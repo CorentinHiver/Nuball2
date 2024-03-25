@@ -24,7 +24,7 @@
 <simplesect>
     <title>Static Private Attributes    </title>
         <itemizedlist>
-            <listitem><para>static bool <link linkend="_class_type_root_map_1a5e084d8316e53d9b9138d29129efa302">initialized</link> = false</para>
+            <listitem><para>static bool <link linkend="_class_type_root_map_1a738dc178a974321674fec5116598515c">Initialised</link> = false</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -55,11 +55,11 @@
 </section>
 <section>
 <title>Member Data Documentation</title>
-<anchor xml:id="_class_type_root_map_1a5e084d8316e53d9b9138d29129efa302"/>    <section>
-    <title>initialized</title>
-<indexterm><primary>initialized</primary><secondary>TypeRootMap</secondary></indexterm>
-<indexterm><primary>TypeRootMap</primary><secondary>initialized</secondary></indexterm>
-<para><computeroutput>bool TypeRootMap::initialized = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_type_root_map_1ad92c898d3d47a36b01b8f3ef5b178407"/>    <section>
+<anchor xml:id="_class_type_root_map_1a738dc178a974321674fec5116598515c"/>    <section>
+    <title>Initialised</title>
+<indexterm><primary>Initialised</primary><secondary>TypeRootMap</secondary></indexterm>
+<indexterm><primary>TypeRootMap</primary><secondary>Initialised</secondary></indexterm>
+<para><computeroutput>bool TypeRootMap::Initialised = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_type_root_map_1ad92c898d3d47a36b01b8f3ef5b178407"/>    <section>
     <title>m_typeRootMap</title>
 <indexterm><primary>m_typeRootMap</primary><secondary>TypeRootMap</secondary></indexterm>
 <indexterm><primary>TypeRootMap</primary><secondary>m_typeRootMap</secondary></indexterm>

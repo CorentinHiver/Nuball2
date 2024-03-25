@@ -79,7 +79,7 @@
 
 <para>Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking. </para>
 </listitem>
-            <listitem><para>void <link linkend="_class_static_vector_1ac0b86d749f8e35274fbac0506c050465">push_back_unique</link> (T const &amp;t)</para>
+            <listitem><para>bool <link linkend="_class_static_vector_1ae9a13402fed613a29197e99ce20396f8">push_back_unique</link> (T const &amp;t)</para>
 
 <para>Add element to the back of the vector only if the vector do not contain it. </para>
 </listitem>
@@ -146,9 +146,13 @@ class StaticVector&lt; T &gt;</title></simplesect>
 
 <para><caution><title>Attention</title>
 
-<para>Prototype, have some memory management issues in some cases ...</para>
+<para>Prototype, has some memory management issues in some cases ... </para>
 </caution>
-This class is meant to handle a vector of data that needs to be resized a lot. To do so, declare it this way : <literallayout><computeroutput> static_vector&lt;T&gt; my_vec = static_vector&lt;T&gt;(maximum_size);
+<para><link linkend="_deprecated_1_deprecated000012">Deprecated</link> 
+<para>With optimisation option, std::vector is almost as efficient as this class ... </para>
+</para></para>
+
+<para>This class is meant to handle a vector of data that needs to be resized a lot. To do so, declare it this way : <literallayout><computeroutput> static_vector&lt;T&gt; my_vec = static_vector&lt;T&gt;(maximum_size);
 </computeroutput></literallayout> If not in an object prototype, simply : <literallayout><computeroutput> auto my_vec = static_vector&lt;T&gt;(maximum_size);
 </computeroutput></literallayout> You can fill the whole vector with some value : <literallayout><computeroutput> auto my_vec = static_vector&lt;T&gt;(maximum_size, fill_value);
  // or :
@@ -536,11 +540,11 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_static_vector_1ac0b86d749f8e35274fbac0506c050465"/>    <section>
+    </section><anchor xml:id="_class_static_vector_1ae9a13402fed613a29197e99ce20396f8"/>    <section>
     <title>push_back_unique()</title>
 <indexterm><primary>push_back_unique</primary><secondary>StaticVector&lt; T &gt;</secondary></indexterm>
 <indexterm><primary>StaticVector&lt; T &gt;</primary><secondary>push_back_unique</secondary></indexterm>
-<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_static_vector">StaticVector</link>&lt; T &gt;::push_back_unique (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_static_vector">StaticVector</link>&lt; T &gt;::push_back_unique (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
 <para>Add element to the back of the vector only if the vector do not contain it. </para>
 </para>
@@ -548,7 +552,7 @@ Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_static_vector_ac0b86d749f8e35274fbac0506c050465_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_static_vector_ae9a13402fed613a29197e99ce20396f8_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -557,7 +561,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_static_vector_ac0b86d749f8e35274fbac0506c050465_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_static_vector_ae9a13402fed613a29197e99ce20396f8_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

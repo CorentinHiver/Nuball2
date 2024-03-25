@@ -22,6 +22,8 @@ Collaboration diagram for Event:<para>
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
+            <listitem><para>auto &amp; <link linkend="_class_event_1a0a7c3958a8dbe24b6263cf95374cee33">adc</link> (int const &amp;hit_i)</para>
+</listitem>
             <listitem><para>void <link linkend="_class_event_1a0862af1471604bf30a4f50a5e028637a">clear</link> ()</para>
 </listitem>
             <listitem><para><link linkend="_class_event_1a5a40dd4708297f7031e29b39e039ae10">Event</link> ()</para>
@@ -40,11 +42,21 @@ Collaboration diagram for Event:<para>
 </listitem>
             <listitem><para>bool <link linkend="_class_event_1ac0a49a4178b701a0921ade6bfb1ad143">isSingle</link> () const</para>
 </listitem>
+            <listitem><para>auto &amp; <link linkend="_class_event_1a0e533090f7dced2fff1b3a6663acd841">label</link> (int const &amp;hit_i)</para>
+</listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const  &amp; <link linkend="_class_event_1ae94819278665e54966a12c494fb65dbc">maxSize</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_event_1a8bf512de8f0a0c6cd276f53977c25d7a">nrj</link> (int const &amp;hit_i)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_event_1a3ccd6e99168f22a468a53547348e0d69">nrj2</link> (int const &amp;hit_i)</para>
 </listitem>
             <listitem><para><link linkend="_class_event">Event</link> &amp; <link linkend="_class_event_1ae393238c864abbf268c5172572241778">operator=</link> (<link linkend="_class_event">Event</link> const &amp;evt)</para>
 </listitem>
             <listitem><para><link linkend="_class_event">Event</link> &amp; <link linkend="_class_event_1a2bb3a8e63ac8be551f02fb0963cf0041">operator=</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+</listitem>
+            <listitem><para><link linkend="_class_hit">Hit</link> <link linkend="_class_event_1a799fb8b56453824767b038389059a2a6">operator[]</link> (int const &amp;hit_i)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_event_1aabc19f5092b019ed9162185aeb733b3e">pileup</link> (int const &amp;hit_i)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_event_1a090d2a02b5c85844e1287e7e693af3a7">Print</link> () const</para>
 </listitem>
@@ -53,6 +65,8 @@ Collaboration diagram for Event:<para>
             <listitem><para>void <link linkend="_class_event_1a78b1cb630e7720f205a9c00e2c111102">push_front</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
 
 <para>Sometimes, we want to select pre-prompt events. In such case, we have to put in in front of the others. </para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_event_1a39afaa43b1fdc8219c8628aaabeddcff">qdc2</link> (int const &amp;hit_i)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_event_1a243e29bac8d969902d32a4d444fc5174">reading</link> (TTree *tree)</para>
 
@@ -63,6 +77,10 @@ Collaboration diagram for Event:<para>
             <listitem><para>void <link linkend="_class_event_1afd2351e3fb971a5f061e5b1b84f78326">setT0</link> (<link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> const &amp;timestamp)</para>
 </listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_event_1aadb0c0dcbb31718e69358e9c99a5b633">size</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_event_1ab616f6bc73ef81551865d39aeed416e0">time</link> (int const &amp;hit_i)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_event_1af5411de73ead6ecdf4de54122d6ad69c">time2</link> (int const &amp;hit_i)</para>
 </listitem>
             <listitem><para><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> <link linkend="_class_event_1a15a45e59b3ce25ab2b72e68578e99c51">time_ns</link> (int const &amp;i) const</para>
 </listitem>
@@ -207,7 +225,11 @@ Collaboration diagram for Event:<para>
 </section>
 <section>
 <title>Member Function Documentation</title>
-<anchor xml:id="_class_event_1a0862af1471604bf30a4f50a5e028637a"/>    <section>
+<anchor xml:id="_class_event_1a0a7c3958a8dbe24b6263cf95374cee33"/>    <section>
+    <title>adc()</title>
+<indexterm><primary>adc</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>adc</secondary></indexterm>
+<para><computeroutput>auto&amp; Event::adc (int const &amp; hit_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a0862af1471604bf30a4f50a5e028637a"/>    <section>
     <title>clear()</title>
 <indexterm><primary>clear</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>clear</secondary></indexterm>
@@ -250,11 +272,23 @@ Collaboration diagram for Event:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_event_1ae94819278665e54966a12c494fb65dbc"/>    <section>
+    </section><anchor xml:id="_class_event_1a0e533090f7dced2fff1b3a6663acd841"/>    <section>
+    <title>label()</title>
+<indexterm><primary>label</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>label</secondary></indexterm>
+<para><computeroutput>auto&amp; Event::label (int const &amp; hit_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1ae94819278665e54966a12c494fb65dbc"/>    <section>
     <title>maxSize()</title>
 <indexterm><primary>maxSize</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>maxSize</secondary></indexterm>
-<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const&amp; Event::maxSize ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1ae393238c864abbf268c5172572241778"/>    <section>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const&amp; Event::maxSize ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a8bf512de8f0a0c6cd276f53977c25d7a"/>    <section>
+    <title>nrj()</title>
+<indexterm><primary>nrj</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>nrj</secondary></indexterm>
+<para><computeroutput>auto&amp; Event::nrj (int const &amp; hit_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a3ccd6e99168f22a468a53547348e0d69"/>    <section>
+    <title>nrj2()</title>
+<indexterm><primary>nrj2</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>nrj2</secondary></indexterm>
+<para><computeroutput>auto&amp; Event::nrj2 (int const &amp; hit_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1ae393238c864abbf268c5172572241778"/>    <section>
     <title>operator=()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>operator=</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>operator=</secondary></indexterm>
@@ -262,7 +296,15 @@ Collaboration diagram for Event:<para>
     <title>operator=()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>operator=</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>operator=</secondary></indexterm>
-<para><computeroutput><link linkend="_class_event">Event</link> &amp; Event::operator= (<link linkend="_class_hit">Hit</link> const &amp; hit)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a090d2a02b5c85844e1287e7e693af3a7"/>    <section>
+<para><computeroutput><link linkend="_class_event">Event</link> &amp; Event::operator= (<link linkend="_class_hit">Hit</link> const &amp; hit)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a799fb8b56453824767b038389059a2a6"/>    <section>
+    <title>operator[]()</title>
+<indexterm><primary>operator[]</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput><link linkend="_class_hit">Hit</link> Event::operator[] (int const &amp; hit_i)</computeroutput></para>    </section><anchor xml:id="_class_event_1aabc19f5092b019ed9162185aeb733b3e"/>    <section>
+    <title>pileup()</title>
+<indexterm><primary>pileup</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>pileup</secondary></indexterm>
+<para><computeroutput>auto&amp; Event::pileup (int const &amp; hit_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a090d2a02b5c85844e1287e7e693af3a7"/>    <section>
     <title>Print()</title>
 <indexterm><primary>Print</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>Print</secondary></indexterm>
@@ -307,7 +349,11 @@ Here is the call graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_event_1a243e29bac8d969902d32a4d444fc5174"/>    <section>
+    </section><anchor xml:id="_class_event_1a39afaa43b1fdc8219c8628aaabeddcff"/>    <section>
+    <title>qdc2()</title>
+<indexterm><primary>qdc2</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>qdc2</secondary></indexterm>
+<para><computeroutput>auto&amp; Event::qdc2 (int const &amp; hit_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a243e29bac8d969902d32a4d444fc5174"/>    <section>
     <title>reading()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>reading</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>reading</secondary></indexterm>
@@ -372,7 +418,15 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_event_1a15a45e59b3ce25ab2b72e68578e99c51"/>    <section>
+    </section><anchor xml:id="_class_event_1ab616f6bc73ef81551865d39aeed416e0"/>    <section>
+    <title>time()</title>
+<indexterm><primary>time</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>time</secondary></indexterm>
+<para><computeroutput>auto&amp; Event::time (int const &amp; hit_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1af5411de73ead6ecdf4de54122d6ad69c"/>    <section>
+    <title>time2()</title>
+<indexterm><primary>time2</primary><secondary>Event</secondary></indexterm>
+<indexterm><primary>Event</primary><secondary>time2</secondary></indexterm>
+<para><computeroutput>auto&amp; Event::time2 (int const &amp; hit_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a15a45e59b3ce25ab2b72e68578e99c51"/>    <section>
     <title>time_ns()</title>
 <indexterm><primary>time_ns</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>time_ns</secondary></indexterm>
@@ -402,16 +456,7 @@ Here is the caller graph for this function:<para>
     <title>timeShift_ns()</title>
 <indexterm><primary>timeShift_ns</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>timeShift_ns</secondary></indexterm>
-<para><computeroutput>void Event::timeShift_ns (double const &amp; shift)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_event_aa69256b1b2f550541a1bc6104cec62d9_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_event_1a0b93fcd8063a3c02edede96bb53b136d"/>    <section>
+<para><computeroutput>void Event::timeShift_ns (double const &amp; shift)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_event_1a0b93fcd8063a3c02edede96bb53b136d"/>    <section>
     <title>writting()</title>
 <indexterm><primary>writting</primary><secondary>Event</secondary></indexterm>
 <indexterm><primary>Event</primary><secondary>writting</secondary></indexterm>

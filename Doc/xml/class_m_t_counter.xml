@@ -57,7 +57,7 @@
         </inbodydescription>
         <location file="lib/MTObjects/MTCounter.hpp" line="34" column="8" bodyfile="lib/MTObjects/MTCounter.hpp" bodystart="34" bodyend="34"/>
         <references refid="class_m_t_counter_1a284d6290040d3ba03ad1ee201ddc2055" compoundref="_m_t_counter_8hpp" startline="43">m_counter</references>
-        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="125" endline="125">size_cast</references>
+        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="266" endline="266">size_cast</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_counter_1a0f22cd113e1ab51159f288dd7b04f1ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
@@ -240,7 +240,7 @@
         </inbodydescription>
         <location file="lib/MTObjects/MTCounter.hpp" line="37" column="8" bodyfile="lib/MTObjects/MTCounter.hpp" bodystart="37" bodyend="37"/>
         <references refid="class_m_t_counter_1a284d6290040d3ba03ad1ee201ddc2055" compoundref="_m_t_counter_8hpp" startline="43">m_counter</references>
-        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="125" endline="125">size_cast</references>
+        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="266" endline="266">size_cast</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_counter_1a02fc60a8ffdcaf8c305cdfe4d9f75080" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
@@ -299,7 +299,7 @@
         </inbodydescription>
         <location file="lib/MTObjects/MTCounter.hpp" line="40" column="8" bodyfile="lib/MTObjects/MTCounter.hpp" bodystart="40" bodyend="40"/>
         <references refid="class_m_t_counter_1a284d6290040d3ba03ad1ee201ddc2055" compoundref="_m_t_counter_8hpp" startline="43">m_counter</references>
-        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="125" endline="125">size_cast</references>
+        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="266" endline="266">size_cast</references>
       </memberdef>
       </sectiondef>
     <briefdescription>

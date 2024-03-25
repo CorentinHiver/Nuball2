@@ -372,7 +372,7 @@ class TypeRootMap
 public:
   TypeRootMap()
   {
-    if (!initialized)
+    if (!Initialised)
     {
       // Bool :
       m_typeRootMap[typeid(true)          ] = "O";
@@ -389,7 +389,7 @@ public:
       // ROOT types :
       m_typeRootMap[typeid(Long64_cast(1))] = "L"; m_typeRootMap[typeid(ULong64_cast(1)) ] = "l";
 
-      initialized = true;
+      Initialised = true;
     }
   }
 
@@ -406,11 +406,11 @@ public:
   }
 
 private:
-  static bool initialized;
+  static bool Initialised;
   std::unordered_map<std::type_index, std::string> m_typeRootMap;
 }typeRootMap;
 
-bool TypeRootMap::initialized = false;
+bool TypeRootMap::Initialised = false;
 
 /// @brief Create a branch for a given value and name
 template<class T>
@@ -527,7 +527,7 @@ void TheTChain::set()
 struct THBinning
 {
   THBinning() = default;
-  THBinning(std::initializer_list<double> initList)
+  THBinning(std::Initialiser_list<double> initList)
   {
     if (initList.size() != 3) 
     {

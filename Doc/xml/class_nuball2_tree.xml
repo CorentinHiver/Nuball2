@@ -16,9 +16,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="42" column="8" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="42" bodyend="-1"/>
-        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="47" endline="83">Open</referencedby>
-        <referencedby refid="class_nuball2_tree_1a552b2576698d81e4b900b18700f63d30" compoundref="_nuball2_tree_8hpp" startline="21" endline="28">~Nuball2Tree</referencedby>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="39" column="8" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="39" bodyend="-1"/>
+        <referencedby refid="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" compoundref="_nuball2_tree_8hpp" startline="24" endline="24">Close</referencedby>
+        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="45" endline="81">Open</referencedby>
+        <referencedby refid="class_nuball2_tree_1a552b2576698d81e4b900b18700f63d30" compoundref="_nuball2_tree_8hpp" startline="21" endline="21">~Nuball2Tree</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_nuball2_tree_1a1f80108952100594c63d331ea08856e7" prot="private" static="no" mutable="no">
         <type>TFile *</type>
@@ -32,9 +33,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="39" column="9" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="39" bodyend="-1"/>
-        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="47" endline="83">Open</referencedby>
-        <referencedby refid="class_nuball2_tree_1a552b2576698d81e4b900b18700f63d30" compoundref="_nuball2_tree_8hpp" startline="21" endline="28">~Nuball2Tree</referencedby>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="36" column="9" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="36" bodyend="-1"/>
+        <referencedby refid="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" compoundref="_nuball2_tree_8hpp" startline="24" endline="24">Close</referencedby>
+        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="45" endline="81">Open</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_nuball2_tree_1a80be32d072f67940b00ead543af1b1dc" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Nuball2Tree::m_filename</definition>
+        <argsstring></argsstring>
+        <name>m_filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="40" column="15" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="40" bodyend="-1"/>
+        <referencedby refid="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" compoundref="_nuball2_tree_8hpp" startline="24" endline="24">Close</referencedby>
+        <referencedby refid="class_nuball2_tree_1a95740402b5b22c91dd8216837c1bec83" compoundref="_nuball2_tree_8hpp" startline="26" endline="26">filename</referencedby>
+        <referencedby refid="class_nuball2_tree_1a583dfb63b12ab4a2b9f5c7a2b9830f50" compoundref="_nuball2_tree_8hpp" startline="14" endline="14">Nuball2Tree</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_nuball2_tree_1afa0171368194e6d8f2dd30b362b74a88" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -48,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="43" column="15" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="43" bodyend="-1"/>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="41" column="15" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_nuball2_tree_1a966fc201fe602567d90824e4750129bf" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -62,9 +79,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="41" column="8" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="41" bodyend="-1"/>
-        <referencedby refid="class_nuball2_tree_1a805727b437e4db4a769dda09c9a13813" compoundref="_nuball2_tree_8hpp" startline="36" endline="36">ok</referencedby>
-        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="47" endline="83">Open</referencedby>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="38" column="8" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="38" bodyend="-1"/>
+        <referencedby refid="class_nuball2_tree_1a805727b437e4db4a769dda09c9a13813" compoundref="_nuball2_tree_8hpp" startline="33" endline="33">ok</referencedby>
+        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="45" endline="81">Open</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_nuball2_tree_1a4c47c096ba8ea28ee6702c33fe3645ec" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -77,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="44" column="15" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="44" bodyend="-1"/>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="42" column="15" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" prot="private" static="no" mutable="no">
         <type>TTree *</type>
@@ -91,14 +108,49 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="40" column="9" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="40" bodyend="-1"/>
-        <referencedby refid="class_nuball2_tree_1ab6287030e410a63962564377b938bd31" compoundref="_nuball2_tree_8hpp" startline="32" endline="32">get</referencedby>
-        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="47" endline="83">Open</referencedby>
-        <referencedby refid="class_nuball2_tree_1a12b6305361aab9040c5cd8d74af9fee1" compoundref="_nuball2_tree_8hpp" startline="34" endline="34">operator TTree *</referencedby>
-        <referencedby refid="class_nuball2_tree_1a19a84a1c38d5d1224ce9808df63d5322" compoundref="_nuball2_tree_8hpp" startline="33" endline="33">operator-&gt;</referencedby>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="37" column="9" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="37" bodyend="-1"/>
+        <referencedby refid="class_nuball2_tree_1ab6287030e410a63962564377b938bd31" compoundref="_nuball2_tree_8hpp" startline="28" endline="28">get</referencedby>
+        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="45" endline="81">Open</referencedby>
+        <referencedby refid="class_nuball2_tree_1a12b6305361aab9040c5cd8d74af9fee1" compoundref="_nuball2_tree_8hpp" startline="31" endline="31">operator TTree *</referencedby>
+        <referencedby refid="class_nuball2_tree_1a19a84a1c38d5d1224ce9808df63d5322" compoundref="_nuball2_tree_8hpp" startline="30" endline="30">operator-&gt;</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Nuball2Tree::Close</definition>
+        <argsstring>()</argsstring>
+        <name>Close</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="24" column="8" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="24" bodyend="24"/>
+        <references refid="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" compoundref="_nuball2_tree_8hpp" startline="24" endline="24">Close</references>
+        <references refid="class_nuball2_tree_1a0985344a885facf82cea3d04e2fed2ec" compoundref="_nuball2_tree_8hpp" startline="39">file_opened</references>
+        <references refid="class_nuball2_tree_1a1f80108952100594c63d331ea08856e7" compoundref="_nuball2_tree_8hpp" startline="36">m_file</references>
+        <references refid="class_nuball2_tree_1a80be32d072f67940b00ead543af1b1dc" compoundref="_nuball2_tree_8hpp" startline="40">m_filename</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <referencedby refid="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" compoundref="_nuball2_tree_8hpp" startline="24" endline="24">Close</referencedby>
+        <referencedby refid="class_nuball2_tree_1a552b2576698d81e4b900b18700f63d30" compoundref="_nuball2_tree_8hpp" startline="21" endline="21">~Nuball2Tree</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_nuball2_tree_1a95740402b5b22c91dd8216837c1bec83" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Nuball2Tree::filename</definition>
+        <argsstring>()</argsstring>
+        <name>filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="26" column="15" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="26" bodyend="26"/>
+        <references refid="class_nuball2_tree_1a80be32d072f67940b00ead543af1b1dc" compoundref="_nuball2_tree_8hpp" startline="40">m_filename</references>
+        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="45" endline="81">Open</referencedby>
+      </memberdef>
       <memberdef kind="function" id="class_nuball2_tree_1ab6287030e410a63962564377b938bd31" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>TTree *</type>
         <definition>TTree* Nuball2Tree::get</definition>
@@ -110,8 +162,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="32" column="9" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="32" bodyend="32"/>
-        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="40">m_tree</references>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="28" column="9" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="28" bodyend="28"/>
+        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="37">m_tree</references>
+        <referencedby refid="_nuball2_tree_8hpp_1a54f20b40faec698ac06b486ac5107ea3" compoundref="_nuball2_tree_8hpp" startline="83" endline="87">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_m_t_root_reader_1ad46b9bf07eeab40b80fa9a504d5aaf52" compoundref="_m_t_root_reader_8hpp" startline="42" endline="52">MTRootReader::Read</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_nuball2_tree_1ae832f7cd26b8fb12a57d944a9d785b49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const</type>
+        <definition>auto const Nuball2Tree::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="29" column="14" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="29" bodyend="29"/>
+        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="37">m_tree</references>
       </memberdef>
       <memberdef kind="function" id="class_nuball2_tree_1a583dfb63b12ab4a2b9f5c7a2b9830f50" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -129,7 +197,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/Nuball2Tree.hpp" line="14" column="3" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="14" bodyend="14"/>
-        <references refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="47" endline="83">Open</references>
+        <references refid="class_nuball2_tree_1a80be32d072f67940b00ead543af1b1dc" compoundref="_nuball2_tree_8hpp" startline="40">m_filename</references>
+        <references refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="45" endline="81">Open</references>
       </memberdef>
       <memberdef kind="function" id="class_nuball2_tree_1ab6567d160a7e21431a1f047ffd93accc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -151,7 +220,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/Nuball2Tree.hpp" line="15" column="3" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="15" bodyend="19"/>
-        <references refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="47" endline="83">Open</references>
+        <references refid="class_nuball2_tree_1a80be32d072f67940b00ead543af1b1dc" compoundref="_nuball2_tree_8hpp" startline="40">m_filename</references>
+        <references refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="45" endline="81">Open</references>
       </memberdef>
       <memberdef kind="function" id="class_nuball2_tree_1a805727b437e4db4a769dda09c9a13813" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool const  &amp;</type>
@@ -164,8 +234,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="36" column="15" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="36" bodyend="36"/>
-        <references refid="class_nuball2_tree_1a966fc201fe602567d90824e4750129bf" compoundref="_nuball2_tree_8hpp" startline="41">m_ok</references>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="33" column="15" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="33" bodyend="33"/>
+        <references refid="class_nuball2_tree_1a966fc201fe602567d90824e4750129bf" compoundref="_nuball2_tree_8hpp" startline="38">m_ok</references>
       </memberdef>
       <memberdef kind="function" id="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -182,12 +252,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="30" column="8" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="47" bodyend="83"/>
-        <references refid="class_nuball2_tree_1a0985344a885facf82cea3d04e2fed2ec" compoundref="_nuball2_tree_8hpp" startline="42">file_opened</references>
-        <references refid="class_nuball2_tree_1a1f80108952100594c63d331ea08856e7" compoundref="_nuball2_tree_8hpp" startline="39">m_file</references>
-        <references refid="class_nuball2_tree_1a966fc201fe602567d90824e4750129bf" compoundref="_nuball2_tree_8hpp" startline="41">m_ok</references>
-        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="40">m_tree</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="23" column="8" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="45" bodyend="81"/>
+        <references refid="class_nuball2_tree_1a0985344a885facf82cea3d04e2fed2ec" compoundref="_nuball2_tree_8hpp" startline="39">file_opened</references>
+        <references refid="class_nuball2_tree_1a95740402b5b22c91dd8216837c1bec83" compoundref="_nuball2_tree_8hpp" startline="26" endline="26">filename</references>
+        <references refid="class_nuball2_tree_1a1f80108952100594c63d331ea08856e7" compoundref="_nuball2_tree_8hpp" startline="36">m_file</references>
+        <references refid="class_nuball2_tree_1a966fc201fe602567d90824e4750129bf" compoundref="_nuball2_tree_8hpp" startline="38">m_ok</references>
+        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="37">m_tree</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
         <referencedby refid="class_nuball2_tree_1a583dfb63b12ab4a2b9f5c7a2b9830f50" compoundref="_nuball2_tree_8hpp" startline="14" endline="14">Nuball2Tree</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_nuball2_tree_1a12b6305361aab9040c5cd8d74af9fee1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -201,8 +272,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="34" column="3" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="34" bodyend="34"/>
-        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="40">m_tree</references>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="31" column="3" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="31" bodyend="31"/>
+        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="37">m_tree</references>
       </memberdef>
       <memberdef kind="function" id="class_nuball2_tree_1a19a84a1c38d5d1224ce9808df63d5322" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>TTree *</type>
@@ -215,8 +286,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="33" column="9" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="33" bodyend="33"/>
-        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="40">m_tree</references>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="30" column="9" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="30" bodyend="30"/>
+        <references refid="class_nuball2_tree_1a435695b5186855fecb8831c746f6cb94" compoundref="_nuball2_tree_8hpp" startline="37">m_tree</references>
       </memberdef>
       <memberdef kind="function" id="class_nuball2_tree_1a552b2576698d81e4b900b18700f63d30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -229,21 +300,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Nuball2Tree.hpp" line="21" column="3" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="21" bodyend="28"/>
-        <references refid="class_nuball2_tree_1a0985344a885facf82cea3d04e2fed2ec" compoundref="_nuball2_tree_8hpp" startline="42">file_opened</references>
-        <references refid="class_nuball2_tree_1a1f80108952100594c63d331ea08856e7" compoundref="_nuball2_tree_8hpp" startline="39">m_file</references>
+        <location file="lib/Classes/Nuball2Tree.hpp" line="21" column="3" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="21" bodyend="21"/>
+        <references refid="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" compoundref="_nuball2_tree_8hpp" startline="24" endline="24">Close</references>
+        <references refid="class_nuball2_tree_1a0985344a885facf82cea3d04e2fed2ec" compoundref="_nuball2_tree_8hpp" startline="39">file_opened</references>
       </memberdef>
       </sectiondef>
     <briefdescription>
-<para>test _ not finished </para>
+<para>Access to the underlying TTree using -&gt; operator (e.g. nuball2tree-&gt;GetEntry(n);) </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="lib/Classes/Nuball2Tree.hpp" line="11" column="1" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="12" bodyend="45"/>
+    <location file="lib/Classes/Nuball2Tree.hpp" line="11" column="1" bodyfile="lib/Classes/Nuball2Tree.hpp" bodystart="12" bodyend="43"/>
     <listofallmembers>
+      <member refid="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" prot="public" virt="non-virtual"><scope>Nuball2Tree</scope><name>Close</name></member>
       <member refid="class_nuball2_tree_1a0985344a885facf82cea3d04e2fed2ec" prot="private" virt="non-virtual"><scope>Nuball2Tree</scope><name>file_opened</name></member>
+      <member refid="class_nuball2_tree_1a95740402b5b22c91dd8216837c1bec83" prot="public" virt="non-virtual"><scope>Nuball2Tree</scope><name>filename</name></member>
       <member refid="class_nuball2_tree_1ab6287030e410a63962564377b938bd31" prot="public" virt="non-virtual"><scope>Nuball2Tree</scope><name>get</name></member>
+      <member refid="class_nuball2_tree_1ae832f7cd26b8fb12a57d944a9d785b49" prot="public" virt="non-virtual"><scope>Nuball2Tree</scope><name>get</name></member>
       <member refid="class_nuball2_tree_1a1f80108952100594c63d331ea08856e7" prot="private" virt="non-virtual"><scope>Nuball2Tree</scope><name>m_file</name></member>
+      <member refid="class_nuball2_tree_1a80be32d072f67940b00ead543af1b1dc" prot="private" virt="non-virtual"><scope>Nuball2Tree</scope><name>m_filename</name></member>
       <member refid="class_nuball2_tree_1afa0171368194e6d8f2dd30b362b74a88" prot="private" virt="non-virtual"><scope>Nuball2Tree</scope><name>m_name</name></member>
       <member refid="class_nuball2_tree_1a966fc201fe602567d90824e4750129bf" prot="private" virt="non-virtual"><scope>Nuball2Tree</scope><name>m_ok</name></member>
       <member refid="class_nuball2_tree_1a4c47c096ba8ea28ee6702c33fe3645ec" prot="private" virt="non-virtual"><scope>Nuball2Tree</scope><name>m_title</name></member>

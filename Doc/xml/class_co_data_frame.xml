@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="274" column="8" bodyfile="lib/files_functions.hpp" bodystart="274" bodyend="-1"/>
+        <location file="lib/files_functions.hpp" line="326" column="8" bodyfile="lib/files_functions.hpp" bodystart="326" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_co_data_frame_1af2798a5ea665091240b51eb2373f3c35" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::vector&lt; T &gt; &gt;</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="271" column="15" bodyfile="lib/files_functions.hpp" bodystart="271" bodyend="-1"/>
+        <location file="lib/files_functions.hpp" line="323" column="15" bodyfile="lib/files_functions.hpp" bodystart="323" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_co_data_frame_1aab49f63af655fd9bea2efb8952dfcac4" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -50,8 +50,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="276" column="15" bodyfile="lib/files_functions.hpp" bodystart="276" bodyend="-1"/>
-        <referencedby refid="class_co_data_frame_1a1aff8a5a81105e495961fe2610c60c35" compoundref="files__functions_8hpp" startline="264" endline="264">CoDataFrame&lt; Index, T &gt;::filename</referencedby>
+        <location file="lib/files_functions.hpp" line="328" column="15" bodyfile="lib/files_functions.hpp" bodystart="328" bodyend="-1"/>
+        <referencedby refid="class_co_data_frame_1a1aff8a5a81105e495961fe2610c60c35" compoundref="files__functions_8hpp" startline="316" endline="316">CoDataFrame&lt; Index, T &gt;::filename</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_co_data_frame_1a00eee215324aa22e4001d8f1e09dc2b0" prot="private" static="no" mutable="no">
         <type>std::vector&lt; Index &gt;</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="270" column="15" bodyfile="lib/files_functions.hpp" bodystart="270" bodyend="-1"/>
+        <location file="lib/files_functions.hpp" line="322" column="15" bodyfile="lib/files_functions.hpp" bodystart="322" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_co_data_frame_1a73c25cc0f8b810b051f3e0c5c3dedfcc" prot="private" static="no" mutable="no">
         <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="273" column="10" bodyfile="lib/files_functions.hpp" bodystart="273" bodyend="-1"/>
+        <location file="lib/files_functions.hpp" line="325" column="10" bodyfile="lib/files_functions.hpp" bodystart="325" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="261" column="3"/>
+        <location file="lib/files_functions.hpp" line="313" column="3"/>
       </memberdef>
       <memberdef kind="function" id="class_co_data_frame_1acefddf32b3e68daa5e8616c50adf670a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="262" column="3"/>
+        <location file="lib/files_functions.hpp" line="314" column="3"/>
       </memberdef>
       <memberdef kind="function" id="class_co_data_frame_1a1aff8a5a81105e495961fe2610c60c35" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -128,8 +128,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="264" column="15" bodyfile="lib/files_functions.hpp" bodystart="264" bodyend="264"/>
-        <references refid="class_co_data_frame_1aab49f63af655fd9bea2efb8952dfcac4" compoundref="files__functions_8hpp" startline="276">CoDataFrame&lt; Index, T &gt;::m_filename</references>
+        <location file="lib/files_functions.hpp" line="316" column="15" bodyfile="lib/files_functions.hpp" bodystart="316" bodyend="316"/>
+        <references refid="class_co_data_frame_1aab49f63af655fd9bea2efb8952dfcac4" compoundref="files__functions_8hpp" startline="328">CoDataFrame&lt; Index, T &gt;::m_filename</references>
       </memberdef>
       <memberdef kind="function" id="class_co_data_frame_1a0bcdc865bd25f1835e17f471349e2d6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="265" column="8"/>
+        <location file="lib/files_functions.hpp" line="317" column="8"/>
       </memberdef>
       <memberdef kind="function" id="class_co_data_frame_1a62ae554984ec74b6217dc716bff3bf06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -167,14 +167,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/files_functions.hpp" line="267" column="3"/>
+        <location file="lib/files_functions.hpp" line="319" column="3"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="lib/files_functions.hpp" line="258" column="1" bodyfile="lib/files_functions.hpp" bodystart="259" bodyend="277"/>
+    <location file="lib/files_functions.hpp" line="310" column="1" bodyfile="lib/files_functions.hpp" bodystart="311" bodyend="329"/>
     <listofallmembers>
       <member refid="class_co_data_frame_1a8b4711944af95ac655a64d7c6ae642ad" prot="public" virt="non-virtual"><scope>CoDataFrame</scope><name>CoDataFrame</name></member>
       <member refid="class_co_data_frame_1acefddf32b3e68daa5e8616c50adf670a" prot="public" virt="non-virtual"><scope>CoDataFrame</scope><name>CoDataFrame</name></member>

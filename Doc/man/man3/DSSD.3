@@ -1,4 +1,4 @@
-.TH "DSSD" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "DSSD" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -53,23 +53,41 @@ DSSD
 
 .in +1c
 .ti -1c
-.RI "static void \fBInitializeArrays\fP ()"
+.RI "static void \fBInitialiseArrays\fP ()"
 .br
 .in -1c
 .SS "Public Attributes"
 
 .in +1c
 .ti -1c
-.RI "std::vector< \fBuchar\fP > \fBm_Ring_Hits\fP = std::vector<\fBuchar\fP>(\fBnb_rings\fP)"
+.RI "double const \fBdistance\fP = 20"
 .br
 .ti -1c
-.RI "std::vector< \fBuchar\fP > \fBm_Sector_Hits\fP = std::vector<\fBuchar\fP>(\fBnb_sectors\fP)"
+.RI "double const \fBinnerRadius\fP = 15"
+.br
+.ti -1c
+.RI "int const \fBnb_rings\fP = 16"
+.br
+.ti -1c
+.RI "int const \fBnb_sectors\fP = 32"
+.br
+.ti -1c
+.RI "double const \fBouterRadius\fP = 41"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBRing_Hits\fP = std::vector<\fBuchar\fP>(\fBnb_rings\fP)"
+.br
+.ti -1c
+.RI "double const \fBring_thickness\fP = (\fBouterRadius\fP\-\fBinnerRadius\fP)/\fBnb_rings\fP"
 .br
 .ti -1c
 .RI "\fBstd::size_t\fP \fBRingMult\fP = 0u"
 .br
 .ti -1c
 .RI "std::vector< \fBSiStrip\fP > \fBRings\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBuchar\fP > \fBSector_Hits\fP = std::vector<\fBuchar\fP>(\fBnb_sectors\fP)"
 .br
 .ti -1c
 .RI "\fBstd::size_t\fP \fBSectorMult\fP = 0u"
@@ -101,7 +119,7 @@ DSSD
 
 .in +1c
 .ti -1c
-.RI "static bool \fBs_initialized\fP = false"
+.RI "static bool \fBs_Initialised\fP = false"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
@@ -122,7 +140,7 @@ Don't return any angle but really the label of the ring\&.
 
 .SS "void DSSD::Fill (\fBEvent\fP const & evt, int const & index)"
 
-.SS "static void DSSD::InitializeArrays ()\fC [inline]\fP, \fC [static]\fP"
+.SS "static void DSSD::InitialiseArrays ()\fC [inline]\fP, \fC [static]\fP"
 
 .SS "bool DSSD::oneParticle () const\fC [inline]\fP"
 
@@ -138,7 +156,11 @@ Don't return any angle but really the label of the ring\&.
 
 .SH "Member Data Documentation"
 .PP 
+.SS "double const DSSD::distance = 20"
+
 .SS "std::array< \fBuchar\fP, 1000 > DSSD::indexes = {255}\fC [static]\fP"
+
+.SS "double const DSSD::innerRadius = 15"
 
 .SS "std::array< bool, 1000 > DSSD::isRing = {0}\fC [static]\fP"
 
@@ -148,15 +170,23 @@ Don't return any angle but really the label of the ring\&.
 
 .SS "std::array< bool, 1000 > DSSD::isSector = {0}\fC [static]\fP"
 
-.SS "std::vector<\fBuchar\fP> DSSD::m_Ring_Hits = std::vector<\fBuchar\fP>(\fBnb_rings\fP)"
+.SS "int const DSSD::nb_rings = 16"
 
-.SS "std::vector<\fBuchar\fP> DSSD::m_Sector_Hits = std::vector<\fBuchar\fP>(\fBnb_sectors\fP)"
+.SS "int const DSSD::nb_sectors = 32"
+
+.SS "double const DSSD::outerRadius = 41"
+
+.SS "std::vector<\fBuchar\fP> DSSD::Ring_Hits = std::vector<\fBuchar\fP>(\fBnb_rings\fP)"
+
+.SS "double const DSSD::ring_thickness = (\fBouterRadius\fP\-\fBinnerRadius\fP)/\fBnb_rings\fP"
 
 .SS "\fBstd::size_t\fP DSSD::RingMult = 0u"
 
 .SS "std::vector<\fBSiStrip\fP> DSSD::Rings"
 
-.SS "bool DSSD::s_initialized = false\fC [static]\fP, \fC [private]\fP"
+.SS "bool DSSD::s_Initialised = false\fC [static]\fP, \fC [private]\fP"
+
+.SS "std::vector<\fBuchar\fP> DSSD::Sector_Hits = std::vector<\fBuchar\fP>(\fBnb_sectors\fP)"
 
 .SS "\fBstd::size_t\fP DSSD::SectorMult = 0u"
 

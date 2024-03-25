@@ -1,4 +1,4 @@
-.TH "Bools" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Bools" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,22 +12,25 @@ Bools
 
 .in +1c
 .ti -1c
+.RI "bool \fBAND\fP () const noexcept"
+.br
+.ti -1c
 .RI "auto \fBbegin\fP ()"
 .br
 .ti -1c
 .RI "auto \fBbegin\fP () const"
 .br
 .ti -1c
-.RI "\fBBools\fP ()"
+.RI "\fBBools\fP () noexcept=default"
 .br
 .ti -1c
 .RI "\fBBools\fP (\fBBools\fP &&other) noexcept"
 .br
 .ti -1c
-.RI "\fBBools\fP (const \fBBools\fP &other)"
+.RI "\fBBools\fP (const \fBBools\fP &other) noexcept"
 .br
 .ti -1c
-.RI "\fBBools\fP (\fBsize_t\fP \fBsize\fP, bool const &value=false)"
+.RI "\fBBools\fP (\fBsize_t\fP \fBsize\fP, bool const &value=false) noexcept"
 .br
 .ti -1c
 .RI "auto \fBend\fP ()"
@@ -39,7 +42,7 @@ Bools
 .RI "\fBBools\fP & \fBoperator=\fP (\fBBools\fP &&other) noexcept"
 .br
 .ti -1c
-.RI "\fBBools\fP & \fBoperator=\fP (const \fBBools\fP &other)"
+.RI "\fBBools\fP & \fBoperator=\fP (const \fBBools\fP &other) noexcept"
 .br
 .ti -1c
 .RI "bool & \fBoperator[]\fP (\fBsize_t\fP const &index)"
@@ -48,10 +51,22 @@ Bools
 .RI "bool const  & \fBoperator[]\fP (\fBsize_t\fP const &index) const"
 .br
 .ti -1c
-.RI "\fBsize_t\fP const  & \fBresize\fP (\fBsize_t\fP \fBsize\fP, bool const &value=false)"
+.RI "bool \fBOR\fP () const noexcept"
+.br
+.ti -1c
+.RI "void \fBpush_back\fP (bool const &value)"
+.br
+.ti -1c
+.RI "void \fBresize\fP (\fBsize_t\fP \fBsize\fP)"
+.br
+.ti -1c
+.RI "void \fBresize\fP (\fBsize_t\fP \fBsize\fP, bool const &value)"
 .br
 .ti -1c
 .RI "\fBsize_t\fP const  & \fBsize\fP () const"
+.br
+.ti -1c
+.RI "bool \fBXOR\fP () const noexcept"
 .br
 .ti -1c
 .RI "\fB~Bools\fP ()"
@@ -64,16 +79,19 @@ Bools
 .RI "bool * \fBm_data\fP = nullptr"
 .br
 .ti -1c
+.RI "\fBsize_t\fP \fBm_reserved_size\fP = 0"
+.br
+.ti -1c
 .RI "\fBsize_t\fP \fBm_size\fP = 0"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "Bools::Bools ()\fC [inline]\fP"
+.SS "Bools::Bools ()\fC [default]\fP, \fC [noexcept]\fP"
 
-.SS "Bools::Bools (\fBsize_t\fP size, bool const & value = \fCfalse\fP)\fC [inline]\fP"
+.SS "Bools::Bools (\fBsize_t\fP size, bool const & value = \fCfalse\fP)\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "Bools::Bools (const \fBBools\fP & other)\fC [inline]\fP"
+.SS "Bools::Bools (const \fBBools\fP & other)\fC [inline]\fP, \fC [noexcept]\fP"
 
 .SS "Bools::Bools (\fBBools\fP && other)\fC [inline]\fP, \fC [noexcept]\fP"
 
@@ -81,6 +99,8 @@ Bools
 
 .SH "Member Function Documentation"
 .PP 
+.SS "bool Bools::AND () const\fC [inline]\fP, \fC [noexcept]\fP"
+
 .SS "auto Bools::begin ()\fC [inline]\fP"
 
 .SS "auto Bools::begin () const\fC [inline]\fP"
@@ -91,19 +111,29 @@ Bools
 
 .SS "\fBBools\fP& Bools::operator= (\fBBools\fP && other)\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "\fBBools\fP& Bools::operator= (const \fBBools\fP & other)\fC [inline]\fP"
+.SS "\fBBools\fP& Bools::operator= (const \fBBools\fP & other)\fC [inline]\fP, \fC [noexcept]\fP"
 
 .SS "bool& Bools::operator[] (\fBsize_t\fP const & index)\fC [inline]\fP"
 
 .SS "bool const& Bools::operator[] (\fBsize_t\fP const & index) const\fC [inline]\fP"
 
-.SS "\fBsize_t\fP const& Bools::resize (\fBsize_t\fP size, bool const & value = \fCfalse\fP)\fC [inline]\fP"
+.SS "bool Bools::OR () const\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SS "void Bools::push_back (bool const & value)\fC [inline]\fP"
+
+.SS "void Bools::resize (\fBsize_t\fP size)\fC [inline]\fP"
+
+.SS "void Bools::resize (\fBsize_t\fP size, bool const & value)\fC [inline]\fP"
 
 .SS "\fBsize_t\fP const& Bools::size () const\fC [inline]\fP"
+
+.SS "bool Bools::XOR () const\fC [inline]\fP, \fC [noexcept]\fP"
 
 .SH "Member Data Documentation"
 .PP 
 .SS "bool* Bools::m_data = nullptr\fC [private]\fP"
+
+.SS "\fBsize_t\fP Bools::m_reserved_size = 0\fC [private]\fP"
 
 .SS "\fBsize_t\fP Bools::m_size = 0\fC [private]\fP"
 

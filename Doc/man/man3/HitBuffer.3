@@ -1,0 +1,173 @@
+.TH "HitBuffer" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+HitBuffer \- Hits container\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <HitBuffer\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "auto \fBat\fP (\fBsize_t\fP const &i)"
+.br
+.ti -1c
+.RI "auto \fBbegin\fP ()"
+.br
+.ti -1c
+.RI "auto \fBbegin\fP () const"
+.br
+.ti -1c
+.RI "void \fBclear\fP ()"
+.br
+.ti -1c
+.RI "auto \fBend\fP ()"
+.br
+.ti -1c
+.RI "auto \fBend\fP () const"
+.br
+.ti -1c
+.RI "\fBHitBuffer\fP (\fBsize_t\fP \fBsize\fP=100)"
+.br
+.ti -1c
+.RI "bool \fBisFull\fP () const"
+.br
+.RI "Are all the slots used ? "
+.ti -1c
+.RI "auto \fBmax_size\fP () const"
+.br
+.ti -1c
+.RI "auto & \fBnbClear\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBnbClear\fP () const"
+.br
+.ti -1c
+.RI "auto \fBoperator[]\fP (\fBsize_t\fP const &i)"
+.br
+.ti -1c
+.RI "auto const  & \fBoperator[]\fP (\fBsize_t\fP const &i) const"
+.br
+.ti -1c
+.RI "void \fBpush_back\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "void \fBsetStep\fP (\fBsize_t\fP const &\fBstep\fP)"
+.br
+.ti -1c
+.RI "void \fBshift\fP (int n)"
+.br
+.RI "Shifts the buffer of hits by a certain amount\&. "
+.ti -1c
+.RI "auto const  & \fBsize\fP () const"
+.br
+.ti -1c
+.RI "auto & \fBstep\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBstep\fP () const"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< \fBHit\fP > \fBm_buffer\fP"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_max_size\fP = 0"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_nb_clear\fP = 0"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_size\fP = 0"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_step\fP = 0"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Hits container\&. 
+
+\fBHitBuffer\fP 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "HitBuffer::HitBuffer (\fBsize_t\fP size = \fC100\fP)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "auto HitBuffer::at (\fBsize_t\fP const & i)\fC [inline]\fP"
+
+.SS "auto HitBuffer::begin ()\fC [inline]\fP"
+
+.SS "auto HitBuffer::begin () const\fC [inline]\fP"
+
+.SS "void HitBuffer::clear ()\fC [inline]\fP"
+
+.SS "auto HitBuffer::end ()\fC [inline]\fP"
+
+.SS "auto HitBuffer::end () const\fC [inline]\fP"
+
+.SS "bool HitBuffer::isFull () const\fC [inline]\fP"
+
+.PP
+Are all the slots used ? 
+.SS "auto HitBuffer::max_size () const\fC [inline]\fP"
+
+.SS "auto& HitBuffer::nbClear ()\fC [inline]\fP"
+
+.SS "auto const& HitBuffer::nbClear () const\fC [inline]\fP"
+
+.SS "auto HitBuffer::operator[] (\fBsize_t\fP const & i)\fC [inline]\fP"
+
+.SS "auto const& HitBuffer::operator[] (\fBsize_t\fP const & i) const\fC [inline]\fP"
+
+.SS "void HitBuffer::push_back (\fBHit\fP const & hit)\fC [inline]\fP"
+
+.SS "void HitBuffer::setStep (\fBsize_t\fP const & step)\fC [inline]\fP"
+
+.SS "void HitBuffer::shift (int n)\fC [inline]\fP"
+
+.PP
+Shifts the buffer of hits by a certain amount\&. 
+.PP
+\fBTodo\fP
+.RS 4
+Make it functionnal maybe ?
+.RE
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIn\fP if n == 0 nothing happens if n>0 shifts the buffer to the right by n indexes, expends the size if needed\&. Creates empty slots at beginning\&. if n<0 moves the n last cells to the beginning, size stays the same\&. Overflow logic : the first hits are moved to the end
+.RE
+.PP
+Example : \fBHitBuffer\fP buffer = {hit1, hit2, hit3, hit4}; buffer\&.shift( 2); // buffer = {empty1, empty2, hit1, hit2, hit3, hit4} buffer\&.shift(-2); // buffer = {hit3, hit4, hit1, hit2} Carefull : for n>0 , need to copy twice the data, so it can be very long for big buffers 
+.SS "auto const& HitBuffer::size () const\fC [inline]\fP"
+
+.SS "auto& HitBuffer::step ()\fC [inline]\fP"
+
+.SS "auto const& HitBuffer::step () const\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::vector<\fBHit\fP> HitBuffer::m_buffer\fC [private]\fP"
+
+.SS "\fBsize_t\fP HitBuffer::m_max_size = 0\fC [private]\fP"
+
+.SS "\fBsize_t\fP HitBuffer::m_nb_clear = 0\fC [private]\fP"
+
+.SS "\fBsize_t\fP HitBuffer::m_size = 0\fC [private]\fP"
+
+.SS "\fBsize_t\fP HitBuffer::m_step = 0\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

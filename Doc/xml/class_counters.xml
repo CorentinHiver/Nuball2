@@ -283,7 +283,7 @@
         <references refid="class_counters_1af42a2277da8f07fa4867143d426058ec" compoundref="_analyse_2_counters_8hpp" startline="33">ParisMult</references>
         <references refid="class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf" compoundref="_analyse_2_counters_8hpp" startline="27">RawBGO</references>
         <references refid="class_counters_1a788284c58e92d46682d73e2679cdaa48" compoundref="_analyse_2_counters_8hpp" startline="26">RawGe</references>
-        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="260" endline="260">StaticVector&lt; T &gt;::resize</references>
+        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="364" endline="364">StaticVector&lt; T &gt;::resize</references>
         <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">count_event</referencedby>
         <referencedby refid="class_counters_1acebc5e99a89d9fe257917c46b3101999" compoundref="_classes_2_counters_8hpp" startline="99" endline="106">countEvent</referencedby>
       </memberdef>
@@ -319,8 +319,8 @@
         <references refid="class_counters_1a62564fb849d524995a2358f0ae8bec39" compoundref="_analyse_2_counters_8hpp" startline="29">GeClovers</references>
         <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
         <references refid="class_counters_1aa10e5f5e024f297949057a82c50a14a2" compoundref="_analyse_2_counters_8hpp" startline="31">Modules</references>
-        <references refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" compoundref="vector__functions_8hpp" startline="329" endline="329">StaticVector&lt; T &gt;::size</references>
-        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="101" endline="101">uchar_cast</references>
+        <references refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" compoundref="vector__functions_8hpp" startline="441" endline="441">StaticVector&lt; T &gt;::size</references>
+        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="242" endline="242">uchar_cast</references>
       </memberdef>
       <memberdef kind="function" id="class_counters_1a438d855f700f802261df045b1f52723e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -356,11 +356,11 @@
         <references refid="class_counters_1aa10e5f5e024f297949057a82c50a14a2" compoundref="_analyse_2_counters_8hpp" startline="31">Modules</references>
         <references refid="class_counters_1a0d4d6f79204a5462c92c5215b7f51e58" compoundref="_analyse_2_counters_8hpp" startline="25">mult</references>
         <references refid="class_counters_1af42a2277da8f07fa4867143d426058ec" compoundref="_analyse_2_counters_8hpp" startline="33">ParisMult</references>
-        <references refid="class_static_vector_1ac0b86d749f8e35274fbac0506c050465" compoundref="vector__functions_8hpp" startline="314" endline="314">StaticVector&lt; T &gt;::push_back_unique</references>
+        <references refid="class_static_vector_1ae9a13402fed613a29197e99ce20396f8" compoundref="vector__functions_8hpp" startline="418" endline="426">StaticVector&lt; T &gt;::push_back_unique</references>
         <references refid="class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf" compoundref="_analyse_2_counters_8hpp" startline="27">RawBGO</references>
         <references refid="class_counters_1a788284c58e92d46682d73e2679cdaa48" compoundref="_analyse_2_counters_8hpp" startline="26">RawGe</references>
-        <references refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" compoundref="vector__functions_8hpp" startline="329" endline="329">StaticVector&lt; T &gt;::size</references>
-        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="101" endline="101">uchar_cast</references>
+        <references refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" compoundref="vector__functions_8hpp" startline="441" endline="441">StaticVector&lt; T &gt;::size</references>
+        <references refid="lib_co_8hpp_1ade77d1f37b1311b3f80ce429a33fd226" compoundref="lib_co_8hpp" startline="242" endline="242">uchar_cast</references>
       </memberdef>
       <memberdef kind="function" id="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -377,7 +377,7 @@
         <references refid="class_counters_1ad6278342b5968437e8a02869ad914244" compoundref="_analyse_2_counters_8hpp" startline="38">BGO_Clover</references>
         <references refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" compoundref="_analyse_2_counters_8hpp" startline="37">Ge_Clover</references>
         <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
-        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="260" endline="260">StaticVector&lt; T &gt;::resize</references>
+        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="364" endline="364">StaticVector&lt; T &gt;::resize</references>
       </memberdef>
       <memberdef kind="function" id="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -394,7 +394,7 @@
         <references refid="class_counters_1ad6278342b5968437e8a02869ad914244" compoundref="_analyse_2_counters_8hpp" startline="38">BGO_Clover</references>
         <references refid="class_counters_1aaf1d093d97e4d98ce7a84d46b027c9d3" compoundref="_analyse_2_counters_8hpp" startline="37">Ge_Clover</references>
         <references refid="class_counters_1a9338b4e640e1f3996fedb317d9c40923" compoundref="_analyse_2_counters_8hpp" startline="36">list_clovers</references>
-        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="260" endline="260">StaticVector&lt; T &gt;::resize</references>
+        <references refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="364" endline="364">StaticVector&lt; T &gt;::resize</references>
       </memberdef>
       <memberdef kind="function" id="class_counters_1acebc5e99a89d9fe257917c46b3101999" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -476,7 +476,7 @@
         <references refid="class_counters_1aa10e5f5e024f297949057a82c50a14a2" compoundref="_analyse_2_counters_8hpp" startline="31">Modules</references>
         <references refid="class_counters_1a0d4d6f79204a5462c92c5215b7f51e58" compoundref="_analyse_2_counters_8hpp" startline="25">mult</references>
         <references refid="class_counters_1af42a2277da8f07fa4867143d426058ec" compoundref="_analyse_2_counters_8hpp" startline="33">ParisMult</references>
-        <references refid="class_static_vector_1ac0b86d749f8e35274fbac0506c050465" compoundref="vector__functions_8hpp" startline="314" endline="314">StaticVector&lt; T &gt;::push_back_unique</references>
+        <references refid="class_static_vector_1ae9a13402fed613a29197e99ce20396f8" compoundref="vector__functions_8hpp" startline="418" endline="426">StaticVector&lt; T &gt;::push_back_unique</references>
         <references refid="class_counters_1afba8f7fd1f07fe6afd5f2ffd46ddf8bf" compoundref="_analyse_2_counters_8hpp" startline="27">RawBGO</references>
         <references refid="class_counters_1a788284c58e92d46682d73e2679cdaa48" compoundref="_analyse_2_counters_8hpp" startline="26">RawGe</references>
         <referencedby refid="class_counters_1acebc5e99a89d9fe257917c46b3101999" compoundref="_classes_2_counters_8hpp" startline="99" endline="106">countEvent</referencedby>

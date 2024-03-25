@@ -20,7 +20,7 @@ class Sorted_Event
 public:
   Sorted_Event(){initialise(); reset();}
   Sorted_Event(Event * event){initialise(); reset(); setEvent(event);}
-  static void Initialize() {Clovers::Initialize();}
+  static void Initialise() {Clovers::Initialise();}
   void initialise();
   void reset();
 

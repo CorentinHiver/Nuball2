@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="24" column="8" bodyfile="lib/Modules/Timewalk.hpp" bodystart="24" bodyend="-1"/>
+        <location file="lib/Classes/Timewalk.hpp" line="24" column="8" bodyfile="lib/Classes/Timewalk.hpp" bodystart="24" bodyend="-1"/>
         <referencedby refid="class_timewalk_1aea302190deccd4d6e51c306db01e7341" compoundref="_timewalk_8hpp" startline="30" endline="34">get</referencedby>
         <referencedby refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" compoundref="_timewalk_8hpp" startline="36" endline="69">loadFile</referencedby>
       </memberdef>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="25" column="9" bodyfile="lib/Modules/Timewalk.hpp" bodystart="25" bodyend="-1"/>
+        <location file="lib/Classes/Timewalk.hpp" line="25" column="9" bodyfile="lib/Classes/Timewalk.hpp" bodystart="25" bodyend="-1"/>
         <referencedby refid="class_timewalk_1aea302190deccd4d6e51c306db01e7341" compoundref="_timewalk_8hpp" startline="30" endline="34">get</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" prot="private" static="no" mutable="no">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="21" column="9" bodyfile="lib/Modules/Timewalk.hpp" bodystart="21" bodyend="-1"/>
+        <location file="lib/Classes/Timewalk.hpp" line="21" column="9" bodyfile="lib/Classes/Timewalk.hpp" bodystart="21" bodyend="-1"/>
         <referencedby refid="class_timewalk_1aea302190deccd4d6e51c306db01e7341" compoundref="_timewalk_8hpp" startline="30" endline="34">get</referencedby>
         <referencedby refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" compoundref="_timewalk_8hpp" startline="36" endline="69">loadFile</referencedby>
         <referencedby refid="class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a" compoundref="_timewalk_8hpp" startline="13" endline="13">Print</referencedby>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="22" column="15" bodyfile="lib/Modules/Timewalk.hpp" bodystart="22" bodyend="-1"/>
+        <location file="lib/Classes/Timewalk.hpp" line="22" column="15" bodyfile="lib/Classes/Timewalk.hpp" bodystart="22" bodyend="-1"/>
         <referencedby refid="class_timewalk_1aea302190deccd4d6e51c306db01e7341" compoundref="_timewalk_8hpp" startline="30" endline="34">get</referencedby>
         <referencedby refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" compoundref="_timewalk_8hpp" startline="36" endline="69">loadFile</referencedby>
         <referencedby refid="class_timewalk_1acf3359a58961b4c14ea29bb542bb1a3c" compoundref="_timewalk_8hpp" startline="18" endline="18">operator[]</referencedby>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="23" column="16" bodyfile="lib/Modules/Timewalk.hpp" bodystart="23" bodyend="-1"/>
+        <location file="lib/Classes/Timewalk.hpp" line="23" column="16" bodyfile="lib/Classes/Timewalk.hpp" bodystart="23" bodyend="-1"/>
         <referencedby refid="class_timewalk_1aea302190deccd4d6e51c306db01e7341" compoundref="_timewalk_8hpp" startline="30" endline="34">get</referencedby>
         <referencedby refid="class_timewalk_1abbe59aeb889198a2849c329ebcf15e0a" compoundref="_timewalk_8hpp" startline="17" endline="17">getMax</referencedby>
         <referencedby refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" compoundref="_timewalk_8hpp" startline="36" endline="69">loadFile</referencedby>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="12" column="16" bodyfile="lib/Modules/Timewalk.hpp" bodystart="30" bodyend="34"/>
+        <location file="lib/Classes/Timewalk.hpp" line="12" column="16" bodyfile="lib/Classes/Timewalk.hpp" bodystart="30" bodyend="34"/>
         <references refid="class_timewalk_1a4757707dc2702478007fd1aed630b5a7" compoundref="_timewalk_8hpp" startline="24">isON</references>
         <references refid="class_timewalk_1a3f011c6087272a223f93ec9298ddc905" compoundref="_timewalk_8hpp" startline="25">m_float_zero</references>
         <references refid="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" compoundref="_timewalk_8hpp" startline="21">m_keVperBin</references>
@@ -129,13 +129,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="11" column="8" bodyfile="lib/Modules/Timewalk.hpp" bodystart="36" bodyend="69"/>
+        <location file="lib/Classes/Timewalk.hpp" line="11" column="8" bodyfile="lib/Classes/Timewalk.hpp" bodystart="36" bodyend="69"/>
         <references refid="class_timewalk_1a4757707dc2702478007fd1aed630b5a7" compoundref="_timewalk_8hpp" startline="24">isON</references>
         <references refid="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" compoundref="_timewalk_8hpp" startline="21">m_keVperBin</references>
         <references refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" compoundref="_timewalk_8hpp" startline="22">m_Timewalk</references>
         <references refid="class_timewalk_1a63ec5a22a054be2b6bd511e27cf46ef5" compoundref="_timewalk_8hpp" startline="23">max</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <references refid="files__functions_8hpp_1a58f50a6390692cff52eef37fdaa94e56" compoundref="files__functions_8hpp" startline="25" endline="28">rmPathAndExt</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="files__functions_8hpp_1a58f50a6390692cff52eef37fdaa94e56" compoundref="files__functions_8hpp" startline="29" endline="29">rmPathAndExt</references>
         <references refid="class_timewalk_1a7c5110fd80b5bdd2aa245f14451b9a41" compoundref="_timewalk_8hpp" startline="9" endline="9">Timewalk</references>
         <referencedby refid="class_timewalk_1ac6d66ef44ed399a2d12c24d083d71b3f" compoundref="_timewalk_8hpp" startline="10" endline="10">Timewalk</referencedby>
       </memberdef>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="18" column="9" bodyfile="lib/Modules/Timewalk.hpp" bodystart="18" bodyend="18"/>
+        <location file="lib/Classes/Timewalk.hpp" line="18" column="9" bodyfile="lib/Classes/Timewalk.hpp" bodystart="18" bodyend="18"/>
         <references refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" compoundref="_timewalk_8hpp" startline="22">m_Timewalk</references>
       </memberdef>
       <memberdef kind="function" id="class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -168,10 +168,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="13" column="8" bodyfile="lib/Modules/Timewalk.hpp" bodystart="13" bodyend="13"/>
+        <location file="lib/Classes/Timewalk.hpp" line="13" column="8" bodyfile="lib/Classes/Timewalk.hpp" bodystart="13" bodyend="13"/>
         <references refid="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" compoundref="_timewalk_8hpp" startline="21">m_keVperBin</references>
         <references refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" compoundref="_timewalk_8hpp" startline="22">m_Timewalk</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       <memberdef kind="function" id="class_timewalk_1a5a9bf52d569022f6260d820a8b070606" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="15" column="8" bodyfile="lib/Modules/Timewalk.hpp" bodystart="15" bodyend="15"/>
+        <location file="lib/Classes/Timewalk.hpp" line="15" column="8" bodyfile="lib/Classes/Timewalk.hpp" bodystart="15" bodyend="15"/>
         <references refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" compoundref="_timewalk_8hpp" startline="22">m_Timewalk</references>
         <references refid="class_timewalk_1a63ec5a22a054be2b6bd511e27cf46ef5" compoundref="_timewalk_8hpp" startline="23">max</references>
       </memberdef>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="14" column="8" bodyfile="lib/Modules/Timewalk.hpp" bodystart="14" bodyend="14"/>
+        <location file="lib/Classes/Timewalk.hpp" line="14" column="8" bodyfile="lib/Classes/Timewalk.hpp" bodystart="14" bodyend="14"/>
         <references refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" compoundref="_timewalk_8hpp" startline="22">m_Timewalk</references>
       </memberdef>
       <memberdef kind="function" id="class_timewalk_1a7c5110fd80b5bdd2aa245f14451b9a41" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="9" column="3" bodyfile="lib/Modules/Timewalk.hpp" bodystart="9" bodyend="9"/>
+        <location file="lib/Classes/Timewalk.hpp" line="9" column="3" bodyfile="lib/Classes/Timewalk.hpp" bodystart="9" bodyend="9"/>
         <referencedby refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" compoundref="_timewalk_8hpp" startline="36" endline="69">loadFile</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_timewalk_1ac6d66ef44ed399a2d12c24d083d71b3f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="10" column="3" bodyfile="lib/Modules/Timewalk.hpp" bodystart="10" bodyend="10"/>
+        <location file="lib/Classes/Timewalk.hpp" line="10" column="3" bodyfile="lib/Classes/Timewalk.hpp" bodystart="10" bodyend="10"/>
         <references refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" compoundref="_timewalk_8hpp" startline="36" endline="69">loadFile</references>
       </memberdef>
       </sectiondef>
@@ -256,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="17" column="23" bodyfile="lib/Modules/Timewalk.hpp" bodystart="17" bodyend="17"/>
+        <location file="lib/Classes/Timewalk.hpp" line="17" column="23" bodyfile="lib/Classes/Timewalk.hpp" bodystart="17" bodyend="17"/>
         <references refid="class_timewalk_1a63ec5a22a054be2b6bd511e27cf46ef5" compoundref="_timewalk_8hpp" startline="23">max</references>
       </memberdef>
       <memberdef kind="function" id="class_timewalk_1a5fcb34cdafa277bc367708edfad4508d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="16" column="15" bodyfile="lib/Modules/Timewalk.hpp" bodystart="16" bodyend="16"/>
+        <location file="lib/Classes/Timewalk.hpp" line="16" column="15" bodyfile="lib/Classes/Timewalk.hpp" bodystart="16" bodyend="16"/>
         <references refid="class_timewalk_1a63ec5a22a054be2b6bd511e27cf46ef5" compoundref="_timewalk_8hpp" startline="23">max</references>
         <referencedby refid="class_timewalks_1af97cc14dd7d0ab5ac1f6e7b21b8badad" compoundref="_timewalk_8hpp" startline="100" endline="100">Timewalks::setMax</referencedby>
       </memberdef>
@@ -283,7 +283,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="lib/Modules/Timewalk.hpp" line="6" column="1" bodyfile="lib/Modules/Timewalk.hpp" bodystart="7" bodyend="26"/>
+    <location file="lib/Classes/Timewalk.hpp" line="6" column="1" bodyfile="lib/Classes/Timewalk.hpp" bodystart="7" bodyend="26"/>
     <listofallmembers>
       <member refid="class_timewalk_1aea302190deccd4d6e51c306db01e7341" prot="public" virt="non-virtual"><scope>Timewalk</scope><name>get</name></member>
       <member refid="class_timewalk_1abbe59aeb889198a2849c329ebcf15e0a" prot="public" virt="non-virtual"><scope>Timewalk</scope><name>getMax</name></member>

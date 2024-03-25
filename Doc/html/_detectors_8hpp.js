@@ -1,6 +1,8 @@
 var _detectors_8hpp =
 [
     [ "Detectors", "class_detectors.html", "class_detectors" ],
+    [ "EmptyError", "class_detectors_1_1_empty_error.html", "class_detectors_1_1_empty_error" ],
+    [ "Error", "class_detectors_1_1_error.html", "class_detectors_1_1_error" ],
     [ "SIZE_LOOKUP", "_detectors_8hpp.html#a66ffad8e00f3e94ca2040082469213c6", null ],
     [ "dType", "_detectors_8hpp.html#a7ea6a1daded60b9200989100a41bbc3a", null ],
     [ "clover_pos", "_detectors_8hpp.html#aa4d7f26a632b3df166ad7a08cad05af1", null ],
@@ -8,8 +10,9 @@ var _detectors_8hpp =
     [ "labelToBGOcrystal", "_detectors_8hpp.html#a2f5a496d7673272c5c21b29a2d41bde2", null ],
     [ "labelToClover", "_detectors_8hpp.html#adccbc8332a89f48a35baea4a37255e2c", null ],
     [ "labelToGecrystal", "_detectors_8hpp.html#a13f8fc40b8957fe11c059d8d17523704", null ],
+    [ "loadFormattedTH1F", "_detectors_8hpp.html#ae343a2d2d22d862f6ac7ae10ba1b3d41", null ],
     [ "m_index", "_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a", null ],
-    [ "operator>>", "_detectors_8hpp.html#ad6e008a36a12682ccf6a850ecc307187", null ],
+    [ "operator<<", "_detectors_8hpp.html#a2fa75cda21d89a0dcd5f8135c5a2c8bc", null ],
     [ "detectors", "_detectors_8hpp.html#a06939d30171afd1f13893e05454ed813", null ],
     [ "isBack", "_detectors_8hpp.html#a4e969925c521d2b624de9829460bf419", null ],
     [ "isBGO", "_detectors_8hpp.html#acad86c343cb1a6d3f382c2468415cc8a", null ],

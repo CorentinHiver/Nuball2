@@ -1,0 +1,10 @@
+<map id="Timeshifts::InitialisePreferencesArrays" name="Timeshifts::InitialisePreferencesArrays">
+<area shape="rect" id="node1" title=" " alt="" coords="441,100,672,141"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html#af97a362f9d3714a1483e0a18fdf26119" title=" " alt="" coords="227,5,387,47"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#a2f89468edaaaadc6d5e1c23282a0714d" title=" " alt="" coords="232,71,381,112"/>
+<area shape="rect" id="node4" href="$class_timeshifts.html#afac40edfb7b6eb8f630f328d31023d4f" title=" " alt="" coords="220,137,393,163"/>
+<area shape="rect" id="node5" href="$class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="229,187,384,214"/>
+<area shape="rect" id="node6" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="10,137,167,163"/>
+<area shape="rect" id="node7" href="$class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,187,172,214"/>
+<area shape="rect" id="node8" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="21,238,156,265"/>
+</map>

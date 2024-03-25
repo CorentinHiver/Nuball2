@@ -10,7 +10,7 @@ var class_timer =
     [ "TimeElapsedSec", "class_timer.html#ae3d9db001e5c766ee5198bea46180423", null ],
     [ "TimeSec", "class_timer.html#a4b85f2f938d7261db769607fc50fcaef", null ],
     [ "unit", "class_timer.html#a3614503158effc6668bc10001d75d20c", null ],
-    [ "Unit", "class_timer.html#a94fd593f6a7c33ae98741955a1eef579", null ],
+    [ "Unit", "class_timer.html#ab34e8e4ba0e7fd60fdd3b0048cb35897", null ],
     [ "d_milli", "class_timer.html#ae4d68c43b475d70c5944034ff53577c4", null ],
     [ "m_clock", "class_timer.html#a472849e3ff85d7a235fb3a947a7c1e70", null ],
     [ "m_now", "class_timer.html#a30397a9c04b42d4620bc80b89c47bb75", null ],

@@ -39,20 +39,32 @@
 <simplesect>
     <title>Static Public Member Functions    </title>
         <itemizedlist>
-            <listitem><para>static void <link linkend="_class_d_s_s_d_1a800770306a115e1096108cef2463a103">InitializeArrays</link> ()</para>
+            <listitem><para>static void <link linkend="_class_d_s_s_d_1a2c9fd5c55f23797bdcf66933d7662cb1">InitialiseArrays</link> ()</para>
 </listitem>
         </itemizedlist>
 </simplesect>
 <simplesect>
     <title>Public Attributes    </title>
         <itemizedlist>
-            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_d_s_s_d_1a22ef7a1a4978c25fb7f5f8f8b0ae6b57">m_Ring_Hits</link> = std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(<link linkend="__d_s_s_d_8hpp_1a6f982e9d8d9c8fd28d6d8384eb058324">nb_rings</link>)</para>
+            <listitem><para>double const <link linkend="_class_d_s_s_d_1ae8a114aaa994b51924669ce17653c31a">distance</link> = 20</para>
 </listitem>
-            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80">m_Sector_Hits</link> = std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(<link linkend="__d_s_s_d_8hpp_1a1727ad97c53a82a3ef1c310b909e4dff">nb_sectors</link>)</para>
+            <listitem><para>double const <link linkend="_class_d_s_s_d_1a5b949d6c8743c915dc0232e8fb20b74d">innerRadius</link> = 15</para>
+</listitem>
+            <listitem><para>int const <link linkend="_class_d_s_s_d_1ab292ca38f24d4ab2ccfc32425ad031c9">nb_rings</link> = 16</para>
+</listitem>
+            <listitem><para>int const <link linkend="_class_d_s_s_d_1a958bd3cd28f311c4d60e8b19043e6fea">nb_sectors</link> = 32</para>
+</listitem>
+            <listitem><para>double const <link linkend="_class_d_s_s_d_1ab77212c2dba9783ac847ee8b8af70f0d">outerRadius</link> = 41</para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_d_s_s_d_1aed2a8154605b320f03d690623f9894d4">Ring_Hits</link> = std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(<link linkend="_class_d_s_s_d_1ab292ca38f24d4ab2ccfc32425ad031c9">nb_rings</link>)</para>
+</listitem>
+            <listitem><para>double const <link linkend="_class_d_s_s_d_1a9089ebe569d7635d0ea44dfb9fdaba4e">ring_thickness</link> = (<link linkend="_class_d_s_s_d_1ab77212c2dba9783ac847ee8b8af70f0d">outerRadius</link>-<link linkend="_class_d_s_s_d_1a5b949d6c8743c915dc0232e8fb20b74d">innerRadius</link>)/<link linkend="_class_d_s_s_d_1ab292ca38f24d4ab2ccfc32425ad031c9">nb_rings</link></para>
 </listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">std::size_t</link> <link linkend="_class_d_s_s_d_1a28d8b2597e7458b29c399e701f048f17">RingMult</link> = 0u</para>
 </listitem>
             <listitem><para>std::vector&lt; <link linkend="_class_si_strip">SiStrip</link> &gt; <link linkend="_class_d_s_s_d_1ac2048ed45b15c5d0c9b7eb749ea40cba">Rings</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_d_s_s_d_1a07ea2280b92afd2a964cc2956c85011a">Sector_Hits</link> = std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(<link linkend="_class_d_s_s_d_1a958bd3cd28f311c4d60e8b19043e6fea">nb_sectors</link>)</para>
 </listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">std::size_t</link> <link linkend="_class_d_s_s_d_1abfc71d4e8b153e59ffb4da0e60f91bd9">SectorMult</link> = 0u</para>
 </listitem>
@@ -78,7 +90,7 @@
 <simplesect>
     <title>Static Private Attributes    </title>
         <itemizedlist>
-            <listitem><para>static bool <link linkend="_class_d_s_s_d_1a46729c39d700e850893f997a70bad813">s_initialized</link> = false</para>
+            <listitem><para>static bool <link linkend="_class_d_s_s_d_1a2b6c7d3c126c7a665067a5fd73e29c81">s_Initialised</link> = false</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -143,15 +155,15 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_d_s_s_d_1a800770306a115e1096108cef2463a103"/>    <section>
-    <title>InitializeArrays()</title>
-<indexterm><primary>InitializeArrays</primary><secondary>DSSD</secondary></indexterm>
-<indexterm><primary>DSSD</primary><secondary>InitializeArrays</secondary></indexterm>
-<para><computeroutput>static void DSSD::InitializeArrays ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_class_d_s_s_d_1a2c9fd5c55f23797bdcf66933d7662cb1"/>    <section>
+    <title>InitialiseArrays()</title>
+<indexterm><primary>InitialiseArrays</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>InitialiseArrays</secondary></indexterm>
+<para><computeroutput>static void DSSD::InitialiseArrays ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_d_s_s_d_a800770306a115e1096108cef2463a103_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_d_s_s_d_a2c9fd5c55f23797bdcf66933d7662cb1_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -160,7 +172,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_d_s_s_d_a800770306a115e1096108cef2463a103_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_d_s_s_d_a2c9fd5c55f23797bdcf66933d7662cb1_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -247,11 +259,19 @@ Here is the caller graph for this function:<para>
 </section>
 <section>
 <title>Member Data Documentation</title>
-<anchor xml:id="_class_d_s_s_d_1adb11dca39569b2d7ef71f731354ae73c"/>    <section>
+<anchor xml:id="_class_d_s_s_d_1ae8a114aaa994b51924669ce17653c31a"/>    <section>
+    <title>distance</title>
+<indexterm><primary>distance</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>distance</secondary></indexterm>
+<para><computeroutput>double const DSSD::distance = 20</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1adb11dca39569b2d7ef71f731354ae73c"/>    <section>
     <title>indexes</title>
 <indexterm><primary>indexes</primary><secondary>DSSD</secondary></indexterm>
 <indexterm><primary>DSSD</primary><secondary>indexes</secondary></indexterm>
-<para><computeroutput>std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; DSSD::indexes = {255}<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1afeab248c862447291a003301c354feea"/>    <section>
+<para><computeroutput>std::array&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>, 1000 &gt; DSSD::indexes = {255}<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a5b949d6c8743c915dc0232e8fb20b74d"/>    <section>
+    <title>innerRadius</title>
+<indexterm><primary>innerRadius</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>innerRadius</secondary></indexterm>
+<para><computeroutput>double const DSSD::innerRadius = 15</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1afeab248c862447291a003301c354feea"/>    <section>
     <title>isRing</title>
 <indexterm><primary>isRing</primary><secondary>DSSD</secondary></indexterm>
 <indexterm><primary>DSSD</primary><secondary>isRing</secondary></indexterm>
@@ -267,15 +287,27 @@ Here is the caller graph for this function:<para>
     <title>isSector</title>
 <indexterm><primary>isSector</primary><secondary>DSSD</secondary></indexterm>
 <indexterm><primary>DSSD</primary><secondary>isSector</secondary></indexterm>
-<para><computeroutput>std::array&lt; bool, 1000 &gt; DSSD::isSector = {0}<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a22ef7a1a4978c25fb7f5f8f8b0ae6b57"/>    <section>
-    <title>m_Ring_Hits</title>
-<indexterm><primary>m_Ring_Hits</primary><secondary>DSSD</secondary></indexterm>
-<indexterm><primary>DSSD</primary><secondary>m_Ring_Hits</secondary></indexterm>
-<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; DSSD::m_Ring_Hits = std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(<link linkend="__d_s_s_d_8hpp_1a6f982e9d8d9c8fd28d6d8384eb058324">nb_rings</link>)</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1aa4c767b3f8a9088cc2ff6323ab6e0d80"/>    <section>
-    <title>m_Sector_Hits</title>
-<indexterm><primary>m_Sector_Hits</primary><secondary>DSSD</secondary></indexterm>
-<indexterm><primary>DSSD</primary><secondary>m_Sector_Hits</secondary></indexterm>
-<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; DSSD::m_Sector_Hits = std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(<link linkend="__d_s_s_d_8hpp_1a1727ad97c53a82a3ef1c310b909e4dff">nb_sectors</link>)</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a28d8b2597e7458b29c399e701f048f17"/>    <section>
+<para><computeroutput>std::array&lt; bool, 1000 &gt; DSSD::isSector = {0}<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1ab292ca38f24d4ab2ccfc32425ad031c9"/>    <section>
+    <title>nb_rings</title>
+<indexterm><primary>nb_rings</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>nb_rings</secondary></indexterm>
+<para><computeroutput>int const DSSD::nb_rings = 16</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a958bd3cd28f311c4d60e8b19043e6fea"/>    <section>
+    <title>nb_sectors</title>
+<indexterm><primary>nb_sectors</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>nb_sectors</secondary></indexterm>
+<para><computeroutput>int const DSSD::nb_sectors = 32</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1ab77212c2dba9783ac847ee8b8af70f0d"/>    <section>
+    <title>outerRadius</title>
+<indexterm><primary>outerRadius</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>outerRadius</secondary></indexterm>
+<para><computeroutput>double const DSSD::outerRadius = 41</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1aed2a8154605b320f03d690623f9894d4"/>    <section>
+    <title>Ring_Hits</title>
+<indexterm><primary>Ring_Hits</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>Ring_Hits</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; DSSD::Ring_Hits = std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(<link linkend="_class_d_s_s_d_1ab292ca38f24d4ab2ccfc32425ad031c9">nb_rings</link>)</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a9089ebe569d7635d0ea44dfb9fdaba4e"/>    <section>
+    <title>ring_thickness</title>
+<indexterm><primary>ring_thickness</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>ring_thickness</secondary></indexterm>
+<para><computeroutput>double const DSSD::ring_thickness = (<link linkend="_class_d_s_s_d_1ab77212c2dba9783ac847ee8b8af70f0d">outerRadius</link>-<link linkend="_class_d_s_s_d_1a5b949d6c8743c915dc0232e8fb20b74d">innerRadius</link>)/<link linkend="_class_d_s_s_d_1ab292ca38f24d4ab2ccfc32425ad031c9">nb_rings</link></computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a28d8b2597e7458b29c399e701f048f17"/>    <section>
     <title>RingMult</title>
 <indexterm><primary>RingMult</primary><secondary>DSSD</secondary></indexterm>
 <indexterm><primary>DSSD</primary><secondary>RingMult</secondary></indexterm>
@@ -283,11 +315,15 @@ Here is the caller graph for this function:<para>
     <title>Rings</title>
 <indexterm><primary>Rings</primary><secondary>DSSD</secondary></indexterm>
 <indexterm><primary>DSSD</primary><secondary>Rings</secondary></indexterm>
-<para><computeroutput>std::vector&lt;<link linkend="_class_si_strip">SiStrip</link>&gt; DSSD::Rings</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a46729c39d700e850893f997a70bad813"/>    <section>
-    <title>s_initialized</title>
-<indexterm><primary>s_initialized</primary><secondary>DSSD</secondary></indexterm>
-<indexterm><primary>DSSD</primary><secondary>s_initialized</secondary></indexterm>
-<para><computeroutput>bool DSSD::s_initialized = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1abfc71d4e8b153e59ffb4da0e60f91bd9"/>    <section>
+<para><computeroutput>std::vector&lt;<link linkend="_class_si_strip">SiStrip</link>&gt; DSSD::Rings</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a2b6c7d3c126c7a665067a5fd73e29c81"/>    <section>
+    <title>s_Initialised</title>
+<indexterm><primary>s_Initialised</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>s_Initialised</secondary></indexterm>
+<para><computeroutput>bool DSSD::s_Initialised = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1a07ea2280b92afd2a964cc2956c85011a"/>    <section>
+    <title>Sector_Hits</title>
+<indexterm><primary>Sector_Hits</primary><secondary>DSSD</secondary></indexterm>
+<indexterm><primary>DSSD</primary><secondary>Sector_Hits</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; DSSD::Sector_Hits = std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt;(<link linkend="_class_d_s_s_d_1a958bd3cd28f311c4d60e8b19043e6fea">nb_sectors</link>)</computeroutput></para>    </section><anchor xml:id="_class_d_s_s_d_1abfc71d4e8b153e59ffb4da0e60f91bd9"/>    <section>
     <title>SectorMult</title>
 <indexterm><primary>SectorMult</primary><secondary>DSSD</secondary></indexterm>
 <indexterm><primary>DSSD</primary><secondary>SectorMult</secondary></indexterm>

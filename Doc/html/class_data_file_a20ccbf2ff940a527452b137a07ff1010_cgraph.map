@@ -1,0 +1,9 @@
+<map id="DataFile::setColumn" name="DataFile::setColumn">
+<area shape="rect" id="node1" title="Setup the reading to the wanted column." alt="" coords="5,81,160,108"/>
+<area shape="rect" id="node2" href="$class_data_file.html#aa7924fc31df5257c572a05d5a5d6a795" title="Returns the given column." alt="" coords="208,5,340,32"/>
+<area shape="rect" id="node4" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="418,107,521,133"/>
+<area shape="rect" id="node6" href="$vector__functions_8hpp.html#ad399307162129e2996e7bf6e172d97c9" title=" " alt="" coords="219,107,329,133"/>
+<area shape="rect" id="node7" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="225,157,323,184"/>
+<area shape="rect" id="node3" href="$class_data_file.html#a384d0b3098646b77e219189fc8dccd00" title=" " alt="" coords="388,5,551,32"/>
+<area shape="rect" id="node5" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="599,107,705,133"/>
+</map>

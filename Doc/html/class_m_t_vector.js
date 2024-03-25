@@ -6,6 +6,7 @@ var class_m_t_vector =
     [ "clear", "class_m_t_vector.html#ae3f2bdb83abfae640cdcfe0dd5cd05c3", null ],
     [ "end", "class_m_t_vector.html#a5e9df0c0baf0b23daf47797492e6068e", null ],
     [ "get", "class_m_t_vector.html#ae6e4c7bbe8c226d36b317340c447e914", null ],
+    [ "getIndex", "class_m_t_vector.html#a2aedf7ea6cb074610ddcb108b78f9f22", null ],
     [ "getNext", "class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7", null ],
     [ "getNext", "class_m_t_vector.html#aaae47be200e6af0a341a5f9407fe3a4d", null ],
     [ "operator std::vector< T >", "class_m_t_vector.html#a99b913bfdcf68d04d080e7edb3ce89d8", null ],

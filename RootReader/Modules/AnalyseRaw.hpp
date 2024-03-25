@@ -18,7 +18,7 @@ public:
   AnalyseRaw(){};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
-  void InitializeManip();
+  void InitialiseManip();
   static void treatFile(Parameters & p, AnalyseRaw & analyseRaw);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
@@ -56,7 +56,7 @@ private:
 bool AnalyseRaw::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   rf.set_offset_ns(35);
   MTObject::parallelise_function(treatFile, p, *this);
   this -> Write();
@@ -104,10 +104,10 @@ void AnalyseRaw::treatFile(Parameters & p, AnalyseRaw & analyseRaw)
   } // End files loop
 }
 
-void AnalyseRaw::InitializeManip()
+void AnalyseRaw::InitialiseManip()
 {
   RF_Manager::set_offset(50);
-  print("Initialize histograms");
+  print("Initialise histograms");
   timing_spectra.resize(g_detectors.size());
   energy_spectra.resize(g_detectors.size());
   energy2_spectra.resize(g_detectors.size());

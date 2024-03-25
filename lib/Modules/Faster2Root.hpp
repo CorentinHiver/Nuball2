@@ -253,7 +253,7 @@ void Faster2Root::load(int argc, char** argv)
   }
 
   // Perform initialisations :
-  if (m_nb_threads > 1) MTObject::Initialize(m_nb_threads);
+  if (m_nb_threads > 1) MTObject::Initialise(m_nb_threads);
   std::cout << std::setprecision(4);
 
   // Run the conversion :

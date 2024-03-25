@@ -1,4 +1,4 @@
-.TH "SpectraAlignator" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "SpectraAlignator" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,10 +15,16 @@ SpectraAlignator
 .RI "\fBRecalibration\fP const  & \fBalignSpectra\fP (TH1 *_spectra, TH1 *spectra_output, int const &degreesOfFreedom=3, double const &energyThreshold=0)"
 .br
 .ti -1c
+.RI "void \fBnewAlignement\fP (TH1 *_spectra, TH1 *spectra_output)"
+.br
+.ti -1c
 .RI "void \fBsetBruteForce\fP (bool const &brute_force=true)"
 .br
 .ti -1c
 .RI "void \fBsetIterations\fP (int const &iterations)"
+.br
+.ti -1c
+.RI "\fBSpectraAlignator\fP () noexcept=default"
 .br
 .ti -1c
 .RI "\fBSpectraAlignator\fP (TH1 *ref)"
@@ -40,9 +46,6 @@ SpectraAlignator
 .RI "std::vector< double > \fBm_chi2s\fP"
 .br
 .ti -1c
-.RI "std::vector< \fBMinimisator\fP > \fBm_minimisator\fP"
-.br
-.ti -1c
 .RI "int \fBm_nb_iterations\fP = 20"
 .br
 .ti -1c
@@ -61,13 +64,34 @@ SpectraAlignator
 .RI "TH2F * \fBsurface_chi2\fP = nullptr"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBDeprecated\fP
+.RS 4
+
+.RE
+.PP
+
 .SH "Constructor & Destructor Documentation"
 .PP 
+.SS "SpectraAlignator::SpectraAlignator ()\fC [default]\fP, \fC [noexcept]\fP"
+
 .SS "SpectraAlignator::SpectraAlignator (TH1 * ref)\fC [inline]\fP"
 
 .SH "Member Function Documentation"
 .PP 
 .SS "\fBRecalibration\fP const& SpectraAlignator::alignSpectra (TH1 * _spectra, TH1 * spectra_output, int const & degreesOfFreedom = \fC3\fP, double const & energyThreshold = \fC0\fP)\fC [inline]\fP"
+
+.SS "void SpectraAlignator::newAlignement (TH1 * _spectra, TH1 * spectra_output)\fC [inline]\fP"
+
+.PP
+\fBDeprecated\fP
+.RS 4
+
+.RE
+.PP
 
 .SS "void SpectraAlignator::setBruteForce (bool const & brute_force = \fCtrue\fP)\fC [inline]\fP"
 
@@ -82,8 +106,6 @@ SpectraAlignator
 .SS "TH3F* SpectraAlignator::m_chi2_spectra = nullptr\fC [private]\fP"
 
 .SS "std::vector<double> SpectraAlignator::m_chi2s\fC [private]\fP"
-
-.SS "std::vector<\fBMinimisator\fP> SpectraAlignator::m_minimisator\fC [private]\fP"
 
 .SS "int SpectraAlignator::m_nb_iterations = 20\fC [private]\fP"
 

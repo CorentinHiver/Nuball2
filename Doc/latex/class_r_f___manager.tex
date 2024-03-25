@@ -12,86 +12,121 @@ Class used to manage the RF.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+auto \textbf{ last\+\_\+time\+\_\+ns} () const
+\begin{DoxyCompactList}\small\item\em Returns the value of the end of the time window ( = period-\/offset) \end{DoxyCompactList}\item 
+auto \textbf{ period\+\_\+ns} () const
+\item 
 \textbf{ Time} \textbf{ pulse\+\_\+\+ToF} (\textbf{ Hit} const \&hit) const
 \item 
-\textbf{ Time} \textbf{ pulse\+\_\+\+ToF} (\textbf{ Hit} const \&hit, \textbf{ Time} const \&\textbf{ offset}) const
-\item 
 \textbf{ Time} \textbf{ pulse\+\_\+\+ToF} (\textbf{ Timestamp} const \&timestamp) const
-\item 
-\textbf{ Time} \textbf{ pulse\+\_\+\+ToF} (\textbf{ Timestamp} const \&timestamp, \textbf{ Time} const \&\textbf{ offset}) const
 \item 
 {\footnotesize template$<$class... ARGS$>$ }\\float \textbf{ pulse\+\_\+\+To\+F\+\_\+ns} (ARGS... args)
 \item 
 \textbf{ Timestamp} \textbf{ ref\+Time} (\textbf{ Timestamp} const \&timestamp) const
 \item 
-\textbf{ RF\+\_\+\+Manager} (\textbf{ Time} const \&\+\_\+period=400, \textbf{ Label} const \&label\+\_\+\+RF=251)
+\textbf{ RF\+\_\+\+Manager} (\textbf{ Time} const \&\+\_\+period=400000, \textbf{ Label} const \&label\+\_\+\+RF=251)
 \item 
 void \textbf{ set} (\textbf{ Timestamp} new\+\_\+timestamp, \textbf{ Timestamp} \+\_\+period)
+\item 
+void \textbf{ set\+\_\+period\+\_\+ns} (\textbf{ Time} const \&\+\_\+period)
 \item 
 bool \textbf{ set\+Hit} (\textbf{ Hit} const \&hit)
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static auto \textbf{ offset} ()
+static auto const  \& \textbf{ offset} ()
+\item 
+static auto \textbf{ offset\+\_\+ns} ()
 \item 
 static void \textbf{ set\+\_\+offset} (\textbf{ Time} const \&\textbf{ offset})
 \item 
-static void \textbf{ set\+\_\+offset\+\_\+ns} (\textbf{ Time} const \&offset\+\_\+ns)
+static void \textbf{ set\+\_\+offset\+\_\+ns} (\textbf{ Time} const \&\textbf{ offset\+\_\+ns})
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\textbf{ Timestamp} \textbf{ last\+\_\+hit} = 0
+\textbf{ Timestamp} \textbf{ last\+\_\+downscale} = 0
 \item 
 \textbf{ Time} \textbf{ period} = 0
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \textbf{ Label} \textbf{ label} = 251
+static thread\+\_\+local \textbf{ Label} \textbf{ label} = 251
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \textbf{ Time} \textbf{ m\+\_\+offset} = 50000
+static thread\+\_\+local \textbf{ Time} \textbf{ m\+\_\+offset} = 50000
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class used to manage the RF. 
 
-Normal case \+: the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp) dT = (shifted\+\_\+time-\/last\+\_\+hit) corresponds to the time separating the current hit to the reference RF Therefore, N = d\+T/period corresponds to the number of periods separating the two hits In other words, it is the number of pulses between the reference RF and the current hit Then, period$\ast$N is the timestamp of the pulse relative to the current hit (Remember we are doing integer arithmetic, period$\ast$d\+T/period != dT) And dTperiod is the rest of the integer division, hence the time between the hit and its relative pulse Finally, one need to substract the applied offset in order to get the correct result \+:
+Normal case \+: the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp) dT = (shifted\+\_\+time-\/last\+\_\+downscale) corresponds to the time separating the current hit to the reference RF Therefore, N = d\+T/period corresponds to the number of periods separating the two hits In other words, it is the number of pulses between the reference RF and the current hit Then, period$\ast$N is the timestamp of the pulse relative to the current hit (Remember we are doing integer arithmetic, period$\ast$d\+T/period != dT) And dTperiod is the rest of the integer division, hence the time between the hit and its relative pulse Finally, one need to substract the applied offset in order to get the correct result \+:
 
-When the data is not correctly ordered \+: In order to get a correct answer, one need to get a positive difference, so to invert the difference \+: now last\+\_\+hit-\/shifted\+\_\+time$>$0 But the result is inverted and we obtain really period-\/timestamp. We get the correct result by doing \+: relative\+\_\+timestamp = period -\/ (period-\/timestamp) 
+When the data is not correctly ordered \+: In order to get a correct answer, one need to get a positive difference, so to invert the difference \+: now last\+\_\+downscale-\/shifted\+\_\+time$>$0 But the result is inverted and we obtain really period-\/timestamp. We get the correct result by doing \+: relative\+\_\+timestamp = period -\/ (period-\/timestamp) 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\label{class_r_f___manager_a84a0f90afbd329b182c07f7485d29bc3}} 
+\mbox{\label{class_r_f___manager_af2b019bf15c83ef2264742724be8bfc8}} 
 \index{RF\_Manager@{RF\_Manager}!RF\_Manager@{RF\_Manager}}
 \index{RF\_Manager@{RF\_Manager}!RF\_Manager@{RF\_Manager}}
 \doxysubsubsection{RF\_Manager()}
-{\footnotesize\ttfamily RF\+\_\+\+Manager\+::\+RF\+\_\+\+Manager (\begin{DoxyParamCaption}\item[{\textbf{ Time} const \&}]{\+\_\+period = {\ttfamily 400},  }\item[{\textbf{ Label} const \&}]{label\+\_\+\+RF = {\ttfamily 251} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily RF\+\_\+\+Manager\+::\+RF\+\_\+\+Manager (\begin{DoxyParamCaption}\item[{\textbf{ Time} const \&}]{\+\_\+period = {\ttfamily 400000},  }\item[{\textbf{ Label} const \&}]{label\+\_\+\+RF = {\ttfamily 251} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\label{class_r_f___manager_afd7204c9141bc2556b195a93e757508e}} 
+\mbox{\label{class_r_f___manager_accd25977372165f9db75b032086f6d08}} 
+\index{RF\_Manager@{RF\_Manager}!last\_time\_ns@{last\_time\_ns}}
+\index{last\_time\_ns@{last\_time\_ns}!RF\_Manager@{RF\_Manager}}
+\doxysubsubsection{last\_time\_ns()}
+{\footnotesize\ttfamily auto RF\+\_\+\+Manager\+::last\+\_\+time\+\_\+ns (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the value of the end of the time window ( = period-\/offset) 
+
+\mbox{\label{class_r_f___manager_a6f647860bac9370bed96fa4bd88db9a5}} 
 \index{RF\_Manager@{RF\_Manager}!offset@{offset}}
 \index{offset@{offset}!RF\_Manager@{RF\_Manager}}
 \doxysubsubsection{offset()}
-{\footnotesize\ttfamily static auto RF\+\_\+\+Manager\+::offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+{\footnotesize\ttfamily static auto const\& RF\+\_\+\+Manager\+::offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_r_f___manager_afd7204c9141bc2556b195a93e757508e_icgraph}
+\includegraphics[width=350pt]{class_r_f___manager_a6f647860bac9370bed96fa4bd88db9a5_icgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_r_f___manager_a72ed7564f0720d373b4f8c333ca5f009}} 
+\index{RF\_Manager@{RF\_Manager}!offset\_ns@{offset\_ns}}
+\index{offset\_ns@{offset\_ns}!RF\_Manager@{RF\_Manager}}
+\doxysubsubsection{offset\_ns()}
+{\footnotesize\ttfamily static auto RF\+\_\+\+Manager\+::offset\+\_\+ns (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_r_f___manager_a72ed7564f0720d373b4f8c333ca5f009_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_r_f___manager_adc0bff4ffddcf41ce58df5cff27a5d12}} 
+\index{RF\_Manager@{RF\_Manager}!period\_ns@{period\_ns}}
+\index{period\_ns@{period\_ns}!RF\_Manager@{RF\_Manager}}
+\doxysubsubsection{period\_ns()}
+{\footnotesize\ttfamily auto RF\+\_\+\+Manager\+::period\+\_\+ns (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_r_f___manager_a829a6911ee952dc5f3fbcf5cf93b7048}} 
 \index{RF\_Manager@{RF\_Manager}!pulse\_ToF@{pulse\_ToF}}
 \index{pulse\_ToF@{pulse\_ToF}!RF\_Manager@{RF\_Manager}}
-\doxysubsubsection{pulse\_ToF()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+\doxysubsubsection{pulse\_ToF()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \textbf{ Time} RF\+\_\+\+Manager\+::pulse\+\_\+\+ToF (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 Here is the call graph for this function\+:\nopagebreak
@@ -108,37 +143,18 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=211pt]{class_r_f___manager_a829a6911ee952dc5f3fbcf5cf93b7048_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_r_f___manager_a56eade01a7891c421108256629d92028}} 
-\index{RF\_Manager@{RF\_Manager}!pulse\_ToF@{pulse\_ToF}}
-\index{pulse\_ToF@{pulse\_ToF}!RF\_Manager@{RF\_Manager}}
-\doxysubsubsection{pulse\_ToF()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
-{\footnotesize\ttfamily \textbf{ Time} RF\+\_\+\+Manager\+::pulse\+\_\+\+ToF (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit,  }\item[{\textbf{ Time} const \&}]{offset }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_r_f___manager_a56eade01a7891c421108256629d92028_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=211pt]{class_r_f___manager_a56eade01a7891c421108256629d92028_icgraph}
-\end{center}
-\end{figure}
 \mbox{\label{class_r_f___manager_a15356af241ce65874d01c9479ab48aa4}} 
 \index{RF\_Manager@{RF\_Manager}!pulse\_ToF@{pulse\_ToF}}
 \index{pulse\_ToF@{pulse\_ToF}!RF\_Manager@{RF\_Manager}}
-\doxysubsubsection{pulse\_ToF()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+\doxysubsubsection{pulse\_ToF()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \textbf{ Time} RF\+\_\+\+Manager\+::pulse\+\_\+\+ToF (\begin{DoxyParamCaption}\item[{\textbf{ Timestamp} const \&}]{timestamp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=345pt]{class_r_f___manager_a15356af241ce65874d01c9479ab48aa4_cgraph}
+\includegraphics[width=314pt]{class_r_f___manager_a15356af241ce65874d01c9479ab48aa4_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -148,26 +164,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_r_f___manager_a15356af241ce65874d01c9479ab48aa4_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_r_f___manager_ad5d5d6c27fa4e059bc125c5d14a26c3f}} 
-\index{RF\_Manager@{RF\_Manager}!pulse\_ToF@{pulse\_ToF}}
-\index{pulse\_ToF@{pulse\_ToF}!RF\_Manager@{RF\_Manager}}
-\doxysubsubsection{pulse\_ToF()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
-{\footnotesize\ttfamily \textbf{ Time} RF\+\_\+\+Manager\+::pulse\+\_\+\+ToF (\begin{DoxyParamCaption}\item[{\textbf{ Timestamp} const \&}]{timestamp,  }\item[{\textbf{ Time} const \&}]{offset }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_r_f___manager_ad5d5d6c27fa4e059bc125c5d14a26c3f_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=211pt]{class_r_f___manager_ad5d5d6c27fa4e059bc125c5d14a26c3f_icgraph}
-\end{center}
-\end{figure}
 \mbox{\label{class_r_f___manager_a1d406ab06d5c992faae4932e59166941}} 
 \index{RF\_Manager@{RF\_Manager}!pulse\_ToF\_ns@{pulse\_ToF\_ns}}
 \index{pulse\_ToF\_ns@{pulse\_ToF\_ns}!RF\_Manager@{RF\_Manager}}
@@ -175,7 +171,8 @@ Here is the caller graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$class... ARGS$>$ \\
 float RF\+\_\+\+Manager\+::pulse\+\_\+\+To\+F\+\_\+ns (\begin{DoxyParamCaption}\item[{ARGS...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -188,7 +185,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{refTime()}
 {\footnotesize\ttfamily \textbf{ Timestamp} RF\+\_\+\+Manager\+::ref\+Time (\begin{DoxyParamCaption}\item[{\textbf{ Timestamp} const \&}]{timestamp }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -221,7 +219,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{set\_offset()}
 {\footnotesize\ttfamily static void RF\+\_\+\+Manager\+::set\+\_\+offset (\begin{DoxyParamCaption}\item[{\textbf{ Time} const \&}]{offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -241,11 +240,33 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{set\_offset\_ns()}
 {\footnotesize\ttfamily static void RF\+\_\+\+Manager\+::set\+\_\+offset\+\_\+ns (\begin{DoxyParamCaption}\item[{\textbf{ Time} const \&}]{offset\+\_\+ns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_r_f___manager_a7c25dd168ae776c4229195e025ab4365_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_r_f___manager_a78e21e4d50e83b6cbede7d47cb931f77}} 
+\index{RF\_Manager@{RF\_Manager}!set\_period\_ns@{set\_period\_ns}}
+\index{set\_period\_ns@{set\_period\_ns}!RF\_Manager@{RF\_Manager}}
+\doxysubsubsection{set\_period\_ns()}
+{\footnotesize\ttfamily void RF\+\_\+\+Manager\+::set\+\_\+period\+\_\+ns (\begin{DoxyParamCaption}\item[{\textbf{ Time} const \&}]{\+\_\+period }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_r_f___manager_a78e21e4d50e83b6cbede7d47cb931f77_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_r_f___manager_a0261f2b02176a3e5562603c25f31d9a6}} 
 \index{RF\_Manager@{RF\_Manager}!setHit@{setHit}}
 \index{setHit@{setHit}!RF\_Manager@{RF\_Manager}}
 \doxysubsubsection{setHit()}
-{\footnotesize\ttfamily bool RF\+\_\+\+Manager\+::set\+Hit (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool RF\+\_\+\+Manager\+::set\+Hit (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
@@ -264,23 +285,23 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\label{class_r_f___manager_af38019b6bb4e45be94b17c5d193f5e45}} 
+\mbox{\label{class_r_f___manager_ad7c0065f882795fb59c1a74d63ab1de6}} 
 \index{RF\_Manager@{RF\_Manager}!label@{label}}
 \index{label@{label}!RF\_Manager@{RF\_Manager}}
 \doxysubsubsection{label}
-{\footnotesize\ttfamily \textbf{ Label} RF\+\_\+\+Manager\+::label = 251\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily thread\+\_\+local \textbf{ Label} RF\+\_\+\+Manager\+::label = 251\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\label{class_r_f___manager_a7738dda837846c1dee405dea4d544630}} 
-\index{RF\_Manager@{RF\_Manager}!last\_hit@{last\_hit}}
-\index{last\_hit@{last\_hit}!RF\_Manager@{RF\_Manager}}
-\doxysubsubsection{last\_hit}
-{\footnotesize\ttfamily \textbf{ Timestamp} RF\+\_\+\+Manager\+::last\+\_\+hit = 0}
+\mbox{\label{class_r_f___manager_a348a556d99e6cdf8ac51f229ddfe7d8c}} 
+\index{RF\_Manager@{RF\_Manager}!last\_downscale@{last\_downscale}}
+\index{last\_downscale@{last\_downscale}!RF\_Manager@{RF\_Manager}}
+\doxysubsubsection{last\_downscale}
+{\footnotesize\ttfamily \textbf{ Timestamp} RF\+\_\+\+Manager\+::last\+\_\+downscale = 0}
 
-\mbox{\label{class_r_f___manager_a26bbe9a4c07e1019539c2acb0a57e7b5}} 
+\mbox{\label{class_r_f___manager_aea82986410c18b09097410851a888a9b}} 
 \index{RF\_Manager@{RF\_Manager}!m\_offset@{m\_offset}}
 \index{m\_offset@{m\_offset}!RF\_Manager@{RF\_Manager}}
 \doxysubsubsection{m\_offset}
-{\footnotesize\ttfamily \textbf{ Time} RF\+\_\+\+Manager\+::m\+\_\+offset = 50000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily thread\+\_\+local \textbf{ Time} RF\+\_\+\+Manager\+::m\+\_\+offset = 50000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 \mbox{\label{class_r_f___manager_aaafb0a06fe27f4d3121dd41faa6787cd}} 
 \index{RF\_Manager@{RF\_Manager}!period@{period}}

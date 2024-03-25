@@ -10,7 +10,7 @@
         <definition>Time CoincBuilder::m_time_window</definition>
         <argsstring></argsstring>
         <name>m_time_window</name>
-        <initializer>= 500000</initializer>
+        <initializer>= 500000ll</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -48,11 +48,12 @@
         <references refid="class_builder_1a7b1399ae5a1a58620dd564754d691348" compoundref="_builder_8hpp" startline="97">Builder::m_keep_singles</references>
         <references refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" compoundref="_builder_8hpp" startline="92">Builder::m_last_hit</references>
         <references refid="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" compoundref="_builder_8hpp" startline="96">Builder::m_status</references>
-        <references refid="class_event_1a455861b2470596b9ee0101ccb61faa26" compoundref="_event_8hpp" startline="176">Event::mult</references>
+        <references refid="class_event_1a455861b2470596b9ee0101ccb61faa26" compoundref="_event_8hpp" startline="180">Event::mult</references>
+        <references refid="vector__functions_8hpp_1a1351ef703b7cf695131924cc97eb6374" compoundref="vector__functions_8hpp" startline="22" endline="25">push_back</references>
         <references refid="class_coinc_builder_1ad777d92b1242cafdb594e3fb315ae3a9" compoundref="_coinc_builder_8hpp" startline="31" endline="31">reset</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
         <referencedby refid="class_clover_spectra_1a614d7deabde77b0ffea91ca2a6002484" compoundref="_clover_spectra_8hpp" startline="161" endline="207">CloverSpectra::runFasterReader</referencedby>
-        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="732" endline="771">Timeshifts::treatFasterFile</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_coinc_builder_1a358978c5c9a118398d7b8dee4f327999" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -124,8 +125,8 @@
         <location file="lib/Classes/CoincBuilder.hpp" line="32" column="8" bodyfile="lib/Classes/CoincBuilder.hpp" bodystart="32" bodyend="35"/>
         <references refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" compoundref="_builder_8hpp" startline="92">Builder::m_last_hit</references>
         <references refid="class_coinc_builder_1ac6bf8fbe3ea6f8ecf0b7d70a0be2a5d3" compoundref="_coinc_builder_8hpp" startline="46">m_time_window</references>
-        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">Hit::stamp</references>
-        <references refid="_hit_8hpp_1a4ea1ea3a29989c67afc2c4db41e36b15" compoundref="_hit_8hpp" startline="46" endline="46">Time_cast</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="205">Hit::stamp</references>
+        <references refid="_hit_8hpp_1a4ea1ea3a29989c67afc2c4db41e36b15" compoundref="_hit_8hpp" startline="49" endline="49">Time_cast</references>
         <referencedby refid="class_coinc_builder_1a6fbd7caa8ab6ac6bbf4d14eb094b6417" compoundref="_coinc_builder_8hpp" startline="49" endline="90">build</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_builder_1a8fd6226096d712de58f78e9ef123c45d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -196,7 +197,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/Builder.hpp" line="63" column="8" bodyfile="lib/Classes/Builder.hpp" bodystart="63" bodyend="63"/>
-        <references refid="class_event_1ac0a49a4178b701a0921ade6bfb1ad143" compoundref="_event_8hpp" startline="162" endline="162">Event::isSingle</references>
+        <references refid="class_event_1ac0a49a4178b701a0921ade6bfb1ad143" compoundref="_event_8hpp" startline="166" endline="166">Event::isSingle</references>
         <references refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" compoundref="_builder_8hpp" startline="90">Builder::m_event</references>
       </memberdef>
       <memberdef kind="function" id="class_coinc_builder_1aea3e2ad2ee31f1a77abea9e9921cdd6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -439,9 +440,9 @@
         </inbodydescription>
         <location file="lib/Classes/Builder.hpp" line="86" column="15" bodyfile="lib/Classes/Builder.hpp" bodystart="86" bodyend="86"/>
         <references refid="class_builder_1a7b1399ae5a1a58620dd564754d691348" compoundref="_builder_8hpp" startline="97">Builder::m_keep_singles</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
-        <referencedby refid="class_clover_spectra_1abf805324f6371f19ef0b3ce45705a115" compoundref="_clover_spectra_8hpp" startline="147" endline="159">CloverSpectra::Initialize</referencedby>
-        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_clover_spectra_1a8b3eedd382c6e2d0de9d4863efdccaea" compoundref="_clover_spectra_8hpp" startline="147" endline="159">CloverSpectra::Initialise</referencedby>
+        <referencedby refid="class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialise</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>

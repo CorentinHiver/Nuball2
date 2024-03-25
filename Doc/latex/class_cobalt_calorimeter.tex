@@ -1,0 +1,1130 @@
+\doxysection{Cobalt\+Calorimeter Class Reference}
+\label{class_cobalt_calorimeter}\index{CobaltCalorimeter@{CobaltCalorimeter}}
+
+
+{\ttfamily \#include $<$Cobalt\+Calorimeter.\+hpp$>$}
+
+
+
+Collaboration diagram for Cobalt\+Calorimeter\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Cobalt\+Calorimeter} ()
+\item 
+void \textbf{ Initialise} ()
+\item 
+void \textbf{ launch\+Faster} (std\+::string const \&foldername, int nb\+\_\+files=-\/1)
+\begin{DoxyCompactList}\small\item\em legacy \end{DoxyCompactList}\item 
+void \textbf{ launch\+Root} (std\+::string const \&foldername, int nb\+\_\+files=-\/1)
+\item 
+void \textbf{ load\+Calibration} (\textbf{ Calibration} calib)
+\item 
+void \textbf{ load\+ID} (std\+::string const \&filename)
+\item 
+void \textbf{ load\+Timeshifts} (\textbf{ Timeshifts} timeshifts)
+\item 
+void \textbf{ set\+Out\+Name} (std\+::string const \&outfilename)
+\item 
+void \textbf{ set\+Timewindow\+\_\+ns} (\textbf{ Time\+\_\+ns} const \&time\+\_\+ns)
+\item 
+void \textbf{ work} (\textbf{ Hit} \&hit, \textbf{ Alignator} \&reader)
+\begin{DoxyCompactList}\small\item\em legacy \end{DoxyCompactList}\item 
+void \textbf{ work} (\textbf{ Nuball2\+Tree} \&tree, \textbf{ Event} \&event)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ Analyse} ()
+\item 
+bool \textbf{ Na\+I\+\_\+pid} (float nrj, float nrj2)
+\item 
+bool \textbf{ Na\+I\+\_\+pid} (\textbf{ Hit} \&hit)
+\item 
+void \textbf{ write} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ dispatch\+\_\+work\+Faster} (\textbf{ Hit} \&hit, \textbf{ Alignator} \&reader, \textbf{ Cobalt\+Calorimeter} \&cb)
+\item 
+static void \textbf{ dispatch\+\_\+work\+Root} (\textbf{ Nuball2\+Tree} \&tree, \textbf{ Event} \&event, \textbf{ Cobalt\+Calorimeter} \&cb)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ BGO\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ BGO\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ BGO\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ calo\+\_\+double\+\_\+cascades\+\_\+\+VS\+\_\+multiplicity}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ calorimetry\+\_\+\+BGO\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ calorimetry\+\_\+\+Ge\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ calorimetry\+\_\+\+La\+Br\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ calorimetry\+\_\+\+Na\+I\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Clover\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Clover\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ Clover\+\_\+calo\+\_\+without\+\_\+\+Paris}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Clover\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+BGO}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+BGO\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+calo\+\_\+\+VS\+\_\+\+Paris\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+Ge}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+Ge\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+La\+Br}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+La\+Br\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+NaI}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+Na\+I\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+VS\+\_\+\+BGO\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Ge\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ labels}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ labels2\+D\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ La\+Br3\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ La\+Br3\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ La\+Br3\+\_\+calo\+\_\+\+VS\+\_\+\+Paris\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ La\+Br\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ La\+Br\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ Calibration} \textbf{ m\+\_\+calib}
+\item 
+double \textbf{ m\+\_\+calo\+\_\+totale} = 0.\+0
+\item 
+double \textbf{ m\+\_\+calo\+\_\+totale\+\_\+\+BGO} = 0.\+0
+\item 
+double \textbf{ m\+\_\+calo\+\_\+totale\+\_\+\+Ge} = 0.\+0
+\item 
+double \textbf{ m\+\_\+calo\+\_\+totale\+\_\+\+La\+Br3} = 0.\+0
+\item 
+double \textbf{ m\+\_\+calo\+\_\+totale\+\_\+\+NaI} = 0.\+0
+\item 
+std\+::string \textbf{ m\+\_\+\+IDfilename}
+\item 
+int \textbf{ m\+\_\+maxE} = 1339
+\item 
+int \textbf{ m\+\_\+minE} = 1326
+\item 
+int \textbf{ m\+\_\+nb\+\_\+missed} = 0
+\item 
+int \textbf{ m\+\_\+nb\+\_\+trigg} = 0
+\item 
+int \textbf{ m\+\_\+nb\+\_\+trigg\+\_\+\+BGO} = 0
+\item 
+int \textbf{ m\+\_\+nb\+\_\+trigg\+\_\+\+Ge} = 0
+\item 
+int \textbf{ m\+\_\+nb\+\_\+trigg\+\_\+\+La\+Br} = 0
+\item 
+int \textbf{ m\+\_\+nb\+\_\+trigg\+\_\+\+NaI} = 0
+\item 
+std\+::string \textbf{ m\+\_\+outfilename} = \char`\"{}Cobalt\+Calorimetry.\+root\char`\"{}
+\item 
+\textbf{ Timeshifts} \textbf{ m\+\_\+timeshifts}
+\item 
+\textbf{ Time} \textbf{ m\+\_\+timewindow} = 100000
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Na\+I\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Na\+I\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Na\+I\+\_\+calo\+\_\+\+VS\+\_\+\+La\+Br\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Na\+I\+\_\+calo\+\_\+\+VS\+\_\+\+Paris\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Na\+I\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Na\+I\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ nrj\+\_\+each}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ nrj\+\_\+each\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Paris\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Paris\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Paris\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ Paris\+\_\+calo\+\_\+without\+\_\+\+Clover}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ paris\+\_\+pid}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ Paris\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+BGO\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+BGO\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+Clover\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+Clover\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+Ge\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+Ge\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+La\+Br\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+La\+Br\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+Na\+I\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+Na\+I\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+Paris\+\_\+histo}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ smeared\+\_\+calorimetry\+\_\+\+Paris\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ spectra\+\_\+\+Na\+I\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ spectra\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+\+BGO}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+\+BGO\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+\+Ge}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+\+Ge\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+\+La\+Br3}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+\+La\+Br3\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+\+NaI}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+\+Na\+I\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+smeared\+\_\+calorimetry}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ spectrum\+\_\+smeared\+\_\+calorimetry\+\_\+double\+\_\+cascade}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ spectrum\+\_\+smeared\+\_\+calorimetry\+\_\+\+VS\+\_\+\+Multiplicity}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ timewalk\+\_\+\+BGO}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ timewalk\+\_\+\+Ge}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ timewalk\+\_\+\+La\+Br}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ timewalk\+\_\+\+NaI}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ timing\+\_\+\+VS\+\_\+ref}
+\item 
+\textbf{ MTTHist}$<$ TH2F $>$ \textbf{ timing\+\_\+\+VS\+\_\+trigger}
+\item 
+\textbf{ MTTHist}$<$ TH1F $>$ \textbf{ total\+\_\+energy\+\_\+per\+\_\+detector}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_cobalt_calorimeter_a9ada68802d5d0b38509c4a880085f856}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!CobaltCalorimeter@{CobaltCalorimeter}}
+\index{CobaltCalorimeter@{CobaltCalorimeter}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{CobaltCalorimeter()}
+{\footnotesize\ttfamily Cobalt\+Calorimeter\+::\+Cobalt\+Calorimeter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_cobalt_calorimeter_a6d189182d62a2b03d53520834c439620}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Analyse@{Analyse}}
+\index{Analyse@{Analyse}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Analyse()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::\+Analyse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_a6d189182d62a2b03d53520834c439620_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_cobalt_calorimeter_a6d189182d62a2b03d53520834c439620_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_a3464ff1e41c4cbda5b70785952838ee2}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!dispatch\_workFaster@{dispatch\_workFaster}}
+\index{dispatch\_workFaster@{dispatch\_workFaster}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{dispatch\_workFaster()}
+{\footnotesize\ttfamily static void Cobalt\+Calorimeter\+::dispatch\+\_\+work\+Faster (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Alignator} \&}]{reader,  }\item[{\textbf{ Cobalt\+Calorimeter} \&}]{cb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_a3464ff1e41c4cbda5b70785952838ee2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{class_cobalt_calorimeter_a3464ff1e41c4cbda5b70785952838ee2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_a9611646f2620865466213c086a2be263}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!dispatch\_workRoot@{dispatch\_workRoot}}
+\index{dispatch\_workRoot@{dispatch\_workRoot}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{dispatch\_workRoot()}
+{\footnotesize\ttfamily static void Cobalt\+Calorimeter\+::dispatch\+\_\+work\+Root (\begin{DoxyParamCaption}\item[{\textbf{ Nuball2\+Tree} \&}]{tree,  }\item[{\textbf{ Event} \&}]{event,  }\item[{\textbf{ Cobalt\+Calorimeter} \&}]{cb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_a9611646f2620865466213c086a2be263_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_cobalt_calorimeter_a9611646f2620865466213c086a2be263_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_ac6d58077dbdb6d0b166097146dc17083}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Initialise()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::\+Initialise (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_ac6d58077dbdb6d0b166097146dc17083_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_cobalt_calorimeter_ac6d58077dbdb6d0b166097146dc17083_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_aceaa8e906e0257f450799026ec2269ca}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!launchFaster@{launchFaster}}
+\index{launchFaster@{launchFaster}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{launchFaster()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::launch\+Faster (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{foldername,  }\item[{int}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+legacy 
+
+Deprecated.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]\end{DoxyRefDesc}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_aceaa8e906e0257f450799026ec2269ca_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_ae731ee28c852d150fbf668c27604b8ed}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!launchRoot@{launchRoot}}
+\index{launchRoot@{launchRoot}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{launchRoot()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::launch\+Root (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{foldername,  }\item[{int}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_ae731ee28c852d150fbf668c27604b8ed_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_a1c4b865468fc10800e349ad29b4f4849}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!loadCalibration@{loadCalibration}}
+\index{loadCalibration@{loadCalibration}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{loadCalibration()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::load\+Calibration (\begin{DoxyParamCaption}\item[{\textbf{ Calibration}}]{calib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_cobalt_calorimeter_ae6cdd3b9dfd6da0e3d6c56dad47dd757}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!loadID@{loadID}}
+\index{loadID@{loadID}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{loadID()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::load\+ID (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_cobalt_calorimeter_aa8aa7b3caf9ce51cf9d95bdb0d7d2f3c}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!loadTimeshifts@{loadTimeshifts}}
+\index{loadTimeshifts@{loadTimeshifts}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{loadTimeshifts()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::load\+Timeshifts (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts}}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_cobalt_calorimeter_a90243bae60ba112efdb9e336eed0f667}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!NaI\_pid@{NaI\_pid}}
+\index{NaI\_pid@{NaI\_pid}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{NaI\_pid()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Cobalt\+Calorimeter\+::\+Na\+I\+\_\+pid (\begin{DoxyParamCaption}\item[{float}]{nrj,  }\item[{float}]{nrj2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_a90243bae60ba112efdb9e336eed0f667_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_aeb58f6286af52ee8d74f4188664f6af5}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!NaI\_pid@{NaI\_pid}}
+\index{NaI\_pid@{NaI\_pid}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{NaI\_pid()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Cobalt\+Calorimeter\+::\+Na\+I\+\_\+pid (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_aeb58f6286af52ee8d74f4188664f6af5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_aeb58f6286af52ee8d74f4188664f6af5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_a1e0616636a19dd5765feff87ac50c31d}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!setOutName@{setOutName}}
+\index{setOutName@{setOutName}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{setOutName()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::set\+Out\+Name (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_cobalt_calorimeter_af4b400a61a873bfc652737f61b915971}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!setTimewindow\_ns@{setTimewindow\_ns}}
+\index{setTimewindow\_ns@{setTimewindow\_ns}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{setTimewindow\_ns()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::set\+Timewindow\+\_\+ns (\begin{DoxyParamCaption}\item[{\textbf{ Time\+\_\+ns} const \&}]{time\+\_\+ns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{class_cobalt_calorimeter_af4b400a61a873bfc652737f61b915971_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_a87cee37be1d91e747760bb6555e24bc8}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!work@{work}}
+\index{work@{work}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{work()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::work (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Alignator} \&}]{reader }\end{DoxyParamCaption})}
+
+
+
+legacy 
+
+Deprecated.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]\end{DoxyRefDesc}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_a87cee37be1d91e747760bb6555e24bc8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_a760c56b79865a37984edc07165a7bc73}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!work@{work}}
+\index{work@{work}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{work()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::work (\begin{DoxyParamCaption}\item[{\textbf{ Nuball2\+Tree} \&}]{tree,  }\item[{\textbf{ Event} \&}]{event }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_a760c56b79865a37984edc07165a7bc73_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_a760c56b79865a37984edc07165a7bc73_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_cobalt_calorimeter_a526f29997f55b17d33be2b87b30c7a76}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!write@{write}}
+\index{write@{write}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{write()}
+{\footnotesize\ttfamily void Cobalt\+Calorimeter\+::write (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_cobalt_calorimeter_a526f29997f55b17d33be2b87b30c7a76_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_cobalt_calorimeter_a526f29997f55b17d33be2b87b30c7a76_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_cobalt_calorimeter_a35158ceae1ede9a80f06e12aa53f56b8}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!BGO\_calo\_VS\_Clover\_calo@{BGO\_calo\_VS\_Clover\_calo}}
+\index{BGO\_calo\_VS\_Clover\_calo@{BGO\_calo\_VS\_Clover\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{BGO\_calo\_VS\_Clover\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+BGO\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a8e62f478c63bc99b4e431390d7e8d307}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!BGO\_calo\_VS\_smeared\_calorimetry@{BGO\_calo\_VS\_smeared\_calorimetry}}
+\index{BGO\_calo\_VS\_smeared\_calorimetry@{BGO\_calo\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{BGO\_calo\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+BGO\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a1ab31aa84c489d09da3936e450e0f27e}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!BGO\_VS\_smeared\_calorimetry@{BGO\_VS\_smeared\_calorimetry}}
+\index{BGO\_VS\_smeared\_calorimetry@{BGO\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{BGO\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+BGO\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ad0b19dd5363e9168613f98f19cd3dc20}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!calo\_double\_cascades\_VS\_multiplicity@{calo\_double\_cascades\_VS\_multiplicity}}
+\index{calo\_double\_cascades\_VS\_multiplicity@{calo\_double\_cascades\_VS\_multiplicity}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{calo\_double\_cascades\_VS\_multiplicity}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::calo\+\_\+double\+\_\+cascades\+\_\+\+VS\+\_\+multiplicity\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aa79f140fee846198586de707687192cc}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!calorimetry\_BGO\_histo@{calorimetry\_BGO\_histo}}
+\index{calorimetry\_BGO\_histo@{calorimetry\_BGO\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{calorimetry\_BGO\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::calorimetry\+\_\+\+BGO\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a11c940dd2760dfed0454beb028e19e36}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!calorimetry\_Ge\_histo@{calorimetry\_Ge\_histo}}
+\index{calorimetry\_Ge\_histo@{calorimetry\_Ge\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{calorimetry\_Ge\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::calorimetry\+\_\+\+Ge\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a6b3221c9bac6be080b3fb5f161710e47}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!calorimetry\_LaBr\_histo@{calorimetry\_LaBr\_histo}}
+\index{calorimetry\_LaBr\_histo@{calorimetry\_LaBr\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{calorimetry\_LaBr\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::calorimetry\+\_\+\+La\+Br\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a10e61e12693d4a1d2dd9a4b7302841dc}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!calorimetry\_NaI\_histo@{calorimetry\_NaI\_histo}}
+\index{calorimetry\_NaI\_histo@{calorimetry\_NaI\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{calorimetry\_NaI\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::calorimetry\+\_\+\+Na\+I\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ae6425afb7e342e6d0bbf320a0dbfd1ff}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Clover\_calo\_VS\_BGO\_calo@{Clover\_calo\_VS\_BGO\_calo}}
+\index{Clover\_calo\_VS\_BGO\_calo@{Clover\_calo\_VS\_BGO\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Clover\_calo\_VS\_BGO\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Clover\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a35760e63ae787535d0b05d1355904367}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Clover\_calo\_VS\_smeared\_calorimetry@{Clover\_calo\_VS\_smeared\_calorimetry}}
+\index{Clover\_calo\_VS\_smeared\_calorimetry@{Clover\_calo\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Clover\_calo\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Clover\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a10fafb4e29f3c76685ee688ba47c9f04}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Clover\_calo\_without\_Paris@{Clover\_calo\_without\_Paris}}
+\index{Clover\_calo\_without\_Paris@{Clover\_calo\_without\_Paris}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Clover\_calo\_without\_Paris}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::\+Clover\+\_\+calo\+\_\+without\+\_\+\+Paris\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a3b1ed5c16f0cc53679b637e29363948e}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Clover\_VS\_smeared\_calorimetry@{Clover\_VS\_smeared\_calorimetry}}
+\index{Clover\_VS\_smeared\_calorimetry@{Clover\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Clover\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Clover\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a90d6f0d61a8ee9fab731fb8287a8645a}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_BGO@{Ge\_BGO}}
+\index{Ge\_BGO@{Ge\_BGO}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_BGO}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+BGO\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a3a6c50dcca83d8139e1b1f075d4e6b9b}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_BGO\_trigger@{Ge\_BGO\_trigger}}
+\index{Ge\_BGO\_trigger@{Ge\_BGO\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_BGO\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+BGO\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a23a7d5dcd9a31228eb75b81fe2547cc4}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_calo\_VS\_BGO\_calo@{Ge\_calo\_VS\_BGO\_calo}}
+\index{Ge\_calo\_VS\_BGO\_calo@{Ge\_calo\_VS\_BGO\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_calo\_VS\_BGO\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ac06fcf245f316e9f6812877d3bc98fb4}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_calo\_VS\_Clover\_calo@{Ge\_calo\_VS\_Clover\_calo}}
+\index{Ge\_calo\_VS\_Clover\_calo@{Ge\_calo\_VS\_Clover\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_calo\_VS\_Clover\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ac9612ebeaf7bea954b700e0f734cdb81}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_calo\_VS\_Paris\_calo@{Ge\_calo\_VS\_Paris\_calo}}
+\index{Ge\_calo\_VS\_Paris\_calo@{Ge\_calo\_VS\_Paris\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_calo\_VS\_Paris\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+calo\+\_\+\+VS\+\_\+\+Paris\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ac2e6f47d72f3669ea68d54a8a2e4f5cb}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_calo\_VS\_smeared\_calorimetry@{Ge\_calo\_VS\_smeared\_calorimetry}}
+\index{Ge\_calo\_VS\_smeared\_calorimetry@{Ge\_calo\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_calo\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aeefe840b2ebc4720cfbffcab8904f516}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_Ge@{Ge\_Ge}}
+\index{Ge\_Ge@{Ge\_Ge}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_Ge}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+Ge\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aefcd5a662f8d53d41856c6391f718cee}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_Ge\_trigger@{Ge\_Ge\_trigger}}
+\index{Ge\_Ge\_trigger@{Ge\_Ge\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_Ge\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+Ge\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ab58a6090f60b8dc84dde39514974b637}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_LaBr@{Ge\_LaBr}}
+\index{Ge\_LaBr@{Ge\_LaBr}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_LaBr}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+La\+Br\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a5576d3fdcda222e7fcabaeb02ca07317}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_LaBr\_trigger@{Ge\_LaBr\_trigger}}
+\index{Ge\_LaBr\_trigger@{Ge\_LaBr\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_LaBr\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+La\+Br\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_af790bdf8772919e191dc6cbe93e59064}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_NaI@{Ge\_NaI}}
+\index{Ge\_NaI@{Ge\_NaI}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_NaI}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+NaI\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a116cce7f9a26dac82d2612fef19ae356}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_NaI\_trigger@{Ge\_NaI\_trigger}}
+\index{Ge\_NaI\_trigger@{Ge\_NaI\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_NaI\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+Na\+I\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a88f502d49f72506d427e0dce330b308c}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_VS\_BGO\_calorimetry@{Ge\_VS\_BGO\_calorimetry}}
+\index{Ge\_VS\_BGO\_calorimetry@{Ge\_VS\_BGO\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_VS\_BGO\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+VS\+\_\+\+BGO\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a1b913fae2082d73165d2a6c6b3bad187}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Ge\_VS\_smeared\_calorimetry@{Ge\_VS\_smeared\_calorimetry}}
+\index{Ge\_VS\_smeared\_calorimetry@{Ge\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Ge\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Ge\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_af6734f5ec716661a164bf94e9c59216f}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!labels@{labels}}
+\index{labels@{labels}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{labels}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::labels\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ada7be35ca5e42faf2ae796e40a5caa68}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!labels2D\_trigger@{labels2D\_trigger}}
+\index{labels2D\_trigger@{labels2D\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{labels2D\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::labels2\+D\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a66f558516c327e8bc5d8789cabd476a3}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!LaBr3\_calo\_VS\_BGO\_calo@{LaBr3\_calo\_VS\_BGO\_calo}}
+\index{LaBr3\_calo\_VS\_BGO\_calo@{LaBr3\_calo\_VS\_BGO\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{LaBr3\_calo\_VS\_BGO\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+La\+Br3\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a9ef08604b15ef9983383945708f214d9}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!LaBr3\_calo\_VS\_Clover\_calo@{LaBr3\_calo\_VS\_Clover\_calo}}
+\index{LaBr3\_calo\_VS\_Clover\_calo@{LaBr3\_calo\_VS\_Clover\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{LaBr3\_calo\_VS\_Clover\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+La\+Br3\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aab60a2498fd07b4b43f6a61687d6cc67}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!LaBr3\_calo\_VS\_Paris\_calo@{LaBr3\_calo\_VS\_Paris\_calo}}
+\index{LaBr3\_calo\_VS\_Paris\_calo@{LaBr3\_calo\_VS\_Paris\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{LaBr3\_calo\_VS\_Paris\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+La\+Br3\+\_\+calo\+\_\+\+VS\+\_\+\+Paris\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a82498dd823e8ab4e0283c587518f6980}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!LaBr\_calo\_VS\_smeared\_calorimetry@{LaBr\_calo\_VS\_smeared\_calorimetry}}
+\index{LaBr\_calo\_VS\_smeared\_calorimetry@{LaBr\_calo\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{LaBr\_calo\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+La\+Br\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_acb6cdca6388c015ff834e4510ee2ab73}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!LaBr\_VS\_smeared\_calorimetry@{LaBr\_VS\_smeared\_calorimetry}}
+\index{LaBr\_VS\_smeared\_calorimetry@{LaBr\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{LaBr\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+La\+Br\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a69cd49b22f71a552b092396f8f55a064}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_calib@{m\_calib}}
+\index{m\_calib@{m\_calib}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_calib}
+{\footnotesize\ttfamily \textbf{ Calibration} Cobalt\+Calorimeter\+::m\+\_\+calib\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aedb7d518e9a1b558e778f3690d7c1b06}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_calo\_totale@{m\_calo\_totale}}
+\index{m\_calo\_totale@{m\_calo\_totale}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_calo\_totale}
+{\footnotesize\ttfamily double Cobalt\+Calorimeter\+::m\+\_\+calo\+\_\+totale = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a0393264d6718b9a646ac173842ced7c3}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_calo\_totale\_BGO@{m\_calo\_totale\_BGO}}
+\index{m\_calo\_totale\_BGO@{m\_calo\_totale\_BGO}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_calo\_totale\_BGO}
+{\footnotesize\ttfamily double Cobalt\+Calorimeter\+::m\+\_\+calo\+\_\+totale\+\_\+\+BGO = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ab8359651f2214f9cb9fe52871fdcdc25}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_calo\_totale\_Ge@{m\_calo\_totale\_Ge}}
+\index{m\_calo\_totale\_Ge@{m\_calo\_totale\_Ge}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_calo\_totale\_Ge}
+{\footnotesize\ttfamily double Cobalt\+Calorimeter\+::m\+\_\+calo\+\_\+totale\+\_\+\+Ge = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a9b5dd6bf1dc82d2c54d61bda70993ca0}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_calo\_totale\_LaBr3@{m\_calo\_totale\_LaBr3}}
+\index{m\_calo\_totale\_LaBr3@{m\_calo\_totale\_LaBr3}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_calo\_totale\_LaBr3}
+{\footnotesize\ttfamily double Cobalt\+Calorimeter\+::m\+\_\+calo\+\_\+totale\+\_\+\+La\+Br3 = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ab4560b84a0e7c3b6ee300cb44df9fe14}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_calo\_totale\_NaI@{m\_calo\_totale\_NaI}}
+\index{m\_calo\_totale\_NaI@{m\_calo\_totale\_NaI}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_calo\_totale\_NaI}
+{\footnotesize\ttfamily double Cobalt\+Calorimeter\+::m\+\_\+calo\+\_\+totale\+\_\+\+NaI = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a3081ea55d16ba5b78830198568527991}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_IDfilename@{m\_IDfilename}}
+\index{m\_IDfilename@{m\_IDfilename}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_IDfilename}
+{\footnotesize\ttfamily std\+::string Cobalt\+Calorimeter\+::m\+\_\+\+IDfilename\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a38008d73bb96abdc4cafd0b1d86af572}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_maxE@{m\_maxE}}
+\index{m\_maxE@{m\_maxE}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_maxE}
+{\footnotesize\ttfamily int Cobalt\+Calorimeter\+::m\+\_\+maxE = 1339\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a9e4a4e9ddf212a89022023933b827576}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_minE@{m\_minE}}
+\index{m\_minE@{m\_minE}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_minE}
+{\footnotesize\ttfamily int Cobalt\+Calorimeter\+::m\+\_\+minE = 1326\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_addf9633f41947b451676977051be9a94}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_nb\_missed@{m\_nb\_missed}}
+\index{m\_nb\_missed@{m\_nb\_missed}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_nb\_missed}
+{\footnotesize\ttfamily int Cobalt\+Calorimeter\+::m\+\_\+nb\+\_\+missed = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a064839f2a59767e7f8fcf19d14abcb6d}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_nb\_trigg@{m\_nb\_trigg}}
+\index{m\_nb\_trigg@{m\_nb\_trigg}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_nb\_trigg}
+{\footnotesize\ttfamily int Cobalt\+Calorimeter\+::m\+\_\+nb\+\_\+trigg = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a240f12d3cbe97866799fd54a3c4dd63c}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_nb\_trigg\_BGO@{m\_nb\_trigg\_BGO}}
+\index{m\_nb\_trigg\_BGO@{m\_nb\_trigg\_BGO}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_nb\_trigg\_BGO}
+{\footnotesize\ttfamily int Cobalt\+Calorimeter\+::m\+\_\+nb\+\_\+trigg\+\_\+\+BGO = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aca8972aed6cbc0072a8570bf2a92f36a}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_nb\_trigg\_Ge@{m\_nb\_trigg\_Ge}}
+\index{m\_nb\_trigg\_Ge@{m\_nb\_trigg\_Ge}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_nb\_trigg\_Ge}
+{\footnotesize\ttfamily int Cobalt\+Calorimeter\+::m\+\_\+nb\+\_\+trigg\+\_\+\+Ge = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a0e30c1950638aa42b8f3782adb848ffc}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_nb\_trigg\_LaBr@{m\_nb\_trigg\_LaBr}}
+\index{m\_nb\_trigg\_LaBr@{m\_nb\_trigg\_LaBr}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_nb\_trigg\_LaBr}
+{\footnotesize\ttfamily int Cobalt\+Calorimeter\+::m\+\_\+nb\+\_\+trigg\+\_\+\+La\+Br = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a733e3ded3893e30df31e066f9b260148}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_nb\_trigg\_NaI@{m\_nb\_trigg\_NaI}}
+\index{m\_nb\_trigg\_NaI@{m\_nb\_trigg\_NaI}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_nb\_trigg\_NaI}
+{\footnotesize\ttfamily int Cobalt\+Calorimeter\+::m\+\_\+nb\+\_\+trigg\+\_\+\+NaI = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a6554109e2822acb0cd76b46d6beb2ec9}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_outfilename@{m\_outfilename}}
+\index{m\_outfilename@{m\_outfilename}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_outfilename}
+{\footnotesize\ttfamily std\+::string Cobalt\+Calorimeter\+::m\+\_\+outfilename = \char`\"{}Cobalt\+Calorimetry.\+root\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a79e787f378829635e1d04d974a81b9c3}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_timeshifts@{m\_timeshifts}}
+\index{m\_timeshifts@{m\_timeshifts}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_timeshifts}
+{\footnotesize\ttfamily \textbf{ Timeshifts} Cobalt\+Calorimeter\+::m\+\_\+timeshifts\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aa7b3455c28335806f9ef9bbd96493685}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!m\_timewindow@{m\_timewindow}}
+\index{m\_timewindow@{m\_timewindow}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{m\_timewindow}
+{\footnotesize\ttfamily \textbf{ Time} Cobalt\+Calorimeter\+::m\+\_\+timewindow = 100000\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ab51c66ded466ab8948b50c75fb861eb8}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!NaI\_calo\_VS\_BGO\_calo@{NaI\_calo\_VS\_BGO\_calo}}
+\index{NaI\_calo\_VS\_BGO\_calo@{NaI\_calo\_VS\_BGO\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{NaI\_calo\_VS\_BGO\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Na\+I\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aff1f5fffc9ae94ddb2c527707c170e86}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!NaI\_calo\_VS\_Clover\_calo@{NaI\_calo\_VS\_Clover\_calo}}
+\index{NaI\_calo\_VS\_Clover\_calo@{NaI\_calo\_VS\_Clover\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{NaI\_calo\_VS\_Clover\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Na\+I\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a5ccdb12b6891a456087ede851961cda1}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!NaI\_calo\_VS\_LaBr\_calo@{NaI\_calo\_VS\_LaBr\_calo}}
+\index{NaI\_calo\_VS\_LaBr\_calo@{NaI\_calo\_VS\_LaBr\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{NaI\_calo\_VS\_LaBr\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Na\+I\+\_\+calo\+\_\+\+VS\+\_\+\+La\+Br\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_af0e5a4fad7b6df016660827c347cb698}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!NaI\_calo\_VS\_Paris\_calo@{NaI\_calo\_VS\_Paris\_calo}}
+\index{NaI\_calo\_VS\_Paris\_calo@{NaI\_calo\_VS\_Paris\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{NaI\_calo\_VS\_Paris\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Na\+I\+\_\+calo\+\_\+\+VS\+\_\+\+Paris\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a13326d2cdd7b499cf6b54b7d9c0e60d7}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!NaI\_calo\_VS\_smeared\_calorimetry@{NaI\_calo\_VS\_smeared\_calorimetry}}
+\index{NaI\_calo\_VS\_smeared\_calorimetry@{NaI\_calo\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{NaI\_calo\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Na\+I\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aea4fd99f56673d4f787fddb472640636}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!NaI\_VS\_smeared\_calorimetry@{NaI\_VS\_smeared\_calorimetry}}
+\index{NaI\_VS\_smeared\_calorimetry@{NaI\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{NaI\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Na\+I\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ae9a7243e283e384eb0cb2bf02b01c938}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!nrj\_each@{nrj\_each}}
+\index{nrj\_each@{nrj\_each}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{nrj\_each}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::nrj\+\_\+each\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a65d4d96e3dbbec7c89cbeb0fefc63fd9}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!nrj\_each\_trigger@{nrj\_each\_trigger}}
+\index{nrj\_each\_trigger@{nrj\_each\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{nrj\_each\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::nrj\+\_\+each\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a86452a23a78b095b44cd320f855db47a}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Paris\_calo\_VS\_BGO\_calo@{Paris\_calo\_VS\_BGO\_calo}}
+\index{Paris\_calo\_VS\_BGO\_calo@{Paris\_calo\_VS\_BGO\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Paris\_calo\_VS\_BGO\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Paris\+\_\+calo\+\_\+\+VS\+\_\+\+BGO\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ad36951ff5bebc4c03aa8caf7b57f11ce}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Paris\_calo\_VS\_Clover\_calo@{Paris\_calo\_VS\_Clover\_calo}}
+\index{Paris\_calo\_VS\_Clover\_calo@{Paris\_calo\_VS\_Clover\_calo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Paris\_calo\_VS\_Clover\_calo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Paris\+\_\+calo\+\_\+\+VS\+\_\+\+Clover\+\_\+calo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a8b453ac0d6985857182fd3f7079925d6}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Paris\_calo\_VS\_smeared\_calorimetry@{Paris\_calo\_VS\_smeared\_calorimetry}}
+\index{Paris\_calo\_VS\_smeared\_calorimetry@{Paris\_calo\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Paris\_calo\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Paris\+\_\+calo\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ad3cb603aaa15070f0707c99ad4f9a4bd}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Paris\_calo\_without\_Clover@{Paris\_calo\_without\_Clover}}
+\index{Paris\_calo\_without\_Clover@{Paris\_calo\_without\_Clover}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Paris\_calo\_without\_Clover}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::\+Paris\+\_\+calo\+\_\+without\+\_\+\+Clover\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a9f27905a01ef2d6b079865e4125b0e5e}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!paris\_pid@{paris\_pid}}
+\index{paris\_pid@{paris\_pid}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{paris\_pid}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::paris\+\_\+pid\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a6e7ce15e058f26cbf88f100dace96b4b}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!Paris\_VS\_smeared\_calorimetry@{Paris\_VS\_smeared\_calorimetry}}
+\index{Paris\_VS\_smeared\_calorimetry@{Paris\_VS\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{Paris\_VS\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::\+Paris\+\_\+\+VS\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_acb73758b96ee7e5659674c56ff5e3e8d}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_BGO\_histo@{smeared\_calorimetry\_BGO\_histo}}
+\index{smeared\_calorimetry\_BGO\_histo@{smeared\_calorimetry\_BGO\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_BGO\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+BGO\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aaaf4d8b44557290e6a61da1b9d3c595b}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_BGO\_histo\_VS\_cristalMult@{smeared\_calorimetry\_BGO\_histo\_VS\_cristalMult}}
+\index{smeared\_calorimetry\_BGO\_histo\_VS\_cristalMult@{smeared\_calorimetry\_BGO\_histo\_VS\_cristalMult}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_BGO\_histo\_VS\_cristalMult}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+BGO\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ab6cca157d4aa38e6cf13346703a401a2}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_Clover\_histo@{smeared\_calorimetry\_Clover\_histo}}
+\index{smeared\_calorimetry\_Clover\_histo@{smeared\_calorimetry\_Clover\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_Clover\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+Clover\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a24a0ebd4f96ece874d96753c59f14c85}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_Clover\_histo\_VS\_cristalMult@{smeared\_calorimetry\_Clover\_histo\_VS\_cristalMult}}
+\index{smeared\_calorimetry\_Clover\_histo\_VS\_cristalMult@{smeared\_calorimetry\_Clover\_histo\_VS\_cristalMult}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_Clover\_histo\_VS\_cristalMult}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+Clover\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a5cb1cbdc133c31f7f2eef694605cb9ec}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_Ge\_histo@{smeared\_calorimetry\_Ge\_histo}}
+\index{smeared\_calorimetry\_Ge\_histo@{smeared\_calorimetry\_Ge\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_Ge\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+Ge\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a2687f5f10cdf40583a2114800be6f437}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_Ge\_histo\_VS\_cristalMult@{smeared\_calorimetry\_Ge\_histo\_VS\_cristalMult}}
+\index{smeared\_calorimetry\_Ge\_histo\_VS\_cristalMult@{smeared\_calorimetry\_Ge\_histo\_VS\_cristalMult}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_Ge\_histo\_VS\_cristalMult}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+Ge\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a400c857d670f65e64c1bda2ab6a8dd80}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_LaBr\_histo@{smeared\_calorimetry\_LaBr\_histo}}
+\index{smeared\_calorimetry\_LaBr\_histo@{smeared\_calorimetry\_LaBr\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_LaBr\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+La\+Br\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_acf98959906b743b7b07f0ac0f9bf5c96}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_LaBr\_histo\_VS\_cristalMult@{smeared\_calorimetry\_LaBr\_histo\_VS\_cristalMult}}
+\index{smeared\_calorimetry\_LaBr\_histo\_VS\_cristalMult@{smeared\_calorimetry\_LaBr\_histo\_VS\_cristalMult}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_LaBr\_histo\_VS\_cristalMult}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+La\+Br\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a38ebc0598c8590b7b339c361762d772c}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_NaI\_histo@{smeared\_calorimetry\_NaI\_histo}}
+\index{smeared\_calorimetry\_NaI\_histo@{smeared\_calorimetry\_NaI\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_NaI\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+Na\+I\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a190480f266f5e381607ccaadc4024b61}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_NaI\_histo\_VS\_cristalMult@{smeared\_calorimetry\_NaI\_histo\_VS\_cristalMult}}
+\index{smeared\_calorimetry\_NaI\_histo\_VS\_cristalMult@{smeared\_calorimetry\_NaI\_histo\_VS\_cristalMult}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_NaI\_histo\_VS\_cristalMult}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+Na\+I\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ad9d32a53b1f94eb56d0d46a6a2ba8b23}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_Paris\_histo@{smeared\_calorimetry\_Paris\_histo}}
+\index{smeared\_calorimetry\_Paris\_histo@{smeared\_calorimetry\_Paris\_histo}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_Paris\_histo}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+Paris\+\_\+histo\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a34e19c33a887afd018d53414b00c29f7}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!smeared\_calorimetry\_Paris\_histo\_VS\_cristalMult@{smeared\_calorimetry\_Paris\_histo\_VS\_cristalMult}}
+\index{smeared\_calorimetry\_Paris\_histo\_VS\_cristalMult@{smeared\_calorimetry\_Paris\_histo\_VS\_cristalMult}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{smeared\_calorimetry\_Paris\_histo\_VS\_cristalMult}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::smeared\+\_\+calorimetry\+\_\+\+Paris\+\_\+histo\+\_\+\+VS\+\_\+cristal\+Mult\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a4f212189f1594aa957cd0ba63e8bf4cd}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectra\_NaI\_trigger@{spectra\_NaI\_trigger}}
+\index{spectra\_NaI\_trigger@{spectra\_NaI\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectra\_NaI\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::spectra\+\_\+\+Na\+I\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a3400fd81cafa234538e560235a5be8f6}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectra\_trigger@{spectra\_trigger}}
+\index{spectra\_trigger@{spectra\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectra\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::spectra\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a9035428e424af29eb5f3fe6cf28c94ca}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_BGO@{spectrum\_BGO}}
+\index{spectrum\_BGO@{spectrum\_BGO}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_BGO}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+\+BGO\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a845aa416b8e10817f016e9e6a41a5484}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_BGO\_trigger@{spectrum\_BGO\_trigger}}
+\index{spectrum\_BGO\_trigger@{spectrum\_BGO\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_BGO\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+\+BGO\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a95ba5114ad75f474e9779798d06502bc}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_calorimetry@{spectrum\_calorimetry}}
+\index{spectrum\_calorimetry@{spectrum\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aad27382d7a051d784c0996a2db919321}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_Ge@{spectrum\_Ge}}
+\index{spectrum\_Ge@{spectrum\_Ge}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_Ge}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+\+Ge\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a9c0f91dd4053e2a7688d05a5d49a27e2}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_Ge\_trigger@{spectrum\_Ge\_trigger}}
+\index{spectrum\_Ge\_trigger@{spectrum\_Ge\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_Ge\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+\+Ge\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_ad9dbef4507e525ec6e258df613ef2c92}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_LaBr3@{spectrum\_LaBr3}}
+\index{spectrum\_LaBr3@{spectrum\_LaBr3}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_LaBr3}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+\+La\+Br3\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_afb6c86c56189e8c399b6ee4696c49402}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_LaBr3\_trigger@{spectrum\_LaBr3\_trigger}}
+\index{spectrum\_LaBr3\_trigger@{spectrum\_LaBr3\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_LaBr3\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+\+La\+Br3\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a18b3bb5b56f449a8ddd8e3dc5302ee2b}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_NaI@{spectrum\_NaI}}
+\index{spectrum\_NaI@{spectrum\_NaI}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_NaI}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+\+NaI\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a1a24a1d11777bdff866ca81eebb0ef7a}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_NaI\_trigger@{spectrum\_NaI\_trigger}}
+\index{spectrum\_NaI\_trigger@{spectrum\_NaI\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_NaI\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+\+Na\+I\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a2f03d3f36f740b1acd28c3fc39dbbea5}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_smeared\_calorimetry@{spectrum\_smeared\_calorimetry}}
+\index{spectrum\_smeared\_calorimetry@{spectrum\_smeared\_calorimetry}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_smeared\_calorimetry}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+smeared\+\_\+calorimetry\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_af2a70f1e6f65f7d36b77743509b9e280}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_smeared\_calorimetry\_double\_cascade@{spectrum\_smeared\_calorimetry\_double\_cascade}}
+\index{spectrum\_smeared\_calorimetry\_double\_cascade@{spectrum\_smeared\_calorimetry\_double\_cascade}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_smeared\_calorimetry\_double\_cascade}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+smeared\+\_\+calorimetry\+\_\+double\+\_\+cascade\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a4871f62563a33927738138c2e5487864}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!spectrum\_smeared\_calorimetry\_VS\_Multiplicity@{spectrum\_smeared\_calorimetry\_VS\_Multiplicity}}
+\index{spectrum\_smeared\_calorimetry\_VS\_Multiplicity@{spectrum\_smeared\_calorimetry\_VS\_Multiplicity}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{spectrum\_smeared\_calorimetry\_VS\_Multiplicity}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::spectrum\+\_\+smeared\+\_\+calorimetry\+\_\+\+VS\+\_\+\+Multiplicity\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a8994f9446f39defe1397962e6936dba5}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!timewalk\_BGO@{timewalk\_BGO}}
+\index{timewalk\_BGO@{timewalk\_BGO}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{timewalk\_BGO}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::timewalk\+\_\+\+BGO\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a0abd5ffa844291e1cf653af138ec2e01}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!timewalk\_Ge@{timewalk\_Ge}}
+\index{timewalk\_Ge@{timewalk\_Ge}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{timewalk\_Ge}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::timewalk\+\_\+\+Ge\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a7c2bf9e04be46aa02ea434a65e2901fc}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!timewalk\_LaBr@{timewalk\_LaBr}}
+\index{timewalk\_LaBr@{timewalk\_LaBr}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{timewalk\_LaBr}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::timewalk\+\_\+\+La\+Br\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a1aee45e8c23b4963d437e4503860c95f}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!timewalk\_NaI@{timewalk\_NaI}}
+\index{timewalk\_NaI@{timewalk\_NaI}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{timewalk\_NaI}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::timewalk\+\_\+\+NaI\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a1aa9872c17ad44079fd4141bfd551f09}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!timing\_VS\_ref@{timing\_VS\_ref}}
+\index{timing\_VS\_ref@{timing\_VS\_ref}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{timing\_VS\_ref}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::timing\+\_\+\+VS\+\_\+ref\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_aa0301ef42114f2e88696708d7451891a}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!timing\_VS\_trigger@{timing\_VS\_trigger}}
+\index{timing\_VS\_trigger@{timing\_VS\_trigger}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{timing\_VS\_trigger}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH2F$>$ Cobalt\+Calorimeter\+::timing\+\_\+\+VS\+\_\+trigger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_cobalt_calorimeter_a7e464b46a184c94c1c142d4c770e3758}} 
+\index{CobaltCalorimeter@{CobaltCalorimeter}!total\_energy\_per\_detector@{total\_energy\_per\_detector}}
+\index{total\_energy\_per\_detector@{total\_energy\_per\_detector}!CobaltCalorimeter@{CobaltCalorimeter}}
+\doxysubsubsection{total\_energy\_per\_detector}
+{\footnotesize\ttfamily \textbf{ MTTHist}$<$TH1F$>$ Cobalt\+Calorimeter\+::total\+\_\+energy\+\_\+per\+\_\+detector\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Modules/\textbf{ Cobalt\+Calorimeter.\+hpp}\end{DoxyCompactItemize}

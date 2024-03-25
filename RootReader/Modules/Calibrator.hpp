@@ -12,7 +12,7 @@ public:
   Calibrator(){for (Label label = 0; label<detectors.size(); label++) print(label, detectors.exists(label));};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
-  void InitializeManip();
+  void InitialiseManip();
   static void run(Parameters & p, Calibrator & calibration);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
@@ -29,7 +29,7 @@ private:
 bool Calibrator::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
   this -> Write();
@@ -67,9 +67,9 @@ void Calibrator::run(Parameters & p, Calibrator & calibration)
   } // End files loop
 }
 
-void Calibrator::InitializeManip()
+void Calibrator::InitialiseManip()
 {
-  print("Initialize histograms");
+  print("Initialise histograms");
 }
 
 void Calibrator::FillRaw(Event const & event)

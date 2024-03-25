@@ -1,4 +1,5 @@
 <map id="Path::makeFolderList" name="Path::makeFolderList">
 <area shape="rect" id="node1" title=" " alt="" coords="5,5,163,32"/>
-<area shape="rect" id="node2" href="$string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39; ...." alt="" coords="211,5,277,32"/>
+<area shape="rect" id="node2" href="$string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title=" " alt="" coords="211,5,277,32"/>
+<area shape="rect" id="node3" href="$string__functions_8hpp.html#a1f4138b473c708db6b901f81bba9f5f6" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39;." alt="" coords="325,5,387,32"/>
 </map>

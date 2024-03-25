@@ -4,10 +4,6 @@
     <title>Nuball2</title>
     </info>
 <chapter>
-    <title>Test List</title>
-    <xi:include href="test.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-</chapter>
-<chapter>
     <title>Deprecated List</title>
     <xi:include href="deprecated.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>
@@ -16,46 +12,68 @@
     <xi:include href="todo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>
 <chapter>
+    <title>Test List</title>
+    <xi:include href="test.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</chapter>
+<chapter>
     <title>Namespace Documentation</title>
 <xi:include href="namespace_co_analyse.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<xi:include href="namespace_co_bazar.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<xi:include href="namespacerandom_co.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<xi:include href="namespace_sources_co.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>
 <chapter>
     <title>Class Documentation</title>
     <xi:include href="class_alignator.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="class_analysis_event.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_analysed_spectra.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_biggest_peak_fitter.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_bools.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_builder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_calibration.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_calibrator.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_cast_impossible.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_clover_module.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_clovers.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_clover_spectra.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_cobalt_calorimeter.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_co_data_frame.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_coinc_builder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_co_progress_bar.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_m_t_t_hist_1_1_copy_error.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_counters.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="class_data_file_reader.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_data_file.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_clovers_1_1_delayed_gate.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_detectors.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_d_s_s_d.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_detectors_1_1_empty_error.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_timeshifts_1_1_empty_error.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_detectors_1_1_error.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_event.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_event_analyse.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_event_builder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_evolution_peaks.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_faster2_histo.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_faster2_root.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_faster_reader.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_file.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_paris_bidim_angles_1_1_file_error.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_filename.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_files_manager.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_fit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_fits.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_fitted_peak.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_folder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_folders.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="classf_parameters.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_gate__t.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_gates__t.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="class_histo_analyse.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="class_histogramor.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="struct_calibration_1_1histograms.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="struct_calibrator_1_1histograms.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_spectra_co_1_1_histo_null.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_spectra_co_1_1_histo_zombie.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_hit.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_hit_buffer.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_i_options.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structis__container.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_manip.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_minimisator.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_m_t_counter.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -67,20 +85,29 @@
     <xi:include href="class_m_t_t_hist.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_m_t_variable.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_m_t_vector.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_my_error.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_my_simple_convertor.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_near_line.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="struct_minimisator_1_1_nelder_mead_parameters.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_timeshifts_1_1_not_found_error.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_nuball2_tree.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_objective_function.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_objective_function_chi2.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_output_t_file.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_overwrite_error.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_paris.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_paris_bidim_angles.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_paris_cluster.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_paris_label.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_paris_module.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_paris_phoswitch.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_paris_x_y.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_path.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_peak_fitter.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_peaks_calibrator.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_performances.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_position_x_y.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_clovers_1_1_prompt_gate.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="class_reader_manager.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_recalibration.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_r_f___extractor.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_r_f___manager.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -88,10 +115,12 @@
     <xi:include href="class_r_w_mat.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_simplex.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_si_strip.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_spectra_co_1_1_size_missmatch.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_sorted___event.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_spectra_alignator.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_spectra_co.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_static_vector.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="class_test_objective_function.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="struct_t_h_binning.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_the_t_chain.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="class_timer.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -103,6 +132,7 @@
 </chapter>
 <chapter>
     <title>File Documentation</title>
+    <xi:include href="_analysed_spectra_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_paris_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_clover_module_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_clovers_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -110,48 +140,54 @@
     <xi:include href="_classes_2_counters_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_d_s_s_d_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_event_analyse_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_histo_analyse_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_paris_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_paris_bidim_angles_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_paris_cluster_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_paris_label_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_paris_module_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_paris_phoswitch_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_paris_x_y_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_position_x_y_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_recalibration_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_sorted___event_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_spectra_alignator_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_spectra_co_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_alignator_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_analysis_event_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_builder_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_calibration_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_coinc_builder_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_data_file_reader_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_data_reader_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_co_progress_bar_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_data_file_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_detectors_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_event_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_event_builder_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_faster_reader_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_files_manager_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_fit_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_gate_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_hit_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_hit_buffer_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_manip_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_nuball2_tree_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_output_t_file_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_performances_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_reader_manager_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_r_f___manager_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_r_w_mat_8hxx.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_spectra_alignator_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_timer_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_timewalk_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="errors_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="files__functions_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="lib_co_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="lib_root_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_calibration_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_calibrator_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_clover_spectra_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_cobalt_calorimeter_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="_evolution_peaks_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_faster2_histo_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_faster2_root_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_histogramor_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_near_line_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_run_matrixator_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_timeshifts_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="_timewalk_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_m_t_counter_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_m_t_faster_reader_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_m_t_files_manager_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
@@ -162,9 +198,15 @@
     <xi:include href="_m_t_t_hist_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="_m_t_variable_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="print_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="random_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="random_co_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="sources_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="string__functions_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <xi:include href="vector__functions_8hpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</chapter>
+<chapter>
+    <title>Example Documentation</title>
+    <xi:include href="_2media_2sf__one_drive_2_c_n_r_s_2_nuball2_2lib_2_classes_2_co_progress_bar_8hpp-example.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="std_1_1string-example.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </chapter>
 <index/>
 </book>

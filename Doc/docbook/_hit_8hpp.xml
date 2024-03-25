@@ -67,6 +67,10 @@ This graph shows which files directly or indirectly include this file:<para>
 </listitem>
             <listitem><para>using <link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> = ULong64_t</para>
 </listitem>
+            <listitem><para>using <link linkend="__hit_8hpp_1a1956dd48cc8db6b2ab4dae054752a2ae">TriggerHit</link> = std::function&lt; bool(const <link linkend="_class_hit">Hit</link> &amp;)&gt;</para>
+
+<para>Trigger definition ///. </para>
+</listitem>
         </itemizedlist>
 </simplesect>
 <simplesect>
@@ -162,7 +166,15 @@ This graph shows which files directly or indirectly include this file:<para>
     <title>Timestamp</title>
 <indexterm><primary>Timestamp</primary><secondary>Hit.hpp</secondary></indexterm>
 <indexterm><primary>Hit.hpp</primary><secondary>Timestamp</secondary></indexterm>
-<para><computeroutput>using <link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> =  ULong64_t</computeroutput></para></section>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a36a1e53eff51015f34900948053c0d69">Timestamp</link> =  ULong64_t</computeroutput></para>    </section><anchor xml:id="__hit_8hpp_1a1956dd48cc8db6b2ab4dae054752a2ae"/>    <section>
+    <title>TriggerHit</title>
+<indexterm><primary>TriggerHit</primary><secondary>Hit.hpp</secondary></indexterm>
+<indexterm><primary>Hit.hpp</primary><secondary>TriggerHit</secondary></indexterm>
+<para><computeroutput>using <link linkend="__hit_8hpp_1a1956dd48cc8db6b2ab4dae054752a2ae">TriggerHit</link> =  std::function&lt;bool(const <link linkend="_class_hit">Hit</link>&amp;)&gt;</computeroutput></para><para>
+
+<para>Trigger definition ///. </para>
+</para>
+</section>
 </section>
 <section>
 <title>Function Documentation</title>

@@ -130,8 +130,8 @@
         </inbodydescription>
         <location file="lib/Analyse/CloverModule.hpp" line="33" column="9" bodyfile="lib/Analyse/CloverModule.hpp" bodystart="33" bodyend="-1"/>
         <referencedby refid="class_clover_module_1a9c67abf2c39e6a2247763cb88756f993" compoundref="_clover_module_8hpp" startline="24" endline="24">addGe</referencedby>
-        <referencedby refid="class_clovers_1a42f43989153734778e0ba6ad1cb2b983" compoundref="_clovers_8hpp" startline="200" endline="200">Clovers::isDelayed</referencedby>
-        <referencedby refid="class_clovers_1acf7eee4006e708ff0b2f4a56433d5e38" compoundref="_clovers_8hpp" startline="199" endline="199">Clovers::isPrompt</referencedby>
+        <referencedby refid="class_clovers_1a42f43989153734778e0ba6ad1cb2b983" compoundref="_clovers_8hpp" startline="190" endline="190">Clovers::isDelayed</referencedby>
+        <referencedby refid="class_clovers_1acf7eee4006e708ff0b2f4a56433d5e38" compoundref="_clovers_8hpp" startline="189" endline="189">Clovers::isPrompt</referencedby>
         <referencedby refid="_clover_module_8hpp_1aae60fbf6c352f4c0682ec1c2a3f04181" compoundref="_clover_module_8hpp" startline="69" endline="80">operator&lt;&lt;</referencedby>
         <referencedby refid="class_clover_module_1adf77517ab6c0830eed708a1ad77e7530" compoundref="_clover_module_8hpp" startline="52" endline="67">Reset</referencedby>
       </memberdef>
@@ -165,8 +165,8 @@
         </inbodydescription>
         <location file="lib/Analyse/CloverModule.hpp" line="35" column="10" bodyfile="lib/Analyse/CloverModule.hpp" bodystart="35" bodyend="-1"/>
         <referencedby refid="class_clover_module_1a9c67abf2c39e6a2247763cb88756f993" compoundref="_clover_module_8hpp" startline="24" endline="24">addGe</referencedby>
-        <referencedby refid="class_clovers_1a42f43989153734778e0ba6ad1cb2b983" compoundref="_clovers_8hpp" startline="200" endline="200">Clovers::isDelayed</referencedby>
-        <referencedby refid="class_clovers_1acf7eee4006e708ff0b2f4a56433d5e38" compoundref="_clovers_8hpp" startline="199" endline="199">Clovers::isPrompt</referencedby>
+        <referencedby refid="class_clovers_1a42f43989153734778e0ba6ad1cb2b983" compoundref="_clovers_8hpp" startline="190" endline="190">Clovers::isDelayed</referencedby>
+        <referencedby refid="class_clovers_1acf7eee4006e708ff0b2f4a56433d5e38" compoundref="_clovers_8hpp" startline="189" endline="189">Clovers::isPrompt</referencedby>
         <referencedby refid="_clover_module_8hpp_1aae60fbf6c352f4c0682ec1c2a3f04181" compoundref="_clover_module_8hpp" startline="69" endline="80">operator&lt;&lt;</referencedby>
         <referencedby refid="class_clover_module_1adf77517ab6c0830eed708a1ad77e7530" compoundref="_clover_module_8hpp" startline="52" endline="67">Reset</referencedby>
       </memberdef>
@@ -383,7 +383,7 @@
         </inbodydescription>
         <location file="lib/Analyse/CloverModule.hpp" line="23" column="15" bodyfile="lib/Analyse/CloverModule.hpp" bodystart="23" bodyend="23"/>
         <references refid="class_clover_module_1a62224aefa3000858c610f9d475ff85fd" compoundref="_clover_module_8hpp" startline="47">glabel</references>
-        <referencedby refid="class_clovers_1addcd7785b41aec6be8988166a5b04fa0" compoundref="_clovers_8hpp" startline="147" endline="157">Clovers::Clovers</referencedby>
+        <referencedby refid="class_clovers_1addcd7785b41aec6be8988166a5b04fa0" compoundref="_clovers_8hpp" startline="137" endline="147">Clovers::Clovers</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>

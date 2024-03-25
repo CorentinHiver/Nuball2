@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__co_progress_bar_8hpp" xml:lang="en-US">
+<title>lib/Classes/CoProgressBar.hpp File Reference</title>
+<indexterm><primary>lib/Classes/CoProgressBar.hpp</primary></indexterm>
+<programlisting>#include &quot;../libCo.hpp&quot;
+#include &quot;Timer.hpp&quot;
+</programlisting>Include dependency graph for CoProgressBar.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_co_progress_bar_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_co_progress_bar_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_co_progress_bar">CoProgressBar&lt; T &gt;</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

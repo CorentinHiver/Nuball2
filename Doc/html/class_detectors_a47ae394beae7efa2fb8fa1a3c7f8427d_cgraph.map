@@ -1,5 +1,5 @@
 <map id="Detectors::exists" name="Detectors::exists">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,137,57"/>
+<area shape="rect" id="node1" title="Does this label correspond to a detector ?" alt="" coords="5,31,137,57"/>
 <area shape="rect" id="node2" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="185,31,311,57"/>
 <area shape="rect" id="node3" href="$class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="359,31,489,57"/>
 <area shape="rect" id="node4" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="537,5,667,32"/>

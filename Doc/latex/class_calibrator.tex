@@ -1,0 +1,901 @@
+\doxysection{Calibrator Class Reference}
+\label{class_calibrator}\index{Calibrator@{Calibrator}}
+
+
+Allows one to calculate and verify calibration coefficients for various sources and detectors for Nuball2.  
+
+
+
+
+{\ttfamily \#include $<$Calibrator.\+hpp$>$}
+
+
+
+Collaboration diagram for Calibrator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ histograms}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ analyse} (std\+::string const \&source=\char`\"{}152Eu\char`\"{})
+\begin{DoxyCompactList}\small\item\em Analyse the spectra to extract calibration coefficients. \end{DoxyCompactList}\item 
+void \textbf{ analyse2} (std\+::vector$<$ double $>$ peaks)
+\begin{DoxyCompactList}\small\item\em Uses the second version of the peak finder to extract calibration coefficients. \end{DoxyCompactList}\item 
+void \textbf{ calculate} (std\+::string const \&data\+Dir, int nb\+\_\+files=-\/1, std\+::string const \&source=\char`\"{}152Eu\char`\"{}, std\+::string const \&type=\char`\"{}fast\char`\"{})
+\item 
+void \textbf{ calculate} (std\+::string const \&\textbf{ histograms}, std\+::string const \&source=\char`\"{}152Eu\char`\"{})
+\begin{DoxyCompactList}\small\item\em Calculate calibration from .root histograms. \end{DoxyCompactList}\item 
+void \textbf{ calculate2} (std\+::string const \&histograms\+Filename, std\+::vector$<$ double $>$ peaks, std\+::string const \&fit\+\_\+info\+\_\+file=\char`\"{}fit\+\_\+info.\+data\char`\"{})
+\item 
+auto \& \textbf{ calib} ()
+\item 
+auto const  \& \textbf{ calib} () const
+\item 
+bool const  \& \textbf{ calibrate\+\_\+data} ()
+\item 
+bool const  \& \textbf{ calibrate\+\_\+data} () const
+\item 
+void \textbf{ calibrate\+Faster\+Data} (std\+::string const \&folder, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ calibrate\+Root\+Data} (std\+::string const \&folder, int const \&nb\+\_\+files=-\/1)
+\item 
+\textbf{ Calibration} \& \textbf{ calibration} ()
+\item 
+\textbf{ Calibration} const  \& \textbf{ calibration} () const
+\item 
+\textbf{ Calibrator} ()=default
+\item 
+void \textbf{ fill\+Root\+Data\+Histo} (std\+::string const \&filename)
+\item 
+void \textbf{ fit\+Calibration} (\textbf{ Fits} \&fits)
+\item 
+void \textbf{ Initialise} ()
+\item 
+bool \textbf{ load\+Calibration} (\textbf{ Calibration} const \&\textbf{ calib})
+\begin{DoxyCompactList}\small\item\em Loading calibration from file name. \end{DoxyCompactList}\item 
+bool \textbf{ load\+Calibration} (std\+::string const \&calib\+\_\+file)
+\item 
+void \textbf{ load\+Faster\+Data} (std\+::string const \&data\+Dir, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ load\+Fit\+Info} (std\+::string const \&fit\+\_\+info\+\_\+file)
+\item 
+void \textbf{ load\+Root\+Data} (std\+::string const \&data\+Dir, int const \&nb\+\_\+files=-\/1)
+\item 
+void \textbf{ load\+Root\+Histo} (std\+::string const \&\textbf{ histograms})
+\begin{DoxyCompactList}\small\item\em Loads non-\/calibrated spectra. \end{DoxyCompactList}\item 
+\textbf{ operator bool} () const \&
+\item 
+void \textbf{ peak\+Finder} (std\+::string const \&source)
+\item 
+void \textbf{ set\+Source} (std\+::string const \&source)
+\item 
+void \textbf{ verbose} (bool const \&\+\_\+verbose)
+\item 
+void \textbf{ verify} (std\+::string const \&outfilename=\char`\"{}verify\char`\"{})
+\begin{DoxyCompactList}\small\item\em if some spectra and calibration coefficients have been loaded, or after the calibration coefficients have been calculated, this allows one to check the calibration \end{DoxyCompactList}\item 
+void \textbf{ write\+Calibrated\+Histo} (std\+::string const \&outfilename)
+\item 
+void \textbf{ write\+Data} (std\+::string const \&outfilename)
+\item 
+void \textbf{ write\+Pos\+Peaks} (std\+::string const \&outfilename)
+\item 
+void \textbf{ write\+Raw\+Root} (std\+::string const \&outfilename)
+\item 
+\textbf{ $\sim$\+Calibrator} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ fill\+Histo} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader, \textbf{ Calibrator} \&\textbf{ calib})
+\begin{DoxyCompactList}\small\item\em Fills histograms. \end{DoxyCompactList}\item 
+static void \textbf{ load\+Root\+Data\+Thread} (\textbf{ Calibrator} \&\textbf{ calib}, \textbf{ MTList} \&list)
+\item 
+static void \textbf{ treat\+Only\+Ge} (bool const \&b=true)
+\item 
+static void \textbf{ treat\+Only\+Paris} (bool const \&b=true)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Calibrator\+::histograms} \textbf{ m\+\_\+histos}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ print\+Parameters} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Path} \textbf{ data\+Path}
+\item 
+\textbf{ Calibration} \textbf{ m\+\_\+calib}
+\item 
+bool \textbf{ m\+\_\+calibrate\+\_\+data} = false
+\item 
+\textbf{ Fits} \textbf{ m\+\_\+fits} = \textbf{ Fits}(100)
+\item 
+bool \textbf{ m\+\_\+histo\+\_\+loaded} = false
+\item 
+bool \textbf{ m\+\_\+\+Initialised} = false
+\item 
+std\+::map$<$ int, int $>$ \textbf{ m\+\_\+nb\+\_\+bins\+\_\+below}
+\item 
+std\+::string \textbf{ m\+\_\+out\+Calib} = \char`\"{}\char`\"{}
+\item 
+std\+::string \textbf{ m\+\_\+out\+Dir} = \char`\"{}Calibrator/\char`\"{}
+\item 
+std\+::string \textbf{ m\+\_\+out\+Root} = \char`\"{}calibration.\+root\char`\"{}
+\item 
+bool \textbf{ m\+\_\+out\+Root\+\_\+b} = false
+\item 
+std\+::map$<$ int, int $>$ \textbf{ m\+\_\+rebin}
+\item 
+bool \textbf{ m\+\_\+residus} = false
+\item 
+std\+::string \textbf{ m\+\_\+source} = \char`\"{}\char`\"{}
+\item 
+std\+::map$<$ int, double $>$ \textbf{ m\+\_\+threshold}
+\item 
+bool \textbf{ m\+\_\+verbose} = false
+\item 
+TFile $\ast$ \textbf{ read\+File} = nullptr
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \textbf{ m\+\_\+treat\+Only\+Ge} = false
+\item 
+static bool \textbf{ m\+\_\+treat\+Only\+Paris} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Allows one to calculate and verify calibration coefficients for various sources and detectors for Nuball2. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]\doxyref{Calibrator\+::verify()}{p.}{class_calibrator_aad90b0e3951d4caffe11e319c7108a51} DO NOT SUPPORT multithreading with \doxyref{MTObject}{p.}{class_m_t_object} !! \end{DoxyRefDesc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_calibrator_ae55ce16f9f65ced4b0c74efaaf92ac42}} 
+\index{Calibrator@{Calibrator}!Calibrator@{Calibrator}}
+\index{Calibrator@{Calibrator}!Calibrator@{Calibrator}}
+\doxysubsubsection{Calibrator()}
+{\footnotesize\ttfamily Calibrator\+::\+Calibrator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\label{class_calibrator_a42f20b668e32d1b43b2de39cb477e04f}} 
+\index{Calibrator@{Calibrator}!````~Calibrator@{$\sim$Calibrator}}
+\index{````~Calibrator@{$\sim$Calibrator}!Calibrator@{Calibrator}}
+\doxysubsubsection{$\sim$Calibrator()}
+{\footnotesize\ttfamily Calibrator\+::$\sim$\+Calibrator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_calibrator_aa15e2c6afb9da71595926a10d89f0761}} 
+\index{Calibrator@{Calibrator}!analyse@{analyse}}
+\index{analyse@{analyse}!Calibrator@{Calibrator}}
+\doxysubsubsection{analyse()}
+{\footnotesize\ttfamily void Calibrator\+::analyse (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{source = {\ttfamily \char`\"{}152Eu\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Analyse the spectra to extract calibration coefficients. 
+
+The peak finding follows the following principle \+: We start from the bin at the very right side of the spectra. Then we add the value of the bin to the integral counter. Then we add the value of the next bin on the left, then the next, etc.. That is, we integrate the spectra from right to left The moment the first peak is found, the higher energy one, the integral will suddenly increase Then we have to determine a threshold above which we say \char`\"{}we have found the first peak\char`\"{} From this we determine a really rough first linear calibration. This allows us to find, for each other peak, an energy windows in which it should be. Once this window established, we find its centroid. Then we create a smaller window and find again the centroid. A third window (which may not me important ?) event narrower is set around the peak. Then the peak is fitted and the mean value of the gaussian fit added to the calibration curve. Finally, the fit of the calibration curve gives the calibration coefficients.
+
+The threshold is taken as the ratio between the integral and the total integral of the spectra, so that the process do not depend neither on different counting rates nor on different calibration duration. Only issue \+: it depends on the kind of detector and to some extend to the geometry. That is, this calibration is not well suited for paris detectors... Also, if a peak is absent due to for instance high energy threshold of the detector (typically 121keV of 152Eu is absent in some noisy channels) then the calibration will fail
+
+\begin{DoxyAttention}{Attention}
+The most difficult part is to find the value of the threshold, wich must be different for each kind of detector. If it is different for differents detectors of the same type (e.\+g. paris) then the calibration requires additionnal work.
+
+Take care of the binning of the spectra. If there is too much or not enough bins then the peak fitting will fail, if the maximum ADC value is lower than the higher energy peak then the peak findind will fail. Also, everything supposes the minimum bin corresponds to 0, otherwise it might fail. 
+\end{DoxyAttention}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_aa15e2c6afb9da71595926a10d89f0761_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_calibrator_aa15e2c6afb9da71595926a10d89f0761_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a00806ef12bceedaa6c16dad9b653f27f}} 
+\index{Calibrator@{Calibrator}!analyse2@{analyse2}}
+\index{analyse2@{analyse2}!Calibrator@{Calibrator}}
+\doxysubsubsection{analyse2()}
+{\footnotesize\ttfamily void Calibrator\+::analyse2 (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{peaks }\end{DoxyParamCaption})}
+
+
+
+Uses the second version of the peak finder to extract calibration coefficients. 
+
+Uses the second derivative spectra in order to find the peaks. To do so, uses an input file to set the three main parameter for each detector \+: The number of bins to use The threshold for peak detection The number of bins below threshold (by default 2)
+
+The spectra\textquotesingle{}s name must be the detector\textquotesingle{}s name (ex R3\+A1\+\_\+red)
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a00806ef12bceedaa6c16dad9b653f27f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a00806ef12bceedaa6c16dad9b653f27f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_af5fcdabfdef0a399a9e3a3992b3029fb}} 
+\index{Calibrator@{Calibrator}!calculate@{calculate}}
+\index{calculate@{calculate}!Calibrator@{Calibrator}}
+\doxysubsubsection{calculate()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Calibrator\+::calculate (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{data\+Dir,  }\item[{int}]{nb\+\_\+files = {\ttfamily -\/1},  }\item[{std\+::string const \&}]{source = {\ttfamily \char`\"{}152Eu\char`\"{}},  }\item[{std\+::string const \&}]{type = {\ttfamily \char`\"{}fast\char`\"{}} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_af5fcdabfdef0a399a9e3a3992b3029fb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a547f6f7bb37caef0b1a2e574422fb85f}} 
+\index{Calibrator@{Calibrator}!calculate@{calculate}}
+\index{calculate@{calculate}!Calibrator@{Calibrator}}
+\doxysubsubsection{calculate()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Calibrator\+::calculate (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{histograms,  }\item[{std\+::string const \&}]{source = {\ttfamily \char`\"{}152Eu\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Calculate calibration from .root histograms. 
+
+Calculate the calibration coefficients from already calculated histograms.
+
+\begin{DoxyAttention}{Attention}
+TODO
+
+The name of the histograms must correspond either to the name of the detector or the label declared in the ID file 
+\end{DoxyAttention}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a547f6f7bb37caef0b1a2e574422fb85f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_af12375fcb4e97a40d98fb2549565f2f2}} 
+\index{Calibrator@{Calibrator}!calculate2@{calculate2}}
+\index{calculate2@{calculate2}!Calibrator@{Calibrator}}
+\doxysubsubsection{calculate2()}
+{\footnotesize\ttfamily void Calibrator\+::calculate2 (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{histograms\+Filename,  }\item[{std\+::vector$<$ double $>$}]{peaks,  }\item[{std\+::string const \&}]{fit\+\_\+info\+\_\+file = {\ttfamily \char`\"{}fit\+\_\+info.data\char`\"{}} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_af12375fcb4e97a40d98fb2549565f2f2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a2873b525b0a387de8c9f06e665d8e7ed}} 
+\index{Calibrator@{Calibrator}!calib@{calib}}
+\index{calib@{calib}!Calibrator@{Calibrator}}
+\doxysubsubsection{calib()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto\& Calibrator\+::calib (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibrator_adab079fd4083424545ee758000887e87}} 
+\index{Calibrator@{Calibrator}!calib@{calib}}
+\index{calib@{calib}!Calibrator@{Calibrator}}
+\doxysubsubsection{calib()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Calibrator\+::calib (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_adab079fd4083424545ee758000887e87_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a69cb999f260dfa070073a22709aac586}} 
+\index{Calibrator@{Calibrator}!calibrate\_data@{calibrate\_data}}
+\index{calibrate\_data@{calibrate\_data}!Calibrator@{Calibrator}}
+\doxysubsubsection{calibrate\_data()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool const\& Calibrator\+::calibrate\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibrator_ad08f57f450b311f7f213b47388236362}} 
+\index{Calibrator@{Calibrator}!calibrate\_data@{calibrate\_data}}
+\index{calibrate\_data@{calibrate\_data}!Calibrator@{Calibrator}}
+\doxysubsubsection{calibrate\_data()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool const\& Calibrator\+::calibrate\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibrator_ac16a84c9c3244443c44a7c5de11ceb5f}} 
+\index{Calibrator@{Calibrator}!calibrateFasterData@{calibrateFasterData}}
+\index{calibrateFasterData@{calibrateFasterData}!Calibrator@{Calibrator}}
+\doxysubsubsection{calibrateFasterData()}
+{\footnotesize\ttfamily void Calibrator\+::calibrate\+Faster\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_ac16a84c9c3244443c44a7c5de11ceb5f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_aa45584fd0c25478ec98232ac18af3082}} 
+\index{Calibrator@{Calibrator}!calibrateRootData@{calibrateRootData}}
+\index{calibrateRootData@{calibrateRootData}!Calibrator@{Calibrator}}
+\doxysubsubsection{calibrateRootData()}
+{\footnotesize\ttfamily void Calibrator\+::calibrate\+Root\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_aa45584fd0c25478ec98232ac18af3082_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a03b4f69e1b937a479812fb60ea6f90a1}} 
+\index{Calibrator@{Calibrator}!calibration@{calibration}}
+\index{calibration@{calibration}!Calibrator@{Calibrator}}
+\doxysubsubsection{calibration()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \textbf{ Calibration}\& Calibrator\+::calibration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibrator_ae54039d407ea1fe9a91876892317f6e7}} 
+\index{Calibrator@{Calibrator}!calibration@{calibration}}
+\index{calibration@{calibration}!Calibrator@{Calibrator}}
+\doxysubsubsection{calibration()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \textbf{ Calibration} const\& Calibrator\+::calibration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibrator_a87ba405f3d9af67c43789893fc5ff534}} 
+\index{Calibrator@{Calibrator}!fillHisto@{fillHisto}}
+\index{fillHisto@{fillHisto}!Calibrator@{Calibrator}}
+\doxysubsubsection{fillHisto()}
+{\footnotesize\ttfamily void Calibrator\+::fill\+Histo (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Calibrator} \&}]{calib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Fills histograms. 
+
+There are two modes \+: You can either fill the histograms with raw values Or you can use the loaded or calculated calibration factors to fille calibrated histograms
+
+
+\begin{DoxyParams}{Parameters}
+{\em hit} & \\
+\hline
+{\em reader} & \\
+\hline
+{\em calib} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a87ba405f3d9af67c43789893fc5ff534_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a87ba405f3d9af67c43789893fc5ff534_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a01917c2d097c62f2c6dc3a608d4e3ab4}} 
+\index{Calibrator@{Calibrator}!fillRootDataHisto@{fillRootDataHisto}}
+\index{fillRootDataHisto@{fillRootDataHisto}!Calibrator@{Calibrator}}
+\doxysubsubsection{fillRootDataHisto()}
+{\footnotesize\ttfamily void Calibrator\+::fill\+Root\+Data\+Histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a01917c2d097c62f2c6dc3a608d4e3ab4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a7f0728db56f517ca2dfe8182a122e094}} 
+\index{Calibrator@{Calibrator}!fitCalibration@{fitCalibration}}
+\index{fitCalibration@{fitCalibration}!Calibrator@{Calibrator}}
+\doxysubsubsection{fitCalibration()}
+{\footnotesize\ttfamily void Calibrator\+::fit\+Calibration (\begin{DoxyParamCaption}\item[{\textbf{ Fits} \&}]{fits }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a7f0728db56f517ca2dfe8182a122e094_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a7f0728db56f517ca2dfe8182a122e094_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_ae81772276c36ab528b8147fa583356fd}} 
+\index{Calibrator@{Calibrator}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!Calibrator@{Calibrator}}
+\doxysubsubsection{Initialise()}
+{\footnotesize\ttfamily void Calibrator\+::\+Initialise (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_ae81772276c36ab528b8147fa583356fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_ae81772276c36ab528b8147fa583356fd_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a293b803d661723f873d34c5e0ccef310}} 
+\index{Calibrator@{Calibrator}!loadCalibration@{loadCalibration}}
+\index{loadCalibration@{loadCalibration}!Calibrator@{Calibrator}}
+\doxysubsubsection{loadCalibration()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Calibrator\+::load\+Calibration (\begin{DoxyParamCaption}\item[{\textbf{ Calibration} const \&}]{calib }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Loading calibration from file name. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a293b803d661723f873d34c5e0ccef310_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a6f6b1a44ab84227e16be740e39449f08}} 
+\index{Calibrator@{Calibrator}!loadCalibration@{loadCalibration}}
+\index{loadCalibration@{loadCalibration}!Calibrator@{Calibrator}}
+\doxysubsubsection{loadCalibration()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Calibrator\+::load\+Calibration (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{calib\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibrator_a00297f1bb253279bfa8bdce83fb81951}} 
+\index{Calibrator@{Calibrator}!loadFasterData@{loadFasterData}}
+\index{loadFasterData@{loadFasterData}!Calibrator@{Calibrator}}
+\doxysubsubsection{loadFasterData()}
+{\footnotesize\ttfamily void Calibrator\+::load\+Faster\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{data\+Dir,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a00297f1bb253279bfa8bdce83fb81951_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a00297f1bb253279bfa8bdce83fb81951_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a14ec7e7a2a8f36d31e474de1a67df7ec}} 
+\index{Calibrator@{Calibrator}!loadFitInfo@{loadFitInfo}}
+\index{loadFitInfo@{loadFitInfo}!Calibrator@{Calibrator}}
+\doxysubsubsection{loadFitInfo()}
+{\footnotesize\ttfamily void Calibrator\+::load\+Fit\+Info (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{fit\+\_\+info\+\_\+file }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a14ec7e7a2a8f36d31e474de1a67df7ec_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a14ec7e7a2a8f36d31e474de1a67df7ec_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_af067fee0c3a37336851ea63f2561b59f}} 
+\index{Calibrator@{Calibrator}!loadRootData@{loadRootData}}
+\index{loadRootData@{loadRootData}!Calibrator@{Calibrator}}
+\doxysubsubsection{loadRootData()}
+{\footnotesize\ttfamily void Calibrator\+::load\+Root\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{data\+Dir,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_af067fee0c3a37336851ea63f2561b59f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_af067fee0c3a37336851ea63f2561b59f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a08032bf64f38605b8b6daa4a839fe443}} 
+\index{Calibrator@{Calibrator}!loadRootDataThread@{loadRootDataThread}}
+\index{loadRootDataThread@{loadRootDataThread}!Calibrator@{Calibrator}}
+\doxysubsubsection{loadRootDataThread()}
+{\footnotesize\ttfamily void Calibrator\+::load\+Root\+Data\+Thread (\begin{DoxyParamCaption}\item[{\textbf{ Calibrator} \&}]{calib,  }\item[{\textbf{ MTList} \&}]{list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a08032bf64f38605b8b6daa4a839fe443_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a08032bf64f38605b8b6daa4a839fe443_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a0d2a41f02b2c16409b58ce3ee4183792}} 
+\index{Calibrator@{Calibrator}!loadRootHisto@{loadRootHisto}}
+\index{loadRootHisto@{loadRootHisto}!Calibrator@{Calibrator}}
+\doxysubsubsection{loadRootHisto()}
+{\footnotesize\ttfamily void Calibrator\+::load\+Root\+Histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{histograms }\end{DoxyParamCaption})}
+
+
+
+Loads non-\/calibrated spectra. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em histograms} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a0d2a41f02b2c16409b58ce3ee4183792_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a0d2a41f02b2c16409b58ce3ee4183792_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a6f433f9ca2ce1406d8ca5d55fdccb696}} 
+\index{Calibrator@{Calibrator}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Calibrator@{Calibrator}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily Calibrator\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]\end{DoxyRefDesc}
+\mbox{\label{class_calibrator_aa0fff626078ec3cd2e453c5cf6681462}} 
+\index{Calibrator@{Calibrator}!peakFinder@{peakFinder}}
+\index{peakFinder@{peakFinder}!Calibrator@{Calibrator}}
+\doxysubsubsection{peakFinder()}
+{\footnotesize\ttfamily void Calibrator\+::peak\+Finder (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{source }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_aa0fff626078ec3cd2e453c5cf6681462_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_aa0fff626078ec3cd2e453c5cf6681462_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a4c41a4cdb731bfa201e03e8d19628d59}} 
+\index{Calibrator@{Calibrator}!printParameters@{printParameters}}
+\index{printParameters@{printParameters}!Calibrator@{Calibrator}}
+\doxysubsubsection{printParameters()}
+{\footnotesize\ttfamily void Calibrator\+::print\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_ae47ff4fb802736a0880679f284aaef81}} 
+\index{Calibrator@{Calibrator}!setSource@{setSource}}
+\index{setSource@{setSource}!Calibrator@{Calibrator}}
+\doxysubsubsection{setSource()}
+{\footnotesize\ttfamily void Calibrator\+::set\+Source (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{source }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibrator_aab113de3373ab0677455bcd465ab5306}} 
+\index{Calibrator@{Calibrator}!treatOnlyGe@{treatOnlyGe}}
+\index{treatOnlyGe@{treatOnlyGe}!Calibrator@{Calibrator}}
+\doxysubsubsection{treatOnlyGe()}
+{\footnotesize\ttfamily static void Calibrator\+::treat\+Only\+Ge (\begin{DoxyParamCaption}\item[{bool const \&}]{b = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_calibrator_adba52414b26cd454f2095236c344e4f8}} 
+\index{Calibrator@{Calibrator}!treatOnlyParis@{treatOnlyParis}}
+\index{treatOnlyParis@{treatOnlyParis}!Calibrator@{Calibrator}}
+\doxysubsubsection{treatOnlyParis()}
+{\footnotesize\ttfamily static void Calibrator\+::treat\+Only\+Paris (\begin{DoxyParamCaption}\item[{bool const \&}]{b = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_calibrator_a4efc8ed8fb70b22bb1e78e27e325359a}} 
+\index{Calibrator@{Calibrator}!verbose@{verbose}}
+\index{verbose@{verbose}!Calibrator@{Calibrator}}
+\doxysubsubsection{verbose()}
+{\footnotesize\ttfamily void Calibrator\+::verbose (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+verbose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_calibrator_aad90b0e3951d4caffe11e319c7108a51}} 
+\index{Calibrator@{Calibrator}!verify@{verify}}
+\index{verify@{verify}!Calibrator@{Calibrator}}
+\doxysubsubsection{verify()}
+{\footnotesize\ttfamily void Calibrator\+::verify (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename = {\ttfamily \char`\"{}verify\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+if some spectra and calibration coefficients have been loaded, or after the calibration coefficients have been calculated, this allows one to check the calibration 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outfilename} & \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_aad90b0e3951d4caffe11e319c7108a51_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a04a1a6e9e32b48699affcd9adfffa2f0}} 
+\index{Calibrator@{Calibrator}!writeCalibratedHisto@{writeCalibratedHisto}}
+\index{writeCalibratedHisto@{writeCalibratedHisto}!Calibrator@{Calibrator}}
+\doxysubsubsection{writeCalibratedHisto()}
+{\footnotesize\ttfamily void Calibrator\+::write\+Calibrated\+Histo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{class_calibrator_a04a1a6e9e32b48699affcd9adfffa2f0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a5168dd14ccf0ad9629fa56185986d218}} 
+\index{Calibrator@{Calibrator}!writeData@{writeData}}
+\index{writeData@{writeData}!Calibrator@{Calibrator}}
+\doxysubsubsection{writeData()}
+{\footnotesize\ttfamily void Calibrator\+::write\+Data (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a5168dd14ccf0ad9629fa56185986d218_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a5168dd14ccf0ad9629fa56185986d218_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_ace95da8167dc1202e913a75c553313b3}} 
+\index{Calibrator@{Calibrator}!writePosPeaks@{writePosPeaks}}
+\index{writePosPeaks@{writePosPeaks}!Calibrator@{Calibrator}}
+\doxysubsubsection{writePosPeaks()}
+{\footnotesize\ttfamily void Calibrator\+::write\+Pos\+Peaks (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_ace95da8167dc1202e913a75c553313b3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_calibrator_a78414158b6fec48d58182e62c9478126}} 
+\index{Calibrator@{Calibrator}!writeRawRoot@{writeRawRoot}}
+\index{writeRawRoot@{writeRawRoot}!Calibrator@{Calibrator}}
+\doxysubsubsection{writeRawRoot()}
+{\footnotesize\ttfamily void Calibrator\+::write\+Raw\+Root (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{outfilename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a78414158b6fec48d58182e62c9478126_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_calibrator_a78414158b6fec48d58182e62c9478126_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_calibrator_aa98a40455fa921b68858b94f6821426b}} 
+\index{Calibrator@{Calibrator}!dataPath@{dataPath}}
+\index{dataPath@{dataPath}!Calibrator@{Calibrator}}
+\doxysubsubsection{dataPath}
+{\footnotesize\ttfamily \textbf{ Path} Calibrator\+::data\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_ae1bf2cfab99dffa65adc9c5491a668b7}} 
+\index{Calibrator@{Calibrator}!m\_calib@{m\_calib}}
+\index{m\_calib@{m\_calib}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_calib}
+{\footnotesize\ttfamily \textbf{ Calibration} Calibrator\+::m\+\_\+calib\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_a001ccdbc50c865246f88a77085680e7d}} 
+\index{Calibrator@{Calibrator}!m\_calibrate\_data@{m\_calibrate\_data}}
+\index{m\_calibrate\_data@{m\_calibrate\_data}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_calibrate\_data}
+{\footnotesize\ttfamily bool Calibrator\+::m\+\_\+calibrate\+\_\+data = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_af9f21ae4029930b0581d194f7f5007be}} 
+\index{Calibrator@{Calibrator}!m\_fits@{m\_fits}}
+\index{m\_fits@{m\_fits}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_fits}
+{\footnotesize\ttfamily \textbf{ Fits} Calibrator\+::m\+\_\+fits = \textbf{ Fits}(100)\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_a23efbbb0b3b113e8620e1f173a1ef795}} 
+\index{Calibrator@{Calibrator}!m\_histo\_loaded@{m\_histo\_loaded}}
+\index{m\_histo\_loaded@{m\_histo\_loaded}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_histo\_loaded}
+{\footnotesize\ttfamily bool Calibrator\+::m\+\_\+histo\+\_\+loaded = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_adc2d012caeb55220308005a02190dd21}} 
+\index{Calibrator@{Calibrator}!m\_histos@{m\_histos}}
+\index{m\_histos@{m\_histos}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_histos}
+{\footnotesize\ttfamily struct \textbf{ Calibrator\+::histograms} Calibrator\+::m\+\_\+histos}
+
+\mbox{\label{class_calibrator_a149bd96011065f976236c0bfd58085e8}} 
+\index{Calibrator@{Calibrator}!m\_Initialised@{m\_Initialised}}
+\index{m\_Initialised@{m\_Initialised}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_Initialised}
+{\footnotesize\ttfamily bool Calibrator\+::m\+\_\+\+Initialised = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_abb7cc034b66c4d986d28e3d1e3901b2c}} 
+\index{Calibrator@{Calibrator}!m\_nb\_bins\_below@{m\_nb\_bins\_below}}
+\index{m\_nb\_bins\_below@{m\_nb\_bins\_below}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_nb\_bins\_below}
+{\footnotesize\ttfamily std\+::map$<$int, int$>$ Calibrator\+::m\+\_\+nb\+\_\+bins\+\_\+below\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_ad001f1fd1adca313356b4b070e4b647c}} 
+\index{Calibrator@{Calibrator}!m\_outCalib@{m\_outCalib}}
+\index{m\_outCalib@{m\_outCalib}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_outCalib}
+{\footnotesize\ttfamily std\+::string Calibrator\+::m\+\_\+out\+Calib = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_a75a33409cf6ac4509ccbd219ac39a353}} 
+\index{Calibrator@{Calibrator}!m\_outDir@{m\_outDir}}
+\index{m\_outDir@{m\_outDir}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_outDir}
+{\footnotesize\ttfamily std\+::string Calibrator\+::m\+\_\+out\+Dir = \char`\"{}Calibrator/\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_a58fa98239eecf663449388fd3128184e}} 
+\index{Calibrator@{Calibrator}!m\_outRoot@{m\_outRoot}}
+\index{m\_outRoot@{m\_outRoot}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_outRoot}
+{\footnotesize\ttfamily std\+::string Calibrator\+::m\+\_\+out\+Root = \char`\"{}calibration.\+root\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_aeeea0d6b5093606e9af2cb5565dc771d}} 
+\index{Calibrator@{Calibrator}!m\_outRoot\_b@{m\_outRoot\_b}}
+\index{m\_outRoot\_b@{m\_outRoot\_b}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_outRoot\_b}
+{\footnotesize\ttfamily bool Calibrator\+::m\+\_\+out\+Root\+\_\+b = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_ac1218b83e5524b8817762bbc9ccbc32d}} 
+\index{Calibrator@{Calibrator}!m\_rebin@{m\_rebin}}
+\index{m\_rebin@{m\_rebin}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_rebin}
+{\footnotesize\ttfamily std\+::map$<$int, int$>$ Calibrator\+::m\+\_\+rebin\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_a6a8832e379513d4c6b9aeaeebf06dc28}} 
+\index{Calibrator@{Calibrator}!m\_residus@{m\_residus}}
+\index{m\_residus@{m\_residus}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_residus}
+{\footnotesize\ttfamily bool Calibrator\+::m\+\_\+residus = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_afa56c62f28c894f5374073cba7bd284a}} 
+\index{Calibrator@{Calibrator}!m\_source@{m\_source}}
+\index{m\_source@{m\_source}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_source}
+{\footnotesize\ttfamily std\+::string Calibrator\+::m\+\_\+source = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_afe2a295e4ebc9322bfd540085e531549}} 
+\index{Calibrator@{Calibrator}!m\_threshold@{m\_threshold}}
+\index{m\_threshold@{m\_threshold}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_threshold}
+{\footnotesize\ttfamily std\+::map$<$int, double$>$ Calibrator\+::m\+\_\+threshold\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_a6d0b8ee9047fa180aa56f157e9f991c4}} 
+\index{Calibrator@{Calibrator}!m\_treatOnlyGe@{m\_treatOnlyGe}}
+\index{m\_treatOnlyGe@{m\_treatOnlyGe}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_treatOnlyGe}
+{\footnotesize\ttfamily bool Calibrator\+::m\+\_\+treat\+Only\+Ge = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_a10d7597c3ff68484c243328415305e7c}} 
+\index{Calibrator@{Calibrator}!m\_treatOnlyParis@{m\_treatOnlyParis}}
+\index{m\_treatOnlyParis@{m\_treatOnlyParis}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_treatOnlyParis}
+{\footnotesize\ttfamily bool Calibrator\+::m\+\_\+treat\+Only\+Paris = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_ad7076abb546a7ef91b4c5df50b3dfffa}} 
+\index{Calibrator@{Calibrator}!m\_verbose@{m\_verbose}}
+\index{m\_verbose@{m\_verbose}!Calibrator@{Calibrator}}
+\doxysubsubsection{m\_verbose}
+{\footnotesize\ttfamily bool Calibrator\+::m\+\_\+verbose = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_calibrator_a39c8a92b79d32122442419c7c2785dbf}} 
+\index{Calibrator@{Calibrator}!readFile@{readFile}}
+\index{readFile@{readFile}!Calibrator@{Calibrator}}
+\doxysubsubsection{readFile}
+{\footnotesize\ttfamily TFile$\ast$ Calibrator\+::read\+File = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Modules/\textbf{ Calibrator.\+hpp}\end{DoxyCompactItemize}

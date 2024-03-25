@@ -1,12 +1,12 @@
 <map id="Path::Path" name="Path::Path">
-<area shape="rect" id="node1" title=" " alt="" coords="484,69,571,96"/>
-<area shape="rect" id="node2" href="$class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="327,19,421,45"/>
-<area shape="rect" id="node6" href="$class_path.html#a3d0909258a10a05b04d3c08ec42f562c" title=" " alt="" coords="312,69,436,96"/>
-<area shape="rect" id="node7" href="$class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="331,120,417,147"/>
-<area shape="rect" id="node3" href="$class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="177,44,264,71"/>
+<area shape="rect" id="node1" title=" " alt="" coords="512,69,599,96"/>
+<area shape="rect" id="node2" href="$class_path.html#a08c199926ff5432cd3f35c2df4b07433" title=" " alt="" coords="355,19,449,45"/>
+<area shape="rect" id="node6" href="$class_path.html#a3d0909258a10a05b04d3c08ec42f562c" title=" " alt="" coords="340,69,464,96"/>
+<area shape="rect" id="node7" href="$class_path.html#a0374de2afee27834da4adccf704d4190" title=" " alt="" coords="359,120,445,147"/>
+<area shape="rect" id="node3" href="$class_path.html#af8ae2716e0002e69eff44e6d669e6051" title=" " alt="" coords="177,44,292,71"/>
 <area shape="rect" id="node4" href="$class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
 <area shape="rect" id="node5" href="$class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
-<area shape="rect" id="node8" href="$class_file.html#ac3774fc193239a9a83f6974e9a79f9c4" title=" " alt="" coords="186,120,255,147"/>
+<area shape="rect" id="node8" href="$class_file.html#ac3774fc193239a9a83f6974e9a79f9c4" title=" " alt="" coords="200,120,269,147"/>
 <area shape="rect" id="node9" href="$class_file.html#a5237343fec40bceaa8cf7fc7c4026426" title=" " alt="" coords="29,113,105,140"/>
 <area shape="rect" id="node10" href="$class_file.html#a900ed41b6c4fbcec93e4306e2d8b0c35" title=" " alt="" coords="8,164,127,191"/>
 </map>

@@ -21,6 +21,8 @@ Collaboration diagram for Event\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+auto \& \textbf{ adc} (int const \&hit\+\_\+i)
+\item 
 void \textbf{ clear} ()
 \item 
 \textbf{ Event} ()
@@ -39,11 +41,21 @@ bool \textbf{ is\+Empty} () const
 \item 
 bool \textbf{ is\+Single} () const
 \item 
+auto \& \textbf{ label} (int const \&hit\+\_\+i)
+\item 
 \textbf{ size\+\_\+t} const  \& \textbf{ max\+Size} () const
+\item 
+auto \& \textbf{ nrj} (int const \&hit\+\_\+i)
+\item 
+auto \& \textbf{ nrj2} (int const \&hit\+\_\+i)
 \item 
 \textbf{ Event} \& \textbf{ operator=} (\textbf{ Event} const \&evt)
 \item 
 \textbf{ Event} \& \textbf{ operator=} (\textbf{ Hit} const \&hit)
+\item 
+\textbf{ Hit} \textbf{ operator[$\,$]} (int const \&hit\+\_\+i)
+\item 
+auto \& \textbf{ pileup} (int const \&hit\+\_\+i)
 \item 
 void \textbf{ Print} () const
 \item 
@@ -51,6 +63,8 @@ void \textbf{ push\+\_\+back} (\textbf{ Hit} const \&hit)
 \item 
 void \textbf{ push\+\_\+front} (\textbf{ Hit} const \&hit)
 \begin{DoxyCompactList}\small\item\em Sometimes, we want to select pre-\/prompt events. In such case, we have to put in in front of the others. \end{DoxyCompactList}\item 
+auto \& \textbf{ qdc2} (int const \&hit\+\_\+i)
+\item 
 void \textbf{ reading} (TTree $\ast$tree)
 \begin{DoxyCompactList}\small\item\em Automatically set branches based on the presence or not of branches in the root tree. Reserved for \char`\"{}\+Nuball2\char`\"{} type of trees. \end{DoxyCompactList}\item 
 void \textbf{ reading} (TTree $\ast$tree, std\+::string const \&options)
@@ -58,6 +72,10 @@ void \textbf{ reading} (TTree $\ast$tree, std\+::string const \&options)
 void \textbf{ set\+T0} (\textbf{ Timestamp} const \&timestamp)
 \item 
 \textbf{ size\+\_\+t} \textbf{ size} () const
+\item 
+auto \& \textbf{ time} (int const \&hit\+\_\+i)
+\item 
+auto \& \textbf{ time2} (int const \&hit\+\_\+i)
 \item 
 \textbf{ Time\+\_\+ns} \textbf{ time\+\_\+ns} (int const \&i) const
 \item 
@@ -182,7 +200,8 @@ You can add Hits to an event using the \doxyref{Event\+::push\+\_\+back}{p.}{cla
 \doxysubsubsection{Event()\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
 {\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -195,7 +214,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{Event()\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
 {\footnotesize\ttfamily Event\+::\+Event (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{std\+::string const \&}]{options }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -205,6 +225,12 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\label{class_event_a0a7c3958a8dbe24b6263cf95374cee33}} 
+\index{Event@{Event}!adc@{adc}}
+\index{adc@{adc}!Event@{Event}}
+\doxysubsubsection{adc()}
+{\footnotesize\ttfamily auto\& Event\+::adc (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_event_a0862af1471604bf30a4f50a5e028637a}} 
 \index{Event@{Event}!clear@{clear}}
 \index{clear@{clear}!Event@{Event}}
@@ -224,7 +250,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{isCalibrated()}
 {\footnotesize\ttfamily bool Event\+::is\+Calibrated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -250,11 +277,29 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=300pt]{class_event_ac0a49a4178b701a0921ade6bfb1ad143_icgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_event_a0e533090f7dced2fff1b3a6663acd841}} 
+\index{Event@{Event}!label@{label}}
+\index{label@{label}!Event@{Event}}
+\doxysubsubsection{label()}
+{\footnotesize\ttfamily auto\& Event\+::label (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_event_ae94819278665e54966a12c494fb65dbc}} 
 \index{Event@{Event}!maxSize@{maxSize}}
 \index{maxSize@{maxSize}!Event@{Event}}
 \doxysubsubsection{maxSize()}
 {\footnotesize\ttfamily \textbf{ size\+\_\+t} const\& Event\+::max\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_a8bf512de8f0a0c6cd276f53977c25d7a}} 
+\index{Event@{Event}!nrj@{nrj}}
+\index{nrj@{nrj}!Event@{Event}}
+\doxysubsubsection{nrj()}
+{\footnotesize\ttfamily auto\& Event\+::nrj (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_a3ccd6e99168f22a468a53547348e0d69}} 
+\index{Event@{Event}!nrj2@{nrj2}}
+\index{nrj2@{nrj2}!Event@{Event}}
+\doxysubsubsection{nrj2()}
+{\footnotesize\ttfamily auto\& Event\+::nrj2 (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\label{class_event_ae393238c864abbf268c5172572241778}} 
 \index{Event@{Event}!operator=@{operator=}}
@@ -268,13 +313,26 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \textbf{ Event} \& Event\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+\mbox{\label{class_event_a799fb8b56453824767b038389059a2a6}} 
+\index{Event@{Event}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Event@{Event}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily \textbf{ Hit} Event\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})}
+
+\mbox{\label{class_event_aabc19f5092b019ed9162185aeb733b3e}} 
+\index{Event@{Event}!pileup@{pileup}}
+\index{pileup@{pileup}!Event@{Event}}
+\doxysubsubsection{pileup()}
+{\footnotesize\ttfamily auto\& Event\+::pileup (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_event_a090d2a02b5c85844e1287e7e693af3a7}} 
 \index{Event@{Event}!Print@{Print}}
 \index{Print@{Print}!Event@{Event}}
 \doxysubsubsection{Print()}
 {\footnotesize\ttfamily void Event\+::\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -287,7 +345,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{push\_back()}
 {\footnotesize\ttfamily void Event\+::push\+\_\+back (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -304,13 +363,20 @@ Here is the call graph for this function\+:\nopagebreak
 
 Sometimes, we want to select pre-\/prompt events. In such case, we have to put in in front of the others. 
 
-About the timestamp of the event, we keep the same as this additionnal event is located before the first hit that really represents the \char`\"{}0\char`\"{} of the event Here is the call graph for this function\+:\nopagebreak
+About the timestamp of the event, we keep the same as this additionnal event is located before the first hit that really represents the \char`\"{}0\char`\"{} of the event Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=285pt]{class_event_a78b1cb630e7720f205a9c00e2c111102_cgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_event_a39afaa43b1fdc8219c8628aaabeddcff}} 
+\index{Event@{Event}!qdc2@{qdc2}}
+\index{qdc2@{qdc2}!Event@{Event}}
+\doxysubsubsection{qdc2()}
+{\footnotesize\ttfamily auto\& Event\+::qdc2 (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_event_a243e29bac8d969902d32a4d444fc5174}} 
 \index{Event@{Event}!reading@{reading}}
 \index{reading@{reading}!Event@{Event}}
@@ -321,18 +387,20 @@ About the timestamp of the event, we keep the same as this additionnal event is 
 
 Automatically set branches based on the presence or not of branches in the root tree. Reserved for \char`\"{}\+Nuball2\char`\"{} type of trees. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=242pt]{class_event_a243e29bac8d969902d32a4d444fc5174_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_event_a243e29bac8d969902d32a4d444fc5174_icgraph}
+\includegraphics[width=331pt]{class_event_a243e29bac8d969902d32a4d444fc5174_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_event_af08b47f89112db7279491ab1201ce82d}} 
@@ -341,7 +409,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{reading()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void Event\+::reading (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{std\+::string const \&}]{options }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -354,11 +423,12 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{setT0()}
 {\footnotesize\ttfamily void Event\+::set\+T0 (\begin{DoxyParamCaption}\item[{\textbf{ Timestamp} const \&}]{timestamp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=304pt]{class_event_afd2351e3fb971a5f061e5b1b84f78326_cgraph}
+\includegraphics[width=288pt]{class_event_afd2351e3fb971a5f061e5b1b84f78326_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_event_aadb0c0dcbb31718e69358e9c99a5b633}} 
@@ -374,6 +444,18 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=248pt]{class_event_aadb0c0dcbb31718e69358e9c99a5b633_cgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_event_ab616f6bc73ef81551865d39aeed416e0}} 
+\index{Event@{Event}!time@{time}}
+\index{time@{time}!Event@{Event}}
+\doxysubsubsection{time()}
+{\footnotesize\ttfamily auto\& Event\+::time (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_event_af5411de73ead6ecdf4de54122d6ad69c}} 
+\index{Event@{Event}!time2@{time2}}
+\index{time2@{time2}!Event@{Event}}
+\doxysubsubsection{time2()}
+{\footnotesize\ttfamily auto\& Event\+::time2 (\begin{DoxyParamCaption}\item[{int const \&}]{hit\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_event_a15a45e59b3ce25ab2b72e68578e99c51}} 
 \index{Event@{Event}!time\_ns@{time\_ns}}
 \index{time\_ns@{time\_ns}!Event@{Event}}
@@ -406,20 +488,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{timeShift\_ns()}
 {\footnotesize\ttfamily void Event\+::time\+Shift\+\_\+ns (\begin{DoxyParamCaption}\item[{double const \&}]{shift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=304pt]{class_event_aa69256b1b2f550541a1bc6104cec62d9_icgraph}
-\end{center}
-\end{figure}
 \mbox{\label{class_event_a0b93fcd8063a3c02edede96bb53b136d}} 
 \index{Event@{Event}!writting@{writting}}
 \index{writting@{writting}!Event@{Event}}
 \doxysubsubsection{writting()}
 {\footnotesize\ttfamily void Event\+::writting (\begin{DoxyParamCaption}\item[{TTree $\ast$}]{tree,  }\item[{std\+::string const \&}]{options = {\ttfamily \char`\"{}lstTeEqQ\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

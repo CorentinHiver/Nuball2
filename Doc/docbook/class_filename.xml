@@ -13,6 +13,8 @@
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
+            <listitem><para>std::string <link linkend="_class_filename_1a2f9666a4424564e529e1c9c4236397e1">c_str</link> () const</para>
+</listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_filename_1a9a5a8b12e6ffac9d53e54e6410b59c02">extension</link> () const</para>
 </listitem>
             <listitem><para><link linkend="_class_filename_1a2bba4cdf51d4f8042d55850e0699e80b">Filename</link> ()</para>
@@ -22,6 +24,8 @@
             <listitem><para><link linkend="_class_filename_1ac695bd1e796829d4a40c81111dd8935b">Filename</link> (std::string const &amp;_filename)</para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_filename_1a00a9c3c47a6c091bc1c49982c6d57233">fullName</link> () const</para>
+
+<para>Full name stands for the file name with the path nor the extension. </para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_filename_1a6d397a1dc62b7bc35bf84e6e72b9bd03">get</link> () const</para>
 </listitem>
@@ -36,6 +40,8 @@
             <listitem><para>void <link linkend="_class_filename_1a2d925b1dc8e2afbd09e729be3f3603b2">setExtension</link> (std::string const &amp;new_extension)</para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_filename_1a16a859ce80a8efeabbf8b28add13c55f">shortName</link> () const</para>
+
+<para>Short name stands for the file name withpout the path nor the extension. </para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_filename_1a46cfb960345a190b3971553c65f702b4">string</link> () const</para>
 </listitem>
@@ -93,7 +99,11 @@
 </section>
 <section>
 <title>Member Function Documentation</title>
-<anchor xml:id="_class_filename_1a9a5a8b12e6ffac9d53e54e6410b59c02"/>    <section>
+<anchor xml:id="_class_filename_1a2f9666a4424564e529e1c9c4236397e1"/>    <section>
+    <title>c_str()</title>
+<indexterm><primary>c_str</primary><secondary>Filename</secondary></indexterm>
+<indexterm><primary>Filename</primary><secondary>c_str</secondary></indexterm>
+<para><computeroutput>std::string Filename::c_str ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_filename_1a9a5a8b12e6ffac9d53e54e6410b59c02"/>    <section>
     <title>extension()</title>
 <indexterm><primary>extension</primary><secondary>Filename</secondary></indexterm>
 <indexterm><primary>Filename</primary><secondary>extension</secondary></indexterm>
@@ -132,7 +142,11 @@ Here is the caller graph for this function:<para>
     <title>fullName()</title>
 <indexterm><primary>fullName</primary><secondary>Filename</secondary></indexterm>
 <indexterm><primary>Filename</primary><secondary>fullName</secondary></indexterm>
-<para><computeroutput>std::string const&amp; Filename::fullName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>std::string const&amp; Filename::fullName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Full name stands for the file name with the path nor the extension. </para>
+</para>
+Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -214,7 +228,11 @@ Here is the caller graph for this function:<para>
     <title>shortName()</title>
 <indexterm><primary>shortName</primary><secondary>Filename</secondary></indexterm>
 <indexterm><primary>Filename</primary><secondary>shortName</secondary></indexterm>
-<para><computeroutput>std::string const&amp; Filename::shortName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>std::string const&amp; Filename::shortName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Short name stands for the file name withpout the path nor the extension. </para>
+</para>
+Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>

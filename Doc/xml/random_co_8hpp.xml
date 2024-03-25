@@ -1,0 +1,614 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="random_co_8hpp" kind="file" language="C++">
+    <compoundname>randomCo.hpp</compoundname>
+    <includes local="no">random</includes>
+    <includedby refid="lib_co_8hpp" local="yes">lib/libCo.hpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>random</label>
+      </node>
+      <node id="1">
+        <label>lib/randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="3">
+        <label>lib/Analyse/Counters.hpp</label>
+        <link refid="_analyse_2_counters_8hpp"/>
+      </node>
+      <node id="48">
+        <label>lib/Classes/RWMat.hxx</label>
+        <link refid="_r_w_mat_8hxx"/>
+      </node>
+      <node id="40">
+        <label>lib/libRoot.hpp</label>
+        <link refid="lib_root_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>lib/Modules/Faster2Histo.hpp</label>
+        <link refid="_faster2_histo_8hpp"/>
+      </node>
+      <node id="31">
+        <label>lib/Classes/RF_Manager.hpp</label>
+        <link refid="_r_f___manager_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>lib/Classes/Manip.hpp</label>
+        <link refid="_manip_8hpp"/>
+      </node>
+      <node id="23">
+        <label>lib/MTObjects/MTFasterReader.hpp</label>
+        <link refid="_m_t_faster_reader_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>lib/Classes/Nuball2Tree.hpp</label>
+        <link refid="_nuball2_tree_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>lib/Modules/EvolutionPeaks.hpp</label>
+        <link refid="_evolution_peaks_8hpp"/>
+      </node>
+      <node id="36">
+        <label>lib/Classes/Gate.hpp</label>
+        <link refid="_gate_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>lib/Analyse/DSSD.hpp</label>
+        <link refid="_d_s_s_d_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>lib/MTObjects/MTFilesManager.hpp</label>
+        <link refid="_m_t_files_manager_8hpp"/>
+      </node>
+      <node id="46">
+        <label>lib/Classes/FasterReader.hpp</label>
+        <link refid="_faster_reader_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>lib/Analyse/EventAnalyse.hpp</label>
+        <link refid="_event_analyse_8hpp"/>
+      </node>
+      <node id="12">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
+      </node>
+      <node id="45">
+        <label>lib/Classes/Hit.hpp</label>
+        <link refid="_hit_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lib/libCo.hpp</label>
+        <link refid="lib_co_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>lib/Classes/EventBuilder.hpp</label>
+        <link refid="_event_builder_8hpp"/>
+      </node>
+      <node id="27">
+        <label>lib/Analyse/Clovers.hpp</label>
+        <link refid="_clovers_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>lib/Modules/CloverSpectra.hpp</label>
+        <link refid="_clover_spectra_8hpp"/>
+      </node>
+      <node id="49">
+        <label>lib/MTObjects/MTList.hpp</label>
+        <link refid="_m_t_list_8hpp"/>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>lib/Classes/Fit.hpp</label>
+        <link refid="_fit_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>lib/Analyse/ParisCluster.hpp</label>
+        <link refid="_paris_cluster_8hpp"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>lib/Classes/Calibration.hpp</label>
+        <link refid="_calibration_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>lib/Classes/DataFile.hpp</label>
+        <link refid="_data_file_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>lib/Classes/Counters.hpp</label>
+        <link refid="_classes_2_counters_8hpp"/>
+      </node>
+      <node id="17">
+        <label>lib/Analyse/SpectraCo.hpp</label>
+        <link refid="_spectra_co_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>lib/Analyse/SpectraAlignator.hpp</label>
+        <link refid="_spectra_alignator_8hpp"/>
+      </node>
+      <node id="43">
+        <label>lib/Classes/Detectors.hpp</label>
+        <link refid="_detectors_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>lib/Classes/Event.hpp</label>
+        <link refid="_event_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>lib/Analyse/Sorted_Event.hpp</label>
+        <link refid="_sorted___event_8hpp"/>
+      </node>
+      <node id="47">
+        <label>lib/Classes/OutputTFile.hpp</label>
+        <link refid="_output_t_file_8hpp"/>
+      </node>
+      <node id="1">
+        <label>lib/randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>lib/Modules/Faster2Root.hpp</label>
+        <link refid="_faster2_root_8hpp"/>
+      </node>
+      <node id="42">
+        <label>lib/Analyse/ParisPhoswitch.hpp</label>
+        <link refid="_paris_phoswitch_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>lib/Modules/RunMatrixator.hpp</label>
+        <link refid="_run_matrixator_8hpp"/>
+      </node>
+      <node id="35">
+        <label>lib/Analyse/AnalysedSpectra.hpp</label>
+        <link refid="_analysed_spectra_8hpp"/>
+      </node>
+      <node id="21">
+        <label>lib/Classes/CoProgressBar.hpp</label>
+        <link refid="_co_progress_bar_8hpp"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>lib/Classes/CoincBuilder.hpp</label>
+        <link refid="_coinc_builder_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>lib/Classes/Builder.hpp</label>
+        <link refid="_builder_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>lib/Modules/NearLine.hpp</label>
+        <link refid="_near_line_8hpp"/>
+      </node>
+      <node id="11">
+        <label>lib/Modules/Timeshifts.hpp</label>
+        <link refid="_timeshifts_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>lib/Classes/Timewalk.hpp</label>
+        <link refid="_timewalk_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>lib/Analyse/Paris.hpp</label>
+        <link refid="_paris_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>lib/Classes/Alignator.hpp</label>
+        <link refid="_alignator_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>lib/Classes/FilesManager.hpp</label>
+        <link refid="_files_manager_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>lib/Modules/Calibrator.hpp</label>
+        <link refid="_calibrator_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>lib/MTObjects/MTRootReader.hpp</label>
+        <link refid="_m_t_root_reader_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>lib/Classes/Performances.hpp</label>
+        <link refid="_performances_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespacerandom_co">randomCo</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="random_co_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" prot="public" static="no" mutable="no">
+        <type>std::random_device</type>
+        <definition>std::random_device rd</definition>
+        <argsstring></argsstring>
+        <name>rd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/randomCo.hpp" line="6" column="20" bodyfile="lib/randomCo.hpp" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="random_co_8hpp_1a374a9a7de3fd00dceacc5de8a654c087" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::mt19937</type>
+        <definition>std::mt19937 gen</definition>
+        <argsstring>(rd())</argsstring>
+        <name>gen</name>
+        <param>
+          <type><ref refid="random_co_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" kindref="member">rd</ref>()</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/randomCo.hpp" line="7" column="14" declfile="lib/randomCo.hpp" declline="7" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="random_co_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::uniform_real_distribution&lt; double &gt;</type>
+        <definition>std::uniform_real_distribution&lt;double&gt; uniform_random_generator_double</definition>
+        <argsstring>(0, 1)</argsstring>
+        <name>uniform_random_generator_double</name>
+        <param>
+          <type>0</type>
+        </param>
+        <param>
+          <type>1</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/randomCo.hpp" line="8" column="32" declfile="lib/randomCo.hpp" declline="8" declcolumn="32"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>RANDOM_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RANDOM_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;random&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="random_co_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" refkind="member"><highlight class="normal">std::random_device<sp/><ref refid="random_co_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" kindref="member">rd</ref>;</highlight></codeline>
+<codeline lineno="7" refid="random_co_8hpp_1a374a9a7de3fd00dceacc5de8a654c087" refkind="member"><highlight class="normal">std::mt19937<sp/><ref refid="random_co_8hpp_1a374a9a7de3fd00dceacc5de8a654c087" kindref="member">gen</ref>(<ref refid="random_co_8hpp_1a7071b0092ad8c5b57d6cc40c5f803df5" kindref="member">rd</ref>());</highlight></codeline>
+<codeline lineno="8" refid="random_co_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6" refkind="member"><highlight class="normal">std::uniform_real_distribution&lt;double&gt;<sp/><ref refid="random_co_8hpp_1a4b55f3e7bc2bb11053ada6696cd821f6" kindref="member">uniform_random_generator_double</ref>(0,<sp/>1);</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>double<sp/>random_uniform()<sp/>{return<sp/>uniform_random_generator_double(gen);}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="namespacerandom_co" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespacerandom_co" kindref="compound">randomCo</ref></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="14" refid="namespacerandom_co_1a1cbd16b1a0fb6d2e1649c253da6ecd00" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>thread_local<sp/>std::mt19937<sp/><ref refid="namespacerandom_co_1a1cbd16b1a0fb6d2e1649c253da6ecd00" kindref="member">generator</ref>;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="namespacerandom_co_1a09c0c41c36066ccce76265856856dff4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="namespacerandom_co_1a09c0c41c36066ccce76265856856dff4" kindref="member">setSeed</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_seed)<sp/>{<ref refid="namespacerandom_co_1a1cbd16b1a0fb6d2e1649c253da6ecd00" kindref="member">generator</ref>.seed(_seed);}</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="19" refid="namespacerandom_co_1a48bc9803dd8f0a7515755b9b84ed3330" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="namespacerandom_co_1a48bc9803dd8f0a7515755b9b84ed3330" kindref="member">uniform_t</ref>()</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>std::uniform_real_distribution&lt;T&gt;<sp/>distribution(0,<sp/>1);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>distribution(<ref refid="namespacerandom_co_1a1cbd16b1a0fb6d2e1649c253da6ecd00" kindref="member">generator</ref>);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="26" refid="namespacerandom_co_1ae3ed73e012391122405d66b75b1d233c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="namespacerandom_co_1a48bc9803dd8f0a7515755b9b84ed3330" kindref="member">uniform_t</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>min,<sp/>T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>max)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>std::uniform_real_distribution&lt;T&gt;<sp/>distribution(min,<sp/>max);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>distribution(<ref refid="namespacerandom_co_1a1cbd16b1a0fb6d2e1649c253da6ecd00" kindref="member">generator</ref>);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="namespacerandom_co_1af7496cee21570d25ebf9babc7cf1bcae" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="namespacerandom_co_1af7496cee21570d25ebf9babc7cf1bcae" kindref="member">uniform</ref>()</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>std::uniform_real_distribution&lt;double&gt;<sp/>distribution(0,<sp/>1);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>distribution(<ref refid="namespacerandom_co_1a1cbd16b1a0fb6d2e1649c253da6ecd00" kindref="member">generator</ref>);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38" refid="namespacerandom_co_1a09df1fe62625fa364e82b64227bb2807" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="namespacerandom_co_1af7496cee21570d25ebf9babc7cf1bcae" kindref="member">uniform</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>&amp;<sp/>min,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>&amp;<sp/>max)</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>std::uniform_real_distribution&lt;double&gt;<sp/>distribution(min,<sp/>max);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>distribution(<ref refid="namespacerandom_co_1a1cbd16b1a0fb6d2e1649c253da6ecd00" kindref="member">generator</ref>);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="namespacerandom_co_1ab5d8d1aa5c84a6ca5d44c2e60cfc8c8d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="namespacerandom_co_1ab5d8d1aa5c84a6ca5d44c2e60cfc8c8d" kindref="member">gaussian</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="namespace_co_bazar_1a030309d1b093093b5fd48a5f7734018e" kindref="member">mean</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>stddev)<sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>std::normal_distribution&lt;double&gt;<sp/>distribution(<ref refid="namespace_co_bazar_1a030309d1b093093b5fd48a5f7734018e" kindref="member">mean</ref>,<sp/>stddev);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>distribution(<ref refid="namespacerandom_co_1a1cbd16b1a0fb6d2e1649c253da6ecd00" kindref="member">generator</ref>);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//RANDOM_HPP</highlight></codeline>
+    </programlisting>
+    <location file="lib/randomCo.hpp"/>
+  </compounddef>
+</doxygen>

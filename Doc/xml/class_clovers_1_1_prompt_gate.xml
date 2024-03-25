@@ -16,9 +16,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="320" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="320" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="302" endline="308">operator()</referencedby>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="284" endline="291">PromptGate</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="310" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="310" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="292" endline="298">operator()</referencedby>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="274" endline="281">PromptGate</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_prompt_gate_1a8d445ecd07d7ceb91fca8f8e98f98ec6" prot="private" static="no" mutable="no">
         <type><ref refid="_gate_8hpp_1aec153c0c98a059999caa4cfb803777c8" kindref="member">Gate</ref></type>
@@ -32,9 +32,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="322" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="322" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="302" endline="308">operator()</referencedby>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="284" endline="291">PromptGate</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="312" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="312" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="292" endline="298">operator()</referencedby>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="274" endline="281">PromptGate</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_prompt_gate_1ab8d61188e744b02341381601a2b5fd5f" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -48,9 +48,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="321" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="321" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="302" endline="308">operator()</referencedby>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="284" endline="291">PromptGate</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="311" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="311" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="292" endline="298">operator()</referencedby>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="274" endline="281">PromptGate</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_prompt_gate_1aa725929dbc349e34b8d696a2f0575540" prot="private" static="no" mutable="no">
         <type><ref refid="_gate_8hpp_1aec153c0c98a059999caa4cfb803777c8" kindref="member">Gate</ref></type>
@@ -64,9 +64,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="323" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="323" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="302" endline="308">operator()</referencedby>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="284" endline="291">PromptGate</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="313" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="313" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="292" endline="298">operator()</referencedby>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="274" endline="281">PromptGate</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_prompt_gate_1a8b8f752b98956440347786da814db71b" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -80,9 +80,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="324" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="324" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303" compoundref="_clovers_8hpp" startline="317" endline="317">intermediate_start</referencedby>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="284" endline="291">PromptGate</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="314" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="314" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303" compoundref="_clovers_8hpp" startline="307" endline="307">intermediate_start</referencedby>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="274" endline="281">PromptGate</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_prompt_gate_1a5f72ef2730a18d95cbb44797802bdc0b" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -96,9 +96,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="325" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="325" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303" compoundref="_clovers_8hpp" startline="317" endline="317">intermediate_start</referencedby>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="284" endline="291">PromptGate</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="315" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="315" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303" compoundref="_clovers_8hpp" startline="307" endline="307">intermediate_start</referencedby>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="274" endline="281">PromptGate</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_prompt_gate_1a2e853072f112b7a5d630b0672e19958d" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -112,9 +112,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="326" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="326" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110" compoundref="_clovers_8hpp" startline="318" endline="318">intermediate_stop</referencedby>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="284" endline="291">PromptGate</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="316" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="316" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110" compoundref="_clovers_8hpp" startline="308" endline="308">intermediate_stop</referencedby>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="274" endline="281">PromptGate</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_prompt_gate_1a9e5b930b3774e9f611444bf7a3c6714c" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -128,9 +128,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="327" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="327" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110" compoundref="_clovers_8hpp" startline="318" endline="318">intermediate_stop</referencedby>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="284" endline="291">PromptGate</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="317" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="317" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110" compoundref="_clovers_8hpp" startline="308" endline="308">intermediate_stop</referencedby>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" compoundref="_clovers_8hpp" startline="274" endline="281">PromptGate</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -149,8 +149,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="310" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="310" bodyend="313"/>
-        <references refid="class_clovers_1a3189bfc58392c24d6a3dee2ce1a4c663" compoundref="_clovers_8hpp" startline="278">Clovers::promptGeGate</references>
+        <location file="lib/Analyse/Clovers.hpp" line="300" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="300" bodyend="303"/>
+        <references refid="class_clovers_1a3189bfc58392c24d6a3dee2ce1a4c663" compoundref="_clovers_8hpp" startline="268">Clovers::promptGeGate</references>
       </memberdef>
       <memberdef kind="function" id="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -174,14 +174,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="302" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="302" bodyend="308"/>
-        <references refid="class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303" compoundref="_clovers_8hpp" startline="317" endline="317">intermediate_start</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110" compoundref="_clovers_8hpp" startline="318" endline="318">intermediate_stop</references>
-        <references refid="class_gate__t_1a6ece805d91b1c54d4b84cc36e652bc0f" compoundref="_gate_8hpp" startline="25" endline="25">Gate_t&lt; T &gt;::isIn</references>
-        <references refid="class_clovers_1_1_prompt_gate_1ac3c7946fdddfaea3d944d3a53f77788c" compoundref="_clovers_8hpp" startline="320">m_high_E</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a8d445ecd07d7ceb91fca8f8e98f98ec6" compoundref="_clovers_8hpp" startline="322">m_high_E_gate</references>
-        <references refid="class_clovers_1_1_prompt_gate_1ab8d61188e744b02341381601a2b5fd5f" compoundref="_clovers_8hpp" startline="321">m_low_E</references>
-        <references refid="class_clovers_1_1_prompt_gate_1aa725929dbc349e34b8d696a2f0575540" compoundref="_clovers_8hpp" startline="323">m_low_E_gate</references>
+        <location file="lib/Analyse/Clovers.hpp" line="292" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="292" bodyend="298"/>
+        <references refid="class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303" compoundref="_clovers_8hpp" startline="307" endline="307">intermediate_start</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110" compoundref="_clovers_8hpp" startline="308" endline="308">intermediate_stop</references>
+        <references refid="class_gate__t_1a6ece805d91b1c54d4b84cc36e652bc0f" compoundref="_gate_8hpp" startline="30" endline="30">Gate_t&lt; T &gt;::isIn</references>
+        <references refid="class_clovers_1_1_prompt_gate_1ac3c7946fdddfaea3d944d3a53f77788c" compoundref="_clovers_8hpp" startline="310">m_high_E</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a8d445ecd07d7ceb91fca8f8e98f98ec6" compoundref="_clovers_8hpp" startline="312">m_high_E_gate</references>
+        <references refid="class_clovers_1_1_prompt_gate_1ab8d61188e744b02341381601a2b5fd5f" compoundref="_clovers_8hpp" startline="311">m_low_E</references>
+        <references refid="class_clovers_1_1_prompt_gate_1aa725929dbc349e34b8d696a2f0575540" compoundref="_clovers_8hpp" startline="313">m_low_E_gate</references>
       </memberdef>
       <memberdef kind="function" id="class_clovers_1_1_prompt_gate_1a35cb13d9f04935c2d43cc24a9773a406" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -194,17 +194,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="284" column="5" bodyfile="lib/Analyse/Clovers.hpp" bodystart="284" bodyend="291"/>
-        <references refid="class_clovers_1_1_prompt_gate_1ac3c7946fdddfaea3d944d3a53f77788c" compoundref="_clovers_8hpp" startline="320">m_high_E</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a8d445ecd07d7ceb91fca8f8e98f98ec6" compoundref="_clovers_8hpp" startline="322">m_high_E_gate</references>
-        <references refid="class_clovers_1_1_prompt_gate_1ab8d61188e744b02341381601a2b5fd5f" compoundref="_clovers_8hpp" startline="321">m_low_E</references>
-        <references refid="class_clovers_1_1_prompt_gate_1aa725929dbc349e34b8d696a2f0575540" compoundref="_clovers_8hpp" startline="323">m_low_E_gate</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a8b8f752b98956440347786da814db71b" compoundref="_clovers_8hpp" startline="324">m_start_coeff</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a5f72ef2730a18d95cbb44797802bdc0b" compoundref="_clovers_8hpp" startline="325">m_start_intercept</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a2e853072f112b7a5d630b0672e19958d" compoundref="_clovers_8hpp" startline="326">m_stop_coeff</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a9e5b930b3774e9f611444bf7a3c6714c" compoundref="_clovers_8hpp" startline="327">m_stop_intercept</references>
-        <references refid="class_gate__t_1a1c49ae7aa44c27b9357e718432c2f93a" compoundref="_gate_8hpp" startline="27">Gate_t&lt; T &gt;::start</references>
-        <references refid="class_gate__t_1aa48ef2734b80f70fbbd37f2760e18724" compoundref="_gate_8hpp" startline="28">Gate_t&lt; T &gt;::stop</references>
+        <location file="lib/Analyse/Clovers.hpp" line="274" column="5" bodyfile="lib/Analyse/Clovers.hpp" bodystart="274" bodyend="281"/>
+        <references refid="class_clovers_1_1_prompt_gate_1ac3c7946fdddfaea3d944d3a53f77788c" compoundref="_clovers_8hpp" startline="310">m_high_E</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a8d445ecd07d7ceb91fca8f8e98f98ec6" compoundref="_clovers_8hpp" startline="312">m_high_E_gate</references>
+        <references refid="class_clovers_1_1_prompt_gate_1ab8d61188e744b02341381601a2b5fd5f" compoundref="_clovers_8hpp" startline="311">m_low_E</references>
+        <references refid="class_clovers_1_1_prompt_gate_1aa725929dbc349e34b8d696a2f0575540" compoundref="_clovers_8hpp" startline="313">m_low_E_gate</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a8b8f752b98956440347786da814db71b" compoundref="_clovers_8hpp" startline="314">m_start_coeff</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a5f72ef2730a18d95cbb44797802bdc0b" compoundref="_clovers_8hpp" startline="315">m_start_intercept</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a2e853072f112b7a5d630b0672e19958d" compoundref="_clovers_8hpp" startline="316">m_stop_coeff</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a9e5b930b3774e9f611444bf7a3c6714c" compoundref="_clovers_8hpp" startline="317">m_stop_intercept</references>
+        <references refid="class_gate__t_1a1c49ae7aa44c27b9357e718432c2f93a" compoundref="_gate_8hpp" startline="32">Gate_t&lt; T &gt;::start</references>
+        <references refid="class_gate__t_1aa48ef2734b80f70fbbd37f2760e18724" compoundref="_gate_8hpp" startline="33">Gate_t&lt; T &gt;::stop</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -223,10 +223,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="317" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="317" bodyend="317"/>
-        <references refid="class_clovers_1_1_prompt_gate_1a8b8f752b98956440347786da814db71b" compoundref="_clovers_8hpp" startline="324">m_start_coeff</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a5f72ef2730a18d95cbb44797802bdc0b" compoundref="_clovers_8hpp" startline="325">m_start_intercept</references>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="302" endline="308">operator()</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="307" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="307" bodyend="307"/>
+        <references refid="class_clovers_1_1_prompt_gate_1a8b8f752b98956440347786da814db71b" compoundref="_clovers_8hpp" startline="314">m_start_coeff</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a5f72ef2730a18d95cbb44797802bdc0b" compoundref="_clovers_8hpp" startline="315">m_start_intercept</references>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="292" endline="298">operator()</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>float</type>
@@ -243,10 +243,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="318" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="318" bodyend="318"/>
-        <references refid="class_clovers_1_1_prompt_gate_1a2e853072f112b7a5d630b0672e19958d" compoundref="_clovers_8hpp" startline="326">m_stop_coeff</references>
-        <references refid="class_clovers_1_1_prompt_gate_1a9e5b930b3774e9f611444bf7a3c6714c" compoundref="_clovers_8hpp" startline="327">m_stop_intercept</references>
-        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="302" endline="308">operator()</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="308" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="308" bodyend="308"/>
+        <references refid="class_clovers_1_1_prompt_gate_1a2e853072f112b7a5d630b0672e19958d" compoundref="_clovers_8hpp" startline="316">m_stop_coeff</references>
+        <references refid="class_clovers_1_1_prompt_gate_1a9e5b930b3774e9f611444bf7a3c6714c" compoundref="_clovers_8hpp" startline="317">m_stop_intercept</references>
+        <referencedby refid="class_clovers_1_1_prompt_gate_1a0361a1e0c672d0302e126e14c5dc59a3" compoundref="_clovers_8hpp" startline="292" endline="298">operator()</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -267,7 +267,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="lib/Analyse/Clovers.hpp" line="281" column="3" bodyfile="lib/Analyse/Clovers.hpp" bodystart="282" bodyend="328"/>
+    <location file="lib/Analyse/Clovers.hpp" line="271" column="3" bodyfile="lib/Analyse/Clovers.hpp" bodystart="272" bodyend="318"/>
     <listofallmembers>
       <member refid="class_clovers_1_1_prompt_gate_1a781245b0785affec4dc3acb3c40ed303" prot="private" virt="non-virtual"><scope>Clovers::PromptGate</scope><name>intermediate_start</name></member>
       <member refid="class_clovers_1_1_prompt_gate_1a98e79d17cebda167160ad84138900110" prot="private" virt="non-virtual"><scope>Clovers::PromptGate</scope><name>intermediate_stop</name></member>

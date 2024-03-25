@@ -1,14 +1,15 @@
 <map id="Clovers::Clovers" name="Clovers::Clovers">
-<area shape="rect" id="node1" title=" " alt="" coords="5,170,133,196"/>
-<area shape="rect" id="node2" href="$class_clovers.html#a10afb56c3c4311007df55386dacba543" title=" " alt="" coords="207,94,350,120"/>
-<area shape="rect" id="node3" href="$class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="190,144,367,171"/>
-<area shape="rect" id="node10" href="$class_clovers.html#a60b7747d54a60759b4eae02deac50f95" title=" " alt="" coords="221,195,337,222"/>
-<area shape="rect" id="node12" href="$class_clover_module.html#afbff08fa0ebf248267295197f33cbd4b" title=" " alt="" coords="181,246,376,288"/>
-<area shape="rect" id="node4" href="$class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0" title=" " alt="" coords="651,43,788,70"/>
-<area shape="rect" id="node5" href="$class_clovers.html#a4940a14c796f0825697af29156644e9c" title=" " alt="" coords="427,43,600,70"/>
-<area shape="rect" id="node6" href="$class_clovers.html#a434508059d1a1f8e1c31dc793505cdc7" title=" " alt="" coords="432,94,595,120"/>
-<area shape="rect" id="node7" href="$class_clovers.html#a9b2bcd83b6884936745b06346b121b73" title=" " alt="" coords="424,144,603,171"/>
-<area shape="rect" id="node8" href="$class_clovers.html#ad047177f1403bb65359a6ad07ba4473a" title=" " alt="" coords="424,195,603,222"/>
-<area shape="rect" id="node9" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="487,246,539,272"/>
-<area shape="rect" id="node11" href="$class_static_vector.html#a9c5d814a81b352ebbb5d8a07cbdd2699" title=" " alt="" coords="443,296,583,323"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,141,133,168"/>
+<area shape="rect" id="node2" href="$class_clovers.html#a10afb56c3c4311007df55386dacba543" title=" " alt="" coords="207,65,350,92"/>
+<area shape="rect" id="node3" href="$class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="190,116,367,143"/>
+<area shape="rect" id="node11" href="$class_clovers.html#a60b7747d54a60759b4eae02deac50f95" title=" " alt="" coords="221,167,337,193"/>
+<area shape="rect" id="node13" href="$class_clover_module.html#afbff08fa0ebf248267295197f33cbd4b" title=" " alt="" coords="181,218,376,259"/>
+<area shape="rect" id="node4" href="$class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0" title=" " alt="" coords="651,40,788,67"/>
+<area shape="rect" id="node5" href="$class_clovers.html#a4940a14c796f0825697af29156644e9c" title=" " alt="" coords="427,40,600,67"/>
+<area shape="rect" id="node6" href="$class_clovers.html#a434508059d1a1f8e1c31dc793505cdc7" title=" " alt="" coords="432,91,595,117"/>
+<area shape="rect" id="node7" href="$class_clovers.html#a9b2bcd83b6884936745b06346b121b73" title=" " alt="" coords="424,141,603,168"/>
+<area shape="rect" id="node8" href="$class_clovers.html#ad047177f1403bb65359a6ad07ba4473a" title=" " alt="" coords="424,192,603,219"/>
+<area shape="rect" id="node9" href="$lib_co_8hpp.html#acffb7404540d3e0a654fd7929081bb70" title=" " alt="" coords="654,167,785,193"/>
+<area shape="rect" id="node10" href="$lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226" title="Casts a number into unsigned char (uchar)" alt="" coords="673,217,765,244"/>
+<area shape="rect" id="node12" href="$class_static_vector.html#a9c5d814a81b352ebbb5d8a07cbdd2699" title=" " alt="" coords="443,243,583,269"/>
 </map>

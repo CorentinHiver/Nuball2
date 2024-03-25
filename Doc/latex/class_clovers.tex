@@ -11,7 +11,8 @@ Analyse the clovers in the event.
 
 
 
-Collaboration diagram for Clovers\+:\nopagebreak
+Collaboration diagram for Clovers\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -67,8 +68,8 @@ auto const  \& \textbf{ size} () const
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \textbf{ Initialize\+Arrays} ()
-\begin{DoxyCompactList}\small\item\em Static initialize. Allows one to use the arrays event if no object has been instantiated. \end{DoxyCompactList}\item 
+static void \textbf{ Initialise\+Arrays} ()
+\begin{DoxyCompactList}\small\item\em Static Initialise. Allows one to use the arrays event if no object has been instantiated. \end{DoxyCompactList}\item 
 static bool \textbf{ is\+\_\+clover} (\textbf{ Label} const \&l)
 \item 
 static bool \textbf{ is\+\_\+clover\+\_\+\+BGO} (\textbf{ Label} const \&l)
@@ -167,9 +168,9 @@ double \textbf{ tot\+Ge\+\_\+prompt} = -\/0.\+1
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static std\+::array$<$ \textbf{ uchar}, 1000 $>$ \textbf{ cristaux\+\_\+index}
+static std\+::array$<$ \textbf{ uchar}, \textbf{ nb\+\_\+det} $>$ \textbf{ cristaux\+\_\+index}
 \item 
-static std\+::array$<$ \textbf{ uchar}, 1000 $>$ \textbf{ cristaux\+\_\+index\+\_\+\+BGO}
+static std\+::array$<$ \textbf{ uchar}, \textbf{ nb\+\_\+det} $>$ \textbf{ cristaux\+\_\+index\+\_\+\+BGO}
 \item 
 static \textbf{ Gates} \textbf{ delayed\+BGOgate} = \{\{60.f, 145.f\}\}
 \item 
@@ -177,13 +178,15 @@ static \textbf{ Gates} \textbf{ delayed\+Ge\+Gate} = \{\{60.f, 145.f\}\}
 \item 
 static float \textbf{ Emin} = 5.
 \item 
-static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+BGO}
+static std\+::array$<$ bool, \textbf{ nb\+\_\+det} $>$ \textbf{ is\+BGO}
 \item 
-static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+Clover}
+static std\+::array$<$ bool, \textbf{ nb\+\_\+det} $>$ \textbf{ is\+Clover}
 \item 
-static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+Ge}
+static std\+::array$<$ bool, \textbf{ nb\+\_\+det} $>$ \textbf{ is\+Ge}
 \item 
-static std\+::array$<$ \textbf{ uchar}, 1000 $>$ \textbf{ labels}
+static std\+::array$<$ \textbf{ uchar}, \textbf{ nb\+\_\+det} $>$ \textbf{ labels}
+\item 
+static constexpr int \textbf{ nb\+\_\+det} = 1000
 \item 
 static \textbf{ Gate} \textbf{ prompt\+BGOgate} = \{-\/20.f, 10.f \}
 \item 
@@ -192,7 +195,7 @@ static \textbf{ Gate} \textbf{ prompt\+Ge\+Gate} = \{-\/20.f, 10.f \}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \textbf{ s\+\_\+initialised} = false
+static thread\+\_\+local bool \textbf{ s\+\_\+initialised} = false
 \item 
 static bool \textbf{ s\+\_\+time\+\_\+ps} = false
 \end{DoxyCompactItemize}
@@ -219,7 +222,7 @@ Typical use case \+: \begin{DoxyVerb}   // Open tree...
      }
    }
 \end{DoxyVerb}
- This class is Thread Safe ! 
+ 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\label{class_clovers_addcd7785b41aec6be8988166a5b04fa0}} 
@@ -228,7 +231,8 @@ Typical use case \+: \begin{DoxyVerb}   // Open tree...
 \doxysubsubsection{Clovers()}
 {\footnotesize\ttfamily Clovers\+::\+Clovers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -251,7 +255,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_clovers_a523aad5d019f23144292c0e23067a43b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -295,14 +300,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{Fill()}
 {\footnotesize\ttfamily bool Clovers\+::\+Fill (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event,  }\item[{\textbf{ size\+\_\+t} const \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_clovers_ab1394e718791a5016aa3e0a19828465c_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -315,7 +322,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{FillFast()}
 {\footnotesize\ttfamily bool Clovers\+::\+Fill\+Fast (\begin{DoxyParamCaption}\item[{\textbf{ Event} const \&}]{event,  }\item[{\textbf{ size\+\_\+t} const \&}]{hit\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -329,28 +337,30 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=312pt]{class_clovers_a5f280f8b6d043a949b726c7ff2b1e019_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a}} 
-\index{Clovers@{Clovers}!InitializeArrays@{InitializeArrays}}
-\index{InitializeArrays@{InitializeArrays}!Clovers@{Clovers}}
-\doxysubsubsection{InitializeArrays()}
-{\footnotesize\ttfamily static void Clovers\+::\+Initialize\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+\mbox{\label{class_clovers_aaeeef6197466b4fb5e445e5742bdf6c7}} 
+\index{Clovers@{Clovers}!InitialiseArrays@{InitialiseArrays}}
+\index{InitialiseArrays@{InitialiseArrays}!Clovers@{Clovers}}
+\doxysubsubsection{InitialiseArrays()}
+{\footnotesize\ttfamily static void Clovers\+::\+Initialise\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
-Static initialize. Allows one to use the arrays event if no object has been instantiated. 
+Static Initialise. Allows one to use the arrays event if no object has been instantiated. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_cgraph}
+\includegraphics[width=350pt]{class_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=345pt]{class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_icgraph}
+\includegraphics[width=345pt]{class_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_clovers_a9c28e72706c325a4fe3b0aab61c0bfe0}} 
@@ -359,7 +369,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{is\_clover()}
 {\footnotesize\ttfamily static bool Clovers\+::is\+\_\+clover (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -379,7 +390,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=349pt]{class_clovers_a4940a14c796f0825697af29156644e9c_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -399,7 +411,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=341pt]{class_clovers_a434508059d1a1f8e1c31dc793505cdc7_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -424,7 +437,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{label\_to\_clover()}
 {\footnotesize\ttfamily static \textbf{ uchar} Clovers\+::label\+\_\+to\+\_\+clover (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -437,7 +451,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{label\_to\_cristal()}
 {\footnotesize\ttfamily \textbf{ uchar} Clovers\+::label\+\_\+to\+\_\+cristal (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_clovers_ad047177f1403bb65359a6ad07ba4473a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -475,7 +498,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{PrintClean()}
 {\footnotesize\ttfamily void Clovers\+::\+Print\+Clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -495,7 +519,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=308pt]{class_clovers_a60b7747d54a60759b4eae02deac50f95_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -518,14 +543,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Fills the Clover\+Modules for a whole event. 
 
-Two modes \+: 1 \+: normal mode, skip the compton cleaning 2 \+: new mode Here is the call graph for this function\+:\nopagebreak
+Two modes \+: 1 \+: normal mode, skip the compton cleaning 2 \+: new mode Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_clovers_a264432ef7231d65b77e744858374b8e1_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -542,7 +569,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Fills the Clover\+Modules for a whole event. 
 
-Two modes \+: 1 \+: normal mode, skip the compton cleaning 2 \+: new mode Here is the call graph for this function\+:\nopagebreak
+Two modes \+: 1 \+: normal mode, skip the compton cleaning 2 \+: new mode Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -568,7 +596,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{timePs()}
 {\footnotesize\ttfamily static void Clovers\+::time\+Ps (\begin{DoxyParamCaption}\item[{bool const \&}]{time\+\_\+ps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -608,17 +637,17 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{cristaux\_BGO}
 {\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::cristaux\+\_\+\+BGO = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(48)}
 
-\mbox{\label{class_clovers_a899c8b03a2cf2772aa085100292b738e}} 
+\mbox{\label{class_clovers_aaf1a13c67031efd703a4001cdc6df402}} 
 \index{Clovers@{Clovers}!cristaux\_index@{cristaux\_index}}
 \index{cristaux\_index@{cristaux\_index}!Clovers@{Clovers}}
 \doxysubsubsection{cristaux\_index}
-{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, 1000 $>$ Clovers\+::cristaux\+\_\+index\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, \textbf{ Clovers\+::nb\+\_\+det} $>$ Clovers\+::cristaux\+\_\+index\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\label{class_clovers_a8c76fc2f276e19d4b7a8cc70c9f9cebc}} 
+\mbox{\label{class_clovers_abbd356b154fa2369acffc83cca9a6204}} 
 \index{Clovers@{Clovers}!cristaux\_index\_BGO@{cristaux\_index\_BGO}}
 \index{cristaux\_index\_BGO@{cristaux\_index\_BGO}!Clovers@{Clovers}}
 \doxysubsubsection{cristaux\_index\_BGO}
-{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, 1000 $>$ Clovers\+::cristaux\+\_\+index\+\_\+\+BGO\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, \textbf{ Clovers\+::nb\+\_\+det} $>$ Clovers\+::cristaux\+\_\+index\+\_\+\+BGO\hspace{0.3cm}{\ttfamily [static]}}
 
 \mbox{\label{class_clovers_a75da7859463f1478187c7f3f13d5f5d7}} 
 \index{Clovers@{Clovers}!cristaux\_nrj@{cristaux\_nrj}}
@@ -734,35 +763,41 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{Hits}
 {\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Hits = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
 
-\mbox{\label{class_clovers_aabda84c85d5315fe8d1f37ba5f4e02c3}} 
+\mbox{\label{class_clovers_ab911b0e211d1222b38039f0d23018754}} 
 \index{Clovers@{Clovers}!isBGO@{isBGO}}
 \index{isBGO@{isBGO}!Clovers@{Clovers}}
 \doxysubsubsection{isBGO}
-{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ Clovers\+::is\+BGO\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily std\+::array$<$ bool, \textbf{ Clovers\+::nb\+\_\+det} $>$ Clovers\+::is\+BGO\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\label{class_clovers_a2f696c2c36f8f152505dedee19be2ca0}} 
+\mbox{\label{class_clovers_a687d74db6672d500ea654b1829b793ed}} 
 \index{Clovers@{Clovers}!isClover@{isClover}}
 \index{isClover@{isClover}!Clovers@{Clovers}}
 \doxysubsubsection{isClover}
-{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ Clovers\+::is\+Clover\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily std\+::array$<$ bool, \textbf{ Clovers\+::nb\+\_\+det} $>$ Clovers\+::is\+Clover\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\label{class_clovers_a8fd25933d58fec7ea47ed1a7ba610ed3}} 
+\mbox{\label{class_clovers_a1ec1095c6c79a2b350a8b97faf93c454}} 
 \index{Clovers@{Clovers}!isGe@{isGe}}
 \index{isGe@{isGe}!Clovers@{Clovers}}
 \doxysubsubsection{isGe}
-{\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ Clovers\+::is\+Ge\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily std\+::array$<$ bool, \textbf{ Clovers\+::nb\+\_\+det} $>$ Clovers\+::is\+Ge\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\label{class_clovers_ae7bc9c33c4a997ef7cf615af95059a0c}} 
+\mbox{\label{class_clovers_a159566fba0cdaa0508d8049c12b7626c}} 
 \index{Clovers@{Clovers}!labels@{labels}}
 \index{labels@{labels}!Clovers@{Clovers}}
 \doxysubsubsection{labels}
-{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, 1000 $>$ Clovers\+::labels\hspace{0.3cm}{\ttfamily [static]}}
+{\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, \textbf{ Clovers\+::nb\+\_\+det} $>$ Clovers\+::labels\hspace{0.3cm}{\ttfamily [static]}}
 
 \mbox{\label{class_clovers_ad07746b708cc9bea3ef6ed4370d928b9}} 
 \index{Clovers@{Clovers}!m\_clovers@{m\_clovers}}
 \index{m\_clovers@{m\_clovers}!Clovers@{Clovers}}
 \doxysubsubsection{m\_clovers}
 {\footnotesize\ttfamily std\+::vector$<$\textbf{ Clover\+Module}$>$ Clovers\+::m\+\_\+clovers}
+
+\mbox{\label{class_clovers_a4ff3a807d72cc3c8e51e10d96184f0a6}} 
+\index{Clovers@{Clovers}!nb\_det@{nb\_det}}
+\index{nb\_det@{nb\_det}!Clovers@{Clovers}}
+\doxysubsubsection{nb\_det}
+{\footnotesize\ttfamily constexpr int Clovers\+::nb\+\_\+det = 1000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
 
 \mbox{\label{class_clovers_aebe6be652c1225409f400b3961ea9582}} 
 \index{Clovers@{Clovers}!PromptBGO@{PromptBGO}}
@@ -836,11 +871,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{RejectedGe}
 {\footnotesize\ttfamily \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$ Clovers\+::\+Rejected\+Ge = \textbf{ Static\+Vector}$<$\textbf{ uchar}$>$(24)}
 
-\mbox{\label{class_clovers_a90e876d664b89f0b8b46f4ed07ecd6fe}} 
+\mbox{\label{class_clovers_a8ab8ca513d60be7c305ca022e83c96b2}} 
 \index{Clovers@{Clovers}!s\_initialised@{s\_initialised}}
 \index{s\_initialised@{s\_initialised}!Clovers@{Clovers}}
 \doxysubsubsection{s\_initialised}
-{\footnotesize\ttfamily bool Clovers\+::s\+\_\+initialised = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+{\footnotesize\ttfamily thread\+\_\+local bool Clovers\+::s\+\_\+initialised = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 \mbox{\label{class_clovers_a52066e9d7cf040173f1790470bf9afff}} 
 \index{Clovers@{Clovers}!s\_time\_ps@{s\_time\_ps}}

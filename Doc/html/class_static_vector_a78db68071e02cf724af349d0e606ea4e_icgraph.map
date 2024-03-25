@@ -1,7 +1,7 @@
 <map id="StaticVector::begin" name="StaticVector::begin">
 <area shape="rect" id="node1" title="Return iterator to the beginning of the vector." alt="" coords="1752,103,1896,130"/>
 <area shape="rect" id="node2" href="$class_static_vector.html#ad756be87d5c09054f47d40e38ce4b45f" title="Does the vector contain element e ?" alt="" coords="1573,103,1704,130"/>
-<area shape="rect" id="node3" href="$class_static_vector.html#ac0b86d749f8e35274fbac0506c050465" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="1387,96,1525,137"/>
+<area shape="rect" id="node3" href="$class_static_vector.html#ae9a13402fed613a29197e99ce20396f8" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="1387,96,1525,137"/>
 <area shape="rect" id="node4" href="$class_counters.html#a438d855f700f802261df045b1f52723e" title=" " alt="" coords="1171,27,1339,54"/>
 <area shape="rect" id="node5" href="$class_clovers.html#ab1394e718791a5016aa3e0a19828465c" title=" " alt="" coords="1205,78,1304,105"/>
 <area shape="rect" id="node16" href="$class_clovers.html#a5f280f8b6d043a949b726c7ff2b1e019" title=" " alt="" coords="1193,129,1317,155"/>
@@ -15,7 +15,7 @@
 <area shape="rect" id="node11" href="$class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="461,71,639,112"/>
 <area shape="rect" id="node13" href="$class_clover_spectra.html#ac087194079e7879a2824f4488db96512" title=" " alt="" coords="449,136,651,177"/>
 <area shape="rect" id="node14" href="$class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="231,143,401,170"/>
-<area shape="rect" id="node15" href="$class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,143,183,170"/>
+<area shape="rect" id="node15" href="$class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="5,143,183,170"/>
 <area shape="rect" id="node17" href="$class_clovers.html#a947342842702e2f91a86d0847b15ba3a" title="Fills the CloverModules for a whole event." alt="" coords="973,129,1111,155"/>
 <area shape="rect" id="node19" href="$class_counters.html#acebc5e99a89d9fe257917c46b3101999" title=" " alt="" coords="961,179,1123,206"/>
 </map>

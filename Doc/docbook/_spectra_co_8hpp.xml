@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__spectra_co_8hpp" xml:lang="en-US">
+<title>lib/Analyse/SpectraCo.hpp File Reference</title>
+<indexterm><primary>lib/Analyse/SpectraCo.hpp</primary></indexterm>
+<programlisting>#include &quot;../libRoot.hpp&quot;
+#include &quot;Recalibration.hpp&quot;
+#include &quot;../Classes/Calibration.hpp&quot;
+</programlisting>Include dependency graph for SpectraCo.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_spectra_co_1_1_histo_null">SpectraCo::HistoNull</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_spectra_co_1_1_histo_zombie">SpectraCo::HistoZombie</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_my_error">MyError</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_spectra_co_1_1_size_missmatch">SpectraCo::SizeMissmatch</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_spectra_co">SpectraCo</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e">SpectraPoint</link> = std::pair&lt; int, double &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="__spectra_co_8hpp_1a3a08928d322f56dd109a6d6fdff241c7">SpectraPoints</link> = std::vector&lt; <link linkend="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e">SpectraPoint</link> &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="__spectra_co_8hpp_1ab40ef30166a4d0b3f315e6b365bb96c6">goingAbove</link> (std::vector&lt; double &gt; &amp;m_spectra, int &amp;bin, int const &amp;threshold, int const &amp;nb_above)</para>
+
+<para>Returns the position where the histogram goes under the threshold. </para>
+</listitem>
+            <listitem><para>bool <link linkend="__spectra_co_8hpp_1a2db236fee001966b9a9a303b1096182b">goingBelow</link> (std::vector&lt; double &gt; &amp;m_spectra, int &amp;bin, int const &amp;threshold, int const &amp;nb_below)</para>
+
+<para>Returns the position where the histogram goes under the threshold. </para>
+</listitem>
+            <listitem><para><link linkend="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e">SpectraPoint</link> <link linkend="__spectra_co_8hpp_1a83ac1a487b3da916f985b967215f76a4">maximum_in_range</link> (std::vector&lt; double &gt; &amp;m_spectra, int bin_min, int const &amp;bin_max)</para>
+</listitem>
+            <listitem><para><link linkend="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e">SpectraPoint</link> <link linkend="__spectra_co_8hpp_1abdc3f87ff631c70010f12fd72339b8c8">minimum_in_range</link> (std::vector&lt; double &gt; &amp;m_spectra, int bin_min, int const &amp;bin_max)</para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="__spectra_co_8hpp_1aca2246688a20da3a38fe2a0f9cd74e90">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_class_spectra_co">SpectraCo</link> const &amp;spectra)</para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>std::string <link linkend="__spectra_co_8hpp_1ad3085c55da700fb2917875d8efe0b377">type_of&lt; SpectraCo &gt;</link> (<link linkend="_class_spectra_co">SpectraCo</link> const &amp;spectra)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e"/>    <section>
+    <title>SpectraPoint</title>
+<indexterm><primary>SpectraPoint</primary><secondary>SpectraCo.hpp</secondary></indexterm>
+<indexterm><primary>SpectraCo.hpp</primary><secondary>SpectraPoint</secondary></indexterm>
+<para><computeroutput>using <link linkend="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e">SpectraPoint</link> =  std::pair&lt;int, double&gt;</computeroutput></para>    </section><anchor xml:id="__spectra_co_8hpp_1a3a08928d322f56dd109a6d6fdff241c7"/>    <section>
+    <title>SpectraPoints</title>
+<indexterm><primary>SpectraPoints</primary><secondary>SpectraCo.hpp</secondary></indexterm>
+<indexterm><primary>SpectraCo.hpp</primary><secondary>SpectraPoints</secondary></indexterm>
+<para><computeroutput>using <link linkend="__spectra_co_8hpp_1a3a08928d322f56dd109a6d6fdff241c7">SpectraPoints</link> =  std::vector&lt;<link linkend="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e">SpectraPoint</link>&gt;</computeroutput></para></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__spectra_co_8hpp_1ab40ef30166a4d0b3f315e6b365bb96c6"/>    <section>
+    <title>goingAbove()</title>
+<indexterm><primary>goingAbove</primary><secondary>SpectraCo.hpp</secondary></indexterm>
+<indexterm><primary>SpectraCo.hpp</primary><secondary>goingAbove</secondary></indexterm>
+<para><computeroutput>bool goingAbove (std::vector&lt; double &gt; &amp; m_spectra, int &amp; bin, int const &amp; threshold, int const &amp; nb_above)</computeroutput></para><para>
+
+<para>Returns the position where the histogram goes under the threshold. </para>
+</para>
+
+<para>Must start above threshold. There must be at least nb_below points below the threshold </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp_ab40ef30166a4d0b3f315e6b365bb96c6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp_ab40ef30166a4d0b3f315e6b365bb96c6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__spectra_co_8hpp_1a2db236fee001966b9a9a303b1096182b"/>    <section>
+    <title>goingBelow()</title>
+<indexterm><primary>goingBelow</primary><secondary>SpectraCo.hpp</secondary></indexterm>
+<indexterm><primary>SpectraCo.hpp</primary><secondary>goingBelow</secondary></indexterm>
+<para><computeroutput>bool goingBelow (std::vector&lt; double &gt; &amp; m_spectra, int &amp; bin, int const &amp; threshold, int const &amp; nb_below)</computeroutput></para><para>
+
+<para>Returns the position where the histogram goes under the threshold. </para>
+</para>
+
+<para>Must start above threshold. There must be at least nb_below points below the threshold </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp_a2db236fee001966b9a9a303b1096182b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp_a2db236fee001966b9a9a303b1096182b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__spectra_co_8hpp_1a83ac1a487b3da916f985b967215f76a4"/>    <section>
+    <title>maximum_in_range()</title>
+<indexterm><primary>maximum_in_range</primary><secondary>SpectraCo.hpp</secondary></indexterm>
+<indexterm><primary>SpectraCo.hpp</primary><secondary>maximum_in_range</secondary></indexterm>
+<para><computeroutput><link linkend="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e">SpectraPoint</link> maximum_in_range (std::vector&lt; double &gt; &amp; m_spectra, int bin_min, int const &amp; bin_max)</computeroutput></para>    </section><anchor xml:id="__spectra_co_8hpp_1abdc3f87ff631c70010f12fd72339b8c8"/>    <section>
+    <title>minimum_in_range()</title>
+<indexterm><primary>minimum_in_range</primary><secondary>SpectraCo.hpp</secondary></indexterm>
+<indexterm><primary>SpectraCo.hpp</primary><secondary>minimum_in_range</secondary></indexterm>
+<para><computeroutput><link linkend="__spectra_co_8hpp_1a43a18302ff8470bdf68a839c735e6c8e">SpectraPoint</link> minimum_in_range (std::vector&lt; double &gt; &amp; m_spectra, int bin_min, int const &amp; bin_max)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp_abdc3f87ff631c70010f12fd72339b8c8_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__spectra_co_8hpp_1aca2246688a20da3a38fe2a0f9cd74e90"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>SpectraCo.hpp</secondary></indexterm>
+<indexterm><primary>SpectraCo.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_class_spectra_co">SpectraCo</link> const &amp; spectra)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp_aca2246688a20da3a38fe2a0f9cd74e90_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__spectra_co_8hpp_1ad3085c55da700fb2917875d8efe0b377"/>    <section>
+    <title>type_of&lt; SpectraCo &gt;()</title>
+<indexterm><primary>type_of&lt; SpectraCo &gt;</primary><secondary>SpectraCo.hpp</secondary></indexterm>
+<indexterm><primary>SpectraCo.hpp</primary><secondary>type_of&lt; SpectraCo &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>std::string <link linkend="_print_8hpp_1a90460287027986fbf0c9a1ef8e5a1bce">type_of</link>&lt; <link linkend="_class_spectra_co">SpectraCo</link> &gt; (<link linkend="_class_spectra_co">SpectraCo</link> const &amp; spectra)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_spectra_co_8hpp_ad3085c55da700fb2917875d8efe0b377_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

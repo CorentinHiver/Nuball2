@@ -1,14 +1,16 @@
 \doxysection{lib/\+Classes/\+Hit.hpp File Reference}
 \label{_hit_8hpp}\index{lib/Classes/Hit.hpp@{lib/Classes/Hit.hpp}}
 {\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
-Include dependency graph for Hit.\+hpp\+:\nopagebreak
+Include dependency graph for Hit.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{_hit_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -50,7 +52,9 @@ using \textbf{ Time\+\_\+ns\+\_\+vec} = std\+::vector$<$ \textbf{ Time\+\_\+ns} 
 using \textbf{ Time\+\_\+vec} = std\+::vector$<$ \textbf{ Time} $>$
 \item 
 using \textbf{ Timestamp} = ULong64\+\_\+t
-\end{DoxyCompactItemize}
+\item 
+using \textbf{ Trigger\+Hit} = std\+::function$<$ bool(const \textbf{ Hit} \&)$>$
+\begin{DoxyCompactList}\small\item\em Trigger definition ///. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -157,6 +161,16 @@ Data vectors ///.
 \doxysubsubsection{Timestamp}
 {\footnotesize\ttfamily using \textbf{ Timestamp} =  ULong64\+\_\+t}
 
+\mbox{\label{_hit_8hpp_a1956dd48cc8db6b2ab4dae054752a2ae}} 
+\index{Hit.hpp@{Hit.hpp}!TriggerHit@{TriggerHit}}
+\index{TriggerHit@{TriggerHit}!Hit.hpp@{Hit.hpp}}
+\doxysubsubsection{TriggerHit}
+{\footnotesize\ttfamily using \textbf{ Trigger\+Hit} =  std\+::function$<$bool(const \textbf{ Hit}\&)$>$}
+
+
+
+Trigger definition ///. 
+
 
 
 \doxysubsection{Function Documentation}
@@ -171,7 +185,8 @@ Data vectors ///.
 
 Casts a number into unsigned ADC. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -189,7 +204,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Data casts ///. 
 
-Casts a number into unsigned Label Here is the caller graph for this function\+:\nopagebreak
+Casts a number into unsigned Label Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -207,7 +223,8 @@ Casts a number into unsigned Label Here is the caller graph for this function\+:
 
 Casts a number into unsigned NRJ. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -231,7 +248,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Casts a number into unsigned Time. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -267,7 +285,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Casts a number into unsigned Timestamp. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

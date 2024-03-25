@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_my_error" kind="class" language="C++" prot="public">
+    <compoundname>MyError</compoundname>
+    <includes refid="_spectra_co_8hpp" local="no">SpectraCo.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_my_error_1a05198cf33bf051e16f6ec2647bf4b571" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MyError::MyError</definition>
+        <argsstring>(std::string const &amp;message=&quot;&quot;)</argsstring>
+        <name>MyError</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>message</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraCo.hpp" line="12" column="3" bodyfile="lib/Analyse/SpectraCo.hpp" bodystart="12" bodyend="12"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Analyse/SpectraCo.hpp" line="10" column="1" bodyfile="lib/Analyse/SpectraCo.hpp" bodystart="11" bodyend="13"/>
+    <listofallmembers>
+      <member refid="class_my_error_1a05198cf33bf051e16f6ec2647bf4b571" prot="public" virt="non-virtual"><scope>MyError</scope><name>MyError</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

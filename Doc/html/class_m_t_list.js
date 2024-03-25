@@ -10,7 +10,7 @@ var class_m_t_list =
     [ "getNext", "class_m_t_list.html#a39b49e58e5474dc6880b6d1702a2c35a", null ],
     [ "getThreadIndex", "class_m_t_list.html#ac58d31e459097547352bf2785dc8f40a", null ],
     [ "getThreadsNb", "class_m_t_list.html#ac97399bb34f766e41e7f9a1cd1b7eb7a", null ],
-    [ "Initialize", "class_m_t_list.html#a0230b58b8d09067fec22fbe8a5f3db89", null ],
+    [ "Initialise", "class_m_t_list.html#a0230b58b8d09067fec22fbe8a5f3db89", null ],
     [ "isMasterThread", "class_m_t_list.html#a3350577ca839e2abdcd4d6f6449a1408", null ],
     [ "operator bool", "class_m_t_list.html#a048c52b4b15fc13667559a5b07d71002", null ],
     [ "operator std::vector< T >", "class_m_t_list.html#a56f378aee85fedc71aa4732a12a8f1a5", null ],

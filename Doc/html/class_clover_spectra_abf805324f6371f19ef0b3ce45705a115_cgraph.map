@@ -1,8 +1,8 @@
-<map id="CloverSpectra::Initialize" name="CloverSpectra::Initialize">
+<map id="CloverSpectra::Initialise" name="CloverSpectra::Initialise">
 <area shape="rect" id="node1" title=" " alt="" coords="5,81,183,108"/>
 <area shape="rect" id="node2" href="$class_m_t_object.html#aaa3623d88deae3a9311aad39bfff49dc" title=" " alt="" coords="234,5,382,32"/>
 <area shape="rect" id="node4" href="$class_builder.html#a4d557d96189a42cbc0a4a0d32db45d6c" title=" " alt="" coords="231,56,385,83"/>
-<area shape="rect" id="node5" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="249,107,367,133"/>
+<area shape="rect" id="node5" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy Initialiser." alt="" coords="249,107,367,133"/>
 <area shape="rect" id="node6" href="$class_clovers.html#aa641968a47fb9db9363e89be9c29be4c" title=" " alt="" coords="246,157,370,184"/>
 <area shape="rect" id="node3" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="433,5,485,32"/>
 </map>

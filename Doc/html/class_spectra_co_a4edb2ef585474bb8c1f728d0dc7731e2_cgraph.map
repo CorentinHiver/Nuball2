@@ -1,0 +1,8 @@
+<map id="SpectraCo::setActualRange" name="SpectraCo::setActualRange">
+<area shape="rect" id="node1" title="Remove the bins after the last bin with content (= detector&#39;s output max range)" alt="" coords="5,43,204,69"/>
+<area shape="rect" id="node2" href="$class_spectra_co.html#a66d66744d2d12b088005a826158e2946" title=" " alt="" coords="252,5,459,32"/>
+<area shape="rect" id="node3" href="$class_spectra_co.html#ab733430ea1ac8bafd68b6709f19d1d0d" title="Resize allows one to select the number of bins. Affects only the maximum bin." alt="" coords="277,80,433,107"/>
+<area shape="rect" id="node4" href="$class_spectra_co.html#ac010001d3601d366b0573119a5d2be2a" title=" " alt="" coords="507,29,696,56"/>
+<area shape="rect" id="node5" href="$lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="551,80,651,107"/>
+<area shape="rect" id="node6" href="$vector__functions_8hpp.html#a2b29a4762dbbff2cabcb7e8a62cb0d39" title=" " alt="" coords="576,131,627,157"/>
+</map>

@@ -1,6 +1,8 @@
 var class_m_t_files_manager =
 [
+    [ "addFile", "class_m_t_files_manager.html#a986350d5c057d10b8fdd11551b097b37", null ],
     [ "addFiles", "class_m_t_files_manager.html#a3aaaccb43ef036f930ffcf1ca3ea522f", null ],
+    [ "addFolder", "class_m_t_files_manager.html#ae56276d4ed1c16566b6849b0491efc0e", null ],
     [ "addFolder", "class_m_t_files_manager.html#a6d05662378bde592075237b9fa0a5168", null ],
     [ "begin", "class_m_t_files_manager.html#a444c7295f3b1a3b9053db2b64a809514", null ],
     [ "begin", "class_m_t_files_manager.html#acc6d5a780b87ea8ef55a5a43d8d806aa", null ],
@@ -18,6 +20,7 @@ var class_m_t_files_manager =
     [ "isEmpty", "class_m_t_files_manager.html#a031ec08f37366ff77828b8106f20cf66", null ],
     [ "nextFileName", "class_m_t_files_manager.html#ac4d90f9590ed90fcbbe23557ae88c892", null ],
     [ "operator bool", "class_m_t_files_manager.html#a3405dcb99deb03c4fdea55fff9f3ffdf", null ],
+    [ "operator>>", "class_m_t_files_manager.html#a94f6fa018f7d7fda65a463be74a3c3d4", null ],
     [ "operator[]", "class_m_t_files_manager.html#a78934b0656b357c7eb3807aa4bea7f26", null ],
     [ "path", "class_m_t_files_manager.html#a9e94015b1a269aba763b4791b8eaa957", null ],
     [ "Print", "class_m_t_files_manager.html#a8d40403481fa064867f12ff55dcbf0ba", null ],

@@ -143,7 +143,7 @@
         <location file="lib/Analyse/PositionXY.hpp" line="28" column="8" bodyfile="lib/Analyse/PositionXY.hpp" bodystart="28" bodyend="28"/>
         <references refid="class_position_x_y_1a583c89cff15edc779275a67bbf521954" compoundref="_position_x_y_8hpp" startline="31">m_x</references>
         <references refid="class_position_x_y_1a6e54b1a15b214672d73fb52a4d83af63" compoundref="_position_x_y_8hpp" startline="32">m_y</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       <memberdef kind="function" id="class_position_x_y_1ac33d5d71f3a3ea3f0020387edd207fdd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>

@@ -1,7 +1,10 @@
 <map id="minYaxis" name="minYaxis">
-<area shape="rect" id="node1" title=" " alt="" coords="771,31,851,57"/>
-<area shape="rect" id="node2" href="$namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project on Y axis at a given X bin." alt="" coords="571,31,723,57"/>
-<area shape="rect" id="node3" href="$namespace_co_analyse.html#ab64c2bb160dbdc01836274235d0bbd3b" title="Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]." alt="" coords="333,5,485,32"/>
-<area shape="rect" id="node4" href="$namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8" title="Remove the background in the given histo." alt="" coords="296,56,523,83"/>
-<area shape="rect" id="node5" href="$class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112" title=" " alt="" coords="5,56,248,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="989,31,1069,57"/>
+<area shape="rect" id="node2" href="$namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project matrix on Y axis at a given X bin. This fills proj." alt="" coords="789,31,941,57"/>
+<area shape="rect" id="node3" href="$namespace_co_analyse.html#ab64c2bb160dbdc01836274235d0bbd3b" title="Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]...." alt="" coords="552,5,704,32"/>
+<area shape="rect" id="node4" href="$namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da" title="Remove the background in the given histo." alt="" coords="515,56,741,83"/>
+<area shape="rect" id="node5" href="$class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b" title=" " alt="" coords="244,29,467,56"/>
+<area shape="rect" id="node7" href="$class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="280,81,431,108"/>
+<area shape="rect" id="node6" href="$class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="21,27,180,53"/>
+<area shape="rect" id="node8" href="$class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,78,196,119"/>
 </map>

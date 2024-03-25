@@ -17,7 +17,7 @@ Collaboration diagram for Calibration::histograms:<para>
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
-            <listitem><para>void <link linkend="_struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa">Initialize</link> ()</para>
+            <listitem><para>void <link linkend="_struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa">Initialise</link> ()</para>
 </listitem>
             <listitem><para>void <link linkend="_struct_calibration_1_1histograms_1a8cf05daf9b9f1ee4ec9d1763acc2c307">setBins</link> (std::string const &amp;parameters)</para>
 </listitem>
@@ -32,7 +32,7 @@ Collaboration diagram for Calibration::histograms:<para>
 </listitem>
             <listitem><para><link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link>&lt; TH1F &gt; <link linkend="_struct_calibration_1_1histograms_1a8b5260e1a8f3434d96c5cd83402a48fc">calib_spectra</link></para>
 </listitem>
-            <listitem><para>bool <link linkend="_struct_calibration_1_1histograms_1af1e9037776e922dcc96614e080a23ba3">initialized</link> = false</para>
+            <listitem><para>bool <link linkend="_struct_calibration_1_1histograms_1af1e9037776e922dcc96614e080a23ba3">Initialised</link> = false</para>
 </listitem>
             <listitem><para><link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link>&lt; TH1F &gt; <link linkend="_struct_calibration_1_1histograms_1a4665ea6699e47b50df6103317d87d36b">raw_spectra</link></para>
 </listitem>
@@ -43,10 +43,10 @@ Collaboration diagram for Calibration::histograms:<para>
 <section>
 <title>Member Function Documentation</title>
 <anchor xml:id="_struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa"/>    <section>
-    <title>Initialize()</title>
-<indexterm><primary>Initialize</primary><secondary>Calibration::histograms</secondary></indexterm>
-<indexterm><primary>Calibration::histograms</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>void Calibration::histograms::Initialize ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <title>Initialise()</title>
+<indexterm><primary>Initialise</primary><secondary>Calibration::histograms</secondary></indexterm>
+<indexterm><primary>Calibration::histograms</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>void Calibration::histograms::Initialise ( )</computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -94,10 +94,10 @@ Here is the caller graph for this function:<para>
 <indexterm><primary>calib_spectra</primary><secondary>Calibration::histograms</secondary></indexterm>
 <indexterm><primary>Calibration::histograms</primary><secondary>calib_spectra</secondary></indexterm>
 <para><computeroutput><link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link>&lt;TH1F&gt; Calibration::histograms::calib_spectra</computeroutput></para>    </section><anchor xml:id="_struct_calibration_1_1histograms_1af1e9037776e922dcc96614e080a23ba3"/>    <section>
-    <title>initialized</title>
-<indexterm><primary>initialized</primary><secondary>Calibration::histograms</secondary></indexterm>
-<indexterm><primary>Calibration::histograms</primary><secondary>initialized</secondary></indexterm>
-<para><computeroutput>bool Calibration::histograms::initialized = false</computeroutput></para>    </section><anchor xml:id="_struct_calibration_1_1histograms_1a4665ea6699e47b50df6103317d87d36b"/>    <section>
+    <title>Initialised</title>
+<indexterm><primary>Initialised</primary><secondary>Calibration::histograms</secondary></indexterm>
+<indexterm><primary>Calibration::histograms</primary><secondary>Initialised</secondary></indexterm>
+<para><computeroutput>bool Calibration::histograms::Initialised = false</computeroutput></para>    </section><anchor xml:id="_struct_calibration_1_1histograms_1a4665ea6699e47b50df6103317d87d36b"/>    <section>
     <title>raw_spectra</title>
 <indexterm><primary>raw_spectra</primary><secondary>Calibration::histograms</secondary></indexterm>
 <indexterm><primary>Calibration::histograms</primary><secondary>raw_spectra</secondary></indexterm>

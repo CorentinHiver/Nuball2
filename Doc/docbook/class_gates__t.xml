@@ -8,11 +8,11 @@
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
-            <listitem><para>void <link linkend="_class_gates__t_1a07f860c7dcd7110ee0da5d523591b12f">check</link> (std::initializer_list&lt; T &gt; bounds)</para>
+            <listitem><para>void <link linkend="_class_gates__t_1a3a7b9f42116c357f29cf1d24d46e1405">check</link> (std::Initialiser_list&lt; T &gt; bounds)</para>
 </listitem>
             <listitem><para><link linkend="_class_gates__t_1a296ccceb76e5c87c661a6814b2301e80">Gates_t</link> ()</para>
 </listitem>
-            <listitem><para><link linkend="_class_gates__t_1a31ce88cdf09b7b5f9c74d13a22537815">Gates_t</link> (std::initializer_list&lt; T &gt; bounds)</para>
+            <listitem><para><link linkend="_class_gates__t_1aae7623c7695d3577ee3fdf49a35e10b8">Gates_t</link> (std::Initialiser_list&lt; T &gt; bounds)</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_gates__t_1a0bd9311137fd07879a470fdc692e6503">isIn</link> (T const &amp;t)</para>
 </listitem>
@@ -39,15 +39,15 @@
     <title>Gates_t()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>Gates_t</primary><secondary>Gates_t&lt; T &gt;</secondary></indexterm>
 <indexterm><primary>Gates_t&lt; T &gt;</primary><secondary>Gates_t</secondary></indexterm>
-<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_class_gates__t">Gates_t</link>&lt; T &gt;::<link linkend="_class_gates__t">Gates_t</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_gates__t_1a31ce88cdf09b7b5f9c74d13a22537815"/>    <section>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_class_gates__t">Gates_t</link>&lt; T &gt;::<link linkend="_class_gates__t">Gates_t</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_gates__t_1aae7623c7695d3577ee3fdf49a35e10b8"/>    <section>
     <title>Gates_t()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>Gates_t</primary><secondary>Gates_t&lt; T &gt;</secondary></indexterm>
 <indexterm><primary>Gates_t&lt; T &gt;</primary><secondary>Gates_t</secondary></indexterm>
-<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_class_gates__t">Gates_t</link>&lt; T &gt;::<link linkend="_class_gates__t">Gates_t</link> (std::initializer_list&lt; T &gt; bounds)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_class_gates__t">Gates_t</link>&lt; T &gt;::<link linkend="_class_gates__t">Gates_t</link> (std::Initialiser_list&lt; T &gt; bounds)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_gates__t_a31ce88cdf09b7b5f9c74d13a22537815_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_gates__t_aae7623c7695d3577ee3fdf49a35e10b8_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -56,15 +56,15 @@
 </section>
 <section>
 <title>Member Function Documentation</title>
-<anchor xml:id="_class_gates__t_1a07f860c7dcd7110ee0da5d523591b12f"/>    <section>
+<anchor xml:id="_class_gates__t_1a3a7b9f42116c357f29cf1d24d46e1405"/>    <section>
     <title>check()</title>
 <indexterm><primary>check</primary><secondary>Gates_t&lt; T &gt;</secondary></indexterm>
 <indexterm><primary>Gates_t&lt; T &gt;</primary><secondary>check</secondary></indexterm>
-<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_gates__t">Gates_t</link>&lt; T &gt;::check (std::initializer_list&lt; T &gt; bounds)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_gates__t">Gates_t</link>&lt; T &gt;::check (std::Initialiser_list&lt; T &gt; bounds)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_gates__t_a07f860c7dcd7110ee0da5d523591b12f_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_gates__t_a3a7b9f42116c357f29cf1d24d46e1405_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -73,7 +73,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_gates__t_a07f860c7dcd7110ee0da5d523591b12f_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_gates__t_a3a7b9f42116c357f29cf1d24d46e1405_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

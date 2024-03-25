@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_overwrite_error" kind="class" language="C++" prot="public">
+    <compoundname>OverwriteError</compoundname>
+    <includes refid="errors_8hpp" local="no">errors.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_overwrite_error_1a18d8b25386149797af9bd15159642c91" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string OverwriteError::m_message</definition>
+        <argsstring></argsstring>
+        <name>m_message</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/errors.hpp" line="13" column="15" bodyfile="lib/errors.hpp" bodystart="13" bodyend="-1"/>
+        <referencedby refid="class_overwrite_error_1ad64a19a339d52b5baaa876b38ee1b3a1" compoundref="errors_8hpp" startline="10" endline="10">what</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_overwrite_error_1a1ceef07c7c86c032768abcb44e85b270" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>OverwriteError::OverwriteError</definition>
+        <argsstring>(std::string const &amp;message) noexcept</argsstring>
+        <name>OverwriteError</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/errors.hpp" line="9" column="3" bodyfile="lib/errors.hpp" bodystart="9" bodyend="9"/>
+        <references refid="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" compoundref="print_8hpp" startline="176" endline="181">error</references>
+      </memberdef>
+      <memberdef kind="function" id="class_overwrite_error_1a9aaec059d2a5f52221894d3f8fda3658" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto OverwriteError::what</definition>
+        <argsstring>()</argsstring>
+        <name>what</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/errors.hpp" line="11" column="8" bodyfile="lib/errors.hpp" bodystart="11" bodyend="11"/>
+        <references refid="class_overwrite_error_1a18d8b25386149797af9bd15159642c91" compoundref="errors_8hpp" startline="13">m_message</references>
+      </memberdef>
+      <memberdef kind="function" id="class_overwrite_error_1ad64a19a339d52b5baaa876b38ee1b3a1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; OverwriteError::what</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>what</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/errors.hpp" line="10" column="15" bodyfile="lib/errors.hpp" bodystart="10" bodyend="10"/>
+        <references refid="class_overwrite_error_1a18d8b25386149797af9bd15159642c91" compoundref="errors_8hpp" startline="13">m_message</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/errors.hpp" line="6" column="1" bodyfile="lib/errors.hpp" bodystart="7" bodyend="14"/>
+    <listofallmembers>
+      <member refid="class_overwrite_error_1a18d8b25386149797af9bd15159642c91" prot="private" virt="non-virtual"><scope>OverwriteError</scope><name>m_message</name></member>
+      <member refid="class_overwrite_error_1a1ceef07c7c86c032768abcb44e85b270" prot="public" virt="non-virtual"><scope>OverwriteError</scope><name>OverwriteError</name></member>
+      <member refid="class_overwrite_error_1ad64a19a339d52b5baaa876b38ee1b3a1" prot="public" virt="non-virtual"><scope>OverwriteError</scope><name>what</name></member>
+      <member refid="class_overwrite_error_1a9aaec059d2a5f52221894d3f8fda3658" prot="public" virt="non-virtual"><scope>OverwriteError</scope><name>what</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

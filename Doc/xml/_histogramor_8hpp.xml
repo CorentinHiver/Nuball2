@@ -612,15 +612,15 @@
         <referencedby refid="class_calibration_1afd14ef8f1b6cee6cf7abc10783ee318e" compoundref="_calibration_8hpp" startline="485" endline="525">Calibration::fillRootDataHisto</referencedby>
         <referencedby refid="lib_root_8hpp_1ab7f08b4e478a833328fa0fb5cebf88d2" compoundref="lib_root_8hpp" startline="933" endline="993">fuse_all_histo</referencedby>
         <referencedby refid="lib_root_8hpp_1accfb8dfb6ee42fa6845013a0cf121ac1" compoundref="lib_root_8hpp" startline="132" endline="169">getMeanPeak</referencedby>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">DataFileReader::Initialize</referencedby>
-        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
-        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
-        <referencedby refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" compoundref="_m_t_object_8hpp" startline="62" endline="73">MTObject::Initialize</referencedby>
-        <referencedby refid="class_timeshifts_1a0753528955e94c43043cd7d68193f960" compoundref="_timeshifts_8hpp" startline="492" endline="524">Timeshifts::Initialize</referencedby>
-        <referencedby refid="class_clover_spectra_1a353ec66774413feefb33a784ce2159cf" compoundref="_clover_spectra_8hpp" startline="114" endline="145">CloverSpectra::Initialize</referencedby>
-        <referencedby refid="class_clovers_1ab97fc40c1f6b24a092f8f92562c2fd9a" compoundref="_clovers_8hpp" startline="102" endline="132">Clovers::InitializeArrays</referencedby>
-        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">DSSD::InitializeArrays</referencedby>
-        <referencedby refid="class_paris_1a5218753a8ecec0c9a05c6d3e3ca2db07" compoundref="_paris_8hpp" startline="42" endline="58">Paris::InitializeArrays</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">DataFileReader::Initialise</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialise</referencedby>
+        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialise</referencedby>
+        <referencedby refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" compoundref="_m_t_object_8hpp" startline="62" endline="73">MTObject::Initialise</referencedby>
+        <referencedby refid="class_timeshifts_1a0753528955e94c43043cd7d68193f960" compoundref="_timeshifts_8hpp" startline="492" endline="524">Timeshifts::Initialise</referencedby>
+        <referencedby refid="class_clover_spectra_1a353ec66774413feefb33a784ce2159cf" compoundref="_clover_spectra_8hpp" startline="114" endline="145">CloverSpectra::Initialise</referencedby>
+        <referencedby refid="class_clovers_1ab97fc40c1f6b24a092f8f92562c2fd9a" compoundref="_clovers_8hpp" startline="102" endline="132">Clovers::InitialiseArrays</referencedby>
+        <referencedby refid="class_d_s_s_d_1a800770306a115e1096108cef2463a103" compoundref="_d_s_s_d_8hpp" startline="64" endline="86">DSSD::InitialiseArrays</referencedby>
+        <referencedby refid="class_paris_1a5218753a8ecec0c9a05c6d3e3ca2db07" compoundref="_paris_8hpp" startline="42" endline="58">Paris::InitialiseArrays</referencedby>
         <referencedby refid="class_event_1a93d81b8139c839326e56f33ef63097e8" compoundref="_event_8hpp" startline="164" endline="173">Event::isCalibrated</referencedby>
         <referencedby refid="files__functions_8hpp_1a25af8f31a8b51b38a4c2334e3901acfc" compoundref="files__functions_8hpp" startline="210" endline="228">listFileReader</referencedby>
         <referencedby refid="class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9" compoundref="files__functions_8hpp" startline="480" endline="515">Path::load</referencedby>

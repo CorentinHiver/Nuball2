@@ -19,8 +19,8 @@ public:
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
   static void run(Parameters & p, RunCheck & runcheck);
-  void InitializeManip();
-  void InitializeRun(std::string const & run);
+  void InitialiseManip();
+  void InitialiseRun(std::string const & run);
   void FillRaw(Event const & event);
   void FillSorted(Clovers const & clovers, DSSD const & dssd, Event const & event);
   void AnalyseRun();
@@ -61,7 +61,7 @@ bool RunCheck::launch(Parameters & p)
 {
   debug("loading parameters");
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
   this -> AnalyseManip();
@@ -69,11 +69,11 @@ bool RunCheck::launch(Parameters & p)
   return true;
 }
 
-void RunCheck::InitializeManip()
+void RunCheck::InitialiseManip()
 {
   auto const & nbThreads = MTObject::getThreadsNb();
   m_name_run.resize(nbThreads);
-  print("Initialize the manip histograms...");
+  print("Initialise the manip histograms...");
   GeSpectraManip.reset("Each_Clover_Spectra", "Each Clover Spectra", 24,0,24, 10000,0,10000);
   GeSpectraTotal.reset("Ge_Spectra_Total", "Ge Spectra Total", 10000,0,10000);
   TimeEachDetector.resize(g_detectors.size());
@@ -114,7 +114,7 @@ void RunCheck::run(Parameters & p, RunCheck & runcheck)
   {
     print(_run);
     Timer timer;
-    runcheck.InitializeRun(_run);
+    runcheck.InitialiseRun(_run);
     auto const & listFilesRun = p.getRunFiles(_run);
     int run_size = 0;
     Clovers clovers;
@@ -171,7 +171,7 @@ void RunCheck::run(Parameters & p, RunCheck & runcheck)
   } // End runs loop
 }
 
-void RunCheck::InitializeRun(std::string const & run_name)
+void RunCheck::InitialiseRun(std::string const & run_name)
 {
   m_name_run[MTObject::getThreadIndex()] = run_name;
   TimeSpectra.reset("Times"+run_name,"Relative Timestamp", 900,0,900, 500,-100,400);

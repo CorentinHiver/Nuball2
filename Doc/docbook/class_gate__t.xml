@@ -3,6 +3,11 @@
 <title>Gate_t&lt; T &gt; Class Template Reference</title>
 <indexterm><primary>Gate_t&lt; T &gt;</primary></indexterm>
 <para>
+
+<para>Convenient gate class. </para>
+ 
+</para>
+<para>
 <computeroutput>#include &lt;Gate.hpp&gt;</computeroutput>
 </para>
 <simplesect>
@@ -10,7 +15,7 @@
         <itemizedlist>
             <listitem><para><link linkend="_class_gate__t_1ad0a2a66e0b675d9b7548e1ee2c821912">Gate_t</link> ()</para>
 </listitem>
-            <listitem><para><link linkend="_class_gate__t_1a4f8e29c161dd85d2dd5081292f5705b0">Gate_t</link> (std::initializer_list&lt; T &gt; inputs)</para>
+            <listitem><para><link linkend="_class_gate__t_1ad0002de40542bcf95966df6b3193b98b">Gate_t</link> (std::Initialiser_list&lt; T &gt; inputs)</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_gate__t_1a6ece805d91b1c54d4b84cc36e652bc0f">isIn</link> (T const &amp;e)</para>
 </listitem>
@@ -43,16 +48,49 @@
         </itemizedlist>
 </simplesect>
 <section>
+<title>Detailed Description</title>
+<simplesect><title>template&lt;typename T&gt;
+class Gate_t&lt; T &gt;</title></simplesect>
+
+
+<para>Convenient gate class. </para>
+
+
+
+<para>
+                <formalpara>
+                    <title>
+Template Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>T</entry>
+                                <entry>
+<para>Type of the data </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<section>
 <title>Constructor &amp; Destructor Documentation</title>
 <anchor xml:id="_class_gate__t_1ad0a2a66e0b675d9b7548e1ee2c821912"/>    <section>
     <title>Gate_t()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>Gate_t</primary><secondary>Gate_t&lt; T &gt;</secondary></indexterm>
 <indexterm><primary>Gate_t&lt; T &gt;</primary><secondary>Gate_t</secondary></indexterm>
-<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_class_gate__t">Gate_t</link>&lt; T &gt;::<link linkend="_class_gate__t">Gate_t</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_gate__t_1a4f8e29c161dd85d2dd5081292f5705b0"/>    <section>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_class_gate__t">Gate_t</link>&lt; T &gt;::<link linkend="_class_gate__t">Gate_t</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_gate__t_1ad0002de40542bcf95966df6b3193b98b"/>    <section>
     <title>Gate_t()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>Gate_t</primary><secondary>Gate_t&lt; T &gt;</secondary></indexterm>
 <indexterm><primary>Gate_t&lt; T &gt;</primary><secondary>Gate_t</secondary></indexterm>
-<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_class_gate__t">Gate_t</link>&lt; T &gt;::<link linkend="_class_gate__t">Gate_t</link> (std::initializer_list&lt; T &gt; inputs)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_class_gate__t">Gate_t</link>&lt; T &gt;::<link linkend="_class_gate__t">Gate_t</link> (std::Initialiser_list&lt; T &gt; inputs)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
 </section>
 <section>
 <title>Member Function Documentation</title>

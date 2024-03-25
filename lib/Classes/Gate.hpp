@@ -13,7 +13,7 @@ class Gate_t
 {
 public:
   Gate_t(){}
-  Gate_t(std::initializer_list<T> inputs) 
+  Gate_t(std::Initialiser_list<T> inputs) 
   {
     if (inputs.size() == 2) 
     {
@@ -49,7 +49,7 @@ class Gates_t
 {
 public:
   Gates_t(){}
-  Gates_t(std::initializer_list<T> bounds) : m_size(bounds.size()/2)
+  Gates_t(std::Initialiser_list<T> bounds) : m_size(bounds.size()/2)
   {
     check(bounds);
     bool low = true;
@@ -72,9 +72,9 @@ public:
 
   bool operator() (T const & t) const {return isIn(t);}
 
-  void check(std::initializer_list<T> bounds)
+  void check(std::Initialiser_list<T> bounds)
   {
-    if (bounds.size()%2 == 1) throw_error(" Gates initializer must have an even number of bounds (one lower and one higher bound)");
+    if (bounds.size()%2 == 1) throw_error(" Gates Initialiser must have an even number of bounds (one lower and one higher bound)");
   }
   std::size_t const & size() const {return m_size;}
 

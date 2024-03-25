@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['thbinning_1425',['THBinning',['../struct_t_h_binning.html',1,'']]],
-  ['thetchain_1426',['TheTChain',['../class_the_t_chain.html',1,'']]],
-  ['timer_1427',['Timer',['../class_timer.html',1,'']]],
-  ['timeshifts_1428',['Timeshifts',['../class_timeshifts.html',1,'']]],
-  ['timewalk_1429',['Timewalk',['../class_timewalk.html',1,'']]],
-  ['timewalks_1430',['Timewalks',['../class_timewalks.html',1,'']]],
-  ['typerootmap_1431',['TypeRootMap',['../class_type_root_map.html',1,'']]]
+  ['simplex_1845',['Simplex',['../class_simplex.html',1,'']]],
+  ['sistrip_1846',['SiStrip',['../class_si_strip.html',1,'']]],
+  ['sizemissmatch_1847',['SizeMissmatch',['../class_spectra_co_1_1_size_missmatch.html',1,'SpectraCo']]],
+  ['sorted_5fevent_1848',['Sorted_Event',['../class_sorted___event.html',1,'']]],
+  ['spectraalignator_1849',['SpectraAlignator',['../class_spectra_alignator.html',1,'']]],
+  ['spectraco_1850',['SpectraCo',['../class_spectra_co.html',1,'']]],
+  ['staticvector_1851',['StaticVector',['../class_static_vector.html',1,'']]],
+  ['staticvector_3c_20uchar_20_3e_1852',['StaticVector&lt; uchar &gt;',['../class_static_vector.html',1,'']]],
+  ['staticvector_3c_20uchar_2c_2024_20_3e_1853',['StaticVector&lt; uchar, 24 &gt;',['../class_static_vector.html',1,'']]]
 ];

@@ -25,12 +25,12 @@ private:
 
 EventAnalyse::EventAnalyse()
 {
-  // Initialize arrays :
-  Clovers::Initialize();
-  Paris::Initialize();
+  // Initialise arrays :
+  Clovers::Initialise();
+  Paris::Initialise();
 
-  // Initialize Paris :
-  m_Paris.Initialize(2,36);
+  // Initialise Paris :
+  m_Paris.Initialise(2,36);
 }
 
 void EventAnalyse::Set(Event const & event)

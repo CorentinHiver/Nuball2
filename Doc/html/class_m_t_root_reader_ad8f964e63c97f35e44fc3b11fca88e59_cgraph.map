@@ -1,7 +1,8 @@
 <map id="MTRootReader::addFolder" name="MTRootReader::addFolder">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,196,83"/>
-<area shape="rect" id="node2" href="$class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="244,56,425,83"/>
-<area shape="rect" id="node3" href="$files__functions_8hpp.html#a8c014ea676bc34e0ec57b1aeb55af4c5" title=" " alt="" coords="477,5,617,32"/>
-<area shape="rect" id="node4" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="521,56,573,83"/>
-<area shape="rect" id="node5" href="$files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="473,107,620,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,196,108"/>
+<area shape="rect" id="node2" href="$class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="244,81,425,108"/>
+<area shape="rect" id="node3" href="$files__functions_8hpp.html#a0b6555f0818e33170e5c3c3c513d6b91" title=" " alt="" coords="477,5,617,32"/>
+<area shape="rect" id="node4" href="$lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07" title="Casts a number into an long." alt="" coords="505,56,589,83"/>
+<area shape="rect" id="node5" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="521,107,573,133"/>
+<area shape="rect" id="node6" href="$files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="473,157,620,184"/>
 </map>

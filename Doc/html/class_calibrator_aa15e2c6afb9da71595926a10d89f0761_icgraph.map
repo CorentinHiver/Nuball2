@@ -1,0 +1,4 @@
+<map id="Calibrator::analyse" name="Calibrator::analyse">
+<area shape="rect" id="node1" title="Analyse the spectra to extract calibration coefficients." alt="" coords="207,5,352,32"/>
+<area shape="rect" id="node2" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="5,5,159,32"/>
+</map>

@@ -1,8 +1,9 @@
 <map id="Timeshifts::get" name="Timeshifts::get">
-<area shape="rect" id="node1" title=" " alt="" coords="449,56,568,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="449,81,568,108"/>
 <area shape="rect" id="node2" href="$class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="241,5,391,32"/>
 <area shape="rect" id="node4" href="$class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="231,56,401,83"/>
 <area shape="rect" id="node6" href="$_timeshifts_8hpp.html#aecdab429e75a8d9f7a38f3938d9a7173" title=" " alt="" coords="267,107,365,133"/>
+<area shape="rect" id="node7" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="249,157,383,184"/>
 <area shape="rect" id="node3" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="15,5,173,32"/>
-<area shape="rect" id="node5" href="$class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,56,183,83"/>
+<area shape="rect" id="node5" href="$class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="5,56,183,83"/>
 </map>

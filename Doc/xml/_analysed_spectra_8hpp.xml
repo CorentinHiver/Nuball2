@@ -1,0 +1,849 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_analysed_spectra_8hpp" kind="file" language="C++">
+    <compoundname>AnalysedSpectra.hpp</compoundname>
+    <includes refid="lib_root_8hpp" local="yes">../libRoot.hpp</includes>
+    <includes refid="_fit_8hpp" local="yes">../Classes/Fit.hpp</includes>
+    <incdepgraph>
+      <node id="20">
+        <label>glob.h</label>
+      </node>
+      <node id="52">
+        <label>TH1S.h</label>
+      </node>
+      <node id="25">
+        <label>functional</label>
+      </node>
+      <node id="6">
+        <label>iomanip</label>
+      </node>
+      <node id="29">
+        <label>queue</label>
+      </node>
+      <node id="70">
+        <label>TTreeIndex.h</label>
+      </node>
+      <node id="2">
+        <label>../libRoot.hpp</label>
+        <link refid="lib_root_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>filesystem</label>
+      </node>
+      <node id="39">
+        <label>TAxis.h</label>
+      </node>
+      <node id="68">
+        <label>TThread.h</label>
+      </node>
+      <node id="22">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>TH1D.h</label>
+      </node>
+      <node id="64">
+        <label>TStopwatch.h</label>
+      </node>
+      <node id="30">
+        <label>stdexcept</label>
+      </node>
+      <node id="28">
+        <label>numeric</label>
+      </node>
+      <node id="15">
+        <label>string</label>
+      </node>
+      <node id="8">
+        <label>map</label>
+      </node>
+      <node id="72">
+        <label>Hit.hpp</label>
+        <link refid="_hit_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>libCo.hpp</label>
+        <link refid="lib_co_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>TF1.h</label>
+      </node>
+      <node id="4">
+        <label>print.hpp</label>
+        <link refid="print_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>fstream</label>
+      </node>
+      <node id="42">
+        <label>TError.h</label>
+      </node>
+      <node id="66">
+        <label>TStyle.h</label>
+      </node>
+      <node id="71">
+        <label>../Classes/Fit.hpp</label>
+        <link refid="_fit_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>any</label>
+      </node>
+      <node id="17">
+        <label>files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>random</label>
+      </node>
+      <node id="62">
+        <label>TROOT.h</label>
+      </node>
+      <node id="34">
+        <label>typeinfo</label>
+      </node>
+      <node id="38">
+        <label>ctime</label>
+      </node>
+      <node id="41">
+        <label>TChain.h</label>
+      </node>
+      <node id="67">
+        <label>TSystem.h</label>
+      </node>
+      <node id="31">
+        <label>stack</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="44">
+        <label>TF2.h</label>
+      </node>
+      <node id="45">
+        <label>TFile.h</label>
+      </node>
+      <node id="40">
+        <label>TCanvas.h</label>
+      </node>
+      <node id="55">
+        <label>TH3I.h</label>
+      </node>
+      <node id="56">
+        <label>TKey.h</label>
+      </node>
+      <node id="9">
+        <label>vector_functions.hpp</label>
+        <link refid="vector__functions_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>TSpectrum.h</label>
+      </node>
+      <node id="24">
+        <label>array</label>
+      </node>
+      <node id="47">
+        <label>TFitResult.h</label>
+      </node>
+      <node id="16">
+        <label>sstream</label>
+      </node>
+      <node id="11">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>TMarker.h</label>
+      </node>
+      <node id="49">
+        <label>TGraphErrors.h</label>
+      </node>
+      <node id="53">
+        <label>TH2.h</label>
+      </node>
+      <node id="37">
+        <label>cstdlib</label>
+      </node>
+      <node id="50">
+        <label>TH1F.h</label>
+      </node>
+      <node id="57">
+        <label>TLeaf.h</label>
+      </node>
+      <node id="5">
+        <label>iostream</label>
+      </node>
+      <node id="13">
+        <label>string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>unordered_map</label>
+      </node>
+      <node id="58">
+        <label>TLegend.h</label>
+      </node>
+      <node id="1">
+        <label>lib/Analyse/AnalysedSpectra.hpp</label>
+        <link refid="_analysed_spectra_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>TString.h</label>
+      </node>
+      <node id="60">
+        <label>TMath.h</label>
+      </node>
+      <node id="54">
+        <label>TH2F.h</label>
+      </node>
+      <node id="27">
+        <label>mutex</label>
+      </node>
+      <node id="36">
+        <label>csignal</label>
+      </node>
+      <node id="32">
+        <label>thread</label>
+      </node>
+      <node id="61">
+        <label>TRandom.h</label>
+      </node>
+      <node id="69">
+        <label>TTree.h</label>
+      </node>
+      <node id="10">
+        <label>algorithm</label>
+      </node>
+      <node id="46">
+        <label>TFitResultPtr.h</label>
+      </node>
+      <node id="14">
+        <label>cstring</label>
+      </node>
+      <node id="48">
+        <label>TGraph.h</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="33">
+        <label>typeindex</label>
+      </node>
+      <node id="18">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_analysed_spectra" prot="public">AnalysedSpectra</innerclass>
+    <innerclass refid="class_b_g_o_peak_fitter" prot="public">BGOPeakFitter</innerclass>
+    <innerclass refid="class_fitted_peak" prot="public">FittedPeak</innerclass>
+    <innerclass refid="class_ge_peak_fitter" prot="public">GePeakFitter</innerclass>
+    <innerclass refid="class_peaks_calibrator" prot="public">PeaksCalibrator</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_analysed_spectra_8hpp_1a6d775b8e11108ba61170f07a5e6cb5d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;out, AnalysedSpectra const &amp;as)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type><ref refid="class_analysed_spectra" kindref="compound">AnalysedSpectra</ref> const &amp;</type>
+          <declname>as</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/AnalysedSpectra.hpp" line="303" column="1" bodyfile="lib/Analyse/AnalysedSpectra.hpp" bodystart="303" bodyend="314"/>
+        <references refid="class_analysed_spectra_1a902f2eb384247213806564ef3d7a6633" compoundref="_analysed_spectra_8hpp" startline="123" endline="123">AnalysedSpectra::getPeaks</references>
+      </memberdef>
+      <memberdef kind="function" id="_analysed_spectra_8hpp_1aaf36d0767b1e42a5950ac81f37152530" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;out, FittedPeak const &amp;peak)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type><ref refid="class_fitted_peak" kindref="compound">FittedPeak</ref> const &amp;</type>
+          <declname>peak</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/AnalysedSpectra.hpp" line="57" column="1" bodyfile="lib/Analyse/AnalysedSpectra.hpp" bodystart="57" bodyend="64"/>
+        <references refid="class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f" compoundref="_analysed_spectra_8hpp" startline="47" endline="47">FittedPeak::constante</references>
+        <references refid="class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05" compoundref="_analysed_spectra_8hpp" startline="44" endline="44">FittedPeak::energy</references>
+        <references refid="class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46" compoundref="_analysed_spectra_8hpp" startline="45" endline="45">FittedPeak::mean</references>
+        <references refid="class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d" compoundref="_analysed_spectra_8hpp" startline="46" endline="46">FittedPeak::sigma</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>ANALYSEDSPECTRA_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ANALYSEDSPECTRA_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../libRoot.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../Classes/Fit.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="class_b_g_o_peak_fitter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_b_g_o_peak_fitter" kindref="compound">BGOPeakFitter</ref></highlight></codeline>
+<codeline lineno="9"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="class_ge_peak_fitter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_ge_peak_fitter" kindref="compound">GePeakFitter</ref></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="class_fitted_peak" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_fitted_peak" kindref="compound">FittedPeak</ref></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="21" refid="class_fitted_peak_1a5786d717e69886653b4fc866f72a141e" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_fitted_peak_1a5786d717e69886653b4fc866f72a141e" kindref="member">FittedPeak</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05" kindref="member">energy</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f" kindref="member">constante</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46" kindref="member">mean</ref>,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d" kindref="member">sigma</ref><sp/>=<sp/>-1)<sp/>:</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1ac1bb9cc24dfaff9c3660fd32360445ac" kindref="member">m_energy</ref><sp/><sp/><sp/><sp/>(<ref refid="class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05" kindref="member">energy</ref>),</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a0679489b4be421ee57f2001d56a5c429" kindref="member">m_constante</ref><sp/>(<ref refid="class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f" kindref="member">constante</ref>),</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a0d91f27751bdb9d18a36e858e2415129" kindref="member">m_mean</ref><sp/><sp/><sp/><sp/><sp/><sp/>(<ref refid="class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46" kindref="member">mean</ref>),</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a55df3f35f773445be7ff397af5ed87ad" kindref="member">m_sigma</ref><sp/><sp/><sp/><sp/><sp/>(<ref refid="class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d" kindref="member">sigma</ref>)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="class_fitted_peak_1aa0cbf6339c2ba9f0105dbd8bb8b1bdbf" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_fitted_peak_1aa0cbf6339c2ba9f0105dbd8bb8b1bdbf" kindref="member">FittedPeak</ref>(<ref refid="class_peak_fitter" kindref="compound">PeakFitter</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>fit)<sp/>:</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a0679489b4be421ee57f2001d56a5c429" kindref="member">m_constante</ref><sp/>(fit.getConstante()),</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a0d91f27751bdb9d18a36e858e2415129" kindref="member">m_mean</ref><sp/><sp/><sp/><sp/><sp/><sp/>(fit.getMean()),</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a55df3f35f773445be7ff397af5ed87ad" kindref="member">m_sigma</ref><sp/><sp/><sp/><sp/><sp/>(fit.getSigma())</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="class_fitted_peak_1a58f2af302cec41a1b8a729aa87923cc9" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_fitted_peak_1a58f2af302cec41a1b8a729aa87923cc9" kindref="member">FittedPeak</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05" kindref="member">energy</ref>,<sp/><ref refid="class_peak_fitter" kindref="compound">PeakFitter</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>fit)<sp/>:</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1ac1bb9cc24dfaff9c3660fd32360445ac" kindref="member">m_energy</ref><sp/><sp/><sp/><sp/>(<ref refid="class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05" kindref="member">energy</ref>),</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a0679489b4be421ee57f2001d56a5c429" kindref="member">m_constante</ref><sp/>(fit.getConstante()),</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a0d91f27751bdb9d18a36e858e2415129" kindref="member">m_mean</ref><sp/><sp/><sp/><sp/><sp/><sp/>(fit.getMean()),</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_fitted_peak_1a55df3f35f773445be7ff397af5ed87ad" kindref="member">m_sigma</ref><sp/><sp/><sp/><sp/><sp/>(fit.getSigma())</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05" kindref="member">energy</ref><sp/><sp/><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_fitted_peak_1ac1bb9cc24dfaff9c3660fd32360445ac" kindref="member">m_energy</ref><sp/><sp/><sp/>;}</highlight></codeline>
+<codeline lineno="45" refid="class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46" kindref="member">mean</ref><sp/><sp/><sp/><sp/><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_fitted_peak_1a0d91f27751bdb9d18a36e858e2415129" kindref="member">m_mean</ref><sp/><sp/><sp/><sp/><sp/>;}</highlight></codeline>
+<codeline lineno="46" refid="class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d" kindref="member">sigma</ref><sp/><sp/><sp/><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_fitted_peak_1a55df3f35f773445be7ff397af5ed87ad" kindref="member">m_sigma</ref><sp/><sp/><sp/><sp/>;}</highlight></codeline>
+<codeline lineno="47" refid="class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f" kindref="member">constante</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_fitted_peak_1a0679489b4be421ee57f2001d56a5c429" kindref="member">m_constante</ref>;}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="50" refid="class_fitted_peak_1ac1bb9cc24dfaff9c3660fd32360445ac" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_fitted_peak_1ac1bb9cc24dfaff9c3660fd32360445ac" kindref="member">m_energy</ref><sp/><sp/><sp/><sp/><sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="51" refid="class_fitted_peak_1a0679489b4be421ee57f2001d56a5c429" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_fitted_peak_1a0679489b4be421ee57f2001d56a5c429" kindref="member">m_constante</ref><sp/><sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="52" refid="class_fitted_peak_1a0d91f27751bdb9d18a36e858e2415129" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_fitted_peak_1a0d91f27751bdb9d18a36e858e2415129" kindref="member">m_mean</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="53" refid="class_fitted_peak_1a55df3f35f773445be7ff397af5ed87ad" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_fitted_peak_1a55df3f35f773445be7ff397af5ed87ad" kindref="member">m_sigma</ref><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="_analysed_spectra_8hpp_1aaf36d0767b1e42a5950ac81f37152530" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="_analysed_spectra_8hpp_1aaf36d0767b1e42a5950ac81f37152530" kindref="member">operator&lt;&lt;</ref>(std::ostream<sp/>&amp;<sp/>out,<sp/><ref refid="class_fitted_peak" kindref="compound">FittedPeak</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>out<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;E<sp/>:<sp/>&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>peak.<ref refid="class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05" kindref="member">energy</ref>()<sp/></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>mean<sp/>:<sp/>&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>peak.<ref refid="class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46" kindref="member">mean</ref>()<sp/></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>sigma<sp/>&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/>peak.<ref refid="class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d" kindref="member">sigma</ref>()<sp/></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>constante<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>peak.<ref refid="class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f" kindref="member">constante</ref>();</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>out;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70" refid="class_analysed_spectra" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_analysed_spectra" kindref="compound">AnalysedSpectra</ref></highlight></codeline>
+<codeline lineno="71"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="73" refid="class_analysed_spectra_1a7f9cc3de0ad2c0e6bf3963881253d6ed" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a7f9cc3de0ad2c0e6bf3963881253d6ed" kindref="member">AnalysedSpectra</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="74" refid="class_analysed_spectra_1a16ef19c7181b68c3e942895f79e9ea4f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra" kindref="compound">AnalysedSpectra</ref>(TH1F*<sp/>histo)<sp/>noexcept<sp/>:<sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>(histo)<sp/>{}</highlight></codeline>
+<codeline lineno="75" refid="class_analysed_spectra_1a17f98f42b34ad243753fd19ebcebccd4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a17f98f42b34ad243753fd19ebcebccd4" kindref="member">load</ref>(TH1F*<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>histo)<sp/></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref><sp/>=<sp/>histo;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1aaef1cb033207e3c99fb77d02ce1375cb" kindref="member">range_min</ref><sp/>=<sp/>histo-&gt;GetXaxis()<sp/>-&gt;<sp/>GetXmin();</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1ade8353a5064a3e891165ea2922c55f5c" kindref="member">range_max</ref><sp/>=<sp/>histo-&gt;GetXaxis()<sp/>-&gt;<sp/>GetXmax();</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="class_analysed_spectra_1aa61bc91f3ba8c5e823b944abd4aa5f9c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1aa61bc91f3ba8c5e823b944abd4aa5f9c" kindref="member">operator-&gt;</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>;}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="class_analysed_spectra_1ae92f07fb00cfde10fe5188eb3f03c71a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1ae92f07fb00cfde10fe5188eb3f03c71a" kindref="member">setKevPerBin</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>kpb)<sp/>{<ref refid="class_analysed_spectra_1a298930c6c6d3ff9c242fb0e4c006b87f" kindref="member">m_kpb</ref><sp/>=<sp/>kpb;}</highlight></codeline>
+<codeline lineno="85" refid="class_analysed_spectra_1a1b69d2bc2625934b9c32c41a79de97c0" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a1b69d2bc2625934b9c32c41a79de97c0" kindref="member">setChannelsPerBin</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>cpb)<sp/>{<ref refid="class_analysed_spectra_1ad8c7e6a0110fdae413b9bd47ae9bb8e7" kindref="member">m_apb</ref><sp/>=<sp/>cpb;}</highlight></codeline>
+<codeline lineno="86" refid="class_analysed_spectra_1aacaab750a4de40051e75424b77948128" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1aacaab750a4de40051e75424b77948128" kindref="member">cd</ref>(TVirtualPad<sp/>*<sp/>vpad)<sp/>{<ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">TPad*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal"><sp/>(vpad);<sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;cd();}</highlight></codeline>
+<codeline lineno="87" refid="class_analysed_spectra_1aa6f0263d9827ce94c3c9e273c72182c8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1aa6f0263d9827ce94c3c9e273c72182c8" kindref="member">autoCanvas</ref>()</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Pad<sp/>created<sp/>automatically<sp/>for<sp/>peak<sp/>finding&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>TCanvas(</highlight><highlight class="stringliteral">&quot;canvas&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;canvas&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>-&gt;<sp/><ref refid="class_analysed_spectra_1aacaab750a4de40051e75424b77948128" kindref="member">cd</ref>();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>-&gt;<sp/>Update();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>-&gt;<sp/>SetCrosshair(1);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="95" refid="class_analysed_spectra_1ae9556cbcfc68bf2ba3bebe13967db262" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1ae9556cbcfc68bf2ba3bebe13967db262" kindref="member">getCanvas</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>;}</highlight></codeline>
+<codeline lineno="96" refid="class_analysed_spectra_1ab6b1800aa0df04c31298a266f6b59a61" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1ab6b1800aa0df04c31298a266f6b59a61" kindref="member">getCanvas</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>;}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1aa810982a33acfa30e512aa45da4461ce" kindref="member">choosePeaks</ref>(std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peaks);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>instructions)</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>y<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;SetTitle(instructions.c_str());</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;SetTitle(instructions.c_str());</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="lib_root_8hpp_1ad3470a3661e492e7d353b083639b8743" kindref="member">GetPoint</ref>(<ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;cd(),<sp/>x,<sp/>y);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;Update();</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>x;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="class_analysed_spectra_1ab89922675c823b0d01b9a33a85863dae" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1ab89922675c823b0d01b9a33a85863dae" kindref="member">setMinimumRange</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_min)<sp/></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;GetXaxis()-&gt;SetRangeUser((<ref refid="class_analysed_spectra_1aaef1cb033207e3c99fb77d02ce1375cb" kindref="member">range_min</ref><sp/>=<sp/>_min),<sp/><ref refid="class_analysed_spectra_1ade8353a5064a3e891165ea2922c55f5c" kindref="member">range_max</ref>);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115" refid="class_analysed_spectra_1af994d86175a786fe145723a9ca63459b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1af994d86175a786fe145723a9ca63459b" kindref="member">setMaximumRange</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_max)<sp/></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;GetXaxis()-&gt;SetRangeUser(<ref refid="class_analysed_spectra_1aaef1cb033207e3c99fb77d02ce1375cb" kindref="member">range_min</ref>,<sp/>(<ref refid="class_analysed_spectra_1ade8353a5064a3e891165ea2922c55f5c" kindref="member">range_max</ref><sp/>=<sp/>_max));</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><ref refid="class_fitted_peak" kindref="compound">FittedPeak</ref><sp/>&amp;<sp/><ref refid="class_analysed_spectra_1a14412f4f3f9b11bf5206be1f586f2560" kindref="member">fitPeak</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peaks,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>adjustRange<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>std::vector&lt;FittedPeak&gt;<sp/>&amp;<sp/><ref refid="class_analysed_spectra_1aa62448f275c4787703e7d77a38dd421a" kindref="member">fitPeaks</ref>(std::vector&lt;double&gt;<sp/>peaks,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>adjustRange<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123" refid="class_analysed_spectra_1a902f2eb384247213806564ef3d7a6633" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_analysed_spectra_1a902f2eb384247213806564ef3d7a6633" kindref="member">getPeaks</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>;}</highlight></codeline>
+<codeline lineno="124" refid="class_analysed_spectra_1ab4f59dc04de64bdcd8e3c2c5038e0e42" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1ab4f59dc04de64bdcd8e3c2c5038e0e42" kindref="member">clearPeaks</ref>()<sp/>{<ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>.clear();}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="class_analysed_spectra_1a884875b22bde2d29d22b41924e18e09d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a884875b22bde2d29d22b41924e18e09d" kindref="member">setRatioRange</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>min,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>max)</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1afe6370bcf60d5d986f7da79e5228f014" kindref="member">ratio_range_min</ref><sp/>=<sp/>min;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1aca7013d58146ed540c6ade244166b226" kindref="member">ratio_range_max</ref><sp/>=<sp/>max;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="133" refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" refkind="member"><highlight class="normal"><sp/><sp/>TPad*<sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="134" refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" refkind="member"><highlight class="normal"><sp/><sp/>TH1F*<sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="135" refid="class_analysed_spectra_1a298930c6c6d3ff9c242fb0e4c006b87f" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a298930c6c6d3ff9c242fb0e4c006b87f" kindref="member">m_kpb</ref><sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>keV<sp/>per<sp/>bin</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="class_analysed_spectra_1ad8c7e6a0110fdae413b9bd47ae9bb8e7" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1ad8c7e6a0110fdae413b9bd47ae9bb8e7" kindref="member">m_apb</ref><sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>canal<sp/>per<sp/>bin</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="class_analysed_spectra_1a01a3d249379ee0e0d805550ce7d85e58" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="class_analysed_spectra_1a01a3d249379ee0e0d805550ce7d85e58" kindref="member">detector</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;PARIS&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139" refid="class_analysed_spectra_1aaef1cb033207e3c99fb77d02ce1375cb" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1aaef1cb033207e3c99fb77d02ce1375cb" kindref="member">range_min</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="140" refid="class_analysed_spectra_1ade8353a5064a3e891165ea2922c55f5c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1ade8353a5064a3e891165ea2922c55f5c" kindref="member">range_max</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="class_analysed_spectra_1afe6370bcf60d5d986f7da79e5228f014" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1afe6370bcf60d5d986f7da79e5228f014" kindref="member">ratio_range_min</ref><sp/>=<sp/>0.75;</highlight></codeline>
+<codeline lineno="143" refid="class_analysed_spectra_1aca7013d58146ed540c6ade244166b226" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1aca7013d58146ed540c6ade244166b226" kindref="member">ratio_range_max</ref><sp/>=<sp/>1.25;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Fitting<sp/>:<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146" refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;FittedPeak&gt;<sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149" refid="class_analysed_spectra_1a14412f4f3f9b11bf5206be1f586f2560" refkind="member"><highlight class="normal"><ref refid="class_fitted_peak" kindref="compound">FittedPeak</ref><sp/>&amp;<sp/><ref refid="class_analysed_spectra_1a14412f4f3f9b11bf5206be1f586f2560" kindref="member">AnalysedSpectra::fitPeak</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>adjustRange)</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/><ref refid="class_analysed_spectra_1aa6f0263d9827ce94c3c9e273c72182c8" kindref="member">autoCanvas</ref>();</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;Draw();</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>-&gt;<sp/>SetLogy(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1af994d86175a786fe145723a9ca63459b" kindref="member">setMaximumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>ABOVE<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1ab89922675c823b0d01b9a33a85863dae" kindref="member">setMinimumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>BELOW<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>-&gt;<sp/>SetLogy(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(adjustRange)</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1ab89922675c823b0d01b9a33a85863dae" kindref="member">setMinimumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>BELOW<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1af994d86175a786fe145723a9ca63459b" kindref="member">setMaximumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>ABOVE<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>beginPeak<sp/>=<sp/><ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;FIT<sp/>:<sp/>Select<sp/>the<sp/>BEGINNING<sp/>of<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak));</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>endPeak<sp/><sp/><sp/>=<sp/><ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;FIT<sp/>:<sp/>Select<sp/>the<sp/>END<sp/>peak<sp/>&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak));</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><ref refid="class_peak_fitter" kindref="compound">PeakFitter</ref><sp/>fit(<ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>,<sp/>beginPeak,<sp/>endPeak);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>.emplace_back(</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>peak,</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>fit.<ref refid="class_peak_fitter_1af1719649da41412e67dd10950de22924" kindref="member">getConstante</ref>(),</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>fit.<ref refid="class_peak_fitter_1ae83803972d52d79a55f2af7b1dde0ae5" kindref="member">getMean</ref>(),</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>fit.<ref refid="class_peak_fitter_1aecad4fbb3fc12ed9d845bb590858f653" kindref="member">getSigma</ref>());</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>.back();</highlight></codeline>
+<codeline lineno="179"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181" refid="class_analysed_spectra_1aa62448f275c4787703e7d77a38dd421a" refkind="member"><highlight class="normal">std::vector&lt;FittedPeak&gt;<sp/>&amp;<sp/><ref refid="class_analysed_spectra_1aa62448f275c4787703e7d77a38dd421a" kindref="member">AnalysedSpectra::fitPeaks</ref>(std::vector&lt;double&gt;<sp/>peaks,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>adjustRange<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/><ref refid="class_analysed_spectra_1aa6f0263d9827ce94c3c9e273c72182c8" kindref="member">autoCanvas</ref>();</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;Draw();</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>y<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>xmax<sp/>=<sp/>0;</highlight><highlight class="comment">//<sp/>Position<sp/>of<sp/>the<sp/>maximum<sp/>peak<sp/>in<sp/>bins</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sigma_peakMax<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mean_peakMax<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Fit<sp/>the<sp/>maximum<sp/>peak<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>=<sp/>peaks.back();</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>-&gt;<sp/>SetLogy(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1af994d86175a786fe145723a9ca63459b" kindref="member">setMaximumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>ABOVE<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1ab89922675c823b0d01b9a33a85863dae" kindref="member">setMinimumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>BELOW<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(adjustRange)</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1ab89922675c823b0d01b9a33a85863dae" kindref="member">setMinimumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>BELOW<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1af994d86175a786fe145723a9ca63459b" kindref="member">setMaximumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>ABOVE<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>-&gt;<sp/>SetLogy(</highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>beginPeak<sp/>=<sp/><ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;FIT<sp/>:<sp/>Select<sp/>the<sp/>BEGINNING<sp/>of<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak));</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>endPeak<sp/><sp/><sp/>=<sp/><ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;FIT<sp/>:<sp/>Select<sp/>the<sp/>END<sp/>peak<sp/>&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak));</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peak_fitter" kindref="compound">PeakFitter</ref><sp/>fit(<ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>,<sp/>beginPeak,<sp/>endPeak);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>xmax<sp/>=<sp/>(beginPeak+endPeak)/2;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>mean_peakMax<sp/><sp/>=<sp/>fit.<ref refid="class_peak_fitter_1ae83803972d52d79a55f2af7b1dde0ae5" kindref="member">getMean</ref><sp/>();</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>sigma_peakMax<sp/>=<sp/>fit.<ref refid="class_peak_fitter_1aecad4fbb3fc12ed9d845bb590858f653" kindref="member">getSigma</ref>();</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a298930c6c6d3ff9c242fb0e4c006b87f" kindref="member">m_kpb</ref><sp/>=<sp/>peaks.back()/mean_peakMax;<sp/></highlight><highlight class="comment">//<sp/>keV<sp/>per<sp/>bin</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1ad8c7e6a0110fdae413b9bd47ae9bb8e7" kindref="member">m_apb</ref><sp/>=<sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;GetXaxis()-&gt;GetBinLowEdge(mean_peakMax)/xmax;<sp/></highlight><highlight class="comment">//<sp/>ADC<sp/>per<sp/>bin</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;keV<sp/>per<sp/>bin<sp/>:&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_analysed_spectra_1a298930c6c6d3ff9c242fb0e4c006b87f" kindref="member">m_kpb</ref>,<sp/></highlight><highlight class="stringliteral">&quot;canal<sp/>per<sp/>bin<sp/>:<sp/>&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_analysed_spectra_1ad8c7e6a0110fdae413b9bd47ae9bb8e7" kindref="member">m_apb</ref>);</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>FWHMr<sp/>=<sp/>2.35*sigma_peakMax/mean_peakMax;</highlight><highlight class="comment">//<sp/>relative<sp/>FWHM<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>FWHMp<sp/>=<sp/>100*FWHMr;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>relative<sp/>FWHM<sp/>in<sp/>percentage</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;sigma:&quot;</highlight><highlight class="normal">,<sp/>sigma_peakMax*<ref refid="class_analysed_spectra_1a298930c6c6d3ff9c242fb0e4c006b87f" kindref="member">m_kpb</ref>,<sp/></highlight><highlight class="stringliteral">&quot;keV<sp/>at&quot;</highlight><highlight class="normal">,<sp/>peaks.back(),<sp/></highlight><highlight class="stringliteral">&quot;kev<sp/>-&gt;<sp/>FWHM=&quot;</highlight><highlight class="normal">,<sp/>FWHMp,<sp/></highlight><highlight class="stringliteral">&quot;%&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>peak_i<sp/>=<sp/>0;<sp/>peak_i&lt;peaks.size();<sp/>peak_i++)</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>=<sp/>peaks[peak_i];</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak_recal<sp/>=<sp/>peak/<ref refid="class_analysed_spectra_1a298930c6c6d3ff9c242fb0e4c006b87f" kindref="member">m_kpb</ref>;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak_min_view_range<sp/>=<sp/>peak_recal*<ref refid="class_analysed_spectra_1afe6370bcf60d5d986f7da79e5228f014" kindref="member">ratio_range_min</ref>;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak_max_view_range<sp/>=<sp/>peak_recal*<ref refid="class_analysed_spectra_1aca7013d58146ed540c6ade244166b226" kindref="member">ratio_range_max</ref>;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1ab89922675c823b0d01b9a33a85863dae" kindref="member">setMinimumRange</ref>(peak_min_view_range);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1af994d86175a786fe145723a9ca63459b" kindref="member">setMaximumRange</ref>(peak_max_view_range);</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(adjustRange)</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1ab89922675c823b0d01b9a33a85863dae" kindref="member">setMinimumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>BELOW<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1af994d86175a786fe145723a9ca63459b" kindref="member">setMaximumRange</ref>(<ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;VIEW<sp/>RANGE<sp/>:<sp/>Select<sp/>ABOVE<sp/>peak<sp/>&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)));</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>low_edge<sp/>=<sp/><ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(</highlight><highlight class="stringliteral">&quot;FIT<sp/>:<sp/>Select<sp/>the<sp/>BEGINNING<sp/>of<sp/>peak<sp/>&quot;</highlight><highlight class="normal">+<sp/>std::to_string((</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak));</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>high_edge<sp/>=<sp/><ref refid="class_analysed_spectra_1abb27cafac273c5eb490eeb17596a60a1" kindref="member">selectX</ref>(</highlight><highlight class="stringliteral">&quot;FIT<sp/>:<sp/>Select<sp/>the<sp/>END<sp/>peak<sp/>&quot;</highlight><highlight class="normal">+<sp/>std::to_string((</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak));</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peak_fitter" kindref="compound">PeakFitter</ref><sp/>fit(<ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>,<sp/>low_edge,<sp/>high_edge);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>.emplace_back(</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>peak,</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>fit.<ref refid="class_peak_fitter_1af1719649da41412e67dd10950de22924" kindref="member">getConstante</ref>(),</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>fit.<ref refid="class_peak_fitter_1ae83803972d52d79a55f2af7b1dde0ae5" kindref="member">getMean</ref>(),</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>fit.<ref refid="class_peak_fitter_1aecad4fbb3fc12ed9d845bb590858f653" kindref="member">getSigma</ref>());</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;E<sp/><sp/><sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>:<sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>)<sp/>std::cout<sp/>&lt;&lt;<sp/>peak.energy()<sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;ADC<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>:<sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>)<sp/>std::cout<sp/>&lt;&lt;<sp/>peak.mean()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263" refid="class_analysed_spectra_1aa810982a33acfa30e512aa45da4461ce" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_analysed_spectra_1aa810982a33acfa30e512aa45da4461ce" kindref="member">AnalysedSpectra::choosePeaks</ref>(std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peaks)</highlight></codeline>
+<codeline lineno="264"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref><sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/><ref refid="class_analysed_spectra_1aa6f0263d9827ce94c3c9e273c72182c8" kindref="member">autoCanvas</ref>();</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;Draw();</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>x<sp/>=<sp/>0;<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>y<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>xmax<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sigma_peakMax<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>mean_peakMax<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Setup<sp/>the<sp/>window<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;SetTitle(</highlight><highlight class="stringliteral">&quot;INSTRUCTION<sp/>:<sp/>Select<sp/>the<sp/>maximum<sp/>of<sp/>energy<sp/>window&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;SetTitle(</highlight><highlight class="stringliteral">&quot;INSTRUCTION<sp/>:<sp/>Select<sp/>the<sp/>maximum<sp/>of<sp/>energy<sp/>window&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;Update();</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><ref refid="lib_root_8hpp_1ad3470a3661e492e7d353b083639b8743" kindref="member">GetPoint</ref>(<ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;cd(),<sp/>x,<sp/>y);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;GetXaxis()-&gt;SetRangeUser(0,<sp/>x);</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;Update();</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>peak_i<sp/>=<sp/>0;<sp/>peak_i&lt;peaks.size();<sp/>peak_i++)</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>=<sp/>peaks[peak_i];</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;SetTitle((</highlight><highlight class="stringliteral">&quot;Select<sp/>peak<sp/>&quot;</highlight><highlight class="normal">+std::to_string((</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)peak)).c_str());</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;Update();</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="lib_root_8hpp_1ad3470a3661e492e7d353b083639b8743" kindref="member">GetPoint</ref>(<ref refid="class_analysed_spectra_1a8381935ad5c99df237ef5749dfb20523" kindref="member">m_pad</ref>-&gt;cd(),<sp/>x,<sp/>y);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>pos<sp/>=<sp/>x;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(x);</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>.emplace_back(peak,<sp/><ref refid="class_analysed_spectra_1a0a8e8cfab11155dbea0a8d52a0d32983" kindref="member">m_histo</ref>-&gt;GetBinContent(pos),<sp/>pos);</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;E<sp/><sp/><sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>:<sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>)<sp/>std::cout<sp/>&lt;&lt;<sp/>peak.energy()<sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;ADC<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>:<sp/><ref refid="class_analysed_spectra_1a1dcb01de4dee7488240dbe8bfd586061" kindref="member">m_peaks</ref>)<sp/>std::cout<sp/>&lt;&lt;<sp/>peak.mean()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="301"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"></highlight></codeline>
+<codeline lineno="303" refid="_analysed_spectra_8hpp_1a6d775b8e11108ba61170f07a5e6cb5d2" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="_analysed_spectra_8hpp_1aaf36d0767b1e42a5950ac81f37152530" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>out,<sp/><ref refid="class_analysed_spectra" kindref="compound">AnalysedSpectra</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>as)</highlight></codeline>
+<codeline lineno="304"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/>out<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;E<sp/><sp/><sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>:<sp/>as.<ref refid="class_analysed_spectra_1a902f2eb384247213806564ef3d7a6633" kindref="member">getPeaks</ref>())<sp/>out<sp/>&lt;&lt;<sp/>peak.energy()<sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/>out<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/>out<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;ADC<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>:<sp/>as.<ref refid="class_analysed_spectra_1a902f2eb384247213806564ef3d7a6633" kindref="member">getPeaks</ref>())<sp/>out<sp/>&lt;&lt;<sp/>peak.mean()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/>out<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>out;</highlight></codeline>
+<codeline lineno="314"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"></highlight></codeline>
+<codeline lineno="316" refid="class_peaks_calibrator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_peaks_calibrator" kindref="compound">PeaksCalibrator</ref></highlight></codeline>
+<codeline lineno="317"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="319" refid="class_peaks_calibrator_1ad020d8c79aa946517f140b3b73a16817" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_peaks_calibrator_1ad020d8c79aa946517f140b3b73a16817" kindref="member">PeaksCalibrator</ref>(std::vector&lt;FittedPeak&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peaks,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>order<sp/>=<sp/>0)<sp/>:</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa" kindref="member">m_size</ref>(peaks.size()),</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1a31b139c91cf9c3739c04b0b510ceeba1" kindref="member">m_order</ref>(order)</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>ADCs;<sp/>ADCs.reserve(<ref refid="class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa" kindref="member">m_size</ref>);</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>energies;<sp/>energies.reserve(<ref refid="class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa" kindref="member">m_size</ref>);</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peak<sp/>:<sp/>peaks)</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ADCs.push_back(peak.mean());</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>energies.push_back(peak.energy());</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref><sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>TGraph(<ref refid="class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa" kindref="member">m_size</ref>,<sp/>ADCs.data(),<sp/>energies.data());</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref>-&gt;Fit(<ref refid="class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254" kindref="member">linear_fit</ref>);</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(order<sp/>&gt;<sp/>0)<sp/><ref refid="class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f" kindref="member">m_fit</ref>.<ref refid="class_fit_1a6dd1941f173b91a904be34afca6cd5d0" kindref="member">parameter0</ref><sp/>=<sp/><ref refid="class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254" kindref="member">linear_fit</ref>-&gt;GetParameter(0);</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f" kindref="member">m_fit</ref>.<ref refid="class_fit_1abe17456d5a2ccb50497d776f4f63f98b" kindref="member">parameter1</ref><sp/>=<sp/><ref refid="class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254" kindref="member">linear_fit</ref>-&gt;GetParameter(1);</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight></codeline>
+<codeline lineno="338" refid="class_peaks_calibrator_1a6d799246268d62e0e7097594ea82050b" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_peaks_calibrator_1a6d799246268d62e0e7097594ea82050b" kindref="member">PeaksCalibrator</ref>(std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peaks,<sp/>std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>ADCs,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>order)<sp/>:</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa" kindref="member">m_size</ref>(peaks.size()),</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1a31b139c91cf9c3739c04b0b510ceeba1" kindref="member">m_order</ref>(order)</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(peaks.size()<sp/>!=<sp/>ADCs.size())<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;The<sp/>peak<sp/>vector<sp/>has<sp/>size<sp/>&quot;</highlight><highlight class="normal">,<sp/>peaks.size(),<sp/></highlight><highlight class="stringliteral">&quot;<sp/>and<sp/>ADC<sp/>vector<sp/>size<sp/>&quot;</highlight><highlight class="normal">,<sp/>ADCs.size()));</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(order&gt;2)<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;PeaksCalibrator<sp/>DONT<sp/>HANDLE<sp/>order<sp/>of<sp/>fit<sp/>&gt;<sp/>2&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref><sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>TGraph(<ref refid="class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa" kindref="member">m_size</ref>,<sp/>ADCs.data(),<sp/>peaks.data());</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/>TF1*<sp/>the_fit<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(order)</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>0<sp/>:<sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>1<sp/>:<sp/></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>the_fit<sp/>=<sp/><ref refid="class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254" kindref="member">linear_fit</ref>;</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>2<sp/>:<sp/></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>the_fit<sp/>=<sp/><ref refid="class_peaks_calibrator_1a1d389cb4ba14899a1c8b2162c016e52a" kindref="member">square_fit</ref>;</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>default<sp/>:<sp/>the_fit<sp/>=<sp/><ref refid="class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254" kindref="member">linear_fit</ref>;<sp/></highlight><highlight class="comment">//<sp/>Should<sp/>never<sp/>happen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref>-&gt;Fit(the_fit);</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f" kindref="member">m_fit</ref>.<ref refid="class_fit_1a6dd1941f173b91a904be34afca6cd5d0" kindref="member">parameter0</ref><sp/>=<sp/>(order<sp/>&gt;<sp/>0)<sp/>?<sp/>the_fit-&gt;GetParameter(0)<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f" kindref="member">m_fit</ref>.<ref refid="class_fit_1abe17456d5a2ccb50497d776f4f63f98b" kindref="member">parameter1</ref><sp/>=<sp/>the_fit-&gt;GetParameter(1);</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(order&gt;1)<sp/><ref refid="class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f" kindref="member">m_fit</ref>.<ref refid="class_fit_1a394d86d19fb25ad5facea296ed71bb1e" kindref="member">parameter2</ref><sp/>=<sp/>the_fit-&gt;GetParameter(2);</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/>}<sp/></highlight></codeline>
+<codeline lineno="360"><highlight class="normal"></highlight></codeline>
+<codeline lineno="361" refid="class_peaks_calibrator_1aa22df9cfa24378f5e262488cc1160f14" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_peaks_calibrator_1aa22df9cfa24378f5e262488cc1160f14" kindref="member">~PeaksCalibrator</ref>()</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/><ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref>;</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight></codeline>
+<codeline lineno="366" refid="class_peaks_calibrator_1a801c737980f87c4c59b7aa015ec6bee8" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_fit" kindref="compound">Fit</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_peaks_calibrator_1a801c737980f87c4c59b7aa015ec6bee8" kindref="member">fit</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f" kindref="member">m_fit</ref>;}</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"></highlight></codeline>
+<codeline lineno="368" refid="class_peaks_calibrator_1ae6dcd447c315e23324f882fd3791721a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_peaks_calibrator_1ae6dcd447c315e23324f882fd3791721a" kindref="member">Draw</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>opt)<sp/>{</highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref>)<sp/><ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref>-&gt;Draw(opt.c_str());}</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"></highlight></codeline>
+<codeline lineno="370" refid="class_peaks_calibrator_1a10e6bb763e092ee0bef1a9035eb4c1bd" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_peaks_calibrator_1a10e6bb763e092ee0bef1a9035eb4c1bd" kindref="member">graph</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref>;}</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"></highlight></codeline>
+<codeline lineno="372"><highlight class="normal">private<sp/>:</highlight></codeline>
+<codeline lineno="373" refid="class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa" kindref="member">m_size</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="374" refid="class_peaks_calibrator_1a31b139c91cf9c3739c04b0b510ceeba1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_peaks_calibrator_1a31b139c91cf9c3739c04b0b510ceeba1" kindref="member">m_order</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"></highlight></codeline>
+<codeline lineno="376" refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" refkind="member"><highlight class="normal"><sp/><sp/>TGraph*<sp/><ref refid="class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749" kindref="member">m_graph</ref>;</highlight></codeline>
+<codeline lineno="377" refid="class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>TF1*<sp/><ref refid="class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254" kindref="member">linear_fit</ref>;</highlight></codeline>
+<codeline lineno="378" refid="class_peaks_calibrator_1a1d389cb4ba14899a1c8b2162c016e52a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>TF1*<sp/><ref refid="class_peaks_calibrator_1a1d389cb4ba14899a1c8b2162c016e52a" kindref="member">square_fit</ref>;</highlight></codeline>
+<codeline lineno="379" refid="class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_fit" kindref="compound">Fit</ref><sp/><ref refid="class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f" kindref="member">m_fit</ref>;</highlight></codeline>
+<codeline lineno="380"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"></highlight></codeline>
+<codeline lineno="382"><highlight class="normal">TF1*<sp/><ref refid="class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254" kindref="member">PeaksCalibrator::linear_fit</ref><sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>TF1(</highlight><highlight class="stringliteral">&quot;linear_PeaksCalibrator&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;pol1&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="383"><highlight class="normal">TF1*<sp/><ref refid="class_peaks_calibrator_1a1d389cb4ba14899a1c8b2162c016e52a" kindref="member">PeaksCalibrator::square_fit</ref><sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>TF1(</highlight><highlight class="stringliteral">&quot;square_PeaksCalibrator&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;pol2&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="384"><highlight class="normal"></highlight></codeline>
+<codeline lineno="385"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>ANALYSEDSPECTRA_HPP</highlight></codeline>
+    </programlisting>
+    <location file="lib/Analyse/AnalysedSpectra.hpp"/>
+  </compounddef>
+</doxygen>

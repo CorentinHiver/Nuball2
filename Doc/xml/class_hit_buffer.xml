@@ -1,0 +1,457 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_hit_buffer" kind="class" language="C++" prot="public">
+    <compoundname>HitBuffer</compoundname>
+    <includes refid="_hit_buffer_8hpp" local="no">HitBuffer.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_hit_buffer_1a64223f64655bdae34926831cafae1227" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="class_hit" kindref="compound">Hit</ref> &gt;</type>
+        <definition>std::vector&lt;Hit&gt; HitBuffer::m_buffer</definition>
+        <argsstring></argsstring>
+        <name>m_buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="92" column="15" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="92" bodyend="-1"/>
+        <referencedby refid="class_hit_buffer_1adeeba852a151488e1e9f043ecb00d1e7" compoundref="_hit_buffer_8hpp" startline="19" endline="27">at</referencedby>
+        <referencedby refid="class_hit_buffer_1ad4607c4c9db51fd975c9118e4bb8ed3c" compoundref="_hit_buffer_8hpp" startline="32" endline="32">begin</referencedby>
+        <referencedby refid="class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77" compoundref="_hit_buffer_8hpp" startline="14" endline="14">clear</referencedby>
+        <referencedby refid="class_hit_buffer_1adfe0706e7e11c503433bda4bab818bfb" compoundref="_hit_buffer_8hpp" startline="34" endline="34">end</referencedby>
+        <referencedby refid="class_hit_buffer_1a15e4f894efd5d4ce212caf33d9345642" compoundref="_hit_buffer_8hpp" startline="11" endline="11">HitBuffer</referencedby>
+        <referencedby refid="class_hit_buffer_1a6ea32057774f64e7ea503167dd4f4046" compoundref="_hit_buffer_8hpp" startline="16" endline="16">operator[]</referencedby>
+        <referencedby refid="class_hit_buffer_1a784863f96a770a8b7d6aead043f6de17" compoundref="_hit_buffer_8hpp" startline="13" endline="13">push_back</referencedby>
+        <referencedby refid="class_hit_buffer_1a69b8f046928a8e3dc0e573dff8b4fe94" compoundref="_hit_buffer_8hpp" startline="62" endline="85">shift</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_hit_buffer_1a221f7336df760e282fb10bdb76a7291e" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t HitBuffer::m_max_size</definition>
+        <argsstring></argsstring>
+        <name>m_max_size</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="88" column="10" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="88" bodyend="-1"/>
+        <referencedby refid="class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77" compoundref="_hit_buffer_8hpp" startline="14" endline="14">clear</referencedby>
+        <referencedby refid="class_hit_buffer_1a47c456dd0db2e286da0a8fd6f005aa94" compoundref="_hit_buffer_8hpp" startline="38" endline="38">isFull</referencedby>
+        <referencedby refid="class_hit_buffer_1a043ec3be6f740c5150a2973531825933" compoundref="_hit_buffer_8hpp" startline="30" endline="30">max_size</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_hit_buffer_1a6ba71f55c6ca350739e6344cb2430103" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t HitBuffer::m_nb_clear</definition>
+        <argsstring></argsstring>
+        <name>m_nb_clear</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="91" column="10" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="91" bodyend="-1"/>
+        <referencedby refid="class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77" compoundref="_hit_buffer_8hpp" startline="14" endline="14">clear</referencedby>
+        <referencedby refid="class_hit_buffer_1af235606f7b97e643e615924eb9d8e731" compoundref="_hit_buffer_8hpp" startline="40" endline="40">nbClear</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t HitBuffer::m_size</definition>
+        <argsstring></argsstring>
+        <name>m_size</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="89" column="10" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="89" bodyend="-1"/>
+        <referencedby refid="class_hit_buffer_1adeeba852a151488e1e9f043ecb00d1e7" compoundref="_hit_buffer_8hpp" startline="19" endline="27">at</referencedby>
+        <referencedby refid="class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77" compoundref="_hit_buffer_8hpp" startline="14" endline="14">clear</referencedby>
+        <referencedby refid="class_hit_buffer_1a47c456dd0db2e286da0a8fd6f005aa94" compoundref="_hit_buffer_8hpp" startline="38" endline="38">isFull</referencedby>
+        <referencedby refid="class_hit_buffer_1a784863f96a770a8b7d6aead043f6de17" compoundref="_hit_buffer_8hpp" startline="13" endline="13">push_back</referencedby>
+        <referencedby refid="class_hit_buffer_1a69b8f046928a8e3dc0e573dff8b4fe94" compoundref="_hit_buffer_8hpp" startline="62" endline="85">shift</referencedby>
+        <referencedby refid="class_hit_buffer_1a3347b5dad56d6a8c32956d58e1dd0d40" compoundref="_hit_buffer_8hpp" startline="29" endline="29">size</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_hit_buffer_1a3af72f963f298b8b15f2a8d2402768c2" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t HitBuffer::m_step</definition>
+        <argsstring></argsstring>
+        <name>m_step</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="90" column="10" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="90" bodyend="-1"/>
+        <referencedby refid="class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77" compoundref="_hit_buffer_8hpp" startline="14" endline="14">clear</referencedby>
+        <referencedby refid="class_hit_buffer_1a56077cbecd38953dec15caf1cb4067f3" compoundref="_hit_buffer_8hpp" startline="43" endline="43">setStep</referencedby>
+        <referencedby refid="class_hit_buffer_1a335273868e4a43e152b47d04d679d8f4" compoundref="_hit_buffer_8hpp" startline="44" endline="44">step</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_hit_buffer_1adeeba852a151488e1e9f043ecb00d1e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto HitBuffer::at</definition>
+        <argsstring>(size_t const &amp;i)</argsstring>
+        <name>at</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="19" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="19" bodyend="27"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+        <references refid="class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe" compoundref="_hit_buffer_8hpp" startline="89">m_size</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1ad4607c4c9db51fd975c9118e4bb8ed3c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto HitBuffer::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="32" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="32" bodyend="32"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a3094f0a9c44658c318bc54aed8cb85c7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto HitBuffer::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="33" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="33" bodyend="33"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void HitBuffer::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="14" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="14" bodyend="14"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+        <references refid="class_hit_buffer_1a221f7336df760e282fb10bdb76a7291e" compoundref="_hit_buffer_8hpp" startline="88">m_max_size</references>
+        <references refid="class_hit_buffer_1a6ba71f55c6ca350739e6344cb2430103" compoundref="_hit_buffer_8hpp" startline="91">m_nb_clear</references>
+        <references refid="class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe" compoundref="_hit_buffer_8hpp" startline="89">m_size</references>
+        <references refid="class_hit_buffer_1a3af72f963f298b8b15f2a8d2402768c2" compoundref="_hit_buffer_8hpp" startline="90">m_step</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1adfe0706e7e11c503433bda4bab818bfb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto HitBuffer::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="34" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="34" bodyend="34"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1aef76bdf6263af98da048506b48506365" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto HitBuffer::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="35" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="35" bodyend="35"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a15e4f894efd5d4ce212caf33d9345642" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>HitBuffer::HitBuffer</definition>
+        <argsstring>(size_t size=100)</argsstring>
+        <name>HitBuffer</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+          <defval>100</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="11" column="3" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="11" bodyend="11"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+        <references refid="class_hit_buffer_1a3347b5dad56d6a8c32956d58e1dd0d40" compoundref="_hit_buffer_8hpp" startline="29" endline="29">size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a47c456dd0db2e286da0a8fd6f005aa94" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool HitBuffer::isFull</definition>
+        <argsstring>() const</argsstring>
+        <name>isFull</name>
+        <briefdescription>
+<para>Are all the slots used ? </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="38" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="38" bodyend="38"/>
+        <references refid="class_hit_buffer_1a221f7336df760e282fb10bdb76a7291e" compoundref="_hit_buffer_8hpp" startline="88">m_max_size</references>
+        <references refid="class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe" compoundref="_hit_buffer_8hpp" startline="89">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a043ec3be6f740c5150a2973531825933" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto HitBuffer::max_size</definition>
+        <argsstring>() const</argsstring>
+        <name>max_size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="30" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="30" bodyend="30"/>
+        <references refid="class_hit_buffer_1a221f7336df760e282fb10bdb76a7291e" compoundref="_hit_buffer_8hpp" startline="88">m_max_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1ac60826e62033fe14911cdf03a61352f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; HitBuffer::nbClear</definition>
+        <argsstring>()</argsstring>
+        <name>nbClear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="41" column="15" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="41" bodyend="41"/>
+        <references refid="class_hit_buffer_1a6ba71f55c6ca350739e6344cb2430103" compoundref="_hit_buffer_8hpp" startline="91">m_nb_clear</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1af235606f7b97e643e615924eb9d8e731" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; HitBuffer::nbClear</definition>
+        <argsstring>() const</argsstring>
+        <name>nbClear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="40" column="15" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="40" bodyend="40"/>
+        <references refid="class_hit_buffer_1a6ba71f55c6ca350739e6344cb2430103" compoundref="_hit_buffer_8hpp" startline="91">m_nb_clear</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a9efee5395fbc55828e289c1fee96cf9a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto HitBuffer::operator[]</definition>
+        <argsstring>(size_t const &amp;i)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="17" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="17" bodyend="17"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a6ea32057774f64e7ea503167dd4f4046" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; HitBuffer::operator[]</definition>
+        <argsstring>(size_t const &amp;i) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="16" column="15" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="16" bodyend="16"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a784863f96a770a8b7d6aead043f6de17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void HitBuffer::push_back</definition>
+        <argsstring>(Hit const &amp;hit)</argsstring>
+        <name>push_back</name>
+        <param>
+          <type><ref refid="class_hit" kindref="compound">Hit</ref> const &amp;</type>
+          <declname>hit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="13" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="13" bodyend="13"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+        <references refid="class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe" compoundref="_hit_buffer_8hpp" startline="89">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a56077cbecd38953dec15caf1cb4067f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void HitBuffer::setStep</definition>
+        <argsstring>(size_t const &amp;step)</argsstring>
+        <name>setStep</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>step</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="43" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="43" bodyend="43"/>
+        <references refid="class_hit_buffer_1a3af72f963f298b8b15f2a8d2402768c2" compoundref="_hit_buffer_8hpp" startline="90">m_step</references>
+        <references refid="class_hit_buffer_1a335273868e4a43e152b47d04d679d8f4" compoundref="_hit_buffer_8hpp" startline="44" endline="44">step</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a69b8f046928a8e3dc0e573dff8b4fe94" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void HitBuffer::shift</definition>
+        <argsstring>(int n)</argsstring>
+        <name>shift</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>Shifts the buffer of hits by a certain amount. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="todo_1_todo000009"><xreftitle>Todo</xreftitle><xrefdescription><para>Make it functionnal maybe ?</para>
+</xrefdescription></xrefsect></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if n == 0 nothing happens if n&gt;0 shifts the buffer to the right by n indexes, expends the size if needed. Creates empty slots at beginning. if n&lt;0 moves the n last cells to the beginning, size stays the same. Overflow logic : the first hits are moved to the end</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Example : <ref refid="class_hit_buffer" kindref="compound">HitBuffer</ref> buffer = {hit1, hit2, hit3, hit4}; buffer.shift( 2); // buffer = {empty1, empty2, hit1, hit2, hit3, hit4} buffer.shift(-2); // buffer = {hit3, hit4, hit1, hit2} Carefull : for n&gt;0 , need to copy twice the data, so it can be very long for big buffers </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="62" column="8" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="62" bodyend="85"/>
+        <references refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" compoundref="_hit_buffer_8hpp" startline="92">m_buffer</references>
+        <references refid="class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe" compoundref="_hit_buffer_8hpp" startline="89">m_size</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a3347b5dad56d6a8c32956d58e1dd0d40" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; HitBuffer::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="29" column="15" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="29" bodyend="29"/>
+        <references refid="class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe" compoundref="_hit_buffer_8hpp" startline="89">m_size</references>
+        <referencedby refid="class_hit_buffer_1a15e4f894efd5d4ce212caf33d9345642" compoundref="_hit_buffer_8hpp" startline="11" endline="11">HitBuffer</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1ac80ad41333ed9e090eb7d93590677829" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; HitBuffer::step</definition>
+        <argsstring>()</argsstring>
+        <name>step</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="45" column="15" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="45" bodyend="45"/>
+        <references refid="class_hit_buffer_1a3af72f963f298b8b15f2a8d2402768c2" compoundref="_hit_buffer_8hpp" startline="90">m_step</references>
+      </memberdef>
+      <memberdef kind="function" id="class_hit_buffer_1a335273868e4a43e152b47d04d679d8f4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; HitBuffer::step</definition>
+        <argsstring>() const</argsstring>
+        <name>step</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/HitBuffer.hpp" line="44" column="15" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="44" bodyend="44"/>
+        <references refid="class_hit_buffer_1a3af72f963f298b8b15f2a8d2402768c2" compoundref="_hit_buffer_8hpp" startline="90">m_step</references>
+        <referencedby refid="class_hit_buffer_1a56077cbecd38953dec15caf1cb4067f3" compoundref="_hit_buffer_8hpp" startline="43" endline="43">setStep</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Hits container. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="class_hit_buffer" kindref="compound">HitBuffer</ref> </para>
+    </detaileddescription>
+    <location file="lib/Classes/HitBuffer.hpp" line="8" column="1" bodyfile="lib/Classes/HitBuffer.hpp" bodystart="9" bodyend="93"/>
+    <listofallmembers>
+      <member refid="class_hit_buffer_1adeeba852a151488e1e9f043ecb00d1e7" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>at</name></member>
+      <member refid="class_hit_buffer_1ad4607c4c9db51fd975c9118e4bb8ed3c" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>begin</name></member>
+      <member refid="class_hit_buffer_1a3094f0a9c44658c318bc54aed8cb85c7" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>begin</name></member>
+      <member refid="class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>clear</name></member>
+      <member refid="class_hit_buffer_1adfe0706e7e11c503433bda4bab818bfb" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>end</name></member>
+      <member refid="class_hit_buffer_1aef76bdf6263af98da048506b48506365" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>end</name></member>
+      <member refid="class_hit_buffer_1a15e4f894efd5d4ce212caf33d9345642" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>HitBuffer</name></member>
+      <member refid="class_hit_buffer_1a47c456dd0db2e286da0a8fd6f005aa94" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>isFull</name></member>
+      <member refid="class_hit_buffer_1a64223f64655bdae34926831cafae1227" prot="private" virt="non-virtual"><scope>HitBuffer</scope><name>m_buffer</name></member>
+      <member refid="class_hit_buffer_1a221f7336df760e282fb10bdb76a7291e" prot="private" virt="non-virtual"><scope>HitBuffer</scope><name>m_max_size</name></member>
+      <member refid="class_hit_buffer_1a6ba71f55c6ca350739e6344cb2430103" prot="private" virt="non-virtual"><scope>HitBuffer</scope><name>m_nb_clear</name></member>
+      <member refid="class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe" prot="private" virt="non-virtual"><scope>HitBuffer</scope><name>m_size</name></member>
+      <member refid="class_hit_buffer_1a3af72f963f298b8b15f2a8d2402768c2" prot="private" virt="non-virtual"><scope>HitBuffer</scope><name>m_step</name></member>
+      <member refid="class_hit_buffer_1a043ec3be6f740c5150a2973531825933" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>max_size</name></member>
+      <member refid="class_hit_buffer_1af235606f7b97e643e615924eb9d8e731" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>nbClear</name></member>
+      <member refid="class_hit_buffer_1ac60826e62033fe14911cdf03a61352f8" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>nbClear</name></member>
+      <member refid="class_hit_buffer_1a6ea32057774f64e7ea503167dd4f4046" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>operator[]</name></member>
+      <member refid="class_hit_buffer_1a9efee5395fbc55828e289c1fee96cf9a" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>operator[]</name></member>
+      <member refid="class_hit_buffer_1a784863f96a770a8b7d6aead043f6de17" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>push_back</name></member>
+      <member refid="class_hit_buffer_1a56077cbecd38953dec15caf1cb4067f3" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>setStep</name></member>
+      <member refid="class_hit_buffer_1a69b8f046928a8e3dc0e573dff8b4fe94" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>shift</name></member>
+      <member refid="class_hit_buffer_1a3347b5dad56d6a8c32956d58e1dd0d40" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>size</name></member>
+      <member refid="class_hit_buffer_1a335273868e4a43e152b47d04d679d8f4" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>step</name></member>
+      <member refid="class_hit_buffer_1ac80ad41333ed9e090eb7d93590677829" prot="public" virt="non-virtual"><scope>HitBuffer</scope><name>step</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

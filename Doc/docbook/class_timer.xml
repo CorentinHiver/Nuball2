@@ -28,7 +28,7 @@
 </listitem>
             <listitem><para>std::string <link linkend="_class_timer_1a3614503158effc6668bc10001d75d20c">unit</link> ()</para>
 </listitem>
-            <listitem><para>auto <link linkend="_class_timer_1a94fd593f6a7c33ae98741955a1eef579">Unit</link> ()</para>
+            <listitem><para>float <link linkend="_class_timer_1ab34e8e4ba0e7fd60fdd3b0048cb35897">Unit</link> ()</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -49,6 +49,10 @@
 </listitem>
         </itemizedlist>
 </simplesect>
+<section>
+<title>Detailed Description</title>
+<simplesect><title>Examples</title><link linkend="__2media_2sf__one_drive_2_c_n_r_s_2_nuball2_2lib_2_classes_2_co_progress_bar_8hpp-example">/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar.hpp</link>.</simplesect>
+</section>
 <section>
 <title>Constructor &amp; Destructor Documentation</title>
 <anchor xml:id="_class_timer_1a5f16e8da27d2a5a5242dead46de05d97"/>    <section>
@@ -185,11 +189,11 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_timer_1a94fd593f6a7c33ae98741955a1eef579"/>    <section>
+    </section><anchor xml:id="_class_timer_1ab34e8e4ba0e7fd60fdd3b0048cb35897"/>    <section>
     <title>Unit()</title>
 <indexterm><primary>Unit</primary><secondary>Timer</secondary></indexterm>
 <indexterm><primary>Timer</primary><secondary>Unit</secondary></indexterm>
-<para><computeroutput>auto Timer::Unit ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+<para><computeroutput>float Timer::Unit ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
 </section>
 <section>
 <title>Member Data Documentation</title>

@@ -180,7 +180,7 @@ protected:
   // Useful informations :
   bool m_ok = false;
   bool m_loaded = false;
-  bool m_initialized = false;
+  bool m_Initialised = false;
   ushort m_nb_detectors = 0;
   std::string m_filename;
 

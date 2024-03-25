@@ -2,29 +2,29 @@
 \label{class_fit}\index{Fit@{Fit}}
 
 
-Allows one to manipulate the results of peaks.  
+Allows one to manipulate the results of peak fitting.  
 
 
 
 
-{\ttfamily \#include $<$Calibration.\+hpp$>$}
+{\ttfamily \#include $<$Fit.\+hpp$>$}
 
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \textbf{ clear} ()
 \item 
-bool \textbf{ enough\+\_\+counts} () const
+auto \textbf{ enough\+\_\+counts} () const
 \begin{DoxyCompactList}\small\item\em Returns true if fit had enough counts. \end{DoxyCompactList}\item 
-bool const  \& \textbf{ exists} () const
+auto const  \& \textbf{ exists} () const
 \begin{DoxyCompactList}\small\item\em Returns true if fit succeeded. \end{DoxyCompactList}\item 
 bool const  \& \textbf{ exists} (bool exist)
 \begin{DoxyCompactList}\small\item\em Set if the fit succeeded \+: \end{DoxyCompactList}\item 
 \textbf{ Fit} ()
 \item 
-bool \textbf{ found\+\_\+peaks} () const
+auto \textbf{ found\+\_\+peaks} () const
 \begin{DoxyCompactList}\small\item\em Returns true if the fit found the peaks. \end{DoxyCompactList}\item 
-\textbf{ Label} const  \& \textbf{ label} () const
+auto const  \& \textbf{ label} () const
 \item 
 bool \textbf{ peaks\+\_\+found} (bool \textbf{ found})
 \begin{DoxyCompactList}\small\item\em Set if there was not enough counts \+: \end{DoxyCompactList}\item 
@@ -32,7 +32,7 @@ void \textbf{ resize} (int \textbf{ size})
 \item 
 void \textbf{ set\+Label} (\textbf{ Label} const \&\textbf{ label})
 \begin{DoxyCompactList}\small\item\em Set the label. \end{DoxyCompactList}\item 
-\textbf{ size\+\_\+t} \textbf{ size} () const
+auto \textbf{ size} () const
 \begin{DoxyCompactList}\small\item\em Returns the number of peaks used for calibration. \end{DoxyCompactList}\item 
 bool \textbf{ too\+\_\+few\+\_\+counts} (bool few\+\_\+counts)
 \begin{DoxyCompactList}\small\item\em Set if there was not enough counts \+: \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -89,7 +89,7 @@ bool \textbf{ m\+\_\+peaks\+\_\+found} = false
 
 
 \doxysubsection{Detailed Description}
-Allows one to manipulate the results of peaks. 
+Allows one to manipulate the results of peak fitting. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\label{class_fit_abd77d8fae160b06c58643a7f11e64625}} 
@@ -107,31 +107,32 @@ Allows one to manipulate the results of peaks.
 \doxysubsubsection{clear()}
 {\footnotesize\ttfamily void Fit\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\label{class_fit_a0c3b74202459b21a89949d1764c821ac}} 
+\mbox{\label{class_fit_ace2faca83c11b880a44c1e5f7c89ad8e}} 
 \index{Fit@{Fit}!enough\_counts@{enough\_counts}}
 \index{enough\_counts@{enough\_counts}!Fit@{Fit}}
 \doxysubsubsection{enough\_counts()}
-{\footnotesize\ttfamily bool Fit\+::enough\+\_\+counts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily auto Fit\+::enough\+\_\+counts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Returns true if fit had enough counts. 
 
-\mbox{\label{class_fit_aa524861d860cc6384c92425166453e93}} 
+\mbox{\label{class_fit_acd04ad290cb58f48b9925152587c380e}} 
 \index{Fit@{Fit}!exists@{exists}}
 \index{exists@{exists}!Fit@{Fit}}
 \doxysubsubsection{exists()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool const\& Fit\+::exists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily auto const\& Fit\+::exists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Returns true if fit succeeded. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_fit_aa524861d860cc6384c92425166453e93_icgraph}
+\includegraphics[width=350pt]{class_fit_acd04ad290cb58f48b9925152587c380e_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_fit_aace9236c432ee27bd3c208911b7a396d}} 
@@ -144,34 +145,36 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Set if the fit succeeded \+: 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=243pt]{class_fit_aace9236c432ee27bd3c208911b7a396d_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_fit_abaca326b14541eeb51a3bcac88c1d40e}} 
+\mbox{\label{class_fit_a4a492179d25c42f4964e9aa32aebeece}} 
 \index{Fit@{Fit}!found\_peaks@{found\_peaks}}
 \index{found\_peaks@{found\_peaks}!Fit@{Fit}}
 \doxysubsubsection{found\_peaks()}
-{\footnotesize\ttfamily bool Fit\+::found\+\_\+peaks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily auto Fit\+::found\+\_\+peaks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Returns true if the fit found the peaks. 
 
-\mbox{\label{class_fit_a4874f1cf7e73d3add3b14956618a52c8}} 
+\mbox{\label{class_fit_a65785d0daa5a0aa76f1ca5924c36fa28}} 
 \index{Fit@{Fit}!label@{label}}
 \index{label@{label}!Fit@{Fit}}
 \doxysubsubsection{label()}
-{\footnotesize\ttfamily \textbf{ Label} const\& Fit\+::label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily auto const\& Fit\+::label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=251pt]{class_fit_a4874f1cf7e73d3add3b14956618a52c8_icgraph}
+\includegraphics[width=251pt]{class_fit_a65785d0daa5a0aa76f1ca5924c36fa28_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_fit_a861a69c651863dcb3b41a788fe73f69d}} 
@@ -184,7 +187,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Set if there was not enough counts \+: 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -197,7 +201,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{resize()}
 {\footnotesize\ttfamily void Fit\+::resize (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -214,28 +219,30 @@ Here is the call graph for this function\+:\nopagebreak
 
 Set the label. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=251pt]{class_fit_a5f9e21546ed32f5b53c0692d2c199f1d_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_fit_a9c248d8b560bede53a0c550418bf2604}} 
+\mbox{\label{class_fit_a912700f52a0a3a3c66c90966ed81581b}} 
 \index{Fit@{Fit}!size@{size}}
 \index{size@{size}!Fit@{Fit}}
 \doxysubsubsection{size()}
-{\footnotesize\ttfamily \textbf{ size\+\_\+t} Fit\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily auto Fit\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Returns the number of peaks used for calibration. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=234pt]{class_fit_a9c248d8b560bede53a0c550418bf2604_icgraph}
+\includegraphics[width=234pt]{class_fit_a912700f52a0a3a3c66c90966ed81581b_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_fit_ad12c75a87a239da0768c9c6b869da431}} 
@@ -248,7 +255,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Set if there was not enough counts \+: 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -394,4 +402,4 @@ Here is the call graph for this function\+:\nopagebreak
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-lib/\+Modules/\textbf{ Calibration.\+hpp}\end{DoxyCompactItemize}
+lib/\+Classes/\textbf{ Fit.\+hpp}\end{DoxyCompactItemize}

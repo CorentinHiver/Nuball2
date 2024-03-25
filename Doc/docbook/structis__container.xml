@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structis__container" xml:lang="en-US">
+<title>is_container&lt; T &gt; Struct Template Reference</title>
+<indexterm><primary>is_container&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;libCo.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Static Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static constexpr bool <link linkend="_structis__container_1abe72bf896680aa10340ccf08a5d293c7">value</link> = decltype(<link linkend="_structis__container_1aa5aa36a7f90719cf56b0888bccb34ac4">test</link>&lt;T&gt;(0))::value</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;typename &gt; </para><para>static std::false_type <link linkend="_structis__container_1a0d9f3142d7b172650f1a4713e443aad6">test</link> (...)</para>
+</listitem>
+            <listitem><para>template&lt;typename C &gt; </para><para>static auto <link linkend="_structis__container_1aa5aa36a7f90719cf56b0888bccb34ac4">test</link> (int) -&gt; decltype(std::begin(std::declval&lt; C &gt;()), std::end(std::declval&lt; C &gt;()), std::true_type())</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_structis__container_1a0d9f3142d7b172650f1a4713e443aad6"/>    <section>
+    <title>test()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>test</primary><secondary>is_container&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>is_container&lt; T &gt;</primary><secondary>test</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><computeroutput>template&lt;typename &gt; </computeroutput><para><computeroutput>static std::false_type <link linkend="_structis__container">is_container</link>&lt; T &gt;::test ( ...)<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_structis__container_1aa5aa36a7f90719cf56b0888bccb34ac4"/>    <section>
+    <title>test()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>test</primary><secondary>is_container&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>is_container&lt; T &gt;</primary><secondary>test</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><computeroutput>template&lt;typename C &gt; </computeroutput><para><computeroutput>static auto <link linkend="_structis__container">is_container</link>&lt; T &gt;::test (int ) -&gt;  decltype(std::begin(std::declval&lt; C &gt;()), std::end(std::declval&lt; C &gt;()), std::true_type())<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structis__container_1abe72bf896680aa10340ccf08a5d293c7"/>    <section>
+    <title>value</title>
+<indexterm><primary>value</primary><secondary>is_container&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>is_container&lt; T &gt;</primary><secondary>value</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>constexpr bool <link linkend="_structis__container">is_container</link>&lt; T &gt;::value = decltype(<link linkend="_structis__container_1aa5aa36a7f90719cf56b0888bccb34ac4">test</link>&lt;T&gt;(0))::value<computeroutput>[static]</computeroutput>, <computeroutput>[constexpr]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+lib/<link linkend="_lib_co_8hpp">libCo.hpp</link></section>
+</section>

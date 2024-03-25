@@ -1,4 +1,4 @@
-.TH "lib/MTObjects/MTObject.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/MTObjects/MTObject.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,11 +6,21 @@ lib/MTObjects/MTObject.hpp
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <csignal>\fP
+.br
+\fC#include <future>\fP
+.br
 \fC#include <thread>\fP
 .br
 \fC#include <mutex>\fP
 .br
-\fC#include '\&.\&./libRoot\&.hpp'\fP
+\fC#include <vector>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include 'TROOT\&.h'\fP
+.br
+\fC#include 'TThread\&.h'\fP
 .br
 
 .SS "Classes"
@@ -18,6 +28,14 @@ lib/MTObjects/MTObject.hpp
 .in +1c
 .ti -1c
 .RI "class \fBMTObject\fP"
+.br
+.RI "Class handeling an easy multi threading\&. "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBMULTITHREADING\fP"
 .br
 .in -1c
 .SS "Typedefs"
@@ -27,13 +45,6 @@ lib/MTObjects/MTObject.hpp
 .RI "using \fBlock_mutex\fP = const std::lock_guard< std::mutex >"
 .br
 .in -1c
-.SS "Functions"
-
-.in +1c
-.ti -1c
-.RI "template<class\&.\&.\&. ARGS> void \fBprintMT\fP (ARGS &&\&.\&.\&. args)"
-.br
-.in -1c
 .SS "Variables"
 
 .in +1c
@@ -41,13 +52,13 @@ lib/MTObjects/MTObject.hpp
 .RI "std::mutex \fBMTmutex\fP"
 .br
 .in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define MULTITHREADING"
+
 .SH "Typedef Documentation"
 .PP 
 .SS "using \fBlock_mutex\fP =  const std::lock_guard<std::mutex>"
-
-.SH "Function Documentation"
-.PP 
-.SS "template<class\&.\&.\&. ARGS> void printMT (ARGS &&\&.\&.\&. args)"
 
 .SH "Variable Documentation"
 .PP 

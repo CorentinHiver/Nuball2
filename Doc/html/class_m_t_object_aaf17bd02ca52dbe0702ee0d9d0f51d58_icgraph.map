@@ -1,0 +1,8 @@
+<map id="MTObject::setThreadsNb" name="MTObject::setThreadsNb">
+<area shape="rect" id="node1" title="Sets the number of threads." alt="" coords="716,56,899,83"/>
+<area shape="rect" id="node2" href="$class_m_t_object.html#ac76ab61815b5c3a471e6c210b7ba1913" title=" " alt="" coords="432,5,668,32"/>
+<area shape="rect" id="node3" href="$class_m_t_object.html#a47f15f1545383d3476ae6614984d3e07" title=" " alt="" coords="476,56,624,83"/>
+<area shape="rect" id="node4" href="$class_faster2_histo.html#a18454db0c46d7acbcf87315fc123462d" title="Set the number of threads to write down. Option &#45;m." alt="" coords="449,107,651,133"/>
+<area shape="rect" id="node5" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title="To launch the application after instanciation." alt="" coords="245,107,384,133"/>
+<area shape="rect" id="node6" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="5,107,197,133"/>
+</map>

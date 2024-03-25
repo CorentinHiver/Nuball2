@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_timeshifts_1_1_not_found_error" kind="class" language="C++" prot="public">
+    <compoundname>Timeshifts::NotFoundError</compoundname>
+    <includes refid="_timeshifts_8hpp" local="no">Timeshifts.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_timeshifts_1_1_not_found_error_1af68cdae6542290c9aa3f6ba180e56bf5" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string Timeshifts::NotFoundError::m_filename</definition>
+        <argsstring></argsstring>
+        <name>m_filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Timeshifts.hpp" line="367" column="17" bodyfile="lib/Modules/Timeshifts.hpp" bodystart="367" bodyend="-1"/>
+        <referencedby refid="class_timeshifts_1_1_not_found_error_1af2d2641bfbfdabee633eb2e17fb5bf5a" compoundref="_timeshifts_8hpp" startline="365" endline="365">getFilename</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_timeshifts_1_1_not_found_error_1af2d2641bfbfdabee633eb2e17fb5bf5a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Timeshifts::NotFoundError::getFilename</definition>
+        <argsstring>() const</argsstring>
+        <name>getFilename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Timeshifts.hpp" line="365" column="17" bodyfile="lib/Modules/Timeshifts.hpp" bodystart="365" bodyend="365"/>
+        <references refid="class_timeshifts_1_1_not_found_error_1af68cdae6542290c9aa3f6ba180e56bf5" compoundref="_timeshifts_8hpp" startline="367">m_filename</references>
+      </memberdef>
+      <memberdef kind="function" id="class_timeshifts_1_1_not_found_error_1a7c3315b4832d93e060e3b22f72b74282" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Timeshifts::NotFoundError::NotFoundError</definition>
+        <argsstring>(std::string const &amp;filename)</argsstring>
+        <name>NotFoundError</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Timeshifts.hpp" line="364" column="5" bodyfile="lib/Modules/Timeshifts.hpp" bodystart="364" bodyend="364"/>
+        <references refid="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" compoundref="print_8hpp" startline="176" endline="181">error</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Modules/Timeshifts.hpp" line="361" column="3" bodyfile="lib/Modules/Timeshifts.hpp" bodystart="362" bodyend="368"/>
+    <listofallmembers>
+      <member refid="class_timeshifts_1_1_not_found_error_1af2d2641bfbfdabee633eb2e17fb5bf5a" prot="public" virt="non-virtual"><scope>Timeshifts::NotFoundError</scope><name>getFilename</name></member>
+      <member refid="class_timeshifts_1_1_not_found_error_1af68cdae6542290c9aa3f6ba180e56bf5" prot="private" virt="non-virtual"><scope>Timeshifts::NotFoundError</scope><name>m_filename</name></member>
+      <member refid="class_timeshifts_1_1_not_found_error_1a7c3315b4832d93e060e3b22f72b74282" prot="public" virt="non-virtual"><scope>Timeshifts::NotFoundError</scope><name>NotFoundError</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

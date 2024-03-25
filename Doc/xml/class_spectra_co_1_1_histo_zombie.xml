@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_spectra_co_1_1_histo_zombie" kind="class" language="C++" prot="public">
+    <compoundname>SpectraCo::HistoZombie</compoundname>
+    <includes refid="_spectra_co_8hpp" local="no">SpectraCo.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_spectra_co_1_1_histo_zombie_1a6bec654226930402a49bf10619b2cdd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SpectraCo::HistoZombie::HistoZombie</definition>
+        <argsstring>()</argsstring>
+        <name>HistoZombie</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraCo.hpp" line="385" column="5" bodyfile="lib/Analyse/SpectraCo.hpp" bodystart="385" bodyend="385"/>
+        <references refid="print_8hpp_1adce122f566c88a1eceeb79a635afa964" compoundref="print_8hpp" startline="39">GREY</references>
+        <references refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" compoundref="print_8hpp" startline="60" endline="60">printC</references>
+        <references refid="print_8hpp_1a8d23feea868a983c8c2b661e1e16972f" compoundref="print_8hpp" startline="22">RED</references>
+        <references refid="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" compoundref="print_8hpp" startline="19">RESET</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Analyse/SpectraCo.hpp" line="382" column="3" bodyfile="lib/Analyse/SpectraCo.hpp" bodystart="383" bodyend="386"/>
+    <listofallmembers>
+      <member refid="class_spectra_co_1_1_histo_zombie_1a6bec654226930402a49bf10619b2cdd6" prot="public" virt="non-virtual"><scope>SpectraCo::HistoZombie</scope><name>HistoZombie</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

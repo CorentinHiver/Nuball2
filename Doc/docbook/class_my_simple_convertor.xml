@@ -37,6 +37,8 @@ Collaboration diagram for MySimpleConvertor:<para>
             <listitem><para>void <link linkend="_class_faster2_root_1a3953ee6d843802ca12997e146fd7046d">loadTimeshifts</link> (std::string const &amp;dTfile)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_faster2_root_1a5b8a78ef8c54117807c770d21fa4acf0">loadTriggerFile</link> (std::string const &amp;file)</para>
+
+<para>Loads a trigger file. </para>
 </listitem>
             <listitem><para>template&lt;class... ARGS&gt; </para><para><link linkend="_class_my_simple_convertor_1a98cb80e651f072598ac0eb58264c3fee">MySimpleConvertor</link> (ARGS &amp;&amp;... args)</para>
 </listitem>
@@ -50,7 +52,7 @@ Collaboration diagram for MySimpleConvertor:<para>
 </listitem>
             <listitem><para>void <link linkend="_class_faster2_root_1ace1cc6bfc486195e5808e946770d5954">setTimeshifts</link> (<link linkend="_class_timeshifts">Timeshifts</link> const &amp;timeshifts)</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_faster2_root_1aaa5d89a939efb05b6408e65b5f0117c2">setTrigger</link> (std::function&lt; bool(const <link linkend="_class_event">Event</link> &amp;)&gt; other)</para>
+            <listitem><para>void <link linkend="_class_faster2_root_1a6975bef38e67cce6044eb1ce7f5c2f92">setTrigger</link> (<link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> other)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_faster2_root_1a01cccc30e85ee668bbff3827c838173e">throwSingles</link> (bool const &amp;_throw_single=true)</para>
 </listitem>
@@ -68,7 +70,9 @@ Collaboration diagram for MySimpleConvertor:<para>
 <simplesect>
     <title>Static Protected Member Functions    </title>
         <itemizedlist>
-            <listitem><para>static void <link linkend="_class_faster2_root_1a50fd46a075ae0a1a1f52b5bb6405047b">s_convertFile</link> (<link linkend="_class_hit">Hit</link> &amp;hit, <link linkend="_class_faster_reader">FasterReader</link> &amp;reader, <link linkend="_class_faster2_root">Faster2Root</link> &amp;convertor, <link linkend="_class_path">Path</link> const &amp;outPath)</para>
+            <listitem><para>static void <link linkend="_class_faster2_root_1a71d9880b2fea1d23ec201ded7e12b3fd">dispatch_threads</link> (<link linkend="_class_hit">Hit</link> &amp;hit, <link linkend="_class_faster_reader">FasterReader</link> &amp;reader, <link linkend="_class_faster2_root">Faster2Root</link> &amp;convertor, <link linkend="_class_path">Path</link> const &amp;outPath)</para>
+
+<para>Dispatch the <link linkend="_class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89">Faster2Root::convertFile()</link> method through the threads. </para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -105,7 +109,7 @@ Collaboration diagram for MySimpleConvertor:<para>
 </listitem>
             <listitem><para><link linkend="_class_m_t_counter">MTCounter</link> <link linkend="_class_faster2_root_1a1589ca0222d305ef05b8d622e79fbb8b">m_trigg_events</link></para>
 </listitem>
-            <listitem><para>std::function&lt; bool(const <link linkend="_class_event">Event</link> &amp;)&gt; <link linkend="_class_faster2_root_1a5807435c6403ac0a7fba6da6b43fefce">m_trigger</link> = [](const <link linkend="_class_event">Event</link>&amp;) { return true; }</para>
+            <listitem><para><link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> <link linkend="_class_faster2_root_1a329970d0ebeef0479f529969eac0aaa8">m_trigger</link> = [](const <link linkend="_class_event">Event</link>&amp;) { return true; }</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_faster2_root_1ae3fce7a9419f8ed5044f8a8cc7302a6b">m_trigger_file</link></para>
 </listitem>
@@ -222,6 +226,32 @@ Here is the call graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
+    </section><anchor xml:id="_class_faster2_root_1a71d9880b2fea1d23ec201ded7e12b3fd"/>    <section>
+    <title>dispatch_threads()</title>
+<indexterm><primary>dispatch_threads</primary><secondary>MySimpleConvertor</secondary></indexterm>
+<indexterm><primary>MySimpleConvertor</primary><secondary>dispatch_threads</secondary></indexterm>
+<para><computeroutput>static void Faster2Root::dispatch_threads (<link linkend="_class_hit">Hit</link> &amp; hit, <link linkend="_class_faster_reader">FasterReader</link> &amp; reader, <link linkend="_class_faster2_root">Faster2Root</link> &amp; convertor, <link linkend="_class_path">Path</link> const &amp; outPath)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para><para>
+
+<para>Dispatch the <link linkend="_class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89">Faster2Root::convertFile()</link> method through the threads. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a71d9880b2fea1d23ec201ded7e12b3fd_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a71d9880b2fea1d23ec201ded7e12b3fd_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
     </section><anchor xml:id="_class_faster2_root_1ad30ccf937150bbd3504ec3a354b76c8f"/>    <section>
     <title>load()</title>
 <indexterm><primary>load</primary><secondary>MySimpleConvertor</secondary></indexterm>
@@ -292,7 +322,13 @@ Here is the caller graph for this function:<para>
     <title>loadTriggerFile()</title>
 <indexterm><primary>loadTriggerFile</primary><secondary>MySimpleConvertor</secondary></indexterm>
 <indexterm><primary>MySimpleConvertor</primary><secondary>loadTriggerFile</secondary></indexterm>
-<para><computeroutput>void Faster2Root::loadTriggerFile (std::string const &amp; file)<computeroutput>[inherited]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>void Faster2Root::loadTriggerFile (std::string const &amp; filename)<computeroutput>[inherited]</computeroutput></computeroutput></para><para>
+
+<para>Loads a trigger file. </para>
+</para>
+
+<para>A trigger file contains a list of the detectors&apos;s labels (the number, not the name) that are required in the event (e.g. a germanium trigger file would list all the labels of the germaniums). If you want more specific trigger you have to create your own executable, include <link linkend="_class_faster2_root">Faster2Root</link> and follow the example 2 of the documentation of the class. </para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -345,28 +381,6 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_faster2_root_1a50fd46a075ae0a1a1f52b5bb6405047b"/>    <section>
-    <title>s_convertFile()</title>
-<indexterm><primary>s_convertFile</primary><secondary>MySimpleConvertor</secondary></indexterm>
-<indexterm><primary>MySimpleConvertor</primary><secondary>s_convertFile</secondary></indexterm>
-<para><computeroutput>static void Faster2Root::s_convertFile (<link linkend="_class_hit">Hit</link> &amp; hit, <link linkend="_class_faster_reader">FasterReader</link> &amp; reader, <link linkend="_class_faster2_root">Faster2Root</link> &amp; convertor, <link linkend="_class_path">Path</link> const &amp; outPath)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
     </section><anchor xml:id="_class_faster2_root_1a957a45ae197b565da07521a27ee73f53"/>    <section>
     <title>setCalibration()</title>
 <indexterm><primary>setCalibration</primary><secondary>MySimpleConvertor</secondary></indexterm>
@@ -403,15 +417,15 @@ Here is the caller graph for this function:<para>
     <title>setTimeshifts()</title>
 <indexterm><primary>setTimeshifts</primary><secondary>MySimpleConvertor</secondary></indexterm>
 <indexterm><primary>MySimpleConvertor</primary><secondary>setTimeshifts</secondary></indexterm>
-<para><computeroutput>void Faster2Root::setTimeshifts (<link linkend="_class_timeshifts">Timeshifts</link> const &amp; timeshifts)<computeroutput>[inline]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1aaa5d89a939efb05b6408e65b5f0117c2"/>    <section>
+<para><computeroutput>void Faster2Root::setTimeshifts (<link linkend="_class_timeshifts">Timeshifts</link> const &amp; timeshifts)<computeroutput>[inline]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1a6975bef38e67cce6044eb1ce7f5c2f92"/>    <section>
     <title>setTrigger()</title>
 <indexterm><primary>setTrigger</primary><secondary>MySimpleConvertor</secondary></indexterm>
 <indexterm><primary>MySimpleConvertor</primary><secondary>setTrigger</secondary></indexterm>
-<para><computeroutput>void Faster2Root::setTrigger (std::function&lt; bool(const <link linkend="_class_event">Event</link> &amp;)&gt; other)<computeroutput>[inline]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>void Faster2Root::setTrigger (<link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> other)<computeroutput>[inline]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a6975bef38e67cce6044eb1ce7f5c2f92_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -485,11 +499,11 @@ Here is the caller graph for this function:<para>
     <title>m_trigg_events</title>
 <indexterm><primary>m_trigg_events</primary><secondary>MySimpleConvertor</secondary></indexterm>
 <indexterm><primary>MySimpleConvertor</primary><secondary>m_trigg_events</secondary></indexterm>
-<para><computeroutput><link linkend="_class_m_t_counter">MTCounter</link> Faster2Root::m_trigg_events<computeroutput>[protected]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1a5807435c6403ac0a7fba6da6b43fefce"/>    <section>
+<para><computeroutput><link linkend="_class_m_t_counter">MTCounter</link> Faster2Root::m_trigg_events<computeroutput>[protected]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1a329970d0ebeef0479f529969eac0aaa8"/>    <section>
     <title>m_trigger</title>
 <indexterm><primary>m_trigger</primary><secondary>MySimpleConvertor</secondary></indexterm>
 <indexterm><primary>MySimpleConvertor</primary><secondary>m_trigger</secondary></indexterm>
-<para><computeroutput>std::function&lt;bool(const <link linkend="_class_event">Event</link>&amp;)&gt; Faster2Root::m_trigger = [](const <link linkend="_class_event">Event</link>&amp;) { return true; }<computeroutput>[protected]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1ae3fce7a9419f8ed5044f8a8cc7302a6b"/>    <section>
+<para><computeroutput><link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> Faster2Root::m_trigger = [](const <link linkend="_class_event">Event</link>&amp;) { return true; }<computeroutput>[protected]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1ae3fce7a9419f8ed5044f8a8cc7302a6b"/>    <section>
     <title>m_trigger_file</title>
 <indexterm><primary>m_trigger_file</primary><secondary>MySimpleConvertor</secondary></indexterm>
 <indexterm><primary>MySimpleConvertor</primary><secondary>m_trigger_file</secondary></indexterm>

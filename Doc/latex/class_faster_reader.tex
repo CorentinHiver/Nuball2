@@ -46,14 +46,18 @@ void \textbf{ set\+Hit} (\textbf{ Hit} $\ast$hit)
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+static auto \textbf{ get\+Max\+Hits} ()
+\item 
 static void \textbf{ set\+Max\+Hits} (\textbf{ ulonglong} max\+Hits)
-\begin{DoxyCompactList}\small\item\em Set the number of hits to read inside each file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set the number of hits to read inside each file. \end{DoxyCompactList}\item 
+static void \textbf{ set\+Verbose} (int i=1)
+\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \textbf{ Initialize} ()
+bool \textbf{ Initialise} ()
 \begin{DoxyCompactList}\small\item\em Setup the fasterac.\+h library to read the data. \end{DoxyCompactList}\item 
-bool \textbf{ Initialize\+Reader} ()
+bool \textbf{ Initialise\+Reader} ()
 \item 
 bool \textbf{ Read\+Data} (faster\+\_\+data\+\_\+p const \&\+\_\+data)
 \begin{DoxyCompactList}\small\item\em Treats faster data. \end{DoxyCompactList}\item 
@@ -86,8 +90,6 @@ std\+::unordered\+\_\+map$<$ std\+::string, bool $>$ \textbf{ error\+\_\+message
 \item 
 \textbf{ ulonglong} \textbf{ m\+\_\+counter} = 0
 \item 
-\textbf{ ulonglong} \textbf{ m\+\_\+cursor} = 0
-\item 
 faster\+\_\+data\+\_\+p \textbf{ m\+\_\+data}
 \item 
 \textbf{ Hit} \textbf{ m\+\_\+empty\+\_\+hit}
@@ -113,7 +115,9 @@ bool \textbf{ m\+\_\+write} = false
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static \textbf{ ulonglong} \textbf{ m\+\_\+max\+Hits} = -\/1
+static thread\+\_\+local int \textbf{ m\+\_\+verbose} = 1
+\item 
+static \textbf{ ulonglong} \textbf{ s\+\_\+max\+Hits} = -\/1
 \end{DoxyCompactItemize}
 
 
@@ -173,7 +177,8 @@ The pileup bit for CRRC4 is not handled
 
 Construct a new Faster Reader object. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -203,7 +208,8 @@ Destroy the Faster Reader object.
 
 Get the name of the file being read. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -220,7 +226,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Returns the hits counter. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -237,7 +244,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Get the name of the file being read. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -252,41 +260,58 @@ Here is the caller graph for this function\+:\nopagebreak
 
 \begin{DoxyRefDesc}{Deprecated}
 \item[\textbf{ Deprecated}]Get the current \doxyref{Hit}{p.}{class_hit} \end{DoxyRefDesc}
-\mbox{\label{class_faster_reader_a949601e8d70fc3aaabe66824d22bdf69}} 
-\index{FasterReader@{FasterReader}!Initialize@{Initialize}}
-\index{Initialize@{Initialize}!FasterReader@{FasterReader}}
-\doxysubsubsection{Initialize()}
-{\footnotesize\ttfamily bool Faster\+Reader\+::\+Initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+\mbox{\label{class_faster_reader_a54f783429b2ce11a478280f5aa0ab2a4}} 
+\index{FasterReader@{FasterReader}!getMaxHits@{getMaxHits}}
+\index{getMaxHits@{getMaxHits}!FasterReader@{FasterReader}}
+\doxysubsubsection{getMaxHits()}
+{\footnotesize\ttfamily static auto Faster\+Reader\+::get\+Max\+Hits (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\label{class_faster_reader_aa887429a942ff961225755336c06c025}} 
+\index{FasterReader@{FasterReader}!Initialise@{Initialise}}
+\index{Initialise@{Initialise}!FasterReader@{FasterReader}}
+\doxysubsubsection{Initialise()}
+{\footnotesize\ttfamily bool Faster\+Reader\+::\+Initialise (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
 Setup the fasterac.\+h library to read the data. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_faster_reader_a949601e8d70fc3aaabe66824d22bdf69_cgraph}
+\includegraphics[width=350pt]{class_faster_reader_aa887429a942ff961225755336c06c025_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_faster_reader_a949601e8d70fc3aaabe66824d22bdf69_icgraph}
+\includegraphics[width=350pt]{class_faster_reader_aa887429a942ff961225755336c06c025_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_faster_reader_a21a9202f79d43b9fd41cd1e1c276fe2c}} 
-\index{FasterReader@{FasterReader}!InitializeReader@{InitializeReader}}
-\index{InitializeReader@{InitializeReader}!FasterReader@{FasterReader}}
-\doxysubsubsection{InitializeReader()}
-{\footnotesize\ttfamily bool Faster\+Reader\+::\+Initialize\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+\mbox{\label{class_faster_reader_a83d86d816bed5053765a05ddf4da278d}} 
+\index{FasterReader@{FasterReader}!InitialiseReader@{InitialiseReader}}
+\index{InitialiseReader@{InitialiseReader}!FasterReader@{FasterReader}}
+\doxysubsubsection{InitialiseReader()}
+{\footnotesize\ttfamily bool Faster\+Reader\+::\+Initialise\+Reader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_faster_reader_a21a9202f79d43b9fd41cd1e1c276fe2c_icgraph}
+\includegraphics[width=283pt]{class_faster_reader_a83d86d816bed5053765a05ddf4da278d_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster_reader_a83d86d816bed5053765a05ddf4da278d_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_faster_reader_a5aefeb0380dfdd42d1e63b987989a118}} 
@@ -323,7 +348,7 @@ Main method. Extract the next hit from the data file and fills the \doxyref{Hit}
 
 \doxyref{Faster\+Reader}{p.}{class_faster_reader} reader(\&hit, filename); \begin{DoxyVerb} while(reader.Read())
  {
-    // This hit is filled/updated at each iteration by the data read in the ReadData() private method
+    // This hit is filled/updated at each iteration
     print(hit); 
  }
 \end{DoxyVerb}
@@ -332,14 +357,16 @@ Main method. Extract the next hit from the data file and fills the \doxyref{Hit}
 \begin{DoxyReturn}{Returns}
 true if the end of the file is reached, false otherwise 
 \end{DoxyReturn}
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster_reader_a2d05907241b80ed637b2ae5a01503756_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -356,14 +383,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Treats faster data. 
 
-FASTER\+\_\+\+GROUPHere is the call graph for this function\+:\nopagebreak
+FASTER\+\_\+\+GROUPHere is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster_reader_a0b2cd239d03d34e69b10418cb6292858_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -380,14 +409,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Treats the faster data groups. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster_reader_a64fb4fc3d241141f5d27df99906780fc_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -404,14 +435,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Replace the standard Read\+Simple if the faster data contains groups First of all, the m\+\_\+write variable is used to make sure only the handled types are managed (see \doxyref{switch\+\_\+alias()}{p.}{class_faster_reader_af3c8f411415fb3d9fe20cd8551bc24ed} definition) First hit read \+: goes inside \doxyref{Read\+Data()}{p.}{class_faster_reader_a0b2cd239d03d34e69b10418cb6292858} if it isn\textquotesingle{}t a GROUP\+\_\+\+TYPE\+\_\+\+ALIAS then read it normally else \+: recursively read the data inside of the group and fill in m\+\_\+hit\+\_\+group\+\_\+buffer returns the first hit // TO CHECK THIS !!! and sets m\+\_\+in\+Group to true The other hits \+: if we still are in a group (m\+\_\+in\+Group is true)\+: reads the next hit in m\+\_\+hit\+\_\+group\+\_\+buffer else \+: if it isn\textquotesingle{}t a GROUP\+\_\+\+TYPE\+\_\+\+ALIAS then read it normally else \+: recursively read the data inside of the group and fill in m\+\_\+hit\+\_\+group\+\_\+buffer returns the first hit // TO CHECK THIS !!! and sets m\+\_\+in\+Group to true. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster_reader_aef9fb9be5f288b88bdb17616aab801bd_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -428,14 +461,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Read triggerless data. 
 
-This function is replaced by Read\+Group if the faster data contains groups, this one is simply faster Here is the call graph for this function\+:\nopagebreak
+This function is replaced by Read\+Group if the faster data contains groups, this one is simply faster Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster_reader_a60f1f638732c48c1b78cfe4dcd23d39b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -452,7 +487,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Reset the cursor to the begining of the document. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -477,13 +513,28 @@ Here is the call graph for this function\+:\nopagebreak
 
 Set the number of hits to read inside each file. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{class_faster_reader_aa1fcb8d6721212bc982cac0ae4e597eb_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster_reader_aa1fcb8d6721212bc982cac0ae4e597eb_icgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_faster_reader_a76b7fa1bc82b5a5dff918bef2ae7d3a0}} 
+\index{FasterReader@{FasterReader}!setVerbose@{setVerbose}}
+\index{setVerbose@{setVerbose}!FasterReader@{FasterReader}}
+\doxysubsubsection{setVerbose()}
+{\footnotesize\ttfamily static void Faster\+Reader\+::set\+Verbose (\begin{DoxyParamCaption}\item[{int}]{i = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
 \mbox{\label{class_faster_reader_af3c8f411415fb3d9fe20cd8551bc24ed}} 
 \index{FasterReader@{FasterReader}!switch\_alias@{switch\_alias}}
 \index{switch\_alias@{switch\_alias}!FasterReader@{FasterReader}}
@@ -494,14 +545,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Treat the specific part of data (QDC gates, spectro ADC ...) 
 
-Internal method that is used to fill hit.\+adc depending on the alias of the data, that correspond to a certain kind of faster data. Here is the call graph for this function\+:\nopagebreak
+Internal method that is used to fill hit.\+adc depending on the alias of the data, that correspond to a certain kind of faster data. Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster_reader_af3c8f411415fb3d9fe20cd8551bc24ed_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -523,7 +576,8 @@ Internal method used to extract ADC value from CRRC4 filter
 \begin{DoxyAttention}{Attention}
 m\+\_\+hit-\/$>$pileup = (false); //\+TO BE LOOKED AT 
 \end{DoxyAttention}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -540,7 +594,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Load QDC1 data. 
 
-Internal method used to extract QDC values with 1 gate Here is the caller graph for this function\+:\nopagebreak
+Internal method used to extract QDC values with 1 gate Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -557,7 +612,16 @@ Internal method used to extract QDC values with 1 gate Here is the caller graph 
 
 Load qdc2 data. 
 
-Internal method used to extract QDC values with 2 gates Here is the caller graph for this function\+:\nopagebreak
+Internal method used to extract QDC values with 2 gates Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{class_faster_reader_a94fd509a6352735984a20c03fb046254_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -574,7 +638,16 @@ Internal method used to extract QDC values with 2 gates Here is the caller graph
 
 Load qdc3 data. 
 
-Internal method used to extract QDC values with 2 gates Here is the caller graph for this function\+:\nopagebreak
+Internal method used to extract QDC values with 2 gates Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{class_faster_reader_afa7cbf1733ff68804ef4f7706bf58416_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -598,7 +671,8 @@ Internal method used to extract RF period Here is the call graph for this functi
 \includegraphics[width=302pt]{class_faster_reader_ad2d7d3acd1a874f09f44f2adfa69d42c_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -615,7 +689,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Load Trapez data. 
 
-Internal method used to extract ADC value from trapezoid filter Here is the caller graph for this function\+:\nopagebreak
+Internal method used to extract ADC value from trapezoid filter Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -642,12 +717,6 @@ Internal method used to extract ADC value from trapezoid filter Here is the call
 \index{m\_counter@{m\_counter}!FasterReader@{FasterReader}}
 \doxysubsubsection{m\_counter}
 {\footnotesize\ttfamily \textbf{ ulonglong} Faster\+Reader\+::m\+\_\+counter = 0\hspace{0.3cm}{\ttfamily [private]}}
-
-\mbox{\label{class_faster_reader_a681170463697b5dd3856328eacb0a39d}} 
-\index{FasterReader@{FasterReader}!m\_cursor@{m\_cursor}}
-\index{m\_cursor@{m\_cursor}!FasterReader@{FasterReader}}
-\doxysubsubsection{m\_cursor}
-{\footnotesize\ttfamily \textbf{ ulonglong} Faster\+Reader\+::m\+\_\+cursor = 0\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\label{class_faster_reader_a95a022f50153b44f711a81e8109583ce}} 
 \index{FasterReader@{FasterReader}!m\_data@{m\_data}}
@@ -703,23 +772,29 @@ Internal method used to extract ADC value from trapezoid filter Here is the call
 \doxysubsubsection{m\_kReady}
 {\footnotesize\ttfamily bool Faster\+Reader\+::m\+\_\+k\+Ready = false\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\label{class_faster_reader_a8554231dbef9df122f04313f4adb594a}} 
-\index{FasterReader@{FasterReader}!m\_maxHits@{m\_maxHits}}
-\index{m\_maxHits@{m\_maxHits}!FasterReader@{FasterReader}}
-\doxysubsubsection{m\_maxHits}
-{\footnotesize\ttfamily \textbf{ ulonglong} Faster\+Reader\+::m\+\_\+max\+Hits = -\/1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
-
 \mbox{\label{class_faster_reader_ac10e47db05e3067528e3ce53d5b3da38}} 
 \index{FasterReader@{FasterReader}!m\_reader@{m\_reader}}
 \index{m\_reader@{m\_reader}!FasterReader@{FasterReader}}
 \doxysubsubsection{m\_reader}
 {\footnotesize\ttfamily faster\+\_\+file\+\_\+reader\+\_\+p Faster\+Reader\+::m\+\_\+reader = NULL\hspace{0.3cm}{\ttfamily [private]}}
 
+\mbox{\label{class_faster_reader_a5d60fc12eece11753c5d495ba76db75f}} 
+\index{FasterReader@{FasterReader}!m\_verbose@{m\_verbose}}
+\index{m\_verbose@{m\_verbose}!FasterReader@{FasterReader}}
+\doxysubsubsection{m\_verbose}
+{\footnotesize\ttfamily thread\+\_\+local int Faster\+Reader\+::m\+\_\+verbose = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
 \mbox{\label{class_faster_reader_abd85697a856dc998d235a5edc0ebb530}} 
 \index{FasterReader@{FasterReader}!m\_write@{m\_write}}
 \index{m\_write@{m\_write}!FasterReader@{FasterReader}}
 \doxysubsubsection{m\_write}
 {\footnotesize\ttfamily bool Faster\+Reader\+::m\+\_\+write = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster_reader_aa58b38ff4c8f95526ea529cdaaa1f8f8}} 
+\index{FasterReader@{FasterReader}!s\_maxHits@{s\_maxHits}}
+\index{s\_maxHits@{s\_maxHits}!FasterReader@{FasterReader}}
+\doxysubsubsection{s\_maxHits}
+{\footnotesize\ttfamily \textbf{ ulonglong} Faster\+Reader\+::s\+\_\+max\+Hits = -\/1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 

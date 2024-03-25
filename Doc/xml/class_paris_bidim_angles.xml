@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_paris_bidim_angles" kind="class" language="C++" prot="public">
+    <compoundname>ParisBidimAngles</compoundname>
+    <includes refid="_paris_bidim_angles_8hpp" local="no">ParisBidimAngles.hpp</includes>
+    <innerclass refid="class_paris_bidim_angles_1_1_file_error" prot="public">ParisBidimAngles::FileError</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_paris_bidim_angles_1aaf84ea92c8f0a178e039c173c71f0b1a" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, double &gt;</type>
+        <definition>std::unordered_map&lt;std::string, double&gt; ParisBidimAngles::m_angleLaBr</definition>
+        <argsstring></argsstring>
+        <name>m_angleLaBr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="46" column="22" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="46" bodyend="-1"/>
+        <referencedby refid="class_paris_bidim_angles_1a72183315a0c50a92612964ed779a7419" compoundref="_paris_bidim_angles_8hpp" startline="17" endline="17">angleLaBr</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a7cc946220cdb4f0a42a8793cf6337f58" compoundref="_paris_bidim_angles_8hpp" startline="36" endline="36">LaBr_angles</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" compoundref="_paris_bidim_angles_8hpp" startline="90" endline="96">set</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_bidim_angles_1aa58045051b25656e3ee374f0e930c6de" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, double &gt;</type>
+        <definition>std::unordered_map&lt;std::string, double&gt; ParisBidimAngles::m_angleNaI</definition>
+        <argsstring></argsstring>
+        <name>m_angleNaI</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="47" column="22" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="47" bodyend="-1"/>
+        <referencedby refid="class_paris_bidim_angles_1a799125ee30452e7ba2d5f89b48c57da1" compoundref="_paris_bidim_angles_8hpp" startline="15" endline="15">angleNaI</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1aa0d0e80c56a0e44766c856b3560a0ba0" compoundref="_paris_bidim_angles_8hpp" startline="37" endline="37">NaI_angles</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" compoundref="_paris_bidim_angles_8hpp" startline="90" endline="96">set</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_bidim_angles_1ab6053684ae330a5e30a89618044a4e18" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::pair&lt; double, double &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::pair&lt;double, double&gt; &gt; ParisBidimAngles::m_angles</definition>
+        <argsstring></argsstring>
+        <name>m_angles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="48" column="22" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="48" bodyend="-1"/>
+        <referencedby refid="class_paris_bidim_angles_1a2fc512a76d77f8ecb97c3d46b07c088a" compoundref="_paris_bidim_angles_8hpp" startline="13" endline="13">operator[]</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" compoundref="_paris_bidim_angles_8hpp" startline="90" endline="96">set</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_bidim_angles_1a86e477b4aad725586be9bcdd64ef738f" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ParisBidimAngles::m_filename</definition>
+        <argsstring></argsstring>
+        <name>m_filename</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="42" column="15" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_bidim_angles_1ad7e9840d2054070758edf03ce757cba0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; ParisBidimAngles::m_names</definition>
+        <argsstring></argsstring>
+        <name>m_names</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="45" column="15" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="45" bodyend="-1"/>
+        <referencedby refid="class_paris_bidim_angles_1ab8d9a5f52612a296bea2ada2ba64b385" compoundref="_paris_bidim_angles_8hpp" startline="22" endline="22">names</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a00fe25e6cdd8340cab38ba7f6fe2b1d7" compoundref="_paris_bidim_angles_8hpp" startline="27" endline="34">printDeg</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" compoundref="_paris_bidim_angles_8hpp" startline="90" endline="96">set</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1adc78f553d4c386a1ea6230965c11d68a" compoundref="_paris_bidim_angles_8hpp" startline="25" endline="25">sortNames</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_paris_bidim_angles_1ab440b2ada4931a8f26eece54a1ec8a16" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ParisBidimAngles::m_ok</definition>
+        <argsstring></argsstring>
+        <name>m_ok</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="41" column="8" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_paris_bidim_angles_1a3c71992fbda09a6d859949cba76d0d87" prot="private" static="yes" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ParisBidimAngles::m_extension</definition>
+        <argsstring></argsstring>
+        <name>m_extension</name>
+        <initializer>= &quot;angles&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="43" column="22" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="43" bodyend="-1"/>
+        <referencedby refid="class_paris_bidim_angles_1a904829a187c50059dda2d439ef0d6db1" compoundref="_paris_bidim_angles_8hpp" startline="98" endline="122">load</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a0ca1c561f33bc79fc16b630ef4db9144" compoundref="_paris_bidim_angles_8hpp" startline="77" endline="88">write</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_paris_bidim_angles_1a737596223de54d2eabbb64a3d674e82f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double ParisBidimAngles::angleLaBr</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>angleLaBr</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="18" column="18" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="18" bodyend="18"/>
+        <references refid="class_paris_bidim_angles_1aaf84ea92c8f0a178e039c173c71f0b1a" compoundref="_paris_bidim_angles_8hpp" startline="46">m_angleLaBr</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a72183315a0c50a92612964ed779a7419" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double const  &amp;</type>
+        <definition>double const&amp; ParisBidimAngles::angleLaBr</definition>
+        <argsstring>(std::string name) const</argsstring>
+        <name>angleLaBr</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="17" column="17" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="17" bodyend="17"/>
+        <references refid="class_paris_bidim_angles_1aaf84ea92c8f0a178e039c173c71f0b1a" compoundref="_paris_bidim_angles_8hpp" startline="46">m_angleLaBr</references>
+        <referencedby refid="class_paris_bidim_angles_1a904829a187c50059dda2d439ef0d6db1" compoundref="_paris_bidim_angles_8hpp" startline="98" endline="122">load</referencedby>
+        <referencedby refid="_paris_bidim_angles_8hpp_1acfc86248a9acc94731d9b97c23da3e56" compoundref="_paris_bidim_angles_8hpp" startline="59" endline="67">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a00fe25e6cdd8340cab38ba7f6fe2b1d7" compoundref="_paris_bidim_angles_8hpp" startline="27" endline="34">printDeg</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" compoundref="_paris_bidim_angles_8hpp" startline="90" endline="96">set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a054559c88ccfa68ffc104ba8cf0c2fe6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double ParisBidimAngles::angleNaI</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>angleNaI</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="16" column="18" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="16" bodyend="16"/>
+        <references refid="class_paris_bidim_angles_1aa58045051b25656e3ee374f0e930c6de" compoundref="_paris_bidim_angles_8hpp" startline="47">m_angleNaI</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a799125ee30452e7ba2d5f89b48c57da1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double const  &amp;</type>
+        <definition>double const&amp; ParisBidimAngles::angleNaI</definition>
+        <argsstring>(std::string name) const</argsstring>
+        <name>angleNaI</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="15" column="17" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="15" bodyend="15"/>
+        <references refid="class_paris_bidim_angles_1aa58045051b25656e3ee374f0e930c6de" compoundref="_paris_bidim_angles_8hpp" startline="47">m_angleNaI</references>
+        <referencedby refid="class_paris_bidim_angles_1a904829a187c50059dda2d439ef0d6db1" compoundref="_paris_bidim_angles_8hpp" startline="98" endline="122">load</referencedby>
+        <referencedby refid="_paris_bidim_angles_8hpp_1acfc86248a9acc94731d9b97c23da3e56" compoundref="_paris_bidim_angles_8hpp" startline="59" endline="67">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a00fe25e6cdd8340cab38ba7f6fe2b1d7" compoundref="_paris_bidim_angles_8hpp" startline="27" endline="34">printDeg</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" compoundref="_paris_bidim_angles_8hpp" startline="90" endline="96">set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a7cc946220cdb4f0a42a8793cf6337f58" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::unordered_map&lt; std::string, double &gt; const  &amp;</type>
+        <definition>std::unordered_map&lt;std::string, double&gt; const&amp; ParisBidimAngles::LaBr_angles</definition>
+        <argsstring>()</argsstring>
+        <name>LaBr_angles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="36" column="29" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="36" bodyend="36"/>
+        <references refid="class_paris_bidim_angles_1aaf84ea92c8f0a178e039c173c71f0b1a" compoundref="_paris_bidim_angles_8hpp" startline="46">m_angleLaBr</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a904829a187c50059dda2d439ef0d6db1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisBidimAngles::load</definition>
+        <argsstring>(std::string const &amp;filename)</argsstring>
+        <name>load</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="9" column="8" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="98" bodyend="122"/>
+        <references refid="class_paris_bidim_angles_1a72183315a0c50a92612964ed779a7419" compoundref="_paris_bidim_angles_8hpp" startline="17" endline="17">angleLaBr</references>
+        <references refid="class_paris_bidim_angles_1a799125ee30452e7ba2d5f89b48c57da1" compoundref="_paris_bidim_angles_8hpp" startline="15" endline="15">angleNaI</references>
+        <references refid="class_file_1a53118ce36851cb1c6845a82f915fd8ba" compoundref="files__functions_8hpp" startline="834" endline="834">File::exists</references>
+        <references refid="files__functions_8hpp_1afd584978228fac5fae283c12837378dd" compoundref="files__functions_8hpp" startline="31" endline="31">file_is_empty</references>
+        <references refid="class_paris_bidim_angles_1a3c71992fbda09a6d859949cba76d0d87" compoundref="_paris_bidim_angles_8hpp" startline="43">m_extension</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" compoundref="_paris_bidim_angles_8hpp" startline="90" endline="96">set</references>
+        <references refid="class_file_1af4dee1c79bf496d505633211177c6ce3" compoundref="files__functions_8hpp" startline="829" endline="829">File::setExtension</references>
+        <references refid="class_file_1a899e6a7c528ab2824c7c584c4ee63073" compoundref="files__functions_8hpp" startline="811" endline="811">File::string</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="156" endline="156">throw_error</references>
+        <referencedby refid="class_paris_bidim_angles_1a94f5dc80e2e164186840fdf9915e080e" compoundref="_paris_bidim_angles_8hpp" startline="8" endline="8">ParisBidimAngles</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1aa0d0e80c56a0e44766c856b3560a0ba0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::unordered_map&lt; std::string, double &gt; const  &amp;</type>
+        <definition>std::unordered_map&lt;std::string, double&gt; const&amp; ParisBidimAngles::NaI_angles</definition>
+        <argsstring>()</argsstring>
+        <name>NaI_angles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="37" column="29" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="37" bodyend="37"/>
+        <references refid="class_paris_bidim_angles_1aa58045051b25656e3ee374f0e930c6de" compoundref="_paris_bidim_angles_8hpp" startline="47">m_angleNaI</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1aa257a0e840f44672aa2bcbf23d103566" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto ParisBidimAngles::names</definition>
+        <argsstring>()</argsstring>
+        <name>names</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="23" column="16" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="23" bodyend="23"/>
+        <references refid="class_paris_bidim_angles_1ad7e9840d2054070758edf03ce757cba0" compoundref="_paris_bidim_angles_8hpp" startline="45">m_names</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1ab8d9a5f52612a296bea2ada2ba64b385" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; ParisBidimAngles::names</definition>
+        <argsstring>() const</argsstring>
+        <name>names</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="22" column="15" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="22" bodyend="22"/>
+        <references refid="class_paris_bidim_angles_1ad7e9840d2054070758edf03ce757cba0" compoundref="_paris_bidim_angles_8hpp" startline="45">m_names</references>
+        <referencedby refid="_paris_bidim_angles_8hpp_1acfc86248a9acc94731d9b97c23da3e56" compoundref="_paris_bidim_angles_8hpp" startline="59" endline="67">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a2fc512a76d77f8ecb97c3d46b07c088a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::pair&lt; double, double &gt; const  &amp;</type>
+        <definition>std::pair&lt;double, double&gt; const&amp; ParisBidimAngles::operator[]</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="13" column="20" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="13" bodyend="13"/>
+        <references refid="class_paris_bidim_angles_1ab6053684ae330a5e30a89618044a4e18" compoundref="_paris_bidim_angles_8hpp" startline="48">m_angles</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a1005f10d8eabebfd02d1dee6fafa9ebd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>ParisBidimAngles::ParisBidimAngles</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>ParisBidimAngles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="7" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a94f5dc80e2e164186840fdf9915e080e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ParisBidimAngles::ParisBidimAngles</definition>
+        <argsstring>(std::string const &amp;filename)</argsstring>
+        <name>ParisBidimAngles</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="8" column="3" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="8" bodyend="8"/>
+        <references refid="class_paris_bidim_angles_1a904829a187c50059dda2d439ef0d6db1" compoundref="_paris_bidim_angles_8hpp" startline="98" endline="122">load</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a00fe25e6cdd8340cab38ba7f6fe2b1d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisBidimAngles::printDeg</definition>
+        <argsstring>()</argsstring>
+        <name>printDeg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="27" column="8" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="27" bodyend="34"/>
+        <references refid="class_paris_bidim_angles_1a72183315a0c50a92612964ed779a7419" compoundref="_paris_bidim_angles_8hpp" startline="17" endline="17">angleLaBr</references>
+        <references refid="class_paris_bidim_angles_1a799125ee30452e7ba2d5f89b48c57da1" compoundref="_paris_bidim_angles_8hpp" startline="15" endline="15">angleNaI</references>
+        <references refid="class_paris_bidim_angles_1ad7e9840d2054070758edf03ce757cba0" compoundref="_paris_bidim_angles_8hpp" startline="45">m_names</references>
+        <references refid="class_paris_bidim_angles_1adc78f553d4c386a1ea6230965c11d68a" compoundref="_paris_bidim_angles_8hpp" startline="25" endline="25">sortNames</references>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisBidimAngles::set</definition>
+        <argsstring>(std::string const &amp;name, double const &amp;angleLaBr, double const &amp;angleNaI)</argsstring>
+        <name>set</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>angleLaBr</declname>
+        </param>
+        <param>
+          <type>double const &amp;</type>
+          <declname>angleNaI</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="20" column="8" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="90" bodyend="96"/>
+        <references refid="class_paris_bidim_angles_1a72183315a0c50a92612964ed779a7419" compoundref="_paris_bidim_angles_8hpp" startline="17" endline="17">angleLaBr</references>
+        <references refid="class_paris_bidim_angles_1a799125ee30452e7ba2d5f89b48c57da1" compoundref="_paris_bidim_angles_8hpp" startline="15" endline="15">angleNaI</references>
+        <references refid="class_paris_bidim_angles_1aaf84ea92c8f0a178e039c173c71f0b1a" compoundref="_paris_bidim_angles_8hpp" startline="46">m_angleLaBr</references>
+        <references refid="class_paris_bidim_angles_1aa58045051b25656e3ee374f0e930c6de" compoundref="_paris_bidim_angles_8hpp" startline="47">m_angleNaI</references>
+        <references refid="class_paris_bidim_angles_1ab6053684ae330a5e30a89618044a4e18" compoundref="_paris_bidim_angles_8hpp" startline="48">m_angles</references>
+        <references refid="class_paris_bidim_angles_1ad7e9840d2054070758edf03ce757cba0" compoundref="_paris_bidim_angles_8hpp" startline="45">m_names</references>
+        <referencedby refid="class_paris_1a66745a02a04a8733eba514f319b1cc5e" compoundref="_paris_8hpp" startline="283" endline="316">Paris::calculateBidimAngles</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a904829a187c50059dda2d439ef0d6db1" compoundref="_paris_bidim_angles_8hpp" startline="98" endline="122">load</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1adc78f553d4c386a1ea6230965c11d68a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisBidimAngles::sortNames</definition>
+        <argsstring>()</argsstring>
+        <name>sortNames</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="25" column="8" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="25" bodyend="25"/>
+        <references refid="class_paris_bidim_angles_1ad7e9840d2054070758edf03ce757cba0" compoundref="_paris_bidim_angles_8hpp" startline="45">m_names</references>
+        <referencedby refid="_paris_bidim_angles_8hpp_1acfc86248a9acc94731d9b97c23da3e56" compoundref="_paris_bidim_angles_8hpp" startline="59" endline="67">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a00fe25e6cdd8340cab38ba7f6fe2b1d7" compoundref="_paris_bidim_angles_8hpp" startline="27" endline="34">printDeg</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_paris_bidim_angles_1a0ca1c561f33bc79fc16b630ef4db9144" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ParisBidimAngles::write</definition>
+        <argsstring>(std::string const &amp;filename)</argsstring>
+        <name>write</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/ParisBidimAngles.hpp" line="11" column="8" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="77" bodyend="88"/>
+        <references refid="class_file_1a53118ce36851cb1c6845a82f915fd8ba" compoundref="files__functions_8hpp" startline="834" endline="834">File::exists</references>
+        <references refid="class_paris_bidim_angles_1a3c71992fbda09a6d859949cba76d0d87" compoundref="_paris_bidim_angles_8hpp" startline="43">m_extension</references>
+        <references refid="class_file_1aec78af028103207cb2ce88c0120dd4f6" compoundref="files__functions_8hpp" startline="830" endline="830">File::makePath</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_file_1af4dee1c79bf496d505633211177c6ce3" compoundref="files__functions_8hpp" startline="829" endline="829">File::setExtension</references>
+        <references refid="class_file_1a899e6a7c528ab2824c7c584c4ee63073" compoundref="files__functions_8hpp" startline="811" endline="811">File::string</references>
+        <referencedby refid="class_paris_1a66745a02a04a8733eba514f319b1cc5e" compoundref="_paris_8hpp" startline="283" endline="316">Paris::calculateBidimAngles</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Analyse/ParisBidimAngles.hpp" line="4" column="1" bodyfile="lib/Analyse/ParisBidimAngles.hpp" bodystart="5" bodyend="55"/>
+    <listofallmembers>
+      <member refid="class_paris_bidim_angles_1a72183315a0c50a92612964ed779a7419" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>angleLaBr</name></member>
+      <member refid="class_paris_bidim_angles_1a737596223de54d2eabbb64a3d674e82f" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>angleLaBr</name></member>
+      <member refid="class_paris_bidim_angles_1a799125ee30452e7ba2d5f89b48c57da1" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>angleNaI</name></member>
+      <member refid="class_paris_bidim_angles_1a054559c88ccfa68ffc104ba8cf0c2fe6" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>angleNaI</name></member>
+      <member refid="class_paris_bidim_angles_1a7cc946220cdb4f0a42a8793cf6337f58" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>LaBr_angles</name></member>
+      <member refid="class_paris_bidim_angles_1a904829a187c50059dda2d439ef0d6db1" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>load</name></member>
+      <member refid="class_paris_bidim_angles_1aaf84ea92c8f0a178e039c173c71f0b1a" prot="private" virt="non-virtual"><scope>ParisBidimAngles</scope><name>m_angleLaBr</name></member>
+      <member refid="class_paris_bidim_angles_1aa58045051b25656e3ee374f0e930c6de" prot="private" virt="non-virtual"><scope>ParisBidimAngles</scope><name>m_angleNaI</name></member>
+      <member refid="class_paris_bidim_angles_1ab6053684ae330a5e30a89618044a4e18" prot="private" virt="non-virtual"><scope>ParisBidimAngles</scope><name>m_angles</name></member>
+      <member refid="class_paris_bidim_angles_1a3c71992fbda09a6d859949cba76d0d87" prot="private" virt="non-virtual"><scope>ParisBidimAngles</scope><name>m_extension</name></member>
+      <member refid="class_paris_bidim_angles_1a86e477b4aad725586be9bcdd64ef738f" prot="private" virt="non-virtual"><scope>ParisBidimAngles</scope><name>m_filename</name></member>
+      <member refid="class_paris_bidim_angles_1ad7e9840d2054070758edf03ce757cba0" prot="private" virt="non-virtual"><scope>ParisBidimAngles</scope><name>m_names</name></member>
+      <member refid="class_paris_bidim_angles_1ab440b2ada4931a8f26eece54a1ec8a16" prot="private" virt="non-virtual"><scope>ParisBidimAngles</scope><name>m_ok</name></member>
+      <member refid="class_paris_bidim_angles_1aa0d0e80c56a0e44766c856b3560a0ba0" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>NaI_angles</name></member>
+      <member refid="class_paris_bidim_angles_1ab8d9a5f52612a296bea2ada2ba64b385" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>names</name></member>
+      <member refid="class_paris_bidim_angles_1aa257a0e840f44672aa2bcbf23d103566" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>names</name></member>
+      <member refid="class_paris_bidim_angles_1a2fc512a76d77f8ecb97c3d46b07c088a" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>operator[]</name></member>
+      <member refid="class_paris_bidim_angles_1a1005f10d8eabebfd02d1dee6fafa9ebd" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>ParisBidimAngles</name></member>
+      <member refid="class_paris_bidim_angles_1a94f5dc80e2e164186840fdf9915e080e" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>ParisBidimAngles</name></member>
+      <member refid="class_paris_bidim_angles_1a00fe25e6cdd8340cab38ba7f6fe2b1d7" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>printDeg</name></member>
+      <member refid="class_paris_bidim_angles_1afd9e6c297a0cc74001a6180f6b49d253" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>set</name></member>
+      <member refid="class_paris_bidim_angles_1adc78f553d4c386a1ea6230965c11d68a" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>sortNames</name></member>
+      <member refid="class_paris_bidim_angles_1a0ca1c561f33bc79fc16b630ef4db9144" prot="public" virt="non-virtual"><scope>ParisBidimAngles</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

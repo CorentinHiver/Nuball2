@@ -1,0 +1,143 @@
+\doxysection{Peaks\+Calibrator Class Reference}
+\label{class_peaks_calibrator}\index{PeaksCalibrator@{PeaksCalibrator}}
+
+
+{\ttfamily \#include $<$Analysed\+Spectra.\+hpp$>$}
+
+
+
+Collaboration diagram for Peaks\+Calibrator\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=174pt]{class_peaks_calibrator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ Draw} (std\+::string const \&opt)
+\item 
+\textbf{ Fit} const  \& \textbf{ fit} () const
+\item 
+auto \textbf{ graph} ()
+\item 
+\textbf{ Peaks\+Calibrator} (std\+::vector$<$ double $>$ const \&peaks, std\+::vector$<$ double $>$ const \&ADCs, int const \&order)
+\item 
+\textbf{ Peaks\+Calibrator} (std\+::vector$<$ \textbf{ Fitted\+Peak} $>$ const \&peaks, int const \&order=0)
+\item 
+\textbf{ $\sim$\+Peaks\+Calibrator} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Fit} \textbf{ m\+\_\+fit}
+\item 
+TGraph $\ast$ \textbf{ m\+\_\+graph}
+\item 
+int \textbf{ m\+\_\+order} = 0
+\item 
+\textbf{ size\+\_\+t} \textbf{ m\+\_\+size} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static TF1 $\ast$ \textbf{ linear\+\_\+fit} = new TF1(\char`\"{}linear\+\_\+\+Peaks\+Calibrator\char`\"{}, \char`\"{}pol1\char`\"{})
+\item 
+static TF1 $\ast$ \textbf{ square\+\_\+fit} = new TF1(\char`\"{}square\+\_\+\+Peaks\+Calibrator\char`\"{}, \char`\"{}pol2\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_peaks_calibrator_ad020d8c79aa946517f140b3b73a16817}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!PeaksCalibrator@{PeaksCalibrator}}
+\index{PeaksCalibrator@{PeaksCalibrator}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{PeaksCalibrator()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Peaks\+Calibrator\+::\+Peaks\+Calibrator (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \textbf{ Fitted\+Peak} $>$ const \&}]{peaks,  }\item[{int const \&}]{order = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_peaks_calibrator_a6d799246268d62e0e7097594ea82050b}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!PeaksCalibrator@{PeaksCalibrator}}
+\index{PeaksCalibrator@{PeaksCalibrator}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{PeaksCalibrator()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Peaks\+Calibrator\+::\+Peaks\+Calibrator (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ const \&}]{peaks,  }\item[{std\+::vector$<$ double $>$ const \&}]{ADCs,  }\item[{int const \&}]{order }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_peaks_calibrator_a6d799246268d62e0e7097594ea82050b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_peaks_calibrator_aa22df9cfa24378f5e262488cc1160f14}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!````~PeaksCalibrator@{$\sim$PeaksCalibrator}}
+\index{````~PeaksCalibrator@{$\sim$PeaksCalibrator}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{$\sim$PeaksCalibrator()}
+{\footnotesize\ttfamily Peaks\+Calibrator\+::$\sim$\+Peaks\+Calibrator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_peaks_calibrator_ae6dcd447c315e23324f882fd3791721a}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!Draw@{Draw}}
+\index{Draw@{Draw}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{Draw()}
+{\footnotesize\ttfamily void Peaks\+Calibrator\+::\+Draw (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{opt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_peaks_calibrator_a801c737980f87c4c59b7aa015ec6bee8}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!fit@{fit}}
+\index{fit@{fit}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{fit()}
+{\footnotesize\ttfamily \textbf{ Fit} const\& Peaks\+Calibrator\+::fit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_peaks_calibrator_a10e6bb763e092ee0bef1a9035eb4c1bd}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!graph@{graph}}
+\index{graph@{graph}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{graph()}
+{\footnotesize\ttfamily auto Peaks\+Calibrator\+::graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_peaks_calibrator_a3563a42bc953688a5f907113c2146254}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!linear\_fit@{linear\_fit}}
+\index{linear\_fit@{linear\_fit}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{linear\_fit}
+{\footnotesize\ttfamily TF1 $\ast$ Peaks\+Calibrator\+::linear\+\_\+fit = new TF1(\char`\"{}linear\+\_\+\+Peaks\+Calibrator\char`\"{}, \char`\"{}pol1\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_peaks_calibrator_ac2f381fe77e81ccba5e6a7fff961693f}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!m\_fit@{m\_fit}}
+\index{m\_fit@{m\_fit}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{m\_fit}
+{\footnotesize\ttfamily \textbf{ Fit} Peaks\+Calibrator\+::m\+\_\+fit\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_peaks_calibrator_af9bcffdb32cd57ac682fe46e0f43b749}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!m\_graph@{m\_graph}}
+\index{m\_graph@{m\_graph}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{m\_graph}
+{\footnotesize\ttfamily TGraph$\ast$ Peaks\+Calibrator\+::m\+\_\+graph\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_peaks_calibrator_a31b139c91cf9c3739c04b0b510ceeba1}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!m\_order@{m\_order}}
+\index{m\_order@{m\_order}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{m\_order}
+{\footnotesize\ttfamily int Peaks\+Calibrator\+::m\+\_\+order = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_peaks_calibrator_a466da0521dac478f9eae058234fc8cfa}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!m\_size@{m\_size}}
+\index{m\_size@{m\_size}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{m\_size}
+{\footnotesize\ttfamily \textbf{ size\+\_\+t} Peaks\+Calibrator\+::m\+\_\+size = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_peaks_calibrator_a1d389cb4ba14899a1c8b2162c016e52a}} 
+\index{PeaksCalibrator@{PeaksCalibrator}!square\_fit@{square\_fit}}
+\index{square\_fit@{square\_fit}!PeaksCalibrator@{PeaksCalibrator}}
+\doxysubsubsection{square\_fit}
+{\footnotesize\ttfamily TF1 $\ast$ Peaks\+Calibrator\+::square\+\_\+fit = new TF1(\char`\"{}square\+\_\+\+Peaks\+Calibrator\char`\"{}, \char`\"{}pol2\char`\"{})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Analyse/\textbf{ Analysed\+Spectra.\+hpp}\end{DoxyCompactItemize}

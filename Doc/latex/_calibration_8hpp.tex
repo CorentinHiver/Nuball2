@@ -1,21 +1,18 @@
-\doxysection{lib/\+Modules/\+Calibration.hpp File Reference}
-\label{_calibration_8hpp}\index{lib/Modules/Calibration.hpp@{lib/Modules/Calibration.hpp}}
+\doxysection{lib/\+Classes/\+Calibration.hpp File Reference}
+\label{_calibration_8hpp}\index{lib/Classes/Calibration.hpp@{lib/Classes/Calibration.hpp}}
 {\ttfamily \#include \char`\"{}../lib\+Co.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../\+Classes/\+Hit.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../\+Classes/\+Detectors.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../\+Classes/\+Event.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../\+Classes/\+Files\+Manager.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../\+MTObjects/\+MTFaster\+Reader.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../\+MTObjects/\+MTRoot\+Reader.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../\+MTObjects/\+MTTHist.\+hpp\char`\"{}}\newline
-Include dependency graph for Calibration.\+hpp\+:\nopagebreak
+Include dependency graph for Calibration.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{_calibration_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -26,73 +23,30 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 class \textbf{ Calibration}
-\item 
-class \textbf{ Fit}
-\begin{DoxyCompactList}\small\item\em Allows one to manipulate the results of peaks. \end{DoxyCompactList}\item 
-struct \textbf{ Calibration\+::histograms}
-\end{DoxyCompactItemize}
-\doxysubsection*{Typedefs}
-\begin{DoxyCompactItemize}
-\item 
-using \textbf{ Fits} = std\+::vector$<$ \textbf{ Fit} $>$
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A convenient class for handling coefficient calibration up to 3rd order. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool \textbf{ is\+Triple\+Alpha} (std\+::string const \&source\+\_\+name)
-\item 
-std\+::ofstream \& \textbf{ operator$<$$<$} (std\+::ofstream \&fout, \textbf{ Fit} const \&fit)
-\item 
-std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ Calibration} const \&calib)
-\end{DoxyCompactItemize}
-
-
-\doxysubsection{Typedef Documentation}
-\mbox{\label{_calibration_8hpp_a3e47c22fe90cb9e403d05dc134b6a047}} 
-\index{Calibration.hpp@{Calibration.hpp}!Fits@{Fits}}
-\index{Fits@{Fits}!Calibration.hpp@{Calibration.hpp}}
-\doxysubsubsection{Fits}
-{\footnotesize\ttfamily using \textbf{ Fits} =  std\+::vector $<$\textbf{ Fit}$>$}
-
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&out, \textbf{ Calibration} const \&calib)
+\begin{DoxyCompactList}\small\item\em Displays the calibration coefficients. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\label{_calibration_8hpp_a53eebde5a64b66ea934c2c8a5015b9bb}} 
-\index{Calibration.hpp@{Calibration.hpp}!isTripleAlpha@{isTripleAlpha}}
-\index{isTripleAlpha@{isTripleAlpha}!Calibration.hpp@{Calibration.hpp}}
-\doxysubsubsection{isTripleAlpha()}
-{\footnotesize\ttfamily bool is\+Triple\+Alpha (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{source\+\_\+name }\end{DoxyParamCaption})}
-
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{_calibration_8hpp_a53eebde5a64b66ea934c2c8a5015b9bb_icgraph}
-\end{center}
-\end{figure}
-\mbox{\label{_calibration_8hpp_a4f68d2fe488cf1a3044c1573a16bc394}} 
+\mbox{\label{_calibration_8hpp_a6e05c096827f5bf5c7f3c52fffd2305d}} 
 \index{Calibration.hpp@{Calibration.hpp}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!Calibration.hpp@{Calibration.hpp}}
-\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily std\+::ofstream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{fout,  }\item[{\textbf{ Fit} const \&}]{fit }\end{DoxyParamCaption})}
+\doxysubsubsection{operator$<$$<$()}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\textbf{ Calibration} const \&}]{calib }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Displays the calibration coefficients. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=249pt]{_calibration_8hpp_a4f68d2fe488cf1a3044c1573a16bc394_cgraph}
-\end{center}
-\end{figure}
-\mbox{\label{_calibration_8hpp_abacd32722d973dc5cde6c73482b0e615}} 
-\index{Calibration.hpp@{Calibration.hpp}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!Calibration.hpp@{Calibration.hpp}}
-\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Calibration} const \&}]{calib }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{_calibration_8hpp_abacd32722d973dc5cde6c73482b0e615_cgraph}
+\includegraphics[width=325pt]{_calibration_8hpp_a6e05c096827f5bf5c7f3c52fffd2305d_cgraph}
 \end{center}
 \end{figure}

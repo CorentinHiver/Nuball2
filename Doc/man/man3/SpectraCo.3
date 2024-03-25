@@ -1,4 +1,4 @@
-.TH "SpectraCo" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "SpectraCo" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,13 +7,47 @@ SpectraCo
 .br
 .PP
 .PP
-\fC#include <SpectraAlignator\&.hpp>\fP
+\fC#include <SpectraCo\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBHistoNull\fP"
+.br
+.ti -1c
+.RI "class \fBHistoZombie\fP"
+.br
+.ti -1c
+.RI "class \fBSizeMissmatch\fP"
+.br
+.in -1c
 .SS "Public Member Functions"
 
 .in +1c
 .ti -1c
+.RI "auto & \fBback\fP ()"
+.br
+.ti -1c
 .RI "auto const  & \fBback\fP () const"
 .br
+.ti -1c
+.RI "void \fBcalibrate\fP (\fBCalibration\fP const &calib, \fBLabel\fP const &label)"
+.br
+.ti -1c
+.RI "void \fBcalibrate\fP (std::vector< double > const &coeffs)"
+.br
+.ti -1c
+.RI "void \fBcalibrateAndScale\fP (std::vector< double > const &coeffs)"
+.br
+.RI "Calibrates using the coeffs[0:n-1] coefficient then scale it using the coeffs\&.back() coefficient (spectra*=coeffs\&.back()) "
+.ti -1c
+.RI "void \fBcalibrateX\fP (double const &intercept, double const &slope=1)"
+.br
+.RI "First order calibration\&. "
+.ti -1c
+.RI "double \fBchi2\fP (\fBSpectraCo\fP &other)"
+.br
+.RI "Calculates the chi2 between this spectra and another one\&. "
 .ti -1c
 .RI "TH1D * \fBcreateTH1D\fP (std::string newName='', std::string newTitle='')"
 .br
@@ -21,19 +55,62 @@ SpectraCo
 .RI "TH1F * \fBcreateTH1F\fP (std::string newName='', std::string newTitle='')"
 .br
 .ti -1c
-.RI "std::vector< double > const  & \fBderivate\fP (int const &smooth=1)"
+.RI "auto & \fBdata\fP ()"
 .br
 .ti -1c
-.RI "std::vector< double > const  & \fBderivate2\fP (int const &smooth=1)"
+.RI "auto const  & \fBdata\fP () const"
 .br
 .ti -1c
-.RI "std::vector< double > const  & \fBderivative\fP ()"
+.RI "void \fBdeleteDerivative\fP ()"
 .br
 .ti -1c
-.RI "std::vector< double > const  & \fBderivative2\fP ()"
+.RI "\fBSpectraCo\fP * \fBderivate\fP (int smooth=1) noexcept"
 .br
 .ti -1c
-.RI "void \fBDraw\fP (const char *param='')"
+.RI "\fBSpectraCo\fP * \fBderivate2\fP (int smooth=1) noexcept"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP * \fBderivative\fP ()"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP * \fBderivative\fP (std::string const &\fBname\fP)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP * \fBderivative2\fP ()"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP * \fBderivative2\fP (std::string const &\fBname\fP)"
+.br
+.ti -1c
+.RI "std::vector< double > const  & \fBderivative2Data\fP ()"
+.br
+.ti -1c
+.RI "std::vector< double > const  & \fBderivativeData\fP ()"
+.br
+.ti -1c
+.RI "void \fBdraw\fP (const char *param='')"
+.br
+.RI "Creates a new TH1F to be drawn\&. "
+.ti -1c
+.RI "auto & \fBfactor\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBfactor\fP () const"
+.br
+.ti -1c
+.RI "void \fBfill\fP (double const &X) noexcept"
+.br
+.RI "Fills a bin of the spectra based on the X value\&. "
+.ti -1c
+.RI "\fBSpectraPoints\fP const  & \fBfindPeaks\fP (int const &threshold, int const &nb_bins_below_threshold)"
+.br
+.RI "Uses the second derivative spectra to get the peaks\&. "
+.ti -1c
+.RI "\fBSpectraPoints\fP const  & \fBfindPeaks\fP (int const &threshold, int const &nb_bins_below_threshold, int const &smooth)"
+.br
+.RI "The spectra must not have had background substraction yet\&. "
+.ti -1c
+.RI "int \fBfirstBinWithValue\fP () const noexcept"
 .br
 .ti -1c
 .RI "auto & \fBget\fP ()"
@@ -42,26 +119,65 @@ SpectraCo
 .RI "auto const  & \fBget\fP () const"
 .br
 .ti -1c
-.RI "auto const  & \fBget\fP (int const &bin) const"
+.RI "auto const  & \fBget\fP (int const &bin) const noexcept"
+.br
+.ti -1c
+.RI "double \fBgetBin\fP (double const &x) const"
+.br
+.ti -1c
+.RI "double \fBgetX\fP (double const &bin)"
+.br
+.ti -1c
+.RI "auto & \fBintegral\fP ()"
 .br
 .ti -1c
 .RI "auto const  & \fBintegral\fP () const"
 .br
 .ti -1c
-.RI "double \fBinterpolate\fP (double const &bin) const"
+.RI "double \fBintegralInRange\fP (double const &value_min, double const &value_max) noexcept"
 .br
-.RI "wrapper around operator[] "
+.ti -1c
+.RI "double \fBintegralInRangeBin\fP (int const &bin_min, int const &bin_max) noexcept"
+.br
+.ti -1c
+.RI "double \fBinterpolate\fP (double const &bin) const noexcept"
+.br
+.ti -1c
+.RI "void \fBinverse\fP ()"
+.br
+.RI "Inverses the spectra : negative values become positive and positive values become negative\&. "
+.ti -1c
+.RI "auto & \fBlastBin\fP ()"
+.br
 .ti -1c
 .RI "auto const  & \fBlastBin\fP () const"
+.br
+.ti -1c
+.RI "int \fBlastBinWithValue\fP () const noexcept"
 .br
 .ti -1c
 .RI "void \fBload\fP (TH1 *root_spectra)"
 .br
 .ti -1c
-.RI "auto const  & \fBmaxValue\fP () const"
+.RI "auto & \fBmaxX\fP ()"
 .br
 .ti -1c
-.RI "auto const  & \fBminValue\fP () const"
+.RI "auto const  & \fBmaxX\fP () const"
+.br
+.ti -1c
+.RI "double \fBmeanInRange\fP (double const &value_min, double const &value_max) noexcept"
+.br
+.ti -1c
+.RI "double \fBmeanInRangeBin\fP (int const &bin_min, int const &bin_max) noexcept"
+.br
+.ti -1c
+.RI "auto & \fBminX\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBminX\fP () const"
+.br
+.ti -1c
+.RI "auto & \fBname\fP ()"
 .br
 .ti -1c
 .RI "auto const  & \fBname\fP () const"
@@ -70,49 +186,125 @@ SpectraCo
 .RI "auto \fBname\fP (std::string const &name)"
 .br
 .ti -1c
-.RI "\fBSpectraCo\fP \fBoperator+\fP (\fBSpectraCo\fP const &other)"
+.RI "\fBSpectraCo\fP \fBoperator*\fP (double const &\fBfactor\fP)"
 .br
 .ti -1c
-.RI "\fBSpectraCo\fP \fBoperator\-\fP (\fBSpectraCo\fP const &other)"
+.RI "\fBSpectraCo\fP & \fBoperator*=\fP (double const &\fBfactor\fP)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP \fBoperator+\fP (\fBSpectraCo\fP const &other) const"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP \fBoperator\-\fP (\fBSpectraCo\fP const &other) const"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP \fBoperator/\fP (double const &\fBfactor\fP)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP & \fBoperator=\fP (\fBSpectraCo\fP const &other)"
 .br
 .ti -1c
 .RI "\fBSpectraCo\fP & \fBoperator=\fP (TH1 *root_spectra)"
 .br
 .ti -1c
-.RI "double \fBoperator[]\fP (double const &bin) const"
+.RI "double \fBoperator[]\fP (double const &bin) const noexcept"
 .br
 .ti -1c
-.RI "auto & \fBoperator[]\fP (int const &bin)"
+.RI "double \fBoperator[]\fP (double const &bin) noexcept"
 .br
 .ti -1c
-.RI "auto const  & \fBoperator[]\fP (int const &bin) const"
+.RI "auto const  & \fBoperator[]\fP (int const &bin) const noexcept"
 .br
+.ti -1c
+.RI "auto & \fBoperator[]\fP (int const &bin) noexcept"
+.br
+.ti -1c
+.RI "auto & \fBpeaks\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBpeaks\fP () const"
+.br
+.ti -1c
+.RI "void \fBrebin\fP (int const &\fBfactor\fP, bool const &rebin_derivatives=false)"
+.br
+.RI "TODO\&. "
 .ti -1c
 .RI "void \fBrecalibrate\fP (\fBRecalibration\fP const &recal)"
 .br
 .ti -1c
-.RI "void \fBsetMaxValue\fP (double const &_max_value)"
+.RI "void \fBremoveBackground\fP (int const &smooth, std::string const &fit_options='') noexcept"
 .br
 .ti -1c
-.RI "void \fBsetMinValue\fP (double const &_min_value)"
+.RI "void \fBresizeBin\fP (\fBsize_t\fP const &new_size)"
+.br
+.RI "Resize allows one to select the number of bins\&. Affects only the maximum bin\&. "
+.ti -1c
+.RI "void \fBresizeX\fP (double const &\fBmaxX\fP)"
+.br
+.ti -1c
+.RI "void \fBresizeX\fP (double const &\fBminX\fP, double const &\fBmaxX\fP)"
+.br
+.RI "Carefull, this resize leads to a copy of the data\&. "
+.ti -1c
+.RI "void \fBsetActualRange\fP ()"
+.br
+.RI "Remove the bins after the last bin with content (= detector's output max range) "
+.ti -1c
+.RI "void \fBsetMaxX\fP (double const &_max_x)"
+.br
+.ti -1c
+.RI "void \fBsetMinX\fP (double const &_min_x)"
+.br
+.ti -1c
+.RI "void \fBsetRangeX\fP (double const &_min_x, double const &_max_x)"
+.br
+.ti -1c
+.RI "auto & \fBsize\fP ()"
 .br
 .ti -1c
 .RI "auto const  & \fBsize\fP () const"
 .br
 .ti -1c
-.RI "\fBSpectraCo\fP ()=default"
+.RI "\fBSpectraCo\fP () noexcept=default"
 .br
 .ti -1c
-.RI "\fBSpectraCo\fP (\fBSpectraCo\fP const &other)"
+.RI "\fBSpectraCo\fP (\fBsize_t\fP const &\fBsize\fP)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (\fBSpectraCo\fP *other, \fBCalibration\fP const &cal, \fBLabel\fP const &label)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (\fBSpectraCo\fP *other, \fBRecalibration\fP const &recal)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (\fBSpectraCo\fP *other, std::string \fBname\fP='', std::string \fBtitle\fP='')"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (\fBSpectraCo\fP const &other, \fBCalibration\fP const &cal, \fBLabel\fP const &label)"
 .br
 .ti -1c
 .RI "\fBSpectraCo\fP (\fBSpectraCo\fP const &other, \fBRecalibration\fP const &recal)"
 .br
 .ti -1c
-.RI "\fBSpectraCo\fP (std::vector< double > const &data)"
+.RI "\fBSpectraCo\fP (\fBSpectraCo\fP const &other, std::string \fBname\fP='', std::string \fBtitle\fP='')"
 .br
 .ti -1c
-.RI "\fBSpectraCo\fP (TH1 *root_spectra)"
+.RI "\fBSpectraCo\fP (std::nullptr_t) noexcept"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (std::vector< double > const &_data)"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (std::vector< double > const &spectra, float const &min_value=0, float const &max_value=0, std::string \fBname\fP='', std::string \fBtitle\fP='')"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (std::vector< float > const &spectra, float const &min_value=0, float const &max_value=0, std::string \fBname\fP='', std::string \fBtitle\fP='')"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP (TH1 *root_spectra, std::string \fBname\fP='', std::string \fBtitle\fP='')"
+.br
+.ti -1c
+.RI "auto & \fBtitle\fP ()"
 .br
 .ti -1c
 .RI "auto const  & \fBtitle\fP () const"
@@ -120,30 +312,70 @@ SpectraCo
 .ti -1c
 .RI "auto \fBtitle\fP (std::string const &title)"
 .br
+.ti -1c
+.RI "void \fBwrite\fP ()"
+.br
+.ti -1c
+.RI "void \fBwrite\fP (TDirectory *directory)"
+.br
+.ti -1c
+.RI "void \fBwriteTH1D\fP ()"
+.br
+.ti -1c
+.RI "void \fBwriteTH1D\fP (TDirectory *directory)"
+.br
+.ti -1c
+.RI "\fB~SpectraCo\fP () noexcept"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcalculateCoeff\fP ()"
+.br
 .in -1c
 .SS "Private Attributes"
 
 .in +1c
 .ti -1c
-.RI "std::vector< double > \fBm_derivative\fP"
+.RI "\fBSpectraCo\fP * \fBm_derivative\fP = nullptr"
 .br
 .ti -1c
-.RI "std::vector< double > \fBm_derivative2\fP"
+.RI "\fBSpectraCo\fP * \fBm_derivative2\fP = nullptr"
+.br
+.ti -1c
+.RI "double \fBm_factor\fP = 1"
 .br
 .ti -1c
 .RI "int \fBm_integral\fP = 0"
 .br
 .ti -1c
-.RI "int \fBm_max_value\fP = 0"
+.RI "double \fBm_intercept\fP = 0"
 .br
 .ti -1c
-.RI "int \fBm_min_value\fP = 0"
+.RI "TH1 * \fBm_loaded_TH1\fP = nullptr"
+.br
+.ti -1c
+.RI "double \fBm_max_x\fP = 0"
+.br
+.ti -1c
+.RI "double \fBm_min_x\fP = 0"
 .br
 .ti -1c
 .RI "std::string \fBm_name\fP = 'Unnamed'"
 .br
 .ti -1c
-.RI "int \fBm_size\fP = \-1"
+.RI "\fBSpectraPoints\fP \fBm_peaks\fP"
+.br
+.ti -1c
+.RI "double \fBm_rebin\fP = 1"
+.br
+.ti -1c
+.RI "int \fBm_size\fP = 0"
+.br
+.ti -1c
+.RI "double \fBm_slope\fP = \-1"
 .br
 .ti -1c
 .RI "std::vector< double > \fBm_spectra\fP"
@@ -151,104 +383,371 @@ SpectraCo
 .ti -1c
 .RI "std::string \fBm_title\fP = 'Untitled'"
 .br
+.ti -1c
+.RI "int \fBnb_histo_drawn\fP = 0"
+.br
+.ti -1c
+.RI "std::vector< TH1 * > \fBroot_spectra_pointers\fP"
+.br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "SpectraCo::SpectraCo ()\fC [default]\fP"
+.SS "SpectraCo::SpectraCo ()\fC [default]\fP, \fC [noexcept]\fP"
 
-.SS "SpectraCo::SpectraCo (TH1 * root_spectra)\fC [inline]\fP"
+.SS "SpectraCo::~SpectraCo ()\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "SpectraCo::SpectraCo (\fBSpectraCo\fP const & other)\fC [inline]\fP"
+.PP
+\fBTodo\fP
+.RS 4
+
+.RE
+.PP
+
+.SS "SpectraCo::SpectraCo (std::nullptr_t)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SS "SpectraCo::SpectraCo (std::vector< float > const & spectra, float const & min_value = \fC0\fP, float const & max_value = \fC0\fP, std::string name = \fC''\fP, std::string title = \fC''\fP)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (std::vector< double > const & spectra, float const & min_value = \fC0\fP, float const & max_value = \fC0\fP, std::string name = \fC''\fP, std::string title = \fC''\fP)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (\fBSpectraCo\fP const & other, std::string name = \fC''\fP, std::string title = \fC''\fP)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (\fBSpectraCo\fP * other, std::string name = \fC''\fP, std::string title = \fC''\fP)\fC [inline]\fP"
 
 .SS "SpectraCo::SpectraCo (\fBSpectraCo\fP const & other, \fBRecalibration\fP const & recal)\fC [inline]\fP"
 
-.SS "SpectraCo::SpectraCo (std::vector< double > const & data)\fC [inline]\fP"
+.SS "SpectraCo::SpectraCo (\fBSpectraCo\fP * other, \fBRecalibration\fP const & recal)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (\fBSpectraCo\fP const & other, \fBCalibration\fP const & cal, \fBLabel\fP const & label)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (\fBSpectraCo\fP * other, \fBCalibration\fP const & cal, \fBLabel\fP const & label)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (std::vector< double > const & _data)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (\fBsize_t\fP const & size)\fC [inline]\fP"
+
+.SS "SpectraCo::SpectraCo (TH1 * root_spectra, std::string name = \fC''\fP, std::string title = \fC''\fP)\fC [inline]\fP"
 
 .SH "Member Function Documentation"
 .PP 
+.SS "auto& SpectraCo::back ()\fC [inline]\fP"
+
 .SS "auto const& SpectraCo::back () const\fC [inline]\fP"
 
-.SS "TH1D* SpectraCo::createTH1D (std::string newName = \fC''\fP, std::string newTitle = \fC''\fP)\fC [inline]\fP"
+.SS "void SpectraCo::calculateCoeff ()\fC [private]\fP"
 
-.SS "TH1F* SpectraCo::createTH1F (std::string newName = \fC''\fP, std::string newTitle = \fC''\fP)\fC [inline]\fP"
+.SS "void SpectraCo::calibrate (\fBCalibration\fP const & calib, \fBLabel\fP const & label)"
 
-.SS "std::vector<double> const& SpectraCo::derivate (int const & smooth = \fC1\fP)\fC [inline]\fP"
+.SS "void SpectraCo::calibrate (std::vector< double > const & coeffs)"
 
-.SS "std::vector<double> const& SpectraCo::derivate2 (int const & smooth = \fC1\fP)\fC [inline]\fP"
+.SS "void SpectraCo::calibrateAndScale (std::vector< double > const & coeffs)"
 
-.SS "std::vector<double> const& SpectraCo::derivative ()\fC [inline]\fP"
+.PP
+Calibrates using the coeffs[0:n-1] coefficient then scale it using the coeffs\&.back() coefficient (spectra*=coeffs\&.back()) 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcoeffs\fP The last coefficient is used to scale, the other firsts to calibrate the x axis 
+.RE
+.PP
 
-.SS "std::vector<double> const& SpectraCo::derivative2 ()\fC [inline]\fP"
+.SS "void SpectraCo::calibrateX (double const & intercept, double const & slope = \fC1\fP)\fC [inline]\fP"
 
-.SS "void SpectraCo::Draw (const char * param = \fC''\fP)\fC [inline]\fP"
+.PP
+First order calibration\&. 
+.SS "double SpectraCo::chi2 (\fBSpectraCo\fP & other)\fC [inline]\fP"
+
+.PP
+Calculates the chi2 between this spectra and another one\&. 
+.SS "TH1D * SpectraCo::createTH1D (std::string newName = \fC''\fP, std::string newTitle = \fC''\fP)"
+
+.SS "TH1F * SpectraCo::createTH1F (std::string newName = \fC''\fP, std::string newTitle = \fC''\fP)"
+
+.SS "auto& SpectraCo::data ()\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::data () const\fC [inline]\fP"
+
+.SS "void SpectraCo::deleteDerivative ()\fC [inline]\fP"
+
+.SS "\fBSpectraCo\fP * SpectraCo::derivate (int smooth = \fC1\fP)\fC [noexcept]\fP"
+
+.SS "\fBSpectraCo\fP * SpectraCo::derivate2 (int smooth = \fC1\fP)\fC [noexcept]\fP"
+
+.SS "\fBSpectraCo\fP* SpectraCo::derivative ()\fC [inline]\fP"
+
+.SS "\fBSpectraCo\fP * SpectraCo::derivative (std::string const & name)"
+
+.SS "\fBSpectraCo\fP* SpectraCo::derivative2 ()\fC [inline]\fP"
+
+.SS "\fBSpectraCo\fP * SpectraCo::derivative2 (std::string const & name)"
+
+.SS "std::vector<double> const& SpectraCo::derivative2Data ()\fC [inline]\fP"
+
+.PP
+\fBAttention\fP
+.RS 4
+One has to check that the second derivative has already been calculated; 
+.RE
+.PP
+
+.SS "std::vector<double> const& SpectraCo::derivativeData ()\fC [inline]\fP"
+
+.PP
+\fBAttention\fP
+.RS 4
+One has to check that the derivative has already been calculated; 
+.RE
+.PP
+
+.SS "void SpectraCo::draw (const char * param = \fC''\fP)"
+
+.PP
+Creates a new TH1F to be drawn\&. 
+.SS "auto& SpectraCo::factor ()\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::factor () const\fC [inline]\fP"
+
+.SS "void SpectraCo::fill (double const & X)\fC [noexcept]\fP"
+
+.PP
+Fills a bin of the spectra based on the X value\&. 
+.PP
+\fBAttention\fP
+.RS 4
+Has not been tested 
+.RE
+.PP
+\fBTodo\fP
+.RS 4
+test it 
+.RE
+.PP
+
+.SS "\fBSpectraPoints\fP const  & SpectraCo::findPeaks (int const & threshold, int const & nb_bins_below_threshold)"
+
+.PP
+Uses the second derivative spectra to get the peaks\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIthreshold\fP 
+.br
+\fInb_bins_below_threshold\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+SpectraPoints: a vector<pair<int, double>> with the keys the bin and the values the height of the second derivative peak 
+.RE
+.PP
+
+.SS "\fBSpectraPoints\fP const  & SpectraCo::findPeaks (int const & threshold, int const & nb_bins_below_threshold, int const & smooth)"
+
+.PP
+The spectra must not have had background substraction yet\&. 
+.SS "int SpectraCo::firstBinWithValue () const\fC [inline]\fP, \fC [noexcept]\fP"
 
 .SS "auto& SpectraCo::get ()\fC [inline]\fP"
 
 .SS "auto const& SpectraCo::get () const\fC [inline]\fP"
 
-.SS "auto const& SpectraCo::get (int const & bin) const\fC [inline]\fP"
+.SS "auto const& SpectraCo::get (int const & bin) const\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SS "double SpectraCo::getBin (double const & x) const\fC [inline]\fP"
+
+.SS "double SpectraCo::getX (double const & bin)\fC [inline]\fP"
+
+.SS "auto& SpectraCo::integral ()\fC [inline]\fP"
 
 .SS "auto const& SpectraCo::integral () const\fC [inline]\fP"
 
-.SS "double SpectraCo::interpolate (double const & bin) const\fC [inline]\fP"
+.SS "double SpectraCo::integralInRange (double const & value_min, double const & value_max)\fC [noexcept]\fP"
+
+.SS "double SpectraCo::integralInRangeBin (int const & bin_min, int const & bin_max)\fC [noexcept]\fP"
+
+.SS "double SpectraCo::interpolate (double const & bin) const\fC [noexcept]\fP"
+
+.SS "void SpectraCo::inverse ()\fC [inline]\fP"
 
 .PP
-wrapper around operator[] 
+Inverses the spectra : negative values become positive and positive values become negative\&. Do not touch the derivatives 
+.SS "auto& SpectraCo::lastBin ()\fC [inline]\fP"
+
 .SS "auto const& SpectraCo::lastBin () const\fC [inline]\fP"
 
-.SS "void SpectraCo::load (TH1 * root_spectra)\fC [inline]\fP"
+.SS "int SpectraCo::lastBinWithValue () const\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "auto const& SpectraCo::maxValue () const\fC [inline]\fP"
+.SS "void SpectraCo::load (TH1 * root_spectra)"
 
-.SS "auto const& SpectraCo::minValue () const\fC [inline]\fP"
+.SS "auto& SpectraCo::maxX ()\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::maxX () const\fC [inline]\fP"
+
+.SS "double SpectraCo::meanInRange (double const & value_min, double const & value_max)\fC [noexcept]\fP"
+
+.SS "double SpectraCo::meanInRangeBin (int const & bin_min, int const & bin_max)\fC [noexcept]\fP"
+
+.SS "auto& SpectraCo::minX ()\fC [inline]\fP"
+
+.SS "auto const& SpectraCo::minX () const\fC [inline]\fP"
+
+.SS "auto& SpectraCo::name ()\fC [inline]\fP"
 
 .SS "auto const& SpectraCo::name () const\fC [inline]\fP"
 
 .SS "auto SpectraCo::name (std::string const & name)\fC [inline]\fP"
 
-.SS "\fBSpectraCo\fP SpectraCo::operator+ (\fBSpectraCo\fP const & other)\fC [inline]\fP"
+.SS "\fBSpectraCo\fP SpectraCo::operator* (double const & factor)"
 
-.SS "\fBSpectraCo\fP SpectraCo::operator\- (\fBSpectraCo\fP const & other)\fC [inline]\fP"
+.PP
+\fBTodo\fP
+.RS 4
+can be optimized 
+.RE
+.PP
+
+.SS "\fBSpectraCo\fP & SpectraCo::operator*= (double const & factor)"
+
+.SS "\fBSpectraCo\fP SpectraCo::operator+ (\fBSpectraCo\fP const & other) const"
+
+.SS "\fBSpectraCo\fP SpectraCo::operator\- (\fBSpectraCo\fP const & other) const"
+
+.SS "\fBSpectraCo\fP SpectraCo::operator/ (double const & factor)"
+
+.PP
+\fBTodo\fP
+.RS 4
+can be optimized 
+.RE
+.PP
+
+.SS "\fBSpectraCo\fP& SpectraCo::operator= (\fBSpectraCo\fP const & other)\fC [inline]\fP"
 
 .SS "\fBSpectraCo\fP& SpectraCo::operator= (TH1 * root_spectra)\fC [inline]\fP"
 
-.SS "double SpectraCo::operator[] (double const & bin) const\fC [inline]\fP"
+.SS "double SpectraCo::operator[] (double const & bin) const\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "auto& SpectraCo::operator[] (int const & bin)\fC [inline]\fP"
+.SS "double SpectraCo::operator[] (double const & bin)\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "auto const& SpectraCo::operator[] (int const & bin) const\fC [inline]\fP"
+.SS "auto const& SpectraCo::operator[] (int const & bin) const\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "void SpectraCo::recalibrate (\fBRecalibration\fP const & recal)\fC [inline]\fP"
+.SS "auto& SpectraCo::operator[] (int const & bin)\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "void SpectraCo::setMaxValue (double const & _max_value)\fC [inline]\fP"
+.SS "auto& SpectraCo::peaks ()\fC [inline]\fP"
 
-.SS "void SpectraCo::setMinValue (double const & _min_value)\fC [inline]\fP"
+.SS "auto const& SpectraCo::peaks () const\fC [inline]\fP"
+
+.SS "void SpectraCo::rebin (int const & factor, bool const & rebin_derivatives = \fCfalse\fP)"
+
+.PP
+TODO\&. Uses the TH1::Rebin method;\&.
+.PP
+\fBTodo\fP
+.RS 4
+create a custom method without the use of ROOT (attempt commented at the bottom of the file) 
+.RE
+.PP
+
+.SS "void SpectraCo::recalibrate (\fBRecalibration\fP const & recal)"
+
+.SS "void SpectraCo::removeBackground (int const & smooth, std::string const & fit_options = \fC''\fP)\fC [noexcept]\fP"
+
+.PP
+\fBTodo\fP
+.RS 4
+Try to adapt not to have to use root for this function
+.RE
+.PP
+.PP
+\fBParameters\fP
+.RS 4
+\fIsmooth\fP 
+.br
+\fIfit_options\fP 
+.RE
+.PP
+
+.SS "void SpectraCo::resizeBin (\fBsize_t\fP const & new_size)"
+
+.PP
+Resize allows one to select the number of bins\&. Affects only the maximum bin\&. 
+.SS "void SpectraCo::resizeX (double const & maxX)"
+
+.SS "void SpectraCo::resizeX (double const & minX, double const & maxX)"
+
+.PP
+Carefull, this resize leads to a copy of the data\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIminX\fP 
+.br
+\fImaxX\fP 
+.RE
+.PP
+
+.SS "void SpectraCo::setActualRange ()\fC [inline]\fP"
+
+.PP
+Remove the bins after the last bin with content (= detector's output max range) 
+.SS "void SpectraCo::setMaxX (double const & _max_x)\fC [inline]\fP"
+
+.SS "void SpectraCo::setMinX (double const & _min_x)\fC [inline]\fP"
+
+.SS "void SpectraCo::setRangeX (double const & _min_x, double const & _max_x)\fC [inline]\fP"
+
+.SS "auto& SpectraCo::size ()\fC [inline]\fP"
 
 .SS "auto const& SpectraCo::size () const\fC [inline]\fP"
+
+.SS "auto& SpectraCo::title ()\fC [inline]\fP"
 
 .SS "auto const& SpectraCo::title () const\fC [inline]\fP"
 
 .SS "auto SpectraCo::title (std::string const & title)\fC [inline]\fP"
 
+.SS "void SpectraCo::write ()\fC [inline]\fP"
+
+.SS "void SpectraCo::write (TDirectory * directory)\fC [inline]\fP"
+
+.SS "void SpectraCo::writeTH1D ()\fC [inline]\fP"
+
+.SS "void SpectraCo::writeTH1D (TDirectory * directory)\fC [inline]\fP"
+
 .SH "Member Data Documentation"
 .PP 
-.SS "std::vector<double> SpectraCo::m_derivative\fC [private]\fP"
+.SS "\fBSpectraCo\fP* SpectraCo::m_derivative = nullptr\fC [private]\fP"
 
-.SS "std::vector<double> SpectraCo::m_derivative2\fC [private]\fP"
+.SS "\fBSpectraCo\fP* SpectraCo::m_derivative2 = nullptr\fC [private]\fP"
+
+.SS "double SpectraCo::m_factor = 1\fC [private]\fP"
 
 .SS "int SpectraCo::m_integral = 0\fC [private]\fP"
 
-.SS "int SpectraCo::m_max_value = 0\fC [private]\fP"
+.SS "double SpectraCo::m_intercept = 0\fC [private]\fP"
 
-.SS "int SpectraCo::m_min_value = 0\fC [private]\fP"
+.SS "TH1* SpectraCo::m_loaded_TH1 = nullptr\fC [private]\fP"
+
+.SS "double SpectraCo::m_max_x = 0\fC [private]\fP"
+
+.SS "double SpectraCo::m_min_x = 0\fC [private]\fP"
 
 .SS "std::string SpectraCo::m_name = 'Unnamed'\fC [private]\fP"
 
-.SS "int SpectraCo::m_size = \-1\fC [private]\fP"
+.SS "\fBSpectraPoints\fP SpectraCo::m_peaks\fC [private]\fP"
+
+.SS "double SpectraCo::m_rebin = 1\fC [private]\fP"
+
+.SS "int SpectraCo::m_size = 0\fC [private]\fP"
+
+.SS "double SpectraCo::m_slope = \-1\fC [private]\fP"
 
 .SS "std::vector<double> SpectraCo::m_spectra\fC [private]\fP"
 
 .SS "std::string SpectraCo::m_title = 'Untitled'\fC [private]\fP"
+
+.SS "int SpectraCo::nb_histo_drawn = 0\fC [private]\fP"
+
+.SS "std::vector<TH1*> SpectraCo::root_spectra_pointers\fC [private]\fP"
 
 
 .SH "Author"

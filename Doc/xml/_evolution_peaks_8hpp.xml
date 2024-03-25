@@ -1,0 +1,978 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_evolution_peaks_8hpp" kind="file" language="C++">
+    <compoundname>EvolutionPeaks.hpp</compoundname>
+    <includes refid="lib_root_8hpp" local="yes">../libRoot.hpp</includes>
+    <includes refid="_spectra_co_8hpp" local="yes">../Analyse/SpectraCo.hpp</includes>
+    <includes refid="_detectors_8hpp" local="yes">../Classes/Detectors.hpp</includes>
+    <includes refid="_files_manager_8hpp" local="yes">../Classes/FilesManager.hpp</includes>
+    <includes refid="_data_file_8hpp" local="yes">../Classes/DataFile.hpp</includes>
+    <includes refid="_calibrator_8hpp" local="yes">../Modules/Calibrator.hpp</includes>
+    <incdepgraph>
+      <node id="20">
+        <label>glob.h</label>
+      </node>
+      <node id="52">
+        <label>TH1S.h</label>
+      </node>
+      <node id="25">
+        <label>functional</label>
+      </node>
+      <node id="6">
+        <label>iomanip</label>
+      </node>
+      <node id="29">
+        <label>queue</label>
+      </node>
+      <node id="70">
+        <label>TTreeIndex.h</label>
+      </node>
+      <node id="2">
+        <label>../libRoot.hpp</label>
+        <link refid="lib_root_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>filesystem</label>
+      </node>
+      <node id="39">
+        <label>TAxis.h</label>
+      </node>
+      <node id="81">
+        <label>../MTObjects/MTFasterReader.hpp</label>
+        <link refid="_m_t_faster_reader_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>TThread.h</label>
+      </node>
+      <node id="96">
+        <label>../Classes/Nuball2Tree.hpp</label>
+        <link refid="_nuball2_tree_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>Recalibration.hpp</label>
+        <link refid="_recalibration_8hpp"/>
+      </node>
+      <node id="1">
+        <label>lib/Modules/EvolutionPeaks.hpp</label>
+        <link refid="_evolution_peaks_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>TH1D.h</label>
+      </node>
+      <node id="64">
+        <label>TStopwatch.h</label>
+      </node>
+      <node id="30">
+        <label>stdexcept</label>
+      </node>
+      <node id="28">
+        <label>numeric</label>
+      </node>
+      <node id="85">
+        <label>../Classes/FasterReader.hpp</label>
+        <link refid="_faster_reader_8hpp"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>string</label>
+      </node>
+      <node id="90">
+        <label>fasterac/utils.h</label>
+      </node>
+      <node id="8">
+        <label>map</label>
+      </node>
+      <node id="98">
+        <label>MTCounter.hpp</label>
+        <link refid="_m_t_counter_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>fasterac/adc.h</label>
+      </node>
+      <node id="74">
+        <label>../Classes/Hit.hpp</label>
+        <link refid="_hit_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>libCo.hpp</label>
+        <link refid="lib_co_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>fasterac/rf.h</label>
+      </node>
+      <node id="43">
+        <label>TF1.h</label>
+      </node>
+      <node id="4">
+        <label>print.hpp</label>
+        <link refid="print_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>fstream</label>
+      </node>
+      <node id="84">
+        <label>MTList.hpp</label>
+        <link refid="_m_t_list_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>TError.h</label>
+      </node>
+      <node id="66">
+        <label>TStyle.h</label>
+      </node>
+      <node id="79">
+        <label>../Classes/Fit.hpp</label>
+        <link refid="_fit_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>any</label>
+      </node>
+      <node id="97">
+        <label>../MTObjects/MTTHist.hpp</label>
+        <link refid="_m_t_t_hist_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>random</label>
+      </node>
+      <node id="73">
+        <label>../Classes/Calibration.hpp</label>
+        <link refid="_calibration_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>../Classes/DataFile.hpp</label>
+        <link refid="_data_file_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>TROOT.h</label>
+      </node>
+      <node id="34">
+        <label>typeinfo</label>
+      </node>
+      <node id="71">
+        <label>../Analyse/SpectraCo.hpp</label>
+        <link refid="_spectra_co_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>../Classes/Detectors.hpp</label>
+        <link refid="_detectors_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>future</label>
+      </node>
+      <node id="38">
+        <label>ctime</label>
+      </node>
+      <node id="41">
+        <label>TChain.h</label>
+      </node>
+      <node id="80">
+        <label>../Classes/Event.hpp</label>
+        <link refid="_event_8hpp"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>TSystem.h</label>
+      </node>
+      <node id="31">
+        <label>stack</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="44">
+        <label>TF2.h</label>
+      </node>
+      <node id="45">
+        <label>TFile.h</label>
+      </node>
+      <node id="40">
+        <label>TCanvas.h</label>
+      </node>
+      <node id="55">
+        <label>TH3I.h</label>
+      </node>
+      <node id="56">
+        <label>TKey.h</label>
+      </node>
+      <node id="9">
+        <label>vector_functions.hpp</label>
+        <link refid="vector__functions_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>fasterac/qdc.h</label>
+      </node>
+      <node id="63">
+        <label>TSpectrum.h</label>
+      </node>
+      <node id="24">
+        <label>array</label>
+      </node>
+      <node id="47">
+        <label>TFitResult.h</label>
+      </node>
+      <node id="16">
+        <label>sstream</label>
+      </node>
+      <node id="11">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>TMarker.h</label>
+      </node>
+      <node id="49">
+        <label>TGraphErrors.h</label>
+      </node>
+      <node id="53">
+        <label>TH2.h</label>
+      </node>
+      <node id="37">
+        <label>cstdlib</label>
+      </node>
+      <node id="50">
+        <label>TH1F.h</label>
+      </node>
+      <node id="57">
+        <label>TLeaf.h</label>
+      </node>
+      <node id="5">
+        <label>iostream</label>
+      </node>
+      <node id="13">
+        <label>string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>Timer.hpp</label>
+        <link refid="_timer_8hpp"/>
+        <childnode refid="94" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>unordered_map</label>
+      </node>
+      <node id="58">
+        <label>TLegend.h</label>
+      </node>
+      <node id="65">
+        <label>TString.h</label>
+      </node>
+      <node id="60">
+        <label>TMath.h</label>
+      </node>
+      <node id="54">
+        <label>TH2F.h</label>
+      </node>
+      <node id="92">
+        <label>../Classes/CoProgressBar.hpp</label>
+        <link refid="_co_progress_bar_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>mutex</label>
+      </node>
+      <node id="94">
+        <label>chrono</label>
+      </node>
+      <node id="36">
+        <label>csignal</label>
+      </node>
+      <node id="82">
+        <label>MTObject.hpp</label>
+        <link refid="_m_t_object_8hpp"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>thread</label>
+      </node>
+      <node id="61">
+        <label>TRandom.h</label>
+      </node>
+      <node id="69">
+        <label>TTree.h</label>
+      </node>
+      <node id="87">
+        <label>fasterac/group.h</label>
+      </node>
+      <node id="10">
+        <label>algorithm</label>
+      </node>
+      <node id="46">
+        <label>TFitResultPtr.h</label>
+      </node>
+      <node id="91">
+        <label>../Classes/Alignator.hpp</label>
+        <link refid="_alignator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>../Classes/FilesManager.hpp</label>
+        <link refid="_files_manager_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>cstring</label>
+      </node>
+      <node id="78">
+        <label>../Modules/Calibrator.hpp</label>
+        <link refid="_calibrator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>../MTObjects/MTRootReader.hpp</label>
+        <link refid="_m_t_root_reader_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>TGraph.h</label>
+      </node>
+      <node id="26">
+        <label>memory</label>
+      </node>
+      <node id="33">
+        <label>typeindex</label>
+      </node>
+      <node id="18">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_evolution_peaks" prot="public">EvolutionPeaks</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>EVOLUTIONPEAKS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>EVOLUTIONPEAKS_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../libRoot.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../Analyse/SpectraCo.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../Classes/Detectors.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../Classes/FilesManager.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../Classes/DataFile.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../Modules/Calibrator.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="class_evolution_peaks" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_evolution_peaks" kindref="compound">EvolutionPeaks</ref></highlight></codeline>
+<codeline lineno="28"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="30" refid="class_evolution_peaks_1ae971ac16cf6f652c322c0b7f008cbf8f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_evolution_peaks_1ae971ac16cf6f652c322c0b7f008cbf8f" kindref="member">EvolutionPeaks</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="31" refid="class_evolution_peaks_1a97403723f87d740c700637e07e95fbb7" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_evolution_peaks_1a97403723f87d740c700637e07e95fbb7" kindref="member">EvolutionPeaks</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">**<sp/>argv)<sp/>{<ref refid="class_evolution_peaks_1aa6877d718198437381b3516d0593e2c6" kindref="member">loadParameters</ref>(argc,<sp/>argv);<sp/><ref refid="class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18" kindref="member">run</ref>();}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a0b661bdce835988388c52c174b59f57b" kindref="member">printParameters</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1aa6877d718198437381b3516d0593e2c6" kindref="member">loadParameters</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">**<sp/>argv);</highlight></codeline>
+<codeline lineno="35" refid="class_evolution_peaks_1a5c8a97eb07b43c440cc065a864fab56e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a5c8a97eb07b43c440cc065a864fab56e" kindref="member">setPeaks</ref>(std::vector&lt;double&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>peaks)<sp/>{<ref refid="class_evolution_peaks_1abc104be9ef72adc1f947542394ffad50" kindref="member">m_peaks</ref><sp/>=<sp/>peaks;}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18" kindref="member">run</ref>();</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ARGS&gt;</highlight></codeline>
+<codeline lineno="39" refid="class_evolution_peaks_1ad13fac38f35247d7e2f6ba5b61f0dd9b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1ad13fac38f35247d7e2f6ba5b61f0dd9b" kindref="member">loadCalibration</ref>(ARGS<sp/>&amp;&amp;...<sp/>args)<sp/>{<ref refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" kindref="member">m_calib</ref>.<ref refid="class_calibration_1a660694835089e0020f014c65f3d6f7e7" kindref="member">load</ref>(std::forward&lt;ARGS&gt;(args)...);}</highlight></codeline>
+<codeline lineno="40" refid="class_evolution_peaks_1ad8012c10acf0d3d2e12e81b03b82be39" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1ad8012c10acf0d3d2e12e81b03b82be39" kindref="member">setNbFiles</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>nb)<sp/>{<ref refid="class_evolution_peaks_1a92b3c575edb0750c40872db984b01d13" kindref="member">m_nb_files</ref><sp/>=<sp/>nb;}</highlight></codeline>
+<codeline lineno="41" refid="class_evolution_peaks_1a0e6bdb90d030eac7d3ef1365338dd7de" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a0e6bdb90d030eac7d3ef1365338dd7de" kindref="member">overwrite</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_overwrite<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{<ref refid="class_evolution_peaks_1a9b5df4439b97335efcc0772a424ee37a" kindref="member">m_overwrite</ref><sp/>=<sp/>_overwrite;}</highlight></codeline>
+<codeline lineno="42" refid="class_evolution_peaks_1ae2edbfac41a429e8275da5572f7329e5" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1ae2edbfac41a429e8275da5572f7329e5" kindref="member">setOutputName</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_output)<sp/>{<ref refid="class_evolution_peaks_1a5ff141333653c2e9eb21702601b02611" kindref="member">m_output</ref><sp/>=<sp/>_output;}</highlight></codeline>
+<codeline lineno="43" refid="class_evolution_peaks_1a10bf1158a6a89129b9c2e61ff4ca27ee" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a10bf1158a6a89129b9c2e61ff4ca27ee" kindref="member">loadRebin</ref>(<ref refid="class_file" kindref="compound">File</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>filename)<sp/>{<ref refid="class_evolution_peaks_1ad874f98afd738fbdb60b89bb926bca61" kindref="member">m_rebins</ref>.<ref refid="class_data_file_1ae9748d2772e7a11da4b9f81da89d70b3" kindref="member">load</ref>(filename);}</highlight></codeline>
+<codeline lineno="44" refid="class_evolution_peaks_1a4dce5d05c6d643d582829be29b6b16e5" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a4dce5d05c6d643d582829be29b6b16e5" kindref="member">loadDetectors</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>filename){<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" kindref="member">load</ref>(filename);}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="47" refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_calibration" kindref="compound">Calibration</ref><sp/><ref refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" kindref="member">m_calib</ref>;</highlight></codeline>
+<codeline lineno="48" refid="class_evolution_peaks_1a2982e096a06f6ecc3025077537a8f89c" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_calibration" kindref="compound">Calibration</ref><sp/><ref refid="class_evolution_peaks_1a2982e096a06f6ecc3025077537a8f89c" kindref="member">m_recalibration</ref>;</highlight></codeline>
+<codeline lineno="49" refid="class_evolution_peaks_1aef745e6072118051e5fdd25a6841103e" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_path" kindref="compound">Path</ref><sp/><ref refid="class_evolution_peaks_1aef745e6072118051e5fdd25a6841103e" kindref="member">m_dataPath</ref>;</highlight></codeline>
+<codeline lineno="50" refid="class_evolution_peaks_1a92b3c575edb0750c40872db984b01d13" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a92b3c575edb0750c40872db984b01d13" kindref="member">m_nb_files</ref><sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="51" refid="class_evolution_peaks_1a9b5df4439b97335efcc0772a424ee37a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a9b5df4439b97335efcc0772a424ee37a" kindref="member">m_overwrite</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="52" refid="class_evolution_peaks_1a5ff141333653c2e9eb21702601b02611" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_file" kindref="compound">File</ref><sp/><ref refid="class_evolution_peaks_1a5ff141333653c2e9eb21702601b02611" kindref="member">m_output</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;follow_evolution.root&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="class_evolution_peaks_1abc104be9ef72adc1f947542394ffad50" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="class_evolution_peaks_1abc104be9ef72adc1f947542394ffad50" kindref="member">m_peaks</ref><sp/>=<sp/>{511};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="56" refid="class_evolution_peaks_1ad874f98afd738fbdb60b89bb926bca61" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_data_file" kindref="compound">DataFile&lt;Label, int&gt;</ref><sp/><ref refid="class_evolution_peaks_1ad874f98afd738fbdb60b89bb926bca61" kindref="member">m_rebins</ref>;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="class_evolution_peaks_1a0b661bdce835988388c52c174b59f57b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a0b661bdce835988388c52c174b59f57b" kindref="member">EvolutionPeaks::printParameters</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="60"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Usage<sp/>of<sp/>EvolutionPeaks<sp/>:<sp/>/path/to/data<sp/>[[parameters]]&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;parameters<sp/>:&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;-c<sp/>[calibration_file]<sp/><sp/>:<sp/>Loads<sp/>the<sp/>calibration<sp/>file&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;-f<sp/>[files_number]<sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>Choose<sp/>the<sp/>total<sp/>number<sp/>of<sp/>files<sp/>to<sp/>treat<sp/>inside<sp/>a<sp/>data<sp/>folder&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;-i<sp/>[ID_file]<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>Load<sp/>ID<sp/>file&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;-o<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>Overwrites<sp/>the<sp/>output&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;-O<sp/>[output_name]<sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>Set<sp/>the<sp/>name<sp/>of<sp/>the<sp/>output&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>exit(1);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="class_evolution_peaks_1aa6877d718198437381b3516d0593e2c6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1aa6877d718198437381b3516d0593e2c6" kindref="member">EvolutionPeaks::loadParameters</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">**<sp/>argv)</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>the<sp/>case<sp/>of<sp/>not<sp/>enough<sp/>parameters<sp/>(0<sp/>or<sp/>1)<sp/>and<sp/>print<sp/>the<sp/>parameters<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(argc&lt;2)<sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Not<sp/>enough<sp/>parameters<sp/>!!!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_evolution_peaks_1a0b661bdce835988388c52c174b59f57b" kindref="member">printParameters</ref>();</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Path<sp/>of<sp/>the<sp/>input<sp/>data<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><ref refid="class_evolution_peaks_1aef745e6072118051e5fdd25a6841103e" kindref="member">m_dataPath</ref><sp/>=<sp/>argv<sp/>[1];</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Other<sp/>parameters<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>2;<sp/>i&lt;argc;<sp/>i++)</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>command<sp/>=<sp/>argv[i];</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(command<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-c&quot;</highlight><highlight class="normal">)<sp/><ref refid="class_evolution_peaks_1ad13fac38f35247d7e2f6ba5b61f0dd9b" kindref="member">loadCalibration</ref>(argv[++i]);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(command<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-f&quot;</highlight><highlight class="normal">)<sp/><ref refid="class_evolution_peaks_1ad8012c10acf0d3d2e12e81b03b82be39" kindref="member">setNbFiles</ref>(std::stoi(argv[++i]));</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(command<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-i&quot;</highlight><highlight class="normal">)<sp/><ref refid="class_evolution_peaks_1a4dce5d05c6d643d582829be29b6b16e5" kindref="member">loadDetectors</ref>(argv[++i]);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(command<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-o&quot;</highlight><highlight class="normal">)<sp/><ref refid="class_evolution_peaks_1a0e6bdb90d030eac7d3ef1365338dd7de" kindref="member">overwrite</ref>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(command<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-O&quot;</highlight><highlight class="normal">)<sp/><ref refid="class_evolution_peaks_1ae2edbfac41a429e8275da5572f7329e5" kindref="member">setOutputName</ref>(argv[++i]);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(command<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;--rebin&quot;</highlight><highlight class="normal">)<sp/><ref refid="class_evolution_peaks_1a10bf1158a6a89129b9c2e61ff4ca27ee" kindref="member">loadRebin</ref>(argv[++i]);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{<ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;Unkown<sp/>command&quot;</highlight><highlight class="normal"><sp/>+<sp/>command);}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Loaded&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18" kindref="member">EvolutionPeaks::run</ref>()</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager" kindref="compound">FilesManager</ref><sp/>files(<ref refid="class_evolution_peaks_1aef745e6072118051e5fdd25a6841103e" kindref="member">m_dataPath</ref>);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!files)<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;DATA&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_evolution_peaks_1a5ff141333653c2e9eb21702601b02611" kindref="member">m_output</ref>.<ref refid="class_file_1a53118ce36851cb1c6845a82f915fd8ba" kindref="member">exists</ref>()<sp/>&amp;&amp;<sp/>!<ref refid="class_evolution_peaks_1a9b5df4439b97335efcc0772a424ee37a" kindref="member">m_overwrite</ref>)<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(<ref refid="class_evolution_peaks_1a5ff141333653c2e9eb21702601b02611" kindref="member">m_output</ref>,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>already<sp/>exists&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/>std::vector&lt;int&gt;<sp/>run_numbers;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/>std::string<sp/>file;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(files&gt;&gt;file)<sp/>run_numbers.push_back(std::stoi(<ref refid="string__functions_8hpp_1a39fc5beacd18fe3d9446687fdf163416" kindref="member">lastPart</ref>(<ref refid="files__functions_8hpp_1a658fd83a6ed34994ff0742273a3cc358" kindref="member">removeExtension</ref>(file),<sp/></highlight><highlight class="charliteral">&apos;_&apos;</highlight><highlight class="normal">)));</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>std::vector&lt;int&gt;<sp/>gindex;<sp/></highlight><highlight class="comment">//We<sp/>have<sp/>to<sp/>resort<sp/>the<sp/>vector<sp/>by<sp/>the<sp/>index<sp/>because<sp/>100<sp/>comes<sp/>before<sp/>11<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/>bubbleSort(run_numbers,<sp/>gindex);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>std::vector&lt;int&gt;<sp/>ordered_runs_number;<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>index<sp/>:<sp/>gindex)<sp/>ordered_runs_number.push_back(run_numbers[index]);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>first_run_number<sp/>=<sp/>run_numbers[gindex[0]];</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>last_run_number<sp/>=<sp/>run_numbers[gindex.back()];</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>number_of_runs<sp/>=<sp/>files.<ref refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" kindref="member">size</ref>();</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>TH2F*<sp/>evolution_BR2D1<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/>TH1F*<sp/>BR2D1_total<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>std::vector&lt;TGraph*&gt;<sp/>maximum_graph;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>std::vector&lt;TGraph*&gt;<sp/>resolution_graph;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/>std::vector&lt;TGraph*&gt;<sp/>resolution_VS_maximum_graph;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>std::vector&lt;TGraph*&gt;<sp/>resolution_VS_nb_hits_graph;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><ref refid="lib_root_8hpp_1a3b73f11bc69f125e12c1d48c9ed79a6e" kindref="member">unique_TFile</ref><sp/>totalFile(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);<sp/></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/>std::vector&lt;SpectraCo&gt;<sp/>tot_histos;</highlight><highlight class="comment">//<sp/>Will<sp/>be<sp/>filled<sp/>only<sp/>if<sp/>the<sp/>tot<sp/>file<sp/>has<sp/>been<sp/>found</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>informations<sp/>from<sp/>the<sp/>first<sp/>file<sp/>or<sp/>the<sp/>total<sp/>file<sp/>to<sp/>adjust<sp/>accordingly<sp/>the<sp/>spectra:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_path" kindref="compound">Path</ref><sp/>totpath(<ref refid="class_evolution_peaks_1aef745e6072118051e5fdd25a6841103e" kindref="member">m_dataPath</ref>+</highlight><highlight class="stringliteral">&quot;total&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(totpath.<ref refid="class_path_1aecd02f464b364bc26631bcb65e44843b" kindref="member">exists</ref>())<sp/></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>total<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_file" kindref="compound">File</ref><sp/>totFilename(totpath+</highlight><highlight class="stringliteral">&quot;fused_histo.root&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(totFilename.<ref refid="class_file_1a53118ce36851cb1c6845a82f915fd8ba" kindref="member">exists</ref>())<sp/>totalFile.reset(TFile::Open(totFilename.<ref refid="class_file_1adcc058679f1c4e1b9561aa7043720ade" kindref="member">c_str</ref>()));</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>totalFile-&gt;cd();</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>histo_names<sp/>=<sp/>getTH1FNames(totalFile.get());</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;int&gt;<sp/>labels;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;TH1F*&gt;<sp/>histos_total;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Load<sp/>the<sp/>histograms<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>histo_name<sp/>:<sp/>histo_names)</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>histo<sp/>=<sp/>totalFile-&gt;Get&lt;TH1F&gt;(histo_name.c_str());</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{labels.push_back(string_to&lt;Label&gt;(histo_name));}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal">(<ref refid="class_cast_impossible" kindref="compound">CastImpossible</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" kindref="member">error</ref>)</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>)<sp/>labels.push_back(<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>[histo_name]);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(</highlight><highlight class="stringliteral">&quot;As<sp/>the<sp/>histograms<sp/>are<sp/>labeled<sp/>with<sp/>names,<sp/>one<sp/>has<sp/>to<sp/>provide<sp/>the<sp/>correct<sp/>index.list<sp/>file<sp/>!!<sp/>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Use<sp/>parameter<sp/>-i<sp/>[filename]<sp/>or<sp/>detectors.load(filename).&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" kindref="member">m_calib</ref><sp/>&amp;&amp;<sp/><ref refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" kindref="member">m_calib</ref>.<ref refid="class_calibration_1a91d512d3bcbc3a3439a7902326965b48" kindref="member">order</ref>(labels.back())&gt;-1<sp/>&amp;&amp;<sp/><ref refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" kindref="member">m_calib</ref>.<ref refid="class_calibration_1a91d512d3bcbc3a3439a7902326965b48" kindref="member">order</ref>(labels.back())&lt;2)<sp/></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" kindref="member">m_calib</ref>.calibrateAxis(histo,<sp/>labels.back());</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>histo-&gt;GetXaxis()-&gt;SetRangeUser(0,<sp/>30000);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>histo-&gt;SetName(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(histo_name,<sp/></highlight><highlight class="stringliteral">&quot;_total&quot;</highlight><highlight class="normal">).c_str());</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>histo-&gt;SetTitle(<ref refid="string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2" kindref="member">concatenate</ref>(histo-&gt;GetTitle(),<sp/></highlight><highlight class="stringliteral">&quot;<sp/>total&quot;</highlight><highlight class="normal">).c_str());</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>histos_total.push_back(histo);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tot_histos.push_back(histo);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Recalibrate<sp/>using<sp/>the<sp/>peaks<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>nameDerFile<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;second_derivative.root&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>totDerivateFile<sp/>=<sp/>TFile::Open(nameDerFile.c_str(),<sp/></highlight><highlight class="stringliteral">&quot;recreate&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>spectra_i<sp/>=<sp/>0;<sp/>spectra_i&lt;tot_histos.size();<sp/>++spectra_i)</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>label<sp/>=<sp/>labels[spectra_i];</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(label);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="string__functions_8hpp_1a87d8e2cb69021ab11e443cb140349eb6" kindref="member">found</ref>(<ref refid="class_evolution_peaks_1ad874f98afd738fbdb60b89bb926bca61" kindref="member">m_rebins</ref>.<ref refid="class_data_file_1affed9dbc6759035d5e3b087b466b3413" kindref="member">indexes</ref>(),<sp/><ref refid="lib_co_8hpp_1ab2f8f9033c2742c4f5ac6d3cce6caf9a" kindref="member">ushort_cast</ref>(label)))<sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>smooth<sp/>=<sp/><ref refid="class_evolution_peaks_1ad874f98afd738fbdb60b89bb926bca61" kindref="member">m_rebins</ref>[label];</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>spectra<sp/>=<sp/>histos_total[spectra_i];</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(smooth&gt;100)</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>rebin<sp/>=<sp/>smooth/100;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a141d6b4b0d8c1824f6ed472b5226eab4" kindref="member">information</ref>(label,<sp/></highlight><highlight class="stringliteral">&quot;smooth<sp/>factor<sp/>&gt;<sp/>100<sp/>:<sp/>smooth<sp/>set<sp/>to<sp/>100<sp/>and<sp/>spectra<sp/>rebinned<sp/>by&quot;</highlight><highlight class="normal">,<sp/>rebin);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spectra-&gt;Rebin(rebin);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>smooth<sp/>=<sp/>100;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>auto<sp/>&amp;<sp/>spectra<sp/>=<sp/>tot_histos[spectra_i];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>spectra.derivate2(m_rebins[label]);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>auto<sp/>der<sp/>=<sp/>spectra.derivative2().createTH1F();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="namespace_co_analyse_1afa2d6e36c43655ace45e8aa55a53d4da" kindref="member">CoAnalyse::removeBackground</ref>(spectra,<sp/>smooth);</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>totDerivateFile-&gt;cd();</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>spectra-&gt;Write();</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>der-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gROOT-&gt;cd();</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>totDerivateFile-&gt;cd();</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>totDerivateFile-&gt;Write();</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>totDerivateFile-&gt;Close();</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(nameDerFile,<sp/></highlight><highlight class="stringliteral">&quot;written&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="lib_root_8hpp_1a3b73f11bc69f125e12c1d48c9ed79a6e" kindref="member">unique_TFile</ref><sp/>file(TFile::Open(files[gindex[0]].c_str(),<sp/></highlight><highlight class="stringliteral">&quot;READ&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>file-&gt;cd();</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>histo_BR2D1<sp/>=<sp/>file-&gt;Get&lt;TH1F&gt;(</highlight><highlight class="stringliteral">&quot;R3A1_red&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" kindref="member">m_calib</ref>)<sp/><ref refid="class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7" kindref="member">m_calib</ref>.calibrateAxis(histo_BR2D1,<sp/>23);</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>nbins<sp/>=<sp/>histo_BR2D1-&gt;GetNbinsX();</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>min<sp/><sp/><sp/>=<sp/>histo_BR2D1-&gt;GetXaxis()-&gt;GetXmin();</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>max<sp/><sp/><sp/>=<sp/>histo_BR2D1-&gt;GetXaxis()-&gt;GetXmax();</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>file-&gt;Close();</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>BR2D1_total<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>TH1F(</highlight><highlight class="stringliteral">&quot;BR2D1_total&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;BR2D1_total&quot;</highlight><highlight class="normal">,<sp/>nbins,min,max);</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>evolution_BR2D1<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>TH2F(</highlight><highlight class="stringliteral">&quot;evolution_BR2D1&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;evolution_BR2D1&quot;</highlight><highlight class="normal">,<sp/>number_of_runs,first_run_number,last_run_number,<sp/>nbins,min,max);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>std::vector&lt;std::vector&lt;int&gt;&gt;<sp/>maximums(m_peaks.size());</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>auto<sp/>maximums<sp/>=<sp/>peaks.size();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>//<sp/>To<sp/>carefully<sp/>manage<sp/>scope<sp/>!!!!</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>unique_TFile<sp/>output(TFile::Open(m_output.c_str(),<sp/>&quot;RECREATE&quot;));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>gROOT-&gt;cd();<sp/>//<sp/>Get<sp/>ou<sp/>of<sp/>the<sp/>output<sp/>file<sp/>scope<sp/>for<sp/>the<sp/>moment</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>//<sp/>Fill<sp/>the<sp/>histograms<sp/>and<sp/>fit<sp/>the<sp/>peaks<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>for<sp/>(auto<sp/>const<sp/>&amp;<sp/>index<sp/>:<sp/>gindex)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>{//<sp/>Looping<sp/>through<sp/>the<sp/>runs</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>-------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>--<sp/>Extract<sp/>the<sp/>spectra<sp/>--<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>-------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>run_number<sp/>=<sp/>run_numbers[index];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>name<sp/>=<sp/>files[index];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>unique_TFile<sp/>file(TFile::Open(name.c_str(),<sp/>&quot;READ&quot;));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>file-&gt;cd();//<sp/>Going<sp/>back<sp/>to<sp/>the<sp/>input<sp/>file<sp/>scope</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>auto<sp/>histo_BR2D1<sp/>=<sp/>file-&gt;Get&lt;TH1F&gt;(&quot;R3A1_red&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>if<sp/>(!histo_BR2D1)<sp/>throw_error(&quot;CANT<sp/>FIND<sp/>PARIS_BR2D1&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>------------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>--<sp/>First<sp/>linear<sp/>calibration<sp/>--<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>------------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>if<sp/>(m_calib)<sp/>m_calib.calibrateAxis(histo_BR2D1,<sp/>301);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>BR2D1_total-&gt;Add(histo_BR2D1);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>histo_BR2D1-&gt;Rebin(100);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>CoAnalyse::removeBackground(histo_BR2D1,<sp/>100);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>AddTH1(evolution_BR2D1,<sp/>histo_BR2D1,<sp/>index);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>--<sp/>Better<sp/>calibration<sp/>--<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>------------------------<sp/>//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>binToX<sp/>=<sp/>histo_BR2D1-&gt;GetXaxis()-&gt;GetXmax()/histo_BR2D1-&gt;GetNbinsX();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>for<sp/>(size_t<sp/>peak_i<sp/>=<sp/>0;<sp/>peak_i&lt;m_peaks.size();<sp/>++peak_i)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>peak<sp/>=<sp/>m_peaks[peak_i];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>maximum_graph.push_back(new<sp/>TGraph());</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>resolution_graph.push_back(new<sp/>TGraph());</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>resolution_VS_maximum_graph.push_back(new<sp/>TGraph());</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>resolution_VS_nb_hits_graph.push_back(new<sp/>TGraph());</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>//<sp/>auto<sp/>const<sp/>&amp;<sp/>sigma<sp/>=<sp/>mean*0.03-0.00001*peak*peak;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>sigma<sp/>=<sp/>3;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>//<sp/>auto<sp/>const<sp/>&amp;<sp/>sigma<sp/>=<sp/>peak*(5.04375534e+01/sqrt(peak)+2.75778254e+02/peak-8.89257900e-02)/100;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>window<sp/>=<sp/>5*sigma;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>min<sp/>=<sp/>peak-window;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>max<sp/>=<sp/>peak+window;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>histo_BR2D1-&gt;GetXaxis()-&gt;SetRangeUser(min,<sp/>max);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>auto<sp/>constante<sp/>=<sp/>histo_BR2D1-&gt;GetMaximum();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>auto<sp/>mean<sp/>=<sp/>histo_BR2D1-&gt;GetMaximumBin()*binToX;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>TF1*<sp/>gaus_pol0<sp/>=<sp/>new<sp/>TF1(&quot;gaus(0)+pol1(3)&quot;,&quot;gaus(0)+pol1(3)&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>//<sp/>gaus_pol0<sp/>-&gt;<sp/>SetRange(min*binToX,<sp/>max*binToX);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>histo_BR2D1-&gt;GetXaxis()-&gt;SetRangeUser(min,<sp/>max);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>gaus_pol0<sp/>-&gt;<sp/>SetRange(mean-window,<sp/>mean+window);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>gaus_pol0<sp/>-&gt;<sp/>SetParameter(0,<sp/>constante);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>gaus_pol0<sp/>-&gt;<sp/>SetParameter(1,<sp/>mean);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>gaus_pol0<sp/>-&gt;<sp/>SetParameter(2,<sp/>sigma);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print(constante,<sp/>mean,<sp/>sigma);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>histo_BR2D1<sp/>-&gt;<sp/>Fit(gaus_pol0,&quot;RQN+&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print(gaus_pol0<sp/>-&gt;<sp/>GetParameter(0),<sp/>gaus_pol0<sp/>-&gt;<sp/>GetParameter(1),<sp/>gaus_pol0<sp/>-&gt;<sp/>GetParameter(2));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print(&quot;&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>maximums[peak_i].push_back(gaus_pol0<sp/>-&gt;<sp/>GetParameter(1));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>maximum_graph[peak_i]-&gt;AddPoint(run_number,<sp/>gaus_pol0<sp/>-&gt;<sp/>GetParameter(1));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>resolution_graph[peak_i]-&gt;AddPoint(run_number,<sp/>gaus_pol0<sp/>-&gt;<sp/>GetParameter(2));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>resolution_VS_maximum_graph[peak_i]-&gt;AddPoint(gaus_pol0<sp/>-&gt;<sp/>GetParameter(1),<sp/>gaus_pol0<sp/>-&gt;<sp/>GetParameter(2));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>resolution_VS_nb_hits_graph[peak_i]-&gt;AddPoint(histo_BR2D1-&gt;GetEntries(),<sp/>gaus_pol0<sp/>-&gt;<sp/>GetParameter(2));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>output-&gt;cd();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>histo_BR2D1-&gt;SetName(concatenate(histo_BR2D1-&gt;GetName(),<sp/>&quot;_&quot;,<sp/>run_number).c_str());</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>histo_BR2D1-&gt;SetTitle(concatenate(histo_BR2D1-&gt;GetName(),<sp/>&quot;_&quot;,<sp/>run_number).c_str());</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>histo_BR2D1-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>file-&gt;cd();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>file-&gt;Close();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>gROOT-&gt;cd();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>CoAnalyse::normalizeY(evolution_BR2D1);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>output-&gt;cd();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>evolution_BR2D1-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>BR2D1_total-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>for<sp/>(size_t<sp/>peak_i<sp/>=<sp/>0;<sp/>peak_i&lt;m_peaks.size();<sp/>++peak_i)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>auto<sp/>const<sp/>&amp;<sp/>peak<sp/>=<sp/>m_peaks[peak_i];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>maximum_graph[peak_i]-&gt;SetName(Form(&quot;Evolution_%i&quot;,<sp/>(int)peak));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>maximum_graph[peak_i]-&gt;SetTitle(Form(&quot;Evolution_%i&quot;,<sp/>(int)peak));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>maximum_graph[peak_i]-&gt;SetMarkerStyle(5);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>maximum_graph[peak_i]-&gt;SetMarkerSize(1);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>maximum_graph[peak_i]-&gt;SetMarkerColor(kRed);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>maximum_graph[peak_i]-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="316"><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_graph[peak_i]-&gt;SetName(Form(&quot;Evolution_resolution_%i&quot;,<sp/>(int)peak));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_graph[peak_i]-&gt;SetTitle(Form(&quot;Evolution_resolution_%i&quot;,<sp/>(int)peak));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_graph[peak_i]-&gt;SetMarkerStyle(5);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_graph[peak_i]-&gt;SetMarkerSize(1);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_graph[peak_i]-&gt;SetMarkerColor(kRed);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_graph[peak_i]-&gt;SetLineColor(0);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_graph[peak_i]-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_maximum_graph[peak_i]-&gt;SetName(Form(&quot;Resolution_VS_maximum%i&quot;,<sp/>(int)peak));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_maximum_graph[peak_i]-&gt;SetTitle(Form(&quot;Resolution_VS_maximum%i&quot;,<sp/>(int)peak));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_maximum_graph[peak_i]-&gt;SetMarkerStyle(5);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_maximum_graph[peak_i]-&gt;SetMarkerSize(1);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_maximum_graph[peak_i]-&gt;SetMarkerColor(kRed);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_maximum_graph[peak_i]-&gt;SetLineColor(0);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_maximum_graph[peak_i]-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_nb_hits_graph[peak_i]-&gt;SetName(Form(&quot;Resolution_VS_nb_hits%i&quot;,<sp/>(int)peak));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_nb_hits_graph[peak_i]-&gt;SetTitle(Form(&quot;Resolution_VS_nb_hits%i&quot;,<sp/>(int)peak));</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_nb_hits_graph[peak_i]-&gt;SetMarkerStyle(5);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_nb_hits_graph[peak_i]-&gt;SetMarkerSize(1);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_nb_hits_graph[peak_i]-&gt;SetMarkerColor(kRed);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_nb_hits_graph[peak_i]-&gt;SetLineColor(0);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>resolution_VS_nb_hits_graph[peak_i]-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>output-&gt;Write();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>output-&gt;Close();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>print(m_output,<sp/>&quot;written&quot;);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//EVOLUTIONPEAKS_HPP</highlight></codeline>
+    </programlisting>
+    <location file="lib/Modules/EvolutionPeaks.hpp"/>
+  </compounddef>
+</doxygen>

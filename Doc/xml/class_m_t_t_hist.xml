@@ -3,27 +3,12 @@
   <compounddef id="class_m_t_t_hist" kind="class" language="C++" prot="public">
     <compoundname>MTTHist</compoundname>
     <includes refid="_m_t_t_hist_8hpp" local="no">MTTHist.hpp</includes>
+    <innerclass refid="class_m_t_t_hist_1_1_copy_error" prot="public">MTTHist::CopyError</innerclass>
     <templateparamlist>
       <param>
         <type>class THist</type>
       </param>
     </templateparamlist>
-      <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="class_m_t_t_hist_1aca0db36a40f564546ca75e94e9139145" prot="public" static="no" mutable="no">
-        <type>std::mutex</type>
-        <definition>std::mutex MTTHist&lt; THist &gt;::m_mutex</definition>
-        <argsstring></argsstring>
-        <name>m_mutex</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="337" column="14" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="337" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a7fea4cd494636bb8c4b103d3cf0d0786" compoundref="_m_t_t_hist_8hpp" startline="458" endline="473">MTTHist&lt; THist &gt;::Merge_thread</referencedby>
-      </memberdef>
-      </sectiondef>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" prot="private" static="no" mutable="no">
         <type>std::vector&lt; THist * &gt;</type>
@@ -36,13 +21,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="357" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="357" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a7caec71178e8d79ad73ee5ff6c34b21d" compoundref="_m_t_t_hist_8hpp" startline="324" endline="324">MTTHist&lt; THist &gt;::Get</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a9437a1854c47ccda87812b6d2a8271b5" compoundref="_m_t_t_hist_8hpp" startline="296" endline="296">MTTHist&lt; THist &gt;::getCollection</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a8d9bba241299b542c654905edc517f63" compoundref="_m_t_t_hist_8hpp" startline="326" endline="326">MTTHist&lt; THist &gt;::operator[]</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a1c8fd75c77e227a9f4cdca690d321a71" compoundref="_m_t_t_hist_8hpp" startline="314" endline="314">MTTHist&lt; THist &gt;::size</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="345" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="345" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" compoundref="_m_t_t_hist_8hpp" startline="174" endline="185">MTTHist&lt; THist &gt;::cleanMove</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a7caec71178e8d79ad73ee5ff6c34b21d" compoundref="_m_t_t_hist_8hpp" startline="307" endline="307">MTTHist&lt; THist &gt;::Get</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9437a1854c47ccda87812b6d2a8271b5" compoundref="_m_t_t_hist_8hpp" startline="271" endline="271">MTTHist&lt; THist &gt;::getCollection</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" compoundref="_m_t_t_hist_8hpp" startline="84" endline="102">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a8d9bba241299b542c654905edc517f63" compoundref="_m_t_t_hist_8hpp" startline="309" endline="309">MTTHist&lt; THist &gt;::operator[]</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a1c8fd75c77e227a9f4cdca690d321a71" compoundref="_m_t_t_hist_8hpp" startline="296" endline="296">MTTHist&lt; THist &gt;::size</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -55,11 +42,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="344" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="344" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a6dbe08dfe0c62f9c9b75064cb262bdc0" compoundref="_m_t_t_hist_8hpp" startline="335" endline="335">MTTHist&lt; THist &gt;::readComment</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
-        <referencedby refid="class_m_t_t_hist_1aa69b6607da79271f1454987d06b4d78e" compoundref="_m_t_t_hist_8hpp" startline="334" endline="334">MTTHist&lt; THist &gt;::setComment</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="328" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="328" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" compoundref="_m_t_t_hist_8hpp" startline="174" endline="185">MTTHist&lt; THist &gt;::cleanMove</referencedby>
+        <referencedby refid="class_m_t_t_hist_1afdd2e89e1472927f588a8176e6813e88" compoundref="_m_t_t_hist_8hpp" startline="317" endline="317">MTTHist&lt; THist &gt;::readComment</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa69b6607da79271f1454987d06b4d78e" compoundref="_m_t_t_hist_8hpp" startline="316" endline="316">MTTHist&lt; THist &gt;::setComment</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -73,29 +61,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="348" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="348" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a46a58bcb4b91d7a05bee3ec0f4fe4eab" compoundref="_m_t_t_hist_8hpp" startline="292" endline="292">MTTHist&lt; THist &gt;::exists</referencedby>
-        <referencedby refid="class_m_t_t_hist_1affbda260e218244cd5ed9870d6ed77cf" compoundref="_m_t_t_hist_8hpp" startline="293" endline="293">MTTHist&lt; THist &gt;::isWritten</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab13711dce2e1451ab94833ff7e928802" compoundref="_m_t_t_hist_8hpp" startline="294" endline="294">MTTHist&lt; THist &gt;::operator bool</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
-      </memberdef>
-      <memberdef kind="variable" id="class_m_t_t_hist_1a0b22e8677009e6458288f97867176c77" prot="private" static="no" mutable="no">
-        <type>TFile *</type>
-        <definition>TFile* MTTHist&lt; THist &gt;::m_file</definition>
-        <argsstring></argsstring>
-        <name>m_file</name>
-        <initializer>= nullptr</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="347" column="9" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="347" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a0b1fb45a588e20b42e65275f14685dd5" compoundref="_m_t_t_hist_8hpp" startline="313" endline="313">MTTHist&lt; THist &gt;::file</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="332" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="332" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" compoundref="_m_t_t_hist_8hpp" startline="174" endline="185">MTTHist&lt; THist &gt;::cleanMove</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a46a58bcb4b91d7a05bee3ec0f4fe4eab" compoundref="_m_t_t_hist_8hpp" startline="268" endline="268">MTTHist&lt; THist &gt;::exists</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" compoundref="_m_t_t_hist_8hpp" startline="84" endline="102">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+        <referencedby refid="class_m_t_t_hist_1ab13711dce2e1451ab94833ff7e928802" compoundref="_m_t_t_hist_8hpp" startline="269" endline="269">MTTHist&lt; THist &gt;::operator bool</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" prot="private" static="no" mutable="no">
         <type><ref refid="lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52" kindref="member">ulonglong</ref></type>
@@ -109,25 +81,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="350" column="13" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="350" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a5c8a398dfdd3fad0a4529453caf93bd2" compoundref="_m_t_t_hist_8hpp" startline="328" endline="328">MTTHist&lt; THist &gt;::Integral</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
-      </memberdef>
-      <memberdef kind="variable" id="class_m_t_t_hist_1a7400ac26c3f0273fae7d9a47751a67a2" prot="private" static="no" mutable="no">
-        <type><ref refid="class_bools" kindref="compound">Bools</ref></type>
-        <definition>Bools MTTHist&lt; THist &gt;::m_is_deleted</definition>
-        <argsstring></argsstring>
-        <name>m_is_deleted</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="358" column="9" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="358" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="336" column="13" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="336" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" compoundref="_m_t_t_hist_8hpp" startline="174" endline="185">MTTHist&lt; THist &gt;::cleanMove</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a5c8a398dfdd3fad0a4529453caf93bd2" compoundref="_m_t_t_hist_8hpp" startline="311" endline="311">MTTHist&lt; THist &gt;::Integral</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" compoundref="_m_t_t_hist_8hpp" startline="84" endline="102">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -141,9 +100,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="356" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="356" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="344" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="344" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" compoundref="_m_t_t_hist_8hpp" startline="174" endline="185">MTTHist&lt; THist &gt;::cleanMove</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" compoundref="_m_t_t_hist_8hpp" startline="84" endline="102">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" prot="private" static="no" mutable="no">
         <type>THist *</type>
@@ -157,11 +118,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="352" column="9" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="352" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a9c2f7d05c9f8506382211635b35bd97b" compoundref="_m_t_t_hist_8hpp" startline="312" endline="312">MTTHist&lt; THist &gt;::get</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" compoundref="_m_t_t_hist_8hpp" startline="298" endline="307">MTTHist&lt; THist &gt;::operator-&gt;</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="338" column="9" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="338" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" compoundref="_m_t_t_hist_8hpp" startline="174" endline="185">MTTHist&lt; THist &gt;::cleanMove</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9c2f7d05c9f8506382211635b35bd97b" compoundref="_m_t_t_hist_8hpp" startline="294" endline="294">MTTHist&lt; THist &gt;::get</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" compoundref="_m_t_t_hist_8hpp" startline="84" endline="102">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" compoundref="_m_t_t_hist_8hpp" startline="278" endline="288">MTTHist&lt; THist &gt;::operator-&gt;</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1a267e78003ec791a6a795b30f1a718d66" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -175,7 +138,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="353" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="353" bodyend="-1"/>
+        <location file="lib/MTObjects/MTTHist.hpp" line="339" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="339" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_m_t_t_hist_1aca0db36a40f564546ca75e94e9139145" prot="private" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex MTTHist&lt; THist &gt;::m_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="341" column="14" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="341" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1ac71b59bd26bea2680cb0ed99c5d1af05" compoundref="_m_t_t_hist_8hpp" startline="323" endline="323">MTTHist&lt; THist &gt;::mutex</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -188,12 +165,30 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="345" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="345" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a317a4a786844491e45a270e87acd1e89" compoundref="_m_t_t_hist_8hpp" startline="332" endline="332">MTTHist&lt; THist &gt;::GetName</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a7f6ebd619dc5ffb63c9abf591e743e54" compoundref="_m_t_t_hist_8hpp" startline="283" endline="283">MTTHist&lt; THist &gt;::name</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a0536abca6658e43dc7a949f7907850ed" compoundref="_m_t_t_hist_8hpp" startline="289" endline="289">MTTHist&lt; THist &gt;::setName</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="329" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="329" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" compoundref="_m_t_t_hist_8hpp" startline="174" endline="185">MTTHist&lt; THist &gt;::cleanMove</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a317a4a786844491e45a270e87acd1e89" compoundref="_m_t_t_hist_8hpp" startline="258" endline="258">MTTHist&lt; THist &gt;::GetName</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" compoundref="_m_t_t_hist_8hpp" startline="84" endline="102">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a7f6ebd619dc5ffb63c9abf591e743e54" compoundref="_m_t_t_hist_8hpp" startline="259" endline="259">MTTHist&lt; THist &gt;::name</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" compoundref="_m_t_t_hist_8hpp" startline="278" endline="288">MTTHist&lt; THist &gt;::operator-&gt;</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a0536abca6658e43dc7a949f7907850ed" compoundref="_m_t_t_hist_8hpp" startline="265" endline="265">MTTHist&lt; THist &gt;::setName</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_m_t_t_hist_1a56b52d42dfd24d8d191debef8c665378" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool MTTHist&lt; THist &gt;::m_outscope</definition>
+        <argsstring></argsstring>
+        <name>m_outscope</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="334" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="334" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" compoundref="_m_t_t_hist_8hpp" startline="84" endline="102">MTTHist&lt; THist &gt;::MTTHist</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -206,9 +201,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="346" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="346" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1aacf25219627db315dae995e7282c2ed2" compoundref="_m_t_t_hist_8hpp" startline="290" endline="290">MTTHist&lt; THist &gt;::setTitle</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ad8011791f2722ca40959cc2ec297944d" compoundref="_m_t_t_hist_8hpp" startline="284" endline="284">MTTHist&lt; THist &gt;::title</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="330" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="330" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" compoundref="_m_t_t_hist_8hpp" startline="84" endline="102">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aacf25219627db315dae995e7282c2ed2" compoundref="_m_t_t_hist_8hpp" startline="266" endline="266">MTTHist&lt; THist &gt;::setTitle</referencedby>
+        <referencedby refid="class_m_t_t_hist_1ad8011791f2722ca40959cc2ec297944d" compoundref="_m_t_t_hist_8hpp" startline="260" endline="260">MTTHist&lt; THist &gt;::title</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1a910933fd0e3e4015090efb2bbb4dc9c6" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -222,40 +218,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="349" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="349" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
-        <referencedby refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="333" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="333" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" compoundref="_m_t_t_hist_8hpp" startline="174" endline="185">MTTHist&lt; THist &gt;::cleanMove</referencedby>
+        <referencedby refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-static-attrib">
-      <memberdef kind="variable" id="class_m_t_t_hist_1acd8494777ed82d06fd269ce3c73edb9d" prot="private" static="yes" mutable="no">
-        <type>std::condition_variable</type>
-        <definition>std::condition_variable MTTHist&lt; THist &gt;::m_condition</definition>
-        <argsstring></argsstring>
-        <name>m_condition</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="362" column="34" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="362" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1a7fea4cd494636bb8c4b103d3cf0d0786" compoundref="_m_t_t_hist_8hpp" startline="458" endline="473">MTTHist&lt; THist &gt;::Merge_thread</referencedby>
-      </memberdef>
-      <memberdef kind="variable" id="class_m_t_t_hist_1aa8018dbd5155bd525933ddbed3e6e602" prot="private" static="yes" mutable="no">
-        <type><ref refid="class_m_t_counter" kindref="compound">MTCounter</ref></type>
-        <definition>MTCounter MTTHist&lt; THist &gt;::m_nb_thread_running</definition>
-        <argsstring></argsstring>
-        <name>m_nb_thread_running</name>
-        <initializer>{0}</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="361" column="20" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="361" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="class_m_t_t_hist_1ab6b53be8a250f79cbd952c1133701d25" prot="private" static="yes" mutable="no">
         <type>bool</type>
         <definition>bool MTTHist&lt; THist &gt;::m_verbose</definition>
@@ -268,9 +237,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="363" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="363" bodyend="-1"/>
-        <referencedby refid="class_m_t_t_hist_1aba83034c1d597fe7f384498ceaf0ba3b" compoundref="_m_t_t_hist_8hpp" startline="339" endline="339">MTTHist&lt; THist &gt;::verbose</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a58028d6dbd7cf61775c44c10af03c562" compoundref="_m_t_t_hist_8hpp" startline="340" endline="340">MTTHist&lt; THist &gt;::verbosity</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="350" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="350" bodyend="-1"/>
+        <referencedby refid="class_m_t_t_hist_1aba83034c1d597fe7f384498ceaf0ba3b" compoundref="_m_t_t_hist_8hpp" startline="320" endline="320">MTTHist&lt; THist &gt;::verbose</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a58028d6dbd7cf61775c44c10af03c562" compoundref="_m_t_t_hist_8hpp" startline="321" endline="321">MTTHist&lt; THist &gt;::verbosity</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -285,18 +254,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="157" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="157" bodyend="176"/>
-        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="357">MTTHist&lt; THist &gt;::m_collection</references>
-        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_comment</references>
-        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="348">MTTHist&lt; THist &gt;::m_exists</references>
-        <references refid="class_m_t_t_hist_1a0b22e8677009e6458288f97867176c77" compoundref="_m_t_t_hist_8hpp" startline="347">MTTHist&lt; THist &gt;::m_file</references>
-        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="350">MTTHist&lt; THist &gt;::m_integral</references>
-        <references refid="class_m_t_t_hist_1a7400ac26c3f0273fae7d9a47751a67a2" compoundref="_m_t_t_hist_8hpp" startline="358">MTTHist&lt; THist &gt;::m_is_deleted</references>
-        <references refid="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" compoundref="_m_t_t_hist_8hpp" startline="356">MTTHist&lt; THist &gt;::m_is_merged</references>
-        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="352">MTTHist&lt; THist &gt;::m_merged</references>
-        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_name</references>
-        <references refid="class_m_t_t_hist_1a910933fd0e3e4015090efb2bbb4dc9c6" compoundref="_m_t_t_hist_8hpp" startline="349">MTTHist&lt; THist &gt;::m_written</references>
-        <references refid="class_m_t_t_hist_1a1c8fd75c77e227a9f4cdca690d321a71" compoundref="_m_t_t_hist_8hpp" startline="314" endline="314">MTTHist&lt; THist &gt;::size</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="161" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="161" bodyend="172"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="328">MTTHist&lt; THist &gt;::m_comment</references>
+        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="332">MTTHist&lt; THist &gt;::m_exists</references>
+        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="336">MTTHist&lt; THist &gt;::m_integral</references>
+        <references refid="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_is_merged</references>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
+        <references refid="class_m_t_t_hist_1a910933fd0e3e4015090efb2bbb4dc9c6" compoundref="_m_t_t_hist_8hpp" startline="333">MTTHist&lt; THist &gt;::m_written</references>
+        <referencedby refid="class_m_t_t_hist_1ad6ba02ffcc88d2ad2084985e8e91b338" compoundref="_m_t_t_hist_8hpp" startline="125" endline="139">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MTTHist&lt; THist &gt;::cleanMove</definition>
+        <argsstring>()</argsstring>
+        <name>cleanMove</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="174" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="174" bodyend="185"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="328">MTTHist&lt; THist &gt;::m_comment</references>
+        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="332">MTTHist&lt; THist &gt;::m_exists</references>
+        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="336">MTTHist&lt; THist &gt;::m_integral</references>
+        <references refid="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_is_merged</references>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
+        <references refid="class_m_t_t_hist_1a910933fd0e3e4015090efb2bbb4dc9c6" compoundref="_m_t_t_hist_8hpp" startline="333">MTTHist&lt; THist &gt;::m_written</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="247">MTObject::ON</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a46a58bcb4b91d7a05bee3ec0f4fe4eab" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool const  &amp;</type>
@@ -309,22 +298,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="292" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="292" bodyend="292"/>
-        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="348">MTTHist&lt; THist &gt;::m_exists</references>
-      </memberdef>
-      <memberdef kind="function" id="class_m_t_t_hist_1a0b1fb45a588e20b42e65275f14685dd5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>TFile *</type>
-        <definition>TFile* MTTHist&lt; THist &gt;::file</definition>
-        <argsstring>()</argsstring>
-        <name>file</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="313" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="313" bodyend="313"/>
-        <references refid="class_m_t_t_hist_1a0b22e8677009e6458288f97867176c77" compoundref="_m_t_t_hist_8hpp" startline="347">MTTHist&lt; THist &gt;::m_file</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="268" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="268" bodyend="268"/>
+        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="332">MTTHist&lt; THist &gt;::m_exists</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a3413cee45758fa0ec41020ae067e3e71" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -348,11 +323,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="276" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="425" bodyend="436"/>
-        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="111" endline="111">MTObject::getThreadIndex</references>
-        <referencedby refid="class_timeshifts_1a5c037c5bb4b409c3040982c451c6733d" compoundref="_timeshifts_8hpp" startline="712" endline="783">Timeshifts::Fill</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="246" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="442" bodyend="453"/>
+        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="250" endline="250">MTObject::getThreadIndex</references>
+        <referencedby refid="class_timeshifts_1a5c037c5bb4b409c3040982c451c6733d" compoundref="_timeshifts_8hpp" startline="778" endline="849">Timeshifts::Fill</referencedby>
         <referencedby refid="class_run_matrixator_1af360ec9f7686353b663ce0bdcfa3e2df" compoundref="_run_matrixator_8hpp" startline="313" endline="499">RunMatrixator::fillMatrixes</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a90243bae60ba112efdb9e336eed0f667" compoundref="_cobalt_calorimeter_8hpp" startline="297" endline="303">CobaltCalorimeter::NaI_pid</referencedby>
         <referencedby refid="class_clover_spectra_1a614d7deabde77b0ffea91ca2a6002484" compoundref="_clover_spectra_8hpp" startline="161" endline="207">CloverSpectra::runFasterReader</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a760c56b79865a37984edc07165a7bc73" compoundref="_cobalt_calorimeter_8hpp" startline="332" endline="660">CobaltCalorimeter::work</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a9c2f7d05c9f8506382211635b35bd97b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>THist *</type>
@@ -365,11 +342,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="312" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="312" bodyend="312"/>
-        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="352">MTTHist&lt; THist &gt;::m_merged</references>
-        <referencedby refid="class_calibration_1ad6db2742477c8ac64787c6fe8a687aff" compoundref="_calibration_8hpp" startline="552" endline="850">Calibration::peakFinder</referencedby>
-        <referencedby refid="class_histo_analyse_1a3ebd877de62f44cfde794b8a7dad2a78" compoundref="_histo_analyse_8hpp" startline="19" endline="31">HistoAnalyse&lt; THist &gt;::reset</referencedby>
-        <referencedby refid="class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b" compoundref="_r_w_mat_8hxx" startline="58" endline="68">RWMat::RWMat</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="294" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="294" bodyend="294"/>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="893" endline="1007">Timeshifts::analyse</referencedby>
+        <referencedby refid="_m_t_t_hist_8hpp_1a0dd7e86329ae164eaad633c614352e41" compoundref="_m_t_t_hist_8hpp" startline="581" endline="593">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_calibrator_1aa0fff626078ec3cd2e453c5cf6681462" compoundref="_calibrator_8hpp" startline="421" endline="720">Calibrator::peakFinder</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a02c41970872fdf5dba693eaa7ef368b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>THist *</type>
@@ -382,9 +359,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="325" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="325" bodyend="325"/>
-        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="111" endline="111">MTObject::getThreadIndex</references>
-        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="357">MTTHist&lt; THist &gt;::m_collection</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="308" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="308" bodyend="308"/>
+        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="250" endline="250">MTObject::getThreadIndex</references>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1a63d5b560f2ba15a6fd1d220bd237ee6d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>THist *</type>
+        <definition>THist* MTTHist&lt; THist &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="295" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="295" bodyend="295"/>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a7caec71178e8d79ad73ee5ff6c34b21d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>THist *</type>
@@ -401,8 +392,48 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="324" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="324" bodyend="324"/>
-        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="357">MTTHist&lt; THist &gt;::m_collection</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="307" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="307" bodyend="307"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1a90048d486361aa8a3bb18d17f02df241" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>auto MTTHist&lt; THist &gt;::GetBinContent</definition>
+        <argsstring>(ARGS &amp;&amp;... args) noexcept</argsstring>
+        <name>GetBinContent</name>
+        <param>
+          <type>ARGS &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="253" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="435" bodyend="438"/>
+        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="250" endline="250">MTObject::getThreadIndex</references>
+        <referencedby refid="class_cobalt_calorimeter_1a760c56b79865a37984edc07165a7bc73" compoundref="_cobalt_calorimeter_8hpp" startline="332" endline="660">CobaltCalorimeter::work</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1a6ec6c81339288a3a04fa18d6ccadaaf1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; THist * &gt; &amp;</type>
+        <definition>std::vector&lt;THist*&gt;&amp; MTTHist&lt; THist &gt;::getCollection</definition>
+        <argsstring>()</argsstring>
+        <name>getCollection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="272" column="16" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="272" bodyend="272"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a9437a1854c47ccda87812b6d2a8271b5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::vector&lt; THist * &gt; const  &amp;</type>
@@ -415,8 +446,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="296" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="296" bodyend="296"/>
-        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="357">MTTHist&lt; THist &gt;::m_collection</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="271" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="271" bodyend="271"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+        <referencedby refid="_m_t_t_hist_8hpp_1a0dd7e86329ae164eaad633c614352e41" compoundref="_m_t_t_hist_8hpp" startline="581" endline="593">operator&lt;&lt;</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a317a4a786844491e45a270e87acd1e89" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string const  &amp;</type>
@@ -429,9 +461,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="332" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="332" bodyend="332"/>
-        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_name</references>
-        <referencedby refid="class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b" compoundref="_r_w_mat_8hxx" startline="58" endline="68">RWMat::RWMat</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="258" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="258" bodyend="258"/>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a5c8a398dfdd3fad0a4529453caf93bd2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -444,28 +475,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="328" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="328" bodyend="328"/>
-        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="350">MTTHist&lt; THist &gt;::m_integral</references>
-        <referencedby refid="class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b" compoundref="_r_w_mat_8hxx" startline="58" endline="68">RWMat::RWMat</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="311" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="311" bodyend="311"/>
+        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="336">MTTHist&lt; THist &gt;::m_integral</references>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="893" endline="1007">Timeshifts::analyse</referencedby>
+        <referencedby refid="_m_t_t_hist_8hpp_1a0dd7e86329ae164eaad633c614352e41" compoundref="_m_t_t_hist_8hpp" startline="581" endline="593">operator&lt;&lt;</referencedby>
       </memberdef>
-      <memberdef kind="function" id="class_m_t_t_hist_1affbda260e218244cd5ed9870d6ed77cf" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>bool const  &amp;</type>
-        <definition>bool const&amp; MTTHist&lt; THist &gt;::isWritten</definition>
-        <argsstring>() const</argsstring>
-        <name>isWritten</name>
+      <memberdef kind="function" id="class_m_t_t_hist_1a0412e3cb8d1db4278f3b09316d4ec139" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>THist *</type>
+        <definition>THist * MTTHist&lt; THist &gt;::Merge</definition>
+        <argsstring>()</argsstring>
+        <name>Merge</name>
         <briefdescription>
+<para>Merges the histograms. </para>
         </briefdescription>
         <detaileddescription>
+<para><simplesect kind="attention"><para>Can merge only once <linebreak/>
+ </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="293" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="293" bodyend="293"/>
-        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="348">MTTHist&lt; THist &gt;::m_exists</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="302" column="9" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="495" bodyend="521"/>
+        <references refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" compoundref="print_8hpp" startline="82" endline="87">debug</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="247">MTObject::ON</references>
+        <referencedby refid="class_cobalt_calorimeter_1a6d189182d62a2b03d53520834c439620" compoundref="_cobalt_calorimeter_8hpp" startline="662" endline="702">CobaltCalorimeter::Analyse</referencedby>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="893" endline="1007">Timeshifts::analyse</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" compoundref="_m_t_t_hist_8hpp" startline="278" endline="288">MTTHist&lt; THist &gt;::operator-&gt;</referencedby>
       </memberdef>
-      <memberdef kind="function" id="class_m_t_t_hist_1a7c92589542fe14a28350712bab17c7ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void MTTHist&lt; THist &gt;::Merge</definition>
-        <argsstring>()</argsstring>
+      <memberdef kind="function" id="class_m_t_t_hist_1a49cc7d85e797bb8e8e921d993a4f5e24" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>THist *</type>
+        <definition>THist* MTTHist&lt; THist &gt;::Merge</definition>
+        <argsstring>() const</argsstring>
         <name>Merge</name>
         <briefdescription>
         </briefdescription>
@@ -473,11 +514,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="320" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="476" bodyend="496"/>
-        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">MTObject::ON</references>
-        <referencedby refid="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" compoundref="_m_t_t_hist_8hpp" startline="298" endline="307">MTTHist&lt; THist &gt;::operator-&gt;</referencedby>
-        <referencedby refid="class_histo_analyse_1a3ebd877de62f44cfde794b8a7dad2a78" compoundref="_histo_analyse_8hpp" startline="19" endline="31">HistoAnalyse&lt; THist &gt;::reset</referencedby>
-        <referencedby refid="class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b" compoundref="_r_w_mat_8hxx" startline="58" endline="68">RWMat::RWMat</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="303" column="9" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="303" bodyend="303"/>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1ac66509969968b395494517fabe09976c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -490,8 +527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="321" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="440" bodyend="454"/>
-        <referencedby refid="class_m_t_t_hist_1a7fea4cd494636bb8c4b103d3cf0d0786" compoundref="_m_t_t_hist_8hpp" startline="458" endline="473">MTTHist&lt; THist &gt;::Merge_thread</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="304" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="457" bodyend="470"/>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a72615441a18ffcfab6ca4b848f63eee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>THist *</type>
@@ -504,8 +540,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="323" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="499" bodyend="507"/>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="306" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="524" bodyend="532"/>
+        <references refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" compoundref="print_8hpp" startline="82" endline="87">debug</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1ac51ad7ced1fdf79f4b17c9dee8231e6d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -520,13 +556,14 @@
         <argsstring>()</argsstring>
         <name>MTTHist</name>
         <briefdescription>
+<para>Default initialisator. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="91" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="91" bodyend="94"/>
-        <references refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="75" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="75" bodyend="78"/>
+        <references refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a649cb4ac9c9239c1bf76f3f8b508bea5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -551,8 +588,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="85" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="85" bodyend="88"/>
-        <references refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="68" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="68" bodyend="71"/>
+        <references refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a08dcc0e1d5db8d111f0459ff47f736e9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -577,7 +614,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="96" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="137" bodyend="155"/>
+        <location file="lib/MTObjects/MTTHist.hpp" line="104" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="143" bodyend="159"/>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1ad6ba02ffcc88d2ad2084985e8e91b338" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -602,7 +639,56 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="96" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="115" bodyend="131"/>
+        <location file="lib/MTObjects/MTTHist.hpp" line="104" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="125" bodyend="139"/>
+        <references refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="161" endline="172">MTTHist&lt; THist &gt;::clean</references>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="332">MTTHist&lt; THist &gt;::m_exists</references>
+        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="336">MTTHist&lt; THist &gt;::m_integral</references>
+        <references refid="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_is_merged</references>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
+        <references refid="class_m_t_t_hist_1a56b52d42dfd24d8d191debef8c665378" compoundref="_m_t_t_hist_8hpp" startline="334">MTTHist&lt; THist &gt;::m_outscope</references>
+        <references refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" compoundref="_m_t_t_hist_8hpp" startline="330">MTTHist&lt; THist &gt;::m_title</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MTTHist&lt; THist &gt;::MTTHist</definition>
+        <argsstring>(THist *hist)</argsstring>
+        <name>MTTHist</name>
+        <param>
+          <type>THist *</type>
+          <declname>hist</declname>
+        </param>
+        <briefdescription>
+<para>Wrapper around an already existing histograms. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="84" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="84" bodyend="102"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="332">MTTHist&lt; THist &gt;::m_exists</references>
+        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="336">MTTHist&lt; THist &gt;::m_integral</references>
+        <references refid="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_is_merged</references>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
+        <references refid="class_m_t_t_hist_1a56b52d42dfd24d8d191debef8c665378" compoundref="_m_t_t_hist_8hpp" startline="334">MTTHist&lt; THist &gt;::m_outscope</references>
+        <references refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" compoundref="_m_t_t_hist_8hpp" startline="330">MTTHist&lt; THist &gt;::m_title</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1ac71b59bd26bea2680cb0ed99c5d1af05" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; MTTHist&lt; THist &gt;::mutex</definition>
+        <argsstring>()</argsstring>
+        <name>mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="323" column="9" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="323" bodyend="323"/>
+        <references refid="class_m_t_t_hist_1aca0db36a40f564546ca75e94e9139145" compoundref="_m_t_t_hist_8hpp" startline="341">MTTHist&lt; THist &gt;::m_mutex</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1aee6a88890f7831e809400db4d68e43e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string &amp;</type>
@@ -615,8 +701,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="286" column="16" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="286" bodyend="286"/>
-        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_name</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="262" column="16" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="262" bodyend="262"/>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a7f6ebd619dc5ffb63c9abf591e743e54" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string const  &amp;</type>
@@ -629,8 +715,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="283" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="283" bodyend="283"/>
-        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_name</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="259" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="259" bodyend="259"/>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
+        <referencedby refid="class_m_t_t_hist_1_1_copy_error_1ac090398113f53a468f9c63a8bbf4fa51" compoundref="_m_t_t_hist_8hpp" startline="355" endline="358">MTTHist&lt; THist &gt;::CopyError::CopyError</referencedby>
+        <referencedby refid="_m_t_t_hist_8hpp_1a0dd7e86329ae164eaad633c614352e41" compoundref="_m_t_t_hist_8hpp" startline="581" endline="593">operator&lt;&lt;</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1ab13711dce2e1451ab94833ff7e928802" prot="public" static="no" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
         <type></type>
@@ -643,8 +731,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="294" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="294" bodyend="294"/>
-        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="348">MTTHist&lt; THist &gt;::m_exists</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="269" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="269" bodyend="269"/>
+        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="332">MTTHist&lt; THist &gt;::m_exists</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>THist *</type>
@@ -657,10 +745,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="298" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="298" bodyend="307"/>
-        <references refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" compoundref="print_8hpp" startline="65" endline="70">debug</references>
-        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="352">MTTHist&lt; THist &gt;::m_merged</references>
-        <references refid="class_m_t_t_hist_1a7c92589542fe14a28350712bab17c7ff" compoundref="_m_t_t_hist_8hpp" startline="476" endline="496">MTTHist&lt; THist &gt;::Merge</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="278" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="278" bodyend="288"/>
+        <references refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" compoundref="print_8hpp" startline="82" endline="87">debug</references>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
+        <references refid="class_m_t_t_hist_1a0412e3cb8d1db4278f3b09316d4ec139" compoundref="_m_t_t_hist_8hpp" startline="495" endline="521">MTTHist&lt; THist &gt;::Merge</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1a452e1d8072c531826c61b178881f2544" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>THist *</type>
+        <definition>THist* MTTHist&lt; THist &gt;::operator-&gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-&gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="290" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="290" bodyend="290"/>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a6d6f72f095b93283ff97e9785781e3f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="class_m_t_t_hist" kindref="compound">MTTHist</ref>&lt; THist &gt; &amp;</type>
@@ -677,8 +780,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="240" column="12" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="240" bodyend="244"/>
-        <references refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" compoundref="_m_t_t_hist_8hpp" startline="223" endline="238">MTTHist&lt; THist &gt;::reset</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="215" column="12" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="215" bodyend="218"/>
+        <references refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1a7e925cda7729c6ecece6459c70a07a32" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void MTTHist&lt; THist &gt;::operator=</definition>
+        <argsstring>(THist *hist)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>THist *</type>
+          <declname>hist</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="104" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="104" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a8d9bba241299b542c654905edc517f63" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>THist *</type>
@@ -695,8 +815,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="326" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="326" bodyend="326"/>
-        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="357">MTTHist&lt; THist &gt;::m_collection</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="309" column="10" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="309" bodyend="309"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1ab5e2653e7d709487a194b192baccfe32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -709,30 +829,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="279" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="552" bodyend="559"/>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="254" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="596" bodyend="599"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
-      <memberdef kind="function" id="class_m_t_t_hist_1a6dbe08dfe0c62f9c9b75064cb262bdc0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_m_t_t_hist_1afdd2e89e1472927f588a8176e6813e88" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string const  &amp;</type>
         <definition>std::string const&amp; MTTHist&lt; THist &gt;::readComment</definition>
-        <argsstring>(std::string const &amp;comment) const</argsstring>
+        <argsstring>() const</argsstring>
         <name>readComment</name>
-        <param>
-          <type>std::string const &amp;</type>
-          <declname>comment</declname>
-        </param>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="335" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="335" bodyend="335"/>
-        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_comment</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="317" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="317" bodyend="317"/>
+        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="328">MTTHist&lt; THist &gt;::m_comment</references>
       </memberdef>
-      <memberdef kind="function" id="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>auto</type>
-        <definition>auto MTTHist&lt; THist &gt;::reset</definition>
+      <memberdef kind="function" id="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_m_t_t_hist" kindref="compound">MTTHist</ref>&lt; THist &gt; &amp;</type>
+        <definition>MTTHist&lt;THist&gt;&amp; MTTHist&lt; THist &gt;::reset</definition>
         <argsstring>(MTTHist&lt; THist &gt; const &amp;hist)</argsstring>
         <name>reset</name>
         <param>
@@ -740,30 +856,30 @@
           <declname>hist</declname>
         </param>
         <briefdescription>
-<para>Copy initializer. </para>
+<para>Copy Initialiser. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="223" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="223" bodyend="238"/>
-        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="357">MTTHist&lt; THist &gt;::m_collection</references>
-        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_comment</references>
-        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="348">MTTHist&lt; THist &gt;::m_exists</references>
-        <references refid="class_m_t_t_hist_1a0b22e8677009e6458288f97867176c77" compoundref="_m_t_t_hist_8hpp" startline="347">MTTHist&lt; THist &gt;::m_file</references>
-        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="350">MTTHist&lt; THist &gt;::m_integral</references>
-        <references refid="class_m_t_t_hist_1a7400ac26c3f0273fae7d9a47751a67a2" compoundref="_m_t_t_hist_8hpp" startline="358">MTTHist&lt; THist &gt;::m_is_deleted</references>
-        <references refid="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" compoundref="_m_t_t_hist_8hpp" startline="356">MTTHist&lt; THist &gt;::m_is_merged</references>
-        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="352">MTTHist&lt; THist &gt;::m_merged</references>
-        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_name</references>
-        <references refid="class_m_t_t_hist_1a910933fd0e3e4015090efb2bbb4dc9c6" compoundref="_m_t_t_hist_8hpp" startline="349">MTTHist&lt; THist &gt;::m_written</references>
-        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Calibration::histograms::Initialize</referencedby>
-        <referencedby refid="class_clover_spectra_1abf805324f6371f19ef0b3ce45705a115" compoundref="_clover_spectra_8hpp" startline="147" endline="159">CloverSpectra::Initialize</referencedby>
-        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
-        <referencedby refid="class_timeshifts_1a0753528955e94c43043cd7d68193f960" compoundref="_timeshifts_8hpp" startline="492" endline="524">Timeshifts::Initialize</referencedby>
-        <referencedby refid="class_timeshifts_1a05ac31a6c49360d94eeff184dc896c6b" compoundref="_timeshifts_8hpp" startline="454" endline="490">Timeshifts::InitializeCorrected</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a649cb4ac9c9239c1bf76f3f8b508bea5" compoundref="_m_t_t_hist_8hpp" startline="85" endline="88">MTTHist&lt; THist &gt;::MTTHist</referencedby>
-        <referencedby refid="class_m_t_t_hist_1a6d6f72f095b93283ff97e9785781e3f8" compoundref="_m_t_t_hist_8hpp" startline="240" endline="244">MTTHist&lt; THist &gt;::operator=</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="193" column="12" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="193" bodyend="213"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="328">MTTHist&lt; THist &gt;::m_comment</references>
+        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="332">MTTHist&lt; THist &gt;::m_exists</references>
+        <references refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" compoundref="_m_t_t_hist_8hpp" startline="336">MTTHist&lt; THist &gt;::m_integral</references>
+        <references refid="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_is_merged</references>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
+        <references refid="class_m_t_t_hist_1a910933fd0e3e4015090efb2bbb4dc9c6" compoundref="_m_t_t_hist_8hpp" startline="333">MTTHist&lt; THist &gt;::m_written</references>
+        <referencedby refid="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" compoundref="_calibrator_8hpp" startline="156" endline="200">Calibrator::histograms::Initialise</referencedby>
+        <referencedby refid="class_clover_spectra_1a8b3eedd382c6e2d0de9d4863efdccaea" compoundref="_clover_spectra_8hpp" startline="147" endline="159">CloverSpectra::Initialise</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1ac6d58077dbdb6d0b166097146dc17083" compoundref="_cobalt_calorimeter_8hpp" startline="168" endline="279">CobaltCalorimeter::Initialise</referencedby>
+        <referencedby refid="class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialise</referencedby>
+        <referencedby refid="class_timeshifts_1a95e126cc70243c24a016af24652ecb0b" compoundref="_timeshifts_8hpp" startline="533" endline="566">Timeshifts::Initialise</referencedby>
+        <referencedby refid="class_timeshifts_1a1eaf31f737ca23292d92babdf2f21fd8" compoundref="_timeshifts_8hpp" startline="495" endline="531">Timeshifts::InitialiseCorrected</referencedby>
+        <referencedby refid="class_timeshifts_1abf99e2b89b819a92e4891d1c3da4e704" compoundref="_timeshifts_8hpp" startline="460" endline="493">Timeshifts::InitialiseRaw</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a649cb4ac9c9239c1bf76f3f8b508bea5" compoundref="_m_t_t_hist_8hpp" startline="68" endline="71">MTTHist&lt; THist &gt;::MTTHist</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a6d6f72f095b93283ff97e9785781e3f8" compoundref="_m_t_t_hist_8hpp" startline="215" endline="218">MTTHist&lt; THist &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a18ddf8bef1fdb6dfc3a95ffc76e20efb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -786,12 +902,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="258" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="258" bodyend="267"/>
-        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="357">MTTHist&lt; THist &gt;::m_collection</references>
-        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="348">MTTHist&lt; THist &gt;::m_exists</references>
-        <references refid="class_m_t_t_hist_1a7400ac26c3f0273fae7d9a47751a67a2" compoundref="_m_t_t_hist_8hpp" startline="358">MTTHist&lt; THist &gt;::m_is_deleted</references>
-        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="352">MTTHist&lt; THist &gt;::m_merged</references>
-        <references refid="class_bools_1ad4d74f6e2266b271a8bd060ce6d0e448" compoundref="lib_co_8hpp" startline="188" endline="190">Bools::size</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="232" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="232" bodyend="237"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+        <references refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" compoundref="_m_t_t_hist_8hpp" startline="332">MTTHist&lt; THist &gt;::m_exists</references>
+        <references refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" compoundref="_m_t_t_hist_8hpp" startline="338">MTTHist&lt; THist &gt;::m_merged</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="247">MTObject::ON</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a6524d02003fa4d77ae22b33e14b977d9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -819,9 +934,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="271" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="373" bodyend="421"/>
-        <references refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" compoundref="_m_t_object_8hpp" startline="101" endline="101">MTObject::getThreadsNb</references>
-        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">MTObject::ON</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="241" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="370" bodyend="422"/>
+        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="250" endline="250">MTObject::getThreadIndex</references>
+        <references refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" compoundref="_m_t_object_8hpp" startline="240" endline="240">MTObject::getThreadsNb</references>
+        <references refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" compoundref="_m_t_object_8hpp" startline="243" endline="243">MTObject::isMasterThread</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="247">MTObject::ON</references>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_t_hist_1aa354c892da959ee2c25f894adf98064c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void MTTHist&lt; THist &gt;::SetBinContent</definition>
+        <argsstring>(ARGS &amp;&amp;... args) noexcept</argsstring>
+        <name>SetBinContent</name>
+        <param>
+          <type>ARGS &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="251" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="426" bodyend="431"/>
+        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="250" endline="250">MTObject::getThreadIndex</references>
+        <referencedby refid="class_cobalt_calorimeter_1a760c56b79865a37984edc07165a7bc73" compoundref="_cobalt_calorimeter_8hpp" startline="332" endline="660">CobaltCalorimeter::work</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1aa69b6607da79271f1454987d06b4d78e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -838,8 +981,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="334" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="334" bodyend="334"/>
-        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="344">MTTHist&lt; THist &gt;::m_comment</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="316" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="316" bodyend="316"/>
+        <references refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" compoundref="_m_t_t_hist_8hpp" startline="328">MTTHist&lt; THist &gt;::m_comment</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a0536abca6658e43dc7a949f7907850ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string const  &amp;</type>
@@ -856,8 +999,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="289" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="289" bodyend="289"/>
-        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_name</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="265" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="265" bodyend="265"/>
+        <references refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" compoundref="_m_t_t_hist_8hpp" startline="329">MTTHist&lt; THist &gt;::m_name</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1aacf25219627db315dae995e7282c2ed2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string const  &amp;</type>
@@ -874,8 +1017,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="290" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="290" bodyend="290"/>
-        <references refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" compoundref="_m_t_t_hist_8hpp" startline="346">MTTHist&lt; THist &gt;::m_title</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="266" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="266" bodyend="266"/>
+        <references refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" compoundref="_m_t_t_hist_8hpp" startline="330">MTTHist&lt; THist &gt;::m_title</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a1c8fd75c77e227a9f4cdca690d321a71" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -888,9 +1031,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="314" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="314" bodyend="314"/>
-        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="357">MTTHist&lt; THist &gt;::m_collection</references>
-        <referencedby refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" compoundref="_m_t_t_hist_8hpp" startline="157" endline="176">MTTHist&lt; THist &gt;::clean</referencedby>
+        <location file="lib/MTObjects/MTTHist.hpp" line="296" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="296" bodyend="296"/>
+        <references refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" compoundref="_m_t_t_hist_8hpp" startline="345">MTTHist&lt; THist &gt;::m_collection</references>
+        <referencedby refid="_m_t_t_hist_8hpp_1a0dd7e86329ae164eaad633c614352e41" compoundref="_m_t_t_hist_8hpp" startline="581" endline="593">operator&lt;&lt;</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a34ab3c9b0d9d1add54bcdf21e61c1451" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string &amp;</type>
@@ -903,8 +1046,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="287" column="16" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="287" bodyend="287"/>
-        <references refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" compoundref="_m_t_t_hist_8hpp" startline="346">MTTHist&lt; THist &gt;::m_title</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="263" column="16" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="263" bodyend="263"/>
+        <references refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" compoundref="_m_t_t_hist_8hpp" startline="330">MTTHist&lt; THist &gt;::m_title</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1ad8011791f2722ca40959cc2ec297944d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string const  &amp;</type>
@@ -917,52 +1060,30 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="284" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="284" bodyend="284"/>
-        <references refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" compoundref="_m_t_t_hist_8hpp" startline="346">MTTHist&lt; THist &gt;::m_title</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="260" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="260" bodyend="260"/>
+        <references refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" compoundref="_m_t_t_hist_8hpp" startline="330">MTTHist&lt; THist &gt;::m_title</references>
       </memberdef>
-      <memberdef kind="function" id="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void MTTHist&lt; THist &gt;::Write</definition>
-        <argsstring>(bool const &amp;writeEmpty=false)</argsstring>
+        <argsstring>()</argsstring>
         <name>Write</name>
-        <param>
-          <type>bool const &amp;</type>
-          <declname>writeEmpty</declname>
-          <defval>false</defval>
-        </param>
         <briefdescription>
+<para>MTTHIST_MONO. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="280" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="531" bodyend="549"/>
-        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="111" endline="111">MTObject::getThreadIndex</references>
-        <references refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" compoundref="_m_t_object_8hpp" startline="104" endline="104">MTObject::isMasterThread</references>
-        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">MTObject::ON</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="255" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="554" bodyend="578"/>
+        <references refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" compoundref="_m_t_object_8hpp" startline="243" endline="243">MTObject::isMasterThread</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="247">MTObject::ON</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <referencedby refid="class_cobalt_calorimeter_1a526f29997f55b17d33be2b87b30c7a76" compoundref="_cobalt_calorimeter_8hpp" startline="704" endline="811">CobaltCalorimeter::write</referencedby>
         <referencedby refid="class_run_matrixator_1aeb9889ba763858dfb65e05c3a7bb142e" compoundref="_run_matrixator_8hpp" startline="501" endline="550">RunMatrixator::Write</referencedby>
         <referencedby refid="class_clover_spectra_1aea0814fac7c993ad4813804415f3ffab" compoundref="_clover_spectra_8hpp" startline="79" endline="95">CloverSpectra::writeHisto</referencedby>
-        <referencedby refid="class_calibration_1a062cb134d4b82246ba9c89c567a32963" compoundref="_calibration_8hpp" startline="1119" endline="1126">Calibration::writeRawRoot</referencedby>
-        <referencedby refid="class_timeshifts_1a579c8583bd37c3988ffb5cb6df7849f7" compoundref="_timeshifts_8hpp" startline="970" endline="1001">Timeshifts::writeRoot</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="class_m_t_t_hist_1ad6af9a0476250acac958446a91f450fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void MTTHist&lt; THist &gt;::Write_i</definition>
-        <argsstring>(int const &amp;thread_index)</argsstring>
-        <name>Write_i</name>
-        <param>
-          <type>int const &amp;</type>
-          <declname>thread_index</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="281" column="8" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="511" bodyend="528"/>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <referencedby refid="class_calibrator_1a78414158b6fec48d58182e62c9478126" compoundref="_calibrator_8hpp" startline="944" endline="951">Calibrator::writeRawRoot</referencedby>
+        <referencedby refid="class_timeshifts_1a579c8583bd37c3988ffb5cb6df7849f7" compoundref="_timeshifts_8hpp" startline="1052" endline="1085">Timeshifts::writeRoot</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a9fc4f9b3947ade70cad19a33c16d69d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -974,33 +1095,12 @@
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
+<para>MTTHIST_MONO</para>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="96" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="562" bodyend="588"/>
-        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">MTObject::ON</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="80" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="602" bodyend="618"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="class_m_t_t_hist_1a7fea4cd494636bb8c4b103d3cf0d0786" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void MTTHist&lt; THist &gt;::Merge_thread</definition>
-        <argsstring>(MTTHist&lt; THist &gt; &amp;histo)</argsstring>
-        <name>Merge_thread</name>
-        <param>
-          <type><ref refid="class_m_t_t_hist" kindref="compound">MTTHist</ref>&lt; THist &gt; &amp;</type>
-          <declname>histo</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="322" column="15" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="458" bodyend="473"/>
-        <references refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" compoundref="_m_t_object_8hpp" startline="101" endline="101">MTObject::getThreadsNb</references>
-        <references refid="class_m_t_t_hist_1acd8494777ed82d06fd269ce3c73edb9d" compoundref="_m_t_t_hist_8hpp" startline="362">MTTHist&lt; THist &gt;::m_condition</references>
-        <references refid="class_m_t_t_hist_1aca0db36a40f564546ca75e94e9139145" compoundref="_m_t_t_hist_8hpp" startline="337">MTTHist&lt; THist &gt;::m_mutex</references>
-        <references refid="class_m_t_t_hist_1ac66509969968b395494517fabe09976c" compoundref="_m_t_t_hist_8hpp" startline="440" endline="454">MTTHist&lt; THist &gt;::Merge_t</references>
-      </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1aba83034c1d597fe7f384498ceaf0ba3b" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool const  &amp;</type>
         <definition>static bool const&amp; MTTHist&lt; THist &gt;::verbose</definition>
@@ -1017,8 +1117,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="339" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="339" bodyend="339"/>
-        <references refid="class_m_t_t_hist_1ab6b53be8a250f79cbd952c1133701d25" compoundref="_m_t_t_hist_8hpp" startline="363">MTTHist&lt; THist &gt;::m_verbose</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="320" column="22" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="320" bodyend="320"/>
+        <references refid="class_m_t_t_hist_1ab6b53be8a250f79cbd952c1133701d25" compoundref="_m_t_t_hist_8hpp" startline="350">MTTHist&lt; THist &gt;::m_verbose</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_t_hist_1a58028d6dbd7cf61775c44c10af03c562" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool &amp;</type>
@@ -1031,113 +1131,90 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTTHist.hpp" line="340" column="16" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="340" bodyend="340"/>
-        <references refid="class_m_t_t_hist_1ab6b53be8a250f79cbd952c1133701d25" compoundref="_m_t_t_hist_8hpp" startline="363">MTTHist&lt; THist &gt;::m_verbose</references>
+        <location file="lib/MTObjects/MTTHist.hpp" line="321" column="16" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="321" bodyend="321"/>
+        <references refid="class_m_t_t_hist_1ab6b53be8a250f79cbd952c1133701d25" compoundref="_m_t_t_hist_8hpp" startline="350">MTTHist&lt; THist &gt;::m_verbose</references>
       </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Multithreading wrapper for all THist spectra of root library. </para>
     </briefdescription>
     <detaileddescription>
-<para><simplesect kind="author"><para><ulink url="mailto:corentin.hiver@ijclab.in2p3.fr">corentin.hiver@ijclab.in2p3.fr</ulink></para>
+<para><simplesect kind="author"><para><ulink url="mailto:corentin.hiver@free.fr">corentin.hiver@free.fr</ulink></para>
 </simplesect>
 Inspiration : <ulink url="https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167">https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167</ulink></para>
-<para><simplesect kind="attention"><para>As for any class deriving from <ref refid="class_m_t_object" kindref="compound">MTObject</ref>, first initialize the number of threads : <verbatim> MTObject::Initialize(nb_threads)
+<para><simplesect kind="attention"><para>As for any class using my multithreading, Initialise the number of threads BEFORE instantiating any object : <verbatim> MTObject::Initialise(nb_threads)
 </verbatim></para>
 </simplesect>
-Instantiate this class as follow : <verbatim> MTTHist&lt;TH1F&gt; some_TH1F_histo(&quot;name&quot;, &quot;title:xaxis:yaxis&quot;, bins, min, max);
+Instantiation : <verbatim> MTTHist&lt;TH1F&gt; some_TH1F_histo(&lt;normal arguments for TH1F objects&gt;);
 </verbatim> Or <verbatim> MTTHist&lt;TH1F&gt; some_TH1F_histo;
  some_TH1F_histo.reset(&quot;name&quot;, &quot;title:xaxis:yaxis&quot;, bins, min, max);
-</verbatim> <simplesect kind="attention"><para>Please do not use the copy constructors and operators, may need proper work to make it safe</para>
-</simplesect>
-In default mode, nb_threads histograms are created <xrefsect id="test_1_test000002"><xreftitle>Test</xreftitle><xrefdescription><para>In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPPEMENT</para>
+</verbatim> In default mode, [nb_threads] sub_histograms are created <xrefsect id="test_1_test000002"><xreftitle>Test</xreftitle><xrefdescription><para>In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPPEMENT</para>
 </xrefdescription></xrefsect></para>
-<para>To fill the histogram from threads : <verbatim>     some_TH1F_histo.Fill()
-</verbatim> Once the histogram have been filled, two options :</para>
-<para><itemizedlist>
-<listitem><para>Either write it down directly : <verbatim>  // Open a TFile
-  some_TH1F_histo.Write()
-  // Write and close the TFile
-</verbatim></para>
-</listitem><listitem><para>Or you can merge the histograms : <verbatim> some_TH1F_histo.Merge();
+<para>To fill the histogram from within one thread : <verbatim>     some_TH1F_histo[MTObject::getThreadIndex()]-&gt;Fill(&lt;normal arguments for TH1*::Fill()&gt;)
+</verbatim> Or in a more concise way (preferred) : <verbatim>     some_TH1F_histo.Fill(&lt;normal arguments for TH1*::Fill()&gt;)
+</verbatim> Once the histograms have been filled, two options :</para>
+<para>Either write it down directly : <verbatim>    // Open a TFile and cd() inside
+    some_TH1F_histo.Write(); //Merges the sub_histograms then write it if it has counts
+    // Write and close the TFile
+</verbatim> Or you can merge the histograms : <verbatim>   some_TH1F_histo.Merge();
 </verbatim> You can then address the merged histogram using -&gt; : <verbatim>some_TH1F_histo-&gt;Integral();
-</verbatim> Special case : you can also instanciate and write down one histogram per thread.</para>
-</listitem></itemizedlist>
-</para>
-<para>Example : void single_thread(MTTHist &amp; histo) { histo.reset(&quot;name&quot;,&quot;title&quot;, args...); ... Fill the histo histo.Write(); }</para>
-<para>int main() { MTTHist&lt;TH1&gt; on_histo_per_thread; std::parallelise_function(single_thread, on_histo_per_thread); return 1; }</para>
-<para>In this case each histogram is kept separated, no merge occurs. Use this if you want to make the benefits of the user defined method of this class or for consistency with the rest of the code. It is equivalent to declare the histogram directly inside the funcion</para>
-<para><xrefsect id="todo_1_todo000003"><xreftitle>Todo</xreftitle><xrefdescription><para>better memory management </para>
-</xrefdescription></xrefsect></para>
+some_TH1F_histo-&gt;GetEntries();
+some_TH1F_histo-&gt;Write();
+...
+</verbatim> </para>
     </detaileddescription>
-    <collaborationgraph>
-      <node id="3">
-        <label>Bools</label>
-        <link refid="class_bools"/>
-      </node>
-      <node id="2">
-        <label>MTCounter</label>
-        <link refid="class_m_t_counter"/>
-      </node>
-      <node id="1">
-        <label>MTTHist&lt; THist &gt;</label>
-        <link refid="class_m_t_t_hist"/>
-        <childnode refid="2" relation="usage">
-          <edgelabel>m_nb_thread_running</edgelabel>
-        </childnode>
-        <childnode refid="3" relation="usage">
-          <edgelabel>m_is_deleted</edgelabel>
-        </childnode>
-      </node>
-    </collaborationgraph>
-    <location file="lib/MTObjects/MTTHist.hpp" line="78" column="1" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="79" bodyend="364"/>
+    <location file="lib/MTObjects/MTTHist.hpp" line="62" column="1" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="63" bodyend="360"/>
     <listofallmembers>
       <member refid="class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>clean</name></member>
+      <member refid="class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>cleanMove</name></member>
       <member refid="class_m_t_t_hist_1a46a58bcb4b91d7a05bee3ec0f4fe4eab" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>exists</name></member>
-      <member refid="class_m_t_t_hist_1a0b1fb45a588e20b42e65275f14685dd5" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>file</name></member>
       <member refid="class_m_t_t_hist_1a3413cee45758fa0ec41020ae067e3e71" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Fill</name></member>
+      <member refid="class_m_t_t_hist_1a9c2f7d05c9f8506382211635b35bd97b" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>get</name></member>
+      <member refid="class_m_t_t_hist_1a63d5b560f2ba15a6fd1d220bd237ee6d" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>get</name></member>
       <member refid="class_m_t_t_hist_1a7caec71178e8d79ad73ee5ff6c34b21d" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Get</name></member>
       <member refid="class_m_t_t_hist_1a02c41970872fdf5dba693eaa7ef368b6" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Get</name></member>
-      <member refid="class_m_t_t_hist_1a9c2f7d05c9f8506382211635b35bd97b" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>get</name></member>
+      <member refid="class_m_t_t_hist_1a90048d486361aa8a3bb18d17f02df241" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>GetBinContent</name></member>
       <member refid="class_m_t_t_hist_1a9437a1854c47ccda87812b6d2a8271b5" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>getCollection</name></member>
+      <member refid="class_m_t_t_hist_1a6ec6c81339288a3a04fa18d6ccadaaf1" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>getCollection</name></member>
       <member refid="class_m_t_t_hist_1a317a4a786844491e45a270e87acd1e89" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>GetName</name></member>
       <member refid="class_m_t_t_hist_1a5c8a398dfdd3fad0a4529453caf93bd2" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Integral</name></member>
-      <member refid="class_m_t_t_hist_1affbda260e218244cd5ed9870d6ed77cf" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>isWritten</name></member>
       <member refid="class_m_t_t_hist_1aeedab112b16e9d632c2a73f0fd246022" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_collection</name></member>
       <member refid="class_m_t_t_hist_1a1ad6c922d10ee3d2cc860085a4166af5" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_comment</name></member>
-      <member refid="class_m_t_t_hist_1acd8494777ed82d06fd269ce3c73edb9d" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_condition</name></member>
       <member refid="class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_exists</name></member>
-      <member refid="class_m_t_t_hist_1a0b22e8677009e6458288f97867176c77" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_file</name></member>
       <member refid="class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_integral</name></member>
-      <member refid="class_m_t_t_hist_1a7400ac26c3f0273fae7d9a47751a67a2" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_is_deleted</name></member>
       <member refid="class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_is_merged</name></member>
       <member refid="class_m_t_t_hist_1a745e2db95c003d270e953402042236e7" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_merged</name></member>
       <member refid="class_m_t_t_hist_1a267e78003ec791a6a795b30f1a718d66" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_merged_deleted</name></member>
-      <member refid="class_m_t_t_hist_1aca0db36a40f564546ca75e94e9139145" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>m_mutex</name></member>
+      <member refid="class_m_t_t_hist_1aca0db36a40f564546ca75e94e9139145" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_mutex</name></member>
       <member refid="class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_name</name></member>
-      <member refid="class_m_t_t_hist_1aa8018dbd5155bd525933ddbed3e6e602" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_nb_thread_running</name></member>
+      <member refid="class_m_t_t_hist_1a56b52d42dfd24d8d191debef8c665378" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_outscope</name></member>
       <member refid="class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_title</name></member>
       <member refid="class_m_t_t_hist_1ab6b53be8a250f79cbd952c1133701d25" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_verbose</name></member>
       <member refid="class_m_t_t_hist_1a910933fd0e3e4015090efb2bbb4dc9c6" prot="private" virt="non-virtual"><scope>MTTHist</scope><name>m_written</name></member>
-      <member refid="class_m_t_t_hist_1a7c92589542fe14a28350712bab17c7ff" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Merge</name></member>
+      <member refid="class_m_t_t_hist_1a0412e3cb8d1db4278f3b09316d4ec139" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Merge</name></member>
+      <member refid="class_m_t_t_hist_1a49cc7d85e797bb8e8e921d993a4f5e24" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Merge</name></member>
       <member refid="class_m_t_t_hist_1ac66509969968b395494517fabe09976c" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Merge_t</name></member>
-      <member refid="class_m_t_t_hist_1a7fea4cd494636bb8c4b103d3cf0d0786" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Merge_thread</name></member>
       <member refid="class_m_t_t_hist_1a72615441a18ffcfab6ca4b848f63eee3" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Merged</name></member>
       <member refid="class_m_t_t_hist_1a649cb4ac9c9239c1bf76f3f8b508bea5" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>MTTHist</name></member>
       <member refid="class_m_t_t_hist_1ac51ad7ced1fdf79f4b17c9dee8231e6d" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>MTTHist</name></member>
+      <member refid="class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>MTTHist</name></member>
       <member refid="class_m_t_t_hist_1ad6ba02ffcc88d2ad2084985e8e91b338" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>MTTHist</name></member>
       <member refid="class_m_t_t_hist_1a08dcc0e1d5db8d111f0459ff47f736e9" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>MTTHist</name></member>
+      <member refid="class_m_t_t_hist_1ac71b59bd26bea2680cb0ed99c5d1af05" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>mutex</name></member>
       <member refid="class_m_t_t_hist_1a7f6ebd619dc5ffb63c9abf591e743e54" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>name</name></member>
       <member refid="class_m_t_t_hist_1aee6a88890f7831e809400db4d68e43e1" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>name</name></member>
       <member refid="class_m_t_t_hist_1ab13711dce2e1451ab94833ff7e928802" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>operator bool</name></member>
       <member refid="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>operator-&gt;</name></member>
+      <member refid="class_m_t_t_hist_1a452e1d8072c531826c61b178881f2544" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>operator-&gt;</name></member>
+      <member refid="class_m_t_t_hist_1a7e925cda7729c6ecece6459c70a07a32" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>operator=</name></member>
       <member refid="class_m_t_t_hist_1a6d6f72f095b93283ff97e9785781e3f8" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>operator=</name></member>
       <member refid="class_m_t_t_hist_1a8d9bba241299b542c654905edc517f63" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>operator[]</name></member>
       <member refid="class_m_t_t_hist_1ab5e2653e7d709487a194b192baccfe32" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Print</name></member>
-      <member refid="class_m_t_t_hist_1a6dbe08dfe0c62f9c9b75064cb262bdc0" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>readComment</name></member>
-      <member refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>reset</name></member>
+      <member refid="class_m_t_t_hist_1afdd2e89e1472927f588a8176e6813e88" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>readComment</name></member>
+      <member refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>reset</name></member>
       <member refid="class_m_t_t_hist_1a18ddf8bef1fdb6dfc3a95ffc76e20efb" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>reset</name></member>
       <member refid="class_m_t_t_hist_1a6524d02003fa4d77ae22b33e14b977d9" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>reset</name></member>
+      <member refid="class_m_t_t_hist_1aa354c892da959ee2c25f894adf98064c" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>SetBinContent</name></member>
       <member refid="class_m_t_t_hist_1aa69b6607da79271f1454987d06b4d78e" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>setComment</name></member>
       <member refid="class_m_t_t_hist_1a0536abca6658e43dc7a949f7907850ed" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>setName</name></member>
       <member refid="class_m_t_t_hist_1aacf25219627db315dae995e7282c2ed2" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>setTitle</name></member>
@@ -1146,8 +1223,7 @@ In default mode, nb_threads histograms are created <xrefsect id="test_1_test0000
       <member refid="class_m_t_t_hist_1a34ab3c9b0d9d1add54bcdf21e61c1451" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>title</name></member>
       <member refid="class_m_t_t_hist_1aba83034c1d597fe7f384498ceaf0ba3b" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>verbose</name></member>
       <member refid="class_m_t_t_hist_1a58028d6dbd7cf61775c44c10af03c562" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>verbosity</name></member>
-      <member refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Write</name></member>
-      <member refid="class_m_t_t_hist_1ad6af9a0476250acac958446a91f450fd" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Write_i</name></member>
+      <member refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>Write</name></member>
       <member refid="class_m_t_t_hist_1a9fc4f9b3947ade70cad19a33c16d69d6" prot="public" virt="non-virtual"><scope>MTTHist</scope><name>~MTTHist</name></member>
     </listofallmembers>
   </compounddef>

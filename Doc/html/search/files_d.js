@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['sorted_5fevent_2ehpp_1488',['Sorted_Event.hpp',['../_sorted___event_8hpp.html',1,'']]],
-  ['spectraalignator_2ehpp_1489',['SpectraAlignator.hpp',['../_spectra_alignator_8hpp.html',1,'']]],
-  ['string_5ffunctions_2ehpp_1490',['string_functions.hpp',['../string__functions_8hpp.html',1,'']]]
+  ['randomco_2ehpp_1922',['randomCo.hpp',['../random_co_8hpp.html',1,'']]],
+  ['recalibration_2ehpp_1923',['Recalibration.hpp',['../_recalibration_8hpp.html',1,'']]],
+  ['rf_5fmanager_2ehpp_1924',['RF_Manager.hpp',['../_r_f___manager_8hpp.html',1,'']]],
+  ['runmatrixator_2ehpp_1925',['RunMatrixator.hpp',['../_run_matrixator_8hpp.html',1,'']]],
+  ['rwmat_2ehxx_1926',['RWMat.hxx',['../_r_w_mat_8hxx.html',1,'']]]
 ];

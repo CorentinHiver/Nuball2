@@ -1,6 +1,6 @@
 <map id="Timeshifts::setParameters" name="Timeshifts::setParameters">
 <area shape="rect" id="node1" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="5,210,197,237"/>
-<area shape="rect" id="node2" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="566,7,618,34"/>
+<area shape="rect" id="node2" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="566,7,618,34"/>
 <area shape="rect" id="node3" href="$files__functions_8hpp.html#a658fd83a6ed34994ff0742273a3cc358" title=" " alt="" coords="524,159,660,186"/>
 <area shape="rect" id="node4" href="$class_timeshifts.html#a6206d2b698c88e80bc42bdf4b51fce14" title="Set the multiplicity gate for the events used for coincidence timeshift calculation." alt="" coords="285,261,431,287"/>
 <area shape="rect" id="node5" href="$class_timeshifts.html#ab877131bc1bd7394f55c3d46729ac9e6" title="Use setName instead. Set output file name of the timeshifts data." alt="" coords="272,210,444,237"/>

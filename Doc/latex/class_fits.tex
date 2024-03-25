@@ -1,0 +1,194 @@
+\doxysection{Fits Class Reference}
+\label{class_fits}\index{Fits@{Fits}}
+
+
+{\ttfamily \#include $<$Fit.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \textbf{ begin} ()
+\begin{DoxyCompactList}\small\item\em Returns the iterator to the start of the vector. \end{DoxyCompactList}\item 
+auto \textbf{ begin} () const
+\begin{DoxyCompactList}\small\item\em Returns the iterator to the start of the vector. \end{DoxyCompactList}\item 
+auto \textbf{ end} ()
+\begin{DoxyCompactList}\small\item\em Returns the iterator to the end of the vector. \end{DoxyCompactList}\item 
+auto \textbf{ end} () const
+\begin{DoxyCompactList}\small\item\em Returns the iterator to the end of the vector. \end{DoxyCompactList}\item 
+\textbf{ Fits} ()=default
+\item 
+\textbf{ Fits} (int const \&\+\_\+size)
+\item 
+auto \& \textbf{ get} ()
+\begin{DoxyCompactList}\small\item\em Accesses the vector of fits. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ get} () const
+\begin{DoxyCompactList}\small\item\em Accesses the vector of fits. \end{DoxyCompactList}\item 
+auto \& \textbf{ operator[$\,$]} (\textbf{ size\+\_\+t} const \&i)
+\begin{DoxyCompactList}\small\item\em Directly access the fit \+: \end{DoxyCompactList}\item 
+auto const  \& \textbf{ operator[$\,$]} (\textbf{ size\+\_\+t} const \&i) const
+\begin{DoxyCompactList}\small\item\em Directly access the fit \+: \end{DoxyCompactList}\item 
+void \textbf{ reserve} (\textbf{ size\+\_\+t} const \&i=0)
+\item 
+void \textbf{ resize} (\textbf{ size\+\_\+t} const \&i=0)
+\item 
+auto \textbf{ size} ()
+\item 
+auto \textbf{ size} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \textbf{ Fit} $>$ \textbf{ m\+\_\+fits}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_fits_a165c99bd9cd192d2090559fb67e775fd}} 
+\index{Fits@{Fits}!Fits@{Fits}}
+\index{Fits@{Fits}!Fits@{Fits}}
+\doxysubsubsection{Fits()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Fits\+::\+Fits (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\label{class_fits_abcb7fa2410bddb246a10dc4768775dbb}} 
+\index{Fits@{Fits}!Fits@{Fits}}
+\index{Fits@{Fits}!Fits@{Fits}}
+\doxysubsubsection{Fits()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Fits\+::\+Fits (\begin{DoxyParamCaption}\item[{int const \&}]{\+\_\+size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{class_fits_abcb7fa2410bddb246a10dc4768775dbb_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_fits_a63bd95e86bd3cec779d560cc2ec712f7}} 
+\index{Fits@{Fits}!begin@{begin}}
+\index{begin@{begin}!Fits@{Fits}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Fits\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the iterator to the start of the vector. 
+
+\mbox{\label{class_fits_a637b0285a97a72bdf31a62ca9d947ac2}} 
+\index{Fits@{Fits}!begin@{begin}}
+\index{begin@{begin}!Fits@{Fits}}
+\doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Fits\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the iterator to the start of the vector. 
+
+\mbox{\label{class_fits_aa880b69de30904dd067fff783c264edf}} 
+\index{Fits@{Fits}!end@{end}}
+\index{end@{end}!Fits@{Fits}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Fits\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the iterator to the end of the vector. 
+
+\mbox{\label{class_fits_a5bd5dd38c4d25851dbc247bcf890a19c}} 
+\index{Fits@{Fits}!end@{end}}
+\index{end@{end}!Fits@{Fits}}
+\doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Fits\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the iterator to the end of the vector. 
+
+\mbox{\label{class_fits_a6f2b8882580d600cde2a475cd317880b}} 
+\index{Fits@{Fits}!get@{get}}
+\index{get@{get}!Fits@{Fits}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto\& Fits\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accesses the vector of fits. 
+
+\mbox{\label{class_fits_ad823ae7c11f6839c4a14faf48c0220f9}} 
+\index{Fits@{Fits}!get@{get}}
+\index{get@{get}!Fits@{Fits}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Fits\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Accesses the vector of fits. 
+
+\mbox{\label{class_fits_a3f056945a7e353d9df1ba5532a69706d}} 
+\index{Fits@{Fits}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Fits@{Fits}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto\& Fits\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Directly access the fit \+: 
+
+\mbox{\label{class_fits_a98fe938f148e69b0436f8086059c2d41}} 
+\index{Fits@{Fits}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Fits@{Fits}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Fits\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Directly access the fit \+: 
+
+\mbox{\label{class_fits_a0daee1f106c810c2c719927264b9dd8c}} 
+\index{Fits@{Fits}!reserve@{reserve}}
+\index{reserve@{reserve}!Fits@{Fits}}
+\doxysubsubsection{reserve()}
+{\footnotesize\ttfamily void Fits\+::reserve (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{i = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_fits_a2aa7593ccf9c3638a5a675b62b8863da}} 
+\index{Fits@{Fits}!resize@{resize}}
+\index{resize@{resize}!Fits@{Fits}}
+\doxysubsubsection{resize()}
+{\footnotesize\ttfamily void Fits\+::resize (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{i = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_fits_a2aa7593ccf9c3638a5a675b62b8863da_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_fits_a4993d8fe8d778f9a77c7bd9fc7cf3d4a}} 
+\index{Fits@{Fits}!size@{size}}
+\index{size@{size}!Fits@{Fits}}
+\doxysubsubsection{size()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Fits\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_fits_a289960dbf5f79d490ce3b4bef67a2c09}} 
+\index{Fits@{Fits}!size@{size}}
+\index{size@{size}!Fits@{Fits}}
+\doxysubsubsection{size()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Fits\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_fits_a73938005a651c73279b21c1057b8de15}} 
+\index{Fits@{Fits}!m\_fits@{m\_fits}}
+\index{m\_fits@{m\_fits}!Fits@{Fits}}
+\doxysubsubsection{m\_fits}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Fit}$>$ Fits\+::m\+\_\+fits\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Fit.\+hpp}\end{DoxyCompactItemize}

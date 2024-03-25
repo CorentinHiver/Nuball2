@@ -3,8 +3,11 @@
 <title>lib/Analyse/Paris.hpp File Reference</title>
 <indexterm><primary>lib/Analyse/Paris.hpp</primary></indexterm>
 <programlisting>#include &quot;../Classes/Event.hpp&quot;
+#include &quot;../Classes/Detectors.hpp&quot;
+#include &quot;../Classes/CoProgressBar.hpp&quot;
 #include &quot;Arrays/Paris.h&quot;
 #include &quot;ParisCluster.hpp&quot;
+#include &quot;ParisBidimAngles.hpp&quot;
 </programlisting>Include dependency graph for Paris.hpp:<para>
     <informalfigure>
         <mediaobject>

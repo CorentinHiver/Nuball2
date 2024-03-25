@@ -37,7 +37,7 @@ int main()
   std::mutex myMutex;
   unsigned nb_threads = 2;
 
-  // MTObject::Initialize(nb_threads);
+  // MTObject::Initialise(nb_threads);
   // MTObject::parallelise_function([&](){
   //   auto thread_i = MTObject::getThreadIndex();
 
@@ -91,7 +91,7 @@ int main()
   for (auto & thread : threads) thread.join();
   threads.clear();
 
-  // MTObject::Initialize(2);
+  // MTObject::Initialise(2);
   //   std::vector<std::string> names = 
   // {
   //   "/home/corentin/faster_data/N-SI-136/run_75.fast/run_75_0002.fast",
@@ -113,10 +113,10 @@ int main()
 
 
 
-  // if (found(Path::pwd().string(), "faster")) MTObject::Initialize(10);
-  // else                              MTObject::Initialize(2);
+  // if (found(Path::pwd().string(), "faster")) MTObject::Initialise(10);
+  // else                              MTObject::Initialise(2);
 
-  // MTObject::Initialize(2);
+  // MTObject::Initialise(2);
   // detectors.load("index_129.list");
   // Timeshifts ts;
   // ts.dT_with_biggest_peak_finder();
@@ -780,7 +780,7 @@ int main()
   //       {
   //         nb_threads = std::atoi(argv[++i]);
   //         MTObject::setThreadsNb(nb_threads);
-  //         MTObject::Initialize();
+  //         MTObject::Initialise();
   //       }
   //       else if (command == "-i") {index_file = argv[++i];}
   //       else {throw std::runtime_error("command " + command + " unkown");}
@@ -900,7 +900,7 @@ int main()
 
 
 
-  // MTObject::Initialize(2);
+  // MTObject::Initialise(2);
   // Calibration calib;
   // calib.load("../../136/conversion_200ns/136_final.calib");
   // // calib.calibrateFasterData("/home/corentin/faster_data/N-SI-129/152EU_N1N2.fast/");
@@ -928,7 +928,7 @@ int main()
   // calibration.calibrateData(argv[1], (argc>2) ? std::stoi(argv[2]) : 1);
   // calibration.writeCalibratedData("test_calib_data.root");
 
-  // MTObject::Initialize(std::stoi(argv[1]));
+  // MTObject::Initialise(std::stoi(argv[1]));
   //   Timeshifts ts;
   //   ts.setDetectors(detectors);
   //   ts.setOutDir(".");
@@ -991,8 +991,8 @@ int main()
   // ts.writeRoot(run_name+"calculate"); 
 
   // Calibration calib("index_129.list");
-  // calib.Initialize();
-  // MTObject::Initialize(2);
+  // calib.Initialise();
+  // MTObject::Initialise(2);
 
   // std::thread t2([]()
   // {
@@ -1014,7 +1014,7 @@ int main()
   // t3->join();
   // t2.join();
   
-  // Detectors::Initialize();
+  // Detectors::Initialise();
   // Timeshifts ts;
   // ts.setParameters("outDir: tests outRoot: tests.root");
   // ts.setIDFile(DetectorsList("index_129.list"));

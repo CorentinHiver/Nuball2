@@ -34,18 +34,30 @@ auto const  \& \textbf{ time} () const
 \doxysubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \textbf{ Initialize\+Arrays} ()
+static void \textbf{ Initialise\+Arrays} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ m\+\_\+\+Ring\+\_\+\+Hits} = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+rings})
+double const \textbf{ distance} = 20
 \item 
-std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ m\+\_\+\+Sector\+\_\+\+Hits} = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+sectors})
+double const \textbf{ inner\+Radius} = 15
+\item 
+int const \textbf{ nb\+\_\+rings} = 16
+\item 
+int const \textbf{ nb\+\_\+sectors} = 32
+\item 
+double const \textbf{ outer\+Radius} = 41
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ Ring\+\_\+\+Hits} = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+rings})
+\item 
+double const \textbf{ ring\+\_\+thickness} = (\textbf{ outer\+Radius}-\/\textbf{ inner\+Radius})/\textbf{ nb\+\_\+rings}
 \item 
 \textbf{ std\+::size\+\_\+t} \textbf{ Ring\+Mult} = 0u
 \item 
 std\+::vector$<$ \textbf{ Si\+Strip} $>$ \textbf{ Rings}
+\item 
+std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ Sector\+\_\+\+Hits} = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+sectors})
 \item 
 \textbf{ std\+::size\+\_\+t} \textbf{ Sector\+Mult} = 0u
 \item 
@@ -67,7 +79,7 @@ static std\+::array$<$ bool, 1000 $>$ \textbf{ is\+Sector} = \{0\}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static bool \textbf{ s\+\_\+initialized} = false
+static bool \textbf{ s\+\_\+\+Initialised} = false
 \end{DoxyCompactItemize}
 
 
@@ -78,7 +90,8 @@ static bool \textbf{ s\+\_\+initialized} = false
 \doxysubsubsection{DSSD()}
 {\footnotesize\ttfamily DSSD\+::\+DSSD (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -136,24 +149,26 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=273pt]{class_d_s_s_d_aeb787f13de411a3e801360d85c6ed00b_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_d_s_s_d_a800770306a115e1096108cef2463a103}} 
-\index{DSSD@{DSSD}!InitializeArrays@{InitializeArrays}}
-\index{InitializeArrays@{InitializeArrays}!DSSD@{DSSD}}
-\doxysubsubsection{InitializeArrays()}
-{\footnotesize\ttfamily static void DSSD\+::\+Initialize\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+\mbox{\label{class_d_s_s_d_a2c9fd5c55f23797bdcf66933d7662cb1}} 
+\index{DSSD@{DSSD}!InitialiseArrays@{InitialiseArrays}}
+\index{InitialiseArrays@{InitialiseArrays}!DSSD@{DSSD}}
+\doxysubsubsection{InitialiseArrays()}
+{\footnotesize\ttfamily static void DSSD\+::\+Initialise\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=308pt]{class_d_s_s_d_a800770306a115e1096108cef2463a103_cgraph}
+\includegraphics[width=308pt]{class_d_s_s_d_a2c9fd5c55f23797bdcf66933d7662cb1_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=316pt]{class_d_s_s_d_a800770306a115e1096108cef2463a103_icgraph}
+\includegraphics[width=316pt]{class_d_s_s_d_a2c9fd5c55f23797bdcf66933d7662cb1_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_d_s_s_d_a46c68fcb7d0d1da868173aa028fdb4f3}} 
@@ -237,11 +252,23 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\label{class_d_s_s_d_ae8a114aaa994b51924669ce17653c31a}} 
+\index{DSSD@{DSSD}!distance@{distance}}
+\index{distance@{distance}!DSSD@{DSSD}}
+\doxysubsubsection{distance}
+{\footnotesize\ttfamily double const DSSD\+::distance = 20}
+
 \mbox{\label{class_d_s_s_d_adb11dca39569b2d7ef71f731354ae73c}} 
 \index{DSSD@{DSSD}!indexes@{indexes}}
 \index{indexes@{indexes}!DSSD@{DSSD}}
 \doxysubsubsection{indexes}
 {\footnotesize\ttfamily std\+::array$<$ \textbf{ uchar}, 1000 $>$ DSSD\+::indexes = \{255\}\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{class_d_s_s_d_a5b949d6c8743c915dc0232e8fb20b74d}} 
+\index{DSSD@{DSSD}!innerRadius@{innerRadius}}
+\index{innerRadius@{innerRadius}!DSSD@{DSSD}}
+\doxysubsubsection{innerRadius}
+{\footnotesize\ttfamily double const DSSD\+::inner\+Radius = 15}
 
 \mbox{\label{class_d_s_s_d_afeab248c862447291a003301c354feea}} 
 \index{DSSD@{DSSD}!isRing@{isRing}}
@@ -267,17 +294,35 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{isSector}
 {\footnotesize\ttfamily std\+::array$<$ bool, 1000 $>$ DSSD\+::is\+Sector = \{0\}\hspace{0.3cm}{\ttfamily [static]}}
 
-\mbox{\label{class_d_s_s_d_a22ef7a1a4978c25fb7f5f8f8b0ae6b57}} 
-\index{DSSD@{DSSD}!m\_Ring\_Hits@{m\_Ring\_Hits}}
-\index{m\_Ring\_Hits@{m\_Ring\_Hits}!DSSD@{DSSD}}
-\doxysubsubsection{m\_Ring\_Hits}
-{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ DSSD\+::m\+\_\+\+Ring\+\_\+\+Hits = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+rings})}
+\mbox{\label{class_d_s_s_d_ab292ca38f24d4ab2ccfc32425ad031c9}} 
+\index{DSSD@{DSSD}!nb\_rings@{nb\_rings}}
+\index{nb\_rings@{nb\_rings}!DSSD@{DSSD}}
+\doxysubsubsection{nb\_rings}
+{\footnotesize\ttfamily int const DSSD\+::nb\+\_\+rings = 16}
 
-\mbox{\label{class_d_s_s_d_aa4c767b3f8a9088cc2ff6323ab6e0d80}} 
-\index{DSSD@{DSSD}!m\_Sector\_Hits@{m\_Sector\_Hits}}
-\index{m\_Sector\_Hits@{m\_Sector\_Hits}!DSSD@{DSSD}}
-\doxysubsubsection{m\_Sector\_Hits}
-{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ DSSD\+::m\+\_\+\+Sector\+\_\+\+Hits = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+sectors})}
+\mbox{\label{class_d_s_s_d_a958bd3cd28f311c4d60e8b19043e6fea}} 
+\index{DSSD@{DSSD}!nb\_sectors@{nb\_sectors}}
+\index{nb\_sectors@{nb\_sectors}!DSSD@{DSSD}}
+\doxysubsubsection{nb\_sectors}
+{\footnotesize\ttfamily int const DSSD\+::nb\+\_\+sectors = 32}
+
+\mbox{\label{class_d_s_s_d_ab77212c2dba9783ac847ee8b8af70f0d}} 
+\index{DSSD@{DSSD}!outerRadius@{outerRadius}}
+\index{outerRadius@{outerRadius}!DSSD@{DSSD}}
+\doxysubsubsection{outerRadius}
+{\footnotesize\ttfamily double const DSSD\+::outer\+Radius = 41}
+
+\mbox{\label{class_d_s_s_d_aed2a8154605b320f03d690623f9894d4}} 
+\index{DSSD@{DSSD}!Ring\_Hits@{Ring\_Hits}}
+\index{Ring\_Hits@{Ring\_Hits}!DSSD@{DSSD}}
+\doxysubsubsection{Ring\_Hits}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ DSSD\+::\+Ring\+\_\+\+Hits = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+rings})}
+
+\mbox{\label{class_d_s_s_d_a9089ebe569d7635d0ea44dfb9fdaba4e}} 
+\index{DSSD@{DSSD}!ring\_thickness@{ring\_thickness}}
+\index{ring\_thickness@{ring\_thickness}!DSSD@{DSSD}}
+\doxysubsubsection{ring\_thickness}
+{\footnotesize\ttfamily double const DSSD\+::ring\+\_\+thickness = (\textbf{ outer\+Radius}-\/\textbf{ inner\+Radius})/\textbf{ nb\+\_\+rings}}
 
 \mbox{\label{class_d_s_s_d_a28d8b2597e7458b29c399e701f048f17}} 
 \index{DSSD@{DSSD}!RingMult@{RingMult}}
@@ -291,11 +336,17 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{Rings}
 {\footnotesize\ttfamily std\+::vector$<$\textbf{ Si\+Strip}$>$ DSSD\+::\+Rings}
 
-\mbox{\label{class_d_s_s_d_a46729c39d700e850893f997a70bad813}} 
-\index{DSSD@{DSSD}!s\_initialized@{s\_initialized}}
-\index{s\_initialized@{s\_initialized}!DSSD@{DSSD}}
-\doxysubsubsection{s\_initialized}
-{\footnotesize\ttfamily bool DSSD\+::s\+\_\+initialized = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+\mbox{\label{class_d_s_s_d_a2b6c7d3c126c7a665067a5fd73e29c81}} 
+\index{DSSD@{DSSD}!s\_Initialised@{s\_Initialised}}
+\index{s\_Initialised@{s\_Initialised}!DSSD@{DSSD}}
+\doxysubsubsection{s\_Initialised}
+{\footnotesize\ttfamily bool DSSD\+::s\+\_\+\+Initialised = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_d_s_s_d_a07ea2280b92afd2a964cc2956c85011a}} 
+\index{DSSD@{DSSD}!Sector\_Hits@{Sector\_Hits}}
+\index{Sector\_Hits@{Sector\_Hits}!DSSD@{DSSD}}
+\doxysubsubsection{Sector\_Hits}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ DSSD\+::\+Sector\+\_\+\+Hits = std\+::vector$<$\textbf{ uchar}$>$(\textbf{ nb\+\_\+sectors})}
 
 \mbox{\label{class_d_s_s_d_abfc71d4e8b153e59ffb4da0e60f91bd9}} 
 \index{DSSD@{DSSD}!SectorMult@{SectorMult}}

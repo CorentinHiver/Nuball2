@@ -8,7 +8,7 @@ class EachDetector
 public:
   EachDetector(){};
   EachDetector(std::string const & parameters){setParameters(parameters);}
-  EachDetector(size_t nb_labels) {this->Initialize(nb_labels);}
+  EachDetector(size_t nb_labels) {this->Initialise(nb_labels);}
   ~EachDetector()
   {
     if (Ge_spectra) delete Ge_spectra;
@@ -37,7 +37,7 @@ public:
     for (auto histo : times_nrj) if (histo) delete histo;
   }
 
-  void Initialize(size_t nb_labels);
+  void Initialise(size_t nb_labels);
   void Fill(Event const & event);
   void SetRF(RF_Manager* rf){m_rf = rf;}
   void Write(std::string const & outRoot);
@@ -106,7 +106,7 @@ bool EachDetector::setParameters(std::string const & parameters)
   return true;
 }
 
-void EachDetector::Initialize(size_t nb_labels)
+void EachDetector::Initialise(size_t nb_labels)
 {
   m_nb_labels = nb_labels;
 

@@ -9,7 +9,7 @@
         <definition>uchar DataFileReader::m_alias</definition>
         <argsstring></argsstring>
         <name>m_alias</name>
-        <initializer>= 0</initializer>
+        <Initialiser>= 0</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -25,7 +25,7 @@
         <definition>ULong64_t DataFileReader::m_cursor</definition>
         <argsstring></argsstring>
         <name>m_cursor</name>
-        <initializer>= 0</initializer>
+        <Initialiser>= 0</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -33,7 +33,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="76" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="76" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
         <referencedby refid="class_data_file_reader_1ab19c49a704799dcddadaf88b2d4347ff" compoundref="_data_file_reader_8hpp" startline="161" endline="182">Read</referencedby>
         <referencedby refid="class_data_file_reader_1aaf456b672dccdf6bc67513301cf09dae" compoundref="_data_file_reader_8hpp" startline="187" endline="191">ReadRoot</referencedby>
       </memberdef>
@@ -57,7 +57,7 @@
         <definition>Hit* DataFileReader::m_empty_hit</definition>
         <argsstring></argsstring>
         <name>m_empty_hit</name>
-        <initializer>= nullptr</initializer>
+        <Initialiser>= nullptr</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -66,7 +66,7 @@
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="69" column="14" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="69" bodyend="-1"/>
         <referencedby refid="class_data_file_reader_1ac8f415a62f194b3b8b5a277e15cf55ab" compoundref="_data_file_reader_8hpp" startline="13" endline="13">DataFileReader</referencedby>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
         <referencedby refid="class_data_file_reader_1a1abd3ec4b3d81ec14e71bc969dea1035" compoundref="_data_file_reader_8hpp" startline="215" endline="250">ReadFastGroup</referencedby>
         <referencedby refid="class_data_file_reader_1a8b64d1899bd625401126228fd28132e2" compoundref="_data_file_reader_8hpp" startline="17" endline="33">~DataFileReader</referencedby>
       </memberdef>
@@ -75,7 +75,7 @@
         <definition>std::string DataFileReader::m_filename</definition>
         <argsstring></argsstring>
         <name>m_filename</name>
-        <initializer>= &quot;&quot;</initializer>
+        <Initialiser>= &quot;&quot;</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -83,9 +83,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="70" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="70" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
-        <referencedby refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" compoundref="_data_file_reader_8hpp" startline="405" endline="415">InitializeFasterRead</referencedby>
-        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitializeRootRead</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
+        <referencedby refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" compoundref="_data_file_reader_8hpp" startline="405" endline="415">InitialiseFasterRead</referencedby>
+        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitialiseRootRead</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_data_file_reader_1aad9a3ad5bb201ee4674dae4fe61c022e" prot="private" static="no" mutable="no">
         <type>Buffer_ptr</type>
@@ -99,7 +99,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="79" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="79" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
         <referencedby refid="class_data_file_reader_1a36d62f5aa4f75cbdd2bc011edbcf38bc" compoundref="_data_file_reader_8hpp" startline="323" endline="347">ReadFastData</referencedby>
         <referencedby refid="class_data_file_reader_1a1abd3ec4b3d81ec14e71bc969dea1035" compoundref="_data_file_reader_8hpp" startline="215" endline="250">ReadFastGroup</referencedby>
       </memberdef>
@@ -108,7 +108,7 @@
         <definition>UShort_t DataFileReader::m_group_read_cursor</definition>
         <argsstring></argsstring>
         <name>m_group_read_cursor</name>
-        <initializer>= 0</initializer>
+        <Initialiser>= 0</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -116,7 +116,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="77" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="77" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
         <referencedby refid="class_data_file_reader_1a1abd3ec4b3d81ec14e71bc969dea1035" compoundref="_data_file_reader_8hpp" startline="215" endline="250">ReadFastGroup</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_data_file_reader_1a15a548778f321fabad72af766a07b4a4" prot="private" static="no" mutable="no">
@@ -124,7 +124,7 @@
         <definition>UShort_t DataFileReader::m_group_write_cursor</definition>
         <argsstring></argsstring>
         <name>m_group_write_cursor</name>
-        <initializer>= 0</initializer>
+        <Initialiser>= 0</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -132,7 +132,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="78" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="78" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
         <referencedby refid="class_data_file_reader_1a36d62f5aa4f75cbdd2bc011edbcf38bc" compoundref="_data_file_reader_8hpp" startline="323" endline="347">ReadFastData</referencedby>
         <referencedby refid="class_data_file_reader_1a1abd3ec4b3d81ec14e71bc969dea1035" compoundref="_data_file_reader_8hpp" startline="215" endline="250">ReadFastGroup</referencedby>
       </memberdef>
@@ -141,7 +141,7 @@
         <definition>Hit* DataFileReader::m_hit</definition>
         <argsstring></argsstring>
         <name>m_hit</name>
-        <initializer>= nullptr</initializer>
+        <Initialiser>= nullptr</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -161,7 +161,7 @@
         <definition>Bool_t DataFileReader::m_isGroup</definition>
         <argsstring></argsstring>
         <name>m_isGroup</name>
-        <initializer>= false</initializer>
+        <Initialiser>= false</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -178,7 +178,7 @@
         <definition>Bool_t DataFileReader::m_kReady</definition>
         <argsstring></argsstring>
         <name>m_kReady</name>
-        <initializer>= true</initializer>
+        <Initialiser>= true</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -187,9 +187,9 @@
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="72" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="72" bodyend="-1"/>
         <referencedby refid="class_data_file_reader_1a14657e37d9465aec5cf5c3a774f5d39b" compoundref="_data_file_reader_8hpp" startline="15" endline="15">DataFileReader</referencedby>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
-        <referencedby refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" compoundref="_data_file_reader_8hpp" startline="405" endline="415">InitializeFasterRead</referencedby>
-        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitializeRootRead</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
+        <referencedby refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" compoundref="_data_file_reader_8hpp" startline="405" endline="415">InitialiseFasterRead</referencedby>
+        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitialiseRootRead</referencedby>
         <referencedby refid="class_data_file_reader_1a3eb026afa7eb48f76d6032b13c24361a" compoundref="_data_file_reader_8hpp" startline="54" endline="54">isReady</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_data_file_reader_1a32654eedfeb644461da15069403fbb8e" prot="private" static="no" mutable="no">
@@ -197,7 +197,7 @@
         <definition>Bool_t DataFileReader::m_QDCx[4]</definition>
         <argsstring>[4]</argsstring>
         <name>m_QDCx</name>
-        <initializer>= {1,0,0,0}</initializer>
+        <Initialiser>= {1,0,0,0}</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -205,14 +205,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="74" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="74" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitializeRootRead</referencedby>
+        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitialiseRootRead</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_data_file_reader_1af5a63e66c1ff0c7dbfee66163538dd39" prot="private" static="no" mutable="no">
         <type>char</type>
         <definition>char DataFileReader::m_quick_rootOrFast</definition>
         <argsstring></argsstring>
         <name>m_quick_rootOrFast</name>
-        <initializer>= 0</initializer>
+        <Initialiser>= 0</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -221,7 +221,7 @@
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="75" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="75" bodyend="-1"/>
         <referencedby refid="class_data_file_reader_1a08df6771ae6227935847e535aed2e8c2" compoundref="_data_file_reader_8hpp" startline="193" endline="198">cd</referencedby>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
         <referencedby refid="class_data_file_reader_1ab19c49a704799dcddadaf88b2d4347ff" compoundref="_data_file_reader_8hpp" startline="161" endline="182">Read</referencedby>
         <referencedby refid="class_data_file_reader_1a8b64d1899bd625401126228fd28132e2" compoundref="_data_file_reader_8hpp" startline="17" endline="33">~DataFileReader</referencedby>
       </memberdef>
@@ -230,7 +230,7 @@
         <definition>faster_file_reader_p DataFileReader::m_reader</definition>
         <argsstring></argsstring>
         <name>m_reader</name>
-        <initializer>= NULL</initializer>
+        <Initialiser>= NULL</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -238,7 +238,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="88" column="26" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="88" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" compoundref="_data_file_reader_8hpp" startline="405" endline="415">InitializeFasterRead</referencedby>
+        <referencedby refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" compoundref="_data_file_reader_8hpp" startline="405" endline="415">InitialiseFasterRead</referencedby>
         <referencedby refid="class_data_file_reader_1a95d01d90b9d4887da8684b8ffad3c964" compoundref="_data_file_reader_8hpp" startline="205" endline="213">ReadFast</referencedby>
         <referencedby refid="class_data_file_reader_1a1abd3ec4b3d81ec14e71bc969dea1035" compoundref="_data_file_reader_8hpp" startline="215" endline="250">ReadFastGroup</referencedby>
         <referencedby refid="class_data_file_reader_1a8b64d1899bd625401126228fd28132e2" compoundref="_data_file_reader_8hpp" startline="17" endline="33">~DataFileReader</referencedby>
@@ -248,7 +248,7 @@
         <definition>TTree* DataFileReader::m_ReadTree</definition>
         <argsstring></argsstring>
         <name>m_ReadTree</name>
-        <initializer>= nullptr</initializer>
+        <Initialiser>= nullptr</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -256,7 +256,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="84" column="9" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="84" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitializeRootRead</referencedby>
+        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitialiseRootRead</referencedby>
         <referencedby refid="class_data_file_reader_1aaf456b672dccdf6bc67513301cf09dae" compoundref="_data_file_reader_8hpp" startline="187" endline="191">ReadRoot</referencedby>
         <referencedby refid="class_data_file_reader_1a8b64d1899bd625401126228fd28132e2" compoundref="_data_file_reader_8hpp" startline="17" endline="33">~DataFileReader</referencedby>
       </memberdef>
@@ -265,7 +265,7 @@
         <definition>std::string DataFileReader::m_rootORfast</definition>
         <argsstring></argsstring>
         <name>m_rootORfast</name>
-        <initializer>= &quot;&quot;</initializer>
+        <Initialiser>= &quot;&quot;</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -273,7 +273,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="71" column="15" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="71" bodyend="-1"/>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
         <referencedby refid="class_data_file_reader_1adb0f6c01a14efb8428b217a450116b14" compoundref="_data_file_reader_8hpp" startline="56" endline="56">isRootOrFast</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_data_file_reader_1a69ed2a0858a61a41141cd3f9777b7d5b" prot="private" static="no" mutable="no">
@@ -289,14 +289,14 @@
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="83" column="19" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="83" bodyend="-1"/>
         <referencedby refid="class_data_file_reader_1a08df6771ae6227935847e535aed2e8c2" compoundref="_data_file_reader_8hpp" startline="193" endline="198">cd</referencedby>
-        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitializeRootRead</referencedby>
+        <referencedby refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitialiseRootRead</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_data_file_reader_1a2c197a79e35044710369c221d5a33e90" prot="private" static="no" mutable="no">
         <type>bool</type>
         <definition>bool DataFileReader::m_verbose</definition>
         <argsstring></argsstring>
         <name>m_verbose</name>
-        <initializer>= false</initializer>
+        <Initialiser>= false</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -310,7 +310,7 @@
         <definition>Bool_t DataFileReader::m_write</definition>
         <argsstring></argsstring>
         <name>m_write</name>
-        <initializer>= false</initializer>
+        <Initialiser>= false</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -392,7 +392,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="16" column="3" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="16" bodyend="16"/>
-        <references refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</references>
+        <references refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</references>
         <references refid="class_data_file_reader_1a0d36da7f6c524e14d40cd5f21acae0b3" compoundref="_data_file_reader_8hpp" startline="69">m_empty_hit</references>
         <references refid="class_data_file_reader_1a8621174b131344b5a3da1c07200645da" compoundref="_data_file_reader_8hpp" startline="72">m_kReady</references>
       </memberdef>
@@ -412,7 +412,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="15" column="3" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="15" bodyend="15"/>
-        <references refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</references>
+        <references refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</references>
         <references refid="class_data_file_reader_1a8621174b131344b5a3da1c07200645da" compoundref="_data_file_reader_8hpp" startline="72">m_kReady</references>
       </memberdef>
       <memberdef kind="function" id="class_data_file_reader_1a034e540bca091a553d32bd6ea3df83a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -431,9 +431,9 @@
       </memberdef>
       <memberdef kind="function" id="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Bool_t</type>
-        <definition>Bool_t DataFileReader::Initialize</definition>
+        <definition>Bool_t DataFileReader::Initialise</definition>
         <argsstring>()</argsstring>
-        <name>Initialize</name>
+        <name>Initialise</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -442,8 +442,8 @@
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="35" column="10" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="96" bodyend="146"/>
         <references refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" compoundref="files__functions_8hpp" startline="20" endline="20">extension</references>
-        <references refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" compoundref="_data_file_reader_8hpp" startline="405" endline="415">InitializeFasterRead</references>
-        <references refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitializeRootRead</references>
+        <references refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" compoundref="_data_file_reader_8hpp" startline="405" endline="415">InitialiseFasterRead</references>
+        <references refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" compoundref="_data_file_reader_8hpp" startline="355" endline="401">InitialiseRootRead</references>
         <references refid="class_data_file_reader_1a975fafa8ec2657c646c94a07b23f9bf8" compoundref="_data_file_reader_8hpp" startline="76">m_cursor</references>
         <references refid="class_data_file_reader_1a0d36da7f6c524e14d40cd5f21acae0b3" compoundref="_data_file_reader_8hpp" startline="69">m_empty_hit</references>
         <references refid="class_data_file_reader_1a1f047e7f6e84b9eef04cbe6f7e4346a5" compoundref="_data_file_reader_8hpp" startline="70">m_filename</references>
@@ -455,13 +455,13 @@
         <references refid="class_data_file_reader_1a785bd9f5a7afeb82122f3fc2b0b1d26f" compoundref="_data_file_reader_8hpp" startline="71">m_rootORfast</references>
         <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
         <referencedby refid="class_data_file_reader_1a14657e37d9465aec5cf5c3a774f5d39b" compoundref="_data_file_reader_8hpp" startline="15" endline="15">DataFileReader</referencedby>
-        <referencedby refid="class_data_file_reader_1adf4b2ffd95a42bdd5b03cb4cdded83d1" compoundref="_data_file_reader_8hpp" startline="148" endline="152">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1adf4b2ffd95a42bdd5b03cb4cdded83d1" compoundref="_data_file_reader_8hpp" startline="148" endline="152">Initialise</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_data_file_reader_1adf4b2ffd95a42bdd5b03cb4cdded83d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Bool_t</type>
-        <definition>Bool_t DataFileReader::Initialize</definition>
+        <definition>Bool_t DataFileReader::Initialise</definition>
         <argsstring>(std::string const &amp;_filename)</argsstring>
-        <name>Initialize</name>
+        <name>Initialise</name>
         <param>
           <type>std::string const &amp;</type>
           <declname>_filename</declname>
@@ -473,7 +473,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/DataFileReader.hpp" line="36" column="10" bodyfile="lib/Classes/DataFileReader.hpp" bodystart="148" bodyend="152"/>
-        <references refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</references>
+        <references refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</references>
         <references refid="class_data_file_reader_1a1f047e7f6e84b9eef04cbe6f7e4346a5" compoundref="_data_file_reader_8hpp" startline="70">m_filename</references>
       </memberdef>
       <memberdef kind="function" id="class_data_file_reader_1a3eb026afa7eb48f76d6032b13c24361a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -724,9 +724,9 @@
       <sectiondef kind="private-func">
       <memberdef kind="function" id="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Bool_t</type>
-        <definition>Bool_t DataFileReader::InitializeFasterRead</definition>
+        <definition>Bool_t DataFileReader::InitialiseFasterRead</definition>
         <argsstring>()</argsstring>
-        <name>InitializeFasterRead</name>
+        <name>InitialiseFasterRead</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -737,13 +737,13 @@
         <references refid="class_data_file_reader_1a1f047e7f6e84b9eef04cbe6f7e4346a5" compoundref="_data_file_reader_8hpp" startline="70">m_filename</references>
         <references refid="class_data_file_reader_1a8621174b131344b5a3da1c07200645da" compoundref="_data_file_reader_8hpp" startline="72">m_kReady</references>
         <references refid="class_data_file_reader_1a4061e1aec6b6ccaaa1b1b9d728d397fe" compoundref="_data_file_reader_8hpp" startline="88">m_reader</references>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Bool_t</type>
-        <definition>Bool_t DataFileReader::InitializeRootRead</definition>
+        <definition>Bool_t DataFileReader::InitialiseRootRead</definition>
         <argsstring>()</argsstring>
-        <name>InitializeRootRead</name>
+        <name>InitialiseRootRead</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -756,7 +756,7 @@
         <references refid="class_data_file_reader_1a32654eedfeb644461da15069403fbb8e" compoundref="_data_file_reader_8hpp" startline="74">m_QDCx</references>
         <references refid="class_data_file_reader_1ad8538455a818353a98cbec7ecbf47314" compoundref="_data_file_reader_8hpp" startline="84">m_ReadTree</references>
         <references refid="class_data_file_reader_1a69ed2a0858a61a41141cd3f9777b7d5b" compoundref="_data_file_reader_8hpp" startline="83">m_TFile</references>
-        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialize</referencedby>
+        <referencedby refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" compoundref="_data_file_reader_8hpp" startline="96" endline="146">Initialise</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -793,10 +793,10 @@
       <member refid="class_data_file_reader_1a14657e37d9465aec5cf5c3a774f5d39b" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>DataFileReader</name></member>
       <member refid="class_data_file_reader_1a1f3ba36be0b3abeef18d4d365659f94c" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>DataFileReader</name></member>
       <member refid="class_data_file_reader_1a034e540bca091a553d32bd6ea3df83a0" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>getHit</name></member>
-      <member refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>Initialize</name></member>
-      <member refid="class_data_file_reader_1adf4b2ffd95a42bdd5b03cb4cdded83d1" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>Initialize</name></member>
-      <member refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" prot="private" virt="non-virtual"><scope>DataFileReader</scope><name>InitializeFasterRead</name></member>
-      <member refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" prot="private" virt="non-virtual"><scope>DataFileReader</scope><name>InitializeRootRead</name></member>
+      <member refid="class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>Initialise</name></member>
+      <member refid="class_data_file_reader_1adf4b2ffd95a42bdd5b03cb4cdded83d1" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>Initialise</name></member>
+      <member refid="class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45" prot="private" virt="non-virtual"><scope>DataFileReader</scope><name>InitialiseFasterRead</name></member>
+      <member refid="class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b" prot="private" virt="non-virtual"><scope>DataFileReader</scope><name>InitialiseRootRead</name></member>
       <member refid="class_data_file_reader_1a3eb026afa7eb48f76d6032b13c24361a" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>isReady</name></member>
       <member refid="class_data_file_reader_1adb0f6c01a14efb8428b217a450116b14" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>isRootOrFast</name></member>
       <member refid="class_data_file_reader_1af03b5dd8b9cf07680fc6fae7a423cbb8" prot="public" virt="non-virtual"><scope>DataFileReader</scope><name>isWritable</name></member>

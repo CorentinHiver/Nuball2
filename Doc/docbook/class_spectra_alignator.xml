@@ -19,9 +19,13 @@ Collaboration diagram for SpectraAlignator:<para>
         <itemizedlist>
             <listitem><para><link linkend="_class_recalibration">Recalibration</link> const  &amp; <link linkend="_class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d">alignSpectra</link> (TH1 *_spectra, TH1 *spectra_output, int const &amp;degreesOfFreedom=3, double const &amp;energyThreshold=0)</para>
 </listitem>
+            <listitem><para>void <link linkend="_class_spectra_alignator_1aed228999d9baba04b99e8542204e058b">newAlignement</link> (TH1 *_spectra, TH1 *spectra_output)</para>
+</listitem>
             <listitem><para>void <link linkend="_class_spectra_alignator_1a06e5ad929499d18d557fd5a37daf8897">setBruteForce</link> (bool const &amp;brute_force=true)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_spectra_alignator_1a2aad91050c99f92c1e217d4c886db883">setIterations</link> (int const &amp;iterations)</para>
+</listitem>
+            <listitem><para><link linkend="_class_spectra_alignator_1a77c3fc9994a3475f24daf5bcf8b0110e">SpectraAlignator</link> () noexcept=default</para>
 </listitem>
             <listitem><para><link linkend="_class_spectra_alignator_1a1f75d38f8f9dd676b72689f8adbe3be5">SpectraAlignator</link> (TH1 *ref)</para>
 </listitem>
@@ -38,8 +42,6 @@ Collaboration diagram for SpectraAlignator:<para>
 </listitem>
             <listitem><para>std::vector&lt; double &gt; <link linkend="_class_spectra_alignator_1a49faa58fd7b8c2bc3a16e0dbc11c9bbe">m_chi2s</link></para>
 </listitem>
-            <listitem><para>std::vector&lt; <link linkend="_class_minimisator">Minimisator</link> &gt; <link linkend="_class_spectra_alignator_1abcc20c4ad4370552aa2730ade1f2b74e">m_minimisator</link></para>
-</listitem>
             <listitem><para>int <link linkend="_class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a">m_nb_iterations</link> = 20</para>
 </listitem>
             <listitem><para>std::vector&lt; <link linkend="_class_recalibration">Recalibration</link> &gt; <link linkend="_class_spectra_alignator_1a616ff75748e686a5a9bde689b9ec6a1e">m_recals</link></para>
@@ -55,9 +57,18 @@ Collaboration diagram for SpectraAlignator:<para>
         </itemizedlist>
 </simplesect>
 <section>
+<title>Detailed Description</title>
+
+<para><para><link linkend="_deprecated_1_deprecated000001">Deprecated</link> </para></para>
+</section>
+<section>
 <title>Constructor &amp; Destructor Documentation</title>
-<anchor xml:id="_class_spectra_alignator_1a1f75d38f8f9dd676b72689f8adbe3be5"/>    <section>
-    <title>SpectraAlignator()</title>
+<anchor xml:id="_class_spectra_alignator_1a77c3fc9994a3475f24daf5bcf8b0110e"/>    <section>
+    <title>SpectraAlignator()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>SpectraAlignator</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>SpectraAlignator</secondary></indexterm>
+<para><computeroutput>SpectraAlignator::SpectraAlignator ( )<computeroutput>[default]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a1f75d38f8f9dd676b72689f8adbe3be5"/>    <section>
+    <title>SpectraAlignator()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>SpectraAlignator</primary><secondary>SpectraAlignator</secondary></indexterm>
 <indexterm><primary>SpectraAlignator</primary><secondary>SpectraAlignator</secondary></indexterm>
 <para><computeroutput>SpectraAlignator::SpectraAlignator (TH1 * ref)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
@@ -75,6 +86,21 @@ Collaboration diagram for SpectraAlignator:<para>
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_spectra_alignator_a1844e2814df35c43677ed678f79fc00d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_spectra_alignator_1aed228999d9baba04b99e8542204e058b"/>    <section>
+    <title>newAlignement()</title>
+<indexterm><primary>newAlignement</primary><secondary>SpectraAlignator</secondary></indexterm>
+<indexterm><primary>SpectraAlignator</primary><secondary>newAlignement</secondary></indexterm>
+<para><computeroutput>void SpectraAlignator::newAlignement (TH1 * _spectra, TH1 * spectra_output)<computeroutput>[inline]</computeroutput></computeroutput></para>
+<para><para><link linkend="_deprecated_1_deprecated000002">Deprecated</link> </para></para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_spectra_alignator_aed228999d9baba04b99e8542204e058b_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -108,11 +134,7 @@ Collaboration diagram for SpectraAlignator:<para>
     <title>m_chi2s</title>
 <indexterm><primary>m_chi2s</primary><secondary>SpectraAlignator</secondary></indexterm>
 <indexterm><primary>SpectraAlignator</primary><secondary>m_chi2s</secondary></indexterm>
-<para><computeroutput>std::vector&lt;double&gt; SpectraAlignator::m_chi2s<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1abcc20c4ad4370552aa2730ade1f2b74e"/>    <section>
-    <title>m_minimisator</title>
-<indexterm><primary>m_minimisator</primary><secondary>SpectraAlignator</secondary></indexterm>
-<indexterm><primary>SpectraAlignator</primary><secondary>m_minimisator</secondary></indexterm>
-<para><computeroutput>std::vector&lt;<link linkend="_class_minimisator">Minimisator</link>&gt; SpectraAlignator::m_minimisator<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a"/>    <section>
+<para><computeroutput>std::vector&lt;double&gt; SpectraAlignator::m_chi2s<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a"/>    <section>
     <title>m_nb_iterations</title>
 <indexterm><primary>m_nb_iterations</primary><secondary>SpectraAlignator</secondary></indexterm>
 <indexterm><primary>SpectraAlignator</primary><secondary>m_nb_iterations</secondary></indexterm>
@@ -139,5 +161,5 @@ Collaboration diagram for SpectraAlignator:<para>
 <para><computeroutput>TH2F* SpectraAlignator::surface_chi2 = nullptr<computeroutput>[private]</computeroutput></computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
-lib/Classes/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+lib/Analyse/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
 </section>

@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_peak_fitter" xml:lang="en-US">
+<title>PeakFitter Class Reference</title>
+<indexterm><primary>PeakFitter</primary></indexterm>
+<para>
+
+<para>Allows one to fit a peak of a histogram in the range [low_edge, high_edge]. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;libRoot.hpp&gt;</computeroutput>
+</para>
+Inheritance diagram for PeakFitter:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_peak_fitter_1a841cf7c0b3f96186b22636f2df02e3d3">fit</link> ()</para>
+
+<para>Allows one to fit a peak of a histogram in the range [low_edge, high_edge]. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_peak_fitter_1a47cd33d5de6c62965edb2e34c49a6118">fit</link> (TH1 *histo, double low_edge, double high_edge, double mean=-1, double sigma=-1, double constante=-1)</para>
+
+<para>Allows one to fit a peak of a histogram in the range [low_edge, high_edge]. </para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_peak_fitter_1acfa69ccabbbe06ec5cd5ea85e21b7e8f">getBackground</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_peak_fitter_1af1719649da41412e67dd10950de22924">getConstante</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_peak_fitter_1abbebe1db98d32f0fda50c1edbd30296b">getFit</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_peak_fitter_1ae83803972d52d79a55f2af7b1dde0ae5">getMean</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_peak_fitter_1aecad4fbb3fc12ed9d845bb590858f653">getSigma</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_peak_fitter_1a4a770d3564dad1c02c0ccad8bbfaa1ee">operator-&gt;</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_peak_fitter_1a6eacc2d68d3b6f3fa954f1570b4ee870">PeakFitter</link> ()=default</para>
+</listitem>
+            <listitem><para><link linkend="_class_peak_fitter_1ac7184cc922b31d9c9c3ec80582f878c6">PeakFitter</link> (TH1 *histo, double low_edge, double high_edge)</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_peak_fitter_1a21d2023f09f628c8c3c0483202d3ac3d">setBackgroundOrder</link> (int const &amp;order_background)</para>
+</listitem>
+            <listitem><para><link linkend="_class_peak_fitter_1ab7388a3d35abe30e593c429d5d442448">~PeakFitter</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>TF1 * <link linkend="_class_peak_fitter_1aefb677199a0080515e2574e269c99817">final_fit</link> = nullptr</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_peak_fitter_1aa94a3facb6d0dd7c297f4a88aa8d0c1f">m_high_edge</link> = 0.0</para>
+</listitem>
+            <listitem><para>TH1 * <link linkend="_class_peak_fitter_1a17c767989b804103544ee0763d9b71be">m_histo</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_peak_fitter_1a7f6ea41a7272addc3d3a309aedea9271">m_low_binning</link> = true</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_peak_fitter_1ab66419dc7237fd8292f82826355375f8">m_low_edge</link> = 0.0</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_peak_fitter_1a727ceddfd60949055a086b35d1ac8e3d">m_order_background</link> = 3</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Allows one to fit a peak of a histogram in the range [low_edge, high_edge]. </para>
+
+
+
+<para><caution><title>Attention</title>
+
+<para>The edges must be well centered, this is not a peak finder. </para>
+</caution>
+</para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_peak_fitter_1a6eacc2d68d3b6f3fa954f1570b4ee870"/>    <section>
+    <title>PeakFitter()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>PeakFitter</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>PeakFitter</secondary></indexterm>
+<para><computeroutput>PeakFitter::PeakFitter ( )<computeroutput>[default]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1ab7388a3d35abe30e593c429d5d442448"/>    <section>
+    <title>~PeakFitter()</title>
+<indexterm><primary>~PeakFitter</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>~PeakFitter</secondary></indexterm>
+<para><computeroutput>PeakFitter::~PeakFitter ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1ac7184cc922b31d9c9c3ec80582f878c6"/>    <section>
+    <title>PeakFitter()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>PeakFitter</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>PeakFitter</secondary></indexterm>
+<para><computeroutput>PeakFitter::PeakFitter (TH1 * histo, double low_edge, double high_edge)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_ac7184cc922b31d9c9c3ec80582f878c6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_peak_fitter_1a841cf7c0b3f96186b22636f2df02e3d3"/>    <section>
+    <title>fit()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>fit</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>fit</secondary></indexterm>
+<para><computeroutput>void PeakFitter::fit ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Allows one to fit a peak of a histogram in the range [low_edge, high_edge]. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_a841cf7c0b3f96186b22636f2df02e3d3_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_a841cf7c0b3f96186b22636f2df02e3d3_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_peak_fitter_1a47cd33d5de6c62965edb2e34c49a6118"/>    <section>
+    <title>fit()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>fit</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>fit</secondary></indexterm>
+<para><computeroutput>void PeakFitter::fit (TH1 * histo, double low_edge, double high_edge, double mean = <computeroutput>-1</computeroutput>
+, double sigma = <computeroutput>-1</computeroutput>
+, double constante = <computeroutput>-1</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Allows one to fit a peak of a histogram in the range [low_edge, high_edge]. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_a47cd33d5de6c62965edb2e34c49a6118_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_peak_fitter_1acfa69ccabbbe06ec5cd5ea85e21b7e8f"/>    <section>
+    <title>getBackground()</title>
+<indexterm><primary>getBackground</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>getBackground</secondary></indexterm>
+<para><computeroutput>auto PeakFitter::getBackground ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_acfa69ccabbbe06ec5cd5ea85e21b7e8f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_peak_fitter_1af1719649da41412e67dd10950de22924"/>    <section>
+    <title>getConstante()</title>
+<indexterm><primary>getConstante</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>getConstante</secondary></indexterm>
+<para><computeroutput>auto PeakFitter::getConstante ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_af1719649da41412e67dd10950de22924_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_peak_fitter_1abbebe1db98d32f0fda50c1edbd30296b"/>    <section>
+    <title>getFit()</title>
+<indexterm><primary>getFit</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>getFit</secondary></indexterm>
+<para><computeroutput>auto const&amp; PeakFitter::getFit ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1ae83803972d52d79a55f2af7b1dde0ae5"/>    <section>
+    <title>getMean()</title>
+<indexterm><primary>getMean</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>getMean</secondary></indexterm>
+<para><computeroutput>auto PeakFitter::getMean ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_ae83803972d52d79a55f2af7b1dde0ae5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_peak_fitter_1aecad4fbb3fc12ed9d845bb590858f653"/>    <section>
+    <title>getSigma()</title>
+<indexterm><primary>getSigma</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>getSigma</secondary></indexterm>
+<para><computeroutput>auto PeakFitter::getSigma ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_aecad4fbb3fc12ed9d845bb590858f653_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_peak_fitter_1a4a770d3564dad1c02c0ccad8bbfaa1ee"/>    <section>
+    <title>operator-&gt;()</title>
+<indexterm><primary>operator-&gt;</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>operator-&gt;</secondary></indexterm>
+<para><computeroutput>auto PeakFitter::operator-&gt; ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1a21d2023f09f628c8c3c0483202d3ac3d"/>    <section>
+    <title>setBackgroundOrder()</title>
+<indexterm><primary>setBackgroundOrder</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>setBackgroundOrder</secondary></indexterm>
+<para><computeroutput>auto PeakFitter::setBackgroundOrder (int const &amp; order_background)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peak_fitter_a21d2023f09f628c8c3c0483202d3ac3d_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_peak_fitter_1aefb677199a0080515e2574e269c99817"/>    <section>
+    <title>final_fit</title>
+<indexterm><primary>final_fit</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>final_fit</secondary></indexterm>
+<para><computeroutput>TF1* PeakFitter::final_fit = nullptr<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1aa94a3facb6d0dd7c297f4a88aa8d0c1f"/>    <section>
+    <title>m_high_edge</title>
+<indexterm><primary>m_high_edge</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>m_high_edge</secondary></indexterm>
+<para><computeroutput>double PeakFitter::m_high_edge = 0.0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1a17c767989b804103544ee0763d9b71be"/>    <section>
+    <title>m_histo</title>
+<indexterm><primary>m_histo</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>m_histo</secondary></indexterm>
+<para><computeroutput>TH1* PeakFitter::m_histo<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1a7f6ea41a7272addc3d3a309aedea9271"/>    <section>
+    <title>m_low_binning</title>
+<indexterm><primary>m_low_binning</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>m_low_binning</secondary></indexterm>
+<para><computeroutput>bool PeakFitter::m_low_binning = true<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1ab66419dc7237fd8292f82826355375f8"/>    <section>
+    <title>m_low_edge</title>
+<indexterm><primary>m_low_edge</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>m_low_edge</secondary></indexterm>
+<para><computeroutput>double PeakFitter::m_low_edge = 0.0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peak_fitter_1a727ceddfd60949055a086b35d1ac8e3d"/>    <section>
+    <title>m_order_background</title>
+<indexterm><primary>m_order_background</primary><secondary>PeakFitter</secondary></indexterm>
+<indexterm><primary>PeakFitter</primary><secondary>m_order_background</secondary></indexterm>
+<para><computeroutput>double PeakFitter::m_order_background = 3<computeroutput>[protected]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/<link linkend="_lib_root_8hpp">libRoot.hpp</link></section>
+</section>

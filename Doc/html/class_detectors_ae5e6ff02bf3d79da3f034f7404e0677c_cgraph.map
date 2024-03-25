@@ -1,10 +1,12 @@
 <map id="Detectors::nbOfType" name="Detectors::nbOfType">
 <area shape="rect" id="node1" title="Returns the number of detector of each type." alt="" coords="5,56,160,83"/>
-<area shape="rect" id="node2" href="$string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="240,5,299,32"/>
+<area shape="rect" id="node2" href="$string__functions_8hpp.html#a87d8e2cb69021ab11e443cb140349eb6" title="Returns true if the string has at least one occurence of substr." alt="" coords="240,5,299,32"/>
 <area shape="rect" id="node3" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="221,56,318,83"/>
-<area shape="rect" id="node4" href="$class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="208,107,331,133"/>
-<area shape="rect" id="node5" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="379,132,504,159"/>
-<area shape="rect" id="node6" href="$class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="552,81,683,108"/>
-<area shape="rect" id="node7" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="731,107,860,133"/>
-<area shape="rect" id="node8" href="$_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="908,107,987,133"/>
+<area shape="rect" id="node6" href="$class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="208,107,331,133"/>
+<area shape="rect" id="node4" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="390,56,493,83"/>
+<area shape="rect" id="node5" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="564,56,671,83"/>
+<area shape="rect" id="node7" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="379,157,504,184"/>
+<area shape="rect" id="node8" href="$class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="552,107,683,133"/>
+<area shape="rect" id="node9" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="731,132,860,159"/>
+<area shape="rect" id="node10" href="$_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="908,132,987,159"/>
 </map>

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_timeshifts_1_1_not_found_error" xml:lang="en-US">
+<title>Timeshifts::NotFoundError Class Reference</title>
+<indexterm><primary>Timeshifts::NotFoundError</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Timeshifts.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto const  &amp; <link linkend="_class_timeshifts_1_1_not_found_error_1af2d2641bfbfdabee633eb2e17fb5bf5a">getFilename</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_timeshifts_1_1_not_found_error_1a7c3315b4832d93e060e3b22f72b74282">NotFoundError</link> (std::string const &amp;filename)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_class_timeshifts_1_1_not_found_error_1af68cdae6542290c9aa3f6ba180e56bf5">m_filename</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_timeshifts_1_1_not_found_error_1a7c3315b4832d93e060e3b22f72b74282"/>    <section>
+    <title>NotFoundError()</title>
+<indexterm><primary>NotFoundError</primary><secondary>Timeshifts::NotFoundError</secondary></indexterm>
+<indexterm><primary>Timeshifts::NotFoundError</primary><secondary>NotFoundError</secondary></indexterm>
+<para><computeroutput>Timeshifts::NotFoundError::NotFoundError (std::string const &amp; filename)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_1_1_not_found_error_a7c3315b4832d93e060e3b22f72b74282_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_timeshifts_1_1_not_found_error_1af2d2641bfbfdabee633eb2e17fb5bf5a"/>    <section>
+    <title>getFilename()</title>
+<indexterm><primary>getFilename</primary><secondary>Timeshifts::NotFoundError</secondary></indexterm>
+<indexterm><primary>Timeshifts::NotFoundError</primary><secondary>getFilename</secondary></indexterm>
+<para><computeroutput>auto const&amp; Timeshifts::NotFoundError::getFilename ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_timeshifts_1_1_not_found_error_1af68cdae6542290c9aa3f6ba180e56bf5"/>    <section>
+    <title>m_filename</title>
+<indexterm><primary>m_filename</primary><secondary>Timeshifts::NotFoundError</secondary></indexterm>
+<indexterm><primary>Timeshifts::NotFoundError</primary><secondary>m_filename</secondary></indexterm>
+<para><computeroutput>std::string Timeshifts::NotFoundError::m_filename<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Modules/<link linkend="__timeshifts_8hpp">Timeshifts.hpp</link></section>
+</section>

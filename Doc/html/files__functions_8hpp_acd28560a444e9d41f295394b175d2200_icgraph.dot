@@ -31,13 +31,13 @@ digraph "extension"
   Node1 -> Node13 [id="edge12_Node000001_Node000013",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node13 [id="Node000013",label="ReaderManager::addFolder",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_reader_manager.html#af440d75101cf18d9c7c1515d4c383fa3",tooltip=" "];
   Node1 -> Node14 [id="edge13_Node000001_Node000014",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node14 [id="Node000014",label="DataFileReader::Initialize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_data_file_reader.html#ad7d87b772fa148a1ed228f1b7df10fa8",tooltip=" "];
+  Node14 [id="Node000014",label="DataFileReader::Initialise",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_data_file_reader.html#ad7d87b772fa148a1ed228f1b7df10fa8",tooltip=" "];
   Node14 -> Node15 [id="edge14_Node000014_Node000015",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node15 [id="Node000015",label="DataFileReader::DataFile\lReader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_data_file_reader.html#a1f3ba36be0b3abeef18d4d365659f94c",tooltip=" "];
   Node14 -> Node16 [id="edge15_Node000014_Node000016",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node16 [id="Node000016",label="DataFileReader::DataFile\lReader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_data_file_reader.html#a14657e37d9465aec5cf5c3a774f5d39b",tooltip=" "];
   Node14 -> Node17 [id="edge16_Node000014_Node000017",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node17 [id="Node000017",label="DataFileReader::Initialize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_data_file_reader.html#adf4b2ffd95a42bdd5b03cb4cdded83d1",tooltip=" "];
+  Node17 [id="Node000017",label="DataFileReader::Initialise",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_data_file_reader.html#adf4b2ffd95a42bdd5b03cb4cdded83d1",tooltip=" "];
   Node1 -> Node18 [id="edge17_Node000001_Node000018",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node18 [id="Node000018",label="Timeshifts::InitParameters",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_timeshifts.html#a9e3dc861a2470908defb028b2710ab09",tooltip=" "];
   Node18 -> Node10 [id="edge18_Node000018_Node000010",dir="back",color="steelblue1",style="solid",tooltip=" "];

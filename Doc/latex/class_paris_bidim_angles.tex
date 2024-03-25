@@ -1,0 +1,314 @@
+\doxysection{Paris\+Bidim\+Angles Class Reference}
+\label{class_paris_bidim_angles}\index{ParisBidimAngles@{ParisBidimAngles}}
+
+
+{\ttfamily \#include $<$Paris\+Bidim\+Angles.\+hpp$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ File\+Error}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \textbf{ angle\+La\+Br} (std\+::string name)
+\item 
+double const  \& \textbf{ angle\+La\+Br} (std\+::string name) const
+\item 
+double \textbf{ angle\+NaI} (std\+::string name)
+\item 
+double const  \& \textbf{ angle\+NaI} (std\+::string name) const
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, double $>$ const  \& \textbf{ La\+Br\+\_\+angles} ()
+\item 
+void \textbf{ load} (std\+::string const \&filename)
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, double $>$ const  \& \textbf{ Na\+I\+\_\+angles} ()
+\item 
+auto \textbf{ names} ()
+\item 
+auto const  \& \textbf{ names} () const
+\item 
+std\+::pair$<$ double, double $>$ const  \& \textbf{ operator[$\,$]} (std\+::string name)
+\item 
+\textbf{ Paris\+Bidim\+Angles} () noexcept=default
+\item 
+\textbf{ Paris\+Bidim\+Angles} (std\+::string const \&filename)
+\item 
+void \textbf{ print\+Deg} ()
+\item 
+void \textbf{ set} (std\+::string const \&name, double const \&\textbf{ angle\+La\+Br}, double const \&\textbf{ angle\+NaI})
+\item 
+void \textbf{ sort\+Names} ()
+\item 
+void \textbf{ write} (std\+::string const \&filename)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, double $>$ \textbf{ m\+\_\+angle\+La\+Br}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, double $>$ \textbf{ m\+\_\+angle\+NaI}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ double, double $>$ $>$ \textbf{ m\+\_\+angles}
+\item 
+std\+::string \textbf{ m\+\_\+filename}
+\item 
+std\+::vector$<$ std\+::string $>$ \textbf{ m\+\_\+names}
+\item 
+bool \textbf{ m\+\_\+ok} = false
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \textbf{ m\+\_\+extension} = \char`\"{}angles\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_paris_bidim_angles_a1005f10d8eabebfd02d1dee6fafa9ebd}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!ParisBidimAngles@{ParisBidimAngles}}
+\index{ParisBidimAngles@{ParisBidimAngles}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{ParisBidimAngles()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Paris\+Bidim\+Angles\+::\+Paris\+Bidim\+Angles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\mbox{\label{class_paris_bidim_angles_a94f5dc80e2e164186840fdf9915e080e}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!ParisBidimAngles@{ParisBidimAngles}}
+\index{ParisBidimAngles@{ParisBidimAngles}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{ParisBidimAngles()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Paris\+Bidim\+Angles\+::\+Paris\+Bidim\+Angles (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_a94f5dc80e2e164186840fdf9915e080e_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_paris_bidim_angles_a737596223de54d2eabbb64a3d674e82f}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!angleLaBr@{angleLaBr}}
+\index{angleLaBr@{angleLaBr}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{angleLaBr()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double Paris\+Bidim\+Angles\+::angle\+La\+Br (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_paris_bidim_angles_a72183315a0c50a92612964ed779a7419}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!angleLaBr@{angleLaBr}}
+\index{angleLaBr@{angleLaBr}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{angleLaBr()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double const\& Paris\+Bidim\+Angles\+::angle\+La\+Br (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_a72183315a0c50a92612964ed779a7419_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_paris_bidim_angles_a054559c88ccfa68ffc104ba8cf0c2fe6}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!angleNaI@{angleNaI}}
+\index{angleNaI@{angleNaI}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{angleNaI()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double Paris\+Bidim\+Angles\+::angle\+NaI (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_paris_bidim_angles_a799125ee30452e7ba2d5f89b48c57da1}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!angleNaI@{angleNaI}}
+\index{angleNaI@{angleNaI}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{angleNaI()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double const\& Paris\+Bidim\+Angles\+::angle\+NaI (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_a799125ee30452e7ba2d5f89b48c57da1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_paris_bidim_angles_a7cc946220cdb4f0a42a8793cf6337f58}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!LaBr\_angles@{LaBr\_angles}}
+\index{LaBr\_angles@{LaBr\_angles}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{LaBr\_angles()}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, double$>$ const\& Paris\+Bidim\+Angles\+::\+La\+Br\+\_\+angles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_paris_bidim_angles_a904829a187c50059dda2d439ef0d6db1}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!load@{load}}
+\index{load@{load}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{load()}
+{\footnotesize\ttfamily void Paris\+Bidim\+Angles\+::load (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_a904829a187c50059dda2d439ef0d6db1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_a904829a187c50059dda2d439ef0d6db1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_paris_bidim_angles_aa0d0e80c56a0e44766c856b3560a0ba0}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!NaI\_angles@{NaI\_angles}}
+\index{NaI\_angles@{NaI\_angles}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{NaI\_angles()}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, double$>$ const\& Paris\+Bidim\+Angles\+::\+Na\+I\+\_\+angles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_paris_bidim_angles_aa257a0e840f44672aa2bcbf23d103566}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!names@{names}}
+\index{names@{names}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{names()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Paris\+Bidim\+Angles\+::names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_paris_bidim_angles_ab8d9a5f52612a296bea2ada2ba64b385}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!names@{names}}
+\index{names@{names}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{names()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Paris\+Bidim\+Angles\+::names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{class_paris_bidim_angles_ab8d9a5f52612a296bea2ada2ba64b385_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_paris_bidim_angles_a2fc512a76d77f8ecb97c3d46b07c088a}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{operator[]()}
+{\footnotesize\ttfamily std\+::pair$<$double, double$>$ const\& Paris\+Bidim\+Angles\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_paris_bidim_angles_a00fe25e6cdd8340cab38ba7f6fe2b1d7}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!printDeg@{printDeg}}
+\index{printDeg@{printDeg}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{printDeg()}
+{\footnotesize\ttfamily void Paris\+Bidim\+Angles\+::print\+Deg (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_a00fe25e6cdd8340cab38ba7f6fe2b1d7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_paris_bidim_angles_afd9e6c297a0cc74001a6180f6b49d253}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!set@{set}}
+\index{set@{set}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{set()}
+{\footnotesize\ttfamily void Paris\+Bidim\+Angles\+::set (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{double const \&}]{angle\+La\+Br,  }\item[{double const \&}]{angle\+NaI }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_afd9e6c297a0cc74001a6180f6b49d253_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_afd9e6c297a0cc74001a6180f6b49d253_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_paris_bidim_angles_adc78f553d4c386a1ea6230965c11d68a}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!sortNames@{sortNames}}
+\index{sortNames@{sortNames}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{sortNames()}
+{\footnotesize\ttfamily void Paris\+Bidim\+Angles\+::sort\+Names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_adc78f553d4c386a1ea6230965c11d68a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_paris_bidim_angles_a0ca1c561f33bc79fc16b630ef4db9144}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!write@{write}}
+\index{write@{write}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{write()}
+{\footnotesize\ttfamily void Paris\+Bidim\+Angles\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_a0ca1c561f33bc79fc16b630ef4db9144_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_paris_bidim_angles_a0ca1c561f33bc79fc16b630ef4db9144_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_paris_bidim_angles_aaf84ea92c8f0a178e039c173c71f0b1a}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!m\_angleLaBr@{m\_angleLaBr}}
+\index{m\_angleLaBr@{m\_angleLaBr}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{m\_angleLaBr}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, double$>$ Paris\+Bidim\+Angles\+::m\+\_\+angle\+La\+Br\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_paris_bidim_angles_aa58045051b25656e3ee374f0e930c6de}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!m\_angleNaI@{m\_angleNaI}}
+\index{m\_angleNaI@{m\_angleNaI}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{m\_angleNaI}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, double$>$ Paris\+Bidim\+Angles\+::m\+\_\+angle\+NaI\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_paris_bidim_angles_ab6053684ae330a5e30a89618044a4e18}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!m\_angles@{m\_angles}}
+\index{m\_angles@{m\_angles}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{m\_angles}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, std\+::pair$<$double, double$>$ $>$ Paris\+Bidim\+Angles\+::m\+\_\+angles\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_paris_bidim_angles_a3c71992fbda09a6d859949cba76d0d87}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!m\_extension@{m\_extension}}
+\index{m\_extension@{m\_extension}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{m\_extension}
+{\footnotesize\ttfamily std\+::string Paris\+Bidim\+Angles\+::m\+\_\+extension = \char`\"{}angles\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\label{class_paris_bidim_angles_a86e477b4aad725586be9bcdd64ef738f}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!m\_filename@{m\_filename}}
+\index{m\_filename@{m\_filename}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{m\_filename}
+{\footnotesize\ttfamily std\+::string Paris\+Bidim\+Angles\+::m\+\_\+filename\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_paris_bidim_angles_ad7e9840d2054070758edf03ce757cba0}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!m\_names@{m\_names}}
+\index{m\_names@{m\_names}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{m\_names}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ Paris\+Bidim\+Angles\+::m\+\_\+names\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_paris_bidim_angles_ab440b2ada4931a8f26eece54a1ec8a16}} 
+\index{ParisBidimAngles@{ParisBidimAngles}!m\_ok@{m\_ok}}
+\index{m\_ok@{m\_ok}!ParisBidimAngles@{ParisBidimAngles}}
+\doxysubsubsection{m\_ok}
+{\footnotesize\ttfamily bool Paris\+Bidim\+Angles\+::m\+\_\+ok = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Analyse/\textbf{ Paris\+Bidim\+Angles.\+hpp}\end{DoxyCompactItemize}

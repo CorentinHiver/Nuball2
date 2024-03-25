@@ -16,10 +16,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="38" column="13" bodyfile="lib/Classes/Alignator.hpp" bodystart="38" bodyend="-1"/>
-        <referencedby refid="class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23" compoundref="_alignator_8hpp" startline="21" endline="21">cursor</referencedby>
-        <referencedby refid="class_alignator_1a45bc066237b8c221590a6be1ddce1739" compoundref="_alignator_8hpp" startline="20" endline="20">next</referencedby>
-        <referencedby refid="class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012" compoundref="_alignator_8hpp" startline="22" endline="22">reset</referencedby>
+        <location file="lib/Classes/Alignator.hpp" line="45" column="13" bodyfile="lib/Classes/Alignator.hpp" bodystart="45" bodyend="-1"/>
+        <referencedby refid="class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23" compoundref="_alignator_8hpp" startline="24" endline="24">cursor</referencedby>
+        <referencedby refid="class_alignator_1a45bc066237b8c221590a6be1ddce1739" compoundref="_alignator_8hpp" startline="23" endline="23">next</referencedby>
+        <referencedby refid="class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012" compoundref="_alignator_8hpp" startline="25" endline="25">reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_alignator_1af4921d71e017acc7212a7e351fb41901" prot="private" static="no" mutable="no">
         <type>std::vector&lt; int &gt;</type>
@@ -32,13 +32,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="39" column="15" bodyfile="lib/Classes/Alignator.hpp" bodystart="39" bodyend="-1"/>
-        <referencedby refid="class_alignator_1ac335d9fe9d4d96476f4a964e08773d82" compoundref="_alignator_8hpp" startline="24" endline="24">begin</referencedby>
-        <referencedby refid="class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341" compoundref="_alignator_8hpp" startline="25" endline="25">end</referencedby>
-        <referencedby refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" compoundref="_alignator_8hpp" startline="27" endline="27">GetEntry</referencedby>
-        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="44" endline="86">loadNewIndex</referencedby>
-        <referencedby refid="class_alignator_1a45bc066237b8c221590a6be1ddce1739" compoundref="_alignator_8hpp" startline="20" endline="20">next</referencedby>
-        <referencedby refid="class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3" compoundref="_alignator_8hpp" startline="18" endline="18">operator[]</referencedby>
+        <location file="lib/Classes/Alignator.hpp" line="46" column="15" bodyfile="lib/Classes/Alignator.hpp" bodystart="46" bodyend="-1"/>
+        <referencedby refid="class_alignator_1ac335d9fe9d4d96476f4a964e08773d82" compoundref="_alignator_8hpp" startline="27" endline="27">begin</referencedby>
+        <referencedby refid="class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341" compoundref="_alignator_8hpp" startline="28" endline="28">end</referencedby>
+        <referencedby refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" compoundref="_alignator_8hpp" startline="30" endline="30">GetEntry</referencedby>
+        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="51" endline="99">loadNewIndex</referencedby>
+        <referencedby refid="class_alignator_1a45bc066237b8c221590a6be1ddce1739" compoundref="_alignator_8hpp" startline="23" endline="23">next</referencedby>
+        <referencedby refid="class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3" compoundref="_alignator_8hpp" startline="21" endline="21">operator[]</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" prot="private" static="no" mutable="no">
         <type>ULong64_t</type>
@@ -52,8 +52,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="37" column="13" bodyfile="lib/Classes/Alignator.hpp" bodystart="37" bodyend="-1"/>
-        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="44" endline="86">loadNewIndex</referencedby>
+        <location file="lib/Classes/Alignator.hpp" line="44" column="13" bodyfile="lib/Classes/Alignator.hpp" bodystart="44" bodyend="-1"/>
+        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="51" endline="99">loadNewIndex</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_alignator_1a9827f1466d50a02e7269f3f2e30ea0dd" prot="private" static="no" mutable="no">
         <type>TTree *</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="41" column="9" bodyfile="lib/Classes/Alignator.hpp" bodystart="41" bodyend="-1"/>
+        <location file="lib/Classes/Alignator.hpp" line="48" column="9" bodyfile="lib/Classes/Alignator.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" prot="private" static="no" mutable="no">
         <type>TTree *</type>
@@ -79,11 +79,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="40" column="9" bodyfile="lib/Classes/Alignator.hpp" bodystart="40" bodyend="-1"/>
-        <referencedby refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" compoundref="_alignator_8hpp" startline="27" endline="27">GetEntry</referencedby>
-        <referencedby refid="class_alignator_1a3f13f1e4383561e761787e1b38f18c75" compoundref="_alignator_8hpp" startline="31" endline="31">getTree</referencedby>
-        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="44" endline="86">loadNewIndex</referencedby>
-        <referencedby refid="class_alignator_1a645dc87dcffc14053eaac92708c22e17" compoundref="_alignator_8hpp" startline="29" endline="29">operator-&gt;</referencedby>
+        <location file="lib/Classes/Alignator.hpp" line="47" column="9" bodyfile="lib/Classes/Alignator.hpp" bodystart="47" bodyend="-1"/>
+        <referencedby refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" compoundref="_alignator_8hpp" startline="30" endline="30">GetEntry</referencedby>
+        <referencedby refid="class_alignator_1a3f13f1e4383561e761787e1b38f18c75" compoundref="_alignator_8hpp" startline="34" endline="34">getTree</referencedby>
+        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="51" endline="99">loadNewIndex</referencedby>
+        <referencedby refid="class_alignator_1a645dc87dcffc14053eaac92708c22e17" compoundref="_alignator_8hpp" startline="32" endline="32">operator-&gt;</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -101,14 +101,15 @@
           <declname>outputTree</declname>
         </param>
         <briefdescription>
-<para>DEV. </para>
+<para>TBD. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="13" column="3" bodyfile="lib/Classes/Alignator.hpp" bodystart="13" bodyend="16"/>
-        <references refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" compoundref="_alignator_8hpp" startline="94" endline="135">align</references>
+        <location file="lib/Classes/Alignator.hpp" line="13" column="3" bodyfile="lib/Classes/Alignator.hpp" bodystart="13" bodyend="19"/>
+        <references refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" compoundref="_alignator_8hpp" startline="107" endline="110">align</references>
+        <references refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="51" endline="99">loadNewIndex</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1af09796ed3384e2f74bb3c2dae1e83bc9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -126,7 +127,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/Alignator.hpp" line="10" column="3" bodyfile="lib/Classes/Alignator.hpp" bodystart="10" bodyend="10"/>
-        <references refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="44" endline="86">loadNewIndex</references>
+        <references refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="51" endline="99">loadNewIndex</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1ac335d9fe9d4d96476f4a964e08773d82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -139,8 +140,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="24" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="24" bodyend="24"/>
-        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="39">m_index</references>
+        <location file="lib/Classes/Alignator.hpp" line="27" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="27" bodyend="27"/>
+        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="46">m_index</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -153,8 +154,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="21" column="15" bodyfile="lib/Classes/Alignator.hpp" bodystart="21" bodyend="21"/>
-        <references refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" compoundref="_alignator_8hpp" startline="38">m_cursor</references>
+        <location file="lib/Classes/Alignator.hpp" line="24" column="15" bodyfile="lib/Classes/Alignator.hpp" bodystart="24" bodyend="24"/>
+        <references refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" compoundref="_alignator_8hpp" startline="45">m_cursor</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -167,8 +168,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="25" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="25" bodyend="25"/>
-        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="39">m_index</references>
+        <location file="lib/Classes/Alignator.hpp" line="28" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="28" bodyend="28"/>
+        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="46">m_index</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -185,11 +186,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="27" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="27" bodyend="27"/>
-        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="39">m_index</references>
-        <references refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" compoundref="_alignator_8hpp" startline="40">m_tree</references>
-        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="44" endline="86">loadNewIndex</referencedby>
+        <location file="lib/Classes/Alignator.hpp" line="30" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="30" bodyend="30"/>
+        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="46">m_index</references>
+        <references refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" compoundref="_alignator_8hpp" startline="47">m_tree</references>
+        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="51" endline="99">loadNewIndex</referencedby>
         <referencedby refid="class_clover_spectra_1a614d7deabde77b0ffea91ca2a6002484" compoundref="_clover_spectra_8hpp" startline="161" endline="207">CloverSpectra::runFasterReader</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a87cee37be1d91e747760bb6555e24bc8" compoundref="_cobalt_calorimeter_8hpp" startline="840" endline="1005">CobaltCalorimeter::work</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1a3f13f1e4383561e761787e1b38f18c75" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -202,8 +204,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="31" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="31" bodyend="31"/>
-        <references refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" compoundref="_alignator_8hpp" startline="40">m_tree</references>
+        <location file="lib/Classes/Alignator.hpp" line="34" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="34" bodyend="34"/>
+        <references refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" compoundref="_alignator_8hpp" startline="47">m_tree</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1a45bc066237b8c221590a6be1ddce1739" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -216,9 +218,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="20" column="15" bodyfile="lib/Classes/Alignator.hpp" bodystart="20" bodyend="20"/>
-        <references refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" compoundref="_alignator_8hpp" startline="38">m_cursor</references>
-        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="39">m_index</references>
+        <location file="lib/Classes/Alignator.hpp" line="23" column="15" bodyfile="lib/Classes/Alignator.hpp" bodystart="23" bodyend="23"/>
+        <references refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" compoundref="_alignator_8hpp" startline="45">m_cursor</references>
+        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="46">m_index</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1a645dc87dcffc14053eaac92708c22e17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -231,8 +233,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="29" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="29" bodyend="29"/>
-        <references refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" compoundref="_alignator_8hpp" startline="40">m_tree</references>
+        <location file="lib/Classes/Alignator.hpp" line="32" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="32" bodyend="32"/>
+        <references refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" compoundref="_alignator_8hpp" startline="47">m_tree</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -249,8 +251,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="18" column="15" bodyfile="lib/Classes/Alignator.hpp" bodystart="18" bodyend="18"/>
-        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="39">m_index</references>
+        <location file="lib/Classes/Alignator.hpp" line="21" column="15" bodyfile="lib/Classes/Alignator.hpp" bodystart="21" bodyend="21"/>
+        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="46">m_index</references>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -263,8 +265,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="22" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="22" bodyend="22"/>
-        <references refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" compoundref="_alignator_8hpp" startline="38">m_cursor</references>
+        <location file="lib/Classes/Alignator.hpp" line="25" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="25" bodyend="25"/>
+        <references refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" compoundref="_alignator_8hpp" startline="45">m_cursor</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -281,8 +283,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="35" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="94" bodyend="135"/>
-        <referencedby refid="class_alignator_1a77097dec7c5f3598142d63c1df1bb78d" compoundref="_alignator_8hpp" startline="13" endline="16">Alignator</referencedby>
+        <location file="lib/Classes/Alignator.hpp" line="42" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="107" bodyend="110"/>
+        <referencedby refid="class_alignator_1a77097dec7c5f3598142d63c1df1bb78d" compoundref="_alignator_8hpp" startline="13" endline="19">Alignator</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -295,12 +297,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Alignator.hpp" line="34" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="44" bodyend="86"/>
-        <references refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" compoundref="_alignator_8hpp" startline="27" endline="27">GetEntry</references>
-        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="39">m_index</references>
-        <references refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" compoundref="_alignator_8hpp" startline="37">m_nb_data</references>
-        <references refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" compoundref="_alignator_8hpp" startline="40">m_tree</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/Classes/Alignator.hpp" line="41" column="8" bodyfile="lib/Classes/Alignator.hpp" bodystart="51" bodyend="99"/>
+        <references refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" compoundref="_alignator_8hpp" startline="30" endline="30">GetEntry</references>
+        <references refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" compoundref="_alignator_8hpp" startline="46">m_index</references>
+        <references refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" compoundref="_alignator_8hpp" startline="44">m_nb_data</references>
+        <references refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" compoundref="_alignator_8hpp" startline="47">m_tree</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
         <referencedby refid="class_alignator_1af09796ed3384e2f74bb3c2dae1e83bc9" compoundref="_alignator_8hpp" startline="10" endline="10">Alignator</referencedby>
       </memberdef>
       </sectiondef>
@@ -308,7 +310,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="lib/Classes/Alignator.hpp" line="7" column="1" bodyfile="lib/Classes/Alignator.hpp" bodystart="8" bodyend="42"/>
+    <location file="lib/Classes/Alignator.hpp" line="7" column="1" bodyfile="lib/Classes/Alignator.hpp" bodystart="8" bodyend="49"/>
     <listofallmembers>
       <member refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" prot="private" virt="non-virtual"><scope>Alignator</scope><name>align</name></member>
       <member refid="class_alignator_1af09796ed3384e2f74bb3c2dae1e83bc9" prot="public" virt="non-virtual"><scope>Alignator</scope><name>Alignator</name></member>

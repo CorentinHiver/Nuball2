@@ -20,22 +20,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="353" column="5" bodyfile="lib/vector_functions.hpp" bodystart="353" bodyend="-1"/>
-        <referencedby refid="class_static_vector_1adb781bb9deb3bb03929efd86ec024ea1" compoundref="vector__functions_8hpp" startline="339" endline="339">StaticVector&lt; T &gt;::at</referencedby>
-        <referencedby refid="class_static_vector_1a78db68071e02cf724af349d0e606ea4e" compoundref="vector__functions_8hpp" startline="317" endline="317">StaticVector&lt; T &gt;::begin</referencedby>
-        <referencedby refid="class_static_vector_1a7d5be1902e52590f04d726d14c25db8d" compoundref="vector__functions_8hpp" startline="342" endline="342">StaticVector&lt; T &gt;::data</referencedby>
-        <referencedby refid="class_static_vector_1a3e8eb7b20f56c54b32640267e6e797bc" compoundref="vector__functions_8hpp" startline="234" endline="241">StaticVector&lt; T &gt;::deallocate</referencedby>
-        <referencedby refid="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" compoundref="vector__functions_8hpp" startline="320" endline="320">StaticVector&lt; T &gt;::end</referencedby>
-        <referencedby refid="class_static_vector_1aeb818a6ce377300792c49ac51bec0f02" compoundref="vector__functions_8hpp" startline="345" endline="345">StaticVector&lt; T &gt;::fill</referencedby>
-        <referencedby refid="class_static_vector_1a39189c70d033178ce16024a824343409" compoundref="vector__functions_8hpp" startline="348" endline="348">StaticVector&lt; T &gt;::fill_static</referencedby>
-        <referencedby refid="class_static_vector_1a20da4a5384ac01b54c19c563888fe3a3" compoundref="vector__functions_8hpp" startline="307" endline="311">StaticVector&lt; T &gt;::move_back</referencedby>
-        <referencedby refid="class_static_vector_1a9b1f4393056e120458e8d10da7222aa7" compoundref="vector__functions_8hpp" startline="244" endline="257">StaticVector&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="class_static_vector_1ae2fa694636166997299fc80186d2c7dc" compoundref="vector__functions_8hpp" startline="332" endline="336">StaticVector&lt; T &gt;::operator[]</referencedby>
-        <referencedby refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" compoundref="vector__functions_8hpp" startline="300" endline="304">StaticVector&lt; T &gt;::push_back</referencedby>
-        <referencedby refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="350" endline="350">StaticVector&lt; T &gt;::reserve</referencedby>
-        <referencedby refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="264" endline="270">StaticVector&lt; T &gt;::static_resize</referencedby>
-        <referencedby refid="class_static_vector_1a982fd40392e5c546da6ba2360f59fe55" compoundref="vector__functions_8hpp" startline="205" endline="209">StaticVector&lt; T &gt;::StaticVector</referencedby>
-        <referencedby refid="class_static_vector_1a5170abb13005d53067431140a679ce4b" compoundref="vector__functions_8hpp" startline="217" endline="231">StaticVector&lt; T &gt;::~StaticVector</referencedby>
+        <location file="lib/vector_functions.hpp" line="465" column="5" bodyfile="lib/vector_functions.hpp" bodystart="465" bodyend="-1"/>
+        <referencedby refid="class_static_vector_1adb781bb9deb3bb03929efd86ec024ea1" compoundref="vector__functions_8hpp" startline="451" endline="451">StaticVector&lt; T &gt;::at</referencedby>
+        <referencedby refid="class_static_vector_1a78db68071e02cf724af349d0e606ea4e" compoundref="vector__functions_8hpp" startline="429" endline="429">StaticVector&lt; T &gt;::begin</referencedby>
+        <referencedby refid="class_static_vector_1a7d5be1902e52590f04d726d14c25db8d" compoundref="vector__functions_8hpp" startline="454" endline="454">StaticVector&lt; T &gt;::data</referencedby>
+        <referencedby refid="class_static_vector_1a3e8eb7b20f56c54b32640267e6e797bc" compoundref="vector__functions_8hpp" startline="338" endline="345">StaticVector&lt; T &gt;::deallocate</referencedby>
+        <referencedby refid="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" compoundref="vector__functions_8hpp" startline="432" endline="432">StaticVector&lt; T &gt;::end</referencedby>
+        <referencedby refid="class_static_vector_1aeb818a6ce377300792c49ac51bec0f02" compoundref="vector__functions_8hpp" startline="457" endline="457">StaticVector&lt; T &gt;::fill</referencedby>
+        <referencedby refid="class_static_vector_1a39189c70d033178ce16024a824343409" compoundref="vector__functions_8hpp" startline="460" endline="460">StaticVector&lt; T &gt;::fill_static</referencedby>
+        <referencedby refid="class_static_vector_1a20da4a5384ac01b54c19c563888fe3a3" compoundref="vector__functions_8hpp" startline="411" endline="415">StaticVector&lt; T &gt;::move_back</referencedby>
+        <referencedby refid="class_static_vector_1a9b1f4393056e120458e8d10da7222aa7" compoundref="vector__functions_8hpp" startline="348" endline="361">StaticVector&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="class_static_vector_1ae2fa694636166997299fc80186d2c7dc" compoundref="vector__functions_8hpp" startline="444" endline="448">StaticVector&lt; T &gt;::operator[]</referencedby>
+        <referencedby refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" compoundref="vector__functions_8hpp" startline="404" endline="408">StaticVector&lt; T &gt;::push_back</referencedby>
+        <referencedby refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="462" endline="462">StaticVector&lt; T &gt;::reserve</referencedby>
+        <referencedby refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="368" endline="374">StaticVector&lt; T &gt;::static_resize</referencedby>
+        <referencedby refid="class_static_vector_1a982fd40392e5c546da6ba2360f59fe55" compoundref="vector__functions_8hpp" startline="309" endline="313">StaticVector&lt; T &gt;::StaticVector</referencedby>
+        <referencedby refid="class_static_vector_1a5170abb13005d53067431140a679ce4b" compoundref="vector__functions_8hpp" startline="321" endline="335">StaticVector&lt; T &gt;::~StaticVector</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_static_vector_1aad06f563cf46c8038677140a57d928ed" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -49,8 +49,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="356" column="8" bodyfile="lib/vector_functions.hpp" bodystart="356" bodyend="-1"/>
-        <referencedby refid="class_static_vector_1a5170abb13005d53067431140a679ce4b" compoundref="vector__functions_8hpp" startline="217" endline="231">StaticVector&lt; T &gt;::~StaticVector</referencedby>
+        <location file="lib/vector_functions.hpp" line="468" column="8" bodyfile="lib/vector_functions.hpp" bodystart="468" bodyend="-1"/>
+        <referencedby refid="class_static_vector_1a5170abb13005d53067431140a679ce4b" compoundref="vector__functions_8hpp" startline="321" endline="335">StaticVector&lt; T &gt;::~StaticVector</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" prot="private" static="no" mutable="no">
         <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
@@ -64,18 +64,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="354" column="10" bodyfile="lib/vector_functions.hpp" bodystart="354" bodyend="-1"/>
-        <referencedby refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="277" endline="282">StaticVector&lt; T &gt;::checkCapacity</referencedby>
-        <referencedby refid="class_static_vector_1a9c5d814a81b352ebbb5d8a07cbdd2699" compoundref="vector__functions_8hpp" startline="261" endline="261">StaticVector&lt; T &gt;::clear</referencedby>
-        <referencedby refid="class_static_vector_1a3e8eb7b20f56c54b32640267e6e797bc" compoundref="vector__functions_8hpp" startline="234" endline="241">StaticVector&lt; T &gt;::deallocate</referencedby>
-        <referencedby refid="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" compoundref="vector__functions_8hpp" startline="320" endline="320">StaticVector&lt; T &gt;::end</referencedby>
-        <referencedby refid="class_static_vector_1aeb818a6ce377300792c49ac51bec0f02" compoundref="vector__functions_8hpp" startline="345" endline="345">StaticVector&lt; T &gt;::fill</referencedby>
-        <referencedby refid="class_static_vector_1a20da4a5384ac01b54c19c563888fe3a3" compoundref="vector__functions_8hpp" startline="307" endline="311">StaticVector&lt; T &gt;::move_back</referencedby>
-        <referencedby refid="class_static_vector_1a9b1f4393056e120458e8d10da7222aa7" compoundref="vector__functions_8hpp" startline="244" endline="257">StaticVector&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" compoundref="vector__functions_8hpp" startline="300" endline="304">StaticVector&lt; T &gt;::push_back</referencedby>
-        <referencedby refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="260" endline="260">StaticVector&lt; T &gt;::resize</referencedby>
-        <referencedby refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" compoundref="vector__functions_8hpp" startline="329" endline="329">StaticVector&lt; T &gt;::size</referencedby>
-        <referencedby refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="264" endline="270">StaticVector&lt; T &gt;::static_resize</referencedby>
+        <location file="lib/vector_functions.hpp" line="466" column="10" bodyfile="lib/vector_functions.hpp" bodystart="466" bodyend="-1"/>
+        <referencedby refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="381" endline="386">StaticVector&lt; T &gt;::checkCapacity</referencedby>
+        <referencedby refid="class_static_vector_1a9c5d814a81b352ebbb5d8a07cbdd2699" compoundref="vector__functions_8hpp" startline="365" endline="365">StaticVector&lt; T &gt;::clear</referencedby>
+        <referencedby refid="class_static_vector_1a3e8eb7b20f56c54b32640267e6e797bc" compoundref="vector__functions_8hpp" startline="338" endline="345">StaticVector&lt; T &gt;::deallocate</referencedby>
+        <referencedby refid="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" compoundref="vector__functions_8hpp" startline="432" endline="432">StaticVector&lt; T &gt;::end</referencedby>
+        <referencedby refid="class_static_vector_1aeb818a6ce377300792c49ac51bec0f02" compoundref="vector__functions_8hpp" startline="457" endline="457">StaticVector&lt; T &gt;::fill</referencedby>
+        <referencedby refid="class_static_vector_1a20da4a5384ac01b54c19c563888fe3a3" compoundref="vector__functions_8hpp" startline="411" endline="415">StaticVector&lt; T &gt;::move_back</referencedby>
+        <referencedby refid="class_static_vector_1a9b1f4393056e120458e8d10da7222aa7" compoundref="vector__functions_8hpp" startline="348" endline="361">StaticVector&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" compoundref="vector__functions_8hpp" startline="404" endline="408">StaticVector&lt; T &gt;::push_back</referencedby>
+        <referencedby refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" compoundref="vector__functions_8hpp" startline="364" endline="364">StaticVector&lt; T &gt;::resize</referencedby>
+        <referencedby refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" compoundref="vector__functions_8hpp" startline="441" endline="441">StaticVector&lt; T &gt;::size</referencedby>
+        <referencedby refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="368" endline="374">StaticVector&lt; T &gt;::static_resize</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_static_vector_1aaa12257ef000a52e60da489d80027dde" prot="private" static="no" mutable="no">
         <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
@@ -89,15 +89,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="355" column="10" bodyfile="lib/vector_functions.hpp" bodystart="355" bodyend="-1"/>
-        <referencedby refid="class_static_vector_1adb781bb9deb3bb03929efd86ec024ea1" compoundref="vector__functions_8hpp" startline="339" endline="339">StaticVector&lt; T &gt;::at</referencedby>
-        <referencedby refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="277" endline="282">StaticVector&lt; T &gt;::checkCapacity</referencedby>
-        <referencedby refid="class_static_vector_1a3e8eb7b20f56c54b32640267e6e797bc" compoundref="vector__functions_8hpp" startline="234" endline="241">StaticVector&lt; T &gt;::deallocate</referencedby>
-        <referencedby refid="class_static_vector_1a39189c70d033178ce16024a824343409" compoundref="vector__functions_8hpp" startline="348" endline="348">StaticVector&lt; T &gt;::fill_static</referencedby>
-        <referencedby refid="class_static_vector_1a9b1f4393056e120458e8d10da7222aa7" compoundref="vector__functions_8hpp" startline="244" endline="257">StaticVector&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="350" endline="350">StaticVector&lt; T &gt;::reserve</referencedby>
-        <referencedby refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="264" endline="270">StaticVector&lt; T &gt;::static_resize</referencedby>
-        <referencedby refid="class_static_vector_1a5170abb13005d53067431140a679ce4b" compoundref="vector__functions_8hpp" startline="217" endline="231">StaticVector&lt; T &gt;::~StaticVector</referencedby>
+        <location file="lib/vector_functions.hpp" line="467" column="10" bodyfile="lib/vector_functions.hpp" bodystart="467" bodyend="-1"/>
+        <referencedby refid="class_static_vector_1adb781bb9deb3bb03929efd86ec024ea1" compoundref="vector__functions_8hpp" startline="451" endline="451">StaticVector&lt; T &gt;::at</referencedby>
+        <referencedby refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="381" endline="386">StaticVector&lt; T &gt;::checkCapacity</referencedby>
+        <referencedby refid="class_static_vector_1a3e8eb7b20f56c54b32640267e6e797bc" compoundref="vector__functions_8hpp" startline="338" endline="345">StaticVector&lt; T &gt;::deallocate</referencedby>
+        <referencedby refid="class_static_vector_1a39189c70d033178ce16024a824343409" compoundref="vector__functions_8hpp" startline="460" endline="460">StaticVector&lt; T &gt;::fill_static</referencedby>
+        <referencedby refid="class_static_vector_1a9b1f4393056e120458e8d10da7222aa7" compoundref="vector__functions_8hpp" startline="348" endline="361">StaticVector&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="462" endline="462">StaticVector&lt; T &gt;::reserve</referencedby>
+        <referencedby refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="368" endline="374">StaticVector&lt; T &gt;::static_resize</referencedby>
+        <referencedby refid="class_static_vector_1a5170abb13005d53067431140a679ce4b" compoundref="vector__functions_8hpp" startline="321" endline="335">StaticVector&lt; T &gt;::~StaticVector</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -117,9 +117,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="339" column="12" bodyfile="lib/vector_functions.hpp" bodystart="339" bodyend="339"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
+        <location file="lib/vector_functions.hpp" line="451" column="12" bodyfile="lib/vector_functions.hpp" bodystart="451" bodyend="451"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a78db68071e02cf724af349d0e606ea4e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>T *</type>
@@ -133,9 +133,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="317" column="13" bodyfile="lib/vector_functions.hpp" bodystart="317" bodyend="317"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <referencedby refid="class_static_vector_1ad756be87d5c09054f47d40e38ce4b45f" compoundref="vector__functions_8hpp" startline="293" endline="293">StaticVector&lt; T &gt;::has</referencedby>
+        <location file="lib/vector_functions.hpp" line="429" column="13" bodyfile="lib/vector_functions.hpp" bodystart="429" bodyend="429"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <referencedby refid="class_static_vector_1ad756be87d5c09054f47d40e38ce4b45f" compoundref="vector__functions_8hpp" startline="397" endline="397">StaticVector&lt; T &gt;::has</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a4adf4196edf343a347c758ac9ad61be1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>T *</type>
@@ -149,8 +149,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="323" column="13" bodyfile="lib/vector_functions.hpp" bodystart="323" bodyend="323"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
+        <location file="lib/vector_functions.hpp" line="435" column="13" bodyfile="lib/vector_functions.hpp" bodystart="435" bodyend="435"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a581a28f823edc9d3fbfa959465004f12" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -163,9 +163,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="284" column="15" bodyfile="lib/vector_functions.hpp" bodystart="284" bodyend="289"/>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
+        <location file="lib/vector_functions.hpp" line="388" column="15" bodyfile="lib/vector_functions.hpp" bodystart="388" bodyend="393"/>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -178,12 +178,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="277" column="15" bodyfile="lib/vector_functions.hpp" bodystart="277" bodyend="282"/>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
-        <referencedby refid="class_static_vector_1a20da4a5384ac01b54c19c563888fe3a3" compoundref="vector__functions_8hpp" startline="307" endline="311">StaticVector&lt; T &gt;::move_back</referencedby>
-        <referencedby refid="class_static_vector_1ae2fa694636166997299fc80186d2c7dc" compoundref="vector__functions_8hpp" startline="332" endline="336">StaticVector&lt; T &gt;::operator[]</referencedby>
-        <referencedby refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" compoundref="vector__functions_8hpp" startline="300" endline="304">StaticVector&lt; T &gt;::push_back</referencedby>
+        <location file="lib/vector_functions.hpp" line="381" column="15" bodyfile="lib/vector_functions.hpp" bodystart="381" bodyend="386"/>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
+        <referencedby refid="class_static_vector_1a20da4a5384ac01b54c19c563888fe3a3" compoundref="vector__functions_8hpp" startline="411" endline="415">StaticVector&lt; T &gt;::move_back</referencedby>
+        <referencedby refid="class_static_vector_1ae2fa694636166997299fc80186d2c7dc" compoundref="vector__functions_8hpp" startline="444" endline="448">StaticVector&lt; T &gt;::operator[]</referencedby>
+        <referencedby refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" compoundref="vector__functions_8hpp" startline="404" endline="408">StaticVector&lt; T &gt;::push_back</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a9c5d814a81b352ebbb5d8a07cbdd2699" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -196,9 +196,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="261" column="8" bodyfile="lib/vector_functions.hpp" bodystart="261" bodyend="261"/>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
-        <referencedby refid="class_clovers_1a60b7747d54a60759b4eae02deac50f95" compoundref="_clovers_8hpp" startline="379" endline="431">Clovers::Reset</referencedby>
+        <location file="lib/vector_functions.hpp" line="365" column="8" bodyfile="lib/vector_functions.hpp" bodystart="365" bodyend="365"/>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <referencedby refid="class_clovers_1a60b7747d54a60759b4eae02deac50f95" compoundref="_clovers_8hpp" startline="369" endline="421">Clovers::Reset</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a7d5be1902e52590f04d726d14c25db8d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T *</type>
@@ -212,8 +212,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="342" column="5" bodyfile="lib/vector_functions.hpp" bodystart="342" bodyend="342"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
+        <location file="lib/vector_functions.hpp" line="454" column="5" bodyfile="lib/vector_functions.hpp" bodystart="454" bodyend="454"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a3e8eb7b20f56c54b32640267e6e797bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -227,10 +227,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="234" column="8" bodyfile="lib/vector_functions.hpp" bodystart="234" bodyend="241"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
+        <location file="lib/vector_functions.hpp" line="338" column="8" bodyfile="lib/vector_functions.hpp" bodystart="338" bodyend="345"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>T *</type>
@@ -244,10 +244,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="320" column="13" bodyfile="lib/vector_functions.hpp" bodystart="320" bodyend="320"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
-        <referencedby refid="class_static_vector_1ad756be87d5c09054f47d40e38ce4b45f" compoundref="vector__functions_8hpp" startline="293" endline="293">StaticVector&lt; T &gt;::has</referencedby>
+        <location file="lib/vector_functions.hpp" line="432" column="13" bodyfile="lib/vector_functions.hpp" bodystart="432" bodyend="432"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <referencedby refid="class_static_vector_1ad756be87d5c09054f47d40e38ce4b45f" compoundref="vector__functions_8hpp" startline="397" endline="397">StaticVector&lt; T &gt;::has</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1aff91554484ba655f02b84fbe17276332" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>T *</type>
@@ -261,9 +261,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="326" column="13" bodyfile="lib/vector_functions.hpp" bodystart="326" bodyend="326"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <location file="lib/vector_functions.hpp" line="438" column="13" bodyfile="lib/vector_functions.hpp" bodystart="438" bodyend="438"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1aeb818a6ce377300792c49ac51bec0f02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -281,9 +281,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="345" column="8" bodyfile="lib/vector_functions.hpp" bodystart="345" bodyend="345"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <location file="lib/vector_functions.hpp" line="457" column="8" bodyfile="lib/vector_functions.hpp" bodystart="457" bodyend="457"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a39189c70d033178ce16024a824343409" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -301,11 +301,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="348" column="8" bodyfile="lib/vector_functions.hpp" bodystart="348" bodyend="348"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
-        <referencedby refid="class_static_vector_1a25564f07e92dd67a4f6bc0dfeaaad31b" compoundref="vector__functions_8hpp" startline="271" endline="275">StaticVector&lt; T &gt;::static_resize</referencedby>
-        <referencedby refid="class_static_vector_1a2c073e13f79566c96c4a28837cbcc358" compoundref="vector__functions_8hpp" startline="198" endline="202">StaticVector&lt; T &gt;::StaticVector</referencedby>
+        <location file="lib/vector_functions.hpp" line="460" column="8" bodyfile="lib/vector_functions.hpp" bodystart="460" bodyend="460"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
+        <referencedby refid="class_static_vector_1a25564f07e92dd67a4f6bc0dfeaaad31b" compoundref="vector__functions_8hpp" startline="375" endline="379">StaticVector&lt; T &gt;::static_resize</referencedby>
+        <referencedby refid="class_static_vector_1a2c073e13f79566c96c4a28837cbcc358" compoundref="vector__functions_8hpp" startline="302" endline="306">StaticVector&lt; T &gt;::StaticVector</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1aa5ed2c50cf5c44e9685430f0aa6be160" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -333,9 +333,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="297" column="16" bodyfile="lib/vector_functions.hpp" bodystart="297" bodyend="297"/>
-        <references refid="class_static_vector_1a78db68071e02cf724af349d0e606ea4e" compoundref="vector__functions_8hpp" startline="317" endline="317">StaticVector&lt; T &gt;::begin</references>
-        <references refid="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" compoundref="vector__functions_8hpp" startline="320" endline="320">StaticVector&lt; T &gt;::end</references>
+        <location file="lib/vector_functions.hpp" line="401" column="16" bodyfile="lib/vector_functions.hpp" bodystart="401" bodyend="401"/>
+        <references refid="class_static_vector_1a78db68071e02cf724af349d0e606ea4e" compoundref="vector__functions_8hpp" startline="429" endline="429">StaticVector&lt; T &gt;::begin</references>
+        <references refid="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" compoundref="vector__functions_8hpp" startline="432" endline="432">StaticVector&lt; T &gt;::end</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1ad756be87d5c09054f47d40e38ce4b45f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -363,10 +363,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="293" column="16" bodyfile="lib/vector_functions.hpp" bodystart="293" bodyend="293"/>
-        <references refid="class_static_vector_1a78db68071e02cf724af349d0e606ea4e" compoundref="vector__functions_8hpp" startline="317" endline="317">StaticVector&lt; T &gt;::begin</references>
-        <references refid="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" compoundref="vector__functions_8hpp" startline="320" endline="320">StaticVector&lt; T &gt;::end</references>
-        <referencedby refid="class_static_vector_1ac0b86d749f8e35274fbac0506c050465" compoundref="vector__functions_8hpp" startline="314" endline="314">StaticVector&lt; T &gt;::push_back_unique</referencedby>
+        <location file="lib/vector_functions.hpp" line="397" column="16" bodyfile="lib/vector_functions.hpp" bodystart="397" bodyend="397"/>
+        <references refid="class_static_vector_1a78db68071e02cf724af349d0e606ea4e" compoundref="vector__functions_8hpp" startline="429" endline="429">StaticVector&lt; T &gt;::begin</references>
+        <references refid="class_static_vector_1ae80eaa7fb165b6408406870253bd8e5f" compoundref="vector__functions_8hpp" startline="432" endline="432">StaticVector&lt; T &gt;::end</references>
+        <referencedby refid="class_static_vector_1ae9a13402fed613a29197e99ce20396f8" compoundref="vector__functions_8hpp" startline="418" endline="426">StaticVector&lt; T &gt;::push_back_unique</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a20da4a5384ac01b54c19c563888fe3a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -384,10 +384,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="307" column="8" bodyfile="lib/vector_functions.hpp" bodystart="307" bodyend="311"/>
-        <references refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="277" endline="282">StaticVector&lt; T &gt;::checkCapacity</references>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <location file="lib/vector_functions.hpp" line="411" column="8" bodyfile="lib/vector_functions.hpp" bodystart="411" bodyend="415"/>
+        <references refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="381" endline="386">StaticVector&lt; T &gt;::checkCapacity</references>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a9b1f4393056e120458e8d10da7222aa7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="class_static_vector" kindref="compound">StaticVector</ref> &amp;</type>
@@ -405,10 +405,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="244" column="16" bodyfile="lib/vector_functions.hpp" bodystart="244" bodyend="257"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
+        <location file="lib/vector_functions.hpp" line="348" column="16" bodyfile="lib/vector_functions.hpp" bodystart="348" bodyend="361"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1ae2fa694636166997299fc80186d2c7dc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>T &amp;</type>
@@ -426,9 +426,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="332" column="6" bodyfile="lib/vector_functions.hpp" bodystart="332" bodyend="336"/>
-        <references refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="277" endline="282">StaticVector&lt; T &gt;::checkCapacity</references>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
+        <location file="lib/vector_functions.hpp" line="444" column="6" bodyfile="lib/vector_functions.hpp" bodystart="444" bodyend="448"/>
+        <references refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="381" endline="386">StaticVector&lt; T &gt;::checkCapacity</references>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -446,17 +446,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="300" column="8" bodyfile="lib/vector_functions.hpp" bodystart="300" bodyend="304"/>
-        <references refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="277" endline="282">StaticVector&lt; T &gt;::checkCapacity</references>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
-        <referencedby refid="class_clovers_1a523aad5d019f23144292c0e23067a43b" compoundref="_clovers_8hpp" startline="606" endline="630">Clovers::Analyse</referencedby>
-        <referencedby refid="class_clovers_1ab1394e718791a5016aa3e0a19828465c" compoundref="_clovers_8hpp" startline="505" endline="604">Clovers::Fill</referencedby>
-        <referencedby refid="class_static_vector_1ac0b86d749f8e35274fbac0506c050465" compoundref="vector__functions_8hpp" startline="314" endline="314">StaticVector&lt; T &gt;::push_back_unique</referencedby>
+        <location file="lib/vector_functions.hpp" line="404" column="8" bodyfile="lib/vector_functions.hpp" bodystart="404" bodyend="408"/>
+        <references refid="class_static_vector_1a28a635b7f2cbd0cbc5a042dc22ab7ea3" compoundref="vector__functions_8hpp" startline="381" endline="386">StaticVector&lt; T &gt;::checkCapacity</references>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <referencedby refid="class_clovers_1a523aad5d019f23144292c0e23067a43b" compoundref="_clovers_8hpp" startline="593" endline="617">Clovers::Analyse</referencedby>
+        <referencedby refid="class_clovers_1ab1394e718791a5016aa3e0a19828465c" compoundref="_clovers_8hpp" startline="495" endline="591">Clovers::Fill</referencedby>
+        <referencedby refid="class_static_vector_1ae9a13402fed613a29197e99ce20396f8" compoundref="vector__functions_8hpp" startline="418" endline="426">StaticVector&lt; T &gt;::push_back_unique</referencedby>
       </memberdef>
-      <memberdef kind="function" id="class_static_vector_1ac0b86d749f8e35274fbac0506c050465" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>void</type>
-        <definition>void StaticVector&lt; T &gt;::push_back_unique</definition>
+      <memberdef kind="function" id="class_static_vector_1ae9a13402fed613a29197e99ce20396f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool StaticVector&lt; T &gt;::push_back_unique</definition>
         <argsstring>(T const &amp;t)</argsstring>
         <name>push_back_unique</name>
         <param>
@@ -470,12 +470,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="314" column="8" bodyfile="lib/vector_functions.hpp" bodystart="314" bodyend="314"/>
-        <references refid="class_static_vector_1ad756be87d5c09054f47d40e38ce4b45f" compoundref="vector__functions_8hpp" startline="293" endline="293">StaticVector&lt; T &gt;::has</references>
-        <references refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" compoundref="vector__functions_8hpp" startline="300" endline="304">StaticVector&lt; T &gt;::push_back</references>
+        <location file="lib/vector_functions.hpp" line="418" column="8" bodyfile="lib/vector_functions.hpp" bodystart="418" bodyend="426"/>
+        <references refid="class_static_vector_1ad756be87d5c09054f47d40e38ce4b45f" compoundref="vector__functions_8hpp" startline="397" endline="397">StaticVector&lt; T &gt;::has</references>
+        <references refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" compoundref="vector__functions_8hpp" startline="404" endline="408">StaticVector&lt; T &gt;::push_back</references>
         <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">Counters::count_event</referencedby>
-        <referencedby refid="class_clovers_1ab1394e718791a5016aa3e0a19828465c" compoundref="_clovers_8hpp" startline="505" endline="604">Clovers::Fill</referencedby>
-        <referencedby refid="class_clovers_1a5f280f8b6d043a949b726c7ff2b1e019" compoundref="_clovers_8hpp" startline="470" endline="503">Clovers::FillFast</referencedby>
+        <referencedby refid="class_clovers_1ab1394e718791a5016aa3e0a19828465c" compoundref="_clovers_8hpp" startline="495" endline="591">Clovers::Fill</referencedby>
+        <referencedby refid="class_clovers_1a5f280f8b6d043a949b726c7ff2b1e019" compoundref="_clovers_8hpp" startline="460" endline="493">Clovers::FillFast</referencedby>
         <referencedby refid="class_counters_1a64f2e9cf1e132725e4b5a6b0fcdb9ea5" compoundref="_classes_2_counters_8hpp" startline="65" endline="97">Counters::set_hit</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -489,11 +489,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="350" column="8" bodyfile="lib/vector_functions.hpp" bodystart="350" bodyend="350"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
-        <referencedby refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="264" endline="270">StaticVector&lt; T &gt;::static_resize</referencedby>
-        <referencedby refid="class_static_vector_1a1fd1ac7d3e54a74084f25ecad026c79c" compoundref="vector__functions_8hpp" startline="195" endline="195">StaticVector&lt; T &gt;::StaticVector</referencedby>
+        <location file="lib/vector_functions.hpp" line="462" column="8" bodyfile="lib/vector_functions.hpp" bodystart="462" bodyend="462"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
+        <referencedby refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="368" endline="374">StaticVector&lt; T &gt;::static_resize</referencedby>
+        <referencedby refid="class_static_vector_1a1fd1ac7d3e54a74084f25ecad026c79c" compoundref="vector__functions_8hpp" startline="299" endline="299">StaticVector&lt; T &gt;::StaticVector</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1ae292e425773c82dc9eb20db025963e29" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -512,8 +512,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="260" column="8" bodyfile="lib/vector_functions.hpp" bodystart="260" bodyend="260"/>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <location file="lib/vector_functions.hpp" line="364" column="8" bodyfile="lib/vector_functions.hpp" bodystart="364" bodyend="364"/>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
         <referencedby refid="class_counters_1ada46b45bb45210aad28a4ebbd23f98f8" compoundref="_analyse_2_counters_8hpp" startline="43" endline="61">Counters::clear</referencedby>
         <referencedby refid="class_counters_1a6d83023bf5dece2147c82ad2b1906abd" compoundref="_analyse_2_counters_8hpp" startline="11" endline="19">Counters::Counters</referencedby>
       </memberdef>
@@ -529,15 +529,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="329" column="15" bodyfile="lib/vector_functions.hpp" bodystart="329" bodyend="329"/>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <location file="lib/vector_functions.hpp" line="441" column="15" bodyfile="lib/vector_functions.hpp" bodystart="441" bodyend="441"/>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
         <referencedby refid="class_counters_1a1f2723ecaf63399d985ce2efd87aab6f" compoundref="_classes_2_counters_8hpp" startline="108" endline="125">Counters::clover_analyse</referencedby>
         <referencedby refid="class_counters_1a438d855f700f802261df045b1f52723e" compoundref="_analyse_2_counters_8hpp" startline="63" endline="121">Counters::count_event</referencedby>
-        <referencedby refid="class_clovers_1a378e1b7fea24003b4b56eb855c8ae163" compoundref="_clovers_8hpp" startline="195" endline="195">Clovers::mult</referencedby>
-        <referencedby refid="_clovers_8hpp_1a25cc9a6adf9227586fe9e4ef23928011" compoundref="_clovers_8hpp" startline="720" endline="728">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_clovers_1a0d853153f63a1b04ca62756615dfd741" compoundref="_clovers_8hpp" startline="711" endline="718">Clovers::PrintClean</referencedby>
+        <referencedby refid="class_clovers_1a378e1b7fea24003b4b56eb855c8ae163" compoundref="_clovers_8hpp" startline="185" endline="185">Clovers::mult</referencedby>
+        <referencedby refid="_clovers_8hpp_1a25cc9a6adf9227586fe9e4ef23928011" compoundref="_clovers_8hpp" startline="691" endline="699">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_clovers_1a0d853153f63a1b04ca62756615dfd741" compoundref="_clovers_8hpp" startline="682" endline="689">Clovers::PrintClean</referencedby>
         <referencedby refid="class_clover_spectra_1a614d7deabde77b0ffea91ca2a6002484" compoundref="_clover_spectra_8hpp" startline="161" endline="207">CloverSpectra::runFasterReader</referencedby>
-        <referencedby refid="class_clovers_1a6f9f1d7a131c9972ded9cf1b4291455d" compoundref="_clovers_8hpp" startline="194" endline="194">Clovers::size</referencedby>
+        <referencedby refid="class_clovers_1a6f9f1d7a131c9972ded9cf1b4291455d" compoundref="_clovers_8hpp" startline="184" endline="184">Clovers::size</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a25564f07e92dd67a4f6bc0dfeaaad31b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -558,9 +558,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="271" column="8" bodyfile="lib/vector_functions.hpp" bodystart="271" bodyend="275"/>
-        <references refid="class_static_vector_1a39189c70d033178ce16024a824343409" compoundref="vector__functions_8hpp" startline="348" endline="348">StaticVector&lt; T &gt;::fill_static</references>
-        <references refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="264" endline="270">StaticVector&lt; T &gt;::static_resize</references>
+        <location file="lib/vector_functions.hpp" line="375" column="8" bodyfile="lib/vector_functions.hpp" bodystart="375" bodyend="379"/>
+        <references refid="class_static_vector_1a39189c70d033178ce16024a824343409" compoundref="vector__functions_8hpp" startline="460" endline="460">StaticVector&lt; T &gt;::fill_static</references>
+        <references refid="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" compoundref="vector__functions_8hpp" startline="368" endline="374">StaticVector&lt; T &gt;::static_resize</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a3f31307e19e313fb7b4b93f284194f52" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -579,12 +579,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="264" column="8" bodyfile="lib/vector_functions.hpp" bodystart="264" bodyend="270"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="354">StaticVector&lt; T &gt;::m_dynamic_size</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
-        <references refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="350" endline="350">StaticVector&lt; T &gt;::reserve</references>
-        <referencedby refid="class_static_vector_1a25564f07e92dd67a4f6bc0dfeaaad31b" compoundref="vector__functions_8hpp" startline="271" endline="275">StaticVector&lt; T &gt;::static_resize</referencedby>
+        <location file="lib/vector_functions.hpp" line="368" column="8" bodyfile="lib/vector_functions.hpp" bodystart="368" bodyend="374"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1af728d4c1860a0955dfc05f921ac8cf1a" compoundref="vector__functions_8hpp" startline="466">StaticVector&lt; T &gt;::m_dynamic_size</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
+        <references refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="462" endline="462">StaticVector&lt; T &gt;::reserve</references>
+        <referencedby refid="class_static_vector_1a25564f07e92dd67a4f6bc0dfeaaad31b" compoundref="vector__functions_8hpp" startline="375" endline="379">StaticVector&lt; T &gt;::static_resize</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a5b3dc3f31d7b676540c171832d244304" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -597,7 +597,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="192" column="3"/>
+        <location file="lib/vector_functions.hpp" line="296" column="3"/>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a27bc6181b4ef6643f3abc9c91d728349" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -615,7 +615,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="212" column="3" bodyfile="lib/vector_functions.hpp" bodystart="212" bodyend="215"/>
+        <location file="lib/vector_functions.hpp" line="316" column="3" bodyfile="lib/vector_functions.hpp" bodystart="316" bodyend="319"/>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a982fd40392e5c546da6ba2360f59fe55" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -633,9 +633,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="205" column="3" bodyfile="lib/vector_functions.hpp" bodystart="205" bodyend="209"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="350" endline="350">StaticVector&lt; T &gt;::reserve</references>
+        <location file="lib/vector_functions.hpp" line="309" column="3" bodyfile="lib/vector_functions.hpp" bodystart="309" bodyend="313"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="462" endline="462">StaticVector&lt; T &gt;::reserve</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a1fd1ac7d3e54a74084f25ecad026c79c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -653,8 +653,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="195" column="3" bodyfile="lib/vector_functions.hpp" bodystart="195" bodyend="195"/>
-        <references refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="350" endline="350">StaticVector&lt; T &gt;::reserve</references>
+        <location file="lib/vector_functions.hpp" line="299" column="3" bodyfile="lib/vector_functions.hpp" bodystart="299" bodyend="299"/>
+        <references refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="462" endline="462">StaticVector&lt; T &gt;::reserve</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a2c073e13f79566c96c4a28837cbcc358" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -676,9 +676,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="198" column="3" bodyfile="lib/vector_functions.hpp" bodystart="198" bodyend="202"/>
-        <references refid="class_static_vector_1a39189c70d033178ce16024a824343409" compoundref="vector__functions_8hpp" startline="348" endline="348">StaticVector&lt; T &gt;::fill_static</references>
-        <references refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="350" endline="350">StaticVector&lt; T &gt;::reserve</references>
+        <location file="lib/vector_functions.hpp" line="302" column="3" bodyfile="lib/vector_functions.hpp" bodystart="302" bodyend="306"/>
+        <references refid="class_static_vector_1a39189c70d033178ce16024a824343409" compoundref="vector__functions_8hpp" startline="460" endline="460">StaticVector&lt; T &gt;::fill_static</references>
+        <references refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" compoundref="vector__functions_8hpp" startline="462" endline="462">StaticVector&lt; T &gt;::reserve</references>
       </memberdef>
       <memberdef kind="function" id="class_static_vector_1a5170abb13005d53067431140a679ce4b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -691,20 +691,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/vector_functions.hpp" line="217" column="3" bodyfile="lib/vector_functions.hpp" bodystart="217" bodyend="231"/>
-        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="353">StaticVector&lt; T &gt;::m_data</references>
-        <references refid="class_static_vector_1aad06f563cf46c8038677140a57d928ed" compoundref="vector__functions_8hpp" startline="356">StaticVector&lt; T &gt;::m_deleted</references>
-        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="355">StaticVector&lt; T &gt;::m_static_size</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/vector_functions.hpp" line="321" column="3" bodyfile="lib/vector_functions.hpp" bodystart="321" bodyend="335"/>
+        <references refid="class_static_vector_1af9f68b36479f70b30a68e2a7c1503154" compoundref="vector__functions_8hpp" startline="465">StaticVector&lt; T &gt;::m_data</references>
+        <references refid="class_static_vector_1aad06f563cf46c8038677140a57d928ed" compoundref="vector__functions_8hpp" startline="468">StaticVector&lt; T &gt;::m_deleted</references>
+        <references refid="class_static_vector_1aaa12257ef000a52e60da489d80027dde" compoundref="vector__functions_8hpp" startline="467">StaticVector&lt; T &gt;::m_static_size</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       </sectiondef>
     <briefdescription>
 <para>An efficient container for dynamic arrays with a known and fixed maximum size. </para>
     </briefdescription>
     <detaileddescription>
-<para><simplesect kind="attention"><para>Prototype, have some memory management issues in some cases ...</para>
+<para><simplesect kind="attention"><para>Prototype, has some memory management issues in some cases ... </para>
 </simplesect>
-This class is meant to handle a vector of data that needs to be resized a lot. To do so, declare it this way : <verbatim> static_vector&lt;T&gt; my_vec = static_vector&lt;T&gt;(maximum_size);
+<xrefsect id="deprecated_1_deprecated000012"><xreftitle>Deprecated</xreftitle><xrefdescription><para>With optimisation option, std::vector is almost as efficient as this class ... </para>
+</xrefdescription></xrefsect></para>
+<para>This class is meant to handle a vector of data that needs to be resized a lot. To do so, declare it this way : <verbatim> static_vector&lt;T&gt; my_vec = static_vector&lt;T&gt;(maximum_size);
 </verbatim> If not in an object prototype, simply : <verbatim> auto my_vec = static_vector&lt;T&gt;(maximum_size);
 </verbatim> You can fill the whole vector with some value : <verbatim> auto my_vec = static_vector&lt;T&gt;(maximum_size, fill_value);
  // or :
@@ -720,7 +722,7 @@ If you want not to crash you application if the capacity is reached, use push_ba
 <para>An interesting feature is push_back_unique(t). This allows one to push_back t only if it has not been found in the vector. It may require t to have a comparison operator (not tested yet).</para>
 <para>Now, if for some reason you want to modify the capacity of the vector, you can use static_resize(new_size). </para>
     </detaileddescription>
-    <location file="lib/vector_functions.hpp" line="189" column="1" bodyfile="lib/vector_functions.hpp" bodystart="190" bodyend="357"/>
+    <location file="lib/vector_functions.hpp" line="293" column="1" bodyfile="lib/vector_functions.hpp" bodystart="294" bodyend="469"/>
     <listofallmembers>
       <member refid="class_static_vector_1adb781bb9deb3bb03929efd86ec024ea1" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>at</name></member>
       <member refid="class_static_vector_1a78db68071e02cf724af349d0e606ea4e" prot="public" virt="virtual"><scope>StaticVector</scope><name>begin</name></member>
@@ -744,7 +746,7 @@ If you want not to crash you application if the capacity is reached, use push_ba
       <member refid="class_static_vector_1a9b1f4393056e120458e8d10da7222aa7" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>operator=</name></member>
       <member refid="class_static_vector_1ae2fa694636166997299fc80186d2c7dc" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>operator[]</name></member>
       <member refid="class_static_vector_1a8f604b0f4165d95a6b6653907c92ceb3" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>push_back</name></member>
-      <member refid="class_static_vector_1ac0b86d749f8e35274fbac0506c050465" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>push_back_unique</name></member>
+      <member refid="class_static_vector_1ae9a13402fed613a29197e99ce20396f8" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>push_back_unique</name></member>
       <member refid="class_static_vector_1aac46f946b1d5b09e8713eac121594a06" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>reserve</name></member>
       <member refid="class_static_vector_1ae292e425773c82dc9eb20db025963e29" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>resize</name></member>
       <member refid="class_static_vector_1a44b964207cfd132dda347e246a3640c8" prot="public" virt="non-virtual"><scope>StaticVector</scope><name>size</name></member>

@@ -1,9 +1,43 @@
 
 \begin{DoxyRefList}
-\item[Class \doxyref{Calibration}{p.}{class_calibration} ]\label{todo__todo000002}%
-\doxyref{Calibration\+::verify()}{p.}{class_calibration_a344dc3d6feab3580e859cc693c2fdd4a} DO NOT SUPPORT \doxyref{MTObject}{p.}{class_m_t_object} !!  
-\item[Class \doxyref{File}{p.}{class_file} ]\label{todo__todo000001}%
+\item[Member \doxyref{Add\+TH1\+By\+Value}{p.}{lib_root_8hpp_a0135527c42feb1bbb8180af21ef5229e} (TH2 $\ast$histo2, TH1 $\ast$histo1, int index, bool x=true)]\label{todo__todo000012}%
+doesn\textquotesingle{}t work for some reason ... 
+\item[Class \doxyref{Calibrator}{p.}{class_calibrator} ]\label{todo__todo000014}%
+\doxyref{Calibrator\+::verify()}{p.}{class_calibrator_aad90b0e3951d4caffe11e319c7108a51} DO NOT SUPPORT multithreading with \doxyref{MTObject}{p.}{class_m_t_object} !!  
+\item[Member \doxyref{Calibrator\+::operator bool}{p.}{class_calibrator_a6f433f9ca2ce1406d8ca5d55fdccb696} () const \&]\label{todo__todo000015}%
+  
+\item[Member \doxyref{Data\+File$<$ Index, T $>$\+::vectorize}{p.}{class_data_file_a943ee036c1dc8d2a2a98a9bc5953d303} ()]\label{todo__todo000008}%
+if needed  
+\item[Class \doxyref{Faster2\+Histo}{p.}{class_faster2_histo} ]\label{todo__todo000016}%
+ event building, timeshifts 
+\item[Member \doxyref{Faster2\+Histo\+::set\+Trigger}{p.}{class_faster2_histo_a9fe030fbb75d71117cbac93c14c787f6} (Trigger\+Hit trigger)]\label{todo__todo000017}%
+UNUSED until event building is done  
+\item[Class \doxyref{File}{p.}{class_file} ]\label{todo__todo000011}%
 rethink the check\+Mode logic ...  
-\item[Class \doxyref{MTTHist$<$ THist $>$}{p.}{class_m_t_t_hist} ]\label{todo__todo000003}%
-better memory management 
+\item[Member \doxyref{Hit\+Buffer\+::shift}{p.}{class_hit_buffer_a69b8f046928a8e3dc0e573dff8b4fe94} (int n)]\label{todo__todo000009}%
+Make it functionnal maybe ? 
+\item[Class \doxyref{Manip}{p.}{class_manip} ]\label{todo__todo000010}%
+make it better !!  
+\item[Class \doxyref{MTObject}{p.}{class_m_t_object} ]\label{todo__todo000020}%
+ Trying to make this work \+: template$<$class... ARGS$>$ static ret\+\_\+type helper\+\_\+function(\+My\+Class \& myclass, ARGS... args) \{return myclass.\+function\+\_\+to\+\_\+multithread(std\+::forward$<$\+ARGS$>$(args)...);\}  
+\item[Member \doxyref{MTObject\+::parallelise\+\_\+function}{p.}{class_m_t_object_a35c02650eb403bd54e867f93bb26fc47} (Func \&\&func, ARGS \&\&... args)]\label{todo__todo000021}%
+check if I can replace Func by std\+::function  
+\item[Class \doxyref{Near\+Line}{p.}{class_near_line} ]\label{todo__todo000018}%
+ 
+\item[Member \doxyref{Spectra\+Co\+::fill}{p.}{class_spectra_co_a223f3a9be7c661c1ef700d8bfda1106f} (double const \&X) noexcept]\label{todo__todo000001}%
+test it  
+\item[Member \doxyref{Spectra\+Co\+::operator$\ast$}{p.}{class_spectra_co_a34ea7496185caf2178c8ba1c10876dd3} (double const \&factor)]\label{todo__todo000003}%
+can be optimized  
+\item[Member \doxyref{Spectra\+Co\+::operator/}{p.}{class_spectra_co_aa4225392a595ff8a0950ef67610096d0} (double const \&factor)]\label{todo__todo000004}%
+can be optimized  
+\item[Member \doxyref{Spectra\+Co\+::rebin}{p.}{class_spectra_co_a79c602e0c90555c37098d070863134f3} (int const \&factor, bool const \&rebin\+\_\+derivatives=false)]\label{todo__todo000002}%
+create a custom method without the use of ROOT (attempt commented at the bottom of the file)  
+\item[Member \doxyref{Spectra\+Co\+::remove\+Background}{p.}{class_spectra_co_adbdfafcc8b0a95d520e491b0062b2e0b} (int const \&smooth, std\+::string const \&fit\+\_\+options=\char`\"{}\char`\"{}) noexcept]\label{todo__todo000005}%
+Try to adapt not to have to use root for this function 
+\item[Member \doxyref{Spectra\+Co\+::$\sim$\+Spectra\+Co}{p.}{class_spectra_co_a213631f494d8361bfa9f4115266e9af7} () noexcept]\label{todo__todo000007}%
+  
+\item[Class \doxyref{The\+TChain}{p.}{class_the_t_chain} ]\label{todo__todo000013}%
+maybe 
+\item[Member \doxyref{Timeshifts\+::verification}{p.}{class_timeshifts_abc70d7dc0c400a76d84f2c5cc30edf77} (bool const \&verif=true)]\label{todo__todo000019}%
+caption
 \end{DoxyRefList}

@@ -1,4 +1,4 @@
-.TH "MTTHist< THist >" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "MTTHist< THist >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -9,6 +9,13 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .PP
 .PP
 \fC#include <MTTHist\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBCopyError\fP"
+.br
+.in -1c
 .SS "Public Member Functions"
 
 .in +1c
@@ -16,10 +23,10 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .RI "void \fBclean\fP ()"
 .br
 .ti -1c
-.RI "bool const  & \fBexists\fP () const"
+.RI "void \fBcleanMove\fP ()"
 .br
 .ti -1c
-.RI "TFile * \fBfile\fP ()"
+.RI "bool const  & \fBexists\fP () const"
 .br
 .ti -1c
 .RI "template<class\&.\&.\&. ARGS> void \fBFill\fP (ARGS &&\&.\&.\&. args) noexcept"
@@ -31,7 +38,16 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .RI "THist * \fBGet\fP ()"
 .br
 .ti -1c
+.RI "THist * \fBget\fP () const"
+.br
+.ti -1c
 .RI "THist * \fBGet\fP (\fBushort\fP const &thread_nb)"
+.br
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> auto \fBGetBinContent\fP (ARGS &&\&.\&.\&. args) noexcept"
+.br
+.ti -1c
+.RI "std::vector< THist * > & \fBgetCollection\fP ()"
 .br
 .ti -1c
 .RI "std::vector< THist * > const  & \fBgetCollection\fP () const"
@@ -43,10 +59,11 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .RI "auto const  & \fBIntegral\fP () const"
 .br
 .ti -1c
-.RI "bool const  & \fBisWritten\fP () const"
+.RI "THist * \fBMerge\fP ()"
 .br
+.RI "Merges the histograms\&. "
 .ti -1c
-.RI "void \fBMerge\fP ()"
+.RI "THist * \fBMerge\fP () const"
 .br
 .ti -1c
 .RI "void \fBMerge_t\fP ()"
@@ -57,6 +74,7 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .ti -1c
 .RI "template<class\&.\&.\&. ARGS> \fBMTTHist\fP ()"
 .br
+.RI "Default initialisator\&. "
 .ti -1c
 .RI "template<class\&.\&.\&. ARGS> \fBMTTHist\fP (ARGS &&\&.\&.\&. args)"
 .br
@@ -70,6 +88,13 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .br
 .RI "Copy constructor\&. "
 .ti -1c
+.RI "\fBMTTHist\fP (THist *hist)"
+.br
+.RI "Wrapper around an already existing histograms\&. "
+.ti -1c
+.RI "auto & \fBmutex\fP ()"
+.br
+.ti -1c
 .RI "std::string & \fBname\fP ()"
 .br
 .ti -1c
@@ -82,7 +107,13 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .RI "THist * \fBoperator\->\fP ()"
 .br
 .ti -1c
+.RI "THist * \fBoperator\->\fP () const"
+.br
+.ti -1c
 .RI "\fBMTTHist\fP< THist > & \fBoperator=\fP (\fBMTTHist\fP< THist > const &hist)"
+.br
+.ti -1c
+.RI "void \fBoperator=\fP (THist *hist)"
 .br
 .ti -1c
 .RI "THist * \fBoperator[]\fP (int const &thread_nb)"
@@ -91,17 +122,20 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .RI "void \fBPrint\fP ()"
 .br
 .ti -1c
-.RI "std::string const  & \fBreadComment\fP (std::string const &comment) const"
+.RI "std::string const  & \fBreadComment\fP () const"
 .br
 .ti -1c
-.RI "auto \fBreset\fP (\fBMTTHist\fP< THist > const &hist)"
+.RI "\fBMTTHist\fP< THist > & \fBreset\fP (\fBMTTHist\fP< THist > const &hist)"
 .br
-.RI "Copy initializer\&. "
+.RI "Copy Initialiser\&. "
 .ti -1c
 .RI "template<class\&.\&.\&. ARGS> void \fBreset\fP (std::nullptr_t)"
 .br
 .ti -1c
 .RI "template<class\&.\&.\&. ARGS> void \fBreset\fP (std::string \fBname\fP, ARGS &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> void \fBSetBinContent\fP (ARGS &&\&.\&.\&. args) noexcept"
 .br
 .ti -1c
 .RI "void \fBsetComment\fP (std::string const &comment)"
@@ -122,11 +156,9 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .RI "std::string const  & \fBtitle\fP () const"
 .br
 .ti -1c
-.RI "void \fBWrite\fP (bool const &writeEmpty=false)"
+.RI "void \fBWrite\fP ()"
 .br
-.ti -1c
-.RI "void \fBWrite_i\fP (int const &thread_index)"
-.br
+.RI "MTTHIST_MONO\&. "
 .ti -1c
 .RI "\fB~MTTHist\fP ()"
 .br
@@ -135,20 +167,10 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 
 .in +1c
 .ti -1c
-.RI "static void \fBMerge_thread\fP (\fBMTTHist\fP< THist > &histo)"
-.br
-.ti -1c
 .RI "static bool const  & \fBverbose\fP (bool const &_verbose=true)"
 .br
 .ti -1c
 .RI "static bool & \fBverbosity\fP ()"
-.br
-.in -1c
-.SS "Public Attributes"
-
-.in +1c
-.ti -1c
-.RI "std::mutex \fBm_mutex\fP"
 .br
 .in -1c
 .SS "Private Attributes"
@@ -164,13 +186,7 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .RI "bool \fBm_exists\fP = false"
 .br
 .ti -1c
-.RI "TFile * \fBm_file\fP = nullptr"
-.br
-.ti -1c
 .RI "\fBulonglong\fP \fBm_integral\fP = 0ull"
-.br
-.ti -1c
-.RI "\fBBools\fP \fBm_is_deleted\fP"
 .br
 .ti -1c
 .RI "bool \fBm_is_merged\fP = false"
@@ -182,7 +198,13 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .RI "bool \fBm_merged_deleted\fP = false"
 .br
 .ti -1c
+.RI "std::mutex \fBm_mutex\fP"
+.br
+.ti -1c
 .RI "std::string \fBm_name\fP"
+.br
+.ti -1c
+.RI "bool \fBm_outscope\fP = false"
 .br
 .ti -1c
 .RI "std::string \fBm_title\fP"
@@ -194,12 +216,6 @@ MTTHist< THist > \- Multithreading wrapper for all THist spectra of root library
 .SS "Static Private Attributes"
 
 .in +1c
-.ti -1c
-.RI "static std::condition_variable \fBm_condition\fP"
-.br
-.ti -1c
-.RI "static \fBMTCounter\fP \fBm_nb_thread_running\fP {0}"
-.br
 .ti -1c
 .RI "static bool \fBm_verbose\fP = true"
 .br
@@ -216,26 +232,26 @@ Multithreading wrapper for all THist spectra of root library\&.
 .PP
 \fBAuthor\fP
 .RS 4
-corentin.hiver@ijclab.in2p3.fr
+corentin.hiver@free.fr
 .RE
 .PP
 Inspiration : https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167
 .PP
 \fBAttention\fP
 .RS 4
-As for any class deriving from \fBMTObject\fP, first initialize the number of threads : 
+As for any class using my multithreading, Initialise the number of threads BEFORE instantiating any object : 
 .PP
 .nf
- MTObject::Initialize(nb_threads)
+ MTObject::Initialise(nb_threads)
 
 .fi
 .PP
 .RE
 .PP
-Instantiate this class as follow : 
+Instantiation : 
 .PP
 .nf
- MTTHist<TH1F> some_TH1F_histo("name", "title:xaxis:yaxis", bins, min, max);
+ MTTHist<TH1F> some_TH1F_histo(<normal arguments for TH1F objects>);
 
 .fi
 .PP
@@ -247,14 +263,7 @@ Instantiate this class as follow :
 
 .fi
 .PP
- 
-.PP
-\fBAttention\fP
-.RS 4
-Please do not use the copy constructors and operators, may need proper work to make it safe
-.RE
-.PP
-In default mode, nb_threads histograms are created 
+ In default mode, [nb_threads] sub_histograms are created 
 .PP
 \fBTest\fP
 .RS 4
@@ -262,31 +271,35 @@ In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPPEMENT
 .RE
 .PP
 .PP
-To fill the histogram from threads : 
+To fill the histogram from within one thread : 
 .PP
 .nf
-     some_TH1F_histo.Fill()
+     some_TH1F_histo[MTObject::getThreadIndex()]->Fill(<normal arguments for TH1*::Fill()>)
 
 .fi
 .PP
- Once the histogram have been filled, two options :
+ Or in a more concise way (preferred) : 
 .PP
-.IP "\(bu" 2
+.nf
+     some_TH1F_histo.Fill(<normal arguments for TH1*::Fill()>)
+
+.fi
+.PP
+ Once the histograms have been filled, two options :
+.PP
 Either write it down directly : 
 .PP
 .nf
-  // Open a TFile
-  some_TH1F_histo.Write()
-  // Write and close the TFile
+    // Open a TFile and cd() inside
+    some_TH1F_histo.Write(); //Merges the sub_histograms then write it if it has counts
+    // Write and close the TFile
 
 .fi
 .PP
-
-.IP "\(bu" 2
-Or you can merge the histograms : 
+ Or you can merge the histograms : 
 .PP
 .nf
- some_TH1F_histo.Merge();
+   some_TH1F_histo.Merge();
 
 .fi
 .PP
@@ -294,24 +307,13 @@ Or you can merge the histograms :
 .PP
 .nf
 some_TH1F_histo->Integral();
+some_TH1F_histo->GetEntries();
+some_TH1F_histo->Write();
+...
 
 .fi
 .PP
- Special case : you can also instanciate and write down one histogram per thread\&.
-.PP
-.PP
-Example : void single_thread(MTTHist & histo) { histo\&.reset('name','title', args\&.\&.\&.); \&.\&.\&. Fill the histo histo\&.Write(); }
-.PP
-int main() { MTTHist<TH1> on_histo_per_thread; std::parallelise_function(single_thread, on_histo_per_thread); return 1; }
-.PP
-In this case each histogram is kept separated, no merge occurs\&. Use this if you want to make the benefits of the user defined method of this class or for consistency with the rest of the code\&. It is equivalent to declare the histogram directly inside the funcion
-.PP
-\fBTodo\fP
-.RS 4
-better memory management 
-.RE
-.PP
-
+ 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "template<class THist > template<class\&.\&.\&. ARGS> \fBMTTHist\fP< THist >::\fBMTTHist\fP (ARGS &&\&.\&.\&. args)\fC [inline]\fP"
@@ -320,8 +322,14 @@ better memory management
 Construct a new \fBMTTHist\fP object and send the arguments directly to the underlying root histogramm\&. 
 .SS "template<class THist > template<class\&.\&.\&. ARGS> \fBMTTHist\fP< THist >::\fBMTTHist\fP ()\fC [inline]\fP"
 
+.PP
+Default initialisator\&. 
 .SS "template<class THist > \fBMTTHist\fP< THist >::~\fBMTTHist\fP"
+MTTHIST_MONO
+.SS "template<class THist > \fBMTTHist\fP< THist >::\fBMTTHist\fP (THist * hist)\fC [inline]\fP"
 
+.PP
+Wrapper around an already existing histograms\&. 
 .SS "template<class THist > template<class\&.\&.\&. ARGS> \fBMTTHist\fP< THist >::\fBMTTHist\fP (\fBMTTHist\fP< THist > const & hist)\fC [inline]\fP"
 
 .PP
@@ -334,9 +342,9 @@ Move constructor\&.
 .PP 
 .SS "template<class THist > void \fBMTTHist\fP< THist >::clean ()\fC [inline]\fP"
 
-.SS "template<class THist > bool const& \fBMTTHist\fP< THist >::exists () const\fC [inline]\fP"
+.SS "template<class THist > void \fBMTTHist\fP< THist >::cleanMove ()\fC [inline]\fP"
 
-.SS "template<class THist > TFile* \fBMTTHist\fP< THist >::file ()\fC [inline]\fP"
+.SS "template<class THist > bool const& \fBMTTHist\fP< THist >::exists () const\fC [inline]\fP"
 
 .SS "template<class THist > template<class\&.\&.\&. ARGS> void \fBMTTHist\fP< THist >::Fill (ARGS &&\&.\&.\&. args)\fC [inline]\fP, \fC [noexcept]\fP"
 
@@ -344,7 +352,13 @@ Move constructor\&.
 
 .SS "template<class THist > THist* \fBMTTHist\fP< THist >::Get ()\fC [inline]\fP"
 
+.SS "template<class THist > THist* \fBMTTHist\fP< THist >::get () const\fC [inline]\fP"
+
 .SS "template<class THist > THist* \fBMTTHist\fP< THist >::Get (\fBushort\fP const & thread_nb)\fC [inline]\fP"
+
+.SS "template<class THist > template<class\&.\&.\&. ARGS> auto \fBMTTHist\fP< THist >::GetBinContent (ARGS &&\&.\&.\&. args)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SS "template<class THist > std::vector<THist*>& \fBMTTHist\fP< THist >::getCollection ()\fC [inline]\fP"
 
 .SS "template<class THist > std::vector<THist*> const& \fBMTTHist\fP< THist >::getCollection () const\fC [inline]\fP"
 
@@ -352,15 +366,26 @@ Move constructor\&.
 
 .SS "template<class THist > auto const& \fBMTTHist\fP< THist >::Integral () const\fC [inline]\fP"
 
-.SS "template<class THist > bool const& \fBMTTHist\fP< THist >::isWritten () const\fC [inline]\fP"
+.SS "template<class THist > THist * \fBMTTHist\fP< THist >::Merge"
 
-.SS "template<class THist > void \fBMTTHist\fP< THist >::Merge"
+.PP
+Merges the histograms\&. 
+.PP
+\fBAttention\fP
+.RS 4
+Can merge only once 
+.br
+ 
+.RE
+.PP
+
+.SS "template<class THist > THist* \fBMTTHist\fP< THist >::Merge () const\fC [inline]\fP"
 
 .SS "template<class THist > void \fBMTTHist\fP< THist >::Merge_t\fC [inline]\fP"
 
-.SS "template<class THist > void \fBMTTHist\fP< THist >::Merge_thread (\fBMTTHist\fP< THist > & histo)\fC [inline]\fP, \fC [static]\fP"
-
 .SS "template<class THist > THist * \fBMTTHist\fP< THist >::Merged"
+
+.SS "template<class THist > auto& \fBMTTHist\fP< THist >::mutex ()\fC [inline]\fP"
 
 .SS "template<class THist > std::string& \fBMTTHist\fP< THist >::name ()\fC [inline]\fP"
 
@@ -370,21 +395,27 @@ Move constructor\&.
 
 .SS "template<class THist > THist* \fBMTTHist\fP< THist >::operator\-> ()\fC [inline]\fP"
 
+.SS "template<class THist > THist* \fBMTTHist\fP< THist >::operator\-> () const\fC [inline]\fP"
+
 .SS "template<class THist > \fBMTTHist\fP<THist>& \fBMTTHist\fP< THist >::operator= (\fBMTTHist\fP< THist > const & hist)\fC [inline]\fP"
+
+.SS "template<class THist > void \fBMTTHist\fP< THist >::operator= (THist * hist)\fC [inline]\fP"
 
 .SS "template<class THist > THist* \fBMTTHist\fP< THist >::operator[] (int const & thread_nb)\fC [inline]\fP"
 
 .SS "template<class THist > void \fBMTTHist\fP< THist >::Print"
 
-.SS "template<class THist > std::string const& \fBMTTHist\fP< THist >::readComment (std::string const & comment) const\fC [inline]\fP"
+.SS "template<class THist > std::string const& \fBMTTHist\fP< THist >::readComment () const\fC [inline]\fP"
 
-.SS "template<class THist > auto \fBMTTHist\fP< THist >::reset (\fBMTTHist\fP< THist > const & hist)\fC [inline]\fP"
+.SS "template<class THist > \fBMTTHist\fP<THist>& \fBMTTHist\fP< THist >::reset (\fBMTTHist\fP< THist > const & hist)\fC [inline]\fP"
 
 .PP
-Copy initializer\&. 
+Copy Initialiser\&. 
 .SS "template<class THist > template<class\&.\&.\&. ARGS> void \fBMTTHist\fP< THist >::reset (std::nullptr_t)\fC [inline]\fP"
 
 .SS "template<class THist > template<class\&.\&.\&. ARGS> void \fBMTTHist\fP< THist >::reset (std::string name, ARGS &&\&.\&.\&. args)\fC [inline]\fP"
+
+.SS "template<class THist > template<class\&.\&.\&. ARGS> void \fBMTTHist\fP< THist >::SetBinContent (ARGS &&\&.\&.\&. args)\fC [inline]\fP, \fC [noexcept]\fP"
 
 .SS "template<class THist > void \fBMTTHist\fP< THist >::setComment (std::string const & comment)\fC [inline]\fP"
 
@@ -402,25 +433,19 @@ Copy initializer\&.
 
 .SS "template<class THist > static bool& \fBMTTHist\fP< THist >::verbosity ()\fC [inline]\fP, \fC [static]\fP"
 
-.SS "template<class THist > void \fBMTTHist\fP< THist >::Write (bool const & writeEmpty = \fCfalse\fP)"
+.SS "template<class THist > void \fBMTTHist\fP< THist >::Write"
 
-.SS "template<class THist > void \fBMTTHist\fP< THist >::Write_i (int const & thread_index)"
-
+.PP
+MTTHIST_MONO\&. 
 .SH "Member Data Documentation"
 .PP 
 .SS "template<class THist > std::vector<THist*> \fBMTTHist\fP< THist >::m_collection\fC [private]\fP"
 
 .SS "template<class THist > std::string \fBMTTHist\fP< THist >::m_comment\fC [private]\fP"
 
-.SS "template<class THist > std::condition_variable \fBMTTHist\fP< THist >::m_condition\fC [static]\fP, \fC [private]\fP"
-
 .SS "template<class THist > bool \fBMTTHist\fP< THist >::m_exists = false\fC [private]\fP"
 
-.SS "template<class THist > TFile* \fBMTTHist\fP< THist >::m_file = nullptr\fC [private]\fP"
-
 .SS "template<class THist > \fBulonglong\fP \fBMTTHist\fP< THist >::m_integral = 0ull\fC [private]\fP"
-
-.SS "template<class THist > \fBBools\fP \fBMTTHist\fP< THist >::m_is_deleted\fC [private]\fP"
 
 .SS "template<class THist > bool \fBMTTHist\fP< THist >::m_is_merged = false\fC [private]\fP"
 
@@ -428,11 +453,11 @@ Copy initializer\&.
 
 .SS "template<class THist > bool \fBMTTHist\fP< THist >::m_merged_deleted = false\fC [private]\fP"
 
-.SS "template<class THist > std::mutex \fBMTTHist\fP< THist >::m_mutex"
+.SS "template<class THist > std::mutex \fBMTTHist\fP< THist >::m_mutex\fC [private]\fP"
 
 .SS "template<class THist > std::string \fBMTTHist\fP< THist >::m_name\fC [private]\fP"
 
-.SS "template<class THist > \fBMTCounter\fP \fBMTTHist\fP< THist >::m_nb_thread_running {0}\fC [static]\fP, \fC [private]\fP"
+.SS "template<class THist > bool \fBMTTHist\fP< THist >::m_outscope = false\fC [private]\fP"
 
 .SS "template<class THist > std::string \fBMTTHist\fP< THist >::m_title\fC [private]\fP"
 

@@ -1,4 +1,4 @@
-.TH "lib/MTObjects/MTTHist.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/MTObjects/MTTHist.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,6 +15,9 @@ lib/MTObjects/MTTHist.hpp
 
 .in +1c
 .ti -1c
+.RI "class \fBMTTHist< THist >::CopyError\fP"
+.br
+.ti -1c
 .RI "class \fBMTTHist< THist >\fP"
 .br
 .RI "Multithreading wrapper for all THist spectra of root library\&. "
@@ -23,12 +26,28 @@ lib/MTObjects/MTTHist.hpp
 
 .in +1c
 .ti -1c
+.RI "template<class THist > using \fBMap_MTTHist\fP = std::unordered_map< int, \fBMTTHist\fP< THist > >"
+.br
+.ti -1c
 .RI "template<class THist > using \fBVector_MTTHist\fP = std::vector< \fBMTTHist\fP< THist > >"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<class THist > std::ostream & \fBoperator<<\fP (std::ostream &out, \fBMTTHist\fP< THist > const &histo)"
 .br
 .in -1c
 .SH "Typedef Documentation"
 .PP 
+.SS "template<class THist > using \fBMap_MTTHist\fP =  std::unordered_map<int, \fBMTTHist\fP<THist> >"
+
 .SS "template<class THist > using \fBVector_MTTHist\fP =  std::vector<\fBMTTHist\fP<THist> >"
+
+.SH "Function Documentation"
+.PP 
+.SS "template<class THist > std::ostream& operator<< (std::ostream & out, \fBMTTHist\fP< THist > const & histo)"
 
 .SH "Author"
 .PP 

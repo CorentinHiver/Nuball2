@@ -13,9 +13,9 @@ class CloverSpectra
 {
 public:
   CloverSpectra() = default;
-  CloverSpectra(int argc, char** argv) {this -> Initialize(argc, argv);}
-  void Initialize();
-  void Initialize(int argc, char** argv);
+  CloverSpectra(int argc, char** argv) {this -> Initialise(argc, argv);}
+  void Initialise();
+  void Initialise(int argc, char** argv);
   void printParameters();
 
   void loadTimeshifts(std::string const & dTfile)   {m_timeshifts.load(dTfile);}
@@ -111,7 +111,7 @@ inline void CloverSpectra::printParameters()
   print("--throw-singles        : Throw the single hits, i.e. no coincidence");
 }
 
-inline void CloverSpectra::Initialize(int argc, char** argv)
+inline void CloverSpectra::Initialise(int argc, char** argv)
 {
   if (argc<2) 
   {
@@ -137,16 +137,16 @@ inline void CloverSpectra::Initialize(int argc, char** argv)
     else {print("Unkown command", command);}
   }
 
-  this -> Initialize();
+  this -> Initialise();
 
   this -> fillHisto();
 
   if (m_writeHisto) this -> writeHisto();
 }
 
-inline void CloverSpectra::Initialize()
+inline void CloverSpectra::Initialise()
 {
-  if (m_nb_threads > 1) MTObject::Initialize(m_nb_threads);
+  if (m_nb_threads > 1) MTObject::Initialise(m_nb_threads);
   if (!m_throw_single) Builder::keepSingles();
   Clovers::timePs(true);
 

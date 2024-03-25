@@ -1,4 +1,4 @@
-<map id="CloverSpectra::Initialize" name="CloverSpectra::Initialize">
+<map id="CloverSpectra::Initialise" name="CloverSpectra::Initialise">
 <area shape="rect" id="node1" title=" " alt="" coords="5,645,183,672"/>
 <area shape="rect" id="node2" href="$class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="269,152,440,179"/>
 <area shape="rect" id="node7" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="1063,417,1115,444"/>
@@ -25,7 +25,7 @@
 <area shape="rect" id="node11" href="$class_path.html#a4e4d7d7670941e8ddc58261a4fac0916" title=" " alt="" coords="844,5,923,32"/>
 <area shape="rect" id="node14" href="$class_m_t_object.html#aaa3623d88deae3a9311aad39bfff49dc" title=" " alt="" coords="559,544,707,571"/>
 <area shape="rect" id="node15" href="$class_builder.html#a4d557d96189a42cbc0a4a0d32db45d6c" title=" " alt="" coords="556,747,711,773"/>
-<area shape="rect" id="node16" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="575,645,692,672"/>
+<area shape="rect" id="node16" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy Initialiser." alt="" coords="575,645,692,672"/>
 <area shape="rect" id="node17" href="$class_clovers.html#aa641968a47fb9db9363e89be9c29be4c" title=" " alt="" coords="571,696,695,723"/>
 <area shape="rect" id="node19" href="$class_detectors.html#a8d5c0f2d189ddda12ed3c36f13887cfd" title="Fills the lookup tables." alt="" coords="548,1253,719,1280"/>
 <area shape="rect" id="node31" href="$class_detectors.html#a3d5631f8fd2770b6b3a2a178130519ad" title="Reads the file and extracts the list of detectors." alt="" coords="561,949,706,976"/>

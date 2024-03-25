@@ -28,7 +28,7 @@ digraph "Faster2Root::convert"
   Node1 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node12 [label="MTObject::getThreadsNb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a",tooltip=" "];
   Node1 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node13 [label="MTObject::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_object.html#a0230b58b8d09067fec22fbe8a5f3db89",tooltip=" "];
+  Node13 [label="MTObject::Initialise",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_object.html#a0230b58b8d09067fec22fbe8a5f3db89",tooltip=" "];
   Node1 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node14 [label="FilesManager::nextFileName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_files_manager.html#ac4d90f9590ed90fcbbe23557ae88c892",tooltip=" "];
   Node1 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

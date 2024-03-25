@@ -26,8 +26,6 @@
 </listitem>
             <listitem><para>void <link linkend="_class_r_w_mat_1a218cbcc341e23f37e9398c038d9353e8">ReSymmetrise</link> ()</para>
 </listitem>
-            <listitem><para>template&lt;class T &gt; </para><para><link linkend="_class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b">RWMat</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; T &gt; &amp;MTRootMat)</para>
-</listitem>
             <listitem><para><link linkend="_class_r_w_mat_1ad245f6dc989a954229821900e5c17458">RWMat</link> (std::string name=&quot;test.m4b&quot;, int nchans=4096)</para>
 </listitem>
             <listitem><para><link linkend="_class_r_w_mat_1a25c4d6ab84120b88df33e44a3539988d">RWMat</link> (TH2F *RootMat)</para>
@@ -47,15 +45,15 @@
         <itemizedlist>
             <listitem><para>bool <link linkend="_class_r_w_mat_1ab4ce18606ed04d40b50ff6b8f6af6a21">deleted</link> = false</para>
 </listitem>
-            <listitem><para>double <link linkend="_class_r_w_mat_1a4208d4292b829b19a94c1d089cf7b2c5">fMaxCounts</link></para>
+            <listitem><para>double <link linkend="_class_r_w_mat_1a4208d4292b829b19a94c1d089cf7b2c5">fMaxCounts</link> = 0.0</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d">fName</link></para>
 </listitem>
-            <listitem><para>unsigned short <link linkend="_class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502">fNChannels</link></para>
+            <listitem><para>unsigned short <link linkend="_class_r_w_mat_1a078fa06934beca6a0b26e8d390b47502">fNChannels</link> = 0</para>
 </listitem>
-            <listitem><para>int ** <link linkend="_class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37">fRWMat</link></para>
+            <listitem><para>int ** <link linkend="_class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37">fRWMat</link> = nullptr</para>
 </listitem>
-            <listitem><para>double <link linkend="_class_r_w_mat_1ac474b466b02ad230cef4547e636cb6ab">fTotalCounts</link></para>
+            <listitem><para>double <link linkend="_class_r_w_mat_1ac474b466b02ad230cef4547e636cb6ab">fTotalCounts</link> = 0.0</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e">m_ok</link> = true</para>
 </listitem>
@@ -64,7 +62,7 @@
 <section>
 <title>Constructor &amp; Destructor Documentation</title>
 <anchor xml:id="_class_r_w_mat_1ad245f6dc989a954229821900e5c17458"/>    <section>
-    <title>RWMat()<computeroutput>[1/3]</computeroutput></title>
+    <title>RWMat()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>RWMat</primary><secondary>RWMat</secondary></indexterm>
 <indexterm><primary>RWMat</primary><secondary>RWMat</secondary></indexterm>
 <para><computeroutput>RWMat::RWMat (std::string name = <computeroutput>&quot;test.m4b&quot;</computeroutput>
@@ -79,7 +77,7 @@
     </informalfigure>
 </para>
     </section><anchor xml:id="_class_r_w_mat_1a25c4d6ab84120b88df33e44a3539988d"/>    <section>
-    <title>RWMat()<computeroutput>[2/3]</computeroutput></title>
+    <title>RWMat()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>RWMat</primary><secondary>RWMat</secondary></indexterm>
 <indexterm><primary>RWMat</primary><secondary>RWMat</secondary></indexterm>
 <para><computeroutput>RWMat::RWMat (TH2F * RootMat)</computeroutput></para>Here is the call graph for this function:<para>
@@ -87,19 +85,6 @@
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_w_mat_a25c4d6ab84120b88df33e44a3539988d_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_r_w_mat_1a2e77ce21675eb416b09dd3c9911be13b"/>    <section>
-    <title>RWMat()<computeroutput>[3/3]</computeroutput></title>
-<indexterm><primary>RWMat</primary><secondary>RWMat</secondary></indexterm>
-<indexterm><primary>RWMat</primary><secondary>RWMat</secondary></indexterm>
-<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>RWMat::RWMat (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; T &gt; &amp; MTRootMat)</computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_r_w_mat_a2e77ce21675eb416b09dd3c9911be13b_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -248,7 +233,7 @@ Here is the caller graph for this function:<para>
     <title>fMaxCounts</title>
 <indexterm><primary>fMaxCounts</primary><secondary>RWMat</secondary></indexterm>
 <indexterm><primary>RWMat</primary><secondary>fMaxCounts</secondary></indexterm>
-<para><computeroutput>double RWMat::fMaxCounts<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d"/>    <section>
+<para><computeroutput>double RWMat::fMaxCounts = 0.0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_w_mat_1a1f1ba15012123f1e9300198569dfc41d"/>    <section>
     <title>fName</title>
 <indexterm><primary>fName</primary><secondary>RWMat</secondary></indexterm>
 <indexterm><primary>RWMat</primary><secondary>fName</secondary></indexterm>
@@ -256,15 +241,15 @@ Here is the caller graph for this function:<para>
     <title>fNChannels</title>
 <indexterm><primary>fNChannels</primary><secondary>RWMat</secondary></indexterm>
 <indexterm><primary>RWMat</primary><secondary>fNChannels</secondary></indexterm>
-<para><computeroutput>unsigned short RWMat::fNChannels<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37"/>    <section>
+<para><computeroutput>unsigned short RWMat::fNChannels = 0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_w_mat_1aa0e60afd074b20cdd737fafcd3fced37"/>    <section>
     <title>fRWMat</title>
 <indexterm><primary>fRWMat</primary><secondary>RWMat</secondary></indexterm>
 <indexterm><primary>RWMat</primary><secondary>fRWMat</secondary></indexterm>
-<para><computeroutput>int** RWMat::fRWMat<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_w_mat_1ac474b466b02ad230cef4547e636cb6ab"/>    <section>
+<para><computeroutput>int** RWMat::fRWMat = nullptr<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_w_mat_1ac474b466b02ad230cef4547e636cb6ab"/>    <section>
     <title>fTotalCounts</title>
 <indexterm><primary>fTotalCounts</primary><secondary>RWMat</secondary></indexterm>
 <indexterm><primary>RWMat</primary><secondary>fTotalCounts</secondary></indexterm>
-<para><computeroutput>double RWMat::fTotalCounts<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e"/>    <section>
+<para><computeroutput>double RWMat::fTotalCounts = 0.0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_r_w_mat_1a0ec72e725999c7216f1a76ac7d145e9e"/>    <section>
     <title>m_ok</title>
 <indexterm><primary>m_ok</primary><secondary>RWMat</secondary></indexterm>
 <indexterm><primary>RWMat</primary><secondary>m_ok</secondary></indexterm>

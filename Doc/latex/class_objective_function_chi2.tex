@@ -1,0 +1,114 @@
+\doxysection{Objective\+Function\+Chi2 Class Reference}
+\label{class_objective_function_chi2}\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+
+
+{\ttfamily \#include $<$Spectra\+Alignator.\+hpp$>$}
+
+
+
+Inheritance diagram for Objective\+Function\+Chi2\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{class_objective_function_chi2__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Objective\+Function\+Chi2\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_objective_function_chi2__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \textbf{ evaluate} (std\+::vector$<$ double $>$ const \&coefficients) const override
+\item 
+\textbf{ Objective\+Function\+Chi2} () noexcept=default
+\item 
+\textbf{ Objective\+Function\+Chi2} (\textbf{ Spectra\+Co} $\ast$spectra\+\_\+ref, \textbf{ Spectra\+Co} $\ast$spectra\+\_\+test)
+\item 
+void \textbf{ set\+Ref} (\textbf{ Spectra\+Co} $\ast$spectra\+\_\+ref)
+\item 
+void \textbf{ set\+Test} (\textbf{ Spectra\+Co} $\ast$spectra\+\_\+test)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Spectra\+Co} $\ast$ \textbf{ m\+\_\+spectra\+\_\+ref} = nullptr
+\item 
+\textbf{ Spectra\+Co} $\ast$ \textbf{ m\+\_\+spectra\+\_\+test} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_objective_function_chi2_a0f074c2df8d48affdc0ca1daceb2de90}} 
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\doxysubsubsection{ObjectiveFunctionChi2()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Objective\+Function\+Chi2\+::\+Objective\+Function\+Chi2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\mbox{\label{class_objective_function_chi2_a78fcc3130e61fffaddfeeb76a5962eeb}} 
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\doxysubsubsection{ObjectiveFunctionChi2()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Objective\+Function\+Chi2\+::\+Objective\+Function\+Chi2 (\begin{DoxyParamCaption}\item[{\textbf{ Spectra\+Co} $\ast$}]{spectra\+\_\+ref,  }\item[{\textbf{ Spectra\+Co} $\ast$}]{spectra\+\_\+test }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_objective_function_chi2_ab9abe6ab2b65aa87d805b9866044eaed}} 
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\doxysubsubsection{evaluate()}
+{\footnotesize\ttfamily double Objective\+Function\+Chi2\+::evaluate (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ const \&}]{coefficients }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \textbf{ Objective\+Function} \doxyref{}{p.}{class_objective_function_a9eb6407e18579b7eddcffcfe55badf20}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_objective_function_chi2_ab9abe6ab2b65aa87d805b9866044eaed_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_objective_function_chi2_ae6d2c828a893d5279e40c3a3de504401}} 
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!setRef@{setRef}}
+\index{setRef@{setRef}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\doxysubsubsection{setRef()}
+{\footnotesize\ttfamily void Objective\+Function\+Chi2\+::set\+Ref (\begin{DoxyParamCaption}\item[{\textbf{ Spectra\+Co} $\ast$}]{spectra\+\_\+ref }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_objective_function_chi2_a809ad142bb8f9e81cae7094a74f53b1d}} 
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!setTest@{setTest}}
+\index{setTest@{setTest}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\doxysubsubsection{setTest()}
+{\footnotesize\ttfamily void Objective\+Function\+Chi2\+::set\+Test (\begin{DoxyParamCaption}\item[{\textbf{ Spectra\+Co} $\ast$}]{spectra\+\_\+test }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_objective_function_chi2_aae38c40346cfa2c2b0d57c595f3ad0c6}} 
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!m\_spectra\_ref@{m\_spectra\_ref}}
+\index{m\_spectra\_ref@{m\_spectra\_ref}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\doxysubsubsection{m\_spectra\_ref}
+{\footnotesize\ttfamily \textbf{ Spectra\+Co}$\ast$ Objective\+Function\+Chi2\+::m\+\_\+spectra\+\_\+ref = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_objective_function_chi2_ab7b5fe940715f2142c443c805d4e72d4}} 
+\index{ObjectiveFunctionChi2@{ObjectiveFunctionChi2}!m\_spectra\_test@{m\_spectra\_test}}
+\index{m\_spectra\_test@{m\_spectra\_test}!ObjectiveFunctionChi2@{ObjectiveFunctionChi2}}
+\doxysubsubsection{m\_spectra\_test}
+{\footnotesize\ttfamily \textbf{ Spectra\+Co}$\ast$ Objective\+Function\+Chi2\+::m\+\_\+spectra\+\_\+test = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Analyse/\textbf{ Spectra\+Alignator.\+hpp}\end{DoxyCompactItemize}

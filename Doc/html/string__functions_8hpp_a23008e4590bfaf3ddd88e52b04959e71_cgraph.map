@@ -1,0 +1,5 @@
+<map id="split" name="split">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,56,32"/>
+<area shape="rect" id="node2" href="$string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title=" " alt="" coords="104,5,171,32"/>
+<area shape="rect" id="node3" href="$string__functions_8hpp.html#a1f4138b473c708db6b901f81bba9f5f6" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39;." alt="" coords="219,5,280,32"/>
+</map>

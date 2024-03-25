@@ -15,7 +15,7 @@ public:
   CalibrationReader(){};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
-  void InitializeManip();
+  void InitialiseManip();
   static void treatFile(Parameters & p, CalibrationReader & calibrationreader);
   // void FillRaw(Event const & event);
   void FillSorted(Clovers & clovers, DSSD & dssd, Paris & paris, Event const & event);
@@ -37,7 +37,7 @@ private:
 bool CalibrationReader::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(treatFile, p, *this);
   this -> Write();
@@ -93,9 +93,9 @@ void CalibrationReader::treatFile(Parameters & p, CalibrationReader & calibratio
   } // End files loop
 }
 
-void CalibrationReader::InitializeManip()
+void CalibrationReader::InitialiseManip()
 {
-  // print("Initialize histograms");
+  // print("Initialise histograms");
 }
 
 // void CalibrationReader::FillRaw(Event const & event)

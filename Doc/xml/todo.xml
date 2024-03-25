@@ -7,14 +7,65 @@
     </briefdescription>
     <detaileddescription>
 <para><variablelist>
-<varlistentry><term>Class <ref refid="class_calibration" kindref="compound">Calibration</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000002"/><ref refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" kindref="member">Calibration::verify()</ref> DO NOT SUPPORT <ref refid="class_m_t_object" kindref="compound">MTObject</ref> !!  </para>
+<varlistentry><term>Member <ref refid="lib_root_8hpp_1a0135527c42feb1bbb8180af21ef5229e" kindref="member">AddTH1ByValue</ref>  (TH2 *histo2, TH1 *histo1, int index, bool x=true)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000012"/>doesn&apos;t work for some reason ... </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_calibrator" kindref="compound">Calibrator</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000014"/><ref refid="class_calibrator_1aad90b0e3951d4caffe11e319c7108a51" kindref="member">Calibrator::verify()</ref> DO NOT SUPPORT multithreading with <ref refid="class_m_t_object" kindref="compound">MTObject</ref> !!  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_calibrator_1a6f433f9ca2ce1406d8ca5d55fdccb696" kindref="member">Calibrator::operator bool</ref>  () const &amp;</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000015"/>  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_data_file_1a943ee036c1dc8d2a2a98a9bc5953d303" kindref="member">DataFile&lt; Index, T &gt;::vectorize</ref>  ()</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000008"/>if needed  </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_faster2_histo" kindref="compound">Faster2Histo</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000016"/> event building, timeshifts </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_faster2_histo_1a9fe030fbb75d71117cbac93c14c787f6" kindref="member">Faster2Histo::setTrigger</ref>  (TriggerHit trigger)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000017"/>UNUSED until event building is done  </para>
 </listitem>
 <varlistentry><term>Class <ref refid="class_file" kindref="compound">File</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000001"/>rethink the checkMode logic ...  </para>
+<listitem><para><anchor id="todo_1_todo000011"/>rethink the checkMode logic ...  </para>
 </listitem>
-<varlistentry><term>Class <ref refid="class_m_t_t_hist" kindref="compound">MTTHist&lt; THist &gt;</ref>  </term></varlistentry>
-<listitem><para><anchor id="todo_1_todo000003"/>better memory management </para>
+<varlistentry><term>Member <ref refid="class_hit_buffer_1a69b8f046928a8e3dc0e573dff8b4fe94" kindref="member">HitBuffer::shift</ref>  (int n)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000009"/>Make it functionnal maybe ? </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_manip" kindref="compound">Manip</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000010"/>make it better !!  </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_m_t_object" kindref="compound">MTObject</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000020"/> Trying to make this work : template&lt;class... ARGS&gt; static ret_type helper_function(MyClass &amp; myclass, ARGS... args) {return myclass.function_to_multithread(std::forward&lt;ARGS&gt;(args)...);}  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" kindref="member">MTObject::parallelise_function</ref>  (Func &amp;&amp;func, ARGS &amp;&amp;... args)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000021"/>check if I can replace Func by std::function  </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_near_line" kindref="compound">NearLine</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000018"/> </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_spectra_co_1a223f3a9be7c661c1ef700d8bfda1106f" kindref="member">SpectraCo::fill</ref>  (double const &amp;X) noexcept</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000001"/>test it  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_spectra_co_1a34ea7496185caf2178c8ba1c10876dd3" kindref="member">SpectraCo::operator*</ref>  (double const &amp;factor)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000003"/>can be optimized  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_spectra_co_1aa4225392a595ff8a0950ef67610096d0" kindref="member">SpectraCo::operator/</ref>  (double const &amp;factor)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000004"/>can be optimized  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_spectra_co_1a79c602e0c90555c37098d070863134f3" kindref="member">SpectraCo::rebin</ref>  (int const &amp;factor, bool const &amp;rebin_derivatives=false)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000002"/>create a custom method without the use of ROOT (attempt commented at the bottom of the file)  </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_spectra_co_1adbdfafcc8b0a95d520e491b0062b2e0b" kindref="member">SpectraCo::removeBackground</ref>  (int const &amp;smooth, std::string const &amp;fit_options=&quot;&quot;) noexcept</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000005"/>Try to adapt not to have to use root for this function </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_spectra_co_1a213631f494d8361bfa9f4115266e9af7" kindref="member">SpectraCo::~SpectraCo</ref>  () noexcept</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000007"/>  </para>
+</listitem>
+<varlistentry><term>Class <ref refid="class_the_t_chain" kindref="compound">TheTChain</ref>  </term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000013"/>maybe </para>
+</listitem>
+<varlistentry><term>Member <ref refid="class_timeshifts_1abc70d7dc0c400a76d84f2c5cc30edf77" kindref="member">Timeshifts::verification</ref>  (bool const &amp;verif=true)</term></varlistentry>
+<listitem><para><anchor id="todo_1_todo000019"/>caption</para>
 </listitem>
 </variablelist>
 </para>

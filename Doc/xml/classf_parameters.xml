@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="85" column="15" bodyfile="lib/Modules/Timewalk.hpp" bodystart="85" bodyend="-1"/>
+        <location file="lib/Classes/Timewalk.hpp" line="85" column="15" bodyfile="lib/Classes/Timewalk.hpp" bodystart="85" bodyend="-1"/>
         <referencedby refid="classf_parameters_1a0fec2d7f5d67a607a5a040b8c3c2e5ba" compoundref="_timewalk_8hpp" startline="80" endline="80">fParameters&lt; nb_param, T &gt;::fParameters</referencedby>
         <referencedby refid="classf_parameters_1a035a376af9f731a1a97fec7b6eb1205e" compoundref="_timewalk_8hpp" startline="82" endline="82">fParameters&lt; nb_param, T &gt;::get</referencedby>
         <referencedby refid="classf_parameters_1ae8c10c3b0eec5c7e490e6d571e9c5581" compoundref="_timewalk_8hpp" startline="83" endline="83">fParameters&lt; nb_param, T &gt;::operator std::vector&lt; T &gt;</referencedby>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="80" column="3" bodyfile="lib/Modules/Timewalk.hpp" bodystart="80" bodyend="80"/>
+        <location file="lib/Classes/Timewalk.hpp" line="80" column="3" bodyfile="lib/Classes/Timewalk.hpp" bodystart="80" bodyend="80"/>
         <references refid="classf_parameters_1a5ae05c46288020f9d73b6bf0be593227" compoundref="_timewalk_8hpp" startline="85">fParameters&lt; nb_param, T &gt;::m_parameters</references>
       </memberdef>
       <memberdef kind="function" id="classf_parameters_1a035a376af9f731a1a97fec7b6eb1205e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="82" column="6" bodyfile="lib/Modules/Timewalk.hpp" bodystart="82" bodyend="82"/>
+        <location file="lib/Classes/Timewalk.hpp" line="82" column="6" bodyfile="lib/Classes/Timewalk.hpp" bodystart="82" bodyend="82"/>
         <references refid="classf_parameters_1a5ae05c46288020f9d73b6bf0be593227" compoundref="_timewalk_8hpp" startline="85">fParameters&lt; nb_param, T &gt;::m_parameters</references>
       </memberdef>
       <memberdef kind="function" id="classf_parameters_1ae8c10c3b0eec5c7e490e6d571e9c5581" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="83" column="3" bodyfile="lib/Modules/Timewalk.hpp" bodystart="83" bodyend="83"/>
+        <location file="lib/Classes/Timewalk.hpp" line="83" column="3" bodyfile="lib/Classes/Timewalk.hpp" bodystart="83" bodyend="83"/>
         <references refid="classf_parameters_1a5ae05c46288020f9d73b6bf0be593227" compoundref="_timewalk_8hpp" startline="85">fParameters&lt; nb_param, T &gt;::m_parameters</references>
       </memberdef>
       <memberdef kind="function" id="classf_parameters_1a33d244ebfe2024343a2b1d1c2f7ef2db" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="81" column="12" bodyfile="lib/Modules/Timewalk.hpp" bodystart="81" bodyend="81"/>
+        <location file="lib/Classes/Timewalk.hpp" line="81" column="12" bodyfile="lib/Classes/Timewalk.hpp" bodystart="81" bodyend="81"/>
         <references refid="classf_parameters_1a5ae05c46288020f9d73b6bf0be593227" compoundref="_timewalk_8hpp" startline="85">fParameters&lt; nb_param, T &gt;::m_parameters</references>
       </memberdef>
       </sectiondef>
@@ -104,7 +104,7 @@
     <detaileddescription>
 <para>A wrapper around a vector of parameters </para>
     </detaileddescription>
-    <location file="lib/Modules/Timewalk.hpp" line="77" column="1" bodyfile="lib/Modules/Timewalk.hpp" bodystart="78" bodyend="86"/>
+    <location file="lib/Classes/Timewalk.hpp" line="77" column="1" bodyfile="lib/Classes/Timewalk.hpp" bodystart="78" bodyend="86"/>
     <listofallmembers>
       <member refid="classf_parameters_1a0fec2d7f5d67a607a5a040b8c3c2e5ba" prot="public" virt="non-virtual"><scope>fParameters</scope><name>fParameters</name></member>
       <member refid="classf_parameters_1a035a376af9f731a1a97fec7b6eb1205e" prot="public" virt="non-virtual"><scope>fParameters</scope><name>get</name></member>

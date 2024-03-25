@@ -1,4 +1,4 @@
-.TH "lib/vector_functions.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/vector_functions.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -7,6 +7,10 @@ lib/vector_functions.hpp
 .br
 .PP
 \fC#include 'print\&.hpp'\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <algorithm>\fP
 .br
 
 .SS "Classes"
@@ -17,41 +21,65 @@ lib/vector_functions.hpp
 .br
 .RI "An efficient container for dynamic arrays with a known and fixed maximum size\&. "
 .in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "template<class T > using \fBvector2D\fP = std::vector< std::vector< T > >"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "template<typename T > std::vector< int > \fBbubbleSort\fP (std::vector< T > const &vector)"
+.RI "template<typename T > std::vector< int > \fBbubble_sort\fP (std::vector< T > const &vector)"
+.br
+.RI "Order the vector from lower to higher value\&. "
+.ti -1c
+.RI "template<typename T > std::vector< int > & \fBbubble_sort\fP (std::vector< T > const &vector, std::vector< int > &ordered_indexes)"
+.br
+.RI "Order the vector from lower to higer value\&. "
+.ti -1c
+.RI "template<class T > void \fBfill2D\fP (\fBvector2D\fP< T > &vec2, \fBsize_t\fP const &size_x, \fBsize_t\fP const &size_y, T const &obj)"
 .br
 .ti -1c
-.RI "template<typename T > std::vector< int > \fBbubbleSort\fP (std::vector< T > const &vector, std::vector< int > &indexes)"
+.RI "template<typename T > int \fBfirst_index_in\fP (std::vector< T > &vec, T &t)"
 .br
 .ti -1c
-.RI "template<class T > void \fBfill2D\fP (std::vector< std::vector< T >> &vec2, \fBsize_t\fP const &size_x, \fBsize_t\fP const &size_y, T const &obj)"
+.RI "template<typename T > int \fBfirst_index_in\fP (std::vector< T > &vec, T const &t)"
 .br
 .ti -1c
-.RI "template<typename T > bool \fBfound\fP (std::vector< T > &vector, T &t)"
+.RI "template<typename T > int \fBfirst_index_in\fP (std::vector< T > const &vec, T &t)"
 .br
 .ti -1c
-.RI "template<typename T > bool \fBfound\fP (std::vector< T > &vector, T const &t)"
+.RI "template<typename T > int \fBfirst_index_in\fP (std::vector< T > const &vec, T const &t)"
 .br
 .ti -1c
-.RI "template<typename T > bool \fBfound\fP (std::vector< T > const &vector, T &t)"
+.RI "template<typename T > bool \fBfound\fP (std::vector< T > &vec, T &t)"
 .br
 .ti -1c
-.RI "template<typename T > bool \fBfound\fP (std::vector< T > const &vector, T const &t)"
+.RI "template<typename T > bool \fBfound\fP (std::vector< T > &vec, T const &t)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBfound\fP (std::vector< T > const &vec, T &t)"
+.br
+.ti -1c
+.RI "template<typename T > bool \fBfound\fP (std::vector< T > const &vec, T const &t)"
+.br
+.ti -1c
+.RI "template<typename T > void \fBinvert\fP (std::vector< T > &vector)"
 .br
 .ti -1c
 .RI "template<typename T > T \fBmaximum\fP (std::vector< T > const &vector)"
 .br
 .ti -1c
-.RI "template<typename T > T \fBmaximumIndex\fP (std::vector< T > const &vector)"
+.RI "template<typename T > T \fBmaximum_index\fP (std::vector< T > const &vector)"
 .br
 .ti -1c
 .RI "template<typename T > T \fBminimum\fP (std::vector< T > const &vector)"
 .br
 .ti -1c
-.RI "template<typename T > T \fBminimumIndex\fP (std::vector< T > const &vector)"
+.RI "template<typename T > T \fBminimum_index\fP (std::vector< T > const &vector)"
 .br
 .ti -1c
 .RI "template<class T > std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBStaticVector\fP< T > const &vector)"
@@ -63,32 +91,66 @@ lib/vector_functions.hpp
 .RI "template<class T > std::istringstream & \fBoperator>>\fP (std::istringstream &is, std::vector< T > &v)"
 .br
 .ti -1c
+.RI "template<class T > std::vector< T > \fBpush_back\fP (std::vector< T > const &target, std::vector< T > const &source)"
+.br
+.ti -1c
+.RI "template<class T > std::vector< T > \fBpush_back\fP (std::vector< T > const &target, T const &value)"
+.br
+.ti -1c
 .RI "template<typename T > bool \fBpush_back_unique\fP (std::vector< T > &vector, T const &t)"
 .br
+.ti -1c
+.RI "template<class T > auto \fBsub_vec\fP (std::vector< T > const &vec, int const &start, int const &length)"
+.br
+.RI "Returns the vector in the range [start, start+length[\&. "
+.ti -1c
+.RI "template<class T > T \fBsum\fP (std::vector< T > const &source)"
+.br
+.ti -1c
+.RI "template<class K , class V > void \fBunpack\fP (std::vector< std::pair< K, V >> const &pairs, std::vector< K > &keys, std::vector< V > &values)"
+.br
 .in -1c
+.SH "Typedef Documentation"
+.PP 
+.SS "template<class T > using \fBvector2D\fP =  std::vector<std::vector<T> >"
+
 .SH "Function Documentation"
 .PP 
-.SS "template<typename T > std::vector<int> bubbleSort (std::vector< T > const & vector)"
+.SS "template<typename T > std::vector<int> bubble_sort (std::vector< T > const & vector)"
 
-.SS "template<typename T > std::vector<int> bubbleSort (std::vector< T > const & vector, std::vector< int > & indexes)"
+.PP
+Order the vector from lower to higher value\&. 
+.SS "template<typename T > std::vector<int>& bubble_sort (std::vector< T > const & vector, std::vector< int > & ordered_indexes)"
 
-.SS "template<class T > void fill2D (std::vector< std::vector< T >> & vec2, \fBsize_t\fP const & size_x, \fBsize_t\fP const & size_y, T const & obj)"
+.PP
+Order the vector from lower to higer value\&. 
+.SS "template<class T > void fill2D (\fBvector2D\fP< T > & vec2, \fBsize_t\fP const & size_x, \fBsize_t\fP const & size_y, T const & obj)"
 
-.SS "template<typename T > bool found (std::vector< T > & vector, T & t)"
+.SS "template<typename T > int first_index_in (std::vector< T > & vec, T & t)"
 
-.SS "template<typename T > bool found (std::vector< T > & vector, T const & t)"
+.SS "template<typename T > int first_index_in (std::vector< T > & vec, T const & t)"
 
-.SS "template<typename T > bool found (std::vector< T > const & vector, T & t)"
+.SS "template<typename T > int first_index_in (std::vector< T > const & vec, T & t)"
 
-.SS "template<typename T > bool found (std::vector< T > const & vector, T const & t)"
+.SS "template<typename T > int first_index_in (std::vector< T > const & vec, T const & t)"
+
+.SS "template<typename T > bool found (std::vector< T > & vec, T & t)"
+
+.SS "template<typename T > bool found (std::vector< T > & vec, T const & t)"
+
+.SS "template<typename T > bool found (std::vector< T > const & vec, T & t)"
+
+.SS "template<typename T > bool found (std::vector< T > const & vec, T const & t)"
+
+.SS "template<typename T > void invert (std::vector< T > & vector)"
 
 .SS "template<typename T > T maximum (std::vector< T > const & vector)"
 
-.SS "template<typename T > T maximumIndex (std::vector< T > const & vector)"
+.SS "template<typename T > T maximum_index (std::vector< T > const & vector)"
 
 .SS "template<typename T > T minimum (std::vector< T > const & vector)"
 
-.SS "template<typename T > T minimumIndex (std::vector< T > const & vector)"
+.SS "template<typename T > T minimum_index (std::vector< T > const & vector)"
 
 .SS "template<class T > std::ostream& operator<< (std::ostream & cout, \fBStaticVector\fP< T > const & vector)"
 
@@ -96,7 +158,19 @@ lib/vector_functions.hpp
 
 .SS "template<class T > std::istringstream& operator>> (std::istringstream & is, std::vector< T > & v)"
 
+.SS "template<class T > std::vector<T> push_back (std::vector< T > const & target, std::vector< T > const & source)"
+
+.SS "template<class T > std::vector<T> push_back (std::vector< T > const & target, T const & value)"
+
 .SS "template<typename T > bool push_back_unique (std::vector< T > & vector, T const & t)"
+
+.SS "template<class T > auto sub_vec (std::vector< T > const & vec, int const & start, int const & length)"
+
+.PP
+Returns the vector in the range [start, start+length[\&. E\&.g\&. vec = {1,2,3,4,5} ; sub_vec(vec, 1, 3) -> {2, 3, 4}; 
+.SS "template<class T > T sum (std::vector< T > const & source)"
+
+.SS "template<class K , class V > void unpack (std::vector< std::pair< K, V >> const & pairs, std::vector< K > & keys, std::vector< V > & values)"
 
 .SH "Author"
 .PP 

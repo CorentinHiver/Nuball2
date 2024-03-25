@@ -1,58 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
-  <compounddef id="struct_minimisator_1_1_nelder_mead_parameters" kind="struct" language="C++" prot="private">
+  <compounddef id="struct_minimisator_1_1_nelder_mead_parameters" kind="struct" language="C++" prot="public">
     <compoundname>Minimisator::NelderMeadParameters</compoundname>
+    <includes refid="_spectra_alignator_8hpp" local="no">SpectraAlignator.hpp</includes>
       <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1ad572ad763d40de2c3ef34e50bf71177d" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1a0b2013a431620391c58cf8eab841d9f7" prot="public" static="no" mutable="no">
         <type>double</type>
-        <definition>double Minimisator::NelderMeadParameters::alpha</definition>
+        <definition>double Minimisator::NelderMeadParameters::a_contract</definition>
         <argsstring></argsstring>
-        <name>alpha</name>
-        <initializer>= 1</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="788" column="12" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="788" bodyend="-1"/>
-        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">Minimisator::minimise</referencedby>
-      </memberdef>
-      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1aeec9715878231abdfbea7a5a6801bf1e" prot="public" static="no" mutable="no">
-        <type>double</type>
-        <definition>double Minimisator::NelderMeadParameters::beta</definition>
-        <argsstring></argsstring>
-        <name>beta</name>
-        <initializer>= 2</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="789" column="12" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="789" bodyend="-1"/>
-        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">Minimisator::minimise</referencedby>
-      </memberdef>
-      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1ae4f64377f468e22558d8bd6fee8bad24" prot="public" static="no" mutable="no">
-        <type>double</type>
-        <definition>double Minimisator::NelderMeadParameters::delta</definition>
-        <argsstring></argsstring>
-        <name>delta</name>
-        <initializer>= 0.8</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="791" column="12" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="791" bodyend="-1"/>
-        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">Minimisator::minimise</referencedby>
-      </memberdef>
-      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1a605647638f96b3aaaec933e3b741c392" prot="public" static="no" mutable="no">
-        <type>double</type>
-        <definition>double Minimisator::NelderMeadParameters::gamma</definition>
-        <argsstring></argsstring>
-        <name>gamma</name>
+        <name>a_contract</name>
         <initializer>= 0.5</initializer>
         <briefdescription>
         </briefdescription>
@@ -60,20 +16,127 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="790" column="12" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="790" bodyend="-1"/>
-        <referencedby refid="class_minimisator_1a4146b62ab538a9c36f9a93855bee198a" compoundref="_spectra_alignator_8hpp" startline="656" endline="762">Minimisator::minimise</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="454" column="12" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="454" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1a1a69b4f78d62114054549adbf013c280" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::NelderMeadParameters::a_expand</definition>
+        <argsstring></argsstring>
+        <name>a_expand</name>
+        <initializer>= 1.3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="456" column="12" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="456" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1ab4e42f52d8bc30c6c5b429bd9d591106" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::NelderMeadParameters::a_extend</definition>
+        <argsstring></argsstring>
+        <name>a_extend</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="453" column="12" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="453" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1af0470094a30fdde0d4a943137a130585" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::NelderMeadParameters::a_reflect</definition>
+        <argsstring></argsstring>
+        <name>a_reflect</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="452" column="12" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="452" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1a976cc25210f4b060efd991e53b3fb1e5" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Minimisator::NelderMeadParameters::a_shrink</definition>
+        <argsstring></argsstring>
+        <name>a_shrink</name>
+        <initializer>= 0.5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="455" column="12" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="455" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_minimisator_1_1_nelder_mead_parameters_1a417843cc722a10d40f1b8aa88310eddc" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Minimisator::NelderMeadParameters::adjusted</definition>
+        <argsstring></argsstring>
+        <name>adjusted</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="457" column="10" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="457" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_minimisator_1_1_nelder_mead_parameters_1aa2ff65f63bdee40f4cbc28ebd3b58515" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::NelderMeadParameters::adjustToDimension</definition>
+        <argsstring>(double const &amp;n)</argsstring>
+        <name>adjustToDimension</name>
+        <param>
+          <type>double const &amp;</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="436" column="10" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="436" bodyend="444"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+      </memberdef>
+      <memberdef kind="function" id="struct_minimisator_1_1_nelder_mead_parameters_1a9cd5948b40f44ce5783e5e61683834f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Minimisator::NelderMeadParameters::Print</definition>
+        <argsstring>()</argsstring>
+        <name>Print</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="446" column="10" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="446" bodyend="450"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="lib/Classes/SpectraAlignator.hpp" line="786" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="787" bodyend="792"/>
+    <location file="lib/Analyse/SpectraAlignator.hpp" line="434" column="3" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="435" bodyend="458"/>
     <listofallmembers>
-      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1ad572ad763d40de2c3ef34e50bf71177d" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>alpha</name></member>
-      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1aeec9715878231abdfbea7a5a6801bf1e" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>beta</name></member>
-      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1ae4f64377f468e22558d8bd6fee8bad24" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>delta</name></member>
-      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1a605647638f96b3aaaec933e3b741c392" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>gamma</name></member>
+      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1a0b2013a431620391c58cf8eab841d9f7" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>a_contract</name></member>
+      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1a1a69b4f78d62114054549adbf013c280" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>a_expand</name></member>
+      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1ab4e42f52d8bc30c6c5b429bd9d591106" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>a_extend</name></member>
+      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1af0470094a30fdde0d4a943137a130585" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>a_reflect</name></member>
+      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1a976cc25210f4b060efd991e53b3fb1e5" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>a_shrink</name></member>
+      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1a417843cc722a10d40f1b8aa88310eddc" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>adjusted</name></member>
+      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1aa2ff65f63bdee40f4cbc28ebd3b58515" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>adjustToDimension</name></member>
+      <member refid="struct_minimisator_1_1_nelder_mead_parameters_1a9cd5948b40f44ce5783e5e61683834f3" prot="public" virt="non-virtual"><scope>Minimisator::NelderMeadParameters</scope><name>Print</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -1,0 +1,750 @@
+\doxysection{Data\+File$<$ Index, T $>$ Class Template Reference}
+\label{class_data_file}\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+
+
+NOT FUNCTIONNAL !!! This is a homemade .data reader.  
+
+
+
+
+{\ttfamily \#include $<$Data\+File.\+hpp$>$}
+
+
+
+Collaboration diagram for Data\+File$<$ Index, T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{class_data_file__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ check\+Outputfile} (std\+::ofstream \&outputfile)
+\item 
+\textbf{ Data\+Points} \textbf{ column} ()
+\begin{DoxyCompactList}\small\item\em Returns the given column. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class COL $>$ }\\\textbf{ Data\+Points} \textbf{ column} (COL \&\&columns)
+\begin{DoxyCompactList}\small\item\em Returns the given column. \end{DoxyCompactList}\item 
+auto \& \textbf{ data} ()
+\item 
+auto const  \& \textbf{ data} () const
+\item 
+\textbf{ Data\+File} ()=default
+\item 
+\textbf{ Data\+File} (std\+::string const \&filename, bool const \&has\+\_\+header=true)
+\item 
+auto const  \& \textbf{ indexes} () const
+\item 
+void \textbf{ load} (std\+::string const \&filename, bool const \&has\+\_\+header=true)
+\item 
+\textbf{ operator bool} () const
+\item 
+T \& \textbf{ operator[$\,$]} (T t)
+\item 
+T const  \& \textbf{ operator[$\,$]} (T t) const
+\item 
+{\footnotesize template$<$class T2 $>$ }\\void \textbf{ read\+Column} (std\+::map$<$ Index, T2 $>$ \&map)
+\item 
+{\footnotesize template$<$class T2 , class COL $>$ }\\void \textbf{ read\+Column} (std\+::map$<$ Index, T2 $>$ \&map, COL \&\&\textbf{ column})
+\item 
+{\footnotesize template$<$class T2 $>$ }\\void \textbf{ read\+Column} (std\+::vector$<$ T2 $>$ \&vector)
+\item 
+{\footnotesize template$<$class T2 , class COL $>$ }\\void \textbf{ read\+Column} (std\+::vector$<$ T2 $>$ \&vector, COL \&\&\textbf{ column})
+\item 
+void \textbf{ set\+Column} (int const \&choice)
+\begin{DoxyCompactList}\small\item\em Setup the reading to the wanted column. \end{DoxyCompactList}\item 
+void \textbf{ set\+Column} (std\+::string const \&\textbf{ column})
+\begin{DoxyCompactList}\small\item\em Setup the reading to the wanted column. \end{DoxyCompactList}\item 
+void \textbf{ set\+Columns} (std\+::vector$<$ int $>$ columns)
+\begin{DoxyCompactList}\small\item\em A vector containing the list of the column index to read. By default, reads only the first lines. \end{DoxyCompactList}\item 
+void \textbf{ set\+Header} (\textbf{ Data\+Line} const \&header)
+\item 
+auto \& \textbf{ size} ()
+\item 
+auto const  \& \textbf{ size} () const
+\item 
+bool \textbf{ vectorize} ()
+\item 
+void \textbf{ write} (std\+::string const \&filename)
+\item 
+void \textbf{ write\+Data} (std\+::ofstream \&outputfile)
+\item 
+void \textbf{ write\+Header} (std\+::ofstream \&outputfile)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ check\+Inputfile} (std\+::ifstream \&inputfile)
+\item 
+void \textbf{ load\+Data} (std\+::ifstream \&inputfile)
+\item 
+void \textbf{ load\+Header} (std\+::ifstream \&inputfile)
+\item 
+void \textbf{ setup\+Containers} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ m\+\_\+all\+\_\+column\+\_\+name\+\_\+casted} = false
+\item 
+int \textbf{ m\+\_\+chosen\+\_\+column} = 0
+\item 
+\textbf{ Bools} \textbf{ m\+\_\+column\+\_\+name\+\_\+casted}
+\item 
+std\+::vector$<$ int $>$ \textbf{ m\+\_\+columns\+\_\+to\+\_\+read} = \{1\}
+\item 
+std\+::map$<$ Index, \textbf{ Data\+Points} $>$ \textbf{ m\+\_\+data}
+\item 
+\textbf{ Data\+Points} \textbf{ m\+\_\+data\+\_\+points}
+\item 
+std\+::vector$<$ \textbf{ Data\+Points} $>$ \textbf{ m\+\_\+data\+\_\+vector}
+\item 
+char \textbf{ m\+\_\+delim} = \textquotesingle{} \textquotesingle{}
+\item 
+bool \textbf{ m\+\_\+has\+\_\+header} = true
+\item 
+\textbf{ Data\+Line} \textbf{ m\+\_\+header}
+\item 
+\textbf{ Indexes} \textbf{ m\+\_\+indexes}
+\item 
+std\+::string \textbf{ m\+\_\+input\+\_\+filename}
+\item 
+int \textbf{ m\+\_\+label\+\_\+index} = 0
+\item 
+\textbf{ Strings} \textbf{ m\+\_\+labels\+\_\+column}
+\item 
+\textbf{ Data\+Line} \textbf{ m\+\_\+labels\+\_\+rows}
+\item 
+int \textbf{ m\+\_\+nb\+\_\+columns} = 1
+\item 
+bool \textbf{ m\+\_\+ok} = true
+\item 
+std\+::string \textbf{ m\+\_\+output\+\_\+filename}
+\item 
+std\+::string \textbf{ m\+\_\+reader}
+\item 
+int \textbf{ m\+\_\+size} = 1
+\item 
+bool \textbf{ m\+\_\+warning\+\_\+is\+\_\+error} = true
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ Data\+Points} = std\+::vector$<$ T $>$
+\item 
+using \textbf{ Indexes} = std\+::vector$<$ Index $>$
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Index, class T$>$\newline
+class Data\+File$<$ Index, T $>$}
+
+NOT FUNCTIONNAL !!! This is a homemade .data reader. 
+
+This is a quite strict format \+:
+
+index value1 value2 value3 // The header is one line only, holding the name of each column 10001 235321 2365 235321 // Each column is separated by the same separator ... end
+
+Let\textquotesingle{}s look at an example first \+:
+
+Imagine we want to store the temperature in two different rooms. The index line will hold the time. The first column holds the values of the first room and same for the second column. Here is how it would look like \+:
+
+minutes room1 room2 0 22.\+5 21.\+5 1 22.\+3 21.\+3 2 22.\+4 21.\+4 3 22.\+2 21.\+2 4 22.\+3 21.\+3 5 22.\+4 21.\+4
+
+Possible optimisation \+:
+
+You can \#define Unordered\+Data\+File to have an unordered\+\_\+map holding the data 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\label{class_data_file_a2484810cfdfddf382f6e7cc539fa26ee}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!DataPoints@{DataPoints}}
+\index{DataPoints@{DataPoints}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{DataPoints}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+using \textbf{ Data\+File}$<$ Index, T $>$\+::\textbf{ Data\+Points} =  std\+::vector$<$T$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_data_file_a0d84d9e8ed9d0da9118ece6250e80ec1}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!Indexes@{Indexes}}
+\index{Indexes@{Indexes}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{Indexes}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+using \textbf{ Data\+File}$<$ Index, T $>$\+::\textbf{ Indexes} =  std\+::vector$<$Index$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_data_file_afb388fd7a0b151fa6e8edb8a2c35ca53}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!DataFile@{DataFile}}
+\index{DataFile@{DataFile}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{DataFile()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Data\+File}$<$ Index, T $>$\+::\textbf{ Data\+File} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\label{class_data_file_a1a6fb21dceaa1670086d62be142a45b0}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!DataFile@{DataFile}}
+\index{DataFile@{DataFile}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{DataFile()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Data\+File}$<$ Index, T $>$\+::\textbf{ Data\+File} (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{bool const \&}]{has\+\_\+header = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{class_data_file_a1a6fb21dceaa1670086d62be142a45b0_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_data_file_a8acfde896e9216daa785bc16752ef73e}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!checkInputfile@{checkInputfile}}
+\index{checkInputfile@{checkInputfile}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{checkInputfile()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::check\+Inputfile (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{inputfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{class_data_file_a8acfde896e9216daa785bc16752ef73e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_aaffaf1e2df21446c06f7647c925822be}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!checkOutputfile@{checkOutputfile}}
+\index{checkOutputfile@{checkOutputfile}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{checkOutputfile()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::check\+Outputfile (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outputfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{class_data_file_aaffaf1e2df21446c06f7647c925822be_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_aa7924fc31df5257c572a05d5a5d6a795}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!column@{column}}
+\index{column@{column}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{column()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Data\+Points} \textbf{ Data\+File}$<$ Index, T $>$\+::column (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the given column. 
+
+\begin{DoxyAttention}{Attention}
+This involves a copy of the data !! 
+\end{DoxyAttention}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{class_data_file_aa7924fc31df5257c572a05d5a5d6a795_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{class_data_file_aa7924fc31df5257c572a05d5a5d6a795_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a3fa00fffe402fcc0f77407338fdfa9f8}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!column@{column}}
+\index{column@{column}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{column()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+template$<$class COL $>$ \\
+\textbf{ Data\+Points} \textbf{ Data\+File}$<$ Index, T $>$\+::column (\begin{DoxyParamCaption}\item[{COL \&\&}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the given column. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em COL} & Either std\+::string (name of the column), or int (the column index) \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyAttention}{Attention}
+This involves a copy of the data !! 
+\end{DoxyAttention}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_a3fa00fffe402fcc0f77407338fdfa9f8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a3ad42806aff244755a2ad7ca1fe50a37}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!data@{data}}
+\index{data@{data}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{data()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+auto\& \textbf{ Data\+File}$<$ Index, T $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_ae7b9f0825c34316b883837d063c0de09}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!data@{data}}
+\index{data@{data}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{data()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+auto const\& \textbf{ Data\+File}$<$ Index, T $>$\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{class_data_file_ae7b9f0825c34316b883837d063c0de09_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_affed9dbc6759035d5e3b087b466b3413}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!indexes@{indexes}}
+\index{indexes@{indexes}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{indexes()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+auto const\& \textbf{ Data\+File}$<$ Index, T $>$\+::indexes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_affed9dbc6759035d5e3b087b466b3413_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_ae9748d2772e7a11da4b9f81da89d70b3}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!load@{load}}
+\index{load@{load}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{load()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::load (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{bool const \&}]{has\+\_\+header = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_ae9748d2772e7a11da4b9f81da89d70b3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a6bfb54890d3d1e60dd5104496b00eecf}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!loadData@{loadData}}
+\index{loadData@{loadData}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{loadData()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::load\+Data (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{inputfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{class_data_file_a6bfb54890d3d1e60dd5104496b00eecf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a10063674628cade1720c93ee93faca31}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!loadHeader@{loadHeader}}
+\index{loadHeader@{loadHeader}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{loadHeader()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::load\+Header (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{inputfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{class_data_file_a10063674628cade1720c93ee93faca31_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a2f42ba45453da1c72b8c60d1add57c1a}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{operator bool()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Data\+File}$<$ Index, T $>$\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_a1fb2113e19a01c149f40c3304c676225}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+T\& \textbf{ Data\+File}$<$ Index, T $>$\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{T}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_ab5c38f4fcd6ec5a6e1eb2d1949d3ba9e}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+T const\& \textbf{ Data\+File}$<$ Index, T $>$\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{T}]{t }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_aa8ea777558f19e09c911f9f387d08201}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!readColumn@{readColumn}}
+\index{readColumn@{readColumn}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{readColumn()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+template$<$class T2 $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::read\+Column (\begin{DoxyParamCaption}\item[{std\+::map$<$ Index, T2 $>$ \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_a5693057972b3ec730173b1d200d5d8b2}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!readColumn@{readColumn}}
+\index{readColumn@{readColumn}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{readColumn()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+template$<$class T2 , class COL $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::read\+Column (\begin{DoxyParamCaption}\item[{std\+::map$<$ Index, T2 $>$ \&}]{map,  }\item[{COL \&\&}]{column }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em COL} & Either std\+::string (name of the column), or int (the column index) \\
+\hline
+\end{DoxyTemplParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_a5693057972b3ec730173b1d200d5d8b2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a384d0b3098646b77e219189fc8dccd00}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!readColumn@{readColumn}}
+\index{readColumn@{readColumn}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{readColumn()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+template$<$class T2 $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::read\+Column (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T2 $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_a384d0b3098646b77e219189fc8dccd00_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_acff7815d10848fb38ab6eecc86270ddb}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!readColumn@{readColumn}}
+\index{readColumn@{readColumn}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{readColumn()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+template$<$class T2 , class COL $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::read\+Column (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T2 $>$ \&}]{vector,  }\item[{COL \&\&}]{column }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em COL} & Either std\+::string (name of the column), or int (the column index) \\
+\hline
+\end{DoxyTemplParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_acff7815d10848fb38ab6eecc86270ddb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_aa8591eee73f290dcb9cda4ddf90812bc}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!setColumn@{setColumn}}
+\index{setColumn@{setColumn}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{setColumn()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::set\+Column (\begin{DoxyParamCaption}\item[{int const \&}]{choice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setup the reading to the wanted column. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_aa8591eee73f290dcb9cda4ddf90812bc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a20ccbf2ff940a527452b137a07ff1010}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!setColumn@{setColumn}}
+\index{setColumn@{setColumn}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{setColumn()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::set\+Column (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{column }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setup the reading to the wanted column. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_a20ccbf2ff940a527452b137a07ff1010_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a3acd72939856b7bad0829293ffaf157f}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!setColumns@{setColumns}}
+\index{setColumns@{setColumns}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{setColumns()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::set\+Columns (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$}]{columns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+A vector containing the list of the column index to read. By default, reads only the first lines. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{class_data_file_a3acd72939856b7bad0829293ffaf157f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_afac349d6db7005f3ca36802b0d4fbd96}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!setHeader@{setHeader}}
+\index{setHeader@{setHeader}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{setHeader()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::set\+Header (\begin{DoxyParamCaption}\item[{\textbf{ Data\+Line} const \&}]{header }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_a56b3abb736d7dc38f9d21e1d66e0e678}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!setupContainers@{setupContainers}}
+\index{setupContainers@{setupContainers}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{setupContainers()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::setup\+Containers\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_data_file_a56b3abb736d7dc38f9d21e1d66e0e678_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_aaffaf487bee97fdccc84054f226a94c3}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!size@{size}}
+\index{size@{size}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{size()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+auto\& \textbf{ Data\+File}$<$ Index, T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_a3ab1b817133b14eb348319d7959d360d}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!size@{size}}
+\index{size@{size}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{size()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+auto const\& \textbf{ Data\+File}$<$ Index, T $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_data_file_a943ee036c1dc8d2a2a98a9bc5953d303}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!vectorize@{vectorize}}
+\index{vectorize@{vectorize}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{vectorize()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+bool \textbf{ Data\+File}$<$ Index, T $>$\+::vectorize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]if needed \end{DoxyRefDesc}
+\begin{DoxyReturn}{Returns}
+true if the vectorisation is successfull 
+\end{DoxyReturn}
+\mbox{\label{class_data_file_a9375b98cbf03fcc253e35da2b57cbd5d}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!write@{write}}
+\index{write@{write}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{write()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+\mbox{\label{class_data_file_ad345f346a5757caa2eeb40e14af39460}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!writeData@{writeData}}
+\index{writeData@{writeData}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{writeData()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::write\+Data (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outputfile }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{class_data_file_ad345f346a5757caa2eeb40e14af39460_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_data_file_a33d335be9b04c7014555993718c5fda3}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!writeHeader@{writeHeader}}
+\index{writeHeader@{writeHeader}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{writeHeader()}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+void \textbf{ Data\+File}$<$ Index, T $>$\+::write\+Header (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{outputfile }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_data_file_a4d414d0f4fc92becb2f475a80e56a57f}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_all\_column\_name\_casted@{m\_all\_column\_name\_casted}}
+\index{m\_all\_column\_name\_casted@{m\_all\_column\_name\_casted}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_all\_column\_name\_casted}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+bool \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+all\+\_\+column\+\_\+name\+\_\+casted = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a595bdc44926515b9f30bd332222e6eeb}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_chosen\_column@{m\_chosen\_column}}
+\index{m\_chosen\_column@{m\_chosen\_column}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_chosen\_column}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+int \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+chosen\+\_\+column = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a70de36522aa7d2b770f08e01463d0a9f}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_column\_name\_casted@{m\_column\_name\_casted}}
+\index{m\_column\_name\_casted@{m\_column\_name\_casted}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_column\_name\_casted}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Bools} \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+column\+\_\+name\+\_\+casted\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_aa5fa5d835eef5c509713f74b564cc552}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_columns\_to\_read@{m\_columns\_to\_read}}
+\index{m\_columns\_to\_read@{m\_columns\_to\_read}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_columns\_to\_read}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+std\+::vector$<$int$>$ \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+columns\+\_\+to\+\_\+read = \{1\}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a2611c3a759ee2902c8d05b1b166012d4}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_data@{m\_data}}
+\index{m\_data@{m\_data}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_data}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+std\+::map$<$Index, \textbf{ Data\+Points}$>$ \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+data\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a676faa65afd02b104f3eb0a3d2e653f2}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_data\_points@{m\_data\_points}}
+\index{m\_data\_points@{m\_data\_points}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_data\_points}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Data\+Points} \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+data\+\_\+points\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_ac07aa5725aefa63f837e4a7f7005f623}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_data\_vector@{m\_data\_vector}}
+\index{m\_data\_vector@{m\_data\_vector}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_data\_vector}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+std\+::vector$<$\textbf{ Data\+Points}$>$ \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+data\+\_\+vector\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a1984aaa46019a7aeeaf07f61da0cf130}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_delim@{m\_delim}}
+\index{m\_delim@{m\_delim}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_delim}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+char \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+delim = \textquotesingle{} \textquotesingle{}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_ae6e9b136e3c6dc436b012fed6961e103}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_has\_header@{m\_has\_header}}
+\index{m\_has\_header@{m\_has\_header}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_has\_header}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+bool \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+has\+\_\+header = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a0c032bb1b236276d4bfc5c4d3e74ca0d}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_header@{m\_header}}
+\index{m\_header@{m\_header}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_header}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Data\+Line} \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+header\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_ab339991e70846dfd4bf65be2534e45c1}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_indexes@{m\_indexes}}
+\index{m\_indexes@{m\_indexes}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_indexes}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Indexes} \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+indexes\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a5bac1ee6087bcd1c427a41ae149c10f3}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_input\_filename@{m\_input\_filename}}
+\index{m\_input\_filename@{m\_input\_filename}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_input\_filename}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+std\+::string \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+input\+\_\+filename\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_af3c9d0a54a0f9e7efd9fe94ce945007c}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_label\_index@{m\_label\_index}}
+\index{m\_label\_index@{m\_label\_index}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_label\_index}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+int \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+label\+\_\+index = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_ac4ca4c0767acf308e2b06ab89b340c5c}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_labels\_column@{m\_labels\_column}}
+\index{m\_labels\_column@{m\_labels\_column}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_labels\_column}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Strings} \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+labels\+\_\+column\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a7234085692baf3c4c33cced506b77d9e}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_labels\_rows@{m\_labels\_rows}}
+\index{m\_labels\_rows@{m\_labels\_rows}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_labels\_rows}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+\textbf{ Data\+Line} \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+labels\+\_\+rows\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_ad499801b7733c896c4ed3212ece9f48b}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_nb\_columns@{m\_nb\_columns}}
+\index{m\_nb\_columns@{m\_nb\_columns}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_nb\_columns}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+int \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+nb\+\_\+columns = 1\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a9d671120b9a31228a3eb4ef318c3de47}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_ok@{m\_ok}}
+\index{m\_ok@{m\_ok}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_ok}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+bool \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+ok = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a49e86af7ac13c5325a0ace3c0a4fd6cf}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_output\_filename@{m\_output\_filename}}
+\index{m\_output\_filename@{m\_output\_filename}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_output\_filename}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+std\+::string \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+output\+\_\+filename\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a489605b761bf235b58c58aabf6ac3e2b}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_reader@{m\_reader}}
+\index{m\_reader@{m\_reader}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_reader}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+std\+::string \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+reader\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a3bda8df19c2825e6066f643a4cea25c2}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_size@{m\_size}}
+\index{m\_size@{m\_size}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_size}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+int \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+size = 1\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_data_file_a013613e672fc52c80b933ef0635c83e6}} 
+\index{DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}!m\_warning\_is\_error@{m\_warning\_is\_error}}
+\index{m\_warning\_is\_error@{m\_warning\_is\_error}!DataFile$<$ Index, T $>$@{DataFile$<$ Index, T $>$}}
+\doxysubsubsection{m\_warning\_is\_error}
+{\footnotesize\ttfamily template$<$class Index , class T $>$ \\
+bool \textbf{ Data\+File}$<$ Index, T $>$\+::m\+\_\+warning\+\_\+is\+\_\+error = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Data\+File.\+hpp}\end{DoxyCompactItemize}

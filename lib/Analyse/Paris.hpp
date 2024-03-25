@@ -42,7 +42,7 @@ public:
   static std::array<uchar, 1000> index  ; // Link the label to the module's index in the cluster
 
   // ---- Initialization of static arrays ---- //
-  void static InitializeArrays()
+  void static InitialiseArrays()
   {
     if (!s_initialised)
     {
@@ -63,8 +63,8 @@ public:
 
   // _____________________________________________________________ //
   // -----------------------  Paris Class  ----------------------- //
-  Paris(){this -> InitializeArrays();}
-  void Initialize();
+  Paris(){this -> InitialiseArrays();}
+  void Initialise();
   void Fill(Event const & event, size_t const & i);
   void Reset();
   void Analyse();
@@ -102,12 +102,12 @@ std::array<bool,  1000> Paris::is;     // Does the label correspond to a Paris ?
 std::array<uchar, 1000> Paris::cluster;// Link the label to its cluster (0 : back, 1 : front)
 std::array<uchar, 1000> Paris::index  ;// Link the label to the module's index in the cluster
 
-void Paris::Initialize()
+void Paris::Initialise()
 {// Parameters : number of clusters, number of modules in each cluster
   if (!m_initialised)
   {
-    clusterBack.Initialize();
-    clusterFront.Initialize();
+    clusterBack.Initialise();
+    clusterFront.Initialise();
     m_initialised = true;
   }
 }

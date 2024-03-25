@@ -19,13 +19,13 @@ Collaboration diagram for MTRootReader:<para>
         <itemizedlist>
             <listitem><para>bool <link linkend="_class_m_t_root_reader_1ad8f964e63c97f35e44fc3b11fca88e59">addFolder</link> (<link linkend="_class_path">Path</link> path, int const &amp;nb_files=-1)</para>
 </listitem>
-            <listitem><para>template&lt;class Func , class... ARGS&gt; </para><para>void <link linkend="_class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490">execute</link> (Func &amp;&amp;func, ARGS &amp;&amp;... args)</para>
-</listitem>
             <listitem><para><link linkend="_class_m_t_root_reader_1ac0cd727a88e8f1f2abd1e05d2197fa95">MTRootReader</link> ()</para>
 </listitem>
             <listitem><para><link linkend="_class_m_t_root_reader_1a6df2599a2adf92ce971105fbfac69221">MTRootReader</link> (<link linkend="_class_path">Path</link> foldername, int const &amp;nb_files=-1)</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22">nextFilename</link> (std::string &amp;filename)</para>
+</listitem>
+            <listitem><para>template&lt;class Func , class... ARGS&gt; </para><para>void <link linkend="_class_m_t_root_reader_1a81c87315eaaf2147d6f30639194fd4e8">read</link> (Func &amp;&amp;func, ARGS &amp;&amp;... args)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -92,28 +92,6 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490"/>    <section>
-    <title>execute()</title>
-<indexterm><primary>execute</primary><secondary>MTRootReader</secondary></indexterm>
-<indexterm><primary>MTRootReader</primary><secondary>execute</secondary></indexterm>
-<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>void MTRootReader::execute (Func &amp;&amp; func, ARGS &amp;&amp;... args)</computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_root_reader_a506f517a4772f5ec3b8bbf5c835a3490_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_root_reader_a506f517a4772f5ec3b8bbf5c835a3490_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
     </section><anchor xml:id="_class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22"/>    <section>
     <title>nextFilename()</title>
 <indexterm><primary>nextFilename</primary><secondary>MTRootReader</secondary></indexterm>
@@ -132,6 +110,28 @@ Here is the caller graph for this function:<para>
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_root_reader_a198a2f34b1b61cb0c449ba82478a4f22_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_root_reader_1a81c87315eaaf2147d6f30639194fd4e8"/>    <section>
+    <title>read()</title>
+<indexterm><primary>read</primary><secondary>MTRootReader</secondary></indexterm>
+<indexterm><primary>MTRootReader</primary><secondary>read</secondary></indexterm>
+<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>void MTRootReader::read (Func &amp;&amp; func, ARGS &amp;&amp;... args)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_root_reader_a81c87315eaaf2147d6f30639194fd4e8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_root_reader_a81c87315eaaf2147d6f30639194fd4e8_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

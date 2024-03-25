@@ -1,8 +1,20 @@
 <map id="removeExtension" name="removeExtension">
-<area shape="rect" id="node1" title=" " alt="" coords="465,81,601,108"/>
-<area shape="rect" id="node2" href="$class_timeshifts.html#ab877131bc1bd7394f55c3d46729ac9e6" title="Use setName instead. Set output file name of the timeshifts data." alt="" coords="245,5,417,32"/>
-<area shape="rect" id="node3" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="5,56,197,83"/>
-<area shape="rect" id="node4" href="$class_timeshifts.html#aa9f0f8cc1d96a5408f233449767ef0f6" title="Use setName instead. Set output root file containing the raw and corrected time spectra." alt="" coords="246,107,417,133"/>
-<area shape="rect" id="node5" href="$class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="252,157,411,184"/>
-<area shape="rect" id="node6" href="$class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="29,157,173,184"/>
+<area shape="rect" id="node1" title=" " alt="" coords="912,271,1048,297"/>
+<area shape="rect" id="node2" href="$files__functions_8hpp.html#a58f50a6390692cff52eef37fdaa94e56" title=" " alt="" coords="721,107,835,133"/>
+<area shape="rect" id="node12" href="$class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="703,195,853,221"/>
+<area shape="rect" id="node14" href="$class_timeshifts.html#ab877131bc1bd7394f55c3d46729ac9e6" title="Use setName instead. Set output file name of the timeshifts data." alt="" coords="692,245,864,272"/>
+<area shape="rect" id="node15" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="452,296,644,323"/>
+<area shape="rect" id="node16" href="$class_timeshifts.html#aa9f0f8cc1d96a5408f233449767ef0f6" title="Use setName instead. Set output root file containing the raw and corrected time spectra." alt="" coords="693,347,863,373"/>
+<area shape="rect" id="node17" href="$class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="699,397,857,424"/>
+<area shape="rect" id="node3" href="$class_faster2_histo.html#ac20f36c0861a3af085c9546ca1325cc6" title="Adds one file to convert at the list. Option &#45;f." alt="" coords="469,5,627,32"/>
+<area shape="rect" id="node6" href="$class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a" title="Adds [nb_files] files to convert inside of [folder]." alt="" coords="461,56,635,83"/>
+<area shape="rect" id="node7" href="$class_filename.html#a4f624193292726bfe15c0c16322ccd07" title=" " alt="" coords="495,107,601,133"/>
+<area shape="rect" id="node10" href="$class_timewalk.html#abe911d2d25eefb7886fe35c41f1d61db" title=" " alt="" coords="475,157,621,184"/>
+<area shape="rect" id="node4" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title="To launch the application after instanciation." alt="" coords="255,5,394,32"/>
+<area shape="rect" id="node5" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="5,5,197,32"/>
+<area shape="rect" id="node8" href="$class_filename.html#ac695bd1e796829d4a40c81111dd8935b" title=" " alt="" coords="249,56,400,83"/>
+<area shape="rect" id="node9" href="$class_filename.html#af717b51b864f3465eace889d46cb9ffe" title=" " alt="" coords="247,107,403,133"/>
+<area shape="rect" id="node11" href="$class_timewalk.html#ac6d66ef44ed399a2d12c24d083d71b3f" title=" " alt="" coords="245,157,404,184"/>
+<area shape="rect" id="node13" href="$class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="453,209,643,250"/>
+<area shape="rect" id="node18" href="$class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="476,397,620,424"/>
 </map>

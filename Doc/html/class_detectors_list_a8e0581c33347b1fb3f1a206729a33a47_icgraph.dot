@@ -20,7 +20,7 @@ digraph "DetectorsList::size"
   Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node8 [label="Faster2Root::Faster2Root",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_faster2_root.html#a931cf8ef7c2acab073b363893c65bffd",tooltip=" "];
   Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node9 [label="Timeshifts::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_timeshifts.html#af02fd3c73fd7163ab2a2ddb65eb41465",tooltip=" "];
+  Node9 [label="Timeshifts::Initialise",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_timeshifts.html#af02fd3c73fd7163ab2a2ddb65eb41465",tooltip=" "];
   Node9 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node10 [label="DetectorsList::load",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_detectors_list.html#a1a3c52730d4c53fd56ae8c57ac129645",tooltip=" "];

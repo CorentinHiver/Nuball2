@@ -1,4 +1,4 @@
-.TH "MTRootReader" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "MTRootReader" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -15,9 +15,6 @@ MTRootReader
 .RI "bool \fBaddFolder\fP (\fBPath\fP path, int const &nb_files=\-1)"
 .br
 .ti -1c
-.RI "template<class Func , class\&.\&.\&. ARGS> void \fBexecute\fP (Func &&func, ARGS &&\&.\&.\&. args)"
-.br
-.ti -1c
 .RI "\fBMTRootReader\fP ()"
 .br
 .ti -1c
@@ -25,6 +22,9 @@ MTRootReader
 .br
 .ti -1c
 .RI "bool \fBnextFilename\fP (std::string &filename)"
+.br
+.ti -1c
+.RI "template<class Func , class\&.\&.\&. ARGS> void \fBread\fP (Func &&func, ARGS &&\&.\&.\&. args)"
 .br
 .in -1c
 .SS "Static Private Member Functions"
@@ -54,9 +54,9 @@ MTRootReader
 .PP 
 .SS "bool MTRootReader::addFolder (\fBPath\fP path, int const & nb_files = \fC\-1\fP)\fC [inline]\fP"
 
-.SS "template<class Func , class\&.\&.\&. ARGS> void MTRootReader::execute (Func && func, ARGS &&\&.\&.\&. args)"
-
 .SS "bool MTRootReader::nextFilename (std::string & filename)\fC [inline]\fP"
+
+.SS "template<class Func , class\&.\&.\&. ARGS> void MTRootReader::read (Func && func, ARGS &&\&.\&.\&. args)"
 
 .SS "template<class Func , class\&.\&.\&. ARGS> void MTRootReader::Read (\fBMTRootReader\fP & MTreader, Func function, ARGS &&\&.\&.\&. args)\fC [static]\fP, \fC [private]\fP"
 

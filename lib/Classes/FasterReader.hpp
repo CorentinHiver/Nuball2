@@ -78,7 +78,7 @@ public:
    ///@brief Construct a new Faster Reader object
   FasterReader(Hit *_hit, std::string _filename) : m_hit(_hit), m_filename(_filename)
   {
-    m_kReady = Initialize();
+    m_kReady = Initialise();
   }
 
    ///@brief Destroy the Faster Reader object
@@ -140,7 +140,7 @@ public:
 private:
   
   ///@brief Setup the fasterac.h library to read the data
-  bool Initialize();
+  bool Initialise();
 
   bool ReadSimple();
   bool ReadGroup();
@@ -148,7 +148,7 @@ private:
   bool ReadData(faster_data_p const & _data);
   bool switch_alias(uchar const & _alias, faster_data_p const & _data);
 
-  bool InitializeReader();
+  bool InitialiseReader();
 
   static ulonglong s_maxHits;
   thread_local static int m_verbose; 
@@ -196,12 +196,12 @@ bool inline FasterReader::Reset()
   m_inGroup = false;
   m_alias = 0;
 
-  Initialize();
+  Initialise();
   return true;
 }
 
 
-bool inline FasterReader::Initialize()
+bool inline FasterReader::Initialise()
 {
 
 
@@ -233,7 +233,7 @@ bool inline FasterReader::Initialize()
   if (extension(m_filename) == "fast")
   {
     if (m_verbose>0) print("Reader set to ", m_filename );
-    return InitializeReader();
+    return InitialiseReader();
   }
   else
   {
@@ -244,7 +244,7 @@ bool inline FasterReader::Initialize()
   return (m_kReady = true);
 }
 
-bool FasterReader::InitializeReader()
+bool FasterReader::InitialiseReader()
 {
   if (m_reader != NULL) faster_file_reader_close(m_reader);; // If the reader has already been used 
   m_reader = faster_file_reader_open ( m_filename.c_str() );

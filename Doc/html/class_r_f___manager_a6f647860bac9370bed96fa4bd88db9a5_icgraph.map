@@ -1,0 +1,7 @@
+<map id="RF_Manager::offset" name="RF_Manager::offset">
+<area shape="rect" id="node1" title=" " alt="" coords="472,56,620,83"/>
+<area shape="rect" id="node2" href="$class_r_f___manager.html#ac56cba54c3c01c70e45b40093e3d1a89" title=" " alt="" coords="249,56,424,83"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#ac2c3e8e47598e28d49932a3720a6fd58" title="Set RF offset (synonymous to Timeshifts::setRFShift)" alt="" coords="16,5,191,32"/>
+<area shape="rect" id="node4" href="$class_timeshifts.html#a0faeccde5623d6808435414d020d1385" title="Set RF offset (synonymous to Timeshifts::setRFShift)" alt="" coords="5,56,201,83"/>
+<area shape="rect" id="node5" href="$class_timeshifts.html#af6cb9cffa9322eabb7fe712c6e6ae798" title="Set RF shift (synonymous to Timeshifts::setRFOffset)" alt="" coords="22,107,185,133"/>
+</map>

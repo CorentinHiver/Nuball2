@@ -31,7 +31,7 @@ digraph "StaticVector::size"
   Node1 -> Node12 [id="edge13_Node000001_Node000012",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node12 [id="Node000012",label="StaticVector::static\l_resize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_static_vector.html#ac95270bfba3cd2cd70cc32a91d545381",tooltip=" "];
   Node12 -> Node13 [id="edge14_Node000012_Node000013",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node13 [id="Node000013",label="ParisCluster::Initialize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_paris_cluster.html#ac4c51b25cb87e251ca3a71108f4be3fc",tooltip=" "];
+  Node13 [id="Node000013",label="ParisCluster::Initialise",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_paris_cluster.html#ac4c51b25cb87e251ca3a71108f4be3fc",tooltip=" "];
   Node13 -> Node14 [id="edge15_Node000013_Node000014",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node14 [id="Node000014",label="ParisCluster::ParisCluster",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$class_paris_cluster.html#adc8a4e0b8a4b32700bde25de2766bb23",tooltip=" "];
 }

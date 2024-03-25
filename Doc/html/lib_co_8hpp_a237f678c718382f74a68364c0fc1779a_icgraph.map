@@ -1,14 +1,8 @@
 <map id="size_cast" name="size_cast">
-<area shape="rect" id="node1" title="Casts a number into std::size_t." alt="" coords="947,107,1029,133"/>
-<area shape="rect" id="node2" href="$class_m_t_counter.html#a62d12e221986dda2cb740d9e8da4ee55" title=" " alt="" coords="745,5,869,32"/>
-<area shape="rect" id="node3" href="$class_m_t_counter.html#ad0851e43d22e6ffe02b1ecc66e4b793d" title=" " alt="" coords="719,56,896,83"/>
-<area shape="rect" id="node4" href="$class_m_t_counter.html#a833a2a1bedd059ba424d8150a418c351" title=" " alt="" coords="724,107,891,133"/>
-<area shape="rect" id="node5" href="$class_m_t_object.html#a872d9518e0a1936df8e70a2dae303f4f" title=" " alt="" coords="716,181,899,208"/>
-<area shape="rect" id="node12" href="$class_event.html#aadb0c0dcbb31718e69358e9c99a5b633" title=" " alt="" coords="761,232,854,259"/>
-<area shape="rect" id="node6" href="$class_m_t_object.html#ac76ab61815b5c3a471e6c210b7ba1913" title=" " alt="" coords="432,105,668,132"/>
-<area shape="rect" id="node7" href="$class_m_t_object.html#aaa5354a0915c26979a49d54f36019df1" title=" " alt="" coords="476,156,624,183"/>
-<area shape="rect" id="node8" href="$class_faster2_histo.html#aa3d364eba3c8fc7367fdabea68524854" title=" " alt="" coords="449,207,651,233"/>
-<area shape="rect" id="node11" href="$class_m_t_object.html#a8b70d4506ed556d5ca4c23703a80ddb6" title=" " alt="" coords="442,257,658,284"/>
-<area shape="rect" id="node9" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="245,207,384,233"/>
-<area shape="rect" id="node10" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,207,197,233"/>
+<area shape="rect" id="node1" title="Casts a number into std::size_t." alt="" coords="231,107,313,133"/>
+<area shape="rect" id="node2" href="$class_m_t_counter.html#a62d12e221986dda2cb740d9e8da4ee55" title=" " alt="" coords="32,5,156,32"/>
+<area shape="rect" id="node3" href="$class_m_t_counter.html#ad0851e43d22e6ffe02b1ecc66e4b793d" title=" " alt="" coords="5,56,183,83"/>
+<area shape="rect" id="node4" href="$class_m_t_counter.html#a833a2a1bedd059ba424d8150a418c351" title=" " alt="" coords="11,107,177,133"/>
+<area shape="rect" id="node5" href="$class_simplex.html#ade818ac404caab90542e80143cbc63c0" title=" " alt="" coords="20,157,168,184"/>
+<area shape="rect" id="node6" href="$class_event.html#aadb0c0dcbb31718e69358e9c99a5b633" title=" " alt="" coords="47,208,141,235"/>
 </map>

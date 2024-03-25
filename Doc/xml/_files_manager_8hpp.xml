@@ -3,47 +3,45 @@
   <compounddef id="_files_manager_8hpp" kind="file" language="C++">
     <compoundname>FilesManager.hpp</compoundname>
     <includes refid="lib_co_8hpp" local="yes">../libCo.hpp</includes>
-    <includedby refid="_calibration_8hpp" local="yes">lib/Modules/Calibration.hpp</includedby>
+    <includedby refid="_calibrator_8hpp" local="yes">lib/Modules/Calibrator.hpp</includedby>
+    <includedby refid="_evolution_peaks_8hpp" local="yes">lib/Modules/EvolutionPeaks.hpp</includedby>
     <includedby refid="_faster2_histo_8hpp" local="yes">lib/Modules/Faster2Histo.hpp</includedby>
     <includedby refid="_timeshifts_8hpp" local="yes">lib/Modules/Timeshifts.hpp</includedby>
     <includedby refid="_m_t_faster_reader_8hpp" local="yes">lib/MTObjects/MTFasterReader.hpp</includedby>
     <includedby refid="_m_t_files_manager_8hpp" local="yes">lib/MTObjects/MTFilesManager.hpp</includedby>
     <includedby refid="_m_t_root_reader_8hpp" local="yes">lib/MTObjects/MTRootReader.hpp</includedby>
     <incdepgraph>
-      <node id="27">
+      <node id="19">
         <label>glob.h</label>
       </node>
-      <node id="10">
-        <label>iomanip</label>
-      </node>
-      <node id="9">
+      <node id="24">
         <label>functional</label>
       </node>
-      <node id="16">
+      <node id="5">
+        <label>iomanip</label>
+      </node>
+      <node id="28">
         <label>queue</label>
       </node>
-      <node id="32">
-        <label>random.hpp</label>
-        <link refid="random_8hpp"/>
-        <childnode refid="33" relation="include">
-        </childnode>
-      </node>
-      <node id="37">
+      <node id="20">
         <label>filesystem</label>
       </node>
-      <node id="29">
-        <label>stdlib.h</label>
+      <node id="21">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
-      <node id="18">
+      <node id="29">
         <label>stdexcept</label>
       </node>
-      <node id="15">
+      <node id="27">
         <label>numeric</label>
       </node>
-      <node id="19">
+      <node id="14">
         <label>string</label>
       </node>
-      <node id="12">
+      <node id="7">
         <label>map</label>
       </node>
       <node id="2">
@@ -51,45 +49,21 @@
         <link refid="lib_co_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -103,11 +77,15 @@
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -115,86 +93,120 @@
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
-      </node>
-      <node id="31">
-        <label>print.hpp</label>
-        <link refid="print_8hpp"/>
-      </node>
-      <node id="8">
-        <label>fstream</label>
-      </node>
-      <node id="3">
-        <label>any</label>
-      </node>
-      <node id="35">
-        <label>files_functions.hpp</label>
-        <link refid="files__functions_8hpp"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="33">
-        <label>random</label>
-      </node>
-      <node id="30">
-        <label>string.h</label>
-      </node>
-      <node id="23">
-        <label>typeinfo</label>
-      </node>
-      <node id="25">
-        <label>vector</label>
-      </node>
-      <node id="20">
-        <label>stack</label>
-      </node>
-      <node id="36">
-        <label>vector_functions.hpp</label>
-        <link refid="vector__functions_8hpp"/>
-        <childnode refid="31" relation="include">
+      <node id="3">
+        <label>print.hpp</label>
+        <link refid="print_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="4">
-        <label>array</label>
+      <node id="18">
+        <label>fstream</label>
       </node>
-      <node id="17">
-        <label>sstream</label>
+      <node id="22">
+        <label>any</label>
       </node>
-      <node id="6">
-        <label>cstdlib</label>
-      </node>
-      <node id="11">
-        <label>iostream</label>
-      </node>
-      <node id="34">
-        <label>string_functions.hpp</label>
-        <link refid="string__functions_8hpp"/>
-        <childnode refid="25" relation="include">
+      <node id="16">
+        <label>files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
-      <node id="24">
+      <node id="11">
+        <label>random</label>
+      </node>
+      <node id="33">
+        <label>typeinfo</label>
+      </node>
+      <node id="37">
+        <label>ctime</label>
+      </node>
+      <node id="30">
+        <label>stack</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="8">
+        <label>vector_functions.hpp</label>
+        <link refid="vector__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>array</label>
+      </node>
+      <node id="15">
+        <label>sstream</label>
+      </node>
+      <node id="10">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>cstdlib</label>
+      </node>
+      <node id="4">
+        <label>iostream</label>
+      </node>
+      <node id="12">
+        <label>string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
         <label>unordered_map</label>
       </node>
-      <node id="14">
+      <node id="26">
         <label>mutex</label>
       </node>
-      <node id="21">
+      <node id="35">
+        <label>csignal</label>
+      </node>
+      <node id="31">
         <label>thread</label>
       </node>
-      <node id="5">
+      <node id="9">
         <label>algorithm</label>
-      </node>
-      <node id="28">
-        <label>stdio.h</label>
       </node>
       <node id="1">
         <label>lib/Classes/FilesManager.hpp</label>
@@ -202,16 +214,16 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="13">
         <label>cstring</label>
       </node>
-      <node id="13">
+      <node id="25">
         <label>memory</label>
       </node>
-      <node id="22">
+      <node id="32">
         <label>typeindex</label>
       </node>
-      <node id="26">
+      <node id="17">
         <label>dirent.h</label>
       </node>
     </incdepgraph>
@@ -220,54 +232,56 @@
         <label>lib/Modules/Faster2Histo.hpp</label>
         <link refid="_faster2_histo_8hpp"/>
       </node>
-      <node id="8">
+      <node id="10">
         <label>lib/MTObjects/MTFasterReader.hpp</label>
         <link refid="_m_t_faster_reader_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
+      </node>
+      <node id="3">
+        <label>lib/Modules/EvolutionPeaks.hpp</label>
+        <link refid="_evolution_peaks_8hpp"/>
       </node>
       <node id="11">
         <label>lib/MTObjects/MTFilesManager.hpp</label>
         <link refid="_m_t_files_manager_8hpp"/>
       </node>
-      <node id="3">
+      <node id="7">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
+      </node>
+      <node id="6">
         <label>lib/Modules/CloverSpectra.hpp</label>
         <link refid="_clover_spectra_8hpp"/>
       </node>
-      <node id="9">
-        <label>lib/Modules/Histogramor.hpp</label>
-        <link refid="_histogramor_8hpp"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="5">
+      <node id="8">
         <label>lib/Modules/Faster2Root.hpp</label>
         <link refid="_faster2_root_8hpp"/>
       </node>
-      <node id="6">
+      <node id="9">
         <label>lib/Modules/RunMatrixator.hpp</label>
         <link refid="_run_matrixator_8hpp"/>
       </node>
-      <node id="10">
-        <label>lib/Modules/NearLine.hpp</label>
-        <link refid="_near_line_8hpp"/>
-      </node>
-      <node id="7">
+      <node id="5">
         <label>lib/Modules/Timeshifts.hpp</label>
         <link refid="_timeshifts_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
         <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -275,15 +289,23 @@
         <link refid="_files_manager_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lib/Modules/Calibrator.hpp</label>
+        <link refid="_calibrator_8hpp"/>
+        <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="12">
@@ -291,19 +313,9 @@
         <link refid="_m_t_root_reader_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
-      </node>
-      <node id="2">
-        <label>lib/Modules/Calibration.hpp</label>
-        <link refid="_calibration_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -356,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FilesManager.hpp" line="173" column="1" bodyfile="lib/Classes/FilesManager.hpp" bodystart="173" bodyend="177"/>
+        <location file="lib/Classes/FilesManager.hpp" line="180" column="1" bodyfile="lib/Classes/FilesManager.hpp" bodystart="180" bodyend="184"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -364,8 +376,8 @@
     <detaileddescription>
     </detaileddescription>
     <programlisting>
-<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>FILEMANAGER_H</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FILEMANAGER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>FILEMANAGER_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FILEMANAGER_HPP</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../libCo.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight></codeline>
@@ -378,170 +390,178 @@
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
 <codeline lineno="13" refid="class_files_manager_1a23a2094a7e12272375d5c1a69a9d7a5d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a23a2094a7e12272375d5c1a69a9d7a5d" kindref="member">FilesManager</ref>(){};</highlight></codeline>
 <codeline lineno="14" refid="class_files_manager_1ab73099416f575af7d1ea40add38b5ad0" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1ab73099416f575af7d1ea40add38b5ad0" kindref="member">FilesManager</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>folder,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>nb_files<sp/>=<sp/>-1){<ref refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" kindref="member">addFolder</ref>(folder,nb_files);};</highlight></codeline>
-<codeline lineno="15" refid="class_files_manager_1a384696ab2c23a423c9627c07004ea4a6" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a384696ab2c23a423c9627c07004ea4a6" kindref="member">FilesManager</ref>(<ref refid="class_path" kindref="compound">Path</ref><sp/>&amp;<sp/>folder,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>nb_files<sp/>=<sp/>-1){<ref refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" kindref="member">addFolder</ref>(folder,nb_files);};</highlight></codeline>
+<codeline lineno="15" refid="class_files_manager_1a384696ab2c23a423c9627c07004ea4a6" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a384696ab2c23a423c9627c07004ea4a6" kindref="member">FilesManager</ref>(<ref refid="class_path" kindref="compound">Path</ref><sp/>&amp;<sp/>folder,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>nb_files<sp/>=<sp/>-1){<ref refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" kindref="member">addFolder</ref>(folder.<ref refid="class_path_1aa2f2b14aafcc3fc3626c243fcc6574dc" kindref="member">string</ref>(),nb_files);};</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ac4d90f9590ed90fcbbe23557ae88c892" kindref="member">nextFileName</ref>(std::string<sp/>&amp;<sp/>filename,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>step<sp/>=<sp/>1);</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Adds<sp/>either<sp/>a<sp/>single<sp/>file<sp/>or<sp/>reads<sp/>a<sp/>.list<sp/>containing<sp/>a<sp/>list<sp/>of<sp/>files</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" kindref="member">addFiles</ref><sp/><sp/><sp/><sp/><sp/>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Adds<sp/>a<sp/>given<sp/>number<sp/>of<sp/>files<sp/>with<sp/>a<sp/>.root<sp/>or<sp/>.fast<sp/>inside<sp/>the<sp/>given<sp/>folder<sp/>(by<sp/>default<sp/>all<sp/>the<sp/>files,<sp/>or<sp/>the<sp/>nb_files<sp/>first<sp/>ones)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" kindref="member">addFolder</ref><sp/><sp/><sp/><sp/>(std::string<sp/>folder,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>nb_files<sp/>=<sp/>-1,<sp/>std::vector&lt;std::string&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>extensions<sp/>=<sp/>{</highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">});</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a78f516fb7d432e25ab36b5b4763b6cab" kindref="member">flushFiles</ref><sp/><sp/><sp/>();</highlight></codeline>
-<codeline lineno="25" refid="class_files_manager_1a8d40403481fa064867f12ff55dcbf0ba" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><sp/><sp/><ref refid="class_files_manager_1a8d40403481fa064867f12ff55dcbf0ba" kindref="member">Print</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>file<sp/>:<sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>)<sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(file);}</highlight></codeline>
-<codeline lineno="26" refid="class_files_manager_1ae8f32735de82faefc4284fcb2623f206" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><sp/><sp/><ref refid="class_files_manager_1ae8f32735de82faefc4284fcb2623f206" kindref="member">printFolders</ref><sp/>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>folder<sp/>:<sp/><ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref>)<sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(folder);}</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Getters<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="class_files_manager_1a9e94015b1a269aba763b4791b8eaa957" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_path" kindref="compound">Path</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a9e94015b1a269aba763b4791b8eaa957" kindref="member">path</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref>;}</highlight></codeline>
-<codeline lineno="30" refid="class_files_manager_1a0f59f2614a79d529bc6398a137384efd" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a0f59f2614a79d529bc6398a137384efd" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>;}</highlight></codeline>
-<codeline lineno="31" refid="class_files_manager_1a0348db71fd84552aac6cfc90990b2775" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a0348db71fd84552aac6cfc90990b2775" kindref="member">get</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>;}</highlight></codeline>
-<codeline lineno="32" refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" kindref="member">getListFiles</ref><sp/><sp/><sp/><sp/><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref><sp/>;}</highlight></codeline>
-<codeline lineno="33" refid="class_files_manager_1a608cb616f47ffaec54d0a2c033c82ab7" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a480c6019671fdbb28689828151701c8c" kindref="member">ListFolders</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a608cb616f47ffaec54d0a2c033c82ab7" kindref="member">getListFolders</ref><sp/><sp/><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref>;}</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35" refid="class_files_manager_1a3098544727ca05a49370d362f88c7d5d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a3098544727ca05a49370d362f88c7d5d" kindref="member">getFilesInFolder</ref><sp/>(std::string<sp/>folder)</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(folder.back()!=</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">)<sp/>folder.push_back(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref>[folder];</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41" refid="class_files_manager_1ab9d800959dd94e4003c3b379734af59a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1ab9d800959dd94e4003c3b379734af59a" kindref="member">getCursor</ref><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>;}</highlight></codeline>
-<codeline lineno="42" refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" kindref="member">size</ref><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.size();}</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/></highlight></codeline>
-<codeline lineno="44" refid="class_files_manager_1a519d928170afd78b97573900450e8e3e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a519d928170afd78b97573900450e8e3e" kindref="member">diskSize</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight></codeline>
-<codeline lineno="45"><highlight class="keyword"><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">std::size_t</ref><sp/>i<sp/>=<sp/>0;<sp/>i&lt;<ref refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" kindref="member">size</ref>();<sp/>i++)</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret+=<ref refid="files__functions_8hpp_1a3a01792a9cfbdd1f2b358d878559a917" kindref="member">size_file</ref>(<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>[i]);</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ret;</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54" refid="class_files_manager_1a031ec08f37366ff77828b8106f20cf66" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a031ec08f37366ff77828b8106f20cf66" kindref="member">isEmpty</ref><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(this-&gt;<ref refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" kindref="member">size</ref>()<sp/>==<sp/>0);}</highlight></codeline>
-<codeline lineno="55" refid="class_files_manager_1a3405dcb99deb03c4fdea55fff9f3ffdf" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!<ref refid="class_files_manager_1a031ec08f37366ff77828b8106f20cf66" kindref="member">isEmpty</ref>();}</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Files<sp/>reader<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="59" refid="class_files_manager_1a6de7ae3ec87e58cfe7c03dc28640a3f5" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>std::string<sp/><ref refid="class_files_manager_1a6de7ae3ec87e58cfe7c03dc28640a3f5" kindref="member">getFile</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n<sp/>=<sp/>-1)</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(n&lt;0)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>[<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>];</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>[n];</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Setters<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="66" refid="class_files_manager_1a548490c251183fff04e9db3a1d605875" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a548490c251183fff04e9db3a1d605875" kindref="member">setListFiles</ref>(<ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>list)<sp/>{</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_files_manager_1a78f516fb7d432e25ab36b5b4763b6cab" kindref="member">flushFiles</ref>();<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;list.size();<sp/>i++)<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" kindref="member">addFiles</ref>(list[i]);}</highlight></codeline>
-<codeline lineno="67" refid="class_files_manager_1aa72af0ac3e9923df087384a2bade2c7e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1aa72af0ac3e9923df087384a2bade2c7e" kindref="member">setCursor</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filesCursor)<sp/>{<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal"><sp/>(_filesCursor);}</highlight></codeline>
-<codeline lineno="68" refid="class_files_manager_1aa3e8631822c6f1e152890a496ea40d63" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1aa3e8631822c6f1e152890a496ea40d63" kindref="member">setCursor</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filesCursor)<sp/>{<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/>_filesCursor;}</highlight></codeline>
-<codeline lineno="69" refid="class_files_manager_1a59f028130e0b38bac855ebd8ee938202" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a59f028130e0b38bac855ebd8ee938202" kindref="member">setVerbose</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>v)<sp/>{<ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref><sp/>=<sp/>v;}</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight></codeline>
-<codeline lineno="71" refid="class_files_manager_1a78934b0656b357c7eb3807aa4bea7f26" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="class_files_manager_1a78934b0656b357c7eb3807aa4bea7f26" kindref="member">operator[] </ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n)<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a6de7ae3ec87e58cfe7c03dc28640a3f5" kindref="member">getFile</ref>(n);}</highlight></codeline>
-<codeline lineno="72" refid="class_files_manager_1ae7f5500280a409300732527ddd9f5884" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ae7f5500280a409300732527ddd9f5884" kindref="member">operator=</ref>(<ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>list)<sp/>{<ref refid="class_files_manager_1a548490c251183fff04e9db3a1d605875" kindref="member">setListFiles</ref>(list);}</highlight></codeline>
-<codeline lineno="73" refid="class_files_manager_1a192c60593f1a0469cc4c6bd5727c9905" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager" kindref="compound">FilesManager</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a192c60593f1a0469cc4c6bd5727c9905" kindref="member">operator=</ref>(<ref refid="class_files_manager" kindref="compound">FilesManager</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>other)<sp/></highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref>;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref>;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref>;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a4721c3a635a648a4724d268b2b842064" kindref="member">isReadable</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1a4721c3a635a648a4724d268b2b842064" kindref="member">isReadable</ref>;</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref>;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="85" refid="class_files_manager_1a444c7295f3b1a3b9053db2b64a809514" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a444c7295f3b1a3b9053db2b64a809514" kindref="member">begin</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.begin();}</highlight></codeline>
-<codeline lineno="86" refid="class_files_manager_1ad6f8c081ffad62c336ae5b3a8a5495e6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad6f8c081ffad62c336ae5b3a8a5495e6" kindref="member">end</ref>()<sp/><sp/><sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.end<sp/><sp/>();}</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88" refid="class_files_manager_1acc6d5a780b87ea8ef55a5a43d8d806aa" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1acc6d5a780b87ea8ef55a5a43d8d806aa" kindref="member">begin</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.begin();}</highlight></codeline>
-<codeline lineno="89" refid="class_files_manager_1a00d94c31c948795299d9152b2c4e7dca" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a00d94c31c948795299d9152b2c4e7dca" kindref="member">end</ref>()</highlight><highlight class="keyword"><sp/><sp/><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.end<sp/><sp/>();}</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="92" refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_path" kindref="compound">Path</ref><sp/><ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref>;</highlight></codeline>
-<codeline lineno="93" refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="94" refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>;</highlight></codeline>
-<codeline lineno="95" refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a480c6019671fdbb28689828151701c8c" kindref="member">ListFolders</ref><sp/><ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref>;</highlight></codeline>
-<codeline lineno="96" refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" refkind="member"><highlight class="normal"><sp/><sp/>std::map&lt;std::string,<sp/>ListFiles&gt;<sp/><ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref>;</highlight></codeline>
-<codeline lineno="97" refid="class_files_manager_1a4721c3a635a648a4724d268b2b842064" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a4721c3a635a648a4724d268b2b842064" kindref="member">isReadable</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="98" refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101" refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" kindref="member">FilesManager::addFiles</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename)</highlight></codeline>
-<codeline lineno="102"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref><sp/>=<sp/><ref refid="files__functions_8hpp_1ab1e262f27aaad28944f29cd2bbde417f" kindref="member">getPath</ref>(_filename);</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><ref refid="lib_co_8hpp_1a69aa29b598b851b0640aa225a9e5d61d" kindref="member">uint</ref><sp/>numberFiles<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;list&quot;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/>{</highlight><highlight class="comment">//<sp/>using<sp/>the<sp/>&quot;data&quot;<sp/>file<sp/>as<sp/>an<sp/>input<sp/>containing<sp/>the<sp/>path<sp/>to<sp/>the<sp/>actual<sp/>data<sp/>.root<sp/>or<sp/>.fast<sp/>files</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>std::ifstream<sp/>inputsFile<sp/>(_filename);</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!inputsFile.is_open()<sp/>||<sp/>!inputsFile.good())</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Impossible<sp/>to<sp/>open<sp/>or<sp/>read<sp/>dat<sp/>file<sp/>&apos;&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>_filename<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;&apos;&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>oneline;</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(inputsFile.good())</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>getline(inputsFile,<sp/>oneline);</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>oneline.size()<sp/>&gt;<sp/>1<sp/><sp/>&amp;&amp;<sp/><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(oneline)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal"><sp/>||<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(oneline)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">))</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.push_back(oneline);</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>numberFiles++;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>inputsFile.close();</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal"><sp/>||<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/>{</highlight><highlight class="comment">//<sp/>there<sp/>is<sp/>only<sp/>one<sp/>.root<sp/>or<sp/>.fast<sp/>file</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.push_back(_filename);</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>numberFiles<sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;File<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>_filename<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;not<sp/>taken<sp/>into<sp/>account.<sp/>Extension&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;unkown...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Abort...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;}</highlight></codeline>
-<codeline lineno="134"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight></codeline>
-<codeline lineno="136" refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" kindref="member">FilesManager::addFolder</ref>(std::string<sp/>_foldername,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>_nb_files,<sp/>std::vector&lt;std::string&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>extensions)</highlight></codeline>
-<codeline lineno="137"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><ref refid="files__functions_8hpp_1a4a072faccd444b8907dffd96e6211461" kindref="member">push_back_if_none</ref>(_foldername,<sp/></highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>listfile<sp/>=<sp/><ref refid="files__functions_8hpp_1a8c014ea676bc34e0ec57b1aeb55af4c5" kindref="member">list_files_in_folder</ref>(_foldername,<sp/>extensions);<sp/></highlight><highlight class="comment">//<sp/>Default<sp/>.root<sp/>OR<sp/>.fast<sp/>files<sp/>only</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(listfile.size()<sp/>&gt;<sp/>0)</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>std::sort(listfile.begin(),<sp/>listfile.end());</highlight><highlight class="comment">//<sp/>Sorts<sp/>the<sp/>entries</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_nb_files&gt;<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">long</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(listfile.size())<sp/>||<sp/>_nb_files<sp/>==<sp/>-1)<sp/>_nb_files<sp/>=<sp/>listfile.size();</highlight><highlight class="comment">//Sets<sp/>the<sp/>correct<sp/>number<sp/>of<sp/>files<sp/>to<sp/>keep</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/>cut_listfile<sp/>(listfile.begin(),<sp/>listfile.begin()+_nb_files);</highlight><highlight class="comment">//<sp/>Take<sp/>the<sp/>nb_files<sp/>first<sp/>files<sp/>of<sp/>the<sp/>folder</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>file<sp/>:<sp/>cut_listfile)<sp/><ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref>[_foldername].emplace_back(file);</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.size()<sp/>==<sp/>0)<sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref><sp/>=<sp/>cut_listfile;</highlight><highlight class="comment">//<sp/>Set<sp/>cut_listfile<sp/>to<sp/>be<sp/>the<sp/>global<sp/>list<sp/>of<sp/>files</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>std::copy(cut_listfile.begin(),<sp/>cut_listfile.end(),<sp/>std::back_inserter(<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>));</highlight><highlight class="comment">//<sp/>Add<sp/>cut_listfile<sp/>to<sp/>the<sp/>global<sp/>list<sp/>of<sp/>files</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref>)<sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(<sp/>cut_listfile.size(),<sp/></highlight><highlight class="stringliteral">&quot;files<sp/>added,&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.size(),<sp/></highlight><highlight class="stringliteral">&quot;files<sp/>to<sp/>process&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Folder<sp/>&apos;&quot;</highlight><highlight class="normal">+_foldername+</highlight><highlight class="stringliteral">&quot;&apos;<sp/>empty<sp/>!!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="156"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158" refid="class_files_manager_1a78f516fb7d432e25ab36b5b4763b6cab" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a78f516fb7d432e25ab36b5b4763b6cab" kindref="member">FilesManager::flushFiles</ref>()</highlight></codeline>
-<codeline lineno="159"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.resize(0);</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.clear();</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" kindref="member">addFiles</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename);</highlight></codeline>
+<codeline lineno="22" refid="class_files_manager_1a986350d5c057d10b8fdd11551b097b37" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a986350d5c057d10b8fdd11551b097b37" kindref="member">addFile</ref><sp/>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename)<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" kindref="member">addFiles</ref>(_filename);}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Adds<sp/>a<sp/>given<sp/>number<sp/>of<sp/>files<sp/>with<sp/>a<sp/>.root<sp/>or<sp/>.fast<sp/>inside<sp/>the<sp/>given<sp/>folder<sp/>(by<sp/>default<sp/>all<sp/>the<sp/>files,<sp/>or<sp/>the<sp/>nb_files<sp/>first<sp/>ones)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" kindref="member">addFolder</ref><sp/><sp/><sp/><sp/>(std::string<sp/>folder,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>nb_files<sp/>=<sp/>-1,<sp/>std::vector&lt;std::string&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>extensions<sp/>=<sp/>{</highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">});</highlight></codeline>
+<codeline lineno="25" refid="class_files_manager_1ae56276d4ed1c16566b6849b0491efc0e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ae56276d4ed1c16566b6849b0491efc0e" kindref="member">addFolder</ref><sp/><sp/><sp/><sp/>(<ref refid="class_path" kindref="compound">Path</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>folder,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>nb_files<sp/>=<sp/>-1,<sp/>std::vector&lt;std::string&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>extensions<sp/>=<sp/>{</highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">})</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" kindref="member">addFolder</ref>(folder.<ref refid="class_path_1aa2f2b14aafcc3fc3626c243fcc6574dc" kindref="member">string</ref>(),<sp/>nb_files,<sp/>extensions);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a78f516fb7d432e25ab36b5b4763b6cab" kindref="member">flushFiles</ref><sp/>();</highlight></codeline>
+<codeline lineno="30" refid="class_files_manager_1a8d40403481fa064867f12ff55dcbf0ba" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a8d40403481fa064867f12ff55dcbf0ba" kindref="member">Print</ref><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>file<sp/>:<sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>)<sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(file);}</highlight></codeline>
+<codeline lineno="31" refid="class_files_manager_1ae8f32735de82faefc4284fcb2623f206" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ae8f32735de82faefc4284fcb2623f206" kindref="member">printFolders</ref><sp/>()<sp/>{<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>folder<sp/>:<sp/><ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref>)<sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(folder);}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Getters<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="class_files_manager_1a9e94015b1a269aba763b4791b8eaa957" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_path" kindref="compound">Path</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a9e94015b1a269aba763b4791b8eaa957" kindref="member">path</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref>;}</highlight></codeline>
+<codeline lineno="35" refid="class_files_manager_1a0f59f2614a79d529bc6398a137384efd" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a0f59f2614a79d529bc6398a137384efd" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>;}</highlight></codeline>
+<codeline lineno="36" refid="class_files_manager_1a0348db71fd84552aac6cfc90990b2775" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a0348db71fd84552aac6cfc90990b2775" kindref="member">get</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>;}</highlight></codeline>
+<codeline lineno="37" refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" kindref="member">getListFiles</ref><sp/><sp/><sp/><sp/><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref><sp/>;}</highlight></codeline>
+<codeline lineno="38" refid="class_files_manager_1a608cb616f47ffaec54d0a2c033c82ab7" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a480c6019671fdbb28689828151701c8c" kindref="member">ListFolders</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a608cb616f47ffaec54d0a2c033c82ab7" kindref="member">getListFolders</ref><sp/><sp/><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref>;}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="class_files_manager_1a3098544727ca05a49370d362f88c7d5d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a3098544727ca05a49370d362f88c7d5d" kindref="member">getFilesInFolder</ref><sp/>(std::string<sp/>folder)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(folder.back()!=</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">)<sp/>folder.push_back(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref>[folder];</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="class_files_manager_1ab9d800959dd94e4003c3b379734af59a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1ab9d800959dd94e4003c3b379734af59a" kindref="member">getCursor</ref><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>;}</highlight></codeline>
+<codeline lineno="47" refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" kindref="member">size</ref><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.size();}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="49" refid="class_files_manager_1a519d928170afd78b97573900450e8e3e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a519d928170afd78b97573900450e8e3e" kindref="member">diskSize</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight></codeline>
+<codeline lineno="50"><highlight class="keyword"><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">std::size_t</ref><sp/>i<sp/>=<sp/>0;<sp/>i&lt;<ref refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" kindref="member">size</ref>();<sp/>i++)</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ret+=<ref refid="files__functions_8hpp_1a3a01792a9cfbdd1f2b358d878559a917" kindref="member">size_file</ref>(<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>[i]);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ret;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59" refid="class_files_manager_1a031ec08f37366ff77828b8106f20cf66" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a031ec08f37366ff77828b8106f20cf66" kindref="member">isEmpty</ref><sp/>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(this-&gt;<ref refid="class_files_manager_1ac64c81b01eeebd3ea9cde0f7f6da995e" kindref="member">size</ref>()<sp/>==<sp/>0);}</highlight></codeline>
+<codeline lineno="60" refid="class_files_manager_1a3405dcb99deb03c4fdea55fff9f3ffdf" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!<ref refid="class_files_manager_1a031ec08f37366ff77828b8106f20cf66" kindref="member">isEmpty</ref>();}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Files<sp/>reader<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64" refid="class_files_manager_1a6de7ae3ec87e58cfe7c03dc28640a3f5" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>std::string<sp/><ref refid="class_files_manager_1a6de7ae3ec87e58cfe7c03dc28640a3f5" kindref="member">getFile</ref><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n<sp/>=<sp/>-1)</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(n&lt;0)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>[<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>];</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>[n];</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Setters<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="class_files_manager_1a548490c251183fff04e9db3a1d605875" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a548490c251183fff04e9db3a1d605875" kindref="member">setListFiles</ref>(<ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>list)<sp/>{</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_files_manager_1a78f516fb7d432e25ab36b5b4763b6cab" kindref="member">flushFiles</ref>();<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;list.size();<sp/>i++)<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" kindref="member">addFiles</ref>(list[i]);}</highlight></codeline>
+<codeline lineno="72" refid="class_files_manager_1aa72af0ac3e9923df087384a2bade2c7e" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1aa72af0ac3e9923df087384a2bade2c7e" kindref="member">setCursor</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filesCursor)<sp/>{<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal"><sp/>(_filesCursor);}</highlight></codeline>
+<codeline lineno="73" refid="class_files_manager_1aa3e8631822c6f1e152890a496ea40d63" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1aa3e8631822c6f1e152890a496ea40d63" kindref="member">setCursor</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filesCursor)<sp/>{<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/>_filesCursor;}</highlight></codeline>
+<codeline lineno="74" refid="class_files_manager_1a59f028130e0b38bac855ebd8ee938202" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a59f028130e0b38bac855ebd8ee938202" kindref="member">setVerbose</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>v)<sp/>{<ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref><sp/>=<sp/>v;}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="class_files_manager_1a78934b0656b357c7eb3807aa4bea7f26" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="class_files_manager_1a78934b0656b357c7eb3807aa4bea7f26" kindref="member">operator[] </ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n)<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a6de7ae3ec87e58cfe7c03dc28640a3f5" kindref="member">getFile</ref>(n);}</highlight></codeline>
+<codeline lineno="77" refid="class_files_manager_1ae7f5500280a409300732527ddd9f5884" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ae7f5500280a409300732527ddd9f5884" kindref="member">operator=</ref>(<ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>list)<sp/>{<ref refid="class_files_manager_1a548490c251183fff04e9db3a1d605875" kindref="member">setListFiles</ref>(list);}</highlight></codeline>
+<codeline lineno="78" refid="class_files_manager_1a192c60593f1a0469cc4c6bd5727c9905" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager" kindref="compound">FilesManager</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_files_manager_1a192c60593f1a0469cc4c6bd5727c9905" kindref="member">operator=</ref>(<ref refid="class_files_manager" kindref="compound">FilesManager</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>other)<sp/></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref>;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref>;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref>;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a4721c3a635a648a4724d268b2b842064" kindref="member">isReadable</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1a4721c3a635a648a4724d268b2b842064" kindref="member">isReadable</ref>;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref><sp/>=<sp/>other.<ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref>;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="class_files_manager_1a444c7295f3b1a3b9053db2b64a809514" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a444c7295f3b1a3b9053db2b64a809514" kindref="member">begin</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.begin();}</highlight></codeline>
+<codeline lineno="91" refid="class_files_manager_1ad6f8c081ffad62c336ae5b3a8a5495e6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad6f8c081ffad62c336ae5b3a8a5495e6" kindref="member">end</ref>()<sp/><sp/><sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.end<sp/><sp/>();}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93" refid="class_files_manager_1acc6d5a780b87ea8ef55a5a43d8d806aa" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1acc6d5a780b87ea8ef55a5a43d8d806aa" kindref="member">begin</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.begin();}</highlight></codeline>
+<codeline lineno="94" refid="class_files_manager_1a00d94c31c948795299d9152b2c4e7dca" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a00d94c31c948795299d9152b2c4e7dca" kindref="member">end</ref>()</highlight><highlight class="keyword"><sp/><sp/><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.end<sp/><sp/>();}</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96" refid="class_files_manager_1a94f6fa018f7d7fda65a463be74a3c3d4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a94f6fa018f7d7fda65a463be74a3c3d4" kindref="member">operator&gt;&gt;</ref>(std::string<sp/>&amp;<sp/>filename)<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ac4d90f9590ed90fcbbe23557ae88c892" kindref="member">nextFileName</ref>(filename);}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="99" refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_path" kindref="compound">Path</ref><sp/><ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref>;</highlight></codeline>
+<codeline lineno="100" refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="101" refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>;</highlight></codeline>
+<codeline lineno="102" refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_files_manager_8hpp_1a480c6019671fdbb28689828151701c8c" kindref="member">ListFolders</ref><sp/><ref refid="class_files_manager_1adffde8338a5fd34b53b84e74320b2eb1" kindref="member">m_listFolder</ref>;</highlight></codeline>
+<codeline lineno="103" refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" refkind="member"><highlight class="normal"><sp/><sp/>std::map&lt;std::string,<sp/>ListFiles&gt;<sp/><ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref>;</highlight></codeline>
+<codeline lineno="104" refid="class_files_manager_1a4721c3a635a648a4724d268b2b842064" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a4721c3a635a648a4724d268b2b842064" kindref="member">isReadable</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105" refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" kindref="member">FilesManager::addFiles</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_filename)</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a1fee4928b5f2901a8871cd3b9551788c" kindref="member">m_path</ref><sp/>=<sp/><ref refid="files__functions_8hpp_1ab1e262f27aaad28944f29cd2bbde417f" kindref="member">getPath</ref>(_filename);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><ref refid="lib_co_8hpp_1a69aa29b598b851b0640aa225a9e5d61d" kindref="member">uint</ref><sp/>numberFiles<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;list&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/>{</highlight><highlight class="comment">//<sp/>using<sp/>the<sp/>&quot;data&quot;<sp/>file<sp/>as<sp/>an<sp/>input<sp/>containing<sp/>the<sp/>path<sp/>to<sp/>the<sp/>actual<sp/>data<sp/>.root<sp/>or<sp/>.fast<sp/>files</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>std::ifstream<sp/>inputsFile<sp/>(_filename);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!inputsFile.is_open()<sp/>||<sp/>!inputsFile.good())</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Impossible<sp/>to<sp/>open<sp/>or<sp/>read<sp/>dat<sp/>file<sp/>&apos;&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>_filename<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;&apos;&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>oneline;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(inputsFile.good())</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>getline(inputsFile,<sp/>oneline);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>oneline.size()<sp/>&gt;<sp/>1<sp/><sp/>&amp;&amp;<sp/><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(oneline)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal"><sp/>||<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(oneline)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">))</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.push_back(oneline);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>numberFiles++;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>inputsFile.close();</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal"><sp/>||<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/>{</highlight><highlight class="comment">//<sp/>there<sp/>is<sp/>only<sp/>one<sp/>.root<sp/>or<sp/>.fast<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.push_back(_filename);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>numberFiles<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;File<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>_filename<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;not<sp/>taken<sp/>into<sp/>account.<sp/>Extension&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" kindref="member">extension</ref>(_filename)</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;unkown...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Abort...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143" refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" kindref="member">FilesManager::addFolder</ref>(std::string<sp/>_foldername,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>_nb_files,<sp/>std::vector&lt;std::string&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>extensions)</highlight></codeline>
+<codeline lineno="144"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><ref refid="files__functions_8hpp_1a4a072faccd444b8907dffd96e6211461" kindref="member">push_back_if_none</ref>(_foldername,<sp/></highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>listfile<sp/>=<sp/><ref refid="files__functions_8hpp_1a0b6555f0818e33170e5c3c3c513d6b91" kindref="member">list_files_in_folder</ref>(_foldername,<sp/>extensions);<sp/></highlight><highlight class="comment">//<sp/>Default<sp/>.root<sp/>OR<sp/>.fast<sp/>files<sp/>only</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(listfile.size()<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>std::sort(listfile.begin(),<sp/>listfile.end());</highlight><highlight class="comment">//<sp/>Sorts<sp/>the<sp/>entries</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_nb_files<sp/>&gt;<sp/><ref refid="lib_co_8hpp_1a695ead22582e1da41880ee67c2c61d07" kindref="member">long_cast</ref>(listfile.size())<sp/>||<sp/>_nb_files<sp/>==<sp/>-1)<sp/>_nb_files<sp/>=<sp/>listfile.size();</highlight><highlight class="comment">//Sets<sp/>the<sp/>correct<sp/>number<sp/>of<sp/>files<sp/>to<sp/>keep</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_files_manager_8hpp_1a3e0131c4cf52ba81606452d015c5d2a2" kindref="member">ListFiles</ref><sp/>cut_listfile<sp/>(listfile.begin(),<sp/>listfile.begin()+_nb_files);</highlight><highlight class="comment">//<sp/>Take<sp/>the<sp/>nb_files<sp/>first<sp/>files<sp/>of<sp/>the<sp/>folder</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>file<sp/>:<sp/>cut_listfile)<sp/><ref refid="class_files_manager_1aac344c1b50c5e98ff64f6007b726be43" kindref="member">m_listFilesInFolder</ref>[_foldername].emplace_back(file);</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.size()<sp/>==<sp/>0)<sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref><sp/>=<sp/>cut_listfile;</highlight><highlight class="comment">//<sp/>Set<sp/>cut_listfile<sp/>to<sp/>be<sp/>the<sp/>global<sp/>list<sp/>of<sp/>files</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>std::copy(cut_listfile.begin(),<sp/>cut_listfile.end(),<sp/>std::back_inserter(<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>));</highlight><highlight class="comment">//<sp/>Add<sp/>cut_listfile<sp/>to<sp/>the<sp/>global<sp/>list<sp/>of<sp/>files</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_files_manager_1a7b9423dd2d7f87e518b0cbb80454c24b" kindref="member">verbose</ref>)<sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(<sp/>cut_listfile.size(),<sp/></highlight><highlight class="stringliteral">&quot;files<sp/>added,&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.size(),<sp/></highlight><highlight class="stringliteral">&quot;files<sp/>to<sp/>process&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">throw</highlight><highlight class="normal"><sp/>std::runtime_error(</highlight><highlight class="stringliteral">&quot;Folder<sp/>&apos;&quot;</highlight><highlight class="normal">+_foldername+</highlight><highlight class="stringliteral">&quot;&apos;<sp/>empty<sp/>!!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="163"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="164"><highlight class="normal"></highlight></codeline>
-<codeline lineno="165" refid="class_files_manager_1ac4d90f9590ed90fcbbe23557ae88c892" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ac4d90f9590ed90fcbbe23557ae88c892" kindref="member">FilesManager::nextFileName</ref>(std::string<sp/>&amp;<sp/>filename,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>step)</highlight></codeline>
+<codeline lineno="165" refid="class_files_manager_1a78f516fb7d432e25ab36b5b4763b6cab" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1a78f516fb7d432e25ab36b5b4763b6cab" kindref="member">FilesManager::flushFiles</ref>()</highlight></codeline>
 <codeline lineno="166"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>+step&gt;<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.size())<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/>filename<sp/>=<sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.at(<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>);</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>+=<sp/>step;</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="171"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight></codeline>
-<codeline lineno="173" refid="_files_manager_8hpp_1ad47d67c98fc9fa9f10aafc6252842515" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="_files_manager_8hpp_1ad47d67c98fc9fa9f10aafc6252842515" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>cout,<sp/><ref refid="class_files_manager" kindref="compound">FilesManager</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>files)</highlight></codeline>
-<codeline lineno="174"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>f<sp/>:<sp/>files)<sp/>cout<sp/>&lt;&lt;<sp/>f<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cout;</highlight></codeline>
-<codeline lineno="177"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.resize(0);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.clear();</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172" refid="class_files_manager_1ac4d90f9590ed90fcbbe23557ae88c892" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_files_manager_1ac4d90f9590ed90fcbbe23557ae88c892" kindref="member">FilesManager::nextFileName</ref>(std::string<sp/>&amp;<sp/>filename,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>step)</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>+step&gt;<ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.size())<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>filename<sp/>=<sp/><ref refid="class_files_manager_1ad847c8c06f9ad4c1459d76c8fd034fc2" kindref="member">m_listFiles</ref>.at(<ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref>);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><ref refid="class_files_manager_1a0a7f3e4727cc95b945c22a7df9e9c0e9" kindref="member">m_filesCursor</ref><sp/>+=<sp/>step;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180" refid="_files_manager_8hpp_1ad47d67c98fc9fa9f10aafc6252842515" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="_files_manager_8hpp_1ad47d67c98fc9fa9f10aafc6252842515" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>cout,<sp/><ref refid="class_files_manager" kindref="compound">FilesManager</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>files)</highlight></codeline>
+<codeline lineno="181"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>f<sp/>:<sp/>files)<sp/>cout<sp/>&lt;&lt;<sp/>f<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cout;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//FILEMANAGER_HPP</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="lib/Classes/FilesManager.hpp"/>
   </compounddef>

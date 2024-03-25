@@ -1,0 +1,7 @@
+<map id="Detectors::labels" name="Detectors::labels">
+<area shape="rect" id="node1" title=" " alt="" coords="416,56,548,83"/>
+<area shape="rect" id="node2" href="$class_calibrator.html#a00806ef12bceedaa6c16dad9b653f27f" title="Uses the second version of the peak finder to extract calibration coefficients." alt="" coords="215,5,368,32"/>
+<area shape="rect" id="node4" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="224,56,359,83"/>
+<area shape="rect" id="node5" href="$class_calibrator.html#aad90b0e3951d4caffe11e319c7108a51" title="if some spectra and calibration coefficients have been loaded, or after the calibration coefficients ..." alt="" coords="226,107,357,133"/>
+<area shape="rect" id="node3" href="$class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="5,5,167,32"/>
+</map>

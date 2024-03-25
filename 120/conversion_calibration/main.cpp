@@ -48,7 +48,7 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   // Important : if the output file already exists, then do not overwrite it !
   if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
 
-  // Initialize the temporary TTree :
+  // Initialise the temporary TTree :
   std::unique_ptr<TTree> readTree (new TTree("temp","temp"));
   readTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
   readTree -> Branch("label"  , &hit.label );
@@ -85,15 +85,15 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
   // Realign shuffled hits after timeshifts :
   Alignator gindex(readTree.get());
 
-  // Initialize output TTree :
+  // Initialise output TTree :
   std::unique_ptr<TTree> outTree(new TTree("Nuball2","Nuball2"));
   Event event(outTree.get(), "ltnNp", "w");
 
-  // Initialize event builder based on RF :
+  // Initialise event builder based on RF :
   RF_Manager rf;
   EventBuilder_136 eventBuilder(&event, &rf);
 
-  // Initialize event analyser : simple modules and DSSD counter
+  // Initialise event analyser : simple modules and DSSD counter
   Counter136 counter;
 
   // Handle the first RF downscale :
@@ -162,12 +162,12 @@ void convert(Hit & hit, FasterReader & reader, DetectorsList const & detList, Ca
 int main(int argc, char** argv)
 {
 
-  // MANDATORY : initialize the multithreading !
-  MTObject::Initialize(2);
+  // MANDATORY : Initialise the multithreading !
+  MTObject::Initialise(2);
 
 
-  // MANDATORY : initialize the detectors labels manager !
-  Detectors::Initialize();
+  // MANDATORY : Initialise the detectors labels manager !
+  Detectors::Initialise();
 
   // Setup the path accordingly to the machine :
     Path datapath = std::string(std::getenv("HOME"));

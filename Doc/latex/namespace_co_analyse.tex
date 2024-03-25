@@ -4,7 +4,7 @@
 \begin{DoxyCompactItemize}
 \item 
 using \textbf{ Projections\+Bins} = std\+::vector$<$ std\+::pair$<$ double, double $>$ $>$
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Vector of pairs of min and max bins. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -13,33 +13,33 @@ std\+::vector$<$ double $>$ \textbf{ extract\+Background\+Array} (std\+::vector$
 std\+::vector$<$ double $>$ \textbf{ extract\+Background\+Array} (TH1F $\ast$histo, int const \&nsmooth=10)
 \item 
 void \textbf{ normalize\+Bidim} (TH2 $\ast$matrix, double const \&factor=1.\+0)
-\item 
+\begin{DoxyCompactList}\small\item\em Normalise the whole bidim. \end{DoxyCompactList}\item 
 void \textbf{ normalizeY} (TH2 $\ast$matrix, double const \&factor=1)
-\item 
+\begin{DoxyCompactList}\small\item\em For each X bin, normalise the Y histogram. \end{DoxyCompactList}\item 
 void \textbf{ projectX} (TH2 $\ast$matrix, TH1 $\ast$proj)
-\begin{DoxyCompactList}\small\item\em Total projection on X axis. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Project the whole matrix on the X axis. This fills proj. \end{DoxyCompactList}\item 
 void \textbf{ projectX} (TH2 $\ast$matrix, TH1 $\ast$proj, double const \&bin\+Ymin, double const \&bin\+Ymax)
-\begin{DoxyCompactList}\small\item\em Project on Y axis between values bin\+Ymin and bin\+Ymax included [bin\+Ymin;bin\+Ymax]. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Project on Y axis between values bin\+Ymin and bin\+Ymax included [bin\+Ymin;bin\+Ymax]. This fills proj. \end{DoxyCompactList}\item 
 void \textbf{ projectX} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binY)
-\begin{DoxyCompactList}\small\item\em Project on Y axis at a given X bin. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Project on X axis at a given Y bin. This fills proj. \end{DoxyCompactList}\item 
 void \textbf{ projectX} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&bin\+Ymin, int const \&bin\+Ymax)
-\begin{DoxyCompactList}\small\item\em Project on X axis between bin bin\+Ymin included and bin\+Ymax excluded [bin\+Ymin;bin\+Ymax[. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Project on X axis between bin bin\+Ymin included and bin\+Ymax excluded [bin\+Ymin;bin\+Ymax[. This fills proj. \end{DoxyCompactList}\item 
 void \textbf{ projectY} (TH2 $\ast$matrix, TH1 $\ast$proj, double const \&value\+Xmin, double const \&value\+Xmax)
-\begin{DoxyCompactList}\small\item\em Project on Y axis between values value\+Xmin and value\+Xmax included [value\+Xmin;value\+Xmax]. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Project matrix on Y axis between values value\+Xmin and value\+Xmax included [value\+Xmin;value\+Xmax]. This fills proj. \end{DoxyCompactList}\item 
 void \textbf{ projectY} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binX)
-\begin{DoxyCompactList}\small\item\em Project on Y axis at a given X bin. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Project matrix on Y axis at a given X bin. This fills proj. \end{DoxyCompactList}\item 
 void \textbf{ projectY} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&bin\+Xmin, int const \&bin\+Xmax)
-\begin{DoxyCompactList}\small\item\em Project on Y axis between bin bin\+Xmin included and bin\+Xmax excluded [bin\+Xmin;bin\+Xmax[. \end{DoxyCompactList}\item 
-void \textbf{ remove\+Background} (TH1 $\ast$histo, int const \&niter=10, std\+::string const \&fit\+\_\+options=\char`\"{}\char`\"{}, std\+::string const \&bidim\+\_\+options=\char`\"{}X\char`\"{})
+\begin{DoxyCompactList}\small\item\em Project matrix on Y axis between bin bin\+Xmin included and bin\+Xmax excluded [bin\+Xmin;bin\+Xmax[. This fills proj. \end{DoxyCompactList}\item 
+void \textbf{ remove\+Background} (TH1 $\ast$histo, int const \&niter=10, std\+::string const \&fit\+\_\+options=\char`\"{}\char`\"{}, std\+::string const \&bidim\+\_\+options=\char`\"{}X\char`\"{}) noexcept
 \begin{DoxyCompactList}\small\item\em Remove the background in the given histo. \end{DoxyCompactList}\item 
 void \textbf{ remove\+Random\+Bidim} (TH2 $\ast$matrix, int iterations=1, bool save\+\_\+intermediate=false, \textbf{ Projections\+Bins} projectionsY=\{\{\}\}, \textbf{ Projections\+Bins} projectionsX=\{\{\}\})
 \item 
 void \textbf{ remove\+RandomY} (TH2 $\ast$matrix, int \+\_\+stopX=-\/1, int \+\_\+stopY=-\/1, bool write\+Intermediate=false, \textbf{ Projections\+Bins} projections=\{\{\}\})
 \begin{DoxyCompactList}\small\item\em LEGACY. \end{DoxyCompactList}\item 
 void \textbf{ setX} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binX)
-\item 
+\begin{DoxyCompactList}\small\item\em Set Y histogram proj in matrix at binX. \end{DoxyCompactList}\item 
 void \textbf{ setY} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binY)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set X histogram proj in matrix at binY. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Typedef Documentation}
@@ -51,6 +51,10 @@ void \textbf{ setY} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binY)
 
 
 
+Vector of pairs of min and max bins. 
+
+
+
 \doxysubsection{Function Documentation}
 \mbox{\label{namespace_co_analyse_acb07ede224cab3e9289d25c72c099b24}} 
 \index{CoAnalyse@{CoAnalyse}!extractBackgroundArray@{extractBackgroundArray}}
@@ -58,7 +62,10 @@ void \textbf{ setY} (TH2 $\ast$matrix, TH1 $\ast$proj, int const \&binY)
 \doxysubsubsection{extractBackgroundArray()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily std\+::vector$<$double$>$ Co\+Analyse\+::extract\+Background\+Array (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ \&}]{source,  }\item[{int const \&}]{nsmooth = {\ttfamily 10} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]\end{DoxyRefDesc}
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -71,7 +78,10 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{extractBackgroundArray()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily std\+::vector$<$double$>$ Co\+Analyse\+::extract\+Background\+Array (\begin{DoxyParamCaption}\item[{TH1F $\ast$}]{histo,  }\item[{int const \&}]{nsmooth = {\ttfamily 10} }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]\end{DoxyRefDesc}
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -84,11 +94,19 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{normalizeBidim()}
 {\footnotesize\ttfamily void Co\+Analyse\+::normalize\+Bidim (\begin{DoxyParamCaption}\item[{TH2 $\ast$}]{matrix,  }\item[{double const \&}]{factor = {\ttfamily 1.0} }\end{DoxyParamCaption})}
 
+
+
+Normalise the whole bidim. 
+
 \mbox{\label{namespace_co_analyse_ab71a4903cf3d3c32f35262dab10a82e3}} 
 \index{CoAnalyse@{CoAnalyse}!normalizeY@{normalizeY}}
 \index{normalizeY@{normalizeY}!CoAnalyse@{CoAnalyse}}
 \doxysubsubsection{normalizeY()}
 {\footnotesize\ttfamily void Co\+Analyse\+::normalizeY (\begin{DoxyParamCaption}\item[{TH2 $\ast$}]{matrix,  }\item[{double const \&}]{factor = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+For each X bin, normalise the Y histogram. 
 
 \mbox{\label{namespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272}} 
 \index{CoAnalyse@{CoAnalyse}!projectX@{projectX}}
@@ -98,16 +116,18 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 
-Total projection on X axis. 
+Project the whole matrix on the X axis. This fills proj. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=304pt]{namespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_cgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -122,9 +142,10 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-Project on Y axis between values bin\+Ymin and bin\+Ymax included [bin\+Ymin;bin\+Ymax]. 
+Project on Y axis between values bin\+Ymin and bin\+Ymax included [bin\+Ymin;bin\+Ymax]. This fills proj. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -139,13 +160,14 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 
-Project on Y axis at a given X bin. 
+Project on X axis at a given Y bin. This fills proj. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=304pt]{namespace_co_analyse_a0158170fa443490d844333c1acd9a89a_cgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_a0158170fa443490d844333c1acd9a89a_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{namespace_co_analyse_aa27f433db27fe9babd4c55421121556d}} 
@@ -156,13 +178,14 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 
-Project on X axis between bin bin\+Ymin included and bin\+Ymax excluded [bin\+Ymin;bin\+Ymax[. 
+Project on X axis between bin bin\+Ymin included and bin\+Ymax excluded [bin\+Ymin;bin\+Ymax[. This fills proj. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=304pt]{namespace_co_analyse_aa27f433db27fe9babd4c55421121556d_cgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_aa27f433db27fe9babd4c55421121556d_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{namespace_co_analyse_ab64c2bb160dbdc01836274235d0bbd3b}} 
@@ -173,9 +196,10 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 
-Project on Y axis between values value\+Xmin and value\+Xmax included [value\+Xmin;value\+Xmax]. 
+Project matrix on Y axis between values value\+Xmin and value\+Xmax included [value\+Xmin;value\+Xmax]. This fills proj. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -190,16 +214,18 @@ Here is the call graph for this function\+:\nopagebreak
 
 
 
-Project on Y axis at a given X bin. 
+Project matrix on Y axis at a given X bin. This fills proj. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=303pt]{namespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_cgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -214,20 +240,21 @@ Here is the caller graph for this function\+:\nopagebreak
 
 
 
-Project on Y axis between bin bin\+Xmin included and bin\+Xmax excluded [bin\+Xmin;bin\+Xmax[. 
+Project matrix on Y axis between bin bin\+Xmin included and bin\+Xmax excluded [bin\+Xmin;bin\+Xmax[. This fills proj. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=303pt]{namespace_co_analyse_aa19f9a517f5a4ce70e61ebed3cfeecf9_cgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_aa19f9a517f5a4ce70e61ebed3cfeecf9_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{namespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8}} 
+\mbox{\label{namespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da}} 
 \index{CoAnalyse@{CoAnalyse}!removeBackground@{removeBackground}}
 \index{removeBackground@{removeBackground}!CoAnalyse@{CoAnalyse}}
 \doxysubsubsection{removeBackground()}
-{\footnotesize\ttfamily void Co\+Analyse\+::remove\+Background (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{histo,  }\item[{int const \&}]{niter = {\ttfamily 10},  }\item[{std\+::string const \&}]{fit\+\_\+options = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{bidim\+\_\+options = {\ttfamily \char`\"{}X\char`\"{}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Co\+Analyse\+::remove\+Background (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{histo,  }\item[{int const \&}]{niter = {\ttfamily 10},  }\item[{std\+::string const \&}]{fit\+\_\+options = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{bidim\+\_\+options = {\ttfamily \char`\"{}X\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
 
 
 
@@ -249,18 +276,20 @@ Remove the background in the given histo.
 \end{DoxyItemize}\\
 \hline
 \end{DoxyParams}
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_cgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_icgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{namespace_co_analyse_a2a89fce5d95da5f0448d4a9fba93a108}} 
@@ -269,6 +298,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{removeRandomBidim()}
 {\footnotesize\ttfamily void Co\+Analyse\+::remove\+Random\+Bidim (\begin{DoxyParamCaption}\item[{TH2 $\ast$}]{matrix,  }\item[{int}]{iterations = {\ttfamily 1},  }\item[{bool}]{save\+\_\+intermediate = {\ttfamily false},  }\item[{\textbf{ Projections\+Bins}}]{projectionsY = {\ttfamily \{\{\}\}},  }\item[{\textbf{ Projections\+Bins}}]{projectionsX = {\ttfamily \{\{\}\}} }\end{DoxyParamCaption})}
 
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]\end{DoxyRefDesc}
 \mbox{\label{namespace_co_analyse_ab8af94a11fa0979cbaf83228dfc1675e}} 
 \index{CoAnalyse@{CoAnalyse}!removeRandomY@{removeRandomY}}
 \index{removeRandomY@{removeRandomY}!CoAnalyse@{CoAnalyse}}
@@ -285,14 +316,20 @@ LEGACY.
 \doxysubsubsection{setX()}
 {\footnotesize\ttfamily void Co\+Analyse\+::setX (\begin{DoxyParamCaption}\item[{TH2 $\ast$}]{matrix,  }\item[{TH1 $\ast$}]{proj,  }\item[{int const \&}]{binX }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Set Y histogram proj in matrix at binX. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=285pt]{namespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_cgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -305,14 +342,20 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{setY()}
 {\footnotesize\ttfamily void Co\+Analyse\+::setY (\begin{DoxyParamCaption}\item[{TH2 $\ast$}]{matrix,  }\item[{TH1 $\ast$}]{proj,  }\item[{int const \&}]{binY }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Set X histogram proj in matrix at binY. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=284pt]{namespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_cgraph}
+\includegraphics[width=350pt]{namespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

@@ -13,7 +13,7 @@ public:
   TimewalkDSSD(){};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
-  void InitializeManip();
+  void InitialiseManip();
   static void run(Parameters & p, TimewalkDSSD & TimewalkDSSD);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
@@ -63,7 +63,7 @@ private:
 bool TimewalkDSSD::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
   if (m_writedata) this -> Analyse();
@@ -105,9 +105,9 @@ void TimewalkDSSD::run(Parameters & p, TimewalkDSSD & TimewalkDSSD)
   } // End files loop
 }
 
-void TimewalkDSSD::InitializeManip()
+void TimewalkDSSD::InitialiseManip()
 {
-  print("Initialize histograms");
+  print("Initialise histograms");
   if (m_correct)
   {
     m_Timewalks_DSSD.resize(56);

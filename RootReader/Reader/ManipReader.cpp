@@ -76,8 +76,8 @@ int main(int argc, char** argv)
     MTObject::getThreadsNb(), "threads");
   }
 
-  // Sorted_Event::Initialize();
-  MTObject::Initialize(p.threadsNb());
+  // Sorted_Event::Initialise();
+  MTObject::Initialise(p.threadsNb());
 
   #if defined (N_SI_120)
   std::string fileID = "ID/index_120.dat";

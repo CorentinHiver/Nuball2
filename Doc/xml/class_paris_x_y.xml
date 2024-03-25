@@ -62,7 +62,7 @@
         <references refid="_paris_8h_1a83f5c233a4991b23b715dde312171dc2" compoundref="_paris_8h" startline="61">Paris_R2_y</references>
         <references refid="_paris_8h_1ae69f9e16a5332c21d2e75e85124a24d5" compoundref="_paris_8h" startline="45">Paris_R3_x</references>
         <references refid="_paris_8h_1a96dc4022d292e420408212f72f523ef1" compoundref="_paris_8h" startline="69">Paris_R3_y</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       <memberdef kind="function" id="class_paris_x_y_1ad176348f497c7645d9282dcc653fe173" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int const  &amp;</type>

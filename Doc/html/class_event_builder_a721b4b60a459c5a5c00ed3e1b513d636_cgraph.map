@@ -1,5 +1,6 @@
 <map id="EventBuilder::build" name="EventBuilder::build">
-<area shape="rect" id="node1" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="5,31,151,57"/>
-<area shape="rect" id="node2" href="$class_event_builder.html#a96d24bbdba6a9cc0770bc1ec81c7c9e0" title=" " alt="" coords="219,5,366,32"/>
-<area shape="rect" id="node3" href="$class_event_builder.html#a4f56ddbeef9ac86eca830a3742fb30c7" title=" " alt="" coords="199,56,387,83"/>
+<area shape="rect" id="node1" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="5,56,151,83"/>
+<area shape="rect" id="node2" href="$vector__functions_8hpp.html#a1351ef703b7cf695131924cc97eb6374" title=" " alt="" coords="247,5,338,32"/>
+<area shape="rect" id="node3" href="$class_event_builder.html#a96d24bbdba6a9cc0770bc1ec81c7c9e0" title=" " alt="" coords="219,56,366,83"/>
+<area shape="rect" id="node4" href="$class_event_builder.html#a4f56ddbeef9ac86eca830a3742fb30c7" title=" " alt="" coords="199,107,387,133"/>
 </map>

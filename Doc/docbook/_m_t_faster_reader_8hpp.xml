@@ -2,11 +2,12 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__m_t_faster_reader_8hpp" xml:lang="en-US">
 <title>lib/MTObjects/MTFasterReader.hpp File Reference</title>
 <indexterm><primary>lib/MTObjects/MTFasterReader.hpp</primary></indexterm>
-<programlisting>#include &quot;../Classes/FasterReader.hpp&quot;
+<programlisting>#include &quot;MTObject.hpp&quot;
+#include &quot;MTList.hpp&quot;
+#include &quot;../Classes/FasterReader.hpp&quot;
 #include &quot;../Classes/Alignator.hpp&quot;
 #include &quot;../Classes/FilesManager.hpp&quot;
-#include &quot;MTObject.hpp&quot;
-#include &quot;MTList.hpp&quot;
+#include &quot;../Classes/CoProgressBar.hpp&quot;
 </programlisting>Include dependency graph for MTFasterReader.hpp:<para>
     <informalfigure>
         <mediaobject>

@@ -67,20 +67,24 @@ Collaboration diagram for FasterReader:<para>
 <simplesect>
     <title>Static Public Member Functions    </title>
         <itemizedlist>
+            <listitem><para>static auto <link linkend="_class_faster_reader_1a54f783429b2ce11a478280f5aa0ab2a4">getMaxHits</link> ()</para>
+</listitem>
             <listitem><para>static void <link linkend="_class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb">setMaxHits</link> (<link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> maxHits)</para>
 
 <para>Set the number of hits to read inside each file. </para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_faster_reader_1a76b7fa1bc82b5a5dff918bef2ae7d3a0">setVerbose</link> (int i=1)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
 <simplesect>
     <title>Private Member Functions    </title>
         <itemizedlist>
-            <listitem><para>bool <link linkend="_class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69">Initialize</link> ()</para>
+            <listitem><para>bool <link linkend="_class_faster_reader_1aa887429a942ff961225755336c06c025">Initialise</link> ()</para>
 
 <para>Setup the fasterac.h library to read the data. </para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_faster_reader_1a21a9202f79d43b9fd41cd1e1c276fe2c">InitializeReader</link> ()</para>
+            <listitem><para>bool <link linkend="_class_faster_reader_1a83d86d816bed5053765a05ddf4da278d">InitialiseReader</link> ()</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858">ReadData</link> (faster_data_p const &amp;_data)</para>
 
@@ -137,8 +141,6 @@ Collaboration diagram for FasterReader:<para>
 </listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> <link linkend="_class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a">m_counter</link> = 0</para>
 </listitem>
-            <listitem><para><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> <link linkend="_class_faster_reader_1a681170463697b5dd3856328eacb0a39d">m_cursor</link> = 0</para>
-</listitem>
             <listitem><para>faster_data_p <link linkend="_class_faster_reader_1a95a022f50153b44f711a81e8109583ce">m_data</link></para>
 </listitem>
             <listitem><para><link linkend="_class_hit">Hit</link> <link linkend="_class_faster_reader_1a8150da77ef499006286e92ae4d65436d">m_empty_hit</link></para>
@@ -166,7 +168,9 @@ Collaboration diagram for FasterReader:<para>
 <simplesect>
     <title>Static Private Attributes    </title>
         <itemizedlist>
-            <listitem><para>static <link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> <link linkend="_class_faster_reader_1a8554231dbef9df122f04313f4adb594a">m_maxHits</link> = -1</para>
+            <listitem><para>static thread_local int <link linkend="_class_faster_reader_1a5d60fc12eece11753c5d495ba76db75f">m_verbose</link> = 1</para>
+</listitem>
+            <listitem><para>static <link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> <link linkend="_class_faster_reader_1aa58b38ff4c8f95526ea529cdaaa1f8f8">s_maxHits</link> = -1</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -304,14 +308,18 @@ Here is the caller graph for this function:<para>
 <indexterm><primary>getHit</primary><secondary>FasterReader</secondary></indexterm>
 <indexterm><primary>FasterReader</primary><secondary>getHit</secondary></indexterm>
 <para><computeroutput><link linkend="_class_hit">Hit</link>* FasterReader::getHit ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>
-<para><para><link linkend="_deprecated_1_deprecated000001">Deprecated</link> 
+<para><para><link linkend="_deprecated_1_deprecated000003">Deprecated</link> 
 <para>Get the current <link linkend="_class_hit">Hit</link> </para>
 </para></para>
-    </section><anchor xml:id="_class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69"/>    <section>
-    <title>Initialize()</title>
-<indexterm><primary>Initialize</primary><secondary>FasterReader</secondary></indexterm>
-<indexterm><primary>FasterReader</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>bool FasterReader::Initialize ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
+    </section><anchor xml:id="_class_faster_reader_1a54f783429b2ce11a478280f5aa0ab2a4"/>    <section>
+    <title>getMaxHits()</title>
+<indexterm><primary>getMaxHits</primary><secondary>FasterReader</secondary></indexterm>
+<indexterm><primary>FasterReader</primary><secondary>getMaxHits</secondary></indexterm>
+<para><computeroutput>static auto FasterReader::getMaxHits ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1aa887429a942ff961225755336c06c025"/>    <section>
+    <title>Initialise()</title>
+<indexterm><primary>Initialise</primary><secondary>FasterReader</secondary></indexterm>
+<indexterm><primary>FasterReader</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>bool FasterReader::Initialise ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
 
 <para>Setup the fasterac.h library to read the data. </para>
 </para>
@@ -319,7 +327,7 @@ Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_a949601e8d70fc3aaabe66824d22bdf69_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_aa887429a942ff961225755336c06c025_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -328,20 +336,29 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_a949601e8d70fc3aaabe66824d22bdf69_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_aa887429a942ff961225755336c06c025_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_faster_reader_1a21a9202f79d43b9fd41cd1e1c276fe2c"/>    <section>
-    <title>InitializeReader()</title>
-<indexterm><primary>InitializeReader</primary><secondary>FasterReader</secondary></indexterm>
-<indexterm><primary>FasterReader</primary><secondary>InitializeReader</secondary></indexterm>
-<para><computeroutput>bool FasterReader::InitializeReader ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    </section><anchor xml:id="_class_faster_reader_1a83d86d816bed5053765a05ddf4da278d"/>    <section>
+    <title>InitialiseReader()</title>
+<indexterm><primary>InitialiseReader</primary><secondary>FasterReader</secondary></indexterm>
+<indexterm><primary>FasterReader</primary><secondary>InitialiseReader</secondary></indexterm>
+<para><computeroutput>bool FasterReader::InitialiseReader ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_a21a9202f79d43b9fd41cd1e1c276fe2c_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_a83d86d816bed5053765a05ddf4da278d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_a83d86d816bed5053765a05ddf4da278d_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -375,7 +392,7 @@ Here is the caller graph for this function:<para>
 
 <para><link linkend="_class_faster_reader">FasterReader</link> reader(&amp;hit, filename); <literallayout><computeroutput> while(reader.Read())
  {
-    // This hit is filled/updated at each iteration by the data read in the ReadData() private method
+    // This hit is filled/updated at each iteration
     print(hit); 
  }
 </computeroutput></literallayout></para>
@@ -544,6 +561,15 @@ Here is the call graph for this function:<para>
 
 <para>Set the number of hits to read inside each file. </para>
 </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_aa1fcb8d6721212bc982cac0ae4e597eb_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
 Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
@@ -553,7 +579,12 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed"/>    <section>
+    </section><anchor xml:id="_class_faster_reader_1a76b7fa1bc82b5a5dff918bef2ae7d3a0"/>    <section>
+    <title>setVerbose()</title>
+<indexterm><primary>setVerbose</primary><secondary>FasterReader</secondary></indexterm>
+<indexterm><primary>FasterReader</primary><secondary>setVerbose</secondary></indexterm>
+<para><computeroutput>static void FasterReader::setVerbose (int i = <computeroutput>1</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed"/>    <section>
     <title>switch_alias()</title>
 <indexterm><primary>switch_alias</primary><secondary>FasterReader</secondary></indexterm>
 <indexterm><primary>FasterReader</primary><secondary>switch_alias</secondary></indexterm>
@@ -635,6 +666,15 @@ Here is the caller graph for this function:<para>
 </para>
 
 <para>Internal method used to extract QDC values with 2 gates </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_a94fd509a6352735984a20c03fb046254_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
 Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
@@ -654,6 +694,15 @@ Here is the caller graph for this function:<para>
 </para>
 
 <para>Internal method used to extract QDC values with 2 gates </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster_reader_afa7cbf1733ff68804ef4f7706bf58416_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
 Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
@@ -726,11 +775,7 @@ Here is the caller graph for this function:<para>
     <title>m_counter</title>
 <indexterm><primary>m_counter</primary><secondary>FasterReader</secondary></indexterm>
 <indexterm><primary>FasterReader</primary><secondary>m_counter</secondary></indexterm>
-<para><computeroutput><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> FasterReader::m_counter = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1a681170463697b5dd3856328eacb0a39d"/>    <section>
-    <title>m_cursor</title>
-<indexterm><primary>m_cursor</primary><secondary>FasterReader</secondary></indexterm>
-<indexterm><primary>FasterReader</primary><secondary>m_cursor</secondary></indexterm>
-<para><computeroutput><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> FasterReader::m_cursor = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1a95a022f50153b44f711a81e8109583ce"/>    <section>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> FasterReader::m_counter = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1a95a022f50153b44f711a81e8109583ce"/>    <section>
     <title>m_data</title>
 <indexterm><primary>m_data</primary><secondary>FasterReader</secondary></indexterm>
 <indexterm><primary>FasterReader</primary><secondary>m_data</secondary></indexterm>
@@ -766,19 +811,23 @@ Here is the caller graph for this function:<para>
     <title>m_kReady</title>
 <indexterm><primary>m_kReady</primary><secondary>FasterReader</secondary></indexterm>
 <indexterm><primary>FasterReader</primary><secondary>m_kReady</secondary></indexterm>
-<para><computeroutput>bool FasterReader::m_kReady = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1a8554231dbef9df122f04313f4adb594a"/>    <section>
-    <title>m_maxHits</title>
-<indexterm><primary>m_maxHits</primary><secondary>FasterReader</secondary></indexterm>
-<indexterm><primary>FasterReader</primary><secondary>m_maxHits</secondary></indexterm>
-<para><computeroutput><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> FasterReader::m_maxHits = -1<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38"/>    <section>
+<para><computeroutput>bool FasterReader::m_kReady = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38"/>    <section>
     <title>m_reader</title>
 <indexterm><primary>m_reader</primary><secondary>FasterReader</secondary></indexterm>
 <indexterm><primary>FasterReader</primary><secondary>m_reader</secondary></indexterm>
-<para><computeroutput>faster_file_reader_p FasterReader::m_reader = NULL<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1abd85697a856dc998d235a5edc0ebb530"/>    <section>
+<para><computeroutput>faster_file_reader_p FasterReader::m_reader = NULL<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1a5d60fc12eece11753c5d495ba76db75f"/>    <section>
+    <title>m_verbose</title>
+<indexterm><primary>m_verbose</primary><secondary>FasterReader</secondary></indexterm>
+<indexterm><primary>FasterReader</primary><secondary>m_verbose</secondary></indexterm>
+<para><computeroutput>thread_local int FasterReader::m_verbose = 1<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1abd85697a856dc998d235a5edc0ebb530"/>    <section>
     <title>m_write</title>
 <indexterm><primary>m_write</primary><secondary>FasterReader</secondary></indexterm>
 <indexterm><primary>FasterReader</primary><secondary>m_write</secondary></indexterm>
-<para><computeroutput>bool FasterReader::m_write = false<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para><computeroutput>bool FasterReader::m_write = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster_reader_1aa58b38ff4c8f95526ea529cdaaa1f8f8"/>    <section>
+    <title>s_maxHits</title>
+<indexterm><primary>s_maxHits</primary><secondary>FasterReader</secondary></indexterm>
+<indexterm><primary>FasterReader</primary><secondary>s_maxHits</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> FasterReader::s_maxHits = -1<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
 lib/Classes/<link linkend="__faster_reader_8hpp">FasterReader.hpp</link></section>

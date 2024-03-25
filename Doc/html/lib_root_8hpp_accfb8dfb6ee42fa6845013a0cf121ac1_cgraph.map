@@ -1,5 +1,6 @@
 <map id="getMeanPeak" name="getMeanPeak">
 <area shape="rect" id="node1" title="Get the mean of the peak of a histogram with one nice single peak." alt="" coords="5,31,116,57"/>
-<area shape="rect" id="node2" href="$lib_root_8hpp.html#ab8628517ea9ef7ded29d8e22be6f628f" title="Get which bin holds the X = 0." alt="" coords="164,5,236,32"/>
-<area shape="rect" id="node3" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="174,56,226,83"/>
+<area shape="rect" id="node2" href="$namespace_co_bazar.html#a030309d1b093093b5fd48a5f7734018e" title=" " alt="" coords="164,31,285,57"/>
+<area shape="rect" id="node3" href="$lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="339,5,439,32"/>
+<area shape="rect" id="node4" href="$namespace_co_bazar.html#a1e08093363d904d8875d5907b48464f0" title=" " alt="" coords="333,56,445,83"/>
 </map>

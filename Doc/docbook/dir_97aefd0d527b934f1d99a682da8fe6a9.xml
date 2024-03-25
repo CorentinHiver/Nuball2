@@ -27,6 +27,8 @@ Directory dependency graph for lib:<para>
 <simplesect>
     <title>Files    </title>
         <itemizedlist>
+            <listitem><para>file <link linkend="_errors_8hpp">errors.hpp</link></para>
+</listitem>
             <listitem><para>file <link linkend="_files__functions_8hpp">files_functions.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="_lib_co_8hpp">libCo.hpp</link></para>
@@ -35,7 +37,9 @@ Directory dependency graph for lib:<para>
 </listitem>
             <listitem><para>file <link linkend="_print_8hpp">print.hpp</link></para>
 </listitem>
-            <listitem><para>file <link linkend="_random_8hpp">random.hpp</link></para>
+            <listitem><para>file <link linkend="_random_co_8hpp">randomCo.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="_sources_8hpp">sources.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="_string__functions_8hpp">string_functions.hpp</link></para>
 </listitem>

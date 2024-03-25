@@ -1,26 +1,6 @@
 var searchData=
 [
-  ['name_2588',['name',['../class_fit.html#a964131fabef1652357c6f1dd08f9f2de',1,'Fit']]],
-  ['nb_2589',['nb',['../class_clover_module.html#a7c9ab1d1764e331b5c03827498575a0d',1,'CloverModule']]],
-  ['nb_5fbgo_2590',['nb_BGO',['../class_clover_module.html#ab6ae88bdff14bbde9b660f729a87cc59',1,'CloverModule']]],
-  ['nb_5fevents_2591',['nb_events',['../class_performances.html#a8e8fcff6992c781cab447c29da39f801',1,'Performances']]],
-  ['nb_5fhits_2592',['nb_hits',['../class_performances.html#a0a0ed2b8332c39dce0bc3761174f881a',1,'Performances']]],
-  ['nb_5fkept_5fevents_2593',['nb_kept_events',['../class_performances.html#a8497130e4b198e77e82757dab6c3f39d',1,'Performances']]],
-  ['nb_5fraw_5fevents_2594',['nb_raw_events',['../class_performances.html#a4b030c6fb60bb91f6105420ab943cf90',1,'Performances']]],
-  ['nb_5frings_2595',['nb_rings',['../_d_s_s_d_8hpp.html#a6f982e9d8d9c8fd28d6d8384eb058324',1,'DSSD.hpp']]],
-  ['nb_5fsectors_2596',['nb_sectors',['../_d_s_s_d_8hpp.html#a1727ad97c53a82a3ef1c310b909e4dff',1,'DSSD.hpp']]],
-  ['nb_5fthreads_2597',['nb_threads',['../class_m_t_object.html#a1c2b3cb0cdccca46c8ebba009503ac88',1,'MTObject']]],
-  ['nb_5ftotal_5fevents_2598',['nb_total_events',['../class_performances.html#ab98612d481594c3b39a759f480742345',1,'Performances']]],
-  ['nb_5ftotal_5fhits_2599',['nb_total_hits',['../class_performances.html#ada2edd8aeddf080f2c494a8a921e662f',1,'Performances']]],
-  ['nb_5ftotal_5fkept_5fevents_2600',['nb_total_kept_events',['../class_performances.html#a113fa2db5fa26c78e6c272960209e254',1,'Performances']]],
-  ['nb_5ftotal_5fraw_5fevents_2601',['nb_total_raw_events',['../class_performances.html#a739d118946fd27bbd250d664fdcf72a7',1,'Performances']]],
-  ['nmparam_2602',['nmParam',['../class_minimisator.html#a60fa32272bc0c844926f7910bcb83e50',1,'Minimisator']]],
-  ['nrj_2603',['nrj',['../class_clover_module.html#a5ffbecaa432da9e2c8c24b529610da80',1,'CloverModule::nrj()'],['../class_si_strip.html#ade646df154437b96b61a59c8569d7595',1,'SiStrip::nrj()'],['../class_paris_phoswitch.html#a4f976bd815409e09bea4639f9a9065ac',1,'ParisPhoswitch::nrj()'],['../class_hit.html#abda4857e925c3a6315a6fb41fad59189',1,'Hit::nrj()']]],
-  ['nrj2_2604',['nrj2',['../class_paris_phoswitch.html#a1771ab16004c4bc9e16ab5590e1d7afb',1,'ParisPhoswitch::nrj2()'],['../class_hit.html#ab4b93fbbb58d5bf2fd3480238d93065a',1,'Hit::nrj2()']]],
-  ['nrj2s_2605',['nrj2s',['../class_event.html#acf99e771da7327b904866b80d6cfc45b',1,'Event']]],
-  ['nrj3_2606',['nrj3',['../class_hit.html#a04ef9221b81184bd9617b1b23311cc34',1,'Hit']]],
-  ['nrj_5fbgo_2607',['nrj_BGO',['../class_clover_module.html#aee0db7d982d61df2f372c1e67383abb3',1,'CloverModule']]],
-  ['nrj_5fclover_2608',['nrj_clover',['../class_sorted___event.html#a790240303b1df1a9f60359bcaf667ae6',1,'Sorted_Event']]],
-  ['nrjcal_2609',['nrjcal',['../_sorted___event_8hpp.html#ae287180c5639726f2d4905e52a678597',1,'LaBr3_Hit']]],
-  ['nrjs_2610',['nrjs',['../class_event.html#abdf231115162bb24604c238caceb1b05',1,'Event']]]
+  ['on_3382',['ON',['../class_m_t_object.html#a6fe86ce1ea64ede7e695490bceb264a3',1,'MTObject']]],
+  ['order_3383',['order',['../class_fit.html#a09a8cb0e9a300f8aeef67fcd267cb8f2',1,'Fit']]],
+  ['outerradius_3384',['outerRadius',['../class_d_s_s_d.html#ab77212c2dba9783ac847ee8b8af70f0d',1,'DSSD']]]
 ];

@@ -1,4 +1,4 @@
-.TH "CoAnalyse" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "CoAnalyse" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,6 +12,7 @@ CoAnalyse
 .ti -1c
 .RI "using \fBProjectionsBins\fP = std::vector< std::pair< double, double > >"
 .br
+.RI "Vector of pairs of min and max bins\&. "
 .in -1c
 .SS "Functions"
 
@@ -25,39 +26,41 @@ CoAnalyse
 .ti -1c
 .RI "void \fBnormalizeBidim\fP (TH2 *matrix, double const &factor=1\&.0)"
 .br
+.RI "Normalise the whole bidim\&. "
 .ti -1c
 .RI "void \fBnormalizeY\fP (TH2 *matrix, double const &factor=1)"
 .br
+.RI "For each X bin, normalise the Y histogram\&. "
 .ti -1c
 .RI "void \fBprojectX\fP (TH2 *matrix, TH1 *proj)"
 .br
-.RI "Total projection on X axis\&. "
+.RI "Project the whole matrix on the X axis\&. This fills proj\&. "
 .ti -1c
 .RI "void \fBprojectX\fP (TH2 *matrix, TH1 *proj, double const &binYmin, double const &binYmax)"
 .br
-.RI "Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]\&. "
+.RI "Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]\&. This fills proj\&. "
 .ti -1c
 .RI "void \fBprojectX\fP (TH2 *matrix, TH1 *proj, int const &binY)"
 .br
-.RI "Project on Y axis at a given X bin\&. "
+.RI "Project on X axis at a given Y bin\&. This fills proj\&. "
 .ti -1c
 .RI "void \fBprojectX\fP (TH2 *matrix, TH1 *proj, int const &binYmin, int const &binYmax)"
 .br
-.RI "Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[\&. "
+.RI "Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[\&. This fills proj\&. "
 .ti -1c
 .RI "void \fBprojectY\fP (TH2 *matrix, TH1 *proj, double const &valueXmin, double const &valueXmax)"
 .br
-.RI "Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]\&. "
+.RI "Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]\&. This fills proj\&. "
 .ti -1c
 .RI "void \fBprojectY\fP (TH2 *matrix, TH1 *proj, int const &binX)"
 .br
-.RI "Project on Y axis at a given X bin\&. "
+.RI "Project matrix on Y axis at a given X bin\&. This fills proj\&. "
 .ti -1c
 .RI "void \fBprojectY\fP (TH2 *matrix, TH1 *proj, int const &binXmin, int const &binXmax)"
 .br
-.RI "Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[\&. "
+.RI "Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[\&. This fills proj\&. "
 .ti -1c
-.RI "void \fBremoveBackground\fP (TH1 *histo, int const &niter=10, std::string const &fit_options='', std::string const &bidim_options='X')"
+.RI "void \fBremoveBackground\fP (TH1 *histo, int const &niter=10, std::string const &fit_options='', std::string const &bidim_options='X') noexcept"
 .br
 .RI "Remove the background in the given histo\&. "
 .ti -1c
@@ -70,53 +73,75 @@ CoAnalyse
 .ti -1c
 .RI "void \fBsetX\fP (TH2 *matrix, TH1 *proj, int const &binX)"
 .br
+.RI "Set Y histogram proj in matrix at binX\&. "
 .ti -1c
 .RI "void \fBsetY\fP (TH2 *matrix, TH1 *proj, int const &binY)"
 .br
+.RI "Set X histogram proj in matrix at binY\&. "
 .in -1c
 .SH "Typedef Documentation"
 .PP 
 .SS "using \fBCoAnalyse::ProjectionsBins\fP = typedef std::vector<std::pair<double,double> >"
 
+.PP
+Vector of pairs of min and max bins\&. 
 .SH "Function Documentation"
 .PP 
 .SS "std::vector<double> CoAnalyse::extractBackgroundArray (std::vector< double > & source, int const & nsmooth = \fC10\fP)"
 
+.PP
+\fBDeprecated\fP
+.RS 4
+
+.RE
+.PP
+
 .SS "std::vector<double> CoAnalyse::extractBackgroundArray (TH1F * histo, int const & nsmooth = \fC10\fP)"
+
+.PP
+\fBDeprecated\fP
+.RS 4
+
+.RE
+.PP
 
 .SS "void CoAnalyse::normalizeBidim (TH2 * matrix, double const & factor = \fC1\&.0\fP)"
 
+.PP
+Normalise the whole bidim\&. 
 .SS "void CoAnalyse::normalizeY (TH2 * matrix, double const & factor = \fC1\fP)"
 
+.PP
+For each X bin, normalise the Y histogram\&. 
 .SS "void CoAnalyse::projectX (TH2 * matrix, TH1 * proj)"
 
 .PP
-Total projection on X axis\&. 
+Project the whole matrix on the X axis\&. This fills proj\&. 
 .SS "void CoAnalyse::projectX (TH2 * matrix, TH1 * proj, double const & binYmin, double const & binYmax)"
 
 .PP
-Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]\&. 
+Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]\&. This fills proj\&. 
 .SS "void CoAnalyse::projectX (TH2 * matrix, TH1 * proj, int const & binY)"
 
 .PP
-Project on Y axis at a given X bin\&. 
+Project on X axis at a given Y bin\&. This fills proj\&. 
 .SS "void CoAnalyse::projectX (TH2 * matrix, TH1 * proj, int const & binYmin, int const & binYmax)"
 
 .PP
-Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[\&. 
+Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[\&. This fills proj\&. 
 .SS "void CoAnalyse::projectY (TH2 * matrix, TH1 * proj, double const & valueXmin, double const & valueXmax)"
 
 .PP
-Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]\&. 
+Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]\&. This fills proj\&. 
 .SS "void CoAnalyse::projectY (TH2 * matrix, TH1 * proj, int const & binX)"
 
 .PP
-Project on Y axis at a given X bin\&. 
+Project matrix on Y axis at a given X bin\&. This fills proj\&. 
 .SS "void CoAnalyse::projectY (TH2 * matrix, TH1 * proj, int const & binXmin, int const & binXmax)"
 
 .PP
-Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[\&. 
-.SS "void CoAnalyse::removeBackground (TH1 * histo, int const & niter = \fC10\fP, std::string const & fit_options = \fC''\fP, std::string const & bidim_options = \fC'X'\fP)"
+Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[\&. This fills proj\&. 
+.SS "void CoAnalyse::removeBackground (TH1 * histo, int const & niter = \fC10\fP, std::string const & fit_options = \fC''\fP, std::string const & bidim_options = \fC'X'\fP)\fC [noexcept]\fP"
 
 .PP
 Remove the background in the given histo\&. 
@@ -142,14 +167,25 @@ Remove the background in the given histo\&.
 
 .SS "void CoAnalyse::removeRandomBidim (TH2 * matrix, int iterations = \fC1\fP, bool save_intermediate = \fCfalse\fP, \fBProjectionsBins\fP projectionsY = \fC{{}}\fP, \fBProjectionsBins\fP projectionsX = \fC{{}}\fP)"
 
+.PP
+\fBDeprecated\fP
+.RS 4
+
+.RE
+.PP
+
 .SS "void CoAnalyse::removeRandomY (TH2 * matrix, int _stopX = \fC\-1\fP, int _stopY = \fC\-1\fP, bool writeIntermediate = \fCfalse\fP, \fBProjectionsBins\fP projections = \fC{{}}\fP)"
 
 .PP
 LEGACY\&. 
 .SS "void CoAnalyse::setX (TH2 * matrix, TH1 * proj, int const & binX)"
 
+.PP
+Set Y histogram proj in matrix at binX\&. 
 .SS "void CoAnalyse::setY (TH2 * matrix, TH1 * proj, int const & binY)"
 
+.PP
+Set X histogram proj in matrix at binY\&. 
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for Nuball2 from the source code\&.

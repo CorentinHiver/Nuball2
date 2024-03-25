@@ -88,8 +88,9 @@
         <references refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" compoundref="_builder_8hpp" startline="92">Builder::m_last_hit</references>
         <references refid="class_event_builder_1a5f2a208b4757d805b8c9e3f3f2a59c48" compoundref="_event_builder_8hpp" startline="45">m_rf</references>
         <references refid="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" compoundref="_builder_8hpp" startline="96">Builder::m_status</references>
-        <references refid="class_event_1a455861b2470596b9ee0101ccb61faa26" compoundref="_event_8hpp" startline="176">Event::mult</references>
+        <references refid="class_event_1a455861b2470596b9ee0101ccb61faa26" compoundref="_event_8hpp" startline="180">Event::mult</references>
         <references refid="class_r_f___manager_1aaafb0a06fe27f4d3121dd41faa6787cd" compoundref="_r_f___manager_8hpp" startline="89">RF_Manager::period</references>
+        <references refid="vector__functions_8hpp_1a1351ef703b7cf695131924cc97eb6374" compoundref="vector__functions_8hpp" startline="22" endline="25">push_back</references>
         <references refid="class_event_builder_1a96d24bbdba6a9cc0770bc1ec81c7c9e0" compoundref="_event_builder_8hpp" startline="119" endline="125">reset</references>
         <references refid="class_event_builder_1aae65b5dd56d65114847b98becd24634c" compoundref="_event_builder_8hpp" startline="44">RF_ref_time</references>
         <references refid="class_event_builder_1a4f56ddbeef9ac86eca830a3742fb30c7" compoundref="_event_builder_8hpp" startline="111" endline="117">set_last_hit</references>
@@ -262,7 +263,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/Builder.hpp" line="63" column="8" bodyfile="lib/Classes/Builder.hpp" bodystart="63" bodyend="63"/>
-        <references refid="class_event_1ac0a49a4178b701a0921ade6bfb1ad143" compoundref="_event_8hpp" startline="162" endline="162">Event::isSingle</references>
+        <references refid="class_event_1ac0a49a4178b701a0921ade6bfb1ad143" compoundref="_event_8hpp" startline="166" endline="166">Event::isSingle</references>
         <references refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" compoundref="_builder_8hpp" startline="90">Builder::m_event</references>
       </memberdef>
       <memberdef kind="function" id="class_event_builder_1a96d24bbdba6a9cc0770bc1ec81c7c9e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -278,7 +279,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/EventBuilder.hpp" line="28" column="8" bodyfile="lib/Classes/EventBuilder.hpp" bodystart="119" bodyend="125"/>
-        <references refid="class_r_f___manager_1a7738dda837846c1dee405dea4d544630" compoundref="_r_f___manager_8hpp" startline="86">RF_Manager::last_hit</references>
         <references refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" compoundref="_builder_8hpp" startline="90">Builder::m_event</references>
         <references refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" compoundref="_builder_8hpp" startline="92">Builder::m_last_hit</references>
         <references refid="class_event_builder_1a5f2a208b4757d805b8c9e3f3f2a59c48" compoundref="_event_builder_8hpp" startline="45">m_rf</references>
@@ -322,7 +322,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/EventBuilder.hpp" line="40" column="15" bodyfile="lib/Classes/EventBuilder.hpp" bodystart="111" bodyend="117"/>
-        <references refid="class_r_f___manager_1a7738dda837846c1dee405dea4d544630" compoundref="_r_f___manager_8hpp" startline="86">RF_Manager::last_hit</references>
         <references refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" compoundref="_builder_8hpp" startline="92">Builder::m_last_hit</references>
         <references refid="class_event_builder_1a5f2a208b4757d805b8c9e3f3f2a59c48" compoundref="_event_builder_8hpp" startline="45">m_rf</references>
         <references refid="class_event_builder_1ab71f51f2b1bce9a82d7035db746e6e57" compoundref="_event_builder_8hpp" startline="46">m_shift</references>
@@ -346,7 +345,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/EventBuilder.hpp" line="38" column="8" bodyfile="lib/Classes/EventBuilder.hpp" bodystart="104" bodyend="109"/>
-        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">Hit::label</references>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="204">Hit::label</references>
         <references refid="class_event_builder_1a5f2a208b4757d805b8c9e3f3f2a59c48" compoundref="_event_builder_8hpp" startline="45">m_rf</references>
         <references refid="class_event_builder_1aae65b5dd56d65114847b98becd24634c" compoundref="_event_builder_8hpp" startline="44">RF_ref_time</references>
       </memberdef>
@@ -559,9 +558,9 @@
         </inbodydescription>
         <location file="lib/Classes/Builder.hpp" line="86" column="15" bodyfile="lib/Classes/Builder.hpp" bodystart="86" bodyend="86"/>
         <references refid="class_builder_1a7b1399ae5a1a58620dd564754d691348" compoundref="_builder_8hpp" startline="97">Builder::m_keep_singles</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
-        <referencedby refid="class_clover_spectra_1abf805324f6371f19ef0b3ce45705a115" compoundref="_clover_spectra_8hpp" startline="147" endline="159">CloverSpectra::Initialize</referencedby>
-        <referencedby refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialize</referencedby>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_clover_spectra_1a8b3eedd382c6e2d0de9d4863efdccaea" compoundref="_clover_spectra_8hpp" startline="147" endline="159">CloverSpectra::Initialise</referencedby>
+        <referencedby refid="class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialise</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>

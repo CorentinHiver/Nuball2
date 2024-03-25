@@ -1080,7 +1080,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Analyse/Sorted_Event.hpp" line="54" column="8" bodyfile="lib/Analyse/Sorted_Event.hpp" bodystart="254" bodyend="372"/>
-        <references refid="lib_co_8hpp_1a99f92dd785ee1e11e00427fdc8a4f772" compoundref="lib_co_8hpp" startline="54">_ns</references>
         <references refid="class_sorted___event_1acc6df50642355743d54630834ff98c4f" compoundref="_sorted___event_8hpp" startline="74">BGO</references>
         <references refid="class_sorted___event_1a07235caacabfe9b670119ca3ecdc43c4" compoundref="_sorted___event_8hpp" startline="108">BGOMult</references>
         <references refid="class_sorted___event_1a8d737abb70590129a32cc2b3aeaa78bb" compoundref="_sorted___event_8hpp" startline="105">CleanGeMult</references>
@@ -1107,7 +1106,7 @@
         <references refid="_detectors_8hpp_1a82c5910e3b4f178c276c8b888c5ac162">isParis</references>
         <references refid="_detectors_8hpp_1a256ea354de5d7f81049eaf74528626b7">isRing</references>
         <references refid="struct_la_br3___hit_1ac232600348d6e8374bd2c80d080adc2a" compoundref="_sorted___event_8hpp" startline="12">LaBr3_Hit::label</references>
-        <references refid="class_event_1ad016b65deeaef393a94793ef140e1bb8" compoundref="_event_8hpp" startline="178">Event::labels</references>
+        <references refid="class_event_1ad016b65deeaef393a94793ef140e1bb8" compoundref="_event_8hpp" startline="182">Event::labels</references>
         <references refid="_detectors_8hpp_1adccbc8332a89f48a35baea4a37255e2c">labelToClover</references>
         <references refid="class_sorted___event_1a98cd91158d1cff362fcdd0ba59285578" compoundref="_sorted___event_8hpp" startline="89">LaBr3_event</references>
         <references refid="class_sorted___event_1af17ec35e8657df6df0117f86522971e7" compoundref="_sorted___event_8hpp" startline="94">LaBr3Mult</references>
@@ -1128,17 +1127,17 @@
         <references refid="class_sorted___event_1a5a0554eb6b4103e2708c075d90d5102f" compoundref="_sorted___event_8hpp" startline="79">paris_hits</references>
         <references refid="class_sorted___event_1ab238484c396ccd1c8e42b47d5667036e" compoundref="_sorted___event_8hpp" startline="95">ParisMult</references>
         <references refid="class_sorted___event_1a89a3ad21720b8c31773799a549da8746" compoundref="_sorted___event_8hpp" startline="71">prompt_Ge</references>
-        <references refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" compoundref="_r_f___manager_8hpp" startline="44" endline="66">RF_Manager::pulse_ToF</references>
+        <references refid="class_r_f___manager_1a15356af241ce65874d01c9479ab48aa4" compoundref="_r_f___manager_8hpp" startline="49" endline="70">RF_Manager::pulse_ToF</references>
         <references refid="class_sorted___event_1a87e18e85b327bc463a15d2d1f8ae2c5c" compoundref="_sorted___event_8hpp" startline="98">RawGeMult</references>
         <references refid="class_sorted___event_1a305216fefa6fd71376e828702590fb82" compoundref="_sorted___event_8hpp" startline="92">RawMult</references>
-        <references refid="class_event_1a9c01144b3f06d4cc5234ae3736fec9d2" compoundref="_event_8hpp" startline="188">Event::read</references>
+        <references refid="class_event_1a9c01144b3f06d4cc5234ae3736fec9d2" compoundref="_event_8hpp" startline="211">Event::read</references>
         <references refid="class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231" compoundref="_sorted___event_8hpp" startline="175" endline="224">reset</references>
         <references refid="class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0" compoundref="_sorted___event_8hpp" startline="231" endline="252">sortGeClover</references>
-        <references refid="class_i_options_1af82eb678f8bb2f7984016b278cc24875" compoundref="_hit_8hpp" startline="106">IOptions::t</references>
-        <references refid="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" compoundref="_hit_8hpp" startline="107">IOptions::T</references>
+        <references refid="class_i_options_1af82eb678f8bb2f7984016b278cc24875" compoundref="_hit_8hpp" startline="112">IOptions::t</references>
+        <references refid="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" compoundref="_hit_8hpp" startline="113">IOptions::T</references>
         <references refid="struct_la_br3___hit_1a37b178a0c74cf89bd93a94f2765ece64" compoundref="_sorted___event_8hpp" startline="14">LaBr3_Hit::time</references>
         <references refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" compoundref="_sorted___event_8hpp" startline="62">time2s</references>
-        <references refid="class_event_1a24cba1790b71f725050f229c129e91d4" compoundref="_event_8hpp" startline="180">Event::time2s</references>
+        <references refid="class_event_1a24cba1790b71f725050f229c129e91d4" compoundref="_event_8hpp" startline="184">Event::time2s</references>
         <references refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" compoundref="_sorted___event_8hpp" startline="69">time_clover</references>
       </memberdef>
       <memberdef kind="function" id="class_sorted___event_1a868a20701f8be649bbaf0a0366c378d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -1167,20 +1166,20 @@
         <references refid="class_sorted___event_1a5cc067d81bda02f44385c8cd892604d6" compoundref="_sorted___event_8hpp" startline="75">maxE</references>
         <references refid="class_sorted___event_1ab9fc30633428e8bdf601ce500a7c740d" compoundref="_sorted___event_8hpp" startline="76">maxE_hit</references>
         <references refid="class_sorted___event_1a790240303b1df1a9f60359bcaf667ae6" compoundref="_sorted___event_8hpp" startline="68">nrj_clover</references>
-        <references refid="vector__functions_8hpp_1a0714a23fb316299fdee1e44d9f46343b" compoundref="vector__functions_8hpp" startline="25" endline="36">push_back_unique</references>
-        <references refid="class_event_1a9c01144b3f06d4cc5234ae3736fec9d2" compoundref="_event_8hpp" startline="188">Event::read</references>
-        <references refid="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" compoundref="_hit_8hpp" startline="107">IOptions::T</references>
+        <references refid="vector__functions_8hpp_1a0714a23fb316299fdee1e44d9f46343b" compoundref="vector__functions_8hpp" startline="52" endline="63">push_back_unique</references>
+        <references refid="class_event_1a9c01144b3f06d4cc5234ae3736fec9d2" compoundref="_event_8hpp" startline="211">Event::read</references>
+        <references refid="class_i_options_1a48254b9cb7fdeeacf1f42444333a377a" compoundref="_hit_8hpp" startline="113">IOptions::T</references>
         <references refid="class_sorted___event_1a92097f7b335c6b79b7ef068f555dcddc" compoundref="_sorted___event_8hpp" startline="62">time2s</references>
         <references refid="class_sorted___event_1ac44a4857dde092f1b32fdcdf9c8679e1" compoundref="_sorted___event_8hpp" startline="69">time_clover</references>
         <referencedby refid="class_sorted___event_1a526eefb6a423a59ff6096766c04c98e2" compoundref="_sorted___event_8hpp" startline="254" endline="372">sortEvent</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="class_sorted___event_1a0c2d3980ba5e8ffb7398c53b846d7592" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_sorted___event_1a6b25d4b50b761f368927aaa7e2fef8a9" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>static void Sorted_Event::Initialize</definition>
+        <definition>static void Sorted_Event::Initialise</definition>
         <argsstring>()</argsstring>
-        <name>Initialize</name>
+        <name>Initialise</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1325,7 +1324,7 @@
       <member refid="class_sorted___event_1afe0f8fb89d3ee3065b672d919122c377" prot="public" virt="non-virtual"><scope>Sorted_Event</scope><name>Ge</name></member>
       <member refid="class_sorted___event_1ad835d42335be97eff221b73194950afd" prot="public" virt="non-virtual"><scope>Sorted_Event</scope><name>getGatedClover</name></member>
       <member refid="class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b" prot="public" virt="non-virtual"><scope>Sorted_Event</scope><name>initialise</name></member>
-      <member refid="class_sorted___event_1a0c2d3980ba5e8ffb7398c53b846d7592" prot="public" virt="non-virtual"><scope>Sorted_Event</scope><name>Initialize</name></member>
+      <member refid="class_sorted___event_1a6b25d4b50b761f368927aaa7e2fef8a9" prot="public" virt="non-virtual"><scope>Sorted_Event</scope><name>Initialise</name></member>
       <member refid="class_sorted___event_1a98cd91158d1cff362fcdd0ba59285578" prot="public" virt="non-virtual"><scope>Sorted_Event</scope><name>LaBr3_event</name></member>
       <member refid="class_sorted___event_1af17ec35e8657df6df0117f86522971e7" prot="public" virt="non-virtual"><scope>Sorted_Event</scope><name>LaBr3Mult</name></member>
       <member refid="class_sorted___event_1ac7e90f4a218ef319773a5ddc6a995c8a" prot="private" virt="non-virtual"><scope>Sorted_Event</scope><name>m_CloverTrig</name></member>

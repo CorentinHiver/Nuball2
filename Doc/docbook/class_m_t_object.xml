@@ -3,6 +3,11 @@
 <title>MTObject Class Reference</title>
 <indexterm><primary>MTObject</primary></indexterm>
 <para>
+
+<para>Class handeling an easy multi threading. </para>
+ 
+</para>
+<para>
 <computeroutput>#include &lt;MTObject.hpp&gt;</computeroutput>
 </para>
 <simplesect>
@@ -11,8 +16,6 @@
             <listitem><para><link linkend="_class_m_t_object_1a12856506adc231bafc0983c881c3fe36">MTObject</link> ()</para>
 </listitem>
             <listitem><para><link linkend="_class_m_t_object_1a813cbf27a03a3b334ebc9faec99a5158">MTObject</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> &amp;_nb_threads)</para>
-</listitem>
-            <listitem><para><link linkend="_class_m_t_object_1a048c52b4b15fc13667559a5b07d71002">operator bool</link> ()</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -29,27 +32,33 @@
 </listitem>
             <listitem><para>static auto const  &amp; <link linkend="_class_m_t_object_1af752e86ec494c50d1af7e6442c09733b">index</link> ()</para>
 </listitem>
-            <listitem><para>static void <link linkend="_class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc">Initialize</link> ()</para>
+            <listitem><para>static void <link linkend="_class_m_t_object_1a14b970709f027b42787a5a0471a93dd1">Initialise</link> ()</para>
 </listitem>
-            <listitem><para>static void <link linkend="_class_m_t_object_1aaa5354a0915c26979a49d54f36019df1">Initialize</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;_nb_threads, bool force=false)</para>
+            <listitem><para>static void <link linkend="_class_m_t_object_1a47f15f1545383d3476ae6614984d3e07">Initialise</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;_nb_threads, bool force=false)</para>
 </listitem>
             <listitem><para>static bool <link linkend="_class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408">isMasterThread</link> ()</para>
 </listitem>
             <listitem><para>template&lt;class Func , class... ARGS&gt; </para><para>static void <link linkend="_class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47">parallelise_function</link> (Func &amp;&amp;func, ARGS &amp;&amp;... args)</para>
 </listitem>
-            <listitem><para>static void <link linkend="_class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f">setThreadsNb</link> (int const &amp;n, bool force=false)</para>
-</listitem>
-            <listitem><para>static void <link linkend="_class_m_t_object_1a8f91c9269a027d1770d7bae3b6d599a5">setThreadsNb</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;n, bool force=false)</para>
+            <listitem><para>static void <link linkend="_class_m_t_object_1aaf17bd02ca52dbe0702ee0d9d0f51d58">setThreadsNb</link> (int const &amp;n, bool force=false) noexcept</para>
 
 <para>Sets the number of threads. </para>
 </listitem>
-            <listitem><para>static void <link linkend="_class_m_t_object_1a8b70d4506ed556d5ca4c23703a80ddb6">setThreadsNumber</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;n, bool force=false)</para>
+            <listitem><para>static void <link linkend="_class_m_t_object_1aef24cd9329ac7f05228cfb26418f8f47">setThreadsNb</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;n, bool force=false) noexcept</para>
+
+<para>Sets the number of threads. </para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_m_t_object_1a76b267be14d83c4c257f8451058f8099">signalHandler</link> (int signal)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
 <simplesect>
     <title>Static Public Attributes    </title>
         <itemizedlist>
+            <listitem><para>static bool <link linkend="_class_m_t_object_1aa76149992bd58e1e5918b418db04a7ca">activated</link> = false</para>
+</listitem>
+            <listitem><para>static bool <link linkend="_class_m_t_object_1a67041891e1cebcb79af3180e55e702d6">kill</link> = false</para>
+</listitem>
             <listitem><para>static std::mutex <link linkend="_class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c">mutex</link></para>
 </listitem>
             <listitem><para>static <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88">nb_threads</link> = 1</para>
@@ -61,6 +70,8 @@
 <simplesect>
     <title>Static Private Attributes    </title>
         <itemizedlist>
+            <listitem><para>static bool <link linkend="_class_m_t_object_1a36ab81d1d7e7bee29a08bfb8f0e3ac49">m_Initialised</link> = false</para>
+</listitem>
             <listitem><para>static thread_local <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_m_t_object_1ac9efab6b9d255529611a250e91779a48">m_thread_index</link> = 0</para>
 </listitem>
             <listitem><para>static std::vector&lt; std::thread &gt; <link linkend="_class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d">m_threads</link></para>
@@ -69,6 +80,81 @@
 </listitem>
         </itemizedlist>
 </simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Class handeling an easy multi threading. </para>
+
+
+
+<para><caution><title>Attention</title>
+
+<para>Include this class before any other in order to activate multithreading additions</para>
+</caution>
+POSIX-based multithreading. If you want to use the power of multithreading, this class can be convenient. Please include this class before any other in order to activate multithreading additions in the rest of the library.</para>
+
+<para>First thing to do is to setup the number of threads then to Initialise them : <literallayout><computeroutput>   MTObject::setThreadsNb(nb_threads);
+   MTObject::Initialise();
+</computeroutput></literallayout> Or more consisley : <literallayout><computeroutput>   MTObject::Initialise(nb_threads);
+</computeroutput></literallayout> Then you can multithread any function or static method : <literallayout><computeroutput>   MTObject::parallelise_function(function, param1, param2, ....);
+</computeroutput></literallayout> If you want to multithread a non-static method (regular methods in an object), you need to pass through a static function first.</para>
+
+<para>Example 1 : simplest example : parallelise a lambda. <literallayout><computeroutput>   main()
+   {
+     MTObject::Initialise(2); // Using two concurrent threads
+     int a = 0;
+     int b = 0;
+     // Here, the [&amp;] allows the lambda to have access at everything that has been declared above. 
+     // Therefore, in this case the lambda don&apos;t need any argument and the &apos;()&apos; is empty
+     MTObject::parallelise_function([&amp;](){
+       if (random_uniform(0, 1)&gt;0.5) ++a; // the random_uniform() is thread safe if &apos;#include&lt;MTObject&gt;&apos; is included first
+       else                          ++b;
+     });
+     print(a, b);
+</computeroutput></literallayout> Example 2 : parallelise a lambda and fill a histogram using <link linkend="_class_m_t_t_hist">MTTHist</link> <literallayout><computeroutput>   main()
+   {
+     MTObject::Initialise(2); // Using two concurrent threads
+     MTTHist&lt;TH1F&gt; test(&quot;test&quot;, &quot;test&quot;, 1000,0,1000); // MTTHist holds a vector of TH1F to be filled using its own Fill method
+
+     MTObject::parallelise_function([&amp;]()
+     { // Here starts the parallelised portion of code
+       print(&quot;thread id :&quot;, MTObject::getThreadIndex()); // You can access the current thread index (0 or 1 in this case)
+       // This method automatically fills the copy of the histogram that corresponds to its thread index :
+       for(int i = 0; i&lt;10000000; i++) test.Fill(random_gaussian(500, 100)); 
+     });
+     // Now, you may want to perform some operations on the MTTHist. 
+     // But before, you need to merge the copies into one single spectra using MTTHist::Merge
+     test.Merge();
+     // Now, you can access the fused histogram using &apos;-&gt;&apos; operator.
+     // It calls the TH1F itself, so you have access at all the 
+     print(test-&gt;GetMean());
+     auto outfile(TFile::Open(&quot;test.root&quot;, &quot;RECREATE&quot;));
+     outfile-&gt;cd();
+     // Note : you can use the MTTHist::Write method without already merged it
+     test.Write();
+     outfile-&gt;Write();
+     outfile-&gt;Close();
+     return 0;
+   }
+</computeroutput></literallayout> Example 3 : paralellise a non-static method of a class : <literallayout><computeroutput>   class MyClass
+   {
+   public:
+     MyClass() {}
+     void function_to_multithread(argument_1, argument_2, ...){....}
+
+     static void helper_function(MyClass &amp; myclass, argument_1, argument_2, ...) {return myclass.function_to_multithread(argument_1, argument_2, ...);}
+   };
+
+   int main()
+   {
+    ...
+     MTObject::parallelise_function(myclass.helper_function, argument_1, argument_2, ....);
+    ...
+   }
+</computeroutput></literallayout> <para><link linkend="_todo_1_todo000020">Todo</link> 
+<para>Trying to make this work : template&lt;class... ARGS&gt; static ret_type helper_function(MyClass &amp; myclass, ARGS... args) {return myclass.function_to_multithread(std::forward&lt;ARGS&gt;(args)...);} </para>
+</para></para>
+</section>
 <section>
 <title>Constructor &amp; Destructor Documentation</title>
 <anchor xml:id="_class_m_t_object_1a12856506adc231bafc0983c881c3fe36"/>    <section>
@@ -149,15 +235,15 @@
     <title>index()</title>
 <indexterm><primary>index</primary><secondary>MTObject</secondary></indexterm>
 <indexterm><primary>MTObject</primary><secondary>index</secondary></indexterm>
-<para><computeroutput>static auto const&amp; MTObject::index ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc"/>    <section>
-    <title>Initialize()<computeroutput>[1/2]</computeroutput></title>
-<indexterm><primary>Initialize</primary><secondary>MTObject</secondary></indexterm>
-<indexterm><primary>MTObject</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>static void MTObject::Initialize ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>static auto const&amp; MTObject::index ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_object_1a14b970709f027b42787a5a0471a93dd1"/>    <section>
+    <title>Initialise()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Initialise</primary><secondary>MTObject</secondary></indexterm>
+<indexterm><primary>MTObject</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>static void MTObject::Initialise ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a14b970709f027b42787a5a0471a93dd1_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -166,21 +252,21 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_aaa3623d88deae3a9311aad39bfff49dc_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a14b970709f027b42787a5a0471a93dd1_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_object_1aaa5354a0915c26979a49d54f36019df1"/>    <section>
-    <title>Initialize()<computeroutput>[2/2]</computeroutput></title>
-<indexterm><primary>Initialize</primary><secondary>MTObject</secondary></indexterm>
-<indexterm><primary>MTObject</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>static void MTObject::Initialize (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; _nb_threads, bool force = <computeroutput>false</computeroutput>
+    </section><anchor xml:id="_class_m_t_object_1a47f15f1545383d3476ae6614984d3e07"/>    <section>
+    <title>Initialise()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Initialise</primary><secondary>MTObject</secondary></indexterm>
+<indexterm><primary>MTObject</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>static void MTObject::Initialise (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; _nb_threads, bool force = <computeroutput>false</computeroutput>
 )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_aaa5354a0915c26979a49d54f36019df1_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a47f15f1545383d3476ae6614984d3e07_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -198,23 +284,14 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_object_1a048c52b4b15fc13667559a5b07d71002"/>    <section>
-    <title>operator bool()</title>
-<indexterm><primary>operator bool</primary><secondary>MTObject</secondary></indexterm>
-<indexterm><primary>MTObject</primary><secondary>operator bool</secondary></indexterm>
-<para><computeroutput>MTObject::operator bool ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47"/>    <section>
+    </section><anchor xml:id="_class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47"/>    <section>
     <title>parallelise_function()</title>
 <indexterm><primary>parallelise_function</primary><secondary>MTObject</secondary></indexterm>
 <indexterm><primary>MTObject</primary><secondary>parallelise_function</secondary></indexterm>
-<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>static void MTObject::parallelise_function (Func &amp;&amp; func, ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a35c02650eb403bd54e867f93bb26fc47_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
+<computeroutput>template&lt;class Func , class... ARGS&gt; </computeroutput><para><computeroutput>static void MTObject::parallelise_function (Func &amp;&amp; func, ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>
+<para><para><link linkend="_todo_1_todo000021">Todo</link> 
+<para>check if I can replace Func by std::function </para>
+</para></para>
 Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
@@ -224,35 +301,12 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f"/>    <section>
+    </section><anchor xml:id="_class_m_t_object_1aaf17bd02ca52dbe0702ee0d9d0f51d58"/>    <section>
     <title>setThreadsNb()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>setThreadsNb</primary><secondary>MTObject</secondary></indexterm>
 <indexterm><primary>MTObject</primary><secondary>setThreadsNb</secondary></indexterm>
 <para><computeroutput>static void MTObject::setThreadsNb (int const &amp; n, bool force = <computeroutput>false</computeroutput>
-)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a872d9518e0a1936df8e70a2dae303f4f_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_m_t_object_1a8f91c9269a027d1770d7bae3b6d599a5"/>    <section>
-    <title>setThreadsNb()<computeroutput>[2/2]</computeroutput></title>
-<indexterm><primary>setThreadsNb</primary><secondary>MTObject</secondary></indexterm>
-<indexterm><primary>MTObject</primary><secondary>setThreadsNb</secondary></indexterm>
-<para><computeroutput>static void MTObject::setThreadsNb (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; n, bool force = <computeroutput>false</computeroutput>
-)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para><para>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para><para>
 
 <para>Sets the number of threads. </para>
 </para>
@@ -262,21 +316,40 @@ Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a8f91c9269a027d1770d7bae3b6d599a5_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_aaf17bd02ca52dbe0702ee0d9d0f51d58_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_object_1a8b70d4506ed556d5ca4c23703a80ddb6"/>    <section>
-    <title>setThreadsNumber()</title>
-<indexterm><primary>setThreadsNumber</primary><secondary>MTObject</secondary></indexterm>
-<indexterm><primary>MTObject</primary><secondary>setThreadsNumber</secondary></indexterm>
-<para><computeroutput>static void MTObject::setThreadsNumber (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; n, bool force = <computeroutput>false</computeroutput>
-)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a8b70d4506ed556d5ca4c23703a80ddb6_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_aaf17bd02ca52dbe0702ee0d9d0f51d58_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_object_1aef24cd9329ac7f05228cfb26418f8f47"/>    <section>
+    <title>setThreadsNb()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>setThreadsNb</primary><secondary>MTObject</secondary></indexterm>
+<indexterm><primary>MTObject</primary><secondary>setThreadsNb</secondary></indexterm>
+<para><computeroutput>static void MTObject::setThreadsNb (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; n, bool force = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para><para>
+
+<para>Sets the number of threads. </para>
+</para>
+
+<para>Check the number of threads. Usually, over 75% of cores is the optimal. Set force parameter to true if you want to use all the cores </para>
+    </section><anchor xml:id="_class_m_t_object_1a76b267be14d83c4c257f8451058f8099"/>    <section>
+    <title>signalHandler()</title>
+<indexterm><primary>signalHandler</primary><secondary>MTObject</secondary></indexterm>
+<indexterm><primary>MTObject</primary><secondary>signalHandler</secondary></indexterm>
+<para><computeroutput>static void MTObject::signalHandler (int signal)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_object_a76b267be14d83c4c257f8451058f8099_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -285,7 +358,19 @@ Here is the call graph for this function:<para>
 </section>
 <section>
 <title>Member Data Documentation</title>
-<anchor xml:id="_class_m_t_object_1ac9efab6b9d255529611a250e91779a48"/>    <section>
+<anchor xml:id="_class_m_t_object_1aa76149992bd58e1e5918b418db04a7ca"/>    <section>
+    <title>activated</title>
+<indexterm><primary>activated</primary><secondary>MTObject</secondary></indexterm>
+<indexterm><primary>MTObject</primary><secondary>activated</secondary></indexterm>
+<para><computeroutput>bool MTObject::activated = false<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_object_1a67041891e1cebcb79af3180e55e702d6"/>    <section>
+    <title>kill</title>
+<indexterm><primary>kill</primary><secondary>MTObject</secondary></indexterm>
+<indexterm><primary>MTObject</primary><secondary>kill</secondary></indexterm>
+<para><computeroutput>bool MTObject::kill = false<computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_object_1a36ab81d1d7e7bee29a08bfb8f0e3ac49"/>    <section>
+    <title>m_Initialised</title>
+<indexterm><primary>m_Initialised</primary><secondary>MTObject</secondary></indexterm>
+<indexterm><primary>MTObject</primary><secondary>m_Initialised</secondary></indexterm>
+<para><computeroutput>bool MTObject::m_Initialised = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_object_1ac9efab6b9d255529611a250e91779a48"/>    <section>
     <title>m_thread_index</title>
 <indexterm><primary>m_thread_index</primary><secondary>MTObject</secondary></indexterm>
 <indexterm><primary>MTObject</primary><secondary>m_thread_index</secondary></indexterm>

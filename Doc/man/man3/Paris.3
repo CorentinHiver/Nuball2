@@ -1,4 +1,4 @@
-.TH "Paris" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Paris" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -24,7 +24,7 @@ Paris
 .RI "auto & \fBfront\fP ()"
 .br
 .ti -1c
-.RI "void \fBInitialize\fP ()"
+.RI "void \fBInitialise\fP ()"
 .br
 .ti -1c
 .RI "\fBParis\fP ()"
@@ -37,13 +37,25 @@ Paris
 
 .in +1c
 .ti -1c
-.RI "static void \fBInitializeArrays\fP ()"
+.RI "static void \fBcalculateBidimAngles\fP (std::string file, std::string const &outfilename, bool write_graphs=true)"
+.br
+.ti -1c
+.RI "static std::pair< double, double > \fBfindAngles\fP (TH2F *bidim, int nb_bins=10, bool write_graphs=false)"
+.br
+.ti -1c
+.RI "static std::pair< double, double > \fBfindAnglesDeg\fP (TH2F *bidim, int nb_bins=10, bool write_graphs=false)"
+.br
+.ti -1c
+.RI "static void \fBInitialiseArrays\fP ()"
 .br
 .ti -1c
 .RI "static bool \fBis_paris\fP (\fBLabel\fP const &l)"
 .br
 .ti -1c
 .RI "static \fBuchar\fP \fBlabel_to_index\fP (\fBLabel\fP const &l)"
+.br
+.ti -1c
+.RI "static TH2F * \fBrotate\fP (TH2F *bidim, double angleLaBr, double angleNaI, bool quickNdirty=false)"
 .br
 .in -1c
 .SS "Public Attributes"
@@ -96,19 +108,27 @@ Paris
 
 .SS "auto& Paris::back ()\fC [inline]\fP"
 
+.SS "void Paris::calculateBidimAngles (std::string file, std::string const & outfilename, bool write_graphs = \fCtrue\fP)\fC [static]\fP"
+
 .SS "void Paris::Fill (\fBEvent\fP const & event, \fBsize_t\fP const & i)\fC [inline]\fP"
+
+.SS "std::pair< double, double > Paris::findAngles (TH2F * bidim, int nb_bins = \fC10\fP, bool write_graphs = \fCfalse\fP)\fC [static]\fP"
+
+.SS "std::pair< double, double > Paris::findAnglesDeg (TH2F * bidim, int nb_bins = \fC10\fP, bool write_graphs = \fCfalse\fP)\fC [static]\fP"
 
 .SS "auto& Paris::front ()\fC [inline]\fP"
 
-.SS "void Paris::Initialize ()"
+.SS "void Paris::Initialise ()"
 
-.SS "static void Paris::InitializeArrays ()\fC [inline]\fP, \fC [static]\fP"
+.SS "static void Paris::InitialiseArrays ()\fC [inline]\fP, \fC [static]\fP"
 
 .SS "static bool Paris::is_paris (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
 
 .SS "static \fBuchar\fP Paris::label_to_index (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
 
 .SS "void Paris::Reset ()\fC [inline]\fP"
+
+.SS "TH2F * Paris::rotate (TH2F * bidim, double angleLaBr, double angleNaI, bool quickNdirty = \fCfalse\fP)\fC [static]\fP"
 
 .SH "Member Data Documentation"
 .PP 

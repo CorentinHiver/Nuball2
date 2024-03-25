@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_cast_impossible" xml:lang="en-US">
+<title>CastImpossible Class Reference</title>
+<indexterm><primary>CastImpossible</primary></indexterm>
+<para>
+<computeroutput>#include &lt;libCo.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_cast_impossible_1a67c544643e099ca9dfd9a3c9e61f9be6">CastImpossible</link> () noexcept=default</para>
+</listitem>
+            <listitem><para><link linkend="_class_cast_impossible_1a5d03d9db261611b42df4686671d3cc0a">CastImpossible</link> (std::string const &amp;message) noexcept</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_cast_impossible_1a1a1947bbb68b6388cfb03e91b9ccb5b0">what</link> ()</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_cast_impossible_1a69b6f565a53cefeee300240cb0dd4bb0">what</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_class_cast_impossible_1a0e288e95fc4c0f3796136f8aca974654">m_message</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_cast_impossible_1a67c544643e099ca9dfd9a3c9e61f9be6"/>    <section>
+    <title>CastImpossible()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>CastImpossible</primary><secondary>CastImpossible</secondary></indexterm>
+<indexterm><primary>CastImpossible</primary><secondary>CastImpossible</secondary></indexterm>
+<para><computeroutput>CastImpossible::CastImpossible ( )<computeroutput>[default]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_cast_impossible_1a5d03d9db261611b42df4686671d3cc0a"/>    <section>
+    <title>CastImpossible()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>CastImpossible</primary><secondary>CastImpossible</secondary></indexterm>
+<indexterm><primary>CastImpossible</primary><secondary>CastImpossible</secondary></indexterm>
+<para><computeroutput>CastImpossible::CastImpossible (std::string const &amp; message)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_cast_impossible_1a1a1947bbb68b6388cfb03e91b9ccb5b0"/>    <section>
+    <title>what()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>what</primary><secondary>CastImpossible</secondary></indexterm>
+<indexterm><primary>CastImpossible</primary><secondary>what</secondary></indexterm>
+<para><computeroutput>std::string CastImpossible::what ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_cast_impossible_a1a1947bbb68b6388cfb03e91b9ccb5b0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_cast_impossible_1a69b6f565a53cefeee300240cb0dd4bb0"/>    <section>
+    <title>what()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>what</primary><secondary>CastImpossible</secondary></indexterm>
+<indexterm><primary>CastImpossible</primary><secondary>what</secondary></indexterm>
+<para><computeroutput>std::string CastImpossible::what ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_cast_impossible_1a0e288e95fc4c0f3796136f8aca974654"/>    <section>
+    <title>m_message</title>
+<indexterm><primary>m_message</primary><secondary>CastImpossible</secondary></indexterm>
+<indexterm><primary>CastImpossible</primary><secondary>m_message</secondary></indexterm>
+<para><computeroutput>std::string CastImpossible::m_message<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/<link linkend="_lib_co_8hpp">libCo.hpp</link></section>
+</section>

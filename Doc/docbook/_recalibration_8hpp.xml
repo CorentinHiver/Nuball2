@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__recalibration_8hpp" xml:lang="en-US">
+<title>lib/Analyse/Recalibration.hpp File Reference</title>
+<indexterm><primary>lib/Analyse/Recalibration.hpp</primary></indexterm>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_recalibration_8hpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_recalibration">Recalibration</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::ostream &amp; <link linkend="__recalibration_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_class_recalibration">Recalibration</link> const &amp;recal)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__recalibration_8hpp_1a1c2f6d6b9b8d19b513889e59666d3967"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>Recalibration.hpp</secondary></indexterm>
+<indexterm><primary>Recalibration.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_class_recalibration">Recalibration</link> const &amp; recal)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_recalibration_8hpp_a1c2f6d6b9b8d19b513889e59666d3967_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

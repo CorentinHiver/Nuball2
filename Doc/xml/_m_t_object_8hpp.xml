@@ -2,10 +2,17 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="_m_t_object_8hpp" kind="file" language="C++">
     <compoundname>MTObject.hpp</compoundname>
+    <includes local="no">csignal</includes>
+    <includes local="no">future</includes>
     <includes local="no">thread</includes>
     <includes local="no">mutex</includes>
-    <includes refid="lib_root_8hpp" local="yes">../libRoot.hpp</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">iostream</includes>
+    <includes local="yes">TROOT.h</includes>
+    <includes local="yes">TThread.h</includes>
     <includedby refid="_clovers_8hpp" local="yes">lib/Analyse/Clovers.hpp</includedby>
+    <includedby refid="_cobalt_calorimeter_8hpp" local="yes">lib/Modules/CobaltCalorimeter.hpp</includedby>
+    <includedby refid="_faster2_histo_8hpp" local="yes">lib/Modules/Faster2Histo.hpp</includedby>
     <includedby refid="_timeshifts_8hpp" local="yes">lib/Modules/Timeshifts.hpp</includedby>
     <includedby refid="_m_t_counter_8hpp" local="yes">lib/MTObjects/MTCounter.hpp</includedby>
     <includedby refid="_m_t_faster_reader_8hpp" local="yes">lib/MTObjects/MTFasterReader.hpp</includedby>
@@ -14,336 +21,26 @@
     <includedby refid="_m_t_t_hist_8hpp" local="yes">lib/MTObjects/MTTHist.hpp</includedby>
     <includedby refid="_m_t_variable_8hpp" local="yes">lib/MTObjects/MTVariable.hpp</includedby>
     <incdepgraph>
-      <node id="28">
-        <label>glob.h</label>
-      </node>
-      <node id="52">
-        <label>TH1S.h</label>
-      </node>
-      <node id="13">
-        <label>iomanip</label>
-      </node>
-      <node id="12">
-        <label>functional</label>
-      </node>
-      <node id="18">
-        <label>queue</label>
-      </node>
-      <node id="33">
-        <label>random.hpp</label>
-        <link refid="random_8hpp"/>
-        <childnode refid="34" relation="include">
-        </childnode>
-      </node>
-      <node id="70">
-        <label>TTreeIndex.h</label>
-      </node>
-      <node id="4">
-        <label>../libRoot.hpp</label>
-        <link refid="lib_root_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
-        </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="46" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-        <childnode refid="51" relation="include">
-        </childnode>
-        <childnode refid="52" relation="include">
-        </childnode>
-        <childnode refid="53" relation="include">
-        </childnode>
-        <childnode refid="54" relation="include">
-        </childnode>
-        <childnode refid="55" relation="include">
-        </childnode>
-        <childnode refid="56" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
-        </childnode>
-        <childnode refid="58" relation="include">
-        </childnode>
-        <childnode refid="59" relation="include">
-        </childnode>
-        <childnode refid="60" relation="include">
-        </childnode>
-        <childnode refid="61" relation="include">
-        </childnode>
-        <childnode refid="62" relation="include">
-        </childnode>
-        <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="64" relation="include">
-        </childnode>
-        <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-        <childnode refid="68" relation="include">
-        </childnode>
-        <childnode refid="69" relation="include">
-        </childnode>
-        <childnode refid="70" relation="include">
-        </childnode>
-      </node>
-      <node id="38">
-        <label>filesystem</label>
-      </node>
-      <node id="39">
-        <label>TAxis.h</label>
-      </node>
-      <node id="30">
-        <label>stdlib.h</label>
-      </node>
-      <node id="68">
+      <node id="9">
         <label>TThread.h</label>
       </node>
-      <node id="51">
-        <label>TH1D.h</label>
-      </node>
-      <node id="64">
-        <label>TStopwatch.h</label>
-      </node>
-      <node id="20">
-        <label>stdexcept</label>
-      </node>
-      <node id="17">
-        <label>numeric</label>
-      </node>
-      <node id="21">
-        <label>string</label>
-      </node>
-      <node id="15">
-        <label>map</label>
-      </node>
-      <node id="5">
-        <label>libCo.hpp</label>
-        <link refid="lib_co_8hpp"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-      </node>
-      <node id="43">
-        <label>TF1.h</label>
-      </node>
-      <node id="32">
-        <label>print.hpp</label>
-        <link refid="print_8hpp"/>
-      </node>
-      <node id="11">
-        <label>fstream</label>
-      </node>
-      <node id="42">
-        <label>TError.h</label>
-      </node>
-      <node id="66">
-        <label>TStyle.h</label>
-      </node>
-      <node id="6">
-        <label>any</label>
-      </node>
-      <node id="36">
-        <label>files_functions.hpp</label>
-        <link refid="files__functions_8hpp"/>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-      </node>
-      <node id="34">
-        <label>random</label>
-      </node>
-      <node id="62">
+      <node id="8">
         <label>TROOT.h</label>
       </node>
-      <node id="31">
-        <label>string.h</label>
+      <node id="3">
+        <label>future</label>
       </node>
-      <node id="24">
-        <label>typeinfo</label>
-      </node>
-      <node id="41">
-        <label>TChain.h</label>
-      </node>
-      <node id="67">
-        <label>TSystem.h</label>
-      </node>
-      <node id="26">
+      <node id="6">
         <label>vector</label>
       </node>
-      <node id="22">
-        <label>stack</label>
-      </node>
-      <node id="44">
-        <label>TF2.h</label>
-      </node>
-      <node id="45">
-        <label>TFile.h</label>
-      </node>
-      <node id="40">
-        <label>TCanvas.h</label>
-      </node>
-      <node id="55">
-        <label>TH3I.h</label>
-      </node>
-      <node id="56">
-        <label>TKey.h</label>
-      </node>
-      <node id="37">
-        <label>vector_functions.hpp</label>
-        <link refid="vector__functions_8hpp"/>
-        <childnode refid="32" relation="include">
-        </childnode>
-      </node>
-      <node id="63">
-        <label>TSpectrum.h</label>
-      </node>
       <node id="7">
-        <label>array</label>
-      </node>
-      <node id="47">
-        <label>TFitResult.h</label>
-      </node>
-      <node id="19">
-        <label>sstream</label>
-      </node>
-      <node id="59">
-        <label>TMarker.h</label>
-      </node>
-      <node id="49">
-        <label>TGraphErrors.h</label>
-      </node>
-      <node id="53">
-        <label>TH2.h</label>
-      </node>
-      <node id="9">
-        <label>cstdlib</label>
-      </node>
-      <node id="50">
-        <label>TH1F.h</label>
-      </node>
-      <node id="57">
-        <label>TLeaf.h</label>
-      </node>
-      <node id="14">
         <label>iostream</label>
       </node>
-      <node id="35">
-        <label>string_functions.hpp</label>
-        <link refid="string__functions_8hpp"/>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>unordered_map</label>
-      </node>
-      <node id="58">
-        <label>TLegend.h</label>
-      </node>
-      <node id="65">
-        <label>TString.h</label>
-      </node>
-      <node id="60">
-        <label>TMath.h</label>
-      </node>
-      <node id="54">
-        <label>TH2F.h</label>
-      </node>
-      <node id="3">
+      <node id="5">
         <label>mutex</label>
+      </node>
+      <node id="2">
+        <label>csignal</label>
       </node>
       <node id="1">
         <label>lib/MTObjects/MTObject.hpp</label>
@@ -354,69 +51,53 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-      </node>
-      <node id="2">
-        <label>thread</label>
-      </node>
-      <node id="61">
-        <label>TRandom.h</label>
-      </node>
-      <node id="69">
-        <label>TTree.h</label>
-      </node>
-      <node id="8">
-        <label>algorithm</label>
-      </node>
-      <node id="46">
-        <label>TFitResultPtr.h</label>
-      </node>
-      <node id="29">
-        <label>stdio.h</label>
-      </node>
-      <node id="10">
-        <label>cstring</label>
-      </node>
-      <node id="48">
-        <label>TGraph.h</label>
-      </node>
-      <node id="16">
-        <label>memory</label>
-      </node>
-      <node id="23">
-        <label>typeindex</label>
-      </node>
-      <node id="27">
-        <label>dirent.h</label>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="22">
-        <label>lib/MTObjects/MTVariable.hpp</label>
-        <link refid="_m_t_variable_8hpp"/>
-      </node>
-      <node id="14">
-        <label>lib/Modules/Faster2Histo.hpp</label>
-        <link refid="_faster2_histo_8hpp"/>
-      </node>
-      <node id="19">
-        <label>lib/Classes/Manip.hpp</label>
-        <link refid="_manip_8hpp"/>
-      </node>
-      <node id="17">
-        <label>lib/MTObjects/MTFasterReader.hpp</label>
-        <link refid="_m_t_faster_reader_8hpp"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>thread</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="21">
+        <label>lib/MTObjects/MTVariable.hpp</label>
+        <link refid="_m_t_variable_8hpp"/>
+      </node>
+      <node id="8">
+        <label>lib/Modules/Faster2Histo.hpp</label>
+        <link refid="_faster2_histo_8hpp"/>
+      </node>
+      <node id="18">
+        <label>lib/Classes/Manip.hpp</label>
+        <link refid="_manip_8hpp"/>
+      </node>
+      <node id="16">
+        <label>lib/MTObjects/MTFasterReader.hpp</label>
+        <link refid="_m_t_faster_reader_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="15">
+        <label>lib/Modules/EvolutionPeaks.hpp</label>
+        <link refid="_evolution_peaks_8hpp"/>
+      </node>
+      <node id="19">
         <label>lib/MTObjects/MTFilesManager.hpp</label>
         <link refid="_m_t_files_manager_8hpp"/>
       </node>
@@ -424,13 +105,17 @@
         <label>lib/Analyse/EventAnalyse.hpp</label>
         <link refid="_event_analyse_8hpp"/>
       </node>
-      <node id="9">
+      <node id="11">
         <label>lib/MTObjects/MTCounter.hpp</label>
         <link refid="_m_t_counter_8hpp"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
+      </node>
+      <node id="7">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
       </node>
       <node id="2">
         <label>lib/Analyse/Clovers.hpp</label>
@@ -448,53 +133,41 @@
         <label>lib/Modules/CloverSpectra.hpp</label>
         <link refid="_clover_spectra_8hpp"/>
       </node>
-      <node id="18">
+      <node id="17">
         <label>lib/MTObjects/MTList.hpp</label>
         <link refid="_m_t_list_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
         <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
       </node>
-      <node id="11">
+      <node id="13">
         <label>lib/MTObjects/MTTHist.hpp</label>
         <link refid="_m_t_t_hist_8hpp"/>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-      </node>
-      <node id="15">
-        <label>lib/Modules/Histogramor.hpp</label>
-        <link refid="_histogramor_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-      </node>
-      <node id="12">
-        <label>lib/Analyse/HistoAnalyse.hpp</label>
-        <link refid="_histo_analyse_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
       </node>
       <node id="4">
         <label>lib/Analyse/Sorted_Event.hpp</label>
         <link refid="_sorted___event_8hpp"/>
       </node>
-      <node id="8">
+      <node id="10">
         <label>lib/Modules/Faster2Root.hpp</label>
         <link refid="_faster2_root_8hpp"/>
       </node>
@@ -509,61 +182,73 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="16">
-        <label>lib/Modules/NearLine.hpp</label>
-        <link refid="_near_line_8hpp"/>
-      </node>
-      <node id="7">
+      <node id="9">
         <label>lib/Modules/Timeshifts.hpp</label>
         <link refid="_timeshifts_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
         <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="14">
+        <label>lib/Modules/Calibrator.hpp</label>
+        <link refid="_calibrator_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
         <label>lib/MTObjects/MTRootReader.hpp</label>
         <link refid="_m_t_root_reader_8hpp"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>lib/Modules/Calibration.hpp</label>
-        <link refid="_calibration_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="12">
         <label>lib/Classes/Performances.hpp</label>
         <link refid="_performances_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="class_m_t_object" prot="public">MTObject</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_m_t_object_8hpp_1acbb3b2bf65ee25bfaaddfdd53daecb4b" prot="public" static="no">
+        <name>MULTITHREADING</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTObject.hpp" line="13" column="9" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
       <sectiondef kind="typedef">
       <memberdef kind="typedef" id="_m_t_object_8hpp_1a225f8aadf270f4a69ad323e64b7eaa33" prot="public" static="no">
         <type>const std::lock_guard&lt; std::mutex &gt;</type>
@@ -576,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTObject.hpp" line="11" column="1" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="11" bodyend="-1"/>
+        <location file="lib/MTObjects/MTObject.hpp" line="15" column="1" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="15" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="var">
@@ -591,35 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTObject.hpp" line="128" column="12" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="128" bodyend="-1"/>
-      </memberdef>
-      </sectiondef>
-      <sectiondef kind="func">
-      <memberdef kind="function" id="_m_t_object_8hpp_1acceec6d26d3021217ae83ccd7b029351" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class...</type>
-            <declname>ARGS</declname>
-            <defname>ARGS</defname>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>void printMT</definition>
-        <argsstring>(ARGS &amp;&amp;... args)</argsstring>
-        <name>printMT</name>
-        <param>
-          <type>ARGS &amp;&amp;...</type>
-          <declname>args</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTObject.hpp" line="137" column="6" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="137" bodyend="142"/>
-        <references refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" compoundref="_m_t_object_8hpp" startline="107">MTObject::mutex</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/MTObjects/MTObject.hpp" line="271" column="12" bodyfile="lib/MTObjects/MTObject.hpp" bodystart="271" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -629,140 +286,177 @@
     <programlisting>
 <codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>MTOBJECT_HPP</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MTOBJECT_HPP</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
-<codeline lineno="4"><highlight class="comment"><sp/><sp/>*<sp/>This<sp/>object<sp/>is<sp/>meant<sp/>to<sp/>be<sp/>a<sp/>base<sp/>class<sp/>for<sp/>any<sp/>other<sp/>multithreaded<sp/>object</highlight></codeline>
-<codeline lineno="5"><highlight class="comment"><sp/><sp/>*<sp/>It&apos;s<sp/>only<sp/>point<sp/>is<sp/>to<sp/>manage<sp/>this<sp/>nb_threads<sp/>static<sp/>member<sp/>variable</highlight></codeline>
-<codeline lineno="6"><highlight class="comment"><sp/><sp/>*<sp/>That<sp/>is,<sp/>all<sp/>classes<sp/>inheriting<sp/>from<sp/>MTObject<sp/>will<sp/>share<sp/>this<sp/>variable</highlight></codeline>
-<codeline lineno="7"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;thread&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight></codeline>
-<codeline lineno="11" refid="_m_t_object_8hpp_1a225f8aadf270f4a69ad323e64b7eaa33" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="_m_t_object_8hpp_1a225f8aadf270f4a69ad323e64b7eaa33" kindref="member">lock_mutex</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::lock_guard&lt;std::mutex&gt;;</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;csignal&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;future&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;thread&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;mutex&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;TROOT.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;TThread.h&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../libRoot.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="_m_t_object_8hpp_1acbb3b2bf65ee25bfaaddfdd53daecb4b" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MULTITHREADING</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18" refid="class_m_t_object" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_m_t_object" kindref="compound">MTObject</ref></highlight></codeline>
-<codeline lineno="19"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="21" refid="class_m_t_object_1a12856506adc231bafc0983c881c3fe36" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_m_t_object_1a12856506adc231bafc0983c881c3fe36" kindref="member">MTObject</ref>()<sp/>{}</highlight></codeline>
-<codeline lineno="22" refid="class_m_t_object_1a813cbf27a03a3b334ebc9faec99a5158" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_m_t_object_1a813cbf27a03a3b334ebc9faec99a5158" kindref="member">MTObject</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>&amp;<sp/>_nb_threads<sp/>)<sp/>{<ref refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" kindref="member">Initialize</ref>(_nb_threads);}</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24" refid="class_m_t_object_1aaa5354a0915c26979a49d54f36019df1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1aaa5354a0915c26979a49d54f36019df1" kindref="member">Initialize</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_nb_threads,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>force<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" kindref="member">setThreadsNb</ref>(_nb_threads,<sp/>force);</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" kindref="member">Initialize</ref>();</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30" refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" kindref="member">setThreadsNb</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>force<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{<ref refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" kindref="member">setThreadsNb</ref>(<ref refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" kindref="member">size_cast</ref>(n),<sp/>force);}</highlight></codeline>
-<codeline lineno="36" refid="class_m_t_object_1a8f91c9269a027d1770d7bae3b6d599a5" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a8f91c9269a027d1770d7bae3b6d599a5" kindref="member">setThreadsNb</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>force<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/></highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>maxThreads<sp/>=<sp/><ref refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" kindref="member">size_cast</ref>(std::thread::hardware_concurrency()*((force)<sp/>?<sp/>1<sp/>:<sp/>0.75));</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(n<sp/>&gt;<sp/>maxThreads)</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>=<sp/>maxThreads;</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>threads<sp/>too<sp/>large<sp/>(hardware)<sp/>-&gt;<sp/>reset<sp/>to<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>=<sp/>n;</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>nbThreadsChanged(nb_threads);//<sp/>Signal</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50" refid="class_m_t_object_1a8b70d4506ed556d5ca4c23703a80ddb6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a8b70d4506ed556d5ca4c23703a80ddb6" kindref="member">setThreadsNumber</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>force<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{<ref refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" kindref="member">setThreadsNb</ref>(n,<sp/>force);}</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52" refid="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" kindref="member">adjustThreadsNumber</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>limiting_number,<sp/>std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>print_if_limit_reached<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)<sp/></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(limiting_number&lt;<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>)<sp/></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a872d9518e0a1936df8e70a2dae303f4f" kindref="member">setThreadsNb</ref>(limiting_number);</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(print_if_limit_reached,<sp/></highlight><highlight class="stringliteral">&quot;thread<sp/>number<sp/>reduced<sp/>to<sp/>&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>);</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>==<sp/>1)<sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62" refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1aaa3623d88deae3a9311aad39bfff49dc" kindref="member">Initialize</ref>()</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" kindref="member">master_thread_id</ref><sp/>=<sp/>std::this_thread::get_id();</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>&gt;1)</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;MTObject<sp/>initialized<sp/>with&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>,<sp/></highlight><highlight class="stringliteral">&quot;threads&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>TThread::Initialize();</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ROOT::EnableThreadSafety();</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Func,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ARGS&gt;</highlight></codeline>
-<codeline lineno="76" refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" kindref="member">parallelise_function</ref>(Func<sp/>&amp;&amp;<sp/>func,<sp/>ARGS<sp/>&amp;&amp;...<sp/>args)</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref>)</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.reserve(<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>);<sp/></highlight><highlight class="comment">//<sp/>Memory<sp/>pre-allocation<sp/>(used<sp/>for<sp/>performances<sp/>reasons)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>;<sp/>i++)<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.emplace_back(<sp/>[i,<sp/>&amp;func,<sp/>&amp;args...]<sp/>()</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Inside<sp/>this<sp/>lambda<sp/>function,<sp/>we<sp/>already<sp/>are<sp/>inside<sp/>the<sp/>threads,<sp/>so<sp/>the<sp/>parallelised<sp/>section<sp/>starts<sp/>NOW<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>threads_ID[std::this_thread::get_id()]<sp/>=<sp/>i;<sp/>//<sp/>Old<sp/>indexing<sp/>system</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_thread_index<sp/>=<sp/>i;<sp/></highlight><highlight class="comment">//<sp/>Index<sp/>the<sp/>thread</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func(std::forward&lt;ARGS&gt;(args)...);<sp/></highlight><highlight class="comment">//<sp/>Run<sp/>the<sp/>function<sp/>inside<sp/>thread</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.size();<sp/>i++)<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.at(i).join();<sp/></highlight><highlight class="comment">//Closes<sp/>threads,<sp/>waiting<sp/>fot<sp/>everyone<sp/>to<sp/>finish</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.clear();<sp/></highlight><highlight class="comment">//<sp/>Flushes<sp/>memory</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Multi-threading<sp/>is<sp/>over<sp/>!&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Running<sp/>without<sp/>multithreading<sp/>...&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">m_thread_index</ref><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>func(std::forward&lt;ARGS&gt;(args)...);</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101" refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" kindref="member">getThreadsNb</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>;}</highlight></codeline>
-<codeline lineno="102" refid="class_m_t_object_1ad156f9b1c68f0e2713abb16890b1fa15" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_m_t_object_1ad156f9b1c68f0e2713abb16890b1fa15" kindref="member">getThreadsNumber</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>;}</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight></codeline>
-<codeline lineno="104" refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" kindref="member">isMasterThread</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" kindref="member">master_thread_id</ref><sp/>==<sp/>std::this_thread::get_id());}</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106" refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>;</highlight></codeline>
-<codeline lineno="107" refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::mutex<sp/><ref refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" kindref="member">mutex</ref>;<sp/></highlight><highlight class="comment">//<sp/>A<sp/>global<sp/>mutex<sp/>for<sp/>everyone<sp/>to<sp/>use</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="108" refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">ON</ref>;<sp/></highlight><highlight class="comment">//<sp/>State<sp/>boolean</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="109" refid="class_m_t_object_1a048c52b4b15fc13667559a5b07d71002" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref>;}<sp/></highlight><highlight class="comment">//<sp/>Can<sp/>be<sp/>used<sp/>only<sp/>if<sp/>the<sp/>class<sp/>has<sp/>been<sp/>instanciated</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111" refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" kindref="member">getThreadIndex</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">m_thread_index</ref>;}</highlight></codeline>
-<codeline lineno="112" refid="class_m_t_object_1af752e86ec494c50d1af7e6442c09733b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_m_t_object_1af752e86ec494c50d1af7e6442c09733b" kindref="member">index</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">m_thread_index</ref>;}</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>static<sp/>int<sp/>const<sp/>&amp;<sp/>getThreadIndex()<sp/>{return<sp/>threads_ID[std::this_thread::get_id()];}<sp/>//<sp/>Old<sp/>indexing<sp/>system</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>static<sp/>Signal&lt;int&gt;<sp/>nbThreadsChanged;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="_m_t_object_8hpp_1a225f8aadf270f4a69ad323e64b7eaa33" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/><ref refid="_m_t_object_8hpp_1a225f8aadf270f4a69ad323e64b7eaa33" kindref="member">lock_mutex</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::lock_guard&lt;std::mutex&gt;;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="class_m_t_object" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_m_t_object" kindref="compound">MTObject</ref></highlight></codeline>
+<codeline lineno="112"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="114" refid="class_m_t_object_1a12856506adc231bafc0983c881c3fe36" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_m_t_object_1a12856506adc231bafc0983c881c3fe36" kindref="member">MTObject</ref>()<sp/>{}</highlight></codeline>
+<codeline lineno="115" refid="class_m_t_object_1a813cbf27a03a3b334ebc9faec99a5158" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_m_t_object_1a813cbf27a03a3b334ebc9faec99a5158" kindref="member">MTObject</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>&amp;<sp/>_nb_threads<sp/>)<sp/>{<ref refid="class_m_t_object_1a14b970709f027b42787a5a0471a93dd1" kindref="member">Initialise</ref>(_nb_threads);}</highlight></codeline>
 <codeline lineno="116"><highlight class="normal"></highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>static<sp/>std::map&lt;std::thread::id,<sp/>int&gt;<sp/>threads_ID;<sp/>//<sp/>Old<sp/>indexing<sp/>system</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="119" refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::thread::id<sp/><ref refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" kindref="member">master_thread_id</ref>;<sp/></highlight></codeline>
-<codeline lineno="120" refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>thread_local<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">m_thread_index</ref>;<sp/></highlight><highlight class="comment">//<sp/>thread_local<sp/>variable,<sp/>meaning<sp/>it<sp/>will<sp/>hold<sp/>different<sp/>values<sp/>for<sp/>each<sp/>thread<sp/>it<sp/>is<sp/>in</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="121" refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::vector&lt;std::thread&gt;<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>;</highlight></codeline>
-<codeline lineno="122"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight></codeline>
-<codeline lineno="124"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Declaration<sp/>of<sp/>static<sp/>variables<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">MTObject::nb_threads</ref><sp/>=<sp/>1;</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="127"><highlight class="normal">std::mutex<sp/><ref refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" kindref="member">MTObject::mutex</ref>;</highlight></codeline>
-<codeline lineno="128" refid="_m_t_object_8hpp_1ab8cd4d7b579e254e645ccde48aadd2f4" refkind="member"><highlight class="normal">std::mutex<sp/><ref refid="_m_t_object_8hpp_1ab8cd4d7b579e254e645ccde48aadd2f4" kindref="member">MTmutex</ref>;</highlight></codeline>
+<codeline lineno="117" refid="class_m_t_object_1a47f15f1545383d3476ae6614984d3e07" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a47f15f1545383d3476ae6614984d3e07" kindref="member">Initialise</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_nb_threads,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>force<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1aaf17bd02ca52dbe0702ee0d9d0f51d58" kindref="member">setThreadsNb</ref>(_nb_threads,<sp/>force);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a14b970709f027b42787a5a0471a93dd1" kindref="member">Initialise</ref>();</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="class_m_t_object_1aaf17bd02ca52dbe0702ee0d9d0f51d58" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1aaf17bd02ca52dbe0702ee0d9d0f51d58" kindref="member">setThreadsNb</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>force<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>noexcept<sp/>{<ref refid="class_m_t_object_1aaf17bd02ca52dbe0702ee0d9d0f51d58" kindref="member">setThreadsNb</ref>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(n),<sp/>force);}</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="comment">//<sp/>std::map&lt;std::thread::id,<sp/>int&gt;<sp/>MTObject::threads_ID;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal">std::thread::id<sp/><ref refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" kindref="member">MTObject::master_thread_id</ref>;</highlight></codeline>
-<codeline lineno="132"><highlight class="normal">thread_local<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">MTObject::m_thread_index</ref><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="133"><highlight class="normal">std::vector&lt;std::thread&gt;<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">MTObject::m_threads</ref>;</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ARGS&gt;</highlight></codeline>
-<codeline lineno="137" refid="_m_t_object_8hpp_1acceec6d26d3021217ae83ccd7b029351" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_m_t_object_8hpp_1acceec6d26d3021217ae83ccd7b029351" kindref="member">printMT</ref>(ARGS<sp/>&amp;&amp;...<sp/>args)<sp/></highlight></codeline>
-<codeline lineno="138"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><ref refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" kindref="member">MTObject::mutex</ref>.lock();</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(std::forward&lt;ARGS&gt;(args)...);</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><ref refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" kindref="member">MTObject::mutex</ref>.unlock();</highlight></codeline>
-<codeline lineno="142"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//MTOBJECT_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135" refid="class_m_t_object_1aef24cd9329ac7f05228cfb26418f8f47" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1aef24cd9329ac7f05228cfb26418f8f47" kindref="member">setThreadsNb</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>n,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>force<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>noexcept</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>maxThreads<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">size_t</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(std::thread::hardware_concurrency()*((force)<sp/>?<sp/>1<sp/>:<sp/>0.75));</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(n<sp/>&gt;<sp/>maxThreads)</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>=<sp/>maxThreads;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>threads<sp/>too<sp/>large<sp/>(hardware)<sp/>-&gt;<sp/>reset<sp/>to<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>=<sp/>n;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>nbThreadsChanged(nb_threads);//<sp/>Signal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149" refid="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac76ab61815b5c3a471e6c210b7ba1913" kindref="member">adjustThreadsNumber</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>limiting_number,<sp/>std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>print_if_limit_reached<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)<sp/></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(limiting_number&lt;<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>)<sp/></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1aaf17bd02ca52dbe0702ee0d9d0f51d58" kindref="member">setThreadsNb</ref>(limiting_number);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>print_if_limit_reached<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>thread<sp/>number<sp/>reduced<sp/>to<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>==<sp/>1)<sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159" refid="class_m_t_object_1a67041891e1cebcb79af3180e55e702d6" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a67041891e1cebcb79af3180e55e702d6" kindref="member">kill</ref>;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161" refid="class_m_t_object_1a76b267be14d83c4c257f8451058f8099" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a76b267be14d83c4c257f8451058f8099" kindref="member">signalHandler</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>signal)</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(signal<sp/>==<sp/>SIGINT)</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="class_m_t_object_1aa76149992bd58e1e5918b418db04a7ca" kindref="member">activated</ref>)<sp/>exit(41);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a67041891e1cebcb79af3180e55e702d6" kindref="member">MTObject::kill</ref>)</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\nCtrl+C<sp/>pressed<sp/>twice,<sp/>killing<sp/>violently<sp/>the<sp/>program...<sp/>(but<sp/>should<sp/>be<sp/>fine,<sp/>maybe,<sp/>hopefully...)&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_m_t_object_8hpp_1a225f8aadf270f4a69ad323e64b7eaa33" kindref="member">lock_mutex</ref><sp/>lock(<ref refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" kindref="member">mutex</ref>);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\nCtrl+C<sp/>pressed,<sp/>quitting<sp/>the<sp/>multithreaded<sp/>environement<sp/>safely&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Waiting<sp/>for<sp/>the<sp/>current<sp/>threads<sp/>to<sp/>finish....&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;If<sp/>the<sp/>threads<sp/>do<sp/>not<sp/>stop<sp/>are<sp/>still<sp/>created,<sp/>you&apos;ll<sp/>have<sp/>to<sp/>close<sp/>the<sp/>terminal<sp/>(nothing<sp/>will<sp/>happens<sp/>by<sp/>default)&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a67041891e1cebcb79af3180e55e702d6" kindref="member">MTObject::kill</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>thread<sp/>:<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>)<sp/>thread.join();</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.clear();</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;All<sp/>threads<sp/>terminated<sp/>properly&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>exit(42);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187" refid="class_m_t_object_1a14b970709f027b42787a5a0471a93dd1" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a14b970709f027b42787a5a0471a93dd1" kindref="member">Initialise</ref>()</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Safety<sp/>to<sp/>Initialise<sp/>threads<sp/>only<sp/>once<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a36ab81d1d7e7bee29a08bfb8f0e3ac49" kindref="member">m_Initialised</ref>)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a36ab81d1d7e7bee29a08bfb8f0e3ac49" kindref="member">m_Initialised</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>signal(SIGINT,<sp/><ref refid="class_m_t_object_1a76b267be14d83c4c257f8451058f8099" kindref="member">signalHandler</ref>);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialising<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" kindref="member">master_thread_id</ref><sp/>=<sp/>std::this_thread::get_id();</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>&gt;1)</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialise<sp/>the<sp/>root<sp/>thread<sp/>management</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>#ifdef<sp/>DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Initialise<sp/>ROOT<sp/>thread<sp/>management...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/>#endif<sp/></highlight><highlight class="comment">//DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TThread::Initialise();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>ROOT::EnableThreadSafety();</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;MTObject<sp/>Initialised<sp/>with<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref><sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>threads<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Func,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ARGS&gt;</highlight></codeline>
+<codeline lineno="214" refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" kindref="member">parallelise_function</ref>(Func<sp/>&amp;&amp;<sp/>func,<sp/>ARGS<sp/>&amp;&amp;...<sp/>args)</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref>)</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1aa76149992bd58e1e5918b418db04a7ca" kindref="member">activated</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.reserve(<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>);<sp/></highlight><highlight class="comment">//<sp/>Memory<sp/>pre-allocation<sp/>(used<sp/>for<sp/>performances<sp/>reasons)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;<ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>;<sp/>i++)<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.emplace_back(<sp/>[i,<sp/>&amp;func,<sp/>&amp;args...]<sp/>()</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Inside<sp/>this<sp/>lambda<sp/>function,<sp/>we<sp/>already<sp/>are<sp/>inside<sp/>the<sp/>threads,<sp/>so<sp/>the<sp/>parallelised<sp/>section<sp/>starts<sp/>NOW<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_thread_index<sp/>=<sp/>i;<sp/></highlight><highlight class="comment">//<sp/>Index<sp/>the<sp/>thread</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func(std::forward&lt;ARGS&gt;(args)...);<sp/></highlight><highlight class="comment">//<sp/>Run<sp/>the<sp/>function<sp/>inside<sp/>thread</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>thread<sp/>:<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>)<sp/>thread.join();<sp/></highlight><highlight class="comment">//Closes<sp/>threads,<sp/>waiting<sp/>fot<sp/>everyone<sp/>to<sp/>finish</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>.clear();<sp/></highlight><highlight class="comment">//<sp/>Flushes<sp/>memory</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Multi-threading<sp/>is<sp/>over<sp/>!&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1aa76149992bd58e1e5918b418db04a7ca" kindref="member">activated</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Running<sp/>without<sp/>multithreading<sp/>...&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">m_thread_index</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>func(std::forward&lt;ARGS&gt;(args)...);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240" refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_m_t_object_1ac97399bb34f766e41e7f9a1cd1b7eb7a" kindref="member">getThreadsNb</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>;}</highlight></codeline>
+<codeline lineno="241" refid="class_m_t_object_1ad156f9b1c68f0e2713abb16890b1fa15" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_m_t_object_1ad156f9b1c68f0e2713abb16890b1fa15" kindref="member">getThreadsNumber</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>;}</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243" refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a3350577ca839e2abdcd4d6f6449a1408" kindref="member">isMasterThread</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" kindref="member">master_thread_id</ref><sp/>==<sp/>std::this_thread::get_id());}</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245" refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">nb_threads</ref>;</highlight></codeline>
+<codeline lineno="246" refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::mutex<sp/><ref refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" kindref="member">mutex</ref>;<sp/></highlight><highlight class="comment">//<sp/>A<sp/>global<sp/>mutex<sp/>for<sp/>everyone<sp/>to<sp/>use</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247" refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">ON</ref>;<sp/></highlight><highlight class="comment">//<sp/>State<sp/>boolean<sp/>:<sp/>is<sp/>multithreading<sp/>activated<sp/>?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248" refid="class_m_t_object_1aa76149992bd58e1e5918b418db04a7ca" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1aa76149992bd58e1e5918b418db04a7ca" kindref="member">activated</ref>;<sp/></highlight><highlight class="comment">//<sp/>State<sp/>boolean<sp/>:<sp/>is<sp/>multithreading<sp/>activated<sp/>?</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="250" refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" kindref="member">getThreadIndex</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">m_thread_index</ref>;}</highlight></codeline>
+<codeline lineno="251" refid="class_m_t_object_1af752e86ec494c50d1af7e6442c09733b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_m_t_object_1af752e86ec494c50d1af7e6442c09733b" kindref="member">index</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">m_thread_index</ref>;}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>static<sp/>Signal&lt;int&gt;<sp/>nbThreadsChanged;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="256" refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::thread::id<sp/><ref refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" kindref="member">master_thread_id</ref>;<sp/></highlight></codeline>
+<codeline lineno="257" refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>thread_local<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">m_thread_index</ref>;<sp/></highlight><highlight class="comment">//<sp/>thread_local<sp/>variable,<sp/>meaning<sp/>it<sp/>will<sp/>hold<sp/>different<sp/>values<sp/>for<sp/>each<sp/>thread<sp/>it<sp/>is<sp/>in</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258" refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::vector&lt;std::thread&gt;<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">m_threads</ref>;</highlight></codeline>
+<codeline lineno="259" refid="class_m_t_object_1a36ab81d1d7e7bee29a08bfb8f0e3ac49" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a36ab81d1d7e7bee29a08bfb8f0e3ac49" kindref="member">m_Initialised</ref>;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a36ab81d1d7e7bee29a08bfb8f0e3ac49" kindref="member">MTObject::m_Initialised</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a67041891e1cebcb79af3180e55e702d6" kindref="member">MTObject::kill</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1aa76149992bd58e1e5918b418db04a7ca" kindref="member">MTObject::activated</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Declaration<sp/>of<sp/>static<sp/>variables<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a1c2b3cb0cdccca46c8ebba009503ac88" kindref="member">MTObject::nb_threads</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" kindref="member">MTObject::ON</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal">std::mutex<sp/><ref refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" kindref="member">MTObject::mutex</ref>;</highlight></codeline>
+<codeline lineno="271" refid="_m_t_object_8hpp_1ab8cd4d7b579e254e645ccde48aadd2f4" refkind="member"><highlight class="normal">std::mutex<sp/><ref refid="_m_t_object_8hpp_1ab8cd4d7b579e254e645ccde48aadd2f4" kindref="member">MTmutex</ref>;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal">std::thread::id<sp/><ref refid="class_m_t_object_1a16983b3e7be4853da5f32145342fc6b0" kindref="member">MTObject::master_thread_id</ref>;</highlight></codeline>
+<codeline lineno="274"><highlight class="normal">thread_local<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="class_m_t_object_1ac9efab6b9d255529611a250e91779a48" kindref="member">MTObject::m_thread_index</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="275"><highlight class="normal">std::vector&lt;std::thread&gt;<sp/><ref refid="class_m_t_object_1abf0f47fe00f785c060ba2ec35df9819d" kindref="member">MTObject::m_threads</ref>;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//MTOBJECT_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="lib/MTObjects/MTObject.hpp"/>
   </compounddef>

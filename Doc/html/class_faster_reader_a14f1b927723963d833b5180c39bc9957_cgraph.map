@@ -1,6 +1,7 @@
 <map id="FasterReader::Reset" name="FasterReader::Reset">
-<area shape="rect" id="node1" title="Reset the cursor to the begining of the document." alt="" coords="5,35,157,61"/>
-<area shape="rect" id="node2" href="$class_faster_reader.html#a949601e8d70fc3aaabe66824d22bdf69" title="Setup the fasterac.h library to read the data." alt="" coords="205,35,376,61"/>
+<area shape="rect" id="node1" title="Reset the cursor to the begining of the document." alt="" coords="5,64,157,91"/>
+<area shape="rect" id="node2" href="$class_faster_reader.html#aa887429a942ff961225755336c06c025" title="Setup the fasterac.h library to read the data." alt="" coords="205,64,376,91"/>
 <area shape="rect" id="node3" href="$files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="466,5,553,32"/>
-<area shape="rect" id="node4" href="$class_faster_reader.html#a21a9202f79d43b9fd41cd1e1c276fe2c" title=" " alt="" coords="424,57,595,98"/>
+<area shape="rect" id="node4" href="$class_faster_reader.html#a83d86d816bed5053765a05ddf4da278d" title=" " alt="" coords="424,57,595,98"/>
+<area shape="rect" id="node5" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="643,93,695,120"/>
 </map>

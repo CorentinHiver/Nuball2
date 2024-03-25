@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['histoanalyse_1374',['HistoAnalyse',['../class_histo_analyse.html',1,'']]],
-  ['histogramor_1375',['Histogramor',['../class_histogramor.html',1,'']]],
-  ['histograms_1376',['histograms',['../struct_calibration_1_1histograms.html',1,'Calibration']]],
-  ['hit_1377',['Hit',['../class_hit.html',1,'']]]
+  ['histograms_1792',['histograms',['../struct_calibrator_1_1histograms.html',1,'Calibrator']]],
+  ['histonull_1793',['HistoNull',['../class_spectra_co_1_1_histo_null.html',1,'SpectraCo']]],
+  ['histozombie_1794',['HistoZombie',['../class_spectra_co_1_1_histo_zombie.html',1,'SpectraCo']]],
+  ['hit_1795',['Hit',['../class_hit.html',1,'']]],
+  ['hitbuffer_1796',['HitBuffer',['../class_hit_buffer.html',1,'']]]
 ];

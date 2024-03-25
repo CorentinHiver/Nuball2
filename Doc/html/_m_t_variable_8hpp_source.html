@@ -98,34 +98,48 @@ $(document).ready(function(){initNavTree('_m_t_variable_8hpp_source.html',''); i
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  {</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>.resize(<a class="code" href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a">MTObject::getThreadsNb</a>());</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    MTObject::nbThreadsChanged.connect</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    (</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      [<span class="keyword">this</span>](<span class="keywordtype">int</span> nb_threads)</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;      {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <a class="code" href="class_m_t_variable.html#af2f966c9e57eb54bd8fb27595e8c39ac">resize</a>(nb_threads);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;      }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    );</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  }</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="class_m_t_variable.html#af2f966c9e57eb54bd8fb27595e8c39ac">   26</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_m_t_variable.html#af2f966c9e57eb54bd8fb27595e8c39ac">resize</a>(<span class="keywordtype">size_t</span> size) </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;  {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="_m_t_object_8hpp.html#a225f8aadf270f4a69ad323e64b7eaa33">lock_mutex</a>(<a class="code" href="class_m_t_object.html#a79d86fbc8837ba0f9a4cd1405fddef1c">MTObject::mutex</a>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>.clear();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>.resize(size);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  }</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">   34</a></span>&#160;  std::vector&lt;T&gt; <a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MTVARIABLE_HPP</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">if</span> (std::is_arithmetic&lt;T&gt;::value) <a class="code" href="class_m_t_variable.html#a2806e59901cd3ba9a92462b4fc72f08f">total</a> = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(0);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">// MTObject::nbThreadsChanged.connect</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// (</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">//   [this](int nb_threads)</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">//   {</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">//     resize(nb_threads);</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">//   }</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// );</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;  }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_m_t_variable.html#af2f966c9e57eb54bd8fb27595e8c39ac">   28</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="class_m_t_variable.html#af2f966c9e57eb54bd8fb27595e8c39ac">resize</a>(<span class="keywordtype">size_t</span> size) </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="_m_t_object_8hpp.html#a225f8aadf270f4a69ad323e64b7eaa33">lock_mutex</a> lock(<a class="code" href="class_m_t_object.html#a79d86fbc8837ba0f9a4cd1405fddef1c">MTObject::mutex</a>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>.clear();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>.resize(size);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_m_t_variable.html#a4e2763a5d9c13ad566d8d370dd88521c">   35</a></span>&#160;  T <span class="keyword">const</span> &amp; <a class="code" href="class_m_t_variable.html#a4e2763a5d9c13ad566d8d370dd88521c">fuse</a>()</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    static_assert(std::is_arithmetic&lt;T&gt;::value, <span class="stringliteral">&quot;in MTVariable&lt;T&gt;::fuse() : T must be a numerical !!&quot;</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_m_t_variable.html#a2806e59901cd3ba9a92462b4fc72f08f">total</a> = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(0);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span> &amp; e : <a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>) e+=<a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;  }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_m_t_variable.html#a2806e59901cd3ba9a92462b4fc72f08f">   45</a></span>&#160;  T <a class="code" href="class_m_t_variable.html#a2806e59901cd3ba9a92462b4fc72f08f">total</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">   46</a></span>&#160;  std::vector&lt;T&gt; <a class="code" href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">m_variables</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// MTVARIABLE_HPP</span></div>
 <div class="ttc" id="a_m_t_object_8hpp_html"><div class="ttname"><a href="_m_t_object_8hpp.html">MTObject.hpp</a></div></div>
-<div class="ttc" id="a_m_t_object_8hpp_html_a225f8aadf270f4a69ad323e64b7eaa33"><div class="ttname"><a href="_m_t_object_8hpp.html#a225f8aadf270f4a69ad323e64b7eaa33">lock_mutex</a></div><div class="ttdeci">const std::lock_guard&lt; std::mutex &gt; lock_mutex</div><div class="ttdef"><b>Definition:</b> MTObject.hpp:11</div></div>
-<div class="ttc" id="aclass_m_t_object_html_a79d86fbc8837ba0f9a4cd1405fddef1c"><div class="ttname"><a href="class_m_t_object.html#a79d86fbc8837ba0f9a4cd1405fddef1c">MTObject::mutex</a></div><div class="ttdeci">static std::mutex mutex</div><div class="ttdef"><b>Definition:</b> MTObject.hpp:107</div></div>
-<div class="ttc" id="aclass_m_t_object_html_ac97399bb34f766e41e7f9a1cd1b7eb7a"><div class="ttname"><a href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a">MTObject::getThreadsNb</a></div><div class="ttdeci">static auto const  &amp; getThreadsNb()</div><div class="ttdef"><b>Definition:</b> MTObject.hpp:101</div></div>
+<div class="ttc" id="a_m_t_object_8hpp_html_a225f8aadf270f4a69ad323e64b7eaa33"><div class="ttname"><a href="_m_t_object_8hpp.html#a225f8aadf270f4a69ad323e64b7eaa33">lock_mutex</a></div><div class="ttdeci">const std::lock_guard&lt; std::mutex &gt; lock_mutex</div><div class="ttdef"><b>Definition:</b> MTObject.hpp:15</div></div>
+<div class="ttc" id="aclass_m_t_object_html_a79d86fbc8837ba0f9a4cd1405fddef1c"><div class="ttname"><a href="class_m_t_object.html#a79d86fbc8837ba0f9a4cd1405fddef1c">MTObject::mutex</a></div><div class="ttdeci">static std::mutex mutex</div><div class="ttdef"><b>Definition:</b> MTObject.hpp:246</div></div>
+<div class="ttc" id="aclass_m_t_object_html_ac97399bb34f766e41e7f9a1cd1b7eb7a"><div class="ttname"><a href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a">MTObject::getThreadsNb</a></div><div class="ttdeci">static auto const  &amp; getThreadsNb()</div><div class="ttdef"><b>Definition:</b> MTObject.hpp:240</div></div>
 <div class="ttc" id="aclass_m_t_variable_html"><div class="ttname"><a href="class_m_t_variable.html">MTVariable</a></div><div class="ttdoc">UNUSED.</div><div class="ttdef"><b>Definition:</b> MTVariable.hpp:11</div></div>
-<div class="ttc" id="aclass_m_t_variable_html_aab1b644bd142eb657d88aecc74450b30"><div class="ttname"><a href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">MTVariable::m_variables</a></div><div class="ttdeci">std::vector&lt; T &gt; m_variables</div><div class="ttdef"><b>Definition:</b> MTVariable.hpp:34</div></div>
-<div class="ttc" id="aclass_m_t_variable_html_af2f966c9e57eb54bd8fb27595e8c39ac"><div class="ttname"><a href="class_m_t_variable.html#af2f966c9e57eb54bd8fb27595e8c39ac">MTVariable::resize</a></div><div class="ttdeci">void resize(size_t size)</div><div class="ttdef"><b>Definition:</b> MTVariable.hpp:26</div></div>
+<div class="ttc" id="aclass_m_t_variable_html_a2806e59901cd3ba9a92462b4fc72f08f"><div class="ttname"><a href="class_m_t_variable.html#a2806e59901cd3ba9a92462b4fc72f08f">MTVariable::total</a></div><div class="ttdeci">T total</div><div class="ttdef"><b>Definition:</b> MTVariable.hpp:45</div></div>
+<div class="ttc" id="aclass_m_t_variable_html_a4e2763a5d9c13ad566d8d370dd88521c"><div class="ttname"><a href="class_m_t_variable.html#a4e2763a5d9c13ad566d8d370dd88521c">MTVariable::fuse</a></div><div class="ttdeci">T const  &amp; fuse()</div><div class="ttdef"><b>Definition:</b> MTVariable.hpp:35</div></div>
+<div class="ttc" id="aclass_m_t_variable_html_aab1b644bd142eb657d88aecc74450b30"><div class="ttname"><a href="class_m_t_variable.html#aab1b644bd142eb657d88aecc74450b30">MTVariable::m_variables</a></div><div class="ttdeci">std::vector&lt; T &gt; m_variables</div><div class="ttdef"><b>Definition:</b> MTVariable.hpp:46</div></div>
+<div class="ttc" id="aclass_m_t_variable_html_af2f966c9e57eb54bd8fb27595e8c39ac"><div class="ttname"><a href="class_m_t_variable.html#af2f966c9e57eb54bd8fb27595e8c39ac">MTVariable::resize</a></div><div class="ttdeci">void resize(size_t size)</div><div class="ttdef"><b>Definition:</b> MTVariable.hpp:28</div></div>
 <div class="ttc" id="aclass_m_t_variable_html_afeaf590e18d11bba1ca0e82be8d1cb26"><div class="ttname"><a href="class_m_t_variable.html#afeaf590e18d11bba1ca0e82be8d1cb26">MTVariable::MTVariable</a></div><div class="ttdeci">MTVariable()</div><div class="ttdef"><b>Definition:</b> MTVariable.hpp:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

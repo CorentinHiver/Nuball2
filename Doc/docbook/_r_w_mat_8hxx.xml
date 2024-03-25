@@ -2,16 +2,7 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__r_w_mat_8hxx" xml:lang="en-US">
 <title>lib/Classes/RWMat.hxx File Reference</title>
 <indexterm><primary>lib/Classes/RWMat.hxx</primary></indexterm>
-<programlisting>#include &lt;math.h&gt;
-#include &lt;vector&gt;
-#include &lt;iostream&gt;
-#include &lt;string&gt;
-#include &lt;cstdlib&gt;
-#include &lt;fstream&gt;
-#include &lt;sstream&gt;
-#include &lt;iomanip&gt;
-#include &quot;TH2F.h&quot;
-#include &quot;../libCo.hpp&quot;
+<programlisting>#include &quot;../libRoot.hpp&quot;
 </programlisting>Include dependency graph for RWMat.hxx:<para>
     <informalfigure>
         <mediaobject>

@@ -1,0 +1,22 @@
+<map id="SpectraCo::calculateCoeff" name="SpectraCo::calculateCoeff">
+<area shape="rect" id="node1" title=" " alt="" coords="697,366,887,393"/>
+<area shape="rect" id="node2" href="$class_spectra_co.html#af202a60db2de7b7a723f9863c9616dca" title=" " alt="" coords="489,63,643,90"/>
+<area shape="rect" id="node6" href="$class_spectra_co.html#afdfa3e10eda4e3513674dddcd32ae7e6" title="First order calibration." alt="" coords="485,145,647,171"/>
+<area shape="rect" id="node8" href="$class_spectra_co.html#ad357dfc02fbb9ad6fc308ecf07f07fea" title=" " alt="" coords="504,203,628,230"/>
+<area shape="rect" id="node12" href="$class_spectra_co.html#aae276b412dd31fc06933db96b65298fd" title=" " alt="" coords="485,254,647,281"/>
+<area shape="rect" id="node13" href="$class_spectra_co.html#a085a0452438dbffc3452aed6733a9103" title=" " alt="" coords="483,329,649,355"/>
+<area shape="rect" id="node15" href="$class_spectra_co.html#ab733430ea1ac8bafd68b6709f19d1d0d" title="Resize allows one to select the number of bins. Affects only the maximum bin." alt="" coords="488,403,644,430"/>
+<area shape="rect" id="node17" href="$class_spectra_co.html#aaee0e2be91f5b3e3958892b8389a5003" title=" " alt="" coords="489,454,643,481"/>
+<area shape="rect" id="node18" href="$class_spectra_co.html#a5347b79a6a914df04a1a99664fd5cc96" title=" " alt="" coords="491,505,641,531"/>
+<area shape="rect" id="node19" href="$class_spectra_co.html#ac2141fbefadce3d8f82e5c7db09998ab" title=" " alt="" coords="483,555,649,582"/>
+<area shape="rect" id="node20" href="$class_spectra_co.html#a7aa1ab216355e91774cbf364a7286043" title=" " alt="" coords="485,606,647,633"/>
+<area shape="rect" id="node3" href="$class_spectra_co.html#af74c78334a7be1cc421779f9e4b30a0b" title="Calibrates using the coeffs[0:n&#45;1] coefficient then scale it using the coeffs.back() coefficient (spe..." alt="" coords="221,13,435,39"/>
+<area shape="rect" id="node5" href="$class_spectra_co.html#a488369423915a272c24b561553cea913" title=" " alt="" coords="247,63,409,90"/>
+<area shape="rect" id="node4" href="$class_objective_function_chi2.html#ab9abe6ab2b65aa87d805b9866044eaed" title=" " alt="" coords="5,5,173,47"/>
+<area shape="rect" id="node7" href="$class_spectra_co.html#af580e2c735a90aff03e6c1c159ed9b17" title=" " alt="" coords="251,114,405,141"/>
+<area shape="rect" id="node9" href="$class_spectra_co.html#ad094b13ab3d8e445b04edc68a5c12ec0" title=" " alt="" coords="247,165,409,191"/>
+<area shape="rect" id="node10" href="$class_spectra_co.html#a79c602e0c90555c37098d070863134f3" title="TODO." alt="" coords="263,239,393,266"/>
+<area shape="rect" id="node11" href="$class_spectra_co.html#a7cd88b33fa9b85c5bf2dcdd2e3d13dc2" title=" " alt="" coords="247,290,409,317"/>
+<area shape="rect" id="node14" href="$class_spectra_co.html#a3e4d1435fa3a80662a8c4442464988e1" title=" " alt="" coords="247,341,409,367"/>
+<area shape="rect" id="node16" href="$class_spectra_co.html#a4edb2ef585474bb8c1f728d0dc7731e2" title="Remove the bins after the last bin with content (= detector&#39;s output max range)" alt="" coords="229,403,427,430"/>
+</map>

@@ -1,4 +1,4 @@
-<map id="Timeshifts::InitializeRaw" name="Timeshifts::InitializeRaw">
+<map id="Timeshifts::InitialiseRaw" name="Timeshifts::InitialiseRaw">
 <area shape="rect" id="node1" title=" " alt="" coords="5,132,188,159"/>
 <area shape="rect" id="node2" href="$class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="236,68,368,95"/>
 <area shape="rect" id="node7" href="$class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="771,81,894,108"/>

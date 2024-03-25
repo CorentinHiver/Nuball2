@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="__timewalk_8hpp" xml:lang="en-US">
-<title>lib/Modules/Timewalk.hpp File Reference</title>
-<indexterm><primary>lib/Modules/Timewalk.hpp</primary></indexterm>
+<title>lib/Classes/Timewalk.hpp File Reference</title>
+<indexterm><primary>lib/Classes/Timewalk.hpp</primary></indexterm>
 <programlisting>#include &quot;../libCo.hpp&quot;
 </programlisting>Include dependency graph for Timewalk.hpp:<para>
     <informalfigure>

@@ -1,8 +1,27 @@
 var searchData=
 [
-  ['q_2647',['q',['../class_i_options.html#adb4538164fb33f5375f1f72601f4aefb',1,'IOptions']]],
-  ['q_2648',['Q',['../class_i_options.html#a3b860786dd7c7cef82d6f00b2e64a05e',1,'IOptions']]],
-  ['qdc2_2649',['qdc2',['../class_hit.html#a07541ef2177c95ba3de7df1fed1c986f',1,'Hit']]],
-  ['qdc2s_2650',['qdc2s',['../class_event.html#a7bc76ee166649431e9010875202ca6c1',1,'Event']]],
-  ['qdc3_2651',['qdc3',['../class_hit.html#a109d6cdcf0601e11453901833daa7a4b',1,'Hit']]]
+  ['range_5fmax_3431',['range_max',['../class_analysed_spectra.html#ade8353a5064a3e891165ea2922c55f5c',1,'AnalysedSpectra']]],
+  ['range_5fmin_3432',['range_min',['../class_analysed_spectra.html#aaef1cb033207e3c99fb77d02ce1375cb',1,'AnalysedSpectra']]],
+  ['ratio_3433',['ratio',['../class_paris_phoswitch.html#ac84fb1e5c68263ffd8e2ab4b017841ce',1,'ParisPhoswitch']]],
+  ['ratio_5frange_5fmax_3434',['ratio_range_max',['../class_analysed_spectra.html#aca7013d58146ed540c6ade244166b226',1,'AnalysedSpectra']]],
+  ['ratio_5frange_5fmin_3435',['ratio_range_min',['../class_analysed_spectra.html#afe6370bcf60d5d986f7da79e5228f014',1,'AnalysedSpectra']]],
+  ['raw_5fspectra_3436',['raw_spectra',['../struct_calibrator_1_1histograms.html#adb60dbf765f5c82fb247c2aae1ec4d6d',1,'Calibrator::histograms']]],
+  ['rawbgo_3437',['RawBGO',['../class_counters.html#afba8f7fd1f07fe6afd5f2ffd46ddf8bf',1,'Counters']]],
+  ['rawbgo_3438',['rawBGO',['../class_clovers.html#a1a2205eb2396ce5fd48b0f12a73f0196',1,'Clovers']]],
+  ['rawge_3439',['RawGe',['../class_counters.html#a788284c58e92d46682d73e2679cdaa48',1,'Counters']]],
+  ['rawge_3440',['rawGe',['../class_clovers.html#af84dd10eb878f4385ecd092e23a77e1c',1,'Clovers']]],
+  ['rawgemult_3441',['RawGeMult',['../class_sorted___event.html#a87e18e85b327bc463a15d2d1f8ae2c5c',1,'Sorted_Event']]],
+  ['rawmult_3442',['RawMult',['../class_sorted___event.html#a305216fefa6fd71376e828702590fb82',1,'Sorted_Event']]],
+  ['rd_3443',['rd',['../random_co_8hpp.html#a7071b0092ad8c5b57d6cc40c5f803df5',1,'randomCo.hpp']]],
+  ['read_3444',['read',['../class_hit.html#a4748672c2bd6987972336e488f67bda7',1,'Hit::read()'],['../class_event.html#a9c01144b3f06d4cc5234ae3736fec9d2',1,'Event::read()']]],
+  ['readfile_3445',['readFile',['../class_calibrator.html#a39c8a92b79d32122442419c7c2785dbf',1,'Calibrator']]],
+  ['rejectedge_3446',['RejectedGe',['../class_clovers.html#ae853cd7142ff578d6876c38070ef482e',1,'Clovers']]],
+  ['rf_5fref_5ftime_3447',['RF_ref_time',['../class_event_builder.html#aae65b5dd56d65114847b98becd24634c',1,'EventBuilder']]],
+  ['ring_3448',['ring',['../class_paris_label.html#a43fed71ff7f0c3efcf3b2938fd60715d',1,'ParisLabel']]],
+  ['ring_5farray_3449',['ring_array',['../class_paris_label.html#a12026f89649ca3d3ef2a5fda9b6395e7',1,'ParisLabel']]],
+  ['ring_5fhits_3450',['Ring_Hits',['../class_d_s_s_d.html#aed2a8154605b320f03d690623f9894d4',1,'DSSD']]],
+  ['ring_5fthickness_3451',['ring_thickness',['../class_d_s_s_d.html#a9089ebe569d7635d0ea44dfb9fdaba4e',1,'DSSD']]],
+  ['ringmult_3452',['RingMult',['../class_d_s_s_d.html#a28d8b2597e7458b29c399e701f048f17',1,'DSSD']]],
+  ['rings_3453',['Rings',['../class_d_s_s_d.html#ac2048ed45b15c5d0c9b7eb749ea40cba',1,'DSSD']]],
+  ['root_5fspectra_5fpointers_3454',['root_spectra_pointers',['../class_spectra_co.html#a7bb27d1fe53fe342a218040f28d647ba',1,'SpectraCo']]]
 ];

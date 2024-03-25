@@ -7,26 +7,20 @@
     <includes refid="_paris_8hpp" local="yes">Paris.hpp</includes>
     <includes refid="_event_8hpp" local="yes">../Classes/Event.hpp</includes>
     <incdepgraph>
-      <node id="29">
+      <node id="21">
         <label>glob.h</label>
       </node>
       <node id="53">
         <label>TH1S.h</label>
       </node>
-      <node id="12">
-        <label>iomanip</label>
-      </node>
-      <node id="11">
+      <node id="26">
         <label>functional</label>
       </node>
-      <node id="18">
-        <label>queue</label>
+      <node id="7">
+        <label>iomanip</label>
       </node>
-      <node id="34">
-        <label>random.hpp</label>
-        <link refid="random_8hpp"/>
-        <childnode refid="35" relation="include">
-        </childnode>
+      <node id="30">
+        <label>queue</label>
       </node>
       <node id="71">
         <label>TTreeIndex.h</label>
@@ -101,17 +95,20 @@
         <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="22">
         <label>filesystem</label>
       </node>
       <node id="40">
         <label>TAxis.h</label>
       </node>
-      <node id="31">
-        <label>stdlib.h</label>
-      </node>
       <node id="69">
         <label>TThread.h</label>
+      </node>
+      <node id="23">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
       </node>
       <node id="74">
         <label>../Classes/Gate.hpp</label>
@@ -119,44 +116,48 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="77">
         <label>CloverModule.hpp</label>
         <link refid="_clover_module_8hpp"/>
       </node>
       <node id="52">
         <label>TH1D.h</label>
       </node>
-      <node id="77">
+      <node id="78">
         <label>DSSD.hpp</label>
         <link refid="_d_s_s_d_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
         <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="78" relation="include">
-        </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
       <node id="65">
         <label>TStopwatch.h</label>
       </node>
-      <node id="20">
+      <node id="31">
         <label>stdexcept</label>
       </node>
-      <node id="17">
+      <node id="29">
         <label>numeric</label>
       </node>
-      <node id="81">
+      <node id="85">
         <label>Arrays/Paris.h</label>
         <link refid="_paris_8h"/>
       </node>
-      <node id="21">
+      <node id="16">
         <label>string</label>
       </node>
-      <node id="14">
+      <node id="89">
+        <label>ParisBidimAngles.hpp</label>
+        <link refid="_paris_bidim_angles_8hpp"/>
+      </node>
+      <node id="9">
         <label>map</label>
       </node>
       <node id="1">
@@ -164,9 +165,9 @@
         <link refid="_event_analyse_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
@@ -182,45 +183,21 @@
         <link refid="lib_co_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
@@ -234,11 +211,15 @@
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
         <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
@@ -246,15 +227,27 @@
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
       </node>
       <node id="44">
         <label>TF1.h</label>
       </node>
-      <node id="33">
+      <node id="5">
         <label>print.hpp</label>
         <link refid="print_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
       </node>
-      <node id="10">
+      <node id="20">
         <label>fstream</label>
       </node>
       <node id="2">
@@ -268,16 +261,10 @@
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="76" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
       </node>
-      <node id="78">
-        <label>Timewalk.hpp</label>
-        <link refid="_timewalk_8hpp"/>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="84">
+      <node id="88">
         <label>PositionXY.hpp</label>
         <link refid="_position_x_y_8hpp"/>
       </node>
@@ -287,52 +274,63 @@
       <node id="67">
         <label>TStyle.h</label>
       </node>
-      <node id="5">
+      <node id="24">
         <label>any</label>
       </node>
-      <node id="37">
+      <node id="18">
         <label>files_functions.hpp</label>
         <link refid="files__functions_8hpp"/>
-        <childnode refid="33" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="13">
         <label>random</label>
       </node>
-      <node id="82">
+      <node id="86">
         <label>ParisCluster.hpp</label>
         <link refid="_paris_cluster_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
       </node>
       <node id="63">
         <label>TROOT.h</label>
       </node>
-      <node id="32">
-        <label>string.h</label>
-      </node>
-      <node id="25">
+      <node id="35">
         <label>typeinfo</label>
       </node>
       <node id="79">
-        <label>Detectors.hpp</label>
+        <label>../Classes/Detectors.hpp</label>
         <link refid="_detectors_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="73" relation="include">
         </childnode>
+      </node>
+      <node id="76">
+        <label>future</label>
+      </node>
+      <node id="39">
+        <label>ctime</label>
       </node>
       <node id="42">
         <label>TChain.h</label>
@@ -350,11 +348,11 @@
       <node id="68">
         <label>TSystem.h</label>
       </node>
-      <node id="27">
-        <label>vector</label>
-      </node>
-      <node id="22">
+      <node id="32">
         <label>stack</label>
+      </node>
+      <node id="8">
+        <label>vector</label>
       </node>
       <node id="45">
         <label>TF2.h</label>
@@ -371,28 +369,38 @@
       <node id="57">
         <label>TKey.h</label>
       </node>
-      <node id="38">
+      <node id="10">
         <label>vector_functions.hpp</label>
         <link refid="vector__functions_8hpp"/>
-        <childnode refid="33" relation="include">
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="64">
         <label>TSpectrum.h</label>
       </node>
-      <node id="6">
+      <node id="25">
         <label>array</label>
       </node>
       <node id="48">
         <label>TFitResult.h</label>
       </node>
-      <node id="19">
+      <node id="17">
         <label>sstream</label>
+      </node>
+      <node id="12">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
       </node>
       <node id="60">
         <label>TMarker.h</label>
       </node>
-      <node id="83">
+      <node id="87">
         <label>ParisPhoswitch.hpp</label>
         <link refid="_paris_phoswitch_8hpp"/>
         <childnode refid="3" relation="include">
@@ -404,7 +412,7 @@
       <node id="54">
         <label>TH2.h</label>
       </node>
-      <node id="8">
+      <node id="38">
         <label>cstdlib</label>
       </node>
       <node id="51">
@@ -413,18 +421,28 @@
       <node id="58">
         <label>TLeaf.h</label>
       </node>
-      <node id="13">
+      <node id="6">
         <label>iostream</label>
       </node>
-      <node id="36">
+      <node id="14">
         <label>string_functions.hpp</label>
         <link refid="string__functions_8hpp"/>
-        <childnode refid="27" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="83">
+        <label>Timer.hpp</label>
+        <link refid="_timer_8hpp"/>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
         <label>unordered_map</label>
       </node>
       <node id="59">
@@ -439,20 +457,44 @@
       <node id="55">
         <label>TH2F.h</label>
       </node>
-      <node id="16">
+      <node id="82">
+        <label>../Classes/CoProgressBar.hpp</label>
+        <link refid="_co_progress_bar_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
         <label>mutex</label>
+      </node>
+      <node id="84">
+        <label>chrono</label>
+      </node>
+      <node id="37">
+        <label>csignal</label>
       </node>
       <node id="75">
         <label>../MTObjects/MTObject.hpp</label>
         <link refid="_m_t_object_8hpp"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="33">
         <label>thread</label>
       </node>
       <node id="62">
@@ -462,37 +504,46 @@
         <label>TTree.h</label>
       </node>
       <node id="80">
+        <label>../Classes/Timewalk.hpp</label>
+        <link refid="_timewalk_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
         <label>Paris.hpp</label>
         <link refid="_paris_8hpp"/>
         <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="82" relation="include">
         </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
       </node>
-      <node id="7">
+      <node id="11">
         <label>algorithm</label>
       </node>
       <node id="47">
         <label>TFitResultPtr.h</label>
       </node>
-      <node id="30">
-        <label>stdio.h</label>
-      </node>
-      <node id="9">
+      <node id="15">
         <label>cstring</label>
       </node>
       <node id="49">
         <label>TGraph.h</label>
       </node>
-      <node id="15">
+      <node id="27">
         <label>memory</label>
       </node>
-      <node id="24">
+      <node id="34">
         <label>typeindex</label>
       </node>
-      <node id="28">
+      <node id="19">
         <label>dirent.h</label>
       </node>
     </incdepgraph>
@@ -529,12 +580,12 @@
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
 <codeline lineno="26" refid="class_event_analyse_1ad1a958082173e421e93221ce6759c850" refkind="member"><highlight class="normal"><ref refid="class_event_analyse_1ad1a958082173e421e93221ce6759c850" kindref="member">EventAnalyse::EventAnalyse</ref>()</highlight></codeline>
 <codeline lineno="27"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialize<sp/>arrays<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/>Clovers::Initialize();</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><ref refid="class_paris_1ac0479d995c00e0ee8170092cdf1b5f51" kindref="member">Paris::Initialize</ref>();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialise<sp/>arrays<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>Clovers::Initialise();</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><ref refid="class_paris_1a2d405a64e0e65a845a2723bb3b2af697" kindref="member">Paris::Initialise</ref>();</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialize<sp/>Paris<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><ref refid="class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8" kindref="member">m_Paris</ref>.<ref refid="class_paris_1ac0479d995c00e0ee8170092cdf1b5f51" kindref="member">Initialize</ref>(2,36);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialise<sp/>Paris<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><ref refid="class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8" kindref="member">m_Paris</ref>.<ref refid="class_paris_1a2d405a64e0e65a845a2723bb3b2af697" kindref="member">Initialise</ref>(2,36);</highlight></codeline>
 <codeline lineno="34"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36" refid="class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_event_analyse_1a3667d9363f41262088e0ca5c1f06fc7e" kindref="member">EventAnalyse::Set</ref>(<ref refid="class_event" kindref="compound">Event</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>event)</highlight></codeline>

@@ -12,7 +12,7 @@ public:
   NoPulse(){};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
-  void InitializeManip();
+  void InitialiseManip();
   static void run(Parameters & p, NoPulse & nopulse);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
@@ -40,7 +40,7 @@ private:
 bool NoPulse::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
   this -> Write();
@@ -78,9 +78,9 @@ void NoPulse::run(Parameters & p, NoPulse & nopulse)
   } // End files loop
 }
 
-void NoPulse::InitializeManip()
+void NoPulse::InitialiseManip()
 {
-  print("Initialize histograms");
+  print("Initialise histograms");
   pulse_DSSD.reset("pulse_DSSD", "pulse DSSD", 3500,-200,500);
   pulse_first_DSSD.reset("pulse_first_DSSD", "pulse first DSSD", 3500,-200,500);
   Time_VS_pulse_DSSD.reset("Time_VS_pulse_DSSD", "Time VS pulse DSSD ref any", 3500,-200,500, 3500,-200,500);

@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_hit_buffer" xml:lang="en-US">
+<title>HitBuffer Class Reference</title>
+<indexterm><primary>HitBuffer</primary></indexterm>
+<para>
+
+<para>Hits container. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;HitBuffer.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto <link linkend="_class_hit_buffer_1adeeba852a151488e1e9f043ecb00d1e7">at</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;i)</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_hit_buffer_1ad4607c4c9db51fd975c9118e4bb8ed3c">begin</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_hit_buffer_1a3094f0a9c44658c318bc54aed8cb85c7">begin</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77">clear</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_hit_buffer_1adfe0706e7e11c503433bda4bab818bfb">end</link> ()</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_hit_buffer_1aef76bdf6263af98da048506b48506365">end</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_hit_buffer_1a15e4f894efd5d4ce212caf33d9345642">HitBuffer</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_hit_buffer_1a3347b5dad56d6a8c32956d58e1dd0d40">size</link>=100)</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_hit_buffer_1a47c456dd0db2e286da0a8fd6f005aa94">isFull</link> () const</para>
+
+<para>Are all the slots used ? </para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_hit_buffer_1a043ec3be6f740c5150a2973531825933">max_size</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_hit_buffer_1ac60826e62033fe14911cdf03a61352f8">nbClear</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_hit_buffer_1af235606f7b97e643e615924eb9d8e731">nbClear</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_hit_buffer_1a9efee5395fbc55828e289c1fee96cf9a">operator[]</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;i)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_hit_buffer_1a6ea32057774f64e7ea503167dd4f4046">operator[]</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;i) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_hit_buffer_1a784863f96a770a8b7d6aead043f6de17">push_back</link> (<link linkend="_class_hit">Hit</link> const &amp;hit)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_hit_buffer_1a56077cbecd38953dec15caf1cb4067f3">setStep</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;<link linkend="_class_hit_buffer_1a335273868e4a43e152b47d04d679d8f4">step</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_hit_buffer_1a69b8f046928a8e3dc0e573dff8b4fe94">shift</link> (int n)</para>
+
+<para>Shifts the buffer of hits by a certain amount. </para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_hit_buffer_1a3347b5dad56d6a8c32956d58e1dd0d40">size</link> () const</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_hit_buffer_1ac80ad41333ed9e090eb7d93590677829">step</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_hit_buffer_1a335273868e4a43e152b47d04d679d8f4">step</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; <link linkend="_class_hit">Hit</link> &gt; <link linkend="_class_hit_buffer_1a64223f64655bdae34926831cafae1227">m_buffer</link></para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_hit_buffer_1a221f7336df760e282fb10bdb76a7291e">m_max_size</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_hit_buffer_1a6ba71f55c6ca350739e6344cb2430103">m_nb_clear</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe">m_size</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_hit_buffer_1a3af72f963f298b8b15f2a8d2402768c2">m_step</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Hits container. </para>
+
+
+
+<para><link linkend="_class_hit_buffer">HitBuffer</link> </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_hit_buffer_1a15e4f894efd5d4ce212caf33d9345642"/>    <section>
+    <title>HitBuffer()</title>
+<indexterm><primary>HitBuffer</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>HitBuffer</secondary></indexterm>
+<para><computeroutput>HitBuffer::HitBuffer (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> size = <computeroutput>100</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_hit_buffer_a15e4f894efd5d4ce212caf33d9345642_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_hit_buffer_1adeeba852a151488e1e9f043ecb00d1e7"/>    <section>
+    <title>at()</title>
+<indexterm><primary>at</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>at</secondary></indexterm>
+<para><computeroutput>auto HitBuffer::at (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_hit_buffer_adeeba852a151488e1e9f043ecb00d1e7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_hit_buffer_1ad4607c4c9db51fd975c9118e4bb8ed3c"/>    <section>
+    <title>begin()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>begin</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto HitBuffer::begin ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a3094f0a9c44658c318bc54aed8cb85c7"/>    <section>
+    <title>begin()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>begin</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>begin</secondary></indexterm>
+<para><computeroutput>auto HitBuffer::begin ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a4374e1dedce2f811d2a058c69a5aae77"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void HitBuffer::clear ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1adfe0706e7e11c503433bda4bab818bfb"/>    <section>
+    <title>end()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>end</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto HitBuffer::end ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1aef76bdf6263af98da048506b48506365"/>    <section>
+    <title>end()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>end</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>end</secondary></indexterm>
+<para><computeroutput>auto HitBuffer::end ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a47c456dd0db2e286da0a8fd6f005aa94"/>    <section>
+    <title>isFull()</title>
+<indexterm><primary>isFull</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>isFull</secondary></indexterm>
+<para><computeroutput>bool HitBuffer::isFull ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Are all the slots used ? </para>
+</para>
+    </section><anchor xml:id="_class_hit_buffer_1a043ec3be6f740c5150a2973531825933"/>    <section>
+    <title>max_size()</title>
+<indexterm><primary>max_size</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>max_size</secondary></indexterm>
+<para><computeroutput>auto HitBuffer::max_size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1ac60826e62033fe14911cdf03a61352f8"/>    <section>
+    <title>nbClear()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>nbClear</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>nbClear</secondary></indexterm>
+<para><computeroutput>auto&amp; HitBuffer::nbClear ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1af235606f7b97e643e615924eb9d8e731"/>    <section>
+    <title>nbClear()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>nbClear</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>nbClear</secondary></indexterm>
+<para><computeroutput>auto const&amp; HitBuffer::nbClear ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a9efee5395fbc55828e289c1fee96cf9a"/>    <section>
+    <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto HitBuffer::operator[] (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a6ea32057774f64e7ea503167dd4f4046"/>    <section>
+    <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>operator[]</secondary></indexterm>
+<para><computeroutput>auto const&amp; HitBuffer::operator[] (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a784863f96a770a8b7d6aead043f6de17"/>    <section>
+    <title>push_back()</title>
+<indexterm><primary>push_back</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>push_back</secondary></indexterm>
+<para><computeroutput>void HitBuffer::push_back (<link linkend="_class_hit">Hit</link> const &amp; hit)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a56077cbecd38953dec15caf1cb4067f3"/>    <section>
+    <title>setStep()</title>
+<indexterm><primary>setStep</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>setStep</secondary></indexterm>
+<para><computeroutput>void HitBuffer::setStep (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; step)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_hit_buffer_a56077cbecd38953dec15caf1cb4067f3_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_hit_buffer_1a69b8f046928a8e3dc0e573dff8b4fe94"/>    <section>
+    <title>shift()</title>
+<indexterm><primary>shift</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>shift</secondary></indexterm>
+<para><computeroutput>void HitBuffer::shift (int n)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Shifts the buffer of hits by a certain amount. </para>
+</para>
+
+<para><para><link linkend="_todo_1_todo000009">Todo</link> 
+<para>Make it functionnal maybe ?</para>
+</para></para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>n</entry>
+                                <entry>
+<para>if n == 0 nothing happens if n&gt;0 shifts the buffer to the right by n indexes, expends the size if needed. Creates empty slots at beginning. if n&lt;0 moves the n last cells to the beginning, size stays the same. Overflow logic : the first hits are moved to the end</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                Example : <link linkend="_class_hit_buffer">HitBuffer</link> buffer = {hit1, hit2, hit3, hit4}; buffer.shift( 2); // buffer = {empty1, empty2, hit1, hit2, hit3, hit4} buffer.shift(-2); // buffer = {hit3, hit4, hit1, hit2} Carefull : for n&gt;0 , need to copy twice the data, so it can be very long for big buffers </para>
+    </section><anchor xml:id="_class_hit_buffer_1a3347b5dad56d6a8c32956d58e1dd0d40"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>auto const&amp; HitBuffer::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_hit_buffer_a3347b5dad56d6a8c32956d58e1dd0d40_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_hit_buffer_1ac80ad41333ed9e090eb7d93590677829"/>    <section>
+    <title>step()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>step</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>step</secondary></indexterm>
+<para><computeroutput>auto&amp; HitBuffer::step ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a335273868e4a43e152b47d04d679d8f4"/>    <section>
+    <title>step()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>step</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>step</secondary></indexterm>
+<para><computeroutput>auto const&amp; HitBuffer::step ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_hit_buffer_a335273868e4a43e152b47d04d679d8f4_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_hit_buffer_1a64223f64655bdae34926831cafae1227"/>    <section>
+    <title>m_buffer</title>
+<indexterm><primary>m_buffer</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>m_buffer</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_class_hit">Hit</link>&gt; HitBuffer::m_buffer<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a221f7336df760e282fb10bdb76a7291e"/>    <section>
+    <title>m_max_size</title>
+<indexterm><primary>m_max_size</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>m_max_size</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> HitBuffer::m_max_size = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a6ba71f55c6ca350739e6344cb2430103"/>    <section>
+    <title>m_nb_clear</title>
+<indexterm><primary>m_nb_clear</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>m_nb_clear</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> HitBuffer::m_nb_clear = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1af681f205dddaede9a8b847d9ef1a1ebe"/>    <section>
+    <title>m_size</title>
+<indexterm><primary>m_size</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>m_size</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> HitBuffer::m_size = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_hit_buffer_1a3af72f963f298b8b15f2a8d2402768c2"/>    <section>
+    <title>m_step</title>
+<indexterm><primary>m_step</primary><secondary>HitBuffer</secondary></indexterm>
+<indexterm><primary>HitBuffer</primary><secondary>m_step</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> HitBuffer::m_step = 0<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__hit_buffer_8hpp">HitBuffer.hpp</link></section>
+</section>

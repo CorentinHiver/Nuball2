@@ -1,0 +1,8 @@
+<map id="Calibrator::histograms::setTypeBins" name="Calibrator::histograms::setTypeBins">
+<area shape="rect" id="node1" title=" " alt="" coords="5,49,172,90"/>
+<area shape="rect" id="node2" href="$class_detectors.html#aba567529b262d88913de6ccb05a71a99" title="Get the default energy (keV) bidimensionnal histogram binning for all types of detectors." alt="" coords="229,5,391,32"/>
+<area shape="rect" id="node3" href="$class_detectors.html#ae1ead00f89e7fcb96cefa082f9b4e290" title="Get the default energy (keV) bidimensionnal histogram binning for all types of detectors." alt="" coords="220,56,400,83"/>
+<area shape="rect" id="node4" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="261,107,359,133"/>
+<area shape="rect" id="node5" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="448,107,551,133"/>
+<area shape="rect" id="node6" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="599,107,705,133"/>
+</map>

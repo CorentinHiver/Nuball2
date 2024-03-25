@@ -1,4 +1,4 @@
-<map id="Calibration::Initialize" name="Calibration::Initialize">
+<map id="Calibration::Initialise" name="Calibration::Initialise">
 <area shape="rect" id="node1" title=" " alt="" coords="528,56,685,83"/>
 <area shape="rect" id="node2" href="$class_calibration.html#a178a349d575d8f0e8b090f828def78b6" title="Calculate calibration from .root histograms." alt="" coords="301,5,461,32"/>
 <area shape="rect" id="node3" href="$class_calibration.html#a6514307ca111ecc5d6f02694373dc5ec" title=" " alt="" coords="281,56,480,83"/>

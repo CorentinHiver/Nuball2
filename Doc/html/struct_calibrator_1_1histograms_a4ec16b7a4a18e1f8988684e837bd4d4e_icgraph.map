@@ -1,0 +1,12 @@
+<map id="Calibrator::histograms::Initialise" name="Calibrator::histograms::Initialise">
+<area shape="rect" id="node1" title=" " alt="" coords="713,94,880,135"/>
+<area shape="rect" id="node2" href="$class_calibrator.html#ae81772276c36ab528b8147fa583356fd" title=" " alt="" coords="515,101,665,128"/>
+<area shape="rect" id="node3" href="$class_calibrator.html#a547f6f7bb37caef0b1a2e574422fb85f" title="Calculate calibration from .root histograms." alt="" coords="39,5,193,32"/>
+<area shape="rect" id="node4" href="$class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="35,63,197,89"/>
+<area shape="rect" id="node5" href="$class_calibrator.html#a00297f1bb253279bfa8bdce83fb81951" title=" " alt="" coords="275,152,467,179"/>
+<area shape="rect" id="node8" href="$class_calibrator.html#af067fee0c3a37336851ea63f2561b59f" title=" " alt="" coords="279,203,462,229"/>
+<area shape="rect" id="node10" href="$class_calibrator.html#a0d2a41f02b2c16409b58ce3ee4183792" title="Loads non&#45;calibrated spectra." alt="" coords="277,51,464,77"/>
+<area shape="rect" id="node6" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="39,189,193,216"/>
+<area shape="rect" id="node7" href="$class_calibrator.html#ac16a84c9c3244443c44a7c5de11ceb5f" title=" " alt="" coords="5,139,227,165"/>
+<area shape="rect" id="node9" href="$class_calibrator.html#aa45584fd0c25478ec98232ac18af3082" title=" " alt="" coords="10,240,222,267"/>
+</map>

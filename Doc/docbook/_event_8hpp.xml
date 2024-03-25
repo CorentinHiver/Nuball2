@@ -33,12 +33,33 @@ This graph shows which files directly or indirectly include this file:<para>
         </itemizedlist>
 </simplesect>
 <simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> = std::function&lt; bool(const <link linkend="_class_event">Event</link> &amp;)&gt;</para>
+
+<para>Trigger definition ///. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
     <title>Functions    </title>
         <itemizedlist>
             <listitem><para>std::ostream &amp; <link linkend="__event_8hpp_1a0486f85c1b0f1aed67847c1e1935fd7b">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_event">Event</link> const &amp;event)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8"/>    <section>
+    <title>TriggerEvent</title>
+<indexterm><primary>TriggerEvent</primary><secondary>Event.hpp</secondary></indexterm>
+<indexterm><primary>Event.hpp</primary><secondary>TriggerEvent</secondary></indexterm>
+<para><computeroutput>using <link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> =  std::function&lt;bool(const <link linkend="_class_event">Event</link>&amp;)&gt;</computeroutput></para><para>
+
+<para>Trigger definition ///. </para>
+</para>
+</section>
+</section>
 <section>
 <title>Function Documentation</title>
 <anchor xml:id="__event_8hpp_1a0486f85c1b0f1aed67847c1e1935fd7b"/>    <section>

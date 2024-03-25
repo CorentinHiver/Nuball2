@@ -3,6 +3,7 @@
   <compounddef id="_timer_8hpp" kind="file" language="C++">
     <compoundname>Timer.hpp</compoundname>
     <includes local="no">chrono</includes>
+    <includedby refid="_co_progress_bar_8hpp" local="yes">lib/Classes/CoProgressBar.hpp</includedby>
     <includedby refid="_faster2_histo_8hpp" local="yes">lib/Modules/Faster2Histo.hpp</includedby>
     <includedby refid="_faster2_root_8hpp" local="yes">lib/Modules/Faster2Root.hpp</includedby>
     <includedby refid="_run_matrixator_8hpp" local="yes">lib/Modules/RunMatrixator.hpp</includedby>
@@ -19,19 +20,45 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="2">
+      <node id="9">
         <label>lib/Modules/Faster2Histo.hpp</label>
         <link refid="_faster2_histo_8hpp"/>
       </node>
-      <node id="6">
+      <node id="5">
+        <label>lib/MTObjects/MTFasterReader.hpp</label>
+        <link refid="_m_t_faster_reader_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>lib/Modules/EvolutionPeaks.hpp</label>
+        <link refid="_evolution_peaks_8hpp"/>
+      </node>
+      <node id="4">
+        <label>lib/Analyse/EventAnalyse.hpp</label>
+        <link refid="_event_analyse_8hpp"/>
+      </node>
+      <node id="8">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
+      </node>
+      <node id="13">
         <label>lib/Modules/CloverSpectra.hpp</label>
         <link refid="_clover_spectra_8hpp"/>
       </node>
-      <node id="3">
+      <node id="10">
         <label>lib/Modules/Faster2Root.hpp</label>
         <link refid="_faster2_root_8hpp"/>
       </node>
-      <node id="4">
+      <node id="11">
         <label>lib/Modules/RunMatrixator.hpp</label>
         <link refid="_run_matrixator_8hpp"/>
       </node>
@@ -40,21 +67,47 @@
         <link refid="_timer_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lib/Classes/CoProgressBar.hpp</label>
+        <link refid="_co_progress_bar_8hpp"/>
+        <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="12">
         <label>lib/Modules/Timeshifts.hpp</label>
         <link refid="_timeshifts_8hpp"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>lib/Analyse/Paris.hpp</label>
+        <link refid="_paris_8hpp"/>
         <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>lib/Modules/Calibrator.hpp</label>
+        <link refid="_calibrator_8hpp"/>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -98,6 +151,29 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Classes/Timer.hpp" line="7" column="1" bodyfile="lib/Classes/Timer.hpp" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_timer_8hpp_1adcb647b9e338481f614d8538ad423343" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::ostream &amp;</type>
+        <definition>std::ostream&amp; operator&lt;&lt;</definition>
+        <argsstring>(std::ostream &amp;out, Timer &amp;timer)</argsstring>
+        <name>operator&lt;&lt;</name>
+        <param>
+          <type>std::ostream &amp;</type>
+          <declname>out</declname>
+        </param>
+        <param>
+          <type><ref refid="class_timer" kindref="compound">Timer</ref> &amp;</type>
+          <declname>timer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Timer.hpp" line="88" column="1" bodyfile="lib/Classes/Timer.hpp" bodystart="88" bodyend="92"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -159,43 +235,46 @@
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
 <codeline lineno="53" refid="class_timer_1ac2b548061cb177ede6aae2ee6add57e7" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_timer_1ac2b548061cb177ede6aae2ee6add57e7" kindref="member">operator() </ref>()</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>time<sp/>=<sp/><ref refid="class_timer_1a86aee5dffb7f4d95cd91ab437601f030" kindref="member">Time</ref>();</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>time<sp/>=<sp/><ref refid="class_timer_1a86aee5dffb7f4d95cd91ab437601f030" kindref="member">Time</ref>();</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;1000.)<sp/>{<sp/>time/=1000.;<sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;s&quot;</highlight><highlight class="normal">;}</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>time;<sp/>}</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;120.)<sp/>{<sp/>time/=60.;<sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;min&quot;</highlight><highlight class="normal">;<sp/><sp/>}</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{<sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>time;<sp/>}</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;120.)<sp/>{<sp/>time/=60.;<sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">;<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>time;}</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>time;<sp/>}</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68" refid="class_timer_1a3614503158effc6668bc10001d75d20c" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="class_timer_1a3614503158effc6668bc10001d75d20c" kindref="member">unit</ref>()<sp/>{(*this)();<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref>;}</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight></codeline>
-<codeline lineno="70" refid="class_timer_1a94fd593f6a7c33ae98741955a1eef579" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_timer_1a94fd593f6a7c33ae98741955a1eef579" kindref="member">Unit</ref>()</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>==<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1.;</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>==<sp/><sp/></highlight><highlight class="stringliteral">&quot;s&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1000.;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>==</highlight><highlight class="stringliteral">&quot;min&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>60000.;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>==<sp/><sp/></highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>3600000.;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0.;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81" refid="class_timer_1a472849e3ff85d7a235fb3a947a7c1e70" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1a07f3627b9b4dc1205bb4cdbfcf2c9f17" kindref="member">hr_clock_t</ref><sp/><ref refid="class_timer_1a472849e3ff85d7a235fb3a947a7c1e70" kindref="member">m_clock</ref>;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83" refid="class_timer_1a2ac09a570ef3d52ecf6152959cc9257f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1a300388ee1344972cad8e8dfb87beef08" kindref="member">time_point_t</ref><sp/><ref refid="class_timer_1a2ac09a570ef3d52ecf6152959cc9257f" kindref="member">m_start</ref>;</highlight></codeline>
-<codeline lineno="84" refid="class_timer_1a30397a9c04b42d4620bc80b89c47bb75" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1a300388ee1344972cad8e8dfb87beef08" kindref="member">time_point_t</ref><sp/><ref refid="class_timer_1a30397a9c04b42d4620bc80b89c47bb75" kindref="member">m_now</ref>;</highlight></codeline>
-<codeline lineno="85" refid="class_timer_1a7a1319f264fbd93df4faefb97de2c1a8" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1a300388ee1344972cad8e8dfb87beef08" kindref="member">time_point_t</ref><sp/><ref refid="class_timer_1a7a1319f264fbd93df4faefb97de2c1a8" kindref="member">m_stop</ref>;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87" refid="class_timer_1ae4d68c43b475d70c5944034ff53577c4" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1aa9d2a4957c5127a34317da8c2bfb5b63" kindref="member">duration_milli_t</ref><sp/><ref refid="class_timer_1ae4d68c43b475d70c5944034ff53577c4" kindref="member">d_milli</ref>;</highlight></codeline>
-<codeline lineno="88" refid="class_timer_1a8658b87929810f05eb5345458a6dde75" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//TIMER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;3600000.)<sp/>{time/=3600000.;<sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;120000.){time/=60000.;<sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;min&quot;</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(time&gt;1000.){time/=1000.;<sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;s&quot;</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::to_string(time)+</highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">+<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref>;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65" refid="class_timer_1a3614503158effc6668bc10001d75d20c" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="class_timer_1a3614503158effc6668bc10001d75d20c" kindref="member">unit</ref>()<sp/>{(*this)();<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref>;}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="67" refid="class_timer_1ab34e8e4ba0e7fd60fdd3b0048cb35897" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="class_timer_1ab34e8e4ba0e7fd60fdd3b0048cb35897" kindref="member">Unit</ref>()</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>==<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1.;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>==<sp/><sp/></highlight><highlight class="stringliteral">&quot;s&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1000.;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>==</highlight><highlight class="stringliteral">&quot;min&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>60000.;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>==<sp/><sp/></highlight><highlight class="stringliteral">&quot;h&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>3600000.;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0.;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="class_timer_1a472849e3ff85d7a235fb3a947a7c1e70" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1a07f3627b9b4dc1205bb4cdbfcf2c9f17" kindref="member">hr_clock_t</ref><sp/><ref refid="class_timer_1a472849e3ff85d7a235fb3a947a7c1e70" kindref="member">m_clock</ref>;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="class_timer_1a2ac09a570ef3d52ecf6152959cc9257f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1a300388ee1344972cad8e8dfb87beef08" kindref="member">time_point_t</ref><sp/><ref refid="class_timer_1a2ac09a570ef3d52ecf6152959cc9257f" kindref="member">m_start</ref>;</highlight></codeline>
+<codeline lineno="81" refid="class_timer_1a30397a9c04b42d4620bc80b89c47bb75" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1a300388ee1344972cad8e8dfb87beef08" kindref="member">time_point_t</ref><sp/><ref refid="class_timer_1a30397a9c04b42d4620bc80b89c47bb75" kindref="member">m_now</ref>;</highlight></codeline>
+<codeline lineno="82" refid="class_timer_1a7a1319f264fbd93df4faefb97de2c1a8" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1a300388ee1344972cad8e8dfb87beef08" kindref="member">time_point_t</ref><sp/><ref refid="class_timer_1a7a1319f264fbd93df4faefb97de2c1a8" kindref="member">m_stop</ref>;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="class_timer_1ae4d68c43b475d70c5944034ff53577c4" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_timer_8hpp_1aa9d2a4957c5127a34317da8c2bfb5b63" kindref="member">duration_milli_t</ref><sp/><ref refid="class_timer_1ae4d68c43b475d70c5944034ff53577c4" kindref="member">d_milli</ref>;</highlight></codeline>
+<codeline lineno="85" refid="class_timer_1a8658b87929810f05eb5345458a6dde75" refkind="member"><highlight class="normal"><sp/><sp/>std::string<sp/><ref refid="class_timer_1a8658b87929810f05eb5345458a6dde75" kindref="member">m_unit</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="_timer_8hpp_1adcb647b9e338481f614d8538ad423343" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="_timer_8hpp_1adcb647b9e338481f614d8538ad423343" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>out,<sp/><ref refid="class_timer" kindref="compound">Timer</ref><sp/>&amp;<sp/>timer)</highlight></codeline>
+<codeline lineno="89"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>out<sp/>&lt;&lt;<sp/>timer();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>out;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//TIMER_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="lib/Classes/Timer.hpp"/>
   </compounddef>

@@ -1,4 +1,4 @@
-.TH "lib/Classes/Detectors.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/Classes/Detectors.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,6 +18,12 @@ lib/Classes/Detectors.hpp
 .RI "class \fBDetectors\fP"
 .br
 .RI "Loads the ID file and fills lookup tables\&. "
+.ti -1c
+.RI "class \fBDetectors::EmptyError\fP"
+.br
+.ti -1c
+.RI "class \fBDetectors::Error\fP"
+.br
 .in -1c
 .SS "Macros"
 
@@ -52,10 +58,13 @@ lib/Classes/Detectors.hpp
 .RI "std::vector< \fBuchar\fP > \fBlabelToGecrystal\fP (\fBSIZE_LOOKUP\fP, 0)"
 .br
 .ti -1c
+.RI "std::map< \fBLabel\fP, TH1F * > \fBloadFormattedTH1F\fP (TFile *file)"
+.br
+.ti -1c
 .RI "\fBInts\fP \fBm_index\fP (\fBSIZE_LOOKUP\fP,\-1)"
 .br
 .ti -1c
-.RI "std::ostream & \fBoperator>>\fP (std::ostream &cout, \fBDetectors\fP const &\fBdetectors\fP)"
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &out, \fBDetectors\fP const &\fBdetectors\fP)"
 .br
 .in -1c
 .SS "Variables"
@@ -127,9 +136,11 @@ lib/Classes/Detectors.hpp
 
 .SS "std::vector<\fBuchar\fP> labelToGecrystal (\fBSIZE_LOOKUP\fP, 0)"
 
+.SS "std::map<\fBLabel\fP, TH1F*> loadFormattedTH1F (TFile * file)"
+
 .SS "\fBInts\fP m_index (\fBSIZE_LOOKUP\fP, \- 1)"
 
-.SS "std::ostream& operator>> (std::ostream & cout, \fBDetectors\fP const & detectors)"
+.SS "std::ostream& operator<< (std::ostream & out, \fBDetectors\fP const & detectors)"
 
 .SH "Variable Documentation"
 .PP 

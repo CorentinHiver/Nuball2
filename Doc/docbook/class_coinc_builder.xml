@@ -99,7 +99,7 @@ Collaboration diagram for CoincBuilder:<para>
 <simplesect>
     <title>Private Attributes    </title>
         <itemizedlist>
-            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_coinc_builder_1ac6bf8fbe3ea6f8ecf0b7d70a0be2a5d3">m_time_window</link> = 500000</para>
+            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_coinc_builder_1ac6bf8fbe3ea6f8ecf0b7d70a0be2a5d3">m_time_window</link> = 500000ll</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -314,7 +314,7 @@ Here is the caller graph for this function:<para>
     <title>m_time_window</title>
 <indexterm><primary>m_time_window</primary><secondary>CoincBuilder</secondary></indexterm>
 <indexterm><primary>CoincBuilder</primary><secondary>m_time_window</secondary></indexterm>
-<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> CoincBuilder::m_time_window = 500000<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> CoincBuilder::m_time_window = 500000ll<computeroutput>[private]</computeroutput></computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
 lib/Classes/<link linkend="__coinc_builder_8hpp">CoincBuilder.hpp</link></section>

@@ -39,7 +39,7 @@ Collaboration diagram for Faster2Root:<para>
 </listitem>
             <listitem><para><link linkend="_class_faster2_root_1aacd4d3fa480eba9bc86b49f4b2040c60">Faster2Root</link> (int argc, char **argv)</para>
 </listitem>
-            <listitem><para><link linkend="_class_faster2_root_1a61a5cc14735e615b6a6389a1ece4f694">Faster2Root</link> (int argc, char **argv, <link linkend="__faster2_root_8hpp_1a75162947cdf43694952e4c0a53735199">Trigger</link> trigger)</para>
+            <listitem><para><link linkend="_class_faster2_root_1aa3c4c9fba96103e7290fffa028b6556e">Faster2Root</link> (int argc, char **argv, <link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> trigger)</para>
 </listitem>
             <listitem><para><link linkend="_class_faster2_root_1ad07b97d280479aabc26e04d920726ddb">Faster2Root</link> (<link linkend="_class_path">Path</link> const &amp;inputFolder, <link linkend="_class_path">Path</link> const &amp;outputFolder, int const &amp;nb_files=-1, bool const &amp;<link linkend="_class_faster2_root_1a5eadd66ea26d632b75a92aa9c2878bf3">buildEvents</link>=false)</para>
 
@@ -50,6 +50,8 @@ Collaboration diagram for Faster2Root:<para>
             <listitem><para>void <link linkend="_class_faster2_root_1a3953ee6d843802ca12997e146fd7046d">loadTimeshifts</link> (std::string const &amp;dTfile)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_faster2_root_1a5b8a78ef8c54117807c770d21fa4acf0">loadTriggerFile</link> (std::string const &amp;file)</para>
+
+<para>Loads a trigger file. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_faster2_root_1a19537e5417a0537a0327b91b78982ca2">overwrite</link> (bool const &amp;_overwrite)</para>
 </listitem>
@@ -61,7 +63,7 @@ Collaboration diagram for Faster2Root:<para>
 </listitem>
             <listitem><para>void <link linkend="_class_faster2_root_1ace1cc6bfc486195e5808e946770d5954">setTimeshifts</link> (<link linkend="_class_timeshifts">Timeshifts</link> const &amp;timeshifts)</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_faster2_root_1aaa5d89a939efb05b6408e65b5f0117c2">setTrigger</link> (std::function&lt; bool(const <link linkend="_class_event">Event</link> &amp;)&gt; other)</para>
+            <listitem><para>void <link linkend="_class_faster2_root_1a6975bef38e67cce6044eb1ce7f5c2f92">setTrigger</link> (<link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> other)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_faster2_root_1a01cccc30e85ee668bbff3827c838173e">throwSingles</link> (bool const &amp;_throw_single=true)</para>
 </listitem>
@@ -81,7 +83,9 @@ Collaboration diagram for Faster2Root:<para>
 <simplesect>
     <title>Static Protected Member Functions    </title>
         <itemizedlist>
-            <listitem><para>static void <link linkend="_class_faster2_root_1a50fd46a075ae0a1a1f52b5bb6405047b">s_convertFile</link> (<link linkend="_class_hit">Hit</link> &amp;hit, <link linkend="_class_faster_reader">FasterReader</link> &amp;reader, <link linkend="_class_faster2_root">Faster2Root</link> &amp;convertor, <link linkend="_class_path">Path</link> const &amp;outPath)</para>
+            <listitem><para>static void <link linkend="_class_faster2_root_1a71d9880b2fea1d23ec201ded7e12b3fd">dispatch_threads</link> (<link linkend="_class_hit">Hit</link> &amp;hit, <link linkend="_class_faster_reader">FasterReader</link> &amp;reader, <link linkend="_class_faster2_root">Faster2Root</link> &amp;convertor, <link linkend="_class_path">Path</link> const &amp;outPath)</para>
+
+<para>Dispatch the <link linkend="_class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89">Faster2Root::convertFile()</link> method through the threads. </para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -118,7 +122,7 @@ Collaboration diagram for Faster2Root:<para>
 </listitem>
             <listitem><para><link linkend="_class_m_t_counter">MTCounter</link> <link linkend="_class_faster2_root_1a1589ca0222d305ef05b8d622e79fbb8b">m_trigg_events</link></para>
 </listitem>
-            <listitem><para>std::function&lt; bool(const <link linkend="_class_event">Event</link> &amp;)&gt; <link linkend="_class_faster2_root_1a5807435c6403ac0a7fba6da6b43fefce">m_trigger</link> = [](const <link linkend="_class_event">Event</link>&amp;) { return true; }</para>
+            <listitem><para><link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> <link linkend="_class_faster2_root_1a329970d0ebeef0479f529969eac0aaa8">m_trigger</link> = [](const <link linkend="_class_event">Event</link>&amp;) { return true; }</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_faster2_root_1ae3fce7a9419f8ed5044f8a8cc7302a6b">m_trigger_file</link></para>
 </listitem>
@@ -139,21 +143,21 @@ Collaboration diagram for Faster2Root:<para>
 
 <para>Section 1 : Options</para>
 
-<para>Use this class to perform raw conversion. Without any option, no calibration, no time alignement and no event building are performed. If you want to do more, you have to load the ID file with the -l option. This file has the following format :</para>
+<para>Use this class to perform raw conversion. Without any option, no calibration, no time alignement and no event building are performed. If you want to do more, you have to load the ID file with the -i option. This file has the following format :</para>
 
-<para>label_nb name label_nb name ... label_nb name</para>
+<para>label_nb_1 name label_nb_2 name ... label_nb_3 name</para>
 
-<para>You can build it from the index.pid file</para>
+<para>You can build it from the index.pid file generated by faster</para>
 
 <para>You can import a calibration file using -c option. Considering the equation E_cal = a + b*ADC + c*ADC² ..., the file has the following structure :</para>
 
 <para>label_nb a b (c) (d)</para>
 
-<para>If a detector has no calibration data, then leaving its line empty will automatically fills a = 0 and b = 1. c and d are optional, they will be filled with 0. You can choose the number of parameter line by line, because each detector needs a different correction order !</para>
+<para>If a detector has no calibration data, then leaving its line empty will automatically setup a = 0 and b = 1. c and d are optional, they will be filled with 0 by default. You can choose the number of parameter line by line, because each detector may needs a different correction order.</para>
 
 <para>Now, let&apos;s attack the most difficult part : timing and event building. So far, the data are still shuffled because of time shifts induced by faster hardware. So there are different options :</para>
 
-<para>-e [time_window_ns] : Simple event building. If no time realignment, the time shift can be big, it is recommended to use at least 1500 ns This option will always result in more time and memory consumption because the conversion is done in 3 step : First the hits are time shifted (and put in a memory resident root tree). But this will result in a shuffle, because some hits can be shifted before the previous hit. Therefore, the data have to be realigned. And finally the conversion will take place with truly time aligned data.</para>
+<para>-e [time_window_ns] : Simple event building. If no time realignment, the time shift can be big so it is recommended to use a window of at least 1500 ns width. This option will always result in more time and memory consumption because the conversion is done in 3 step : First the hits are time aligned and put in a memory resident root tree. But the hits are still shuffled, because only their timestamp have been modified. Therefore, the second step results in realigned data. And finally the conversion to root using event building will take place with truly time aligned data.</para>
 
 <para>-m [threads_number] : Multithreading. use this option to choose the number of files to treat in parallel.</para>
 
@@ -161,25 +165,26 @@ Collaboration diagram for Faster2Root:<para>
 
 <para>Recap &amp; ancillary parameters :</para>
 
-<para>-c [calibration_file] : Load the calibration -e [time_window_ns] : Perform event building with time_window_ns = 1500 ns by default -i [ID_file] : Load ID file. For Nuball2 data, allows for nice lookup tables to know the type of detector like isDSSD[label] or isGe[label] -m [threads_number] : Choose the number of files to treat in parallel -n [files_number] : Choose the total number of files to treat inside a data folder -t [time_window_ns] : Loads timeshift data &#8211;throw_single : If you are not interested in single hits (hits not alone in their time range)</para>
+<para>-c [calibration_file] : Load the calibration -e [time_window_ns] : Perform event building with time_window_ns = 1500 ns by default -i [ID_file] : Load ID file. For Nuball2 data, allows for nice lookup tables to know the type of detector like isDSSD[label] or isGe[label] -m [threads_number] : Choose the number of files to treat in parallel -n [files_number] : Choose the total number of files to treat inside a data folder -t [time_window_ns] : Loads timeshift data &#8211;throw_single : If you are not interested in single hits but only at coincidences with at least another detector &#8211;trigger [filename] : Loads a trigger file (look below)</para>
 
 <para><caution><title>Attention</title>
 
 <para>The two first parameters must be /path/to/data/ and /path/to/output/ Example 1 : <literallayout><computeroutput> Faster2Root(&quot;/path/to/data /path/to/output -i index_129.id -c calib.calib -e 200 -m 4 -t timeshifts.dT &quot;)
 </computeroutput></literallayout> Example 2 :</para>
 </caution>
-We want to create a <link linkend="_class_d_s_s_d">DSSD</link> trigger : <literallayout><computeroutput>int main(int argc, argv** argv)
+We want to create a <link linkend="_class_d_s_s_d">DSSD</link> trigger in a Nuball2 experiment : <literallayout><computeroutput>int main(int argc, argv** argv)
 {
   Faster2Root convertor(argc, argv, [](const Event&amp; event)
   {
-    for (int hit = 0; hit&lt;event.mult; hit++)
+    for (int hit_i = 0; hit_i&lt;event.mult; hit_i++)
     {
-      if (isDSSD[event.labels[hit]]) return true;
+      auto const &amp; label = event.labels[hit_i]]
+      if (label&gt;799 &amp;&amp; label&lt;856) return true;
     }
     return false;
   });
 }
-</computeroutput></literallayout> Then compile the code and call : ./executable /path/to/data /path/to/output -i index_129.id -c calib.calib -e 200 -m 4 -t timeshifts.dT</para>
+</computeroutput></literallayout> Then compile the code and call : ./executable /path/to/data /path/to/output -i index_129.list -c calib.calib -e 200 -m 4 -t timeshifts.dT</para>
 
 <para>Section 2 : Format</para>
 
@@ -210,15 +215,15 @@ We want to create a <link linkend="_class_d_s_s_d">DSSD</link> trigger : <litera
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_faster2_root_1a61a5cc14735e615b6a6389a1ece4f694"/>    <section>
+    </section><anchor xml:id="_class_faster2_root_1aa3c4c9fba96103e7290fffa028b6556e"/>    <section>
     <title>Faster2Root()<computeroutput>[3/4]</computeroutput></title>
 <indexterm><primary>Faster2Root</primary><secondary>Faster2Root</secondary></indexterm>
 <indexterm><primary>Faster2Root</primary><secondary>Faster2Root</secondary></indexterm>
-<para><computeroutput>Faster2Root::Faster2Root (int argc, char ** argv, <link linkend="__faster2_root_8hpp_1a75162947cdf43694952e4c0a53735199">Trigger</link> trigger)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>Faster2Root::Faster2Root (int argc, char ** argv, <link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> trigger)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a61a5cc14735e615b6a6389a1ece4f694_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_aa3c4c9fba96103e7290fffa028b6556e_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -233,6 +238,8 @@ We want to create a <link linkend="_class_d_s_s_d">DSSD</link> trigger : <litera
 
 <para>Raw conversion : </para>
 </para>
+
+<para><para><link linkend="_deprecated_1_deprecated000011">Deprecated</link> </para></para>
 Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
@@ -350,6 +357,32 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
+    </section><anchor xml:id="_class_faster2_root_1a71d9880b2fea1d23ec201ded7e12b3fd"/>    <section>
+    <title>dispatch_threads()</title>
+<indexterm><primary>dispatch_threads</primary><secondary>Faster2Root</secondary></indexterm>
+<indexterm><primary>Faster2Root</primary><secondary>dispatch_threads</secondary></indexterm>
+<para><computeroutput>static void Faster2Root::dispatch_threads (<link linkend="_class_hit">Hit</link> &amp; hit, <link linkend="_class_faster_reader">FasterReader</link> &amp; reader, <link linkend="_class_faster2_root">Faster2Root</link> &amp; convertor, <link linkend="_class_path">Path</link> const &amp; outPath)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Dispatch the <link linkend="_class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89">Faster2Root::convertFile()</link> method through the threads. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a71d9880b2fea1d23ec201ded7e12b3fd_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a71d9880b2fea1d23ec201ded7e12b3fd_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
     </section><anchor xml:id="_class_faster2_root_1ad30ccf937150bbd3504ec3a354b76c8f"/>    <section>
     <title>load()</title>
 <indexterm><primary>load</primary><secondary>Faster2Root</secondary></indexterm>
@@ -420,7 +453,13 @@ Here is the caller graph for this function:<para>
     <title>loadTriggerFile()</title>
 <indexterm><primary>loadTriggerFile</primary><secondary>Faster2Root</secondary></indexterm>
 <indexterm><primary>Faster2Root</primary><secondary>loadTriggerFile</secondary></indexterm>
-<para><computeroutput>void Faster2Root::loadTriggerFile (std::string const &amp; file)</computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>void Faster2Root::loadTriggerFile (std::string const &amp; filename)</computeroutput></para><para>
+
+<para>Loads a trigger file. </para>
+</para>
+
+<para>A trigger file contains a list of the detectors&apos;s labels (the number, not the name) that are required in the event (e.g. a germanium trigger file would list all the labels of the germaniums). If you want more specific trigger you have to create your own executable, include <link linkend="_class_faster2_root">Faster2Root</link> and follow the example 2 of the documentation of the class. </para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -473,28 +512,6 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_faster2_root_1a50fd46a075ae0a1a1f52b5bb6405047b"/>    <section>
-    <title>s_convertFile()</title>
-<indexterm><primary>s_convertFile</primary><secondary>Faster2Root</secondary></indexterm>
-<indexterm><primary>Faster2Root</primary><secondary>s_convertFile</secondary></indexterm>
-<para><computeroutput>static void Faster2Root::s_convertFile (<link linkend="_class_hit">Hit</link> &amp; hit, <link linkend="_class_faster_reader">FasterReader</link> &amp; reader, <link linkend="_class_faster2_root">Faster2Root</link> &amp; convertor, <link linkend="_class_path">Path</link> const &amp; outPath)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
     </section><anchor xml:id="_class_faster2_root_1a957a45ae197b565da07521a27ee73f53"/>    <section>
     <title>setCalibration()</title>
 <indexterm><primary>setCalibration</primary><secondary>Faster2Root</secondary></indexterm>
@@ -531,15 +548,15 @@ Here is the caller graph for this function:<para>
     <title>setTimeshifts()</title>
 <indexterm><primary>setTimeshifts</primary><secondary>Faster2Root</secondary></indexterm>
 <indexterm><primary>Faster2Root</primary><secondary>setTimeshifts</secondary></indexterm>
-<para><computeroutput>void Faster2Root::setTimeshifts (<link linkend="_class_timeshifts">Timeshifts</link> const &amp; timeshifts)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1aaa5d89a939efb05b6408e65b5f0117c2"/>    <section>
+<para><computeroutput>void Faster2Root::setTimeshifts (<link linkend="_class_timeshifts">Timeshifts</link> const &amp; timeshifts)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1a6975bef38e67cce6044eb1ce7f5c2f92"/>    <section>
     <title>setTrigger()</title>
 <indexterm><primary>setTrigger</primary><secondary>Faster2Root</secondary></indexterm>
 <indexterm><primary>Faster2Root</primary><secondary>setTrigger</secondary></indexterm>
-<para><computeroutput>void Faster2Root::setTrigger (std::function&lt; bool(const <link linkend="_class_event">Event</link> &amp;)&gt; other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>void Faster2Root::setTrigger (<link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_faster2_root_a6975bef38e67cce6044eb1ce7f5c2f92_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -613,11 +630,11 @@ Here is the caller graph for this function:<para>
     <title>m_trigg_events</title>
 <indexterm><primary>m_trigg_events</primary><secondary>Faster2Root</secondary></indexterm>
 <indexterm><primary>Faster2Root</primary><secondary>m_trigg_events</secondary></indexterm>
-<para><computeroutput><link linkend="_class_m_t_counter">MTCounter</link> Faster2Root::m_trigg_events<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1a5807435c6403ac0a7fba6da6b43fefce"/>    <section>
+<para><computeroutput><link linkend="_class_m_t_counter">MTCounter</link> Faster2Root::m_trigg_events<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1a329970d0ebeef0479f529969eac0aaa8"/>    <section>
     <title>m_trigger</title>
 <indexterm><primary>m_trigger</primary><secondary>Faster2Root</secondary></indexterm>
 <indexterm><primary>Faster2Root</primary><secondary>m_trigger</secondary></indexterm>
-<para><computeroutput>std::function&lt;bool(const <link linkend="_class_event">Event</link>&amp;)&gt; Faster2Root::m_trigger = [](const <link linkend="_class_event">Event</link>&amp;) { return true; }<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1ae3fce7a9419f8ed5044f8a8cc7302a6b"/>    <section>
+<para><computeroutput><link linkend="__event_8hpp_1a19365add2f462b2c1532b04c9fc170d8">TriggerEvent</link> Faster2Root::m_trigger = [](const <link linkend="_class_event">Event</link>&amp;) { return true; }<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_faster2_root_1ae3fce7a9419f8ed5044f8a8cc7302a6b"/>    <section>
     <title>m_trigger_file</title>
 <indexterm><primary>m_trigger_file</primary><secondary>Faster2Root</secondary></indexterm>
 <indexterm><primary>Faster2Root</primary><secondary>m_trigger_file</secondary></indexterm>

@@ -1,9 +1,10 @@
 <map id="FilesManager::addFiles" name="FilesManager::addFiles">
-<area shape="rect" id="node1" title=" " alt="" coords="901,31,1072,57"/>
+<area shape="rect" id="node1" title=" " alt="" coords="901,56,1072,83"/>
 <area shape="rect" id="node2" href="$class_m_t_faster_reader.html#a8693e1143a0aea8096a527c7d9df9a63" title=" " alt="" coords="667,5,849,32"/>
-<area shape="rect" id="node6" href="$class_files_manager.html#a548490c251183fff04e9db3a1d605875" title=" " alt="" coords="663,56,853,83"/>
-<area shape="rect" id="node3" href="$class_faster2_histo.html#ac20f36c0861a3af085c9546ca1325cc6" title=" " alt="" coords="444,5,603,32"/>
-<area shape="rect" id="node4" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="245,5,384,32"/>
-<area shape="rect" id="node5" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,5,197,32"/>
-<area shape="rect" id="node7" href="$class_files_manager.html#ae7f5500280a409300732527ddd9f5884" title=" " alt="" coords="432,56,615,83"/>
+<area shape="rect" id="node3" href="$class_files_manager.html#a986350d5c057d10b8fdd11551b097b37" title=" " alt="" coords="676,56,840,83"/>
+<area shape="rect" id="node7" href="$class_files_manager.html#a548490c251183fff04e9db3a1d605875" title=" " alt="" coords="663,107,853,133"/>
+<area shape="rect" id="node4" href="$class_faster2_histo.html#ac20f36c0861a3af085c9546ca1325cc6" title="Adds one file to convert at the list. Option &#45;f." alt="" coords="444,56,603,83"/>
+<area shape="rect" id="node5" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title="To launch the application after instanciation." alt="" coords="245,56,384,83"/>
+<area shape="rect" id="node6" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="5,56,197,83"/>
+<area shape="rect" id="node8" href="$class_files_manager.html#ae7f5500280a409300732527ddd9f5884" title=" " alt="" coords="432,107,615,133"/>
 </map>

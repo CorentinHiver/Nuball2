@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_peaks_calibrator" xml:lang="en-US">
+<title>PeaksCalibrator Class Reference</title>
+<indexterm><primary>PeaksCalibrator</primary></indexterm>
+<para>
+<computeroutput>#include &lt;AnalysedSpectra.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for PeaksCalibrator:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peaks_calibrator__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_peaks_calibrator_1ae6dcd447c315e23324f882fd3791721a">Draw</link> (std::string const &amp;opt)</para>
+</listitem>
+            <listitem><para><link linkend="_class_fit">Fit</link> const  &amp; <link linkend="_class_peaks_calibrator_1a801c737980f87c4c59b7aa015ec6bee8">fit</link> () const</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_peaks_calibrator_1a10e6bb763e092ee0bef1a9035eb4c1bd">graph</link> ()</para>
+</listitem>
+            <listitem><para><link linkend="_class_peaks_calibrator_1a6d799246268d62e0e7097594ea82050b">PeaksCalibrator</link> (std::vector&lt; double &gt; const &amp;peaks, std::vector&lt; double &gt; const &amp;ADCs, int const &amp;order)</para>
+</listitem>
+            <listitem><para><link linkend="_class_peaks_calibrator_1ad020d8c79aa946517f140b3b73a16817">PeaksCalibrator</link> (std::vector&lt; <link linkend="_class_fitted_peak">FittedPeak</link> &gt; const &amp;peaks, int const &amp;order=0)</para>
+</listitem>
+            <listitem><para><link linkend="_class_peaks_calibrator_1aa22df9cfa24378f5e262488cc1160f14">~PeaksCalibrator</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_fit">Fit</link> <link linkend="_class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f">m_fit</link></para>
+</listitem>
+            <listitem><para>TGraph * <link linkend="_class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749">m_graph</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_class_peaks_calibrator_1a31b139c91cf9c3739c04b0b510ceeba1">m_order</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa">m_size</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static TF1 * <link linkend="_class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254">linear_fit</link> = new TF1(&quot;linear_PeaksCalibrator&quot;, &quot;pol1&quot;)</para>
+</listitem>
+            <listitem><para>static TF1 * <link linkend="_class_peaks_calibrator_1a1d389cb4ba14899a1c8b2162c016e52a">square_fit</link> = new TF1(&quot;square_PeaksCalibrator&quot;, &quot;pol2&quot;)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_peaks_calibrator_1ad020d8c79aa946517f140b3b73a16817"/>    <section>
+    <title>PeaksCalibrator()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>PeaksCalibrator</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<para><computeroutput>PeaksCalibrator::PeaksCalibrator (std::vector&lt; <link linkend="_class_fitted_peak">FittedPeak</link> &gt; const &amp; peaks, int const &amp; order = <computeroutput>0</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peaks_calibrator_1a6d799246268d62e0e7097594ea82050b"/>    <section>
+    <title>PeaksCalibrator()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>PeaksCalibrator</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<para><computeroutput>PeaksCalibrator::PeaksCalibrator (std::vector&lt; double &gt; const &amp; peaks, std::vector&lt; double &gt; const &amp; ADCs, int const &amp; order)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_peaks_calibrator_a6d799246268d62e0e7097594ea82050b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_peaks_calibrator_1aa22df9cfa24378f5e262488cc1160f14"/>    <section>
+    <title>~PeaksCalibrator()</title>
+<indexterm><primary>~PeaksCalibrator</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>~PeaksCalibrator</secondary></indexterm>
+<para><computeroutput>PeaksCalibrator::~PeaksCalibrator ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_peaks_calibrator_1ae6dcd447c315e23324f882fd3791721a"/>    <section>
+    <title>Draw()</title>
+<indexterm><primary>Draw</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>Draw</secondary></indexterm>
+<para><computeroutput>void PeaksCalibrator::Draw (std::string const &amp; opt)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peaks_calibrator_1a801c737980f87c4c59b7aa015ec6bee8"/>    <section>
+    <title>fit()</title>
+<indexterm><primary>fit</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>fit</secondary></indexterm>
+<para><computeroutput><link linkend="_class_fit">Fit</link> const&amp; PeaksCalibrator::fit ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peaks_calibrator_1a10e6bb763e092ee0bef1a9035eb4c1bd"/>    <section>
+    <title>graph()</title>
+<indexterm><primary>graph</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>graph</secondary></indexterm>
+<para><computeroutput>auto PeaksCalibrator::graph ( )<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_peaks_calibrator_1a3563a42bc953688a5f907113c2146254"/>    <section>
+    <title>linear_fit</title>
+<indexterm><primary>linear_fit</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>linear_fit</secondary></indexterm>
+<para><computeroutput>TF1 * PeaksCalibrator::linear_fit = new TF1(&quot;linear_PeaksCalibrator&quot;, &quot;pol1&quot;)<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peaks_calibrator_1ac2f381fe77e81ccba5e6a7fff961693f"/>    <section>
+    <title>m_fit</title>
+<indexterm><primary>m_fit</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>m_fit</secondary></indexterm>
+<para><computeroutput><link linkend="_class_fit">Fit</link> PeaksCalibrator::m_fit<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peaks_calibrator_1af9bcffdb32cd57ac682fe46e0f43b749"/>    <section>
+    <title>m_graph</title>
+<indexterm><primary>m_graph</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>m_graph</secondary></indexterm>
+<para><computeroutput>TGraph* PeaksCalibrator::m_graph<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peaks_calibrator_1a31b139c91cf9c3739c04b0b510ceeba1"/>    <section>
+    <title>m_order</title>
+<indexterm><primary>m_order</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>m_order</secondary></indexterm>
+<para><computeroutput>int PeaksCalibrator::m_order = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peaks_calibrator_1a466da0521dac478f9eae058234fc8cfa"/>    <section>
+    <title>m_size</title>
+<indexterm><primary>m_size</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>m_size</secondary></indexterm>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> PeaksCalibrator::m_size = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_peaks_calibrator_1a1d389cb4ba14899a1c8b2162c016e52a"/>    <section>
+    <title>square_fit</title>
+<indexterm><primary>square_fit</primary><secondary>PeaksCalibrator</secondary></indexterm>
+<indexterm><primary>PeaksCalibrator</primary><secondary>square_fit</secondary></indexterm>
+<para><computeroutput>TF1 * PeaksCalibrator::square_fit = new TF1(&quot;square_PeaksCalibrator&quot;, &quot;pol2&quot;)<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__analysed_spectra_8hpp">AnalysedSpectra.hpp</link></section>
+</section>

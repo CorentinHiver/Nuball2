@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespace_co_bazar" xml:lang="en-US">
+<title>CoBazar Namespace Reference</title>
+<indexterm><primary>CoBazar</primary></indexterm>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_namespace_co_bazar_1a5a85829d9980d46c04dfe66c15ca395a">long_progress_bar</link> (float const &amp;progress_procent)</para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>double <link linkend="_namespace_co_bazar_1a030309d1b093093b5fd48a5f7734018e">mean</link> (ARGS... args)</para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_bazar_1a24cffd290231166ac66b8c2fc0f9ee65">progress_bar</link> (float const &amp;progress_procent, int width=50)</para>
+</listitem>
+            <listitem><para>void <link linkend="_namespace_co_bazar_1a10289b78525ae5d515e9d00181ecee64">short_progress_bar</link> (float const &amp;progress_procent)</para>
+</listitem>
+            <listitem><para>template&lt;class T , class... ARGS&gt; </para><para>T <link linkend="_namespace_co_bazar_1a1e08093363d904d8875d5907b48464f0">sum</link> (T i, ARGS... args)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_namespace_co_bazar_1a5a85829d9980d46c04dfe66c15ca395a"/>    <section>
+    <title>long_progress_bar()</title>
+<indexterm><primary>long_progress_bar</primary><secondary>CoBazar</secondary></indexterm>
+<indexterm><primary>CoBazar</primary><secondary>long_progress_bar</secondary></indexterm>
+<para><computeroutput>void CoBazar::long_progress_bar (float const &amp; progress_procent)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_bazar_a5a85829d9980d46c04dfe66c15ca395a_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_namespace_co_bazar_1a030309d1b093093b5fd48a5f7734018e"/>    <section>
+    <title>mean()</title>
+<indexterm><primary>mean</primary><secondary>CoBazar</secondary></indexterm>
+<indexterm><primary>CoBazar</primary><secondary>mean</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>double CoBazar::mean (ARGS... args)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_bazar_a030309d1b093093b5fd48a5f7734018e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_bazar_a030309d1b093093b5fd48a5f7734018e_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_namespace_co_bazar_1a24cffd290231166ac66b8c2fc0f9ee65"/>    <section>
+    <title>progress_bar()</title>
+<indexterm><primary>progress_bar</primary><secondary>CoBazar</secondary></indexterm>
+<indexterm><primary>CoBazar</primary><secondary>progress_bar</secondary></indexterm>
+<para><computeroutput>void CoBazar::progress_bar (float const &amp; progress_procent, int width = <computeroutput>50</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_bazar_a24cffd290231166ac66b8c2fc0f9ee65_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_bazar_a24cffd290231166ac66b8c2fc0f9ee65_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_namespace_co_bazar_1a10289b78525ae5d515e9d00181ecee64"/>    <section>
+    <title>short_progress_bar()</title>
+<indexterm><primary>short_progress_bar</primary><secondary>CoBazar</secondary></indexterm>
+<indexterm><primary>CoBazar</primary><secondary>short_progress_bar</secondary></indexterm>
+<para><computeroutput>void CoBazar::short_progress_bar (float const &amp; progress_procent)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_bazar_a10289b78525ae5d515e9d00181ecee64_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_namespace_co_bazar_1a1e08093363d904d8875d5907b48464f0"/>    <section>
+    <title>sum()</title>
+<indexterm><primary>sum</primary><secondary>CoBazar</secondary></indexterm>
+<indexterm><primary>CoBazar</primary><secondary>sum</secondary></indexterm>
+<computeroutput>template&lt;class T , class... ARGS&gt; </computeroutput><para><computeroutput>T CoBazar::sum (T i, ARGS... args)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_bazar_a1e08093363d904d8875d5907b48464f0_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+</section>

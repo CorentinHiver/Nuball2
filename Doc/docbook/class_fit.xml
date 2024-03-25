@@ -4,22 +4,22 @@
 <indexterm><primary>Fit</primary></indexterm>
 <para>
 
-<para>Allows one to manipulate the results of peaks. </para>
+<para>Allows one to manipulate the results of peak fitting. </para>
  
 </para>
 <para>
-<computeroutput>#include &lt;Calibration.hpp&gt;</computeroutput>
+<computeroutput>#include &lt;Fit.hpp&gt;</computeroutput>
 </para>
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
             <listitem><para>void <link linkend="_class_fit_1a8c319eaa8c1924d691ca348e60032392">clear</link> ()</para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_fit_1a0c3b74202459b21a89949d1764c821ac">enough_counts</link> () const</para>
+            <listitem><para>auto <link linkend="_class_fit_1ace2faca83c11b880a44c1e5f7c89ad8e">enough_counts</link> () const</para>
 
 <para>Returns true if fit had enough counts. </para>
 </listitem>
-            <listitem><para>bool const  &amp; <link linkend="_class_fit_1aa524861d860cc6384c92425166453e93">exists</link> () const</para>
+            <listitem><para>auto const  &amp; <link linkend="_class_fit_1acd04ad290cb58f48b9925152587c380e">exists</link> () const</para>
 
 <para>Returns true if fit succeeded. </para>
 </listitem>
@@ -29,23 +29,23 @@
 </listitem>
             <listitem><para><link linkend="_class_fit_1abd77d8fae160b06c58643a7f11e64625">Fit</link> ()</para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_fit_1abaca326b14541eeb51a3bcac88c1d40e">found_peaks</link> () const</para>
+            <listitem><para>auto <link linkend="_class_fit_1a4a492179d25c42f4964e9aa32aebeece">found_peaks</link> () const</para>
 
 <para>Returns true if the fit found the peaks. </para>
 </listitem>
-            <listitem><para><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const  &amp; <link linkend="_class_fit_1a4874f1cf7e73d3add3b14956618a52c8">label</link> () const</para>
+            <listitem><para>auto const  &amp; <link linkend="_class_fit_1a65785d0daa5a0aa76f1ca5924c36fa28">label</link> () const</para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_fit_1a861a69c651863dcb3b41a788fe73f69d">peaks_found</link> (bool <link linkend="_vector__functions_8hpp_1a14962b41d2983daea3bcdc089a8257ef">found</link>)</para>
+            <listitem><para>bool <link linkend="_class_fit_1a861a69c651863dcb3b41a788fe73f69d">peaks_found</link> (bool <link linkend="_vector__functions_8hpp_1a2a2fe6c64692ae7368f063010a0ff97a">found</link>)</para>
 
 <para>Set if there was not enough counts : </para>
 </listitem>
-            <listitem><para>void <link linkend="_class_fit_1a9b69dacd5f0264c1760f38d9dd19f5dd">resize</link> (int <link linkend="_class_fit_1a9c248d8b560bede53a0c550418bf2604">size</link>)</para>
+            <listitem><para>void <link linkend="_class_fit_1a9b69dacd5f0264c1760f38d9dd19f5dd">resize</link> (int <link linkend="_class_fit_1a912700f52a0a3a3c66c90966ed81581b">size</link>)</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_fit_1a5f9e21546ed32f5b53c0692d2c199f1d">setLabel</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;<link linkend="_class_fit_1a4874f1cf7e73d3add3b14956618a52c8">label</link>)</para>
+            <listitem><para>void <link linkend="_class_fit_1a5f9e21546ed32f5b53c0692d2c199f1d">setLabel</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;<link linkend="_class_fit_1a65785d0daa5a0aa76f1ca5924c36fa28">label</link>)</para>
 
 <para>Set the label. </para>
 </listitem>
-            <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_fit_1a9c248d8b560bede53a0c550418bf2604">size</link> () const</para>
+            <listitem><para>auto <link linkend="_class_fit_1a912700f52a0a3a3c66c90966ed81581b">size</link> () const</para>
 
 <para>Returns the number of peaks used for calibration. </para>
 </listitem>
@@ -112,7 +112,7 @@
 <section>
 <title>Detailed Description</title>
 
-<para>Allows one to manipulate the results of peaks. </para>
+<para>Allows one to manipulate the results of peak fitting. </para>
 </section>
 <section>
 <title>Constructor &amp; Destructor Documentation</title>
@@ -128,19 +128,19 @@
     <title>clear()</title>
 <indexterm><primary>clear</primary><secondary>Fit</secondary></indexterm>
 <indexterm><primary>Fit</primary><secondary>clear</secondary></indexterm>
-<para><computeroutput>void Fit::clear ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_fit_1a0c3b74202459b21a89949d1764c821ac"/>    <section>
+<para><computeroutput>void Fit::clear ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_fit_1ace2faca83c11b880a44c1e5f7c89ad8e"/>    <section>
     <title>enough_counts()</title>
 <indexterm><primary>enough_counts</primary><secondary>Fit</secondary></indexterm>
 <indexterm><primary>Fit</primary><secondary>enough_counts</secondary></indexterm>
-<para><computeroutput>bool Fit::enough_counts ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+<para><computeroutput>auto Fit::enough_counts ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
 <para>Returns true if fit had enough counts. </para>
 </para>
-    </section><anchor xml:id="_class_fit_1aa524861d860cc6384c92425166453e93"/>    <section>
+    </section><anchor xml:id="_class_fit_1acd04ad290cb58f48b9925152587c380e"/>    <section>
     <title>exists()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>exists</primary><secondary>Fit</secondary></indexterm>
 <indexterm><primary>Fit</primary><secondary>exists</secondary></indexterm>
-<para><computeroutput>bool const&amp; Fit::exists ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+<para><computeroutput>auto const&amp; Fit::exists ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
 <para>Returns true if fit succeeded. </para>
 </para>
@@ -148,7 +148,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fit_aa524861d860cc6384c92425166453e93_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fit_acd04ad290cb58f48b9925152587c380e_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -170,23 +170,23 @@ Here is the call graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_fit_1abaca326b14541eeb51a3bcac88c1d40e"/>    <section>
+    </section><anchor xml:id="_class_fit_1a4a492179d25c42f4964e9aa32aebeece"/>    <section>
     <title>found_peaks()</title>
 <indexterm><primary>found_peaks</primary><secondary>Fit</secondary></indexterm>
 <indexterm><primary>Fit</primary><secondary>found_peaks</secondary></indexterm>
-<para><computeroutput>bool Fit::found_peaks ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+<para><computeroutput>auto Fit::found_peaks ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
 <para>Returns true if the fit found the peaks. </para>
 </para>
-    </section><anchor xml:id="_class_fit_1a4874f1cf7e73d3add3b14956618a52c8"/>    <section>
+    </section><anchor xml:id="_class_fit_1a65785d0daa5a0aa76f1ca5924c36fa28"/>    <section>
     <title>label()</title>
 <indexterm><primary>label</primary><secondary>Fit</secondary></indexterm>
 <indexterm><primary>Fit</primary><secondary>label</secondary></indexterm>
-<para><computeroutput><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const&amp; Fit::label ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>auto const&amp; Fit::label ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fit_a4874f1cf7e73d3add3b14956618a52c8_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fit_a65785d0daa5a0aa76f1ca5924c36fa28_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -238,11 +238,11 @@ Here is the call graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_fit_1a9c248d8b560bede53a0c550418bf2604"/>    <section>
+    </section><anchor xml:id="_class_fit_1a912700f52a0a3a3c66c90966ed81581b"/>    <section>
     <title>size()</title>
 <indexterm><primary>size</primary><secondary>Fit</secondary></indexterm>
 <indexterm><primary>Fit</primary><secondary>size</secondary></indexterm>
-<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Fit::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+<para><computeroutput>auto Fit::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
 <para>Returns the number of peaks used for calibration. </para>
 </para>
@@ -250,7 +250,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fit_a9c248d8b560bede53a0c550418bf2604_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fit_a912700f52a0a3a3c66c90966ed81581b_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -367,5 +367,5 @@ Here is the call graph for this function:<para>
 <para><computeroutput>std::vector&lt;double&gt; Fit::y</computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
-lib/Modules/<link linkend="__calibration_8hpp">Calibration.hpp</link></section>
+lib/Classes/<link linkend="__fit_8hpp">Fit.hpp</link></section>
 </section>

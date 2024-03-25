@@ -1,0 +1,92 @@
+.TH "PeaksCalibrator" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PeaksCalibrator
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <AnalysedSpectra\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBDraw\fP (std::string const &opt)"
+.br
+.ti -1c
+.RI "\fBFit\fP const  & \fBfit\fP () const"
+.br
+.ti -1c
+.RI "auto \fBgraph\fP ()"
+.br
+.ti -1c
+.RI "\fBPeaksCalibrator\fP (std::vector< double > const &peaks, std::vector< double > const &ADCs, int const &order)"
+.br
+.ti -1c
+.RI "\fBPeaksCalibrator\fP (std::vector< \fBFittedPeak\fP > const &peaks, int const &order=0)"
+.br
+.ti -1c
+.RI "\fB~PeaksCalibrator\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBFit\fP \fBm_fit\fP"
+.br
+.ti -1c
+.RI "TGraph * \fBm_graph\fP"
+.br
+.ti -1c
+.RI "int \fBm_order\fP = 0"
+.br
+.ti -1c
+.RI "\fBsize_t\fP \fBm_size\fP = 0"
+.br
+.in -1c
+.SS "Static Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "static TF1 * \fBlinear_fit\fP = new TF1('linear_PeaksCalibrator', 'pol1')"
+.br
+.ti -1c
+.RI "static TF1 * \fBsquare_fit\fP = new TF1('square_PeaksCalibrator', 'pol2')"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "PeaksCalibrator::PeaksCalibrator (std::vector< \fBFittedPeak\fP > const & peaks, int const & order = \fC0\fP)\fC [inline]\fP"
+
+.SS "PeaksCalibrator::PeaksCalibrator (std::vector< double > const & peaks, std::vector< double > const & ADCs, int const & order)\fC [inline]\fP"
+
+.SS "PeaksCalibrator::~PeaksCalibrator ()\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void PeaksCalibrator::Draw (std::string const & opt)\fC [inline]\fP"
+
+.SS "\fBFit\fP const& PeaksCalibrator::fit () const\fC [inline]\fP"
+
+.SS "auto PeaksCalibrator::graph ()\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "TF1 * PeaksCalibrator::linear_fit = new TF1('linear_PeaksCalibrator', 'pol1')\fC [static]\fP, \fC [private]\fP"
+
+.SS "\fBFit\fP PeaksCalibrator::m_fit\fC [private]\fP"
+
+.SS "TGraph* PeaksCalibrator::m_graph\fC [private]\fP"
+
+.SS "int PeaksCalibrator::m_order = 0\fC [private]\fP"
+
+.SS "\fBsize_t\fP PeaksCalibrator::m_size = 0\fC [private]\fP"
+
+.SS "TF1 * PeaksCalibrator::square_fit = new TF1('square_PeaksCalibrator', 'pol2')\fC [static]\fP, \fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

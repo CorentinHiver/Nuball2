@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_objective_function" xml:lang="en-US">
+<title>ObjectiveFunction Class Reference</title>
+<indexterm><primary>ObjectiveFunction</primary></indexterm>
+<para>
+<computeroutput>#include &lt;SpectraAlignator.hpp&gt;</computeroutput>
+</para>
+Inheritance diagram for ObjectiveFunction:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_objective_function__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual double <link linkend="_class_objective_function_1a9eb6407e18579b7eddcffcfe55badf20">evaluate</link> (std::vector&lt; double &gt; const &amp;coefficients) const =0</para>
+</listitem>
+            <listitem><para><link linkend="_class_objective_function_1aae8254009cb9b2dcbbfa751149652fbd">ObjectiveFunction</link> () noexcept=default</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_objective_function_1aae8254009cb9b2dcbbfa751149652fbd"/>    <section>
+    <title>ObjectiveFunction()</title>
+<indexterm><primary>ObjectiveFunction</primary><secondary>ObjectiveFunction</secondary></indexterm>
+<indexterm><primary>ObjectiveFunction</primary><secondary>ObjectiveFunction</secondary></indexterm>
+<para><computeroutput>ObjectiveFunction::ObjectiveFunction ( )<computeroutput>[default]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_objective_function_1a9eb6407e18579b7eddcffcfe55badf20"/>    <section>
+    <title>evaluate()</title>
+<indexterm><primary>evaluate</primary><secondary>ObjectiveFunction</secondary></indexterm>
+<indexterm><primary>ObjectiveFunction</primary><secondary>evaluate</secondary></indexterm>
+<para><computeroutput>virtual double ObjectiveFunction::evaluate (std::vector&lt; double &gt; const &amp; coefficients) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_class_objective_function_chi2_1ab9abe6ab2b65aa87d805b9866044eaed">ObjectiveFunctionChi2</link>, and <link linkend="_class_test_objective_function_1a37613667d05da9ece656c1bfb9b48843">TestObjectiveFunction</link>.</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_objective_function_a9eb6407e18579b7eddcffcfe55badf20_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+</section>

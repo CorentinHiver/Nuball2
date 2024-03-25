@@ -10,7 +10,7 @@
         <itemizedlist>
             <listitem><para><link linkend="_class_alignator_1a77097dec7c5f3598142d63c1df1bb78d">Alignator</link> (TTree *inputTree, TTree *outputTree)</para>
 
-<para>DEV. </para>
+<para>TBD. </para>
 </listitem>
             <listitem><para><link linkend="_class_alignator_1af09796ed3384e2f74bb3c2dae1e83bc9">Alignator</link> (TTree *tree)</para>
 </listitem>
@@ -81,7 +81,7 @@
 <indexterm><primary>Alignator</primary><secondary>Alignator</secondary></indexterm>
 <para><computeroutput>Alignator::Alignator (TTree * inputTree, TTree * outputTree)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
-<para>DEV. </para>
+<para>TBD. </para>
 </para>
 Here is the call graph for this function:<para>
     <informalfigure>

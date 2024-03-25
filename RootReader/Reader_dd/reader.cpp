@@ -206,7 +206,7 @@ void Analysator::Initialise()
   randomCo::setSeed(time(0));
   detectors.load("index_129.list");
   random->SetSeed(time(0));
-  Clovers::InitializeArrays();
+  Clovers::InitialiseArrays();
   Clovers::timePs(true);
   int run_min = 70;
   int run_max = 130;
@@ -904,7 +904,7 @@ void reader(int number_files = -1)
 {
   if (found(Path::pwd().string(), "faster")) 
   {
-    MTObject::Initialize((nb_threads<0) ? 10 : nb_threads);
+    MTObject::Initialise((nb_threads<0) ? 10 : nb_threads);
     if (read_129)
     {
       if (simple_d) Analysator analysator(number_files, "~/nuball2/N-SI-129-root_d/merged/");
@@ -918,7 +918,7 @@ void reader(int number_files = -1)
   }
   else 
   {
-    MTObject::Initialize((nb_threads<0) ? 2 : nb_threads);
+    MTObject::Initialise((nb_threads<0) ? 2 : nb_threads);
     if (read_129)
     {
       if (simple_d) Analysator analysator(number_files, "~/faster_data/N-SI-129-root_d/");

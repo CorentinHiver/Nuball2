@@ -1,0 +1,9 @@
+<map id="information" name="information">
+<area shape="rect" id="node1" title="Print in grey." alt="" coords="660,61,759,88"/>
+<area shape="rect" id="node2" href="$class_calibrator.html#aa0fff626078ec3cd2e453c5cf6681462" title=" " alt="" coords="445,7,612,33"/>
+<area shape="rect" id="node5" href="$class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="453,61,604,88"/>
+<area shape="rect" id="node7" href="$class_calibrator.html#aad90b0e3951d4caffe11e319c7108a51" title="if some spectra and calibration coefficients have been loaded, or after the calibration coefficients ..." alt="" coords="463,112,594,139"/>
+<area shape="rect" id="node3" href="$class_calibrator.html#aa15e2c6afb9da71595926a10d89f0761" title="Analyse the spectra to extract calibration coefficients." alt="" coords="229,5,375,32"/>
+<area shape="rect" id="node4" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="5,5,159,32"/>
+<area shape="rect" id="node6" href="$class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="207,57,397,98"/>
+</map>

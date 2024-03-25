@@ -50,7 +50,7 @@ Collaboration diagram for Sorted_Event:<para>
 <simplesect>
     <title>Static Public Member Functions    </title>
         <itemizedlist>
-            <listitem><para>static void <link linkend="_class_sorted___event_1a0c2d3980ba5e8ffb7398c53b846d7592">Initialize</link> ()</para>
+            <listitem><para>static void <link linkend="_class_sorted___event_1a6b25d4b50b761f368927aaa7e2fef8a9">Initialise</link> ()</para>
 </listitem>
             <listitem><para>static void <link linkend="_class_sorted___event_1a3fb09052ae07199b3b8912218ca045aa">setDSSDVeto</link> (Float_t const &amp;min_time, Float_t const &amp;max_time, Float_t const &amp;max_E)</para>
 </listitem>
@@ -234,7 +234,11 @@ Collaboration diagram for Sorted_Event:<para>
     <title>getGatedClover()</title>
 <indexterm><primary>getGatedClover</primary><secondary>Sorted_Event</secondary></indexterm>
 <indexterm><primary>Sorted_Event</primary><secondary>getGatedClover</secondary></indexterm>
-<para><computeroutput>auto const&amp; Sorted_Event::getGatedClover ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b"/>    <section>
+<para><computeroutput>auto const&amp; Sorted_Event::getGatedClover ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a6b25d4b50b761f368927aaa7e2fef8a9"/>    <section>
+    <title>Initialise()</title>
+<indexterm><primary>Initialise</primary><secondary>Sorted_Event</secondary></indexterm>
+<indexterm><primary>Sorted_Event</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>static void Sorted_Event::Initialise ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1afc0b469d164d06c59dd19b580202ac2b"/>    <section>
     <title>initialise()</title>
 <indexterm><primary>initialise</primary><secondary>Sorted_Event</secondary></indexterm>
 <indexterm><primary>Sorted_Event</primary><secondary>initialise</secondary></indexterm>
@@ -247,11 +251,7 @@ Collaboration diagram for Sorted_Event:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_sorted___event_1a0c2d3980ba5e8ffb7398c53b846d7592"/>    <section>
-    <title>Initialize()</title>
-<indexterm><primary>Initialize</primary><secondary>Sorted_Event</secondary></indexterm>
-<indexterm><primary>Sorted_Event</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>static void Sorted_Event::Initialize ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231"/>    <section>
+    </section><anchor xml:id="_class_sorted___event_1a9d502b0a90b38c3a02d1d12e19818231"/>    <section>
     <title>reset()</title>
 <indexterm><primary>reset</primary><secondary>Sorted_Event</secondary></indexterm>
 <indexterm><primary>Sorted_Event</primary><secondary>reset</secondary></indexterm>

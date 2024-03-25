@@ -51,8 +51,8 @@ void convert_simple(Hit & hit, FasterReader & reader)
 
 int main()
 {
-  // MANDATORY : initialize the multithreading !
-  MTObject::Initialize(4);
+  // MANDATORY : Initialise the multithreading !
+  MTObject::Initialise(4);
 
   // Instantiate the reader
   MTFasterReader readerMT(/path/to/data/folder, nb_files); // leave nb_files empty or equals to -1 if reading all the files

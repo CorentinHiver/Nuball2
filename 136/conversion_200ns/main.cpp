@@ -101,7 +101,7 @@ struct Histos
   MTTHist<TH2F> energy_each_trig;
   MTTHist<TH2F> rf_each_trig;
 
-  void Initialize()
+  void Initialise()
   {
     auto const & nbDet = detectors.number();
 
@@ -259,7 +259,7 @@ void convert(Hit & hit, FasterReader & reader,
   auto dataSize = float_cast(raw_datafile.size("Mo"));
 
   // ------------------------------ //
-  // Initialize the temporary TTree //
+  // Initialise the temporary TTree //
   // ------------------------------ //
   std::unique_ptr<TTree> tempTree (new TTree("temp","temp"));
   tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
@@ -306,7 +306,7 @@ void convert(Hit & hit, FasterReader & reader,
   Event event;
   event.writting(outTree.get(), "lstEQp");
 
-  // Initialize event builder based on RF :
+  // Initialise event builder based on RF :
   RF_Manager rf;
   rf.set_period_ns(200);
 
@@ -319,7 +319,7 @@ void convert(Hit & hit, FasterReader & reader,
 
   debug("first RF found at hit n°", first_rf.cursor());
 
-  // Initialize event analyser : simple modules and DSSD counter
+  // Initialise event analyser : simple modules and DSSD counter
   Counter136 counter;
 
   // Handle the first hit :
@@ -333,7 +333,7 @@ void convert(Hit & hit, FasterReader & reader,
   // --------------------------------- //
   // Loop over the temporary root tree //
   // --------------------------------- //
-  // Clovers::InitializeArrays();
+  // Clovers::InitialiseArrays();
   Timer convert_timer;
   auto const & nb_data = tempTree->GetEntries();
   ulong hits_count = 0;
@@ -426,7 +426,7 @@ void convert(Hit & hit, FasterReader & reader,
   print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
   Timer write_timer;
 
-  // Initialize output TTree :
+  // Initialise output TTree :
   unique_TFile outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
   outTree -> Write();
@@ -560,10 +560,10 @@ int main(int argc, char** argv)
     }
   }
 
-  // MANDATORY : initialize the multithreading !
+  // MANDATORY : Initialise the multithreading !
   MTObject::setThreadsNb(nb_threads);
   MTObject::adjustThreadsNumber(nb_files);
-  MTObject::Initialize();
+  MTObject::Initialise();
 
   // Setup the path accordingly to the machine :
   Path datapath = Path::home();
@@ -604,7 +604,7 @@ int main(int argc, char** argv)
     auto const & run_name = removeExtension(run);
 
     Histos histos;
-    if (histoed && !only_timeshifts) histos.Initialize();
+    if (histoed && !only_timeshifts) histos.Initialise();
 
     print("----------------");
     print("Treating ", run_name);

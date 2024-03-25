@@ -1,4 +1,4 @@
-.TH "FasterReader" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "FasterReader" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -59,19 +59,25 @@ FasterReader \- Class used to read \&.fast files\&.
 
 .in +1c
 .ti -1c
+.RI "static auto \fBgetMaxHits\fP ()"
+.br
+.ti -1c
 .RI "static void \fBsetMaxHits\fP (\fBulonglong\fP maxHits)"
 .br
 .RI "Set the number of hits to read inside each file\&. "
+.ti -1c
+.RI "static void \fBsetVerbose\fP (int i=1)"
+.br
 .in -1c
 .SS "Private Member Functions"
 
 .in +1c
 .ti -1c
-.RI "bool \fBInitialize\fP ()"
+.RI "bool \fBInitialise\fP ()"
 .br
 .RI "Setup the fasterac\&.h library to read the data\&. "
 .ti -1c
-.RI "bool \fBInitializeReader\fP ()"
+.RI "bool \fBInitialiseReader\fP ()"
 .br
 .ti -1c
 .RI "bool \fBReadData\fP (faster_data_p const &_data)"
@@ -131,9 +137,6 @@ FasterReader \- Class used to read \&.fast files\&.
 .RI "\fBulonglong\fP \fBm_counter\fP = 0"
 .br
 .ti -1c
-.RI "\fBulonglong\fP \fBm_cursor\fP = 0"
-.br
-.ti -1c
 .RI "faster_data_p \fBm_data\fP"
 .br
 .ti -1c
@@ -171,7 +174,10 @@ FasterReader \- Class used to read \&.fast files\&.
 
 .in +1c
 .ti -1c
-.RI "static \fBulonglong\fP \fBm_maxHits\fP = \-1"
+.RI "static thread_local int \fBm_verbose\fP = 1"
+.br
+.ti -1c
+.RI "static \fBulonglong\fP \fBs_maxHits\fP = \-1"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -268,11 +274,13 @@ Get the current \fBHit\fP
 .RE
 .PP
 
-.SS "bool FasterReader::Initialize ()\fC [inline]\fP, \fC [private]\fP"
+.SS "static auto FasterReader::getMaxHits ()\fC [inline]\fP, \fC [static]\fP"
+
+.SS "bool FasterReader::Initialise ()\fC [inline]\fP, \fC [private]\fP"
 
 .PP
 Setup the fasterac\&.h library to read the data\&. 
-.SS "bool FasterReader::InitializeReader ()\fC [private]\fP"
+.SS "bool FasterReader::InitialiseReader ()\fC [private]\fP"
 
 .SS "bool const& FasterReader::isReady () const\fC [inline]\fP"
 
@@ -292,7 +300,7 @@ Main method\&. Extract the next hit from the data file and fills the \fBHit\fP *
 .nf
  while(reader.Read())
  {
-    // This hit is filled/updated at each iteration by the data read in the ReadData() private method
+    // This hit is filled/updated at each iteration
     print(hit); 
  }
 
@@ -338,6 +346,8 @@ Set the \fBHit\fP object \\nNever tested, but should work !
 
 .PP
 Set the number of hits to read inside each file\&. 
+.SS "static void FasterReader::setVerbose (int i = \fC1\fP)\fC [inline]\fP, \fC [static]\fP"
+
 .SS "bool FasterReader::switch_alias (\fBuchar\fP const & _alias, faster_data_p const & _data)\fC [inline]\fP, \fC [private]\fP"
 
 .PP
@@ -381,8 +391,6 @@ Load Trapez data\&. Internal method used to extract ADC value from trapezoid fil
 
 .SS "\fBulonglong\fP FasterReader::m_counter = 0\fC [private]\fP"
 
-.SS "\fBulonglong\fP FasterReader::m_cursor = 0\fC [private]\fP"
-
 .SS "faster_data_p FasterReader::m_data\fC [private]\fP"
 
 .SS "\fBHit\fP FasterReader::m_empty_hit\fC [private]\fP"
@@ -401,11 +409,13 @@ Load Trapez data\&. Internal method used to extract ADC value from trapezoid fil
 
 .SS "bool FasterReader::m_kReady = false\fC [private]\fP"
 
-.SS "\fBulonglong\fP FasterReader::m_maxHits = \-1\fC [static]\fP, \fC [private]\fP"
-
 .SS "faster_file_reader_p FasterReader::m_reader = NULL\fC [private]\fP"
 
+.SS "thread_local int FasterReader::m_verbose = 1\fC [static]\fP, \fC [private]\fP"
+
 .SS "bool FasterReader::m_write = false\fC [private]\fP"
+
+.SS "\fBulonglong\fP FasterReader::s_maxHits = \-1\fC [static]\fP, \fC [private]\fP"
 
 
 .SH "Author"

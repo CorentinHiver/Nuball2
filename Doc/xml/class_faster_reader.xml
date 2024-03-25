@@ -4,11 +4,28 @@
     <compoundname>FasterReader</compoundname>
     <includes refid="_faster_reader_8hpp" local="no">FasterReader.hpp</includes>
       <sectiondef kind="private-static-attrib">
-      <memberdef kind="variable" id="class_faster_reader_1a8554231dbef9df122f04313f4adb594a" prot="private" static="yes" mutable="no">
-        <type><ref refid="lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52" kindref="member">ulonglong</ref></type>
-        <definition>ulonglong FasterReader::m_maxHits</definition>
+      <memberdef kind="variable" id="class_faster_reader_1a5d60fc12eece11753c5d495ba76db75f" prot="private" static="yes" mutable="no">
+        <type>thread_local int</type>
+        <definition>thread_local int FasterReader::m_verbose</definition>
         <argsstring></argsstring>
-        <name>m_maxHits</name>
+        <name>m_verbose</name>
+        <initializer>= 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/FasterReader.hpp" line="154" column="27" bodyfile="lib/Classes/FasterReader.hpp" bodystart="154" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</referencedby>
+        <referencedby refid="class_faster_reader_1a83d86d816bed5053765a05ddf4da278d" compoundref="_faster_reader_8hpp" startline="247" endline="257">InitialiseReader</referencedby>
+        <referencedby refid="class_faster_reader_1a76b7fa1bc82b5a5dff918bef2ae7d3a0" compoundref="_faster_reader_8hpp" startline="119" endline="119">setVerbose</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="class_faster_reader_1aa58b38ff4c8f95526ea529cdaaa1f8f8" prot="private" static="yes" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52" kindref="member">ulonglong</ref></type>
+        <definition>ulonglong FasterReader::s_maxHits</definition>
+        <argsstring></argsstring>
+        <name>s_maxHits</name>
         <initializer>= -1</initializer>
         <briefdescription>
         </briefdescription>
@@ -16,9 +33,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="155" column="20" bodyfile="lib/Classes/FasterReader.hpp" bodystart="155" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="259" endline="270">Read</referencedby>
-        <referencedby refid="class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb" compoundref="_faster_reader_8hpp" startline="120" endline="120">setMaxHits</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="153" column="20" bodyfile="lib/Classes/FasterReader.hpp" bodystart="153" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1a54f783429b2ce11a478280f5aa0ab2a4" compoundref="_faster_reader_8hpp" startline="118" endline="118">getMaxHits</referencedby>
+        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="263" endline="274">Read</referencedby>
+        <referencedby refid="class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb" compoundref="_faster_reader_8hpp" startline="117" endline="117">setMaxHits</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -33,9 +51,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="181" column="22" bodyfile="lib/Classes/FasterReader.hpp" bodystart="181" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="522" endline="546">TreatQDC2</referencedby>
-        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="554" endline="578">TreatQDC3</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="180" column="22" bodyfile="lib/Classes/FasterReader.hpp" bodystart="180" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="526" endline="550">TreatQDC2</referencedby>
+        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="558" endline="582">TreatQDC3</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1ac285d052a5dea4e6c61537c9c95dcd28" prot="private" static="no" mutable="no">
         <type><ref refid="lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21" kindref="member">uchar</ref></type>
@@ -49,8 +67,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="172" column="25" bodyfile="lib/Classes/FasterReader.hpp" bodystart="172" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="171" column="25" bodyfile="lib/Classes/FasterReader.hpp" bodystart="171" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</referencedby>
         <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a" prot="private" static="no" mutable="no">
@@ -65,24 +83,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="157" column="13" bodyfile="lib/Classes/FasterReader.hpp" bodystart="157" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a0e799cf6b890a3ca281819efeb2df29e" compoundref="_faster_reader_8hpp" startline="140" endline="140">getCounter</referencedby>
-        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="259" endline="270">Read</referencedby>
-        <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
-      </memberdef>
-      <memberdef kind="variable" id="class_faster_reader_1a681170463697b5dd3856328eacb0a39d" prot="private" static="no" mutable="no">
-        <type><ref refid="lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52" kindref="member">ulonglong</ref></type>
-        <definition>ulonglong FasterReader::m_cursor</definition>
-        <argsstring></argsstring>
-        <name>m_cursor</name>
-        <initializer>=  0</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
         <location file="lib/Classes/FasterReader.hpp" line="156" column="13" bodyfile="lib/Classes/FasterReader.hpp" bodystart="156" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1a0e799cf6b890a3ca281819efeb2df29e" compoundref="_faster_reader_8hpp" startline="138" endline="138">getCounter</referencedby>
+        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="263" endline="274">Read</referencedby>
+        <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1a95a022f50153b44f711a81e8109583ce" prot="private" static="no" mutable="no">
         <type>faster_data_p</type>
@@ -95,9 +99,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="171" column="25" bodyfile="lib/Classes/FasterReader.hpp" bodystart="171" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
-        <referencedby refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="278" endline="289">ReadSimple</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="170" column="25" bodyfile="lib/Classes/FasterReader.hpp" bodystart="170" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
+        <referencedby refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="282" endline="293">ReadSimple</referencedby>
         <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1a8150da77ef499006286e92ae4d65436d" prot="private" static="no" mutable="no">
@@ -111,8 +115,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="160" column="10" bodyfile="lib/Classes/FasterReader.hpp" bodystart="160" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="159" column="10" bodyfile="lib/Classes/FasterReader.hpp" bodystart="159" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -126,11 +130,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="161" column="17" bodyfile="lib/Classes/FasterReader.hpp" bodystart="161" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1add1cd47aee08955e9a1fb11782129714" compoundref="_faster_reader_8hpp" startline="134" endline="134">filename</referencedby>
-        <referencedby refid="class_faster_reader_1aab416287bd95c5dad74fff1ebb45d3c8" compoundref="_faster_reader_8hpp" startline="137" endline="137">getFilename</referencedby>
-        <referencedby refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</referencedby>
-        <referencedby refid="class_faster_reader_1a21a9202f79d43b9fd41cd1e1c276fe2c" compoundref="_faster_reader_8hpp" startline="243" endline="253">InitializeReader</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="160" column="17" bodyfile="lib/Classes/FasterReader.hpp" bodystart="160" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1add1cd47aee08955e9a1fb11782129714" compoundref="_faster_reader_8hpp" startline="132" endline="132">filename</referencedby>
+        <referencedby refid="class_faster_reader_1aab416287bd95c5dad74fff1ebb45d3c8" compoundref="_faster_reader_8hpp" startline="135" endline="135">getFilename</referencedby>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</referencedby>
+        <referencedby refid="class_faster_reader_1a83d86d816bed5053765a05ddf4da278d" compoundref="_faster_reader_8hpp" startline="247" endline="257">InitialiseReader</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1ae9b49fa4ed0663ab809a48193877beb4" prot="private" static="no" mutable="no">
         <type><ref refid="lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a" kindref="member">ushort</ref></type>
@@ -144,9 +148,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="166" column="10" bodyfile="lib/Classes/FasterReader.hpp" bodystart="166" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</referencedby>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="165" column="10" bodyfile="lib/Classes/FasterReader.hpp" bodystart="165" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</referencedby>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
         <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" prot="private" static="no" mutable="no">
@@ -161,10 +165,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="167" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="167" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</referencedby>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</referencedby>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="166" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="166" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</referencedby>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</referencedby>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
         <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" prot="private" static="no" mutable="no">
@@ -179,17 +183,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="159" column="9" bodyfile="lib/Classes/FasterReader.hpp" bodystart="159" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a152cfc9a0973c4a754e248c3e0326bea" compoundref="_faster_reader_8hpp" startline="125" endline="125">getHit</referencedby>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</referencedby>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
-        <referencedby refid="class_faster_reader_1ad88f1dfb85bb64d8526770ffbeca5607" compoundref="_faster_reader_8hpp" startline="117" endline="117">setHit</referencedby>
-        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="478" endline="491">TreatCRRC4</referencedby>
-        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="499" endline="514">TreatQDC1</referencedby>
-        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="522" endline="546">TreatQDC2</referencedby>
-        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="554" endline="578">TreatQDC3</referencedby>
-        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="586" endline="599">TreatRF</referencedby>
-        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="455" endline="468">TreatTrapez</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="158" column="9" bodyfile="lib/Classes/FasterReader.hpp" bodystart="158" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1a152cfc9a0973c4a754e248c3e0326bea" compoundref="_faster_reader_8hpp" startline="123" endline="123">getHit</referencedby>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</referencedby>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
+        <referencedby refid="class_faster_reader_1ad88f1dfb85bb64d8526770ffbeca5607" compoundref="_faster_reader_8hpp" startline="114" endline="114">setHit</referencedby>
+        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="482" endline="495">TreatCRRC4</referencedby>
+        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="503" endline="518">TreatQDC1</referencedby>
+        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="526" endline="550">TreatQDC2</referencedby>
+        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="558" endline="582">TreatQDC3</referencedby>
+        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="590" endline="603">TreatRF</referencedby>
+        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="459" endline="472">TreatTrapez</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1a96edba4f7a1a64796627bfd1fbdf1c92" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="class_hit" kindref="compound">Hit</ref> * &gt;</type>
@@ -202,10 +206,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="169" column="19" bodyfile="lib/Classes/FasterReader.hpp" bodystart="169" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</referencedby>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</referencedby>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="168" column="19" bodyfile="lib/Classes/FasterReader.hpp" bodystart="168" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</referencedby>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</referencedby>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1a49b96919779759c068b03b24f379d024" prot="private" static="no" mutable="no">
         <type><ref refid="lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a" kindref="member">ushort</ref></type>
@@ -219,10 +223,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="168" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="168" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</referencedby>
-        <referencedby refid="class_faster_reader_1a64fb4fc3d241141f5d27df99906780fc" compoundref="_faster_reader_8hpp" startline="386" endline="401">ReadDataGroup</referencedby>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="167" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="167" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</referencedby>
+        <referencedby refid="class_faster_reader_1a64fb4fc3d241141f5d27df99906780fc" compoundref="_faster_reader_8hpp" startline="390" endline="405">ReadDataGroup</referencedby>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
         <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" prot="private" static="no" mutable="no">
@@ -237,12 +241,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="162" column="10" bodyfile="lib/Classes/FasterReader.hpp" bodystart="162" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1af4dd68bbc6c027e1c35bfd5b52525002" compoundref="_faster_reader_8hpp" startline="85" endline="85">FasterReader</referencedby>
-        <referencedby refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</referencedby>
-        <referencedby refid="class_faster_reader_1a21a9202f79d43b9fd41cd1e1c276fe2c" compoundref="_faster_reader_8hpp" startline="243" endline="253">InitializeReader</referencedby>
-        <referencedby refid="class_faster_reader_1a5aefeb0380dfdd42d1e63b987989a118" compoundref="_faster_reader_8hpp" startline="128" endline="128">isReady</referencedby>
-        <referencedby refid="class_faster_reader_1a613b5de02c11764659a3b90b8e8f0b0b" compoundref="_faster_reader_8hpp" startline="131" endline="131">operator bool</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="161" column="10" bodyfile="lib/Classes/FasterReader.hpp" bodystart="161" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1af4dd68bbc6c027e1c35bfd5b52525002" compoundref="_faster_reader_8hpp" startline="79" endline="82">FasterReader</referencedby>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</referencedby>
+        <referencedby refid="class_faster_reader_1a83d86d816bed5053765a05ddf4da278d" compoundref="_faster_reader_8hpp" startline="247" endline="257">InitialiseReader</referencedby>
+        <referencedby refid="class_faster_reader_1a5aefeb0380dfdd42d1e63b987989a118" compoundref="_faster_reader_8hpp" startline="126" endline="126">isReady</referencedby>
+        <referencedby refid="class_faster_reader_1a613b5de02c11764659a3b90b8e8f0b0b" compoundref="_faster_reader_8hpp" startline="129" endline="129">operator bool</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" prot="private" static="no" mutable="no">
         <type>faster_file_reader_p</type>
@@ -256,12 +260,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="170" column="25" bodyfile="lib/Classes/FasterReader.hpp" bodystart="170" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a21a9202f79d43b9fd41cd1e1c276fe2c" compoundref="_faster_reader_8hpp" startline="243" endline="253">InitializeReader</referencedby>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
-        <referencedby refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="278" endline="289">ReadSimple</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="169" column="25" bodyfile="lib/Classes/FasterReader.hpp" bodystart="169" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1a83d86d816bed5053765a05ddf4da278d" compoundref="_faster_reader_8hpp" startline="247" endline="257">InitialiseReader</referencedby>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
+        <referencedby refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="282" endline="293">ReadSimple</referencedby>
         <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
-        <referencedby refid="class_faster_reader_1af0c896c5302be52b2f839fd1885d1ecc" compoundref="_faster_reader_8hpp" startline="88" endline="91">~FasterReader</referencedby>
+        <referencedby refid="class_faster_reader_1af0c896c5302be52b2f839fd1885d1ecc" compoundref="_faster_reader_8hpp" startline="85" endline="88">~FasterReader</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -275,11 +279,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="163" column="10" bodyfile="lib/Classes/FasterReader.hpp" bodystart="163" bodyend="-1"/>
-        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="259" endline="270">Read</referencedby>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</referencedby>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
-        <referencedby refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="278" endline="289">ReadSimple</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="162" column="10" bodyfile="lib/Classes/FasterReader.hpp" bodystart="162" bodyend="-1"/>
+        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="263" endline="274">Read</referencedby>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</referencedby>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
+        <referencedby refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="282" endline="293">ReadSimple</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -303,9 +307,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="85" column="3" bodyfile="lib/Classes/FasterReader.hpp" bodystart="85" bodyend="85"/>
-        <references refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</references>
-        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="162">m_kReady</references>
+        <location file="lib/Classes/FasterReader.hpp" line="79" column="3" bodyfile="lib/Classes/FasterReader.hpp" bodystart="79" bodyend="82"/>
+        <references refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</references>
+        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="161">m_kReady</references>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1add1cd47aee08955e9a1fb11782129714" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -319,9 +323,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="134" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="134" bodyend="134"/>
-        <references refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" compoundref="_faster_reader_8hpp" startline="161">m_filename</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="132" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="132" bodyend="132"/>
+        <references refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" compoundref="_faster_reader_8hpp" startline="160">m_filename</references>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a0e799cf6b890a3ca281819efeb2df29e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -335,9 +339,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="140" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="140" bodyend="140"/>
-        <references refid="class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a" compoundref="_faster_reader_8hpp" startline="157">m_counter</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="138" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="138" bodyend="138"/>
+        <references refid="class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a" compoundref="_faster_reader_8hpp" startline="156">m_counter</references>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1aab416287bd95c5dad74fff1ebb45d3c8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -351,10 +355,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="137" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="137" bodyend="137"/>
-        <references refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" compoundref="_faster_reader_8hpp" startline="161">m_filename</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
-        <referencedby refid="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" compoundref="_faster2_histo_8hpp" startline="132" endline="144">Faster2Histo::treatFile</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="135" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="135" bodyend="135"/>
+        <references refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" compoundref="_faster_reader_8hpp" startline="160">m_filename</references>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" compoundref="_faster2_histo_8hpp" startline="201" endline="214">Faster2Histo::treatFile</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a152cfc9a0973c4a754e248c3e0326bea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="class_hit" kindref="compound">Hit</ref> *</type>
@@ -364,13 +368,13 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para><xrefsect id="deprecated_1_deprecated000001"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Get the current <ref refid="class_hit" kindref="compound">Hit</ref> </para>
+<para><xrefsect id="deprecated_1_deprecated000003"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Get the current <ref refid="class_hit" kindref="compound">Hit</ref> </para>
 </xrefdescription></xrefsect></para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="125" column="7" bodyfile="lib/Classes/FasterReader.hpp" bodystart="125" bodyend="125"/>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
+        <location file="lib/Classes/FasterReader.hpp" line="123" column="7" bodyfile="lib/Classes/FasterReader.hpp" bodystart="123" bodyend="123"/>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a5aefeb0380dfdd42d1e63b987989a118" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool const  &amp;</type>
@@ -384,8 +388,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="128" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="128" bodyend="128"/>
-        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="162">m_kReady</references>
+        <location file="lib/Classes/FasterReader.hpp" line="126" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="126" bodyend="126"/>
+        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="161">m_kReady</references>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a613b5de02c11764659a3b90b8e8f0b0b" prot="public" static="no" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
         <type></type>
@@ -399,8 +403,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="131" column="3" bodyfile="lib/Classes/FasterReader.hpp" bodystart="131" bodyend="131"/>
-        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="162">m_kReady</references>
+        <location file="lib/Classes/FasterReader.hpp" line="129" column="3" bodyfile="lib/Classes/FasterReader.hpp" bodystart="129" bodyend="129"/>
+        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="161">m_kReady</references>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -414,7 +418,7 @@
 <para><ref refid="class_hit" kindref="compound">Hit</ref> hit;</para>
 <para><ref refid="class_faster_reader" kindref="compound">FasterReader</ref> reader(&amp;hit, filename); <verbatim> while(reader.Read())
  {
-    // This hit is filled/updated at each iteration by the data read in the ReadData() private method
+    // This hit is filled/updated at each iteration
     print(hit); 
  }
 </verbatim></para>
@@ -424,20 +428,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="112" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="259" bodyend="270"/>
-        <references refid="class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a" compoundref="_faster_reader_8hpp" startline="157">m_counter</references>
-        <references refid="class_faster_reader_1a8554231dbef9df122f04313f4adb594a" compoundref="_faster_reader_8hpp" startline="155">m_maxHits</references>
-        <references refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" compoundref="_faster_reader_8hpp" startline="163">m_write</references>
-        <references refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</references>
-        <references refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="278" endline="289">ReadSimple</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
-        <referencedby refid="class_my_simple_convertor_1a81d6aadfcbadae6e83dbacc86735a0c5" compoundref="_faster2_root_8hpp" startline="416" endline="442">MySimpleConvertor::convertFile</referencedby>
-        <referencedby refid="class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a" compoundref="_calibration_8hpp" startline="527" endline="544">Calibration::fillHisto</referencedby>
-        <referencedby refid="_timeshifts_8hpp_1a202a57630e2aa9744043c30964b64bcd" compoundref="_timeshifts_8hpp" startline="612" endline="618">get_first_RF_of_file</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="109" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="263" bodyend="274"/>
+        <references refid="class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a" compoundref="_faster_reader_8hpp" startline="156">m_counter</references>
+        <references refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" compoundref="_faster_reader_8hpp" startline="162">m_write</references>
+        <references refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</references>
+        <references refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="282" endline="293">ReadSimple</references>
+        <references refid="class_faster_reader_1aa58b38ff4c8f95526ea529cdaaa1f8f8" compoundref="_faster_reader_8hpp" startline="153">s_maxHits</references>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_my_simple_convertor_1a81d6aadfcbadae6e83dbacc86735a0c5" compoundref="_faster2_root_8hpp" startline="426" endline="452">MySimpleConvertor::convertFile</referencedby>
+        <referencedby refid="class_calibrator_1a87ba405f3d9af67c43789893fc5ff534" compoundref="_calibrator_8hpp" startline="401" endline="413">Calibrator::fillHisto</referencedby>
+        <referencedby refid="_timeshifts_8hpp_1a202a57630e2aa9744043c30964b64bcd" compoundref="_timeshifts_8hpp" startline="680" endline="686">get_first_RF_of_file</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="226" endline="245">MTFasterReader::Realign</referencedby>
-        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
-        <referencedby refid="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" compoundref="_faster2_histo_8hpp" startline="132" endline="144">Faster2Histo::treatFile</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="234" endline="253">MTFasterReader::Realign</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="732" endline="771">Timeshifts::treatFasterFile</referencedby>
+        <referencedby refid="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" compoundref="_faster2_histo_8hpp" startline="201" endline="214">Faster2Histo::treatFile</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -451,15 +455,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="94" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="189" bodyend="201"/>
-        <references refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</references>
-        <references refid="class_faster_reader_1ac285d052a5dea4e6c61537c9c95dcd28" compoundref="_faster_reader_8hpp" startline="172">m_alias</references>
-        <references refid="class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a" compoundref="_faster_reader_8hpp" startline="157">m_counter</references>
-        <references refid="class_faster_reader_1a95a022f50153b44f711a81e8109583ce" compoundref="_faster_reader_8hpp" startline="171">m_data</references>
-        <references refid="class_faster_reader_1ae9b49fa4ed0663ab809a48193877beb4" compoundref="_faster_reader_8hpp" startline="166">m_group_read_cursor</references>
-        <references refid="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" compoundref="_faster_reader_8hpp" startline="167">m_group_write_cursor</references>
-        <references refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" compoundref="_faster_reader_8hpp" startline="168">m_inGroup</references>
-        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="170">m_reader</references>
+        <location file="lib/Classes/FasterReader.hpp" line="91" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="189" bodyend="201"/>
+        <references refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</references>
+        <references refid="class_faster_reader_1ac285d052a5dea4e6c61537c9c95dcd28" compoundref="_faster_reader_8hpp" startline="171">m_alias</references>
+        <references refid="class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a" compoundref="_faster_reader_8hpp" startline="156">m_counter</references>
+        <references refid="class_faster_reader_1a95a022f50153b44f711a81e8109583ce" compoundref="_faster_reader_8hpp" startline="170">m_data</references>
+        <references refid="class_faster_reader_1ae9b49fa4ed0663ab809a48193877beb4" compoundref="_faster_reader_8hpp" startline="165">m_group_read_cursor</references>
+        <references refid="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" compoundref="_faster_reader_8hpp" startline="166">m_group_write_cursor</references>
+        <references refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" compoundref="_faster_reader_8hpp" startline="167">m_inGroup</references>
+        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="169">m_reader</references>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1ad88f1dfb85bb64d8526770ffbeca5607" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -478,8 +482,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="117" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="117" bodyend="117"/>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
+        <location file="lib/Classes/FasterReader.hpp" line="114" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="114" bodyend="114"/>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1af0c896c5302be52b2f839fd1885d1ecc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -493,11 +497,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="88" column="3" bodyfile="lib/Classes/FasterReader.hpp" bodystart="88" bodyend="91"/>
-        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="170">m_reader</references>
+        <location file="lib/Classes/FasterReader.hpp" line="85" column="3" bodyfile="lib/Classes/FasterReader.hpp" bodystart="85" bodyend="88"/>
+        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="169">m_reader</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_faster_reader_1a54f783429b2ce11a478280f5aa0ab2a4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>static auto FasterReader::getMaxHits</definition>
+        <argsstring>()</argsstring>
+        <name>getMaxHits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/FasterReader.hpp" line="118" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="118" bodyend="118"/>
+        <references refid="class_faster_reader_1aa58b38ff4c8f95526ea529cdaaa1f8f8" compoundref="_faster_reader_8hpp" startline="153">s_maxHits</references>
+      </memberdef>
       <memberdef kind="function" id="class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>static void FasterReader::setMaxHits</definition>
@@ -514,20 +532,41 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="120" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="120" bodyend="120"/>
-        <references refid="class_faster_reader_1a8554231dbef9df122f04313f4adb594a" compoundref="_faster_reader_8hpp" startline="155">m_maxHits</references>
-        <referencedby refid="class_clover_spectra_1a353ec66774413feefb33a784ce2159cf" compoundref="_clover_spectra_8hpp" startline="114" endline="145">CloverSpectra::Initialize</referencedby>
-        <referencedby refid="class_faster2_root_1ad30ccf937150bbd3504ec3a354b76c8f" compoundref="_faster2_root_8hpp" startline="209" endline="263">Faster2Root::load</referencedby>
-        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">Faster2Histo::load</referencedby>
-        <referencedby refid="class_near_line_1a3280d6187c79a0aaf4f23b97fe3089ee" compoundref="_near_line_8hpp" startline="40" endline="64">NearLine::readParam</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="117" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="117" bodyend="117"/>
+        <references refid="class_m_t_object_1a79d86fbc8837ba0f9a4cd1405fddef1c" compoundref="_m_t_object_8hpp" startline="246">MTObject::mutex</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_faster_reader_1aa58b38ff4c8f95526ea529cdaaa1f8f8" compoundref="_faster_reader_8hpp" startline="153">s_maxHits</references>
+        <referencedby refid="class_clover_spectra_1a84dbd5cac3977a0082ab763d51f938d7" compoundref="_clover_spectra_8hpp" startline="114" endline="145">CloverSpectra::Initialise</referencedby>
+        <referencedby refid="class_faster2_root_1ad30ccf937150bbd3504ec3a354b76c8f" compoundref="_faster2_root_8hpp" startline="211" endline="265">Faster2Root::load</referencedby>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="146" endline="187">Faster2Histo::load</referencedby>
+        <referencedby refid="class_near_line_1a3280d6187c79a0aaf4f23b97fe3089ee" compoundref="_near_line_8hpp" startline="44" endline="68">NearLine::readParam</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_faster_reader_1a76b7fa1bc82b5a5dff918bef2ae7d3a0" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void FasterReader::setVerbose</definition>
+        <argsstring>(int i=1)</argsstring>
+        <name>setVerbose</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/FasterReader.hpp" line="119" column="15" bodyfile="lib/Classes/FasterReader.hpp" bodystart="119" bodyend="119"/>
+        <references refid="class_faster_reader_1a5d60fc12eece11753c5d495ba76db75f" compoundref="_faster_reader_8hpp" startline="154">m_verbose</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
-      <memberdef kind="function" id="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_faster_reader_1aa887429a942ff961225755336c06c025" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
-        <definition>bool FasterReader::Initialize</definition>
+        <definition>bool FasterReader::Initialise</definition>
         <argsstring>()</argsstring>
-        <name>Initialize</name>
+        <name>Initialise</name>
         <briefdescription>
 <para>Setup the fasterac.h library to read the data. </para>
         </briefdescription>
@@ -535,34 +574,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="145" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="203" bodyend="241"/>
-        <references refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" compoundref="files__functions_8hpp" startline="20" endline="20">extension</references>
-        <references refid="class_faster_reader_1a21a9202f79d43b9fd41cd1e1c276fe2c" compoundref="_faster_reader_8hpp" startline="243" endline="253">InitializeReader</references>
-        <references refid="class_faster_reader_1a8150da77ef499006286e92ae4d65436d" compoundref="_faster_reader_8hpp" startline="160">m_empty_hit</references>
-        <references refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" compoundref="_faster_reader_8hpp" startline="161">m_filename</references>
-        <references refid="class_faster_reader_1ae9b49fa4ed0663ab809a48193877beb4" compoundref="_faster_reader_8hpp" startline="166">m_group_read_cursor</references>
-        <references refid="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" compoundref="_faster_reader_8hpp" startline="167">m_group_write_cursor</references>
-        <references refid="class_faster_reader_1a96edba4f7a1a64796627bfd1fbdf1c92" compoundref="_faster_reader_8hpp" startline="169">m_hit_group_buffer</references>
-        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="162">m_kReady</references>
-        <referencedby refid="class_faster_reader_1af4dd68bbc6c027e1c35bfd5b52525002" compoundref="_faster_reader_8hpp" startline="85" endline="85">FasterReader</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="143" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="204" bodyend="245"/>
+        <references refid="files__functions_8hpp_1a321abbd0681c4da012deaf49122389c5" compoundref="files__functions_8hpp" startline="25" endline="25">extension</references>
+        <references refid="class_faster_reader_1a83d86d816bed5053765a05ddf4da278d" compoundref="_faster_reader_8hpp" startline="247" endline="257">InitialiseReader</references>
+        <references refid="class_faster_reader_1a8150da77ef499006286e92ae4d65436d" compoundref="_faster_reader_8hpp" startline="159">m_empty_hit</references>
+        <references refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" compoundref="_faster_reader_8hpp" startline="160">m_filename</references>
+        <references refid="class_faster_reader_1ae9b49fa4ed0663ab809a48193877beb4" compoundref="_faster_reader_8hpp" startline="165">m_group_read_cursor</references>
+        <references refid="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" compoundref="_faster_reader_8hpp" startline="166">m_group_write_cursor</references>
+        <references refid="class_faster_reader_1a96edba4f7a1a64796627bfd1fbdf1c92" compoundref="_faster_reader_8hpp" startline="168">m_hit_group_buffer</references>
+        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="161">m_kReady</references>
+        <references refid="class_faster_reader_1a5d60fc12eece11753c5d495ba76db75f" compoundref="_faster_reader_8hpp" startline="154">m_verbose</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <referencedby refid="class_faster_reader_1af4dd68bbc6c027e1c35bfd5b52525002" compoundref="_faster_reader_8hpp" startline="79" endline="82">FasterReader</referencedby>
         <referencedby refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" compoundref="_faster_reader_8hpp" startline="189" endline="201">Reset</referencedby>
       </memberdef>
-      <memberdef kind="function" id="class_faster_reader_1a21a9202f79d43b9fd41cd1e1c276fe2c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="class_faster_reader_1a83d86d816bed5053765a05ddf4da278d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
-        <definition>bool FasterReader::InitializeReader</definition>
+        <definition>bool FasterReader::InitialiseReader</definition>
         <argsstring>()</argsstring>
-        <name>InitializeReader</name>
+        <name>InitialiseReader</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="153" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="243" bodyend="253"/>
-        <references refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" compoundref="_faster_reader_8hpp" startline="161">m_filename</references>
-        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="162">m_kReady</references>
-        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="170">m_reader</references>
-        <referencedby refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" compoundref="_faster_reader_8hpp" startline="203" endline="241">Initialize</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="151" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="247" bodyend="257"/>
+        <references refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" compoundref="_faster_reader_8hpp" startline="160">m_filename</references>
+        <references refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" compoundref="_faster_reader_8hpp" startline="161">m_kReady</references>
+        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="169">m_reader</references>
+        <references refid="class_faster_reader_1a5d60fc12eece11753c5d495ba76db75f" compoundref="_faster_reader_8hpp" startline="154">m_verbose</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">Initialise</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -581,21 +624,22 @@
         <inbodydescription>
 <para>FASTER_GROUP</para>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="150" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="348" bodyend="377"/>
-        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">Hit::label</references>
-        <references refid="class_faster_reader_1ac285d052a5dea4e6c61537c9c95dcd28" compoundref="_faster_reader_8hpp" startline="172">m_alias</references>
-        <references refid="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" compoundref="_faster_reader_8hpp" startline="167">m_group_write_cursor</references>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
-        <references refid="class_faster_reader_1a96edba4f7a1a64796627bfd1fbdf1c92" compoundref="_faster_reader_8hpp" startline="169">m_hit_group_buffer</references>
-        <references refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" compoundref="_faster_reader_8hpp" startline="168">m_inGroup</references>
-        <references refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" compoundref="_faster_reader_8hpp" startline="163">m_write</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">Hit::qdc2</references>
-        <references refid="class_faster_reader_1a64fb4fc3d241141f5d27df99906780fc" compoundref="_faster_reader_8hpp" startline="386" endline="401">ReadDataGroup</references>
-        <references refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="411" endline="447">switch_alias</references>
-        <references refid="_hit_8hpp_1a3bbfcd7f9bbec3174213c2b5eedc2edd" compoundref="_hit_8hpp" startline="58" endline="58">Timestamp_cast</references>
-        <referencedby refid="class_faster_reader_1a64fb4fc3d241141f5d27df99906780fc" compoundref="_faster_reader_8hpp" startline="386" endline="401">ReadDataGroup</referencedby>
-        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="310" endline="343">ReadGroup</referencedby>
-        <referencedby refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="278" endline="289">ReadSimple</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="148" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="352" bodyend="381"/>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="204">Hit::label</references>
+        <references refid="class_faster_reader_1ac285d052a5dea4e6c61537c9c95dcd28" compoundref="_faster_reader_8hpp" startline="171">m_alias</references>
+        <references refid="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" compoundref="_faster_reader_8hpp" startline="166">m_group_write_cursor</references>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
+        <references refid="class_faster_reader_1a96edba4f7a1a64796627bfd1fbdf1c92" compoundref="_faster_reader_8hpp" startline="168">m_hit_group_buffer</references>
+        <references refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" compoundref="_faster_reader_8hpp" startline="167">m_inGroup</references>
+        <references refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" compoundref="_faster_reader_8hpp" startline="162">m_write</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">Hit::qdc2</references>
+        <references refid="class_faster_reader_1a64fb4fc3d241141f5d27df99906780fc" compoundref="_faster_reader_8hpp" startline="390" endline="405">ReadDataGroup</references>
+        <references refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="415" endline="451">switch_alias</references>
+        <references refid="_hit_8hpp_1a3bbfcd7f9bbec3174213c2b5eedc2edd" compoundref="_hit_8hpp" startline="61" endline="61">Timestamp_cast</references>
+        <referencedby refid="class_faster_reader_1a64fb4fc3d241141f5d27df99906780fc" compoundref="_faster_reader_8hpp" startline="390" endline="405">ReadDataGroup</referencedby>
+        <referencedby refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" compoundref="_faster_reader_8hpp" startline="314" endline="347">ReadGroup</referencedby>
+        <referencedby refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" compoundref="_faster_reader_8hpp" startline="282" endline="293">ReadSimple</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a64fb4fc3d241141f5d27df99906780fc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -613,10 +657,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="149" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="386" bodyend="401"/>
-        <references refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" compoundref="_faster_reader_8hpp" startline="168">m_inGroup</references>
-        <references refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</references>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="147" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="390" bodyend="405"/>
+        <references refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" compoundref="_faster_reader_8hpp" startline="167">m_inGroup</references>
+        <references refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</references>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -630,17 +674,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="148" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="310" bodyend="343"/>
-        <references refid="class_faster_reader_1a95a022f50153b44f711a81e8109583ce" compoundref="_faster_reader_8hpp" startline="171">m_data</references>
-        <references refid="class_faster_reader_1ae9b49fa4ed0663ab809a48193877beb4" compoundref="_faster_reader_8hpp" startline="166">m_group_read_cursor</references>
-        <references refid="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" compoundref="_faster_reader_8hpp" startline="167">m_group_write_cursor</references>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
-        <references refid="class_faster_reader_1a96edba4f7a1a64796627bfd1fbdf1c92" compoundref="_faster_reader_8hpp" startline="169">m_hit_group_buffer</references>
-        <references refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" compoundref="_faster_reader_8hpp" startline="168">m_inGroup</references>
-        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="170">m_reader</references>
-        <references refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" compoundref="_faster_reader_8hpp" startline="163">m_write</references>
-        <references refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</references>
-        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="259" endline="270">Read</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="146" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="314" bodyend="347"/>
+        <references refid="class_faster_reader_1a95a022f50153b44f711a81e8109583ce" compoundref="_faster_reader_8hpp" startline="170">m_data</references>
+        <references refid="class_faster_reader_1ae9b49fa4ed0663ab809a48193877beb4" compoundref="_faster_reader_8hpp" startline="165">m_group_read_cursor</references>
+        <references refid="class_faster_reader_1acae297c3fa67057ecf6e6c25b87e5e2b" compoundref="_faster_reader_8hpp" startline="166">m_group_write_cursor</references>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
+        <references refid="class_faster_reader_1a96edba4f7a1a64796627bfd1fbdf1c92" compoundref="_faster_reader_8hpp" startline="168">m_hit_group_buffer</references>
+        <references refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" compoundref="_faster_reader_8hpp" startline="167">m_inGroup</references>
+        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="169">m_reader</references>
+        <references refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" compoundref="_faster_reader_8hpp" startline="162">m_write</references>
+        <references refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</references>
+        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="263" endline="274">Read</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -655,12 +699,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="147" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="278" bodyend="289"/>
-        <references refid="class_faster_reader_1a95a022f50153b44f711a81e8109583ce" compoundref="_faster_reader_8hpp" startline="171">m_data</references>
-        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="170">m_reader</references>
-        <references refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" compoundref="_faster_reader_8hpp" startline="163">m_write</references>
-        <references refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</references>
-        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="259" endline="270">Read</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="145" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="282" bodyend="293"/>
+        <references refid="class_faster_reader_1a95a022f50153b44f711a81e8109583ce" compoundref="_faster_reader_8hpp" startline="170">m_data</references>
+        <references refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" compoundref="_faster_reader_8hpp" startline="169">m_reader</references>
+        <references refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" compoundref="_faster_reader_8hpp" startline="162">m_write</references>
+        <references refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</references>
+        <referencedby refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="263" endline="274">Read</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -683,14 +727,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="151" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="411" bodyend="447"/>
-        <references refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="478" endline="491">TreatCRRC4</references>
-        <references refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="499" endline="514">TreatQDC1</references>
-        <references refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="522" endline="546">TreatQDC2</references>
-        <references refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="554" endline="578">TreatQDC3</references>
-        <references refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="586" endline="599">TreatRF</references>
-        <references refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="455" endline="468">TreatTrapez</references>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">ReadData</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="149" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="415" bodyend="451"/>
+        <references refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="482" endline="495">TreatCRRC4</references>
+        <references refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="503" endline="518">TreatQDC1</references>
+        <references refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="526" endline="550">TreatQDC2</references>
+        <references refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="558" endline="582">TreatQDC3</references>
+        <references refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="590" endline="603">TreatRF</references>
+        <references refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="459" endline="472">TreatTrapez</references>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">ReadData</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -712,13 +756,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="175" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="478" bodyend="491"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">Hit::adc</references>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">Hit::pileup</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">Hit::qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">Hit::qdc3</references>
-        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="411" endline="447">switch_alias</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="174" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="482" bodyend="495"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">Hit::adc</references>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">Hit::pileup</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">Hit::qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">Hit::qdc3</references>
+        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="415" endline="451">switch_alias</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -737,13 +781,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="176" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="499" bodyend="514"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">Hit::adc</references>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">Hit::pileup</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">Hit::qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">Hit::qdc3</references>
-        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="411" endline="447">switch_alias</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="175" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="503" bodyend="518"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">Hit::adc</references>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">Hit::pileup</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">Hit::qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">Hit::qdc3</references>
+        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="415" endline="451">switch_alias</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a94fd509a6352735984a20c03fb046254" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -762,14 +806,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="177" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="522" bodyend="546"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">Hit::adc</references>
-        <references refid="class_faster_reader_1ae21a765c80bcf2f928bfd6e4f6b8abbf" compoundref="_faster_reader_8hpp" startline="181">error_message</references>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">Hit::pileup</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">Hit::qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">Hit::qdc3</references>
-        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="411" endline="447">switch_alias</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="176" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="526" bodyend="550"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">Hit::adc</references>
+        <references refid="class_faster_reader_1ae21a765c80bcf2f928bfd6e4f6b8abbf" compoundref="_faster_reader_8hpp" startline="180">error_message</references>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">Hit::pileup</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">Hit::qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">Hit::qdc3</references>
+        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="415" endline="451">switch_alias</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -788,14 +833,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="178" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="554" bodyend="578"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">Hit::adc</references>
-        <references refid="class_faster_reader_1ae21a765c80bcf2f928bfd6e4f6b8abbf" compoundref="_faster_reader_8hpp" startline="181">error_message</references>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">Hit::pileup</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">Hit::qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">Hit::qdc3</references>
-        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="411" endline="447">switch_alias</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="177" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="558" bodyend="582"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">Hit::adc</references>
+        <references refid="class_faster_reader_1ae21a765c80bcf2f928bfd6e4f6b8abbf" compoundref="_faster_reader_8hpp" startline="180">error_message</references>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">Hit::pileup</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">Hit::qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">Hit::qdc3</references>
+        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="415" endline="451">switch_alias</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -814,14 +860,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="179" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="586" bodyend="599"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">Hit::adc</references>
-        <references refid="_hit_8hpp_1a42de29176eeb225c09486aa0dcac5362" compoundref="_hit_8hpp" startline="42" endline="42">ADC_cast</references>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">Hit::pileup</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">Hit::qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">Hit::qdc3</references>
-        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="411" endline="447">switch_alias</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="178" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="590" bodyend="603"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">Hit::adc</references>
+        <references refid="_hit_8hpp_1a42de29176eeb225c09486aa0dcac5362" compoundref="_hit_8hpp" startline="45" endline="45">ADC_cast</references>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">Hit::pileup</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">Hit::qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">Hit::qdc3</references>
+        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="415" endline="451">switch_alias</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -840,13 +886,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/FasterReader.hpp" line="174" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="455" bodyend="468"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">Hit::adc</references>
-        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="159">m_hit</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">Hit::pileup</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">Hit::qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">Hit::qdc3</references>
-        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="411" endline="447">switch_alias</referencedby>
+        <location file="lib/Classes/FasterReader.hpp" line="173" column="8" bodyfile="lib/Classes/FasterReader.hpp" bodystart="459" bodyend="472"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">Hit::adc</references>
+        <references refid="class_faster_reader_1ad4e298455ea7776ad41d803f50796432" compoundref="_faster_reader_8hpp" startline="158">m_hit</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">Hit::pileup</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">Hit::qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">Hit::qdc3</references>
+        <referencedby refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" compoundref="_faster_reader_8hpp" startline="415" endline="451">switch_alias</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -906,7 +952,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="lib/Classes/FasterReader.hpp" line="81" column="1" bodyfile="lib/Classes/FasterReader.hpp" bodystart="82" bodyend="182"/>
+    <location file="lib/Classes/FasterReader.hpp" line="75" column="1" bodyfile="lib/Classes/FasterReader.hpp" bodystart="76" bodyend="181"/>
     <listofallmembers>
       <member refid="class_faster_reader_1ae21a765c80bcf2f928bfd6e4f6b8abbf" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>error_message</name></member>
       <member refid="class_faster_reader_1af4dd68bbc6c027e1c35bfd5b52525002" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>FasterReader</name></member>
@@ -914,12 +960,12 @@
       <member refid="class_faster_reader_1a0e799cf6b890a3ca281819efeb2df29e" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>getCounter</name></member>
       <member refid="class_faster_reader_1aab416287bd95c5dad74fff1ebb45d3c8" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>getFilename</name></member>
       <member refid="class_faster_reader_1a152cfc9a0973c4a754e248c3e0326bea" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>getHit</name></member>
-      <member refid="class_faster_reader_1a949601e8d70fc3aaabe66824d22bdf69" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>Initialize</name></member>
-      <member refid="class_faster_reader_1a21a9202f79d43b9fd41cd1e1c276fe2c" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>InitializeReader</name></member>
+      <member refid="class_faster_reader_1a54f783429b2ce11a478280f5aa0ab2a4" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>getMaxHits</name></member>
+      <member refid="class_faster_reader_1aa887429a942ff961225755336c06c025" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>Initialise</name></member>
+      <member refid="class_faster_reader_1a83d86d816bed5053765a05ddf4da278d" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>InitialiseReader</name></member>
       <member refid="class_faster_reader_1a5aefeb0380dfdd42d1e63b987989a118" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>isReady</name></member>
       <member refid="class_faster_reader_1ac285d052a5dea4e6c61537c9c95dcd28" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_alias</name></member>
       <member refid="class_faster_reader_1a9709ea4e034d6cf92c107d8c5bff232a" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_counter</name></member>
-      <member refid="class_faster_reader_1a681170463697b5dd3856328eacb0a39d" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_cursor</name></member>
       <member refid="class_faster_reader_1a95a022f50153b44f711a81e8109583ce" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_data</name></member>
       <member refid="class_faster_reader_1a8150da77ef499006286e92ae4d65436d" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_empty_hit</name></member>
       <member refid="class_faster_reader_1a818df2ca2de45cbbabf1efc83b98cb53" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_filename</name></member>
@@ -929,8 +975,8 @@
       <member refid="class_faster_reader_1a96edba4f7a1a64796627bfd1fbdf1c92" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_hit_group_buffer</name></member>
       <member refid="class_faster_reader_1a49b96919779759c068b03b24f379d024" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_inGroup</name></member>
       <member refid="class_faster_reader_1a2d5ba6a3aa8089fcabdbc7fb88555ea3" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_kReady</name></member>
-      <member refid="class_faster_reader_1a8554231dbef9df122f04313f4adb594a" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_maxHits</name></member>
       <member refid="class_faster_reader_1ac10e47db05e3067528e3ce53d5b3da38" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_reader</name></member>
+      <member refid="class_faster_reader_1a5d60fc12eece11753c5d495ba76db75f" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_verbose</name></member>
       <member refid="class_faster_reader_1abd85697a856dc998d235a5edc0ebb530" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>m_write</name></member>
       <member refid="class_faster_reader_1a613b5de02c11764659a3b90b8e8f0b0b" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>operator bool</name></member>
       <member refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>Read</name></member>
@@ -939,8 +985,10 @@
       <member refid="class_faster_reader_1aef9fb9be5f288b88bdb17616aab801bd" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>ReadGroup</name></member>
       <member refid="class_faster_reader_1a60f1f638732c48c1b78cfe4dcd23d39b" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>ReadSimple</name></member>
       <member refid="class_faster_reader_1a14f1b927723963d833b5180c39bc9957" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>Reset</name></member>
+      <member refid="class_faster_reader_1aa58b38ff4c8f95526ea529cdaaa1f8f8" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>s_maxHits</name></member>
       <member refid="class_faster_reader_1ad88f1dfb85bb64d8526770ffbeca5607" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>setHit</name></member>
       <member refid="class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>setMaxHits</name></member>
+      <member refid="class_faster_reader_1a76b7fa1bc82b5a5dff918bef2ae7d3a0" prot="public" virt="non-virtual"><scope>FasterReader</scope><name>setVerbose</name></member>
       <member refid="class_faster_reader_1af3c8f411415fb3d9fe20cd8551bc24ed" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>switch_alias</name></member>
       <member refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>TreatCRRC4</name></member>
       <member refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" prot="private" virt="non-virtual"><scope>FasterReader</scope><name>TreatQDC1</name></member>

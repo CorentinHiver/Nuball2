@@ -30,6 +30,8 @@ Collaboration diagram for MTFasterReader:<para>
 </listitem>
             <listitem><para>auto const  &amp; <link linkend="_class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5">files</link> () const</para>
 </listitem>
+            <listitem><para>auto &amp; <link linkend="_class_m_t_faster_reader_1a023fdc6cdd455017dc7e911820206ac0">getFilesList</link> ()</para>
+</listitem>
             <listitem><para><link linkend="_class_m_t_faster_reader_1ad7f0fc9a9cd713d59870a91c86d8ad9a">MTFasterReader</link> ()</para>
 
 <para>Default constructor. </para>
@@ -55,6 +57,13 @@ Collaboration diagram for MTFasterReader:<para>
             <listitem><para>void <link linkend="_class_m_t_faster_reader_1a39cce770cb5f6dc49e2ae2558d709af6">setTimeshifts</link> (std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; const &amp;timeshifts)</para>
 </listitem>
             <listitem><para>auto const  &amp; <link linkend="_class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822">timeshift</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;label) const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static void <link linkend="_class_m_t_faster_reader_1a91677f13aa03d3b2f9dee6eb252286d1">showProgressBar</link> (bool const &amp;choice=true)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -85,6 +94,13 @@ Collaboration diagram for MTFasterReader:<para>
 </listitem>
         </itemizedlist>
 </simplesect>
+<simplesect>
+    <title>Static Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static bool <link linkend="_class_m_t_faster_reader_1aca07d380d9a702313f523c1eea28c0d0">s_progressBar</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
 <section>
 <title>Detailed Description</title>
 
@@ -96,37 +112,16 @@ Collaboration diagram for MTFasterReader:<para>
 <section xml:id="_class_m_t_faster_reader_1autotoc_md0">
 <title>How to use this class</title>
 
-<para>First, you&apos;ll need to activate the multithreading :</para>
+<para>First, you&apos;ll need to activate the multithreading : <literallayout><computeroutput>   MTObject::Initialise(nb_threads)
+</computeroutput></literallayout> Then instanciate this class : <literallayout><computeroutput>   MTFasterReader reader(folder_name, first_n_files);
+</computeroutput></literallayout> To read all the files then leave the second argument empty</para>
 
-<para>MTObject::Initialize(nb_threads)</para>
+<para>Then, use the readRaw(function, arguments...) method to run any user defined function. <literallayout><computeroutput>   reader.readRaw(function, arguments...);
+</computeroutput></literallayout> Carefull : this function MUST have the following arguments is this EXACT order : <literallayout><computeroutput>   return_type function(Hit &amp; hit, FasterReader &amp; reader, arguments...)
+</computeroutput></literallayout> This function can also be a static method of an object, but CANNOT be a member</para>
 
-<para>Then instanciate this class :</para>
-
-<para><orderedlist>
-<listitem>
-<para><link linkend="_class_m_t_faster_reader">MTFasterReader</link> reader(folder_name, first_n_files);</para>
-</listitem></orderedlist>
-</para>
-
-<para>To read all the files then leave the second argument empty</para>
-
-<para>Then, use the readRaw(function, arguments...) method to run any user defined function.</para>
-
-<para><orderedlist>
-<listitem>
-<para>reader.readRaw(function, arguments...);</para>
-</listitem></orderedlist>
-</para>
-
-<para>Carefull : this function MUST have the following arguments is this EXACT order :</para>
-
-<para>return_type function(Hit &amp; hit, FasterReader &amp; reader, arguments...)</para>
-
-<para>This function can also be a static method of an object, but CANNOT be a member</para>
-
-<para>The trick to use the object anyway is to pass it as an argument :</para>
-
-<para>static return_type myClass::function(Hit &amp; hit, FasterReader &amp; reader, myClass &amp; class, arguments...);</para>
+<para>The trick to use the object anyway is to pass it as an argument : <literallayout><computeroutput>   static return_type myClass::function(Hit &amp; hit, FasterReader &amp; reader, myClass &amp; class, arguments...);
+</computeroutput></literallayout></para>
 
 <para>Here is a minimal code snippet : <literallayout><computeroutput> void function(Hit &amp; hit, FasterReader &amp; reader, Arg &amp; some_argument) 
  {
@@ -140,15 +135,13 @@ Collaboration diagram for MTFasterReader:<para>
 
  int main()
  {
-    MTObject::Initialize(n); // n being an appropriate number of threads.
+    MTObject::Initialise(n); // n being an appropriate number of threads.
     MTFasterReader reader(folder);
     Arg some_argument;
     reader.readRaw(function, some_argument);
     // Do something with the argument like print(some_argument) or some_argument.Write()
  }
-</computeroutput></literallayout> Here are two function examples. The third parameter has been instanciated before the <link linkend="_class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513">MTFasterReader::readRaw()</link> method call</para>
-
-<para><literallayout><computeroutput>   void counter(Hit &amp; hit, FasterReader &amp; reader, MTCounter &amp; counterMT)
+</computeroutput></literallayout> Here are two function examples. The third parameter has been instanciated before the <link linkend="_class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513">MTFasterReader::readRaw()</link> method call <literallayout><computeroutput>   void counter(Hit &amp; hit, FasterReader &amp; reader, MTCounter &amp; counterMT)
     {
        int counter = 0;
        while(reader.Read())
@@ -168,7 +161,7 @@ Collaboration diagram for MTFasterReader:<para>
    }
 </computeroutput></literallayout> (see <link linkend="_class_m_t_t_hist">MTTHist</link> and <link linkend="_class_m_t_counter">MTCounter</link> documentation)</para>
 
-<para>It is recommended to use the &quot;&amp;&quot; symbol (reference) before the other as well parameters so that they are shared between threads, therefore only with thread safe objects, but it is not mandatory. If you want to pass read-only objects (i.e. lookup tables), consider adding the &quot;const&quot; key word like that : (..., type const &amp; lookup_table, ...). Another work-around is simply to declare your parameter at a global scope, although it is not recommended to have too many of them. </para>
+<para>It is recommended to pass the variables by reference (adding the &apos;&amp;&apos; character) for the parameters so that they are shared between threads. Therefore this should only be done for thread safe objects, like any object in the folder MTObjects/ or stl stuff, or read-only variables. If you want to pass read-only objects (i.e. lookup tables), consider adding the &quot;const&quot; key word (..., type const &amp; lookup_table, ...). Another work-around is simply to declare your parameter at a global scope, although it is not recommended to have too many global variables. </para>
 </section>
 </section>
 <section>
@@ -258,15 +251,6 @@ Here is the call graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a8693e1143a0aea8096a527c7d9df9a63_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
     </section><anchor xml:id="_class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288"/>    <section>
     <title>addFolder()</title>
 <indexterm><primary>addFolder</primary><secondary>MTFasterReader</secondary></indexterm>
@@ -303,6 +287,19 @@ Here is the caller graph for this function:<para>
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a5d2beaf7551d9b288eef9509daf8b3b5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a023fdc6cdd455017dc7e911820206ac0"/>    <section>
+    <title>getFilesList()</title>
+<indexterm><primary>getFilesList</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>getFilesList</secondary></indexterm>
+<para><computeroutput>auto&amp; MTFasterReader::getFilesList ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a023fdc6cdd455017dc7e911820206ac0_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -379,7 +376,7 @@ Parameters                    </title>
                             <row>
                                 <entry>func</entry>
                                 <entry>
-<para>: Must be of the form func(Hit &amp; hit, Alignator &amp; alignedTree, args...) with args </para>
+<para>: Must be of the form func(Hit &amp; hit, Alignator &amp; alignedTree, args...). <link linkend="_class_alignator">Alignator</link> is a simple wrapper around a tree. Use alignedTree::GetEntry </para>
 </entry>
                             </row>
                         </tbody>
@@ -450,9 +447,9 @@ Parameters                    </title>
                     </para>
                 </formalpara>
                 The declared function MUST have its two first parameters as follow : type function(Hit &amp; hit, FasterReader &amp; reader, ...); You can add any other parameter in the ..., but then you have to call them in the readRaw method call e.g. : <literallayout><computeroutput>   void my_function(Hit &amp; hit, FasterReader &amp; reader, MTCounter &amp; counter){do something...}
-</computeroutput></literallayout> in main <literallayout><computeroutput>   MTFasterReader reader(/path/to/data/folder/, wanted_number_of_files);
-   MTCounter counter;
-   reader.readRaw(my_function, counter);
+</computeroutput></literallayout> in main <literallayout><computeroutput>   MTFasterReader readerMT(/path/to/data/folder/, wanted_number_of_files);
+   MTCounter counterMT;
+   readerMT.readRaw(my_function, counterMT);
 </computeroutput></literallayout> That way, my_function will be executed in parallel on each file in /path/to/data/folder/ </para>
 Here is the call graph for this function:<para>
     <informalfigure>
@@ -489,7 +486,21 @@ Here is the caller graph for this function:<para>
     <title>setTimeshifts()</title>
 <indexterm><primary>setTimeshifts</primary><secondary>MTFasterReader</secondary></indexterm>
 <indexterm><primary>MTFasterReader</primary><secondary>setTimeshifts</secondary></indexterm>
-<para><computeroutput>void MTFasterReader::setTimeshifts (std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; const &amp; timeshifts)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822"/>    <section>
+<para><computeroutput>void MTFasterReader::setTimeshifts (std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; const &amp; timeshifts)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_faster_reader_a39cce770cb5f6dc49e2ae2558d709af6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_faster_reader_1a91677f13aa03d3b2f9dee6eb252286d1"/>    <section>
+    <title>showProgressBar()</title>
+<indexterm><primary>showProgressBar</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>showProgressBar</secondary></indexterm>
+<para><computeroutput>static void MTFasterReader::showProgressBar (bool const &amp; choice = <computeroutput>true</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822"/>    <section>
     <title>timeshift()</title>
 <indexterm><primary>timeshift</primary><secondary>MTFasterReader</secondary></indexterm>
 <indexterm><primary>MTFasterReader</primary><secondary>timeshift</secondary></indexterm>
@@ -518,7 +529,11 @@ Here is the caller graph for this function:<para>
     <title>m_timeshifts</title>
 <indexterm><primary>m_timeshifts</primary><secondary>MTFasterReader</secondary></indexterm>
 <indexterm><primary>MTFasterReader</primary><secondary>m_timeshifts</secondary></indexterm>
-<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link>&gt; MTFasterReader::m_timeshifts<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link>&gt; MTFasterReader::m_timeshifts<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_faster_reader_1aca07d380d9a702313f523c1eea28c0d0"/>    <section>
+    <title>s_progressBar</title>
+<indexterm><primary>s_progressBar</primary><secondary>MTFasterReader</secondary></indexterm>
+<indexterm><primary>MTFasterReader</primary><secondary>s_progressBar</secondary></indexterm>
+<para><computeroutput>bool MTFasterReader::s_progressBar = false<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
 lib/MTObjects/<link linkend="__m_t_faster_reader_8hpp">MTFasterReader.hpp</link></section>

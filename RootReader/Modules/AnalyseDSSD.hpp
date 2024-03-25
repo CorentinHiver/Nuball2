@@ -13,7 +13,7 @@ public:
   AnalyseDSSD(){};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
-  void InitializeManip();
+  void InitialiseManip();
   static void run(Parameters & p, AnalyseDSSD & analysedssd);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
@@ -104,7 +104,7 @@ private:
 bool AnalyseDSSD::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
   this -> Write();
@@ -144,9 +144,9 @@ void AnalyseDSSD::run(Parameters & p, AnalyseDSSD & analysedssd)
   } // End files loop
 }
 
-void AnalyseDSSD::InitializeManip()
+void AnalyseDSSD::InitialiseManip()
 {
-  print("Initialize histograms");
+  print("Initialise histograms");
   m_Ring_14_spectra.reset("Ring 15","Ring 15",10000,0,100000);
   m_mult_R_VS_S.reset("Mult Rings VS Sectors","Multiplicity Rings VS Sectors", 10,0,10, 15,0,15);
   m_each_Sector_spectra.reset("Each sector spectra","Each sector spectra",

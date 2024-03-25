@@ -1,0 +1,138 @@
+.TH "EvolutionPeaks" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+EvolutionPeaks \- Shows the evolution of peak position for given detectors\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <EvolutionPeaks\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBEvolutionPeaks\fP ()=default"
+.br
+.ti -1c
+.RI "\fBEvolutionPeaks\fP (int argc, char **argv)"
+.br
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> void \fBloadCalibration\fP (ARGS &&\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "void \fBloadDetectors\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "void \fBloadParameters\fP (int argc, char **argv)"
+.br
+.ti -1c
+.RI "void \fBloadRebin\fP (\fBFile\fP const &filename)"
+.br
+.ti -1c
+.RI "void \fBoverwrite\fP (bool const &_overwrite=true)"
+.br
+.ti -1c
+.RI "void \fBprintParameters\fP () const"
+.br
+.ti -1c
+.RI "void \fBrun\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetNbFiles\fP (int const &nb)"
+.br
+.ti -1c
+.RI "void \fBsetOutputName\fP (std::string const &_output)"
+.br
+.ti -1c
+.RI "void \fBsetPeaks\fP (std::vector< double > const &peaks)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBCalibration\fP \fBm_calib\fP"
+.br
+.ti -1c
+.RI "\fBPath\fP \fBm_dataPath\fP"
+.br
+.ti -1c
+.RI "int \fBm_nb_files\fP = \-1"
+.br
+.ti -1c
+.RI "\fBFile\fP \fBm_output\fP = 'follow_evolution\&.root'"
+.br
+.ti -1c
+.RI "bool \fBm_overwrite\fP = false"
+.br
+.ti -1c
+.RI "std::vector< double > \fBm_peaks\fP = {511}"
+.br
+.ti -1c
+.RI "\fBDataFile\fP< \fBLabel\fP, int > \fBm_rebins\fP"
+.br
+.ti -1c
+.RI "\fBCalibration\fP \fBm_recalibration\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Shows the evolution of peak position for given detectors\&. 
+
+This class will read all the histograms all the TFiles in a folder, or just the list of histograms given\&.
+.PP
+Each file name has to follow this format : name_index\&.root
+.PP
+Then a linear calibration is applied is wanted\&. Measures the centroid of the peak\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "EvolutionPeaks::EvolutionPeaks ()\fC [default]\fP"
+
+.SS "EvolutionPeaks::EvolutionPeaks (int argc, char ** argv)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class\&.\&.\&. ARGS> void EvolutionPeaks::loadCalibration (ARGS &&\&.\&.\&. args)\fC [inline]\fP"
+
+.SS "void EvolutionPeaks::loadDetectors (std::string const & filename)\fC [inline]\fP"
+
+.SS "void EvolutionPeaks::loadParameters (int argc, char ** argv)"
+
+.SS "void EvolutionPeaks::loadRebin (\fBFile\fP const & filename)\fC [inline]\fP"
+
+.SS "void EvolutionPeaks::overwrite (bool const & _overwrite = \fCtrue\fP)\fC [inline]\fP"
+
+.SS "void EvolutionPeaks::printParameters () const"
+
+.SS "void EvolutionPeaks::run ()"
+
+.SS "void EvolutionPeaks::setNbFiles (int const & nb)\fC [inline]\fP"
+
+.SS "void EvolutionPeaks::setOutputName (std::string const & _output)\fC [inline]\fP"
+
+.SS "void EvolutionPeaks::setPeaks (std::vector< double > const & peaks)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBCalibration\fP EvolutionPeaks::m_calib\fC [private]\fP"
+
+.SS "\fBPath\fP EvolutionPeaks::m_dataPath\fC [private]\fP"
+
+.SS "int EvolutionPeaks::m_nb_files = \-1\fC [private]\fP"
+
+.SS "\fBFile\fP EvolutionPeaks::m_output = 'follow_evolution\&.root'\fC [private]\fP"
+
+.SS "bool EvolutionPeaks::m_overwrite = false\fC [private]\fP"
+
+.SS "std::vector<double> EvolutionPeaks::m_peaks = {511}\fC [private]\fP"
+
+.SS "\fBDataFile\fP<\fBLabel\fP, int> EvolutionPeaks::m_rebins\fC [private]\fP"
+
+.SS "\fBCalibration\fP EvolutionPeaks::m_recalibration\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

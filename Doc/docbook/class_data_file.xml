@@ -1,0 +1,692 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_data_file" xml:lang="en-US">
+<title>DataFile&lt; Index, T &gt; Class Template Reference</title>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary></indexterm>
+<para>
+
+<para>NOT FUNCTIONNAL !!! This is a homemade .data reader. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;DataFile.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for DataFile&lt; Index, T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_data_file_1aaffaf1e2df21446c06f7647c925822be">checkOutputfile</link> (std::ofstream &amp;outputfile)</para>
+</listitem>
+            <listitem><para><link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> <link linkend="_class_data_file_1aa7924fc31df5257c572a05d5a5d6a795">column</link> ()</para>
+
+<para>Returns the given column. </para>
+</listitem>
+            <listitem><para>template&lt;class COL &gt; </para><para><link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> <link linkend="_class_data_file_1a3fa00fffe402fcc0f77407338fdfa9f8">column</link> (COL &amp;&amp;columns)</para>
+
+<para>Returns the given column. </para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_data_file_1a3ad42806aff244755a2ad7ca1fe50a37">data</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_data_file_1ae7b9f0825c34316b883837d063c0de09">data</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_data_file_1afb388fd7a0b151fa6e8edb8a2c35ca53">DataFile</link> ()=default</para>
+</listitem>
+            <listitem><para><link linkend="_class_data_file_1a1a6fb21dceaa1670086d62be142a45b0">DataFile</link> (std::string const &amp;filename, bool const &amp;has_header=true)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_data_file_1affed9dbc6759035d5e3b087b466b3413">indexes</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1ae9748d2772e7a11da4b9f81da89d70b3">load</link> (std::string const &amp;filename, bool const &amp;has_header=true)</para>
+</listitem>
+            <listitem><para><link linkend="_class_data_file_1a2f42ba45453da1c72b8c60d1add57c1a">operator bool</link> () const</para>
+</listitem>
+            <listitem><para>T &amp; <link linkend="_class_data_file_1a1fb2113e19a01c149f40c3304c676225">operator[]</link> (T t)</para>
+</listitem>
+            <listitem><para>T const  &amp; <link linkend="_class_data_file_1ab5c38f4fcd6ec5a6e1eb2d1949d3ba9e">operator[]</link> (T t) const</para>
+</listitem>
+            <listitem><para>template&lt;class T2 &gt; </para><para>void <link linkend="_class_data_file_1aa8ea777558f19e09c911f9f387d08201">readColumn</link> (std::map&lt; Index, T2 &gt; &amp;map)</para>
+</listitem>
+            <listitem><para>template&lt;class T2 , class COL &gt; </para><para>void <link linkend="_class_data_file_1a5693057972b3ec730173b1d200d5d8b2">readColumn</link> (std::map&lt; Index, T2 &gt; &amp;map, COL &amp;&amp;<link linkend="_class_data_file_1aa7924fc31df5257c572a05d5a5d6a795">column</link>)</para>
+</listitem>
+            <listitem><para>template&lt;class T2 &gt; </para><para>void <link linkend="_class_data_file_1a384d0b3098646b77e219189fc8dccd00">readColumn</link> (std::vector&lt; T2 &gt; &amp;vector)</para>
+</listitem>
+            <listitem><para>template&lt;class T2 , class COL &gt; </para><para>void <link linkend="_class_data_file_1acff7815d10848fb38ab6eecc86270ddb">readColumn</link> (std::vector&lt; T2 &gt; &amp;vector, COL &amp;&amp;<link linkend="_class_data_file_1aa7924fc31df5257c572a05d5a5d6a795">column</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1aa8591eee73f290dcb9cda4ddf90812bc">setColumn</link> (int const &amp;choice)</para>
+
+<para>Setup the reading to the wanted column. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1a20ccbf2ff940a527452b137a07ff1010">setColumn</link> (std::string const &amp;<link linkend="_class_data_file_1aa7924fc31df5257c572a05d5a5d6a795">column</link>)</para>
+
+<para>Setup the reading to the wanted column. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1a3acd72939856b7bad0829293ffaf157f">setColumns</link> (std::vector&lt; int &gt; columns)</para>
+
+<para>A vector containing the list of the column index to read. By default, reads only the first lines. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1afac349d6db7005f3ca36802b0d4fbd96">setHeader</link> (<link linkend="__data_file_8hpp_1a5bbd0ff6e41ea521288f926113db6f48">DataLine</link> const &amp;header)</para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_data_file_1aaffaf487bee97fdccc84054f226a94c3">size</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_data_file_1a3ab1b817133b14eb348319d7959d360d">size</link> () const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_data_file_1a943ee036c1dc8d2a2a98a9bc5953d303">vectorize</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1a9375b98cbf03fcc253e35da2b57cbd5d">write</link> (std::string const &amp;filename)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1ad345f346a5757caa2eeb40e14af39460">writeData</link> (std::ofstream &amp;outputfile)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1a33d335be9b04c7014555993718c5fda3">writeHeader</link> (std::ofstream &amp;outputfile)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_data_file_1a8acfde896e9216daa785bc16752ef73e">checkInputfile</link> (std::ifstream &amp;inputfile)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1a6bfb54890d3d1e60dd5104496b00eecf">loadData</link> (std::ifstream &amp;inputfile)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1a10063674628cade1720c93ee93faca31">loadHeader</link> (std::ifstream &amp;inputfile)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_data_file_1a56b3abb736d7dc38f9d21e1d66e0e678">setupContainers</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_class_data_file_1a4d414d0f4fc92becb2f475a80e56a57f">m_all_column_name_casted</link> = false</para>
+</listitem>
+            <listitem><para>int <link linkend="_class_data_file_1a595bdc44926515b9f30bd332222e6eeb">m_chosen_column</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_class_bools">Bools</link> <link linkend="_class_data_file_1a70de36522aa7d2b770f08e01463d0a9f">m_column_name_casted</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; int &gt; <link linkend="_class_data_file_1aa5fa5d835eef5c509713f74b564cc552">m_columns_to_read</link> = {1}</para>
+</listitem>
+            <listitem><para>std::map&lt; Index, <link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> &gt; <link linkend="_class_data_file_1a2611c3a759ee2902c8d05b1b166012d4">m_data</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> <link linkend="_class_data_file_1a676faa65afd02b104f3eb0a3d2e653f2">m_data_points</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> &gt; <link linkend="_class_data_file_1ac07aa5725aefa63f837e4a7f7005f623">m_data_vector</link></para>
+</listitem>
+            <listitem><para>char <link linkend="_class_data_file_1a1984aaa46019a7aeeaf07f61da0cf130">m_delim</link> = &apos; &apos;</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_data_file_1ae6e9b136e3c6dc436b012fed6961e103">m_has_header</link> = true</para>
+</listitem>
+            <listitem><para><link linkend="__data_file_8hpp_1a5bbd0ff6e41ea521288f926113db6f48">DataLine</link> <link linkend="_class_data_file_1a0c032bb1b236276d4bfc5c4d3e74ca0d">m_header</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_data_file_1a0d84d9e8ed9d0da9118ece6250e80ec1">Indexes</link> <link linkend="_class_data_file_1ab339991e70846dfd4bf65be2534e45c1">m_indexes</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_data_file_1a5bac1ee6087bcd1c427a41ae149c10f3">m_input_filename</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_class_data_file_1af3c9d0a54a0f9e7efd9fe94ce945007c">m_label_index</link> = 0</para>
+</listitem>
+            <listitem><para><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> <link linkend="_class_data_file_1ac4ca4c0767acf308e2b06ab89b340c5c">m_labels_column</link></para>
+</listitem>
+            <listitem><para><link linkend="__data_file_8hpp_1a5bbd0ff6e41ea521288f926113db6f48">DataLine</link> <link linkend="_class_data_file_1a7234085692baf3c4c33cced506b77d9e">m_labels_rows</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_class_data_file_1ad499801b7733c896c4ed3212ece9f48b">m_nb_columns</link> = 1</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_data_file_1a9d671120b9a31228a3eb4ef318c3de47">m_ok</link> = true</para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_data_file_1a49e86af7ac13c5325a0ace3c0a4fd6cf">m_output_filename</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_class_data_file_1a489605b761bf235b58c58aabf6ac3e2b">m_reader</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_class_data_file_1a3bda8df19c2825e6066f643a4cea25c2">m_size</link> = 1</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_data_file_1a013613e672fc52c80b933ef0635c83e6">m_warning_is_error</link> = true</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Types    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> = std::vector&lt; T &gt;</para>
+</listitem>
+            <listitem><para>using <link linkend="_class_data_file_1a0d84d9e8ed9d0da9118ece6250e80ec1">Indexes</link> = std::vector&lt; Index &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+<simplesect><title>template&lt;class Index, class T&gt;
+class DataFile&lt; Index, T &gt;</title></simplesect>
+
+
+<para>NOT FUNCTIONNAL !!! This is a homemade .data reader. </para>
+
+
+
+<para>This is a quite strict format :</para>
+
+<para>index value1 value2 value3 // The header is one line only, holding the name of each column 10001 235321 2365 235321 // Each column is separated by the same separator ... end</para>
+
+<para>Let&apos;s look at an example first :</para>
+
+<para>Imagine we want to store the temperature in two different rooms. The index line will hold the time. The first column holds the values of the first room and same for the second column. Here is how it would look like :</para>
+
+<para>minutes room1 room2 0 22.5 21.5 1 22.3 21.3 2 22.4 21.4 3 22.2 21.2 4 22.3 21.3 5 22.4 21.4</para>
+
+<para>Possible optimisation :</para>
+
+<para>You can #define UnorderedDataFile to have an unordered_map holding the data </para>
+</section>
+<section>
+<title>Member Typedef Documentation</title>
+<anchor xml:id="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee"/>    <section>
+    <title>DataPoints</title>
+<indexterm><primary>DataPoints</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>DataPoints</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>using <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::<link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> =  std::vector&lt;T&gt;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a0d84d9e8ed9d0da9118ece6250e80ec1"/>    <section>
+    <title>Indexes</title>
+<indexterm><primary>Indexes</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>Indexes</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>using <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::<link linkend="_class_data_file_1a0d84d9e8ed9d0da9118ece6250e80ec1">Indexes</link> =  std::vector&lt;Index&gt;<computeroutput>[private]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_data_file_1afb388fd7a0b151fa6e8edb8a2c35ca53"/>    <section>
+    <title>DataFile()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>DataFile</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>DataFile</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::<link linkend="_class_data_file">DataFile</link> ( )<computeroutput>[default]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a1a6fb21dceaa1670086d62be142a45b0"/>    <section>
+    <title>DataFile()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>DataFile</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>DataFile</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::<link linkend="_class_data_file">DataFile</link> (std::string const &amp; filename, bool const &amp; has_header = <computeroutput>true</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a1a6fb21dceaa1670086d62be142a45b0_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_data_file_1a8acfde896e9216daa785bc16752ef73e"/>    <section>
+    <title>checkInputfile()</title>
+<indexterm><primary>checkInputfile</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>checkInputfile</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::checkInputfile (std::ifstream &amp; inputfile)<computeroutput>[protected]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a8acfde896e9216daa785bc16752ef73e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1aaffaf1e2df21446c06f7647c925822be"/>    <section>
+    <title>checkOutputfile()</title>
+<indexterm><primary>checkOutputfile</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>checkOutputfile</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::checkOutputfile (std::ofstream &amp; outputfile)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_aaffaf1e2df21446c06f7647c925822be_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1aa7924fc31df5257c572a05d5a5d6a795"/>    <section>
+    <title>column()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>column</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>column</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::column ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Returns the given column. </para>
+</para>
+
+<para><caution><title>Attention</title>
+
+<para>This involves a copy of the data !! </para>
+</caution>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_aa7924fc31df5257c572a05d5a5d6a795_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_aa7924fc31df5257c572a05d5a5d6a795_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a3fa00fffe402fcc0f77407338fdfa9f8"/>    <section>
+    <title>column()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>column</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>column</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><computeroutput>template&lt;class COL &gt; </computeroutput><para><computeroutput><link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::column (COL &amp;&amp; columns)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Returns the given column. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Template Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>COL</entry>
+                                <entry>
+<para>Either std::string (name of the column), or int (the column index) </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <caution><title>Attention</title>
+
+<para>This involves a copy of the data !! </para>
+</caution>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a3fa00fffe402fcc0f77407338fdfa9f8_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a3ad42806aff244755a2ad7ca1fe50a37"/>    <section>
+    <title>data()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>data</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>data</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>auto&amp; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::data ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1ae7b9f0825c34316b883837d063c0de09"/>    <section>
+    <title>data()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>data</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>data</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>auto const&amp; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::data ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_ae7b9f0825c34316b883837d063c0de09_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1affed9dbc6759035d5e3b087b466b3413"/>    <section>
+    <title>indexes()</title>
+<indexterm><primary>indexes</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>indexes</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>auto const&amp; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::indexes ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_affed9dbc6759035d5e3b087b466b3413_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1ae9748d2772e7a11da4b9f81da89d70b3"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>load</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::load (std::string const &amp; filename, bool const &amp; has_header = <computeroutput>true</computeroutput>
+)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_ae9748d2772e7a11da4b9f81da89d70b3_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a6bfb54890d3d1e60dd5104496b00eecf"/>    <section>
+    <title>loadData()</title>
+<indexterm><primary>loadData</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>loadData</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::loadData (std::ifstream &amp; inputfile)<computeroutput>[protected]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a6bfb54890d3d1e60dd5104496b00eecf_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a10063674628cade1720c93ee93faca31"/>    <section>
+    <title>loadHeader()</title>
+<indexterm><primary>loadHeader</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>loadHeader</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::loadHeader (std::ifstream &amp; inputfile)<computeroutput>[inline]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a10063674628cade1720c93ee93faca31_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a2f42ba45453da1c72b8c60d1add57c1a"/>    <section>
+    <title>operator bool()</title>
+<indexterm><primary>operator bool</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>operator bool</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::operator bool ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a1fb2113e19a01c149f40c3304c676225"/>    <section>
+    <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>operator[]</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>T&amp; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::operator[] (T t)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1ab5c38f4fcd6ec5a6e1eb2d1949d3ba9e"/>    <section>
+    <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator[]</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>operator[]</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>T const&amp; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::operator[] (T t) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1aa8ea777558f19e09c911f9f387d08201"/>    <section>
+    <title>readColumn()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>readColumn</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>readColumn</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><computeroutput>template&lt;class T2 &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::readColumn (std::map&lt; Index, T2 &gt; &amp; map)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a5693057972b3ec730173b1d200d5d8b2"/>    <section>
+    <title>readColumn()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>readColumn</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>readColumn</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><computeroutput>template&lt;class T2 , class COL &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::readColumn (std::map&lt; Index, T2 &gt; &amp; map, COL &amp;&amp; column)<computeroutput>[inline]</computeroutput></computeroutput></para>
+<para>
+                <formalpara>
+                    <title>
+Template Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>COL</entry>
+                                <entry>
+<para>Either std::string (name of the column), or int (the column index) </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a5693057972b3ec730173b1d200d5d8b2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a384d0b3098646b77e219189fc8dccd00"/>    <section>
+    <title>readColumn()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>readColumn</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>readColumn</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><computeroutput>template&lt;class T2 &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::readColumn (std::vector&lt; T2 &gt; &amp; vector)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a384d0b3098646b77e219189fc8dccd00_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1acff7815d10848fb38ab6eecc86270ddb"/>    <section>
+    <title>readColumn()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>readColumn</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>readColumn</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><computeroutput>template&lt;class T2 , class COL &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::readColumn (std::vector&lt; T2 &gt; &amp; vector, COL &amp;&amp; column)<computeroutput>[inline]</computeroutput></computeroutput></para>
+<para>
+                <formalpara>
+                    <title>
+Template Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>COL</entry>
+                                <entry>
+<para>Either std::string (name of the column), or int (the column index) </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_acff7815d10848fb38ab6eecc86270ddb_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1aa8591eee73f290dcb9cda4ddf90812bc"/>    <section>
+    <title>setColumn()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>setColumn</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>setColumn</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::setColumn (int const &amp; choice)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Setup the reading to the wanted column. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_aa8591eee73f290dcb9cda4ddf90812bc_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a20ccbf2ff940a527452b137a07ff1010"/>    <section>
+    <title>setColumn()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>setColumn</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>setColumn</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::setColumn (std::string const &amp; column)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Setup the reading to the wanted column. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a20ccbf2ff940a527452b137a07ff1010_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a3acd72939856b7bad0829293ffaf157f"/>    <section>
+    <title>setColumns()</title>
+<indexterm><primary>setColumns</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>setColumns</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::setColumns (std::vector&lt; int &gt; columns)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>A vector containing the list of the column index to read. By default, reads only the first lines. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a3acd72939856b7bad0829293ffaf157f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1afac349d6db7005f3ca36802b0d4fbd96"/>    <section>
+    <title>setHeader()</title>
+<indexterm><primary>setHeader</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>setHeader</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::setHeader (<link linkend="__data_file_8hpp_1a5bbd0ff6e41ea521288f926113db6f48">DataLine</link> const &amp; header)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a56b3abb736d7dc38f9d21e1d66e0e678"/>    <section>
+    <title>setupContainers()</title>
+<indexterm><primary>setupContainers</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>setupContainers</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::setupContainers<computeroutput>[inline]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_a56b3abb736d7dc38f9d21e1d66e0e678_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1aaffaf487bee97fdccc84054f226a94c3"/>    <section>
+    <title>size()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>size</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>size</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>auto&amp; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::size ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a3ab1b817133b14eb348319d7959d360d"/>    <section>
+    <title>size()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>size</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>size</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>auto const&amp; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a943ee036c1dc8d2a2a98a9bc5953d303"/>    <section>
+    <title>vectorize()</title>
+<indexterm><primary>vectorize</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>vectorize</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::vectorize ( )<computeroutput>[inline]</computeroutput></computeroutput></para>
+<para><para><link linkend="_todo_1_todo000008">Todo</link> 
+<para>if needed </para>
+</para><formalpara><title>Returns</title>
+
+<para>true if the vectorisation is successfull </para>
+</formalpara>
+</para>
+    </section><anchor xml:id="_class_data_file_1a9375b98cbf03fcc253e35da2b57cbd5d"/>    <section>
+    <title>write()</title>
+<indexterm><primary>write</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>write</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::write (std::string const &amp; filename)</computeroutput></para>    </section><anchor xml:id="_class_data_file_1ad345f346a5757caa2eeb40e14af39460"/>    <section>
+    <title>writeData()</title>
+<indexterm><primary>writeData</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>writeData</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::writeData (std::ofstream &amp; outputfile)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_data_file_ad345f346a5757caa2eeb40e14af39460_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_data_file_1a33d335be9b04c7014555993718c5fda3"/>    <section>
+    <title>writeHeader()</title>
+<indexterm><primary>writeHeader</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>writeHeader</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>void <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::writeHeader (std::ofstream &amp; outputfile)</computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_data_file_1a4d414d0f4fc92becb2f475a80e56a57f"/>    <section>
+    <title>m_all_column_name_casted</title>
+<indexterm><primary>m_all_column_name_casted</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_all_column_name_casted</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_all_column_name_casted = false<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a595bdc44926515b9f30bd332222e6eeb"/>    <section>
+    <title>m_chosen_column</title>
+<indexterm><primary>m_chosen_column</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_chosen_column</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>int <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_chosen_column = 0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a70de36522aa7d2b770f08e01463d0a9f"/>    <section>
+    <title>m_column_name_casted</title>
+<indexterm><primary>m_column_name_casted</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_column_name_casted</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="_class_bools">Bools</link> <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_column_name_casted<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1aa5fa5d835eef5c509713f74b564cc552"/>    <section>
+    <title>m_columns_to_read</title>
+<indexterm><primary>m_columns_to_read</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_columns_to_read</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>std::vector&lt;int&gt; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_columns_to_read = {1}<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a2611c3a759ee2902c8d05b1b166012d4"/>    <section>
+    <title>m_data</title>
+<indexterm><primary>m_data</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_data</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>std::map&lt;Index, <link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link>&gt; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_data<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a676faa65afd02b104f3eb0a3d2e653f2"/>    <section>
+    <title>m_data_points</title>
+<indexterm><primary>m_data_points</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_data_points</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link> <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_data_points<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1ac07aa5725aefa63f837e4a7f7005f623"/>    <section>
+    <title>m_data_vector</title>
+<indexterm><primary>m_data_vector</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_data_vector</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>std::vector&lt;<link linkend="_class_data_file_1a2484810cfdfddf382f6e7cc539fa26ee">DataPoints</link>&gt; <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_data_vector<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a1984aaa46019a7aeeaf07f61da0cf130"/>    <section>
+    <title>m_delim</title>
+<indexterm><primary>m_delim</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_delim</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>char <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_delim = &apos; &apos;<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1ae6e9b136e3c6dc436b012fed6961e103"/>    <section>
+    <title>m_has_header</title>
+<indexterm><primary>m_has_header</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_has_header</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_has_header = true<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a0c032bb1b236276d4bfc5c4d3e74ca0d"/>    <section>
+    <title>m_header</title>
+<indexterm><primary>m_header</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_header</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="__data_file_8hpp_1a5bbd0ff6e41ea521288f926113db6f48">DataLine</link> <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_header<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1ab339991e70846dfd4bf65be2534e45c1"/>    <section>
+    <title>m_indexes</title>
+<indexterm><primary>m_indexes</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_indexes</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="_class_data_file_1a0d84d9e8ed9d0da9118ece6250e80ec1">Indexes</link> <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_indexes<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a5bac1ee6087bcd1c427a41ae149c10f3"/>    <section>
+    <title>m_input_filename</title>
+<indexterm><primary>m_input_filename</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_input_filename</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>std::string <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_input_filename<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1af3c9d0a54a0f9e7efd9fe94ce945007c"/>    <section>
+    <title>m_label_index</title>
+<indexterm><primary>m_label_index</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_label_index</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>int <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_label_index = 0<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1ac4ca4c0767acf308e2b06ab89b340c5c"/>    <section>
+    <title>m_labels_column</title>
+<indexterm><primary>m_labels_column</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_labels_column</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="_lib_co_8hpp_1a632090884b4aa0585e747446a2683963">Strings</link> <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_labels_column<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a7234085692baf3c4c33cced506b77d9e"/>    <section>
+    <title>m_labels_rows</title>
+<indexterm><primary>m_labels_rows</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_labels_rows</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput><link linkend="__data_file_8hpp_1a5bbd0ff6e41ea521288f926113db6f48">DataLine</link> <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_labels_rows<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1ad499801b7733c896c4ed3212ece9f48b"/>    <section>
+    <title>m_nb_columns</title>
+<indexterm><primary>m_nb_columns</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_nb_columns</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>int <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_nb_columns = 1<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a9d671120b9a31228a3eb4ef318c3de47"/>    <section>
+    <title>m_ok</title>
+<indexterm><primary>m_ok</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_ok</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_ok = true<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a49e86af7ac13c5325a0ace3c0a4fd6cf"/>    <section>
+    <title>m_output_filename</title>
+<indexterm><primary>m_output_filename</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_output_filename</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>std::string <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_output_filename<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a489605b761bf235b58c58aabf6ac3e2b"/>    <section>
+    <title>m_reader</title>
+<indexterm><primary>m_reader</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_reader</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>std::string <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_reader<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a3bda8df19c2825e6066f643a4cea25c2"/>    <section>
+    <title>m_size</title>
+<indexterm><primary>m_size</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_size</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>int <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_size = 1<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_1a013613e672fc52c80b933ef0635c83e6"/>    <section>
+    <title>m_warning_is_error</title>
+<indexterm><primary>m_warning_is_error</primary><secondary>DataFile&lt; Index, T &gt;</secondary></indexterm>
+<indexterm><primary>DataFile&lt; Index, T &gt;</primary><secondary>m_warning_is_error</secondary></indexterm>
+<computeroutput>template&lt;class Index , class T &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_data_file">DataFile</link>&lt; Index, T &gt;::m_warning_is_error = true<computeroutput>[protected]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__data_file_8hpp">DataFile.hpp</link></section>
+</section>

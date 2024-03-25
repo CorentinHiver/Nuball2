@@ -1,8 +1,9 @@
-.TH "Gate_t< T >" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Gate_t< T >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Gate_t< T >
+Gate_t< T > \- Convenient gate class\&.  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -15,7 +16,7 @@ Gate_t< T >
 .RI "\fBGate_t\fP ()"
 .br
 .ti -1c
-.RI "\fBGate_t\fP (std::initializer_list< T > inputs)"
+.RI "\fBGate_t\fP (std::Initialiser_list< T > inputs)"
 .br
 .ti -1c
 .RI "bool \fBisIn\fP (T const &e)"
@@ -53,11 +54,27 @@ Gate_t< T >
 .RI "bool \fBm_use\fP = false"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename T>
+.br
+class Gate_t< T >"
+Convenient gate class\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP Type of the data 
+.RE
+.PP
+
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "template<typename T > \fBGate_t\fP< T >::\fBGate_t\fP ()\fC [inline]\fP"
 
-.SS "template<typename T > \fBGate_t\fP< T >::\fBGate_t\fP (std::initializer_list< T > inputs)\fC [inline]\fP"
+.SS "template<typename T > \fBGate_t\fP< T >::\fBGate_t\fP (std::Initialiser_list< T > inputs)\fC [inline]\fP"
 
 .SH "Member Function Documentation"
 .PP 

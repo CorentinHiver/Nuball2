@@ -69,13 +69,13 @@ public:
   }
 
   ///@brief To allow several threads to work on different runs on parallel
-  ///@details MTObject needs to have been initialized before creating the 
+  ///@details MTObject needs to have been Initialised before creating the 
   bool setMT(bool const & MTOn = true)
   { // To enable the parallel reading of the runs
     if(MTObject::ON) return (m_MTOn = MTOn);
     else 
     {
-      if (MTOn) print("MULTITHREADING ISN'T INITIALIZED !");
+      if (MTOn) print("MULTITHREADING ISN'T InitialiseD !");
       return false;
     }
   }

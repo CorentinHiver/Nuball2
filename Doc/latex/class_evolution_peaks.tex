@@ -1,0 +1,339 @@
+\doxysection{Evolution\+Peaks Class Reference}
+\label{class_evolution_peaks}\index{EvolutionPeaks@{EvolutionPeaks}}
+
+
+Shows the evolution of peak position for given detectors.  
+
+
+
+
+{\ttfamily \#include $<$Evolution\+Peaks.\+hpp$>$}
+
+
+
+Collaboration diagram for Evolution\+Peaks\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Evolution\+Peaks} ()=default
+\item 
+\textbf{ Evolution\+Peaks} (int argc, char $\ast$$\ast$argv)
+\item 
+{\footnotesize template$<$class... ARGS$>$ }\\void \textbf{ load\+Calibration} (ARGS \&\&... args)
+\item 
+void \textbf{ load\+Detectors} (std\+::string const \&filename)
+\item 
+void \textbf{ load\+Parameters} (int argc, char $\ast$$\ast$argv)
+\item 
+void \textbf{ load\+Rebin} (\textbf{ File} const \&filename)
+\item 
+void \textbf{ overwrite} (bool const \&\+\_\+overwrite=true)
+\item 
+void \textbf{ print\+Parameters} () const
+\item 
+void \textbf{ run} ()
+\item 
+void \textbf{ set\+Nb\+Files} (int const \&nb)
+\item 
+void \textbf{ set\+Output\+Name} (std\+::string const \&\+\_\+output)
+\item 
+void \textbf{ set\+Peaks} (std\+::vector$<$ double $>$ const \&peaks)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Calibration} \textbf{ m\+\_\+calib}
+\item 
+\textbf{ Path} \textbf{ m\+\_\+data\+Path}
+\item 
+int \textbf{ m\+\_\+nb\+\_\+files} = -\/1
+\item 
+\textbf{ File} \textbf{ m\+\_\+output} = \char`\"{}follow\+\_\+evolution.\+root\char`\"{}
+\item 
+bool \textbf{ m\+\_\+overwrite} = false
+\item 
+std\+::vector$<$ double $>$ \textbf{ m\+\_\+peaks} = \{511\}
+\item 
+\textbf{ Data\+File}$<$ \textbf{ Label}, int $>$ \textbf{ m\+\_\+rebins}
+\item 
+\textbf{ Calibration} \textbf{ m\+\_\+recalibration}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Shows the evolution of peak position for given detectors. 
+
+This class will read all the histograms all the TFiles in a folder, or just the list of histograms given.
+
+Each file name has to follow this format \+: name\+\_\+index.\+root
+
+Then a linear calibration is applied is wanted. Measures the centroid of the peak. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_evolution_peaks_ae971ac16cf6f652c322c0b7f008cbf8f}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!EvolutionPeaks@{EvolutionPeaks}}
+\index{EvolutionPeaks@{EvolutionPeaks}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{EvolutionPeaks()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Evolution\+Peaks\+::\+Evolution\+Peaks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\label{class_evolution_peaks_a97403723f87d740c700637e07e95fbb7}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!EvolutionPeaks@{EvolutionPeaks}}
+\index{EvolutionPeaks@{EvolutionPeaks}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{EvolutionPeaks()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Evolution\+Peaks\+::\+Evolution\+Peaks (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_a97403723f87d740c700637e07e95fbb7_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_evolution_peaks_ad13fac38f35247d7e2f6ba5b61f0dd9b}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!loadCalibration@{loadCalibration}}
+\index{loadCalibration@{loadCalibration}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{loadCalibration()}
+{\footnotesize\ttfamily template$<$class... ARGS$>$ \\
+void Evolution\+Peaks\+::load\+Calibration (\begin{DoxyParamCaption}\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_ad13fac38f35247d7e2f6ba5b61f0dd9b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_ad13fac38f35247d7e2f6ba5b61f0dd9b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_a4dce5d05c6d643d582829be29b6b16e5}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!loadDetectors@{loadDetectors}}
+\index{loadDetectors@{loadDetectors}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{loadDetectors()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::load\+Detectors (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_a4dce5d05c6d643d582829be29b6b16e5_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_a4dce5d05c6d643d582829be29b6b16e5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_aa6877d718198437381b3516d0593e2c6}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!loadParameters@{loadParameters}}
+\index{loadParameters@{loadParameters}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{loadParameters()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::load\+Parameters (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_aa6877d718198437381b3516d0593e2c6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_aa6877d718198437381b3516d0593e2c6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_a10bf1158a6a89129b9c2e61ff4ca27ee}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!loadRebin@{loadRebin}}
+\index{loadRebin@{loadRebin}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{loadRebin()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::load\+Rebin (\begin{DoxyParamCaption}\item[{\textbf{ File} const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_evolution_peaks_a10bf1158a6a89129b9c2e61ff4ca27ee_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_a10bf1158a6a89129b9c2e61ff4ca27ee_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_a0e6bdb90d030eac7d3ef1365338dd7de}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!overwrite@{overwrite}}
+\index{overwrite@{overwrite}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{overwrite()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::overwrite (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+overwrite = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_a0e6bdb90d030eac7d3ef1365338dd7de_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_a0b661bdce835988388c52c174b59f57b}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!printParameters@{printParameters}}
+\index{printParameters@{printParameters}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{printParameters()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::print\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{class_evolution_peaks_a0b661bdce835988388c52c174b59f57b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_a0b661bdce835988388c52c174b59f57b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_a5645dd6726d0af38e8a4d849da6a8d18}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!run@{run}}
+\index{run@{run}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{run()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_a5645dd6726d0af38e8a4d849da6a8d18_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_a5645dd6726d0af38e8a4d849da6a8d18_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_ad8012c10acf0d3d2e12e81b03b82be39}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!setNbFiles@{setNbFiles}}
+\index{setNbFiles@{setNbFiles}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{setNbFiles()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::set\+Nb\+Files (\begin{DoxyParamCaption}\item[{int const \&}]{nb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_ad8012c10acf0d3d2e12e81b03b82be39_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_ae2edbfac41a429e8275da5572f7329e5}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!setOutputName@{setOutputName}}
+\index{setOutputName@{setOutputName}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{setOutputName()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::set\+Output\+Name (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_evolution_peaks_ae2edbfac41a429e8275da5572f7329e5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_evolution_peaks_a5c8a97eb07b43c440cc065a864fab56e}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!setPeaks@{setPeaks}}
+\index{setPeaks@{setPeaks}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{setPeaks()}
+{\footnotesize\ttfamily void Evolution\+Peaks\+::set\+Peaks (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ const \&}]{peaks }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_evolution_peaks_a5b44bb9841c376e762261953de4be5a7}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!m\_calib@{m\_calib}}
+\index{m\_calib@{m\_calib}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{m\_calib}
+{\footnotesize\ttfamily \textbf{ Calibration} Evolution\+Peaks\+::m\+\_\+calib\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_evolution_peaks_aef745e6072118051e5fdd25a6841103e}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!m\_dataPath@{m\_dataPath}}
+\index{m\_dataPath@{m\_dataPath}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{m\_dataPath}
+{\footnotesize\ttfamily \textbf{ Path} Evolution\+Peaks\+::m\+\_\+data\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_evolution_peaks_a92b3c575edb0750c40872db984b01d13}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!m\_nb\_files@{m\_nb\_files}}
+\index{m\_nb\_files@{m\_nb\_files}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{m\_nb\_files}
+{\footnotesize\ttfamily int Evolution\+Peaks\+::m\+\_\+nb\+\_\+files = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_evolution_peaks_a5ff141333653c2e9eb21702601b02611}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!m\_output@{m\_output}}
+\index{m\_output@{m\_output}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{m\_output}
+{\footnotesize\ttfamily \textbf{ File} Evolution\+Peaks\+::m\+\_\+output = \char`\"{}follow\+\_\+evolution.\+root\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_evolution_peaks_a9b5df4439b97335efcc0772a424ee37a}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!m\_overwrite@{m\_overwrite}}
+\index{m\_overwrite@{m\_overwrite}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{m\_overwrite}
+{\footnotesize\ttfamily bool Evolution\+Peaks\+::m\+\_\+overwrite = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_evolution_peaks_abc104be9ef72adc1f947542394ffad50}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!m\_peaks@{m\_peaks}}
+\index{m\_peaks@{m\_peaks}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{m\_peaks}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ Evolution\+Peaks\+::m\+\_\+peaks = \{511\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_evolution_peaks_ad874f98afd738fbdb60b89bb926bca61}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!m\_rebins@{m\_rebins}}
+\index{m\_rebins@{m\_rebins}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{m\_rebins}
+{\footnotesize\ttfamily \textbf{ Data\+File}$<$\textbf{ Label}, int$>$ Evolution\+Peaks\+::m\+\_\+rebins\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_evolution_peaks_a2982e096a06f6ecc3025077537a8f89c}} 
+\index{EvolutionPeaks@{EvolutionPeaks}!m\_recalibration@{m\_recalibration}}
+\index{m\_recalibration@{m\_recalibration}!EvolutionPeaks@{EvolutionPeaks}}
+\doxysubsubsection{m\_recalibration}
+{\footnotesize\ttfamily \textbf{ Calibration} Evolution\+Peaks\+::m\+\_\+recalibration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Modules/\textbf{ Evolution\+Peaks.\+hpp}\end{DoxyCompactItemize}

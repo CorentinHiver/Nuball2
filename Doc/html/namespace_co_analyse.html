@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('namespace_co_analyse.html',''); initRe
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a0c12c2535bb054631b3b0304a1dc9a34"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#a0c12c2535bb054631b3b0304a1dc9a34">ProjectionsBins</a> = std::vector&lt; std::pair&lt; double, double &gt; &gt;</td></tr>
+<tr class="memdesc:a0c12c2535bb054631b3b0304a1dc9a34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of pairs of min and max bins.  <a href="namespace_co_analyse.html#a0c12c2535bb054631b3b0304a1dc9a34">More...</a><br /></td></tr>
 <tr class="separator:a0c12c2535bb054631b3b0304a1dc9a34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -101,41 +102,45 @@ Functions</h2></td></tr>
 <tr class="memitem:accb0147ca7573fc7dade0af93673a4e3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#accb0147ca7573fc7dade0af93673a4e3">extractBackgroundArray</a> (TH1F *histo, int const &amp;nsmooth=10)</td></tr>
 <tr class="separator:accb0147ca7573fc7dade0af93673a4e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9585a7922e83dcea10f06211868846bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#a9585a7922e83dcea10f06211868846bc">normalizeBidim</a> (TH2 *matrix, double const &amp;factor=1.0)</td></tr>
+<tr class="memdesc:a9585a7922e83dcea10f06211868846bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalise the whole bidim.  <a href="namespace_co_analyse.html#a9585a7922e83dcea10f06211868846bc">More...</a><br /></td></tr>
 <tr class="separator:a9585a7922e83dcea10f06211868846bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab71a4903cf3d3c32f35262dab10a82e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#ab71a4903cf3d3c32f35262dab10a82e3">normalizeY</a> (TH2 *matrix, double const &amp;factor=1)</td></tr>
+<tr class="memdesc:ab71a4903cf3d3c32f35262dab10a82e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">For each X bin, normalise the Y histogram.  <a href="namespace_co_analyse.html#ab71a4903cf3d3c32f35262dab10a82e3">More...</a><br /></td></tr>
 <tr class="separator:ab71a4903cf3d3c32f35262dab10a82e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53744e2ddfba6a4a188ada9ed1bc6272"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272">projectX</a> (TH2 *matrix, TH1 *proj)</td></tr>
-<tr class="memdesc:a53744e2ddfba6a4a188ada9ed1bc6272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Total projection on X axis.  <a href="namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272">More...</a><br /></td></tr>
+<tr class="memdesc:a53744e2ddfba6a4a188ada9ed1bc6272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project the whole matrix on the X axis. This fills proj.  <a href="namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272">More...</a><br /></td></tr>
 <tr class="separator:a53744e2ddfba6a4a188ada9ed1bc6272"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d7393e48336effee246cbbc33822847"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#a2d7393e48336effee246cbbc33822847">projectX</a> (TH2 *matrix, TH1 *proj, double const &amp;binYmin, double const &amp;binYmax)</td></tr>
-<tr class="memdesc:a2d7393e48336effee246cbbc33822847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on Y axis between values binYmin and binYmax included [binYmin;binYmax].  <a href="namespace_co_analyse.html#a2d7393e48336effee246cbbc33822847">More...</a><br /></td></tr>
+<tr class="memdesc:a2d7393e48336effee246cbbc33822847"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. This fills proj.  <a href="namespace_co_analyse.html#a2d7393e48336effee246cbbc33822847">More...</a><br /></td></tr>
 <tr class="separator:a2d7393e48336effee246cbbc33822847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0158170fa443490d844333c1acd9a89a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#a0158170fa443490d844333c1acd9a89a">projectX</a> (TH2 *matrix, TH1 *proj, int const &amp;binY)</td></tr>
-<tr class="memdesc:a0158170fa443490d844333c1acd9a89a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on Y axis at a given X bin.  <a href="namespace_co_analyse.html#a0158170fa443490d844333c1acd9a89a">More...</a><br /></td></tr>
+<tr class="memdesc:a0158170fa443490d844333c1acd9a89a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on X axis at a given Y bin. This fills proj.  <a href="namespace_co_analyse.html#a0158170fa443490d844333c1acd9a89a">More...</a><br /></td></tr>
 <tr class="separator:a0158170fa443490d844333c1acd9a89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa27f433db27fe9babd4c55421121556d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#aa27f433db27fe9babd4c55421121556d">projectX</a> (TH2 *matrix, TH1 *proj, int const &amp;binYmin, int const &amp;binYmax)</td></tr>
-<tr class="memdesc:aa27f433db27fe9babd4c55421121556d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[.  <a href="namespace_co_analyse.html#aa27f433db27fe9babd4c55421121556d">More...</a><br /></td></tr>
+<tr class="memdesc:aa27f433db27fe9babd4c55421121556d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. This fills proj.  <a href="namespace_co_analyse.html#aa27f433db27fe9babd4c55421121556d">More...</a><br /></td></tr>
 <tr class="separator:aa27f433db27fe9babd4c55421121556d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab64c2bb160dbdc01836274235d0bbd3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#ab64c2bb160dbdc01836274235d0bbd3b">projectY</a> (TH2 *matrix, TH1 *proj, double const &amp;valueXmin, double const &amp;valueXmax)</td></tr>
-<tr class="memdesc:ab64c2bb160dbdc01836274235d0bbd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax].  <a href="namespace_co_analyse.html#ab64c2bb160dbdc01836274235d0bbd3b">More...</a><br /></td></tr>
+<tr class="memdesc:ab64c2bb160dbdc01836274235d0bbd3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. This fills proj.  <a href="namespace_co_analyse.html#ab64c2bb160dbdc01836274235d0bbd3b">More...</a><br /></td></tr>
 <tr class="separator:ab64c2bb160dbdc01836274235d0bbd3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abecf48371e430ad0cc8dfb063e6d951d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d">projectY</a> (TH2 *matrix, TH1 *proj, int const &amp;binX)</td></tr>
-<tr class="memdesc:abecf48371e430ad0cc8dfb063e6d951d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on Y axis at a given X bin.  <a href="namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d">More...</a><br /></td></tr>
+<tr class="memdesc:abecf48371e430ad0cc8dfb063e6d951d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project matrix on Y axis at a given X bin. This fills proj.  <a href="namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d">More...</a><br /></td></tr>
 <tr class="separator:abecf48371e430ad0cc8dfb063e6d951d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa19f9a517f5a4ce70e61ebed3cfeecf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#aa19f9a517f5a4ce70e61ebed3cfeecf9">projectY</a> (TH2 *matrix, TH1 *proj, int const &amp;binXmin, int const &amp;binXmax)</td></tr>
-<tr class="memdesc:aa19f9a517f5a4ce70e61ebed3cfeecf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[.  <a href="namespace_co_analyse.html#aa19f9a517f5a4ce70e61ebed3cfeecf9">More...</a><br /></td></tr>
+<tr class="memdesc:aa19f9a517f5a4ce70e61ebed3cfeecf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. This fills proj.  <a href="namespace_co_analyse.html#aa19f9a517f5a4ce70e61ebed3cfeecf9">More...</a><br /></td></tr>
 <tr class="separator:aa19f9a517f5a4ce70e61ebed3cfeecf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb2cc17685bbda3b8531803c4d8cc5c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8">removeBackground</a> (TH1 *histo, int const &amp;niter=10, std::string const &amp;fit_options=&quot;&quot;, std::string const &amp;bidim_options=&quot;X&quot;)</td></tr>
-<tr class="memdesc:aeb2cc17685bbda3b8531803c4d8cc5c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the background in the given histo.  <a href="namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8">More...</a><br /></td></tr>
-<tr class="separator:aeb2cc17685bbda3b8531803c4d8cc5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa2d6e36c43655ace45e8aa55a53d4da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da">removeBackground</a> (TH1 *histo, int const &amp;niter=10, std::string const &amp;fit_options=&quot;&quot;, std::string const &amp;bidim_options=&quot;X&quot;) noexcept</td></tr>
+<tr class="memdesc:afa2d6e36c43655ace45e8aa55a53d4da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove the background in the given histo.  <a href="namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da">More...</a><br /></td></tr>
+<tr class="separator:afa2d6e36c43655ace45e8aa55a53d4da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a89fce5d95da5f0448d4a9fba93a108"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#a2a89fce5d95da5f0448d4a9fba93a108">removeRandomBidim</a> (TH2 *matrix, int iterations=1, bool save_intermediate=false, <a class="el" href="namespace_co_analyse.html#a0c12c2535bb054631b3b0304a1dc9a34">ProjectionsBins</a> projectionsY={{}}, <a class="el" href="namespace_co_analyse.html#a0c12c2535bb054631b3b0304a1dc9a34">ProjectionsBins</a> projectionsX={{}})</td></tr>
 <tr class="separator:a2a89fce5d95da5f0448d4a9fba93a108"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8af94a11fa0979cbaf83228dfc1675e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#ab8af94a11fa0979cbaf83228dfc1675e">removeRandomY</a> (TH2 *matrix, int _stopX=-1, int _stopY=-1, bool writeIntermediate=false, <a class="el" href="namespace_co_analyse.html#a0c12c2535bb054631b3b0304a1dc9a34">ProjectionsBins</a> projections={{}})</td></tr>
 <tr class="memdesc:ab8af94a11fa0979cbaf83228dfc1675e"><td class="mdescLeft">&#160;</td><td class="mdescRight">LEGACY.  <a href="namespace_co_analyse.html#ab8af94a11fa0979cbaf83228dfc1675e">More...</a><br /></td></tr>
 <tr class="separator:ab8af94a11fa0979cbaf83228dfc1675e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad13b7eeaa3d7d9a30cdf04a8b0d17088"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#ad13b7eeaa3d7d9a30cdf04a8b0d17088">setX</a> (TH2 *matrix, TH1 *proj, int const &amp;binX)</td></tr>
+<tr class="memdesc:ad13b7eeaa3d7d9a30cdf04a8b0d17088"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Y histogram proj in matrix at binX.  <a href="namespace_co_analyse.html#ad13b7eeaa3d7d9a30cdf04a8b0d17088">More...</a><br /></td></tr>
 <tr class="separator:ad13b7eeaa3d7d9a30cdf04a8b0d17088"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1aa3fcfcc46318e4f0d6f42510471a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_co_analyse.html#ac1aa3fcfcc46318e4f0d6f42510471a0">setY</a> (TH2 *matrix, TH1 *proj, int const &amp;binY)</td></tr>
+<tr class="memdesc:ac1aa3fcfcc46318e4f0d6f42510471a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set X histogram proj in matrix at binY.  <a href="namespace_co_analyse.html#ac1aa3fcfcc46318e4f0d6f42510471a0">More...</a><br /></td></tr>
 <tr class="separator:ac1aa3fcfcc46318e4f0d6f42510471a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
@@ -150,6 +155,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Vector of pairs of min and max bins. </p>
 
 </div>
 </div>
@@ -179,13 +186,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000007">Deprecated:</a></b></dt><dd></dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_acb07ede224cab3e9289d25c72c099b24_cgraph.png" border="0" usemap="#anamespace_co_analyse_acb07ede224cab3e9289d25c72c099b24_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_acb07ede224cab3e9289d25c72c099b24_cgraph" id="anamespace_co_analyse_acb07ede224cab3e9289d25c72c099b24_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,228,47"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="276,13,328,39"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="276,13,328,39"/>
 </map>
 </div>
 
@@ -216,13 +224,14 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000008">Deprecated:</a></b></dt><dd></dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_accb0147ca7573fc7dade0af93673a4e3_cgraph.png" border="0" usemap="#anamespace_co_analyse_accb0147ca7573fc7dade0af93673a4e3_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_accb0147ca7573fc7dade0af93673a4e3_cgraph" id="anamespace_co_analyse_accb0147ca7573fc7dade0af93673a4e3_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,228,47"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="276,13,328,39"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="276,13,328,39"/>
 </map>
 </div>
 
@@ -254,6 +263,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Normalise the whole bidim. </p>
+
 </div>
 </div>
 <a id="ab71a4903cf3d3c32f35262dab10a82e3"></a>
@@ -281,6 +292,8 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>For each X bin, normalise the Y histogram. </p>
 
 </div>
 </div>
@@ -310,16 +323,18 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Total projection on X axis. </p>
+<p>Project the whole matrix on the X axis. This fills proj. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_cgraph.png" border="0" usemap="#anamespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_cgraph" id="anamespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_cgraph">
-<area shape="rect" title="Total projection on X axis." alt="" coords="5,56,159,83"/>
+<area shape="rect" title="Project the whole matrix on the X axis. This fills proj." alt="" coords="5,56,159,83"/>
 <area shape="rect" href="lib_root_8hpp.html#a0269226b4d78b1089ef77180712147e0" title=" " alt="" coords="212,5,299,32"/>
 <area shape="rect" href="lib_root_8hpp.html#ab23c9fed2f973bde045e7d90c8e1f2fe" title=" " alt="" coords="214,56,297,83"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="207,107,304,133"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="352,107,455,133"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="503,107,609,133"/>
 </map>
 </div>
 <div class="dynheader">
@@ -327,10 +342,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_icgraph.png" border="0" usemap="#anamespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_icgraph" alt=""/></div>
 <map name="anamespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_icgraph" id="anamespace_co_analyse_a53744e2ddfba6a4a188ada9ed1bc6272_icgraph">
-<area shape="rect" title="Total projection on X axis." alt="" coords="571,31,724,57"/>
-<area shape="rect" href="namespace_co_analyse.html#a2d7393e48336effee246cbbc33822847" title="Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]." alt="" coords="333,5,486,32"/>
-<area shape="rect" href="namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8" title="Remove the background in the given histo." alt="" coords="296,56,523,83"/>
-<area shape="rect" href="class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112" title=" " alt="" coords="5,56,248,83"/>
+<area shape="rect" title="Project the whole matrix on the X axis. This fills proj." alt="" coords="789,31,943,57"/>
+<area shape="rect" href="namespace_co_analyse.html#a2d7393e48336effee246cbbc33822847" title="Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. This fills proj." alt="" coords="551,5,705,32"/>
+<area shape="rect" href="namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da" title="Remove the background in the given histo." alt="" coords="515,56,741,83"/>
+<area shape="rect" href="class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b" title=" " alt="" coords="244,29,467,56"/>
+<area shape="rect" href="class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="280,81,431,108"/>
+<area shape="rect" href="class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="21,27,180,53"/>
+<area shape="rect" href="class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,78,196,119"/>
 </map>
 </div>
 
@@ -374,17 +392,19 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. </p>
+<p>Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. This fills proj. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_a2d7393e48336effee246cbbc33822847_cgraph.png" border="0" usemap="#anamespace_co_analyse_a2d7393e48336effee246cbbc33822847_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_a2d7393e48336effee246cbbc33822847_cgraph" id="anamespace_co_analyse_a2d7393e48336effee246cbbc33822847_cgraph">
-<area shape="rect" title="Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]." alt="" coords="5,56,159,83"/>
-<area shape="rect" href="namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272" title="Total projection on X axis." alt="" coords="207,56,360,83"/>
+<area shape="rect" title="Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. This fills proj." alt="" coords="5,56,159,83"/>
+<area shape="rect" href="namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272" title="Project the whole matrix on the X axis. This fills proj." alt="" coords="207,56,360,83"/>
 <area shape="rect" href="lib_root_8hpp.html#a0269226b4d78b1089ef77180712147e0" title=" " alt="" coords="413,5,500,32"/>
 <area shape="rect" href="lib_root_8hpp.html#ab23c9fed2f973bde045e7d90c8e1f2fe" title=" " alt="" coords="415,56,498,83"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="408,107,505,133"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="553,107,656,133"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="704,107,811,133"/>
 </map>
 </div>
 
@@ -422,16 +442,18 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Project on Y axis at a given X bin. </p>
+<p>Project on X axis at a given Y bin. This fills proj. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_a0158170fa443490d844333c1acd9a89a_cgraph.png" border="0" usemap="#anamespace_co_analyse_a0158170fa443490d844333c1acd9a89a_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_a0158170fa443490d844333c1acd9a89a_cgraph" id="anamespace_co_analyse_a0158170fa443490d844333c1acd9a89a_cgraph">
-<area shape="rect" title="Project on Y axis at a given X bin." alt="" coords="5,56,159,83"/>
+<area shape="rect" title="Project on X axis at a given Y bin. This fills proj." alt="" coords="5,56,159,83"/>
 <area shape="rect" href="lib_root_8hpp.html#a0269226b4d78b1089ef77180712147e0" title=" " alt="" coords="212,5,299,32"/>
 <area shape="rect" href="lib_root_8hpp.html#ab23c9fed2f973bde045e7d90c8e1f2fe" title=" " alt="" coords="214,56,297,83"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="207,107,304,133"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="352,107,455,133"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="503,107,609,133"/>
 </map>
 </div>
 
@@ -475,16 +497,18 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. </p>
+<p>Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. This fills proj. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_aa27f433db27fe9babd4c55421121556d_cgraph.png" border="0" usemap="#anamespace_co_analyse_aa27f433db27fe9babd4c55421121556d_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_aa27f433db27fe9babd4c55421121556d_cgraph" id="anamespace_co_analyse_aa27f433db27fe9babd4c55421121556d_cgraph">
-<area shape="rect" title="Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[." alt="" coords="5,56,159,83"/>
+<area shape="rect" title="Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[...." alt="" coords="5,56,159,83"/>
 <area shape="rect" href="lib_root_8hpp.html#a0269226b4d78b1089ef77180712147e0" title=" " alt="" coords="212,5,299,32"/>
 <area shape="rect" href="lib_root_8hpp.html#ab23c9fed2f973bde045e7d90c8e1f2fe" title=" " alt="" coords="214,56,297,83"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="207,107,304,133"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="352,107,455,133"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="503,107,609,133"/>
 </map>
 </div>
 
@@ -528,17 +552,19 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. </p>
+<p>Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. This fills proj. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_ab64c2bb160dbdc01836274235d0bbd3b_cgraph.png" border="0" usemap="#anamespace_co_analyse_ab64c2bb160dbdc01836274235d0bbd3b_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_ab64c2bb160dbdc01836274235d0bbd3b_cgraph" id="anamespace_co_analyse_ab64c2bb160dbdc01836274235d0bbd3b_cgraph">
-<area shape="rect" title="Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]." alt="" coords="5,56,157,83"/>
-<area shape="rect" href="namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project on Y axis at a given X bin." alt="" coords="205,56,357,83"/>
+<area shape="rect" title="Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]...." alt="" coords="5,56,157,83"/>
+<area shape="rect" href="namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project matrix on Y axis at a given X bin. This fills proj." alt="" coords="205,56,357,83"/>
 <area shape="rect" href="lib_root_8hpp.html#ada9d5d265d78076b2e7fb980a09c71b0" title=" " alt="" coords="412,5,496,32"/>
 <area shape="rect" href="lib_root_8hpp.html#a6ce1f9927b8e99f76cbda975fb51adcf" title=" " alt="" coords="414,56,494,83"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="405,107,503,133"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="551,107,653,133"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="701,107,808,133"/>
 </map>
 </div>
 
@@ -576,16 +602,18 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Project on Y axis at a given X bin. </p>
+<p>Project matrix on Y axis at a given X bin. This fills proj. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_cgraph.png" border="0" usemap="#anamespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_cgraph" id="anamespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_cgraph">
-<area shape="rect" title="Project on Y axis at a given X bin." alt="" coords="5,56,157,83"/>
+<area shape="rect" title="Project matrix on Y axis at a given X bin. This fills proj." alt="" coords="5,56,157,83"/>
 <area shape="rect" href="lib_root_8hpp.html#ada9d5d265d78076b2e7fb980a09c71b0" title=" " alt="" coords="212,5,296,32"/>
 <area shape="rect" href="lib_root_8hpp.html#a6ce1f9927b8e99f76cbda975fb51adcf" title=" " alt="" coords="214,56,294,83"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="205,107,303,133"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="351,107,453,133"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="501,107,608,133"/>
 </map>
 </div>
 <div class="dynheader">
@@ -593,10 +621,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_icgraph.png" border="0" usemap="#anamespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_icgraph" alt=""/></div>
 <map name="anamespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_icgraph" id="anamespace_co_analyse_abecf48371e430ad0cc8dfb063e6d951d_icgraph">
-<area shape="rect" title="Project on Y axis at a given X bin." alt="" coords="571,31,723,57"/>
-<area shape="rect" href="namespace_co_analyse.html#ab64c2bb160dbdc01836274235d0bbd3b" title="Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]." alt="" coords="333,5,485,32"/>
-<area shape="rect" href="namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8" title="Remove the background in the given histo." alt="" coords="296,56,523,83"/>
-<area shape="rect" href="class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112" title=" " alt="" coords="5,56,248,83"/>
+<area shape="rect" title="Project matrix on Y axis at a given X bin. This fills proj." alt="" coords="789,31,941,57"/>
+<area shape="rect" href="namespace_co_analyse.html#ab64c2bb160dbdc01836274235d0bbd3b" title="Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]...." alt="" coords="552,5,704,32"/>
+<area shape="rect" href="namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da" title="Remove the background in the given histo." alt="" coords="515,56,741,83"/>
+<area shape="rect" href="class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b" title=" " alt="" coords="244,29,467,56"/>
+<area shape="rect" href="class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="280,81,431,108"/>
+<area shape="rect" href="class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="21,27,180,53"/>
+<area shape="rect" href="class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,78,196,119"/>
 </map>
 </div>
 
@@ -640,26 +671,31 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. </p>
+<p>Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. This fills proj. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_aa19f9a517f5a4ce70e61ebed3cfeecf9_cgraph.png" border="0" usemap="#anamespace_co_analyse_aa19f9a517f5a4ce70e61ebed3cfeecf9_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_aa19f9a517f5a4ce70e61ebed3cfeecf9_cgraph" id="anamespace_co_analyse_aa19f9a517f5a4ce70e61ebed3cfeecf9_cgraph">
-<area shape="rect" title="Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[." alt="" coords="5,56,157,83"/>
+<area shape="rect" title="Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[...." alt="" coords="5,56,157,83"/>
 <area shape="rect" href="lib_root_8hpp.html#ada9d5d265d78076b2e7fb980a09c71b0" title=" " alt="" coords="212,5,296,32"/>
 <area shape="rect" href="lib_root_8hpp.html#a6ce1f9927b8e99f76cbda975fb51adcf" title=" " alt="" coords="214,56,294,83"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="205,107,303,133"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="351,107,453,133"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="501,107,608,133"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="aeb2cc17685bbda3b8531803c4d8cc5c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb2cc17685bbda3b8531803c4d8cc5c8">&#9670;&nbsp;</a></span>removeBackground()</h2>
+<a id="afa2d6e36c43655ace45e8aa55a53d4da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa2d6e36c43655ace45e8aa55a53d4da">&#9670;&nbsp;</a></span>removeBackground()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void CoAnalyse::removeBackground </td>
@@ -691,6 +727,11 @@ Here is the call graph for this function:</div>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Remove the background in the given histo. </p>
@@ -711,17 +752,19 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_cgraph.png" border="0" usemap="#anamespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_cgraph" alt=""/></div>
-<map name="anamespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_cgraph" id="anamespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_cgraph">
+<div class="center"><img src="namespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_cgraph.png" border="0" usemap="#anamespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_cgraph" alt=""/></div>
+<map name="anamespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_cgraph" id="anamespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_cgraph">
 <area shape="rect" title="Remove the background in the given histo." alt="" coords="5,107,232,133"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="331,5,383,32"/>
-<area shape="rect" href="namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272" title="Total projection on X axis." alt="" coords="280,56,433,83"/>
-<area shape="rect" href="namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project on Y axis at a given X bin." alt="" coords="281,208,433,235"/>
-<area shape="rect" href="namespace_co_analyse.html#ad13b7eeaa3d7d9a30cdf04a8b0d17088" title=" " alt="" coords="293,107,421,133"/>
-<area shape="rect" href="namespace_co_analyse.html#ac1aa3fcfcc46318e4f0d6f42510471a0" title=" " alt="" coords="293,157,420,184"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="331,5,383,32"/>
+<area shape="rect" href="namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272" title="Project the whole matrix on the X axis. This fills proj." alt="" coords="280,56,433,83"/>
+<area shape="rect" href="namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project matrix on Y axis at a given X bin. This fills proj." alt="" coords="281,208,433,235"/>
+<area shape="rect" href="namespace_co_analyse.html#ad13b7eeaa3d7d9a30cdf04a8b0d17088" title="Set Y histogram proj in matrix at binX." alt="" coords="293,107,421,133"/>
+<area shape="rect" href="namespace_co_analyse.html#ac1aa3fcfcc46318e4f0d6f42510471a0" title="Set X histogram proj in matrix at binY." alt="" coords="293,157,420,184"/>
 <area shape="rect" href="lib_root_8hpp.html#a0269226b4d78b1089ef77180712147e0" title=" " alt="" coords="487,11,573,37"/>
 <area shape="rect" href="lib_root_8hpp.html#ab23c9fed2f973bde045e7d90c8e1f2fe" title=" " alt="" coords="489,61,571,88"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="481,119,579,145"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="627,119,729,145"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="777,119,884,145"/>
 <area shape="rect" href="lib_root_8hpp.html#ada9d5d265d78076b2e7fb980a09c71b0" title=" " alt="" coords="488,195,572,221"/>
 <area shape="rect" href="lib_root_8hpp.html#a6ce1f9927b8e99f76cbda975fb51adcf" title=" " alt="" coords="490,245,570,272"/>
 </map>
@@ -729,10 +772,13 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_icgraph.png" border="0" usemap="#anamespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_icgraph" alt=""/></div>
-<map name="anamespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_icgraph" id="anamespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_icgraph">
-<area shape="rect" title="Remove the background in the given histo." alt="" coords="296,5,523,32"/>
-<area shape="rect" href="class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112" title=" " alt="" coords="5,5,248,32"/>
+<div class="center"><img src="namespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_icgraph.png" border="0" usemap="#anamespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_icgraph" alt=""/></div>
+<map name="anamespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_icgraph" id="anamespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_icgraph">
+<area shape="rect" title="Remove the background in the given histo." alt="" coords="515,35,741,61"/>
+<area shape="rect" href="class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b" title=" " alt="" coords="244,8,467,35"/>
+<area shape="rect" href="class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="280,60,431,87"/>
+<area shape="rect" href="class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="21,5,180,32"/>
+<area shape="rect" href="class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,57,196,98"/>
 </map>
 </div>
 
@@ -781,6 +827,7 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000006">Deprecated:</a></b></dt><dd></dd></dl>
 
 </div>
 </div>
@@ -863,13 +910,17 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set Y histogram proj in matrix at binX. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_cgraph.png" border="0" usemap="#anamespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_cgraph" id="anamespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,133,32"/>
+<area shape="rect" title="Set Y histogram proj in matrix at binX." alt="" coords="5,5,133,32"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="181,5,279,32"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="327,5,429,32"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="477,5,584,32"/>
 </map>
 </div>
 <div class="dynheader">
@@ -877,9 +928,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_icgraph.png" border="0" usemap="#anamespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_icgraph" alt=""/></div>
 <map name="anamespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_icgraph" id="anamespace_co_analyse_ad13b7eeaa3d7d9a30cdf04a8b0d17088_icgraph">
-<area shape="rect" title=" " alt="" coords="571,5,699,32"/>
-<area shape="rect" href="namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8" title="Remove the background in the given histo." alt="" coords="296,5,523,32"/>
-<area shape="rect" href="class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112" title=" " alt="" coords="5,5,248,32"/>
+<area shape="rect" title="Set Y histogram proj in matrix at binX." alt="" coords="789,35,917,61"/>
+<area shape="rect" href="namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da" title="Remove the background in the given histo." alt="" coords="515,35,741,61"/>
+<area shape="rect" href="class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b" title=" " alt="" coords="244,8,467,35"/>
+<area shape="rect" href="class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="280,60,431,87"/>
+<area shape="rect" href="class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="21,5,180,32"/>
+<area shape="rect" href="class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,57,196,98"/>
 </map>
 </div>
 
@@ -916,13 +970,17 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set X histogram proj in matrix at binY. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_cgraph.png" border="0" usemap="#anamespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_cgraph" alt=""/></div>
 <map name="anamespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_cgraph" id="anamespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,132,32"/>
+<area shape="rect" title="Set X histogram proj in matrix at binY." alt="" coords="5,5,132,32"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="180,5,277,32"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="325,5,428,32"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="476,5,583,32"/>
 </map>
 </div>
 <div class="dynheader">
@@ -930,9 +988,12 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_icgraph.png" border="0" usemap="#anamespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_icgraph" alt=""/></div>
 <map name="anamespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_icgraph" id="anamespace_co_analyse_ac1aa3fcfcc46318e4f0d6f42510471a0_icgraph">
-<area shape="rect" title=" " alt="" coords="571,5,697,32"/>
-<area shape="rect" href="namespace_co_analyse.html#aeb2cc17685bbda3b8531803c4d8cc5c8" title="Remove the background in the given histo." alt="" coords="296,5,523,32"/>
-<area shape="rect" href="class_histo_analyse.html#a32a4ee17c51884e01eb924cec2c42112" title=" " alt="" coords="5,5,248,32"/>
+<area shape="rect" title="Set X histogram proj in matrix at binY." alt="" coords="789,35,916,61"/>
+<area shape="rect" href="namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da" title="Remove the background in the given histo." alt="" coords="515,35,741,61"/>
+<area shape="rect" href="class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b" title=" " alt="" coords="244,8,467,35"/>
+<area shape="rect" href="class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="280,60,431,87"/>
+<area shape="rect" href="class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="21,5,180,32"/>
+<area shape="rect" href="class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,57,196,98"/>
 </map>
 </div>
 

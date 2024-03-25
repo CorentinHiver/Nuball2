@@ -1,4 +1,4 @@
-.TH "Minimisator" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Minimisator" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -19,210 +19,130 @@ Minimisator
 
 .in +1c
 .ti -1c
-.RI "double \fBchi2\fP (\fBSpectraCo\fP const &ref_spectra, \fBSpectraCo\fP const &spectra)"
+.RI "auto const  & \fBgetMinimum\fP () const"
 .br
 .ti -1c
-.RI "double \fBchi2\fP (\fBSpectraCo\fP const &ref_spectra, \fBSpectraCo\fP const &spectra, \fBVertice\fP const &vertice)"
+.RI "\fBMinimisator\fP ()=default"
 .br
 .ti -1c
-.RI "double \fBchi2_second_derivative\fP (\fBSpectraCo\fP &ref_spectra, \fBSpectraCo\fP &test_spectra)"
+.RI "void \fBnelderMead\fP (\fBObjectiveFunction\fP const &function)"
 .br
 .ti -1c
-.RI "auto const  & \fBgetDegreesOfFreedom\fP () const"
+.RI "void \fBsetInitialGuess\fP (\fBVertice\fP const &init_vertice)"
 .br
 .ti -1c
-.RI "\fBMinimisator\fP (\fBRecalibration\fP *recal)"
+.RI "void \fBsetInitialSteps\fP (\fBVertice\fP const &steps)"
 .br
 .ti -1c
-.RI "\fBVertice\fP \fBminimise\fP (\fBSpectraCo\fP const &ref_spectra, \fBSpectraCo\fP const &spectra, std::string const &method='nelder\-mead')"
+.RI "void \fBsimpleGrad\fP (\fBObjectiveFunction\fP &func)"
+.br
+.RI "C'est peut-être une fausse piste \&.\&.\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBVertices\fP \fBg_minima_history\fP"
 .br
 .ti -1c
-.RI "auto \fBoperator\->\fP ()"
+.RI "std::vector< double > \fBg_minimums\fP"
 .br
 .ti -1c
-.RI "void \fBsetC\fP (double const &_C)"
+.RI "std::vector< \fBSimplex\fP > \fBg_simplex_history\fP"
 .br
 .ti -1c
-.RI "void \fBsetDegreesOfFreedom\fP (int const &degrees)"
+.RI "struct \fBMinimisator::NelderMeadParameters\fP \fBnmParam\fP"
 .br
 .ti -1c
-.RI "void \fBsetMaxa0\fP (double const &_maxa0)"
+.RI "double \fBtolerance\fP = 1\&.e\-3"
+.br
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static int \fBg_nb_rounds\fP = 5"
 .br
 .ti -1c
-.RI "void \fBsetMaxa1\fP (double const &_maxa1)"
-.br
-.ti -1c
-.RI "void \fBsetMaxa2\fP (double const &_maxa2)"
-.br
-.ti -1c
-.RI "void \fBsetMaxaSqrt\fP (double const &_maxaSqrt)"
-.br
-.ti -1c
-.RI "void \fBsetMaxC\fP (double const &_maxC)"
-.br
-.ti -1c
-.RI "void \fBsetMina0\fP (double const &_mina0)"
-.br
-.ti -1c
-.RI "void \fBsetMina1\fP (double const &_mina1)"
-.br
-.ti -1c
-.RI "void \fBsetMina2\fP (double const &_mina2)"
-.br
-.ti -1c
-.RI "void \fBsetMinaSqrt\fP (double const &_minaSqrt)"
-.br
-.ti -1c
-.RI "void \fBsetMinC\fP (double const &_minC)"
-.br
-.ti -1c
-.RI "void \fBsetThreshold\fP (int const &bin)"
+.RI "static int \fBg_order\fP = 3"
 .br
 .in -1c
 .SS "Private Attributes"
 
 .in +1c
 .ti -1c
-.RI "double \fBm_C\fP = 0\&.0"
+.RI "\fBVertices\fP \fBm_grad_vertices\fP"
 .br
 .ti -1c
-.RI "double \fBm_maxa0\fP = 0\&.0"
+.RI "\fBVertice\fP \fBm_initial_vertice\fP"
 .br
 .ti -1c
-.RI "double \fBm_maxa1\fP = 0\&.0"
+.RI "\fBVertice\fP \fBm_minimum\fP = 0\&.0"
 .br
 .ti -1c
-.RI "double \fBm_maxa2\fP = 0\&.0"
+.RI "int \fBm_nb_steps_grad\fP = 10"
 .br
 .ti -1c
-.RI "double \fBm_maxaSqrt\fP = 0\&.0"
+.RI "\fBVertice\fP \fBm_steps\fP"
 .br
 .ti -1c
-.RI "double \fBm_maxC\fP = 0\&.0"
-.br
-.ti -1c
-.RI "double \fBm_mina0\fP = 0\&.0"
-.br
-.ti -1c
-.RI "double \fBm_mina1\fP = 0\&.0"
-.br
-.ti -1c
-.RI "double \fBm_mina2\fP = 0\&.0"
-.br
-.ti -1c
-.RI "double \fBm_minaSqrt\fP = 0\&.0"
-.br
-.ti -1c
-.RI "double \fBm_minC\fP = 0\&.0"
-.br
-.ti -1c
-.RI "int \fBm_nb_freedom_degrees\fP = 3"
-.br
-.ti -1c
-.RI "\fBRecalibration\fP * \fBm_recal\fP = nullptr"
-.br
-.ti -1c
-.RI "int \fBm_spectra_threshold\fP = 0"
-.br
-.ti -1c
-.RI "struct \fBMinimisator::NelderMeadParameters\fP \fBnmParam\fP"
+.RI "\fBVertice\fP \fBm_weights\fP"
 .br
 .in -1c
-.SH "Class Documentation"
-.PP 
-.SH "struct Minimisator::NelderMeadParameters"
-.PP 
-\fBClass Members:\fP
-.RS 4
-double \fIalpha\fP 
-.br
-.PP
-double \fIbeta\fP 
-.br
-.PP
-double \fIdelta\fP 
-.br
-.PP
-double \fIgamma\fP 
-.br
-.PP
-.RE
-.PP
 .SH "Constructor & Destructor Documentation"
 .PP 
-.SS "Minimisator::Minimisator (\fBRecalibration\fP * recal)\fC [inline]\fP"
+.SS "Minimisator::Minimisator ()\fC [default]\fP"
 
 .SH "Member Function Documentation"
 .PP 
-.SS "double Minimisator::chi2 (\fBSpectraCo\fP const & ref_spectra, \fBSpectraCo\fP const & spectra)\fC [inline]\fP"
+.SS "auto const& Minimisator::getMinimum () const\fC [inline]\fP"
 
-.SS "double Minimisator::chi2 (\fBSpectraCo\fP const & ref_spectra, \fBSpectraCo\fP const & spectra, \fBVertice\fP const & vertice)\fC [inline]\fP"
+.SS "void Minimisator::nelderMead (\fBObjectiveFunction\fP const & function)\fC [inline]\fP"
 
-.SS "double Minimisator::chi2_second_derivative (\fBSpectraCo\fP & ref_spectra, \fBSpectraCo\fP & test_spectra)\fC [inline]\fP"
+.SS "void Minimisator::setInitialGuess (\fBVertice\fP const & init_vertice)\fC [inline]\fP"
 
-.SS "auto const& Minimisator::getDegreesOfFreedom () const\fC [inline]\fP"
+.SS "void Minimisator::setInitialSteps (\fBVertice\fP const & steps)\fC [inline]\fP"
 
-.SS "\fBVertice\fP Minimisator::minimise (\fBSpectraCo\fP const & ref_spectra, \fBSpectraCo\fP const & spectra, std::string const & method = \fC'nelder\-mead'\fP)\fC [inline]\fP"
+.SS "void Minimisator::simpleGrad (\fBObjectiveFunction\fP & func)\fC [inline]\fP"
 
-.SS "auto Minimisator::operator\-> ()\fC [inline]\fP"
-
-.SS "void Minimisator::setC (double const & _C)\fC [inline]\fP"
-
-.SS "void Minimisator::setDegreesOfFreedom (int const & degrees)\fC [inline]\fP"
-
-.SS "void Minimisator::setMaxa0 (double const & _maxa0)\fC [inline]\fP"
-
-.SS "void Minimisator::setMaxa1 (double const & _maxa1)\fC [inline]\fP"
-
-.SS "void Minimisator::setMaxa2 (double const & _maxa2)\fC [inline]\fP"
-
-.SS "void Minimisator::setMaxaSqrt (double const & _maxaSqrt)\fC [inline]\fP"
-
-.SS "void Minimisator::setMaxC (double const & _maxC)\fC [inline]\fP"
-
-.SS "void Minimisator::setMina0 (double const & _mina0)\fC [inline]\fP"
-
-.SS "void Minimisator::setMina1 (double const & _mina1)\fC [inline]\fP"
-
-.SS "void Minimisator::setMina2 (double const & _mina2)\fC [inline]\fP"
-
-.SS "void Minimisator::setMinaSqrt (double const & _minaSqrt)\fC [inline]\fP"
-
-.SS "void Minimisator::setMinC (double const & _minC)\fC [inline]\fP"
-
-.SS "void Minimisator::setThreshold (int const & bin)\fC [inline]\fP"
+.PP
+C'est peut-être une fausse piste \&.\&.\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfunc\fP 
+.br
+ 
+.RE
+.PP
 
 .SH "Member Data Documentation"
 .PP 
-.SS "double Minimisator::m_C = 0\&.0\fC [private]\fP"
+.SS "\fBVertices\fP Minimisator::g_minima_history"
 
-.SS "double Minimisator::m_maxa0 = 0\&.0\fC [private]\fP"
+.SS "std::vector<double> Minimisator::g_minimums"
 
-.SS "double Minimisator::m_maxa1 = 0\&.0\fC [private]\fP"
+.SS "int Minimisator::g_nb_rounds = 5\fC [static]\fP"
 
-.SS "double Minimisator::m_maxa2 = 0\&.0\fC [private]\fP"
+.SS "int Minimisator::g_order = 3\fC [static]\fP"
 
-.SS "double Minimisator::m_maxaSqrt = 0\&.0\fC [private]\fP"
+.SS "std::vector<\fBSimplex\fP> Minimisator::g_simplex_history"
 
-.SS "double Minimisator::m_maxC = 0\&.0\fC [private]\fP"
+.SS "\fBVertices\fP Minimisator::m_grad_vertices\fC [private]\fP"
 
-.SS "double Minimisator::m_mina0 = 0\&.0\fC [private]\fP"
+.SS "\fBVertice\fP Minimisator::m_initial_vertice\fC [private]\fP"
 
-.SS "double Minimisator::m_mina1 = 0\&.0\fC [private]\fP"
+.SS "\fBVertice\fP Minimisator::m_minimum = 0\&.0\fC [private]\fP"
 
-.SS "double Minimisator::m_mina2 = 0\&.0\fC [private]\fP"
+.SS "int Minimisator::m_nb_steps_grad = 10\fC [private]\fP"
 
-.SS "double Minimisator::m_minaSqrt = 0\&.0\fC [private]\fP"
+.SS "\fBVertice\fP Minimisator::m_steps\fC [private]\fP"
 
-.SS "double Minimisator::m_minC = 0\&.0\fC [private]\fP"
+.SS "\fBVertice\fP Minimisator::m_weights\fC [private]\fP"
 
-.SS "int Minimisator::m_nb_freedom_degrees = 3\fC [private]\fP"
+.SS "struct \fBMinimisator::NelderMeadParameters\fP Minimisator::nmParam"
 
-.SS "\fBRecalibration\fP* Minimisator::m_recal = nullptr\fC [private]\fP"
-
-.SS "int Minimisator::m_spectra_threshold = 0\fC [private]\fP"
-
-.SS "struct \fBMinimisator::NelderMeadParameters\fP Minimisator::nmParam\fC [private]\fP"
+.SS "double Minimisator::tolerance = 1\&.e\-3"
 
 
 .SH "Author"

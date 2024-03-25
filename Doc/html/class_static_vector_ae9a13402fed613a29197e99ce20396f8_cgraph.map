@@ -1,0 +1,8 @@
+<map id="StaticVector::push_back_unique" name="StaticVector::push_back_unique">
+<area shape="rect" id="node1" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="5,74,144,115"/>
+<area shape="rect" id="node2" href="$class_static_vector.html#ad756be87d5c09054f47d40e38ce4b45f" title="Does the vector contain element e ?" alt="" coords="215,56,346,83"/>
+<area shape="rect" id="node5" href="$class_static_vector.html#a8f604b0f4165d95a6b6653907c92ceb3" title="Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance..." alt="" coords="192,107,369,133"/>
+<area shape="rect" id="node3" href="$class_static_vector.html#a78db68071e02cf724af349d0e606ea4e" title="Return iterator to the beginning of the vector." alt="" coords="447,5,591,32"/>
+<area shape="rect" id="node4" href="$class_static_vector.html#ae80eaa7fb165b6408406870253bd8e5f" title="Return iterator to the end of the vector." alt="" coords="453,56,585,83"/>
+<area shape="rect" id="node6" href="$class_static_vector.html#a28a635b7f2cbd0cbc5a042dc22ab7ea3" title=" " alt="" coords="417,107,620,133"/>
+</map>

@@ -1,4 +1,4 @@
 <map id="Fit::too_few_counts" name="Fit::too_few_counts">
 <area shape="rect" id="node1" title="Set if there was not enough counts :" alt="" coords="5,5,153,32"/>
-<area shape="rect" id="node2" href="$lib_co_8hpp.html#a79092fe2f0694bdbb860894b0f983e32" title="Casts a number into an bool." alt="" coords="201,5,285,32"/>
+<area shape="rect" id="node2" href="$lib_co_8hpp.html#a1783566268ead87d4fdd8c61b6af7ede" title="Casts a any type into an bool." alt="" coords="201,5,285,32"/>
 </map>

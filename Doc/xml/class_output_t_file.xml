@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_output_t_file" kind="class" language="C++" prot="public">
+    <compoundname>OutputTFile</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">TFile</basecompoundref>
+    <includes refid="_output_t_file_8hpp" local="no">OutputTFile.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_output_t_file_1a3ac1415d2e385df0c55d63a33aab63ff" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>OutputTFile::OutputTFile</definition>
+        <argsstring>(std::string filename, std::string option=&quot;&quot;, std::string title=&quot;&quot;, Int_t compress=1)</argsstring>
+        <name>OutputTFile</name>
+        <param>
+          <type>std::string</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>option</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>title</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>Int_t</type>
+          <declname>compress</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/OutputTFile.hpp" line="9" column="3" bodyfile="lib/Classes/OutputTFile.hpp" bodystart="9" bodyend="17"/>
+        <references refid="lib_co_8hpp_1a6cca31a5d1658456b486e6fa135c690b" compoundref="lib_co_8hpp" startline="163" endline="171">pauseCo</references>
+      </memberdef>
+      <memberdef kind="function" id="class_output_t_file_1ae051c7d04475a5151d2c06d2be9e6c45" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>OutputTFile::Write</definition>
+        <argsstring>(ARGS... args) override</argsstring>
+        <name>Write</name>
+        <param>
+          <type>ARGS...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/OutputTFile.hpp" line="20" column="3" bodyfile="lib/Classes/OutputTFile.hpp" bodystart="20" bodyend="20"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_output_t_file_1ae051c7d04475a5151d2c06d2be9e6c45" compoundref="_output_t_file_8hpp" startline="20" endline="20">Write</references>
+        <referencedby refid="class_output_t_file_1ae051c7d04475a5151d2c06d2be9e6c45" compoundref="_output_t_file_8hpp" startline="20" endline="20">Write</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_output_t_file_1a90689ad0a9e7d7914b8537cca65bd39f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>virtual OutputTFile::~OutputTFile</definition>
+        <argsstring>()</argsstring>
+        <name>~OutputTFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/OutputTFile.hpp" line="22" column="11" bodyfile="lib/Classes/OutputTFile.hpp" bodystart="22" bodyend="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>OutputTFile</label>
+        <link refid="class_output_t_file"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TFile</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>OutputTFile</label>
+        <link refid="class_output_t_file"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>TFile</label>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Classes/OutputTFile.hpp" line="6" column="1" bodyfile="lib/Classes/OutputTFile.hpp" bodystart="7" bodyend="23"/>
+    <listofallmembers>
+      <member refid="class_output_t_file_1a3ac1415d2e385df0c55d63a33aab63ff" prot="public" virt="non-virtual"><scope>OutputTFile</scope><name>OutputTFile</name></member>
+      <member refid="class_output_t_file_1ae051c7d04475a5151d2c06d2be9e6c45" prot="public" virt="non-virtual"><scope>OutputTFile</scope><name>Write</name></member>
+      <member refid="class_output_t_file_1a90689ad0a9e7d7914b8537cca65bd39f" prot="public" virt="virtual"><scope>OutputTFile</scope><name>~OutputTFile</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

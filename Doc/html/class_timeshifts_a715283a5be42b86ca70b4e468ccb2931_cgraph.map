@@ -1,7 +1,7 @@
 <map id="Timeshifts::CheckParameters" name="Timeshifts::CheckParameters">
 <area shape="rect" id="node1" title=" " alt="" coords="5,56,217,83"/>
-<area shape="rect" id="node2" href="$class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="265,31,397,57"/>
-<area shape="rect" id="node8" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="305,81,357,108"/>
+<area shape="rect" id="node2" href="$class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="265,31,397,57"/>
+<area shape="rect" id="node8" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="305,81,357,108"/>
 <area shape="rect" id="node3" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="445,31,571,57"/>
 <area shape="rect" id="node4" href="$class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="619,31,749,57"/>
 <area shape="rect" id="node5" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="797,5,927,32"/>

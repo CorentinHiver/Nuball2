@@ -16,9 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="987" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="987" bodyend="-1"/>
-        <referencedby refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" compoundref="_spectra_alignator_8hpp" startline="806" endline="956">alignSpectra</referencedby>
-        <referencedby refid="class_spectra_alignator_1a06e5ad929499d18d557fd5a37daf8897" compoundref="_spectra_alignator_8hpp" startline="973" endline="973">setBruteForce</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="897" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="897" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_spectra_alignator_1ad36473470290fcb740440c8952e4b30e" prot="private" static="no" mutable="no">
         <type>TH3F *</type>
@@ -32,9 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="988" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="988" bodyend="-1"/>
-        <referencedby refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" compoundref="_spectra_alignator_8hpp" startline="806" endline="956">alignSpectra</referencedby>
-        <referencedby refid="class_spectra_alignator_1a6bac228fc1bc0ef5ad041966722642cd" compoundref="_spectra_alignator_8hpp" startline="967" endline="971">writeChi2Spectra</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="898" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="898" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_spectra_alignator_1a49faa58fd7b8c2bc3a16e0dbc11c9bbe" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
@@ -47,21 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="982" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="982" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="class_spectra_alignator_1abcc20c4ad4370552aa2730ade1f2b74e" prot="private" static="no" mutable="no">
-        <type>std::vector&lt; <ref refid="class_minimisator" kindref="compound">Minimisator</ref> &gt;</type>
-        <definition>std::vector&lt;Minimisator&gt; SpectraAlignator::m_minimisator</definition>
-        <argsstring></argsstring>
-        <name>m_minimisator</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="980" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="980" bodyend="-1"/>
-        <referencedby refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" compoundref="_spectra_alignator_8hpp" startline="806" endline="956">alignSpectra</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="892" column="15" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="892" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -75,9 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="986" column="7" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="986" bodyend="-1"/>
-        <referencedby refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" compoundref="_spectra_alignator_8hpp" startline="806" endline="956">alignSpectra</referencedby>
-        <referencedby refid="class_spectra_alignator_1a2aad91050c99f92c1e217d4c886db883" compoundref="_spectra_alignator_8hpp" startline="965" endline="965">setIterations</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="896" column="7" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="896" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_spectra_alignator_1a616ff75748e686a5a9bde689b9ec6a1e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="class_recalibration" kindref="compound">Recalibration</ref> &gt;</type>
@@ -90,8 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="981" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="981" bodyend="-1"/>
-        <referencedby refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" compoundref="_spectra_alignator_8hpp" startline="806" endline="956">alignSpectra</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="891" column="15" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="891" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_spectra_alignator_1a3ad1731be89ec8af6fc61a8cbe89ba80" prot="private" static="no" mutable="no">
         <type><ref refid="class_spectra_co" kindref="compound">SpectraCo</ref></type>
@@ -104,8 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="976" column="13" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="976" bodyend="-1"/>
-        <referencedby refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" compoundref="_spectra_alignator_8hpp" startline="806" endline="956">alignSpectra</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="887" column="13" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="887" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_spectra_alignator_1a3ab517682bf990b44620a3db9020064e" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> &gt;</type>
@@ -118,8 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="979" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="979" bodyend="-1"/>
-        <referencedby refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" compoundref="_spectra_alignator_8hpp" startline="806" endline="956">alignSpectra</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="889" column="15" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="889" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_spectra_alignator_1ad0175cbe3edb3c577a91a728625c5cf6" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -133,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="989" column="7" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="989" bodyend="-1"/>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="899" column="7" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="899" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_spectra_alignator_1a5098303e559bd1051c6758b2bf6bcf1a" prot="private" static="no" mutable="no">
         <type>TH2F *</type>
@@ -147,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="984" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="984" bodyend="-1"/>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="894" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="894" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -180,15 +157,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="806" column="24" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="806" bodyend="956"/>
-        <references refid="class_spectra_alignator_1a3ae8fddfa8d549fff41f095efb6a9ca4" compoundref="_spectra_alignator_8hpp" startline="987">m_brute_force</references>
-        <references refid="class_spectra_alignator_1ad36473470290fcb740440c8952e4b30e" compoundref="_spectra_alignator_8hpp" startline="988">m_chi2_spectra</references>
-        <references refid="class_spectra_alignator_1abcc20c4ad4370552aa2730ade1f2b74e" compoundref="_spectra_alignator_8hpp" startline="980">m_minimisator</references>
-        <references refid="class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a" compoundref="_spectra_alignator_8hpp" startline="986">m_nb_iterations</references>
-        <references refid="class_spectra_alignator_1a616ff75748e686a5a9bde689b9ec6a1e" compoundref="_spectra_alignator_8hpp" startline="981">m_recals</references>
-        <references refid="class_spectra_alignator_1a3ad1731be89ec8af6fc61a8cbe89ba80" compoundref="_spectra_alignator_8hpp" startline="976">m_ref_spectra</references>
-        <references refid="class_spectra_alignator_1a3ab517682bf990b44620a3db9020064e" compoundref="_spectra_alignator_8hpp" startline="979">m_spectra</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="717" column="24" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="717" bodyend="874"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+      </memberdef>
+      <memberdef kind="function" id="class_spectra_alignator_1aed228999d9baba04b99e8542204e058b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SpectraAlignator::newAlignement</definition>
+        <argsstring>(TH1 *_spectra, TH1 *spectra_output)</argsstring>
+        <name>newAlignement</name>
+        <param>
+          <type>TH1 *</type>
+          <declname>_spectra</declname>
+        </param>
+        <param>
+          <type>TH1 *</type>
+          <declname>spectra_output</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><xrefsect id="deprecated_1_deprecated000002"><xreftitle>Deprecated</xreftitle><xrefdescription></xrefdescription></xrefsect></para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="703" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="703" bodyend="714"/>
+        <references refid="class_minimisator_1a29123baa85c854b224ef5e93b6029c1d" compoundref="_spectra_alignator_8hpp" startline="633" endline="633">Minimisator::getMinimum</references>
+        <references refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_minimisator_1a3583b6db1e38e9d0342c8e417d7c67e6" compoundref="_spectra_alignator_8hpp" startline="634" endline="638">Minimisator::setInitialGuess</references>
+        <references refid="class_minimisator_1a1b7709cb6a248889abf24b37adf6904b" compoundref="_spectra_alignator_8hpp" startline="640" endline="643">Minimisator::setInitialSteps</references>
       </memberdef>
       <memberdef kind="function" id="class_spectra_alignator_1a06e5ad929499d18d557fd5a37daf8897" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -206,8 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="973" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="973" bodyend="973"/>
-        <references refid="class_spectra_alignator_1a3ae8fddfa8d549fff41f095efb6a9ca4" compoundref="_spectra_alignator_8hpp" startline="987">m_brute_force</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="884" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="884" bodyend="884"/>
       </memberdef>
       <memberdef kind="function" id="class_spectra_alignator_1a2aad91050c99f92c1e217d4c886db883" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -224,8 +220,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="965" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="965" bodyend="965"/>
-        <references refid="class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a" compoundref="_spectra_alignator_8hpp" startline="986">m_nb_iterations</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="876" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="876" bodyend="876"/>
+      </memberdef>
+      <memberdef kind="function" id="class_spectra_alignator_1a77c3fc9994a3475f24daf5bcf8b0110e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>SpectraAlignator::SpectraAlignator</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>SpectraAlignator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="695" column="3"/>
       </memberdef>
       <memberdef kind="function" id="class_spectra_alignator_1a1f75d38f8f9dd676b72689f8adbe3be5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -242,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="801" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="801" bodyend="804"/>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="697" column="3" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="697" bodyend="700"/>
       </memberdef>
       <memberdef kind="function" id="class_spectra_alignator_1a6bac228fc1bc0ef5ad041966722642cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -259,18 +267,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="967" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="967" bodyend="971"/>
-        <references refid="class_spectra_alignator_1ad36473470290fcb740440c8952e4b30e" compoundref="_spectra_alignator_8hpp" startline="988">m_chi2_spectra</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="878" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="878" bodyend="882"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
+<para><xrefsect id="deprecated_1_deprecated000001"><xreftitle>Deprecated</xreftitle><xrefdescription></xrefdescription></xrefsect></para>
     </detaileddescription>
     <collaborationgraph>
       <node id="2">
         <label>SpectraCo</label>
         <link refid="class_spectra_co"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_derivative</edgelabel>
+          <edgelabel>m_derivative2</edgelabel>
+        </childnode>
       </node>
       <node id="1">
         <label>SpectraAlignator</label>
@@ -280,20 +292,21 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="lib/Classes/SpectraAlignator.hpp" line="798" column="1" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="799" bodyend="990"/>
+    <location file="lib/Analyse/SpectraAlignator.hpp" line="692" column="1" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="693" bodyend="900"/>
     <listofallmembers>
       <member refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" prot="public" virt="non-virtual"><scope>SpectraAlignator</scope><name>alignSpectra</name></member>
       <member refid="class_spectra_alignator_1a3ae8fddfa8d549fff41f095efb6a9ca4" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_brute_force</name></member>
       <member refid="class_spectra_alignator_1ad36473470290fcb740440c8952e4b30e" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_chi2_spectra</name></member>
       <member refid="class_spectra_alignator_1a49faa58fd7b8c2bc3a16e0dbc11c9bbe" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_chi2s</name></member>
-      <member refid="class_spectra_alignator_1abcc20c4ad4370552aa2730ade1f2b74e" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_minimisator</name></member>
       <member refid="class_spectra_alignator_1a5d2a1ca21ba9deeb943965dbdb51496a" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_nb_iterations</name></member>
       <member refid="class_spectra_alignator_1a616ff75748e686a5a9bde689b9ec6a1e" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_recals</name></member>
       <member refid="class_spectra_alignator_1a3ad1731be89ec8af6fc61a8cbe89ba80" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_ref_spectra</name></member>
       <member refid="class_spectra_alignator_1a3ab517682bf990b44620a3db9020064e" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_spectra</name></member>
       <member refid="class_spectra_alignator_1ad0175cbe3edb3c577a91a728625c5cf6" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>m_spectra_threshold</name></member>
+      <member refid="class_spectra_alignator_1aed228999d9baba04b99e8542204e058b" prot="public" virt="non-virtual"><scope>SpectraAlignator</scope><name>newAlignement</name></member>
       <member refid="class_spectra_alignator_1a06e5ad929499d18d557fd5a37daf8897" prot="public" virt="non-virtual"><scope>SpectraAlignator</scope><name>setBruteForce</name></member>
       <member refid="class_spectra_alignator_1a2aad91050c99f92c1e217d4c886db883" prot="public" virt="non-virtual"><scope>SpectraAlignator</scope><name>setIterations</name></member>
+      <member refid="class_spectra_alignator_1a77c3fc9994a3475f24daf5bcf8b0110e" prot="public" virt="non-virtual"><scope>SpectraAlignator</scope><name>SpectraAlignator</name></member>
       <member refid="class_spectra_alignator_1a1f75d38f8f9dd676b72689f8adbe3be5" prot="public" virt="non-virtual"><scope>SpectraAlignator</scope><name>SpectraAlignator</name></member>
       <member refid="class_spectra_alignator_1a5098303e559bd1051c6758b2bf6bcf1a" prot="private" virt="non-virtual"><scope>SpectraAlignator</scope><name>surface_chi2</name></member>
       <member refid="class_spectra_alignator_1a6bac228fc1bc0ef5ad041966722642cd" prot="public" virt="non-virtual"><scope>SpectraAlignator</scope><name>writeChi2Spectra</name></member>

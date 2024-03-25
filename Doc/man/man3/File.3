@@ -1,4 +1,4 @@
-.TH "File" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "File" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -43,8 +43,13 @@ File \- EXPERIMENTAL Composed of a \fBPath\fP and a \fBFilename\fP\&.
 .RI "\fBFile\fP (std::string const &file, std::string const &mode='')"
 .br
 .ti -1c
+.RI "\fBFilename\fP & \fBfilename\fP ()"
+.br
+.RI "\fBFilename\fP stands for the file name without the path but with the extension\&. "
+.ti -1c
 .RI "\fBFilename\fP const  & \fBfilename\fP () const"
 .br
+.RI "\fBFilename\fP stands for the file name without the path but with the extension\&. "
 .ti -1c
 .RI "\fBFolder\fP const  & \fBfolder\fP () const"
 .br
@@ -76,6 +81,9 @@ File \- EXPERIMENTAL Composed of a \fBPath\fP and a \fBFilename\fP\&.
 .RI "\fBFile\fP & \fBoperator=\fP (std::string const &file)"
 .br
 .ti -1c
+.RI "bool \fBoperator==\fP (\fBFile\fP const &other) const"
+.br
+.ti -1c
 .RI "\fBPath\fP const  & \fBpath\fP () const"
 .br
 .ti -1c
@@ -84,6 +92,7 @@ File \- EXPERIMENTAL Composed of a \fBPath\fP and a \fBFilename\fP\&.
 .ti -1c
 .RI "std::string const  & \fBshortName\fP () const"
 .br
+.RI "Short name stands for the file name withpout the path nor the extension\&. "
 .ti -1c
 .RI "auto \fBsize\fP (std::string const &unit='o') const"
 .br
@@ -167,8 +176,14 @@ rethink the checkMode logic \&.\&.\&.
 
 .SS "std::string const& File::extension () const\fC [inline]\fP"
 
+.SS "\fBFilename\fP& File::filename ()\fC [inline]\fP"
+
+.PP
+\fBFilename\fP stands for the file name without the path but with the extension\&. 
 .SS "\fBFilename\fP const& File::filename () const\fC [inline]\fP"
 
+.PP
+\fBFilename\fP stands for the file name without the path but with the extension\&. 
 .SS "void File::fill (std::string const & file)\fC [inline]\fP, \fC [private]\fP"
 
 .SS "\fBFolder\fP const& File::folder () const\fC [inline]\fP"
@@ -191,12 +206,16 @@ rethink the checkMode logic \&.\&.\&.
 
 .SS "\fBFile\fP& File::operator= (std::string const & file)\fC [inline]\fP"
 
+.SS "bool File::operator== (\fBFile\fP const & other) const\fC [inline]\fP"
+
 .SS "\fBPath\fP const& File::path () const\fC [inline]\fP"
 
 .SS "void File::setExtension (std::string const & new_extension)\fC [inline]\fP"
 
 .SS "std::string const& File::shortName () const\fC [inline]\fP"
 
+.PP
+Short name stands for the file name withpout the path nor the extension\&. 
 .SS "auto File::size (std::string const & unit = \fC'o'\fP) const\fC [inline]\fP"
 
 .SS "std::string const& File::string () const\fC [inline]\fP"

@@ -1,14 +1,48 @@
-.TH "todo" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "todo" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
 todo \- Todo List 
 
-.IP "\fBClass \fBCalibration\fP \fP" 1c
-\fBCalibration::verify()\fP DO NOT SUPPORT \fBMTObject\fP !!  
+.IP "\fBMember \fBAddTH1ByValue\fP (TH2 *histo2, TH1 *histo1, int index, bool x=true)\fP" 1c
+doesn't work for some reason \&.\&.\&. 
+.IP "\fBClass \fBCalibrator\fP \fP" 1c
+\fBCalibrator::verify()\fP DO NOT SUPPORT multithreading with \fBMTObject\fP !!  
+.IP "\fBMember \fBCalibrator::operator bool\fP () const &\fP" 1c
+  
+.IP "\fBMember \fBDataFile< Index, T >::vectorize\fP ()\fP" 1c
+if needed  
+.IP "\fBClass \fBFaster2Histo\fP \fP" 1c
+ event building, timeshifts 
+.IP "\fBMember \fBFaster2Histo::setTrigger\fP (TriggerHit trigger)\fP" 1c
+UNUSED until event building is done  
 .IP "\fBClass \fBFile\fP \fP" 1c
 rethink the checkMode logic \&.\&.\&.  
-.IP "\fBClass \fBMTTHist< THist >\fP \fP" 1c
-better memory management 
+.IP "\fBMember \fBHitBuffer::shift\fP (int n)\fP" 1c
+Make it functionnal maybe ? 
+.IP "\fBClass \fBManip\fP \fP" 1c
+make it better !!  
+.IP "\fBClass \fBMTObject\fP \fP" 1c
+ Trying to make this work : template<class\&.\&.\&. ARGS> static ret_type helper_function(MyClass & myclass, ARGS\&.\&.\&. args) {return myclass\&.function_to_multithread(std::forward<ARGS>(args)\&.\&.\&.);}  
+.IP "\fBMember \fBMTObject::parallelise_function\fP (Func &&func, ARGS &&\&.\&.\&. args)\fP" 1c
+check if I can replace Func by std::function  
+.IP "\fBClass \fBNearLine\fP \fP" 1c
+ 
+.IP "\fBMember \fBSpectraCo::fill\fP (double const &X) noexcept\fP" 1c
+test it  
+.IP "\fBMember \fBSpectraCo::operator*\fP (double const &factor)\fP" 1c
+can be optimized  
+.IP "\fBMember \fBSpectraCo::operator/\fP (double const &factor)\fP" 1c
+can be optimized  
+.IP "\fBMember \fBSpectraCo::rebin\fP (int const &factor, bool const &rebin_derivatives=false)\fP" 1c
+create a custom method without the use of ROOT (attempt commented at the bottom of the file)  
+.IP "\fBMember \fBSpectraCo::removeBackground\fP (int const &smooth, std::string const &fit_options='') noexcept\fP" 1c
+Try to adapt not to have to use root for this function 
+.IP "\fBMember \fBSpectraCo::~SpectraCo\fP () noexcept\fP" 1c
+  
+.IP "\fBClass \fBTheTChain\fP \fP" 1c
+maybe 
+.IP "\fBMember \fBTimeshifts::verification\fP (bool const &verif=true)\fP" 1c
+caption
 .PP
 

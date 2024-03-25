@@ -29,6 +29,8 @@ auto \& \textbf{ files} ()
 \item 
 auto const  \& \textbf{ files} () const
 \item 
+auto \& \textbf{ get\+Files\+List} ()
+\item 
 \textbf{ MTFaster\+Reader} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
 \textbf{ MTFaster\+Reader} (\textbf{ Files\+Manager} const \&\textbf{ files})
@@ -46,6 +48,11 @@ void \textbf{ print\+MTFiles} ()
 void \textbf{ set\+Timeshifts} (std\+::vector$<$ \textbf{ Time} $>$ const \&timeshifts)
 \item 
 auto const  \& \textbf{ timeshift} (\textbf{ Label} const \&label) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ show\+Progress\+Bar} (bool const \&choice=true)
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -68,41 +75,32 @@ bool \textbf{ next\+Filename} (std\+::string \&filename)
 \item 
 std\+::vector$<$ \textbf{ Time} $>$ \textbf{ m\+\_\+timeshifts}
 \end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \textbf{ s\+\_\+progress\+Bar} = false
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Class used to read in parallel .fast files of the same run. 
 
 {\bfseries{Look at the \doxyref{Faster\+Reader}{p.}{class_faster_reader} class for the various options}}\doxysubsection{How to use this class}\label{class_m_t_faster_reader_autotoc_md0}
-First, you\textquotesingle{}ll need to activate the multithreading \+:
+First, you\textquotesingle{}ll need to activate the multithreading \+: \begin{DoxyVerb}   MTObject::Initialise(nb_threads)
+\end{DoxyVerb}
+ Then instanciate this class \+: \begin{DoxyVerb}   MTFasterReader reader(folder_name, first_n_files);
+\end{DoxyVerb}
+ To read all the files then leave the second argument empty
 
-MTObject\+::\+Initialize(nb\+\_\+threads)
+Then, use the read\+Raw(function, arguments...) method to run any user defined function. \begin{DoxyVerb}   reader.readRaw(function, arguments...);
+\end{DoxyVerb}
+ Carefull \+: this function MUST have the following arguments is this EXACT order \+: \begin{DoxyVerb}   return_type function(Hit & hit, FasterReader & reader, arguments...)
+\end{DoxyVerb}
+ This function can also be a static method of an object, but CANNOT be a member
 
-Then instanciate this class \+:
+The trick to use the object anyway is to pass it as an argument \+: \begin{DoxyVerb}   static return_type myClass::function(Hit & hit, FasterReader & reader, myClass & class, arguments...);
+\end{DoxyVerb}
 
-
-\begin{DoxyEnumerate}
-\item \doxyref{MTFaster\+Reader}{p.}{class_m_t_faster_reader} reader(folder\+\_\+name, first\+\_\+n\+\_\+files);
-\end{DoxyEnumerate}
-
-To read all the files then leave the second argument empty
-
-Then, use the read\+Raw(function, arguments...) method to run any user defined function.
-
-
-\begin{DoxyEnumerate}
-\item reader.\+read\+Raw(function, arguments...);
-\end{DoxyEnumerate}
-
-Carefull \+: this function MUST have the following arguments is this EXACT order \+:
-
-return\+\_\+type function(\+Hit \& hit, Faster\+Reader \& reader, arguments...)
-
-This function can also be a static method of an object, but CANNOT be a member
-
-The trick to use the object anyway is to pass it as an argument \+:
-
-static return\+\_\+type my\+Class\+::function(\+Hit \& hit, Faster\+Reader \& reader, my\+Class \& class, arguments...);
 
 Here is a minimal code snippet \+: \begin{DoxyVerb} void function(Hit & hit, FasterReader & reader, Arg & some_argument) 
  {
@@ -116,16 +114,14 @@ Here is a minimal code snippet \+: \begin{DoxyVerb} void function(Hit & hit, Fas
 
  int main()
  {
-    MTObject::Initialize(n); // n being an appropriate number of threads.
+    MTObject::Initialise(n); // n being an appropriate number of threads.
     MTFasterReader reader(folder);
     Arg some_argument;
     reader.readRaw(function, some_argument);
     // Do something with the argument like print(some_argument) or some_argument.Write()
  }
 \end{DoxyVerb}
- Here are two function examples. The third parameter has been instanciated before the \doxyref{MTFaster\+Reader\+::read\+Raw()}{p.}{class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513} method call
-
-\begin{DoxyVerb}   void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
+ Here are two function examples. The third parameter has been instanciated before the \doxyref{MTFaster\+Reader\+::read\+Raw()}{p.}{class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513} method call \begin{DoxyVerb}   void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
     {
        int counter = 0;
        while(reader.Read())
@@ -146,7 +142,7 @@ Here is a minimal code snippet \+: \begin{DoxyVerb} void function(Hit & hit, Fas
 \end{DoxyVerb}
  (see \doxyref{MTTHist}{p.}{class_m_t_t_hist} and \doxyref{MTCounter}{p.}{class_m_t_counter} documentation)
 
-It is recommended to use the \char`\"{}\&\char`\"{} symbol (reference) before the other as well parameters so that they are shared between threads, therefore only with thread safe objects, but it is not mandatory. If you want to pass read-\/only objects (i.\+e. lookup tables), consider adding the \char`\"{}const\char`\"{} key word like that \+: (..., type const \& lookup\+\_\+table, ...). Another work-\/around is simply to declare your parameter at a global scope, although it is not recommended to have too many of them. 
+It is recommended to pass the variables by reference (adding the \textquotesingle{}\&\textquotesingle{} character) for the parameters so that they are shared between threads. Therefore this should only be done for thread safe objects, like any object in the folder MTObjects/ or stl stuff, or read-\/only variables. If you want to pass read-\/only objects (i.\+e. lookup tables), consider adding the \char`\"{}const\char`\"{} key word (..., type const \& lookup\+\_\+table, ...). Another work-\/around is simply to declare your parameter at a global scope, although it is not recommended to have too many global variables. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\label{class_m_t_faster_reader_ad7f0fc9a9cd713d59870a91c86d8ad9a}} 
@@ -176,7 +172,8 @@ Regular constructor.
 {\em nb\+\_\+files} & \+: Default -\/1, takes all the files \\
 \hline
 \end{DoxyParams}
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -212,27 +209,22 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_m_t_faster_reader_a8693e1143a0aea8096a527c7d9df9a63_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_m_t_faster_reader_a8693e1143a0aea8096a527c7d9df9a63_icgraph}
-\end{center}
-\end{figure}
 \mbox{\label{class_m_t_faster_reader_a58a2fe8f9f9ba39808d43f36f45c8288}} 
 \index{MTFasterReader@{MTFasterReader}!addFolder@{addFolder}}
 \index{addFolder@{addFolder}!MTFasterReader@{MTFasterReader}}
 \doxysubsubsection{addFolder()}
 {\footnotesize\ttfamily bool MTFaster\+Reader\+::add\+Folder (\begin{DoxyParamCaption}\item[{\textbf{ Path}}]{path,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_m_t_faster_reader_a58a2fe8f9f9ba39808d43f36f45c8288_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -251,11 +243,26 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{files()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily auto const\& MTFaster\+Reader\+::files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_m_t_faster_reader_a5d2beaf7551d9b288eef9509daf8b3b5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a023fdc6cdd455017dc7e911820206ac0}} 
+\index{MTFasterReader@{MTFasterReader}!getFilesList@{getFilesList}}
+\index{getFilesList@{getFilesList}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{getFilesList()}
+{\footnotesize\ttfamily auto\& MTFaster\+Reader\+::get\+Files\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a023fdc6cdd455017dc7e911820206ac0_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_m_t_faster_reader_a63e239df82bf04244bdab829bb73cd20}} 
@@ -284,7 +291,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{printMTFiles()}
 {\footnotesize\ttfamily void MTFaster\+Reader\+::print\+MTFiles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -298,7 +306,8 @@ Here is the call graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
 void MTFaster\+Reader\+::\+Read (\begin{DoxyParamCaption}\item[{\textbf{ MTFaster\+Reader} \&}]{MTreader,  }\item[{Func}]{function,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -320,17 +329,19 @@ Use this function in the same way as read\+Raw, with a function like this \+: fu
 
 
 \begin{DoxyParams}{Parameters}
-{\em func} & \+: Must be of the form func(\+Hit \& hit, Alignator \& aligned\+Tree, args...) with args \\
+{\em func} & \+: Must be of the form func(\+Hit \& hit, Alignator \& aligned\+Tree, args...). \doxyref{Alignator}{p.}{class_alignator} is a simple wrapper around a tree. Use aligned\+Tree\+::\+Get\+Entry \\
 \hline
 \end{DoxyParams}
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_m_t_faster_reader_af1ec563da5602cc23d7b0cd98b63bee0_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -344,7 +355,8 @@ Here is the caller graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
 void MTFaster\+Reader\+::read\+Aligned (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \textbf{ Time} $>$}]{timeshifts,  }\item[{Func \&\&}]{func,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -369,18 +381,20 @@ Reads many faster files in parallel.
 \end{DoxyParams}
 The declared function MUST have its two first parameters as follow \+: type function(\+Hit \& hit, Faster\+Reader \& reader, ...); You can add any other parameter in the ..., but then you have to call them in the read\+Raw method call e.\+g. \+: \begin{DoxyVerb}   void my_function(Hit & hit, FasterReader & reader, MTCounter & counter){do something...}
 \end{DoxyVerb}
- in main \begin{DoxyVerb}   MTFasterReader reader(/path/to/data/folder/, wanted_number_of_files);
-   MTCounter counter;
-   reader.readRaw(my_function, counter);
+ in main \begin{DoxyVerb}   MTFasterReader readerMT(/path/to/data/folder/, wanted_number_of_files);
+   MTCounter counterMT;
+   readerMT.readRaw(my_function, counterMT);
 \end{DoxyVerb}
- That way, my\+\_\+function will be executed in parallel on each file in /path/to/data/folder/ Here is the call graph for this function\+:\nopagebreak
+ That way, my\+\_\+function will be executed in parallel on each file in /path/to/data/folder/ Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_m_t_faster_reader_ae316d31ebcb18ae8689522509d1ba513_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -394,7 +408,8 @@ Here is the caller graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
 void MTFaster\+Reader\+::\+Realign (\begin{DoxyParamCaption}\item[{\textbf{ MTFaster\+Reader} \&}]{MTreader,  }\item[{Func}]{function,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -406,6 +421,20 @@ Here is the call graph for this function\+:\nopagebreak
 \index{setTimeshifts@{setTimeshifts}!MTFasterReader@{MTFasterReader}}
 \doxysubsubsection{setTimeshifts()}
 {\footnotesize\ttfamily void MTFaster\+Reader\+::set\+Timeshifts (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \textbf{ Time} $>$ const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_faster_reader_a39cce770cb5f6dc49e2ae2558d709af6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_m_t_faster_reader_a91677f13aa03d3b2f9dee6eb252286d1}} 
+\index{MTFasterReader@{MTFasterReader}!showProgressBar@{showProgressBar}}
+\index{showProgressBar@{showProgressBar}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{showProgressBar()}
+{\footnotesize\ttfamily static void MTFaster\+Reader\+::show\+Progress\+Bar (\begin{DoxyParamCaption}\item[{bool const \&}]{choice = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 \mbox{\label{class_m_t_faster_reader_a2adcc31120c30ac26b0c35a67c0e8822}} 
 \index{MTFasterReader@{MTFasterReader}!timeshift@{timeshift}}
@@ -440,6 +469,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{m\_timeshifts@{m\_timeshifts}!MTFasterReader@{MTFasterReader}}
 \doxysubsubsection{m\_timeshifts}
 {\footnotesize\ttfamily std\+::vector$<$\textbf{ Time}$>$ MTFaster\+Reader\+::m\+\_\+timeshifts\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_m_t_faster_reader_aca07d380d9a702313f523c1eea28c0d0}} 
+\index{MTFasterReader@{MTFasterReader}!s\_progressBar@{s\_progressBar}}
+\index{s\_progressBar@{s\_progressBar}!MTFasterReader@{MTFasterReader}}
+\doxysubsubsection{s\_progressBar}
+{\footnotesize\ttfamily bool MTFaster\+Reader\+::s\+\_\+progress\+Bar = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
 
 

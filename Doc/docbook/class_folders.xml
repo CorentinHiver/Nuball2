@@ -21,7 +21,7 @@
 </listitem>
             <listitem><para>auto <link linkend="_class_folders_1aa6c7cccbbb9de930b9a41dc42dcbb840">erase</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;pos)</para>
 </listitem>
-            <listitem><para>auto <link linkend="_class_folders_1a035d2b31430c66fc7a8941a9d938b658">erase</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;pos, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;<link linkend="_class_folders_1a6b8b818a0a08a010b9849573883bf189">size</link>)</para>
+            <listitem><para>auto <link linkend="_class_folders_1a035d2b31430c66fc7a8941a9d938b658">erase</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;pos, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;<link linkend="_class_folders_1a415c1107abd57b7a9c63fd8959a220cd">size</link>)</para>
 </listitem>
             <listitem><para><link linkend="_class_folders_1abb5ba77dd0b151ddc2479831740e514b">Folders</link> ()</para>
 </listitem>
@@ -47,9 +47,9 @@
 </listitem>
             <listitem><para>void <link linkend="_class_folders_1ab7471e5d0263ec69f2c87f184c004395">push_back</link> (<link linkend="_class_folder">Folder</link> const &amp;folder)</para>
 </listitem>
-            <listitem><para><link linkend="_class_folders">Folders</link> &amp; <link linkend="_class_folders_1a9b9a8af61bcaec214ec25ec217b84ef7">resize</link> (int const &amp;<link linkend="_class_folders_1a6b8b818a0a08a010b9849573883bf189">size</link>)</para>
+            <listitem><para><link linkend="_class_folders">Folders</link> &amp; <link linkend="_class_folders_1a9b9a8af61bcaec214ec25ec217b84ef7">resize</link> (int const &amp;<link linkend="_class_folders_1a415c1107abd57b7a9c63fd8959a220cd">size</link>)</para>
 </listitem>
-            <listitem><para>auto const <link linkend="_class_folders_1a6b8b818a0a08a010b9849573883bf189">size</link> () const</para>
+            <listitem><para>auto <link linkend="_class_folders_1a415c1107abd57b7a9c63fd8959a220cd">size</link> () const</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_folders_1a21778cd16e2d1dfa91886bba394a506f">string</link> () const</para>
 </listitem>
@@ -217,15 +217,15 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_folders_1a6b8b818a0a08a010b9849573883bf189"/>    <section>
+    </section><anchor xml:id="_class_folders_1a415c1107abd57b7a9c63fd8959a220cd"/>    <section>
     <title>size()</title>
 <indexterm><primary>size</primary><secondary>Folders</secondary></indexterm>
 <indexterm><primary>Folders</primary><secondary>size</secondary></indexterm>
-<para><computeroutput>auto const Folders::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>auto Folders::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_a6b8b818a0a08a010b9849573883bf189_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_folders_a415c1107abd57b7a9c63fd8959a220cd_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

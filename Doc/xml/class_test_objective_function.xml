@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_test_objective_function" kind="class" language="C++" prot="public">
+    <compoundname>TestObjectiveFunction</compoundname>
+    <basecompoundref refid="class_objective_function" prot="public" virt="non-virtual">ObjectiveFunction</basecompoundref>
+    <includes refid="_spectra_alignator_8hpp" local="no">SpectraAlignator.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_test_objective_function_1a37613667d05da9ece656c1bfb9b48843" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>double</type>
+        <definition>double TestObjectiveFunction::evaluate</definition>
+        <argsstring>(std::vector&lt; double &gt; const &amp;coefficients) const override</argsstring>
+        <name>evaluate</name>
+        <reimplements refid="class_objective_function_1a9eb6407e18579b7eddcffcfe55badf20">evaluate</reimplements>
+        <param>
+          <type>std::vector&lt; double &gt; const &amp;</type>
+          <declname>coefficients</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="375" column="10" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="375" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="class_test_objective_function_1a4e14bcf861e99f85e3c513e0860d0de9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>TestObjectiveFunction::TestObjectiveFunction</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>TestObjectiveFunction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="374" column="3"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>TestObjectiveFunction</label>
+        <link refid="class_test_objective_function"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ObjectiveFunction</label>
+        <link refid="class_objective_function"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>TestObjectiveFunction</label>
+        <link refid="class_test_objective_function"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ObjectiveFunction</label>
+        <link refid="class_objective_function"/>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Analyse/SpectraAlignator.hpp" line="371" column="1" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="372" bodyend="381"/>
+    <listofallmembers>
+      <member refid="class_test_objective_function_1a37613667d05da9ece656c1bfb9b48843" prot="public" virt="virtual"><scope>TestObjectiveFunction</scope><name>evaluate</name></member>
+      <member refid="class_objective_function_1aae8254009cb9b2dcbbfa751149652fbd" prot="public" virt="non-virtual"><scope>TestObjectiveFunction</scope><name>ObjectiveFunction</name></member>
+      <member refid="class_test_objective_function_1a4e14bcf861e99f85e3c513e0860d0de9" prot="public" virt="non-virtual"><scope>TestObjectiveFunction</scope><name>TestObjectiveFunction</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

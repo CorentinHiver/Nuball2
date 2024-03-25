@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="sources_8hpp" kind="file" language="C++">
+    <compoundname>sources.hpp</compoundname>
+    <innernamespace refid="namespace_sources_co">SourcesCo</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SOURCES_HPP<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SOURCES_HPP<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4" refid="namespace_sources_co" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_sources_co" kindref="compound">SourcesCo</ref></highlight></codeline>
+<codeline lineno="5"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="6" refid="namespace_sources_co_1a630d56c9ac0b13d6ce22f599d0e515d3" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="namespace_sources_co_1a630d56c9ac0b13d6ce22f599d0e515d3" kindref="member">Eu152_5</ref><sp/>=<sp/>{121.7830,<sp/>344.2760,<sp/>778.9030,<sp/>964.1310,<sp/>1408.0110};</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="namespace_sources_co_1abe9a6ff287ecdd65b5e43c0d51446091" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="namespace_sources_co_1abe9a6ff287ecdd65b5e43c0d51446091" kindref="member">Eu152_10</ref><sp/>=<sp/>{121.7817,<sp/>244.6974,<sp/>443.9606,<sp/>867.380,<sp/>964.057,<sp/>1085.837,<sp/>1112.076,<sp/>1212.948,<sp/>1408.013};</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="namespace_sources_co_1ac98f545082a728c551c82635c5b5791c" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="namespace_sources_co_1ac98f545082a728c551c82635c5b5791c" kindref="member">Co60</ref><sp/><sp/>=<sp/>{1173.228,<sp/>1332.492};</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="namespace_sources_co_1a621d7f2e2fa179581cc32bf8e3ab8e5e" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;double&gt;<sp/><ref refid="namespace_sources_co_1a621d7f2e2fa179581cc32bf8e3ab8e5e" kindref="member">Cs137</ref><sp/>=<sp/>{661.657};</highlight></codeline>
+<codeline lineno="13"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//SOURCES_HPP<sp/></highlight></codeline>
+    </programlisting>
+    <location file="lib/sources.hpp"/>
+  </compounddef>
+</doxygen>

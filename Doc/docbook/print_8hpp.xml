@@ -2,6 +2,19 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_print_8hpp" xml:lang="en-US">
 <title>lib/print.hpp File Reference</title>
 <indexterm><primary>lib/print.hpp</primary></indexterm>
+<programlisting>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+</programlisting>Include dependency graph for print.hpp:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
 This graph shows which files directly or indirectly include this file:<para>
     <informalfigure>
         <mediaobject>
@@ -12,39 +25,194 @@ This graph shows which files directly or indirectly include this file:<para>
     </informalfigure>
 </para>
 <simplesect>
-    <title>Functions    </title>
+    <title>Macros    </title>
         <itemizedlist>
-            <listitem><para>template&lt;class... ARGS&gt; </para><para>void <link linkend="_print_8hpp_1a7c50c0690489629965f74c4921570ce5">debug</link> (ARGS &amp;&amp;... args)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1acbf3245277a73b810032219100559ae2">_GLIBCXX_USE_CXX11_ABI</link>   0/1</para>
 </listitem>
-            <listitem><para>template&lt;class E , size_t size&gt; </para><para>std::ostream &amp; <link linkend="_print_8hpp_1a021f6cc0c03903546e6a63851944f2e8">operator&lt;&lt;</link> (std::ostream &amp;cout, std::array&lt; E, size &gt; const &amp;a)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1a7b3b25cba33b07c303f3060fe41887f6">BLACK</link>   &quot;\u001b[30m&quot;</para>
 </listitem>
-            <listitem><para>template&lt;class K , class V &gt; </para><para>std::ostream &amp; <link linkend="_print_8hpp_1a1fc2e1be374c41706525b8d606242646">operator&lt;&lt;</link> (std::ostream &amp;cout, std::map&lt; K, V &gt; const &amp;m)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1a79d10e672abb49ad63eeaa8aaef57c38">BLUE</link>   &quot;\u001b[34m&quot;</para>
 </listitem>
-            <listitem><para>template&lt;class F , class S &gt; </para><para>std::ostream &amp; <link linkend="_print_8hpp_1a305d037b6a2823d9d8d935b1cd5dd2c0">operator&lt;&lt;</link> (std::ostream &amp;cout, std::pair&lt; F, S &gt; const &amp;p)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1a37c3aae09c44fbf015cf4f048a1ea6bf">BRIGHTBLACK</link>   &quot;\u001b[30;1m&quot;</para>
 </listitem>
-            <listitem><para>template&lt;class E &gt; </para><para>std::ostream &amp; <link linkend="_print_8hpp_1a03b9abfe3f12543c365e9a25848ba566">operator&lt;&lt;</link> (std::ostream &amp;cout, std::vector&lt; E &gt; const &amp;v)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1a1856ac8f97780221a92b56c5b994b959">BRIGHTBLUE</link>   &quot;\u001b[34;1m&quot;</para>
 </listitem>
-            <listitem><para>std::ostream &amp; <link linkend="_print_8hpp_1ad68695d41301547d77d546b80b1bc278">operator&lt;&lt;</link> (std::ostream &amp;cout, unsigned char const &amp;uc)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1a6c928762de56d07b80b0c9dc9472a4d5">BRIGHTCYAN</link>   &quot;\u001b[36;1m&quot;</para>
 </listitem>
-            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7">print</link> ()</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1aa52f4996a4480f3f19d881dbff50ae59">BRIGHTGREEN</link>   &quot;\u001b[32;1m&quot;</para>
 </listitem>
-            <listitem><para>template&lt;class... T&gt; </para><para>void <link linkend="_print_8hpp_1a527acf8dce9e07a4901d65a23979424b">print</link> (T const &amp;... t)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1a25c081882d60d0060029256721157d89">BRIGHTMAGENTA</link>   &quot;\u001b[35;1m&quot;</para>
 </listitem>
-            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_print_8hpp_1a02e3acd6b90f83126d840187ee8023d6">print</link> (T const &amp;t)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1a62e8ee733dff17c16de3391bb0fc50c7">BRIGHTRED</link>   &quot;\u001b[31;1m&quot;</para>
 </listitem>
-            <listitem><para>template&lt;class T , class... T2&gt; </para><para>void <link linkend="_print_8hpp_1a942a3ac725f791da05ff038fd549a721">print</link> (T const &amp;t, T2 const &amp;... t2)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1a099085e6196d7a7a29cbee3ef769c64e">BRIGHTWHITE</link>   &quot;\u001b[37;1m&quot;</para>
 </listitem>
-            <listitem><para>void <link linkend="_print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de">print_precision</link> (int n=6)</para>
+            <listitem><para>#define <link linkend="_print_8hpp_1ab95f936e60a13b90646adc2674c9a8e3">BRIGHTYELLOW</link>   &quot;\u001b[33;1m&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_print_8hpp_1ad243f93c16bc4c1d3e0a13b84421d760">CYAN</link>   &quot;\u001b[36m&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_print_8hpp_1acfbc006ea433ad708fdee3e82996e721">GREEN</link>   &quot;\u001b[32m&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_print_8hpp_1adce122f566c88a1eceeb79a635afa964">GREY</link>   &quot;\u001b[38;5;8m&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_print_8hpp_1a6f699060902f800f12aaae150f3a708e">MAGENTA</link>   &quot;\u001b[35m&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_print_8hpp_1a8d23feea868a983c8c2b661e1e16972f">RED</link>   &quot;\u001b[31m&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_print_8hpp_1ab702106cf3b3e96750b6845ded4e0299">RESET</link>   &quot;\u001b[0m&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_print_8hpp_1a87b537f5fa5c109d3c05c13d6b18f382">WHITE</link>   &quot;\u001b[37m&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_print_8hpp_1abf681265909adf3d3e8116c93c0ba179">YELLOW</link>   &quot;\u001b[33m&quot;</para>
 </listitem>
         </itemizedlist>
 </simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>void <link linkend="_print_8hpp_1a7c50c0690489629965f74c4921570ce5">debug</link> (ARGS &amp;&amp;... args)</para>
+
+<para>Requires #define DEBUG or -DDEBUG in the compile line. </para>
+</listitem>
+            <listitem><para>template&lt;class... T&gt; </para><para>void <link linkend="_print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528">error</link> (T const &amp;... t)</para>
+
+<para>Print in red. </para>
+</listitem>
+            <listitem><para>template&lt;class... T&gt; </para><para>void <link linkend="_print_8hpp_1a141d6b4b0d8c1824f6ed472b5226eab4">information</link> (T const &amp;... t)</para>
+
+<para>Print in grey. </para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8hpp_1a388f572c62279f839ee138a9afbdeeb5">print</link> ()</para>
+
+<para>New line. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_print_8hpp_1a02e3acd6b90f83126d840187ee8023d6">print</link> (T const &amp;t)</para>
+
+<para>Generic print. </para>
+</listitem>
+            <listitem><para>template&lt;class T , class... T2&gt; </para><para>void <link linkend="_print_8hpp_1a942a3ac725f791da05ff038fd549a721">print</link> (T const &amp;t, T2 const &amp;... t2)</para>
+
+<para>Generic print. </para>
+</listitem>
+            <listitem><para>void <link linkend="_print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de">print_precision</link> (int n=6)</para>
+
+<para>Set the floating point precision displayed. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c">printC</link> (T const &amp;t)</para>
+
+<para>Generic print concatenated. </para>
+</listitem>
+            <listitem><para>template&lt;class T , class... T2&gt; </para><para>void <link linkend="_print_8hpp_1a4c2aee0ac2f1c9f607a845b21b1c12e5">printC</link> (T const &amp;t, T2 const &amp;... t2)</para>
+
+<para>Generic print concatenated. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_print_8hpp_1a57409044715c55a505142dc6cab8a49f">println</link> (T const &amp;t)</para>
+
+<para>Generic print in one line. </para>
+</listitem>
+            <listitem><para>template&lt;class T , class... T2&gt; </para><para>void <link linkend="_print_8hpp_1ae92ca213daa0e7e64752028d31033abe">println</link> (T const &amp;t, T2 const &amp;... t2)</para>
+
+<para>Generic print in one line. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>std::string <link linkend="_print_8hpp_1a90460287027986fbf0c9a1ef8e5a1bce">type_of</link> (T const &amp;t)</para>
+</listitem>
+            <listitem><para>template&lt;class... T&gt; </para><para>void <link linkend="_print_8hpp_1ad9e2dd512a5915af4751a40fefbfbc94">warning</link> (T const &amp;... t)</para>
+
+<para>Print in bright black. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_print_8hpp_1acbf3245277a73b810032219100559ae2"/>    <section>
+    <title>_GLIBCXX_USE_CXX11_ABI</title>
+<indexterm><primary>_GLIBCXX_USE_CXX11_ABI</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>_GLIBCXX_USE_CXX11_ABI</secondary></indexterm>
+<para><computeroutput>#define _GLIBCXX_USE_CXX11_ABI   0/1</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a7b3b25cba33b07c303f3060fe41887f6"/>    <section>
+    <title>BLACK</title>
+<indexterm><primary>BLACK</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BLACK</secondary></indexterm>
+<para><computeroutput>#define BLACK   &quot;\u001b[30m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a79d10e672abb49ad63eeaa8aaef57c38"/>    <section>
+    <title>BLUE</title>
+<indexterm><primary>BLUE</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BLUE</secondary></indexterm>
+<para><computeroutput>#define BLUE   &quot;\u001b[34m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a37c3aae09c44fbf015cf4f048a1ea6bf"/>    <section>
+    <title>BRIGHTBLACK</title>
+<indexterm><primary>BRIGHTBLACK</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BRIGHTBLACK</secondary></indexterm>
+<para><computeroutput>#define BRIGHTBLACK   &quot;\u001b[30;1m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a1856ac8f97780221a92b56c5b994b959"/>    <section>
+    <title>BRIGHTBLUE</title>
+<indexterm><primary>BRIGHTBLUE</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BRIGHTBLUE</secondary></indexterm>
+<para><computeroutput>#define BRIGHTBLUE   &quot;\u001b[34;1m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a6c928762de56d07b80b0c9dc9472a4d5"/>    <section>
+    <title>BRIGHTCYAN</title>
+<indexterm><primary>BRIGHTCYAN</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BRIGHTCYAN</secondary></indexterm>
+<para><computeroutput>#define BRIGHTCYAN   &quot;\u001b[36;1m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1aa52f4996a4480f3f19d881dbff50ae59"/>    <section>
+    <title>BRIGHTGREEN</title>
+<indexterm><primary>BRIGHTGREEN</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BRIGHTGREEN</secondary></indexterm>
+<para><computeroutput>#define BRIGHTGREEN   &quot;\u001b[32;1m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a25c081882d60d0060029256721157d89"/>    <section>
+    <title>BRIGHTMAGENTA</title>
+<indexterm><primary>BRIGHTMAGENTA</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BRIGHTMAGENTA</secondary></indexterm>
+<para><computeroutput>#define BRIGHTMAGENTA   &quot;\u001b[35;1m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a62e8ee733dff17c16de3391bb0fc50c7"/>    <section>
+    <title>BRIGHTRED</title>
+<indexterm><primary>BRIGHTRED</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BRIGHTRED</secondary></indexterm>
+<para><computeroutput>#define BRIGHTRED   &quot;\u001b[31;1m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a099085e6196d7a7a29cbee3ef769c64e"/>    <section>
+    <title>BRIGHTWHITE</title>
+<indexterm><primary>BRIGHTWHITE</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BRIGHTWHITE</secondary></indexterm>
+<para><computeroutput>#define BRIGHTWHITE   &quot;\u001b[37;1m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1ab95f936e60a13b90646adc2674c9a8e3"/>    <section>
+    <title>BRIGHTYELLOW</title>
+<indexterm><primary>BRIGHTYELLOW</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>BRIGHTYELLOW</secondary></indexterm>
+<para><computeroutput>#define BRIGHTYELLOW   &quot;\u001b[33;1m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1ad243f93c16bc4c1d3e0a13b84421d760"/>    <section>
+    <title>CYAN</title>
+<indexterm><primary>CYAN</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>CYAN</secondary></indexterm>
+<para><computeroutput>#define CYAN   &quot;\u001b[36m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1acfbc006ea433ad708fdee3e82996e721"/>    <section>
+    <title>GREEN</title>
+<indexterm><primary>GREEN</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>GREEN</secondary></indexterm>
+<para><computeroutput>#define GREEN   &quot;\u001b[32m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1adce122f566c88a1eceeb79a635afa964"/>    <section>
+    <title>GREY</title>
+<indexterm><primary>GREY</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>GREY</secondary></indexterm>
+<para><computeroutput>#define GREY   &quot;\u001b[38;5;8m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a6f699060902f800f12aaae150f3a708e"/>    <section>
+    <title>MAGENTA</title>
+<indexterm><primary>MAGENTA</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>MAGENTA</secondary></indexterm>
+<para><computeroutput>#define MAGENTA   &quot;\u001b[35m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a8d23feea868a983c8c2b661e1e16972f"/>    <section>
+    <title>RED</title>
+<indexterm><primary>RED</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>RED</secondary></indexterm>
+<para><computeroutput>#define RED   &quot;\u001b[31m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1ab702106cf3b3e96750b6845ded4e0299"/>    <section>
+    <title>RESET</title>
+<indexterm><primary>RESET</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>RESET</secondary></indexterm>
+<para><computeroutput>#define RESET   &quot;\u001b[0m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a87b537f5fa5c109d3c05c13d6b18f382"/>    <section>
+    <title>WHITE</title>
+<indexterm><primary>WHITE</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>WHITE</secondary></indexterm>
+<para><computeroutput>#define WHITE   &quot;\u001b[37m&quot;</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1abf681265909adf3d3e8116c93c0ba179"/>    <section>
+    <title>YELLOW</title>
+<indexterm><primary>YELLOW</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>YELLOW</secondary></indexterm>
+<para><computeroutput>#define YELLOW   &quot;\u001b[33m&quot;</computeroutput></para></section>
+</section>
 <section>
 <title>Function Documentation</title>
 <anchor xml:id="_print_8hpp_1a7c50c0690489629965f74c4921570ce5"/>    <section>
     <title>debug()</title>
 <indexterm><primary>debug</primary><secondary>print.hpp</secondary></indexterm>
 <indexterm><primary>print.hpp</primary><secondary>debug</secondary></indexterm>
-<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>void debug (ARGS &amp;&amp;... args)</computeroutput></para>Here is the call graph for this function:<para>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>void debug (ARGS &amp;&amp;... args)</computeroutput></para><para>
+
+<para>Requires #define DEBUG or -DDEBUG in the compile line. </para>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -62,70 +230,87 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_print_8hpp_1a021f6cc0c03903546e6a63851944f2e8"/>    <section>
-    <title>operator&lt;&lt;()<computeroutput>[1/5]</computeroutput></title>
-<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
-<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
-<computeroutput>template&lt;class E , size_t size&gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, std::array&lt; E, size &gt; const &amp; a)</computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528"/>    <section>
+    <title>error()</title>
+<indexterm><primary>error</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>error</secondary></indexterm>
+<computeroutput>template&lt;class... T&gt; </computeroutput><para><computeroutput>void error (T const &amp;... t)</computeroutput></para><para>
+
+<para>Print in red. </para>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a021f6cc0c03903546e6a63851944f2e8_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_print_8hpp_1a1fc2e1be374c41706525b8d606242646"/>    <section>
-    <title>operator&lt;&lt;()<computeroutput>[2/5]</computeroutput></title>
-<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
-<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
-<computeroutput>template&lt;class K , class V &gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, std::map&lt; K, V &gt; const &amp; m)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a305d037b6a2823d9d8d935b1cd5dd2c0"/>    <section>
-    <title>operator&lt;&lt;()<computeroutput>[3/5]</computeroutput></title>
-<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
-<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
-<computeroutput>template&lt;class F , class S &gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, std::pair&lt; F, S &gt; const &amp; p)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a03b9abfe3f12543c365e9a25848ba566"/>    <section>
-    <title>operator&lt;&lt;()<computeroutput>[4/5]</computeroutput></title>
-<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
-<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
-<computeroutput>template&lt;class E &gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, std::vector&lt; E &gt; const &amp; v)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1ad68695d41301547d77d546b80b1bc278"/>    <section>
-    <title>operator&lt;&lt;()<computeroutput>[5/5]</computeroutput></title>
-<indexterm><primary>operator&lt;&lt;</primary><secondary>print.hpp</secondary></indexterm>
-<indexterm><primary>print.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
-<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; cout, unsigned char const &amp; uc)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7"/>    <section>
-    <title>print()<computeroutput>[1/4]</computeroutput></title>
-<indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
-<indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
-<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void print ( )</computeroutput></para>Here is the caller graph for this function:<para>
+Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_aaa2383e8fc7f8fa546f4376e1dd4c9b7_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_print_8hpp_1a527acf8dce9e07a4901d65a23979424b"/>    <section>
-    <title>print()<computeroutput>[2/4]</computeroutput></title>
-<indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
-<indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
-<computeroutput>template&lt;class... T&gt; </computeroutput><para><computeroutput>void print (T const &amp;... t)</computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_print_8hpp_1a141d6b4b0d8c1824f6ed472b5226eab4"/>    <section>
+    <title>information()</title>
+<indexterm><primary>information</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>information</secondary></indexterm>
+<computeroutput>template&lt;class... T&gt; </computeroutput><para><computeroutput>void information (T const &amp;... t)</computeroutput></para><para>
+
+<para>Print in grey. </para>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a527acf8dce9e07a4901d65a23979424b_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1a388f572c62279f839ee138a9afbdeeb5"/>    <section>
+    <title>print()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
+<para><computeroutput>void print ( )</computeroutput></para><para>
+
+<para>New line. </para>
 </para>
     </section><anchor xml:id="_print_8hpp_1a02e3acd6b90f83126d840187ee8023d6"/>    <section>
-    <title>print()<computeroutput>[3/4]</computeroutput></title>
+    <title>print()<computeroutput>[2/3]</computeroutput></title>
 <indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
 <indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
-<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void print (T const &amp; t)</computeroutput></para>    </section><anchor xml:id="_print_8hpp_1a942a3ac725f791da05ff038fd549a721"/>    <section>
-    <title>print()<computeroutput>[4/4]</computeroutput></title>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void print (T const &amp; t)</computeroutput></para><para>
+
+<para>Generic print. </para>
+</para>
+
+<para>Automatically adds space between each input. Terminate the output with a &quot;\\n&quot; </para>
+    </section><anchor xml:id="_print_8hpp_1a942a3ac725f791da05ff038fd549a721"/>    <section>
+    <title>print()<computeroutput>[3/3]</computeroutput></title>
 <indexterm><primary>print</primary><secondary>print.hpp</secondary></indexterm>
 <indexterm><primary>print.hpp</primary><secondary>print</secondary></indexterm>
-<computeroutput>template&lt;class T , class... T2&gt; </computeroutput><para><computeroutput>void print (T const &amp; t, T2 const &amp;... t2)</computeroutput></para>Here is the call graph for this function:<para>
+<computeroutput>template&lt;class T , class... T2&gt; </computeroutput><para><computeroutput>void print (T const &amp; t, T2 const &amp;... t2)</computeroutput></para><para>
+
+<para>Generic print. </para>
+</para>
+
+<para>Automatically adds space between each input. Terminate the output with a &quot;\\n&quot; </para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -139,6 +324,125 @@ Here is the caller graph for this function:<para>
 <indexterm><primary>print_precision</primary><secondary>print.hpp</secondary></indexterm>
 <indexterm><primary>print.hpp</primary><secondary>print_precision</secondary></indexterm>
 <para><computeroutput>void print_precision (int n = <computeroutput>6</computeroutput>
-)</computeroutput></para></section>
+)</computeroutput></para><para>
+
+<para>Set the floating point precision displayed. </para>
+</para>
+    </section><anchor xml:id="_print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c"/>    <section>
+    <title>printC()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>printC</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>printC</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void printC (T const &amp; t)</computeroutput></para><para>
+
+<para>Generic print concatenated. </para>
+</para>
+
+<para>Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a &quot;\\n&quot; </para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_afded2b178f1cba7246c86beaab6d4e6c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1a4c2aee0ac2f1c9f607a845b21b1c12e5"/>    <section>
+    <title>printC()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>printC</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>printC</secondary></indexterm>
+<computeroutput>template&lt;class T , class... T2&gt; </computeroutput><para><computeroutput>void printC (T const &amp; t, T2 const &amp;... t2)</computeroutput></para><para>
+
+<para>Generic print concatenated. </para>
+</para>
+
+<para>Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a &quot;\\n&quot; </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a4c2aee0ac2f1c9f607a845b21b1c12e5_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1a57409044715c55a505142dc6cab8a49f"/>    <section>
+    <title>println()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>println</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>println</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void println (T const &amp; t)</computeroutput></para><para>
+
+<para>Generic print in one line. </para>
+</para>
+
+<para>Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a &quot;\\n&quot; </para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a57409044715c55a505142dc6cab8a49f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1ae92ca213daa0e7e64752028d31033abe"/>    <section>
+    <title>println()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>println</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>println</secondary></indexterm>
+<computeroutput>template&lt;class T , class... T2&gt; </computeroutput><para><computeroutput>void println (T const &amp; t, T2 const &amp;... t2)</computeroutput></para><para>
+
+<para>Generic print in one line. </para>
+</para>
+
+<para>Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a &quot;\\n&quot; </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_ae92ca213daa0e7e64752028d31033abe_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1a90460287027986fbf0c9a1ef8e5a1bce"/>    <section>
+    <title>type_of()</title>
+<indexterm><primary>type_of</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>type_of</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>std::string type_of (T const &amp; t)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_a90460287027986fbf0c9a1ef8e5a1bce_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_print_8hpp_1ad9e2dd512a5915af4751a40fefbfbc94"/>    <section>
+    <title>warning()</title>
+<indexterm><primary>warning</primary><secondary>print.hpp</secondary></indexterm>
+<indexterm><primary>print.hpp</primary><secondary>warning</secondary></indexterm>
+<computeroutput>template&lt;class... T&gt; </computeroutput><para><computeroutput>void warning (T const &amp;... t)</computeroutput></para><para>
+
+<para>Print in bright black. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="print_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
 </section>
 </section>

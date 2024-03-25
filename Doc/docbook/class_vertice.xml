@@ -12,21 +12,47 @@
 </listitem>
             <listitem><para>auto <link linkend="_class_vertice_1aad7a051c244a4565277290b7c4cb3382">begin</link> () const</para>
 </listitem>
+            <listitem><para>void <link linkend="_class_vertice_1a2b540156c45d4c5c519cb9035c7a3648">cleanMove</link> (<link linkend="_class_vertice">Vertice</link> &amp;_vertice)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_vertice_1ae9c9917341984b56f264c4478b9d8791">copy</link> (std::vector&lt; double &gt; const &amp;point)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_vertice_1a8b64784c593d9d75f9052a7a9d2fee02">copy</link> (<link linkend="_class_vertice">Vertice</link> &amp;&amp;other)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_vertice_1ae4155cad8d004c954916882157c9375f">copy</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other)</para>
+</listitem>
             <listitem><para>auto <link linkend="_class_vertice_1a1215380e747b2cf93f861407a5bf9c3d">end</link> ()</para>
 </listitem>
             <listitem><para>auto <link linkend="_class_vertice_1a5f64695b3dcd9bca4f2fb6e0ed83348c">end</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_vertice_1a6a4e7b2f8b617f2153b2fc0f0742a09e">evaluate</link> (std::function&lt; double(const <link linkend="_class_vertice">Vertice</link> &amp;)&gt; objective_function)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_vertice_1a1c3b20dfc14068262251ce9930dfa88f">fill</link> (double const &amp;value)</para>
 </listitem>
             <listitem><para>auto &amp; <link linkend="_class_vertice_1a7ae35dd4e65c993d7faa019d8b966086">get</link> ()</para>
 </listitem>
             <listitem><para>auto const  &amp; <link linkend="_class_vertice_1a11e12aac4668a10a6b1706db7e5ebbcd">get</link> () const</para>
 </listitem>
-            <listitem><para><link linkend="_class_vertice">Vertice</link> &amp; <link linkend="_class_vertice_1a0bb7c9c5bc6bceef7479d6761a9020fb">operator*</link> (double const &amp;constant)</para>
+            <listitem><para>auto &amp; <link linkend="_class_vertice_1af3563e71bc70c76de76010a381fd3afb">get</link> (int const &amp;coordinate_i)</para>
 </listitem>
-            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_vertice_1a2e858710d6eb5fe7dc4029b6cc280272">operator*</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other)</para>
+            <listitem><para>auto const  &amp; <link linkend="_class_vertice_1a6c5691267912f8f2cc04aa708e6a8f2b">get</link> (int const &amp;coordinate_i) const</para>
 </listitem>
-            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_vertice_1a1897df7eb0121341d7dac0a285af7db8">operator+</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other)</para>
+            <listitem><para>auto <link linkend="_class_vertice_1a54771ef13c85f80a0603765273e2c8dd">getValue</link> ()</para>
 </listitem>
-            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_vertice_1a35359e51cb43abf68e459cbfedaeabb6">operator-</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other)</para>
+            <listitem><para>auto const  &amp; <link linkend="_class_vertice_1a5f23c4ece665d5a55b5c3b67fc45ffb3">getValue</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_vertice_1a82b943e02b26f4e9d713aceb17ccab61">operator*</link> (double const &amp;constant) const</para>
+</listitem>
+            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_vertice_1af7bdce52a3f6189f94f05a80127f949d">operator*</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other) const</para>
+</listitem>
+            <listitem><para><link linkend="_class_vertice">Vertice</link> &amp; <link linkend="_class_vertice_1a082dc91912838405b4c98eec453cd7fe">operator*=</link> (double const &amp;constant)</para>
+</listitem>
+            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_vertice_1ae6bf8b5aab5ad865f4fdd9a9b91f7e92">operator+</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other) const</para>
+</listitem>
+            <listitem><para><link linkend="_class_vertice">Vertice</link> <link linkend="_class_vertice_1aba263387b931496c5937f8645ded93ae">operator-</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other) const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_vertice_1afe53f60865f26d7945c338eb3f2422ac">operator&lt;</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other) const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_vertice_1a540a77aff2f79ae4cd5bb932311118fd">operator&lt;=</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other) const</para>
 </listitem>
             <listitem><para><link linkend="_class_vertice">Vertice</link> &amp; <link linkend="_class_vertice_1a651eb7cb39f966a5ff2d6d24c3e1e785">operator=</link> (std::vector&lt; double &gt; const &amp;point)</para>
 </listitem>
@@ -34,21 +60,37 @@
 </listitem>
             <listitem><para><link linkend="_class_vertice">Vertice</link> &amp; <link linkend="_class_vertice_1ab16b5e8facd201c70bdab71384adc6df">operator=</link> (<link linkend="_class_vertice">Vertice</link> const &amp;vertice)</para>
 </listitem>
+            <listitem><para>bool <link linkend="_class_vertice_1ab7e40502eaba03b6b1576cbf39c358f0">operator&gt;</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other) const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_vertice_1ad563d154d6ffe9f7a75323bc0d706fe4">operator&gt;=</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other) const</para>
+</listitem>
             <listitem><para>auto &amp; <link linkend="_class_vertice_1a20a711ace767a031ec41eb3a0dd75ed1">operator[]</link> (int const &amp;i)</para>
 </listitem>
             <listitem><para>auto const  &amp; <link linkend="_class_vertice_1ad7e931f0342f3c2a87d0d8e46936416d">operator[]</link> (int const &amp;i) const</para>
 </listitem>
+            <listitem><para>void <link linkend="_class_vertice_1a1884b3dc38c78b7526fe7e75d1bb4604">resize</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;<link linkend="_class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4">size</link>)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_vertice_1a9ab0c67e95e2ebd4ccd3d648d22c78eb">resize</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;<link linkend="_class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4">size</link>, double const &amp;value)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_vertice_1a3554246d64dc33a7719b5cd2d112e67b">set</link> (int const &amp;coordinate_i, double const &amp;coordinate)</para>
+</listitem>
             <listitem><para>void <link linkend="_class_vertice_1ab5519307ad24edb7b482ce63f41d3b63">set</link> (std::vector&lt; double &gt; const &amp;point)</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_vertice_1a7a18bb3bfb36d8630641d7b33c1461cc">set</link> (<link linkend="_class_vertice">Vertice</link> &amp;&amp;_vertice)</para>
+            <listitem><para>void <link linkend="_class_vertice_1a59ec9893ab3e7bbadfbd2e54ea283e8e">set</link> (<link linkend="_class_vertice">Vertice</link> &amp;&amp;other)</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_vertice_1a58c2af14cebf91fc79298f4128a54856">set</link> (<link linkend="_class_vertice">Vertice</link> const &amp;_vertice)</para>
+            <listitem><para>void <link linkend="_class_vertice_1aad52a08bb2c5b6f92119d42956051924">set</link> (<link linkend="_class_vertice">Vertice</link> const &amp;other)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_vertice_1a0ab115f978a0d9c454b957d5cc531c57">setValue</link> (double const &amp;_value)</para>
 </listitem>
             <listitem><para>auto &amp; <link linkend="_class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4">size</link> ()</para>
 </listitem>
             <listitem><para>auto const  &amp; <link linkend="_class_vertice_1ae6a2eb34867f3c9ac333b267e3f20a17">size</link> () const</para>
 </listitem>
+            <listitem><para><link linkend="_class_vertice_1a4beafe087884524a9728617bff98029f">Vertice</link> ()=default</para>
+</listitem>
             <listitem><para><link linkend="_class_vertice_1a25640d2ace19cf2993c1854edd452ef0">Vertice</link> (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4">size</link>)</para>
+</listitem>
+            <listitem><para><link linkend="_class_vertice_1a9b171d24a90abd98983bd7cfc4796aa9">Vertice</link> (std::Initialiser_list&lt; double &gt; const &amp;init_list)</para>
 </listitem>
             <listitem><para><link linkend="_class_vertice_1a6e2e24eb4beb27f1b42163fda1777c40">Vertice</link> (std::vector&lt; double &gt; const &amp;coords)</para>
 </listitem>
@@ -65,33 +107,43 @@
 </listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> <link linkend="_class_vertice_1a0a14824e1d0e1aefdfe45e6878fd1550">m_dim</link> = 0</para>
 </listitem>
+            <listitem><para>double <link linkend="_class_vertice_1a5ef7f30be58758901c1e35e0bfe4d681">m_value</link> = NAN</para>
+</listitem>
         </itemizedlist>
 </simplesect>
 <section>
 <title>Constructor &amp; Destructor Documentation</title>
-<anchor xml:id="_class_vertice_1a6e2e24eb4beb27f1b42163fda1777c40"/>    <section>
-    <title>Vertice()<computeroutput>[1/4]</computeroutput></title>
+<anchor xml:id="_class_vertice_1a4beafe087884524a9728617bff98029f"/>    <section>
+    <title>Vertice()<computeroutput>[1/6]</computeroutput></title>
 <indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
-<para><computeroutput>Vertice::Vertice (std::vector&lt; double &gt; const &amp; coords)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>Vertice::Vertice ( )<computeroutput>[default]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a6e2e24eb4beb27f1b42163fda1777c40_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a4beafe087884524a9728617bff98029f_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_vertice_1aa498494b022d938d1b641cc6d8aac2f3"/>    <section>
-    <title>Vertice()<computeroutput>[2/4]</computeroutput></title>
+    </section><anchor xml:id="_class_vertice_1a6e2e24eb4beb27f1b42163fda1777c40"/>    <section>
+    <title>Vertice()<computeroutput>[2/6]</computeroutput></title>
+<indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
+<para><computeroutput>Vertice::Vertice (std::vector&lt; double &gt; const &amp; coords)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a9b171d24a90abd98983bd7cfc4796aa9"/>    <section>
+    <title>Vertice()<computeroutput>[3/6]</computeroutput></title>
+<indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
+<para><computeroutput>Vertice::Vertice (std::Initialiser_list&lt; double &gt; const &amp; init_list)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1aa498494b022d938d1b641cc6d8aac2f3"/>    <section>
+    <title>Vertice()<computeroutput>[4/6]</computeroutput></title>
 <indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
 <para><computeroutput>Vertice::Vertice (<link linkend="_class_vertice">Vertice</link> const &amp; _vertice)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1afddab470753508f96eeb0735e1400cbb"/>    <section>
-    <title>Vertice()<computeroutput>[3/4]</computeroutput></title>
+    <title>Vertice()<computeroutput>[5/6]</computeroutput></title>
 <indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
 <para><computeroutput>Vertice::Vertice (<link linkend="_class_vertice">Vertice</link> &amp;&amp; _vertice)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a25640d2ace19cf2993c1854edd452ef0"/>    <section>
-    <title>Vertice()<computeroutput>[4/4]</computeroutput></title>
+    <title>Vertice()<computeroutput>[6/6]</computeroutput></title>
 <indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>Vertice</secondary></indexterm>
 <para><computeroutput>Vertice::Vertice (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> size)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
@@ -106,7 +158,68 @@
     <title>begin()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>begin</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>begin</secondary></indexterm>
-<para><computeroutput>auto Vertice::begin ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a1215380e747b2cf93f861407a5bf9c3d"/>    <section>
+<para><computeroutput>auto Vertice::begin ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a2b540156c45d4c5c519cb9035c7a3648"/>    <section>
+    <title>cleanMove()</title>
+<indexterm><primary>cleanMove</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>cleanMove</secondary></indexterm>
+<para><computeroutput>void Vertice::cleanMove (<link linkend="_class_vertice">Vertice</link> &amp; _vertice)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a2b540156c45d4c5c519cb9035c7a3648_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1ae9c9917341984b56f264c4478b9d8791"/>    <section>
+    <title>copy()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>copy</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>copy</secondary></indexterm>
+<para><computeroutput>void Vertice::copy (std::vector&lt; double &gt; const &amp; point)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_ae9c9917341984b56f264c4478b9d8791_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1a8b64784c593d9d75f9052a7a9d2fee02"/>    <section>
+    <title>copy()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>copy</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>copy</secondary></indexterm>
+<para><computeroutput>void Vertice::copy (<link linkend="_class_vertice">Vertice</link> &amp;&amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a8b64784c593d9d75f9052a7a9d2fee02_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1ae4155cad8d004c954916882157c9375f"/>    <section>
+    <title>copy()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>copy</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>copy</secondary></indexterm>
+<para><computeroutput>void Vertice::copy (<link linkend="_class_vertice">Vertice</link> const &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_ae4155cad8d004c954916882157c9375f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_ae4155cad8d004c954916882157c9375f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1a1215380e747b2cf93f861407a5bf9c3d"/>    <section>
     <title>end()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>end</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>end</secondary></indexterm>
@@ -114,12 +227,38 @@
     <title>end()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>end</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>end</secondary></indexterm>
-<para><computeroutput>auto Vertice::end ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a7ae35dd4e65c993d7faa019d8b966086"/>    <section>
-    <title>get()<computeroutput>[1/2]</computeroutput></title>
+<para><computeroutput>auto Vertice::end ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a6a4e7b2f8b617f2153b2fc0f0742a09e"/>    <section>
+    <title>evaluate()</title>
+<indexterm><primary>evaluate</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>evaluate</secondary></indexterm>
+<para><computeroutput>auto const&amp; Vertice::evaluate (std::function&lt; double(const <link linkend="_class_vertice">Vertice</link> &amp;)&gt; objective_function)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a6a4e7b2f8b617f2153b2fc0f0742a09e_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1a1c3b20dfc14068262251ce9930dfa88f"/>    <section>
+    <title>fill()</title>
+<indexterm><primary>fill</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>fill</secondary></indexterm>
+<para><computeroutput>void Vertice::fill (double const &amp; value)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a1c3b20dfc14068262251ce9930dfa88f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1a7ae35dd4e65c993d7faa019d8b966086"/>    <section>
+    <title>get()<computeroutput>[1/4]</computeroutput></title>
 <indexterm><primary>get</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>get</secondary></indexterm>
 <para><computeroutput>auto&amp; Vertice::get ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a11e12aac4668a10a6b1706db7e5ebbcd"/>    <section>
-    <title>get()<computeroutput>[2/2]</computeroutput></title>
+    <title>get()<computeroutput>[2/4]</computeroutput></title>
 <indexterm><primary>get</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>get</secondary></indexterm>
 <para><computeroutput>auto const&amp; Vertice::get ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
@@ -131,50 +270,96 @@
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_vertice_1a0bb7c9c5bc6bceef7479d6761a9020fb"/>    <section>
+    </section><anchor xml:id="_class_vertice_1af3563e71bc70c76de76010a381fd3afb"/>    <section>
+    <title>get()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>get</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>auto&amp; Vertice::get (int const &amp; coordinate_i)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a6c5691267912f8f2cc04aa708e6a8f2b"/>    <section>
+    <title>get()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>get</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>auto const&amp; Vertice::get (int const &amp; coordinate_i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a54771ef13c85f80a0603765273e2c8dd"/>    <section>
+    <title>getValue()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>getValue</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>getValue</secondary></indexterm>
+<para><computeroutput>auto Vertice::getValue ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a5f23c4ece665d5a55b5c3b67fc45ffb3"/>    <section>
+    <title>getValue()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>getValue</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>getValue</secondary></indexterm>
+<para><computeroutput>auto const&amp; Vertice::getValue ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a5f23c4ece665d5a55b5c3b67fc45ffb3_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1a82b943e02b26f4e9d713aceb17ccab61"/>    <section>
     <title>operator*()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>operator*</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>operator*</secondary></indexterm>
-<para><computeroutput><link linkend="_class_vertice">Vertice</link>&amp; Vertice::operator* (double const &amp; constant)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a2e858710d6eb5fe7dc4029b6cc280272"/>    <section>
+<para><computeroutput><link linkend="_class_vertice">Vertice</link> Vertice::operator* (double const &amp; constant) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a82b943e02b26f4e9d713aceb17ccab61_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1af7bdce52a3f6189f94f05a80127f949d"/>    <section>
     <title>operator*()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>operator*</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>operator*</secondary></indexterm>
-<para><computeroutput><link linkend="_class_vertice">Vertice</link> Vertice::operator* (<link linkend="_class_vertice">Vertice</link> const &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput><link linkend="_class_vertice">Vertice</link> Vertice::operator* (<link linkend="_class_vertice">Vertice</link> const &amp; other) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a2e858710d6eb5fe7dc4029b6cc280272_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_af7bdce52a3f6189f94f05a80127f949d_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_vertice_1a1897df7eb0121341d7dac0a285af7db8"/>    <section>
+    </section><anchor xml:id="_class_vertice_1a082dc91912838405b4c98eec453cd7fe"/>    <section>
+    <title>operator*=()</title>
+<indexterm><primary>operator*=</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>operator*=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_vertice">Vertice</link>&amp; Vertice::operator*= (double const &amp; constant)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1ae6bf8b5aab5ad865f4fdd9a9b91f7e92"/>    <section>
     <title>operator+()</title>
 <indexterm><primary>operator+</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>operator+</secondary></indexterm>
-<para><computeroutput><link linkend="_class_vertice">Vertice</link> Vertice::operator+ (<link linkend="_class_vertice">Vertice</link> const &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput><link linkend="_class_vertice">Vertice</link> Vertice::operator+ (<link linkend="_class_vertice">Vertice</link> const &amp; other) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a1897df7eb0121341d7dac0a285af7db8_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_ae6bf8b5aab5ad865f4fdd9a9b91f7e92_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_vertice_1a35359e51cb43abf68e459cbfedaeabb6"/>    <section>
+    </section><anchor xml:id="_class_vertice_1aba263387b931496c5937f8645ded93ae"/>    <section>
     <title>operator-()</title>
 <indexterm><primary>operator-</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>operator-</secondary></indexterm>
-<para><computeroutput><link linkend="_class_vertice">Vertice</link> Vertice::operator- (<link linkend="_class_vertice">Vertice</link> const &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput><link linkend="_class_vertice">Vertice</link> Vertice::operator- (<link linkend="_class_vertice">Vertice</link> const &amp; other) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a35359e51cb43abf68e459cbfedaeabb6_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_aba263387b931496c5937f8645ded93ae_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_vertice_1a651eb7cb39f966a5ff2d6d24c3e1e785"/>    <section>
+    </section><anchor xml:id="_class_vertice_1afe53f60865f26d7945c338eb3f2422ac"/>    <section>
+    <title>operator&lt;()</title>
+<indexterm><primary>operator&lt;</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>operator&lt;</secondary></indexterm>
+<para><computeroutput>bool Vertice::operator&lt; (<link linkend="_class_vertice">Vertice</link> const &amp; other) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a540a77aff2f79ae4cd5bb932311118fd"/>    <section>
+    <title>operator&lt;=()</title>
+<indexterm><primary>operator&lt;=</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>operator&lt;=</secondary></indexterm>
+<para><computeroutput>bool Vertice::operator&lt;= (<link linkend="_class_vertice">Vertice</link> const &amp; other) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a651eb7cb39f966a5ff2d6d24c3e1e785"/>    <section>
     <title>operator=()<computeroutput>[1/3]</computeroutput></title>
 <indexterm><primary>operator=</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>operator=</secondary></indexterm>
@@ -213,7 +398,15 @@
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_vertice_1a20a711ace767a031ec41eb3a0dd75ed1"/>    <section>
+    </section><anchor xml:id="_class_vertice_1ab7e40502eaba03b6b1576cbf39c358f0"/>    <section>
+    <title>operator&gt;()</title>
+<indexterm><primary>operator&gt;</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>operator&gt;</secondary></indexterm>
+<para><computeroutput>bool Vertice::operator&gt; (<link linkend="_class_vertice">Vertice</link> const &amp; other) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1ad563d154d6ffe9f7a75323bc0d706fe4"/>    <section>
+    <title>operator&gt;=()</title>
+<indexterm><primary>operator&gt;=</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>operator&gt;=</secondary></indexterm>
+<para><computeroutput>bool Vertice::operator&gt;= (<link linkend="_class_vertice">Vertice</link> const &amp; other) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a20a711ace767a031ec41eb3a0dd75ed1"/>    <section>
     <title>operator[]()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>operator[]</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>operator[]</secondary></indexterm>
@@ -221,41 +414,15 @@
     <title>operator[]()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>operator[]</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>operator[]</secondary></indexterm>
-<para><computeroutput>auto const&amp; Vertice::operator[] (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1ab5519307ad24edb7b482ce63f41d3b63"/>    <section>
-    <title>set()<computeroutput>[1/3]</computeroutput></title>
-<indexterm><primary>set</primary><secondary>Vertice</secondary></indexterm>
-<indexterm><primary>Vertice</primary><secondary>set</secondary></indexterm>
-<para><computeroutput>void Vertice::set (std::vector&lt; double &gt; const &amp; point)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>auto const&amp; Vertice::operator[] (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a1884b3dc38c78b7526fe7e75d1bb4604"/>    <section>
+    <title>resize()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>resize</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>resize</secondary></indexterm>
+<para><computeroutput>void Vertice::resize (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; size)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_ab5519307ad24edb7b482ce63f41d3b63_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_vertice_1a7a18bb3bfb36d8630641d7b33c1461cc"/>    <section>
-    <title>set()<computeroutput>[2/3]</computeroutput></title>
-<indexterm><primary>set</primary><secondary>Vertice</secondary></indexterm>
-<indexterm><primary>Vertice</primary><secondary>set</secondary></indexterm>
-<para><computeroutput>void Vertice::set (<link linkend="_class_vertice">Vertice</link> &amp;&amp; _vertice)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a7a18bb3bfb36d8630641d7b33c1461cc_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_vertice_1a58c2af14cebf91fc79298f4128a54856"/>    <section>
-    <title>set()<computeroutput>[3/3]</computeroutput></title>
-<indexterm><primary>set</primary><secondary>Vertice</secondary></indexterm>
-<indexterm><primary>Vertice</primary><secondary>set</secondary></indexterm>
-<para><computeroutput>void Vertice::set (<link linkend="_class_vertice">Vertice</link> const &amp; _vertice)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a58c2af14cebf91fc79298f4128a54856_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a1884b3dc38c78b7526fe7e75d1bb4604_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -264,12 +431,63 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a58c2af14cebf91fc79298f4128a54856_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a1884b3dc38c78b7526fe7e75d1bb4604_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4"/>    <section>
+    </section><anchor xml:id="_class_vertice_1a9ab0c67e95e2ebd4ccd3d648d22c78eb"/>    <section>
+    <title>resize()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>resize</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>resize</secondary></indexterm>
+<para><computeroutput>void Vertice::resize (<link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp; size, double const &amp; value)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a9ab0c67e95e2ebd4ccd3d648d22c78eb_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1a3554246d64dc33a7719b5cd2d112e67b"/>    <section>
+    <title>set()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>set</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>void Vertice::set (int const &amp; coordinate_i, double const &amp; coordinate)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1ab5519307ad24edb7b482ce63f41d3b63"/>    <section>
+    <title>set()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>set</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>void Vertice::set (std::vector&lt; double &gt; const &amp; point)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a59ec9893ab3e7bbadfbd2e54ea283e8e"/>    <section>
+    <title>set()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>set</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>void Vertice::set (<link linkend="_class_vertice">Vertice</link> &amp;&amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_a59ec9893ab3e7bbadfbd2e54ea283e8e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1aad52a08bb2c5b6f92119d42956051924"/>    <section>
+    <title>set()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>set</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>void Vertice::set (<link linkend="_class_vertice">Vertice</link> const &amp; other)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_vertice_aad52a08bb2c5b6f92119d42956051924_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_vertice_1a0ab115f978a0d9c454b957d5cc531c57"/>    <section>
+    <title>setValue()</title>
+<indexterm><primary>setValue</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>setValue</secondary></indexterm>
+<para><computeroutput>void Vertice::setValue (double const &amp; _value)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4"/>    <section>
     <title>size()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>size</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>size</secondary></indexterm>
@@ -298,8 +516,12 @@ Here is the caller graph for this function:<para>
     <title>m_dim</title>
 <indexterm><primary>m_dim</primary><secondary>Vertice</secondary></indexterm>
 <indexterm><primary>Vertice</primary><secondary>m_dim</secondary></indexterm>
-<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Vertice::m_dim = 0<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para><computeroutput><link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> Vertice::m_dim = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_vertice_1a5ef7f30be58758901c1e35e0bfe4d681"/>    <section>
+    <title>m_value</title>
+<indexterm><primary>m_value</primary><secondary>Vertice</secondary></indexterm>
+<indexterm><primary>Vertice</primary><secondary>m_value</secondary></indexterm>
+<para><computeroutput>double Vertice::m_value = NAN<computeroutput>[private]</computeroutput></computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
-lib/Classes/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+lib/Analyse/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
 </section>

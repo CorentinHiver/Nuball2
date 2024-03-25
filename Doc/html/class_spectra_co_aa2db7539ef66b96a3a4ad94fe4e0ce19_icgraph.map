@@ -1,0 +1,7 @@
+<map id="SpectraCo::data" name="SpectraCo::data">
+<area shape="rect" id="node1" title=" " alt="" coords="461,56,587,83"/>
+<area shape="rect" id="node2" href="$class_spectra_co.html#a6106089e9e4295cc71f3d45f781ac2c8" title=" " alt="" coords="212,5,413,32"/>
+<area shape="rect" id="node3" href="$class_spectra_co.html#a5c0d013692342e790580839787143f36" title=" " alt="" coords="216,56,409,83"/>
+<area shape="rect" id="node4" href="$class_spectra_co.html#adfe0baad93402b4ae44a6c8ea14bc137" title="Uses the second derivative spectra to get the peaks." alt="" coords="233,107,392,133"/>
+<area shape="rect" id="node5" href="$class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="5,107,164,133"/>
+</map>

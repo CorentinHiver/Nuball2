@@ -1,4 +1,4 @@
-.TH "Vertice" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Vertice" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,10 +18,28 @@ Vertice
 .RI "auto \fBbegin\fP () const"
 .br
 .ti -1c
+.RI "void \fBcleanMove\fP (\fBVertice\fP &_vertice)"
+.br
+.ti -1c
+.RI "void \fBcopy\fP (std::vector< double > const &point)"
+.br
+.ti -1c
+.RI "void \fBcopy\fP (\fBVertice\fP &&other)"
+.br
+.ti -1c
+.RI "void \fBcopy\fP (\fBVertice\fP const &other)"
+.br
+.ti -1c
 .RI "auto \fBend\fP ()"
 .br
 .ti -1c
 .RI "auto \fBend\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBevaluate\fP (std::function< double(const \fBVertice\fP &)> objective_function)"
+.br
+.ti -1c
+.RI "void \fBfill\fP (double const &value)"
 .br
 .ti -1c
 .RI "auto & \fBget\fP ()"
@@ -30,16 +48,37 @@ Vertice
 .RI "auto const  & \fBget\fP () const"
 .br
 .ti -1c
-.RI "\fBVertice\fP & \fBoperator*\fP (double const &constant)"
+.RI "auto & \fBget\fP (int const &coordinate_i)"
 .br
 .ti -1c
-.RI "\fBVertice\fP \fBoperator*\fP (\fBVertice\fP const &other)"
+.RI "auto const  & \fBget\fP (int const &coordinate_i) const"
 .br
 .ti -1c
-.RI "\fBVertice\fP \fBoperator+\fP (\fBVertice\fP const &other)"
+.RI "auto \fBgetValue\fP ()"
 .br
 .ti -1c
-.RI "\fBVertice\fP \fBoperator\-\fP (\fBVertice\fP const &other)"
+.RI "auto const  & \fBgetValue\fP () const"
+.br
+.ti -1c
+.RI "\fBVertice\fP \fBoperator*\fP (double const &constant) const"
+.br
+.ti -1c
+.RI "\fBVertice\fP \fBoperator*\fP (\fBVertice\fP const &other) const"
+.br
+.ti -1c
+.RI "\fBVertice\fP & \fBoperator*=\fP (double const &constant)"
+.br
+.ti -1c
+.RI "\fBVertice\fP \fBoperator+\fP (\fBVertice\fP const &other) const"
+.br
+.ti -1c
+.RI "\fBVertice\fP \fBoperator\-\fP (\fBVertice\fP const &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator<\fP (\fBVertice\fP const &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator<=\fP (\fBVertice\fP const &other) const"
 .br
 .ti -1c
 .RI "\fBVertice\fP & \fBoperator=\fP (std::vector< double > const &point)"
@@ -51,19 +90,37 @@ Vertice
 .RI "\fBVertice\fP & \fBoperator=\fP (\fBVertice\fP const &vertice)"
 .br
 .ti -1c
+.RI "bool \fBoperator>\fP (\fBVertice\fP const &other) const"
+.br
+.ti -1c
+.RI "bool \fBoperator>=\fP (\fBVertice\fP const &other) const"
+.br
+.ti -1c
 .RI "auto & \fBoperator[]\fP (int const &i)"
 .br
 .ti -1c
 .RI "auto const  & \fBoperator[]\fP (int const &i) const"
 .br
 .ti -1c
+.RI "void \fBresize\fP (\fBsize_t\fP const &\fBsize\fP)"
+.br
+.ti -1c
+.RI "void \fBresize\fP (\fBsize_t\fP const &\fBsize\fP, double const &value)"
+.br
+.ti -1c
+.RI "void \fBset\fP (int const &coordinate_i, double const &coordinate)"
+.br
+.ti -1c
 .RI "void \fBset\fP (std::vector< double > const &point)"
 .br
 .ti -1c
-.RI "void \fBset\fP (\fBVertice\fP &&_vertice)"
+.RI "void \fBset\fP (\fBVertice\fP &&other)"
 .br
 .ti -1c
-.RI "void \fBset\fP (\fBVertice\fP const &_vertice)"
+.RI "void \fBset\fP (\fBVertice\fP const &other)"
+.br
+.ti -1c
+.RI "void \fBsetValue\fP (double const &_value)"
 .br
 .ti -1c
 .RI "auto & \fBsize\fP ()"
@@ -72,7 +129,13 @@ Vertice
 .RI "auto const  & \fBsize\fP () const"
 .br
 .ti -1c
+.RI "\fBVertice\fP ()=default"
+.br
+.ti -1c
 .RI "\fBVertice\fP (\fBsize_t\fP \fBsize\fP)"
+.br
+.ti -1c
+.RI "\fBVertice\fP (std::Initialiser_list< double > const &init_list)"
 .br
 .ti -1c
 .RI "\fBVertice\fP (std::vector< double > const &coords)"
@@ -93,10 +156,17 @@ Vertice
 .ti -1c
 .RI "\fBsize_t\fP \fBm_dim\fP = 0"
 .br
+.ti -1c
+.RI "double \fBm_value\fP = NAN"
+.br
 .in -1c
 .SH "Constructor & Destructor Documentation"
 .PP 
+.SS "Vertice::Vertice ()\fC [default]\fP"
+
 .SS "Vertice::Vertice (std::vector< double > const & coords)\fC [inline]\fP"
+
+.SS "Vertice::Vertice (std::Initialiser_list< double > const & init_list)\fC [inline]\fP"
 
 .SS "Vertice::Vertice (\fBVertice\fP const & _vertice)\fC [inline]\fP"
 
@@ -110,21 +180,47 @@ Vertice
 
 .SS "auto Vertice::begin () const\fC [inline]\fP"
 
+.SS "void Vertice::cleanMove (\fBVertice\fP & _vertice)\fC [inline]\fP"
+
+.SS "void Vertice::copy (std::vector< double > const & point)\fC [inline]\fP"
+
+.SS "void Vertice::copy (\fBVertice\fP && other)\fC [inline]\fP"
+
+.SS "void Vertice::copy (\fBVertice\fP const & other)\fC [inline]\fP"
+
 .SS "auto Vertice::end ()\fC [inline]\fP"
 
 .SS "auto Vertice::end () const\fC [inline]\fP"
+
+.SS "auto const& Vertice::evaluate (std::function< double(const \fBVertice\fP &)> objective_function)\fC [inline]\fP"
+
+.SS "void Vertice::fill (double const & value)\fC [inline]\fP"
 
 .SS "auto& Vertice::get ()\fC [inline]\fP"
 
 .SS "auto const& Vertice::get () const\fC [inline]\fP"
 
-.SS "\fBVertice\fP& Vertice::operator* (double const & constant)\fC [inline]\fP"
+.SS "auto& Vertice::get (int const & coordinate_i)\fC [inline]\fP"
 
-.SS "\fBVertice\fP Vertice::operator* (\fBVertice\fP const & other)\fC [inline]\fP"
+.SS "auto const& Vertice::get (int const & coordinate_i) const\fC [inline]\fP"
 
-.SS "\fBVertice\fP Vertice::operator+ (\fBVertice\fP const & other)\fC [inline]\fP"
+.SS "auto Vertice::getValue ()\fC [inline]\fP"
 
-.SS "\fBVertice\fP Vertice::operator\- (\fBVertice\fP const & other)\fC [inline]\fP"
+.SS "auto const& Vertice::getValue () const\fC [inline]\fP"
+
+.SS "\fBVertice\fP Vertice::operator* (double const & constant) const\fC [inline]\fP"
+
+.SS "\fBVertice\fP Vertice::operator* (\fBVertice\fP const & other) const\fC [inline]\fP"
+
+.SS "\fBVertice\fP& Vertice::operator*= (double const & constant)\fC [inline]\fP"
+
+.SS "\fBVertice\fP Vertice::operator+ (\fBVertice\fP const & other) const\fC [inline]\fP"
+
+.SS "\fBVertice\fP Vertice::operator\- (\fBVertice\fP const & other) const\fC [inline]\fP"
+
+.SS "bool Vertice::operator< (\fBVertice\fP const & other) const\fC [inline]\fP"
+
+.SS "bool Vertice::operator<= (\fBVertice\fP const & other) const\fC [inline]\fP"
 
 .SS "\fBVertice\fP& Vertice::operator= (std::vector< double > const & point)\fC [inline]\fP"
 
@@ -132,15 +228,27 @@ Vertice
 
 .SS "\fBVertice\fP& Vertice::operator= (\fBVertice\fP const & vertice)\fC [inline]\fP"
 
+.SS "bool Vertice::operator> (\fBVertice\fP const & other) const\fC [inline]\fP"
+
+.SS "bool Vertice::operator>= (\fBVertice\fP const & other) const\fC [inline]\fP"
+
 .SS "auto& Vertice::operator[] (int const & i)\fC [inline]\fP"
 
 .SS "auto const& Vertice::operator[] (int const & i) const\fC [inline]\fP"
 
+.SS "void Vertice::resize (\fBsize_t\fP const & size)\fC [inline]\fP"
+
+.SS "void Vertice::resize (\fBsize_t\fP const & size, double const & value)\fC [inline]\fP"
+
+.SS "void Vertice::set (int const & coordinate_i, double const & coordinate)\fC [inline]\fP"
+
 .SS "void Vertice::set (std::vector< double > const & point)\fC [inline]\fP"
 
-.SS "void Vertice::set (\fBVertice\fP && _vertice)\fC [inline]\fP"
+.SS "void Vertice::set (\fBVertice\fP && other)\fC [inline]\fP"
 
-.SS "void Vertice::set (\fBVertice\fP const & _vertice)\fC [inline]\fP"
+.SS "void Vertice::set (\fBVertice\fP const & other)\fC [inline]\fP"
+
+.SS "void Vertice::setValue (double const & _value)\fC [inline]\fP"
 
 .SS "auto& Vertice::size ()\fC [inline]\fP"
 
@@ -151,6 +259,8 @@ Vertice
 .SS "std::vector<double> Vertice::m_coordinates\fC [private]\fP"
 
 .SS "\fBsize_t\fP Vertice::m_dim = 0\fC [private]\fP"
+
+.SS "double Vertice::m_value = NAN\fC [private]\fP"
 
 
 .SH "Author"

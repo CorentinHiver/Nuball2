@@ -1,13 +1,14 @@
 <map id="Faster2Histo" name="Faster2Histo">
-<area shape="rect" id="node1" title=" " alt="" coords="201,363,303,389"/>
-<area shape="rect" id="node2" href="$class_m_t_faster_reader.html" title="Class used to read in parallel .fast files of the same run." alt="" coords="189,273,315,300"/>
-<area shape="rect" id="node3" href="$class_m_t_vector.html" title=" " alt="" coords="93,184,272,211"/>
-<area shape="rect" id="node4" href="$class_files_manager.html" title=" " alt="" coords="296,184,405,211"/>
-<area shape="rect" id="node5" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="216,95,267,121"/>
-<area shape="rect" id="node7" href="$class_file.html" title="EXPERIMENTAL Composed of a Path and a Filename." alt="" coords="24,184,69,211"/>
-<area shape="rect" id="node6" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="207,5,276,32"/>
-<area shape="rect" id="node8" href="$class_filename.html" title="EXPERIMENTAL Contains the short name and the extension of a given file, without any knowledge of its ..." alt="" coords="5,95,88,121"/>
-<area shape="rect" id="node9" href="$class_calibration.html" title=" " alt="" coords="359,273,452,300"/>
-<area shape="rect" id="node10" href="$struct_calibration_1_1histograms.html" title=" " alt="" coords="430,184,605,211"/>
-<area shape="rect" id="node11" href="$class_m_t_t_hist.html" title=" " alt="" coords="447,95,587,121"/>
+<area shape="rect" id="node1" title="Convert faster data to histograms." alt="" coords="816,451,919,477"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html" title="Calculates the time difference between all detectors and a reference detector." alt="" coords="429,361,519,388"/>
+<area shape="rect" id="node3" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="803,95,854,121"/>
+<area shape="rect" id="node5" href="$class_files_manager.html" title=" " alt="" coords="571,184,681,211"/>
+<area shape="rect" id="node10" href="$class_file.html" title="EXPERIMENTAL Composed of a Path and a Filename." alt="" coords="991,184,1037,211"/>
+<area shape="rect" id="node4" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="794,5,863,32"/>
+<area shape="rect" id="node8" href="$class_m_t_faster_reader.html" title="Class used to read in parallel .fast files of the same run." alt="" coords="731,361,857,388"/>
+<area shape="rect" id="node6" href="$class_m_t_t_hist.html" title=" " alt="" coords="5,184,145,211"/>
+<area shape="rect" id="node7" href="$class_m_t_t_hist.html" title=" " alt="" coords="211,184,351,211"/>
+<area shape="rect" id="node9" href="$class_m_t_vector.html" title=" " alt="" coords="705,184,883,211"/>
+<area shape="rect" id="node11" href="$class_filename.html" title="EXPERIMENTAL Contains the short name and the extension of a given file, without any knowledge of its ..." alt="" coords="1007,95,1090,121"/>
+<area shape="rect" id="node12" href="$class_calibration.html" title="A convenient class for handling coefficient calibration up to 3rd order." alt="" coords="1107,361,1201,388"/>
 </map>

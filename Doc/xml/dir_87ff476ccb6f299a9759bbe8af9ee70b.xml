@@ -3,27 +3,29 @@
   <compounddef id="dir_87ff476ccb6f299a9759bbe8af9ee70b" kind="dir">
     <compoundname>lib/Classes</compoundname>
     <innerfile refid="_alignator_8hpp">Alignator.hpp</innerfile>
-    <innerfile refid="_analysis_event_8hpp">AnalysisEvent.hpp</innerfile>
     <innerfile refid="_builder_8hpp">Builder.hpp</innerfile>
+    <innerfile refid="_calibration_8hpp">Calibration.hpp</innerfile>
     <innerfile refid="_coinc_builder_8hpp">CoincBuilder.hpp</innerfile>
+    <innerfile refid="_co_progress_bar_8hpp">CoProgressBar.hpp</innerfile>
     <innerfile refid="_classes_2_counters_8hpp">Counters.hpp</innerfile>
-    <innerfile refid="_data_file_reader_8hpp">DataFileReader.hpp</innerfile>
-    <innerfile refid="_data_reader_8hpp">DataReader.hpp</innerfile>
+    <innerfile refid="_data_file_8hpp">DataFile.hpp</innerfile>
     <innerfile refid="_detectors_8hpp">Detectors.hpp</innerfile>
     <innerfile refid="_event_8hpp">Event.hpp</innerfile>
     <innerfile refid="_event_builder_8hpp">EventBuilder.hpp</innerfile>
     <innerfile refid="_faster_reader_8hpp">FasterReader.hpp</innerfile>
     <innerfile refid="_files_manager_8hpp">FilesManager.hpp</innerfile>
+    <innerfile refid="_fit_8hpp">Fit.hpp</innerfile>
     <innerfile refid="_gate_8hpp">Gate.hpp</innerfile>
     <innerfile refid="_hit_8hpp">Hit.hpp</innerfile>
+    <innerfile refid="_hit_buffer_8hpp">HitBuffer.hpp</innerfile>
     <innerfile refid="_manip_8hpp">Manip.hpp</innerfile>
     <innerfile refid="_nuball2_tree_8hpp">Nuball2Tree.hpp</innerfile>
+    <innerfile refid="_output_t_file_8hpp">OutputTFile.hpp</innerfile>
     <innerfile refid="_performances_8hpp">Performances.hpp</innerfile>
-    <innerfile refid="_reader_manager_8hpp">ReaderManager.hpp</innerfile>
     <innerfile refid="_r_f___manager_8hpp">RF_Manager.hpp</innerfile>
     <innerfile refid="_r_w_mat_8hxx">RWMat.hxx</innerfile>
-    <innerfile refid="_spectra_alignator_8hpp">SpectraAlignator.hpp</innerfile>
     <innerfile refid="_timer_8hpp">Timer.hpp</innerfile>
+    <innerfile refid="_timewalk_8hpp">Timewalk.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

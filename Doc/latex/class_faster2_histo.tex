@@ -2,6 +2,11 @@
 \label{class_faster2_histo}\index{Faster2Histo@{Faster2Histo}}
 
 
+Convert faster data to histograms.  
+
+
+
+
 {\ttfamily \#include $<$Faster2\+Histo.\+hpp$>$}
 
 
@@ -18,35 +23,41 @@ Collaboration diagram for Faster2\+Histo\+:
 \begin{DoxyCompactItemize}
 \item 
 void \textbf{ add\+File} (std\+::string const \&file)
-\item 
+\begin{DoxyCompactList}\small\item\em Adds one file to convert at the list. Option -\/f. \end{DoxyCompactList}\item 
 void \textbf{ add\+Folder} (\textbf{ Path} folder, int const \&nb\+\_\+files=-\/1)
-\item 
+\begin{DoxyCompactList}\small\item\em Adds [nb\+\_\+files] files to convert inside of [folder]. \end{DoxyCompactList}\item 
 \textbf{ Faster2\+Histo} ()
 \item 
 \textbf{ Faster2\+Histo} (int argc, char $\ast$$\ast$argv)
-\item 
+\begin{DoxyCompactList}\small\item\em To launch the application at instanciation. \end{DoxyCompactList}\item 
 void \textbf{ fill\+Histo} (\textbf{ Hit} const \&hit)
-\item 
+\begin{DoxyCompactList}\small\item\em Handles each hit and fills the correct histogram. \end{DoxyCompactList}\item 
 void \textbf{ load} (int const \&argc, char $\ast$$\ast$argv)
-\item 
+\begin{DoxyCompactList}\small\item\em To launch the application after instanciation. \end{DoxyCompactList}\item 
 void \textbf{ load\+Calibration} (std\+::string const \&calibration\+\_\+file)
-\item 
+\begin{DoxyCompactList}\small\item\em Loads the .calib file needed. Option -\/c. \end{DoxyCompactList}\item 
+void \textbf{ load\+Timeshifts} (\textbf{ Timeshifts} const \&timeshifts)
+\begin{DoxyCompactList}\small\item\em Loads the .dT file needed. Option -\/t. \end{DoxyCompactList}\item 
 void \textbf{ multirun} (int const \&nb\+\_\+threads=-\/1)
-\item 
-void \textbf{ overwrite} (bool const \&\+\_\+overwrite)
-\item 
-void \textbf{ set\+Nb\+Files} (int const \&\+\_\+nb\+\_\+files)
-\item 
-void \textbf{ set\+Nb\+Threads} (int const \&\+\_\+nb\+\_\+threads)
-\item 
+\begin{DoxyCompactList}\small\item\em Setup the threads and launched the application. \end{DoxyCompactList}\item 
+void \textbf{ overwrite} (bool const \&\+\_\+overwrite) noexcept
+\begin{DoxyCompactList}\small\item\em Allows to overwrite the output file if it exists. Option -\/o. \end{DoxyCompactList}\item 
+void \textbf{ set\+Nb\+Files} (int const \&\+\_\+nb\+\_\+files) noexcept
+\begin{DoxyCompactList}\small\item\em Set the number of files to read in the folder. Second argument of option -\/F. \end{DoxyCompactList}\item 
+void \textbf{ set\+Nb\+Threads} (int const \&\+\_\+nb\+\_\+threads) noexcept
+\begin{DoxyCompactList}\small\item\em Set the number of threads to write down. Option -\/m. \end{DoxyCompactList}\item 
 void \textbf{ set\+Out\+Filename} (std\+::string const \&out\+\_\+filename) noexcept
+\begin{DoxyCompactList}\small\item\em Set the name of the output file. \end{DoxyCompactList}\item 
+void \textbf{ set\+Out\+Path} (\textbf{ Path} const \&path) noexcept
+\begin{DoxyCompactList}\small\item\em Set the full output path. Option --out\+\_\+path. \end{DoxyCompactList}\item 
+void \textbf{ set\+Trigger} (\textbf{ Trigger\+Hit} trigger)
 \item 
 void \textbf{ set\+Write\+Mode} (const char $\ast$mode) noexcept
-\item 
+\begin{DoxyCompactList}\small\item\em Interface with the ROOT write mode. Default = \char`\"{}\+RECREATE\char`\"{}. \end{DoxyCompactList}\item 
 void \textbf{ treat\+File} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader)
-\item 
-void \textbf{ write} (std\+::string const \&out\+\_\+filename=\char`\"{}\char`\"{})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Treats the file with already configured \doxyref{Hit}{p.}{class_hit} and \doxyref{Faster\+Reader}{p.}{class_faster_reader} object. \end{DoxyCompactList}\item 
+void \textbf{ write} (std\+::string const \&out\+\_\+filename=\char`\"{}\char`\"{}) noexcept
+\begin{DoxyCompactList}\small\item\em Write down a [out\+\_\+filename].root file containing the spectra of the data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -60,22 +71,51 @@ static void \textbf{ dispatch\+\_\+threads} (\textbf{ Hit} \&hit, \textbf{ Faste
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
+std\+::unordered\+\_\+map$<$ \textbf{ Label}, \textbf{ MTTHist}$<$ TH2F $>$ $>$ \textbf{ m\+\_\+bidim}
+\item 
+bool \textbf{ m\+\_\+bidim\+\_\+paris} = false
+\item 
+double \textbf{ m\+\_\+bin\+\_\+max} = -\/1
+\item 
+double \textbf{ m\+\_\+bin\+\_\+max\+\_\+paris} = -\/1
+\item 
 \textbf{ Calibration} \textbf{ m\+\_\+calibration}
+\item 
+\textbf{ Files\+Manager} \textbf{ m\+\_\+files}
 \item 
 std\+::vector$<$ \textbf{ Label} $>$ \textbf{ m\+\_\+labels}
 \item 
+int \textbf{ m\+\_\+maximum\+\_\+hits} = -\/1
+\item 
 \textbf{ MTFaster\+Reader} \textbf{ m\+\_\+\+MTreader}
+\item 
+int \textbf{ m\+\_\+nb\+\_\+bins} = -\/1
+\item 
+int \textbf{ m\+\_\+nb\+\_\+bins\+\_\+paris} = -\/1
 \item 
 int \textbf{ m\+\_\+nb\+\_\+files} = -\/1
 \item 
 \textbf{ File} \textbf{ m\+\_\+out\+File} = \char`\"{}spectra.\+root\char`\"{}
 \item 
+\textbf{ Path} \textbf{ m\+\_\+out\+Path} = \textbf{ Path\+::pwd}()
+\item 
 int \textbf{ m\+\_\+overwrite} = false
 \item 
 std\+::unordered\+\_\+map$<$ \textbf{ Label}, \textbf{ MTTHist}$<$ TH1F $>$ $>$ \textbf{ m\+\_\+spectra}
 \item 
+\textbf{ Timeshifts} \textbf{ m\+\_\+timeshifts}
+\item 
+\textbf{ Trigger\+Hit} \textbf{ m\+\_\+trigger} = [$\,$](\textbf{ Hit} const \& hit) \{return true;\}
+\item 
 const char $\ast$ \textbf{ write\+\_\+mode} = \char`\"{}RECREATE\char`\"{}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Convert faster data to histograms. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]event building, timeshifts\end{DoxyRefDesc}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
@@ -90,6 +130,10 @@ const char $\ast$ \textbf{ write\+\_\+mode} = \char`\"{}RECREATE\char`\"{}
 \index{Faster2Histo@{Faster2Histo}!Faster2Histo@{Faster2Histo}}
 \doxysubsubsection{Faster2Histo()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Faster2\+Histo\+::\+Faster2\+Histo (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+To launch the application at instanciation. 
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -108,14 +152,20 @@ Here is the call graph for this function\+:
 \doxysubsubsection{addFile()}
 {\footnotesize\ttfamily void Faster2\+Histo\+::add\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Adds one file to convert at the list. Option -\/f. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_ac20f36c0861a3af085c9546ca1325cc6_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -128,14 +178,20 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{addFolder()}
 {\footnotesize\ttfamily void Faster2\+Histo\+::add\+Folder (\begin{DoxyParamCaption}\item[{\textbf{ Path}}]{folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Adds [nb\+\_\+files] files to convert inside of [folder]. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_a8684b0b531e6369ce35bca61f4b1007a_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -148,7 +204,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{dispatch\_threads()}
 {\footnotesize\ttfamily static void Faster2\+Histo\+::dispatch\+\_\+threads (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Faster2\+Histo} \&}]{f2h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -161,14 +218,20 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{fillHisto()}
 {\footnotesize\ttfamily void Faster2\+Histo\+::fill\+Histo (\begin{DoxyParamCaption}\item[{\textbf{ Hit} const \&}]{hit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Handles each hit and fills the correct histogram. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=281pt]{class_faster2_histo_a327a8348f79c5ecf27a58baef32b81d8_cgraph}
+\includegraphics[width=350pt]{class_faster2_histo_a327a8348f79c5ecf27a58baef32b81d8_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -181,14 +244,20 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{load()}
 {\footnotesize\ttfamily void Faster2\+Histo\+::load (\begin{DoxyParamCaption}\item[{int const \&}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+To launch the application after instanciation. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_a72f8004ae550c02db09791b810c0252d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -201,18 +270,42 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{loadCalibration()}
 {\footnotesize\ttfamily void Faster2\+Histo\+::load\+Calibration (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{calibration\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Loads the .calib file needed. Option -\/c. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_a46087c5a676f688d4862304fca62cc24_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_a46087c5a676f688d4862304fca62cc24_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_histo_a1d8ac98ca01be74eac38354fc10c015e}} 
+\index{Faster2Histo@{Faster2Histo}!loadTimeshifts@{loadTimeshifts}}
+\index{loadTimeshifts@{loadTimeshifts}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{loadTimeshifts()}
+{\footnotesize\ttfamily void Faster2\+Histo\+::load\+Timeshifts (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts} const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Loads the .dT file needed. Option -\/t. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_histo_a1d8ac98ca01be74eac38354fc10c015e_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_faster2_histo_a20fd8b47b9a9aecef8682ad5442db16d}} 
@@ -221,31 +314,42 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{multirun()}
 {\footnotesize\ttfamily void Faster2\+Histo\+::multirun (\begin{DoxyParamCaption}\item[{int const \&}]{nb\+\_\+threads = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Setup the threads and launched the application. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_a20fd8b47b9a9aecef8682ad5442db16d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_a20fd8b47b9a9aecef8682ad5442db16d_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_faster2_histo_afadb67cbf1469aebd3133246cf7ba922}} 
+\mbox{\label{class_faster2_histo_a630775308c3c6961b59c540239a08e71}} 
 \index{Faster2Histo@{Faster2Histo}!overwrite@{overwrite}}
 \index{overwrite@{overwrite}!Faster2Histo@{Faster2Histo}}
 \doxysubsubsection{overwrite()}
-{\footnotesize\ttfamily void Faster2\+Histo\+::overwrite (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+overwrite }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Faster2\+Histo\+::overwrite (\begin{DoxyParamCaption}\item[{bool const \&}]{\+\_\+overwrite }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+
+
+Allows to overwrite the output file if it exists. Option -\/o. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_faster2_histo_afadb67cbf1469aebd3133246cf7ba922_icgraph}
+\includegraphics[width=350pt]{class_faster2_histo_a630775308c3c6961b59c540239a08e71_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_faster2_histo_af5be7bfaa8186926e62e736310dffc26}} 
@@ -254,44 +358,56 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{printParameters()}
 {\footnotesize\ttfamily void Faster2\+Histo\+::print\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [noexcept]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=316pt]{class_faster2_histo_af5be7bfaa8186926e62e736310dffc26_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_af5be7bfaa8186926e62e736310dffc26_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_faster2_histo_aa059538fc470d3de0663e6ec44ebb46d}} 
+\mbox{\label{class_faster2_histo_abe0d71f02ef51428e9f3fd3adb3d946c}} 
 \index{Faster2Histo@{Faster2Histo}!setNbFiles@{setNbFiles}}
 \index{setNbFiles@{setNbFiles}!Faster2Histo@{Faster2Histo}}
 \doxysubsubsection{setNbFiles()}
-{\footnotesize\ttfamily void Faster2\+Histo\+::set\+Nb\+Files (\begin{DoxyParamCaption}\item[{int const \&}]{\+\_\+nb\+\_\+files }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Faster2\+Histo\+::set\+Nb\+Files (\begin{DoxyParamCaption}\item[{int const \&}]{\+\_\+nb\+\_\+files }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
-\mbox{\label{class_faster2_histo_aa3d364eba3c8fc7367fdabea68524854}} 
+
+
+Set the number of files to read in the folder. Second argument of option -\/F. 
+
+\mbox{\label{class_faster2_histo_a18454db0c46d7acbcf87315fc123462d}} 
 \index{Faster2Histo@{Faster2Histo}!setNbThreads@{setNbThreads}}
 \index{setNbThreads@{setNbThreads}!Faster2Histo@{Faster2Histo}}
 \doxysubsubsection{setNbThreads()}
-{\footnotesize\ttfamily void Faster2\+Histo\+::set\+Nb\+Threads (\begin{DoxyParamCaption}\item[{int const \&}]{\+\_\+nb\+\_\+threads }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Faster2\+Histo\+::set\+Nb\+Threads (\begin{DoxyParamCaption}\item[{int const \&}]{\+\_\+nb\+\_\+threads }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Set the number of threads to write down. Option -\/m. 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_faster2_histo_aa3d364eba3c8fc7367fdabea68524854_cgraph}
+\includegraphics[width=350pt]{class_faster2_histo_a18454db0c46d7acbcf87315fc123462d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_faster2_histo_aa3d364eba3c8fc7367fdabea68524854_icgraph}
+\includegraphics[width=350pt]{class_faster2_histo_a18454db0c46d7acbcf87315fc123462d_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_faster2_histo_a479d102c3637023aedeaa0b8e7608781}} 
@@ -300,61 +416,144 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{setOutFilename()}
 {\footnotesize\ttfamily void Faster2\+Histo\+::set\+Out\+Filename (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{out\+\_\+filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+
+
+Set the name of the output file. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_histo_a479d102c3637023aedeaa0b8e7608781_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_faster2_histo_aea9828c3cbca9a909cb5f45e4cb659f5}} 
-\index{Faster2Histo@{Faster2Histo}!setWriteMode@{setWriteMode}}
-\index{setWriteMode@{setWriteMode}!Faster2Histo@{Faster2Histo}}
-\doxysubsubsection{setWriteMode()}
-{\footnotesize\ttfamily void Faster2\+Histo\+::set\+Write\+Mode (\begin{DoxyParamCaption}\item[{const char $\ast$}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+\mbox{\label{class_faster2_histo_a10cecb02216295444e7ab7a9b08a1965}} 
+\index{Faster2Histo@{Faster2Histo}!setOutPath@{setOutPath}}
+\index{setOutPath@{setOutPath}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{setOutPath()}
+{\footnotesize\ttfamily void Faster2\+Histo\+::set\+Out\+Path (\begin{DoxyParamCaption}\item[{\textbf{ Path} const \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
 
-\mbox{\label{class_faster2_histo_a48d7d46929ffbd69ccc3a590c535d3b7}} 
-\index{Faster2Histo@{Faster2Histo}!treatFile@{treatFile}}
-\index{treatFile@{treatFile}!Faster2Histo@{Faster2Histo}}
-\doxysubsubsection{treatFile()}
-{\footnotesize\ttfamily void Faster2\+Histo\+::treat\+File (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_faster2_histo_a48d7d46929ffbd69ccc3a590c535d3b7_cgraph}
-\end{center}
-\end{figure}
-\mbox{\label{class_faster2_histo_a355de92b0dc2822b28ac3f65f87b5db9}} 
-\index{Faster2Histo@{Faster2Histo}!write@{write}}
-\index{write@{write}!Faster2Histo@{Faster2Histo}}
-\doxysubsubsection{write()}
-{\footnotesize\ttfamily void Faster2\+Histo\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{out\+\_\+filename = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Set the full output path. Option --out\+\_\+path. 
 
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=293pt]{class_faster2_histo_a355de92b0dc2822b28ac3f65f87b5db9_cgraph}
+\includegraphics[width=350pt]{class_faster2_histo_a10cecb02216295444e7ab7a9b08a1965_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_faster2_histo_a355de92b0dc2822b28ac3f65f87b5db9_icgraph}
+\includegraphics[width=350pt]{class_faster2_histo_a10cecb02216295444e7ab7a9b08a1965_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_histo_a9fe030fbb75d71117cbac93c14c787f6}} 
+\index{Faster2Histo@{Faster2Histo}!setTrigger@{setTrigger}}
+\index{setTrigger@{setTrigger}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{setTrigger()}
+{\footnotesize\ttfamily void Faster2\+Histo\+::set\+Trigger (\begin{DoxyParamCaption}\item[{\textbf{ Trigger\+Hit}}]{trigger }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]UNUSED until event building is done \end{DoxyRefDesc}
+\mbox{\label{class_faster2_histo_aea9828c3cbca9a909cb5f45e4cb659f5}} 
+\index{Faster2Histo@{Faster2Histo}!setWriteMode@{setWriteMode}}
+\index{setWriteMode@{setWriteMode}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{setWriteMode()}
+{\footnotesize\ttfamily void Faster2\+Histo\+::set\+Write\+Mode (\begin{DoxyParamCaption}\item[{const char $\ast$}]{mode }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Interface with the ROOT write mode. Default = \char`\"{}\+RECREATE\char`\"{}. 
+
+If you want to use \char`\"{}\+APPEND\char`\"{} for instance, you have to use the overwrite option (-\/o) \mbox{\label{class_faster2_histo_a48d7d46929ffbd69ccc3a590c535d3b7}} 
+\index{Faster2Histo@{Faster2Histo}!treatFile@{treatFile}}
+\index{treatFile@{treatFile}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{treatFile()}
+{\footnotesize\ttfamily void Faster2\+Histo\+::treat\+File (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader }\end{DoxyParamCaption})}
+
+
+
+Treats the file with already configured \doxyref{Hit}{p.}{class_hit} and \doxyref{Faster\+Reader}{p.}{class_faster_reader} object. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_histo_a48d7d46929ffbd69ccc3a590c535d3b7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_histo_a8821f5ded43a6f91593962adbe4761b9}} 
+\index{Faster2Histo@{Faster2Histo}!write@{write}}
+\index{write@{write}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{write()}
+{\footnotesize\ttfamily void Faster2\+Histo\+::write (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{out\+\_\+filename = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Write down a [out\+\_\+filename].root file containing the spectra of the data. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_histo_a8821f5ded43a6f91593962adbe4761b9_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_histo_a8821f5ded43a6f91593962adbe4761b9_icgraph}
 \end{center}
 \end{figure}
 
 
 \doxysubsection{Member Data Documentation}
+\mbox{\label{class_faster2_histo_a513ce65ab115d887353d27a684597440}} 
+\index{Faster2Histo@{Faster2Histo}!m\_bidim@{m\_bidim}}
+\index{m\_bidim@{m\_bidim}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_bidim}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ Label}, \textbf{ MTTHist}$<$TH2F$>$ $>$ Faster2\+Histo\+::m\+\_\+bidim\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster2_histo_a0ee52745a95d3615c3862327111b2296}} 
+\index{Faster2Histo@{Faster2Histo}!m\_bidim\_paris@{m\_bidim\_paris}}
+\index{m\_bidim\_paris@{m\_bidim\_paris}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_bidim\_paris}
+{\footnotesize\ttfamily bool Faster2\+Histo\+::m\+\_\+bidim\+\_\+paris = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster2_histo_a1bca384e749b760f4cb2ba31c587439a}} 
+\index{Faster2Histo@{Faster2Histo}!m\_bin\_max@{m\_bin\_max}}
+\index{m\_bin\_max@{m\_bin\_max}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_bin\_max}
+{\footnotesize\ttfamily double Faster2\+Histo\+::m\+\_\+bin\+\_\+max = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster2_histo_a336d91e629b3e2956d08d248e604c7bb}} 
+\index{Faster2Histo@{Faster2Histo}!m\_bin\_max\_paris@{m\_bin\_max\_paris}}
+\index{m\_bin\_max\_paris@{m\_bin\_max\_paris}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_bin\_max\_paris}
+{\footnotesize\ttfamily double Faster2\+Histo\+::m\+\_\+bin\+\_\+max\+\_\+paris = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
 \mbox{\label{class_faster2_histo_a93debc2e47619ed043f25f90aaa16c75}} 
 \index{Faster2Histo@{Faster2Histo}!m\_calibration@{m\_calibration}}
 \index{m\_calibration@{m\_calibration}!Faster2Histo@{Faster2Histo}}
 \doxysubsubsection{m\_calibration}
 {\footnotesize\ttfamily \textbf{ Calibration} Faster2\+Histo\+::m\+\_\+calibration\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster2_histo_a527fd90eaf5fa6f5332d284d5b4dac07}} 
+\index{Faster2Histo@{Faster2Histo}!m\_files@{m\_files}}
+\index{m\_files@{m\_files}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_files}
+{\footnotesize\ttfamily \textbf{ Files\+Manager} Faster2\+Histo\+::m\+\_\+files\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\label{class_faster2_histo_a9564f0b9bed4fd3f2d275b4127abedc2}} 
 \index{Faster2Histo@{Faster2Histo}!m\_labels@{m\_labels}}
@@ -362,11 +561,29 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{m\_labels}
 {\footnotesize\ttfamily std\+::vector$<$\textbf{ Label}$>$ Faster2\+Histo\+::m\+\_\+labels\hspace{0.3cm}{\ttfamily [private]}}
 
+\mbox{\label{class_faster2_histo_a5fced38fc1fad7f2d40028fff465bb9e}} 
+\index{Faster2Histo@{Faster2Histo}!m\_maximum\_hits@{m\_maximum\_hits}}
+\index{m\_maximum\_hits@{m\_maximum\_hits}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_maximum\_hits}
+{\footnotesize\ttfamily int Faster2\+Histo\+::m\+\_\+maximum\+\_\+hits = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
 \mbox{\label{class_faster2_histo_a2ec4e07c1b3ee37719c9312822515466}} 
 \index{Faster2Histo@{Faster2Histo}!m\_MTreader@{m\_MTreader}}
 \index{m\_MTreader@{m\_MTreader}!Faster2Histo@{Faster2Histo}}
 \doxysubsubsection{m\_MTreader}
 {\footnotesize\ttfamily \textbf{ MTFaster\+Reader} Faster2\+Histo\+::m\+\_\+\+MTreader\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster2_histo_a918141fac8915284217d8dc2969b7220}} 
+\index{Faster2Histo@{Faster2Histo}!m\_nb\_bins@{m\_nb\_bins}}
+\index{m\_nb\_bins@{m\_nb\_bins}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_nb\_bins}
+{\footnotesize\ttfamily int Faster2\+Histo\+::m\+\_\+nb\+\_\+bins = -\/1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster2_histo_a9772ec5bf914344889c208b965e94193}} 
+\index{Faster2Histo@{Faster2Histo}!m\_nb\_bins\_paris@{m\_nb\_bins\_paris}}
+\index{m\_nb\_bins\_paris@{m\_nb\_bins\_paris}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_nb\_bins\_paris}
+{\footnotesize\ttfamily int Faster2\+Histo\+::m\+\_\+nb\+\_\+bins\+\_\+paris = -\/1\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\label{class_faster2_histo_a287be636deda02485fc20e28f37d44d1}} 
 \index{Faster2Histo@{Faster2Histo}!m\_nb\_files@{m\_nb\_files}}
@@ -380,6 +597,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{m\_outFile}
 {\footnotesize\ttfamily \textbf{ File} Faster2\+Histo\+::m\+\_\+out\+File = \char`\"{}spectra.\+root\char`\"{}\hspace{0.3cm}{\ttfamily [private]}}
 
+\mbox{\label{class_faster2_histo_a19560b8efec76dd19e9ae9cc6e09dd55}} 
+\index{Faster2Histo@{Faster2Histo}!m\_outPath@{m\_outPath}}
+\index{m\_outPath@{m\_outPath}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_outPath}
+{\footnotesize\ttfamily \textbf{ Path} Faster2\+Histo\+::m\+\_\+out\+Path = \textbf{ Path\+::pwd}()\hspace{0.3cm}{\ttfamily [private]}}
+
 \mbox{\label{class_faster2_histo_abb960755db4b68484ac9c9904185093c}} 
 \index{Faster2Histo@{Faster2Histo}!m\_overwrite@{m\_overwrite}}
 \index{m\_overwrite@{m\_overwrite}!Faster2Histo@{Faster2Histo}}
@@ -391,6 +614,18 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{m\_spectra@{m\_spectra}!Faster2Histo@{Faster2Histo}}
 \doxysubsubsection{m\_spectra}
 {\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ Label}, \textbf{ MTTHist}$<$TH1F$>$ $>$ Faster2\+Histo\+::m\+\_\+spectra\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster2_histo_ae9aeacfa4883b5e323c5929801576b69}} 
+\index{Faster2Histo@{Faster2Histo}!m\_timeshifts@{m\_timeshifts}}
+\index{m\_timeshifts@{m\_timeshifts}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_timeshifts}
+{\footnotesize\ttfamily \textbf{ Timeshifts} Faster2\+Histo\+::m\+\_\+timeshifts\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_faster2_histo_ae3545228b0bbf1b2aa513412e6aa80a1}} 
+\index{Faster2Histo@{Faster2Histo}!m\_trigger@{m\_trigger}}
+\index{m\_trigger@{m\_trigger}!Faster2Histo@{Faster2Histo}}
+\doxysubsubsection{m\_trigger}
+{\footnotesize\ttfamily \textbf{ Trigger\+Hit} Faster2\+Histo\+::m\+\_\+trigger = [$\,$](\textbf{ Hit} const \& hit) \{return true;\}\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\label{class_faster2_histo_ab989a53d306f9cf1328921d011199e19}} 
 \index{Faster2Histo@{Faster2Histo}!write\_mode@{write\_mode}}

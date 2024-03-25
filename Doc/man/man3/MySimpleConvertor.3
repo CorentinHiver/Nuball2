@@ -1,4 +1,4 @@
-.TH "MySimpleConvertor" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "MySimpleConvertor" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -31,6 +31,7 @@ Inherits \fBFaster2Root\fP\&.
 .ti -1c
 .RI "void \fBloadTriggerFile\fP (std::string const &file)"
 .br
+.RI "Loads a trigger file\&. "
 .ti -1c
 .RI "template<class\&.\&.\&. ARGS> \fBMySimpleConvertor\fP (ARGS &&\&.\&.\&. args)"
 .br
@@ -50,7 +51,7 @@ Inherits \fBFaster2Root\fP\&.
 .RI "void \fBsetTimeshifts\fP (\fBTimeshifts\fP const &timeshifts)"
 .br
 .ti -1c
-.RI "void \fBsetTrigger\fP (std::function< bool(const \fBEvent\fP &)> other)"
+.RI "void \fBsetTrigger\fP (\fBTriggerEvent\fP other)"
 .br
 .ti -1c
 .RI "void \fBthrowSingles\fP (bool const &_throw_single=true)"
@@ -70,8 +71,9 @@ Inherits \fBFaster2Root\fP\&.
 
 .in +1c
 .ti -1c
-.RI "static void \fBs_convertFile\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader, \fBFaster2Root\fP &convertor, \fBPath\fP const &outPath)"
+.RI "static void \fBdispatch_threads\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader, \fBFaster2Root\fP &convertor, \fBPath\fP const &outPath)"
 .br
+.RI "Dispatch the \fBFaster2Root::convertFile()\fP method through the threads\&. "
 .in -1c
 .SS "Protected Attributes"
 
@@ -122,7 +124,7 @@ Inherits \fBFaster2Root\fP\&.
 .RI "\fBMTCounter\fP \fBm_trigg_events\fP"
 .br
 .ti -1c
-.RI "std::function< bool(const \fBEvent\fP &)> \fBm_trigger\fP = [](const \fBEvent\fP&) { return true; }"
+.RI "\fBTriggerEvent\fP \fBm_trigger\fP = [](const \fBEvent\fP&) { return true; }"
 .br
 .ti -1c
 .RI "std::string \fBm_trigger_file\fP"
@@ -162,19 +164,23 @@ Inherits \fBFaster2Root\fP\&.
 
 .PP
 Reimplemented from \fBFaster2Root\fP\&.
+.SS "static void Faster2Root::dispatch_threads (\fBHit\fP & hit, \fBFasterReader\fP & reader, \fBFaster2Root\fP & convertor, \fBPath\fP const & outPath)\fC [inline]\fP, \fC [static]\fP, \fC [protected]\fP, \fC [inherited]\fP"
+
+.PP
+Dispatch the \fBFaster2Root::convertFile()\fP method through the threads\&. 
 .SS "void Faster2Root::load (int argc, char ** argv)\fC [protected]\fP, \fC [inherited]\fP"
 
 .SS "void Faster2Root::loadCalibration (std::string const & calibFile)\fC [inline]\fP, \fC [inherited]\fP"
 
 .SS "void Faster2Root::loadTimeshifts (std::string const & dTfile)\fC [inline]\fP, \fC [inherited]\fP"
 
-.SS "void Faster2Root::loadTriggerFile (std::string const & file)\fC [inherited]\fP"
+.SS "void Faster2Root::loadTriggerFile (std::string const & filename)\fC [inherited]\fP"
 
+.PP
+Loads a trigger file\&. A trigger file contains a list of the detectors's labels (the number, not the name) that are required in the event (e\&.g\&. a germanium trigger file would list all the labels of the germaniums)\&. If you want more specific trigger you have to create your own executable, include \fBFaster2Root\fP and follow the example 2 of the documentation of the class\&. 
 .SS "void Faster2Root::overwrite (bool const & _overwrite)\fC [inline]\fP, \fC [inherited]\fP"
 
 .SS "void Faster2Root::printParameters () const\fC [protected]\fP, \fC [virtual]\fP, \fC [inherited]\fP"
-
-.SS "static void Faster2Root::s_convertFile (\fBHit\fP & hit, \fBFasterReader\fP & reader, \fBFaster2Root\fP & convertor, \fBPath\fP const & outPath)\fC [inline]\fP, \fC [static]\fP, \fC [protected]\fP, \fC [inherited]\fP"
 
 .SS "void Faster2Root::setCalibration (\fBCalibration\fP const & calibration)\fC [inline]\fP, \fC [inherited]\fP"
 
@@ -184,7 +190,7 @@ Reimplemented from \fBFaster2Root\fP\&.
 
 .SS "void Faster2Root::setTimeshifts (\fBTimeshifts\fP const & timeshifts)\fC [inline]\fP, \fC [inherited]\fP"
 
-.SS "void Faster2Root::setTrigger (std::function< bool(const \fBEvent\fP &)> other)\fC [inline]\fP, \fC [inherited]\fP"
+.SS "void Faster2Root::setTrigger (\fBTriggerEvent\fP other)\fC [inline]\fP, \fC [inherited]\fP"
 
 .SS "void Faster2Root::throwSingles (bool const & _throw_single = \fCtrue\fP)\fC [inline]\fP, \fC [inherited]\fP"
 
@@ -220,7 +226,7 @@ Reimplemented from \fBFaster2Root\fP\&.
 
 .SS "\fBMTCounter\fP Faster2Root::m_trigg_events\fC [protected]\fP, \fC [inherited]\fP"
 
-.SS "std::function<bool(const \fBEvent\fP&)> Faster2Root::m_trigger = [](const \fBEvent\fP&) { return true; }\fC [protected]\fP, \fC [inherited]\fP"
+.SS "\fBTriggerEvent\fP Faster2Root::m_trigger = [](const \fBEvent\fP&) { return true; }\fC [protected]\fP, \fC [inherited]\fP"
 
 .SS "std::string Faster2Root::m_trigger_file\fC [protected]\fP, \fC [inherited]\fP"
 

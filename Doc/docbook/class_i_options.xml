@@ -36,6 +36,10 @@
 </listitem>
             <listitem><para>bool <link linkend="_class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e">Q</link> = false</para>
 </listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1a7a7584f389ca9b8f293c434259e7b2ed">q3</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_i_options_1ac054625a2121f43014087db4ae9b9c55">Q3</link> = false</para>
+</listitem>
             <listitem><para>bool <link linkend="_class_i_options_1aa727e950a396e908cf8ebd137dc4f539">s</link> = false</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_i_options_1af82eb678f8bb2f7984016b278cc24875">t</link> = false</para>
@@ -53,7 +57,7 @@
 
 <para>ReadIO options</para>
 
-<para>l : label label ushort s : stamp absolute timestamp ps ULong64_t t : time relative timestamp ps Long64_t T : time2 relative timestamp ns float e : adc energy in ADC int E : nrj energy in keV float q : qdc2 energy qdc2 in ADC float Q : nrj2 energy qdc2 in keV float p : pileup pilepup bool </para>
+<para>l : label label ushort s : stamp absolute timestamp ps ULong64_t t : time relative timestamp ps Long64_t T : time2 relative timestamp ns float e : adc energy in ADC int E : nrj energy in keV float q : qdc2 energy qdc2 in ADC float Q : nrj2 energy qdc2 in keV float 3 : qdc3 energy qdc3 in ADC float R : nrj3 energy qdc3 in keV float p : pileup pilepup bool </para>
 </section>
 <section>
 <title>Constructor &amp; Destructor Documentation</title>
@@ -128,7 +132,15 @@ Here is the caller graph for this function:<para>
     <title>Q</title>
 <indexterm><primary>Q</primary><secondary>IOptions</secondary></indexterm>
 <indexterm><primary>IOptions</primary><secondary>Q</secondary></indexterm>
-<para><computeroutput>bool IOptions::Q = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1aa727e950a396e908cf8ebd137dc4f539"/>    <section>
+<para><computeroutput>bool IOptions::Q = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1a7a7584f389ca9b8f293c434259e7b2ed"/>    <section>
+    <title>q3</title>
+<indexterm><primary>q3</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>q3</secondary></indexterm>
+<para><computeroutput>bool IOptions::q3 = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1ac054625a2121f43014087db4ae9b9c55"/>    <section>
+    <title>Q3</title>
+<indexterm><primary>Q3</primary><secondary>IOptions</secondary></indexterm>
+<indexterm><primary>IOptions</primary><secondary>Q3</secondary></indexterm>
+<para><computeroutput>bool IOptions::Q3 = false</computeroutput></para>    </section><anchor xml:id="_class_i_options_1aa727e950a396e908cf8ebd137dc4f539"/>    <section>
     <title>s</title>
 <indexterm><primary>s</primary><secondary>IOptions</secondary></indexterm>
 <indexterm><primary>IOptions</primary><secondary>s</secondary></indexterm>

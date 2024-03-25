@@ -1,8 +1,9 @@
-.TH "Faster2Histo" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Faster2Histo" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Faster2Histo
+Faster2Histo \- Convert faster data to histograms\&.  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -14,48 +15,73 @@ Faster2Histo
 .ti -1c
 .RI "void \fBaddFile\fP (std::string const &file)"
 .br
+.RI "Adds one file to convert at the list\&. Option -f\&. "
 .ti -1c
 .RI "void \fBaddFolder\fP (\fBPath\fP folder, int const &nb_files=\-1)"
 .br
+.RI "Adds [nb_files] files to convert inside of [folder]\&. "
 .ti -1c
 .RI "\fBFaster2Histo\fP ()"
 .br
 .ti -1c
 .RI "\fBFaster2Histo\fP (int argc, char **argv)"
 .br
+.RI "To launch the application at instanciation\&. "
 .ti -1c
 .RI "void \fBfillHisto\fP (\fBHit\fP const &hit)"
 .br
+.RI "Handles each hit and fills the correct histogram\&. "
 .ti -1c
 .RI "void \fBload\fP (int const &argc, char **argv)"
 .br
+.RI "To launch the application after instanciation\&. "
 .ti -1c
 .RI "void \fBloadCalibration\fP (std::string const &calibration_file)"
 .br
+.RI "Loads the \&.calib file needed\&. Option -c\&. "
+.ti -1c
+.RI "void \fBloadTimeshifts\fP (\fBTimeshifts\fP const &timeshifts)"
+.br
+.RI "Loads the \&.dT file needed\&. Option -t\&. "
 .ti -1c
 .RI "void \fBmultirun\fP (int const &nb_threads=\-1)"
 .br
+.RI "Setup the threads and launched the application\&. "
 .ti -1c
-.RI "void \fBoverwrite\fP (bool const &_overwrite)"
+.RI "void \fBoverwrite\fP (bool const &_overwrite) noexcept"
 .br
+.RI "Allows to overwrite the output file if it exists\&. Option -o\&. "
 .ti -1c
-.RI "void \fBsetNbFiles\fP (int const &_nb_files)"
+.RI "void \fBsetNbFiles\fP (int const &_nb_files) noexcept"
 .br
+.RI "Set the number of files to read in the folder\&. Second argument of option -F\&. "
 .ti -1c
-.RI "void \fBsetNbThreads\fP (int const &_nb_threads)"
+.RI "void \fBsetNbThreads\fP (int const &_nb_threads) noexcept"
 .br
+.RI "Set the number of threads to write down\&. Option -m\&. "
 .ti -1c
 .RI "void \fBsetOutFilename\fP (std::string const &out_filename) noexcept"
+.br
+.RI "Set the name of the output file\&. "
+.ti -1c
+.RI "void \fBsetOutPath\fP (\fBPath\fP const &path) noexcept"
+.br
+.RI "Set the full output path\&. Option --out_path\&. "
+.ti -1c
+.RI "void \fBsetTrigger\fP (\fBTriggerHit\fP trigger)"
 .br
 .ti -1c
 .RI "void \fBsetWriteMode\fP (const char *mode) noexcept"
 .br
+.RI "Interface with the ROOT write mode\&. Default = 'RECREATE'\&. "
 .ti -1c
 .RI "void \fBtreatFile\fP (\fBHit\fP &hit, \fBFasterReader\fP &reader)"
 .br
+.RI "Treats the file with already configured \fBHit\fP and \fBFasterReader\fP object\&. "
 .ti -1c
-.RI "void \fBwrite\fP (std::string const &out_filename='')"
+.RI "void \fBwrite\fP (std::string const &out_filename='') noexcept"
 .br
+.RI "Write down a [out_filename]\&.root file containing the spectra of the data\&. "
 .in -1c
 .SS "Private Member Functions"
 
@@ -75,13 +101,37 @@ Faster2Histo
 
 .in +1c
 .ti -1c
+.RI "std::unordered_map< \fBLabel\fP, \fBMTTHist\fP< TH2F > > \fBm_bidim\fP"
+.br
+.ti -1c
+.RI "bool \fBm_bidim_paris\fP = false"
+.br
+.ti -1c
+.RI "double \fBm_bin_max\fP = \-1"
+.br
+.ti -1c
+.RI "double \fBm_bin_max_paris\fP = \-1"
+.br
+.ti -1c
 .RI "\fBCalibration\fP \fBm_calibration\fP"
+.br
+.ti -1c
+.RI "\fBFilesManager\fP \fBm_files\fP"
 .br
 .ti -1c
 .RI "std::vector< \fBLabel\fP > \fBm_labels\fP"
 .br
 .ti -1c
+.RI "int \fBm_maximum_hits\fP = \-1"
+.br
+.ti -1c
 .RI "\fBMTFasterReader\fP \fBm_MTreader\fP"
+.br
+.ti -1c
+.RI "int \fBm_nb_bins\fP = \-1"
+.br
+.ti -1c
+.RI "int \fBm_nb_bins_paris\fP = \-1"
 .br
 .ti -1c
 .RI "int \fBm_nb_files\fP = \-1"
@@ -90,68 +140,156 @@ Faster2Histo
 .RI "\fBFile\fP \fBm_outFile\fP = 'spectra\&.root'"
 .br
 .ti -1c
+.RI "\fBPath\fP \fBm_outPath\fP = \fBPath::pwd\fP()"
+.br
+.ti -1c
 .RI "int \fBm_overwrite\fP = false"
 .br
 .ti -1c
 .RI "std::unordered_map< \fBLabel\fP, \fBMTTHist\fP< TH1F > > \fBm_spectra\fP"
 .br
 .ti -1c
+.RI "\fBTimeshifts\fP \fBm_timeshifts\fP"
+.br
+.ti -1c
+.RI "\fBTriggerHit\fP \fBm_trigger\fP = [](\fBHit\fP const & hit) {return true;}"
+.br
+.ti -1c
 .RI "const char * \fBwrite_mode\fP = 'RECREATE'"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+Convert faster data to histograms\&. 
+
+
+.PP
+\fBTodo\fP
+.RS 4
+event building, timeshifts
+.RE
+.PP
+
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "Faster2Histo::Faster2Histo ()\fC [inline]\fP"
 
 .SS "Faster2Histo::Faster2Histo (int argc, char ** argv)"
 
+.PP
+To launch the application at instanciation\&. 
 .SH "Member Function Documentation"
 .PP 
 .SS "void Faster2Histo::addFile (std::string const & file)\fC [inline]\fP"
 
+.PP
+Adds one file to convert at the list\&. Option -f\&. 
 .SS "void Faster2Histo::addFolder (\fBPath\fP folder, int const & nb_files = \fC\-1\fP)\fC [inline]\fP"
 
+.PP
+Adds [nb_files] files to convert inside of [folder]\&. 
 .SS "static void Faster2Histo::dispatch_threads (\fBHit\fP & hit, \fBFasterReader\fP & reader, \fBFaster2Histo\fP & f2h)\fC [inline]\fP, \fC [static]\fP, \fC [private]\fP"
 
 .SS "void Faster2Histo::fillHisto (\fBHit\fP const & hit)\fC [inline]\fP"
 
+.PP
+Handles each hit and fills the correct histogram\&. 
 .SS "void Faster2Histo::load (int const & argc, char ** argv)"
 
+.PP
+To launch the application after instanciation\&. 
 .SS "void Faster2Histo::loadCalibration (std::string const & calibration_file)\fC [inline]\fP"
 
+.PP
+Loads the \&.calib file needed\&. Option -c\&. 
+.SS "void Faster2Histo::loadTimeshifts (\fBTimeshifts\fP const & timeshifts)\fC [inline]\fP"
+
+.PP
+Loads the \&.dT file needed\&. Option -t\&. 
 .SS "void Faster2Histo::multirun (int const & nb_threads = \fC\-1\fP)\fC [inline]\fP"
 
-.SS "void Faster2Histo::overwrite (bool const & _overwrite)\fC [inline]\fP"
+.PP
+Setup the threads and launched the application\&. 
+.SS "void Faster2Histo::overwrite (bool const & _overwrite)\fC [inline]\fP, \fC [noexcept]\fP"
 
+.PP
+Allows to overwrite the output file if it exists\&. Option -o\&. 
 .SS "void Faster2Histo::printParameters () const\fC [private]\fP, \fC [noexcept]\fP"
 
-.SS "void Faster2Histo::setNbFiles (int const & _nb_files)\fC [inline]\fP"
+.SS "void Faster2Histo::setNbFiles (int const & _nb_files)\fC [inline]\fP, \fC [noexcept]\fP"
 
-.SS "void Faster2Histo::setNbThreads (int const & _nb_threads)\fC [inline]\fP"
+.PP
+Set the number of files to read in the folder\&. Second argument of option -F\&. 
+.SS "void Faster2Histo::setNbThreads (int const & _nb_threads)\fC [inline]\fP, \fC [noexcept]\fP"
 
+.PP
+Set the number of threads to write down\&. Option -m\&. 
 .SS "void Faster2Histo::setOutFilename (std::string const & out_filename)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Set the name of the output file\&. 
+.SS "void Faster2Histo::setOutPath (\fBPath\fP const & path)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Set the full output path\&. Option --out_path\&. 
+.SS "void Faster2Histo::setTrigger (\fBTriggerHit\fP trigger)\fC [inline]\fP"
+
+.PP
+\fBTodo\fP
+.RS 4
+UNUSED until event building is done 
+.RE
+.PP
 
 .SS "void Faster2Histo::setWriteMode (const char * mode)\fC [inline]\fP, \fC [noexcept]\fP"
 
+.PP
+Interface with the ROOT write mode\&. Default = 'RECREATE'\&. If you want to use 'APPEND' for instance, you have to use the overwrite option (-o) 
 .SS "void Faster2Histo::treatFile (\fBHit\fP & hit, \fBFasterReader\fP & reader)"
 
+.PP
+Treats the file with already configured \fBHit\fP and \fBFasterReader\fP object\&. 
 .SS "void Faster2Histo::write (std::string const & out_filename = \fC''\fP)\fC [noexcept]\fP"
 
+.PP
+Write down a [out_filename]\&.root file containing the spectra of the data\&. 
 .SH "Member Data Documentation"
 .PP 
+.SS "std::unordered_map<\fBLabel\fP, \fBMTTHist\fP<TH2F> > Faster2Histo::m_bidim\fC [private]\fP"
+
+.SS "bool Faster2Histo::m_bidim_paris = false\fC [private]\fP"
+
+.SS "double Faster2Histo::m_bin_max = \-1\fC [private]\fP"
+
+.SS "double Faster2Histo::m_bin_max_paris = \-1\fC [private]\fP"
+
 .SS "\fBCalibration\fP Faster2Histo::m_calibration\fC [private]\fP"
+
+.SS "\fBFilesManager\fP Faster2Histo::m_files\fC [private]\fP"
 
 .SS "std::vector<\fBLabel\fP> Faster2Histo::m_labels\fC [private]\fP"
 
+.SS "int Faster2Histo::m_maximum_hits = \-1\fC [private]\fP"
+
 .SS "\fBMTFasterReader\fP Faster2Histo::m_MTreader\fC [private]\fP"
+
+.SS "int Faster2Histo::m_nb_bins = \-1\fC [private]\fP"
+
+.SS "int Faster2Histo::m_nb_bins_paris = \-1\fC [private]\fP"
 
 .SS "int Faster2Histo::m_nb_files = \-1\fC [private]\fP"
 
 .SS "\fBFile\fP Faster2Histo::m_outFile = 'spectra\&.root'\fC [private]\fP"
 
+.SS "\fBPath\fP Faster2Histo::m_outPath = \fBPath::pwd\fP()\fC [private]\fP"
+
 .SS "int Faster2Histo::m_overwrite = false\fC [private]\fP"
 
 .SS "std::unordered_map<\fBLabel\fP, \fBMTTHist\fP<TH1F> > Faster2Histo::m_spectra\fC [private]\fP"
+
+.SS "\fBTimeshifts\fP Faster2Histo::m_timeshifts\fC [private]\fP"
+
+.SS "\fBTriggerHit\fP Faster2Histo::m_trigger = [](\fBHit\fP const & hit) {return true;}\fC [private]\fP"
 
 .SS "const char* Faster2Histo::write_mode = 'RECREATE'\fC [private]\fP"
 

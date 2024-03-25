@@ -1,7 +1,7 @@
 <map id="Clovers::FillFast" name="Clovers::FillFast">
 <area shape="rect" id="node1" title=" " alt="" coords="5,52,129,79"/>
 <area shape="rect" id="node2" href="$vector__functions_8hpp.html#a0714a23fb316299fdee1e44d9f46343b" title=" " alt="" coords="177,23,320,49"/>
-<area shape="rect" id="node3" href="$class_static_vector.html#ac0b86d749f8e35274fbac0506c050465" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="179,74,318,115"/>
+<area shape="rect" id="node3" href="$class_static_vector.html#ae9a13402fed613a29197e99ce20396f8" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="179,74,318,115"/>
 <area shape="rect" id="node4" href="$class_static_vector.html#ad756be87d5c09054f47d40e38ce4b45f" title="Does the vector contain element e ?" alt="" coords="391,56,522,83"/>
 <area shape="rect" id="node7" href="$class_static_vector.html#a8f604b0f4165d95a6b6653907c92ceb3" title="Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance..." alt="" coords="368,107,545,133"/>
 <area shape="rect" id="node5" href="$class_static_vector.html#a78db68071e02cf724af349d0e606ea4e" title="Return iterator to the beginning of the vector." alt="" coords="623,5,767,32"/>

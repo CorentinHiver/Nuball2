@@ -1,4 +1,4 @@
-.TH "StaticVector< T >" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "StaticVector< T >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -82,7 +82,7 @@ StaticVector< T > \- An efficient container for dynamic arrays with a known and 
 .br
 .RI "Add element to the back of the vector\&. Use for performances\&. Unsafe\&. define SAFE for less performance but size checking\&. "
 .ti -1c
-.RI "void \fBpush_back_unique\fP (T const &t)"
+.RI "bool \fBpush_back_unique\fP (T const &t)"
 .br
 .RI "Add element to the back of the vector only if the vector do not contain it\&. "
 .ti -1c
@@ -154,8 +154,14 @@ An efficient container for dynamic arrays with a known and fixed maximum size\&.
 .PP
 \fBAttention\fP
 .RS 4
-Prototype, have some memory management issues in some cases \&.\&.\&.
+Prototype, has some memory management issues in some cases \&.\&.\&. 
 .RE
+.PP
+\fBDeprecated\fP
+.RS 4
+With optimisation option, std::vector is almost as efficient as this class \&.\&.\&. 
+.RE
+.PP
 .PP
 This class is meant to handle a vector of data that needs to be resized a lot\&. To do so, declare it this way : 
 .PP
@@ -307,7 +313,7 @@ Return the ith element\&.
 
 .PP
 Add element to the back of the vector\&. Use for performances\&. Unsafe\&. define SAFE for less performance but size checking\&. 
-.SS "template<class T > void \fBStaticVector\fP< T >::push_back_unique (T const & t)\fC [inline]\fP"
+.SS "template<class T > bool \fBStaticVector\fP< T >::push_back_unique (T const & t)\fC [inline]\fP"
 
 .PP
 Add element to the back of the vector only if the vector do not contain it\&. 

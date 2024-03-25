@@ -1,4 +1,4 @@
-.TH "Path" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Path" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,12 +16,8 @@ Path \- EXPERIMENTAL Object used to hold the complete path of a giver folder\&.
 .RI "\fBPath\fP & \fBaddFolder\fP (\fBFolder\fP const &\fBfolder\fP)"
 .br
 .ti -1c
-.RI "auto \fBc_str\fP () const"
+.RI "auto \fBc_str\fP ()"
 .br
-.ti -1c
-.RI "void \fBcleanPath\fP ()"
-.br
-.RI "To remove extraneous \&./ or \&.\&./\&. "
 .ti -1c
 .RI "bool \fBexists\fP ()"
 .br
@@ -35,9 +31,6 @@ Path \- EXPERIMENTAL Object used to hold the complete path of a giver folder\&.
 .RI "\fBFolders\fP const  & \fBgetFolders\fP () const"
 .br
 .ti -1c
-.RI "void \fBload\fP (bool const &create=false)"
-.br
-.ti -1c
 .RI "bool \fBmake\fP ()"
 .br
 .ti -1c
@@ -48,9 +41,6 @@ Path \- EXPERIMENTAL Object used to hold the complete path of a giver folder\&.
 .br
 .ti -1c
 .RI "\fBoperator bool\fP () const"
-.br
-.ti -1c
-.RI "\fBoperator std::string\fP () const &"
 .br
 .ti -1c
 .RI "std::string \fBoperator+\fP (const char *addString)"
@@ -69,6 +59,9 @@ Path \- EXPERIMENTAL Object used to hold the complete path of a giver folder\&.
 .br
 .ti -1c
 .RI "\fBPath\fP & \fBoperator=\fP (\fBPath\fP &\fBpath\fP)"
+.br
+.ti -1c
+.RI "\fBPath\fP & \fBoperator=\fP (\fBPath\fP const &\fBpath\fP)"
 .br
 .ti -1c
 .RI "\fBPath\fP & \fBoperator=\fP (std::string const &inputString)"
@@ -97,7 +90,7 @@ Path \- EXPERIMENTAL Object used to hold the complete path of a giver folder\&.
 .br
 .RI "Turns a string to a path, creating it if create = true and it doesn't already exists\&. "
 .ti -1c
-.RI "auto const \fBsize\fP () const"
+.RI "auto \fBsize\fP () const"
 .br
 .ti -1c
 .RI "std::string const  & \fBstring\fP () const"
@@ -111,6 +104,17 @@ Path \- EXPERIMENTAL Object used to hold the complete path of a giver folder\&.
 .br
 .ti -1c
 .RI "static \fBPath\fP \fBpwd\fP ()"
+.br
+.in -1c
+.SS "Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcleanPath\fP ()"
+.br
+.RI "To remove extraneous \&./ or \&.\&./\&. "
+.ti -1c
+.RI "void \fBloadPath\fP (bool const &create=false)"
 .br
 .in -1c
 .SS "Private Attributes"
@@ -151,9 +155,9 @@ Turns a C string to a path, creating it if create = true and it doesn't already 
 .PP 
 .SS "\fBPath\fP& Path::addFolder (\fBFolder\fP const & folder)\fC [inline]\fP"
 
-.SS "auto Path::c_str () const\fC [inline]\fP"
+.SS "auto Path::c_str ()\fC [inline]\fP"
 
-.SS "void Path::cleanPath ()\fC [inline]\fP"
+.SS "void Path::cleanPath ()\fC [inline]\fP, \fC [private]\fP"
 
 .PP
 To remove extraneous \&./ or \&.\&./\&. 
@@ -167,7 +171,7 @@ To remove extraneous \&./ or \&.\&./\&.
 
 .SS "static \fBPath\fP Path::home ()\fC [inline]\fP, \fC [static]\fP"
 
-.SS "void Path::load (bool const & create = \fCfalse\fP)\fC [inline]\fP"
+.SS "void Path::loadPath (bool const & create = \fCfalse\fP)\fC [inline]\fP, \fC [private]\fP"
 
 .SS "bool Path::make ()\fC [inline]\fP"
 
@@ -176,8 +180,6 @@ To remove extraneous \&./ or \&.\&./\&.
 .SS "int Path::nbFiles ()\fC [inline]\fP"
 
 .SS "Path::operator bool () const\fC [inline]\fP"
-
-.SS "Path::operator std::string () const &\fC [inline]\fP"
 
 .SS "std::string Path::operator+ (const char * addString)\fC [inline]\fP"
 
@@ -191,6 +193,8 @@ To remove extraneous \&./ or \&.\&./\&.
 
 .SS "\fBPath\fP& Path::operator= (\fBPath\fP & path)\fC [inline]\fP"
 
+.SS "\fBPath\fP& Path::operator= (\fBPath\fP const & path)\fC [inline]\fP"
+
 .SS "\fBPath\fP& Path::operator= (std::string const & inputString)\fC [inline]\fP"
 
 .SS "bool Path::operator== (std::string const & cmprStr)\fC [inline]\fP"
@@ -201,7 +205,7 @@ To remove extraneous \&./ or \&.\&./\&.
 
 .SS "static \fBPath\fP Path::pwd ()\fC [inline]\fP, \fC [static]\fP"
 
-.SS "auto const Path::size () const\fC [inline]\fP"
+.SS "auto Path::size () const\fC [inline]\fP"
 
 .SS "std::string const& Path::string () const\fC [inline]\fP"
 

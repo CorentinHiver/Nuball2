@@ -1,6 +1,8 @@
 <map id="lib/Modules/Timeshifts.hpp" name="lib/Modules/Timeshifts.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="254,5,451,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="526,5,723,32"/>
 <area shape="rect" id="node2" href="$_clover_spectra_8hpp.html" title=" " alt="" coords="5,80,225,107"/>
-<area shape="rect" id="node3" href="$_faster2_root_8hpp.html" title=" " alt="" coords="249,80,456,107"/>
-<area shape="rect" id="node4" href="$_run_matrixator_8hpp.html" title=" " alt="" coords="481,80,702,107"/>
+<area shape="rect" id="node3" href="$_cobalt_calorimeter_8hpp.html" title=" " alt="" coords="249,80,496,107"/>
+<area shape="rect" id="node4" href="$_faster2_histo_8hpp.html" title=" " alt="" coords="519,80,730,107"/>
+<area shape="rect" id="node5" href="$_faster2_root_8hpp.html" title=" " alt="" coords="755,80,961,107"/>
+<area shape="rect" id="node6" href="$_run_matrixator_8hpp.html" title=" " alt="" coords="986,80,1207,107"/>
 </map>

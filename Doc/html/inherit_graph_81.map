@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_timer.html" title=" " alt="" coords="5,5,65,32"/>
+<area shape="rect" id="node1" href="$class_peak_fitter.html" title="Allows one to fit a peak of a histogram in the range [low_edge, high_edge]." alt="" coords="5,5,93,32"/>
+<area shape="rect" id="node2" href="$class_biggest_peak_fitter.html" title="Allows one to find the most significant peak in the range [low_edge, high_edge]." alt="" coords="141,5,279,32"/>
 </map>

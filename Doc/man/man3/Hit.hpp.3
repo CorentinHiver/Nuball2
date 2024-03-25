@@ -1,4 +1,4 @@
-.TH "lib/Classes/Hit.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/Classes/Hit.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -65,6 +65,10 @@ lib/Classes/Hit.hpp
 .ti -1c
 .RI "using \fBTimestamp\fP = ULong64_t"
 .br
+.ti -1c
+.RI "using \fBTriggerHit\fP = std::function< bool(const \fBHit\fP &)>"
+.br
+.RI "Trigger definition ///\&. "
 .in -1c
 .SS "Functions"
 
@@ -129,6 +133,10 @@ Data vectors ///\&.
 
 .SS "using \fBTimestamp\fP =  ULong64_t"
 
+.SS "using \fBTriggerHit\fP =  std::function<bool(const \fBHit\fP&)>"
+
+.PP
+Trigger definition ///\&. 
 .SH "Function Documentation"
 .PP 
 .SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBADC\fP ADC_cast (T const & t)\fC [inline]\fP"

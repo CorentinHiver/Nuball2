@@ -6,11 +6,12 @@
 
 
 
-Collaboration diagram for Spectra\+Alignator\+:\nopagebreak
+Collaboration diagram for Spectra\+Alignator\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=202pt]{class_spectra_alignator__coll__graph}
+\includegraphics[width=251pt]{class_spectra_alignator__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -18,9 +19,13 @@ Collaboration diagram for Spectra\+Alignator\+:\nopagebreak
 \item 
 \textbf{ Recalibration} const  \& \textbf{ align\+Spectra} (TH1 $\ast$\+\_\+spectra, TH1 $\ast$spectra\+\_\+output, int const \&degrees\+Of\+Freedom=3, double const \&energy\+Threshold=0)
 \item 
+void \textbf{ new\+Alignement} (TH1 $\ast$\+\_\+spectra, TH1 $\ast$spectra\+\_\+output)
+\item 
 void \textbf{ set\+Brute\+Force} (bool const \&brute\+\_\+force=true)
 \item 
 void \textbf{ set\+Iterations} (int const \&iterations)
+\item 
+\textbf{ Spectra\+Alignator} () noexcept=default
 \item 
 \textbf{ Spectra\+Alignator} (TH1 $\ast$ref)
 \item 
@@ -34,8 +39,6 @@ bool \textbf{ m\+\_\+brute\+\_\+force} = false
 TH3F $\ast$ \textbf{ m\+\_\+chi2\+\_\+spectra} = nullptr
 \item 
 std\+::vector$<$ double $>$ \textbf{ m\+\_\+chi2s}
-\item 
-std\+::vector$<$ \textbf{ Minimisator} $>$ \textbf{ m\+\_\+minimisator}
 \item 
 int \textbf{ m\+\_\+nb\+\_\+iterations} = 20
 \item 
@@ -51,11 +54,22 @@ TH2F $\ast$ \textbf{ surface\+\_\+chi2} = nullptr
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]\end{DoxyRefDesc}
+
+
 \doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_spectra_alignator_a77c3fc9994a3475f24daf5bcf8b0110e}} 
+\index{SpectraAlignator@{SpectraAlignator}!SpectraAlignator@{SpectraAlignator}}
+\index{SpectraAlignator@{SpectraAlignator}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{SpectraAlignator()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Spectra\+Alignator\+::\+Spectra\+Alignator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
 \mbox{\label{class_spectra_alignator_a1f75d38f8f9dd676b72689f8adbe3be5}} 
 \index{SpectraAlignator@{SpectraAlignator}!SpectraAlignator@{SpectraAlignator}}
 \index{SpectraAlignator@{SpectraAlignator}!SpectraAlignator@{SpectraAlignator}}
-\doxysubsubsection{SpectraAlignator()}
+\doxysubsubsection{SpectraAlignator()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Spectra\+Alignator\+::\+Spectra\+Alignator (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{ref }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -67,11 +81,28 @@ TH2F $\ast$ \textbf{ surface\+\_\+chi2} = nullptr
 \doxysubsubsection{alignSpectra()}
 {\footnotesize\ttfamily \textbf{ Recalibration} const\& Spectra\+Alignator\+::align\+Spectra (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{\+\_\+spectra,  }\item[{TH1 $\ast$}]{spectra\+\_\+output,  }\item[{int const \&}]{degrees\+Of\+Freedom = {\ttfamily 3},  }\item[{double const \&}]{energy\+Threshold = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=319pt]{class_spectra_alignator_a1844e2814df35c43677ed678f79fc00d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_spectra_alignator_aed228999d9baba04b99e8542204e058b}} 
+\index{SpectraAlignator@{SpectraAlignator}!newAlignement@{newAlignement}}
+\index{newAlignement@{newAlignement}!SpectraAlignator@{SpectraAlignator}}
+\doxysubsubsection{newAlignement()}
+{\footnotesize\ttfamily void Spectra\+Alignator\+::new\+Alignement (\begin{DoxyParamCaption}\item[{TH1 $\ast$}]{\+\_\+spectra,  }\item[{TH1 $\ast$}]{spectra\+\_\+output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]\end{DoxyRefDesc}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_spectra_alignator_aed228999d9baba04b99e8542204e058b_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_spectra_alignator_a06e5ad929499d18d557fd5a37daf8897}} 
@@ -113,12 +144,6 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{m\_chi2s}
 {\footnotesize\ttfamily std\+::vector$<$double$>$ Spectra\+Alignator\+::m\+\_\+chi2s\hspace{0.3cm}{\ttfamily [private]}}
 
-\mbox{\label{class_spectra_alignator_abcc20c4ad4370552aa2730ade1f2b74e}} 
-\index{SpectraAlignator@{SpectraAlignator}!m\_minimisator@{m\_minimisator}}
-\index{m\_minimisator@{m\_minimisator}!SpectraAlignator@{SpectraAlignator}}
-\doxysubsubsection{m\_minimisator}
-{\footnotesize\ttfamily std\+::vector$<$\textbf{ Minimisator}$>$ Spectra\+Alignator\+::m\+\_\+minimisator\hspace{0.3cm}{\ttfamily [private]}}
-
 \mbox{\label{class_spectra_alignator_a5d2a1ca21ba9deeb943965dbdb51496a}} 
 \index{SpectraAlignator@{SpectraAlignator}!m\_nb\_iterations@{m\_nb\_iterations}}
 \index{m\_nb\_iterations@{m\_nb\_iterations}!SpectraAlignator@{SpectraAlignator}}
@@ -159,4 +184,4 @@ Here is the call graph for this function\+:\nopagebreak
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-lib/\+Classes/\textbf{ Spectra\+Alignator.\+hpp}\end{DoxyCompactItemize}
+lib/\+Analyse/\textbf{ Spectra\+Alignator.\+hpp}\end{DoxyCompactItemize}

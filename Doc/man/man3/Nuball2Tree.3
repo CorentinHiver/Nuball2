@@ -1,8 +1,8 @@
-.TH "Nuball2Tree" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Nuball2Tree" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Nuball2Tree \- test _ not finished  
+Nuball2Tree \- Access to the underlying TTree using -> operator (e\&.g\&. nuball2tree->GetEntry(n);)  
 
 .SH SYNOPSIS
 .br
@@ -13,19 +13,28 @@ Nuball2Tree \- test _ not finished
 
 .in +1c
 .ti -1c
+.RI "void \fBClose\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBfilename\fP ()"
+.br
+.ti -1c
 .RI "TTree * \fBget\fP ()"
 .br
 .ti -1c
-.RI "\fBNuball2Tree\fP (std::string const &filename)"
+.RI "auto const \fBget\fP () const"
 .br
 .ti -1c
-.RI "\fBNuball2Tree\fP (std::string const &filename, \fBEvent\fP &event)"
+.RI "\fBNuball2Tree\fP (std::string const &\fBfilename\fP)"
+.br
+.ti -1c
+.RI "\fBNuball2Tree\fP (std::string const &\fBfilename\fP, \fBEvent\fP &event)"
 .br
 .ti -1c
 .RI "bool const  & \fBok\fP () const"
 .br
 .ti -1c
-.RI "bool \fBOpen\fP (std::string const &filename)"
+.RI "bool \fBOpen\fP (std::string const &\fBfilename\fP)"
 .br
 .ti -1c
 .RI "\fBoperator TTree *\fP ()"
@@ -47,6 +56,9 @@ Nuball2Tree \- test _ not finished
 .RI "TFile * \fBm_file\fP = nullptr"
 .br
 .ti -1c
+.RI "std::string \fBm_filename\fP"
+.br
+.ti -1c
 .RI "std::string \fBm_name\fP = 'Nuball2'"
 .br
 .ti -1c
@@ -61,7 +73,7 @@ Nuball2Tree \- test _ not finished
 .in -1c
 .SH "Detailed Description"
 .PP 
-test _ not finished 
+Access to the underlying TTree using -> operator (e\&.g\&. nuball2tree->GetEntry(n);) 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "Nuball2Tree::Nuball2Tree (std::string const & filename)\fC [inline]\fP"
@@ -72,7 +84,13 @@ test _ not finished
 
 .SH "Member Function Documentation"
 .PP 
+.SS "void Nuball2Tree::Close ()\fC [inline]\fP"
+
+.SS "auto const& Nuball2Tree::filename ()\fC [inline]\fP"
+
 .SS "TTree* Nuball2Tree::get ()\fC [inline]\fP"
+
+.SS "auto const Nuball2Tree::get () const\fC [inline]\fP"
 
 .SS "bool const& Nuball2Tree::ok () const\fC [inline]\fP"
 
@@ -87,6 +105,8 @@ test _ not finished
 .SS "bool Nuball2Tree::file_opened = false\fC [private]\fP"
 
 .SS "TFile* Nuball2Tree::m_file = nullptr\fC [private]\fP"
+
+.SS "std::string Nuball2Tree::m_filename\fC [private]\fP"
 
 .SS "std::string Nuball2Tree::m_name = 'Nuball2'\fC [private]\fP"
 

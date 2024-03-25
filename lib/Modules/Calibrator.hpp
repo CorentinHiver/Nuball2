@@ -41,13 +41,13 @@ public:
 
   // void calculateInteractive(std::string const & histogramsFilename, std::string const & fit_info_file = "fit_info.data", std::vector<double> peaks);
 
-  void Initialize() 
+  void Initialise() 
   {
-    if (m_initialized) return;
-    m_histos.Initialize(); 
+    if (m_Initialised) return;
+    m_histos.Initialise(); 
     m_fits.resize(1000); 
     if (!detectors) throw Detectors::Error(); 
-    m_initialized = true;
+    m_Initialised = true;
   }
   
   void loadRootData(std::string const & dataDir, int const & nb_files = -1);
@@ -100,7 +100,7 @@ private:
 
   //Attributs for the calculations :
   bool      m_verbose     = false;
-  bool      m_initialized = false;
+  bool      m_Initialised = false;
   bool      m_residus     = false;
   bool      m_outRoot_b   = false;
   std::string m_source    = "";
@@ -144,18 +144,18 @@ public:
     // Other spectra :
     std::map<Label, SpectraCo> spectra;
 
-    void Initialize();
+    void Initialise();
     void setTypeBins(std::string const & parameters);
-    bool initialized = false;
+    bool Initialised = false;
   } m_histos;
 };
 
 bool Calibrator::m_treatOnlyParis = false;
 bool Calibrator::m_treatOnlyGe = false;
 
-void Calibrator::histograms::Initialize()
+void Calibrator::histograms::Initialise()
 {
-  if (initialized) return;
+  if (Initialised) return;
 
   if (detectors)
   {
@@ -195,7 +195,7 @@ void Calibrator::histograms::Initialize()
         calib_spectra[label].reset((name+"_calib").c_str(), (name+" calibrated spectra").c_str(), bin_calib.bins, bin_calib.min, bin_calib.max);
       }
     }
-    initialized = true;
+    Initialised = true;
   }
 }
 
@@ -239,7 +239,7 @@ void Calibrator::calculate(std::string const & dataDir, int nb_files, std::strin
 void Calibrator::calculate(std::string const & histograms, std::string const & source)
 {
   print ("Calculating calibration coefficients from histogram data in", histograms);
-  this -> Initialize();
+  this -> Initialise();
   this -> loadRootHisto(histograms);
   this -> analyse(source);
   this -> writeData(source+".calib");
@@ -274,7 +274,7 @@ void Calibrator::loadFitInfo(std::string const & fit_info_file)
 void Calibrator::calculate2(std::string const & histogramsFilename, std::vector<double> peaks, std::string const & fit_info_file)
 {
   print ("Calculating calibration coefficients from histogram data in", histogramsFilename, "version 2");
-  this -> Initialize();
+  this -> Initialise();
   this -> loadFitInfo(fit_info_file);
   this -> loadRootHisto(histogramsFilename);
   this -> analyse2(peaks);
@@ -289,7 +289,7 @@ void Calibrator::calculate2(std::string const & histogramsFilename, std::vector<
  */
 void Calibrator::loadRootHisto(std::string const & histograms)
 {
-  this -> Initialize();
+  this -> Initialise();
   m_histo_loaded = true;
   
   print("Loading histograms ...");
@@ -313,7 +313,7 @@ void Calibrator::loadFasterData(std::string const & dataDir, int const & nb_file
   print("Loading the data from", Path(dataDir).folder());
 
   // First initialises the histograms :
-  this -> Initialize();
+  this -> Initialise();
 
   // Then create the data reader :
   MTFasterReader *mt_reader = new MTFasterReader();
@@ -328,7 +328,7 @@ void Calibrator::loadFasterData(std::string const & dataDir, int const & nb_file
 void Calibrator::loadRootData(std::string const & dataDir, int const & nb_files)
 {
   print("Loading the data from", Path(dataDir).folder());
-  this -> Initialize();
+  this -> Initialise();
   FilesManager files;
   files.addFolder(dataDir, nb_files);
   MTList list(files.getListFiles());
@@ -444,7 +444,7 @@ void Calibrator::peakFinder(std::string const & source)
 
     if (m_verbose) {print(); print(name);}
 
-    // Initialize algorithm parameters :
+    // Initialise algorithm parameters :
    
     double integral_ratio_threshold = 0.f;  // The threshold used to tag the peak.
     int ADC_threshold = 0; // A threshold used in order to reject any potential electrical noise below like 500 ADC

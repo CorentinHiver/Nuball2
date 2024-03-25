@@ -6,5 +6,5 @@ digraph "paris_getPositionModule"
   rankdir="RL";
   Node1 [label="paris_getPositionModule",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Paris::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_paris.html#a2f4c2c7179a5ec14230327bc40a137b0",tooltip=" "];
+  Node2 [label="Paris::Initialise",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_paris.html#a2f4c2c7179a5ec14230327bc40a137b0",tooltip=" "];
 }

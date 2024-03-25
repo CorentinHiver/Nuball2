@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_fitted_peak" xml:lang="en-US">
+<title>FittedPeak Class Reference</title>
+<indexterm><primary>FittedPeak</primary></indexterm>
+<para>
+<computeroutput>#include &lt;AnalysedSpectra.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>auto const  &amp; <link linkend="_class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f">constante</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05">energy</link> () const</para>
+</listitem>
+            <listitem><para><link linkend="_class_fitted_peak_1a5786d717e69886653b4fc866f72a141e">FittedPeak</link> (double const &amp;<link linkend="_class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05">energy</link>, double const &amp;<link linkend="_class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f">constante</link>, double const &amp;<link linkend="_class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46">mean</link>, double const &amp;<link linkend="_class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d">sigma</link>=-1)</para>
+</listitem>
+            <listitem><para><link linkend="_class_fitted_peak_1a58f2af302cec41a1b8a729aa87923cc9">FittedPeak</link> (double const &amp;<link linkend="_class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05">energy</link>, <link linkend="_class_peak_fitter">PeakFitter</link> const &amp;fit)</para>
+</listitem>
+            <listitem><para><link linkend="_class_fitted_peak_1aa0cbf6339c2ba9f0105dbd8bb8b1bdbf">FittedPeak</link> (<link linkend="_class_peak_fitter">PeakFitter</link> const &amp;fit)</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46">mean</link> () const</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d">sigma</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>double <link linkend="_class_fitted_peak_1a0679489b4be421ee57f2001d56a5c429">m_constante</link> = -1</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_fitted_peak_1ac1bb9cc24dfaff9c3660fd32360445ac">m_energy</link> = -1</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_fitted_peak_1a0d91f27751bdb9d18a36e858e2415129">m_mean</link> = -1</para>
+</listitem>
+            <listitem><para>double <link linkend="_class_fitted_peak_1a55df3f35f773445be7ff397af5ed87ad">m_sigma</link> = -1</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_fitted_peak_1a5786d717e69886653b4fc866f72a141e"/>    <section>
+    <title>FittedPeak()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>FittedPeak</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>FittedPeak</secondary></indexterm>
+<para><computeroutput>FittedPeak::FittedPeak (double const &amp; energy, double const &amp; constante, double const &amp; mean, double const &amp; sigma = <computeroutput>-1</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_fitted_peak_1aa0cbf6339c2ba9f0105dbd8bb8b1bdbf"/>    <section>
+    <title>FittedPeak()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>FittedPeak</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>FittedPeak</secondary></indexterm>
+<para><computeroutput>FittedPeak::FittedPeak (<link linkend="_class_peak_fitter">PeakFitter</link> const &amp; fit)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_fitted_peak_1a58f2af302cec41a1b8a729aa87923cc9"/>    <section>
+    <title>FittedPeak()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>FittedPeak</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>FittedPeak</secondary></indexterm>
+<para><computeroutput>FittedPeak::FittedPeak (double const &amp; energy, <link linkend="_class_peak_fitter">PeakFitter</link> const &amp; fit)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_fitted_peak_1a26adf5bbcd3b82689363e7b53266aa9f"/>    <section>
+    <title>constante()</title>
+<indexterm><primary>constante</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>constante</secondary></indexterm>
+<para><computeroutput>auto const&amp; FittedPeak::constante ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fitted_peak_a26adf5bbcd3b82689363e7b53266aa9f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_fitted_peak_1a21b7802bc1e2d2d8ffd526b165e5cd05"/>    <section>
+    <title>energy()</title>
+<indexterm><primary>energy</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>energy</secondary></indexterm>
+<para><computeroutput>auto const&amp; FittedPeak::energy ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fitted_peak_a21b7802bc1e2d2d8ffd526b165e5cd05_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_fitted_peak_1af3dd0d1bcb9f842f7e4f97f17905fd46"/>    <section>
+    <title>mean()</title>
+<indexterm><primary>mean</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>mean</secondary></indexterm>
+<para><computeroutput>auto const&amp; FittedPeak::mean ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fitted_peak_af3dd0d1bcb9f842f7e4f97f17905fd46_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_fitted_peak_1aa406dd34f1a2318c5a8d1a8148c71f5d"/>    <section>
+    <title>sigma()</title>
+<indexterm><primary>sigma</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>sigma</secondary></indexterm>
+<para><computeroutput>auto const&amp; FittedPeak::sigma ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_fitted_peak_aa406dd34f1a2318c5a8d1a8148c71f5d_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_fitted_peak_1a0679489b4be421ee57f2001d56a5c429"/>    <section>
+    <title>m_constante</title>
+<indexterm><primary>m_constante</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>m_constante</secondary></indexterm>
+<para><computeroutput>double FittedPeak::m_constante = -1<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_fitted_peak_1ac1bb9cc24dfaff9c3660fd32360445ac"/>    <section>
+    <title>m_energy</title>
+<indexterm><primary>m_energy</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>m_energy</secondary></indexterm>
+<para><computeroutput>double FittedPeak::m_energy = -1<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_fitted_peak_1a0d91f27751bdb9d18a36e858e2415129"/>    <section>
+    <title>m_mean</title>
+<indexterm><primary>m_mean</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>m_mean</secondary></indexterm>
+<para><computeroutput>double FittedPeak::m_mean = -1<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_fitted_peak_1a55df3f35f773445be7ff397af5ed87ad"/>    <section>
+    <title>m_sigma</title>
+<indexterm><primary>m_sigma</primary><secondary>FittedPeak</secondary></indexterm>
+<indexterm><primary>FittedPeak</primary><secondary>m_sigma</secondary></indexterm>
+<para><computeroutput>double FittedPeak::m_sigma = -1<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__analysed_spectra_8hpp">AnalysedSpectra.hpp</link></section>
+</section>

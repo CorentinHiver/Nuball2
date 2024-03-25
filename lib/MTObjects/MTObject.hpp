@@ -23,14 +23,14 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  * If you want to use the power of multithreading, this class can be convenient.
  * Please include this class before any other in order to activate multithreading additions in the rest of the library.
  * 
- * First thing to do is to setup the number of threads then to initialize them :
+ * First thing to do is to setup the number of threads then to Initialise them :
  * 
  *        MTObject::setThreadsNb(nb_threads);
- *        MTObject::Initialize();
+ *        MTObject::Initialise();
  * 
  * Or more consisley : 
  * 
- *        MTObject::Initialize(nb_threads);
+ *        MTObject::Initialise(nb_threads);
  * 
  * Then you can multithread any function or static method : 
  * 
@@ -44,7 +44,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  * 
  *        main()
  *        {
- *          MTObject::Initialize(2); // Using two concurrent threads
+ *          MTObject::Initialise(2); // Using two concurrent threads
  *          int a = 0;
  *          int b = 0;
  *          // Here, the [&] allows the lambda to have access at everything that has been declared above. 
@@ -59,7 +59,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  * 
  *        main()
  *        {
- *          MTObject::Initialize(2); // Using two concurrent threads
+ *          MTObject::Initialise(2); // Using two concurrent threads
  *          MTTHist<TH1F> test("test", "test", 1000,0,1000); // MTTHist holds a vector of TH1F to be filled using its own Fill method
  *          
  *          MTObject::parallelise_function([&]()
@@ -112,12 +112,12 @@ class MTObject
 {
 public:
   MTObject() {}
-  MTObject(size_t & _nb_threads ) {Initialize(_nb_threads);}
+  MTObject(size_t & _nb_threads ) {Initialise(_nb_threads);}
 
-  static void Initialize(size_t const & _nb_threads, bool force = false)
+  static void Initialise(size_t const & _nb_threads, bool force = false)
   {
     setThreadsNb(_nb_threads, force);
-    Initialize();
+    Initialise();
   }
 
   /** @brief Sets the number of threads.
@@ -178,17 +178,17 @@ public:
         }
         for (auto & thread : m_threads) thread.join();
         m_threads.clear();
-        std::cout << "All threads terminated" << std::endl;
+        std::cout << "All threads terminated properly" << std::endl;
       }
       exit(42);
     }
   }
 
-  static void Initialize()
+  static void Initialise()
   {
-    // Safety to initialize threads only once :
-    if (m_initialized) return;
-    m_initialized = true;
+    // Safety to Initialise threads only once :
+    if (m_Initialised) return;
+    m_Initialised = true;
 
     signal(SIGINT, signalHandler);
 
@@ -198,12 +198,12 @@ public:
     {
       // Initialise the root thread management
       #ifdef DEBUG
-      std::cout << "Initialize ROOT thread management..." << std::endl;
+      std::cout << "Initialise ROOT thread management..." << std::endl;
       #endif //DEBUG
-      // TThread::Initialize();
+      // TThread::Initialise();
       ROOT::EnableThreadSafety();
       MTObject::ON = true;
-      std::cout << "MTObject initialized with " << nb_threads << " threads " << std::endl;
+      std::cout << "MTObject Initialised with " << nb_threads << " threads " << std::endl;
     }
     else MTObject::ON = false;
   }
@@ -256,11 +256,11 @@ private:
   static std::thread::id master_thread_id; 
   static thread_local size_t m_thread_index; // thread_local variable, meaning it will hold different values for each thread it is in
   static std::vector<std::thread> m_threads;
-  static bool m_initialized;
+  static bool m_Initialised;
 
 };
 
-bool MTObject::m_initialized = false;
+bool MTObject::m_Initialised = false;
 bool MTObject::kill = false;
 bool MTObject::activated = false;
 

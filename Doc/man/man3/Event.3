@@ -1,4 +1,4 @@
-.TH "Event" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Event" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,6 +12,9 @@ Event \- \fBEvent\fP used for reading and writting event, event building and tri
 .SS "Public Member Functions"
 
 .in +1c
+.ti -1c
+.RI "auto & \fBadc\fP (int const &hit_i)"
+.br
 .ti -1c
 .RI "void \fBclear\fP ()"
 .br
@@ -40,13 +43,28 @@ Event \- \fBEvent\fP used for reading and writting event, event building and tri
 .RI "bool \fBisSingle\fP () const"
 .br
 .ti -1c
+.RI "auto & \fBlabel\fP (int const &hit_i)"
+.br
+.ti -1c
 .RI "\fBsize_t\fP const  & \fBmaxSize\fP () const"
+.br
+.ti -1c
+.RI "auto & \fBnrj\fP (int const &hit_i)"
+.br
+.ti -1c
+.RI "auto & \fBnrj2\fP (int const &hit_i)"
 .br
 .ti -1c
 .RI "\fBEvent\fP & \fBoperator=\fP (\fBEvent\fP const &evt)"
 .br
 .ti -1c
 .RI "\fBEvent\fP & \fBoperator=\fP (\fBHit\fP const &hit)"
+.br
+.ti -1c
+.RI "\fBHit\fP \fBoperator[]\fP (int const &hit_i)"
+.br
+.ti -1c
+.RI "auto & \fBpileup\fP (int const &hit_i)"
 .br
 .ti -1c
 .RI "void \fBPrint\fP () const"
@@ -59,6 +77,9 @@ Event \- \fBEvent\fP used for reading and writting event, event building and tri
 .br
 .RI "Sometimes, we want to select pre-prompt events\&. In such case, we have to put in in front of the others\&. "
 .ti -1c
+.RI "auto & \fBqdc2\fP (int const &hit_i)"
+.br
+.ti -1c
 .RI "void \fBreading\fP (TTree *tree)"
 .br
 .RI "Automatically set branches based on the presence or not of branches in the root tree\&. Reserved for 'Nuball2' type of trees\&. "
@@ -70,6 +91,12 @@ Event \- \fBEvent\fP used for reading and writting event, event building and tri
 .br
 .ti -1c
 .RI "\fBsize_t\fP \fBsize\fP () const"
+.br
+.ti -1c
+.RI "auto & \fBtime\fP (int const &hit_i)"
+.br
+.ti -1c
+.RI "auto & \fBtime2\fP (int const &hit_i)"
 .br
 .ti -1c
 .RI "\fBTime_ns\fP \fBtime_ns\fP (int const &i) const"
@@ -238,6 +265,8 @@ You can add Hits to an event using the \fBEvent::push_back\fP or \fBEvent::push_
 
 .SH "Member Function Documentation"
 .PP 
+.SS "auto& Event::adc (int const & hit_i)\fC [inline]\fP"
+
 .SS "void Event::clear ()\fC [inline]\fP"
 
 .SS "bool Event::isCalibrated () const\fC [inline]\fP"
@@ -246,11 +275,21 @@ You can add Hits to an event using the \fBEvent::push_back\fP or \fBEvent::push_
 
 .SS "bool Event::isSingle () const\fC [inline]\fP"
 
+.SS "auto& Event::label (int const & hit_i)\fC [inline]\fP"
+
 .SS "\fBsize_t\fP const& Event::maxSize () const\fC [inline]\fP"
+
+.SS "auto& Event::nrj (int const & hit_i)\fC [inline]\fP"
+
+.SS "auto& Event::nrj2 (int const & hit_i)\fC [inline]\fP"
 
 .SS "\fBEvent\fP & Event::operator= (\fBEvent\fP const & evt)\fC [inline]\fP"
 
 .SS "\fBEvent\fP & Event::operator= (\fBHit\fP const & hit)\fC [inline]\fP"
+
+.SS "\fBHit\fP Event::operator[] (int const & hit_i)"
+
+.SS "auto& Event::pileup (int const & hit_i)\fC [inline]\fP"
 
 .SS "void Event::Print () const\fC [inline]\fP"
 
@@ -260,6 +299,8 @@ You can add Hits to an event using the \fBEvent::push_back\fP or \fBEvent::push_
 
 .PP
 Sometimes, we want to select pre-prompt events\&. In such case, we have to put in in front of the others\&. About the timestamp of the event, we keep the same as this additionnal event is located before the first hit that really represents the '0' of the event 
+.SS "auto& Event::qdc2 (int const & hit_i)\fC [inline]\fP"
+
 .SS "void Event::reading (TTree * tree)\fC [inline]\fP"
 
 .PP
@@ -269,6 +310,10 @@ Automatically set branches based on the presence or not of branches in the root 
 .SS "void Event::setT0 (\fBTimestamp\fP const & timestamp)\fC [inline]\fP"
 
 .SS "\fBsize_t\fP Event::size () const\fC [inline]\fP"
+
+.SS "auto& Event::time (int const & hit_i)\fC [inline]\fP"
+
+.SS "auto& Event::time2 (int const & hit_i)\fC [inline]\fP"
 
 .SS "\fBTime_ns\fP Event::time_ns (int const & i) const\fC [inline]\fP"
 

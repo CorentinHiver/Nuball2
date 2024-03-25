@@ -10,7 +10,7 @@ public:
   operator bool() {return m_activated;}
   void operator=(bool activate) {m_activated = activate;}
 
-  Bool_t Initialize();
+  Bool_t Initialise();
   Bool_t SetConfig(std::istringstream & is);
   void Fill(Hit & hit, RF_Manager const & rf, int const & thread_nb = 0);
   void Write();
@@ -62,7 +62,7 @@ Bool_t ParisBidim::SetConfig(std::istringstream & is)
   return true;
 }
 
-Bool_t ParisBidim::Initialize()
+Bool_t ParisBidim::Initialise()
 {
   m_nb_histo = n->m_labelToName.size();
 

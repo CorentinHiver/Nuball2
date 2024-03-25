@@ -1,16 +1,23 @@
 \doxysection{lib/\+MTObjects/\+MTObject.hpp File Reference}
 \label{_m_t_object_8hpp}\index{lib/MTObjects/MTObject.hpp@{lib/MTObjects/MTObject.hpp}}
+{\ttfamily \#include $<$csignal$>$}\newline
+{\ttfamily \#include $<$future$>$}\newline
 {\ttfamily \#include $<$thread$>$}\newline
 {\ttfamily \#include $<$mutex$>$}\newline
-{\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
-Include dependency graph for MTObject.\+hpp\+:\nopagebreak
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}TROOT.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}TThread.\+h\char`\"{}}\newline
+Include dependency graph for MTObject.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{_m_t_object_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -21,22 +28,31 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 class \textbf{ MTObject}
+\begin{DoxyCompactList}\small\item\em Class handeling an easy multi threading. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ MULTITHREADING}
 \end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
 using \textbf{ lock\+\_\+mutex} = const std\+::lock\+\_\+guard$<$ std\+::mutex $>$
 \end{DoxyCompactItemize}
-\doxysubsection*{Functions}
-\begin{DoxyCompactItemize}
-\item 
-{\footnotesize template$<$class... ARGS$>$ }\\void \textbf{ print\+MT} (ARGS \&\&... args)
-\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 std\+::mutex \textbf{ MTmutex}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{_m_t_object_8hpp_acbb3b2bf65ee25bfaaddfdd53daecb4b}} 
+\index{MTObject.hpp@{MTObject.hpp}!MULTITHREADING@{MULTITHREADING}}
+\index{MULTITHREADING@{MULTITHREADING}!MTObject.hpp@{MTObject.hpp}}
+\doxysubsubsection{MULTITHREADING}
+{\footnotesize\ttfamily \#define MULTITHREADING}
+
 
 
 \doxysubsection{Typedef Documentation}
@@ -46,23 +62,6 @@ std\+::mutex \textbf{ MTmutex}
 \doxysubsubsection{lock\_mutex}
 {\footnotesize\ttfamily using \textbf{ lock\+\_\+mutex} =  const std\+::lock\+\_\+guard$<$std\+::mutex$>$}
 
-
-
-\doxysubsection{Function Documentation}
-\mbox{\label{_m_t_object_8hpp_acceec6d26d3021217ae83ccd7b029351}} 
-\index{MTObject.hpp@{MTObject.hpp}!printMT@{printMT}}
-\index{printMT@{printMT}!MTObject.hpp@{MTObject.hpp}}
-\doxysubsubsection{printMT()}
-{\footnotesize\ttfamily template$<$class... ARGS$>$ \\
-void print\+MT (\begin{DoxyParamCaption}\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=209pt]{_m_t_object_8hpp_acceec6d26d3021217ae83ccd7b029351_cgraph}
-\end{center}
-\end{figure}
 
 
 \doxysubsection{Variable Documentation}

@@ -61,13 +61,13 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Analyse/CloverModule.hpp" line="69" column="1" bodyfile="lib/Analyse/CloverModule.hpp" bodystart="69" bodyend="80"/>
-        <references refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" compoundref="lib_co_8hpp" startline="74" endline="74">int_cast</references>
+        <references refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" compoundref="lib_co_8hpp" startline="209" endline="209">int_cast</references>
         <references refid="class_clover_module_1a9bf510d1a745fcfb7f9bb884a4e23a52" compoundref="_clover_module_8hpp" startline="22" endline="22">CloverModule::label</references>
         <references refid="class_clover_module_1a9ce6bd8f9c0fa3e717318bf08b734ee5" compoundref="_clover_module_8hpp" startline="43">CloverModule::maxE_Ge_cristal</references>
         <references refid="class_clover_module_1a7c9ab1d1764e331b5c03827498575a0d" compoundref="_clover_module_8hpp" startline="31">CloverModule::nb</references>
         <references refid="class_clover_module_1ab6ae88bdff14bbde9b660f729a87cc59" compoundref="_clover_module_8hpp" startline="32">CloverModule::nb_BGO</references>
         <references refid="class_clover_module_1a5ffbecaa432da9e2c8c24b529610da80" compoundref="_clover_module_8hpp" startline="33">CloverModule::nrj</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
         <references refid="class_clover_module_1aa015368cdc852dd79598e8c4bac07a50" compoundref="_clover_module_8hpp" startline="35">CloverModule::time</references>
       </memberdef>
       </sectiondef>
@@ -137,7 +137,7 @@
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
 <codeline lineno="69" refid="_clover_module_8hpp_1aae60fbf6c352f4c0682ec1c2a3f04181" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="_clover_module_8hpp_1aae60fbf6c352f4c0682ec1c2a3f04181" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>cout,<sp/><ref refid="class_clover_module" kindref="compound">CloverModule</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>cloverModule)</highlight></codeline>
 <codeline lineno="70"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Clover<sp/>n°&quot;</highlight><highlight class="normal">,<ref refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" kindref="member">int_cast</ref>(cloverModule.<ref refid="class_clover_module_1a9bf510d1a745fcfb7f9bb884a4e23a52" kindref="member">label</ref>()),<sp/></highlight><highlight class="stringliteral">&quot;:&quot;</highlight><highlight class="normal">,</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;nb<sp/>Ge&quot;</highlight><highlight class="normal">,<sp/><ref refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" kindref="member">int_cast</ref>(cloverModule.<ref refid="class_clover_module_1a7c9ab1d1764e331b5c03827498575a0d" kindref="member">nb</ref>),</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;nb<sp/>BGO&quot;</highlight><highlight class="normal">,<sp/><ref refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" kindref="member">int_cast</ref>(cloverModule.<ref refid="class_clover_module_1ab6ae88bdff14bbde9b660f729a87cc59" kindref="member">nb_BGO</ref>),</highlight></codeline>

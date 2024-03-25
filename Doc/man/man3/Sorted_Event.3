@@ -1,4 +1,4 @@
-.TH "Sorted_Event" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Sorted_Event" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -58,7 +58,7 @@ Sorted_Event
 
 .in +1c
 .ti -1c
-.RI "static void \fBInitialize\fP ()"
+.RI "static void \fBInitialise\fP ()"
 .br
 .ti -1c
 .RI "static void \fBsetDSSDVeto\fP (Float_t const &min_time, Float_t const &max_time, Float_t const &max_E)"
@@ -257,9 +257,9 @@ Sorted_Event
 
 .SS "auto const& Sorted_Event::getGatedClover () const\fC [inline]\fP"
 
-.SS "void Sorted_Event::initialise ()"
+.SS "static void Sorted_Event::Initialise ()\fC [inline]\fP, \fC [static]\fP"
 
-.SS "static void Sorted_Event::Initialize ()\fC [inline]\fP, \fC [static]\fP"
+.SS "void Sorted_Event::initialise ()"
 
 .SS "void Sorted_Event::reset ()"
 

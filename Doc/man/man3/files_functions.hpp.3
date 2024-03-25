@@ -1,4 +1,4 @@
-.TH "lib/files_functions.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/files_functions.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,11 +8,19 @@ lib/files_functions.hpp
 .PP
 \fC#include 'print\&.hpp'\fP
 .br
-\fC#include 'string_functions\&.hpp'\fP
-.br
 \fC#include 'vector_functions\&.hpp'\fP
 .br
+\fC#include 'string_functions\&.hpp'\fP
+.br
+\fC#include <algorithm>\fP
+.br
+\fC#include <dirent\&.h>\fP
+.br
 \fC#include <fstream>\fP
+.br
+\fC#include <glob\&.h>\fP
+.br
+\fC#include <iostream>\fP
 .br
 \fC#include <filesystem>\fP
 .br
@@ -84,10 +92,16 @@ lib/files_functions.hpp
 .RI "std::string \fBgetPath\fP (std::string const &string)"
 .br
 .ti -1c
+.RI "void \fBgo_to_beginning\fP (std::ifstream &file)"
+.br
+.ti -1c
 .RI "bool \fBhasPath\fP (std::string const &file)"
 .br
 .ti -1c
-.RI "std::vector< std::string > \fBlist_files_in_folder\fP (std::string const &foldername, std::vector< std::string > const &extensions={'*'}, bool const &reorder=true)"
+.RI "std::vector< std::string > \fBlist_file_names_in_folder\fP (std::string const &foldername='\&./', std::vector< std::string > const &extensions={'*'}, bool const &reorder=true)"
+.br
+.ti -1c
+.RI "std::vector< std::string > \fBlist_files_in_folder\fP (std::string const &foldername='\&./', std::vector< std::string > const &extensions={'*'}, bool const &reorder=true)"
 .br
 .ti -1c
 .RI "std::vector< std::string > \fBlistFileReader\fP (std::string const &filename)"
@@ -103,9 +117,6 @@ lib/files_functions.hpp
 .br
 .ti -1c
 .RI "\fBFolder\fP \fBoperator+\fP (std::string const &string, \fBFolder\fP const &folder)"
-.br
-.ti -1c
-.RI "std::string \fBoperator+=\fP (std::string const &string, \fBFolder\fP const &folder)"
 .br
 .ti -1c
 .RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBFile\fP const &file)"
@@ -180,9 +191,13 @@ lib/files_functions.hpp
 
 .SS "std::string getPath (std::string const & string)"
 
+.SS "void go_to_beginning (std::ifstream & file)"
+
 .SS "bool hasPath (std::string const & file)"
 
-.SS "std::vector<std::string> list_files_in_folder (std::string const & foldername, std::vector< std::string > const & extensions = \fC{'*'}\fP, bool const & reorder = \fCtrue\fP)"
+.SS "std::vector<std::string> list_file_names_in_folder (std::string const & foldername = \fC'\&./'\fP, std::vector< std::string > const & extensions = \fC{'*'}\fP, bool const & reorder = \fCtrue\fP)"
+
+.SS "std::vector<std::string> list_files_in_folder (std::string const & foldername = \fC'\&./'\fP, std::vector< std::string > const & extensions = \fC{'*'}\fP, bool const & reorder = \fCtrue\fP)"
 
 .SS "std::vector<std::string> listFileReader (std::string const & filename)"
 
@@ -193,8 +208,6 @@ lib/files_functions.hpp
 .SS "std::string operator+ (\fBPath\fP const & path, \fBFilename\fP const & filename)"
 
 .SS "\fBFolder\fP operator+ (std::string const & string, \fBFolder\fP const & folder)"
-
-.SS "std::string operator+= (std::string const & string, \fBFolder\fP const & folder)"
 
 .SS "std::ostream& operator<< (std::ostream & cout, \fBFile\fP const & file)"
 

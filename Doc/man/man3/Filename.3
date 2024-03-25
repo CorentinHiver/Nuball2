@@ -1,4 +1,4 @@
-.TH "Filename" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Filename" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,6 +12,9 @@ Filename \- EXPERIMENTAL Contains the short name and the extension of a given fi
 .SS "Public Member Functions"
 
 .in +1c
+.ti -1c
+.RI "std::string \fBc_str\fP () const"
+.br
 .ti -1c
 .RI "std::string const  & \fBextension\fP () const"
 .br
@@ -27,6 +30,7 @@ Filename \- EXPERIMENTAL Contains the short name and the extension of a given fi
 .ti -1c
 .RI "std::string const  & \fBfullName\fP () const"
 .br
+.RI "Full name stands for the file name with the path nor the extension\&. "
 .ti -1c
 .RI "std::string const  & \fBget\fP () const"
 .br
@@ -48,6 +52,7 @@ Filename \- EXPERIMENTAL Contains the short name and the extension of a given fi
 .ti -1c
 .RI "std::string const  & \fBshortName\fP () const"
 .br
+.RI "Short name stands for the file name withpout the path nor the extension\&. "
 .ti -1c
 .RI "std::string const  & \fBstring\fP () const"
 .br
@@ -88,12 +93,16 @@ EXPERIMENTAL Contains the short name and the extension of a given file, without 
 
 .SH "Member Function Documentation"
 .PP 
+.SS "std::string Filename::c_str () const\fC [inline]\fP"
+
 .SS "std::string const& Filename::extension () const\fC [inline]\fP"
 
 .SS "void Filename::fill (std::string const & filename)\fC [inline]\fP, \fC [private]\fP"
 
 .SS "std::string const& Filename::fullName () const\fC [inline]\fP"
 
+.PP
+Full name stands for the file name with the path nor the extension\&. 
 .SS "std::string const& Filename::get () const\fC [inline]\fP"
 
 .SS "Filename::operator std::string () const &\fC [inline]\fP"
@@ -108,6 +117,8 @@ EXPERIMENTAL Contains the short name and the extension of a given file, without 
 
 .SS "std::string const& Filename::shortName () const\fC [inline]\fP"
 
+.PP
+Short name stands for the file name withpout the path nor the extension\&. 
 .SS "std::string const& Filename::string () const\fC [inline]\fP"
 
 .SS "void Filename::update ()\fC [inline]\fP, \fC [private]\fP"

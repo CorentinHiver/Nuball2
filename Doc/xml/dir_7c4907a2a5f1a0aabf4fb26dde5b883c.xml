@@ -3,20 +3,24 @@
   <compounddef id="dir_7c4907a2a5f1a0aabf4fb26dde5b883c" kind="dir">
     <compoundname>lib/Analyse</compoundname>
     <innerdir refid="dir_94eea9e301c5d43b028a346ce38e954d">lib/Analyse/Arrays</innerdir>
+    <innerfile refid="_analysed_spectra_8hpp">AnalysedSpectra.hpp</innerfile>
     <innerfile refid="_clover_module_8hpp">CloverModule.hpp</innerfile>
     <innerfile refid="_clovers_8hpp">Clovers.hpp</innerfile>
     <innerfile refid="_analyse_2_counters_8hpp">Counters.hpp</innerfile>
     <innerfile refid="_d_s_s_d_8hpp">DSSD.hpp</innerfile>
     <innerfile refid="_event_analyse_8hpp">EventAnalyse.hpp</innerfile>
-    <innerfile refid="_histo_analyse_8hpp">HistoAnalyse.hpp</innerfile>
     <innerfile refid="_paris_8hpp">Paris.hpp</innerfile>
+    <innerfile refid="_paris_bidim_angles_8hpp">ParisBidimAngles.hpp</innerfile>
     <innerfile refid="_paris_cluster_8hpp">ParisCluster.hpp</innerfile>
     <innerfile refid="_paris_label_8hpp">ParisLabel.hpp</innerfile>
     <innerfile refid="_paris_module_8hpp">ParisModule.hpp</innerfile>
     <innerfile refid="_paris_phoswitch_8hpp">ParisPhoswitch.hpp</innerfile>
     <innerfile refid="_paris_x_y_8hpp">ParisXY.hpp</innerfile>
     <innerfile refid="_position_x_y_8hpp">PositionXY.hpp</innerfile>
+    <innerfile refid="_recalibration_8hpp">Recalibration.hpp</innerfile>
     <innerfile refid="_sorted___event_8hpp">Sorted_Event.hpp</innerfile>
+    <innerfile refid="_spectra_alignator_8hpp">SpectraAlignator.hpp</innerfile>
+    <innerfile refid="_spectra_co_8hpp">SpectraCo.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

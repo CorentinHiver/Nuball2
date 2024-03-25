@@ -42,7 +42,13 @@ Collaboration diagram for File:<para>
 </listitem>
             <listitem><para><link linkend="_class_file_1a5237343fec40bceaa8cf7fc7c4026426">File</link> (std::string const &amp;file, std::string const &amp;mode=&quot;&quot;)</para>
 </listitem>
+            <listitem><para><link linkend="_class_filename">Filename</link> &amp; <link linkend="_class_file_1a8b611e5ac24218c6cde441dce45315dd">filename</link> ()</para>
+
+<para><link linkend="_class_filename">Filename</link> stands for the file name without the path but with the extension. </para>
+</listitem>
             <listitem><para><link linkend="_class_filename">Filename</link> const  &amp; <link linkend="_class_file_1a0860c6b771d42f74d5c3fdc3fc820332">filename</link> () const</para>
+
+<para><link linkend="_class_filename">Filename</link> stands for the file name without the path but with the extension. </para>
 </listitem>
             <listitem><para><link linkend="_class_folder">Folder</link> const  &amp; <link linkend="_class_file_1ae66434e6a61f2a76b09c3480bcff4fba">folder</link> () const</para>
 </listitem>
@@ -64,11 +70,15 @@ Collaboration diagram for File:<para>
 </listitem>
             <listitem><para><link linkend="_class_file">File</link> &amp; <link linkend="_class_file_1a900ed41b6c4fbcec93e4306e2d8b0c35">operator=</link> (std::string const &amp;file)</para>
 </listitem>
+            <listitem><para>bool <link linkend="_class_file_1a35d0d3ff742417be72ad0dd6bb83fb6a">operator==</link> (<link linkend="_class_file">File</link> const &amp;other) const</para>
+</listitem>
             <listitem><para><link linkend="_class_path">Path</link> const  &amp; <link linkend="_class_file_1ad1ad54af9ff70a91691eed58bdf7e76f">path</link> () const</para>
 </listitem>
             <listitem><para>void <link linkend="_class_file_1af4dee1c79bf496d505633211177c6ce3">setExtension</link> (std::string const &amp;new_extension)</para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_file_1a4162125761930208891770416c498828">shortName</link> () const</para>
+
+<para>Short name stands for the file name withpout the path nor the extension. </para>
 </listitem>
             <listitem><para>auto <link linkend="_class_file_1a43e3d087ec47881811167f3a20a99cfa">size</link> (std::string const &amp;unit=&quot;o&quot;) const</para>
 </listitem>
@@ -113,7 +123,7 @@ Collaboration diagram for File:<para>
 <listitem>
 <para>A list of folder that forms the <link linkend="_class_path">Path</link> to the file</para>
 </listitem><listitem>
-<para>A short name and an extension for the <link linkend="_class_filename">Filename</link> <para><link linkend="_todo_1_todo000001">Todo</link> 
+<para>A short name and an extension for the <link linkend="_class_filename">Filename</link> <para><link linkend="_todo_1_todo000011">Todo</link> 
 <para>rethink the checkMode logic ... </para>
 </para></para>
 </listitem></itemizedlist>
@@ -262,11 +272,23 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_file_1a0860c6b771d42f74d5c3fdc3fc820332"/>    <section>
-    <title>filename()</title>
+    </section><anchor xml:id="_class_file_1a8b611e5ac24218c6cde441dce45315dd"/>    <section>
+    <title>filename()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>filename</primary><secondary>File</secondary></indexterm>
 <indexterm><primary>File</primary><secondary>filename</secondary></indexterm>
-<para><computeroutput><link linkend="_class_filename">Filename</link> const&amp; File::filename ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1ac3774fc193239a9a83f6974e9a79f9c4"/>    <section>
+<para><computeroutput><link linkend="_class_filename">Filename</link>&amp; File::filename ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_filename">Filename</link> stands for the file name without the path but with the extension. </para>
+</para>
+    </section><anchor xml:id="_class_file_1a0860c6b771d42f74d5c3fdc3fc820332"/>    <section>
+    <title>filename()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>filename</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>filename</secondary></indexterm>
+<para><computeroutput><link linkend="_class_filename">Filename</link> const&amp; File::filename ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_class_filename">Filename</link> stands for the file name without the path but with the extension. </para>
+</para>
+    </section><anchor xml:id="_class_file_1ac3774fc193239a9a83f6974e9a79f9c4"/>    <section>
     <title>fill()</title>
 <indexterm><primary>fill</primary><secondary>File</secondary></indexterm>
 <indexterm><primary>File</primary><secondary>fill</secondary></indexterm>
@@ -382,11 +404,24 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_file_1ad1ad54af9ff70a91691eed58bdf7e76f"/>    <section>
+    </section><anchor xml:id="_class_file_1a35d0d3ff742417be72ad0dd6bb83fb6a"/>    <section>
+    <title>operator==()</title>
+<indexterm><primary>operator==</primary><secondary>File</secondary></indexterm>
+<indexterm><primary>File</primary><secondary>operator==</secondary></indexterm>
+<para><computeroutput>bool File::operator== (<link linkend="_class_file">File</link> const &amp; other) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1ad1ad54af9ff70a91691eed58bdf7e76f"/>    <section>
     <title>path()</title>
 <indexterm><primary>path</primary><secondary>File</secondary></indexterm>
 <indexterm><primary>File</primary><secondary>path</secondary></indexterm>
-<para><computeroutput><link linkend="_class_path">Path</link> const&amp; File::path ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_file_1af4dee1c79bf496d505633211177c6ce3"/>    <section>
+<para><computeroutput><link linkend="_class_path">Path</link> const&amp; File::path ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_file_ad1ad54af9ff70a91691eed58bdf7e76f_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_file_1af4dee1c79bf496d505633211177c6ce3"/>    <section>
     <title>setExtension()</title>
 <indexterm><primary>setExtension</primary><secondary>File</secondary></indexterm>
 <indexterm><primary>File</primary><secondary>setExtension</secondary></indexterm>
@@ -412,7 +447,11 @@ Here is the caller graph for this function:<para>
     <title>shortName()</title>
 <indexterm><primary>shortName</primary><secondary>File</secondary></indexterm>
 <indexterm><primary>File</primary><secondary>shortName</secondary></indexterm>
-<para><computeroutput>std::string const&amp; File::shortName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>std::string const&amp; File::shortName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Short name stands for the file name withpout the path nor the extension. </para>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>

@@ -86,12 +86,46 @@ $(document).ready(function(){initNavTree('todo.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><dl class="reflist">
-<dt>Class <a class="el" href="class_calibration.html">Calibration</a>  </dt>
-<dd><a class="anchor" id="_todo000002"></a><a class="el" href="class_calibration.html#a344dc3d6feab3580e859cc693c2fdd4a">Calibration::verify()</a> DO NOT SUPPORT <a class="el" href="class_m_t_object.html">MTObject</a> !!  </dd>
+<dt>Member <a class="el" href="lib_root_8hpp.html#a0135527c42feb1bbb8180af21ef5229e">AddTH1ByValue</a>  (TH2 *histo2, TH1 *histo1, int index, bool x=true)</dt>
+<dd><a class="anchor" id="_todo000012"></a>doesn't work for some reason ... </dd>
+<dt>Class <a class="el" href="class_calibrator.html">Calibrator</a>  </dt>
+<dd><a class="anchor" id="_todo000014"></a><a class="el" href="class_calibrator.html#aad90b0e3951d4caffe11e319c7108a51" title="if some spectra and calibration coefficients have been loaded, or after the calibration coefficients ...">Calibrator::verify()</a> DO NOT SUPPORT multithreading with <a class="el" href="class_m_t_object.html" title="Class handeling an easy multi threading.">MTObject</a> !!  </dd>
+<dt>Member <a class="el" href="class_calibrator.html#a6f433f9ca2ce1406d8ca5d55fdccb696">Calibrator::operator bool</a>  () const &amp;</dt>
+<dd><a class="anchor" id="_todo000015"></a>  </dd>
+<dt>Member <a class="el" href="class_data_file.html#a943ee036c1dc8d2a2a98a9bc5953d303">DataFile&lt; Index, T &gt;::vectorize</a>  ()</dt>
+<dd><a class="anchor" id="_todo000008"></a>if needed  </dd>
+<dt>Class <a class="el" href="class_faster2_histo.html">Faster2Histo</a>  </dt>
+<dd><a class="anchor" id="_todo000016"></a> event building, timeshifts </dd>
+<dt>Member <a class="el" href="class_faster2_histo.html#a9fe030fbb75d71117cbac93c14c787f6">Faster2Histo::setTrigger</a>  (TriggerHit trigger)</dt>
+<dd><a class="anchor" id="_todo000017"></a>UNUSED until event building is done  </dd>
 <dt>Class <a class="el" href="class_file.html">File</a>  </dt>
-<dd><a class="anchor" id="_todo000001"></a>rethink the checkMode logic ...  </dd>
-<dt>Class <a class="el" href="class_m_t_t_hist.html">MTTHist&lt; THist &gt;</a>  </dt>
-<dd><a class="anchor" id="_todo000003"></a>better memory management </dd>
+<dd><a class="anchor" id="_todo000011"></a>rethink the checkMode logic ...  </dd>
+<dt>Member <a class="el" href="class_hit_buffer.html#a69b8f046928a8e3dc0e573dff8b4fe94">HitBuffer::shift</a>  (int n)</dt>
+<dd><a class="anchor" id="_todo000009"></a>Make it functionnal maybe ? </dd>
+<dt>Class <a class="el" href="class_manip.html">Manip</a>  </dt>
+<dd><a class="anchor" id="_todo000010"></a>make it better !!  </dd>
+<dt>Class <a class="el" href="class_m_t_object.html">MTObject</a>  </dt>
+<dd><a class="anchor" id="_todo000020"></a> Trying to make this work : template&lt;class... ARGS&gt; static ret_type helper_function(MyClass &amp; myclass, ARGS... args) {return myclass.function_to_multithread(std::forward&lt;ARGS&gt;(args)...);}  </dd>
+<dt>Member <a class="el" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47">MTObject::parallelise_function</a>  (Func &amp;&amp;func, ARGS &amp;&amp;... args)</dt>
+<dd><a class="anchor" id="_todo000021"></a>check if I can replace Func by std::function  </dd>
+<dt>Class <a class="el" href="class_near_line.html">NearLine</a>  </dt>
+<dd><a class="anchor" id="_todo000018"></a> </dd>
+<dt>Member <a class="el" href="class_spectra_co.html#a223f3a9be7c661c1ef700d8bfda1106f">SpectraCo::fill</a>  (double const &amp;X) noexcept</dt>
+<dd><a class="anchor" id="_todo000001"></a>test it  </dd>
+<dt>Member <a class="el" href="class_spectra_co.html#a34ea7496185caf2178c8ba1c10876dd3">SpectraCo::operator*</a>  (double const &amp;factor)</dt>
+<dd><a class="anchor" id="_todo000003"></a>can be optimized  </dd>
+<dt>Member <a class="el" href="class_spectra_co.html#aa4225392a595ff8a0950ef67610096d0">SpectraCo::operator/</a>  (double const &amp;factor)</dt>
+<dd><a class="anchor" id="_todo000004"></a>can be optimized  </dd>
+<dt>Member <a class="el" href="class_spectra_co.html#a79c602e0c90555c37098d070863134f3">SpectraCo::rebin</a>  (int const &amp;factor, bool const &amp;rebin_derivatives=false)</dt>
+<dd><a class="anchor" id="_todo000002"></a>create a custom method without the use of ROOT (attempt commented at the bottom of the file)  </dd>
+<dt>Member <a class="el" href="class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b">SpectraCo::removeBackground</a>  (int const &amp;smooth, std::string const &amp;fit_options="") noexcept</dt>
+<dd><a class="anchor" id="_todo000005"></a>Try to adapt not to have to use root for this function </dd>
+<dt>Member <a class="el" href="class_spectra_co.html#a213631f494d8361bfa9f4115266e9af7">SpectraCo::~SpectraCo</a>  () noexcept</dt>
+<dd><a class="anchor" id="_todo000007"></a>  </dd>
+<dt>Class <a class="el" href="class_the_t_chain.html">TheTChain</a>  </dt>
+<dd><a class="anchor" id="_todo000013"></a>maybe </dd>
+<dt>Member <a class="el" href="class_timeshifts.html#abc70d7dc0c400a76d84f2c5cc30edf77">Timeshifts::verification</a>  (bool const &amp;verif=true)</dt>
+<dd><a class="anchor" id="_todo000019"></a>caption</dd>
 </dl>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

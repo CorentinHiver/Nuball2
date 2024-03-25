@@ -1,7 +1,9 @@
-\doxysection{lib/\+Classes/\+Spectra\+Alignator.hpp File Reference}
-\label{_spectra_alignator_8hpp}\index{lib/Classes/SpectraAlignator.hpp@{lib/Classes/SpectraAlignator.hpp}}
+\doxysection{lib/\+Analyse/\+Spectra\+Alignator.hpp File Reference}
+\label{_spectra_alignator_8hpp}\index{lib/Analyse/SpectraAlignator.hpp@{lib/Analyse/SpectraAlignator.hpp}}
 {\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
-Include dependency graph for Spectra\+Alignator.\+hpp\+:\nopagebreak
+{\ttfamily \#include \char`\"{}Spectra\+Co.\+hpp\char`\"{}}\newline
+Include dependency graph for Spectra\+Alignator.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -15,13 +17,15 @@ class \textbf{ Minimisator}
 \item 
 struct \textbf{ Minimisator\+::\+Nelder\+Mead\+Parameters}
 \item 
-class \textbf{ Recalibration}
+class \textbf{ Objective\+Function}
+\item 
+class \textbf{ Objective\+Function\+Chi2}
 \item 
 class \textbf{ Simplex}
 \item 
 class \textbf{ Spectra\+Alignator}
 \item 
-class \textbf{ Spectra\+Co}
+class \textbf{ Test\+Objective\+Function}
 \item 
 class \textbf{ Vertice}
 \end{DoxyCompactItemize}
@@ -40,43 +44,10 @@ using \textbf{ Vertices} = std\+::vector$<$ \textbf{ Vertice} $>$
 \item 
 \textbf{ Vertice} \textbf{ operator$\ast$} (double const \&constant, \textbf{ Vertice} const \&vertice)
 \item 
-std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&out, \textbf{ Recalibration} const \&recal)
-\item 
 std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&out, \textbf{ Simplex} const \&simplex)
 \item 
 std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&out, \textbf{ Vertice} const \&vertice)
 \end{DoxyCompactItemize}
-
-
-\doxysubsection{Class Documentation}
-\index{Minimisator::NelderMeadParameters@{Minimisator::NelderMeadParameters}}\label{struct_minimisator_1_1_nelder_mead_parameters}
-\doxysubsubsection{struct Minimisator\+::Nelder\+Mead\+Parameters}
-\begin{DoxyFields}{Class Members}
-\mbox{\label{class_minimisator_ad572ad763d40de2c3ef34e50bf71177d}} 
-double&
-alpha&
-\\
-\hline
-
-\mbox{\label{class_minimisator_aeec9715878231abdfbea7a5a6801bf1e}} 
-double&
-beta&
-\\
-\hline
-
-\mbox{\label{class_minimisator_ae4f64377f468e22558d8bd6fee8bad24}} 
-double&
-delta&
-\\
-\hline
-
-\mbox{\label{class_minimisator_a605647638f96b3aaaec933e3b741c392}} 
-double&
-gamma&
-\\
-\hline
-
-\end{DoxyFields}
 
 
 \doxysubsection{Macro Definition Documentation}
@@ -111,23 +82,10 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=251pt]{_spectra_alignator_8hpp_a658a331239a2db3139f2a2163a4c182f_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{_spectra_alignator_8hpp_a1c2f6d6b9b8d19b513889e59666d3967}} 
-\index{SpectraAlignator.hpp@{SpectraAlignator.hpp}!operator$<$$<$@{operator$<$$<$}}
-\index{operator$<$$<$@{operator$<$$<$}!SpectraAlignator.hpp@{SpectraAlignator.hpp}}
-\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
-{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\textbf{ Recalibration} const \&}]{recal }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=303pt]{_spectra_alignator_8hpp_a1c2f6d6b9b8d19b513889e59666d3967_cgraph}
-\end{center}
-\end{figure}
 \mbox{\label{_spectra_alignator_8hpp_a2b92434fd8aaf67b841513f9b83eaaa8}} 
 \index{SpectraAlignator.hpp@{SpectraAlignator.hpp}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!SpectraAlignator.hpp@{SpectraAlignator.hpp}}
-\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\textbf{ Simplex} const \&}]{simplex }\end{DoxyParamCaption})}
 
 Here is the call graph for this function\+:\nopagebreak
@@ -140,13 +98,14 @@ Here is the call graph for this function\+:\nopagebreak
 \mbox{\label{_spectra_alignator_8hpp_a00041d0900b9f4e90f24fc9f5f61208f}} 
 \index{SpectraAlignator.hpp@{SpectraAlignator.hpp}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!SpectraAlignator.hpp@{SpectraAlignator.hpp}}
-\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\textbf{ Vertice} const \&}]{vertice }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=262pt]{_spectra_alignator_8hpp_a00041d0900b9f4e90f24fc9f5f61208f_cgraph}
+\includegraphics[width=289pt]{_spectra_alignator_8hpp_a00041d0900b9f4e90f24fc9f5f61208f_cgraph}
 \end{center}
 \end{figure}

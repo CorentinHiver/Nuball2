@@ -193,7 +193,7 @@ int main(int argc, char ** argv)
   {
     MTObject::setThreadsNb(nb_threads);
     MTObject::adjustThreadsNumber(runsMT.size(), "number of runs too small");
-    MTObject::Initialize();
+    MTObject::Initialise();
     MTObject::parallelise_function(convertRuns, runsMT);
   }
   print("Conversion done");

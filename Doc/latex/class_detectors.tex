@@ -18,6 +18,13 @@ Collaboration diagram for Detectors\+:\nopagebreak
 \includegraphics[width=160pt]{class_detectors__coll__graph}
 \end{center}
 \end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Empty\+Error}
+\item 
+class \textbf{ Error}
+\end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,7 +39,7 @@ auto \textbf{ end} ()
 auto \textbf{ end} () const
 \item 
 bool \textbf{ exists} (\textbf{ Label} const \&\textbf{ label})
-\item 
+\begin{DoxyCompactList}\small\item\em Does this label correspond to a detector ? \end{DoxyCompactList}\item 
 auto const  \& \textbf{ file} ()
 \item 
 auto const  \& \textbf{ file} () const
@@ -43,7 +50,7 @@ auto const  \& \textbf{ get\+Exists\+Array} () const
 \item 
 auto const  \& \textbf{ get\+Label} (std\+::string const \&\textbf{ name})
 \item 
-auto const  \& \textbf{ get\+Labels\+Array} () const
+auto const  \& \textbf{ get\+Labels\+Map} () const
 \item 
 auto const  \& \textbf{ get\+Name} (\textbf{ Label} const \&\textbf{ label})
 \item 
@@ -65,10 +72,14 @@ void \textbf{ make\+Arrays} ()
 \begin{DoxyCompactList}\small\item\em Fills the lookup tables. \end{DoxyCompactList}\item 
 auto const  \& \textbf{ name} (\textbf{ d\+Type} const \&\textbf{ type}, int const \&\textbf{ index})
 \begin{DoxyCompactList}\small\item\em Get the name of a detector given its type and type index. \end{DoxyCompactList}\item 
+auto const  \& \textbf{ names} () const
+\item 
 auto const  \& \textbf{ nb\+Of\+Type} (\textbf{ d\+Type} const \&\textbf{ type})
 \begin{DoxyCompactList}\small\item\em Returns the number of detector of each type. \end{DoxyCompactList}\item 
-auto const \textbf{ nb\+Types} ()
+auto \textbf{ nb\+Types} ()
 \begin{DoxyCompactList}\small\item\em Returns the number of types in the ID file. \end{DoxyCompactList}\item 
+auto \textbf{ nb\+Types} () const
+\item 
 auto const  \& \textbf{ number} ()
 \begin{DoxyCompactList}\small\item\em Return the number of detectors. \end{DoxyCompactList}\item 
 \textbf{ operator bool} () const \&
@@ -85,7 +96,7 @@ void \textbf{ read\+File} (std\+::string const \&\textbf{ file})
 \begin{DoxyCompactList}\small\item\em Reads the file and extracts the list of detectors. \end{DoxyCompactList}\item 
 void \textbf{ resize} (\textbf{ ushort} const \&new\+\_\+size)
 \item 
-auto const \textbf{ size} () const
+\textbf{ Label} \textbf{ size} () const
 \begin{DoxyCompactList}\small\item\em Return the value of the maximum label, i.\+e. the size of the lookup tables. \end{DoxyCompactList}\item 
 auto const  \& \textbf{ type} (\textbf{ Label} const \&\textbf{ label})
 \item 
@@ -124,11 +135,13 @@ static auto \& \textbf{ get\+Energy\+Bin} ()
 \item 
 std\+::string \textbf{ m\+\_\+filename}
 \item 
-bool \textbf{ m\+\_\+initialized} = false
+bool \textbf{ m\+\_\+\+Initialised} = false
 \item 
 std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Label\+\_\+vec} $>$ \textbf{ m\+\_\+labels}
 \item 
-std\+::unordered\+\_\+map$<$ std\+::string, \textbf{ Label} $>$ \textbf{ m\+\_\+labels\+\_\+array}
+std\+::unordered\+\_\+map$<$ std\+::string, \textbf{ Label} $>$ \textbf{ m\+\_\+labels\+\_\+map}
+\item 
+std\+::vector$<$ \textbf{ Label} $>$ \textbf{ m\+\_\+labels\+\_\+vector}
 \item 
 \textbf{ Strings} \textbf{ m\+\_\+list}
 \item 
@@ -140,7 +153,7 @@ std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ Strings} $>$ \textbf{ m
 \item 
 bool \textbf{ m\+\_\+ok} = false
 \item 
-std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, \textbf{ size\+\_\+t} $>$ \textbf{ m\+\_\+type\+\_\+counter}
+std\+::unordered\+\_\+map$<$ \textbf{ d\+Type}, int $>$ \textbf{ m\+\_\+type\+\_\+counter}
 \item 
 \textbf{ Strings} \textbf{ m\+\_\+types} = \textbf{ Strings}(\textbf{ SIZE\+\_\+\+LOOKUP})
 \item 
@@ -193,7 +206,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_af54374260cdfa1cd60b6364f07f882b4_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -241,7 +255,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_a4cc1eacca959595eb53a16b75f2d65d8_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -265,7 +280,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_aaadeec0d94fd7daea1b8e4c9d861fbde_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -278,14 +294,20 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{exists()}
 {\footnotesize\ttfamily bool Detectors\+::exists (\begin{DoxyParamCaption}\item[{\textbf{ Label} const \&}]{label }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Does this label correspond to a detector ? 
+
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_a47ae394beae7efa2fb8fa1a3c7f8427d_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -320,7 +342,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -347,7 +370,8 @@ Get the default energy (keV) bidimensionnal histogram binning for all types of d
 
 Get the default energy (keV) bidimensionnal histogram binning for all types of detectors. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -373,18 +397,19 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_a538487678aa928ab2956e6fb40c90472_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_a538487678aa928ab2956e6fb40c90472_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_detectors_aeadb2b9222dd4544d5035960befb2902}} 
-\index{Detectors@{Detectors}!getLabelsArray@{getLabelsArray}}
-\index{getLabelsArray@{getLabelsArray}!Detectors@{Detectors}}
-\doxysubsubsection{getLabelsArray()}
-{\footnotesize\ttfamily auto const\& Detectors\+::get\+Labels\+Array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\label{class_detectors_a7170a4aafdd8cedc0beab11e87446b0a}} 
+\index{Detectors@{Detectors}!getLabelsMap@{getLabelsMap}}
+\index{getLabelsMap@{getLabelsMap}!Detectors@{Detectors}}
+\doxysubsubsection{getLabelsMap()}
+{\footnotesize\ttfamily auto const\& Detectors\+::get\+Labels\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\label{class_detectors_a9f0298ea9621d3680607633908b1daff}} 
 \index{Detectors@{Detectors}!getName@{getName}}
@@ -422,7 +447,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_a3c4f247022eb113c0371899060ea0199_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -459,7 +485,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_a349500ec816bd7761de87c54b95000bc_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -472,6 +499,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{labels()}
 {\footnotesize\ttfamily auto const\& Detectors\+::labels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_abdba5d8991ded8844de7900d8e64d788_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_detectors_aae4bbbd3eb0f515868e4160a7091beef}} 
 \index{Detectors@{Detectors}!list@{list}}
 \index{list@{list}!Detectors@{Detectors}}
@@ -488,14 +523,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Reads the file and extracts the list of detectors, then fills the lookup tables. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_a03f6e9974f958b86ddbbc4670d0209a2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -512,14 +549,16 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Fills the lookup tables. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_a8d5c0f2d189ddda12ed3c36f13887cfd_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -543,11 +582,26 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_afd00ee8a76386f7356a12858b1dd7c6b_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_afd00ee8a76386f7356a12858b1dd7c6b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_detectors_ad535ab86053baec3294cda955ea275cd}} 
+\index{Detectors@{Detectors}!names@{names}}
+\index{names@{names}!Detectors@{Detectors}}
+\doxysubsubsection{names()}
+{\footnotesize\ttfamily auto const\& Detectors\+::names (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detectors_ad535ab86053baec3294cda955ea275cd_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_detectors_ae5e6ff02bf3d79da3f034f7404e0677c}} 
@@ -560,37 +614,46 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Returns the number of detector of each type. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_ae5e6ff02bf3d79da3f034f7404e0677c_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_ae5e6ff02bf3d79da3f034f7404e0677c_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_detectors_a24d220832c2f0a03a0d886e11f2c284c}} 
+\mbox{\label{class_detectors_adc3246e1180dfd8b2fb52bf0924aa7ef}} 
 \index{Detectors@{Detectors}!nbTypes@{nbTypes}}
 \index{nbTypes@{nbTypes}!Detectors@{Detectors}}
-\doxysubsubsection{nbTypes()}
-{\footnotesize\ttfamily auto const Detectors\+::nb\+Types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{nbTypes()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Detectors\+::nb\+Types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Returns the number of types in the ID file. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_detectors_a24d220832c2f0a03a0d886e11f2c284c_icgraph}
+\includegraphics[width=350pt]{class_detectors_adc3246e1180dfd8b2fb52bf0924aa7ef_icgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_detectors_af2539ac04844248329ca07525fc5da7b}} 
+\index{Detectors@{Detectors}!nbTypes@{nbTypes}}
+\index{nbTypes@{nbTypes}!Detectors@{Detectors}}
+\doxysubsubsection{nbTypes()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto Detectors\+::nb\+Types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_detectors_a4d20a642176613274e1b8a42f7a0bf01}} 
 \index{Detectors@{Detectors}!number@{number}}
 \index{number@{number}!Detectors@{Detectors}}
@@ -617,7 +680,8 @@ Returns true only of the detectors ID file has been loaded successfully.
 \doxysubsubsection{operator=()}
 {\footnotesize\ttfamily void Detectors\+::operator= (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -678,14 +742,16 @@ Prints out the list of labels.
 
 Reads the file and extracts the list of detectors. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_a3d5631f8fd2770b6b3a2a178130519ad_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -698,42 +764,46 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{resize()}
 {\footnotesize\ttfamily void Detectors\+::resize (\begin{DoxyParamCaption}\item[{\textbf{ ushort} const \&}]{new\+\_\+size }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_af2bb20ee60f504df326b87e9ebbaef30_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_detectors_af2bb20ee60f504df326b87e9ebbaef30_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_detectors_a1177661fb15c9825755925faf00c8398}} 
+\mbox{\label{class_detectors_a8780c1daca5724bb16ba07824f3c3665}} 
 \index{Detectors@{Detectors}!size@{size}}
 \index{size@{size}!Detectors@{Detectors}}
 \doxysubsubsection{size()}
-{\footnotesize\ttfamily auto const Detectors\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \textbf{ Label} Detectors\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Return the value of the maximum label, i.\+e. the size of the lookup tables. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=273pt]{class_detectors_a1177661fb15c9825755925faf00c8398_cgraph}
+\includegraphics[width=273pt]{class_detectors_a8780c1daca5724bb16ba07824f3c3665_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_detectors_a1177661fb15c9825755925faf00c8398_icgraph}
+\includegraphics[width=350pt]{class_detectors_a8780c1daca5724bb16ba07824f3c3665_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_detectors_a0be56517035f1272af33392665b9ff1f}} 
@@ -749,7 +819,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_a0be56517035f1272af33392665b9ff1f_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -769,7 +840,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_detectors_ab4d5e6cc24173a65a35788ba7c680264_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -795,7 +867,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{types()}
 {\footnotesize\ttfamily auto const\& Detectors\+::types (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -890,11 +963,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{m\_filename}
 {\footnotesize\ttfamily std\+::string Detectors\+::m\+\_\+filename\hspace{0.3cm}{\ttfamily [protected]}}
 
-\mbox{\label{class_detectors_ab570ead47cf9719ae6f4c1e8c9285b81}} 
-\index{Detectors@{Detectors}!m\_initialized@{m\_initialized}}
-\index{m\_initialized@{m\_initialized}!Detectors@{Detectors}}
-\doxysubsubsection{m\_initialized}
-{\footnotesize\ttfamily bool Detectors\+::m\+\_\+initialized = false\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\label{class_detectors_ac7bf8a0616a138a02d7c09bdf898fe66}} 
+\index{Detectors@{Detectors}!m\_Initialised@{m\_Initialised}}
+\index{m\_Initialised@{m\_Initialised}!Detectors@{Detectors}}
+\doxysubsubsection{m\_Initialised}
+{\footnotesize\ttfamily bool Detectors\+::m\+\_\+\+Initialised = false\hspace{0.3cm}{\ttfamily [protected]}}
 
 \mbox{\label{class_detectors_a5a5289db11cb3ad98c96c69f58f6a6d5}} 
 \index{Detectors@{Detectors}!m\_labels@{m\_labels}}
@@ -902,11 +975,17 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{m\_labels}
 {\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ Label\+\_\+vec}$>$ Detectors\+::m\+\_\+labels\hspace{0.3cm}{\ttfamily [protected]}}
 
-\mbox{\label{class_detectors_a8b8f4313aeec18389d1213accb50b52d}} 
-\index{Detectors@{Detectors}!m\_labels\_array@{m\_labels\_array}}
-\index{m\_labels\_array@{m\_labels\_array}!Detectors@{Detectors}}
-\doxysubsubsection{m\_labels\_array}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \textbf{ Label}$>$ Detectors\+::m\+\_\+labels\+\_\+array\hspace{0.3cm}{\ttfamily [protected]}}
+\mbox{\label{class_detectors_a1f886bf622ed3fd2bb9c4f749504415a}} 
+\index{Detectors@{Detectors}!m\_labels\_map@{m\_labels\_map}}
+\index{m\_labels\_map@{m\_labels\_map}!Detectors@{Detectors}}
+\doxysubsubsection{m\_labels\_map}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$std\+::string, \textbf{ Label}$>$ Detectors\+::m\+\_\+labels\+\_\+map\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\label{class_detectors_a1a7b4644a4309a4d90adfd9fcf13d7a0}} 
+\index{Detectors@{Detectors}!m\_labels\_vector@{m\_labels\_vector}}
+\index{m\_labels\_vector@{m\_labels\_vector}!Detectors@{Detectors}}
+\doxysubsubsection{m\_labels\_vector}
+{\footnotesize\ttfamily std\+::vector$<$\textbf{ Label}$>$ Detectors\+::m\+\_\+labels\+\_\+vector\hspace{0.3cm}{\ttfamily [protected]}}
 
 \mbox{\label{class_detectors_a6994304445c6fc6137346690683b56ec}} 
 \index{Detectors@{Detectors}!m\_list@{m\_list}}
@@ -938,11 +1017,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{m\_ok}
 {\footnotesize\ttfamily bool Detectors\+::m\+\_\+ok = false\hspace{0.3cm}{\ttfamily [protected]}}
 
-\mbox{\label{class_detectors_a661090e1c43cb00b366d7a5d642de879}} 
+\mbox{\label{class_detectors_a767e2461f5118cd3789c50786b297037}} 
 \index{Detectors@{Detectors}!m\_type\_counter@{m\_type\_counter}}
 \index{m\_type\_counter@{m\_type\_counter}!Detectors@{Detectors}}
 \doxysubsubsection{m\_type\_counter}
-{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, \textbf{ size\+\_\+t}$>$ Detectors\+::m\+\_\+type\+\_\+counter\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\textbf{ d\+Type}, int$>$ Detectors\+::m\+\_\+type\+\_\+counter\hspace{0.3cm}{\ttfamily [protected]}}
 
 \mbox{\label{class_detectors_a5677eaffae4eea104f04c3f85e2c5fbe}} 
 \index{Detectors@{Detectors}!m\_types@{m\_types}}

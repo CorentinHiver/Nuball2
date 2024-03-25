@@ -29,9 +29,9 @@ Collaboration diagram for DataFileReader:<para>
 </listitem>
             <listitem><para><link linkend="_class_hit">Hit</link> * <link linkend="_class_data_file_reader_1a034e540bca091a553d32bd6ea3df83a0">getHit</link> () const</para>
 </listitem>
-            <listitem><para>Bool_t <link linkend="_class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8">Initialize</link> ()</para>
+            <listitem><para>Bool_t <link linkend="_class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8">Initialise</link> ()</para>
 </listitem>
-            <listitem><para>Bool_t <link linkend="_class_data_file_reader_1adf4b2ffd95a42bdd5b03cb4cdded83d1">Initialize</link> (std::string const &amp;_filename)</para>
+            <listitem><para>Bool_t <link linkend="_class_data_file_reader_1adf4b2ffd95a42bdd5b03cb4cdded83d1">Initialise</link> (std::string const &amp;_filename)</para>
 </listitem>
             <listitem><para>Bool_t const  &amp; <link linkend="_class_data_file_reader_1a3eb026afa7eb48f76d6032b13c24361a">isReady</link> () const</para>
 </listitem>
@@ -62,9 +62,9 @@ Collaboration diagram for DataFileReader:<para>
 <simplesect>
     <title>Private Member Functions    </title>
         <itemizedlist>
-            <listitem><para>Bool_t <link linkend="_class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45">InitializeFasterRead</link> ()</para>
+            <listitem><para>Bool_t <link linkend="_class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45">InitialiseFasterRead</link> ()</para>
 </listitem>
-            <listitem><para>Bool_t <link linkend="_class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b">InitializeRootRead</link> ()</para>
+            <listitem><para>Bool_t <link linkend="_class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b">InitialiseRootRead</link> ()</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -164,10 +164,10 @@ Collaboration diagram for DataFileReader:<para>
 <indexterm><primary>getHit</primary><secondary>DataFileReader</secondary></indexterm>
 <indexterm><primary>DataFileReader</primary><secondary>getHit</secondary></indexterm>
 <para><computeroutput><link linkend="_class_hit">Hit</link>* DataFileReader::getHit ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_data_file_reader_1ad7d87b772fa148a1ed228f1b7df10fa8"/>    <section>
-    <title>Initialize()<computeroutput>[1/2]</computeroutput></title>
-<indexterm><primary>Initialize</primary><secondary>DataFileReader</secondary></indexterm>
-<indexterm><primary>DataFileReader</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>Bool_t DataFileReader::Initialize ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <title>Initialise()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Initialise</primary><secondary>DataFileReader</secondary></indexterm>
+<indexterm><primary>DataFileReader</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>Bool_t DataFileReader::Initialise ( )</computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -186,10 +186,10 @@ Here is the caller graph for this function:<para>
     </informalfigure>
 </para>
     </section><anchor xml:id="_class_data_file_reader_1adf4b2ffd95a42bdd5b03cb4cdded83d1"/>    <section>
-    <title>Initialize()<computeroutput>[2/2]</computeroutput></title>
-<indexterm><primary>Initialize</primary><secondary>DataFileReader</secondary></indexterm>
-<indexterm><primary>DataFileReader</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>Bool_t DataFileReader::Initialize (std::string const &amp; _filename)</computeroutput></para>Here is the call graph for this function:<para>
+    <title>Initialise()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Initialise</primary><secondary>DataFileReader</secondary></indexterm>
+<indexterm><primary>DataFileReader</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>Bool_t DataFileReader::Initialise (std::string const &amp; _filename)</computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -199,10 +199,10 @@ Here is the caller graph for this function:<para>
     </informalfigure>
 </para>
     </section><anchor xml:id="_class_data_file_reader_1a30933fc0789de10355edc6ccbc3c4f45"/>    <section>
-    <title>InitializeFasterRead()</title>
-<indexterm><primary>InitializeFasterRead</primary><secondary>DataFileReader</secondary></indexterm>
-<indexterm><primary>DataFileReader</primary><secondary>InitializeFasterRead</secondary></indexterm>
-<para><computeroutput>Bool_t DataFileReader::InitializeFasterRead ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <title>InitialiseFasterRead()</title>
+<indexterm><primary>InitialiseFasterRead</primary><secondary>DataFileReader</secondary></indexterm>
+<indexterm><primary>DataFileReader</primary><secondary>InitialiseFasterRead</secondary></indexterm>
+<para><computeroutput>Bool_t DataFileReader::InitialiseFasterRead ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -212,10 +212,10 @@ Here is the caller graph for this function:<para>
     </informalfigure>
 </para>
     </section><anchor xml:id="_class_data_file_reader_1a95d6838cd3d9660578db7f6b5f4d6f9b"/>    <section>
-    <title>InitializeRootRead()</title>
-<indexterm><primary>InitializeRootRead</primary><secondary>DataFileReader</secondary></indexterm>
-<indexterm><primary>DataFileReader</primary><secondary>InitializeRootRead</secondary></indexterm>
-<para><computeroutput>Bool_t DataFileReader::InitializeRootRead ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <title>InitialiseRootRead()</title>
+<indexterm><primary>InitialiseRootRead</primary><secondary>DataFileReader</secondary></indexterm>
+<indexterm><primary>DataFileReader</primary><secondary>InitialiseRootRead</secondary></indexterm>
+<para><computeroutput>Bool_t DataFileReader::InitialiseRootRead ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>

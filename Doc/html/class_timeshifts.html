@@ -82,6 +82,7 @@ $(document).ready(function(){initNavTree('class_timeshifts.html',''); initResiza
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
@@ -93,21 +94,31 @@ $(document).ready(function(){initNavTree('class_timeshifts.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 
+<p>Calculates the time difference between all detectors and a reference detector.  
+ <a href="class_timeshifts.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_timeshifts_8hpp_source.html">Timeshifts.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for Timeshifts:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts__coll__graph.png" border="0" usemap="#a_timeshifts_coll__map" alt="Collaboration graph"/></div>
 <map name="a_timeshifts_coll__map" id="a_timeshifts_coll__map">
-<area shape="rect" title=" " alt="" coords="233,303,324,329"/>
+<area shape="rect" title="Calculates the time difference between all detectors and a reference detector." alt="" coords="212,361,303,388"/>
 <area shape="rect" href="class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="15,95,65,121"/>
 <area shape="rect" href="class_files_manager.html" title=" " alt="" coords="116,184,225,211"/>
 <area shape="rect" href="class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="5,5,75,32"/>
 <area shape="rect" href="class_m_t_t_hist.html" title=" " alt="" coords="250,184,390,211"/>
-<area shape="rect" href="class_m_t_t_hist.html" title=" " alt="" coords="414,184,554,211"/>
+<area shape="rect" href="class_m_t_t_hist.html" title=" " alt="" coords="434,184,574,211"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts_1_1_empty_error.html">EmptyError</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts_1_1_not_found_error.html">NotFoundError</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3d3ab1b3498ca45832d8a8735f16e188"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188">calculate</a> (std::string const &amp;folder, int const &amp;nb_files=-1)</td></tr>
@@ -116,10 +127,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a648f30a01a30b44ef675666ddae79f80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a715283a5be42b86ca70b4e468ccb2931"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a715283a5be42b86ca70b4e468ccb2931">CheckParameters</a> ()</td></tr>
 <tr class="separator:a715283a5be42b86ca70b4e468ccb2931"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a250c8d12a357303853380350ce77aa81"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a250c8d12a357303853380350ce77aa81">data</a> () const</td></tr>
+<tr class="separator:a250c8d12a357303853380350ce77aa81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad77934ca763db86895300f275f935e39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ad77934ca763db86895300f275f935e39">dT_with_biggest_peak_finder</a> ()</td></tr>
+<tr class="separator:ad77934ca763db86895300f275f935e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af97a362f9d3714a1483e0a18fdf26119"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#af97a362f9d3714a1483e0a18fdf26119">dT_with_biggest_peak_finder</a> (<a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;label)</td></tr>
+<tr class="separator:af97a362f9d3714a1483e0a18fdf26119"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aea8a9a1e849fca3bf3712385bd2155c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#aea8a9a1e849fca3bf3712385bd2155c3">dT_with_raising_edge</a> (<a class="el" href="_detectors_8hpp.html#a7ea6a1daded60b9200989100a41bbc3a">dType</a> const &amp;type)</td></tr>
 <tr class="separator:aea8a9a1e849fca3bf3712385bd2155c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f89468edaaaadc6d5e1c23282a0714d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a2f89468edaaaadc6d5e1c23282a0714d">dT_with_raising_edge</a> (<a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;label)</td></tr>
+<tr class="separator:a2f89468edaaaadc6d5e1c23282a0714d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b3ce3e274b28b65f01e336efe99670e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a2b3ce3e274b28b65f01e336efe99670e">dT_with_RF</a> (<a class="el" href="_detectors_8hpp.html#a7ea6a1daded60b9200989100a41bbc3a">dType</a> const &amp;type)</td></tr>
 <tr class="separator:a2b3ce3e274b28b65f01e336efe99670e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afac40edfb7b6eb8f630f328d31023d4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#afac40edfb7b6eb8f630f328d31023d4f">dT_with_RF</a> (<a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;label)</td></tr>
+<tr class="separator:afac40edfb7b6eb8f630f328d31023d4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5161a4c343623e92b4e26522ad7ee16a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a> &gt; const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a5161a4c343623e92b4e26522ad7ee16a">get</a> () const</td></tr>
 <tr class="separator:a5161a4c343623e92b4e26522ad7ee16a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b9a1cbb93f280215432c4d323d1114d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a2b9a1cbb93f280215432c4d323d1114d">get</a> (int const &amp;i) const</td></tr>
@@ -133,6 +154,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a38aac2aef62c8999bb5da97e397ea64c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a942984c1af943a864baf8744babb2d15"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a942984c1af943a864baf8744babb2d15">operator[]</a> (int const &amp;i) const</td></tr>
 <tr class="separator:a942984c1af943a864baf8744babb2d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d484aa685afb43084c90117326a2375"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a9d484aa685afb43084c90117326a2375">periodRF_ns</a> (int const &amp;period_ns)</td></tr>
+<tr class="separator:a9d484aa685afb43084c90117326a2375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ab2718e733f94acda46780191295e3b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a0ab2718e733f94acda46780191295e3b">rebin</a> (std::string const &amp;detector, <a class="el" href="_hit_8hpp.html#ad7cd28c849adeb8fec74d20155b0113d">Time_ns</a> const &amp;bin_size_ns)</td></tr>
 <tr class="separator:a0ab2718e733f94acda46780191295e3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82ddafa1c3f1d2c21c33749e70fab876"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a82ddafa1c3f1d2c21c33749e70fab876">setEminADC</a> (<a class="el" href="_hit_8hpp.html#a04b75a9e083a1c44419fdb7c3f87c361">ADC</a> const &amp;EminADC)</td></tr>
@@ -216,10 +239,14 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a30bd7826eb2ae66e9c7784b819270daa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a30bd7826eb2ae66e9c7784b819270daa">m_biggest_peak_finder</a> = false</td></tr>
+<tr class="separator:a30bd7826eb2ae66e9c7784b819270daa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e446f34754a8d3e2abbba5818cf03cb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a6e446f34754a8d3e2abbba5818cf03cb">m_biggest_peak_finder_label</a></td></tr>
+<tr class="separator:a6e446f34754a8d3e2abbba5818cf03cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab098d455164964ba60b9f5c555de74e4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ab098d455164964ba60b9f5c555de74e4">m_edge_preferred_label</a></td></tr>
 <tr class="separator:ab098d455164964ba60b9f5c555de74e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a53bfccafc7cfbd834754b752a9a4c313"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a53bfccafc7cfbd834754b752a9a4c313">m_nb_shifts_RF_peak</a></td></tr>
-<tr class="separator:a53bfccafc7cfbd834754b752a9a4c313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a5daa2e56c25139ce85e4c5447b28a0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a9a5daa2e56c25139ce85e4c5447b28a0">m_nb_shifts_RF_peak</a></td></tr>
+<tr class="separator:a9a5daa2e56c25139ce85e4c5447b28a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4338a0a481ffac2a8f8dffbafca76e7d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a4338a0a481ffac2a8f8dffbafca76e7d">m_RF_preferred_label</a></td></tr>
 <tr class="separator:a4338a0a481ffac2a8f8dffbafca76e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -229,12 +256,14 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a608d9443a15dd669920e10dd8baee23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c037c5bb4b409c3040982c451c6733d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d">Fill</a> (<a class="el" href="class_event.html">Event</a> const &amp;event, <a class="el" href="class_r_f___manager.html">RF_Manager</a> &amp;rf)</td></tr>
 <tr class="separator:a5c037c5bb4b409c3040982c451c6733d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0753528955e94c43043cd7d68193f960"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a0753528955e94c43043cd7d68193f960">Initialize</a> (bool const &amp;initializeRaw=false, bool const &amp;initializeCorrected=false)</td></tr>
-<tr class="separator:a0753528955e94c43043cd7d68193f960"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05ac31a6c49360d94eeff184dc896c6b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a05ac31a6c49360d94eeff184dc896c6b">InitializeCorrected</a> ()</td></tr>
-<tr class="separator:a05ac31a6c49360d94eeff184dc896c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a40254b2aa53028b1b5c941ee1cb3833d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a40254b2aa53028b1b5c941ee1cb3833d">InitializeRaw</a> ()</td></tr>
-<tr class="separator:a40254b2aa53028b1b5c941ee1cb3833d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95e126cc70243c24a016af24652ecb0b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b">Initialise</a> (bool const &amp;<a class="el" href="class_timeshifts.html#abf99e2b89b819a92e4891d1c3da4e704">InitialiseRaw</a>=false, bool const &amp;<a class="el" href="class_timeshifts.html#a1eaf31f737ca23292d92babdf2f21fd8">InitialiseCorrected</a>=false)</td></tr>
+<tr class="separator:a95e126cc70243c24a016af24652ecb0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eaf31f737ca23292d92babdf2f21fd8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a1eaf31f737ca23292d92babdf2f21fd8">InitialiseCorrected</a> ()</td></tr>
+<tr class="separator:a1eaf31f737ca23292d92babdf2f21fd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c87fcd3920ef2f785349c392890e795"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a7c87fcd3920ef2f785349c392890e795">InitialisePreferencesArrays</a> ()</td></tr>
+<tr class="separator:a7c87fcd3920ef2f785349c392890e795"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf99e2b89b819a92e4891d1c3da4e704"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#abf99e2b89b819a92e4891d1c3da4e704">InitialiseRaw</a> ()</td></tr>
+<tr class="separator:abf99e2b89b819a92e4891d1c3da4e704"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abef7234fe827ae3c7758788cf22b6921"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921">treatFasterFile</a> (std::string const &amp;filename)</td></tr>
 <tr class="separator:abef7234fe827ae3c7758788cf22b6921"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaef5b6fdd23be94ed37a2b4e7fe47b48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48">treatFile</a> (std::string const &amp;filename)</td></tr>
@@ -265,18 +294,26 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a1a70cc43f750599c993c689e62cfb29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18d1ff66fe0d6be096467ff874c139dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt; TH2F &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a18d1ff66fe0d6be096467ff874c139dc">m_EnergyRef_bidim</a></td></tr>
 <tr class="separator:a18d1ff66fe0d6be096467ff874c139dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a025f10899ed33302dee33f2e98d40b3a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a025f10899ed33302dee33f2e98d40b3a">m_energySpectraInitialized</a> = false</td></tr>
-<tr class="separator:a025f10899ed33302dee33f2e98d40b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbb1007ca0f5bccdf9106fa2ec66feca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#acbb1007ca0f5bccdf9106fa2ec66feca">m_energySpectraInitialised</a> = false</td></tr>
+<tr class="separator:acbb1007ca0f5bccdf9106fa2ec66feca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a77bd589fc081641e19c5da8b4e19b6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a1a77bd589fc081641e19c5da8b4e19b6">m_filename</a> = &quot;&quot;</td></tr>
 <tr class="separator:a1a77bd589fc081641e19c5da8b4e19b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f155373f7d1a70f3f1d06233ebf10c1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_files_manager.html">FilesManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a4f155373f7d1a70f3f1d06233ebf10c1">m_files</a></td></tr>
 <tr class="separator:a4f155373f7d1a70f3f1d06233ebf10c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6bda9ede24fd63e7a43ad12bd861a98"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ad6bda9ede24fd63e7a43ad12bd861a98">m_initialized</a> = false</td></tr>
-<tr class="separator:ad6bda9ede24fd63e7a43ad12bd861a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3b75fce1fde95be5ca45b20cfbb8350"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ae3b75fce1fde95be5ca45b20cfbb8350">m_initializedCorrected</a> = false</td></tr>
-<tr class="separator:ae3b75fce1fde95be5ca45b20cfbb8350"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c7b6bfda5c2dacef69d0b7657d89fce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a8c7b6bfda5c2dacef69d0b7657d89fce">m_initializedRaw</a> = false</td></tr>
-<tr class="separator:a8c7b6bfda5c2dacef69d0b7657d89fce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a154847a6a1b23616fed6306401856c9b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a154847a6a1b23616fed6306401856c9b">m_folder_treated</a> = false</td></tr>
+<tr class="separator:a154847a6a1b23616fed6306401856c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac331936db248b471aaa4df09edf8733d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt; TH1F &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ac331936db248b471aaa4df09edf8733d">m_histo_ref_VS_RF</a></td></tr>
+<tr class="separator:ac331936db248b471aaa4df09edf8733d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39db58224dbfadac0d6c7d9d48facb55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt; TH2F &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a39db58224dbfadac0d6c7d9d48facb55">m_histo_ref_vs_RF_VS_mult</a></td></tr>
+<tr class="separator:a39db58224dbfadac0d6c7d9d48facb55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6360328fb6c3da9d0e6910aa88cfc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_m_t_t_hist_8hpp.html#ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</a>&lt; TH1F &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#afe6360328fb6c3da9d0e6910aa88cfc3">m_histograms_VS_RF</a></td></tr>
+<tr class="separator:afe6360328fb6c3da9d0e6910aa88cfc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8c39336ff11fe341a775a6964cf2294"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ac8c39336ff11fe341a775a6964cf2294">m_Initialised</a> = false</td></tr>
+<tr class="separator:ac8c39336ff11fe341a775a6964cf2294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab8aaf500b3e321fb5914ca4fb2de748"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#aab8aaf500b3e321fb5914ca4fb2de748">m_InitialisedCorrected</a> = false</td></tr>
+<tr class="separator:aab8aaf500b3e321fb5914ca4fb2de748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9fe51a29188e20ab8b1870ce7218c1f7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a9fe51a29188e20ab8b1870ce7218c1f7">m_InitialisedRaw</a> = false</td></tr>
+<tr class="separator:a9fe51a29188e20ab8b1870ce7218c1f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7363de3261a770287e981328276f21dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="lib_co_8hpp.html#a92c2ca60527219506deb3325507baee0">ulong</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a7363de3261a770287e981328276f21dd">m_max_hits</a> = -1</td></tr>
 <tr class="separator:a7363de3261a770287e981328276f21dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46a97751e517cc9f21d54d04bb16c5f5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a46a97751e517cc9f21d54d04bb16c5f5">m_max_mult</a> = 2</td></tr>
@@ -295,6 +332,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a7a9d72db7cd915c282014f63c6020d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3640104ddce3ee9548d83186f4032e6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ae3640104ddce3ee9548d83186f4032e6">m_outRoot</a> = &quot;timeshifts.root&quot;</td></tr>
 <tr class="separator:ae3640104ddce3ee9548d83186f4032e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9a517ba9d26652b9caef66639ab6c92"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#aa9a517ba9d26652b9caef66639ab6c92">m_pref_arrays_init</a> = false</td></tr>
+<tr class="separator:aa9a517ba9d26652b9caef66639ab6c92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59308d3bfde01354a6c37ffe4ca635e8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a59308d3bfde01354a6c37ffe4ca635e8">m_rf_period</a> = 0</td></tr>
+<tr class="separator:a59308d3bfde01354a6c37ffe4ca635e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af643b4246a7e7efb0857cec8f705eeb1"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="_detectors_8hpp.html#a7ea6a1daded60b9200989100a41bbc3a">dType</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#af643b4246a7e7efb0857cec8f705eeb1">m_RF_preferred</a></td></tr>
 <tr class="separator:af643b4246a7e7efb0857cec8f705eeb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a149e0f0885280b888df3f2b35ac29af8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a149e0f0885280b888df3f2b35ac29af8">m_time_ref_label</a> = 252</td></tr>
@@ -307,6 +348,12 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ae8fe2221ac14c7c9920ba2dee69ec719"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9b0b763dbe5e2be797d89e9bcb05c1e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt; TH2F &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ab9b0b763dbe5e2be797d89e9bcb05c1e">m_time_spectra_corrected_bidim</a></td></tr>
 <tr class="separator:ab9b0b763dbe5e2be797d89e9bcb05c1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af80ba291868bb2890bbb06304681f6a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt; TH2F &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#af80ba291868bb2890bbb06304681f6a2">m_time_spectra_corrected_bidim_RF</a></td></tr>
+<tr class="separator:af80ba291868bb2890bbb06304681f6a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a170b35d11634ea783d45821092960e78"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_m_t_t_hist_8hpp.html#ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</a>&lt; TH1F &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a170b35d11634ea783d45821092960e78">m_time_spectra_corrected_RF</a></td></tr>
+<tr class="separator:a170b35d11634ea783d45821092960e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a487371ab334a8651058a6ea114fc3f46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt; TH1F &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a487371ab334a8651058a6ea114fc3f46">m_time_spectra_reference_RF_corrected</a></td></tr>
+<tr class="separator:a487371ab334a8651058a6ea114fc3f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad10b3d7e16a2d51d3e73d7f2e7b1e0fa"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ad10b3d7e16a2d51d3e73d7f2e7b1e0fa">m_timeshifts</a></td></tr>
 <tr class="separator:ad10b3d7e16a2d51d3e73d7f2e7b1e0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73dda60d3425a0de61719829231e6d55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a73dda60d3425a0de61719829231e6d55">m_timewindow</a> = <a class="el" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15">Time_cast</a>(<a class="el" href="class_timeshifts.html#a221c8bebd939cf4a9442f5c9dddfeefb">m_timewindow_ns</a>*1000)</td></tr>
@@ -315,6 +362,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a221c8bebd939cf4a9442f5c9dddfeefb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af567d75bbe3263cece04cf3e6eff5256"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#af567d75bbe3263cece04cf3e6eff5256">m_ts_outdir</a> = &quot;Timeshifts/&quot;</td></tr>
 <tr class="separator:af567d75bbe3263cece04cf3e6eff5256"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c1290feea6b17e155dc5fcfc21031cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a7c1290feea6b17e155dc5fcfc21031cd">m_use_rf</a> = false</td></tr>
+<tr class="separator:a7c1290feea6b17e155dc5fcfc21031cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a985a81e5fa8d1a8866988c6af1b2ff1c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a985a81e5fa8d1a8866988c6af1b2ff1c">m_verbose</a> = false</td></tr>
 <tr class="separator:a985a81e5fa8d1a8866988c6af1b2ff1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4329368cc98918cfd4489788dc4a4f8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#ab4329368cc98918cfd4489788dc4a4f8">m_verification</a> = true</td></tr>
@@ -322,7 +371,12 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a64966ebd9e0538d9e3160bbfaf4a74de"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="_hit_8hpp.html#a36a1e53eff51015f34900948053c0d69">Timestamp</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timeshifts.html#a64966ebd9e0538d9e3160bbfaf4a74de">mt_ref_time</a></td></tr>
 <tr class="separator:a64966ebd9e0538d9e3160bbfaf4a74de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Calculates the time difference between all detectors and a reference detector. </p>
+<ul>
+<li>The timestamps and timeshifts are in picoseconds Goal 1 : calculate the time shifts between detectors How : Use one detector as reference, preferencially with good time resolution Create coincidences using the <a class="el" href="class_coinc_builder.html" title="Coincidence builder.">CoincBuilder</a> event builder Calculate the difference in timestamp as follow : ref_time - detector_time Finally, output the (.dT) file containing the time shifts of all the detectors Also produces a .root file containing the raw and corrected time spectra. This module includes multithreading management using MTObject::parallelise_function(function, parameters...) Goal 2 : read a timeshift file (.dT) previously calculated by this module Goal 3 : apply the timeshifts by calling the operator[] : time_correct = time_shifted + timeshifts[label]; Example at the end </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad85f4cabf723d28843393cda47abc2b3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad85f4cabf723d28843393cda47abc2b3">&#9670;&nbsp;</a></span>Timeshifts() <span class="overload">[1/5]</span></h2>
 
@@ -378,12 +432,24 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_ae47e90a384a5dd891bdc5eed10450971_cgraph.png" border="0" usemap="#aclass_timeshifts_ae47e90a384a5dd891bdc5eed10450971_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_ae47e90a384a5dd891bdc5eed10450971_cgraph" id="aclass_timeshifts_ae47e90a384a5dd891bdc5eed10450971_cgraph">
-<area shape="rect" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,56,172,83"/>
-<area shape="rect" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="220,56,347,83"/>
-<area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="399,5,509,32"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="428,56,480,83"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="395,107,513,133"/>
-<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="561,107,652,133"/>
+<area shape="rect" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,363,172,389"/>
+<area shape="rect" href="class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="220,253,375,280"/>
+<area shape="rect" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="234,421,361,448"/>
+<area shape="rect" href="class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15" title=" " alt="" coords="429,76,647,103"/>
+<area shape="rect" href="class_timeshifts.html#a1eaf31f737ca23292d92babdf2f21fd8" title=" " alt="" coords="429,127,647,153"/>
+<area shape="rect" href="class_m_t_t_hist.html#aa10c349eccd83edd9e5204e014b706c8" title="Copy Initialiser." alt="" coords="709,177,826,204"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="708,279,827,305"/>
+<area shape="rect" href="class_timeshifts.html#a7c87fcd3920ef2f785349c392890e795" title=" " alt="" coords="423,330,653,371"/>
+<area shape="rect" href="class_timeshifts.html#abf99e2b89b819a92e4891d1c3da4e704" title=" " alt="" coords="447,228,629,255"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="512,396,564,423"/>
+<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="701,76,833,103"/>
+<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1237,89,1359,116"/>
+<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="881,51,1007,77"/>
+<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="1055,25,1185,52"/>
+<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="1233,13,1363,40"/>
+<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="1411,13,1489,40"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="899,279,989,305"/>
+<area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="483,497,593,524"/>
 </map>
 </div>
 
@@ -422,8 +488,8 @@ Here is the call graph for this function:</div>
 <area shape="rect" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,56,172,83"/>
 <area shape="rect" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="220,56,347,83"/>
 <area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="399,5,509,32"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="428,56,480,83"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="395,107,513,133"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="428,56,480,83"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="395,107,513,133"/>
 <area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="561,107,652,133"/>
 </map>
 </div>
@@ -481,8 +547,8 @@ Here is the call graph for this function:</div>
 <area shape="rect" title="For faster to root conversion only : Timeshifts::load() loads the timeshifts from a ...." alt="" coords="5,56,172,83"/>
 <area shape="rect" href="class_timeshifts.html#a28163efe8d487669cf50d5f6e1060d71" title="Use this method to load timeshifts from a .dT file." alt="" coords="220,56,347,83"/>
 <area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="399,5,509,32"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="428,56,480,83"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="395,107,513,133"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="428,56,480,83"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="395,107,513,133"/>
 <area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="561,107,652,133"/>
 </map>
 </div>
@@ -545,23 +611,30 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a608d9443a15dd669920e10dd8baee23a_cgraph.png" border="0" usemap="#aclass_timeshifts_a608d9443a15dd669920e10dd8baee23a_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a608d9443a15dd669920e10dd8baee23a_cgraph" id="aclass_timeshifts_a608d9443a15dd669920e10dd8baee23a_cgraph">
-<area shape="rect" title=" " alt="" coords="5,309,155,336"/>
-<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="216,69,348,96"/>
+<area shape="rect" title=" " alt="" coords="5,436,155,463"/>
+<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="216,69,348,96"/>
 <area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="765,81,887,108"/>
-<area shape="rect" href="class_timeshifts.html#a5161a4c343623e92b4e26522ad7ee16a" title=" " alt="" coords="223,183,341,209"/>
-<area shape="rect" href="lib_root_8hpp.html#accfb8dfb6ee42fa6845013a0cf121ac1" title="Get the mean of the peak of a histogram with one nice single peak." alt="" coords="227,233,337,260"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="446,284,498,311"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a1efb60019dbe926cccb8410a806d73a9" title=" " alt="" coords="203,335,361,361"/>
-<area shape="rect" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="245,385,319,412"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a0363984bdeb96360bcf8a0a13163f47a" title="Casts a number into unsigned Time." alt="" coords="239,436,325,463"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="223,487,341,513"/>
-<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="237,537,327,564"/>
+<area shape="rect" href="class_m_t_t_hist.html#a9c2f7d05c9f8506382211635b35bd97b" title=" " alt="" coords="229,183,335,209"/>
+<area shape="rect" href="class_timeshifts.html#a5161a4c343623e92b4e26522ad7ee16a" title=" " alt="" coords="223,233,341,260"/>
+<area shape="rect" href="class_peak_fitter.html#ae83803972d52d79a55f2af7b1dde0ae5" title=" " alt="" coords="205,284,359,311"/>
+<area shape="rect" href="lib_root_8hpp.html#accfb8dfb6ee42fa6845013a0cf121ac1" title="Get the mean of the peak of a histogram with one nice single peak." alt="" coords="227,335,337,361"/>
+<area shape="rect" href="namespace_co_bazar.html#a030309d1b093093b5fd48a5f7734018e" title=" " alt="" coords="411,360,533,387"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a1efb60019dbe926cccb8410a806d73a9" title=" " alt="" coords="203,436,361,463"/>
+<area shape="rect" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="245,487,319,513"/>
+<area shape="rect" href="class_m_t_t_hist.html#a5c8a398dfdd3fad0a4529453caf93bd2" title=" " alt="" coords="215,537,349,564"/>
+<area shape="rect" href="class_m_t_t_hist.html#a0412e3cb8d1db4278f3b09316d4ec139" title="Merges the histograms." alt="" coords="219,588,345,615"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="622,613,674,640"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="223,689,341,716"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="237,740,327,767"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a02c5bf3a1c10d9b086ba64557fdb8995" title="Casts a number into unsigned Time." alt="" coords="223,791,341,817"/>
 <area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="409,56,535,83"/>
 <area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="583,31,713,57"/>
 <area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="761,5,891,32"/>
 <area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="939,5,1017,32"/>
-<area shape="rect" href="lib_root_8hpp.html#ab8628517ea9ef7ded29d8e22be6f628f" title="Get which bin holds the X = 0." alt="" coords="436,233,508,260"/>
-<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="427,487,517,513"/>
+<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="598,335,698,361"/>
+<area shape="rect" href="namespace_co_bazar.html#a1e08093363d904d8875d5907b48464f0" title=" " alt="" coords="592,385,704,412"/>
+<area shape="rect" href="print_8hpp.html#a7c50c0690489629965f74c4921570ce5" title="Requires #define DEBUG or &#45;DDEBUG in the compile line." alt="" coords="441,588,503,615"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="427,689,517,716"/>
 </map>
 </div>
 <div class="dynheader">
@@ -606,56 +679,56 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a3d3ab1b3498ca45832d8a8735f16e188_cgraph.png" border="0" usemap="#aclass_timeshifts_a3d3ab1b3498ca45832d8a8735f16e188_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a3d3ab1b3498ca45832d8a8735f16e188_cgraph" id="aclass_timeshifts_a3d3ab1b3498ca45832d8a8735f16e188_cgraph">
-<area shape="rect" title=" " alt="" coords="5,728,163,755"/>
-<area shape="rect" href="class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="718,259,867,285"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="1235,765,1287,792"/>
-<area shape="rect" href="class_timeshifts.html#a715283a5be42b86ca70b4e468ccb2931" title=" " alt="" coords="687,715,899,741"/>
-<area shape="rect" href="class_timeshifts.html#a0753528955e94c43043cd7d68193f960" title=" " alt="" coords="455,563,609,589"/>
-<area shape="rect" href="class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="211,947,380,973"/>
-<area shape="rect" href="class_timer.html#a3614503158effc6668bc10001d75d20c" title=" " alt="" coords="249,997,342,1024"/>
-<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="979,512,1111,539"/>
-<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1656,411,1779,437"/>
-<area shape="rect" href="class_timeshifts.html#a5161a4c343623e92b4e26522ad7ee16a" title=" " alt="" coords="985,56,1104,83"/>
-<area shape="rect" href="lib_root_8hpp.html#accfb8dfb6ee42fa6845013a0cf121ac1" title="Get the mean of the peak of a histogram with one nice single peak." alt="" coords="989,309,1100,336"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a1efb60019dbe926cccb8410a806d73a9" title=" " alt="" coords="965,157,1124,184"/>
-<area shape="rect" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="1008,208,1081,235"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a0363984bdeb96360bcf8a0a13163f47a" title="Casts a number into unsigned Time." alt="" coords="1002,5,1087,32"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="985,411,1104,437"/>
-<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1673,1187,1762,1213"/>
-<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="1199,411,1324,437"/>
-<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="1412,233,1543,260"/>
-<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="1653,208,1782,235"/>
-<area shape="rect" href="lib_root_8hpp.html#ab8628517ea9ef7ded29d8e22be6f628f" title="Get which bin holds the X = 0." alt="" coords="1225,309,1297,336"/>
-<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="1216,360,1307,387"/>
-<area shape="rect" href="class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15" title=" " alt="" coords="684,563,901,589"/>
-<area shape="rect" href="class_timeshifts.html#a05ac31a6c49360d94eeff184dc896c6b" title=" " alt="" coords="684,512,901,539"/>
-<area shape="rect" href="class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="986,613,1103,640"/>
-<area shape="rect" href="class_timeshifts.html#a40254b2aa53028b1b5c941ee1cb3833d" title=" " alt="" coords="701,461,884,488"/>
-<area shape="rect" href="class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="441,1175,623,1201"/>
-<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="437,921,627,948"/>
-<area shape="rect" href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a" title=" " alt="" coords="441,972,623,999"/>
-<area shape="rect" href="class_files_manager.html#ac4d90f9590ed90fcbbe23557ae88c892" title=" " alt="" coords="428,1073,636,1100"/>
-<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="452,805,612,846"/>
-<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="717,1023,869,1049"/>
-<area shape="rect" href="class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="443,1023,621,1049"/>
-<area shape="rect" href="files__functions_8hpp.html#a8c014ea676bc34e0ec57b1aeb55af4c5" title=" " alt="" coords="723,1200,863,1227"/>
-<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="719,1149,866,1176"/>
-<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="1001,972,1088,999"/>
-<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="949,1073,1140,1100"/>
-<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="953,1124,1136,1151"/>
-<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="1189,972,1333,999"/>
-<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="1203,1175,1320,1201"/>
-<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="1620,1111,1815,1137"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="1188,1124,1335,1151"/>
-<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="1403,1048,1551,1075"/>
-<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="1222,1073,1301,1100"/>
-<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="1383,997,1572,1024"/>
-<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="1405,947,1550,973"/>
-<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="1426,1149,1529,1176"/>
-<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="1390,1200,1565,1227"/>
-<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="1402,1099,1553,1125"/>
-<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="1624,1048,1811,1075"/>
-<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="721,972,864,999"/>
+<area shape="rect" title=" " alt="" coords="5,680,163,707"/>
+<area shape="rect" href="class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="469,680,618,707"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="1223,1009,1275,1036"/>
+<area shape="rect" href="class_timeshifts.html#a715283a5be42b86ca70b4e468ccb2931" title=" " alt="" coords="437,376,649,403"/>
+<area shape="rect" href="class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="218,199,373,225"/>
+<area shape="rect" href="class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="211,1187,380,1213"/>
+<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="720,275,852,301"/>
+<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1395,275,1517,301"/>
+<area shape="rect" href="class_m_t_t_hist.html#a9c2f7d05c9f8506382211635b35bd97b" title=" " alt="" coords="733,832,839,859"/>
+<area shape="rect" href="class_timeshifts.html#a5161a4c343623e92b4e26522ad7ee16a" title=" " alt="" coords="727,883,845,909"/>
+<area shape="rect" href="class_peak_fitter.html#ae83803972d52d79a55f2af7b1dde0ae5" title=" " alt="" coords="709,984,863,1011"/>
+<area shape="rect" href="lib_root_8hpp.html#accfb8dfb6ee42fa6845013a0cf121ac1" title="Get the mean of the peak of a histogram with one nice single peak." alt="" coords="731,528,841,555"/>
+<area shape="rect" href="namespace_co_bazar.html#a030309d1b093093b5fd48a5f7734018e" title=" " alt="" coords="948,553,1069,580"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a1efb60019dbe926cccb8410a806d73a9" title=" " alt="" coords="707,1035,865,1061"/>
+<area shape="rect" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="749,680,823,707"/>
+<area shape="rect" href="class_m_t_t_hist.html#a5c8a398dfdd3fad0a4529453caf93bd2" title=" " alt="" coords="719,731,853,757"/>
+<area shape="rect" href="class_m_t_t_hist.html#a0412e3cb8d1db4278f3b09316d4ec139" title="Merges the histograms." alt="" coords="723,933,849,960"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="727,123,845,149"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1411,908,1501,935"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a02c5bf3a1c10d9b086ba64557fdb8995" title="Casts a number into unsigned Time." alt="" coords="727,781,845,808"/>
+<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="946,275,1071,301"/>
+<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="1184,275,1315,301"/>
+<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="1199,592,1299,619"/>
+<area shape="rect" href="namespace_co_bazar.html#a1e08093363d904d8875d5907b48464f0" title=" " alt="" coords="1193,541,1305,568"/>
+<area shape="rect" href="print_8hpp.html#a7c50c0690489629965f74c4921570ce5" title="Requires #define DEBUG or &#45;DDEBUG in the compile line." alt="" coords="977,971,1040,997"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="963,123,1054,149"/>
+<area shape="rect" href="class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15" title=" " alt="" coords="435,5,652,32"/>
+<area shape="rect" href="class_timeshifts.html#a1eaf31f737ca23292d92babdf2f21fd8" title=" " alt="" coords="435,173,652,200"/>
+<area shape="rect" href="class_m_t_t_hist.html#aa10c349eccd83edd9e5204e014b706c8" title="Copy Initialiser." alt="" coords="727,173,845,200"/>
+<area shape="rect" href="class_timeshifts.html#a7c87fcd3920ef2f785349c392890e795" title=" " alt="" coords="428,57,659,98"/>
+<area shape="rect" href="class_timeshifts.html#abf99e2b89b819a92e4891d1c3da4e704" title=" " alt="" coords="452,275,635,301"/>
+<area shape="rect" href="class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="453,1304,634,1331"/>
+<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="448,1035,639,1061"/>
+<area shape="rect" href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a" title=" " alt="" coords="452,1085,635,1112"/>
+<area shape="rect" href="class_files_manager.html#ac4d90f9590ed90fcbbe23557ae88c892" title=" " alt="" coords="439,1187,647,1213"/>
+<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="463,1238,623,1279"/>
+<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="710,1389,862,1416"/>
+<area shape="rect" href="class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="454,1405,633,1432"/>
+<area shape="rect" href="files__functions_8hpp.html#a0b6555f0818e33170e5c3c3c513d6b91" title=" " alt="" coords="716,1237,856,1264"/>
+<area shape="rect" href="lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07" title="Casts a number into an long." alt="" coords="744,1288,828,1315"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="713,1339,859,1365"/>
+<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="965,1339,1052,1365"/>
+<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="913,1288,1104,1315"/>
+<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="917,1389,1100,1416"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="1177,1187,1321,1213"/>
+<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="1191,1339,1308,1365"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="1176,1389,1323,1416"/>
+<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="1152,1237,1347,1264"/>
+<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="1210,1288,1289,1315"/>
+<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="715,1440,857,1467"/>
 </map>
 </div>
 
@@ -721,8 +794,8 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_timeshifts_a715283a5be42b86ca70b4e468ccb2931_cgraph.png" border="0" usemap="#aclass_timeshifts_a715283a5be42b86ca70b4e468ccb2931_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a715283a5be42b86ca70b4e468ccb2931_cgraph" id="aclass_timeshifts_a715283a5be42b86ca70b4e468ccb2931_cgraph">
 <area shape="rect" title=" " alt="" coords="5,56,217,83"/>
-<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="265,31,397,57"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="305,81,357,108"/>
+<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="265,31,397,57"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="305,81,357,108"/>
 <area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="445,31,571,57"/>
 <area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="619,31,749,57"/>
 <area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="797,5,927,32"/>
@@ -742,8 +815,104 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a250c8d12a357303853380350ce77aa81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a250c8d12a357303853380350ce77aa81">&#9670;&nbsp;</a></span>data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a>&gt; const&amp; Timeshifts::data </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_a250c8d12a357303853380350ce77aa81_icgraph.png" border="0" usemap="#aclass_timeshifts_a250c8d12a357303853380350ce77aa81_icgraph" alt=""/></div>
+<map name="aclass_timeshifts_a250c8d12a357303853380350ce77aa81_icgraph" id="aclass_timeshifts_a250c8d12a357303853380350ce77aa81_icgraph">
+<area shape="rect" title=" " alt="" coords="203,13,329,39"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#aceaa8e906e0257f450799026ec2269ca" title="legacy" alt="" coords="5,5,155,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad77934ca763db86895300f275f935e39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad77934ca763db86895300f275f935e39">&#9670;&nbsp;</a></span>dT_with_biggest_peak_finder() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timeshifts::dT_with_biggest_peak_finder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af97a362f9d3714a1483e0a18fdf26119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af97a362f9d3714a1483e0a18fdf26119">&#9670;&nbsp;</a></span>dT_with_biggest_peak_finder() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timeshifts::dT_with_biggest_peak_finder </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;&#160;</td>
+          <td class="paramname"><em>label</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_af97a362f9d3714a1483e0a18fdf26119_cgraph.png" border="0" usemap="#aclass_timeshifts_af97a362f9d3714a1483e0a18fdf26119_cgraph" alt=""/></div>
+<map name="aclass_timeshifts_af97a362f9d3714a1483e0a18fdf26119_cgraph" id="aclass_timeshifts_af97a362f9d3714a1483e0a18fdf26119_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,165,47"/>
+<area shape="rect" href="class_timeshifts.html#a7c87fcd3920ef2f785349c392890e795" title=" " alt="" coords="213,5,444,47"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="492,13,611,39"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="659,13,749,39"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="aea8a9a1e849fca3bf3712385bd2155c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea8a9a1e849fca3bf3712385bd2155c3">&#9670;&nbsp;</a></span>dT_with_raising_edge()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aea8a9a1e849fca3bf3712385bd2155c3">&#9670;&nbsp;</a></span>dT_with_raising_edge() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -768,8 +937,45 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a2f89468edaaaadc6d5e1c23282a0714d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f89468edaaaadc6d5e1c23282a0714d">&#9670;&nbsp;</a></span>dT_with_raising_edge() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timeshifts::dT_with_raising_edge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;&#160;</td>
+          <td class="paramname"><em>label</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_a2f89468edaaaadc6d5e1c23282a0714d_cgraph.png" border="0" usemap="#aclass_timeshifts_a2f89468edaaaadc6d5e1c23282a0714d_cgraph" alt=""/></div>
+<map name="aclass_timeshifts_a2f89468edaaaadc6d5e1c23282a0714d_cgraph" id="aclass_timeshifts_a2f89468edaaaadc6d5e1c23282a0714d_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,155,47"/>
+<area shape="rect" href="class_timeshifts.html#a7c87fcd3920ef2f785349c392890e795" title=" " alt="" coords="203,5,433,47"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="481,13,600,39"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="648,13,739,39"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="a2b3ce3e274b28b65f01e336efe99670e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b3ce3e274b28b65f01e336efe99670e">&#9670;&nbsp;</a></span>dT_with_RF()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3ce3e274b28b65f01e336efe99670e">&#9670;&nbsp;</a></span>dT_with_RF() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -791,6 +997,43 @@ Here is the caller graph for this function:</div>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="afac40edfb7b6eb8f630f328d31023d4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afac40edfb7b6eb8f630f328d31023d4f">&#9670;&nbsp;</a></span>dT_with_RF() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timeshifts::dT_with_RF </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;&#160;</td>
+          <td class="paramname"><em>label</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_afac40edfb7b6eb8f630f328d31023d4f_cgraph.png" border="0" usemap="#aclass_timeshifts_afac40edfb7b6eb8f630f328d31023d4f_cgraph" alt=""/></div>
+<map name="aclass_timeshifts_afac40edfb7b6eb8f630f328d31023d4f_cgraph" id="aclass_timeshifts_afac40edfb7b6eb8f630f328d31023d4f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,13,179,39"/>
+<area shape="rect" href="class_timeshifts.html#a7c87fcd3920ef2f785349c392890e795" title=" " alt="" coords="227,5,457,47"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="505,13,624,39"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="672,13,763,39"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -840,10 +1083,9 @@ Here is the call graph for this function:</div>
 <map name="aclass_timeshifts_a5c037c5bb4b409c3040982c451c6733d_cgraph" id="aclass_timeshifts_a5c037c5bb4b409c3040982c451c6733d_cgraph">
 <area shape="rect" title=" " alt="" coords="5,56,123,83"/>
 <area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="207,5,309,32"/>
-<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="171,107,345,133"/>
-<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="446,56,535,83"/>
+<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="171,56,345,83"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="446,81,535,108"/>
 <area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="393,5,588,32"/>
-<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="425,107,556,133"/>
 </map>
 </div>
 <div class="dynheader">
@@ -891,12 +1133,13 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a5161a4c343623e92b4e26522ad7ee16a_icgraph.png" border="0" usemap="#aclass_timeshifts_a5161a4c343623e92b4e26522ad7ee16a_icgraph" alt=""/></div>
 <map name="aclass_timeshifts_a5161a4c343623e92b4e26522ad7ee16a_icgraph" id="aclass_timeshifts_a5161a4c343623e92b4e26522ad7ee16a_icgraph">
-<area shape="rect" title=" " alt="" coords="449,56,568,83"/>
+<area shape="rect" title=" " alt="" coords="449,81,568,108"/>
 <area shape="rect" href="class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="241,5,391,32"/>
 <area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="231,56,401,83"/>
 <area shape="rect" href="_timeshifts_8hpp.html#aecdab429e75a8d9f7a38f3938d9a7173" title=" " alt="" coords="267,107,365,133"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="249,157,383,184"/>
 <area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="15,5,173,32"/>
-<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,56,183,83"/>
+<area shape="rect" href="class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="5,56,183,83"/>
 </map>
 </div>
 
@@ -928,8 +1171,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a0753528955e94c43043cd7d68193f960"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0753528955e94c43043cd7d68193f960">&#9670;&nbsp;</a></span>Initialize()</h2>
+<a id="a95e126cc70243c24a016af24652ecb0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95e126cc70243c24a016af24652ecb0b">&#9670;&nbsp;</a></span>Initialise()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -938,16 +1181,16 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Timeshifts::Initialize </td>
+          <td class="memname">bool Timeshifts::Initialise </td>
           <td>(</td>
           <td class="paramtype">bool const &amp;&#160;</td>
-          <td class="paramname"><em>initializeRaw</em> = <code>false</code>, </td>
+          <td class="paramname"><em>InitialiseRaw</em> = <code>false</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool const &amp;&#160;</td>
-          <td class="paramname"><em>initializeCorrected</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>InitialiseCorrected</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -964,39 +1207,41 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_timeshifts_a0753528955e94c43043cd7d68193f960_cgraph.png" border="0" usemap="#aclass_timeshifts_a0753528955e94c43043cd7d68193f960_cgraph" alt=""/></div>
-<map name="aclass_timeshifts_a0753528955e94c43043cd7d68193f960_cgraph" id="aclass_timeshifts_a0753528955e94c43043cd7d68193f960_cgraph">
-<area shape="rect" title=" " alt="" coords="5,132,160,159"/>
-<area shape="rect" href="class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15" title=" " alt="" coords="208,5,425,32"/>
-<area shape="rect" href="class_timeshifts.html#a05ac31a6c49360d94eeff184dc896c6b" title=" " alt="" coords="208,107,425,133"/>
-<area shape="rect" href="class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="481,56,598,83"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="480,208,599,235"/>
-<area shape="rect" href="class_timeshifts.html#a40254b2aa53028b1b5c941ee1cb3833d" title=" " alt="" coords="225,208,408,235"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="291,259,343,285"/>
-<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="473,107,605,133"/>
-<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1009,120,1131,147"/>
-<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="653,81,779,108"/>
-<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="827,56,957,83"/>
-<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="1005,44,1135,71"/>
-<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="1183,44,1261,71"/>
-<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="671,208,761,235"/>
+<div class="center"><img src="class_timeshifts_a95e126cc70243c24a016af24652ecb0b_cgraph.png" border="0" usemap="#aclass_timeshifts_a95e126cc70243c24a016af24652ecb0b_cgraph" alt=""/></div>
+<map name="aclass_timeshifts_a95e126cc70243c24a016af24652ecb0b_cgraph" id="aclass_timeshifts_a95e126cc70243c24a016af24652ecb0b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,157,160,184"/>
+<area shape="rect" href="class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15" title=" " alt="" coords="215,5,432,32"/>
+<area shape="rect" href="class_timeshifts.html#a1eaf31f737ca23292d92babdf2f21fd8" title=" " alt="" coords="215,107,432,133"/>
+<area shape="rect" href="class_m_t_t_hist.html#aa10c349eccd83edd9e5204e014b706c8" title="Copy Initialiser." alt="" coords="494,56,611,83"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="493,259,612,285"/>
+<area shape="rect" href="class_timeshifts.html#a7c87fcd3920ef2f785349c392890e795" title=" " alt="" coords="208,209,439,250"/>
+<area shape="rect" href="class_timeshifts.html#abf99e2b89b819a92e4891d1c3da4e704" title=" " alt="" coords="232,157,415,184"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="297,325,349,352"/>
+<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="487,208,619,235"/>
+<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1022,196,1145,223"/>
+<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="667,208,792,235"/>
+<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="840,259,971,285"/>
+<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="1019,272,1148,299"/>
+<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="1196,272,1275,299"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="684,259,775,285"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_timeshifts_a0753528955e94c43043cd7d68193f960_icgraph.png" border="0" usemap="#aclass_timeshifts_a0753528955e94c43043cd7d68193f960_icgraph" alt=""/></div>
-<map name="aclass_timeshifts_a0753528955e94c43043cd7d68193f960_icgraph" id="aclass_timeshifts_a0753528955e94c43043cd7d68193f960_icgraph">
-<area shape="rect" title=" " alt="" coords="211,31,365,57"/>
-<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,5,163,32"/>
-<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,56,151,83"/>
+<div class="center"><img src="class_timeshifts_a95e126cc70243c24a016af24652ecb0b_icgraph.png" border="0" usemap="#aclass_timeshifts_a95e126cc70243c24a016af24652ecb0b_icgraph" alt=""/></div>
+<map name="aclass_timeshifts_a95e126cc70243c24a016af24652ecb0b_icgraph" id="aclass_timeshifts_a95e126cc70243c24a016af24652ecb0b_icgraph">
+<area shape="rect" title=" " alt="" coords="220,56,375,83"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="10,5,167,32"/>
+<area shape="rect" href="class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,56,172,83"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="21,107,156,133"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a05ac31a6c49360d94eeff184dc896c6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05ac31a6c49360d94eeff184dc896c6b">&#9670;&nbsp;</a></span>InitializeCorrected()</h2>
+<a id="a1eaf31f737ca23292d92babdf2f21fd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eaf31f737ca23292d92babdf2f21fd8">&#9670;&nbsp;</a></span>InitialiseCorrected()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1005,7 +1250,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Timeshifts::InitializeCorrected </td>
+          <td class="memname">bool Timeshifts::InitialiseCorrected </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1020,13 +1265,13 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_cgraph.png" border="0" usemap="#aclass_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_cgraph" alt=""/></div>
-<map name="aclass_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_cgraph" id="aclass_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_cgraph">
+<div class="center"><img src="class_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_cgraph.png" border="0" usemap="#aclass_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_cgraph" alt=""/></div>
+<map name="aclass_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_cgraph" id="aclass_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_cgraph">
 <area shape="rect" title=" " alt="" coords="5,157,223,184"/>
-<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="271,68,403,95"/>
+<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="271,68,403,95"/>
 <area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="806,81,929,108"/>
-<area shape="rect" href="class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="278,183,395,209"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="277,233,396,260"/>
+<area shape="rect" href="class_m_t_t_hist.html#aa10c349eccd83edd9e5204e014b706c8" title="Copy Initialiser." alt="" coords="278,183,395,209"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="277,233,396,260"/>
 <area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="451,43,576,69"/>
 <area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="624,31,755,57"/>
 <area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="803,5,932,32"/>
@@ -1037,19 +1282,20 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_icgraph.png" border="0" usemap="#aclass_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_icgraph" alt=""/></div>
-<map name="aclass_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_icgraph" id="aclass_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_icgraph">
-<area shape="rect" title=" " alt="" coords="413,31,631,57"/>
-<area shape="rect" href="class_timeshifts.html#a0753528955e94c43043cd7d68193f960" title=" " alt="" coords="211,31,365,57"/>
-<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,5,163,32"/>
-<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,56,151,83"/>
+<div class="center"><img src="class_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_icgraph.png" border="0" usemap="#aclass_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_icgraph" alt=""/></div>
+<map name="aclass_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_icgraph" id="aclass_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_icgraph">
+<area shape="rect" title=" " alt="" coords="423,56,640,83"/>
+<area shape="rect" href="class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="220,56,375,83"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="10,5,167,32"/>
+<area shape="rect" href="class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,56,172,83"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="21,107,156,133"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a40254b2aa53028b1b5c941ee1cb3833d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40254b2aa53028b1b5c941ee1cb3833d">&#9670;&nbsp;</a></span>InitializeRaw()</h2>
+<a id="a7c87fcd3920ef2f785349c392890e795"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c87fcd3920ef2f785349c392890e795">&#9670;&nbsp;</a></span>InitialisePreferencesArrays()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1058,7 +1304,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Timeshifts::InitializeRaw </td>
+          <td class="memname">void Timeshifts::InitialisePreferencesArrays </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1073,28 +1319,80 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_cgraph.png" border="0" usemap="#aclass_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_cgraph" alt=""/></div>
-<map name="aclass_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_cgraph" id="aclass_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_cgraph">
-<area shape="rect" title=" " alt="" coords="5,132,188,159"/>
-<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="236,68,368,95"/>
-<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="771,81,894,108"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="243,183,361,209"/>
-<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="416,43,541,69"/>
-<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="589,31,720,57"/>
-<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="768,5,897,32"/>
-<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="945,5,1024,32"/>
-<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="433,183,524,209"/>
+<div class="center"><img src="class_timeshifts_a7c87fcd3920ef2f785349c392890e795_cgraph.png" border="0" usemap="#aclass_timeshifts_a7c87fcd3920ef2f785349c392890e795_cgraph" alt=""/></div>
+<map name="aclass_timeshifts_a7c87fcd3920ef2f785349c392890e795_cgraph" id="aclass_timeshifts_a7c87fcd3920ef2f785349c392890e795_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,236,47"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="284,13,403,39"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="451,13,541,39"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_icgraph.png" border="0" usemap="#aclass_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_icgraph" alt=""/></div>
-<map name="aclass_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_icgraph" id="aclass_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_icgraph">
-<area shape="rect" title=" " alt="" coords="413,31,596,57"/>
-<area shape="rect" href="class_timeshifts.html#a0753528955e94c43043cd7d68193f960" title=" " alt="" coords="211,31,365,57"/>
-<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,5,163,32"/>
-<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,56,151,83"/>
+<div class="center"><img src="class_timeshifts_a7c87fcd3920ef2f785349c392890e795_icgraph.png" border="0" usemap="#aclass_timeshifts_a7c87fcd3920ef2f785349c392890e795_icgraph" alt=""/></div>
+<map name="aclass_timeshifts_a7c87fcd3920ef2f785349c392890e795_icgraph" id="aclass_timeshifts_a7c87fcd3920ef2f785349c392890e795_icgraph">
+<area shape="rect" title=" " alt="" coords="441,100,672,141"/>
+<area shape="rect" href="class_timeshifts.html#af97a362f9d3714a1483e0a18fdf26119" title=" " alt="" coords="227,5,387,47"/>
+<area shape="rect" href="class_timeshifts.html#a2f89468edaaaadc6d5e1c23282a0714d" title=" " alt="" coords="232,71,381,112"/>
+<area shape="rect" href="class_timeshifts.html#afac40edfb7b6eb8f630f328d31023d4f" title=" " alt="" coords="220,137,393,163"/>
+<area shape="rect" href="class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="229,187,384,214"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="10,137,167,163"/>
+<area shape="rect" href="class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,187,172,214"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="21,238,156,265"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abf99e2b89b819a92e4891d1c3da4e704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf99e2b89b819a92e4891d1c3da4e704">&#9670;&nbsp;</a></span>InitialiseRaw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Timeshifts::InitialiseRaw </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_cgraph.png" border="0" usemap="#aclass_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_cgraph" alt=""/></div>
+<map name="aclass_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_cgraph" id="aclass_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_cgraph">
+<area shape="rect" title=" " alt="" coords="5,157,188,184"/>
+<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="236,68,368,95"/>
+<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="771,81,894,108"/>
+<area shape="rect" href="class_m_t_t_hist.html#aa10c349eccd83edd9e5204e014b706c8" title="Copy Initialiser." alt="" coords="243,183,361,209"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="243,233,361,260"/>
+<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="416,43,541,69"/>
+<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="589,31,720,57"/>
+<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="768,5,897,32"/>
+<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="945,5,1024,32"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="433,233,524,260"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_icgraph.png" border="0" usemap="#aclass_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_icgraph" alt=""/></div>
+<map name="aclass_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_icgraph" id="aclass_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_icgraph">
+<area shape="rect" title=" " alt="" coords="423,56,605,83"/>
+<area shape="rect" href="class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="220,56,375,83"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="10,5,167,32"/>
+<area shape="rect" href="class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,56,172,83"/>
+<area shape="rect" href="class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="21,107,156,133"/>
 </map>
 </div>
 
@@ -1124,8 +1422,8 @@ Here is the call graph for this function:</div>
 <map name="aclass_timeshifts_a28163efe8d487669cf50d5f6e1060d71_cgraph" id="aclass_timeshifts_a28163efe8d487669cf50d5f6e1060d71_cgraph">
 <area shape="rect" title="Use this method to load timeshifts from a .dT file." alt="" coords="5,56,132,83"/>
 <area shape="rect" href="files__functions_8hpp.html#afd584978228fac5fae283c12837378dd" title=" " alt="" coords="185,5,294,32"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="213,56,265,83"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="180,107,299,133"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="213,56,265,83"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="180,107,299,133"/>
 <area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="347,107,437,133"/>
 </map>
 </div>
@@ -1138,7 +1436,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="class_clover_spectra.html#abe2f37c6b8c698dcdf72731cc315f5b7" title=" " alt="" coords="463,5,680,32"/>
 <area shape="rect" href="class_faster2_root.html#a3953ee6d843802ca12997e146fd7046d" title=" " alt="" coords="470,56,673,83"/>
 <area shape="rect" href="class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="488,107,655,133"/>
-<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="237,5,415,32"/>
+<area shape="rect" href="class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="237,5,415,32"/>
 <area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="259,56,393,83"/>
 <area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="5,56,189,83"/>
 </map>
@@ -1223,6 +1521,32 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a9d484aa685afb43084c90117326a2375"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d484aa685afb43084c90117326a2375">&#9670;&nbsp;</a></span>periodRF_ns()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Timeshifts::periodRF_ns </td>
+          <td>(</td>
+          <td class="paramtype">int const &amp;&#160;</td>
+          <td class="paramname"><em>period_ns</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a0ab2718e733f94acda46780191295e3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ab2718e733f94acda46780191295e3b">&#9670;&nbsp;</a></span>rebin()</h2>
 
@@ -1264,6 +1588,8 @@ Here is the call graph for this function:</div>
 <area shape="rect" title=" " alt="" coords="5,31,136,57"/>
 <area shape="rect" href="lib_co_8hpp.html#a3b8ddb099e22657a31515fbcd8d1bf67" title=" " alt="" coords="195,5,271,32"/>
 <area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="184,56,281,83"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="329,56,432,83"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="480,56,587,83"/>
 </map>
 </div>
 
@@ -1546,7 +1872,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_timeshifts_acca1130b271301c5477d4b4a23ae4e5b_cgraph.png" border="0" usemap="#aclass_timeshifts_acca1130b271301c5477d4b4a23ae4e5b_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_acca1130b271301c5477d4b4a23ae4e5b_cgraph" id="aclass_timeshifts_acca1130b271301c5477d4b4a23ae4e5b_cgraph">
 <area shape="rect" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="5,210,197,237"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="566,7,618,34"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="566,7,618,34"/>
 <area shape="rect" href="files__functions_8hpp.html#a658fd83a6ed34994ff0742273a3cc358" title=" " alt="" coords="524,159,660,186"/>
 <area shape="rect" href="class_timeshifts.html#a6206d2b698c88e80bc42bdf4b51fce14" title="Set the multiplicity gate for the events used for coincidence timeshift calculation." alt="" coords="285,261,431,287"/>
 <area shape="rect" href="class_timeshifts.html#ab877131bc1bd7394f55c3d46729ac9e6" title="Use setName instead. Set output file name of the timeshifts data." alt="" coords="272,210,444,237"/>
@@ -1602,7 +1928,7 @@ Here is the call graph for this function:</div>
 <map name="aclass_timeshifts_ac2c3e8e47598e28d49932a3720a6fd58_cgraph" id="aclass_timeshifts_ac2c3e8e47598e28d49932a3720a6fd58_cgraph">
 <area shape="rect" title="Set RF offset (synonymous to Timeshifts::setRFShift)" alt="" coords="5,5,180,32"/>
 <area shape="rect" href="class_r_f___manager.html#ac56cba54c3c01c70e45b40093e3d1a89" title=" " alt="" coords="228,5,403,32"/>
-<area shape="rect" href="class_r_f___manager.html#afd7204c9141bc2556b195a93e757508e" title=" " alt="" coords="451,5,599,32"/>
+<area shape="rect" href="class_r_f___manager.html#a6f647860bac9370bed96fa4bd88db9a5" title=" " alt="" coords="451,5,599,32"/>
 </map>
 </div>
 
@@ -1648,7 +1974,7 @@ Here is the call graph for this function:</div>
 <area shape="rect" title="Set RF offset (synonymous to Timeshifts::setRFShift)" alt="" coords="5,31,201,57"/>
 <area shape="rect" href="class_r_f___manager.html#ac56cba54c3c01c70e45b40093e3d1a89" title=" " alt="" coords="249,5,424,32"/>
 <area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="292,56,381,83"/>
-<area shape="rect" href="class_r_f___manager.html#afd7204c9141bc2556b195a93e757508e" title=" " alt="" coords="472,5,620,32"/>
+<area shape="rect" href="class_r_f___manager.html#a6f647860bac9370bed96fa4bd88db9a5" title=" " alt="" coords="472,5,620,32"/>
 </map>
 </div>
 
@@ -1693,7 +2019,7 @@ Here is the call graph for this function:</div>
 <map name="aclass_timeshifts_af6cb9cffa9322eabb7fe712c6e6ae798_cgraph" id="aclass_timeshifts_af6cb9cffa9322eabb7fe712c6e6ae798_cgraph">
 <area shape="rect" title="Set RF shift (synonymous to Timeshifts::setRFOffset)" alt="" coords="5,5,168,32"/>
 <area shape="rect" href="class_r_f___manager.html#ac56cba54c3c01c70e45b40093e3d1a89" title=" " alt="" coords="216,5,391,32"/>
-<area shape="rect" href="class_r_f___manager.html#afd7204c9141bc2556b195a93e757508e" title=" " alt="" coords="439,5,587,32"/>
+<area shape="rect" href="class_r_f___manager.html#a6f647860bac9370bed96fa4bd88db9a5" title=" " alt="" coords="439,5,587,32"/>
 </map>
 </div>
 
@@ -1801,7 +2127,7 @@ Here is the call graph for this function:</div>
 <area shape="rect" title="Set the time window in ns." alt="" coords="5,56,231,83"/>
 <area shape="rect" href="class_timeshifts.html#a304c1076d703a78153cfe72d61b28425" title="Setup the time window for the coincidence in ns." alt="" coords="279,31,504,57"/>
 <area shape="rect" href="_hit_8hpp.html#a04b1f65fe07e6d731225feecab2b66f6" title="Casts a number into unsigned Time_ns." alt="" coords="336,81,447,108"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="571,5,623,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="571,5,623,32"/>
 <area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="552,56,641,83"/>
 </map>
 </div>
@@ -1831,7 +2157,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_timeshifts_a304c1076d703a78153cfe72d61b28425_cgraph.png" border="0" usemap="#aclass_timeshifts_a304c1076d703a78153cfe72d61b28425_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a304c1076d703a78153cfe72d61b28425_cgraph" id="aclass_timeshifts_a304c1076d703a78153cfe72d61b28425_cgraph">
 <area shape="rect" title="Setup the time window for the coincidence in ns." alt="" coords="5,31,231,57"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="297,5,349,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="297,5,349,32"/>
 <area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="279,56,368,83"/>
 </map>
 </div>
@@ -1885,10 +2211,10 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_timeshifts_a89dbca371bce4601ee60122f544faf95_cgraph.png" border="0" usemap="#aclass_timeshifts_a89dbca371bce4601ee60122f544faf95_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a89dbca371bce4601ee60122f544faf95_cgraph" id="aclass_timeshifts_a89dbca371bce4601ee60122f544faf95_cgraph">
 <area shape="rect" title=" " alt="" coords="5,81,213,108"/>
-<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="261,5,361,32"/>
-<area shape="rect" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="275,56,348,83"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="285,107,337,133"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a0363984bdeb96360bcf8a0a13163f47a" title="Casts a number into unsigned Time." alt="" coords="269,157,354,184"/>
+<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="270,5,370,32"/>
+<area shape="rect" href="lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="283,56,357,83"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="294,107,346,133"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a02c5bf3a1c10d9b086ba64557fdb8995" title="Casts a number into unsigned Time." alt="" coords="261,157,379,184"/>
 </map>
 </div>
 
@@ -1922,35 +2248,37 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_abef7234fe827ae3c7758788cf22b6921_cgraph.png" border="0" usemap="#aclass_timeshifts_abef7234fe827ae3c7758788cf22b6921_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_abef7234fe827ae3c7758788cf22b6921_cgraph" id="aclass_timeshifts_abef7234fe827ae3c7758788cf22b6921_cgraph">
-<area shape="rect" title=" " alt="" coords="5,255,196,281"/>
-<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="245,68,389,95"/>
-<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="475,144,592,171"/>
-<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="917,179,1112,205"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="244,255,391,281"/>
-<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="459,331,607,357"/>
-<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="278,356,357,383"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="291,407,343,433"/>
-<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="439,5,628,32"/>
-<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="461,68,606,95"/>
-<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="970,59,1059,85"/>
-<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="721,153,824,180"/>
-<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="685,103,860,129"/>
-<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1204,287,1335,313"/>
-<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="458,255,609,281"/>
-<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="679,356,866,383"/>
-<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="676,407,869,433"/>
-<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="925,375,1104,401"/>
-<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1160,404,1379,431"/>
-<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1191,338,1348,379"/>
-<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1427,219,1617,245"/>
-<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1430,269,1614,296"/>
-<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1430,320,1614,347"/>
-<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1430,371,1614,397"/>
-<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1440,421,1604,448"/>
-<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1427,472,1617,499"/>
-<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1665,421,1749,448"/>
-<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="707,255,838,281"/>
-<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="965,255,1065,281"/>
+<area shape="rect" title=" " alt="" coords="5,377,196,403"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="273,275,417,302"/>
+<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="286,73,403,99"/>
+<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="692,117,887,143"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="271,351,418,378"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="495,402,643,429"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="1683,326,1735,353"/>
+<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="305,503,384,530"/>
+<area shape="rect" href="class_r_f___manager.html#a78e21e4d50e83b6cbede7d47cb931f77" title=" " alt="" coords="244,554,445,581"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="695,193,884,219"/>
+<area shape="rect" href="vector__functions_8hpp.html#a1351ef703b7cf695131924cc97eb6374" title=" " alt="" coords="523,199,614,226"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="496,250,641,277"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="979,193,1069,219"/>
+<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="517,98,620,125"/>
+<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="702,54,877,81"/>
+<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="493,351,644,378"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="696,351,883,378"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="693,402,886,429"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="935,351,1113,378"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1161,351,1380,378"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1192,285,1349,327"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1205,234,1336,261"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1428,301,1619,327"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1431,351,1615,378"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1431,199,1615,226"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1431,250,1615,277"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1441,98,1605,125"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1429,149,1618,175"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1667,98,1751,125"/>
+<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="724,245,855,271"/>
+<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="974,245,1074,271"/>
 </map>
 </div>
 <div class="dynheader">
@@ -1997,38 +2325,40 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_aaef5b6fdd23be94ed37a2b4e7fe47b48_cgraph.png" border="0" usemap="#aclass_timeshifts_aaef5b6fdd23be94ed37a2b4e7fe47b48_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_aaef5b6fdd23be94ed37a2b4e7fe47b48_cgraph" id="aclass_timeshifts_aaef5b6fdd23be94ed37a2b4e7fe47b48_cgraph">
-<area shape="rect" title=" " alt="" coords="5,157,157,184"/>
-<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="257,107,344,133"/>
-<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="205,208,396,235"/>
-<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="209,157,392,184"/>
-<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="445,107,589,133"/>
-<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="459,56,576,83"/>
-<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="876,161,1071,188"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="444,157,591,184"/>
-<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="659,360,807,387"/>
-<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="478,208,557,235"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="491,309,543,336"/>
-<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="639,157,828,184"/>
-<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="661,208,806,235"/>
-<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1163,95,1253,121"/>
-<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="682,107,785,133"/>
-<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="886,5,1061,32"/>
-<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1389,281,1520,308"/>
-<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="658,309,809,336"/>
-<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="880,357,1067,384"/>
-<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="877,408,1070,435"/>
-<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1119,369,1297,396"/>
-<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1345,399,1564,425"/>
-<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1376,333,1533,374"/>
-<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1612,213,1803,240"/>
-<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1615,264,1799,291"/>
-<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1615,315,1799,341"/>
-<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1615,365,1799,392"/>
-<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1625,416,1789,443"/>
-<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1613,467,1802,493"/>
-<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1851,416,1935,443"/>
-<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="908,219,1039,245"/>
-<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="1158,219,1258,245"/>
+<area shape="rect" title=" " alt="" coords="5,209,157,236"/>
+<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="257,158,344,185"/>
+<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="205,260,396,286"/>
+<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="209,209,392,236"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="473,412,617,438"/>
+<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="486,94,603,121"/>
+<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="892,94,1087,121"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="471,209,618,236"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="695,297,843,324"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="1883,373,1935,400"/>
+<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="505,310,584,337"/>
+<area shape="rect" href="class_r_f___manager.html#a78e21e4d50e83b6cbede7d47cb931f77" title=" " alt="" coords="444,361,645,388"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="895,145,1084,172"/>
+<area shape="rect" href="vector__functions_8hpp.html#a1351ef703b7cf695131924cc97eb6374" title=" " alt="" coords="723,424,814,450"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="696,373,841,400"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1179,145,1269,172"/>
+<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="717,94,820,121"/>
+<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="902,44,1077,70"/>
+<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="693,246,844,273"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="896,348,1083,374"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="893,297,1086,324"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1135,322,1313,349"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1361,381,1580,408"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1392,315,1549,356"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1405,145,1536,172"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1628,348,1819,374"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1631,398,1815,425"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1631,449,1815,476"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1631,297,1815,324"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1641,246,1805,273"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1629,500,1818,526"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1867,246,1951,273"/>
+<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="924,196,1055,222"/>
+<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="1174,196,1274,222"/>
 </map>
 </div>
 <div class="dynheader">
@@ -2084,40 +2414,42 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a79fe955b7d1bbc12fd4c659691727df3_cgraph.png" border="0" usemap="#aclass_timeshifts_a79fe955b7d1bbc12fd4c659691727df3_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a79fe955b7d1bbc12fd4c659691727df3_cgraph" id="aclass_timeshifts_a79fe955b7d1bbc12fd4c659691727df3_cgraph">
-<area shape="rect" title=" " alt="" coords="5,132,184,159"/>
-<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="237,107,379,133"/>
-<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="232,157,384,184"/>
-<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="484,107,571,133"/>
-<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="432,208,623,235"/>
-<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="436,157,619,184"/>
-<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="672,107,816,133"/>
-<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="685,56,803,83"/>
-<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="1103,161,1297,188"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="671,157,817,184"/>
-<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="886,360,1034,387"/>
-<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="705,208,783,235"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="718,309,770,336"/>
-<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="865,157,1055,184"/>
-<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="887,208,1033,235"/>
-<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1390,95,1479,121"/>
-<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="909,107,1011,133"/>
-<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="1113,5,1287,32"/>
-<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1616,281,1747,308"/>
-<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="885,309,1035,336"/>
-<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="1107,357,1293,384"/>
-<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="1103,408,1297,435"/>
-<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1345,369,1524,396"/>
-<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1572,399,1791,425"/>
-<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1603,333,1760,374"/>
-<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1839,213,2029,240"/>
-<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1842,264,2026,291"/>
-<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1842,315,2026,341"/>
-<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1842,365,2026,392"/>
-<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1852,416,2016,443"/>
-<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1839,467,2029,493"/>
-<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="2077,416,2161,443"/>
-<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="1135,219,1265,245"/>
-<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="1385,219,1485,245"/>
+<area shape="rect" title=" " alt="" coords="5,184,184,210"/>
+<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="237,158,379,185"/>
+<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="232,209,384,236"/>
+<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="484,158,571,185"/>
+<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="432,260,623,286"/>
+<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="436,209,619,236"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="699,412,843,438"/>
+<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="713,94,830,121"/>
+<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="1119,94,1313,121"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="698,209,845,236"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="921,297,1069,324"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="2109,373,2161,400"/>
+<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="732,310,811,337"/>
+<area shape="rect" href="class_r_f___manager.html#a78e21e4d50e83b6cbede7d47cb931f77" title=" " alt="" coords="671,361,872,388"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="1121,145,1311,172"/>
+<area shape="rect" href="vector__functions_8hpp.html#a1351ef703b7cf695131924cc97eb6374" title=" " alt="" coords="950,424,1041,450"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="923,373,1068,400"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1406,145,1495,172"/>
+<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="944,94,1047,121"/>
+<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="1129,44,1303,70"/>
+<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="920,246,1071,273"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="1123,348,1309,374"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="1119,297,1313,324"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1361,322,1540,349"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1588,381,1807,408"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1619,315,1776,356"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1632,145,1763,172"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1855,348,2045,374"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1858,398,2042,425"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1858,449,2042,476"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1858,297,2042,324"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1868,246,2032,273"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1855,500,2045,526"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="2093,246,2177,273"/>
+<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="1151,196,1281,222"/>
+<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="1401,196,1501,222"/>
 </map>
 </div>
 <div class="dynheader">
@@ -2172,48 +2504,51 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a21dc1e7bf232c6b0637b16aa04e43701_cgraph.png" border="0" usemap="#aclass_timeshifts_a21dc1e7bf232c6b0637b16aa04e43701_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a21dc1e7bf232c6b0637b16aa04e43701_cgraph" id="aclass_timeshifts_a21dc1e7bf232c6b0637b16aa04e43701_cgraph">
-<area shape="rect" title=" " alt="" coords="5,251,175,278"/>
-<area shape="rect" href="class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="236,48,417,75"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="965,124,1017,151"/>
-<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="231,175,422,202"/>
-<area shape="rect" href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a" title=" " alt="" coords="235,226,418,252"/>
-<area shape="rect" href="class_files_manager.html#ac4d90f9590ed90fcbbe23557ae88c892" title=" " alt="" coords="223,276,431,303"/>
-<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="694,193,854,234"/>
-<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="479,378,631,404"/>
-<area shape="rect" href="class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="237,428,416,455"/>
-<area shape="rect" href="files__functions_8hpp.html#a8c014ea676bc34e0ec57b1aeb55af4c5" title=" " alt="" coords="485,74,625,100"/>
-<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="481,23,628,50"/>
-<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="731,302,817,328"/>
-<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="679,352,869,379"/>
-<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="683,403,865,430"/>
-<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="919,428,1063,455"/>
-<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="932,479,1049,506"/>
-<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="1349,376,1544,403"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="917,378,1064,404"/>
-<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="1133,275,1281,302"/>
-<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="951,276,1030,303"/>
-<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="1112,530,1301,556"/>
-<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="1134,378,1279,404"/>
-<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1637,542,1726,568"/>
-<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="1155,428,1258,455"/>
-<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="1359,631,1534,658"/>
-<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1863,436,1993,463"/>
-<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="1131,479,1282,506"/>
-<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="1353,322,1540,348"/>
-<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="1350,271,1543,298"/>
-<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1592,320,1771,347"/>
-<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1819,319,2037,346"/>
-<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1849,370,2007,412"/>
-<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="2085,251,2276,278"/>
-<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="2089,302,2273,328"/>
-<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="2089,352,2273,379"/>
-<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="2089,403,2273,430"/>
-<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="2099,454,2263,480"/>
-<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="2086,504,2275,531"/>
-<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="2324,454,2408,480"/>
-<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="1381,479,1512,506"/>
-<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="1631,479,1731,506"/>
-<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="483,428,626,455"/>
+<area shape="rect" title=" " alt="" coords="5,639,175,665"/>
+<area shape="rect" href="class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="236,107,417,133"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="2356,183,2408,209"/>
+<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="231,664,422,691"/>
+<area shape="rect" href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a" title=" " alt="" coords="235,715,418,741"/>
+<area shape="rect" href="class_files_manager.html#ac4d90f9590ed90fcbbe23557ae88c892" title=" " alt="" coords="223,765,431,792"/>
+<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="247,817,407,858"/>
+<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="479,512,631,539"/>
+<area shape="rect" href="class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="237,563,416,589"/>
+<area shape="rect" href="files__functions_8hpp.html#a0b6555f0818e33170e5c3c3c513d6b91" title=" " alt="" coords="485,157,625,184"/>
+<area shape="rect" href="lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07" title="Casts a number into an long." alt="" coords="513,5,597,32"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="481,107,628,133"/>
+<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="731,512,817,539"/>
+<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="679,309,869,336"/>
+<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="683,461,865,488"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="946,157,1090,184"/>
+<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="959,461,1077,488"/>
+<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="1365,461,1560,488"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="945,360,1091,387"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="1168,259,1316,285"/>
+<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="979,259,1057,285"/>
+<area shape="rect" href="class_r_f___manager.html#a78e21e4d50e83b6cbede7d47cb931f77" title=" " alt="" coords="917,309,1119,336"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="1368,411,1557,437"/>
+<area shape="rect" href="vector__functions_8hpp.html#a1351ef703b7cf695131924cc97eb6374" title=" " alt="" coords="1197,208,1287,235"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="1169,157,1315,184"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1653,461,1742,488"/>
+<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="1191,461,1293,488"/>
+<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="1375,563,1550,589"/>
+<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="1167,309,1317,336"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="1369,208,1556,235"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="1366,259,1559,285"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1608,259,1787,285"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1835,317,2053,344"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1865,251,2023,293"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1879,368,2009,395"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="2101,309,2292,336"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="2105,360,2289,387"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="2105,208,2289,235"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="2105,259,2289,285"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="2115,664,2279,691"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="2102,411,2291,437"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="2340,664,2424,691"/>
+<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="1397,360,1528,387"/>
+<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="1647,360,1747,387"/>
+<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="483,563,626,589"/>
 </map>
 </div>
 <div class="dynheader">
@@ -2261,24 +2596,25 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="447,81,565,108"/>
 <area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="236,196,383,223"/>
 <area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="675,5,777,32"/>
-<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="639,56,813,83"/>
+<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="639,107,813,133"/>
 <area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="923,107,1013,133"/>
 <area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="871,5,1065,32"/>
-<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1157,189,1288,216"/>
 <area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="432,259,580,285"/>
 <area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="431,196,581,223"/>
-<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="633,259,819,285"/>
-<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="629,309,823,336"/>
-<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="879,277,1057,304"/>
-<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1113,307,1332,333"/>
-<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1144,241,1301,282"/>
-<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1380,121,1571,148"/>
-<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1383,172,1567,199"/>
-<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1383,223,1567,249"/>
-<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1383,273,1567,300"/>
-<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1393,324,1557,351"/>
-<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1381,375,1570,401"/>
-<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1619,324,1703,351"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="633,309,819,336"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="629,259,823,285"/>
+<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="879,309,1057,336"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="1635,461,1687,488"/>
+<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1113,309,1332,336"/>
+<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="1144,403,1301,445"/>
+<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="1157,208,1288,235"/>
+<area shape="rect" href="class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef" title="Load CRRC4 data." alt="" coords="1380,360,1571,387"/>
+<area shape="rect" href="class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b" title="Load QDC1 data." alt="" coords="1383,411,1567,437"/>
+<area shape="rect" href="class_faster_reader.html#a94fd509a6352735984a20c03fb046254" title="Load qdc2 data." alt="" coords="1383,461,1567,488"/>
+<area shape="rect" href="class_faster_reader.html#afa7cbf1733ff68804ef4f7706bf58416" title="Load qdc3 data." alt="" coords="1383,512,1567,539"/>
+<area shape="rect" href="class_faster_reader.html#ad2d7d3acd1a874f09f44f2adfa69d42c" title="Load RF data." alt="" coords="1393,563,1557,589"/>
+<area shape="rect" href="class_faster_reader.html#a3ee31b1e6a4c60d72f8d989d2e08bcdf" title="Load Trapez data." alt="" coords="1381,309,1570,336"/>
+<area shape="rect" href="_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362" title="Casts a number into unsigned ADC." alt="" coords="1619,563,1703,589"/>
 <area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="661,157,791,184"/>
 <area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="918,157,1018,184"/>
 </map>
@@ -2363,6 +2699,7 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Used to create. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000019">Todo:</a></b></dt><dd>caption</dd></dl>
 
 </div>
 </div>
@@ -2398,56 +2735,56 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a6520eab7a8824f41a2be8517d83fc835_cgraph.png" border="0" usemap="#aclass_timeshifts_a6520eab7a8824f41a2be8517d83fc835_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a6520eab7a8824f41a2be8517d83fc835_cgraph" id="aclass_timeshifts_a6520eab7a8824f41a2be8517d83fc835_cgraph">
-<area shape="rect" title="To verify an already calculated timeshift .dT data file." alt="" coords="5,389,140,416"/>
-<area shape="rect" href="class_timeshifts.html#a0753528955e94c43043cd7d68193f960" title=" " alt="" coords="195,157,350,184"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="1157,397,1209,424"/>
-<area shape="rect" href="class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="188,495,357,521"/>
-<area shape="rect" href="class_timer.html#a3614503158effc6668bc10001d75d20c" title=" " alt="" coords="226,545,319,572"/>
-<area shape="rect" href="class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15" title=" " alt="" coords="405,5,623,32"/>
-<area shape="rect" href="class_timeshifts.html#a05ac31a6c49360d94eeff184dc896c6b" title=" " alt="" coords="405,107,623,133"/>
-<area shape="rect" href="class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="688,208,805,235"/>
-<area shape="rect" href="class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="687,157,806,184"/>
-<area shape="rect" href="class_timeshifts.html#a40254b2aa53028b1b5c941ee1cb3833d" title=" " alt="" coords="423,56,605,83"/>
-<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="681,56,813,83"/>
-<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1318,132,1441,159"/>
-<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="903,157,1029,184"/>
-<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="1117,208,1248,235"/>
-<area shape="rect" href="class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="1315,233,1444,260"/>
-<area shape="rect" href="_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="1561,233,1639,260"/>
-<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="921,208,1011,235"/>
-<area shape="rect" href="class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="423,419,605,445"/>
-<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="419,520,609,547"/>
-<area shape="rect" href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a" title=" " alt="" coords="423,571,605,597"/>
-<area shape="rect" href="class_files_manager.html#ac4d90f9590ed90fcbbe23557ae88c892" title=" " alt="" coords="410,621,618,648"/>
-<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="886,361,1046,402"/>
-<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="671,723,823,749"/>
-<area shape="rect" href="class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="425,469,603,496"/>
-<area shape="rect" href="files__functions_8hpp.html#a8c014ea676bc34e0ec57b1aeb55af4c5" title=" " alt="" coords="677,473,817,500"/>
-<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="673,524,820,551"/>
-<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="923,723,1009,749"/>
-<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="871,773,1061,800"/>
-<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="875,824,1057,851"/>
-<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="1111,799,1255,825"/>
-<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="1124,900,1241,927"/>
-<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="1503,893,1697,920"/>
-<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="1109,748,1256,775"/>
-<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="1305,647,1453,673"/>
-<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="1143,697,1222,724"/>
-<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="1505,840,1695,867"/>
-<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="1307,748,1452,775"/>
-<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1790,869,1879,896"/>
-<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="1328,900,1431,927"/>
-<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="1513,1001,1687,1028"/>
-<area shape="rect" href="_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="2016,740,2147,767"/>
-<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="1304,697,1455,724"/>
-<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="1507,604,1693,631"/>
-<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="1503,655,1697,681"/>
-<area shape="rect" href="class_faster_reader.html#a0b2cd239d03d34e69b10418cb6292858" title="Treats faster data." alt="" coords="1745,649,1924,676"/>
-<area shape="rect" href="class_faster_reader.html#a64fb4fc3d241141f5d27df99906780fc" title="Treats the faster data groups." alt="" coords="1972,623,2191,649"/>
-<area shape="rect" href="class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed" title="Treat the specific part of data (QDC gates, spectro ADC ...)" alt="" coords="2003,674,2160,715"/>
-<area shape="rect" href="class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="1535,788,1665,815"/>
-<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="1785,788,1885,815"/>
-<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="675,575,818,601"/>
+<area shape="rect" title="To verify an already calculated timeshift .dT data file." alt="" coords="5,253,140,280"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="469,5,572,32"/>
+<area shape="rect" href="class_timeshifts.html#a5161a4c343623e92b4e26522ad7ee16a" title=" " alt="" coords="213,203,332,229"/>
+<area shape="rect" href="class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="195,253,350,280"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="1197,528,1249,555"/>
+<area shape="rect" href="class_detectors.html#abdba5d8991ded8844de7900d8e64d788" title=" " alt="" coords="207,659,339,685"/>
+<area shape="rect" href="lib_root_8hpp.html#a3a6fcc9d0f4e35bf7088b99991905138" title="Shifts a histogram by &#39;shift&#39; X value." alt="" coords="243,20,302,47"/>
+<area shape="rect" href="class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="188,608,357,635"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="707,5,813,32"/>
+<area shape="rect" href="class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15" title=" " alt="" coords="412,107,629,133"/>
+<area shape="rect" href="class_timeshifts.html#a1eaf31f737ca23292d92babdf2f21fd8" title=" " alt="" coords="412,208,629,235"/>
+<area shape="rect" href="class_m_t_t_hist.html#aa10c349eccd83edd9e5204e014b706c8" title="Copy Initialiser." alt="" coords="701,56,819,83"/>
+<area shape="rect" href="class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="701,309,819,336"/>
+<area shape="rect" href="class_timeshifts.html#a7c87fcd3920ef2f785349c392890e795" title=" " alt="" coords="405,259,636,301"/>
+<area shape="rect" href="class_timeshifts.html#abf99e2b89b819a92e4891d1c3da4e704" title=" " alt="" coords="429,157,612,184"/>
+<area shape="rect" href="class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="694,183,826,209"/>
+<area shape="rect" href="class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="1405,183,1528,209"/>
+<area shape="rect" href="class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="917,183,1042,209"/>
+<area shape="rect" href="class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="1158,208,1289,235"/>
+<area shape="rect" href="_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="934,309,1025,336"/>
+<area shape="rect" href="class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="430,696,611,723"/>
+<area shape="rect" href="class_files_manager.html#a2b619786ba65a7ac1e701fc61e2409ae" title=" " alt="" coords="425,848,616,875"/>
+<area shape="rect" href="class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a" title=" " alt="" coords="429,477,612,504"/>
+<area shape="rect" href="class_files_manager.html#ac4d90f9590ed90fcbbe23557ae88c892" title=" " alt="" coords="417,579,625,605"/>
+<area shape="rect" href="class_m_t_object.html#a35c02650eb403bd54e867f93bb26fc47" title=" " alt="" coords="441,630,601,671"/>
+<area shape="rect" href="class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="684,781,836,808"/>
+<area shape="rect" href="class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="431,797,610,824"/>
+<area shape="rect" href="files__functions_8hpp.html#a0b6555f0818e33170e5c3c3c513d6b91" title=" " alt="" coords="690,731,830,757"/>
+<area shape="rect" href="lib_co_8hpp.html#a695ead22582e1da41880ee67c2c61d07" title="Casts a number into an long." alt="" coords="718,579,802,605"/>
+<area shape="rect" href="files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="687,629,833,656"/>
+<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="936,781,1023,808"/>
+<area shape="rect" href="class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="884,731,1075,757"/>
+<area shape="rect" href="class_timeshifts.html#a32079af1345e308feddd58e0950998ab" title=" " alt="" coords="888,832,1071,859"/>
+<area shape="rect" href="class_coinc_builder.html#a6fbd7caa8ab6ac6bbf4d14eb094b6417" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="1151,629,1295,656"/>
+<area shape="rect" href="class_timeshifts.html#a5c037c5bb4b409c3040982c451c6733d" title=" " alt="" coords="1165,883,1282,909"/>
+<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="1609,807,1804,833"/>
+<area shape="rect" href="_timeshifts_8hpp.html#a202a57630e2aa9744043c30964b64bcd" title=" " alt="" coords="1150,832,1297,859"/>
+<area shape="rect" href="class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756" title="Main method. Extract the next hit from the data file and fills the Hit *m_hit object." alt="" coords="1393,680,1541,707"/>
+<area shape="rect" href="_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92" title="Casts a number into unsigned NRJ." alt="" coords="1184,781,1263,808"/>
+<area shape="rect" href="class_r_f___manager.html#a78e21e4d50e83b6cbede7d47cb931f77" title=" " alt="" coords="1123,579,1324,605"/>
+<area shape="rect" href="class_coinc_builder.html#a7bb003c28d9b4b43bbd10a09771226ae" title=" " alt="" coords="1372,781,1561,808"/>
+<area shape="rect" href="vector__functions_8hpp.html#a1351ef703b7cf695131924cc97eb6374" title=" " alt="" coords="1421,579,1512,605"/>
+<area shape="rect" href="class_coinc_builder.html#ad777d92b1242cafdb594e3fb315ae3a9" title=" " alt="" coords="1394,629,1539,656"/>
+<area shape="rect" href="_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="1662,933,1751,960"/>
+<area shape="rect" href="class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="1415,883,1518,909"/>
+<area shape="rect" href="class_r_f___manager.html#a15356af241ce65874d01c9479ab48aa4" title=" " alt="" coords="1379,984,1554,1011"/>
+<area shape="rect" href="class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="1391,832,1542,859"/>
+<area shape="rect" href="class_faster_reader.html#aef9fb9be5f288b88bdb17616aab801bd" title="Replace the standard ReadSimple if the faster data contains groups First of all, the m_write variable..." alt="" coords="1613,655,1800,681"/>
+<area shape="rect" href="class_faster_reader.html#a60f1f638732c48c1b78cfe4dcd23d39b" title="Read triggerless data." alt="" coords="1610,705,1803,732"/>
+<area shape="rect" href="class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="689,832,831,859"/>
 </map>
 </div>
 
@@ -2481,13 +2818,25 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_a79f5376cf7071865b264989ef46d886f_cgraph.png" border="0" usemap="#aclass_timeshifts_a79f5376cf7071865b264989ef46d886f_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a79f5376cf7071865b264989ef46d886f_cgraph" id="aclass_timeshifts_a79f5376cf7071865b264989ef46d886f_cgraph">
-<area shape="rect" title="To write down the histograms and the data." alt="" coords="5,31,136,57"/>
-<area shape="rect" href="class_timeshifts.html#ad19fdc64b6f8dd54e94665a7170a49a7" title="To write down the data." alt="" coords="393,5,556,32"/>
-<area shape="rect" href="class_timeshifts.html#a579c8583bd37c3988ffb5cb6df7849f7" title="To write down the histograms." alt="" coords="184,56,345,83"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="675,56,727,83"/>
-<area shape="rect" href="class_m_t_t_hist.html#ae9163b5b4afca69cfdebdf2cf60064cd" title=" " alt="" coords="415,107,534,133"/>
-<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="604,107,799,133"/>
-<area shape="rect" href="class_m_t_object.html#a3350577ca839e2abdcd4d6f6449a1408" title=" " alt="" coords="605,157,798,184"/>
+<area shape="rect" title="To write down the histograms and the data." alt="" coords="5,284,136,311"/>
+<area shape="rect" href="class_timeshifts.html#ad19fdc64b6f8dd54e94665a7170a49a7" title="To write down the data." alt="" coords="184,259,347,285"/>
+<area shape="rect" href="class_timeshifts.html#a579c8583bd37c3988ffb5cb6df7849f7" title="To write down the histograms." alt="" coords="587,309,748,336"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="1056,284,1108,311"/>
+<area shape="rect" href="class_file.html#af4dee1c79bf496d505633211177c6ce3" title=" " alt="" coords="395,157,532,184"/>
+<area shape="rect" href="class_filename.html#a2d925b1dc8e2afbd09e729be3f3603b2" title=" " alt="" coords="580,56,755,83"/>
+<area shape="rect" href="class_file.html#a8f6a2ccec2d48112847c89541d13bc10" title=" " alt="" coords="618,157,717,184"/>
+<area shape="rect" href="string__functions_8hpp.html#a9b6b51fed28f705d129f02193ce89b3c" title="Remove the first substr to the string if found." alt="" coords="834,5,906,32"/>
+<area shape="rect" href="class_filename.html#aaebbbc0d7ac17984013bffbd87d05763" title=" " alt="" coords="803,56,937,83"/>
+<area shape="rect" href="class_file.html#a6b15fde4d8bb49099cdf7f27c4f36fae" title=" " alt="" coords="825,208,915,235"/>
+<area shape="rect" href="class_path.html#aa2f2b14aafcc3fc3626c243fcc6574dc" title=" " alt="" coords="823,107,917,133"/>
+<area shape="rect" href="class_filename.html#a46cfb960345a190b3971553c65f702b4" title=" " alt="" coords="807,157,933,184"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="1033,169,1131,196"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="1038,220,1126,247"/>
+<area shape="rect" href="files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="1241,195,1312,221"/>
+<area shape="rect" href="files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="1227,245,1327,272"/>
+<area shape="rect" href="class_path.html#a4e4d7d7670941e8ddc58261a4fac0916" title=" " alt="" coords="1043,107,1121,133"/>
+<area shape="rect" href="class_m_t_t_hist.html#a84c745f09bbccc075589f8531c4454e3" title="MTTHIST_MONO." alt="" coords="811,360,929,387"/>
+<area shape="rect" href="class_m_t_object.html#a3350577ca839e2abdcd4d6f6449a1408" title=" " alt="" coords="985,360,1179,387"/>
 </map>
 </div>
 
@@ -2521,8 +2870,21 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_timeshifts_ad19fdc64b6f8dd54e94665a7170a49a7_cgraph.png" border="0" usemap="#aclass_timeshifts_ad19fdc64b6f8dd54e94665a7170a49a7_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_ad19fdc64b6f8dd54e94665a7170a49a7_cgraph" id="aclass_timeshifts_ad19fdc64b6f8dd54e94665a7170a49a7_cgraph">
-<area shape="rect" title="To write down the data." alt="" coords="5,5,168,32"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="216,5,268,32"/>
+<area shape="rect" title="To write down the data." alt="" coords="5,19,168,45"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="829,5,881,32"/>
+<area shape="rect" href="class_file.html#af4dee1c79bf496d505633211177c6ce3" title=" " alt="" coords="216,56,353,83"/>
+<area shape="rect" href="class_filename.html#a2d925b1dc8e2afbd09e729be3f3603b2" title=" " alt="" coords="401,56,576,83"/>
+<area shape="rect" href="class_file.html#a8f6a2ccec2d48112847c89541d13bc10" title=" " alt="" coords="439,157,538,184"/>
+<area shape="rect" href="string__functions_8hpp.html#a9b6b51fed28f705d129f02193ce89b3c" title="Remove the first substr to the string if found." alt="" coords="655,31,727,57"/>
+<area shape="rect" href="class_filename.html#aaebbbc0d7ac17984013bffbd87d05763" title=" " alt="" coords="624,81,759,108"/>
+<area shape="rect" href="class_file.html#a6b15fde4d8bb49099cdf7f27c4f36fae" title=" " alt="" coords="646,132,737,159"/>
+<area shape="rect" href="class_path.html#aa2f2b14aafcc3fc3626c243fcc6574dc" title=" " alt="" coords="644,183,739,209"/>
+<area shape="rect" href="class_filename.html#a46cfb960345a190b3971553c65f702b4" title=" " alt="" coords="628,233,755,260"/>
+<area shape="rect" href="class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="807,81,904,108"/>
+<area shape="rect" href="files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="811,132,899,159"/>
+<area shape="rect" href="files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="967,107,1037,133"/>
+<area shape="rect" href="files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="952,157,1052,184"/>
+<area shape="rect" href="class_path.html#a4e4d7d7670941e8ddc58261a4fac0916" title=" " alt="" coords="816,183,895,209"/>
 </map>
 </div>
 <div class="dynheader">
@@ -2566,10 +2928,9 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_timeshifts_a579c8583bd37c3988ffb5cb6df7849f7_cgraph.png" border="0" usemap="#aclass_timeshifts_a579c8583bd37c3988ffb5cb6df7849f7_cgraph" alt=""/></div>
 <map name="aclass_timeshifts_a579c8583bd37c3988ffb5cb6df7849f7_cgraph" id="aclass_timeshifts_a579c8583bd37c3988ffb5cb6df7849f7_cgraph">
 <area shape="rect" title="To write down the histograms." alt="" coords="5,31,167,57"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="453,5,505,32"/>
-<area shape="rect" href="class_m_t_t_hist.html#ae9163b5b4afca69cfdebdf2cf60064cd" title=" " alt="" coords="215,56,333,83"/>
-<area shape="rect" href="class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="381,56,576,83"/>
-<area shape="rect" href="class_m_t_object.html#a3350577ca839e2abdcd4d6f6449a1408" title=" " alt="" coords="382,107,575,133"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="452,5,504,32"/>
+<area shape="rect" href="class_m_t_t_hist.html#a84c745f09bbccc075589f8531c4454e3" title="MTTHIST_MONO." alt="" coords="215,56,333,83"/>
+<area shape="rect" href="class_m_t_object.html#a3350577ca839e2abdcd4d6f6449a1408" title=" " alt="" coords="381,56,575,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -2585,6 +2946,34 @@ Here is the caller graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a30bd7826eb2ae66e9c7784b819270daa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30bd7826eb2ae66e9c7784b819270daa">&#9670;&nbsp;</a></span>m_biggest_peak_finder</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Timeshifts::m_biggest_peak_finder = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6e446f34754a8d3e2abbba5818cf03cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e446f34754a8d3e2abbba5818cf03cb">&#9670;&nbsp;</a></span>m_biggest_peak_finder_label</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;bool&gt; Timeshifts::m_biggest_peak_finder_label</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a4dd5b35444834dca94e9432619e24c47"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4dd5b35444834dca94e9432619e24c47">&#9670;&nbsp;</a></span>m_bins_per_ns</h2>
 
@@ -2611,7 +3000,7 @@ Here is the caller graph for this function:</div>
 <div class="line">    {<span class="stringliteral">&quot;bgo&quot;</span>,    2.}, </div>
 <div class="line">    {<span class="stringliteral">&quot;eden&quot;</span>,   2.}, </div>
 <div class="line">    {<span class="stringliteral">&quot;RF&quot;</span>,    10.}, </div>
-<div class="line">    {<span class="stringliteral">&quot;paris&quot;</span>, 10.}, </div>
+<div class="line">    {<span class="stringliteral">&quot;paris&quot;</span>,  5.}, </div>
 <div class="line">    {<span class="stringliteral">&quot;dssd&quot;</span>,  0.5}</div>
 <div class="line">  }</div>
 </div><!-- fragment -->
@@ -2773,8 +3162,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a025f10899ed33302dee33f2e98d40b3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a025f10899ed33302dee33f2e98d40b3a">&#9670;&nbsp;</a></span>m_energySpectraInitialized</h2>
+<a id="acbb1007ca0f5bccdf9106fa2ec66feca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbb1007ca0f5bccdf9106fa2ec66feca">&#9670;&nbsp;</a></span>m_energySpectraInitialised</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2783,7 +3172,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Timeshifts::m_energySpectraInitialized = false</td>
+          <td class="memname">bool Timeshifts::m_energySpectraInitialised = false</td>
         </tr>
       </table>
   </td>
@@ -2839,8 +3228,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ad6bda9ede24fd63e7a43ad12bd861a98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6bda9ede24fd63e7a43ad12bd861a98">&#9670;&nbsp;</a></span>m_initialized</h2>
+<a id="a154847a6a1b23616fed6306401856c9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a154847a6a1b23616fed6306401856c9b">&#9670;&nbsp;</a></span>m_folder_treated</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2849,7 +3238,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Timeshifts::m_initialized = false</td>
+          <td class="memname">bool Timeshifts::m_folder_treated = false</td>
         </tr>
       </table>
   </td>
@@ -2861,8 +3250,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ae3b75fce1fde95be5ca45b20cfbb8350"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3b75fce1fde95be5ca45b20cfbb8350">&#9670;&nbsp;</a></span>m_initializedCorrected</h2>
+<a id="ac331936db248b471aaa4df09edf8733d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac331936db248b471aaa4df09edf8733d">&#9670;&nbsp;</a></span>m_histo_ref_VS_RF</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2871,7 +3260,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Timeshifts::m_initializedCorrected = false</td>
+          <td class="memname"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt;TH1F&gt; Timeshifts::m_histo_ref_VS_RF</td>
         </tr>
       </table>
   </td>
@@ -2883,8 +3272,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a8c7b6bfda5c2dacef69d0b7657d89fce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c7b6bfda5c2dacef69d0b7657d89fce">&#9670;&nbsp;</a></span>m_initializedRaw</h2>
+<a id="a39db58224dbfadac0d6c7d9d48facb55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39db58224dbfadac0d6c7d9d48facb55">&#9670;&nbsp;</a></span>m_histo_ref_vs_RF_VS_mult</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2893,7 +3282,95 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Timeshifts::m_initializedRaw = false</td>
+          <td class="memname"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt;TH2F&gt; Timeshifts::m_histo_ref_vs_RF_VS_mult</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe6360328fb6c3da9d0e6910aa88cfc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe6360328fb6c3da9d0e6910aa88cfc3">&#9670;&nbsp;</a></span>m_histograms_VS_RF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_m_t_t_hist_8hpp.html#ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</a>&lt;TH1F&gt; Timeshifts::m_histograms_VS_RF</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac8c39336ff11fe341a775a6964cf2294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c39336ff11fe341a775a6964cf2294">&#9670;&nbsp;</a></span>m_Initialised</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Timeshifts::m_Initialised = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab8aaf500b3e321fb5914ca4fb2de748"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab8aaf500b3e321fb5914ca4fb2de748">&#9670;&nbsp;</a></span>m_InitialisedCorrected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Timeshifts::m_InitialisedCorrected = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9fe51a29188e20ab8b1870ce7218c1f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe51a29188e20ab8b1870ce7218c1f7">&#9670;&nbsp;</a></span>m_InitialisedRaw</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Timeshifts::m_InitialisedRaw = false</td>
         </tr>
       </table>
   </td>
@@ -2993,14 +3470,14 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a53bfccafc7cfbd834754b752a9a4c313"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53bfccafc7cfbd834754b752a9a4c313">&#9670;&nbsp;</a></span>m_nb_shifts_RF_peak</h2>
+<a id="a9a5daa2e56c25139ce85e4c5447b28a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a5daa2e56c25139ce85e4c5447b28a0">&#9670;&nbsp;</a></span>m_nb_shifts_RF_peak</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>&gt; Timeshifts::m_nb_shifts_RF_peak</td>
+          <td class="memname">std::vector&lt;int&gt; Timeshifts::m_nb_shifts_RF_peak</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -3106,6 +3583,50 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">std::string Timeshifts::m_outRoot = &quot;timeshifts.root&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9a517ba9d26652b9caef66639ab6c92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9a517ba9d26652b9caef66639ab6c92">&#9670;&nbsp;</a></span>m_pref_arrays_init</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Timeshifts::m_pref_arrays_init = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a59308d3bfde01354a6c37ffe4ca635e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59308d3bfde01354a6c37ffe4ca635e8">&#9670;&nbsp;</a></span>m_rf_period</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_hit_8hpp.html#a808363c27c30b41f6ed40b62ebde3ee7">Time</a> Timeshifts::m_rf_period = 0</td>
         </tr>
       </table>
   </td>
@@ -3273,6 +3794,72 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="af80ba291868bb2890bbb06304681f6a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af80ba291868bb2890bbb06304681f6a2">&#9670;&nbsp;</a></span>m_time_spectra_corrected_bidim_RF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt;TH2F&gt; Timeshifts::m_time_spectra_corrected_bidim_RF</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a170b35d11634ea783d45821092960e78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a170b35d11634ea783d45821092960e78">&#9670;&nbsp;</a></span>m_time_spectra_corrected_RF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_m_t_t_hist_8hpp.html#ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</a>&lt;TH1F&gt; Timeshifts::m_time_spectra_corrected_RF</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a487371ab334a8651058a6ea114fc3f46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a487371ab334a8651058a6ea114fc3f46">&#9670;&nbsp;</a></span>m_time_spectra_reference_RF_corrected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_m_t_t_hist.html">MTTHist</a>&lt;TH1F&gt; Timeshifts::m_time_spectra_reference_RF_corrected</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ad10b3d7e16a2d51d3e73d7f2e7b1e0fa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad10b3d7e16a2d51d3e73d7f2e7b1e0fa">&#9670;&nbsp;</a></span>m_timeshifts</h2>
 
@@ -3350,6 +3937,28 @@ Here is the caller graph for this function:</div>
       <table class="memname">
         <tr>
           <td class="memname">std::string Timeshifts::m_ts_outdir = &quot;Timeshifts/&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7c1290feea6b17e155dc5fcfc21031cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c1290feea6b17e155dc5fcfc21031cd">&#9670;&nbsp;</a></span>m_use_rf</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Timeshifts::m_use_rf = false</td>
         </tr>
       </table>
   </td>

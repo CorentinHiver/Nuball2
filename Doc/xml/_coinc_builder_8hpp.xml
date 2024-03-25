@@ -7,26 +7,20 @@
     <includedby refid="_faster2_root_8hpp" local="yes">lib/Modules/Faster2Root.hpp</includedby>
     <includedby refid="_timeshifts_8hpp" local="yes">lib/Modules/Timeshifts.hpp</includedby>
     <incdepgraph>
-      <node id="28">
+      <node id="20">
         <label>glob.h</label>
       </node>
       <node id="53">
         <label>TH1S.h</label>
       </node>
-      <node id="11">
-        <label>iomanip</label>
-      </node>
-      <node id="10">
+      <node id="25">
         <label>functional</label>
       </node>
-      <node id="17">
-        <label>queue</label>
+      <node id="6">
+        <label>iomanip</label>
       </node>
-      <node id="33">
-        <label>random.hpp</label>
-        <link refid="random_8hpp"/>
-        <childnode refid="34" relation="include">
-        </childnode>
+      <node id="29">
+        <label>queue</label>
       </node>
       <node id="71">
         <label>TTreeIndex.h</label>
@@ -101,17 +95,20 @@
         <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="38">
+      <node id="21">
         <label>filesystem</label>
       </node>
       <node id="40">
         <label>TAxis.h</label>
       </node>
-      <node id="30">
-        <label>stdlib.h</label>
-      </node>
       <node id="69">
         <label>TThread.h</label>
+      </node>
+      <node id="22">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
       </node>
       <node id="52">
         <label>TH1D.h</label>
@@ -119,16 +116,16 @@
       <node id="65">
         <label>TStopwatch.h</label>
       </node>
-      <node id="19">
+      <node id="30">
         <label>stdexcept</label>
       </node>
-      <node id="16">
+      <node id="28">
         <label>numeric</label>
       </node>
-      <node id="20">
+      <node id="15">
         <label>string</label>
       </node>
-      <node id="13">
+      <node id="8">
         <label>map</label>
       </node>
       <node id="73">
@@ -142,45 +139,21 @@
         <link refid="lib_co_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
         <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
         <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
@@ -194,11 +167,15 @@
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
@@ -206,15 +183,27 @@
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
       </node>
       <node id="44">
         <label>TF1.h</label>
       </node>
-      <node id="32">
+      <node id="4">
         <label>print.hpp</label>
         <link refid="print_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
-      <node id="9">
+      <node id="19">
         <label>fstream</label>
       </node>
       <node id="43">
@@ -223,34 +212,42 @@
       <node id="67">
         <label>TStyle.h</label>
       </node>
-      <node id="4">
+      <node id="23">
         <label>any</label>
       </node>
-      <node id="36">
+      <node id="17">
         <label>files_functions.hpp</label>
         <link refid="files__functions_8hpp"/>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="38" relation="include">
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="12">
         <label>random</label>
       </node>
       <node id="63">
         <label>TROOT.h</label>
       </node>
-      <node id="31">
-        <label>string.h</label>
-      </node>
-      <node id="24">
+      <node id="34">
         <label>typeinfo</label>
+      </node>
+      <node id="38">
+        <label>ctime</label>
       </node>
       <node id="42">
         <label>TChain.h</label>
@@ -268,11 +265,11 @@
       <node id="68">
         <label>TSystem.h</label>
       </node>
-      <node id="26">
-        <label>vector</label>
-      </node>
-      <node id="21">
+      <node id="31">
         <label>stack</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
       </node>
       <node id="45">
         <label>TF2.h</label>
@@ -289,23 +286,33 @@
       <node id="57">
         <label>TKey.h</label>
       </node>
-      <node id="37">
+      <node id="9">
         <label>vector_functions.hpp</label>
         <link refid="vector__functions_8hpp"/>
-        <childnode refid="32" relation="include">
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="64">
         <label>TSpectrum.h</label>
       </node>
-      <node id="5">
+      <node id="24">
         <label>array</label>
       </node>
       <node id="48">
         <label>TFitResult.h</label>
       </node>
-      <node id="18">
+      <node id="16">
         <label>sstream</label>
+      </node>
+      <node id="11">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
       </node>
       <node id="60">
         <label>TMarker.h</label>
@@ -316,7 +323,7 @@
       <node id="54">
         <label>TH2.h</label>
       </node>
-      <node id="7">
+      <node id="37">
         <label>cstdlib</label>
       </node>
       <node id="51">
@@ -325,18 +332,22 @@
       <node id="58">
         <label>TLeaf.h</label>
       </node>
-      <node id="12">
+      <node id="5">
         <label>iostream</label>
       </node>
-      <node id="35">
+      <node id="13">
         <label>string_functions.hpp</label>
         <link refid="string__functions_8hpp"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="35">
         <label>unordered_map</label>
       </node>
       <node id="59">
@@ -351,8 +362,11 @@
       <node id="55">
         <label>TH2F.h</label>
       </node>
-      <node id="15">
+      <node id="27">
         <label>mutex</label>
+      </node>
+      <node id="36">
+        <label>csignal</label>
       </node>
       <node id="1">
         <label>lib/Classes/CoincBuilder.hpp</label>
@@ -370,7 +384,7 @@
         <childnode refid="72" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="32">
         <label>thread</label>
       </node>
       <node id="62">
@@ -379,32 +393,37 @@
       <node id="70">
         <label>TTree.h</label>
       </node>
-      <node id="6">
+      <node id="10">
         <label>algorithm</label>
       </node>
       <node id="47">
         <label>TFitResultPtr.h</label>
       </node>
-      <node id="29">
-        <label>stdio.h</label>
-      </node>
-      <node id="8">
+      <node id="14">
         <label>cstring</label>
       </node>
       <node id="49">
         <label>TGraph.h</label>
       </node>
-      <node id="14">
+      <node id="26">
         <label>memory</label>
       </node>
-      <node id="23">
+      <node id="33">
         <label>typeindex</label>
       </node>
-      <node id="27">
+      <node id="18">
         <label>dirent.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="6">
+        <label>lib/Modules/Faster2Histo.hpp</label>
+        <link refid="_faster2_histo_8hpp"/>
+      </node>
+      <node id="5">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
+      </node>
       <node id="2">
         <label>lib/Modules/CloverSpectra.hpp</label>
         <link refid="_clover_spectra_8hpp"/>
@@ -413,7 +432,7 @@
         <label>lib/Modules/Faster2Root.hpp</label>
         <link refid="_faster2_root_8hpp"/>
       </node>
-      <node id="5">
+      <node id="7">
         <label>lib/Modules/RunMatrixator.hpp</label>
         <link refid="_run_matrixator_8hpp"/>
       </node>
@@ -432,9 +451,13 @@
         <link refid="_timeshifts_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -477,7 +500,7 @@
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Attributes<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="46" refid="class_coinc_builder_1ac6bf8fbe3ea6f8ecf0b7d70a0be2a5d3" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref><sp/><ref refid="class_coinc_builder_1ac6bf8fbe3ea6f8ecf0b7d70a0be2a5d3" kindref="member">m_time_window</ref><sp/>=<sp/>500000;<sp/></highlight><highlight class="comment">//<sp/>500<sp/>000<sp/>ps<sp/>by<sp/>default<sp/>(ull<sp/>=<sp/>unsigned<sp/>long<sp/>long)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="class_coinc_builder_1ac6bf8fbe3ea6f8ecf0b7d70a0be2a5d3" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref><sp/><ref refid="class_coinc_builder_1ac6bf8fbe3ea6f8ecf0b7d70a0be2a5d3" kindref="member">m_time_window</ref><sp/>=<sp/>500000ll;<sp/></highlight><highlight class="comment">//<sp/>500<sp/>000<sp/>ps<sp/>by<sp/>default<sp/>(ll<sp/>=<sp/>long<sp/>long)</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="47"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"></highlight></codeline>
 <codeline lineno="49" refid="class_coinc_builder_1a6fbd7caa8ab6ac6bbf4d14eb094b6417" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_coinc_builder_1a6fbd7caa8ab6ac6bbf4d14eb094b6417" kindref="member">CoincBuilder::build</ref>(<ref refid="class_hit" kindref="compound">Hit</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>hit)</highlight></codeline>
@@ -489,14 +512,14 @@
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" kindref="member">m_event</ref><sp/>-&gt;<sp/>clear();</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>*<ref refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" kindref="member">m_event</ref><sp/>=<sp/><ref refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" kindref="member">m_last_hit</ref>;</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_coinc_builder_1a7bb003c28d9b4b43bbd10a09771226ae" kindref="member">coincidence</ref>(hit))</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Situation<sp/>1<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Case<sp/>1<sp/>:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>previous<sp/>and<sp/>current<sp/>hit<sp/>are<sp/>in<sp/>the<sp/>same<sp/>event.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>In<sp/>next<sp/>call,<sp/>we&apos;ll<sp/>check<sp/>if<sp/>the<sp/>next<sp/>hits<sp/>also<sp/>belong<sp/>to<sp/>this<sp/>event<sp/>(situations<sp/>1&apos;<sp/>or<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" kindref="member">m_event</ref><sp/>-&gt;<sp/>push_back(hit);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" kindref="member">m_event</ref><sp/>-&gt;<sp/><ref refid="vector__functions_8hpp_1a1351ef703b7cf695131924cc97eb6374" kindref="member">push_back</ref>(hit);</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_builder_1a81c56e91c1951d25faecf88f390b5bcb" kindref="member">m_status</ref><sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>Now,<sp/>the<sp/>event<sp/>is<sp/>being<sp/>filled</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Situation<sp/>0<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Case<sp/>0<sp/>:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>last<sp/>and<sp/>current<sp/>hits<sp/>aren&apos;t<sp/>in<sp/>the<sp/>same<sp/>event.</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>last<sp/>hit<sp/>is<sp/>therefore<sp/>a<sp/>single<sp/>hit,<sp/>alone<sp/>in<sp/>the<sp/>time<sp/>window</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_builder_1a5cce09bc1a95dd0bcaa4f857f1a1b3da" kindref="member">m_last_hit</ref><sp/>=<sp/>hit;<sp/></highlight><highlight class="comment">//<sp/>Building<sp/>next<sp/>event<sp/>based<sp/>on<sp/>the<sp/>last<sp/>hit</highlight><highlight class="normal"></highlight></codeline>
@@ -510,7 +533,7 @@
 <codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_coinc_builder_1a7bb003c28d9b4b43bbd10a09771226ae" kindref="member">coincidence</ref>(hit))</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Case<sp/>1&apos;<sp/>:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Hit<sp/>in<sp/>coincidence<sp/>with<sp/>the<sp/>previous<sp/>hits</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" kindref="member">m_event</ref><sp/>-&gt;<sp/>push_back(hit);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_builder_1a76749e4cc31025fde18f9cdbeb232cbf" kindref="member">m_event</ref><sp/>-&gt;<sp/><ref refid="vector__functions_8hpp_1a1351ef703b7cf695131924cc97eb6374" kindref="member">push_back</ref>(hit);</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Case<sp/>2<sp/>:<sp/></highlight><highlight class="normal"></highlight></codeline>

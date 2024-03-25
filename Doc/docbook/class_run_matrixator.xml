@@ -28,9 +28,9 @@ Collaboration diagram for RunMatrixator:<para>
 </listitem>
             <listitem><para>void <link linkend="_class_run_matrixator_1af360ec9f7686353b663ce0bdcfa3e2df">fillMatrixes</link> (<link linkend="_class_clovers">Clovers</link> const &amp;clovers, <link linkend="_class_event">Event</link> const &amp;event)</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_run_matrixator_1ad32109c5c279f520ce19602340aa2293">Initialize</link> ()</para>
+            <listitem><para>void <link linkend="_class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52">Initialise</link> ()</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_run_matrixator_1ae9e13b02718812681204cad70679385d">initialize_dontMatrixate</link> ()</para>
+            <listitem><para>void <link linkend="_class_run_matrixator_1a0ae1d8ed78f3b5d6b7ac64361772734d">Initialise_dontMatrixate</link> ()</para>
 </listitem>
             <listitem><para>void <link linkend="_class_run_matrixator_1ab294e0aa6a89ca1f191f335cae223d57">keepSingles</link> (bool const &amp;b=true)</para>
 </listitem>
@@ -237,15 +237,15 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_run_matrixator_1ad32109c5c279f520ce19602340aa2293"/>    <section>
-    <title>Initialize()</title>
-<indexterm><primary>Initialize</primary><secondary>RunMatrixator</secondary></indexterm>
-<indexterm><primary>RunMatrixator</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>void RunMatrixator::Initialize ( )</computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52"/>    <section>
+    <title>Initialise()</title>
+<indexterm><primary>Initialise</primary><secondary>RunMatrixator</secondary></indexterm>
+<indexterm><primary>RunMatrixator</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>void RunMatrixator::Initialise ( )</computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_run_matrixator_ad32109c5c279f520ce19602340aa2293_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_run_matrixator_a7254994e33c3a8a124a7fd4d67158a52_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -254,20 +254,20 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_run_matrixator_ad32109c5c279f520ce19602340aa2293_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_run_matrixator_a7254994e33c3a8a124a7fd4d67158a52_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_run_matrixator_1ae9e13b02718812681204cad70679385d"/>    <section>
-    <title>initialize_dontMatrixate()</title>
-<indexterm><primary>initialize_dontMatrixate</primary><secondary>RunMatrixator</secondary></indexterm>
-<indexterm><primary>RunMatrixator</primary><secondary>initialize_dontMatrixate</secondary></indexterm>
-<para><computeroutput>void RunMatrixator::initialize_dontMatrixate ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_class_run_matrixator_1a0ae1d8ed78f3b5d6b7ac64361772734d"/>    <section>
+    <title>Initialise_dontMatrixate()</title>
+<indexterm><primary>Initialise_dontMatrixate</primary><secondary>RunMatrixator</secondary></indexterm>
+<indexterm><primary>RunMatrixator</primary><secondary>Initialise_dontMatrixate</secondary></indexterm>
+<para><computeroutput>void RunMatrixator::Initialise_dontMatrixate ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_run_matrixator_ae9e13b02718812681204cad70679385d_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_run_matrixator_a0ae1d8ed78f3b5d6b7ac64361772734d_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -276,7 +276,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_run_matrixator_ae9e13b02718812681204cad70679385d_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_run_matrixator_a0ae1d8ed78f3b5d6b7ac64361772734d_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

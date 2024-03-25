@@ -1,12 +1,14 @@
-.TH "lib/Classes/SpectraAlignator.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/Analyse/SpectraAlignator.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-lib/Classes/SpectraAlignator.hpp
+lib/Analyse/SpectraAlignator.hpp
 .SH SYNOPSIS
 .br
 .PP
 \fC#include '\&.\&./libRoot\&.hpp'\fP
+.br
+\fC#include 'SpectraCo\&.hpp'\fP
 .br
 
 .SS "Classes"
@@ -19,7 +21,10 @@ lib/Classes/SpectraAlignator.hpp
 .RI "struct \fBMinimisator::NelderMeadParameters\fP"
 .br
 .ti -1c
-.RI "class \fBRecalibration\fP"
+.RI "class \fBObjectiveFunction\fP"
+.br
+.ti -1c
+.RI "class \fBObjectiveFunctionChi2\fP"
 .br
 .ti -1c
 .RI "class \fBSimplex\fP"
@@ -28,7 +33,7 @@ lib/Classes/SpectraAlignator.hpp
 .RI "class \fBSpectraAlignator\fP"
 .br
 .ti -1c
-.RI "class \fBSpectraCo\fP"
+.RI "class \fBTestObjectiveFunction\fP"
 .br
 .ti -1c
 .RI "class \fBVertice\fP"
@@ -55,35 +60,12 @@ lib/Classes/SpectraAlignator.hpp
 .RI "\fBVertice\fP \fBoperator*\fP (double const &constant, \fBVertice\fP const &vertice)"
 .br
 .ti -1c
-.RI "std::ostream & \fBoperator<<\fP (std::ostream &out, \fBRecalibration\fP const &recal)"
-.br
-.ti -1c
 .RI "std::ostream & \fBoperator<<\fP (std::ostream &out, \fBSimplex\fP const &simplex)"
 .br
 .ti -1c
 .RI "std::ostream & \fBoperator<<\fP (std::ostream &out, \fBVertice\fP const &vertice)"
 .br
 .in -1c
-.SH "Class Documentation"
-.PP 
-.SH "struct Minimisator::NelderMeadParameters"
-.PP 
-\fBClass Members:\fP
-.RS 4
-double \fIalpha\fP 
-.br
-.PP
-double \fIbeta\fP 
-.br
-.PP
-double \fIdelta\fP 
-.br
-.PP
-double \fIgamma\fP 
-.br
-.PP
-.RE
-.PP
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define MAX_ORDER2"
@@ -95,8 +77,6 @@ double \fIgamma\fP
 .SH "Function Documentation"
 .PP 
 .SS "\fBVertice\fP operator* (double const & constant, \fBVertice\fP const & vertice)"
-
-.SS "std::ostream& operator<< (std::ostream & out, \fBRecalibration\fP const & recal)"
 
 .SS "std::ostream& operator<< (std::ostream & out, \fBSimplex\fP const & simplex)"
 

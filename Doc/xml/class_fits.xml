@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_fits" kind="class" language="C++" prot="public">
+    <compoundname>Fits</compoundname>
+    <includes refid="_fit_8hpp" local="no">Fit.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_fits_1a73938005a651c73279b21c1057b8de15" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="class_fit" kindref="compound">Fit</ref> &gt;</type>
+        <definition>std::vector&lt;Fit&gt; Fits::m_fits</definition>
+        <argsstring></argsstring>
+        <name>m_fits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="165" column="15" bodyfile="lib/Classes/Fit.hpp" bodystart="165" bodyend="-1"/>
+        <referencedby refid="class_fits_1a637b0285a97a72bdf31a62ca9d947ac2" compoundref="_fit_8hpp" startline="156" endline="156">begin</referencedby>
+        <referencedby refid="class_fits_1a5bd5dd38c4d25851dbc247bcf890a19c" compoundref="_fit_8hpp" startline="160" endline="160">end</referencedby>
+        <referencedby refid="class_fits_1ad823ae7c11f6839c4a14faf48c0220f9" compoundref="_fit_8hpp" startline="143" endline="143">get</referencedby>
+        <referencedby refid="class_fits_1a98fe938f148e69b0436f8086059c2d41" compoundref="_fit_8hpp" startline="148" endline="148">operator[]</referencedby>
+        <referencedby refid="class_fits_1a0daee1f106c810c2c719927264b9dd8c" compoundref="_fit_8hpp" startline="138" endline="138">reserve</referencedby>
+        <referencedby refid="class_fits_1a2aa7593ccf9c3638a5a675b62b8863da" compoundref="_fit_8hpp" startline="137" endline="137">resize</referencedby>
+        <referencedby refid="class_fits_1a4993d8fe8d778f9a77c7bd9fc7cf3d4a" compoundref="_fit_8hpp" startline="139" endline="139">size</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_fits_1a63bd95e86bd3cec779d560cc2ec712f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Fits::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+<para>Returns the iterator to the start of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="158" column="8" bodyfile="lib/Classes/Fit.hpp" bodystart="158" bodyend="158"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a637b0285a97a72bdf31a62ca9d947ac2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Fits::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+<para>Returns the iterator to the start of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="156" column="8" bodyfile="lib/Classes/Fit.hpp" bodystart="156" bodyend="156"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1aa880b69de30904dd067fff783c264edf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Fits::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+<para>Returns the iterator to the end of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="162" column="8" bodyfile="lib/Classes/Fit.hpp" bodystart="162" bodyend="162"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a5bd5dd38c4d25851dbc247bcf890a19c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Fits::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+<para>Returns the iterator to the end of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="160" column="8" bodyfile="lib/Classes/Fit.hpp" bodystart="160" bodyend="160"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a165c99bd9cd192d2090559fb67e775fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>Fits::Fits</definition>
+        <argsstring>()=default</argsstring>
+        <name>Fits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="134" column="3"/>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1abcb7fa2410bddb246a10dc4768775dbb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Fits::Fits</definition>
+        <argsstring>(int const &amp;_size)</argsstring>
+        <name>Fits</name>
+        <param>
+          <type>int const &amp;</type>
+          <declname>_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="135" column="3" bodyfile="lib/Classes/Fit.hpp" bodystart="135" bodyend="135"/>
+        <references refid="class_fits_1a2aa7593ccf9c3638a5a675b62b8863da" compoundref="_fit_8hpp" startline="137" endline="137">resize</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a6f2b8882580d600cde2a475cd317880b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Fits::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <briefdescription>
+<para>Accesses the vector of fits. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="145" column="9" bodyfile="lib/Classes/Fit.hpp" bodystart="145" bodyend="145"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1ad823ae7c11f6839c4a14faf48c0220f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Fits::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+<para>Accesses the vector of fits. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="143" column="15" bodyfile="lib/Classes/Fit.hpp" bodystart="143" bodyend="143"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a3f056945a7e353d9df1ba5532a69706d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Fits::operator[]</definition>
+        <argsstring>(size_t const &amp;i)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+<para>Directly access the fit : </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="150" column="9" bodyfile="lib/Classes/Fit.hpp" bodystart="150" bodyend="150"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a98fe938f148e69b0436f8086059c2d41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Fits::operator[]</definition>
+        <argsstring>(size_t const &amp;i) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+<para>Directly access the fit : </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="148" column="15" bodyfile="lib/Classes/Fit.hpp" bodystart="148" bodyend="148"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a0daee1f106c810c2c719927264b9dd8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Fits::reserve</definition>
+        <argsstring>(size_t const &amp;i=0)</argsstring>
+        <name>reserve</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>i</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="138" column="8" bodyfile="lib/Classes/Fit.hpp" bodystart="138" bodyend="138"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a2aa7593ccf9c3638a5a675b62b8863da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Fits::resize</definition>
+        <argsstring>(size_t const &amp;i=0)</argsstring>
+        <name>resize</name>
+        <param>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>i</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="137" column="8" bodyfile="lib/Classes/Fit.hpp" bodystart="137" bodyend="137"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+        <referencedby refid="class_fits_1abcb7fa2410bddb246a10dc4768775dbb" compoundref="_fit_8hpp" startline="135" endline="135">Fits</referencedby>
+        <referencedby refid="class_calibrator_1ae81772276c36ab528b8147fa583356fd" compoundref="_calibrator_8hpp" startline="44" endline="51">Calibrator::Initialise</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a4993d8fe8d778f9a77c7bd9fc7cf3d4a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Fits::size</definition>
+        <argsstring>()</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="139" column="8" bodyfile="lib/Classes/Fit.hpp" bodystart="139" bodyend="139"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      <memberdef kind="function" id="class_fits_1a289960dbf5f79d490ce3b4bef67a2c09" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Fits::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Classes/Fit.hpp" line="140" column="8" bodyfile="lib/Classes/Fit.hpp" bodystart="140" bodyend="140"/>
+        <references refid="class_fits_1a73938005a651c73279b21c1057b8de15" compoundref="_fit_8hpp" startline="165">m_fits</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Classes/Fit.hpp" line="131" column="1" bodyfile="lib/Classes/Fit.hpp" bodystart="132" bodyend="166"/>
+    <listofallmembers>
+      <member refid="class_fits_1a637b0285a97a72bdf31a62ca9d947ac2" prot="public" virt="non-virtual"><scope>Fits</scope><name>begin</name></member>
+      <member refid="class_fits_1a63bd95e86bd3cec779d560cc2ec712f7" prot="public" virt="non-virtual"><scope>Fits</scope><name>begin</name></member>
+      <member refid="class_fits_1a5bd5dd38c4d25851dbc247bcf890a19c" prot="public" virt="non-virtual"><scope>Fits</scope><name>end</name></member>
+      <member refid="class_fits_1aa880b69de30904dd067fff783c264edf" prot="public" virt="non-virtual"><scope>Fits</scope><name>end</name></member>
+      <member refid="class_fits_1a165c99bd9cd192d2090559fb67e775fd" prot="public" virt="non-virtual"><scope>Fits</scope><name>Fits</name></member>
+      <member refid="class_fits_1abcb7fa2410bddb246a10dc4768775dbb" prot="public" virt="non-virtual"><scope>Fits</scope><name>Fits</name></member>
+      <member refid="class_fits_1ad823ae7c11f6839c4a14faf48c0220f9" prot="public" virt="non-virtual"><scope>Fits</scope><name>get</name></member>
+      <member refid="class_fits_1a6f2b8882580d600cde2a475cd317880b" prot="public" virt="non-virtual"><scope>Fits</scope><name>get</name></member>
+      <member refid="class_fits_1a73938005a651c73279b21c1057b8de15" prot="private" virt="non-virtual"><scope>Fits</scope><name>m_fits</name></member>
+      <member refid="class_fits_1a98fe938f148e69b0436f8086059c2d41" prot="public" virt="non-virtual"><scope>Fits</scope><name>operator[]</name></member>
+      <member refid="class_fits_1a3f056945a7e353d9df1ba5532a69706d" prot="public" virt="non-virtual"><scope>Fits</scope><name>operator[]</name></member>
+      <member refid="class_fits_1a0daee1f106c810c2c719927264b9dd8c" prot="public" virt="non-virtual"><scope>Fits</scope><name>reserve</name></member>
+      <member refid="class_fits_1a2aa7593ccf9c3638a5a675b62b8863da" prot="public" virt="non-virtual"><scope>Fits</scope><name>resize</name></member>
+      <member refid="class_fits_1a4993d8fe8d778f9a77c7bd9fc7cf3d4a" prot="public" virt="non-virtual"><scope>Fits</scope><name>size</name></member>
+      <member refid="class_fits_1a289960dbf5f79d490ce3b4bef67a2c09" prot="public" virt="non-virtual"><scope>Fits</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

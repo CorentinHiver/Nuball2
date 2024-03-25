@@ -3,6 +3,11 @@
 <title>Timeshifts Class Reference</title>
 <indexterm><primary>Timeshifts</primary></indexterm>
 <para>
+
+<para>Calculates the time difference between all detectors and a reference detector. </para>
+ 
+</para>
+<para>
 <computeroutput>#include &lt;Timeshifts.hpp&gt;</computeroutput>
 </para>
 Collaboration diagram for Timeshifts:<para>
@@ -15,6 +20,15 @@ Collaboration diagram for Timeshifts:<para>
     </informalfigure>
 </para>
 <simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_timeshifts_1_1_empty_error">EmptyError</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_timeshifts_1_1_not_found_error">NotFoundError</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
             <listitem><para>bool <link linkend="_class_timeshifts_1a3d3ab1b3498ca45832d8a8735f16e188">calculate</link> (std::string const &amp;folder, int const &amp;nb_files=-1)</para>
@@ -23,9 +37,19 @@ Collaboration diagram for Timeshifts:<para>
 </listitem>
             <listitem><para>bool <link linkend="_class_timeshifts_1a715283a5be42b86ca70b4e468ccb2931">CheckParameters</link> ()</para>
 </listitem>
+            <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; const  &amp; <link linkend="_class_timeshifts_1a250c8d12a357303853380350ce77aa81">data</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_timeshifts_1ad77934ca763db86895300f275f935e39">dT_with_biggest_peak_finder</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_timeshifts_1af97a362f9d3714a1483e0a18fdf26119">dT_with_biggest_peak_finder</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;label)</para>
+</listitem>
             <listitem><para>void <link linkend="_class_timeshifts_1aea8a9a1e849fca3bf3712385bd2155c3">dT_with_raising_edge</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;type)</para>
 </listitem>
+            <listitem><para>void <link linkend="_class_timeshifts_1a2f89468edaaaadc6d5e1c23282a0714d">dT_with_raising_edge</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;label)</para>
+</listitem>
             <listitem><para>void <link linkend="_class_timeshifts_1a2b3ce3e274b28b65f01e336efe99670e">dT_with_RF</link> (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp;type)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_timeshifts_1afac40edfb7b6eb8f630f328d31023d4f">dT_with_RF</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;label)</para>
 </listitem>
             <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; const  &amp; <link linkend="_class_timeshifts_1a5161a4c343623e92b4e26522ad7ee16a">get</link> () const</para>
 </listitem>
@@ -40,6 +64,8 @@ Collaboration diagram for Timeshifts:<para>
             <listitem><para><link linkend="_class_timeshifts">Timeshifts</link> &amp; <link linkend="_class_timeshifts_1a38aac2aef62c8999bb5da97e397ea64c">operator=</link> (<link linkend="_class_timeshifts">Timeshifts</link> const &amp;timeshifts)</para>
 </listitem>
             <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const  &amp; <link linkend="_class_timeshifts_1a942984c1af943a864baf8744babb2d15">operator[]</link> (int const &amp;i) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_timeshifts_1a9d484aa685afb43084c90117326a2375">periodRF_ns</link> (int const &amp;period_ns)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_timeshifts_1a0ab2718e733f94acda46780191295e3b">rebin</link> (std::string const &amp;detector, <link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> const &amp;bin_size_ns)</para>
 </listitem>
@@ -150,9 +176,13 @@ Collaboration diagram for Timeshifts:<para>
 <simplesect>
     <title>Public Attributes    </title>
         <itemizedlist>
+            <listitem><para>bool <link linkend="_class_timeshifts_1a30bd7826eb2ae66e9c7784b819270daa">m_biggest_peak_finder</link> = false</para>
+</listitem>
+            <listitem><para>std::vector&lt; bool &gt; <link linkend="_class_timeshifts_1a6e446f34754a8d3e2abbba5818cf03cb">m_biggest_peak_finder_label</link></para>
+</listitem>
             <listitem><para>std::vector&lt; bool &gt; <link linkend="_class_timeshifts_1ab098d455164964ba60b9f5c555de74e4">m_edge_preferred_label</link></para>
 </listitem>
-            <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="_class_timeshifts_1a53bfccafc7cfbd834754b752a9a4c313">m_nb_shifts_RF_peak</link></para>
+            <listitem><para>std::vector&lt; int &gt; <link linkend="_class_timeshifts_1a9a5daa2e56c25139ce85e4c5447b28a0">m_nb_shifts_RF_peak</link></para>
 </listitem>
             <listitem><para>std::vector&lt; bool &gt; <link linkend="_class_timeshifts_1a4338a0a481ffac2a8f8dffbafca76e7d">m_RF_preferred_label</link></para>
 </listitem>
@@ -165,11 +195,13 @@ Collaboration diagram for Timeshifts:<para>
 </listitem>
             <listitem><para>void <link linkend="_class_timeshifts_1a5c037c5bb4b409c3040982c451c6733d">Fill</link> (<link linkend="_class_event">Event</link> const &amp;event, <link linkend="_class_r_f___manager">RF_Manager</link> &amp;rf)</para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_timeshifts_1a0753528955e94c43043cd7d68193f960">Initialize</link> (bool const &amp;initializeRaw=false, bool const &amp;initializeCorrected=false)</para>
+            <listitem><para>bool <link linkend="_class_timeshifts_1a95e126cc70243c24a016af24652ecb0b">Initialise</link> (bool const &amp;<link linkend="_class_timeshifts_1abf99e2b89b819a92e4891d1c3da4e704">InitialiseRaw</link>=false, bool const &amp;<link linkend="_class_timeshifts_1a1eaf31f737ca23292d92babdf2f21fd8">InitialiseCorrected</link>=false)</para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_timeshifts_1a05ac31a6c49360d94eeff184dc896c6b">InitializeCorrected</link> ()</para>
+            <listitem><para>bool <link linkend="_class_timeshifts_1a1eaf31f737ca23292d92babdf2f21fd8">InitialiseCorrected</link> ()</para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_timeshifts_1a40254b2aa53028b1b5c941ee1cb3833d">InitializeRaw</link> ()</para>
+            <listitem><para>void <link linkend="_class_timeshifts_1a7c87fcd3920ef2f785349c392890e795">InitialisePreferencesArrays</link> ()</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_timeshifts_1abf99e2b89b819a92e4891d1c3da4e704">InitialiseRaw</link> ()</para>
 </listitem>
             <listitem><para>void <link linkend="_class_timeshifts_1abef7234fe827ae3c7758788cf22b6921">treatFasterFile</link> (std::string const &amp;filename)</para>
 </listitem>
@@ -205,17 +237,25 @@ Collaboration diagram for Timeshifts:<para>
 </listitem>
             <listitem><para><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; TH2F &gt; <link linkend="_class_timeshifts_1a18d1ff66fe0d6be096467ff874c139dc">m_EnergyRef_bidim</link></para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_timeshifts_1a025f10899ed33302dee33f2e98d40b3a">m_energySpectraInitialized</link> = false</para>
+            <listitem><para>bool <link linkend="_class_timeshifts_1acbb1007ca0f5bccdf9106fa2ec66feca">m_energySpectraInitialised</link> = false</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_timeshifts_1a1a77bd589fc081641e19c5da8b4e19b6">m_filename</link> = &quot;&quot;</para>
 </listitem>
             <listitem><para><link linkend="_class_files_manager">FilesManager</link> <link linkend="_class_timeshifts_1a4f155373f7d1a70f3f1d06233ebf10c1">m_files</link></para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_timeshifts_1ad6bda9ede24fd63e7a43ad12bd861a98">m_initialized</link> = false</para>
+            <listitem><para>bool <link linkend="_class_timeshifts_1a154847a6a1b23616fed6306401856c9b">m_folder_treated</link> = false</para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_timeshifts_1ae3b75fce1fde95be5ca45b20cfbb8350">m_initializedCorrected</link> = false</para>
+            <listitem><para><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; TH1F &gt; <link linkend="_class_timeshifts_1ac331936db248b471aaa4df09edf8733d">m_histo_ref_VS_RF</link></para>
 </listitem>
-            <listitem><para>bool <link linkend="_class_timeshifts_1a8c7b6bfda5c2dacef69d0b7657d89fce">m_initializedRaw</link> = false</para>
+            <listitem><para><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; TH2F &gt; <link linkend="_class_timeshifts_1a39db58224dbfadac0d6c7d9d48facb55">m_histo_ref_vs_RF_VS_mult</link></para>
+</listitem>
+            <listitem><para><link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link>&lt; TH1F &gt; <link linkend="_class_timeshifts_1afe6360328fb6c3da9d0e6910aa88cfc3">m_histograms_VS_RF</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_timeshifts_1ac8c39336ff11fe341a775a6964cf2294">m_Initialised</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_timeshifts_1aab8aaf500b3e321fb5914ca4fb2de748">m_InitialisedCorrected</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_timeshifts_1a9fe51a29188e20ab8b1870ce7218c1f7">m_InitialisedRaw</link> = false</para>
 </listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a92c2ca60527219506deb3325507baee0">ulong</link> <link linkend="_class_timeshifts_1a7363de3261a770287e981328276f21dd">m_max_hits</link> = -1</para>
 </listitem>
@@ -235,6 +275,10 @@ Collaboration diagram for Timeshifts:<para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_timeshifts_1ae3640104ddce3ee9548d83186f4032e6">m_outRoot</link> = &quot;timeshifts.root&quot;</para>
 </listitem>
+            <listitem><para>bool <link linkend="_class_timeshifts_1aa9a517ba9d26652b9caef66639ab6c92">m_pref_arrays_init</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_timeshifts_1a59308d3bfde01354a6c37ffe4ca635e8">m_rf_period</link> = 0</para>
+</listitem>
             <listitem><para>std::map&lt; <link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link>, bool &gt; <link linkend="_class_timeshifts_1af643b4246a7e7efb0857cec8f705eeb1">m_RF_preferred</link></para>
 </listitem>
             <listitem><para><link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> <link linkend="_class_timeshifts_1a149e0f0885280b888df3f2b35ac29af8">m_time_ref_label</link> = 252</para>
@@ -247,6 +291,12 @@ Collaboration diagram for Timeshifts:<para>
 </listitem>
             <listitem><para><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; TH2F &gt; <link linkend="_class_timeshifts_1ab9b0b763dbe5e2be797d89e9bcb05c1e">m_time_spectra_corrected_bidim</link></para>
 </listitem>
+            <listitem><para><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; TH2F &gt; <link linkend="_class_timeshifts_1af80ba291868bb2890bbb06304681f6a2">m_time_spectra_corrected_bidim_RF</link></para>
+</listitem>
+            <listitem><para><link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link>&lt; TH1F &gt; <link linkend="_class_timeshifts_1a170b35d11634ea783d45821092960e78">m_time_spectra_corrected_RF</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; TH1F &gt; <link linkend="_class_timeshifts_1a487371ab334a8651058a6ea114fc3f46">m_time_spectra_reference_RF_corrected</link></para>
+</listitem>
             <listitem><para>std::vector&lt; <link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> &gt; <link linkend="_class_timeshifts_1ad10b3d7e16a2d51d3e73d7f2e7b1e0fa">m_timeshifts</link></para>
 </listitem>
             <listitem><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="_class_timeshifts_1a73dda60d3425a0de61719829231e6d55">m_timewindow</link> = <link linkend="__hit_8hpp_1a4ea1ea3a29989c67afc2c4db41e36b15">Time_cast</link>(<link linkend="_class_timeshifts_1a221c8bebd939cf4a9442f5c9dddfeefb">m_timewindow_ns</link>*1000)</para>
@@ -254,6 +304,8 @@ Collaboration diagram for Timeshifts:<para>
             <listitem><para><link linkend="__hit_8hpp_1ad7cd28c849adeb8fec74d20155b0113d">Time_ns</link> <link linkend="_class_timeshifts_1a221c8bebd939cf4a9442f5c9dddfeefb">m_timewindow_ns</link> = <link linkend="__hit_8hpp_1a04b1f65fe07e6d731225feecab2b66f6">Time_ns_cast</link>(1500)</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_timeshifts_1af567d75bbe3263cece04cf3e6eff5256">m_ts_outdir</link> = &quot;Timeshifts/&quot;</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_timeshifts_1a7c1290feea6b17e155dc5fcfc21031cd">m_use_rf</link> = false</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_timeshifts_1a985a81e5fa8d1a8866988c6af1b2ff1c">m_verbose</link> = false</para>
 </listitem>
@@ -263,6 +315,19 @@ Collaboration diagram for Timeshifts:<para>
 </listitem>
         </itemizedlist>
 </simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Calculates the time difference between all detectors and a reference detector. </para>
+
+
+
+<para><itemizedlist>
+<listitem>
+<para>The timestamps and timeshifts are in picoseconds Goal 1 : calculate the time shifts between detectors How : Use one detector as reference, preferencially with good time resolution Create coincidences using the <link linkend="_class_coinc_builder">CoincBuilder</link> event builder Calculate the difference in timestamp as follow : ref_time - detector_time Finally, output the (.dT) file containing the time shifts of all the detectors Also produces a .root file containing the raw and corrected time spectra. This module includes multithreading management using MTObject::parallelise_function(function, parameters...) Goal 2 : read a timeshift file (.dT) previously calculated by this module Goal 3 : apply the timeshifts by calling the operator[] : time_correct = time_shifted + timeshifts[label]; Example at the end </para>
+</listitem></itemizedlist>
+</para>
+</section>
 <section>
 <title>Constructor &amp; Destructor Documentation</title>
 <anchor xml:id="_class_timeshifts_1ad85f4cabf723d28843393cda47abc2b3"/>    <section>
@@ -447,15 +512,71 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
+    </section><anchor xml:id="_class_timeshifts_1a250c8d12a357303853380350ce77aa81"/>    <section>
+    <title>data()</title>
+<indexterm><primary>data</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>data</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link>&gt; const&amp; Timeshifts::data ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a250c8d12a357303853380350ce77aa81_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_timeshifts_1ad77934ca763db86895300f275f935e39"/>    <section>
+    <title>dT_with_biggest_peak_finder()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>dT_with_biggest_peak_finder</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>dT_with_biggest_peak_finder</secondary></indexterm>
+<para><computeroutput>void Timeshifts::dT_with_biggest_peak_finder ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1af97a362f9d3714a1483e0a18fdf26119"/>    <section>
+    <title>dT_with_biggest_peak_finder()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>dT_with_biggest_peak_finder</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>dT_with_biggest_peak_finder</secondary></indexterm>
+<para><computeroutput>void Timeshifts::dT_with_biggest_peak_finder (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_af97a362f9d3714a1483e0a18fdf26119_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
     </section><anchor xml:id="_class_timeshifts_1aea8a9a1e849fca3bf3712385bd2155c3"/>    <section>
-    <title>dT_with_raising_edge()</title>
+    <title>dT_with_raising_edge()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>dT_with_raising_edge</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>dT_with_raising_edge</secondary></indexterm>
-<para><computeroutput>void Timeshifts::dT_with_raising_edge (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a2b3ce3e274b28b65f01e336efe99670e"/>    <section>
-    <title>dT_with_RF()</title>
+<para><computeroutput>void Timeshifts::dT_with_raising_edge (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a2f89468edaaaadc6d5e1c23282a0714d"/>    <section>
+    <title>dT_with_raising_edge()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>dT_with_raising_edge</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>dT_with_raising_edge</secondary></indexterm>
+<para><computeroutput>void Timeshifts::dT_with_raising_edge (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a2f89468edaaaadc6d5e1c23282a0714d_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_timeshifts_1a2b3ce3e274b28b65f01e336efe99670e"/>    <section>
+    <title>dT_with_RF()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>dT_with_RF</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>dT_with_RF</secondary></indexterm>
-<para><computeroutput>void Timeshifts::dT_with_RF (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a5c037c5bb4b409c3040982c451c6733d"/>    <section>
+<para><computeroutput>void Timeshifts::dT_with_RF (<link linkend="__detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a">dType</link> const &amp; type)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1afac40edfb7b6eb8f630f328d31023d4f"/>    <section>
+    <title>dT_with_RF()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>dT_with_RF</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>dT_with_RF</secondary></indexterm>
+<para><computeroutput>void Timeshifts::dT_with_RF (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp; label)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_afac40edfb7b6eb8f630f328d31023d4f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_timeshifts_1a5c037c5bb4b409c3040982c451c6733d"/>    <section>
     <title>Fill()</title>
 <indexterm><primary>Fill</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>Fill</secondary></indexterm>
@@ -517,17 +638,17 @@ Here is the caller graph for this function:<para>
     <title>get()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>get</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>get</secondary></indexterm>
-<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const&amp; Timeshifts::get (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a0753528955e94c43043cd7d68193f960"/>    <section>
-    <title>Initialize()</title>
-<indexterm><primary>Initialize</primary><secondary>Timeshifts</secondary></indexterm>
-<indexterm><primary>Timeshifts</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>bool Timeshifts::Initialize (bool const &amp; initializeRaw = <computeroutput>false</computeroutput>
-, bool const &amp; initializeCorrected = <computeroutput>false</computeroutput>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const&amp; Timeshifts::get (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a95e126cc70243c24a016af24652ecb0b"/>    <section>
+    <title>Initialise()</title>
+<indexterm><primary>Initialise</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::Initialise (bool const &amp; InitialiseRaw = <computeroutput>false</computeroutput>
+, bool const &amp; InitialiseCorrected = <computeroutput>false</computeroutput>
 )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a0753528955e94c43043cd7d68193f960_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a95e126cc70243c24a016af24652ecb0b_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -536,42 +657,20 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a0753528955e94c43043cd7d68193f960_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a95e126cc70243c24a016af24652ecb0b_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_timeshifts_1a05ac31a6c49360d94eeff184dc896c6b"/>    <section>
-    <title>InitializeCorrected()</title>
-<indexterm><primary>InitializeCorrected</primary><secondary>Timeshifts</secondary></indexterm>
-<indexterm><primary>Timeshifts</primary><secondary>InitializeCorrected</secondary></indexterm>
-<para><computeroutput>bool Timeshifts::InitializeCorrected ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_class_timeshifts_1a1eaf31f737ca23292d92babdf2f21fd8"/>    <section>
+    <title>InitialiseCorrected()</title>
+<indexterm><primary>InitialiseCorrected</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>InitialiseCorrected</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::InitialiseCorrected ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a05ac31a6c49360d94eeff184dc896c6b_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_timeshifts_1a40254b2aa53028b1b5c941ee1cb3833d"/>    <section>
-    <title>InitializeRaw()</title>
-<indexterm><primary>InitializeRaw</primary><secondary>Timeshifts</secondary></indexterm>
-<indexterm><primary>Timeshifts</primary><secondary>InitializeRaw</secondary></indexterm>
-<para><computeroutput>bool Timeshifts::InitializeRaw ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -580,7 +679,51 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a40254b2aa53028b1b5c941ee1cb3833d_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a1eaf31f737ca23292d92babdf2f21fd8_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_timeshifts_1a7c87fcd3920ef2f785349c392890e795"/>    <section>
+    <title>InitialisePreferencesArrays()</title>
+<indexterm><primary>InitialisePreferencesArrays</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>InitialisePreferencesArrays</secondary></indexterm>
+<para><computeroutput>void Timeshifts::InitialisePreferencesArrays ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a7c87fcd3920ef2f785349c392890e795_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_a7c87fcd3920ef2f785349c392890e795_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_timeshifts_1abf99e2b89b819a92e4891d1c3da4e704"/>    <section>
+    <title>InitialiseRaw()</title>
+<indexterm><primary>InitialiseRaw</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>InitialiseRaw</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::InitialiseRaw ( )<computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_timeshifts_abf99e2b89b819a92e4891d1c3da4e704_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -623,7 +766,11 @@ Here is the caller graph for this function:<para>
     <title>operator[]()</title>
 <indexterm><primary>operator[]</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>operator[]</secondary></indexterm>
-<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const&amp; Timeshifts::operator[] (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a0ab2718e733f94acda46780191295e3b"/>    <section>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> const&amp; Timeshifts::operator[] (int const &amp; i) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a9d484aa685afb43084c90117326a2375"/>    <section>
+    <title>periodRF_ns()</title>
+<indexterm><primary>periodRF_ns</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>periodRF_ns</secondary></indexterm>
+<para><computeroutput>void Timeshifts::periodRF_ns (int const &amp; period_ns)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a0ab2718e733f94acda46780191295e3b"/>    <section>
     <title>rebin()</title>
 <indexterm><primary>rebin</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>rebin</secondary></indexterm>
@@ -1244,6 +1391,10 @@ Here is the caller graph for this function:<para>
 
 <para>Used to create. </para>
 </para>
+
+<para><para><link linkend="_todo_1_todo000019">Todo</link> 
+<para>caption</para>
+</para></para>
     </section><anchor xml:id="_class_timeshifts_1a6520eab7a8824f41a2be8517d83fc835"/>    <section>
     <title>verify()</title>
 <indexterm><primary>verify</primary><secondary>Timeshifts</secondary></indexterm>
@@ -1404,7 +1555,15 @@ Here is the caller graph for this function:<para>
 </section>
 <section>
 <title>Member Data Documentation</title>
-<anchor xml:id="_class_timeshifts_1a4dd5b35444834dca94e9432619e24c47"/>    <section>
+<anchor xml:id="_class_timeshifts_1a30bd7826eb2ae66e9c7784b819270daa"/>    <section>
+    <title>m_biggest_peak_finder</title>
+<indexterm><primary>m_biggest_peak_finder</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_biggest_peak_finder</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::m_biggest_peak_finder = false</computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a6e446f34754a8d3e2abbba5818cf03cb"/>    <section>
+    <title>m_biggest_peak_finder_label</title>
+<indexterm><primary>m_biggest_peak_finder_label</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_biggest_peak_finder_label</secondary></indexterm>
+<para><computeroutput>std::vector&lt;bool&gt; Timeshifts::m_biggest_peak_finder_label</computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a4dd5b35444834dca94e9432619e24c47"/>    <section>
     <title>m_bins_per_ns</title>
 <indexterm><primary>m_bins_per_ns</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_bins_per_ns</secondary></indexterm>
@@ -1415,7 +1574,7 @@ Here is the caller graph for this function:<para>
 &#32;&#32;&#32;&#32;{<emphasis role="stringliteral">&quot;bgo&quot;</emphasis>,&#32;&#32;&#32;&#32;2.},&#32;
 &#32;&#32;&#32;&#32;{<emphasis role="stringliteral">&quot;eden&quot;</emphasis>,&#32;&#32;&#32;2.},&#32;
 &#32;&#32;&#32;&#32;{<emphasis role="stringliteral">&quot;RF&quot;</emphasis>,&#32;&#32;&#32;&#32;10.},&#32;
-&#32;&#32;&#32;&#32;{<emphasis role="stringliteral">&quot;paris&quot;</emphasis>,&#32;10.},&#32;
+&#32;&#32;&#32;&#32;{<emphasis role="stringliteral">&quot;paris&quot;</emphasis>,&#32;&#32;5.},&#32;
 &#32;&#32;&#32;&#32;{<emphasis role="stringliteral">&quot;dssd&quot;</emphasis>,&#32;&#32;0.5}
 &#32;&#32;}
 </programlisting>    </section><anchor xml:id="_class_timeshifts_1afdd59f1f2d548c6bd8ef89d998e8ed1e"/>    <section>
@@ -1456,11 +1615,11 @@ Here is the caller graph for this function:<para>
     <title>m_EnergyRef_bidim</title>
 <indexterm><primary>m_EnergyRef_bidim</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_EnergyRef_bidim</secondary></indexterm>
-<para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH2F&gt; Timeshifts::m_EnergyRef_bidim<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a025f10899ed33302dee33f2e98d40b3a"/>    <section>
-    <title>m_energySpectraInitialized</title>
-<indexterm><primary>m_energySpectraInitialized</primary><secondary>Timeshifts</secondary></indexterm>
-<indexterm><primary>Timeshifts</primary><secondary>m_energySpectraInitialized</secondary></indexterm>
-<para><computeroutput>bool Timeshifts::m_energySpectraInitialized = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a1a77bd589fc081641e19c5da8b4e19b6"/>    <section>
+<para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH2F&gt; Timeshifts::m_EnergyRef_bidim<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1acbb1007ca0f5bccdf9106fa2ec66feca"/>    <section>
+    <title>m_energySpectraInitialised</title>
+<indexterm><primary>m_energySpectraInitialised</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_energySpectraInitialised</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::m_energySpectraInitialised = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a1a77bd589fc081641e19c5da8b4e19b6"/>    <section>
     <title>m_filename</title>
 <indexterm><primary>m_filename</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_filename</secondary></indexterm>
@@ -1468,19 +1627,35 @@ Here is the caller graph for this function:<para>
     <title>m_files</title>
 <indexterm><primary>m_files</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_files</secondary></indexterm>
-<para><computeroutput><link linkend="_class_files_manager">FilesManager</link> Timeshifts::m_files<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1ad6bda9ede24fd63e7a43ad12bd861a98"/>    <section>
-    <title>m_initialized</title>
-<indexterm><primary>m_initialized</primary><secondary>Timeshifts</secondary></indexterm>
-<indexterm><primary>Timeshifts</primary><secondary>m_initialized</secondary></indexterm>
-<para><computeroutput>bool Timeshifts::m_initialized = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1ae3b75fce1fde95be5ca45b20cfbb8350"/>    <section>
-    <title>m_initializedCorrected</title>
-<indexterm><primary>m_initializedCorrected</primary><secondary>Timeshifts</secondary></indexterm>
-<indexterm><primary>Timeshifts</primary><secondary>m_initializedCorrected</secondary></indexterm>
-<para><computeroutput>bool Timeshifts::m_initializedCorrected = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a8c7b6bfda5c2dacef69d0b7657d89fce"/>    <section>
-    <title>m_initializedRaw</title>
-<indexterm><primary>m_initializedRaw</primary><secondary>Timeshifts</secondary></indexterm>
-<indexterm><primary>Timeshifts</primary><secondary>m_initializedRaw</secondary></indexterm>
-<para><computeroutput>bool Timeshifts::m_initializedRaw = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a7363de3261a770287e981328276f21dd"/>    <section>
+<para><computeroutput><link linkend="_class_files_manager">FilesManager</link> Timeshifts::m_files<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a154847a6a1b23616fed6306401856c9b"/>    <section>
+    <title>m_folder_treated</title>
+<indexterm><primary>m_folder_treated</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_folder_treated</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::m_folder_treated = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1ac331936db248b471aaa4df09edf8733d"/>    <section>
+    <title>m_histo_ref_VS_RF</title>
+<indexterm><primary>m_histo_ref_VS_RF</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_histo_ref_VS_RF</secondary></indexterm>
+<para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH1F&gt; Timeshifts::m_histo_ref_VS_RF<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a39db58224dbfadac0d6c7d9d48facb55"/>    <section>
+    <title>m_histo_ref_vs_RF_VS_mult</title>
+<indexterm><primary>m_histo_ref_vs_RF_VS_mult</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_histo_ref_vs_RF_VS_mult</secondary></indexterm>
+<para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH2F&gt; Timeshifts::m_histo_ref_vs_RF_VS_mult<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1afe6360328fb6c3da9d0e6910aa88cfc3"/>    <section>
+    <title>m_histograms_VS_RF</title>
+<indexterm><primary>m_histograms_VS_RF</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_histograms_VS_RF</secondary></indexterm>
+<para><computeroutput><link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link>&lt;TH1F&gt; Timeshifts::m_histograms_VS_RF<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1ac8c39336ff11fe341a775a6964cf2294"/>    <section>
+    <title>m_Initialised</title>
+<indexterm><primary>m_Initialised</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_Initialised</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::m_Initialised = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1aab8aaf500b3e321fb5914ca4fb2de748"/>    <section>
+    <title>m_InitialisedCorrected</title>
+<indexterm><primary>m_InitialisedCorrected</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_InitialisedCorrected</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::m_InitialisedCorrected = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a9fe51a29188e20ab8b1870ce7218c1f7"/>    <section>
+    <title>m_InitialisedRaw</title>
+<indexterm><primary>m_InitialisedRaw</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_InitialisedRaw</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::m_InitialisedRaw = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a7363de3261a770287e981328276f21dd"/>    <section>
     <title>m_max_hits</title>
 <indexterm><primary>m_max_hits</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_max_hits</secondary></indexterm>
@@ -1496,11 +1671,11 @@ Here is the caller graph for this function:<para>
     <title>m_nb_detectors</title>
 <indexterm><primary>m_nb_detectors</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_nb_detectors</secondary></indexterm>
-<para><computeroutput>int Timeshifts::m_nb_detectors = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a53bfccafc7cfbd834754b752a9a4c313"/>    <section>
+<para><computeroutput>int Timeshifts::m_nb_detectors = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a9a5daa2e56c25139ce85e4c5447b28a0"/>    <section>
     <title>m_nb_shifts_RF_peak</title>
 <indexterm><primary>m_nb_shifts_RF_peak</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_nb_shifts_RF_peak</secondary></indexterm>
-<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; Timeshifts::m_nb_shifts_RF_peak</computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a0bf7feef945319722118991949b033d4"/>    <section>
+<para><computeroutput>std::vector&lt;int&gt; Timeshifts::m_nb_shifts_RF_peak</computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a0bf7feef945319722118991949b033d4"/>    <section>
     <title>m_ok</title>
 <indexterm><primary>m_ok</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_ok</secondary></indexterm>
@@ -1520,7 +1695,15 @@ Here is the caller graph for this function:<para>
     <title>m_outRoot</title>
 <indexterm><primary>m_outRoot</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_outRoot</secondary></indexterm>
-<para><computeroutput>std::string Timeshifts::m_outRoot = &quot;timeshifts.root&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1af643b4246a7e7efb0857cec8f705eeb1"/>    <section>
+<para><computeroutput>std::string Timeshifts::m_outRoot = &quot;timeshifts.root&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1aa9a517ba9d26652b9caef66639ab6c92"/>    <section>
+    <title>m_pref_arrays_init</title>
+<indexterm><primary>m_pref_arrays_init</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_pref_arrays_init</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::m_pref_arrays_init = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a59308d3bfde01354a6c37ffe4ca635e8"/>    <section>
+    <title>m_rf_period</title>
+<indexterm><primary>m_rf_period</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_rf_period</secondary></indexterm>
+<para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> Timeshifts::m_rf_period = 0<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1af643b4246a7e7efb0857cec8f705eeb1"/>    <section>
     <title>m_RF_preferred</title>
 <indexterm><primary>m_RF_preferred</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_RF_preferred</secondary></indexterm>
@@ -1558,7 +1741,19 @@ Here is the caller graph for this function:<para>
     <title>m_time_spectra_corrected_bidim</title>
 <indexterm><primary>m_time_spectra_corrected_bidim</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_time_spectra_corrected_bidim</secondary></indexterm>
-<para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH2F&gt; Timeshifts::m_time_spectra_corrected_bidim<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1ad10b3d7e16a2d51d3e73d7f2e7b1e0fa"/>    <section>
+<para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH2F&gt; Timeshifts::m_time_spectra_corrected_bidim<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1af80ba291868bb2890bbb06304681f6a2"/>    <section>
+    <title>m_time_spectra_corrected_bidim_RF</title>
+<indexterm><primary>m_time_spectra_corrected_bidim_RF</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_time_spectra_corrected_bidim_RF</secondary></indexterm>
+<para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH2F&gt; Timeshifts::m_time_spectra_corrected_bidim_RF<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a170b35d11634ea783d45821092960e78"/>    <section>
+    <title>m_time_spectra_corrected_RF</title>
+<indexterm><primary>m_time_spectra_corrected_RF</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_time_spectra_corrected_RF</secondary></indexterm>
+<para><computeroutput><link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link>&lt;TH1F&gt; Timeshifts::m_time_spectra_corrected_RF<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a487371ab334a8651058a6ea114fc3f46"/>    <section>
+    <title>m_time_spectra_reference_RF_corrected</title>
+<indexterm><primary>m_time_spectra_reference_RF_corrected</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_time_spectra_reference_RF_corrected</secondary></indexterm>
+<para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;TH1F&gt; Timeshifts::m_time_spectra_reference_RF_corrected<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1ad10b3d7e16a2d51d3e73d7f2e7b1e0fa"/>    <section>
     <title>m_timeshifts</title>
 <indexterm><primary>m_timeshifts</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_timeshifts</secondary></indexterm>
@@ -1574,7 +1769,11 @@ Here is the caller graph for this function:<para>
     <title>m_ts_outdir</title>
 <indexterm><primary>m_ts_outdir</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_ts_outdir</secondary></indexterm>
-<para><computeroutput>std::string Timeshifts::m_ts_outdir = &quot;Timeshifts/&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a985a81e5fa8d1a8866988c6af1b2ff1c"/>    <section>
+<para><computeroutput>std::string Timeshifts::m_ts_outdir = &quot;Timeshifts/&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a7c1290feea6b17e155dc5fcfc21031cd"/>    <section>
+    <title>m_use_rf</title>
+<indexterm><primary>m_use_rf</primary><secondary>Timeshifts</secondary></indexterm>
+<indexterm><primary>Timeshifts</primary><secondary>m_use_rf</secondary></indexterm>
+<para><computeroutput>bool Timeshifts::m_use_rf = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_timeshifts_1a985a81e5fa8d1a8866988c6af1b2ff1c"/>    <section>
     <title>m_verbose</title>
 <indexterm><primary>m_verbose</primary><secondary>Timeshifts</secondary></indexterm>
 <indexterm><primary>Timeshifts</primary><secondary>m_verbose</secondary></indexterm>

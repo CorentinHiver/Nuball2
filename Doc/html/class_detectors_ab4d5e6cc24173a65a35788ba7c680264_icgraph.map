@@ -1,15 +1,16 @@
 <map id="Detectors::typeIndex" name="Detectors::typeIndex">
-<area shape="rect" id="node1" title=" " alt="" coords="993,93,1152,120"/>
-<area shape="rect" id="node2" href="$class_calibration.html#ae62aaba8d0f0f77aecf89a5ad1e7605a" title=" " alt="" coords="548,5,699,32"/>
-<area shape="rect" id="node6" href="$class_calibration.html#afd14ef8f1b6cee6cf7abc10783ee318e" title=" " alt="" coords="767,118,945,159"/>
-<area shape="rect" id="node10" href="$struct_calibration_1_1histograms.html#a911cfd2064bd94694cd0731aa6afccfa" title=" " alt="" coords="769,53,943,94"/>
-<area shape="rect" id="node13" href="$class_calibration.html#a344dc3d6feab3580e859cc693c2fdd4a" title=" " alt="" coords="787,184,925,211"/>
-<area shape="rect" id="node3" href="$class_calibration.html#a6514307ca111ecc5d6f02694373dc5ec" title=" " alt="" coords="281,9,480,36"/>
-<area shape="rect" id="node4" href="$class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="39,60,199,87"/>
-<area shape="rect" id="node5" href="$class_calibration.html#a5931047806db77858db6886d041db100" title=" " alt="" coords="5,9,233,36"/>
-<area shape="rect" id="node7" href="$class_calibration.html#a58f794ed6862bc71c09b440e63ea94f1" title=" " alt="" coords="528,114,719,155"/>
-<area shape="rect" id="node8" href="$class_calibration.html#a6d6d354f65db38acf12addf1efb7c815" title=" " alt="" coords="285,111,476,137"/>
-<area shape="rect" id="node9" href="$class_calibration.html#ac7678b0524f8407659a9594b3862e5c3" title=" " alt="" coords="10,111,229,137"/>
-<area shape="rect" id="node11" href="$class_calibration.html#a2f91a6803bf8008bd7b748d4a1688338" title=" " alt="" coords="545,60,702,87"/>
-<area shape="rect" id="node12" href="$class_calibration.html#a178a349d575d8f0e8b090f828def78b6" title="Calculate calibration from .root histograms." alt="" coords="301,60,461,87"/>
+<area shape="rect" id="node1" title=" " alt="" coords="932,132,1091,159"/>
+<area shape="rect" id="node2" href="$class_calibrator.html#a87ba405f3d9af67c43789893fc5ff534" title="Fills histograms." alt="" coords="518,43,662,69"/>
+<area shape="rect" id="node6" href="$class_calibrator.html#a01917c2d097c62f2c6dc3a608d4e3ab4" title=" " alt="" coords="713,91,884,133"/>
+<area shape="rect" id="node7" href="$struct_calibrator_1_1histograms.html#a4ec16b7a4a18e1f8988684e837bd4d4e" title=" " alt="" coords="715,157,882,198"/>
+<area shape="rect" id="node14" href="$class_calibrator.html#aad90b0e3951d4caffe11e319c7108a51" title="if some spectra and calibration coefficients have been loaded, or after the calibration coefficients ..." alt="" coords="733,223,864,249"/>
+<area shape="rect" id="node3" href="$class_calibrator.html#a00297f1bb253279bfa8bdce83fb81951" title=" " alt="" coords="275,44,467,71"/>
+<area shape="rect" id="node4" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="39,56,193,83"/>
+<area shape="rect" id="node5" href="$class_calibrator.html#ac16a84c9c3244443c44a7c5de11ceb5f" title=" " alt="" coords="5,5,227,32"/>
+<area shape="rect" id="node8" href="$class_calibrator.html#ae81772276c36ab528b8147fa583356fd" title=" " alt="" coords="515,153,665,180"/>
+<area shape="rect" id="node9" href="$class_calibrator.html#a547f6f7bb37caef0b1a2e574422fb85f" title="Calculate calibration from .root histograms." alt="" coords="39,164,193,191"/>
+<area shape="rect" id="node10" href="$class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="35,227,197,253"/>
+<area shape="rect" id="node11" href="$class_calibrator.html#af067fee0c3a37336851ea63f2561b59f" title=" " alt="" coords="279,100,462,127"/>
+<area shape="rect" id="node13" href="$class_calibrator.html#a0d2a41f02b2c16409b58ce3ee4183792" title="Loads non&#45;calibrated spectra." alt="" coords="277,201,464,228"/>
+<area shape="rect" id="node12" href="$class_calibrator.html#aa45584fd0c25478ec98232ac18af3082" title=" " alt="" coords="10,107,222,133"/>
 </map>

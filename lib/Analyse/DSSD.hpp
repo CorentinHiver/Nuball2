@@ -53,12 +53,12 @@ public:
   static std::array<bool, 1000>  isRing  ;
   static std::array<uchar, 1000> indexes ;
 
-  void static InitializeArrays()
+  void static InitialiseArrays()
   {
     #ifdef MULTITHREADING
       lock_mutex lock(MTObject::mutex);
     #endif //MULTITHREADING
-    if (!s_initialized)
+    if (!s_Initialised)
     {
       print("Initialising DSSD arrays");
       for (Label label = 0; label<Label_cast(1000); label++)
@@ -73,7 +73,7 @@ public:
         else if (isRing[label]) indexes[label] = uchar_cast(label-Label_cast(840));
 
       }
-      s_initialized = true;
+      s_Initialised = true;
     }
   }
 
@@ -82,7 +82,7 @@ public:
 // _____________________________________
   DSSD()
   {
-    InitializeArrays(); 
+    InitialiseArrays(); 
     Sectors.reserve(nb_sectors); 
     for (ushort i = 0; i<nb_sectors; i++) Sectors.emplace_back(i, (i+0.5)*2*3.141596/nb_sectors);
     Rings.reserve(nb_rings);
@@ -127,13 +127,13 @@ public:
   double const ring_thickness = (outerRadius-innerRadius)/nb_rings;
 
 private:
-  bool static s_initialized;
+  bool static s_Initialised;
   
 };
 
-bool DSSD::s_initialized = false;
+bool DSSD::s_Initialised = false;
 
-// Initialize static members :
+// Initialise static members :
 std::array<bool, 1000>  DSSD::isS1     = {0};
 std::array<bool, 1000>  DSSD::isS2     = {0};
 std::array<bool, 1000>  DSSD::isSector = {0};

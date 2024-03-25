@@ -36,7 +36,13 @@ This graph shows which files directly or indirectly include this file:<para>
 <simplesect>
     <title>Classes    </title>
         <itemizedlist>
+            <listitem><para>class <link linkend="_class_timeshifts_1_1_empty_error">Timeshifts::EmptyError</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_timeshifts_1_1_not_found_error">Timeshifts::NotFoundError</link></para>
+</listitem>
             <listitem><para>class <link linkend="_class_timeshifts">Timeshifts</link></para>
+
+<para>Calculates the time difference between all detectors and a reference detector. </para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -51,7 +57,7 @@ This graph shows which files directly or indirectly include this file:<para>
 </listitem>
             <listitem><para>std::ostream &amp; <link linkend="__timeshifts_8hpp_1aecdab429e75a8d9f7a38f3938d9a7173">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_timeshifts">Timeshifts</link> const &amp;ts)</para>
 </listitem>
-            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="__timeshifts_8hpp_1a0363984bdeb96360bcf8a0a13163f47a">Shift_cast</link> (T const &amp;t)</para>
+            <listitem><para>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </para><para><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> <link linkend="__timeshifts_8hpp_1a02c5bf3a1c10d9b086ba64557fdb8995">Timeshift_cast</link> (T const &amp;t)</para>
 
 <para>Casts a number into unsigned Time. </para>
 </listitem>
@@ -127,11 +133,11 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="__timeshifts_8hpp_1a0363984bdeb96360bcf8a0a13163f47a"/>    <section>
-    <title>Shift_cast()</title>
-<indexterm><primary>Shift_cast</primary><secondary>Timeshifts.hpp</secondary></indexterm>
-<indexterm><primary>Timeshifts.hpp</primary><secondary>Shift_cast</secondary></indexterm>
-<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> Shift_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+    </section><anchor xml:id="__timeshifts_8hpp_1a02c5bf3a1c10d9b086ba64557fdb8995"/>    <section>
+    <title>Timeshift_cast()</title>
+<indexterm><primary>Timeshift_cast</primary><secondary>Timeshifts.hpp</secondary></indexterm>
+<indexterm><primary>Timeshifts.hpp</primary><secondary>Timeshift_cast</secondary></indexterm>
+<computeroutput>template&lt;typename T , typename  = typename std::enable_if&lt;std::is_arithmetic&lt;T&gt;::value&gt;::type&gt; </computeroutput><para><computeroutput><link linkend="__hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7">Time</link> Timeshift_cast (T const &amp; t)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
 <para>Casts a number into unsigned Time. </para>
 </para>
@@ -139,7 +145,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_timeshifts_8hpp_a0363984bdeb96360bcf8a0a13163f47a_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_timeshifts_8hpp_a02c5bf3a1c10d9b086ba64557fdb8995_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

@@ -1,0 +1,4 @@
+<map id="SpectraCo::findPeaks" name="SpectraCo::findPeaks">
+<area shape="rect" id="node1" title="Uses the second derivative spectra to get the peaks." alt="" coords="212,5,371,32"/>
+<area shape="rect" id="node2" href="$class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="5,5,164,32"/>
+</map>

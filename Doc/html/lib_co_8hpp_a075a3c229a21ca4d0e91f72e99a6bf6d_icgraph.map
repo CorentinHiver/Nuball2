@@ -1,4 +1,10 @@
 <map id="float_cast" name="float_cast">
-<area shape="rect" id="node1" title="Casts a number into a float." alt="" coords="260,5,345,32"/>
-<area shape="rect" id="node2" href="$class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="5,5,212,32"/>
+<area shape="rect" id="node1" title="Casts a number into a float." alt="" coords="511,131,596,157"/>
+<area shape="rect" id="node2" href="$class_calibration.html#a2758f6c22e17c9c924f25690240f1b09" title=" " alt="" coords="280,29,439,56"/>
+<area shape="rect" id="node3" href="$lib_root_8hpp.html#a88d5549923b75ad5c6c45c83dc2a22f5" title=" " alt="" coords="322,80,397,107"/>
+<area shape="rect" id="node4" href="$class_co_progress_bar.html#a79b92711e75250b41c39aeeca73a1621" title=" " alt="" coords="280,131,439,157"/>
+<area shape="rect" id="node7" href="$class_co_progress_bar.html#a0f79e8a642786af052ee7f1356b4bf9d" title=" " alt="" coords="267,181,452,208"/>
+<area shape="rect" id="node8" href="$class_type_root_map.html#acc24a4f33058532b330071a6738f02f4" title=" " alt="" coords="256,232,463,259"/>
+<area shape="rect" id="node5" href="$class_paris.html#a66745a02a04a8733eba514f319b1cc5e" title=" " alt="" coords="5,105,208,132"/>
+<area shape="rect" id="node6" href="$class_m_t_faster_reader.html#a7e26b2201486cd489b66ab12b83427e0" title=" " alt="" coords="23,156,191,183"/>
 </map>

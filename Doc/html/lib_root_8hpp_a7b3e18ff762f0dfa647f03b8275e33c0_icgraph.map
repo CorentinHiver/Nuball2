@@ -1,0 +1,7 @@
+<map id="get_TH1F_map" name="get_TH1F_map">
+<area shape="rect" id="node1" title=" " alt="" coords="648,31,768,57"/>
+<area shape="rect" id="node2" href="$_detectors_8hpp.html#ae343a2d2d22d862f6ac7ae10ba1b3d41" title=" " alt="" coords="449,31,600,57"/>
+<area shape="rect" id="node3" href="$class_calibrator.html#a0d2a41f02b2c16409b58ce3ee4183792" title="Loads non&#45;calibrated spectra." alt="" coords="215,31,401,57"/>
+<area shape="rect" id="node4" href="$class_calibrator.html#a547f6f7bb37caef0b1a2e574422fb85f" title="Calculate calibration from .root histograms." alt="" coords="9,5,163,32"/>
+<area shape="rect" id="node5" href="$class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="5,56,167,83"/>
+</map>

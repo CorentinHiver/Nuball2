@@ -6,128 +6,40 @@
     <includes refid="_m_t_counter_8hpp" local="yes">../MTObjects/MTCounter.hpp</includes>
     <includedby refid="_timeshifts_8hpp" local="yes">lib/Modules/Timeshifts.hpp</includedby>
     <incdepgraph>
-      <node id="27">
+      <node id="19">
         <label>glob.h</label>
       </node>
-      <node id="54">
-        <label>TH1S.h</label>
-      </node>
-      <node id="10">
-        <label>iomanip</label>
-      </node>
-      <node id="9">
+      <node id="24">
         <label>functional</label>
       </node>
-      <node id="16">
+      <node id="5">
+        <label>iomanip</label>
+      </node>
+      <node id="28">
         <label>queue</label>
       </node>
-      <node id="32">
-        <label>random.hpp</label>
-        <link refid="random_8hpp"/>
-        <childnode refid="33" relation="include">
-        </childnode>
-      </node>
-      <node id="72">
-        <label>TTreeIndex.h</label>
-      </node>
-      <node id="40">
-        <label>../libRoot.hpp</label>
-        <link refid="lib_root_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="46" relation="include">
-        </childnode>
-        <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-        <childnode refid="51" relation="include">
-        </childnode>
-        <childnode refid="52" relation="include">
-        </childnode>
-        <childnode refid="53" relation="include">
-        </childnode>
-        <childnode refid="54" relation="include">
-        </childnode>
-        <childnode refid="55" relation="include">
-        </childnode>
-        <childnode refid="56" relation="include">
-        </childnode>
-        <childnode refid="57" relation="include">
-        </childnode>
-        <childnode refid="58" relation="include">
-        </childnode>
-        <childnode refid="59" relation="include">
-        </childnode>
-        <childnode refid="60" relation="include">
-        </childnode>
-        <childnode refid="61" relation="include">
-        </childnode>
-        <childnode refid="62" relation="include">
-        </childnode>
-        <childnode refid="63" relation="include">
-        </childnode>
-        <childnode refid="64" relation="include">
-        </childnode>
-        <childnode refid="65" relation="include">
-        </childnode>
-        <childnode refid="66" relation="include">
-        </childnode>
-        <childnode refid="67" relation="include">
-        </childnode>
-        <childnode refid="68" relation="include">
-        </childnode>
-        <childnode refid="69" relation="include">
-        </childnode>
-        <childnode refid="70" relation="include">
-        </childnode>
-        <childnode refid="71" relation="include">
-        </childnode>
-        <childnode refid="72" relation="include">
-        </childnode>
-      </node>
-      <node id="37">
+      <node id="20">
         <label>filesystem</label>
       </node>
-      <node id="41">
-        <label>TAxis.h</label>
-      </node>
-      <node id="29">
-        <label>stdlib.h</label>
-      </node>
-      <node id="70">
+      <node id="42">
         <label>TThread.h</label>
       </node>
-      <node id="53">
-        <label>TH1D.h</label>
+      <node id="21">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
-      <node id="66">
-        <label>TStopwatch.h</label>
-      </node>
-      <node id="18">
+      <node id="29">
         <label>stdexcept</label>
       </node>
-      <node id="15">
+      <node id="27">
         <label>numeric</label>
       </node>
-      <node id="19">
+      <node id="14">
         <label>string</label>
       </node>
-      <node id="12">
+      <node id="7">
         <label>map</label>
       </node>
       <node id="38">
@@ -141,45 +53,21 @@
         <link refid="lib_co_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -193,11 +81,15 @@
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -205,182 +97,154 @@
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
-      </node>
-      <node id="45">
-        <label>TF1.h</label>
-      </node>
-      <node id="31">
-        <label>print.hpp</label>
-        <link refid="print_8hpp"/>
-      </node>
-      <node id="8">
-        <label>fstream</label>
-      </node>
-      <node id="44">
-        <label>TError.h</label>
-      </node>
-      <node id="68">
-        <label>TStyle.h</label>
-      </node>
-      <node id="3">
-        <label>any</label>
-      </node>
-      <node id="35">
-        <label>files_functions.hpp</label>
-        <link refid="files__functions_8hpp"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="33">
-        <label>random</label>
-      </node>
-      <node id="64">
-        <label>TROOT.h</label>
-      </node>
-      <node id="30">
-        <label>string.h</label>
-      </node>
-      <node id="23">
-        <label>typeinfo</label>
-      </node>
-      <node id="43">
-        <label>TChain.h</label>
-      </node>
-      <node id="69">
-        <label>TSystem.h</label>
-      </node>
-      <node id="25">
-        <label>vector</label>
-      </node>
-      <node id="20">
-        <label>stack</label>
-      </node>
-      <node id="46">
-        <label>TF2.h</label>
-      </node>
-      <node id="47">
-        <label>TFile.h</label>
-      </node>
-      <node id="42">
-        <label>TCanvas.h</label>
-      </node>
-      <node id="57">
-        <label>TH3I.h</label>
-      </node>
-      <node id="58">
-        <label>TKey.h</label>
-      </node>
-      <node id="36">
-        <label>vector_functions.hpp</label>
-        <link refid="vector__functions_8hpp"/>
-        <childnode refid="31" relation="include">
+      <node id="3">
+        <label>print.hpp</label>
+        <link refid="print_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="65">
-        <label>TSpectrum.h</label>
+      <node id="18">
+        <label>fstream</label>
       </node>
-      <node id="4">
-        <label>array</label>
+      <node id="22">
+        <label>any</label>
       </node>
-      <node id="49">
-        <label>TFitResult.h</label>
-      </node>
-      <node id="17">
-        <label>sstream</label>
-      </node>
-      <node id="61">
-        <label>TMarker.h</label>
-      </node>
-      <node id="51">
-        <label>TGraphErrors.h</label>
-      </node>
-      <node id="55">
-        <label>TH2.h</label>
-      </node>
-      <node id="6">
-        <label>cstdlib</label>
-      </node>
-      <node id="52">
-        <label>TH1F.h</label>
-      </node>
-      <node id="59">
-        <label>TLeaf.h</label>
-      </node>
-      <node id="11">
-        <label>iostream</label>
-      </node>
-      <node id="34">
-        <label>string_functions.hpp</label>
-        <link refid="string__functions_8hpp"/>
-        <childnode refid="25" relation="include">
+      <node id="16">
+        <label>files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
-      <node id="24">
+      <node id="11">
+        <label>random</label>
+      </node>
+      <node id="41">
+        <label>TROOT.h</label>
+      </node>
+      <node id="33">
+        <label>typeinfo</label>
+      </node>
+      <node id="40">
+        <label>future</label>
+      </node>
+      <node id="37">
+        <label>ctime</label>
+      </node>
+      <node id="30">
+        <label>stack</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="8">
+        <label>vector_functions.hpp</label>
+        <link refid="vector__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>array</label>
+      </node>
+      <node id="15">
+        <label>sstream</label>
+      </node>
+      <node id="10">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>cstdlib</label>
+      </node>
+      <node id="4">
+        <label>iostream</label>
+      </node>
+      <node id="12">
+        <label>string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
         <label>unordered_map</label>
       </node>
-      <node id="60">
-        <label>TLegend.h</label>
-      </node>
-      <node id="67">
-        <label>TString.h</label>
-      </node>
-      <node id="62">
-        <label>TMath.h</label>
-      </node>
-      <node id="56">
-        <label>TH2F.h</label>
-      </node>
-      <node id="14">
+      <node id="26">
         <label>mutex</label>
+      </node>
+      <node id="35">
+        <label>csignal</label>
       </node>
       <node id="39">
         <label>MTObject.hpp</label>
         <link refid="_m_t_object_8hpp"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
       </node>
-      <node id="21">
+      <node id="31">
         <label>thread</label>
       </node>
-      <node id="63">
-        <label>TRandom.h</label>
-      </node>
-      <node id="71">
-        <label>TTree.h</label>
-      </node>
-      <node id="5">
+      <node id="9">
         <label>algorithm</label>
       </node>
-      <node id="48">
-        <label>TFitResultPtr.h</label>
-      </node>
-      <node id="28">
-        <label>stdio.h</label>
-      </node>
-      <node id="7">
+      <node id="13">
         <label>cstring</label>
       </node>
-      <node id="50">
-        <label>TGraph.h</label>
-      </node>
-      <node id="13">
+      <node id="25">
         <label>memory</label>
       </node>
-      <node id="22">
+      <node id="32">
         <label>typeindex</label>
       </node>
       <node id="1">
@@ -391,20 +255,28 @@
         <childnode refid="38" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="17">
         <label>dirent.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="5">
+        <label>lib/Modules/Faster2Histo.hpp</label>
+        <link refid="_faster2_histo_8hpp"/>
+      </node>
+      <node id="4">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
+      </node>
       <node id="3">
         <label>lib/Modules/CloverSpectra.hpp</label>
         <link refid="_clover_spectra_8hpp"/>
       </node>
-      <node id="4">
+      <node id="6">
         <label>lib/Modules/Faster2Root.hpp</label>
         <link refid="_faster2_root_8hpp"/>
       </node>
-      <node id="5">
+      <node id="7">
         <label>lib/Modules/RunMatrixator.hpp</label>
         <link refid="_run_matrixator_8hpp"/>
       </node>
@@ -416,6 +288,10 @@
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="1">

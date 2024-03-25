@@ -1,8 +1,10 @@
 <map id="lib/Classes/RF_Manager.hpp" name="lib/Classes/RF_Manager.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="153,5,357,32"/>
-<area shape="rect" id="node2" href="$_sorted___event_8hpp.html" title=" " alt="" coords="89,80,229,121"/>
-<area shape="rect" id="node3" href="$_timeshifts_8hpp.html" title=" " alt="" coords="254,87,451,114"/>
+<area shape="rect" id="node1" title=" " alt="" coords="425,5,629,32"/>
+<area shape="rect" id="node2" href="$_sorted___event_8hpp.html" title=" " alt="" coords="361,80,501,121"/>
+<area shape="rect" id="node3" href="$_timeshifts_8hpp.html" title=" " alt="" coords="526,87,723,114"/>
 <area shape="rect" id="node4" href="$_clover_spectra_8hpp.html" title=" " alt="" coords="5,169,225,196"/>
-<area shape="rect" id="node5" href="$_faster2_root_8hpp.html" title=" " alt="" coords="249,169,456,196"/>
-<area shape="rect" id="node6" href="$_run_matrixator_8hpp.html" title=" " alt="" coords="481,169,702,196"/>
+<area shape="rect" id="node5" href="$_cobalt_calorimeter_8hpp.html" title=" " alt="" coords="249,169,496,196"/>
+<area shape="rect" id="node6" href="$_faster2_histo_8hpp.html" title=" " alt="" coords="519,169,730,196"/>
+<area shape="rect" id="node7" href="$_faster2_root_8hpp.html" title=" " alt="" coords="755,169,961,196"/>
+<area shape="rect" id="node8" href="$_run_matrixator_8hpp.html" title=" " alt="" coords="986,169,1207,196"/>
 </map>

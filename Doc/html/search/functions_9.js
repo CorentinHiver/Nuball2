@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keepsingles_1764',['keepSingles',['../class_builder.html#a4d557d96189a42cbc0a4a0d32db45d6c',1,'Builder::keepSingles()'],['../class_run_matrixator.html#ab294e0aa6a89ca1f191f335cae223d57',1,'RunMatrixator::keepSingles()']]]
+  ['keepsingles_2307',['keepSingles',['../class_builder.html#a4d557d96189a42cbc0a4a0d32db45d6c',1,'Builder::keepSingles()'],['../class_run_matrixator.html#ab294e0aa6a89ca1f191f335cae223d57',1,'RunMatrixator::keepSingles()']]]
 ];

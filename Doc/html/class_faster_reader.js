@@ -6,8 +6,9 @@ var class_faster_reader =
     [ "getCounter", "class_faster_reader.html#a0e799cf6b890a3ca281819efeb2df29e", null ],
     [ "getFilename", "class_faster_reader.html#aab416287bd95c5dad74fff1ebb45d3c8", null ],
     [ "getHit", "class_faster_reader.html#a152cfc9a0973c4a754e248c3e0326bea", null ],
-    [ "Initialize", "class_faster_reader.html#a949601e8d70fc3aaabe66824d22bdf69", null ],
-    [ "InitializeReader", "class_faster_reader.html#a21a9202f79d43b9fd41cd1e1c276fe2c", null ],
+    [ "getMaxHits", "class_faster_reader.html#a54f783429b2ce11a478280f5aa0ab2a4", null ],
+    [ "Initialise", "class_faster_reader.html#aa887429a942ff961225755336c06c025", null ],
+    [ "InitialiseReader", "class_faster_reader.html#a83d86d816bed5053765a05ddf4da278d", null ],
     [ "isReady", "class_faster_reader.html#a5aefeb0380dfdd42d1e63b987989a118", null ],
     [ "operator bool", "class_faster_reader.html#a613b5de02c11764659a3b90b8e8f0b0b", null ],
     [ "Read", "class_faster_reader.html#a2d05907241b80ed637b2ae5a01503756", null ],
@@ -18,6 +19,7 @@ var class_faster_reader =
     [ "Reset", "class_faster_reader.html#a14f1b927723963d833b5180c39bc9957", null ],
     [ "setHit", "class_faster_reader.html#ad88f1dfb85bb64d8526770ffbeca5607", null ],
     [ "setMaxHits", "class_faster_reader.html#aa1fcb8d6721212bc982cac0ae4e597eb", null ],
+    [ "setVerbose", "class_faster_reader.html#a76b7fa1bc82b5a5dff918bef2ae7d3a0", null ],
     [ "switch_alias", "class_faster_reader.html#af3c8f411415fb3d9fe20cd8551bc24ed", null ],
     [ "TreatCRRC4", "class_faster_reader.html#aa0d1eaa1b39778def2b7cd25581accef", null ],
     [ "TreatQDC1", "class_faster_reader.html#aa5890b8ac1fdbcd4e2c544c1eeca537b", null ],
@@ -28,7 +30,6 @@ var class_faster_reader =
     [ "error_message", "class_faster_reader.html#ae21a765c80bcf2f928bfd6e4f6b8abbf", null ],
     [ "m_alias", "class_faster_reader.html#ac285d052a5dea4e6c61537c9c95dcd28", null ],
     [ "m_counter", "class_faster_reader.html#a9709ea4e034d6cf92c107d8c5bff232a", null ],
-    [ "m_cursor", "class_faster_reader.html#a681170463697b5dd3856328eacb0a39d", null ],
     [ "m_data", "class_faster_reader.html#a95a022f50153b44f711a81e8109583ce", null ],
     [ "m_empty_hit", "class_faster_reader.html#a8150da77ef499006286e92ae4d65436d", null ],
     [ "m_filename", "class_faster_reader.html#a818df2ca2de45cbbabf1efc83b98cb53", null ],
@@ -38,7 +39,8 @@ var class_faster_reader =
     [ "m_hit_group_buffer", "class_faster_reader.html#a96edba4f7a1a64796627bfd1fbdf1c92", null ],
     [ "m_inGroup", "class_faster_reader.html#a49b96919779759c068b03b24f379d024", null ],
     [ "m_kReady", "class_faster_reader.html#a2d5ba6a3aa8089fcabdbc7fb88555ea3", null ],
-    [ "m_maxHits", "class_faster_reader.html#a8554231dbef9df122f04313f4adb594a", null ],
     [ "m_reader", "class_faster_reader.html#ac10e47db05e3067528e3ce53d5b3da38", null ],
-    [ "m_write", "class_faster_reader.html#abd85697a856dc998d235a5edc0ebb530", null ]
+    [ "m_verbose", "class_faster_reader.html#a5d60fc12eece11753c5d495ba76db75f", null ],
+    [ "m_write", "class_faster_reader.html#abd85697a856dc998d235a5edc0ebb530", null ],
+    [ "s_maxHits", "class_faster_reader.html#aa58b38ff4c8f95526ea529cdaaa1f8f8", null ]
 ];

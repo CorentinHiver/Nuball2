@@ -98,8 +98,8 @@ public:
   static std::array<uchar, nb_det> cristaux_index_BGO; // Array used to make correspondance between the detector label and the BGO index
   // static std::vector <uchar> cristaux_opposite;// Array used to make correspondance between a detector and the label of the detector at 180° 
 
-  /// @brief Static initialize. Allows one to use the arrays event if no object has been instantiated
-  static void InitializeArrays()
+  /// @brief Static Initialise. Allows one to use the arrays event if no object has been instantiated
+  static void InitialiseArrays()
   {
     #ifdef MULTITHREADING
       lock_mutex lock(MTObject::mutex);
@@ -136,7 +136,7 @@ public:
 
   Clovers()
   {
-    InitializeArrays(); 
+    InitialiseArrays(); 
     m_clovers.resize(24); 
     CloverModule::resetGlobalLabel();
     PromptClovers.resize(24);
@@ -344,7 +344,7 @@ public:
   } delayedGate;
 };
 
-// ---- InitializeArrays static members : ----- //
+// ---- InitialiseArrays static members : ----- //
 // Lookup tables :
 std::array<bool, Clovers::nb_det> Clovers::isClover;
 std::array<bool, Clovers::nb_det> Clovers::isGe;

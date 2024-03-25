@@ -1,0 +1,12 @@
+<map id="Timeshifts::InitialiseCorrected" name="Timeshifts::InitialiseCorrected">
+<area shape="rect" id="node1" title=" " alt="" coords="5,157,223,184"/>
+<area shape="rect" id="node2" href="$class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="271,68,403,95"/>
+<area shape="rect" id="node7" href="$class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="806,81,929,108"/>
+<area shape="rect" id="node8" href="$class_m_t_t_hist.html#aa10c349eccd83edd9e5204e014b706c8" title="Copy Initialiser." alt="" coords="278,183,395,209"/>
+<area shape="rect" id="node9" href="$class_detectors.html#a8780c1daca5724bb16ba07824f3c3665" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="277,233,396,260"/>
+<area shape="rect" id="node3" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="451,43,576,69"/>
+<area shape="rect" id="node4" href="$class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="624,31,755,57"/>
+<area shape="rect" id="node5" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="803,5,932,32"/>
+<area shape="rect" id="node6" href="$_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="980,5,1059,32"/>
+<area shape="rect" id="node10" href="$_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="468,233,559,260"/>
+</map>

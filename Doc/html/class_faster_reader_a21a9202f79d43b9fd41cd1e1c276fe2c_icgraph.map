@@ -1,4 +1,4 @@
-<map id="FasterReader::InitializeReader" name="FasterReader::InitializeReader">
+<map id="FasterReader::InitialiseReader" name="FasterReader::InitialiseReader">
 <area shape="rect" id="node1" title=" " alt="" coords="472,23,643,65"/>
 <area shape="rect" id="node2" href="$class_faster_reader.html#a949601e8d70fc3aaabe66824d22bdf69" title="Setup the fasterac.h library to read the data." alt="" coords="253,31,424,57"/>
 <area shape="rect" id="node3" href="$class_faster_reader.html#af4dd68bbc6c027e1c35bfd5b52525002" title="Construct a new Faster Reader object." alt="" coords="5,5,205,32"/>

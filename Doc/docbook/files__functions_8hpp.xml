@@ -3,9 +3,13 @@
 <title>lib/files_functions.hpp File Reference</title>
 <indexterm><primary>lib/files_functions.hpp</primary></indexterm>
 <programlisting>#include &quot;print.hpp&quot;
-#include &quot;string_functions.hpp&quot;
 #include &quot;vector_functions.hpp&quot;
+#include &quot;string_functions.hpp&quot;
+#include &lt;algorithm&gt;
+#include &lt;dirent.h&gt;
 #include &lt;fstream&gt;
+#include &lt;glob.h&gt;
+#include &lt;iostream&gt;
 #include &lt;filesystem&gt;
 </programlisting>Include dependency graph for files_functions.hpp:<para>
     <informalfigure>
@@ -79,9 +83,13 @@ This graph shows which files directly or indirectly include this file:<para>
 </listitem>
             <listitem><para>std::string <link linkend="_files__functions_8hpp_1ab1e262f27aaad28944f29cd2bbde417f">getPath</link> (std::string const &amp;string)</para>
 </listitem>
+            <listitem><para>void <link linkend="_files__functions_8hpp_1a2f9387aa10988ebce3a1bd6e860497a2">go_to_beginning</link> (std::ifstream &amp;file)</para>
+</listitem>
             <listitem><para>bool <link linkend="_files__functions_8hpp_1a0b4d810562e117c29ca0dda1855a02e3">hasPath</link> (std::string const &amp;file)</para>
 </listitem>
-            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_files__functions_8hpp_1a8c014ea676bc34e0ec57b1aeb55af4c5">list_files_in_folder</link> (std::string const &amp;foldername, std::vector&lt; std::string &gt; const &amp;extensions={&quot;*&quot;}, bool const &amp;reorder=true)</para>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_files__functions_8hpp_1a61d333d5f140b093c5ef8903d29dee77">list_file_names_in_folder</link> (std::string const &amp;foldername=&quot;./&quot;, std::vector&lt; std::string &gt; const &amp;extensions={&quot;*&quot;}, bool const &amp;reorder=true)</para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_files__functions_8hpp_1a0b6555f0818e33170e5c3c3c513d6b91">list_files_in_folder</link> (std::string const &amp;foldername=&quot;./&quot;, std::vector&lt; std::string &gt; const &amp;extensions={&quot;*&quot;}, bool const &amp;reorder=true)</para>
 </listitem>
             <listitem><para>std::vector&lt; std::string &gt; <link linkend="_files__functions_8hpp_1a25af8f31a8b51b38a4c2334e3901acfc">listFileReader</link> (std::string const &amp;filename)</para>
 </listitem>
@@ -92,8 +100,6 @@ This graph shows which files directly or indirectly include this file:<para>
             <listitem><para>std::string <link linkend="_files__functions_8hpp_1a5326a7606384341a1bd2a01f15ca9b06">operator+</link> (<link linkend="_class_path">Path</link> const &amp;path, <link linkend="_class_filename">Filename</link> const &amp;filename)</para>
 </listitem>
             <listitem><para><link linkend="_class_folder">Folder</link> <link linkend="_files__functions_8hpp_1ad580345a13bcb93c84b981f67f25b899">operator+</link> (std::string const &amp;string, <link linkend="_class_folder">Folder</link> const &amp;folder)</para>
-</listitem>
-            <listitem><para>std::string <link linkend="_files__functions_8hpp_1a151e488cdb2e927bd293d0e574948f43">operator+=</link> (std::string const &amp;string, <link linkend="_class_folder">Folder</link> const &amp;folder)</para>
 </listitem>
             <listitem><para>std::ostream &amp; <link linkend="_files__functions_8hpp_1a159a1e5f9109960956ef172f5b862cf8">operator&lt;&lt;</link> (std::ostream &amp;cout, <link linkend="_class_file">File</link> const &amp;file)</para>
 </listitem>
@@ -315,6 +321,19 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
+    </section><anchor xml:id="_files__functions_8hpp_1a2f9387aa10988ebce3a1bd6e860497a2"/>    <section>
+    <title>go_to_beginning()</title>
+<indexterm><primary>go_to_beginning</primary><secondary>files_functions.hpp</secondary></indexterm>
+<indexterm><primary>files_functions.hpp</primary><secondary>go_to_beginning</secondary></indexterm>
+<para><computeroutput>void go_to_beginning (std::ifstream &amp; file)</computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="files__functions_8hpp_a2f9387aa10988ebce3a1bd6e860497a2_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
     </section><anchor xml:id="_files__functions_8hpp_1a0b4d810562e117c29ca0dda1855a02e3"/>    <section>
     <title>hasPath()</title>
 <indexterm><primary>hasPath</primary><secondary>files_functions.hpp</secondary></indexterm>
@@ -337,17 +356,25 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_files__functions_8hpp_1a8c014ea676bc34e0ec57b1aeb55af4c5"/>    <section>
+    </section><anchor xml:id="_files__functions_8hpp_1a61d333d5f140b093c5ef8903d29dee77"/>    <section>
+    <title>list_file_names_in_folder()</title>
+<indexterm><primary>list_file_names_in_folder</primary><secondary>files_functions.hpp</secondary></indexterm>
+<indexterm><primary>files_functions.hpp</primary><secondary>list_file_names_in_folder</secondary></indexterm>
+<para><computeroutput>std::vector&lt;std::string&gt; list_file_names_in_folder (std::string const &amp; foldername = <computeroutput>&quot;./&quot;</computeroutput>
+, std::vector&lt; std::string &gt; const &amp; extensions = <computeroutput>{&quot;*&quot;}</computeroutput>
+, bool const &amp; reorder = <computeroutput>true</computeroutput>
+)</computeroutput></para>    </section><anchor xml:id="_files__functions_8hpp_1a0b6555f0818e33170e5c3c3c513d6b91"/>    <section>
     <title>list_files_in_folder()</title>
 <indexterm><primary>list_files_in_folder</primary><secondary>files_functions.hpp</secondary></indexterm>
 <indexterm><primary>files_functions.hpp</primary><secondary>list_files_in_folder</secondary></indexterm>
-<para><computeroutput>std::vector&lt;std::string&gt; list_files_in_folder (std::string const &amp; foldername, std::vector&lt; std::string &gt; const &amp; extensions = <computeroutput>{&quot;*&quot;}</computeroutput>
+<para><computeroutput>std::vector&lt;std::string&gt; list_files_in_folder (std::string const &amp; foldername = <computeroutput>&quot;./&quot;</computeroutput>
+, std::vector&lt; std::string &gt; const &amp; extensions = <computeroutput>{&quot;*&quot;}</computeroutput>
 , bool const &amp; reorder = <computeroutput>true</computeroutput>
 )</computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="files__functions_8hpp_a8c014ea676bc34e0ec57b1aeb55af4c5_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="files__functions_8hpp_a0b6555f0818e33170e5c3c3c513d6b91_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -422,19 +449,6 @@ Here is the caller graph for this function:<para>
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="files__functions_8hpp_ad580345a13bcb93c84b981f67f25b899_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_files__functions_8hpp_1a151e488cdb2e927bd293d0e574948f43"/>    <section>
-    <title>operator+=()</title>
-<indexterm><primary>operator+=</primary><secondary>files_functions.hpp</secondary></indexterm>
-<indexterm><primary>files_functions.hpp</primary><secondary>operator+=</secondary></indexterm>
-<para><computeroutput>std::string operator+= (std::string const &amp; string, <link linkend="_class_folder">Folder</link> const &amp; folder)</computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="files__functions_8hpp_a151e488cdb2e927bd293d0e574948f43_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -551,7 +565,16 @@ Here is the caller graph for this function:<para>
     <title>rmPathAndExt()</title>
 <indexterm><primary>rmPathAndExt</primary><secondary>files_functions.hpp</secondary></indexterm>
 <indexterm><primary>files_functions.hpp</primary><secondary>rmPathAndExt</secondary></indexterm>
-<para><computeroutput>std::string rmPathAndExt (std::string const &amp; string)</computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>std::string rmPathAndExt (std::string const &amp; string)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="files__functions_8hpp_a58f50a6390692cff52eef37fdaa94e56_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>

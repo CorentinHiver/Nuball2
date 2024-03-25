@@ -1,20 +1,19 @@
 \doxysection{lib/lib\+Co.hpp File Reference}
 \label{lib_co_8hpp}\index{lib/libCo.hpp@{lib/libCo.hpp}}
+{\ttfamily \#include \char`\"{}print.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}vector\+\_\+functions.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}random\+Co.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}string\+\_\+functions.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}files\+\_\+functions.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}errors.\+hpp\char`\"{}}\newline
 {\ttfamily \#include $<$any$>$}\newline
 {\ttfamily \#include $<$array$>$}\newline
-{\ttfamily \#include $<$algorithm$>$}\newline
-{\ttfamily \#include $<$cstdlib$>$}\newline
-{\ttfamily \#include $<$cstring$>$}\newline
 {\ttfamily \#include $<$fstream$>$}\newline
 {\ttfamily \#include $<$functional$>$}\newline
-{\ttfamily \#include $<$iomanip$>$}\newline
-{\ttfamily \#include $<$iostream$>$}\newline
-{\ttfamily \#include $<$map$>$}\newline
 {\ttfamily \#include $<$memory$>$}\newline
 {\ttfamily \#include $<$mutex$>$}\newline
 {\ttfamily \#include $<$numeric$>$}\newline
 {\ttfamily \#include $<$queue$>$}\newline
-{\ttfamily \#include $<$sstream$>$}\newline
 {\ttfamily \#include $<$stdexcept$>$}\newline
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$stack$>$}\newline
@@ -22,25 +21,20 @@
 {\ttfamily \#include $<$typeindex$>$}\newline
 {\ttfamily \#include $<$typeinfo$>$}\newline
 {\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
-{\ttfamily \#include $<$vector$>$}\newline
-{\ttfamily \#include $<$dirent.\+h$>$}\newline
-{\ttfamily \#include $<$glob.\+h$>$}\newline
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$string.\+h$>$}\newline
-{\ttfamily \#include \char`\"{}print.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}random.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}string\+\_\+functions.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}files\+\_\+functions.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}vector\+\_\+functions.\+hpp\char`\"{}}\newline
-Include dependency graph for lib\+Co.\+hpp\+:\nopagebreak
+{\ttfamily \#include $<$csignal$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+Include dependency graph for lib\+Co.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{lib_co_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -51,6 +45,20 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 class \textbf{ Bools}
+\item 
+class \textbf{ Cast\+Impossible}
+\item 
+struct \textbf{ is\+\_\+container$<$ T $>$}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \textbf{ Co\+Bazar}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ \+\_\+\+GLIBCXX\+\_\+\+USE\+\_\+\+CXX11\+\_\+\+ABI}~0/1
 \end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
@@ -78,28 +86,28 @@ using \textbf{ ushort} = unsigned short int
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\bool \textbf{ bool\+\_\+cast} (T const \&t)
-\begin{DoxyCompactList}\small\item\em Casts a number into an bool. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \textbf{ bool\+\_\+cast} (T const \&t)
+\begin{DoxyCompactList}\small\item\em Casts a any type into an bool. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\char \textbf{ char\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into an char. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\double \textbf{ double\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into an double. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename K , typename V $>$ }\\bool \textbf{ find\+\_\+key} (std\+::map$<$ K, V $>$ const \&map, K const \&key)
-\item 
+\begin{DoxyCompactList}\small\item\em Returns yes if the key is found in the map. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename K , typename V $>$ }\\bool \textbf{ find\+\_\+key} (std\+::unordered\+\_\+map$<$ K, V $>$ const \&map, K const \&key)
 \item 
 {\footnotesize template$<$typename K , typename V $>$ }\\bool \textbf{ find\+\_\+value} (std\+::map$<$ K, V $>$ const \&map, V const \&value)
-\item 
+\begin{DoxyCompactList}\small\item\em Returns yes if the value is found in the map. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename K , typename V $>$ }\\bool \textbf{ find\+\_\+value} (std\+::unordered\+\_\+map$<$ K, V $>$ const \&map, V const \&value)
 \item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\float \textbf{ float\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into a float. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename K , typename V $>$ }\\std\+::pair$<$ K, V $>$ \textbf{ get\+\_\+max\+\_\+element} (std\+::map$<$ K, V $>$ const \&map)
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the element with the maximum value. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename K , typename V $>$ }\\K \textbf{ get\+\_\+max\+\_\+key} (std\+::map$<$ K, V $>$ const \&map)
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the maximum key stored in the map. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename K , typename V $>$ }\\V \textbf{ get\+\_\+max\+\_\+value} (std\+::map$<$ K, V $>$ const \&map)
-\item 
+\begin{DoxyCompactList}\small\item\em Returns the maximum value stored in the map. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename K , typename V $>$ }\\std\+::pair$<$ K, V $>$ \textbf{ get\+\_\+min} (std\+::map$<$ K, V $>$ const \&map)
 \item 
 {\footnotesize template$<$typename K , typename V $>$ }\\K \textbf{ get\+\_\+min\+\_\+key} (std\+::map$<$ K, V $>$ const \&map)
@@ -108,22 +116,58 @@ using \textbf{ ushort} = unsigned short int
 \item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\int \textbf{ int\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into an int. \end{DoxyCompactList}\item 
+bool \textbf{ is\+\_\+int} (double const \&x)
+\begin{DoxyCompactList}\small\item\em Check if the given double holds an integer. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\std\+::vector$<$ K $>$ \textbf{ list\+\_\+of\+\_\+keys} (std\+::map$<$ K, V $>$ const \&map)
+\begin{DoxyCompactList}\small\item\em Returns the list of keys in a map. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\long \textbf{ long\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into an long. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Bazar\+::long\+\_\+progress\+\_\+bar} (float const \&progress\+\_\+procent)
+\item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ longlong} \textbf{ longlong\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into long long (longlong) \end{DoxyCompactList}\item 
-std\+::ostream \& \textbf{ operator$>$$>$} (std\+::ostream \&cout, \textbf{ Bools} const \&bools)
+{\footnotesize template$<$class... ARGS$>$ }\\double \textbf{ Co\+Bazar\+::mean} (ARGS... args)
+\item 
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ Bools} const \&bools)
+\item 
+{\footnotesize template$<$class E , size\+\_\+t size$>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::array$<$ E, size $>$ const \&a)
+\item 
+{\footnotesize template$<$class K , class V $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::map$<$ K, V $>$ const \&m)
+\item 
+{\footnotesize template$<$class F , class S $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::pair$<$ F, S $>$ const \&p)
+\item 
+{\footnotesize template$<$class K , class V $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::unordered\+\_\+map$<$ K, V $>$ const \&m)
+\item 
+{\footnotesize template$<$class E $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, std\+::vector$<$ E $>$ const \&v)
+\item 
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ uchar} const \&uc)
 \item 
 auto \textbf{ pause\+Co} ()
 \item 
 auto \textbf{ pause\+Co} (std\+::string const \&message)
 \item 
+void \textbf{ pause\+Debug} (std\+::string const \&message=\char`\"{}\char`\"{})
+\item 
+{\footnotesize template$<$class T $>$ }\\T \textbf{ positive\+\_\+modulo} (T const \&dividend, T const \&divisor)
+\item 
+void \textbf{ Co\+Bazar\+::progress\+\_\+bar} (float const \&progress\+\_\+procent, int width=50)
+\item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\short \textbf{ short\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into an short. \end{DoxyCompactList}\item 
+void \textbf{ Co\+Bazar\+::short\+\_\+progress\+\_\+bar} (float const \&progress\+\_\+procent)
+\item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ size\+\_\+t} \textbf{ size\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into std\+::size\+\_\+t. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\T \textbf{ string\+\_\+to} (std\+::string const \&string)
+\item 
+{\footnotesize template$<$class T , class... ARGS$>$ }\\T \textbf{ Co\+Bazar\+::sum} (T i, ARGS... args)
+\item 
 void \textbf{ throw\+\_\+error} (std\+::string const \&message)
 \item 
+std\+::string \textbf{ time\+\_\+string} ()
+\begin{DoxyCompactList}\small\item\em Returns a string in the format mm\+\_\+hh\+\_\+dd\+\_\+mm\+\_\+yy. \end{DoxyCompactList}\item 
+std\+::string \textbf{ time\+\_\+string\+\_\+inverse} ()
+\begin{DoxyCompactList}\small\item\em Returns a string in the format yy\+\_\+mm\+\_\+dd\+\_\+hh\+\_\+mm. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ uchar} \textbf{ uchar\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into unsigned char (uchar) \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ uint} \textbf{ uint\+\_\+cast} (T const \&t)
@@ -137,10 +181,17 @@ void \textbf{ throw\+\_\+error} (std\+::string const \&message)
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-double \textbf{ \+\_\+ns} = 1000.
-\item 
 std\+::map$<$ std\+::string, std\+::string $>$ \textbf{ error\+\_\+message}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{lib_co_8hpp_acbf3245277a73b810032219100559ae2}} 
+\index{libCo.hpp@{libCo.hpp}!\_GLIBCXX\_USE\_CXX11\_ABI@{\_GLIBCXX\_USE\_CXX11\_ABI}}
+\index{\_GLIBCXX\_USE\_CXX11\_ABI@{\_GLIBCXX\_USE\_CXX11\_ABI}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{\_GLIBCXX\_USE\_CXX11\_ABI}
+{\footnotesize\ttfamily \#define \+\_\+\+GLIBCXX\+\_\+\+USE\+\_\+\+CXX11\+\_\+\+ABI~0/1}
+
 
 
 \doxysubsection{Typedef Documentation}
@@ -208,22 +259,23 @@ using \textbf{ T\+\_\+is\+\_\+number} =  void}
 
 
 \doxysubsection{Function Documentation}
-\mbox{\label{lib_co_8hpp_a79092fe2f0694bdbb860894b0f983e32}} 
+\mbox{\label{lib_co_8hpp_a1783566268ead87d4fdd8c61b6af7ede}} 
 \index{libCo.hpp@{libCo.hpp}!bool\_cast@{bool\_cast}}
 \index{bool\_cast@{bool\_cast}!libCo.hpp@{libCo.hpp}}
 \doxysubsubsection{bool\_cast()}
-{\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
+{\footnotesize\ttfamily template$<$typename T $>$ \\
 bool bool\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Casts a number into an bool. 
+Casts a any type into an bool. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=291pt]{lib_co_8hpp_a79092fe2f0694bdbb860894b0f983e32_icgraph}
+\includegraphics[width=290pt]{lib_co_8hpp_a1783566268ead87d4fdd8c61b6af7ede_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{lib_co_8hpp_afe72de0c3fabeb8944bfd72ccdbe0d73}} 
@@ -255,7 +307,8 @@ double double\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{Dox
 
 Casts a number into an double. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -269,18 +322,23 @@ Here is the caller graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
 bool find\+\_\+key (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map,  }\item[{K const \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\label{lib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67}} 
+
+
+Returns yes if the key is found in the map. 
+
+This method is only looking in the keys, not in the values \mbox{\label{lib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67}} 
 \index{libCo.hpp@{libCo.hpp}!find\_key@{find\_key}}
 \index{find\_key@{find\_key}!libCo.hpp@{libCo.hpp}}
 \doxysubsubsection{find\_key()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
 bool find\+\_\+key (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+map$<$ K, V $>$ const \&}]{map,  }\item[{K const \&}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=271pt]{lib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67_icgraph}
+\includegraphics[width=350pt]{lib_co_8hpp_a3b8ddb099e22657a31515fbcd8d1bf67_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{lib_co_8hpp_a1a6d9eab2874e1bf6506aeb84d21506d}} 
@@ -290,7 +348,11 @@ Here is the caller graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
 bool find\+\_\+value (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map,  }\item[{V const \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\label{lib_co_8hpp_aaff2134bba0ee7c0b4a509699674251a}} 
+
+
+Returns yes if the value is found in the map. 
+
+This method is only looking in the values, not in the keys \mbox{\label{lib_co_8hpp_aaff2134bba0ee7c0b4a509699674251a}} 
 \index{libCo.hpp@{libCo.hpp}!find\_value@{find\_value}}
 \index{find\_value@{find\_value}!libCo.hpp@{libCo.hpp}}
 \doxysubsubsection{find\_value()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
@@ -308,11 +370,15 @@ float float\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyP
 
 Casts a number into a float. 
 
-Here is the caller graph for this function\+:\nopagebreak
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=335pt]{lib_co_8hpp_a075a3c229a21ca4d0e91f72e99a6bf6d_icgraph}
+\includegraphics[width=350pt]{lib_co_8hpp_a075a3c229a21ca4d0e91f72e99a6bf6d_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{lib_co_8hpp_ad15d46f1c6897c587cd64a3efba23585}} 
@@ -322,21 +388,33 @@ Here is the caller graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
 std\+::pair$<$K,V$>$ get\+\_\+max\+\_\+element (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\label{lib_co_8hpp_aecb45c04cc3a1a2386b973014e4fef50}} 
+
+
+Returns the element with the maximum value. 
+
+This method is only comparing values, not keys \mbox{\label{lib_co_8hpp_aecb45c04cc3a1a2386b973014e4fef50}} 
 \index{libCo.hpp@{libCo.hpp}!get\_max\_key@{get\_max\_key}}
 \index{get\_max\_key@{get\_max\_key}!libCo.hpp@{libCo.hpp}}
 \doxysubsubsection{get\_max\_key()}
 {\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
 K get\+\_\+max\+\_\+key (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\label{lib_co_8hpp_ad4ab9f9247e670a4d9db36ca683e6270}} 
+
+
+Returns the maximum key stored in the map. 
+
+This method is only looking for values, not keys \mbox{\label{lib_co_8hpp_ad4ab9f9247e670a4d9db36ca683e6270}} 
 \index{libCo.hpp@{libCo.hpp}!get\_max\_value@{get\_max\_value}}
 \index{get\_max\_value@{get\_max\_value}!libCo.hpp@{libCo.hpp}}
 \doxysubsubsection{get\_max\_value()}
 {\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
 V get\+\_\+max\+\_\+value (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\label{lib_co_8hpp_a6f43d67b9c0e4bb6bf5a58906ae0d812}} 
+
+
+Returns the maximum value stored in the map. 
+
+This method is only lookinf for values, not keys \mbox{\label{lib_co_8hpp_a6f43d67b9c0e4bb6bf5a58906ae0d812}} 
 \index{libCo.hpp@{libCo.hpp}!get\_min@{get\_min}}
 \index{get\_min@{get\_min}!libCo.hpp@{libCo.hpp}}
 \doxysubsubsection{get\_min()}
@@ -368,14 +446,39 @@ int int\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParam
 
 Casts a number into an int. 
 
-Here is the caller graph for this function\+:\nopagebreak
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{lib_co_8hpp_a48e80fbfd11f9fb219b92ba1c29c1b2a_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{lib_co_8hpp_a695ead22582e1da41880ee67c2c61d07}} 
+\mbox{\label{lib_co_8hpp_a55120ef582763ab1404545ce4e2845b9}} 
+\index{libCo.hpp@{libCo.hpp}!is\_int@{is\_int}}
+\index{is\_int@{is\_int}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{is\_int()}
+{\footnotesize\ttfamily bool is\+\_\+int (\begin{DoxyParamCaption}\item[{double const \&}]{x }\end{DoxyParamCaption})}
+
+
+
+Check if the given double holds an integer. 
+
+\mbox{\label{lib_co_8hpp_a0437363026eeb97df583c38d88cf68b1}} 
+\index{libCo.hpp@{libCo.hpp}!list\_of\_keys@{list\_of\_keys}}
+\index{list\_of\_keys@{list\_of\_keys}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{list\_of\_keys()}
+{\footnotesize\ttfamily template$<$typename K , typename V $>$ \\
+std\+::vector$<$K$>$ list\+\_\+of\+\_\+keys (\begin{DoxyParamCaption}\item[{std\+::map$<$ K, V $>$ const \&}]{map }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the list of keys in a map. 
+
+This method is only looking in the keys, not the values \mbox{\label{lib_co_8hpp_a695ead22582e1da41880ee67c2c61d07}} 
 \index{libCo.hpp@{libCo.hpp}!long\_cast@{long\_cast}}
 \index{long\_cast@{long\_cast}!libCo.hpp@{libCo.hpp}}
 \doxysubsubsection{long\_cast()}
@@ -386,11 +489,12 @@ long long\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyPar
 
 Casts a number into an long. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=334pt]{lib_co_8hpp_a695ead22582e1da41880ee67c2c61d07_icgraph}
+\includegraphics[width=350pt]{lib_co_8hpp_a695ead22582e1da41880ee67c2c61d07_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{lib_co_8hpp_a86b2b990fa7ee3c102db83cdecc9d129}} 
@@ -404,11 +508,60 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Casts a number into long long (longlong) 
 
-\mbox{\label{lib_co_8hpp_a4944be9c9377ea1853bd55f996b7cb13}} 
-\index{libCo.hpp@{libCo.hpp}!operator$>$$>$@{operator$>$$>$}}
-\index{operator$>$$>$@{operator$>$$>$}!libCo.hpp@{libCo.hpp}}
-\doxysubsubsection{operator$>$$>$()}
-{\footnotesize\ttfamily std\+::ostream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Bools} const \&}]{bools }\end{DoxyParamCaption})}
+\mbox{\label{lib_co_8hpp_aea023a62fe74d109a9fe9da1040708fc}} 
+\index{libCo.hpp@{libCo.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Bools} const \&}]{bools }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_co_8hpp_a021f6cc0c03903546e6a63851944f2e8}} 
+\index{libCo.hpp@{libCo.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily template$<$class E , size\+\_\+t size$>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::array$<$ E, size $>$ const \&}]{a }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{lib_co_8hpp_a021f6cc0c03903546e6a63851944f2e8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a1fc2e1be374c41706525b8d606242646}} 
+\index{libCo.hpp@{libCo.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily template$<$class K , class V $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::map$<$ K, V $>$ const \&}]{m }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_co_8hpp_a305d037b6a2823d9d8d935b1cd5dd2c0}} 
+\index{libCo.hpp@{libCo.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily template$<$class F , class S $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::pair$<$ F, S $>$ const \&}]{p }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_co_8hpp_ac877d4b5e0dd4b6c1cba14fea177d092}} 
+\index{libCo.hpp@{libCo.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily template$<$class K , class V $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::unordered\+\_\+map$<$ K, V $>$ const \&}]{m }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_co_8hpp_a03b9abfe3f12543c365e9a25848ba566}} 
+\index{libCo.hpp@{libCo.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily template$<$class E $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{std\+::vector$<$ E $>$ const \&}]{v }\end{DoxyParamCaption})}
+
+\mbox{\label{lib_co_8hpp_ae7a3135c43a9bae996dfeb1775184a45}} 
+\index{libCo.hpp@{libCo.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ uchar} const \&}]{uc }\end{DoxyParamCaption})}
 
 \mbox{\label{lib_co_8hpp_a6cca31a5d1658456b486e6fa135c690b}} 
 \index{libCo.hpp@{libCo.hpp}!pauseCo@{pauseCo}}
@@ -416,7 +569,8 @@ Casts a number into long long (longlong)
 \doxysubsubsection{pauseCo()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily auto pause\+Co (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -429,6 +583,35 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{pauseCo()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily auto pause\+Co (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{message }\end{DoxyParamCaption})}
 
+\mbox{\label{lib_co_8hpp_aad6095f67a0bcb2c5dbaf1484e98d326}} 
+\index{libCo.hpp@{libCo.hpp}!pauseDebug@{pauseDebug}}
+\index{pauseDebug@{pauseDebug}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{pauseDebug()}
+{\footnotesize\ttfamily void pause\+Debug (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{message = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{lib_co_8hpp_aad6095f67a0bcb2c5dbaf1484e98d326_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_acffb7404540d3e0a654fd7929081bb70}} 
+\index{libCo.hpp@{libCo.hpp}!positive\_modulo@{positive\_modulo}}
+\index{positive\_modulo@{positive\_modulo}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{positive\_modulo()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T positive\+\_\+modulo (\begin{DoxyParamCaption}\item[{T const \&}]{dividend,  }\item[{T const \&}]{divisor }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp_acffb7404540d3e0a654fd7929081bb70_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{lib_co_8hpp_af4d9dac78db5e48b5e2c5253754aaa8c}} 
 \index{libCo.hpp@{libCo.hpp}!short\_cast@{short\_cast}}
 \index{short\_cast@{short\_cast}!libCo.hpp@{libCo.hpp}}
@@ -458,11 +641,27 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Casts a number into std\+::size\+\_\+t. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{lib_co_8hpp_a237f678c718382f74a68364c0fc1779a_icgraph}
+\includegraphics[width=311pt]{lib_co_8hpp_a237f678c718382f74a68364c0fc1779a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_a860090f450f9d024cd3e5cd721101418}} 
+\index{libCo.hpp@{libCo.hpp}!string\_to@{string\_to}}
+\index{string\_to@{string\_to}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{string\_to()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T string\+\_\+to (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lib_co_8hpp_a860090f450f9d024cd3e5cd721101418_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{lib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d}} 
@@ -471,13 +670,45 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{throw\_error()}
 {\footnotesize\ttfamily void throw\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{message }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{lib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d_icgraph}
+\includegraphics[width=350pt]{lib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d_cgraph}
 \end{center}
 \end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{lib_co_8hpp_a6df2dcd4b1f61c75dc292942bc5ca74d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{lib_co_8hpp_adaf1adad3b86299b92ed406d55b1fa77}} 
+\index{libCo.hpp@{libCo.hpp}!time\_string@{time\_string}}
+\index{time\_string@{time\_string}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{time\_string()}
+{\footnotesize\ttfamily std\+::string time\+\_\+string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a string in the format mm\+\_\+hh\+\_\+dd\+\_\+mm\+\_\+yy. 
+
+\mbox{\label{lib_co_8hpp_abd9cea94f34b8212279bfabe71df818b}} 
+\index{libCo.hpp@{libCo.hpp}!time\_string\_inverse@{time\_string\_inverse}}
+\index{time\_string\_inverse@{time\_string\_inverse}!libCo.hpp@{libCo.hpp}}
+\doxysubsubsection{time\_string\_inverse()}
+{\footnotesize\ttfamily std\+::string time\+\_\+string\+\_\+inverse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a string in the format yy\+\_\+mm\+\_\+dd\+\_\+hh\+\_\+mm. 
+
 \mbox{\label{lib_co_8hpp_ade77d1f37b1311b3f80ce429a33fd226}} 
 \index{libCo.hpp@{libCo.hpp}!uchar\_cast@{uchar\_cast}}
 \index{uchar\_cast@{uchar\_cast}!libCo.hpp@{libCo.hpp}}
@@ -489,7 +720,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Casts a number into unsigned char (uchar) 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -554,22 +786,17 @@ Casts a number into unsigned long long (ulonglong)
 
 Casts a number into unsigned short (ushort) 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=344pt]{lib_co_8hpp_ab2f8f9033c2742c4f5ac6d3cce6caf9a_icgraph}
+\includegraphics[width=350pt]{lib_co_8hpp_ab2f8f9033c2742c4f5ac6d3cce6caf9a_icgraph}
 \end{center}
 \end{figure}
 
 
 \doxysubsection{Variable Documentation}
-\mbox{\label{lib_co_8hpp_a99f92dd785ee1e11e00427fdc8a4f772}} 
-\index{libCo.hpp@{libCo.hpp}!\_ns@{\_ns}}
-\index{\_ns@{\_ns}!libCo.hpp@{libCo.hpp}}
-\doxysubsubsection{\_ns}
-{\footnotesize\ttfamily double \+\_\+ns = 1000.}
-
 \mbox{\label{lib_co_8hpp_af522b6efd63a7f871a8307755b1297bf}} 
 \index{libCo.hpp@{libCo.hpp}!error\_message@{error\_message}}
 \index{error\_message@{error\_message}!libCo.hpp@{libCo.hpp}}

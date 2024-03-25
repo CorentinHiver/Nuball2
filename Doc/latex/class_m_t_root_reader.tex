@@ -18,13 +18,13 @@ Collaboration diagram for MTRoot\+Reader\+:\nopagebreak
 \item 
 bool \textbf{ add\+Folder} (\textbf{ Path} path, int const \&nb\+\_\+files=-\/1)
 \item 
-{\footnotesize template$<$class Func , class... ARGS$>$ }\\void \textbf{ execute} (Func \&\&func, ARGS \&\&... args)
-\item 
 \textbf{ MTRoot\+Reader} ()
 \item 
 \textbf{ MTRoot\+Reader} (\textbf{ Path} foldername, int const \&nb\+\_\+files=-\/1)
 \item 
 bool \textbf{ next\+Filename} (std\+::string \&filename)
+\item 
+{\footnotesize template$<$class Func , class... ARGS$>$ }\\void \textbf{ read} (Func \&\&func, ARGS \&\&... args)
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -53,7 +53,8 @@ bool \textbf{ next\+Filename} (std\+::string \&filename)
 \doxysubsubsection{MTRootReader()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily MTRoot\+Reader\+::\+MTRoot\+Reader (\begin{DoxyParamCaption}\item[{\textbf{ Path}}]{foldername,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -69,7 +70,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{addFolder()}
 {\footnotesize\ttfamily bool MTRoot\+Reader\+::add\+Folder (\begin{DoxyParamCaption}\item[{\textbf{ Path}}]{path,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -81,27 +83,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_m_t_root_reader_ad8f964e63c97f35e44fc3b11fca88e59_icgraph}
-\end{center}
-\end{figure}
-\mbox{\label{class_m_t_root_reader_a506f517a4772f5ec3b8bbf5c835a3490}} 
-\index{MTRootReader@{MTRootReader}!execute@{execute}}
-\index{execute@{execute}!MTRootReader@{MTRootReader}}
-\doxysubsubsection{execute()}
-{\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
-void MTRoot\+Reader\+::execute (\begin{DoxyParamCaption}\item[{Func \&\&}]{func,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_m_t_root_reader_a506f517a4772f5ec3b8bbf5c835a3490_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_m_t_root_reader_a506f517a4772f5ec3b8bbf5c835a3490_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_m_t_root_reader_a198a2f34b1b61cb0c449ba82478a4f22}} 
@@ -124,6 +105,29 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_m_t_root_reader_a198a2f34b1b61cb0c449ba82478a4f22_icgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_m_t_root_reader_a81c87315eaaf2147d6f30639194fd4e8}} 
+\index{MTRootReader@{MTRootReader}!read@{read}}
+\index{read@{read}!MTRootReader@{MTRootReader}}
+\doxysubsubsection{read()}
+{\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
+void MTRoot\+Reader\+::read (\begin{DoxyParamCaption}\item[{Func \&\&}]{func,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_m_t_root_reader_a81c87315eaaf2147d6f30639194fd4e8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{class_m_t_root_reader_a81c87315eaaf2147d6f30639194fd4e8_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_m_t_root_reader_ad46b9bf07eeab40b80fa9a504d5aaf52}} 
 \index{MTRootReader@{MTRootReader}!Read@{Read}}
 \index{Read@{Read}!MTRootReader@{MTRootReader}}
@@ -131,7 +135,8 @@ Here is the caller graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$class Func , class... ARGS$>$ \\
 void MTRoot\+Reader\+::\+Read (\begin{DoxyParamCaption}\item[{\textbf{ MTRoot\+Reader} \&}]{MTreader,  }\item[{Func}]{function,  }\item[{ARGS \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

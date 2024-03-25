@@ -25,14 +25,15 @@
 var NAVTREE =
 [
   [ "Nuball2", "index.html", [
-    [ "Test List", "test.html", null ],
     [ "Deprecated List", "deprecated.html", null ],
     [ "Todo List", "todo.html", null ],
+    [ "Test List", "test.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
         [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
         [ "Typedefs", "namespacemembers_type.html", null ]
       ] ]
     ] ],
@@ -43,34 +44,39 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", "functions_vars" ]
+        [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Typedefs", "functions_type.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", null ],
+        [ "Functions", "globals_func.html", "globals_func" ],
         [ "Variables", "globals_vars.html", null ],
         [ "Typedefs", "globals_type.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
-    ] ]
+    ] ],
+    [ "Examples", "examples.html", "examples" ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_alignator_8hpp.html",
-"class_bools.html#a0908affb9f95fbbcd517316c7c81bf53",
-"class_clovers_1_1_delayed_gate.html#ad56e49d7480258ae67105b58e0624bac",
-"class_event_analyse.html#a511c0ce19d51b95aed1c3ebf7f69eca0",
-"class_fit.html#a5a9406e4e285484650609f696d96ffa2",
-"class_m_t_t_hist.html#a08dcc0e1d5db8d111f0459ff47f736e9",
-"class_paris_label.html#a17ef0fbe8cabfb5de60f9853fc8dc49d",
-"class_simplex.html#a321c481eed3e0f60defabaa88f4cba69",
-"class_timeshifts.html#a46a97751e517cc9f21d54d04bb16c5f5",
-"globals.html"
+"_2media_2sf__one_drive_2_c_n_r_s_2_nuball2_2lib_2_classes_2_co_progress_bar_8hpp-example.html",
+"class_alignator.html#a03d48bd3422a4f5d9210ba28ff0957a3",
+"class_clover_module.html#aa9dbed7e8f20d7f3205d9ba2adb4a664",
+"class_cobalt_calorimeter.html#ab8359651f2214f9cb9fe52871fdcdc25",
+"class_event.html#a243e29bac8d969902d32a4d444fc5174",
+"class_file.html#ab08b6536403bbea4df3adf514fa92768",
+"class_i_options.html#a73a8079d9aabef8cd70b9a8713be9ce3",
+"class_minimisator.html#a66a519bb9c01f483c54b852f2cf91e8b",
+"class_peak_fitter.html#af1719649da41412e67dd10950de22924",
+"class_sorted___event.html#ac1284dab08a8b2d8cfa31dfa78db96cd",
+"class_timeshifts.html#a1a77bd589fc081641e19c5da8b4e19b6",
+"functions_func_b.html",
+"namespace_co_analyse.html#ab8af94a11fa0979cbaf83228dfc1675e"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

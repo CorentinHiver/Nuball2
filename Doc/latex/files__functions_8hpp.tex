@@ -1,18 +1,24 @@
 \doxysection{lib/files\+\_\+functions.hpp File Reference}
 \label{files__functions_8hpp}\index{lib/files\_functions.hpp@{lib/files\_functions.hpp}}
 {\ttfamily \#include \char`\"{}print.\+hpp\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}string\+\_\+functions.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}vector\+\_\+functions.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}string\+\_\+functions.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$dirent.\+h$>$}\newline
 {\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$glob.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$filesystem$>$}\newline
-Include dependency graph for files\+\_\+functions.\+hpp\+:\nopagebreak
+Include dependency graph for files\+\_\+functions.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{files__functions_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -61,9 +67,13 @@ std\+::string \textbf{ get\+Extension} (std\+::string const \&string)
 \item 
 std\+::string \textbf{ get\+Path} (std\+::string const \&string)
 \item 
+void \textbf{ go\+\_\+to\+\_\+beginning} (std\+::ifstream \&file)
+\item 
 bool \textbf{ has\+Path} (std\+::string const \&file)
 \item 
-std\+::vector$<$ std\+::string $>$ \textbf{ list\+\_\+files\+\_\+in\+\_\+folder} (std\+::string const \&foldername, std\+::vector$<$ std\+::string $>$ const \&extensions=\{\char`\"{}$\ast$\char`\"{}\}, bool const \&reorder=true)
+std\+::vector$<$ std\+::string $>$ \textbf{ list\+\_\+file\+\_\+names\+\_\+in\+\_\+folder} (std\+::string const \&foldername=\char`\"{}./\char`\"{}, std\+::vector$<$ std\+::string $>$ const \&extensions=\{\char`\"{}$\ast$\char`\"{}\}, bool const \&reorder=true)
+\item 
+std\+::vector$<$ std\+::string $>$ \textbf{ list\+\_\+files\+\_\+in\+\_\+folder} (std\+::string const \&foldername=\char`\"{}./\char`\"{}, std\+::vector$<$ std\+::string $>$ const \&extensions=\{\char`\"{}$\ast$\char`\"{}\}, bool const \&reorder=true)
 \item 
 std\+::vector$<$ std\+::string $>$ \textbf{ list\+File\+Reader} (std\+::string const \&filename)
 \item 
@@ -74,8 +84,6 @@ int \textbf{ nb\+\_\+files\+\_\+in\+\_\+folder} (std\+::string \&folder\+Name)
 std\+::string \textbf{ operator+} (\textbf{ Path} const \&path, \textbf{ Filename} const \&filename)
 \item 
 \textbf{ Folder} \textbf{ operator+} (std\+::string const \&string, \textbf{ Folder} const \&folder)
-\item 
-std\+::string \textbf{ operator+=} (std\+::string const \&string, \textbf{ Folder} const \&folder)
 \item 
 std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ File} const \&file)
 \item 
@@ -130,14 +138,16 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{create\_folder\_if\_none()}
 {\footnotesize\ttfamily void create\+\_\+folder\+\_\+if\+\_\+none (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder\+Name }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{files__functions_8hpp_af52310dd2d55713265daa0e58dd7bf21_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -150,7 +160,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{extension()}
 {\footnotesize\ttfamily std\+::string extension (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -170,7 +181,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=257pt]{files__functions_8hpp_a6d165da5cc41e5429a9c03c6a6c68d96_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -183,7 +195,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{file\_is\_empty()}
 {\footnotesize\ttfamily bool file\+\_\+is\+\_\+empty (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{file }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -229,7 +242,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=306pt]{files__functions_8hpp_a6d7a6f0ccbecfe41730c211f472cfcb3_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -281,11 +295,26 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{getPath()}
 {\footnotesize\ttfamily std\+::string get\+Path (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{files__functions_8hpp_ab1e262f27aaad28944f29cd2bbde417f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{files__functions_8hpp_a2f9387aa10988ebce3a1bd6e860497a2}} 
+\index{files\_functions.hpp@{files\_functions.hpp}!go\_to\_beginning@{go\_to\_beginning}}
+\index{go\_to\_beginning@{go\_to\_beginning}!files\_functions.hpp@{files\_functions.hpp}}
+\doxysubsubsection{go\_to\_beginning()}
+{\footnotesize\ttfamily void go\+\_\+to\+\_\+beginning (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{file }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{files__functions_8hpp_a2f9387aa10988ebce3a1bd6e860497a2_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{files__functions_8hpp_a0b4d810562e117c29ca0dda1855a02e3}} 
@@ -308,17 +337,24 @@ Here is the caller graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{files__functions_8hpp_a0b4d810562e117c29ca0dda1855a02e3_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{files__functions_8hpp_a8c014ea676bc34e0ec57b1aeb55af4c5}} 
+\mbox{\label{files__functions_8hpp_a61d333d5f140b093c5ef8903d29dee77}} 
+\index{files\_functions.hpp@{files\_functions.hpp}!list\_file\_names\_in\_folder@{list\_file\_names\_in\_folder}}
+\index{list\_file\_names\_in\_folder@{list\_file\_names\_in\_folder}!files\_functions.hpp@{files\_functions.hpp}}
+\doxysubsubsection{list\_file\_names\_in\_folder()}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ list\+\_\+file\+\_\+names\+\_\+in\+\_\+folder (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{foldername = {\ttfamily \char`\"{}./\char`\"{}},  }\item[{std\+::vector$<$ std\+::string $>$ const \&}]{extensions = {\ttfamily \{\char`\"{}$\ast$\char`\"{}\}},  }\item[{bool const \&}]{reorder = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\mbox{\label{files__functions_8hpp_a0b6555f0818e33170e5c3c3c513d6b91}} 
 \index{files\_functions.hpp@{files\_functions.hpp}!list\_files\_in\_folder@{list\_files\_in\_folder}}
 \index{list\_files\_in\_folder@{list\_files\_in\_folder}!files\_functions.hpp@{files\_functions.hpp}}
 \doxysubsubsection{list\_files\_in\_folder()}
-{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ list\+\_\+files\+\_\+in\+\_\+folder (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{foldername,  }\item[{std\+::vector$<$ std\+::string $>$ const \&}]{extensions = {\ttfamily \{\char`\"{}$\ast$\char`\"{}\}},  }\item[{bool const \&}]{reorder = {\ttfamily true} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ list\+\_\+files\+\_\+in\+\_\+folder (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{foldername = {\ttfamily \char`\"{}./\char`\"{}},  }\item[{std\+::vector$<$ std\+::string $>$ const \&}]{extensions = {\ttfamily \{\char`\"{}$\ast$\char`\"{}\}},  }\item[{bool const \&}]{reorder = {\ttfamily true} }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{files__functions_8hpp_a8c014ea676bc34e0ec57b1aeb55af4c5_icgraph}
+\includegraphics[width=350pt]{files__functions_8hpp_a0b6555f0818e33170e5c3c3c513d6b91_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{files__functions_8hpp_a25af8f31a8b51b38a4c2334e3901acfc}} 
@@ -327,7 +363,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{listFileReader()}
 {\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ list\+File\+Reader (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -393,19 +430,6 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=262pt]{files__functions_8hpp_ad580345a13bcb93c84b981f67f25b899_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{files__functions_8hpp_a151e488cdb2e927bd293d0e574948f43}} 
-\index{files\_functions.hpp@{files\_functions.hpp}!operator+=@{operator+=}}
-\index{operator+=@{operator+=}!files\_functions.hpp@{files\_functions.hpp}}
-\doxysubsubsection{operator+=()}
-{\footnotesize\ttfamily std\+::string operator+= (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string,  }\item[{\textbf{ Folder} const \&}]{folder }\end{DoxyParamCaption})}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=270pt]{files__functions_8hpp_a151e488cdb2e927bd293d0e574948f43_cgraph}
-\end{center}
-\end{figure}
 \mbox{\label{files__functions_8hpp_a159a1e5f9109960956ef172f5b862cf8}} 
 \index{files\_functions.hpp@{files\_functions.hpp}!operator$<$$<$@{operator$<$$<$}}
 \index{operator$<$$<$@{operator$<$$<$}!files\_functions.hpp@{files\_functions.hpp}}
@@ -464,7 +488,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{operator$<$$<$()\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
 {\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{\textbf{ Filename} const \&}]{filename }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -484,7 +509,8 @@ std\+::string procent (\begin{DoxyParamCaption}\item[{N const \&}]{n,  }\item[{D
 \doxysubsubsection{push\_back\_if\_none()}
 {\footnotesize\ttfamily std\+::string\& push\+\_\+back\+\_\+if\+\_\+none (\begin{DoxyParamCaption}\item[{std\+::string \&}]{string,  }\item[{char const \&}]{character }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -497,7 +523,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{removeExtension()}
 {\footnotesize\ttfamily std\+::string remove\+Extension (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -510,7 +537,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{removePath()}
 {\footnotesize\ttfamily std\+::string remove\+Path (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -523,7 +551,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{rmPathAndExt()}
 {\footnotesize\ttfamily std\+::string rm\+Path\+And\+Ext (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{string }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{files__functions_8hpp_a58f50a6390692cff52eef37fdaa94e56_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -536,7 +573,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{size\_file()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily float size\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{file,  }\item[{std\+::string const \&}]{unit = {\ttfamily \char`\"{}o\char`\"{}} }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

@@ -25,7 +25,7 @@ Collaboration diagram for Paris:<para>
 </listitem>
             <listitem><para>auto &amp; <link linkend="_class_paris_1adf36cdac7f24cbc27ace07ec0afeb6a6">front</link> ()</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_paris_1ac0479d995c00e0ee8170092cdf1b5f51">Initialize</link> ()</para>
+            <listitem><para>void <link linkend="_class_paris_1a2d405a64e0e65a845a2723bb3b2af697">Initialise</link> ()</para>
 </listitem>
             <listitem><para><link linkend="_class_paris_1a1f05e7dfce90ff9808cf79ebbbb23008">Paris</link> ()</para>
 </listitem>
@@ -36,11 +36,19 @@ Collaboration diagram for Paris:<para>
 <simplesect>
     <title>Static Public Member Functions    </title>
         <itemizedlist>
-            <listitem><para>static void <link linkend="_class_paris_1a5218753a8ecec0c9a05c6d3e3ca2db07">InitializeArrays</link> ()</para>
+            <listitem><para>static void <link linkend="_class_paris_1a66745a02a04a8733eba514f319b1cc5e">calculateBidimAngles</link> (std::string file, std::string const &amp;outfilename, bool write_graphs=true)</para>
+</listitem>
+            <listitem><para>static std::pair&lt; double, double &gt; <link linkend="_class_paris_1ad83b7a82190285f4c69fb5eeb30c5db6">findAngles</link> (TH2F *bidim, int nb_bins=10, bool write_graphs=false)</para>
+</listitem>
+            <listitem><para>static std::pair&lt; double, double &gt; <link linkend="_class_paris_1a4605af4582a21a229000502ab0cbf827">findAnglesDeg</link> (TH2F *bidim, int nb_bins=10, bool write_graphs=false)</para>
+</listitem>
+            <listitem><para>static void <link linkend="_class_paris_1aaa7a70ca124d8c0428ee54c7d9d42256">InitialiseArrays</link> ()</para>
 </listitem>
             <listitem><para>static bool <link linkend="_class_paris_1a5e84a66240e195c7743f8c8dae84f800">is_paris</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
 </listitem>
             <listitem><para>static <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> <link linkend="_class_paris_1a060a9d4c6345e7b73ac62ad5aee1bd23">label_to_index</link> (<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link> const &amp;l)</para>
+</listitem>
+            <listitem><para>static TH2F * <link linkend="_class_paris_1a21f73f502db25f43f31426c4ea88f419">rotate</link> (TH2F *bidim, double angleLaBr, double angleNaI, bool quickNdirty=false)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -125,7 +133,21 @@ Here is the caller graph for this function:<para>
     <title>back()</title>
 <indexterm><primary>back</primary><secondary>Paris</secondary></indexterm>
 <indexterm><primary>Paris</primary><secondary>back</secondary></indexterm>
-<para><computeroutput>auto&amp; Paris::back ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1acfde42a5101236f9f4063c22661563f0"/>    <section>
+<para><computeroutput>auto&amp; Paris::back ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1a66745a02a04a8733eba514f319b1cc5e"/>    <section>
+    <title>calculateBidimAngles()</title>
+<indexterm><primary>calculateBidimAngles</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>calculateBidimAngles</secondary></indexterm>
+<para><computeroutput>void Paris::calculateBidimAngles (std::string file, std::string const &amp; outfilename, bool write_graphs = <computeroutput>true</computeroutput>
+)<computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a66745a02a04a8733eba514f319b1cc5e_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1acfde42a5101236f9f4063c22661563f0"/>    <section>
     <title>Fill()</title>
 <indexterm><primary>Fill</primary><secondary>Paris</secondary></indexterm>
 <indexterm><primary>Paris</primary><secondary>Fill</secondary></indexterm>
@@ -138,19 +160,58 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
+    </section><anchor xml:id="_class_paris_1ad83b7a82190285f4c69fb5eeb30c5db6"/>    <section>
+    <title>findAngles()</title>
+<indexterm><primary>findAngles</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>findAngles</secondary></indexterm>
+<para><computeroutput>std::pair&lt; double, double &gt; Paris::findAngles (TH2F * bidim, int nb_bins = <computeroutput>10</computeroutput>
+, bool write_graphs = <computeroutput>false</computeroutput>
+)<computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ad83b7a82190285f4c69fb5eeb30c5db6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ad83b7a82190285f4c69fb5eeb30c5db6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1a4605af4582a21a229000502ab0cbf827"/>    <section>
+    <title>findAnglesDeg()</title>
+<indexterm><primary>findAnglesDeg</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>findAnglesDeg</secondary></indexterm>
+<para><computeroutput>std::pair&lt; double, double &gt; Paris::findAnglesDeg (TH2F * bidim, int nb_bins = <computeroutput>10</computeroutput>
+, bool write_graphs = <computeroutput>false</computeroutput>
+)<computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a4605af4582a21a229000502ab0cbf827_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
     </section><anchor xml:id="_class_paris_1adf36cdac7f24cbc27ace07ec0afeb6a6"/>    <section>
     <title>front()</title>
 <indexterm><primary>front</primary><secondary>Paris</secondary></indexterm>
 <indexterm><primary>Paris</primary><secondary>front</secondary></indexterm>
-<para><computeroutput>auto&amp; Paris::front ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1ac0479d995c00e0ee8170092cdf1b5f51"/>    <section>
-    <title>Initialize()</title>
-<indexterm><primary>Initialize</primary><secondary>Paris</secondary></indexterm>
-<indexterm><primary>Paris</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>void Paris::Initialize ( )</computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>auto&amp; Paris::front ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_paris_1a2d405a64e0e65a845a2723bb3b2af697"/>    <section>
+    <title>Initialise()</title>
+<indexterm><primary>Initialise</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>void Paris::Initialise ( )</computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ac0479d995c00e0ee8170092cdf1b5f51_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a2d405a64e0e65a845a2723bb3b2af697_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -159,20 +220,20 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ac0479d995c00e0ee8170092cdf1b5f51_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a2d405a64e0e65a845a2723bb3b2af697_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_paris_1a5218753a8ecec0c9a05c6d3e3ca2db07"/>    <section>
-    <title>InitializeArrays()</title>
-<indexterm><primary>InitializeArrays</primary><secondary>Paris</secondary></indexterm>
-<indexterm><primary>Paris</primary><secondary>InitializeArrays</secondary></indexterm>
-<para><computeroutput>static void Paris::InitializeArrays ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_class_paris_1aaa7a70ca124d8c0428ee54c7d9d42256"/>    <section>
+    <title>InitialiseArrays()</title>
+<indexterm><primary>InitialiseArrays</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>InitialiseArrays</secondary></indexterm>
+<para><computeroutput>static void Paris::InitialiseArrays ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_aaa7a70ca124d8c0428ee54c7d9d42256_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -181,7 +242,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a5218753a8ecec0c9a05c6d3e3ca2db07_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_aaa7a70ca124d8c0428ee54c7d9d42256_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -230,6 +291,20 @@ Here is the caller graph for this function:<para>
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_ad9b942023bbc514963ee8742aeccd23c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_paris_1a21f73f502db25f43f31426c4ea88f419"/>    <section>
+    <title>rotate()</title>
+<indexterm><primary>rotate</primary><secondary>Paris</secondary></indexterm>
+<indexterm><primary>Paris</primary><secondary>rotate</secondary></indexterm>
+<para><computeroutput>TH2F * Paris::rotate (TH2F * bidim, double angleLaBr, double angleNaI, bool quickNdirty = <computeroutput>false</computeroutput>
+)<computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_paris_a21f73f502db25f43f31426c4ea88f419_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

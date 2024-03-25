@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_overwrite_error" xml:lang="en-US">
+<title>OverwriteError Class Reference</title>
+<indexterm><primary>OverwriteError</primary></indexterm>
+<para>
+<computeroutput>#include &lt;errors.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_overwrite_error_1a1ceef07c7c86c032768abcb44e85b270">OverwriteError</link> (std::string const &amp;message) noexcept</para>
+</listitem>
+            <listitem><para>auto <link linkend="_class_overwrite_error_1a9aaec059d2a5f52221894d3f8fda3658">what</link> ()</para>
+</listitem>
+            <listitem><para>auto const  &amp; <link linkend="_class_overwrite_error_1ad64a19a339d52b5baaa876b38ee1b3a1">what</link> () const noexcept</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_class_overwrite_error_1a18d8b25386149797af9bd15159642c91">m_message</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_overwrite_error_1a1ceef07c7c86c032768abcb44e85b270"/>    <section>
+    <title>OverwriteError()</title>
+<indexterm><primary>OverwriteError</primary><secondary>OverwriteError</secondary></indexterm>
+<indexterm><primary>OverwriteError</primary><secondary>OverwriteError</secondary></indexterm>
+<para><computeroutput>OverwriteError::OverwriteError (std::string const &amp; message)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_overwrite_error_a1ceef07c7c86c032768abcb44e85b270_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_overwrite_error_1a9aaec059d2a5f52221894d3f8fda3658"/>    <section>
+    <title>what()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>what</primary><secondary>OverwriteError</secondary></indexterm>
+<indexterm><primary>OverwriteError</primary><secondary>what</secondary></indexterm>
+<para><computeroutput>auto OverwriteError::what ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_overwrite_error_1ad64a19a339d52b5baaa876b38ee1b3a1"/>    <section>
+    <title>what()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>what</primary><secondary>OverwriteError</secondary></indexterm>
+<indexterm><primary>OverwriteError</primary><secondary>what</secondary></indexterm>
+<para><computeroutput>auto const&amp; OverwriteError::what ( ) const<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_overwrite_error_1a18d8b25386149797af9bd15159642c91"/>    <section>
+    <title>m_message</title>
+<indexterm><primary>m_message</primary><secondary>OverwriteError</secondary></indexterm>
+<indexterm><primary>OverwriteError</primary><secondary>m_message</secondary></indexterm>
+<para><computeroutput>std::string OverwriteError::m_message<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/<link linkend="_errors_8hpp">errors.hpp</link></section>
+</section>

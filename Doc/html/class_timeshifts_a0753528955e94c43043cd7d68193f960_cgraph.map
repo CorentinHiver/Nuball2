@@ -1,8 +1,8 @@
-<map id="Timeshifts::Initialize" name="Timeshifts::Initialize">
+<map id="Timeshifts::Initialise" name="Timeshifts::Initialise">
 <area shape="rect" id="node1" title=" " alt="" coords="5,132,160,159"/>
 <area shape="rect" id="node2" href="$class_m_t_object.html#ad156f9b1c68f0e2713abb16890b1fa15" title=" " alt="" coords="208,5,425,32"/>
 <area shape="rect" id="node3" href="$class_timeshifts.html#a05ac31a6c49360d94eeff184dc896c6b" title=" " alt="" coords="208,107,425,133"/>
-<area shape="rect" id="node10" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="481,56,598,83"/>
+<area shape="rect" id="node10" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy Initialiser." alt="" coords="481,56,598,83"/>
 <area shape="rect" id="node11" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="480,208,599,235"/>
 <area shape="rect" id="node13" href="$class_timeshifts.html#a40254b2aa53028b1b5c941ee1cb3833d" title=" " alt="" coords="225,208,408,235"/>
 <area shape="rect" id="node14" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="291,259,343,285"/>

@@ -6,7 +6,7 @@ digraph "ParisCluster::ParisCluster"
   rankdir="LR";
   Node1 [label="ParisCluster::ParisCluster",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="ParisCluster::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_paris_cluster.html#ac4c51b25cb87e251ca3a71108f4be3fc",tooltip=" "];
+  Node2 [label="ParisCluster::Initialise",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_paris_cluster.html#ac4c51b25cb87e251ca3a71108f4be3fc",tooltip=" "];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="ParisModule::newCluster",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_paris_module.html#a1c1e8ac667354498aa9c82c9854ca557",tooltip=" "];
   Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

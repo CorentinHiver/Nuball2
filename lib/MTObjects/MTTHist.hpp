@@ -12,10 +12,10 @@
  * Inspiration :
  * https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167
  *
- * \attention As for any class using my multithreading, initialize the number of threads 
+ * \attention As for any class using my multithreading, Initialise the number of threads 
  * BEFORE instantiating any object :
  * 
- *      MTObject::Initialize(nb_threads)
+ *      MTObject::Initialise(nb_threads)
  * 
  * 
  * 
@@ -189,7 +189,7 @@ public:
 
   // // ---   GENERIC INSTANCIATION --- //
 
-  /// @brief Copy initializer.
+  /// @brief Copy Initialiser.
   MTTHist<THist> & reset(MTTHist<THist> const & hist) 
   { 
     // Execution stops here : it is fobidden so far to copy this object !!

@@ -1,17 +1,21 @@
 var dir_7c4907a2a5f1a0aabf4fb26dde5b883c =
 [
     [ "Arrays", "dir_94eea9e301c5d43b028a346ce38e954d.html", "dir_94eea9e301c5d43b028a346ce38e954d" ],
+    [ "AnalysedSpectra.hpp", "_analysed_spectra_8hpp.html", "_analysed_spectra_8hpp" ],
     [ "CloverModule.hpp", "_clover_module_8hpp.html", "_clover_module_8hpp" ],
     [ "Clovers.hpp", "_clovers_8hpp.html", "_clovers_8hpp" ],
     [ "Counters.hpp", "_analyse_2_counters_8hpp.html", [
       [ "Counters", "class_counters.html", "class_counters" ]
     ] ],
-    [ "DSSD.hpp", "_d_s_s_d_8hpp.html", "_d_s_s_d_8hpp" ],
+    [ "DSSD.hpp", "_d_s_s_d_8hpp.html", [
+      [ "DSSD", "class_d_s_s_d.html", "class_d_s_s_d" ],
+      [ "SiStrip", "class_si_strip.html", "class_si_strip" ]
+    ] ],
     [ "EventAnalyse.hpp", "_event_analyse_8hpp.html", [
       [ "EventAnalyse", "class_event_analyse.html", "class_event_analyse" ]
     ] ],
-    [ "HistoAnalyse.hpp", "_histo_analyse_8hpp.html", "_histo_analyse_8hpp" ],
     [ "Paris.hpp", "_paris_8hpp.html", "_paris_8hpp" ],
+    [ "ParisBidimAngles.hpp", "_paris_bidim_angles_8hpp.html", "_paris_bidim_angles_8hpp" ],
     [ "ParisCluster.hpp", "_paris_cluster_8hpp.html", [
       [ "ParisCluster", "class_paris_cluster.html", "class_paris_cluster" ]
     ] ],
@@ -28,5 +32,8 @@ var dir_7c4907a2a5f1a0aabf4fb26dde5b883c =
     [ "PositionXY.hpp", "_position_x_y_8hpp.html", [
       [ "PositionXY", "class_position_x_y.html", "class_position_x_y" ]
     ] ],
-    [ "Sorted_Event.hpp", "_sorted___event_8hpp.html", "_sorted___event_8hpp" ]
+    [ "Recalibration.hpp", "_recalibration_8hpp.html", "_recalibration_8hpp" ],
+    [ "Sorted_Event.hpp", "_sorted___event_8hpp.html", "_sorted___event_8hpp" ],
+    [ "SpectraAlignator.hpp", "_spectra_alignator_8hpp.html", "_spectra_alignator_8hpp" ],
+    [ "SpectraCo.hpp", "_spectra_co_8hpp.html", "_spectra_co_8hpp" ]
 ];

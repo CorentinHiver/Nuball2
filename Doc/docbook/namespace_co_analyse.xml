@@ -6,6 +6,8 @@
     <title>Typedefs    </title>
         <itemizedlist>
             <listitem><para>using <link linkend="_namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34">ProjectionsBins</link> = std::vector&lt; std::pair&lt; double, double &gt; &gt;</para>
+
+<para>Vector of pairs of min and max bins. </para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -17,38 +19,42 @@
             <listitem><para>std::vector&lt; double &gt; <link linkend="_namespace_co_analyse_1accb0147ca7573fc7dade0af93673a4e3">extractBackgroundArray</link> (TH1F *histo, int const &amp;nsmooth=10)</para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1a9585a7922e83dcea10f06211868846bc">normalizeBidim</link> (TH2 *matrix, double const &amp;factor=1.0)</para>
+
+<para>Normalise the whole bidim. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1ab71a4903cf3d3c32f35262dab10a82e3">normalizeY</link> (TH2 *matrix, double const &amp;factor=1)</para>
+
+<para>For each X bin, normalise the Y histogram. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1a53744e2ddfba6a4a188ada9ed1bc6272">projectX</link> (TH2 *matrix, TH1 *proj)</para>
 
-<para>Total projection on X axis. </para>
+<para>Project the whole matrix on the X axis. This fills proj. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1a2d7393e48336effee246cbbc33822847">projectX</link> (TH2 *matrix, TH1 *proj, double const &amp;binYmin, double const &amp;binYmax)</para>
 
-<para>Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. </para>
+<para>Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. This fills proj. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1a0158170fa443490d844333c1acd9a89a">projectX</link> (TH2 *matrix, TH1 *proj, int const &amp;binY)</para>
 
-<para>Project on Y axis at a given X bin. </para>
+<para>Project on X axis at a given Y bin. This fills proj. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1aa27f433db27fe9babd4c55421121556d">projectX</link> (TH2 *matrix, TH1 *proj, int const &amp;binYmin, int const &amp;binYmax)</para>
 
-<para>Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. </para>
+<para>Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. This fills proj. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1ab64c2bb160dbdc01836274235d0bbd3b">projectY</link> (TH2 *matrix, TH1 *proj, double const &amp;valueXmin, double const &amp;valueXmax)</para>
 
-<para>Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. </para>
+<para>Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. This fills proj. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1abecf48371e430ad0cc8dfb063e6d951d">projectY</link> (TH2 *matrix, TH1 *proj, int const &amp;binX)</para>
 
-<para>Project on Y axis at a given X bin. </para>
+<para>Project matrix on Y axis at a given X bin. This fills proj. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1aa19f9a517f5a4ce70e61ebed3cfeecf9">projectY</link> (TH2 *matrix, TH1 *proj, int const &amp;binXmin, int const &amp;binXmax)</para>
 
-<para>Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. </para>
+<para>Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. This fills proj. </para>
 </listitem>
-            <listitem><para>void <link linkend="_namespace_co_analyse_1aeb2cc17685bbda3b8531803c4d8cc5c8">removeBackground</link> (TH1 *histo, int const &amp;niter=10, std::string const &amp;fit_options=&quot;&quot;, std::string const &amp;bidim_options=&quot;X&quot;)</para>
+            <listitem><para>void <link linkend="_namespace_co_analyse_1afa2d6e36c43655ace45e8aa55a53d4da">removeBackground</link> (TH1 *histo, int const &amp;niter=10, std::string const &amp;fit_options=&quot;&quot;, std::string const &amp;bidim_options=&quot;X&quot;) noexcept</para>
 
 <para>Remove the background in the given histo. </para>
 </listitem>
@@ -59,8 +65,12 @@
 <para>LEGACY. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1ad13b7eeaa3d7d9a30cdf04a8b0d17088">setX</link> (TH2 *matrix, TH1 *proj, int const &amp;binX)</para>
+
+<para>Set Y histogram proj in matrix at binX. </para>
 </listitem>
             <listitem><para>void <link linkend="_namespace_co_analyse_1ac1aa3fcfcc46318e4f0d6f42510471a0">setY</link> (TH2 *matrix, TH1 *proj, int const &amp;binY)</para>
+
+<para>Set X histogram proj in matrix at binY. </para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -70,7 +80,11 @@
     <title>ProjectionsBins</title>
 <indexterm><primary>ProjectionsBins</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>ProjectionsBins</secondary></indexterm>
-<para><computeroutput>using <link linkend="_namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34">CoAnalyse::ProjectionsBins</link> = typedef std::vector&lt;std::pair&lt;double,double&gt; &gt;</computeroutput></para></section>
+<para><computeroutput>using <link linkend="_namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34">CoAnalyse::ProjectionsBins</link> = typedef std::vector&lt;std::pair&lt;double,double&gt; &gt;</computeroutput></para><para>
+
+<para>Vector of pairs of min and max bins. </para>
+</para>
+</section>
 </section>
 <section>
 <title>Function Documentation</title>
@@ -79,7 +93,9 @@
 <indexterm><primary>extractBackgroundArray</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>extractBackgroundArray</secondary></indexterm>
 <para><computeroutput>std::vector&lt;double&gt; CoAnalyse::extractBackgroundArray (std::vector&lt; double &gt; &amp; source, int const &amp; nsmooth = <computeroutput>10</computeroutput>
-)</computeroutput></para>Here is the call graph for this function:<para>
+)</computeroutput></para>
+<para><para><link linkend="_deprecated_1_deprecated000007">Deprecated</link> </para></para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -93,7 +109,9 @@
 <indexterm><primary>extractBackgroundArray</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>extractBackgroundArray</secondary></indexterm>
 <para><computeroutput>std::vector&lt;double&gt; CoAnalyse::extractBackgroundArray (TH1F * histo, int const &amp; nsmooth = <computeroutput>10</computeroutput>
-)</computeroutput></para>Here is the call graph for this function:<para>
+)</computeroutput></para>
+<para><para><link linkend="_deprecated_1_deprecated000008">Deprecated</link> </para></para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -107,18 +125,26 @@
 <indexterm><primary>normalizeBidim</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>normalizeBidim</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::normalizeBidim (TH2 * matrix, double const &amp; factor = <computeroutput>1.0</computeroutput>
-)</computeroutput></para>    </section><anchor xml:id="_namespace_co_analyse_1ab71a4903cf3d3c32f35262dab10a82e3"/>    <section>
+)</computeroutput></para><para>
+
+<para>Normalise the whole bidim. </para>
+</para>
+    </section><anchor xml:id="_namespace_co_analyse_1ab71a4903cf3d3c32f35262dab10a82e3"/>    <section>
     <title>normalizeY()</title>
 <indexterm><primary>normalizeY</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>normalizeY</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::normalizeY (TH2 * matrix, double const &amp; factor = <computeroutput>1</computeroutput>
-)</computeroutput></para>    </section><anchor xml:id="_namespace_co_analyse_1a53744e2ddfba6a4a188ada9ed1bc6272"/>    <section>
+)</computeroutput></para><para>
+
+<para>For each X bin, normalise the Y histogram. </para>
+</para>
+    </section><anchor xml:id="_namespace_co_analyse_1a53744e2ddfba6a4a188ada9ed1bc6272"/>    <section>
     <title>projectX()<computeroutput>[1/4]</computeroutput></title>
 <indexterm><primary>projectX</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>projectX</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::projectX (TH2 * matrix, TH1 * proj)</computeroutput></para><para>
 
-<para>Total projection on X axis. </para>
+<para>Project the whole matrix on the X axis. This fills proj. </para>
 </para>
 Here is the call graph for this function:<para>
     <informalfigure>
@@ -144,7 +170,7 @@ Here is the caller graph for this function:<para>
 <indexterm><primary>CoAnalyse</primary><secondary>projectX</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::projectX (TH2 * matrix, TH1 * proj, double const &amp; binYmin, double const &amp; binYmax)</computeroutput></para><para>
 
-<para>Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. </para>
+<para>Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. This fills proj. </para>
 </para>
 Here is the call graph for this function:<para>
     <informalfigure>
@@ -161,7 +187,7 @@ Here is the call graph for this function:<para>
 <indexterm><primary>CoAnalyse</primary><secondary>projectX</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::projectX (TH2 * matrix, TH1 * proj, int const &amp; binY)</computeroutput></para><para>
 
-<para>Project on Y axis at a given X bin. </para>
+<para>Project on X axis at a given Y bin. This fills proj. </para>
 </para>
 Here is the call graph for this function:<para>
     <informalfigure>
@@ -178,7 +204,7 @@ Here is the call graph for this function:<para>
 <indexterm><primary>CoAnalyse</primary><secondary>projectX</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::projectX (TH2 * matrix, TH1 * proj, int const &amp; binYmin, int const &amp; binYmax)</computeroutput></para><para>
 
-<para>Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. </para>
+<para>Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. This fills proj. </para>
 </para>
 Here is the call graph for this function:<para>
     <informalfigure>
@@ -195,7 +221,7 @@ Here is the call graph for this function:<para>
 <indexterm><primary>CoAnalyse</primary><secondary>projectY</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::projectY (TH2 * matrix, TH1 * proj, double const &amp; valueXmin, double const &amp; valueXmax)</computeroutput></para><para>
 
-<para>Project on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. </para>
+<para>Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]. This fills proj. </para>
 </para>
 Here is the call graph for this function:<para>
     <informalfigure>
@@ -212,7 +238,7 @@ Here is the call graph for this function:<para>
 <indexterm><primary>CoAnalyse</primary><secondary>projectY</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::projectY (TH2 * matrix, TH1 * proj, int const &amp; binX)</computeroutput></para><para>
 
-<para>Project on Y axis at a given X bin. </para>
+<para>Project matrix on Y axis at a given X bin. This fills proj. </para>
 </para>
 Here is the call graph for this function:<para>
     <informalfigure>
@@ -238,7 +264,7 @@ Here is the caller graph for this function:<para>
 <indexterm><primary>CoAnalyse</primary><secondary>projectY</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::projectY (TH2 * matrix, TH1 * proj, int const &amp; binXmin, int const &amp; binXmax)</computeroutput></para><para>
 
-<para>Project on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. </para>
+<para>Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. This fills proj. </para>
 </para>
 Here is the call graph for this function:<para>
     <informalfigure>
@@ -249,14 +275,14 @@ Here is the call graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_namespace_co_analyse_1aeb2cc17685bbda3b8531803c4d8cc5c8"/>    <section>
+    </section><anchor xml:id="_namespace_co_analyse_1afa2d6e36c43655ace45e8aa55a53d4da"/>    <section>
     <title>removeBackground()</title>
 <indexterm><primary>removeBackground</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>removeBackground</secondary></indexterm>
 <para><computeroutput>void CoAnalyse::removeBackground (TH1 * histo, int const &amp; niter = <computeroutput>10</computeroutput>
 , std::string const &amp; fit_options = <computeroutput>&quot;&quot;</computeroutput>
 , std::string const &amp; bidim_options = <computeroutput>&quot;X&quot;</computeroutput>
-)</computeroutput></para><para>
+)<computeroutput>[noexcept]</computeroutput></computeroutput></para><para>
 
 <para>Remove the background in the given histo. </para>
 </para>
@@ -313,7 +339,7 @@ Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -322,7 +348,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_analyse_aeb2cc17685bbda3b8531803c4d8cc5c8_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="namespace_co_analyse_afa2d6e36c43655ace45e8aa55a53d4da_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -335,7 +361,9 @@ Here is the caller graph for this function:<para>
 , bool save_intermediate = <computeroutput>false</computeroutput>
 , <link linkend="_namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34">ProjectionsBins</link> projectionsY = <computeroutput>{{}}</computeroutput>
 , <link linkend="_namespace_co_analyse_1a0c12c2535bb054631b3b0304a1dc9a34">ProjectionsBins</link> projectionsX = <computeroutput>{{}}</computeroutput>
-)</computeroutput></para>    </section><anchor xml:id="_namespace_co_analyse_1ab8af94a11fa0979cbaf83228dfc1675e"/>    <section>
+)</computeroutput></para>
+<para><para><link linkend="_deprecated_1_deprecated000006">Deprecated</link> </para></para>
+    </section><anchor xml:id="_namespace_co_analyse_1ab8af94a11fa0979cbaf83228dfc1675e"/>    <section>
     <title>removeRandomY()</title>
 <indexterm><primary>removeRandomY</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>removeRandomY</secondary></indexterm>
@@ -351,7 +379,11 @@ Here is the caller graph for this function:<para>
     <title>setX()</title>
 <indexterm><primary>setX</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>setX</secondary></indexterm>
-<para><computeroutput>void CoAnalyse::setX (TH2 * matrix, TH1 * proj, int const &amp; binX)</computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>void CoAnalyse::setX (TH2 * matrix, TH1 * proj, int const &amp; binX)</computeroutput></para><para>
+
+<para>Set Y histogram proj in matrix at binX. </para>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -373,7 +405,11 @@ Here is the caller graph for this function:<para>
     <title>setY()</title>
 <indexterm><primary>setY</primary><secondary>CoAnalyse</secondary></indexterm>
 <indexterm><primary>CoAnalyse</primary><secondary>setY</secondary></indexterm>
-<para><computeroutput>void CoAnalyse::setY (TH2 * matrix, TH1 * proj, int const &amp; binY)</computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>void CoAnalyse::setY (TH2 * matrix, TH1 * proj, int const &amp; binY)</computeroutput></para><para>
+
+<para>Set X histogram proj in matrix at binY. </para>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>

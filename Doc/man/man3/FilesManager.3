@@ -1,4 +1,4 @@
-.TH "FilesManager" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "FilesManager" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -14,7 +14,13 @@ Inherited by \fBMTFilesManager\fP\&.
 
 .in +1c
 .ti -1c
+.RI "virtual bool \fBaddFile\fP (std::string const &_filename)"
+.br
+.ti -1c
 .RI "virtual bool \fBaddFiles\fP (std::string const &_filename)"
+.br
+.ti -1c
+.RI "virtual bool \fBaddFolder\fP (\fBPath\fP const &folder, long nb_files=\-1, std::vector< std::string > const &extensions={'root', 'fast'})"
 .br
 .ti -1c
 .RI "virtual bool \fBaddFolder\fP (std::string folder, long nb_files=\-1, std::vector< std::string > const &extensions={'root', 'fast'})"
@@ -83,6 +89,9 @@ Inherited by \fBMTFilesManager\fP\&.
 .RI "void \fBoperator=\fP (\fBListFiles\fP const &list)"
 .br
 .ti -1c
+.RI "bool \fBoperator>>\fP (std::string &filename)"
+.br
+.ti -1c
 .RI "std::string \fBoperator[]\fP (int const &n)"
 .br
 .ti -1c
@@ -145,7 +154,11 @@ Inherited by \fBMTFilesManager\fP\&.
 
 .SH "Member Function Documentation"
 .PP 
+.SS "virtual bool FilesManager::addFile (std::string const & _filename)\fC [inline]\fP, \fC [virtual]\fP"
+
 .SS "bool FilesManager::addFiles (std::string const & _filename)\fC [virtual]\fP"
+
+.SS "virtual bool FilesManager::addFolder (\fBPath\fP const & folder, long nb_files = \fC\-1\fP, std::vector< std::string > const & extensions = \fC{'root', 'fast'}\fP)\fC [inline]\fP, \fC [virtual]\fP"
 
 .SS "bool FilesManager::addFolder (std::string folder, long nb_files = \fC\-1\fP, std::vector< std::string > const & extensions = \fC{'root', 'fast'}\fP)\fC [virtual]\fP"
 
@@ -184,6 +197,8 @@ Inherited by \fBMTFilesManager\fP\&.
 .SS "\fBFilesManager\fP const& FilesManager::operator= (\fBFilesManager\fP const & other)\fC [inline]\fP"
 
 .SS "void FilesManager::operator= (\fBListFiles\fP const & list)\fC [inline]\fP"
+
+.SS "bool FilesManager::operator>> (std::string & filename)\fC [inline]\fP"
 
 .SS "std::string FilesManager::operator[] (int const & n)\fC [inline]\fP"
 

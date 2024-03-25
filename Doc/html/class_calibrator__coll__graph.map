@@ -1,0 +1,9 @@
+<map id="Calibrator" name="Calibrator">
+<area shape="rect" id="node1" title="Allows one to calculate and verify calibration coefficients for various sources and detectors for Nub..." alt="" coords="121,184,207,211"/>
+<area shape="rect" id="node2" href="$class_fits.html" title=" " alt="" coords="5,95,51,121"/>
+<area shape="rect" id="node3" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="75,95,125,121"/>
+<area shape="rect" id="node4" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="48,5,117,32"/>
+<area shape="rect" id="node5" href="$struct_calibrator_1_1histograms.html" title=" " alt="" coords="150,95,317,121"/>
+<area shape="rect" id="node6" href="$class_m_t_t_hist.html" title=" " alt="" coords="181,5,321,32"/>
+<area shape="rect" id="node7" href="$class_calibration.html" title="A convenient class for handling coefficient calibration up to 3rd order." alt="" coords="341,95,435,121"/>
+</map>

@@ -1,4 +1,4 @@
-.TH "lib/string_functions.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/string_functions.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -8,22 +8,58 @@ lib/string_functions.hpp
 .PP
 \fC#include <vector>\fP
 .br
+\fC#include <cstring>\fP
+.br
 \fC#include <string>\fP
+.br
+\fC#include <sstream>\fP
 .br
 
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "std::string \fBfirstPart\fP (std::string const &string, char const &sep)"
+.RI "std::string \fBargv_to_string\fP (char **argv, int const &start_i=0)"
+.br
+.RI "Convert i_th first arguments of argv into a string (), by default starting at the first\&. "
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> std::string \fBconcatenate\fP (ARGS &&\&.\&.\&. args)"
 .br
 .ti -1c
-.RI "bool \fBfound\fP (std::string const &string, std::string const &substr)"
+.RI "template<class\&.\&.\&. ARGS> const char * \fBconcatenate_c\fP (ARGS &&\&.\&.\&. args)"
 .br
+.RI "concatenate string, returns a c_str (char**) "
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> std::string \fBctcstr\fP (ARGS &&\&.\&.\&. args)"
+.br
+.RI "concatenate string, returns a c_str (char**) "
+.ti -1c
+.RI "template<class\&.\&.\&. ARGS> std::string \fBctstr\fP (ARGS &&\&.\&.\&. args)"
+.br
+.RI "Concatenate a series of arguments into a big string (alias) "
+.ti -1c
+.RI "void \fBdelete_argv\fP (char **argv)"
+.br
+.RI "Delete an argv manually created by \fBstring_to_argv()\fP "
+.ti -1c
+.RI "void \fBfillList\fP (std::vector< std::string > &list, std::string string, char const &separator, bool const &removeVoids=false)"
+.br
+.RI "Cuts a string into pieces separated by the given separator like ';' or ' ' or ','\&. "
+.ti -1c
+.RI "std::string \fBfirstPart\fP (std::string const &string, char const &sep)"
+.br
+.RI "Returns the string to the left of the first occurence of sep in the string\&. "
+.ti -1c
+.RI "std::string \fBfirstPart\fP (std::string const &string, std::string const &sep)"
+.br
+.RI "Returns the string to the left of the first occurence of sep in the string\&. "
+.ti -1c
+.RI "bool \fBfound\fP (std::string const &string, std::string const &_substr)"
+.br
+.RI "Returns true if the string has at least one occurence of substr\&. "
 .ti -1c
 .RI "std::vector< std::string > \fBgetList\fP (std::string string, char const &separator, bool const &removeVoids=false)"
 .br
-.RI "Cuts a string into pieces separated by the given separator like ';' or ' ' or ',' \&.\&.\&. "
 .ti -1c
 .RI "bool \fBisNumber\fP (std::string const &string)"
 .br
@@ -31,13 +67,27 @@ lib/string_functions.hpp
 .ti -1c
 .RI "std::string \fBlastPart\fP (std::string const &string, char const &sep)"
 .br
+.RI "Returns the string to the right of the last occurence of sep in the string\&. "
+.ti -1c
+.RI "std::string \fBlastPart\fP (std::string const &string, std::string const &sep)"
+.br
+.RI "Returns the string to the right of the last occurence of sep in the string\&. "
+.ti -1c
+.RI "template<class T > std::string \fBmy_to_string\fP (const T &value)"
+.br
+.RI "Convert any type into string, including vector of any type\&. "
 .ti -1c
 .RI "std::string & \fBpop_front\fP (std::string &string)"
 .br
 .RI "Removes the first character of a string\&. "
 .ti -1c
-.RI "bool \fBremove\fP (std::string &string, std::string const &substr)"
+.RI "bool \fBremove\fP (std::string &string, char const &c)"
 .br
+.RI "Remove the first char 'c' to the string if found\&. "
+.ti -1c
+.RI "bool \fBremove\fP (std::string &string, std::string const &_substr)"
+.br
+.RI "Remove the first substr to the string if found\&. "
 .ti -1c
 .RI "std::string \fBremoveBlankSpace\fP (std::string str)"
 .br
@@ -45,9 +95,23 @@ lib/string_functions.hpp
 .ti -1c
 .RI "std::string \fBremoveFirstPart\fP (std::string const &string, char const &sep)"
 .br
+.RI "Returns the string to the right of the first occurence of sep in the string\&. "
+.ti -1c
+.RI "std::string \fBremoveFirstPart\fP (std::string const &string, std::string const &sep)"
+.br
+.RI "Returns the string to the right of the first occurence of sep in the string\&. "
 .ti -1c
 .RI "std::string \fBremoveLastPart\fP (std::string const &string, char const &sep)"
 .br
+.RI "Returns the string to the left of the last occurence of sep in the string\&. "
+.ti -1c
+.RI "std::string \fBremoveLastPart\fP (std::string const &string, std::string const &sep)"
+.br
+.RI "Returns the string to the left of the last occurence of sep in the string\&. "
+.ti -1c
+.RI "bool \fBreplace\fP (std::string &string, std::string const &substr_init, std::string const &substr_substitue)"
+.br
+.RI "Replace substr to the string if it exists\&. "
 .ti -1c
 .RI "std::string \fBreplaceCharacter\fP (std::string const &istring, char const &ichar, char const &ochar)"
 .br
@@ -56,25 +120,86 @@ lib/string_functions.hpp
 .RI "std::string \fBrpCommaWDots\fP (std::string str)"
 .br
 .RI "Replace all the commas of a std::string with dots\&. "
+.ti -1c
+.RI "std::vector< std::string > \fBsplit\fP (std::string string, char const &separator, bool const &removeVoids=false)"
+.br
+.ti -1c
+.RI "char ** \fBstring_to_argv\fP (std::string const &string)"
+.br
+.RI "Create a null terminated C-style array of char from a string\&. "
 .in -1c
 .SH "Function Documentation"
 .PP 
+.SS "std::string argv_to_string (char ** argv, int const & start_i = \fC0\fP)"
+
+.PP
+Convert i_th first arguments of argv into a string (), by default starting at the first\&. 
+.PP
+\fBAttention\fP
+.RS 4
+argv MUST be null-terminated
+.RE
+.PP
+Each argument starts with a space 
+.SS "template<class\&.\&.\&. ARGS> std::string concatenate (ARGS &&\&.\&.\&. args)"
+
+.SS "template<class\&.\&.\&. ARGS> const char* concatenate_c (ARGS &&\&.\&.\&. args)"
+
+.PP
+concatenate string, returns a c_str (char**) 
+.SS "template<class\&.\&.\&. ARGS> std::string ctcstr (ARGS &&\&.\&.\&. args)"
+
+.PP
+concatenate string, returns a c_str (char**) 
+.SS "template<class\&.\&.\&. ARGS> std::string ctstr (ARGS &&\&.\&.\&. args)"
+
+.PP
+Concatenate a series of arguments into a big string (alias) 
+.SS "void delete_argv (char ** argv)"
+
+.PP
+Delete an argv manually created by \fBstring_to_argv()\fP 
+.SS "void fillList (std::vector< std::string > & list, std::string string, char const & separator, bool const & removeVoids = \fCfalse\fP)"
+
+.PP
+Cuts a string into pieces separated by the given separator like ';' or ' ' or ','\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIremoveVoids\fP For instance, we have string = ';1;2;3;;5'\&. without removeVoids this function returns {'1', '2', '3', '5'} with removeVoids this function returns {'', '1', '2', '3', '', '5'} 
+.RE
+.PP
+
 .SS "std::string firstPart (std::string const & string, char const & sep)"
 
-.SS "bool found (std::string const & string, std::string const & substr)"
+.PP
+Returns the string to the left of the first occurence of sep in the string\&. 
+.SS "std::string firstPart (std::string const & string, std::string const & sep)"
 
+.PP
+Returns the string to the left of the first occurence of sep in the string\&. 
+.SS "bool found (std::string const & string, std::string const & _substr)"
+
+.PP
+Returns true if the string has at least one occurence of substr\&. 
 .SS "std::vector<std::string> getList (std::string string, char const & separator, bool const & removeVoids = \fCfalse\fP)"
 
-.PP
-Cuts a string into pieces separated by the given separator like ';' or ' ' or ',' \&.\&.\&. Understand the removeVoids parameter : for instance, we have string = ';1;2;3;;5'
-.PP
-without removeVoids this function returns {'1', '2', '3', '5'} with removeVoids this function returns {'', '1', '2', '3', '', '5'} 
 .SS "bool isNumber (std::string const & string)"
 
 .PP
 Returns true if all its characters are digits\&. 
 .SS "std::string lastPart (std::string const & string, char const & sep)"
 
+.PP
+Returns the string to the right of the last occurence of sep in the string\&. 
+.SS "std::string lastPart (std::string const & string, std::string const & sep)"
+
+.PP
+Returns the string to the right of the last occurence of sep in the string\&. 
+.SS "template<class T > std::string my_to_string (const T & value)"
+
+.PP
+Convert any type into string, including vector of any type\&. 
 .SS "std::string& pop_front (std::string & string)"
 
 .PP
@@ -86,16 +211,38 @@ Careful, time complexity makes it really heavy on big string
 .RE
 .PP
 
-.SS "bool remove (std::string & string, std::string const & substr)"
+.SS "bool remove (std::string & string, char const & c)"
 
+.PP
+Remove the first char 'c' to the string if found\&. 
+.SS "bool remove (std::string & string, std::string const & _substr)"
+
+.PP
+Remove the first substr to the string if found\&. 
 .SS "std::string removeBlankSpace (std::string str)"
 
 .PP
 Remove all the blank space in a string\&. 
 .SS "std::string removeFirstPart (std::string const & string, char const & sep)"
 
+.PP
+Returns the string to the right of the first occurence of sep in the string\&. 
+.SS "std::string removeFirstPart (std::string const & string, std::string const & sep)"
+
+.PP
+Returns the string to the right of the first occurence of sep in the string\&. 
 .SS "std::string removeLastPart (std::string const & string, char const & sep)"
 
+.PP
+Returns the string to the left of the last occurence of sep in the string\&. 
+.SS "std::string removeLastPart (std::string const & string, std::string const & sep)"
+
+.PP
+Returns the string to the left of the last occurence of sep in the string\&. 
+.SS "bool replace (std::string & string, std::string const & substr_init, std::string const & substr_substitue)"
+
+.PP
+Replace substr to the string if it exists\&. 
 .SS "std::string replaceCharacter (std::string const & istring, char const & ichar, char const & ochar)"
 
 .PP
@@ -104,6 +251,19 @@ Replaces all the instances of one character with another\&. For instance : std::
 
 .PP
 Replace all the commas of a std::string with dots\&. 
+.SS "std::vector<std::string> split (std::string string, char const & separator, bool const & removeVoids = \fCfalse\fP)"
+
+.SS "char** string_to_argv (std::string const & string)"
+
+.PP
+Create a null terminated C-style array of char from a string\&. 
+.PP
+\fBAttention\fP
+.RS 4
+you'll have to delete the allocated memory 
+.RE
+.PP
+
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for Nuball2 from the source code\&.

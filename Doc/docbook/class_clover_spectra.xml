@@ -28,9 +28,9 @@ Collaboration diagram for CloverSpectra:<para>
 </listitem>
             <listitem><para>void <link linkend="_class_clover_spectra_1ae46c582451bada5b2b8957ee44b92e35">fillHisto</link> (std::string const &amp;datapath=&quot;&quot;, int nb_files=-1)</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_clover_spectra_1abf805324f6371f19ef0b3ce45705a115">Initialize</link> ()</para>
+            <listitem><para>void <link linkend="_class_clover_spectra_1a8b3eedd382c6e2d0de9d4863efdccaea">Initialise</link> ()</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_clover_spectra_1a353ec66774413feefb33a784ce2159cf">Initialize</link> (int argc, char **argv)</para>
+            <listitem><para>void <link linkend="_class_clover_spectra_1a84dbd5cac3977a0082ab763d51f938d7">Initialise</link> (int argc, char **argv)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_clover_spectra_1a4631e5643c2d2d12eb2fab20c381d59c">loadCalibration</link> (std::string const &amp;calibFile)</para>
 </listitem>
@@ -153,15 +153,15 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_clover_spectra_1abf805324f6371f19ef0b3ce45705a115"/>    <section>
-    <title>Initialize()<computeroutput>[1/2]</computeroutput></title>
-<indexterm><primary>Initialize</primary><secondary>CloverSpectra</secondary></indexterm>
-<indexterm><primary>CloverSpectra</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>void CloverSpectra::Initialize ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_class_clover_spectra_1a8b3eedd382c6e2d0de9d4863efdccaea"/>    <section>
+    <title>Initialise()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Initialise</primary><secondary>CloverSpectra</secondary></indexterm>
+<indexterm><primary>CloverSpectra</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>void CloverSpectra::Initialise ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_spectra_abf805324f6371f19ef0b3ce45705a115_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_spectra_a8b3eedd382c6e2d0de9d4863efdccaea_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -170,20 +170,20 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_spectra_abf805324f6371f19ef0b3ce45705a115_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_spectra_a8b3eedd382c6e2d0de9d4863efdccaea_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_clover_spectra_1a353ec66774413feefb33a784ce2159cf"/>    <section>
-    <title>Initialize()<computeroutput>[2/2]</computeroutput></title>
-<indexterm><primary>Initialize</primary><secondary>CloverSpectra</secondary></indexterm>
-<indexterm><primary>CloverSpectra</primary><secondary>Initialize</secondary></indexterm>
-<para><computeroutput>void CloverSpectra::Initialize (int argc, char ** argv)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_class_clover_spectra_1a84dbd5cac3977a0082ab763d51f938d7"/>    <section>
+    <title>Initialise()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Initialise</primary><secondary>CloverSpectra</secondary></indexterm>
+<indexterm><primary>CloverSpectra</primary><secondary>Initialise</secondary></indexterm>
+<para><computeroutput>void CloverSpectra::Initialise (int argc, char ** argv)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_spectra_a353ec66774413feefb33a784ce2159cf_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_clover_spectra_a84dbd5cac3977a0082ab763d51f938d7_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

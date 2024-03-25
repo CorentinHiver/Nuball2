@@ -17,7 +17,7 @@
         </inbodydescription>
         <location file="lib/MTObjects/MTRootReader.hpp" line="29" column="16" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="29" bodyend="-1"/>
         <referencedby refid="class_m_t_root_reader_1ad8f964e63c97f35e44fc3b11fca88e59" compoundref="_m_t_root_reader_8hpp" startline="15" endline="19">addFolder</referencedby>
-        <referencedby refid="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" compoundref="_m_t_root_reader_8hpp" startline="34" endline="39">execute</referencedby>
+        <referencedby refid="class_m_t_root_reader_1a81c87315eaaf2147d6f30639194fd4e8" compoundref="_m_t_root_reader_8hpp" startline="34" endline="39">read</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" prot="private" static="no" mutable="no">
         <type><ref refid="_m_t_list_8hpp_1a5645cb48b623bfc2e6e274c70952a8e2" kindref="member">MTList</ref></type>
@@ -31,8 +31,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTRootReader.hpp" line="30" column="10" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="30" bodyend="-1"/>
-        <referencedby refid="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" compoundref="_m_t_root_reader_8hpp" startline="34" endline="39">execute</referencedby>
         <referencedby refid="class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22" compoundref="_m_t_root_reader_8hpp" startline="23" endline="23">nextFilename</referencedby>
+        <referencedby refid="class_m_t_root_reader_1a81c87315eaaf2147d6f30639194fd4e8" compoundref="_m_t_root_reader_8hpp" startline="34" endline="39">read</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -57,46 +57,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTRootReader.hpp" line="15" column="8" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="15" bodyend="19"/>
-        <references refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" compoundref="_files_manager_8hpp" startline="136" endline="156">FilesManager::addFolder</references>
+        <references refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" compoundref="_files_manager_8hpp" startline="143" endline="163">FilesManager::addFolder</references>
         <references refid="class_m_t_root_reader_1a46d681c951b18ad571dcbc5283ba8bba" compoundref="_m_t_root_reader_8hpp" startline="29">m_files</references>
         <referencedby refid="class_m_t_root_reader_1a6df2599a2adf92ce971105fbfac69221" compoundref="_m_t_root_reader_8hpp" startline="14" endline="14">MTRootReader</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class Func</type>
-          </param>
-          <param>
-            <type>class...</type>
-            <declname>ARGS</declname>
-            <defname>ARGS</defname>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>void MTRootReader::execute</definition>
-        <argsstring>(Func &amp;&amp;func, ARGS &amp;&amp;... args)</argsstring>
-        <name>execute</name>
-        <param>
-          <type>Func &amp;&amp;</type>
-          <declname>func</declname>
-        </param>
-        <param>
-          <type>ARGS &amp;&amp;...</type>
-          <declname>args</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/MTObjects/MTRootReader.hpp" line="21" column="8" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="34" bodyend="39"/>
-        <references refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" compoundref="_files_manager_8hpp" startline="32" endline="32">FilesManager::getListFiles</references>
-        <references refid="class_m_t_root_reader_1a46d681c951b18ad571dcbc5283ba8bba" compoundref="_m_t_root_reader_8hpp" startline="29">m_files</references>
-        <references refid="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" compoundref="_m_t_root_reader_8hpp" startline="30">m_MTfiles</references>
-        <references refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="76" endline="99">MTObject::parallelise_function</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <referencedby refid="class_run_matrixator_1aa6d13b08060fef07b50d7ab6b35be0d6" compoundref="_run_matrixator_8hpp" startline="122" endline="150">RunMatrixator::run</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_root_reader_1ac0cd727a88e8f1f2abd1e05d2197fa95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -150,9 +113,46 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTRootReader.hpp" line="23" column="8" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="23" bodyend="23"/>
-        <references refid="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" compoundref="_m_t_list_8hpp" startline="81" endline="91">MTVector&lt; T &gt;::getNext</references>
+        <references refid="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" compoundref="_m_t_list_8hpp" startline="82" endline="92">MTVector&lt; T &gt;::getNext</references>
         <references refid="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" compoundref="_m_t_root_reader_8hpp" startline="30">m_MTfiles</references>
-        <referencedby refid="class_m_t_root_reader_1ad46b9bf07eeab40b80fa9a504d5aaf52" compoundref="_m_t_root_reader_8hpp" startline="42" endline="51">Read</referencedby>
+        <referencedby refid="class_m_t_root_reader_1ad46b9bf07eeab40b80fa9a504d5aaf52" compoundref="_m_t_root_reader_8hpp" startline="42" endline="52">Read</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_root_reader_1a81c87315eaaf2147d6f30639194fd4e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Func</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void MTRootReader::read</definition>
+        <argsstring>(Func &amp;&amp;func, ARGS &amp;&amp;... args)</argsstring>
+        <name>read</name>
+        <param>
+          <type>Func &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>ARGS &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="21" column="8" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="34" bodyend="39"/>
+        <references refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" compoundref="_files_manager_8hpp" startline="37" endline="37">FilesManager::getListFiles</references>
+        <references refid="class_m_t_root_reader_1a46d681c951b18ad571dcbc5283ba8bba" compoundref="_m_t_root_reader_8hpp" startline="29">m_files</references>
+        <references refid="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" compoundref="_m_t_root_reader_8hpp" startline="30">m_MTfiles</references>
+        <references refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="214" endline="238">MTObject::parallelise_function</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <referencedby refid="class_cobalt_calorimeter_1ae731ee28c852d150fbf668c27604b8ed" compoundref="_cobalt_calorimeter_8hpp" startline="281" endline="295">CobaltCalorimeter::launchRoot</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-static-func">
@@ -189,7 +189,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTRootReader.hpp" line="27" column="15" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="42" bodyend="51"/>
+        <location file="lib/MTObjects/MTRootReader.hpp" line="27" column="15" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="42" bodyend="52"/>
+        <references refid="class_nuball2_tree_1ab6287030e410a63962564377b938bd31" compoundref="_nuball2_tree_8hpp" startline="28" endline="28">Nuball2Tree::get</references>
         <references refid="class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22" compoundref="_m_t_root_reader_8hpp" startline="23" endline="23">nextFilename</references>
       </memberdef>
       </sectiondef>
@@ -234,12 +235,12 @@
     <location file="lib/MTObjects/MTRootReader.hpp" line="10" column="1" bodyfile="lib/MTObjects/MTRootReader.hpp" bodystart="11" bodyend="31"/>
     <listofallmembers>
       <member refid="class_m_t_root_reader_1ad8f964e63c97f35e44fc3b11fca88e59" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>addFolder</name></member>
-      <member refid="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>execute</name></member>
       <member refid="class_m_t_root_reader_1a46d681c951b18ad571dcbc5283ba8bba" prot="private" virt="non-virtual"><scope>MTRootReader</scope><name>m_files</name></member>
       <member refid="class_m_t_root_reader_1a502ca89edf653e2e55e697a2135b7eef" prot="private" virt="non-virtual"><scope>MTRootReader</scope><name>m_MTfiles</name></member>
       <member refid="class_m_t_root_reader_1ac0cd727a88e8f1f2abd1e05d2197fa95" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>MTRootReader</name></member>
       <member refid="class_m_t_root_reader_1a6df2599a2adf92ce971105fbfac69221" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>MTRootReader</name></member>
       <member refid="class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>nextFilename</name></member>
+      <member refid="class_m_t_root_reader_1a81c87315eaaf2147d6f30639194fd4e8" prot="public" virt="non-virtual"><scope>MTRootReader</scope><name>read</name></member>
       <member refid="class_m_t_root_reader_1ad46b9bf07eeab40b80fa9a504d5aaf52" prot="private" virt="non-virtual"><scope>MTRootReader</scope><name>Read</name></member>
     </listofallmembers>
   </compounddef>

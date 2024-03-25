@@ -31,7 +31,11 @@ Collaboration diagram for MTFilesManager:<para>
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
+            <listitem><para>virtual bool <link linkend="_class_files_manager_1a986350d5c057d10b8fdd11551b097b37">addFile</link> (std::string const &amp;_filename)</para>
+</listitem>
             <listitem><para>virtual bool <link linkend="_class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f">addFiles</link> (std::string const &amp;_filename)</para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_class_files_manager_1ae56276d4ed1c16566b6849b0491efc0e">addFolder</link> (<link linkend="_class_path">Path</link> const &amp;folder, long nb_files=-1, std::vector&lt; std::string &gt; const &amp;extensions={&quot;root&quot;, &quot;fast&quot;})</para>
 </listitem>
             <listitem><para>virtual bool <link linkend="_class_files_manager_1a6d05662378bde592075237b9fa0a5168">addFolder</link> (std::string folder, long nb_files=-1, std::vector&lt; std::string &gt; const &amp;extensions={&quot;root&quot;, &quot;fast&quot;})</para>
 </listitem>
@@ -66,6 +70,8 @@ Collaboration diagram for MTFilesManager:<para>
             <listitem><para>bool <link linkend="_class_files_manager_1ac4d90f9590ed90fcbbe23557ae88c892">nextFileName</link> (std::string &amp;filename, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> const &amp;step=1)</para>
 </listitem>
             <listitem><para><link linkend="_class_files_manager_1a3405dcb99deb03c4fdea55fff9f3ffdf">operator bool</link> () const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_files_manager_1a94f6fa018f7d7fda65a463be74a3c3d4">operator&gt;&gt;</link> (std::string &amp;filename)</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_files_manager_1a78934b0656b357c7eb3807aa4bea7f26">operator[]</link> (int const &amp;n)</para>
 </listitem>
@@ -118,7 +124,29 @@ Collaboration diagram for MTFilesManager:<para>
 </section>
 <section>
 <title>Member Function Documentation</title>
-<anchor xml:id="_class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f"/>    <section>
+<anchor xml:id="_class_files_manager_1a986350d5c057d10b8fdd11551b097b37"/>    <section>
+    <title>addFile()</title>
+<indexterm><primary>addFile</primary><secondary>MTFilesManager</secondary></indexterm>
+<indexterm><primary>MTFilesManager</primary><secondary>addFile</secondary></indexterm>
+<para><computeroutput>virtual bool FilesManager::addFile (std::string const &amp; _filename)<computeroutput>[inline]</computeroutput>, <computeroutput>[virtual]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_files_manager_a986350d5c057d10b8fdd11551b097b37_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_files_manager_a986350d5c057d10b8fdd11551b097b37_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f"/>    <section>
     <title>addFiles()</title>
 <indexterm><primary>addFiles</primary><secondary>MTFilesManager</secondary></indexterm>
 <indexterm><primary>MTFilesManager</primary><secondary>addFiles</secondary></indexterm>
@@ -140,8 +168,14 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_files_manager_1a6d05662378bde592075237b9fa0a5168"/>    <section>
-    <title>addFolder()</title>
+    </section><anchor xml:id="_class_files_manager_1ae56276d4ed1c16566b6849b0491efc0e"/>    <section>
+    <title>addFolder()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>addFolder</primary><secondary>MTFilesManager</secondary></indexterm>
+<indexterm><primary>MTFilesManager</primary><secondary>addFolder</secondary></indexterm>
+<para><computeroutput>virtual bool FilesManager::addFolder (<link linkend="_class_path">Path</link> const &amp; folder, long nb_files = <computeroutput>-1</computeroutput>
+, std::vector&lt; std::string &gt; const &amp; extensions = <computeroutput>{&quot;root&quot;, &quot;fast&quot;}</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[virtual]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_files_manager_1a6d05662378bde592075237b9fa0a5168"/>    <section>
+    <title>addFolder()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>addFolder</primary><secondary>MTFilesManager</secondary></indexterm>
 <indexterm><primary>MTFilesManager</primary><secondary>addFolder</secondary></indexterm>
 <para><computeroutput>bool FilesManager::addFolder (std::string folder, long nb_files = <computeroutput>-1</computeroutput>
@@ -298,6 +332,19 @@ Here is the caller graph for this function:<para>
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_files_manager_a3405dcb99deb03c4fdea55fff9f3ffdf_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_files_manager_1a94f6fa018f7d7fda65a463be74a3c3d4"/>    <section>
+    <title>operator&gt;&gt;()</title>
+<indexterm><primary>operator&gt;&gt;</primary><secondary>MTFilesManager</secondary></indexterm>
+<indexterm><primary>MTFilesManager</primary><secondary>operator&gt;&gt;</secondary></indexterm>
+<para><computeroutput>bool FilesManager::operator&gt;&gt; (std::string &amp; filename)<computeroutput>[inline]</computeroutput>, <computeroutput>[inherited]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_files_manager_a94f6fa018f7d7fda65a463be74a3c3d4_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

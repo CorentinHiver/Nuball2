@@ -1,9 +1,10 @@
 <map id="CloverSpectra::writeHisto" name="CloverSpectra::writeHisto">
 <area shape="rect" id="node1" title=" " alt="" coords="5,81,193,108"/>
 <area shape="rect" id="node2" href="$class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="259,5,343,32"/>
-<area shape="rect" id="node3" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="479,69,531,96"/>
-<area shape="rect" id="node4" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="252,107,349,133"/>
-<area shape="rect" id="node5" href="$class_m_t_t_hist.html#ae9163b5b4afca69cfdebdf2cf60064cd" title=" " alt="" coords="241,157,360,184"/>
-<area shape="rect" id="node6" href="$class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="408,132,603,159"/>
-<area shape="rect" id="node7" href="$class_m_t_object.html#a3350577ca839e2abdcd4d6f6449a1408" title=" " alt="" coords="409,183,602,209"/>
+<area shape="rect" id="node3" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="479,107,531,133"/>
+<area shape="rect" id="node4" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="252,56,349,83"/>
+<area shape="rect" id="node7" href="$class_m_t_t_hist.html#a84c745f09bbccc075589f8531c4454e3" title="MTTHIST_MONO." alt="" coords="241,157,360,184"/>
+<area shape="rect" id="node5" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="453,56,556,83"/>
+<area shape="rect" id="node6" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="649,56,756,83"/>
+<area shape="rect" id="node8" href="$class_m_t_object.html#a3350577ca839e2abdcd4d6f6449a1408" title=" " alt="" coords="408,157,601,184"/>
 </map>

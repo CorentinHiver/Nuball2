@@ -1,4 +1,7 @@
 <map id="Faster2Histo::fillHisto" name="Faster2Histo::fillHisto">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,167,32"/>
-<area shape="rect" id="node2" href="$string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="215,5,273,32"/>
+<area shape="rect" id="node1" title="Handles each hit and fills the correct histogram." alt="" coords="5,56,167,83"/>
+<area shape="rect" id="node2" href="$print_8hpp.html#a553a9a331cc4556c2d9bb3aaa8533528" title="Print in red." alt="" coords="225,5,278,32"/>
+<area shape="rect" id="node4" href="$string__functions_8hpp.html#a87d8e2cb69021ab11e443cb140349eb6" title="Returns true if the string has at least one occurence of substr." alt="" coords="222,56,281,83"/>
+<area shape="rect" id="node5" href="$lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="215,107,288,133"/>
+<area shape="rect" id="node3" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="336,5,388,32"/>
 </map>

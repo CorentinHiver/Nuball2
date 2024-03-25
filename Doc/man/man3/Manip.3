@@ -1,8 +1,9 @@
-.TH "Manip" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Manip" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Manip
+Manip \- Loads the list file containing the list of the names of the folder containing the faster files to convert\&.  
+
 .SH SYNOPSIS
 .br
 .PP
@@ -14,6 +15,7 @@ Manip
 .ti -1c
 .RI "void \fBaddFolder\fP (std::string const &folder)"
 .br
+.RI "Clears the previously set list of folders and replace it with folder\&. "
 .ti -1c
 .RI "auto const  & \fBget\fP () const"
 .br
@@ -33,11 +35,9 @@ Manip
 .RI "bool \fBoperator>>\fP (std::string &string)"
 .br
 .ti -1c
-.RI "void \fBPrint\fP ()"
+.RI "void \fBreadFile\fP ()"
 .br
-.ti -1c
-.RI "bool \fBreadFile\fP ()"
-.br
+.RI "Reads the list file containing the list of folders\&. "
 .ti -1c
 .RI "void \fBreadFile\fP (std::string const &runs_file)"
 .br
@@ -53,12 +53,14 @@ Manip
 .ti -1c
 .RI "void \fBsetFolder\fP (std::string const &folder)"
 .br
+.RI "Clears the previously set list of folders and replace it with folder\&. "
 .ti -1c
 .RI "void \fBsetManipName\fP (std::string const &manipname)"
 .br
 .ti -1c
 .RI "bool \fBsetMT\fP (bool const &MTOn=true)"
 .br
+.RI "To allow several threads to work on different runs on parallel\&. "
 .in -1c
 .SS "Private Attributes"
 
@@ -91,6 +93,18 @@ Manip
 .RI "std::string \fBm_runs_files\fP"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+Loads the list file containing the list of the names of the folder containing the faster files to convert\&. 
+
+
+.PP
+\fBTodo\fP
+.RS 4
+make it better !! 
+.RE
+.PP
+
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "Manip::Manip ()\fC [inline]\fP"
@@ -101,6 +115,8 @@ Manip
 .PP 
 .SS "void Manip::addFolder (std::string const & folder)\fC [inline]\fP"
 
+.PP
+Clears the previously set list of folders and replace it with folder\&. 
 .SS "auto const& Manip::get () const\fC [inline]\fP"
 
 .SS "bool Manip::getNext (std::string & run)\fC [inline]\fP"
@@ -109,24 +125,44 @@ Manip
 
 .SS "bool Manip::operator>> (std::string & string)\fC [inline]\fP"
 
-.SS "void Manip::Print ()\fC [inline]\fP"
+.SS "void Manip::readFile ()\fC [inline]\fP"
 
-.SS "bool Manip::readFile ()\fC [inline]\fP"
-
+.PP
+Reads the list file containing the list of folders\&. 
 .SS "void Manip::readFile (std::string const & runs_file)\fC [inline]\fP"
 
 .SS "void Manip::reset ()\fC [inline]\fP"
 
 .SS "void Manip::setDataPath (std::string const & datapath)\fC [inline]\fP"
 
+.PP
+\fBDeprecated\fP
+.RS 4
+Set the path of the list file containing the list of folders 
+.RE
+.PP
+
 .SS "void Manip::setFileName (std::string const & filename)\fC [inline]\fP"
 
 .SS "void Manip::setFolder (std::string const & folder)\fC [inline]\fP"
 
+.PP
+Clears the previously set list of folders and replace it with folder\&. 
 .SS "void Manip::setManipName (std::string const & manipname)\fC [inline]\fP"
+
+.PP
+\fBDeprecated\fP
+.RS 4
+Set the name of the folder inside the datapath containing the list file containing the list of folders 
+.RE
+.PP
 
 .SS "bool Manip::setMT (bool const & MTOn = \fCtrue\fP)\fC [inline]\fP"
 
+.PP
+To allow several threads to work on different runs on parallel\&. \fBMTObject\fP needs to have been Initialised before creating the 
+.br
+ 
 .SH "Member Data Documentation"
 .PP 
 .SS "\fBuint\fP Manip::i = 0\fC [private]\fP"

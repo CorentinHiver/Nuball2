@@ -1,4 +1,4 @@
-.TH "lib/Modules/Timeshifts.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/Modules/Timeshifts.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -37,8 +37,15 @@ lib/Modules/Timeshifts.hpp
 
 .in +1c
 .ti -1c
+.RI "class \fBTimeshifts::EmptyError\fP"
+.br
+.ti -1c
+.RI "class \fBTimeshifts::NotFoundError\fP"
+.br
+.ti -1c
 .RI "class \fBTimeshifts\fP"
 .br
+.RI "Calculates the time difference between all detectors and a reference detector\&. "
 .in -1c
 .SS "Functions"
 
@@ -56,7 +63,7 @@ lib/Modules/Timeshifts.hpp
 .RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBTimeshifts\fP const &ts)"
 .br
 .ti -1c
-.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBTime\fP \fBShift_cast\fP (T const &t)"
+.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBTime\fP \fBTimeshift_cast\fP (T const &t)"
 .br
 .RI "Casts a number into unsigned Time\&. "
 .in -1c
@@ -77,7 +84,7 @@ lib/Modules/Timeshifts.hpp
 
 .SS "std::ostream& operator<< (std::ostream & cout, \fBTimeshifts\fP const & ts)"
 
-.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBTime\fP Shift_cast (T const & t)\fC [inline]\fP"
+.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBTime\fP Timeshift_cast (T const & t)\fC [inline]\fP"
 
 .PP
 Casts a number into unsigned Time\&. 

@@ -12,8 +12,8 @@ class DataFileReader
 public:
   DataFileReader(){m_hit = new Hit; m_empty_hit = new Hit;};
   DataFileReader(Hit* _hit) : m_hit(_hit) {m_empty_hit = new Hit;};
-  DataFileReader(std::string _filename) : m_filename(_filename) {m_kReady = Initialize();};
-  DataFileReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) {m_empty_hit = new Hit; m_kReady = Initialize();};
+  DataFileReader(std::string _filename) : m_filename(_filename) {m_kReady = Initialise();};
+  DataFileReader(Hit* _hit, std::string _filename) : m_hit(_hit), m_filename(_filename) {m_empty_hit = new Hit; m_kReady = Initialise();};
   ~DataFileReader()
   {
     delete m_ReadTree;
@@ -32,8 +32,8 @@ public:
     }
   };
 
-  Bool_t Initialize();
-  Bool_t Initialize(std::string const & _filename);
+  Bool_t Initialise();
+  Bool_t Initialise(std::string const & _filename);
   Bool_t Read(Hit* hit);
   Bool_t Read();
   Bool_t ReadRoot(Int_t const & pos);
@@ -57,9 +57,9 @@ public:
 
 private:
   //Internal methods :
-  Bool_t InitializeRootRead();
+  Bool_t InitialiseRootRead();
   #ifndef NO_FASTERAC
-  Bool_t InitializeFasterRead();
+  Bool_t InitialiseFasterRead();
   #endif //NO_FASTERAC
 
   bool m_verbose = false;
@@ -93,7 +93,7 @@ private:
   Bool_t                 m_isGroup  = false;
 };
 
-Bool_t DataFileReader::Initialize()
+Bool_t DataFileReader::Initialise()
 {
 #ifndef NO_FASTERAC
   #ifdef FASTER_GROUP
@@ -124,7 +124,7 @@ Bool_t DataFileReader::Initialize()
     m_rootORfast = "root";
     m_quick_rootOrFast = 'r';
     std::cout << "Reader set to " << m_filename << std::endl;
-    return InitializeRootRead();
+    return InitialiseRootRead();
   }
   else if (extension(m_filename) == "fast")
   {
@@ -132,7 +132,7 @@ Bool_t DataFileReader::Initialize()
     m_rootORfast = "fast";
     m_quick_rootOrFast = 'f';
     std::cout << "Reader set to " << m_filename << std::endl;
-    return InitializeFasterRead();
+    return InitialiseFasterRead();
   #else
     print("No faster read !!");
   #endif //NO_FASTERAC
@@ -145,10 +145,10 @@ Bool_t DataFileReader::Initialize()
   return false;
 }
 
-Bool_t DataFileReader::Initialize(std::string const & _filename)
+Bool_t DataFileReader::Initialise(std::string const & _filename)
 {
   m_filename = _filename;
-  return Initialize();
+  return Initialise();
 }
 
 Bool_t DataFileReader::Read(Hit* hit)
@@ -352,7 +352,7 @@ Bool_t DataFileReader::ReadFastData(faster_data_p const & _data)
 //  Privates methods
 //====================
 
-Bool_t DataFileReader::InitializeRootRead()
+Bool_t DataFileReader::InitialiseRootRead()
 {
   if (m_TFile.get()) m_TFile->Close();
   m_TFile.reset(TFile::Open(m_filename.c_str(),"read"));
@@ -402,7 +402,7 @@ Bool_t DataFileReader::InitializeRootRead()
 
 #ifndef NO_FASTERAC
 
-Bool_t DataFileReader::InitializeFasterRead()
+Bool_t DataFileReader::InitialiseFasterRead()
 {
   if (m_reader != NULL) faster_file_reader_close(m_reader);
   m_reader = faster_file_reader_open ( m_filename.c_str() );

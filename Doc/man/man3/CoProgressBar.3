@@ -1,0 +1,148 @@
+.TH "CoProgressBar< T >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+CoProgressBar< T >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <CoProgressBar\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBCoProgressBar\fP () noexcept=default"
+.br
+.ti -1c
+.RI "\fBCoProgressBar\fP (T *value, float const &value_max)"
+.br
+.ti -1c
+.RI "\fBCoProgressBar\fP (T *value, float const &value_max, int width)"
+.br
+.ti -1c
+.RI "bool \fBsetValue\fP (T *value)"
+.br
+.ti -1c
+.RI "bool \fBsetValueMax\fP (float const &value_max)"
+.br
+.ti -1c
+.RI "void \fBshow\fP (std::string const &message='')"
+.br
+.ti -1c
+.RI "void \fBshowFast\fP ()"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBfirst_time\fP = true"
+.br
+.ti -1c
+.RI "int \fBm_last_value\fP = 0"
+.br
+.ti -1c
+.RI "T * \fBm_value\fP = nullptr"
+.br
+.ti -1c
+.RI "T \fBm_value_max\fP = 0"
+.br
+.ti -1c
+.RI "int \fBm_width\fP = 50"
+.br
+.ti -1c
+.RI "\fBTimer\fP \fBtimer\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T>
+.br
+class CoProgressBar< T >"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class T > \fBCoProgressBar\fP< T >::\fBCoProgressBar\fP ()\fC [default]\fP, \fC [noexcept]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > \fBCoProgressBar\fP< T >::\fBCoProgressBar\fP (T * value, float const & value_max)\fC [inline]\fP"
+
+.SS "template<class T > \fBCoProgressBar\fP< T >::\fBCoProgressBar\fP (T * value, float const & value_max, int width)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class T > bool \fBCoProgressBar\fP< T >::setValue (T * value)\fC [inline]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > bool \fBCoProgressBar\fP< T >::setValueMax (float const & value_max)\fC [inline]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > void \fBCoProgressBar\fP< T >::show (std::string const & message = \fC''\fP)"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > void \fBCoProgressBar\fP< T >::showFast"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SH "Member Data Documentation"
+.PP 
+.SS "template<class T > bool \fBCoProgressBar\fP< T >::first_time = true\fC [private]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > int \fBCoProgressBar\fP< T >::m_last_value = 0\fC [private]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > T* \fBCoProgressBar\fP< T >::m_value = nullptr\fC [private]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > T \fBCoProgressBar\fP< T >::m_value_max = 0\fC [private]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > int \fBCoProgressBar\fP< T >::m_width = 50\fC [private]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "template<class T > \fBTimer\fP \fBCoProgressBar\fP< T >::timer\fC [private]\fP"
+
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

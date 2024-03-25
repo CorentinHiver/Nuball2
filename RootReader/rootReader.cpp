@@ -61,7 +61,7 @@ int main(int argc, char** argv)
   // if(outRoot.back() == '/') outRoot.pop_back();
   // outRoot="129/Analyse/Isomer/"+outRoot;
 
-// Initialize arrays
+// Initialise arrays
   g_labelToName = arrayID(fileID);
   m_nb_labels = g_labelToName.size();
   setArrays(m_nb_labels);
@@ -69,10 +69,10 @@ int main(int argc, char** argv)
   // EachDetector module : one histogram of each kind for each detector
   // EachDetector ed;
   // ed.setParameters(p.get_ed_setup());
-  // ed.Initialize(m_nb_labels);
+  // ed.Initialise(m_nb_labels);
 
   AnalyseIsomer ai;
-  ai.Initialize();
+  ai.Initialise();
 
   FilesManager files;
   // std::string list = "Parameters/list_runs.list";
@@ -82,10 +82,10 @@ int main(int argc, char** argv)
   // files.addFolder(dataPath+"run_70");
 
   // Matrices ma;
-  // ma.Initialize();
+  // ma.Initialise();
 
   // RunCheck rc;
-  // rc.Initialize();
+  // rc.Initialise();
 
   // Pre-sorting code :
   Sorted_Event event_s;

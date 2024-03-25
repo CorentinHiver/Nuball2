@@ -3,43 +3,40 @@
   <compounddef id="_timewalk_8hpp" kind="file" language="C++">
     <compoundname>Timewalk.hpp</compoundname>
     <includes refid="lib_co_8hpp" local="yes">../libCo.hpp</includes>
-    <includedby refid="_d_s_s_d_8hpp" local="no">lib/Analyse/DSSD.hpp</includedby>
+    <includedby refid="_d_s_s_d_8hpp" local="yes">lib/Analyse/DSSD.hpp</includedby>
     <includedby refid="_sorted___event_8hpp" local="no">lib/Analyse/Sorted_Event.hpp</includedby>
     <incdepgraph>
-      <node id="27">
+      <node id="19">
         <label>glob.h</label>
       </node>
-      <node id="10">
-        <label>iomanip</label>
-      </node>
-      <node id="9">
+      <node id="24">
         <label>functional</label>
       </node>
-      <node id="16">
+      <node id="5">
+        <label>iomanip</label>
+      </node>
+      <node id="28">
         <label>queue</label>
       </node>
-      <node id="32">
-        <label>random.hpp</label>
-        <link refid="random_8hpp"/>
-        <childnode refid="33" relation="include">
-        </childnode>
-      </node>
-      <node id="37">
+      <node id="20">
         <label>filesystem</label>
       </node>
-      <node id="29">
-        <label>stdlib.h</label>
+      <node id="21">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
-      <node id="18">
+      <node id="29">
         <label>stdexcept</label>
       </node>
-      <node id="15">
+      <node id="27">
         <label>numeric</label>
       </node>
-      <node id="19">
+      <node id="14">
         <label>string</label>
       </node>
-      <node id="12">
+      <node id="7">
         <label>map</label>
       </node>
       <node id="2">
@@ -47,45 +44,21 @@
         <link refid="lib_co_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -99,11 +72,15 @@
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -111,103 +88,137 @@
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
-      </node>
-      <node id="31">
-        <label>print.hpp</label>
-        <link refid="print_8hpp"/>
-      </node>
-      <node id="8">
-        <label>fstream</label>
-      </node>
-      <node id="1">
-        <label>lib/Modules/Timewalk.hpp</label>
-        <link refid="_timewalk_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>any</label>
-      </node>
-      <node id="35">
-        <label>files_functions.hpp</label>
-        <link refid="files__functions_8hpp"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="33">
-        <label>random</label>
-      </node>
-      <node id="30">
-        <label>string.h</label>
-      </node>
-      <node id="23">
-        <label>typeinfo</label>
-      </node>
-      <node id="25">
-        <label>vector</label>
-      </node>
-      <node id="20">
-        <label>stack</label>
-      </node>
-      <node id="36">
-        <label>vector_functions.hpp</label>
-        <link refid="vector__functions_8hpp"/>
-        <childnode refid="31" relation="include">
+      <node id="3">
+        <label>print.hpp</label>
+        <link refid="print_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="4">
-        <label>array</label>
+      <node id="18">
+        <label>fstream</label>
       </node>
-      <node id="17">
-        <label>sstream</label>
+      <node id="22">
+        <label>any</label>
       </node>
-      <node id="6">
-        <label>cstdlib</label>
-      </node>
-      <node id="11">
-        <label>iostream</label>
-      </node>
-      <node id="34">
-        <label>string_functions.hpp</label>
-        <link refid="string__functions_8hpp"/>
-        <childnode refid="25" relation="include">
+      <node id="16">
+        <label>files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
-      <node id="24">
+      <node id="11">
+        <label>random</label>
+      </node>
+      <node id="33">
+        <label>typeinfo</label>
+      </node>
+      <node id="37">
+        <label>ctime</label>
+      </node>
+      <node id="30">
+        <label>stack</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="8">
+        <label>vector_functions.hpp</label>
+        <link refid="vector__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>array</label>
+      </node>
+      <node id="15">
+        <label>sstream</label>
+      </node>
+      <node id="10">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>cstdlib</label>
+      </node>
+      <node id="4">
+        <label>iostream</label>
+      </node>
+      <node id="12">
+        <label>string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
         <label>unordered_map</label>
       </node>
-      <node id="14">
+      <node id="26">
         <label>mutex</label>
       </node>
-      <node id="21">
+      <node id="35">
+        <label>csignal</label>
+      </node>
+      <node id="31">
         <label>thread</label>
       </node>
-      <node id="5">
+      <node id="1">
+        <label>lib/Classes/Timewalk.hpp</label>
+        <link refid="_timewalk_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
         <label>algorithm</label>
       </node>
-      <node id="28">
-        <label>stdio.h</label>
-      </node>
-      <node id="7">
+      <node id="13">
         <label>cstring</label>
       </node>
-      <node id="13">
+      <node id="25">
         <label>memory</label>
       </node>
-      <node id="22">
+      <node id="32">
         <label>typeindex</label>
       </node>
-      <node id="26">
+      <node id="17">
         <label>dirent.h</label>
       </node>
     </incdepgraph>
@@ -224,17 +235,17 @@
         <label>lib/Analyse/EventAnalyse.hpp</label>
         <link refid="_event_analyse_8hpp"/>
       </node>
+      <node id="4">
+        <label>lib/Analyse/Sorted_Event.hpp</label>
+        <link refid="_sorted___event_8hpp"/>
+      </node>
       <node id="1">
-        <label>lib/Modules/Timewalk.hpp</label>
+        <label>lib/Classes/Timewalk.hpp</label>
         <link refid="_timewalk_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-      </node>
-      <node id="4">
-        <label>lib/Analyse/Sorted_Event.hpp</label>
-        <link refid="_sorted___event_8hpp"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classf_parameters" prot="public">fParameters</innerclass>
@@ -252,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/Timewalk.hpp" line="88" column="1" bodyfile="lib/Modules/Timewalk.hpp" bodystart="88" bodyend="-1"/>
+        <location file="lib/Classes/Timewalk.hpp" line="88" column="1" bodyfile="lib/Classes/Timewalk.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -272,7 +283,7 @@
 <codeline lineno="10" refid="class_timewalk_1ac6d66ef44ed399a2d12c24d083d71b3f" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_timewalk_1ac6d66ef44ed399a2d12c24d083d71b3f" kindref="member">Timewalk</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>filename){<ref refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" kindref="member">loadFile</ref>(filename);}</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" kindref="member">loadFile</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>filename);</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_timewalk_1aea302190deccd4d6e51c306db01e7341" kindref="member">get</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>nrj);</highlight></codeline>
-<codeline lineno="13" refid="class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a" kindref="member">Print</ref>(){</highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;<ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>.size();<sp/>i++)<sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(i)*<ref refid="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" kindref="member">m_keVperBin</ref>,<sp/><ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>[i]);}</highlight></codeline>
+<codeline lineno="13" refid="class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a" kindref="member">Print</ref>(){</highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;<ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>.size();<sp/>i++)<sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(i)*<ref refid="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" kindref="member">m_keVperBin</ref>,<sp/><ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>[i]);}</highlight></codeline>
 <codeline lineno="14" refid="class_timewalk_1a760b5d3b33b49d022b4ba352f76de157" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_timewalk_1a760b5d3b33b49d022b4ba352f76de157" kindref="member">resize</ref>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>size,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>value<sp/>=<sp/>0.)<sp/>{<ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>.resize(size,<sp/>value);}</highlight></codeline>
 <codeline lineno="15" refid="class_timewalk_1a5a9bf52d569022f6260d820a8b070606" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_timewalk_1a5a9bf52d569022f6260d820a8b070606" kindref="member">resize</ref>()<sp/>{<ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>.resize(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="class_timewalk_1a63ec5a22a054be2b6bd511e27cf46ef5" kindref="member">max</ref>),<sp/>0.);}</highlight></codeline>
 <codeline lineno="16" refid="class_timewalk_1a5fcb34cdafa277bc367708edfad4508d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_timewalk_1a5fcb34cdafa277bc367708edfad4508d" kindref="member">setMax</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>_max)<sp/>{<ref refid="class_timewalk_1a63ec5a22a054be2b6bd511e27cf46ef5" kindref="member">max</ref><sp/>=<sp/>_max;}</highlight></codeline>
@@ -324,7 +335,7 @@
 <codeline lineno="62"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(i)*<ref refid="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" kindref="member">m_keVperBin</ref>&gt;5000<sp/>&amp;&amp;<sp/>abs(<ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>[i]-<ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>[i-1])<sp/>&gt;<sp/>15)</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(<ref refid="files__functions_8hpp_1a58f50a6390692cff52eef37fdaa94e56" kindref="member">rmPathAndExt</ref>(filename),<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(i)*<ref refid="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" kindref="member">m_keVperBin</ref>,<sp/><ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>[i]);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(<ref refid="files__functions_8hpp_1a58f50a6390692cff52eef37fdaa94e56" kindref="member">rmPathAndExt</ref>(filename),<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">float</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(i)*<ref refid="class_timewalk_1a048a7979d8424c55ca0d545b3ec589d3" kindref="member">m_keVperBin</ref>,<sp/><ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>[i]);</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>[i]<sp/>=<sp/><ref refid="class_timewalk_1a38ee691b54eb47a48c43146d803a3e74" kindref="member">m_Timewalk</ref>[i-1];</highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
@@ -432,12 +443,12 @@
 <codeline lineno="175"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>l++;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Timewalk<sp/>arrays<sp/>ready&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Timewalk<sp/>arrays<sp/>ready&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="179"><highlight class="normal"><sp/><sp/><ref refid="class_timewalks_1a35a9676041331c3c1bbad0a95551e092" kindref="member">isON</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="180"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="181"><highlight class="normal"></highlight></codeline>
 <codeline lineno="182"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//TIMEWALK_H</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
-    <location file="lib/Modules/Timewalk.hpp"/>
+    <location file="lib/Classes/Timewalk.hpp"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="struct_calibrator_1_1histograms" kind="struct" language="C++" prot="public">
+    <compoundname>Calibrator::histograms</compoundname>
+    <includes refid="_calibrator_8hpp" local="no">Calibrator.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_calibrator_1_1histograms_1ac32701da9acbca65baf18250a10b9b37" prot="public" static="no" mutable="no">
+        <type><ref refid="_m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e" kindref="member">Vector_MTTHist</ref>&lt; TH2F &gt;</type>
+        <definition>Vector_MTTHist&lt;TH2F&gt; Calibrator::histograms::all_calib</definition>
+        <argsstring></argsstring>
+        <name>all_calib</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Calibrator.hpp" line="142" column="20" bodyfile="lib/Modules/Calibrator.hpp" bodystart="142" bodyend="-1"/>
+        <referencedby refid="class_calibrator_1a01917c2d097c62f2c6dc3a608d4e3ab4" compoundref="_calibrator_8hpp" startline="348" endline="388">Calibrator::fillRootDataHisto</referencedby>
+        <referencedby refid="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" compoundref="_calibrator_8hpp" startline="156" endline="200">Initialise</referencedby>
+        <referencedby refid="class_calibrator_1aad90b0e3951d4caffe11e319c7108a51" compoundref="_calibrator_8hpp" startline="960" endline="1025">Calibrator::verify</referencedby>
+        <referencedby refid="class_calibrator_1a04a1a6e9e32b48699affcd9adfffa2f0" compoundref="_calibrator_8hpp" startline="1027" endline="1036">Calibrator::writeCalibratedHisto</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_calibrator_1_1histograms_1a8a6b7533a4ea0c474c8896120e1589f8" prot="public" static="no" mutable="no">
+        <type><ref refid="class_m_t_t_hist" kindref="compound">MTTHist</ref>&lt; TH2F &gt;</type>
+        <definition>MTTHist&lt;TH2F&gt; Calibrator::histograms::all_raw_spectra</definition>
+        <argsstring></argsstring>
+        <name>all_raw_spectra</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Calibrator.hpp" line="138" column="13" bodyfile="lib/Modules/Calibrator.hpp" bodystart="138" bodyend="-1"/>
+        <referencedby refid="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" compoundref="_calibrator_8hpp" startline="156" endline="200">Initialise</referencedby>
+        <referencedby refid="class_calibrator_1aa0fff626078ec3cd2e453c5cf6681462" compoundref="_calibrator_8hpp" startline="421" endline="720">Calibrator::peakFinder</referencedby>
+        <referencedby refid="class_calibrator_1a78414158b6fec48d58182e62c9478126" compoundref="_calibrator_8hpp" startline="944" endline="951">Calibrator::writeRawRoot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_calibrator_1_1histograms_1ae518a10be1cffd8c718e7d6e0bc0c987" prot="public" static="no" mutable="no">
+        <type><ref refid="_m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e" kindref="member">Vector_MTTHist</ref>&lt; TH1F &gt;</type>
+        <definition>Vector_MTTHist&lt;TH1F&gt; Calibrator::histograms::calib_spectra</definition>
+        <argsstring></argsstring>
+        <name>calib_spectra</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Calibrator.hpp" line="141" column="20" bodyfile="lib/Modules/Calibrator.hpp" bodystart="141" bodyend="-1"/>
+        <referencedby refid="class_calibrator_1a01917c2d097c62f2c6dc3a608d4e3ab4" compoundref="_calibrator_8hpp" startline="348" endline="388">Calibrator::fillRootDataHisto</referencedby>
+        <referencedby refid="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" compoundref="_calibrator_8hpp" startline="156" endline="200">Initialise</referencedby>
+        <referencedby refid="class_calibrator_1a04a1a6e9e32b48699affcd9adfffa2f0" compoundref="_calibrator_8hpp" startline="1027" endline="1036">Calibrator::writeCalibratedHisto</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_calibrator_1_1histograms_1a4c55b360c72c92c930b04427d309811f" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool Calibrator::histograms::Initialised</definition>
+        <argsstring></argsstring>
+        <name>Initialised</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Calibrator.hpp" line="149" column="10" bodyfile="lib/Modules/Calibrator.hpp" bodystart="149" bodyend="-1"/>
+        <referencedby refid="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" compoundref="_calibrator_8hpp" startline="156" endline="200">Initialise</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_calibrator_1_1histograms_1adb60dbf765f5c82fb247c2aae1ec4d6d" prot="public" static="no" mutable="no">
+        <type><ref refid="_m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e" kindref="member">Vector_MTTHist</ref>&lt; TH1F &gt;</type>
+        <definition>Vector_MTTHist&lt;TH1F&gt; Calibrator::histograms::raw_spectra</definition>
+        <argsstring></argsstring>
+        <name>raw_spectra</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Calibrator.hpp" line="137" column="20" bodyfile="lib/Modules/Calibrator.hpp" bodystart="137" bodyend="-1"/>
+        <referencedby refid="class_calibrator_1a01917c2d097c62f2c6dc3a608d4e3ab4" compoundref="_calibrator_8hpp" startline="348" endline="388">Calibrator::fillRootDataHisto</referencedby>
+        <referencedby refid="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" compoundref="_calibrator_8hpp" startline="156" endline="200">Initialise</referencedby>
+        <referencedby refid="class_calibrator_1aa0fff626078ec3cd2e453c5cf6681462" compoundref="_calibrator_8hpp" startline="421" endline="720">Calibrator::peakFinder</referencedby>
+        <referencedby refid="class_calibrator_1aad90b0e3951d4caffe11e319c7108a51" compoundref="_calibrator_8hpp" startline="960" endline="1025">Calibrator::verify</referencedby>
+        <referencedby refid="class_calibrator_1a78414158b6fec48d58182e62c9478126" compoundref="_calibrator_8hpp" startline="944" endline="951">Calibrator::writeRawRoot</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="struct_calibrator_1_1histograms_1ae885f7bdabe2e31b12ea5573ee46317e" prot="public" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref>, <ref refid="class_spectra_co" kindref="compound">SpectraCo</ref> &gt;</type>
+        <definition>std::map&lt;Label, SpectraCo&gt; Calibrator::histograms::spectra</definition>
+        <argsstring></argsstring>
+        <name>spectra</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Calibrator.hpp" line="145" column="14" bodyfile="lib/Modules/Calibrator.hpp" bodystart="145" bodyend="-1"/>
+        <referencedby refid="class_calibrator_1a00806ef12bceedaa6c16dad9b653f27f" compoundref="_calibrator_8hpp" startline="796" endline="870">Calibrator::analyse2</referencedby>
+        <referencedby refid="class_calibrator_1a0d2a41f02b2c16409b58ce3ee4183792" compoundref="_calibrator_8hpp" startline="290" endline="309">Calibrator::loadRootHisto</referencedby>
+        <referencedby refid="class_calibrator_1aad90b0e3951d4caffe11e319c7108a51" compoundref="_calibrator_8hpp" startline="960" endline="1025">Calibrator::verify</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Calibrator::histograms::Initialise</definition>
+        <argsstring>()</argsstring>
+        <name>Initialise</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Calibrator.hpp" line="147" column="10" bodyfile="lib/Modules/Calibrator.hpp" bodystart="156" bodyend="200"/>
+        <references refid="class_detectors_1af54374260cdfa1cd60b6364f07f882b4" compoundref="_detectors_8hpp" startline="138" endline="143">Detectors::ADCBin</references>
+        <references refid="struct_calibrator_1_1histograms_1ac32701da9acbca65baf18250a10b9b37" compoundref="_calibrator_8hpp" startline="142">all_calib</references>
+        <references refid="struct_calibrator_1_1histograms_1a8a6b7533a4ea0c474c8896120e1589f8" compoundref="_calibrator_8hpp" startline="138">all_raw_spectra</references>
+        <references refid="struct_calibrator_1_1histograms_1ae518a10be1cffd8c718e7d6e0bc0c987" compoundref="_calibrator_8hpp" startline="141">calib_spectra</references>
+        <references refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813">detectors</references>
+        <references refid="class_detectors_1a4cc1eacca959595eb53a16b75f2d65d8" compoundref="_detectors_8hpp" startline="154" endline="159">Detectors::energyBidimBin</references>
+        <references refid="class_detectors_1aaadeec0d94fd7daea1b8e4c9d861fbde" compoundref="_detectors_8hpp" startline="146" endline="151">Detectors::energyBin</references>
+        <references refid="lib_co_8hpp_1af522b6efd63a7f871a8307755b1297bf" compoundref="lib_co_8hpp" startline="158">error_message</references>
+        <references refid="struct_calibrator_1_1histograms_1a4c55b360c72c92c930b04427d309811f" compoundref="_calibrator_8hpp" startline="149">Initialised</references>
+        <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="103" endline="103">Detectors::label</references>
+        <references refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="128" endline="128">Detectors::name</references>
+        <references refid="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" compoundref="_detectors_8hpp" startline="121" endline="125">Detectors::nbOfType</references>
+        <references refid="class_detectors_1adc3246e1180dfd8b2fb52bf0924aa7ef" compoundref="_detectors_8hpp" startline="117" endline="117">Detectors::nbTypes</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="struct_calibrator_1_1histograms_1adb60dbf765f5c82fb247c2aae1ec4d6d" compoundref="_calibrator_8hpp" startline="137">raw_spectra</references>
+        <references refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" compoundref="_m_t_t_hist_8hpp" startline="193" endline="213">MTTHist&lt; THist &gt;::reset</references>
+        <references refid="class_detectors_1a8780c1daca5724bb16ba07824f3c3665" compoundref="_detectors_8hpp" startline="76" endline="76">Detectors::size</references>
+        <references refid="class_detectors_1ab4d5e6cc24173a65a35788ba7c680264" compoundref="_detectors_8hpp" startline="97" endline="97">Detectors::typeIndex</references>
+        <references refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" compoundref="_detectors_8hpp" startline="94" endline="94">Detectors::types</references>
+        <referencedby refid="class_calibrator_1ae81772276c36ab528b8147fa583356fd" compoundref="_calibrator_8hpp" startline="44" endline="51">Calibrator::Initialise</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="struct_calibrator_1_1histograms_1a5c30eec7418701ef02ce4faf97fef690" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Calibrator::histograms::setTypeBins</definition>
+        <argsstring>(std::string const &amp;parameters)</argsstring>
+        <name>setTypeBins</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>parameters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Modules/Calibrator.hpp" line="148" column="10" bodyfile="lib/Modules/Calibrator.hpp" bodystart="202" bodyend="219"/>
+        <references refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813">detectors</references>
+        <references refid="class_detectors_1aba567529b262d88913de6ccb05a71a99" compoundref="_detectors_8hpp" startline="162" endline="162">Detectors::getADCBin</references>
+        <references refid="class_detectors_1ae1ead00f89e7fcb96cefa082f9b4e290" compoundref="_detectors_8hpp" startline="164" endline="164">Detectors::getEnergyBin</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="156" endline="156">throw_error</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>MTTHist&lt; TH2F &gt;</label>
+        <link refid="class_m_t_t_hist"/>
+      </node>
+      <node id="1">
+        <label>Calibrator::histograms</label>
+        <link refid="struct_calibrator_1_1histograms"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>all_raw_spectra</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="lib/Modules/Calibrator.hpp" line="134" column="3" bodyfile="lib/Modules/Calibrator.hpp" bodystart="135" bodyend="150"/>
+    <listofallmembers>
+      <member refid="struct_calibrator_1_1histograms_1ac32701da9acbca65baf18250a10b9b37" prot="public" virt="non-virtual"><scope>Calibrator::histograms</scope><name>all_calib</name></member>
+      <member refid="struct_calibrator_1_1histograms_1a8a6b7533a4ea0c474c8896120e1589f8" prot="public" virt="non-virtual"><scope>Calibrator::histograms</scope><name>all_raw_spectra</name></member>
+      <member refid="struct_calibrator_1_1histograms_1ae518a10be1cffd8c718e7d6e0bc0c987" prot="public" virt="non-virtual"><scope>Calibrator::histograms</scope><name>calib_spectra</name></member>
+      <member refid="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" prot="public" virt="non-virtual"><scope>Calibrator::histograms</scope><name>Initialise</name></member>
+      <member refid="struct_calibrator_1_1histograms_1a4c55b360c72c92c930b04427d309811f" prot="public" virt="non-virtual"><scope>Calibrator::histograms</scope><name>Initialised</name></member>
+      <member refid="struct_calibrator_1_1histograms_1adb60dbf765f5c82fb247c2aae1ec4d6d" prot="public" virt="non-virtual"><scope>Calibrator::histograms</scope><name>raw_spectra</name></member>
+      <member refid="struct_calibrator_1_1histograms_1a5c30eec7418701ef02ce4faf97fef690" prot="public" virt="non-virtual"><scope>Calibrator::histograms</scope><name>setTypeBins</name></member>
+      <member refid="struct_calibrator_1_1histograms_1ae885f7bdabe2e31b12ea5573ee46317e" prot="public" virt="non-virtual"><scope>Calibrator::histograms</scope><name>spectra</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

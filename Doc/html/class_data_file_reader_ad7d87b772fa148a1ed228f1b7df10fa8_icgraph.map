@@ -1,4 +1,4 @@
-<map id="DataFileReader::Initialize" name="DataFileReader::Initialize">
+<map id="DataFileReader::Initialise" name="DataFileReader::Initialise">
 <area shape="rect" id="node1" title=" " alt="" coords="240,42,427,69"/>
 <area shape="rect" id="node2" href="$class_data_file_reader.html#a14657e37d9465aec5cf5c3a774f5d39b" title=" " alt="" coords="7,5,191,47"/>
 <area shape="rect" id="node3" href="$class_data_file_reader.html#adf4b2ffd95a42bdd5b03cb4cdded83d1" title=" " alt="" coords="5,71,192,98"/>

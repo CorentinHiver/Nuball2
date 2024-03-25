@@ -9,32 +9,26 @@
     <includes refid="_timer_8hpp" local="yes">../Classes/Timer.hpp</includes>
     <includes refid="_clovers_8hpp" local="yes">../Analyse/Clovers.hpp</includes>
     <includes local="yes">../../136/conversion_200ns/EventBuilder_136.hpp</includes>
-    <includes refid="_calibration_8hpp" local="yes">../Modules/Calibration.hpp</includes>
+    <includes local="yes">../Modules/Calibration.hpp</includes>
     <includes refid="_timeshifts_8hpp" local="yes">../Modules/Timeshifts.hpp</includes>
     <includes refid="_m_t_root_reader_8hpp" local="yes">../MTObjects/MTRootReader.hpp</includes>
     <includes refid="_m_t_faster_reader_8hpp" local="yes">../MTObjects/MTFasterReader.hpp</includes>
     <includes refid="_m_t_t_hist_8hpp" local="yes">../MTObjects/MTTHist.hpp</includes>
     <incdepgraph>
-      <node id="27">
+      <node id="19">
         <label>glob.h</label>
       </node>
       <node id="53">
         <label>TH1S.h</label>
       </node>
-      <node id="10">
-        <label>iomanip</label>
-      </node>
-      <node id="9">
+      <node id="24">
         <label>functional</label>
       </node>
-      <node id="16">
-        <label>queue</label>
+      <node id="5">
+        <label>iomanip</label>
       </node>
-      <node id="32">
-        <label>random.hpp</label>
-        <link refid="random_8hpp"/>
-        <childnode refid="33" relation="include">
-        </childnode>
+      <node id="28">
+        <label>queue</label>
       </node>
       <node id="71">
         <label>TTreeIndex.h</label>
@@ -109,10 +103,10 @@
         <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="37">
+      <node id="20">
         <label>filesystem</label>
       </node>
-      <node id="97">
+      <node id="92">
         <label>../Classes/RF_Manager.hpp</label>
         <link refid="_r_f___manager_8hpp"/>
         <childnode refid="2" relation="include">
@@ -125,32 +119,37 @@
       <node id="40">
         <label>TAxis.h</label>
       </node>
-      <node id="84">
+      <node id="101">
         <label>../MTObjects/MTFasterReader.hpp</label>
         <link refid="_m_t_faster_reader_8hpp"/>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
         <childnode refid="85" relation="include">
         </childnode>
         <childnode refid="73" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
-        </childnode>
-        <childnode refid="79" relation="include">
-        </childnode>
         <childnode refid="91" relation="include">
         </childnode>
-      </node>
-      <node id="29">
-        <label>stdlib.h</label>
+        <childnode refid="102" relation="include">
+        </childnode>
       </node>
       <node id="69">
         <label>TThread.h</label>
       </node>
-      <node id="93">
+      <node id="100">
         <label>../Classes/Nuball2Tree.hpp</label>
         <link refid="_nuball2_tree_8hpp"/>
-        <childnode refid="2" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="78">
@@ -159,7 +158,7 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="81">
         <label>CloverModule.hpp</label>
         <link refid="_clover_module_8hpp"/>
       </node>
@@ -169,10 +168,10 @@
       <node id="65">
         <label>TStopwatch.h</label>
       </node>
-      <node id="18">
+      <node id="29">
         <label>stdexcept</label>
       </node>
-      <node id="15">
+      <node id="27">
         <label>numeric</label>
       </node>
       <node id="85">
@@ -191,17 +190,17 @@
         <childnode refid="90" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="14">
         <label>string</label>
       </node>
       <node id="90">
         <label>fasterac/utils.h</label>
       </node>
-      <node id="12">
+      <node id="7">
         <label>map</label>
       </node>
-      <node id="95">
-        <label>MTCounter.hpp</label>
+      <node id="96">
+        <label>../MTObjects/MTCounter.hpp</label>
         <link refid="_m_t_counter_8hpp"/>
         <childnode refid="79" relation="include">
         </childnode>
@@ -220,45 +219,21 @@
         <link refid="lib_co_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
         <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
@@ -272,17 +247,25 @@
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
         </childnode>
       </node>
       <node id="89">
@@ -291,11 +274,19 @@
       <node id="44">
         <label>TF1.h</label>
       </node>
-      <node id="31">
+      <node id="3">
         <label>print.hpp</label>
         <link refid="print_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
       </node>
-      <node id="8">
+      <node id="18">
         <label>fstream</label>
       </node>
       <node id="77">
@@ -309,11 +300,11 @@
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="80" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
-      <node id="91">
-        <label>MTList.hpp</label>
+      <node id="97">
+        <label>../MTObjects/MTList.hpp</label>
         <link refid="_m_t_list_8hpp"/>
         <childnode refid="79" relation="include">
         </childnode>
@@ -326,44 +317,49 @@
       <node id="67">
         <label>TStyle.h</label>
       </node>
-      <node id="3">
+      <node id="22">
         <label>any</label>
       </node>
-      <node id="94">
+      <node id="98">
         <label>../MTObjects/MTTHist.hpp</label>
         <link refid="_m_t_t_hist_8hpp"/>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="16">
         <label>files_functions.hpp</label>
         <link refid="files__functions_8hpp"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
+        <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="11">
         <label>random</label>
       </node>
-      <node id="81">
+      <node id="82">
         <label>../../136/conversion_200ns/EventBuilder_136.hpp</label>
       </node>
       <node id="63">
         <label>TROOT.h</label>
       </node>
-      <node id="30">
-        <label>string.h</label>
-      </node>
-      <node id="23">
+      <node id="33">
         <label>typeinfo</label>
       </node>
       <node id="38">
@@ -373,6 +369,12 @@
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
+      </node>
+      <node id="80">
+        <label>future</label>
+      </node>
+      <node id="37">
+        <label>ctime</label>
       </node>
       <node id="42">
         <label>TChain.h</label>
@@ -390,11 +392,11 @@
       <node id="68">
         <label>TSystem.h</label>
       </node>
-      <node id="25">
-        <label>vector</label>
-      </node>
-      <node id="20">
+      <node id="30">
         <label>stack</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
       </node>
       <node id="45">
         <label>TF2.h</label>
@@ -411,10 +413,14 @@
       <node id="57">
         <label>TKey.h</label>
       </node>
-      <node id="36">
+      <node id="8">
         <label>vector_functions.hpp</label>
         <link refid="vector__functions_8hpp"/>
-        <childnode refid="31" relation="include">
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="88">
@@ -423,14 +429,20 @@
       <node id="64">
         <label>TSpectrum.h</label>
       </node>
-      <node id="4">
+      <node id="23">
         <label>array</label>
       </node>
       <node id="48">
         <label>TFitResult.h</label>
       </node>
-      <node id="17">
+      <node id="15">
         <label>sstream</label>
+      </node>
+      <node id="10">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
       </node>
       <node id="60">
         <label>TMarker.h</label>
@@ -441,7 +453,10 @@
       <node id="54">
         <label>TH2.h</label>
       </node>
-      <node id="6">
+      <node id="83">
+        <label>../Modules/Calibration.hpp</label>
+      </node>
+      <node id="36">
         <label>cstdlib</label>
       </node>
       <node id="1">
@@ -459,17 +474,17 @@
         </childnode>
         <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="81" relation="include">
-        </childnode>
         <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="96" relation="include">
-        </childnode>
-        <childnode refid="92" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
       <node id="51">
@@ -478,15 +493,19 @@
       <node id="58">
         <label>TLeaf.h</label>
       </node>
-      <node id="11">
+      <node id="4">
         <label>iostream</label>
       </node>
-      <node id="34">
+      <node id="12">
         <label>string_functions.hpp</label>
         <link refid="string__functions_8hpp"/>
-        <childnode refid="25" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="75">
@@ -495,7 +514,7 @@
         <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="24">
+      <node id="34">
         <label>unordered_map</label>
       </node>
       <node id="59">
@@ -510,19 +529,30 @@
       <node id="55">
         <label>TH2F.h</label>
       </node>
-      <node id="14">
+      <node id="102">
+        <label>../Classes/CoProgressBar.hpp</label>
+        <link refid="_co_progress_bar_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
         <label>mutex</label>
       </node>
       <node id="76">
         <label>chrono</label>
       </node>
-      <node id="98">
+      <node id="35">
+        <label>csignal</label>
+      </node>
+      <node id="93">
         <label>../Classes/CoincBuilder.hpp</label>
         <link refid="_coinc_builder_8hpp"/>
-        <childnode refid="99" relation="include">
+        <childnode refid="94" relation="include">
         </childnode>
       </node>
-      <node id="99">
+      <node id="94">
         <label>Builder.hpp</label>
         <link refid="_builder_8hpp"/>
         <childnode refid="2" relation="include">
@@ -535,14 +565,24 @@
       <node id="79">
         <label>../MTObjects/MTObject.hpp</label>
         <link refid="_m_t_object_8hpp"/>
-        <childnode refid="21" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="31">
         <label>thread</label>
       </node>
       <node id="62">
@@ -554,7 +594,7 @@
       <node id="87">
         <label>fasterac/group.h</label>
       </node>
-      <node id="96">
+      <node id="84">
         <label>../Modules/Timeshifts.hpp</label>
         <link refid="_timeshifts_8hpp"/>
         <childnode refid="2" relation="include">
@@ -563,28 +603,28 @@
         </childnode>
         <childnode refid="85" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="91" relation="include">
         </childnode>
         <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="97" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
         <childnode refid="74" relation="include">
         </childnode>
-        <childnode refid="98" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
         <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="100" relation="include">
+        <childnode refid="95" relation="include">
         </childnode>
         <childnode refid="79" relation="include">
         </childnode>
-        <childnode refid="91" relation="include">
+        <childnode refid="97" relation="include">
         </childnode>
-        <childnode refid="94" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="9">
         <label>algorithm</label>
       </node>
       <node id="47">
@@ -598,68 +638,45 @@
         <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="28">
-        <label>stdio.h</label>
-      </node>
-      <node id="83">
+      <node id="91">
         <label>../Classes/FilesManager.hpp</label>
         <link refid="_files_manager_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="13">
         <label>cstring</label>
       </node>
-      <node id="92">
+      <node id="99">
         <label>../MTObjects/MTRootReader.hpp</label>
         <link refid="_m_t_root_reader_8hpp"/>
         <childnode refid="79" relation="include">
         </childnode>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
         <childnode refid="91" relation="include">
-        </childnode>
-        <childnode refid="93" relation="include">
-        </childnode>
-        <childnode refid="83" relation="include">
         </childnode>
       </node>
       <node id="49">
         <label>TGraph.h</label>
       </node>
-      <node id="13">
+      <node id="25">
         <label>memory</label>
       </node>
-      <node id="22">
+      <node id="32">
         <label>typeindex</label>
       </node>
-      <node id="82">
-        <label>../Modules/Calibration.hpp</label>
-        <link refid="_calibration_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="72" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="74" relation="include">
-        </childnode>
-        <childnode refid="83" relation="include">
-        </childnode>
-        <childnode refid="84" relation="include">
-        </childnode>
-        <childnode refid="92" relation="include">
-        </childnode>
-        <childnode refid="94" relation="include">
-        </childnode>
-      </node>
-      <node id="100">
+      <node id="95">
         <label>../Classes/Performances.hpp</label>
         <link refid="_performances_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="95" relation="include">
+        <childnode refid="96" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="17">
         <label>dirent.h</label>
       </node>
     </incdepgraph>
@@ -710,7 +727,7 @@
 <codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="31" refid="class_run_matrixator_1addf156b30f248773029c6be07c243d7a" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1addf156b30f248773029c6be07c243d7a" kindref="member">RunMatrixator</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1aa6d13b08060fef07b50d7ab6b35be0d6" kindref="member">run</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>runpath,<sp/>std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>data<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" kindref="member">Initialize</ref>();</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52" kindref="member">Initialise</ref>();</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1a526469f6440d19b85fd142c797056c65" kindref="member">loadData_root</ref>(TTree<sp/>*<sp/>tree,<sp/><ref refid="class_event" kindref="compound">Event</ref><sp/>&amp;<sp/>event);</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" kindref="member">loadData_faster</ref>(<ref refid="class_hit" kindref="compound">Hit</ref><sp/>&amp;<sp/>hit,<sp/><ref refid="class_faster_reader" kindref="compound">FasterReader</ref><sp/>&amp;<sp/>reader);</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1af360ec9f7686353b663ce0bdcfa3e2df" kindref="member">fillMatrixes</ref>(<ref refid="class_clovers" kindref="compound">Clovers</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>clovers,<sp/><ref refid="class_event" kindref="compound">Event</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>event);</highlight></codeline>
@@ -730,19 +747,19 @@
 <codeline lineno="50" refid="class_run_matrixator_1a68ec3f959732a3fa5e65583bc9ad7045" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1a68ec3f959732a3fa5e65583bc9ad7045" kindref="member">setCalibration</ref>(<ref refid="class_calibration" kindref="compound">Calibration</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>calibration)<sp/>{<ref refid="class_run_matrixator_1a96930629dddc11947153e3a5042d426c" kindref="member">m_calibration</ref><sp/>=<sp/>calibration;}</highlight></codeline>
 <codeline lineno="51" refid="class_run_matrixator_1ab0f22d301e134b991dbb19ca083c0780" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1ab0f22d301e134b991dbb19ca083c0780" kindref="member">setTimeshifts</ref>(<ref refid="class_timeshifts" kindref="compound">Timeshifts</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>timeshifts)<sp/>{<ref refid="class_run_matrixator_1a92dbd9cb82e86444d93b745a16466cd3" kindref="member">m_timeshifts</ref><sp/>=<sp/>timeshifts;}</highlight></codeline>
 <codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53" refid="class_run_matrixator_1ae9e13b02718812681204cad70679385d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1ae9e13b02718812681204cad70679385d" kindref="member">initialize_dontMatrixate</ref>()</highlight></codeline>
+<codeline lineno="53" refid="class_run_matrixator_1a0ae1d8ed78f3b5d6b7ac64361772734d" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1a0ae1d8ed78f3b5d6b7ac64361772734d" kindref="member">Initialise_dontMatrixate</ref>()</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_run_matrixator_1af2f5b38bcb1ff671164d3a1b82fdf5cc" kindref="member">m_dontMatrixateLabel</ref>.size()&lt;<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a1177661fb15c9825755925faf00c8398" kindref="member">size</ref>())<sp/><sp/><ref refid="class_run_matrixator_1af2f5b38bcb1ff671164d3a1b82fdf5cc" kindref="member">m_dontMatrixateLabel</ref>.resize(<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a1177661fb15c9825755925faf00c8398" kindref="member">size</ref>(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_run_matrixator_1a9f29fa4e4ebfad487466d3272fd5a920" kindref="member">m_dontMatrixateType</ref>.size()<sp/>&lt;<sp/><ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a24d220832c2f0a03a0d886e11f2c284c" kindref="member">nbTypes</ref>())<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>type<sp/>:<sp/><ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" kindref="member">types</ref>())<sp/><ref refid="class_run_matrixator_1a9f29fa4e4ebfad487466d3272fd5a920" kindref="member">m_dontMatrixateType</ref>.emplace(type,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_run_matrixator_1af2f5b38bcb1ff671164d3a1b82fdf5cc" kindref="member">m_dontMatrixateLabel</ref>.size()&lt;<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a8780c1daca5724bb16ba07824f3c3665" kindref="member">size</ref>())<sp/><sp/><ref refid="class_run_matrixator_1af2f5b38bcb1ff671164d3a1b82fdf5cc" kindref="member">m_dontMatrixateLabel</ref>.resize(<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a8780c1daca5724bb16ba07824f3c3665" kindref="member">size</ref>(),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_run_matrixator_1a9f29fa4e4ebfad487466d3272fd5a920" kindref="member">m_dontMatrixateType</ref>.size()<sp/>&lt;<sp/><ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1adc3246e1180dfd8b2fb52bf0924aa7ef" kindref="member">nbTypes</ref>())<sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>type<sp/>:<sp/><ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" kindref="member">types</ref>())<sp/><ref refid="class_run_matrixator_1a9f29fa4e4ebfad487466d3272fd5a920" kindref="member">m_dontMatrixateType</ref>.emplace(type,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="58"><highlight class="normal"></highlight></codeline>
 <codeline lineno="59" refid="class_run_matrixator_1a1f6ba04bc894d68a6d72ccedf8367ad4" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1a1f6ba04bc894d68a6d72ccedf8367ad4" kindref="member">dontMatrixate</ref>(<ref refid="_detectors_8hpp_1a7ea6a1daded60b9200989100a41bbc3a" kindref="member">dType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>type)</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialise<sp/>if<sp/>not<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_run_matrixator_1ae9e13b02718812681204cad70679385d" kindref="member">initialize_dontMatrixate</ref>();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_run_matrixator_1a0ae1d8ed78f3b5d6b7ac64361772734d" kindref="member">Initialise_dontMatrixate</ref>();</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"></highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>if<sp/>the<sp/>type<sp/>exists<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="string__functions_8hpp_1a03fb03d95885354ac3c329693588097b" kindref="member">found</ref>(<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" kindref="member">types</ref>(),<sp/>type))<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;RunMatrixator::dontMatrixate(type)<sp/>:<sp/>type<sp/>unkown&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="string__functions_8hpp_1a87d8e2cb69021ab11e443cb140349eb6" kindref="member">found</ref>(<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" kindref="member">types</ref>(),<sp/>type))<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;RunMatrixator::dontMatrixate(type)<sp/>:<sp/>type<sp/>unkown&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"></highlight></codeline>
 <codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Fill<sp/>the<sp/>map<sp/>:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_run_matrixator_1a9f29fa4e4ebfad487466d3272fd5a920" kindref="member">m_dontMatrixateType</ref>[type]<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
@@ -753,7 +770,7 @@
 <codeline lineno="73" refid="class_run_matrixator_1a142f119b63706f044dc99025ee46f4ca" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1a142f119b63706f044dc99025ee46f4ca" kindref="member">dontMatrixate</ref>(<ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>label)</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialise<sp/>if<sp/>not<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_run_matrixator_1ae9e13b02718812681204cad70679385d" kindref="member">initialize_dontMatrixate</ref>();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_run_matrixator_1a0ae1d8ed78f3b5d6b7ac64361772734d" kindref="member">Initialise_dontMatrixate</ref>();</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>entry<sp/>:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(label&gt;<ref refid="class_run_matrixator_1af2f5b38bcb1ff671164d3a1b82fdf5cc" kindref="member">m_dontMatrixateLabel</ref>.size())<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;RunMatrixator::dontMatrixate(label)<sp/>:<sp/>label<sp/>out<sp/>of<sp/>range&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_run_matrixator_1af2f5b38bcb1ff671164d3a1b82fdf5cc" kindref="member">m_dontMatrixateLabel</ref>[label]<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
@@ -804,7 +821,7 @@
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><ref refid="class_timer" kindref="compound">Timer</ref><sp/>timer;</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1af1c63e22db1391971bdeb8cebcb31ff0" kindref="member">m_runpath</ref><sp/>=<sp/>runpath;</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialise<sp/>the<sp/>matrices<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" kindref="member">Initialize</ref>();</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52" kindref="member">Initialise</ref>();</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"></highlight></codeline>
 <codeline lineno="129"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Fills<sp/>the<sp/>matrices<sp/>:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(data<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;fast&quot;</highlight><highlight class="normal">)</highlight></codeline>
@@ -818,41 +835,41 @@
 <codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(data<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;root&quot;</highlight><highlight class="normal">)</highlight></codeline>
 <codeline lineno="139"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
 <codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_m_t_root_reader" kindref="compound">MTRootReader</ref><sp/>mt_reader(<ref refid="class_run_matrixator_1af1c63e22db1391971bdeb8cebcb31ff0" kindref="member">m_runpath</ref>);</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>mt_reader.<ref refid="class_m_t_root_reader_1a506f517a4772f5ec3b8bbf5c835a3490" kindref="member">execute</ref>(<ref refid="class_run_matrixator_1a2d5326c4e5b0684552e5d72c88e64ef8" kindref="member">dispatch_root_reader</ref>,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>mt_reader.execute(<ref refid="class_run_matrixator_1a2d5326c4e5b0684552e5d72c88e64ef8" kindref="member">dispatch_root_reader</ref>,<sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;Unkown<sp/>data<sp/>kind<sp/>!<sp/>Only<sp/>handles<sp/>root<sp/>and<sp/>fast&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/></highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Reading<sp/>done<sp/>in&quot;</highlight><highlight class="normal">,<sp/>timer(),<sp/>timer.<ref refid="class_timer_1a3614503158effc6668bc10001d75d20c" kindref="member">unit</ref>());</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Reading<sp/>done<sp/>in&quot;</highlight><highlight class="normal">,<sp/>timer(),<sp/>timer.<ref refid="class_timer_1a3614503158effc6668bc10001d75d20c" kindref="member">unit</ref>());</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Writes<sp/>the<sp/>matrices<sp/>down<sp/>:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_run_matrixator_1aeb9889ba763858dfb65e05c3a7bb142e" kindref="member">Write</ref>();</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(timer(),<sp/>timer.<ref refid="class_timer_1a3614503158effc6668bc10001d75d20c" kindref="member">unit</ref>(),<sp/></highlight><highlight class="stringliteral">&quot;to<sp/>matrixate&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_run_matrixator_1af1c63e22db1391971bdeb8cebcb31ff0" kindref="member">m_runpath</ref>);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(timer(),<sp/>timer.<ref refid="class_timer_1a3614503158effc6668bc10001d75d20c" kindref="member">unit</ref>(),<sp/></highlight><highlight class="stringliteral">&quot;to<sp/>matrixate&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_run_matrixator_1af1c63e22db1391971bdeb8cebcb31ff0" kindref="member">m_runpath</ref>);</highlight></codeline>
 <codeline lineno="150"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="151"><highlight class="normal"></highlight></codeline>
-<codeline lineno="152" refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1ad32109c5c279f520ce19602340aa2293" kindref="member">RunMatrixator::Initialize</ref>()</highlight></codeline>
+<codeline lineno="152" refid="class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52" kindref="member">RunMatrixator::Initialise</ref>()</highlight></codeline>
 <codeline lineno="153"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="154"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Hit::setExternalTime(true);<sp/>//<sp/>Allows<sp/>to<sp/>directly<sp/>calculate<sp/>the<sp/>rf<sp/>time<sp/>instead<sp/>of<sp/>the<sp/>relative<sp/>time</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>)<sp/>{<ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Please<sp/>initialize<sp/>the<sp/>Detectors&quot;</highlight><highlight class="normal">);<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;Detectors<sp/>not<sp/>loaded&quot;</highlight><highlight class="normal">);}</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_run_matrixator_1ae9e13b02718812681204cad70679385d" kindref="member">initialize_dontMatrixate</ref>();</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!<ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>)<sp/>{<ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Please<sp/>Initialise<sp/>the<sp/>Detectors&quot;</highlight><highlight class="normal">);<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;Detectors<sp/>not<sp/>loaded&quot;</highlight><highlight class="normal">);}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>-&gt;<sp/><ref refid="class_run_matrixator_1a0ae1d8ed78f3b5d6b7ac64361772734d" kindref="member">Initialise_dontMatrixate</ref>();</highlight></codeline>
 <codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_run_matrixator_1a2b7e0097b9fdf211f291649020f0ad23" kindref="member">m_keep_singles</ref>)<sp/><ref refid="class_builder_1a4d557d96189a42cbc0a4a0d32db45d6c" kindref="member">Builder::keepSingles</ref>();</highlight></codeline>
 <codeline lineno="158"><highlight class="normal"></highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a3e8757458107f0f0ec8de5a25c6518fe" kindref="member">test_paris_vs_mult</ref>.<ref refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;test_paris_vs_mult&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Paris<sp/>vs<sp/>Mult&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_run_matrixator_1a36384c50ee570508e06725b7fdd5bb63" kindref="member">m_max_multiplicity</ref>,0,<ref refid="class_run_matrixator_1a36384c50ee570508e06725b7fdd5bb63" kindref="member">m_max_multiplicity</ref>,<sp/>1000,0,10000);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a3e8757458107f0f0ec8de5a25c6518fe" kindref="member">test_paris_vs_mult</ref>.<ref refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;test_paris_vs_mult&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Paris<sp/>vs<sp/>Mult&quot;</highlight><highlight class="normal">,<sp/><ref refid="class_run_matrixator_1a36384c50ee570508e06725b7fdd5bb63" kindref="member">m_max_multiplicity</ref>,0,<ref refid="class_run_matrixator_1a36384c50ee570508e06725b7fdd5bb63" kindref="member">m_max_multiplicity</ref>,<sp/>1000,0,10000);</highlight></codeline>
 <codeline lineno="160"><highlight class="normal"></highlight></codeline>
 <codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>Clover<sp/>initialisation<sp/>:<sp/>---<sp/>//</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Initialize<sp/>clovers&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1aaeb5707153689242e99adeea90e2d223" kindref="member">clover_singles_prompt</ref>.<ref refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;clover_singles_prompt&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;clover<sp/>prompt<sp/>single<sp/>hit;Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>20000,0,20000);</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a7b1b1f5b80cef42ae89cade92589eb84" kindref="member">clover_singles_delayed</ref>.<ref refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;clover_singles_delayed&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;clover<sp/>delayed<sp/><sp/>single<sp/>hit;Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>20000,0,20000);</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a0c8f270cf84d7aeca1eb87e80d51495b" kindref="member">clover_singles_prompt_Compton_veto</ref>.<ref refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;clover_singles_prompt_Compton_veto&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;clover<sp/>prompt<sp/>single<sp/>hit<sp/>Compton<sp/>veto;Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>20000,0,20000);</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1aba625d564958262437e498d7f1ea8ea3" kindref="member">clover_singles_delayed_Compton_veto</ref>.<ref refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;clover_singles_delayed_Compton_veto&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;clover<sp/>delayed<sp/>single<sp/>hit<sp/>Compton<sp/>veto;Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>20000,0,20000);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Initialise<sp/>clovers&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1aaeb5707153689242e99adeea90e2d223" kindref="member">clover_singles_prompt</ref>.<ref refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;clover_singles_prompt&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;clover<sp/>prompt<sp/>single<sp/>hit;Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>20000,0,20000);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a7b1b1f5b80cef42ae89cade92589eb84" kindref="member">clover_singles_delayed</ref>.<ref refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;clover_singles_delayed&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;clover<sp/>delayed<sp/><sp/>single<sp/>hit;Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>20000,0,20000);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a0c8f270cf84d7aeca1eb87e80d51495b" kindref="member">clover_singles_prompt_Compton_veto</ref>.<ref refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;clover_singles_prompt_Compton_veto&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;clover<sp/>prompt<sp/>single<sp/>hit<sp/>Compton<sp/>veto;Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>20000,0,20000);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1aba625d564958262437e498d7f1ea8ea3" kindref="member">clover_singles_delayed_Compton_veto</ref>.<ref refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;clover_singles_delayed_Compton_veto&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;clover<sp/>delayed<sp/>single<sp/>hit<sp/>Compton<sp/>veto;Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>20000,0,20000);</highlight></codeline>
 <codeline lineno="167"><highlight class="normal"></highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a51381da7ca12e24fd0069f9d03842217" kindref="member">matrix_Clovers_prompt</ref>.<ref refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;pp&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;matrix_Clovers_prompt;Clover<sp/>E<sp/>[keV];Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>7000,0,7000,<sp/>7000,0,7000);</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a22fdc3576bfff16a1ffc1e17e7076e5e" kindref="member">matrix_Clovers_delayed</ref>.<ref refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;dd&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;matrix_Clovers_delayed;Clover<sp/>E<sp/>[keV];Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>7000,0,7000,<sp/>7000,0,7000);</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a045df0760364e0b5ffc3241461d423ee" kindref="member">matrix_Clovers_delayed_vs_prompt</ref>.<ref refid="class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;dp&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;Clovers<sp/>delayed<sp/>VS<sp/>prompt;Prompt<sp/>E<sp/>[keV];Delayed<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>7000,0,7000,<sp/>7000,0,7000);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a51381da7ca12e24fd0069f9d03842217" kindref="member">matrix_Clovers_prompt</ref>.<ref refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;pp&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;matrix_Clovers_prompt;Clover<sp/>E<sp/>[keV];Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>7000,0,7000,<sp/>7000,0,7000);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a22fdc3576bfff16a1ffc1e17e7076e5e" kindref="member">matrix_Clovers_delayed</ref>.<ref refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;dd&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;matrix_Clovers_delayed;Clover<sp/>E<sp/>[keV];Clover<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>7000,0,7000,<sp/>7000,0,7000);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a045df0760364e0b5ffc3241461d423ee" kindref="member">matrix_Clovers_delayed_vs_prompt</ref>.<ref refid="class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8" kindref="member">reset</ref>(</highlight><highlight class="stringliteral">&quot;dp&quot;</highlight><highlight class="normal">,</highlight><highlight class="stringliteral">&quot;Clovers<sp/>delayed<sp/>VS<sp/>prompt;Prompt<sp/>E<sp/>[keV];Delayed<sp/>E<sp/>[keV]&quot;</highlight><highlight class="normal">,<sp/>7000,0,7000,<sp/>7000,0,7000);</highlight></codeline>
 <codeline lineno="171"><highlight class="normal"></highlight></codeline>
 <codeline lineno="172"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>All<sp/>the<sp/>matrices<sp/>and<sp/>single<sp/>spectra<sp/>initialisation<sp/>:<sp/>---<sp/>//</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>type<sp/>:<sp/><ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" kindref="member">types</ref>())</highlight></codeline>
 <codeline lineno="174"><highlight class="normal"><sp/><sp/>{</highlight><highlight class="comment">//<sp/>Loop<sp/>through<sp/>all<sp/>the<sp/>detectors<sp/>types<sp/>(ge,<sp/>labr...)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Initialize<sp/>&quot;</highlight><highlight class="normal">,type);</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Initialise<sp/>&quot;</highlight><highlight class="normal">,type);</highlight></codeline>
 <codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>nb_det<sp/>=<sp/><ref refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813" kindref="member">detectors</ref>.<ref refid="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" kindref="member">nbOfType</ref>(type);</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"></highlight></codeline>
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Matrices<sp/>:<sp/></highlight><highlight class="normal"></highlight></codeline>
@@ -937,8 +954,8 @@
 <codeline lineno="259"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
 <codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>label<sp/>=<sp/>hit.<ref refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" kindref="member">label</ref>;</highlight></codeline>
 <codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>hit.<ref refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" kindref="member">stamp</ref>+=<ref refid="class_run_matrixator_1a92dbd9cb82e86444d93b745a16466cd3" kindref="member">m_timeshifts</ref>[label];</highlight></codeline>
-<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>hit.<ref refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" kindref="member">nrj</ref><sp/>=<sp/><ref refid="class_run_matrixator_1a96930629dddc11947153e3a5042d426c" kindref="member">m_calibration</ref>.<ref refid="class_calibration_1a1732880c01e21df259b4ff45dba24c59" kindref="member">calibrate</ref>(hit.<ref refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" kindref="member">adc</ref>,<sp/>label);</highlight></codeline>
-<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>hit.<ref refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" kindref="member">nrj2</ref><sp/>=<sp/>(hit.<ref refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" kindref="member">qdc2</ref>)<sp/>?<sp/><ref refid="class_run_matrixator_1a96930629dddc11947153e3a5042d426c" kindref="member">m_calibration</ref>.<ref refid="class_calibration_1a1732880c01e21df259b4ff45dba24c59" kindref="member">calibrate</ref>(hit.<ref refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" kindref="member">qdc2</ref>,<sp/>label)<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>hit.<ref refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" kindref="member">nrj</ref><sp/>=<sp/><ref refid="class_run_matrixator_1a96930629dddc11947153e3a5042d426c" kindref="member">m_calibration</ref>.<ref refid="class_calibration_1aacb494950f95ab8c5e12f548de28afb4" kindref="member">calibrate</ref>(hit.<ref refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" kindref="member">adc</ref>,<sp/>label);</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/>hit.<ref refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" kindref="member">nrj2</ref><sp/>=<sp/>(hit.<ref refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" kindref="member">qdc2</ref>)<sp/>?<sp/><ref refid="class_run_matrixator_1a96930629dddc11947153e3a5042d426c" kindref="member">m_calibration</ref>.<ref refid="class_calibration_1aacb494950f95ab8c5e12f548de28afb4" kindref="member">calibrate</ref>(hit.<ref refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" kindref="member">qdc2</ref>,<sp/>label)<sp/>:<sp/>0;</highlight></codeline>
 <codeline lineno="264"><highlight class="normal"></highlight></codeline>
 <codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/>tempTree-&gt;Fill();</highlight></codeline>
 <codeline lineno="266"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
@@ -1192,23 +1209,23 @@
 <codeline lineno="514"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
 <codeline lineno="515"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!file)<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;Error&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="516"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="517"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal">(std::runtime_error<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>error)</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal">(std::runtime_error<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" kindref="member">error</ref>)</highlight></codeline>
 <codeline lineno="518"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Try<sp/>another<sp/>output<sp/>file&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;Try<sp/>another<sp/>output<sp/>file&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="520"><highlight class="normal"><sp/><sp/><sp/><sp/>std::cin<sp/>&gt;&gt;<sp/>outRoot;</highlight></codeline>
 <codeline lineno="521"><highlight class="normal"><sp/><sp/><sp/><sp/>file.reset(TFile::Open(outRoot.c_str(),<sp/></highlight><highlight class="stringliteral">&quot;RECREATE&quot;</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="522"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
 <codeline lineno="523"><highlight class="normal"><sp/><sp/>file<sp/>-&gt;<sp/>cd();</highlight></codeline>
 <codeline lineno="524"><highlight class="normal"></highlight></codeline>
-<codeline lineno="525"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a3e8757458107f0f0ec8de5a25c6518fe" kindref="member">test_paris_vs_mult</ref>.<ref refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" kindref="member">Write</ref>();</highlight></codeline>
-<codeline lineno="526"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a51381da7ca12e24fd0069f9d03842217" kindref="member">matrix_Clovers_prompt</ref>.<ref refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" kindref="member">Write</ref>();</highlight></codeline>
-<codeline lineno="527"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a22fdc3576bfff16a1ffc1e17e7076e5e" kindref="member">matrix_Clovers_delayed</ref>.<ref refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" kindref="member">Write</ref>();</highlight></codeline>
-<codeline lineno="528"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a045df0760364e0b5ffc3241461d423ee" kindref="member">matrix_Clovers_delayed_vs_prompt</ref>.<ref refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" kindref="member">Write</ref>();</highlight></codeline>
+<codeline lineno="525"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a3e8757458107f0f0ec8de5a25c6518fe" kindref="member">test_paris_vs_mult</ref>.<ref refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" kindref="member">Write</ref>();</highlight></codeline>
+<codeline lineno="526"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a51381da7ca12e24fd0069f9d03842217" kindref="member">matrix_Clovers_prompt</ref>.<ref refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" kindref="member">Write</ref>();</highlight></codeline>
+<codeline lineno="527"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a22fdc3576bfff16a1ffc1e17e7076e5e" kindref="member">matrix_Clovers_delayed</ref>.<ref refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" kindref="member">Write</ref>();</highlight></codeline>
+<codeline lineno="528"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a045df0760364e0b5ffc3241461d423ee" kindref="member">matrix_Clovers_delayed_vs_prompt</ref>.<ref refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" kindref="member">Write</ref>();</highlight></codeline>
 <codeline lineno="529"><highlight class="normal"></highlight></codeline>
-<codeline lineno="530"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1aaeb5707153689242e99adeea90e2d223" kindref="member">clover_singles_prompt</ref>.<ref refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" kindref="member">Write</ref>();</highlight></codeline>
-<codeline lineno="531"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a7b1b1f5b80cef42ae89cade92589eb84" kindref="member">clover_singles_delayed</ref>.<ref refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" kindref="member">Write</ref>();</highlight></codeline>
-<codeline lineno="532"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a0c8f270cf84d7aeca1eb87e80d51495b" kindref="member">clover_singles_prompt_Compton_veto</ref>.<ref refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" kindref="member">Write</ref>();</highlight></codeline>
-<codeline lineno="533"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1aba625d564958262437e498d7f1ea8ea3" kindref="member">clover_singles_delayed_Compton_veto</ref>.<ref refid="class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd" kindref="member">Write</ref>();</highlight></codeline>
+<codeline lineno="530"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1aaeb5707153689242e99adeea90e2d223" kindref="member">clover_singles_prompt</ref>.<ref refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" kindref="member">Write</ref>();</highlight></codeline>
+<codeline lineno="531"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a7b1b1f5b80cef42ae89cade92589eb84" kindref="member">clover_singles_delayed</ref>.<ref refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" kindref="member">Write</ref>();</highlight></codeline>
+<codeline lineno="532"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1a0c8f270cf84d7aeca1eb87e80d51495b" kindref="member">clover_singles_prompt_Compton_veto</ref>.<ref refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" kindref="member">Write</ref>();</highlight></codeline>
+<codeline lineno="533"><highlight class="normal"><sp/><sp/><ref refid="class_run_matrixator_1aba625d564958262437e498d7f1ea8ea3" kindref="member">clover_singles_delayed_Compton_veto</ref>.<ref refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" kindref="member">Write</ref>();</highlight></codeline>
 <codeline lineno="534"><highlight class="normal"></highlight></codeline>
 <codeline lineno="535"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Writting<sp/>the<sp/>matrices<sp/>:</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="536"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>type_matrice<sp/>:<sp/><ref refid="class_run_matrixator_1afa913d44012b7ed12db67e5d2900e4a6" kindref="member">matricesPrompt</ref>)<sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;<sp/>matrice<sp/>:<sp/>type_matrice.second<sp/>)<sp/>matrice.Write();</highlight></codeline>
@@ -1224,7 +1241,7 @@
 <codeline lineno="546"><highlight class="normal"></highlight></codeline>
 <codeline lineno="547"><highlight class="normal"><sp/><sp/>file<sp/>-&gt;<sp/><ref refid="class_run_matrixator_1aeb9889ba763858dfb65e05c3a7bb142e" kindref="member">Write</ref>();</highlight></codeline>
 <codeline lineno="548"><highlight class="normal"><sp/><sp/>file<sp/>-&gt;<sp/>Close();</highlight></codeline>
-<codeline lineno="549"><highlight class="normal"><sp/><sp/><ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(outRoot,<sp/></highlight><highlight class="stringliteral">&quot;written&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="549"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(outRoot,<sp/></highlight><highlight class="stringliteral">&quot;written&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="550"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="551"><highlight class="normal"></highlight></codeline>
 <codeline lineno="552"><highlight class="normal"></highlight></codeline>

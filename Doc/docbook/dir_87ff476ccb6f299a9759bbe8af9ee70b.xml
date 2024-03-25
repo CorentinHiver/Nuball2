@@ -16,17 +16,17 @@ Directory dependency graph for Classes:<para>
         <itemizedlist>
             <listitem><para>file <link linkend="__alignator_8hpp">Alignator.hpp</link></para>
 </listitem>
-            <listitem><para>file <link linkend="__analysis_event_8hpp">AnalysisEvent.hpp</link></para>
-</listitem>
             <listitem><para>file <link linkend="__builder_8hpp">Builder.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__calibration_8hpp">Calibration.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__coinc_builder_8hpp">CoincBuilder.hpp</link></para>
 </listitem>
+            <listitem><para>file <link linkend="__co_progress_bar_8hpp">CoProgressBar.hpp</link></para>
+</listitem>
             <listitem><para>file <link linkend="__classes_2_counters_8hpp">Counters.hpp</link></para>
 </listitem>
-            <listitem><para>file <link linkend="__data_file_reader_8hpp">DataFileReader.hpp</link></para>
-</listitem>
-            <listitem><para>file <link linkend="__data_reader_8hpp">DataReader.hpp</link></para>
+            <listitem><para>file <link linkend="__data_file_8hpp">DataFile.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__detectors_8hpp">Detectors.hpp</link></para>
 </listitem>
@@ -38,25 +38,29 @@ Directory dependency graph for Classes:<para>
 </listitem>
             <listitem><para>file <link linkend="__files_manager_8hpp">FilesManager.hpp</link></para>
 </listitem>
+            <listitem><para>file <link linkend="__fit_8hpp">Fit.hpp</link></para>
+</listitem>
             <listitem><para>file <link linkend="__gate_8hpp">Gate.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__hit_8hpp">Hit.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__hit_buffer_8hpp">HitBuffer.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__manip_8hpp">Manip.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__nuball2_tree_8hpp">Nuball2Tree.hpp</link></para>
 </listitem>
-            <listitem><para>file <link linkend="__performances_8hpp">Performances.hpp</link></para>
+            <listitem><para>file <link linkend="__output_t_file_8hpp">OutputTFile.hpp</link></para>
 </listitem>
-            <listitem><para>file <link linkend="__reader_manager_8hpp">ReaderManager.hpp</link></para>
+            <listitem><para>file <link linkend="__performances_8hpp">Performances.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__r_f___manager_8hpp">RF_Manager.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__r_w_mat_8hxx">RWMat.hxx</link></para>
 </listitem>
-            <listitem><para>file <link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></para>
-</listitem>
             <listitem><para>file <link linkend="__timer_8hpp">Timer.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__timewalk_8hpp">Timewalk.hpp</link></para>
 </listitem>
         </itemizedlist>
 </simplesect>

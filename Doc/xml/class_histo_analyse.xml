@@ -14,7 +14,7 @@
         <definition>bool HistoAnalyse&lt; THist &gt;::m_exists</definition>
         <argsstring></argsstring>
         <name>m_exists</name>
-        <initializer>= false</initializer>
+        <Initialiser>= false</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -29,7 +29,7 @@
         <definition>THist* HistoAnalyse&lt; THist &gt;::m_histo</definition>
         <argsstring></argsstring>
         <name>m_histo</name>
-        <initializer>= nullptr</initializer>
+        <Initialiser>= nullptr</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

@@ -1,4 +1,19 @@
 <map id="debug" name="debug">
-<area shape="rect" id="node1" title=" " alt="" coords="208,5,271,32"/>
-<area shape="rect" id="node2" href="$class_m_t_t_hist.html#a3fbc1867068d50b62b712f2458d35ff0" title=" " alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node1" title="Requires #define DEBUG or &#45;DDEBUG in the compile line." alt="" coords="756,179,819,205"/>
+<area shape="rect" id="node2" href="$class_calibrator.html#a00806ef12bceedaa6c16dad9b653f27f" title="Uses the second version of the peak finder to extract calibration coefficients." alt="" coords="541,8,694,35"/>
+<area shape="rect" id="node4" href="$class_simplex.html#a4212e98efa0b1468955d32a51387f3fc" title=" " alt="" coords="549,61,685,88"/>
+<area shape="rect" id="node5" href="$class_minimisator.html#a3c467eeb96f716414dbfb6f2348c6340" title=" " alt="" coords="293,56,479,83"/>
+<area shape="rect" id="node7" href="$class_m_t_t_hist.html#a0412e3cb8d1db4278f3b09316d4ec139" title="Merges the histograms." alt="" coords="555,245,680,272"/>
+<area shape="rect" id="node13" href="$class_m_t_t_hist.html#a3fbc1867068d50b62b712f2458d35ff0" title=" " alt="" coords="309,355,463,381"/>
+<area shape="rect" id="node14" href="$class_m_t_t_hist.html#a72615441a18ffcfab6ca4b848f63eee3" title=" " alt="" coords="551,347,684,373"/>
+<area shape="rect" id="node15" href="$class_cobalt_calorimeter.html#a760c56b79865a37984edc07165a7bc73" title=" " alt="" coords="527,179,708,205"/>
+<area shape="rect" id="node3" href="$class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="305,5,467,32"/>
+<area shape="rect" id="node6" href="$class_spectra_alignator.html#aed228999d9baba04b99e8542204e058b" title=" " alt="" coords="5,56,245,83"/>
+<area shape="rect" id="node8" href="$class_cobalt_calorimeter.html#a6d189182d62a2b03d53520834c439620" title=" " alt="" coords="311,238,461,279"/>
+<area shape="rect" id="node11" href="$class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="311,304,461,331"/>
+<area shape="rect" id="node9" href="$class_cobalt_calorimeter.html#aceaa8e906e0257f450799026ec2269ca" title="legacy" alt="" coords="51,222,200,263"/>
+<area shape="rect" id="node10" href="$class_cobalt_calorimeter.html#ae731ee28c852d150fbf668c27604b8ed" title=" " alt="" coords="51,139,200,181"/>
+<area shape="rect" id="node12" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="47,304,204,331"/>
+<area shape="rect" id="node16" href="$class_cobalt_calorimeter.html#a3464ff1e41c4cbda5b70785952838ee2" title=" " alt="" coords="309,173,463,214"/>
+<area shape="rect" id="node17" href="$class_cobalt_calorimeter.html#a9611646f2620865466213c086a2be263" title=" " alt="" coords="311,107,461,149"/>
 </map>

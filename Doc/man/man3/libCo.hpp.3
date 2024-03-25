@@ -1,4 +1,4 @@
-.TH "lib/libCo.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/libCo.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,25 +6,25 @@ lib/libCo.hpp
 .SH SYNOPSIS
 .br
 .PP
+\fC#include 'print\&.hpp'\fP
+.br
+\fC#include 'vector_functions\&.hpp'\fP
+.br
+\fC#include 'randomCo\&.hpp'\fP
+.br
+\fC#include 'string_functions\&.hpp'\fP
+.br
+\fC#include 'files_functions\&.hpp'\fP
+.br
+\fC#include 'errors\&.hpp'\fP
+.br
 \fC#include <any>\fP
 .br
 \fC#include <array>\fP
 .br
-\fC#include <algorithm>\fP
-.br
-\fC#include <cstdlib>\fP
-.br
-\fC#include <cstring>\fP
-.br
 \fC#include <fstream>\fP
 .br
 \fC#include <functional>\fP
-.br
-\fC#include <iomanip>\fP
-.br
-\fC#include <iostream>\fP
-.br
-\fC#include <map>\fP
 .br
 \fC#include <memory>\fP
 .br
@@ -33,8 +33,6 @@ lib/libCo.hpp
 \fC#include <numeric>\fP
 .br
 \fC#include <queue>\fP
-.br
-\fC#include <sstream>\fP
 .br
 \fC#include <stdexcept>\fP
 .br
@@ -50,27 +48,13 @@ lib/libCo.hpp
 .br
 \fC#include <unordered_map>\fP
 .br
-\fC#include <vector>\fP
+\fC#include <csignal>\fP
 .br
-\fC#include <dirent\&.h>\fP
+\fC#include <cstdlib>\fP
 .br
-\fC#include <glob\&.h>\fP
+\fC#include <cstring>\fP
 .br
-\fC#include <stdio\&.h>\fP
-.br
-\fC#include <stdlib\&.h>\fP
-.br
-\fC#include <string\&.h>\fP
-.br
-\fC#include 'print\&.hpp'\fP
-.br
-\fC#include 'random\&.hpp'\fP
-.br
-\fC#include 'string_functions\&.hpp'\fP
-.br
-\fC#include 'files_functions\&.hpp'\fP
-.br
-\fC#include 'vector_functions\&.hpp'\fP
+\fC#include <ctime>\fP
 .br
 
 .SS "Classes"
@@ -78,6 +62,26 @@ lib/libCo.hpp
 .in +1c
 .ti -1c
 .RI "class \fBBools\fP"
+.br
+.ti -1c
+.RI "class \fBCastImpossible\fP"
+.br
+.ti -1c
+.RI "struct \fBis_container< T >\fP"
+.br
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBCoBazar\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_GLIBCXX_USE_CXX11_ABI\fP   0/1"
 .br
 .in -1c
 .SS "Typedefs"
@@ -118,9 +122,9 @@ lib/libCo.hpp
 
 .in +1c
 .ti -1c
-.RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> bool \fBbool_cast\fP (T const &t)"
+.RI "template<typename T > bool \fBbool_cast\fP (T const &t)"
 .br
-.RI "Casts a number into an bool\&. "
+.RI "Casts a any type into an bool\&. "
 .ti -1c
 .RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> char \fBchar_cast\fP (T const &t)"
 .br
@@ -132,12 +136,14 @@ lib/libCo.hpp
 .ti -1c
 .RI "template<typename K , typename V > bool \fBfind_key\fP (std::map< K, V > const &map, K const &key)"
 .br
+.RI "Returns yes if the key is found in the map\&. "
 .ti -1c
 .RI "template<typename K , typename V > bool \fBfind_key\fP (std::unordered_map< K, V > const &map, K const &key)"
 .br
 .ti -1c
 .RI "template<typename K , typename V > bool \fBfind_value\fP (std::map< K, V > const &map, V const &value)"
 .br
+.RI "Returns yes if the value is found in the map\&. "
 .ti -1c
 .RI "template<typename K , typename V > bool \fBfind_value\fP (std::unordered_map< K, V > const &map, V const &value)"
 .br
@@ -148,12 +154,15 @@ lib/libCo.hpp
 .ti -1c
 .RI "template<typename K , typename V > std::pair< K, V > \fBget_max_element\fP (std::map< K, V > const &map)"
 .br
+.RI "Returns the element with the maximum value\&. "
 .ti -1c
 .RI "template<typename K , typename V > K \fBget_max_key\fP (std::map< K, V > const &map)"
 .br
+.RI "Returns the maximum key stored in the map\&. "
 .ti -1c
 .RI "template<typename K , typename V > V \fBget_max_value\fP (std::map< K, V > const &map)"
 .br
+.RI "Returns the maximum value stored in the map\&. "
 .ti -1c
 .RI "template<typename K , typename V > std::pair< K, V > \fBget_min\fP (std::map< K, V > const &map)"
 .br
@@ -168,15 +177,47 @@ lib/libCo.hpp
 .br
 .RI "Casts a number into an int\&. "
 .ti -1c
+.RI "bool \fBis_int\fP (double const &x)"
+.br
+.RI "Check if the given double holds an integer\&. "
+.ti -1c
+.RI "template<typename K , typename V > std::vector< K > \fBlist_of_keys\fP (std::map< K, V > const &map)"
+.br
+.RI "Returns the list of keys in a map\&. "
+.ti -1c
 .RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> long \fBlong_cast\fP (T const &t)"
 .br
 .RI "Casts a number into an long\&. "
+.ti -1c
+.RI "void \fBCoBazar::long_progress_bar\fP (float const &progress_procent)"
+.br
 .ti -1c
 .RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBlonglong\fP \fBlonglong_cast\fP (T const &t)"
 .br
 .RI "Casts a number into long long (longlong) "
 .ti -1c
-.RI "std::ostream & \fBoperator>>\fP (std::ostream &cout, \fBBools\fP const &bools)"
+.RI "template<class\&.\&.\&. ARGS> double \fBCoBazar::mean\fP (ARGS\&.\&.\&. args)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBBools\fP const &bools)"
+.br
+.ti -1c
+.RI "template<class E , size_t size> std::ostream & \fBoperator<<\fP (std::ostream &cout, std::array< E, size > const &a)"
+.br
+.ti -1c
+.RI "template<class K , class V > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::map< K, V > const &m)"
+.br
+.ti -1c
+.RI "template<class F , class S > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::pair< F, S > const &p)"
+.br
+.ti -1c
+.RI "template<class K , class V > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::unordered_map< K, V > const &m)"
+.br
+.ti -1c
+.RI "template<class E > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::vector< E > const &v)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBuchar\fP const &uc)"
 .br
 .ti -1c
 .RI "auto \fBpauseCo\fP ()"
@@ -185,16 +226,42 @@ lib/libCo.hpp
 .RI "auto \fBpauseCo\fP (std::string const &message)"
 .br
 .ti -1c
+.RI "void \fBpauseDebug\fP (std::string const &message='')"
+.br
+.ti -1c
+.RI "template<class T > T \fBpositive_modulo\fP (T const &dividend, T const &divisor)"
+.br
+.ti -1c
+.RI "void \fBCoBazar::progress_bar\fP (float const &progress_procent, int width=50)"
+.br
+.ti -1c
 .RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> short \fBshort_cast\fP (T const &t)"
 .br
 .RI "Casts a number into an short\&. "
+.ti -1c
+.RI "void \fBCoBazar::short_progress_bar\fP (float const &progress_procent)"
+.br
 .ti -1c
 .RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBsize_t\fP \fBsize_cast\fP (T const &t)"
 .br
 .RI "Casts a number into std::size_t\&. "
 .ti -1c
+.RI "template<class T > T \fBstring_to\fP (std::string const &string)"
+.br
+.ti -1c
+.RI "template<class T , class\&.\&.\&. ARGS> T \fBCoBazar::sum\fP (T i, ARGS\&.\&.\&. args)"
+.br
+.ti -1c
 .RI "void \fBthrow_error\fP (std::string const &message)"
 .br
+.ti -1c
+.RI "std::string \fBtime_string\fP ()"
+.br
+.RI "Returns a string in the format mm_hh_dd_mm_yy\&. "
+.ti -1c
+.RI "std::string \fBtime_string_inverse\fP ()"
+.br
+.RI "Returns a string in the format yy_mm_dd_hh_mm\&. "
 .ti -1c
 .RI "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBuchar\fP \fBuchar_cast\fP (T const &t)"
 .br
@@ -220,12 +287,13 @@ lib/libCo.hpp
 
 .in +1c
 .ti -1c
-.RI "double \fB_ns\fP = 1000\&."
-.br
-.ti -1c
 .RI "std::map< std::string, std::string > \fBerror_message\fP"
 .br
 .in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _GLIBCXX_USE_CXX11_ABI   0/1"
+
 .SH "Typedef Documentation"
 .PP 
 .SS "using \fBInts\fP =  std::vector<int>"
@@ -250,10 +318,10 @@ lib/libCo.hpp
 
 .SH "Function Documentation"
 .PP 
-.SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> bool bool_cast (T const & t)\fC [inline]\fP"
+.SS "template<typename T > bool bool_cast (T const & t)\fC [inline]\fP"
 
 .PP
-Casts a number into an bool\&. 
+Casts a any type into an bool\&. 
 .SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> char char_cast (T const & t)\fC [inline]\fP"
 
 .PP
@@ -264,22 +332,36 @@ Casts a number into an char\&.
 Casts a number into an double\&. 
 .SS "template<typename K , typename V > bool find_key (std::map< K, V > const & map, K const & key)\fC [inline]\fP"
 
+.PP
+Returns yes if the key is found in the map\&. This method is only looking in the keys, not in the values 
 .SS "template<typename K , typename V > bool find_key (std::unordered_map< K, V > const & map, K const & key)\fC [inline]\fP"
 
 .SS "template<typename K , typename V > bool find_value (std::map< K, V > const & map, V const & value)\fC [inline]\fP"
 
+.PP
+Returns yes if the value is found in the map\&. This method is only looking in the values, not in the keys 
 .SS "template<typename K , typename V > bool find_value (std::unordered_map< K, V > const & map, V const & value)\fC [inline]\fP"
 
 .SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> float float_cast (T const & t)\fC [inline]\fP"
 
 .PP
 Casts a number into a float\&. 
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
 .SS "template<typename K , typename V > std::pair<K,V> get_max_element (std::map< K, V > const & map)\fC [inline]\fP"
 
+.PP
+Returns the element with the maximum value\&. This method is only comparing values, not keys 
 .SS "template<typename K , typename V > K get_max_key (std::map< K, V > const & map)\fC [inline]\fP"
 
+.PP
+Returns the maximum key stored in the map\&. This method is only looking for values, not keys 
 .SS "template<typename K , typename V > V get_max_value (std::map< K, V > const & map)\fC [inline]\fP"
 
+.PP
+Returns the maximum value stored in the map\&. This method is only lookinf for values, not keys 
 .SS "template<typename K , typename V > std::pair<K,V> get_min (std::map< K, V > const & map)\fC [inline]\fP"
 
 .SS "template<typename K , typename V > K get_min_key (std::map< K, V > const & map)\fC [inline]\fP"
@@ -290,6 +372,18 @@ Casts a number into a float\&.
 
 .PP
 Casts a number into an int\&. 
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "bool is_int (double const & x)"
+
+.PP
+Check if the given double holds an integer\&. 
+.SS "template<typename K , typename V > std::vector<K> list_of_keys (std::map< K, V > const & map)\fC [inline]\fP"
+
+.PP
+Returns the list of keys in a map\&. This method is only looking in the keys, not the values 
 .SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> long long_cast (T const & t)\fC [inline]\fP"
 
 .PP
@@ -298,11 +392,27 @@ Casts a number into an long\&.
 
 .PP
 Casts a number into long long (longlong) 
-.SS "std::ostream& operator>> (std::ostream & cout, \fBBools\fP const & bools)"
+.SS "std::ostream& operator<< (std::ostream & cout, \fBBools\fP const & bools)"
+
+.SS "template<class E , size_t size> std::ostream& operator<< (std::ostream & cout, std::array< E, size > const & a)"
+
+.SS "template<class K , class V > std::ostream& operator<< (std::ostream & cout, std::map< K, V > const & m)"
+
+.SS "template<class F , class S > std::ostream& operator<< (std::ostream & cout, std::pair< F, S > const & p)"
+
+.SS "template<class K , class V > std::ostream& operator<< (std::ostream & cout, std::unordered_map< K, V > const & m)"
+
+.SS "template<class E > std::ostream& operator<< (std::ostream & cout, std::vector< E > const & v)"
+
+.SS "std::ostream& operator<< (std::ostream & cout, \fBuchar\fP const & uc)"
 
 .SS "auto pauseCo ()"
 
 .SS "auto pauseCo (std::string const & message)"
+
+.SS "void pauseDebug (std::string const & message = \fC''\fP)"
+
+.SS "template<class T > T positive_modulo (T const & dividend, T const & divisor)"
 
 .SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> short short_cast (T const & t)\fC [inline]\fP"
 
@@ -312,8 +422,22 @@ Casts a number into an short\&.
 
 .PP
 Casts a number into std::size_t\&. 
+.SS "template<class T > T string_to (std::string const & string)"
+
 .SS "void throw_error (std::string const & message)"
 
+.PP
+\fBExamples\fP
+.in +1c
+\fB/media/sf_OneDrive/CNRS/Nuball2/lib/Classes/CoProgressBar\&.hpp\fP\&.
+.SS "std::string time_string ()"
+
+.PP
+Returns a string in the format mm_hh_dd_mm_yy\&. 
+.SS "std::string time_string_inverse ()"
+
+.PP
+Returns a string in the format yy_mm_dd_hh_mm\&. 
 .SS "template<typename T , typename  = typename std::enable_if<std::is_arithmetic<T>::value>::type> \fBuchar\fP uchar_cast (T const & t)\fC [inline]\fP"
 
 .PP
@@ -336,8 +460,6 @@ Casts a number into unsigned long long (ulonglong)
 Casts a number into unsigned short (ushort) 
 .SH "Variable Documentation"
 .PP 
-.SS "double _ns = 1000\&."
-
 .SS "std::map<std::string, std::string> error_message"
 \fBInitial value:\fP
 .PP

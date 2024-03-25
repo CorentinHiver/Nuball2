@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_spectra_co_1_1_size_missmatch" xml:lang="en-US">
+<title>SpectraCo::SizeMissmatch Class Reference</title>
+<indexterm><primary>SpectraCo::SizeMissmatch</primary></indexterm>
+<para>
+<computeroutput>#include &lt;SpectraCo.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_spectra_co_1_1_size_missmatch_1a94aae14f6932f29e357f42fd0132827f">SizeMissmatch</link> ()=default</para>
+</listitem>
+            <listitem><para><link linkend="_class_spectra_co_1_1_size_missmatch_1a42beba683555e28da7b2436ccfeb55e5">SizeMissmatch</link> (std::string const &amp;message)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_spectra_co_1_1_size_missmatch_1a94aae14f6932f29e357f42fd0132827f"/>    <section>
+    <title>SizeMissmatch()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>SizeMissmatch</primary><secondary>SpectraCo::SizeMissmatch</secondary></indexterm>
+<indexterm><primary>SpectraCo::SizeMissmatch</primary><secondary>SizeMissmatch</secondary></indexterm>
+<para><computeroutput>SpectraCo::SizeMissmatch::SizeMissmatch ( )<computeroutput>[default]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_spectra_co_1_1_size_missmatch_1a42beba683555e28da7b2436ccfeb55e5"/>    <section>
+    <title>SizeMissmatch()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>SizeMissmatch</primary><secondary>SpectraCo::SizeMissmatch</secondary></indexterm>
+<indexterm><primary>SpectraCo::SizeMissmatch</primary><secondary>SizeMissmatch</secondary></indexterm>
+<para><computeroutput>SpectraCo::SizeMissmatch::SizeMissmatch (std::string const &amp; message)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_spectra_co_1_1_size_missmatch_a42beba683555e28da7b2436ccfeb55e5_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__spectra_co_8hpp">SpectraCo.hpp</link></section>
+</section>

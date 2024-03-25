@@ -1,46 +1,44 @@
 <map id="push_back_if_none" name="push_back_if_none">
-<area shape="rect" id="node1" title=" " alt="" coords="1864,451,2011,477"/>
-<area shape="rect" id="node2" href="$class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="1044,192,1225,219"/>
-<area shape="rect" id="node19" href="$files__functions_8hpp.html#af9990cd15a6b2f01f535dbf9b536f319" title=" " alt="" coords="1675,425,1797,452"/>
-<area shape="rect" id="node20" href="$files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="1683,375,1789,401"/>
-<area shape="rect" id="node23" href="$class_path.html#aa9b3a53718dcd8ba66d90d50b112ddb9" title=" " alt="" coords="1091,312,1178,339"/>
-<area shape="rect" id="node39" href="$files__functions_8hpp.html#a595eecb3abc2bf6927fee1c77ea1bfa7" title=" " alt="" coords="1673,476,1799,503"/>
-<area shape="rect" id="node40" href="$files__functions_8hpp.html#a5e105952499e9ca713d2a2fd5db3299d" title=" " alt="" coords="1668,527,1804,553"/>
-<area shape="rect" id="node42" href="$class_path.html#aea2baf3449b7fc955e7320f851ec29e5" title=" " alt="" coords="1669,577,1803,604"/>
-<area shape="rect" id="node43" href="$class_timeshifts.html#a26367484f20648d7c3f5b3bbe5679ca8" title="Set the output directory (full path);." alt="" coords="1656,628,1816,655"/>
-<area shape="rect" id="node3" href="$class_m_t_faster_reader.html#a58a2fe8f9f9ba39808d43f36f45c8288" title=" " alt="" coords="795,203,993,229"/>
-<area shape="rect" id="node11" href="$class_m_t_root_reader.html#ad8f964e63c97f35e44fc3b11fca88e59" title=" " alt="" coords="799,13,989,40"/>
-<area shape="rect" id="node13" href="$class_files_manager.html#ab73099416f575af7d1ea40add38b5ad0" title=" " alt="" coords="792,76,996,103"/>
-<area shape="rect" id="node14" href="$class_calibration.html#a6d6d354f65db38acf12addf1efb7c815" title=" " alt="" coords="799,261,989,288"/>
-<area shape="rect" id="node16" href="$class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="809,127,979,153"/>
-<area shape="rect" id="node4" href="$class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a" title=" " alt="" coords="545,157,720,184"/>
-<area shape="rect" id="node7" href="$class_calibration.html#a6514307ca111ecc5d6f02694373dc5ec" title=" " alt="" coords="533,208,732,235"/>
-<area shape="rect" id="node10" href="$class_m_t_faster_reader.html#a98a77edc573c4b3cfa5fa384f0d1a085" title="Regular constructor." alt="" coords="535,259,730,301"/>
-<area shape="rect" id="node5" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="290,157,429,184"/>
-<area shape="rect" id="node6" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,157,197,184"/>
-<area shape="rect" id="node8" href="$class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="279,376,439,403"/>
-<area shape="rect" id="node9" href="$class_calibration.html#a5931047806db77858db6886d041db100" title=" " alt="" coords="245,208,473,235"/>
-<area shape="rect" id="node12" href="$class_m_t_root_reader.html#a6df2599a2adf92ce971105fbfac69221" title=" " alt="" coords="521,5,744,32"/>
-<area shape="rect" id="node15" href="$class_calibration.html#ac7678b0524f8407659a9594b3862e5c3" title=" " alt="" coords="523,325,742,352"/>
-<area shape="rect" id="node17" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="554,56,711,83"/>
-<area shape="rect" id="node18" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="565,107,700,133"/>
-<area shape="rect" id="node21" href="$files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="1431,451,1593,477"/>
-<area shape="rect" id="node29" href="$class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="1463,501,1561,528"/>
-<area shape="rect" id="node37" href="$files__functions_8hpp.html#a1af9b6a86720b38a84a8b0be4e57bec7" title=" " alt="" coords="1459,400,1565,427"/>
-<area shape="rect" id="node38" href="$class_path.html#a0db652f355256181825b11d0199ed0ae" title=" " alt="" coords="1439,349,1585,376"/>
-<area shape="rect" id="node22" href="$class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="1273,448,1368,475"/>
-<area shape="rect" id="node26" href="$class_file.html#aec78af028103207cb2ce88c0120dd4f6" title=" " alt="" coords="835,427,953,453"/>
-<area shape="rect" id="node24" href="$class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="832,363,956,389"/>
-<area shape="rect" id="node25" href="$class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="851,312,937,339"/>
-<area shape="rect" id="node27" href="$class_calibration.html#a7e89a0c788e7ad97c2a9cea5e02ef3f2" title=" " alt="" coords="550,427,715,453"/>
-<area shape="rect" id="node28" href="$class_calibration.html#a53565d0fe7d92fd6d5d94eee5a97f1b8" title=" " alt="" coords="535,477,731,504"/>
-<area shape="rect" id="node30" href="$class_file.html#a6b15fde4d8bb49099cdf7f27c4f36fae" title=" " alt="" coords="1275,553,1366,580"/>
-<area shape="rect" id="node31" href="$class_file.html#a5237343fec40bceaa8cf7fc7c4026426" title=" " alt="" coords="595,528,671,555"/>
-<area shape="rect" id="node32" href="$class_file.html#a900ed41b6c4fbcec93e4306e2d8b0c35" title=" " alt="" coords="573,629,692,656"/>
-<area shape="rect" id="node33" href="$class_file.html#a8f6a2ccec2d48112847c89541d13bc10" title=" " alt="" coords="1085,579,1184,605"/>
-<area shape="rect" id="node34" href="$class_file.html#a84e9ad3641a6cff0d371dddb2ea0f73e" title=" " alt="" coords="856,629,932,656"/>
-<area shape="rect" id="node35" href="$class_file.html#ac3774fc193239a9a83f6974e9a79f9c4" title=" " alt="" coords="859,579,929,605"/>
-<area shape="rect" id="node36" href="$class_file.html#af4dee1c79bf496d505633211177c6ce3" title=" " alt="" coords="825,477,963,504"/>
-<area shape="rect" id="node41" href="$class_path.html#a67161dbd774db3274fadc0c438b0cdf2" title=" " alt="" coords="1460,552,1564,579"/>
-<area shape="rect" id="node44" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="1416,628,1608,655"/>
+<area shape="rect" id="node1" title=" " alt="" coords="1475,705,1621,732"/>
+<area shape="rect" id="node2" href="$class_files_manager.html#a6d05662378bde592075237b9fa0a5168" title=" " alt="" coords="797,252,979,279"/>
+<area shape="rect" id="node19" href="$files__functions_8hpp.html#af9990cd15a6b2f01f535dbf9b536f319" title=" " alt="" coords="1286,553,1407,580"/>
+<area shape="rect" id="node20" href="$files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="1293,604,1400,631"/>
+<area shape="rect" id="node23" href="$class_path.html#af8ae2716e0002e69eff44e6d669e6051" title=" " alt="" coords="590,680,705,707"/>
+<area shape="rect" id="node37" href="$files__functions_8hpp.html#a595eecb3abc2bf6927fee1c77ea1bfa7" title=" " alt="" coords="1283,731,1410,757"/>
+<area shape="rect" id="node38" href="$files__functions_8hpp.html#a5e105952499e9ca713d2a2fd5db3299d" title=" " alt="" coords="1279,781,1415,808"/>
+<area shape="rect" id="node40" href="$class_path.html#aea2baf3449b7fc955e7320f851ec29e5" title=" " alt="" coords="1279,832,1414,859"/>
+<area shape="rect" id="node41" href="$class_timeshifts.html#a26367484f20648d7c3f5b3bbe5679ca8" title="Set the output directory (full path);." alt="" coords="1267,883,1427,909"/>
+<area shape="rect" id="node3" href="$class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a" title="Adds [nb_files] files to convert inside of [folder]." alt="" coords="560,357,735,384"/>
+<area shape="rect" id="node6" href="$class_m_t_faster_reader.html#a58a2fe8f9f9ba39808d43f36f45c8288" title=" " alt="" coords="548,201,747,228"/>
+<area shape="rect" id="node11" href="$class_m_t_root_reader.html#ad8f964e63c97f35e44fc3b11fca88e59" title=" " alt="" coords="552,136,743,163"/>
+<area shape="rect" id="node13" href="$class_files_manager.html#ab73099416f575af7d1ea40add38b5ad0" title=" " alt="" coords="545,252,749,279"/>
+<area shape="rect" id="node14" href="$class_calibrator.html#af067fee0c3a37336851ea63f2561b59f" title=" " alt="" coords="556,303,739,329"/>
+<area shape="rect" id="node16" href="$class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="563,56,732,83"/>
+<area shape="rect" id="node4" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title="To launch the application after instanciation." alt="" coords="317,376,455,403"/>
+<area shape="rect" id="node5" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="20,427,212,453"/>
+<area shape="rect" id="node7" href="$class_calibrator.html#a00297f1bb253279bfa8bdce83fb81951" title=" " alt="" coords="290,157,482,184"/>
+<area shape="rect" id="node10" href="$class_m_t_faster_reader.html#a98a77edc573c4b3cfa5fa384f0d1a085" title="Regular constructor." alt="" coords="289,209,483,250"/>
+<area shape="rect" id="node8" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="39,275,193,301"/>
+<area shape="rect" id="node9" href="$class_calibrator.html#ac16a84c9c3244443c44a7c5de11ceb5f" title=" " alt="" coords="5,157,227,184"/>
+<area shape="rect" id="node12" href="$class_m_t_root_reader.html#a6df2599a2adf92ce971105fbfac69221" title=" " alt="" coords="275,107,497,133"/>
+<area shape="rect" id="node15" href="$class_calibrator.html#aa45584fd0c25478ec98232ac18af3082" title=" " alt="" coords="280,325,492,352"/>
+<area shape="rect" id="node17" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="307,5,465,32"/>
+<area shape="rect" id="node18" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="319,56,453,83"/>
+<area shape="rect" id="node21" href="$files__functions_8hpp.html#af52310dd2d55713265daa0e58dd7bf21" title=" " alt="" coords="1041,477,1204,504"/>
+<area shape="rect" id="node35" href="$files__functions_8hpp.html#a1af9b6a86720b38a84a8b0be4e57bec7" title=" " alt="" coords="1069,579,1176,605"/>
+<area shape="rect" id="node36" href="$class_path.html#a0db652f355256181825b11d0199ed0ae" title=" " alt="" coords="1050,629,1195,656"/>
+<area shape="rect" id="node22" href="$class_path.html#a1f94b3b7d475723ead35e54c87078ed7" title=" " alt="" coords="841,477,935,504"/>
+<area shape="rect" id="node26" href="$class_file.html#aec78af028103207cb2ce88c0120dd4f6" title=" " alt="" coords="589,515,706,541"/>
+<area shape="rect" id="node34" href="$class_faster2_histo.html#a10cecb02216295444e7ab7a9b08a1965" title="Set the full output path. Option –out_path." alt="" coords="556,451,739,477"/>
+<area shape="rect" id="node24" href="$class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="324,731,448,757"/>
+<area shape="rect" id="node25" href="$class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="343,680,429,707"/>
+<area shape="rect" id="node27" href="$class_paris_bidim_angles.html#a0ca1c561f33bc79fc16b630ef4db9144" title=" " alt="" coords="298,629,474,656"/>
+<area shape="rect" id="node29" href="$class_faster2_histo.html#a8821f5ded43a6f91593962adbe4761b9" title="Write down a [out_filename].root file containing the spectra of the data." alt="" coords="314,477,458,504"/>
+<area shape="rect" id="node30" href="$class_calibration.html#a62f73bc45da4c1cd949b4ce32b630916" title="Writes down the calibration file." alt="" coords="319,528,453,555"/>
+<area shape="rect" id="node31" href="$class_calibrator.html#a5168dd14ccf0ad9629fa56185986d218" title=" " alt="" coords="307,579,465,605"/>
+<area shape="rect" id="node33" href="$class_calibrator.html#ace95da8167dc1202e913a75c553313b3" title=" " alt="" coords="291,427,481,453"/>
+<area shape="rect" id="node28" href="$class_paris.html#a66745a02a04a8733eba514f319b1cc5e" title=" " alt="" coords="15,629,217,656"/>
+<area shape="rect" id="node32" href="$class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="35,579,197,605"/>
+<area shape="rect" id="node39" href="$class_path.html#a67161dbd774db3274fadc0c438b0cdf2" title=" " alt="" coords="1071,781,1175,808"/>
+<area shape="rect" id="node42" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="1027,883,1219,909"/>
 </map>

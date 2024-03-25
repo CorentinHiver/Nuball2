@@ -15,7 +15,8 @@ Inheritance diagram for My\+Simple\+Convertor\+:\nopagebreak
 \end{figure}
 
 
-Collaboration diagram for My\+Simple\+Convertor\+:\nopagebreak
+Collaboration diagram for My\+Simple\+Convertor\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -36,7 +37,7 @@ void \textbf{ load\+Calibration} (std\+::string const \&calib\+File)
 void \textbf{ load\+Timeshifts} (std\+::string const \&d\+Tfile)
 \item 
 void \textbf{ load\+Trigger\+File} (std\+::string const \&file)
-\item 
+\begin{DoxyCompactList}\small\item\em Loads a trigger file. \end{DoxyCompactList}\item 
 {\footnotesize template$<$class... ARGS$>$ }\\\textbf{ My\+Simple\+Convertor} (ARGS \&\&... args)
 \item 
 void \textbf{ overwrite} (bool const \&\+\_\+overwrite)
@@ -49,7 +50,7 @@ void \textbf{ set\+Nb\+Threads} (int const \&nb\+\_\+threads=-\/1)
 \item 
 void \textbf{ set\+Timeshifts} (\textbf{ Timeshifts} const \&timeshifts)
 \item 
-void \textbf{ set\+Trigger} (std\+::function$<$ bool(const \textbf{ Event} \&)$>$ other)
+void \textbf{ set\+Trigger} (\textbf{ Trigger\+Event} other)
 \item 
 void \textbf{ throw\+Singles} (bool const \&\+\_\+throw\+\_\+single=true)
 \end{DoxyCompactItemize}
@@ -63,8 +64,8 @@ virtual void \textbf{ print\+Parameters} () const
 \doxysubsection*{Static Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void \textbf{ s\+\_\+convert\+File} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader, \textbf{ Faster2\+Root} \&convertor, \textbf{ Path} const \&out\+Path)
-\end{DoxyCompactItemize}
+static void \textbf{ dispatch\+\_\+threads} (\textbf{ Hit} \&hit, \textbf{ Faster\+Reader} \&reader, \textbf{ Faster2\+Root} \&convertor, \textbf{ Path} const \&out\+Path)
+\begin{DoxyCompactList}\small\item\em Dispatch the \doxyref{Faster2\+Root\+::convert\+File()}{p.}{class_faster2_root_a2ba93a4814723b6103dc25a701f3dc89} method through the threads. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -98,7 +99,7 @@ Long64\+\_\+t \textbf{ m\+\_\+time\+\_\+window} = 1500000
 \item 
 \textbf{ MTCounter} \textbf{ m\+\_\+trigg\+\_\+events}
 \item 
-std\+::function$<$ bool(const \textbf{ Event} \&)$>$ \textbf{ m\+\_\+trigger} = [$\,$](const \textbf{ Event}\&) \{ return true; \}
+\textbf{ Trigger\+Event} \textbf{ m\+\_\+trigger} = [$\,$](const \textbf{ Event}\&) \{ return true; \}
 \item 
 std\+::string \textbf{ m\+\_\+trigger\+\_\+file}
 \item 
@@ -127,7 +128,8 @@ My\+Simple\+Convertor\+::\+My\+Simple\+Convertor (\begin{DoxyParamCaption}\item[
 \doxysubsubsection{buildEvents()}
 {\footnotesize\ttfamily void Faster2\+Root\+::build\+Events (\begin{DoxyParamCaption}\item[{int}]{time\+\_\+window\+\_\+ns }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -147,7 +149,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{convert()}
 {\footnotesize\ttfamily void Faster2\+Root\+::convert (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{data\+Folder,  }\item[{std\+::string const \&}]{output\+Folder,  }\item[{int const \&}]{nb\+\_\+files = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -180,11 +183,38 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Reimplemented from \textbf{ Faster2\+Root} \doxyref{}{p.}{class_faster2_root_a2ba93a4814723b6103dc25a701f3dc89}.
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_my_simple_convertor_a81d6aadfcbadae6e83dbacc86735a0c5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_faster2_root_a71d9880b2fea1d23ec201ded7e12b3fd}} 
+\index{MySimpleConvertor@{MySimpleConvertor}!dispatch\_threads@{dispatch\_threads}}
+\index{dispatch\_threads@{dispatch\_threads}!MySimpleConvertor@{MySimpleConvertor}}
+\doxysubsubsection{dispatch\_threads()}
+{\footnotesize\ttfamily static void Faster2\+Root\+::dispatch\+\_\+threads (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Faster2\+Root} \&}]{convertor,  }\item[{\textbf{ Path} const \&}]{out\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}, {\ttfamily [inherited]}}
+
+
+
+Dispatch the \doxyref{Faster2\+Root\+::convert\+File()}{p.}{class_faster2_root_a2ba93a4814723b6103dc25a701f3dc89} method through the threads. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a71d9880b2fea1d23ec201ded7e12b3fd_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_faster2_root_a71d9880b2fea1d23ec201ded7e12b3fd_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_faster2_root_ad30ccf937150bbd3504ec3a354b76c8f}} 
@@ -193,7 +223,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{load()}
 {\footnotesize\ttfamily void Faster2\+Root\+::load (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -213,7 +244,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{loadCalibration()}
 {\footnotesize\ttfamily void Faster2\+Root\+::load\+Calibration (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{calib\+File }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -233,7 +265,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{loadTimeshifts()}
 {\footnotesize\ttfamily void Faster2\+Root\+::load\+Timeshifts (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{d\+Tfile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -251,16 +284,22 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{MySimpleConvertor@{MySimpleConvertor}!loadTriggerFile@{loadTriggerFile}}
 \index{loadTriggerFile@{loadTriggerFile}!MySimpleConvertor@{MySimpleConvertor}}
 \doxysubsubsection{loadTriggerFile()}
-{\footnotesize\ttfamily void Faster2\+Root\+::load\+Trigger\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
+{\footnotesize\ttfamily void Faster2\+Root\+::load\+Trigger\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+Loads a trigger file. 
+
+A trigger file contains a list of the detectors\textquotesingle{}s labels (the number, not the name) that are required in the event (e.\+g. a germanium trigger file would list all the labels of the germaniums). If you want more specific trigger you have to create your own executable, include \doxyref{Faster2\+Root}{p.}{class_faster2_root} and follow the example 2 of the documentation of the class. Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_root_a5b8a78ef8c54117807c770d21fa4acf0_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -286,7 +325,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{printParameters()}
 {\footnotesize\ttfamily void Faster2\+Root\+::print\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}, {\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -298,26 +338,6 @@ Here is the caller graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_faster2_root_a6cc6f4731958e8c74ad0e07f4d97f4a0_icgraph}
-\end{center}
-\end{figure}
-\mbox{\label{class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b}} 
-\index{MySimpleConvertor@{MySimpleConvertor}!s\_convertFile@{s\_convertFile}}
-\index{s\_convertFile@{s\_convertFile}!MySimpleConvertor@{MySimpleConvertor}}
-\doxysubsubsection{s\_convertFile()}
-{\footnotesize\ttfamily static void Faster2\+Root\+::s\+\_\+convert\+File (\begin{DoxyParamCaption}\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Faster2\+Root} \&}]{convertor,  }\item[{\textbf{ Path} const \&}]{out\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}, {\ttfamily [inherited]}}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_faster2_root_a50fd46a075ae0a1a1f52b5bb6405047b_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_faster2_root_a957a45ae197b565da07521a27ee73f53}} 
@@ -358,17 +378,18 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{setTimeshifts()}
 {\footnotesize\ttfamily void Faster2\+Root\+::set\+Timeshifts (\begin{DoxyParamCaption}\item[{\textbf{ Timeshifts} const \&}]{timeshifts }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-\mbox{\label{class_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2}} 
+\mbox{\label{class_faster2_root_a6975bef38e67cce6044eb1ce7f5c2f92}} 
 \index{MySimpleConvertor@{MySimpleConvertor}!setTrigger@{setTrigger}}
 \index{setTrigger@{setTrigger}!MySimpleConvertor@{MySimpleConvertor}}
 \doxysubsubsection{setTrigger()}
-{\footnotesize\ttfamily void Faster2\+Root\+::set\+Trigger (\begin{DoxyParamCaption}\item[{std\+::function$<$ bool(const \textbf{ Event} \&)$>$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+{\footnotesize\ttfamily void Faster2\+Root\+::set\+Trigger (\begin{DoxyParamCaption}\item[{\textbf{ Trigger\+Event}}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_faster2_root_aaa5d89a939efb05b6408e65b5f0117c2_icgraph}
+\includegraphics[width=350pt]{class_faster2_root_a6975bef38e67cce6044eb1ce7f5c2f92_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_faster2_root_a01cccc30e85ee668bbff3827c838173e}} 
@@ -470,11 +491,11 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{m\_trigg\_events}
 {\footnotesize\ttfamily \textbf{ MTCounter} Faster2\+Root\+::m\+\_\+trigg\+\_\+events\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
 
-\mbox{\label{class_faster2_root_a5807435c6403ac0a7fba6da6b43fefce}} 
+\mbox{\label{class_faster2_root_a329970d0ebeef0479f529969eac0aaa8}} 
 \index{MySimpleConvertor@{MySimpleConvertor}!m\_trigger@{m\_trigger}}
 \index{m\_trigger@{m\_trigger}!MySimpleConvertor@{MySimpleConvertor}}
 \doxysubsubsection{m\_trigger}
-{\footnotesize\ttfamily std\+::function$<$bool(const \textbf{ Event}\&)$>$ Faster2\+Root\+::m\+\_\+trigger = [$\,$](const \textbf{ Event}\&) \{ return true; \}\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
+{\footnotesize\ttfamily \textbf{ Trigger\+Event} Faster2\+Root\+::m\+\_\+trigger = [$\,$](const \textbf{ Event}\&) \{ return true; \}\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [inherited]}}
 
 \mbox{\label{class_faster2_root_ae3fce7a9419f8ed5044f8a8cc7302a6b}} 
 \index{MySimpleConvertor@{MySimpleConvertor}!m\_trigger\_file@{m\_trigger\_file}}

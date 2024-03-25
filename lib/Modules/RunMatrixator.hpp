@@ -30,7 +30,7 @@ class RunMatrixator
 public:
   RunMatrixator() = default;
   void run(std::string const & runpath, std::string const & data = "fast");
-  void Initialize();
+  void Initialise();
   void loadData_root(TTree * tree, Event & event);
   void loadData_faster(Hit & hit, FasterReader & reader);
   void fillMatrixes(Clovers const & clovers, Event const & event);
@@ -50,7 +50,7 @@ public:
   void setCalibration(Calibration const & calibration) {m_calibration = calibration;}
   void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
 
-  void initialize_dontMatrixate()
+  void Initialise_dontMatrixate()
   {
     if (m_dontMatrixateLabel.size()<detectors.size())  m_dontMatrixateLabel.resize(detectors.size(), false);
     if (m_dontMatrixateType.size() < detectors.nbTypes()) for (auto const & type : detectors.types()) m_dontMatrixateType.emplace(type, false);
@@ -59,7 +59,7 @@ public:
   void dontMatrixate(dType const & type)
   {
     // Initialise if not :
-    initialize_dontMatrixate();
+    Initialise_dontMatrixate();
 
     // Check if the type exists :
     if (!found(detectors.types(), type)) throw_error("RunMatrixator::dontMatrixate(type) : type unkown");
@@ -73,7 +73,7 @@ public:
   void dontMatrixate(Label const & label)
   {
     // Initialise if not :
-    initialize_dontMatrixate();
+    Initialise_dontMatrixate();
     // Check entry :
     if (label>m_dontMatrixateLabel.size()) throw_error("RunMatrixator::dontMatrixate(label) : label out of range");
     m_dontMatrixateLabel[label] = true;
@@ -124,7 +124,7 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
   Timer timer;
   m_runpath = runpath;
   // Initialise the matrices :
-  this -> Initialize();
+  this -> Initialise();
 
   // Fills the matrices :
   if (data == "fast")
@@ -149,17 +149,17 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
   print(timer(), timer.unit(), "to matrixate", m_runpath);
 }
 
-void RunMatrixator::Initialize()
+void RunMatrixator::Initialise()
 {
   // Hit::setExternalTime(true); // Allows to directly calculate the rf time instead of the relative time
-  if (!detectors) {print("Please initialize the Detectors"); throw_error("Detectors not loaded");}
-  this -> initialize_dontMatrixate();
+  if (!detectors) {print("Please Initialise the Detectors"); throw_error("Detectors not loaded");}
+  this -> Initialise_dontMatrixate();
   if (m_keep_singles) Builder::keepSingles();
 
   test_paris_vs_mult.reset("test_paris_vs_mult", "Paris vs Mult", m_max_multiplicity,0,m_max_multiplicity, 1000,0,10000);
 
   // --- Clover initialisation : --- //
-  print("Initialize clovers");
+  print("Initialise clovers");
   clover_singles_prompt.reset("clover_singles_prompt", "clover prompt single hit;Clover E [keV]", 20000,0,20000);
   clover_singles_delayed.reset("clover_singles_delayed", "clover delayed  single hit;Clover E [keV]", 20000,0,20000);
   clover_singles_prompt_Compton_veto.reset("clover_singles_prompt_Compton_veto", "clover prompt single hit Compton veto;Clover E [keV]", 20000,0,20000);
@@ -172,7 +172,7 @@ void RunMatrixator::Initialize()
   // --- All the matrices and single spectra initialisation : --- //
   for (auto const & type : detectors.types())
   {// Loop through all the detectors types (ge, labr...)
-    print("Initialize ",type);
+    print("Initialise ",type);
     auto const & nb_det = detectors.nbOfType(type);
 
     // Matrices : 

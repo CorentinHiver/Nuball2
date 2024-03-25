@@ -48,7 +48,7 @@ T \& \textbf{ operator[$\,$]} (\textbf{ std\+::size\+\_\+t} const \&i) const
 \begin{DoxyCompactList}\small\item\em Return the ith element. \end{DoxyCompactList}\item 
 void \textbf{ push\+\_\+back} (T const \&e)
 \begin{DoxyCompactList}\small\item\em Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking. \end{DoxyCompactList}\item 
-void \textbf{ push\+\_\+back\+\_\+unique} (T const \&t)
+bool \textbf{ push\+\_\+back\+\_\+unique} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Add element to the back of the vector only if the vector do not contain it. \end{DoxyCompactList}\item 
 void \textbf{ reserve} ()
 \item 
@@ -92,8 +92,12 @@ class Static\+Vector$<$ T $>$}
 An efficient container for dynamic arrays with a known and fixed maximum size. 
 
 \begin{DoxyAttention}{Attention}
-Prototype, have some memory management issues in some cases ...
+Prototype, has some memory management issues in some cases ... 
 \end{DoxyAttention}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]With optimisation option, std\+::vector is almost as efficient as this class ... \end{DoxyRefDesc}
+
+
 This class is meant to handle a vector of data that needs to be resized a lot. To do so, declare it this way \+: \begin{DoxyVerb} static_vector<T> my_vec = static_vector<T>(maximum_size);
 \end{DoxyVerb}
  If not in an object prototype, simply \+: \begin{DoxyVerb} auto my_vec = static_vector<T>(maximum_size);
@@ -197,7 +201,8 @@ Move contructor.
 {\footnotesize\ttfamily template$<$class T $>$ \\
 \textbf{ Static\+Vector}$<$ T $>$\+::$\sim$\textbf{ Static\+Vector} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -229,7 +234,8 @@ virtual T$\ast$ \textbf{ Static\+Vector}$<$ T $>$\+::begin (\begin{DoxyParamCapt
 
 Return iterator to the beginning of the vector. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -261,7 +267,8 @@ void \textbf{ Static\+Vector}$<$ T $>$\+::check\+Capacity (\begin{DoxyParamCapti
 {\footnotesize\ttfamily template$<$class T $>$ \\
 void \textbf{ Static\+Vector}$<$ T $>$\+::check\+Capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -275,7 +282,8 @@ Here is the caller graph for this function\+:\nopagebreak
 {\footnotesize\ttfamily template$<$class T $>$ \\
 void \textbf{ Static\+Vector}$<$ T $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -315,7 +323,8 @@ virtual T$\ast$ \textbf{ Static\+Vector}$<$ T $>$\+::end (\begin{DoxyParamCaptio
 
 Return iterator to the end of the vector. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -408,7 +417,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=322pt]{class_static_vector_ad756be87d5c09054f47d40e38ce4b45f_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -480,36 +490,39 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_static_vector_a8f604b0f4165d95a6b6653907c92ceb3_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_static_vector_a8f604b0f4165d95a6b6653907c92ceb3_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_static_vector_ac0b86d749f8e35274fbac0506c050465}} 
+\mbox{\label{class_static_vector_ae9a13402fed613a29197e99ce20396f8}} 
 \index{StaticVector$<$ T $>$@{StaticVector$<$ T $>$}!push\_back\_unique@{push\_back\_unique}}
 \index{push\_back\_unique@{push\_back\_unique}!StaticVector$<$ T $>$@{StaticVector$<$ T $>$}}
 \doxysubsubsection{push\_back\_unique()}
 {\footnotesize\ttfamily template$<$class T $>$ \\
-void \textbf{ Static\+Vector}$<$ T $>$\+::push\+\_\+back\+\_\+unique (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+bool \textbf{ Static\+Vector}$<$ T $>$\+::push\+\_\+back\+\_\+unique (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Add element to the back of the vector only if the vector do not contain it. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_static_vector_ac0b86d749f8e35274fbac0506c050465_cgraph}
+\includegraphics[width=350pt]{class_static_vector_ae9a13402fed613a29197e99ce20396f8_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_static_vector_ac0b86d749f8e35274fbac0506c050465_icgraph}
+\includegraphics[width=350pt]{class_static_vector_ae9a13402fed613a29197e99ce20396f8_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_static_vector_aac46f946b1d5b09e8713eac121594a06}} 
@@ -555,7 +568,8 @@ auto const\& \textbf{ Static\+Vector}$<$ T $>$\+::size (\begin{DoxyParamCaption}
 
 Return the position of the write cursor. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

@@ -46,7 +46,7 @@ public:
   Timeshifts() {}
 
   ///@brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
-  Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename); this -> Initialize();}
+  Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename); this -> Initialise();}
 
   ///@brief Call the Timeshifts::load() method to load the timeshifts from a .dT file 
   Timeshifts(const char * filename) : m_filename(filename) {this -> load(m_filename);}
@@ -250,9 +250,9 @@ private:
 
   void InitialisePreferencesArrays();
   bool m_pref_arrays_init = false;
-  bool Initialize(bool const & initializeRaw = false, bool const & initializeCorrected = false);
-  bool InitializeRaw();
-  bool InitializeCorrected();
+  bool Initialise(bool const & InitialiseRaw = false, bool const & InitialiseCorrected = false);
+  bool InitialiseRaw();
+  bool InitialiseCorrected();
   static void treatFilesMT(Timeshifts & ts, MTList & files_MT);
   void treatFolder(std::string const & folder, int const & nb_files = -1);
   void treatFile(std::string const & filename);
@@ -268,10 +268,10 @@ private:
   bool m_corrected = false;
   bool m_folder_treated = false;
 
-  bool m_initialized = false;
-  bool m_energySpectraInitialized = false;
-  bool m_initializedRaw = false;
-  bool m_initializedCorrected = false;
+  bool m_Initialised = false;
+  bool m_energySpectraInitialised = false;
+  bool m_InitialisedRaw = false;
+  bool m_InitialisedCorrected = false;
 
   bool m_check_preprompt = false;
 
@@ -457,9 +457,9 @@ bool Timeshifts::setParameters(std::string const & parameter)
   return true;
 }
 
-bool Timeshifts::InitializeRaw()
+bool Timeshifts::InitialiseRaw()
 {
-  if (m_initializedRaw) return true;// To prevent multiple initializations
+  if (m_InitialisedRaw) return true;// To prevent multiple initializations
 
   // Raw Timeshifts spectra :
   m_time_spectra.resize(detectors.size());
@@ -489,12 +489,12 @@ bool Timeshifts::InitializeRaw()
       }
     }
   }
-  return (m_initializedRaw = true);
+  return (m_InitialisedRaw = true);
 }
 
-bool Timeshifts::InitializeCorrected()
+bool Timeshifts::InitialiseCorrected()
 {
-  if (m_initializedCorrected) return true;// To prevent multiple initializations
+  if (m_InitialisedCorrected) return true;// To prevent multiple initializations
 
   // Corrected timeshifts spectra :
   m_time_spectra_corrected.resize(detectors.size());
@@ -510,7 +510,7 @@ bool Timeshifts::InitializeCorrected()
   if(m_use_rf)
   {
     // Corrected RF timeshifts spectra :
-    m_time_spectra_corrected_RF.resize(detectors.size());// Initialize the vector
+    m_time_spectra_corrected_RF.resize(detectors.size());// Initialise the vector
     m_time_spectra_reference_RF_corrected.reset( "Ref_RF_corrected", "Reference RF corrected;Time[ps];#", RF_time_window_ns*m_bins_per_ns["RF"], borne_inf, borne_sup);
     m_time_spectra_corrected_bidim_RF.reset("All_corrected_time_spectra_RF", "All corrected time spectra VS RF;Channel;Time[ps];#", 
             detectors.size(), 0, detectors.size(), RF_time_window_ns*2, borne_inf, borne_sup);
@@ -527,25 +527,25 @@ bool Timeshifts::InitializeCorrected()
     if(m_use_rf) m_time_spectra_corrected_RF[label].reset((name+"_RF_corrected").c_str(), (name+" RF corrected;Time[ps];#").c_str(), 
                     RF_time_window_ns*m_bins_per_ns[type], borne_inf, borne_sup);
   }
-  return (m_initializedCorrected = true);
+  return (m_InitialisedCorrected = true);
 }
 
-bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeCorrected)
+bool Timeshifts::Initialise(bool const & InitialiseRaw, bool const & InitialiseCorrected)
 {
   Timeshifts::InitialisePreferencesArrays();
 
-  if (initializeRaw) this -> InitializeRaw();
+  if (InitialiseRaw) this -> InitialiseRaw();
 
-  if (initializeCorrected) this -> InitializeCorrected();    
+  if (InitialiseCorrected) this -> InitialiseCorrected();    
 
-  if (!m_energySpectraInitialized && (initializeRaw || initializeCorrected))
+  if (!m_energySpectraInitialised && (InitialiseRaw || InitialiseCorrected))
   {
     // Energy spectra :
     m_EnergyRef.reset("Energy_spectra", "Energy_spectra;ADC;#", 10000, 0, 1000000);
-    m_energySpectraInitialized = true;
+    m_energySpectraInitialised = true;
   }
 
-  if (m_initialized) return true; // To prevent multiple initializations
+  if (m_Initialised) return true; // To prevent multiple initializations
 
   mt_ref_time.resize(MTObject::getThreadsNumber(), 0);
 
@@ -554,7 +554,7 @@ bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeC
   if (label_max == 0)
   {
     print("PLEASE LOAD THE ID FILE");
-    return (m_ok = m_initialized = false);
+    return (m_ok = m_Initialised = false);
   }
 
   m_timeshifts.resize(label_max, 0);
@@ -562,7 +562,7 @@ bool Timeshifts::Initialize(bool const & initializeRaw, bool const & initializeC
   m_edge_preferred_label.resize(label_max, false);
   m_nb_shifts_RF_peak.resize(label_max, 0);
 
-  return (m_ok = m_initialized = true);
+  return (m_ok = m_Initialised = true);
 }
 
 void Timeshifts::treatFolder(std::string const & folder, int const & nb_files)
@@ -594,7 +594,7 @@ void Timeshifts::treatFolder(std::string const & folder, int const & nb_files)
 bool Timeshifts::calculate(std::string const & folder, int const & nb_files)
 {
   Timer timer;
-  if (!this -> Initialize(true,false)) 
+  if (!this -> Initialise(true,false)) 
   {
     print("Someting went wrong in the timeshifts calculation initialization...");
     return false;
@@ -621,7 +621,7 @@ bool Timeshifts::calculate(std::string const & folder, int const & nb_files)
 bool Timeshifts::verify(std::string const & folder, int const & nb_files)
 {
   Timer timer;
-  if (!this -> Initialize(false, true)) 
+  if (!this -> Initialise(false, true)) 
   {
     print("Something went wrong in the timeshifts initialization...");
     return false;

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="350" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="350" bodyend="-1"/>
+        <location file="lib/Analyse/Clovers.hpp" line="340" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="340" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_delayed_gate_1a7d7104c6298961f558dbe86e45c8e9dc" prot="private" static="no" mutable="no">
         <type><ref refid="_gate_8hpp_1aec153c0c98a059999caa4cfb803777c8" kindref="member">Gate</ref></type>
@@ -30,8 +30,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="352" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="352" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="334" endline="339">operator()</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="342" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="342" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="324" endline="329">operator()</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_delayed_gate_1abae41589bbf517cc6de956bf774f3cdb" prot="private" static="no" mutable="no">
         <type>float</type>
@@ -45,8 +45,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="351" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="351" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="334" endline="339">operator()</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="341" column="11" bodyfile="lib/Analyse/Clovers.hpp" bodystart="341" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="324" endline="329">operator()</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_clovers_1_1_delayed_gate_1a2b8ade0055f592263dc7ce0c146a94c1" prot="private" static="no" mutable="no">
         <type><ref refid="_gate_8hpp_1aec153c0c98a059999caa4cfb803777c8" kindref="member">Gate</ref></type>
@@ -60,8 +60,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="353" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="353" bodyend="-1"/>
-        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="334" endline="339">operator()</referencedby>
+        <location file="lib/Analyse/Clovers.hpp" line="343" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="343" bodyend="-1"/>
+        <referencedby refid="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" compoundref="_clovers_8hpp" startline="324" endline="329">operator()</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="333" column="5" bodyfile="lib/Analyse/Clovers.hpp" bodystart="333" bodyend="333"/>
+        <location file="lib/Analyse/Clovers.hpp" line="323" column="5" bodyfile="lib/Analyse/Clovers.hpp" bodystart="323" bodyend="323"/>
       </memberdef>
       <memberdef kind="function" id="class_clovers_1_1_delayed_gate_1a91c5e552a14d95e0801b8ac51944f6e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="341" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="341" bodyend="347"/>
+        <location file="lib/Analyse/Clovers.hpp" line="331" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="331" bodyend="337"/>
       </memberdef>
       <memberdef kind="function" id="class_clovers_1_1_delayed_gate_1a99b6bd95a46640581a2e8ed4db91336e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -114,11 +114,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Analyse/Clovers.hpp" line="334" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="334" bodyend="339"/>
-        <references refid="class_gate__t_1a6ece805d91b1c54d4b84cc36e652bc0f" compoundref="_gate_8hpp" startline="25" endline="25">Gate_t&lt; T &gt;::isIn</references>
-        <references refid="class_clovers_1_1_delayed_gate_1a7d7104c6298961f558dbe86e45c8e9dc" compoundref="_clovers_8hpp" startline="352">m_high_E_gate</references>
-        <references refid="class_clovers_1_1_delayed_gate_1abae41589bbf517cc6de956bf774f3cdb" compoundref="_clovers_8hpp" startline="351">m_low_E</references>
-        <references refid="class_clovers_1_1_delayed_gate_1a2b8ade0055f592263dc7ce0c146a94c1" compoundref="_clovers_8hpp" startline="353">m_low_E_gate</references>
+        <location file="lib/Analyse/Clovers.hpp" line="324" column="10" bodyfile="lib/Analyse/Clovers.hpp" bodystart="324" bodyend="329"/>
+        <references refid="class_gate__t_1a6ece805d91b1c54d4b84cc36e652bc0f" compoundref="_gate_8hpp" startline="30" endline="30">Gate_t&lt; T &gt;::isIn</references>
+        <references refid="class_clovers_1_1_delayed_gate_1a7d7104c6298961f558dbe86e45c8e9dc" compoundref="_clovers_8hpp" startline="342">m_high_E_gate</references>
+        <references refid="class_clovers_1_1_delayed_gate_1abae41589bbf517cc6de956bf774f3cdb" compoundref="_clovers_8hpp" startline="341">m_low_E</references>
+        <references refid="class_clovers_1_1_delayed_gate_1a2b8ade0055f592263dc7ce0c146a94c1" compoundref="_clovers_8hpp" startline="343">m_low_E_gate</references>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -139,7 +139,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="lib/Analyse/Clovers.hpp" line="330" column="3" bodyfile="lib/Analyse/Clovers.hpp" bodystart="331" bodyend="354"/>
+    <location file="lib/Analyse/Clovers.hpp" line="320" column="3" bodyfile="lib/Analyse/Clovers.hpp" bodystart="321" bodyend="344"/>
     <listofallmembers>
       <member refid="class_clovers_1_1_delayed_gate_1ad56e49d7480258ae67105b58e0624bac" prot="public" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>DelayedGate</name></member>
       <member refid="class_clovers_1_1_delayed_gate_1a730d8ada73e8b3337efcbf68c66b4a42" prot="private" virt="non-virtual"><scope>Clovers::DelayedGate</scope><name>m_high_E</name></member>

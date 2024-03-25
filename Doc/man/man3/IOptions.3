@@ -1,4 +1,4 @@
-.TH "IOptions" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "IOptions" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -44,6 +44,12 @@ IOptions \- IO parameters ///\&.
 .RI "bool \fBQ\fP = false"
 .br
 .ti -1c
+.RI "bool \fBq3\fP = false"
+.br
+.ti -1c
+.RI "bool \fBQ3\fP = false"
+.br
+.ti -1c
 .RI "bool \fBs\fP = false"
 .br
 .ti -1c
@@ -59,7 +65,7 @@ IO parameters ///\&.
 
 ReadIO options
 .PP
-l : label label ushort s : stamp absolute timestamp ps ULong64_t t : time relative timestamp ps Long64_t T : time2 relative timestamp ns float e : adc energy in ADC int E : nrj energy in keV float q : qdc2 energy qdc2 in ADC float Q : nrj2 energy qdc2 in keV float p : pileup pilepup bool 
+l : label label ushort s : stamp absolute timestamp ps ULong64_t t : time relative timestamp ps Long64_t T : time2 relative timestamp ns float e : adc energy in ADC int E : nrj energy in keV float q : qdc2 energy qdc2 in ADC float Q : nrj2 energy qdc2 in keV float 3 : qdc3 energy qdc3 in ADC float R : nrj3 energy qdc3 in keV float p : pileup pilepup bool 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "IOptions::IOptions ()\fC [inline]\fP"
@@ -83,6 +89,10 @@ l : label label ushort s : stamp absolute timestamp ps ULong64_t t : time relati
 .SS "bool IOptions::q = false"
 
 .SS "bool IOptions::Q = false"
+
+.SS "bool IOptions::q3 = false"
+
+.SS "bool IOptions::Q3 = false"
 
 .SS "bool IOptions::s = false"
 

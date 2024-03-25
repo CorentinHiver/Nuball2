@@ -106,7 +106,7 @@ void ParisCalib
 
   detectors.load("index_129.list");
 
-  MTObject::Initialize(nb_threads);
+  MTObject::Initialise(nb_threads);
   raw_spectra.resize(detectors.nbOfType(type));
   auto const & binning = detectors.ADCBin(type);
   for (size_t index = 0; index<detectors.nbOfType(type); index++)

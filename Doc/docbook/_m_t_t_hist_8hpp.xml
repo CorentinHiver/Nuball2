@@ -25,6 +25,8 @@ This graph shows which files directly or indirectly include this file:<para>
 <simplesect>
     <title>Classes    </title>
         <itemizedlist>
+            <listitem><para>class <link linkend="_class_m_t_t_hist_1_1_copy_error">MTTHist&lt; THist &gt;::CopyError</link></para>
+</listitem>
             <listitem><para>class <link linkend="_class_m_t_t_hist">MTTHist&lt; THist &gt;</link></para>
 
 <para>Multithreading wrapper for all THist spectra of root library. </para>
@@ -34,16 +36,46 @@ This graph shows which files directly or indirectly include this file:<para>
 <simplesect>
     <title>Typedefs    </title>
         <itemizedlist>
+            <listitem><para>template&lt;class THist &gt; </para><para>using <link linkend="__m_t_t_hist_8hpp_1a7831795ec71145ff20cd8444c58f24af">Map_MTTHist</link> = std::unordered_map&lt; int, <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &gt;</para>
+</listitem>
             <listitem><para>template&lt;class THist &gt; </para><para>using <link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link> = std::vector&lt; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &gt;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;class THist &gt; </para><para>std::ostream &amp; <link linkend="__m_t_t_hist_8hpp_1a0dd7e86329ae164eaad633c614352e41">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp;histo)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
 <section>
 <title>Typedef Documentation</title>
-<anchor xml:id="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e"/>    <section>
+<anchor xml:id="__m_t_t_hist_8hpp_1a7831795ec71145ff20cd8444c58f24af"/>    <section>
+    <title>Map_MTTHist</title>
+<indexterm><primary>Map_MTTHist</primary><secondary>MTTHist.hpp</secondary></indexterm>
+<indexterm><primary>MTTHist.hpp</primary><secondary>Map_MTTHist</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>using <link linkend="__m_t_t_hist_8hpp_1a7831795ec71145ff20cd8444c58f24af">Map_MTTHist</link> =  std::unordered_map&lt;int, <link linkend="_class_m_t_t_hist">MTTHist</link>&lt;THist&gt; &gt;</computeroutput></para>    </section><anchor xml:id="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e"/>    <section>
     <title>Vector_MTTHist</title>
 <indexterm><primary>Vector_MTTHist</primary><secondary>MTTHist.hpp</secondary></indexterm>
 <indexterm><primary>MTTHist.hpp</primary><secondary>Vector_MTTHist</secondary></indexterm>
 <computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>using <link linkend="__m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e">Vector_MTTHist</link> =  std::vector&lt;<link linkend="_class_m_t_t_hist">MTTHist</link>&lt;THist&gt; &gt;</computeroutput></para></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__m_t_t_hist_8hpp_1a0dd7e86329ae164eaad633c614352e41"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>MTTHist.hpp</secondary></indexterm>
+<indexterm><primary>MTTHist.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp; histo)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_m_t_t_hist_8hpp_a0dd7e86329ae164eaad633c614352e41_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
 </section>
 </section>

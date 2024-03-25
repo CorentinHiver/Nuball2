@@ -1,0 +1,41 @@
+.TH "is_container< T >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+is_container< T >
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <libCo\&.hpp>\fP
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static constexpr bool \fBvalue\fP = decltype(\fBtest\fP<T>(0))::value"
+.br
+.in -1c
+.SS "Static Private Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename > static std::false_type \fBtest\fP (\&.\&.\&.)"
+.br
+.ti -1c
+.RI "template<typename C > static auto \fBtest\fP (int) \-> decltype(std::begin(std::declval< C >()), std::end(std::declval< C >()), std::true_type())"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T > template<typename > static std::false_type \fBis_container\fP< T >::test ( \&.\&.\&.)\fC [static]\fP, \fC [private]\fP"
+
+.SS "template<typename T > template<typename C > static auto \fBis_container\fP< T >::test (int) \->  decltype(std::begin(std::declval< C >()), std::end(std::declval< C >()), std::true_type())\fC [static]\fP, \fC [private]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<typename T > constexpr bool \fBis_container\fP< T >::value = decltype(\fBtest\fP<T>(0))::value\fC [static]\fP, \fC [constexpr]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

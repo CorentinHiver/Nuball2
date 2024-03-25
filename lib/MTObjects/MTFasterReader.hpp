@@ -19,7 +19,7 @@
  * 
  * First, you'll need to activate the multithreading : 
  * 
- *        MTObject::Initialize(nb_threads)
+ *        MTObject::Initialise(nb_threads)
  * 
  * Then instanciate this class :
  * 
@@ -57,7 +57,7 @@
  * 
  *      int main()
  *      {
- *         MTObject::Initialize(n); // n being an appropriate number of threads.
+ *         MTObject::Initialise(n); // n being an appropriate number of threads.
  *         MTFasterReader reader(folder);
  *         Arg some_argument;
  *         reader.readRaw(function, some_argument);

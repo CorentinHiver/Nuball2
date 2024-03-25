@@ -96,8 +96,8 @@ Collaboration diagram for SpectraAlignator:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_spectra_alignator__coll__graph.png" border="0" usemap="#a_spectra_alignator_coll__map" alt="Collaboration graph"/></div>
 <map name="a_spectra_alignator_coll__map" id="a_spectra_alignator_coll__map">
-<area shape="rect" title=" " alt="" coords="5,95,136,121"/>
-<area shape="rect" href="class_spectra_co.html" title=" " alt="" coords="27,5,115,32"/>
+<area shape="rect" title=" " alt="" coords="5,97,136,124"/>
+<area shape="rect" href="class_spectra_co.html" title=" " alt="" coords="27,7,115,33"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -105,10 +105,14 @@ Collaboration diagram for SpectraAlignator:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1844e2814df35c43677ed678f79fc00d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_recalibration.html">Recalibration</a> const  &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a1844e2814df35c43677ed678f79fc00d">alignSpectra</a> (TH1 *_spectra, TH1 *spectra_output, int const &amp;degreesOfFreedom=3, double const &amp;energyThreshold=0)</td></tr>
 <tr class="separator:a1844e2814df35c43677ed678f79fc00d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed228999d9baba04b99e8542204e058b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#aed228999d9baba04b99e8542204e058b">newAlignement</a> (TH1 *_spectra, TH1 *spectra_output)</td></tr>
+<tr class="separator:aed228999d9baba04b99e8542204e058b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06e5ad929499d18d557fd5a37daf8897"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a06e5ad929499d18d557fd5a37daf8897">setBruteForce</a> (bool const &amp;brute_force=true)</td></tr>
 <tr class="separator:a06e5ad929499d18d557fd5a37daf8897"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2aad91050c99f92c1e217d4c886db883"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a2aad91050c99f92c1e217d4c886db883">setIterations</a> (int const &amp;iterations)</td></tr>
 <tr class="separator:a2aad91050c99f92c1e217d4c886db883"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77c3fc9994a3475f24daf5bcf8b0110e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a77c3fc9994a3475f24daf5bcf8b0110e">SpectraAlignator</a> () noexcept=default</td></tr>
+<tr class="separator:a77c3fc9994a3475f24daf5bcf8b0110e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f75d38f8f9dd676b72689f8adbe3be5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a1f75d38f8f9dd676b72689f8adbe3be5">SpectraAlignator</a> (TH1 *ref)</td></tr>
 <tr class="separator:a1f75d38f8f9dd676b72689f8adbe3be5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bac228fc1bc0ef5ad041966722642cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a6bac228fc1bc0ef5ad041966722642cd">writeChi2Spectra</a> (TFile *file)</td></tr>
@@ -122,8 +126,6 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ad36473470290fcb740440c8952e4b30e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49faa58fd7b8c2bc3a16e0dbc11c9bbe"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a49faa58fd7b8c2bc3a16e0dbc11c9bbe">m_chi2s</a></td></tr>
 <tr class="separator:a49faa58fd7b8c2bc3a16e0dbc11c9bbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcc20c4ad4370552aa2730ade1f2b74e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_minimisator.html">Minimisator</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#abcc20c4ad4370552aa2730ade1f2b74e">m_minimisator</a></td></tr>
-<tr class="separator:abcc20c4ad4370552aa2730ade1f2b74e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d2a1ca21ba9deeb943965dbdb51496a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a5d2a1ca21ba9deeb943965dbdb51496a">m_nb_iterations</a> = 20</td></tr>
 <tr class="separator:a5d2a1ca21ba9deeb943965dbdb51496a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a616ff75748e686a5a9bde689b9ec6a1e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_recalibration.html">Recalibration</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a616ff75748e686a5a9bde689b9ec6a1e">m_recals</a></td></tr>
@@ -137,9 +139,36 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a5098303e559bd1051c6758b2bf6bcf1a"><td class="memItemLeft" align="right" valign="top">TH2F *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_spectra_alignator.html#a5098303e559bd1051c6758b2bf6bcf1a">surface_chi2</a> = nullptr</td></tr>
 <tr class="separator:a5098303e559bd1051c6758b2bf6bcf1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd></dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a77c3fc9994a3475f24daf5bcf8b0110e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77c3fc9994a3475f24daf5bcf8b0110e">&#9670;&nbsp;</a></span>SpectraAlignator() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpectraAlignator::SpectraAlignator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1f75d38f8f9dd676b72689f8adbe3be5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f75d38f8f9dd676b72689f8adbe3be5">&#9670;&nbsp;</a></span>SpectraAlignator()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f75d38f8f9dd676b72689f8adbe3be5">&#9670;&nbsp;</a></span>SpectraAlignator() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +245,73 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_spectra_alignator_a1844e2814df35c43677ed678f79fc00d_cgraph.png" border="0" usemap="#aclass_spectra_alignator_a1844e2814df35c43677ed678f79fc00d_cgraph" alt=""/></div>
 <map name="aclass_spectra_alignator_a1844e2814df35c43677ed678f79fc00d_cgraph" id="aclass_spectra_alignator_a1844e2814df35c43677ed678f79fc00d_cgraph">
 <area shape="rect" title=" " alt="" coords="5,5,224,32"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="272,5,324,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="272,5,324,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aed228999d9baba04b99e8542204e058b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed228999d9baba04b99e8542204e058b">&#9670;&nbsp;</a></span>newAlignement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpectraAlignator::newAlignement </td>
+          <td>(</td>
+          <td class="paramtype">TH1 *&#160;</td>
+          <td class="paramname"><em>_spectra</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TH1 *&#160;</td>
+          <td class="paramname"><em>spectra_output</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd></dd></dl>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_spectra_alignator_aed228999d9baba04b99e8542204e058b_cgraph.png" border="0" usemap="#aclass_spectra_alignator_aed228999d9baba04b99e8542204e058b_cgraph" alt=""/></div>
+<map name="aclass_spectra_alignator_aed228999d9baba04b99e8542204e058b_cgraph" id="aclass_spectra_alignator_aed228999d9baba04b99e8542204e058b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,107,245,133"/>
+<area shape="rect" href="class_minimisator.html#a29123baa85c854b224ef5e93b6029c1d" title=" " alt="" coords="301,5,491,32"/>
+<area shape="rect" href="class_minimisator.html#a3c467eeb96f716414dbfb6f2348c6340" title=" " alt="" coords="303,411,489,437"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="909,157,961,184"/>
+<area shape="rect" href="class_minimisator.html#a3583b6db1e38e9d0342c8e417d7c67e6" title=" " alt="" coords="293,107,499,133"/>
+<area shape="rect" href="class_minimisator.html#a1b7709cb6a248889abf24b37adf6904b" title=" " alt="" coords="295,461,497,488"/>
+<area shape="rect" href="class_simplex.html#af9f387b740699fc83d561b06a5e8305a" title=" " alt="" coords="557,461,676,488"/>
+<area shape="rect" href="class_simplex.html#a4212e98efa0b1468955d32a51387f3fc" title=" " alt="" coords="549,563,685,589"/>
+<area shape="rect" href="print_8hpp.html#a7c50c0690489629965f74c4921570ce5" title="Requires #define DEBUG or &#45;DDEBUG in the compile line." alt="" coords="754,512,817,539"/>
+<area shape="rect" href="lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="737,664,834,691"/>
+<area shape="rect" href="class_vertice.html#ae4155cad8d004c954916882157c9375f" title=" " alt="" coords="563,664,670,691"/>
+<area shape="rect" href="class_simplex.html#aed93fc950fa50599b289d5ac9e3356c7" title=" " alt="" coords="563,765,671,792"/>
+<area shape="rect" href="class_simplex.html#a43aa87c378225a78bf764a3c049ed381" title=" " alt="" coords="563,208,670,235"/>
+<area shape="rect" href="class_vertice.html#a6a4e7b2f8b617f2153b2fc0f0742a09e" title=" " alt="" coords="551,259,683,285"/>
+<area shape="rect" href="class_simplex.html#a3840674dbc694d4796b28c088da4c02e" title=" " alt="" coords="547,309,687,336"/>
+<area shape="rect" href="files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="573,360,660,387"/>
+<area shape="rect" href="class_vertice.html#aad52a08bb2c5b6f92119d42956051924" title=" " alt="" coords="569,411,664,437"/>
+<area shape="rect" href="class_simplex.html#ae39ce6d0a47986ceabb9a76146a8225b" title=" " alt="" coords="562,613,671,640"/>
+<area shape="rect" href="lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="735,563,835,589"/>
+<area shape="rect" href="class_vertice.html#a93b6febeec367c7c2211eb1e34dcfce4" title=" " alt="" coords="735,107,836,133"/>
+<area shape="rect" href="string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="884,664,987,691"/>
+<area shape="rect" href="string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="1035,664,1141,691"/>
 </map>
 </div>
 
@@ -367,28 +462,6 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a id="abcc20c4ad4370552aa2730ade1f2b74e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abcc20c4ad4370552aa2730ade1f2b74e">&#9670;&nbsp;</a></span>m_minimisator</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="class_minimisator.html">Minimisator</a>&gt; SpectraAlignator::m_minimisator</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a5d2a1ca21ba9deeb943965dbdb51496a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d2a1ca21ba9deeb943965dbdb51496a">&#9670;&nbsp;</a></span>m_nb_iterations</h2>
 
@@ -522,7 +595,7 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>lib/Classes/<a class="el" href="_spectra_alignator_8hpp_source.html">SpectraAlignator.hpp</a></li>
+<li>lib/Analyse/<a class="el" href="_spectra_alignator_8hpp_source.html">SpectraAlignator.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

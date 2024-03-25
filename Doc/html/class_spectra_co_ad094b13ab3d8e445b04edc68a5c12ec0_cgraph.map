@@ -1,5 +1,9 @@
 <map id="SpectraCo::operator=" name="SpectraCo::operator=">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,168,32"/>
-<area shape="rect" id="node2" href="$class_spectra_co.html#ad357dfc02fbb9ad6fc308ecf07f07fea" title=" " alt="" coords="216,5,340,32"/>
-<area shape="rect" id="node3" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="388,5,485,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,168,83"/>
+<area shape="rect" id="node2" href="$class_spectra_co.html#ad357dfc02fbb9ad6fc308ecf07f07fea" title=" " alt="" coords="216,56,340,83"/>
+<area shape="rect" id="node3" href="$class_spectra_co.html#ac010001d3601d366b0573119a5d2be2a" title=" " alt="" coords="388,5,577,32"/>
+<area shape="rect" id="node4" href="$lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="433,56,533,83"/>
+<area shape="rect" id="node5" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="434,107,531,133"/>
+<area shape="rect" id="node6" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="625,107,728,133"/>
+<area shape="rect" id="node7" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="776,107,883,133"/>
 </map>

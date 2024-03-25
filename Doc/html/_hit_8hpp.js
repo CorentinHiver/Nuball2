@@ -15,6 +15,7 @@ var _hit_8hpp =
     [ "Time_ns_vec", "_hit_8hpp.html#a72badb0bc1d4963ea7e36056916cd6c6", null ],
     [ "Time_vec", "_hit_8hpp.html#a613beddb43860b3568c452fa6620510b", null ],
     [ "Timestamp", "_hit_8hpp.html#a36a1e53eff51015f34900948053c0d69", null ],
+    [ "TriggerHit", "_hit_8hpp.html#a1956dd48cc8db6b2ab4dae054752a2ae", null ],
     [ "ADC_cast", "_hit_8hpp.html#a42de29176eeb225c09486aa0dcac5362", null ],
     [ "Label_cast", "_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64", null ],
     [ "NRJ_cast", "_hit_8hpp.html#a394977782e3af344e009b96c7d5bec92", null ],

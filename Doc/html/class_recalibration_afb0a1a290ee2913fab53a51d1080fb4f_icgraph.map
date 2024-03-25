@@ -1,5 +1,9 @@
 <map id="Recalibration::a3" name="Recalibration::a3">
-<area shape="rect" id="node1" title=" " alt="" coords="185,31,317,57"/>
-<area shape="rect" id="node2" href="$class_recalibration.html#a126c31e5ccd9cc3e4efacc7ba82be9e9" title=" " alt="" coords="5,5,137,32"/>
-<area shape="rect" id="node3" href="$_spectra_alignator_8hpp.html#a1c2f6d6b9b8d19b513889e59666d3967" title=" " alt="" coords="22,56,121,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="668,56,800,83"/>
+<area shape="rect" id="node2" href="$class_recalibration.html#a126c31e5ccd9cc3e4efacc7ba82be9e9" title=" " alt="" coords="467,5,599,32"/>
+<area shape="rect" id="node3" href="$class_recalibration.html#a6ce90b10d69409fdbc385ba6f990e073" title=" " alt="" coords="445,56,620,83"/>
+<area shape="rect" id="node7" href="$_recalibration_8hpp.html#a1c2f6d6b9b8d19b513889e59666d3967" title=" " alt="" coords="483,107,582,133"/>
+<area shape="rect" id="node4" href="$class_recalibration.html#a020eb53732eef370a3938eef68c59b5f" title=" " alt="" coords="216,19,397,45"/>
+<area shape="rect" id="node5" href="$class_spectra_co.html#a085a0452438dbffc3452aed6733a9103" title=" " alt="" coords="223,93,390,120"/>
+<area shape="rect" id="node6" href="$class_spectra_co.html#a3e4d1435fa3a80662a8c4442464988e1" title=" " alt="" coords="5,93,168,120"/>
 </map>

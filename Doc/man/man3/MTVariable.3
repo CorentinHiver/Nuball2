@@ -1,4 +1,4 @@
-.TH "MTVariable< T >" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "MTVariable< T >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -13,6 +13,9 @@ MTVariable< T > \- UNUSED\&.
 
 .in +1c
 .ti -1c
+.RI "T const  & \fBfuse\fP ()"
+.br
+.ti -1c
 .RI "\fBMTVariable\fP ()"
 .br
 .ti -1c
@@ -24,6 +27,9 @@ MTVariable< T > \- UNUSED\&.
 .in +1c
 .ti -1c
 .RI "std::vector< T > \fBm_variables\fP"
+.br
+.ti -1c
+.RI "T \fBtotal\fP"
 .br
 .in -1c
 .SH "Detailed Description"
@@ -39,11 +45,15 @@ UNUSED\&.
 
 .SH "Member Function Documentation"
 .PP 
+.SS "template<class T > T const& \fBMTVariable\fP< T >::fuse ()\fC [inline]\fP"
+
 .SS "template<class T > void \fBMTVariable\fP< T >::resize (\fBsize_t\fP size)\fC [inline]\fP"
 
 .SH "Member Data Documentation"
 .PP 
 .SS "template<class T > std::vector<T> \fBMTVariable\fP< T >::m_variables\fC [private]\fP"
+
+.SS "template<class T > T \fBMTVariable\fP< T >::total\fC [private]\fP"
 
 
 .SH "Author"

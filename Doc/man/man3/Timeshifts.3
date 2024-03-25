@@ -1,13 +1,24 @@
-.TH "Timeshifts" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Timeshifts" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Timeshifts
+Timeshifts \- Calculates the time difference between all detectors and a reference detector\&.  
+
 .SH SYNOPSIS
 .br
 .PP
 .PP
 \fC#include <Timeshifts\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBEmptyError\fP"
+.br
+.ti -1c
+.RI "class \fBNotFoundError\fP"
+.br
+.in -1c
 .SS "Public Member Functions"
 
 .in +1c
@@ -21,10 +32,25 @@ Timeshifts
 .RI "bool \fBCheckParameters\fP ()"
 .br
 .ti -1c
+.RI "std::vector< \fBTime\fP > const  & \fBdata\fP () const"
+.br
+.ti -1c
+.RI "void \fBdT_with_biggest_peak_finder\fP ()"
+.br
+.ti -1c
+.RI "void \fBdT_with_biggest_peak_finder\fP (\fBLabel\fP const &label)"
+.br
+.ti -1c
 .RI "void \fBdT_with_raising_edge\fP (\fBdType\fP const &type)"
 .br
 .ti -1c
+.RI "void \fBdT_with_raising_edge\fP (\fBLabel\fP const &label)"
+.br
+.ti -1c
 .RI "void \fBdT_with_RF\fP (\fBdType\fP const &type)"
+.br
+.ti -1c
+.RI "void \fBdT_with_RF\fP (\fBLabel\fP const &label)"
 .br
 .ti -1c
 .RI "std::vector< \fBTime\fP > const  & \fBget\fP () const"
@@ -44,6 +70,9 @@ Timeshifts
 .br
 .ti -1c
 .RI "\fBTime\fP const  & \fBoperator[]\fP (int const &i) const"
+.br
+.ti -1c
+.RI "void \fBperiodRF_ns\fP (int const &period_ns)"
 .br
 .ti -1c
 .RI "void \fBrebin\fP (std::string const &detector, \fBTime_ns\fP const &bin_size_ns)"
@@ -158,10 +187,16 @@ Timeshifts
 
 .in +1c
 .ti -1c
+.RI "bool \fBm_biggest_peak_finder\fP = false"
+.br
+.ti -1c
+.RI "std::vector< bool > \fBm_biggest_peak_finder_label\fP"
+.br
+.ti -1c
 .RI "std::vector< bool > \fBm_edge_preferred_label\fP"
 .br
 .ti -1c
-.RI "std::vector< \fBuchar\fP > \fBm_nb_shifts_RF_peak\fP"
+.RI "std::vector< int > \fBm_nb_shifts_RF_peak\fP"
 .br
 .ti -1c
 .RI "std::vector< bool > \fBm_RF_preferred_label\fP"
@@ -177,13 +212,16 @@ Timeshifts
 .RI "void \fBFill\fP (\fBEvent\fP const &event, \fBRF_Manager\fP &rf)"
 .br
 .ti -1c
-.RI "bool \fBInitialize\fP (bool const &initializeRaw=false, bool const &initializeCorrected=false)"
+.RI "bool \fBInitialise\fP (bool const &\fBInitialiseRaw\fP=false, bool const &\fBInitialiseCorrected\fP=false)"
 .br
 .ti -1c
-.RI "bool \fBInitializeCorrected\fP ()"
+.RI "bool \fBInitialiseCorrected\fP ()"
 .br
 .ti -1c
-.RI "bool \fBInitializeRaw\fP ()"
+.RI "void \fBInitialisePreferencesArrays\fP ()"
+.br
+.ti -1c
+.RI "bool \fBInitialiseRaw\fP ()"
 .br
 .ti -1c
 .RI "void \fBtreatFasterFile\fP (std::string const &filename)"
@@ -230,7 +268,7 @@ Timeshifts
 .RI "\fBMTTHist\fP< TH2F > \fBm_EnergyRef_bidim\fP"
 .br
 .ti -1c
-.RI "bool \fBm_energySpectraInitialized\fP = false"
+.RI "bool \fBm_energySpectraInitialised\fP = false"
 .br
 .ti -1c
 .RI "std::string \fBm_filename\fP = ''"
@@ -239,13 +277,25 @@ Timeshifts
 .RI "\fBFilesManager\fP \fBm_files\fP"
 .br
 .ti -1c
-.RI "bool \fBm_initialized\fP = false"
+.RI "bool \fBm_folder_treated\fP = false"
 .br
 .ti -1c
-.RI "bool \fBm_initializedCorrected\fP = false"
+.RI "\fBMTTHist\fP< TH1F > \fBm_histo_ref_VS_RF\fP"
 .br
 .ti -1c
-.RI "bool \fBm_initializedRaw\fP = false"
+.RI "\fBMTTHist\fP< TH2F > \fBm_histo_ref_vs_RF_VS_mult\fP"
+.br
+.ti -1c
+.RI "\fBVector_MTTHist\fP< TH1F > \fBm_histograms_VS_RF\fP"
+.br
+.ti -1c
+.RI "bool \fBm_Initialised\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_InitialisedCorrected\fP = false"
+.br
+.ti -1c
+.RI "bool \fBm_InitialisedRaw\fP = false"
 .br
 .ti -1c
 .RI "\fBulong\fP \fBm_max_hits\fP = \-1"
@@ -275,6 +325,12 @@ Timeshifts
 .RI "std::string \fBm_outRoot\fP = 'timeshifts\&.root'"
 .br
 .ti -1c
+.RI "bool \fBm_pref_arrays_init\fP = false"
+.br
+.ti -1c
+.RI "\fBTime\fP \fBm_rf_period\fP = 0"
+.br
+.ti -1c
 .RI "std::map< \fBdType\fP, bool > \fBm_RF_preferred\fP"
 .br
 .ti -1c
@@ -293,6 +349,15 @@ Timeshifts
 .RI "\fBMTTHist\fP< TH2F > \fBm_time_spectra_corrected_bidim\fP"
 .br
 .ti -1c
+.RI "\fBMTTHist\fP< TH2F > \fBm_time_spectra_corrected_bidim_RF\fP"
+.br
+.ti -1c
+.RI "\fBVector_MTTHist\fP< TH1F > \fBm_time_spectra_corrected_RF\fP"
+.br
+.ti -1c
+.RI "\fBMTTHist\fP< TH1F > \fBm_time_spectra_reference_RF_corrected\fP"
+.br
+.ti -1c
 .RI "std::vector< \fBTime\fP > \fBm_timeshifts\fP"
 .br
 .ti -1c
@@ -305,6 +370,9 @@ Timeshifts
 .RI "std::string \fBm_ts_outdir\fP = 'Timeshifts/'"
 .br
 .ti -1c
+.RI "bool \fBm_use_rf\fP = false"
+.br
+.ti -1c
 .RI "bool \fBm_verbose\fP = false"
 .br
 .ti -1c
@@ -314,6 +382,15 @@ Timeshifts
 .RI "std::vector< \fBTimestamp\fP > \fBmt_ref_time\fP"
 .br
 .in -1c
+.SH "Detailed Description"
+.PP 
+Calculates the time difference between all detectors and a reference detector\&. 
+
+
+.IP "\(bu" 2
+The timestamps and timeshifts are in picoseconds Goal 1 : calculate the time shifts between detectors How : Use one detector as reference, preferencially with good time resolution Create coincidences using the \fBCoincBuilder\fP event builder Calculate the difference in timestamp as follow : ref_time - detector_time Finally, output the (\&.dT) file containing the time shifts of all the detectors Also produces a \&.root file containing the raw and corrected time spectra\&. This module includes multithreading management using MTObject::parallelise_function(function, parameters\&.\&.\&.) Goal 2 : read a timeshift file (\&.dT) previously calculated by this module Goal 3 : apply the timeshifts by calling the operator[] : time_correct = time_shifted + timeshifts[label]; Example at the end 
+.PP
+
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "Timeshifts::Timeshifts ()\fC [inline]\fP"
@@ -360,9 +437,19 @@ Copy constructor\&.
 
 .SS "bool Timeshifts::CheckParameters ()\fC [inline]\fP"
 
+.SS "std::vector<\fBTime\fP> const& Timeshifts::data () const\fC [inline]\fP"
+
+.SS "void Timeshifts::dT_with_biggest_peak_finder ()\fC [inline]\fP"
+
+.SS "void Timeshifts::dT_with_biggest_peak_finder (\fBLabel\fP const & label)\fC [inline]\fP"
+
 .SS "void Timeshifts::dT_with_raising_edge (\fBdType\fP const & type)\fC [inline]\fP"
 
+.SS "void Timeshifts::dT_with_raising_edge (\fBLabel\fP const & label)\fC [inline]\fP"
+
 .SS "void Timeshifts::dT_with_RF (\fBdType\fP const & type)\fC [inline]\fP"
+
+.SS "void Timeshifts::dT_with_RF (\fBLabel\fP const & label)\fC [inline]\fP"
 
 .SS "void Timeshifts::Fill (\fBEvent\fP const & event, \fBRF_Manager\fP & rf)\fC [private]\fP"
 
@@ -377,11 +464,13 @@ Copy constructor\&.
 
 .SS "\fBTime\fP const& Timeshifts::get (int const & i) const\fC [inline]\fP"
 
-.SS "bool Timeshifts::Initialize (bool const & initializeRaw = \fCfalse\fP, bool const & initializeCorrected = \fCfalse\fP)\fC [private]\fP"
+.SS "bool Timeshifts::Initialise (bool const & InitialiseRaw = \fCfalse\fP, bool const & InitialiseCorrected = \fCfalse\fP)\fC [private]\fP"
 
-.SS "bool Timeshifts::InitializeCorrected ()\fC [private]\fP"
+.SS "bool Timeshifts::InitialiseCorrected ()\fC [private]\fP"
 
-.SS "bool Timeshifts::InitializeRaw ()\fC [private]\fP"
+.SS "void Timeshifts::InitialisePreferencesArrays ()\fC [private]\fP"
+
+.SS "bool Timeshifts::InitialiseRaw ()\fC [private]\fP"
 
 .SS "bool Timeshifts::load (std::string const & filename)"
 
@@ -392,6 +481,8 @@ Use this method to load timeshifts from a \&.dT file\&.
 .SS "\fBTimeshifts\fP& Timeshifts::operator= (\fBTimeshifts\fP const & timeshifts)\fC [inline]\fP"
 
 .SS "\fBTime\fP const& Timeshifts::operator[] (int const & i) const\fC [inline]\fP"
+
+.SS "void Timeshifts::periodRF_ns (int const & period_ns)\fC [inline]\fP"
 
 .SS "void Timeshifts::rebin (std::string const & detector, \fBTime_ns\fP const & bin_size_ns)\fC [inline]\fP"
 
@@ -597,6 +688,13 @@ It will print the fit parameters in the terminal
 
 .PP
 Used to create\&. 
+.PP
+\fBTodo\fP
+.RS 4
+caption
+.RE
+.PP
+
 .SS "bool Timeshifts::verify (std::string const & folder, int const & nb_files = \fC\-1\fP)"
 
 .PP
@@ -636,6 +734,10 @@ To write down the histograms\&.
 
 .SH "Member Data Documentation"
 .PP 
+.SS "bool Timeshifts::m_biggest_peak_finder = false"
+
+.SS "std::vector<bool> Timeshifts::m_biggest_peak_finder_label"
+
 .SS "std::map<\fBdType\fP, \fBTime_ns\fP> Timeshifts::m_bins_per_ns\fC [private]\fP"
 \fBInitial value:\fP
 .PP
@@ -647,7 +749,7 @@ To write down the histograms\&.
     {"bgo",    2\&.}, 
     {"eden",   2\&.}, 
     {"RF",    10\&.}, 
-    {"paris", 10\&.}, 
+    {"paris",  5\&.}, 
     {"dssd",  0\&.5}
   }
 .fi
@@ -678,17 +780,25 @@ To write down the histograms\&.
 
 .SS "\fBMTTHist\fP<TH2F> Timeshifts::m_EnergyRef_bidim\fC [private]\fP"
 
-.SS "bool Timeshifts::m_energySpectraInitialized = false\fC [private]\fP"
+.SS "bool Timeshifts::m_energySpectraInitialised = false\fC [private]\fP"
 
 .SS "std::string Timeshifts::m_filename = ''\fC [private]\fP"
 
 .SS "\fBFilesManager\fP Timeshifts::m_files\fC [private]\fP"
 
-.SS "bool Timeshifts::m_initialized = false\fC [private]\fP"
+.SS "bool Timeshifts::m_folder_treated = false\fC [private]\fP"
 
-.SS "bool Timeshifts::m_initializedCorrected = false\fC [private]\fP"
+.SS "\fBMTTHist\fP<TH1F> Timeshifts::m_histo_ref_VS_RF\fC [private]\fP"
 
-.SS "bool Timeshifts::m_initializedRaw = false\fC [private]\fP"
+.SS "\fBMTTHist\fP<TH2F> Timeshifts::m_histo_ref_vs_RF_VS_mult\fC [private]\fP"
+
+.SS "\fBVector_MTTHist\fP<TH1F> Timeshifts::m_histograms_VS_RF\fC [private]\fP"
+
+.SS "bool Timeshifts::m_Initialised = false\fC [private]\fP"
+
+.SS "bool Timeshifts::m_InitialisedCorrected = false\fC [private]\fP"
+
+.SS "bool Timeshifts::m_InitialisedRaw = false\fC [private]\fP"
 
 .SS "\fBulong\fP Timeshifts::m_max_hits = \-1\fC [private]\fP"
 
@@ -698,7 +808,7 @@ To write down the histograms\&.
 
 .SS "int Timeshifts::m_nb_detectors = 0\fC [private]\fP"
 
-.SS "std::vector<\fBuchar\fP> Timeshifts::m_nb_shifts_RF_peak"
+.SS "std::vector<int> Timeshifts::m_nb_shifts_RF_peak"
 
 .SS "bool Timeshifts::m_ok = false\fC [private]\fP"
 
@@ -709,6 +819,10 @@ To write down the histograms\&.
 .SS "\fBPath\fP Timeshifts::m_outPath\fC [private]\fP"
 
 .SS "std::string Timeshifts::m_outRoot = 'timeshifts\&.root'\fC [private]\fP"
+
+.SS "bool Timeshifts::m_pref_arrays_init = false\fC [private]\fP"
+
+.SS "\fBTime\fP Timeshifts::m_rf_period = 0\fC [private]\fP"
 
 .SS "std::map<\fBdType\fP, bool> Timeshifts::m_RF_preferred\fC [private]\fP"
 \fBInitial value:\fP
@@ -737,6 +851,12 @@ To write down the histograms\&.
 
 .SS "\fBMTTHist\fP<TH2F> Timeshifts::m_time_spectra_corrected_bidim\fC [private]\fP"
 
+.SS "\fBMTTHist\fP<TH2F> Timeshifts::m_time_spectra_corrected_bidim_RF\fC [private]\fP"
+
+.SS "\fBVector_MTTHist\fP<TH1F> Timeshifts::m_time_spectra_corrected_RF\fC [private]\fP"
+
+.SS "\fBMTTHist\fP<TH1F> Timeshifts::m_time_spectra_reference_RF_corrected\fC [private]\fP"
+
 .SS "std::vector<\fBTime\fP> Timeshifts::m_timeshifts\fC [private]\fP"
 
 .SS "\fBTime\fP Timeshifts::m_timewindow = \fBTime_cast\fP(\fBm_timewindow_ns\fP*1000)\fC [private]\fP"
@@ -744,6 +864,8 @@ To write down the histograms\&.
 .SS "\fBTime_ns\fP Timeshifts::m_timewindow_ns = \fBTime_ns_cast\fP(1500)\fC [private]\fP"
 
 .SS "std::string Timeshifts::m_ts_outdir = 'Timeshifts/'\fC [private]\fP"
+
+.SS "bool Timeshifts::m_use_rf = false\fC [private]\fP"
 
 .SS "bool Timeshifts::m_verbose = false\fC [private]\fP"
 

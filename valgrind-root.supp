@@ -353,7 +353,7 @@
    TEmulatedCollectionProxy configuration item
    Memcheck:Leak
    fun:_Znw?
-   fun:_ZN24TEmulatedCollectionProxy12InitializeExEv
+   fun:_ZN24TEmulatedCollectionProxy12InitialiseExEv
 }
 
 
@@ -1016,42 +1016,42 @@
 ######## ROOT TObject on heap
 
 {
-   TObject::TObject() uses uninitialized value
+   TObject::TObject() uses unInitialised value
    Memcheck:Cond
    fun:_ZN7TObjectC1Ev
    ...
 }
 
 {
-   TObject::TObject() uses uninitialized value
+   TObject::TObject() uses unInitialised value
    Memcheck:Cond
    fun:_ZN7TObjectC2Ev
    ...
 }
 
 {
-   TObject::TObject() uses uninitialized value
+   TObject::TObject() uses unInitialised value
    Memcheck:Cond
    fun:TObject
    ...
 }
 
 {
-   TObject::TObject(const TObject&) uses uninitialized value
+   TObject::TObject(const TObject&) uses unInitialised value
    Memcheck:Cond
    fun:_ZN7TObjectC1ERKS_
    ...
 }
 
 {
-   TObject::TObject(const TObject&) uses uninitialized value
+   TObject::TObject(const TObject&) uses unInitialised value
    Memcheck:Cond
    fun:_ZN7TObjectC2ERKS_
    ...
 }
 
 {
-   TObject::TObject(const TObject&) uses uninitialized value
+   TObject::TObject(const TObject&) uses unInitialised value
    Memcheck:Cond
    fun:TObject
    ...
@@ -1334,7 +1334,7 @@
    match-leak-kinds: possible
    fun:_Znwm
    ...
-   fun:_ZL21EmitMemberInitializerRN5clang7CodeGen15CodeGenFunctionEPKNS_13CXXRecordDeclEPNS_18CXXCtorInitializerEPKNS_18CXXConstructorDeclERNS0_15FunctionArgListE
+   fun:_ZL21EmitMemberInitialiserRN5clang7CodeGen15CodeGenFunctionEPKNS_13CXXRecordDeclEPNS_18CXXCtorInitialiserEPKNS_18CXXConstructorDeclERNS0_15FunctionArgListE
 }
 
 {
@@ -1611,7 +1611,7 @@
 }
 
 {
-   cling pointer checker on uninitialized memory (ROOT-8144)
+   cling pointer checker on unInitialised memory (ROOT-8144)
    Memcheck:Param
    msync(start)
    ...
@@ -1620,7 +1620,7 @@
 }
 
 {
-   cling pointer checker on uninitialized memory (ROOT-8144)
+   cling pointer checker on unInitialised memory (ROOT-8144)
    Memcheck:Param
    msync(start)
    ...

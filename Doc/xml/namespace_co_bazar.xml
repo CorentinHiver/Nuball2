@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespace_co_bazar" kind="namespace" language="C++">
+    <compoundname>CoBazar</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespace_co_bazar_1a5a85829d9980d46c04dfe66c15ca395a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoBazar::long_progress_bar</definition>
+        <argsstring>(float const &amp;progress_procent)</argsstring>
+        <name>long_progress_bar</name>
+        <param>
+          <type>float const &amp;</type>
+          <declname>progress_procent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="667" column="8" bodyfile="lib/libCo.hpp" bodystart="667" bodyend="667"/>
+        <references refid="namespace_co_bazar_1a24cffd290231166ac66b8c2fc0f9ee65" compoundref="lib_co_8hpp" startline="652" endline="664">progress_bar</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_bazar_1a030309d1b093093b5fd48a5f7734018e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double CoBazar::mean</definition>
+        <argsstring>(ARGS... args)</argsstring>
+        <name>mean</name>
+        <param>
+          <type>ARGS...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="470" column="17" bodyfile="lib/libCo.hpp" bodystart="470" bodyend="470"/>
+        <references refid="lib_co_8hpp_1a2052317e56aa118e7ffcdb2e398f551c" compoundref="lib_co_8hpp" startline="221" endline="221">double_cast</references>
+        <references refid="namespace_co_bazar_1a1e08093363d904d8875d5907b48464f0" compoundref="lib_co_8hpp" startline="467" endline="467">sum</references>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="893" endline="1007">Timeshifts::analyse</referencedby>
+        <referencedby refid="class_biggest_peak_fitter_1a645977fa8bd708c4e9137d926c3136f0" compoundref="lib_root_8hpp" startline="1456" endline="1492">BiggestPeakFitter::BiggestPeakFitter</referencedby>
+        <referencedby refid="class_peak_fitter_1a47cd33d5de6c62965edb2e34c49a6118" compoundref="lib_root_8hpp" startline="1362" endline="1418">PeakFitter::fit</referencedby>
+        <referencedby refid="namespacerandom_co_1ab5d8d1aa5c84a6ca5d44c2e60cfc8c8d" compoundref="random_co_8hpp" startline="44" endline="48">randomCo::gaussian</referencedby>
+        <referencedby refid="lib_root_8hpp_1accfb8dfb6ee42fa6845013a0cf121ac1" compoundref="lib_root_8hpp" startline="194" endline="240">getMeanPeak</referencedby>
+        <referencedby refid="class_spectra_co_1a4e9df1dfede067a7a241e1209a01f4bc" compoundref="_spectra_co_8hpp" startline="699" endline="711">SpectraCo::meanInRange</referencedby>
+        <referencedby refid="class_spectra_co_1a6c50f289318ed3a37218be1b2485a0aa" compoundref="_spectra_co_8hpp" startline="687" endline="697">SpectraCo::meanInRangeBin</referencedby>
+        <referencedby refid="class_calibrator_1aa0fff626078ec3cd2e453c5cf6681462" compoundref="_calibrator_8hpp" startline="421" endline="720">Calibrator::peakFinder</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_bazar_1a24cffd290231166ac66b8c2fc0f9ee65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoBazar::progress_bar</definition>
+        <argsstring>(float const &amp;progress_procent, int width=50)</argsstring>
+        <name>progress_bar</name>
+        <param>
+          <type>float const &amp;</type>
+          <declname>progress_procent</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>width</declname>
+          <defval>50</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="652" column="8" bodyfile="lib/libCo.hpp" bodystart="652" bodyend="664"/>
+        <references refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" compoundref="lib_co_8hpp" startline="209" endline="209">int_cast</references>
+        <referencedby refid="namespace_co_bazar_1a5a85829d9980d46c04dfe66c15ca395a" compoundref="lib_co_8hpp" startline="667" endline="667">long_progress_bar</referencedby>
+        <referencedby refid="namespace_co_bazar_1a10289b78525ae5d515e9d00181ecee64" compoundref="lib_co_8hpp" startline="666" endline="666">short_progress_bar</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_bazar_1a10289b78525ae5d515e9d00181ecee64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void CoBazar::short_progress_bar</definition>
+        <argsstring>(float const &amp;progress_procent)</argsstring>
+        <name>short_progress_bar</name>
+        <param>
+          <type>float const &amp;</type>
+          <declname>progress_procent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="666" column="8" bodyfile="lib/libCo.hpp" bodystart="666" bodyend="666"/>
+        <references refid="namespace_co_bazar_1a24cffd290231166ac66b8c2fc0f9ee65" compoundref="lib_co_8hpp" startline="652" endline="664">progress_bar</references>
+      </memberdef>
+      <memberdef kind="function" id="namespace_co_bazar_1a1e08093363d904d8875d5907b48464f0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>ARGS</declname>
+            <defname>ARGS</defname>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T CoBazar::sum</definition>
+        <argsstring>(T i, ARGS... args)</argsstring>
+        <name>sum</name>
+        <param>
+          <type>T</type>
+          <declname>i</declname>
+        </param>
+        <param>
+          <type>ARGS...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/libCo.hpp" line="467" column="12" bodyfile="lib/libCo.hpp" bodystart="467" bodyend="467"/>
+        <referencedby refid="namespace_co_bazar_1a030309d1b093093b5fd48a5f7734018e" compoundref="lib_co_8hpp" startline="470" endline="470">mean</referencedby>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/libCo.hpp" line="464" column="1"/>
+  </compounddef>
+</doxygen>

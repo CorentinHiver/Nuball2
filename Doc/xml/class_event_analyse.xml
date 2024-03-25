@@ -64,7 +64,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Analyse/EventAnalyse.hpp" line="12" column="3" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="26" bodyend="34"/>
-        <references refid="class_paris_1ac0479d995c00e0ee8170092cdf1b5f51" compoundref="_paris_8hpp" startline="93" endline="101">Paris::Initialize</references>
+        <references refid="class_paris_1a2d405a64e0e65a845a2723bb3b2af697" compoundref="_paris_8hpp" startline="105" endline="113">Paris::Initialise</references>
         <references refid="class_event_analyse_1a74a8eeac3500a62a467f8ce6d8dd97b8" compoundref="_event_analyse_8hpp" startline="22">m_Paris</references>
       </memberdef>
       <memberdef kind="function" id="class_event_analyse_1ad00469e7b023e281fdf18ea416e9cae8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -125,8 +125,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Analyse/EventAnalyse.hpp" line="14" column="8" bodyfile="lib/Analyse/EventAnalyse.hpp" bodystart="36" bodyend="50"/>
-        <references refid="class_clovers_1a523aad5d019f23144292c0e23067a43b" compoundref="_clovers_8hpp" startline="606" endline="630">Clovers::Analyse</references>
-        <references refid="class_paris_1ac6fb6d9310b0dd298ebf10862497954a" compoundref="_paris_8hpp" startline="115" endline="119">Paris::Analyse</references>
+        <references refid="class_clovers_1a523aad5d019f23144292c0e23067a43b" compoundref="_clovers_8hpp" startline="593" endline="617">Clovers::Analyse</references>
+        <references refid="class_paris_1ac6fb6d9310b0dd298ebf10862497954a" compoundref="_paris_8hpp" startline="127" endline="131">Paris::Analyse</references>
         <references refid="_detectors_8hpp_1a3148345147f51e96aaa73e5d9f8e9d93">isDSSD</references>
         <references refid="_detectors_8hpp_1a82c5910e3b4f178c276c8b888c5ac162">isParis</references>
         <references refid="class_event_analyse_1a511c0ce19d51b95aed1c3ebf7f69eca0" compoundref="_event_analyse_8hpp" startline="21">m_Clovers</references>

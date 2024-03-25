@@ -1,5 +1,6 @@
 <map id="SpectraCo::size" name="SpectraCo::size">
-<area shape="rect" id="node1" title=" " alt="" coords="241,35,364,61"/>
-<area shape="rect" id="node2" href="$class_minimisator.html#a92ceedc5d8e612ed8515faf6657c99a3" title=" " alt="" coords="32,5,167,32"/>
-<area shape="rect" id="node3" href="$class_minimisator.html#a9111d4088cf501a73b3472dc4565b4e3" title=" " alt="" coords="5,57,193,98"/>
+<area shape="rect" id="node1" title=" " alt="" coords="221,64,344,91"/>
+<area shape="rect" id="node2" href="$class_spectra_co.html#aecb46bfbd2968e90d0ffd6d5848ca8b4" title="Calculates the chi2 between this spectra and another one." alt="" coords="28,5,151,32"/>
+<area shape="rect" id="node3" href="$class_objective_function_chi2.html#ab9abe6ab2b65aa87d805b9866044eaed" title=" " alt="" coords="5,57,173,98"/>
+<area shape="rect" id="node4" href="$class_spectra_co.html#a46fdc41ee93d910d1e667c4715e8eb9e" title=" " alt="" coords="8,123,171,149"/>
 </map>

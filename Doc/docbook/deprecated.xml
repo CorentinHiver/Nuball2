@@ -2,9 +2,53 @@
 <section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_deprecated" xml:lang="en-US">
 
 <para><variablelist>
+<varlistentry><term>Member <link linkend="_namespace_co_analyse_1acb07ede224cab3e9289d25c72c099b24">CoAnalyse::extractBackgroundArray</link>  (std::vector&lt; double &gt; &amp;source, int const &amp;nsmooth=10)</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000007"/>  </para>
+</listitem></varlistentry>
+<varlistentry><term>Member <link linkend="_namespace_co_analyse_1accb0147ca7573fc7dade0af93673a4e3">CoAnalyse::extractBackgroundArray</link>  (TH1F *histo, int const &amp;nsmooth=10)</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000008"/>  </para>
+</listitem></varlistentry>
+<varlistentry><term>Member <link linkend="_namespace_co_analyse_1a2a89fce5d95da5f0448d4a9fba93a108">CoAnalyse::removeRandomBidim</link>  (TH2 *matrix, int iterations=1, bool save_intermediate=false, ProjectionsBins projectionsY={{}}, ProjectionsBins projectionsX={{}})</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000006"/>  </para>
+</listitem></varlistentry>
+<varlistentry><term>Member <link linkend="_class_cobalt_calorimeter_1aceaa8e906e0257f450799026ec2269ca">CobaltCalorimeter::launchFaster</link>  (std::string const &amp;foldername, int nb_files=-1)</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000009"/>  </para>
+</listitem></varlistentry>
+<varlistentry><term>Member <link linkend="_class_cobalt_calorimeter_1a87cee37be1d91e747760bb6555e24bc8">CobaltCalorimeter::work</link>  (<link linkend="_class_hit">Hit</link> &amp;hit, <link linkend="_class_alignator">Alignator</link> &amp;reader)</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000010"/>  </para>
+</listitem></varlistentry>
+<varlistentry><term>Member <link linkend="_class_faster2_root_1ad07b97d280479aabc26e04d920726ddb">Faster2Root::Faster2Root</link>  (<link linkend="_class_path">Path</link> const &amp;inputFolder, <link linkend="_class_path">Path</link> const &amp;outputFolder, int const &amp;nb_files=-1, bool const &amp;buildEvents=false)</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000011"/>  </para>
+</listitem></varlistentry>
 <varlistentry><term>Member <link linkend="_class_faster_reader_1a152cfc9a0973c4a754e248c3e0326bea">FasterReader::getHit</link>  () const</term>
 <listitem>
-<para><anchor xml:id="_deprecated_1_deprecated000001"/>Get the current <link linkend="_class_hit">Hit</link> </para>
+<para><anchor xml:id="_deprecated_1_deprecated000003"/>Get the current <link linkend="_class_hit">Hit</link>  </para>
+</listitem></varlistentry>
+<varlistentry><term>Member <link linkend="_class_manip_1aba047d84e5c3eaff3640c2ed8f31aaea">Manip::setDataPath</link>  (std::string const &amp;datapath)</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000004"/>Set the path of the list file containing the list of folders  </para>
+</listitem></varlistentry>
+<varlistentry><term>Member <link linkend="_class_manip_1a7f2aa2947cd843abecac34300b6da94e">Manip::setManipName</link>  (std::string const &amp;manipname)</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000005"/>Set the name of the folder inside the datapath containing the list file containing the list of folders  </para>
+</listitem></varlistentry>
+<varlistentry><term>Class <link linkend="_class_spectra_alignator">SpectraAlignator</link>  </term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000001"/>  </para>
+</listitem></varlistentry>
+<varlistentry><term>Member <link linkend="_class_spectra_alignator_1aed228999d9baba04b99e8542204e058b">SpectraAlignator::newAlignement</link>  (TH1 *_spectra, TH1 *spectra_output)</term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000002"/>  </para>
+</listitem></varlistentry>
+<varlistentry><term>Class <link linkend="_class_static_vector">StaticVector&lt; T &gt;</link>  </term>
+<listitem>
+<para><anchor xml:id="_deprecated_1_deprecated000012"/>With optimisation option, std::vector is almost as efficient as this class ... </para>
 </listitem></varlistentry>
 </variablelist>
 </para>

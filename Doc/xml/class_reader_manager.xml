@@ -9,7 +9,7 @@
         <definition>std::string ReaderManager::m_currentFile</definition>
         <argsstring></argsstring>
         <name>m_currentFile</name>
-        <initializer>= &quot;&quot;</initializer>
+        <Initialiser>= &quot;&quot;</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -25,7 +25,7 @@
         <definition>Int_t ReaderManager::m_filesCursor</definition>
         <argsstring></argsstring>
         <name>m_filesCursor</name>
-        <initializer>= 0</initializer>
+        <Initialiser>= 0</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>

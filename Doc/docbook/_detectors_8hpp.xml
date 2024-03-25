@@ -29,6 +29,10 @@ This graph shows which files directly or indirectly include this file:<para>
 
 <para>Loads the ID file and fills lookup tables. </para>
 </listitem>
+            <listitem><para>class <link linkend="_class_detectors_1_1_empty_error">Detectors::EmptyError</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_class_detectors_1_1_error">Detectors::Error</link></para>
+</listitem>
         </itemizedlist>
 </simplesect>
 <simplesect>
@@ -58,9 +62,11 @@ This graph shows which files directly or indirectly include this file:<para>
 </listitem>
             <listitem><para>std::vector&lt; <link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link> &gt; <link linkend="__detectors_8hpp_1a13f8fc40b8957fe11c059d8d17523704">labelToGecrystal</link> (<link linkend="__detectors_8hpp_1a66ffad8e00f3e94ca2040082469213c6">SIZE_LOOKUP</link>, 0)</para>
 </listitem>
+            <listitem><para>std::map&lt; <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link>, TH1F * &gt; <link linkend="__detectors_8hpp_1ae343a2d2d22d862f6ac7ae10ba1b3d41">loadFormattedTH1F</link> (TFile *file)</para>
+</listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a54161053f7c12fa7dd7bddf119708644">Ints</link> <link linkend="__detectors_8hpp_1af8a018699aa5d8544bc4877f40463a5a">m_index</link> (<link linkend="__detectors_8hpp_1a66ffad8e00f3e94ca2040082469213c6">SIZE_LOOKUP</link>,-1)</para>
 </listitem>
-            <listitem><para>std::ostream &amp; <link linkend="__detectors_8hpp_1ad6e008a36a12682ccf6a850ecc307187">operator&gt;&gt;</link> (std::ostream &amp;cout, <link linkend="_class_detectors">Detectors</link> const &amp;<link linkend="__detectors_8hpp_1a06939d30171afd1f13893e05454ed813">detectors</link>)</para>
+            <listitem><para>std::ostream &amp; <link linkend="__detectors_8hpp_1a2fa75cda21d89a0dcd5f8135c5a2c8bc">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_class_detectors">Detectors</link> const &amp;<link linkend="__detectors_8hpp_1a06939d30171afd1f13893e05454ed813">detectors</link>)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -164,7 +170,29 @@ This graph shows which files directly or indirectly include this file:<para>
     <title>labelToGecrystal()</title>
 <indexterm><primary>labelToGecrystal</primary><secondary>Detectors.hpp</secondary></indexterm>
 <indexterm><primary>Detectors.hpp</primary><secondary>labelToGecrystal</secondary></indexterm>
-<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; labelToGecrystal (<link linkend="__detectors_8hpp_1a66ffad8e00f3e94ca2040082469213c6">SIZE_LOOKUP</link> , 0 )</computeroutput></para>    </section><anchor xml:id="__detectors_8hpp_1af8a018699aa5d8544bc4877f40463a5a"/>    <section>
+<para><computeroutput>std::vector&lt;<link linkend="_lib_co_8hpp_1ae48ac2456c5ad6c956fef86e7bef3a21">uchar</link>&gt; labelToGecrystal (<link linkend="__detectors_8hpp_1a66ffad8e00f3e94ca2040082469213c6">SIZE_LOOKUP</link> , 0 )</computeroutput></para>    </section><anchor xml:id="__detectors_8hpp_1ae343a2d2d22d862f6ac7ae10ba1b3d41"/>    <section>
+    <title>loadFormattedTH1F()</title>
+<indexterm><primary>loadFormattedTH1F</primary><secondary>Detectors.hpp</secondary></indexterm>
+<indexterm><primary>Detectors.hpp</primary><secondary>loadFormattedTH1F</secondary></indexterm>
+<para><computeroutput>std::map&lt;<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link>, TH1F*&gt; loadFormattedTH1F (TFile * file)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_detectors_8hpp_ae343a2d2d22d862f6ac7ae10ba1b3d41_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="_detectors_8hpp_ae343a2d2d22d862f6ac7ae10ba1b3d41_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="__detectors_8hpp_1af8a018699aa5d8544bc4877f40463a5a"/>    <section>
     <title>m_index()</title>
 <indexterm><primary>m_index</primary><secondary>Detectors.hpp</secondary></indexterm>
 <indexterm><primary>Detectors.hpp</primary><secondary>m_index</secondary></indexterm>
@@ -177,11 +205,11 @@ This graph shows which files directly or indirectly include this file:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="__detectors_8hpp_1ad6e008a36a12682ccf6a850ecc307187"/>    <section>
-    <title>operator&gt;&gt;()</title>
-<indexterm><primary>operator&gt;&gt;</primary><secondary>Detectors.hpp</secondary></indexterm>
-<indexterm><primary>Detectors.hpp</primary><secondary>operator&gt;&gt;</secondary></indexterm>
-<para><computeroutput>std::ostream&amp; operator&gt;&gt; (std::ostream &amp; cout, <link linkend="_class_detectors">Detectors</link> const &amp; detectors)</computeroutput></para></section>
+    </section><anchor xml:id="__detectors_8hpp_1a2fa75cda21d89a0dcd5f8135c5a2c8bc"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>Detectors.hpp</secondary></indexterm>
+<indexterm><primary>Detectors.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_class_detectors">Detectors</link> const &amp; detectors)</computeroutput></para></section>
 </section>
 <section>
 <title>Variable Documentation</title>

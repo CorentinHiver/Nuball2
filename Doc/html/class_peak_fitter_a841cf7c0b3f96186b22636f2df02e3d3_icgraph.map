@@ -1,0 +1,5 @@
+<map id="PeakFitter::fit" name="PeakFitter::fit">
+<area shape="rect" id="node1" title="Allows one to fit a peak of a histogram in the range [low_edge, high_edge]." alt="" coords="216,42,325,69"/>
+<area shape="rect" id="node2" href="$class_biggest_peak_fitter.html#a645977fa8bd708c4e9137d926c3136f0" title="Allows one to find the most significant peak in the range [low_edge, high_edge]." alt="" coords="14,5,159,47"/>
+<area shape="rect" id="node3" href="$class_peak_fitter.html#ac7184cc922b31d9c9c3ec80582f878c6" title=" " alt="" coords="5,71,168,98"/>
+</map>

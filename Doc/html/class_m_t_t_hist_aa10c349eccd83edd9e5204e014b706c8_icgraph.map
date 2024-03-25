@@ -1,0 +1,29 @@
+<map id="MTTHist::reset" name="MTTHist::reset">
+<area shape="rect" id="node1" title="Copy Initialiser." alt="" coords="1040,376,1157,403"/>
+<area shape="rect" id="node2" href="$struct_calibrator_1_1histograms.html#a4ec16b7a4a18e1f8988684e837bd4d4e" title=" " alt="" coords="800,114,967,155"/>
+<area shape="rect" id="node12" href="$class_clover_spectra.html#a8b3eedd382c6e2d0de9d4863efdccaea" title=" " alt="" coords="795,201,972,228"/>
+<area shape="rect" id="node15" href="$class_cobalt_calorimeter.html#ac6d58077dbdb6d0b166097146dc17083" title=" " alt="" coords="809,259,958,301"/>
+<area shape="rect" id="node18" href="$class_run_matrixator.html#a7254994e33c3a8a124a7fd4d67158a52" title=" " alt="" coords="794,325,973,352"/>
+<area shape="rect" id="node20" href="$class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="543,435,698,461"/>
+<area shape="rect" id="node24" href="$class_timeshifts.html#a1eaf31f737ca23292d92babdf2f21fd8" title=" " alt="" coords="775,427,992,453"/>
+<area shape="rect" id="node25" href="$class_timeshifts.html#abf99e2b89b819a92e4891d1c3da4e704" title=" " alt="" coords="792,477,975,504"/>
+<area shape="rect" id="node26" href="$class_m_t_t_hist.html#a649cb4ac9c9239c1bf76f3f8b508bea5" title="Construct a new MTTHist object and send the arguments directly to the underlying root histogramm." alt="" coords="814,528,953,555"/>
+<area shape="rect" id="node27" href="$class_m_t_t_hist.html#a6d6f72f095b93283ff97e9785781e3f8" title=" " alt="" coords="808,579,959,605"/>
+<area shape="rect" id="node3" href="$class_calibrator.html#ae81772276c36ab528b8147fa583356fd" title=" " alt="" coords="545,100,696,127"/>
+<area shape="rect" id="node4" href="$class_calibrator.html#a547f6f7bb37caef0b1a2e574422fb85f" title="Calculate calibration from .root histograms." alt="" coords="39,5,193,32"/>
+<area shape="rect" id="node5" href="$class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="35,68,197,95"/>
+<area shape="rect" id="node6" href="$class_calibrator.html#a00297f1bb253279bfa8bdce83fb81951" title=" " alt="" coords="275,151,467,177"/>
+<area shape="rect" id="node9" href="$class_calibrator.html#af067fee0c3a37336851ea63f2561b59f" title=" " alt="" coords="279,201,462,228"/>
+<area shape="rect" id="node11" href="$class_calibrator.html#a0d2a41f02b2c16409b58ce3ee4183792" title="Loads non&#45;calibrated spectra." alt="" coords="277,49,464,76"/>
+<area shape="rect" id="node7" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="39,195,193,221"/>
+<area shape="rect" id="node8" href="$class_calibrator.html#ac16a84c9c3244443c44a7c5de11ceb5f" title=" " alt="" coords="5,144,227,171"/>
+<area shape="rect" id="node10" href="$class_calibrator.html#aa45584fd0c25478ec98232ac18af3082" title=" " alt="" coords="10,245,222,272"/>
+<area shape="rect" id="node13" href="$class_clover_spectra.html#a83b3f64fea8bb8fb6743762ec72e2c04" title=" " alt="" coords="515,151,727,177"/>
+<area shape="rect" id="node14" href="$class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="532,201,709,228"/>
+<area shape="rect" id="node16" href="$class_cobalt_calorimeter.html#aceaa8e906e0257f450799026ec2269ca" title="legacy" alt="" coords="546,253,695,294"/>
+<area shape="rect" id="node17" href="$class_cobalt_calorimeter.html#ae731ee28c852d150fbf668c27604b8ed" title=" " alt="" coords="546,318,695,359"/>
+<area shape="rect" id="node19" href="$class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="549,384,693,411"/>
+<area shape="rect" id="node21" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="292,384,449,411"/>
+<area shape="rect" id="node22" href="$class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="287,435,454,461"/>
+<area shape="rect" id="node23" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="303,485,438,512"/>
+</map>

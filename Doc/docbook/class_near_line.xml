@@ -24,6 +24,11 @@
         </itemizedlist>
 </simplesect>
 <section>
+<title>Detailed Description</title>
+
+<para><para><link linkend="_todo_1_todo000018">Todo</link> </para></para>
+</section>
+<section>
 <title>Constructor &amp; Destructor Documentation</title>
 <anchor xml:id="_class_near_line_1adf3bc13e36dd295fc5668f08e81eaf32"/>    <section>
     <title>NearLine()</title>

@@ -1,0 +1,24 @@
+<map id="remove" name="remove">
+<area shape="rect" id="node1" title="Remove the first substr to the string if found." alt="" coords="960,217,1032,244"/>
+<area shape="rect" id="node2" href="$class_paris.html#a66745a02a04a8733eba514f319b1cc5e" title=" " alt="" coords="10,13,213,40"/>
+<area shape="rect" id="node3" href="$_detectors_8hpp.html#ae343a2d2d22d862f6ac7ae10ba1b3d41" title=" " alt="" coords="749,344,900,371"/>
+<area shape="rect" id="node7" href="$class_filename.html#a2d925b1dc8e2afbd09e729be3f3603b2" title=" " alt="" coords="737,217,912,244"/>
+<area shape="rect" id="node4" href="$class_calibrator.html#a0d2a41f02b2c16409b58ce3ee4183792" title="Loads non&#45;calibrated spectra." alt="" coords="503,449,689,476"/>
+<area shape="rect" id="node5" href="$class_calibrator.html#a547f6f7bb37caef0b1a2e574422fb85f" title="Calculate calibration from .root histograms." alt="" coords="283,500,437,527"/>
+<area shape="rect" id="node6" href="$class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="31,449,192,476"/>
+<area shape="rect" id="node8" href="$class_file.html#af4dee1c79bf496d505633211177c6ce3" title=" " alt="" coords="527,217,665,244"/>
+<area shape="rect" id="node9" href="$class_paris_bidim_angles.html#a904829a187c50059dda2d439ef0d6db1" title=" " alt="" coords="275,129,445,156"/>
+<area shape="rect" id="node11" href="$class_cobalt_calorimeter.html#a526f29997f55b17d33be2b87b30c7a76" title=" " alt="" coords="285,181,435,222"/>
+<area shape="rect" id="node14" href="$class_paris_bidim_angles.html#a0ca1c561f33bc79fc16b630ef4db9144" title=" " alt="" coords="272,79,448,105"/>
+<area shape="rect" id="node15" href="$class_faster2_histo.html#a8821f5ded43a6f91593962adbe4761b9" title="Write down a [out_filename].root file containing the spectra of the data." alt="" coords="288,297,432,324"/>
+<area shape="rect" id="node17" href="$class_calibration.html#a62f73bc45da4c1cd949b4ce32b630916" title="Writes down the calibration file." alt="" coords="293,247,427,273"/>
+<area shape="rect" id="node18" href="$class_timeshifts.html#ad19fdc64b6f8dd54e94665a7170a49a7" title="To write down the data." alt="" coords="279,348,441,375"/>
+<area shape="rect" id="node20" href="$class_calibrator.html#a5168dd14ccf0ad9629fa56185986d218" title=" " alt="" coords="281,399,439,425"/>
+<area shape="rect" id="node22" href="$class_calibrator.html#ace95da8167dc1202e913a75c553313b3" title=" " alt="" coords="265,28,455,55"/>
+<area shape="rect" id="node10" href="$class_paris_bidim_angles.html#a94f5dc80e2e164186840fdf9915e080e" title=" " alt="" coords="5,101,217,142"/>
+<area shape="rect" id="node12" href="$class_cobalt_calorimeter.html#aceaa8e906e0257f450799026ec2269ca" title="legacy" alt="" coords="37,231,186,273"/>
+<area shape="rect" id="node13" href="$class_cobalt_calorimeter.html#ae731ee28c852d150fbf668c27604b8ed" title=" " alt="" coords="37,166,186,207"/>
+<area shape="rect" id="node16" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="15,297,207,324"/>
+<area shape="rect" id="node19" href="$class_timeshifts.html#a79f5376cf7071865b264989ef46d886f" title="To write down the histograms and the data." alt="" coords="46,348,177,375"/>
+<area shape="rect" id="node21" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="35,399,188,425"/>
+</map>

@@ -1,7 +1,7 @@
 <map id="Faster2Histo::setOutFilename" name="Faster2Histo::setOutFilename">
-<area shape="rect" id="node1" title=" " alt="" coords="655,56,869,83"/>
-<area shape="rect" id="node2" href="$class_faster2_histo.html#ac20f36c0861a3af085c9546ca1325cc6" title=" " alt="" coords="440,5,599,32"/>
-<area shape="rect" id="node3" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="245,56,384,83"/>
-<area shape="rect" id="node5" href="$class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a" title=" " alt="" coords="432,107,607,133"/>
-<area shape="rect" id="node4" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,56,197,83"/>
+<area shape="rect" id="node1" title="Set the name of the output file." alt="" coords="655,56,869,83"/>
+<area shape="rect" id="node2" href="$class_faster2_histo.html#ac20f36c0861a3af085c9546ca1325cc6" title="Adds one file to convert at the list. Option &#45;f." alt="" coords="440,5,599,32"/>
+<area shape="rect" id="node3" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title="To launch the application after instanciation." alt="" coords="245,56,384,83"/>
+<area shape="rect" id="node5" href="$class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a" title="Adds [nb_files] files to convert inside of [folder]." alt="" coords="432,107,607,133"/>
+<area shape="rect" id="node4" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="5,56,197,83"/>
 </map>

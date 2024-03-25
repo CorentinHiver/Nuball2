@@ -39,6 +39,13 @@ This graph shows which files directly or indirectly include this file:<para>
 </listitem>
         </itemizedlist>
 </simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::ostream &amp; <link linkend="__timer_8hpp_1adcb647b9e338481f614d8538ad423343">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_class_timer">Timer</link> &amp;timer)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
 <section>
 <title>Typedef Documentation</title>
 <anchor xml:id="__timer_8hpp_1aa9d2a4957c5127a34317da8c2bfb5b63"/>    <section>
@@ -54,5 +61,13 @@ This graph shows which files directly or indirectly include this file:<para>
 <indexterm><primary>time_point_t</primary><secondary>Timer.hpp</secondary></indexterm>
 <indexterm><primary>Timer.hpp</primary><secondary>time_point_t</secondary></indexterm>
 <para><computeroutput>using <link linkend="__timer_8hpp_1a300388ee1344972cad8e8dfb87beef08">time_point_t</link> =  std::chrono::time_point&lt;<link linkend="__timer_8hpp_1a07f3627b9b4dc1205bb4cdbfcf2c9f17">hr_clock_t</link>&gt;</computeroutput></para></section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="__timer_8hpp_1adcb647b9e338481f614d8538ad423343"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>Timer.hpp</secondary></indexterm>
+<indexterm><primary>Timer.hpp</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream&amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_class_timer">Timer</link> &amp; timer)</computeroutput></para></section>
 </section>
 </section>

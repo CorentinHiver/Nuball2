@@ -1,4 +1,4 @@
-.TH "ParisCluster< nb_phoswitch >" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "ParisCluster< nb_phoswitch >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -18,10 +18,10 @@ ParisCluster< nb_phoswitch >
 .RI "void \fBFill\fP (\fBEvent\fP const &event, int const &i, \fBuchar\fP const &\fBlabel\fP)"
 .br
 .ti -1c
-.RI "void \fBInitialize\fP ()"
+.RI "void \fBInitialise\fP ()"
 .br
 .ti -1c
-.RI "void \fBInitializeBidims\fP ()"
+.RI "void \fBInitialiseBidims\fP ()"
 .br
 .ti -1c
 .RI "auto const  & \fBlabel\fP () const"
@@ -73,7 +73,7 @@ ParisCluster< nb_phoswitch >
 
 .in +1c
 .ti -1c
-.RI "static thread_local std::atomic< \fBuchar\fP > \fBglabel\fP = 0"
+.RI "static thread_local \fBuchar\fP \fBglabel\fP = 0"
 .br
 .in -1c
 .SH "Constructor & Destructor Documentation"
@@ -86,9 +86,9 @@ ParisCluster< nb_phoswitch >
 
 .SS "template<std::size_t nb_phoswitch> void \fBParisCluster\fP< nb_phoswitch >::Fill (\fBEvent\fP const & event, int const & i, \fBuchar\fP const & label)\fC [inline]\fP"
 
-.SS "template<std::size_t nb_phoswitch> void \fBParisCluster\fP< nb_phoswitch >::Initialize"
+.SS "template<std::size_t nb_phoswitch> void \fBParisCluster\fP< nb_phoswitch >::Initialise"
 
-.SS "template<std::size_t nb_phoswitch> void \fBParisCluster\fP< nb_phoswitch >::InitializeBidims"
+.SS "template<std::size_t nb_phoswitch> void \fBParisCluster\fP< nb_phoswitch >::InitialiseBidims"
 
 .SS "template<std::size_t nb_phoswitch> auto const& \fBParisCluster\fP< nb_phoswitch >::label () const\fC [inline]\fP"
 
@@ -102,7 +102,7 @@ ParisCluster< nb_phoswitch >
 
 .SH "Member Data Documentation"
 .PP 
-.SS "template<std::size_t nb_phoswitch> thread_local std::atomic< \fBuchar\fP > \fBParisCluster\fP< nb_phoswitch >::glabel = 0\fC [static]\fP, \fC [private]\fP"
+.SS "template<std::size_t nb_phoswitch> thread_local \fBuchar\fP \fBParisCluster\fP< nb_phoswitch >::glabel = 0\fC [static]\fP, \fC [private]\fP"
 
 .SS "template<std::size_t nb_phoswitch> \fBStaticVector\fP<\fBuchar\fP> \fBParisCluster\fP< nb_phoswitch >::Hits = \fBStaticVector\fP<\fBuchar\fP>(nb_phoswitch)"
 

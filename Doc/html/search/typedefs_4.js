@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fits_2722',['Fits',['../_calibration_8hpp.html#a3e47c22fe90cb9e403d05dc134b6a047',1,'Calibration.hpp']]]
+  ['hr_5fclock_5ft_3552',['hr_clock_t',['../_timer_8hpp.html#a07f3627b9b4dc1205bb4cdbfcf2c9f17',1,'Timer.hpp']]]
 ];

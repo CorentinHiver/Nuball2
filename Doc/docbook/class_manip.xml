@@ -3,6 +3,11 @@
 <title>Manip Class Reference</title>
 <indexterm><primary>Manip</primary></indexterm>
 <para>
+
+<para>Loads the list file containing the list of the names of the folder containing the faster files to convert. </para>
+ 
+</para>
+<para>
 <computeroutput>#include &lt;Manip.hpp&gt;</computeroutput>
 </para>
 Collaboration diagram for Manip:<para>
@@ -18,6 +23,8 @@ Collaboration diagram for Manip:<para>
     <title>Public Member Functions    </title>
         <itemizedlist>
             <listitem><para>void <link linkend="_class_manip_1a86ed3dd2dc6d3b8b7342a9552bc43e26">addFolder</link> (std::string const &amp;folder)</para>
+
+<para>Clears the previously set list of folders and replace it with folder. </para>
 </listitem>
             <listitem><para>auto const  &amp; <link linkend="_class_manip_1a41dfa1aac77e2340abf4f66934af0092">get</link> () const</para>
 </listitem>
@@ -31,9 +38,9 @@ Collaboration diagram for Manip:<para>
 </listitem>
             <listitem><para>bool <link linkend="_class_manip_1aa8e71952b07876be2dc56e180bdfe5f5">operator&gt;&gt;</link> (std::string &amp;string)</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_manip_1a6390322006ca8d8e7c350a3a915182e8">Print</link> ()</para>
-</listitem>
-            <listitem><para>bool <link linkend="_class_manip_1a4da401a6eb5a013a4150e01b81ecf853">readFile</link> ()</para>
+            <listitem><para>void <link linkend="_class_manip_1a4fe55690c18999195a5c4c3bec5e6b17">readFile</link> ()</para>
+
+<para>Reads the list file containing the list of folders. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_manip_1ad044eafeb71fda443f77377d44d652d0">readFile</link> (std::string const &amp;runs_file)</para>
 </listitem>
@@ -44,10 +51,14 @@ Collaboration diagram for Manip:<para>
             <listitem><para>void <link linkend="_class_manip_1af3f64608a08dd23d186f48e8c1beeba0">setFileName</link> (std::string const &amp;filename)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985">setFolder</link> (std::string const &amp;folder)</para>
+
+<para>Clears the previously set list of folders and replace it with folder. </para>
 </listitem>
             <listitem><para>void <link linkend="_class_manip_1a7f2aa2947cd843abecac34300b6da94e">setManipName</link> (std::string const &amp;manipname)</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_manip_1ab0813163118017c1064ec02f091356b8">setMT</link> (bool const &amp;MTOn=true)</para>
+
+<para>To allow several threads to work on different runs on parallel. </para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -75,6 +86,17 @@ Collaboration diagram for Manip:<para>
         </itemizedlist>
 </simplesect>
 <section>
+<title>Detailed Description</title>
+
+<para>Loads the list file containing the list of the names of the folder containing the faster files to convert. </para>
+
+
+
+<para><para><link linkend="_todo_1_todo000010">Todo</link> 
+<para>make it better !! </para>
+</para></para>
+</section>
+<section>
 <title>Constructor &amp; Destructor Documentation</title>
 <anchor xml:id="_class_manip_1a1f5a91129d20b2e3924c54bddde521f6"/>    <section>
     <title>Manip()<computeroutput>[1/2]</computeroutput></title>
@@ -101,7 +123,20 @@ Collaboration diagram for Manip:<para>
     <title>addFolder()</title>
 <indexterm><primary>addFolder</primary><secondary>Manip</secondary></indexterm>
 <indexterm><primary>Manip</primary><secondary>addFolder</secondary></indexterm>
-<para><computeroutput>void Manip::addFolder (std::string const &amp; folder)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_manip_1a41dfa1aac77e2340abf4f66934af0092"/>    <section>
+<para><computeroutput>void Manip::addFolder (std::string const &amp; folder)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Clears the previously set list of folders and replace it with folder. </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_manip_a86ed3dd2dc6d3b8b7342a9552bc43e26_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_manip_1a41dfa1aac77e2340abf4f66934af0092"/>    <section>
     <title>get()</title>
 <indexterm><primary>get</primary><secondary>Manip</secondary></indexterm>
 <indexterm><primary>Manip</primary><secondary>get</secondary></indexterm>
@@ -153,28 +188,19 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_manip_1a6390322006ca8d8e7c350a3a915182e8"/>    <section>
-    <title>Print()</title>
-<indexterm><primary>Print</primary><secondary>Manip</secondary></indexterm>
-<indexterm><primary>Manip</primary><secondary>Print</secondary></indexterm>
-<para><computeroutput>void Manip::Print ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_manip_a6390322006ca8d8e7c350a3a915182e8_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_manip_1a4da401a6eb5a013a4150e01b81ecf853"/>    <section>
+    </section><anchor xml:id="_class_manip_1a4fe55690c18999195a5c4c3bec5e6b17"/>    <section>
     <title>readFile()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>readFile</primary><secondary>Manip</secondary></indexterm>
 <indexterm><primary>Manip</primary><secondary>readFile</secondary></indexterm>
-<para><computeroutput>bool Manip::readFile ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<para><computeroutput>void Manip::readFile ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Reads the list file containing the list of folders. </para>
+</para>
+Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_manip_a4da401a6eb5a013a4150e01b81ecf853_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_manip_a4fe55690c18999195a5c4c3bec5e6b17_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -200,7 +226,11 @@ Here is the caller graph for this function:<para>
     <title>setDataPath()</title>
 <indexterm><primary>setDataPath</primary><secondary>Manip</secondary></indexterm>
 <indexterm><primary>Manip</primary><secondary>setDataPath</secondary></indexterm>
-<para><computeroutput>void Manip::setDataPath (std::string const &amp; datapath)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_manip_1af3f64608a08dd23d186f48e8c1beeba0"/>    <section>
+<para><computeroutput>void Manip::setDataPath (std::string const &amp; datapath)<computeroutput>[inline]</computeroutput></computeroutput></para>
+<para><para><link linkend="_deprecated_1_deprecated000004">Deprecated</link> 
+<para>Set the path of the list file containing the list of folders </para>
+</para></para>
+    </section><anchor xml:id="_class_manip_1af3f64608a08dd23d186f48e8c1beeba0"/>    <section>
     <title>setFileName()</title>
 <indexterm><primary>setFileName</primary><secondary>Manip</secondary></indexterm>
 <indexterm><primary>Manip</primary><secondary>setFileName</secondary></indexterm>
@@ -208,16 +238,32 @@ Here is the caller graph for this function:<para>
     <title>setFolder()</title>
 <indexterm><primary>setFolder</primary><secondary>Manip</secondary></indexterm>
 <indexterm><primary>Manip</primary><secondary>setFolder</secondary></indexterm>
-<para><computeroutput>void Manip::setFolder (std::string const &amp; folder)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_manip_1a7f2aa2947cd843abecac34300b6da94e"/>    <section>
+<para><computeroutput>void Manip::setFolder (std::string const &amp; folder)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Clears the previously set list of folders and replace it with folder. </para>
+</para>
+    </section><anchor xml:id="_class_manip_1a7f2aa2947cd843abecac34300b6da94e"/>    <section>
     <title>setManipName()</title>
 <indexterm><primary>setManipName</primary><secondary>Manip</secondary></indexterm>
 <indexterm><primary>Manip</primary><secondary>setManipName</secondary></indexterm>
-<para><computeroutput>void Manip::setManipName (std::string const &amp; manipname)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_manip_1ab0813163118017c1064ec02f091356b8"/>    <section>
+<para><computeroutput>void Manip::setManipName (std::string const &amp; manipname)<computeroutput>[inline]</computeroutput></computeroutput></para>
+<para><para><link linkend="_deprecated_1_deprecated000005">Deprecated</link> 
+<para>Set the name of the folder inside the datapath containing the list file containing the list of folders </para>
+</para></para>
+    </section><anchor xml:id="_class_manip_1ab0813163118017c1064ec02f091356b8"/>    <section>
     <title>setMT()</title>
 <indexterm><primary>setMT</primary><secondary>Manip</secondary></indexterm>
 <indexterm><primary>Manip</primary><secondary>setMT</secondary></indexterm>
 <para><computeroutput>bool Manip::setMT (bool const &amp; MTOn = <computeroutput>true</computeroutput>
-)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>To allow several threads to work on different runs on parallel. </para>
+</para>
+
+<para><link linkend="_class_m_t_object">MTObject</link> needs to have been Initialised before creating the 
+<literallayout>&#160;&#xa;</literallayout>
+ </para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>

@@ -1,6 +1,6 @@
 <map id="RunMatrixator::fillMatrixes" name="RunMatrixator::fillMatrixes">
 <area shape="rect" id="node1" title=" " alt="" coords="5,217,200,243"/>
-<area shape="rect" id="node2" href="$class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title=" " alt="" coords="279,102,411,129"/>
+<area shape="rect" id="node2" href="$class_detectors.html#a47ae394beae7efa2fb8fa1a3c7f8427d" title="Does this label correspond to a detector ?" alt="" coords="279,102,411,129"/>
 <area shape="rect" id="node5" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="912,115,1041,142"/>
 <area shape="rect" id="node7" href="$class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="915,14,1038,41"/>
 <area shape="rect" id="node8" href="$class_m_t_t_hist.html#a3413cee45758fa0ec41020ae067e3e71" title=" " alt="" coords="294,217,397,243"/>

@@ -20,16 +20,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="66" column="15" bodyfile="lib/MTObjects/MTList.hpp" bodystart="66" bodyend="-1"/>
-        <referencedby refid="class_m_t_vector_1ac635c567f37ab40e241f5eccdf49ac3d" compoundref="_m_t_list_8hpp" startline="49" endline="49">MTVector&lt; T &gt;::begin</referencedby>
-        <referencedby refid="class_m_t_vector_1ae3f2bdb83abfae640cdcfe0dd5cd05c3" compoundref="_m_t_list_8hpp" startline="29" endline="29">MTVector&lt; T &gt;::clear</referencedby>
-        <referencedby refid="class_m_t_vector_1a5e9df0c0baf0b23daf47797492e6068e" compoundref="_m_t_list_8hpp" startline="50" endline="50">MTVector&lt; T &gt;::end</referencedby>
+        <location file="lib/MTObjects/MTList.hpp" line="67" column="15" bodyfile="lib/MTObjects/MTList.hpp" bodystart="67" bodyend="-1"/>
+        <referencedby refid="class_m_t_vector_1ac635c567f37ab40e241f5eccdf49ac3d" compoundref="_m_t_list_8hpp" startline="50" endline="50">MTVector&lt; T &gt;::begin</referencedby>
+        <referencedby refid="class_m_t_vector_1ae3f2bdb83abfae640cdcfe0dd5cd05c3" compoundref="_m_t_list_8hpp" startline="30" endline="30">MTVector&lt; T &gt;::clear</referencedby>
+        <referencedby refid="class_m_t_vector_1a5e9df0c0baf0b23daf47797492e6068e" compoundref="_m_t_list_8hpp" startline="51" endline="51">MTVector&lt; T &gt;::end</referencedby>
         <referencedby refid="class_m_t_vector_1ae6e4c7bbe8c226d36b317340c447e914" compoundref="_m_t_list_8hpp" startline="24" endline="24">MTVector&lt; T &gt;::get</referencedby>
-        <referencedby refid="class_m_t_vector_1a99b913bfdcf68d04d080e7edb3ce89d8" compoundref="_m_t_list_8hpp" startline="52" endline="52">MTVector&lt; std::string &gt;::operator std::vector&lt; std::string &gt;</referencedby>
-        <referencedby refid="class_m_t_vector_1a29b5d2b3af7c22198407775ecab444b5" compoundref="_m_t_list_8hpp" startline="39" endline="39">MTVector&lt; T &gt;::operator[]</referencedby>
-        <referencedby refid="class_m_t_vector_1a3bca517dd665e4ad48dceab41c6db9f7" compoundref="_m_t_list_8hpp" startline="58" endline="62">MTVector&lt; T &gt;::Print</referencedby>
-        <referencedby refid="class_m_t_vector_1ada63ea1ffe18a57ba1ce0e87e45e497c" compoundref="_m_t_list_8hpp" startline="56" endline="56">MTVector&lt; T &gt;::push_back</referencedby>
-        <referencedby refid="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" compoundref="_m_t_list_8hpp" startline="30" endline="36">MTVector&lt; T &gt;::resize</referencedby>
+        <referencedby refid="class_m_t_vector_1a99b913bfdcf68d04d080e7edb3ce89d8" compoundref="_m_t_list_8hpp" startline="53" endline="53">MTVector&lt; std::string &gt;::operator std::vector&lt; std::string &gt;</referencedby>
+        <referencedby refid="class_m_t_vector_1a29b5d2b3af7c22198407775ecab444b5" compoundref="_m_t_list_8hpp" startline="40" endline="40">MTVector&lt; T &gt;::operator[]</referencedby>
+        <referencedby refid="class_m_t_vector_1a3bca517dd665e4ad48dceab41c6db9f7" compoundref="_m_t_list_8hpp" startline="59" endline="63">MTVector&lt; T &gt;::Print</referencedby>
+        <referencedby refid="class_m_t_vector_1ada63ea1ffe18a57ba1ce0e87e45e497c" compoundref="_m_t_list_8hpp" startline="57" endline="57">MTVector&lt; T &gt;::push_back</referencedby>
+        <referencedby refid="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" compoundref="_m_t_list_8hpp" startline="31" endline="37">MTVector&lt; T &gt;::resize</referencedby>
         <referencedby refid="class_m_t_vector_1a17f4b1c62fa8f37d67955085a2f31918" compoundref="_m_t_list_8hpp" startline="16" endline="22">MTVector&lt; T &gt;::set</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" prot="private" static="no" mutable="yes">
@@ -43,10 +43,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="65" column="22" bodyfile="lib/MTObjects/MTList.hpp" bodystart="65" bodyend="-1"/>
-        <referencedby refid="class_m_t_vector_1ae4daeb890c699da55114201063ea7b49" compoundref="_m_t_list_8hpp" startline="41" endline="47">MTVector&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="class_m_t_vector_1a3bca517dd665e4ad48dceab41c6db9f7" compoundref="_m_t_list_8hpp" startline="58" endline="62">MTVector&lt; T &gt;::Print</referencedby>
-        <referencedby refid="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" compoundref="_m_t_list_8hpp" startline="30" endline="36">MTVector&lt; T &gt;::resize</referencedby>
+        <location file="lib/MTObjects/MTList.hpp" line="66" column="22" bodyfile="lib/MTObjects/MTList.hpp" bodystart="66" bodyend="-1"/>
+        <referencedby refid="class_m_t_vector_1ae4daeb890c699da55114201063ea7b49" compoundref="_m_t_list_8hpp" startline="42" endline="48">MTVector&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="class_m_t_vector_1a3bca517dd665e4ad48dceab41c6db9f7" compoundref="_m_t_list_8hpp" startline="59" endline="63">MTVector&lt; T &gt;::Print</referencedby>
+        <referencedby refid="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" compoundref="_m_t_list_8hpp" startline="31" endline="37">MTVector&lt; T &gt;::resize</referencedby>
         <referencedby refid="class_m_t_vector_1a17f4b1c62fa8f37d67955085a2f31918" compoundref="_m_t_list_8hpp" startline="16" endline="22">MTVector&lt; T &gt;::set</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_vector_1a61e0c6ca31740a065b6a9fea31b471db" prot="private" static="no" mutable="no">
@@ -61,7 +61,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="68" column="10" bodyfile="lib/MTObjects/MTList.hpp" bodystart="68" bodyend="-1"/>
+        <location file="lib/MTObjects/MTList.hpp" line="69" column="10" bodyfile="lib/MTObjects/MTList.hpp" bodystart="69" bodyend="-1"/>
+        <referencedby refid="class_m_t_vector_1a2aedf7ea6cb074610ddcb108b78f9f22" compoundref="_m_t_list_8hpp" startline="29" endline="29">MTVector&lt; T &gt;::getIndex</referencedby>
         <referencedby refid="class_m_t_vector_1ae777fd124e908c9a638f4d41585ac1d3" compoundref="_m_t_list_8hpp" startline="28" endline="28">MTVector&lt; T &gt;::resetRead</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" prot="private" static="no" mutable="no">
@@ -76,11 +77,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="67" column="10" bodyfile="lib/MTObjects/MTList.hpp" bodystart="67" bodyend="-1"/>
-        <referencedby refid="class_m_t_vector_1ada63ea1ffe18a57ba1ce0e87e45e497c" compoundref="_m_t_list_8hpp" startline="56" endline="56">MTVector&lt; T &gt;::push_back</referencedby>
-        <referencedby refid="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" compoundref="_m_t_list_8hpp" startline="30" endline="36">MTVector&lt; T &gt;::resize</referencedby>
+        <location file="lib/MTObjects/MTList.hpp" line="68" column="10" bodyfile="lib/MTObjects/MTList.hpp" bodystart="68" bodyend="-1"/>
+        <referencedby refid="class_m_t_vector_1ada63ea1ffe18a57ba1ce0e87e45e497c" compoundref="_m_t_list_8hpp" startline="57" endline="57">MTVector&lt; T &gt;::push_back</referencedby>
+        <referencedby refid="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" compoundref="_m_t_list_8hpp" startline="31" endline="37">MTVector&lt; T &gt;::resize</referencedby>
         <referencedby refid="class_m_t_vector_1a17f4b1c62fa8f37d67955085a2f31918" compoundref="_m_t_list_8hpp" startline="16" endline="22">MTVector&lt; T &gt;::set</referencedby>
-        <referencedby refid="class_m_t_vector_1adc40b9528bbbdcf2e3d33c1d93bb1582" compoundref="_m_t_list_8hpp" startline="38" endline="38">MTVector&lt; T &gt;::size</referencedby>
+        <referencedby refid="class_m_t_vector_1adc40b9528bbbdcf2e3d33c1d93bb1582" compoundref="_m_t_list_8hpp" startline="39" endline="39">MTVector&lt; T &gt;::size</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -95,8 +96,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="49" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="49" bodyend="49"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
+        <location file="lib/MTObjects/MTList.hpp" line="50" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="50" bodyend="50"/>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1ae3f2bdb83abfae640cdcfe0dd5cd05c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -109,9 +110,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="29" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="29" bodyend="29"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
-        <referencedby refid="class_m_t_vector_1ae4daeb890c699da55114201063ea7b49" compoundref="_m_t_list_8hpp" startline="41" endline="47">MTVector&lt; T &gt;::operator=</referencedby>
+        <location file="lib/MTObjects/MTList.hpp" line="30" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="30" bodyend="30"/>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
+        <referencedby refid="class_m_t_vector_1ae4daeb890c699da55114201063ea7b49" compoundref="_m_t_list_8hpp" startline="42" endline="48">MTVector&lt; T &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1a5e9df0c0baf0b23daf47797492e6068e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -124,8 +125,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="50" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="50" bodyend="50"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
+        <location file="lib/MTObjects/MTList.hpp" line="51" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="51" bodyend="51"/>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1ae6e4c7bbe8c226d36b317340c447e914" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::vector&lt; T &gt; const  &amp;</type>
@@ -139,8 +140,22 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTList.hpp" line="24" column="31" bodyfile="lib/MTObjects/MTList.hpp" bodystart="24" bodyend="24"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
-        <referencedby refid="_m_t_list_8hpp_1a5ca09cd003ad326e7e70433ab01ea129" compoundref="_m_t_list_8hpp" startline="74" endline="78">operator&lt;&lt;</referencedby>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
+        <referencedby refid="_m_t_list_8hpp_1a5ca09cd003ad326e7e70433ab01ea129" compoundref="_m_t_list_8hpp" startline="75" endline="79">operator&lt;&lt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_vector_1a2aedf7ea6cb074610ddcb108b78f9f22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; MTVector&lt; T &gt;::getIndex</definition>
+        <argsstring>()</argsstring>
+        <name>getIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTList.hpp" line="29" column="9" bodyfile="lib/MTObjects/MTList.hpp" bodystart="29" bodyend="29"/>
+        <references refid="class_m_t_vector_1a61e0c6ca31740a065b6a9fea31b471db" compoundref="_m_t_list_8hpp" startline="69">MTVector&lt; T &gt;::m_read_index</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -157,12 +172,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="26" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="81" bodyend="91"/>
-        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="92" endline="107">Manip::getNext</referencedby>
-        <referencedby refid="class_calibration_1a58f794ed6862bc71c09b440e63ea94f1" compoundref="_calibration_8hpp" startline="476" endline="483">Calibration::loadRootDataThread</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20" compoundref="_m_t_faster_reader_8hpp" startline="154" endline="154">MTFasterReader::nextFilename</referencedby>
+        <location file="lib/MTObjects/MTList.hpp" line="26" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="82" bodyend="92"/>
+        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="87" endline="102">Manip::getNext</referencedby>
+        <referencedby refid="class_calibrator_1a08032bf64f38605b8b6daa4a839fe443" compoundref="_calibrator_8hpp" startline="339" endline="346">Calibrator::loadRootDataThread</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20" compoundref="_m_t_faster_reader_8hpp" startline="155" endline="155">MTFasterReader::nextFilename</referencedby>
         <referencedby refid="class_m_t_root_reader_1a198a2f34b1b61cb0c449ba82478a4f22" compoundref="_m_t_root_reader_8hpp" startline="23" endline="23">MTRootReader::nextFilename</referencedby>
-        <referencedby refid="class_timeshifts_1a79fe955b7d1bbc12fd4c659691727df3" compoundref="_timeshifts_8hpp" startline="599" endline="610">Timeshifts::treatFilesMT</referencedby>
+        <referencedby refid="class_timeshifts_1a79fe955b7d1bbc12fd4c659691727df3" compoundref="_timeshifts_8hpp" startline="667" endline="678">Timeshifts::treatFilesMT</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1aaae47be200e6af0a341a5f9407fe3a4d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -183,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="27" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="94" bodyend="104"/>
+        <location file="lib/MTObjects/MTList.hpp" line="27" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="95" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1a5b1308e464723c4ad533a4b47d2d28b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -226,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="52" column="3" bodyfile="lib/MTObjects/MTList.hpp" bodystart="52" bodyend="52"/>
+        <location file="lib/MTObjects/MTList.hpp" line="53" column="3" bodyfile="lib/MTObjects/MTList.hpp" bodystart="53" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1a7b972ae46bd6ca7086b45543bdee7503" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -243,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="54" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="54" bodyend="54"/>
+        <location file="lib/MTObjects/MTList.hpp" line="55" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="55" bodyend="55"/>
         <references refid="class_m_t_vector_1a17f4b1c62fa8f37d67955085a2f31918" compoundref="_m_t_list_8hpp" startline="16" endline="22">MTVector&lt; T &gt;::set</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1ae4daeb890c699da55114201063ea7b49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -261,10 +276,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="41" column="12" bodyfile="lib/MTObjects/MTList.hpp" bodystart="41" bodyend="47"/>
-        <references refid="class_m_t_vector_1ae3f2bdb83abfae640cdcfe0dd5cd05c3" compoundref="_m_t_list_8hpp" startline="29" endline="29">MTVector&lt; T &gt;::clear</references>
-        <references refid="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" compoundref="_m_t_list_8hpp" startline="65">MTVector&lt; T &gt;::m_mutex</references>
-        <references refid="class_m_t_vector_1ada63ea1ffe18a57ba1ce0e87e45e497c" compoundref="_m_t_list_8hpp" startline="56" endline="56">MTVector&lt; T &gt;::push_back</references>
+        <location file="lib/MTObjects/MTList.hpp" line="42" column="12" bodyfile="lib/MTObjects/MTList.hpp" bodystart="42" bodyend="48"/>
+        <references refid="class_m_t_vector_1ae3f2bdb83abfae640cdcfe0dd5cd05c3" compoundref="_m_t_list_8hpp" startline="30" endline="30">MTVector&lt; T &gt;::clear</references>
+        <references refid="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_mutex</references>
+        <references refid="class_m_t_vector_1ada63ea1ffe18a57ba1ce0e87e45e497c" compoundref="_m_t_list_8hpp" startline="57" endline="57">MTVector&lt; T &gt;::push_back</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1a29b5d2b3af7c22198407775ecab444b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>T const  &amp;</type>
@@ -281,8 +296,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="39" column="12" bodyfile="lib/MTObjects/MTList.hpp" bodystart="39" bodyend="39"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
+        <location file="lib/MTObjects/MTList.hpp" line="40" column="12" bodyfile="lib/MTObjects/MTList.hpp" bodystart="40" bodyend="40"/>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1a3bca517dd665e4ad48dceab41c6db9f7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -295,11 +310,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="58" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="58" bodyend="62"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
-        <references refid="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" compoundref="_m_t_list_8hpp" startline="65">MTVector&lt; T &gt;::m_mutex</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <referencedby refid="class_manip_1a6390322006ca8d8e7c350a3a915182e8" compoundref="_manip_8hpp" startline="90" endline="90">Manip::Print</referencedby>
+        <location file="lib/MTObjects/MTList.hpp" line="59" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="59" bodyend="63"/>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
+        <references refid="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_mutex</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1ada63ea1ffe18a57ba1ce0e87e45e497c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -316,10 +330,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="56" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="56" bodyend="56"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
-        <references refid="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_size</references>
-        <referencedby refid="class_m_t_vector_1ae4daeb890c699da55114201063ea7b49" compoundref="_m_t_list_8hpp" startline="41" endline="47">MTVector&lt; T &gt;::operator=</referencedby>
+        <location file="lib/MTObjects/MTList.hpp" line="57" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="57" bodyend="57"/>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
+        <references refid="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" compoundref="_m_t_list_8hpp" startline="68">MTVector&lt; T &gt;::m_size</references>
+        <referencedby refid="class_manip_1a86ed3dd2dc6d3b8b7342a9552bc43e26" compoundref="_manip_8hpp" startline="41" endline="45">Manip::addFolder</referencedby>
+        <referencedby refid="class_m_t_vector_1ae4daeb890c699da55114201063ea7b49" compoundref="_m_t_list_8hpp" startline="42" endline="48">MTVector&lt; T &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1ae777fd124e908c9a638f4d41585ac1d3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -333,8 +348,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTList.hpp" line="28" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="28" bodyend="28"/>
-        <references refid="class_m_t_vector_1a61e0c6ca31740a065b6a9fea31b471db" compoundref="_m_t_list_8hpp" startline="68">MTVector&lt; T &gt;::m_read_index</references>
-        <referencedby refid="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" compoundref="_m_t_list_8hpp" startline="30" endline="36">MTVector&lt; T &gt;::resize</referencedby>
+        <references refid="class_m_t_vector_1a61e0c6ca31740a065b6a9fea31b471db" compoundref="_m_t_list_8hpp" startline="69">MTVector&lt; T &gt;::m_read_index</references>
+        <referencedby refid="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" compoundref="_m_t_list_8hpp" startline="31" endline="37">MTVector&lt; T &gt;::resize</referencedby>
         <referencedby refid="class_m_t_vector_1a17f4b1c62fa8f37d67955085a2f31918" compoundref="_m_t_list_8hpp" startline="16" endline="22">MTVector&lt; T &gt;::set</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1aaf668b0e1119200aa54524e429acd0c9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -353,10 +368,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="30" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="30" bodyend="36"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
-        <references refid="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" compoundref="_m_t_list_8hpp" startline="65">MTVector&lt; T &gt;::m_mutex</references>
-        <references refid="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_size</references>
+        <location file="lib/MTObjects/MTList.hpp" line="31" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="31" bodyend="37"/>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
+        <references refid="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_mutex</references>
+        <references refid="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" compoundref="_m_t_list_8hpp" startline="68">MTVector&lt; T &gt;::m_size</references>
         <references refid="class_m_t_vector_1ae777fd124e908c9a638f4d41585ac1d3" compoundref="_m_t_list_8hpp" startline="28" endline="28">MTVector&lt; T &gt;::resetRead</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1a17f4b1c62fa8f37d67955085a2f31918" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -375,11 +390,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTList.hpp" line="16" column="8" bodyfile="lib/MTObjects/MTList.hpp" bodystart="16" bodyend="22"/>
-        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_collection</references>
-        <references refid="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" compoundref="_m_t_list_8hpp" startline="65">MTVector&lt; T &gt;::m_mutex</references>
-        <references refid="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_size</references>
+        <references refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_collection</references>
+        <references refid="class_m_t_vector_1a6352285479e71649dbd4ec8d32f08ca0" compoundref="_m_t_list_8hpp" startline="66">MTVector&lt; T &gt;::m_mutex</references>
+        <references refid="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" compoundref="_m_t_list_8hpp" startline="68">MTVector&lt; T &gt;::m_size</references>
         <references refid="class_m_t_vector_1ae777fd124e908c9a638f4d41585ac1d3" compoundref="_m_t_list_8hpp" startline="28" endline="28">MTVector&lt; T &gt;::resetRead</references>
-        <referencedby refid="class_m_t_vector_1a7b972ae46bd6ca7086b45543bdee7503" compoundref="_m_t_list_8hpp" startline="54" endline="54">MTVector&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="class_m_t_vector_1a7b972ae46bd6ca7086b45543bdee7503" compoundref="_m_t_list_8hpp" startline="55" endline="55">MTVector&lt; T &gt;::operator=</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_vector_1adc40b9528bbbdcf2e3d33c1d93bb1582" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const  &amp;</type>
@@ -392,20 +407,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTList.hpp" line="38" column="17" bodyfile="lib/MTObjects/MTList.hpp" bodystart="38" bodyend="38"/>
-        <references refid="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" compoundref="_m_t_list_8hpp" startline="67">MTVector&lt; T &gt;::m_size</references>
+        <location file="lib/MTObjects/MTList.hpp" line="39" column="17" bodyfile="lib/MTObjects/MTList.hpp" bodystart="39" bodyend="39"/>
+        <references refid="class_m_t_vector_1a42853e85d32b83e0ee6a8a822b5d532a" compoundref="_m_t_list_8hpp" startline="68">MTVector&lt; T &gt;::m_size</references>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="lib/MTObjects/MTList.hpp" line="8" column="1" bodyfile="lib/MTObjects/MTList.hpp" bodystart="9" bodyend="69"/>
+    <location file="lib/MTObjects/MTList.hpp" line="8" column="1" bodyfile="lib/MTObjects/MTList.hpp" bodystart="9" bodyend="70"/>
     <listofallmembers>
       <member refid="class_m_t_vector_1ac635c567f37ab40e241f5eccdf49ac3d" prot="public" virt="non-virtual"><scope>MTVector</scope><name>begin</name></member>
       <member refid="class_m_t_vector_1ae3f2bdb83abfae640cdcfe0dd5cd05c3" prot="public" virt="non-virtual"><scope>MTVector</scope><name>clear</name></member>
       <member refid="class_m_t_vector_1a5e9df0c0baf0b23daf47797492e6068e" prot="public" virt="non-virtual"><scope>MTVector</scope><name>end</name></member>
       <member refid="class_m_t_vector_1ae6e4c7bbe8c226d36b317340c447e914" prot="public" virt="non-virtual"><scope>MTVector</scope><name>get</name></member>
+      <member refid="class_m_t_vector_1a2aedf7ea6cb074610ddcb108b78f9f22" prot="public" virt="non-virtual"><scope>MTVector</scope><name>getIndex</name></member>
       <member refid="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" prot="public" virt="non-virtual"><scope>MTVector</scope><name>getNext</name></member>
       <member refid="class_m_t_vector_1aaae47be200e6af0a341a5f9407fe3a4d" prot="public" virt="non-virtual"><scope>MTVector</scope><name>getNext</name></member>
       <member refid="class_m_t_vector_1a2c3ec2db54d57467063e4b9f3ef0d02f" prot="private" virt="non-virtual"><scope>MTVector</scope><name>m_collection</name></member>

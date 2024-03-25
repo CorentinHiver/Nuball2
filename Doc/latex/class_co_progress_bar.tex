@@ -1,0 +1,219 @@
+\doxysection{Co\+Progress\+Bar$<$ T $>$ Class Template Reference}
+\label{class_co_progress_bar}\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Co\+Progress\+Bar.\+hpp$>$}
+
+
+
+Collaboration diagram for Co\+Progress\+Bar$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{class_co_progress_bar__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Co\+Progress\+Bar} () noexcept=default
+\item 
+\textbf{ Co\+Progress\+Bar} (T $\ast$value, float const \&value\+\_\+max)
+\item 
+\textbf{ Co\+Progress\+Bar} (T $\ast$value, float const \&value\+\_\+max, int width)
+\item 
+bool \textbf{ set\+Value} (T $\ast$value)
+\item 
+bool \textbf{ set\+Value\+Max} (float const \&value\+\_\+max)
+\item 
+void \textbf{ show} (std\+::string const \&message=\char`\"{}\char`\"{})
+\item 
+void \textbf{ show\+Fast} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ first\+\_\+time} = true
+\item 
+int \textbf{ m\+\_\+last\+\_\+value} = 0
+\item 
+T $\ast$ \textbf{ m\+\_\+value} = nullptr
+\item 
+T \textbf{ m\+\_\+value\+\_\+max} = 0
+\item 
+int \textbf{ m\+\_\+width} = 50
+\item 
+\textbf{ Timer} \textbf{ timer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Co\+Progress\+Bar$<$ T $>$}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_co_progress_bar_a81a2ac9c5cde4b3f528cc1cf207715fc}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!CoProgressBar@{CoProgressBar}}
+\index{CoProgressBar@{CoProgressBar}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{CoProgressBar()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Co\+Progress\+Bar}$<$ T $>$\+::\textbf{ Co\+Progress\+Bar} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+\mbox{\label{class_co_progress_bar_a7d63daa56da1acfbaf261174a5bb38cb}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!CoProgressBar@{CoProgressBar}}
+\index{CoProgressBar@{CoProgressBar}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{CoProgressBar()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Co\+Progress\+Bar}$<$ T $>$\+::\textbf{ Co\+Progress\+Bar} (\begin{DoxyParamCaption}\item[{T $\ast$}]{value,  }\item[{float const \&}]{value\+\_\+max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_co_progress_bar_ac0f7359ce638713f30880078c6f052cf}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!CoProgressBar@{CoProgressBar}}
+\index{CoProgressBar@{CoProgressBar}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{CoProgressBar()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Co\+Progress\+Bar}$<$ T $>$\+::\textbf{ Co\+Progress\+Bar} (\begin{DoxyParamCaption}\item[{T $\ast$}]{value,  }\item[{float const \&}]{value\+\_\+max,  }\item[{int}]{width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\label{class_co_progress_bar_a11bd8143244337b4e97858b176f43008}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!setValue@{setValue}}
+\index{setValue@{setValue}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{setValue()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::set\+Value (\begin{DoxyParamCaption}\item[{T $\ast$}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+\mbox{\label{class_co_progress_bar_a74e7041d7ecfdb4ce5963ba55c63206b}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!setValueMax@{setValueMax}}
+\index{setValueMax@{setValueMax}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{setValueMax()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::set\+Value\+Max (\begin{DoxyParamCaption}\item[{float const \&}]{value\+\_\+max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+\mbox{\label{class_co_progress_bar_a79b92711e75250b41c39aeeca73a1621}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!show@{show}}
+\index{show@{show}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{show()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::show (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{message = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_co_progress_bar_a79b92711e75250b41c39aeeca73a1621_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_co_progress_bar_a79b92711e75250b41c39aeeca73a1621_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_co_progress_bar_a0f79e8a642786af052ee7f1356b4bf9d}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!showFast@{showFast}}
+\index{showFast@{showFast}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{showFast()}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::show\+Fast}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_co_progress_bar_a0f79e8a642786af052ee7f1356b4bf9d_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\label{class_co_progress_bar_ae4588f4445f3e4cb4156d55987b93dc8}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!first\_time@{first\_time}}
+\index{first\_time@{first\_time}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{first\_time}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::first\+\_\+time = true\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+\mbox{\label{class_co_progress_bar_a12b03168cd124f1c597a003236748458}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!m\_last\_value@{m\_last\_value}}
+\index{m\_last\_value@{m\_last\_value}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{m\_last\_value}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::m\+\_\+last\+\_\+value = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+\mbox{\label{class_co_progress_bar_ab54fee7f6cea3e105918836870d9e95e}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!m\_value@{m\_value}}
+\index{m\_value@{m\_value}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{m\_value}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T$\ast$ \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::m\+\_\+value = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+\mbox{\label{class_co_progress_bar_ae22504f867d4a07d27e6fed248cfcbaf}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!m\_value\_max@{m\_value\_max}}
+\index{m\_value\_max@{m\_value\_max}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{m\_value\_max}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::m\+\_\+value\+\_\+max = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+\mbox{\label{class_co_progress_bar_a76f13195beb7ba1acce4f94ef511d7c2}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!m\_width@{m\_width}}
+\index{m\_width@{m\_width}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{m\_width}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::m\+\_\+width = 50\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+\mbox{\label{class_co_progress_bar_ab2fca97c06433ac5c2805cad130edf3a}} 
+\index{CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}!timer@{timer}}
+\index{timer@{timer}!CoProgressBar$<$ T $>$@{CoProgressBar$<$ T $>$}}
+\doxysubsubsection{timer}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\textbf{ Timer} \textbf{ Co\+Progress\+Bar}$<$ T $>$\+::timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\begin{Desc}
+\item[Examples]\par
+\textbf{ /media/sf\+\_\+\+One\+Drive/\+CNRS/\+Nuball2/lib/\+Classes/\+Co\+Progress\+Bar.\+hpp}.\end{Desc}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+lib/\+Classes/\textbf{ Co\+Progress\+Bar.\+hpp}\end{DoxyCompactItemize}

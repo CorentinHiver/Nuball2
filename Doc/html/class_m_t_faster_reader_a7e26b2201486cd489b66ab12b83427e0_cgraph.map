@@ -1,5 +1,14 @@
 <map id="MTFasterReader::Read" name="MTFasterReader::Read">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,173,32"/>
-<area shape="rect" id="node2" href="$class_m_t_faster_reader.html#a63e239df82bf04244bdab829bb73cd20" title=" " alt="" coords="221,5,445,32"/>
-<area shape="rect" id="node3" href="$class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="493,5,636,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,173,133"/>
+<area shape="rect" id="node2" href="$class_m_t_faster_reader.html#a023fdc6cdd455017dc7e911820206ac0" title=" " alt="" coords="229,5,438,32"/>
+<area shape="rect" id="node3" href="$class_m_t_object.html#a9c9a57a49a12e1d408a5354e8520b3fe" title=" " alt="" coords="236,56,431,83"/>
+<area shape="rect" id="node4" href="$class_m_t_faster_reader.html#a63e239df82bf04244bdab829bb73cd20" title=" " alt="" coords="221,107,445,133"/>
+<area shape="rect" id="node6" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="307,157,359,184"/>
+<area shape="rect" id="node7" href="$class_co_progress_bar.html#a79b92711e75250b41c39aeeca73a1621" title=" " alt="" coords="254,208,413,235"/>
+<area shape="rect" id="node5" href="$class_m_t_vector.html#a824a9ff009dde921eec4759c69f74ca7" title=" " alt="" coords="493,107,636,133"/>
+<area shape="rect" id="node8" href="$lib_co_8hpp.html#a075a3c229a21ca4d0e91f72e99a6bf6d" title="Casts a number into a float." alt="" coords="522,157,607,184"/>
+<area shape="rect" id="node9" href="$lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="528,208,601,235"/>
+<area shape="rect" id="node10" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="516,259,613,285"/>
+<area shape="rect" id="node11" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="684,259,787,285"/>
+<area shape="rect" id="node12" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="835,259,941,285"/>
 </map>

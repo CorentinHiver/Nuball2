@@ -3,7 +3,9 @@
 <title>lib/string_functions.hpp File Reference</title>
 <indexterm><primary>lib/string_functions.hpp</primary></indexterm>
 <programlisting>#include &lt;vector&gt;
+#include &lt;cstring&gt;
 #include &lt;string&gt;
+#include &lt;sstream&gt;
 </programlisting>Include dependency graph for string_functions.hpp:<para>
     <informalfigure>
         <mediaobject>
@@ -25,33 +27,97 @@ This graph shows which files directly or indirectly include this file:<para>
 <simplesect>
     <title>Functions    </title>
         <itemizedlist>
-            <listitem><para>std::string <link linkend="_string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a">firstPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1aa7465160d3e16a3c75545d8f792a08a1">argv_to_string</link> (char **argv, int const &amp;start_i=0)</para>
+
+<para>Convert i_th first arguments of argv into a string (), by default starting at the first. </para>
 </listitem>
-            <listitem><para>bool <link linkend="_string__functions_8hpp_1a03fb03d95885354ac3c329693588097b">found</link> (std::string const &amp;string, std::string const &amp;substr)</para>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>std::string <link linkend="_string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2">concatenate</link> (ARGS &amp;&amp;... args)</para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>const char * <link linkend="_string__functions_8hpp_1ac2d6212e4822106a56c2f5cc83045bee">concatenate_c</link> (ARGS &amp;&amp;... args)</para>
+
+<para>concatenate string, returns a c_str (char**) </para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>std::string <link linkend="_string__functions_8hpp_1ab88c9cdf5b652a4f4bee449509c2430f">ctcstr</link> (ARGS &amp;&amp;... args)</para>
+
+<para>concatenate string, returns a c_str (char**) </para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>std::string <link linkend="_string__functions_8hpp_1a87017d41316416c683acfbfd42207e80">ctstr</link> (ARGS &amp;&amp;... args)</para>
+
+<para>Concatenate a series of arguments into a big string (alias) </para>
+</listitem>
+            <listitem><para>void <link linkend="_string__functions_8hpp_1a84156900e5c1cf02d69b15d608038257">delete_argv</link> (char **argv)</para>
+
+<para>Delete an argv manually created by <link linkend="_string__functions_8hpp_1a9a899e4db0c9b7d0e80130d2b90c5f25">string_to_argv()</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_string__functions_8hpp_1a1f4138b473c708db6b901f81bba9f5f6">fillList</link> (std::vector&lt; std::string &gt; &amp;list, std::string string, char const &amp;separator, bool const &amp;removeVoids=false)</para>
+
+<para>Cuts a string into pieces separated by the given separator like &apos;;&apos; or &apos; &apos; or &apos;,&apos;. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a">firstPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+
+<para>Returns the string to the left of the first occurence of sep in the string. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1a181c58eb4af9035b6f772134a76e4e70">firstPart</link> (std::string const &amp;string, std::string const &amp;sep)</para>
+
+<para>Returns the string to the left of the first occurence of sep in the string. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_string__functions_8hpp_1a87d8e2cb69021ab11e443cb140349eb6">found</link> (std::string const &amp;string, std::string const &amp;_substr)</para>
+
+<para>Returns true if the string has at least one occurence of substr. </para>
 </listitem>
             <listitem><para>std::vector&lt; std::string &gt; <link linkend="_string__functions_8hpp_1a44ad60b408ba7b75bdf7ae75f8d2532f">getList</link> (std::string string, char const &amp;separator, bool const &amp;removeVoids=false)</para>
-
-<para>Cuts a string into pieces separated by the given separator like &apos;;&apos; or &apos; &apos; or &apos;,&apos; ... </para>
 </listitem>
             <listitem><para>bool <link linkend="_string__functions_8hpp_1a4adaa91d1b90e1b97cc5fee8998e09b1">isNumber</link> (std::string const &amp;string)</para>
 
 <para>Returns true if all its characters are digits. </para>
 </listitem>
             <listitem><para>std::string <link linkend="_string__functions_8hpp_1a3f3e5a4df9e542b1aa927c29ddf26af3">lastPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+
+<para>Returns the string to the right of the last occurence of sep in the string. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1a39fc5beacd18fe3d9446687fdf163416">lastPart</link> (std::string const &amp;string, std::string const &amp;sep)</para>
+
+<para>Returns the string to the right of the last occurence of sep in the string. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>std::string <link linkend="_string__functions_8hpp_1a69253dfa467bcccee64b774b43242c4c">my_to_string</link> (const T &amp;value)</para>
+
+<para>Convert any type into string, including vector of any type. </para>
 </listitem>
             <listitem><para>std::string &amp; <link linkend="_string__functions_8hpp_1a93bd453ee6b6af7c8e5e970bb1000651">pop_front</link> (std::string &amp;string)</para>
 
 <para>Removes the first character of a string. </para>
 </listitem>
-            <listitem><para>bool <link linkend="_string__functions_8hpp_1a952e248eeca9d6f3be780b68df3f3264">remove</link> (std::string &amp;string, std::string const &amp;substr)</para>
+            <listitem><para>bool <link linkend="_string__functions_8hpp_1a1de0ecd281996fcab785a9bc6d394737">remove</link> (std::string &amp;string, char const &amp;c)</para>
+
+<para>Remove the first char &apos;c&apos; to the string if found. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_string__functions_8hpp_1a9b6b51fed28f705d129f02193ce89b3c">remove</link> (std::string &amp;string, std::string const &amp;_substr)</para>
+
+<para>Remove the first substr to the string if found. </para>
 </listitem>
             <listitem><para>std::string <link linkend="_string__functions_8hpp_1a8cf535d46125ed8622aedb6300d8de46">removeBlankSpace</link> (std::string str)</para>
 
 <para>Remove all the blank space in a string. </para>
 </listitem>
             <listitem><para>std::string <link linkend="_string__functions_8hpp_1abb2a169e2ba2e6a949a988e4d591699e">removeFirstPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+
+<para>Returns the string to the right of the first occurence of sep in the string. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1aabc76069865b3a34ee37e95755d23764">removeFirstPart</link> (std::string const &amp;string, std::string const &amp;sep)</para>
+
+<para>Returns the string to the right of the first occurence of sep in the string. </para>
 </listitem>
             <listitem><para>std::string <link linkend="_string__functions_8hpp_1a416863eb8599122a08605e1f2f94d617">removeLastPart</link> (std::string const &amp;string, char const &amp;sep)</para>
+
+<para>Returns the string to the left of the last occurence of sep in the string. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_string__functions_8hpp_1a005ed434e73ab2c5226d8421e7f43b26">removeLastPart</link> (std::string const &amp;string, std::string const &amp;sep)</para>
+
+<para>Returns the string to the left of the last occurence of sep in the string. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_string__functions_8hpp_1a3a78dc61d5d352a6559b927ae3167a21">replace</link> (std::string &amp;string, std::string const &amp;substr_init, std::string const &amp;substr_substitue)</para>
+
+<para>Replace substr to the string if it exists. </para>
 </listitem>
             <listitem><para>std::string <link linkend="_string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829">replaceCharacter</link> (std::string const &amp;istring, char const &amp;ichar, char const &amp;ochar)</para>
 
@@ -61,23 +127,182 @@ This graph shows which files directly or indirectly include this file:<para>
 
 <para>Replace all the commas of a std::string with dots. </para>
 </listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_string__functions_8hpp_1a23008e4590bfaf3ddd88e52b04959e71">split</link> (std::string string, char const &amp;separator, bool const &amp;removeVoids=false)</para>
+</listitem>
+            <listitem><para>char ** <link linkend="_string__functions_8hpp_1a9a899e4db0c9b7d0e80130d2b90c5f25">string_to_argv</link> (std::string const &amp;string)</para>
+
+<para>Create a null terminated C-style array of char from a string. </para>
+</listitem>
         </itemizedlist>
 </simplesect>
 <section>
 <title>Function Documentation</title>
-<anchor xml:id="_string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a"/>    <section>
-    <title>firstPart()</title>
-<indexterm><primary>firstPart</primary><secondary>string_functions.hpp</secondary></indexterm>
-<indexterm><primary>string_functions.hpp</primary><secondary>firstPart</secondary></indexterm>
-<para><computeroutput>std::string firstPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1a03fb03d95885354ac3c329693588097b"/>    <section>
-    <title>found()</title>
-<indexterm><primary>found</primary><secondary>string_functions.hpp</secondary></indexterm>
-<indexterm><primary>string_functions.hpp</primary><secondary>found</secondary></indexterm>
-<para><computeroutput>bool found (std::string const &amp; string, std::string const &amp; substr)</computeroutput></para>Here is the caller graph for this function:<para>
+<anchor xml:id="_string__functions_8hpp_1aa7465160d3e16a3c75545d8f792a08a1"/>    <section>
+    <title>argv_to_string()</title>
+<indexterm><primary>argv_to_string</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>argv_to_string</secondary></indexterm>
+<para><computeroutput>std::string argv_to_string (char ** argv, int const &amp; start_i = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert i_th first arguments of argv into a string (), by default starting at the first. </para>
+</para>
+
+<para><caution><title>Attention</title>
+
+<para>argv MUST be null-terminated</para>
+</caution>
+Each argument starts with a space </para>
+    </section><anchor xml:id="_string__functions_8hpp_1ae058d07fbc702d0b0f79e3650e7804a2"/>    <section>
+    <title>concatenate()</title>
+<indexterm><primary>concatenate</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>concatenate</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>std::string concatenate (ARGS &amp;&amp;... args)</computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a03fb03d95885354ac3c329693588097b_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_ae058d07fbc702d0b0f79e3650e7804a2_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_ae058d07fbc702d0b0f79e3650e7804a2_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1ac2d6212e4822106a56c2f5cc83045bee"/>    <section>
+    <title>concatenate_c()</title>
+<indexterm><primary>concatenate_c</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>concatenate_c</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>const char* concatenate_c (ARGS &amp;&amp;... args)</computeroutput></para><para>
+
+<para>concatenate string, returns a c_str (char**) </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_ac2d6212e4822106a56c2f5cc83045bee_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1ab88c9cdf5b652a4f4bee449509c2430f"/>    <section>
+    <title>ctcstr()</title>
+<indexterm><primary>ctcstr</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>ctcstr</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>std::string ctcstr (ARGS &amp;&amp;... args)</computeroutput></para><para>
+
+<para>concatenate string, returns a c_str (char**) </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_ab88c9cdf5b652a4f4bee449509c2430f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a87017d41316416c683acfbfd42207e80"/>    <section>
+    <title>ctstr()</title>
+<indexterm><primary>ctstr</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>ctstr</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>std::string ctstr (ARGS &amp;&amp;... args)</computeroutput></para><para>
+
+<para>Concatenate a series of arguments into a big string (alias) </para>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a87017d41316416c683acfbfd42207e80_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a84156900e5c1cf02d69b15d608038257"/>    <section>
+    <title>delete_argv()</title>
+<indexterm><primary>delete_argv</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>delete_argv</secondary></indexterm>
+<para><computeroutput>void delete_argv (char ** argv)</computeroutput></para><para>
+
+<para>Delete an argv manually created by <link linkend="_string__functions_8hpp_1a9a899e4db0c9b7d0e80130d2b90c5f25">string_to_argv()</link> </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a1f4138b473c708db6b901f81bba9f5f6"/>    <section>
+    <title>fillList()</title>
+<indexterm><primary>fillList</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>fillList</secondary></indexterm>
+<para><computeroutput>void fillList (std::vector&lt; std::string &gt; &amp; list, std::string string, char const &amp; separator, bool const &amp; removeVoids = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Cuts a string into pieces separated by the given separator like &apos;;&apos; or &apos; &apos; or &apos;,&apos;. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>removeVoids</entry>
+                                <entry>
+<para>For instance, we have string = &quot;;1;2;3;;5&quot;. without removeVoids this function returns {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;5&quot;} with removeVoids this function returns {&quot;&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;&quot;, &quot;5&quot;} </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a1f4138b473c708db6b901f81bba9f5f6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1ab14274457c8b46f1fe9f22745ae2186a"/>    <section>
+    <title>firstPart()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>firstPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>firstPart</secondary></indexterm>
+<para><computeroutput>std::string firstPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para><para>
+
+<para>Returns the string to the left of the first occurence of sep in the string. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a181c58eb4af9035b6f772134a76e4e70"/>    <section>
+    <title>firstPart()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>firstPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>firstPart</secondary></indexterm>
+<para><computeroutput>std::string firstPart (std::string const &amp; string, std::string const &amp; sep)</computeroutput></para><para>
+
+<para>Returns the string to the left of the first occurence of sep in the string. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a87d8e2cb69021ab11e443cb140349eb6"/>    <section>
+    <title>found()</title>
+<indexterm><primary>found</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>found</secondary></indexterm>
+<para><computeroutput>bool found (std::string const &amp; string, std::string const &amp; _substr)</computeroutput></para><para>
+
+<para>Returns true if the string has at least one occurence of substr. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a87d8e2cb69021ab11e443cb140349eb6_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -87,14 +312,15 @@ This graph shows which files directly or indirectly include this file:<para>
 <indexterm><primary>getList</primary><secondary>string_functions.hpp</secondary></indexterm>
 <indexterm><primary>string_functions.hpp</primary><secondary>getList</secondary></indexterm>
 <para><computeroutput>std::vector&lt;std::string&gt; getList (std::string string, char const &amp; separator, bool const &amp; removeVoids = <computeroutput>false</computeroutput>
-)</computeroutput></para><para>
-
-<para>Cuts a string into pieces separated by the given separator like &apos;;&apos; or &apos; &apos; or &apos;,&apos; ... </para>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a44ad60b408ba7b75bdf7ae75f8d2532f_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
 </para>
-
-<para>Understand the removeVoids parameter : for instance, we have string = &quot;;1;2;3;;5&quot;</para>
-
-<para>without removeVoids this function returns {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;5&quot;} with removeVoids this function returns {&quot;&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;&quot;, &quot;5&quot;} </para>
 Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
@@ -122,10 +348,48 @@ Here is the caller graph for this function:<para>
     </informalfigure>
 </para>
     </section><anchor xml:id="_string__functions_8hpp_1a3f3e5a4df9e542b1aa927c29ddf26af3"/>    <section>
-    <title>lastPart()</title>
+    <title>lastPart()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>lastPart</primary><secondary>string_functions.hpp</secondary></indexterm>
 <indexterm><primary>string_functions.hpp</primary><secondary>lastPart</secondary></indexterm>
-<para><computeroutput>std::string lastPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1a93bd453ee6b6af7c8e5e970bb1000651"/>    <section>
+<para><computeroutput>std::string lastPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para><para>
+
+<para>Returns the string to the right of the last occurence of sep in the string. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a39fc5beacd18fe3d9446687fdf163416"/>    <section>
+    <title>lastPart()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>lastPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>lastPart</secondary></indexterm>
+<para><computeroutput>std::string lastPart (std::string const &amp; string, std::string const &amp; sep)</computeroutput></para><para>
+
+<para>Returns the string to the right of the last occurence of sep in the string. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a39fc5beacd18fe3d9446687fdf163416_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a69253dfa467bcccee64b774b43242c4c"/>    <section>
+    <title>my_to_string()</title>
+<indexterm><primary>my_to_string</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>my_to_string</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>std::string my_to_string (const T &amp; value)</computeroutput></para><para>
+
+<para>Convert any type into string, including vector of any type. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a69253dfa467bcccee64b774b43242c4c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a93bd453ee6b6af7c8e5e970bb1000651"/>    <section>
     <title>pop_front()</title>
 <indexterm><primary>pop_front</primary><secondary>string_functions.hpp</secondary></indexterm>
 <indexterm><primary>string_functions.hpp</primary><secondary>pop_front</secondary></indexterm>
@@ -139,11 +403,32 @@ Here is the caller graph for this function:<para>
 <para>Careful, time complexity makes it really heavy on big string </para>
 </caution>
 </para>
-    </section><anchor xml:id="_string__functions_8hpp_1a952e248eeca9d6f3be780b68df3f3264"/>    <section>
-    <title>remove()</title>
+    </section><anchor xml:id="_string__functions_8hpp_1a1de0ecd281996fcab785a9bc6d394737"/>    <section>
+    <title>remove()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>remove</primary><secondary>string_functions.hpp</secondary></indexterm>
 <indexterm><primary>string_functions.hpp</primary><secondary>remove</secondary></indexterm>
-<para><computeroutput>bool remove (std::string &amp; string, std::string const &amp; substr)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1a8cf535d46125ed8622aedb6300d8de46"/>    <section>
+<para><computeroutput>bool remove (std::string &amp; string, char const &amp; c)</computeroutput></para><para>
+
+<para>Remove the first char &apos;c&apos; to the string if found. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a9b6b51fed28f705d129f02193ce89b3c"/>    <section>
+    <title>remove()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>remove</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>remove</secondary></indexterm>
+<para><computeroutput>bool remove (std::string &amp; string, std::string const &amp; _substr)</computeroutput></para><para>
+
+<para>Remove the first substr to the string if found. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a9b6b51fed28f705d129f02193ce89b3c_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a8cf535d46125ed8622aedb6300d8de46"/>    <section>
     <title>removeBlankSpace()</title>
 <indexterm><primary>removeBlankSpace</primary><secondary>string_functions.hpp</secondary></indexterm>
 <indexterm><primary>string_functions.hpp</primary><secondary>removeBlankSpace</secondary></indexterm>
@@ -152,14 +437,55 @@ Here is the caller graph for this function:<para>
 <para>Remove all the blank space in a string. </para>
 </para>
     </section><anchor xml:id="_string__functions_8hpp_1abb2a169e2ba2e6a949a988e4d591699e"/>    <section>
-    <title>removeFirstPart()</title>
+    <title>removeFirstPart()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>removeFirstPart</primary><secondary>string_functions.hpp</secondary></indexterm>
 <indexterm><primary>string_functions.hpp</primary><secondary>removeFirstPart</secondary></indexterm>
-<para><computeroutput>std::string removeFirstPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1a416863eb8599122a08605e1f2f94d617"/>    <section>
-    <title>removeLastPart()</title>
+<para><computeroutput>std::string removeFirstPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para><para>
+
+<para>Returns the string to the right of the first occurence of sep in the string. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1aabc76069865b3a34ee37e95755d23764"/>    <section>
+    <title>removeFirstPart()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>removeFirstPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>removeFirstPart</secondary></indexterm>
+<para><computeroutput>std::string removeFirstPart (std::string const &amp; string, std::string const &amp; sep)</computeroutput></para><para>
+
+<para>Returns the string to the right of the first occurence of sep in the string. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a416863eb8599122a08605e1f2f94d617"/>    <section>
+    <title>removeLastPart()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>removeLastPart</primary><secondary>string_functions.hpp</secondary></indexterm>
 <indexterm><primary>string_functions.hpp</primary><secondary>removeLastPart</secondary></indexterm>
-<para><computeroutput>std::string removeLastPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para>    </section><anchor xml:id="_string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829"/>    <section>
+<para><computeroutput>std::string removeLastPart (std::string const &amp; string, char const &amp; sep)</computeroutput></para><para>
+
+<para>Returns the string to the left of the last occurence of sep in the string. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a005ed434e73ab2c5226d8421e7f43b26"/>    <section>
+    <title>removeLastPart()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>removeLastPart</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>removeLastPart</secondary></indexterm>
+<para><computeroutput>std::string removeLastPart (std::string const &amp; string, std::string const &amp; sep)</computeroutput></para><para>
+
+<para>Returns the string to the left of the last occurence of sep in the string. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a3a78dc61d5d352a6559b927ae3167a21"/>    <section>
+    <title>replace()</title>
+<indexterm><primary>replace</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>replace</secondary></indexterm>
+<para><computeroutput>bool replace (std::string &amp; string, std::string const &amp; substr_init, std::string const &amp; substr_substitue)</computeroutput></para><para>
+
+<para>Replace substr to the string if it exists. </para>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a3a78dc61d5d352a6559b927ae3167a21_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1ab2c67e2ba68d5a42ce9a48dafdbba829"/>    <section>
     <title>replaceCharacter()</title>
 <indexterm><primary>replaceCharacter</primary><secondary>string_functions.hpp</secondary></indexterm>
 <indexterm><primary>string_functions.hpp</primary><secondary>replaceCharacter</secondary></indexterm>
@@ -194,6 +520,43 @@ Here is the caller graph for this function:<para>
 <para><computeroutput>std::string rpCommaWDots (std::string str)</computeroutput></para><para>
 
 <para>Replace all the commas of a std::string with dots. </para>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a23008e4590bfaf3ddd88e52b04959e71"/>    <section>
+    <title>split()</title>
+<indexterm><primary>split</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>split</secondary></indexterm>
+<para><computeroutput>std::vector&lt;std::string&gt; split (std::string string, char const &amp; separator, bool const &amp; removeVoids = <computeroutput>false</computeroutput>
+)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a23008e4590bfaf3ddd88e52b04959e71_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_string__functions_8hpp_1a9a899e4db0c9b7d0e80130d2b90c5f25"/>    <section>
+    <title>string_to_argv()</title>
+<indexterm><primary>string_to_argv</primary><secondary>string_functions.hpp</secondary></indexterm>
+<indexterm><primary>string_functions.hpp</primary><secondary>string_to_argv</secondary></indexterm>
+<para><computeroutput>char** string_to_argv (std::string const &amp; string)</computeroutput></para><para>
+
+<para>Create a null terminated C-style array of char from a string. </para>
+</para>
+
+<para><caution><title>Attention</title>
+
+<para>you&apos;ll have to delete the allocated memory </para>
+</caution>
+</para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="string__functions_8hpp_a9a899e4db0c9b7d0e80130d2b90c5f25_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
 </para>
 </section>
 </section>

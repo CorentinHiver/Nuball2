@@ -109,7 +109,7 @@ Collaboration diagram for Clovers:</div>
 <area shape="rect" href="class_clovers_1_1_prompt_gate.html" title=" " alt="" coords="286,65,443,92"/>
 <area shape="rect" href="class_static_vector.html" title=" " alt="" coords="281,255,448,281"/>
 <area shape="rect" href="class_gates__t.html" title=" " alt="" coords="309,315,420,341"/>
-<area shape="rect" href="class_gate__t.html" title=" " alt="" coords="313,375,416,401"/>
+<area shape="rect" href="class_gate__t.html" title="Convenient gate class." alt="" coords="313,375,416,401"/>
 </map>
 <center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -163,9 +163,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ab97fc40c1f6b24a092f8f92562c2fd9a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a">InitializeArrays</a> ()</td></tr>
-<tr class="memdesc:ab97fc40c1f6b24a092f8f92562c2fd9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static initialize. Allows one to use the arrays event if no object has been instantiated.  <a href="class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a">More...</a><br /></td></tr>
-<tr class="separator:ab97fc40c1f6b24a092f8f92562c2fd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeeef6197466b4fb5e445e5742bdf6c7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7">InitialiseArrays</a> ()</td></tr>
+<tr class="memdesc:aaeeef6197466b4fb5e445e5742bdf6c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static Initialise. Allows one to use the arrays event if no object has been instantiated.  <a href="class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7">More...</a><br /></td></tr>
+<tr class="separator:aaeeef6197466b4fb5e445e5742bdf6c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c28e72706c325a4fe3b0aab61c0bfe0"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0">is_clover</a> (<a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;l)</td></tr>
 <tr class="separator:a9c28e72706c325a4fe3b0aab61c0bfe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4940a14c796f0825697af29156644e9c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a4940a14c796f0825697af29156644e9c">is_clover_BGO</a> (<a class="el" href="_hit_8hpp.html#ab5dd24876acad09ec52c250c1668466c">Label</a> const &amp;l)</td></tr>
@@ -264,24 +264,26 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a899c8b03a2cf2772aa085100292b738e"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a899c8b03a2cf2772aa085100292b738e">cristaux_index</a></td></tr>
-<tr class="separator:a899c8b03a2cf2772aa085100292b738e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c76fc2f276e19d4b7a8cc70c9f9cebc"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a8c76fc2f276e19d4b7a8cc70c9f9cebc">cristaux_index_BGO</a></td></tr>
-<tr class="separator:a8c76fc2f276e19d4b7a8cc70c9f9cebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf1a13c67031efd703a4001cdc6df402"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">nb_det</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#aaf1a13c67031efd703a4001cdc6df402">cristaux_index</a></td></tr>
+<tr class="separator:aaf1a13c67031efd703a4001cdc6df402"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbd356b154fa2369acffc83cca9a6204"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">nb_det</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#abbd356b154fa2369acffc83cca9a6204">cristaux_index_BGO</a></td></tr>
+<tr class="separator:abbd356b154fa2369acffc83cca9a6204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f5e44c3955123ec5535c585c7c295a2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_gate_8hpp.html#a2b91fd9abbd8bef0ba1f2f2ba1205c1f">Gates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a3f5e44c3955123ec5535c585c7c295a2">delayedBGOgate</a> = {{60.f, 145.f}}</td></tr>
 <tr class="separator:a3f5e44c3955123ec5535c585c7c295a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1d3b98f82e408cf31671e72b9884169"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_gate_8hpp.html#a2b91fd9abbd8bef0ba1f2f2ba1205c1f">Gates</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#af1d3b98f82e408cf31671e72b9884169">delayedGeGate</a> = {{60.f, 145.f}}</td></tr>
 <tr class="separator:af1d3b98f82e408cf31671e72b9884169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fd19fb7d2b6a38d651a179deda4c3c5"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a2fd19fb7d2b6a38d651a179deda4c3c5">Emin</a> = 5.</td></tr>
 <tr class="separator:a2fd19fb7d2b6a38d651a179deda4c3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabda84c85d5315fe8d1f37ba5f4e02c3"><td class="memItemLeft" align="right" valign="top">static std::array&lt; bool, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#aabda84c85d5315fe8d1f37ba5f4e02c3">isBGO</a></td></tr>
-<tr class="separator:aabda84c85d5315fe8d1f37ba5f4e02c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f696c2c36f8f152505dedee19be2ca0"><td class="memItemLeft" align="right" valign="top">static std::array&lt; bool, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a2f696c2c36f8f152505dedee19be2ca0">isClover</a></td></tr>
-<tr class="separator:a2f696c2c36f8f152505dedee19be2ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fd25933d58fec7ea47ed1a7ba610ed3"><td class="memItemLeft" align="right" valign="top">static std::array&lt; bool, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a8fd25933d58fec7ea47ed1a7ba610ed3">isGe</a></td></tr>
-<tr class="separator:a8fd25933d58fec7ea47ed1a7ba610ed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7bc9c33c4a997ef7cf615af95059a0c"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#ae7bc9c33c4a997ef7cf615af95059a0c">labels</a></td></tr>
-<tr class="separator:ae7bc9c33c4a997ef7cf615af95059a0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab911b0e211d1222b38039f0d23018754"><td class="memItemLeft" align="right" valign="top">static std::array&lt; bool, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">nb_det</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#ab911b0e211d1222b38039f0d23018754">isBGO</a></td></tr>
+<tr class="separator:ab911b0e211d1222b38039f0d23018754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a687d74db6672d500ea654b1829b793ed"><td class="memItemLeft" align="right" valign="top">static std::array&lt; bool, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">nb_det</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a687d74db6672d500ea654b1829b793ed">isClover</a></td></tr>
+<tr class="separator:a687d74db6672d500ea654b1829b793ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ec1095c6c79a2b350a8b97faf93c454"><td class="memItemLeft" align="right" valign="top">static std::array&lt; bool, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">nb_det</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a1ec1095c6c79a2b350a8b97faf93c454">isGe</a></td></tr>
+<tr class="separator:a1ec1095c6c79a2b350a8b97faf93c454"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a159566fba0cdaa0508d8049c12b7626c"><td class="memItemLeft" align="right" valign="top">static std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">nb_det</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a159566fba0cdaa0508d8049c12b7626c">labels</a></td></tr>
+<tr class="separator:a159566fba0cdaa0508d8049c12b7626c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ff3a807d72cc3c8e51e10d96184f0a6"><td class="memItemLeft" align="right" valign="top">static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">nb_det</a> = 1000</td></tr>
+<tr class="separator:a4ff3a807d72cc3c8e51e10d96184f0a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a413ff8f90d6bcc0321e500633fd96bd5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_gate_8hpp.html#aec153c0c98a059999caa4cfb803777c8">Gate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a413ff8f90d6bcc0321e500633fd96bd5">promptBGOgate</a> = {-20.f, 10.f }</td></tr>
 <tr class="separator:a413ff8f90d6bcc0321e500633fd96bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3189bfc58392c24d6a3dee2ce1a4c663"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_gate_8hpp.html#aec153c0c98a059999caa4cfb803777c8">Gate</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a3189bfc58392c24d6a3dee2ce1a4c663">promptGeGate</a> = {-20.f, 10.f }</td></tr>
@@ -289,8 +291,8 @@ Static Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Static Private Attributes</h2></td></tr>
-<tr class="memitem:a90e876d664b89f0b8b46f4ed07ecd6fe"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a90e876d664b89f0b8b46f4ed07ecd6fe">s_initialised</a> = false</td></tr>
-<tr class="separator:a90e876d664b89f0b8b46f4ed07ecd6fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab8ca513d60be7c305ca022e83c96b2"><td class="memItemLeft" align="right" valign="top">static thread_local bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a8ab8ca513d60be7c305ca022e83c96b2">s_initialised</a> = false</td></tr>
+<tr class="separator:a8ab8ca513d60be7c305ca022e83c96b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52066e9d7cf040173f1790470bf9afff"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_clovers.html#a52066e9d7cf040173f1790470bf9afff">s_time_ps</a> = false</td></tr>
 <tr class="separator:a52066e9d7cf040173f1790470bf9afff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -313,8 +315,7 @@ Static Private Attributes</h2></td></tr>
        root_histo-&gt;Fill(clover.nrj);
      }
    }
-</pre><p> This class is Thread Safe ! </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="addcd7785b41aec6be8988166a5b04fa0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#addcd7785b41aec6be8988166a5b04fa0">&#9670;&nbsp;</a></span>Clovers()</h2>
 
@@ -342,18 +343,19 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_clovers_addcd7785b41aec6be8988166a5b04fa0_cgraph.png" border="0" usemap="#aclass_clovers_addcd7785b41aec6be8988166a5b04fa0_cgraph" alt=""/></div>
 <map name="aclass_clovers_addcd7785b41aec6be8988166a5b04fa0_cgraph" id="aclass_clovers_addcd7785b41aec6be8988166a5b04fa0_cgraph">
-<area shape="rect" title=" " alt="" coords="5,170,133,196"/>
-<area shape="rect" href="class_clovers.html#a10afb56c3c4311007df55386dacba543" title=" " alt="" coords="207,94,350,120"/>
-<area shape="rect" href="class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="190,144,367,171"/>
-<area shape="rect" href="class_clovers.html#a60b7747d54a60759b4eae02deac50f95" title=" " alt="" coords="221,195,337,222"/>
-<area shape="rect" href="class_clover_module.html#afbff08fa0ebf248267295197f33cbd4b" title=" " alt="" coords="181,246,376,288"/>
-<area shape="rect" href="class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0" title=" " alt="" coords="651,43,788,70"/>
-<area shape="rect" href="class_clovers.html#a4940a14c796f0825697af29156644e9c" title=" " alt="" coords="427,43,600,70"/>
-<area shape="rect" href="class_clovers.html#a434508059d1a1f8e1c31dc793505cdc7" title=" " alt="" coords="432,94,595,120"/>
-<area shape="rect" href="class_clovers.html#a9b2bcd83b6884936745b06346b121b73" title=" " alt="" coords="424,144,603,171"/>
-<area shape="rect" href="class_clovers.html#ad047177f1403bb65359a6ad07ba4473a" title=" " alt="" coords="424,195,603,222"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="487,246,539,272"/>
-<area shape="rect" href="class_static_vector.html#a9c5d814a81b352ebbb5d8a07cbdd2699" title=" " alt="" coords="443,296,583,323"/>
+<area shape="rect" title=" " alt="" coords="5,141,133,168"/>
+<area shape="rect" href="class_clovers.html#a10afb56c3c4311007df55386dacba543" title=" " alt="" coords="207,65,350,92"/>
+<area shape="rect" href="class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="190,116,367,143"/>
+<area shape="rect" href="class_clovers.html#a60b7747d54a60759b4eae02deac50f95" title=" " alt="" coords="221,167,337,193"/>
+<area shape="rect" href="class_clover_module.html#afbff08fa0ebf248267295197f33cbd4b" title=" " alt="" coords="181,218,376,259"/>
+<area shape="rect" href="class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0" title=" " alt="" coords="651,40,788,67"/>
+<area shape="rect" href="class_clovers.html#a4940a14c796f0825697af29156644e9c" title=" " alt="" coords="427,40,600,67"/>
+<area shape="rect" href="class_clovers.html#a434508059d1a1f8e1c31dc793505cdc7" title=" " alt="" coords="432,91,595,117"/>
+<area shape="rect" href="class_clovers.html#a9b2bcd83b6884936745b06346b121b73" title=" " alt="" coords="424,141,603,168"/>
+<area shape="rect" href="class_clovers.html#ad047177f1403bb65359a6ad07ba4473a" title=" " alt="" coords="424,192,603,219"/>
+<area shape="rect" href="lib_co_8hpp.html#acffb7404540d3e0a654fd7929081bb70" title=" " alt="" coords="654,167,785,193"/>
+<area shape="rect" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226" title="Casts a number into unsigned char (uchar)" alt="" coords="673,217,765,244"/>
+<area shape="rect" href="class_static_vector.html#a9c5d814a81b352ebbb5d8a07cbdd2699" title=" " alt="" coords="443,243,583,269"/>
 </map>
 </div>
 
@@ -408,7 +410,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="461,71,639,112"/>
 <area shape="rect" href="class_clover_spectra.html#ac087194079e7879a2824f4488db96512" title=" " alt="" coords="449,136,651,177"/>
 <area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="231,143,401,170"/>
-<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,143,183,170"/>
+<area shape="rect" href="class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="5,143,183,170"/>
 </map>
 </div>
 
@@ -556,7 +558,7 @@ Here is the call graph for this function:</div>
 <map name="aclass_clovers_ab1394e718791a5016aa3e0a19828465c_cgraph" id="aclass_clovers_ab1394e718791a5016aa3e0a19828465c_cgraph">
 <area shape="rect" title=" " alt="" coords="5,31,104,57"/>
 <area shape="rect" href="class_static_vector.html#a8f604b0f4165d95a6b6653907c92ceb3" title="Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance..." alt="" coords="339,5,516,32"/>
-<area shape="rect" href="class_static_vector.html#ac0b86d749f8e35274fbac0506c050465" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="152,53,291,94"/>
+<area shape="rect" href="class_static_vector.html#ae9a13402fed613a29197e99ce20396f8" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="152,53,291,94"/>
 <area shape="rect" href="class_static_vector.html#a28a635b7f2cbd0cbc5a042dc22ab7ea3" title=" " alt="" coords="564,5,767,32"/>
 <area shape="rect" href="class_static_vector.html#ad756be87d5c09054f47d40e38ce4b45f" title="Does the vector contain element e ?" alt="" coords="362,60,493,87"/>
 <area shape="rect" href="class_static_vector.html#a78db68071e02cf724af349d0e606ea4e" title="Return iterator to the beginning of the vector." alt="" coords="593,57,737,84"/>
@@ -578,7 +580,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="461,71,639,112"/>
 <area shape="rect" href="class_clover_spectra.html#ac087194079e7879a2824f4488db96512" title=" " alt="" coords="449,136,651,177"/>
 <area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="231,143,401,170"/>
-<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,143,183,170"/>
+<area shape="rect" href="class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="5,143,183,170"/>
 </map>
 </div>
 
@@ -624,7 +626,7 @@ Here is the call graph for this function:</div>
 <map name="aclass_clovers_a5f280f8b6d043a949b726c7ff2b1e019_cgraph" id="aclass_clovers_a5f280f8b6d043a949b726c7ff2b1e019_cgraph">
 <area shape="rect" title=" " alt="" coords="5,52,129,79"/>
 <area shape="rect" href="vector__functions_8hpp.html#a0714a23fb316299fdee1e44d9f46343b" title=" " alt="" coords="177,23,320,49"/>
-<area shape="rect" href="class_static_vector.html#ac0b86d749f8e35274fbac0506c050465" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="179,74,318,115"/>
+<area shape="rect" href="class_static_vector.html#ae9a13402fed613a29197e99ce20396f8" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="179,74,318,115"/>
 <area shape="rect" href="class_static_vector.html#ad756be87d5c09054f47d40e38ce4b45f" title="Does the vector contain element e ?" alt="" coords="391,56,522,83"/>
 <area shape="rect" href="class_static_vector.html#a8f604b0f4165d95a6b6653907c92ceb3" title="Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance..." alt="" coords="368,107,545,133"/>
 <area shape="rect" href="class_static_vector.html#a78db68071e02cf724af349d0e606ea4e" title="Return iterator to the beginning of the vector." alt="" coords="623,5,767,32"/>
@@ -644,8 +646,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ab97fc40c1f6b24a092f8f92562c2fd9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab97fc40c1f6b24a092f8f92562c2fd9a">&#9670;&nbsp;</a></span>InitializeArrays()</h2>
+<a id="aaeeef6197466b4fb5e445e5742bdf6c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeeef6197466b4fb5e445e5742bdf6c7">&#9670;&nbsp;</a></span>InitialiseArrays()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -654,7 +656,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void Clovers::InitializeArrays </td>
+          <td class="memname">static void Clovers::InitialiseArrays </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -667,27 +669,28 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Static initialize. Allows one to use the arrays event if no object has been instantiated. </p>
+<p>Static Initialise. Allows one to use the arrays event if no object has been instantiated. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_cgraph.png" border="0" usemap="#aclass_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_cgraph" alt=""/></div>
-<map name="aclass_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_cgraph" id="aclass_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_cgraph">
-<area shape="rect" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="5,108,183,134"/>
-<area shape="rect" href="class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0" title=" " alt="" coords="457,32,595,58"/>
-<area shape="rect" href="class_clovers.html#a4940a14c796f0825697af29156644e9c" title=" " alt="" coords="233,32,407,58"/>
-<area shape="rect" href="class_clovers.html#a434508059d1a1f8e1c31dc793505cdc7" title=" " alt="" coords="239,82,401,109"/>
-<area shape="rect" href="class_clovers.html#a9b2bcd83b6884936745b06346b121b73" title=" " alt="" coords="231,133,409,160"/>
-<area shape="rect" href="class_clovers.html#ad047177f1403bb65359a6ad07ba4473a" title=" " alt="" coords="231,184,409,210"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="294,234,346,261"/>
+<div class="center"><img src="class_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_cgraph.png" border="0" usemap="#aclass_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_cgraph" alt=""/></div>
+<map name="aclass_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_cgraph" id="aclass_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_cgraph">
+<area shape="rect" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="5,79,183,105"/>
+<area shape="rect" href="class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0" title=" " alt="" coords="457,28,595,55"/>
+<area shape="rect" href="class_clovers.html#a4940a14c796f0825697af29156644e9c" title=" " alt="" coords="233,28,407,55"/>
+<area shape="rect" href="class_clovers.html#a434508059d1a1f8e1c31dc793505cdc7" title=" " alt="" coords="239,79,401,105"/>
+<area shape="rect" href="class_clovers.html#a9b2bcd83b6884936745b06346b121b73" title=" " alt="" coords="231,129,409,156"/>
+<area shape="rect" href="class_clovers.html#ad047177f1403bb65359a6ad07ba4473a" title=" " alt="" coords="231,180,409,207"/>
+<area shape="rect" href="lib_co_8hpp.html#acffb7404540d3e0a654fd7929081bb70" title=" " alt="" coords="461,155,591,181"/>
+<area shape="rect" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226" title="Casts a number into unsigned char (uchar)" alt="" coords="480,205,572,232"/>
 </map>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_icgraph.png" border="0" usemap="#aclass_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_icgraph" alt=""/></div>
-<map name="aclass_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_icgraph" id="aclass_clovers_ab97fc40c1f6b24a092f8f92562c2fd9a_icgraph">
-<area shape="rect" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,5,359,32"/>
+<div class="center"><img src="class_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_icgraph.png" border="0" usemap="#aclass_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_icgraph" alt=""/></div>
+<map name="aclass_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_icgraph" id="aclass_clovers_aaeeef6197466b4fb5e445e5742bdf6c7_icgraph">
+<area shape="rect" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,5,359,32"/>
 <area shape="rect" href="class_clovers.html#addcd7785b41aec6be8988166a5b04fa0" title=" " alt="" coords="5,5,133,32"/>
 </map>
 </div>
@@ -723,7 +726,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_clovers_a9c28e72706c325a4fe3b0aab61c0bfe0_icgraph.png" border="0" usemap="#aclass_clovers_a9c28e72706c325a4fe3b0aab61c0bfe0_icgraph" alt=""/></div>
 <map name="aclass_clovers_a9c28e72706c325a4fe3b0aab61c0bfe0_icgraph" id="aclass_clovers_a9c28e72706c325a4fe3b0aab61c0bfe0_icgraph">
 <area shape="rect" title=" " alt="" coords="628,23,765,50"/>
-<area shape="rect" href="class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,23,359,50"/>
+<area shape="rect" href="class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,23,359,50"/>
 <area shape="rect" href="class_clovers.html#a4940a14c796f0825697af29156644e9c" title=" " alt="" coords="407,23,580,50"/>
 <area shape="rect" href="class_clovers.html#a434508059d1a1f8e1c31dc793505cdc7" title=" " alt="" coords="412,74,575,101"/>
 <area shape="rect" href="class_clovers.html#addcd7785b41aec6be8988166a5b04fa0" title=" " alt="" coords="5,23,133,50"/>
@@ -770,7 +773,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_clovers_a4940a14c796f0825697af29156644e9c_icgraph.png" border="0" usemap="#aclass_clovers_a4940a14c796f0825697af29156644e9c_icgraph" alt=""/></div>
 <map name="aclass_clovers_a4940a14c796f0825697af29156644e9c_icgraph" id="aclass_clovers_a4940a14c796f0825697af29156644e9c_icgraph">
 <area shape="rect" title=" " alt="" coords="407,5,580,32"/>
-<area shape="rect" href="class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,5,359,32"/>
+<area shape="rect" href="class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,5,359,32"/>
 <area shape="rect" href="class_clovers.html#addcd7785b41aec6be8988166a5b04fa0" title=" " alt="" coords="5,5,133,32"/>
 </map>
 </div>
@@ -815,7 +818,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_clovers_a434508059d1a1f8e1c31dc793505cdc7_icgraph.png" border="0" usemap="#aclass_clovers_a434508059d1a1f8e1c31dc793505cdc7_icgraph" alt=""/></div>
 <map name="aclass_clovers_a434508059d1a1f8e1c31dc793505cdc7_icgraph" id="aclass_clovers_a434508059d1a1f8e1c31dc793505cdc7_icgraph">
 <area shape="rect" title=" " alt="" coords="407,5,569,32"/>
-<area shape="rect" href="class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,5,359,32"/>
+<area shape="rect" href="class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,5,359,32"/>
 <area shape="rect" href="class_clovers.html#addcd7785b41aec6be8988166a5b04fa0" title=" " alt="" coords="5,5,133,32"/>
 </map>
 </div>
@@ -904,7 +907,7 @@ Here is the caller graph for this function:</div>
 <map name="aclass_clovers_a9b2bcd83b6884936745b06346b121b73_icgraph" id="aclass_clovers_a9b2bcd83b6884936745b06346b121b73_icgraph">
 <area shape="rect" title=" " alt="" coords="929,101,1108,127"/>
 <area shape="rect" href="class_run_matrixator.html#af360ec9f7686353b663ce0bdcfa3e2df" title=" " alt="" coords="687,75,881,102"/>
-<area shape="rect" href="class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="695,126,873,153"/>
+<area shape="rect" href="class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="695,126,873,153"/>
 <area shape="rect" href="class_run_matrixator.html#a8d8f01fad64864d032395e18b10c2a7e" title=" " alt="" coords="440,7,623,48"/>
 <area shape="rect" href="class_run_matrixator.html#a526469f6440d19b85fd142c797056c65" title=" " alt="" coords="424,75,639,102"/>
 <area shape="rect" href="class_run_matrixator.html#a47322f73c6a9f220f49f9fd85993fcd5" title="Multithreading of loadData_faster (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="197,5,376,47"/>
@@ -940,12 +943,22 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 <div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_clovers_ad047177f1403bb65359a6ad07ba4473a_cgraph.png" border="0" usemap="#aclass_clovers_ad047177f1403bb65359a6ad07ba4473a_cgraph" alt=""/></div>
+<map name="aclass_clovers_ad047177f1403bb65359a6ad07ba4473a_cgraph" id="aclass_clovers_ad047177f1403bb65359a6ad07ba4473a_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,184,57"/>
+<area shape="rect" href="lib_co_8hpp.html#acffb7404540d3e0a654fd7929081bb70" title=" " alt="" coords="232,5,363,32"/>
+<area shape="rect" href="lib_co_8hpp.html#ade77d1f37b1311b3f80ce429a33fd226" title="Casts a number into unsigned char (uchar)" alt="" coords="251,56,343,83"/>
+</map>
+</div>
+<div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_clovers_ad047177f1403bb65359a6ad07ba4473a_icgraph.png" border="0" usemap="#aclass_clovers_ad047177f1403bb65359a6ad07ba4473a_icgraph" alt=""/></div>
 <map name="aclass_clovers_ad047177f1403bb65359a6ad07ba4473a_icgraph" id="aclass_clovers_ad047177f1403bb65359a6ad07ba4473a_icgraph">
 <area shape="rect" title=" " alt="" coords="407,5,585,32"/>
-<area shape="rect" href="class_clovers.html#ab97fc40c1f6b24a092f8f92562c2fd9a" title="Static initialize. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,5,359,32"/>
+<area shape="rect" href="class_clovers.html#aaeeef6197466b4fb5e445e5742bdf6c7" title="Static Initialise. Allows one to use the arrays event if no object has been instantiated." alt="" coords="181,5,359,32"/>
 <area shape="rect" href="class_clovers.html#addcd7785b41aec6be8988166a5b04fa0" title=" " alt="" coords="5,5,133,32"/>
 </map>
 </div>
@@ -1067,7 +1080,7 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_clovers_a0d853153f63a1b04ca62756615dfd741_cgraph.png" border="0" usemap="#aclass_clovers_a0d853153f63a1b04ca62756615dfd741_cgraph" alt=""/></div>
 <map name="aclass_clovers_a0d853153f63a1b04ca62756615dfd741_cgraph" id="aclass_clovers_a0d853153f63a1b04ca62756615dfd741_cgraph">
 <area shape="rect" title=" " alt="" coords="5,31,152,57"/>
-<area shape="rect" href="_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="241,5,293,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="241,5,293,32"/>
 <area shape="rect" href="class_static_vector.html#a44b964207cfd132dda347e246a3640c8" title="Return the position of the write cursor." alt="" coords="200,56,335,83"/>
 </map>
 </div>
@@ -1121,7 +1134,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="461,71,639,112"/>
 <area shape="rect" href="class_clover_spectra.html#ac087194079e7879a2824f4488db96512" title=" " alt="" coords="449,136,651,177"/>
 <area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="231,143,401,170"/>
-<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,143,183,170"/>
+<area shape="rect" href="class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="5,143,183,170"/>
 </map>
 </div>
 
@@ -1190,7 +1203,7 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="class_clovers.html#a60b7747d54a60759b4eae02deac50f95" title=" " alt="" coords="191,155,307,181"/>
 <area shape="rect" href="class_static_vector.html#a8f604b0f4165d95a6b6653907c92ceb3" title="Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance..." alt="" coords="543,56,720,83"/>
 <area shape="rect" href="class_static_vector.html#a28a635b7f2cbd0cbc5a042dc22ab7ea3" title=" " alt="" coords="768,56,971,83"/>
-<area shape="rect" href="class_static_vector.html#ac0b86d749f8e35274fbac0506c050465" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="355,107,494,149"/>
+<area shape="rect" href="class_static_vector.html#ae9a13402fed613a29197e99ce20396f8" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="355,107,494,149"/>
 <area shape="rect" href="class_static_vector.html#ad756be87d5c09054f47d40e38ce4b45f" title="Does the vector contain element e ?" alt="" coords="566,115,697,141"/>
 <area shape="rect" href="class_static_vector.html#a78db68071e02cf724af349d0e606ea4e" title="Return iterator to the beginning of the vector." alt="" coords="797,111,941,137"/>
 <area shape="rect" href="class_static_vector.html#ae80eaa7fb165b6408406870253bd8e5f" title="Return iterator to the end of the vector." alt="" coords="803,161,935,188"/>
@@ -1211,7 +1224,7 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="461,71,639,112"/>
 <area shape="rect" href="class_clover_spectra.html#ac087194079e7879a2824f4488db96512" title=" " alt="" coords="449,136,651,177"/>
 <area shape="rect" href="class_clover_spectra.html#ae46c582451bada5b2b8957ee44b92e35" title=" " alt="" coords="231,143,401,170"/>
-<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="5,143,183,170"/>
+<area shape="rect" href="class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="5,143,183,170"/>
 </map>
 </div>
 
@@ -1264,7 +1277,7 @@ Here is the call graph for this function:</div>
 <area shape="rect" href="class_clovers.html#a5f280f8b6d043a949b726c7ff2b1e019" title=" " alt="" coords="200,112,324,139"/>
 <area shape="rect" href="class_clovers.html#a60b7747d54a60759b4eae02deac50f95" title=" " alt="" coords="204,167,320,193"/>
 <area shape="rect" href="class_static_vector.html#a8f604b0f4165d95a6b6653907c92ceb3" title="Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance..." alt="" coords="572,5,749,32"/>
-<area shape="rect" href="class_static_vector.html#ac0b86d749f8e35274fbac0506c050465" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="383,54,522,95"/>
+<area shape="rect" href="class_static_vector.html#ae9a13402fed613a29197e99ce20396f8" title="Add element to the back of the vector only if the vector do not contain it." alt="" coords="383,54,522,95"/>
 <area shape="rect" href="class_static_vector.html#a28a635b7f2cbd0cbc5a042dc22ab7ea3" title=" " alt="" coords="797,5,1000,32"/>
 <area shape="rect" href="class_static_vector.html#ad756be87d5c09054f47d40e38ce4b45f" title="Does the vector contain element e ?" alt="" coords="595,61,726,88"/>
 <area shape="rect" href="class_static_vector.html#a78db68071e02cf724af349d0e606ea4e" title="Return iterator to the beginning of the vector." alt="" coords="827,57,971,84"/>
@@ -1339,9 +1352,9 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="class_clovers_aa641968a47fb9db9363e89be9c29be4c_icgraph.png" border="0" usemap="#aclass_clovers_aa641968a47fb9db9363e89be9c29be4c_icgraph" alt=""/></div>
 <map name="aclass_clovers_aa641968a47fb9db9363e89be9c29be4c_icgraph" id="aclass_clovers_aa641968a47fb9db9363e89be9c29be4c_icgraph">
 <area shape="rect" title=" " alt="" coords="491,31,615,57"/>
-<area shape="rect" href="class_clover_spectra.html#abf805324f6371f19ef0b3ce45705a115" title=" " alt="" coords="265,31,443,57"/>
+<area shape="rect" href="class_clover_spectra.html#a8b3eedd382c6e2d0de9d4863efdccaea" title=" " alt="" coords="265,31,443,57"/>
 <area shape="rect" href="class_clover_spectra.html#a83b3f64fea8bb8fb6743762ec72e2c04" title=" " alt="" coords="5,5,217,32"/>
-<area shape="rect" href="class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="23,56,200,83"/>
+<area shape="rect" href="class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="23,56,200,83"/>
 </map>
 </div>
 
@@ -1418,8 +1431,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a899c8b03a2cf2772aa085100292b738e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a899c8b03a2cf2772aa085100292b738e">&#9670;&nbsp;</a></span>cristaux_index</h2>
+<a id="aaf1a13c67031efd703a4001cdc6df402"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf1a13c67031efd703a4001cdc6df402">&#9670;&nbsp;</a></span>cristaux_index</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1428,7 +1441,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt; Clovers::cristaux_index</td>
+          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">Clovers::nb_det</a> &gt; Clovers::cristaux_index</td>
         </tr>
       </table>
   </td>
@@ -1440,8 +1453,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a8c76fc2f276e19d4b7a8cc70c9f9cebc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c76fc2f276e19d4b7a8cc70c9f9cebc">&#9670;&nbsp;</a></span>cristaux_index_BGO</h2>
+<a id="abbd356b154fa2369acffc83cca9a6204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbd356b154fa2369acffc83cca9a6204">&#9670;&nbsp;</a></span>cristaux_index_BGO</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1450,7 +1463,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt; Clovers::cristaux_index_BGO</td>
+          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">Clovers::nb_det</a> &gt; Clovers::cristaux_index_BGO</td>
         </tr>
       </table>
   </td>
@@ -1752,8 +1765,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="aabda84c85d5315fe8d1f37ba5f4e02c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabda84c85d5315fe8d1f37ba5f4e02c3">&#9670;&nbsp;</a></span>isBGO</h2>
+<a id="ab911b0e211d1222b38039f0d23018754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab911b0e211d1222b38039f0d23018754">&#9670;&nbsp;</a></span>isBGO</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1762,7 +1775,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; bool, 1000 &gt; Clovers::isBGO</td>
+          <td class="memname">std::array&lt; bool, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">Clovers::nb_det</a> &gt; Clovers::isBGO</td>
         </tr>
       </table>
   </td>
@@ -1774,8 +1787,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a2f696c2c36f8f152505dedee19be2ca0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f696c2c36f8f152505dedee19be2ca0">&#9670;&nbsp;</a></span>isClover</h2>
+<a id="a687d74db6672d500ea654b1829b793ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a687d74db6672d500ea654b1829b793ed">&#9670;&nbsp;</a></span>isClover</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1784,7 +1797,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; bool, 1000 &gt; Clovers::isClover</td>
+          <td class="memname">std::array&lt; bool, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">Clovers::nb_det</a> &gt; Clovers::isClover</td>
         </tr>
       </table>
   </td>
@@ -1796,8 +1809,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a8fd25933d58fec7ea47ed1a7ba610ed3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8fd25933d58fec7ea47ed1a7ba610ed3">&#9670;&nbsp;</a></span>isGe</h2>
+<a id="a1ec1095c6c79a2b350a8b97faf93c454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ec1095c6c79a2b350a8b97faf93c454">&#9670;&nbsp;</a></span>isGe</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1806,7 +1819,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; bool, 1000 &gt; Clovers::isGe</td>
+          <td class="memname">std::array&lt; bool, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">Clovers::nb_det</a> &gt; Clovers::isGe</td>
         </tr>
       </table>
   </td>
@@ -1818,8 +1831,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="ae7bc9c33c4a997ef7cf615af95059a0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7bc9c33c4a997ef7cf615af95059a0c">&#9670;&nbsp;</a></span>labels</h2>
+<a id="a159566fba0cdaa0508d8049c12b7626c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a159566fba0cdaa0508d8049c12b7626c">&#9670;&nbsp;</a></span>labels</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1828,7 +1841,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, 1000 &gt; Clovers::labels</td>
+          <td class="memname">std::array&lt; <a class="el" href="lib_co_8hpp.html#ae48ac2456c5ad6c956fef86e7bef3a21">uchar</a>, <a class="el" href="class_clovers.html#a4ff3a807d72cc3c8e51e10d96184f0a6">Clovers::nb_det</a> &gt; Clovers::labels</td>
         </tr>
       </table>
   </td>
@@ -1850,6 +1863,28 @@ Here is the caller graph for this function:</div>
           <td class="memname">std::vector&lt;<a class="el" href="class_clover_module.html">CloverModule</a>&gt; Clovers::m_clovers</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4ff3a807d72cc3c8e51e10d96184f0a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ff3a807d72cc3c8e51e10d96184f0a6">&#9670;&nbsp;</a></span>nb_det</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int Clovers::nb_det = 1000</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -2038,8 +2073,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="a90e876d664b89f0b8b46f4ed07ecd6fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90e876d664b89f0b8b46f4ed07ecd6fe">&#9670;&nbsp;</a></span>s_initialised</h2>
+<a id="a8ab8ca513d60be7c305ca022e83c96b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ab8ca513d60be7c305ca022e83c96b2">&#9670;&nbsp;</a></span>s_initialised</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2048,7 +2083,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Clovers::s_initialised = false</td>
+          <td class="memname">thread_local bool Clovers::s_initialised = false</td>
         </tr>
       </table>
   </td>

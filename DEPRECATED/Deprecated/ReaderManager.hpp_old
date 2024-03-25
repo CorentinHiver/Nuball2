@@ -41,7 +41,7 @@ Bool_t ReaderManager::readNextFile()
 {
   if(m_filesCursor+1>m_listFiles.size()) return false;
   m_currentFile = m_listFiles.at(m_filesCursor);
-  Bool_t is_file = m_Reader.Initialize(m_currentFile);
+  Bool_t is_file = m_Reader.Initialise(m_currentFile);
   m_filesCursor++;
   if (!is_file) m_filesCursor = 0;// Place the file cursor back to 0, ready to read again from the first file
   return is_file;
@@ -50,13 +50,13 @@ Bool_t ReaderManager::readNextFile()
 Bool_t ReaderManager::setReader(std::string const & _filename)
 {
   m_currentFile = _filename;
-  return  m_Reader.Initialize(_filename);
+  return  m_Reader.Initialise(_filename);
 }
 
 Bool_t ReaderManager::setReader(Int_t const & _filecursor)
 {
   m_currentFile = m_listFiles[_filecursor];
-  return m_Reader.Initialize(m_currentFile);
+  return m_Reader.Initialise(m_currentFile);
 }
 
 Bool_t ReaderManager::addFiles(std::string const & _filename)

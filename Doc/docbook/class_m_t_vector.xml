@@ -16,6 +16,8 @@
 </listitem>
             <listitem><para>std::vector&lt; T &gt; const  &amp; <link linkend="_class_m_t_vector_1ae6e4c7bbe8c226d36b317340c447e914">get</link> () const</para>
 </listitem>
+            <listitem><para>auto &amp; <link linkend="_class_m_t_vector_1a2aedf7ea6cb074610ddcb108b78f9f22">getIndex</link> ()</para>
+</listitem>
             <listitem><para>bool <link linkend="_class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7">getNext</link> (T &amp;t)</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_m_t_vector_1aaae47be200e6af0a341a5f9407fe3a4d">getNext</link> (T &amp;t, <link linkend="_lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638">size_t</link> &amp;index)</para>
@@ -107,7 +109,11 @@
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7"/>    <section>
+    </section><anchor xml:id="_class_m_t_vector_1a2aedf7ea6cb074610ddcb108b78f9f22"/>    <section>
+    <title>getIndex()</title>
+<indexterm><primary>getIndex</primary><secondary>MTVector&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>MTVector&lt; T &gt;</primary><secondary>getIndex</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>auto&amp; <link linkend="_class_m_t_vector">MTVector</link>&lt; T &gt;::getIndex ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7"/>    <section>
     <title>getNext()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>getNext</primary><secondary>MTVector&lt; T &gt;</secondary></indexterm>
 <indexterm><primary>MTVector&lt; T &gt;</primary><secondary>getNext</secondary></indexterm>
@@ -167,15 +173,6 @@
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_vector_a3bca517dd665e4ad48dceab41c6db9f7_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_vector_a3bca517dd665e4ad48dceab41c6db9f7_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

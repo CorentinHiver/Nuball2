@@ -24,11 +24,7 @@ Collaboration diagram for Path:<para>
         <itemizedlist>
             <listitem><para><link linkend="_class_path">Path</link> &amp; <link linkend="_class_path_1a99656cd73eb5c5fa461d7570b86eb66d">addFolder</link> (<link linkend="_class_folder">Folder</link> const &amp;<link linkend="_class_path_1a859f02f9224a864b541b15e8db325409">folder</link>)</para>
 </listitem>
-            <listitem><para>auto <link linkend="_class_path_1a7c25cd5ebf26bf022d3477d9a42f387f">c_str</link> () const</para>
-</listitem>
-            <listitem><para>void <link linkend="_class_path_1ac40c8c627d0412be849f1e6cd4cdc556">cleanPath</link> ()</para>
-
-<para>To remove extraneous ./ or ../. </para>
+            <listitem><para>auto <link linkend="_class_path_1a41729d4a0f1bba6b33666fbced1b3a85">c_str</link> ()</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_path_1aecd02f464b364bc26631bcb65e44843b">exists</link> ()</para>
 </listitem>
@@ -38,8 +34,6 @@ Collaboration diagram for Path:<para>
 </listitem>
             <listitem><para><link linkend="_class_folders">Folders</link> const  &amp; <link linkend="_class_path_1a6aca68097e64629ee5d1e2c02f1b85ee">getFolders</link> () const</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9">load</link> (bool const &amp;create=false)</para>
-</listitem>
             <listitem><para>bool <link linkend="_class_path_1a1f94b3b7d475723ead35e54c87078ed7">make</link> ()</para>
 </listitem>
             <listitem><para>void <link linkend="_class_path_1ac9b837b0071ab41b4b0868590786eeae">makeFolderList</link> ()</para>
@@ -47,8 +41,6 @@ Collaboration diagram for Path:<para>
             <listitem><para>int <link linkend="_class_path_1a67161dbd774db3274fadc0c438b0cdf2">nbFiles</link> ()</para>
 </listitem>
             <listitem><para><link linkend="_class_path_1a0db652f355256181825b11d0199ed0ae">operator bool</link> () const</para>
-</listitem>
-            <listitem><para><link linkend="_class_path_1a6b32e82eaa18b7d2d12bc4eac45b8a4b">operator std::string</link> () const &amp;</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_path_1acb9812e5cc077adf9cecd471b5397a83">operator+</link> (const char *addString)</para>
 </listitem>
@@ -62,6 +54,8 @@ Collaboration diagram for Path:<para>
 </listitem>
             <listitem><para><link linkend="_class_path">Path</link> &amp; <link linkend="_class_path_1a5bb409bfa25a8efe99b9d07e0ea2cf7a">operator=</link> (<link linkend="_class_path">Path</link> &amp;<link linkend="_class_path_1a7797092ad2d61166d4adcecff31e34bb">path</link>)</para>
 </listitem>
+            <listitem><para><link linkend="_class_path">Path</link> &amp; <link linkend="_class_path_1aa834b0a20c0c9940f01da1ea814324e7">operator=</link> (<link linkend="_class_path">Path</link> const &amp;<link linkend="_class_path_1a7797092ad2d61166d4adcecff31e34bb">path</link>)</para>
+</listitem>
             <listitem><para><link linkend="_class_path">Path</link> &amp; <link linkend="_class_path_1a42f3cfe8b84c3e11afc5d54b47522ab3">operator=</link> (std::string const &amp;inputString)</para>
 </listitem>
             <listitem><para>bool <link linkend="_class_path_1a104457a3f7fbf2dcdb86d8c5a168f344">operator==</link> (std::string const &amp;cmprStr)</para>
@@ -72,7 +66,7 @@ Collaboration diagram for Path:<para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_path_1a7797092ad2d61166d4adcecff31e34bb">path</link> () const</para>
 </listitem>
-            <listitem><para><link linkend="_class_path_1ac5e21de774118e980dea1c985155f110">Path</link> (const char *<link linkend="_class_path_1a7c25cd5ebf26bf022d3477d9a42f387f">c_str</link>, bool const &amp;create=false)</para>
+            <listitem><para><link linkend="_class_path_1ac5e21de774118e980dea1c985155f110">Path</link> (const char *<link linkend="_class_path_1a41729d4a0f1bba6b33666fbced1b3a85">c_str</link>, bool const &amp;create=false)</para>
 
 <para>Turns a C string to a path, creating it if create = true and it doesn&apos;t already exists. </para>
 </listitem>
@@ -82,7 +76,7 @@ Collaboration diagram for Path:<para>
 
 <para>Turns a string to a path, creating it if create = true and it doesn&apos;t already exists. </para>
 </listitem>
-            <listitem><para>auto const <link linkend="_class_path_1a34073c3753fbd7873238808f7f5a655b">size</link> () const</para>
+            <listitem><para>auto <link linkend="_class_path_1ae0110636233610d4f90c0441181ccf9f">size</link> () const</para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_path_1aa2f2b14aafcc3fc3626c243fcc6574dc">string</link> () const</para>
 </listitem>
@@ -94,6 +88,17 @@ Collaboration diagram for Path:<para>
             <listitem><para>static <link linkend="_class_path">Path</link> <link linkend="_class_path_1a08c199926ff5432cd3f35c2df4b07433">home</link> ()</para>
 </listitem>
             <listitem><para>static <link linkend="_class_path">Path</link> <link linkend="_class_path_1a0374de2afee27834da4adccf704d4190">pwd</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_class_path_1ac40c8c627d0412be849f1e6cd4cdc556">cleanPath</link> ()</para>
+
+<para>To remove extraneous ./ or ../. </para>
+</listitem>
+            <listitem><para>void <link linkend="_class_path_1af8ae2716e0002e69eff44e6d669e6051">loadPath</link> (bool const &amp;create=false)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -191,15 +196,15 @@ Here is the call graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_path_1a7c25cd5ebf26bf022d3477d9a42f387f"/>    <section>
+    </section><anchor xml:id="_class_path_1a41729d4a0f1bba6b33666fbced1b3a85"/>    <section>
     <title>c_str()</title>
 <indexterm><primary>c_str</primary><secondary>Path</secondary></indexterm>
 <indexterm><primary>Path</primary><secondary>c_str</secondary></indexterm>
-<para><computeroutput>auto Path::c_str ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_path_1ac40c8c627d0412be849f1e6cd4cdc556"/>    <section>
+<para><computeroutput>auto Path::c_str ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_path_1ac40c8c627d0412be849f1e6cd4cdc556"/>    <section>
     <title>cleanPath()</title>
 <indexterm><primary>cleanPath</primary><secondary>Path</secondary></indexterm>
 <indexterm><primary>Path</primary><secondary>cleanPath</secondary></indexterm>
-<para><computeroutput>void Path::cleanPath ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+<para><computeroutput>void Path::cleanPath ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para><para>
 
 <para>To remove extraneous ./ or ../. </para>
 </para>
@@ -225,16 +230,7 @@ Here is the caller graph for this function:<para>
     <title>exists()</title>
 <indexterm><primary>exists</primary><secondary>Path</secondary></indexterm>
 <indexterm><primary>Path</primary><secondary>exists</secondary></indexterm>
-<para><computeroutput>bool Path::exists ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_aecd02f464b364bc26631bcb65e44843b_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-Here is the caller graph for this function:<para>
+<para><computeroutput>bool Path::exists ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -304,16 +300,16 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_path_1aa9b3a53718dcd8ba66d90d50b112ddb9"/>    <section>
-    <title>load()</title>
-<indexterm><primary>load</primary><secondary>Path</secondary></indexterm>
-<indexterm><primary>Path</primary><secondary>load</secondary></indexterm>
-<para><computeroutput>void Path::load (bool const &amp; create = <computeroutput>false</computeroutput>
-)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    </section><anchor xml:id="_class_path_1af8ae2716e0002e69eff44e6d669e6051"/>    <section>
+    <title>loadPath()</title>
+<indexterm><primary>loadPath</primary><secondary>Path</secondary></indexterm>
+<indexterm><primary>Path</primary><secondary>loadPath</secondary></indexterm>
+<para><computeroutput>void Path::loadPath (bool const &amp; create = <computeroutput>false</computeroutput>
+)<computeroutput>[inline]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_aa9b3a53718dcd8ba66d90d50b112ddb9_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_af8ae2716e0002e69eff44e6d669e6051_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -322,7 +318,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_aa9b3a53718dcd8ba66d90d50b112ddb9_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_af8ae2716e0002e69eff44e6d669e6051_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -397,19 +393,6 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_path_1a6b32e82eaa18b7d2d12bc4eac45b8a4b"/>    <section>
-    <title>operator std::string()</title>
-<indexterm><primary>operator std::string</primary><secondary>Path</secondary></indexterm>
-<indexterm><primary>Path</primary><secondary>operator std::string</secondary></indexterm>
-<para><computeroutput>Path::operator std::string ( ) const &amp;<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
     </section><anchor xml:id="_class_path_1acb9812e5cc077adf9cecd471b5397a83"/>    <section>
     <title>operator+()<computeroutput>[1/3]</computeroutput></title>
 <indexterm><primary>operator+</primary><secondary>Path</secondary></indexterm>
@@ -445,7 +428,7 @@ Here is the caller graph for this function:<para>
     </informalfigure>
 </para>
     </section><anchor xml:id="_class_path_1a71da17bb5e324fd092daeca8f56f81ed"/>    <section>
-    <title>operator=()<computeroutput>[1/3]</computeroutput></title>
+    <title>operator=()<computeroutput>[1/4]</computeroutput></title>
 <indexterm><primary>operator=</primary><secondary>Path</secondary></indexterm>
 <indexterm><primary>Path</primary><secondary>operator=</secondary></indexterm>
 <para><computeroutput><link linkend="_class_path">Path</link>&amp; Path::operator= (const char * path)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
@@ -458,7 +441,7 @@ Here is the caller graph for this function:<para>
     </informalfigure>
 </para>
     </section><anchor xml:id="_class_path_1a5bb409bfa25a8efe99b9d07e0ea2cf7a"/>    <section>
-    <title>operator=()<computeroutput>[2/3]</computeroutput></title>
+    <title>operator=()<computeroutput>[2/4]</computeroutput></title>
 <indexterm><primary>operator=</primary><secondary>Path</secondary></indexterm>
 <indexterm><primary>Path</primary><secondary>operator=</secondary></indexterm>
 <para><computeroutput><link linkend="_class_path">Path</link>&amp; Path::operator= (<link linkend="_class_path">Path</link> &amp; path)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
@@ -470,8 +453,21 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
+    </section><anchor xml:id="_class_path_1aa834b0a20c0c9940f01da1ea814324e7"/>    <section>
+    <title>operator=()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>Path</secondary></indexterm>
+<indexterm><primary>Path</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_class_path">Path</link>&amp; Path::operator= (<link linkend="_class_path">Path</link> const &amp; path)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_aa834b0a20c0c9940f01da1ea814324e7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
     </section><anchor xml:id="_class_path_1a42f3cfe8b84c3e11afc5d54b47522ab3"/>    <section>
-    <title>operator=()<computeroutput>[3/3]</computeroutput></title>
+    <title>operator=()<computeroutput>[4/4]</computeroutput></title>
 <indexterm><primary>operator=</primary><secondary>Path</secondary></indexterm>
 <indexterm><primary>Path</primary><secondary>operator=</secondary></indexterm>
 <para><computeroutput><link linkend="_class_path">Path</link>&amp; Path::operator= (std::string const &amp; inputString)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
@@ -526,15 +522,15 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_path_1a34073c3753fbd7873238808f7f5a655b"/>    <section>
+    </section><anchor xml:id="_class_path_1ae0110636233610d4f90c0441181ccf9f"/>    <section>
     <title>size()</title>
 <indexterm><primary>size</primary><secondary>Path</secondary></indexterm>
 <indexterm><primary>Path</primary><secondary>size</secondary></indexterm>
-<para><computeroutput>auto const Path::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<para><computeroutput>auto Path::size ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_a34073c3753fbd7873238808f7f5a655b_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_path_ae0110636233610d4f90c0441181ccf9f_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>

@@ -10,10 +10,10 @@ class ParisCluster
 {
 public:
   // ParisCluster() {}
-  // ParisCluster() : m_label(glabel.fetch_add(1)) {this -> Initialize();}
-  ParisCluster() : m_label() {glabel++; this -> Initialize();}
-  void Initialize();
-  void InitializeBidims();
+  // ParisCluster() : m_label(glabel.fetch_add(1)) {this -> Initialise();}
+  ParisCluster() : m_label() {glabel++; this -> Initialise();}
+  void Initialise();
+  void InitialiseBidims();
   void Reset();
   void Fill(Event const & event, int const & i, uchar const & label);
   void Analyse();
@@ -51,21 +51,21 @@ template<std::size_t nb_phoswitch>
 thread_local uchar ParisCluster<nb_phoswitch>::glabel = 0;
 
 template<std::size_t nb_phoswitch>
-void ParisCluster<nb_phoswitch>::Initialize()
+void ParisCluster<nb_phoswitch>::Initialise()
 {
   int i = 0;
   for (auto & phoswitch : phoswitches) phoswitch.setLabel(i++);
-  // Initialize the containers
+  // Initialise the containers
   // LaBr3s.   resize(nb_phoswitch);
   // NaIs.     resize(nb_phoswitch);
   // positions.resize(nb_phoswitch);
   // nb_neighbors.resize(nb_phoswitch, 0);
 
-  // Initialize the bidim containers
+  // Initialise the bidim containers
   // distances.resize(nb_phoswitch);
   // for (auto & distance : distances) distance.resize(nb_phoswitch, 0.);
 
-  // Initialize the readers
+  // Initialise the readers
   // Hits.      static_resize(nb_phoswitch);
   // hits_no_neighbors.  static_resize(nb_phoswitch);
   // hits_has_neighbors.  static_resize(nb_phoswitch);
@@ -74,7 +74,7 @@ void ParisCluster<nb_phoswitch>::Initialize()
 }
 
 template<std::size_t nb_phoswitch>
-void ParisCluster<nb_phoswitch>::InitializeBidims()
+void ParisCluster<nb_phoswitch>::InitialiseBidims()
 {
   // for (std::size_t i = 0; i<positions.size(); i++)
   // {

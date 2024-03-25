@@ -1,8 +1,8 @@
 var class_gates__t =
 [
     [ "Gates_t", "class_gates__t.html#a296ccceb76e5c87c661a6814b2301e80", null ],
-    [ "Gates_t", "class_gates__t.html#a31ce88cdf09b7b5f9c74d13a22537815", null ],
-    [ "check", "class_gates__t.html#a07f860c7dcd7110ee0da5d523591b12f", null ],
+    [ "Gates_t", "class_gates__t.html#aae7623c7695d3577ee3fdf49a35e10b8", null ],
+    [ "check", "class_gates__t.html#a3a7b9f42116c357f29cf1d24d46e1405", null ],
     [ "isIn", "class_gates__t.html#a0bd9311137fd07879a470fdc692e6503", null ],
     [ "operator()", "class_gates__t.html#a26ce612cac177fd38e869095069452bf", null ],
     [ "size", "class_gates__t.html#a09ccdefe86716e251d36ac2d5dcea922", null ],

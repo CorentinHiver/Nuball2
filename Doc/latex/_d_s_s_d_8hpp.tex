@@ -1,11 +1,12 @@
 \doxysection{lib/\+Analyse/\+DSSD.hpp File Reference}
 \label{_d_s_s_d_8hpp}\index{lib/Analyse/DSSD.hpp@{lib/Analyse/DSSD.hpp}}
-{\ttfamily \#include $<$lib\+Co.\+hpp$>$}\newline
-{\ttfamily \#include $<$lib\+Root.\+hpp$>$}\newline
-{\ttfamily \#include $<$Event.\+hpp$>$}\newline
-{\ttfamily \#include $<$Timewalk.\+hpp$>$}\newline
-{\ttfamily \#include $<$Detectors.\+hpp$>$}\newline
-Include dependency graph for DSSD.\+hpp\+:\nopagebreak
+{\ttfamily \#include \char`\"{}../lib\+Co.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Detectors.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Event.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Timewalk.\+hpp\char`\"{}}\newline
+Include dependency graph for DSSD.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -26,65 +27,3 @@ class \textbf{ DSSD}
 \item 
 class \textbf{ Si\+Strip}
 \begin{DoxyCompactList}\small\item\em Silicon Strip. Represents a strip of the \doxyref{DSSD}{p.}{class_d_s_s_d}. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
-\begin{DoxyCompactItemize}
-\item 
-double \textbf{ distance} = 20
-\item 
-double \textbf{ inner\+Radius} = 15
-\item 
-int const \textbf{ nb\+\_\+rings} = 16
-\item 
-int const \textbf{ nb\+\_\+sectors} = 32
-\item 
-double \textbf{ outer\+Radius} = 41
-\item 
-double \textbf{ ring\+\_\+deg\+\_\+thick} = TMath\+::\+ATan(\textbf{ ring\+\_\+thickness}/\textbf{ distance})
-\item 
-double \textbf{ ring\+\_\+thickness} = (\textbf{ outer\+Radius}-\/\textbf{ inner\+Radius})/\textbf{ nb\+\_\+rings}
-\end{DoxyCompactItemize}
-
-
-\doxysubsection{Variable Documentation}
-\mbox{\label{_d_s_s_d_8hpp_a79b8e036dca6911e3295a47d99f21f43}} 
-\index{DSSD.hpp@{DSSD.hpp}!distance@{distance}}
-\index{distance@{distance}!DSSD.hpp@{DSSD.hpp}}
-\doxysubsubsection{distance}
-{\footnotesize\ttfamily double distance = 20}
-
-\mbox{\label{_d_s_s_d_8hpp_ab2edbac6623ac37db1f0dc2e95ce0e11}} 
-\index{DSSD.hpp@{DSSD.hpp}!innerRadius@{innerRadius}}
-\index{innerRadius@{innerRadius}!DSSD.hpp@{DSSD.hpp}}
-\doxysubsubsection{innerRadius}
-{\footnotesize\ttfamily double inner\+Radius = 15}
-
-\mbox{\label{_d_s_s_d_8hpp_a6f982e9d8d9c8fd28d6d8384eb058324}} 
-\index{DSSD.hpp@{DSSD.hpp}!nb\_rings@{nb\_rings}}
-\index{nb\_rings@{nb\_rings}!DSSD.hpp@{DSSD.hpp}}
-\doxysubsubsection{nb\_rings}
-{\footnotesize\ttfamily int const nb\+\_\+rings = 16}
-
-\mbox{\label{_d_s_s_d_8hpp_a1727ad97c53a82a3ef1c310b909e4dff}} 
-\index{DSSD.hpp@{DSSD.hpp}!nb\_sectors@{nb\_sectors}}
-\index{nb\_sectors@{nb\_sectors}!DSSD.hpp@{DSSD.hpp}}
-\doxysubsubsection{nb\_sectors}
-{\footnotesize\ttfamily int const nb\+\_\+sectors = 32}
-
-\mbox{\label{_d_s_s_d_8hpp_a9b7ffc3533566212552a1ff318432354}} 
-\index{DSSD.hpp@{DSSD.hpp}!outerRadius@{outerRadius}}
-\index{outerRadius@{outerRadius}!DSSD.hpp@{DSSD.hpp}}
-\doxysubsubsection{outerRadius}
-{\footnotesize\ttfamily double outer\+Radius = 41}
-
-\mbox{\label{_d_s_s_d_8hpp_a171e565222e5ede0a6978e8dc588f2b0}} 
-\index{DSSD.hpp@{DSSD.hpp}!ring\_deg\_thick@{ring\_deg\_thick}}
-\index{ring\_deg\_thick@{ring\_deg\_thick}!DSSD.hpp@{DSSD.hpp}}
-\doxysubsubsection{ring\_deg\_thick}
-{\footnotesize\ttfamily double ring\+\_\+deg\+\_\+thick = TMath\+::\+ATan(\textbf{ ring\+\_\+thickness}/\textbf{ distance})}
-
-\mbox{\label{_d_s_s_d_8hpp_a130dbffe4a5a42623871be39c19d4a68}} 
-\index{DSSD.hpp@{DSSD.hpp}!ring\_thickness@{ring\_thickness}}
-\index{ring\_thickness@{ring\_thickness}!DSSD.hpp@{DSSD.hpp}}
-\doxysubsubsection{ring\_thickness}
-{\footnotesize\ttfamily double ring\+\_\+thickness = (\textbf{ outer\+Radius}-\/\textbf{ inner\+Radius})/\textbf{ nb\+\_\+rings}}
-

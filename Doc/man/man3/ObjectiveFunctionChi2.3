@@ -1,0 +1,67 @@
+.TH "ObjectiveFunctionChi2" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+ObjectiveFunctionChi2
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <SpectraAlignator\&.hpp>\fP
+.PP
+Inherits \fBObjectiveFunction\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "double \fBevaluate\fP (std::vector< double > const &coefficients) const override"
+.br
+.ti -1c
+.RI "\fBObjectiveFunctionChi2\fP () noexcept=default"
+.br
+.ti -1c
+.RI "\fBObjectiveFunctionChi2\fP (\fBSpectraCo\fP *spectra_ref, \fBSpectraCo\fP *spectra_test)"
+.br
+.ti -1c
+.RI "void \fBsetRef\fP (\fBSpectraCo\fP *spectra_ref)"
+.br
+.ti -1c
+.RI "void \fBsetTest\fP (\fBSpectraCo\fP *spectra_test)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBSpectraCo\fP * \fBm_spectra_ref\fP = nullptr"
+.br
+.ti -1c
+.RI "\fBSpectraCo\fP * \fBm_spectra_test\fP = nullptr"
+.br
+.in -1c
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "ObjectiveFunctionChi2::ObjectiveFunctionChi2 ()\fC [default]\fP, \fC [noexcept]\fP"
+
+.SS "ObjectiveFunctionChi2::ObjectiveFunctionChi2 (\fBSpectraCo\fP * spectra_ref, \fBSpectraCo\fP * spectra_test)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "double ObjectiveFunctionChi2::evaluate (std::vector< double > const & coefficients) const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Implements \fBObjectiveFunction\fP\&.
+.SS "void ObjectiveFunctionChi2::setRef (\fBSpectraCo\fP * spectra_ref)\fC [inline]\fP"
+
+.SS "void ObjectiveFunctionChi2::setTest (\fBSpectraCo\fP * spectra_test)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "\fBSpectraCo\fP* ObjectiveFunctionChi2::m_spectra_ref = nullptr\fC [private]\fP"
+
+.SS "\fBSpectraCo\fP* ObjectiveFunctionChi2::m_spectra_test = nullptr\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

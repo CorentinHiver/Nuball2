@@ -23,10 +23,8 @@ Collaboration diagram for Path\+:\nopagebreak
 \item 
 \textbf{ Path} \& \textbf{ add\+Folder} (\textbf{ Folder} const \&\textbf{ folder})
 \item 
-auto \textbf{ c\+\_\+str} () const
+auto \textbf{ c\+\_\+str} ()
 \item 
-void \textbf{ clean\+Path} ()
-\begin{DoxyCompactList}\small\item\em To remove extraneous ./ or ../. \end{DoxyCompactList}\item 
 bool \textbf{ exists} ()
 \item 
 \textbf{ Folder} const  \& \textbf{ folder} () const
@@ -35,8 +33,6 @@ std\+::string const  \& \textbf{ get} () const
 \item 
 \textbf{ Folders} const  \& \textbf{ get\+Folders} () const
 \item 
-void \textbf{ load} (bool const \&create=false)
-\item 
 bool \textbf{ make} ()
 \item 
 void \textbf{ make\+Folder\+List} ()
@@ -44,8 +40,6 @@ void \textbf{ make\+Folder\+List} ()
 int \textbf{ nb\+Files} ()
 \item 
 \textbf{ operator bool} () const
-\item 
-\textbf{ operator std\+::string} () const \&
 \item 
 std\+::string \textbf{ operator+} (const char $\ast$add\+String)
 \item 
@@ -58,6 +52,8 @@ std\+::string \textbf{ operator+} (std\+::string const \&add\+String)
 \textbf{ Path} \& \textbf{ operator=} (const char $\ast$\textbf{ path})
 \item 
 \textbf{ Path} \& \textbf{ operator=} (\textbf{ Path} \&\textbf{ path})
+\item 
+\textbf{ Path} \& \textbf{ operator=} (\textbf{ Path} const \&\textbf{ path})
 \item 
 \textbf{ Path} \& \textbf{ operator=} (std\+::string const \&input\+String)
 \item 
@@ -75,7 +71,7 @@ std\+::string const  \& \textbf{ path} () const
 \item 
 \textbf{ Path} (std\+::string const \&\textbf{ path}, bool const \&create=false)
 \begin{DoxyCompactList}\small\item\em Turns a string to a path, creating it if create = true and it doesn\textquotesingle{}t already exists. \end{DoxyCompactList}\item 
-auto const \textbf{ size} () const
+auto \textbf{ size} () const
 \item 
 std\+::string const  \& \textbf{ string} () const
 \end{DoxyCompactItemize}
@@ -85,6 +81,13 @@ std\+::string const  \& \textbf{ string} () const
 static \textbf{ Path} \textbf{ home} ()
 \item 
 static \textbf{ Path} \textbf{ pwd} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ clean\+Path} ()
+\begin{DoxyCompactList}\small\item\em To remove extraneous ./ or ../. \end{DoxyCompactList}\item 
+void \textbf{ load\+Path} (bool const \&create=false)
 \end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -111,7 +114,8 @@ So far, relative paths are not supported (yet hopefully)
 \doxysubsubsection{Path()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily Path\+::\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -134,7 +138,8 @@ Here is the caller graph for this function\+:\nopagebreak
 
 Turns a string to a path, creating it if create = true and it doesn\textquotesingle{}t already exists. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -151,7 +156,8 @@ Here is the call graph for this function\+:\nopagebreak
 
 Turns a C string to a path, creating it if create = true and it doesn\textquotesingle{}t already exists. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -174,30 +180,32 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_path_a99656cd73eb5c5fa461d7570b86eb66d_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_path_a7c25cd5ebf26bf022d3477d9a42f387f}} 
+\mbox{\label{class_path_a41729d4a0f1bba6b33666fbced1b3a85}} 
 \index{Path@{Path}!c\_str@{c\_str}}
 \index{c\_str@{c\_str}!Path@{Path}}
 \doxysubsubsection{c\_str()}
-{\footnotesize\ttfamily auto Path\+::c\+\_\+str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily auto Path\+::c\+\_\+str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\label{class_path_ac40c8c627d0412be849f1e6cd4cdc556}} 
 \index{Path@{Path}!cleanPath@{cleanPath}}
 \index{cleanPath@{cleanPath}!Path@{Path}}
 \doxysubsubsection{cleanPath()}
-{\footnotesize\ttfamily void Path\+::clean\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Path\+::clean\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
 
 
 To remove extraneous ./ or ../. 
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_path_ac40c8c627d0412be849f1e6cd4cdc556_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -210,14 +218,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{exists()}
 {\footnotesize\ttfamily bool Path\+::exists (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_path_aecd02f464b364bc26631bcb65e44843b_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -237,7 +239,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=262pt]{class_path_a859f02f9224a864b541b15e8db325409_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -250,7 +253,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{get()}
 {\footnotesize\ttfamily std\+::string const\& Path\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -276,31 +280,34 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=252pt]{class_path_a08c199926ff5432cd3f35c2df4b07433_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_path_a08c199926ff5432cd3f35c2df4b07433_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_path_aa9b3a53718dcd8ba66d90d50b112ddb9}} 
-\index{Path@{Path}!load@{load}}
-\index{load@{load}!Path@{Path}}
-\doxysubsubsection{load()}
-{\footnotesize\ttfamily void Path\+::load (\begin{DoxyParamCaption}\item[{bool const \&}]{create = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\mbox{\label{class_path_af8ae2716e0002e69eff44e6d669e6051}} 
+\index{Path@{Path}!loadPath@{loadPath}}
+\index{loadPath@{loadPath}!Path@{Path}}
+\doxysubsubsection{loadPath()}
+{\footnotesize\ttfamily void Path\+::load\+Path (\begin{DoxyParamCaption}\item[{bool const \&}]{create = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_path_aa9b3a53718dcd8ba66d90d50b112ddb9_cgraph}
+\includegraphics[width=350pt]{class_path_af8ae2716e0002e69eff44e6d669e6051_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=274pt]{class_path_aa9b3a53718dcd8ba66d90d50b112ddb9_icgraph}
+\includegraphics[width=295pt]{class_path_af8ae2716e0002e69eff44e6d669e6051_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_path_a1f94b3b7d475723ead35e54c87078ed7}} 
@@ -309,14 +316,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{make()}
 {\footnotesize\ttfamily bool Path\+::make (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_path_a1f94b3b7d475723ead35e54c87078ed7_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -329,14 +338,16 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{makeFolderList()}
 {\footnotesize\ttfamily void Path\+::make\+Folder\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=284pt]{class_path_ac9b837b0071ab41b4b0868590786eeae_cgraph}
+\includegraphics[width=350pt]{class_path_ac9b837b0071ab41b4b0868590786eeae_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -367,19 +378,6 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_path_a0db652f355256181825b11d0199ed0ae_cgraph}
-\end{center}
-\end{figure}
-\mbox{\label{class_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b}} 
-\index{Path@{Path}!operator std::string@{operator std::string}}
-\index{operator std::string@{operator std::string}!Path@{Path}}
-\doxysubsubsection{operator std::string()}
-{\footnotesize\ttfamily Path\+::operator std\+::string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=246pt]{class_path_a6b32e82eaa18b7d2d12bc4eac45b8a4b_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_path_acb9812e5cc077adf9cecd471b5397a83}} 
@@ -423,10 +421,11 @@ Here is the call graph for this function\+:\nopagebreak
 \mbox{\label{class_path_a71da17bb5e324fd092daeca8f56f81ed}} 
 \index{Path@{Path}!operator=@{operator=}}
 \index{operator=@{operator=}!Path@{Path}}
-\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily \textbf{ Path}\& Path\+::operator= (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -436,23 +435,39 @@ Here is the call graph for this function\+:\nopagebreak
 \mbox{\label{class_path_a5bb409bfa25a8efe99b9d07e0ea2cf7a}} 
 \index{Path@{Path}!operator=@{operator=}}
 \index{operator=@{operator=}!Path@{Path}}
-\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily \textbf{ Path}\& Path\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Path} \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_path_a5bb409bfa25a8efe99b9d07e0ea2cf7a_cgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_path_aa834b0a20c0c9940f01da1ea814324e7}} 
+\index{Path@{Path}!operator=@{operator=}}
+\index{operator=@{operator=}!Path@{Path}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \textbf{ Path}\& Path\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Path} const \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_path_aa834b0a20c0c9940f01da1ea814324e7_cgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_path_a42f3cfe8b84c3e11afc5d54b47522ab3}} 
 \index{Path@{Path}!operator=@{operator=}}
 \index{operator=@{operator=}!Path@{Path}}
-\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily \textbf{ Path}\& Path\+::operator= (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{input\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -497,24 +512,26 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=245pt]{class_path_a0374de2afee27834da4adccf704d4190_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_path_a0374de2afee27834da4adccf704d4190_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_path_a34073c3753fbd7873238808f7f5a655b}} 
+\mbox{\label{class_path_ae0110636233610d4f90c0441181ccf9f}} 
 \index{Path@{Path}!size@{size}}
 \index{size@{size}!Path@{Path}}
 \doxysubsubsection{size()}
-{\footnotesize\ttfamily auto const Path\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily auto Path\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=256pt]{class_path_a34073c3753fbd7873238808f7f5a655b_cgraph}
+\includegraphics[width=256pt]{class_path_ae0110636233610d4f90c0441181ccf9f_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_path_aa2f2b14aafcc3fc3626c243fcc6574dc}} 
@@ -530,7 +547,8 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=246pt]{class_path_aa2f2b14aafcc3fc3626c243fcc6574dc_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

@@ -21,6 +21,8 @@ Directory dependency graph for Analyse:<para>
 <simplesect>
     <title>Files    </title>
         <itemizedlist>
+            <listitem><para>file <link linkend="__analysed_spectra_8hpp">AnalysedSpectra.hpp</link></para>
+</listitem>
             <listitem><para>file <link linkend="__clover_module_8hpp">CloverModule.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__clovers_8hpp">Clovers.hpp</link></para>
@@ -31,9 +33,9 @@ Directory dependency graph for Analyse:<para>
 </listitem>
             <listitem><para>file <link linkend="__event_analyse_8hpp">EventAnalyse.hpp</link></para>
 </listitem>
-            <listitem><para>file <link linkend="__histo_analyse_8hpp">HistoAnalyse.hpp</link></para>
-</listitem>
             <listitem><para>file <link linkend="__paris_8hpp">Paris.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__paris_bidim_angles_8hpp">ParisBidimAngles.hpp</link></para>
 </listitem>
             <listitem><para>file <link linkend="__paris_cluster_8hpp">ParisCluster.hpp</link></para>
 </listitem>
@@ -47,7 +49,13 @@ Directory dependency graph for Analyse:<para>
 </listitem>
             <listitem><para>file <link linkend="__position_x_y_8hpp">PositionXY.hpp</link></para>
 </listitem>
+            <listitem><para>file <link linkend="__recalibration_8hpp">Recalibration.hpp</link></para>
+</listitem>
             <listitem><para>file <link linkend="__sorted___event_8hpp">Sorted_Event.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></para>
+</listitem>
+            <listitem><para>file <link linkend="__spectra_co_8hpp">SpectraCo.hpp</link></para>
 </listitem>
         </itemizedlist>
 </simplesect>

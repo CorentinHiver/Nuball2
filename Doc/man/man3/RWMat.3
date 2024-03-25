@@ -1,4 +1,4 @@
-.TH "RWMat" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "RWMat" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -39,9 +39,6 @@ RWMat
 .RI "void \fBReSymmetrise\fP ()"
 .br
 .ti -1c
-.RI "template<class T > \fBRWMat\fP (\fBMTTHist\fP< T > &MTRootMat)"
-.br
-.ti -1c
 .RI "\fBRWMat\fP (std::string name='test\&.m4b', int nchans=4096)"
 .br
 .ti -1c
@@ -67,19 +64,19 @@ RWMat
 .RI "bool \fBdeleted\fP = false"
 .br
 .ti -1c
-.RI "double \fBfMaxCounts\fP"
+.RI "double \fBfMaxCounts\fP = 0\&.0"
 .br
 .ti -1c
 .RI "std::string \fBfName\fP"
 .br
 .ti -1c
-.RI "unsigned short \fBfNChannels\fP"
+.RI "unsigned short \fBfNChannels\fP = 0"
 .br
 .ti -1c
-.RI "int ** \fBfRWMat\fP"
+.RI "int ** \fBfRWMat\fP = nullptr"
 .br
 .ti -1c
-.RI "double \fBfTotalCounts\fP"
+.RI "double \fBfTotalCounts\fP = 0\&.0"
 .br
 .ti -1c
 .RI "bool \fBm_ok\fP = true"
@@ -90,8 +87,6 @@ RWMat
 .SS "RWMat::RWMat (std::string name = \fC'test\&.m4b'\fP, int nchans = \fC4096\fP)"
 
 .SS "RWMat::RWMat (TH2F * RootMat)"
-
-.SS "template<class T > RWMat::RWMat (\fBMTTHist\fP< T > & MTRootMat)"
 
 .SS "RWMat::~RWMat ()"
 
@@ -125,15 +120,15 @@ RWMat
 .PP 
 .SS "bool RWMat::deleted = false\fC [protected]\fP"
 
-.SS "double RWMat::fMaxCounts\fC [protected]\fP"
+.SS "double RWMat::fMaxCounts = 0\&.0\fC [protected]\fP"
 
 .SS "std::string RWMat::fName\fC [protected]\fP"
 
-.SS "unsigned short RWMat::fNChannels\fC [protected]\fP"
+.SS "unsigned short RWMat::fNChannels = 0\fC [protected]\fP"
 
-.SS "int** RWMat::fRWMat\fC [protected]\fP"
+.SS "int** RWMat::fRWMat = nullptr\fC [protected]\fP"
 
-.SS "double RWMat::fTotalCounts\fC [protected]\fP"
+.SS "double RWMat::fTotalCounts = 0\&.0\fC [protected]\fP"
 
 .SS "bool RWMat::m_ok = true\fC [protected]\fP"
 

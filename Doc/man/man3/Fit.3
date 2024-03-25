@@ -1,14 +1,14 @@
-.TH "Fit" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Fit" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-Fit \- Allows one to manipulate the results of peaks\&.  
+Fit \- Allows one to manipulate the results of peak fitting\&.  
 
 .SH SYNOPSIS
 .br
 .PP
 .PP
-\fC#include <Calibration\&.hpp>\fP
+\fC#include <Fit\&.hpp>\fP
 .SS "Public Member Functions"
 
 .in +1c
@@ -16,11 +16,11 @@ Fit \- Allows one to manipulate the results of peaks\&.
 .RI "void \fBclear\fP ()"
 .br
 .ti -1c
-.RI "bool \fBenough_counts\fP () const"
+.RI "auto \fBenough_counts\fP () const"
 .br
 .RI "Returns true if fit had enough counts\&. "
 .ti -1c
-.RI "bool const  & \fBexists\fP () const"
+.RI "auto const  & \fBexists\fP () const"
 .br
 .RI "Returns true if fit succeeded\&. "
 .ti -1c
@@ -31,11 +31,11 @@ Fit \- Allows one to manipulate the results of peaks\&.
 .RI "\fBFit\fP ()"
 .br
 .ti -1c
-.RI "bool \fBfound_peaks\fP () const"
+.RI "auto \fBfound_peaks\fP () const"
 .br
 .RI "Returns true if the fit found the peaks\&. "
 .ti -1c
-.RI "\fBLabel\fP const  & \fBlabel\fP () const"
+.RI "auto const  & \fBlabel\fP () const"
 .br
 .ti -1c
 .RI "bool \fBpeaks_found\fP (bool \fBfound\fP)"
@@ -49,7 +49,7 @@ Fit \- Allows one to manipulate the results of peaks\&.
 .br
 .RI "Set the label\&. "
 .ti -1c
-.RI "\fBsize_t\fP \fBsize\fP () const"
+.RI "auto \fBsize\fP () const"
 .br
 .RI "Returns the number of peaks used for calibration\&. "
 .ti -1c
@@ -133,7 +133,7 @@ Fit \- Allows one to manipulate the results of peaks\&.
 .in -1c
 .SH "Detailed Description"
 .PP 
-Allows one to manipulate the results of peaks\&. 
+Allows one to manipulate the results of peak fitting\&. 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "Fit::Fit ()\fC [inline]\fP"
@@ -142,11 +142,11 @@ Allows one to manipulate the results of peaks\&.
 .PP 
 .SS "void Fit::clear ()\fC [inline]\fP"
 
-.SS "bool Fit::enough_counts () const\fC [inline]\fP"
+.SS "auto Fit::enough_counts () const\fC [inline]\fP"
 
 .PP
 Returns true if fit had enough counts\&. 
-.SS "bool const& Fit::exists () const\fC [inline]\fP"
+.SS "auto const& Fit::exists () const\fC [inline]\fP"
 
 .PP
 Returns true if fit succeeded\&. 
@@ -154,11 +154,11 @@ Returns true if fit succeeded\&.
 
 .PP
 Set if the fit succeeded : 
-.SS "bool Fit::found_peaks () const\fC [inline]\fP"
+.SS "auto Fit::found_peaks () const\fC [inline]\fP"
 
 .PP
 Returns true if the fit found the peaks\&. 
-.SS "\fBLabel\fP const& Fit::label () const\fC [inline]\fP"
+.SS "auto const& Fit::label () const\fC [inline]\fP"
 
 .SS "bool Fit::peaks_found (bool found)\fC [inline]\fP"
 
@@ -170,7 +170,7 @@ Set if there was not enough counts :
 
 .PP
 Set the label\&. 
-.SS "\fBsize_t\fP Fit::size () const\fC [inline]\fP"
+.SS "auto Fit::size () const\fC [inline]\fP"
 
 .PP
 Returns the number of peaks used for calibration\&. 

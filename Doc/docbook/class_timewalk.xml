@@ -183,5 +183,5 @@ Here is the caller graph for this function:<para>
 <para><computeroutput>float Timewalk::max = 10000.f<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
-lib/Modules/<link linkend="__timewalk_8hpp">Timewalk.hpp</link></section>
+lib/Classes/<link linkend="__timewalk_8hpp">Timewalk.hpp</link></section>
 </section>

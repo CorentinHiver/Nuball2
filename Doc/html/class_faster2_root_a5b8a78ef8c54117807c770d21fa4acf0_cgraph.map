@@ -1,5 +1,5 @@
 <map id="Faster2Root::loadTriggerFile" name="Faster2Root::loadTriggerFile">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,208,57"/>
-<area shape="rect" id="node2" href="$string__functions_8hpp.html#a03fb03d95885354ac3c329693588097b" title=" " alt="" coords="312,5,371,32"/>
-<area shape="rect" id="node3" href="$class_faster2_root.html#aaa5d89a939efb05b6408e65b5f0117c2" title=" " alt="" coords="256,56,427,83"/>
+<area shape="rect" id="node1" title="Loads a trigger file." alt="" coords="5,31,208,57"/>
+<area shape="rect" id="node2" href="$string__functions_8hpp.html#a87d8e2cb69021ab11e443cb140349eb6" title="Returns true if the string has at least one occurence of substr." alt="" coords="312,5,371,32"/>
+<area shape="rect" id="node3" href="$class_faster2_root.html#a6975bef38e67cce6044eb1ce7f5c2f92" title=" " alt="" coords="256,56,427,83"/>
 </map>

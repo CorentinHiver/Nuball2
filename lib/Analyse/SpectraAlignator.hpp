@@ -22,7 +22,7 @@ public:
   {
   }
 
-  Vertice(std::initializer_list<double> const & init_list) : 
+  Vertice(std::Initialiser_list<double> const & init_list) : 
     m_dim(init_list.size()),
     m_coordinates(init_list)
   {
@@ -497,7 +497,7 @@ public:
         };
     };
 
-    // Initialize the simplex :
+    // Initialise the simplex :
     Simplex simplex(m_initial_vertice);
 
     auto const & n = simplex.dim();// The dimension of the problem

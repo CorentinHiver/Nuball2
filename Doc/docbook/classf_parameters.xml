@@ -75,5 +75,5 @@ class fParameters&lt; nb_param, T &gt;</title></simplesect>
 <computeroutput>template&lt;uchar nb_param, typename T &gt; </computeroutput><para><computeroutput>std::vector&lt;T&gt; <link linkend="_classf_parameters">fParameters</link>&lt; nb_param, T &gt;::m_parameters<computeroutput>[private]</computeroutput></computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
-lib/Modules/<link linkend="__timewalk_8hpp">Timewalk.hpp</link></section>
+lib/Classes/<link linkend="__timewalk_8hpp">Timewalk.hpp</link></section>
 </section>

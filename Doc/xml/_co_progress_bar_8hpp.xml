@@ -1,0 +1,391 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="_co_progress_bar_8hpp" kind="file" language="C++">
+    <compoundname>CoProgressBar.hpp</compoundname>
+    <includes refid="lib_co_8hpp" local="yes">../libCo.hpp</includes>
+    <includes refid="_timer_8hpp" local="yes">Timer.hpp</includes>
+    <includedby refid="_paris_8hpp" local="yes">lib/Analyse/Paris.hpp</includedby>
+    <includedby refid="_m_t_faster_reader_8hpp" local="yes">lib/MTObjects/MTFasterReader.hpp</includedby>
+    <incdepgraph>
+      <node id="19">
+        <label>glob.h</label>
+      </node>
+      <node id="24">
+        <label>functional</label>
+      </node>
+      <node id="5">
+        <label>iomanip</label>
+      </node>
+      <node id="28">
+        <label>queue</label>
+      </node>
+      <node id="20">
+        <label>filesystem</label>
+      </node>
+      <node id="21">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>stdexcept</label>
+      </node>
+      <node id="27">
+        <label>numeric</label>
+      </node>
+      <node id="14">
+        <label>string</label>
+      </node>
+      <node id="7">
+        <label>map</label>
+      </node>
+      <node id="2">
+        <label>../libCo.hpp</label>
+        <link refid="lib_co_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>print.hpp</label>
+        <link refid="print_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>fstream</label>
+      </node>
+      <node id="22">
+        <label>any</label>
+      </node>
+      <node id="16">
+        <label>files_functions.hpp</label>
+        <link refid="files__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>random</label>
+      </node>
+      <node id="33">
+        <label>typeinfo</label>
+      </node>
+      <node id="37">
+        <label>ctime</label>
+      </node>
+      <node id="30">
+        <label>stack</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="8">
+        <label>vector_functions.hpp</label>
+        <link refid="vector__functions_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>array</label>
+      </node>
+      <node id="15">
+        <label>sstream</label>
+      </node>
+      <node id="10">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>cstdlib</label>
+      </node>
+      <node id="4">
+        <label>iostream</label>
+      </node>
+      <node id="12">
+        <label>string_functions.hpp</label>
+        <link refid="string__functions_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>Timer.hpp</label>
+        <link refid="_timer_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>unordered_map</label>
+      </node>
+      <node id="1">
+        <label>lib/Classes/CoProgressBar.hpp</label>
+        <link refid="_co_progress_bar_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>mutex</label>
+      </node>
+      <node id="39">
+        <label>chrono</label>
+      </node>
+      <node id="35">
+        <label>csignal</label>
+      </node>
+      <node id="31">
+        <label>thread</label>
+      </node>
+      <node id="9">
+        <label>algorithm</label>
+      </node>
+      <node id="13">
+        <label>cstring</label>
+      </node>
+      <node id="25">
+        <label>memory</label>
+      </node>
+      <node id="32">
+        <label>typeindex</label>
+      </node>
+      <node id="17">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="8">
+        <label>lib/Modules/Faster2Histo.hpp</label>
+        <link refid="_faster2_histo_8hpp"/>
+      </node>
+      <node id="4">
+        <label>lib/MTObjects/MTFasterReader.hpp</label>
+        <link refid="_m_t_faster_reader_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>lib/Modules/EvolutionPeaks.hpp</label>
+        <link refid="_evolution_peaks_8hpp"/>
+      </node>
+      <node id="3">
+        <label>lib/Analyse/EventAnalyse.hpp</label>
+        <link refid="_event_analyse_8hpp"/>
+      </node>
+      <node id="7">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
+      </node>
+      <node id="9">
+        <label>lib/Modules/Faster2Root.hpp</label>
+        <link refid="_faster2_root_8hpp"/>
+      </node>
+      <node id="10">
+        <label>lib/Modules/RunMatrixator.hpp</label>
+        <link refid="_run_matrixator_8hpp"/>
+      </node>
+      <node id="1">
+        <label>lib/Classes/CoProgressBar.hpp</label>
+        <link refid="_co_progress_bar_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>lib/Analyse/Paris.hpp</label>
+        <link refid="_paris_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>lib/Modules/Calibrator.hpp</label>
+        <link refid="_calibrator_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="class_co_progress_bar" prot="public">CoProgressBar</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>COPROGRESSBAR_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>COPROGRESSBAR_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../libCo.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_timer_8hpp" kindref="compound">Timer.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="26" refid="class_co_progress_bar" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_co_progress_bar" kindref="compound">CoProgressBar</ref></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Constructors<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="class_co_progress_bar_1a81a2ac9c5cde4b3f528cc1cf207715fc" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_co_progress_bar_1a81a2ac9c5cde4b3f528cc1cf207715fc" kindref="member">CoProgressBar</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="32" refid="class_co_progress_bar_1a7d63daa56da1acfbaf261174a5bb38cb" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_co_progress_bar" kindref="compound">CoProgressBar</ref>(T<sp/>*<sp/>value,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>const<sp/>&amp;<sp/>value_max)<sp/>:<sp/><ref refid="class_co_progress_bar_1ab54fee7f6cea3e105918836870d9e95e" kindref="member">m_value</ref>(value),<sp/><ref refid="class_co_progress_bar_1ae22504f867d4a07d27e6fed248cfcbaf" kindref="member">m_value_max</ref>(value_max)<sp/>{}</highlight></codeline>
+<codeline lineno="33" refid="class_co_progress_bar_1ac0f7359ce638713f30880078c6f052cf" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_co_progress_bar_1ac0f7359ce638713f30880078c6f052cf" kindref="member">CoProgressBar</ref>(T<sp/>*<sp/>value,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>value_max,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>width)<sp/>:<sp/><ref refid="class_co_progress_bar_1ab54fee7f6cea3e105918836870d9e95e" kindref="member">m_value</ref>(value),<sp/><ref refid="class_co_progress_bar_1ae22504f867d4a07d27e6fed248cfcbaf" kindref="member">m_value_max</ref>(value_max),<sp/><ref refid="class_co_progress_bar_1a76f13195beb7ba1acce4f94ef511d7c2" kindref="member">m_width</ref>(width)<sp/>{}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Settings<sp/>methods<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="class_co_progress_bar_1a11bd8143244337b4e97858b176f43008" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1a11bd8143244337b4e97858b176f43008" kindref="member">setValue</ref>(T<sp/>*<sp/>value)<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="class_co_progress_bar_1ab54fee7f6cea3e105918836870d9e95e" kindref="member">m_value</ref><sp/>=<sp/>value);}</highlight></codeline>
+<codeline lineno="37" refid="class_co_progress_bar_1a74e7041d7ecfdb4ce5963ba55c63206b" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1a74e7041d7ecfdb4ce5963ba55c63206b" kindref="member">setValueMax</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>value_max)<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<ref refid="class_co_progress_bar_1ae22504f867d4a07d27e6fed248cfcbaf" kindref="member">m_value_max</ref><sp/>=<sp/>value_max);}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Show<sp/>methods<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1a79b92711e75250b41c39aeeca73a1621" kindref="member">show</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>message<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1a0f79e8a642786af052ee7f1356b4bf9d" kindref="member">showFast</ref>();</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="class_co_progress_bar_1a76f13195beb7ba1acce4f94ef511d7c2" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1a76f13195beb7ba1acce4f94ef511d7c2" kindref="member">m_width</ref><sp/>=<sp/>50;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="class_co_progress_bar_1ab54fee7f6cea3e105918836870d9e95e" refkind="member"><highlight class="normal"><sp/><sp/>T*<sp/><ref refid="class_co_progress_bar_1ab54fee7f6cea3e105918836870d9e95e" kindref="member">m_value</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48" refid="class_co_progress_bar_1ae22504f867d4a07d27e6fed248cfcbaf" refkind="member"><highlight class="normal"><sp/><sp/>T<sp/><ref refid="class_co_progress_bar_1ae22504f867d4a07d27e6fed248cfcbaf" kindref="member">m_value_max</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="49" refid="class_co_progress_bar_1a12b03168cd124f1c597a003236748458" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1a12b03168cd124f1c597a003236748458" kindref="member">m_last_value</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="class_co_progress_bar_1ab2fca97c06433ac5c2805cad130edf3a" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_timer" kindref="compound">Timer</ref><sp/><ref refid="class_co_progress_bar_1ab2fca97c06433ac5c2805cad130edf3a" kindref="member">timer</ref>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="class_co_progress_bar_1ae4588f4445f3e4cb4156d55987b93dc8" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1ae4588f4445f3e4cb4156d55987b93dc8" kindref="member">first_time</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="57" refid="class_co_progress_bar_1a0f79e8a642786af052ee7f1356b4bf9d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1a0f79e8a642786af052ee7f1356b4bf9d" kindref="member">CoProgressBar&lt;T&gt;::showFast</ref>()</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!m_value)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;in<sp/>CoProgressBar&lt;T&gt;::show()<sp/>:<sp/>the<sp/>value<sp/>has<sp/>not<sp/>been<sp/>set<sp/>!!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_value_max<sp/>==<sp/>0)<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;in<sp/>CoProgressBar&lt;T&gt;::show()<sp/>:<sp/>the<sp/>maximum<sp/>value<sp/>has<sp/>not<sp/>been<sp/>set<sp/>!!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>real_procentage<sp/>=<sp/><ref refid="lib_co_8hpp_1a075a3c229a21ca4d0e91f72e99a6bf6d" kindref="member">float_cast</ref>(*m_value)/m_value_max;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>nb_chars<sp/>=<sp/><ref refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" kindref="member">int_cast</ref>(real_procentage*m_width);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;|&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;m_width;<sp/>i++)<sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i&lt;nb_chars)<sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;.&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;|<sp/>:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" kindref="member">int_cast</ref>(real_procentage*100)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;%<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\033[F&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>std::cout.flush();</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="76" refid="class_co_progress_bar_1a79b92711e75250b41c39aeeca73a1621" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_co_progress_bar_1a79b92711e75250b41c39aeeca73a1621" kindref="member">CoProgressBar&lt;T&gt;::show</ref>(std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>message)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!m_value)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;in<sp/>CoProgressBar&lt;T&gt;::show()<sp/>:<sp/>the<sp/>value<sp/>has<sp/>not<sp/>been<sp/>set<sp/>!!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(m_value_max<sp/>==<sp/>0)<sp/><ref refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" kindref="member">throw_error</ref>(</highlight><highlight class="stringliteral">&quot;in<sp/>CoProgressBar&lt;T&gt;::show()<sp/>:<sp/>the<sp/>maximum<sp/>value<sp/>has<sp/>not<sp/>been<sp/>set<sp/>!!&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>speed<sp/>=<sp/>0.f;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(first_time)<sp/>{timer.Restart();<sp/>speed<sp/>=<sp/>0;<sp/>first_time<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{speed<sp/>=<sp/>100*((*m_value)-m_last_value)/(timer.TimeSec()*m_value_max);}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>real_procentage<sp/>=<sp/><ref refid="lib_co_8hpp_1a075a3c229a21ca4d0e91f72e99a6bf6d" kindref="member">float_cast</ref>(*m_value)/m_value_max;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>nb_chars<sp/>=<sp/><ref refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" kindref="member">int_cast</ref>(real_procentage*m_width);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;|&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;m_width;<sp/>i++)<sp/></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(i&lt;nb_chars)<sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;.&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;|<sp/>:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/><ref refid="lib_co_8hpp_1a48e80fbfd11f9fb219b92ba1c29c1b2a" kindref="member">int_cast</ref>(real_procentage*100)<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;%<sp/>(&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::setprecision(3)<sp/>&lt;&lt;<sp/>speed<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>%/s)&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(message!=</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">)<sp/>std::cout<sp/>&lt;&lt;<sp/>message<sp/>;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>std::endl<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;\033[F&quot;</highlight><highlight class="normal">;</highlight><highlight class="comment">//<sp/>This<sp/>code<sp/>flushes<sp/>the<sp/>previous<sp/>line</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/>std::cout.flush();</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/>timer.Restart();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/>m_last_value<sp/>=<sp/>*m_value;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//COPROGRESSBAR_HPP</highlight></codeline>
+    </programlisting>
+    <location file="lib/Classes/CoProgressBar.hpp"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,69 @@
+.TH "lib/randomCo.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+lib/randomCo.hpp
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <random>\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBrandomCo\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "double \fBrandomCo::gaussian\fP (double mean, double stddev)"
+.br
+.ti -1c
+.RI "std::mt19937 \fBgen\fP (\fBrd\fP())"
+.br
+.ti -1c
+.RI "void \fBrandomCo::setSeed\fP (int const &_seed)"
+.br
+.ti -1c
+.RI "double \fBrandomCo::uniform\fP ()"
+.br
+.ti -1c
+.RI "double \fBrandomCo::uniform\fP (const double &min, const double &max)"
+.br
+.ti -1c
+.RI "std::uniform_real_distribution< double > \fBuniform_random_generator_double\fP (0, 1)"
+.br
+.ti -1c
+.RI "template<class T > double \fBrandomCo::uniform_t\fP ()"
+.br
+.ti -1c
+.RI "template<class T > double \fBrandomCo::uniform_t\fP (T const &min, T const &max)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static thread_local std::mt19937 \fBrandomCo::generator\fP"
+.br
+.ti -1c
+.RI "std::random_device \fBrd\fP"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "std::mt19937 gen (\fBrd\fP())"
+
+.SS "std::uniform_real_distribution<double> uniform_random_generator_double (0, 1)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "std::random_device rd"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

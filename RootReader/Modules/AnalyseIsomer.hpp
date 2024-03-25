@@ -19,7 +19,7 @@ public:
   AnalyseIsomer(){}
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const &  param);
-  void InitializeManip();
+  void InitialiseManip();
   static void run(Parameters & p, AnalyseIsomer & ai);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
@@ -63,7 +63,7 @@ bool AnalyseIsomer::nuball2_tree = false;
 bool AnalyseIsomer::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
   this -> Write();
@@ -108,9 +108,9 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
   } // End files loop
 }
 
-void AnalyseIsomer::InitializeManip()
+void AnalyseIsomer::InitialiseManip()
 {
-  print("Initialize histograms");
+  print("Initialise histograms");
 
   Ge_spectra.reset("Ge spectra","Ge spectra", 14000,0,7000);
   Ge_spectra_prompt.reset("Ge spectra prompt","Ge spectra prompt", 14000,0,7000);

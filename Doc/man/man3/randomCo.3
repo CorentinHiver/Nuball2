@@ -1,0 +1,58 @@
+.TH "randomCo" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+randomCo
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "double \fBgaussian\fP (double mean, double stddev)"
+.br
+.ti -1c
+.RI "void \fBsetSeed\fP (int const &_seed)"
+.br
+.ti -1c
+.RI "double \fBuniform\fP ()"
+.br
+.ti -1c
+.RI "double \fBuniform\fP (const double &min, const double &max)"
+.br
+.ti -1c
+.RI "template<class T > double \fBuniform_t\fP ()"
+.br
+.ti -1c
+.RI "template<class T > double \fBuniform_t\fP (T const &min, T const &max)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "static thread_local std::mt19937 \fBgenerator\fP"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "double randomCo::gaussian (double mean, double stddev)"
+
+.SS "void randomCo::setSeed (int const & _seed)"
+
+.SS "double randomCo::uniform ()"
+
+.SS "double randomCo::uniform (const double & min, const double & max)"
+
+.SS "template<class T > double randomCo::uniform_t ()"
+
+.SS "template<class T > double randomCo::uniform_t (T const & min, T const & max)"
+
+.SH "Variable Documentation"
+.PP 
+.SS "thread_local std::mt19937 randomCo::generator\fC [static]\fP"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

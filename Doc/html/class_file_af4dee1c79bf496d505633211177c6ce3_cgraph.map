@@ -1,17 +1,16 @@
 <map id="File::setExtension" name="File::setExtension">
-<area shape="rect" id="node1" title=" " alt="" coords="5,81,143,108"/>
-<area shape="rect" id="node2" href="$class_filename.html#a2d925b1dc8e2afbd09e729be3f3603b2" title=" " alt="" coords="191,44,365,71"/>
-<area shape="rect" id="node4" href="$class_file.html#a8f6a2ccec2d48112847c89541d13bc10" title=" " alt="" coords="229,107,327,133"/>
-<area shape="rect" id="node3" href="$class_filename.html#aaebbbc0d7ac17984013bffbd87d05763" title=" " alt="" coords="413,31,548,57"/>
-<area shape="rect" id="node5" href="$class_file.html#a6b15fde4d8bb49099cdf7f27c4f36fae" title=" " alt="" coords="435,81,526,108"/>
-<area shape="rect" id="node13" href="$class_path.html#aa2f2b14aafcc3fc3626c243fcc6574dc" title=" " alt="" coords="433,132,528,159"/>
-<area shape="rect" id="node15" href="$class_filename.html#a46cfb960345a190b3971553c65f702b4" title=" " alt="" coords="417,183,544,209"/>
-<area shape="rect" id="node6" href="$class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="596,5,693,32"/>
-<area shape="rect" id="node9" href="$files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="601,56,689,83"/>
-<area shape="rect" id="node12" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="619,107,671,133"/>
-<area shape="rect" id="node7" href="$files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3" title=" " alt="" coords="741,5,848,32"/>
-<area shape="rect" id="node8" href="$files__functions_8hpp.html#a4a072faccd444b8907dffd96e6211461" title=" " alt="" coords="896,5,1043,32"/>
-<area shape="rect" id="node10" href="$files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="759,56,830,83"/>
-<area shape="rect" id="node11" href="$files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="745,107,845,133"/>
-<area shape="rect" id="node14" href="$class_path.html#a4e4d7d7670941e8ddc58261a4fac0916" title=" " alt="" coords="605,157,684,184"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,143,133"/>
+<area shape="rect" id="node2" href="$class_filename.html#a2d925b1dc8e2afbd09e729be3f3603b2" title=" " alt="" coords="191,56,365,83"/>
+<area shape="rect" id="node5" href="$class_file.html#a8f6a2ccec2d48112847c89541d13bc10" title=" " alt="" coords="229,132,327,159"/>
+<area shape="rect" id="node3" href="$string__functions_8hpp.html#a9b6b51fed28f705d129f02193ce89b3c" title="Remove the first substr to the string if found." alt="" coords="445,5,517,32"/>
+<area shape="rect" id="node4" href="$class_filename.html#aaebbbc0d7ac17984013bffbd87d05763" title=" " alt="" coords="413,56,548,83"/>
+<area shape="rect" id="node6" href="$class_file.html#a6b15fde4d8bb49099cdf7f27c4f36fae" title=" " alt="" coords="435,107,526,133"/>
+<area shape="rect" id="node12" href="$class_path.html#aa2f2b14aafcc3fc3626c243fcc6574dc" title=" " alt="" coords="433,157,528,184"/>
+<area shape="rect" id="node14" href="$class_filename.html#a46cfb960345a190b3971553c65f702b4" title=" " alt="" coords="417,208,544,235"/>
+<area shape="rect" id="node7" href="$class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="596,31,693,57"/>
+<area shape="rect" id="node8" href="$files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="601,81,689,108"/>
+<area shape="rect" id="node11" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="619,132,671,159"/>
+<area shape="rect" id="node9" href="$files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="756,56,827,83"/>
+<area shape="rect" id="node10" href="$files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="741,107,841,133"/>
+<area shape="rect" id="node13" href="$class_path.html#a4e4d7d7670941e8ddc58261a4fac0916" title=" " alt="" coords="605,183,684,209"/>
 </map>

@@ -9,6 +9,8 @@ var class_i_options =
     [ "p", "class_i_options.html#a73a8079d9aabef8cd70b9a8713be9ce3", null ],
     [ "q", "class_i_options.html#adb4538164fb33f5375f1f72601f4aefb", null ],
     [ "Q", "class_i_options.html#a3b860786dd7c7cef82d6f00b2e64a05e", null ],
+    [ "q3", "class_i_options.html#a7a7584f389ca9b8f293c434259e7b2ed", null ],
+    [ "Q3", "class_i_options.html#ac054625a2121f43014087db4ae9b9c55", null ],
     [ "s", "class_i_options.html#aa727e950a396e908cf8ebd137dc4f539", null ],
     [ "t", "class_i_options.html#af82eb678f8bb2f7984016b278cc24875", null ],
     [ "T", "class_i_options.html#a48254b9cb7fdeeacf1f42444333a377a", null ]

@@ -189,7 +189,7 @@ void Faster2Histo::load(int const & argc, char** argv)
 inline void Faster2Histo::multirun(int const & nb_threads)
 {
   // Initialise the multithreading. Either initialise with previously set number or 1 if not, or with nb_threads
-  (nb_threads<0) ? MTObject::Initialize() : MTObject::Initialize(nb_threads);
+  (nb_threads<0) ? MTObject::Initialise() : MTObject::Initialise(nb_threads);
 
   // Set the files to the reader
   m_MTreader.files() = m_files;

@@ -3,14 +3,16 @@
 {\ttfamily \#include \char`\"{}Hit.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib\+Co.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
-Include dependency graph for Event.\+hpp\+:\nopagebreak
+Include dependency graph for Event.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{_event_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,11 +24,29 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 class \textbf{ Event}
 \begin{DoxyCompactList}\small\item\em \doxyref{Event}{p.}{class_event} used for reading and writting event, event building and trigger. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ Trigger\+Event} = std\+::function$<$ bool(const \textbf{ Event} \&)$>$
+\begin{DoxyCompactList}\small\item\em Trigger definition ///. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ Event} const \&event)
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{_event_8hpp_a19365add2f462b2c1532b04c9fc170d8}} 
+\index{Event.hpp@{Event.hpp}!TriggerEvent@{TriggerEvent}}
+\index{TriggerEvent@{TriggerEvent}!Event.hpp@{Event.hpp}}
+\doxysubsubsection{TriggerEvent}
+{\footnotesize\ttfamily using \textbf{ Trigger\+Event} =  std\+::function$<$bool(const \textbf{ Event}\&)$>$}
+
+
+
+Trigger definition ///. 
+
 
 
 \doxysubsection{Function Documentation}

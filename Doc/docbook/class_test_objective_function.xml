@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_test_objective_function" xml:lang="en-US">
+<title>TestObjectiveFunction Class Reference</title>
+<indexterm><primary>TestObjectiveFunction</primary></indexterm>
+<para>
+<computeroutput>#include &lt;SpectraAlignator.hpp&gt;</computeroutput>
+</para>
+Inheritance diagram for TestObjectiveFunction:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_test_objective_function__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for TestObjectiveFunction:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_test_objective_function__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>double <link linkend="_class_test_objective_function_1a37613667d05da9ece656c1bfb9b48843">evaluate</link> (std::vector&lt; double &gt; const &amp;coefficients) const override</para>
+</listitem>
+            <listitem><para><link linkend="_class_test_objective_function_1a4e14bcf861e99f85e3c513e0860d0de9">TestObjectiveFunction</link> () noexcept=default</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_test_objective_function_1a4e14bcf861e99f85e3c513e0860d0de9"/>    <section>
+    <title>TestObjectiveFunction()</title>
+<indexterm><primary>TestObjectiveFunction</primary><secondary>TestObjectiveFunction</secondary></indexterm>
+<indexterm><primary>TestObjectiveFunction</primary><secondary>TestObjectiveFunction</secondary></indexterm>
+<para><computeroutput>TestObjectiveFunction::TestObjectiveFunction ( )<computeroutput>[default]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_test_objective_function_1a37613667d05da9ece656c1bfb9b48843"/>    <section>
+    <title>evaluate()</title>
+<indexterm><primary>evaluate</primary><secondary>TestObjectiveFunction</secondary></indexterm>
+<indexterm><primary>TestObjectiveFunction</primary><secondary>evaluate</secondary></indexterm>
+<para><computeroutput>double TestObjectiveFunction::evaluate (std::vector&lt; double &gt; const &amp; coefficients) const<computeroutput>[inline]</computeroutput>, <computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_class_objective_function_1a9eb6407e18579b7eddcffcfe55badf20">ObjectiveFunction</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Analyse/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+</section>

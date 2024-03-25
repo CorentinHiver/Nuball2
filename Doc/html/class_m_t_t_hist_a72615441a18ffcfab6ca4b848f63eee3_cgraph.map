@@ -1,4 +1,5 @@
 <map id="MTTHist::Merged" name="MTTHist::Merged">
 <area shape="rect" id="node1" title=" " alt="" coords="5,5,139,32"/>
-<area shape="rect" id="node2" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="187,5,239,32"/>
+<area shape="rect" id="node2" href="$print_8hpp.html#a7c50c0690489629965f74c4921570ce5" title="Requires #define DEBUG or &#45;DDEBUG in the compile line." alt="" coords="187,5,249,32"/>
+<area shape="rect" id="node3" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="297,5,349,32"/>
 </map>

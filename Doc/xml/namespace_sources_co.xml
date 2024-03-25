@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespace_sources_co" kind="namespace" language="C++">
+    <compoundname>SourcesCo</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespace_sources_co_1ac98f545082a728c551c82635c5b5791c" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; SourcesCo::Co60</definition>
+        <argsstring></argsstring>
+        <name>Co60</name>
+        <initializer>= {1173.228, 1332.492}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/sources.hpp" line="10" column="15" bodyfile="lib/sources.hpp" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_sources_co_1a621d7f2e2fa179581cc32bf8e3ab8e5e" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; SourcesCo::Cs137</definition>
+        <argsstring></argsstring>
+        <name>Cs137</name>
+        <initializer>= {661.657}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/sources.hpp" line="12" column="15" bodyfile="lib/sources.hpp" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_sources_co_1abe9a6ff287ecdd65b5e43c0d51446091" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; SourcesCo::Eu152_10</definition>
+        <argsstring></argsstring>
+        <name>Eu152_10</name>
+        <initializer>= {121.7817, 244.6974, 443.9606, 867.380, 964.057, 1085.837, 1112.076, 1212.948, 1408.013}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/sources.hpp" line="8" column="15" bodyfile="lib/sources.hpp" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_sources_co_1a630d56c9ac0b13d6ce22f599d0e515d3" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; SourcesCo::Eu152_5</definition>
+        <argsstring></argsstring>
+        <name>Eu152_5</name>
+        <initializer>= {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/sources.hpp" line="6" column="15" bodyfile="lib/sources.hpp" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/sources.hpp" line="4" column="1"/>
+  </compounddef>
+</doxygen>

@@ -16,7 +16,7 @@
 <area shape="rect" id="node16" href="$class_detectors.html#aaadeec0d94fd7daea1b8e4c9d861fbde" title="Get the default energy (keV) histogram binning for each type of detectors." alt="" coords="729,360,887,387"/>
 <area shape="rect" id="node17" href="$class_detectors.html#ae5e6ff02bf3d79da3f034f7404e0677c" title="Returns the number of detector of each type." alt="" coords="731,56,885,83"/>
 <area shape="rect" id="node20" href="$class_detectors.html#a24d220832c2f0a03a0d886e11f2c284c" title="Returns the number of types in the ID file." alt="" coords="735,259,881,285"/>
-<area shape="rect" id="node21" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="749,309,867,336"/>
+<area shape="rect" id="node21" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy Initialiser." alt="" coords="749,309,867,336"/>
 <area shape="rect" id="node22" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="749,107,867,133"/>
 <area shape="rect" id="node24" href="$class_detectors.html#ab4d5e6cc24173a65a35788ba7c680264" title=" " alt="" coords="729,563,887,589"/>
 <area shape="rect" id="node25" href="$class_detectors.html#a6c368aa8fe9d985fd742371179718d71" title=" " alt="" coords="743,411,873,437"/>

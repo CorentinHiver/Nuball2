@@ -16,9 +16,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="117" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="117" bodyend="-1"/>
-        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="92" endline="107">getNext</referencedby>
-        <referencedby refid="class_manip_1a580f1eee22ca0c4f2419867c7a15cb85" compoundref="_manip_8hpp" startline="114" endline="114">reset</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="112" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="112" bodyend="-1"/>
+        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="87" endline="102">getNext</referencedby>
+        <referencedby refid="class_manip_1a580f1eee22ca0c4f2419867c7a15cb85" compoundref="_manip_8hpp" startline="109" endline="109">reset</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -31,13 +31,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="126" column="15" bodyfile="lib/Classes/Manip.hpp" bodystart="126" bodyend="-1"/>
-        <referencedby refid="class_manip_1a86ed3dd2dc6d3b8b7342a9552bc43e26" compoundref="_manip_8hpp" startline="52" endline="55">addFolder</referencedby>
-        <referencedby refid="class_manip_1a41dfa1aac77e2340abf4f66934af0092" compoundref="_manip_8hpp" startline="42" endline="42">get</referencedby>
-        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="92" endline="107">getNext</referencedby>
-        <referencedby refid="class_manip_1a6390322006ca8d8e7c350a3a915182e8" compoundref="_manip_8hpp" startline="90" endline="90">Print</referencedby>
-        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="30" endline="40">readFile</referencedby>
-        <referencedby refid="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" compoundref="_manip_8hpp" startline="44" endline="50">setFolder</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="121" column="15" bodyfile="lib/Classes/Manip.hpp" bodystart="121" bodyend="-1"/>
+        <referencedby refid="class_manip_1a86ed3dd2dc6d3b8b7342a9552bc43e26" compoundref="_manip_8hpp" startline="41" endline="45">addFolder</referencedby>
+        <referencedby refid="class_manip_1a41dfa1aac77e2340abf4f66934af0092" compoundref="_manip_8hpp" startline="29" endline="29">get</referencedby>
+        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="87" endline="102">getNext</referencedby>
+        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="17" endline="27">readFile</referencedby>
+        <referencedby refid="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" compoundref="_manip_8hpp" startline="32" endline="38">setFolder</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" prot="private" static="no" mutable="no">
         <type><ref refid="_m_t_list_8hpp_1a5645cb48b623bfc2e6e274c70952a8e2" kindref="member">MTList</ref></type>
@@ -50,11 +49,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="127" column="10" bodyfile="lib/Classes/Manip.hpp" bodystart="127" bodyend="-1"/>
-        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="92" endline="107">getNext</referencedby>
-        <referencedby refid="class_manip_1a6390322006ca8d8e7c350a3a915182e8" compoundref="_manip_8hpp" startline="90" endline="90">Print</referencedby>
-        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="30" endline="40">readFile</referencedby>
-        <referencedby refid="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" compoundref="_manip_8hpp" startline="44" endline="50">setFolder</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="122" column="10" bodyfile="lib/Classes/Manip.hpp" bodystart="122" bodyend="-1"/>
+        <referencedby refid="class_manip_1a86ed3dd2dc6d3b8b7342a9552bc43e26" compoundref="_manip_8hpp" startline="41" endline="45">addFolder</referencedby>
+        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="87" endline="102">getNext</referencedby>
+        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="17" endline="27">readFile</referencedby>
+        <referencedby refid="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" compoundref="_manip_8hpp" startline="32" endline="38">setFolder</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_manip_1ac2ac621173f7cd52f01c5b4b50a56e5e" prot="private" static="no" mutable="no">
         <type><ref refid="class_path" kindref="compound">Path</ref></type>
@@ -67,9 +66,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="121" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="121" bodyend="-1"/>
-        <referencedby refid="class_manip_1a4da401a6eb5a013a4150e01b81ecf853" compoundref="_manip_8hpp" startline="57" endline="61">readFile</referencedby>
-        <referencedby refid="class_manip_1aba047d84e5c3eaff3640c2ed8f31aaea" compoundref="_manip_8hpp" startline="63" endline="66">setDataPath</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="116" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="116" bodyend="-1"/>
+        <referencedby refid="class_manip_1a4fe55690c18999195a5c4c3bec5e6b17" compoundref="_manip_8hpp" startline="48" endline="52">readFile</referencedby>
+        <referencedby refid="class_manip_1aba047d84e5c3eaff3640c2ed8f31aaea" compoundref="_manip_8hpp" startline="55" endline="58">setDataPath</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_manip_1a8e335c089c27a67924e3955f5707fc9f" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -82,9 +81,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="124" column="15" bodyfile="lib/Classes/Manip.hpp" bodystart="124" bodyend="-1"/>
-        <referencedby refid="class_manip_1a4da401a6eb5a013a4150e01b81ecf853" compoundref="_manip_8hpp" startline="57" endline="61">readFile</referencedby>
-        <referencedby refid="class_manip_1af3f64608a08dd23d186f48e8c1beeba0" compoundref="_manip_8hpp" startline="73" endline="76">setFileName</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="119" column="15" bodyfile="lib/Classes/Manip.hpp" bodystart="119" bodyend="-1"/>
+        <referencedby refid="class_manip_1a4fe55690c18999195a5c4c3bec5e6b17" compoundref="_manip_8hpp" startline="48" endline="52">readFile</referencedby>
+        <referencedby refid="class_manip_1af3f64608a08dd23d186f48e8c1beeba0" compoundref="_manip_8hpp" startline="66" endline="69">setFileName</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_manip_1a2d82ae040e3db69e9dcac867180f918e" prot="private" static="no" mutable="no">
         <type><ref refid="class_folder" kindref="compound">Folder</ref></type>
@@ -97,9 +96,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="123" column="10" bodyfile="lib/Classes/Manip.hpp" bodystart="123" bodyend="-1"/>
-        <referencedby refid="class_manip_1a4da401a6eb5a013a4150e01b81ecf853" compoundref="_manip_8hpp" startline="57" endline="61">readFile</referencedby>
-        <referencedby refid="class_manip_1a7f2aa2947cd843abecac34300b6da94e" compoundref="_manip_8hpp" startline="68" endline="71">setManipName</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="118" column="10" bodyfile="lib/Classes/Manip.hpp" bodystart="118" bodyend="-1"/>
+        <referencedby refid="class_manip_1a4fe55690c18999195a5c4c3bec5e6b17" compoundref="_manip_8hpp" startline="48" endline="52">readFile</referencedby>
+        <referencedby refid="class_manip_1a7f2aa2947cd843abecac34300b6da94e" compoundref="_manip_8hpp" startline="61" endline="64">setManipName</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -113,12 +112,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="119" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="119" bodyend="-1"/>
-        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="92" endline="107">getNext</referencedby>
-        <referencedby refid="class_manip_1a6390322006ca8d8e7c350a3a915182e8" compoundref="_manip_8hpp" startline="90" endline="90">Print</referencedby>
-        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="30" endline="40">readFile</referencedby>
-        <referencedby refid="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" compoundref="_manip_8hpp" startline="44" endline="50">setFolder</referencedby>
-        <referencedby refid="class_manip_1ab0813163118017c1064ec02f091356b8" compoundref="_manip_8hpp" startline="78" endline="86">setMT</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="114" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="114" bodyend="-1"/>
+        <referencedby refid="class_manip_1a86ed3dd2dc6d3b8b7342a9552bc43e26" compoundref="_manip_8hpp" startline="41" endline="45">addFolder</referencedby>
+        <referencedby refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="87" endline="102">getNext</referencedby>
+        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="17" endline="27">readFile</referencedby>
+        <referencedby refid="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" compoundref="_manip_8hpp" startline="32" endline="38">setFolder</referencedby>
+        <referencedby refid="class_manip_1ab0813163118017c1064ec02f091356b8" compoundref="_manip_8hpp" startline="73" endline="81">setMT</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_manip_1ade3e293cfef09fb727b8d549d5190ecf" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -131,10 +130,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="118" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="118" bodyend="-1"/>
-        <referencedby refid="class_manip_1ad509e37dce3d5a639115b54f16ded598" compoundref="_manip_8hpp" startline="88" endline="88">operator bool</referencedby>
-        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="30" endline="40">readFile</referencedby>
-        <referencedby refid="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" compoundref="_manip_8hpp" startline="44" endline="50">setFolder</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="113" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="113" bodyend="-1"/>
+        <referencedby refid="class_manip_1ad509e37dce3d5a639115b54f16ded598" compoundref="_manip_8hpp" startline="83" endline="83">operator bool</referencedby>
+        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="17" endline="27">readFile</referencedby>
+        <referencedby refid="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" compoundref="_manip_8hpp" startline="32" endline="38">setFolder</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_manip_1af08813391e63fd965d34ff2ff31c6453" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -147,9 +146,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="122" column="15" bodyfile="lib/Classes/Manip.hpp" bodystart="122" bodyend="-1"/>
-        <referencedby refid="class_manip_1aab38d946797ab4e5b03c02d9bf69aa0c" compoundref="_manip_8hpp" startline="13" endline="13">Manip</referencedby>
-        <referencedby refid="class_manip_1a4da401a6eb5a013a4150e01b81ecf853" compoundref="_manip_8hpp" startline="57" endline="61">readFile</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="117" column="15" bodyfile="lib/Classes/Manip.hpp" bodystart="117" bodyend="-1"/>
+        <referencedby refid="class_manip_1aab38d946797ab4e5b03c02d9bf69aa0c" compoundref="_manip_8hpp" startline="15" endline="15">Manip</referencedby>
+        <referencedby refid="class_manip_1a4fe55690c18999195a5c4c3bec5e6b17" compoundref="_manip_8hpp" startline="48" endline="52">readFile</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -163,13 +162,17 @@
           <declname>folder</declname>
         </param>
         <briefdescription>
+<para>Clears the previously set list of folders and replace it with folder. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="52" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="52" bodyend="55"/>
-        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="126">list_runs</references>
+        <location file="lib/Classes/Manip.hpp" line="41" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="41" bodyend="45"/>
+        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="121">list_runs</references>
+        <references refid="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" compoundref="_manip_8hpp" startline="122">list_runs_MT</references>
+        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="114">m_MTOn</references>
+        <references refid="class_m_t_vector_1ada63ea1ffe18a57ba1ce0e87e45e497c" compoundref="_m_t_list_8hpp" startline="57" endline="57">MTVector&lt; T &gt;::push_back</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1a41dfa1aac77e2340abf4f66934af0092" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -182,9 +185,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="42" column="15" bodyfile="lib/Classes/Manip.hpp" bodystart="42" bodyend="42"/>
-        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="126">list_runs</references>
-        <referencedby refid="_manip_8hpp_1a42112ddf75a5ec621f893f7817b97837" compoundref="_manip_8hpp" startline="130" endline="134">operator&lt;&lt;</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="29" column="15" bodyfile="lib/Classes/Manip.hpp" bodystart="29" bodyend="29"/>
+        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="121">list_runs</references>
+        <referencedby refid="_manip_8hpp_1a42112ddf75a5ec621f893f7817b97837" compoundref="_manip_8hpp" startline="125" endline="129">operator&lt;&lt;</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_manip_1a0192f178496568056b1d17c9e73db064" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -201,13 +204,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="92" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="92" bodyend="107"/>
-        <references refid="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" compoundref="_m_t_list_8hpp" startline="81" endline="91">MTVector&lt; T &gt;::getNext</references>
-        <references refid="class_manip_1a48b7346ccf31813912089fe976d9663a" compoundref="_manip_8hpp" startline="117">i</references>
-        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="126">list_runs</references>
-        <references refid="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" compoundref="_manip_8hpp" startline="127">list_runs_MT</references>
-        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="119">m_MTOn</references>
-        <referencedby refid="class_manip_1aa8e71952b07876be2dc56e180bdfe5f5" compoundref="_manip_8hpp" startline="109" endline="112">operator&gt;&gt;</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="87" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="87" bodyend="102"/>
+        <references refid="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" compoundref="_m_t_list_8hpp" startline="82" endline="92">MTVector&lt; T &gt;::getNext</references>
+        <references refid="class_manip_1a48b7346ccf31813912089fe976d9663a" compoundref="_manip_8hpp" startline="112">i</references>
+        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="121">list_runs</references>
+        <references refid="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" compoundref="_manip_8hpp" startline="122">list_runs_MT</references>
+        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="114">m_MTOn</references>
+        <referencedby refid="class_manip_1aa8e71952b07876be2dc56e180bdfe5f5" compoundref="_manip_8hpp" startline="104" endline="107">operator&gt;&gt;</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_manip_1a1f5a91129d20b2e3924c54bddde521f6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -220,7 +223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="11" column="3" bodyfile="lib/Classes/Manip.hpp" bodystart="11" bodyend="11"/>
+        <location file="lib/Classes/Manip.hpp" line="13" column="3" bodyfile="lib/Classes/Manip.hpp" bodystart="13" bodyend="13"/>
       </memberdef>
       <memberdef kind="function" id="class_manip_1aab38d946797ab4e5b03c02d9bf69aa0c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -237,9 +240,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="13" column="3" bodyfile="lib/Classes/Manip.hpp" bodystart="13" bodyend="13"/>
-        <references refid="class_manip_1af08813391e63fd965d34ff2ff31c6453" compoundref="_manip_8hpp" startline="122">m_runs_files</references>
-        <references refid="class_manip_1a4da401a6eb5a013a4150e01b81ecf853" compoundref="_manip_8hpp" startline="57" endline="61">readFile</references>
+        <location file="lib/Classes/Manip.hpp" line="15" column="3" bodyfile="lib/Classes/Manip.hpp" bodystart="15" bodyend="15"/>
+        <references refid="class_manip_1af08813391e63fd965d34ff2ff31c6453" compoundref="_manip_8hpp" startline="117">m_runs_files</references>
+        <references refid="class_manip_1a4fe55690c18999195a5c4c3bec5e6b17" compoundref="_manip_8hpp" startline="48" endline="52">readFile</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1ad509e37dce3d5a639115b54f16ded598" prot="public" static="no" const="yes" explicit="no" inline="yes" refqual="lvalue" virt="non-virtual">
         <type></type>
@@ -252,8 +255,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="88" column="3" bodyfile="lib/Classes/Manip.hpp" bodystart="88" bodyend="88"/>
-        <references refid="class_manip_1ade3e293cfef09fb727b8d549d5190ecf" compoundref="_manip_8hpp" startline="118">m_ok</references>
+        <location file="lib/Classes/Manip.hpp" line="83" column="3" bodyfile="lib/Classes/Manip.hpp" bodystart="83" bodyend="83"/>
+        <references refid="class_manip_1ade3e293cfef09fb727b8d549d5190ecf" compoundref="_manip_8hpp" startline="113">m_ok</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1aa8e71952b07876be2dc56e180bdfe5f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -270,44 +273,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="109" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="109" bodyend="112"/>
-        <references refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="92" endline="107">getNext</references>
+        <location file="lib/Classes/Manip.hpp" line="104" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="104" bodyend="107"/>
+        <references refid="class_manip_1a0192f178496568056b1d17c9e73db064" compoundref="_manip_8hpp" startline="87" endline="102">getNext</references>
       </memberdef>
-      <memberdef kind="function" id="class_manip_1a6390322006ca8d8e7c350a3a915182e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_manip_1a4fe55690c18999195a5c4c3bec5e6b17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void Manip::Print</definition>
-        <argsstring>()</argsstring>
-        <name>Print</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="90" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="90" bodyend="90"/>
-        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="126">list_runs</references>
-        <references refid="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" compoundref="_manip_8hpp" startline="127">list_runs_MT</references>
-        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="119">m_MTOn</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <references refid="class_m_t_vector_1a3bca517dd665e4ad48dceab41c6db9f7" compoundref="_m_t_list_8hpp" startline="58" endline="62">MTVector&lt; T &gt;::Print</references>
-      </memberdef>
-      <memberdef kind="function" id="class_manip_1a4da401a6eb5a013a4150e01b81ecf853" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool Manip::readFile</definition>
+        <definition>void Manip::readFile</definition>
         <argsstring>()</argsstring>
         <name>readFile</name>
         <briefdescription>
+<para>Reads the list file containing the list of folders. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="57" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="57" bodyend="61"/>
-        <references refid="class_manip_1ac2ac621173f7cd52f01c5b4b50a56e5e" compoundref="_manip_8hpp" startline="121">m_datapath</references>
-        <references refid="class_manip_1a8e335c089c27a67924e3955f5707fc9f" compoundref="_manip_8hpp" startline="124">m_file</references>
-        <references refid="class_manip_1a2d82ae040e3db69e9dcac867180f918e" compoundref="_manip_8hpp" startline="123">m_manip</references>
-        <references refid="class_manip_1af08813391e63fd965d34ff2ff31c6453" compoundref="_manip_8hpp" startline="122">m_runs_files</references>
-        <referencedby refid="class_manip_1aab38d946797ab4e5b03c02d9bf69aa0c" compoundref="_manip_8hpp" startline="13" endline="13">Manip</referencedby>
+        <location file="lib/Classes/Manip.hpp" line="48" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="48" bodyend="52"/>
+        <references refid="class_manip_1ac2ac621173f7cd52f01c5b4b50a56e5e" compoundref="_manip_8hpp" startline="116">m_datapath</references>
+        <references refid="class_manip_1a8e335c089c27a67924e3955f5707fc9f" compoundref="_manip_8hpp" startline="119">m_file</references>
+        <references refid="class_manip_1a2d82ae040e3db69e9dcac867180f918e" compoundref="_manip_8hpp" startline="118">m_manip</references>
+        <references refid="class_manip_1af08813391e63fd965d34ff2ff31c6453" compoundref="_manip_8hpp" startline="117">m_runs_files</references>
+        <referencedby refid="class_manip_1aab38d946797ab4e5b03c02d9bf69aa0c" compoundref="_manip_8hpp" startline="15" endline="15">Manip</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_manip_1ad044eafeb71fda443f77377d44d652d0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -324,12 +310,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="30" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="30" bodyend="40"/>
-        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="126">list_runs</references>
-        <references refid="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" compoundref="_manip_8hpp" startline="127">list_runs_MT</references>
-        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="119">m_MTOn</references>
-        <references refid="class_manip_1ade3e293cfef09fb727b8d549d5190ecf" compoundref="_manip_8hpp" startline="118">m_ok</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/Classes/Manip.hpp" line="17" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="17" bodyend="27"/>
+        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="121">list_runs</references>
+        <references refid="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" compoundref="_manip_8hpp" startline="122">list_runs_MT</references>
+        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="114">m_MTOn</references>
+        <references refid="class_manip_1ade3e293cfef09fb727b8d549d5190ecf" compoundref="_manip_8hpp" startline="113">m_ok</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1a580f1eee22ca0c4f2419867c7a15cb85" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -342,8 +328,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="114" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="114" bodyend="114"/>
-        <references refid="class_manip_1a48b7346ccf31813912089fe976d9663a" compoundref="_manip_8hpp" startline="117">i</references>
+        <location file="lib/Classes/Manip.hpp" line="109" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="109" bodyend="109"/>
+        <references refid="class_manip_1a48b7346ccf31813912089fe976d9663a" compoundref="_manip_8hpp" startline="112">i</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1aba047d84e5c3eaff3640c2ed8f31aaea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -357,11 +343,13 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para><xrefsect id="deprecated_1_deprecated000004"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Set the path of the list file containing the list of folders </para>
+</xrefdescription></xrefsect></para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="63" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="63" bodyend="66"/>
-        <references refid="class_manip_1ac2ac621173f7cd52f01c5b4b50a56e5e" compoundref="_manip_8hpp" startline="121">m_datapath</references>
+        <location file="lib/Classes/Manip.hpp" line="55" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="55" bodyend="58"/>
+        <references refid="class_manip_1ac2ac621173f7cd52f01c5b4b50a56e5e" compoundref="_manip_8hpp" startline="116">m_datapath</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1af3f64608a08dd23d186f48e8c1beeba0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -378,8 +366,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="73" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="73" bodyend="76"/>
-        <references refid="class_manip_1a8e335c089c27a67924e3955f5707fc9f" compoundref="_manip_8hpp" startline="124">m_file</references>
+        <location file="lib/Classes/Manip.hpp" line="66" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="66" bodyend="69"/>
+        <references refid="class_manip_1a8e335c089c27a67924e3955f5707fc9f" compoundref="_manip_8hpp" startline="119">m_file</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1aec7bc3a8a74d63eda8ad6e6f7496c985" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -391,16 +379,17 @@
           <declname>folder</declname>
         </param>
         <briefdescription>
+<para>Clears the previously set list of folders and replace it with folder. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="44" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="44" bodyend="50"/>
-        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="126">list_runs</references>
-        <references refid="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" compoundref="_manip_8hpp" startline="127">list_runs_MT</references>
-        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="119">m_MTOn</references>
-        <references refid="class_manip_1ade3e293cfef09fb727b8d549d5190ecf" compoundref="_manip_8hpp" startline="118">m_ok</references>
+        <location file="lib/Classes/Manip.hpp" line="32" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="32" bodyend="38"/>
+        <references refid="class_manip_1a1c4ac027f4eed9e755aca5ba641a27ea" compoundref="_manip_8hpp" startline="121">list_runs</references>
+        <references refid="class_manip_1ac47140bb9d696f5c0cd15edf4171c905" compoundref="_manip_8hpp" startline="122">list_runs_MT</references>
+        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="114">m_MTOn</references>
+        <references refid="class_manip_1ade3e293cfef09fb727b8d549d5190ecf" compoundref="_manip_8hpp" startline="113">m_ok</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1a7f2aa2947cd843abecac34300b6da94e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -414,11 +403,13 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
+<para><xrefsect id="deprecated_1_deprecated000005"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Set the name of the folder inside the datapath containing the list file containing the list of folders </para>
+</xrefdescription></xrefsect></para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="68" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="68" bodyend="71"/>
-        <references refid="class_manip_1a2d82ae040e3db69e9dcac867180f918e" compoundref="_manip_8hpp" startline="123">m_manip</references>
+        <location file="lib/Classes/Manip.hpp" line="61" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="61" bodyend="64"/>
+        <references refid="class_manip_1a2d82ae040e3db69e9dcac867180f918e" compoundref="_manip_8hpp" startline="118">m_manip</references>
       </memberdef>
       <memberdef kind="function" id="class_manip_1ab0813163118017c1064ec02f091356b8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -431,20 +422,26 @@
           <defval>true</defval>
         </param>
         <briefdescription>
+<para>To allow several threads to work on different runs on parallel. </para>
         </briefdescription>
         <detaileddescription>
+<para><ref refid="class_m_t_object" kindref="compound">MTObject</ref> needs to have been Initialised before creating the <linebreak/>
+ </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Manip.hpp" line="78" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="78" bodyend="86"/>
-        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="119">m_MTOn</references>
-        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="108">MTObject::ON</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/Classes/Manip.hpp" line="73" column="8" bodyfile="lib/Classes/Manip.hpp" bodystart="73" bodyend="81"/>
+        <references refid="class_manip_1a1bc91186338c5bc2d2d76ac0001c7c05" compoundref="_manip_8hpp" startline="114">m_MTOn</references>
+        <references refid="class_m_t_object_1a6fe86ce1ea64ede7e695490bceb264a3" compoundref="_m_t_object_8hpp" startline="247">MTObject::ON</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       </sectiondef>
     <briefdescription>
+<para>Loads the list file containing the list of the names of the folder containing the faster files to convert. </para>
     </briefdescription>
     <detaileddescription>
+<para><xrefsect id="todo_1_todo000010"><xreftitle>Todo</xreftitle><xrefdescription><para>make it better !! </para>
+</xrefdescription></xrefsect></para>
     </detaileddescription>
     <collaborationgraph>
       <node id="3">
@@ -480,7 +477,7 @@
         <link refid="class_folder"/>
       </node>
     </collaborationgraph>
-    <location file="lib/Classes/Manip.hpp" line="7" column="1" bodyfile="lib/Classes/Manip.hpp" bodystart="8" bodyend="128"/>
+    <location file="lib/Classes/Manip.hpp" line="9" column="1" bodyfile="lib/Classes/Manip.hpp" bodystart="10" bodyend="123"/>
     <listofallmembers>
       <member refid="class_manip_1a86ed3dd2dc6d3b8b7342a9552bc43e26" prot="public" virt="non-virtual"><scope>Manip</scope><name>addFolder</name></member>
       <member refid="class_manip_1a41dfa1aac77e2340abf4f66934af0092" prot="public" virt="non-virtual"><scope>Manip</scope><name>get</name></member>
@@ -498,9 +495,8 @@
       <member refid="class_manip_1aab38d946797ab4e5b03c02d9bf69aa0c" prot="public" virt="non-virtual"><scope>Manip</scope><name>Manip</name></member>
       <member refid="class_manip_1ad509e37dce3d5a639115b54f16ded598" prot="public" virt="non-virtual"><scope>Manip</scope><name>operator bool</name></member>
       <member refid="class_manip_1aa8e71952b07876be2dc56e180bdfe5f5" prot="public" virt="non-virtual"><scope>Manip</scope><name>operator&gt;&gt;</name></member>
-      <member refid="class_manip_1a6390322006ca8d8e7c350a3a915182e8" prot="public" virt="non-virtual"><scope>Manip</scope><name>Print</name></member>
       <member refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" prot="public" virt="non-virtual"><scope>Manip</scope><name>readFile</name></member>
-      <member refid="class_manip_1a4da401a6eb5a013a4150e01b81ecf853" prot="public" virt="non-virtual"><scope>Manip</scope><name>readFile</name></member>
+      <member refid="class_manip_1a4fe55690c18999195a5c4c3bec5e6b17" prot="public" virt="non-virtual"><scope>Manip</scope><name>readFile</name></member>
       <member refid="class_manip_1a580f1eee22ca0c4f2419867c7a15cb85" prot="public" virt="non-virtual"><scope>Manip</scope><name>reset</name></member>
       <member refid="class_manip_1aba047d84e5c3eaff3640c2ed8f31aaea" prot="public" virt="non-virtual"><scope>Manip</scope><name>setDataPath</name></member>
       <member refid="class_manip_1af3f64608a08dd23d186f48e8c1beeba0" prot="public" virt="non-virtual"><scope>Manip</scope><name>setFileName</name></member>

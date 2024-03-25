@@ -114,7 +114,7 @@ public:
   AnalyseIsomer(){}
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const &  param);
-  void InitializeManip();
+  void InitialiseManip();
   static void run(Parameters & p, AnalyseIsomer & ai);
   void FillRaw(Event const & event);
   void FillSorted(Event const & event, Clovers & clovers, DSSD & dssd, ParisNul & paris);
@@ -301,7 +301,7 @@ bool AnalyseIsomer::launch(Parameters & p)
 {
   Timer totalTimer;
   if (!this -> setParameters(p.getParameters(m_param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   Timer runTimer;
   MTObject::parallelise_function(run, p, *this);
@@ -377,9 +377,9 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
 }
 
 
-void AnalyseIsomer::InitializeManip()
+void AnalyseIsomer::InitialiseManip()
 {
-  print("Initialize histograms");
+  print("Initialise histograms");
 
   if(!m_choose1)
   {

@@ -8,26 +8,20 @@
     <includedby refid="_run_matrixator_8hpp" local="yes">lib/Modules/RunMatrixator.hpp</includedby>
     <includedby refid="_m_t_faster_reader_8hpp" local="yes">lib/MTObjects/MTFasterReader.hpp</includedby>
     <incdepgraph>
-      <node id="28">
+      <node id="20">
         <label>glob.h</label>
       </node>
       <node id="52">
         <label>TH1S.h</label>
       </node>
-      <node id="11">
-        <label>iomanip</label>
-      </node>
-      <node id="10">
+      <node id="25">
         <label>functional</label>
       </node>
-      <node id="17">
-        <label>queue</label>
+      <node id="6">
+        <label>iomanip</label>
       </node>
-      <node id="33">
-        <label>random.hpp</label>
-        <link refid="random_8hpp"/>
-        <childnode refid="34" relation="include">
-        </childnode>
+      <node id="29">
+        <label>queue</label>
       </node>
       <node id="70">
         <label>TTreeIndex.h</label>
@@ -102,17 +96,20 @@
         <childnode refid="70" relation="include">
         </childnode>
       </node>
-      <node id="38">
+      <node id="21">
         <label>filesystem</label>
       </node>
       <node id="39">
         <label>TAxis.h</label>
       </node>
-      <node id="30">
-        <label>stdlib.h</label>
-      </node>
       <node id="68">
         <label>TThread.h</label>
+      </node>
+      <node id="22">
+        <label>errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
       </node>
       <node id="51">
         <label>TH1D.h</label>
@@ -120,16 +117,16 @@
       <node id="64">
         <label>TStopwatch.h</label>
       </node>
-      <node id="19">
+      <node id="30">
         <label>stdexcept</label>
       </node>
-      <node id="16">
+      <node id="28">
         <label>numeric</label>
       </node>
-      <node id="20">
+      <node id="15">
         <label>string</label>
       </node>
-      <node id="13">
+      <node id="8">
         <label>map</label>
       </node>
       <node id="72">
@@ -143,45 +140,21 @@
         <link refid="lib_co_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
         <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
         <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
@@ -195,11 +168,15 @@
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
         <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
@@ -207,15 +184,27 @@
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
       </node>
       <node id="43">
         <label>TF1.h</label>
       </node>
-      <node id="32">
+      <node id="4">
         <label>print.hpp</label>
         <link refid="print_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
-      <node id="9">
+      <node id="19">
         <label>fstream</label>
       </node>
       <node id="42">
@@ -224,34 +213,42 @@
       <node id="66">
         <label>TStyle.h</label>
       </node>
-      <node id="4">
+      <node id="23">
         <label>any</label>
       </node>
-      <node id="36">
+      <node id="17">
         <label>files_functions.hpp</label>
         <link refid="files__functions_8hpp"/>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="38" relation="include">
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="12">
         <label>random</label>
       </node>
       <node id="62">
         <label>TROOT.h</label>
       </node>
-      <node id="31">
-        <label>string.h</label>
-      </node>
-      <node id="24">
+      <node id="34">
         <label>typeinfo</label>
+      </node>
+      <node id="38">
+        <label>ctime</label>
       </node>
       <node id="41">
         <label>TChain.h</label>
@@ -269,11 +266,11 @@
       <node id="67">
         <label>TSystem.h</label>
       </node>
-      <node id="26">
-        <label>vector</label>
-      </node>
-      <node id="21">
+      <node id="31">
         <label>stack</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
       </node>
       <node id="44">
         <label>TF2.h</label>
@@ -290,23 +287,33 @@
       <node id="56">
         <label>TKey.h</label>
       </node>
-      <node id="37">
+      <node id="9">
         <label>vector_functions.hpp</label>
         <link refid="vector__functions_8hpp"/>
-        <childnode refid="32" relation="include">
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="63">
         <label>TSpectrum.h</label>
       </node>
-      <node id="5">
+      <node id="24">
         <label>array</label>
       </node>
       <node id="47">
         <label>TFitResult.h</label>
       </node>
-      <node id="18">
+      <node id="16">
         <label>sstream</label>
+      </node>
+      <node id="11">
+        <label>randomCo.hpp</label>
+        <link refid="random_co_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
       </node>
       <node id="59">
         <label>TMarker.h</label>
@@ -317,7 +324,7 @@
       <node id="53">
         <label>TH2.h</label>
       </node>
-      <node id="7">
+      <node id="37">
         <label>cstdlib</label>
       </node>
       <node id="50">
@@ -326,18 +333,22 @@
       <node id="57">
         <label>TLeaf.h</label>
       </node>
-      <node id="12">
+      <node id="5">
         <label>iostream</label>
       </node>
-      <node id="35">
+      <node id="13">
         <label>string_functions.hpp</label>
         <link refid="string__functions_8hpp"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="35">
         <label>unordered_map</label>
       </node>
       <node id="58">
@@ -352,10 +363,13 @@
       <node id="54">
         <label>TH2F.h</label>
       </node>
-      <node id="15">
+      <node id="27">
         <label>mutex</label>
       </node>
-      <node id="22">
+      <node id="36">
+        <label>csignal</label>
+      </node>
+      <node id="32">
         <label>thread</label>
       </node>
       <node id="61">
@@ -364,7 +378,7 @@
       <node id="69">
         <label>TTree.h</label>
       </node>
-      <node id="6">
+      <node id="10">
         <label>algorithm</label>
       </node>
       <node id="46">
@@ -378,27 +392,24 @@
         <childnode refid="71" relation="include">
         </childnode>
       </node>
-      <node id="29">
-        <label>stdio.h</label>
-      </node>
-      <node id="8">
+      <node id="14">
         <label>cstring</label>
       </node>
       <node id="48">
         <label>TGraph.h</label>
       </node>
-      <node id="14">
+      <node id="26">
         <label>memory</label>
       </node>
-      <node id="23">
+      <node id="33">
         <label>typeindex</label>
       </node>
-      <node id="27">
+      <node id="18">
         <label>dirent.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="7">
+      <node id="8">
         <label>lib/Modules/Faster2Histo.hpp</label>
         <link refid="_faster2_histo_8hpp"/>
       </node>
@@ -409,22 +420,20 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>lib/Modules/CloverSpectra.hpp</label>
-        <link refid="_clover_spectra_8hpp"/>
+        <label>lib/Modules/EvolutionPeaks.hpp</label>
+        <link refid="_evolution_peaks_8hpp"/>
       </node>
-      <node id="8">
-        <label>lib/Modules/Histogramor.hpp</label>
-        <link refid="_histogramor_8hpp"/>
-        <childnode refid="9" relation="include">
-        </childnode>
+      <node id="7">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
       </node>
       <node id="2">
         <label>lib/Modules/Faster2Root.hpp</label>
@@ -433,10 +442,6 @@
       <node id="3">
         <label>lib/Modules/RunMatrixator.hpp</label>
         <link refid="_run_matrixator_8hpp"/>
-      </node>
-      <node id="9">
-        <label>lib/Modules/NearLine.hpp</label>
-        <link refid="_near_line_8hpp"/>
       </node>
       <node id="1">
         <label>lib/Classes/Alignator.hpp</label>
@@ -449,15 +454,9 @@
         </childnode>
       </node>
       <node id="5">
-        <label>lib/Modules/Calibration.hpp</label>
-        <link refid="_calibration_8hpp"/>
+        <label>lib/Modules/Calibrator.hpp</label>
+        <link refid="_calibrator_8hpp"/>
         <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -481,122 +480,97 @@
 <codeline lineno="13" refid="class_alignator_1a77097dec7c5f3598142d63c1df1bb78d" refkind="member"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1a77097dec7c5f3598142d63c1df1bb78d" kindref="member">Alignator</ref>(TTree*<sp/>inputTree,<sp/>TTree*<sp/>outputTree)<sp/>:<sp/></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>(inputTree),<sp/></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_alignator_1a9827f1466d50a02e7269f3f2e30ea0dd" kindref="member">m_out_tree</ref>(outputTree)<sp/></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"><sp/><sp/>{<ref refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" kindref="member">align</ref>();}</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18" refid="class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3" kindref="member">operator[]</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>i)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i];}</highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="20" refid="class_alignator_1a45bc066237b8c221590a6be1ddce1739" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_alignator_1a45bc066237b8c221590a6be1ddce1739" kindref="member">next</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[<ref refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" kindref="member">m_cursor</ref>++];}</highlight></codeline>
-<codeline lineno="21" refid="class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23" kindref="member">cursor</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" kindref="member">m_cursor</ref>;}</highlight></codeline>
-<codeline lineno="22" refid="class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012" kindref="member">reset</ref>()<sp/>{<ref refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" kindref="member">m_cursor</ref><sp/>=<sp/>0;}</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24" refid="class_alignator_1ac335d9fe9d4d96476f4a964e08773d82" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ac335d9fe9d4d96476f4a964e08773d82" kindref="member">begin</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>.begin();}</highlight></codeline>
-<codeline lineno="25" refid="class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341" kindref="member">end</ref>()<sp/><sp/><sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>.end();}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" kindref="member">loadNewIndex</ref>();</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" kindref="member">align</ref>();</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_alignator_1a03d48bd3422a4f5d9210ba28ff0957a3" kindref="member">operator[]</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>i)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i];}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="class_alignator_1a45bc066237b8c221590a6be1ddce1739" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_alignator_1a45bc066237b8c221590a6be1ddce1739" kindref="member">next</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[<ref refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" kindref="member">m_cursor</ref>++];}</highlight></codeline>
+<codeline lineno="24" refid="class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/><ref refid="class_alignator_1a4f2f5ea6c53a5037ca7d906b6f45aa23" kindref="member">cursor</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" kindref="member">m_cursor</ref>;}</highlight></codeline>
+<codeline lineno="25" refid="class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af7f99e69b7cffb8e56b6ac5635ffe012" kindref="member">reset</ref>()<sp/>{<ref refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" kindref="member">m_cursor</ref><sp/>=<sp/>0;}</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27" refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" kindref="member">GetEntry</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i)<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>-&gt;GetEntry(<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i]);}</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29" refid="class_alignator_1a645dc87dcffc14053eaac92708c22e17" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a645dc87dcffc14053eaac92708c22e17" kindref="member">operator-&gt;</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>;}</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31" refid="class_alignator_1a3f13f1e4383561e761787e1b38f18c75" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a3f13f1e4383561e761787e1b38f18c75" kindref="member">getTree</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>;}</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" kindref="member">loadNewIndex</ref>();</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" kindref="member">align</ref>();<sp/></highlight><highlight class="comment">//TBD</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="37" refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" refkind="member"><highlight class="normal"><sp/><sp/>ULong64_t<sp/><ref refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" kindref="member">m_nb_data</ref><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="38" refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" refkind="member"><highlight class="normal"><sp/><sp/>ULong64_t<sp/><ref refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" kindref="member">m_cursor</ref><sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="39" refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;int&gt;<sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>;</highlight></codeline>
-<codeline lineno="40" refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" refkind="member"><highlight class="normal"><sp/><sp/>TTree*<sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>;</highlight></codeline>
-<codeline lineno="41" refid="class_alignator_1a9827f1466d50a02e7269f3f2e30ea0dd" refkind="member"><highlight class="normal"><sp/><sp/>TTree*<sp/><ref refid="class_alignator_1a9827f1466d50a02e7269f3f2e30ea0dd" kindref="member">m_out_tree</ref>;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="27" refid="class_alignator_1ac335d9fe9d4d96476f4a964e08773d82" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ac335d9fe9d4d96476f4a964e08773d82" kindref="member">begin</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>.begin();}</highlight></codeline>
+<codeline lineno="28" refid="class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a64edf01aea60eb8fdd7a19a6f0b1a341" kindref="member">end</ref>()<sp/><sp/><sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>.end();}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" kindref="member">GetEntry</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i)<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>-&gt;GetEntry(<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i]);}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="class_alignator_1a645dc87dcffc14053eaac92708c22e17" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a645dc87dcffc14053eaac92708c22e17" kindref="member">operator-&gt;</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>;}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="class_alignator_1a3f13f1e4383561e761787e1b38f18c75" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a3f13f1e4383561e761787e1b38f18c75" kindref="member">getTree</ref>()<sp/>{</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>;}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/>#ifdef<sp/>MULTITHREADING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/>std::mutex<sp/>mutex;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/>#endif<sp/></highlight><highlight class="comment">//MULTITHREADING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" kindref="member">loadNewIndex</ref>();</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" kindref="member">align</ref>();<sp/></highlight><highlight class="comment">//TBD</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44" refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" kindref="member">Alignator::loadNewIndex</ref>()</highlight></codeline>
-<codeline lineno="45"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" kindref="member">m_nb_data</ref><sp/>=<sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>GetEntries();</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" kindref="member">m_nb_data</ref>==0)<sp/>{<ref refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;NO<sp/>DATA<sp/>IN<sp/>ROOT<sp/>TREE<sp/>!&quot;</highlight><highlight class="normal">);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;}</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>.resize(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" kindref="member">m_nb_data</ref>));</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/>std::iota(std::begin(<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>),<sp/>std::end(<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>),<sp/>0);<sp/></highlight><highlight class="comment">//<sp/>Fill<sp/>with<sp/>0,1,2,...,m_nb_data</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>NHits<sp/>=<sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>GetEntries();</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>SetBranchStatus(</highlight><highlight class="stringliteral">&quot;*&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight><highlight class="comment">//<sp/>Disables<sp/>all<sp/>the<sp/>branches<sp/>readability</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>SetBranchStatus(</highlight><highlight class="stringliteral">&quot;stamp&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight><highlight class="comment">//<sp/>Read<sp/>only<sp/>the<sp/>time</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/>std::vector&lt;ULong64_t&gt;<sp/>TimeStampBuffer(NHits,<sp/>0);</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/>ULong64_t<sp/>TimeStamp<sp/>=<sp/>0;<sp/></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>-&gt;SetBranchAddress(</highlight><highlight class="stringliteral">&quot;stamp&quot;</highlight><highlight class="normal">,<sp/>&amp;TimeStamp);</highlight></codeline>
+<codeline lineno="44" refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" refkind="member"><highlight class="normal"><sp/><sp/>ULong64_t<sp/><ref refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" kindref="member">m_nb_data</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="45" refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" refkind="member"><highlight class="normal"><sp/><sp/>ULong64_t<sp/><ref refid="class_alignator_1ac1a363be6c31aea520ff2da4c360af65" kindref="member">m_cursor</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="46" refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" refkind="member"><highlight class="normal"><sp/><sp/>std::vector&lt;int&gt;<sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>;</highlight></codeline>
+<codeline lineno="47" refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" refkind="member"><highlight class="normal"><sp/><sp/>TTree*<sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>;</highlight></codeline>
+<codeline lineno="48" refid="class_alignator_1a9827f1466d50a02e7269f3f2e30ea0dd" refkind="member"><highlight class="normal"><sp/><sp/>TTree*<sp/><ref refid="class_alignator_1a9827f1466d50a02e7269f3f2e30ea0dd" kindref="member">m_out_tree</ref>;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" kindref="member">Alignator::loadNewIndex</ref>()</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">mutex.lock();</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" kindref="member">m_nb_data</ref><sp/>=<sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>GetEntries();</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" kindref="member">m_nb_data</ref>==0)<sp/>{<ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;NO<sp/>DATA<sp/>IN<sp/>ROOT<sp/>TREE<sp/>!&quot;</highlight><highlight class="normal">);<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>.resize(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="class_alignator_1aa4755777194f1ebae3ada8dd2ac7acbd" kindref="member">m_nb_data</ref>));</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/>std::iota(std::begin(<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>),<sp/>std::end(<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>),<sp/>0);<sp/></highlight><highlight class="comment">//<sp/>Fill<sp/>with<sp/>0,1,2,...,m_nb_data</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>First<sp/>creates<sp/>a<sp/>buffer<sp/>of<sp/>all<sp/>the<sp/>timestamps<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;NHits;<sp/>i++)</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/><ref refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" kindref="member">GetEntry</ref>(i);</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>TimeStampBuffer[i]=TimeStamp;</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Then<sp/>computes<sp/>the<sp/>correct<sp/>order<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0,<sp/>j<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/>ULong64_t<sp/>a<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[0]=0;</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(j=0;<sp/>j&lt;NHits;j++)</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[j]=j;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/>a=TimeStampBuffer[j];<sp/></highlight><highlight class="comment">//Focus<sp/>on<sp/>this<sp/>time<sp/>stamp</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/>i=j;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Find<sp/>the<sp/>place<sp/>to<sp/>insert<sp/>it<sp/>amongst<sp/>the<sp/>previously<sp/>sorted<sp/>timestamps</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">((i<sp/>&gt;<sp/>0)<sp/>&amp;&amp;<sp/>(TimeStampBuffer[<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i-1]]<sp/>&gt;<sp/>a))</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i]=<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i-1];</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>i--;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i]=j;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"><sp/>}</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>SetBranchStatus(</highlight><highlight class="stringliteral">&quot;*&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/></highlight><highlight class="comment">//enables<sp/>again<sp/>the<sp/>whole<sp/>tree<sp/>to<sp/>be<sp/>read</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="94" refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" kindref="member">Alignator::align</ref>()</highlight></codeline>
-<codeline lineno="95"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>m_nb_data<sp/>=<sp/>m_tree<sp/>-&gt;<sp/>GetEntries();</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>(m_nb_data==0)<sp/>{print(&quot;NO<sp/>DATA<sp/>IN<sp/>ROOT<sp/>TREE<sp/>!&quot;);<sp/>return;}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>m_index.resize(static_cast&lt;int&gt;(m_nb_data));</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>std::iota(std::begin(m_index),<sp/>std::end(m_index),<sp/>0);<sp/>//<sp/>Fill<sp/>with<sp/>0,1,2,...,m_nb_data</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="102"><highlight class="normal"></highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Event<sp/>event</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>auto<sp/>const<sp/>NHits<sp/>=<sp/>tree<sp/>-&gt;<sp/>GetEntries();</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>std::vector&lt;ULong64_t&gt;<sp/>TimeStampBuffer(NHits,<sp/>0);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>ULong64_t<sp/>TimeStamp<sp/>=<sp/>0;<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>tree-&gt;SetBranchAddress(&quot;time&quot;,<sp/>&amp;TimeStamp);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="109"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>//<sp/>First<sp/>creates<sp/>a<sp/>buffer<sp/>of<sp/>all<sp/>the<sp/>timestamps<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>for<sp/>(int<sp/>i<sp/>=<sp/>0;<sp/>i&lt;NHits;<sp/>i++)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>tree<sp/>-&gt;<sp/>GetEntry(i);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>TimeStampBuffer[i]=TimeStamp;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>//<sp/>Then<sp/>computes<sp/>the<sp/>correct<sp/>order<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>int<sp/>i<sp/>=<sp/>0,<sp/>j<sp/>=<sp/>0;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>ULong64_t<sp/>a<sp/>=<sp/>0;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>m_index[0]=0;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>for<sp/>(j=0;<sp/>j&lt;NHits;j++)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>m_index[j]=j;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>a=TimeStampBuffer[j];<sp/>//Focus<sp/>on<sp/>this<sp/>time<sp/>stamp</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>i=j;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>//<sp/>Find<sp/>the<sp/>place<sp/>to<sp/>insert<sp/>it<sp/>amongst<sp/>the<sp/>previously<sp/>sorted<sp/>timestamps</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>while((i<sp/>&gt;<sp/>0)<sp/>&amp;&amp;<sp/>(TimeStampBuffer[m_index[i-1]]<sp/>&gt;<sp/>a))</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>m_index[i]=m_index[i-1];</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>i--;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/>m_index[i]=j;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>tree<sp/>-&gt;<sp/>SetBranchStatus(&quot;*&quot;,<sp/>true);<sp/>//enables<sp/>again<sp/>the<sp/>whole<sp/>tree<sp/>to<sp/>be<sp/>read</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//ALIGNATOR_HPP</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>nb_hits<sp/>=<sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>GetEntries();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>SetBranchStatus(</highlight><highlight class="stringliteral">&quot;*&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight><highlight class="comment">//<sp/>Disables<sp/>all<sp/>the<sp/>branches<sp/>readability</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>SetBranchStatus(</highlight><highlight class="stringliteral">&quot;stamp&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight><highlight class="comment">//<sp/>Read<sp/>only<sp/>the<sp/>time</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/>ULong64_t<sp/>timestamp<sp/>=<sp/>0;<sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/>std::vector&lt;ULong64_t&gt;<sp/>timestamp_buffer(nb_hits,<sp/>0);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref>-&gt;SetBranchAddress(</highlight><highlight class="stringliteral">&quot;stamp&quot;</highlight><highlight class="normal">,<sp/>&amp;timestamp);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">mutex.unlock();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>First<sp/>creates<sp/>a<sp/>buffer<sp/>of<sp/>all<sp/>the<sp/>timestamps<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;nb_hits;<sp/>i++)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/><ref refid="class_alignator_1afb300fed240c1e094b7f58a5d061c4a0" kindref="member">GetEntry</ref>(i);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>timestamp_buffer[i]=timestamp;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal">mutex.lock();</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Then<sp/>computes<sp/>the<sp/>correct<sp/>order<sp/>:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0,<sp/>j<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/>ULong64_t<sp/>a<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[0]=0;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">mutex.unlock();</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(j=0;<sp/>j&lt;nb_hits;j++)</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[j]=j;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/>a=timestamp_buffer[j];<sp/></highlight><highlight class="comment">//Focus<sp/>on<sp/>this<sp/>time<sp/>stamp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/>i=j;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Find<sp/>the<sp/>place<sp/>to<sp/>insert<sp/>it<sp/>amongst<sp/>the<sp/>previously<sp/>sorted<sp/>timestamps</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">((i<sp/>&gt;<sp/>0)<sp/>&amp;&amp;<sp/>(timestamp_buffer[<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i-1]]<sp/>&gt;<sp/>a))</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i]=<ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i-1];</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/>i--;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><ref refid="class_alignator_1af4921d71e017acc7212a7e351fb41901" kindref="member">m_index</ref>[i]=j;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">mutex.lock();</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><ref refid="class_alignator_1ab4e454069bf5a2f8a392ab7210aff301" kindref="member">m_tree</ref><sp/>-&gt;<sp/>SetBranchStatus(</highlight><highlight class="stringliteral">&quot;*&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);<sp/></highlight><highlight class="comment">//enables<sp/>again<sp/>the<sp/>whole<sp/>tree<sp/>to<sp/>be<sp/>read</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal">mutex.unlock();</highlight></codeline>
+<codeline lineno="99"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_alignator_1aef33d1c20ad6433d96eeec4b91fab0c1" kindref="member">Alignator::align</ref>()</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//ALIGNATOR_HPP</highlight></codeline>
     </programlisting>
     <location file="lib/Classes/Alignator.hpp"/>
   </compounddef>

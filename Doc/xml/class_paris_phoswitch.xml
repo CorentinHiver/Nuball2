@@ -133,13 +133,13 @@
         <references refid="class_paris_phoswitch_1a367f255ba6b644157677a32d4dfe0aae" compoundref="_paris_phoswitch_8hpp" startline="30">m_state</references>
         <references refid="class_paris_phoswitch_1a4f976bd815409e09bea4639f9a9065ac" compoundref="_paris_phoswitch_8hpp" startline="24">nrj</references>
         <references refid="class_paris_phoswitch_1a1771ab16004c4bc9e16ab5590e1d7afb" compoundref="_paris_phoswitch_8hpp" startline="25">nrj2</references>
-        <references refid="class_event_1acf99e771da7327b904866b80d6cfc45b" compoundref="_event_8hpp" startline="184">Event::nrj2s</references>
-        <references refid="_hit_8hpp_1a394977782e3af344e009b96c7d5bec92" compoundref="_hit_8hpp" startline="50" endline="50">NRJ_cast</references>
-        <references refid="class_event_1abdf231115162bb24604c238caceb1b05" compoundref="_event_8hpp" startline="182">Event::nrjs</references>
+        <references refid="class_event_1acf99e771da7327b904866b80d6cfc45b" compoundref="_event_8hpp" startline="188">Event::nrj2s</references>
+        <references refid="_hit_8hpp_1a394977782e3af344e009b96c7d5bec92" compoundref="_hit_8hpp" startline="53" endline="53">NRJ_cast</references>
+        <references refid="class_event_1abdf231115162bb24604c238caceb1b05" compoundref="_event_8hpp" startline="186">Event::nrjs</references>
         <references refid="class_paris_phoswitch_1a1992c9aaafc61e2f5dea0e10d6c81f30" compoundref="_paris_phoswitch_8hpp" startline="51" endline="59">test_gate_classic</references>
         <references refid="class_paris_phoswitch_1a948e4a40c9c567bcb5b5885b266779b6" compoundref="_paris_phoswitch_8hpp" startline="23">time</references>
-        <references refid="_hit_8hpp_1a04b1f65fe07e6d731225feecab2b66f6" compoundref="_hit_8hpp" startline="54" endline="54">Time_ns_cast</references>
-        <references refid="class_event_1a433bcb1da05d7a6f477d4d1b9ee0f7b0" compoundref="_event_8hpp" startline="179">Event::times</references>
+        <references refid="_hit_8hpp_1a04b1f65fe07e6d731225feecab2b66f6" compoundref="_hit_8hpp" startline="57" endline="57">Time_ns_cast</references>
+        <references refid="class_event_1a433bcb1da05d7a6f477d4d1b9ee0f7b0" compoundref="_event_8hpp" startline="183">Event::times</references>
       </memberdef>
       <memberdef kind="function" id="class_paris_phoswitch_1a7a0199f0d00c394f06e51cb47df043e1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>

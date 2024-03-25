@@ -7,6 +7,7 @@ var class_m_t_faster_reader =
     [ "addFolder", "class_m_t_faster_reader.html#a58a2fe8f9f9ba39808d43f36f45c8288", null ],
     [ "files", "class_m_t_faster_reader.html#aa8421439b6ac40fc7513fc85ad5a112b", null ],
     [ "files", "class_m_t_faster_reader.html#a5d2beaf7551d9b288eef9509daf8b3b5", null ],
+    [ "getFilesList", "class_m_t_faster_reader.html#a023fdc6cdd455017dc7e911820206ac0", null ],
     [ "nextFilename", "class_m_t_faster_reader.html#a63e239df82bf04244bdab829bb73cd20", null ],
     [ "printMTFiles", "class_m_t_faster_reader.html#a01bb4c02770855a41d53b3544b3cae3a", null ],
     [ "Read", "class_m_t_faster_reader.html#a7e26b2201486cd489b66ab12b83427e0", null ],
@@ -15,8 +16,10 @@ var class_m_t_faster_reader =
     [ "readRaw", "class_m_t_faster_reader.html#ae316d31ebcb18ae8689522509d1ba513", null ],
     [ "Realign", "class_m_t_faster_reader.html#ad4720651ef47aefe5a1901e4659683e1", null ],
     [ "setTimeshifts", "class_m_t_faster_reader.html#a39cce770cb5f6dc49e2ae2558d709af6", null ],
+    [ "showProgressBar", "class_m_t_faster_reader.html#a91677f13aa03d3b2f9dee6eb252286d1", null ],
     [ "timeshift", "class_m_t_faster_reader.html#a2adcc31120c30ac26b0c35a67c0e8822", null ],
     [ "m_files", "class_m_t_faster_reader.html#ab64bd8c46413ce8e280acc80a33df936", null ],
     [ "m_MTfiles", "class_m_t_faster_reader.html#a2ba1ed98c0363d91f5c0c38d6f7f231c", null ],
-    [ "m_timeshifts", "class_m_t_faster_reader.html#a2bea00b692984363df66161e172036e1", null ]
+    [ "m_timeshifts", "class_m_t_faster_reader.html#a2bea00b692984363df66161e172036e1", null ],
+    [ "s_progressBar", "class_m_t_faster_reader.html#aca07d380d9a702313f523c1eea28c0d0", null ]
 ];

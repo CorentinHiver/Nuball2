@@ -12,7 +12,7 @@ public:
   Analyse511(){};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
-  void InitializeManip();
+  void InitialiseManip();
   static void run(Parameters & p, Analyse511 & analyse_511);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
@@ -45,7 +45,7 @@ private:
 bool Analyse511::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
   this -> Write();
@@ -83,12 +83,12 @@ void Analyse511::run(Parameters & p, Analyse511 & analyse_511)
   } // End files loop
 }
 
-void Analyse511::InitializeManip()
+void Analyse511::InitialiseManip()
 {
-  print("Initialize Arrays");
-  Clovers::Initialize();
+  print("Initialise Arrays");
+  Clovers::Initialise();
   m_Clovers.resize(MTObject::getThreadsNb());
-  print("Initialize histograms");
+  print("Initialise histograms");
   m_histo_crystals_label.reset("crystals_patern","all crystals patterns", 144,0,144, 144,0,144);
 
   m_histo_511_label_both.reset("511_pattern_both","511keV crystal patern both crystals have 511", 144,0,144, 144,0,144);

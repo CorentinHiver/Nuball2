@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/NearLine.hpp" line="18" column="8" bodyfile="lib/Modules/NearLine.hpp" bodystart="18" bodyend="-1"/>
+        <location file="lib/Modules/NearLine.hpp" line="22" column="8" bodyfile="lib/Modules/NearLine.hpp" bodystart="22" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -39,9 +39,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/NearLine.hpp" line="13" column="3" bodyfile="lib/Modules/NearLine.hpp" bodystart="66" bodyend="69"/>
-        <references refid="class_near_line_1a3280d6187c79a0aaf4f23b97fe3089ee" compoundref="_near_line_8hpp" startline="40" endline="64">readParam</references>
-        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <location file="lib/Modules/NearLine.hpp" line="17" column="3" bodyfile="lib/Modules/NearLine.hpp" bodystart="70" bodyend="73"/>
+        <references refid="class_near_line_1a3280d6187c79a0aaf4f23b97fe3089ee" compoundref="_near_line_8hpp" startline="44" endline="68">readParam</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="156" endline="156">throw_error</references>
       </memberdef>
       <memberdef kind="function" id="class_near_line_1a3280d6187c79a0aaf4f23b97fe3089ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -62,12 +62,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/NearLine.hpp" line="14" column="8" bodyfile="lib/Modules/NearLine.hpp" bodystart="40" bodyend="64"/>
+        <location file="lib/Modules/NearLine.hpp" line="18" column="8" bodyfile="lib/Modules/NearLine.hpp" bodystart="44" bodyend="68"/>
         <references refid="_detectors_8hpp_1a06939d30171afd1f13893e05454ed813">detectors</references>
-        <references refid="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" compoundref="_detectors_8hpp" startline="214" endline="218">Detectors::load</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <references refid="class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb" compoundref="_faster_reader_8hpp" startline="120" endline="120">FasterReader::setMaxHits</references>
-        <referencedby refid="class_near_line_1adf3bc13e36dd295fc5668f08e81eaf32" compoundref="_near_line_8hpp" startline="66" endline="69">NearLine</referencedby>
+        <references refid="class_detectors_1a03f6e9974f958b86ddbbc4670d0209a2" compoundref="_detectors_8hpp" startline="233" endline="237">Detectors::load</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb" compoundref="_faster_reader_8hpp" startline="117" endline="117">FasterReader::setMaxHits</references>
+        <referencedby refid="class_near_line_1adf3bc13e36dd295fc5668f08e81eaf32" compoundref="_near_line_8hpp" startline="70" endline="73">NearLine</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_near_line_1a7a5987f603e02c97963ebc5f2e14709c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -80,14 +80,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Modules/NearLine.hpp" line="15" column="3" bodyfile="lib/Modules/NearLine.hpp" bodystart="71" bodyend="73"/>
+        <location file="lib/Modules/NearLine.hpp" line="19" column="3" bodyfile="lib/Modules/NearLine.hpp" bodystart="75" bodyend="77"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
+<para><xrefsect id="todo_1_todo000018"><xreftitle>Todo</xreftitle><xrefdescription></xrefdescription></xrefsect></para>
     </detaileddescription>
-    <location file="lib/Modules/NearLine.hpp" line="10" column="1" bodyfile="lib/Modules/NearLine.hpp" bodystart="11" bodyend="19"/>
+    <location file="lib/Modules/NearLine.hpp" line="14" column="1" bodyfile="lib/Modules/NearLine.hpp" bodystart="15" bodyend="23"/>
     <listofallmembers>
       <member refid="class_near_line_1a424af5c3473b89fc961227c55a1af01b" prot="private" virt="non-virtual"><scope>NearLine</scope><name>m_hr</name></member>
       <member refid="class_near_line_1adf3bc13e36dd295fc5668f08e81eaf32" prot="public" virt="non-virtual"><scope>NearLine</scope><name>NearLine</name></member>

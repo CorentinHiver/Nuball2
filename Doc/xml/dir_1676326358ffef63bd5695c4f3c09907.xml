@@ -2,15 +2,15 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="dir_1676326358ffef63bd5695c4f3c09907" kind="dir">
     <compoundname>lib/Modules</compoundname>
-    <innerfile refid="_calibration_8hpp">Calibration.hpp</innerfile>
+    <innerfile refid="_calibrator_8hpp">Calibrator.hpp</innerfile>
     <innerfile refid="_clover_spectra_8hpp">CloverSpectra.hpp</innerfile>
+    <innerfile refid="_cobalt_calorimeter_8hpp">CobaltCalorimeter.hpp</innerfile>
+    <innerfile refid="_evolution_peaks_8hpp">EvolutionPeaks.hpp</innerfile>
     <innerfile refid="_faster2_histo_8hpp">Faster2Histo.hpp</innerfile>
     <innerfile refid="_faster2_root_8hpp">Faster2Root.hpp</innerfile>
-    <innerfile refid="_histogramor_8hpp">Histogramor.hpp</innerfile>
     <innerfile refid="_near_line_8hpp">NearLine.hpp</innerfile>
     <innerfile refid="_run_matrixator_8hpp">RunMatrixator.hpp</innerfile>
     <innerfile refid="_timeshifts_8hpp">Timeshifts.hpp</innerfile>
-    <innerfile refid="_timewalk_8hpp">Timewalk.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

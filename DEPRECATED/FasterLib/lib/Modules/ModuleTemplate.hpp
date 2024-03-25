@@ -14,7 +14,7 @@
 // 3 : declare the class like this : ModuleTemplate *m_mt = nullprt;
 // 4 : import the module AFTER NearLine class
 // 5 : instantiate the module in the NearLine::setConfig member : m_mt = new ModuleTemplate(this,whatever...);
-// 6 : initialize the module in the NearLine::Initialize() member : m_mt.Initialize();
+// 6 : Initialise the module in the NearLine::Initialise() member : m_mt.Initialise();
 // 7 : play with it in the NearLine::processFile() member (using Fill or any other user defined function)
 // 8 : Calculate or Write anything at the end of runs in the NearLine::WriteData() member : m_mt.Write() | m_mt.Calculate()
 // 9 : in the final method to use it, dont forget to DELETE IT after checking it exists
@@ -28,7 +28,7 @@ public:
   void operator=(bool activate) {m_activated = activate;}
   // User defined operator overloads :
 
-  Bool_t Initialize();
+  Bool_t Initialise();
   Bool_t SetConfig(std::istringstream & is);
   Bool_t Check();
   void Fill(Hit & hit, UShort_t const & thread_nb);
@@ -65,9 +65,9 @@ Bool_t Analyse::Check()
   // Conditions to verify to make the code work correctly
 }
 
-Bool_t ModuleTemplate::Initialize()
+Bool_t ModuleTemplate::Initialise()
 {
-  // Here initialize all your histograms :
+  // Here Initialise all your histograms :
   return true;
 }
 

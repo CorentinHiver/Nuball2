@@ -2,14 +2,16 @@
 \label{_detectors_8hpp}\index{lib/Classes/Detectors.hpp@{lib/Classes/Detectors.hpp}}
 {\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}Hit.\+hpp\char`\"{}}\newline
-Include dependency graph for Detectors.\+hpp\+:\nopagebreak
+Include dependency graph for Detectors.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{_detectors_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -20,7 +22,11 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 class \textbf{ Detectors}
-\begin{DoxyCompactList}\small\item\em Loads the ID file and fills lookup tables. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Loads the ID file and fills lookup tables. \end{DoxyCompactList}\item 
+class \textbf{ Detectors\+::\+Empty\+Error}
+\item 
+class \textbf{ Detectors\+::\+Error}
+\end{DoxyCompactItemize}
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -44,9 +50,11 @@ std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ label\+To\+Clover} (\textbf{ SIZE\
 \item 
 std\+::vector$<$ \textbf{ uchar} $>$ \textbf{ label\+To\+Gecrystal} (\textbf{ SIZE\+\_\+\+LOOKUP}, 0)
 \item 
+std\+::map$<$ \textbf{ Label}, TH1F $\ast$ $>$ \textbf{ load\+Formatted\+TH1F} (TFile $\ast$file)
+\item 
 \textbf{ Ints} \textbf{ m\+\_\+index} (\textbf{ SIZE\+\_\+\+LOOKUP},-\/1)
 \item 
-std\+::ostream \& \textbf{ operator$>$$>$} (std\+::ostream \&cout, \textbf{ Detectors} const \&\textbf{ detectors})
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&out, \textbf{ Detectors} const \&\textbf{ detectors})
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -108,7 +116,8 @@ class \textbf{ Detectors} \textbf{ detectors}
 \doxysubsubsection{clover\_pos()}
 {\footnotesize\ttfamily \textbf{ Strings} clover\+\_\+pos (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{\char`\"{}\char`\"{}}]{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -121,7 +130,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{compressedLabel()}
 {\footnotesize\ttfamily \textbf{ Label\+\_\+vec} compressed\+Label (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{-\/}]{1 }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -140,7 +150,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{labelToClover()}
 {\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ label\+To\+Clover (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -153,24 +164,47 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{labelToGecrystal()}
 {\footnotesize\ttfamily std\+::vector$<$\textbf{ uchar}$>$ label\+To\+Gecrystal (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
 
+\mbox{\label{_detectors_8hpp_ae343a2d2d22d862f6ac7ae10ba1b3d41}} 
+\index{Detectors.hpp@{Detectors.hpp}!loadFormattedTH1F@{loadFormattedTH1F}}
+\index{loadFormattedTH1F@{loadFormattedTH1F}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{loadFormattedTH1F()}
+{\footnotesize\ttfamily std\+::map$<$\textbf{ Label}, TH1F$\ast$$>$ load\+Formatted\+TH1F (\begin{DoxyParamCaption}\item[{TFile $\ast$}]{file }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_detectors_8hpp_ae343a2d2d22d862f6ac7ae10ba1b3d41_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_detectors_8hpp_ae343a2d2d22d862f6ac7ae10ba1b3d41_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{_detectors_8hpp_af8a018699aa5d8544bc4877f40463a5a}} 
 \index{Detectors.hpp@{Detectors.hpp}!m\_index@{m\_index}}
 \index{m\_index@{m\_index}!Detectors.hpp@{Detectors.hpp}}
 \doxysubsubsection{m\_index()}
 {\footnotesize\ttfamily \textbf{ Ints} m\+\_\+index (\begin{DoxyParamCaption}\item[{\textbf{ SIZE\+\_\+\+LOOKUP}}]{,  }\item[{-\/}]{1 }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{_detectors_8hpp_af8a018699aa5d8544bc4877f40463a5a_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{_detectors_8hpp_ad6e008a36a12682ccf6a850ecc307187}} 
-\index{Detectors.hpp@{Detectors.hpp}!operator$>$$>$@{operator$>$$>$}}
-\index{operator$>$$>$@{operator$>$$>$}!Detectors.hpp@{Detectors.hpp}}
-\doxysubsubsection{operator$>$$>$()}
-{\footnotesize\ttfamily std\+::ostream\& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{cout,  }\item[{\textbf{ Detectors} const \&}]{detectors }\end{DoxyParamCaption})}
+\mbox{\label{_detectors_8hpp_a2fa75cda21d89a0dcd5f8135c5a2c8bc}} 
+\index{Detectors.hpp@{Detectors.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Detectors.hpp@{Detectors.hpp}}
+\doxysubsubsection{operator$<$$<$()}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\textbf{ Detectors} const \&}]{detectors }\end{DoxyParamCaption})}
 
 
 

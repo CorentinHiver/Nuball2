@@ -1,8 +1,9 @@
 <map id="MTTHist::get" name="MTTHist::get">
-<area shape="rect" id="node1" title=" " alt="" coords="635,56,740,83"/>
-<area shape="rect" id="node2" href="$class_calibration.html#ad6db2742477c8ac64787c6fe8a687aff" title=" " alt="" coords="413,5,587,32"/>
-<area shape="rect" id="node5" href="$class_histo_analyse.html#a3ebd877de62f44cfde794b8a7dad2a78" title=" " alt="" coords="425,56,575,83"/>
-<area shape="rect" id="node6" href="$class_r_w_mat.html#a2e77ce21675eb416b09dd3c9911be13b" title=" " alt="" coords="438,107,562,133"/>
-<area shape="rect" id="node3" href="$class_calibration.html#ae6bbaf8b283a345c9936a907fcba1849" title="Analyse the spectra to extract calibration coefficients." alt="" coords="213,5,365,32"/>
-<area shape="rect" id="node4" href="$class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="5,5,165,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="627,56,732,83"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="421,5,570,32"/>
+<area shape="rect" id="node4" href="$_m_t_t_hist_8hpp.html#a0dd7e86329ae164eaad633c614352e41" title=" " alt="" coords="446,56,545,83"/>
+<area shape="rect" id="node5" href="$class_calibrator.html#aa0fff626078ec3cd2e453c5cf6681462" title=" " alt="" coords="412,107,579,133"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="207,5,364,32"/>
+<area shape="rect" id="node6" href="$class_calibrator.html#aa15e2c6afb9da71595926a10d89f0761" title="Analyse the spectra to extract calibration coefficients." alt="" coords="213,107,358,133"/>
+<area shape="rect" id="node7" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="5,107,159,133"/>
 </map>

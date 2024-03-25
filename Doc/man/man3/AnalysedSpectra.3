@@ -1,0 +1,177 @@
+.TH "AnalysedSpectra" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+AnalysedSpectra \- Allows one to select which peaks to fit on a spectra\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <AnalysedSpectra\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAnalysedSpectra\fP () noexcept=default"
+.br
+.ti -1c
+.RI "\fBAnalysedSpectra\fP (TH1F *histo) noexcept"
+.br
+.ti -1c
+.RI "void \fBautoCanvas\fP ()"
+.br
+.ti -1c
+.RI "void \fBcd\fP (TVirtualPad *vpad)"
+.br
+.ti -1c
+.RI "void \fBchoosePeaks\fP (std::vector< double > const &peaks)"
+.br
+.ti -1c
+.RI "void \fBclearPeaks\fP ()"
+.br
+.ti -1c
+.RI "\fBFittedPeak\fP & \fBfitPeak\fP (double const &peaks, bool const &adjustRange=false)"
+.br
+.ti -1c
+.RI "std::vector< \fBFittedPeak\fP > & \fBfitPeaks\fP (std::vector< double > peaks, bool const &adjustRange=false)"
+.br
+.ti -1c
+.RI "auto \fBgetCanvas\fP ()"
+.br
+.ti -1c
+.RI "auto const \fBgetCanvas\fP () const"
+.br
+.ti -1c
+.RI "auto const  & \fBgetPeaks\fP () const"
+.br
+.ti -1c
+.RI "void \fBload\fP (TH1F *const histo)"
+.br
+.ti -1c
+.RI "auto \fBoperator\->\fP ()"
+.br
+.ti -1c
+.RI "double \fBselectX\fP (std::string const &instructions)"
+.br
+.ti -1c
+.RI "void \fBsetChannelsPerBin\fP (double const &cpb)"
+.br
+.ti -1c
+.RI "void \fBsetKevPerBin\fP (double const &kpb)"
+.br
+.ti -1c
+.RI "void \fBsetMaximumRange\fP (double const &_max)"
+.br
+.ti -1c
+.RI "void \fBsetMinimumRange\fP (double const &_min)"
+.br
+.ti -1c
+.RI "void \fBsetRatioRange\fP (double const &min, double const &max)"
+.br
+.in -1c
+.SS "Private Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::string \fBdetector\fP = 'PARIS'"
+.br
+.ti -1c
+.RI "double \fBm_apb\fP = 1"
+.br
+.ti -1c
+.RI "TH1F * \fBm_histo\fP = nullptr"
+.br
+.ti -1c
+.RI "double \fBm_kpb\fP = 1"
+.br
+.ti -1c
+.RI "TPad * \fBm_pad\fP = nullptr"
+.br
+.ti -1c
+.RI "std::vector< \fBFittedPeak\fP > \fBm_peaks\fP"
+.br
+.ti -1c
+.RI "double \fBrange_max\fP = 0"
+.br
+.ti -1c
+.RI "double \fBrange_min\fP = 0"
+.br
+.ti -1c
+.RI "double \fBratio_range_max\fP = 1\&.25"
+.br
+.ti -1c
+.RI "double \fBratio_range_min\fP = 0\&.75"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Allows one to select which peaks to fit on a spectra\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "AnalysedSpectra::AnalysedSpectra ()\fC [default]\fP, \fC [noexcept]\fP"
+
+.SS "AnalysedSpectra::AnalysedSpectra (TH1F * histo)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "void AnalysedSpectra::autoCanvas ()\fC [inline]\fP"
+
+.SS "void AnalysedSpectra::cd (TVirtualPad * vpad)\fC [inline]\fP"
+
+.SS "void AnalysedSpectra::choosePeaks (std::vector< double > const & peaks)"
+
+.SS "void AnalysedSpectra::clearPeaks ()\fC [inline]\fP"
+
+.SS "\fBFittedPeak\fP & AnalysedSpectra::fitPeak (double const & peaks, bool const & adjustRange = \fCfalse\fP)"
+
+.SS "std::vector< \fBFittedPeak\fP > & AnalysedSpectra::fitPeaks (std::vector< double > peaks, bool const & adjustRange = \fCfalse\fP)"
+
+.SS "auto AnalysedSpectra::getCanvas ()\fC [inline]\fP"
+
+.SS "auto const AnalysedSpectra::getCanvas () const\fC [inline]\fP"
+
+.SS "auto const& AnalysedSpectra::getPeaks () const\fC [inline]\fP"
+
+.SS "void AnalysedSpectra::load (TH1F *const histo)\fC [inline]\fP"
+
+.SS "auto AnalysedSpectra::operator\-> ()\fC [inline]\fP"
+
+.SS "double AnalysedSpectra::selectX (std::string const & instructions)\fC [inline]\fP"
+
+.SS "void AnalysedSpectra::setChannelsPerBin (double const & cpb)\fC [inline]\fP"
+
+.SS "void AnalysedSpectra::setKevPerBin (double const & kpb)\fC [inline]\fP"
+
+.SS "void AnalysedSpectra::setMaximumRange (double const & _max)\fC [inline]\fP"
+
+.SS "void AnalysedSpectra::setMinimumRange (double const & _min)\fC [inline]\fP"
+
+.SS "void AnalysedSpectra::setRatioRange (double const & min, double const & max)\fC [inline]\fP"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::string AnalysedSpectra::detector = 'PARIS'\fC [private]\fP"
+
+.SS "double AnalysedSpectra::m_apb = 1\fC [private]\fP"
+
+.SS "TH1F* AnalysedSpectra::m_histo = nullptr\fC [private]\fP"
+
+.SS "double AnalysedSpectra::m_kpb = 1\fC [private]\fP"
+
+.SS "TPad* AnalysedSpectra::m_pad = nullptr\fC [private]\fP"
+
+.SS "std::vector<\fBFittedPeak\fP> AnalysedSpectra::m_peaks\fC [private]\fP"
+
+.SS "double AnalysedSpectra::range_max = 0\fC [private]\fP"
+
+.SS "double AnalysedSpectra::range_min = 0\fC [private]\fP"
+
+.SS "double AnalysedSpectra::ratio_range_max = 1\&.25\fC [private]\fP"
+
+.SS "double AnalysedSpectra::ratio_range_min = 0\&.75\fC [private]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

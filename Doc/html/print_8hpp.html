@@ -82,103 +82,448 @@ $(document).ready(function(){initNavTree('print_8hpp.html',''); initResizable();
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">print.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for print.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp__incl.png" border="0" usemap="#alib_2print_8hpp" alt=""/></div>
+<map name="alib_2print_8hpp" id="alib_2print_8hpp">
+<area shape="rect" title=" " alt="" coords="143,5,243,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,85,107"/>
+<area shape="rect" title=" " alt="" coords="109,80,184,107"/>
+<area shape="rect" title=" " alt="" coords="209,80,271,107"/>
+<area shape="rect" title=" " alt="" coords="296,80,347,107"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="print_8hpp__dep__incl.png" border="0" usemap="#alib_2print_8hppdep" alt=""/></div>
 <map name="alib_2print_8hppdep" id="alib_2print_8hppdep">
-<area shape="rect" title=" " alt="" coords="1531,5,1631,32"/>
-<area shape="rect" href="files__functions_8hpp.html" title=" " alt="" coords="1537,155,1701,181"/>
-<area shape="rect" href="lib_co_8hpp.html" title=" " alt="" coords="1568,229,1671,256"/>
-<area shape="rect" href="vector__functions_8hpp.html" title=" " alt="" coords="1618,80,1797,107"/>
-<area shape="rect" href="_analyse_2_counters_8hpp.html" title=" " alt="" coords="1851,528,2035,555"/>
-<area shape="rect" href="_d_s_s_d_8hpp.html" title=" " alt="" coords="649,528,811,555"/>
-<area shape="rect" href="_builder_8hpp.html" title=" " alt="" coords="1399,528,1568,555"/>
-<area shape="rect" href="_faster2_root_8hpp.html" title=" " alt="" coords="3048,767,3255,793"/>
-<area shape="rect" href="_timeshifts_8hpp.html" title=" " alt="" coords="2025,692,2222,719"/>
-<area shape="rect" href="_run_matrixator_8hpp.html" title=" " alt="" coords="2411,767,2633,793"/>
-<area shape="rect" href="_classes_2_counters_8hpp.html" title=" " alt="" coords="1644,528,1827,555"/>
-<area shape="rect" href="_event_8hpp.html" title=" " alt="" coords="1301,453,1463,480"/>
-<area shape="rect" href="_calibration_8hpp.html" title=" " alt="" coords="2694,692,2894,719"/>
-<area shape="rect" href="_nuball2_tree_8hpp.html" title=" " alt="" coords="3767,528,3968,555"/>
-<area shape="rect" href="_r_f___manager_8hpp.html" title=" " alt="" coords="1068,528,1272,555"/>
-<area shape="rect" href="_files_manager_8hpp.html" title=" " alt="" coords="3481,528,3691,555"/>
-<area shape="rect" href="_gate_8hpp.html" title=" " alt="" coords="109,453,263,480"/>
-<area shape="rect" href="_manip_8hpp.html" title=" " alt="" coords="4037,610,4201,637"/>
-<area shape="rect" href="_performances_8hpp.html" title=" " alt="" coords="1871,610,2085,637"/>
-<area shape="rect" href="_r_w_mat_8hxx.html" title=" " alt="" coords="4406,304,4577,331"/>
-<area shape="rect" href="lib_root_8hpp.html" title=" " alt="" coords="1207,304,1323,331"/>
-<area shape="rect" href="_m_t_list_8hpp.html" title=" " alt="" coords="3993,528,4179,555"/>
-<area shape="rect" href="_timewalk_8hpp.html" title=" " alt="" coords="449,453,643,480"/>
-<area shape="rect" href="_event_analyse_8hpp.html" title=" " alt="" coords="807,610,1021,637"/>
-<area shape="rect" href="_sorted___event_8hpp.html" title=" " alt="" coords="1045,603,1185,644"/>
-<area shape="rect" href="_coinc_builder_8hpp.html" title=" " alt="" coords="1590,610,1795,637"/>
-<area shape="rect" href="_event_builder_8hpp.html" title=" " alt="" coords="1359,610,1565,637"/>
-<area shape="rect" href="_clover_spectra_8hpp.html" title=" " alt="" coords="1311,767,1531,793"/>
-<area shape="rect" href="_clovers_8hpp.html" title=" " alt="" coords="399,528,573,555"/>
-<area shape="rect" href="_paris_8hpp.html" title=" " alt="" coords="835,528,993,555"/>
-<area shape="rect" href="_alignator_8hpp.html" title=" " alt="" coords="3273,528,3456,555"/>
-<area shape="rect" href="_m_t_faster_reader_8hpp.html" title=" " alt="" coords="2837,610,3084,637"/>
-<area shape="rect" href="_faster2_histo_8hpp.html" title=" " alt="" coords="3305,767,3515,793"/>
-<area shape="rect" href="_histogramor_8hpp.html" title=" " alt="" coords="2248,692,2457,719"/>
-<area shape="rect" href="_near_line_8hpp.html" title=" " alt="" coords="213,767,399,793"/>
-<area shape="rect" href="_m_t_root_reader_8hpp.html" title=" " alt="" coords="3108,610,3347,637"/>
-<area shape="rect" href="_m_t_files_manager_8hpp.html" title=" " alt="" coords="3472,610,3721,637"/>
-<area shape="rect" href="_histo_analyse_8hpp.html" title=" " alt="" coords="57,692,269,719"/>
-<area shape="rect" href="_paris_cluster_8hpp.html" title=" " alt="" coords="718,453,921,480"/>
-<area shape="rect" href="_paris_phoswitch_8hpp.html" title=" " alt="" coords="699,379,921,405"/>
-<area shape="rect" href="_detectors_8hpp.html" title=" " alt="" coords="1849,453,2035,480"/>
-<area shape="rect" href="_hit_8hpp.html" title=" " alt="" coords="1936,379,2079,405"/>
-<area shape="rect" href="_spectra_alignator_8hpp.html" title=" " alt="" coords="996,379,1227,405"/>
-<area shape="rect" href="_m_t_object_8hpp.html" title=" " alt="" coords="2741,453,2946,480"/>
-<area shape="rect" href="_faster_reader_8hpp.html" title=" " alt="" coords="2547,528,2755,555"/>
-<area shape="rect" href="_m_t_counter_8hpp.html" title=" " alt="" coords="2160,528,2372,555"/>
-<area shape="rect" href="_m_t_t_hist_8hpp.html" title=" " alt="" coords="2313,610,2510,637"/>
-<area shape="rect" href="_m_t_variable_8hpp.html" title=" " alt="" coords="2982,528,3198,555"/>
+<area shape="rect" title=" " alt="" coords="1794,5,1894,32"/>
+<area shape="rect" href="errors_8hpp.html" title=" " alt="" coords="1765,155,1873,181"/>
+<area shape="rect" href="lib_co_8hpp.html" title=" " alt="" coords="1847,229,1950,256"/>
+<area shape="rect" href="files__functions_8hpp.html" title=" " alt="" coords="1897,155,2061,181"/>
+<area shape="rect" href="vector__functions_8hpp.html" title=" " alt="" coords="1907,80,2085,107"/>
+<area shape="rect" href="_analyse_2_counters_8hpp.html" title=" " alt="" coords="1488,528,1672,555"/>
+<area shape="rect" href="_d_s_s_d_8hpp.html" title=" " alt="" coords="848,528,1011,555"/>
+<area shape="rect" href="_builder_8hpp.html" title=" " alt="" coords="374,528,543,555"/>
+<area shape="rect" href="_faster2_root_8hpp.html" title=" " alt="" coords="1613,767,1819,793"/>
+<area shape="rect" href="_timeshifts_8hpp.html" title=" " alt="" coords="1779,692,1976,719"/>
+<area shape="rect" href="_run_matrixator_8hpp.html" title=" " alt="" coords="2135,767,2356,793"/>
+<area shape="rect" href="_calibration_8hpp.html" title=" " alt="" coords="2924,528,3119,555"/>
+<area shape="rect" href="_co_progress_bar_8hpp.html" title=" " alt="" coords="3628,453,3847,480"/>
+<area shape="rect" href="_classes_2_counters_8hpp.html" title=" " alt="" coords="2362,528,2545,555"/>
+<area shape="rect" href="_data_file_8hpp.html" title=" " alt="" coords="4796,692,4975,719"/>
+<area shape="rect" href="_event_8hpp.html" title=" " alt="" coords="1513,453,1674,480"/>
+<area shape="rect" href="_r_f___manager_8hpp.html" title=" " alt="" coords="619,528,823,555"/>
+<area shape="rect" href="_files_manager_8hpp.html" title=" " alt="" coords="4371,528,4581,555"/>
+<area shape="rect" href="_fit_8hpp.html" title=" " alt="" coords="3463,453,3603,480"/>
+<area shape="rect" href="_gate_8hpp.html" title=" " alt="" coords="1232,304,1387,331"/>
+<area shape="rect" href="_manip_8hpp.html" title=" " alt="" coords="4082,610,4246,637"/>
+<area shape="rect" href="_performances_8hpp.html" title=" " alt="" coords="409,304,623,331"/>
+<area shape="rect" href="_timewalk_8hpp.html" title=" " alt="" coords="835,453,1023,480"/>
+<area shape="rect" href="lib_root_8hpp.html" title=" " alt="" coords="2197,304,2313,331"/>
+<area shape="rect" href="_m_t_list_8hpp.html" title=" " alt="" coords="3892,528,4079,555"/>
+<area shape="rect" href="_event_analyse_8hpp.html" title=" " alt="" coords="1211,610,1426,637"/>
+<area shape="rect" href="_sorted___event_8hpp.html" title=" " alt="" coords="859,603,999,644"/>
+<area shape="rect" href="_coinc_builder_8hpp.html" title=" " alt="" coords="43,610,248,637"/>
+<area shape="rect" href="_event_builder_8hpp.html" title=" " alt="" coords="374,610,581,637"/>
+<area shape="rect" href="_clover_spectra_8hpp.html" title=" " alt="" coords="1203,767,1423,793"/>
+<area shape="rect" href="_cobalt_calorimeter_8hpp.html" title=" " alt="" coords="2513,767,2759,793"/>
+<area shape="rect" href="_faster2_histo_8hpp.html" title=" " alt="" coords="3320,767,3531,793"/>
+<area shape="rect" href="_spectra_co_8hpp.html" title=" " alt="" coords="2876,610,3068,637"/>
+<area shape="rect" href="_calibrator_8hpp.html" title=" " alt="" coords="3247,692,3439,719"/>
+<area shape="rect" href="_spectra_alignator_8hpp.html" title=" " alt="" coords="2989,692,3222,719"/>
+<area shape="rect" href="_evolution_peaks_8hpp.html" title=" " alt="" coords="3635,767,3864,793"/>
+<area shape="rect" href="_paris_8hpp.html" title=" " alt="" coords="2180,528,2337,555"/>
+<area shape="rect" href="_m_t_faster_reader_8hpp.html" title=" " alt="" coords="3710,610,3957,637"/>
+<area shape="rect" href="_clovers_8hpp.html" title=" " alt="" coords="1086,528,1261,555"/>
+<area shape="rect" href="_alignator_8hpp.html" title=" " alt="" coords="1973,528,2155,555"/>
+<area shape="rect" href="_nuball2_tree_8hpp.html" title=" " alt="" coords="1747,528,1949,555"/>
+<area shape="rect" href="_m_t_root_reader_8hpp.html" title=" " alt="" coords="3447,610,3686,637"/>
+<area shape="rect" href="_m_t_files_manager_8hpp.html" title=" " alt="" coords="4270,610,4519,637"/>
+<area shape="rect" href="_analysed_spectra_8hpp.html" title=" " alt="" coords="3447,528,3681,555"/>
+<area shape="rect" href="_paris_cluster_8hpp.html" title=" " alt="" coords="2153,453,2356,480"/>
+<area shape="rect" href="_paris_phoswitch_8hpp.html" title=" " alt="" coords="2143,379,2366,405"/>
+<area shape="rect" href="_detectors_8hpp.html" title=" " alt="" coords="2565,453,2752,480"/>
+<area shape="rect" href="_hit_8hpp.html" title=" " alt="" coords="2765,379,2907,405"/>
+<area shape="rect" href="_output_t_file_8hpp.html" title=" " alt="" coords="1725,379,1923,405"/>
+<area shape="rect" href="_r_w_mat_8hxx.html" title=" " alt="" coords="1948,379,2119,405"/>
 </map>
 </div>
 </div>
 <p><a href="print_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:acbf3245277a73b810032219100559ae2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#acbf3245277a73b810032219100559ae2">_GLIBCXX_USE_CXX11_ABI</a>&#160;&#160;&#160;0/1</td></tr>
+<tr class="separator:acbf3245277a73b810032219100559ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b3b25cba33b07c303f3060fe41887f6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a7b3b25cba33b07c303f3060fe41887f6">BLACK</a>&#160;&#160;&#160;&quot;\u001b[30m&quot;</td></tr>
+<tr class="separator:a7b3b25cba33b07c303f3060fe41887f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d10e672abb49ad63eeaa8aaef57c38"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a79d10e672abb49ad63eeaa8aaef57c38">BLUE</a>&#160;&#160;&#160;&quot;\u001b[34m&quot;</td></tr>
+<tr class="separator:a79d10e672abb49ad63eeaa8aaef57c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37c3aae09c44fbf015cf4f048a1ea6bf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a37c3aae09c44fbf015cf4f048a1ea6bf">BRIGHTBLACK</a>&#160;&#160;&#160;&quot;\u001b[30;1m&quot;</td></tr>
+<tr class="separator:a37c3aae09c44fbf015cf4f048a1ea6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1856ac8f97780221a92b56c5b994b959"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a1856ac8f97780221a92b56c5b994b959">BRIGHTBLUE</a>&#160;&#160;&#160;&quot;\u001b[34;1m&quot;</td></tr>
+<tr class="separator:a1856ac8f97780221a92b56c5b994b959"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c928762de56d07b80b0c9dc9472a4d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a6c928762de56d07b80b0c9dc9472a4d5">BRIGHTCYAN</a>&#160;&#160;&#160;&quot;\u001b[36;1m&quot;</td></tr>
+<tr class="separator:a6c928762de56d07b80b0c9dc9472a4d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa52f4996a4480f3f19d881dbff50ae59"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#aa52f4996a4480f3f19d881dbff50ae59">BRIGHTGREEN</a>&#160;&#160;&#160;&quot;\u001b[32;1m&quot;</td></tr>
+<tr class="separator:aa52f4996a4480f3f19d881dbff50ae59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25c081882d60d0060029256721157d89"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a25c081882d60d0060029256721157d89">BRIGHTMAGENTA</a>&#160;&#160;&#160;&quot;\u001b[35;1m&quot;</td></tr>
+<tr class="separator:a25c081882d60d0060029256721157d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62e8ee733dff17c16de3391bb0fc50c7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a62e8ee733dff17c16de3391bb0fc50c7">BRIGHTRED</a>&#160;&#160;&#160;&quot;\u001b[31;1m&quot;</td></tr>
+<tr class="separator:a62e8ee733dff17c16de3391bb0fc50c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a099085e6196d7a7a29cbee3ef769c64e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a099085e6196d7a7a29cbee3ef769c64e">BRIGHTWHITE</a>&#160;&#160;&#160;&quot;\u001b[37;1m&quot;</td></tr>
+<tr class="separator:a099085e6196d7a7a29cbee3ef769c64e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab95f936e60a13b90646adc2674c9a8e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#ab95f936e60a13b90646adc2674c9a8e3">BRIGHTYELLOW</a>&#160;&#160;&#160;&quot;\u001b[33;1m&quot;</td></tr>
+<tr class="separator:ab95f936e60a13b90646adc2674c9a8e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad243f93c16bc4c1d3e0a13b84421d760"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#ad243f93c16bc4c1d3e0a13b84421d760">CYAN</a>&#160;&#160;&#160;&quot;\u001b[36m&quot;</td></tr>
+<tr class="separator:ad243f93c16bc4c1d3e0a13b84421d760"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfbc006ea433ad708fdee3e82996e721"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#acfbc006ea433ad708fdee3e82996e721">GREEN</a>&#160;&#160;&#160;&quot;\u001b[32m&quot;</td></tr>
+<tr class="separator:acfbc006ea433ad708fdee3e82996e721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adce122f566c88a1eceeb79a635afa964"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#adce122f566c88a1eceeb79a635afa964">GREY</a>&#160;&#160;&#160;&quot;\u001b[38;5;8m&quot;</td></tr>
+<tr class="separator:adce122f566c88a1eceeb79a635afa964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f699060902f800f12aaae150f3a708e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a6f699060902f800f12aaae150f3a708e">MAGENTA</a>&#160;&#160;&#160;&quot;\u001b[35m&quot;</td></tr>
+<tr class="separator:a6f699060902f800f12aaae150f3a708e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d23feea868a983c8c2b661e1e16972f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a8d23feea868a983c8c2b661e1e16972f">RED</a>&#160;&#160;&#160;&quot;\u001b[31m&quot;</td></tr>
+<tr class="separator:a8d23feea868a983c8c2b661e1e16972f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab702106cf3b3e96750b6845ded4e0299"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#ab702106cf3b3e96750b6845ded4e0299">RESET</a>&#160;&#160;&#160;&quot;\u001b[0m&quot;</td></tr>
+<tr class="separator:ab702106cf3b3e96750b6845ded4e0299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87b537f5fa5c109d3c05c13d6b18f382"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a87b537f5fa5c109d3c05c13d6b18f382">WHITE</a>&#160;&#160;&#160;&quot;\u001b[37m&quot;</td></tr>
+<tr class="separator:a87b537f5fa5c109d3c05c13d6b18f382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf681265909adf3d3e8116c93c0ba179"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#abf681265909adf3d3e8116c93c0ba179">YELLOW</a>&#160;&#160;&#160;&quot;\u001b[33m&quot;</td></tr>
+<tr class="separator:abf681265909adf3d3e8116c93c0ba179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a7c50c0690489629965f74c4921570ce5"><td class="memTemplParams" colspan="2">template&lt;class... ARGS&gt; </td></tr>
 <tr class="memitem:a7c50c0690489629965f74c4921570ce5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a7c50c0690489629965f74c4921570ce5">debug</a> (ARGS &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a7c50c0690489629965f74c4921570ce5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requires #define DEBUG or -DDEBUG in the compile line.  <a href="print_8hpp.html#a7c50c0690489629965f74c4921570ce5">More...</a><br /></td></tr>
 <tr class="separator:a7c50c0690489629965f74c4921570ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a021f6cc0c03903546e6a63851944f2e8"><td class="memTemplParams" colspan="2">template&lt;class E , size_t size&gt; </td></tr>
-<tr class="memitem:a021f6cc0c03903546e6a63851944f2e8"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a021f6cc0c03903546e6a63851944f2e8">operator&lt;&lt;</a> (std::ostream &amp;cout, std::array&lt; E, size &gt; const &amp;a)</td></tr>
-<tr class="separator:a021f6cc0c03903546e6a63851944f2e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fc2e1be374c41706525b8d606242646"><td class="memTemplParams" colspan="2">template&lt;class K , class V &gt; </td></tr>
-<tr class="memitem:a1fc2e1be374c41706525b8d606242646"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a1fc2e1be374c41706525b8d606242646">operator&lt;&lt;</a> (std::ostream &amp;cout, std::map&lt; K, V &gt; const &amp;m)</td></tr>
-<tr class="separator:a1fc2e1be374c41706525b8d606242646"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a305d037b6a2823d9d8d935b1cd5dd2c0"><td class="memTemplParams" colspan="2">template&lt;class F , class S &gt; </td></tr>
-<tr class="memitem:a305d037b6a2823d9d8d935b1cd5dd2c0"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a305d037b6a2823d9d8d935b1cd5dd2c0">operator&lt;&lt;</a> (std::ostream &amp;cout, std::pair&lt; F, S &gt; const &amp;p)</td></tr>
-<tr class="separator:a305d037b6a2823d9d8d935b1cd5dd2c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03b9abfe3f12543c365e9a25848ba566"><td class="memTemplParams" colspan="2">template&lt;class E &gt; </td></tr>
-<tr class="memitem:a03b9abfe3f12543c365e9a25848ba566"><td class="memTemplItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a03b9abfe3f12543c365e9a25848ba566">operator&lt;&lt;</a> (std::ostream &amp;cout, std::vector&lt; E &gt; const &amp;v)</td></tr>
-<tr class="separator:a03b9abfe3f12543c365e9a25848ba566"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad68695d41301547d77d546b80b1bc278"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#ad68695d41301547d77d546b80b1bc278">operator&lt;&lt;</a> (std::ostream &amp;cout, unsigned char const &amp;uc)</td></tr>
-<tr class="separator:ad68695d41301547d77d546b80b1bc278"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa2383e8fc7f8fa546f4376e1dd4c9b7"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:aaa2383e8fc7f8fa546f4376e1dd4c9b7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#aaa2383e8fc7f8fa546f4376e1dd4c9b7">print</a> ()</td></tr>
-<tr class="separator:aaa2383e8fc7f8fa546f4376e1dd4c9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a527acf8dce9e07a4901d65a23979424b"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
-<tr class="memitem:a527acf8dce9e07a4901d65a23979424b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a527acf8dce9e07a4901d65a23979424b">print</a> (T const &amp;... t)</td></tr>
-<tr class="separator:a527acf8dce9e07a4901d65a23979424b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a553a9a331cc4556c2d9bb3aaa8533528"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
+<tr class="memitem:a553a9a331cc4556c2d9bb3aaa8533528"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a553a9a331cc4556c2d9bb3aaa8533528">error</a> (T const &amp;... t)</td></tr>
+<tr class="memdesc:a553a9a331cc4556c2d9bb3aaa8533528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print in red.  <a href="print_8hpp.html#a553a9a331cc4556c2d9bb3aaa8533528">More...</a><br /></td></tr>
+<tr class="separator:a553a9a331cc4556c2d9bb3aaa8533528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a141d6b4b0d8c1824f6ed472b5226eab4"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
+<tr class="memitem:a141d6b4b0d8c1824f6ed472b5226eab4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a141d6b4b0d8c1824f6ed472b5226eab4">information</a> (T const &amp;... t)</td></tr>
+<tr class="memdesc:a141d6b4b0d8c1824f6ed472b5226eab4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print in grey.  <a href="print_8hpp.html#a141d6b4b0d8c1824f6ed472b5226eab4">More...</a><br /></td></tr>
+<tr class="separator:a141d6b4b0d8c1824f6ed472b5226eab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a388f572c62279f839ee138a9afbdeeb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5">print</a> ()</td></tr>
+<tr class="memdesc:a388f572c62279f839ee138a9afbdeeb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">New line.  <a href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5">More...</a><br /></td></tr>
+<tr class="separator:a388f572c62279f839ee138a9afbdeeb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02e3acd6b90f83126d840187ee8023d6"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
 <tr class="memitem:a02e3acd6b90f83126d840187ee8023d6"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a02e3acd6b90f83126d840187ee8023d6">print</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a02e3acd6b90f83126d840187ee8023d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic print.  <a href="print_8hpp.html#a02e3acd6b90f83126d840187ee8023d6">More...</a><br /></td></tr>
 <tr class="separator:a02e3acd6b90f83126d840187ee8023d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a942a3ac725f791da05ff038fd549a721"><td class="memTemplParams" colspan="2">template&lt;class T , class... T2&gt; </td></tr>
 <tr class="memitem:a942a3ac725f791da05ff038fd549a721"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a942a3ac725f791da05ff038fd549a721">print</a> (T const &amp;t, T2 const &amp;... t2)</td></tr>
+<tr class="memdesc:a942a3ac725f791da05ff038fd549a721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic print.  <a href="print_8hpp.html#a942a3ac725f791da05ff038fd549a721">More...</a><br /></td></tr>
 <tr class="separator:a942a3ac725f791da05ff038fd549a721"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab97d5aa53eda1f20404d0555d7ffd5de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="print_8hpp.html#ab97d5aa53eda1f20404d0555d7ffd5de">print_precision</a> (int n=6)</td></tr>
+<tr class="memdesc:ab97d5aa53eda1f20404d0555d7ffd5de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the floating point precision displayed.  <a href="print_8hpp.html#ab97d5aa53eda1f20404d0555d7ffd5de">More...</a><br /></td></tr>
 <tr class="separator:ab97d5aa53eda1f20404d0555d7ffd5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afded2b178f1cba7246c86beaab6d4e6c"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:afded2b178f1cba7246c86beaab6d4e6c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#afded2b178f1cba7246c86beaab6d4e6c">printC</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:afded2b178f1cba7246c86beaab6d4e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic print concatenated.  <a href="print_8hpp.html#afded2b178f1cba7246c86beaab6d4e6c">More...</a><br /></td></tr>
+<tr class="separator:afded2b178f1cba7246c86beaab6d4e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2aee0ac2f1c9f607a845b21b1c12e5"><td class="memTemplParams" colspan="2">template&lt;class T , class... T2&gt; </td></tr>
+<tr class="memitem:a4c2aee0ac2f1c9f607a845b21b1c12e5"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a4c2aee0ac2f1c9f607a845b21b1c12e5">printC</a> (T const &amp;t, T2 const &amp;... t2)</td></tr>
+<tr class="memdesc:a4c2aee0ac2f1c9f607a845b21b1c12e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic print concatenated.  <a href="print_8hpp.html#a4c2aee0ac2f1c9f607a845b21b1c12e5">More...</a><br /></td></tr>
+<tr class="separator:a4c2aee0ac2f1c9f607a845b21b1c12e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57409044715c55a505142dc6cab8a49f"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a57409044715c55a505142dc6cab8a49f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a57409044715c55a505142dc6cab8a49f">println</a> (T const &amp;t)</td></tr>
+<tr class="memdesc:a57409044715c55a505142dc6cab8a49f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic print in one line.  <a href="print_8hpp.html#a57409044715c55a505142dc6cab8a49f">More...</a><br /></td></tr>
+<tr class="separator:a57409044715c55a505142dc6cab8a49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae92ca213daa0e7e64752028d31033abe"><td class="memTemplParams" colspan="2">template&lt;class T , class... T2&gt; </td></tr>
+<tr class="memitem:ae92ca213daa0e7e64752028d31033abe"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#ae92ca213daa0e7e64752028d31033abe">println</a> (T const &amp;t, T2 const &amp;... t2)</td></tr>
+<tr class="memdesc:ae92ca213daa0e7e64752028d31033abe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic print in one line.  <a href="print_8hpp.html#ae92ca213daa0e7e64752028d31033abe">More...</a><br /></td></tr>
+<tr class="separator:ae92ca213daa0e7e64752028d31033abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90460287027986fbf0c9a1ef8e5a1bce"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a90460287027986fbf0c9a1ef8e5a1bce"><td class="memTemplItemLeft" align="right" valign="top">std::string&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#a90460287027986fbf0c9a1ef8e5a1bce">type_of</a> (T const &amp;t)</td></tr>
+<tr class="separator:a90460287027986fbf0c9a1ef8e5a1bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9e2dd512a5915af4751a40fefbfbc94"><td class="memTemplParams" colspan="2">template&lt;class... T&gt; </td></tr>
+<tr class="memitem:ad9e2dd512a5915af4751a40fefbfbc94"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="print_8hpp.html#ad9e2dd512a5915af4751a40fefbfbc94">warning</a> (T const &amp;... t)</td></tr>
+<tr class="memdesc:ad9e2dd512a5915af4751a40fefbfbc94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print in bright black.  <a href="print_8hpp.html#ad9e2dd512a5915af4751a40fefbfbc94">More...</a><br /></td></tr>
+<tr class="separator:ad9e2dd512a5915af4751a40fefbfbc94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="acbf3245277a73b810032219100559ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbf3245277a73b810032219100559ae2">&#9670;&nbsp;</a></span>_GLIBCXX_USE_CXX11_ABI</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _GLIBCXX_USE_CXX11_ABI&#160;&#160;&#160;0/1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7b3b25cba33b07c303f3060fe41887f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b3b25cba33b07c303f3060fe41887f6">&#9670;&nbsp;</a></span>BLACK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLACK&#160;&#160;&#160;&quot;\u001b[30m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79d10e672abb49ad63eeaa8aaef57c38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79d10e672abb49ad63eeaa8aaef57c38">&#9670;&nbsp;</a></span>BLUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLUE&#160;&#160;&#160;&quot;\u001b[34m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a37c3aae09c44fbf015cf4f048a1ea6bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37c3aae09c44fbf015cf4f048a1ea6bf">&#9670;&nbsp;</a></span>BRIGHTBLACK</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRIGHTBLACK&#160;&#160;&#160;&quot;\u001b[30;1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1856ac8f97780221a92b56c5b994b959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1856ac8f97780221a92b56c5b994b959">&#9670;&nbsp;</a></span>BRIGHTBLUE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRIGHTBLUE&#160;&#160;&#160;&quot;\u001b[34;1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6c928762de56d07b80b0c9dc9472a4d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c928762de56d07b80b0c9dc9472a4d5">&#9670;&nbsp;</a></span>BRIGHTCYAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRIGHTCYAN&#160;&#160;&#160;&quot;\u001b[36;1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa52f4996a4480f3f19d881dbff50ae59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa52f4996a4480f3f19d881dbff50ae59">&#9670;&nbsp;</a></span>BRIGHTGREEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRIGHTGREEN&#160;&#160;&#160;&quot;\u001b[32;1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a25c081882d60d0060029256721157d89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25c081882d60d0060029256721157d89">&#9670;&nbsp;</a></span>BRIGHTMAGENTA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRIGHTMAGENTA&#160;&#160;&#160;&quot;\u001b[35;1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a62e8ee733dff17c16de3391bb0fc50c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62e8ee733dff17c16de3391bb0fc50c7">&#9670;&nbsp;</a></span>BRIGHTRED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRIGHTRED&#160;&#160;&#160;&quot;\u001b[31;1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a099085e6196d7a7a29cbee3ef769c64e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a099085e6196d7a7a29cbee3ef769c64e">&#9670;&nbsp;</a></span>BRIGHTWHITE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRIGHTWHITE&#160;&#160;&#160;&quot;\u001b[37;1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab95f936e60a13b90646adc2674c9a8e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab95f936e60a13b90646adc2674c9a8e3">&#9670;&nbsp;</a></span>BRIGHTYELLOW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRIGHTYELLOW&#160;&#160;&#160;&quot;\u001b[33;1m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad243f93c16bc4c1d3e0a13b84421d760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad243f93c16bc4c1d3e0a13b84421d760">&#9670;&nbsp;</a></span>CYAN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CYAN&#160;&#160;&#160;&quot;\u001b[36m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acfbc006ea433ad708fdee3e82996e721"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfbc006ea433ad708fdee3e82996e721">&#9670;&nbsp;</a></span>GREEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GREEN&#160;&#160;&#160;&quot;\u001b[32m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adce122f566c88a1eceeb79a635afa964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adce122f566c88a1eceeb79a635afa964">&#9670;&nbsp;</a></span>GREY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GREY&#160;&#160;&#160;&quot;\u001b[38;5;8m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6f699060902f800f12aaae150f3a708e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f699060902f800f12aaae150f3a708e">&#9670;&nbsp;</a></span>MAGENTA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAGENTA&#160;&#160;&#160;&quot;\u001b[35m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8d23feea868a983c8c2b661e1e16972f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d23feea868a983c8c2b661e1e16972f">&#9670;&nbsp;</a></span>RED</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RED&#160;&#160;&#160;&quot;\u001b[31m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab702106cf3b3e96750b6845ded4e0299"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab702106cf3b3e96750b6845ded4e0299">&#9670;&nbsp;</a></span>RESET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RESET&#160;&#160;&#160;&quot;\u001b[0m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a87b537f5fa5c109d3c05c13d6b18f382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b537f5fa5c109d3c05c13d6b18f382">&#9670;&nbsp;</a></span>WHITE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define WHITE&#160;&#160;&#160;&quot;\u001b[37m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abf681265909adf3d3e8116c93c0ba179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf681265909adf3d3e8116c93c0ba179">&#9670;&nbsp;</a></span>YELLOW</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define YELLOW&#160;&#160;&#160;&quot;\u001b[33m&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a7c50c0690489629965f74c4921570ce5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c50c0690489629965f74c4921570ce5">&#9670;&nbsp;</a></span>debug()</h2>
@@ -197,13 +542,15 @@ template&lt;class... ARGS&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Requires #define DEBUG or -DDEBUG in the compile line. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="print_8hpp_a7c50c0690489629965f74c4921570ce5_cgraph.png" border="0" usemap="#aprint_8hpp_a7c50c0690489629965f74c4921570ce5_cgraph" alt=""/></div>
 <map name="aprint_8hpp_a7c50c0690489629965f74c4921570ce5_cgraph" id="aprint_8hpp_a7c50c0690489629965f74c4921570ce5_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,68,32"/>
-<area shape="rect" href="print_8hpp.html#aaa2383e8fc7f8fa546f4376e1dd4c9b7" title=" " alt="" coords="116,5,168,32"/>
+<area shape="rect" title="Requires #define DEBUG or &#45;DDEBUG in the compile line." alt="" coords="5,5,68,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="116,5,168,32"/>
 </map>
 </div>
 <div class="dynheader">
@@ -211,177 +558,155 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="print_8hpp_a7c50c0690489629965f74c4921570ce5_icgraph.png" border="0" usemap="#aprint_8hpp_a7c50c0690489629965f74c4921570ce5_icgraph" alt=""/></div>
 <map name="aprint_8hpp_a7c50c0690489629965f74c4921570ce5_icgraph" id="aprint_8hpp_a7c50c0690489629965f74c4921570ce5_icgraph">
-<area shape="rect" title=" " alt="" coords="208,5,271,32"/>
-<area shape="rect" href="class_m_t_t_hist.html#a3fbc1867068d50b62b712f2458d35ff0" title=" " alt="" coords="5,5,160,32"/>
+<area shape="rect" title="Requires #define DEBUG or &#45;DDEBUG in the compile line." alt="" coords="756,179,819,205"/>
+<area shape="rect" href="class_calibrator.html#a00806ef12bceedaa6c16dad9b653f27f" title="Uses the second version of the peak finder to extract calibration coefficients." alt="" coords="541,8,694,35"/>
+<area shape="rect" href="class_simplex.html#a4212e98efa0b1468955d32a51387f3fc" title=" " alt="" coords="549,61,685,88"/>
+<area shape="rect" href="class_minimisator.html#a3c467eeb96f716414dbfb6f2348c6340" title=" " alt="" coords="293,56,479,83"/>
+<area shape="rect" href="class_m_t_t_hist.html#a0412e3cb8d1db4278f3b09316d4ec139" title="Merges the histograms." alt="" coords="555,245,680,272"/>
+<area shape="rect" href="class_m_t_t_hist.html#a3fbc1867068d50b62b712f2458d35ff0" title=" " alt="" coords="309,355,463,381"/>
+<area shape="rect" href="class_m_t_t_hist.html#a72615441a18ffcfab6ca4b848f63eee3" title=" " alt="" coords="551,347,684,373"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#a760c56b79865a37984edc07165a7bc73" title=" " alt="" coords="527,179,708,205"/>
+<area shape="rect" href="class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="305,5,467,32"/>
+<area shape="rect" href="class_spectra_alignator.html#aed228999d9baba04b99e8542204e058b" title=" " alt="" coords="5,56,245,83"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#a6d189182d62a2b03d53520834c439620" title=" " alt="" coords="311,238,461,279"/>
+<area shape="rect" href="class_timeshifts.html#a608d9443a15dd669920e10dd8baee23a" title=" " alt="" coords="311,304,461,331"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#aceaa8e906e0257f450799026ec2269ca" title="legacy" alt="" coords="51,222,200,263"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#ae731ee28c852d150fbf668c27604b8ed" title=" " alt="" coords="51,139,200,181"/>
+<area shape="rect" href="class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="47,304,204,331"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#a3464ff1e41c4cbda5b70785952838ee2" title=" " alt="" coords="309,173,463,214"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#a9611646f2620865466213c086a2be263" title=" " alt="" coords="311,107,461,149"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a021f6cc0c03903546e6a63851944f2e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a021f6cc0c03903546e6a63851944f2e8">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/5]</span></h2>
+<a id="a553a9a331cc4556c2d9bb3aaa8533528"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a553a9a331cc4556c2d9bb3aaa8533528">&#9670;&nbsp;</a></span>error()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class E , size_t size&gt; </div>
+template&lt;class... T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td class="memname">void error </td>
           <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>cout</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">T const &amp;...&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::array&lt; E, size &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>a</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Print in red. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="print_8hpp_a021f6cc0c03903546e6a63851944f2e8_cgraph.png" border="0" usemap="#aprint_8hpp_a021f6cc0c03903546e6a63851944f2e8_cgraph" alt=""/></div>
-<map name="aprint_8hpp_a021f6cc0c03903546e6a63851944f2e8_cgraph" id="aprint_8hpp_a021f6cc0c03903546e6a63851944f2e8_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,104,32"/>
-<area shape="rect" href="print_8hpp.html#aaa2383e8fc7f8fa546f4376e1dd4c9b7" title=" " alt="" coords="152,5,204,32"/>
+<div class="center"><img src="print_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_cgraph.png" border="0" usemap="#aprint_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_cgraph" alt=""/></div>
+<map name="aprint_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_cgraph" id="aprint_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_cgraph">
+<area shape="rect" title="Print in red." alt="" coords="5,5,59,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="107,5,159,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_icgraph.png" border="0" usemap="#aprint_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_icgraph" alt=""/></div>
+<map name="aprint_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_icgraph" id="aprint_8hpp_a553a9a331cc4556c2d9bb3aaa8533528_icgraph">
+<area shape="rect" title="Print in red." alt="" coords="1273,495,1327,521"/>
+<area shape="rect" href="class_spectra_co.html#af580e2c735a90aff03e6c1c159ed9b17" title=" " alt="" coords="1050,5,1203,32"/>
+<area shape="rect" href="class_spectra_co.html#aecb46bfbd2968e90d0ffd6d5848ca8b4" title="Calculates the chi2 between this spectra and another one." alt="" coords="1065,56,1188,83"/>
+<area shape="rect" href="class_m_t_t_hist_1_1_copy_error.html#ac090398113f53a468f9c63a8bbf4fa51" title=" " alt="" coords="1053,107,1201,149"/>
+<area shape="rect" href="class_spectra_co.html#a2d1839156a996f255b74024e12257bdb" title=" " alt="" coords="1045,173,1208,200"/>
+<area shape="rect" href="class_spectra_co.html#a213a9aea476c88a52c8c32a4eb775190" title=" " alt="" coords="1041,224,1212,251"/>
+<area shape="rect" href="class_timeshifts_1_1_empty_error.html#a5289356f08a982b5d7cc050451c1780b" title=" " alt="" coords="1041,275,1212,317"/>
+<area shape="rect" href="class_detectors_1_1_empty_error.html#aeeb433faed85351daaf637651f38fdf9" title=" " alt="" coords="1043,341,1210,382"/>
+<area shape="rect" href="class_detectors_1_1_error.html#a59974e434a9b91b0ed91c2674ad20452" title=" " alt="" coords="1045,407,1208,433"/>
+<area shape="rect" href="class_paris_bidim_angles_1_1_file_error.html#a262dced802827f156f0e120dcc91f016" title=" " alt="" coords="1028,458,1225,499"/>
+<area shape="rect" href="class_faster2_histo.html#a327a8348f79c5ecf27a58baef32b81d8" title="Handles each hit and fills the correct histogram." alt="" coords="1046,524,1207,551"/>
+<area shape="rect" href="class_spectra_co.html#adfe0baad93402b4ae44a6c8ea14bc137" title="Uses the second derivative spectra to get the peaks." alt="" coords="1047,575,1206,601"/>
+<area shape="rect" href="_detectors_8hpp.html#ae343a2d2d22d862f6ac7ae10ba1b3d41" title=" " alt="" coords="1051,625,1202,652"/>
+<area shape="rect" href="class_timeshifts_1_1_not_found_error.html#a7c3315b4832d93e060e3b22f72b74282" title=" " alt="" coords="1031,677,1222,718"/>
+<area shape="rect" href="class_spectra_co.html#aa4225392a595ff8a0950ef67610096d0" title=" " alt="" coords="1049,743,1204,769"/>
+<area shape="rect" href="class_overwrite_error.html#a1ceef07c7c86c032768abcb44e85b270" title=" " alt="" coords="1032,794,1221,835"/>
+<area shape="rect" href="class_detectors.html#a3d5631f8fd2770b6b3a2a178130519ad" title="Reads the file and extracts the list of detectors." alt="" coords="1054,860,1199,887"/>
+<area shape="rect" href="class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="285,1087,435,1113"/>
+<area shape="rect" href="class_run_matrixator.html#aeb9889ba763858dfb65e05c3a7bb142e" title=" " alt="" coords="1047,1137,1206,1164"/>
+<area shape="rect" href="class_faster2_histo.html#a48d7d46929ffbd69ccc3a590c535d3b7" title="Treats the file with already configured Hit and FasterReader object." alt="" coords="804,524,969,551"/>
+<area shape="rect" href="class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="807,575,966,601"/>
+<area shape="rect" href="class_calibrator.html#a0d2a41f02b2c16409b58ce3ee4183792" title="Loads non&#45;calibrated spectra." alt="" coords="793,625,980,652"/>
+<area shape="rect" href="class_calibrator.html#a547f6f7bb37caef0b1a2e574422fb85f" title="Calculate calibration from .root histograms." alt="" coords="558,549,711,576"/>
+<area shape="rect" href="class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="554,600,715,627"/>
+<area shape="rect" href="class_detectors.html#a03f6e9974f958b86ddbbc4670d0209a2" title="Reads the file and extracts the list of detectors, then fills the lookup tables." alt="" coords="826,860,947,887"/>
+<area shape="rect" href="class_clover_spectra.html#a84dbd5cac3977a0082ab763d51f938d7" title=" " alt="" coords="546,651,723,677"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#aceaa8e906e0257f450799026ec2269ca" title="legacy" alt="" coords="560,702,709,743"/>
+<area shape="rect" href="class_cobalt_calorimeter.html#ae731ee28c852d150fbf668c27604b8ed" title=" " alt="" coords="560,767,709,809"/>
+<area shape="rect" href="class_faster2_root.html#ad30ccf937150bbd3504ec3a354b76c8f" title=" " alt="" coords="567,833,702,860"/>
+<area shape="rect" href="class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title="To launch the application after instanciation." alt="" coords="565,884,704,911"/>
+<area shape="rect" href="class_evolution_peaks.html#a4dce5d05c6d643d582829be29b6b16e5" title=" " alt="" coords="524,935,745,961"/>
+<area shape="rect" href="class_detectors.html#a0aa2791c5f5b7133fd5816d2f4dc0b56" title=" " alt="" coords="555,985,714,1012"/>
+<area shape="rect" href="class_near_line.html#a3280d6187c79a0aaf4f23b97fe3089ee" title=" " alt="" coords="555,1036,714,1063"/>
+<area shape="rect" href="class_faster2_root.html#aacd4d3fa480eba9bc86b49f4b2040c60" title=" " alt="" coords="268,833,452,860"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="264,884,456,911"/>
+<area shape="rect" href="class_evolution_peaks.html#aa6877d718198437381b3516d0593e2c6" title=" " alt="" coords="244,960,476,987"/>
+<area shape="rect" href="class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,1003,196,1045"/>
+<area shape="rect" href="class_near_line.html#adf3bc13e36dd295fc5668f08e81eaf32" title=" " alt="" coords="287,1036,433,1063"/>
+<area shape="rect" href="class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="815,1137,959,1164"/>
 </map>
 </div>
 
 </div>
 </div>
-<a id="a1fc2e1be374c41706525b8d606242646"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fc2e1be374c41706525b8d606242646">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/5]</span></h2>
+<a id="a141d6b4b0d8c1824f6ed472b5226eab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a141d6b4b0d8c1824f6ed472b5226eab4">&#9670;&nbsp;</a></span>information()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class K , class V &gt; </div>
+template&lt;class... T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
+          <td class="memname">void information </td>
           <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>cout</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">T const &amp;...&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::map&lt; K, V &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>m</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Print in grey. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_cgraph.png" border="0" usemap="#aprint_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_cgraph" alt=""/></div>
+<map name="aprint_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_cgraph" id="aprint_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_cgraph">
+<area shape="rect" title="Print in grey." alt="" coords="5,5,104,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="152,5,204,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_icgraph.png" border="0" usemap="#aprint_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_icgraph" alt=""/></div>
+<map name="aprint_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_icgraph" id="aprint_8hpp_a141d6b4b0d8c1824f6ed472b5226eab4_icgraph">
+<area shape="rect" title="Print in grey." alt="" coords="660,61,759,88"/>
+<area shape="rect" href="class_calibrator.html#aa0fff626078ec3cd2e453c5cf6681462" title=" " alt="" coords="445,7,612,33"/>
+<area shape="rect" href="class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="453,61,604,88"/>
+<area shape="rect" href="class_calibrator.html#aad90b0e3951d4caffe11e319c7108a51" title="if some spectra and calibration coefficients have been loaded, or after the calibration coefficients ..." alt="" coords="463,112,594,139"/>
+<area shape="rect" href="class_calibrator.html#aa15e2c6afb9da71595926a10d89f0761" title="Analyse the spectra to extract calibration coefficients." alt="" coords="229,5,375,32"/>
+<area shape="rect" href="class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="5,5,159,32"/>
+<area shape="rect" href="class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="207,57,397,98"/>
+</map>
+</div>
+
 </div>
 </div>
-<a id="a305d037b6a2823d9d8d935b1cd5dd2c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a305d037b6a2823d9d8d935b1cd5dd2c0">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[3/5]</span></h2>
+<a id="a388f572c62279f839ee138a9afbdeeb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a388f572c62279f839ee138a9afbdeeb5">&#9670;&nbsp;</a></span>print() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class F , class S &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>cout</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::pair&lt; F, S &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>p</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a03b9abfe3f12543c365e9a25848ba566"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03b9abfe3f12543c365e9a25848ba566">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[4/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class E &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>cout</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; E &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>v</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad68695d41301547d77d546b80b1bc278"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad68695d41301547d77d546b80b1bc278">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[5/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::ostream&amp; operator&lt;&lt; </td>
-          <td>(</td>
-          <td class="paramtype">std::ostream &amp;&#160;</td>
-          <td class="paramname"><em>cout</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char const &amp;&#160;</td>
-          <td class="paramname"><em>uc</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aaa2383e8fc7f8fa546f4376e1dd4c9b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa2383e8fc7f8fa546f4376e1dd4c9b7">&#9670;&nbsp;</a></span>print() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void print </td>
@@ -391,52 +716,13 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="print_8hpp_aaa2383e8fc7f8fa546f4376e1dd4c9b7_icgraph.png" border="0" usemap="#aprint_8hpp_aaa2383e8fc7f8fa546f4376e1dd4c9b7_icgraph" alt=""/></div>
-<map name="aprint_8hpp_aaa2383e8fc7f8fa546f4376e1dd4c9b7_icgraph" id="aprint_8hpp_aaa2383e8fc7f8fa546f4376e1dd4c9b7_icgraph">
-<area shape="rect" title=" " alt="" coords="355,56,407,83"/>
-<area shape="rect" href="print_8hpp.html#a7c50c0690489629965f74c4921570ce5" title=" " alt="" coords="226,5,289,32"/>
-<area shape="rect" href="print_8hpp.html#a021f6cc0c03903546e6a63851944f2e8" title=" " alt="" coords="208,56,307,83"/>
-<area shape="rect" href="print_8hpp.html#a527acf8dce9e07a4901d65a23979424b" title=" " alt="" coords="231,107,283,133"/>
-<area shape="rect" href="class_m_t_t_hist.html#a3fbc1867068d50b62b712f2458d35ff0" title=" " alt="" coords="5,5,160,32"/>
-</map>
-</div>
 
-</div>
-</div>
-<a id="a527acf8dce9e07a4901d65a23979424b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a527acf8dce9e07a4901d65a23979424b">&#9670;&nbsp;</a></span>print() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;class... T&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void print </td>
-          <td>(</td>
-          <td class="paramtype">T const &amp;...&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="print_8hpp_a527acf8dce9e07a4901d65a23979424b_cgraph.png" border="0" usemap="#aprint_8hpp_a527acf8dce9e07a4901d65a23979424b_cgraph" alt=""/></div>
-<map name="aprint_8hpp_a527acf8dce9e07a4901d65a23979424b_cgraph" id="aprint_8hpp_a527acf8dce9e07a4901d65a23979424b_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,57,32"/>
-<area shape="rect" href="print_8hpp.html#aaa2383e8fc7f8fa546f4376e1dd4c9b7" title=" " alt="" coords="105,5,157,32"/>
-</map>
-</div>
+<p>New line. </p>
 
 </div>
 </div>
 <a id="a02e3acd6b90f83126d840187ee8023d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02e3acd6b90f83126d840187ee8023d6">&#9670;&nbsp;</a></span>print() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a02e3acd6b90f83126d840187ee8023d6">&#9670;&nbsp;</a></span>print() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -453,10 +739,13 @@ template&lt;class T &gt; </div>
       </table>
 </div><div class="memdoc">
 
+<p>Generic print. </p>
+<p>Automatically adds space between each input. Terminate the output with a "\\n" </p>
+
 </div>
 </div>
 <a id="a942a3ac725f791da05ff038fd549a721"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a942a3ac725f791da05ff038fd549a721">&#9670;&nbsp;</a></span>print() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a942a3ac725f791da05ff038fd549a721">&#9670;&nbsp;</a></span>print() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -482,13 +771,16 @@ template&lt;class T , class... T2&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Generic print. </p>
+<p>Automatically adds space between each input. Terminate the output with a "\\n" </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="print_8hpp_a942a3ac725f791da05ff038fd549a721_cgraph.png" border="0" usemap="#aprint_8hpp_a942a3ac725f791da05ff038fd549a721_cgraph" alt=""/></div>
 <map name="aprint_8hpp_a942a3ac725f791da05ff038fd549a721_cgraph" id="aprint_8hpp_a942a3ac725f791da05ff038fd549a721_cgraph">
-<area shape="rect" title=" " alt="" coords="5,5,57,32"/>
-<area shape="rect" href="print_8hpp.html#aaa2383e8fc7f8fa546f4376e1dd4c9b7" title=" " alt="" coords="105,5,157,32"/>
+<area shape="rect" title="Generic print." alt="" coords="5,5,57,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="105,5,157,32"/>
 </map>
 </div>
 
@@ -509,6 +801,234 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the floating point precision displayed. </p>
+
+</div>
+</div>
+<a id="afded2b178f1cba7246c86beaab6d4e6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afded2b178f1cba7246c86beaab6d4e6c">&#9670;&nbsp;</a></span>printC() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void printC </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic print concatenated. </p>
+<p>Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n" </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_afded2b178f1cba7246c86beaab6d4e6c_icgraph.png" border="0" usemap="#aprint_8hpp_afded2b178f1cba7246c86beaab6d4e6c_icgraph" alt=""/></div>
+<map name="aprint_8hpp_afded2b178f1cba7246c86beaab6d4e6c_icgraph" id="aprint_8hpp_afded2b178f1cba7246c86beaab6d4e6c_icgraph">
+<area shape="rect" title="Generic print concatenated." alt="" coords="675,115,736,141"/>
+<area shape="rect" href="class_calibrator.html#a00806ef12bceedaa6c16dad9b653f27f" title="Uses the second version of the peak finder to extract calibration coefficients." alt="" coords="245,5,399,32"/>
+<area shape="rect" href="vector__functions_8hpp.html#a516812808c1a19cf37a17258f1789ab8" title="Order the vector from lower to higer value." alt="" coords="487,56,586,83"/>
+<area shape="rect" href="class_spectra_co_1_1_histo_null.html#a47f60c3e6fe497633fb72bed36224ea4" title=" " alt="" coords="459,107,615,149"/>
+<area shape="rect" href="class_spectra_co_1_1_histo_zombie.html#a6bec654226930402a49bf10619b2cdd6" title=" " alt="" coords="447,173,627,214"/>
+<area shape="rect" href="print_8hpp.html#a4c2aee0ac2f1c9f607a845b21b1c12e5" title="Generic print concatenated." alt="" coords="506,239,567,265"/>
+<area shape="rect" href="class_calibrator.html#af12375fcb4e97a40d98fb2549565f2f2" title=" " alt="" coords="21,5,182,32"/>
+<area shape="rect" href="vector__functions_8hpp.html#ab624cd9b69dafa0701b213f5bb78f911" title="Order the vector from lower to higher value." alt="" coords="273,56,371,83"/>
+<area shape="rect" href="class_faster2_histo.html#a8821f5ded43a6f91593962adbe4761b9" title="Write down a [out_filename].root file containing the spectra of the data." alt="" coords="250,107,394,133"/>
+<area shape="rect" href="class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="5,107,197,133"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4c2aee0ac2f1c9f607a845b21b1c12e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c2aee0ac2f1c9f607a845b21b1c12e5">&#9670;&nbsp;</a></span>printC() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , class... T2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void printC </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T2 const &amp;...&#160;</td>
+          <td class="paramname"><em>t2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic print concatenated. </p>
+<p>Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n" </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_a4c2aee0ac2f1c9f607a845b21b1c12e5_cgraph.png" border="0" usemap="#aprint_8hpp_a4c2aee0ac2f1c9f607a845b21b1c12e5_cgraph" alt=""/></div>
+<map name="aprint_8hpp_a4c2aee0ac2f1c9f607a845b21b1c12e5_cgraph" id="aprint_8hpp_a4c2aee0ac2f1c9f607a845b21b1c12e5_cgraph">
+<area shape="rect" title="Generic print concatenated." alt="" coords="5,5,67,32"/>
+<area shape="rect" href="print_8hpp.html#afded2b178f1cba7246c86beaab6d4e6c" title="Generic print concatenated." alt="" coords="115,5,176,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a57409044715c55a505142dc6cab8a49f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57409044715c55a505142dc6cab8a49f">&#9670;&nbsp;</a></span>println() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void println </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic print in one line. </p>
+<p>Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a "\\n" </p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_a57409044715c55a505142dc6cab8a49f_icgraph.png" border="0" usemap="#aprint_8hpp_a57409044715c55a505142dc6cab8a49f_icgraph" alt=""/></div>
+<map name="aprint_8hpp_a57409044715c55a505142dc6cab8a49f_icgraph" id="aprint_8hpp_a57409044715c55a505142dc6cab8a49f_icgraph">
+<area shape="rect" title="Generic print in one line." alt="" coords="117,5,181,32"/>
+<area shape="rect" href="print_8hpp.html#ae92ca213daa0e7e64752028d31033abe" title="Generic print in one line." alt="" coords="5,5,69,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae92ca213daa0e7e64752028d31033abe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae92ca213daa0e7e64752028d31033abe">&#9670;&nbsp;</a></span>println() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T , class... T2&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void println </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T2 const &amp;...&#160;</td>
+          <td class="paramname"><em>t2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic print in one line. </p>
+<p>Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a "\\n" </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_ae92ca213daa0e7e64752028d31033abe_cgraph.png" border="0" usemap="#aprint_8hpp_ae92ca213daa0e7e64752028d31033abe_cgraph" alt=""/></div>
+<map name="aprint_8hpp_ae92ca213daa0e7e64752028d31033abe_cgraph" id="aprint_8hpp_ae92ca213daa0e7e64752028d31033abe_cgraph">
+<area shape="rect" title="Generic print in one line." alt="" coords="5,5,69,32"/>
+<area shape="rect" href="print_8hpp.html#a57409044715c55a505142dc6cab8a49f" title="Generic print in one line." alt="" coords="117,5,181,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a90460287027986fbf0c9a1ef8e5a1bce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90460287027986fbf0c9a1ef8e5a1bce">&#9670;&nbsp;</a></span>type_of()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string type_of </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_a90460287027986fbf0c9a1ef8e5a1bce_icgraph.png" border="0" usemap="#aprint_8hpp_a90460287027986fbf0c9a1ef8e5a1bce_icgraph" alt=""/></div>
+<map name="aprint_8hpp_a90460287027986fbf0c9a1ef8e5a1bce_icgraph" id="aprint_8hpp_a90460287027986fbf0c9a1ef8e5a1bce_icgraph">
+<area shape="rect" title=" " alt="" coords="220,31,291,57"/>
+<area shape="rect" href="lib_co_8hpp.html#a860090f450f9d024cd3e5cd721101418" title=" " alt="" coords="49,5,128,32"/>
+<area shape="rect" href="_spectra_co_8hpp.html#ad3085c55da700fb2917875d8efe0b377" title=" " alt="" coords="5,56,172,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad9e2dd512a5915af4751a40fefbfbc94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9e2dd512a5915af4751a40fefbfbc94">&#9670;&nbsp;</a></span>warning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class... T&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void warning </td>
+          <td>(</td>
+          <td class="paramtype">T const &amp;...&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print in bright black. </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_cgraph.png" border="0" usemap="#aprint_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_cgraph" alt=""/></div>
+<map name="aprint_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_cgraph" id="aprint_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_cgraph">
+<area shape="rect" title="Print in bright black." alt="" coords="5,5,80,32"/>
+<area shape="rect" href="print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="128,5,180,32"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="print_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_icgraph.png" border="0" usemap="#aprint_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_icgraph" alt=""/></div>
+<map name="aprint_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_icgraph" id="aprint_8hpp_ad9e2dd512a5915af4751a40fefbfbc94_icgraph">
+<area shape="rect" title="Print in bright black." alt="" coords="248,13,323,39"/>
+<area shape="rect" href="class_spectra_co_1_1_size_missmatch.html#a42beba683555e28da7b2436ccfeb55e5" title=" " alt="" coords="5,5,200,47"/>
+</map>
+</div>
 
 </div>
 </div>

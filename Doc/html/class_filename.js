@@ -3,6 +3,7 @@ var class_filename =
     [ "Filename", "class_filename.html#a2bba4cdf51d4f8042d55850e0699e80b", null ],
     [ "Filename", "class_filename.html#ac695bd1e796829d4a40c81111dd8935b", null ],
     [ "Filename", "class_filename.html#a81f6faf691f9eec75771b37b7d29fffc", null ],
+    [ "c_str", "class_filename.html#a2f9666a4424564e529e1c9c4236397e1", null ],
     [ "extension", "class_filename.html#a9a5a8b12e6ffac9d53e54e6410b59c02", null ],
     [ "fill", "class_filename.html#a4f624193292726bfe15c0c16322ccd07", null ],
     [ "fullName", "class_filename.html#a00a9c3c47a6c091bc1c49982c6d57233", null ],

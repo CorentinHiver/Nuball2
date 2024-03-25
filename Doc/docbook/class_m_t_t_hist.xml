@@ -10,23 +10,21 @@
 <para>
 <computeroutput>#include &lt;MTTHist.hpp&gt;</computeroutput>
 </para>
-Collaboration diagram for MTTHist&lt; THist &gt;:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist__coll__graph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_class_m_t_t_hist_1_1_copy_error">CopyError</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
 <simplesect>
     <title>Public Member Functions    </title>
         <itemizedlist>
             <listitem><para>void <link linkend="_class_m_t_t_hist_1a01a47983a37248e57310d3105dedb95f">clean</link> ()</para>
 </listitem>
-            <listitem><para>bool const  &amp; <link linkend="_class_m_t_t_hist_1a46a58bcb4b91d7a05bee3ec0f4fe4eab">exists</link> () const</para>
+            <listitem><para>void <link linkend="_class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef">cleanMove</link> ()</para>
 </listitem>
-            <listitem><para>TFile * <link linkend="_class_m_t_t_hist_1a0b1fb45a588e20b42e65275f14685dd5">file</link> ()</para>
+            <listitem><para>bool const  &amp; <link linkend="_class_m_t_t_hist_1a46a58bcb4b91d7a05bee3ec0f4fe4eab">exists</link> () const</para>
 </listitem>
             <listitem><para>template&lt;class... ARGS&gt; </para><para>void <link linkend="_class_m_t_t_hist_1a3413cee45758fa0ec41020ae067e3e71">Fill</link> (ARGS &amp;&amp;... args) noexcept</para>
 </listitem>
@@ -34,7 +32,13 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 </listitem>
             <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a02c41970872fdf5dba693eaa7ef368b6">Get</link> ()</para>
 </listitem>
+            <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a63d5b560f2ba15a6fd1d220bd237ee6d">get</link> () const</para>
+</listitem>
             <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a7caec71178e8d79ad73ee5ff6c34b21d">Get</link> (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp;thread_nb)</para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>auto <link linkend="_class_m_t_t_hist_1a90048d486361aa8a3bb18d17f02df241">GetBinContent</link> (ARGS &amp;&amp;... args) noexcept</para>
+</listitem>
+            <listitem><para>std::vector&lt; THist * &gt; &amp; <link linkend="_class_m_t_t_hist_1a6ec6c81339288a3a04fa18d6ccadaaf1">getCollection</link> ()</para>
 </listitem>
             <listitem><para>std::vector&lt; THist * &gt; const  &amp; <link linkend="_class_m_t_t_hist_1a9437a1854c47ccda87812b6d2a8271b5">getCollection</link> () const</para>
 </listitem>
@@ -42,15 +46,19 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 </listitem>
             <listitem><para>auto const  &amp; <link linkend="_class_m_t_t_hist_1a5c8a398dfdd3fad0a4529453caf93bd2">Integral</link> () const</para>
 </listitem>
-            <listitem><para>bool const  &amp; <link linkend="_class_m_t_t_hist_1affbda260e218244cd5ed9870d6ed77cf">isWritten</link> () const</para>
+            <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a0412e3cb8d1db4278f3b09316d4ec139">Merge</link> ()</para>
+
+<para>Merges the histograms. </para>
 </listitem>
-            <listitem><para>void <link linkend="_class_m_t_t_hist_1a7c92589542fe14a28350712bab17c7ff">Merge</link> ()</para>
+            <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a49cc7d85e797bb8e8e921d993a4f5e24">Merge</link> () const</para>
 </listitem>
             <listitem><para>void <link linkend="_class_m_t_t_hist_1ac66509969968b395494517fabe09976c">Merge_t</link> ()</para>
 </listitem>
             <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a72615441a18ffcfab6ca4b848f63eee3">Merged</link> ()</para>
 </listitem>
             <listitem><para>template&lt;class... ARGS&gt; </para><para><link linkend="_class_m_t_t_hist_1ac51ad7ced1fdf79f4b17c9dee8231e6d">MTTHist</link> ()</para>
+
+<para>Default initialisator. </para>
 </listitem>
             <listitem><para>template&lt;class... ARGS&gt; </para><para><link linkend="_class_m_t_t_hist_1a649cb4ac9c9239c1bf76f3f8b508bea5">MTTHist</link> (ARGS &amp;&amp;... args)</para>
 
@@ -64,6 +72,12 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 
 <para>Copy constructor. </para>
 </listitem>
+            <listitem><para><link linkend="_class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669">MTTHist</link> (THist *hist)</para>
+
+<para>Wrapper around an already existing histograms. </para>
+</listitem>
+            <listitem><para>auto &amp; <link linkend="_class_m_t_t_hist_1ac71b59bd26bea2680cb0ed99c5d1af05">mutex</link> ()</para>
+</listitem>
             <listitem><para>std::string &amp; <link linkend="_class_m_t_t_hist_1aee6a88890f7831e809400db4d68e43e1">name</link> ()</para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_m_t_t_hist_1a7f6ebd619dc5ffb63c9abf591e743e54">name</link> () const</para>
@@ -72,21 +86,27 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 </listitem>
             <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0">operator-&gt;</link> ()</para>
 </listitem>
+            <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a452e1d8072c531826c61b178881f2544">operator-&gt;</link> () const</para>
+</listitem>
             <listitem><para><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp; <link linkend="_class_m_t_t_hist_1a6d6f72f095b93283ff97e9785781e3f8">operator=</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp;hist)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_m_t_t_hist_1a7e925cda7729c6ecece6459c70a07a32">operator=</link> (THist *hist)</para>
 </listitem>
             <listitem><para>THist * <link linkend="_class_m_t_t_hist_1a8d9bba241299b542c654905edc517f63">operator[]</link> (int const &amp;thread_nb)</para>
 </listitem>
             <listitem><para>void <link linkend="_class_m_t_t_hist_1ab5e2653e7d709487a194b192baccfe32">Print</link> ()</para>
 </listitem>
-            <listitem><para>std::string const  &amp; <link linkend="_class_m_t_t_hist_1a6dbe08dfe0c62f9c9b75064cb262bdc0">readComment</link> (std::string const &amp;comment) const</para>
+            <listitem><para>std::string const  &amp; <link linkend="_class_m_t_t_hist_1afdd2e89e1472927f588a8176e6813e88">readComment</link> () const</para>
 </listitem>
-            <listitem><para>auto <link linkend="_class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0">reset</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp;hist)</para>
+            <listitem><para><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp; <link linkend="_class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8">reset</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp;hist)</para>
 
-<para>Copy initializer. </para>
+<para>Copy Initialiser. </para>
 </listitem>
             <listitem><para>template&lt;class... ARGS&gt; </para><para>void <link linkend="_class_m_t_t_hist_1a18ddf8bef1fdb6dfc3a95ffc76e20efb">reset</link> (std::nullptr_t)</para>
 </listitem>
             <listitem><para>template&lt;class... ARGS&gt; </para><para>void <link linkend="_class_m_t_t_hist_1a6524d02003fa4d77ae22b33e14b977d9">reset</link> (std::string <link linkend="_class_m_t_t_hist_1a7f6ebd619dc5ffb63c9abf591e743e54">name</link>, ARGS &amp;&amp;... args)</para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>void <link linkend="_class_m_t_t_hist_1aa354c892da959ee2c25f894adf98064c">SetBinContent</link> (ARGS &amp;&amp;... args) noexcept</para>
 </listitem>
             <listitem><para>void <link linkend="_class_m_t_t_hist_1aa69b6607da79271f1454987d06b4d78e">setComment</link> (std::string const &amp;comment)</para>
 </listitem>
@@ -100,9 +120,9 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 </listitem>
             <listitem><para>std::string const  &amp; <link linkend="_class_m_t_t_hist_1ad8011791f2722ca40959cc2ec297944d">title</link> () const</para>
 </listitem>
-            <listitem><para>void <link linkend="_class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd">Write</link> (bool const &amp;writeEmpty=false)</para>
-</listitem>
-            <listitem><para>void <link linkend="_class_m_t_t_hist_1ad6af9a0476250acac958446a91f450fd">Write_i</link> (int const &amp;thread_index)</para>
+            <listitem><para>void <link linkend="_class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3">Write</link> ()</para>
+
+<para>MTTHIST_MONO. </para>
 </listitem>
             <listitem><para><link linkend="_class_m_t_t_hist_1a9fc4f9b3947ade70cad19a33c16d69d6">~MTTHist</link> ()</para>
 </listitem>
@@ -111,18 +131,9 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 <simplesect>
     <title>Static Public Member Functions    </title>
         <itemizedlist>
-            <listitem><para>static void <link linkend="_class_m_t_t_hist_1a7fea4cd494636bb8c4b103d3cf0d0786">Merge_thread</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp;histo)</para>
-</listitem>
             <listitem><para>static bool const  &amp; <link linkend="_class_m_t_t_hist_1aba83034c1d597fe7f384498ceaf0ba3b">verbose</link> (bool const &amp;_verbose=true)</para>
 </listitem>
             <listitem><para>static bool &amp; <link linkend="_class_m_t_t_hist_1a58028d6dbd7cf61775c44c10af03c562">verbosity</link> ()</para>
-</listitem>
-        </itemizedlist>
-</simplesect>
-<simplesect>
-    <title>Public Attributes    </title>
-        <itemizedlist>
-            <listitem><para>std::mutex <link linkend="_class_m_t_t_hist_1aca0db36a40f564546ca75e94e9139145">m_mutex</link></para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -135,11 +146,7 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 </listitem>
             <listitem><para>bool <link linkend="_class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8">m_exists</link> = false</para>
 </listitem>
-            <listitem><para>TFile * <link linkend="_class_m_t_t_hist_1a0b22e8677009e6458288f97867176c77">m_file</link> = nullptr</para>
-</listitem>
             <listitem><para><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> <link linkend="_class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3">m_integral</link> = 0ull</para>
-</listitem>
-            <listitem><para><link linkend="_class_bools">Bools</link> <link linkend="_class_m_t_t_hist_1a7400ac26c3f0273fae7d9a47751a67a2">m_is_deleted</link></para>
 </listitem>
             <listitem><para>bool <link linkend="_class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0">m_is_merged</link> = false</para>
 </listitem>
@@ -147,7 +154,11 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 </listitem>
             <listitem><para>bool <link linkend="_class_m_t_t_hist_1a267e78003ec791a6a795b30f1a718d66">m_merged_deleted</link> = false</para>
 </listitem>
+            <listitem><para>std::mutex <link linkend="_class_m_t_t_hist_1aca0db36a40f564546ca75e94e9139145">m_mutex</link></para>
+</listitem>
             <listitem><para>std::string <link linkend="_class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d">m_name</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_m_t_t_hist_1a56b52d42dfd24d8d191debef8c665378">m_outscope</link> = false</para>
 </listitem>
             <listitem><para>std::string <link linkend="_class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3">m_title</link></para>
 </listitem>
@@ -158,10 +169,6 @@ Collaboration diagram for MTTHist&lt; THist &gt;:<para>
 <simplesect>
     <title>Static Private Attributes    </title>
         <itemizedlist>
-            <listitem><para>static std::condition_variable <link linkend="_class_m_t_t_hist_1acd8494777ed82d06fd269ce3c73edb9d">m_condition</link></para>
-</listitem>
-            <listitem><para>static <link linkend="_class_m_t_counter">MTCounter</link> <link linkend="_class_m_t_t_hist_1aa8018dbd5155bd525933ddbed3e6e602">m_nb_thread_running</link> {0}</para>
-</listitem>
             <listitem><para>static bool <link linkend="_class_m_t_t_hist_1ab6b53be8a250f79cbd952c1133701d25">m_verbose</link> = true</para>
 </listitem>
         </itemizedlist>
@@ -178,56 +185,40 @@ class MTTHist&lt; THist &gt;</title></simplesect>
 
 <para><formalpara><title>Author</title>
 
-<para><link xlink:href="mailto:corentin.hiver@ijclab.in2p3.fr">corentin.hiver@ijclab.in2p3.fr</link></para>
+<para><link xlink:href="mailto:corentin.hiver@free.fr">corentin.hiver@free.fr</link></para>
 </formalpara>
 Inspiration : <link xlink:href="https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167">https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167</link></para>
 
 <para><caution><title>Attention</title>
 
-<para>As for any class deriving from <link linkend="_class_m_t_object">MTObject</link>, first initialize the number of threads : <literallayout><computeroutput> MTObject::Initialize(nb_threads)
+<para>As for any class using my multithreading, Initialise the number of threads BEFORE instantiating any object : <literallayout><computeroutput> MTObject::Initialise(nb_threads)
 </computeroutput></literallayout></para>
 </caution>
-Instantiate this class as follow : <literallayout><computeroutput> MTTHist&lt;TH1F&gt; some_TH1F_histo(&quot;name&quot;, &quot;title:xaxis:yaxis&quot;, bins, min, max);
+Instantiation : <literallayout><computeroutput> MTTHist&lt;TH1F&gt; some_TH1F_histo(&lt;normal arguments for TH1F objects&gt;);
 </computeroutput></literallayout> Or <literallayout><computeroutput> MTTHist&lt;TH1F&gt; some_TH1F_histo;
  some_TH1F_histo.reset(&quot;name&quot;, &quot;title:xaxis:yaxis&quot;, bins, min, max);
-</computeroutput></literallayout> <caution><title>Attention</title>
-
-<para>Please do not use the copy constructors and operators, may need proper work to make it safe</para>
-</caution>
-In default mode, nb_threads histograms are created <para><link linkend="_test_1_test000002">Test</link> 
+</computeroutput></literallayout> In default mode, [nb_threads] sub_histograms are created <para><link linkend="_test_1_test000002">Test</link> 
 <para>In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPPEMENT</para>
 </para></para>
 
-<para>To fill the histogram from threads : <literallayout><computeroutput>     some_TH1F_histo.Fill()
-</computeroutput></literallayout> Once the histogram have been filled, two options :</para>
+<para>To fill the histogram from within one thread : <literallayout><computeroutput>     some_TH1F_histo[MTObject::getThreadIndex()]-&gt;Fill(&lt;normal arguments for TH1*::Fill()&gt;)
+</computeroutput></literallayout> Or in a more concise way (preferred) : <literallayout><computeroutput>     some_TH1F_histo.Fill(&lt;normal arguments for TH1*::Fill()&gt;)
+</computeroutput></literallayout> Once the histograms have been filled, two options :</para>
 
-<para><itemizedlist>
-<listitem>
-<para>Either write it down directly : <literallayout><computeroutput>  // Open a TFile
-  some_TH1F_histo.Write()
-  // Write and close the TFile
-</computeroutput></literallayout></para>
-</listitem><listitem>
-<para>Or you can merge the histograms : <literallayout><computeroutput> some_TH1F_histo.Merge();
+<para>Either write it down directly : <literallayout><computeroutput>    // Open a TFile and cd() inside
+    some_TH1F_histo.Write(); //Merges the sub_histograms then write it if it has counts
+    // Write and close the TFile
+</computeroutput></literallayout> Or you can merge the histograms : <literallayout><computeroutput>   some_TH1F_histo.Merge();
 </computeroutput></literallayout> You can then address the merged histogram using -&gt; : <literallayout><computeroutput>some_TH1F_histo-&gt;Integral();
-</computeroutput></literallayout> Special case : you can also instanciate and write down one histogram per thread.</para>
-</listitem></itemizedlist>
-</para>
-
-<para>Example : void single_thread(MTTHist &amp; histo) { histo.reset(&quot;name&quot;,&quot;title&quot;, args...); ... Fill the histo histo.Write(); }</para>
-
-<para>int main() { MTTHist&lt;TH1&gt; on_histo_per_thread; std::parallelise_function(single_thread, on_histo_per_thread); return 1; }</para>
-
-<para>In this case each histogram is kept separated, no merge occurs. Use this if you want to make the benefits of the user defined method of this class or for consistency with the rest of the code. It is equivalent to declare the histogram directly inside the funcion</para>
-
-<para><para><link linkend="_todo_1_todo000003">Todo</link> 
-<para>better memory management </para>
-</para></para>
+some_TH1F_histo-&gt;GetEntries();
+some_TH1F_histo-&gt;Write();
+...
+</computeroutput></literallayout> </para>
 </section>
 <section>
 <title>Constructor &amp; Destructor Documentation</title>
 <anchor xml:id="_class_m_t_t_hist_1a649cb4ac9c9239c1bf76f3f8b508bea5"/>    <section>
-    <title>MTTHist()<computeroutput>[1/4]</computeroutput></title>
+    <title>MTTHist()<computeroutput>[1/5]</computeroutput></title>
 <indexterm><primary>MTTHist</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>MTTHist</secondary></indexterm>
 <computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::<link linkend="_class_m_t_t_hist">MTTHist</link> (ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
@@ -244,10 +235,14 @@ Here is the call graph for this function:<para>
     </informalfigure>
 </para>
     </section><anchor xml:id="_class_m_t_t_hist_1ac51ad7ced1fdf79f4b17c9dee8231e6d"/>    <section>
-    <title>MTTHist()<computeroutput>[2/4]</computeroutput></title>
+    <title>MTTHist()<computeroutput>[2/5]</computeroutput></title>
 <indexterm><primary>MTTHist</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>MTTHist</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::<link linkend="_class_m_t_t_hist">MTTHist</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::<link linkend="_class_m_t_t_hist">MTTHist</link> ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Default initialisator. </para>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
@@ -260,16 +255,35 @@ Here is the call graph for this function:<para>
     <title>~MTTHist()</title>
 <indexterm><primary>~MTTHist</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>~MTTHist</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::~<link linkend="_class_m_t_t_hist">MTTHist</link></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1ad6ba02ffcc88d2ad2084985e8e91b338"/>    <section>
-    <title>MTTHist()<computeroutput>[3/4]</computeroutput></title>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::~<link linkend="_class_m_t_t_hist">MTTHist</link></computeroutput></para>
+<para>MTTHIST_MONO</para>
+    </section><anchor xml:id="_class_m_t_t_hist_1a376fc74695b83ca214a29199119c3669"/>    <section>
+    <title>MTTHist()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>MTTHist</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>MTTHist</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::<link linkend="_class_m_t_t_hist">MTTHist</link> (THist * hist)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Wrapper around an already existing histograms. </para>
+</para>
+    </section><anchor xml:id="_class_m_t_t_hist_1ad6ba02ffcc88d2ad2084985e8e91b338"/>    <section>
+    <title>MTTHist()<computeroutput>[4/5]</computeroutput></title>
 <indexterm><primary>MTTHist</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>MTTHist</secondary></indexterm>
 <computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::<link linkend="_class_m_t_t_hist">MTTHist</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp; hist)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
 <para>Copy constructor. </para>
 </para>
+Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_ad6ba02ffcc88d2ad2084985e8e91b338_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
     </section><anchor xml:id="_class_m_t_t_hist_1a08dcc0e1d5db8d111f0459ff47f736e9"/>    <section>
-    <title>MTTHist()<computeroutput>[4/4]</computeroutput></title>
+    <title>MTTHist()<computeroutput>[5/5]</computeroutput></title>
 <indexterm><primary>MTTHist</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>MTTHist</secondary></indexterm>
 <computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::<link linkend="_class_m_t_t_hist">MTTHist</link> (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp;&amp; hist)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
@@ -284,24 +298,24 @@ Here is the call graph for this function:<para>
     <title>clean()</title>
 <indexterm><primary>clean</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>clean</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::clean ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::clean ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a01a47983a37248e57310d3105dedb95f_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a01a47983a37248e57310d3105dedb95f_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a46a58bcb4b91d7a05bee3ec0f4fe4eab"/>    <section>
+    </section><anchor xml:id="_class_m_t_t_hist_1a9a97821ee8dae32294f5bf0c240c59ef"/>    <section>
+    <title>cleanMove()</title>
+<indexterm><primary>cleanMove</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>cleanMove</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::cleanMove ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a46a58bcb4b91d7a05bee3ec0f4fe4eab"/>    <section>
     <title>exists()</title>
 <indexterm><primary>exists</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>exists</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>bool const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::exists ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a0b1fb45a588e20b42e65275f14685dd5"/>    <section>
-    <title>file()</title>
-<indexterm><primary>file</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>file</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>TFile* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::file ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a3413cee45758fa0ec41020ae067e3e71"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>bool const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::exists ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a3413cee45758fa0ec41020ae067e3e71"/>    <section>
     <title>Fill()</title>
 <indexterm><primary>Fill</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Fill</secondary></indexterm>
@@ -324,7 +338,7 @@ Here is the caller graph for this function:<para>
     </informalfigure>
 </para>
     </section><anchor xml:id="_class_m_t_t_hist_1a9c2f7d05c9f8506382211635b35bd97b"/>    <section>
-    <title>get()</title>
+    <title>get()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>get</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>get</secondary></indexterm>
 <computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::get ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
@@ -349,28 +363,58 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a7caec71178e8d79ad73ee5ff6c34b21d"/>    <section>
+    </section><anchor xml:id="_class_m_t_t_hist_1a63d5b560f2ba15a6fd1d220bd237ee6d"/>    <section>
+    <title>get()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>get</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>get</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::get ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a7caec71178e8d79ad73ee5ff6c34b21d"/>    <section>
     <title>Get()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>Get</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Get</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Get (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp; thread_nb)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a9437a1854c47ccda87812b6d2a8271b5"/>    <section>
-    <title>getCollection()</title>
-<indexterm><primary>getCollection</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>getCollection</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::vector&lt;THist*&gt; const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::getCollection ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a317a4a786844491e45a270e87acd1e89"/>    <section>
-    <title>GetName()</title>
-<indexterm><primary>GetName</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>GetName</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::GetName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Get (<link linkend="_lib_co_8hpp_1ad29aff8b0f7fde4ef0291331012e596a">ushort</link> const &amp; thread_nb)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a90048d486361aa8a3bb18d17f02df241"/>    <section>
+    <title>GetBinContent()</title>
+<indexterm><primary>GetBinContent</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>GetBinContent</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>auto <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::GetBinContent (ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a317a4a786844491e45a270e87acd1e89_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a90048d486361aa8a3bb18d17f02df241_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a5c8a398dfdd3fad0a4529453caf93bd2"/>    <section>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a90048d486361aa8a3bb18d17f02df241_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_t_hist_1a6ec6c81339288a3a04fa18d6ccadaaf1"/>    <section>
+    <title>getCollection()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>getCollection</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>getCollection</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::vector&lt;THist*&gt;&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::getCollection ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a9437a1854c47ccda87812b6d2a8271b5"/>    <section>
+    <title>getCollection()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>getCollection</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>getCollection</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::vector&lt;THist*&gt; const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::getCollection ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a9437a1854c47ccda87812b6d2a8271b5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_t_hist_1a317a4a786844491e45a270e87acd1e89"/>    <section>
+    <title>GetName()</title>
+<indexterm><primary>GetName</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>GetName</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::GetName ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a5c8a398dfdd3fad0a4529453caf93bd2"/>    <section>
     <title>Integral()</title>
 <indexterm><primary>Integral</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Integral</secondary></indexterm>
@@ -383,50 +427,49 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1affbda260e218244cd5ed9870d6ed77cf"/>    <section>
-    <title>isWritten()</title>
-<indexterm><primary>isWritten</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>isWritten</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>bool const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::isWritten ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a7c92589542fe14a28350712bab17c7ff"/>    <section>
-    <title>Merge()</title>
+    </section><anchor xml:id="_class_m_t_t_hist_1a0412e3cb8d1db4278f3b09316d4ec139"/>    <section>
+    <title>Merge()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>Merge</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Merge</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Merge</computeroutput></para>Here is the caller graph for this function:<para>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist * <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Merge</computeroutput></para><para>
+
+<para>Merges the histograms. </para>
+</para>
+
+<para><caution><title>Attention</title>
+
+<para>Can merge only once 
+<literallayout>&#160;&#xa;</literallayout>
+ </para>
+</caution>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a7c92589542fe14a28350712bab17c7ff_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a0412e3cb8d1db4278f3b09316d4ec139_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1ac66509969968b395494517fabe09976c"/>    <section>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a0412e3cb8d1db4278f3b09316d4ec139_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_t_hist_1a49cc7d85e797bb8e8e921d993a4f5e24"/>    <section>
+    <title>Merge()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Merge</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Merge</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Merge ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1ac66509969968b395494517fabe09976c"/>    <section>
     <title>Merge_t()</title>
 <indexterm><primary>Merge_t</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Merge_t</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Merge_t<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_ac66509969968b395494517fabe09976c_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a7fea4cd494636bb8c4b103d3cf0d0786"/>    <section>
-    <title>Merge_thread()</title>
-<indexterm><primary>Merge_thread</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Merge_thread</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Merge_thread (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; &amp; histo)<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a7fea4cd494636bb8c4b103d3cf0d0786_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a72615441a18ffcfab6ca4b848f63eee3"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Merge_t<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a72615441a18ffcfab6ca4b848f63eee3"/>    <section>
     <title>Merged()</title>
 <indexterm><primary>Merged</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Merged</secondary></indexterm>
@@ -439,7 +482,11 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1aee6a88890f7831e809400db4d68e43e1"/>    <section>
+    </section><anchor xml:id="_class_m_t_t_hist_1ac71b59bd26bea2680cb0ed99c5d1af05"/>    <section>
+    <title>mutex()</title>
+<indexterm><primary>mutex</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>mutex</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>auto&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::mutex ( )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1aee6a88890f7831e809400db4d68e43e1"/>    <section>
     <title>name()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>name</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>name</secondary></indexterm>
@@ -447,12 +494,21 @@ Here is the caller graph for this function:<para>
     <title>name()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>name</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>name</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::name ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1ab13711dce2e1451ab94833ff7e928802"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::name ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a7f6ebd619dc5ffb63c9abf591e743e54_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_t_hist_1ab13711dce2e1451ab94833ff7e928802"/>    <section>
     <title>operator bool()</title>
 <indexterm><primary>operator bool</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>operator bool</secondary></indexterm>
 <computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::operator bool ( ) const &amp;<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0"/>    <section>
-    <title>operator-&gt;()</title>
+    <title>operator-&gt;()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>operator-&gt;</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>operator-&gt;</secondary></indexterm>
 <computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::operator-&gt; ( )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
@@ -464,8 +520,12 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a6d6f72f095b93283ff97e9785781e3f8"/>    <section>
-    <title>operator=()</title>
+    </section><anchor xml:id="_class_m_t_t_hist_1a452e1d8072c531826c61b178881f2544"/>    <section>
+    <title>operator-&gt;()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator-&gt;</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>operator-&gt;</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>THist* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::operator-&gt; ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a6d6f72f095b93283ff97e9785781e3f8"/>    <section>
+    <title>operator=()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>operator=</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>operator=</secondary></indexterm>
 <computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;THist&gt;&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::operator= (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp; hist)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
@@ -477,7 +537,11 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a8d9bba241299b542c654905edc517f63"/>    <section>
+    </section><anchor xml:id="_class_m_t_t_hist_1a7e925cda7729c6ecece6459c70a07a32"/>    <section>
+    <title>operator=()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>operator=</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::operator= (THist * hist)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a8d9bba241299b542c654905edc517f63"/>    <section>
     <title>operator[]()</title>
 <indexterm><primary>operator[]</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>operator[]</secondary></indexterm>
@@ -494,23 +558,23 @@ Here is the caller graph for this function:<para>
         </mediaobject>
     </informalfigure>
 </para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a6dbe08dfe0c62f9c9b75064cb262bdc0"/>    <section>
+    </section><anchor xml:id="_class_m_t_t_hist_1afdd2e89e1472927f588a8176e6813e88"/>    <section>
     <title>readComment()</title>
 <indexterm><primary>readComment</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>readComment</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::readComment (std::string const &amp; comment) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1ab31bc7c988df03ecae485b391850e2c0"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string const&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::readComment ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1aa10c349eccd83edd9e5204e014b706c8"/>    <section>
     <title>reset()<computeroutput>[1/3]</computeroutput></title>
 <indexterm><primary>reset</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>reset</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>auto <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::reset (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp; hist)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_t_hist">MTTHist</link>&lt;THist&gt;&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::reset (<link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt; const &amp; hist)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
 
-<para>Copy initializer. </para>
+<para>Copy Initialiser. </para>
 </para>
 Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_ab31bc7c988df03ecae485b391850e2c0_icgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_aa10c349eccd83edd9e5204e014b706c8_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -519,16 +583,7 @@ Here is the caller graph for this function:<para>
     <title>reset()<computeroutput>[2/3]</computeroutput></title>
 <indexterm><primary>reset</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>reset</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::reset (std::nullptr_t )<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a18ddf8bef1fdb6dfc3a95ffc76e20efb_cgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_m_t_t_hist_1a6524d02003fa4d77ae22b33e14b977d9"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::reset (std::nullptr_t )<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a6524d02003fa4d77ae22b33e14b977d9"/>    <section>
     <title>reset()<computeroutput>[3/3]</computeroutput></title>
 <indexterm><primary>reset</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>reset</secondary></indexterm>
@@ -537,6 +592,28 @@ Here is the caller graph for this function:<para>
         <mediaobject>
             <imageobject>
                 <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a6524d02003fa4d77ae22b33e14b977d9_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_m_t_t_hist_1aa354c892da959ee2c25f894adf98064c"/>    <section>
+    <title>SetBinContent()</title>
+<indexterm><primary>SetBinContent</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>SetBinContent</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::SetBinContent (ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_aa354c892da959ee2c25f894adf98064c_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_aa354c892da959ee2c25f894adf98064c_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -583,16 +660,19 @@ Here is the caller graph for this function:<para>
     <title>verbosity()</title>
 <indexterm><primary>verbosity</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>verbosity</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>static bool&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::verbosity ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1ae9163b5b4afca69cfdebdf2cf60064cd"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>static bool&amp; <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::verbosity ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[static]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3"/>    <section>
     <title>Write()</title>
 <indexterm><primary>Write</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Write</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Write (bool const &amp; writeEmpty = <computeroutput>false</computeroutput>
-)</computeroutput></para>Here is the call graph for this function:<para>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Write</computeroutput></para><para>
+
+<para>MTTHIST_MONO. </para>
+</para>
+Here is the call graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_ae9163b5b4afca69cfdebdf2cf60064cd_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a84c745f09bbccc075589f8531c4454e3_cgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -601,20 +681,7 @@ Here is the caller graph for this function:<para>
     <informalfigure>
         <mediaobject>
             <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_ae9163b5b4afca69cfdebdf2cf60064cd_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_m_t_t_hist_1ad6af9a0476250acac958446a91f450fd"/>    <section>
-    <title>Write_i()</title>
-<indexterm><primary>Write_i</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>Write_i</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>void <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::Write_i (int const &amp; thread_index)</computeroutput></para>Here is the call graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_ad6af9a0476250acac958446a91f450fd_cgraph.png"></imagedata>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_m_t_t_hist_a84c745f09bbccc075589f8531c4454e3_icgraph.png"></imagedata>
             </imageobject>
         </mediaobject>
     </informalfigure>
@@ -631,27 +698,15 @@ Here is the caller graph for this function:<para>
     <title>m_comment</title>
 <indexterm><primary>m_comment</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_comment</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_comment<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1acd8494777ed82d06fd269ce3c73edb9d"/>    <section>
-    <title>m_condition</title>
-<indexterm><primary>m_condition</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_condition</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::condition_variable <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_condition<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_comment<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1aae83f1e36e6b7dd93656efa65df26ff8"/>    <section>
     <title>m_exists</title>
 <indexterm><primary>m_exists</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_exists</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_exists = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a0b22e8677009e6458288f97867176c77"/>    <section>
-    <title>m_file</title>
-<indexterm><primary>m_file</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_file</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>TFile* <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_file = nullptr<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_exists = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a493dcc68ddf16801283fda4ceca928b3"/>    <section>
     <title>m_integral</title>
 <indexterm><primary>m_integral</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_integral</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_integral = 0ull<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a7400ac26c3f0273fae7d9a47751a67a2"/>    <section>
-    <title>m_is_deleted</title>
-<indexterm><primary>m_is_deleted</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_is_deleted</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_bools">Bools</link> <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_is_deleted<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_lib_co_8hpp_1a36061a3a05c4802ea9393df730a50d52">ulonglong</link> <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_integral = 0ull<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1add9a68781eee34a0c0fa53f7109926d0"/>    <section>
     <title>m_is_merged</title>
 <indexterm><primary>m_is_merged</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_is_merged</secondary></indexterm>
@@ -667,15 +722,15 @@ Here is the caller graph for this function:<para>
     <title>m_mutex</title>
 <indexterm><primary>m_mutex</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_mutex</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::mutex <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_mutex</computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::mutex <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_mutex<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a303b73968562ece743ccdf7eafe9824d"/>    <section>
     <title>m_name</title>
 <indexterm><primary>m_name</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_name</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_name<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1aa8018dbd5155bd525933ddbed3e6e602"/>    <section>
-    <title>m_nb_thread_running</title>
-<indexterm><primary>m_nb_thread_running</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
-<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_nb_thread_running</secondary></indexterm>
-<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput><link linkend="_class_m_t_counter">MTCounter</link> <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_nb_thread_running {0}<computeroutput>[static]</computeroutput>, <computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3"/>    <section>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>std::string <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_name<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a56b52d42dfd24d8d191debef8c665378"/>    <section>
+    <title>m_outscope</title>
+<indexterm><primary>m_outscope</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
+<indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_outscope</secondary></indexterm>
+<computeroutput>template&lt;class THist &gt; </computeroutput><para><computeroutput>bool <link linkend="_class_m_t_t_hist">MTTHist</link>&lt; THist &gt;::m_outscope = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_m_t_t_hist_1a7443af95ac2aa447bf8a3c4590f31ce3"/>    <section>
     <title>m_title</title>
 <indexterm><primary>m_title</primary><secondary>MTTHist&lt; THist &gt;</secondary></indexterm>
 <indexterm><primary>MTTHist&lt; THist &gt;</primary><secondary>m_title</secondary></indexterm>

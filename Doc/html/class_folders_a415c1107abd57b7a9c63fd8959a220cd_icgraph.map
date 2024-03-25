@@ -1,0 +1,10 @@
+<map id="Folders::size" name="Folders::size">
+<area shape="rect" id="node1" title=" " alt="" coords="509,107,612,133"/>
+<area shape="rect" id="node2" href="$class_path.html#ac40c8c627d0412be849f1e6cd4cdc556" title="To remove extraneous ./ or ../." alt="" coords="340,31,461,57"/>
+<area shape="rect" id="node6" href="$class_folders.html#a035d2b31430c66fc7a8941a9d938b658" title=" " alt="" coords="344,81,457,108"/>
+<area shape="rect" id="node7" href="$class_folders.html#a9b9a8af61bcaec214ec25ec217b84ef7" title=" " alt="" coords="343,132,459,159"/>
+<area shape="rect" id="node8" href="$class_path.html#ae0110636233610d4f90c0441181ccf9f" title=" " alt="" coords="359,183,443,209"/>
+<area shape="rect" id="node3" href="$class_path.html#af8ae2716e0002e69eff44e6d669e6051" title=" " alt="" coords="177,31,292,57"/>
+<area shape="rect" id="node4" href="$class_path.html#a42f3cfe8b84c3e11afc5d54b47522ab3" title=" " alt="" coords="5,5,129,32"/>
+<area shape="rect" id="node5" href="$class_path.html#ae9ae307831520e338154143243a24a67" title="Turns a string to a path, creating it if create = true and it doesn&#39;t already exists." alt="" coords="24,56,111,83"/>
+</map>

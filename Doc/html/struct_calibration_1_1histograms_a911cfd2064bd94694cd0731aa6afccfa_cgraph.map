@@ -1,4 +1,4 @@
-<map id="Calibration::histograms::Initialize" name="Calibration::histograms::Initialize">
+<map id="Calibration::histograms::Initialise" name="Calibration::histograms::Initialise">
 <area shape="rect" id="node1" title=" " alt="" coords="5,287,180,329"/>
 <area shape="rect" id="node2" href="$class_detectors.html#af54374260cdfa1cd60b6364f07f882b4" title="Get the default ADC histogram binning for each type of detectors." alt="" coords="255,67,398,93"/>
 <area shape="rect" id="node4" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="644,193,769,220"/>
@@ -8,7 +8,7 @@
 <area shape="rect" id="node10" href="$class_detectors.html#ae5e6ff02bf3d79da3f034f7404e0677c" title="Returns the number of detector of each type." alt="" coords="249,320,404,347"/>
 <area shape="rect" id="node13" href="$class_detectors.html#a24d220832c2f0a03a0d886e11f2c284c" title="Returns the number of types in the ID file." alt="" coords="253,371,400,397"/>
 <area shape="rect" id="node14" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="301,421,353,448"/>
-<area shape="rect" id="node15" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="268,472,385,499"/>
+<area shape="rect" id="node15" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy Initialiser." alt="" coords="268,472,385,499"/>
 <area shape="rect" id="node16" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="267,523,386,549"/>
 <area shape="rect" id="node18" href="$class_detectors.html#ab4d5e6cc24173a65a35788ba7c680264" title=" " alt="" coords="247,219,406,245"/>
 <area shape="rect" id="node19" href="$class_detectors.html#a6c368aa8fe9d985fd742371179718d71" title=" " alt="" coords="262,573,391,600"/>

@@ -2,7 +2,7 @@
 \label{class_nuball2_tree}\index{Nuball2Tree@{Nuball2Tree}}
 
 
-test \+\_\+ not finished  
+Access to the underlying TTree using -\/$>$ operator (e.\+g. nuball2tree-\/$>$Get\+Entry(n);)  
 
 
 
@@ -12,15 +12,21 @@ test \+\_\+ not finished
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \textbf{ Close} ()
+\item 
+auto const  \& \textbf{ filename} ()
+\item 
 TTree $\ast$ \textbf{ get} ()
 \item 
-\textbf{ Nuball2\+Tree} (std\+::string const \&filename)
+auto const \textbf{ get} () const
 \item 
-\textbf{ Nuball2\+Tree} (std\+::string const \&filename, \textbf{ Event} \&event)
+\textbf{ Nuball2\+Tree} (std\+::string const \&\textbf{ filename})
+\item 
+\textbf{ Nuball2\+Tree} (std\+::string const \&\textbf{ filename}, \textbf{ Event} \&event)
 \item 
 bool const  \& \textbf{ ok} () const
 \item 
-bool \textbf{ Open} (std\+::string const \&filename)
+bool \textbf{ Open} (std\+::string const \&\textbf{ filename})
 \item 
 \textbf{ operator TTree $\ast$} ()
 \item 
@@ -35,6 +41,8 @@ bool \textbf{ file\+\_\+opened} = false
 \item 
 TFile $\ast$ \textbf{ m\+\_\+file} = nullptr
 \item 
+std\+::string \textbf{ m\+\_\+filename}
+\item 
 std\+::string \textbf{ m\+\_\+name} = \char`\"{}Nuball2\char`\"{}
 \item 
 bool \textbf{ m\+\_\+ok} = false
@@ -46,7 +54,7 @@ TTree $\ast$ \textbf{ m\+\_\+tree} = nullptr
 
 
 \doxysubsection{Detailed Description}
-test \+\_\+ not finished 
+Access to the underlying TTree using -\/$>$ operator (e.\+g. nuball2tree-\/$>$Get\+Entry(n);) 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\label{class_nuball2_tree_a583dfb63b12ab4a2b9f5c7a2b9830f50}} 
@@ -55,7 +63,8 @@ test \+\_\+ not finished
 \doxysubsubsection{Nuball2Tree()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily Nuball2\+Tree\+::\+Nuball2\+Tree (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -68,7 +77,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{Nuball2Tree()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Nuball2\+Tree\+::\+Nuball2\+Tree (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{\textbf{ Event} \&}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -81,14 +91,72 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{$\sim$Nuball2Tree()}
 {\footnotesize\ttfamily Nuball2\+Tree\+::$\sim$\+Nuball2\+Tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_nuball2_tree_a552b2576698d81e4b900b18700f63d30_cgraph}
+\end{center}
+\end{figure}
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\label{class_nuball2_tree_a7c2657d3f3d3e58b2d20de0737f11ebc}} 
+\index{Nuball2Tree@{Nuball2Tree}!Close@{Close}}
+\index{Close@{Close}!Nuball2Tree@{Nuball2Tree}}
+\doxysubsubsection{Close()}
+{\footnotesize\ttfamily void Nuball2\+Tree\+::\+Close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{class_nuball2_tree_a7c2657d3f3d3e58b2d20de0737f11ebc_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_nuball2_tree_a7c2657d3f3d3e58b2d20de0737f11ebc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_nuball2_tree_a95740402b5b22c91dd8216837c1bec83}} 
+\index{Nuball2Tree@{Nuball2Tree}!filename@{filename}}
+\index{filename@{filename}!Nuball2Tree@{Nuball2Tree}}
+\doxysubsubsection{filename()}
+{\footnotesize\ttfamily auto const\& Nuball2\+Tree\+::filename (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_nuball2_tree_a95740402b5b22c91dd8216837c1bec83_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_nuball2_tree_ab6287030e410a63962564377b938bd31}} 
 \index{Nuball2Tree@{Nuball2Tree}!get@{get}}
 \index{get@{get}!Nuball2Tree@{Nuball2Tree}}
-\doxysubsubsection{get()}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily TTree$\ast$ Nuball2\+Tree\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{class_nuball2_tree_ab6287030e410a63962564377b938bd31_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_nuball2_tree_ae832f7cd26b8fb12a57d944a9d785b49}} 
+\index{Nuball2Tree@{Nuball2Tree}!get@{get}}
+\index{get@{get}!Nuball2Tree@{Nuball2Tree}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const Nuball2\+Tree\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\label{class_nuball2_tree_a805727b437e4db4a769dda09c9a13813}} 
 \index{Nuball2Tree@{Nuball2Tree}!ok@{ok}}
@@ -102,11 +170,12 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{Open()}
 {\footnotesize\ttfamily bool Nuball2\+Tree\+::\+Open (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=261pt]{class_nuball2_tree_a9f6fa077da6a7c27dfa5e9d2252cdfd0_cgraph}
+\includegraphics[width=345pt]{class_nuball2_tree_a9f6fa077da6a7c27dfa5e9d2252cdfd0_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:\nopagebreak
@@ -142,6 +211,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{m\_file@{m\_file}!Nuball2Tree@{Nuball2Tree}}
 \doxysubsubsection{m\_file}
 {\footnotesize\ttfamily TFile$\ast$ Nuball2\+Tree\+::m\+\_\+file = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\label{class_nuball2_tree_a80be32d072f67940b00ead543af1b1dc}} 
+\index{Nuball2Tree@{Nuball2Tree}!m\_filename@{m\_filename}}
+\index{m\_filename@{m\_filename}!Nuball2Tree@{Nuball2Tree}}
+\doxysubsubsection{m\_filename}
+{\footnotesize\ttfamily std\+::string Nuball2\+Tree\+::m\+\_\+filename\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\label{class_nuball2_tree_afa0171368194e6d8f2dd30b362b74a88}} 
 \index{Nuball2Tree@{Nuball2Tree}!m\_name@{m\_name}}

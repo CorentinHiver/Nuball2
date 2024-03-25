@@ -1,4 +1,4 @@
-<map id="RunMatrixator::Initialize" name="RunMatrixator::Initialize">
+<map id="RunMatrixator::Initialise" name="RunMatrixator::Initialise">
 <area shape="rect" id="node1" title=" " alt="" coords="5,276,184,303"/>
 <area shape="rect" id="node2" href="$class_detectors.html#a4cc1eacca959595eb53a16b75f2d65d8" title="Get the default energy (keV) bidimensionnal histogram binning for each type of detectors." alt="" coords="232,124,429,151"/>
 <area shape="rect" id="node4" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="672,149,797,176"/>
@@ -10,7 +10,7 @@
 <area shape="rect" id="node15" href="$class_detectors.html#ae5e6ff02bf3d79da3f034f7404e0677c" title="Returns the number of detector of each type." alt="" coords="253,225,408,252"/>
 <area shape="rect" id="node17" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="502,276,599,303"/>
 <area shape="rect" id="node18" href="$_histogramor_8hpp.html#ab48a2fa7184e6354788989602c8c8c29" title=" " alt="" coords="305,495,357,521"/>
-<area shape="rect" id="node19" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy initializer." alt="" coords="272,545,389,572"/>
+<area shape="rect" id="node19" href="$class_m_t_t_hist.html#ab31bc7c988df03ecae485b391850e2c0" title="Copy Initialiser." alt="" coords="272,545,389,572"/>
 <area shape="rect" id="node3" href="$class_detectors.html#a0be56517035f1272af33392665b9ff1f" title=" " alt="" coords="489,124,612,151"/>
 <area shape="rect" id="node6" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="1024,124,1153,151"/>
 <area shape="rect" id="node7" href="$_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="1201,124,1280,151"/>

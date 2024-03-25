@@ -1,10 +1,7 @@
 <map id="MTFasterReader::addFolder" name="MTFasterReader::addFolder">
-<area shape="rect" id="node1" title=" " alt="" coords="768,56,967,83"/>
-<area shape="rect" id="node2" href="$class_faster2_histo.html#a8684b0b531e6369ce35bca61f4b1007a" title=" " alt="" coords="533,5,708,32"/>
-<area shape="rect" id="node5" href="$class_calibration.html#a6514307ca111ecc5d6f02694373dc5ec" title=" " alt="" coords="521,56,720,83"/>
-<area shape="rect" id="node8" href="$class_m_t_faster_reader.html#a98a77edc573c4b3cfa5fa384f0d1a085" title="Regular constructor." alt="" coords="523,107,718,149"/>
-<area shape="rect" id="node3" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title=" " alt="" coords="290,5,429,32"/>
-<area shape="rect" id="node4" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title=" " alt="" coords="5,5,197,32"/>
-<area shape="rect" id="node6" href="$class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="279,56,439,83"/>
-<area shape="rect" id="node7" href="$class_calibration.html#a5931047806db77858db6886d041db100" title=" " alt="" coords="245,107,473,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="517,60,716,87"/>
+<area shape="rect" id="node2" href="$class_calibrator.html#a00297f1bb253279bfa8bdce83fb81951" title=" " alt="" coords="276,31,468,57"/>
+<area shape="rect" id="node5" href="$class_m_t_faster_reader.html#a98a77edc573c4b3cfa5fa384f0d1a085" title="Regular constructor." alt="" coords="275,82,469,123"/>
+<area shape="rect" id="node3" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="39,5,193,32"/>
+<area shape="rect" id="node4" href="$class_calibrator.html#ac16a84c9c3244443c44a7c5de11ceb5f" title=" " alt="" coords="5,56,227,83"/>
 </map>

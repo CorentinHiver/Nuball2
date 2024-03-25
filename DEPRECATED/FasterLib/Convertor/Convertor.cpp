@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     nb_threads = 2;
   }
   
-  MTObject::Initialize(nb_threads);
+  MTObject::Initialise(nb_threads);
 
   Path datapath = std::string(std::getenv("HOME"));
        if ( datapath == "/home/corentin") datapath+="/faster_data/";

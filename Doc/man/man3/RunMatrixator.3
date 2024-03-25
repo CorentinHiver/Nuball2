@@ -1,4 +1,4 @@
-.TH "RunMatrixator" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "RunMatrixator" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -22,10 +22,10 @@ RunMatrixator \- Matrixator is used to create a bunch of matrixes : each crystal
 .RI "void \fBfillMatrixes\fP (\fBClovers\fP const &clovers, \fBEvent\fP const &event)"
 .br
 .ti -1c
-.RI "void \fBInitialize\fP ()"
+.RI "void \fBInitialise\fP ()"
 .br
 .ti -1c
-.RI "void \fBinitialize_dontMatrixate\fP ()"
+.RI "void \fBInitialise_dontMatrixate\fP ()"
 .br
 .ti -1c
 .RI "void \fBkeepSingles\fP (bool const &b=true)"
@@ -172,9 +172,9 @@ Multithreading of loadData_ (you have to pass by a static method in order to mul
 
 .SS "void RunMatrixator::fillMatrixes (\fBClovers\fP const & clovers, \fBEvent\fP const & event)"
 
-.SS "void RunMatrixator::Initialize ()"
+.SS "void RunMatrixator::Initialise ()"
 
-.SS "void RunMatrixator::initialize_dontMatrixate ()\fC [inline]\fP"
+.SS "void RunMatrixator::Initialise_dontMatrixate ()\fC [inline]\fP"
 
 .SS "void RunMatrixator::keepSingles (bool const & b = \fCtrue\fP)\fC [inline]\fP"
 

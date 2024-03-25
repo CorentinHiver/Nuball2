@@ -50,7 +50,7 @@ digraph "main"
   Node2 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node22 [label="MTObject::getThreadsNb",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_object.html#ac97399bb34f766e41e7f9a1cd1b7eb7a",tooltip=" "];
   Node2 -> Node23 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node23 [label="Timeshifts::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_timeshifts.html#af02fd3c73fd7163ab2a2ddb65eb41465",tooltip=" "];
+  Node23 [label="Timeshifts::Initialise",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_timeshifts.html#af02fd3c73fd7163ab2a2ddb65eb41465",tooltip=" "];
   Node23 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node23 -> Node24 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node24 [label="folder_exists",height=0.2,width=0.4,color="red", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a6d7a6f0ccbecfe41730c211f472cfcb3",tooltip=" "];
@@ -58,7 +58,7 @@ digraph "main"
   Node23 -> Node26 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node26 [label="removeExtension",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$files__functions_8hpp.html#a658fd83a6ed34994ff0742273a3cc358",tooltip=" "];
   Node23 -> Node27 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node27 [label="MTTHist::reset",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_t_hist.html#aae15b3d03e0c33d42ab170f7c159e974",tooltip="Copy initializer :"];
+  Node27 [label="MTTHist::reset",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_t_hist.html#aae15b3d03e0c33d42ab170f7c159e974",tooltip="Copy Initialiser :"];
   Node23 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node23 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node2 -> Node28 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
@@ -89,7 +89,7 @@ digraph "main"
   Node55 -> Node56 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node56 [label="THist_exists",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$lib_root_8hpp.html#a03d21b830e335ed5e98eaf83038ee8d2",tooltip=" "];
   Node1 -> Node60 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node60 [label="Detectors::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_detectors.html#a963f106c34db73646119902b8c86f431",tooltip=" "];
+  Node60 [label="Detectors::Initialise",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_detectors.html#a963f106c34db73646119902b8c86f431",tooltip=" "];
   Node60 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node60 -> Node61 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node61 [label="isClover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#a2d2b5e29b94673055368eab5a6958c99",tooltip=" "];
@@ -106,7 +106,7 @@ digraph "main"
   Node60 -> Node64 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node64 [label="labelToClover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_detectors_8hpp.html#a3a1bcbd4bbbca2cbdb4f56be34610256",tooltip=" "];
   Node1 -> Node65 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node65 [label="MTObject::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_object.html#a0230b58b8d09067fec22fbe8a5f3db89",tooltip=" "];
+  Node65 [label="MTObject::Initialise",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_m_t_object.html#a0230b58b8d09067fec22fbe8a5f3db89",tooltip=" "];
   Node1 -> Node66 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node66 [label="Timeshifts::setIDFile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_timeshifts.html#a4ae53006200a4c08230a78d56745261d",tooltip=" "];
   Node1 -> Node67 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

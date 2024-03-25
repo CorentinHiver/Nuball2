@@ -2,7 +2,6 @@ var class_r_w_mat =
 [
     [ "RWMat", "class_r_w_mat.html#ad245f6dc989a954229821900e5c17458", null ],
     [ "RWMat", "class_r_w_mat.html#a25c4d6ab84120b88df33e44a3539988d", null ],
-    [ "RWMat", "class_r_w_mat.html#a2e77ce21675eb416b09dd3c9911be13b", null ],
     [ "~RWMat", "class_r_w_mat.html#add7fb5d29a3eda4401b94481bcddc896", null ],
     [ "Add", "class_r_w_mat.html#ac6ba02395cf6ef6abee70690be8080f3", null ],
     [ "Fill", "class_r_w_mat.html#ace8b6917a8fbc9501a743cf4466b08c6", null ],

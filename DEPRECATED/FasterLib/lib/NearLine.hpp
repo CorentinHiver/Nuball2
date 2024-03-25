@@ -63,7 +63,7 @@ public:
   ~NearLine(){}
 
   //General functions
-  Bool_t Initialize();
+  Bool_t Initialise();
   Bool_t configOk();
   Bool_t launch();
   Bool_t multi_run();
@@ -168,7 +168,7 @@ private:
       // - Raw spectra (m_hr)
   Bool_t      m_hr = false;
   std::string m_hr_outroot = "histo_raw.root";
-  void        m_hr_Initialize();
+  void        m_hr_Initialise();
   void        m_hr_Write();
       // - Calibrated spectra (m_hc)
   Bool_t      m_hc            = false;
@@ -177,7 +177,7 @@ private:
   Bool_t      m_hc_dssd      = false;
   Bool_t      m_hc_Paris      = false;
   std::string m_hc_outroot    = "histo_calib.root";
-  void        m_hc_Initialize();
+  void        m_hc_Initialise();
   void        m_hc_Write();
     // Calcul calibration (m_ca)
   Bool_t      m_ca           = false;
@@ -207,7 +207,7 @@ private:
   Timing_ref  m_ts_time_ref; // time reference used for time alignement purposes
   Timeshift   m_ts_array;
   std::map<Detector, Float_t> m_ts_rebin = { {LaBr3,100}, {Ge,1000}, {BGO,500}, {EDEN,500}, {RF,100}, {paris,100}, {dssd,1000}, {EDEN,1000}};
-  void        m_ts_Initialize();
+  void        m_ts_Initialise();
   void        m_ts_Fill(Event const & ts_buffer, size_t const & refPos, UShort_t const & thread_nb);
   void        m_ts_calculate();
 
@@ -228,7 +228,7 @@ private:
   MTCounter  m_converting_rate;
   MTCounter  m_writting_rate;
   Timer      m_timer;
-  void     m_fr_Initialize();
+  void     m_fr_Initialise();
   void     m_fr_Write();
   void     m_fr_sum_counters();
   void     setVerbose() {m_fr_verbose = true;}
@@ -244,7 +244,7 @@ private:
   Time m_rfc_RF_shift_ns = 50;
   std::string m_rfc_time_ref_det = "";
   std::string m_rfc_outroot = "check_rf.root";
-  void m_rfc_Initialize();
+  void m_rfc_Initialise();
   void m_rfc_Write();
 
   //paris bidim histo :
@@ -317,7 +317,7 @@ Bool_t NearLine::launch()
   // First checks the configuration loaded :
   if (!this -> configOk()) return false;
 
-  MTObject::Initialize(m_nb_threads);
+  MTObject::Initialise(m_nb_threads);
 
   for (std::size_t i = 0; i<p_Files.size(); i++)
   {
@@ -325,7 +325,7 @@ Bool_t NearLine::launch()
   }
 
   // Initialise all the histograms and some other variables :
-  if (!this -> Initialize()) return false;
+  if (!this -> Initialise()) return false;
 
   if (p_Files.isEmpty()) {print("NO .fast FILES IN THAT FOLDER !"); return false;}
 
@@ -415,7 +415,7 @@ void NearLine::faster2root(std::string const & filename, int const & thread_nb)
   //Checking the file doesn't already exists :
   if ( file_exists(outfile) ) {print(outfile, "already exists !");return;}
 
-  // Initialize :
+  // Initialise :
   FasterReader reader(&hit, filename);
   if (!reader.isReady()) { print("CAN'T READ", filename); return;}
 
@@ -603,7 +603,7 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
   // ________________________________ //
 
   // ================================= //
-  //   °°°   INITIALIZE Reader   °°°   //
+  //   °°°   Initialise Reader   °°°   //
   FasterReader reader(&hit, filename);
   if (!reader.isReady()) return false;
   // ================================= //
@@ -611,7 +611,7 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
   auto start = std::chrono::high_resolution_clock::now();
 
   // ===================================== //
-  //   °°°   INITIALIZE Temp TTree   °°°   //
+  //   °°°   Initialise Temp TTree   °°°   //
   std::unique_ptr<TFile> tempFile;
   if (temp_tree_on_disk) tempFile.reset(new TFile(("analysisTempTrees/tempTree"+std::to_string(thread_nb)).c_str(), "recreate"));
   std::unique_ptr<TTree> rootTree;
@@ -903,7 +903,7 @@ Bool_t NearLine::processFile(std::string filename, int thread_nb)
   return true;
 }
 
-void NearLine::m_hr_Initialize()
+void NearLine::m_hr_Initialise()
 {
   if (m_hr)
   {
@@ -920,7 +920,7 @@ void NearLine::m_hr_Initialize()
   }
 }
 
-void NearLine::m_fr_Initialize()
+void NearLine::m_fr_Initialise()
 {
   // m_use_threshold = false;
   // m_fr_Ge_raw.reset("Raw spectra","Raw spectra",m_bins_calib[Ge],m_min_calib[Ge],m_max_calib[Ge]) ;
@@ -946,7 +946,7 @@ void NearLine::m_fr_Initialize()
   // m_fr_C_VS_dT_pulse.reset("mult VS pulse ref", "mult VS pulse ref", 600,-200,400, 21,0,20);
 }
 
-void NearLine::m_hc_Initialize()
+void NearLine::m_hc_Initialise()
 {
   if (m_hc)
   {
@@ -979,7 +979,7 @@ void NearLine::m_hc_Initialize()
   }
 }
 
-void NearLine::m_ts_Initialize()
+void NearLine::m_ts_Initialise()
 {
   if (m_ts)
   {
@@ -1019,7 +1019,7 @@ void NearLine::m_ts_Initialize()
   }
 }
 
-void NearLine::m_rfc_Initialize()
+void NearLine::m_rfc_Initialise()
 {
   m_rfc_histo_RF.reset( ("ToF VS "+m_rfc_time_ref_det).c_str(), ("RF VS "+m_rfc_time_ref_det).c_str(), 5000, -50, 450);
   m_rfc_histo_RF_test.reset( ("test RF VS "+m_rfc_time_ref_det).c_str(), ("test RF VS "+m_rfc_time_ref_det).c_str(), 1000, -5, 5);
@@ -1039,7 +1039,7 @@ void NearLine::m_rfc_Initialize()
   p_Files.Print();
 }
 
-Bool_t NearLine::Initialize()
+Bool_t NearLine::Initialise()
 {
   if (!folder_exists(m_outdir))
   {
@@ -1047,7 +1047,7 @@ Bool_t NearLine::Initialize()
     if (gSystem -> Exec((std::string("mkdir ")+m_outdir).c_str())) return false;
   }
   if (temp_tree_on_disk) if (!folder_exists("analysisTempTrees/")) gSystem -> Exec("mkdir analysisTempTrees/");
-  TThread::Initialize();
+  TThread::Initialise();
   srand(time(0));
 
   //   ARRAYS   //
@@ -1061,28 +1061,28 @@ Bool_t NearLine::Initialize()
   // dssd-> set(this);
   // #endif //USE_DSSD
 
-    //   HISTOGRAMS INITIALIZE   //
+    //   HISTOGRAMS Initialise   //
 
     // Raw Histo //
-    if (m_hr) m_hr_Initialize();
+    if (m_hr) m_hr_Initialise();
 
     // Calibrated spectra //
-    if (m_hc) m_hc_Initialize();
+    if (m_hc) m_hc_Initialise();
 
     // TIMESHIFT //
-    if (m_ts) m_ts_Initialize();
+    if (m_ts) m_ts_Initialise();
 
     // Analysis //
-    // if (m_a) m_a_Initialize();
-    if (m_a) m_a->Initialize();
+    // if (m_a) m_a_Initialise();
+    if (m_a) m_a->Initialise();
 
-    if (m_aw) m_aw->Initialize();
+    if (m_aw) m_aw->Initialise();
 
-    if (m_fr) m_fr_Initialize();
+    if (m_fr) m_fr_Initialise();
 
-    if (m_pb) m_pb->Initialize();
+    if (m_pb) m_pb->Initialise();
 
-    if (m_rfc) m_rfc_Initialize();
+    if (m_rfc) m_rfc_Initialise();
 
     return true;
 }
@@ -1545,7 +1545,7 @@ void NearLine::m_ca_calculate(std::string _histoFilename, Fits & fits, TFile* ou
     histo = (TH1F*)file->Get(name.c_str());
     if (histo == nullptr || histo -> IsZombie()) {if (m_ca_verbose) print("Histo doesn't exists"); continue;}
 
-    // Initialize algorithm parameters :
+    // Initialise algorithm parameters :
     Float_t integral_ratio_threshold = 0.f;
     Int_t ADC_threshold = 0;
     Int_t window_1 = 0, window_2 = 0, window_3 = 0;//Window value in keV
@@ -1847,7 +1847,7 @@ void NearLine::m_ca_residus_calculate()
   #ifdef PARIS
   m_hc_Paris = true;
   #endif //PARIS
-  m_hc_Initialize();
+  m_hc_Initialise();
   p_Files.setCursor(0);
   multi_run();
   m_hc_Write();

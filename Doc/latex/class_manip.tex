@@ -2,11 +2,17 @@
 \label{class_manip}\index{Manip@{Manip}}
 
 
+Loads the list file containing the list of the names of the folder containing the faster files to convert.  
+
+
+
+
 {\ttfamily \#include $<$Manip.\+hpp$>$}
 
 
 
-Collaboration diagram for Manip\+:\nopagebreak
+Collaboration diagram for Manip\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -17,7 +23,7 @@ Collaboration diagram for Manip\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 void \textbf{ add\+Folder} (std\+::string const \&folder)
-\item 
+\begin{DoxyCompactList}\small\item\em Clears the previously set list of folders and replace it with folder. \end{DoxyCompactList}\item 
 auto const  \& \textbf{ get} () const
 \item 
 bool \textbf{ get\+Next} (std\+::string \&run)
@@ -30,10 +36,8 @@ bool \textbf{ get\+Next} (std\+::string \&run)
 \item 
 bool \textbf{ operator$>$$>$} (std\+::string \&string)
 \item 
-void \textbf{ Print} ()
-\item 
-bool \textbf{ read\+File} ()
-\item 
+void \textbf{ read\+File} ()
+\begin{DoxyCompactList}\small\item\em Reads the list file containing the list of folders. \end{DoxyCompactList}\item 
 void \textbf{ read\+File} (std\+::string const \&runs\+\_\+file)
 \item 
 void \textbf{ reset} ()
@@ -43,11 +47,11 @@ void \textbf{ set\+Data\+Path} (std\+::string const \&datapath)
 void \textbf{ set\+File\+Name} (std\+::string const \&filename)
 \item 
 void \textbf{ set\+Folder} (std\+::string const \&folder)
-\item 
+\begin{DoxyCompactList}\small\item\em Clears the previously set list of folders and replace it with folder. \end{DoxyCompactList}\item 
 void \textbf{ set\+Manip\+Name} (std\+::string const \&manipname)
 \item 
 bool \textbf{ set\+MT} (bool const \&MTOn=true)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em To allow several threads to work on different runs on parallel. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -71,6 +75,13 @@ std\+::string \textbf{ m\+\_\+runs\+\_\+files}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Loads the list file containing the list of the names of the folder containing the faster files to convert. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\textbf{ Todo}]make it better !! \end{DoxyRefDesc}
+
+
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\label{class_manip_a1f5a91129d20b2e3924c54bddde521f6}} 
 \index{Manip@{Manip}!Manip@{Manip}}
@@ -84,7 +95,8 @@ std\+::string \textbf{ m\+\_\+runs\+\_\+files}
 \doxysubsubsection{Manip()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily Manip\+::\+Manip (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{runs\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -100,6 +112,18 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{addFolder()}
 {\footnotesize\ttfamily void Manip\+::add\+Folder (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Clears the previously set list of folders and replace it with folder. 
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{class_manip_a86ed3dd2dc6d3b8b7342a9552bc43e26_cgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_manip_a41dfa1aac77e2340abf4f66934af0092}} 
 \index{Manip@{Manip}!get@{get}}
 \index{get@{get}!Manip@{Manip}}
@@ -152,30 +176,22 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{class_manip_aa8e71952b07876be2dc56e180bdfe5f5_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_manip_a6390322006ca8d8e7c350a3a915182e8}} 
-\index{Manip@{Manip}!Print@{Print}}
-\index{Print@{Print}!Manip@{Manip}}
-\doxysubsubsection{Print()}
-{\footnotesize\ttfamily void Manip\+::\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{class_manip_a6390322006ca8d8e7c350a3a915182e8_cgraph}
-\end{center}
-\end{figure}
-\mbox{\label{class_manip_a4da401a6eb5a013a4150e01b81ecf853}} 
+\mbox{\label{class_manip_a4fe55690c18999195a5c4c3bec5e6b17}} 
 \index{Manip@{Manip}!readFile@{readFile}}
 \index{readFile@{readFile}!Manip@{Manip}}
 \doxysubsubsection{readFile()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool Manip\+::read\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily void Manip\+::read\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+
+
+Reads the list file containing the list of folders. 
+
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=291pt]{class_manip_a4da401a6eb5a013a4150e01b81ecf853_icgraph}
+\includegraphics[width=291pt]{class_manip_a4fe55690c18999195a5c4c3bec5e6b17_icgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_manip_ad044eafeb71fda443f77377d44d652d0}} 
@@ -184,7 +200,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{readFile()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void Manip\+::read\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{runs\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -203,6 +220,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{setDataPath()}
 {\footnotesize\ttfamily void Manip\+::set\+Data\+Path (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{datapath }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Set the path of the list file containing the list of folders \end{DoxyRefDesc}
 \mbox{\label{class_manip_af3f64608a08dd23d186f48e8c1beeba0}} 
 \index{Manip@{Manip}!setFileName@{setFileName}}
 \index{setFileName@{setFileName}!Manip@{Manip}}
@@ -215,19 +234,31 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{setFolder()}
 {\footnotesize\ttfamily void Manip\+::set\+Folder (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{folder }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+
+
+Clears the previously set list of folders and replace it with folder. 
+
 \mbox{\label{class_manip_a7f2aa2947cd843abecac34300b6da94e}} 
 \index{Manip@{Manip}!setManipName@{setManipName}}
 \index{setManipName@{setManipName}!Manip@{Manip}}
 \doxysubsubsection{setManipName()}
 {\footnotesize\ttfamily void Manip\+::set\+Manip\+Name (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{manipname }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
+\begin{DoxyRefDesc}{Deprecated}
+\item[\textbf{ Deprecated}]Set the name of the folder inside the datapath containing the list file containing the list of folders \end{DoxyRefDesc}
 \mbox{\label{class_manip_ab0813163118017c1064ec02f091356b8}} 
 \index{Manip@{Manip}!setMT@{setMT}}
 \index{setMT@{setMT}!Manip@{Manip}}
 \doxysubsubsection{setMT()}
 {\footnotesize\ttfamily bool Manip\+::set\+MT (\begin{DoxyParamCaption}\item[{bool const \&}]{MTOn = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+
+
+To allow several threads to work on different runs on parallel. 
+
+\doxyref{MTObject}{p.}{class_m_t_object} needs to have been Initialised before creating the ~\newline
+ Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

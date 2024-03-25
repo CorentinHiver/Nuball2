@@ -18,7 +18,7 @@
         <location file="lib/Modules/Calibration.hpp" line="162" column="20" bodyfile="lib/Modules/Calibration.hpp" bodystart="162" bodyend="-1"/>
         <referencedby refid="class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a" compoundref="_calibration_8hpp" startline="527" endline="544">Calibration::fillHisto</referencedby>
         <referencedby refid="class_calibration_1afd14ef8f1b6cee6cf7abc10783ee318e" compoundref="_calibration_8hpp" startline="485" endline="525">Calibration::fillRootDataHisto</referencedby>
-        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialize</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialise</referencedby>
         <referencedby refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" compoundref="_calibration_8hpp" startline="1128" endline="1171">Calibration::verify</referencedby>
         <referencedby refid="class_calibration_1a6ad79450d0bb55baa744f6436f84dbbe" compoundref="_calibration_8hpp" startline="1194" endline="1201">Calibration::writeCalibratedData</referencedby>
         <referencedby refid="class_calibration_1a8ff8375eee244f2b22b86914a1d559bc" compoundref="_calibration_8hpp" startline="1173" endline="1180">Calibration::writeCalibratedHisto</referencedby>
@@ -35,7 +35,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Modules/Calibration.hpp" line="158" column="13" bodyfile="lib/Modules/Calibration.hpp" bodystart="158" bodyend="-1"/>
-        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialize</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialise</referencedby>
         <referencedby refid="class_calibration_1ad6db2742477c8ac64787c6fe8a687aff" compoundref="_calibration_8hpp" startline="552" endline="850">Calibration::peakFinder</referencedby>
         <referencedby refid="class_calibration_1a062cb134d4b82246ba9c89c567a32963" compoundref="_calibration_8hpp" startline="1119" endline="1126">Calibration::writeRawRoot</referencedby>
       </memberdef>
@@ -53,7 +53,7 @@
         <location file="lib/Modules/Calibration.hpp" line="161" column="20" bodyfile="lib/Modules/Calibration.hpp" bodystart="161" bodyend="-1"/>
         <referencedby refid="class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a" compoundref="_calibration_8hpp" startline="527" endline="544">Calibration::fillHisto</referencedby>
         <referencedby refid="class_calibration_1afd14ef8f1b6cee6cf7abc10783ee318e" compoundref="_calibration_8hpp" startline="485" endline="525">Calibration::fillRootDataHisto</referencedby>
-        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialize</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialise</referencedby>
         <referencedby refid="class_calibration_1a7835b1d9192d2c9fa8dcd8efbceb8db3" compoundref="_calibration_8hpp" startline="419" endline="452">Calibration::loadRootHisto</referencedby>
         <referencedby refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" compoundref="_calibration_8hpp" startline="1128" endline="1171">Calibration::verify</referencedby>
         <referencedby refid="class_calibration_1a6ad79450d0bb55baa744f6436f84dbbe" compoundref="_calibration_8hpp" startline="1194" endline="1201">Calibration::writeCalibratedData</referencedby>
@@ -61,10 +61,10 @@
       </memberdef>
       <memberdef kind="variable" id="struct_calibration_1_1histograms_1af1e9037776e922dcc96614e080a23ba3" prot="public" static="no" mutable="no">
         <type>bool</type>
-        <definition>bool Calibration::histograms::initialized</definition>
+        <definition>bool Calibration::histograms::Initialised</definition>
         <argsstring></argsstring>
-        <name>initialized</name>
-        <initializer>= false</initializer>
+        <name>Initialised</name>
+        <Initialiser>= false</Initialiser>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -72,7 +72,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/Modules/Calibration.hpp" line="169" column="10" bodyfile="lib/Modules/Calibration.hpp" bodystart="169" bodyend="-1"/>
-        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialize</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialise</referencedby>
       </memberdef>
       <memberdef kind="variable" id="struct_calibration_1_1histograms_1a4665ea6699e47b50df6103317d87d36b" prot="public" static="no" mutable="no">
         <type><ref refid="_m_t_t_hist_8hpp_1ab7cfdf0e608b8024114dc2729684173e" kindref="member">Vector_MTTHist</ref>&lt; TH1F &gt;</type>
@@ -88,7 +88,7 @@
         <location file="lib/Modules/Calibration.hpp" line="157" column="20" bodyfile="lib/Modules/Calibration.hpp" bodystart="157" bodyend="-1"/>
         <referencedby refid="class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a" compoundref="_calibration_8hpp" startline="527" endline="544">Calibration::fillHisto</referencedby>
         <referencedby refid="class_calibration_1afd14ef8f1b6cee6cf7abc10783ee318e" compoundref="_calibration_8hpp" startline="485" endline="525">Calibration::fillRootDataHisto</referencedby>
-        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialize</referencedby>
+        <referencedby refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" compoundref="_calibration_8hpp" startline="330" endline="372">Initialise</referencedby>
         <referencedby refid="class_calibration_1a7835b1d9192d2c9fa8dcd8efbceb8db3" compoundref="_calibration_8hpp" startline="419" endline="452">Calibration::loadRootHisto</referencedby>
         <referencedby refid="class_calibration_1ad6db2742477c8ac64787c6fe8a687aff" compoundref="_calibration_8hpp" startline="552" endline="850">Calibration::peakFinder</referencedby>
         <referencedby refid="class_calibration_1a344dc3d6feab3580e859cc693c2fdd4a" compoundref="_calibration_8hpp" startline="1128" endline="1171">Calibration::verify</referencedby>
@@ -112,9 +112,9 @@
       <sectiondef kind="public-func">
       <memberdef kind="function" id="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void Calibration::histograms::Initialize</definition>
+        <definition>void Calibration::histograms::Initialise</definition>
         <argsstring>()</argsstring>
-        <name>Initialize</name>
+        <name>Initialise</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -130,7 +130,7 @@
         <references refid="class_detectors_1a4cc1eacca959595eb53a16b75f2d65d8" compoundref="_detectors_8hpp" startline="150" endline="155">Detectors::energyBidimBin</references>
         <references refid="class_detectors_1aaadeec0d94fd7daea1b8e4c9d861fbde" compoundref="_detectors_8hpp" startline="142" endline="147">Detectors::energyBin</references>
         <references refid="lib_co_8hpp_1af522b6efd63a7f871a8307755b1297bf" compoundref="lib_co_8hpp" startline="236">error_message</references>
-        <references refid="struct_calibration_1_1histograms_1af1e9037776e922dcc96614e080a23ba3" compoundref="_calibration_8hpp" startline="169">initialized</references>
+        <references refid="struct_calibration_1_1histograms_1af1e9037776e922dcc96614e080a23ba3" compoundref="_calibration_8hpp" startline="169">Initialised</references>
         <references refid="class_detectors_1a349500ec816bd7761de87c54b95000bc" compoundref="_detectors_8hpp" startline="100" endline="100">Detectors::label</references>
         <references refid="class_detectors_1afd00ee8a76386f7356a12858b1dd7c6b" compoundref="_detectors_8hpp" startline="124" endline="124">Detectors::name</references>
         <references refid="class_detectors_1ae5e6ff02bf3d79da3f034f7404e0677c" compoundref="_detectors_8hpp" startline="117" endline="121">Detectors::nbOfType</references>
@@ -141,7 +141,7 @@
         <references refid="class_detectors_1a1177661fb15c9825755925faf00c8398" compoundref="_detectors_8hpp" startline="74" endline="74">Detectors::size</references>
         <references refid="class_detectors_1ab4d5e6cc24173a65a35788ba7c680264" compoundref="_detectors_8hpp" startline="94" endline="94">Detectors::typeIndex</references>
         <references refid="class_detectors_1a6c368aa8fe9d985fd742371179718d71" compoundref="_detectors_8hpp" startline="91" endline="91">Detectors::types</references>
-        <referencedby refid="class_calibration_1a2f91a6803bf8008bd7b748d4a1688338" compoundref="_calibration_8hpp" startline="216" endline="216">Calibration::Initialize</referencedby>
+        <referencedby refid="class_calibration_1a2f91a6803bf8008bd7b748d4a1688338" compoundref="_calibration_8hpp" startline="216" endline="216">Calibration::Initialise</referencedby>
       </memberdef>
       <memberdef kind="function" id="struct_calibration_1_1histograms_1a8cf05daf9b9f1ee4ec9d1763acc2c307" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -187,8 +187,8 @@
       <member refid="struct_calibration_1_1histograms_1a4e3132f86e81180b0e35833ed839057d" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>all_calib</name></member>
       <member refid="struct_calibration_1_1histograms_1a7459f2c745533444d1d7958fa192dd56" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>all_raw_spectra</name></member>
       <member refid="struct_calibration_1_1histograms_1a8b5260e1a8f3434d96c5cd83402a48fc" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>calib_spectra</name></member>
-      <member refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>Initialize</name></member>
-      <member refid="struct_calibration_1_1histograms_1af1e9037776e922dcc96614e080a23ba3" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>initialized</name></member>
+      <member refid="struct_calibration_1_1histograms_1a911cfd2064bd94694cd0731aa6afccfa" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>Initialise</name></member>
+      <member refid="struct_calibration_1_1histograms_1af1e9037776e922dcc96614e080a23ba3" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>Initialised</name></member>
       <member refid="struct_calibration_1_1histograms_1a4665ea6699e47b50df6103317d87d36b" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>raw_spectra</name></member>
       <member refid="struct_calibration_1_1histograms_1a8cf05daf9b9f1ee4ec9d1763acc2c307" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>setBins</name></member>
       <member refid="struct_calibration_1_1histograms_1a6993a369903dab26282e44875e604d6a" prot="public" virt="non-virtual"><scope>Calibration::histograms</scope><name>spectra</name></member>

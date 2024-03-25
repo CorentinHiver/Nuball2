@@ -1,4 +1,4 @@
-.TH "Clovers" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Clovers" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -83,9 +83,9 @@ Clovers \- Analyse the clovers in the event\&.
 
 .in +1c
 .ti -1c
-.RI "static void \fBInitializeArrays\fP ()"
+.RI "static void \fBInitialiseArrays\fP ()"
 .br
-.RI "Static initialize\&. Allows one to use the arrays event if no object has been instantiated\&. "
+.RI "Static Initialise\&. Allows one to use the arrays event if no object has been instantiated\&. "
 .ti -1c
 .RI "static bool \fBis_clover\fP (\fBLabel\fP const &l)"
 .br
@@ -233,10 +233,10 @@ Clovers \- Analyse the clovers in the event\&.
 
 .in +1c
 .ti -1c
-.RI "static std::array< \fBuchar\fP, 1000 > \fBcristaux_index\fP"
+.RI "static std::array< \fBuchar\fP, \fBnb_det\fP > \fBcristaux_index\fP"
 .br
 .ti -1c
-.RI "static std::array< \fBuchar\fP, 1000 > \fBcristaux_index_BGO\fP"
+.RI "static std::array< \fBuchar\fP, \fBnb_det\fP > \fBcristaux_index_BGO\fP"
 .br
 .ti -1c
 .RI "static \fBGates\fP \fBdelayedBGOgate\fP = {{60\&.f, 145\&.f}}"
@@ -248,16 +248,19 @@ Clovers \- Analyse the clovers in the event\&.
 .RI "static float \fBEmin\fP = 5\&."
 .br
 .ti -1c
-.RI "static std::array< bool, 1000 > \fBisBGO\fP"
+.RI "static std::array< bool, \fBnb_det\fP > \fBisBGO\fP"
 .br
 .ti -1c
-.RI "static std::array< bool, 1000 > \fBisClover\fP"
+.RI "static std::array< bool, \fBnb_det\fP > \fBisClover\fP"
 .br
 .ti -1c
-.RI "static std::array< bool, 1000 > \fBisGe\fP"
+.RI "static std::array< bool, \fBnb_det\fP > \fBisGe\fP"
 .br
 .ti -1c
-.RI "static std::array< \fBuchar\fP, 1000 > \fBlabels\fP"
+.RI "static std::array< \fBuchar\fP, \fBnb_det\fP > \fBlabels\fP"
+.br
+.ti -1c
+.RI "static constexpr int \fBnb_det\fP = 1000"
 .br
 .ti -1c
 .RI "static \fBGate\fP \fBpromptBGOgate\fP = {\-20\&.f, 10\&.f }"
@@ -270,7 +273,7 @@ Clovers \- Analyse the clovers in the event\&.
 
 .in +1c
 .ti -1c
-.RI "static bool \fBs_initialised\fP = false"
+.RI "static thread_local bool \fBs_initialised\fP = false"
 .br
 .ti -1c
 .RI "static bool \fBs_time_ps\fP = false"
@@ -303,7 +306,7 @@ Typical use case :
 
 .fi
 .PP
- This class is Thread Safe ! 
+ 
 .SH "Constructor & Destructor Documentation"
 .PP 
 .SS "Clovers::Clovers ()\fC [inline]\fP"
@@ -324,10 +327,10 @@ Typical use case :
 
 .SS "bool Clovers::FillFast (\fBEvent\fP const & event, \fBsize_t\fP const & hit_index)\fC [inline]\fP"
 
-.SS "static void Clovers::InitializeArrays ()\fC [inline]\fP, \fC [static]\fP"
+.SS "static void Clovers::InitialiseArrays ()\fC [inline]\fP, \fC [static]\fP"
 
 .PP
-Static initialize\&. Allows one to use the arrays event if no object has been instantiated\&. 
+Static Initialise\&. Allows one to use the arrays event if no object has been instantiated\&. 
 .SS "static bool Clovers::is_clover (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
 
 .SS "static bool Clovers::is_clover_BGO (\fBLabel\fP const & l)\fC [inline]\fP, \fC [static]\fP"
@@ -378,9 +381,9 @@ Fills the CloverModules for a whole event\&. Two modes : 1 : normal mode, skip t
 
 .SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::cristaux_BGO = \fBStaticVector\fP<\fBuchar\fP>(48)"
 
-.SS "std::array< \fBuchar\fP, 1000 > Clovers::cristaux_index\fC [static]\fP"
+.SS "std::array< \fBuchar\fP, \fBClovers::nb_det\fP > Clovers::cristaux_index\fC [static]\fP"
 
-.SS "std::array< \fBuchar\fP, 1000 > Clovers::cristaux_index_BGO\fC [static]\fP"
+.SS "std::array< \fBuchar\fP, \fBClovers::nb_det\fP > Clovers::cristaux_index_BGO\fC [static]\fP"
 
 .SS "std::array<float, 96> Clovers::cristaux_nrj = {0}"
 
@@ -420,15 +423,17 @@ Fills the CloverModules for a whole event\&. Two modes : 1 : normal mode, skip t
 
 .SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::Hits = \fBStaticVector\fP<\fBuchar\fP>(24)"
 
-.SS "std::array< bool, 1000 > Clovers::isBGO\fC [static]\fP"
+.SS "std::array< bool, \fBClovers::nb_det\fP > Clovers::isBGO\fC [static]\fP"
 
-.SS "std::array< bool, 1000 > Clovers::isClover\fC [static]\fP"
+.SS "std::array< bool, \fBClovers::nb_det\fP > Clovers::isClover\fC [static]\fP"
 
-.SS "std::array< bool, 1000 > Clovers::isGe\fC [static]\fP"
+.SS "std::array< bool, \fBClovers::nb_det\fP > Clovers::isGe\fC [static]\fP"
 
-.SS "std::array< \fBuchar\fP, 1000 > Clovers::labels\fC [static]\fP"
+.SS "std::array< \fBuchar\fP, \fBClovers::nb_det\fP > Clovers::labels\fC [static]\fP"
 
 .SS "std::vector<\fBCloverModule\fP> Clovers::m_clovers"
+
+.SS "constexpr int Clovers::nb_det = 1000\fC [static]\fP, \fC [constexpr]\fP"
 
 .SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::PromptBGO = \fBStaticVector\fP<\fBuchar\fP>(24)"
 
@@ -454,7 +459,7 @@ Fills the CloverModules for a whole event\&. Two modes : 1 : normal mode, skip t
 
 .SS "\fBStaticVector\fP<\fBuchar\fP> Clovers::RejectedGe = \fBStaticVector\fP<\fBuchar\fP>(24)"
 
-.SS "bool Clovers::s_initialised = false\fC [static]\fP, \fC [private]\fP"
+.SS "thread_local bool Clovers::s_initialised = false\fC [static]\fP, \fC [private]\fP"
 
 .SS "bool Clovers::s_time_ps = false\fC [static]\fP, \fC [private]\fP"
 

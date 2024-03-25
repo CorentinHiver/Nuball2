@@ -4,6 +4,19 @@
     <compoundname>Simplex</compoundname>
     <includes refid="_spectra_alignator_8hpp" local="no">SpectraAlignator.hpp</includes>
       <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_simplex_1acee756ff5f517c95c30b3dc7e99ea7d7" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; double &gt;</type>
+        <definition>std::vector&lt;double&gt; Simplex::m_angles</definition>
+        <argsstring></argsstring>
+        <name>m_angles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="350" column="15" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="350" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="class_simplex_1a0d352c2bc1248646ccaff4236538a194" prot="private" static="no" mutable="no">
         <type><ref refid="class_vertice" kindref="compound">Vertice</ref></type>
         <definition>Vertice Simplex::m_centroid</definition>
@@ -16,9 +29,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="561" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="561" bodyend="-1"/>
-        <referencedby refid="class_simplex_1a033d49e8ac767b72b4c1dd6d38573988" compoundref="_spectra_alignator_8hpp" startline="539" endline="549">centroid</referencedby>
-        <referencedby refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" compoundref="_spectra_alignator_8hpp" startline="509" endline="516">operator=</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="349" column="11" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="349" bodyend="-1"/>
+        <referencedby refid="class_simplex_1a4212e98efa0b1468955d32a51387f3fc" compoundref="_spectra_alignator_8hpp" startline="299" endline="318">centroid</referencedby>
+        <referencedby refid="class_simplex_1a0ceff7d3432670abaddf74f5b223e62d" compoundref="_spectra_alignator_8hpp" startline="326" endline="326">getCentroid</referencedby>
+        <referencedby refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" compoundref="_spectra_alignator_8hpp" startline="270" endline="277">operator=</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_simplex_1aed12d66219db915526fc70cc33c83505" prot="private" static="no" mutable="no">
         <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
@@ -32,13 +46,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="559" column="10" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="559" bodyend="-1"/>
-        <referencedby refid="class_simplex_1aed93fc950fa50599b289d5ac9e3356c7" compoundref="_spectra_alignator_8hpp" startline="554" endline="554">dim</referencedby>
-        <referencedby refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" compoundref="_spectra_alignator_8hpp" startline="509" endline="516">operator=</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="348" column="10" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="348" bodyend="-1"/>
+        <referencedby refid="class_simplex_1aed93fc950fa50599b289d5ac9e3356c7" compoundref="_spectra_alignator_8hpp" startline="342" endline="342">dim</referencedby>
+        <referencedby refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" compoundref="_spectra_alignator_8hpp" startline="270" endline="277">operator=</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" prot="private" static="no" mutable="no">
-        <type>int</type>
-        <definition>int Simplex::m_size</definition>
+      <memberdef kind="variable" id="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" prot="private" static="no" mutable="no">
+        <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
+        <definition>size_t Simplex::m_size</definition>
         <argsstring></argsstring>
         <name>m_size</name>
         <initializer>= 0</initializer>
@@ -48,11 +62,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="560" column="7" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="560" bodyend="-1"/>
-        <referencedby refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" compoundref="_spectra_alignator_8hpp" startline="509" endline="516">operator=</referencedby>
-        <referencedby refid="class_simplex_1ade818ac404caab90542e80143cbc63c0" compoundref="_spectra_alignator_8hpp" startline="527" endline="527">setVertice</referencedby>
-        <referencedby refid="class_simplex_1ad893ac9de899c841e0e6ada82ea611b9" compoundref="_spectra_alignator_8hpp" startline="477" endline="482">Simplex</referencedby>
-        <referencedby refid="class_simplex_1ae39ce6d0a47986ceabb9a76146a8225b" compoundref="_spectra_alignator_8hpp" startline="551" endline="551">size</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="347" column="10" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="347" bodyend="-1"/>
+        <referencedby refid="class_simplex_1a4212e98efa0b1468955d32a51387f3fc" compoundref="_spectra_alignator_8hpp" startline="299" endline="318">centroid</referencedby>
+        <referencedby refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" compoundref="_spectra_alignator_8hpp" startline="270" endline="277">operator=</referencedby>
+        <referencedby refid="class_simplex_1ade818ac404caab90542e80143cbc63c0" compoundref="_spectra_alignator_8hpp" startline="296" endline="296">setVertice</referencedby>
+        <referencedby refid="class_simplex_1ad893ac9de899c841e0e6ada82ea611b9" compoundref="_spectra_alignator_8hpp" startline="224" endline="229">Simplex</referencedby>
+        <referencedby refid="class_simplex_1ae39ce6d0a47986ceabb9a76146a8225b" compoundref="_spectra_alignator_8hpp" startline="339" endline="339">size</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" prot="private" static="no" mutable="no">
         <type><ref refid="_spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e" kindref="member">Vertices</ref></type>
@@ -65,14 +80,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="558" column="12" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="558" bodyend="-1"/>
-        <referencedby refid="class_simplex_1af9f387b740699fc83d561b06a5e8305a" compoundref="_spectra_alignator_8hpp" startline="533" endline="533">begin</referencedby>
-        <referencedby refid="class_simplex_1a033d49e8ac767b72b4c1dd6d38573988" compoundref="_spectra_alignator_8hpp" startline="539" endline="549">centroid</referencedby>
-        <referencedby refid="class_simplex_1a43aa87c378225a78bf764a3c049ed381" compoundref="_spectra_alignator_8hpp" startline="534" endline="534">end</referencedby>
-        <referencedby refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" compoundref="_spectra_alignator_8hpp" startline="509" endline="516">operator=</referencedby>
-        <referencedby refid="class_simplex_1a0bbdd7fe5cc1296b7c1da9232d78d182" compoundref="_spectra_alignator_8hpp" startline="530" endline="530">operator[]</referencedby>
-        <referencedby refid="class_simplex_1ade818ac404caab90542e80143cbc63c0" compoundref="_spectra_alignator_8hpp" startline="527" endline="527">setVertice</referencedby>
-        <referencedby refid="class_simplex_1ad893ac9de899c841e0e6ada82ea611b9" compoundref="_spectra_alignator_8hpp" startline="477" endline="482">Simplex</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="346" column="12" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="346" bodyend="-1"/>
+        <referencedby refid="class_simplex_1af9f387b740699fc83d561b06a5e8305a" compoundref="_spectra_alignator_8hpp" startline="333" endline="333">begin</referencedby>
+        <referencedby refid="class_simplex_1a4212e98efa0b1468955d32a51387f3fc" compoundref="_spectra_alignator_8hpp" startline="299" endline="318">centroid</referencedby>
+        <referencedby refid="class_simplex_1a43aa87c378225a78bf764a3c049ed381" compoundref="_spectra_alignator_8hpp" startline="334" endline="334">end</referencedby>
+        <referencedby refid="class_simplex_1a3840674dbc694d4796b28c088da4c02e" compoundref="_spectra_alignator_8hpp" startline="321" endline="324">evaluate</referencedby>
+        <referencedby refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" compoundref="_spectra_alignator_8hpp" startline="270" endline="277">operator=</referencedby>
+        <referencedby refid="class_simplex_1a0bbdd7fe5cc1296b7c1da9232d78d182" compoundref="_spectra_alignator_8hpp" startline="330" endline="330">operator[]</referencedby>
+        <referencedby refid="class_simplex_1ade818ac404caab90542e80143cbc63c0" compoundref="_spectra_alignator_8hpp" startline="296" endline="296">setVertice</referencedby>
+        <referencedby refid="class_simplex_1ad893ac9de899c841e0e6ada82ea611b9" compoundref="_spectra_alignator_8hpp" startline="224" endline="229">Simplex</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -87,8 +103,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="533" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="533" bodyend="533"/>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="333" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="333" bodyend="333"/>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+        <referencedby refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1ad5161ef4f875383b9880f2401cefe71a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -101,17 +118,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="536" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="536" bodyend="536"/>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="336" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="336" bodyend="336"/>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
       </memberdef>
-      <memberdef kind="function" id="class_simplex_1a033d49e8ac767b72b4c1dd6d38573988" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="class_simplex_1af3f0b93fc1290f891ce99f72bd0e7b59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
         <definition>auto Simplex::centroid</definition>
-        <argsstring>(std::vector&lt; int &gt; const &amp;sorted_vertices_indexes)</argsstring>
+        <argsstring>()</argsstring>
+        <name>centroid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="319" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="319" bodyend="319"/>
+        <references refid="class_simplex_1af3f0b93fc1290f891ce99f72bd0e7b59" compoundref="_spectra_alignator_8hpp" startline="319" endline="319">centroid</references>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <referencedby refid="class_simplex_1af3f0b93fc1290f891ce99f72bd0e7b59" compoundref="_spectra_alignator_8hpp" startline="319" endline="319">centroid</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_simplex_1a4212e98efa0b1468955d32a51387f3fc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto Simplex::centroid</definition>
+        <argsstring>(size_t const &amp;n_best)</argsstring>
         <name>centroid</name>
         <param>
-          <type>std::vector&lt; int &gt; const &amp;</type>
-          <declname>sorted_vertices_indexes</declname>
+          <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref> const &amp;</type>
+          <declname>n_best</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -119,14 +152,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="539" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="539" bodyend="549"/>
-        <references refid="class_simplex_1a0d352c2bc1248646ccaff4236538a194" compoundref="_spectra_alignator_8hpp" startline="561">m_centroid</references>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
-        <references refid="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" compoundref="_spectra_alignator_8hpp" startline="404" endline="404">Vertice::size</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="299" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="299" bodyend="318"/>
+        <references refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" compoundref="print_8hpp" startline="82" endline="87">debug</references>
+        <references refid="lib_co_8hpp_1a2052317e56aa118e7ffcdb2e398f551c" compoundref="lib_co_8hpp" startline="221" endline="221">double_cast</references>
+        <references refid="class_simplex_1a0d352c2bc1248646ccaff4236538a194" compoundref="_spectra_alignator_8hpp" startline="349">m_centroid</references>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+        <references refid="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" compoundref="_spectra_alignator_8hpp" startline="127" endline="127">Vertice::size</references>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="156" endline="156">throw_error</references>
+        <referencedby refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</referencedby>
       </memberdef>
-      <memberdef kind="function" id="class_simplex_1a67925da27ed5cdd6b9ea6b002102d02b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>auto const  &amp;</type>
-        <definition>auto const&amp; Simplex::dim</definition>
+      <memberdef kind="function" id="class_simplex_1afbcd974270009d3cec5f3253ae852cbc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Simplex::dim</definition>
         <argsstring>()</argsstring>
         <name>dim</name>
         <briefdescription>
@@ -135,8 +173,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="555" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="555" bodyend="555"/>
-        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="559">m_dim</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="343" column="9" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="343" bodyend="343"/>
+        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="348">m_dim</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1aed93fc950fa50599b289d5ac9e3356c7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -149,9 +187,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="554" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="554" bodyend="554"/>
-        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="559">m_dim</references>
-        <referencedby refid="class_simplex_1ad893ac9de899c841e0e6ada82ea611b9" compoundref="_spectra_alignator_8hpp" startline="477" endline="482">Simplex</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="342" column="15" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="342" bodyend="342"/>
+        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="348">m_dim</references>
+        <referencedby refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</referencedby>
+        <referencedby refid="class_simplex_1ad893ac9de899c841e0e6ada82ea611b9" compoundref="_spectra_alignator_8hpp" startline="224" endline="229">Simplex</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1a43aa87c378225a78bf764a3c049ed381" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -164,8 +203,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="534" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="534" bodyend="534"/>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="334" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="334" bodyend="334"/>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+        <referencedby refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1ae3a1f652ec439b823610f75846ae8067" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -178,8 +218,41 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="537" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="537" bodyend="537"/>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="337" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="337" bodyend="337"/>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+      </memberdef>
+      <memberdef kind="function" id="class_simplex_1a3840674dbc694d4796b28c088da4c02e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Simplex::evaluate</definition>
+        <argsstring>(std::function&lt; double(const Vertice &amp;)&gt; objective_function)</argsstring>
+        <name>evaluate</name>
+        <param>
+          <type>std::function&lt; double(const <ref refid="class_vertice" kindref="compound">Vertice</ref> &amp;)&gt;</type>
+          <declname>objective_function</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="321" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="321" bodyend="324"/>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+        <referencedby refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_simplex_1a0ceff7d3432670abaddf74f5b223e62d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto const  &amp;</type>
+        <definition>auto const&amp; Simplex::getCentroid</definition>
+        <argsstring>() const</argsstring>
+        <name>getCentroid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="326" column="15" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="326" bodyend="326"/>
+        <references refid="class_simplex_1a0d352c2bc1248646ccaff4236538a194" compoundref="_spectra_alignator_8hpp" startline="349">m_centroid</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1a18363c969c478336afe053dc246495ce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="class_simplex" kindref="compound">Simplex</ref> &amp;</type>
@@ -196,11 +269,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="518" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="518" bodyend="525"/>
-        <references refid="class_simplex_1a0d352c2bc1248646ccaff4236538a194" compoundref="_spectra_alignator_8hpp" startline="561">m_centroid</references>
-        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="559">m_dim</references>
-        <references refid="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" compoundref="_spectra_alignator_8hpp" startline="560">m_size</references>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="279" column="11" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="279" bodyend="286"/>
+        <references refid="class_simplex_1a0d352c2bc1248646ccaff4236538a194" compoundref="_spectra_alignator_8hpp" startline="349">m_centroid</references>
+        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="348">m_dim</references>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="class_simplex" kindref="compound">Simplex</ref> &amp;</type>
@@ -217,11 +290,31 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="509" column="11" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="509" bodyend="516"/>
-        <references refid="class_simplex_1a0d352c2bc1248646ccaff4236538a194" compoundref="_spectra_alignator_8hpp" startline="561">m_centroid</references>
-        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="559">m_dim</references>
-        <references refid="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" compoundref="_spectra_alignator_8hpp" startline="560">m_size</references>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="270" column="11" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="270" bodyend="277"/>
+        <references refid="class_simplex_1a0d352c2bc1248646ccaff4236538a194" compoundref="_spectra_alignator_8hpp" startline="349">m_centroid</references>
+        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="348">m_dim</references>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+      </memberdef>
+      <memberdef kind="function" id="class_simplex_1ac1a2bb63bb9b56da8457ecefe34e23e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="class_simplex" kindref="compound">Simplex</ref> &amp;</type>
+        <definition>Simplex&amp; Simplex::operator=</definition>
+        <argsstring>(Vertices const &amp;vertices)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="_spectra_alignator_8hpp_1afafb4a66ac57eb9c69b1fe6488851c4e" kindref="member">Vertices</ref> const &amp;</type>
+          <declname>vertices</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="288" column="11" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="288" bodyend="294"/>
+        <references refid="class_simplex_1aed12d66219db915526fc70cc33c83505" compoundref="_spectra_alignator_8hpp" startline="348">m_dim</references>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1a0bbdd7fe5cc1296b7c1da9232d78d182" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto &amp;</type>
@@ -238,8 +331,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="530" column="9" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="530" bodyend="530"/>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="330" column="9" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="330" bodyend="330"/>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1a08239a3a6b994da2a445a7ea44c7b893" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -256,8 +349,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="531" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="531" bodyend="531"/>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="331" column="15" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="331" bodyend="331"/>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1aa4f7721e6989b27489d84cca5de99c07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -278,9 +371,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="528" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="528" bodyend="528"/>
-        <references refid="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" compoundref="_spectra_alignator_8hpp" startline="560">m_size</references>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="297" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="297" bodyend="297"/>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="266" endline="266">size_cast</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1ade818ac404caab90542e80143cbc63c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -301,9 +395,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="527" column="8" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="527" bodyend="527"/>
-        <references refid="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" compoundref="_spectra_alignator_8hpp" startline="560">m_size</references>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="296" column="8" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="296" bodyend="296"/>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+        <references refid="lib_co_8hpp_1a237f678c718382f74a68364c0fc1779a" compoundref="lib_co_8hpp" startline="266" endline="266">size_cast</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1a169c2796d3adf036611cdcf6772e46d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -320,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="501" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="501" bodyend="507"/>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="262" column="3" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="262" bodyend="268"/>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1a2ff37bbc43bc7c86703f204c3510baa8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -337,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="493" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="493" bodyend="499"/>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="254" column="3" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="254" bodyend="260"/>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1ad893ac9de899c841e0e6ada82ea611b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -354,10 +449,33 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="477" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="477" bodyend="482"/>
-        <references refid="class_simplex_1aed93fc950fa50599b289d5ac9e3356c7" compoundref="_spectra_alignator_8hpp" startline="554" endline="554">dim</references>
-        <references refid="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" compoundref="_spectra_alignator_8hpp" startline="560">m_size</references>
-        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="558">m_vertices</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="224" column="3" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="224" bodyend="229"/>
+        <references refid="class_simplex_1aed93fc950fa50599b289d5ac9e3356c7" compoundref="_spectra_alignator_8hpp" startline="342" endline="342">dim</references>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+      </memberdef>
+      <memberdef kind="function" id="class_simplex_1ac74b813d1b4b98e97d1c98157997d294" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>Simplex::Simplex</definition>
+        <argsstring>(Vertice const &amp;vertice)</argsstring>
+        <name>Simplex</name>
+        <param>
+          <type><ref refid="class_vertice" kindref="compound">Vertice</ref> const &amp;</type>
+          <declname>vertice</declname>
+        </param>
+        <briefdescription>
+<para>Construct a simplex based on a vertice. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The simplex is built based on the dimension of the given vertex, which is then duplicated </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="236" column="3" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="236" bodyend="243"/>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <references refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" compoundref="_spectra_alignator_8hpp" startline="346">m_vertices</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_vertice_1a93b6febeec367c7c2211eb1e34dcfce4" compoundref="_spectra_alignator_8hpp" startline="127" endline="127">Vertice::size</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1abd6e34ab7ace7cf33b13fa0dab907a2a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -374,12 +492,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="484" column="3" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="484" bodyend="491"/>
-        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="234" endline="234">throw_error</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="245" column="3" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="245" bodyend="252"/>
+        <references refid="lib_co_8hpp_1a6df2dcd4b1f61c75dc292942bc5ca74d" compoundref="lib_co_8hpp" startline="156" endline="156">throw_error</references>
       </memberdef>
-      <memberdef kind="function" id="class_simplex_1a321c481eed3e0f60defabaa88f4cba69" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>auto const  &amp;</type>
-        <definition>auto const&amp; Simplex::size</definition>
+      <memberdef kind="function" id="class_simplex_1ab3328d220b10f9978d86a61a0f9c53c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; Simplex::size</definition>
         <argsstring>()</argsstring>
         <name>size</name>
         <briefdescription>
@@ -388,8 +506,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="552" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="552" bodyend="552"/>
-        <references refid="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" compoundref="_spectra_alignator_8hpp" startline="560">m_size</references>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="340" column="9" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="340" bodyend="340"/>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
       </memberdef>
       <memberdef kind="function" id="class_simplex_1ae39ce6d0a47986ceabb9a76146a8225b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -402,9 +520,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/SpectraAlignator.hpp" line="551" column="15" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="551" bodyend="551"/>
-        <references refid="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" compoundref="_spectra_alignator_8hpp" startline="560">m_size</references>
-        <referencedby refid="_spectra_alignator_8hpp_1a2b92434fd8aaf67b841513f9b83eaaa8" compoundref="_spectra_alignator_8hpp" startline="564" endline="569">operator&lt;&lt;</referencedby>
+        <location file="lib/Analyse/SpectraAlignator.hpp" line="339" column="15" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="339" bodyend="339"/>
+        <references refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" compoundref="_spectra_alignator_8hpp" startline="347">m_size</references>
+        <referencedby refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</referencedby>
+        <referencedby refid="_spectra_alignator_8hpp_1a2b92434fd8aaf67b841513f9b83eaaa8" compoundref="_spectra_alignator_8hpp" startline="353" endline="358">operator&lt;&lt;</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -424,31 +543,37 @@
         <link refid="class_vertice"/>
       </node>
     </collaborationgraph>
-    <location file="lib/Classes/SpectraAlignator.hpp" line="474" column="1" bodyfile="lib/Classes/SpectraAlignator.hpp" bodystart="475" bodyend="562"/>
+    <location file="lib/Analyse/SpectraAlignator.hpp" line="221" column="1" bodyfile="lib/Analyse/SpectraAlignator.hpp" bodystart="222" bodyend="351"/>
     <listofallmembers>
       <member refid="class_simplex_1af9f387b740699fc83d561b06a5e8305a" prot="public" virt="non-virtual"><scope>Simplex</scope><name>begin</name></member>
       <member refid="class_simplex_1ad5161ef4f875383b9880f2401cefe71a" prot="public" virt="non-virtual"><scope>Simplex</scope><name>begin</name></member>
-      <member refid="class_simplex_1a033d49e8ac767b72b4c1dd6d38573988" prot="public" virt="non-virtual"><scope>Simplex</scope><name>centroid</name></member>
+      <member refid="class_simplex_1a4212e98efa0b1468955d32a51387f3fc" prot="public" virt="non-virtual"><scope>Simplex</scope><name>centroid</name></member>
+      <member refid="class_simplex_1af3f0b93fc1290f891ce99f72bd0e7b59" prot="public" virt="non-virtual"><scope>Simplex</scope><name>centroid</name></member>
       <member refid="class_simplex_1aed93fc950fa50599b289d5ac9e3356c7" prot="public" virt="non-virtual"><scope>Simplex</scope><name>dim</name></member>
-      <member refid="class_simplex_1a67925da27ed5cdd6b9ea6b002102d02b" prot="public" virt="non-virtual"><scope>Simplex</scope><name>dim</name></member>
+      <member refid="class_simplex_1afbcd974270009d3cec5f3253ae852cbc" prot="public" virt="non-virtual"><scope>Simplex</scope><name>dim</name></member>
       <member refid="class_simplex_1a43aa87c378225a78bf764a3c049ed381" prot="public" virt="non-virtual"><scope>Simplex</scope><name>end</name></member>
       <member refid="class_simplex_1ae3a1f652ec439b823610f75846ae8067" prot="public" virt="non-virtual"><scope>Simplex</scope><name>end</name></member>
+      <member refid="class_simplex_1a3840674dbc694d4796b28c088da4c02e" prot="public" virt="non-virtual"><scope>Simplex</scope><name>evaluate</name></member>
+      <member refid="class_simplex_1a0ceff7d3432670abaddf74f5b223e62d" prot="public" virt="non-virtual"><scope>Simplex</scope><name>getCentroid</name></member>
+      <member refid="class_simplex_1acee756ff5f517c95c30b3dc7e99ea7d7" prot="private" virt="non-virtual"><scope>Simplex</scope><name>m_angles</name></member>
       <member refid="class_simplex_1a0d352c2bc1248646ccaff4236538a194" prot="private" virt="non-virtual"><scope>Simplex</scope><name>m_centroid</name></member>
       <member refid="class_simplex_1aed12d66219db915526fc70cc33c83505" prot="private" virt="non-virtual"><scope>Simplex</scope><name>m_dim</name></member>
-      <member refid="class_simplex_1a3e8657a83fb94712f3d5c61a88801e89" prot="private" virt="non-virtual"><scope>Simplex</scope><name>m_size</name></member>
+      <member refid="class_simplex_1a78b6b0c0442a52c96872d063b999cc8f" prot="private" virt="non-virtual"><scope>Simplex</scope><name>m_size</name></member>
       <member refid="class_simplex_1a8e0cd4b76bda7c66a299e4f7c8ea1bc3" prot="private" virt="non-virtual"><scope>Simplex</scope><name>m_vertices</name></member>
       <member refid="class_simplex_1a622f6bed00b73eb0b931cf65ee77d055" prot="public" virt="non-virtual"><scope>Simplex</scope><name>operator=</name></member>
       <member refid="class_simplex_1a18363c969c478336afe053dc246495ce" prot="public" virt="non-virtual"><scope>Simplex</scope><name>operator=</name></member>
+      <member refid="class_simplex_1ac1a2bb63bb9b56da8457ecefe34e23e8" prot="public" virt="non-virtual"><scope>Simplex</scope><name>operator=</name></member>
       <member refid="class_simplex_1a0bbdd7fe5cc1296b7c1da9232d78d182" prot="public" virt="non-virtual"><scope>Simplex</scope><name>operator[]</name></member>
       <member refid="class_simplex_1a08239a3a6b994da2a445a7ea44c7b893" prot="public" virt="non-virtual"><scope>Simplex</scope><name>operator[]</name></member>
       <member refid="class_simplex_1ade818ac404caab90542e80143cbc63c0" prot="public" virt="non-virtual"><scope>Simplex</scope><name>setVertice</name></member>
       <member refid="class_simplex_1aa4f7721e6989b27489d84cca5de99c07" prot="public" virt="non-virtual"><scope>Simplex</scope><name>setVertice</name></member>
       <member refid="class_simplex_1ad893ac9de899c841e0e6ada82ea611b9" prot="public" virt="non-virtual"><scope>Simplex</scope><name>Simplex</name></member>
+      <member refid="class_simplex_1ac74b813d1b4b98e97d1c98157997d294" prot="public" virt="non-virtual"><scope>Simplex</scope><name>Simplex</name></member>
       <member refid="class_simplex_1abd6e34ab7ace7cf33b13fa0dab907a2a" prot="public" virt="non-virtual"><scope>Simplex</scope><name>Simplex</name></member>
       <member refid="class_simplex_1a2ff37bbc43bc7c86703f204c3510baa8" prot="public" virt="non-virtual"><scope>Simplex</scope><name>Simplex</name></member>
       <member refid="class_simplex_1a169c2796d3adf036611cdcf6772e46d1" prot="public" virt="non-virtual"><scope>Simplex</scope><name>Simplex</name></member>
       <member refid="class_simplex_1ae39ce6d0a47986ceabb9a76146a8225b" prot="public" virt="non-virtual"><scope>Simplex</scope><name>size</name></member>
-      <member refid="class_simplex_1a321c481eed3e0f60defabaa88f4cba69" prot="public" virt="non-virtual"><scope>Simplex</scope><name>size</name></member>
+      <member refid="class_simplex_1ab3328d220b10f9978d86a61a0f9c53c7" prot="public" virt="non-virtual"><scope>Simplex</scope><name>size</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

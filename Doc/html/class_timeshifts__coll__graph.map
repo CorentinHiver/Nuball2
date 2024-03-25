@@ -1,8 +1,8 @@
 <map id="Timeshifts" name="Timeshifts">
-<area shape="rect" id="node1" title=" " alt="" coords="233,303,324,329"/>
+<area shape="rect" id="node1" title="Calculates the time difference between all detectors and a reference detector." alt="" coords="212,361,303,388"/>
 <area shape="rect" id="node2" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="15,95,65,121"/>
 <area shape="rect" id="node4" href="$class_files_manager.html" title=" " alt="" coords="116,184,225,211"/>
 <area shape="rect" id="node3" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="5,5,75,32"/>
 <area shape="rect" id="node5" href="$class_m_t_t_hist.html" title=" " alt="" coords="250,184,390,211"/>
-<area shape="rect" id="node6" href="$class_m_t_t_hist.html" title=" " alt="" coords="414,184,554,211"/>
+<area shape="rect" id="node6" href="$class_m_t_t_hist.html" title=" " alt="" coords="434,184,574,211"/>
 </map>

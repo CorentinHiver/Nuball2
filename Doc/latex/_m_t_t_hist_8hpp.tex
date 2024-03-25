@@ -2,14 +2,16 @@
 \label{_m_t_t_hist_8hpp}\index{lib/MTObjects/MTTHist.hpp@{lib/MTObjects/MTTHist.hpp}}
 {\ttfamily \#include \char`\"{}MTObject.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}MTCounter.\+hpp\char`\"{}}\newline
-Include dependency graph for MTTHist.\+hpp\+:\nopagebreak
+Include dependency graph for MTTHist.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{_m_t_t_hist_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -19,16 +21,32 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \textbf{ MTTHist$<$ THist $>$\+::\+Copy\+Error}
+\item 
 class \textbf{ MTTHist$<$ THist $>$}
 \begin{DoxyCompactList}\small\item\em Multithreading wrapper for all THist spectra of root library. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
+{\footnotesize template$<$class THist $>$ }\\using \textbf{ Map\+\_\+\+MTTHist} = std\+::unordered\+\_\+map$<$ int, \textbf{ MTTHist}$<$ THist $>$ $>$
+\item 
 {\footnotesize template$<$class THist $>$ }\\using \textbf{ Vector\+\_\+\+MTTHist} = std\+::vector$<$ \textbf{ MTTHist}$<$ THist $>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class THist $>$ }\\std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&out, \textbf{ MTTHist}$<$ THist $>$ const \&histo)
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Typedef Documentation}
+\mbox{\label{_m_t_t_hist_8hpp_a7831795ec71145ff20cd8444c58f24af}} 
+\index{MTTHist.hpp@{MTTHist.hpp}!Map\_MTTHist@{Map\_MTTHist}}
+\index{Map\_MTTHist@{Map\_MTTHist}!MTTHist.hpp@{MTTHist.hpp}}
+\doxysubsubsection{Map\_MTTHist}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+using \textbf{ Map\+\_\+\+MTTHist} =  std\+::unordered\+\_\+map$<$int, \textbf{ MTTHist}$<$THist$>$ $>$}
+
 \mbox{\label{_m_t_t_hist_8hpp_ab7cfdf0e608b8024114dc2729684173e}} 
 \index{MTTHist.hpp@{MTTHist.hpp}!Vector\_MTTHist@{Vector\_MTTHist}}
 \index{Vector\_MTTHist@{Vector\_MTTHist}!MTTHist.hpp@{MTTHist.hpp}}
@@ -36,3 +54,21 @@ class \textbf{ MTTHist$<$ THist $>$}
 {\footnotesize\ttfamily template$<$class THist $>$ \\
 using \textbf{ Vector\+\_\+\+MTTHist} =  std\+::vector$<$\textbf{ MTTHist}$<$THist$>$ $>$}
 
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{_m_t_t_hist_8hpp_a0dd7e86329ae164eaad633c614352e41}} 
+\index{MTTHist.hpp@{MTTHist.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!MTTHist.hpp@{MTTHist.hpp}}
+\doxysubsubsection{operator$<$$<$()}
+{\footnotesize\ttfamily template$<$class THist $>$ \\
+std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\textbf{ MTTHist}$<$ THist $>$ const \&}]{histo }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{_m_t_t_hist_8hpp_a0dd7e86329ae164eaad633c614352e41_cgraph}
+\end{center}
+\end{figure}

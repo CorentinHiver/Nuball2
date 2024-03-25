@@ -6,11 +6,13 @@
     <innerdir refid="dir_87ff476ccb6f299a9759bbe8af9ee70b">lib/Classes</innerdir>
     <innerdir refid="dir_1676326358ffef63bd5695c4f3c09907">lib/Modules</innerdir>
     <innerdir refid="dir_36293d75d3861a2cc4b09260fc47a5c1">lib/MTObjects</innerdir>
+    <innerfile refid="errors_8hpp">errors.hpp</innerfile>
     <innerfile refid="files__functions_8hpp">files_functions.hpp</innerfile>
     <innerfile refid="lib_co_8hpp">libCo.hpp</innerfile>
     <innerfile refid="lib_root_8hpp">libRoot.hpp</innerfile>
     <innerfile refid="print_8hpp">print.hpp</innerfile>
-    <innerfile refid="random_8hpp">random.hpp</innerfile>
+    <innerfile refid="random_co_8hpp">randomCo.hpp</innerfile>
+    <innerfile refid="sources_8hpp">sources.hpp</innerfile>
     <innerfile refid="string__functions_8hpp">string_functions.hpp</innerfile>
     <innerfile refid="vector__functions_8hpp">vector_functions.hpp</innerfile>
     <briefdescription>

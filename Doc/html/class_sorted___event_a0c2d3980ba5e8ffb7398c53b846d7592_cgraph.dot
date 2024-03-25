@@ -1,12 +1,12 @@
-digraph "Sorted_Event::Initialize"
+digraph "Sorted_Event::Initialise"
 {
  // LATEX_PDF_SIZE
   edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
   node [fontname="Helvetica",fontsize="10",shape=record];
   rankdir="LR";
-  Node1 [label="Sorted_Event::Initialize",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 [label="Sorted_Event::Initialise",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Clovers::Initialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_clovers.html#accefdb9345b426ca37ff2d61dfee3487",tooltip=" "];
+  Node2 [label="Clovers::Initialise",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_clovers.html#accefdb9345b426ca37ff2d61dfee3487",tooltip=" "];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="Clovers::is_clover",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_clovers.html#a9c28e72706c325a4fe3b0aab61c0bfe0",tooltip=" "];
   Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];

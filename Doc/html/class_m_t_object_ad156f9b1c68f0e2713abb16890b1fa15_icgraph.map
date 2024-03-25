@@ -1,6 +1,7 @@
 <map id="MTObject::getThreadsNumber" name="MTObject::getThreadsNumber">
-<area shape="rect" id="node1" title=" " alt="" coords="413,31,631,57"/>
-<area shape="rect" id="node2" href="$class_timeshifts.html#a0753528955e94c43043cd7d68193f960" title=" " alt="" coords="211,31,365,57"/>
-<area shape="rect" id="node3" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,5,163,32"/>
-<area shape="rect" id="node4" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,56,151,83"/>
+<area shape="rect" id="node1" title=" " alt="" coords="423,56,640,83"/>
+<area shape="rect" id="node2" href="$class_timeshifts.html#a95e126cc70243c24a016af24652ecb0b" title=" " alt="" coords="220,56,375,83"/>
+<area shape="rect" id="node3" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="10,5,167,32"/>
+<area shape="rect" id="node4" href="$class_timeshifts.html#ae47e90a384a5dd891bdc5eed10450971" title="Call the Timeshifts::load() method to load the timeshifts from a .dT file." alt="" coords="5,56,172,83"/>
+<area shape="rect" id="node5" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="21,107,156,133"/>
 </map>

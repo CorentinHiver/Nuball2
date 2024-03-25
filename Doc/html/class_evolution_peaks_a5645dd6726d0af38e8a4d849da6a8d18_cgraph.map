@@ -1,0 +1,31 @@
+<map id="EvolutionPeaks::run" name="EvolutionPeaks::run">
+<area shape="rect" id="node1" title=" " alt="" coords="5,436,156,463"/>
+<area shape="rect" id="node2" href="$class_file.html#adcc058679f1c4e1b9561aa7043720ade" title=" " alt="" coords="275,5,359,32"/>
+<area shape="rect" id="node3" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="828,107,931,133"/>
+<area shape="rect" id="node5" href="$print_8hpp.html#a553a9a331cc4556c2d9bb3aaa8533528" title="Print in red." alt="" coords="291,309,344,336"/>
+<area shape="rect" id="node6" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="529,360,581,387"/>
+<area shape="rect" id="node7" href="$class_path.html#aecd02f464b364bc26631bcb65e44843b" title=" " alt="" coords="269,411,366,437"/>
+<area shape="rect" id="node8" href="$class_file.html#a53118ce36851cb1c6845a82f915fd8ba" title=" " alt="" coords="271,461,363,488"/>
+<area shape="rect" id="node12" href="$string__functions_8hpp.html#a87d8e2cb69021ab11e443cb140349eb6" title="Returns true if the string has at least one occurence of substr." alt="" coords="288,512,347,539"/>
+<area shape="rect" id="node13" href="$class_data_file.html#affed9dbc6759035d5e3b087b466b3413" title=" " alt="" coords="250,563,385,589"/>
+<area shape="rect" id="node14" href="$print_8hpp.html#a141d6b4b0d8c1824f6ed472b5226eab4" title="Print in grey." alt="" coords="268,360,367,387"/>
+<area shape="rect" id="node15" href="$string__functions_8hpp.html#a39fc5beacd18fe3d9446687fdf163416" title="Returns the string to the right of the last occurence of sep in the string." alt="" coords="282,613,353,640"/>
+<area shape="rect" id="node16" href="$class_calibration.html#a91d512d3bcbc3a3439a7902326965b48" title="Get the order of the calibration (0 : linear, 1 : affine, 2 : quadratic, 3 : 3rd order)" alt="" coords="250,664,385,691"/>
+<area shape="rect" id="node17" href="$namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da" title="Remove the background in the given histo." alt="" coords="204,208,431,235"/>
+<area shape="rect" id="node21" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="681,157,779,184"/>
+<area shape="rect" id="node27" href="$files__functions_8hpp.html#a658fd83a6ed34994ff0742273a3cc358" title=" " alt="" coords="249,715,385,741"/>
+<area shape="rect" id="node28" href="$class_files_manager.html#ac64c81b01eeebd3ea9cde0f7f6da995e" title=" " alt="" coords="246,765,389,792"/>
+<area shape="rect" id="node29" href="$lib_co_8hpp.html#ab2f8f9033c2742c4f5ac6d3cce6caf9a" title="Casts a number into unsigned short (ushort)" alt="" coords="269,816,366,843"/>
+<area shape="rect" id="node4" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="979,107,1085,133"/>
+<area shape="rect" id="node9" href="$files__functions_8hpp.html#a6d165da5cc41e5429a9c03c6a6c68d96" title=" " alt="" coords="511,461,599,488"/>
+<area shape="rect" id="node10" href="$files__functions_8hpp.html#ab1e262f27aaad28944f29cd2bbde417f" title=" " alt="" coords="695,436,765,463"/>
+<area shape="rect" id="node11" href="$files__functions_8hpp.html#ad3a78346393c83676348f6bad34b8ce2" title=" " alt="" coords="680,487,780,513"/>
+<area shape="rect" id="node18" href="$namespace_co_analyse.html#a53744e2ddfba6a4a188ada9ed1bc6272" title="Project the whole matrix on the X axis. This fills proj." alt="" coords="479,259,632,285"/>
+<area shape="rect" id="node22" href="$namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project matrix on Y axis at a given X bin. This fills proj." alt="" coords="479,309,631,336"/>
+<area shape="rect" id="node25" href="$namespace_co_analyse.html#ad13b7eeaa3d7d9a30cdf04a8b0d17088" title="Set Y histogram proj in matrix at binX." alt="" coords="491,157,619,184"/>
+<area shape="rect" id="node26" href="$namespace_co_analyse.html#ac1aa3fcfcc46318e4f0d6f42510471a0" title="Set X histogram proj in matrix at binY." alt="" coords="492,208,619,235"/>
+<area shape="rect" id="node19" href="$lib_root_8hpp.html#a0269226b4d78b1089ef77180712147e0" title=" " alt="" coords="687,208,773,235"/>
+<area shape="rect" id="node20" href="$lib_root_8hpp.html#ab23c9fed2f973bde045e7d90c8e1f2fe" title=" " alt="" coords="689,259,771,285"/>
+<area shape="rect" id="node23" href="$lib_root_8hpp.html#ada9d5d265d78076b2e7fb980a09c71b0" title=" " alt="" coords="688,309,772,336"/>
+<area shape="rect" id="node24" href="$lib_root_8hpp.html#a6ce1f9927b8e99f76cbda975fb51adcf" title=" " alt="" coords="690,360,770,387"/>
+</map>

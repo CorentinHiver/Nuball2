@@ -1,4 +1,4 @@
-.TH "lib/print.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/print.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -6,67 +6,223 @@ lib/print.hpp
 .SH SYNOPSIS
 .br
 .PP
+\fC#include <iostream>\fP
+.br
+\fC#include <iomanip>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <map>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fB_GLIBCXX_USE_CXX11_ABI\fP   0/1"
+.br
+.ti -1c
+.RI "#define \fBBLACK\fP   '\\u001b[30m'"
+.br
+.ti -1c
+.RI "#define \fBBLUE\fP   '\\u001b[34m'"
+.br
+.ti -1c
+.RI "#define \fBBRIGHTBLACK\fP   '\\u001b[30;1m'"
+.br
+.ti -1c
+.RI "#define \fBBRIGHTBLUE\fP   '\\u001b[34;1m'"
+.br
+.ti -1c
+.RI "#define \fBBRIGHTCYAN\fP   '\\u001b[36;1m'"
+.br
+.ti -1c
+.RI "#define \fBBRIGHTGREEN\fP   '\\u001b[32;1m'"
+.br
+.ti -1c
+.RI "#define \fBBRIGHTMAGENTA\fP   '\\u001b[35;1m'"
+.br
+.ti -1c
+.RI "#define \fBBRIGHTRED\fP   '\\u001b[31;1m'"
+.br
+.ti -1c
+.RI "#define \fBBRIGHTWHITE\fP   '\\u001b[37;1m'"
+.br
+.ti -1c
+.RI "#define \fBBRIGHTYELLOW\fP   '\\u001b[33;1m'"
+.br
+.ti -1c
+.RI "#define \fBCYAN\fP   '\\u001b[36m'"
+.br
+.ti -1c
+.RI "#define \fBGREEN\fP   '\\u001b[32m'"
+.br
+.ti -1c
+.RI "#define \fBGREY\fP   '\\u001b[38;5;8m'"
+.br
+.ti -1c
+.RI "#define \fBMAGENTA\fP   '\\u001b[35m'"
+.br
+.ti -1c
+.RI "#define \fBRED\fP   '\\u001b[31m'"
+.br
+.ti -1c
+.RI "#define \fBRESET\fP   '\\u001b[0m'"
+.br
+.ti -1c
+.RI "#define \fBWHITE\fP   '\\u001b[37m'"
+.br
+.ti -1c
+.RI "#define \fBYELLOW\fP   '\\u001b[33m'"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
 .RI "template<class\&.\&.\&. ARGS> void \fBdebug\fP (ARGS &&\&.\&.\&. args)"
 .br
+.RI "Requires #define DEBUG or -DDEBUG in the compile line\&. "
 .ti -1c
-.RI "template<class E , size_t size> std::ostream & \fBoperator<<\fP (std::ostream &cout, std::array< E, size > const &a)"
+.RI "template<class\&.\&.\&. T> void \fBerror\fP (T const &\&.\&.\&. t)"
 .br
+.RI "Print in red\&. "
 .ti -1c
-.RI "template<class K , class V > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::map< K, V > const &m)"
+.RI "template<class\&.\&.\&. T> void \fBinformation\fP (T const &\&.\&.\&. t)"
 .br
+.RI "Print in grey\&. "
 .ti -1c
-.RI "template<class F , class S > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::pair< F, S > const &p)"
+.RI "void \fBprint\fP ()"
 .br
-.ti -1c
-.RI "template<class E > std::ostream & \fBoperator<<\fP (std::ostream &cout, std::vector< E > const &v)"
-.br
-.ti -1c
-.RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, unsigned char const &uc)"
-.br
-.ti -1c
-.RI "template<class T > void \fBprint\fP ()"
-.br
-.ti -1c
-.RI "template<class\&.\&.\&. T> void \fBprint\fP (T const &\&.\&.\&. t)"
-.br
+.RI "New line\&. "
 .ti -1c
 .RI "template<class T > void \fBprint\fP (T const &t)"
 .br
+.RI "Generic print\&. "
 .ti -1c
 .RI "template<class T , class\&.\&.\&. T2> void \fBprint\fP (T const &t, T2 const &\&.\&.\&. t2)"
 .br
+.RI "Generic print\&. "
 .ti -1c
 .RI "void \fBprint_precision\fP (int n=6)"
 .br
+.RI "Set the floating point precision displayed\&. "
+.ti -1c
+.RI "template<class T > void \fBprintC\fP (T const &t)"
+.br
+.RI "Generic print concatenated\&. "
+.ti -1c
+.RI "template<class T , class\&.\&.\&. T2> void \fBprintC\fP (T const &t, T2 const &\&.\&.\&. t2)"
+.br
+.RI "Generic print concatenated\&. "
+.ti -1c
+.RI "template<class T > void \fBprintln\fP (T const &t)"
+.br
+.RI "Generic print in one line\&. "
+.ti -1c
+.RI "template<class T , class\&.\&.\&. T2> void \fBprintln\fP (T const &t, T2 const &\&.\&.\&. t2)"
+.br
+.RI "Generic print in one line\&. "
+.ti -1c
+.RI "template<class T > std::string \fBtype_of\fP (T const &t)"
+.br
+.ti -1c
+.RI "template<class\&.\&.\&. T> void \fBwarning\fP (T const &\&.\&.\&. t)"
+.br
+.RI "Print in bright black\&. "
 .in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define _GLIBCXX_USE_CXX11_ABI   0/1"
+
+.SS "#define BLACK   '\\u001b[30m'"
+
+.SS "#define BLUE   '\\u001b[34m'"
+
+.SS "#define BRIGHTBLACK   '\\u001b[30;1m'"
+
+.SS "#define BRIGHTBLUE   '\\u001b[34;1m'"
+
+.SS "#define BRIGHTCYAN   '\\u001b[36;1m'"
+
+.SS "#define BRIGHTGREEN   '\\u001b[32;1m'"
+
+.SS "#define BRIGHTMAGENTA   '\\u001b[35;1m'"
+
+.SS "#define BRIGHTRED   '\\u001b[31;1m'"
+
+.SS "#define BRIGHTWHITE   '\\u001b[37;1m'"
+
+.SS "#define BRIGHTYELLOW   '\\u001b[33;1m'"
+
+.SS "#define CYAN   '\\u001b[36m'"
+
+.SS "#define GREEN   '\\u001b[32m'"
+
+.SS "#define GREY   '\\u001b[38;5;8m'"
+
+.SS "#define MAGENTA   '\\u001b[35m'"
+
+.SS "#define RED   '\\u001b[31m'"
+
+.SS "#define RESET   '\\u001b[0m'"
+
+.SS "#define WHITE   '\\u001b[37m'"
+
+.SS "#define YELLOW   '\\u001b[33m'"
+
 .SH "Function Documentation"
 .PP 
 .SS "template<class\&.\&.\&. ARGS> void debug (ARGS &&\&.\&.\&. args)"
 
-.SS "template<class E , size_t size> std::ostream& operator<< (std::ostream & cout, std::array< E, size > const & a)"
+.PP
+Requires #define DEBUG or -DDEBUG in the compile line\&. 
+.SS "template<class\&.\&.\&. T> void error (T const &\&.\&.\&. t)"
 
-.SS "template<class K , class V > std::ostream& operator<< (std::ostream & cout, std::map< K, V > const & m)"
+.PP
+Print in red\&. 
+.SS "template<class\&.\&.\&. T> void information (T const &\&.\&.\&. t)"
 
-.SS "template<class F , class S > std::ostream& operator<< (std::ostream & cout, std::pair< F, S > const & p)"
+.PP
+Print in grey\&. 
+.SS "void print ()"
 
-.SS "template<class E > std::ostream& operator<< (std::ostream & cout, std::vector< E > const & v)"
-
-.SS "std::ostream& operator<< (std::ostream & cout, unsigned char const & uc)"
-
-.SS "template<class T > void print ()"
-
-.SS "template<class\&.\&.\&. T> void print (T const &\&.\&.\&. t)"
-
+.PP
+New line\&. 
 .SS "template<class T > void print (T const & t)"
 
+.PP
+Generic print\&. Automatically adds space between each input\&. Terminate the output with a '\\\\n' 
 .SS "template<class T , class\&.\&.\&. T2> void print (T const & t, T2 const &\&.\&.\&. t2)"
 
+.PP
+Generic print\&. Automatically adds space between each input\&. Terminate the output with a '\\\\n' 
 .SS "void print_precision (int n = \fC6\fP)"
 
+.PP
+Set the floating point precision displayed\&. 
+.SS "template<class T > void printC (T const & t)"
+
+.PP
+Generic print concatenated\&. Concatenate the ouput, i\&.e\&. do not add space between each input\&. Terminate the output with a '\\\\n' 
+.SS "template<class T , class\&.\&.\&. T2> void printC (T const & t, T2 const &\&.\&.\&. t2)"
+
+.PP
+Generic print concatenated\&. Concatenate the ouput, i\&.e\&. do not add space between each input\&. Terminate the output with a '\\\\n' 
+.SS "template<class T > void println (T const & t)"
+
+.PP
+Generic print in one line\&. Concatenate the ouput, i\&.e\&. do not add space between each input\&. Do not terminate the output with a '\\\\n' 
+.SS "template<class T , class\&.\&.\&. T2> void println (T const & t, T2 const &\&.\&.\&. t2)"
+
+.PP
+Generic print in one line\&. Concatenate the ouput, i\&.e\&. do not add space between each input\&. Do not terminate the output with a '\\\\n' 
+.SS "template<class T > std::string type_of (T const & t)"
+
+.SS "template<class\&.\&.\&. T> void warning (T const &\&.\&.\&. t)"
+
+.PP
+Print in bright black\&. 
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for Nuball2 from the source code\&.

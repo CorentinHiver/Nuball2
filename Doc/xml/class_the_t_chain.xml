@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="354" column="13" bodyfile="lib/libRoot.hpp" bodystart="354" bodyend="-1"/>
+        <location file="lib/libRoot.hpp" line="497" column="13" bodyfile="lib/libRoot.hpp" bodystart="497" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_the_t_chain_1acdd69c2f1eddd7ff0b8a122336307f00" prot="private" static="no" mutable="no">
         <type>std::vector&lt; TFile * &gt;</type>
@@ -29,8 +29,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="358" column="15" bodyfile="lib/libRoot.hpp" bodystart="358" bodyend="-1"/>
-        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="344" endline="348">newTTree</referencedby>
+        <location file="lib/libRoot.hpp" line="501" column="15" bodyfile="lib/libRoot.hpp" bodystart="501" bodyend="-1"/>
+        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="487" endline="491">newTTree</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_the_t_chain_1adca1e51c2ca4f6d761db269375a4abdf" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="351" column="15" bodyfile="lib/libRoot.hpp" bodystart="351" bodyend="-1"/>
+        <location file="lib/libRoot.hpp" line="494" column="15" bodyfile="lib/libRoot.hpp" bodystart="494" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_the_t_chain_1a2b60d00d493c326b7ef6fe9bd7d75395" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -56,8 +56,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="350" column="15" bodyfile="lib/libRoot.hpp" bodystart="350" bodyend="-1"/>
-        <referencedby refid="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" compoundref="lib_root_8hpp" startline="318" endline="321">Add</referencedby>
+        <location file="lib/libRoot.hpp" line="493" column="15" bodyfile="lib/libRoot.hpp" bodystart="493" bodyend="-1"/>
+        <referencedby refid="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" compoundref="lib_root_8hpp" startline="461" endline="464">Add</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_the_t_chain_1a3e18b727fcdca6044244e2bff67cd704" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -71,8 +71,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="340" column="15" bodyfile="lib/libRoot.hpp" bodystart="340" bodyend="-1"/>
-        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="344" endline="348">newTTree</referencedby>
+        <location file="lib/libRoot.hpp" line="483" column="15" bodyfile="lib/libRoot.hpp" bodystart="483" bodyend="-1"/>
+        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="487" endline="491">newTTree</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_the_t_chain_1a86ebdcbf215c3096476090e80d09dbc0" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="341" column="15" bodyfile="lib/libRoot.hpp" bodystart="341" bodyend="-1"/>
+        <location file="lib/libRoot.hpp" line="484" column="15" bodyfile="lib/libRoot.hpp" bodystart="484" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_the_t_chain_1a8038a5652ad04d3daaf506f3d0807639" prot="private" static="no" mutable="no">
         <type>ULong64_t</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="355" column="13" bodyfile="lib/libRoot.hpp" bodystart="355" bodyend="-1"/>
+        <location file="lib/libRoot.hpp" line="498" column="13" bodyfile="lib/libRoot.hpp" bodystart="498" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_the_t_chain_1a819ab9dc6c19972b4bd385f771a2e4ba" prot="private" static="no" mutable="no">
         <type>UInt_t</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="353" column="13" bodyfile="lib/libRoot.hpp" bodystart="353" bodyend="-1"/>
+        <location file="lib/libRoot.hpp" line="496" column="13" bodyfile="lib/libRoot.hpp" bodystart="496" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" prot="private" static="no" mutable="no">
         <type>std::vector&lt; TTree * &gt;</type>
@@ -127,12 +127,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="357" column="15" bodyfile="lib/libRoot.hpp" bodystart="357" bodyend="-1"/>
-        <referencedby refid="class_the_t_chain_1ae1f6295d54f2ce619bdf5e1555cb5243" compoundref="lib_root_8hpp" startline="336" endline="336">begin</referencedby>
-        <referencedby refid="class_the_t_chain_1a950b7bd4cd253b85bc1108ceb573bfd1" compoundref="lib_root_8hpp" startline="337" endline="337">end</referencedby>
-        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="344" endline="348">newTTree</referencedby>
-        <referencedby refid="class_the_t_chain_1a62880bea2d28ba4963a0784845b5bd66" compoundref="lib_root_8hpp" startline="334" endline="334">operator[]</referencedby>
-        <referencedby refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="324" endline="324">SetBranchAddress</referencedby>
+        <location file="lib/libRoot.hpp" line="500" column="15" bodyfile="lib/libRoot.hpp" bodystart="500" bodyend="-1"/>
+        <referencedby refid="class_the_t_chain_1ae1f6295d54f2ce619bdf5e1555cb5243" compoundref="lib_root_8hpp" startline="479" endline="479">begin</referencedby>
+        <referencedby refid="class_the_t_chain_1a950b7bd4cd253b85bc1108ceb573bfd1" compoundref="lib_root_8hpp" startline="480" endline="480">end</referencedby>
+        <referencedby refid="class_the_t_chain_1aaa019deecc3a6a2fb214862e479e53a4" compoundref="lib_root_8hpp" startline="487" endline="491">newTTree</referencedby>
+        <referencedby refid="class_the_t_chain_1a62880bea2d28ba4963a0784845b5bd66" compoundref="lib_root_8hpp" startline="477" endline="477">operator[]</referencedby>
+        <referencedby refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="467" endline="467">SetBranchAddress</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -151,9 +151,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="318" column="8" bodyfile="lib/libRoot.hpp" bodystart="318" bodyend="321"/>
-        <references refid="class_the_t_chain_1a2b60d00d493c326b7ef6fe9bd7d75395" compoundref="lib_root_8hpp" startline="350">m_input_files_expressions</references>
-        <referencedby refid="class_the_t_chain_1abca9ad5e5cd894098e39660de91a3b36" compoundref="lib_root_8hpp" startline="312" endline="315">TheTChain</referencedby>
+        <location file="lib/libRoot.hpp" line="461" column="8" bodyfile="lib/libRoot.hpp" bodystart="461" bodyend="464"/>
+        <references refid="class_the_t_chain_1a2b60d00d493c326b7ef6fe9bd7d75395" compoundref="lib_root_8hpp" startline="493">m_input_files_expressions</references>
+        <referencedby refid="class_the_t_chain_1abca9ad5e5cd894098e39660de91a3b36" compoundref="lib_root_8hpp" startline="455" endline="458">TheTChain</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_the_t_chain_1ae1f6295d54f2ce619bdf5e1555cb5243" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -166,8 +166,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="336" column="8" bodyfile="lib/libRoot.hpp" bodystart="336" bodyend="336"/>
-        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+        <location file="lib/libRoot.hpp" line="479" column="8" bodyfile="lib/libRoot.hpp" bodystart="479" bodyend="479"/>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="500">m_trees</references>
       </memberdef>
       <memberdef kind="function" id="class_the_t_chain_1a950b7bd4cd253b85bc1108ceb573bfd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -180,8 +180,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="337" column="8" bodyfile="lib/libRoot.hpp" bodystart="337" bodyend="337"/>
-        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+        <location file="lib/libRoot.hpp" line="480" column="8" bodyfile="lib/libRoot.hpp" bodystart="480" bodyend="480"/>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="500">m_trees</references>
       </memberdef>
       <memberdef kind="function" id="class_the_t_chain_1a62880bea2d28ba4963a0784845b5bd66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>TTree *</type>
@@ -198,8 +198,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="334" column="9" bodyfile="lib/libRoot.hpp" bodystart="334" bodyend="334"/>
-        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+        <location file="lib/libRoot.hpp" line="477" column="9" bodyfile="lib/libRoot.hpp" bodystart="477" bodyend="477"/>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="500">m_trees</references>
       </memberdef>
       <memberdef kind="function" id="class_the_t_chain_1a5e7c32ab56c040e9fac734db6eb7d6e6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="332" column="8" bodyfile="lib/libRoot.hpp" bodystart="332" bodyend="332"/>
+        <location file="lib/libRoot.hpp" line="475" column="8" bodyfile="lib/libRoot.hpp" bodystart="475" bodyend="475"/>
       </memberdef>
       <memberdef kind="function" id="class_the_t_chain_1a0858c536e02a0459fd2e101936fe923f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="331" column="8" bodyfile="lib/libRoot.hpp" bodystart="361" bodyend="374"/>
+        <location file="lib/libRoot.hpp" line="474" column="8" bodyfile="lib/libRoot.hpp" bodystart="504" bodyend="517"/>
       </memberdef>
       <memberdef kind="function" id="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -249,10 +249,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="324" column="8" bodyfile="lib/libRoot.hpp" bodystart="324" bodyend="324"/>
-        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
-        <references refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="324" endline="324">SetBranchAddress</references>
-        <referencedby refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="324" endline="324">SetBranchAddress</referencedby>
+        <location file="lib/libRoot.hpp" line="467" column="8" bodyfile="lib/libRoot.hpp" bodystart="467" bodyend="467"/>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="500">m_trees</references>
+        <references refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="467" endline="467">SetBranchAddress</references>
+        <referencedby refid="class_the_t_chain_1a342da75a59ca99b7f56cc76cece2b580" compoundref="lib_root_8hpp" startline="467" endline="467">SetBranchAddress</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_the_t_chain_1abca9ad5e5cd894098e39660de91a3b36" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -279,8 +279,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="312" column="3" bodyfile="lib/libRoot.hpp" bodystart="312" bodyend="315"/>
-        <references refid="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" compoundref="lib_root_8hpp" startline="318" endline="321">Add</references>
+        <location file="lib/libRoot.hpp" line="455" column="3" bodyfile="lib/libRoot.hpp" bodystart="455" bodyend="458"/>
+        <references refid="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" compoundref="lib_root_8hpp" startline="461" endline="464">Add</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -299,10 +299,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="344" column="8" bodyfile="lib/libRoot.hpp" bodystart="344" bodyend="348"/>
-        <references refid="class_the_t_chain_1acdd69c2f1eddd7ff0b8a122336307f00" compoundref="lib_root_8hpp" startline="358">m_files</references>
-        <references refid="class_the_t_chain_1a3e18b727fcdca6044244e2bff67cd704" compoundref="lib_root_8hpp" startline="340">m_name</references>
-        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="357">m_trees</references>
+        <location file="lib/libRoot.hpp" line="487" column="8" bodyfile="lib/libRoot.hpp" bodystart="487" bodyend="491"/>
+        <references refid="class_the_t_chain_1acdd69c2f1eddd7ff0b8a122336307f00" compoundref="lib_root_8hpp" startline="501">m_files</references>
+        <references refid="class_the_t_chain_1a3e18b727fcdca6044244e2bff67cd704" compoundref="lib_root_8hpp" startline="483">m_name</references>
+        <references refid="class_the_t_chain_1a353e40160c351c0049ae964dfd813847" compoundref="lib_root_8hpp" startline="500">m_trees</references>
       </memberdef>
       <memberdef kind="function" id="class_the_t_chain_1a0eaf5f8f574cfea07a4e2d1edac3e563" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -319,18 +319,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/libRoot.hpp" line="343" column="8"/>
+        <location file="lib/libRoot.hpp" line="486" column="8"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Not functionnal yet. </para>
     </briefdescription>
     <detaileddescription>
+<para><xrefsect id="todo_1_todo000013"><xreftitle>Todo</xreftitle><xrefdescription><para>maybe</para>
+</xrefdescription></xrefsect></para>
 <para>1: Add all the files <ref refid="class_the_t_chain" kindref="compound">TheTChain</ref> chain(&quot;Nuball&quot;, &quot;/path/to/data/files*.root&quot;); chain.Add(&quot;/other_path/to/data/files*.root&quot;)</para>
 <para>2: Setup the chain : chain.set();</para>
 <para>3: Links all the variables chain.SetBranchAddress(&quot;branch&quot;, &amp;variable); </para>
     </detaileddescription>
-    <location file="lib/libRoot.hpp" line="309" column="1" bodyfile="lib/libRoot.hpp" bodystart="310" bodyend="359"/>
+    <location file="lib/libRoot.hpp" line="452" column="1" bodyfile="lib/libRoot.hpp" bodystart="453" bodyend="502"/>
     <listofallmembers>
       <member refid="class_the_t_chain_1add0a45b5b2328af8a75ebce7bde98f0c" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>Add</name></member>
       <member refid="class_the_t_chain_1ae1f6295d54f2ce619bdf5e1555cb5243" prot="public" virt="non-virtual"><scope>TheTChain</scope><name>begin</name></member>

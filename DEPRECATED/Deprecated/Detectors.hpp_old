@@ -22,7 +22,7 @@
 //  * @brief Allows one to get the type of a detector from its label
 //  * @details
 //  * You can use this class for two purposes : 
-//  *  First you can use its Initialize() method to initialize the above arrays
+//  *  First you can use its Initialise() method to Initialise the above arrays
 //  *  Second you can use the type() method to get a string containing the type of detector associated to the label
 // */
 // class Detectors
@@ -39,10 +39,10 @@
 //     else if (isEden  [label]) return "EDEN";
 //     else                      return "null";
 //   }
-//   static void Initialize();
+//   static void Initialise();
 // };
 
-// void Detectors::Initialize()
+// void Detectors::Initialise()
 // {
 //   isRF[251] = true;
 //   for (int label = 0; label<1000; label++)

@@ -119,7 +119,7 @@ void Faster2Root::convert(ushort const & nb_threads = 2)
   print("_________");
   if (m_runpath=="") {print("Nothing to convert"); return;}
   m_timer.Restart();
-  if (!m_ok) {print("Faster2Root module not correctly initialized !"); return;}
+  if (!m_ok) {print("Faster2Root module not correctly Initialised !"); return;}
 
   m_files.addFolder(m_runpath);
 
@@ -131,7 +131,7 @@ void Faster2Root::convert(ushort const & nb_threads = 2)
 
   m_size_data = m_files.diskSize();
 
-  if (nb_threads>1 && !MTObject::ON) MTObject::Initialize(nb_threads);
+  if (nb_threads>1 && !MTObject::ON) MTObject::Initialise(nb_threads);
 
   if (MTObject::ON)
   {

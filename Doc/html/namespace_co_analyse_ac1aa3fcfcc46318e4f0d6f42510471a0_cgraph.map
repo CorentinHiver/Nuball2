@@ -1,4 +1,6 @@
 <map id="CoAnalyse::setY" name="CoAnalyse::setY">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,132,32"/>
+<area shape="rect" id="node1" title="Set X histogram proj in matrix at binY." alt="" coords="5,5,132,32"/>
 <area shape="rect" id="node2" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="180,5,277,32"/>
+<area shape="rect" id="node3" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="325,5,428,32"/>
+<area shape="rect" id="node4" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="476,5,583,32"/>
 </map>

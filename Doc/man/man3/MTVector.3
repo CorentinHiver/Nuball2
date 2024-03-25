@@ -1,4 +1,4 @@
-.TH "MTVector< T >" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "MTVector< T >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -22,6 +22,9 @@ MTVector< T >
 .br
 .ti -1c
 .RI "std::vector< T > const  & \fBget\fP () const"
+.br
+.ti -1c
+.RI "auto & \fBgetIndex\fP ()"
 .br
 .ti -1c
 .RI "bool \fBgetNext\fP (T &t)"
@@ -97,6 +100,8 @@ MTVector< T >
 .SS "template<class T > auto \fBMTVector\fP< T >::end ()\fC [inline]\fP"
 
 .SS "template<class T > std::vector<T> const& \fBMTVector\fP< T >::get () const\fC [inline]\fP"
+
+.SS "template<class T > auto& \fBMTVector\fP< T >::getIndex ()\fC [inline]\fP"
 
 .SS "template<class T > bool \fBMTVector\fP< T >::getNext (T & t)\fC [inline]\fP"
 

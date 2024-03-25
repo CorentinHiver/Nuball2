@@ -1,0 +1,4 @@
+<map id="DataFile::setColumns" name="DataFile::setColumns">
+<area shape="rect" id="node1" title="A vector containing the list of the column index to read. By default, reads only the first lines." alt="" coords="5,5,167,32"/>
+<area shape="rect" id="node2" href="$lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="215,5,288,32"/>
+</map>

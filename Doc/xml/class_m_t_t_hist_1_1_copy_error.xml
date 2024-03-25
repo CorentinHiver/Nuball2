@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_m_t_t_hist_1_1_copy_error" kind="class" language="C++" prot="public">
+    <compoundname>MTTHist::CopyError</compoundname>
+    <includes refid="_m_t_t_hist_8hpp" local="no">MTTHist.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_m_t_t_hist_1_1_copy_error_1ac090398113f53a468f9c63a8bbf4fa51" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MTTHist&lt; THist &gt;::CopyError::CopyError</definition>
+        <argsstring>(MTTHist&lt; THist &gt; const &amp;histo)</argsstring>
+        <name>CopyError</name>
+        <param>
+          <type><ref refid="class_m_t_t_hist" kindref="compound">MTTHist</ref>&lt; THist &gt; const &amp;</type>
+          <declname>histo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTTHist.hpp" line="355" column="5" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="355" bodyend="358"/>
+        <references refid="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" compoundref="print_8hpp" startline="176" endline="181">error</references>
+        <references refid="class_m_t_t_hist_1a7f6ebd619dc5ffb63c9abf591e743e54" compoundref="_m_t_t_hist_8hpp" startline="259" endline="259">MTTHist&lt; THist &gt;::name</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/MTObjects/MTTHist.hpp" line="353" column="3" bodyfile="lib/MTObjects/MTTHist.hpp" bodystart="354" bodyend="359"/>
+    <listofallmembers>
+      <member refid="class_m_t_t_hist_1_1_copy_error_1ac090398113f53a468f9c63a8bbf4fa51" prot="public" virt="non-virtual"><scope>MTTHist::CopyError</scope><name>CopyError</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

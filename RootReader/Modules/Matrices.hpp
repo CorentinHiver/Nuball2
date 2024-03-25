@@ -13,7 +13,7 @@ public:
   Matrices(){};
   bool launch(Parameters & p);
   bool setParameters(std::vector<std::string> const & param);
-  void InitializeManip();
+  void InitialiseManip();
   static void run(Parameters & p, Matrices & matrices);
   void FillRaw(Event const & event);
   void FillSorted(Sorted_Event const & event_s, Event const & event);
@@ -79,7 +79,7 @@ private:
 bool Matrices::launch(Parameters & p)
 {
   if (!this -> setParameters(p.getParameters(param_string))) return false;
-  this -> InitializeManip();
+  this -> InitialiseManip();
   print("Starting !");
   MTObject::parallelise_function(run, p, *this);
   this -> Analyse();
@@ -125,10 +125,10 @@ void Matrices::run(Parameters & p, Matrices & matrices)
   } // End files loop
 }
 
-void Matrices::InitializeManip()
+void Matrices::InitialiseManip()
 {
   // m_Clovers.resize(MTObject::getThreadsNb());
-  print("Initialize histograms");
+  print("Initialise histograms");
   m_R3A1_BGO_VS_all_Clover.reset("R3A1_BGO1_VS_Clover", "R3A1 BGO1 VS Clover",
       m_bins_Ge,m_min_Ge,m_max_Ge, m_bins_BGO,m_min_BGO,m_max_BGO);
   m_Clean_R3A1_BGO_VS_all_Clean_Clover.reset("Clean_R3A1_BGO1_VS_Clean_Clover", "Clean R3A1 BGO1 VS Clean Clover",

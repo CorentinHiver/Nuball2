@@ -1,8 +1,8 @@
-.TH "lib/Modules/Calibration.hpp" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "lib/Classes/Calibration.hpp" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-lib/Modules/Calibration.hpp
+lib/Classes/Calibration.hpp
 .SH SYNOPSIS
 .br
 .PP
@@ -12,16 +12,6 @@ lib/Modules/Calibration.hpp
 .br
 \fC#include '\&.\&./Classes/Detectors\&.hpp'\fP
 .br
-\fC#include '\&.\&./Classes/Event\&.hpp'\fP
-.br
-\fC#include '\&.\&./Classes/FilesManager\&.hpp'\fP
-.br
-\fC#include '\&.\&./MTObjects/MTFasterReader\&.hpp'\fP
-.br
-\fC#include '\&.\&./MTObjects/MTRootReader\&.hpp'\fP
-.br
-\fC#include '\&.\&./MTObjects/MTTHist\&.hpp'\fP
-.br
 
 .SS "Classes"
 
@@ -29,46 +19,22 @@ lib/Modules/Calibration.hpp
 .ti -1c
 .RI "class \fBCalibration\fP"
 .br
-.ti -1c
-.RI "class \fBFit\fP"
-.br
-.RI "Allows one to manipulate the results of peaks\&. "
-.ti -1c
-.RI "struct \fBCalibration::histograms\fP"
-.br
-.in -1c
-.SS "Typedefs"
-
-.in +1c
-.ti -1c
-.RI "using \fBFits\fP = std::vector< \fBFit\fP >"
-.br
+.RI "A convenient class for handling coefficient calibration up to 3rd order\&. "
 .in -1c
 .SS "Functions"
 
 .in +1c
 .ti -1c
-.RI "bool \fBisTripleAlpha\fP (std::string const &source_name)"
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &out, \fBCalibration\fP const &calib)"
 .br
-.ti -1c
-.RI "std::ofstream & \fBoperator<<\fP (std::ofstream &fout, \fBFit\fP const &fit)"
-.br
-.ti -1c
-.RI "std::ostream & \fBoperator<<\fP (std::ostream &cout, \fBCalibration\fP const &calib)"
-.br
+.RI "Displays the calibration coefficients\&. "
 .in -1c
-.SH "Typedef Documentation"
-.PP 
-.SS "using \fBFits\fP =  std::vector <\fBFit\fP>"
-
 .SH "Function Documentation"
 .PP 
-.SS "bool isTripleAlpha (std::string const & source_name)"
+.SS "std::ostream& operator<< (std::ostream & out, \fBCalibration\fP const & calib)"
 
-.SS "std::ofstream& operator<< (std::ofstream & fout, \fBFit\fP const & fit)"
-
-.SS "std::ostream& operator<< (std::ostream & cout, \fBCalibration\fP const & calib)"
-
+.PP
+Displays the calibration coefficients\&. 
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for Nuball2 from the source code\&.

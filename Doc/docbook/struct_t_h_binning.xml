@@ -17,7 +17,7 @@
 </listitem>
             <listitem><para><link linkend="_struct_t_h_binning_1a070c302a8ec5fa92f63de2937c780776">THBinning</link> (double _bins, double _min, double _max)</para>
 </listitem>
-            <listitem><para><link linkend="_struct_t_h_binning_1ac350ebb59b8d2e9cfa6434bba51c5a53">THBinning</link> (std::initializer_list&lt; double &gt; initList)</para>
+            <listitem><para><link linkend="_struct_t_h_binning_1ae7ab113929fe481e5bd28a58afae21a6">THBinning</link> (std::Initialiser_list&lt; double &gt; initList)</para>
 </listitem>
         </itemizedlist>
 </simplesect>
@@ -43,11 +43,11 @@
     <title>THBinning()<computeroutput>[1/3]</computeroutput></title>
 <indexterm><primary>THBinning</primary><secondary>THBinning</secondary></indexterm>
 <indexterm><primary>THBinning</primary><secondary>THBinning</secondary></indexterm>
-<para><computeroutput>THBinning::THBinning ( )<computeroutput>[default]</computeroutput></computeroutput></para>    </section><anchor xml:id="_struct_t_h_binning_1ac350ebb59b8d2e9cfa6434bba51c5a53"/>    <section>
+<para><computeroutput>THBinning::THBinning ( )<computeroutput>[default]</computeroutput></computeroutput></para>    </section><anchor xml:id="_struct_t_h_binning_1ae7ab113929fe481e5bd28a58afae21a6"/>    <section>
     <title>THBinning()<computeroutput>[2/3]</computeroutput></title>
 <indexterm><primary>THBinning</primary><secondary>THBinning</secondary></indexterm>
 <indexterm><primary>THBinning</primary><secondary>THBinning</secondary></indexterm>
-<para><computeroutput>THBinning::THBinning (std::initializer_list&lt; double &gt; initList)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_struct_t_h_binning_1a070c302a8ec5fa92f63de2937c780776"/>    <section>
+<para><computeroutput>THBinning::THBinning (std::Initialiser_list&lt; double &gt; initList)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_struct_t_h_binning_1a070c302a8ec5fa92f63de2937c780776"/>    <section>
     <title>THBinning()<computeroutput>[3/3]</computeroutput></title>
 <indexterm><primary>THBinning</primary><secondary>THBinning</secondary></indexterm>
 <indexterm><primary>THBinning</primary><secondary>THBinning</secondary></indexterm>

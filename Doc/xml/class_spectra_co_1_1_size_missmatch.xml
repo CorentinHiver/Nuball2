@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="class_spectra_co_1_1_size_missmatch" kind="class" language="C++" prot="public">
+    <compoundname>SpectraCo::SizeMissmatch</compoundname>
+    <includes refid="_spectra_co_8hpp" local="no">SpectraCo.hpp</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_spectra_co_1_1_size_missmatch_1a94aae14f6932f29e357f42fd0132827f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>SpectraCo::SizeMissmatch::SizeMissmatch</definition>
+        <argsstring>()=default</argsstring>
+        <name>SizeMissmatch</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraCo.hpp" line="391" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="class_spectra_co_1_1_size_missmatch_1a42beba683555e28da7b2436ccfeb55e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SpectraCo::SizeMissmatch::SizeMissmatch</definition>
+        <argsstring>(std::string const &amp;message)</argsstring>
+        <name>SizeMissmatch</name>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/Analyse/SpectraCo.hpp" line="392" column="5" bodyfile="lib/Analyse/SpectraCo.hpp" bodystart="392" bodyend="392"/>
+        <references refid="print_8hpp_1ad9e2dd512a5915af4751a40fefbfbc94" compoundref="print_8hpp" startline="167" endline="172">warning</references>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="lib/Analyse/SpectraCo.hpp" line="388" column="3" bodyfile="lib/Analyse/SpectraCo.hpp" bodystart="389" bodyend="393"/>
+    <listofallmembers>
+      <member refid="class_spectra_co_1_1_size_missmatch_1a94aae14f6932f29e357f42fd0132827f" prot="public" virt="non-virtual"><scope>SpectraCo::SizeMissmatch</scope><name>SizeMissmatch</name></member>
+      <member refid="class_spectra_co_1_1_size_missmatch_1a42beba683555e28da7b2436ccfeb55e5" prot="public" virt="non-virtual"><scope>SpectraCo::SizeMissmatch</scope><name>SizeMissmatch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -316,7 +316,7 @@ void Analysator::write()
 
 void reader(int number_files = -1)
 {
-  MTObject::Initialize(nb_threads);
+  MTObject::Initialise(nb_threads);
   Analysator analysator(number_files);
 }
 

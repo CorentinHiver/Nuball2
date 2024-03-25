@@ -1,0 +1,385 @@
+.TH "DataFile< Index, T >" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+DataFile< Index, T > \- NOT FUNCTIONNAL !!! This is a homemade \&.data reader\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <DataFile\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcheckOutputfile\fP (std::ofstream &outputfile)"
+.br
+.ti -1c
+.RI "\fBDataPoints\fP \fBcolumn\fP ()"
+.br
+.RI "Returns the given column\&. "
+.ti -1c
+.RI "template<class COL > \fBDataPoints\fP \fBcolumn\fP (COL &&columns)"
+.br
+.RI "Returns the given column\&. "
+.ti -1c
+.RI "auto & \fBdata\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBdata\fP () const"
+.br
+.ti -1c
+.RI "\fBDataFile\fP ()=default"
+.br
+.ti -1c
+.RI "\fBDataFile\fP (std::string const &filename, bool const &has_header=true)"
+.br
+.ti -1c
+.RI "auto const  & \fBindexes\fP () const"
+.br
+.ti -1c
+.RI "void \fBload\fP (std::string const &filename, bool const &has_header=true)"
+.br
+.ti -1c
+.RI "\fBoperator bool\fP () const"
+.br
+.ti -1c
+.RI "T & \fBoperator[]\fP (T t)"
+.br
+.ti -1c
+.RI "T const  & \fBoperator[]\fP (T t) const"
+.br
+.ti -1c
+.RI "template<class T2 > void \fBreadColumn\fP (std::map< Index, T2 > &map)"
+.br
+.ti -1c
+.RI "template<class T2 , class COL > void \fBreadColumn\fP (std::map< Index, T2 > &map, COL &&\fBcolumn\fP)"
+.br
+.ti -1c
+.RI "template<class T2 > void \fBreadColumn\fP (std::vector< T2 > &vector)"
+.br
+.ti -1c
+.RI "template<class T2 , class COL > void \fBreadColumn\fP (std::vector< T2 > &vector, COL &&\fBcolumn\fP)"
+.br
+.ti -1c
+.RI "void \fBsetColumn\fP (int const &choice)"
+.br
+.RI "Setup the reading to the wanted column\&. "
+.ti -1c
+.RI "void \fBsetColumn\fP (std::string const &\fBcolumn\fP)"
+.br
+.RI "Setup the reading to the wanted column\&. "
+.ti -1c
+.RI "void \fBsetColumns\fP (std::vector< int > columns)"
+.br
+.RI "A vector containing the list of the column index to read\&. By default, reads only the first lines\&. "
+.ti -1c
+.RI "void \fBsetHeader\fP (\fBDataLine\fP const &header)"
+.br
+.ti -1c
+.RI "auto & \fBsize\fP ()"
+.br
+.ti -1c
+.RI "auto const  & \fBsize\fP () const"
+.br
+.ti -1c
+.RI "bool \fBvectorize\fP ()"
+.br
+.ti -1c
+.RI "void \fBwrite\fP (std::string const &filename)"
+.br
+.ti -1c
+.RI "void \fBwriteData\fP (std::ofstream &outputfile)"
+.br
+.ti -1c
+.RI "void \fBwriteHeader\fP (std::ofstream &outputfile)"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcheckInputfile\fP (std::ifstream &inputfile)"
+.br
+.ti -1c
+.RI "void \fBloadData\fP (std::ifstream &inputfile)"
+.br
+.ti -1c
+.RI "void \fBloadHeader\fP (std::ifstream &inputfile)"
+.br
+.ti -1c
+.RI "void \fBsetupContainers\fP ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "bool \fBm_all_column_name_casted\fP = false"
+.br
+.ti -1c
+.RI "int \fBm_chosen_column\fP = 0"
+.br
+.ti -1c
+.RI "\fBBools\fP \fBm_column_name_casted\fP"
+.br
+.ti -1c
+.RI "std::vector< int > \fBm_columns_to_read\fP = {1}"
+.br
+.ti -1c
+.RI "std::map< Index, \fBDataPoints\fP > \fBm_data\fP"
+.br
+.ti -1c
+.RI "\fBDataPoints\fP \fBm_data_points\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBDataPoints\fP > \fBm_data_vector\fP"
+.br
+.ti -1c
+.RI "char \fBm_delim\fP = ' '"
+.br
+.ti -1c
+.RI "bool \fBm_has_header\fP = true"
+.br
+.ti -1c
+.RI "\fBDataLine\fP \fBm_header\fP"
+.br
+.ti -1c
+.RI "\fBIndexes\fP \fBm_indexes\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_input_filename\fP"
+.br
+.ti -1c
+.RI "int \fBm_label_index\fP = 0"
+.br
+.ti -1c
+.RI "\fBStrings\fP \fBm_labels_column\fP"
+.br
+.ti -1c
+.RI "\fBDataLine\fP \fBm_labels_rows\fP"
+.br
+.ti -1c
+.RI "int \fBm_nb_columns\fP = 1"
+.br
+.ti -1c
+.RI "bool \fBm_ok\fP = true"
+.br
+.ti -1c
+.RI "std::string \fBm_output_filename\fP"
+.br
+.ti -1c
+.RI "std::string \fBm_reader\fP"
+.br
+.ti -1c
+.RI "int \fBm_size\fP = 1"
+.br
+.ti -1c
+.RI "bool \fBm_warning_is_error\fP = true"
+.br
+.in -1c
+.SS "Private Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBDataPoints\fP = std::vector< T >"
+.br
+.ti -1c
+.RI "using \fBIndexes\fP = std::vector< Index >"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class Index, class T>
+.br
+class DataFile< Index, T >"
+NOT FUNCTIONNAL !!! This is a homemade \&.data reader\&. 
+
+This is a quite strict format :
+.PP
+index value1 value2 value3 // The header is one line only, holding the name of each column 10001 235321 2365 235321 // Each column is separated by the same separator \&.\&.\&. end
+.PP
+Let's look at an example first :
+.PP
+Imagine we want to store the temperature in two different rooms\&. The index line will hold the time\&. The first column holds the values of the first room and same for the second column\&. Here is how it would look like :
+.PP
+minutes room1 room2 0 22\&.5 21\&.5 1 22\&.3 21\&.3 2 22\&.4 21\&.4 3 22\&.2 21\&.2 4 22\&.3 21\&.3 5 22\&.4 21\&.4
+.PP
+Possible optimisation :
+.PP
+You can #define UnorderedDataFile to have an unordered_map holding the data 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<class Index , class T > using \fBDataFile\fP< Index, T >::\fBDataPoints\fP =  std::vector<T>\fC [private]\fP"
+
+.SS "template<class Index , class T > using \fBDataFile\fP< Index, T >::\fBIndexes\fP =  std::vector<Index>\fC [private]\fP"
+
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<class Index , class T > \fBDataFile\fP< Index, T >::\fBDataFile\fP ()\fC [default]\fP"
+
+.SS "template<class Index , class T > \fBDataFile\fP< Index, T >::\fBDataFile\fP (std::string const & filename, bool const & has_header = \fCtrue\fP)\fC [inline]\fP"
+
+.SH "Member Function Documentation"
+.PP 
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::checkInputfile (std::ifstream & inputfile)\fC [protected]\fP"
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::checkOutputfile (std::ofstream & outputfile)\fC [inline]\fP"
+
+.SS "template<class Index , class T > \fBDataPoints\fP \fBDataFile\fP< Index, T >::column ()\fC [inline]\fP"
+
+.PP
+Returns the given column\&. 
+.PP
+\fBAttention\fP
+.RS 4
+This involves a copy of the data !! 
+.RE
+.PP
+
+.SS "template<class Index , class T > template<class COL > \fBDataPoints\fP \fBDataFile\fP< Index, T >::column (COL && columns)\fC [inline]\fP"
+
+.PP
+Returns the given column\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fICOL\fP Either std::string (name of the column), or int (the column index) 
+.RE
+.PP
+\fBAttention\fP
+.RS 4
+This involves a copy of the data !! 
+.RE
+.PP
+
+.SS "template<class Index , class T > auto& \fBDataFile\fP< Index, T >::data ()\fC [inline]\fP"
+
+.SS "template<class Index , class T > auto const& \fBDataFile\fP< Index, T >::data () const\fC [inline]\fP"
+
+.SS "template<class Index , class T > auto const& \fBDataFile\fP< Index, T >::indexes () const\fC [inline]\fP"
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::load (std::string const & filename, bool const & has_header = \fCtrue\fP)"
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::loadData (std::ifstream & inputfile)\fC [protected]\fP"
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::loadHeader (std::ifstream & inputfile)\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "template<class Index , class T > \fBDataFile\fP< Index, T >::operator bool () const\fC [inline]\fP"
+
+.SS "template<class Index , class T > T& \fBDataFile\fP< Index, T >::operator[] (T t)\fC [inline]\fP"
+
+.SS "template<class Index , class T > T const& \fBDataFile\fP< Index, T >::operator[] (T t) const\fC [inline]\fP"
+
+.SS "template<class Index , class T > template<class T2 > void \fBDataFile\fP< Index, T >::readColumn (std::map< Index, T2 > & map)\fC [inline]\fP"
+
+.SS "template<class Index , class T > template<class T2 , class COL > void \fBDataFile\fP< Index, T >::readColumn (std::map< Index, T2 > & map, COL && column)\fC [inline]\fP"
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fICOL\fP Either std::string (name of the column), or int (the column index) 
+.RE
+.PP
+
+.SS "template<class Index , class T > template<class T2 > void \fBDataFile\fP< Index, T >::readColumn (std::vector< T2 > & vector)\fC [inline]\fP"
+
+.SS "template<class Index , class T > template<class T2 , class COL > void \fBDataFile\fP< Index, T >::readColumn (std::vector< T2 > & vector, COL && column)\fC [inline]\fP"
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fICOL\fP Either std::string (name of the column), or int (the column index) 
+.RE
+.PP
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::setColumn (int const & choice)\fC [inline]\fP"
+
+.PP
+Setup the reading to the wanted column\&. 
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::setColumn (std::string const & column)\fC [inline]\fP"
+
+.PP
+Setup the reading to the wanted column\&. 
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::setColumns (std::vector< int > columns)\fC [inline]\fP"
+
+.PP
+A vector containing the list of the column index to read\&. By default, reads only the first lines\&. 
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::setHeader (\fBDataLine\fP const & header)\fC [inline]\fP"
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::setupContainers\fC [inline]\fP, \fC [protected]\fP"
+
+.SS "template<class Index , class T > auto& \fBDataFile\fP< Index, T >::size ()\fC [inline]\fP"
+
+.SS "template<class Index , class T > auto const& \fBDataFile\fP< Index, T >::size () const\fC [inline]\fP"
+
+.SS "template<class Index , class T > bool \fBDataFile\fP< Index, T >::vectorize ()\fC [inline]\fP"
+
+.PP
+\fBTodo\fP
+.RS 4
+if needed 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if the vectorisation is successfull 
+.RE
+.PP
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::write (std::string const & filename)"
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::writeData (std::ofstream & outputfile)"
+
+.SS "template<class Index , class T > void \fBDataFile\fP< Index, T >::writeHeader (std::ofstream & outputfile)"
+
+.SH "Member Data Documentation"
+.PP 
+.SS "template<class Index , class T > bool \fBDataFile\fP< Index, T >::m_all_column_name_casted = false\fC [protected]\fP"
+
+.SS "template<class Index , class T > int \fBDataFile\fP< Index, T >::m_chosen_column = 0\fC [protected]\fP"
+
+.SS "template<class Index , class T > \fBBools\fP \fBDataFile\fP< Index, T >::m_column_name_casted\fC [protected]\fP"
+
+.SS "template<class Index , class T > std::vector<int> \fBDataFile\fP< Index, T >::m_columns_to_read = {1}\fC [protected]\fP"
+
+.SS "template<class Index , class T > std::map<Index, \fBDataPoints\fP> \fBDataFile\fP< Index, T >::m_data\fC [protected]\fP"
+
+.SS "template<class Index , class T > \fBDataPoints\fP \fBDataFile\fP< Index, T >::m_data_points\fC [protected]\fP"
+
+.SS "template<class Index , class T > std::vector<\fBDataPoints\fP> \fBDataFile\fP< Index, T >::m_data_vector\fC [protected]\fP"
+
+.SS "template<class Index , class T > char \fBDataFile\fP< Index, T >::m_delim = ' '\fC [protected]\fP"
+
+.SS "template<class Index , class T > bool \fBDataFile\fP< Index, T >::m_has_header = true\fC [protected]\fP"
+
+.SS "template<class Index , class T > \fBDataLine\fP \fBDataFile\fP< Index, T >::m_header\fC [protected]\fP"
+
+.SS "template<class Index , class T > \fBIndexes\fP \fBDataFile\fP< Index, T >::m_indexes\fC [protected]\fP"
+
+.SS "template<class Index , class T > std::string \fBDataFile\fP< Index, T >::m_input_filename\fC [protected]\fP"
+
+.SS "template<class Index , class T > int \fBDataFile\fP< Index, T >::m_label_index = 0\fC [protected]\fP"
+
+.SS "template<class Index , class T > \fBStrings\fP \fBDataFile\fP< Index, T >::m_labels_column\fC [protected]\fP"
+
+.SS "template<class Index , class T > \fBDataLine\fP \fBDataFile\fP< Index, T >::m_labels_rows\fC [protected]\fP"
+
+.SS "template<class Index , class T > int \fBDataFile\fP< Index, T >::m_nb_columns = 1\fC [protected]\fP"
+
+.SS "template<class Index , class T > bool \fBDataFile\fP< Index, T >::m_ok = true\fC [protected]\fP"
+
+.SS "template<class Index , class T > std::string \fBDataFile\fP< Index, T >::m_output_filename\fC [protected]\fP"
+
+.SS "template<class Index , class T > std::string \fBDataFile\fP< Index, T >::m_reader\fC [protected]\fP"
+
+.SS "template<class Index , class T > int \fBDataFile\fP< Index, T >::m_size = 1\fC [protected]\fP"
+
+.SS "template<class Index , class T > bool \fBDataFile\fP< Index, T >::m_warning_is_error = true\fC [protected]\fP"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Nuball2 from the source code\&.

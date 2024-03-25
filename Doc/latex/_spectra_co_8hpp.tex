@@ -1,0 +1,175 @@
+\doxysection{lib/\+Analyse/\+Spectra\+Co.hpp File Reference}
+\label{_spectra_co_8hpp}\index{lib/Analyse/SpectraCo.hpp@{lib/Analyse/SpectraCo.hpp}}
+{\ttfamily \#include \char`\"{}../lib\+Root.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Recalibration.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../\+Classes/\+Calibration.\+hpp\char`\"{}}\newline
+Include dependency graph for Spectra\+Co.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_spectra_co_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_spectra_co_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \textbf{ Spectra\+Co\+::\+Histo\+Null}
+\item 
+class \textbf{ Spectra\+Co\+::\+Histo\+Zombie}
+\item 
+class \textbf{ My\+Error}
+\item 
+class \textbf{ Spectra\+Co\+::\+Size\+Missmatch}
+\item 
+class \textbf{ Spectra\+Co}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \textbf{ Spectra\+Point} = std\+::pair$<$ int, double $>$
+\item 
+using \textbf{ Spectra\+Points} = std\+::vector$<$ \textbf{ Spectra\+Point} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \textbf{ going\+Above} (std\+::vector$<$ double $>$ \&m\+\_\+spectra, int \&bin, int const \&threshold, int const \&nb\+\_\+above)
+\begin{DoxyCompactList}\small\item\em Returns the position where the histogram goes under the threshold. \end{DoxyCompactList}\item 
+bool \textbf{ going\+Below} (std\+::vector$<$ double $>$ \&m\+\_\+spectra, int \&bin, int const \&threshold, int const \&nb\+\_\+below)
+\begin{DoxyCompactList}\small\item\em Returns the position where the histogram goes under the threshold. \end{DoxyCompactList}\item 
+\textbf{ Spectra\+Point} \textbf{ maximum\+\_\+in\+\_\+range} (std\+::vector$<$ double $>$ \&m\+\_\+spectra, int bin\+\_\+min, int const \&bin\+\_\+max)
+\item 
+\textbf{ Spectra\+Point} \textbf{ minimum\+\_\+in\+\_\+range} (std\+::vector$<$ double $>$ \&m\+\_\+spectra, int bin\+\_\+min, int const \&bin\+\_\+max)
+\item 
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&out, \textbf{ Spectra\+Co} const \&spectra)
+\item 
+template$<$$>$ std\+::string \textbf{ type\+\_\+of$<$ Spectra\+Co $>$} (\textbf{ Spectra\+Co} const \&spectra)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{_spectra_co_8hpp_a43a18302ff8470bdf68a839c735e6c8e}} 
+\index{SpectraCo.hpp@{SpectraCo.hpp}!SpectraPoint@{SpectraPoint}}
+\index{SpectraPoint@{SpectraPoint}!SpectraCo.hpp@{SpectraCo.hpp}}
+\doxysubsubsection{SpectraPoint}
+{\footnotesize\ttfamily using \textbf{ Spectra\+Point} =  std\+::pair$<$int, double$>$}
+
+\mbox{\label{_spectra_co_8hpp_a3a08928d322f56dd109a6d6fdff241c7}} 
+\index{SpectraCo.hpp@{SpectraCo.hpp}!SpectraPoints@{SpectraPoints}}
+\index{SpectraPoints@{SpectraPoints}!SpectraCo.hpp@{SpectraCo.hpp}}
+\doxysubsubsection{SpectraPoints}
+{\footnotesize\ttfamily using \textbf{ Spectra\+Points} =  std\+::vector$<$\textbf{ Spectra\+Point}$>$}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{_spectra_co_8hpp_ab40ef30166a4d0b3f315e6b365bb96c6}} 
+\index{SpectraCo.hpp@{SpectraCo.hpp}!goingAbove@{goingAbove}}
+\index{goingAbove@{goingAbove}!SpectraCo.hpp@{SpectraCo.hpp}}
+\doxysubsubsection{goingAbove()}
+{\footnotesize\ttfamily bool going\+Above (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ \&}]{m\+\_\+spectra,  }\item[{int \&}]{bin,  }\item[{int const \&}]{threshold,  }\item[{int const \&}]{nb\+\_\+above }\end{DoxyParamCaption})}
+
+
+
+Returns the position where the histogram goes under the threshold. 
+
+Must start above threshold. There must be at least nb\+\_\+below points below the threshold Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{_spectra_co_8hpp_ab40ef30166a4d0b3f315e6b365bb96c6_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_spectra_co_8hpp_ab40ef30166a4d0b3f315e6b365bb96c6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_spectra_co_8hpp_a2db236fee001966b9a9a303b1096182b}} 
+\index{SpectraCo.hpp@{SpectraCo.hpp}!goingBelow@{goingBelow}}
+\index{goingBelow@{goingBelow}!SpectraCo.hpp@{SpectraCo.hpp}}
+\doxysubsubsection{goingBelow()}
+{\footnotesize\ttfamily bool going\+Below (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ \&}]{m\+\_\+spectra,  }\item[{int \&}]{bin,  }\item[{int const \&}]{threshold,  }\item[{int const \&}]{nb\+\_\+below }\end{DoxyParamCaption})}
+
+
+
+Returns the position where the histogram goes under the threshold. 
+
+Must start above threshold. There must be at least nb\+\_\+below points below the threshold Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{_spectra_co_8hpp_a2db236fee001966b9a9a303b1096182b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_spectra_co_8hpp_a2db236fee001966b9a9a303b1096182b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_spectra_co_8hpp_a83ac1a487b3da916f985b967215f76a4}} 
+\index{SpectraCo.hpp@{SpectraCo.hpp}!maximum\_in\_range@{maximum\_in\_range}}
+\index{maximum\_in\_range@{maximum\_in\_range}!SpectraCo.hpp@{SpectraCo.hpp}}
+\doxysubsubsection{maximum\_in\_range()}
+{\footnotesize\ttfamily \textbf{ Spectra\+Point} maximum\+\_\+in\+\_\+range (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ \&}]{m\+\_\+spectra,  }\item[{int}]{bin\+\_\+min,  }\item[{int const \&}]{bin\+\_\+max }\end{DoxyParamCaption})}
+
+\mbox{\label{_spectra_co_8hpp_abdc3f87ff631c70010f12fd72339b8c8}} 
+\index{SpectraCo.hpp@{SpectraCo.hpp}!minimum\_in\_range@{minimum\_in\_range}}
+\index{minimum\_in\_range@{minimum\_in\_range}!SpectraCo.hpp@{SpectraCo.hpp}}
+\doxysubsubsection{minimum\_in\_range()}
+{\footnotesize\ttfamily \textbf{ Spectra\+Point} minimum\+\_\+in\+\_\+range (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ \&}]{m\+\_\+spectra,  }\item[{int}]{bin\+\_\+min,  }\item[{int const \&}]{bin\+\_\+max }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_spectra_co_8hpp_abdc3f87ff631c70010f12fd72339b8c8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_spectra_co_8hpp_aca2246688a20da3a38fe2a0f9cd74e90}} 
+\index{SpectraCo.hpp@{SpectraCo.hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!SpectraCo.hpp@{SpectraCo.hpp}}
+\doxysubsubsection{operator$<$$<$()}
+{\footnotesize\ttfamily std\+::ostream\& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\textbf{ Spectra\+Co} const \&}]{spectra }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_spectra_co_8hpp_aca2246688a20da3a38fe2a0f9cd74e90_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{_spectra_co_8hpp_ad3085c55da700fb2917875d8efe0b377}} 
+\index{SpectraCo.hpp@{SpectraCo.hpp}!type\_of$<$ SpectraCo $>$@{type\_of$<$ SpectraCo $>$}}
+\index{type\_of$<$ SpectraCo $>$@{type\_of$<$ SpectraCo $>$}!SpectraCo.hpp@{SpectraCo.hpp}}
+\doxysubsubsection{type\_of$<$ SpectraCo $>$()}
+{\footnotesize\ttfamily template$<$$>$ \\
+std\+::string \textbf{ type\+\_\+of}$<$ \textbf{ Spectra\+Co} $>$ (\begin{DoxyParamCaption}\item[{\textbf{ Spectra\+Co} const \&}]{spectra }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{_spectra_co_8hpp_ad3085c55da700fb2917875d8efe0b377_cgraph}
+\end{center}
+\end{figure}

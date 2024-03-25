@@ -167,7 +167,7 @@ private:
 
 void CobaltCalorimeter::Initialise()
 {
-  MTObject::Initialize();
+  MTObject::Initialise();
 
   spectrum_Ge    . reset("spectrum_Ge"   , "Ge spectra;Energy [keV]"   , 4000, 0, 2000);
   spectrum_BGO   . reset("spectrum_BGO"  , "BGO spectra;Energy [keV]"  , 500 , 0, 2000);
@@ -284,7 +284,7 @@ void CobaltCalorimeter::launchRoot(std::string const & foldername, int nb_files)
   if (!detectors) throw Detectors::Error();
 
   this -> Initialise();
-  print("Histograms initialized");
+  print("Histograms Initialised");
 
   MTRootReader reader(foldername, nb_files);
   print("Launching the reader");

@@ -1,4 +1,4 @@
-<map id="CloverSpectra::Initialize" name="CloverSpectra::Initialize">
+<map id="CloverSpectra::Initialise" name="CloverSpectra::Initialise">
 <area shape="rect" id="node1" title=" " alt="" coords="265,31,443,57"/>
 <area shape="rect" id="node2" href="$class_clover_spectra.html#a83b3f64fea8bb8fb6743762ec72e2c04" title=" " alt="" coords="5,5,217,32"/>
 <area shape="rect" id="node3" href="$class_clover_spectra.html#a353ec66774413feefb33a784ce2159cf" title=" " alt="" coords="23,56,200,83"/>

@@ -61,7 +61,7 @@ void convert(Hit & hit, FasterReader & reader, Detectors const & detList, Calibr
   // Important : if the output file already exists, then do not overwrite it !
   if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
 
-  // Initialize the temporary TTree :
+  // Initialise the temporary TTree :
   std::unique_ptr<TTree> readTree (new TTree("temp","temp"));
   readTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
   readTree -> Branch("label"  , &hit.label );
@@ -103,17 +103,17 @@ if (count==0) return;
   readTree -> SetBranchAddress("nrj2"   , &hit.nrj2);
   readTree -> SetBranchAddress("pileup" , &hit.pileup);
 
-  // Initialize output TTree :
+  // Initialise output TTree :
   std::unique_ptr<TFile> outFile (TFile::Open(outfile.c_str(), "RECREATE"));
   outFile -> cd();
   TTree* outTree = new TTree("Nuball2","Nuball2");
   Event event(outTree, "ltnNp", "w");
 
-  // Initialize event builder based on RF :
+  // Initialise event builder based on RF :
   RF_Manager rf;
   EventBuilder_136 eventBuilder(&event, &rf);
 
-  // Initialize event analyser : simple modules and DSSD counter
+  // Initialise event analyser : simple modules and DSSD counter
   Counter136 counter;
 
   // Handle the first RF downscaled :
@@ -224,8 +224,8 @@ int main(int argc, char** argv)
     }
   }
 
-  // MANDATORY : initialize the multithreading !
-  MTObject::Initialize(nb_threads);
+  // MANDATORY : Initialise the multithreading !
+  MTObject::Initialise(nb_threads);
 
   // Setup the path accordingly to the machine :
   Path datapath = Path::home();

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_detectors_1_1_error" xml:lang="en-US">
+<title>Detectors::Error Class Reference</title>
+<indexterm><primary>Detectors::Error</primary></indexterm>
+<para>
+<computeroutput>#include &lt;Detectors.hpp&gt;</computeroutput>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_detectors_1_1_error_1a59974e434a9b91b0ed91c2674ad20452">Error</link> () noexcept</para>
+</listitem>
+            <listitem><para><link linkend="_class_detectors_1_1_error_1ae214a13f4991963e3beadfa56cf4ccaf">Error</link> (std::string const &amp;message) noexcept</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_detectors_1_1_error_1a59974e434a9b91b0ed91c2674ad20452"/>    <section>
+    <title>Error()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Error</primary><secondary>Detectors::Error</secondary></indexterm>
+<indexterm><primary>Detectors::Error</primary><secondary>Error</secondary></indexterm>
+<para><computeroutput>Detectors::Error::Error ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_1_1_error_a59974e434a9b91b0ed91c2674ad20452_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_detectors_1_1_error_1ae214a13f4991963e3beadfa56cf4ccaf"/>    <section>
+    <title>Error()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Error</primary><secondary>Detectors::Error</secondary></indexterm>
+<indexterm><primary>Detectors::Error</primary><secondary>Error</secondary></indexterm>
+<para><computeroutput>Detectors::Error::Error (std::string const &amp; message)<computeroutput>[inline]</computeroutput>, <computeroutput>[noexcept]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_detectors_1_1_error_ae214a13f4991963e3beadfa56cf4ccaf_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Classes/<link linkend="__detectors_8hpp">Detectors.hpp</link></section>
+</section>

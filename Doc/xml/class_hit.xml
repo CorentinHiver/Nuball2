@@ -16,28 +16,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="198" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="198" bodyend="-1"/>
-        <referencedby refid="class_calibration_1a1732880c01e21df259b4ff45dba24c59" compoundref="_calibration_8hpp" startline="982" endline="988">Calibration::calibrate</referencedby>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
-        <referencedby refid="class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a" compoundref="_calibration_8hpp" startline="527" endline="544">Calibration::fillHisto</referencedby>
-        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="146" endline="165">Faster2Histo::fillHisto</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="206" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="206" bodyend="-1"/>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_calibrator_1a87ba405f3d9af67c43789893fc5ff534" compoundref="_calibrator_8hpp" startline="401" endline="413">Calibrator::fillHisto</referencedby>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="216" endline="270">Faster2Histo::fillHisto</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="197" endline="209">Event::operator=</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="313" endline="326">Event::push_back</referencedby>
-        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="337" endline="360">Event::push_front</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1aeb58f6286af52ee8d74f4188664f6af5" compoundref="_cobalt_calorimeter_8hpp" startline="305" endline="310">CobaltCalorimeter::NaI_pid</referencedby>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="233" endline="245">Event::operator=</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_event_1a799fb8b56453824767b038389059a2a6" compoundref="_event_8hpp" startline="220" endline="230">Event::operator[]</referencedby>
+        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="362" endline="375">Event::push_back</referencedby>
+        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="386" endline="409">Event::push_front</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
         <referencedby refid="class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6" compoundref="_r_f___manager_8hpp" startline="100" endline="108">RF_Manager::setHit</referencedby>
-        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="478" endline="491">FasterReader::TreatCRRC4</referencedby>
-        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
-        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="499" endline="514">FasterReader::TreatQDC1</referencedby>
-        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="522" endline="546">FasterReader::TreatQDC2</referencedby>
-        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="554" endline="578">FasterReader::TreatQDC3</referencedby>
-        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="586" endline="599">FasterReader::TreatRF</referencedby>
-        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="455" endline="468">FasterReader::TreatTrapez</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="482" endline="495">FasterReader::TreatCRRC4</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="732" endline="771">Timeshifts::treatFasterFile</referencedby>
+        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="503" endline="518">FasterReader::TreatQDC1</referencedby>
+        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="526" endline="550">FasterReader::TreatQDC2</referencedby>
+        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="558" endline="582">FasterReader::TreatQDC3</referencedby>
+        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="590" endline="603">FasterReader::TreatRF</referencedby>
+        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="459" endline="472">FasterReader::TreatTrapez</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" prot="public" static="no" mutable="no">
         <type><ref refid="_hit_8hpp_1ab5dd24876acad09ec52c250c1668466c" kindref="member">Label</ref></type>
@@ -51,30 +52,30 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="196" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="196" bodyend="-1"/>
-        <referencedby refid="class_calibration_1a1732880c01e21df259b4ff45dba24c59" compoundref="_calibration_8hpp" startline="982" endline="988">Calibration::calibrate</referencedby>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
-        <referencedby refid="class_calibration_1ae62aaba8d0f0f77aecf89a5ad1e7605a" compoundref="_calibration_8hpp" startline="527" endline="544">Calibration::fillHisto</referencedby>
-        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="146" endline="165">Faster2Histo::fillHisto</referencedby>
-        <referencedby refid="_timeshifts_8hpp_1a202a57630e2aa9744043c30964b64bcd" compoundref="_timeshifts_8hpp" startline="612" endline="618">get_first_RF_of_file</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="204" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="204" bodyend="-1"/>
+        <referencedby refid="_cobalt_calorimeter_8hpp_1a1d20e8635afe69d2732de36128f82652" compoundref="_cobalt_calorimeter_8hpp" startline="312" endline="312">calibBGO</referencedby>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_calibrator_1a87ba405f3d9af67c43789893fc5ff534" compoundref="_calibrator_8hpp" startline="401" endline="413">Calibrator::fillHisto</referencedby>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="216" endline="270">Faster2Histo::fillHisto</referencedby>
+        <referencedby refid="_timeshifts_8hpp_1a202a57630e2aa9744043c30964b64bcd" compoundref="_timeshifts_8hpp" startline="680" endline="686">get_first_RF_of_file</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="197" endline="209">Event::operator=</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="313" endline="326">Event::push_back</referencedby>
-        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="337" endline="360">Event::push_front</referencedby>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">FasterReader::ReadData</referencedby>
-        <referencedby refid="class_data_file_reader_1a36d62f5aa4f75cbdd2bc011edbcf38bc" compoundref="_data_file_reader_8hpp" startline="323" endline="347">DataFileReader::ReadFastData</referencedby>
-        <referencedby refid="class_data_file_reader_1a1abd3ec4b3d81ec14e71bc969dea1035" compoundref="_data_file_reader_8hpp" startline="215" endline="250">DataFileReader::ReadFastGroup</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="226" endline="245">MTFasterReader::Realign</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1aeb58f6286af52ee8d74f4188664f6af5" compoundref="_cobalt_calorimeter_8hpp" startline="305" endline="310">CobaltCalorimeter::NaI_pid</referencedby>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="233" endline="245">Event::operator=</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_event_1a799fb8b56453824767b038389059a2a6" compoundref="_event_8hpp" startline="220" endline="230">Event::operator[]</referencedby>
+        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="362" endline="375">Event::push_back</referencedby>
+        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="386" endline="409">Event::push_front</referencedby>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">FasterReader::ReadData</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="234" endline="253">MTFasterReader::Realign</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
         <referencedby refid="class_clover_spectra_1a614d7deabde77b0ffea91ca2a6002484" compoundref="_clover_spectra_8hpp" startline="161" endline="207">CloverSpectra::runFasterReader</referencedby>
         <referencedby refid="class_event_builder_1aa5b10a9ec657ec5927ce34a11ca4b88e" compoundref="_event_builder_8hpp" startline="104" endline="109">EventBuilder::setFirstRF</referencedby>
         <referencedby refid="class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6" compoundref="_r_f___manager_8hpp" startline="100" endline="108">RF_Manager::setHit</referencedby>
-        <referencedby refid="class_data_file_reader_1af7fc75a8dd63587c9ad7d45546194a0d" compoundref="_data_file_reader_8hpp" startline="252" endline="304">DataFileReader::switch_alias</referencedby>
-        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="732" endline="771">Timeshifts::treatFasterFile</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a760c56b79865a37984edc07165a7bc73" compoundref="_cobalt_calorimeter_8hpp" startline="332" endline="660">CobaltCalorimeter::work</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1abda4857e925c3a6315a6fb41fad59189" prot="public" static="no" mutable="no">
         <type><ref refid="_hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877" kindref="member">NRJ</ref></type>
@@ -88,21 +89,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="199" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="199" bodyend="-1"/>
-        <referencedby refid="class_calibration_1a1732880c01e21df259b4ff45dba24c59" compoundref="_calibration_8hpp" startline="982" endline="988">Calibration::calibrate</referencedby>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="207" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="207" bodyend="-1"/>
+        <referencedby refid="_cobalt_calorimeter_8hpp_1a1d20e8635afe69d2732de36128f82652" compoundref="_cobalt_calorimeter_8hpp" startline="312" endline="312">calibBGO</referencedby>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="216" endline="270">Faster2Histo::fillHisto</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="197" endline="209">Event::operator=</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="313" endline="326">Event::push_back</referencedby>
-        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="337" endline="360">Event::push_front</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="233" endline="245">Event::operator=</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_event_1a799fb8b56453824767b038389059a2a6" compoundref="_event_8hpp" startline="220" endline="230">Event::operator[]</referencedby>
+        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="362" endline="375">Event::push_back</referencedby>
+        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="386" endline="409">Event::push_front</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
         <referencedby refid="class_clover_spectra_1a614d7deabde77b0ffea91ca2a6002484" compoundref="_clover_spectra_8hpp" startline="161" endline="207">CloverSpectra::runFasterReader</referencedby>
         <referencedby refid="class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6" compoundref="_r_f___manager_8hpp" startline="100" endline="108">RF_Manager::setHit</referencedby>
-        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="732" endline="771">Timeshifts::treatFasterFile</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a87cee37be1d91e747760bb6555e24bc8" compoundref="_cobalt_calorimeter_8hpp" startline="840" endline="1005">CobaltCalorimeter::work</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" prot="public" static="no" mutable="no">
         <type><ref refid="_hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877" kindref="member">NRJ</ref></type>
@@ -116,18 +120,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="202" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="202" bodyend="-1"/>
-        <referencedby refid="class_calibration_1a1732880c01e21df259b4ff45dba24c59" compoundref="_calibration_8hpp" startline="982" endline="988">Calibration::calibrate</referencedby>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="210" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="210" bodyend="-1"/>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="216" endline="270">Faster2Histo::fillHisto</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="197" endline="209">Event::operator=</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="313" endline="326">Event::push_back</referencedby>
-        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="337" endline="360">Event::push_front</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="233" endline="245">Event::operator=</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_event_1a799fb8b56453824767b038389059a2a6" compoundref="_event_8hpp" startline="220" endline="230">Event::operator[]</referencedby>
+        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="362" endline="375">Event::push_back</referencedby>
+        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="386" endline="409">Event::push_front</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1a04ef9221b81184bd9617b1b23311cc34" prot="public" static="no" mutable="no">
         <type><ref refid="_hit_8hpp_1aad3a9d2c404fb4cd7f73b16966ae2877" kindref="member">NRJ</ref></type>
@@ -141,12 +146,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="205" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="205" bodyend="-1"/>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="213" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="213" bodyend="-1"/>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1af11540b09cb070a6c2028546b5a35037" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -160,21 +165,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="208" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="208" bodyend="-1"/>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="197" endline="209">Event::operator=</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="313" endline="326">Event::push_back</referencedby>
-        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="337" endline="360">Event::push_front</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
-        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="478" endline="491">FasterReader::TreatCRRC4</referencedby>
-        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="499" endline="514">FasterReader::TreatQDC1</referencedby>
-        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="522" endline="546">FasterReader::TreatQDC2</referencedby>
-        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="554" endline="578">FasterReader::TreatQDC3</referencedby>
-        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="586" endline="599">FasterReader::TreatRF</referencedby>
-        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="455" endline="468">FasterReader::TreatTrapez</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="216" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="216" bodyend="-1"/>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="233" endline="245">Event::operator=</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="362" endline="375">Event::push_back</referencedby>
+        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="386" endline="409">Event::push_front</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
+        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="482" endline="495">FasterReader::TreatCRRC4</referencedby>
+        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="503" endline="518">FasterReader::TreatQDC1</referencedby>
+        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="526" endline="550">FasterReader::TreatQDC2</referencedby>
+        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="558" endline="582">FasterReader::TreatQDC3</referencedby>
+        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="590" endline="603">FasterReader::TreatRF</referencedby>
+        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="459" endline="472">FasterReader::TreatTrapez</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" prot="public" static="no" mutable="no">
         <type><ref refid="_hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361" kindref="member">ADC</ref></type>
@@ -188,25 +193,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="201" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="201" bodyend="-1"/>
-        <referencedby refid="class_calibration_1a1732880c01e21df259b4ff45dba24c59" compoundref="_calibration_8hpp" startline="982" endline="988">Calibration::calibrate</referencedby>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="209" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="209" bodyend="-1"/>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="216" endline="270">Faster2Histo::fillHisto</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="197" endline="209">Event::operator=</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="313" endline="326">Event::push_back</referencedby>
-        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="337" endline="360">Event::push_front</referencedby>
-        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="348" endline="377">FasterReader::ReadData</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
-        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="478" endline="491">FasterReader::TreatCRRC4</referencedby>
-        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="499" endline="514">FasterReader::TreatQDC1</referencedby>
-        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="522" endline="546">FasterReader::TreatQDC2</referencedby>
-        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="554" endline="578">FasterReader::TreatQDC3</referencedby>
-        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="586" endline="599">FasterReader::TreatRF</referencedby>
-        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="455" endline="468">FasterReader::TreatTrapez</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1aeb58f6286af52ee8d74f4188664f6af5" compoundref="_cobalt_calorimeter_8hpp" startline="305" endline="310">CobaltCalorimeter::NaI_pid</referencedby>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="233" endline="245">Event::operator=</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_event_1a799fb8b56453824767b038389059a2a6" compoundref="_event_8hpp" startline="220" endline="230">Event::operator[]</referencedby>
+        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="362" endline="375">Event::push_back</referencedby>
+        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="386" endline="409">Event::push_front</referencedby>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">FasterReader::ReadData</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
+        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="482" endline="495">FasterReader::TreatCRRC4</referencedby>
+        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="503" endline="518">FasterReader::TreatQDC1</referencedby>
+        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="526" endline="550">FasterReader::TreatQDC2</referencedby>
+        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="558" endline="582">FasterReader::TreatQDC3</referencedby>
+        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="590" endline="603">FasterReader::TreatRF</referencedby>
+        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="459" endline="472">FasterReader::TreatTrapez</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1a109d6cdcf0601e11453901833daa7a4b" prot="public" static="no" mutable="no">
         <type><ref refid="_hit_8hpp_1a04b75a9e083a1c44419fdb7c3f87c361" kindref="member">ADC</ref></type>
@@ -220,18 +227,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="204" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="204" bodyend="-1"/>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
-        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="478" endline="491">FasterReader::TreatCRRC4</referencedby>
-        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="499" endline="514">FasterReader::TreatQDC1</referencedby>
-        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="522" endline="546">FasterReader::TreatQDC2</referencedby>
-        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="554" endline="578">FasterReader::TreatQDC3</referencedby>
-        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="586" endline="599">FasterReader::TreatRF</referencedby>
-        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="455" endline="468">FasterReader::TreatTrapez</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="212" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="212" bodyend="-1"/>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
+        <referencedby refid="class_faster_reader_1aa0d1eaa1b39778def2b7cd25581accef" compoundref="_faster_reader_8hpp" startline="482" endline="495">FasterReader::TreatCRRC4</referencedby>
+        <referencedby refid="class_faster_reader_1aa5890b8ac1fdbcd4e2c544c1eeca537b" compoundref="_faster_reader_8hpp" startline="503" endline="518">FasterReader::TreatQDC1</referencedby>
+        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="526" endline="550">FasterReader::TreatQDC2</referencedby>
+        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="558" endline="582">FasterReader::TreatQDC3</referencedby>
+        <referencedby refid="class_faster_reader_1ad2d7d3acd1a874f09f44f2adfa69d42c" compoundref="_faster_reader_8hpp" startline="590" endline="603">FasterReader::TreatRF</referencedby>
+        <referencedby refid="class_faster_reader_1a3ee31b1e6a4c60d72f8d989d2e08bcdf" compoundref="_faster_reader_8hpp" startline="459" endline="472">FasterReader::TreatTrapez</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" prot="public" static="no" mutable="no">
         <type><ref refid="_hit_8hpp_1a36a1e53eff51015f34900948053c0d69" kindref="member">Timestamp</ref></type>
@@ -245,22 +252,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="197" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="197" bodyend="-1"/>
+        <location file="lib/Classes/Hit.hpp" line="205" column="13" bodyfile="lib/Classes/Hit.hpp" bodystart="205" bodyend="-1"/>
         <referencedby refid="class_coinc_builder_1a7bb003c28d9b4b43bbd10a09771226ae" compoundref="_coinc_builder_8hpp" startline="32" endline="35">CoincBuilder::coincidence</referencedby>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="306" endline="318">operator&lt;&lt;</referencedby>
-        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="197" endline="209">Event::operator=</referencedby>
-        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="177" endline="194">operator=</referencedby>
-        <referencedby refid="class_r_f___manager_1a829a6911ee952dc5f3fbcf5cf93b7048" compoundref="_r_f___manager_8hpp" startline="67" endline="67">RF_Manager::pulse_ToF</referencedby>
-        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="313" endline="326">Event::push_back</referencedby>
-        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="337" endline="360">Event::push_front</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="226" endline="245">MTFasterReader::Realign</referencedby>
-        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</referencedby>
+        <referencedby refid="_hit_8hpp_1a6a8489ad364359132484d320150555a7" compoundref="_hit_8hpp" startline="326" endline="338">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_event_1a2bb3a8e63ac8be551f02fb0963cf0041" compoundref="_event_8hpp" startline="233" endline="245">Event::operator=</referencedby>
+        <referencedby refid="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" compoundref="_hit_8hpp" startline="185" endline="202">operator=</referencedby>
+        <referencedby refid="class_event_1a799fb8b56453824767b038389059a2a6" compoundref="_event_8hpp" startline="220" endline="230">Event::operator[]</referencedby>
+        <referencedby refid="class_r_f___manager_1a829a6911ee952dc5f3fbcf5cf93b7048" compoundref="_r_f___manager_8hpp" startline="71" endline="71">RF_Manager::pulse_ToF</referencedby>
+        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="362" endline="375">Event::push_back</referencedby>
+        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="386" endline="409">Event::push_front</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="234" endline="253">MTFasterReader::Realign</referencedby>
+        <referencedby refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</referencedby>
         <referencedby refid="class_r_f___manager_1a0261f2b02176a3e5562603c25f31d9a6" compoundref="_r_f___manager_8hpp" startline="100" endline="108">RF_Manager::setHit</referencedby>
-        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="664" endline="705">Timeshifts::treatFasterFile</referencedby>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="732" endline="771">Timeshifts::treatFasterFile</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a87cee37be1d91e747760bb6555e24bc8" compoundref="_cobalt_calorimeter_8hpp" startline="840" endline="1005">CobaltCalorimeter::work</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-attrib">
@@ -275,8 +284,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="231" column="19" bodyfile="lib/Classes/Hit.hpp" bodystart="231" bodyend="-1"/>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="239" column="19" bodyfile="lib/Classes/Hit.hpp" bodystart="239" bodyend="-1"/>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_hit_1a6e24a7396ce247f7f49bdf4751cc6a2e" prot="public" static="yes" mutable="no">
         <type><ref refid="class_i_options" kindref="compound">IOptions</ref></type>
@@ -289,8 +298,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="232" column="19" bodyfile="lib/Classes/Hit.hpp" bodystart="232" bodyend="-1"/>
-        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">writting</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="240" column="19" bodyfile="lib/Classes/Hit.hpp" bodystart="240" bodyend="-1"/>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">writting</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -305,8 +314,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="159" column="3" bodyfile="lib/Classes/Hit.hpp" bodystart="159" bodyend="159"/>
-        <references refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</references>
+        <location file="lib/Classes/Hit.hpp" line="167" column="3" bodyfile="lib/Classes/Hit.hpp" bodystart="167" bodyend="167"/>
+        <references refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</references>
       </memberdef>
       <memberdef kind="function" id="class_hit_1abcb26fe11278c6fcb80ddec201b402c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -323,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="161" column="3" bodyfile="lib/Classes/Hit.hpp" bodystart="161" bodyend="175"/>
+        <location file="lib/Classes/Hit.hpp" line="169" column="3" bodyfile="lib/Classes/Hit.hpp" bodystart="169" bodyend="183"/>
       </memberdef>
       <memberdef kind="function" id="class_hit_1a77de7b97444e05abb4f31be7f119e9c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="class_hit" kindref="compound">Hit</ref> &amp;</type>
@@ -340,16 +349,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="177" column="7" bodyfile="lib/Classes/Hit.hpp" bodystart="177" bodyend="194"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">adc</references>
-        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">label</references>
-        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="199">nrj</references>
-        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="202">nrj2</references>
-        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="205">nrj3</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">pileup</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">qdc3</references>
-        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">stamp</references>
+        <location file="lib/Classes/Hit.hpp" line="185" column="7" bodyfile="lib/Classes/Hit.hpp" bodystart="185" bodyend="202"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">adc</references>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="204">label</references>
+        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="207">nrj</references>
+        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="210">nrj2</references>
+        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="213">nrj3</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">pileup</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">qdc3</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="205">stamp</references>
       </memberdef>
       <memberdef kind="function" id="class_hit_1ad809be4a75a5c588504fa77d442e393d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -366,28 +375,31 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="227" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="239" bodyend="264"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">adc</references>
-        <references refid="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" compoundref="_hit_8hpp" startline="108">IOptions::e</references>
-        <references refid="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" compoundref="_hit_8hpp" startline="109">IOptions::E</references>
-        <references refid="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" compoundref="_hit_8hpp" startline="104">IOptions::l</references>
-        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">label</references>
-        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="199">nrj</references>
-        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="202">nrj2</references>
-        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="205">nrj3</references>
-        <references refid="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" compoundref="_hit_8hpp" startline="112">IOptions::p</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">pileup</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <references refid="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" compoundref="_hit_8hpp" startline="110">IOptions::q</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">qdc3</references>
-        <references refid="class_hit_1a4748672c2bd6987972336e488f67bda7" compoundref="_hit_8hpp" startline="231">read</references>
-        <references refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</references>
-        <references refid="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" compoundref="_hit_8hpp" startline="105">IOptions::s</references>
-        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">stamp</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="235" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="247" bodyend="276"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">adc</references>
+        <references refid="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" compoundref="_hit_8hpp" startline="114">IOptions::e</references>
+        <references refid="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" compoundref="_hit_8hpp" startline="115">IOptions::E</references>
+        <references refid="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" compoundref="_hit_8hpp" startline="110">IOptions::l</references>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="204">label</references>
+        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="207">nrj</references>
+        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="210">nrj2</references>
+        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="213">nrj3</references>
+        <references refid="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" compoundref="_hit_8hpp" startline="120">IOptions::p</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">pileup</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" compoundref="_hit_8hpp" startline="116">IOptions::q</references>
+        <references refid="class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e" compoundref="_hit_8hpp" startline="117">IOptions::Q</references>
+        <references refid="class_i_options_1a7a7584f389ca9b8f293c434259e7b2ed" compoundref="_hit_8hpp" startline="118">IOptions::q3</references>
+        <references refid="class_i_options_1ac054625a2121f43014087db4ae9b9c55" compoundref="_hit_8hpp" startline="119">IOptions::Q3</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">qdc3</references>
+        <references refid="class_hit_1a4748672c2bd6987972336e488f67bda7" compoundref="_hit_8hpp" startline="239">read</references>
+        <references refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</references>
+        <references refid="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" compoundref="_hit_8hpp" startline="111">IOptions::s</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="205">stamp</references>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="226" endline="245">MTFasterReader::Realign</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="234" endline="253">MTFasterReader::Realign</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_hit_1aedefb5565ccfc732c322416ef54d015d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -408,27 +420,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="228" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="266" bodyend="285"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">adc</references>
-        <references refid="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" compoundref="_hit_8hpp" startline="108">IOptions::e</references>
-        <references refid="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" compoundref="_hit_8hpp" startline="109">IOptions::E</references>
-        <references refid="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" compoundref="_hit_8hpp" startline="104">IOptions::l</references>
-        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">label</references>
-        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="199">nrj</references>
-        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="202">nrj2</references>
-        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="205">nrj3</references>
-        <references refid="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" compoundref="_hit_8hpp" startline="112">IOptions::p</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">pileup</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <references refid="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" compoundref="_hit_8hpp" startline="110">IOptions::q</references>
-        <references refid="class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e" compoundref="_hit_8hpp" startline="111">IOptions::Q</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">qdc3</references>
-        <references refid="class_hit_1a4748672c2bd6987972336e488f67bda7" compoundref="_hit_8hpp" startline="231">read</references>
-        <references refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">reset</references>
-        <references refid="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" compoundref="_hit_8hpp" startline="105">IOptions::s</references>
-        <references refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">IOptions::setOptions</references>
-        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">stamp</references>
+        <location file="lib/Classes/Hit.hpp" line="236" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="278" bodyend="301"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">adc</references>
+        <references refid="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" compoundref="_hit_8hpp" startline="114">IOptions::e</references>
+        <references refid="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" compoundref="_hit_8hpp" startline="115">IOptions::E</references>
+        <references refid="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" compoundref="_hit_8hpp" startline="110">IOptions::l</references>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="204">label</references>
+        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="207">nrj</references>
+        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="210">nrj2</references>
+        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="213">nrj3</references>
+        <references refid="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" compoundref="_hit_8hpp" startline="120">IOptions::p</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">pileup</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" compoundref="_hit_8hpp" startline="116">IOptions::q</references>
+        <references refid="class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e" compoundref="_hit_8hpp" startline="117">IOptions::Q</references>
+        <references refid="class_i_options_1a7a7584f389ca9b8f293c434259e7b2ed" compoundref="_hit_8hpp" startline="118">IOptions::q3</references>
+        <references refid="class_i_options_1ac054625a2121f43014087db4ae9b9c55" compoundref="_hit_8hpp" startline="119">IOptions::Q3</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">qdc3</references>
+        <references refid="class_hit_1a4748672c2bd6987972336e488f67bda7" compoundref="_hit_8hpp" startline="239">read</references>
+        <references refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">reset</references>
+        <references refid="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" compoundref="_hit_8hpp" startline="111">IOptions::s</references>
+        <references refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="88" endline="108">IOptions::setOptions</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="205">stamp</references>
       </memberdef>
       <memberdef kind="function" id="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -441,20 +455,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="210" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="210" bodyend="225"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">adc</references>
-        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">label</references>
-        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="199">nrj</references>
-        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="202">nrj2</references>
-        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="205">nrj3</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">pileup</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">qdc3</references>
-        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">stamp</references>
-        <referencedby refid="class_hit_1ac2727a27933c07b60b6a7ccccba12fff" compoundref="_hit_8hpp" startline="159" endline="159">Hit</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="218" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="218" bodyend="233"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">adc</references>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="204">label</references>
+        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="207">nrj</references>
+        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="210">nrj2</references>
+        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="213">nrj3</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">pileup</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">qdc3</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="205">stamp</references>
+        <referencedby refid="class_hit_1ac2727a27933c07b60b6a7ccccba12fff" compoundref="_hit_8hpp" startline="167" endline="167">Hit</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">reading</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="226" endline="245">MTFasterReader::Realign</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">reading</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="234" endline="253">MTFasterReader::Realign</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_hit_1ab60637cf6f374e4394139c3594e4464e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -476,30 +490,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/Classes/Hit.hpp" line="229" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="287" bodyend="304"/>
-        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="198">adc</references>
-        <references refid="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" compoundref="_hit_8hpp" startline="108">IOptions::e</references>
-        <references refid="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" compoundref="_hit_8hpp" startline="109">IOptions::E</references>
-        <references refid="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" compoundref="_hit_8hpp" startline="104">IOptions::l</references>
-        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">label</references>
-        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="199">nrj</references>
-        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="202">nrj2</references>
-        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="205">nrj3</references>
-        <references refid="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" compoundref="_hit_8hpp" startline="112">IOptions::p</references>
-        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="208">pileup</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <references refid="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" compoundref="_hit_8hpp" startline="110">IOptions::q</references>
-        <references refid="class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e" compoundref="_hit_8hpp" startline="111">IOptions::Q</references>
-        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="201">qdc2</references>
-        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="204">qdc3</references>
-        <references refid="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" compoundref="_hit_8hpp" startline="105">IOptions::s</references>
-        <references refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="84" endline="102">IOptions::setOptions</references>
-        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">stamp</references>
-        <references refid="class_hit_1a6e24a7396ce247f7f49bdf4751cc6a2e" compoundref="_hit_8hpp" startline="232">write</references>
-        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="298" endline="393">Faster2Root::convertFile</referencedby>
-        <referencedby refid="class_my_simple_convertor_1a81d6aadfcbadae6e83dbacc86735a0c5" compoundref="_faster2_root_8hpp" startline="416" endline="442">MySimpleConvertor::convertFile</referencedby>
+        <location file="lib/Classes/Hit.hpp" line="237" column="8" bodyfile="lib/Classes/Hit.hpp" bodystart="303" bodyend="324"/>
+        <references refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" compoundref="_hit_8hpp" startline="206">adc</references>
+        <references refid="class_i_options_1a7d3b074e2027dd608b60f69ede73761e" compoundref="_hit_8hpp" startline="114">IOptions::e</references>
+        <references refid="class_i_options_1a1a2ef66e7ce7e5af14029dca3b2f7778" compoundref="_hit_8hpp" startline="115">IOptions::E</references>
+        <references refid="class_i_options_1a08938bd98b6894ff1ce8a4a082f5bd7d" compoundref="_hit_8hpp" startline="110">IOptions::l</references>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="204">label</references>
+        <references refid="class_hit_1abda4857e925c3a6315a6fb41fad59189" compoundref="_hit_8hpp" startline="207">nrj</references>
+        <references refid="class_hit_1ab4b93fbbb58d5bf2fd3480238d93065a" compoundref="_hit_8hpp" startline="210">nrj2</references>
+        <references refid="class_hit_1a04ef9221b81184bd9617b1b23311cc34" compoundref="_hit_8hpp" startline="213">nrj3</references>
+        <references refid="class_i_options_1a73a8079d9aabef8cd70b9a8713be9ce3" compoundref="_hit_8hpp" startline="120">IOptions::p</references>
+        <references refid="class_hit_1af11540b09cb070a6c2028546b5a35037" compoundref="_hit_8hpp" startline="216">pileup</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_i_options_1adb4538164fb33f5375f1f72601f4aefb" compoundref="_hit_8hpp" startline="116">IOptions::q</references>
+        <references refid="class_i_options_1a3b860786dd7c7cef82d6f00b2e64a05e" compoundref="_hit_8hpp" startline="117">IOptions::Q</references>
+        <references refid="class_i_options_1a7a7584f389ca9b8f293c434259e7b2ed" compoundref="_hit_8hpp" startline="118">IOptions::q3</references>
+        <references refid="class_i_options_1ac054625a2121f43014087db4ae9b9c55" compoundref="_hit_8hpp" startline="119">IOptions::Q3</references>
+        <references refid="class_hit_1a07541ef2177c95ba3de7df1fed1c986f" compoundref="_hit_8hpp" startline="209">qdc2</references>
+        <references refid="class_hit_1a109d6cdcf0601e11453901833daa7a4b" compoundref="_hit_8hpp" startline="212">qdc3</references>
+        <references refid="class_i_options_1aa727e950a396e908cf8ebd137dc4f539" compoundref="_hit_8hpp" startline="111">IOptions::s</references>
+        <references refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="88" endline="108">IOptions::setOptions</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="205">stamp</references>
+        <references refid="class_hit_1a6e24a7396ce247f7f49bdf4751cc6a2e" compoundref="_hit_8hpp" startline="240">write</references>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="class_my_simple_convertor_1a81d6aadfcbadae6e83dbacc86735a0c5" compoundref="_faster2_root_8hpp" startline="426" endline="452">MySimpleConvertor::convertFile</referencedby>
         <referencedby refid="class_run_matrixator_1a8d8f01fad64864d032395e18b10c2a7e" compoundref="_run_matrixator_8hpp" startline="253" endline="299">RunMatrixator::loadData_faster</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="226" endline="245">MTFasterReader::Realign</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="234" endline="253">MTFasterReader::Realign</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -537,7 +553,7 @@
         <link refid="class_i_options"/>
       </node>
     </collaborationgraph>
-    <location file="lib/Classes/Hit.hpp" line="156" column="1" bodyfile="lib/Classes/Hit.hpp" bodystart="157" bodyend="233"/>
+    <location file="lib/Classes/Hit.hpp" line="164" column="1" bodyfile="lib/Classes/Hit.hpp" bodystart="165" bodyend="241"/>
     <listofallmembers>
       <member refid="class_hit_1a3d999e7bbbb470d1d3aa55ee772a98d6" prot="public" virt="non-virtual"><scope>Hit</scope><name>adc</name></member>
       <member refid="class_hit_1ac2727a27933c07b60b6a7ccccba12fff" prot="public" virt="non-virtual"><scope>Hit</scope><name>Hit</name></member>

@@ -15,13 +15,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="156" column="16" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="156" bodyend="-1"/>
-        <referencedby refid="class_m_t_faster_reader_1a8693e1143a0aea8096a527c7d9df9a63" compoundref="_m_t_faster_reader_8hpp" startline="132" endline="135">addFile</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288" compoundref="_m_t_faster_reader_8hpp" startline="127" endline="130">addFolder</referencedby>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="157" column="16" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="157" bodyend="-1"/>
+        <referencedby refid="class_m_t_faster_reader_1a8693e1143a0aea8096a527c7d9df9a63" compoundref="_m_t_faster_reader_8hpp" startline="131" endline="134">addFile</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288" compoundref="_m_t_faster_reader_8hpp" startline="126" endline="129">addFolder</referencedby>
         <referencedby refid="class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5" compoundref="_m_t_faster_reader_8hpp" startline="138" endline="138">files</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1a7b012332b8f9bc617cd666e0ae768fda" compoundref="_m_t_faster_reader_8hpp" startline="111" endline="111">MTFasterReader</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" compoundref="_m_t_faster_reader_8hpp" startline="217" endline="223">readAligned</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" compoundref="_m_t_faster_reader_8hpp" startline="184" endline="189">readRaw</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a7b012332b8f9bc617cd666e0ae768fda" compoundref="_m_t_faster_reader_8hpp" startline="110" endline="110">MTFasterReader</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" compoundref="_m_t_faster_reader_8hpp" startline="225" endline="231">readAligned</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" compoundref="_m_t_faster_reader_8hpp" startline="186" endline="191">readRaw</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" prot="private" static="no" mutable="no">
         <type><ref refid="_m_t_list_8hpp_1a5645cb48b623bfc2e6e274c70952a8e2" kindref="member">MTList</ref></type>
@@ -34,11 +34,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="157" column="10" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="157" bodyend="-1"/>
-        <referencedby refid="class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20" compoundref="_m_t_faster_reader_8hpp" startline="154" endline="154">nextFilename</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1a01bb4c02770855a41d53b3544b3cae3a" compoundref="_m_t_faster_reader_8hpp" startline="137" endline="137">printMTFiles</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" compoundref="_m_t_faster_reader_8hpp" startline="217" endline="223">readAligned</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" compoundref="_m_t_faster_reader_8hpp" startline="184" endline="189">readRaw</referencedby>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="158" column="10" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="158" bodyend="-1"/>
+        <referencedby refid="class_m_t_faster_reader_1a023fdc6cdd455017dc7e911820206ac0" compoundref="_m_t_faster_reader_8hpp" startline="137" endline="137">getFilesList</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20" compoundref="_m_t_faster_reader_8hpp" startline="155" endline="155">nextFilename</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a01bb4c02770855a41d53b3544b3cae3a" compoundref="_m_t_faster_reader_8hpp" startline="136" endline="136">printMTFiles</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" compoundref="_m_t_faster_reader_8hpp" startline="225" endline="231">readAligned</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" compoundref="_m_t_faster_reader_8hpp" startline="186" endline="191">readRaw</referencedby>
       </memberdef>
       <memberdef kind="variable" id="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="_hit_8hpp_1a808363c27c30b41f6ed40b62ebde3ee7" kindref="member">Time</ref> &gt;</type>
@@ -51,10 +52,28 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="159" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="159" bodyend="-1"/>
-        <referencedby refid="class_m_t_faster_reader_1a870da58b71c34fbcaf76733f0bc2ba71" compoundref="_m_t_faster_reader_8hpp" startline="120" endline="124">readAligned</referencedby>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="160" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="160" bodyend="-1"/>
+        <referencedby refid="class_m_t_faster_reader_1a870da58b71c34fbcaf76733f0bc2ba71" compoundref="_m_t_faster_reader_8hpp" startline="119" endline="123">readAligned</referencedby>
         <referencedby refid="class_m_t_faster_reader_1a39cce770cb5f6dc49e2ae2558d709af6" compoundref="_m_t_faster_reader_8hpp" startline="142" endline="142">setTimeshifts</referencedby>
         <referencedby refid="class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822" compoundref="_m_t_faster_reader_8hpp" startline="143" endline="143">timeshift</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="class_m_t_faster_reader_1aca07d380d9a702313f523c1eea28c0d0" prot="private" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool MTFasterReader::s_progressBar</definition>
+        <argsstring></argsstring>
+        <name>s_progressBar</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="161" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="161" bodyend="-1"/>
+        <referencedby refid="class_m_t_faster_reader_1a7e26b2201486cd489b66ab12b83427e0" compoundref="_m_t_faster_reader_8hpp" startline="194" endline="208">Read</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a91677f13aa03d3b2f9dee6eb252286d1" compoundref="_m_t_faster_reader_8hpp" startline="144" endline="144">showProgressBar</referencedby>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -73,11 +92,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="132" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="132" bodyend="135"/>
-        <references refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" compoundref="_files_manager_8hpp" startline="101" endline="134">FilesManager::addFiles</references>
-        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="156">m_files</references>
-        <references refid="class_file_1a899e6a7c528ab2824c7c584c4ee63073" compoundref="files__functions_8hpp" startline="744" endline="744">File::string</references>
-        <referencedby refid="class_faster2_histo_1ac20f36c0861a3af085c9546ca1325cc6" compoundref="_faster2_histo_8hpp" startline="27" endline="31">Faster2Histo::addFile</referencedby>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="131" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="131" bodyend="134"/>
+        <references refid="class_files_manager_1a3aaaccb43ef036f930ffcf1ca3ea522f" compoundref="_files_manager_8hpp" startline="108" endline="141">FilesManager::addFiles</references>
+        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="157">m_files</references>
+        <references refid="class_file_1a899e6a7c528ab2824c7c584c4ee63073" compoundref="files__functions_8hpp" startline="811" endline="811">File::string</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -99,12 +117,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="127" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="127" bodyend="130"/>
-        <references refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" compoundref="_files_manager_8hpp" startline="136" endline="156">FilesManager::addFolder</references>
-        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="156">m_files</references>
-        <referencedby refid="class_faster2_histo_1a8684b0b531e6369ce35bca61f4b1007a" compoundref="_faster2_histo_8hpp" startline="21" endline="26">Faster2Histo::addFolder</referencedby>
-        <referencedby refid="class_calibration_1a6514307ca111ecc5d6f02694373dc5ec" compoundref="_calibration_8hpp" startline="454" endline="463">Calibration::loadFasterData</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1a98a77edc573c4b3cfa5fa384f0d1a085" compoundref="_m_t_faster_reader_8hpp" startline="109" endline="109">MTFasterReader</referencedby>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="126" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="126" bodyend="129"/>
+        <references refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" compoundref="_files_manager_8hpp" startline="143" endline="163">FilesManager::addFolder</references>
+        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="157">m_files</references>
+        <referencedby refid="class_calibrator_1a00297f1bb253279bfa8bdce83fb81951" compoundref="_calibrator_8hpp" startline="311" endline="326">Calibrator::loadFasterData</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a98a77edc573c4b3cfa5fa384f0d1a085" compoundref="_m_t_faster_reader_8hpp" startline="108" endline="108">MTFasterReader</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1aa8421439b6ac40fc7513fc85ad5a112b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto &amp;</type>
@@ -118,7 +135,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTFasterReader.hpp" line="139" column="9" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="139" bodyend="139"/>
-        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="156">m_files</references>
+        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="157">m_files</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -132,9 +149,24 @@
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTFasterReader.hpp" line="138" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="138" bodyend="138"/>
-        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="156">m_files</references>
-        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="88" endline="121">Faster2Histo::load</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1a7b012332b8f9bc617cd666e0ae768fda" compoundref="_m_t_faster_reader_8hpp" startline="111" endline="111">MTFasterReader</referencedby>
+        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="157">m_files</references>
+        <referencedby refid="class_m_t_faster_reader_1a7b012332b8f9bc617cd666e0ae768fda" compoundref="_m_t_faster_reader_8hpp" startline="110" endline="110">MTFasterReader</referencedby>
+        <referencedby refid="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" compoundref="_faster2_histo_8hpp" startline="189" endline="199">Faster2Histo::multirun</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="class_m_t_faster_reader_1a023fdc6cdd455017dc7e911820206ac0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto &amp;</type>
+        <definition>auto&amp; MTFasterReader::getFilesList</definition>
+        <argsstring>()</argsstring>
+        <name>getFilesList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="137" column="9" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="137" bodyend="137"/>
+        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="158">m_MTfiles</references>
+        <referencedby refid="class_m_t_faster_reader_1a7e26b2201486cd489b66ab12b83427e0" compoundref="_m_t_faster_reader_8hpp" startline="194" endline="208">Read</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1ad7f0fc9a9cd713d59870a91c86d8ad9a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -148,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="102" column="3" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="102" bodyend="102"/>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="101" column="3" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="101" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1a7b012332b8f9bc617cd666e0ae768fda" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -165,9 +197,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="111" column="3" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="111" bodyend="111"/>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="110" column="3" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="110" bodyend="110"/>
         <references refid="class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5" compoundref="_m_t_faster_reader_8hpp" startline="138" endline="138">files</references>
-        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="156">m_files</references>
+        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="157">m_files</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1a98a77edc573c4b3cfa5fa384f0d1a085" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -208,8 +240,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="109" column="3" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="109" bodyend="109"/>
-        <references refid="class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288" compoundref="_m_t_faster_reader_8hpp" startline="127" endline="130">addFolder</references>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="108" column="3" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="108" bodyend="108"/>
+        <references refid="class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288" compoundref="_m_t_faster_reader_8hpp" startline="126" endline="129">addFolder</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1a01bb4c02770855a41d53b3544b3cae3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -222,9 +254,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="137" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="137" bodyend="137"/>
-        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="157">m_MTfiles</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="136" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="136" bodyend="136"/>
+        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="158">m_MTfiles</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -259,7 +291,7 @@
 <parametername>func</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>: Must be of the form func(Hit &amp; hit, Alignator &amp; alignedTree, args...) with args </para>
+<para>: Must be of the form func(Hit &amp; hit, Alignator &amp; alignedTree, args...). <ref refid="class_alignator" kindref="compound">Alignator</ref> is a simple wrapper around a tree. Use alignedTree::GetEntry </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -267,15 +299,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="117" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="217" bodyend="223"/>
-        <references refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" compoundref="_files_manager_8hpp" startline="32" endline="32">FilesManager::getListFiles</references>
-        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="156">m_files</references>
-        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="157">m_MTfiles</references>
-        <references refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" compoundref="_m_t_faster_reader_8hpp" startline="159">m_timeshifts</references>
-        <references refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="76" endline="99">MTObject::parallelise_function</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="116" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="225" bodyend="231"/>
+        <references refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" compoundref="_files_manager_8hpp" startline="37" endline="37">FilesManager::getListFiles</references>
+        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="157">m_files</references>
+        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="158">m_MTfiles</references>
+        <references refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" compoundref="_m_t_faster_reader_8hpp" startline="160">m_timeshifts</references>
+        <references refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="214" endline="238">MTObject::parallelise_function</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
         <referencedby refid="class_clover_spectra_1ae46c582451bada5b2b8957ee44b92e35" compoundref="_clover_spectra_8hpp" startline="65" endline="77">CloverSpectra::fillHisto</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1a870da58b71c34fbcaf76733f0bc2ba71" compoundref="_m_t_faster_reader_8hpp" startline="120" endline="124">readAligned</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1aceaa8e906e0257f450799026ec2269ca" compoundref="_cobalt_calorimeter_8hpp" startline="824" endline="837">CobaltCalorimeter::launchFaster</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a870da58b71c34fbcaf76733f0bc2ba71" compoundref="_m_t_faster_reader_8hpp" startline="119" endline="123">readAligned</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1a870da58b71c34fbcaf76733f0bc2ba71" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -310,9 +343,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="120" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="120" bodyend="124"/>
-        <references refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" compoundref="_m_t_faster_reader_8hpp" startline="159">m_timeshifts</references>
-        <references refid="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" compoundref="_m_t_faster_reader_8hpp" startline="217" endline="223">readAligned</references>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="119" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="119" bodyend="123"/>
+        <references refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" compoundref="_m_t_faster_reader_8hpp" startline="160">m_timeshifts</references>
+        <references refid="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" compoundref="_m_t_faster_reader_8hpp" startline="225" endline="231">readAligned</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -351,22 +384,22 @@
 </parameteritem>
 </parameterlist>
 The declared function MUST have its two first parameters as follow : type function(Hit &amp; hit, FasterReader &amp; reader, ...); You can add any other parameter in the ..., but then you have to call them in the readRaw method call e.g. : <verbatim>   void my_function(Hit &amp; hit, FasterReader &amp; reader, MTCounter &amp; counter){do something...}
-</verbatim> in main <verbatim>   MTFasterReader reader(/path/to/data/folder/, wanted_number_of_files);
-   MTCounter counter;
-   reader.readRaw(my_function, counter);
+</verbatim> in main <verbatim>   MTFasterReader readerMT(/path/to/data/folder/, wanted_number_of_files);
+   MTCounter counterMT;
+   readerMT.readRaw(my_function, counterMT);
 </verbatim> That way, my_function will be executed in parallel on each file in /path/to/data/folder/ </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="114" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="184" bodyend="189"/>
-        <references refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" compoundref="_files_manager_8hpp" startline="32" endline="32">FilesManager::getListFiles</references>
-        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="156">m_files</references>
-        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="157">m_MTfiles</references>
-        <references refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="76" endline="99">MTObject::parallelise_function</references>
-        <references refid="_histogramor_8hpp_1ab48a2fa7184e6354788989602c8c8c29">print</references>
-        <referencedby refid="class_faster2_root_1a7d6d5249c6ced2548a58406eca085cdb" compoundref="_faster2_root_8hpp" startline="282" endline="289">Faster2Root::convert</referencedby>
-        <referencedby refid="class_calibration_1a6514307ca111ecc5d6f02694373dc5ec" compoundref="_calibration_8hpp" startline="454" endline="463">Calibration::loadFasterData</referencedby>
-        <referencedby refid="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" compoundref="_faster2_histo_8hpp" startline="123" endline="130">Faster2Histo::multirun</referencedby>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="113" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="186" bodyend="191"/>
+        <references refid="class_files_manager_1a2b619786ba65a7ac1e701fc61e2409ae" compoundref="_files_manager_8hpp" startline="37" endline="37">FilesManager::getListFiles</references>
+        <references refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" compoundref="_m_t_faster_reader_8hpp" startline="157">m_files</references>
+        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="158">m_MTfiles</references>
+        <references refid="class_m_t_object_1a35c02650eb403bd54e867f93bb26fc47" compoundref="_m_t_object_8hpp" startline="214" endline="238">MTObject::parallelise_function</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <referencedby refid="class_faster2_root_1a7d6d5249c6ced2548a58406eca085cdb" compoundref="_faster2_root_8hpp" startline="293" endline="300">Faster2Root::convert</referencedby>
+        <referencedby refid="class_calibrator_1a00297f1bb253279bfa8bdce83fb81951" compoundref="_calibrator_8hpp" startline="311" endline="326">Calibrator::loadFasterData</referencedby>
+        <referencedby refid="class_faster2_histo_1a20fd8b47b9a9aecef8682ad5442db16d" compoundref="_faster2_histo_8hpp" startline="189" endline="199">Faster2Histo::multirun</referencedby>
         <referencedby refid="class_run_matrixator_1aa6d13b08060fef07b50d7ab6b35be0d6" compoundref="_run_matrixator_8hpp" startline="122" endline="150">RunMatrixator::run</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1a39cce770cb5f6dc49e2ae2558d709af6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -385,7 +418,8 @@ The declared function MUST have its two first parameters as follow : type functi
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTFasterReader.hpp" line="142" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="142" bodyend="142"/>
-        <references refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" compoundref="_m_t_faster_reader_8hpp" startline="159">m_timeshifts</references>
+        <references refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" compoundref="_m_t_faster_reader_8hpp" startline="160">m_timeshifts</references>
+        <referencedby refid="class_cobalt_calorimeter_1aceaa8e906e0257f450799026ec2269ca" compoundref="_cobalt_calorimeter_8hpp" startline="824" endline="837">CobaltCalorimeter::launchFaster</referencedby>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto const  &amp;</type>
@@ -403,8 +437,29 @@ The declared function MUST have its two first parameters as follow : type functi
         <inbodydescription>
         </inbodydescription>
         <location file="lib/MTObjects/MTFasterReader.hpp" line="143" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="143" bodyend="143"/>
-        <references refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" compoundref="_m_t_faster_reader_8hpp" startline="159">m_timeshifts</references>
-        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="226" endline="245">Realign</referencedby>
+        <references refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" compoundref="_m_t_faster_reader_8hpp" startline="160">m_timeshifts</references>
+        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="234" endline="253">Realign</referencedby>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="class_m_t_faster_reader_1a91677f13aa03d3b2f9dee6eb252286d1" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void MTFasterReader::showProgressBar</definition>
+        <argsstring>(bool const &amp;choice=true)</argsstring>
+        <name>showProgressBar</name>
+        <param>
+          <type>bool const &amp;</type>
+          <declname>choice</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="144" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="144" bodyend="144"/>
+        <references refid="class_m_t_faster_reader_1aca07d380d9a702313f523c1eea28c0d0" compoundref="_m_t_faster_reader_8hpp" startline="161">s_progressBar</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-static-func">
@@ -441,8 +496,14 @@ The declared function MUST have its two first parameters as follow : type functi
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="149" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="192" bodyend="201"/>
-        <references refid="class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20" compoundref="_m_t_faster_reader_8hpp" startline="154" endline="154">nextFilename</references>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="150" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="194" bodyend="208"/>
+        <references refid="class_m_t_faster_reader_1a023fdc6cdd455017dc7e911820206ac0" compoundref="_m_t_faster_reader_8hpp" startline="137" endline="137">getFilesList</references>
+        <references refid="class_m_t_object_1a9c9a57a49a12e1d408a5354e8520b3fe" compoundref="_m_t_object_8hpp" startline="250" endline="250">MTObject::getThreadIndex</references>
+        <references refid="class_m_t_object_1a67041891e1cebcb79af3180e55e702d6" compoundref="_m_t_object_8hpp" startline="159">MTObject::kill</references>
+        <references refid="class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20" compoundref="_m_t_faster_reader_8hpp" startline="155" endline="155">nextFilename</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="class_m_t_faster_reader_1aca07d380d9a702313f523c1eea28c0d0" compoundref="_m_t_faster_reader_8hpp" startline="161">s_progressBar</references>
+        <references refid="class_co_progress_bar_1a79b92711e75250b41c39aeeca73a1621" compoundref="_co_progress_bar_8hpp" startline="76" endline="100">CoProgressBar&lt; T &gt;::show</references>
       </memberdef>
       <memberdef kind="function" id="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -477,15 +538,15 @@ The declared function MUST have its two first parameters as follow : type functi
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="152" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="226" bodyend="245"/>
-        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="196">Hit::label</references>
-        <references refid="class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20" compoundref="_m_t_faster_reader_8hpp" startline="154" endline="154">nextFilename</references>
-        <references refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="259" endline="270">FasterReader::Read</references>
-        <references refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="239" endline="264">Hit::reading</references>
-        <references refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="210" endline="225">Hit::reset</references>
-        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="197">Hit::stamp</references>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="153" column="15" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="234" bodyend="253"/>
+        <references refid="class_hit_1a7742ff02158f94fd0ccd163fc34ee9d1" compoundref="_hit_8hpp" startline="204">Hit::label</references>
+        <references refid="class_m_t_faster_reader_1a63e239df82bf04244bdab829bb73cd20" compoundref="_m_t_faster_reader_8hpp" startline="155" endline="155">nextFilename</references>
+        <references refid="class_faster_reader_1a2d05907241b80ed637b2ae5a01503756" compoundref="_faster_reader_8hpp" startline="263" endline="274">FasterReader::Read</references>
+        <references refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">Hit::reading</references>
+        <references refid="class_hit_1a11ab514bf16c8173e974b6582ca6d37e" compoundref="_hit_8hpp" startline="218" endline="233">Hit::reset</references>
+        <references refid="class_hit_1ad98aea75b451b3246f45b25f1ccb9221" compoundref="_hit_8hpp" startline="205">Hit::stamp</references>
         <references refid="class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822" compoundref="_m_t_faster_reader_8hpp" startline="143" endline="143">timeshift</references>
-        <references refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="287" endline="304">Hit::writting</references>
+        <references refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">Hit::writting</references>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -504,11 +565,11 @@ The declared function MUST have its two first parameters as follow : type functi
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/MTObjects/MTFasterReader.hpp" line="154" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="154" bodyend="154"/>
-        <references refid="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" compoundref="_m_t_list_8hpp" startline="81" endline="91">MTVector&lt; T &gt;::getNext</references>
-        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="157">m_MTfiles</references>
-        <referencedby refid="class_m_t_faster_reader_1a7e26b2201486cd489b66ab12b83427e0" compoundref="_m_t_faster_reader_8hpp" startline="192" endline="201">Read</referencedby>
-        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="226" endline="245">Realign</referencedby>
+        <location file="lib/MTObjects/MTFasterReader.hpp" line="155" column="8" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="155" bodyend="155"/>
+        <references refid="class_m_t_vector_1a824a9ff009dde921eec4759c69f74ca7" compoundref="_m_t_list_8hpp" startline="82" endline="92">MTVector&lt; T &gt;::getNext</references>
+        <references refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" compoundref="_m_t_faster_reader_8hpp" startline="158">m_MTfiles</references>
+        <referencedby refid="class_m_t_faster_reader_1a7e26b2201486cd489b66ab12b83427e0" compoundref="_m_t_faster_reader_8hpp" startline="194" endline="208">Read</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" compoundref="_m_t_faster_reader_8hpp" startline="234" endline="253">Realign</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -518,24 +579,14 @@ The declared function MUST have its two first parameters as follow : type functi
 <para><bold>Look at the <ref refid="class_faster_reader" kindref="compound">FasterReader</ref> class for the various options</bold></para>
 <sect1 id="class_m_t_faster_reader_1autotoc_md0">
 <title>How to use this class</title>
-<para>First, you&apos;ll need to activate the multithreading :</para>
-<para>MTObject::Initialize(nb_threads)</para>
-<para>Then instanciate this class :</para>
-<para><orderedlist>
-<listitem><para><ref refid="class_m_t_faster_reader" kindref="compound">MTFasterReader</ref> reader(folder_name, first_n_files);</para>
-</listitem></orderedlist>
-</para>
-<para>To read all the files then leave the second argument empty</para>
-<para>Then, use the readRaw(function, arguments...) method to run any user defined function.</para>
-<para><orderedlist>
-<listitem><para>reader.readRaw(function, arguments...);</para>
-</listitem></orderedlist>
-</para>
-<para>Carefull : this function MUST have the following arguments is this EXACT order :</para>
-<para>return_type function(Hit &amp; hit, FasterReader &amp; reader, arguments...)</para>
-<para>This function can also be a static method of an object, but CANNOT be a member</para>
-<para>The trick to use the object anyway is to pass it as an argument :</para>
-<para>static return_type myClass::function(Hit &amp; hit, FasterReader &amp; reader, myClass &amp; class, arguments...);</para>
+<para>First, you&apos;ll need to activate the multithreading : <verbatim>   MTObject::Initialise(nb_threads)
+</verbatim> Then instanciate this class : <verbatim>   MTFasterReader reader(folder_name, first_n_files);
+</verbatim> To read all the files then leave the second argument empty</para>
+<para>Then, use the readRaw(function, arguments...) method to run any user defined function. <verbatim>   reader.readRaw(function, arguments...);
+</verbatim> Carefull : this function MUST have the following arguments is this EXACT order : <verbatim>   return_type function(Hit &amp; hit, FasterReader &amp; reader, arguments...)
+</verbatim> This function can also be a static method of an object, but CANNOT be a member</para>
+<para>The trick to use the object anyway is to pass it as an argument : <verbatim>   static return_type myClass::function(Hit &amp; hit, FasterReader &amp; reader, myClass &amp; class, arguments...);
+</verbatim></para>
 <para>Here is a minimal code snippet : <verbatim> void function(Hit &amp; hit, FasterReader &amp; reader, Arg &amp; some_argument) 
  {
    // This function is now setup to read one specific file
@@ -548,14 +599,13 @@ The declared function MUST have its two first parameters as follow : type functi
 
  int main()
  {
-    MTObject::Initialize(n); // n being an appropriate number of threads.
+    MTObject::Initialise(n); // n being an appropriate number of threads.
     MTFasterReader reader(folder);
     Arg some_argument;
     reader.readRaw(function, some_argument);
     // Do something with the argument like print(some_argument) or some_argument.Write()
  }
-</verbatim> Here are two function examples. The third parameter has been instanciated before the <ref refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" kindref="member">MTFasterReader::readRaw()</ref> method call</para>
-<para><verbatim>   void counter(Hit &amp; hit, FasterReader &amp; reader, MTCounter &amp; counterMT)
+</verbatim> Here are two function examples. The third parameter has been instanciated before the <ref refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" kindref="member">MTFasterReader::readRaw()</ref> method call <verbatim>   void counter(Hit &amp; hit, FasterReader &amp; reader, MTCounter &amp; counterMT)
     {
        int counter = 0;
        while(reader.Read())
@@ -574,7 +624,7 @@ The declared function MUST have its two first parameters as follow : type functi
       }
    }
 </verbatim> (see <ref refid="class_m_t_t_hist" kindref="compound">MTTHist</ref> and <ref refid="class_m_t_counter" kindref="compound">MTCounter</ref> documentation)</para>
-<para>It is recommended to use the &quot;&amp;&quot; symbol (reference) before the other as well parameters so that they are shared between threads, therefore only with thread safe objects, but it is not mandatory. If you want to pass read-only objects (i.e. lookup tables), consider adding the &quot;const&quot; key word like that : (..., type const &amp; lookup_table, ...). Another work-around is simply to declare your parameter at a global scope, although it is not recommended to have too many of them. </para>
+<para>It is recommended to pass the variables by reference (adding the &apos;&amp;&apos; character) for the parameters so that they are shared between threads. Therefore this should only be done for thread safe objects, like any object in the folder MTObjects/ or stl stuff, or read-only variables. If you want to pass read-only objects (i.e. lookup tables), consider adding the &quot;const&quot; key word (..., type const &amp; lookup_table, ...). Another work-around is simply to declare your parameter at a global scope, although it is not recommended to have too many global variables. </para>
 </sect1>
     </detaileddescription>
     <collaborationgraph>
@@ -611,12 +661,13 @@ The declared function MUST have its two first parameters as follow : type functi
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="lib/MTObjects/MTFasterReader.hpp" line="96" column="1" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="97" bodyend="160"/>
+    <location file="lib/MTObjects/MTFasterReader.hpp" line="95" column="1" bodyfile="lib/MTObjects/MTFasterReader.hpp" bodystart="96" bodyend="162"/>
     <listofallmembers>
       <member refid="class_m_t_faster_reader_1a8693e1143a0aea8096a527c7d9df9a63" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>addFile</name></member>
       <member refid="class_m_t_faster_reader_1a58a2fe8f9f9ba39808d43f36f45c8288" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>addFolder</name></member>
       <member refid="class_m_t_faster_reader_1a5d2beaf7551d9b288eef9509daf8b3b5" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>files</name></member>
       <member refid="class_m_t_faster_reader_1aa8421439b6ac40fc7513fc85ad5a112b" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>files</name></member>
+      <member refid="class_m_t_faster_reader_1a023fdc6cdd455017dc7e911820206ac0" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>getFilesList</name></member>
       <member refid="class_m_t_faster_reader_1ab64bd8c46413ce8e280acc80a33df936" prot="private" virt="non-virtual"><scope>MTFasterReader</scope><name>m_files</name></member>
       <member refid="class_m_t_faster_reader_1a2ba1ed98c0363d91f5c0c38d6f7f231c" prot="private" virt="non-virtual"><scope>MTFasterReader</scope><name>m_MTfiles</name></member>
       <member refid="class_m_t_faster_reader_1a2bea00b692984363df66161e172036e1" prot="private" virt="non-virtual"><scope>MTFasterReader</scope><name>m_timeshifts</name></member>
@@ -630,7 +681,9 @@ The declared function MUST have its two first parameters as follow : type functi
       <member refid="class_m_t_faster_reader_1a870da58b71c34fbcaf76733f0bc2ba71" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>readAligned</name></member>
       <member refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>readRaw</name></member>
       <member refid="class_m_t_faster_reader_1ad4720651ef47aefe5a1901e4659683e1" prot="private" virt="non-virtual"><scope>MTFasterReader</scope><name>Realign</name></member>
+      <member refid="class_m_t_faster_reader_1aca07d380d9a702313f523c1eea28c0d0" prot="private" virt="non-virtual"><scope>MTFasterReader</scope><name>s_progressBar</name></member>
       <member refid="class_m_t_faster_reader_1a39cce770cb5f6dc49e2ae2558d709af6" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>setTimeshifts</name></member>
+      <member refid="class_m_t_faster_reader_1a91677f13aa03d3b2f9dee6eb252286d1" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>showProgressBar</name></member>
       <member refid="class_m_t_faster_reader_1a2adcc31120c30ac26b0c35a67c0e8822" prot="public" virt="non-virtual"><scope>MTFasterReader</scope><name>timeshift</name></member>
     </listofallmembers>
   </compounddef>

@@ -24,7 +24,7 @@ var class_static_vector =
     [ "operator=", "class_static_vector.html#a9b1f4393056e120458e8d10da7222aa7", null ],
     [ "operator[]", "class_static_vector.html#ae2fa694636166997299fc80186d2c7dc", null ],
     [ "push_back", "class_static_vector.html#a8f604b0f4165d95a6b6653907c92ceb3", null ],
-    [ "push_back_unique", "class_static_vector.html#ac0b86d749f8e35274fbac0506c050465", null ],
+    [ "push_back_unique", "class_static_vector.html#ae9a13402fed613a29197e99ce20396f8", null ],
     [ "reserve", "class_static_vector.html#aac46f946b1d5b09e8713eac121594a06", null ],
     [ "resize", "class_static_vector.html#ae292e425773c82dc9eb20db025963e29", null ],
     [ "size", "class_static_vector.html#a44b964207cfd132dda347e246a3640c8", null ],

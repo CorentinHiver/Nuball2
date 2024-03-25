@@ -2,59 +2,96 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="print_8hpp" kind="file" language="C++">
     <compoundname>print.hpp</compoundname>
+    <includes local="no">iostream</includes>
+    <includes local="no">iomanip</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">map</includes>
+    <includedby refid="errors_8hpp" local="yes">lib/errors.hpp</includedby>
     <includedby refid="files__functions_8hpp" local="yes">lib/files_functions.hpp</includedby>
     <includedby refid="lib_co_8hpp" local="yes">lib/libCo.hpp</includedby>
     <includedby refid="vector__functions_8hpp" local="yes">lib/vector_functions.hpp</includedby>
-    <invincdepgraph>
-      <node id="46">
-        <label>lib/MTObjects/MTVariable.hpp</label>
-        <link refid="_m_t_variable_8hpp"/>
+    <incdepgraph>
+      <node id="3">
+        <label>iomanip</label>
       </node>
+      <node id="5">
+        <label>map</label>
+      </node>
+      <node id="1">
+        <label>lib/print.hpp</label>
+        <link refid="print_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="2">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
       <node id="4">
         <label>lib/Analyse/Counters.hpp</label>
         <link refid="_analyse_2_counters_8hpp"/>
       </node>
-      <node id="34">
+      <node id="49">
         <label>lib/Classes/RWMat.hxx</label>
         <link refid="_r_w_mat_8hxx"/>
       </node>
-      <node id="35">
+      <node id="41">
         <label>lib/libRoot.hpp</label>
         <link refid="lib_root_8hpp"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="36" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="38" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="14">
         <label>lib/Modules/Faster2Histo.hpp</label>
         <link refid="_faster2_histo_8hpp"/>
       </node>
-      <node id="27">
+      <node id="32">
         <label>lib/Classes/RF_Manager.hpp</label>
         <link refid="_r_f___manager_8hpp"/>
         <childnode refid="7" relation="include">
@@ -62,38 +99,46 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="38">
         <label>lib/Classes/Manip.hpp</label>
         <link refid="_manip_8hpp"/>
       </node>
-      <node id="20">
+      <node id="24">
         <label>lib/MTObjects/MTFasterReader.hpp</label>
         <link refid="_m_t_faster_reader_8hpp"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
-      <node id="25">
+      <node id="30">
         <label>lib/Classes/Nuball2Tree.hpp</label>
         <link refid="_nuball2_tree_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="21">
+        <label>lib/Modules/EvolutionPeaks.hpp</label>
+        <link refid="_evolution_peaks_8hpp"/>
+      </node>
+      <node id="2">
+        <label>lib/errors.hpp</label>
+        <link refid="errors_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
         <label>lib/Classes/Gate.hpp</label>
         <link refid="_gate_8hpp"/>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -104,40 +149,40 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="34">
         <label>lib/MTObjects/MTFilesManager.hpp</label>
         <link refid="_m_t_files_manager_8hpp"/>
       </node>
-      <node id="40">
+      <node id="47">
         <label>lib/Classes/FasterReader.hpp</label>
         <link refid="_faster_reader_8hpp"/>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="6">
         <label>lib/Analyse/EventAnalyse.hpp</label>
         <link refid="_event_analyse_8hpp"/>
       </node>
-      <node id="43">
-        <label>lib/MTObjects/MTCounter.hpp</label>
-        <link refid="_m_t_counter_8hpp"/>
-        <childnode refid="33" relation="include">
+      <node id="13">
+        <label>lib/Modules/CobaltCalorimeter.hpp</label>
+        <link refid="_cobalt_calorimeter_8hpp"/>
+      </node>
+      <node id="46">
+        <label>lib/Classes/Hit.hpp</label>
+        <link refid="_hit_8hpp"/>
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
-      </node>
-      <node id="39">
-        <label>lib/Classes/Hit.hpp</label>
-        <link refid="_hit_8hpp"/>
-        <childnode refid="38" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -151,40 +196,42 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
-        </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="16">
         <label>lib/Classes/EventBuilder.hpp</label>
         <link refid="_event_builder_8hpp"/>
       </node>
@@ -193,12 +240,14 @@
         <link refid="print_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="28">
         <label>lib/Analyse/Clovers.hpp</label>
         <link refid="_clovers_8hpp"/>
         <childnode refid="6" relation="include">
@@ -207,99 +256,123 @@
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="47">
-        <label>lib/Modules/Timewalk.hpp</label>
-        <link refid="_timewalk_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="10">
         <label>lib/Modules/CloverSpectra.hpp</label>
         <link refid="_clover_spectra_8hpp"/>
       </node>
-      <node id="45">
+      <node id="50">
         <label>lib/MTObjects/MTList.hpp</label>
         <link refid="_m_t_list_8hpp"/>
-        <childnode refid="32" relation="include">
+        <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>lib/Classes/Fit.hpp</label>
+        <link refid="_fit_8hpp"/>
+        <childnode refid="36" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
       </node>
-      <node id="44">
-        <label>lib/MTObjects/MTTHist.hpp</label>
-        <link refid="_m_t_t_hist_8hpp"/>
-        <childnode refid="31" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
+      <node id="51">
         <label>lib/files_functions.hpp</label>
         <link refid="files__functions_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="36">
+      <node id="42">
         <label>lib/Analyse/ParisCluster.hpp</label>
         <link refid="_paris_cluster_8hpp"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="17">
+        <label>lib/Classes/Calibration.hpp</label>
+        <link refid="_calibration_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>lib/Classes/DataFile.hpp</label>
+        <link refid="_data_file_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
         <label>lib/Classes/Counters.hpp</label>
         <link refid="_classes_2_counters_8hpp"/>
       </node>
-      <node id="38">
+      <node id="18">
+        <label>lib/Analyse/SpectraCo.hpp</label>
+        <link refid="_spectra_co_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>lib/Analyse/SpectraAlignator.hpp</label>
+        <link refid="_spectra_alignator_8hpp"/>
+      </node>
+      <node id="44">
         <label>lib/Classes/Detectors.hpp</label>
         <link refid="_detectors_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="41">
-        <label>lib/Classes/SpectraAlignator.hpp</label>
-        <link refid="_spectra_alignator_8hpp"/>
-      </node>
-      <node id="16">
+      <node id="27">
         <label>lib/Classes/Event.hpp</label>
         <link refid="_event_8hpp"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -307,62 +380,70 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
         <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="23">
-        <label>lib/Modules/Histogramor.hpp</label>
-        <link refid="_histogramor_8hpp"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="48">
+      <node id="52">
         <label>lib/vector_functions.hpp</label>
         <link refid="vector__functions_8hpp"/>
-        <childnode refid="2" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-      </node>
-      <node id="31">
-        <label>lib/Analyse/HistoAnalyse.hpp</label>
-        <link refid="_histo_analyse_8hpp"/>
       </node>
       <node id="7">
         <label>lib/Analyse/Sorted_Event.hpp</label>
         <link refid="_sorted___event_8hpp"/>
       </node>
+      <node id="48">
+        <label>lib/Classes/OutputTFile.hpp</label>
+        <link refid="_output_t_file_8hpp"/>
+      </node>
       <node id="11">
         <label>lib/Modules/Faster2Root.hpp</label>
         <link refid="_faster2_root_8hpp"/>
       </node>
-      <node id="37">
+      <node id="43">
         <label>lib/Analyse/ParisPhoswitch.hpp</label>
         <link refid="_paris_phoswitch_8hpp"/>
-        <childnode refid="36" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="15">
         <label>lib/Modules/RunMatrixator.hpp</label>
         <link refid="_run_matrixator_8hpp"/>
+      </node>
+      <node id="36">
+        <label>lib/Analyse/AnalysedSpectra.hpp</label>
+        <link refid="_analysed_spectra_8hpp"/>
+      </node>
+      <node id="22">
+        <label>lib/Classes/CoProgressBar.hpp</label>
+        <link refid="_co_progress_bar_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
       <node id="9">
         <label>lib/Classes/CoincBuilder.hpp</label>
@@ -379,30 +460,10 @@
         <link refid="_builder_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="42">
-        <label>lib/MTObjects/MTObject.hpp</label>
-        <link refid="_m_t_object_8hpp"/>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="45" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="44" relation="include">
-        </childnode>
-        <childnode refid="46" relation="include">
-        </childnode>
-      </node>
-      <node id="24">
+      <node id="45">
         <label>lib/Modules/NearLine.hpp</label>
         <link refid="_near_line_8hpp"/>
       </node>
@@ -411,70 +472,291 @@
         <link refid="_timeshifts_8hpp"/>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="13" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
-      <node id="18">
+      <node id="40">
+        <label>lib/Classes/Timewalk.hpp</label>
+        <link refid="_timewalk_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
         <label>lib/Analyse/Paris.hpp</label>
         <link refid="_paris_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="29">
         <label>lib/Classes/Alignator.hpp</label>
         <link refid="_alignator_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>lib/Classes/FilesManager.hpp</label>
-        <link refid="_files_manager_8hpp"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-      </node>
-      <node id="26">
-        <label>lib/MTObjects/MTRootReader.hpp</label>
-        <link refid="_m_t_root_reader_8hpp"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="21">
-        <label>lib/Modules/Calibration.hpp</label>
-        <link refid="_calibration_8hpp"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="33">
+        <label>lib/Classes/FilesManager.hpp</label>
+        <link refid="_files_manager_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>lib/Modules/Calibrator.hpp</label>
+        <link refid="_calibrator_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>lib/MTObjects/MTRootReader.hpp</label>
+        <link refid="_m_t_root_reader_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
         <label>lib/Classes/Performances.hpp</label>
         <link refid="_performances_8hpp"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="print_8hpp_1acbf3245277a73b810032219100559ae2" prot="public" static="no">
+        <name>_GLIBCXX_USE_CXX11_ABI</name>
+        <initializer>0/1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="6" column="9" bodyfile="lib/print.hpp" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a7b3b25cba33b07c303f3060fe41887f6" prot="public" static="no">
+        <name>BLACK</name>
+        <initializer>&quot;\u001b[30m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="21" column="9" bodyfile="lib/print.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a79d10e672abb49ad63eeaa8aaef57c38" prot="public" static="no">
+        <name>BLUE</name>
+        <initializer>&quot;\u001b[34m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="25" column="9" bodyfile="lib/print.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a37c3aae09c44fbf015cf4f048a1ea6bf" prot="public" static="no">
+        <name>BRIGHTBLACK</name>
+        <initializer>&quot;\u001b[30;1m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="30" column="9" bodyfile="lib/print.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a1856ac8f97780221a92b56c5b994b959" prot="public" static="no">
+        <name>BRIGHTBLUE</name>
+        <initializer>&quot;\u001b[34;1m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="34" column="9" bodyfile="lib/print.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a6c928762de56d07b80b0c9dc9472a4d5" prot="public" static="no">
+        <name>BRIGHTCYAN</name>
+        <initializer>&quot;\u001b[36;1m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="36" column="9" bodyfile="lib/print.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1aa52f4996a4480f3f19d881dbff50ae59" prot="public" static="no">
+        <name>BRIGHTGREEN</name>
+        <initializer>&quot;\u001b[32;1m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="32" column="9" bodyfile="lib/print.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a25c081882d60d0060029256721157d89" prot="public" static="no">
+        <name>BRIGHTMAGENTA</name>
+        <initializer>&quot;\u001b[35;1m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="35" column="9" bodyfile="lib/print.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a62e8ee733dff17c16de3391bb0fc50c7" prot="public" static="no">
+        <name>BRIGHTRED</name>
+        <initializer>&quot;\u001b[31;1m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="31" column="9" bodyfile="lib/print.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a099085e6196d7a7a29cbee3ef769c64e" prot="public" static="no">
+        <name>BRIGHTWHITE</name>
+        <initializer>&quot;\u001b[37;1m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="37" column="9" bodyfile="lib/print.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1ab95f936e60a13b90646adc2674c9a8e3" prot="public" static="no">
+        <name>BRIGHTYELLOW</name>
+        <initializer>&quot;\u001b[33;1m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="33" column="9" bodyfile="lib/print.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1ad243f93c16bc4c1d3e0a13b84421d760" prot="public" static="no">
+        <name>CYAN</name>
+        <initializer>&quot;\u001b[36m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="27" column="9" bodyfile="lib/print.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1acfbc006ea433ad708fdee3e82996e721" prot="public" static="no">
+        <name>GREEN</name>
+        <initializer>&quot;\u001b[32m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="23" column="9" bodyfile="lib/print.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1adce122f566c88a1eceeb79a635afa964" prot="public" static="no">
+        <name>GREY</name>
+        <initializer>&quot;\u001b[38;5;8m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="39" column="9" bodyfile="lib/print.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a6f699060902f800f12aaae150f3a708e" prot="public" static="no">
+        <name>MAGENTA</name>
+        <initializer>&quot;\u001b[35m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="26" column="9" bodyfile="lib/print.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a8d23feea868a983c8c2b661e1e16972f" prot="public" static="no">
+        <name>RED</name>
+        <initializer>&quot;\u001b[31m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="22" column="9" bodyfile="lib/print.hpp" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" prot="public" static="no">
+        <name>RESET</name>
+        <initializer>&quot;\u001b[0m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="19" column="9" bodyfile="lib/print.hpp" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1a87b537f5fa5c109d3c05c13d6b18f382" prot="public" static="no">
+        <name>WHITE</name>
+        <initializer>&quot;\u001b[37m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="28" column="9" bodyfile="lib/print.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="print_8hpp_1abf681265909adf3d3e8116c93c0ba179" prot="public" static="no">
+        <name>YELLOW</name>
+        <initializer>&quot;\u001b[33m&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="24" column="9" bodyfile="lib/print.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
       <sectiondef kind="func">
       <memberdef kind="function" id="print_8hpp_1a7c50c0690489629965f74c4921570ce5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -493,174 +775,23 @@
           <declname>args</declname>
         </param>
         <briefdescription>
+<para>Requires #define DEBUG or -DDEBUG in the compile line. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/print.hpp" line="65" column="18" bodyfile="lib/print.hpp" bodystart="65" bodyend="70"/>
-        <references refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" compoundref="print_8hpp" startline="7" endline="10">print</references>
-        <referencedby refid="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" compoundref="_m_t_t_hist_8hpp" startline="298" endline="307">MTTHist&lt; THist &gt;::operator-&gt;</referencedby>
+        <location file="lib/print.hpp" line="82" column="18" bodyfile="lib/print.hpp" bodystart="82" bodyend="87"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <referencedby refid="class_calibrator_1a00806ef12bceedaa6c16dad9b653f27f" compoundref="_calibrator_8hpp" startline="796" endline="870">Calibrator::analyse2</referencedby>
+        <referencedby refid="class_simplex_1a4212e98efa0b1468955d32a51387f3fc" compoundref="_spectra_alignator_8hpp" startline="299" endline="318">Simplex::centroid</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a0412e3cb8d1db4278f3b09316d4ec139" compoundref="_m_t_t_hist_8hpp" startline="495" endline="521">MTTHist&lt; THist &gt;::Merge</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a72615441a18ffcfab6ca4b848f63eee3" compoundref="_m_t_t_hist_8hpp" startline="524" endline="532">MTTHist&lt; THist &gt;::Merged</referencedby>
+        <referencedby refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a3fbc1867068d50b62b712f2458d35ff0" compoundref="_m_t_t_hist_8hpp" startline="278" endline="288">MTTHist&lt; THist &gt;::operator-&gt;</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a760c56b79865a37984edc07165a7bc73" compoundref="_cobalt_calorimeter_8hpp" startline="332" endline="660">CobaltCalorimeter::work</referencedby>
       </memberdef>
-      <memberdef kind="function" id="print_8hpp_1a021f6cc0c03903546e6a63851944f2e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class E</type>
-          </param>
-          <param>
-            <type><ref refid="lib_co_8hpp_1a801d6a451a01953ef8cbae6feb6a3638" kindref="member">size_t</ref></type>
-            <declname>size</declname>
-            <defname>size</defname>
-          </param>
-        </templateparamlist>
-        <type>std::ostream &amp;</type>
-        <definition>std::ostream&amp; operator&lt;&lt;</definition>
-        <argsstring>(std::ostream &amp;cout, std::array&lt; E, size &gt; const &amp;a)</argsstring>
-        <name>operator&lt;&lt;</name>
-        <param>
-          <type>std::ostream &amp;</type>
-          <declname>cout</declname>
-        </param>
-        <param>
-          <type>std::array&lt; E, size &gt; const &amp;</type>
-          <declname>a</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/print.hpp" line="57" column="1" bodyfile="lib/print.hpp" bodystart="57" bodyend="61"/>
-        <references refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" compoundref="print_8hpp" startline="7" endline="10">print</references>
-      </memberdef>
-      <memberdef kind="function" id="print_8hpp_1a1fc2e1be374c41706525b8d606242646" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class K</type>
-          </param>
-          <param>
-            <type>class V</type>
-          </param>
-        </templateparamlist>
-        <type>std::ostream &amp;</type>
-        <definition>std::ostream&amp; operator&lt;&lt;</definition>
-        <argsstring>(std::ostream &amp;cout, std::map&lt; K, V &gt; const &amp;m)</argsstring>
-        <name>operator&lt;&lt;</name>
-        <param>
-          <type>std::ostream &amp;</type>
-          <declname>cout</declname>
-        </param>
-        <param>
-          <type>std::map&lt; K, V &gt; const &amp;</type>
-          <declname>m</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/print.hpp" line="48" column="1" bodyfile="lib/print.hpp" bodystart="48" bodyend="54"/>
-      </memberdef>
-      <memberdef kind="function" id="print_8hpp_1a305d037b6a2823d9d8d935b1cd5dd2c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class F</type>
-          </param>
-          <param>
-            <type>class S</type>
-          </param>
-        </templateparamlist>
-        <type>std::ostream &amp;</type>
-        <definition>std::ostream&amp; operator&lt;&lt;</definition>
-        <argsstring>(std::ostream &amp;cout, std::pair&lt; F, S &gt; const &amp;p)</argsstring>
-        <name>operator&lt;&lt;</name>
-        <param>
-          <type>std::ostream &amp;</type>
-          <declname>cout</declname>
-        </param>
-        <param>
-          <type>std::pair&lt; F, S &gt; const &amp;</type>
-          <declname>p</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/print.hpp" line="41" column="1" bodyfile="lib/print.hpp" bodystart="41" bodyend="45"/>
-      </memberdef>
-      <memberdef kind="function" id="print_8hpp_1a03b9abfe3f12543c365e9a25848ba566" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class E</type>
-          </param>
-        </templateparamlist>
-        <type>std::ostream &amp;</type>
-        <definition>std::ostream&amp; operator&lt;&lt;</definition>
-        <argsstring>(std::ostream &amp;cout, std::vector&lt; E &gt; const &amp;v)</argsstring>
-        <name>operator&lt;&lt;</name>
-        <param>
-          <type>std::ostream &amp;</type>
-          <declname>cout</declname>
-        </param>
-        <param>
-          <type>std::vector&lt; E &gt; const &amp;</type>
-          <declname>v</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/print.hpp" line="34" column="1" bodyfile="lib/print.hpp" bodystart="34" bodyend="38"/>
-      </memberdef>
-      <memberdef kind="function" id="print_8hpp_1ad68695d41301547d77d546b80b1bc278" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>std::ostream &amp;</type>
-        <definition>std::ostream&amp; operator&lt;&lt;</definition>
-        <argsstring>(std::ostream &amp;cout, unsigned char const &amp;uc)</argsstring>
-        <name>operator&lt;&lt;</name>
-        <param>
-          <type>std::ostream &amp;</type>
-          <declname>cout</declname>
-        </param>
-        <param>
-          <type>unsigned char const &amp;</type>
-          <declname>uc</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/print.hpp" line="75" column="1" bodyfile="lib/print.hpp" bodystart="75" bodyend="79"/>
-      </memberdef>
-      <memberdef kind="function" id="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class T</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>void print</definition>
-        <argsstring>()</argsstring>
-        <name>print</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="lib/print.hpp" line="7" column="18" bodyfile="lib/print.hpp" bodystart="7" bodyend="10"/>
-        <referencedby refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" compoundref="print_8hpp" startline="65" endline="70">debug</referencedby>
-        <referencedby refid="print_8hpp_1a021f6cc0c03903546e6a63851944f2e8" compoundref="print_8hpp" startline="57" endline="61">operator&lt;&lt;</referencedby>
-        <referencedby refid="print_8hpp_1a527acf8dce9e07a4901d65a23979424b" compoundref="print_8hpp" startline="19" endline="22">print</referencedby>
-      </memberdef>
-      <memberdef kind="function" id="print_8hpp_1a527acf8dce9e07a4901d65a23979424b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -669,21 +800,231 @@
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void print</definition>
+        <definition>void error</definition>
         <argsstring>(T const &amp;... t)</argsstring>
-        <name>print</name>
+        <name>error</name>
         <param>
           <type>T const &amp;...</type>
           <declname>t</declname>
         </param>
         <briefdescription>
+<para>Print in red. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/print.hpp" line="19" column="18" bodyfile="lib/print.hpp" bodystart="19" bodyend="22"/>
-        <references refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" compoundref="print_8hpp" startline="7" endline="10">print</references>
+        <location file="lib/print.hpp" line="176" column="6" bodyfile="lib/print.hpp" bodystart="176" bodyend="181"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="print_8hpp_1a8d23feea868a983c8c2b661e1e16972f" compoundref="print_8hpp" startline="22">RED</references>
+        <references refid="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" compoundref="print_8hpp" startline="19">RESET</references>
+        <referencedby refid="class_spectra_co_1af580e2c735a90aff03e6c1c159ed9b17" compoundref="_spectra_co_8hpp" startline="602" endline="631">SpectraCo::calibrate</referencedby>
+        <referencedby refid="class_spectra_co_1aecb46bfbd2968e90d0ffd6d5848ca8b4" compoundref="_spectra_co_8hpp" startline="354" endline="370">SpectraCo::chi2</referencedby>
+        <referencedby refid="class_m_t_t_hist_1_1_copy_error_1ac090398113f53a468f9c63a8bbf4fa51" compoundref="_m_t_t_hist_8hpp" startline="355" endline="358">MTTHist&lt; THist &gt;::CopyError::CopyError</referencedby>
+        <referencedby refid="class_spectra_co_1a2d1839156a996f255b74024e12257bdb" compoundref="_spectra_co_8hpp" startline="767" endline="779">SpectraCo::derivative</referencedby>
+        <referencedby refid="class_spectra_co_1a213a9aea476c88a52c8c32a4eb775190" compoundref="_spectra_co_8hpp" startline="781" endline="793">SpectraCo::derivative2</referencedby>
+        <referencedby refid="class_timeshifts_1_1_empty_error_1a5289356f08a982b5d7cc050451c1780b" compoundref="_timeshifts_8hpp" startline="373" endline="373">Timeshifts::EmptyError::EmptyError</referencedby>
+        <referencedby refid="class_detectors_1_1_empty_error_1aeeb433faed85351daaf637651f38fdf9" compoundref="_detectors_8hpp" startline="215" endline="215">Detectors::EmptyError::EmptyError</referencedby>
+        <referencedby refid="class_detectors_1_1_error_1a59974e434a9b91b0ed91c2674ad20452" compoundref="_detectors_8hpp" startline="209" endline="209">Detectors::Error::Error</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1_1_file_error_1a262dced802827f156f0e120dcc91f016" compoundref="_paris_bidim_angles_8hpp" startline="53" endline="53">ParisBidimAngles::FileError::FileError</referencedby>
+        <referencedby refid="class_faster2_histo_1a327a8348f79c5ecf27a58baef32b81d8" compoundref="_faster2_histo_8hpp" startline="216" endline="270">Faster2Histo::fillHisto</referencedby>
+        <referencedby refid="class_spectra_co_1adfe0baad93402b4ae44a6c8ea14bc137" compoundref="_spectra_co_8hpp" startline="926" endline="963">SpectraCo::findPeaks</referencedby>
+        <referencedby refid="_detectors_8hpp_1ae343a2d2d22d862f6ac7ae10ba1b3d41" compoundref="_detectors_8hpp" startline="431" endline="453">loadFormattedTH1F</referencedby>
+        <referencedby refid="class_timeshifts_1_1_not_found_error_1a7c3315b4832d93e060e3b22f72b74282" compoundref="_timeshifts_8hpp" startline="364" endline="364">Timeshifts::NotFoundError::NotFoundError</referencedby>
+        <referencedby refid="class_spectra_co_1aa4225392a595ff8a0950ef67610096d0" compoundref="_spectra_co_8hpp" startline="546" endline="561">SpectraCo::operator/</referencedby>
+        <referencedby refid="class_overwrite_error_1a1ceef07c7c86c032768abcb44e85b270" compoundref="errors_8hpp" startline="9" endline="9">OverwriteError::OverwriteError</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="239" endline="293">Detectors::readFile</referencedby>
+        <referencedby refid="class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18" compoundref="_evolution_peaks_8hpp" startline="102" endline="345">EvolutionPeaks::run</referencedby>
+        <referencedby refid="class_run_matrixator_1aeb9889ba763858dfb65e05c3a7bb142e" compoundref="_run_matrixator_8hpp" startline="501" endline="550">RunMatrixator::Write</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="print_8hpp_1a141d6b4b0d8c1824f6ed472b5226eab4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void information</definition>
+        <argsstring>(T const &amp;... t)</argsstring>
+        <name>information</name>
+        <param>
+          <type>T const &amp;...</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Print in grey. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="185" column="6" bodyfile="lib/print.hpp" bodystart="185" bodyend="190"/>
+        <references refid="print_8hpp_1adce122f566c88a1eceeb79a635afa964" compoundref="print_8hpp" startline="39">GREY</references>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" compoundref="print_8hpp" startline="19">RESET</references>
+        <referencedby refid="class_calibrator_1aa0fff626078ec3cd2e453c5cf6681462" compoundref="_calibrator_8hpp" startline="421" endline="720">Calibrator::peakFinder</referencedby>
+        <referencedby refid="class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18" compoundref="_evolution_peaks_8hpp" startline="102" endline="345">EvolutionPeaks::run</referencedby>
+        <referencedby refid="class_calibrator_1aad90b0e3951d4caffe11e319c7108a51" compoundref="_calibrator_8hpp" startline="960" endline="1025">Calibrator::verify</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void print</definition>
+        <argsstring>()</argsstring>
+        <name>print</name>
+        <briefdescription>
+<para>New line. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="44" column="6" bodyfile="lib/print.hpp" bodystart="44" bodyend="44"/>
+        <referencedby refid="class_files_manager_1a6d05662378bde592075237b9fa0a5168" compoundref="_files_manager_8hpp" startline="143" endline="163">FilesManager::addFolder</referencedby>
+        <referencedby refid="lib_root_8hpp_1a6f95a95b189be45d91548ce3bfb70a55" compoundref="lib_root_8hpp" startline="111" endline="127">AddTH1</referencedby>
+        <referencedby refid="lib_root_8hpp_1a0135527c42feb1bbb8180af21ef5229e" compoundref="lib_root_8hpp" startline="140" endline="176">AddTH1ByValue</referencedby>
+        <referencedby refid="struct_minimisator_1_1_nelder_mead_parameters_1aa2ff65f63bdee40f4cbc28ebd3b58515" compoundref="_spectra_alignator_8hpp" startline="436" endline="444">Minimisator::NelderMeadParameters::adjustToDimension</referencedby>
+        <referencedby refid="class_spectra_alignator_1a1844e2814df35c43677ed678f79fc00d" compoundref="_spectra_alignator_8hpp" startline="717" endline="874">SpectraAlignator::alignSpectra</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a6d189182d62a2b03d53520834c439620" compoundref="_cobalt_calorimeter_8hpp" startline="662" endline="702">CobaltCalorimeter::Analyse</referencedby>
+        <referencedby refid="class_timeshifts_1a608d9443a15dd669920e10dd8baee23a" compoundref="_timeshifts_8hpp" startline="893" endline="1007">Timeshifts::analyse</referencedby>
+        <referencedby refid="class_calibrator_1aa15e2c6afb9da71595926a10d89f0761" compoundref="_calibrator_8hpp" startline="904" endline="912">Calibrator::analyse</referencedby>
+        <referencedby refid="class_calibrator_1a00806ef12bceedaa6c16dad9b653f27f" compoundref="_calibrator_8hpp" startline="796" endline="870">Calibrator::analyse2</referencedby>
+        <referencedby refid="class_hit_buffer_1adeeba852a151488e1e9f043ecb00d1e7" compoundref="_hit_buffer_8hpp" startline="19" endline="27">HitBuffer::at</referencedby>
+        <referencedby refid="class_analysed_spectra_1aa6f0263d9827ce94c3c9e273c72182c8" compoundref="_analysed_spectra_8hpp" startline="87" endline="94">AnalysedSpectra::autoCanvas</referencedby>
+        <referencedby refid="class_biggest_peak_fitter_1a645977fa8bd708c4e9137d926c3136f0" compoundref="lib_root_8hpp" startline="1456" endline="1492">BiggestPeakFitter::BiggestPeakFitter</referencedby>
+        <referencedby refid="class_faster2_root_1a5eadd66ea26d632b75a92aa9c2878bf3" compoundref="_faster2_root_8hpp" startline="145" endline="150">Faster2Root::buildEvents</referencedby>
+        <referencedby refid="class_calibrator_1af5fcdabfdef0a399a9e3a3992b3029fb" compoundref="_calibrator_8hpp" startline="221" endline="232">Calibrator::calculate</referencedby>
+        <referencedby refid="class_timeshifts_1a3d3ab1b3498ca45832d8a8735f16e188" compoundref="_timeshifts_8hpp" startline="594" endline="615">Timeshifts::calculate</referencedby>
+        <referencedby refid="class_calibrator_1af12375fcb4e97a40d98fb2549565f2f2" compoundref="_calibrator_8hpp" startline="274" endline="283">Calibrator::calculate2</referencedby>
+        <referencedby refid="class_paris_1a66745a02a04a8733eba514f319b1cc5e" compoundref="_paris_8hpp" startline="283" endline="316">Paris::calculateBidimAngles</referencedby>
+        <referencedby refid="class_file_1a6b15fde4d8bb49099cdf7f27c4f36fae" compoundref="files__functions_8hpp" startline="842" endline="854">File::check</referencedby>
+        <referencedby refid="class_data_file_1a8acfde896e9216daa785bc16752ef73e" compoundref="_data_file_8hpp" startline="298" endline="301">DataFile&lt; Index, T &gt;::checkInputfile</referencedby>
+        <referencedby refid="class_data_file_1aaffaf1e2df21446c06f7647c925822be" compoundref="_data_file_8hpp" startline="304" endline="307">DataFile&lt; Index, T &gt;::checkOutputfile</referencedby>
+        <referencedby refid="class_timeshifts_1a715283a5be42b86ca70b4e468ccb2931" compoundref="_timeshifts_8hpp" startline="219" endline="227">Timeshifts::CheckParameters</referencedby>
+        <referencedby refid="class_analysed_spectra_1aa810982a33acfa30e512aa45da4461ce" compoundref="_analysed_spectra_8hpp" startline="263" endline="301">AnalysedSpectra::choosePeaks</referencedby>
+        <referencedby refid="class_nuball2_tree_1a7c2657d3f3d3e58b2d20de0737f11ebc" compoundref="_nuball2_tree_8hpp" startline="24" endline="24">Nuball2Tree::Close</referencedby>
+        <referencedby refid="class_faster2_root_1a7d6d5249c6ced2548a58406eca085cdb" compoundref="_faster2_root_8hpp" startline="293" endline="300">Faster2Root::convert</referencedby>
+        <referencedby refid="class_faster2_root_1a2ba93a4814723b6103dc25a701f3dc89" compoundref="_faster2_root_8hpp" startline="309" endline="403">Faster2Root::convertFile</referencedby>
+        <referencedby refid="files__functions_8hpp_1af52310dd2d55713265daa0e58dd7bf21" compoundref="files__functions_8hpp" startline="117" endline="133">create_folder_if_none</referencedby>
+        <referencedby refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" compoundref="print_8hpp" startline="82" endline="87">debug</referencedby>
+        <referencedby refid="lib_root_8hpp_1a17dc0eddbbe36a95d0397c09c597a338" compoundref="lib_root_8hpp" startline="1261" endline="1287">draw_all_TH1</referencedby>
+        <referencedby refid="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" compoundref="print_8hpp" startline="176" endline="181">error</referencedby>
+        <referencedby refid="class_objective_function_chi2_1ab9abe6ab2b65aa87d805b9866044eaed" compoundref="_spectra_alignator_8hpp" startline="391" endline="421">ObjectiveFunctionChi2::evaluate</referencedby>
+        <referencedby refid="namespace_co_analyse_1acb07ede224cab3e9289d25c72c099b24" compoundref="lib_root_8hpp" startline="983" endline="990">CoAnalyse::extractBackgroundArray</referencedby>
+        <referencedby refid="class_faster2_root_1ad07b97d280479aabc26e04d920726ddb" compoundref="_faster2_root_8hpp" startline="128" endline="137">Faster2Root::Faster2Root</referencedby>
+        <referencedby refid="class_filename_1a4f624193292726bfe15c0c16322ccd07" compoundref="files__functions_8hpp" startline="713" endline="727">Filename::fill</referencedby>
+        <referencedby refid="class_calibrator_1a01917c2d097c62f2c6dc3a608d4e3ab4" compoundref="_calibrator_8hpp" startline="348" endline="388">Calibrator::fillRootDataHisto</referencedby>
+        <referencedby refid="class_analysed_spectra_1aa62448f275c4787703e7d77a38dd421a" compoundref="_analysed_spectra_8hpp" startline="181" endline="261">AnalysedSpectra::fitPeaks</referencedby>
+        <referencedby refid="lib_root_8hpp_1ab7f08b4e478a833328fa0fb5cebf88d2" compoundref="lib_root_8hpp" startline="1188" endline="1247">fuse_all_histo</referencedby>
+        <referencedby refid="lib_root_8hpp_1a0bbbdcf3f7ab789fec1bdd518f3e0bbe" compoundref="lib_root_8hpp" startline="1141" endline="1159">get_names_of</referencedby>
+        <referencedby refid="lib_root_8hpp_1a193ab9e416757c44b70605b92a8824b8" compoundref="lib_root_8hpp" startline="1089" endline="1106">get_TH1F_names</referencedby>
+        <referencedby refid="lib_root_8hpp_1ad3470a3661e492e7d353b083639b8743" compoundref="lib_root_8hpp" startline="1327" endline="1336">GetPoint</referencedby>
+        <referencedby refid="print_8hpp_1a141d6b4b0d8c1824f6ed472b5226eab4" compoundref="print_8hpp" startline="185" endline="190">information</referencedby>
+        <referencedby refid="class_faster_reader_1aa887429a942ff961225755336c06c025" compoundref="_faster_reader_8hpp" startline="204" endline="245">FasterReader::Initialise</referencedby>
+        <referencedby refid="struct_calibrator_1_1histograms_1a4ec16b7a4a18e1f8988684e837bd4d4e" compoundref="_calibrator_8hpp" startline="156" endline="200">Calibrator::histograms::Initialise</referencedby>
+        <referencedby refid="class_run_matrixator_1a7254994e33c3a8a124a7fd4d67158a52" compoundref="_run_matrixator_8hpp" startline="152" endline="239">RunMatrixator::Initialise</referencedby>
+        <referencedby refid="class_timeshifts_1a95e126cc70243c24a016af24652ecb0b" compoundref="_timeshifts_8hpp" startline="533" endline="566">Timeshifts::Initialise</referencedby>
+        <referencedby refid="class_clover_spectra_1a84dbd5cac3977a0082ab763d51f938d7" compoundref="_clover_spectra_8hpp" startline="114" endline="145">CloverSpectra::Initialise</referencedby>
+        <referencedby refid="class_d_s_s_d_1a2c9fd5c55f23797bdcf66933d7662cb1" compoundref="_d_s_s_d_8hpp" startline="56" endline="78">DSSD::InitialiseArrays</referencedby>
+        <referencedby refid="class_paris_1aaa7a70ca124d8c0428ee54c7d9d42256" compoundref="_paris_8hpp" startline="45" endline="61">Paris::InitialiseArrays</referencedby>
+        <referencedby refid="class_faster_reader_1a83d86d816bed5053765a05ddf4da278d" compoundref="_faster_reader_8hpp" startline="247" endline="257">FasterReader::InitialiseReader</referencedby>
+        <referencedby refid="class_event_1a93d81b8139c839326e56f33ef63097e8" compoundref="_event_8hpp" startline="168" endline="177">Event::isCalibrated</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1ae731ee28c852d150fbf668c27604b8ed" compoundref="_cobalt_calorimeter_8hpp" startline="281" endline="295">CobaltCalorimeter::launchRoot</referencedby>
+        <referencedby refid="lib_root_8hpp_1afa74a9c66d3386ccfacfe79ba7d4285c" compoundref="lib_root_8hpp" startline="1495" endline="1498">libRoot</referencedby>
+        <referencedby refid="files__functions_8hpp_1a25af8f31a8b51b38a4c2334e3901acfc" compoundref="files__functions_8hpp" startline="262" endline="280">listFileReader</referencedby>
+        <referencedby refid="class_calibration_1a660694835089e0020f014c65f3d6f7e7" compoundref="_calibration_8hpp" startline="283" endline="327">Calibration::load</referencedby>
+        <referencedby refid="class_faster2_root_1ad30ccf937150bbd3504ec3a354b76c8f" compoundref="_faster2_root_8hpp" startline="211" endline="265">Faster2Root::load</referencedby>
+        <referencedby refid="class_faster2_histo_1a72f8004ae550c02db09791b810c0252d" compoundref="_faster2_histo_8hpp" startline="146" endline="187">Faster2Histo::load</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a904829a187c50059dda2d439ef0d6db1" compoundref="_paris_bidim_angles_8hpp" startline="98" endline="122">ParisBidimAngles::load</referencedby>
+        <referencedby refid="class_timeshifts_1a28163efe8d487669cf50d5f6e1060d71" compoundref="_timeshifts_8hpp" startline="388" endline="427">Timeshifts::load</referencedby>
+        <referencedby refid="class_data_file_1a6bfb54890d3d1e60dd5104496b00eecf" compoundref="_data_file_8hpp" startline="224" endline="273">DataFile&lt; Index, T &gt;::loadData</referencedby>
+        <referencedby refid="class_calibrator_1a00297f1bb253279bfa8bdce83fb81951" compoundref="_calibrator_8hpp" startline="311" endline="326">Calibrator::loadFasterData</referencedby>
+        <referencedby refid="class_timewalk_1abe911d2d25eefb7886fe35c41f1d61db" compoundref="_timewalk_8hpp" startline="36" endline="69">Timewalk::loadFile</referencedby>
+        <referencedby refid="class_timewalks_1a4292dfbeb4cff4c470bd04d2206dc28a" compoundref="_timewalk_8hpp" startline="122" endline="180">Timewalks::loadFile</referencedby>
+        <referencedby refid="class_alignator_1a45f439bebedb99774e387f629cb0dfe9" compoundref="_alignator_8hpp" startline="51" endline="99">Alignator::loadNewIndex</referencedby>
+        <referencedby refid="class_evolution_peaks_1aa6877d718198437381b3516d0593e2c6" compoundref="_evolution_peaks_8hpp" startline="74" endline="100">EvolutionPeaks::loadParameters</referencedby>
+        <referencedby refid="class_path_1af8ae2716e0002e69eff44e6d669e6051" compoundref="files__functions_8hpp" startline="580" endline="613">Path::loadPath</referencedby>
+        <referencedby refid="class_calibrator_1af067fee0c3a37336851ea63f2561b59f" compoundref="_calibrator_8hpp" startline="328" endline="337">Calibrator::loadRootData</referencedby>
+        <referencedby refid="class_calibrator_1a0d2a41f02b2c16409b58ce3ee4183792" compoundref="_calibrator_8hpp" startline="290" endline="309">Calibrator::loadRootHisto</referencedby>
+        <referencedby refid="class_my_error_1a05198cf33bf051e16f6ec2647bf4b571" compoundref="_spectra_co_8hpp" startline="12" endline="12">MyError::MyError</referencedby>
+        <referencedby refid="class_minimisator_1a3c467eeb96f716414dbfb6f2348c6340" compoundref="_spectra_alignator_8hpp" startline="460" endline="631">Minimisator::nelderMead</referencedby>
+        <referencedby refid="class_spectra_alignator_1aed228999d9baba04b99e8542204e058b" compoundref="_spectra_alignator_8hpp" startline="703" endline="714">SpectraAlignator::newAlignement</referencedby>
+        <referencedby refid="class_nuball2_tree_1a9f6fa077da6a7c27dfa5e9d2252cdfd0" compoundref="_nuball2_tree_8hpp" startline="45" endline="81">Nuball2Tree::Open</referencedby>
+        <referencedby refid="_clover_module_8hpp_1aae60fbf6c352f4c0682ec1c2a3f04181" compoundref="_clover_module_8hpp" startline="69" endline="80">operator&lt;&lt;</referencedby>
+        <referencedby refid="class_paris_x_y_1a5457f46da1c0654885ba411edc93a4e0" compoundref="_paris_x_y_8hpp" startline="9" endline="18">ParisXY::ParisXY</referencedby>
+        <referencedby refid="class_calibrator_1aa0fff626078ec3cd2e453c5cf6681462" compoundref="_calibrator_8hpp" startline="421" endline="720">Calibrator::peakFinder</referencedby>
+        <referencedby refid="class_position_x_y_1a4a0681618dd5af4f1fbcef07db0da809" compoundref="_position_x_y_8hpp" startline="28" endline="28">PositionXY::Print</referencedby>
+        <referencedby refid="struct_minimisator_1_1_nelder_mead_parameters_1a9cd5948b40f44ce5783e5e61683834f3" compoundref="_spectra_alignator_8hpp" startline="446" endline="450">Minimisator::NelderMeadParameters::Print</referencedby>
+        <referencedby refid="class_calibration_1aaba010db225b8b01931d013eefda800b" compoundref="_calibration_8hpp" startline="354" endline="354">Calibration::Print</referencedby>
+        <referencedby refid="class_files_manager_1a8d40403481fa064867f12ff55dcbf0ba" compoundref="_files_manager_8hpp" startline="30" endline="30">FilesManager::Print</referencedby>
+        <referencedby refid="class_timewalk_1a6f804cbc759f0980dce1aaee6cf5cd5a" compoundref="_timewalk_8hpp" startline="13" endline="13">Timewalk::Print</referencedby>
+        <referencedby refid="class_m_t_vector_1a3bca517dd665e4ad48dceab41c6db9f7" compoundref="_m_t_list_8hpp" startline="59" endline="63">MTVector&lt; T &gt;::Print</referencedby>
+        <referencedby refid="class_m_t_t_hist_1ab5e2653e7d709487a194b192baccfe32" compoundref="_m_t_t_hist_8hpp" startline="596" endline="599">MTTHist&lt; THist &gt;::Print</referencedby>
+        <referencedby refid="class_event_1a090d2a02b5c85844e1287e7e693af3a7" compoundref="_event_8hpp" startline="411" endline="414">Event::Print</referencedby>
+        <referencedby refid="print_8hpp_1a942a3ac725f791da05ff038fd549a721" compoundref="print_8hpp" startline="54" endline="54">print</referencedby>
+        <referencedby refid="class_clovers_1a0d853153f63a1b04ca62756615dfd741" compoundref="_clovers_8hpp" startline="682" endline="689">Clovers::PrintClean</referencedby>
+        <referencedby refid="class_files_manager_1ae8f32735de82faefc4284fcb2623f206" compoundref="_files_manager_8hpp" startline="31" endline="31">FilesManager::printFolders</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a01bb4c02770855a41d53b3544b3cae3a" compoundref="_m_t_faster_reader_8hpp" startline="136" endline="136">MTFasterReader::printMTFiles</referencedby>
+        <referencedby refid="class_clover_spectra_1a693dcd3c5e09e4da918a6bb095060d37" compoundref="_clover_spectra_8hpp" startline="97" endline="112">CloverSpectra::printParameters</referencedby>
+        <referencedby refid="class_evolution_peaks_1a0b661bdce835988388c52c174b59f57b" compoundref="_evolution_peaks_8hpp" startline="59" endline="72">EvolutionPeaks::printParameters</referencedby>
+        <referencedby refid="class_faster2_root_1a6cc6f4731958e8c74ad0e07f4d97f4a0" compoundref="_faster2_root_8hpp" startline="192" endline="209">Faster2Root::printParameters</referencedby>
+        <referencedby refid="class_faster2_histo_1af5be7bfaa8186926e62e736310dffc26" compoundref="_faster2_histo_8hpp" startline="119" endline="144">Faster2Histo::printParameters</referencedby>
+        <referencedby refid="class_event_1a65f680e6b4c74419f4aa92e6e772efb0" compoundref="_event_8hpp" startline="362" endline="375">Event::push_back</referencedby>
+        <referencedby refid="class_event_1a78b1cb630e7720f205a9c00e2c111102" compoundref="_event_8hpp" startline="386" endline="409">Event::push_front</referencedby>
+        <referencedby refid="class_m_t_root_reader_1a81c87315eaaf2147d6f30639194fd4e8" compoundref="_m_t_root_reader_8hpp" startline="34" endline="39">MTRootReader::read</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1a7e26b2201486cd489b66ab12b83427e0" compoundref="_m_t_faster_reader_8hpp" startline="194" endline="208">MTFasterReader::Read</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1af1ec563da5602cc23d7b0cd98b63bee0" compoundref="_m_t_faster_reader_8hpp" startline="225" endline="231">MTFasterReader::readAligned</referencedby>
+        <referencedby refid="class_faster_reader_1a0b2cd239d03d34e69b10418cb6292858" compoundref="_faster_reader_8hpp" startline="352" endline="381">FasterReader::ReadData</referencedby>
+        <referencedby refid="class_detectors_1a3d5631f8fd2770b6b3a2a178130519ad" compoundref="_detectors_8hpp" startline="239" endline="293">Detectors::readFile</referencedby>
+        <referencedby refid="class_manip_1ad044eafeb71fda443f77377d44d652d0" compoundref="_manip_8hpp" startline="17" endline="27">Manip::readFile</referencedby>
+        <referencedby refid="class_event_1a243e29bac8d969902d32a4d444fc5174" compoundref="_event_8hpp" startline="270" endline="303">Event::reading</referencedby>
+        <referencedby refid="class_hit_1ad809be4a75a5c588504fa77d442e393d" compoundref="_hit_8hpp" startline="247" endline="276">Hit::reading</referencedby>
+        <referencedby refid="class_near_line_1a3280d6187c79a0aaf4f23b97fe3089ee" compoundref="_near_line_8hpp" startline="44" endline="68">NearLine::readParam</referencedby>
+        <referencedby refid="class_m_t_faster_reader_1ae316d31ebcb18ae8689522509d1ba513" compoundref="_m_t_faster_reader_8hpp" startline="186" endline="191">MTFasterReader::readRaw</referencedby>
+        <referencedby refid="namespace_co_analyse_1afa2d6e36c43655ace45e8aa55a53d4da" compoundref="lib_root_8hpp" startline="1015" endline="1081">CoAnalyse::removeBackground</referencedby>
+        <referencedby refid="class_r_w_mat_1a2a38f63e3061d82c63f8d87227bef093" compoundref="_r_w_mat_8hxx" startline="69" endline="95">RWMat::Reset</referencedby>
+        <referencedby refid="class_detectors_1af2bb20ee60f504df326b87e9ebbaef30" compoundref="_detectors_8hpp" startline="219" endline="225">Detectors::resize</referencedby>
+        <referencedby refid="class_spectra_co_1af27cbecc0fdfd5542e0186856bc4c4cf" compoundref="_spectra_co_8hpp" startline="814" endline="817">SpectraCo::resizeX</referencedby>
+        <referencedby refid="class_paris_1a21f73f502db25f43f31426c4ea88f419" compoundref="_paris_8hpp" startline="318" endline="373">Paris::rotate</referencedby>
+        <referencedby refid="class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18" compoundref="_evolution_peaks_8hpp" startline="102" endline="345">EvolutionPeaks::run</referencedby>
+        <referencedby refid="class_run_matrixator_1aa6d13b08060fef07b50d7ab6b35be0d6" compoundref="_run_matrixator_8hpp" startline="122" endline="150">RunMatrixator::run</referencedby>
+        <referencedby refid="class_clover_spectra_1a614d7deabde77b0ffea91ca2a6002484" compoundref="_clover_spectra_8hpp" startline="161" endline="207">CloverSpectra::runFasterReader</referencedby>
+        <referencedby refid="class_faster_reader_1aa1fcb8d6721212bc982cac0ae4e597eb" compoundref="_faster_reader_8hpp" startline="117" endline="117">FasterReader::setMaxHits</referencedby>
+        <referencedby refid="class_manip_1ab0813163118017c1064ec02f091356b8" compoundref="_manip_8hpp" startline="73" endline="81">Manip::setMT</referencedby>
+        <referencedby refid="class_i_options_1aab7ee24774fddd6ccb14bb6801fafdb0" compoundref="_hit_8hpp" startline="88" endline="108">IOptions::setOptions</referencedby>
+        <referencedby refid="class_timeshifts_1acca1130b271301c5477d4b4a23ae4e5b" compoundref="_timeshifts_8hpp" startline="429" endline="458">Timeshifts::setParameters</referencedby>
+        <referencedby refid="class_timeshifts_1a304c1076d703a78153cfe72d61b28425" compoundref="_timeshifts_8hpp" startline="1087" endline="1094">Timeshifts::setTimeWindow_ns</referencedby>
+        <referencedby refid="class_timeshifts_1a89dbca371bce4601ee60122f544faf95" compoundref="_timeshifts_8hpp" startline="1149" endline="1185">Timeshifts::shiftTimeSpectra</referencedby>
+        <referencedby refid="class_simplex_1ac74b813d1b4b98e97d1c98157997d294" compoundref="_spectra_alignator_8hpp" startline="236" endline="243">Simplex::Simplex</referencedby>
+        <referencedby refid="class_timeshifts_1abef7234fe827ae3c7758788cf22b6921" compoundref="_timeshifts_8hpp" startline="732" endline="771">Timeshifts::treatFasterFile</referencedby>
+        <referencedby refid="class_faster2_histo_1a48d7d46929ffbd69ccc3a590c535d3b7" compoundref="_faster2_histo_8hpp" startline="201" endline="214">Faster2Histo::treatFile</referencedby>
+        <referencedby refid="class_timeshifts_1a21dc1e7bf232c6b0637b16aa04e43701" compoundref="_timeshifts_8hpp" startline="568" endline="592">Timeshifts::treatFolder</referencedby>
+        <referencedby refid="class_faster_reader_1a94fd509a6352735984a20c03fb046254" compoundref="_faster_reader_8hpp" startline="526" endline="550">FasterReader::TreatQDC2</referencedby>
+        <referencedby refid="class_faster_reader_1afa7cbf1733ff68804ef4f7706bf58416" compoundref="_faster_reader_8hpp" startline="558" endline="582">FasterReader::TreatQDC3</referencedby>
+        <referencedby refid="class_timeshifts_1a6520eab7a8824f41a2be8517d83fc835" compoundref="_timeshifts_8hpp" startline="621" endline="665">Timeshifts::verify</referencedby>
+        <referencedby refid="class_calibrator_1aad90b0e3951d4caffe11e319c7108a51" compoundref="_calibrator_8hpp" startline="960" endline="1025">Calibrator::verify</referencedby>
+        <referencedby refid="print_8hpp_1ad9e2dd512a5915af4751a40fefbfbc94" compoundref="print_8hpp" startline="167" endline="172">warning</referencedby>
+        <referencedby refid="class_cobalt_calorimeter_1a526f29997f55b17d33be2b87b30c7a76" compoundref="_cobalt_calorimeter_8hpp" startline="704" endline="811">CobaltCalorimeter::write</referencedby>
+        <referencedby refid="class_run_matrixator_1aeb9889ba763858dfb65e05c3a7bb142e" compoundref="_run_matrixator_8hpp" startline="501" endline="550">RunMatrixator::Write</referencedby>
+        <referencedby refid="class_m_t_t_hist_1a84c745f09bbccc075589f8531c4454e3" compoundref="_m_t_t_hist_8hpp" startline="554" endline="578">MTTHist&lt; THist &gt;::Write</referencedby>
+        <referencedby refid="class_output_t_file_1ae051c7d04475a5151d2c06d2be9e6c45" compoundref="_output_t_file_8hpp" startline="20" endline="20">OutputTFile::Write</referencedby>
+        <referencedby refid="class_paris_bidim_angles_1a0ca1c561f33bc79fc16b630ef4db9144" compoundref="_paris_bidim_angles_8hpp" startline="77" endline="88">ParisBidimAngles::write</referencedby>
+        <referencedby refid="class_faster2_histo_1a8821f5ded43a6f91593962adbe4761b9" compoundref="_faster2_histo_8hpp" startline="272" endline="298">Faster2Histo::write</referencedby>
+        <referencedby refid="class_calibration_1a62f73bc45da4c1cd949b4ce32b630916" compoundref="_calibration_8hpp" startline="380" endline="390">Calibration::write</referencedby>
+        <referencedby refid="class_r_w_mat_1ab155902ca767a777680d3196661a7878" compoundref="_r_w_mat_8hxx" startline="141" endline="170">RWMat::Write</referencedby>
+        <referencedby refid="class_calibrator_1a04a1a6e9e32b48699affcd9adfffa2f0" compoundref="_calibrator_8hpp" startline="1027" endline="1036">Calibrator::writeCalibratedHisto</referencedby>
+        <referencedby refid="class_data_file_1ad345f346a5757caa2eeb40e14af39460" compoundref="_data_file_8hpp" startline="316" endline="324">DataFile&lt; Index, T &gt;::writeData</referencedby>
+        <referencedby refid="class_timeshifts_1ad19fdc64b6f8dd54e94665a7170a49a7" compoundref="_timeshifts_8hpp" startline="1026" endline="1045">Timeshifts::writeData</referencedby>
+        <referencedby refid="class_calibrator_1a5168dd14ccf0ad9629fa56185986d218" compoundref="_calibrator_8hpp" startline="933" endline="942">Calibrator::writeData</referencedby>
+        <referencedby refid="class_clover_spectra_1aea0814fac7c993ad4813804415f3ffab" compoundref="_clover_spectra_8hpp" startline="79" endline="95">CloverSpectra::writeHisto</referencedby>
+        <referencedby refid="class_calibrator_1ace95da8167dc1202e913a75c553313b3" compoundref="_calibrator_8hpp" startline="915" endline="931">Calibrator::writePosPeaks</referencedby>
+        <referencedby refid="class_calibrator_1a78414158b6fec48d58182e62c9478126" compoundref="_calibrator_8hpp" startline="944" endline="951">Calibrator::writeRawRoot</referencedby>
+        <referencedby refid="class_timeshifts_1a579c8583bd37c3988ffb5cb6df7849f7" compoundref="_timeshifts_8hpp" startline="1052" endline="1085">Timeshifts::writeRoot</referencedby>
+        <referencedby refid="class_hit_1ab60637cf6f374e4394139c3594e4464e" compoundref="_hit_8hpp" startline="303" endline="324">Hit::writting</referencedby>
+        <referencedby refid="class_event_1a0b93fcd8063a3c02edede96bb53b136d" compoundref="_event_8hpp" startline="334" endline="360">Event::writting</referencedby>
+        <referencedby refid="class_r_w_mat_1add7fb5d29a3eda4401b94481bcddc896" compoundref="_r_w_mat_8hxx" startline="97" endline="109">RWMat::~RWMat</referencedby>
+        <referencedby refid="class_static_vector_1a5170abb13005d53067431140a679ce4b" compoundref="vector__functions_8hpp" startline="321" endline="335">StaticVector&lt; T &gt;::~StaticVector</referencedby>
       </memberdef>
       <memberdef kind="function" id="print_8hpp_1a02e3acd6b90f83126d840187ee8023d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -700,12 +1041,14 @@
           <declname>t</declname>
         </param>
         <briefdescription>
+<para>Generic print. </para>
         </briefdescription>
         <detaileddescription>
+<para>Automatically adds space between each input. Terminate the output with a &quot;\\n&quot; </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/print.hpp" line="13" column="18" bodyfile="lib/print.hpp" bodystart="13" bodyend="16"/>
+        <location file="lib/print.hpp" line="49" column="6" bodyfile="lib/print.hpp" bodystart="49" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="print_8hpp_1a942a3ac725f791da05ff038fd549a721" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -731,13 +1074,15 @@
           <declname>t2</declname>
         </param>
         <briefdescription>
+<para>Generic print. </para>
         </briefdescription>
         <detaileddescription>
+<para>Automatically adds space between each input. Terminate the output with a &quot;\\n&quot; </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/print.hpp" line="24" column="20" bodyfile="lib/print.hpp" bodystart="24" bodyend="28"/>
-        <references refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" compoundref="print_8hpp" startline="7" endline="10">print</references>
+        <location file="lib/print.hpp" line="54" column="6" bodyfile="lib/print.hpp" bodystart="54" bodyend="54"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
       </memberdef>
       <memberdef kind="function" id="print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -750,12 +1095,188 @@
           <defval>6</defval>
         </param>
         <briefdescription>
+<para>Set the floating point precision displayed. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="lib/print.hpp" line="63" column="6" bodyfile="lib/print.hpp" bodystart="63" bodyend="63"/>
+        <location file="lib/print.hpp" line="79" column="6" bodyfile="lib/print.hpp" bodystart="79" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void printC</definition>
+        <argsstring>(T const &amp;t)</argsstring>
+        <name>printC</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Generic print concatenated. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a &quot;\\n&quot; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="60" column="6" bodyfile="lib/print.hpp" bodystart="60" bodyend="60"/>
+        <referencedby refid="class_calibrator_1a00806ef12bceedaa6c16dad9b653f27f" compoundref="_calibrator_8hpp" startline="796" endline="870">Calibrator::analyse2</referencedby>
+        <referencedby refid="vector__functions_8hpp_1a516812808c1a19cf37a17258f1789ab8" compoundref="vector__functions_8hpp" startline="172" endline="214">bubble_sort</referencedby>
+        <referencedby refid="class_spectra_co_1_1_histo_null_1a47f60c3e6fe497633fb72bed36224ea4" compoundref="_spectra_co_8hpp" startline="379" endline="379">SpectraCo::HistoNull::HistoNull</referencedby>
+        <referencedby refid="class_spectra_co_1_1_histo_zombie_1a6bec654226930402a49bf10619b2cdd6" compoundref="_spectra_co_8hpp" startline="385" endline="385">SpectraCo::HistoZombie::HistoZombie</referencedby>
+        <referencedby refid="print_8hpp_1a4c2aee0ac2f1c9f607a845b21b1c12e5" compoundref="print_8hpp" startline="65" endline="65">printC</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="print_8hpp_1a4c2aee0ac2f1c9f607a845b21b1c12e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>T2</declname>
+            <defname>T2</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void printC</definition>
+        <argsstring>(T const &amp;t, T2 const &amp;... t2)</argsstring>
+        <name>printC</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>T2 const &amp;...</type>
+          <declname>t2</declname>
+        </param>
+        <briefdescription>
+<para>Generic print concatenated. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a &quot;\\n&quot; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="65" column="6" bodyfile="lib/print.hpp" bodystart="65" bodyend="65"/>
+        <references refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" compoundref="print_8hpp" startline="60" endline="60">printC</references>
+      </memberdef>
+      <memberdef kind="function" id="print_8hpp_1a57409044715c55a505142dc6cab8a49f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void println</definition>
+        <argsstring>(T const &amp;t)</argsstring>
+        <name>println</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Generic print in one line. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a &quot;\\n&quot; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="71" column="6" bodyfile="lib/print.hpp" bodystart="71" bodyend="71"/>
+        <referencedby refid="print_8hpp_1ae92ca213daa0e7e64752028d31033abe" compoundref="print_8hpp" startline="76" endline="76">println</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="print_8hpp_1ae92ca213daa0e7e64752028d31033abe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>T2</declname>
+            <defname>T2</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void println</definition>
+        <argsstring>(T const &amp;t, T2 const &amp;... t2)</argsstring>
+        <name>println</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>T2 const &amp;...</type>
+          <declname>t2</declname>
+        </param>
+        <briefdescription>
+<para>Generic print in one line. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a &quot;\\n&quot; </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="76" column="6" bodyfile="lib/print.hpp" bodystart="76" bodyend="76"/>
+        <references refid="print_8hpp_1a57409044715c55a505142dc6cab8a49f" compoundref="print_8hpp" startline="71" endline="71">println</references>
+      </memberdef>
+      <memberdef kind="function" id="print_8hpp_1a90460287027986fbf0c9a1ef8e5a1bce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>std::string</type>
+        <definition>std::string type_of</definition>
+        <argsstring>(T const &amp;t)</argsstring>
+        <name>type_of</name>
+        <param>
+          <type>T const &amp;</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="159" column="13" bodyfile="lib/print.hpp" bodystart="159" bodyend="162"/>
+        <referencedby refid="lib_co_8hpp_1a860090f450f9d024cd3e5cd721101418" compoundref="lib_co_8hpp" startline="287" endline="298">string_to</referencedby>
+        <referencedby refid="_spectra_co_8hpp_1ad3085c55da700fb2917875d8efe0b377" compoundref="_spectra_co_8hpp" startline="429" endline="432">type_of&lt; SpectraCo &gt;</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="print_8hpp_1ad9e2dd512a5915af4751a40fefbfbc94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>T</declname>
+            <defname>T</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void warning</definition>
+        <argsstring>(T const &amp;... t)</argsstring>
+        <name>warning</name>
+        <param>
+          <type>T const &amp;...</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+<para>Print in bright black. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="lib/print.hpp" line="167" column="6" bodyfile="lib/print.hpp" bodystart="167" bodyend="172"/>
+        <references refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" compoundref="print_8hpp" startline="44" endline="44">print</references>
+        <references refid="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" compoundref="print_8hpp" startline="19">RESET</references>
+        <references refid="print_8hpp_1abf681265909adf3d3e8116c93c0ba179" compoundref="print_8hpp" startline="24">YELLOW</references>
+        <referencedby refid="class_spectra_co_1_1_size_missmatch_1a42beba683555e28da7b2436ccfeb55e5" compoundref="_spectra_co_8hpp" startline="392" endline="392">SpectraCo::SizeMissmatch::SizeMissmatch</referencedby>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -766,158 +1287,161 @@
 <codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>PRINT_HPP</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PRINT_HPP</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
-<codeline lineno="4"><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Generic<sp/>print<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7" refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" kindref="member">print</ref>()</highlight></codeline>
-<codeline lineno="8"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="9"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="10"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>__CINT__</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13" refid="print_8hpp_1a02e3acd6b90f83126d840187ee8023d6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" kindref="member">print</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t)</highlight></codeline>
-<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="15"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>t<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="16"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//__CINT__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>is<sp/>used<sp/>in<sp/>my<sp/>PC<sp/>to<sp/>have<sp/>better<sp/>looking<sp/>errors</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_GLIBCXX_USE_CXX11_ABI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="print_8hpp_1acbf3245277a73b810032219100559ae2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_GLIBCXX_USE_CXX11_ABI<sp/>0/1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//_GLIBCXX_USE_CXX11_ABI</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iomanip&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;vector&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Defining<sp/>the<sp/>different<sp/>colors<sp/>possible<sp/>of<sp/>the<sp/>terminal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Usage<sp/>:<sp/><sp/>cout&lt;&lt;<sp/>&lt;COLOR&gt;<sp/>&lt;&lt;....</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cout<sp/>&lt;&lt;<sp/>...<sp/>&lt;&lt;<sp/>RESET</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19" refid="print_8hpp_1a527acf8dce9e07a4901d65a23979424b" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" kindref="member">print</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;...<sp/>t)</highlight></codeline>
-<codeline lineno="20"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/>((<ref refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" kindref="member">print</ref>(t)),...);</highlight></codeline>
-<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"></highlight></codeline>
-<codeline lineno="24" refid="print_8hpp_1a942a3ac725f791da05ff038fd549a721" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T2&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" kindref="member">print</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t,<sp/>T2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;...<sp/>t2)</highlight></codeline>
-<codeline lineno="25"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>t<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" kindref="member">print</ref>(t2...);</highlight></codeline>
-<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="19" refid="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RESET<sp/><sp/><sp/>&quot;\u001b[0m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21" refid="print_8hpp_1a7b3b25cba33b07c303f3060fe41887f6" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BLACK<sp/><sp/><sp/>&quot;\u001b[30m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="print_8hpp_1a8d23feea868a983c8c2b661e1e16972f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>RED<sp/><sp/><sp/><sp/><sp/>&quot;\u001b[31m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="print_8hpp_1acfbc006ea433ad708fdee3e82996e721" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GREEN<sp/><sp/><sp/>&quot;\u001b[32m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="print_8hpp_1abf681265909adf3d3e8116c93c0ba179" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>YELLOW<sp/><sp/>&quot;\u001b[33m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="print_8hpp_1a79d10e672abb49ad63eeaa8aaef57c38" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BLUE<sp/><sp/><sp/><sp/>&quot;\u001b[34m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26" refid="print_8hpp_1a6f699060902f800f12aaae150f3a708e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MAGENTA<sp/>&quot;\u001b[35m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="print_8hpp_1ad243f93c16bc4c1d3e0a13b84421d760" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CYAN<sp/><sp/><sp/><sp/>&quot;\u001b[36m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28" refid="print_8hpp_1a87b537f5fa5c109d3c05c13d6b18f382" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>WHITE<sp/><sp/><sp/>&quot;\u001b[37m&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Useful<sp/>overload<sp/>of<sp/>operator&lt;&lt;<sp/>into<sp/>a<sp/>std::cout<sp/>stream<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>E&gt;</highlight></codeline>
-<codeline lineno="34" refid="print_8hpp_1a03b9abfe3f12543c365e9a25848ba566" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="print_8hpp_1a03b9abfe3f12543c365e9a25848ba566" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>cout,<sp/>std::vector&lt;E&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>v)</highlight></codeline>
-<codeline lineno="35"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>e<sp/>:<sp/>v)<sp/>cout<sp/>&lt;&lt;<sp/>e<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cout;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>F,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>S&gt;<sp/></highlight></codeline>
-<codeline lineno="41" refid="print_8hpp_1a305d037b6a2823d9d8d935b1cd5dd2c0" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="print_8hpp_1a03b9abfe3f12543c365e9a25848ba566" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>cout,<sp/>std::pair&lt;F,S&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>p)</highlight></codeline>
-<codeline lineno="42"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/>cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>{&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>p.first<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;,<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>p.second<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;}&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cout;</highlight></codeline>
-<codeline lineno="45"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>K,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>V&gt;<sp/></highlight></codeline>
-<codeline lineno="48" refid="print_8hpp_1a1fc2e1be374c41706525b8d606242646" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="print_8hpp_1a03b9abfe3f12543c365e9a25848ba566" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>cout,<sp/>std::map&lt;K,V&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>m)</highlight></codeline>
-<codeline lineno="49"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/>cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;{&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>pair<sp/>:<sp/>m)<sp/>cout<sp/>&lt;&lt;<sp/>pair;</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/>cout<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;}\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cout;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="30" refid="print_8hpp_1a37c3aae09c44fbf015cf4f048a1ea6bf" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BRIGHTBLACK<sp/><sp/><sp/>&quot;\u001b[30;1m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="print_8hpp_1a62e8ee733dff17c16de3391bb0fc50c7" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BRIGHTRED<sp/><sp/><sp/><sp/><sp/>&quot;\u001b[31;1m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="print_8hpp_1aa52f4996a4480f3f19d881dbff50ae59" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BRIGHTGREEN<sp/><sp/><sp/>&quot;\u001b[32;1m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="print_8hpp_1ab95f936e60a13b90646adc2674c9a8e3" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BRIGHTYELLOW<sp/><sp/>&quot;\u001b[33;1m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="print_8hpp_1a1856ac8f97780221a92b56c5b994b959" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BRIGHTBLUE<sp/><sp/><sp/><sp/>&quot;\u001b[34;1m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="print_8hpp_1a25c081882d60d0060029256721157d89" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BRIGHTMAGENTA<sp/>&quot;\u001b[35;1m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="print_8hpp_1a6c928762de56d07b80b0c9dc9472a4d5" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BRIGHTCYAN<sp/><sp/><sp/><sp/>&quot;\u001b[36;1m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="print_8hpp_1a099085e6196d7a7a29cbee3ef769c64e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BRIGHTWHITE<sp/><sp/><sp/>&quot;\u001b[37;1m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="print_8hpp_1adce122f566c88a1eceeb79a635afa964" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GREY<sp/>&quot;\u001b[38;5;8m&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>MULTITHREADING</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>()<sp/>{std::cout<sp/>&lt;&lt;<sp/>std::endl;}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight></codeline>
+<codeline lineno="49" refid="print_8hpp_1a02e3acd6b90f83126d840187ee8023d6" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t)<sp/>{std::cout<sp/>&lt;&lt;<sp/>t<sp/>&lt;&lt;<sp/>std::endl;}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T2&gt;<sp/></highlight></codeline>
+<codeline lineno="54" refid="print_8hpp_1a942a3ac725f791da05ff038fd549a721" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t,<sp/>T2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;...<sp/>t2)<sp/>{std::cout<sp/>&lt;&lt;<sp/>t<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;<sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(t2...);}</highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>E,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>size&gt;<sp/></highlight></codeline>
-<codeline lineno="57" refid="print_8hpp_1a021f6cc0c03903546e6a63851944f2e8" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="print_8hpp_1a03b9abfe3f12543c365e9a25848ba566" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>cout,<sp/>std::array&lt;E,size&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>a)</highlight></codeline>
-<codeline lineno="58"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i&lt;size;<sp/>i++)<sp/><ref refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" kindref="member">print</ref>(a[i]);</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cout;</highlight></codeline>
-<codeline lineno="61"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63" refid="print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de" kindref="member">print_precision</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n<sp/>=<sp/>6)<sp/>{std::cout<sp/>&lt;&lt;<sp/>std::setprecision(n);}</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65" refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ARGS&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" kindref="member">debug</ref>(ARGS<sp/>&amp;&amp;...<sp/>args)<sp/></highlight></codeline>
-<codeline lineno="66"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>DEBUG</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1aaa2383e8fc7f8fa546f4376e1dd4c9b7" kindref="member">print</ref>(std::forward&lt;ARGS&gt;(args)...);</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//DEBUG</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="70"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight></codeline>
+<codeline lineno="60" refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" kindref="member">printC</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t)<sp/>{std::cout<sp/>&lt;&lt;<sp/>t<sp/>&lt;&lt;<sp/>std::endl;}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T2&gt;<sp/></highlight></codeline>
+<codeline lineno="65" refid="print_8hpp_1a4c2aee0ac2f1c9f607a845b21b1c12e5" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" kindref="member">printC</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t,<sp/>T2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;...<sp/>t2)<sp/>{std::cout<sp/>&lt;&lt;<sp/>t;<sp/><ref refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" kindref="member">printC</ref>(t2...);}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight></codeline>
+<codeline lineno="71" refid="print_8hpp_1a57409044715c55a505142dc6cab8a49f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a57409044715c55a505142dc6cab8a49f" kindref="member">println</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t)<sp/>{std::cout<sp/>&lt;&lt;<sp/>t;}</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="73"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Print<sp/>specialization<sp/>for<sp/>uchar<sp/>:<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="75" refid="print_8hpp_1ad68695d41301547d77d546b80b1bc278" refkind="member"><highlight class="normal">std::ostream&amp;<sp/><ref refid="print_8hpp_1a03b9abfe3f12543c365e9a25848ba566" kindref="member">operator&lt;&lt;</ref>(std::ostream&amp;<sp/>cout,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>uc)</highlight></codeline>
-<codeline lineno="76"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>static_cast&lt;int&gt;(uc);</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cout;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="75"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T2&gt;<sp/></highlight></codeline>
+<codeline lineno="76" refid="print_8hpp_1ae92ca213daa0e7e64752028d31033abe" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a57409044715c55a505142dc6cab8a49f" kindref="member">println</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t,<sp/>T2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;...<sp/>t2)<sp/>{std::cout<sp/>&lt;&lt;<sp/>t;<sp/><ref refid="print_8hpp_1a57409044715c55a505142dc6cab8a49f" kindref="member">println</ref>(t2...);}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79" refid="print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de" kindref="member">print_precision</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n<sp/>=<sp/>6)<sp/>{std::cout<sp/>&lt;&lt;<sp/>std::setprecision(n);}</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Idea<sp/>to<sp/>print<sp/>any<sp/>class<sp/>that<sp/>has<sp/>a<sp/>member<sp/>called<sp/>getPrintable<sp/>that<sp/>returns<sp/>an<sp/>object<sp/>that<sp/>can<sp/>be<sp/>printed<sp/></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"></highlight><highlight class="comment">//<sp/>(i.e.<sp/>a<sp/>base<sp/>type<sp/>or<sp/>a<sp/>class<sp/>for<sp/>which<sp/>operator&lt;&lt;<sp/>have<sp/>been<sp/>overloaded<sp/>like<sp/>vector<sp/>or<sp/>map)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Raw<sp/>idea<sp/>from<sp/>chatgpt<sp/>so<sp/>it<sp/>needs<sp/>refinement</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>&lt;typename<sp/>T,<sp/>typename<sp/>=<sp/>void&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight><highlight class="comment">//<sp/>struct<sp/>HasRequiredFunction<sp/>:<sp/>std::false_type<sp/>{};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" refkind="member"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ARGS&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" kindref="member">debug</ref>(ARGS<sp/>&amp;&amp;...<sp/>args)<sp/></highlight></codeline>
+<codeline lineno="83"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(std::forward&lt;ARGS&gt;(args)...);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"></highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight><highlight class="comment">//<sp/>//<sp/>Partial<sp/>specialization<sp/>for<sp/>types<sp/>that<sp/>have<sp/>the<sp/>required<sp/>function</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>&lt;typename<sp/>T&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight><highlight class="comment">//<sp/>struct<sp/>HasRequiredFunction&lt;T,<sp/>std::void_t&lt;decltype(std::declval&lt;T&gt;().getPrintable())&gt;&gt;<sp/>:<sp/>std::true_type<sp/>{};</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>T&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight><highlight class="comment">//<sp/>std::ostream&amp;<sp/>operator&lt;&lt;(std::ostream&amp;<sp/>cout,<sp/>T<sp/>const<sp/>&amp;<sp/>t)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="95"><highlight class="normal"></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>std::static_assert(HasRequiredFunction&lt;T&gt;::value,<sp/>&quot;must<sp/>have<sp/>a<sp/>getPrintable()<sp/>method<sp/>or<sp/>overloaded<sp/>operator&lt;&lt;<sp/>to<sp/>be<sp/>printed.&quot;);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>cout<sp/>&lt;&lt;<sp/>t.get();</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>return<sp/>cout;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>K,<sp/>class<sp/>V&gt;<sp/>void<sp/>print<sp/>(std::map&lt;K,V&gt;<sp/>const<sp/>&amp;<sp/>m)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="102"><highlight class="normal"></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>print();</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>print(&quot;{&quot;);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>print();</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>for<sp/>(auto<sp/>const<sp/>&amp;<sp/>pair<sp/>:<sp/>m)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print(&quot;key<sp/>:<sp/>&quot;);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="109"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print(pair.first);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>//<sp/>print();</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print(&quot;value<sp/>:&quot;);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="112"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print(pair.second);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="113"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print();</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>print(&quot;}&quot;);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>print();</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="118"><highlight class="normal"></highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>K,<sp/>class<sp/>V,<sp/>class...<sp/>T&gt;<sp/>void<sp/>print<sp/>(std::map&lt;K,V&gt;<sp/>const<sp/>&amp;<sp/>m,<sp/>T<sp/>const<sp/>&amp;<sp/>...<sp/>t2)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="120"><highlight class="normal"></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>print(m);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>print(t2...);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight><highlight class="comment">//<sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="124"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight><highlight class="comment">//<sp/>//<sp/>Class<sp/>Debug,<sp/>based<sp/>on<sp/>template<sp/>print()<sp/>:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight><highlight class="comment">//<sp/>class<sp/>Debug</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"></highlight><highlight class="comment">//<sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight><highlight class="comment">//<sp/>public:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>template<sp/>&lt;class...<sp/>T&gt;<sp/>Debug(T...<sp/>t)<sp/>{<sp/>(*this)(t...);<sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>template<sp/>&lt;class...<sp/>T&gt;<sp/>void<sp/>operator<sp/>()<sp/>(T...<sp/>t)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>if<sp/>(sizeof...(t)<sp/>==<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(&quot;coucou<sp/>&quot;,<sp/>i);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>i++;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="138"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/>return;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="140"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>print(t...);</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="141"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>std::endl;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>void<sp/>operator<sp/>()<sp/>(int<sp/>_i)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="145"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>{</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>&quot;coucou<sp/>&quot;<sp/>&lt;&lt;<sp/>_i<sp/>&lt;&lt;<sp/>std::endl;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/>i<sp/>=<sp/>_i+1;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="148"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>}</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"></highlight><highlight class="comment">//<sp/>private:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>static<sp/>int<sp/>i;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"></highlight><highlight class="comment">//<sp/>};</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal">std::mutex<sp/>print_mutex;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>()<sp/>{print_mutex.lock();<sp/>std::cout<sp/>&lt;&lt;<sp/>std::endl;<sp/>print_mutex.unlock();}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t)</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>print_mutex.lock();<sp/></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/>t<sp/>&lt;&lt;<sp/>std::endl;<sp/></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>print_mutex.unlock();</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T2&gt;<sp/></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t,<sp/>T2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;...<sp/>t2)<sp/>{print_mutex.lock();<sp/>std::cout<sp/>&lt;&lt;<sp/>t<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">;<sp/>print_mutex.unlock();<sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(t2...);}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" kindref="member">printC</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t)<sp/>{print_mutex.lock();<sp/>std::cout<sp/>&lt;&lt;<sp/>t<sp/>&lt;&lt;<sp/>std::endl;<sp/>print_mutex.unlock();}</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T2&gt;<sp/></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" kindref="member">printC</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t,<sp/>T2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;...<sp/>t2)<sp/>{print_mutex.lock();<sp/>std::cout<sp/>&lt;&lt;<sp/>t;<sp/><sp/>print_mutex.unlock();<sp/><ref refid="print_8hpp_1afded2b178f1cba7246c86beaab6d4e6c" kindref="member">printC</ref>(t2...);}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;<sp/></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a57409044715c55a505142dc6cab8a49f" kindref="member">println</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t)<sp/>{print_mutex.lock();<sp/>std::cout<sp/>&lt;&lt;<sp/>t;<sp/>print_mutex.unlock();}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T2&gt;<sp/></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a57409044715c55a505142dc6cab8a49f" kindref="member">println</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t,<sp/>T2<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;...<sp/>t2)<sp/>{print_mutex.lock();<sp/>std::cout<sp/>&lt;&lt;<sp/>t;<sp/>print_mutex.unlock();<sp/><sp/><ref refid="print_8hpp_1a57409044715c55a505142dc6cab8a49f" kindref="member">println</ref>(t2...);}</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1ab97d5aa53eda1f20404d0555d7ffd5de" kindref="member">print_precision</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n<sp/>=<sp/>6)<sp/>{print_mutex.lock();<sp/>std::cout<sp/>&lt;&lt;<sp/>std::setprecision(n);<sp/>print_mutex.unlock();}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ARGS&gt;<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a7c50c0690489629965f74c4921570ce5" kindref="member">debug</ref>(ARGS<sp/>&amp;&amp;...<sp/>args)<sp/></highlight></codeline>
+<codeline lineno="139"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(std::forward&lt;ARGS&gt;(args)...);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//DEBUG</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>ARGS&gt;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>printMT(ARGS<sp/>&amp;&amp;...<sp/>args)<sp/></highlight></codeline>
+<codeline lineno="149"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(std::forward&lt;ARGS&gt;(args)...);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="152"><highlight class="normal"></highlight></codeline>
-<codeline lineno="153"><highlight class="normal"></highlight><highlight class="comment">//<sp/>int<sp/>Debug::i<sp/>=<sp/>0;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//MULTITHREADING</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="154"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//PRINT_HPP</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Extracts<sp/>the<sp/>name<sp/>of<sp/>the<sp/>types<sp/>(overloaded<sp/>for<sp/>user<sp/>defined<sp/>objects):</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="159" refid="print_8hpp_1a90460287027986fbf0c9a1ef8e5a1bce" refkind="member"><highlight class="normal">std::string<sp/><ref refid="print_8hpp_1a90460287027986fbf0c9a1ef8e5a1bce" kindref="member">type_of</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>t)</highlight></codeline>
+<codeline lineno="160"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">typeid</highlight><highlight class="normal">(t).name();</highlight></codeline>
+<codeline lineno="162"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Specialised<sp/>printing<sp/>function<sp/>:</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T&gt;</highlight></codeline>
+<codeline lineno="167" refid="print_8hpp_1ad9e2dd512a5915af4751a40fefbfbc94" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1ad9e2dd512a5915af4751a40fefbfbc94" kindref="member">warning</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>...<sp/>t)</highlight></codeline>
+<codeline lineno="168"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/><ref refid="print_8hpp_1abf681265909adf3d3e8116c93c0ba179" kindref="member">YELLOW</ref>;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(t...);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/><ref refid="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" kindref="member">RESET</ref>;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T&gt;</highlight></codeline>
+<codeline lineno="176" refid="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a553a9a331cc4556c2d9bb3aaa8533528" kindref="member">error</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>...<sp/>t)</highlight></codeline>
+<codeline lineno="177"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/><ref refid="print_8hpp_1a8d23feea868a983c8c2b661e1e16972f" kindref="member">RED</ref>;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(t...);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/><ref refid="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" kindref="member">RESET</ref>;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>T&gt;</highlight></codeline>
+<codeline lineno="185" refid="print_8hpp_1a141d6b4b0d8c1824f6ed472b5226eab4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="print_8hpp_1a141d6b4b0d8c1824f6ed472b5226eab4" kindref="member">information</ref>(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>&amp;<sp/>...<sp/>t)</highlight></codeline>
+<codeline lineno="186"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/><ref refid="print_8hpp_1adce122f566c88a1eceeb79a635afa964" kindref="member">GREY</ref>;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><ref refid="print_8hpp_1a388f572c62279f839ee138a9afbdeeb5" kindref="member">print</ref>(t...);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/>std::cout<sp/>&lt;&lt;<sp/><ref refid="print_8hpp_1ab702106cf3b3e96750b6845ded4e0299" kindref="member">RESET</ref>;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//PRINT_HPP</highlight></codeline>
     </programlisting>
     <location file="lib/print.hpp"/>
   </compounddef>

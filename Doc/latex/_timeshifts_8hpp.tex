@@ -13,14 +13,16 @@
 {\ttfamily \#include \char`\"{}../\+MTObjects/\+MTObject.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../\+MTObjects/\+MTList.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../\+MTObjects/\+MTTHist.\+hpp\char`\"{}}\newline
-Include dependency graph for Timeshifts.\+hpp\+:\nopagebreak
+Include dependency graph for Timeshifts.\+hpp\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{_timeshifts_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -30,8 +32,12 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
+class \textbf{ Timeshifts\+::\+Empty\+Error}
+\item 
+class \textbf{ Timeshifts\+::\+Not\+Found\+Error}
+\item 
 class \textbf{ Timeshifts}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Calculates the time difference between all detectors and a reference detector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -43,7 +49,7 @@ double \textbf{ get\+RFGamma\+Prompt} (TH1F $\ast$hist, bool const \&check\+\_\+
 \item 
 std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&cout, \textbf{ Timeshifts} const \&ts)
 \item 
-{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ Time} \textbf{ Shift\+\_\+cast} (T const \&t)
+{\footnotesize template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ }\\\textbf{ Time} \textbf{ Timeshift\+\_\+cast} (T const \&t)
 \begin{DoxyCompactList}\small\item\em Casts a number into unsigned Time. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -59,7 +65,8 @@ std\+::vector$<$ \textbf{ Time} $>$ \textbf{ forced\+\_\+shifts}
 \doxysubsubsection{get\_first\_RF\_of\_file()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void get\+\_\+first\+\_\+\+RF\+\_\+of\+\_\+file (\begin{DoxyParamCaption}\item[{\textbf{ Faster\+Reader} \&}]{reader,  }\item[{\textbf{ Hit} \&}]{hit,  }\item[{\textbf{ RF\+\_\+\+Manager} \&}]{rf }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -112,22 +119,23 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=279pt]{_timeshifts_8hpp_aecdab429e75a8d9f7a38f3938d9a7173_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{_timeshifts_8hpp_a0363984bdeb96360bcf8a0a13163f47a}} 
-\index{Timeshifts.hpp@{Timeshifts.hpp}!Shift\_cast@{Shift\_cast}}
-\index{Shift\_cast@{Shift\_cast}!Timeshifts.hpp@{Timeshifts.hpp}}
-\doxysubsubsection{Shift\_cast()}
+\mbox{\label{_timeshifts_8hpp_a02c5bf3a1c10d9b086ba64557fdb8995}} 
+\index{Timeshifts.hpp@{Timeshifts.hpp}!Timeshift\_cast@{Timeshift\_cast}}
+\index{Timeshift\_cast@{Timeshift\_cast}!Timeshifts.hpp@{Timeshifts.hpp}}
+\doxysubsubsection{Timeshift\_cast()}
 {\footnotesize\ttfamily template$<$typename T , typename  = typename std\+::enable\+\_\+if$<$std\+::is\+\_\+arithmetic$<$\+T$>$\+::value$>$\+::type$>$ \\
-\textbf{ Time} Shift\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\textbf{ Time} Timeshift\+\_\+cast (\begin{DoxyParamCaption}\item[{T const \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
 Casts a number into unsigned Time. 
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{_timeshifts_8hpp_a0363984bdeb96360bcf8a0a13163f47a_icgraph}
+\includegraphics[width=350pt]{_timeshifts_8hpp_a02c5bf3a1c10d9b086ba64557fdb8995_icgraph}
 \end{center}
 \end{figure}
 

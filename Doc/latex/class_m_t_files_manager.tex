@@ -30,7 +30,11 @@ Collaboration diagram for MTFiles\+Manager\+:\nopagebreak
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+virtual bool \textbf{ add\+File} (std\+::string const \&\+\_\+filename)
+\item 
 virtual bool \textbf{ add\+Files} (std\+::string const \&\+\_\+filename)
+\item 
+virtual bool \textbf{ add\+Folder} (\textbf{ Path} const \&folder, long nb\+\_\+files=-\/1, std\+::vector$<$ std\+::string $>$ const \&extensions=\{\char`\"{}root\char`\"{}, \char`\"{}fast\char`\"{}\})
 \item 
 virtual bool \textbf{ add\+Folder} (std\+::string folder, long nb\+\_\+files=-\/1, std\+::vector$<$ std\+::string $>$ const \&extensions=\{\char`\"{}root\char`\"{}, \char`\"{}fast\char`\"{}\})
 \item 
@@ -65,6 +69,8 @@ bool \textbf{ is\+Empty} () const
 bool \textbf{ next\+File\+Name} (std\+::string \&filename, \textbf{ size\+\_\+t} const \&step=1)
 \item 
 \textbf{ operator bool} () const
+\item 
+bool \textbf{ operator$>$$>$} (std\+::string \&filename)
 \item 
 std\+::string \textbf{ operator[$\,$]} (int const \&n)
 \item 
@@ -110,6 +116,28 @@ bool \textbf{ verbose} = false
 Work in progress. 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\label{class_files_manager_a986350d5c057d10b8fdd11551b097b37}} 
+\index{MTFilesManager@{MTFilesManager}!addFile@{addFile}}
+\index{addFile@{addFile}!MTFilesManager@{MTFilesManager}}
+\doxysubsubsection{addFile()}
+{\footnotesize\ttfamily virtual bool Files\+Manager\+::add\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{\+\_\+filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}, {\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a986350d5c057d10b8fdd11551b097b37_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a986350d5c057d10b8fdd11551b097b37_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_files_manager_a3aaaccb43ef036f930ffcf1ca3ea522f}} 
 \index{MTFilesManager@{MTFilesManager}!addFiles@{addFiles}}
 \index{addFiles@{addFiles}!MTFilesManager@{MTFilesManager}}
@@ -123,27 +151,36 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=309pt]{class_files_manager_a3aaaccb43ef036f930ffcf1ca3ea522f_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_files_manager_a3aaaccb43ef036f930ffcf1ca3ea522f_icgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_files_manager_ae56276d4ed1c16566b6849b0491efc0e}} 
+\index{MTFilesManager@{MTFilesManager}!addFolder@{addFolder}}
+\index{addFolder@{addFolder}!MTFilesManager@{MTFilesManager}}
+\doxysubsubsection{addFolder()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual bool Files\+Manager\+::add\+Folder (\begin{DoxyParamCaption}\item[{\textbf{ Path} const \&}]{folder,  }\item[{long}]{nb\+\_\+files = {\ttfamily -\/1},  }\item[{std\+::vector$<$ std\+::string $>$ const \&}]{extensions = {\ttfamily \{\char`\"{}root\char`\"{},~\char`\"{}fast\char`\"{}\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}, {\ttfamily [inherited]}}
+
 \mbox{\label{class_files_manager_a6d05662378bde592075237b9fa0a5168}} 
 \index{MTFilesManager@{MTFilesManager}!addFolder@{addFolder}}
 \index{addFolder@{addFolder}!MTFilesManager@{MTFilesManager}}
-\doxysubsubsection{addFolder()}
+\doxysubsubsection{addFolder()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily bool Files\+Manager\+::add\+Folder (\begin{DoxyParamCaption}\item[{std\+::string}]{folder,  }\item[{long}]{nb\+\_\+files = {\ttfamily -\/1},  }\item[{std\+::vector$<$ std\+::string $>$ const \&}]{extensions = {\ttfamily \{\char`\"{}root\char`\"{},~\char`\"{}fast\char`\"{}\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_files_manager_a6d05662378bde592075237b9fa0a5168_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -243,7 +280,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{getListFiles()}
 {\footnotesize\ttfamily \textbf{ List\+Files} const\& Files\+Manager\+::get\+List\+Files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -282,7 +320,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{nextFileName()}
 {\footnotesize\ttfamily bool Files\+Manager\+::next\+File\+Name (\begin{DoxyParamCaption}\item[{std\+::string \&}]{filename,  }\item[{\textbf{ size\+\_\+t} const \&}]{step = {\ttfamily 1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inherited]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -300,6 +339,20 @@ Here is the call graph for this function\+:\nopagebreak
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{class_files_manager_a3405dcb99deb03c4fdea55fff9f3ffdf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_files_manager_a94f6fa018f7d7fda65a463be74a3c3d4}} 
+\index{MTFilesManager@{MTFilesManager}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!MTFilesManager@{MTFilesManager}}
+\doxysubsubsection{operator$>$$>$()}
+{\footnotesize\ttfamily bool Files\+Manager\+::operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::string \&}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_files_manager_a94f6fa018f7d7fda65a463be74a3c3d4_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_files_manager_a78934b0656b357c7eb3807aa4bea7f26}} 
@@ -327,7 +380,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{Print()}
 {\footnotesize\ttfamily void Files\+Manager\+::\+Print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -340,7 +394,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{printFolders()}
 {\footnotesize\ttfamily void Files\+Manager\+::print\+Folders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -391,7 +446,8 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{size()}
 {\footnotesize\ttfamily \textbf{ size\+\_\+t} Files\+Manager\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [inherited]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

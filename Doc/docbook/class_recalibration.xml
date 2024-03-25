@@ -3,7 +3,7 @@
 <title>Recalibration Class Reference</title>
 <indexterm><primary>Recalibration</primary></indexterm>
 <para>
-<computeroutput>#include &lt;SpectraAlignator.hpp&gt;</computeroutput>
+<computeroutput>#include &lt;Recalibration.hpp&gt;</computeroutput>
 </para>
 <simplesect>
     <title>Public Member Functions    </title>
@@ -321,16 +321,7 @@ Here is the caller graph for this function:<para>
     <title>setParameter()<computeroutput>[1/2]</computeroutput></title>
 <indexterm><primary>setParameter</primary><secondary>Recalibration</secondary></indexterm>
 <indexterm><primary>Recalibration</primary><secondary>setParameter</secondary></indexterm>
-<para><computeroutput>auto&amp; Recalibration::setParameter (int const &amp; i, double const &amp; a)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
-    <informalfigure>
-        <mediaobject>
-            <imageobject>
-                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_recalibration_ac98afc36338de322cde52205b01971ff_icgraph.png"></imagedata>
-            </imageobject>
-        </mediaobject>
-    </informalfigure>
-</para>
-    </section><anchor xml:id="_class_recalibration_1acacda60d186a17af0794f2c72e2d34c6"/>    <section>
+<para><computeroutput>auto&amp; Recalibration::setParameter (int const &amp; i, double const &amp; a)<computeroutput>[inline]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_recalibration_1acacda60d186a17af0794f2c72e2d34c6"/>    <section>
     <title>setParameter()<computeroutput>[2/2]</computeroutput></title>
 <indexterm><primary>setParameter</primary><secondary>Recalibration</secondary></indexterm>
 <indexterm><primary>Recalibration</primary><secondary>setParameter</secondary></indexterm>
@@ -345,5 +336,5 @@ Here is the caller graph for this function:<para>
 <para><computeroutput>std::vector&lt;double&gt; Recalibration::m_parameters = std::vector&lt;double&gt;(5)<computeroutput>[private]</computeroutput></computeroutput></para></section>
 <para>
 The documentation for this class was generated from the following file:</para>
-lib/Classes/<link linkend="__spectra_alignator_8hpp">SpectraAlignator.hpp</link></section>
+lib/Analyse/<link linkend="__recalibration_8hpp">Recalibration.hpp</link></section>
 </section>

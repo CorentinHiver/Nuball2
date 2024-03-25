@@ -1,4 +1,4 @@
-.TH "Detectors" 3 "Tue Dec 5 2023" "Nuball2" \" -*- nroff -*-
+.TH "Detectors" 3 "Mon Mar 25 2024" "Nuball2" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -9,6 +9,16 @@ Detectors \- Loads the ID file and fills lookup tables\&.
 .PP
 .PP
 \fC#include <Detectors\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBEmptyError\fP"
+.br
+.ti -1c
+.RI "class \fBError\fP"
+.br
+.in -1c
 .SS "Public Member Functions"
 
 .in +1c
@@ -30,6 +40,7 @@ Detectors \- Loads the ID file and fills lookup tables\&.
 .ti -1c
 .RI "bool \fBexists\fP (\fBLabel\fP const &\fBlabel\fP)"
 .br
+.RI "Does this label correspond to a detector ? "
 .ti -1c
 .RI "auto const  & \fBfile\fP ()"
 .br
@@ -46,7 +57,7 @@ Detectors \- Loads the ID file and fills lookup tables\&.
 .RI "auto const  & \fBgetLabel\fP (std::string const &\fBname\fP)"
 .br
 .ti -1c
-.RI "auto const  & \fBgetLabelsArray\fP () const"
+.RI "auto const  & \fBgetLabelsMap\fP () const"
 .br
 .ti -1c
 .RI "auto const  & \fBgetName\fP (\fBLabel\fP const &\fBlabel\fP)"
@@ -84,13 +95,19 @@ Detectors \- Loads the ID file and fills lookup tables\&.
 .br
 .RI "Get the name of a detector given its type and type index\&. "
 .ti -1c
+.RI "auto const  & \fBnames\fP () const"
+.br
+.ti -1c
 .RI "auto const  & \fBnbOfType\fP (\fBdType\fP const &\fBtype\fP)"
 .br
 .RI "Returns the number of detector of each type\&. "
 .ti -1c
-.RI "auto const \fBnbTypes\fP ()"
+.RI "auto \fBnbTypes\fP ()"
 .br
 .RI "Returns the number of types in the ID file\&. "
+.ti -1c
+.RI "auto \fBnbTypes\fP () const"
+.br
 .ti -1c
 .RI "auto const  & \fBnumber\fP ()"
 .br
@@ -122,7 +139,7 @@ Detectors \- Loads the ID file and fills lookup tables\&.
 .RI "void \fBresize\fP (\fBushort\fP const &new_size)"
 .br
 .ti -1c
-.RI "auto const \fBsize\fP () const"
+.RI "\fBLabel\fP \fBsize\fP () const"
 .br
 .RI "Return the value of the maximum label, i\&.e\&. the size of the lookup tables\&. "
 .ti -1c
@@ -186,13 +203,16 @@ Detectors \- Loads the ID file and fills lookup tables\&.
 .RI "std::string \fBm_filename\fP"
 .br
 .ti -1c
-.RI "bool \fBm_initialized\fP = false"
+.RI "bool \fBm_Initialised\fP = false"
 .br
 .ti -1c
 .RI "std::unordered_map< \fBdType\fP, \fBLabel_vec\fP > \fBm_labels\fP"
 .br
 .ti -1c
-.RI "std::unordered_map< std::string, \fBLabel\fP > \fBm_labels_array\fP"
+.RI "std::unordered_map< std::string, \fBLabel\fP > \fBm_labels_map\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBLabel\fP > \fBm_labels_vector\fP"
 .br
 .ti -1c
 .RI "\fBStrings\fP \fBm_list\fP"
@@ -210,7 +230,7 @@ Detectors \- Loads the ID file and fills lookup tables\&.
 .RI "bool \fBm_ok\fP = false"
 .br
 .ti -1c
-.RI "std::unordered_map< \fBdType\fP, \fBsize_t\fP > \fBm_type_counter\fP"
+.RI "std::unordered_map< \fBdType\fP, int > \fBm_type_counter\fP"
 .br
 .ti -1c
 .RI "\fBStrings\fP \fBm_types\fP = \fBStrings\fP(\fBSIZE_LOOKUP\fP)"
@@ -270,6 +290,8 @@ Get the default energy (keV) bidimensionnal histogram binning for each type of d
 Get the default energy (keV) histogram binning for each type of detectors\&. 
 .SS "bool Detectors::exists (\fBLabel\fP const & label)\fC [inline]\fP"
 
+.PP
+Does this label correspond to a detector ? 
 .SS "auto const& Detectors::file ()\fC [inline]\fP"
 
 .SS "auto const& Detectors::file () const\fC [inline]\fP"
@@ -292,7 +314,7 @@ Get the default energy (keV) bidimensionnal histogram binning for all types of d
 
 .SS "auto const& Detectors::getLabel (std::string const & name)\fC [inline]\fP"
 
-.SS "auto const& Detectors::getLabelsArray () const\fC [inline]\fP"
+.SS "auto const& Detectors::getLabelsMap () const\fC [inline]\fP"
 
 .SS "auto const& Detectors::getName (\fBLabel\fP const & label)\fC [inline]\fP"
 
@@ -324,14 +346,18 @@ Fills the lookup tables\&.
 
 .PP
 Get the name of a detector given its type and type index\&. 
+.SS "auto const& Detectors::names () const\fC [inline]\fP"
+
 .SS "auto const& Detectors::nbOfType (\fBdType\fP const & type)\fC [inline]\fP"
 
 .PP
 Returns the number of detector of each type\&. 
-.SS "auto const Detectors::nbTypes ()\fC [inline]\fP"
+.SS "auto Detectors::nbTypes ()\fC [inline]\fP"
 
 .PP
 Returns the number of types in the ID file\&. 
+.SS "auto Detectors::nbTypes () const\fC [inline]\fP"
+
 .SS "auto const& Detectors::number ()\fC [inline]\fP"
 
 .PP
@@ -360,7 +386,7 @@ Prints out the list of labels\&.
 Reads the file and extracts the list of detectors\&. 
 .SS "void Detectors::resize (\fBushort\fP const & new_size)"
 
-.SS "auto const Detectors::size () const\fC [inline]\fP"
+.SS "\fBLabel\fP Detectors::size () const\fC [inline]\fP"
 
 .PP
 Return the value of the maximum label, i\&.e\&. the size of the lookup tables\&. 
@@ -425,11 +451,13 @@ Return the value of the maximum label, i\&.e\&. the size of the lookup tables\&.
 
 .SS "std::string Detectors::m_filename\fC [protected]\fP"
 
-.SS "bool Detectors::m_initialized = false\fC [protected]\fP"
+.SS "bool Detectors::m_Initialised = false\fC [protected]\fP"
 
 .SS "std::unordered_map<\fBdType\fP, \fBLabel_vec\fP> Detectors::m_labels\fC [protected]\fP"
 
-.SS "std::unordered_map<std::string, \fBLabel\fP> Detectors::m_labels_array\fC [protected]\fP"
+.SS "std::unordered_map<std::string, \fBLabel\fP> Detectors::m_labels_map\fC [protected]\fP"
+
+.SS "std::vector<\fBLabel\fP> Detectors::m_labels_vector\fC [protected]\fP"
 
 .SS "\fBStrings\fP Detectors::m_list\fC [protected]\fP"
 
@@ -441,7 +469,7 @@ Return the value of the maximum label, i\&.e\&. the size of the lookup tables\&.
 
 .SS "bool Detectors::m_ok = false\fC [protected]\fP"
 
-.SS "std::unordered_map<\fBdType\fP, \fBsize_t\fP> Detectors::m_type_counter\fC [protected]\fP"
+.SS "std::unordered_map<\fBdType\fP, int> Detectors::m_type_counter\fC [protected]\fP"
 
 .SS "\fBStrings\fP Detectors::m_types = \fBStrings\fP(\fBSIZE_LOOKUP\fP)\fC [protected]\fP"
 

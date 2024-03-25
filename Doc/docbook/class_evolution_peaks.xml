@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_class_evolution_peaks" xml:lang="en-US">
+<title>EvolutionPeaks Class Reference</title>
+<indexterm><primary>EvolutionPeaks</primary></indexterm>
+<para>
+
+<para>Shows the evolution of peak position for given detectors. </para>
+ 
+</para>
+<para>
+<computeroutput>#include &lt;EvolutionPeaks.hpp&gt;</computeroutput>
+</para>
+Collaboration diagram for EvolutionPeaks:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_evolution_peaks_1ae971ac16cf6f652c322c0b7f008cbf8f">EvolutionPeaks</link> ()=default</para>
+</listitem>
+            <listitem><para><link linkend="_class_evolution_peaks_1a97403723f87d740c700637e07e95fbb7">EvolutionPeaks</link> (int argc, char **argv)</para>
+</listitem>
+            <listitem><para>template&lt;class... ARGS&gt; </para><para>void <link linkend="_class_evolution_peaks_1ad13fac38f35247d7e2f6ba5b61f0dd9b">loadCalibration</link> (ARGS &amp;&amp;... args)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1a4dce5d05c6d643d582829be29b6b16e5">loadDetectors</link> (std::string const &amp;filename)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1aa6877d718198437381b3516d0593e2c6">loadParameters</link> (int argc, char **argv)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1a10bf1158a6a89129b9c2e61ff4ca27ee">loadRebin</link> (<link linkend="_class_file">File</link> const &amp;filename)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1a0e6bdb90d030eac7d3ef1365338dd7de">overwrite</link> (bool const &amp;_overwrite=true)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1a0b661bdce835988388c52c174b59f57b">printParameters</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18">run</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1ad8012c10acf0d3d2e12e81b03b82be39">setNbFiles</link> (int const &amp;nb)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1ae2edbfac41a429e8275da5572f7329e5">setOutputName</link> (std::string const &amp;_output)</para>
+</listitem>
+            <listitem><para>void <link linkend="_class_evolution_peaks_1a5c8a97eb07b43c440cc065a864fab56e">setPeaks</link> (std::vector&lt; double &gt; const &amp;peaks)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Private Attributes    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_class_calibration">Calibration</link> <link linkend="_class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7">m_calib</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_path">Path</link> <link linkend="_class_evolution_peaks_1aef745e6072118051e5fdd25a6841103e">m_dataPath</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_class_evolution_peaks_1a92b3c575edb0750c40872db984b01d13">m_nb_files</link> = -1</para>
+</listitem>
+            <listitem><para><link linkend="_class_file">File</link> <link linkend="_class_evolution_peaks_1a5ff141333653c2e9eb21702601b02611">m_output</link> = &quot;follow_evolution.root&quot;</para>
+</listitem>
+            <listitem><para>bool <link linkend="_class_evolution_peaks_1a9b5df4439b97335efcc0772a424ee37a">m_overwrite</link> = false</para>
+</listitem>
+            <listitem><para>std::vector&lt; double &gt; <link linkend="_class_evolution_peaks_1abc104be9ef72adc1f947542394ffad50">m_peaks</link> = {511}</para>
+</listitem>
+            <listitem><para><link linkend="_class_data_file">DataFile</link>&lt; <link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link>, int &gt; <link linkend="_class_evolution_peaks_1ad874f98afd738fbdb60b89bb926bca61">m_rebins</link></para>
+</listitem>
+            <listitem><para><link linkend="_class_calibration">Calibration</link> <link linkend="_class_evolution_peaks_1a2982e096a06f6ecc3025077537a8f89c">m_recalibration</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>Shows the evolution of peak position for given detectors. </para>
+
+
+
+<para>This class will read all the histograms all the TFiles in a folder, or just the list of histograms given.</para>
+
+<para>Each file name has to follow this format : name_index.root</para>
+
+<para>Then a linear calibration is applied is wanted. Measures the centroid of the peak. </para>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_class_evolution_peaks_1ae971ac16cf6f652c322c0b7f008cbf8f"/>    <section>
+    <title>EvolutionPeaks()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>EvolutionPeaks</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<para><computeroutput>EvolutionPeaks::EvolutionPeaks ( )<computeroutput>[default]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_evolution_peaks_1a97403723f87d740c700637e07e95fbb7"/>    <section>
+    <title>EvolutionPeaks()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>EvolutionPeaks</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<para><computeroutput>EvolutionPeaks::EvolutionPeaks (int argc, char ** argv)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a97403723f87d740c700637e07e95fbb7_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_class_evolution_peaks_1ad13fac38f35247d7e2f6ba5b61f0dd9b"/>    <section>
+    <title>loadCalibration()</title>
+<indexterm><primary>loadCalibration</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>loadCalibration</secondary></indexterm>
+<computeroutput>template&lt;class... ARGS&gt; </computeroutput><para><computeroutput>void EvolutionPeaks::loadCalibration (ARGS &amp;&amp;... args)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_ad13fac38f35247d7e2f6ba5b61f0dd9b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_ad13fac38f35247d7e2f6ba5b61f0dd9b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1a4dce5d05c6d643d582829be29b6b16e5"/>    <section>
+    <title>loadDetectors()</title>
+<indexterm><primary>loadDetectors</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>loadDetectors</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::loadDetectors (std::string const &amp; filename)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a4dce5d05c6d643d582829be29b6b16e5_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a4dce5d05c6d643d582829be29b6b16e5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1aa6877d718198437381b3516d0593e2c6"/>    <section>
+    <title>loadParameters()</title>
+<indexterm><primary>loadParameters</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>loadParameters</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::loadParameters (int argc, char ** argv)</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_aa6877d718198437381b3516d0593e2c6_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_aa6877d718198437381b3516d0593e2c6_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1a10bf1158a6a89129b9c2e61ff4ca27ee"/>    <section>
+    <title>loadRebin()</title>
+<indexterm><primary>loadRebin</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>loadRebin</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::loadRebin (<link linkend="_class_file">File</link> const &amp; filename)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a10bf1158a6a89129b9c2e61ff4ca27ee_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a10bf1158a6a89129b9c2e61ff4ca27ee_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1a0e6bdb90d030eac7d3ef1365338dd7de"/>    <section>
+    <title>overwrite()</title>
+<indexterm><primary>overwrite</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>overwrite</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::overwrite (bool const &amp; _overwrite = <computeroutput>true</computeroutput>
+)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a0e6bdb90d030eac7d3ef1365338dd7de_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1a0b661bdce835988388c52c174b59f57b"/>    <section>
+    <title>printParameters()</title>
+<indexterm><primary>printParameters</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>printParameters</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::printParameters ( ) const</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a0b661bdce835988388c52c174b59f57b_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a0b661bdce835988388c52c174b59f57b_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1a5645dd6726d0af38e8a4d849da6a8d18"/>    <section>
+    <title>run()</title>
+<indexterm><primary>run</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>run</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::run ( )</computeroutput></para>Here is the call graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a5645dd6726d0af38e8a4d849da6a8d18_cgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_a5645dd6726d0af38e8a4d849da6a8d18_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1ad8012c10acf0d3d2e12e81b03b82be39"/>    <section>
+    <title>setNbFiles()</title>
+<indexterm><primary>setNbFiles</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>setNbFiles</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::setNbFiles (int const &amp; nb)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_ad8012c10acf0d3d2e12e81b03b82be39_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1ae2edbfac41a429e8275da5572f7329e5"/>    <section>
+    <title>setOutputName()</title>
+<indexterm><primary>setOutputName</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>setOutputName</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::setOutputName (std::string const &amp; _output)<computeroutput>[inline]</computeroutput></computeroutput></para>Here is the caller graph for this function:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="class_evolution_peaks_ae2edbfac41a429e8275da5572f7329e5_icgraph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+    </section><anchor xml:id="_class_evolution_peaks_1a5c8a97eb07b43c440cc065a864fab56e"/>    <section>
+    <title>setPeaks()</title>
+<indexterm><primary>setPeaks</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>setPeaks</secondary></indexterm>
+<para><computeroutput>void EvolutionPeaks::setPeaks (std::vector&lt; double &gt; const &amp; peaks)<computeroutput>[inline]</computeroutput></computeroutput></para></section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_class_evolution_peaks_1a5b44bb9841c376e762261953de4be5a7"/>    <section>
+    <title>m_calib</title>
+<indexterm><primary>m_calib</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>m_calib</secondary></indexterm>
+<para><computeroutput><link linkend="_class_calibration">Calibration</link> EvolutionPeaks::m_calib<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_evolution_peaks_1aef745e6072118051e5fdd25a6841103e"/>    <section>
+    <title>m_dataPath</title>
+<indexterm><primary>m_dataPath</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>m_dataPath</secondary></indexterm>
+<para><computeroutput><link linkend="_class_path">Path</link> EvolutionPeaks::m_dataPath<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_evolution_peaks_1a92b3c575edb0750c40872db984b01d13"/>    <section>
+    <title>m_nb_files</title>
+<indexterm><primary>m_nb_files</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>m_nb_files</secondary></indexterm>
+<para><computeroutput>int EvolutionPeaks::m_nb_files = -1<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_evolution_peaks_1a5ff141333653c2e9eb21702601b02611"/>    <section>
+    <title>m_output</title>
+<indexterm><primary>m_output</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>m_output</secondary></indexterm>
+<para><computeroutput><link linkend="_class_file">File</link> EvolutionPeaks::m_output = &quot;follow_evolution.root&quot;<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_evolution_peaks_1a9b5df4439b97335efcc0772a424ee37a"/>    <section>
+    <title>m_overwrite</title>
+<indexterm><primary>m_overwrite</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>m_overwrite</secondary></indexterm>
+<para><computeroutput>bool EvolutionPeaks::m_overwrite = false<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_evolution_peaks_1abc104be9ef72adc1f947542394ffad50"/>    <section>
+    <title>m_peaks</title>
+<indexterm><primary>m_peaks</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>m_peaks</secondary></indexterm>
+<para><computeroutput>std::vector&lt;double&gt; EvolutionPeaks::m_peaks = {511}<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_evolution_peaks_1ad874f98afd738fbdb60b89bb926bca61"/>    <section>
+    <title>m_rebins</title>
+<indexterm><primary>m_rebins</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>m_rebins</secondary></indexterm>
+<para><computeroutput><link linkend="_class_data_file">DataFile</link>&lt;<link linkend="__hit_8hpp_1ab5dd24876acad09ec52c250c1668466c">Label</link>, int&gt; EvolutionPeaks::m_rebins<computeroutput>[private]</computeroutput></computeroutput></para>    </section><anchor xml:id="_class_evolution_peaks_1a2982e096a06f6ecc3025077537a8f89c"/>    <section>
+    <title>m_recalibration</title>
+<indexterm><primary>m_recalibration</primary><secondary>EvolutionPeaks</secondary></indexterm>
+<indexterm><primary>EvolutionPeaks</primary><secondary>m_recalibration</secondary></indexterm>
+<para><computeroutput><link linkend="_class_calibration">Calibration</link> EvolutionPeaks::m_recalibration<computeroutput>[private]</computeroutput></computeroutput></para></section>
+<para>
+The documentation for this class was generated from the following file:</para>
+lib/Modules/<link linkend="__evolution_peaks_8hpp">EvolutionPeaks.hpp</link></section>
+</section>

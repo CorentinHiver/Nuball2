@@ -1,0 +1,20 @@
+<map id="Minimisator::nelderMead" name="Minimisator::nelderMead">
+<area shape="rect" id="node1" title=" " alt="" coords="5,309,191,336"/>
+<area shape="rect" id="node2" href="$class_simplex.html#af9f387b740699fc83d561b06a5e8305a" title=" " alt="" coords="249,5,368,32"/>
+<area shape="rect" id="node3" href="$class_simplex.html#a4212e98efa0b1468955d32a51387f3fc" title=" " alt="" coords="241,157,377,184"/>
+<area shape="rect" id="node4" href="$print_8hpp.html#a7c50c0690489629965f74c4921570ce5" title="Requires #define DEBUG or &#45;DDEBUG in the compile line." alt="" coords="446,107,509,133"/>
+<area shape="rect" id="node5" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="601,81,653,108"/>
+<area shape="rect" id="node8" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="429,259,526,285"/>
+<area shape="rect" id="node11" href="$class_vertice.html#ae4155cad8d004c954916882157c9375f" title=" " alt="" coords="255,259,362,285"/>
+<area shape="rect" id="node12" href="$class_simplex.html#aed93fc950fa50599b289d5ac9e3356c7" title=" " alt="" coords="255,309,363,336"/>
+<area shape="rect" id="node13" href="$class_simplex.html#a43aa87c378225a78bf764a3c049ed381" title=" " alt="" coords="255,360,362,387"/>
+<area shape="rect" id="node14" href="$class_vertice.html#a6a4e7b2f8b617f2153b2fc0f0742a09e" title=" " alt="" coords="243,411,375,437"/>
+<area shape="rect" id="node15" href="$class_simplex.html#a3840674dbc694d4796b28c088da4c02e" title=" " alt="" coords="239,461,379,488"/>
+<area shape="rect" id="node16" href="$files__functions_8hpp.html#a321abbd0681c4da012deaf49122389c5" title=" " alt="" coords="265,512,352,539"/>
+<area shape="rect" id="node17" href="$class_vertice.html#aad52a08bb2c5b6f92119d42956051924" title=" " alt="" coords="261,563,356,589"/>
+<area shape="rect" id="node18" href="$class_simplex.html#ae39ce6d0a47986ceabb9a76146a8225b" title=" " alt="" coords="254,613,363,640"/>
+<area shape="rect" id="node6" href="$lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="427,157,527,184"/>
+<area shape="rect" id="node7" href="$class_vertice.html#a93b6febeec367c7c2211eb1e34dcfce4" title=" " alt="" coords="427,208,528,235"/>
+<area shape="rect" id="node9" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="576,259,679,285"/>
+<area shape="rect" id="node10" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="727,259,833,285"/>
+</map>

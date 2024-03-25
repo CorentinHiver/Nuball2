@@ -11,21 +11,47 @@ auto \textbf{ begin} ()
 \item 
 auto \textbf{ begin} () const
 \item 
+void \textbf{ clean\+Move} (\textbf{ Vertice} \&\+\_\+vertice)
+\item 
+void \textbf{ copy} (std\+::vector$<$ double $>$ const \&point)
+\item 
+void \textbf{ copy} (\textbf{ Vertice} \&\&other)
+\item 
+void \textbf{ copy} (\textbf{ Vertice} const \&other)
+\item 
 auto \textbf{ end} ()
 \item 
 auto \textbf{ end} () const
+\item 
+auto const  \& \textbf{ evaluate} (std\+::function$<$ double(const \textbf{ Vertice} \&)$>$ objective\+\_\+function)
+\item 
+void \textbf{ fill} (double const \&value)
 \item 
 auto \& \textbf{ get} ()
 \item 
 auto const  \& \textbf{ get} () const
 \item 
-\textbf{ Vertice} \& \textbf{ operator$\ast$} (double const \&constant)
+auto \& \textbf{ get} (int const \&coordinate\+\_\+i)
 \item 
-\textbf{ Vertice} \textbf{ operator$\ast$} (\textbf{ Vertice} const \&other)
+auto const  \& \textbf{ get} (int const \&coordinate\+\_\+i) const
 \item 
-\textbf{ Vertice} \textbf{ operator+} (\textbf{ Vertice} const \&other)
+auto \textbf{ get\+Value} ()
 \item 
-\textbf{ Vertice} \textbf{ operator-\/} (\textbf{ Vertice} const \&other)
+auto const  \& \textbf{ get\+Value} () const
+\item 
+\textbf{ Vertice} \textbf{ operator$\ast$} (double const \&constant) const
+\item 
+\textbf{ Vertice} \textbf{ operator$\ast$} (\textbf{ Vertice} const \&other) const
+\item 
+\textbf{ Vertice} \& \textbf{ operator$\ast$=} (double const \&constant)
+\item 
+\textbf{ Vertice} \textbf{ operator+} (\textbf{ Vertice} const \&other) const
+\item 
+\textbf{ Vertice} \textbf{ operator-\/} (\textbf{ Vertice} const \&other) const
+\item 
+bool \textbf{ operator$<$} (\textbf{ Vertice} const \&other) const
+\item 
+bool \textbf{ operator$<$=} (\textbf{ Vertice} const \&other) const
 \item 
 \textbf{ Vertice} \& \textbf{ operator=} (std\+::vector$<$ double $>$ const \&point)
 \item 
@@ -33,21 +59,37 @@ auto const  \& \textbf{ get} () const
 \item 
 \textbf{ Vertice} \& \textbf{ operator=} (\textbf{ Vertice} const \&vertice)
 \item 
+bool \textbf{ operator$>$} (\textbf{ Vertice} const \&other) const
+\item 
+bool \textbf{ operator$>$=} (\textbf{ Vertice} const \&other) const
+\item 
 auto \& \textbf{ operator[$\,$]} (int const \&i)
 \item 
 auto const  \& \textbf{ operator[$\,$]} (int const \&i) const
 \item 
+void \textbf{ resize} (\textbf{ size\+\_\+t} const \&\textbf{ size})
+\item 
+void \textbf{ resize} (\textbf{ size\+\_\+t} const \&\textbf{ size}, double const \&value)
+\item 
+void \textbf{ set} (int const \&coordinate\+\_\+i, double const \&coordinate)
+\item 
 void \textbf{ set} (std\+::vector$<$ double $>$ const \&point)
 \item 
-void \textbf{ set} (\textbf{ Vertice} \&\&\+\_\+vertice)
+void \textbf{ set} (\textbf{ Vertice} \&\&other)
 \item 
-void \textbf{ set} (\textbf{ Vertice} const \&\+\_\+vertice)
+void \textbf{ set} (\textbf{ Vertice} const \&other)
+\item 
+void \textbf{ set\+Value} (double const \&\+\_\+value)
 \item 
 auto \& \textbf{ size} ()
 \item 
 auto const  \& \textbf{ size} () const
 \item 
+\textbf{ Vertice} ()=default
+\item 
 \textbf{ Vertice} (\textbf{ size\+\_\+t} \textbf{ size})
+\item 
+\textbf{ Vertice} (std\+::\+Initialiser\+\_\+list$<$ double $>$ const \&init\+\_\+list)
 \item 
 \textbf{ Vertice} (std\+::vector$<$ double $>$ const \&coords)
 \item 
@@ -61,39 +103,54 @@ auto const  \& \textbf{ size} () const
 std\+::vector$<$ double $>$ \textbf{ m\+\_\+coordinates}
 \item 
 \textbf{ size\+\_\+t} \textbf{ m\+\_\+dim} = 0
+\item 
+double \textbf{ m\+\_\+value} = NAN
 \end{DoxyCompactItemize}
 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\label{class_vertice_a6e2e24eb4beb27f1b42163fda1777c40}} 
+\mbox{\label{class_vertice_a4beafe087884524a9728617bff98029f}} 
 \index{Vertice@{Vertice}!Vertice@{Vertice}}
 \index{Vertice@{Vertice}!Vertice@{Vertice}}
-\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
-{\footnotesize\ttfamily Vertice\+::\+Vertice (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ const \&}]{coords }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily Vertice\+::\+Vertice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=312pt]{class_vertice_a6e2e24eb4beb27f1b42163fda1777c40_icgraph}
+\includegraphics[width=312pt]{class_vertice_a4beafe087884524a9728617bff98029f_icgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_vertice_a6e2e24eb4beb27f1b42163fda1777c40}} 
+\index{Vertice@{Vertice}!Vertice@{Vertice}}
+\index{Vertice@{Vertice}!Vertice@{Vertice}}
+\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily Vertice\+::\+Vertice (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ const \&}]{coords }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_vertice_a9b171d24a90abd98983bd7cfc4796aa9}} 
+\index{Vertice@{Vertice}!Vertice@{Vertice}}
+\index{Vertice@{Vertice}!Vertice@{Vertice}}
+\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily Vertice\+::\+Vertice (\begin{DoxyParamCaption}\item[{std\+::\+Initialiser\+\_\+list$<$ double $>$ const \&}]{init\+\_\+list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_vertice_aa498494b022d938d1b641cc6d8aac2f3}} 
 \index{Vertice@{Vertice}!Vertice@{Vertice}}
 \index{Vertice@{Vertice}!Vertice@{Vertice}}
-\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
 {\footnotesize\ttfamily Vertice\+::\+Vertice (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{\+\_\+vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\label{class_vertice_afddab470753508f96eeb0735e1400cbb}} 
 \index{Vertice@{Vertice}!Vertice@{Vertice}}
 \index{Vertice@{Vertice}!Vertice@{Vertice}}
-\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
 {\footnotesize\ttfamily Vertice\+::\+Vertice (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} \&\&}]{\+\_\+vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\label{class_vertice_a25640d2ace19cf2993c1854edd452ef0}} 
 \index{Vertice@{Vertice}!Vertice@{Vertice}}
 \index{Vertice@{Vertice}!Vertice@{Vertice}}
-\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+\doxysubsubsection{Vertice()\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
 {\footnotesize\ttfamily Vertice\+::\+Vertice (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t}}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
@@ -111,6 +168,70 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{begin()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily auto Vertice\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
+\mbox{\label{class_vertice_a2b540156c45d4c5c519cb9035c7a3648}} 
+\index{Vertice@{Vertice}!cleanMove@{cleanMove}}
+\index{cleanMove@{cleanMove}!Vertice@{Vertice}}
+\doxysubsubsection{cleanMove()}
+{\footnotesize\ttfamily void Vertice\+::clean\+Move (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} \&}]{\+\_\+vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{class_vertice_a2b540156c45d4c5c519cb9035c7a3648_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_vertice_ae9c9917341984b56f264c4478b9d8791}} 
+\index{Vertice@{Vertice}!copy@{copy}}
+\index{copy@{copy}!Vertice@{Vertice}}
+\doxysubsubsection{copy()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void Vertice\+::copy (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ const \&}]{point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vertice_ae9c9917341984b56f264c4478b9d8791_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_vertice_a8b64784c593d9d75f9052a7a9d2fee02}} 
+\index{Vertice@{Vertice}!copy@{copy}}
+\index{copy@{copy}!Vertice@{Vertice}}
+\doxysubsubsection{copy()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void Vertice\+::copy (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vertice_a8b64784c593d9d75f9052a7a9d2fee02_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_vertice_ae4155cad8d004c954916882157c9375f}} 
+\index{Vertice@{Vertice}!copy@{copy}}
+\index{copy@{copy}!Vertice@{Vertice}}
+\doxysubsubsection{copy()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void Vertice\+::copy (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vertice_ae4155cad8d004c954916882157c9375f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vertice_ae4155cad8d004c954916882157c9375f_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_vertice_a1215380e747b2cf93f861407a5bf9c3d}} 
 \index{Vertice@{Vertice}!end@{end}}
 \index{end@{end}!Vertice@{Vertice}}
@@ -123,81 +244,172 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{end()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily auto Vertice\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
+\mbox{\label{class_vertice_a6a4e7b2f8b617f2153b2fc0f0742a09e}} 
+\index{Vertice@{Vertice}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!Vertice@{Vertice}}
+\doxysubsubsection{evaluate()}
+{\footnotesize\ttfamily auto const\& Vertice\+::evaluate (\begin{DoxyParamCaption}\item[{std\+::function$<$ double(const \textbf{ Vertice} \&)$>$}]{objective\+\_\+function }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vertice_a6a4e7b2f8b617f2153b2fc0f0742a09e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_vertice_a1c3b20dfc14068262251ce9930dfa88f}} 
+\index{Vertice@{Vertice}!fill@{fill}}
+\index{fill@{fill}!Vertice@{Vertice}}
+\doxysubsubsection{fill()}
+{\footnotesize\ttfamily void Vertice\+::fill (\begin{DoxyParamCaption}\item[{double const \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{class_vertice_a1c3b20dfc14068262251ce9930dfa88f_icgraph}
+\end{center}
+\end{figure}
 \mbox{\label{class_vertice_a7ae35dd4e65c993d7faa019d8b966086}} 
 \index{Vertice@{Vertice}!get@{get}}
 \index{get@{get}!Vertice@{Vertice}}
-\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily auto\& Vertice\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 \mbox{\label{class_vertice_a11e12aac4668a10a6b1706db7e5ebbcd}} 
 \index{Vertice@{Vertice}!get@{get}}
 \index{get@{get}!Vertice@{Vertice}}
-\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily auto const\& Vertice\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=291pt]{class_vertice_a11e12aac4668a10a6b1706db7e5ebbcd_icgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_vertice_a0bb7c9c5bc6bceef7479d6761a9020fb}} 
+\mbox{\label{class_vertice_af3563e71bc70c76de76010a381fd3afb}} 
+\index{Vertice@{Vertice}!get@{get}}
+\index{get@{get}!Vertice@{Vertice}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily auto\& Vertice\+::get (\begin{DoxyParamCaption}\item[{int const \&}]{coordinate\+\_\+i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_vertice_a6c5691267912f8f2cc04aa708e6a8f2b}} 
+\index{Vertice@{Vertice}!get@{get}}
+\index{get@{get}!Vertice@{Vertice}}
+\doxysubsubsection{get()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily auto const\& Vertice\+::get (\begin{DoxyParamCaption}\item[{int const \&}]{coordinate\+\_\+i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_vertice_a54771ef13c85f80a0603765273e2c8dd}} 
+\index{Vertice@{Vertice}!getValue@{getValue}}
+\index{getValue@{getValue}!Vertice@{Vertice}}
+\doxysubsubsection{getValue()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto Vertice\+::get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_vertice_a5f23c4ece665d5a55b5c3b67fc45ffb3}} 
+\index{Vertice@{Vertice}!getValue@{getValue}}
+\index{getValue@{getValue}!Vertice@{Vertice}}
+\doxysubsubsection{getValue()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily auto const\& Vertice\+::get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{class_vertice_a5f23c4ece665d5a55b5c3b67fc45ffb3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_vertice_a82b943e02b26f4e9d713aceb17ccab61}} 
 \index{Vertice@{Vertice}!operator$\ast$@{operator$\ast$}}
 \index{operator$\ast$@{operator$\ast$}!Vertice@{Vertice}}
 \doxysubsubsection{operator$\ast$()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \textbf{ Vertice}\& Vertice\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{double const \&}]{constant }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \textbf{ Vertice} Vertice\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{double const \&}]{constant }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-\mbox{\label{class_vertice_a2e858710d6eb5fe7dc4029b6cc280272}} 
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{class_vertice_a82b943e02b26f4e9d713aceb17ccab61_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_vertice_af7bdce52a3f6189f94f05a80127f949d}} 
 \index{Vertice@{Vertice}!operator$\ast$@{operator$\ast$}}
 \index{operator$\ast$@{operator$\ast$}!Vertice@{Vertice}}
 \doxysubsubsection{operator$\ast$()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \textbf{ Vertice} Vertice\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \textbf{ Vertice} Vertice\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=292pt]{class_vertice_a2e858710d6eb5fe7dc4029b6cc280272_cgraph}
+\includegraphics[width=350pt]{class_vertice_af7bdce52a3f6189f94f05a80127f949d_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_vertice_a1897df7eb0121341d7dac0a285af7db8}} 
+\mbox{\label{class_vertice_a082dc91912838405b4c98eec453cd7fe}} 
+\index{Vertice@{Vertice}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!Vertice@{Vertice}}
+\doxysubsubsection{operator$\ast$=()}
+{\footnotesize\ttfamily \textbf{ Vertice}\& Vertice\+::operator$\ast$= (\begin{DoxyParamCaption}\item[{double const \&}]{constant }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_vertice_ae6bf8b5aab5ad865f4fdd9a9b91f7e92}} 
 \index{Vertice@{Vertice}!operator+@{operator+}}
 \index{operator+@{operator+}!Vertice@{Vertice}}
 \doxysubsubsection{operator+()}
-{\footnotesize\ttfamily \textbf{ Vertice} Vertice\+::operator+ (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \textbf{ Vertice} Vertice\+::operator+ (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=312pt]{class_vertice_a1897df7eb0121341d7dac0a285af7db8_cgraph}
+\includegraphics[width=350pt]{class_vertice_ae6bf8b5aab5ad865f4fdd9a9b91f7e92_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_vertice_a35359e51cb43abf68e459cbfedaeabb6}} 
+\mbox{\label{class_vertice_aba263387b931496c5937f8645ded93ae}} 
 \index{Vertice@{Vertice}!operator-\/@{operator-\/}}
 \index{operator-\/@{operator-\/}!Vertice@{Vertice}}
 \doxysubsubsection{operator-\/()}
-{\footnotesize\ttfamily \textbf{ Vertice} Vertice\+::operator-\/ (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily \textbf{ Vertice} Vertice\+::operator-\/ (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=307pt]{class_vertice_a35359e51cb43abf68e459cbfedaeabb6_cgraph}
+\includegraphics[width=350pt]{class_vertice_aba263387b931496c5937f8645ded93ae_cgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_vertice_afe53f60865f26d7945c338eb3f2422ac}} 
+\index{Vertice@{Vertice}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Vertice@{Vertice}}
+\doxysubsubsection{operator$<$()}
+{\footnotesize\ttfamily bool Vertice\+::operator$<$ (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_vertice_a540a77aff2f79ae4cd5bb932311118fd}} 
+\index{Vertice@{Vertice}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Vertice@{Vertice}}
+\doxysubsubsection{operator$<$=()}
+{\footnotesize\ttfamily bool Vertice\+::operator$<$= (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_vertice_a651eb7cb39f966a5ff2d6d24c3e1e785}} 
 \index{Vertice@{Vertice}!operator=@{operator=}}
 \index{operator=@{operator=}!Vertice@{Vertice}}
 \doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily \textbf{ Vertice}\& Vertice\+::operator= (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ const \&}]{point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_vertice_a651eb7cb39f966a5ff2d6d24c3e1e785_cgraph}
+\includegraphics[width=293pt]{class_vertice_a651eb7cb39f966a5ff2d6d24c3e1e785_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_vertice_a45871718e86053a0a03565bbe672f7a3}} 
@@ -206,11 +418,12 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
 {\footnotesize\ttfamily \textbf{ Vertice}\& Vertice\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} \&\&}]{vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_vertice_a45871718e86053a0a03565bbe672f7a3_cgraph}
+\includegraphics[width=293pt]{class_vertice_a45871718e86053a0a03565bbe672f7a3_cgraph}
 \end{center}
 \end{figure}
 \mbox{\label{class_vertice_ab16b5e8facd201c70bdab71384adc6df}} 
@@ -219,13 +432,26 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{operator=()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily \textbf{ Vertice}\& Vertice\+::operator= (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{class_vertice_ab16b5e8facd201c70bdab71384adc6df_cgraph}
+\includegraphics[width=293pt]{class_vertice_ab16b5e8facd201c70bdab71384adc6df_cgraph}
 \end{center}
 \end{figure}
+\mbox{\label{class_vertice_ab7e40502eaba03b6b1576cbf39c358f0}} 
+\index{Vertice@{Vertice}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!Vertice@{Vertice}}
+\doxysubsubsection{operator$>$()}
+{\footnotesize\ttfamily bool Vertice\+::operator$>$ (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{class_vertice_ad563d154d6ffe9f7a75323bc0d706fe4}} 
+\index{Vertice@{Vertice}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!Vertice@{Vertice}}
+\doxysubsubsection{operator$>$=()}
+{\footnotesize\ttfamily bool Vertice\+::operator$>$= (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_vertice_a20a711ace767a031ec41eb3a0dd75ed1}} 
 \index{Vertice@{Vertice}!operator[]@{operator[]}}
 \index{operator[]@{operator[]}!Vertice@{Vertice}}
@@ -238,59 +464,96 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{operator[]()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily auto const\& Vertice\+::operator[$\,$] (\begin{DoxyParamCaption}\item[{int const \&}]{i }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
 
+\mbox{\label{class_vertice_a1884b3dc38c78b7526fe7e75d1bb4604}} 
+\index{Vertice@{Vertice}!resize@{resize}}
+\index{resize@{resize}!Vertice@{Vertice}}
+\doxysubsubsection{resize()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Vertice\+::resize (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{class_vertice_a1884b3dc38c78b7526fe7e75d1bb4604_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_vertice_a1884b3dc38c78b7526fe7e75d1bb4604_icgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_vertice_a9ab0c67e95e2ebd4ccd3d648d22c78eb}} 
+\index{Vertice@{Vertice}!resize@{resize}}
+\index{resize@{resize}!Vertice@{Vertice}}
+\doxysubsubsection{resize()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Vertice\+::resize (\begin{DoxyParamCaption}\item[{\textbf{ size\+\_\+t} const \&}]{size,  }\item[{double const \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_vertice_a9ab0c67e95e2ebd4ccd3d648d22c78eb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\label{class_vertice_a3554246d64dc33a7719b5cd2d112e67b}} 
+\index{Vertice@{Vertice}!set@{set}}
+\index{set@{set}!Vertice@{Vertice}}
+\doxysubsubsection{set()\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void Vertice\+::set (\begin{DoxyParamCaption}\item[{int const \&}]{coordinate\+\_\+i,  }\item[{double const \&}]{coordinate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_vertice_ab5519307ad24edb7b482ce63f41d3b63}} 
 \index{Vertice@{Vertice}!set@{set}}
 \index{set@{set}!Vertice@{Vertice}}
-\doxysubsubsection{set()\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\doxysubsubsection{set()\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily void Vertice\+::set (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$ const \&}]{point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=260pt]{class_vertice_ab5519307ad24edb7b482ce63f41d3b63_cgraph}
-\end{center}
-\end{figure}
-\mbox{\label{class_vertice_a7a18bb3bfb36d8630641d7b33c1461cc}} 
+\mbox{\label{class_vertice_a59ec9893ab3e7bbadfbd2e54ea283e8e}} 
 \index{Vertice@{Vertice}!set@{set}}
 \index{set@{set}!Vertice@{Vertice}}
-\doxysubsubsection{set()\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
-{\footnotesize\ttfamily void Vertice\+::set (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} \&\&}]{\+\_\+vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{set()\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void Vertice\+::set (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the call graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=260pt]{class_vertice_a7a18bb3bfb36d8630641d7b33c1461cc_cgraph}
+\includegraphics[width=297pt]{class_vertice_a59ec9893ab3e7bbadfbd2e54ea283e8e_cgraph}
 \end{center}
 \end{figure}
-\mbox{\label{class_vertice_a58c2af14cebf91fc79298f4128a54856}} 
+\mbox{\label{class_vertice_aad52a08bb2c5b6f92119d42956051924}} 
 \index{Vertice@{Vertice}!set@{set}}
 \index{set@{set}!Vertice@{Vertice}}
-\doxysubsubsection{set()\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily void Vertice\+::set (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{\+\_\+vertice }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+\doxysubsubsection{set()\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void Vertice\+::set (\begin{DoxyParamCaption}\item[{\textbf{ Vertice} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the call graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=260pt]{class_vertice_a58c2af14cebf91fc79298f4128a54856_cgraph}
+\includegraphics[width=350pt]{class_vertice_aad52a08bb2c5b6f92119d42956051924_icgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=293pt]{class_vertice_a58c2af14cebf91fc79298f4128a54856_icgraph}
-\end{center}
-\end{figure}
+\mbox{\label{class_vertice_a0ab115f978a0d9c454b957d5cc531c57}} 
+\index{Vertice@{Vertice}!setValue@{setValue}}
+\index{setValue@{setValue}!Vertice@{Vertice}}
+\doxysubsubsection{setValue()}
+{\footnotesize\ttfamily void Vertice\+::set\+Value (\begin{DoxyParamCaption}\item[{double const \&}]{\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
 \mbox{\label{class_vertice_a93b6febeec367c7c2211eb1e34dcfce4}} 
 \index{Vertice@{Vertice}!size@{size}}
 \index{size@{size}!Vertice@{Vertice}}
 \doxysubsubsection{size()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily auto\& Vertice\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Here is the caller graph for this function\+:\nopagebreak
+Here is the caller graph for this function\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -318,8 +581,14 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{m\_dim}
 {\footnotesize\ttfamily \textbf{ size\+\_\+t} Vertice\+::m\+\_\+dim = 0\hspace{0.3cm}{\ttfamily [private]}}
 
+\mbox{\label{class_vertice_a5ef7f30be58758901c1e35e0bfe4d681}} 
+\index{Vertice@{Vertice}!m\_value@{m\_value}}
+\index{m\_value@{m\_value}!Vertice@{Vertice}}
+\doxysubsubsection{m\_value}
+{\footnotesize\ttfamily double Vertice\+::m\+\_\+value = NAN\hspace{0.3cm}{\ttfamily [private]}}
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-lib/\+Classes/\textbf{ Spectra\+Alignator.\+hpp}\end{DoxyCompactItemize}
+lib/\+Analyse/\textbf{ Spectra\+Alignator.\+hpp}\end{DoxyCompactItemize}

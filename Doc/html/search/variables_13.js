@@ -1,25 +1,5 @@
 var searchData=
 [
-  ['t_2689',['T',['../class_i_options.html#a48254b9cb7fdeeacf1f42444333a377a',1,'IOptions']]],
-  ['t_2690',['t',['../class_i_options.html#af82eb678f8bb2f7984016b278cc24875',1,'IOptions']]],
-  ['test_5fparis_5fvs_5fmult_2691',['test_paris_vs_mult',['../class_run_matrixator.html#a3e8757458107f0f0ec8de5a25c6518fe',1,'RunMatrixator']]],
-  ['time_2692',['time',['../class_clover_module.html#aa015368cdc852dd79598e8c4bac07a50',1,'CloverModule::time()'],['../class_si_strip.html#a96cac34742884a45a3d950d55448e55f',1,'SiStrip::time()'],['../class_paris_phoswitch.html#a948e4a40c9c567bcb5b5885b266779b6',1,'ParisPhoswitch::time()'],['../_sorted___event_8hpp.html#a37b178a0c74cf89bd93a94f2765ece64',1,'LaBr3_Hit::time()']]],
-  ['time2s_2693',['time2s',['../class_sorted___event.html#a92097f7b335c6b79b7ef068f555dcddc',1,'Sorted_Event::time2s()'],['../class_event.html#a24cba1790b71f725050f229c129e91d4',1,'Event::time2s()']]],
-  ['time_5fbgo_2694',['time_BGO',['../class_clover_module.html#a834d28b69726bbfb3ec0a79837676ea4',1,'CloverModule']]],
-  ['time_5fclover_2695',['time_clover',['../class_sorted___event.html#ac44a4857dde092f1b32fdcdf9c8679e1',1,'Sorted_Event']]],
-  ['times_2696',['times',['../class_event.html#a433bcb1da05d7a6f477d4d1b9ee0f7b0',1,'Event']]],
-  ['tmax_2697',['Tmax',['../class_timewalks.html#aa585b7e6f829821705530c962f8cb252',1,'Timewalks']]],
-  ['tmin_2698',['Tmin',['../class_timewalks.html#a99bee54027c71031c1e6757a66bf82fc',1,'Timewalks']]],
-  ['total_5fread_5fsize_5ffile_2699',['total_read_size_file',['../class_performances.html#ad94ac097e2ffac203b813e9703f9cf50',1,'Performances']]],
-  ['total_5fwritten_5fsize_5ffile_2700',['total_written_size_file',['../class_performances.html#ae38c3de3b231fbb995c2585cfc148e5c',1,'Performances']]],
-  ['totalmult_2701',['TotalMult',['../class_clovers.html#a4366bd57c8e4716d5fd63639c5ed2967',1,'Clovers']]],
-  ['totbgo_2702',['totBGO',['../class_clovers.html#a3a258a7a457632666c0190b4fa04939b',1,'Clovers']]],
-  ['totbgo_5fdelayed_2703',['totBGO_delayed',['../class_clovers.html#a6e3b85032ab5190b5c2a360e6f0d2e4e',1,'Clovers']]],
-  ['totbgo_5fprompt_2704',['totBGO_prompt',['../class_clovers.html#a05a4d8b02a5d996da6a1205eb8bd6ca4',1,'Clovers']]],
-  ['totge_2705',['totGe',['../class_clovers.html#a1bad91b9700a464895aacf89166961c5',1,'Clovers']]],
-  ['totge_5fdelayed_2706',['totGe_delayed',['../class_clovers.html#abcd4354801aaef249f6a6332dca6c043',1,'Clovers']]],
-  ['totge_5fprompt_2707',['totGe_prompt',['../class_clovers.html#a94b65546b96444b31ff35570c2d45792',1,'Clovers']]],
-  ['trig_2708',['trig',['../class_counters.html#a0466980b7848964cbcb51ec0a89b93eb',1,'Counters']]],
-  ['typerootmap_2709',['typeRootMap',['../lib_root_8hpp.html#ad29ed215015eb770854e597fbdabb984',1,'libRoot.hpp']]],
-  ['types_5fhandled_2710',['types_handled',['../class_detectors.html#a930c2b917e87154c1337ecf8551a3ab4',1,'Detectors']]]
+  ['value_3537',['value',['../structis__container.html#abe72bf896680aa10340ccf08a5d293c7',1,'is_container']]],
+  ['verbose_3538',['verbose',['../class_files_manager.html#a7b9423dd2d7f87e518b0cbb80454c24b',1,'FilesManager']]]
 ];
