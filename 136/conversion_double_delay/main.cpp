@@ -11,9 +11,7 @@
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
 #include <RF_Manager.hpp>     // Eases manipulation of RF information
-// #include <Clovers.hpp>        // Analysis module for clovers
 #include <HitBuffer.hpp>      // A buffer for hits
-// #include "EventBuilder_136.hpp" // Event builder for this experiment
 
 namespace Clovers_namespace
 {
@@ -38,6 +36,7 @@ std::vector<double> g_trigger_blacklist = {70, 97};
 // Event building parameters :
 double const & g_rf_offset_ns = 25.0;
 double const & g_begin_prompt_ns = -10;
+double const & g_begin_prompt_Rings_DSSD_ns = -40;
 double const & g_end_prompt_ns = 5;
 double const & g_begin_prompt_PARIS_ns = -5;
 double const & g_end_prompt_PARIS_ns = 3;
@@ -47,7 +46,7 @@ bool const & g_prompt_trigger = false; // If we require a prompt or not
 int g_n_prev_pulses = 4; // Number of pulses before the trigger to take
 
   // Time windows :
-Time const & g_coinc_tw_ns = 50; // time window in ns
+Time const & g_coinc_tw_ns = 50; // time window in ns (+-g_coinc_tw_ns)
 
 // std::vector<Label> g_trigger_blacklist = {70};
 
@@ -315,7 +314,7 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
     }
   }
 
-  // --- b. Look forward to look for potential BGO within the time window after the hit --- //
+  // --- b. Look forward for potential BGO within the time window after the hit --- //
   for (it = init_it+1; it<buffer.size(); it++)
   {
     auto const & hit_it = buffer[it];
@@ -507,19 +506,19 @@ output_mutex.unlock();
         if(isGe[hit_r.label])
         {// Trigger on Germaniums
           auto const & hit_first_Ge = hit_r; // The Germanium hit
-          auto const & rel_time_first_Ge = rf.pulse_ToF_ns(hit_first_Ge); // The time of the Germanium relative to the beam pulsation
+          auto const & rel_time_first_Ge_ns = rf.pulse_ToF_ns(hit_first_Ge); // The time of the Germanium relative to the beam pulsation
 
           // ---------------------------------//
           //1. ---  Treat only delayed Ge --- //
           // ---------------------------------//
-          if (isDelayed_ns(rel_time_first_Ge))
+          if (isDelayed_ns(rel_time_first_Ge_ns))
           {// If the Germanium is in the delayed window, try to create the event :
-            auto const init_it = r_buffer_it; // The buffer's index of the first Germanium hit
-            MTObject::mutex.lock();
+            auto const init_it = r_buffer_it; // The buffer's index of the Germanium hit that might open the event
+          MTObject::mutex.lock();
             auto first_Ge_Clover_label = Clovers_namespace::labels[hit_first_Ge.label]; // The Clover label of the first Germanium
-            MTObject::mutex.unlock();
+          MTObject::mutex.unlock();
             auto const & ref_pulse_timestamp = rf.refTime(hit_first_Ge.stamp); // The absolute timestamp of the beam pulse (relative to the delayed Germanium we're trying to trigger on)
-            std::vector<uchar> clover_modules = {first_Ge_Clover_label}; // List of the modules that fired in the event
+            std::vector<uchar> clover_modules = {first_Ge_Clover_label}; // List of the modules that fired in the event (initialise it with the clover that fired)
 
             // -----------------------------//
             //2. --- BGO clean first Ge --- //
@@ -576,7 +575,7 @@ output_mutex.unlock();
             // ----------------------------//
             //3.B --- Another clean Ge --- //
             // ----------------------------//
-            else 
+            else // double clean Ge delayed
             {
               std::vector<int> next_Ge_indexes; // List the indices of the next Germaniums potentially in the event
               while (++r_buffer_it < buffer.size())
@@ -589,7 +588,7 @@ output_mutex.unlock();
                 auto const & time_diff_ns = dT_ns(hit_first_Ge.stamp, hit_it.stamp);// dT_ns(start, stop)
 
                 //2. Remove hits of the prompt of next pulse
-                if (rel_time_first_Ge + time_diff_ns > g_end_delayed_ns) break; 
+                if (rel_time_first_Ge_ns + time_diff_ns > g_end_delayed_ns) break; 
 
                 if (isGe[hit_it.label])
                 {
@@ -605,7 +604,7 @@ output_mutex.unlock();
 
               r_buffer_it = init_it;
 
-              if (histoed) histos.first_Ge_time_VS_nb_delayed.Fill(next_Ge_indexes.size(), rel_time_first_Ge);
+              if (histoed) histos.first_Ge_time_VS_nb_delayed.Fill(next_Ge_indexes.size(), rel_time_first_Ge_ns);
 
               // Trigger : there needs to be at least another clover that fired
               if (next_Ge_indexes.size() < 1) continue;
@@ -616,14 +615,14 @@ output_mutex.unlock();
 
               if (histoed)
               {
-                auto const & time_Ge2 = rel_time_first_Ge + dT_ns(hit_first_Ge.stamp, buffer[next_Ge_indexes[0]].stamp);
+                auto const & time_Ge2 = rel_time_first_Ge_ns + dT_ns(hit_first_Ge.stamp, buffer[next_Ge_indexes[0]].stamp);
                 histos.second_Ge_time_VS_nb_delayed.Fill(next_Ge_indexes.size(), time_Ge2);
-                histos.Ge2_VS_Ge_time.Fill(rel_time_first_Ge, time_Ge2);
+                histos.Ge2_VS_Ge_time.Fill(rel_time_first_Ge_ns, time_Ge2);
                 
                 if (next_Ge_indexes.size() > 2)
                 {
-                  auto const & time_Ge3 = rel_time_first_Ge + dT_ns(hit_first_Ge.stamp, buffer[next_Ge_indexes[1]].stamp);
-                  histos.Ge3_VS_Ge_time.Fill(rel_time_first_Ge, time_Ge3);
+                  auto const & time_Ge3 = rel_time_first_Ge_ns + dT_ns(hit_first_Ge.stamp, buffer[next_Ge_indexes[1]].stamp);
+                  histos.Ge3_VS_Ge_time.Fill(rel_time_first_Ge_ns, time_Ge3);
                   histos.Ge3_VS_Ge2_time.Fill(time_Ge2, time_Ge3);
                 }
               }
@@ -713,7 +712,7 @@ output_mutex.unlock();
             // ----------------------------------------------//
             if (r_buffer_it > buffer.step()) while (--r_buffer_it > 0)
               if(buffer[r_buffer_it].stamp < back_event_window) break; // Here r_buffer_it points to the hit before the first hit of the event
-
+            
             if (histoed)
             {
               histos.time_before_to_first_prompt.Fill(buffer[r_buffer_it].label, dT_ns(ref_pulse_timestamp, buffer[r_buffer_it].stamp));
@@ -785,7 +784,7 @@ output_mutex.unlock();
             event.clear();
             r_buffer_it = init_it;
           }
-          else if (histoed && isPrompt_ns(rel_time_first_Ge, hit_r.label))
+          else if (histoed && isPrompt_ns(rel_time_first_Ge_ns, hit_r.label))
           {
             histos.promptGe.Fill(hit_r.nrj);
             if (comptonClean(buffer, r_buffer_it, rf, histos, histoed, false)) histos.promptGe_clean.Fill(hit_r.nrj);

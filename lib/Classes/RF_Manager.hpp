@@ -95,7 +95,7 @@ private:
 };
 
 thread_local Time  RF_Manager::m_offset = 50000 ;
-thread_local Label RF_Manager::label  = 251;
+thread_local Label RF_Manager::label = 251;
 
 bool inline RF_Manager::setHit(Hit const & hit)
 {
