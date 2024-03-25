@@ -641,6 +641,7 @@ bool Timeshifts::verify(std::string const & folder, int const & nb_files)
       if (!m_time_spectra[label].Merged()) continue;
       m_time_spectra_corrected[label] = static_cast<TH1F*>(m_time_spectra[label].get()->Clone(concatenate(m_time_spectra[label].name(), "_corrected").c_str()));
       shiftX(m_time_spectra_corrected[label].get(), -m_timeshifts[label]);
+      AddTH1(m_time_spectra_corrected_bidim.get(), m_time_spectra_corrected[label].get(), label);
       if (m_use_rf) 
       {
         if (!m_histograms_VS_RF[label].Merged()) continue;
