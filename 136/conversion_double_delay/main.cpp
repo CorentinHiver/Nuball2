@@ -323,8 +323,6 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
     auto const & time_diff = dT_ns(hit_Ge.stamp, hit_it.stamp); // dT_ns(start, stop)
     if(time_diff>g_coinc_tw_ns) break; // No coincident forward BGO
 
-    // if (delayed && rf_time > (rf.period_ns()-20)) break; // We don't look inside the prompt peak for Compton suppression
-
     if (histoed && delayed) histos.BGO_VS_Ge_label.Fill(hit_Ge.label, hit_it.label);
 
     if (clover_Ge==Clovers_namespace::labels[hit_it.label])
@@ -450,7 +448,8 @@ output_mutex.unlock();
 
   // Initialize RF manager :
   RF_Manager rf;
-  rf.set_period_ns(200);
+  if (treat_129) rf.set_period_ns(400);
+  else           rf.set_period_ns(200);
 
   // Handle the first RF downscaled hit :
   RF_Extractor first_rf(tempTree, rf, hit, gindex);
@@ -947,7 +946,7 @@ int main(int argc, char** argv)
           // print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
           print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
-          // print("(       --129)                            : Treats the N-SI-129 pulsed runs");
+          print("(       --129)                            : Treats the N-SI-129 pulsed runs");
           return 0;
         }
       }
@@ -983,7 +982,8 @@ int main(int argc, char** argv)
 
   // Load some modules :
   detectors.load(IDFile);
-  Calibration calibration(calibFile);
+  Calibration calibration;
+  if (!only_timeshifts) calibration.load(calibFile);
   Manip runs(list_runs);
   if (one_run) runs.setFolder(one_run_folder);
 
