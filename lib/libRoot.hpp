@@ -517,7 +517,7 @@ void TheTChain::set()
 }
 
 /////////////////////////
-//   USEFULL CLASSES   //
+//   USELESS CLASSES   //
 /////////////////////////
 
 /**
@@ -527,7 +527,7 @@ void TheTChain::set()
 struct THBinning
 {
   THBinning() = default;
-  THBinning(std::Initialiser_list<double> initList)
+  THBinning(std::initializer_list<double> initList)
   {
     if (initList.size() != 3) 
     {

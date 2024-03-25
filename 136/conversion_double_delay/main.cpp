@@ -16,14 +16,14 @@
 namespace Clovers_namespace
 {
   thread_local static std::array<uchar, 1000> labels;  // Array used to make correspondance between a detector label and its clover label
-  thread_local bool Initialised = false;
-  void Initialise()
+  thread_local bool initialized = false;
+  void initialize()
   {
-    if (!Initialised)
+    if (!initialized)
     {
       std::fill(labels.begin(), labels.end(), -1);
       for (int l = 23; l<167; l++) labels[l] = static_cast<uchar>((l-23)/6);
-      Initialised = true;
+      initialized = true;
     }
   }
 }
@@ -179,7 +179,7 @@ struct Histos
   
   TH1F* rf_evolution = nullptr;
 
-  void Initialise()
+  void Initialize()
   {
     auto const & nbDet = detectors.number();
 
@@ -361,9 +361,9 @@ void convert(Hit & hit, FasterReader & reader,
               RunInfo & run_infos)
 {
   // ------------------ //
-  // Initialise helpers //
+  // Initialize helpers //
   // ------------------ //
-  Clovers_namespace::Initialise();
+  Clovers_namespace::initialize();
   Timer timer;
   // Checking the lookup tables :
   if (!timeshifts || !calibration || !reader) return;
@@ -388,7 +388,7 @@ void convert(Hit & hit, FasterReader & reader,
 
 
   // ------------------------------ //
-  // Initialise the temporary TTree //
+  // Initialize the temporary TTree //
   // ------------------------------ //
 temp_tree_mutex.lock();
   std::string const & tempTree_name = "temp"+std::to_string(MTObject::getThreadIndex());
@@ -446,7 +446,7 @@ output_mutex.lock();
 output_mutex.unlock();
   // event.writting(outTree, "lstEQp");
 
-  // Initialise RF manager :
+  // Initialize RF manager :
   RF_Manager rf;
   if (treat_129) rf.set_period_ns(400);
   else           rf.set_period_ns(200);
@@ -957,7 +957,7 @@ int main(int argc, char** argv)
     }
   }
 
-  // MANDATORY : Initialise the multithreading according to the number required, the number of files and the hardware limitations :
+  // MANDATORY : initialize the multithreading according to the number required, the number of files and the hardware limitations :
   MTObject::setThreadsNb(nb_threads);
   MTObject::adjustThreadsNumber(nb_files);
   MTObject::Initialise();
@@ -988,7 +988,7 @@ int main(int argc, char** argv)
   if (one_run) runs.setFolder(one_run_folder);
 
   // Checking that all the modules have been loaded correctly :
-  if (!calibration || !runs) return 0;
+  if (!runs) return 0;
 
   // Setup some parameters :
   RF_Manager::set_offset_ns(g_rf_offset_ns);
@@ -1013,7 +1013,7 @@ int main(int argc, char** argv)
     if (nb_files<0) run_infos.nb_files = nb_files;
 
     Histos histos;
-    if (histoed) histos.Initialise();
+    if (histoed) histos.Initialize();
 
     print("----------------");
     print("Treating ", run_name);
@@ -1055,6 +1055,7 @@ int main(int argc, char** argv)
 
     if (only_timeshifts) 
     {
+      print("coucou");
       if(overwrite) calculateTimeshifts(timeshifts);
       else print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); 
       continue;
