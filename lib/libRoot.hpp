@@ -578,9 +578,9 @@ namespace CoAnalyse
     {
       Float_t maxRow = 0.;
       // 1 : Get the maximum
-      for (int y = 1; y+2<bins_y; y++) if(matrix->GetBinContent(x, y) > maxRow) maxRow = matrix->GetBinContent(x, y);
+      for (int y = 1; y<bins_y+1; y++) if(matrix->GetBinContent(x, y) > maxRow) maxRow = matrix->GetBinContent(x, y);
       // 2 : Normalize to set maximum = factor
-      if (maxRow>0) for (int y = 1; y+2<bins_y; y++) 
+      if (maxRow>0) for (int y = 1; y<bins_y+1; y++) 
       {
         matrix -> SetBinContent(x, y, factor*matrix->GetBinContent(x, y)/maxRow);
       }
