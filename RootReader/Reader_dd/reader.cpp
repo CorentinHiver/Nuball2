@@ -605,7 +605,7 @@ MTObject::mutex.unlock();
           E_VS_time_NaI_wp.Fill(time_ns, nrj);
         }
 
-        if (nb_gamma_in_prompts>0) time_all_knowing_pulse_A.Fill(label, time_ns);
+        // if (nb_gamma_in_prompts>0) time_all_knowing_pulse_A.Fill(label, time_ns);
 
         if(isLaBr[hit_i]) for(auto & clover_i : clean_indexes)
         {
