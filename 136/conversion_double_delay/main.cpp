@@ -485,7 +485,7 @@ output_mutex.unlock();
     buffer.push_back(hit);
     if (buffer.isFull())
     {
-      for (size_t r_buffer_it = 0; r_buffer_it<buffer.size(); ++r_buffer_it)
+      for (int r_buffer_it = 0; r_buffer_it < int_cast(buffer.size()); ++r_buffer_it)
       {
         auto const & hit_r = buffer[r_buffer_it];
         if (handleRf(rf, hit_r, event, outTree)) 
