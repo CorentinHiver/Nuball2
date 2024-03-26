@@ -273,7 +273,7 @@ bool isDelayed_ns(double const & rel_time_ns) {return (rel_time_ns>g_begin_delay
 
 /// @brief 
 /// @return: true when clean, false when vetoed 
-bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos & histos, bool const & histoed, bool const & delayed = true)
+bool comptonClean(HitBuffer const & buffer, int & it, RF_Manager & rf, Histos & histos, bool const & histoed, bool const & delayed = true)
 {
   auto const init_it = it;
   auto const & hit_Ge = buffer[init_it];
@@ -315,7 +315,7 @@ bool comptonClean(HitBuffer const & buffer, size_t & it, RF_Manager & rf, Histos
   }
 
   // --- b. Look forward for potential BGO within the time window after the hit --- //
-  for (it = init_it+1; it<buffer.size(); it++)
+  for (it = init_it+1; it<int_cast(buffer.size()); it++)
   {
     auto const & hit_it = buffer[it];
     if (!isBGO[hit_it.label]) continue;
@@ -560,7 +560,7 @@ output_mutex.unlock();
               }
 
               // Looking at next hit wether it is in the time window :
-              if (!single_clean_coinc && r_buffer_it+1 < buffer.size())
+              if (!single_clean_coinc && r_buffer_it+1 < int_cast(buffer.size()))
               {
                 auto const & hit_after = buffer[r_buffer_it+1];
                 if (isDSSD[hit_after.label]) continue; // The DSSD does not count as a trigger. Only the gamma detectors do.
@@ -577,7 +577,7 @@ output_mutex.unlock();
             else // double clean Ge delayed
             {
               std::vector<int> next_Ge_indexes; // List the indices of the next Germaniums potentially in the event
-              while (++r_buffer_it < buffer.size())
+              while (++r_buffer_it < int_cast(buffer.size()))
               {// Normal double delayed mode :
                 auto const & hit_it = buffer[r_buffer_it];
 
@@ -637,12 +637,11 @@ output_mutex.unlock();
                 auto const & next_Ge_index = next_Ge_indexes[index_it];
                 r_buffer_it = next_Ge_index;
                 auto const & hit_Ge2 = buffer[r_buffer_it];
-                auto const & index_next_clover = Clovers_namespace::labels[hit_Ge2.label];
 
                 if (histoed && index_it == 0) histos.second_Ge_spectra.Fill(buffer[next_Ge_indexes[0]].nrj);
 
-                // 4.b Compton cleaning
-                // If the Germanium is Clean, then the trigger is complete
+                // Compton cleaning
+                // If the second Germanium is Clean (i.e. no BGO fired in the coincidence time window), then the trigger is complete
                 if (comptonClean(buffer, r_buffer_it, rf, histos, histoed))
                 {
                   if (histoed && index_it == 0) histos.second_Ge_spectra_Clean.Fill(buffer[next_Ge_index].nrj);
@@ -650,7 +649,7 @@ output_mutex.unlock();
                   break;
                 }
 
-                // If a BGO vetoed this Ge, move to next one to check wether he's rejected
+                // If a BGO vetoed this Ge, move to the next one to check wether he's clean or not
                 else
                 {
                   if (histoed && index_it == 0) histos.second_Ge_spectra_Vetoed.Fill(buffer[next_Ge_index].nrj);
@@ -722,7 +721,7 @@ output_mutex.unlock();
             // -------------------------//
             //7. --- Fill the Event --- //
             // -------------------------//
-            while (++r_buffer_it<buffer.size())
+            while (++r_buffer_it<int_cast(buffer.size()))
             {
               auto const & hit_i = buffer[r_buffer_it];
               // debug(hit_i, Long64_cast(front_coinc_window-hit_i.stamp));

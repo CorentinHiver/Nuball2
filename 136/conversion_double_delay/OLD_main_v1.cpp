@@ -247,7 +247,7 @@ public:
   auto const & nbClear() const {return m_nb_clear;}
   auto       & nbClear()       {return m_nb_clear;}
 
-  void setStep(size_t const & step) {m_step = step;}
+  void setStep(int const & step) {m_step = step;}
   auto const & step() const {return m_step;}
   auto       & step()       {return m_step;}
 
@@ -293,7 +293,7 @@ public:
 private:
   size_t m_max_size = 0;
   size_t m_size = 0;
-  size_t m_step = 0;
+  int m_step = 0;
   size_t m_nb_clear = 0;
   std::vector<Hit> m_buffer;
 };
