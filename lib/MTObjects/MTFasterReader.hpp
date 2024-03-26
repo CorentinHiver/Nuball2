@@ -198,11 +198,11 @@ inline void MTFasterReader::Read(MTFasterReader & MTReader, Func function, ARGS 
   while(MTReader.nextFilename(filename))
   {
     if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
-    fasterReaderMutex.lock();
-      Hit hit;
-      FasterReader reader(&hit, filename);
-      if (s_progressBar)progress.show();
-    fasterReaderMutex.unlock();
+  fasterReaderMutex.lock();
+    Hit hit;
+    FasterReader reader(&hit, filename);
+    if (s_progressBar) progress.show();
+  fasterReaderMutex.unlock();
     function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
   }
 }

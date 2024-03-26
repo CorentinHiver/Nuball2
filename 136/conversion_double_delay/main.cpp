@@ -1044,28 +1044,25 @@ int main(int argc, char** argv)
     // Timeshifts loading : 
     Timeshifts timeshifts;
     File file(outPath.string() + "Timeshifts/" + run_name + ".dT");
-    try
-    {
-      timeshifts.load(file.string());
-    }
-    catch(Timeshifts::NotFoundError & error)
-    { // If no timeshifts data if available for the run already, calculate it :
-      calculateTimeshifts(timeshifts);
-    }
 
-    if (only_timeshifts) 
+
+    if(overwrite) calculateTimeshifts(timeshifts);
+    else 
     {
-      print("coucou");
-      if(overwrite) calculateTimeshifts(timeshifts);
-      else print("Not overwritting", run_name, "timeshift file because it already exist ! To change this, add option -o"); 
-      continue;
+      try
+      {
+        timeshifts.load(file.string());
+      }
+      catch(Timeshifts::NotFoundError & error)
+      { // If no timeshifts data if available for the run already, calculate it :
+        calculateTimeshifts(timeshifts);
+      }
+      if (only_timeshifts) continue;
     }
     
-    // Loop over the files in parallel :
+    // Loop over the files of the run in parallel :
     MTFasterReader readerMT(run_path, nb_files);
     readerMT.readRaw(convert, calibration, timeshifts, outPath, histos, total_read_size, run_infos);
-
-    if (MTObject::kill) print("All threads correctly stopped !");
 
     if (histoed)
     {
