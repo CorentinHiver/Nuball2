@@ -332,11 +332,8 @@ double dT_ns(Timestamp const & start, Timestamp const & stop)
 
 bool isPrompt_ns(double const & rel_time_ns, int const & label) 
 {
-  if (treat_129)
-  {
-    if (isParis[label]) return (rel_time_ns > g_begin_prompt_PARIS_ns && rel_time_ns < g_end_prompt_PARIS_ns);
-    else                return (rel_time_ns > g_begin_prompt_ns       && rel_time_ns < g_end_prompt_ns      );
-  }
+  if (isParis[label]) return (rel_time_ns > g_begin_prompt_PARIS_ns && rel_time_ns < g_end_prompt_PARIS_ns);
+  else                return (rel_time_ns > g_begin_prompt_ns       && rel_time_ns < g_end_prompt_ns      );
 }
 bool isDelayed_ns(double const & rel_time_ns) {return (rel_time_ns>g_begin_delayed_ns && rel_time_ns<g_end_delayed_ns);}
 
@@ -566,6 +563,9 @@ output_mutex.unlock();
           }
           continue;
         }
+        
+        Time beam_period = rf.period;
+        if (treat_129) beam_period/=2;
 
         // ||||||||||||||||||||||||||||| //
         // ||| FIRST PART : TRIGGER  ||| //
@@ -575,8 +575,6 @@ output_mutex.unlock();
         {// Trigger on Germaniums
           auto const & hit_first_Ge = hit_r; // The Germanium hit
           auto const & rel_time_first_Ge_ns = rf.pulse_ToF_ns(hit_first_Ge); // The time of the Germanium relative to the beam pulsation
-          Time beam_period = rf.period;
-          if (treat_129) beam_period/=2;
 
           // ---------------------------------//
           //1. ---  Treat only delayed Ge --- //
@@ -608,6 +606,7 @@ output_mutex.unlock();
             // ------------------------------//
             //3. --- Find next detectors --- //
             // ------------------------------//
+            
 
             Timestamp front_coinc_window = hit_first_Ge.stamp + Time_cast(g_coinc_tw_ns*1000.); // The timestamp of the front delayed time window
             Timestamp back_coinc_window  = hit_first_Ge.stamp - Time_cast(g_coinc_tw_ns*1000.); // The timestamp of the back  delayed time window
