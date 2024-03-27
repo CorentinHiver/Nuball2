@@ -3,6 +3,7 @@
 
 #include <csignal>
 // #include <future>
+#include <functional>
 #include <thread>
 #include <mutex>
 #include <vector>

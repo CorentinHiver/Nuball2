@@ -1112,8 +1112,8 @@ int main(int argc, char** argv)
 
     MTObject::setExitFunction([&](){histos.Write("backup.root");});
 
-    if(overwrite) calculateTimeshifts(timeshifts);
-    else 
+    if(overwrite && only_timeshifts) {calculateTimeshifts(timeshifts);}
+    else
     {
       try
       {
