@@ -243,6 +243,72 @@ struct Histos
     rf_evolution = new TH1F("rf_evolution", "Evolution RF;# epoch;[ps]", 1000000,0,1000000);
     rf_evolution->SetDirectory(nullptr);
   }
+
+  void Write(std::string const & name)
+  {
+    std::unique_ptr<TFile> outFile (TFile::Open(name.c_str(), "RECREATE"));
+    outFile -> cd();
+
+    time_VS_det.Write();
+    time_first_prompt.Write();
+    time_found_prompt.Write();
+    time_back_event_window.Write();
+    time_before_to_first_prompt.Write();
+
+    energy_all_Ge_trigg.Write();
+    rf_all_raw.Write();
+    energy_each_raw.Write();
+    rf_each_raw.Write();
+    energy_all_Ge.Write();
+    energy_each.Write();
+    rf_all.Write();
+    rf_each.Write();
+    energy_all_Ge_event.Write();
+    rf_all_event.Write();
+    energy_each_event.Write();
+    rf_each_event.Write();
+    energy_all_Ge_trig.Write();
+    energy_each_trig.Write();
+    rf_all_trig.Write();
+    rf_each_trig.Write();
+    // for (auto & histo : paris_bidim) histo.Write();
+    // for (auto & histo : paris_bidim_M_inf_4) histo.Write();
+
+    promptGe.Write();
+    promptGe_clean.Write();
+    promptGe_vetoed.Write();
+
+    BGO_VS_Ge_time.Write();
+    BGO_VS_Ge_time_prompt.Write();
+    E_Ge_BGO_dT_Ge_VS.Write();
+    BGO_VS_Ge_label.Write();
+    BGO_VS_Ge_label_vetoed.Write();
+    BGO_VS_Ge_label_clean.Write();
+
+    first_Ge_spectra.Write();
+    first_Ge_spectra_Clean.Write();
+    first_Ge_spectra_Vetoed.Write();
+
+    second_Ge_spectra.Write();
+    second_Ge_spectra_Clean.Write();
+    second_Ge_spectra_Vetoed.Write();
+
+    first_Ge_time_VS_nb_delayed.Write();
+    second_Ge_time_VS_nb_delayed.Write();
+
+    all_Ge_after_trigger.Write();
+
+    Ge2_VS_Ge_time.Write();
+    Ge3_VS_Ge_time.Write();
+    Ge3_VS_Ge2_time.Write();
+
+    rf_evolution->Write();
+    delete rf_evolution;
+
+    outFile -> Write();
+    outFile -> Close();
+    print(name, "written");
+  }
 };
 
 inline bool handleRf(RF_Manager & rf, Hit const & hit, Event & event, TTree * tree)
@@ -1044,6 +1110,7 @@ int main(int argc, char** argv)
     Timeshifts timeshifts;
     File file(outPath.string() + "Timeshifts/" + run_name + ".dT");
 
+    MTObject::setExitFunction([&](){histos.Write("backup.root");});
 
     if(overwrite) calculateTimeshifts(timeshifts);
     else 
@@ -1065,69 +1132,7 @@ int main(int argc, char** argv)
 
     if (histoed)
     {
-      auto const name = outPath+run_name+"/histo_"+run_name+".root";
-      std::unique_ptr<TFile> outFile (TFile::Open(name.c_str(), "RECREATE"));
-      outFile -> cd();
-
-      histos.time_VS_det.Write();
-      histos.time_first_prompt.Write();
-      histos.time_found_prompt.Write();
-      histos.time_back_event_window.Write();
-      histos.time_before_to_first_prompt.Write();
-
-      histos.energy_all_Ge_trigg.Write();
-      histos.rf_all_raw.Write();
-      histos.energy_each_raw.Write();
-      histos.rf_each_raw.Write();
-      histos.energy_all_Ge.Write();
-      histos.energy_each.Write();
-      histos.rf_all.Write();
-      histos.rf_each.Write();
-      histos.energy_all_Ge_event.Write();
-      histos.rf_all_event.Write();
-      histos.energy_each_event.Write();
-      histos.rf_each_event.Write();
-      histos.energy_all_Ge_trig.Write();
-      histos.energy_each_trig.Write();
-      histos.rf_all_trig.Write();
-      histos.rf_each_trig.Write();
-      // for (auto & histo : histos.paris_bidim) histo.Write();
-      // for (auto & histo : histos.paris_bidim_M_inf_4) histo.Write();
-
-      histos.promptGe.Write();
-      histos.promptGe_clean.Write();
-      histos.promptGe_vetoed.Write();
-
-      histos.BGO_VS_Ge_time.Write();
-      histos.BGO_VS_Ge_time_prompt.Write();
-      histos.E_Ge_BGO_dT_Ge_VS.Write();
-      histos.BGO_VS_Ge_label.Write();
-      histos.BGO_VS_Ge_label_vetoed.Write();
-      histos.BGO_VS_Ge_label_clean.Write();
-
-      histos.first_Ge_spectra.Write();
-      histos.first_Ge_spectra_Clean.Write();
-      histos.first_Ge_spectra_Vetoed.Write();
-
-      histos.second_Ge_spectra.Write();
-      histos.second_Ge_spectra_Clean.Write();
-      histos.second_Ge_spectra_Vetoed.Write();
-
-      histos.first_Ge_time_VS_nb_delayed.Write();
-      histos.second_Ge_time_VS_nb_delayed.Write();
-
-      histos.all_Ge_after_trigger.Write();
-
-      histos.Ge2_VS_Ge_time.Write();
-      histos.Ge3_VS_Ge_time.Write();
-      histos.Ge3_VS_Ge2_time.Write();
-
-      histos.rf_evolution->Write();
-      delete histos.rf_evolution;
-
-      outFile -> Write();
-      outFile -> Close();
-      print(name, "written");
+      histos.Write(outPath+run_name+"/histo_"+run_name+".root");
     }
 
     print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec());
@@ -1152,9 +1157,5 @@ int main(int argc, char** argv)
   }
   output_fileinfo.close();
   print(output_fileinfo_name, "written");
-  if (MTObject::kill) 
-  {
-    print(output_fileinfo_name, "file will be broken ...");
-  }
   return 0;
 }

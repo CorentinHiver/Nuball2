@@ -162,7 +162,7 @@ public:
   {
     if (signal == SIGINT)
     {
-      if (!activated) exit(41);
+      if (!activated) exit(41); // If there is not multithreading going on, no need to wait for anything ...
       else if (MTObject::kill)
       {
         std::cout << "\nCtrl+C pressed twice, killing violently the program... (but should be fine, maybe, hopefully...)" << std::endl;
@@ -180,6 +180,7 @@ public:
         m_threads.clear();
         std::cout << "All threads terminated properly" << std::endl;
       }
+      m_exit_function();// User-defined function that can be set using setExitFunction
       exit(42);
     }
   }
@@ -250,19 +251,24 @@ public:
   static auto const & getThreadIndex() {return m_thread_index;}
   static auto const & index() {return m_thread_index;}
 
-  // static Signal<int> nbThreadsChanged;
+  ///@brief A function that is used when ctrl+C is pressed in order to clean some stuff
+  ///@details Tip : function can be a lambda (of the form [&](){...do something...}) in it, 
+  /// so you can capture all the variables at the location you use this method
+  static void setExitFunction(std::function<void(void)> const & function) {m_exit_function = function;}
 
 private:
   static std::thread::id master_thread_id; 
   static thread_local size_t m_thread_index; // thread_local variable, meaning it will hold different values for each thread it is in
   static std::vector<std::thread> m_threads;
   static bool m_Initialised;
+  static std::function<void(void)> m_exit_function;
 
 };
 
 bool MTObject::m_Initialised = false;
 bool MTObject::kill = false;
 bool MTObject::activated = false;
+std::function<void(void)> MTObject::m_exit_function = [](){};
 
 // Declaration of static variables :
 size_t MTObject::nb_threads = 1;

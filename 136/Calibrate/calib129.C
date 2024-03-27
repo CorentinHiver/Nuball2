@@ -17,8 +17,6 @@ int find_max_peak(TH1F* spectrum, double ratio_threshold, double ADC_threshold =
   return -1;
 }
 
-
-
 void calib129(std::string detector = "", int choice = 0)
 {
   if (detector == "") print("Detectors are BGO, FR and BR (last 2 for PARIS FRONT and PARIS BACK). Choices are 0 (232Th) or 1 (22Na)");

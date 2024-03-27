@@ -174,11 +174,13 @@ bool MTFasterReader::s_progressBar = false;
  * 
  *        void my_function(Hit & hit, FasterReader & reader, MTCounter & counter){do something...}
  * 
- * in main
- *  
- *        MTFasterReader readerMT(/path/to/data/folder/, wanted_number_of_files);
- *        MTCounter counterMT;
- *        readerMT.readRaw(my_function, counterMT);
+ * int main{
+ *           ...
+ *           MTFasterReader readerMT(/path/to/data/folder/, wanted_number_of_files);
+ *           MTCounter counterMT;
+ *           readerMT.readRaw(my_function, counterMT);
+ *           ...
+ *         }
  * 
  * That way, my_function will be executed in parallel on each file in /path/to/data/folder/
 */
@@ -187,7 +189,21 @@ inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
 {
   if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
   m_MTfiles = m_files.getListFiles();
-  MTObject::parallelise_function(Read<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
+  // MTObject::parallelise_function(Read<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
+  MTObject::parallelise_function([&](){ // Here we are inside each thread :
+    std::string filename;
+    CoProgressBar progress(&m_MTfiles.getIndex(), m_MTfiles.size());
+    while(nextFilename(filename))
+    {
+      if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
+    fasterReaderMutex.lock();
+      Hit hit;
+      FasterReader reader(&hit, filename);
+      if (s_progressBar) progress.show();
+    fasterReaderMutex.unlock();
+      func(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
+    }
+  });
 }
 
 template<class Func, class... ARGS>
@@ -218,8 +234,8 @@ inline void MTFasterReader::Read(MTFasterReader & MTReader, Func function, ARGS 
  * Use this function in the same way as readRaw, with a function like this : 
  *  func(Hit & hit, Alignator & alignedTree, args...)
  * 
- * @param func : Must be of the form func(Hit & hit, Alignator & alignedTree, args...). 
- * Alignator is a simple wrapper around a tree. Use alignedTree::GetEntry
+ * @param func : A function (or lambda). Must be of the form func(Hit & hit, Alignator & alignedTree, args...). 
+ * Alignator is a simple wrapper around a tree. Use Alignator::GetEntry.ies just as you would use TTree::GetEntry.ies
  */
 template<class Func, class... ARGS>
 inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
