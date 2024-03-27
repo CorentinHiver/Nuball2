@@ -332,8 +332,11 @@ double dT_ns(Timestamp const & start, Timestamp const & stop)
 
 bool isPrompt_ns(double const & rel_time_ns, int const & label) 
 {
-  if (isParis[label]) return (rel_time_ns > g_begin_prompt_PARIS_ns && rel_time_ns < g_end_prompt_PARIS_ns);
-  else                return (rel_time_ns > g_begin_prompt_ns       && rel_time_ns < g_end_prompt_ns      );
+  if (treat_129)
+  {
+    if (isParis[label]) return (rel_time_ns > g_begin_prompt_PARIS_ns && rel_time_ns < g_end_prompt_PARIS_ns);
+    else                return (rel_time_ns > g_begin_prompt_ns       && rel_time_ns < g_end_prompt_ns      );
+  }
 }
 bool isDelayed_ns(double const & rel_time_ns) {return (rel_time_ns>g_begin_delayed_ns && rel_time_ns<g_end_delayed_ns);}
 
@@ -572,6 +575,8 @@ output_mutex.unlock();
         {// Trigger on Germaniums
           auto const & hit_first_Ge = hit_r; // The Germanium hit
           auto const & rel_time_first_Ge_ns = rf.pulse_ToF_ns(hit_first_Ge); // The time of the Germanium relative to the beam pulsation
+          Time beam_period = rf.period;
+          if (treat_129) beam_period/=2;
 
           // ---------------------------------//
           //1. ---  Treat only delayed Ge --- //
@@ -1110,7 +1115,7 @@ int main(int argc, char** argv)
     Timeshifts timeshifts;
     File file(outPath.string() + "Timeshifts/" + run_name + ".dT");
 
-    MTObject::setExitFunction([&](){histos.Write("backup.root");});
+    if (histoed) MTObject::setExitFunction([&](){histos.Write("backup.root");});
 
     if(overwrite && only_timeshifts) {calculateTimeshifts(timeshifts);}
     else
