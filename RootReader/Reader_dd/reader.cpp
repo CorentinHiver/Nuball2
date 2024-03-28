@@ -284,8 +284,8 @@ void Analysator::Initialise()
   pp.reset("pp", "pp;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
   dd.reset("dd", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
   dd_wp.reset("dd_wp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
-  dd_wpp.reset("dd_wp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
-  dd_wppE.reset("dd_wp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  dd_wpp.reset("dd_wpp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  dd_wppE.reset("dd_wppE", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
   dp.reset("dp", "delaed VS prompt;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
 
   spectra_all.reset("spectra_all", "Spectra;label;Energy [keV]", 1000,0,1000, 10000,0,10000);
@@ -428,7 +428,7 @@ MTObject::mutex.unlock();
     int pulse_freq = 200;
     int nb_prompts = 6;
 
-    Clovers prompt_clovers;
+    Clovers clovers_prompt;
     int nb_gamma_in_prompts = 0;
 
     std::vector<bool> is_prompt(event.mult, false);
@@ -479,7 +479,7 @@ MTObject::mutex.unlock();
         }
         if (is_prompt[hit_i]) 
         {
-          prompt_clovers.Fill(event, hit_i);
+          clovers_prompt.Fill(event, hit_i);
           prompt_Ge.Fill(nrj);
         }
         else if (is_delayed[hit_i]) 
@@ -553,6 +553,8 @@ MTObject::mutex.unlock();
       spectra_all.Fill(label, nrj);
     }
     
+    clovers_delayed.Analyse();
+    clovers_prompt.Analyse();
     ///////////////////
     // Calorimetry : //
     ///////////////////
@@ -577,8 +579,8 @@ MTObject::mutex.unlock();
     // OTHER //
     ///////////
 
-    clovers_delayed.Analyse();
-    auto const & clean_indexes = clovers_delayed.CleanGe; // Simple alias
+    auto const & clean_indexes_delayed = clovers_delayed.CleanGe; // Simple alias
+    auto const & clean_indexes_prompt = clovers_prompt.CleanGe; // Simple alias
 
     /////////////////////
     // Treated Event : //
@@ -617,7 +619,7 @@ MTObject::mutex.unlock();
 
         // if (nb_gamma_in_prompts>0) time_all_knowing_pulse_A.Fill(label, time_ns);
 
-        if(isLaBr[hit_i]) for(auto & clover_i : clean_indexes)
+        if(isLaBr[hit_i]) for(auto & clover_i : clean_indexes_delayed)
         {
           delayed_Paris_VS_Germanium.Fill(nrj, clovers_delayed[clover_i].nrj);
         }
@@ -626,6 +628,20 @@ MTObject::mutex.unlock();
 
     auto const & prompt_mult =  nb_gamma_in_prompts;
 
+    //////////////////////
+    // Clovers prompt : //
+    //////////////////////
+
+    for (size_t clover_it_i = 0; clover_it_i<clean_indexes_prompt.size(); ++clover_it_i)
+    {
+      auto const & clover_i = clovers_delayed[clean_indexes_delayed[clover_it_i]];
+      auto const & label_i = clean_indexes_delayed[clover_it_i];
+      auto const & nrj_i = clover_i.nrj;
+      auto const & time_i = clover_i.time;
+      if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i) 
+        if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+    }
+
     ///////////////////////
     // Clovers delayed : //
     ///////////////////////
@@ -633,12 +649,12 @@ MTObject::mutex.unlock();
     bool C2_PM24 = false; // 2 clean delayed and 1<prompt mult<5
 
     // Calculate delayed calorimetry with 2 or 3 clean germaniums :
-    if ((clean_indexes.size() == 2))
+    if ((clean_indexes_delayed.size() == 2))
     {
-      auto const & time_0 = clovers_delayed[clean_indexes[0]].time;
-      auto const & time_1 = clovers_delayed[clean_indexes[1]].time;
-      auto const & nrj_0 = clovers_delayed[clean_indexes[0]].nrj;
-      auto const & nrj_1 = clovers_delayed[clean_indexes[1]].nrj;
+      auto const & time_0 = clovers_delayed[clean_indexes_delayed[0]].time;
+      auto const & time_1 = clovers_delayed[clean_indexes_delayed[1]].time;
+      auto const & nrj_0 = clovers_delayed[clean_indexes_delayed[0]].nrj;
+      auto const & nrj_1 = clovers_delayed[clean_indexes_delayed[1]].nrj;
       auto const & dT = time_1 - time_0;
       if (dT>50) continue;
       auto const & calo = nrj_0+nrj_1;
@@ -659,9 +675,9 @@ MTObject::mutex.unlock();
       }
 
       // Prompt VS delayed :
-      for (auto const & clean_index : prompt_clovers.CleanGe)
+      for (auto const & clean_index : clovers_prompt.CleanGe)
       {
-        auto const & clover = prompt_clovers[clean_index];
+        auto const & clover = clovers_prompt[clean_index];
         delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_1);
         delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_0);
       }
@@ -669,14 +685,14 @@ MTObject::mutex.unlock();
       delayed_Ge_C2_VS_prompt_mult.Fill(prompt_mult, nrj_1);
     }
 
-    if ((clean_indexes.size() == 3)) 
+    if ((clean_indexes_delayed.size() == 3)) 
     {
-      auto const & time_0 = clovers_delayed[clean_indexes[0]].time;
-      auto const & time_1 = clovers_delayed[clean_indexes[1]].time;
-      auto const & time_2 = clovers_delayed[clean_indexes[2]].time;
-      auto const & nrj_0 = clovers_delayed[clean_indexes[0]].nrj;
-      auto const & nrj_1 = clovers_delayed[clean_indexes[1]].nrj;
-      auto const & nrj_2 = clovers_delayed[clean_indexes[2]].nrj;
+      auto const & time_0 = clovers_delayed[clean_indexes_delayed[0]].time;
+      auto const & time_1 = clovers_delayed[clean_indexes_delayed[1]].time;
+      auto const & time_2 = clovers_delayed[clean_indexes_delayed[2]].time;
+      auto const & nrj_0 = clovers_delayed[clean_indexes_delayed[0]].nrj;
+      auto const & nrj_1 = clovers_delayed[clean_indexes_delayed[1]].nrj;
+      auto const & nrj_2 = clovers_delayed[clean_indexes_delayed[2]].nrj;
       auto const & dT01 = time_1-time_0;
       auto const & dT02 = time_2-time_0;
       auto const & dT12 = time_2-time_1;
@@ -704,9 +720,10 @@ MTObject::mutex.unlock();
     }
 
     // Others :
-    for (size_t clover_it_i = 0; clover_it_i<clean_indexes.size(); ++clover_it_i)
+    for (size_t clover_it_i = 0; clover_it_i<clean_indexes_delayed.size(); ++clover_it_i)
     {
-      auto const & clover_i = clovers_delayed[clean_indexes[clover_it_i]];
+      auto const & clover_i = clovers_delayed[clean_indexes_delayed[clover_it_i]];
+      auto const & label_i = clean_indexes_delayed[clover_it_i];
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i) 
@@ -731,9 +748,9 @@ MTObject::mutex.unlock();
       if (closest_prompt>2) continue;
 
       // Creating the gamma-gamma matrices :
-      for (size_t clover_it_j = clover_it_i+1; clover_it_j<clean_indexes.size(); ++clover_it_j)
+      for (size_t clover_it_j = clover_it_i+1; clover_it_j<clean_indexes_delayed.size(); ++clover_it_j)
       {
-        auto const & clover_j = clovers_delayed[clean_indexes[clover_it_j]];
+        auto const & clover_j = clovers_delayed[clean_indexes_delayed[clover_it_j]];
         auto const & nrj_j = clover_j.nrj;
         auto const & time_j = clover_j.time;
         
