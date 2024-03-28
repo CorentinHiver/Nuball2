@@ -556,6 +556,7 @@ output_mutex.unlock();
         auto const & hit_r = buffer[r_buffer_it];
         if (handleRf(rf, hit_r, event, outTree)) 
         {
+          if (treat_129) rf.period/=2.0;
           if (histoed)
           {
             histos.rf_evolution->SetBinContent(count_rf, rf.period);
@@ -563,9 +564,6 @@ output_mutex.unlock();
           }
           continue;
         }
-        
-        Time beam_period = rf.period;
-        if (treat_129) beam_period/=2;
 
         // ||||||||||||||||||||||||||||| //
         // ||| FIRST PART : TRIGGER  ||| //
@@ -612,7 +610,7 @@ output_mutex.unlock();
             Timestamp back_coinc_window  = hit_first_Ge.stamp - Time_cast(g_coinc_tw_ns*1000.); // The timestamp of the back  delayed time window
             
             // If the front window is outside of the end of the delayed time window, shift it to it.
-            if (front_coinc_window > ref_pulse_timestamp+beam_period+g_begin_prompt_ns) front_coinc_window = ref_pulse_timestamp+g_end_delayed_ns; 
+            if (front_coinc_window > ref_pulse_timestamp+rf.period+g_begin_prompt_ns) front_coinc_window = ref_pulse_timestamp+g_end_delayed_ns; 
 
             // ------------------------------------------------//
             //3.A --- Any other coincident gamma detector  --- //
@@ -742,7 +740,7 @@ output_mutex.unlock();
             //5. --- Requiring at least one prompt hit within few RF cycles in the past  --- //
             // ------------------------------------------------------------------------------//
             // (This prompt event is likely to be a prompt decay feeding isomeric states)
-            Timestamp const last_prompt_time_window_ps = ref_pulse_timestamp - Time_cast(g_n_prev_pulses*beam_period-rf.offset());
+            Timestamp const last_prompt_time_window_ps = ref_pulse_timestamp - Time_cast(g_n_prev_pulses*rf.period-rf.offset());
             bool one_prompt_before = false;
             Timestamp last_prompt_ref_pulse_timestamp = 0;
             size_t last_prompt_pulse_index = 0;
@@ -773,7 +771,7 @@ output_mutex.unlock();
 
             // Extract some useful informations :
             Timestamp back_event_window = last_prompt_ref_pulse_timestamp + Time_cast(g_begin_prompt_ns*1000); // Beginning of the last prompt pulse (last_prompt_timestamp) - abs(g_begin_prompt_ns)
-            // Timestamp back_event_window = ref_pulse_timestamp - g_n_prev_pulses*beam_period - rf.offset(); // Beginning of the
+            // Timestamp back_event_window = ref_pulse_timestamp - g_n_prev_pulses*rf.period - rf.offset(); // Beginning of the
 
             // ----------------------------------------------//
             //6. --- Locate the first hit in time window --- //
