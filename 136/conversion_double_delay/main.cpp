@@ -982,7 +982,6 @@ int main(int argc, char** argv)
         }
         else if (                   command == "--progress")
         {
-          // FasterReader::setVerbose(0);
           verbose = 0;
           MTFasterReader::showProgressBar();
         }
