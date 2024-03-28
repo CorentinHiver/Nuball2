@@ -346,7 +346,7 @@ void Analysator::Initialise()
   BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO with trigger Clover 511", 1000,0,1000, 1000,0,5000);
   BGO_with_trigger_BGO_511.reset("BGO_with_trigger_BGO_511","BGO with trigger BGO 511", 1000,0,1000, 1000,0,5000);
   LaBr3_with_trigger_Clover_511.reset("LaBr3_with_trigger_Clover_511","LaBr3 with trigger Clover 511", 1000,0,1000, 2500,0,5000);
-  DSSD_VS_Clover_717.reset("DSSD_VS_Clover_717","DSSD VS Clover 717", 1000,0,1000, 1000,0,5000);
+  DSSD_VS_Clover_717.reset("DSSD_VS_Clover_717","DSSD VS Clover 717", 1000,0,1000, 1000,0,30000);
 
 
   // Run quality :
@@ -744,7 +744,6 @@ MTObject::mutex.unlock();
         if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
       }
         
-
       continue;
 
       delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
