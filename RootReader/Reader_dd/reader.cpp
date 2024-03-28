@@ -210,6 +210,11 @@ void Analysator::Initialise()
   Clovers::timePs(true);
   int run_min = 70;
   int run_max = 130;
+  if (read_129)
+  {
+    run_min = 20;
+    run_max = 110;
+  }
   int nb_runs = run_max-run_min;
 
 #ifndef QUALITY
