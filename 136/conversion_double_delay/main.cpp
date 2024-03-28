@@ -830,7 +830,7 @@ output_mutex.unlock();
             // --------------------------//
             //8. --- Write the Event --- //
             // --------------------------//
-            if (histoed) for (int hit_i = 0; hit_i<event.mult; hit_i++) 
+            if (histoed) for (int hit_i = 0; hit_i<event.mult; hit_i++)
             {
               // debug(event.labels[hit_i], (event.times[hit_i])/1000.);
               // pauseDebug();
@@ -841,7 +841,6 @@ output_mutex.unlock();
 
             outTree -> Fill();
             buffer.setStep(r_buffer_it);
-
 
             // --------------//
             //9. --- END --- //

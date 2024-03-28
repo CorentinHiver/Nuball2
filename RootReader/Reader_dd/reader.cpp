@@ -189,6 +189,8 @@ private:
   MTTHist<TH2F> delayed_Ge_C1_VS_prompt_Ge;
   MTTHist<TH2F> delayed_Ge_C1_VS_delayed_calo;
 
+  MTTHist<TH2F> BGO_with_trigger_Clover_511;
+
   #else //QUALITY
 
   Map_MTTHist<TH2F> time_vs_run_each_det;
@@ -337,6 +339,8 @@ void Analysator::Initialise()
     delayed_Ge_C1_VS_delayed_calo.reset("delayed_Ge_C1_VS_delayed_calo", "Clean Ge C1 VS delayed calo", 500,0,5000, 5000,0,5000);
     delayed_Ge_C1_VS_prompt_Ge.reset("delayed_Ge_C1_VS_prompt_Ge", "Clean Ge C1 VS prompt Ge mult", 5000,0,5000, 2000,0,4000);
   }
+
+  BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO_VS_Clover_511", 1000,0,1000, 1000,0,1000);
 
   // Run quality :
 #else // if QUALITY
@@ -701,10 +705,13 @@ MTObject::mutex.unlock();
     // Others :
     for (size_t clover_it_i = 0; clover_it_i<clean_indexes.size(); ++clover_it_i)
     {
-      continue;
       auto const & clover_i = clovers_delayed[clean_indexes[clover_it_i]];
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
+      if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i) 
+        if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+
+      continue;
 
       delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
       delayed_E_VS_time_Ge_clean_wp.Fill(time_i, nrj_i);
@@ -779,6 +786,8 @@ void Analysator::write()
   outfile->cd();
 
 #ifndef QUALITY
+  BGO_with_trigger_Clover_511.Write();
+
   RWMat RW_dd_wp(dd_wp); RW_dd_wp.Write();
   dd.Write();
   dp.Write();
