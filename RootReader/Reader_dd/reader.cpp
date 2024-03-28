@@ -190,6 +190,7 @@ private:
   MTTHist<TH2F> delayed_Ge_C1_VS_delayed_calo;
 
   MTTHist<TH2F> BGO_with_trigger_Clover_511;
+  MTTHist<TH2F> BGO_with_trigger_BGO_511;
 
   #else //QUALITY
 
@@ -341,6 +342,7 @@ void Analysator::Initialise()
   }
 
   BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO_VS_Clover_511", 1000,0,1000, 1000,0,1000);
+  BGO_with_trigger_Clover_511.reset("BGO_with_trigger_BGO_511","BGO_VS_Clover_511", 1000,0,1000, 1000,0,1000);
 
   // Run quality :
 #else // if QUALITY
@@ -515,7 +517,6 @@ MTObject::mutex.unlock();
       ///////////
       else if (isBGO[label]) 
       {
-        nrj*=1.11; // CALIBRATE BETTER !!!
              if (is_prompt [hit_i]) {prompt_BGO .Fill(nrj);}
         else if (is_delayed[hit_i]) {delayed_BGO.Fill(nrj);}
       }
@@ -787,6 +788,7 @@ void Analysator::write()
 
 #ifndef QUALITY
   BGO_with_trigger_Clover_511.Write();
+  BGO_with_trigger_BGO_511.Write();
 
   RWMat RW_dd_wp(dd_wp); RW_dd_wp.Write();
   dd.Write();
