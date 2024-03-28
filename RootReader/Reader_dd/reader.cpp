@@ -646,7 +646,6 @@ MTObject::mutex.unlock();
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
         if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-        if (isBGO[event.labels[hit_i]]) DSSD_VS_Clover_717.Fill(event.labels[hit_i], event.nrjs[hit_i]);
         if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
       }
       if (715<nrj_i && nrj_i<720) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
@@ -739,12 +738,12 @@ MTObject::mutex.unlock();
       auto const & label_i = clean_indexes_delayed[clover_it_i];
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
-      if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i) 
-        if (isBGO[event.labels[hit_i]]) 
-        {
-          BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-          LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-        }
+      if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
+      {
+        if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+      }
+        
 
       continue;
 
