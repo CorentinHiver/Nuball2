@@ -190,6 +190,8 @@ private:
   MTTHist<TH2F> delayed_Ge_C1_VS_delayed_calo;
 
   MTTHist<TH2F> BGO_with_trigger_Clover_511;
+  MTTHist<TH2F> DSSD_VS_Clover_717;
+  MTTHist<TH2F> LaBr3_with_trigger_Clover_511;
   MTTHist<TH2F> BGO_with_trigger_BGO_511;
 
   #else //QUALITY
@@ -341,8 +343,11 @@ void Analysator::Initialise()
     delayed_Ge_C1_VS_prompt_Ge.reset("delayed_Ge_C1_VS_prompt_Ge", "Clean Ge C1 VS prompt Ge mult", 5000,0,5000, 2000,0,4000);
   }
 
-  BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO_VS_Clover_511", 1000,0,1000, 1000,0,1000);
-  BGO_with_trigger_BGO_511.reset("BGO_with_trigger_BGO_511","BGO_VS_Clover_511", 1000,0,1000, 1000,0,1000);
+  BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO with trigger Clover 511", 1000,0,1000, 1000,0,5000);
+  BGO_with_trigger_BGO_511.reset("BGO_with_trigger_BGO_511","BGO with trigger BGO 511", 1000,0,1000, 1000,0,5000);
+  LaBr3_with_trigger_Clover_511.reset("LaBr3_with_trigger_Clover_511","LaBr3 with trigger Clover 511", 1000,0,1000, 2500,0,5000);
+  DSSD_VS_Clover_717.reset("DSSD_VS_Clover_717","DSSD VS Clover 717", 1000,0,1000, 1000,0,5000);
+
 
   // Run quality :
 #else // if QUALITY
@@ -638,8 +643,16 @@ MTObject::mutex.unlock();
       auto const & label_i = clean_indexes_delayed[clover_it_i];
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
-      if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i) 
+      if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
+      {
         if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        if (isBGO[event.labels[hit_i]]) DSSD_VS_Clover_717.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+      }
+      if (715<nrj_i && nrj_i<720) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
+      {
+        if (isDSSD[event.labels[hit_i]]) DSSD_VS_Clover_717.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+      }
     }
 
     ///////////////////////
@@ -727,7 +740,11 @@ MTObject::mutex.unlock();
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i) 
-        if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        if (isBGO[event.labels[hit_i]]) 
+        {
+          BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+          LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        }
 
       continue;
 
@@ -805,6 +822,8 @@ void Analysator::write()
 
 #ifndef QUALITY
   BGO_with_trigger_Clover_511.Write();
+  DSSD_VS_Clover_717.Write();
+  LaBr3_with_trigger_Clover_511.Write();
   BGO_with_trigger_BGO_511.Write();
 
   RWMat RW_dd_wp(dd_wp); RW_dd_wp.Write();
