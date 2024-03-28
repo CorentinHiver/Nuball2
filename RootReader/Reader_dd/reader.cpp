@@ -342,7 +342,7 @@ void Analysator::Initialise()
   }
 
   BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO_VS_Clover_511", 1000,0,1000, 1000,0,1000);
-  BGO_with_trigger_Clover_511.reset("BGO_with_trigger_BGO_511","BGO_VS_Clover_511", 1000,0,1000, 1000,0,1000);
+  BGO_with_trigger_BGO_511.reset("BGO_with_trigger_BGO_511","BGO_VS_Clover_511", 1000,0,1000, 1000,0,1000);
 
   // Run quality :
 #else // if QUALITY
