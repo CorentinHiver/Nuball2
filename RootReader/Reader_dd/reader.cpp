@@ -192,6 +192,7 @@ private:
   MTTHist<TH2F> BGO_with_trigger_Clover_511;
   MTTHist<TH2F> DSSD_VS_Clover_717;
   MTTHist<TH2F> LaBr3_with_trigger_Clover_511;
+  MTTHist<TH2F> NaI_with_trigger_Clover_511;
   MTTHist<TH2F> LaBr3_with_trigger_LaBr3_511;
   MTTHist<TH2F> BGO_with_trigger_BGO_511;
 
@@ -325,7 +326,7 @@ void Analysator::Initialise()
 
   // When only 2-3 germaniums, plot germaniums VS the sum of them
   delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C2_VS_prompt_Ge.reset("delayed_Ge_C2_VS_prompt_Ge", "Clean Ge C2 VS prompt Ge", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C2_VS_prompt_Ge.reset("delayed_Ge_C2_VS_prompt_Ge", "Clean delayed Ge C2 VS prompt Ge", 5000,0,5000, 2000,0,4000);
   delayed_Ge_C2_VS_prompt_mult.reset("delayed_Ge_C2_VS_prompt_mult", "Clean Ge C2 VS prompt Ge mult", 15,0,15, 2000,0,4000);
   delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2 cleaned", 5000,0,5000, 2000,0,4000);
   delayed_Ge_C2_VS_total_Ge_rejected.reset("delayed_Ge_C2_VS_total_Ge_rejected", "Clean Ge VS sum clean Ge C2 rejected", 5000,0,5000, 2000,0,4000);
@@ -347,6 +348,7 @@ void Analysator::Initialise()
   BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO with trigger Clover 511", 1000,0,1000, 1000,0,5000);
   BGO_with_trigger_BGO_511.reset("BGO_with_trigger_BGO_511","BGO with trigger BGO 511", 1000,0,1000, 1000,0,5000);
   LaBr3_with_trigger_Clover_511.reset("LaBr3_with_trigger_Clover_511","LaBr3 with trigger Clover 511", 1000,0,1000, 2500,0,5000);
+  NaI_with_trigger_Clover_511.reset("NaI_with_trigger_Clover_511","NaI with trigger Clover 511", 1000,0,1000, 2500,0,5000);
   LaBr3_with_trigger_LaBr3_511.reset("LaBr3_with_trigger_LaBr3_511","LaBr3 with trigger LaBr3 511", 1000,0,1000, 2500,0,5000);
   DSSD_VS_Clover_717.reset("DSSD_VS_Clover_717","DSSD VS Clover 717", 1000,0,1000, 1000,0,30000);
 
@@ -646,8 +648,9 @@ MTObject::mutex.unlock();
       auto const & time_i = clover_i.time;
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
-        if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-        if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+             if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        else if (isNaI[hit_i]) NaI_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
       }
       if (715<nrj_i && nrj_i<720) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
@@ -741,8 +744,9 @@ MTObject::mutex.unlock();
       auto const & time_i = clover_i.time;
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
-        if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-        if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+             if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        else if (isNaI[hit_i]) NaI_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
       }
         
       continue;
@@ -823,6 +827,7 @@ void Analysator::write()
   BGO_with_trigger_Clover_511.Write();
   DSSD_VS_Clover_717.Write();
   LaBr3_with_trigger_Clover_511.Write();
+  NaI_with_trigger_Clover_511.Write();
   LaBr3_with_trigger_LaBr3_511.Write();
   BGO_with_trigger_BGO_511.Write();
 

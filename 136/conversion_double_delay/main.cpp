@@ -47,6 +47,7 @@ int g_n_prev_pulses = 4; // Number of pulses before the trigger to take
 
   // Time windows :
 Time const & g_coinc_tw_ns = 50; // time window in ns (+-g_coinc_tw_ns)
+Time const & g_compton_tw = 100 // time window in ns (+-g_compton_tw)
 
 // std::vector<Label> g_trigger_blacklist = {70};
 
@@ -344,7 +345,7 @@ bool comptonClean(HitBuffer const & buffer, int & it, RF_Manager & rf, Histos & 
   auto const init_it = it;
   auto const & hit_Ge = buffer[init_it];
   auto const & clover_Ge = Clovers_namespace::labels[hit_Ge.label];
-  auto const & time_Ge = rf.pulse_ToF_ns(hit_Ge);
+  auto const & time_Ge_ns = rf.pulse_ToF_ns(hit_Ge);
 
   // --- a. Look backward to look for potential BGO within the time window before the hit --- //
   // Start with the first hit before the germanium we want to check :
@@ -352,13 +353,14 @@ bool comptonClean(HitBuffer const & buffer, int & it, RF_Manager & rf, Histos & 
   {// Loop back until we either go out of the coincident window, 
    // step inside the prompt window or finds the last hit of the last written event
     auto const & hit_it = buffer[it];
+    
+    auto const & time_diff_ns = dT_ns(hit_it.stamp, hit_Ge.stamp); // dT_ns(start, stop)
+    if(time_diff_ns>g_compton_tw) break;
+
     if (!isBGO[hit_it.label]) continue;
 
-    auto const & time_diff = dT_ns(hit_it.stamp, hit_Ge.stamp); // dT_ns(start, stop)
-    if(time_diff>g_coinc_tw_ns) break;
 
-    // Checking prompt window :  We don't look inside the prompt peak for Compton suppression
-    auto const & rf_time = time_Ge-time_diff;
+    auto const & rf_time = time_Ge_ns-time_diff_ns;
     // if (delayed && rf_time<g_begin_delayed_ns) break;
 
     if (histoed && delayed) histos.BGO_VS_Ge_label.Fill(hit_Ge.label, hit_it.label);
@@ -381,13 +383,14 @@ bool comptonClean(HitBuffer const & buffer, int & it, RF_Manager & rf, Histos & 
   }
 
   // --- b. Look forward for potential BGO within the time window after the hit --- //
-  for (it = init_it+1; it<int_cast(buffer.size()); it++)
+  for (it = init_it+1; it<int_cast(buffer.size()); ++it)
   {
     auto const & hit_it = buffer[it];
-    if (!isBGO[hit_it.label]) continue;
-
+    
     auto const & time_diff = dT_ns(hit_Ge.stamp, hit_it.stamp); // dT_ns(start, stop)
-    if(time_diff>g_coinc_tw_ns) break; // No coincident forward BGO
+    if(time_diff>g_compton_tw) break; // No coincident forward BGO
+
+    if (!isBGO[hit_it.label]) continue;
 
     if (histoed && delayed) histos.BGO_VS_Ge_label.Fill(hit_Ge.label, hit_it.label);
 
