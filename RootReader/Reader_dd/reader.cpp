@@ -114,6 +114,7 @@ private:
   MTTHist<TH2F> spectra_BGO_VS_run;
   MTTHist<TH2F> spectra_LaBr_VS_run;
   MTTHist<TH2F> spectra_NaI_VS_run;
+  MTTHist<TH2F> spectra_NaI_VS_det;
 
 
   MTTHist<TH2F> delayed_E_VS_time_Ge_clean;
@@ -298,6 +299,7 @@ void Analysator::Initialise()
   spectra_BGO_VS_run.reset("spectra_BGO_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
   spectra_LaBr_VS_run.reset("spectra_LaBr_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
   spectra_NaI_VS_run.reset("spectra_NaI_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
+  spectra_NaI_VS_det.reset("spectra_NaI_VS_det", "Spectra;detecteur number;Energy [keV]", 1000,0,1000, 2000,0,2000);
 
   // Timing
   time_all.reset("time_all", "Time", 1000,0,1000, 2000,-1000,1000);
@@ -887,6 +889,7 @@ void Analysator::write()
   spectra_BGO_VS_run.Write();
   spectra_LaBr_VS_run.Write();
   spectra_NaI_VS_run.Write();
+  spectra_NaI_VS_det.Write();
 
   time_all.Write();
   time_NaI.Write();
