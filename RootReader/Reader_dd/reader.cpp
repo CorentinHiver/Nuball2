@@ -53,7 +53,7 @@ public:
     this->Initialise();
     MTRootReader reader(datapath, number_files);
     print("Launching the reader");
-    reader.read([](){this->analyse(tree, event);});
+    reader.read([&](Nuball2Tree & tree, Event & event){this->analyse(tree, event);});
     write();
   }
 
