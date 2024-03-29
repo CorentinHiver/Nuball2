@@ -47,7 +47,7 @@ int g_n_prev_pulses = 4; // Number of pulses before the trigger to take
 
   // Time windows :
 Time const & g_coinc_tw_ns = 50; // time window in ns (+-g_coinc_tw_ns)
-Time const & g_compton_tw = 100 // time window in ns (+-g_compton_tw)
+Time const & g_compton_tw_ns = 100 // time window in ns (+-g_compton_tw_ns)
 
 // std::vector<Label> g_trigger_blacklist = {70};
 
@@ -342,26 +342,24 @@ bool isDelayed_ns(double const & rel_time_ns) {return (rel_time_ns>g_begin_delay
 /// @return: true when clean, false when vetoed 
 bool comptonClean(HitBuffer const & buffer, int & it, RF_Manager & rf, Histos & histos, bool const & histoed, bool const & delayed = true)
 {
-  auto const init_it = it;
+  auto const   init_it = it;
   auto const & hit_Ge = buffer[init_it];
   auto const & clover_Ge = Clovers_namespace::labels[hit_Ge.label];
   auto const & time_Ge_ns = rf.pulse_ToF_ns(hit_Ge);
 
   // --- a. Look backward to look for potential BGO within the time window before the hit --- //
   // Start with the first hit before the germanium we want to check :
-  if (it>0) while(--it>buffer.step())
+  if (it>buffer.step()+1) while(--it>buffer.step())
   {// Loop back until we either go out of the coincident window, 
-   // step inside the prompt window or finds the last hit of the last written event
+   // step inside the prompt window or find the last hit of the last written event
     auto const & hit_it = buffer[it];
+
+    if (delayed && isPrompt(buffer[it].stamp)) break;
     
     auto const & time_diff_ns = dT_ns(hit_it.stamp, hit_Ge.stamp); // dT_ns(start, stop)
-    if(time_diff_ns>g_compton_tw) break;
+    if(time_diff_ns>g_compton_tw_ns) break;
 
     if (!isBGO[hit_it.label]) continue;
-
-
-    auto const & rf_time = time_Ge_ns-time_diff_ns;
-    // if (delayed && rf_time<g_begin_delayed_ns) break;
 
     if (histoed && delayed) histos.BGO_VS_Ge_label.Fill(hit_Ge.label, hit_it.label);
 
@@ -388,7 +386,7 @@ bool comptonClean(HitBuffer const & buffer, int & it, RF_Manager & rf, Histos & 
     auto const & hit_it = buffer[it];
     
     auto const & time_diff = dT_ns(hit_Ge.stamp, hit_it.stamp); // dT_ns(start, stop)
-    if(time_diff>g_compton_tw) break; // No coincident forward BGO
+    if(time_diff>g_compton_tw_ns) break; // No coincident forward BGO
 
     if (!isBGO[hit_it.label]) continue;
 
@@ -583,9 +581,7 @@ output_mutex.unlock();
           if (isDelayed_ns(rel_time_first_Ge_ns))
           {// If the Germanium is in the delayed window, try to create the event :
             auto const init_it = r_buffer_it; // The buffer's index of the Germanium hit that might open the event
-          MTObject::mutex.lock();
-            auto first_Ge_Clover_label = Clovers_namespace::labels[hit_first_Ge.label]; // The Clover label of the first Germanium
-          MTObject::mutex.unlock();
+            auto const & first_Ge_Clover_label = Clovers_namespace::labels[hit_first_Ge.label]; // The Clover label of the first Germanium
             auto const & ref_pulse_timestamp = rf.refTime(hit_first_Ge.stamp); // The absolute timestamp of the beam pulse (relative to the delayed Germanium we're trying to trigger on)
             std::vector<uchar> clover_modules = {first_Ge_Clover_label}; // List of the modules that fired in the event (initialise it with the clover that fired)
 

@@ -18,10 +18,10 @@ public:
     event.reading(*this);
   }
 
-  ~Nuball2Tree() {if (file_opened) this->Close();}
+  ~Nuball2Tree() {if (m_file_opened) this->Close();}
 
   bool Open(std::string const & filename);
-  void Close() {if (file_opened) {m_file -> Close(); file_opened = false; delete m_file;} else {print(m_filename, "not open");}}
+  void Close() {if (m_file_opened) {m_file -> Close(); m_file_opened = false; delete m_file;} else {print(m_filename, "not open");}}
 
   auto const & filename() {return m_filename;}
 
@@ -36,7 +36,7 @@ private:
   TFile* m_file = nullptr;
   TTree* m_tree = nullptr;
   bool m_ok = false;
-  bool file_opened = false;
+  bool m_file_opened = false;
   std::string m_filename;
   std::string m_name = "Nuball2";
   std::string m_title;
@@ -50,10 +50,10 @@ bool Nuball2Tree::Open(std::string const & filename)
   if (!m_file) 
   {
     print("Could not find", filename, "!"); 
-    return (m_ok = file_opened = false);
+    return (m_ok = m_file_opened = false);
   }
   
-  file_opened = true;
+  m_file_opened = true;
   
   if (m_file->IsZombie()) 
   {

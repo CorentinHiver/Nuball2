@@ -114,7 +114,7 @@ private:
   MTTHist<TH2F> spectra_BGO_VS_run;
   MTTHist<TH2F> spectra_LaBr_VS_run;
   MTTHist<TH2F> spectra_NaI_VS_run;
-  MTTHist<TH2F> spectra_NaI_VS_det;
+  Vector_MTTHist<TH2F> spectra_NaI_VS_det;
 
 
   MTTHist<TH2F> delayed_E_VS_time_Ge_clean;
@@ -299,7 +299,13 @@ void Analysator::Initialise()
   spectra_BGO_VS_run.reset("spectra_BGO_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
   spectra_LaBr_VS_run.reset("spectra_LaBr_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
   spectra_NaI_VS_run.reset("spectra_NaI_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
-  spectra_NaI_VS_det.reset("spectra_NaI_VS_det", "Spectra;detecteur number;Energy [keV]", 1000,0,1000, 2000,0,2000);
+
+  spectra_NaI_VS_det.resize(1000);
+  for (int label = 0; label<1000; ++label) if (isParis[label])
+  {
+    std::string spectra = "spectra_NaI_VS_det"+std::to_string(label);
+    spectra_NaI_VS_det[label].reset(spectra.c_str(), (spectra+";Clover [keV];NaI [keV]").c_str(), 2000,0,2000, 500,0,2000);
+  }
 
   // Timing
   time_all.reset("time_all", "Time", 1000,0,1000, 2000,-1000,1000);
@@ -377,11 +383,6 @@ void Analysator::Initialise()
     nrj_vs_det_each_run.emplace(run_i, MTTHist<TH2F>(name.c_str(), title.c_str(), 900,0,900, 1000, 0,1000));
   }
 #endif //QUALITY
-}
-
-bool NaI_pid(float nrj, float nrj2)
-{
-  return ((nrj2-nrj)/double_cast(nrj2) > 0.15);
 }
 
 bool isDelayed(Time_ns const & time_ns) {return ((int_cast(time_ns)%200)>20 && (int_cast(time_ns)%200)<180);}
@@ -504,7 +505,7 @@ MTObject::mutex.unlock();
       /////////////
       else if (isParis[label]) 
       {
-        if (NaI_pid(nrj, nrj2))
+        if (double_cast(nrj2-nrj)/double_cast(nrj2) > 0.15)
         {
           isNaI[hit_i] = true;
 
@@ -650,9 +651,15 @@ MTObject::mutex.unlock();
       auto const & time_i = clover_i.time;
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
-             if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-        else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-        else if (isNaI[hit_i]) NaI_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+        auto const & label = event.labels[hit_i];
+        auto const & nrj = event.nrjs[hit_i];
+             if (isBGO[label]) BGO_with_trigger_Clover_511.Fill(label, nrj);
+        else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(label, nrj);
+        else if (isNaI[hit_i]) 
+        {
+          NaI_with_trigger_Clover_511.Fill(label, nrj);
+          spectra_NaI_VS_det[label].Fill(nrj_i, nrj);
+        }
       }
       if (715<nrj_i && nrj_i<720) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
@@ -889,7 +896,7 @@ void Analysator::write()
   spectra_BGO_VS_run.Write();
   spectra_LaBr_VS_run.Write();
   spectra_NaI_VS_run.Write();
-  spectra_NaI_VS_det.Write();
+  for (auto & histo : spectra_NaI_VS_det) histo.Write();
 
   time_all.Write();
   time_NaI.Write();
