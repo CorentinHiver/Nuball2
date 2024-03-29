@@ -616,7 +616,7 @@ MTObject::mutex.unlock();
         {
           if(is_delayed[hit_i]) delayed_LaBr_wp.Fill(nrj);
           E_VS_time_LaBr_wp.Fill(time_ns, nrj);
-          for (int hit_j = hit_i+1; hit_j<event.mult; hit_j++) if (isLaBr[hit_i] && 500<nrj && nrj<520) LaBr3_with_trigger_LaBr3_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+          if (500<nrj && nrj<520) for (int hit_j = hit_i+1; hit_j<event.mult; hit_j++) if (isLaBr[hit_j]) LaBr3_with_trigger_LaBr3_511.Fill(event.labels[hit_j], event.nrjs[hit_j]);
         }
         else if (isNaI[hit_i])
         {
