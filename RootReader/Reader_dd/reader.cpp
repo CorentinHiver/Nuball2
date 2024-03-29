@@ -503,7 +503,6 @@ MTObject::mutex.unlock();
         if (NaI_pid(nrj, nrj2))
         {
           isNaI[hit_i] = true;
-          nrj=nrj2*1.1; // CALIBRATE BETTER !!!
 
           time_all.Fill(label, time_ns, -1);
           time_NaI.Fill(label, time_ns);
