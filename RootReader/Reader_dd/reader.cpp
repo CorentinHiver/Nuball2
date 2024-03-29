@@ -49,10 +49,11 @@ public:
   Analysator(int const & number_files, std::string const & datapath)
   // Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
   {
+    print("reading", datapath);
     this->Initialise();
     MTRootReader reader(datapath, number_files);
     print("Launching the reader");
-    reader.read(dispatch_threads, *this);
+    reader.read([](){this->analyse(tree, event);});
     write();
   }
 
@@ -64,7 +65,6 @@ public:
 
 private:
   /// @brief static 
-  static void dispatch_threads(Nuball2Tree & tree, Event & event, Analysator & analysator) {analysator.analyse(tree, event);}
   static long g_nb_max_hits;
 
   TRandom* random = new TRandom();
@@ -192,6 +192,7 @@ private:
   MTTHist<TH2F> BGO_with_trigger_Clover_511;
   MTTHist<TH2F> DSSD_VS_Clover_717;
   MTTHist<TH2F> LaBr3_with_trigger_Clover_511;
+  MTTHist<TH2F> LaBr3_with_trigger_LaBr3_511;
   MTTHist<TH2F> BGO_with_trigger_BGO_511;
 
   #else //QUALITY
@@ -346,6 +347,7 @@ void Analysator::Initialise()
   BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO with trigger Clover 511", 1000,0,1000, 1000,0,5000);
   BGO_with_trigger_BGO_511.reset("BGO_with_trigger_BGO_511","BGO with trigger BGO 511", 1000,0,1000, 1000,0,5000);
   LaBr3_with_trigger_Clover_511.reset("LaBr3_with_trigger_Clover_511","LaBr3 with trigger Clover 511", 1000,0,1000, 2500,0,5000);
+  LaBr3_with_trigger_LaBr3_511.reset("LaBr3_with_trigger_LaBr3_511","LaBr3 with trigger LaBr3 511", 1000,0,1000, 2500,0,5000);
   DSSD_VS_Clover_717.reset("DSSD_VS_Clover_717","DSSD VS Clover 717", 1000,0,1000, 1000,0,30000);
 
 
@@ -430,7 +432,6 @@ MTObject::mutex.unlock();
 
     Clovers clovers_delayed;
 
-    int pulse_freq = 200;
     int nb_prompts = 6;
 
     Clovers clovers_prompt;
@@ -615,6 +616,7 @@ MTObject::mutex.unlock();
         {
           if(is_delayed[hit_i]) delayed_LaBr_wp.Fill(nrj);
           E_VS_time_LaBr_wp.Fill(time_ns, nrj);
+          for (int hit_j = hit_i+1; hit_j<event.mult; hit_j++) if (isLaBr[hit_i] && 500<nrj && nrj<520) LaBr3_with_trigger_LaBr3_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
         }
         else if (isNaI[hit_i])
         {
@@ -822,6 +824,7 @@ void Analysator::write()
   BGO_with_trigger_Clover_511.Write();
   DSSD_VS_Clover_717.Write();
   LaBr3_with_trigger_Clover_511.Write();
+  LaBr3_with_trigger_LaBr3_511.Write();
   BGO_with_trigger_BGO_511.Write();
 
   RWMat RW_dd_wp(dd_wp); RW_dd_wp.Write();
@@ -991,7 +994,7 @@ int main(int argc, char** argv)
     std::string param(argv[i]);
          if (param == "-f") nb_files = std::stoi(argv[++i]);
     else if (param == "-n") Analysator::setMaxHits(std::stoi(argv[++i]));
-    else if (param == "-d") {simple_d = true; print("Reading N-SI-136-root_d");}
+    else if (param == "-d") {simple_d = true;}
     else if (param == "-m") nb_threads = std::stoi(argv[++i]);
     else if (param == "--129") read_129 = true;
     else
