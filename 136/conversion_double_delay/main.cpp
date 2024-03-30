@@ -64,7 +64,11 @@ bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
 bool histoed = false;
 bool one_run = false;
+
+// Event building :
 bool single_clean = false;
+bool simple = false;
+
 std::string one_run_folder = "";
 ulonglong max_hits = -1;
 bool treat_129 = false;

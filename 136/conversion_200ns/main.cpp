@@ -11,6 +11,7 @@
 // #define UNSAFE
 
 // 2. Include library
+#include <MTObject.hpp>
 #include <libCo.hpp>
 #include <FasterReader.hpp>   // This class is the base for mono  threaded code
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
@@ -280,6 +281,7 @@ void convert(Hit & hit, FasterReader & reader,
   
     tempTree -> Fill();
   }
+  
   auto rawCounts = tempTree->GetEntries();
 
   read_timer.Stop();
