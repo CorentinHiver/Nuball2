@@ -484,6 +484,7 @@ temp_tree_mutex.unlock();
   
     tempTree -> Fill();
   }
+  
   auto rawCounts = tempTree->GetEntries();
 
   read_timer.Stop();

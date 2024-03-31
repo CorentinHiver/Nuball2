@@ -38,6 +38,8 @@ inline Time Timeshift_cast(T const & t) {return static_cast<Time>(t);}
  * Goal 3 : apply the timeshifts by calling the operator[] : time_correct = time_shifted + timeshifts[label];
  * Example at the end
  * 
+ * @todo separate into two different classes : Timeshifts that only holds the values, and Timeshiftor that handles the calculations
+ * Of course, Timeshiftor has a Timeshifts as member and can be used as it. It can just inherit from it maybe.
  */
 class Timeshifts
 {

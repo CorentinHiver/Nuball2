@@ -146,8 +146,7 @@ public:
 private:
 
   // Private methods that handles the multi-threading
-  template<class Func, class... ARGS>
-  static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
+
 
   template<class Func, class... ARGS>
   static void Realign(MTFasterReader & MTreader, Func function, ARGS &&... args);
@@ -206,23 +205,6 @@ inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
   });
 }
 
-template<class Func, class... ARGS>
-inline void MTFasterReader::Read(MTFasterReader & MTReader, Func function, ARGS &&... args)
-{ // Here we are inside each thread :
-  std::string filename;
-  CoProgressBar progress(&MTReader.getFilesList().getIndex(), MTReader.getFilesList().size());
-  while(MTReader.nextFilename(filename))
-  {
-    if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
-  fasterReaderMutex.lock();
-    Hit hit;
-    FasterReader reader(&hit, filename);
-    if (s_progressBar) progress.show();
-  fasterReaderMutex.unlock();
-    function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
-  }
-}
-
 
 ///////////////////////////////////////
 //   Read time aligned faster data   //
@@ -232,41 +214,66 @@ inline void MTFasterReader::Read(MTFasterReader & MTReader, Func function, ARGS 
  * 
  * @details
  * Use this function in the same way as readRaw, with a function like this : 
- *  func(Hit & hit, Alignator & alignedTree, args...)
+ *  func(Hit & hit, Alignator & tree, args...)
+ *  {
+ *  }
  * 
- * @param func : A function (or lambda). Must be of the form func(Hit & hit, Alignator & alignedTree, args...). 
+ * @param func : A function (or lambda). Must be of the form func(Hit & hit, Alignator & tree, args...). 
  * Alignator is a simple wrapper around a tree. Use Alignator::GetEntry.ies just as you would use TTree::GetEntry.ies
  */
 template<class Func, class... ARGS>
 inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
 {
   if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
-  if (m_timeshifts.size() == 0) print("CAREFULL, NO TIMESHIFT DATA PROVIDED !!");
+  if (m_timeshifts.size() == 0) throw_error("NO TIMESHIFT DATA PROVIDED !!");
   m_MTfiles = m_files.getListFiles();
-  MTObject::parallelise_function(Realign<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
+  MTObject::parallelise_function([&](){ // Here we are inside each thread :
+    std::string filename;
+    while(nextFilename(filename))
+    {
+      Hit hit;
+      FasterReader reader(&hit, filename);
+      TString name = "temp"+std::to_string(MTObject::getThreadIndex());
+      unique_tree tempTree(new TTree(name, "temp"));
+      hit.writting(tempTree.get());
+      while (reader.Read())
+      {
+        hit.stamp+=m_timeshifts[hit.label];
+        tempTree->Fill();
+      }
+      Alignator alignedTree(tempTree.get());
+      hit.reset();
+      hit.reading(tempTree.get());
+      func(hit, alignedTree, std::forward<ARGS>(args)...);
+    }
+  });
 }
 
-template <class Func, class... ARGS>
-inline void MTFasterReader::Realign(MTFasterReader &MTreader, Func function, ARGS &&...args)
-{// Here we are inside each thread :
-  std::string filename;
-  while(MTreader.nextFilename(filename))
-  {
-    Hit hit;
-    FasterReader reader(&hit, filename);
-    unique_tree tempTree(new TTree("temp", "temp"));
-    hit.writting(tempTree.get());
-    while (reader.Read())
-    {
-      hit.stamp+=MTreader.timeshift(hit.label);
-      tempTree->Fill();
-    }
-    Alignator alignedTree(tempTree.get());
-    hit.reset();
-    hit.reading(tempTree.get());
-    function(hit, alignedTree, std::forward<ARGS>(args)...);
-  }
-}
 
 
 #endif //MT_FASTER_READER_HPP
+
+// template <class Func, class... ARGS>
+// inline void MTFasterReader::Realign(MTFasterReader &MTreader, Func function, ARGS &&...args)
+// {
+  
+// }
+  // template<class Func, class... ARGS>
+  // static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
+
+// template<class Func, class... ARGS>
+// inline void MTFasterReader::Read(MTFasterReader & MTReader, Func function, ARGS &&... args)
+// { // Here we are inside each thread :
+//   std::string filename;
+//   CoProgressBar progress(&MTReader.getFilesList().getIndex(), MTReader.getFilesList().size());
+//   while(MTReader.nextFilename(filename))
+//   {
+//     if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
+//   fasterReaderMutex.lock();
+//     Hit hit;
+//     FasterReader reader(&hit, filename);
+//     if (s_progressBar) progress.show();
+//   fasterReaderMutex.unlock();
+//     function(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
+//   }
+// }

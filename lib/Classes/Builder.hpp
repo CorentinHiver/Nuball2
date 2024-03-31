@@ -54,7 +54,6 @@ public:
   // Getters :
   // bool const & isCoincTrigged() const {return coincON;}
 
-
   Hit const & getLastHit() const {return m_last_hit;}
 
   uchar const & status() const { return m_status; }

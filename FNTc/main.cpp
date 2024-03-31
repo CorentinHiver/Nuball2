@@ -1,26 +1,14 @@
 // 1. Parameters
-  // RF : 
-#define USE_RF 200 //ns
-  // Detectors :
-#define USE_DSSD
-#define USE_PARIS
-  // Triggers :
-#define TRIGGER
-  // Event building :
-#define PREPROMPT
-// #define UNSAFE
 
 // 2. Include library
-// #include <libCo.hpp>
-// #include <FasterReader.hpp>   // This class is the base for mono  threaded code
-// #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
+#include <MTObject.hpp>
+#include <libRoot.hpp>
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
-// #include <MTCounter.hpp>      // Use this to thread safely count what you want²
-// #include <MTTHist.hpp>        // Use this to thread safely fill histograms
-// #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
-// #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
+#include <MTTHist.hpp>        // Use this to thread safely fill histograms
 // #include <Detectors.hpp>      // Eases the manipulation of detector's labels
-// #include <RF_Manager.hpp>     // Eases manipulation of RF information
+#include <Calibration.hpp>    // Either loads or calculate calibration coefficients
+#include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
+#include <RF_Manager.hpp>     // Eases manipulation of RF information
 
 /*
 
@@ -40,6 +28,18 @@ public:
   {
   }
 
+  Point(std::initializer_list<double> point = {0,0}) :
+    m_x(*point.begin()),
+    m_y(*(point.begin()+1))
+  {
+  }
+  
+  Point(Point const & point) :
+    m_x(point.m_x),
+    m_y(point.m_y)
+  {
+  }
+
   auto & x() {return m_x;} 
   auto & y() {return m_y;} 
 
@@ -49,11 +49,35 @@ public:
   Point operator+(Point const & other) const {return Point({m_x + other.m_x, m_y + other.m_y});}
   Point operator-(Point const & other) const {return Point({m_x - other.m_x, m_y - other.m_y});}
 
-  Point& shift(Point const & other)
+  Point& operator=(Point const & other) 
+  {
+    m_x = other.m_x;
+    m_y = other.m_y;
+    return *this;
+  }
+
+  Point& shift(std::array<double, 2> point = {0,0})
+  {
+    m_x += point[0];
+    m_y += point[1];
+    return *this;
+  }
+
+  Point& shiftX(double const & _shiftX)
+  {
+    m_x += _shiftX;
+    return *this;
+  }
+
+  Point& shiftY(double const & _shiftY)
+  {
+    m_y += _shiftY;
+    return *this;
+  }
 
 private:
-  double m_x;
-  double m_y;
+  double m_x = 0;
+  double m_y = 0;
 };
 
 class Cone
@@ -66,20 +90,23 @@ public:
     m_right_last  (right_last)
   {}
 
-  Cone(Point const & pointCenterSmall, double const & radiusSmall, Point const & pointCenterLarge, Point const & radiusLarge) :
+  Cone(Point const & pointCenterSmall, double const & radiusSmall, Point const & pointCenterLarge, double const & radiusLarge) :
     m_left_first  (pointCenterSmall),
-    m_left_last   (left_last),
-    m_right_first (right_first),
-    m_right_last  (right_last)
+    m_left_last   (pointCenterSmall),
+    m_right_first (pointCenterLarge),
+    m_right_last  (pointCenterLarge)
   {
-    
+    m_left_first .shiftX(-radiusSmall);
+    m_left_last  .shiftX( radiusSmall);
+    m_right_first.shiftX(-radiusLarge);
+    m_right_last .shiftX( radiusLarge);
   }
 
 private:
   Point m_left_first;
   Point m_left_last;
   Point m_right_first;
-  Point m_right_last
+  Point m_right_last;
 
 };
 
@@ -98,8 +125,11 @@ private:
 class NeutronCollimator
 {
 public:
-  NeutronCollimator(Point const & startPoint,  double const & m_lenght, double const & m_inner_radius, double const & m_outer_radius = 100) :
-    m_startPoint(startPoint)
+  NeutronCollimator(Point const & startPoint,  double const & lenght, double const & inner_radius, double const & outer_radius = 100) :
+    m_startPoint(startPoint),
+    m_lenght(lenght),
+    m_inner_radius(inner_radius),
+    m_outer_radius(outer_radius)
   {}
 
 private:
@@ -147,11 +177,6 @@ public:
     m_table (&table)
   {}
 
-  Cone conePath(double const & angle, double const & posX)
-  {
-    
-  }
-
 private:
   NeutronBeam * m_beam;
   ScanningTable * m_table;
@@ -169,7 +194,7 @@ private:
 class Sinogram3D : public Sinogram
 {
 public:
-  Sinogram(){}
+  Sinogram3D() : Sinogram(){}
 
 private:
 };
@@ -179,14 +204,14 @@ int main(int argc, char** argv)
 {
   int nb_threads = 2;
   std::string run = "";
-  bool sinogram = false;
+  // bool sinogram = false;
   if (argc > 1)
   {
     for(int i = 1; i < argc; i++)
     {
       std::string const & command = argv[i];
       if (command == "-r" || command == "--run") run = argv[++i];
-      else if (command == "-s" || command == "--sinogram") sinogram = true;
+      // else if (command == "-s" || command == "--sinogram") sinogram = true;
     }
   }
 
@@ -196,50 +221,62 @@ int main(int argc, char** argv)
   Path path = "~/FNT/"+run;
 
   // Load some modules :
-  detectors.load("index_FNTc.list");
+  // detectors.load("index_FNTc.list");
   Calibration calib("FNTc.calib");
   Timeshifts timeshifts("FNTc.timeshifts");
 
-  FilesManager files(path);
+  // LicorneSource source({0, 0});
+  // NeutronCollimator collimator({0,0}, 100, 10);
+  // NeutronBeam beam(source, collimator);
+  // thread_local ScanningTable table({-20,0}, {20,0}, 20);
 
-  LicorneSource source({0, 0});
-  NeutronCollimator collimator({0,0}, 100, 10);
-  NeutronBeam beam(source, collimator);
-  ScanningTable table();
+  // Setup setup(beam, table);
+  RF_Manager::setLabel(99);
+  thread_local RF_Manager rf;
 
-  Setup setup(beam, table);
+  MTTHist<TH2F> sinogram("simple sinogram", "simple sinogram", 1000,-20,20, 1000,0,180);
+  MTTHist<TH1F> germanium("Germanium", "Germanium", 10000,0,10000);
+  MTTHist<TH1F> Ge1("Ge1", "Ge1", 10000,0,10000);
+  MTTHist<TH1F> Ge2("Ge2", "Ge2", 10000,0,10000);
+  MTTHist<TH1F> EDEN("EDEN", "EDEN", 10000,0,10000);
 
-  std::string filename;
-  while (files.getNext(filename))
-  {
-    Hit hit;
-    FasterReader reader(&hit, filename);
+  auto isX = [](Label const & label) {return label == 5;}
+  auto isTheta = [](Label const & label) {return label == 6;}
+  auto isGe = [](Label const & label) {return label == 6;}
+  auto isEden = [](Label const & label) {return label == 6;}
 
-    unique_tree tempTree(new TTree("temp","temp"));
-    hit.writting(tempTree);
-
-    while(reader.Read())
+  MTFasterReader reader(path);
+  reader.setTimeshifts(timeshifts.get());
+  reader.readAligned([&](Hit & hit, Alignator & tree){
+    // Treat each faster file in parallel
+    double x = NAN;
+    double theta = NAN;
+    auto const & nb_hits = tree->GetEntries();
+    for (int hit_i = 0; hit_i<nb_hits; ++hit_i)
     {
-      hit.stamp+=timeshifts[hit.label];
-      tempTree->Fill();
+      tree.GetEntry(hit_i); // Alignator::GetEntry is a wrapper around TTree::GetEntry that takes into account the time re-ordering
+           if (rf.setHit(hit)) continue;
+      else if (isX[hit.label]) x = hit.nrj;
+      else if (isTheta[hit.label]) theta = hit.nrj;
+      else if (x != NAN && theta != NAN)
+      {
+        hit.nrj = calib(hit.nrj, hit.label);
+             if (isGe[hit.label])
+        {
+          
+        }
+        else if (isEden[hit.label])
+        {
+          sinogram.Fill(theta, x);
+        }
+      }
     }
+  });
 
-    hit.reset();
-    hit.reading(tempTree);
-
-    Alignator gindex(readTree.get());
-    RF_Manager rf;
-    RF_Extractor first_rf(tempTree.get(), rf, hit, gindex);
-
-    auto const & nb_hits = tempTree->GetEntries();
-
-    for (int hit_i = 0; hit_i<nb_hits; hit_i++)
-    {
-      tempTree->GetEntries();
-      //Hi, add stuff here
-    }
-    
-  }
+  auto file (TFile::Open("test.root", "recreate")) ;
+  file->cd();
+  sinogram.Write();
+  file->Close();
 
   return 1;
 }

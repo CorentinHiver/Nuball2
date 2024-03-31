@@ -9,8 +9,8 @@ class EventBuilder_136 : public Builder
 {
 public:
   // Constructors :
-  EventBuilder_136(Event* _event) {m_event  = _event;}
-  EventBuilder_136(Event* _event, RF_Manager* _rf) : m_rf(_rf) {m_event = _event;}
+  EventBuilder_136(Event* _event) : Builder(_event) {}
+  EventBuilder_136(Event* _event, RF_Manager* _rf) : Builder(_event), m_rf(_rf), m_period(m_rf->period) {}
 
   // Methods :
   // Add Hits  Outputs  0: single | 1: begin of coincidence | 2: coincidence complete
@@ -18,7 +18,9 @@ public:
 
   bool coincidence(Hit const & hit) 
   {
-    return ( Time_cast(hit.stamp-m_RF_ref_stamp) < (Time_cast(USE_RF*1000)-m_rf->offset()) );
+    auto const & dT = Time_cast(hit.stamp-m_RF_ref_stamp);
+    auto const & dT_max = Time_cast(m_period)-m_rf->offset();
+    return (dT < dT_max);
   }
   void reset();
 
@@ -39,13 +41,14 @@ public:
   void setNbPeriodsMore(int const & periods) {m_nb_periods_more = periods;}
 
   Timestamp single_hit_VS_RF_ref = 0;
+  
 private:
   // Attributes :
   Timestamp m_RF_ref_stamp = 0;
   RF_Manager* m_rf = nullptr;
   std::stack<Hit> m_hit_buffer;
   int m_nb_periods_more = 0;
-  Timestamp m_period=USE_RF*1000ull;
+  Timestamp m_period = 200000ll;
 };
 
 void EventBuilder_136::tryAddNextHit_simple(TTree * tree, TTree * outtree, Hit & hit, int & loop, Alignator const & gindex)
@@ -118,7 +121,8 @@ bool EventBuilder_136::build(Hit const & hit)
   #endif //PREPROMPT
   switch (m_status)
   { 
-    case 0 : case 2 : // If no coincidence has been detected in previous iteration :
+    // If no coincidence has been detected in previous iteration :
+    case 0 : case 2 : 
       if (this->coincidence(hit))
       {// Situation 1 :
         // The previous and current hit are in the same event.
@@ -133,15 +137,25 @@ bool EventBuilder_136::build(Hit const & hit)
       {// Situation 0 :
         // The last and current hits aren't in the same event.
         // The last hit is therefore a single hit, alone in the time window around its RF.
-        *m_event = m_last_hit;
 
         // The current hit is set to be the reference hit for next call :
-        this -> set_last_hit(hit);
+        m_RF_ref_stamp = m_rf->refTime(hit.stamp);
+
+        // m_last_hit is filled with the current hit :
+        m_last_hit = hit;
+
         m_status = 0; // No event detected
-        if (m_keep_singles) return true;
+
+        if (m_keep_singles) 
+        {// We might be interested in registering single hits :
+          *m_event = m_last_hit;
+          return true;
+        }
       }
     break;
-    case 1: // If we are building an event (i.e. the two previous hit are in coincidence):
+    
+    // If we are building an event (i.e. the two previous hit are in coincidence):
+    case 1 :
       if (this->coincidence(hit))
       {
         // Situation 1' :
@@ -153,7 +167,9 @@ bool EventBuilder_136::build(Hit const & hit)
       {
         // Situation 2 :
         // The current hit is outside of the event : this hit closes the event 
-        // Therefore, m_event is full with all the hits of the event :
+        // Therefore, m_event is full with all the hits of the event.
+        // We set the reference RF timestamp as the t0 of the event :
+        m_event->setT0(m_RF_ref_stamp);
         m_status = 2; // The event is complete
         // The current hit is set to be the last hit for next call :
         this -> set_last_hit(hit);
@@ -189,38 +205,70 @@ void EventBuilder_136::reset()
 class Counter136
 {
 public:
+  bool counted = false; 
   size_t nb_modules = 0;
   size_t nb_dssd = 0;
-  size_t nb_sectors = 0;
   size_t nb_Ge = 0;
+  size_t nb_BGO = 0;
   size_t nb_clovers = 0;
-  std::vector<uchar> clovers;
-  std::vector<uchar> clovers_ge;
-  std::vector<uchar> clovers_bgo;
+  size_t nb_clovers_clean = 0;
+  std::vector<int> clovers;
+  std::vector<int> clovers_ge;
+  std::vector<int> clovers_bgo;
+  std::vector<int> clovers_clean_Ge;
 
-  void reset() 
+  Counter136(Event* event) : m_event(event) {}
+
+  void reset() noexcept  
   {
+    counted = false;
     nb_modules = 0; 
     nb_dssd = 0; 
     nb_Ge = 0; 
+    nb_BGO = 0;
     nb_clovers = 0;
-    clovers.resize(0);
+    nb_clovers_clean = 0;
+    clovers.clear();
+    clovers_ge.clear();
+    clovers_bgo.clear();
+    clovers_clean_Ge.clear();
   }
   
-  void count(Event const & event)
+  void count()
   {
     reset();
-    for (int hit = 0; hit<event.mult; hit++)
+    for (int hit = 0; hit<m_event->mult; hit++)
     {
-      auto const & label = event.labels[hit];
-      if (isGe[label]) {nb_Ge++; push_back_unique(clovers, labelToClover[label]);}
-      else if(isBGO[label])      push_back_unique(clovers, labelToClover[label]);
-      else if (isLaBr3[label] || isParis[label]) nb_modules++;
-      else if (isDSSD[label])                    nb_dssd++;
+      auto const & label = m_event->labels[hit];
+      if (isClover[label])
+      {
+        auto const & clover_label = int_cast(labelToClover[label]);
+             if(isGe[label] ) {push_back_unique(clovers, clover_label); push_back_unique(clovers_ge , clover_label);}
+        else if(isBGO[label]) {push_back_unique(clovers, clover_label); push_back_unique(clovers_bgo, clover_label);}
+      }
+      else if (isLaBr3[label]) ++nb_modules;
+      else if (isParis[label]) ++nb_modules;
+      else if (isDSSD[label])  ++nb_dssd;
     }
-    nb_clovers = clovers.size();
-    nb_modules+=nb_clovers;
+    nb_Ge  = clovers_ge .size();
+    nb_BGO = clovers_bgo.size();
+    nb_modules += (nb_clovers = clovers.size());
+    counted = true;
   }
+
+  void analyse()
+  {
+    if (!counted) this->count();
+    for (auto & clover_i : clovers)
+    {
+      if (found(clovers_ge, clover_i) && !found(clovers_bgo, clover_i)) 
+        clovers_clean_Ge.push_back(clover_i);
+    }
+    nb_clovers_clean = clovers_clean_Ge.size();
+  }
+
+private:
+  Event * m_event = nullptr;
 };
 
 

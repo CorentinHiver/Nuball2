@@ -366,7 +366,7 @@ void Detectors::makeArrays()
 
     // Other lookup tables :
     isClover[label] = (label>22 && label<167);
-    labelToClover[label] = uchar_cast((isClover[label]) ? (label-23)%6 : -1);
+    labelToClover[label] = uchar_cast((isClover[label]) ? (label-23)/6 : -1);
      
     if (m_exists[label])
     {
