@@ -335,13 +335,13 @@ void Analysator::Initialise()
   delayed_Ge_clean_VS_delayed_calo_wop.reset("delayed_Ge_clean_VS_delayed_calo_wop", "delayed Ge clean VS delayed calo with only one prompt before", 500,0,15000,10000,0,10000);
 
   // When only 2-3 germaniums, plot germaniums VS the sum of them
-  delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C2_VS_prompt_Ge.reset("delayed_Ge_C2_VS_prompt_Ge", "Clean delayed Ge C2 VS prompt Ge", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C2_VS_total_Ge.reset("delayed_Ge_C2_VS_total_Ge", "Clean Ge VS sum clean Ge C2", 2000,0,4000, 5000,0,5000);
+  delayed_Ge_C2_VS_prompt_Ge.reset("delayed_Ge_C2_VS_prompt_Ge", "Clean delayed Ge C2 VS prompt Ge", 2000,0,4000, 5000,0,5000);
   delayed_Ge_C2_VS_prompt_mult.reset("delayed_Ge_C2_VS_prompt_mult", "Clean Ge C2 VS prompt Ge mult", 15,0,15, 2000,0,4000);
-  delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2 cleaned", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C2_VS_total_Ge_rejected.reset("delayed_Ge_C2_VS_total_Ge_rejected", "Clean Ge VS sum clean Ge C2 rejected", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3 - only 2 by 2", 5000,0,5000, 2000,0,4000);
-  delayed_Ge_C3_tot3_VS_total_Ge.reset("delayed_Ge_C3_tot3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 5000,0,5000, 2000,0,4000);
+  delayed_Ge_C2_VS_total_Ge_cleaned.reset("delayed_Ge_C2_VS_total_Ge_cleaned", "Clean Ge VS sum clean Ge C2 cleaned", 2000,0,4000, 5000,0,5000 );
+  delayed_Ge_C2_VS_total_Ge_rejected.reset("delayed_Ge_C2_VS_total_Ge_rejected", "Clean Ge VS sum clean Ge C2 rejected", 2000,0,4000, 5000,0,5000);
+  delayed_Ge_C3_VS_total_Ge.reset("delayed_Ge_C3_VS_total_Ge", "Clean Ge VS sum clean Ge C3 - only 2 by 2", 2000,0,4000, 5000,0,5000);
+  delayed_Ge_C3_tot3_VS_total_Ge.reset("delayed_Ge_C3_tot3_VS_total_Ge", "Clean Ge VS sum clean Ge C3", 2000,0,4000, 5000,0,5000);
 
   // For TSC method :
   dT_VS_sumGe.reset("dT_VS_sumGe", "dT VS Esum Ge", 10000,0,10000, 100,-200,200);
@@ -352,7 +352,7 @@ void Analysator::Initialise()
   if (simple_d)
   {
     delayed_Ge_C1_VS_delayed_calo.reset("delayed_Ge_C1_VS_delayed_calo", "Clean Ge C1 VS delayed calo", 500,0,5000, 5000,0,5000);
-    delayed_Ge_C1_VS_prompt_Ge.reset("delayed_Ge_C1_VS_prompt_Ge", "Clean Ge C1 VS prompt Ge mult", 5000,0,5000, 2000,0,4000);
+    delayed_Ge_C1_VS_prompt_Ge.reset("delayed_Ge_C1_VS_prompt_Ge", "Clean Ge C1 VS prompt Ge mult", 2000,0,4000, 5000,0,5000);
   }
 
   BGO_with_trigger_Clover_511.reset("BGO_with_trigger_Clover_511","BGO with trigger Clover 511", 1000,0,1000, 1000,0,5000);
