@@ -13,6 +13,7 @@
 
 bool simple_d = false;
 bool read_129 = false;
+bool read_C2 = false;
 
 Label_vec const blacklist = {800, 801};
 std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 9000}, {55, 7500}, {57, 6000}, 
@@ -969,34 +970,15 @@ void Analysator::write()
 
 void reader(int number_files = -1)
 {
-  if (found(Path::pwd().string(), "faster")) 
-  {
-    MTObject::Initialise((nb_threads<0) ? 10 : nb_threads);
-    if (read_129)
-    {
-      if (simple_d) Analysator analysator(number_files, "~/nuball2/N-SI-129-root_d/merged/");
-      else          Analysator analysator(number_files, "~/nuball2/N-SI-129-root_dd/merged/");
-    }
-    else // read 136
-    {
-      if (simple_d) Analysator analysator(number_files, "~/nuball2/N-SI-136-root_d/merged/");
-      else          Analysator analysator(number_files, "~/nuball2/N-SI-136-root_dd/merged/");
-    }
-  }
-  else 
-  {
-    MTObject::Initialise((nb_threads<0) ? 2 : nb_threads);
-    if (read_129)
-    {
-      if (simple_d) Analysator analysator(number_files, "~/faster_data/N-SI-129-root_d/");
-      else          Analysator analysator(number_files, "~/faster_data/N-SI-129-root_dd/");
-    }
-    else
-    {
-      if (simple_d) Analysator analysator(number_files, "~/faster_data/N-SI-136-root_d/");
-      else          Analysator analysator(number_files, "~/faster_data/N-SI-136-root_dd/");
-    }
-  }
+  MTObject::Initialise((nb_threads<0) ? 10 : nb_threads);
+  std::string path = "~/faster_data/";
+  if (found(Path::pwd().string(), "faster")) path = "~/nuball2/";
+  std::string run_name = "N-SI-136";
+  if (read_129) run_name;
+  std::string trigger = "_dd";
+  if (simple_d) trigger = "_d";
+  else if (read_C2) trigger = "_C2";
+  Analysator analysator(number_files, path+run_name+"-root"+trigger);
 }
 
 int main(int argc, char** argv)
@@ -1008,15 +990,25 @@ int main(int argc, char** argv)
     std::string param(argv[i]);
          if (param == "-f") nb_files = std::stoi(argv[++i]);
     else if (param == "-n") Analysator::setMaxHits(std::stoi(argv[++i]));
-    else if (param == "-d") {simple_d = true;}
+    else if (param == "-d") 
+    {
+      if(read_C2) throw_error("Can't have both -d and --C2"); 
+      simple_d = true;
+    }
     else if (param == "-m") nb_threads = std::stoi(argv[++i]);
     else if (param == "--129") read_129 = true;
+    else if (param == "--C2") 
+    {
+      if(simple_d) throw_error("Can't have both -d and --C2"); 
+      read_C2 = true;
+    }
     else
     {
       print("Usage of reader :");
       print("-f : number of files");
       print("-n : number of hits per file");
       print("-d : single clean Ge trigger");
+      print("-C2 : 2 clean Ge in the 200ns time window");
       print("-m : number of threads");
       print("--129 : read N-SI-129 data");
     }
