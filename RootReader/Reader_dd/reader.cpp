@@ -974,11 +974,11 @@ void reader(int number_files = -1)
   std::string path = "~/faster_data/";
   if (found(Path::pwd().string(), "faster")) path = "~/nuball2/";
   std::string run_name = "N-SI-136";
-  if (read_129) run_name;
-  std::string trigger = "_dd";
-  if (simple_d) trigger = "_d";
-  else if (read_C2) trigger = "_C2";
-  Analysator analysator(number_files, path+run_name+"-root"+trigger);
+  if (read_129) run_name = "N-SI-129";
+  std::string trigger = "dd";
+  if (simple_d) trigger = "d";
+  else if (read_C2) trigger = "C2";
+  Analysator analysator(number_files, path+run_name+"-root_"+trigger+"/merged/");
 }
 
 int main(int argc, char** argv)
@@ -1011,6 +1011,7 @@ int main(int argc, char** argv)
       print("-C2 : 2 clean Ge in the 200ns time window");
       print("-m : number of threads");
       print("--129 : read N-SI-129 data");
+      exit(42);
     }
   }
   reader(nb_files);
