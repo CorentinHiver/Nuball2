@@ -432,7 +432,21 @@ int main(int argc, char** argv)
     });
     
     print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec());
+
+    Path outDataPath(outPath.string() + "/" + run_name);
+    Path outMergedPath (outPath.string()+"merged", true);
+    File outMergedFile (outMergedPath, run_name+".root");
+    
+    if (outMergedFile.exists())
+    {
+      if (overwrite) system(("rm " + outMergedFile.string()).c_str());
+      else continue;
+    }
+
+    auto nb_threads_hadd = int_cast(std::thread::hardware_concurrency()*0.25);
+
+    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads_hadd) + " " + outMergedPath.string() + run_name + ".root " + outDataPath.string() + run_name + "_*.root";
+    system(merge_command.c_str());
   }
-  return 1;
+  return 0;
 }
-;

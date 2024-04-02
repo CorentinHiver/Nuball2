@@ -231,19 +231,24 @@ inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
     std::string filename;
     while(nextFilename(filename))
     {
+      if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
       Hit hit;
+    fasterReaderMutex.lock();
       FasterReader reader(&hit, filename);
       TString name = "temp"+std::to_string(MTObject::getThreadIndex());
       unique_tree tempTree(new TTree(name, "temp"));
       hit.writting(tempTree.get());
+    fasterReaderMutex.unlock();
       while (reader.Read())
       {
         hit.stamp+=m_timeshifts[hit.label];
         tempTree->Fill();
       }
+    fasterReaderMutex.lock();
       Alignator alignedTree(tempTree.get());
       hit.reset();
       hit.reading(tempTree.get());
+    fasterReaderMutex.unlock();
       func(hit, alignedTree, std::forward<ARGS>(args)...);
     }
   });
