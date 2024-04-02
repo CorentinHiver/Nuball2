@@ -40,6 +40,12 @@ public:
     return(duration_milli_t(m_now - m_start).count()/1000.);
   }
 
+  auto Time(std::string const & unit)
+  {
+    if (!found(m_units, unit)) {print("in Timer::Time(string unit) : unit", unit, "unkown... ms by default"); return Time();}
+    return Time()/m_units[unit];
+  }
+
   auto TimeElapsed()
   {
     return d_milli.count();
@@ -64,13 +70,9 @@ public:
 
   std::string unit() {(*this)(); return m_unit;}
   
-  float Unit()
+  double Unit()
   {
-         if (m_unit == "ms") return 1.;
-    else if (m_unit ==  "s") return 1000.;
-    else if (m_unit =="min") return 60000.;
-    else if (m_unit ==  "h") return 3600000.;
-    else return 0.;
+    return m_units[m_unit];
   }
 
 private:
@@ -83,6 +85,13 @@ private:
 
   duration_milli_t d_milli;
   std::string m_unit = "ms";
+  std::map<std::string, double> m_units
+  ({
+    {"ms" , 1.},
+    {"s"  , 1000.},
+    {"min", 60000.},
+    {"h"  , 3600000.}
+  });
 };
 
 std::ostream& operator<<(std::ostream& out, Timer & timer)

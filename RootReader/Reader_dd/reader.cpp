@@ -14,6 +14,7 @@
 bool simple_d = false;
 bool read_129 = false;
 bool read_C2 = false;
+std::string trigger = "dd";
 
 Label_vec const blacklist = {800, 801};
 std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 9000}, {55, 7500}, {57, 6000}, 
@@ -650,6 +651,7 @@ MTObject::mutex.unlock();
       auto const & label_i = clean_indexes_delayed[clover_it_i];
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
+      for(int hit_i = 0; hit_i<event.mult; ++hit_i) if(isNaI[hit_i]) spectra_NaI_VS_det[event.labels[hit_i]].Fill(nrj_i, event.nrjs[hit_i]);
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
         auto const & label = event.labels[hit_i];
@@ -659,7 +661,7 @@ MTObject::mutex.unlock();
         else if (isNaI[hit_i]) 
         {
           NaI_with_trigger_Clover_511.Fill(label, nrj);
-          spectra_NaI_VS_det[label].Fill(nrj_i, nrj);
+          
         }
       }
       if (715<nrj_i && nrj_i<720) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
@@ -830,6 +832,7 @@ void Analysator::write()
 #ifdef QUALITY
   g_outfilename = "run_quality.root";
 #endif //QUALITY
+  g_outfilename+="_"+trigger;
   auto outfile(TFile::Open(g_outfilename.c_str(), "RECREATE"));
   outfile->cd();
 
@@ -975,7 +978,6 @@ void reader(int number_files = -1)
   if (found(Path::pwd().string(), "faster")) path = "~/nuball2/";
   std::string run_name = "N-SI-136";
   if (read_129) run_name = "N-SI-129";
-  std::string trigger = "dd";
   if (simple_d) trigger = "d";
   else if (read_C2) trigger = "C2";
   Analysator analysator(number_files, path+run_name+"-root_"+trigger+"/merged/");
