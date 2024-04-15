@@ -75,7 +75,6 @@ public:
     else if (rf_time<0)
     {// When the RF timestamp is larger than the hit's
       auto const & relative_time = Time_cast((period - (-rf_time)%period)); 
-      histo_rf.Fill(relative_time - m_offset);
       return relative_time - m_offset;
     }
     else 
