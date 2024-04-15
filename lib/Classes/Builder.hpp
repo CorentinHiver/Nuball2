@@ -8,7 +8,7 @@
  * @brief Base class of event builders (pure virtual class)
  *
  * @details
- * The first thing to do is to set the first hit of the file using Builder::set_first_hit(hit);
+ * The first thing to do is to set the first hit of the file using Builder::setFirstHit(hit);
  * Then add the following hits using Builder::build(hit);
  *
  * The builder can be in four states :
@@ -52,9 +52,9 @@ public:
   Builder(Event * event) : m_event (event) {}
 
   // Getters :
-  // bool const & isCoincTrigged() const {return coincON;}
+  // bool const & isCoincTriggered() const {return coincON;}
 
-  Hit const & getLastHit() const {return m_last_hit;}
+  Hit const & getLastHit() const {return m_first_hit;}
 
   uchar const & status() const { return m_status; }
   bool isBuilding() const {return (m_status==1);}
@@ -66,19 +66,18 @@ public:
 
   /// @brief Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time window.
   /// @details
-  /// 3 status : 0: single | 1: begin of coincidence | 2: coincidence complete
   virtual bool build(Hit const & _hit) = 0; // pure virtual
   virtual bool coincidence(Hit const & hit) = 0; // pure virtual
-  virtual void reset() {m_event->clear(); m_status = 0;}
+  virtual void reset() 
+  {
+    m_event->clear();
+    m_status = 0;
+  }
 
   // Setters :
-  void set_last_hit(Hit const & hit)
+  void setFirstHit(Hit const & hit) 
   {
-    m_last_hit = hit;
-  }
-  void set_first_hit(Hit const & hit)
-  {
-    m_last_hit = hit;
+    m_first_hit = hit;
   }
 
   // Options :
@@ -88,10 +87,9 @@ protected:
 
   Event* m_event = nullptr;
 
-  Hit m_last_hit;
-  // Hit m_single_hit;
+  Hit m_first_hit;
 
-  // bool coincON = false;
+  /// 3 status : 0: single | 1: begin of coincidence | 2: coincidence complete
   uchar m_status = 0;
   static bool m_keep_singles;
 };

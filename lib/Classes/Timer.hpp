@@ -85,13 +85,13 @@ private:
 
   duration_milli_t d_milli;
   std::string m_unit = "ms";
-  std::map<std::string, double> m_units
-  ({
+  std::map<std::string, double> m_units = 
+  {
     {"ms" , 1.},
     {"s"  , 1000.},
     {"min", 60000.},
     {"h"  , 3600000.}
-  });
+  };
 };
 
 std::ostream& operator<<(std::ostream& out, Timer & timer)

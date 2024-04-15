@@ -1,15 +1,16 @@
-// 1. Global compilation parameters
-  // RF : 
-  // Detectors :
-  // Triggers :
-#define TRIGGER
-  // Event building :
-// #define PREPROMPT
-// #define UNSAFE
+// Event building compilation parameters :
+// #define FASTER_GROUP // If the data are grouped by faster, need to degroup them
+// #define PREPROMPT    // EventBuilder_RF : add a preprompt (DO NOT WORK YET)
+// #define UNSAFE       // To unlock a little bit of speed, should not be significant though... and may lead to unexpected surprises !
 
 // 2. Include library
 #include <MTObject.hpp>
 #include <libCo.hpp>
+
+#include <MTTHist.hpp>
+MTTHist<TH1F> histo_rf;
+
+
 #include <FasterReader.hpp>   // This class is the base for mono  threaded code
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
@@ -18,9 +19,10 @@
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
-#include <RF_Manager.hpp>     // Eases manipulation of RF information
 
-#include "EventBuilder_136.hpp" // Event builder for this experiment
+#include <EventBuilderRF.hpp> // Event builder based on RF
+#include "Counter136.hpp"
+
 
 // 3. Declare some global variables :
 std::string IDFile = "../index_129.list";
@@ -31,12 +33,17 @@ std::string output = "-root_";
 int nb_files_ts = 60;
 int nb_files = -1;
 int rf_shift = 20;
+int max_hits_in_event = -1;
+
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
-bool one_run = false;
 bool check_preprompt = false;
 bool write_rf = false;
+bool fill_histos = false;
+bool keep_first_hits = false;
+
 std::string one_run_folder = "";
+Path timeshifts_path = "";
 ulonglong max_hits = -1;
 bool treat_129 = false;
 
@@ -56,10 +63,11 @@ std::map<char, std::string> trigger_name =
   {6, "G2"},
   {7, "C2"},
   {8, "PC2"},
-  {9, "PC1"}
+  {9, "PC1"},
+  {10, "PrM1DeC1"}
 };
 
-std::string trigger_legend = "Legend : P = particle. G = Germanium. M = Module. _ = OR.";
+std::string trigger_legend = "Legend : P = Particle | G = Germanium | M = Module | _ = OR | C = Clean Germanium | Pr = Prompt | De = delayed";
 
 bool trigger(Counter136 & counter)
 {
@@ -76,6 +84,7 @@ bool trigger(Counter136 & counter)
     case 7: counter.analyse(); return counter.nb_clovers_clean > 1; //C2
     case 8: counter.analyse(); return counter.nb_clovers_clean > 1 && counter.nb_dssd > 0; // PC2
     case 9: counter.analyse(); return counter.nb_clovers_clean > 0 && counter.nb_dssd > 0; // PC2
+    case 10: counter.analyse(); return counter.nb_clover_clean_delayed > 0 && counter.nb_modules_prompt > 0;
     default: return true;
   }
 }
@@ -105,21 +114,33 @@ int main(int argc, char** argv)
         {
           nb_files = atoi(argv[++i]);
         }
-        else if (command == "--run")
+        else if (command == "-H" || command == "--histograms")
         {
-          one_run = true;
-          one_run_folder = argv[++i];
+          fill_histos = true;
+          print("No histograms will be saved");
+        }
+        else if (                   command == "--keep-singles")
+        {
+          Builder::keepSingles(true);
+        }
+        else if (                   command == "--keep-first-hits")
+        {
+          keep_first_hits = true;
         }
         else if (command == "-m" || command == "--multithread")
         {// Multithreading : number of threads
           nb_threads = atoi(argv[++i]);
         }
-        else if (command == "-n" || command == "--number-hits")
+        else if (command == "-n" || command == "--number-hits-file")
         {// Number of hits per file
           FasterReader::setMaxHits(std::atoi(argv[++i]));
         }
+        else if (command == "-N" || command == "--number-hits-event")
+        {
+          max_hits_in_event = std::atoi(argv[++i]);
+        }
         else if (command == "-o" || command == "--overwrite")
-        {// Overwright already existing .root files
+        {// Overwrite already existing .root files
           overwrite = true;
         }
         else if (command == "-O" || command == "--output")
@@ -128,7 +149,11 @@ int main(int argc, char** argv)
         }
         else if (command == "-t" || command == "--trigger")
         {
-          trigger_choice = std::stoi(argv[++i]);
+          trigger_choice = char_cast(std::stoi(argv[++i]));
+        }
+        else if (command == "-T" || command == "--timeshifts")
+        {
+          timeshifts_path = argv[++i];
         }
         else if (                   command == "--only-timeshift")
         {
@@ -151,6 +176,10 @@ int main(int argc, char** argv)
           manip = "N-SI-129";
           check_preprompt = true;
         }
+        else if (command == "--run")
+        {
+          one_run_folder = argv[++i];
+        }
         else if (                   command == "--write-rf")
         {
           write_rf = true;
@@ -158,14 +187,16 @@ int main(int argc, char** argv)
         else if (command == "-h" || command == "--help")
         {
           print("List of the commands :");
-          print("(-f  || --files-number)   [files-number]  : set the number of files");
           print("(-e  || --extend-period)  [nb_periods]    : set the number of periods to extend the time window after trigger");
-          print("(       --run)            [runname]       : set only one folder to convert");
+          print("(-f  || --files-number)   [files-number]  : set the number of files");
           print("(-h  || --help)                           : display this help");
+          print("(       --keep-singles)                   : to keep singles hits");
+          print("(       --keep-first-hits)                : to keep the hits before the first RF downscale");
           print("(-m  || --multithread)    [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
           print("(-n  || --number-hits)    [hits_number]   : set the number of hit to read in each file.");
           print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
           print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
+          print("(       --run)            [runName]       : set only one folder to convert");
           print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
           print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
@@ -173,10 +204,15 @@ int main(int argc, char** argv)
           print("(       --write-rf)                       : Include the downscaled pulsation hits in the output data");
           return 0;
         }
+        else 
+        {
+          print(command, "command not recognized");
+          exit(-1);
+        }
       }
       catch(std::invalid_argument const & error) 
       {
-        throw_error("Can't interpret " + std::string(argv[i]) + " as an integer");
+        throw_error("Can't interpret " + std::string(argv[i]) + " as an integer...");
       }
     }
   }
@@ -186,34 +222,37 @@ int main(int argc, char** argv)
   MTObject::adjustThreadsNumber(nb_files);
   MTObject::Initialise();
 
+  histo_rf.reset("dT","dT", 10000,-100000, 1000000);
+
   // Setup the path accordingly to the machine :
-  Path datapath = Path::home();
-       if ( datapath == "/home/corentin/") datapath+="faster_data/";
-  else if ( datapath == "/home/faster/") datapath="/srv/data/nuball2/";
-  else {print("Unkown HOME path -",datapath,"- please add yours on top of this line in the main.cpp ^^^^^^^^"); return -1;}
+  Path dataPath = Path::home();
+       if ( dataPath == "/home/corentin/") dataPath+="faster_data/";
+  else if ( dataPath == "/home/faster/") dataPath="/srv/data/nuball2/";
+  else {print("Unkown HOME path -",dataPath,"- please add yours on top of this line in the main.cpp ^^^^^^^^"); return -1;}
 
   // Input file :
-  Path manipPath = datapath+manip;
+  Path manipPath = dataPath+manip;
 
   // Output file :
   output+=trigger_name.at(trigger_choice);
   if (extend_periods) output+="_"+std::to_string(nb_periods_more)+"periods";
-  Path outPath (datapath+(manip.name()+output), true);
+  Path outPath (dataPath+(manip.name()+output), true);
 
   print("Reading :", manipPath.string());
-  print("Writting in : ", outPath.string());
+  print("Writing in : ", outPath.string());
 
   // Load some modules :
   detectors.load("index_129.list");
   Calibration calibration(calibFile);
   Manip runs(list_runs);
-  if (one_run) runs.setFolder(one_run_folder);
+  if (one_run_folder!="") runs.setFolder(one_run_folder);
 
   // Checking that all the modules have been loaded correctly :
-  if (!calibration || !runs) return -1;
+  if (!calibration) throw Calibration::NotFound(calibFile);
+  if (!runs) throw Manip::NotFound(runs);
 
   // Setup some parameters :
-  RF_Manager::set_offset_ns(rf_shift);
+  RF_Manager::setOffset_ns(rf_shift);
   
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;
@@ -228,13 +267,14 @@ int main(int argc, char** argv)
     print("Treating ", run_name);
 
     // Timeshifts loading : 
+    Timeshifts timeshifts;
 
     // Creating a lambda that calculates the timeshifts directly from the data :
-    auto calculateTimeshifts = [&](Timeshifts & timeshifts){
+    auto calculateTimeshifts = [&](){
       if (treat_129)// for N-SI-129 :
       {
-        for (int i = 800; i<856; i++) timeshifts.dT_with_RF(i); // Using RF to align the DSSD
-        for (int i = 800; i<856; i++) timeshifts.dT_with_raising_edge(i); // Use the raising edge of the dT spectra because of the timewalk of DSSD in this experiment
+        for (Label i = 800; i<856; i++) timeshifts.dT_with_RF(i); // Using RF to align the DSSD
+        for (Label i = 800; i<856; i++) timeshifts.dT_with_raising_edge(i); // Use the raising edge of the dT spectra because of the timewalk of DSSD in this experiment
         timeshifts.periodRF_ns(400);
       }
       else // for N-SI-136 :
@@ -243,7 +283,7 @@ int main(int argc, char** argv)
         timeshifts.periodRF_ns(200);
       }
 
-      timeshifts.setMult(2, 4);// Only events with 2 to 4 hits are included
+      timeshifts.setMult(2, 4);// Only events with 2 to 4 hits are included (more means they are less than correlated)
 
       timeshifts.setOutDir(outPath.string());
       timeshifts.calculate(run_path, nb_files_ts);
@@ -251,28 +291,31 @@ int main(int argc, char** argv)
 
       timeshifts.write(run_name);
     };
-    Timeshifts timeshifts;
-    File file(outPath.string() + "Timeshifts/" + run_name + ".dT");
 
-    if(overwrite && only_timeshifts) {calculateTimeshifts(timeshifts);}
+    File file_dT(outPath.string() + "Timeshifts/" + run_name + ".dT");
+    print();
+    print(timeshifts_path);
+    print();
+    if (timeshifts_path.string() != "" && timeshifts_path.exists()) file_dT = timeshifts_path.string() + "Timeshifts/" + run_name + ".dT";
+
+    if(overwrite && only_timeshifts) {calculateTimeshifts();}
     else
     {
       try
       {
-        timeshifts.load(file.string());
+        timeshifts.load(file_dT.string());
       }
       catch(Timeshifts::NotFoundError & error)
       { // If no timeshifts data if available for the run already, calculate it :
-        calculateTimeshifts(timeshifts);
+        calculateTimeshifts();
       }
       if (only_timeshifts) continue;
     }
 
     // Loop over the files in parallel :
     MTFasterReader readerMT(run_path, nb_files);
-
-    readerMT.readRaw([&](Hit & hit, FasterReader & reader){
-
+    readerMT.readRaw([&](Hit & hit, FasterReader & reader)
+    {
       //////////////////////////////////////
       //    READ EACH FILE IN PARALLEL    //
       //////////////////////////////////////
@@ -282,28 +325,29 @@ int main(int argc, char** argv)
       if (!timeshifts || !calibration || !reader) return;
 
       // Extracting the run name :
-      File raw_datafile = reader.getFilename();   // "/path/to/manip/run_number.fast/run_number_filenumber.fast"
-      Filename filename = raw_datafile.filename();// "                               run_number_filenumber.fast"
-      int filenumber = std::stoi(lastPart(filename.shortName(), '_'));//                        filenumber
+      File raw_dataFile = reader.getFilename();   // "/path/to/manip/run_number.fast/run_number_fileNumber.fast"
+      Filename filename = raw_dataFile.filename();// "                               run_number_fileNumber.fast"
+      int fileNumber = std::stoi(lastPart(filename.shortName(), '_'));//                        fileNumber
       std::string run = removeLastPart(filename.shortName(), '_'); 
 
       // Setting the name of the output file :
       Path outFolder (outPath+run, true);                     // /path/to/manip-root/run_number.fast/
-      Filename outFilename(raw_datafile.shortName()+".root"); //                                     run_number_filenumber.root
-      File outfile (outFolder, outFilename);                  // /path/to/manip-root/run_number.fast/run_number_filenumber.root
+      Filename outFilename(raw_dataFile.shortName()+".root"); //                                     run_number_fileNumber.root
+      File outfile (outFolder, outFilename);                  // /path/to/manip-root/run_number.fast/run_number_fileNumber.root
 
       // Important : if the output file already exists, then do not overwrite it !
       if ( !overwrite && file_exists(outfile) ) {print(outfile, "already exists !"); return;}
 
-      total_read_size+=raw_datafile.size();
-      auto dataSize = float_cast(raw_datafile.size("Mo"));
+      total_read_size+=raw_dataFile.size();
+      auto dataSize = float_cast(raw_dataFile.size("Mo"));
 
       // ------------------------------ //
       // Initialise the temporary TTree //
       // ------------------------------ //
-      std::unique_ptr<TTree> tempTree (new TTree("temp","temp"));
+      std::string tree_name = run_name + "_" + std::to_string(fileNumber);
+      std::unique_ptr<TTree> tempTree (new TTree(tree_name.c_str(),tree_name.c_str()));
       tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-      hit.writting(tempTree.get(), "lsEQp");
+      hit.writing(tempTree.get(), "lsEQp");
 
       // ------------------------ //
       // Loop over the .fast file //
@@ -325,7 +369,7 @@ int main(int argc, char** argv)
 
       read_timer.Stop();
       
-      print("Read of",raw_datafile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s (", dataSize/read_timer.TimeElapsedSec(), "Mo/s)");
+      print("Read of",raw_dataFile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s (", dataSize/read_timer.TimeElapsedSec(), "Mo/s)");
 
       if (rawCounts==0) {print("NO HITS IN",run); return;}
 
@@ -346,11 +390,11 @@ int main(int argc, char** argv)
       TTree* outTree (new TTree(outTree_name.c_str(),"Nuball2"));
       outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
       Event event;
-      event.writting(outTree, "lstEQp");
+      event.writing(outTree, "lstEQp");
 
-      // Initialise event builder based on RF :
+      // Initialise object that handles the rf
       RF_Manager rf;
-      rf.set_period_ns(200);
+      rf.setPeriod_ns(200);
 
       // Handle the first RF downscale :
       RF_Extractor first_rf(tempTree.get(), rf, hit, gindex);
@@ -358,20 +402,22 @@ int main(int argc, char** argv)
 
       debug("first RF found at hit n°", first_rf.cursor());
 
-      // Initialise event builder :
-      EventBuilder_136 eventBuilder(&event, &rf);
+      // Initialise event builder based on RF :
+      EventBuilderRF eventBuilder(&event, &rf);
       eventBuilder.setFirstRF(hit);
+      rf.setHit(hit);
 
-      // Initialise event analyser :
+      // Initialise event analyzer :
       Counter136 counter(&event);
 
       // Handle the first hit :
       int loop = 0;
       // In the first file of each run, the first few hundreds of thousands of hits don't have RF downscale. 
       // So we have to skip them in order to maintain good temporal resolution :
-      if (filenumber == 1) loop = first_rf.cursor(); 
+      if (!keep_first_hits) loop = first_rf.cursor();
+      
       tempTree -> GetEntry(gindex[loop++]);
-      eventBuilder.set_first_hit(hit);
+      eventBuilder.setFirstHit(hit);
 
       // --------------------------------- //
       // Loop over the temporary root tree //
@@ -383,28 +429,31 @@ int main(int argc, char** argv)
       ulong trig_count = 0;
       while (loop<nb_data)
       {
-        tempTree -> GetEntry(gindex[loop++]);
+        tempTree -> GetEntry(gindex[++loop]);
 
         if (rf.setHit(hit))
         { // Handle rf
           if (write_rf)
-          {
-            Event temp (event);
+          {// Write down the rf in the data if the option is activated
+            Event tempEvent (event);
             event = hit;
             outTree -> Fill();
-            event = temp;
+            event = tempEvent;
           }
+          // The rf hits cannot participate in the construction of an event as it is not a detector, 
+          // so move on to the next hit :
           continue;
         }
         
         if (eventBuilder.build(hit))
-        {
+        {// Here, the event is made at least of 2 hits (if the Builder::keepSingles() is activated, can be only one)
+         // in coincidence within the time window centered around the pulsation t0 (between -rf_shift and period-rf_shift)
           evts_count++;
+          if (max_hits_in_event > 0  &&  event.mult > max_hits_in_event) continue;
           counter.count();
           if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "Mevts");
           if (trigger(counter))
           {
-
             hits_count+=event.size();
             ++trig_count;
 
@@ -428,15 +477,15 @@ int main(int argc, char** argv)
       auto outSize  = float_cast(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
 
       print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
-            "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(hits_count))/double_cast(rawCounts),"% hits kept");
+            "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(hits_count))/double_cast(nb_data),"% hits kept");
     });
-    
-    print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec());
+
+    print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec(), "Mo/s");
 
     Path outDataPath(outPath.string() + "/" + run_name);
     Path outMergedPath (outPath.string()+"merged", true);
     File outMergedFile (outMergedPath, run_name+".root");
-    
+
     if (outMergedFile.exists())
     {
       if (overwrite) system(("rm " + outMergedFile.string()).c_str());
@@ -444,9 +493,15 @@ int main(int argc, char** argv)
     }
 
     auto nb_threads_hadd = int_cast(std::thread::hardware_concurrency()*0.25);
-
-    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads_hadd) + " " + outMergedPath.string() + run_name + ".root " + outDataPath.string() + run_name + "_*.root";
+    auto const & outRootName = outMergedPath.string() + run_name + ".root ";
+    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads_hadd) + " " + outRootName + outDataPath.string() + run_name + "_*.root";
     system(merge_command.c_str());
+
+    // Write down the histograms.
+    unique_TFile histoFile (TFile::Open(outRootName.c_str(), "UPDATE"));
+    histoFile->cd();
+    histo_rf.Write();
+    histoFile->Close();
   }
   return 0;
 }

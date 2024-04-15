@@ -16,7 +16,7 @@
 using lock_mutex = const std::lock_guard<std::mutex>;
 
 /**
- * @brief Class handeling an easy multi threading.
+ * @brief Class handling an easy multi threading.
  * @attention Include this class before any other in order to activate multithreading additions
  * @details
  * 
@@ -29,7 +29,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *        MTObject::setThreadsNb(nb_threads);
  *        MTObject::Initialise();
  * 
- * Or more consisley : 
+ * Or more concisely : 
  * 
  *        MTObject::Initialise(nb_threads);
  * 
@@ -64,7 +64,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *          MTTHist<TH1F> test("test", "test", 1000,0,1000); // MTTHist holds a vector of TH1F to be filled using its own Fill method
  *          
  *          MTObject::parallelise_function([&]()
- *          { // Here starts the parallelised portion of code
+ *          { // Here starts the parallelized portion of code
  *            print("thread id :", MTObject::getThreadIndex()); // You can access the current thread index (0 or 1 in this case)
  *            // This method automatically fills the copy of the histogram that corresponds to its thread index :
  *            for(int i = 0; i<10000000; i++) test.Fill(random_gaussian(500, 100)); 
@@ -84,7 +84,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *          return 0;
  *        }
  * 
- * Example 3 : paralellise a non-static method of a class :
+ * Example 3 : parallelize a non-static method of a class :
  * 
  *        class MyClass
  *        {
@@ -92,20 +92,20 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *          MyClass() {}
  *          void function_to_multithread(argument_1, argument_2, ...){....}
  *
- *          static void helper_function(MyClass & myclass, argument_1, argument_2, ...) {return myclass.function_to_multithread(argument_1, argument_2, ...);}
+ *          static void helper_function(MyClass & myClass, argument_1, argument_2, ...) {return myClass.function_to_multithread(argument_1, argument_2, ...);}
  *        };
  *
  *        int main()
  *        {
  *         ...
- *          MTObject::parallelise_function(myclass.helper_function, argument_1, argument_2, ....);
+ *          MTObject::parallelise_function(myClass.helper_function, argument_1, argument_2, ....);
  *         ...
  *        }
  * 
  * @todo 
  * Trying to make this work :
  * template<class... ARGS>
- * static ret_type helper_function(MyClass & myclass, ARGS... args) {return myclass.function_to_multithread(std::forward<ARGS>(args)...);}
+ * static ret_type helper_function(MyClass & myClass, ARGS... args) {return myClass.function_to_multithread(std::forward<ARGS>(args)...);}
  */
 
 
@@ -172,7 +172,7 @@ public:
       {
         {
           lock_mutex lock(mutex);
-          std::cout << "\nCtrl+C pressed, quitting the multithreaded environement safely" << std::endl;
+          std::cout << "\nCtrl+C pressed, quitting the multithreaded environnement safely" << std::endl;
           std::cout << "Waiting for the current threads to finish...." << std::endl;
           std::cout << "If the threads do not stop are still created, you'll have to close the terminal (nothing will happens by default)" << std::endl;
           MTObject::kill = true;
@@ -220,7 +220,7 @@ public:
       activated = true;
       m_threads.reserve(nb_threads); // Memory pre-allocation (used for performances reasons)
       for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
-      {// Inside this lambda function, we already are inside the threads, so the parallelised section starts NOW :
+      {// Inside this lambda function, we already are inside the threads, so the parallelized section starts NOW :
         m_thread_index = i; // Index the thread
         func(std::forward<ARGS>(args)...); // Run the function inside thread
       });

@@ -22,7 +22,7 @@ Bools isDSSD  (SIZE_LOOKUP);
 Bools isClover(SIZE_LOOKUP);// is the 
 std::vector<uchar> labelToClover(SIZE_LOOKUP,0);
 std::vector<uchar> labelToBGOcrystal(SIZE_LOOKUP,0);
-std::vector<uchar> labelToGecrystal(SIZE_LOOKUP,0);
+std::vector<uchar> labelToGeCrystal(SIZE_LOOKUP,0);
 Strings clover_pos (SIZE_LOOKUP,"");
 
 // DSSD specific lookup tables :
@@ -238,15 +238,15 @@ void Detectors::load(std::string const & filename)
 
 void Detectors::readFile(std::string const & filename)
 {
-  std::ifstream inputfile(filename, std::ifstream::in);
-  if (!inputfile.is_open())
+  std::ifstream inputFile(filename, std::ifstream::in);
+  if (!inputFile.is_open())
   {
     m_ok = m_loaded = false;
     m_list.clear();
     error(concatenate("Can't open ID file named '", filename, "'"));
     return;
   }
-  else if (file_is_empty(inputfile))
+  else if (file_is_empty(inputFile))
   {
     m_ok = m_loaded = false;
     print(filename, "is empty !!");
@@ -257,10 +257,10 @@ void Detectors::readFile(std::string const & filename)
   // ----------------------------------------------------- //
   //First reading of the file : extract the maximum label to be the size of the vector
   ushort size = 0; std::string line = "", name = ""; ushort label = 0;
-  std::string oneline;
-  while (getline(inputfile, oneline))
+  std::string one_line;
+  while (getline(inputFile, one_line))
   {
-    std::istringstream is(oneline);
+    std::istringstream is(one_line);
     is>>label;
     if (size<label) size = label;
   }
@@ -269,13 +269,13 @@ void Detectors::readFile(std::string const & filename)
   //Second reading : fill the vector
   m_list.resize(size);
   m_exists.resize(size);
-  inputfile.clear();
-  inputfile.seekg(0, inputfile.beg);
-  while(getline(inputfile, oneline))
+  inputFile.clear();
+  inputFile.seekg(0, inputFile.beg);
+  while(getline(inputFile, one_line))
   {
-    std::istringstream is(oneline);
+    std::istringstream is(one_line);
     is>>label>>name;
-    if (oneline.size()>1)
+    if (one_line.size()>1)
     {
       m_exists[label] = true;
       m_list[label] = name;
@@ -287,7 +287,7 @@ void Detectors::readFile(std::string const & filename)
     }
   }
   std::sort(m_labels_vector.begin(), m_labels_vector.end());
-  inputfile.close();
+  inputFile.close();
   print("Labels extracted from", filename);
   m_ok = m_loaded = true;
 }
@@ -334,9 +334,9 @@ void Detectors::makeArrays()
         m_types[label] = types_handled[6];
         isRF   [label] = true;
       }
-      // Add here any additionnal detector :
+      // Add here any additional detector :
       
-      // Additionnal position information :
+      // Additional position information :
       if (str.size()>2 && str[0] == 'R' && str[2] == 'A')
       {
         clover_pos[label] = str;
@@ -441,8 +441,8 @@ std::map<Label, TH1F*> loadFormattedTH1F(TFile * file)
   {
     std::string name = pair.first;
     auto const & histo = pair.second;
-    Strings possible_additionnal_text = {"_adc", "_energy", "_calib", "_raw"};
-    for (auto const & text : possible_additionnal_text) remove(name, text);
+    Strings possible_additional_text = {"_adc", "_energy", "_calib", "_raw"};
+    for (auto const & text : possible_additional_text) remove(name, text);
     if (found(detectors.names(), name))
     {// Either the histogram label is already the label in int, or is the name of the detector
       try                                 {ret.emplace(string_to<Label>(name), histo);}

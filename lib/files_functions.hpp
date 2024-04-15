@@ -263,15 +263,15 @@ std::vector<std::string> listFileReader(std::string const & filename)
 {
   std::vector<std::string> list;
 
-  std::ifstream listfile(filename,std::ios::in);
-  if(!listfile.good())
+  std::ifstream listFile(filename,std::ios::in);
+  if(!listFile.good())
   {
     print("List file", filename, "not found !");
   }
   else
   {
     std::string line;
-    while(getline(listfile,line))
+    while(getline(listFile,line))
     {
       list.push_back(line);
     }
@@ -301,7 +301,7 @@ void findFilesWildcard(std::string const & expression, std::vector<std::string> 
   for (auto const & file : files) vec.push_back(file);
 }
 
-template <class N, class D> std::string procent(N const & n, D const & d)
+template <class N, class D> std::string percent(N const & n, D const & d)
 {
   return (std::to_string(100*static_cast<double>(n)/static_cast<double>(d))+"%");
 }
@@ -600,7 +600,7 @@ private:
     // To ensure it finishes with a '/' :
     push_back_if_none(m_path, '/');
 
-    //Additionnal information ;
+    //Additional information ;
     this -> makeFolderList();
 
     // To clean the path of the ./ and ../
@@ -689,7 +689,7 @@ public:
   /// @brief Full name stands for the file name with the path nor the extension
   std::string const & fullName() const {return m_fullName;}
 
-  /// @brief Short name stands for the file name withpout the path nor the extension
+  /// @brief Short name stands for the file name without the path nor the extension
   std::string const & shortName() const {return m_shortName;}
 
   std::string const & extension() const {return m_extension;}
@@ -821,7 +821,7 @@ public:
   /// @brief Filename stands for the file name without the path but with the extension
   Filename          & filename()       {return m_filename;}
 
-  /// @brief Short name stands for the file name withpout the path nor the extension
+  /// @brief Short name stands for the file name without the path nor the extension
   std::string const & shortName() const {return m_filename.shortName();}  
 
   std::string const & extension() const {return m_filename.extension();}

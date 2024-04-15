@@ -30,9 +30,9 @@ public:
 
   void reset() {m_event -> clear(); m_status = 0;}
   bool coincidence(Hit const & hit) {
-  //   print(hit.label, hit.stamp, m_last_hit.label, m_last_hit.stamp, Time_cast(hit.stamp - m_last_hit.stamp));  
+  //   print(hit.label, hit.stamp, m_first_hit.label, m_first_hit.stamp, Time_cast(hit.stamp - m_first_hit.stamp));  
   // std::cin.get();
-    return (Time_cast(hit.stamp - m_last_hit.stamp) < m_time_window);}
+    return (Time_cast(hit.stamp - m_first_hit.stamp) < m_time_window);}
 
   // Setters :
   void setTimeWindow(Time const & timewindow) {m_time_window = timewindow;}
@@ -53,7 +53,7 @@ bool CoincBuilder::build(Hit const & hit)
   {
     case 0 : case 2 :// If no coincidence has been detected in previous iteration :
     m_event -> clear();
-    *m_event = m_last_hit;
+    *m_event = m_first_hit;
     if (coincidence(hit))
     {// Case 1 :
       // The previous and current hit are in the same event.
@@ -65,7 +65,7 @@ bool CoincBuilder::build(Hit const & hit)
     {// Case 0 :
       // The last and current hits aren't in the same event.
       // The last hit is therefore a single hit, alone in the time window
-      m_last_hit = hit; // Building next event based on the last hit
+      m_first_hit = hit; // Building next event based on the last hit
       m_status = 0; // No event detected
       if (m_keep_singles) return true;
     }
@@ -81,7 +81,7 @@ bool CoincBuilder::build(Hit const & hit)
     else
     {// Case 2 : 
       // Hit out of coincidence. Next call, go back to first condition.
-      m_last_hit = hit; // Build next event based on the current hit, that is not in the event.
+      m_first_hit = hit; // Build next event based on the current hit, that is not in the event.
       m_status = 2; // The current event is full
       return true; // Now the event is complete and can be treated
     }

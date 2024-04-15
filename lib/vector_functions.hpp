@@ -167,7 +167,7 @@ T minimum_index(std::vector<T> const & vector)
   return value;
 }
 
-/// @brief Order the vector from lower to higer value
+/// @brief Order the vector from lower to higher value
 template <typename T>
 std::vector<int> & bubble_sort(std::vector<T> const & vector, std::vector<int> & ordered_indexes)
 {
@@ -175,7 +175,7 @@ std::vector<int> & bubble_sort(std::vector<T> const & vector, std::vector<int> &
   if (vector.size() == 0) {printC(RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", RESET); return ordered_indexes;}
   if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());
 
-  // Initialisations :
+  // Initializations :
   T v = vector[0];
   ordered_indexes[0] = 0;
   size_t j = 0;
@@ -312,7 +312,7 @@ public:
     m_deleted(vector.m_deleted)
   { reserve(); *m_data = *(vector.m_data); }
 
-  /// @brief Move contructor
+  /// @brief Move constructor
   StaticVector(StaticVector<T>&& other)
   {
     *this = std::move(other);
@@ -484,16 +484,16 @@ public:
   SmartVector(std::vector<T> const & vector) : m_vector(vector) {}
   SmartVector(std::vector<T>       & vector) : m_vector(vector) {}
   SmartVector(std::vector<T>         vector) : m_vector(vector) {}
-  SmartVector(std::Initialiser_list<T> const & init_list) : m_vector(init_list) {}
-  SmartVector(std::Initialiser_list<T>       & init_list) : m_vector(init_list) {}
-  SmartVector(std::Initialiser_list<T>         init_list) : m_vector(init_list) {}
+  SmartVector(std::Initializer_list<T> const & init_list) : m_vector(init_list) {}
+  SmartVector(std::Initializer_list<T>       & init_list) : m_vector(init_list) {}
+  SmartVector(std::Initializer_list<T>         init_list) : m_vector(init_list) {}
 
   auto operator=(std::vector<T> const & vector) {m_vector = vector;}
   auto operator=(std::vector<T>       & vector) {m_vector = vector;}
   auto operator=(std::vector<T>         vector) {m_vector = vector;}
-  auto operator=(std::Initialiser_list<T> const & init_list) {m_vector = vector;}
-  auto operator=(std::Initialiser_list<T>       & init_list) {m_vector = vector;}
-  auto operator=(std::Initialiser_list<T>         init_list) {m_vector = vector;}
+  auto operator=(std::Initializer_list<T> const & init_list) {m_vector = vector;}
+  auto operator=(std::Initializer_list<T>       & init_list) {m_vector = vector;}
+  auto operator=(std::Initializer_list<T>         init_list) {m_vector = vector;}
 
   void bubble_sort() {bubble_sort(m_vector, m_index);}
   /// @brief @attention you need to check bounds

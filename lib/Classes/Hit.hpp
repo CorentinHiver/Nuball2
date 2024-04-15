@@ -78,7 +78,7 @@ inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
  * Q : nrj2   energy qdc2 in keV    float
  * 3 : qdc3   energy qdc3 in ADC    float
  * R : nrj3   energy qdc3 in keV    float
- * p : pileup pilepup               bool
+ * p : pileup pileup                bool
  */
 class IOptions
 {
@@ -125,7 +125,7 @@ public:
 /////////////////
 
 /**
- * @brief This class is used to store conviniently the data from reading the faster data. You can either treat data directly or write it in root trees
+ * @brief This class is used to store conveniently the data from reading the faster data. You can either treat data directly or write it in root trees
  * @details
  * 
  * This class is used as an interface between the faster data and root.
@@ -146,7 +146,7 @@ public:
  *      Hit hit;
  *      TTree * tree = new TTree("Nuball2","Nuball2");
  *      FasterReader.setHit(&hit);
- *      hit.writting(tree);
+ *      hit.writing(tree);
  *      while(reader.Read())
  *      {
  *        tree -> Fill();
@@ -157,7 +157,7 @@ public:
  *      hit.reading(tree);
  *      for (int hit = 0; hit<tree->GetEntries(); hit++)
  *      {
- *        do somethign with the hit ...
+ *        do something with the hit ...
  *      }
  * 
  */
@@ -234,7 +234,7 @@ public:
 
   void reading (TTree * tree);
   void reading (TTree * tree, std::string const & options);
-  void writting(TTree * tree, std::string const & options = "lseqp");
+  void writing(TTree * tree, std::string const & options = "lseqp");
 
   static IOptions read;
   static IOptions write;
@@ -300,7 +300,7 @@ void Hit::reading(TTree * tree, std::string const & options)
   if (read.p ) tree -> SetBranchAddress("pileup" , & pileup );
 } 
 
-void Hit::writting(TTree * tree, std::string const & options)
+void Hit::writing(TTree * tree, std::string const & options)
 {
 #ifdef MULTITHREADING
   lock_mutex lock(mutex_hits);

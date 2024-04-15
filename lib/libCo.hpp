@@ -47,7 +47,7 @@
 #include <ctime>
 
 ////////////////////////////
-// Some specialised print //
+// Some specialized print //
 ////////////////////////////
 
 
@@ -101,14 +101,14 @@ std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
 std::string time_string()
 {
   std::time_t currentTime = std::time(nullptr);
-  std::tm* timeinfo = std::localtime(&currentTime);
-  if (timeinfo != nullptr) {
+  std::tm* timeInfo = std::localtime(&currentTime);
+  if (timeInfo != nullptr) {
     // Extract hours, day, and year
-    int min  = timeinfo->tm_min;
-    int hour = timeinfo->tm_hour;
-    int day  = timeinfo->tm_mday;
-    int mon  = timeinfo->tm_mon;
-    int year = timeinfo->tm_year % 100; // Get last two digits of the year
+    int min  = timeInfo->tm_min;
+    int hour = timeInfo->tm_hour;
+    int day  = timeInfo->tm_mday;
+    int mon  = timeInfo->tm_mon;
+    int year = timeInfo->tm_year % 100; // Get last two digits of the year
 
     std::stringstream ss;
     // Print the time in the desired format
@@ -129,14 +129,14 @@ std::string time_string()
 std::string time_string_inverse()
 {
   std::time_t currentTime = std::time(nullptr);
-  std::tm* timeinfo = std::localtime(&currentTime);
-  if (timeinfo != nullptr) {
+  std::tm* timeInfo = std::localtime(&currentTime);
+  if (timeInfo != nullptr) {
     // Extract hours, day, and year
-    int min  = timeinfo->tm_min;
-    int hour = timeinfo->tm_hour;
-    int day  = timeinfo->tm_mday;
-    int mon  = timeinfo->tm_mon;
-    int year = timeinfo->tm_year % 100; // Get last two digits of the year
+    int min  = timeInfo->tm_min;
+    int hour = timeInfo->tm_hour;
+    int day  = timeInfo->tm_mday;
+    int mon  = timeInfo->tm_mon;
+    int year = timeInfo->tm_year % 100; // Get last two digits of the year
 
     std::stringstream ss;
     // Print the time in the desired format
@@ -166,7 +166,7 @@ auto pauseCo()
   lock_mutex lock(MTObject::mutex);
   #endif //MULTITHREADING
 
-  std::cout << "Programe paused, please press enter"; 
+  std::cout << "Programme paused, please press enter"; 
   return std::cin.get();
 }
 
@@ -490,8 +490,6 @@ inline bool find_value(std::unordered_map<K,V> const & map, V const & value)
     }));
 }
 
-
-
 /////////////////////////
 //    MAPS FUNCTIONS   //
 /////////////////////////
@@ -537,7 +535,7 @@ inline std::pair<K,V> get_max_element(std::map<K,V> const & map)
 }
 
 /// @brief Returns the maximum value stored in the map
-/// @details This method is only lookinf for values, not keys
+/// @details This method is only looking for values, not keys
 template<typename K, typename V> 
 inline V get_max_value(std::map<K,V> const & map) 
 {
@@ -585,9 +583,17 @@ inline K get_min_key(std::map<K,V> const & map)
   })->first); 
 }
 
-/////////////////////////////
-//    TEMPLATE HANDELING   //
-/////////////////////////////
+
+// Cross-containers found function :
+template<typename K, typename V> 
+inline bool found(std::map<K,V> const & map, K const & key) {return find_key(map, key);}
+
+template<typename K, typename V> 
+inline bool found(std::unordered_map<K,V> const & map, K const & key) {return find_key(map, key);}
+
+////////////////////////////
+//    TEMPLATE HANDLING   //
+////////////////////////////
 
 template <class T>
 #if (__cplusplus >= 201702L)
@@ -649,9 +655,9 @@ class Slots
 
 namespace CoBazar
 {
-  void progress_bar(float const & progress_procent, int width = 50)
+  void progress_bar(float const & progress_percent, int width = 50)
   {
-    auto const & nb_chars = int_cast(progress_procent/100.*width);
+    auto const & nb_chars = int_cast(progress_percent/100.*width);
 
     std::cout << "|";
     for (int i = 0; i<width; i++) 
@@ -659,13 +665,32 @@ namespace CoBazar
       if (i<nb_chars) std::cout << ".";
       else            std::cout << " ";
     }
-    std::cout << "| : " << int_cast(progress_procent) << "%" << std::endl << "\033[F";
+    std::cout << "| : " << int_cast(progress_percent) << "%" << std::endl << "\033[F";
     std::cout.flush();
   }
 
-  void short_progress_bar(float const & progress_procent) {progress_bar(progress_procent, 10 );}
-  void long_progress_bar (float const & progress_procent) {progress_bar(progress_procent, 100);}
+  void short_progress_bar(float const & progress_percent) {progress_bar(progress_percent, 10 );}
+  void long_progress_bar (float const & progress_percent) {progress_bar(progress_percent, 100);}
 
+}
+
+template <class T>
+std::string nicer_double(T const & t, int const & nb_digits = 10)
+{
+  auto value = double_cast(t);
+  std::string s;
+       if (value<1.e-9)  {value*=1.e+12; s = " f";}
+  else if (value<1.e-6)  {value*=1.e+9 ; s = " n";}
+  else if (value<1.e-3)  {value*=1.e+6 ; s = " µ";}
+  else if (value<1.e+0)  {value*=1.e+3 ; s = " m";}
+  else if (value<1.e+3)  {value*=1.e+0 ; s = " " ;}
+  else if (value<1.e+6)  {value*=1.e-3 ; s = " k";}
+  else if (value<1.e+9)  {value*=1.e-6 ; s = " M";}
+  else if (value<1.e+12) {value*=1.e-9 ; s = " G";}
+
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(nb_digits) << value << s;
+  return ss.str();
 }
 
 

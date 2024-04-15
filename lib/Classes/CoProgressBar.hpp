@@ -42,11 +42,11 @@ public:
 
 private:
 
-  int m_width = 50;
+  int m_width = 50; // Width of the progress bar in pixels
 
   T* m_value = nullptr;
   T m_value_max = 0;
-  int m_last_value = 0;
+  T m_last_value = 0;
 
   Timer timer;
 
@@ -59,8 +59,8 @@ void CoProgressBar<T>::showFast()
   if (!m_value)              throw_error("in CoProgressBar<T>::show() : the value has not been set !!");
   else if (m_value_max == 0) throw_error("in CoProgressBar<T>::show() : the maximum value has not been set !!");
 
-  auto const & real_procentage = float_cast(*m_value)/m_value_max;
-  auto const & nb_chars = int_cast(real_procentage*m_width);
+  auto const & real_percentage = float_cast(*m_value)/m_value_max;
+  auto const & nb_chars = int_cast(real_percentage*m_width);
 
   std::cout << "|";
   for (int i = 0; i<m_width; i++) 
@@ -68,7 +68,7 @@ void CoProgressBar<T>::showFast()
     if (i<nb_chars) std::cout << ".";
     else            std::cout << " ";
   }
-  std::cout << "| : " << int_cast(real_procentage*100) << "% " << std::endl << "\033[F";
+  std::cout << "| : " << int_cast(real_percentage*100) << "% " << std::endl << "\033[F";
   std::cout.flush();
 }
 
@@ -80,10 +80,10 @@ void CoProgressBar<T>::show(std::string const & message)
 
   float speed = 0.f;
   if (first_time) {timer.Restart(); speed = 0; first_time = false;}
-  else {speed = 100*((*m_value)-m_last_value)/(timer.TimeSec()*m_value_max);}
+  else {speed = 100.*(float_cast(*m_value)-float_cast(m_last_value))/(timer.TimeSec()*float_cast(m_value_max));}
 
-  auto const & real_procentage = float_cast(*m_value)/m_value_max;
-  auto const & nb_chars = int_cast(real_procentage*m_width);
+  auto const & real_percentage = float_cast(*m_value)/float_cast(m_value_max);
+  auto const & nb_chars = int_cast(real_percentage*float_cast(m_width));
 
   std::cout << "|";
   for (int i = 0; i<m_width; i++) 
@@ -91,7 +91,7 @@ void CoProgressBar<T>::show(std::string const & message)
     if (i<nb_chars) std::cout << ".";
     else            std::cout << " ";
   }
-  std::cout << "| : " << int_cast(real_procentage*100) << "% (" << std::setprecision(3) << speed << " %/s)";
+  std::cout << "| : " << int_cast(real_percentage*100) << "% (" << std::setprecision(3) << speed << " %/s)";
   if (message!="") std::cout << message ;
   std::cout << std::endl << "\033[F";// This code flushes the previous line
   std::cout.flush();

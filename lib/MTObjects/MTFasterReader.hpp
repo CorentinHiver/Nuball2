@@ -191,7 +191,7 @@ inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
   // MTObject::parallelise_function(Read<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
     std::string filename;
-    CoProgressBar progress(&m_MTfiles.getIndex(), m_MTfiles.size());
+    CoProgressBar progress(&m_MTfiles.getIndex(), float_cast(m_MTfiles.size()));
     while(nextFilename(filename))
     {
       if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
@@ -237,7 +237,7 @@ inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
       FasterReader reader(&hit, filename);
       TString name = "temp"+std::to_string(MTObject::getThreadIndex());
       unique_tree tempTree(new TTree(name, "temp"));
-      hit.writting(tempTree.get());
+      hit.writing(tempTree.get());
     fasterReaderMutex.unlock();
       while (reader.Read())
       {

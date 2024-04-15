@@ -6,22 +6,22 @@
 #include <string>
 #include <sstream>
 
-/// @brief Returns the string to the left of the first occurence of sep in the string
+/// @brief Returns the string to the left of the first occurrence of sep in the string
 std::string firstPart       (std::string const & string, std::string const & sep) { return (string.substr(0, string.find_first_of(sep) ));  }
-/// @brief Returns the string to the right of the last occurence of sep in the string
+/// @brief Returns the string to the right of the last occurrence of sep in the string
 std::string lastPart        (std::string const & string, std::string const & sep) { return (string.substr(   string.find_last_of(sep)+1));  }
-/// @brief Returns the string to the right of the first occurence of sep in the string
+/// @brief Returns the string to the right of the first occurrence of sep in the string
 std::string removeFirstPart (std::string const & string, std::string const & sep) { return (string.substr(   string.find_first_of(sep) ));  }
-/// @brief Returns the string to the left of the last occurence of sep in the string
+/// @brief Returns the string to the left of the last occurrence of sep in the string
 std::string removeLastPart  (std::string const & string, std::string const & sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
 
-/// @brief Returns the string to the left of the first occurence of sep in the string
+/// @brief Returns the string to the left of the first occurrence of sep in the string
 std::string firstPart       (std::string const & string, char const & sep) { return (string.substr(0, string.find_first_of(sep) ));  }
-/// @brief Returns the string to the right of the last occurence of sep in the string
+/// @brief Returns the string to the right of the last occurrence of sep in the string
 std::string lastPart        (std::string const & string, char const & sep) { return (string.substr(   string.find_last_of(sep)+1));  }
-/// @brief Returns the string to the right of the first occurence of sep in the string
+/// @brief Returns the string to the right of the first occurrence of sep in the string
 std::string removeFirstPart (std::string const & string, char const & sep) { return (string.substr(   string.find_first_of(sep) ));  }
-/// @brief Returns the string to the left of the last occurence of sep in the string
+/// @brief Returns the string to the left of the last occurrence of sep in the string
 std::string removeLastPart  (std::string const & string, char const & sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
 
 /**
@@ -85,20 +85,20 @@ std::string removeBlankSpace(std::string str)
  * @brief Replaces all the instances of one character with another
  * @details 
  * For instance : 
- *        std::string istring = "je_suis_ton_pere";
- *        std::string ostring = replaceCharacter(istring, '_', ' ');
+ *        std::string inString = "je_suis_ton_pere";
+ *        std::string ostring = replaceCharacter(inString, '_', ' ');
  *        print(ostring);
  *        // output : "je suis ton pere"
  * 
 */
-std::string replaceCharacter(std::string const & istring, char const & ichar, char const & ochar)
+std::string replaceCharacter(std::string const & inString, char const & inChar, char const & outChar)
 {
-  auto list = getList(istring, ichar);
+  auto list = getList(inString, inChar);
   std::string ostring;
 
   for (auto const & string : list)
   {
-    ostring+=(string+ochar);
+    ostring+=(string+outChar);
   }
   return ostring;
 }
@@ -133,7 +133,7 @@ bool isNumber(std::string const & string)
   return true;
 }
 
-/// @brief Returns true if the string has at least one occurence of substr
+/// @brief Returns true if the string has at least one occurrence of substr
 bool found(std::string const & string, std::string const & _substr)
 {
   return (string.find(_substr) != std::string::npos);
@@ -166,13 +166,13 @@ bool remove(std::string & string, char const & c)
 }
 
 /// @brief Replace substr to the string if it exists
-bool replace(std::string & string, std::string const & substr_init, std::string const & substr_substitue)
+bool replace(std::string & string, std::string const & substr_init, std::string const & substr_substitute)
 {
   auto pos = string.find(substr_init);
   if (pos!=std::string::npos)
   {
     auto first_str = string.substr(0, pos);
-    string = string.substr(0, pos)+substr_substitue+string.substr(pos+substr_init.size());
+    string = string.substr(0, pos)+substr_substitute+string.substr(pos+substr_init.size());
     return true;
   }
   else return false;
@@ -235,7 +235,7 @@ std::string my_to_string(const T& value)
 }
 
 /// @brief Concatenate a series of arguments into a big string
-/// @example std::string mystring = (concatenate(1, " ", argv[2], " test");
+/// @example std::string myString = (concatenate(1, " ", argv[2], " test");
 template<class... ARGS>
 std::string concatenate(ARGS&&... args)
 {

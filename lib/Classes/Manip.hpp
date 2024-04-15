@@ -47,20 +47,20 @@ public:
   /// @brief Reads the list file containing the list of folders
   void readFile()
   {
-    m_runs_files = m_datapath + m_manip + m_file;
+    m_runs_files = m_dataPath + m_manip + m_file;
     readFile(m_runs_files);
   }
 
   /// @brief @deprecated Set the path of the list file containing the list of folders
-  void setDataPath(std::string const & datapath)
+  void setDataPath(std::string const & dataPath)
   {
-    m_datapath = datapath;
+    m_dataPath = dataPath;
   }
 
-  /// @brief @deprecated Set the name of the folder inside the datapath containing the list file containing the list of folders
-  void setManipName(std::string const & manipname)
+  /// @brief @deprecated Set the name of the folder inside the dataPath containing the list file containing the list of folders
+  void setManipName(std::string const & manipName)
   {
-    m_manip = manipname;
+    m_manip = manipName;
   }
 
   void setFileName(std::string const & filename)
@@ -110,16 +110,25 @@ public:
 
 private:  
   uint i = 0;
-  bool m_ok;
+  bool m_ok = false;
   bool m_MTOn = false; // Multithreading on
 
-  Path m_datapath;
+  Path m_dataPath;
   std::string m_runs_files;
   Folder m_manip;
   std::string m_file;
 
   std::vector<std::string> list_runs;
   MTList list_runs_MT;
+
+public:
+  class NotFound
+  { public:
+    NotFound(Manip const & manip) 
+    {
+      print("the manip at", manip.m_manip.string(), "is not okay ...");
+    }
+  };
 };
 
 std::ostream& operator<<(std::ostream& cout, Manip const & manip)

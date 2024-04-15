@@ -114,7 +114,7 @@ public:
   void setHit(Hit* hit) {m_hit = hit;}
 
    ///@brief Set the number of hits to read inside each file
-  static void setMaxHits(ulonglong maxHits) {s_maxHits = maxHits; print(s_maxHits, "hits to read");}
+  static void setMaxHits(ulonglong maxHits) {s_maxHits = maxHits; printC(nicer_double(s_maxHits, 4), "hits to read in the file");}
   static auto getMaxHits()                  {return s_maxHits   ;}
   static void setVerbose(int i = 1) {m_verbose = i;}
 

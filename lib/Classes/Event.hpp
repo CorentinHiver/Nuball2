@@ -10,18 +10,21 @@
 #endif //MULTITHREADING
 
 /**
- * @brief Event used for reading and writting event, event building and trigger
+ * @brief Event object used for reading and writing event from/to root files in Nuball2-like TTree format, 
+ * perform event building and trigger for faster to root conversion and data analysis.
+ * 
  * @details
  * 
- * An Event is in principle a collection of Hits. However, in order to be an efficient interface with 
- * ROOT TTree, in practice it consist of a collections of arrays that stores values of a specific branch.
+ * An Event is in principle a collection of Hits, usually in a timing correlation. 
+ * In order to be an efficient interface with ROOT TTree, in practice it is implemented as
+ * a collections of arrays that stores the various fields of the Hit class (see documentation of the later).
  * 
  * The following are public members (i.e. you can call it directly with Event::[array_name])
  * 
- *        int mult = 0;                  Number of hits currently stored in the event.
- *        Timestamp stamp = 0ull;         Absolute timestamp of the whole event
+ *        int mult = 0;                   Number of hits currently stored in the event.
+ *        Timestamp stamp = 0ull;         Absolute timestamp of the whole event unsigned long long
  *        Label   labels  [255] = {0};    Labels of the hits
- *        Time    times   [255] = {0};    Time in ps (Long64_t) relative to the first hit
+ *        Time    times   [255] = {0};    Time in ps (Long64_t = long long in x64 computers) relative either to the first hit or to the pulse 
  *        Time_ns time2s  [255] = {0};    Time in ns (float) relative either to the first hit or to the pulse
  *        ADC     adcs    [255] = {0};    Uncalibrated ADC value of the energy
  *        NRJ     nrjs    [255] = {0};    Calibrated (or simply gain matched) energy value in keV
@@ -33,17 +36,17 @@
  * 
  *        "array[mult]/type"
  * 
- * Only the two first members are not arrays because they are true for the entire event.
+ * Only the two first members - the multiplicity and the timestamp - are stored in the branch as variables and not as arrays.
  * 
  * To read any Nuball2-like TTree : 
  * 
  *        // Loads the TTree or TChain ...
  *        Event event;
- *        event.reading(ttree);
+ *        event.reading(tree);
  * 
  * If you are only interested in a few branches, you can choose them by adding an option : 
  * 
- *        event.reading(ttree, "lst"); // Reads only the multiplicity, label, timestamp and relatative time.
+ *        event.reading(tree, "lst"); // Reads only the multiplicity, label, timestamp and relative time.
  * 
  * Note the multiplicity will always be activated, because it is mandatory to read the root file.
  * 
@@ -57,14 +60,14 @@
  *        E : nrj    energy in keV         float
  *        q : qdc2   energy qdc2 in ADC    float
  *        Q : nrj2   energy qdc2 in keV    float
- *        p : pileup pilepup               bool
+ *        p : pileup pileup                bool
  * 
- * You can access the readed branches via the Event::read member (see the ReadIO struct definition)
+ * You can access the read branches via the Event::read member (see the ReadIO struct definition)
  * 
  * 
- * You can use this class to write in another root tree. To do so, use the Event::writting method : 
+ * You can use this class to write in another root tree. To do so, use the Event::writing method : 
  * 
- *        event.writting(outTree, "lstEQ"); Will write the multiplicity, timestamp, relative time and calibrated energy and QDC2
+ *        event.writing(outTree, "lstEQ"); Will write the multiplicity, timestamp, relative time in ps, calibrated energy and calibrated QDC2
  * 
  * You can as well access the written branches via the Event::write member (see the WriteIO struct definition)
  * 
@@ -77,8 +80,12 @@
  * 
  *        event.push_front(hit);
  * 
- * When the event is complete (e.g. in an event builder), you can for instance write it down or analyse it, then call Event::clear() to empty it.
- * 
+ * When the event is complete (e.g. in an event builder), you can for instance write it down or analyse it.
+ * Especially useful, you can set the reference timestamp of the Event using the Event::setT0 method.
+ * It can be an external reference timestamp like the RF or a particle timestamp for instance.
+ *  
+ * After using it, call Event::clear() to empty the event 
+ * (not necessary if readd from a TTree because TTree::GetEntry overwrites all the fields).
  */
 class Event
 {
@@ -100,8 +107,8 @@ public:
     stamp(event.stamp),
     read (event.read ),
     write(event.write),
-    isReading  (event.isReading),
-    isWritting (event.isWritting)
+    isReading (event.isReading),
+    isWriting (event.isWriting)
   {
     std::copy_n(event.labels   , mult ,  labels );
     std::copy_n(event.times    , mult ,  times  );
@@ -119,7 +126,7 @@ public:
   // Interface with TTree class
   void reading(TTree * tree);
   void reading(TTree * tree, std::string const & options);
-  void writting(TTree * tree, std::string const & options = "lstTeEqQ");
+  void writing(TTree * tree, std::string const & options = "lstTeEqQ");
 
   // Interface with Hit class
   void push_back(Hit const & hit);
@@ -143,7 +150,7 @@ public:
     }
   }
 
-  void timeShift_ns(double const & shift)
+  void timeShift_ns(Time_ns const & shift)
   {
     for (int hit_i = 0; hit_i<mult; hit_i++)
     {
@@ -160,15 +167,15 @@ public:
   size_t const & maxSize() const { return m_maxSize; }
 
   // Accessors :
-  Time_ns time_ns(int const & i) const {return (read.T) ? time2s[i] : Time_ns_cast(times[i])/1000.f;}
+  Time_ns time_ns(int const & i) const {return (read.T || write.T) ? time2s[i] : Time_ns_cast(times[i])/1000.f;}
 
   // State accessors : 
   bool isSingle() const {return (mult == 1);}
   bool isEmpty()  const {return (mult == 0);}
   bool isCalibrated() const 
   {
-         if ( isReading && !isWritting) return read .e && !read .E;
-    else if (!isReading &&  isWritting) return write.e && !write.E;
+         if ( isReading && !isWriting) return read .e && !read .E;
+    else if (!isReading &&  isWriting) return write.e && !write.E;
     else 
     {
       print("Event not connected to any tree yet !");
@@ -179,14 +186,14 @@ public:
   // Public members :
   int mult = 0;
   Timestamp stamp = 0ull;
-  Label   labels  [255] = {0};
-  Time    times   [255] = {0};
-  Time_ns time2s  [255] = {0};
-  ADC     adcs    [255] = {0};
-  NRJ     nrjs    [255] = {0};
-  ADC     qdc2s   [255] = {0};
-  NRJ     nrj2s   [255] = {0};
-  Pileup  pileups [255] = {0};
+  Label     labels  [255] = {0};
+  Time      times   [255] = {0};
+  Time_ns   time2s  [255] = {0};
+  ADC       adcs    [255] = {0};
+  NRJ       nrjs    [255] = {0};
+  ADC       qdc2s   [255] = {0};
+  NRJ       nrj2s   [255] = {0};
+  Pileup    pileups [255] = {0};
       
   // auto const & label  const (int const & hit_i) {return labels [hit_i];}
   auto       & label        (int const & hit_i) {return labels [hit_i];}
@@ -214,7 +221,7 @@ public:
 private:
   size_t m_maxSize = 255;
   bool isReading = false;
-  bool isWritting = false;
+  bool isWriting = false;
 };
 
 Hit Event::operator[](int const & hit_i) 
@@ -248,9 +255,9 @@ inline Event& Event::operator=(Event const & event)
 {
   read  = event.read;
   write = event.write;
-  mult  = event.mult;
   isReading  = event.isReading;
-  isWritting = event.isWritting;
+  isWriting = event.isWriting;
+  mult  = event.mult;
   if (write.s || read.s) stamp = event.stamp;
   if (write.l || read.l) std::copy_n(event.labels   , mult ,  labels );
   if (write.t || read.t) std::copy_n(event.times    , mult ,  times  );
@@ -277,7 +284,7 @@ void inline Event::reading(TTree * tree)
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
   isReading  = true;
-  isWritting = false;
+  isWriting = false;
 
   tree -> ResetBranchAddresses();
 
@@ -311,7 +318,7 @@ void inline Event::reading(TTree * tree, std::string const & options)
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
   isReading  = true;
-  isWritting = false;
+  isWriting = false;
 
   read.setOptions(options);
 
@@ -331,7 +338,7 @@ void inline Event::reading(TTree * tree, std::string const & options)
   tree -> SetBranchStatus("*",true);
 }
 
-void inline Event::writting(TTree * tree, std::string const & options)
+void inline Event::writing(TTree * tree, std::string const & options)
 {
 #ifdef MULTITHREADING
   lock_mutex lock(mutex_events);
@@ -340,7 +347,7 @@ void inline Event::writting(TTree * tree, std::string const & options)
   if (!tree) {print("Output tree at address 0x00 !"); return;}
 
   isReading  = false;
-  isWritting = true;
+  isWriting = true;
 
   write.setOptions(options);  
 
@@ -362,7 +369,8 @@ void inline Event::writting(TTree * tree, std::string const & options)
 inline void Event::push_back(Hit const & hit)
 {
 #ifndef UNSAFE
-  if (mult>254) {print("Event mult > 255 !!"); return;}
+       if (mult>254) {print("Event mult > 255 !!"); return;}
+  else if (mult<0) throw_error("Event mult < 0 !!");
 #endif //UNSAFE
   labels  [mult] = hit.label;
   times   [mult] = Time_cast(hit.stamp-stamp);
@@ -371,7 +379,7 @@ inline void Event::push_back(Hit const & hit)
   qdc2s   [mult] = hit.qdc2;
   nrj2s   [mult] = hit.nrj2;
   pileups [mult] = hit.pileup;
-  mult++;
+  ++mult;
 }
 
 /**
@@ -379,14 +387,15 @@ inline void Event::push_back(Hit const & hit)
  * In such case, we have to put in in front of the others.
  * 
  * @details
- * About the timestamp of the event, we keep the same as this additionnal event is located
+ * About the timestamp of the event, we keep the same as this additional event is located
  * before the first hit that really represents the "0" of the event
  * 
  */
 inline void Event::push_front(Hit const & hit)
 {
 #ifndef UNSAFE
-  if (mult>254) {print("Event mult > 255 !!"); return;}
+       if (mult>254) {print("Event mult > 255 !!"); return;}
+  else if (mult<0) throw_error("Event mult < 0 !!");
 #endif //UNSAFE
   for (auto i = mult; i>0; i--)
   {
@@ -405,12 +414,7 @@ inline void Event::push_front(Hit const & hit)
   qdc2s   [0] = hit.qdc2;
   nrj2s   [0] = hit.nrj2;
   pileups [0] = hit.pileup;
-  mult++;
-}
-
-inline void Event::Print() const
-{
-  print(*this);
+  ++mult;
 }
 
 inline std::ostream& operator<<(std::ostream& cout, Event const & event)
@@ -437,6 +441,11 @@ inline std::ostream& operator<<(std::ostream& cout, Event const & event)
   }
   cout << "--- " << std::endl;
   return cout;
+}
+
+inline void Event::Print() const
+{
+  print(*this);
 }
 
 //////////////////////////

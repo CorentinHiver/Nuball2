@@ -3,12 +3,13 @@
 #include "Builder.hpp"
 /*
   Version 1.2 : removed the "single hit" and directly fills the buffer with the single hit instead
+  obsolete
 
 */
 
 
 /**
- * @brief NOT UP TO DATE !! LATEST STABLE IS EventBuilder_136
+ * @brief NOT UP TO DATE !! LATEST STABLE IS EventBuilder_136 IN 136/conversion_200ns
  * 
  */
 class EventBuilder : public Builder
@@ -64,7 +65,7 @@ Bool_t EventBuilder::build(Hit const & hit)
       m_event -> push_back(hit);
       m_last_hit = m_empty_hit; // m_last_hit is cleared
       coincON = true; // Open the event
-      m_status = 1; // The event can be filled with potential additionnal hits
+      m_status = 1; // The event can be filled with potential additional hits
     }
     else
     {// Case 2 :

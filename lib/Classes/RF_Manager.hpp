@@ -10,17 +10,17 @@
  * 
  * @details
  * 
- * Normal case : the RF reference timestamp is lower than the shifted timestamps (should also be the case of unshifted timestamp)
- * dT = (shifted_time-last_downscale) corresponds to the time separating the current hit to the reference RF
+ * Normal case : the RF reference timestamp is lower than the shifted timestamps (should also be the case of un-shifted timestamp)
+ * dT = (shifted_time-last_downscale_timestamp) corresponds to the time separating the current hit to the reference RF
  * Therefore, N = dT/period corresponds to the number of periods separating the two hits
  * In other words, it is the number of pulses between the reference RF and the current hit
  * Then, period*N is the timestamp of the pulse relative to the current hit
  * (Remember we are doing integer arithmetic, period*dT/period != dT)
  * And dT%period is the rest of the integer division, hence the time between the hit and its relative pulse
- * Finally, one need to substract the applied offset in order to get the correct result :
+ * Finally, one need to subtract the applied offset in order to get the correct result :
  * 
  * When the data is not correctly ordered :
- * In order to get a correct answer, one need to get a positive difference, so to invert the difference : now last_downscale-shifted_time>0
+ * In order to get a correct answer, one need to get a positive difference, so to invert the difference : now last_downscale_timestamp-shifted_time>0
  * But the result is inverted and we obtain really period-timestamp. We get the correct result by doing :
  * relative_timestamp = period - (period-timestamp)
  * 
@@ -34,74 +34,98 @@ public:
   bool setHit(Event const & event, int const & hit_i);
   bool setEvent(Event const & evt);
   void align_to_RF(Event & evt) const;
+  /// Use this when using the relative times are in ns (time2s)
   void align_to_RF_ns(Event & evt) const;
 #endif //EVENT_HPP
-  void static set_offset(Time const & offset) {m_offset = offset;}
-  void static set_offset_ns(Time const & offset_ns) {m_offset = offset_ns*1000;}
+  void static setOffset(Time const & offset) {m_offset = offset;}
+  void static setOffset_ns(Time const & offset_ns) {m_offset = offset_ns*1000;}
+  auto static offset_fs() {return Time_cast(m_offset*1000);}
   auto static const & offset() {return m_offset;}
-  auto static offset_ns() {return m_offset/1000.;}
-  auto period_ns() const {return period/1000.;}
+  auto static offset_ns() {return double_cast(m_offset)/1000.;}
+  auto period_ns() const {return double_cast(period)/1000.;}
   ///@brief Returns the value of the end of the time window ( = period-offset)
-  auto last_time_ns() const {return (period-m_offset)/1000.;}
-  void set_period_ns(Time const & _period) {period = _period*1000;}
-  Timestamp refTime(Timestamp const & timestamp) const {return timestamp - pulse_ToF(timestamp);}
+  auto lastTime_ns() const {return double_cast(period-m_offset)/1000.;}
+  void setPeriod(Time const & _period) {period = _period*1000;}
+  void setPeriod_ns(Time const & _period) {period = _period*1000;}
+  /// @brief Returns the timestamp of the reference RF
+  Timestamp refTime(Timestamp const & timestamp) const {return timestamp - relTime(timestamp);}
 
-  Time pulse_ToF(Timestamp const & timestamp) const
+  Time relTime(Timestamp const & timestamp) const
   {
-    // Shifts the timestamp in order to be able to get hits before the 0 :
-    Timestamp const & shifted_timestamp = timestamp + m_offset; 
-
     if (period == 0) throw std::runtime_error("RF period = 0 !!!");
 
-    // auto const & period_fm = Timestamp_cast(period*1000);
+    // Shifts the timestamp in order to be able to get hits before the 0. Indeed, we calculate the relative time using a modulo. 
+    // With no shift, the relative time is always positive (there cannot be negative result out of the modulo operation).
+    // Therefore, the time is first shifted of m_offset picoseconds and then the modulo operation is performed.
+    // Then the output is shifted back in order to obtain the correct relative time (-> the minimum relative time is -m_offset).
+    Timestamp const & shifted_timestamp = timestamp + m_offset;
+    // This is the time separating the shifted timestamp to the last downscaled RF
+    // It is casted to Time (long long signed int) because it is supposed to fit in the range [-9.2e18, 9.2e18] for x64 architectures (should be ok for 32 bits but be careful)
+    // In the frame of this code, Time is used to represent the relative times in picoseconds
+    auto const & rf_time = Time_cast(shifted_timestamp-last_downscale_timestamp); 
 
-    if (shifted_timestamp>last_downscale)
+    // Now, there are two possibilities. Normally, the reference timestamp is lower than the shifted timestamp.
+    // But in some cases, the reference timestamp is higher than the shifted timestamp (when looking "in the past").
+    // The following allows one to have valid relative times for both situations :
+    if (shifted_timestamp>last_downscale_timestamp)
     {// Normal case
-      auto const & rf_time = (shifted_timestamp-last_downscale);
-      auto const & relative_time = Time_cast((rf_time%period));
+      auto const & relative_time = Time_cast((rf_time%period)); // This is the time separating the shifted timestamp to the t0 of the current pulse.
+      return relative_time - m_offset; // Shifts back to obtain the correct relative time
+    }
+    else if (rf_time<0)
+    {// When the RF timestamp is larger than the hit's
+      auto const & relative_time = Time_cast((period - (-rf_time)%period)); 
+      histo_rf.Fill(relative_time - m_offset);
       return relative_time - m_offset;
     }
-    else
-    {// When the RF is found after the hit
-      auto const & reversed_rf_time = (last_downscale-timestamp-m_offset);
-      auto const & relative_time =Time_cast((period - (reversed_rf_time)%period));
-      return relative_time - m_offset;
+    else 
+    {
+      throw_error("FATAL : inconsistency in the timestamps !!! in RF_Manager::relTime()");
     }
   }
-  Time pulse_ToF(Hit const & hit) const {return pulse_ToF(hit.stamp);}
+  Time relTime(Hit const & hit) const {return relTime(hit.stamp);}
 
   template<class... ARGS>
-  float pulse_ToF_ns(ARGS... args) {return (static_cast<float>(pulse_ToF(std::forward<ARGS>(args)...))/1000.f);}
+  float relTime_ns(ARGS... args) {return (static_cast<float>(relTime(std::forward<ARGS>(args)...))/1000.f);}
 
   void inline set(Timestamp new_timestamp, Timestamp _period) 
   {
-    auto const & tperiod = Time_cast(new_timestamp-last_downscale);
-    if (tperiod > 0 && tperiod<1.5*period*1000000) period = double_cast(tperiod)/1000.;
+    auto const & tPeriod = Time_cast(new_timestamp-last_downscale_timestamp);
+
+    // The RF is downscaled every 1000 RF pulses. 
+    // There are two cases : either the RF is indeed downscaled as expected 
+    // and the difference of timestamps should be in the order of 1000 RF pulses:
+    if (tPeriod > 0 && tPeriod<Time_cast(1.5*double_cast(period))*1000000) period = Time_cast(double_cast(tPeriod)/1000.);
+
+    // If it is not, then use the period provided by the user :
     else period = double_cast(_period);
-    last_downscale = new_timestamp;
+
+    // Either way, we need to update the timestamp of the last downscale RF :
+    last_downscale_timestamp = new_timestamp;
   }
 
 
   // Attributes :
 
-  Timestamp last_downscale = 0;
+  Timestamp last_downscale_timestamp = 0;
 
   Time period = 0;
 
-  thread_local static Label label;
+  static Label label;
 
 private:
-  thread_local static Time m_offset;
+  static Time m_offset;
 };
 
-thread_local Time  RF_Manager::m_offset = 50000 ;
-thread_local Label RF_Manager::label = 251;
+Time  RF_Manager::m_offset = 50000;
+Label RF_Manager::label = 251;
 
 bool inline RF_Manager::setHit(Hit const & hit)
 {
   if (hit.label == this -> label)
   {
-    this -> set(hit.stamp, Timestamp_cast((hit.adc == 0) ? hit.nrj : hit.adc));
+    if (hit.adc == 0) this -> set(hit.stamp,Timestamp_cast(hit.nrj));
+    else              this -> set(hit.stamp,Timestamp_cast(hit.adc));
     return true;
   }
   else return false;
@@ -115,7 +139,9 @@ bool inline RF_Manager::setEvent(Event const & event)
 {
   if (event.labels[0] == this -> label)
   {
-    this -> set(event.stamp, Timestamp_cast((event.adcs[0] == 0) ? event.nrjs[0] : event.adcs[0]));
+    
+    if (event.adcs[0] == 0) this -> set(event.stamp,Timestamp_cast(event.nrjs[0]));
+    else                    this -> set(event.stamp,Timestamp_cast(event.adcs[0]));
     return true;
   }
   else return false;
@@ -125,10 +151,9 @@ bool inline RF_Manager::setHit(Event const & event, int const & hit_i)
 {
   if (event.labels[hit_i] == RF_Manager::label)
   {
-    this -> set(
-      event.stamp + event.times[hit_i], 
-      Timestamp_cast((event.adcs[hit_i] == 0) ? event.nrjs[hit_i] : event.adcs[hit_i])
-    );
+    auto const & new_timestamp = event.stamp + event.times[hit_i];
+    if (event.adcs[0] == 0) this -> set(new_timestamp, Timestamp_cast(event.nrjs[0]));
+    else                    this -> set(new_timestamp, Timestamp_cast(event.adcs[0]));
     return true;
   }
   else return false;
@@ -136,12 +161,12 @@ bool inline RF_Manager::setHit(Event const & event, int const & hit_i)
 
 void inline RF_Manager::align_to_RF(Event & event) const
 {
-  event.setT0(pulse_ToF(event.stamp));
+  event.setT0(relTime(event.stamp));
 }
 
 void inline RF_Manager::align_to_RF_ns(Event & event) const
 {
-  auto const & rf_Ref = pulse_ToF(event.stamp);
+  auto const & rf_Ref = relTime(event.stamp);
   event.stamp -= rf_Ref;
   for (int i = 0; i<event.mult; i++)
   {
@@ -153,7 +178,7 @@ void inline RF_Manager::align_to_RF_ns(Event & event) const
 
 std::ostream& operator<<(std::ostream& cout, RF_Manager const & rf)
 {
-  cout << "period : " << rf.period << "ps last timestamp : " << rf.last_downscale << "ps" << std::endl;
+  cout << "period : " << rf.period << "ps last timestamp : " << rf.last_downscale_timestamp << "ps" << std::endl;
   return cout;
 }
 

@@ -165,13 +165,22 @@ private:
   std::string m_filename;
   bool m_ok = false;
   Label m_nb_det = 0;
-  Label m_size = 0;
+  int m_size = 0;
   std::vector<char> m_order;
   std::vector<float> m_intercept;
   std::vector<float> m_slope;
   std::vector<float> m_binom;
   std::vector<float> m_trinom;
   std::vector<std::vector<std::vector<float>>> calibration_tables; // TODO
+
+public:
+  class NotFound
+  {public:
+    NotFound(std::string const & filename) : m_filename(filename) {print(RED, filename, "not found", RESET);}
+    std::string const & getFilename() const {return m_filename;}
+  private:
+    std::string const & m_filename;
+  };
 };
 
 /// @brief Applies the calibration coefficients of the given label to the given energy

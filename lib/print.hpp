@@ -78,7 +78,7 @@ void println(T const & t, T2 const &... t2) {std::cout << t; println(t2...);}
 /// @brief Set the floating point precision displayed.
 void print_precision(int n = 6) {std::cout << std::setprecision(n);}
 
-/// @brief Requires #define DEBUG or -DDEBUG in the compile line
+/// @brief Requires #define DEBUG or -D DEBUG in the compile line
 template <class... ARGS> void debug(ARGS &&... args) 
 {
 #ifdef DEBUG
@@ -134,7 +134,7 @@ void println(T const & t, T2 const &... t2) {print_mutex.lock(); std::cout << t;
 /// @brief Set the floating point precision displayed.
 void print_precision(int n = 6) {print_mutex.lock(); std::cout << std::setprecision(n); print_mutex.unlock();}
 
-/// @brief Requires #define DEBUG or -DDEBUG in the compile line
+/// @brief Requires #define DEBUG or -D DEBUG in the compile line
 template <class... ARGS> void debug(ARGS &&... args) 
 {
 #ifdef DEBUG
@@ -161,7 +161,7 @@ std::string type_of(T const & t)
   return typeid(t).name();
 }
 
-// Specialised printing function :
+// Specialized printing function :
 /// @brief Print in bright black
 template <class... T>
 void warning(T const & ... t)

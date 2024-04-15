@@ -10,13 +10,13 @@ public:
   Alignator(TTree* tree) : m_tree(tree) {loadNewIndex();}
 
   /// @brief TBD
-  Alignator(TTree* inputTree, TTree* outputTree) : 
-    m_tree(inputTree), 
-    m_out_tree(outputTree) 
-  {
-    loadNewIndex();
-    align();
-  }
+  // Alignator(TTree* inputTree, TTree* outputTree) : 
+  //   m_tree(inputTree), 
+  //   m_out_tree(outputTree) 
+  // {
+  //   loadNewIndex();
+  //   align();
+  // }
 
   auto const & operator[](int const & i) const {return m_index[i];}
 
@@ -45,7 +45,7 @@ private:
   ULong64_t m_cursor = 0;
   std::vector<int> m_index;
   TTree* m_tree;
-  TTree* m_out_tree;
+  // TTree* m_out_tree; // TBD
 };
 
 void Alignator::loadNewIndex()

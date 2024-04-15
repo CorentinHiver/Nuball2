@@ -2,7 +2,7 @@
 #define MTTHIST_HPP
 // #define MTTHIST_MONO
 #include "MTObject.hpp"
-#include "MTCounter.hpp"
+#include "../libRoot.hpp"
 
 /**
  * @brief Multithreading wrapper for all THist spectra of root library
@@ -26,10 +26,10 @@
  * Or
  * 
  *      MTTHist<TH1F> some_TH1F_histo;
- *      some_TH1F_histo.reset("name", "title:xaxis:yaxis", bins, min, max);
+ *      some_TH1F_histo.reset("name", "title:xAxis:yAxis", bins, min, max);
  * 
  * In default mode, [nb_threads] sub_histograms are created
- * \test In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPPEMENT
+ * \test In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPMENT
  * 
  * To fill the histogram from within one thread : 
  * 
@@ -63,14 +63,14 @@ class MTTHist
 {
 public:
 
-  /// @brief Construct a new MTTHist object and send the arguments directly to the underlying root histogramm
+  /// @brief Construct a new MTTHist object and send the arguments directly to the underlying root histogram
   template <class... ARGS>
   MTTHist(ARGS &&... args) 
   {
     this -> reset(std::forward<ARGS>(args)...);
   }
 
-  /// @brief Default initialisator
+  /// @brief Default initializator
   template <class... ARGS>
   MTTHist()
   {
@@ -93,7 +93,7 @@ public:
     else
     {
       m_collection.push_back(hist);
-      m_is_merged = m_outscope = true;
+      m_is_merged = m_outScope = true;
       m_exists = true; 
       m_integral = hist->Integral();
       m_name     = hist->GetName ();
@@ -115,7 +115,7 @@ public:
       this -> clean();
       if (m_collection.size()<1) m_collection.reserve(1);
       m_merged = hist; m_is_merged = true; 
-      m_exists = m_outscope = true; m_integral = hist->Integral(); 
+      m_exists = m_outScope = true; m_integral = hist->Integral(); 
       m_name = hist->GetName(); m_title = hist->GetTitle();
     }
   }
@@ -187,12 +187,12 @@ public:
   // void operator=(std::nullptr_t) {reset(nullptr);}
 
 
-  // // ---   GENERIC INSTANCIATION --- //
+  // ---   GENERIC INSTANTIATION --- //
 
-  /// @brief Copy Initialiser.
+  /// @brief Copy Initializer.
   MTTHist<THist> & reset(MTTHist<THist> const & hist) 
   { 
-    // Execution stops here : it is fobidden so far to copy this object !!
+    // Execution stops here : it is forbidden so far to copy this object !!
     throw CopyError(hist);
 
     // If want to use this constructor, one has to make the following good looking
@@ -217,17 +217,17 @@ public:
     return this->reset(hist);
   }
 
-  // // /**
-  // //  * @brief Unsafe
-  // // */
-  // // template <class... ARGS>
-  // // void reset(THist *hist) {m_exists = true; m_merged = hist;}
+    // /**
+    //  * @brief Unsafe
+    // */
+    // template <class... ARGS>
+    // void reset(THist *hist) {m_exists = true; m_merged = hist;}
 
-  // //Default initialiser, to create a zombie :
+  // Default initializer, to create a zombie :
   // template <class... ARGS>
   // void reset() {m_exists = false;}
 
-  //Nullptr initialiser :
+  //Nullptr initializer :
   template <class... ARGS>
   void reset(std::nullptr_t)
   {
@@ -236,7 +236,7 @@ public:
     if (MTObject::ON) for (auto & histo : m_collection) delete histo;
   }
 
-  //General initialiser to construct any root histogram vector starting with its name:
+  //General initializer to construct any root histogram vector starting with its name:
   template <class... ARGS>
   void reset(std::string name, ARGS &&... args);
 
@@ -331,7 +331,7 @@ private:
 
   bool m_exists   = false;
   bool m_written  = false;
-  bool m_outscope = false;
+  bool m_outScope = false;
   
   ulonglong m_integral = 0ull;
 
@@ -543,7 +543,7 @@ THist* MTTHist<THist>::Merged()
 //       ) return;
 //   else
 //   {
-//     if (m_verbose) print("writting", m_name);
+//     if (m_verbose) print("writing", m_name);
 //     m_collection[thread_index] -> Write();
 //     delete m_collection[thread_index];
 //     m_written = true;
@@ -555,7 +555,7 @@ void MTTHist<THist>::Write()
 {
   if (m_exists && m_is_merged)
   {// If the histogram has already been merged
-    if (m_verbose) print("writting", m_name);
+    if (m_verbose) print("writing", m_name);
     m_merged -> Write(m_name.c_str(), TROOT::kOverwrite);
     m_written = true;
   }
@@ -569,7 +569,7 @@ void MTTHist<THist>::Write()
         || (m_merged -> Integral() < 1)) return;
     else
     {
-      if (m_verbose) print("writting", m_name);
+      if (m_verbose) print("writing", m_name);
       m_merged -> Write(m_name.c_str(), TROOT::kOverwrite);
       m_written = true;
     }
@@ -609,7 +609,7 @@ MTTHist<THist>::~MTTHist()
   // print(*this);
 
 #ifndef MTTHIST_MONO
-  // else if (!MTObject::ON && !m_merged_deleted && m_exists && !m_outscope)
+  // else if (!MTObject::ON && !m_merged_deleted && m_exists && !m_outScope)
   // {
   //   m_merged_deleted = true;
   // }
