@@ -8,7 +8,9 @@
 #include <libCo.hpp>
 
 #include <MTTHist.hpp>
-MTTHist<TH1F> histo_rf;
+MTTHist<TH1F> histo_mult_trigger;
+MTTHist<TH1F> clover_histo;
+MTTHist<TH1F> histo_mult;
 
 
 #include <FasterReader.hpp>   // This class is the base for mono  threaded code
@@ -222,7 +224,11 @@ int main(int argc, char** argv)
   MTObject::adjustThreadsNumber(nb_files);
   MTObject::Initialise();
 
-  histo_rf.reset("dT","dT", 10000,-100000, 1000000);
+
+  // Initialise the histograms
+  histo_mult_trigger.reset("mult_trig","mult_trig", 50,-1, 50);
+  clover_histo.reset("clover","clover", 50,-1, 50);
+  histo_mult.reset("mult","mult", 50,-1, 50);
 
   // Setup the path accordingly to the machine :
   Path dataPath = Path::home();
@@ -259,7 +265,7 @@ int main(int argc, char** argv)
   while(runs.getNext(run))
   {
     MTCounter total_read_size;
-    Timer timer;
+    Timer timer_total;
     auto const & run_path = manipPath+run;
     auto const & run_name = removeExtension(run);
 
@@ -424,9 +430,9 @@ int main(int argc, char** argv)
       // --------------------------------- //
       Timer convert_timer;
       auto const & nb_data = tempTree->GetEntries();
-      ulong hits_count = 0;
       ulong evts_count = 0;
       ulong trig_count = 0;
+      ulong trig_hits_count = 0;
       while (loop<nb_data)
       {
         tempTree -> GetEntry(gindex[++loop]);
@@ -448,13 +454,16 @@ int main(int argc, char** argv)
         if (eventBuilder.build(hit))
         {// Here, the event is made at least of 2 hits (if the Builder::keepSingles() is activated, can be only one)
          // in coincidence within the time window centered around the pulsation t0 (between -rf_shift and period-rf_shift)
-          evts_count++;
+          ++evts_count;
           if (max_hits_in_event > 0  &&  event.mult > max_hits_in_event) continue;
           counter.count();
-          if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "Mevts");
+          clover_histo.Fill(event.mult);
+          histo_mult.Fill(event.mult);
+          if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "MEvts");
           if (trigger(counter))
           {
-            hits_count+=event.size();
+            trig_hits_count+=event.size();
+            histo_mult_trigger.Fill(event.mult);
             ++trig_count;
 
             outTree->Fill();
@@ -465,7 +474,8 @@ int main(int argc, char** argv)
       print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
       Timer write_timer;
 
-      // Initialise output TTree :
+      // Write output TTree in file :
+
       unique_TFile outFile (TFile::Open(outfile.c_str(), "RECREATE"));
       outFile -> cd();
       outTree -> SetDirectory(outFile.get());
@@ -477,30 +487,33 @@ int main(int argc, char** argv)
       auto outSize  = float_cast(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
 
       print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
-            "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(hits_count))/double_cast(nb_data),"% hits kept");
+            "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(trig_hits_count))/double_cast(nb_data),"% hits kept");
     });
 
-    print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer.TimeSec(), "Mo/s");
+    print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer_total.TimeSec(), "Mo/s");
+
+    // Merging the files using hadd command from ROOT software :
 
     Path outDataPath(outPath.string() + "/" + run_name);
     Path outMergedPath (outPath.string()+"merged", true);
     File outMergedFile (outMergedPath, run_name+".root");
 
-    if (outMergedFile.exists())
-    {
-      if (overwrite) system(("rm " + outMergedFile.string()).c_str());
-      else continue;
-    }
+    if (outMergedFile.exists() && !overwrite) continue;
 
     auto nb_threads_hadd = int_cast(std::thread::hardware_concurrency()*0.25);
     auto const & outRootName = outMergedPath.string() + run_name + ".root ";
     std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads_hadd) + " " + outRootName + outDataPath.string() + run_name + "_*.root";
+    if (overwrite) merge_command+= "-f";
+    print(merge_command);
     system(merge_command.c_str());
 
-    // Write down the histograms.
+    // Write down the histograms :
+
     unique_TFile histoFile (TFile::Open(outRootName.c_str(), "UPDATE"));
     histoFile->cd();
-    histo_rf.Write();
+    histo_mult_trigger.Write();
+    clover_histo.Write();
+    histo_mult.Write();
     histoFile->Close();
   }
   return 0;

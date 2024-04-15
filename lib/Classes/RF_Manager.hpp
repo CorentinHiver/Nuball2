@@ -80,6 +80,7 @@ public:
     else 
     {
       throw_error("FATAL : inconsistency in the timestamps !!! in RF_Manager::relTime()");
+      return 0;
     }
   }
   Time relTime(Hit const & hit) const {return relTime(hit.stamp);}

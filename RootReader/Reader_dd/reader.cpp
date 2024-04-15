@@ -8,12 +8,15 @@
 #include <RWMat.hxx>
 #include <MTList.hpp>
 
-// Version 2 : reads the root files with the double delayed between0 0 and 200 and the previous hits between -800 and 0.
-// Current : reads the root files with the double delayed between0 0 and n_pulses*200 and the prompt at 0
+// Version 2 : reads the root files with the double delayed between 0 and 200 and the previous hits between -n_pulses*200 and 0.
+
+// Version 3 (current) : reads the root files with the double delayed between 0 and n_pulses*200 and the prompt at 0
+// 
 
 bool simple_d = false;
 bool read_129 = false;
 bool read_C2 = false;
+bool read_new = false;
 std::string trigger = "dd";
 
 Label_vec const blacklist = {800, 801};
@@ -22,7 +25,7 @@ std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 
                                                    {135, 8500}, {136, 9000}, {142, 6000}, {145, 8000}, {146, 9000},
                                                    {147, 9000}, {157, 9000}, {158, 9000}, {159, 9000}};
 
-std::string g_outfilename = "tests.root";
+std::string g_out_filename = "tests.root";
 int nb_threads = -1;
 
 inline float smear(float const & nrj, Label const & label, TRandom* random)
@@ -48,12 +51,12 @@ inline float smear(float const & nrj, Label const & label)
 class Analysator
 {
 public:
-  Analysator(int const & number_files, std::string const & datapath)
-  // Analysator(int const & number_files, std::string const & datapath = "~/nuball2/N-SI-136-root_dd/")
+  Analysator(int const & number_files, std::string const & data_path)
+  // Analysator(int const & number_files, std::string const & data_path = "~/nuball2/N-SI-136-root_dd/")
   {
-    print("reading", datapath);
+    print("reading", data_path);
     this->Initialise();
-    MTRootReader reader(datapath, number_files);
+    MTRootReader reader(data_path, number_files);
     print("Launching the reader");
     reader.read([&](Nuball2Tree & tree, Event & event){this->analyse(tree, event);});
     write();
@@ -188,7 +191,7 @@ private:
   MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
   MTTHist<TH2F> delayed_Ge_C3_tot3_VS_total_Ge;
   
-  // simple clean Ge delayed trigger :
+  // Simple clean Ge delayed trigger :
   MTTHist<TH2F> delayed_Ge_C1_VS_prompt_Ge;
   MTTHist<TH2F> delayed_Ge_C1_VS_delayed_calo;
 
@@ -260,7 +263,7 @@ void Analysator::Initialise()
   prompt_calo_E.reset("prompt_calo_E" , "prompt calorimetry;E[keV]" , 5000,0,10000);
   closest_prompt_calo_histo.reset("closest_prompt_calo_histo" , "closest prompt calorimetry;E[keV]" , 5000,0,10000);
   delayed_calo.reset("delayed_calo", "delayed calorimetry;E[keV]", 5000,0,10000);
-  prompt_delayed_calo.reset("prompt_delayed_calo", "Delayed VS clostest prompt calorimetry;Prompt Calorimetry[keV];Delayed Calorimetry[keV]", 
+  prompt_delayed_calo.reset("prompt_delayed_calo", "Delayed VS closest prompt calorimetry;Prompt Calorimetry[keV];Delayed Calorimetry[keV]", 
       1000,0,20000, 1000,0,20000);
   delayed_Ge_VS_delayed_calo.reset("delayed_Ge_VS_delayed_calo", "Delayed Ge VS delayed calorimetry;Delayed Calorimetry[keV];E[keV]", 
       500,0,10000, 5000,0,10000);
@@ -293,7 +296,7 @@ void Analysator::Initialise()
   dd_wp.reset("dd_wp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
   dd_wpp.reset("dd_wpp", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
   dd_wppE.reset("dd_wppE", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
-  dp.reset("dp", "delaed VS prompt;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  dp.reset("dp", "delayed VS prompt;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
 
   spectra_all.reset("spectra_all", "Spectra;label;Energy [keV]", 1000,0,1000, 10000,0,10000);
 
@@ -407,13 +410,13 @@ MTObject::mutex.unlock();
   if (g_nb_max_hits>-1) nb_evts = g_nb_max_hits;
   for (int evt_i = 0; evt_i<nb_evts; ++evt_i)
   { // Iterate over the events of the file
-    if(evt_i>0 && evt_i%int_cast(1.e+7) == 0) print(evt_i/1.e+6, "Mevts"); 
+    if(evt_i>0 && evt_i%int_cast(1.e+7) == 0) printC(nicer_double(evt_i), "evts"); 
 
     tree->GetEntry(evt_i);
 
     if (rf.setEvent(event)) continue;
+  
   #ifndef QUALITY
-
     isNaI   .resize(event.mult, false);
     isLaBr  .resize(event.mult, false);
     rejected.resize(event.mult, false);
@@ -830,10 +833,10 @@ MTObject::mutex.unlock();
 void Analysator::write()
 {
 #ifdef QUALITY
-  g_outfilename = "run_quality.root";
+  g_out_filename = "run_quality.root";
 #endif //QUALITY
-  g_outfilename+="_"+trigger;
-  auto outfile(TFile::Open(g_outfilename.c_str(), "RECREATE"));
+  g_out_filename+="_"+trigger;
+  auto outfile(TFile::Open(g_out_filename.c_str(), "RECREATE"));
   outfile->cd();
 
 #ifndef QUALITY
@@ -968,7 +971,7 @@ void Analysator::write()
 
   outfile->Write();
   outfile->Close();
-  print(g_outfilename, "written");
+  print(g_out_filename, "written");
 }
 
 void reader(int number_files = -1)
@@ -980,6 +983,7 @@ void reader(int number_files = -1)
   if (read_129) run_name = "N-SI-129";
   if (simple_d) trigger = "d";
   else if (read_C2) trigger = "C2";
+  else if (read_new) trigger = "PrM1DeC1";
   Analysator analysator(number_files, path+run_name+"-root_"+trigger+"/merged/");
 }
 
@@ -994,15 +998,20 @@ int main(int argc, char** argv)
     else if (param == "-n") Analysator::setMaxHits(std::stoi(argv[++i]));
     else if (param == "-d") 
     {
-      if(read_C2) throw_error("Can't have both -d and --C2"); 
+      if(read_C2 || read_new) throw_error("Can't have more than one trigger"); 
       simple_d = true;
     }
     else if (param == "-m") nb_threads = std::stoi(argv[++i]);
     else if (param == "--129") read_129 = true;
     else if (param == "--C2") 
     {
-      if(simple_d) throw_error("Can't have both -d and --C2"); 
+      if(simple_d || read_new) throw_error("Can't have more than one trigger"); 
       read_C2 = true;
+    }
+    else if (param == "--new") 
+    {
+      if(simple_d || read_C2) throw_error("Can't have more than one trigger"); 
+      read_new = true;
     }
     else
     {
@@ -1011,6 +1020,7 @@ int main(int argc, char** argv)
       print("-n : number of hits per file");
       print("-d : single clean Ge trigger");
       print("-C2 : 2 clean Ge in the 200ns time window");
+      print("--new: the M1 prompt C1 delayed trigger");
       print("-m : number of threads");
       print("--129 : read N-SI-129 data");
       exit(42);

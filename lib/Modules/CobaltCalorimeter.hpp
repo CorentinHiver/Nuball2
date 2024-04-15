@@ -19,7 +19,7 @@ public:
   void loadCalibration(Calibration calib) {m_calib = calib;}
   void loadTimeshifts(Timeshifts timeshifts) {m_timeshifts = timeshifts;}
   void setTimewindow_ns(Time_ns const & time_ns) {m_timewindow = Time_cast(time_ns*1000);}
-  void setOutName(std::string const & outfilename) {m_outfilename = outfilename;}
+  void setOutName(std::string const & outFilename) {m_outFilename = outFilename;}
 
   void Initialise();
   void launchRoot(std::string const & foldername, int nb_files = -1);
@@ -43,7 +43,7 @@ private:
   Time m_timewindow = 100000;
   Calibration m_calib;
   Timeshifts m_timeshifts;
-  std::string m_outfilename = "CobaltCalorimetry.root";
+  std::string m_outFilename = "CobaltCalorimetry.root";
 
   // Internal variables :
   int m_nb_trigg = 0;
@@ -56,11 +56,11 @@ private:
   int m_maxE = 1339;
   // int m_minE = 1169;
   // int m_maxE = 1179;
-  double m_calo_totale = 0.0;
-  double m_calo_totale_Ge = 0.0;
-  double m_calo_totale_BGO = 0.0;
-  double m_calo_totale_LaBr3 = 0.0;
-  double m_calo_totale_NaI = 0.0;
+  double m_calo_total = 0.0;
+  double m_calo_total_Ge = 0.0;
+  double m_calo_total_BGO = 0.0;
+  double m_calo_total_LaBr3 = 0.0;
+  double m_calo_total_NaI = 0.0;
 
   // Histograms :
   
@@ -344,11 +344,11 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
   thread_local int nb_trigg_NaI = 0;
 
   thread_local int nb_missed = 0;
-  thread_local double calo_totale = 0;
-  thread_local double calo_totale_Ge = 0;
-  thread_local double calo_totale_BGO = 0;
-  thread_local double calo_totale_LaBr = 0;
-  thread_local double calo_totale_NaI = 0;
+  thread_local double calo_total = 0;
+  thread_local double calo_total_Ge = 0;
+  thread_local double calo_total_BGO = 0;
+  thread_local double calo_total_LaBr = 0;
+  thread_local double calo_total_NaI = 0;
 
   Bools isNaI;
   Bools isRejected;
@@ -469,17 +469,17 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
       auto const & nb_Paris    = nb_LaBr     + nb_NaI;
 
       // Get the sum of the total calorimetry :
-      calo_totale     +=calorimetry;
-      calo_totale_Ge  +=calorimetry_Ge;
-      calo_totale_BGO +=calorimetry_BGO;
-      calo_totale_LaBr+=calorimetry_LaBr;
-      calo_totale_NaI +=calorimetry_NaI;
+      calo_total     +=calorimetry;
+      calo_total_Ge  +=calorimetry_Ge;
+      calo_total_BGO +=calorimetry_BGO;
+      calo_total_LaBr+=calorimetry_LaBr;
+      calo_total_NaI +=calorimetry_NaI;
       nb_trigg_Ge  += nb_Ge;
       nb_trigg_BGO += nb_BGO;
       nb_trigg_LaBr+= nb_LaBr;
       nb_trigg_NaI += nb_NaI;
       
-      // Fill calorimeter polts :
+      // Fill calorimeter plots :
       if (multiplicity>0)
       {
         spectrum_calorimetry.Fill(calorimetry);
@@ -647,11 +647,11 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
     lock_mutex(MTObject::mutex);
     m_nb_trigg    += nb_trigg;
     m_nb_missed   += nb_missed;
-    m_calo_totale += calo_totale;
-    m_calo_totale_Ge    += calo_totale_Ge;
-    m_calo_totale_BGO   += calo_totale_BGO;
-    m_calo_totale_LaBr3 += calo_totale_LaBr;
-    m_calo_totale_NaI   += calo_totale_NaI;
+    m_calo_total += calo_total;
+    m_calo_total_Ge    += calo_total_Ge;
+    m_calo_total_BGO   += calo_total_BGO;
+    m_calo_total_LaBr3 += calo_total_LaBr;
+    m_calo_total_NaI   += calo_total_NaI;
     m_nb_trigg_Ge   += nb_trigg_Ge;
     m_nb_trigg_BGO  += nb_trigg_BGO;
     m_nb_trigg_LaBr += nb_trigg_LaBr;
@@ -678,7 +678,7 @@ void CobaltCalorimeter::Analyse()
   auto const & PE_efficiency = (integral_peak-background_peak)/m_nb_trigg;
 
   print("Total energy released =", total_energy);
-  print("calo totale : ", m_calo_totale);
+  print("calo total : ", m_calo_total);
 
   print("counting efficiency :", int_cast(counting_efficiency*100.)       , "%");
   print("counting in Ge : "    , m_nb_trigg_Ge, int_cast(100.*m_nb_trigg_Ge  /m_nb_trigg), "%");
@@ -686,15 +686,15 @@ void CobaltCalorimeter::Analyse()
   print("counting in LaBr : "  , m_nb_trigg_LaBr, int_cast(100.*m_nb_trigg_LaBr/m_nb_trigg), "%");
   print("counting in NaI : "   , m_nb_trigg_NaI, int_cast(100.*m_nb_trigg_NaI /m_nb_trigg), "%");
 
-  print("total efficiency : "  , int_cast(100.*m_calo_totale/total_energy)       , "%");
-  print("calo totale Ge : "    , int_cast(100.*m_calo_totale_Ge/m_calo_totale)   , "%");
-  print("calo totale BGO : "   , int_cast(100.*m_calo_totale_BGO/m_calo_totale)  , "%");
-  print("calo totale LaBr3 : " , int_cast(100.*m_calo_totale_LaBr3/m_calo_totale), "%");
-  print("calo totale NaI : "   , int_cast(100.*m_calo_totale_NaI/m_calo_totale)  , "%");
+  print("total efficiency : "  , int_cast(100.*m_calo_total/total_energy)       , "%");
+  print("calo total Ge : "    , int_cast(100.*m_calo_total_Ge/m_calo_total)   , "%");
+  print("calo total BGO : "   , int_cast(100.*m_calo_total_BGO/m_calo_total)  , "%");
+  print("calo total LaBr3 : " , int_cast(100.*m_calo_total_LaBr3/m_calo_total), "%");
+  print("calo total NaI : "   , int_cast(100.*m_calo_total_NaI/m_calo_total)  , "%");
 
   print("full energy efficiency : ", int_cast(PE_efficiency*100.), "%");
 
-  pauseCo();
+  // pauseCo();
 
   print("----------------");
 
@@ -703,10 +703,10 @@ void CobaltCalorimeter::Analyse()
 
 void CobaltCalorimeter::write()
 {
-  File outfilename(m_outfilename);
-  outfilename.setExtension("root");
-  auto outfile(TFile::Open(outfilename.c_str(), "RECREATE"));
-  if (!outfile) throw_error(concatenate("Can't create outfile ", outfilename.c_str()).c_str());
+  File outFilename(m_outFilename);
+  outFilename.setExtension("root");
+  auto outfile(TFile::Open(outFilename.c_str(), "RECREATE"));
+  if (!outfile) throw_error(concatenate("Can't create outfile ", outFilename.c_str()).c_str());
 
   outfile->cd();
   // labels.Write();
@@ -807,7 +807,7 @@ void CobaltCalorimeter::write()
 
   outfile->Write();
   outfile->Close();
-  print(outfilename, "written");
+  print(outFilename, "written");
 }
 
 
