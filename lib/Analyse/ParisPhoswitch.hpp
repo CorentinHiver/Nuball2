@@ -42,7 +42,7 @@ void inline ParisPhoswitch::Reset()
 
 void ParisPhoswitch::Fill(Event const & event, int const & i)
 {
-  time = (event.read.t) ? Time_ns_cast(event.times[i])/1000.f : event.time2s[i];
+  time = event.times[i];
   nrj = NRJ_cast(event.nrjs[i]);
   nrj2 = NRJ_cast(event.nrj2s[i]);
   m_state = test_gate_classic();
@@ -58,6 +58,8 @@ char inline ParisPhoswitch::test_gate_classic()
   else                   return -1;
 }
 
+/// @brief 
+/// @todo 
 char inline ParisPhoswitch::test_gate_tan()
 {
   ratio = TMath::Tan((nrj2-nrj)/nrj2);

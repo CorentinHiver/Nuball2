@@ -574,7 +574,7 @@ inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
       // --- Clovers managing: ---//
 
       // Counts the number of BGO crystals that fired in the clover :
-      clover.nb_BGO++;
+      clover.nbBGO++;
 
       // Fill the vector containing the list of BGO clovers that fired :
 
@@ -602,12 +602,12 @@ inline void Clovers::Analyse()
       // Fill the vector containing the list of Ge clovers that fired :
       Ge.push_back(index);
       totGe+=clover.nrj;
-      if (clover.nb_BGO==0) CleanGe.push_back(index);
+      if (clover.nbBGO==0) CleanGe.push_back(index);
       else RejectedGe.push_back(index);
     }
 
     // Analysing BGOs
-    if (clover.nb_BGO > 0)
+    if (clover.nbBGO > 0)
     {
       Bgo.push_back(index);
       totBGO+=clover.nrj_BGO;
@@ -730,7 +730,7 @@ std::ostream& operator<<(std::ostream& cout, Clovers const & clovers)
 //       //   totGe_delayed+=clover.nrj;
 //       // }
 
-//       if (clover.nb_BGO==0)
+//       if (clover.nbBGO==0)
 //       {
 //         CleanGe.push_back(index);
 //         //      if (clover.isGePrompt ) PromptCleanGeMult++;
@@ -740,7 +740,7 @@ std::ostream& operator<<(std::ostream& cout, Clovers const & clovers)
 //     }
 
 //     // Analysing BGOs
-//     if (clover.nb_BGO > 0)
+//     if (clover.nbBGO > 0)
 //     {
 //       Bgo.push_back(index);
 //       totBGO+=clover.nrj_BGO;
