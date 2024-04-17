@@ -44,6 +44,7 @@ void MTRootReader::Read(MTRootReader & MTreader, Func function, ARGS &&... args)
   std::string filename;
   while(MTreader.nextFilename(filename))
   {
+    if (MTObject::kill) break;
     Event event;
     Nuball2Tree tree(filename);
     if (!tree.ok()) continue;

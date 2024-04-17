@@ -163,6 +163,7 @@ std::map<std::string, std::string> error_message =
 auto pauseCo() 
 {
   #ifdef MULTITHREADING
+  // if (MTObject::kill) exit(MTSIGEXIT);
   lock_mutex lock(MTObject::mutex);
   #endif //MULTITHREADING
 
@@ -675,7 +676,7 @@ namespace CoBazar
 }
 
 template <class T>
-std::string nicer_double(T const & t, int const & nb_digits = 10)
+std::string nicer_double(T const & t, int const & nb_digits = 6)
 {
   auto value = double_cast(t);
   std::string s;

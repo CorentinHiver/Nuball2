@@ -12,6 +12,7 @@
 #include "TThread.h"
 
 #define MULTITHREADING
+#define MTSIGEXIT 42
 
 using lock_mutex = const std::lock_guard<std::mutex>;
 
@@ -163,7 +164,7 @@ public:
   {
     if (signal == SIGINT)
     {
-      if (!activated) exit(41); // If there is not multithreading going on, no need to wait for anything ...
+      if (!activated) exit(MTSIGEXIT); // If there is not multithreading going on, no need to wait for anything ...
       else if (MTObject::kill)
       {
         std::cout << "\nCtrl+C pressed twice, killing violently the program... (but should be fine, maybe, hopefully...)" << std::endl;
@@ -182,7 +183,7 @@ public:
         std::cout << "All threads terminated properly" << std::endl;
       }
       m_exit_function();// User-defined function that can be set using setExitFunction
-      exit(42);
+      exit(MTSIGEXIT);
     }
   }
 
