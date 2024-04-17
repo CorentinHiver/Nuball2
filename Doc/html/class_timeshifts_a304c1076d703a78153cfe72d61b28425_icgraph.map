@@ -1,5 +1,0 @@
-<map id="Timeshifts::setTimeWindow_ns" name="Timeshifts::setTimeWindow_ns">
-<area shape="rect" id="node1" title="Setup the time window for the coincidence in ns." alt="" coords="279,31,504,57"/>
-<area shape="rect" id="node2" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="22,5,214,32"/>
-<area shape="rect" id="node3" href="$class_timeshifts.html#af9da5337ea83092b9a6bb56cdb83f4cb" title="Set the time window in ns." alt="" coords="5,56,231,83"/>
-</map>

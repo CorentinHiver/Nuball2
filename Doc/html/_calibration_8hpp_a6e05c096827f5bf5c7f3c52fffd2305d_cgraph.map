@@ -1,9 +1,0 @@
-<map id="operator&lt;&lt;" name="operator&lt;&lt;">
-<area shape="rect" id="node1" title="Displays the calibration coefficients." alt="" coords="5,132,104,159"/>
-<area shape="rect" id="node2" href="$class_calibration.html#a444e5a870012ac2760875f19fb415eab" title="Get the quadratic parameter." alt="" coords="160,5,324,32"/>
-<area shape="rect" id="node3" href="$class_calibration.html#ad6a111e94914e75259ee4f342757b31a" title="Get the intercept." alt="" coords="152,56,332,83"/>
-<area shape="rect" id="node4" href="$class_calibration.html#a001b6fab19a0fdc4bd7a420c8eb7517a" title="Get the order of the calibration (0 : linear, 1 : affine, 2 : quadratic, 3 : 3rd order)" alt="" coords="163,107,321,133"/>
-<area shape="rect" id="node5" href="$class_calibration.html#a35f805421eb01ce451a258adf3ad108c" title="Get the slope parameter." alt="" coords="163,157,321,184"/>
-<area shape="rect" id="node6" href="$class_calibration.html#a57d6e4aaf0bf53a680c4d7ad427378e5" title="Get the 3rd order parameter." alt="" coords="159,208,325,235"/>
-<area shape="rect" id="node7" href="$class_calibration.html#a5070b5faea97d16c53b084a1b82161f0" title="Get the maximum label of detectors." alt="" coords="179,259,305,285"/>
-</map>

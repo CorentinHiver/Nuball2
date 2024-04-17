@@ -1,9 +1,0 @@
-<map id="sum" name="sum">
-<area shape="rect" id="node1" title=" " alt="" coords="668,56,719,83"/>
-<area shape="rect" id="node2" href="$lib_root_8hpp.html#afcf94131ca40144ef5106ddc22a60600" title=" " alt="" coords="459,5,614,32"/>
-<area shape="rect" id="node3" href="$class_calibrator.html#aa0fff626078ec3cd2e453c5cf6681462" title=" " alt="" coords="453,56,620,83"/>
-<area shape="rect" id="node6" href="$class_spectra_co.html#ab733430ea1ac8bafd68b6709f19d1d0d" title="Resize allows one to select the number of bins. Affects only the maximum bin." alt="" coords="459,131,615,157"/>
-<area shape="rect" id="node4" href="$class_calibrator.html#aa15e2c6afb9da71595926a10d89f0761" title="Analyse the spectra to extract calibration coefficients." alt="" coords="233,56,379,83"/>
-<area shape="rect" id="node5" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="5,56,159,83"/>
-<area shape="rect" id="node7" href="$class_spectra_co.html#a4edb2ef585474bb8c1f728d0dc7731e2" title="Remove the bins after the last bin with content (= detector&#39;s output max range)" alt="" coords="207,131,405,157"/>
-</map>

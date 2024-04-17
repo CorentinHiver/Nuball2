@@ -1,7 +1,0 @@
-<map id="Timeshifts::rebin" name="Timeshifts::rebin">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,136,57"/>
-<area shape="rect" id="node2" href="$lib_co_8hpp.html#a3b8ddb099e22657a31515fbcd8d1bf67" title=" " alt="" coords="195,5,271,32"/>
-<area shape="rect" id="node3" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="184,56,281,83"/>
-<area shape="rect" id="node4" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="329,56,432,83"/>
-<area shape="rect" id="node5" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="480,56,587,83"/>
-</map>

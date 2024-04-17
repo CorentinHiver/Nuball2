@@ -1,8 +1,0 @@
-<map id="EventBuilder" name="EventBuilder">
-<area shape="rect" id="node1" title="NOT UP TO DATE !! LATEST STABLE IS EventBuilder_136." alt="" coords="74,288,179,315"/>
-<area shape="rect" id="node2" href="$class_builder.html" title="Base class of event builders (pure virtual class)" alt="" coords="38,199,106,225"/>
-<area shape="rect" id="node3" href="$class_event.html" title="Event used for reading and writting event, event building and trigger." alt="" coords="5,109,64,136"/>
-<area shape="rect" id="node4" href="$class_i_options.html" title="IO parameters ///." alt="" coords="34,5,110,32"/>
-<area shape="rect" id="node5" href="$class_hit.html" title="Hit class ///." alt="" coords="93,109,134,136"/>
-<area shape="rect" id="node6" href="$class_r_f___manager.html" title="Class used to manage the RF." alt="" coords="130,199,233,225"/>
-</map>

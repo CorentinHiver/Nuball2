@@ -1,7 +1,0 @@
-<map id="GetPoint" name="GetPoint">
-<area shape="rect" id="node1" title="This method allows one to get the x and y values of where the user clicks on the graph." alt="" coords="516,31,595,57"/>
-<area shape="rect" id="node2" href="$class_analysed_spectra.html#aa810982a33acfa30e512aa45da4461ce" title=" " alt="" coords="244,5,468,32"/>
-<area shape="rect" id="node3" href="$class_analysed_spectra.html#abb27cafac273c5eb490eeb17596a60a1" title=" " alt="" coords="263,56,449,83"/>
-<area shape="rect" id="node4" href="$class_analysed_spectra.html#a14412f4f3f9b11bf5206be1f586f2560" title=" " alt="" coords="9,31,193,57"/>
-<area shape="rect" id="node5" href="$class_analysed_spectra.html#aa62448f275c4787703e7d77a38dd421a" title=" " alt="" coords="5,81,196,108"/>
-</map>

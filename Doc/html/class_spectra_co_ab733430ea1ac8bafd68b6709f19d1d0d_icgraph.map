@@ -1,4 +1,0 @@
-<map id="SpectraCo::resizeBin" name="SpectraCo::resizeBin">
-<area shape="rect" id="node1" title="Resize allows one to select the number of bins. Affects only the maximum bin." alt="" coords="252,29,408,56"/>
-<area shape="rect" id="node2" href="$class_spectra_co.html#a4edb2ef585474bb8c1f728d0dc7731e2" title="Remove the bins after the last bin with content (= detector&#39;s output max range)" alt="" coords="5,29,204,56"/>
-</map>

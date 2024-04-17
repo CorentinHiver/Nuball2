@@ -1,6 +1,0 @@
-<map id="Calibration::calibrate" name="Calibration::calibrate">
-<area shape="rect" id="node1" title="calibrate the ADC value using the parameters extracted from the calibration data" alt="" coords="5,35,164,61"/>
-<area shape="rect" id="node2" href="$random_8hpp.html#a61ebdcf7bf06323f12806134068541a7" title=" " alt="" coords="212,35,343,61"/>
-<area shape="rect" id="node3" href="$random_8hpp.html#a374a9a7de3fd00dceacc5de8a654c087" title=" " alt="" coords="467,5,514,32"/>
-<area shape="rect" id="node4" href="$random_8hpp.html#a4b55f3e7bc2bb11053ada6696cd821f6" title=" " alt="" coords="391,57,591,98"/>
-</map>

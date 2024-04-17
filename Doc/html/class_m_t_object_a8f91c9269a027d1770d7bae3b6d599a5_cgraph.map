@@ -1,4 +1,0 @@
-<map id="MTObject::setThreadsNb" name="MTObject::setThreadsNb">
-<area shape="rect" id="node1" title="Sets the number of threads." alt="" coords="5,5,188,32"/>
-<area shape="rect" id="node2" href="$lib_co_8hpp.html#a237f678c718382f74a68364c0fc1779a" title="Casts a number into std::size_t." alt="" coords="236,5,319,32"/>
-</map>

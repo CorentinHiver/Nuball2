@@ -1,8 +1,0 @@
-<map id="get_first_RF_of_file" name="get_first_RF_of_file">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,152,83"/>
-<area shape="rect" id="node2" href="$class_r_f___manager.html#a0261f2b02176a3e5562603c25f31d9a6" title=" " alt="" coords="200,56,351,83"/>
-<area shape="rect" id="node3" href="$class_r_f___manager.html#ae63b656a158cd94800fbe542da54a389" title=" " alt="" coords="399,31,529,57"/>
-<area shape="rect" id="node6" href="$_hit_8hpp.html#a3bbfcd7f9bbec3174213c2b5eedc2edd" title="Casts a number into unsigned Timestamp." alt="" coords="399,81,529,108"/>
-<area shape="rect" id="node4" href="$lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="577,5,677,32"/>
-<area shape="rect" id="node5" href="$_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="583,56,672,83"/>
-</map>

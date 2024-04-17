@@ -1,7 +1,0 @@
-<map id="Vertice::copy" name="Vertice::copy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,112,57"/>
-<area shape="rect" id="node2" href="$class_vertice.html#a2b540156c45d4c5c519cb9035c7a3648" title=" " alt="" coords="160,5,307,32"/>
-<area shape="rect" id="node3" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="185,56,282,83"/>
-<area shape="rect" id="node4" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="355,56,457,83"/>
-<area shape="rect" id="node5" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="505,56,612,83"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="shiftX" name="shiftX">
-<area shape="rect" id="node1" title="Shifts a histogram by &#39;shift&#39; X value." alt="" coords="188,5,247,32"/>
-<area shape="rect" id="node2" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="5,5,140,32"/>
-</map>

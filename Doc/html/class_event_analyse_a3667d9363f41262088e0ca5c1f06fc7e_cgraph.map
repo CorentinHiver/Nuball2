@@ -1,8 +1,0 @@
-<map id="EventAnalyse::Set" name="EventAnalyse::Set">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,145,57"/>
-<area shape="rect" id="node2" href="$class_clovers.html#a523aad5d019f23144292c0e23067a43b" title=" " alt="" coords="193,5,324,32"/>
-<area shape="rect" id="node5" href="$class_paris.html#ac6fb6d9310b0dd298ebf10862497954a" title=" " alt="" coords="202,56,315,83"/>
-<area shape="rect" id="node3" href="$class_static_vector.html#a8f604b0f4165d95a6b6653907c92ceb3" title="Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance..." alt="" coords="372,5,549,32"/>
-<area shape="rect" id="node4" href="$class_static_vector.html#a28a635b7f2cbd0cbc5a042dc22ab7ea3" title=" " alt="" coords="597,5,800,32"/>
-<area shape="rect" id="node6" href="$class_paris_cluster.html#a6b62c6df3f369da38428d7afa96e2316" title=" " alt="" coords="381,56,540,83"/>
-</map>

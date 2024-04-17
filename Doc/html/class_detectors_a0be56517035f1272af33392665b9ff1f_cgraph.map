@@ -1,7 +1,0 @@
-<map id="Detectors::type" name="Detectors::type">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,128,57"/>
-<area shape="rect" id="node2" href="$class_detectors.html#a349500ec816bd7761de87c54b95000bc" title=" " alt="" coords="176,56,301,83"/>
-<area shape="rect" id="node3" href="$class_detectors.html#afd00ee8a76386f7356a12858b1dd7c6b" title="Get the name of a detector given its type and type index." alt="" coords="349,5,480,32"/>
-<area shape="rect" id="node4" href="$class_detectors.html#a3c4f247022eb113c0371899060ea0199" title="Get the type index of the detector. Each type of detector has its own indexing system if you have 3 G..." alt="" coords="528,31,657,57"/>
-<area shape="rect" id="node5" href="$_detectors_8hpp.html#af8a018699aa5d8544bc4877f40463a5a" title=" " alt="" coords="705,31,784,57"/>
-</map>

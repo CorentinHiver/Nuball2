@@ -1,9 +1,0 @@
-<map id="CoAnalyse::projectX" name="CoAnalyse::projectX">
-<area shape="rect" id="node1" title="Project the whole matrix on the X axis. This fills proj." alt="" coords="789,31,943,57"/>
-<area shape="rect" id="node2" href="$namespace_co_analyse.html#a2d7393e48336effee246cbbc33822847" title="Project on Y axis between values binYmin and binYmax included [binYmin;binYmax]. This fills proj." alt="" coords="551,5,705,32"/>
-<area shape="rect" id="node3" href="$namespace_co_analyse.html#afa2d6e36c43655ace45e8aa55a53d4da" title="Remove the background in the given histo." alt="" coords="515,56,741,83"/>
-<area shape="rect" id="node4" href="$class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b" title=" " alt="" coords="244,29,467,56"/>
-<area shape="rect" id="node6" href="$class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="280,81,431,108"/>
-<area shape="rect" id="node5" href="$class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="21,27,180,53"/>
-<area shape="rect" id="node7" href="$class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,78,196,119"/>
-</map>

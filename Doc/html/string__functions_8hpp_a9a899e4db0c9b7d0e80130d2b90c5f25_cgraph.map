@@ -1,5 +1,0 @@
-<map id="string_to_argv" name="string_to_argv">
-<area shape="rect" id="node1" title="Create a null terminated C&#45;style array of char from a string." alt="" coords="5,5,120,32"/>
-<area shape="rect" id="node2" href="$string__functions_8hpp.html#a44ad60b408ba7b75bdf7ae75f8d2532f" title=" " alt="" coords="168,5,235,32"/>
-<area shape="rect" id="node3" href="$string__functions_8hpp.html#a1f4138b473c708db6b901f81bba9f5f6" title="Cuts a string into pieces separated by the given separator like &#39;;&#39; or &#39; &#39; or &#39;,&#39;." alt="" coords="283,5,344,32"/>
-</map>

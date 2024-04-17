@@ -1,9 +1,0 @@
-<map id="CoAnalyse::projectY" name="CoAnalyse::projectY">
-<area shape="rect" id="node1" title="Project matrix on Y axis between values valueXmin and valueXmax included [valueXmin;valueXmax]...." alt="" coords="5,56,157,83"/>
-<area shape="rect" id="node2" href="$namespace_co_analyse.html#abecf48371e430ad0cc8dfb063e6d951d" title="Project matrix on Y axis at a given X bin. This fills proj." alt="" coords="205,56,357,83"/>
-<area shape="rect" id="node3" href="$lib_root_8hpp.html#ada9d5d265d78076b2e7fb980a09c71b0" title=" " alt="" coords="412,5,496,32"/>
-<area shape="rect" id="node4" href="$lib_root_8hpp.html#a6ce1f9927b8e99f76cbda975fb51adcf" title=" " alt="" coords="414,56,494,83"/>
-<area shape="rect" id="node5" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="405,107,503,133"/>
-<area shape="rect" id="node6" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="551,107,653,133"/>
-<area shape="rect" id="node7" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="701,107,808,133"/>
-</map>

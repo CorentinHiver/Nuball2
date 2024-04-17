@@ -1,7 +1,0 @@
-<map id="StaticVector::resize" name="StaticVector::resize">
-<area shape="rect" id="node1" title="Only reset the user size to new_size (default 0). Do not touch the data. Use for performances." alt="" coords="416,56,563,83"/>
-<area shape="rect" id="node2" href="$class_counters.html#ada46b45bb45210aad28a4ebbd23f98f8" title=" " alt="" coords="235,31,355,57"/>
-<area shape="rect" id="node5" href="$class_counters.html#a6d83023bf5dece2147c82ad2b1906abd" title=" " alt="" coords="221,81,368,108"/>
-<area shape="rect" id="node3" href="$class_counters.html#a438d855f700f802261df045b1f52723e" title=" " alt="" coords="5,5,173,32"/>
-<area shape="rect" id="node4" href="$class_counters.html#acebc5e99a89d9fe257917c46b3101999" title=" " alt="" coords="9,56,170,83"/>
-</map>

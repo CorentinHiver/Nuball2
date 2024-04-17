@@ -1,7 +1,0 @@
-<map id="AddTH1" name="AddTH1">
-<area shape="rect" id="node1" title="Patch to the TH1::Add method when the histograms limits are inconsistent." alt="" coords="615,31,688,57"/>
-<area shape="rect" id="node2" href="$lib_root_8hpp.html#a0135527c42feb1bbb8180af21ef5229e" title="Like AddTH1 but adjusts the binning first." alt="" coords="420,5,547,32"/>
-<area shape="rect" id="node3" href="$class_calibrator.html#aa0fff626078ec3cd2e453c5cf6681462" title=" " alt="" coords="400,56,567,83"/>
-<area shape="rect" id="node4" href="$class_calibrator.html#aa15e2c6afb9da71595926a10d89f0761" title="Analyse the spectra to extract calibration coefficients." alt="" coords="207,56,352,83"/>
-<area shape="rect" id="node5" href="$class_calibrator.html#af5fcdabfdef0a399a9e3a3992b3029fb" title=" " alt="" coords="5,56,159,83"/>
-</map>

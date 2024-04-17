@@ -1,6 +1,0 @@
-<map id="Calibration::fitCalibration" name="Calibration::fitCalibration">
-<area shape="rect" id="node1" title=" " alt="" coords="5,31,191,57"/>
-<area shape="rect" id="node2" href="$class_fit.html#aa524861d860cc6384c92425166453e93" title="Returns true if fit succeeded." alt="" coords="255,5,341,32"/>
-<area shape="rect" id="node3" href="$class_detectors.html#a1177661fb15c9825755925faf00c8398" title="Return the value of the maximum label, i.e. the size of the lookup tables." alt="" coords="239,56,357,83"/>
-<area shape="rect" id="node4" href="$_hit_8hpp.html#af181231d97866aa957e8fe8bd67f7f64" title="Data casts ///." alt="" coords="405,56,496,83"/>
-</map>

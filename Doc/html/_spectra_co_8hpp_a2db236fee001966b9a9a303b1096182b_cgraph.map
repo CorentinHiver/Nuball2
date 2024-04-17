@@ -1,4 +1,0 @@
-<map id="goingBelow" name="goingBelow">
-<area shape="rect" id="node1" title="Returns the position where the histogram goes under the threshold." alt="" coords="5,5,104,32"/>
-<area shape="rect" id="node2" href="$lib_co_8hpp.html#a48e80fbfd11f9fb219b92ba1c29c1b2a" title="Casts a number into an int." alt="" coords="152,5,225,32"/>
-</map>

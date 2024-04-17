@@ -1,5 +1,0 @@
-<map id="concatenate_c" name="concatenate_c">
-<area shape="rect" id="node1" title="concatenate string, returns a c_str (char**)" alt="" coords="5,5,121,32"/>
-<area shape="rect" id="node2" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="169,5,272,32"/>
-<area shape="rect" id="node3" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="320,5,427,32"/>
-</map>

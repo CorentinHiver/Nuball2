@@ -1,9 +1,0 @@
-<map id="RF_Manager::set_period_ns" name="RF_Manager::set_period_ns">
-<area shape="rect" id="node1" title=" " alt="" coords="1093,31,1295,57"/>
-<area shape="rect" id="node2" href="$class_timeshifts.html#abef7234fe827ae3c7758788cf22b6921" title=" " alt="" coords="855,31,1045,57"/>
-<area shape="rect" id="node3" href="$class_timeshifts.html#aaef5b6fdd23be94ed37a2b4e7fe47b48" title=" " alt="" coords="655,31,807,57"/>
-<area shape="rect" id="node4" href="$class_timeshifts.html#a79fe955b7d1bbc12fd4c659691727df3" title=" " alt="" coords="428,5,607,32"/>
-<area shape="rect" id="node5" href="$class_timeshifts.html#a21dc1e7bf232c6b0637b16aa04e43701" title=" " alt="" coords="211,31,380,57"/>
-<area shape="rect" id="node6" href="$class_timeshifts.html#a3d3ab1b3498ca45832d8a8735f16e188" title=" " alt="" coords="5,5,163,32"/>
-<area shape="rect" id="node7" href="$class_timeshifts.html#a6520eab7a8824f41a2be8517d83fc835" title="To verify an already calculated timeshift .dT data file." alt="" coords="17,56,151,83"/>
-</map>

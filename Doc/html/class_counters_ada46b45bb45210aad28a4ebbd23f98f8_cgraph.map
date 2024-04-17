@@ -1,4 +1,0 @@
-<map id="Counters::clear" name="Counters::clear">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,125,32"/>
-<area shape="rect" id="node2" href="$class_static_vector.html#ae292e425773c82dc9eb20db025963e29" title="Only reset the user size to new_size (default 0). Do not touch the data. Use for performances." alt="" coords="173,5,320,32"/>
-</map>

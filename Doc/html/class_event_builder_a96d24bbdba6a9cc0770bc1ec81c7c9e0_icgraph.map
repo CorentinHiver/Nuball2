@@ -1,4 +1,0 @@
-<map id="EventBuilder::reset" name="EventBuilder::reset">
-<area shape="rect" id="node1" title=" " alt="" coords="199,5,345,32"/>
-<area shape="rect" id="node2" href="$class_event_builder.html#a721b4b60a459c5a5c00ed3e1b513d636" title="Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time win..." alt="" coords="5,5,151,32"/>
-</map>

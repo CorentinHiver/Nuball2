@@ -1,6 +1,0 @@
-<map id="SpectraCo::calibrate" name="SpectraCo::calibrate">
-<area shape="rect" id="node1" title=" " alt="" coords="483,38,636,65"/>
-<area shape="rect" id="node2" href="$class_spectra_co.html#af74c78334a7be1cc421779f9e4b30a0b" title="Calibrates using the coeffs[0:n&#45;1] coefficient then scale it using the coeffs.back() coefficient (spe..." alt="" coords="221,13,435,39"/>
-<area shape="rect" id="node4" href="$class_spectra_co.html#a488369423915a272c24b561553cea913" title=" " alt="" coords="247,63,409,90"/>
-<area shape="rect" id="node3" href="$class_objective_function_chi2.html#ab9abe6ab2b65aa87d805b9866044eaed" title=" " alt="" coords="5,5,173,47"/>
-</map>

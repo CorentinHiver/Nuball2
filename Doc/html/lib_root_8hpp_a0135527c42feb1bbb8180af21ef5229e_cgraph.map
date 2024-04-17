@@ -1,5 +1,0 @@
-<map id="AddTH1ByValue" name="AddTH1ByValue">
-<area shape="rect" id="node1" title="Like AddTH1 but adjusts the binning first." alt="" coords="5,31,132,57"/>
-<area shape="rect" id="node2" href="$lib_root_8hpp.html#ae587b174d8d4d5b8e62f01491140e111" title="Patch to the TH1::Add method when the histograms limits are inconsistent." alt="" coords="180,5,253,32"/>
-<area shape="rect" id="node3" href="$print_8hpp.html#a388f572c62279f839ee138a9afbdeeb5" title="New line." alt="" coords="191,56,243,83"/>
-</map>

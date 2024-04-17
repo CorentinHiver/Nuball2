@@ -1,6 +1,0 @@
-<map id="SpectraCo::resizeBin" name="SpectraCo::resizeBin">
-<area shape="rect" id="node1" title="Resize allows one to select the number of bins. Affects only the maximum bin." alt="" coords="5,56,161,83"/>
-<area shape="rect" id="node2" href="$class_spectra_co.html#ac010001d3601d366b0573119a5d2be2a" title=" " alt="" coords="209,5,399,32"/>
-<area shape="rect" id="node3" href="$lib_co_8hpp.html#a2052317e56aa118e7ffcdb2e398f551c" title="Casts a number into an double." alt="" coords="254,56,354,83"/>
-<area shape="rect" id="node4" href="$vector__functions_8hpp.html#a2b29a4762dbbff2cabcb7e8a62cb0d39" title=" " alt="" coords="279,107,329,133"/>
-</map>

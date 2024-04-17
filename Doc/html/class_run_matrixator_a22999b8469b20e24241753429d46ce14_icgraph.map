@@ -1,9 +1,0 @@
-<map id="RunMatrixator::parisIsLaBr" name="RunMatrixator::parisIsLaBr">
-<area shape="rect" id="node1" title=" " alt="" coords="929,46,1124,73"/>
-<area shape="rect" id="node2" href="$class_run_matrixator.html#af360ec9f7686353b663ce0bdcfa3e2df" title=" " alt="" coords="687,46,881,73"/>
-<area shape="rect" id="node3" href="$class_run_matrixator.html#a8d8f01fad64864d032395e18b10c2a7e" title=" " alt="" coords="440,8,623,49"/>
-<area shape="rect" id="node6" href="$class_run_matrixator.html#a526469f6440d19b85fd142c797056c65" title=" " alt="" coords="424,75,639,102"/>
-<area shape="rect" id="node4" href="$class_run_matrixator.html#a47322f73c6a9f220f49f9fd85993fcd5" title="Multithreading of loadData_faster (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="197,5,376,47"/>
-<area shape="rect" id="node5" href="$class_run_matrixator.html#aa6d13b08060fef07b50d7ab6b35be0d6" title=" " alt="" coords="5,46,149,73"/>
-<area shape="rect" id="node7" href="$class_run_matrixator.html#a2d5326c4e5b0684552e5d72c88e64ef8" title="Multithreading of loadData_ (you have to pass by a static method in order to multi&#45;thread it)" alt="" coords="197,71,376,112"/>
-</map>

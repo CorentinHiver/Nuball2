@@ -1,4 +1,0 @@
-<map id="Timeshifts::setMult" name="Timeshifts::setMult">
-<area shape="rect" id="node1" title="Set the multiplicity gate for the events used for coincidence timeshift calculation." alt="" coords="245,5,392,32"/>
-<area shape="rect" id="node2" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="5,5,197,32"/>
-</map>

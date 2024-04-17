@@ -1,6 +1,0 @@
-<map id="Fit::exists" name="Fit::exists">
-<area shape="rect" id="node1" title="Returns true if fit succeeded." alt="" coords="647,5,732,32"/>
-<area shape="rect" id="node2" href="$class_calibration.html#aea14328cc8a0ab1cf559cd07f8c6a065" title=" " alt="" coords="413,5,599,32"/>
-<area shape="rect" id="node3" href="$class_calibration.html#ae6bbaf8b283a345c9936a907fcba1849" title="Analyse the spectra to extract calibration coefficients." alt="" coords="213,5,365,32"/>
-<area shape="rect" id="node4" href="$class_calibration.html#aa7e921cbc724d97d1a3ef30a4f988e63" title=" " alt="" coords="5,5,165,32"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="bool_cast" name="bool_cast">
-<area shape="rect" id="node1" title="Casts a number into an bool." alt="" coords="203,81,287,108"/>
-<area shape="rect" id="node2" href="$class_fit.html#aace9236c432ee27bd3c208911b7a396d" title="Set if the fit succeeded :" alt="" coords="37,5,123,32"/>
-<area shape="rect" id="node3" href="$class_fit.html#a861a69c651863dcb3b41a788fe73f69d" title="Set if there was not enough counts :" alt="" coords="15,56,145,83"/>
-<area shape="rect" id="node4" href="$class_histo_analyse.html#a3ebd877de62f44cfde794b8a7dad2a78" title=" " alt="" coords="5,107,155,133"/>
-<area shape="rect" id="node5" href="$class_fit.html#ad12c75a87a239da0768c9c6b869da431" title="Set if there was not enough counts :" alt="" coords="6,157,154,184"/>
-</map>

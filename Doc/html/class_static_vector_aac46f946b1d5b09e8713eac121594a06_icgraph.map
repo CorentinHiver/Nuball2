@@ -1,6 +1,0 @@
-<map id="StaticVector::reserve" name="StaticVector::reserve">
-<area shape="rect" id="node1" title=" " alt="" coords="432,42,589,69"/>
-<area shape="rect" id="node2" href="$class_static_vector.html#a3f31307e19e313fb7b4b93f284194f52" title="Delete memory, reset the user size to 0 and allocate new_size memory." alt="" coords="219,5,363,47"/>
-<area shape="rect" id="node4" href="$class_static_vector.html#a1fd1ac7d3e54a74084f25ecad026c79c" title="Create a new Static_vector with size static_size." alt="" coords="197,71,384,98"/>
-<area shape="rect" id="node3" href="$class_static_vector.html#a25564f07e92dd67a4f6bc0dfeaaad31b" title=" " alt="" coords="5,5,149,47"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="FilesManager::addFile" name="FilesManager::addFile">
-<area shape="rect" id="node1" title=" " alt="" coords="639,5,803,32"/>
-<area shape="rect" id="node2" href="$class_faster2_histo.html#ac20f36c0861a3af085c9546ca1325cc6" title="Adds one file to convert at the list. Option &#45;f." alt="" coords="432,5,591,32"/>
-<area shape="rect" id="node3" href="$class_faster2_histo.html#a72f8004ae550c02db09791b810c0252d" title="To launch the application after instanciation." alt="" coords="245,5,384,32"/>
-<area shape="rect" id="node4" href="$class_faster2_histo.html#aed84ab0be7ff45067715733dd7be23d1" title="To launch the application at instanciation." alt="" coords="5,5,197,32"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="CoAnalyse::projectX" name="CoAnalyse::projectX">
-<area shape="rect" id="node1" title="Project the whole matrix on the X axis. This fills proj." alt="" coords="5,56,159,83"/>
-<area shape="rect" id="node2" href="$lib_root_8hpp.html#a0269226b4d78b1089ef77180712147e0" title=" " alt="" coords="212,5,299,32"/>
-<area shape="rect" id="node3" href="$lib_root_8hpp.html#ab23c9fed2f973bde045e7d90c8e1f2fe" title=" " alt="" coords="214,56,297,83"/>
-<area shape="rect" id="node4" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="207,107,304,133"/>
-<area shape="rect" id="node5" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="352,107,455,133"/>
-<area shape="rect" id="node6" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="503,107,609,133"/>
-</map>

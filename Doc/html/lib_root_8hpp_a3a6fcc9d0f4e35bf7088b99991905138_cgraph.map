@@ -1,5 +1,0 @@
-<map id="shiftX" name="shiftX">
-<area shape="rect" id="node1" title="Shifts a histogram by &#39;shift&#39; X value." alt="" coords="5,5,64,32"/>
-<area shape="rect" id="node2" href="$string__functions_8hpp.html#ae058d07fbc702d0b0f79e3650e7804a2" title=" " alt="" coords="112,5,215,32"/>
-<area shape="rect" id="node3" href="$string__functions_8hpp.html#a69253dfa467bcccee64b774b43242c4c" title="Convert any type into string, including vector of any type." alt="" coords="263,5,369,32"/>
-</map>

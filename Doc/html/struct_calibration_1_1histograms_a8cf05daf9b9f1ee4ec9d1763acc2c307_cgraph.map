@@ -1,6 +1,0 @@
-<map id="Calibration::histograms::setBins" name="Calibration::histograms::setBins">
-<area shape="rect" id="node1" title=" " alt="" coords="5,49,180,90"/>
-<area shape="rect" id="node2" href="$class_detectors.html#aba567529b262d88913de6ccb05a71a99" title="Get the default energy (keV) bidimensionnal histogram binning for all types of detectors." alt="" coords="237,5,399,32"/>
-<area shape="rect" id="node3" href="$class_detectors.html#ae1ead00f89e7fcb96cefa082f9b4e290" title="Get the default energy (keV) bidimensionnal histogram binning for all types of detectors." alt="" coords="228,56,408,83"/>
-<area shape="rect" id="node4" href="$lib_co_8hpp.html#a6df2dcd4b1f61c75dc292942bc5ca74d" title=" " alt="" coords="269,107,367,133"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="CoAnalyse::removeBackground" name="CoAnalyse::removeBackground">
-<area shape="rect" id="node1" title="Remove the background in the given histo." alt="" coords="515,35,741,61"/>
-<area shape="rect" id="node2" href="$class_spectra_co.html#adbdfafcc8b0a95d520e491b0062b2e0b" title=" " alt="" coords="244,8,467,35"/>
-<area shape="rect" id="node4" href="$class_evolution_peaks.html#a5645dd6726d0af38e8a4d849da6a8d18" title=" " alt="" coords="280,60,431,87"/>
-<area shape="rect" id="node3" href="$class_spectra_co.html#a3ba8c0e42ab3c3d3efa1f827b9465daf" title="The spectra must not have had background substraction yet." alt="" coords="21,5,180,32"/>
-<area shape="rect" id="node5" href="$class_evolution_peaks.html#a97403723f87d740c700637e07e95fbb7" title=" " alt="" coords="5,57,196,98"/>
-</map>

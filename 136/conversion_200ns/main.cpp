@@ -203,7 +203,7 @@ int main(int argc, char** argv)
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
           print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
           print("(       --129)                            : Treats the N-SI-129 pulsed runs");
-          print("(       --write-rf)                       : Include the downscaled pulsation hits in the output data");
+          print("(       --write-rf)                       : Include the downscale pulsation hits in the output data");
           return 0;
         }
         else 
@@ -383,7 +383,7 @@ int main(int argc, char** argv)
       // Realign switched hits after timeshifts //
       // -------------------------------------- //
 
-      Alignator gindex(tempTree.get());
+      Alignator gIndex(tempTree.get());
 
       // ------------------------------------------------------ //
       // Prepare the reading of the TTree and the output Events //
@@ -403,7 +403,7 @@ int main(int argc, char** argv)
       rf.setPeriod_ns(200);
 
       // Handle the first RF downscale :
-      RF_Extractor first_rf(tempTree.get(), rf, hit, gindex);
+      RF_Extractor first_rf(tempTree.get(), rf, hit, gIndex);
       if (!first_rf) return;
 
       debug("first RF found at hit n°", first_rf.cursor());
@@ -422,7 +422,7 @@ int main(int argc, char** argv)
       // So we have to skip them in order to maintain good temporal resolution :
       if (!keep_first_hits) loop = first_rf.cursor();
       
-      tempTree -> GetEntry(gindex[loop++]);
+      tempTree -> GetEntry(gIndex[loop++]);
       eventBuilder.setFirstHit(hit);
 
       // --------------------------------- //
@@ -435,7 +435,7 @@ int main(int argc, char** argv)
       ulong trig_hits_count = 0;
       while (loop<nb_data)
       {
-        tempTree -> GetEntry(gindex[++loop]);
+        tempTree -> GetEntry(gIndex[++loop]);
 
         if (rf.setHit(hit))
         { // Handle rf
@@ -502,7 +502,8 @@ int main(int argc, char** argv)
 
     auto nb_threads_hadd = int_cast(std::thread::hardware_concurrency()*0.25);
     auto const & outRootName = outMergedPath.string() + run_name + ".root ";
-    std::string merge_command = "hadd -v 1 -j " + std::to_string(nb_threads_hadd) + " " + outRootName + outDataPath.string() + run_name + "_*.root";
+    // hadd options : -v 1 for more minimum verbosity, -j for multithreading, -d to write the sub-files (due to multithreading) in current repository
+    std::string merge_command = "hadd -v 1 -d -j " + std::to_string(nb_threads_hadd) + " " + outRootName + outDataPath.string() + run_name + "_*.root";
     if (overwrite) merge_command+= "-f";
     print(merge_command);
     system(merge_command.c_str());

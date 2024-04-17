@@ -1,4 +1,0 @@
-<map id="Timeshifts::setOutRoot" name="Timeshifts::setOutRoot">
-<area shape="rect" id="node1" title="Use setName instead. Set output root file containing the raw and corrected time spectra." alt="" coords="245,5,416,32"/>
-<area shape="rect" id="node2" href="$class_timeshifts.html#acca1130b271301c5477d4b4a23ae4e5b" title="Use this method to setup the parameters from a string in order to calculate the timeshifts." alt="" coords="5,5,197,32"/>
-</map>

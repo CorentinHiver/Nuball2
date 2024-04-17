@@ -1,7 +1,0 @@
-<map id="Sorted_Event" name="Sorted_Event">
-<area shape="rect" id="node1" title=" " alt="" coords="95,199,203,225"/>
-<area shape="rect" id="node2" href="$class_event.html" title="Event used for reading and writting event, event building and trigger." alt="" coords="14,109,73,136"/>
-<area shape="rect" id="node3" href="$class_i_options.html" title="IO parameters ///." alt="" coords="5,5,81,32"/>
-<area shape="rect" id="node4" href="$class_r_f___manager.html" title="Class used to manage the RF." alt="" coords="97,109,200,136"/>
-<area shape="rect" id="node5" href="$class_timewalks.html" title=" " alt="" coords="225,109,318,136"/>
-</map>

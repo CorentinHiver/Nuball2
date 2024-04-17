@@ -1,8 +1,0 @@
-<map id="SpectraCo::calibrate" name="SpectraCo::calibrate">
-<area shape="rect" id="node1" title=" " alt="" coords="5,107,159,133"/>
-<area shape="rect" id="node2" href="$class_calibration.html#a6044ac4a0a17e177af66138f75aca6b6" title="Applies the calibration coefficients of the given label to the given energy." alt="" coords="233,5,370,32"/>
-<area shape="rect" id="node3" href="$class_spectra_co.html#ac010001d3601d366b0573119a5d2be2a" title=" " alt="" coords="207,56,396,83"/>
-<area shape="rect" id="node4" href="$class_spectra_co.html#ab50cbac4f854c7bf6d807fe476b1e92a" title=" " alt="" coords="218,107,385,133"/>
-<area shape="rect" id="node5" href="$class_calibration.html#a91d512d3bcbc3a3439a7902326965b48" title="Get the order of the calibration (0 : linear, 1 : affine, 2 : quadratic, 3 : 3rd order)" alt="" coords="234,157,369,184"/>
-<area shape="rect" id="node6" href="$string__functions_8hpp.html#a3a78dc61d5d352a6559b927ae3167a21" title="Replace substr to the string if it exists." alt="" coords="266,208,337,235"/>
-</map>

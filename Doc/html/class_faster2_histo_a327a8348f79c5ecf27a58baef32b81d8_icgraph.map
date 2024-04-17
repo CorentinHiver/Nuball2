@@ -1,4 +1,0 @@
-<map id="Faster2Histo::fillHisto" name="Faster2Histo::fillHisto">
-<area shape="rect" id="node1" title="Handles each hit and fills the correct histogram." alt="" coords="219,5,380,32"/>
-<area shape="rect" id="node2" href="$class_faster2_histo.html#a48d7d46929ffbd69ccc3a590c535d3b7" title="Treats the file with already configured Hit and FasterReader object." alt="" coords="5,5,171,32"/>
-</map>

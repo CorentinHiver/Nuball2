@@ -1,6 +1,0 @@
-<map id="Timeshifts::setRFOffset_ns" name="Timeshifts::setRFOffset_ns">
-<area shape="rect" id="node1" title="Set RF offset (synonymous to Timeshifts::setRFShift)" alt="" coords="5,31,201,57"/>
-<area shape="rect" id="node2" href="$class_r_f___manager.html#ac56cba54c3c01c70e45b40093e3d1a89" title=" " alt="" coords="249,5,424,32"/>
-<area shape="rect" id="node4" href="$_hit_8hpp.html#a4ea1ea3a29989c67afc2c4db41e36b15" title="Casts a number into unsigned Time." alt="" coords="292,56,381,83"/>
-<area shape="rect" id="node3" href="$class_r_f___manager.html#a6f647860bac9370bed96fa4bd88db9a5" title=" " alt="" coords="472,5,620,32"/>
-</map>

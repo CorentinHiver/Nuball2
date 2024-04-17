@@ -1,9 +1,0 @@
-<map id="EvolutionPeaks" name="EvolutionPeaks">
-<area shape="rect" id="node1" title="Shows the evolution of peak position for given detectors." alt="" coords="194,288,317,315"/>
-<area shape="rect" id="node2" href="$class_data_file.html" title=" " alt="" coords="5,184,172,211"/>
-<area shape="rect" id="node3" href="$class_path.html" title="EXPERIMENTAL Object used to hold the complete path of a giver folder." alt="" coords="237,95,287,121"/>
-<area shape="rect" id="node5" href="$class_file.html" title="EXPERIMENTAL Composed of a Path and a Filename." alt="" coords="197,184,242,211"/>
-<area shape="rect" id="node4" href="$class_folders.html" title="EXPERIMENTAL Object used to hold a list of folders." alt="" coords="227,5,297,32"/>
-<area shape="rect" id="node6" href="$class_filename.html" title="EXPERIMENTAL Contains the short name and the extension of a given file, without any knowledge of its ..." alt="" coords="73,95,155,121"/>
-<area shape="rect" id="node7" href="$class_calibration.html" title="A convenient class for handling coefficient calibration up to 3rd order." alt="" coords="405,184,498,211"/>
-</map>
