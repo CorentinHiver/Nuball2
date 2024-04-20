@@ -18,6 +18,7 @@ bool simple_d = false;
 bool read_129 = false;
 bool read_C2 = false;
 bool read_new = false;
+bool read_particle = false;
 std::string trigger = "dd";
 
 
@@ -980,6 +981,7 @@ void reader(int number_files = -1)
   if (simple_d) trigger = "d";
   else if (read_C2) trigger = "C2";
   else if (read_new) trigger = "PrM1DeC1";
+  else if (read_particle) trigger = "P";
   Analysator analysator(number_files, path+run_name+"-root_"+trigger+"/merged/");
 }
 
@@ -992,16 +994,21 @@ int main(int argc, char** argv)
     std::string param(argv[i]);
          if (param == "-f") nb_files = std::stoi(argv[++i]);
     else if (param == "-n") Analysator::setMaxHits(std::stoi(argv[++i]));
+    else if (param == "-p") 
+    {
+      if(read_C2 || read_new || simple_d) throw_error("Can't have more than one trigger"); 
+      read_particle = true;
+    }
     else if (param == "-d") 
     {
-      if(read_C2 || read_new) throw_error("Can't have more than one trigger"); 
+      if(read_C2 || read_new || read_particle) throw_error("Can't have more than one trigger"); 
       simple_d = true;
     }
     else if (param == "-m") nb_threads = std::stoi(argv[++i]);
     else if (param == "--129") read_129 = true;
     else if (param == "--C2") 
     {
-      if(simple_d || read_new) throw_error("Can't have more than one trigger"); 
+      if(simple_d || read_new || read_particle) throw_error("Can't have more than one trigger"); 
       read_C2 = true;
     }
     else if (param == "--new") 
@@ -1015,6 +1022,7 @@ int main(int argc, char** argv)
       print("-f : number of files");
       print("-n : number of hits per file");
       print("-d : single clean Ge trigger");
+      print("-p : particle trigger");
       print("-C2 : 2 clean Ge in the 200ns time window");
       print("--new: the M1 prompt C1 delayed trigger");
       print("-m : number of threads");

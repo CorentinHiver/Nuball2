@@ -51,8 +51,9 @@ public:
     {
     #ifdef MULTITHREADING
       print("Initialising Paris arrays in thread", MTObject::getThreadIndex());
-    #endif //MULTITHREADING
+    #else
       print("Initialising Paris arrays");
+    #endif //MULTITHREADING
       for (int l = 0; l<1000; l++)
       {
         is[l]  = is_paris(l);

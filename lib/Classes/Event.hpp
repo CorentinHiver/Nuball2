@@ -254,15 +254,14 @@ void inline Event::reading(TTree * tree)
 
   tree -> ResetBranchAddresses();
 
-  tree -> SetBranchAddress("mult", &mult);
-
   auto branches = tree->GetListOfBranches();
   for (int i = 0; i < branches->GetEntries(); ++i) 
   {
     auto branch = dynamic_cast<TBranch*>(branches->At(i));
     std::string const branchName = branch->GetName();
     
-         if (branchName == "label" ) {read.l = true;  tree -> SetBranchAddress("label"  , &labels );}
+         if (branchName == "mult"  ) {                tree -> SetBranchAddress("mult"   , &mult);}
+    else if (branchName == "label" ) {read.l = true;  tree -> SetBranchAddress("label"  , &labels );}
     else if (branchName == "stamp" ) {read.t = true;  tree -> SetBranchAddress("stamp"  , &stamp  );}
     else if (branchName == "time"  ) {read.T = true;  tree -> SetBranchAddress("time"   , &times  );}
     else if (branchName == "adc"   ) {read.e = true;  tree -> SetBranchAddress("adc"    , &adcs   );}
@@ -272,7 +271,7 @@ void inline Event::reading(TTree * tree)
     else if (branchName == "pileup") {read.p = true;  tree -> SetBranchAddress("pileup" , &pileups);}
     else
     {
-      error("branch", branchName, "unkown ... Event class can't read it !");
+      warning("branch", branchName, "unkown ... Event class can't read it !");
     }
   }
   tree -> SetBranchStatus("*",true);
