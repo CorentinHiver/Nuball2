@@ -44,10 +44,13 @@ public:
   // ---- Initialization of static arrays ---- //
   void static InitialiseArrays()
   {
+  #ifdef MULTITHREADING
+    lock_mutex lock(MTObject::mutex);
+  #endif //MULTITHREADING
     if (!s_initialised)
     {
     #ifdef MULTITHREADING
-      lock_mutex lock(MTObject::mutex);
+      print("Initialising Paris arrays in thread", MTObject::getThreadIndex());
     #endif //MULTITHREADING
       print("Initialising Paris arrays");
       for (int l = 0; l<1000; l++)
@@ -65,13 +68,13 @@ public:
   // -----------------------  Paris Class  ----------------------- //
   Paris(){this -> InitialiseArrays();}
   void Initialise();
-  void Fill(Event const & event, size_t const & i);
-  void Reset();
-  void Analyse();
+  void fill(Event const & event, size_t const & i);
+  void reset();
+  void analyse();
 
   StaticVector<uchar> Hits;
 
-  ParisCluster<28> clusterBack;
+  ParisCluster<36> clusterBack; // Only 28 paris physically present
   ParisCluster<36> clusterFront;
 
   // ______________________________________________________________ //
@@ -86,7 +89,7 @@ public:
   // ------------ Qshort VS Qlong bidim manipulations ------------
   static std::pair<double, double> findAngles   (TH2F* bidim, int nb_bins = 10, bool write_graphs = false);
   static std::pair<double, double> findAnglesDeg(TH2F* bidim, int nb_bins = 10, bool write_graphs = false);
-  static void calculateBidimAngles(std::string file, std::string const & outfilename, bool write_graphs = true);
+  static void calculateBidimAngles(std::string file, std::string const & out_filename, bool write_graphs = true);
   static TH2F* rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNdirty = false);
 
   // _____________________________________________________________ //
@@ -112,27 +115,27 @@ void Paris::Initialise()
   }
 }
 
-void inline Paris::Reset()
+void inline Paris::reset()
 {
-  clusterBack.Reset();
-  clusterFront.Reset();
+  clusterBack.reset();
+  clusterFront.reset();
 }
 
-void inline Paris::Fill(Event const & event, size_t const & i)
+void inline Paris::fill(Event const & event, size_t const & i)
 {
-  clusterBack.Fill(event, i, index[event.labels[i]]);
-  clusterFront.Fill(event, i, index[event.labels[i]]);
+  clusterBack.fill(event, i, index[event.labels[i]]);
+  clusterFront.fill(event, i, index[event.labels[i]]);
 }
 
-void inline Paris::Analyse()
+void inline Paris::analyse()
 {
-  clusterBack.Analyse();
-  clusterFront.Analyse();
+  clusterBack.analyse();
+  clusterFront.analyse();
 }
 
 std::pair<double, double> Paris::findAngles(TH2F* bidim, int nb_bins, bool write_graphs)
 {
-  std::string outfilename = "angles_paris_bidim.root";
+  std::string out_filename = "angles_paris_bidim.root";
   auto const & nb_bins_long = bidim->GetNbinsX();
   auto const & nb_iterations_long = nb_bins_long/nb_bins;
 
@@ -258,7 +261,7 @@ std::pair<double, double> Paris::findAngles(TH2F* bidim, int nb_bins, bool write
   
   if (write_graphs)
   {// Write the graphs in a root file :
-    auto file = TFile::Open(outfilename.c_str(), "update");
+    auto file = TFile::Open(out_filename.c_str(), "update");
     file -> cd();
     graph_peak1->Write();
     graph_peak2->Write();
@@ -280,7 +283,7 @@ std::pair<double, double> Paris::findAnglesDeg(TH2F* bidim, int nb_bins, bool wr
   return ret;
 }
 
-void Paris::calculateBidimAngles(std::string filename, std::string const & outfilename, bool write_graphs)
+void Paris::calculateBidimAngles(std::string filename, std::string const & out_filename, bool write_graphs)
 {
   auto file(TFile::Open(filename.c_str(), "READ"));
   file -> cd();
@@ -312,7 +315,7 @@ void Paris::calculateBidimAngles(std::string filename, std::string const & outfi
   print();
   file->Close();
   print("angles_paris_bidim.root written");
-  angles.write(outfilename);
+  angles.write(out_filename);
 }
 
 TH2F* Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNdirty)
@@ -352,8 +355,8 @@ TH2F* Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNd
       auto const & old_short_range = bidim->GetXaxis()->GetBinCenter(bin_x+1)-old_short;
       for (int hit_i = 0; hit_i<nb_hits; hit_i++)
       {
-        auto const & rand_short = old_short + double_random_uniform(0, old_short_range);
-        auto const & rand_long  = old_long  + double_random_uniform(0, old_long_range);
+        auto const & rand_short = old_short + randomCo::uniform(0, old_short_range);
+        auto const & rand_long  = old_long  + randomCo::uniform(0, old_long_range);
 
         // Rotate the NaI+both toward the long gate :
         auto const & new_short = rand_short * _cos - rand_long * _sin; // * (abs(_tan)/_tan);
@@ -371,7 +374,5 @@ TH2F* Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNd
   }
   return rotated_bidim;
 }
-
-
 
 #endif //PARIS_HPP

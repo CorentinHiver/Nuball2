@@ -94,7 +94,7 @@ std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
 }
 
 //////////////
-//   UTILS  //
+//   UNITS  //
 //////////////
 
 /// @brief Returns a string in the format mm_hh_dd_mm_yy
@@ -163,7 +163,7 @@ std::map<std::string, std::string> error_message =
 auto pauseCo() 
 {
   #ifdef MULTITHREADING
-  // if (MTObject::kill) exit(MTSIGEXIT);
+  if (MTObject::kill) exit(MTSIGEXIT);
   lock_mutex lock(MTObject::mutex);
   #endif //MULTITHREADING
 
@@ -174,6 +174,7 @@ auto pauseCo()
 auto pauseCo(std::string const & message) 
 {
   #ifdef MULTITHREADING
+  if (MTObject::kill) exit(MTSIGEXIT);
   lock_mutex lock(MTObject::mutex);
   #endif //MULTITHREADING
 

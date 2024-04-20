@@ -120,6 +120,12 @@ private:
 Time  RF_Manager::m_offset = 50000;
 Label RF_Manager::label = 251;
 
+std::ostream& operator<<(std::ostream& cout, RF_Manager const & rf)
+{
+  cout << "period : " << rf.period << "ps last timestamp : " << rf.last_downscale_timestamp << "ps" << std::endl;
+  return cout;
+}
+
 bool inline RF_Manager::setHit(Hit const & hit)
 {
   if (hit.label == this -> label)
@@ -131,61 +137,43 @@ bool inline RF_Manager::setHit(Hit const & hit)
   else return false;
 }
 
-  #ifdef EVENT_HPP
-/**
- * @brief Set an event containing only one hit
- */
-bool inline RF_Manager::setEvent(Event const & event)
-{
-  if (event.labels[0] == this -> label)
+#ifdef EVENT_HPP
+  /// @brief Set an event containing the downscale hit of RF
+  bool inline RF_Manager::setEvent(Event const & event)
   {
-    
-    if (event.adcs[0] == 0) this -> set(event.stamp,Timestamp_cast(event.nrjs[0]));
-    else                    this -> set(event.stamp,Timestamp_cast(event.adcs[0]));
-    return true;
+    if (event.labels[0] == this -> label)
+    {
+      
+      if (event.adcs[0] == 0) this -> set(event.stamp,Timestamp_cast(event.nrjs[0]));
+      else                    this -> set(event.stamp,Timestamp_cast(event.adcs[0]));
+      return true;
+    }
+    else return false;
   }
-  else return false;
-}
 
-bool inline RF_Manager::setHit(Event const & event, int const & hit_i)
-{
-  if (event.labels[hit_i] == RF_Manager::label)
+  bool inline RF_Manager::setHit(Event const & event, int const & hit_i)
   {
-    auto const & new_timestamp = event.stamp + event.times[hit_i];
-    if (event.adcs[0] == 0) this -> set(new_timestamp, Timestamp_cast(event.nrjs[0]));
-    else                    this -> set(new_timestamp, Timestamp_cast(event.adcs[0]));
-    return true;
+    if (event.labels[hit_i] == RF_Manager::label)
+    {
+      auto const & new_timestamp = event.stamp + event.times[hit_i];
+      if (event.adcs[0] == 0) this -> set(new_timestamp, Timestamp_cast(event.nrjs[0]));
+      else                    this -> set(new_timestamp, Timestamp_cast(event.adcs[0]));
+      return true;
+    }
+    else return false;
   }
-  else return false;
-}
 
-void inline RF_Manager::align_to_RF(Event & event) const
-{
-  event.setT0(relTime(event.stamp));
-}
-
-void inline RF_Manager::align_to_RF_ns(Event & event) const
-{
-  auto const & rf_Ref = relTime(event.stamp);
-  event.stamp -= rf_Ref;
-  for (int i = 0; i<event.mult; i++)
+  void inline RF_Manager::align_to_RF(Event & event) const
   {
-    event.times[i] += rf_Ref;
-    event.time2s[i] = Time_ns_cast(rf_Ref + event.times[i])/1000.;
+    event.setT0(relTime(event.stamp));
   }
-}
-  #endif //EVENT_HPP
-
-std::ostream& operator<<(std::ostream& cout, RF_Manager const & rf)
-{
-  cout << "period : " << rf.period << "ps last timestamp : " << rf.last_downscale_timestamp << "ps" << std::endl;
-  return cout;
-}
+#endif //EVENT_HPP
 
 //--------------------//
 //--- Helper class ---//
 //--------------------//
 
+/// @brief Helper class for applying RF_Manager to various interfaces
 class RF_Extractor
 {
 public:

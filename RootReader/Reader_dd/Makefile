@@ -45,7 +45,7 @@ HEADER_INCLUDES := $(addprefix -I,$(shell find $(HEADER_DIR) -type d ))
 	${CC} -c $< ${CFLAGS} ${LIBS} ${HEADER_INCLUDES}
 
 CC        = g++
-CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall 
+CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall -fext-numeric-literals
 LIBS      = ${FASTERAC_LIBS}   ${ROOT_LIBS}
 
 # Set SRCEXE to the name of the source file you want to compile

@@ -25,6 +25,7 @@
 #include <TLegend.h>
 #include <TMarker.h>
 #include <TMath.h>
+#include <TPolyMarker.h>
 #include <TRandom.h>
 #include <TROOT.h>
 #include <TSpectrum.h>
@@ -655,7 +656,7 @@ namespace CoAnalyse
       totProjY[y] += value;
     }
 
-    print("Substracting...");
+    print("Subtracting...");
     std::vector<TH2*> intermediate;
     std::vector<std::vector<TH1*>> intermediate_proj(projections.size());
     auto const & total = matrix->Integral();
@@ -697,7 +698,7 @@ namespace CoAnalyse
       }
     }
 
-    print("Substraction done, copying back...");
+    print("Subtraction done, copying back...");
     delete matrix;
     matrix = static_cast<TH2*>(clone->Clone());
 
@@ -707,7 +708,7 @@ namespace CoAnalyse
     print("RemoveRandomY done.");
     if (writeIntermediate)
     {
-      print("Writting intermediate steps...");
+      print("Writing intermediate steps...");
       std::string filename = std::string("Intermediate_")+matrix->GetName()+".root";
       auto file = TFile::Open(filename.c_str(), "recreate");
       file->cd();
@@ -774,7 +775,8 @@ namespace CoAnalyse
   }
 
   /// @deprecated
-  void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, ProjectionsBins projectionsY = {{}}, ProjectionsBins projectionsX = {{}})
+  void removeRandomBidim(TH2* matrix, int iterations = 1, bool save_intermediate = false, 
+                        ProjectionsBins projectionsY = {{}}, ProjectionsBins projectionsX = {{}})
   {
     // matrix->Rebin2D(2);
     int const & bins_x = matrix->GetNbinsX();
@@ -852,7 +854,7 @@ namespace CoAnalyse
     // std::vector<std::vector<double>> real_sub_array;
     // fill2D(real_sub_array, stopX, stopY, 0.0);
 
-    print("Substracting", matrix_name, "with", iterations, "iterations...");
+    print("Subtracting", matrix_name, "with", iterations, "iterations...");
     for (int it = 0; it<iterations; it++)
     {
       print("Iteration", it);
@@ -913,7 +915,7 @@ namespace CoAnalyse
         }
       }
 
-      // V4 : (the iterations are done excluding the extremal lines to avoid edge effet :)
+      // V4 : (the iterations are done excluding the extrema lines to avoid edge effect :)
       // for (int x = 1; x<bins_x; x++)
       // {
       //   for (int y = 1; y<bins_y; y++) 
@@ -962,7 +964,7 @@ namespace CoAnalyse
 
     if (save_intermediate)
     {
-      print("Writting intermediate steps...");
+      print("Writing intermediate steps...");
       std::string filename = "Background_removed_"+matrix_name+".root";
       auto file = TFile::Open(filename.c_str(), "recreate");
       file->cd();
@@ -982,7 +984,7 @@ namespace CoAnalyse
   /// @deprecated
   std::vector<double> extractBackgroundArray(std::vector<double> & source, int const & nsmooth = 10)
   {
-    print("depecrated (", nsmooth, ")");
+    print("deprecated (", nsmooth, ")");
     // auto s = new TSpectrum();
     // s->Background(source.data(),source.size(),nsmooth,TSpectrum::kBackDecreasingWindow,TSpectrum::kBackOrder2,kTRUE,TSpectrum::kBackSmoothing3,kFALSE);
     // s->Delete();
@@ -992,7 +994,7 @@ namespace CoAnalyse
   /// @deprecated
   std::vector<double> extractBackgroundArray(TH1F * histo, int const & nsmooth = 10)
   {
-    print("depecrated (", histo->GetName(), nsmooth, ")");
+    print("deprecated (", histo->GetName(), nsmooth, ")");
     // auto const & nbins = histo->GetNbinsX();
     // std::vector<double> source(nbins);
     // for (int bin=0;bin<nbins;bin++) source[bin]=histo->GetBinContent(bin+1);
@@ -1004,12 +1006,12 @@ namespace CoAnalyse
    * @brief Remove the background in the given histo
    * 
    * @param histo: Can be TH1 or TH2 histogram
-   * @param niter: Choose a higher number of iterations if the peaks have high resultion (5-10 for LaBr3, 20 for Ge)
+   * @param niter: Choose a higher number of iterations if the peaks have high resolution (5-10 for LaBr3, 20 for Ge)
    * @param fit_options: options from TH1::ShowBackground
    * @param bidim_options: 
    *    - "X" (default)  : Loop through the X bins, find the background on the Y projection
    *    - "Y" :            Loop through the Y bins, find the background on the X projection
-   *    - "S" (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrise the bidim
+   *    - "S" (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrize the bidim
    *    
    */
   void removeBackground(TH1 * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X") noexcept
@@ -1028,6 +1030,8 @@ namespace CoAnalyse
 
     else if (dim == 2)
     {
+      // error ("weird, removeBackground(TH2*) should have been called ....");
+      // return;
       char choice = 0; // 0 : X, 1 : Y, 2 : symmetric
       if (bidim_options.find("Y")) choice = 1;
       if (bidim_options.find("S")) choice = 2;
@@ -1044,7 +1048,7 @@ namespace CoAnalyse
       switch (choice)
       {
         case 0: case 2: 
-          // Substract the background of Y spectra gating on each X bins
+          // Subtract the background of Y spectra gating on each X bins
           for (int binX = 0; binX<nXbins; binX++)
           {
             TH1F* histo1D = nullptr; 
@@ -1056,7 +1060,7 @@ namespace CoAnalyse
         break;
 
         case 1:
-          // Substract the background of X spectra gating on each Y bins
+          // Subtract the background of X spectra gating on each Y bins
           for (int binY = 0; binY<nYbins; binY++)
           {
             TH1F* histo1D = nullptr; new TH1F("temp","temp",nYbins, bidim->GetYaxis()->GetXmax(), bidim->GetYaxis()->GetXmin());
@@ -1070,8 +1074,8 @@ namespace CoAnalyse
 
       // if (choice == 2)
       // {
-      //   //2. Resymetrise the matrice : (PROTOTYPAL !)
-      //   print("Symetrisation : ");
+      //   //2. Re-symmetrize the matrix : (PROTOTYPAL !)
+      //   print("Symmetrization : ");
       //   for (int binY = 0; binY<nYbins; binY++) for (int binX = 0; binX<nXbins; binX++)
       //   {
       //     histo->SetBinContent(binX, binY, histo->GetBinContent(binY, binX));
@@ -1079,6 +1083,128 @@ namespace CoAnalyse
       // }
     }
   }
+
+  template <class T>
+  using Pair = std::pair<T, T>;
+  template <class T>
+  using Pairs = std::vector<Pair<T>>;
+
+  using Point = Pair<double>;
+  using Points = Pairs<double>;
+
+  Points getMainPeaks(TH1D* histo, double const & sigma = 2., double const & threshold = 0.05)
+  {
+    histo->ShowPeaks(sigma, "", threshold);
+    auto markers = static_cast<TPolyMarker*>(histo->GetListOfFunctions()->FindObject("TPolyMarker"));
+    auto X = markers->GetX();
+    auto Y = markers->GetY();
+    auto N = markers->GetN();
+    Points points; points.reserve(N);
+    for (int i = 0; i<N; ++i)
+    {
+      points.emplace_back(Point({X[i], Y[i]}));
+    }
+    return points;
+  }
+
+  Pairs<int> getMainPeaksChannels(TH1D* histo, double const & sigma = 2., double const & threshold = 0.05)
+  {
+    auto const & points = getMainPeaks(histo, sigma, threshold);
+    Pairs<int> channels; channels.reserve(points.size());
+    for (auto const & point : points) channels.emplace_back(Pair<int>({int_cast(point.first-2*sigma), int_cast(point.first+2*sigma)}));
+    return channels;
+  }
+  
+  /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316
+  void removeBackground(TH2F * histo, int const & niter = 20, double const & sigmaX = 2., double const & sigmaY = 2., uchar const & choice = 0)
+  {
+    auto const & T = histo->Integral();
+
+    auto projX = histo->ProjectionX("projX"); // Get the total X projection of the matrix
+    auto bckgX = projX->ShowBackground(niter); // Get the total X projection's fitted background 
+    auto projX0 = static_cast<TH1F*>(projX->Clone("projX0")); // Prepare the background-clean total X projection
+    projX->Add(bckgX, -1); // Get the background-subtracted spectra
+
+    auto projY = histo->ProjectionY("projY");
+    auto bckgY = projY->ShowBackground(niter);
+    auto projY0 = static_cast<TH1F*>(projY->Clone("projY0"));
+    projY->Add(bckgY, -1);
+
+    // Extract informations from the histogram :
+    auto xaxis = histo->GetXaxis();
+    auto yaxis = histo->GetYaxis();
+
+    auto bckg_clean = static_cast<TH2F*>(histo->Clone("bckg_clean"));
+    auto bckg2D = static_cast<TH2F*>(histo->Clone("bckg2D"));
+    
+    if(choice == 0) // classic
+    {
+      for (int x=0; x<histo->GetNbinsX(); x++) for (int y=0; y<histo->GetNbinsY(); y++) 
+      {
+        auto const & Px = projX0->GetBinContent(x);
+        auto const & Py = projY0->GetBinContent(y);
+        auto const & px = projX->GetBinContent(x);
+        auto const & bx = bckgX->GetBinContent(x);
+        auto const & py = projY->GetBinContent(y);
+        auto const & by = bckgY->GetBinContent(y);
+        auto const & bx2 = bckgX->GetBinContent(y);
+        auto const & by2 = bckgY->GetBinContent(x);
+
+        auto const & bckg_at_xy = (px*by + py*bx + bx*by)/T;
+        // auto const & bckg_at_xy = (Px*Py - px*py)/T;// - ((px>max_projX/20) ? px/T : 0);
+        bckg2D->SetBinContent(x, y, bckg_at_xy);
+        auto const & new_value = histo->GetBinContent(x, y) - bckg_at_xy;
+        bckg_clean->SetBinContent(x, y, new_value);
+      }
+    }
+    else if (choice == 1) // Palameta and Waddington
+    {
+      // auto const & peaksX = getMainPeaksChannels(projX, sigmaX);
+      // auto const & peaksY = getMainPeaksChannels(projY, sigmaY); 
+      // auto projX_bis = static_cast<TH1F*>(projX0->Clone("projX_bis"));
+      // auto projY_bis = static_cast<TH1F*>(projY0->Clone("projY_bis"));
+      // for (int bin_i = 0; bin_i<xaxis->GetNbins(); ++bin_i)
+      // { // i=x for projX, i=y for projY
+      //   int sum_x = 0; // for projX
+      //   int sum_y = 0; // for projY
+      //   for (int bin_j = 0; bin_j<yaxis->GetNbins(); ++bin_j)
+      //   { // j=x for projX, i=x for projY
+      //     auto const & Mxy = histo->GetBinContent(bin);
+      //     if ()
+      //   }
+      //     projY_bis->SetBinContent(bin, );
+      //     projY_bis->SetBinContent(bin, );
+
+      // } 
+      
+      // auto const & Px_bis = projX_bis->GetBinContent(x);
+      // auto const & Py_bis = projY_bis->GetBinContent(y);
+      // auto const & bx = bckgX->GetBinContent(x);
+      // auto const & by = bckgY->GetBinContent(y);
+
+    }
+
+    for (int x=0; x<histo->GetNbinsX(); x++) for (int y=0; y<histo->GetNbinsY(); y++) 
+      histo->SetBinContent(x, y, bckg_clean->GetBinContent(x, y));
+    delete projX;
+    delete bckgX;
+    delete projY;
+    delete bckgY;
+    delete bckg_clean;
+    delete bckg2D;
+    delete gPad;
+  }
+
+  void test(TH2F* histo)
+  {
+    removeBackground(histo, 15);
+    // histo->Draw("colz");
+    // new TCanvas;
+    histo->ProjectionY("myProjY",641,643)->Draw();
+    new TCanvas;
+    histo->ProjectionX("myProjX",641,643)->Draw();
+  }
+
 };
 
 

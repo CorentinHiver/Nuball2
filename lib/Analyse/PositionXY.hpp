@@ -20,7 +20,7 @@ public:
     return (TMath::Sqrt(dx*dx+dy*dy));
   }
 
-  inline Float_t distanceTo(PositionXY const & coord_2)
+  inline Float_t distance(PositionXY const & coord_2)
   {
     return distance(*this, coord_2);
   }
@@ -31,4 +31,10 @@ private:
   Float_t m_x = 0;
   Float_t m_y = 0;
 };
+
+std::ostream& operator<< (std::ostream& out, PositionXY const & pos)
+{
+  out << "x : " << pos.x() <<  " y : " << pos.y();
+  return out;
+}
 #endif //POSITIONXY_H

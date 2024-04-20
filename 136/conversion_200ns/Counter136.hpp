@@ -28,13 +28,14 @@ public:
 
   std::array<std::vector<Time>, 24> ge_clovers_times;
 
+  Counter136(Event* event) : m_event(event) {}
+
   // Timing:
-  static std::pair<Time, Time> promptGate; //= {-10000, 10000};
+  static std::pair<Time, Time> promptGate;
   bool isPrompt(Time const & time) {return (promptGate.first<time && time<promptGate.second);}
-  static std::pair<Time, Time> delayedGate; //= {60000, 180000};
+  static std::pair<Time, Time> delayedGate;
   bool isDelayed(Time const & time) {return (delayedGate.first<time && time<delayedGate.second);}
 
-  Counter136(Event* event) : m_event(event) {}
 
   void reset() noexcept  
   {
@@ -139,8 +140,7 @@ private:
   Event * m_event = nullptr;
 };
 
-
-std::pair<Time, Time> Counter136::promptGate = {-10000, 10000};
-std::pair<Time, Time> Counter136::delayedGate = {60000, 180000};
+std::pair<Time, Time> Counter136::promptGate  = {-10_ns, 10_ns};
+std::pair<Time, Time> Counter136::delayedGate = {60_ns, 180_ns};
 
 #endif // COUNTER136_HPP

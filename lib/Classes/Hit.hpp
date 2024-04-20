@@ -16,9 +16,8 @@ using ADC       = int;
 using NRJ       = float;
 using Timestamp = ULong64_t;
 using Time      = Long64_t;
-using Time_ns   = float;
+using Time_ns   = float; // deprecated
 using Pileup    = bool;
-
 
 ////////////////////
 /// Data vectors ///
@@ -28,7 +27,7 @@ using Label_vec   = std::vector<Label  >;
 using ADC_vec     = std::vector<ADC    >;
 using Energy_vec  = std::vector<NRJ    >;
 using Time_vec    = std::vector<Time   >;
-using Time_ns_vec = std::vector<Time_ns>;
+using Time_ns_vec = std::vector<Time_ns>; // deprecated
 using Pileup_vec  = std::vector<Pileup >;
 
 
@@ -38,27 +37,45 @@ using Pileup_vec  = std::vector<Pileup >;
 
 /// @brief Casts a number into unsigned Label
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline Label Label_cast(T const & t) {return static_cast<Label>(t);}
+constexpr inline Label Label_cast(T const & t) {return static_cast<Label>(t);}
 
 /// @brief Casts a number into unsigned ADC
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline ADC ADC_cast(T const & t) {return static_cast<ADC>(t);}
+constexpr inline ADC ADC_cast(T const & t) {return static_cast<ADC>(t);}
 
 /// @brief Casts a number into unsigned Time
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline Time Time_cast(T const & t) {return static_cast<Time>(t);}
+constexpr inline Time Time_cast(T const & t) {return static_cast<Time>(t);}
 
 /// @brief Casts a number into unsigned NRJ
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline NRJ NRJ_cast(T const & t) {return static_cast<NRJ>(t);}
+constexpr inline NRJ NRJ_cast(T const & t) {return static_cast<NRJ>(t);}
 
 /// @brief Casts a number into unsigned Time_ns
+/// @deprecated
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline Time_ns Time_ns_cast(T const & t) {return static_cast<Time_ns>(t);}
+constexpr inline Time_ns Time_ns_cast(T const & t) {return static_cast<Time_ns>(t);}
 
 /// @brief Casts a number into unsigned Timestamp
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
+constexpr inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
+
+//////////////////////
+// Time conversions //
+//////////////////////
+
+// Units of time (= relative time). The code is based on ps.
+constexpr inline Time operator""_s (long double time) noexcept {return Time_cast(time*1.e+12);}
+constexpr inline Time operator""_ms(long double time) noexcept {return Time_cast(time*1.e+9 );}
+constexpr inline Time operator""_us(long double time) noexcept {return Time_cast(time*1.e+6 );}
+constexpr inline Time operator""_ns(long double time) noexcept {return Time_cast(time*1.e+3 );}
+constexpr inline Time operator""_ps(long double time) noexcept {return Time_cast(time       );}
+
+constexpr inline Time operator""_s (unsigned long long time) noexcept {return Time_cast(time*1.e+12);}
+constexpr inline Time operator""_ms(unsigned long long time) noexcept {return Time_cast(time*1.e+9 );}
+constexpr inline Time operator""_us(unsigned long long time) noexcept {return Time_cast(time*1.e+6 );}
+constexpr inline Time operator""_ns(unsigned long long time) noexcept {return Time_cast(time*1.e+3 );}
+constexpr inline Time operator""_ps(unsigned long long time) noexcept {return Time_cast(time       );}
 
 /////////////////////
 /// IO parameters ///
@@ -92,7 +109,6 @@ public:
       switch (option)
       {
         case ('l') : l  = true; break;
-        case ('s') : s  = true; break;
         case ('t') : t  = true; break;
         case ('T') : T  = true; break;
         case ('e') : e  = true; break;
@@ -102,21 +118,20 @@ public:
         case ('3') : q3 = true; break;
         case ('R') : Q3 = true; break;
         case ('p') : p  = true; break;
-        default : print("Unkown parameter", option, "for io event");
+        default : error("Unkown parameter", option, "for io data");
       }
     }
   }
 
   bool l  = false; // label
-  bool s  = false; // Timestamp
-  bool t  = false; // relative time ps
-  bool T  = false; // relative time ns
+  bool t  = false; // timestamp in ps
+  bool T  = false; // relative time in ps
   bool e  = false; // energy in ADC
-  bool E  = false; // calibrated energy
-  bool q  = false; // qdc2
-  bool Q  = false; // calibrated qdc2
-  bool q3 = false; // qdc3
-  bool Q3 = false; // calibrated qdc3
+  bool E  = false; // calibrated energy in keV
+  bool q  = false; // qdc2 in ADC
+  bool Q  = false; // calibrated qdc2 in keV
+  bool q3 = false; // qdc3 in ADC
+  bool Q3 = false; // calibrated qdc3 in keV
   bool p  = false; // pileup
 };
 
@@ -160,6 +175,9 @@ public:
  *        do something with the hit ...
  *      }
  * 
+ * Nomenclature : 
+ * The ADC are in INT because they represent a number of digitization channels
+ * 
  */
 class Hit
 {
@@ -200,21 +218,6 @@ public:
     pileup = hit.pileup;
     return *this;
   }
-
-  Label     label  = 0;     // Label
-  Timestamp stamp  = 0ull;  // Timestamp ('ull' stands for unsigned long long)
-  ADC       adc    = 0;     // Energy in ADC or QDC1
-  NRJ       nrj    = 0.f;   // Calibrated energy in keV
-  #ifndef QDC1MAX
-  ADC       qdc2   = 0;     // Energy in qdc2
-  NRJ       nrj2   = 0.f;   // Calibrated energy in qdc2 in keV
-    #ifndef QDC2MAX
-  ADC       qdc3   = 0;     // Energy in qdc3
-  NRJ       nrj3   = 0.f;   // Calibrated energy in qdc3 in keV
-    #endif //QDC2MAX
-  #endif //QDC1MAX
-  bool      pileup = false; // Pile-up (and saturation in QDC) tag
-
   void reset()
   {
     label  = 0;
@@ -232,9 +235,24 @@ public:
     pileup = false;
   }
 
+  Label     label  = 0;     // Label
+  Timestamp stamp  = 0ull;  // Timestamp ('ull' stands for unsigned long long)
+  ADC       adc    = 0;     // Energy in ADC or QDC1
+  NRJ       nrj    = 0.f;   // Calibrated energy in keV
+  #ifndef QDC1MAX
+  ADC       qdc2   = 0;     // Energy in qdc2
+  NRJ       nrj2   = 0.f;   // Calibrated energy in qdc2 in keV
+    #ifndef QDC2MAX
+  ADC       qdc3   = 0;     // Energy in qdc3
+  NRJ       nrj3   = 0.f;   // Calibrated energy in qdc3 in keV
+    #endif //QDC2MAX
+  #endif //QDC1MAX
+  bool      pileup = false; // Pile-up (and saturation in QDC) tag
+
+
   void reading (TTree * tree);
   void reading (TTree * tree, std::string const & options);
-  void writing(TTree * tree, std::string const & options = "lseqp");
+  void writing(TTree * tree, std::string const & options = "lteqp");
 
   static IOptions read;
   static IOptions write;
@@ -264,7 +282,7 @@ void Hit::reading(TTree * tree)
     std::string branchNameStr(branchName);
   
     if(branchNameStr == "label" ) {read.l  = true; tree -> SetBranchAddress("label" , & label );}
-    if(branchNameStr == "stamp" ) {read.s  = true; tree -> SetBranchAddress("stamp" , & stamp );}
+    if(branchNameStr == "stamp" ) {read.t  = true; tree -> SetBranchAddress("stamp" , & stamp );}
     if(branchNameStr == "adc"   ) {read.e  = true; tree -> SetBranchAddress("adc"   , & adc   );}
     if(branchNameStr == "nrj"   ) {read.E  = true; tree -> SetBranchAddress("nrj"   , & nrj   );}
     if(branchNameStr == "qdc2"  ) {read.q  = true; tree -> SetBranchAddress("qdc2"  , & qdc2  );}
@@ -290,7 +308,7 @@ void Hit::reading(TTree * tree, std::string const & options)
   tree -> ResetBranchAddresses();
   
   if (read.l ) tree -> SetBranchAddress("label"  , & label  );
-  if (read.s ) tree -> SetBranchAddress("stamp"  , & stamp  );
+  if (read.t ) tree -> SetBranchAddress("stamp"  , & stamp  );
   if (read.e ) tree -> SetBranchAddress("adc"    , & adc    );
   if (read.E ) tree -> SetBranchAddress("nrj"    , & nrj    );
   if (read.q ) tree -> SetBranchAddress("qdc2"   , & qdc2   );
@@ -313,7 +331,7 @@ void Hit::writing(TTree * tree, std::string const & options)
   tree -> ResetBranchAddresses();
 
   if (write.l ) tree -> Branch("label"  , & label  );
-  if (write.s ) tree -> Branch("stamp"  , & stamp  );
+  if (write.t ) tree -> Branch("stamp"  , & stamp  );
   if (write.e ) tree -> Branch("adc"    , & adc    );
   if (write.E ) tree -> Branch("nrj"    , & nrj    );
   if (write.q ) tree -> Branch("qdc2"   , & qdc2   );

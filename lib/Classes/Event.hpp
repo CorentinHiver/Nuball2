@@ -2,8 +2,6 @@
 #define EVENT_HPP
 
 #include "Hit.hpp"
-#include "../libCo.hpp"
-#include "../libRoot.hpp"
 
 #ifdef MULTITHREADING
   std::mutex mutex_events;
@@ -12,6 +10,8 @@
 /**
  * @brief Event object used for reading and writing event from/to root files in Nuball2-like TTree format, 
  * perform event building and trigger for faster to root conversion and data analysis.
+ * 
+ * @version 2.0 Removed the time2s handling
  * 
  * @details
  * 
@@ -25,7 +25,6 @@
  *        Timestamp stamp = 0ull;         Absolute timestamp of the whole event unsigned long long
  *        Label   labels  [255] = {0};    Labels of the hits
  *        Time    times   [255] = {0};    Time in ps (Long64_t = long long in x64 computers) relative either to the first hit or to the pulse 
- *        Time_ns time2s  [255] = {0};    Time in ns (float) relative either to the first hit or to the pulse
  *        ADC     adcs    [255] = {0};    Uncalibrated ADC value of the energy
  *        NRJ     nrjs    [255] = {0};    Calibrated (or simply gain matched) energy value in keV
  *        ADC     qdc2s   [255] = {0};    Uncalibrated QDC value of the energy measured in the second time gate for QDC2 channels
@@ -53,9 +52,8 @@
  * A list of all the options available so far :
  * 
  *        l : label  label                 ushort
- *        s : stamp  absolute timestamp ps ULong64_t
- *        t : time   relative timestamp ps Long64_t
- *        T : time2  relative timestamp ns float
+ *        t : stamp  absolute timestamp ps ULong64_t
+ *        T : time   relative timestamp ps Long64_t
  *        e : adc    energy in ADC         int
  *        E : nrj    energy in keV         float
  *        q : qdc2   energy qdc2 in ADC    float
@@ -106,13 +104,10 @@ public:
     mult (event.mult ),
     stamp(event.stamp),
     read (event.read ),
-    write(event.write),
-    isReading (event.isReading),
-    isWriting (event.isWriting)
+    write(event.write)
   {
     std::copy_n(event.labels   , mult ,  labels );
     std::copy_n(event.times    , mult ,  times  );
-    std::copy_n(event.time2s   , mult ,  time2s );
     std::copy_n(event.adcs     , mult ,  adcs   );
     std::copy_n(event.qdc2s    , mult ,  qdc2s  );
     std::copy_n(event.nrjs     , mult ,  nrjs   );
@@ -126,7 +121,7 @@ public:
   // Interface with TTree class
   void reading(TTree * tree);
   void reading(TTree * tree, std::string const & options);
-  void writing(TTree * tree, std::string const & options = "lstTeEqQ");
+  void writing(TTree * tree, std::string const & options = "ltTeEqQ");
 
   // Interface with Hit class
   void push_back(Hit const & hit);
@@ -136,71 +131,52 @@ public:
   Event& operator=(Event const & evt);
 
   // Timing management :
-  void setT0(Timestamp const & timestamp)
+  void setT0(Timestamp const & timestamp) noexcept
   {
     auto const & shift = Time_cast(this->stamp - timestamp);
     this -> timeShift(shift);
   }
 
-  void timeShift(Time const & shift)
+  void timeShift(Time const & shift) noexcept
   {
-    for (int hit_i = 0; hit_i<mult; hit_i++)
-    {
-      times[hit_i]+=shift;
-    }
+    for (int hit_i = 0; hit_i<mult; hit_i++) {timeShift(shift, hit_i);}
   }
 
-  void timeShift_ns(Time_ns const & shift)
-  {
-    for (int hit_i = 0; hit_i<mult; hit_i++)
-    {
-      time2s[hit_i]+=shift;
-    }
-  }
+  void timeShift(Time const & shift, int const & hit_i) noexcept {times[hit_i]+=shift;}
 
   // Usual methods :
-  void Print() const;
-  void clear() { mult = 0; }
-  size_t size() const { return size_cast(mult); }
-
-  // Specific methods :
-  size_t const & maxSize() const { return m_maxSize; }
-
-  // Accessors :
-  Time_ns time_ns(int const & i) const {return (read.T || write.T) ? time2s[i] : Time_ns_cast(times[i])/1000.f;}
+  void Print() const noexcept;
+  void clear() noexcept { mult = 0; }
+  size_t size() const noexcept { return size_cast(mult); }
 
   // State accessors : 
-  bool isSingle() const {return (mult == 1);}
-  bool isEmpty()  const {return (mult == 0);}
-  bool isCalibrated() const 
-  {
-         if ( isReading && !isWriting) return read .e && !read .E;
-    else if (!isReading &&  isWriting) return write.e && !write.E;
-    else 
-    {
-      print("Event not connected to any tree yet !");
-      return false;
-    }
-  }
+  bool isSingle() const noexcept {return (mult == 1);}
+  bool isEmpty()  const noexcept {return (mult == 0);}
 
   // Public members :
   int mult = 0;
   Timestamp stamp = 0ull;
-  Label     labels  [255] = {0};
-  Time      times   [255] = {0};
-  Time_ns   time2s  [255] = {0};
-  ADC       adcs    [255] = {0};
-  NRJ       nrjs    [255] = {0};
-  ADC       qdc2s   [255] = {0};
-  NRJ       nrj2s   [255] = {0};
-  Pileup    pileups [255] = {0};
+  static constexpr size_t maxSize = 255;
+  Label     labels  [maxSize] = {0};
+  Time      times   [maxSize] = {0};
+  ADC       adcs    [maxSize] = {0};
+  NRJ       nrjs    [maxSize] = {0};
+  ADC       qdc2s   [maxSize] = {0};
+  NRJ       nrj2s   [maxSize] = {0};
+  Pileup    pileups [maxSize] = {0};
+
+  void check_safe()
+  {
+#ifndef UNSAFE
+       if (mult>254) {print("Event mult > 254 !!"); return;}
+  else if (mult<0  ) throw_error("Event mult < 0 !!");
+#endif //UNSAFE
+  }
       
   // auto const & label  const (int const & hit_i) {return labels [hit_i];}
   auto       & label        (int const & hit_i) {return labels [hit_i];}
   // auto const & time   const (int const & hit_i) {return times  [hit_i];}
   auto       & time         (int const & hit_i) {return times  [hit_i];}
-  // auto const & time2  const (int const & hit_i) {return time2s [hit_i];}
-  auto       & time2        (int const & hit_i) {return time2s [hit_i];}
   // auto const & adc    const (int const & hit_i) {return adcs   [hit_i];}
   auto       & adc          (int const & hit_i) {return adcs   [hit_i];}
   // auto const & nrj    const (int const & hit_i) {return nrjs   [hit_i];}
@@ -219,9 +195,6 @@ public:
   IOptions write;
 
 private:
-  size_t m_maxSize = 255;
-  bool isReading = false;
-  bool isWriting = false;
 };
 
 Hit Event::operator[](int const & hit_i) 
@@ -233,7 +206,7 @@ Hit Event::operator[](int const & hit_i)
   hit.qdc2  = qdc2s [hit_i];
   hit.nrj   = nrjs  [hit_i];
   hit.nrj2  = nrj2s [hit_i];
-  return  (hit);
+  return hit;
 }
 
 
@@ -255,13 +228,10 @@ inline Event& Event::operator=(Event const & event)
 {
   read  = event.read;
   write = event.write;
-  isReading  = event.isReading;
-  isWriting = event.isWriting;
   mult  = event.mult;
-  if (write.s || read.s) stamp = event.stamp;
+  if (write.t || read.t) stamp = event.stamp;
   if (write.l || read.l) std::copy_n(event.labels   , mult ,  labels );
-  if (write.t || read.t) std::copy_n(event.times    , mult ,  times  );
-  if (write.T || read.T) std::copy_n(event.time2s   , mult ,  time2s );
+  if (write.T || read.T) std::copy_n(event.times    , mult ,  times  );
   if (write.e || read.e) std::copy_n(event.adcs     , mult ,  adcs   );
   if (write.q || read.q) std::copy_n(event.qdc2s    , mult ,  qdc2s  );
   if (write.E || read.E) std::copy_n(event.nrjs     , mult ,  nrjs   );
@@ -276,15 +246,11 @@ inline Event& Event::operator=(Event const & event)
  */
 void inline Event::reading(TTree * tree)
 {
-
 #ifdef MULTITHREADING
   lock_mutex lock(mutex_events);
 #endif //MULTITHREADING
 
   if (!tree) {print("Input tree at address 0x00 !"); return;}
-
-  isReading  = true;
-  isWriting = false;
 
   tree -> ResetBranchAddresses();
 
@@ -297,14 +263,17 @@ void inline Event::reading(TTree * tree)
     std::string const branchName = branch->GetName();
     
          if (branchName == "label" ) {read.l = true;  tree -> SetBranchAddress("label"  , &labels );}
-    else if (branchName == "stamp" ) {read.s = true;  tree -> SetBranchAddress("stamp"  , &stamp  );}
-    else if (branchName == "time"  ) {read.t = true;  tree -> SetBranchAddress("time"   , &times  );}
-    else if (branchName == "time2" ) {read.T = true;  tree -> SetBranchAddress("time2"  , &time2s );}
+    else if (branchName == "stamp" ) {read.t = true;  tree -> SetBranchAddress("stamp"  , &stamp  );}
+    else if (branchName == "time"  ) {read.T = true;  tree -> SetBranchAddress("time"   , &times  );}
     else if (branchName == "adc"   ) {read.e = true;  tree -> SetBranchAddress("adc"    , &adcs   );}
     else if (branchName == "nrj"   ) {read.E = true;  tree -> SetBranchAddress("nrj"    , &nrjs   );}
     else if (branchName == "qdc2"  ) {read.q = true;  tree -> SetBranchAddress("qdc2"   , &qdc2s  );}
     else if (branchName == "nrj2"  ) {read.Q = true;  tree -> SetBranchAddress("nrj2"   , &nrj2s  );}
     else if (branchName == "pileup") {read.p = true;  tree -> SetBranchAddress("pileup" , &pileups);}
+    else
+    {
+      error("branch", branchName, "unkown ... Event class can't read it !");
+    }
   }
   tree -> SetBranchStatus("*",true);
 }
@@ -317,18 +286,14 @@ void inline Event::reading(TTree * tree, std::string const & options)
 
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
-  isReading  = true;
-  isWriting = false;
-
   read.setOptions(options);
 
   tree -> ResetBranchAddresses();
 
               tree -> SetBranchAddress("mult"   , &mult   );
   if (read.l) tree -> SetBranchAddress("label"  , &labels );
-  if (read.s) tree -> SetBranchAddress("stamp"  , &stamp  );
-  if (read.t) tree -> SetBranchAddress("time"   , &times  );
-  if (read.T) tree -> SetBranchAddress("time2"  , &time2s );
+  if (read.t) tree -> SetBranchAddress("stamp"  , &stamp  );
+  if (read.T) tree -> SetBranchAddress("time"   , &times  );
   if (read.e) tree -> SetBranchAddress("adc"    , &adcs   );
   if (read.E) tree -> SetBranchAddress("nrj"    , &nrjs   );
   if (read.q) tree -> SetBranchAddress("qdc2"   , &qdc2s  );
@@ -346,17 +311,13 @@ void inline Event::writing(TTree * tree, std::string const & options)
 
   if (!tree) {print("Output tree at address 0x00 !"); return;}
 
-  isReading  = false;
-  isWriting = true;
-
   write.setOptions(options);  
 
   tree -> ResetBranchAddresses();
 
                createBranch     (tree, &mult    , "mult"  );
-  if (write.s) createBranch     (tree, &stamp   , "stamp" );
-  if (write.t) createBranchArray(tree, &times   , "time"  , "mult");
-  if (write.T) createBranchArray(tree, &time2s  , "time2" , "mult");
+  if (write.t) createBranch     (tree, &stamp   , "stamp" );
+  if (write.T) createBranchArray(tree, &times   , "time"  , "mult");
   if (write.E) createBranchArray(tree, &nrjs    , "nrj"   , "mult");
   if (write.Q) createBranchArray(tree, &nrj2s   , "nrj2"  , "mult");
   if (write.e) createBranchArray(tree, &adcs    , "adc"   , "mult");
@@ -368,10 +329,7 @@ void inline Event::writing(TTree * tree, std::string const & options)
 
 inline void Event::push_back(Hit const & hit)
 {
-#ifndef UNSAFE
-       if (mult>254) {print("Event mult > 255 !!"); return;}
-  else if (mult<0) throw_error("Event mult < 0 !!");
-#endif //UNSAFE
+  check_safe();
   labels  [mult] = hit.label;
   times   [mult] = Time_cast(hit.stamp-stamp);
   adcs    [mult] = hit.adc;
@@ -393,10 +351,7 @@ inline void Event::push_back(Hit const & hit)
  */
 inline void Event::push_front(Hit const & hit)
 {
-#ifndef UNSAFE
-       if (mult>254) {print("Event mult > 255 !!"); return;}
-  else if (mult<0) throw_error("Event mult < 0 !!");
-#endif //UNSAFE
+  check_safe();
   for (auto i = mult; i>0; i--)
   {
     labels  [i] = labels  [i-1];
@@ -431,7 +386,6 @@ inline std::ostream& operator<<(std::ostream& cout, Event const & event)
   {
     cout << "label : " << event.labels[i] << " ";
     if(event.times  [i] != 0) cout << "time : "     + std::to_string(event.times [i])+" ps  " ;
-    if(event.time2s [i] != 0) cout << "rel time : " + std::to_string(event.time2s[i])+" ns  " ;
     if(event.adcs   [i] != 0) cout << "adc : "      + std::to_string(event.adcs  [i])+" ";
     if(event.qdc2s  [i] != 0) cout << "qdc2 : "     + std::to_string(event.qdc2s [i])+" ";
     if(event.nrjs   [i] != 0) cout << "energy : "   + std::to_string(event.nrjs  [i])+" keV  ";
@@ -443,7 +397,7 @@ inline std::ostream& operator<<(std::ostream& cout, Event const & event)
   return cout;
 }
 
-inline void Event::Print() const
+inline void Event::Print() const noexcept
 {
   print(*this);
 }

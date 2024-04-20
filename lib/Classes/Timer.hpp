@@ -56,7 +56,7 @@ public:
     return d_milli.count()/1000.;
   }
 
-  auto operator() ()
+  auto operator() (int const & precision = 6)
   {
     double time = Time();
     m_unit = "ms";
@@ -65,7 +65,10 @@ public:
     else if (time>120000.){time/=60000.; m_unit = "min";}
     else if (time>1000.){time/=1000.; m_unit = "s";}
 
-    return std::to_string(time)+" "+m_unit;
+    std::stringstream ss;
+    ss << std::setprecision(precision) << " " << m_unit;
+
+    return ss.str();
   }
 
   std::string unit() {(*this)(); return m_unit;}

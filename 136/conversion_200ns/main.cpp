@@ -25,7 +25,6 @@ MTTHist<TH1F> histo_mult;
 #include <EventBuilderRF.hpp> // Event builder based on RF
 #include "Counter136.hpp"
 
-
 // 3. Declare some global variables :
 std::string IDFile = "../index_129.list";
 std::string calibFile = "../136_2024.calib";
@@ -353,7 +352,7 @@ int main(int argc, char** argv)
       std::string tree_name = run_name + "_" + std::to_string(fileNumber);
       std::unique_ptr<TTree> tempTree (new TTree(tree_name.c_str(),tree_name.c_str()));
       tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-      hit.writing(tempTree.get(), "lsEQp");
+      hit.writing(tempTree.get(), "ltEQp");
 
       // ------------------------ //
       // Loop over the .fast file //
@@ -377,7 +376,7 @@ int main(int argc, char** argv)
       
       print("Read of",raw_dataFile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s (", dataSize/read_timer.TimeElapsedSec(), "Mo/s)");
 
-      if (rawCounts==0) {print("NO HITS IN",run); return;}
+      if (rawCounts==0) {print("NO HITS IN", run); return;}
 
       // -------------------------------------- //
       // Realign switched hits after timeshifts //
@@ -390,13 +389,13 @@ int main(int argc, char** argv)
       // ------------------------------------------------------ //
       // Switch the temporary TTree to reading mode :
       hit.reset();
-      hit.reading(tempTree.get(), "lsEQp");
+      hit.reading(tempTree.get(), "ltEQp");
 
       std::string const outTree_name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
       TTree* outTree (new TTree(outTree_name.c_str(),"Nuball2"));
       outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
       Event event;
-      event.writing(outTree, "lstEQp");
+      event.writing(outTree, "ltTEQp");
 
       // Initialise object that handles the rf
       RF_Manager rf;

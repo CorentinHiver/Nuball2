@@ -7,7 +7,8 @@
 #include <MTTHist.hpp>
 #include <RWMat.hxx>
 #include <MTList.hpp>
-#include <ParisCluster.hpp>
+// #include <ParisCluster.hpp>
+#include <Paris.hpp>
 #include <Timer.hpp>
 // Version 2 : reads the root files with the double delayed between 0 and 200 and the previous hits between -n_pulses*200 and 0.
 
@@ -27,31 +28,35 @@ std::string trigger = "dd";
 class MyClovers
 {
 public:
-  MyClovers() noexcept = default;
-  auto const & operator[](int const & i) const noexcept { return m_clovers[i]; }
-  static bool isGe(Label const & label) {return label%6>1;}
-  static Label index(Label const & label) {return (label-23)/6;}
+  MyClovers() noexcept
+  {
+    CloverModule::resetGlobalLabel(); // This allows to correctly label the CloverModules of another instance of MyClovers  
+  };
+  inline auto const & operator[](int const & i) const noexcept { return m_clovers[i]; }
+  static inline uchar subIndex(Label const & label) noexcept {return (label+1)%6;}
+  static inline bool isGe(Label const & label) noexcept {return subIndex(label)>1;}
+  static inline Label index(Label const & label) noexcept {return (label-23)/6;}
   bool fill(Event const & event, int const & hit_i)
   {
-    if (analyzed) throw_error("MyClovers::fill() called while already analyzed, you need to reset first");
+    if (analyzed) throw_error("MyClovers::fill() called while already analyzed, you need to MyClovers::reset first");
     auto const & label = event.labels[hit_i];
     if (isClover[label])
     {
-      auto const & nrj = event.nrjs[label];
-      auto const & time = event.times[label];
-      Label clover_index = MyClovers::index(label); // label = 23 -> index = 0, label = 196 -> index = 23;
+      auto const & nrj = event.nrjs[hit_i];
+      auto const & time = event.times[hit_i];
+      auto const & clover_index = MyClovers::index(label); // label = 23 -> index = 0, label = 196 -> index = 23;
+      auto const & sub_index = subIndex(label);
       push_back_unique(Hits, clover_index);
+      m_clovers[clover_index].addHit(nrj, time, sub_index);
       calorimetryTotal+=nrj;
       if (isGe(label))
       {
         push_back_unique(Ge, clover_index);
-        m_clovers[clover_index].addGe(nrj, time);
         calorimetryGe+=nrj;
       }
       else
       {
         push_back_unique(BGO, clover_index);
-        m_clovers[clover_index].addBGO(nrj, time);
         calorimetryBGO+=nrj;
       }
       return true;
@@ -75,17 +80,19 @@ public:
     }
   }
 
-  void reset() noexcept
+  void reset()
   {
-    for(auto const & clover : Hits) m_clovers[clover].reset();
-    Hits.clear();
-    GeClean.clear();
-    BGOClean.clear();
-    Rejected.clear();
     calorimetryTotal = 0.0;
     calorimetryGe = 0.0;
     calorimetryBGO = 0.0;
     analyzed = false;
+    for(auto const & clover : Hits) m_clovers[clover].reset();
+    Hits.clear();
+    Ge.clear();
+    BGO.clear();
+    GeClean.clear();
+    BGOClean.clear();
+    Rejected.clear();
   }
 
   double calorimetryGe = 0.0;
@@ -101,13 +108,12 @@ public:
 
 private:
   std::array<CloverModule, 24> m_clovers;
-  std::vector<Time> m_time_hits;
   bool analyzed = false;
 };
 
-std::ostream & operator << (std::ostream & os, MyClovers const & clovers)
+std::ostream & operator << (std::ostream & os, MyClovers const & clovers) noexcept
 {
-  os << clovers.Hits.size() << " clovers hit :";
+  os << clovers.Hits.size() << " clovers hit :" << std::endl;
   for (auto const & clover_i : clovers.Hits)
   {
     os << clovers[clover_i] << std::endl;
@@ -191,6 +197,8 @@ private:
   // Histograms :
 #ifndef QUALITY
   MTTHist<TH1F> prompt_Ge;
+  MTTHist<TH2F> prompt_Clover_VS_sub_ring;
+  MTTHist<TH2F> prompt_Clover_VS_label;
   MTTHist<TH1F> delayed_Ge;
   MTTHist<TH1F> prompt_BGO;
   MTTHist<TH1F> delayed_BGO;
@@ -199,16 +207,21 @@ private:
   MTTHist<TH1F> prompt_LaBr;
   MTTHist<TH1F> delayed_LaBr;
 
+  MTTHist<TH1F> paris_pid;
+  MTTHist<TH2F> paris_long_vs_short;
+  MTTHist<TH2F> paris_long_vs_short_kept;
+
+  MTTHist<TH2F> timing_each_clover_Ge;
+  MTTHist<TH2F> timing_each_clover_BGO;
+  MTTHist<TH2F> nrj_each_clover_Ge_delayed;
+  MTTHist<TH2F> nrj_each_clover_Ge_prompt;
+  MTTHist<TH2F> nrj_each_clover_BGO_delayed;
+  MTTHist<TH2F> nrj_each_clover_BGO_prompt;
+
   MTTHist<TH1F> prompt_clean_Ge;
   MTTHist<TH1F> delayed_clean_Ge;
 
   MTTHist<TH1F> prompt_calo;
-  MTTHist<TH1F> prompt_calo_A;
-  MTTHist<TH1F> prompt_calo_B;
-  MTTHist<TH1F> prompt_calo_C;
-  MTTHist<TH1F> prompt_calo_D;
-  MTTHist<TH1F> prompt_calo_E;
-  MTTHist<TH1F> closest_prompt_calo_histo;
   MTTHist<TH1F> delayed_calo;
 
   MTTHist<TH2F> prompt_delayed_calo;
@@ -216,6 +229,7 @@ private:
   MTTHist<TH2F> delayed_Ge_VS_prompt_calo;
 
   MTTHist<TH2F> spectra_all;
+  MTTHist<TH2F> spectra_all_NaI;
   MTTHist<TH2F> spectra_Ge_VS_run;
   MTTHist<TH2F> spectra_BGO_VS_run;
   MTTHist<TH2F> spectra_LaBr_VS_run;
@@ -242,12 +256,6 @@ private:
   MTTHist<TH2F> dd_wpp;
   MTTHist<TH2F> dd_wppE;
   MTTHist<TH2F> dp;
-
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_A;
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_B;
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_C;
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_D;
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_E;
 
   MTTHist<TH2F> dd_time_Ge_clean;
   MTTHist<TH2F> dd_time_Ge_clean_wp;
@@ -279,6 +287,9 @@ private:
   MTTHist<TH2F> NaI_with_trigger_Clover_511;
   MTTHist<TH2F> LaBr3_with_trigger_LaBr3_511;
   MTTHist<TH2F> BGO_with_trigger_BGO_511;
+
+  // Different triggers on the delayed Ge spectra :
+  MTTHist<TH2F> delayed_Ge_VS_DeM;
 
   #else //QUALITY
 
@@ -318,17 +329,25 @@ void Analysator::Initialise()
   delayed_NaI.reset("delayed_NaI" , "delayed NaI;E[keV]" , 5000,0,10000);
   prompt_LaBr.reset("prompt_LaBr" , "prompt LaBr;E[keV]" , 5000,0,10000);
   delayed_LaBr.reset("delayed_LaBr" , "delayed LaBr;E[keV]" , 5000,0,10000);
+  
+  prompt_Clover_VS_sub_ring.reset("prompt_Clover_VS_sub_ring" , "prompt Clover VS cristal;E[keV];ring_n°+sub_cristal" , 5000,0,10000, 10,-1,9);
+  prompt_Clover_VS_label.reset("prompt_Clover_VS_label" , "prompt Clover VS cristal label;E[keV];cristal label" , 5000,0,10000, 10,-1,9);
+
+  paris_pid.reset("paris_pid" , "paris pid;E[keV]" , 1000,-2,2);
+  paris_long_vs_short.reset("paris_long_vs_short", "paris long vs short", 1000,-200,20000, 1000,-200,20000);
+  paris_long_vs_short_kept.reset("paris_long_vs_short_kept", "paris long vs short kept", 1000,-200,20000, 1000,-200,20000);
+
+  timing_each_clover_Ge.reset("timing_each_clover_Ge", "timing each clover Ge", 27,-2,25, 400,-100000,300000);
+  timing_each_clover_BGO.reset("timing_each_clover_BGO", "timing each clover BGO", 27,-2,25, 400,-100000,300000);
+  nrj_each_clover_Ge_delayed.reset("nrj_each_clover_Ge_delayed", "nrj each clover Ge delayed", 27,-2,25, 5000,0,10000);
+  nrj_each_clover_Ge_prompt.reset("nrj_each_clover_Ge_prompt", "nrj each clover Ge prompt", 27,-2,25, 5000,0,10000);
+  nrj_each_clover_BGO_delayed.reset("nrj_each_clover_BGO_delayed", "nrj each clover BGO delayed", 27,-2,25, 1000,0,20000);
+  nrj_each_clover_BGO_prompt.reset("nrj_each_clover_BGO_prompt", "nrj each clover BGO prompt", 27,-2,25, 1000,0,20000);
 
   number_of_pulses_detected.reset("number_of_pulses_detected","number of pulses detected", 5,0,5);
 
   // Calorimetry
   prompt_calo.reset("prompt_calo" , "prompt calorimetry;E[keV]" , 5000,0,10000);
-  prompt_calo_A.reset("prompt_calo_A" , "prompt calorimetry;E[keV]" , 5000,0,10000);
-  prompt_calo_B.reset("prompt_calo_B" , "prompt calorimetry;E[keV]" , 5000,0,10000);
-  prompt_calo_C.reset("prompt_calo_C" , "prompt calorimetry;E[keV]" , 5000,0,10000);
-  prompt_calo_D.reset("prompt_calo_D" , "prompt calorimetry;E[keV]" , 5000,0,10000);
-  prompt_calo_E.reset("prompt_calo_E" , "prompt calorimetry;E[keV]" , 5000,0,10000);
-  closest_prompt_calo_histo.reset("closest_prompt_calo_histo" , "closest prompt calorimetry;E[keV]" , 5000,0,10000);
   delayed_calo.reset("delayed_calo", "delayed calorimetry;E[keV]", 5000,0,10000);
   prompt_delayed_calo.reset("prompt_delayed_calo", "Delayed VS closest prompt calorimetry;Prompt Calorimetry[keV];Delayed Calorimetry[keV]", 
       1000,0,20000, 1000,0,20000);
@@ -352,11 +371,13 @@ void Analysator::Initialise()
 
 
   // Final bidims
-  pp.reset("pp", "pp;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  // pp.reset("pp", "pp;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
+  pp.reset("pp", "pp;E[keV];E[keV]", 4096,0,2048, 4096,0,2048);
   dd.reset("dd", "dd;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
   dp.reset("dp", "delayed VS prompt;E[keV];E[keV]", 4096,0,4096, 4096,0,4096);
 
   spectra_all.reset("spectra_all", "Spectra;label;Energy [keV]", 1000,0,1000, 10000,0,10000);
+  spectra_all_NaI.reset("spectra_all_NaI", "Spectra;label;Energy [keV]", 1000,0,1000, 10000,0,10000);
 
   spectra_Ge_VS_run.reset("spectra_Ge_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
   spectra_BGO_VS_run.reset("spectra_BGO_VS_run", "Spectra;run number;Energy [keV]", 100,50,150, 2000,0,2000);
@@ -378,12 +399,6 @@ void Analysator::Initialise()
   time_vs_run.reset("time_vs_run","time vs run", nb_runs,run_min,run_max, 750, -1000, 500);
 
   delayed_E_VS_time_Ge_clean.reset("delayed_E_VS_time_Ge_clean", "Energy vs time delayed;time [ns];Energy [keV]", 500,-1000,1000, 5000,0,10000);
-
-  delayed_clean_Ge_last_pulse_A.reset("delayed_clean_Ge_last_pulse_A", "clean Ge last pulse A;Energy [keV]", 10000,0,10000);
-  delayed_clean_Ge_last_pulse_B.reset("delayed_clean_Ge_last_pulse_B", "clean Ge last pulse B;Energy [keV]", 10000,0,10000);
-  delayed_clean_Ge_last_pulse_C.reset("delayed_clean_Ge_last_pulse_C", "clean Ge last pulse C;Energy [keV]", 10000,0,10000);
-  delayed_clean_Ge_last_pulse_D.reset("delayed_clean_Ge_last_pulse_D", "clean Ge last pulse D;Energy [keV]", 10000,0,10000);
-  delayed_clean_Ge_last_pulse_E.reset("delayed_clean_Ge_last_pulse_E", "clean Ge last pulse E;Energy [keV]", 10000,0,10000);
 
   dd_time_Ge_clean.reset("dd_time_Ge_clean", "dd time Ge clean;time [ns];time [ns]", 500,0,500,500,0,500);
   dd_time_Ge_clean_wp.reset("dd_time_Ge_clean_wp", "dd time Ge clean wp;time [ns];time [ns]", 500,0,500,500,0,500);
@@ -418,6 +433,9 @@ void Analysator::Initialise()
   LaBr3_with_trigger_LaBr3_511.reset("LaBr3_with_trigger_LaBr3_511","LaBr3 with trigger LaBr3 511", 1000,0,1000, 2500,0,5000);
   DSSD_VS_Clover_717.reset("DSSD_VS_Clover_717","DSSD VS Clover 717", 1000,0,1000, 1000,0,30000);
 
+  // Different triggers on the delayed Ge spectra :
+  delayed_Ge_VS_DeM.reset("delayed_Ge_VS_DeM", "delayed Ge VS delayed module multiplicity;Module multiplicity;E[keV]", 20,0,20, 20000,0,10000);
+
   // Run quality :
 #else // if QUALITY
   print("_______________");
@@ -442,7 +460,7 @@ void Analysator::Initialise()
 #endif //QUALITY
 }
 
-bool isDelayed(Time_ns const & time_ns) {return ((int_cast(time_ns)%200)>20 && (int_cast(time_ns)%200)<180);}
+// bool isDelayed(Time_ns const & time_ns) {return ((int_cast(time_ns)%200)>60 && (int_cast(time_ns)%200)<170);}
 
 void Analysator::analyze(Nuball2Tree & tree, Event & event)
 {
@@ -456,6 +474,13 @@ MTObject::mutex.unlock();
   Bools isNaI;
   Bools isLaBr;
   Bools rejected;
+
+  // std::vector<MyClovers> other_clover_hits;
+  MyClovers clovers_prompt;
+  MyClovers clovers_delayed;
+
+  Paris paris_prompt;
+  Paris paris_delayed;
 
   RF_Manager rf;
 
@@ -474,9 +499,8 @@ MTObject::mutex.unlock();
     isLaBr  .resize(event.mult, false);
     rejected.resize(event.mult, false);
 
-    MyClovers clovers_delayed;
-    std::vector<MyClovers> other_clover_hits;
-    MyClovers clovers_prompt;
+    clovers_delayed.reset();
+    clovers_prompt.reset();
 
     int prompt_mult = 0;
 
@@ -487,9 +511,9 @@ MTObject::mutex.unlock();
     for (int hit_i = 0; hit_i<event.mult; hit_i++) 
     {// Iterate over the hits of the event
       auto const & label = event.labels[hit_i];
-      auto       & time  = event.times [hit_i];
+      auto const & time  = event.times [hit_i];
       auto const & nrj2  = event.nrj2s [hit_i];
-      auto       & nrj   = event.nrjs  [hit_i];
+      auto const & nrj   = event.nrjs  [hit_i];
       auto const & time_ns = time/1000.0;
 
       if (isDSSD[label]) {rejected[hit_i] = true; continue;} // There is nothing to do with the dssd now
@@ -521,7 +545,29 @@ MTObject::mutex.unlock();
           ++prompt_mult;
           clovers_prompt.fill(event, hit_i);
         }      
-        else if (60 < time_ns && time_ns < 180) 
+        else if (60 < time_ns && time_ns < 170) 
+        {
+          is_delayed[hit_i] = true;
+          clovers_delayed.fill(event, hit_i);
+        }
+        else 
+        {
+          rejected[hit_i] = true;
+        }
+      }
+
+      ///////////
+      // BGO : //
+      ///////////
+      else if (isBGO[label]) 
+      {
+        if (time_ns<10)
+        {
+          is_prompt[hit_i] = true;
+          ++prompt_mult;
+          clovers_prompt.fill(event, hit_i);
+        }      
+        else if (60 < time_ns && time_ns < 190) 
         {
           is_delayed[hit_i] = true;
           clovers_delayed.fill(event, hit_i);
@@ -537,61 +583,108 @@ MTObject::mutex.unlock();
       /////////////
       else if (isParis[label]) 
       {
-        if (double_cast(nrj2-nrj)/double_cast(nrj2) > 0.15)
+        paris_long_vs_short.Fill(nrj, nrj2);
+        paris_long_vs_short_kept.Fill(nrj, nrj2);
+        auto const & state = ParisPhoswitch::test_gate_simple(nrj, nrj2);
+        switch (state)
         {
-          isNaI[hit_i] = true;
-
-          // time_all.Fill(label, time_ns, -1);
-          time_NaI.Fill(label, time_ns);
-          if (time<10) 
-          {
-            is_prompt[hit_i] = true;
-            prompt_NaI .Fill(nrj);
-          }
-          else if (60 < time_ns && time_ns < 180) 
-          {
-            is_delayed[hit_i] = true;
-            delayed_NaI.Fill(nrj);
-          }
-        }
-        else
-        {
-          isLaBr[hit_i] = true;
-               if (is_prompt [hit_i]) {prompt_LaBr .Fill(nrj);}
-          else if (is_delayed[hit_i]) {delayed_LaBr.Fill(nrj);}
+          case  0 : // Is LaBr3
+            isLaBr[hit_i] = true;
+            if (-5 < time_ns && time_ns < 5) 
+            {
+              is_prompt[hit_i] = true;
+              prompt_LaBr .Fill(nrj);
+            }
+            else if (60 < time_ns && time_ns < 190) 
+            {
+              is_delayed[hit_i] = true;
+              delayed_LaBr.Fill(nrj);
+            }
+            else 
+            {
+              rejected[hit_i] = true;
+            }
+            break;
+          case  1 : // Is NaI
+            isNaI[hit_i] = true;
+            time_NaI.Fill(label, time_ns);
+            if (time_ns<10) 
+            {
+              is_prompt[hit_i] = true;
+              prompt_NaI .Fill(nrj);
+            }
+            else if (60 < time_ns && time_ns < 190) 
+            {
+              is_delayed[hit_i] = true;
+              delayed_NaI.Fill(nrj);
+            }
+            else 
+            {
+              rejected[hit_i] = true;
+            }
+            break;
+          case 2 : // Is Internal add-back :
+          default : // All the rest : 
+            rejected[hit_i] = true;
+            break;
         }
       }
 
-      ///////////
-      // BGO : //
-      ///////////
-      else if (isBGO[label]) 
+      else // Not a known detector hit :
       {
-             if (is_prompt [hit_i]) {prompt_BGO .Fill(nrj);}
-        else if (is_delayed[hit_i]) {delayed_BGO.Fill(nrj);}
+        rejected[hit_i] = true;
       }
     }
+
+    ////////////////////
+    // ANALYSE CLOVER //
+    ////////////////////
     
     clovers_delayed.analyze();
     clovers_prompt.analyze();
 
-    print(evt_i);
-    print(clovers_delayed);
+    // print(clovers_delayed);
+    // print(clovers_prompt);
+    // pauseCo();
 
-    ///////////
-    // OTHER //
-    ///////////
+    for (auto const & clover_i : clovers_prompt.BGO)
+    {
+      auto const & clover = clovers_prompt[clover_i];
+      prompt_BGO.Fill(clover.nrj_BGO);
+      timing_each_clover_BGO.Fill(clover_i, clover.time_BGO);
+      nrj_each_clover_BGO_prompt.Fill(clover_i, clover.nrj_BGO);
+    }
 
+    for (auto const & clover_i : clovers_delayed.BGO)
+    {
+      auto const & clover = clovers_delayed[clover_i];
+      delayed_BGO.Fill(clover.nrj_BGO);
+      timing_each_clover_BGO.Fill(clover_i, clover.time_BGO);
+      nrj_each_clover_BGO_delayed.Fill(clover_i, clover.nrj_BGO);
+    }
+
+    for (auto const & clover_i : clovers_prompt.Ge)
+    {
+      auto const & clover = clovers_prompt[clover_i];
+      timing_each_clover_Ge.Fill(clover_i, clover.time);
+      nrj_each_clover_Ge_prompt.Fill(clover_i, clover.nrj);
+    }
+
+    for (auto const & clover_i : clovers_delayed.Ge)
+    {
+      auto const & clover = clovers_delayed[clover_i];
+      timing_each_clover_Ge.Fill(clover_i, clover.time);
+      nrj_each_clover_Ge_delayed.Fill(clover_i, clover.nrj);
+    }
+
+    // Some aliases for the next parts :
     auto const & delayed_indexes = clovers_delayed.GeClean; // Simple alias
     auto const & prompt_indexes = clovers_prompt.GeClean; // Simple alias
+
 
     //////////////////////
     // Clovers prompt : //
     //////////////////////
-
-    // print(clovers_delayed);
-    // print(clovers_prompt);
-    // pauseCo();
 
     for (size_t clover_it_i = 0; clover_it_i<prompt_indexes.size(); ++clover_it_i)
     {
@@ -600,6 +693,10 @@ MTObject::mutex.unlock();
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
       prompt_Ge.Fill(nrj_i);
+      int sub_ring = 4*(clover_i.label()/12) + clover_i.maxE_Ge_cristal-2;
+      Label label_cristal = clover_i.label()*4 + clover_i.maxE_Ge_cristal-2;
+      prompt_Clover_VS_sub_ring.Fill(nrj_i, sub_ring);
+      prompt_Clover_VS_label.Fill(nrj_i, label_cristal);
       // for(int hit_i = 0; hit_i<event.mult; ++hit_i) if(isNaI[hit_i]) spectra_NaI_VS_det[event.labels[hit_i]].Fill(nrj_i, event.nrjs[hit_i]);
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
@@ -607,23 +704,23 @@ MTObject::mutex.unlock();
         auto const & nrj = event.nrjs[hit_i];
              if (isBGO[label]) BGO_with_trigger_Clover_511.Fill(label, nrj);
         else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(label, nrj);
-        else if (isNaI[hit_i]) 
-        {
-          NaI_with_trigger_Clover_511.Fill(label, nrj);
-          
-        }
+        else if (isNaI[hit_i]) NaI_with_trigger_Clover_511.Fill(label, nrj);
       }
       if (715<nrj_i && nrj_i<720) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
         if (isDSSD[event.labels[hit_i]]) DSSD_VS_Clover_717.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+      }
+      for (size_t clover_it_j = clover_it_i+1; clover_it_j<prompt_indexes.size(); ++clover_it_j)
+      {
+        auto const & nrj_j = clovers_prompt[prompt_indexes[clover_it_j]].nrj;
+        pp.Fill(nrj_i, nrj_j);
+        pp.Fill(nrj_j, nrj_i);
       }
     }
 
     ///////////////////////
     // Clovers delayed : //
     ///////////////////////
-
-    bool C2_PM24 = false; // 2 clean delayed and 1<prompt mult<5
 
     if ((delayed_indexes.size() == 2))
     {
@@ -694,13 +791,14 @@ MTObject::mutex.unlock();
       }
     }
 
-    // All cases :
+    // All delayed hits :
     for (size_t clover_it_i = 0; clover_it_i<delayed_indexes.size(); ++clover_it_i)
     {
       auto const & clover_i = clovers_delayed[delayed_indexes[clover_it_i]];
       auto const & label_i = delayed_indexes[clover_it_i];
       auto const & nrj_i = clover_i.nrj;
       auto const & time_i = clover_i.time;
+      delayed_Ge.Fill(nrj_i);
       if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
              if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
@@ -709,19 +807,26 @@ MTObject::mutex.unlock();
       }
         
       delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
-
-      // Now, the point is to clean a maximum the data based on all the informations we have on the event,
-      // in order to have to cleanest gamma-gamma matrices possible.
+      
+      // delayed_Ge_VS_DeM.Fill();
 
       // Creating the gamma-gamma matrices :
       for (size_t clover_it_j = clover_it_i+1; clover_it_j<delayed_indexes.size(); ++clover_it_j)
       {
         auto const & clover_j = clovers_delayed[delayed_indexes[clover_it_j]];
         auto const & nrj_j = clover_j.nrj;
-        auto const & time_j = clover_j.time;
         
         dd.Fill(nrj_i, nrj_j);
         dd.Fill(nrj_j, nrj_i);
+      }
+
+      // Create the prompt-delayed matrix
+      for (size_t clover_it_j = 0; clover_it_j<prompt_indexes.size(); ++clover_it_j)
+      {
+        auto const & clover_j = clovers_prompt[prompt_indexes[clover_it_j]];
+        auto const & nrj_prompt = clover_j.nrj;
+        
+        dp.Fill(nrj_prompt, nrj_i);
       }
     }
   
@@ -743,7 +848,7 @@ MTObject::mutex.unlock();
   #endif // QUALITY
   }
 
-  printC("File ", file.string(), " read in ", timer(), " (", file.size("Mo")/timer.Time("s"), " Mo/s)");
+  printC("File ", file.string(), " read in ", timer(3), " (", file.size("Mo")/timer.Time("s"), " Mo/s)");
 }
 
 void Analysator::write()
@@ -777,15 +882,24 @@ void Analysator::write()
   delayed_NaI.Write();
   prompt_LaBr.Write();
   delayed_LaBr.Write();
+
+  prompt_Clover_VS_sub_ring.Write();
+  prompt_Clover_VS_label.Write();
+
+  paris_pid.Write();
+  paris_long_vs_short.Write();
+  paris_long_vs_short_kept.Write();
+
   delayed_clean_Ge.Write();
 
+  timing_each_clover_Ge.Write();
+  timing_each_clover_BGO.Write();
+  nrj_each_clover_Ge_delayed.Write();
+  nrj_each_clover_Ge_prompt.Write();
+  nrj_each_clover_BGO_delayed.Write();
+  nrj_each_clover_BGO_prompt.Write();
+
   prompt_calo.Write();
-  prompt_calo_A.Write();
-  prompt_calo_B.Write();
-  prompt_calo_C.Write();
-  prompt_calo_D.Write();
-  prompt_calo_E.Write();
-  closest_prompt_calo_histo.Write();
   delayed_calo.Write();
 
   prompt_delayed_calo.Write();
@@ -804,6 +918,7 @@ void Analysator::write()
   delayed_Ge_VS_delayed_calo_wppE.Write();
 
   spectra_all.Write();
+  spectra_all_NaI.Write();
   spectra_Ge_VS_run.Write();
   spectra_BGO_VS_run.Write();
   spectra_LaBr_VS_run.Write();
@@ -812,12 +927,6 @@ void Analysator::write()
 
   time_all.Write();
   time_NaI.Write();
-
-  delayed_clean_Ge_last_pulse_A.Write();
-  delayed_clean_Ge_last_pulse_B.Write();
-  delayed_clean_Ge_last_pulse_C.Write();
-  delayed_clean_Ge_last_pulse_D.Write();
-  delayed_clean_Ge_last_pulse_E.Write();
 
   dd_time_Ge_clean.Write();
   dd_time_Ge_clean_wp.Write();
@@ -1028,6 +1137,8 @@ int main(int argc, char** argv)
     //     if (isGe[label])
     //     {
     //       if (time_ns<20) prompt_Ge.Fill(nrj);
+    //       if (time_ns<20) prompt_Clover_VS_sub_ring.Fill(nrj);
+    //       if (time_ns<20) prompt_Clover_VS_label.Fill(nrj);
     //       else
     //       {
     //         delayed_Ge.Fill(nrj);
@@ -1051,7 +1162,6 @@ int main(int argc, char** argv)
     //   if (totalE_prompt>5) 
     //   {
     //     prompt_calo.Fill(totalE_prompt);
-    //     closest_prompt_calo_histo.Fill(totalE_prompt);
     //   }
 
     //   if (totalE_delayed>5)
