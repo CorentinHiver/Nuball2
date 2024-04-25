@@ -147,7 +147,6 @@ public:
   // Usual methods :
   void Print() const noexcept;
   void clear() noexcept { mult = 0; }
-  size_t size() const noexcept { return size_cast(mult); }
 
   // State accessors : 
   bool isSingle() const noexcept {return (mult == 1);}
@@ -157,13 +156,13 @@ public:
   int mult = 0;
   Timestamp stamp = 0ull;
   static constexpr size_t maxSize = 255;
-  Label     labels  [maxSize] = {0};
-  Time      times   [maxSize] = {0};
-  ADC       adcs    [maxSize] = {0};
-  NRJ       nrjs    [maxSize] = {0};
-  ADC       qdc2s   [maxSize] = {0};
-  NRJ       nrj2s   [maxSize] = {0};
-  Pileup    pileups [maxSize] = {0};
+  Label  labels  [maxSize] = {0};
+  Time   times   [maxSize] = {0};
+  ADC    adcs    [maxSize] = {0};
+  NRJ    nrjs    [maxSize] = {0};
+  ADC    qdc2s   [maxSize] = {0};
+  NRJ    nrj2s   [maxSize] = {0};
+  Pileup pileups [maxSize] = {0};
 
   void check_safe()
   {
@@ -340,8 +339,8 @@ inline void Event::push_back(Hit const & hit)
 }
 
 /**
- * @brief Sometimes, we want to select pre-prompt events. 
- * In such case, we have to put in in front of the others.
+ * @brief Sometimes, we want add events before the first hit. 
+ * In such case, we have to push in in front of the others.
  * 
  * @details
  * About the timestamp of the event, we keep the same as this additional event is located

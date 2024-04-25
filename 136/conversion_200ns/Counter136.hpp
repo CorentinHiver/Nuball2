@@ -126,7 +126,7 @@ public:
             break; // No need to continue looking for the other times of this clover
           }
         }
-             if (is_prompt) clover_clean_prompt.push_back(clover_i);
+             if(is_prompt)  clover_clean_prompt.push_back(clover_i);
         else if(is_delayed) clover_clean_delayed.push_back(clover_i);
       }
     }

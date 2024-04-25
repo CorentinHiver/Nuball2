@@ -1114,6 +1114,12 @@ namespace CoAnalyse
     for (auto const & point : points) channels.emplace_back(Pair<int>({int_cast(point.first-2*sigma), int_cast(point.first+2*sigma)}));
     return channels;
   }
+
+  bool inPeak(Pairs<int> const & peaks, int const & bin)
+  {
+    for (auto peak : peaks) if (bin>peak.first) return (bin<peak.second);
+    return false;
+  }
   
   /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316
   void removeBackground(TH2F * histo, int const & niter = 20, double const & sigmaX = 2., double const & sigmaY = 2., uchar const & choice = 0)
@@ -1133,25 +1139,26 @@ namespace CoAnalyse
     // Extract informations from the histogram :
     auto xaxis = histo->GetXaxis();
     auto yaxis = histo->GetYaxis();
+    auto const & Nx = xaxis->GetNbins()+1;
+    auto const & Ny = yaxis->GetNbins()+1;
 
     auto bckg_clean = static_cast<TH2F*>(histo->Clone("bckg_clean"));
     auto bckg2D = static_cast<TH2F*>(histo->Clone("bckg2D"));
     
     if(choice == 0) // classic
     {
-      for (int x=0; x<histo->GetNbinsX(); x++) for (int y=0; y<histo->GetNbinsY(); y++) 
+      for (int x=0; x<Nx; x++) for (int y=0; y<Ny; y++) 
       {
-        auto const & Px = projX0->GetBinContent(x);
-        auto const & Py = projY0->GetBinContent(y);
+        // auto const & Px = projX0->GetBinContent(x);
+        // auto const & Py = projY0->GetBinContent(y);
         auto const & px = projX->GetBinContent(x);
         auto const & bx = bckgX->GetBinContent(x);
         auto const & py = projY->GetBinContent(y);
         auto const & by = bckgY->GetBinContent(y);
-        auto const & bx2 = bckgX->GetBinContent(y);
-        auto const & by2 = bckgY->GetBinContent(x);
+        // auto const & bx2 = bckgX->GetBinContent(y);
+        // auto const & by2 = bckgY->GetBinContent(x);
 
         auto const & bckg_at_xy = (px*by + py*bx + bx*by)/T;
-        // auto const & bckg_at_xy = (Px*Py - px*py)/T;// - ((px>max_projX/20) ? px/T : 0);
         bckg2D->SetBinContent(x, y, bckg_at_xy);
         auto const & new_value = histo->GetBinContent(x, y) - bckg_at_xy;
         bckg_clean->SetBinContent(x, y, new_value);
@@ -1159,29 +1166,57 @@ namespace CoAnalyse
     }
     else if (choice == 1) // Palameta and Waddington
     {
-      // auto const & peaksX = getMainPeaksChannels(projX, sigmaX);
-      // auto const & peaksY = getMainPeaksChannels(projY, sigmaY); 
-      // auto projX_bis = static_cast<TH1F*>(projX0->Clone("projX_bis"));
-      // auto projY_bis = static_cast<TH1F*>(projY0->Clone("projY_bis"));
-      // for (int bin_i = 0; bin_i<xaxis->GetNbins(); ++bin_i)
-      // { // i=x for projX, i=y for projY
-      //   int sum_x = 0; // for projX
-      //   int sum_y = 0; // for projY
-      //   for (int bin_j = 0; bin_j<yaxis->GetNbins(); ++bin_j)
-      //   { // j=x for projX, i=x for projY
-      //     auto const & Mxy = histo->GetBinContent(bin);
-      //     if ()
-      //   }
-      //     projY_bis->SetBinContent(bin, );
-      //     projY_bis->SetBinContent(bin, );
+      // Promotes negative values to 0 in the background-substracted projections :
+      for (int bin = 1; bin<Nx; ++bin)
+      {
+        if(projX->GetBinContent(bin) < 0) projX->SetBinContent(bin, 0);
+        if(projY->GetBinContent(bin) < 0) projY->SetBinContent(bin, 0);
+      }
 
-      // } 
+      auto const & peaksX = getMainPeaksChannels(projX, sigmaX);
+      auto const & peaksY = getMainPeaksChannels(projY, sigmaY); 
+      print("nb main peaks found for X projection",peaksX.size(), "nb main peaks found for Y projection",peaksY.size());
+      auto projX_bis = static_cast<TH1F*>(projX0->Clone("projX_bis"));
+      auto projY_bis = static_cast<TH1F*>(projY0->Clone("projY_bis"));
+      int sum_y = 0; // for projX
+      int sum_x = 0; // for projY
+
       
-      // auto const & Px_bis = projX_bis->GetBinContent(x);
-      // auto const & Py_bis = projY_bis->GetBinContent(y);
-      // auto const & bx = bckgX->GetBinContent(x);
-      // auto const & by = bckgY->GetBinContent(y);
+      // The following works only for a symmetric matrix :
+      // Create the projection without the contribution of the main peaks in projection :
+      for (int bin_i = 1; bin_i<Nx; ++bin_i)
+      { // i=x for projX, i=y for projY
+        sum_y = 0; // Sum over all y for the x bin
+        sum_x = 0; // Sum over all x for the y bin
+        for (int bin_j = 1; bin_j<Ny; ++bin_j)
+        { // j=y for projX, j=x for projY
+          auto const & Mxy = histo->GetBinContent(bin_i, bin_j);
+          if (inPeak(peaksY, bin_j)) sum_y+=Mxy;
+          if (inPeak(peaksX, bin_j)) sum_x+=Mxy;
+        }
+        projX_bis->SetBinContent(bin_i, sum_y);
+        projY_bis->SetBinContent(bin_i, sum_x);
+      } 
+      
+      // Calculate the constant S and A used for the method (in the classic method, S=T and A=0 )
+      auto const & S = projX_bis->Integral();
+      double A = 0.0; for (int x = 0; x<Nx; ++x) if (inPeak(peaksX, x)) A+=projX_bis->GetBinContent(x);
+      A/=S;
 
+      print("T, S, A", T, S, A);
+      
+      for (int x = 1; x<Nx; ++x) for (int y = 1; y<Ny; ++y)
+      {
+        auto const & Px_bis = projX_bis->GetBinContent(x);
+        auto const & Py_bis = projY_bis->GetBinContent(y);
+        auto const & bx = bckgX->GetBinContent(x);
+        auto const & by = bckgY->GetBinContent(y);
+
+        auto const & bckg_at_xy = int_cast((bx*Py_bis + by*Px_bis - A*bx*by)/S);
+        bckg2D->SetBinContent(x, y, bckg_at_xy);
+        auto const & new_value = histo->GetBinContent(x, y) - bckg_at_xy;
+        bckg_clean->SetBinContent(x, y, new_value);
+      }
     }
 
     for (int x=0; x<histo->GetNbinsX(); x++) for (int y=0; y<histo->GetNbinsY(); y++) 
@@ -1191,18 +1226,18 @@ namespace CoAnalyse
     delete projY;
     delete bckgY;
     delete bckg_clean;
-    delete bckg2D;
+    // delete bckg2D;
     delete gPad;
   }
 
   void test(TH2F* histo)
   {
-    removeBackground(histo, 15);
+    removeBackground(histo, 30, 3, 3, 1);
     // histo->Draw("colz");
     // new TCanvas;
-    histo->ProjectionY("myProjY",641,643)->Draw();
+    histo->ProjectionY("myProjY",641*2,643*2)->Draw();
     new TCanvas;
-    histo->ProjectionX("myProjX",641,643)->Draw();
+    histo->ProjectionX("myProjX",641*2,643*2)->Draw();
   }
 
 };

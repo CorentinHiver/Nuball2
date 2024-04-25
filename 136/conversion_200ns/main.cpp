@@ -4,23 +4,21 @@
 // #define UNSAFE       // To unlock a little bit of speed, should not be significant though... and may lead to unexpected surprises !
 
 // 2. Include library
-#include <MTObject.hpp>
-#include <libCo.hpp>
-
-#include <MTTHist.hpp>
+#include <MTObject.hpp> // Include this first to activate the multithreading additions (#define MULTITHREADING)
+#include <MTTHist.hpp>  // Thread-safe wrapper around root histograms
 MTTHist<TH1F> histo_mult_trigger;
-MTTHist<TH1F> clover_histo;
+MTTHist<TH1F> labels_histo;
+MTTHist<TH1F> labels_trigged_histo;
+MTTHist<TH1F> labels_trigger_histo;
 MTTHist<TH1F> histo_mult;
 
-
-#include <FasterReader.hpp>   // This class is the base for mono  threaded code
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
-#include <MTFasterReader.hpp> // This class is the base for multi threaded code
-#include <MTCounter.hpp>      // Use this to thread safely count what you want²
-#include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Manip.hpp>          // Eases the manipulation of files and folder of an experiments
+#include <MTCounter.hpp>      // Use this to thread safely count what you want²
+#include <MTFasterReader.hpp> // This class is the base for multi threaded code
+#include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors with respect to a reference
 
 #include <EventBuilderRF.hpp> // Event builder based on RF
 #include "Counter136.hpp"
@@ -39,7 +37,7 @@ int max_hits_in_event = -1;
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
 bool check_preprompt = false;
-bool write_rf = false;
+bool keep_rf = false;
 bool fill_histos = false;
 bool keep_first_hits = false;
 
@@ -128,6 +126,10 @@ int main(int argc, char** argv)
         {
           keep_first_hits = true;
         }
+        else if (                   command == "--keep-rf")
+        {
+          keep_rf = true;
+        }
         else if (command == "-m" || command == "--multithread")
         {// Multithreading : number of threads
           nb_threads = atoi(argv[++i]);
@@ -181,28 +183,24 @@ int main(int argc, char** argv)
         {
           one_run_folder = argv[++i];
         }
-        else if (                   command == "--write-rf")
-        {
-          write_rf = true;
-        }
         else if (command == "-h" || command == "--help")
         {
           print("List of the commands :");
-          print("(-e  || --extend-period)  [nb_periods]    : set the number of periods to extend the time window after trigger");
-          print("(-f  || --files-number)   [files-number]  : set the number of files");
+          print("(-e  || --extend-period)  [nb_periods]    : set the number of periods to extend the time window after trigger (not functionnal)");
+          print("(-f  || --files-number)   [files-number]  : set the number of files to convert in each folder");
           print("(-h  || --help)                           : display this help");
           print("(       --keep-singles)                   : to keep singles hits");
           print("(       --keep-first-hits)                : to keep the hits before the first RF downscale");
+          print("(       --keep-rf)                        : to keep the downscale pulsation hits in the output data");
           print("(-m  || --multithread)    [thread_number] : set the number of threads to use. Maximum allowed : 3/4 of the total number of threads");
-          print("(-n  || --number-hits)    [hits_number]   : set the number of hit to read in each file.");
+          print("(-n  || --number-hits)    [hits_number]   : set the number of hits to read in each file.");
           print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
           print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
           print("(       --run)            [runName]       : set only one folder to convert");
-          print("(-t  || --trigger)        [trigger]       : Default ",list_trigger,"|", trigger_legend);
+          print("(-t  || --trigger)        [trigger]       : ", list_trigger, "|", trigger_legend);
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
           print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
           print("(       --129)                            : Treats the N-SI-129 pulsed runs");
-          print("(       --write-rf)                       : Include the downscale pulsation hits in the output data");
           return 0;
         }
         else 
@@ -226,8 +224,10 @@ int main(int argc, char** argv)
 
   // Initialise the histograms
   histo_mult_trigger.reset("mult_trig","mult_trig", 50,-1, 50);
-  clover_histo.reset("clover","clover", 50,-1, 50);
   histo_mult.reset("mult","mult", 50,-1, 50);
+  labels_histo.reset("labels","labels", 1000,0,1000);
+  labels_trigged_histo.reset("labels_trigged","labels trigged", 1000,0,1000);
+  labels_trigger_histo.reset("labels_trigger","labels trigger", 1000,0,1000);
 
   // Setup the path accordingly to the machine :
   Path dataPath = Path::home();
@@ -352,7 +352,7 @@ int main(int argc, char** argv)
       std::string tree_name = run_name + "_" + std::to_string(fileNumber);
       std::unique_ptr<TTree> tempTree (new TTree(tree_name.c_str(),tree_name.c_str()));
       tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-      hit.writing(tempTree.get(), "ltEQp");
+      hit.writing(tempTree.get(), "ltEQ");
 
       // ------------------------ //
       // Loop over the .fast file //
@@ -367,6 +367,8 @@ int main(int argc, char** argv)
         hit.nrj = calibration(hit.adc,  hit.label); // Normal calibration
         hit.nrj2 = ((hit.qdc2 == 0) ? 0.f : calibration(hit.qdc2, hit.label)); // Calibrate the qdc2 if any
       
+        labels_histo.Fill(hit.label);
+
         tempTree -> Fill();
       }
       
@@ -389,13 +391,13 @@ int main(int argc, char** argv)
       // ------------------------------------------------------ //
       // Switch the temporary TTree to reading mode :
       hit.reset();
-      hit.reading(tempTree.get(), "ltEQp");
+      hit.reading(tempTree.get(), "ltEQ"); // Reading label, timestamp, calibrated energy, calibrated qdc2
 
       std::string const outTree_name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
       TTree* outTree (new TTree(outTree_name.c_str(),"Nuball2"));
-      outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
+      outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - so much faster if enough RAM
       Event event;
-      event.writing(outTree, "ltTEQp");
+      event.writing(outTree, "ltTEQ"); // Writing labels, timestamp, relative times, calibrated energies, calibrated qdc2s
 
       // Initialise object that handles the rf
       RF_Manager rf;
@@ -418,7 +420,7 @@ int main(int argc, char** argv)
       // Handle the first hit :
       int loop = 0;
       // In the first file of each run, the first few hundreds of thousands of hits don't have RF downscale. 
-      // So we have to skip them in order to maintain good temporal resolution :
+      // So we have to skip them in order to maintain good temporal resolution of all events:
       if (!keep_first_hits) loop = first_rf.cursor();
       
       tempTree -> GetEntry(gIndex[loop++]);
@@ -438,15 +440,15 @@ int main(int argc, char** argv)
 
         if (rf.setHit(hit))
         { // Handle rf
-          if (write_rf)
+          if (keep_rf)
           {// Write down the rf in the data if the option is activated
             Event tempEvent (event);
             event = hit;
             outTree -> Fill();
             event = tempEvent;
+            ++trig_hits_count; // To count the hit
           }
-          // The rf hits cannot participate in the construction of an event as it is not a detector, 
-          // so move on to the next hit :
+          // The rf hits cannot participate in the construction of an event as it is not a detector
           continue;
         }
         
@@ -455,17 +457,20 @@ int main(int argc, char** argv)
          // in coincidence within the time window centered around the pulsation t0 (between -rf_shift and period-rf_shift)
           ++evts_count;
           if (max_hits_in_event > 0  &&  event.mult > max_hits_in_event) continue;
-          counter.count();
-          clover_histo.Fill(event.mult);
+          // counter.count();
           histo_mult.Fill(event.mult);
           if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "MEvts");
-          if (trigger(counter))
+          // if (trigger(counter))
+          if(event.mult>1) for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (isGe[event.labels[hit_i]])
           {
-            trig_hits_count+=event.size();
+            for (int hit_j = 0; hit_j<event.mult; ++hit_j) labels_trigged_histo.Fill(event.labels[hit_j]);
+            trig_hits_count+=event.mult;
             histo_mult_trigger.Fill(event.mult);
             ++trig_count;
 
             outTree->Fill();
+
+            break;
           }
         }
       }
@@ -485,8 +490,9 @@ int main(int argc, char** argv)
 
       auto outSize  = float_cast(size_file_conversion(float_cast(outFile->GetSize()), "o", "Mo"));
 
-      print(outfile, "written in", timer(), timer.unit(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
-            "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.*double_cast(trig_hits_count))/double_cast(nb_data),"% hits kept");
+      print(outfile, "written in", timer(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
+            "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.l*trig_hits_count)/(1.l*nb_data),"% hits kept",
+            "=", (100.l*trig_count)/(1.l*evts_count), "% evts");
     });
 
     print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer_total.TimeSec(), "Mo/s");
@@ -502,8 +508,9 @@ int main(int argc, char** argv)
     auto nb_threads_hadd = int_cast(std::thread::hardware_concurrency()*0.25);
     auto const & outRootName = outMergedPath.string() + run_name + ".root ";
     // hadd options : -v 1 for more minimum verbosity, -j for multithreading, -d to write the sub-files (due to multithreading) in current repository
-    std::string merge_command = "hadd -v 1 -d -j " + std::to_string(nb_threads_hadd) + " " + outRootName + outDataPath.string() + run_name + "_*.root";
-    if (overwrite) merge_command+= "-f";
+    std::string merge_command = "hadd -v 1 -d . -j " + std::to_string(nb_threads_hadd)+ " ";
+    if (overwrite) merge_command+= "-f "; // -f is to force overwriting of the merged file
+    merge_command += outRootName + outDataPath.string() + run_name + "_*.root";
     print(merge_command);
     system(merge_command.c_str());
 
@@ -511,9 +518,11 @@ int main(int argc, char** argv)
 
     unique_TFile histoFile (TFile::Open(outRootName.c_str(), "UPDATE"));
     histoFile->cd();
-    histo_mult_trigger.Write();
-    clover_histo.Write();
     histo_mult.Write();
+    histo_mult_trigger.Write();
+    labels_histo.Write();
+    labels_trigged_histo.Write();
+    labels_trigger_histo.Write();
     histoFile->Close();
   }
   return 0;

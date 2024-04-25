@@ -267,7 +267,7 @@ inline longlong longlong_cast(T const & t) {return static_cast<longlong>(t);}
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
 
-///@brief Check if the given double holds an integer
+///@brief Check if the given double has integer precision
 bool is_int (double const & x) {return std::trunc(x) == x;}
 
 ////////////////////////
@@ -677,7 +677,7 @@ namespace CoBazar
 }
 
 template <class T>
-std::string nicer_double(T const & t, int const & nb_digits = 6)
+std::string nicer_double(T const & t, int const & nb_decimals = 6)
 {
   auto value = double_cast(t);
   std::string s;
@@ -691,7 +691,7 @@ std::string nicer_double(T const & t, int const & nb_digits = 6)
   else if (value<1.e+12) {value*=1.e-9 ; s = " G";}
 
   std::stringstream ss;
-  ss << std::fixed << std::setprecision(nb_digits) << value << s;
+  ss << std::fixed << std::setprecision(nb_decimals) << value << s;
   return ss.str();
 }
 

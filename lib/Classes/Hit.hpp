@@ -71,10 +71,10 @@ constexpr inline Time operator""_us(long double time) noexcept {return Time_cast
 constexpr inline Time operator""_ns(long double time) noexcept {return Time_cast(time*1.e+3 );}
 constexpr inline Time operator""_ps(long double time) noexcept {return Time_cast(time       );}
 
-constexpr inline Time operator""_s (unsigned long long time) noexcept {return Time_cast(time*1.e+12);}
-constexpr inline Time operator""_ms(unsigned long long time) noexcept {return Time_cast(time*1.e+9 );}
-constexpr inline Time operator""_us(unsigned long long time) noexcept {return Time_cast(time*1.e+6 );}
-constexpr inline Time operator""_ns(unsigned long long time) noexcept {return Time_cast(time*1.e+3 );}
+constexpr inline Time operator""_s (unsigned long long time) noexcept {return Time_cast(time*1.e+12l);}
+constexpr inline Time operator""_ms(unsigned long long time) noexcept {return Time_cast(time*1.e+9l );}
+constexpr inline Time operator""_us(unsigned long long time) noexcept {return Time_cast(time*1.e+6l );}
+constexpr inline Time operator""_ns(unsigned long long time) noexcept {return Time_cast(time*1.e+3l );}
 constexpr inline Time operator""_ps(unsigned long long time) noexcept {return Time_cast(time       );}
 
 /////////////////////

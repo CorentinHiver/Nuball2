@@ -62,7 +62,6 @@ public:
   bool isSingle() const {return (m_event->isSingle());}
 
   Event* getEvent() const {return m_event;}
-  size_t size() const {return m_event -> size();}
 
   /// @brief Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time window.
   /// @details
