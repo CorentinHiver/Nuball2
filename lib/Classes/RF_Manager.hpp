@@ -79,7 +79,6 @@ public:
     }
     else 
     {
-      error ("rf_time ")
       throw_error("FATAL : inconsistency in the timestamps !!! in RF_Manager::relTime()");
       return 0;
     }
