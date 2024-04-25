@@ -517,318 +517,351 @@ MTObject::mutex.unlock();
       auto const & nrj   = event.nrjs  [hit_i];
       auto const & time_ns = time/1000.0;
 
-      if (isDSSD[label]) {rejected[hit_i] = true; continue;} // There is nothing to do with the dssd now
-      if (found(blacklist, label)) {rejected[hit_i] = true; continue;}
-      
-      // Throw events with too low energy
-      if (nrj<5)
+      for (int hit_j = hit_i+1; hit_j<event.mult; hit_j++) 
       {
-        rejected[hit_i] = true;
-        continue;
-      }
-
-      time_all.Fill(label, time_ns);
-      time_vs_run.Fill(run_number, time_ns);
-
-      //////////////////
-      // GERMANIUMS : //
-      //////////////////
-      if (isGe[label])
-      {
-        if (find_key(maxE_Ge, label) && nrj>maxE_Ge.at(label))
+        auto const & label_j = event.labels[hit_j];
+        auto const & time_j  = event.times [hit_j];
+        auto const & nrj2_j  = event.nrj2s [hit_j];
+        auto const & nrj_j   = event.nrjs  [hit_j];
+        auto const & time_ns_j = time/1000.0;
+        if (-10 < time_ns && time_ns < 10)
         {
-          rejected[hit_i] = true;
-          continue;
+          if (-10 < time_ns_j && time_ns_j < 10)
+          {
+            pp->Fill(nrj, nrj_j);
+            pp->Fill(nrj_j, nrj);
+          }
+          else if (60 < time_ns_j && time_ns_j < 170)
+          {
+            dp->Fill(nrj, nrj_j);
+          }
         }
-        if (time_ns<10)
-        {
-          is_prompt[hit_i] = true;
-          ++prompt_mult;
-          clovers_prompt.fill(event, hit_i);
-        }      
         else if (60 < time_ns && time_ns < 170) 
         {
-          is_delayed[hit_i] = true;
-          clovers_delayed.fill(event, hit_i);
-        }
-        else 
-        {
-          rejected[hit_i] = true;
+          if (60 < time_ns_j && time_ns_j < 170)
+          {
+            dd->Fill(nrj, nrj_j);
+            dd->Fill(nrj_j, nrj);
+          }
+          else if (-10 < time_ns_j && time_ns_j < 10)
+          { // Hits are ordered, should never happen that the hit_i
+            dp->Fill(nrj_j, nrj);
+          }
         }
       }
 
-      ///////////
-      // BGO : //
-      ///////////
-      else if (isBGO[label]) 
-      {
-        if (time_ns<10)
-        {
-          is_prompt[hit_i] = true;
-          ++prompt_mult;
-          clovers_prompt.fill(event, hit_i);
-        }      
-        else if (60 < time_ns && time_ns < 190) 
-        {
-          is_delayed[hit_i] = true;
-          clovers_delayed.fill(event, hit_i);
-        }
-        else 
-        {
-          rejected[hit_i] = true;
-        }
-      }
+    //   if (isDSSD[label]) {rejected[hit_i] = true; continue;} // There is nothing to do with the dssd now
+    //   if (found(blacklist, label)) {rejected[hit_i] = true; continue;}
       
-      /////////////
-      // PARIS : //
-      /////////////
-      else if (isParis[label]) 
-      {
-        paris_long_vs_short.Fill(nrj, nrj2);
-        paris_long_vs_short_kept.Fill(nrj, nrj2);
-        auto const & state = ParisPhoswitch::test_gate_simple(nrj, nrj2);
-        switch (state)
-        {
-          case  0 : // Is LaBr3
-            isLaBr[hit_i] = true;
-            if (-5 < time_ns && time_ns < 5) 
-            {
-              is_prompt[hit_i] = true;
-              prompt_LaBr .Fill(nrj);
-            }
-            else if (60 < time_ns && time_ns < 190) 
-            {
-              is_delayed[hit_i] = true;
-              delayed_LaBr.Fill(nrj);
-            }
-            else 
-            {
-              rejected[hit_i] = true;
-            }
-            break;
-          case  1 : // Is NaI
-            isNaI[hit_i] = true;
-            time_NaI.Fill(label, time_ns);
-            if (time_ns<10) 
-            {
-              is_prompt[hit_i] = true;
-              prompt_NaI .Fill(nrj);
-            }
-            else if (60 < time_ns && time_ns < 190) 
-            {
-              is_delayed[hit_i] = true;
-              delayed_NaI.Fill(nrj);
-            }
-            else 
-            {
-              rejected[hit_i] = true;
-            }
-            break;
-          case 2 : // Is Internal add-back :
-          default : // All the rest : 
-            rejected[hit_i] = true;
-            break;
-        }
-      }
+    //   // Throw events with too low energy
+    //   if (nrj<5)
+    //   {
+    //     rejected[hit_i] = true;
+    //     continue;
+    //   }
 
-      else // Not a known detector hit :
-      {
-        rejected[hit_i] = true;
-      }
-    }
+    //   time_all.Fill(label, time_ns);
+    //   time_vs_run.Fill(run_number, time_ns);
 
-    ////////////////////
-    // ANALYSE CLOVER //
-    ////////////////////
+    //   //////////////////
+    //   // GERMANIUMS : //
+    //   //////////////////
+    //   if (isGe[label])
+    //   {
+    //     if (find_key(maxE_Ge, label) && nrj>maxE_Ge.at(label))
+    //     {
+    //       rejected[hit_i] = true;
+    //       continue;
+    //     }
+    //     if (time_ns<10)
+    //     {
+    //       is_prompt[hit_i] = true;
+    //       ++prompt_mult;
+    //       clovers_prompt.fill(event, hit_i);
+    //     }      
+    //     else if (60 < time_ns && time_ns < 170) 
+    //     {
+    //       is_delayed[hit_i] = true;
+    //       clovers_delayed.fill(event, hit_i);
+    //     }
+    //     else 
+    //     {
+    //       rejected[hit_i] = true;
+    //     }
+    //   }
+
+    //   ///////////
+    //   // BGO : //
+    //   ///////////
+    //   else if (isBGO[label]) 
+    //   {
+    //     if (time_ns<10)
+    //     {
+    //       is_prompt[hit_i] = true;
+    //       ++prompt_mult;
+    //       clovers_prompt.fill(event, hit_i);
+    //     }      
+    //     else if (60 < time_ns && time_ns < 190) 
+    //     {
+    //       is_delayed[hit_i] = true;
+    //       clovers_delayed.fill(event, hit_i);
+    //     }
+    //     else 
+    //     {
+    //       rejected[hit_i] = true;
+    //     }
+    //   }
+      
+    //   /////////////
+    //   // PARIS : //
+    //   /////////////
+    //   else if (isParis[label]) 
+    //   {
+    //     paris_long_vs_short.Fill(nrj, nrj2);
+    //     paris_long_vs_short_kept.Fill(nrj, nrj2);
+    //     auto const & state = ParisPhoswitch::test_gate_simple(nrj, nrj2);
+    //     switch (state)
+    //     {
+    //       case  0 : // Is LaBr3
+    //         isLaBr[hit_i] = true;
+    //         if (-5 < time_ns && time_ns < 5) 
+    //         {
+    //           is_prompt[hit_i] = true;
+    //           prompt_LaBr .Fill(nrj);
+    //         }
+    //         else if (60 < time_ns && time_ns < 190) 
+    //         {
+    //           is_delayed[hit_i] = true;
+    //           delayed_LaBr.Fill(nrj);
+    //         }
+    //         else 
+    //         {
+    //           rejected[hit_i] = true;
+    //         }
+    //         break;
+    //       case  1 : // Is NaI
+    //         isNaI[hit_i] = true;
+    //         time_NaI.Fill(label, time_ns);
+    //         if (time_ns<10) 
+    //         {
+    //           is_prompt[hit_i] = true;
+    //           prompt_NaI .Fill(nrj);
+    //         }
+    //         else if (60 < time_ns && time_ns < 190) 
+    //         {
+    //           is_delayed[hit_i] = true;
+    //           delayed_NaI.Fill(nrj);
+    //         }
+    //         else 
+    //         {
+    //           rejected[hit_i] = true;
+    //         }
+    //         break;
+    //       case 2 : // Is Internal add-back :
+    //       default : // All the rest : 
+    //         rejected[hit_i] = true;
+    //         break;
+    //     }
+    //   }
+
+    //   else // Not a known detector hit :
+    //   {
+    //     rejected[hit_i] = true;
+    //   }
+    // }
+
+    // ////////////////////
+    // // ANALYSE CLOVER //
+    // ////////////////////
     
-    clovers_delayed.analyze();
-    clovers_prompt.analyze();
+    // clovers_delayed.analyze();
+    // clovers_prompt.analyze();
 
-    // print(clovers_delayed);
-    // print(clovers_prompt);
-    // pauseCo();
+    // // print(clovers_delayed);
+    // // print(clovers_prompt);
+    // // pauseCo();
 
-    for (auto const & clover_i : clovers_prompt.BGO)
-    {
-      auto const & clover = clovers_prompt[clover_i];
-      prompt_BGO.Fill(clover.nrj_BGO);
-      timing_each_clover_BGO.Fill(clover_i, clover.time_BGO);
-      nrj_each_clover_BGO_prompt.Fill(clover_i, clover.nrj_BGO);
-    }
+    // for (auto const & clover_i : clovers_prompt.BGO)
+    // {
+    //   auto const & clover = clovers_prompt[clover_i];
+    //   prompt_BGO.Fill(clover.nrj_BGO);
+    //   timing_each_clover_BGO.Fill(clover_i, clover.time_BGO);
+    //   nrj_each_clover_BGO_prompt.Fill(clover_i, clover.nrj_BGO);
+    // }
 
-    for (auto const & clover_i : clovers_delayed.BGO)
-    {
-      auto const & clover = clovers_delayed[clover_i];
-      delayed_BGO.Fill(clover.nrj_BGO);
-      timing_each_clover_BGO.Fill(clover_i, clover.time_BGO);
-      nrj_each_clover_BGO_delayed.Fill(clover_i, clover.nrj_BGO);
-    }
+    // for (auto const & clover_i : clovers_delayed.BGO)
+    // {
+    //   auto const & clover = clovers_delayed[clover_i];
+    //   delayed_BGO.Fill(clover.nrj_BGO);
+    //   timing_each_clover_BGO.Fill(clover_i, clover.time_BGO);
+    //   nrj_each_clover_BGO_delayed.Fill(clover_i, clover.nrj_BGO);
+    // }
 
-    for (auto const & clover_i : clovers_prompt.Ge)
-    {
-      auto const & clover = clovers_prompt[clover_i];
-      timing_each_clover_Ge.Fill(clover_i, clover.time);
-      nrj_each_clover_Ge_prompt.Fill(clover_i, clover.nrj);
-    }
+    // for (auto const & clover_i : clovers_prompt.Ge)
+    // {
+    //   auto const & clover = clovers_prompt[clover_i];
+    //   timing_each_clover_Ge.Fill(clover_i, clover.time);
+    //   nrj_each_clover_Ge_prompt.Fill(clover_i, clover.nrj);
+    // }
 
-    for (auto const & clover_i : clovers_delayed.Ge)
-    {
-      auto const & clover = clovers_delayed[clover_i];
-      timing_each_clover_Ge.Fill(clover_i, clover.time);
-      nrj_each_clover_Ge_delayed.Fill(clover_i, clover.nrj);
-    }
+    // for (auto const & clover_i : clovers_delayed.Ge)
+    // {
+    //   auto const & clover = clovers_delayed[clover_i];
+    //   timing_each_clover_Ge.Fill(clover_i, clover.time);
+    //   nrj_each_clover_Ge_delayed.Fill(clover_i, clover.nrj);
+    // }
 
-    // Some aliases for the next parts :
-    auto const & delayed_indexes = clovers_delayed.GeClean; // Simple alias
-    auto const & prompt_indexes = clovers_prompt.GeClean; // Simple alias
+    // // Some aliases for the next parts :
+    // auto const & delayed_indexes = clovers_delayed.GeClean; // Simple alias
+    // auto const & prompt_indexes = clovers_prompt.GeClean; // Simple alias
 
 
-    //////////////////////
-    // Clovers prompt : //
-    //////////////////////
+    // //////////////////////
+    // // Clovers prompt : //
+    // //////////////////////
 
-    for (size_t clover_it_i = 0; clover_it_i<prompt_indexes.size(); ++clover_it_i)
-    {
-      auto const & clover_i = clovers_prompt[prompt_indexes[clover_it_i]];
-      auto const & label_i = prompt_indexes[clover_it_i];
-      auto const & nrj_i = clover_i.nrj;
-      auto const & time_i = clover_i.time;
-      prompt_Ge.Fill(nrj_i);
-      int sub_ring = 4*(clover_i.label()/12) + clover_i.maxE_Ge_cristal-2;
-      Label label_cristal = clover_i.label()*4 + clover_i.maxE_Ge_cristal-2;
-      prompt_Clover_VS_sub_ring.Fill(nrj_i, sub_ring);
-      prompt_Clover_VS_label.Fill(nrj_i, label_cristal);
-      // for(int hit_i = 0; hit_i<event.mult; ++hit_i) if(isNaI[hit_i]) spectra_NaI_VS_det[event.labels[hit_i]].Fill(nrj_i, event.nrjs[hit_i]);
-      if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
-      {
-        auto const & label = event.labels[hit_i];
-        auto const & nrj = event.nrjs[hit_i];
-             if (isBGO[label]) BGO_with_trigger_Clover_511.Fill(label, nrj);
-        else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(label, nrj);
-        else if (isNaI[hit_i]) NaI_with_trigger_Clover_511.Fill(label, nrj);
-      }
-      if (715<nrj_i && nrj_i<720) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
-      {
-        if (isDSSD[event.labels[hit_i]]) DSSD_VS_Clover_717.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-      }
-      for (size_t clover_it_j = clover_it_i+1; clover_it_j<prompt_indexes.size(); ++clover_it_j)
-      {
-        auto const & nrj_j = clovers_prompt[prompt_indexes[clover_it_j]].nrj;
-        pp.Fill(nrj_i, nrj_j);
-        pp.Fill(nrj_j, nrj_i);
-      }
-    }
+    // for (size_t clover_it_i = 0; clover_it_i<prompt_indexes.size(); ++clover_it_i)
+    // {
+    //   auto const & clover_i = clovers_prompt[prompt_indexes[clover_it_i]];
+    //   auto const & label_i = prompt_indexes[clover_it_i];
+    //   auto const & nrj_i = clover_i.nrj;
+    //   auto const & time_i = clover_i.time;
+    //   prompt_Ge.Fill(nrj_i);
+    //   int sub_ring = 4*(clover_i.label()/12) + clover_i.maxE_Ge_cristal-2;
+    //   Label label_cristal = clover_i.label()*4 + clover_i.maxE_Ge_cristal-2;
+    //   prompt_Clover_VS_sub_ring.Fill(nrj_i, sub_ring);
+    //   prompt_Clover_VS_label.Fill(nrj_i, label_cristal);
+    //   // for(int hit_i = 0; hit_i<event.mult; ++hit_i) if(isNaI[hit_i]) spectra_NaI_VS_det[event.labels[hit_i]].Fill(nrj_i, event.nrjs[hit_i]);
+    //   if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
+    //   {
+    //     auto const & label = event.labels[hit_i];
+    //     auto const & nrj = event.nrjs[hit_i];
+    //          if (isBGO[label]) BGO_with_trigger_Clover_511.Fill(label, nrj);
+    //     else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(label, nrj);
+    //     else if (isNaI[hit_i]) NaI_with_trigger_Clover_511.Fill(label, nrj);
+    //   }
+    //   if (715<nrj_i && nrj_i<720) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
+    //   {
+    //     if (isDSSD[event.labels[hit_i]]) DSSD_VS_Clover_717.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+    //   }
+    //   for (size_t clover_it_j = clover_it_i+1; clover_it_j<prompt_indexes.size(); ++clover_it_j)
+    //   {
+    //     auto const & nrj_j = clovers_prompt[prompt_indexes[clover_it_j]].nrj;
+    //     pp.Fill(nrj_i, nrj_j);
+    //     pp.Fill(nrj_j, nrj_i);
+    //   }
+    // }
 
-    ///////////////////////
-    // Clovers delayed : //
-    ///////////////////////
+    // ///////////////////////
+    // // Clovers delayed : //
+    // ///////////////////////
 
-    if ((delayed_indexes.size() == 2))
-    {
-      auto const & time_0 = clovers_delayed[delayed_indexes[0]].time;
-      auto const & time_1 = clovers_delayed[delayed_indexes[1]].time;
-      auto const & nrj_0 = clovers_delayed[delayed_indexes[0]].nrj;
-      auto const & nrj_1 = clovers_delayed[delayed_indexes[1]].nrj;
-      auto const & dT = time_1 - time_0;
-      if (dT>50) continue;
-      auto const & calo = nrj_0+nrj_1;
-      delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_0);
-      delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_1);
-      if(prompt_mult > 1 && prompt_mult < 5)
-      {
-        delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_0);
-        delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_1);
-        // dd_wp.Fill(nrj_0, nrj_1);
-        // dd_wp.Fill(nrj_1, nrj_0);
-      }
-      else
-      {
-        delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_0);
-        delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_1);
-      }
+    // if ((delayed_indexes.size() == 2))
+    // {
+    //   auto const & time_0 = clovers_delayed[delayed_indexes[0]].time;
+    //   auto const & time_1 = clovers_delayed[delayed_indexes[1]].time;
+    //   auto const & nrj_0 = clovers_delayed[delayed_indexes[0]].nrj;
+    //   auto const & nrj_1 = clovers_delayed[delayed_indexes[1]].nrj;
+    //   auto const & dT = time_1 - time_0;
+    //   if (dT>50) continue;
+    //   auto const & calo = nrj_0+nrj_1;
+    //   delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_0);
+    //   delayed_Ge_C2_VS_total_Ge.Fill(calo, nrj_1);
+    //   if(prompt_mult > 1 && prompt_mult < 5)
+    //   {
+    //     delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_0);
+    //     delayed_Ge_C2_VS_total_Ge_cleaned.Fill(calo, nrj_1);
+    //     // dd_wp.Fill(nrj_0, nrj_1);
+    //     // dd_wp.Fill(nrj_1, nrj_0);
+    //   }
+    //   else
+    //   {
+    //     delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_0);
+    //     delayed_Ge_C2_VS_total_Ge_rejected.Fill(calo, nrj_1);
+    //   }
 
-      // Prompt VS delayed :
-      for (auto const & index : prompt_indexes)
-      {
-        auto const & clover = clovers_prompt[index];
-        delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_1);
-        delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_0);
-      }
-      delayed_Ge_C2_VS_prompt_mult.Fill(prompt_mult, nrj_0);
-      delayed_Ge_C2_VS_prompt_mult.Fill(prompt_mult, nrj_1);
-    }
+    //   // Prompt VS delayed :
+    //   for (auto const & index : prompt_indexes)
+    //   {
+    //     auto const & clover = clovers_prompt[index];
+    //     delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_1);
+    //     delayed_Ge_C2_VS_prompt_Ge.Fill(clover.nrj, nrj_0);
+    //   }
+    //   delayed_Ge_C2_VS_prompt_mult.Fill(prompt_mult, nrj_0);
+    //   delayed_Ge_C2_VS_prompt_mult.Fill(prompt_mult, nrj_1);
+    // }
 
-    if ((delayed_indexes.size() == 3)) 
-    {
-      auto const & time_0 = clovers_delayed[delayed_indexes[0]].time;
-      auto const & time_1 = clovers_delayed[delayed_indexes[1]].time;
-      auto const & time_2 = clovers_delayed[delayed_indexes[2]].time;
-      auto const & nrj_0 = clovers_delayed[delayed_indexes[0]].nrj;
-      auto const & nrj_1 = clovers_delayed[delayed_indexes[1]].nrj;
-      auto const & nrj_2 = clovers_delayed[delayed_indexes[2]].nrj;
-      auto const & dT01 = time_1-time_0;
-      auto const & dT02 = time_2-time_0;
-      auto const & dT12 = time_2-time_1;
-      if (dT01<50)
-      {
-        delayed_Ge_C3_VS_total_Ge.Fill(nrj_0+nrj_1, nrj_0);
-        delayed_Ge_C3_VS_total_Ge.Fill(nrj_0+nrj_1, nrj_1);
-      }
-      if (dT02<50)
-      {
-        delayed_Ge_C3_VS_total_Ge.Fill(nrj_0+nrj_2, nrj_0);
-        delayed_Ge_C3_VS_total_Ge.Fill(nrj_0+nrj_2, nrj_2);
-      }
-      if (dT12<50)
-      {
-        delayed_Ge_C3_VS_total_Ge.Fill(nrj_1+nrj_2, nrj_1);
-        delayed_Ge_C3_VS_total_Ge.Fill(nrj_1+nrj_2, nrj_2);
-      }
-      if (dT01<50 && dT02 < 50)
-      {
-        delayed_Ge_C3_tot3_VS_total_Ge.Fill(nrj_0+nrj_1+nrj_2, nrj_0);
-        delayed_Ge_C3_tot3_VS_total_Ge.Fill(nrj_0+nrj_1+nrj_2, nrj_1);
-        delayed_Ge_C3_tot3_VS_total_Ge.Fill(nrj_0+nrj_1+nrj_2, nrj_2);
-      }
-    }
+    // if ((delayed_indexes.size() == 3)) 
+    // {
+    //   auto const & time_0 = clovers_delayed[delayed_indexes[0]].time;
+    //   auto const & time_1 = clovers_delayed[delayed_indexes[1]].time;
+    //   auto const & time_2 = clovers_delayed[delayed_indexes[2]].time;
+    //   auto const & nrj_0 = clovers_delayed[delayed_indexes[0]].nrj;
+    //   auto const & nrj_1 = clovers_delayed[delayed_indexes[1]].nrj;
+    //   auto const & nrj_2 = clovers_delayed[delayed_indexes[2]].nrj;
+    //   auto const & dT01 = time_1-time_0;
+    //   auto const & dT02 = time_2-time_0;
+    //   auto const & dT12 = time_2-time_1;
+    //   if (dT01<50)
+    //   {
+    //     delayed_Ge_C3_VS_total_Ge.Fill(nrj_0+nrj_1, nrj_0);
+    //     delayed_Ge_C3_VS_total_Ge.Fill(nrj_0+nrj_1, nrj_1);
+    //   }
+    //   if (dT02<50)
+    //   {
+    //     delayed_Ge_C3_VS_total_Ge.Fill(nrj_0+nrj_2, nrj_0);
+    //     delayed_Ge_C3_VS_total_Ge.Fill(nrj_0+nrj_2, nrj_2);
+    //   }
+    //   if (dT12<50)
+    //   {
+    //     delayed_Ge_C3_VS_total_Ge.Fill(nrj_1+nrj_2, nrj_1);
+    //     delayed_Ge_C3_VS_total_Ge.Fill(nrj_1+nrj_2, nrj_2);
+    //   }
+    //   if (dT01<50 && dT02 < 50)
+    //   {
+    //     delayed_Ge_C3_tot3_VS_total_Ge.Fill(nrj_0+nrj_1+nrj_2, nrj_0);
+    //     delayed_Ge_C3_tot3_VS_total_Ge.Fill(nrj_0+nrj_1+nrj_2, nrj_1);
+    //     delayed_Ge_C3_tot3_VS_total_Ge.Fill(nrj_0+nrj_1+nrj_2, nrj_2);
+    //   }
+    // }
 
-    // All delayed hits :
-    for (size_t clover_it_i = 0; clover_it_i<delayed_indexes.size(); ++clover_it_i)
-    {
-      auto const & clover_i = clovers_delayed[delayed_indexes[clover_it_i]];
-      auto const & label_i = delayed_indexes[clover_it_i];
-      auto const & nrj_i = clover_i.nrj;
-      auto const & time_i = clover_i.time;
-      delayed_Ge.Fill(nrj_i);
-      if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
-      {
-             if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-        else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-        else if (isNaI[hit_i]) NaI_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
-      }
+    // // All delayed hits :
+    // for (size_t clover_it_i = 0; clover_it_i<delayed_indexes.size(); ++clover_it_i)
+    // {
+    //   auto const & clover_i = clovers_delayed[delayed_indexes[clover_it_i]];
+    //   auto const & label_i = delayed_indexes[clover_it_i];
+    //   auto const & nrj_i = clover_i.nrj;
+    //   auto const & time_i = clover_i.time;
+    //   delayed_Ge.Fill(nrj_i);
+    //   if (505<nrj_i && nrj_i<515) for(int hit_i = 0; hit_i<event.mult; ++hit_i)
+    //   {
+    //          if (isBGO[event.labels[hit_i]]) BGO_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+    //     else if (isLaBr[hit_i]) LaBr3_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+    //     else if (isNaI[hit_i]) NaI_with_trigger_Clover_511.Fill(event.labels[hit_i], event.nrjs[hit_i]);
+    //   }
         
-      delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
+    //   delayed_E_VS_time_Ge_clean.Fill(time_i, nrj_i);
       
-      // delayed_Ge_VS_DeM.Fill();
+    //   // delayed_Ge_VS_DeM.Fill();
 
-      // Creating the gamma-gamma matrices :
-      for (size_t clover_it_j = clover_it_i+1; clover_it_j<delayed_indexes.size(); ++clover_it_j)
-      {
-        auto const & clover_j = clovers_delayed[delayed_indexes[clover_it_j]];
-        auto const & nrj_j = clover_j.nrj;
+    //   // Creating the gamma-gamma matrices :
+    //   for (size_t clover_it_j = clover_it_i+1; clover_it_j<delayed_indexes.size(); ++clover_it_j)
+    //   {
+    //     auto const & clover_j = clovers_delayed[delayed_indexes[clover_it_j]];
+    //     auto const & nrj_j = clover_j.nrj;
         
-        dd.Fill(nrj_i, nrj_j);
-        dd.Fill(nrj_j, nrj_i);
-      }
+    //     dd.Fill(nrj_i, nrj_j);
+    //     dd.Fill(nrj_j, nrj_i);
+    //   }
 
-      // Create the prompt-delayed matrix
-      for (size_t clover_it_j = 0; clover_it_j<prompt_indexes.size(); ++clover_it_j)
-      {
-        auto const & clover_j = clovers_prompt[prompt_indexes[clover_it_j]];
-        auto const & nrj_prompt = clover_j.nrj;
+    //   // Create the prompt-delayed matrix
+    //   for (size_t clover_it_j = 0; clover_it_j<prompt_indexes.size(); ++clover_it_j)
+    //   {
+    //     auto const & clover_j = clovers_prompt[prompt_indexes[clover_it_j]];
+    //     auto const & nrj_prompt = clover_j.nrj;
         
-        dp.Fill(nrj_prompt, nrj_i);
-      }
+    //     dp.Fill(nrj_prompt, nrj_i);
+    //   }
     }
   
   #else // if QUALITY
@@ -906,7 +939,6 @@ void Analysator::write()
   prompt_delayed_calo.Write();
   delayed_Ge_VS_prompt_calo.Write();
 
-
   delayed_Ge_wpp.Write();
   delayed_calo_wpp.Write();
   prompt_Ge_wpp.Write();
@@ -924,7 +956,6 @@ void Analysator::write()
   spectra_BGO_VS_run.Write();
   spectra_LaBr_VS_run.Write();
   spectra_NaI_VS_run.Write();
-  // for (auto & histo : spectra_NaI_VS_det) histo.Write();
 
   time_all.Write();
   time_NaI.Write();

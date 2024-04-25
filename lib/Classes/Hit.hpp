@@ -118,7 +118,7 @@ public:
         case ('3') : q3 = true; break;
         case ('R') : Q3 = true; break;
         case ('p') : p  = true; break;
-        default : error("Unkown parameter", option, "for io data");
+        default : error("Unkown parameter '", option, "' for io data");
       }
     }
   }

@@ -67,7 +67,7 @@ public:
     // Now, there are two possibilities. Normally, the reference timestamp is lower than the shifted timestamp.
     // But in some cases, the reference timestamp is higher than the shifted timestamp (when looking "in the past").
     // The following allows one to have valid relative times for both situations :
-    if (shifted_timestamp>last_downscale_timestamp)
+    if (shifted_timestamp>=last_downscale_timestamp)
     {// Normal case
       auto const & relative_time = Time_cast((rf_time%period)); // This is the time separating the shifted timestamp to the t0 of the current pulse.
       return relative_time - m_offset; // Shifts back to obtain the correct relative time
@@ -79,6 +79,7 @@ public:
     }
     else 
     {
+      error ("rf_time ")
       throw_error("FATAL : inconsistency in the timestamps !!! in RF_Manager::relTime()");
       return 0;
     }
