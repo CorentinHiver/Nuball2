@@ -472,16 +472,16 @@ MTObject::mutex.lock();
   runs.push_back(run_number);
 MTObject::mutex.unlock();
 
-  Bools isNaI;
-  Bools isLaBr;
-  Bools rejected;
+  // Bools isNaI;
+  // Bools isLaBr;
+  // Bools rejected;
 
-  // std::vector<MyClovers> other_clover_hits;
-  MyClovers clovers_prompt;
-  MyClovers clovers_delayed;
+  // // std::vector<MyClovers> other_clover_hits;
+  // MyClovers clovers_prompt;
+  // MyClovers clovers_delayed;
 
-  Paris paris_prompt;
-  Paris paris_delayed;
+  // Paris paris_prompt;
+  // Paris paris_delayed;
 
   RF_Manager rf;
 
@@ -496,17 +496,17 @@ MTObject::mutex.unlock();
     if (rf.setEvent(event)) continue;
   
   #ifndef QUALITY
-    isNaI   .resize(event.mult, false);
-    isLaBr  .resize(event.mult, false);
-    rejected.resize(event.mult, false);
+    // isNaI   .resize(event.mult, false);
+    // isLaBr  .resize(event.mult, false);
+    // rejected.resize(event.mult, false);
 
-    clovers_delayed.reset();
-    clovers_prompt.reset();
+    // clovers_delayed.reset();
+    // clovers_prompt.reset();
 
     int prompt_mult = 0;
 
-    std::vector<bool> is_prompt(event.mult, false);
-    std::vector<bool> is_delayed(event.mult, false);
+    // std::vector<bool> is_prompt(event.mult, false);
+    // std::vector<bool> is_delayed(event.mult, false);
 
     // Data pre-treatment :
     for (int hit_i = 0; hit_i<event.mult; hit_i++) 
