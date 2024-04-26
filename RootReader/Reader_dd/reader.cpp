@@ -528,24 +528,24 @@ MTObject::mutex.unlock();
         {
           if (-10 < time_ns_j && time_ns_j < 10)
           {
-            pp->Fill(nrj, nrj_j);
-            pp->Fill(nrj_j, nrj);
+            pp.Fill(nrj, nrj_j);
+            pp.Fill(nrj_j, nrj);
           }
           else if (60 < time_ns_j && time_ns_j < 170)
           {
-            dp->Fill(nrj, nrj_j);
+            dp.Fill(nrj, nrj_j);
           }
         }
         else if (60 < time_ns && time_ns < 170) 
         {
           if (60 < time_ns_j && time_ns_j < 170)
           {
-            dd->Fill(nrj, nrj_j);
-            dd->Fill(nrj_j, nrj);
+            dd.Fill(nrj, nrj_j);
+            dd.Fill(nrj_j, nrj);
           }
           else if (-10 < time_ns_j && time_ns_j < 10)
           { // Hits are ordered, should never happen that the hit_i
-            dp->Fill(nrj_j, nrj);
+            dp.Fill(nrj_j, nrj);
           }
         }
       }
@@ -1054,7 +1054,7 @@ int main(int argc, char** argv)
       print("-n : number of hits per file");
       print("-d : single clean Ge trigger");
       print("-p : particle trigger");
-      print("-C2 : 2 clean Ge in the 200ns time window");
+      print("--C2 : 2 clean Ge in the 200ns time window");
       print("--new: the M1 prompt C1 delayed trigger");
       print("-m : number of threads");
       print("--129 : read N-SI-129 data");
