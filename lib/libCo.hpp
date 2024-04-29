@@ -695,7 +695,6 @@ std::string nicer_double(T const & t, int const & nb_decimals = 6)
   return ss.str();
 }
 
-
 // #if (__cplusplus >= 201703L)
 
 // /**

@@ -1,7 +1,8 @@
 #include <MTObject.hpp>
 #include "../libRoot.hpp"
+#include <Clovers.hpp>
 // #include <Hit.hpp>
-#include <FasterReader.hpp>
+// #include <FasterReader.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <HitBuffer.hpp>
@@ -12,6 +13,7 @@
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
 // #include <Convertor.hpp>
+#include <MTRootReader.hpp>
 // #include <MTFasterReader.hpp>
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
@@ -34,62 +36,78 @@ static thread_local std::mt19937 generator;
 
 int main()
 { 
-  std::mutex myMutex;
-  unsigned nb_threads = 2;
+  MTRootReader reader("/home/corentin/faster_data/N-SI-136-root_PrM1DeC1/merged/");
+  reader.read([](Nuball2Tree & tree, Event & event){
+    unique_TH1F test(new TH1F("test", "test", 10000,0,10000));
+    Clovers clovers;
+    for (int evt_i = 0; evt_i < 10000000; evt_i++) 
+    {
+      if (evt_i%int_cast(1.e+5) == 0) print(nicer_double(evt_i, 1));
+      tree->GetEntry(evt_i);
+      clovers.SetEvent(event);
+      for (auto const & index : clovers.CleanGe) test->Fill(clovers[index].nrj);
+    }
+    auto file(TFile::Open("test.root", "recreate"));
+    file->cd();
+    test->Write();
+    file->Close();
+  });
+  // std::mutex myMutex;
+  // unsigned nb_threads = 2;
 
-  // MTObject::Initialise(nb_threads);
-  // MTObject::parallelise_function([&](){
-  //   auto thread_i = MTObject::getThreadIndex();
+  // // MTObject::Initialise(nb_threads);
+  // // MTObject::parallelise_function([&](){
+  // //   auto thread_i = MTObject::getThreadIndex();
 
-  print("Initialising root thread safety");
-  ROOT::EnableThreadSafety();
-  std::vector<std::thread> threads;
-  threads.reserve(nb_threads);
-  for (unsigned thread_i = 0; thread_i<nb_threads; ++thread_i){threads.emplace_back([&](){
-    myMutex.lock();
-      generator.seed(time(0));
-      // std::string const tree_name = "myTree"+std::to_string(thread_i);
-      // TTree* tree (new TTree(tree_name.c_str(), tree_name.c_str()));
-      // print(tree_name, "created in memory");
-      TTree* tree (new TTree("myTree", "myTree"));
-      tree->SetDirectory(nullptr);
+  // print("Initialising root thread safety");
+  // ROOT::EnableThreadSafety();
+  // std::vector<std::thread> threads;
+  // threads.reserve(nb_threads);
+  // for (unsigned thread_i = 0; thread_i<nb_threads; ++thread_i){threads.emplace_back([&](){
+  //   myMutex.lock();
+  //     generator.seed(time(0));
+  //     // std::string const tree_name = "myTree"+std::to_string(thread_i);
+  //     // TTree* tree (new TTree(tree_name.c_str(), tree_name.c_str()));
+  //     // print(tree_name, "created in memory");
+  //     TTree* tree (new TTree("myTree", "myTree"));
+  //     tree->SetDirectory(nullptr);
 
 
-      ushort label = 0;
-      ULong64_t stamp = 0ull;
-      float nrj = 0.0f;
-      bool  pileup = false;
+  //     ushort label = 0;
+  //     ULong64_t stamp = 0ull;
+  //     float nrj = 0.0f;
+  //     bool  pileup = false;
 
-      tree -> Branch("label"  , &label  );
-      tree -> Branch("stamp"  , &stamp  );
-      tree -> Branch("nrj"    , &nrj    );
-      tree -> Branch("pileup" , &pileup );
+  //     tree -> Branch("label"  , &label  );
+  //     tree -> Branch("stamp"  , &stamp  );
+  //     tree -> Branch("nrj"    , &nrj    );
+  //     tree -> Branch("pileup" , &pileup );
 
-      print("Variables set to branches");
-    myMutex.unlock();
+  //     print("Variables set to branches");
+  //   myMutex.unlock();
 
-      for(int i = 0; i<10000; i++)
-      {
-        std::normal_distribution<double> distribution(20, 10);
-        double value = distribution(generator);
+  //     for(int i = 0; i<10000; i++)
+  //     {
+  //       std::normal_distribution<double> distribution(20, 10);
+  //       double value = distribution(generator);
 
-        label = static_cast<int>(value);
-        stamp = static_cast<ULong64_t>(abs(value));
-        nrj = static_cast<float>(value);
-        pileup = static_cast<bool>(value);
+  //       label = static_cast<int>(value);
+  //       stamp = static_cast<ULong64_t>(abs(value));
+  //       nrj = static_cast<float>(value);
+  //       pileup = static_cast<bool>(value);
 
-        tree->Fill();
-      }
+  //       tree->Fill();
+  //     }
 
-      print("tree filled");
+  //     print("tree filled");
 
-    myMutex.lock();
-      delete tree;
-    myMutex.unlock();
-    });
-  }
-  for (auto & thread : threads) thread.join();
-  threads.clear();
+  //   myMutex.lock();
+  //     delete tree;
+  //   myMutex.unlock();
+  //   });
+  // }
+  // for (auto & thread : threads) thread.join();
+  // threads.clear();
 
   // MTObject::Initialise(2);
   //   std::vector<std::string> names = 

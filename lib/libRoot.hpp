@@ -567,6 +567,14 @@ std::ostream& operator<<(std::ostream& cout, THBinning binning)
 
 namespace CoAnalyse
 {
+  bool inline checkMatrixSquare(TH2* mat) noexcept
+  {
+    if (!mat) {error(" in CoAnalyse::checkMatrixSquare(TH2* mat) : mat is nullptr"); return false;}
+    return (mat->GetNbinsX() == mat->GetNbinsY()
+    || mat->GetXaxis()->GetXmin()== mat->GetYaxis()->GetXmin()
+    || mat->GetXaxis()->GetXmax()== mat->GetYaxis()->GetXmax());
+
+  }
   /// @brief Vector of pairs of min and max bins 
   using ProjectionsBins = std::vector<std::pair<double,double>>;
 
@@ -1008,13 +1016,13 @@ namespace CoAnalyse
    * @param histo: Can be TH1 or TH2 histogram
    * @param niter: Choose a higher number of iterations if the peaks have high resolution (5-10 for LaBr3, 20 for Ge)
    * @param fit_options: options from TH1::ShowBackground
-   * @param bidim_options: 
+   * @param bidim_options: @deprecated
    *    - "X" (default)  : Loop through the X bins, find the background on the Y projection
    *    - "Y" :            Loop through the Y bins, find the background on the X projection
    *    - "S" (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrize the bidim
-   *    
+   * @param nice: if true, the minimum values of the bin content is 1.
    */
-  void removeBackground(TH1 * histo, int const & niter = 10, std::string const & fit_options = "", std::string const & bidim_options = "X") noexcept
+  void removeBackground(TH1 * histo, int const & niter = 20, std::string const & fit_options = "", bool nice = false) noexcept
   {
     if (!histo || histo->IsZombie()) return;
     auto const & dim = histo->GetDimension();
@@ -1024,17 +1032,18 @@ namespace CoAnalyse
       for (int bin=0; bin<histo->GetNbinsX(); bin++) 
       {
         auto const & new_value = histo->GetBinContent(bin) - background->GetBinContent(bin);
-        histo->SetBinContent(bin, (new_value<1) ? 1 : new_value);
+        if (nice) histo->SetBinContent(bin, (new_value<1) ? 1 : new_value);
+        else histo->SetBinContent(bin, new_value);
       }
     }
 
     else if (dim == 2)
     {
-      // error ("weird, removeBackground(TH2*) should have been called ....");
-      // return;
+      error ("weird, removeBackground(TH2*) should have been called ....");
+      return;
       char choice = 0; // 0 : X, 1 : Y, 2 : symmetric
-      if (bidim_options.find("Y")) choice = 1;
-      if (bidim_options.find("S")) choice = 2;
+      // if (bidim_options.find("Y")) choice = 1;
+      // if (bidim_options.find("S")) choice = 2;
       auto bidim = dynamic_cast<TH2F*>(histo);
 
       auto const & nXbins = bidim -> GetNbinsX();
@@ -1084,68 +1093,64 @@ namespace CoAnalyse
     }
   }
 
-  template <class T>
-  using Pair = std::pair<T, T>;
-  template <class T>
-  using Pairs = std::vector<Pair<T>>;
-
-  using Point = Pair<double>;
-  using Points = Pairs<double>;
-
-  Points getMainPeaks(TH1D* histo, double const & sigma = 2., double const & threshold = 0.05)
+  std::vector<bool> mainPeaksLookup(TH1D* histo, double const & sigma = 2., double const & threshold = 0.05, double const & n_sigma = 2, int const & verbose = 0)
   {
-    histo->ShowPeaks(sigma, "", threshold);
-    auto markers = static_cast<TPolyMarker*>(histo->GetListOfFunctions()->FindObject("TPolyMarker"));
-    auto X = markers->GetX();
-    auto Y = markers->GetY();
-    auto N = markers->GetN();
-    Points points; points.reserve(N);
-    for (int i = 0; i<N; ++i)
+    if (!histo) {error("in CoAnalyse::mainPeaksLookup() : histo is nullptr"); return std::vector<bool>(0);}
+    histo->ShowPeaks(sigma, "", threshold); // Get the peaks from the Root ShowPeaks method
+    auto markers = static_cast<TPolyMarker*>(histo->GetListOfFunctions()->FindObject("TPolyMarker")); // Exctract the peaks list
+    auto N = markers->GetN(); // Get the number of peaks
+    auto X = markers->GetX(); // Get the X values of the maximum of the peak (double*)
+    if (verbose>0) print(N, "peaks found");
+
+    std::vector<bool> lookup; lookup.reserve(histo->GetNbinsX()); // Prepare the lookup vector
+    print(histo->GetNbinsX());
+    int bin = 1; // Iterator over the bins of the histogram
+    for (int peak_i = 0; peak_i<N; ++peak_i)// Loop through the peaks 
     {
-      points.emplace_back(Point({X[i], Y[i]}));
+      // By default += 2 sigma captures 95% of the peak's surface
+      auto const & peak_begin = X[peak_i]-n_sigma*sigma; // The beginning of the peak 
+      auto const & peak_end = X[peak_i]+n_sigma*sigma+1; // The end of the peak 
+      for (;bin<peak_begin; ++bin) lookup.push_back(false); // Loop through the bins. While before the beginning of the peak, fill false
+      for (;bin<peak_end  ; ++bin) lookup.push_back(true);  // When in the peak, fill true
+      if (verbose>1) println(" ", X[peak_i]);
     }
-    return points;
+    if (verbose > 1) print();
+    for (;bin<histo->GetNbinsX()+1; ++bin) lookup.push_back(false); // After the last peak, fill false
+    return lookup;
   }
 
-  Pairs<int> getMainPeaksChannels(TH1D* histo, double const & sigma = 2., double const & threshold = 0.05)
-  {
-    auto const & points = getMainPeaks(histo, sigma, threshold);
-    Pairs<int> channels; channels.reserve(points.size());
-    for (auto const & point : points) channels.emplace_back(Pair<int>({int_cast(point.first-2*sigma), int_cast(point.first+2*sigma)}));
-    return channels;
-  }
-
-  bool inPeak(Pairs<int> const & peaks, int const & bin)
-  {
-    for (auto peak : peaks) if (bin>peak.first) return (bin<peak.second);
-    return false;
-  }
-  
   /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316
-  void removeBackground(TH2F * histo, int const & niter = 20, double const & sigmaX = 2., double const & sigmaY = 2., uchar const & choice = 0)
+  /// @param choice: 0 : classic radware | 1 : Palameta and Waddington (PW) | 2 : classic + remove diagonals | 3 : PW + remove diagonals
+  void removeBackground(TH2F * histo, int const & niter = 20, uchar const & choice = 0, double const & threshold = 0.05, double const & sigmaX = 2., double const & sigmaY = 2.)
   {
+    if (!checkMatrixSquare(histo)) {error ("The matrix must be square"); return;}
+
     auto const & T = histo->Integral();
 
-    auto projX = histo->ProjectionX("projX"); // Get the total X projection of the matrix
-    auto bckgX = projX->ShowBackground(niter); // Get the total X projection's fitted background 
-    auto projX0 = static_cast<TH1F*>(projX->Clone("projX0")); // Prepare the background-clean total X projection
-    projX->Add(bckgX, -1); // Get the background-subtracted spectra
+    auto projX0 = histo->ProjectionX("projX0"); // Get the total X projection of the matrix
+    auto bckgX = projX0->ShowBackground(niter); // Get the total X projection's fitted background 
+    auto projX = static_cast<TH1D*>(projX0->Clone("projX")); // Prepare the background-clean total X projection
+    projX->Add(bckgX, -1); // Calculate the background-subtracted spectra
 
-    auto projY = histo->ProjectionY("projY");
-    auto bckgY = projY->ShowBackground(niter);
-    auto projY0 = static_cast<TH1F*>(projY->Clone("projY0"));
+    auto projY0 = histo->ProjectionY("projY0");
+    auto bckgY = projY0->ShowBackground(niter);
+    auto projY = static_cast<TH1D*>(projY0->Clone("projY"));
     projY->Add(bckgY, -1);
 
     // Extract informations from the histogram :
     auto xaxis = histo->GetXaxis();
     auto yaxis = histo->GetYaxis();
     auto const & Nx = xaxis->GetNbins()+1;
+    auto const & xmin = xaxis->GetXmin();
+    auto const & xmax = xaxis->GetXmax();
     auto const & Ny = yaxis->GetNbins()+1;
+    auto const & ymin = yaxis->GetXmin();
+    auto const & ymax = yaxis->GetXmax();
 
-    auto bckg_clean = static_cast<TH2F*>(histo->Clone("bckg_clean"));
-    auto bckg2D = static_cast<TH2F*>(histo->Clone("bckg2D"));
+    auto bckg_clean = new TH2F("bckg_clean","bckg_clean", Nx,xmin,xmax, Ny,ymin,ymax);
+    auto bckg2D = new TH2F("bckg2D","bckg2D", Nx,xmin,xmax, Ny,ymin,ymax);
     
-    if(choice == 0) // classic
+    if(choice == 0 || choice == 2) // classic radware
     {
       for (int x=0; x<Nx; x++) for (int y=0; y<Ny; y++) 
       {
@@ -1157,14 +1162,15 @@ namespace CoAnalyse
         auto const & by = bckgY->GetBinContent(y);
         // auto const & bx2 = bckgX->GetBinContent(y);
         // auto const & by2 = bckgY->GetBinContent(x);
-
-        auto const & bckg_at_xy = (px*by + py*bx + bx*by)/T;
+        // The bin xy has the contribution of true coincidence E1*E2, as well as E1*background2 + E2*background1 + background1*background2
+        // We are interested only at the true coincidence, the background is therefore :
+        auto const & bckg_at_xy = int_cast((px*by + py*bx + bx*by)/T);
         bckg2D->SetBinContent(x, y, bckg_at_xy);
         auto const & new_value = histo->GetBinContent(x, y) - bckg_at_xy;
         bckg_clean->SetBinContent(x, y, new_value);
       }
     }
-    else if (choice == 1) // Palameta and Waddington
+    if (choice > 0) // Finds the biggest peaks in the total projections :
     {
       // Promotes negative values to 0 in the background-substracted projections :
       for (int bin = 1; bin<Nx; ++bin)
@@ -1173,14 +1179,15 @@ namespace CoAnalyse
         if(projY->GetBinContent(bin) < 0) projY->SetBinContent(bin, 0);
       }
 
-      auto const & peaksX = getMainPeaksChannels(projX, sigmaX);
-      auto const & peaksY = getMainPeaksChannels(projY, sigmaY); 
-      print("nb main peaks found for X projection",peaksX.size(), "nb main peaks found for Y projection",peaksY.size());
-      auto projX_bis = static_cast<TH1F*>(projX0->Clone("projX_bis"));
-      auto projY_bis = static_cast<TH1F*>(projY0->Clone("projY_bis"));
+      // Get the biggest peaks in each projection
+      auto const & peaksX = mainPeaksLookup(projX, sigmaX, threshold, 1);
+      auto const & peaksY = mainPeaksLookup(projY, sigmaY, threshold, 1);
+      print(peaksX.size(), peaksY.size());
+      auto projX_bis = new TH1D("projX_bis", "projX_bis", Nx,xmin,xmax);
+      auto projY_bis = new TH1D("projY_bis", "projY_bis", Ny,ymin,ymax);
+      auto proj_diag = new TH1D("proj_diag", "proj_diag", 2*Nx,xmin,2*xmax);
       int sum_y = 0; // for projX
       int sum_x = 0; // for projY
-
       
       // The following works only for a symmetric matrix :
       // Create the projection without the contribution of the main peaks in projection :
@@ -1191,53 +1198,125 @@ namespace CoAnalyse
         for (int bin_j = 1; bin_j<Ny; ++bin_j)
         { // j=y for projX, j=x for projY
           auto const & Mxy = histo->GetBinContent(bin_i, bin_j);
-          if (inPeak(peaksY, bin_j)) sum_y+=Mxy;
-          if (inPeak(peaksX, bin_j)) sum_x+=Mxy;
+          if (peaksY[bin_j]) sum_y+=Mxy;
+          if (peaksX[bin_j]) sum_x+=Mxy;
         }
         projX_bis->SetBinContent(bin_i, sum_y);
         projY_bis->SetBinContent(bin_i, sum_x);
-      } 
-      
-      // Calculate the constant S and A used for the method (in the classic method, S=T and A=0 )
-      auto const & S = projX_bis->Integral();
-      double A = 0.0; for (int x = 0; x<Nx; ++x) if (inPeak(peaksX, x)) A+=projX_bis->GetBinContent(x);
-      A/=S;
-
-      print("T, S, A", T, S, A);
-      
-      for (int x = 1; x<Nx; ++x) for (int y = 1; y<Ny; ++y)
-      {
-        auto const & Px_bis = projX_bis->GetBinContent(x);
-        auto const & Py_bis = projY_bis->GetBinContent(y);
-        auto const & bx = bckgX->GetBinContent(x);
-        auto const & by = bckgY->GetBinContent(y);
-
-        auto const & bckg_at_xy = int_cast((bx*Py_bis + by*Px_bis - A*bx*by)/S);
-        bckg2D->SetBinContent(x, y, bckg_at_xy);
-        auto const & new_value = histo->GetBinContent(x, y) - bckg_at_xy;
-        bckg_clean->SetBinContent(x, y, new_value);
       }
+
+      if (choice == 1 || choice == 3) // Palameta and Waddington
+      {
+        // Calculate the constant S and A used for the method (in the classic method, S=T and A=0 )
+        auto const & S = projX_bis->Integral();
+        double A = 0.0; for (int x = 0; x<Nx; ++x) if (peaksX[x]) A+=projX_bis->GetBinContent(x);
+        A/=S;
+
+        print("T, S, A", T, S, A);
+        
+        for (int x = 1; x<Nx; ++x) for (int y = 1; y<Ny; ++y)
+        {
+          auto const & Px_bis = projX_bis->GetBinContent(x);
+          auto const & Py_bis = projY_bis->GetBinContent(y);
+          auto const & bx = bckgX->GetBinContent(x);
+          auto const & by = bckgY->GetBinContent(y);
+
+          auto const & bckg_at_xy = int_cast((bx*Py_bis + by*Px_bis - A*bx*by)/S);
+          bckg2D->SetBinContent(x, y, bckg_at_xy);
+          auto const & new_value = histo->GetBinContent(x, y) - bckg_at_xy;
+          bckg_clean->SetBinContent(x, y, new_value);
+        }
+      }
+
+      if (choice > 1) // Removes the diagonals
+      {
+        for (int bin_x = 1; bin_x<Nx; ++bin_x) for (int bin_y = 1; bin_y<Ny; ++bin_y)
+        {
+          auto const & bin_sum = bin_x+bin_y;
+          if ((size_cast(bin_sum)<peaksX.size() && peaksX[bin_sum]) ||
+              (size_cast(bin_sum)<peaksY.size() && peaksY[bin_sum]))
+          {
+            auto const & counts = bckg_clean->GetBinContent(bin_x, bin_y);
+            proj_diag->SetBinContent(bin_sum, proj_diag->GetBinContent(bin_sum)+counts);
+            bckg_clean->SetBinContent(bin_x, bin_y, 0);
+          }
+        }
+      }
+    // #ifndef __CINT__
+    //   delete projX_bis;
+    //   delete projY_bis;
+    // #endif //!__CINT__
+    proj_diag->Draw();
     }
 
     for (int x=0; x<histo->GetNbinsX(); x++) for (int y=0; y<histo->GetNbinsY(); y++) 
       histo->SetBinContent(x, y, bckg_clean->GetBinContent(x, y));
-    delete projX;
-    delete bckgX;
-    delete projY;
-    delete bckgY;
-    delete bckg_clean;
-    // delete bckg2D;
-    delete gPad;
+  // #ifndef __CINT__
+  //   delete projX;
+  //   delete bckgX;
+  //   delete projY;
+  //   delete bckgY;
+  //   delete bckg_clean;
+  //   delete bckg2D;
+  // #endif //!__CINT__
   }
 
+  TH1D* projectDiagonals(TH2* histo)
+  {
+    if (!checkMatrixSquare(histo)) return (new TH1D("void","void",1,0,1));
+    auto diag = new TH1D("diagProj","diagProj", 2*histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), 2*histo->GetXaxis()->GetXmax());
+    auto const & nb_bins = histo->GetNbinsX()+1;
+    for (int bin_x = 1; bin_x < nb_bins; ++bin_x) for (int bin_y = 1; bin_y < bin_x; ++bin_y)
+    {
+      auto const & value_xy = histo->GetBinContent(bin_x, bin_y);
+      auto const & value_yx = histo->GetBinContent(bin_y, bin_x);
+      auto const & diag_bin = bin_x+bin_y;
+      auto const & old_value = diag->GetBinContent(diag_bin);
+      diag->SetBinContent(diag_bin, old_value+value_xy+value_yx);
+    }
+    return diag;
+  }
+
+  /// @brief Work in progress
+  void removeDiagonals(TH2* histo, int nb_iter = 20, int choice = 0)
+  {
+    if (choice == 0)
+    {
+      auto projDiag = projectDiagonals(histo);
+      auto projDiag0 = static_cast<TH2*>(histo->Clone("projDiag0"));
+      auto bckgProjDiag = projDiag->ShowBackground(nb_iter, "q");
+      projDiag->Add(bckgProjDiag, -1);
+
+      int const & T = projDiag->Integral();
+      auto clone = static_cast<TH2*>(histo->Clone("projDiag_temp"));
+      for (int bin_x = 1; bin_x < histo->GetNbinsX()+1; ++bin_x) for (int bin_y = 1; bin_y < bin_x; ++bin_y)
+      {
+        auto const & init_value_xy = clone->GetBinContent(bin_x, bin_y);
+        auto const & init_value_yx = clone->GetBinContent(bin_y, bin_x);
+        auto const & diag_value = projDiag->GetBinContent(bin_x+bin_y);
+        auto const & diag_bckg_value = bckgProjDiag->GetBinContent(bin_x+bin_y);
+        auto const & correction_xy = int_cast((diag_value*diag_bckg_value)/T);
+        auto const & correction_yx = int_cast((diag_value*diag_bckg_value)/T);
+        histo->SetBinContent(bin_x, bin_y, init_value_xy - correction_xy);
+        histo->SetBinContent(bin_y, bin_x, init_value_yx - correction_yx);
+      }
+    }
+    else if (choice == 1)
+    {
+      
+    }
+  }
+  
   void test(TH2F* histo)
   {
-    removeBackground(histo, 30, 3, 3, 1);
+    removeBackground(histo);
+    // removeDiagonals(histo);
+    // projectDiagonals(histo)->Draw();
     // histo->Draw("colz");
     // new TCanvas;
-    histo->ProjectionY("myProjY",641*2,643*2)->Draw();
-    new TCanvas;
-    histo->ProjectionX("myProjX",641*2,643*2)->Draw();
+    // histo->ProjectionY("myProjY",641*2,643*2)->Draw();
+    // new TCanvas;
+    // histo->ProjectionX("myProjX",641*2,643*2)->Draw();
   }
 
 };

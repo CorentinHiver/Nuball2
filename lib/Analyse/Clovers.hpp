@@ -11,37 +11,6 @@
 
 #include "CloverModule.hpp"
 
-// std::array<float, 48> BGO_coeff = 
-// {
-// 1.1747f, 1.2617f,
-// 1.2617f, 1.2342f,
-// 0.1729f, 0.51f,
-// 1.0199f, 0.9358f,
-// 1.f,     1.f,
-// 1.1181f, 1.1801f,
-
-// 1.3342f, 1.3590f,
-// 1.3482f, 1.3885f,
-// 1.3102f, 1.f,
-// 1.1967f, 1.1640f,
-// 1.02f,   1.0179f,
-// 1.0471f, 1.0690f,
-
-// 1.4394f, 1.3663f,
-// 1.0078f, 0.9845f,
-// 1.3204f, 1.0872f,
-// 1.0849f, 1.02f,
-// 1.4811f, 1.3626f,
-// 1.2433f, 1.2283f,
-
-// 1.1132f, 1.1355f,
-// 1.1157f, 1.1280f,
-// 1.3810f, 1.3002f,
-// 1.f,1.f,
-// 1.f,1.f,
-// 1.f,1.f
-// };
-
 /**
  * @brief Analyse the clovers in the event
  * @details
@@ -370,7 +339,7 @@ inline void Clovers::Reset()
 {
   for (auto const & index : Hits)
   {
-    m_clovers[index].Reset();
+    m_clovers[index].reset();
   }
   Hits.clear();
 
@@ -430,7 +399,7 @@ inline void Clovers::Reset()
 inline void Clovers::SetEvent(Event const & event)
 {
   this -> Reset();
-  for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
+  for (int i = 0; i<event.mult; i++) this -> Fill(event, i);
   this -> Analyse();
 }
 
@@ -446,12 +415,12 @@ inline void Clovers::SetEvent(Event const & event, char const & analyse_mode)
   if (analyse_mode == 1) 
   {
     this -> Reset();
-    for (size_t i = 0; i<event.size(); i++) this -> Fill(event, i);
+    for (int i = 0; i<event.mult; i++) this -> Fill(event, i);
   }
   else if (analyse_mode == 2) 
   {
     this -> CleanFast();
-    for (size_t i = 0; i<event.size(); i++) this -> FillFast(event, i);
+    for (int i = 0; i<event.mult; i++) this -> FillFast(event, i);
     PromptMult  = promptClovers .size();
     DelayedMult = delayedClovers.size();
   }
@@ -466,7 +435,8 @@ inline bool Clovers::FillFast(Event const & event, size_t const & hit_index)
   Hits.push_back_unique(index_clover);
 
   auto const & nrj = event.nrjs[hit_index];
-  auto const & time = (s_time_ps) ? event.times[hit_index]/1000.0 : event.time2s[hit_index];
+  auto const & time = event.times[hit_index]/1000.0;
+  auto const & sub_index = (label+1)%6;
 
   if (nrj<Emin) return false;
 
@@ -475,19 +445,19 @@ inline bool Clovers::FillFast(Event const & event, size_t const & hit_index)
     if (promptGate (time)) 
     {
       push_back_unique(promptClovers, index_clover);
-      PromptClovers[index_clover].addGe(nrj, time);
+      PromptClovers[index_clover].addHit(nrj, time, sub_index);
     }
     else if (delayedGate(time))
     {
       push_back_unique(delayedClovers, index_clover);
-      DelayedClovers[index_clover].addGe(nrj, time);
+      DelayedClovers[index_clover].addHit(nrj, time, sub_index);
     }
   }
   else // if isBGO[label] :
   {
-    if (promptGate (time)) PromptClovers[index_clover].addBGO(nrj, time);
+    if (promptGate (time)) PromptClovers[index_clover].addHit(nrj, time, sub_index);
 
-    else if (delayedGate(time)) DelayedClovers[index_clover].addBGO(nrj, time);
+    else if (delayedGate(time)) DelayedClovers[index_clover].addHit(nrj, time, sub_index);
   }
   return true;
 }
@@ -503,7 +473,7 @@ inline bool Clovers::Fill(Event const & event, size_t const & hit_index)
     auto const & nrj  = event.nrjs[hit_index];
     
 
-    auto const & time = (s_time_ps) ? event.times[hit_index]/1000.0 : event.time2s[hit_index];
+    auto const & time = event.times[hit_index]/1000.0;
 
     auto & clover = m_clovers[index_clover];
 
