@@ -172,6 +172,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           auto const & clover_i = prompt_clovers[prompt_clovers.GeClean[loop_i]];
           p->Fill(clover_i.nrj);
           E_dT->Fill(clover_i.time, clover_i.nrj);
+          if (prompt_calo < 3000) p_PC3->Fill(clover_i.nrj);
           // prompt-prompt :
           for (int loop_j = loop_i+1; loop_j<prompt_clovers.GeClean.size(); ++loop_j)
           {
@@ -197,6 +198,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           
           d_VS_prompt_calorimetry -> Fill(prompt_calo, clover_i.nrj);
           d_VS_delayed_calorimetry -> Fill(delayed_calo, clover_i.nrj);
+          if (prompt_calo < 3000) d_PC3->Fill(clover_i.nrj);
+          
           
           // Delayed-delayed :
           for (int loop_j = loop_i+1; loop_j<delayed_clovers.GeClean.size(); ++loop_j)
