@@ -9,7 +9,7 @@ using dType = std::string;
 #define SIZE_LOOKUP 1000
 
 // All detectors lookup tables :
-Bools isGe    (SIZE_LOOKUP);
+// Bools isGe    (SIZE_LOOKUP);
 Bools isBGO   (SIZE_LOOKUP);
 Bools isLaBr3 (SIZE_LOOKUP);
 Bools isEden  (SIZE_LOOKUP);
@@ -307,7 +307,7 @@ void Detectors::makeArrays()
     while(is >> str)
     {
       if (str == "red" || str == "green" || str == "black" || str == "blue" || str == "ge"){
-        isGe   [label] = true;
+        // isGe   [label] = true;
         m_types[label] = types_handled[0];
       }
       else if (str == "BGO1" || str == "BGO2"){

@@ -1,8 +1,10 @@
 #include "../lib/libRoot.hpp"
 #include "../lib/Classes/RF_Manager.hpp"
 #include "../lib/Classes/FilesManager.hpp"
+#include "../lib/Classes/Calibration.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "MyClovers.hpp"
+#include "../lib/Analyse/Paris.hpp"
 
 void macro2(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
@@ -10,6 +12,7 @@ void macro2(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   std::string trigger = "C2";
   // std::string trigger = "P";
 
+  Calibration calib("../136/coeffs_NaI.calib");
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
@@ -56,6 +59,7 @@ void macro2(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       // Different trigger condition (always using clean germaniums): 
       std::unique_ptr<TH1F> d_VS_Clover_mult (new TH1F(("d_VS_Clover_mult_"+std::to_string(thread_i)).c_str(), "d_VS_Clover_mult", 4096,0,4096));
       std::unique_ptr<TH1F> d_VS_Module_mult (new TH1F(("d_VS_Module_mult_"+std::to_string(thread_i)).c_str(), "d_VS_Module_mult", 4096,0,4096));
+      std::unique_ptr<TH2F> d_VS_prompt_Module_mult (new TH2F(("d_VS_prompt_Module_mult_"+std::to_string(thread_i)).c_str(), "d_VS_prompt_Module_mult", 4096,0,4096, 10,0,10));
 
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
@@ -300,5 +304,5 @@ int main(int argc, char** argv)
   return 1;
 }
 #endif //__CINT__
-// g++ -g -o exec macro2.C ` root-config --cflags` `root-config --glibs` -lSpectrum
+// g++ -g -o exec macro2.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum
 // g++ -O2 -o exec macro2.C ` root-config --cflags` `root-config --glibs` -lSpectrum

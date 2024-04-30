@@ -44,7 +44,7 @@ public:
   // ---- Initialization of static arrays ---- //
   void static InitialiseArrays()
   {
-  #ifdef MULTITHREADING
+  #ifdef MULTITHREADING 
     lock_mutex lock(MTObject::mutex);
   #endif //MULTITHREADING
     if (!s_initialised)
@@ -69,10 +69,13 @@ public:
   // -----------------------  Paris Class  ----------------------- //
   Paris(){this -> InitialiseArrays();}
   void Initialise();
-  void fill(Event const & event, size_t const & i);
+  void fill(Event const & event, size_t const & hit_i);
+  void setEvent(Event const & event);
   void reset();
-  void analyse();
-
+  void analyze();
+  auto NaI_calorimetry() {return clusterBack.NaI_calorimetry + clusterFront.NaI_calorimetry;}
+  auto LaBr3_calorimetry() {return clusterBack.LaBr3_calorimetry + clusterFront.LaBr3_calorimetry;}
+  
   StaticVector<uchar> Hits;
 
   ParisCluster<36> clusterBack; // Only 28 paris physically present
@@ -122,16 +125,24 @@ void inline Paris::reset()
   clusterFront.reset();
 }
 
-void inline Paris::fill(Event const & event, size_t const & i)
+void inline Paris::setEvent(Event const & event)
 {
-  clusterBack.fill(event, i, index[event.labels[i]]);
-  clusterFront.fill(event, i, index[event.labels[i]]);
+  this->reset();
+  for (int hit_i = 0; hit_i <event.mult; ++hit_i) if (Paris::is[event.labels[hit_i]]) this->fill(event, hit_i);
+  this->analyze();
 }
 
-void inline Paris::analyse()
+void inline Paris::fill(Event const & event, size_t const & hit_i)
 {
-  clusterBack.analyse();
-  clusterFront.analyse();
+  auto const & cluster_i = Paris::cluster[event.labels[hit_i]];
+  if (cluster_i == 0) clusterBack .fill(event, hit_i, index[event.labels[hit_i]]);
+  else                clusterFront.fill(event, hit_i, index[event.labels[hit_i]]);
+}
+
+void inline Paris::analyze()
+{
+  clusterBack .analyze();
+  clusterFront.analyze();
 }
 
 std::pair<double, double> Paris::findAngles(TH2F* bidim, int nb_bins, bool write_graphs)
@@ -275,7 +286,6 @@ std::pair<double, double> Paris::findAngles(TH2F* bidim, int nb_bins, bool write
   return {first_angle, second_angle};
 }
 
-
 std::pair<double, double> Paris::findAnglesDeg(TH2F* bidim, int nb_bins, bool write_graphs)
 {
   auto ret (findAngles(bidim, nb_bins, write_graphs));
@@ -300,7 +310,7 @@ void Paris::calculateBidimAngles(std::string filename, std::string const & out_f
   }
 
   size_t avancement = 0;
-  CoProgressBar prog(&avancement, names.size());
+  CoProgressBar<size_t> prog(&avancement, names.size());
 
   for (auto const & name : names)
   {
@@ -310,8 +320,7 @@ void Paris::calculateBidimAngles(std::string filename, std::string const & out_f
     auto detector_name = name;
     remove(detector_name, "_bidim");
     angles.set(detector_name, temp.first, temp.second);
-    ++avancement;
-    prog.show();
+    ++avancement; prog.show(); // progress bar
   }
   print();
   file->Close();
@@ -333,10 +342,10 @@ TH2F* Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNd
   auto const & nb_binsx = bidim->GetNbinsX();
   auto const & nb_binsy = bidim->GetNbinsY();
   auto const & pisur2 = 1.570798;
-  double _sin = sin(-angleLaBr);
-  double _cos = cos(-angleLaBr);
-  // double _sin = sin(angleNaI-angleLaBr);
-  // double _cos = cos(angleNaI-angleLaBr);
+  // double _sin = sin(-angleLaBr);
+  // double _cos = cos(-angleLaBr);
+  double _sin = sin(angleNaI-angleLaBr);
+  double _cos = cos(angleNaI-angleLaBr);
   double _sinLaBr = sin(-pisur2+angleLaBr);
   double _cosLaBr = cos(-pisur2+angleLaBr);
 
@@ -374,6 +383,73 @@ TH2F* Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNd
     }
   }
   return rotated_bidim;
+}
+
+namespace NaI_coeffs
+{
+  std::pair<double, double> selectPoint(TH1* histo, std::string const & instructions)
+  {
+    double x = 0; double y = 0;
+    gPad->SetTitle(instructions.c_str());
+    histo->SetTitle(instructions.c_str());
+    GetPoint(gPad->cd(), x, y);
+    gPad->Update();
+    return {x, y};
+  }
+
+  double ratioNaILaBr(TH2* paris_bidim, std::vector<int> peaks = {511, 1274})
+  {
+    paris_bidim->SetMinimum(2);
+    paris_bidim->Draw("colz");
+    gPad->SetLogz(true);
+    auto xaxis = paris_bidim->GetXaxis();
+    auto yaxis = paris_bidim->GetYaxis();
+    std::vector<double> ratios;
+    //1. Loop trough the peaks :
+    for (auto const & peak : peaks)
+    {
+      //2. First the LaBr3 peak :
+      auto LaBr3_point = selectPoint(paris_bidim, concatenate("Click on the ", peak, " keV peak in the LaBr3 diagonal to zoom on it"));
+      xaxis->SetRangeUser(LaBr3_point.first-(xaxis->GetXmax()-xaxis->GetXmin())/10, LaBr3_point.first+(xaxis->GetXmax()-xaxis->GetXmin())/10);
+      yaxis->SetRangeUser(LaBr3_point.second-(yaxis->GetXmax()-yaxis->GetXmin())/10, LaBr3_point.second+(yaxis->GetXmax()-yaxis->GetXmin())/10);
+      LaBr3_point = selectPoint(paris_bidim, concatenate("Select the ", peak, " keV peak in the LaBr3 diagonal"));
+      xaxis->UnZoom();
+      yaxis->UnZoom();
+
+      auto NaI_point = selectPoint(paris_bidim, concatenate("Click on the ", peak, " keV peak in the NaI diagonal to zoom on it"));
+      xaxis->SetRangeUser(NaI_point.first-(xaxis->GetXmax()-xaxis->GetXmin())/10, NaI_point.first+(xaxis->GetXmax()-xaxis->GetXmin())/10);
+      yaxis->SetRangeUser(NaI_point.second-(yaxis->GetXmax()-yaxis->GetXmin())/10, NaI_point.second+(yaxis->GetXmax()-yaxis->GetXmin())/10);
+      NaI_point = selectPoint(paris_bidim, concatenate("Select the ", peak, " keV peak in the LaBr3 diagonal"));
+      xaxis->UnZoom();
+      yaxis->UnZoom();
+
+      ratios.push_back(NaI_point.second/LaBr3_point.first);
+    }
+    gPad->SetLogz(false);
+    return mean(ratios);
+  }
+
+  void calculate(std::string filename)
+  {
+    detectors.load("index_129.list");
+    auto file = TFile::Open(filename.c_str(), "read");
+    file->cd();
+    std::ofstream outfile("coeffs_NaI.calib");
+    
+    auto map = get_map_histo<TH2F*>(file, "TH2F");
+    for (auto const & pair : map)
+    {
+      auto name = pair.first;
+      auto det_name = removeLastPart(name, '_');
+      auto const & label = detectors[det_name];
+      auto histo = pair.second;
+      std::stringstream output;
+      output << label << " 0 " << ratioNaILaBr(histo) << std::endl;
+      print(output.str());
+      outfile << output.str();
+    }
+    outfile.close();
+  }
 }
 
 #endif //PARIS_HPP

@@ -1283,7 +1283,7 @@ namespace CoAnalyse
     if (choice == 0)
     {
       auto projDiag = projectDiagonals(histo);
-      auto projDiag0 = static_cast<TH2*>(histo->Clone("projDiag0"));
+      // auto projDiag0 = static_cast<TH2*>(histo->Clone("projDiag0"));
       auto bckgProjDiag = projDiag->ShowBackground(nb_iter, "q");
       projDiag->Add(bckgProjDiag, -1);
 
@@ -1326,16 +1326,15 @@ namespace CoAnalyse
 //   Manage histo files   //
 ////////////////////////////
 
-std::vector<std::string> get_TH1F_names(TFile * file)
+std::vector<std::string> get_list_histo(TFile * file, std::string const & class_name = "TH1F")
 {
   std::vector<std::string> ret;
-  if (!file) {print("in get_TH1F_names(TFile * file) : file is nullptr"); return ret;}
+  if (!file) {error("in get_list_histo(TFile * file, std::string class_name) : file is nullptr"); return ret;}
   auto list = file->GetListOfKeys();
   for (auto&& keyAsObj : *list)
   {
     std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
-    std::string className =  key->GetClassName();
-    if(className == "TH1F")
+    if(key->GetClassName() == class_name)
     {
       TObject* obj = key->ReadObj();
       TH1* histo = dynamic_cast<TH1*>(obj);
@@ -1345,12 +1344,29 @@ std::vector<std::string> get_TH1F_names(TFile * file)
   return ret;
 }
 
+template <class THist>
+std::map<std::string, THist> get_map_histo(TFile * file, std::string const & class_name = "TH1F")
+{
+  auto names = get_list_histo(file, class_name);
+  std::map<std::string, THist> ret;
+  for (auto const & name : names)
+  {
+    ret.emplace(name, static_cast<THist>(file->Get(name.c_str())));
+  }
+  return ret;
+}
+
 std::vector<std::string> get_TH1F_names(std::string const & filename)
 {
   auto file = TFile::Open(filename.c_str());
-  auto ret =  get_TH1F_names(file);
+  auto ret =  get_list_histo(file, "TH1F");
   file->Close();
   return ret;
+}
+
+std::vector<std::string> get_TH1F_names(TFile * file)
+{
+  return get_list_histo(file, "TH1F");
 }
 
 using TH1F_map = std::map<std::string, TH1F*>;

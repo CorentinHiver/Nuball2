@@ -1,13 +1,14 @@
 #include <MTObject.hpp>
 #include "../libRoot.hpp"
-#include <Clovers.hpp>
+#include <Paris.hpp>
+// #include <Clovers.hpp>
 // #include <Hit.hpp>
 // #include <FasterReader.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <HitBuffer.hpp>
 // #include <SourceCloverSpectra.hpp>
-// #include <Calibration.hpp>
+#include <Calibration.hpp>
 // #include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
 // #include <SpectraAlignator.hpp>
@@ -36,21 +37,85 @@ static thread_local std::mt19937 generator;
 
 int main()
 { 
+
+  ////////////////////////
+  //    PARIS MODULE    //
+  ////////////////////////
+
+  Calibration calibNaI("../136/coeffs_NaI.calib");
+
   MTRootReader reader("/home/corentin/faster_data/N-SI-136-root_PrM1DeC1/merged/");
-  reader.read([](Nuball2Tree & tree, Event & event){
-    unique_TH1F test(new TH1F("test", "test", 10000,0,10000));
-    Clovers clovers;
-    for (int evt_i = 0; evt_i < 10000000; evt_i++) 
+  reader.read([&](Nuball2Tree & tree, Event & event){
+    unique_TH2F each_Nai(new TH2F("each_Nai", "each_Nai", 1000,0,1000, 2000,0,10000));
+    unique_TH1F LaBr3_front(new TH1F("LaBr3_front", "LaBr3_front", 2000,0,10000));
+    unique_TH1F NaI_front(new TH1F("NaI_front", "NaI_front", 2000,0,10000));
+    unique_TH1F LaBr3_front_verif(new TH1F("LaBr3_front_verif", "LaBr3_front_verif", 2000,0,10000));
+    unique_TH1F NaI_front_verif(new TH1F("NaI_front_verif", "NaI_front_verif", 2000,0,10000));
+    unique_TH1F LaBr3_back(new TH1F("LaBr3_back", "LaBr3_back", 2000,0,10000));
+    unique_TH1F NaI_back(new TH1F("NaI_back", "NaI_back", 2000,0,10000));
+    unique_TH1F LaBr3_back_verif(new TH1F("LaBr3_back_verif", "LaBr3_back_verif", 2000,0,10000));
+    unique_TH1F NaI_back_verif(new TH1F("NaI_back_verif", "NaI_back_verif", 2000,0,10000));
+    unique_TH1F add_back_front_LaBr3(new TH1F("add_back_front_LaBr3", "add_back_front_LaBr3", 2000,0,10000));
+    unique_TH1F add_back_back_LaBr3(new TH1F("add_back_back_LaBr3", "add_back_back_LaBr3", 2000,0,10000));
+    unique_TH1F add_back_front_total(new TH1F("add_back_front_total", "add_back_front_total", 2000,0,10000));
+    unique_TH1F add_back_back_total(new TH1F("add_back_back_total", "add_back_back_total", 2000,0,10000));
+    Paris paris;
+    auto & front = paris.front();
+    auto & back = paris.back();
+    front.LaBr3_timewindow = 10_ns; // This is a global variable shared amongst all the ParisClusters
+    for (int evt_i = 0; evt_i < tree->GetEntries(); evt_i++) 
+    // for (int evt_i = 1; evt_i < 10000000; evt_i++) 
     {
       if (evt_i%int_cast(1.e+5) == 0) print(nicer_double(evt_i, 1));
       tree->GetEntry(evt_i);
-      clovers.SetEvent(event);
-      for (auto const & index : clovers.CleanGe) test->Fill(clovers[index].nrj);
+      for (int hit_i = 0; hit_i <event.mult; ++hit_i) if (Paris::is[event.labels[hit_i]])
+      {
+        char cristal = ParisPhoswitch::simple_pid(event.nrjs[hit_i], event.nrj2s[hit_i]); // 0 NaI, 1 LaBr3
+        if (cristal<0) continue; // rejected
+        int cluster = Paris::cluster[event.labels[hit_i]];
+        if (cristal == 0)
+        {
+          event.nrjs[hit_i]  = calibNaI(event.nrjs[hit_i], event.labels[hit_i]);
+          event.nrj2s[hit_i] = calibNaI(event.nrj2s[hit_i], event.labels[hit_i]);
+          each_Nai->Fill(event.labels[hit_i], event.nrj2s[hit_i]);
+          if(cluster == 0) NaI_back ->Fill(event.nrj2s[hit_i]);
+          else             NaI_front->Fill(event.nrj2s[hit_i]);
+        }
+        if (cristal == 1)
+        {
+          if(cluster == 0) LaBr3_back ->Fill(event.nrjs[hit_i]);
+          else             LaBr3_front->Fill(event.nrjs[hit_i]);
+        }
+      }
+      
+      paris.setEvent(event);
+      
+      for (auto const & index : front.hits_LaBr3 ) {LaBr3_front_verif    ->Fill(front[index].nrj);}
+      for (auto const & index : back .hits_LaBr3 ) {LaBr3_back_verif     ->Fill(back [index].nrj);}
+      for (auto const & index : front.hits_NaI   ) {NaI_front_verif      ->Fill(front[index].nrj);}
+      for (auto const & index : back .hits_NaI   ) {NaI_back_verif       ->Fill(back [index].nrj);}
+      for (auto const & index : front.CleanLaBr3 ) {add_back_front_LaBr3 ->Fill(front.modules[index].nrj);}
+      for (auto const & index : back .CleanLaBr3 ) {add_back_back_LaBr3  ->Fill(back .modules[index].nrj);}
+      for (auto const & index : front.HitsClean  ) {add_back_front_total ->Fill(front.modules[index].nrj);}
+      for (auto const & index : back .HitsClean  ) {add_back_back_total  ->Fill(back .modules[index].nrj);}
     }
     auto file(TFile::Open("test.root", "recreate"));
     file->cd();
-    test->Write();
+    each_Nai->Write();
+    LaBr3_front->Write();
+    NaI_front->Write();
+    LaBr3_front_verif->Write();
+    NaI_front_verif->Write();
+    LaBr3_back->Write();
+    NaI_back->Write();
+    LaBr3_back_verif->Write();
+    NaI_back_verif->Write();
+    add_back_front_LaBr3->Write();
+    add_back_back_LaBr3->Write();
+    add_back_front_total->Write();
+    add_back_back_total->Write();
     file->Close();
+    print("test.root written");
   });
   // std::mutex myMutex;
   // unsigned nb_threads = 2;

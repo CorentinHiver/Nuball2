@@ -19,6 +19,14 @@ T sum(std::vector<T> const & source)
 }
 
 template<class T>
+T mean(std::vector<T> const & source)
+{
+  T mean = 0;
+  for (auto const & value : source) mean += value;
+  return mean/static_cast<T>(source.size());
+}
+
+template<class T>
 std::vector<T> push_back(std::vector<T> const & target, T const & value)
 {
   target.push_back(value);

@@ -1,4 +1,5 @@
 verification de la conversion vers root à cause d'une perte de coincidences delayed delayed
 macro.C : compare l'ancienne et la nouvelle conversion avec simple trigger particule, en utilisant un minimum de librairies du framework, sur un seul run
 macro1.C : teste les librairies du framework sur l'ensemble des données ET CA MARCHE
-macro2.C : analyse les données avec moulte precision
+macro2.C : vérifie l'add-back et la réjection Compton
+macro3.C : analyse les données avec moulte précision !
