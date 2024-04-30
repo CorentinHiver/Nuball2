@@ -196,31 +196,31 @@ void pauseDebug(std::string const & message = "")
 
 /// @brief Casts a any type into an bool
 template<typename T>
-inline bool bool_cast(T const & t) {return static_cast<bool>(t);}
+constexpr inline bool bool_cast(T const & t) {return static_cast<bool>(t);}
 
 /// @brief Casts a number into an char
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline char char_cast(T const & t) {return static_cast<char>(t);}
+constexpr inline char char_cast(T const & t) {return static_cast<char>(t);}
 
 /// @brief Casts a number into an short
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline short short_cast(T const & t) {return static_cast<short>(t);}
+constexpr inline short short_cast(T const & t) {return static_cast<short>(t);}
 
 /// @brief Casts a number into an int
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline int int_cast(T const & t) {return static_cast<int>(t);}
+constexpr inline int int_cast(T const & t) {return static_cast<int>(t);}
 
 /// @brief Casts a number into an long
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline long long_cast(T const & t) {return static_cast<long>(t);}
+constexpr inline long long_cast(T const & t) {return static_cast<long>(t);}
 
 /// @brief Casts a number into a float
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline float float_cast(T const & t) {return static_cast<float>(t);}
+constexpr inline float float_cast(T const & t) {return static_cast<float>(t);}
 
 /// @brief Casts a number into an double
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline double double_cast(T const & t) {return static_cast<double>(t);}
+constexpr inline double double_cast(T const & t) {return static_cast<double>(t);}
 
 
 // Type short names :

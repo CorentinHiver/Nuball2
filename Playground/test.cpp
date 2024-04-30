@@ -90,10 +90,10 @@ int main()
       
       paris.setEvent(event);
       
-      for (auto const & index : front.hits_LaBr3 ) {LaBr3_front_verif    ->Fill(front[index].nrj);}
-      for (auto const & index : back .hits_LaBr3 ) {LaBr3_back_verif     ->Fill(back [index].nrj);}
-      for (auto const & index : front.hits_NaI   ) {NaI_front_verif      ->Fill(front[index].nrj);}
-      for (auto const & index : back .hits_NaI   ) {NaI_back_verif       ->Fill(back [index].nrj);}
+      for (auto const & index : front.hits_LaBr3 ) {LaBr3_front_verif    ->Fill(front.modules_pureLaBr[index].nrj);}
+      for (auto const & index : back .hits_LaBr3 ) {LaBr3_back_verif     ->Fill(back .modules_pureLaBr[index].nrj);}
+      for (auto const & index : front.hits_NaI   ) {NaI_front_verif      ->Fill(front.modules_pureLaBr[index].nrj);}
+      for (auto const & index : back .hits_NaI   ) {NaI_back_verif       ->Fill(back .modules_pureLaBr[index].nrj);}
       for (auto const & index : front.CleanLaBr3 ) {add_back_front_LaBr3 ->Fill(front.modules[index].nrj);}
       for (auto const & index : back .CleanLaBr3 ) {add_back_back_LaBr3  ->Fill(back .modules[index].nrj);}
       for (auto const & index : front.HitsClean  ) {add_back_front_total ->Fill(front.modules[index].nrj);}

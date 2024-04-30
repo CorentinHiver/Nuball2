@@ -61,7 +61,7 @@ template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::
 constexpr inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
 
 //////////////////////
-// Time conversions //
+// Unit conversions //
 //////////////////////
 
 // Units of time (= relative time). The code is based on ps.
@@ -70,13 +70,16 @@ constexpr inline Time operator""_ms(long double time) noexcept {return Time_cast
 constexpr inline Time operator""_us(long double time) noexcept {return Time_cast(time*1.e+6 );}
 constexpr inline Time operator""_ns(long double time) noexcept {return Time_cast(time*1.e+3 );}
 constexpr inline Time operator""_ps(long double time) noexcept {return Time_cast(time       );}
+constexpr inline Time operator""_fs(long double time) noexcept {return Time_cast(time*1.e-3 );}
 
 constexpr inline Time operator""_s (unsigned long long time) noexcept {return Time_cast(time*1.e+12l);}
 constexpr inline Time operator""_ms(unsigned long long time) noexcept {return Time_cast(time*1.e+9l );}
 constexpr inline Time operator""_us(unsigned long long time) noexcept {return Time_cast(time*1.e+6l );}
 constexpr inline Time operator""_ns(unsigned long long time) noexcept {return Time_cast(time*1.e+3l );}
-constexpr inline Time operator""_ps(unsigned long long time) noexcept {return Time_cast(time       );}
+constexpr inline Time operator""_ps(unsigned long long time) noexcept {return Time_cast(time          );}
+constexpr inline Time operator""_fs(unsigned long long time) noexcept {return Time_cast(time*1.e-3    );}
 
+constexpr inline double operator""_MeV(long double energy) noexcept {return double_cast(energy)*1000.d;}
 /////////////////////
 /// IO parameters ///
 /////////////////////
