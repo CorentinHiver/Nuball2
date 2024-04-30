@@ -4,7 +4,7 @@
 class ParisBidimAngles
 {
 public:
-  ParisBidimAngles() noexcept = default;
+  ParisBidimAngles() noexcept {};
   ParisBidimAngles(std::string const & filename) : m_filename(filename) {load(filename);}
   void load(std::string const & filename);
 
