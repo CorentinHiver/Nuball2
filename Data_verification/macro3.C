@@ -3,7 +3,7 @@
 #include "../lib/Classes/FilesManager.hpp"
 #include "../lib/Classes/Calibration.hpp"
 #include "../lib/MTObjects/MTList.hpp"
-#include "MyClovers.hpp"
+#include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/Paris.hpp"
 
 float smear(float const & nrj, TRandom* random)
@@ -28,6 +28,42 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   
   std::mutex write_mutex;
 
+  int gate_bin_size = 2; // Take 2 keV
+    std::vector<int> dd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
+    std::vector<int> pp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
+
+    auto const & dd_gate_bin_max = maximum(dd_gates)+gate_bin_size+1;
+    std::vector<bool> dd_gate_lookup; dd_gate_lookup.reserve(dd_gate_bin_max);
+    std::vector<int> dd_index_gate_lookup; dd_index_gate_lookup.reserve(dd_gate_bin_max);
+    size_t temp_bin = 0;
+    for (int gate_index = 0;  gate_index<dd_gates.size(); ++gate_index)
+    {
+      for (; temp_bin<dd_gate_bin_max; ++temp_bin) 
+      {
+        auto const & gate = dd_gates[gate_index];
+        if (temp_bin<gate-gate_bin_size) 
+        {
+          dd_gate_lookup.push_back(false);
+          dd_index_gate_lookup.push_back(0);
+        }
+        else if (temp_bin<gate+gate_bin_size+1) 
+        {
+          dd_gate_lookup.push_back(true);
+          dd_index_gate_lookup.push_back(gate_index);
+        }
+        else break;
+      }
+    }
+    auto const & pp_gate_bin_max = maximum(pp_gates)+gate_bin_size+1;
+    std::vector<bool> pp_gate_lookup; pp_gate_lookup.reserve(pp_gate_bin_max);
+    temp_bin = 0;
+    for (auto gate : pp_gates) for (; temp_bin<pp_gate_bin_max; ++temp_bin) 
+    {
+      if (temp_bin<gate-gate_bin_size) pp_gate_lookup.push_back(false);
+      else if (temp_bin<gate+gate_bin_size+1) pp_gate_lookup.push_back(true);
+      else break;
+    }
+
   MTObject::parallelise_function([&](){
 
     TRandom* random = new TRandom();
@@ -45,6 +81,12 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH2F> dd (new TH2F(("dd_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
       std::unique_ptr<TH2F> dp (new TH2F(("dp_"+std::to_string(thread_i)).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", 4096,0,4096, 4096,0,4096));
       std::unique_ptr<TH2F> E_dT (new TH2F(("E_dT_"+std::to_string(thread_i)).c_str(), "E_dT clean", 600,-100_ns,200_ns, 4096,0,4096));
+      std::vector<TH2I*> dd_gated;
+      for (auto const & gate : dd_gates) dd_gated.push_back(new TH2I(("dd_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
+                                        ("gamma-gamma delayed gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), 4096,0,4096, 4096,0,4096));
+      // std::vector<TH2I*> pp_gated;
+      // for (auto const & gate : pp_gates) pp_gated.push_back(new TH2I(("pp_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
+      //                                   ("gamma-gamma prompt gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), 4096,0,4096, 4096,0,4096));
 
       // Multiplicity :
       std::unique_ptr<TH1F> p_mult (new TH1F(("p_mult_"+std::to_string(thread_i)).c_str(), "p_mult", 20,0,20));
@@ -76,7 +118,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH1F> LaBr3_prompt (new TH1F(("LaBr3_prompt_"+std::to_string(thread_i)).c_str(), "LaBr3_prompt;keV", 10000,0,20000));
       std::unique_ptr<TH1F> LaBr3_delayed (new TH1F(("LaBr3_delayed_"+std::to_string(thread_i)).c_str(), "LaBr3_delayed;keV", 10000,0,20000));
 
-      std::unique_ptr<TH2F> ge_VS_LaBr3_delayed (new TH2F(("ge_VS_LaBr3_delayed_"+std::to_string(thread_i)).c_str(), "ge_VS_LaBr3_delayed;keV", 5000,0,20000, 10000,0,10000));
+      std::unique_ptr<TH2F> ge_VS_LaBr3_delayed (new TH2F(("ge_VS_LaBr3_delayed_"+std::to_string(thread_i)).c_str(), "ge_VS_LaBr3_delayed;LaBr3 [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
       // std::unique_ptr<TH1F> LaBr3_delayed (new TH1F(("LaBr3_delayed_"+std::to_string(thread_i)).c_str(), "LaBr3_delayed;keV", 10000,0,20000));
 
 
@@ -95,13 +137,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       RF_Manager rf;
       bool rf_found = false;
 
-      MyClovers prompt_clovers;
-      MyClovers delayed_clovers;
+      CloversV2 prompt_clovers;
+      CloversV2 delayed_clovers;
 
       Paris prompt_paris;
       Paris delayed_paris;
-
-      Calibration NaI_calib("../136/coeffs_NaI.calib");
 
       for (int evt_i = 1; (evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
       {
@@ -215,6 +255,24 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             }
           }
 
+          // Gated delayed-delayed (=triple coincidence)
+          auto const & nrj_int = int_cast(clover_i.nrj);
+          if (0 < nrj_int && nrj_int < dd_gate_bin_max && dd_gate_lookup[nrj_int])
+          {
+            for (int loop_j = 0; loop_j<delayed_clovers.GeClean.size(); ++loop_j)
+            {
+              if (loop_i == loop_j) continue;
+              auto const & clover_j = delayed_clovers[delayed_clovers.GeClean[loop_j]];
+              for (int loop_k = loop_j+1; loop_k<delayed_clovers.GeClean.size(); ++loop_k)
+              {
+              if (loop_i == loop_k) continue;
+                auto const & clover_k = delayed_clovers[delayed_clovers.GeClean[loop_k]];
+                dd_gated[dd_index_gate_lookup[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
+                dd_gated[dd_index_gate_lookup[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
+              }
+            }
+          }
+
           // Prompt-delayed :
           for (int loop_j = 0; loop_j<prompt_clovers.GeClean.size(); ++loop_j)
           {
@@ -263,6 +321,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d->Write("d", TObject::kOverwrite);
         E_dT->Write("E_dT", TObject::kOverwrite);
         dp->Write("dp", TObject::kOverwrite);
+        for (size_t gate_index = 0; gate_index<dd_gates.size(); ++gate_index) 
+          dd_gated[gate_index]->Write(("dd_gate_"+std::to_string(dd_gates[gate_index])).c_str(), TObject::kOverwrite);
 
         // Multiplicity :
         p_mult->Write("p_mult", TObject::kOverwrite);
@@ -313,5 +373,5 @@ int main(int argc, char** argv)
   return 1;
 }
 #endif //__CINT__
-// g++ -g -o exec macro3.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum
-// g++ -O2 -o exec macro3.C ` root-config --cflags` `root-config --glibs` -lSpectrum
+// g++ -g -o exec macro3.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17
+// g++ -O2 -o exec macro3.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17

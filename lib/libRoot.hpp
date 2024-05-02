@@ -282,6 +282,44 @@ int findNextBinAbove(TH1* histo, int & bin, double threshold)
   return bin;
 }
 
+double peak_over_total(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
+{
+  int total = histo->Integral();
+  auto background = histo->ShowBackground(smooth_background_it);
+  int peak = 0;
+  for (int bin = bin_min; bin<bin_max+1; ++bin) peak += histo->GetBinContent(bin) - background->GetBinContent(bin);
+  delete background;
+  return peak/total;
+}
+
+/**
+ * @brief 
+ * 
+ * @param size_peaks_bin Each peak is at bin += size_peaks_bin
+ * @return TH1F* 
+ */
+TH1F* count_to_sigma(TH1* histo, int size_peaks_bin, int smooth_background_it = 20)
+{
+  auto const & size = size_peaks_bin;
+  std::string name = histo->GetName(); name += "_sigmas";
+  std::string title = histo->GetName(); title+=";keV [];sigmas;";
+  auto background = histo->ShowBackground(smooth_background_it);
+  auto ret = new TH1F(name.c_str(), histo->GetName(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
+  for (int bin = 0+size_peaks_bin; bin<histo->GetNbinsX(); ++bin)
+  {
+    auto peak = 0;
+    auto bckg = 0;
+    for (int bin_i = bin-size_peaks_bin; bin_i<bin+size_peaks_bin+1; bin_i++)
+    {
+      peak+=histo->GetBinContent(bin_i);
+      bckg+=histo->GetBinContent(bin_i);
+    } 
+    ret -> SetBinContent(bin, peak/sqrt(peak+bckg));
+  }
+  delete background;
+  return ret;
+}
+
 /// @brief Shifts a histogram by 'shift' X value
 /// @param shift Shifts each bin content by 'shift' units of the x axis
 void shiftX(TH1* histo, double shift)
@@ -432,9 +470,9 @@ auto createBranchArray(TTree* tree, T * array, std::string const & name, std::st
 }
 
 
-///////////////////////
-//  CLASS THETCHAIN  //
-///////////////////////
+/////////////////////////
+//   USELESS CLASSES   //
+/////////////////////////
 
 /**
  * @brief Not functionnal yet
@@ -501,7 +539,6 @@ private:
   std::vector<TTree*> m_trees;
   std::vector<TFile*> m_files;
 };
-
 void TheTChain::set()
 {
   // for (auto const & expression : m_input_files_expressions)
@@ -516,10 +553,6 @@ void TheTChain::set()
   // print(m_files_vec);
   // for (auto const & filename : m_files_vec) newTTree(filename);
 }
-
-/////////////////////////
-//   USELESS CLASSES   //
-/////////////////////////
 
 /**
  * @brief Binning of a root histogram (TH1) : number of bins, min value, max value
@@ -1307,9 +1340,32 @@ namespace CoAnalyse
     }
   }
   
+  /// @brief 
+  /// @attention The background must have been removed 
+  TH1F* moving_gates(TH1* hist, int gate_size)
+  {
+    auto const & name = hist->GetName()+std::string("_moving_gates_")+std::to_string(gate_size);
+    auto const & Nbins = hist->GetNbinsX();
+    auto const & xmin = hist->GetXaxis()->GetXmin();
+    auto const & xmax = hist->GetXaxis()->GetXmax();
+    auto ret = new TH1F(name.c_str(), name.c_str(), Nbins, xmin, xmax);
+    for (int bin = gate_size+3; bin<Nbins; ++bin)
+    {
+      auto const & value_low = hist->GetBinContent(bin-gate_size);
+      auto const & value_high = hist->GetBinContent(bin);
+      ret ->SetBinContent(bin, value_low * value_high);
+    }
+    return ret;
+  }
+
+
   void test(TH2F* histo)
   {
+    // removeBackground(histo);
     removeBackground(histo);
+    histo->ProjectionX("h642",640,644)->Draw();
+    // auto test = moving_gates(histo->ProjectionX("h642",640,644), 279);
+    // test->Draw();
     // removeDiagonals(histo);
     // projectDiagonals(histo)->Draw();
     // histo->Draw("colz");
@@ -1333,12 +1389,11 @@ std::vector<std::string> get_list_histo(TFile * file, std::string const & class_
   auto list = file->GetListOfKeys();
   for (auto&& keyAsObj : *list)
   {
-    std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
+    auto key = dynamic_cast<TKey*>(keyAsObj);
+    // print(key->ReadObj()->GetName());
     if(key->GetClassName() == class_name)
     {
-      TObject* obj = key->ReadObj();
-      TH1* histo = dynamic_cast<TH1*>(obj);
-      ret.push_back(histo->GetName());
+      ret.push_back(key->GetName());
     }
   }
   return ret;

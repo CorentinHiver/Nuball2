@@ -1,8 +1,10 @@
 #ifndef COUNTER136_HPP
 #define COUNTER136_HPP
 
-#include <Event.hpp>
+#include <CloversV2.hpp>
 
+bool isPrompt(Time const & time)  {return (-10_ns < time && time < 10_ns );}
+bool isDelayed(Time const & time) {return (60_ns  < time && time < 200_ns);}
 class Counter136
 {
 public:
@@ -16,26 +18,11 @@ public:
   size_t nb_clovers_clean = 0;
   size_t nb_modules_prompt = 0;
   size_t nb_modules_delayed = 0;
-  size_t nb_clover_clean_prompt = 0;
-  size_t nb_clover_clean_delayed = 0;
 
-  std::vector<int> clovers;
-  std::vector<int> clovers_ge;
-  std::vector<int> clovers_bgo;
-  std::vector<int> clovers_clean_Ge;
-  std::vector<int> clover_clean_prompt ;
-  std::vector<int> clover_clean_delayed;
-
-  std::array<std::vector<Time>, 24> ge_clovers_times;
+  CloversV2 prompt_clover;
+  CloversV2 delayed_clover;
 
   Counter136(Event* event) : m_event(event) {}
-
-  // Timing:
-  static std::pair<Time, Time> promptGate;
-  bool isPrompt(Time const & time) {return (promptGate.first<time && time<promptGate.second);}
-  static std::pair<Time, Time> delayedGate;
-  bool isDelayed(Time const & time) {return (delayedGate.first<time && time<delayedGate.second);}
-
 
   void reset() noexcept  
   {
@@ -49,98 +36,47 @@ public:
     nb_clovers_clean = 0;
     nb_modules_prompt = 0;
     nb_modules_delayed = 0;
-    nb_clover_clean_prompt = 0;
-    nb_clover_clean_delayed = 0;
-    clovers.clear();
-    clovers_ge.clear();
-    clovers_bgo.clear();
-    clovers_clean_Ge.clear();
-    clover_clean_prompt.clear();
-    clover_clean_delayed.clear();
-
-    for (auto const & clover_i : clovers_ge)
-    {
-      ge_clovers_times[clover_i].clear();
-    }
   }
   
   void count()
   {
     reset();
-    for (int hit = 0; hit<m_event->mult; hit++)
+    for (int hit_i = 0; hit_i<m_event->mult; hit_i++)
     {
-      auto const & label = m_event->labels[hit];
-      auto const & time = m_event->times[hit];
+      auto const & label = m_event->labels[hit_i];
+      auto const & time = m_event->times[hit_i];
       if (isDSSD[label]) ++nb_dssd;
-      else
+      else if (isLaBr3[label] || isParis[label]) 
       {
-        if (isClover[label])
-        {
-          auto const & clover_label = int_cast(labelToClover[label]);
-               if (isPrompt(time)) ++nb_modules_prompt;
-          else if (isDelayed(time)) ++nb_modules_delayed;
-              if(isGe[label] ) 
-          {
-            ge_clovers_times[clover_label].push_back(time);
-            push_back_unique(clovers, clover_label); 
-            push_back_unique(clovers_ge , clover_label);
-          }
-          else if(isBGO[label]) 
-          {
-            push_back_unique(clovers, clover_label); 
-            push_back_unique(clovers_bgo, clover_label);
-          }
-        }
-        else if (isLaBr3[label] || isParis[label]) 
-        {
-          if (isPrompt(time)) ++nb_modules_prompt;
-          else if (isDelayed(time)) ++nb_modules_delayed;
-          ++nb_modules;
-        }
+        if (isPrompt(time)) ++nb_modules_prompt;
+        else if (isDelayed(time)) ++nb_modules_delayed;
+      }
+      else if (CloversV2::isClover(label))
+      {
+        if (CloversV2::isGe(label)) ++nb_Ge;
+        else if (CloversV2::isBGO(label)) ++nb_BGO;
+        if (isPrompt(time)) prompt_clover.fill(*m_event, hit_i);
+        else if (isDelayed(time)) delayed_clover.fill(*m_event, hit_i);
       }
     }
-    nb_Ge  = clovers_ge .size();
-    nb_BGO = clovers_bgo.size();
-    nb_modules += (nb_clovers = clovers.size());
     counted = true;
   }
 
   void analyse()
   {
-    if (!counted) this->count();
-    if (analyzed) return;
-    for (auto & clover_i : clovers)
-    {
-      if (found(clovers_ge, clover_i) && !found(clovers_bgo, clover_i))
-      {
-        clovers_clean_Ge.push_back(clover_i);
-        bool is_prompt = false;
-        bool is_delayed = false;
-        for (auto const & time : ge_clovers_times[clover_i]) 
-        { // Here we loop over the times registered for the germaniums of the clover
-          if (isPrompt(time)) is_prompt = true;
-          if (isDelayed(time))
-          {
-            if (is_prompt) is_prompt = false; // If the clover is both prompt and delayed, then it is not clean
-            else if (isDelayed(time)) is_delayed = true; // If the first hit is delayed then the whole clover is delayed
-            break; // No need to continue looking for the other times of this clover
-          }
-        }
-             if(is_prompt)  clover_clean_prompt.push_back(clover_i);
-        else if(is_delayed) clover_clean_delayed.push_back(clover_i);
-      }
-    }
-    nb_clovers_clean = clovers_clean_Ge.size();
-    nb_clover_clean_prompt = clover_clean_prompt.size();
-    nb_clover_clean_delayed = clover_clean_delayed.size();
+    if (!counted) this->count(); // Need to fill the clovers before analysing them
+    if (analyzed) throw_error("in Counter136::analyse() : already analysed !!"); // Don't analyse twice
+    prompt_clover.analyze();
+    delayed_clover.analyze();
+    nb_modules_prompt+=prompt_clover.Hits.size();
+    nb_modules_delayed+=delayed_clover.Hits.size();
+    nb_clovers += nb_modules_prompt + nb_modules_delayed;
+    nb_clovers_clean += prompt_clover.GeClean.size() + delayed_clover.GeClean.size();
+    nb_modules = nb_clovers + nb_modules_prompt + nb_modules_delayed;
     analyzed = true;
   }
 
 private:
   Event * m_event = nullptr;
 };
-
-std::pair<Time, Time> Counter136::promptGate  = {-10_ns, 10_ns};
-std::pair<Time, Time> Counter136::delayedGate = {60_ns, 180_ns};
-
 #endif // COUNTER136_HPP

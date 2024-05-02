@@ -63,28 +63,40 @@ std::map<char, std::string> trigger_name =
   {7, "C2"},
   {8, "PC2"},
   {9, "PC1"},
-  {10, "PrM1DeC1"}
+  {10, "PrM1DeC1"},
+  {11, "PrC1DeC1"}
 };
 
-std::string trigger_legend = "Legend : P = Particle | G = Germanium | M = Module | _ = OR | C = Clean Germanium | Pr = Prompt | De = delayed";
+std::string trigger_legend = "Legend : P = Particle | G = Germanium | M = Module | C = Clean Germanium | _ = OR | Pr = Prompt | De = delayed";
 
 bool trigger(Counter136 & counter)
 {
-  switch (trigger_choice)
+  if (trigger_choice<7)
   {
-    case 0: return counter.nb_dssd>0; //P
-    case 1: return counter.nb_modules>2 && counter.nb_Ge>0; //M3G1
-    case 2: return (counter.nb_dssd>0 || (counter.nb_modules>2 && counter.nb_Ge>0)); //P_M3G1
-    case 3: return (counter.nb_dssd>0 && counter.nb_modules>1 && counter.nb_Ge>0); //PM2G1
-    case 4: return (counter.nb_dssd>0 || (counter.nb_modules>3 && counter.nb_Ge>0)); //P_M4G1
-    case 5: return (counter.nb_modules>3 && counter.nb_Ge>0); //M4G1
-    case 6: return counter.nb_Ge > 1; // G2
-    
-    case 7: counter.analyse(); return counter.nb_clovers_clean > 1; //C2
-    case 8: counter.analyse(); return counter.nb_clovers_clean > 1 && counter.nb_dssd > 0; // PC2
-    case 9: counter.analyse(); return counter.nb_clovers_clean > 0 && counter.nb_dssd > 0; // PC2
-    case 10: counter.analyse(); return counter.nb_clover_clean_delayed > 0 && counter.nb_modules_prompt > 0;
-    default: return true;
+    switch (trigger_choice)
+    {
+      case 0: return counter.nb_dssd>0; //P
+      case 1: return counter.nb_modules>2 && counter.nb_Ge>0; //M3G1
+      case 2: return (counter.nb_dssd>0 || (counter.nb_modules>2 && counter.nb_Ge>0)); //P_M3G1
+      case 3: return (counter.nb_dssd>0 && counter.nb_modules>1 && counter.nb_Ge>0); //PM2G1
+      case 4: return (counter.nb_dssd>0 || (counter.nb_modules>3 && counter.nb_Ge>0)); //P_M4G1
+      case 5: return (counter.nb_modules>3 && counter.nb_Ge>0); //M4G1
+      case 6: return counter.nb_Ge > 1; // G2
+      default: return true;
+    }
+  }
+  else
+  {
+    switch (trigger_choice)
+    {
+      counter.analyse();
+      case 7:  return counter.prompt_clover.GeClean.size() + counter.delayed_clover.GeClean.size() > 1; //C2
+      case 8:  return counter.nb_clovers > 1 && counter.nb_dssd > 0; // PC2
+      case 9:  return counter.nb_clovers > 0 && counter.nb_dssd > 0; // PC1
+      case 10: return counter.delayed_clover.GeClean.size() > 0 && counter.prompt_clover.GeClean.size() > 0;// PrM1DeC1
+      case 11: return counter.delayed_clover.GeClean.size() > 0 && counter.prompt_clover.GeClean.size() > 0;// PrC1DeC1
+      default: return true;
+    }
   }
 }
 
@@ -461,7 +473,7 @@ int main(int argc, char** argv)
           histo_mult.Fill(event.mult);
           if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "MEvts");
           // if (trigger(counter))
-          if(event.mult>1) for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (isGe[event.labels[hit_i]])
+          if(event.mult>1) for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (CloversV2::isGe(event.labels[hit_i]))
           {
             for (int hit_j = 0; hit_j<event.mult; ++hit_j) labels_trigged_histo.Fill(event.labels[hit_j]);
             trig_hits_count+=event.mult;

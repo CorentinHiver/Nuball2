@@ -3,7 +3,7 @@
 #include "../lib/Classes/FilesManager.hpp"
 #include "../lib/Classes/Calibration.hpp"
 #include "../lib/MTObjects/MTList.hpp"
-#include "MyClovers.hpp"
+#include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/Paris.hpp"
 
 void macro2(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
