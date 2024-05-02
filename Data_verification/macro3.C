@@ -1,3 +1,4 @@
+#include "../MTObjects/MTObject.hpp"
 #include "../lib/libRoot.hpp"
 #include "../lib/Classes/RF_Manager.hpp"
 #include "../lib/Classes/FilesManager.hpp"
@@ -13,12 +14,13 @@ float smear(float const & nrj, TRandom* random)
 
 void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
-  std::string trigger = "PrM1DeC1";
-  // std::string trigger = "C2";
+  // std::string trigger = "PrM1DeC1";
+  std::string trigger = "C2";
   // std::string trigger = "P";
   Timer timer;
   std::atomic<int> files_total_size(0);
-  int freq_hit_display= (nb_hits_read > 2.e+7) ? 1.e+6 : 1.e+7;
+  std::atomic<double> total_hits_number(0);
+  int freq_hit_display= (nb_hits_read < 2.e+7) ? 1.e+6 : 1.e+7;
 
   Calibration calibNaI("../136/coeffs_NaI.calib");
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
@@ -30,40 +32,40 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   std::mutex write_mutex;
 
   int gate_bin_size = 2; // Take 2 keV
-    std::vector<int> dd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
-    std::vector<int> pp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
+  std::vector<int> dd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750}; // keV
+  std::vector<int> pp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750}; // keV
 
-    auto const & dd_gate_bin_max = maximum(dd_gates)+gate_bin_size+1;
-    std::vector<bool> dd_gate_lookup; dd_gate_lookup.reserve(dd_gate_bin_max);
-    std::vector<int> dd_index_gate_lookup; dd_index_gate_lookup.reserve(dd_gate_bin_max);
-    size_t temp_bin = 0;
-    for (int gate_index = 0;  gate_index<dd_gates.size(); ++gate_index)
+  auto const & dd_gate_bin_max = maximum(dd_gates)+gate_bin_size+1;
+  std::vector<bool> dd_gate_lookup; dd_gate_lookup.reserve(dd_gate_bin_max);
+  std::vector<int> dd_index_gate_lookup; dd_index_gate_lookup.reserve(dd_gate_bin_max);
+  size_t temp_bin = 0;
+  for (int gate_index = 0;  gate_index<dd_gates.size(); ++gate_index)
+  {
+    for (; temp_bin<dd_gate_bin_max; ++temp_bin) 
     {
-      for (; temp_bin<dd_gate_bin_max; ++temp_bin) 
+      auto const & gate = dd_gates[gate_index];
+      if (temp_bin<gate-gate_bin_size) 
       {
-        auto const & gate = dd_gates[gate_index];
-        if (temp_bin<gate-gate_bin_size) 
-        {
-          dd_gate_lookup.push_back(false);
-          dd_index_gate_lookup.push_back(0);
-        }
-        else if (temp_bin<gate+gate_bin_size+1) 
-        {
-          dd_gate_lookup.push_back(true);
-          dd_index_gate_lookup.push_back(gate_index);
-        }
-        else break;
+        dd_gate_lookup.push_back(false);
+        dd_index_gate_lookup.push_back(0);
       }
-    }
-    auto const & pp_gate_bin_max = maximum(pp_gates)+gate_bin_size+1;
-    std::vector<bool> pp_gate_lookup; pp_gate_lookup.reserve(pp_gate_bin_max);
-    temp_bin = 0;
-    for (auto gate : pp_gates) for (; temp_bin<pp_gate_bin_max; ++temp_bin) 
-    {
-      if (temp_bin<gate-gate_bin_size) pp_gate_lookup.push_back(false);
-      else if (temp_bin<gate+gate_bin_size+1) pp_gate_lookup.push_back(true);
+      else if (temp_bin<gate+gate_bin_size+1) 
+      {
+        dd_gate_lookup.push_back(true);
+        dd_index_gate_lookup.push_back(gate_index);
+      }
       else break;
     }
+  }
+  auto const & pp_gate_bin_max = maximum(pp_gates)+gate_bin_size+1;
+  std::vector<bool> pp_gate_lookup; pp_gate_lookup.reserve(pp_gate_bin_max);
+  temp_bin = 0;
+  for (auto gate : pp_gates) for (; temp_bin<pp_gate_bin_max; ++temp_bin) 
+  {
+    if (temp_bin<gate-gate_bin_size) pp_gate_lookup.push_back(false);
+    else if (temp_bin<gate+gate_bin_size+1) pp_gate_lookup.push_back(true);
+    else break;
+  }
 
   MTObject::parallelise_function([&](){
 
@@ -129,7 +131,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       chain->Add(file.c_str());
       print("Reading", file);
 
-      std::string outFolder = "data/";
+      std::string outFolder = "data/"+trigger+"/";
       std::string out_filename = outFolder+filename;
 
       Event event;
@@ -144,7 +146,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       Paris prompt_paris;
       Paris delayed_paris;
 
-      for (int evt_i = 1; (evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
+      int evt_i = 1;
+      for ( ;(evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
       {
         if (evt_i%freq_hit_display == 0) print(nicer_double(evt_i, 0), "events");
 
@@ -310,6 +313,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       }// End events loop
 
+      total_hits_number.fetch_add(evt_i, std::memory_order_relaxed);
+
       // Writing the file (the mutex protects potential concurency issues)
       lock_mutex lock(write_mutex);
       std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(),"recreate"));
@@ -359,7 +364,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       // mutex freed
     }
   });
-  print("Reading speed of", files_total_size/timer.TimeSec(), "Mo/s");
+  print("Reading speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_hits_number/timer.TimeSec(), "M events/s");
 }
 
 #ifndef __CINT__

@@ -1154,7 +1154,7 @@ namespace CoAnalyse
 
   /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316
   /// @param choice: 0 : classic radware | 1 : Palameta and Waddington (PW) | 2 : classic + remove diagonals | 3 : PW + remove diagonals
-  void removeBackground(TH2F * histo, int const & niter = 20, uchar const & choice = 0, double const & threshold = 0.05, double const & sigmaX = 2., double const & sigmaY = 2.)
+  void removeBackground(TH2 * histo, int const & niter = 20, uchar const & choice = 0, double const & threshold = 0.05, double const & sigmaX = 2., double const & sigmaY = 2.)
   {
     if (!checkMatrixSquare(histo)) {error ("The matrix must be square"); return;}
 

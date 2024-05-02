@@ -3,11 +3,16 @@
 
 #include "../libRoot.hpp"
 
+/**
+ * @brief From Jon
+ */
 class RWMat
 {
  public:
   RWMat(std::string name="test.m4b",int nchans=4096); //@- Default constructor
+  RWMat(TH2D* RootMat);  //@- constructor from Root 2D histogram
   RWMat(TH2F* RootMat);  //@- constructor from Root 2D histogram
+  RWMat(TH2I* RootMat);  //@- constructor from Root 2D histogram
   #ifdef MTTHIST_HPP
   template<class T>
   RWMat(MTTHist<T> & MTRootMat);  //@- constructor from MTThist 2D histogram
@@ -18,6 +23,7 @@ class RWMat
   void Write(std::string name="", std::string path = "./"); //write the RWMat out
   void Read(std::string Filename="", bool IsInteger=true); //Read matrix from file
   double Get(unsigned short i, unsigned short j) {return fRWMat[i][j];}
+  auto const & GetName () const noexcept {return fName;}
   void Set(unsigned short i, unsigned short j, int val) {fRWMat[i][j]=val;}
   void Set(unsigned short i, unsigned short j, double val) {fRWMat[i][j]=val;}
   void Fill(unsigned short i, unsigned short j); //increment channel by 1 count
@@ -65,6 +71,16 @@ RWMat::RWMat(TH2F* RootMat) //constructor from root object
    Reset(RootMat);
 }
 
+RWMat::RWMat(TH2I* RootMat) //constructor from root object
+{
+   Reset(RootMat);
+}
+
+RWMat::RWMat(TH2D* RootMat) //constructor from root object
+{
+   Reset(RootMat);
+}
+
 template<class THist>
 void RWMat::Reset(THist* RootMat)
 {
@@ -74,23 +90,22 @@ void RWMat::Reset(THist* RootMat)
     m_ok = false;
     return;
   }
-  if (!RootMat -> InheritsFrom("TH2")) {print(RootMat->GetName(),"is not a TH2x !!"); return;}
-  else
+  if (!RootMat -> InheritsFrom("TH2")) {print(RootMat->GetName(),"is not a TH2 !!"); m_ok = false; return;}
+  int xchans=RootMat->GetNbinsX();
+  int ychans=RootMat->GetNbinsY();
+  if (xchans != ychans) {print(RootMat->GetName(),"is not square !!"); m_ok = false; return;}
+  if (xchans != 4096 || ychans != 4096) {print(RootMat->GetName(),"needs to be a 4096x4096 matrix!"); m_ok = false; return;}
+  fNChannels=4096;
+  fName=RootMat->GetName();
+  fName+=".m4b";
+  print(fName);
+  fRWMat=new int*[fNChannels];
+  for(int i=0 ; i < fNChannels ; i++) fRWMat[i] = new int[fNChannels];
+  double val=0;
+  for (int i=0; i < xchans ; i++) for (int j=0; j < ychans ; j++)
   {
-    int xchans=RootMat->GetNbinsX();
-    int ychans=RootMat->GetNbinsY();
-    fNChannels=4096;
-    fName=RootMat->GetName();
-    fName+=".m4b";
-    print(fName);
-    fRWMat=new int*[fNChannels];
-    for(int i=0 ; i < fNChannels ; i++) fRWMat[i] = new int[fNChannels];
-    double val=0;
-    for (int i=0; i < xchans ; i++) for (int j=0; j < ychans ; j++)
-    {
-      fRWMat[i][j]=RootMat->GetBinContent(i,j);
-      val+=fRWMat[i][j];
-    }
+    fRWMat[i][j]=RootMat->GetBinContent(i,j);
+    val+=fRWMat[i][j];
   }
 }
 //________________________________________________________________________
@@ -169,7 +184,7 @@ void RWMat::Write(std::string name, std::string path)
   delete [] buffer;
 }
 //________________________________________________________________________
-RWMat* RWMat::Add(RWMat* Matrix,double val)
+RWMat* RWMat::Add(RWMat* Matrix, double val)
 {
   RWMat *mat3=new RWMat();
   for (int i=0; i<fNChannels; i++)
