@@ -292,29 +292,45 @@ double peak_over_total(TH1* histo, int bin_min, int bin_max, int smooth_backgrou
   return peak/total;
 }
 
+double peak_over_background(TH1* histo, int bin_min, int bin_max, TH1* background)
+{
+  int total = histo->Integral();
+  int peak = 0;
+  for (int bin = bin_min; bin<bin_max+1; ++bin) peak += histo->GetBinContent(bin) - background->GetBinContent(bin);
+  return peak/total;
+}
+
+double peak_over_background(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
+{
+  auto background = histo->ShowBackground(smooth_background_it);
+  auto ret = peak_over_background(histo, bin_min, bin_max, background);
+  delete background;
+  return ret;
+}
+
 /**
  * @brief 
  * 
- * @param size_peaks_bin Each peak is at bin += size_peaks_bin
+ * @param resolution Each peak is at bin += resolution/2
  * @return TH1F* 
  */
-TH1F* count_to_sigma(TH1* histo, int size_peaks_bin, int smooth_background_it = 20)
+TH1F* count_to_sigma(TH1* histo, int resolution, int smooth_background_it = 20)
 {
-  auto const & size = size_peaks_bin;
+  auto const & size = resolution;
   std::string name = histo->GetName(); name += "_sigmas";
   std::string title = histo->GetName(); title+=";keV [];sigmas;";
   auto background = histo->ShowBackground(smooth_background_it);
   auto ret = new TH1F(name.c_str(), histo->GetName(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
-  for (int bin = 0+size_peaks_bin; bin<histo->GetNbinsX(); ++bin)
+  for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
   {
     auto peak = 0;
     auto bckg = 0;
-    for (int bin_i = bin-size_peaks_bin; bin_i<bin+size_peaks_bin+1; bin_i++)
+    for (int bin_i = bin-resolution; bin_i<bin+resolution+1; bin_i++)
     {
       peak+=histo->GetBinContent(bin_i);
       bckg+=histo->GetBinContent(bin_i);
     } 
-    ret -> SetBinContent(bin, sqrt(peak)/(peak-bckg));
+    ret -> SetBinContent(bin, (peak-bckg)/sqrt(peak));
   }
   delete background;
   return ret;

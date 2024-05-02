@@ -1,4 +1,4 @@
-#include "../MTObjects/MTObject.hpp"
+#include "../lib/MTObjects/MTObject.hpp"
 #include "../lib/libRoot.hpp"
 #include "../lib/Classes/RF_Manager.hpp"
 #include "../lib/Classes/FilesManager.hpp"
@@ -115,6 +115,15 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH2F> dd_PC3 (new TH2F(("dd_PC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC3;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
       std::unique_ptr<TH2F> dp_PC3 (new TH2F(("dp_PC3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC3;Prompt [keV];Delayed [keV]", 4096,0,4096, 4096,0,4096));
 
+      std::unique_ptr<TH2F> d_VS_delayed_calorimetry_PC5 (new TH2F(("d_VS_delayed_calorimetry_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_delayed_calorimetry_PC5", 1000,0,10000, 4096,0,4096));
+      std::unique_ptr<TH2F> d_VS_prompt_mult_PC5 (new TH2F(("d_VS_prompt_mult_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_prompt_mult_PC5", 20,0,20, 4096,0,4096));
+      std::unique_ptr<TH2F> d_VS_delayed_mult_PC5 (new TH2F(("d_VS_delayed_mult_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_delayed_mult_PC5", 20,0,20, 4096,0,4096));
+      std::unique_ptr<TH1F> p_PC5 (new TH1F(("p_PC5_"+std::to_string(thread_i)).c_str(), "prompt PC3", 4096,0,4096));
+      std::unique_ptr<TH2F> pp_PC5 (new TH2F(("pp_PC5_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
+      std::unique_ptr<TH1F> d_PC5 (new TH1F(("d_PC5_"+std::to_string(thread_i)).c_str(), "delayed PC3", 4096,0,4096));
+      std::unique_ptr<TH2F> dd_PC5 (new TH2F(("dd_PC5_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC3;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
+      std::unique_ptr<TH2F> dp_PC5 (new TH2F(("dp_PC5_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC3;Prompt [keV];Delayed [keV]", 4096,0,4096, 4096,0,4096));
+
       // Paris
       std::unique_ptr<TH1F> paris_prompt (new TH1F(("paris_prompt_"+std::to_string(thread_i)).c_str(), "paris_prompt;keV", 10000,0,20000));
       std::unique_ptr<TH1F> paris_delayed (new TH1F(("paris_delayed_"+std::to_string(thread_i)).c_str(), "paris_delayed;keV", 10000,0,20000));
@@ -216,6 +225,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           auto const & clover_i = prompt_clovers[prompt_clovers.GeClean[loop_i]];
           p->Fill(clover_i.nrj);
           E_dT->Fill(clover_i.time, clover_i.nrj);
+          if (prompt_calo < 5000) p_PC5->Fill(clover_i.nrj);
           if (prompt_calo < 3000) p_PC3->Fill(clover_i.nrj);
           // prompt-prompt :
           for (int loop_j = loop_i+1; loop_j<prompt_clovers.GeClean.size(); ++loop_j)
@@ -223,6 +233,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & clover_j = prompt_clovers[prompt_clovers.GeClean[loop_j]];
             pp->Fill(clover_i.nrj, clover_j.nrj);
             pp->Fill(clover_j.nrj, clover_i.nrj);
+            if (prompt_calo < 5000)
+            {
+              pp_PC5->Fill(clover_i.nrj, clover_j.nrj);
+              pp_PC5->Fill(clover_j.nrj, clover_i.nrj);
+            }
             if (prompt_calo < 3000)
             {
               pp_PC3->Fill(clover_i.nrj, clover_j.nrj);
@@ -242,6 +257,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           
           d_VS_prompt_calorimetry -> Fill(prompt_calo, clover_i.nrj);
           d_VS_delayed_calorimetry -> Fill(delayed_calo, clover_i.nrj);
+          if (prompt_calo < 5000) d_PC5->Fill(clover_i.nrj);
           if (prompt_calo < 3000) d_PC3->Fill(clover_i.nrj);
           
           
@@ -252,6 +268,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             dd->Fill(clover_i.nrj, clover_j.nrj);
             dd->Fill(clover_j.nrj, clover_i.nrj);
             
+            if (prompt_calo < 5000)
+            {
+              dd_PC5->Fill(clover_i.nrj, clover_j.nrj);
+              dd_PC5->Fill(clover_j.nrj, clover_i.nrj);
+            }
             if (prompt_calo < 3000)
             {
               dd_PC3->Fill(clover_i.nrj, clover_j.nrj);
@@ -282,9 +303,16 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           {
             auto const & clover_j = prompt_clovers[prompt_clovers.GeClean[loop_j]];
             dp->Fill(clover_j.nrj, clover_i.nrj);
+            if (prompt_calo < 5000) dp_PC5->Fill(clover_j.nrj, clover_i.nrj);
             if (prompt_calo < 3000) dp_PC3->Fill(clover_j.nrj, clover_i.nrj);
           }
 
+          if (prompt_calo < 5000)
+          {
+            d_VS_delayed_calorimetry_PC5->Fill(delayed_calo, clover_i.nrj);
+            d_VS_prompt_mult_PC5->Fill(prompt_mult, clover_i.nrj);
+            d_VS_delayed_mult_PC5->Fill(delayed_mult, clover_i.nrj);
+          }
           if (prompt_calo < 3000)
           {
             d_VS_delayed_calorimetry_PC3->Fill(delayed_calo, clover_i.nrj);
