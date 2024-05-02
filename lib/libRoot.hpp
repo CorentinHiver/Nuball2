@@ -314,7 +314,7 @@ TH1F* count_to_sigma(TH1* histo, int size_peaks_bin, int smooth_background_it = 
       peak+=histo->GetBinContent(bin_i);
       bckg+=histo->GetBinContent(bin_i);
     } 
-    ret -> SetBinContent(bin, peak/sqrt(peak+bckg));
+    ret -> SetBinContent(bin, sqrt(peak)/(peak-bckg));
   }
   delete background;
   return ret;

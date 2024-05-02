@@ -18,9 +18,10 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   // std::string trigger = "P";
   Timer timer;
   std::atomic<int> files_total_size(0);
+  int freq_hit_display= (nb_hits_read > 2.e+7) ? 1.e+6 : 1.e+7;
 
   Calibration calibNaI("../136/coeffs_NaI.calib");
-  Path data_path("~/faster_data/N-SI-136-root_"+trigger+"/merged/");
+  Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
   MTObject::Initialise(nb_threads);
@@ -81,9 +82,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH2F> dd (new TH2F(("dd_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
       std::unique_ptr<TH2F> dp (new TH2F(("dp_"+std::to_string(thread_i)).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", 4096,0,4096, 4096,0,4096));
       std::unique_ptr<TH2F> E_dT (new TH2F(("E_dT_"+std::to_string(thread_i)).c_str(), "E_dT clean", 600,-100_ns,200_ns, 4096,0,4096));
-      std::vector<TH2I*> dd_gated;
-      for (auto const & gate : dd_gates) dd_gated.push_back(new TH2I(("dd_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
-                                        ("gamma-gamma delayed gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), 4096,0,4096, 4096,0,4096));
+      std::vector<std::unique_ptr<TH2I>> dd_gated;
+      for (auto const & gate : dd_gates) dd_gated.push_back(std::unique_ptr<TH2I>(new TH2I(("dd_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
+                                        ("gamma-gamma delayed gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), 4096,0,4096, 4096,0,4096)));
       // std::vector<TH2I*> pp_gated;
       // for (auto const & gate : pp_gates) pp_gated.push_back(new TH2I(("pp_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
       //                                   ("gamma-gamma prompt gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), 4096,0,4096, 4096,0,4096));
@@ -145,7 +146,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       for (int evt_i = 1; (evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
       {
-        if (evt_i%((int)1.e+6) == 0) print(nicer_double(evt_i, 0), "events");
+        if (evt_i%freq_hit_display == 0) print(nicer_double(evt_i, 0), "events");
 
         chain->GetEntry(evt_i);
 
