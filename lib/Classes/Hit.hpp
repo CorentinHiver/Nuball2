@@ -79,7 +79,8 @@ constexpr inline Time operator""_ns(unsigned long long time) noexcept {return Ti
 constexpr inline Time operator""_ps(unsigned long long time) noexcept {return Time_cast(time          );}
 constexpr inline Time operator""_fs(unsigned long long time) noexcept {return Time_cast(time*1.e-3    );}
 
-constexpr inline double operator""_MeV(long double energy) noexcept {return double_cast(energy)*1000.d;}
+constexpr inline double operator""_MeV(long double energy) noexcept {return double_cast(energy)*1000.;}
+constexpr inline double operator""_MeV(unsigned long long energy) noexcept {return double_cast(energy)*1000.;}
 /////////////////////
 /// IO parameters ///
 /////////////////////
@@ -89,9 +90,8 @@ constexpr inline double operator""_MeV(long double energy) noexcept {return doub
  * @details
  * 
  * l : label  label                 ushort
- * s : stamp  absolute timestamp ps ULong64_t
- * t : time   relative timestamp ps Long64_t
- * T : time2  relative timestamp ns float
+ * t : stamp  absolute timestamp ps ULong64_t
+ * T : time   relative time      ps Long64_t
  * e : adc    energy in ADC         int
  * E : nrj    energy in keV         float
  * q : qdc2   energy qdc2 in ADC    float

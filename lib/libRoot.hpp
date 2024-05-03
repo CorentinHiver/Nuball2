@@ -6,6 +6,7 @@
 #include <TAxis.h>
 #include <TCanvas.h>
 #include <TChain.h>
+#include <TContextMenu.h>
 #include <TError.h>
 #include <TF1.h>
 #include <TF2.h>
@@ -282,28 +283,53 @@ int findNextBinAbove(TH1* histo, int & bin, double threshold)
   return bin;
 }
 
-double peak_over_total(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
+double peak_integral(TH1* histo, int bin_min, int bin_max, TH1* background)
 {
-  int total = histo->Integral();
+  auto const & peak = histo     ->Integral(bin_min, bin_max);
+  auto const & bckg = background->Integral(bin_min, bin_max);
+  return peak-bckg;
+}
+double peak_integral(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
+{
   auto background = histo->ShowBackground(smooth_background_it);
-  int peak = 0;
-  for (int bin = bin_min; bin<bin_max+1; ++bin) peak += histo->GetBinContent(bin) - background->GetBinContent(bin);
+  auto ret = peak_integral(histo, bin_min, bin_max, background);
   delete background;
-  return peak/total;
+  return ret;
 }
 
 double peak_over_background(TH1* histo, int bin_min, int bin_max, TH1* background)
 {
-  int total = histo->Integral();
-  int peak = 0;
-  for (int bin = bin_min; bin<bin_max+1; ++bin) peak += histo->GetBinContent(bin) - background->GetBinContent(bin);
-  return peak/total;
+  auto const & peak = histo     ->Integral(bin_min, bin_max);
+  auto const & bckg = background->Integral(bin_min, bin_max);
+  return peak/bckg;
 }
-
 double peak_over_background(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
 {
   auto background = histo->ShowBackground(smooth_background_it);
   auto ret = peak_over_background(histo, bin_min, bin_max, background);
+  delete background;
+  return ret;
+}
+
+double peak_over_total(TH1* histo, int bin_min, int bin_max, TH1* background)
+{
+  return peak_integral(histo, bin_min, bin_max, background)/histo->Integral();
+}
+double peak_over_total(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
+{
+  return peak_integral(histo, bin_min, bin_max, smooth_background_it)/histo->Integral();
+}
+
+double peak_significance(TH1* histo, int bin_min, int bin_max, TH1* background)
+{
+  auto const & peak = histo     ->Integral(bin_min, bin_max);
+  auto const & bckg = background->Integral(bin_min, bin_max);
+  return (peak-bckg)/sqrt(peak);
+}
+double peak_significance(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
+{
+  auto background = histo->ShowBackground(smooth_background_it, "");
+  auto ret = peak_significance(histo, bin_min, bin_max, background);
   delete background;
   return ret;
 }
@@ -314,24 +340,50 @@ double peak_over_background(TH1* histo, int bin_min, int bin_max, int smooth_bac
  * @param resolution Each peak is at bin += resolution/2
  * @return TH1F* 
  */
-TH1F* count_to_sigma(TH1* histo, int resolution, int smooth_background_it = 20)
+TH1F* count_to_peak_significance(TH1* histo, int resolution, int smooth_background_it = 20)
 {
-  auto const & size = resolution;
-  std::string name = histo->GetName(); name += "_sigmas";
-  std::string title = histo->GetName(); title+=";keV [];sigmas;";
+  std::string name = histo->GetName(); name += "_significance";
+  std::string title = histo->GetName(); title+=";keV;significance;";
   auto background = histo->ShowBackground(smooth_background_it);
-  auto ret = new TH1F(name.c_str(), histo->GetName(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
+  auto ret = new TH1F(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
   for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
-  {
-    auto peak = 0;
-    auto bckg = 0;
-    for (int bin_i = bin-resolution; bin_i<bin+resolution+1; bin_i++)
-    {
-      peak+=histo->GetBinContent(bin_i);
-      bckg+=histo->GetBinContent(bin_i);
-    } 
-    ret -> SetBinContent(bin, (peak-bckg)/sqrt(peak));
-  }
+    ret -> SetBinContent(bin, peak_significance(histo, bin-resolution, bin+resolution, background));
+  delete background;
+  return ret;
+}
+
+/**
+ * @brief 
+ * 
+ * @param resolution Each peak is at bin += resolution/2
+ * @return TH1F* 
+ */
+TH1F* count_to_peak_over_background(TH1* histo, int resolution, int smooth_background_it = 20)
+{
+  std::string name = histo->GetName(); name += "_peak_over_background";
+  std::string title = histo->GetName(); title+=";keV;peak_over_background;";
+  auto background = histo->ShowBackground(smooth_background_it);
+  auto ret = new TH1F(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
+  for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
+    ret -> SetBinContent(bin, peak_over_background(histo, bin-resolution, bin+resolution, background));
+  delete background;
+  return ret;
+}
+
+/**
+ * @brief 
+ * 
+ * @param resolution Each peak is at bin += resolution
+ * @return TH1F* 
+ */
+TH1F* count_to_peak_over_total(TH1* histo, int resolution, int smooth_background_it = 20)
+{
+  std::string name = histo->GetName(); name += "_peak_over_total";
+  std::string title = histo->GetName(); title+=";keV;peak_over_total";
+  auto background = histo->ShowBackground(smooth_background_it);
+  auto ret = new TH1F(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
+  for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
+    ret -> SetBinContent(bin, peak_over_total(histo, bin-resolution, bin+resolution, background));
   delete background;
   return ret;
 }
@@ -1377,9 +1429,9 @@ namespace CoAnalyse
 
   void test(TH2F* histo)
   {
-    // removeBackground(histo);
     removeBackground(histo);
-    histo->ProjectionX("h642",640,644)->Draw();
+    // removeBackground(histo);
+    // histo->ProjectionX("h642",640,644)->Draw();
     // auto test = moving_gates(histo->ProjectionX("h642",640,644), 279);
     // test->Draw();
     // removeDiagonals(histo);
@@ -1406,7 +1458,6 @@ std::vector<std::string> get_list_histo(TFile * file, std::string const & class_
   for (auto&& keyAsObj : *list)
   {
     auto key = dynamic_cast<TKey*>(keyAsObj);
-    // print(key->ReadObj()->GetName());
     if(key->GetClassName() == class_name)
     {
       ret.push_back(key->GetName());
