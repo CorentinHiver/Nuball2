@@ -59,7 +59,7 @@ public:
   uchar const & status() const { return m_status; }
   bool isBuilding() const {return (m_status==1);}
   bool isBuilt() const {return (m_status==2);}
-  bool isSingle() const {return (m_event->isSingle());}
+  bool isSingle() const {return (m_status==0);}
 
   Event* getEvent() const {return m_event;}
 
@@ -67,28 +67,26 @@ public:
   /// @details
   virtual bool build(Hit const & _hit) = 0; // pure virtual
   virtual bool coincidence(Hit const & hit) = 0; // pure virtual
-  virtual void reset() 
+  virtual void clear() 
   {
     m_event->clear();
     m_status = 0;
   }
 
   // Setters :
-  void setFirstHit(Hit const & hit) 
-  {
-    m_first_hit = hit;
-  }
+  void setFirstHit(Hit const & hit) noexcept {m_first_hit = hit;}
 
   // Options :
-  static void keepSingles(bool const & b = true) {m_keep_singles = b;}
+  static constexpr void keepSingles(bool const & b = true) noexcept {m_keep_singles = b;}
 
 protected:
 
   Event* m_event = nullptr;
 
+  // This hit is used to start a coincidence :
   Hit m_first_hit;
 
-  /// 3 status : 0: single | 1: begin of coincidence | 2: coincidence complete
+  /// 3 status : 0: single | 1: inside coincidence | 2: coincidence complete
   uchar m_status = 0;
   static bool m_keep_singles;
 };

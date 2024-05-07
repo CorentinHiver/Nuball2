@@ -6,11 +6,6 @@
 // 2. Include library
 #include <MTObject.hpp> // Include this first to activate the multithreading additions (#define MULTITHREADING)
 #include <MTTHist.hpp>  // Thread-safe wrapper around root histograms
-MTTHist<TH1F> histo_mult_trigger;
-MTTHist<TH1F> labels_histo;
-MTTHist<TH1F> labels_trigged_histo;
-MTTHist<TH1F> labels_trigger_histo;
-MTTHist<TH1F> histo_mult;
 
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
@@ -19,9 +14,21 @@ MTTHist<TH1F> histo_mult;
 #include <MTCounter.hpp>      // Use this to thread safely count what you want²
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors with respect to a reference
-
 #include <EventBuilderRF.hpp> // Event builder based on RF
-#include "Counter136.hpp"
+
+MTTHist<TH1F> histo_mult_trigger;
+MTTHist<TH1F> labels_histo;
+MTTHist<TH1F> histo_mult;
+MTTHist<TH2F> cleanGe_VS_time_pure_singles;
+MTTHist<TH2F> cleanGe_VS_time;
+MTTHist<TH2F> cleanGe_trigged_VS_time;
+MTTHist<TH2F> cleanGe_trigger_particle_VS_time;
+
+constexpr bool inline isPrompt(Time const & time)  noexcept {return -30_ns < time && time < 30_ns;}
+constexpr bool inline isDelayed(Time const & time) noexcept {return 30_ns < time && time < 180_ns;}
+// constexpr bool inline isGe(Label const & label)    noexcept {return (label<200 && (label-23)%6 > 1);}
+
+#include "Trigger136.hpp"
 
 // 3. Declare some global variables :
 std::string IDFile = "../index_129.list";
@@ -31,74 +38,23 @@ std::string list_runs = "list_runs.list";
 std::string output = "-root_";
 int nb_files_ts = 60;
 int nb_files = -1;
-int rf_shift = 20;
+int rf_shift = 20_ns;
 int max_hits_in_event = -1;
 
 bool only_timeshifts = false; // No conversion : only calculate the timeshifts
 bool overwrite = false; // Overwrite already existing converted root files. Works also with -t options (only_timeshifts)
-bool check_preprompt = false;
-bool keep_rf = false;
-bool fill_histos = false;
-bool keep_first_hits = false;
+bool keep_rf = false; // Write the rf hits
+bool fill_histos = false; // 
+bool keep_first_hits = false; // Do not throw away the hits before the first rf downscale
 
 std::string one_run_folder = "";
 Path timeshifts_path = "";
 ulonglong max_hits = -1;
 bool treat_129 = false;
 
-bool extend_periods = false; // To take more than one period after a event trigger
-uint nb_periods_more = 0; // Number of periods to extend after an event that triggered
-
-char trigger_choice = -1;
-std::map<char, std::string> trigger_name = 
-{
-  {-1,"all"},
-  {0, "P"},
-  {1, "M3G1"},
-  {2, "P_M3G1"},
-  {3, "PM2G1"},
-  {4, "P_M4G1"},
-  {5, "M4G1"},
-  {6, "G2"},
-  {7, "C2"},
-  {8, "PC2"},
-  {9, "PC1"},
-  {10, "PrM1DeC1"},
-  {11, "PrC1DeC1"}
-};
-
-std::string trigger_legend = "Legend : P = Particle | G = Germanium | M = Module | C = Clean Germanium | _ = OR | Pr = Prompt | De = delayed";
-
-bool trigger(Counter136 & counter)
-{
-  if (trigger_choice<7)
-  {
-    switch (trigger_choice)
-    {
-      case 0: return counter.nb_dssd>0; //P
-      case 1: return counter.nb_modules>2 && counter.nb_Ge>0; //M3G1
-      case 2: return (counter.nb_dssd>0 || (counter.nb_modules>2 && counter.nb_Ge>0)); //P_M3G1
-      case 3: return (counter.nb_dssd>0 && counter.nb_modules>1 && counter.nb_Ge>0); //PM2G1
-      case 4: return (counter.nb_dssd>0 || (counter.nb_modules>3 && counter.nb_Ge>0)); //P_M4G1
-      case 5: return (counter.nb_modules>3 && counter.nb_Ge>0); //M4G1
-      case 6: return counter.nb_Ge > 1; // G2
-      default: return true;
-    }
-  }
-  else
-  {
-    switch (trigger_choice)
-    {
-      counter.analyse();
-      case 7:  return counter.prompt_clover.GeClean.size() + counter.delayed_clover.GeClean.size() > 1; //C2
-      case 8:  return counter.nb_clovers > 1 && counter.nb_dssd > 0; // PC2
-      case 9:  return counter.nb_clovers > 0 && counter.nb_dssd > 0; // PC1
-      case 10: return counter.delayed_clover.GeClean.size() > 0 && counter.prompt_clover.GeClean.size() > 0;// PrM1DeC1
-      case 11: return counter.delayed_clover.GeClean.size() > 0 && counter.prompt_clover.GeClean.size() > 0;// PrC1DeC1
-      default: return true;
-    }
-  }
-}
+bool check_preprompt = false; // Do nothing anymore
+bool extend_periods = false; // To take more than one period after a event trigger, do nothing anymore
+uint nb_periods_more = 0; // Number of periods to extend after an event that triggered, do nothing anymore
 
 // 4. Main
 int main(int argc, char** argv)
@@ -107,7 +63,7 @@ int main(int argc, char** argv)
   if (argc > 1)
   {
     std::string list_trigger;
-    for (auto const & trig : trigger_name) 
+    for (auto const & trig : Trigger136::names) 
     {
       list_trigger.append(std::to_string(trig.first)+std::string(" : ")+trig.second+std::string(". "));
     }
@@ -162,9 +118,14 @@ int main(int argc, char** argv)
         {
           output = argv[++i];
         }
+        else if (command == "-s" || command == "--rf-shif")
+        {
+          rf_shift = std::stoi(argv[++i]);
+        }
         else if (command == "-t" || command == "--trigger")
         {
-          trigger_choice = char_cast(std::stoi(argv[++i]));
+          Trigger136::choice = char_cast(std::stoi(argv[++i]));
+          print("Trigger :", Trigger136::names[Trigger136::choice]);
         }
         else if (command == "-T" || command == "--timeshifts")
         {
@@ -198,7 +159,7 @@ int main(int argc, char** argv)
         else if (command == "-h" || command == "--help")
         {
           print("List of the commands :");
-          print("(-e  || --extend-period)  [nb_periods]    : set the number of periods to extend the time window after trigger (not functionnal)");
+          // print("(-e  || --extend-period)  [nb_periods]    : set the number of periods to extend the time window after trigger (not functional)");
           print("(-f  || --files-number)   [files-number]  : set the number of files to convert in each folder");
           print("(-h  || --help)                           : display this help");
           print("(       --keep-singles)                   : to keep singles hits");
@@ -209,7 +170,7 @@ int main(int argc, char** argv)
           print("(-o  || --overwrite)                      : overwrites the already written folders. If a folder is incomplete, you need to delete it");
           print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
           print("(       --run)            [runName]       : set only one folder to convert");
-          print("(-t  || --trigger)        [trigger]       : ", list_trigger, "|", trigger_legend);
+          print("(-t  || --trigger)        [trigger]       : ", list_trigger, "|", Trigger136::legend);
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
           print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
           print("(       --129)                            : Treats the N-SI-129 pulsed runs");
@@ -237,9 +198,11 @@ int main(int argc, char** argv)
   // Initialise the histograms
   histo_mult_trigger.reset("mult_trig","mult_trig", 50,-1, 50);
   histo_mult.reset("mult","mult", 50,-1, 50);
+  cleanGe_VS_time.reset("cleanGe_VS_time","cleanGe_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
+  cleanGe_VS_time_pure_singles.reset("cleanGe_VS_time_pure_singles","cleanGe_VS_time_pure_singles", 400,-100_ns,300_ns, 10000,0,10000);
+  cleanGe_trigged_VS_time.reset("cleanGe_trigged_VS_time","cleanGe_trigged_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
+  cleanGe_trigger_particle_VS_time.reset("cleanGe_trigger_particle_VS_time","cleanGe_trigger_particle_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
   labels_histo.reset("labels","labels", 1000,0,1000);
-  labels_trigged_histo.reset("labels_trigged","labels trigged", 1000,0,1000);
-  labels_trigger_histo.reset("labels_trigger","labels trigger", 1000,0,1000);
 
   // Setup the path accordingly to the machine :
   Path dataPath = Path::home();
@@ -251,7 +214,7 @@ int main(int argc, char** argv)
   Path manipPath = dataPath+manip;
 
   // Output file :
-  output+=trigger_name.at(trigger_choice);
+  output+=Trigger136::names.at(Trigger136::choice);
   if (extend_periods) output+="_"+std::to_string(nb_periods_more)+"periods";
   Path outPath (dataPath+(manip.name()+output), true);
 
@@ -269,7 +232,7 @@ int main(int argc, char** argv)
   if (!runs) throw Manip::NotFound(runs);
 
   // Setup some parameters :
-  RF_Manager::setOffset_ns(rf_shift);
+  RF_Manager::setOffset(rf_shift);
   
   // Loop sequentially through the runs and treat their files in parallel :
   std::string run;
@@ -310,20 +273,18 @@ int main(int argc, char** argv)
     };
 
     File file_dT(outPath.string() + "Timeshifts/" + run_name + ".dT");
-    print();
-    print(timeshifts_path);
-    print();
     if (timeshifts_path.string() != "" && timeshifts_path.exists()) file_dT = timeshifts_path.string() + "Timeshifts/" + run_name + ".dT";
 
+    // If only overwriting the timeshifts then no need to try to load it first :
     if(overwrite && only_timeshifts) {calculateTimeshifts();}
     else
     {
-      try
+      try // Try to load the data
       {
         timeshifts.load(file_dT.string());
       }
       catch(Timeshifts::NotFoundError & error)
-      { // If no timeshifts data if available for the run already, calculate it :
+      { // If no timeshifts data if available for the run already, calculate it from the data :
         calculateTimeshifts();
       }
       if (only_timeshifts) continue;
@@ -402,7 +363,7 @@ int main(int argc, char** argv)
       // Prepare the reading of the TTree and the output Events //
       // ------------------------------------------------------ //
       // Switch the temporary TTree to reading mode :
-      hit.reset();
+      hit.clear();
       hit.reading(tempTree.get(), "ltEQ"); // Reading label, timestamp, calibrated energy, calibrated qdc2
 
       std::string const outTree_name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
@@ -416,31 +377,30 @@ int main(int argc, char** argv)
       rf.setPeriod_ns(200);
 
       // Handle the first RF downscale :
-      RF_Extractor first_rf(tempTree.get(), rf, hit, gIndex);
+      RF_Extractor first_rf(tempTree.get(), rf, hit, gIndex); // The hit now contains the first downscaled RF
       if (!first_rf) return;
+      rf.setHit(hit);
 
       debug("first RF found at hit n°", first_rf.cursor());
 
       // Initialise event builder based on RF :
       EventBuilderRF eventBuilder(&event, &rf);
-      eventBuilder.setFirstRF(hit);
-      rf.setHit(hit);
+      eventBuilder.setFirstHit(hit);
 
       // Initialise event analyzer :
-      Counter136 counter(&event);
+      Trigger136 trigger(&event);
 
-      // Handle the first hit :
+      // Handle the first hit //
       int loop = 0;
       // In the first file of each run, the first few hundreds of thousands of hits don't have RF downscale. 
       // So we have to skip them in order to maintain good temporal resolution of all events:
       if (!keep_first_hits) loop = first_rf.cursor();
       
       tempTree -> GetEntry(gIndex[loop++]);
-      eventBuilder.setFirstHit(hit);
 
-      // --------------------------------- //
-      // Loop over the temporary root tree //
-      // --------------------------------- //
+      // ---------------------------- //
+      // Loop over the realigned data //
+      // ---------------------------- //
       Timer convert_timer;
       auto const & nb_data = tempTree->GetEntries();
       ulong evts_count = 0;
@@ -453,7 +413,7 @@ int main(int argc, char** argv)
         if (rf.setHit(hit))
         { // Handle rf
           if (keep_rf)
-          {// Write down the rf in the data if the option is activated
+          {// Write down the rf in the data if the option keep-rf is activated
             Event tempEvent (event);
             event = hit;
             outTree -> Fill();
@@ -463,28 +423,32 @@ int main(int argc, char** argv)
           // The rf hits cannot participate in the construction of an event as it is not a detector
           continue;
         }
-        
+
         if (eventBuilder.build(hit))
-        {// Here, the event is made at least of 2 hits (if the Builder::keepSingles() is activated, can be only one)
+        {// Here, an event is made of at least of 2 hits (but if the Builder::keepSingles() is activated, can be only one)
          // in coincidence within the time window centered around the pulsation t0 (between -rf_shift and period-rf_shift)
           ++evts_count;
           if (max_hits_in_event > 0  &&  event.mult > max_hits_in_event) continue;
-          // counter.count();
           histo_mult.Fill(event.mult);
           if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "MEvts");
-          // if (trigger(counter))
-          if(event.mult>1) for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (CloversV2::isGe(event.labels[hit_i]))
+          if (trigger.pass())
           {
-            for (int hit_j = 0; hit_j<event.mult; ++hit_j) labels_trigged_histo.Fill(event.labels[hit_j]);
+            for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigged_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
             trig_hits_count+=event.mult;
             histo_mult_trigger.Fill(event.mult);
             ++trig_count;
 
             outTree->Fill();
-
-            break;
           }
+          if (trigger.nb_dssd > 0) for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigger_particle_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
         }
+        if (eventBuilder.isSingle() && CloversV2::isGe(eventBuilder.getLastHit().label))
+        {
+          auto const & hit = eventBuilder.getLastHit();
+          cleanGe_VS_time_pure_singles.Fill(hit.stamp, hit.nrj);
+          cleanGe_VS_time.Fill(hit.stamp, hit.nrj);
+        }
+        // if (eventBuilder.isSingle()) {print(*(eventBuilder.getEvent())); pauseCo();}
       }
       convert_timer.Stop();
       print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
@@ -504,7 +468,7 @@ int main(int argc, char** argv)
 
       print(outfile, "written in", timer(),"(",dataSize/timer.TimeSec(),"Mo/s). Input file", dataSize, 
             "Mo and output file", outSize, "Mo : compression factor ", dataSize/outSize,"-", (100.l*trig_hits_count)/(1.l*nb_data),"% hits kept",
-            "=", (100.l*trig_count)/(1.l*evts_count), "% evts");
+            "|", (100.l*trig_count)/(1.l*evts_count), "% evts");
     });
 
     print(run_name, "converted at a rate of", size_file_conversion(total_read_size, "o", "Mo")/timer_total.TimeSec(), "Mo/s");
@@ -530,11 +494,13 @@ int main(int argc, char** argv)
 
     unique_TFile histoFile (TFile::Open(outRootName.c_str(), "UPDATE"));
     histoFile->cd();
+    cleanGe_VS_time.Write();
+    cleanGe_VS_time_pure_singles.Write();
+    cleanGe_trigged_VS_time.Write();
+    cleanGe_trigger_particle_VS_time.Write();
     histo_mult.Write();
     histo_mult_trigger.Write();
     labels_histo.Write();
-    labels_trigged_histo.Write();
-    labels_trigger_histo.Write();
     histoFile->Close();
   }
   return 0;

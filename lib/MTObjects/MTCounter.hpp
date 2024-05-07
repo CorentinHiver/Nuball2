@@ -18,6 +18,7 @@ public:
   MTCounter(T const & value) : m_counter(size_cast(value)) {}
 
   operator size_t() const { return m_counter.load(); }
+  operator float() const { return float_cast(m_counter.load()); }
   size_t get() const { return m_counter.load(); }
 
   size_t operator++()     {return m_counter.fetch_add(1, std::memory_order_relaxed);} // to do counter++

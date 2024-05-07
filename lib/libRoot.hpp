@@ -313,7 +313,9 @@ double peak_over_background(TH1* histo, int bin_min, int bin_max, int smooth_bac
 
 double peak_over_total(TH1* histo, int bin_min, int bin_max, TH1* background)
 {
-  return peak_integral(histo, bin_min, bin_max, background)/histo->Integral();
+  auto total = histo->Integral();
+  if (total == 0) return 0;
+  else return peak_integral(histo, bin_min, bin_max, background)/total;
 }
 double peak_over_total(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
 {
@@ -324,7 +326,8 @@ double peak_significance(TH1* histo, int bin_min, int bin_max, TH1* background)
 {
   auto const & peak = histo     ->Integral(bin_min, bin_max);
   auto const & bckg = background->Integral(bin_min, bin_max);
-  return (peak-bckg)/sqrt(peak);
+  if (peak == 0) return 0;
+  else return (peak-bckg)/sqrt(peak);
 }
 double peak_significance(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
 {
@@ -387,6 +390,29 @@ TH1F* count_to_peak_over_total(TH1* histo, int resolution, int smooth_background
   delete background;
   return ret;
 }
+
+TH1F* AND(TH1* histo1, TH1* histo2, int smooth_background_it = 20)
+{
+  int bins = histo1->GetNbinsX();
+  double min = histo1->GetXaxis()->GetXmin();
+  double max = histo1->GetXaxis()->GetXmax();
+  if (bins != histo2->GetNbinsX()) bins = (histo1->GetNbinsX() < histo2->GetNbinsX()) ? histo1->GetNbinsX() : histo1->GetNbinsX();
+  if (min  != histo2->GetXaxis()->GetXmin()) {print("in AND(TH1F *histo1, TH1F *histo2) : axis inconsistent..."); return nullptr;}
+  if (max  != histo2->GetXaxis()->GetXmax()) {print("in AND(TH1F *histo1, TH1F *histo2) : axis inconsistent..."); return nullptr;}
+  std::string name = histo1->GetName() + std::string("_AND_") + histo1->GetName();
+  std::string title = histo1->GetTitle() + std::string("_AND_") + histo1->GetTitle();
+  auto background1 = histo1->ShowBackground(smooth_background_it);
+  auto background2 = histo2->ShowBackground(smooth_background_it);
+  auto ret = new TH1F(name.c_str(), title.c_str(), bins, min, max);
+  for (int bin = 0; bin<bins; ++bin)
+  {
+    auto const & count_1 = histo1->GetBinContent(bin) - background1->GetBinContent(bin) ;
+    auto const & count_2 = histo2->GetBinContent(bin) - background2->GetBinContent(bin) ;
+    ret->SetBinContent(bin, (count_1<count_2) ? count_1 : count_2);
+  }
+  return ret;
+}
+
 
 /// @brief Shifts a histogram by 'shift' X value
 /// @param shift Shifts each bin content by 'shift' units of the x axis
@@ -1194,35 +1220,49 @@ namespace CoAnalyse
     }
   }
 
-  std::vector<bool> mainPeaksLookup(TH1D* histo, double const & sigma = 2., double const & threshold = 0.05, double const & n_sigma = 2, int const & verbose = 0)
+  std::vector<bool> mainPeaksLookup(TH1D* histo, double const & sigma = 2., double const & threshold = 0.05, double const & n_sigma = 2, int const & verbose = 0, bool remove511 = false)
   {
     if (!histo) {error("in CoAnalyse::mainPeaksLookup() : histo is nullptr"); return std::vector<bool>(0);}
+    std::vector<double> peaks;
+    auto xAxis = histo->GetXaxis();
+    if (remove511) xAxis->SetRangeUser(0, 500);
     histo->ShowPeaks(sigma, "", threshold); // Get the peaks from the Root ShowPeaks method
-    auto markers = static_cast<TPolyMarker*>(histo->GetListOfFunctions()->FindObject("TPolyMarker")); // Exctract the peaks list
+    auto markers = static_cast<TPolyMarker*>(histo->GetListOfFunctions()->FindObject("TPolyMarker")); // Extracts the peaks list
     auto N = markers->GetN(); // Get the number of peaks
-    auto X = markers->GetX(); // Get the X values of the maximum of the peak (double*)
+    auto raw_X = markers->GetX(); // Get the X values of the maximum of the peak (double*)
+    for (int peak_i = 0; peak_i<N; ++peak_i) peaks.push_back(raw_X[peak_i]);
+    if (remove511)
+    {
+      xAxis->UnZoom();
+      xAxis->SetRangeUser(520, xAxis->GetXmax());
+      auto markers2 = static_cast<TPolyMarker*>(histo->GetListOfFunctions()->FindObject("TPolyMarker")); // Extracts the peaks list
+      auto N2 = markers2->GetN(); // Get the number of peaks
+      auto raw_X2 = markers2->GetX(); // Get the peaks values of the maximum of the peak (double*)
+      for (int peak_i = 0; peak_i<N2; ++peak_i) peaks.push_back(raw_X2[peak_i]);
+    }
     if (verbose>0) print(N, "peaks found");
 
     std::vector<bool> lookup; lookup.reserve(histo->GetNbinsX()); // Prepare the lookup vector
     print(histo->GetNbinsX());
     int bin = 1; // Iterator over the bins of the histogram
-    for (int peak_i = 0; peak_i<N; ++peak_i)// Loop through the peaks 
+    for (auto const & peak : peaks)// Loop through the peaks 
     {
       // By default += 2 sigma captures 95% of the peak's surface
-      auto const & peak_begin = X[peak_i]-n_sigma*sigma; // The beginning of the peak 
-      auto const & peak_end = X[peak_i]+n_sigma*sigma+1; // The end of the peak 
+      auto const & peak_begin = peak-n_sigma*sigma; // The beginning of the peak 
+      auto const & peak_end = peak+n_sigma*sigma+1; // The end of the peak 
       for (;bin<peak_begin; ++bin) lookup.push_back(false); // Loop through the bins. While before the beginning of the peak, fill false
       for (;bin<peak_end  ; ++bin) lookup.push_back(true);  // When in the peak, fill true
-      if (verbose>1) println(" ", X[peak_i]);
+      if (verbose>1) println(" ", peak);
     }
     if (verbose > 1) print();
     for (;bin<histo->GetNbinsX()+1; ++bin) lookup.push_back(false); // After the last peak, fill false
+    if (remove511) for (int bin_i = 505; bin_i<517; ++bin_i)lookup[bin_i] = true;
     return lookup;
   }
 
   /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316
   /// @param choice: 0 : classic radware | 1 : Palameta and Waddington (PW) | 2 : classic + remove diagonals | 3 : PW + remove diagonals
-  void removeBackground(TH2 * histo, int const & niter = 20, uchar const & choice = 0, double const & threshold = 0.05, double const & sigmaX = 2., double const & sigmaY = 2.)
+  void removeBackground(TH2 * histo, int const & niter = 20, uchar const & choice = 0, double const & threshold = 0.05, double const & sigmaX = 2., double const & sigmaY = 2., bool remove511 = false)
   {
     if (!checkMatrixSquare(histo)) {error ("The matrix must be square"); return;}
 
@@ -1239,11 +1279,11 @@ namespace CoAnalyse
     projY->Add(bckgY, -1);
 
     // Extract informations from the histogram :
-    auto xaxis = histo->GetXaxis();
+    auto xAxis = histo->GetXaxis();
     auto yaxis = histo->GetYaxis();
-    auto const & Nx = xaxis->GetNbins()+1;
-    auto const & xmin = xaxis->GetXmin();
-    auto const & xmax = xaxis->GetXmax();
+    auto const & Nx = xAxis->GetNbins()+1;
+    auto const & xmin = xAxis->GetXmin();
+    auto const & xmax = xAxis->GetXmax();
     auto const & Ny = yaxis->GetNbins()+1;
     auto const & ymin = yaxis->GetXmin();
     auto const & ymax = yaxis->GetXmax();
@@ -1281,8 +1321,8 @@ namespace CoAnalyse
       }
 
       // Get the biggest peaks in each projection
-      auto const & peaksX = mainPeaksLookup(projX, sigmaX, threshold, 1);
-      auto const & peaksY = mainPeaksLookup(projY, sigmaY, threshold, 1);
+      auto const & peaksX = mainPeaksLookup(projX, sigmaX, threshold, 1, 1, remove511);
+      auto const & peaksY = mainPeaksLookup(projY, sigmaY, threshold, 1, 1, remove511);
       print(peaksX.size(), peaksY.size());
       auto projX_bis = new TH1D("projX_bis", "projX_bis", Nx,xmin,xmax);
       auto projY_bis = new TH1D("projY_bis", "projY_bis", Ny,ymin,ymax);
@@ -1347,7 +1387,7 @@ namespace CoAnalyse
     //   delete projX_bis;
     //   delete projY_bis;
     // #endif //!__CINT__
-    proj_diag->Draw();
+    // proj_diag->Draw();
     }
 
     for (int x=0; x<histo->GetNbinsX(); x++) for (int y=0; y<histo->GetNbinsY(); y++) 
@@ -1408,7 +1448,7 @@ namespace CoAnalyse
     }
   }
   
-  /// @brief 
+  /// @brief Tests the existence of two peaks separated by gate_size (e.g. two different gamma-rays feeding or decaying from the same state)
   /// @attention The background must have been removed 
   TH1F* moving_gates(TH1* hist, int gate_size)
   {
@@ -1422,6 +1462,25 @@ namespace CoAnalyse
       auto const & value_low = hist->GetBinContent(bin-gate_size);
       auto const & value_high = hist->GetBinContent(bin);
       ret ->SetBinContent(bin, value_low * value_high);
+    }
+    return ret;
+  }
+
+  /// @brief Tests the existence of two peaks separated by gate_size (e.g. two different gamma-rays feeding or decaying from the same state)
+  /// @details Writes down the minimum value for each bin and bin+gate_size bin
+  /// @attention The background must have been removed 
+  TH1F* AND_shifted(TH1* hist, int shift)
+  {
+    auto const & name = hist->GetName()+std::string("_AND_shifted_")+std::to_string(shift);
+    auto const & Nbins = hist->GetNbinsX();
+    auto const & xmin = hist->GetXaxis()->GetXmin();
+    auto const & xmax = hist->GetXaxis()->GetXmax();
+    auto ret = new TH1F(name.c_str(), name.c_str(), Nbins, xmin, xmax);
+    for (int bin = shift+1; bin<Nbins; ++bin)
+    {
+      auto const & value = hist->GetBinContent(bin-shift);
+      auto const & value_shifted = hist->GetBinContent(bin);
+      ret ->SetBinContent(bin, (value < value_shifted) ? value : value_shifted );
     }
     return ret;
   }

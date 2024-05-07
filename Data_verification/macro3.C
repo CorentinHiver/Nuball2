@@ -33,6 +33,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
   size_t gate_bin_size = 2; // Take 2 keV
   std::vector<int> dd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750}; // keV
+  std::vector<int> dp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750}; // keV
   std::vector<int> pp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750}; // keV
 
   auto const & dd_gate_bin_max = maximum(dd_gates)+gate_bin_size+1;
@@ -102,8 +103,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH1F> p_calo (new TH1F(("prompt_calorimetry_"+std::to_string(thread_i)).c_str(), "p_calo", 2000,0,20000));
       std::unique_ptr<TH1F> d_calo (new TH1F(("delayed_calorimetry_"+std::to_string(thread_i)).c_str(), "d_calo", 2000,0,20000));
       std::unique_ptr<TH2F> dp_calo (new TH2F(("prompt_VS_delayed_calorimetry_"+std::to_string(thread_i)).c_str(), "dp_calo", 1000,0,10000, 1000,0,10000));
-      std::unique_ptr<TH2F> d_VS_prompt_calorimetry (new TH2F(("d_VS_prompt_calorimetry_"+std::to_string(thread_i)).c_str(), "d_VS_prompt_calorimetry", 1000,0,10000, 4096,0,4096));
-      std::unique_ptr<TH2F> d_VS_delayed_calorimetry (new TH2F(("d_VS_delayed_calorimetry_"+std::to_string(thread_i)).c_str(), "d_VS_delayed_calorimetry", 1000,0,10000, 4096,0,4096));
+      std::unique_ptr<TH2F> d_VS_prompt_calorimetry (new TH2F(("d_VS_prompt_calorimetry_"+std::to_string(thread_i)).c_str(), "d_VS_prompt_calorimetry", 1000,0,10000, 10000,0,10000));
+      std::unique_ptr<TH2F> d_VS_delayed_calorimetry (new TH2F(("d_VS_delayed_calorimetry_"+std::to_string(thread_i)).c_str(), "d_VS_delayed_calorimetry", 1000,0,10000, 10000,0,10000));
 
       // Condition Prompt Calorimetry < 5 MeV (code PC3):
       std::unique_ptr<TH1F> p_PC5 (new TH1F(("p_PC5_"+std::to_string(thread_i)).c_str(), "prompt PC3", 4096,0,4096));
@@ -183,6 +184,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       std::unique_ptr<TH2F> ge_VS_LaBr3_delayed (new TH2F(("ge_VS_LaBr3_delayed_"+std::to_string(thread_i)).c_str(), "ge_VS_LaBr3_delayed;LaBr3 [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
       std::unique_ptr<TH2F> ge_VS_LaBr3_prompt (new TH2F(("ge_VS_LaBr3_prompt_"+std::to_string(thread_i)).c_str(), "ge_VS_LaBr3_prompt;LaBr3 [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
+      std::unique_ptr<TH2F> ge_VS_BGO_delayed (new TH2F(("ge_VS_BGO_delayed_"+std::to_string(thread_i)).c_str(), "ge_VS_BGO_delayed;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
       // std::unique_ptr<TH1F> LaBr3_delayed (new TH1F(("LaBr3_delayed_"+std::to_string(thread_i)).c_str(), "LaBr3_delayed;keV", 10000,0,20000));
 
       auto const & filename = removePath(file);
@@ -202,6 +204,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       Paris prompt_paris;
       Paris delayed_paris;
+
+      bool dssd_trigger = false;
 
       int evt_i = 1;
       for ( ;(evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
@@ -231,6 +235,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           else if (60_ns < time_i && time_i < 170_ns) delayed_clovers.fill(event, hit_i); // Delayed clovers
           if (-5_ns < time_i && time_i < 5_ns) prompt_paris.fill(event, hit_i);           // Prompt paris
           else if (60_ns < time_i && time_i < 170_ns) delayed_paris.fill(event, hit_i);   // Delayed paris
+          if (799 < label_i && label_i < 860) dssd_trigger = true;
         }// End hits loop
 
         //////////////
@@ -572,6 +577,16 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_VS_delayed_calorimetry_DC3->Write("d_VS_delayed_calorimetry_DC3", TObject::kOverwrite);
         d_VS_prompt_mult_DC3->Write("d_VS_prompt_mult_DC3", TObject::kOverwrite);
         d_VS_delayed_mult_DC3->Write("d_VS_delayed_mult_DC3", TObject::kOverwrite);
+        
+
+        p_DC1_3->Write("p_DC1_3", TObject::kOverwrite);
+        pp_DC1_3->Write("pp_DC1_3", TObject::kOverwrite);
+        d_DC1_3->Write("d_DC1_3", TObject::kOverwrite);
+        dd_DC1_3->Write("dd_DC1_3", TObject::kOverwrite);
+        dp_DC1_3->Write("dp_DC1_3", TObject::kOverwrite);
+        d_VS_delayed_calorimetry_DC1_3->Write("d_VS_delayed_calorimetry_DC1_3", TObject::kOverwrite);
+        d_VS_prompt_mult_DC1_3->Write("d_VS_prompt_mult_DC1_3", TObject::kOverwrite);
+        d_VS_delayed_mult_DC1_3->Write("d_VS_delayed_mult_DC1_3", TObject::kOverwrite);
 
         p_PC3DC3->Write("p_PC3DC3", TObject::kOverwrite);
         pp_PC3DC3->Write("pp_PC3DC3", TObject::kOverwrite);

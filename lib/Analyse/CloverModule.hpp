@@ -21,7 +21,7 @@ public:
   void clean() {this -> reset();}
   auto const & label() const {return m_label;}
   static void resetGlobalLabel() {gLabel = 0;}
-  void addHit(float const & _nrj, double const & _time, uchar const & sub_index)
+  void addHit(float const & _nrj, Time const & _time, uchar const & sub_index)
   {
     if (sub_index<2) addBGO(_nrj, _time);
     else             addGe(_nrj, _time, sub_index);
@@ -30,7 +30,7 @@ public:
   }
 
   /// @brief Deprecated, use addHit instead
-  void addGe(float const & _nrj, double const & _time, uchar const & sub_index) 
+  void addGe(float const & _nrj, Time const & _time, uchar const & sub_index) 
   {
     nrj += _nrj; 
     if (_nrj>maxE_Ge)
@@ -42,7 +42,7 @@ public:
     ++nb;
   }
   /// @brief Deprecated, use addHit instead
-  void addBGO(float const & _nrj, double const & _time) 
+  void addBGO(float const & _nrj, Time const & _time) 
   {
     nrj_BGO += _nrj; 
     time_BGO = _time;
@@ -54,17 +54,17 @@ public:
   // In the following, if nothing is specified then it refers to the Germanium
 
   uchar nb = 0;       // Number of Ge  crystals in the clover
-  uchar nbBGO = 0;   // Number of BGO crystals in the clover
+  uchar nbBGO = 0;    // Number of BGO crystals in the clover
   float nrj = 0.;     // Add-backed energy of Ge  Clovers
   float nrj_BGO = 0.; // Add-backed energy of BGO Clovers
-  double time = 0.;   // Time of the crystal with most energy deposit of the clover
-  double time_BGO = 0.;// Time of the latest BGO
+  Time time = 0.;     // Time of the crystal with most energy deposit of the clover, ps
+  Time time_BGO = 0.; // Time of the latest BGO, ps
 
   float maxE_Ge = 0.0;
   uchar maxE_Ge_cristal = 0u; // Index of the Ge crystal with the most energy deposit in the clover
 
   std::array<float, 6> nrjs;
-  std::array<double, 6> times;
+  std::array<Time, 6> times;
 
 private:
   uchar const m_label;

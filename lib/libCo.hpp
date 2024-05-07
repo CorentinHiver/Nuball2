@@ -241,31 +241,31 @@ std::ostream& operator<<(std::ostream& cout, uchar const & uc)
 
 /// @brief Casts a number into unsigned char (uchar)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline uchar uchar_cast(T const & t) {return static_cast<uchar>(t);}
+constexpr inline uchar uchar_cast(T const & t) {return static_cast<uchar>(t);}
 
 /// @brief Casts a number into unsigned short (ushort)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline ushort ushort_cast(T const & t) {return static_cast<ushort>(t);}
+constexpr inline ushort ushort_cast(T const & t) {return static_cast<ushort>(t);}
 
 /// @brief Casts a number into unsigned int (uint)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline uint  uint_cast(T const & t) {return static_cast<uint>(t);}
+constexpr inline uint  uint_cast(T const & t) {return static_cast<uint>(t);}
 
 /// @brief Casts a number into unsigned long (ulong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline ulong ulong_cast(T const & t) {return static_cast<ulong>(t);}
+constexpr inline ulong ulong_cast(T const & t) {return static_cast<ulong>(t);}
 
 /// @brief Casts a number into unsigned long long (ulonglong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline ulonglong ulonglong_cast(T const & t) {return static_cast<ulonglong>(t);}
+constexpr inline ulonglong ulonglong_cast(T const & t) {return static_cast<ulonglong>(t);}
 
 /// @brief Casts a number into long long (longlong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline longlong longlong_cast(T const & t) {return static_cast<longlong>(t);}
+constexpr inline longlong longlong_cast(T const & t) {return static_cast<longlong>(t);}
 
 /// @brief Casts a number into std::size_t
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
+constexpr inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
 
 ///@brief Check if the given double has integer precision
 bool is_int (double const & x) {return std::trunc(x) == x;}

@@ -1,7 +1,7 @@
 #include <MTObject.hpp>
 #include "../libRoot.hpp"
-#include <Paris.hpp>
-// #include <Clovers.hpp>
+// #include <Paris.hpp>
+#include <CloversV2.hpp>
 // #include <Hit.hpp>
 // #include <FasterReader.hpp>
 // #include <Detectors.hpp>
@@ -14,8 +14,8 @@
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
 // #include <Convertor.hpp>
-#include <MTRootReader.hpp>
-// #include <MTFasterReader.hpp>
+// #include <MTRootReader.hpp>
+#include <MTFasterReader.hpp>
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
 // #include <AnalysedSpectra.hpp>
@@ -24,7 +24,8 @@
 // #include <SpectraCo.hpp>
 // #include "../136/Calibrate/calibrate_spectra.C"
 // #include <CobaltCalorimeter.hpp>
-// #include <MTTHist.hpp>
+#include <MTTHist.hpp>
+#include <Manip.hpp>
 
 // #include <TROOT.h>
 // #include <TThread.h>
@@ -42,81 +43,91 @@ int main()
   //    PARIS MODULE    //
   ////////////////////////
 
-  Calibration calibNaI("../136/coeffs_NaI.calib");
+  // Calibration calibNaI("../136/coeffs_NaI.calib");
 
-  MTRootReader reader("/home/corentin/faster_data/N-SI-136-root_PrM1DeC1/merged/");
-  reader.read([&](Nuball2Tree & tree, Event & event){
-    unique_TH2F each_Nai(new TH2F("each_Nai", "each_Nai", 1000,0,1000, 2000,0,10000));
-    unique_TH1F LaBr3_front(new TH1F("LaBr3_front", "LaBr3_front", 2000,0,10000));
-    unique_TH1F NaI_front(new TH1F("NaI_front", "NaI_front", 2000,0,10000));
-    unique_TH1F LaBr3_front_verif(new TH1F("LaBr3_front_verif", "LaBr3_front_verif", 2000,0,10000));
-    unique_TH1F NaI_front_verif(new TH1F("NaI_front_verif", "NaI_front_verif", 2000,0,10000));
-    unique_TH1F LaBr3_back(new TH1F("LaBr3_back", "LaBr3_back", 2000,0,10000));
-    unique_TH1F NaI_back(new TH1F("NaI_back", "NaI_back", 2000,0,10000));
-    unique_TH1F LaBr3_back_verif(new TH1F("LaBr3_back_verif", "LaBr3_back_verif", 2000,0,10000));
-    unique_TH1F NaI_back_verif(new TH1F("NaI_back_verif", "NaI_back_verif", 2000,0,10000));
-    unique_TH1F add_back_front_LaBr3(new TH1F("add_back_front_LaBr3", "add_back_front_LaBr3", 2000,0,10000));
-    unique_TH1F add_back_back_LaBr3(new TH1F("add_back_back_LaBr3", "add_back_back_LaBr3", 2000,0,10000));
-    unique_TH1F add_back_front_total(new TH1F("add_back_front_total", "add_back_front_total", 2000,0,10000));
-    unique_TH1F add_back_back_total(new TH1F("add_back_back_total", "add_back_back_total", 2000,0,10000));
-    Paris paris;
-    auto & front = paris.front();
-    auto & back = paris.back();
-    front.LaBr3_timewindow = 10_ns; // This is a global variable shared amongst all the ParisClusters
-    for (int evt_i = 0; evt_i < tree->GetEntries(); evt_i++) 
-    // for (int evt_i = 1; evt_i < 10000000; evt_i++) 
-    {
-      if (evt_i%int_cast(1.e+5) == 0) print(nicer_double(evt_i, 1));
-      tree->GetEntry(evt_i);
-      for (int hit_i = 0; hit_i <event.mult; ++hit_i) if (Paris::is[event.labels[hit_i]])
-      {
-        char cristal = ParisPhoswitch::simple_pid(event.nrjs[hit_i], event.nrj2s[hit_i]); // 0 NaI, 1 LaBr3
-        if (cristal<0) continue; // rejected
-        int cluster = Paris::cluster[event.labels[hit_i]];
-        if (cristal == 0)
-        {
-          event.nrjs[hit_i]  = calibNaI(event.nrjs[hit_i], event.labels[hit_i]);
-          event.nrj2s[hit_i] = calibNaI(event.nrj2s[hit_i], event.labels[hit_i]);
-          each_Nai->Fill(event.labels[hit_i], event.nrj2s[hit_i]);
-          if(cluster == 0) NaI_back ->Fill(event.nrj2s[hit_i]);
-          else             NaI_front->Fill(event.nrj2s[hit_i]);
-        }
-        if (cristal == 1)
-        {
-          if(cluster == 0) LaBr3_back ->Fill(event.nrjs[hit_i]);
-          else             LaBr3_front->Fill(event.nrjs[hit_i]);
-        }
-      }
+  // MTRootReader reader("/home/corentin/faster_data/N-SI-136-root_PrM1DeC1/merged/");
+  // reader.read([&](Nuball2Tree & tree, Event & event){
+  //   unique_TH2F each_Nai(new TH2F("each_Nai", "each_Nai", 1000,0,1000, 2000,0,10000));
+  //   unique_TH1F LaBr3_front(new TH1F("LaBr3_front", "LaBr3_front", 2000,0,10000));
+  //   unique_TH1F NaI_front(new TH1F("NaI_front", "NaI_front", 2000,0,10000));
+  //   unique_TH1F LaBr3_front_verif(new TH1F("LaBr3_front_verif", "LaBr3_front_verif", 2000,0,10000));
+  //   unique_TH1F NaI_front_verif(new TH1F("NaI_front_verif", "NaI_front_verif", 2000,0,10000));
+  //   unique_TH1F LaBr3_back(new TH1F("LaBr3_back", "LaBr3_back", 2000,0,10000));
+  //   unique_TH1F NaI_back(new TH1F("NaI_back", "NaI_back", 2000,0,10000));
+  //   unique_TH1F LaBr3_back_verif(new TH1F("LaBr3_back_verif", "LaBr3_back_verif", 2000,0,10000));
+  //   unique_TH1F NaI_back_verif(new TH1F("NaI_back_verif", "NaI_back_verif", 2000,0,10000));
+  //   unique_TH1F add_back_front_LaBr3(new TH1F("add_back_front_LaBr3", "add_back_front_LaBr3", 2000,0,10000));
+  //   unique_TH1F add_back_back_LaBr3(new TH1F("add_back_back_LaBr3", "add_back_back_LaBr3", 2000,0,10000));
+  //   unique_TH1F add_back_front_total(new TH1F("add_back_front_total", "add_back_front_total", 2000,0,10000));
+  //   unique_TH1F add_back_back_total(new TH1F("add_back_back_total", "add_back_back_total", 2000,0,10000));
+  //   Paris paris;
+  //   auto & front = paris.front();
+  //   auto & back = paris.back();
+  //   front.LaBr3_timewindow = 10_ns; // This is a global variable shared amongst all the ParisClusters
+  //   for (int evt_i = 0; evt_i < tree->GetEntries(); evt_i++) 
+  //   // for (int evt_i = 1; evt_i < 10000000; evt_i++) 
+  //   {
+  //     if (evt_i%int_cast(1.e+5) == 0) print(nicer_double(evt_i, 1));
+  //     tree->GetEntry(evt_i);
+  //     for (int hit_i = 0; hit_i <event.mult; ++hit_i) if (Paris::is[event.labels[hit_i]])
+  //     {
+  //       char cristal = ParisPhoswitch::simple_pid(event.nrjs[hit_i], event.nrj2s[hit_i]); // 0 NaI, 1 LaBr3
+  //       if (cristal<0) continue; // rejected
+  //       int cluster = Paris::cluster[event.labels[hit_i]];
+  //       if (cristal == 0)
+  //       {
+  //         event.nrjs[hit_i]  = calibNaI(event.nrjs[hit_i], event.labels[hit_i]);
+  //         event.nrj2s[hit_i] = calibNaI(event.nrj2s[hit_i], event.labels[hit_i]);
+  //         each_Nai->Fill(event.labels[hit_i], event.nrj2s[hit_i]);
+  //         if(cluster == 0) NaI_back ->Fill(event.nrj2s[hit_i]);
+  //         else             NaI_front->Fill(event.nrj2s[hit_i]);
+  //       }
+  //       if (cristal == 1)
+  //       {
+  //         if(cluster == 0) LaBr3_back ->Fill(event.nrjs[hit_i]);
+  //         else             LaBr3_front->Fill(event.nrjs[hit_i]);
+  //       }
+  //     }
       
-      paris.setEvent(event);
+  //     paris.setEvent(event);
       
-      for (auto const & index : front.hits_LaBr3 ) {LaBr3_front_verif    ->Fill(front.modules_pureLaBr[index].nrj);}
-      for (auto const & index : back .hits_LaBr3 ) {LaBr3_back_verif     ->Fill(back .modules_pureLaBr[index].nrj);}
-      for (auto const & index : front.hits_NaI   ) {NaI_front_verif      ->Fill(front.modules_pureLaBr[index].nrj);}
-      for (auto const & index : back .hits_NaI   ) {NaI_back_verif       ->Fill(back .modules_pureLaBr[index].nrj);}
-      for (auto const & index : front.CleanLaBr3 ) {add_back_front_LaBr3 ->Fill(front.modules[index].nrj);}
-      for (auto const & index : back .CleanLaBr3 ) {add_back_back_LaBr3  ->Fill(back .modules[index].nrj);}
-      for (auto const & index : front.HitsClean  ) {add_back_front_total ->Fill(front.modules[index].nrj);}
-      for (auto const & index : back .HitsClean  ) {add_back_back_total  ->Fill(back .modules[index].nrj);}
-    }
-    auto file(TFile::Open("test.root", "recreate"));
-    file->cd();
-    each_Nai->Write();
-    LaBr3_front->Write();
-    NaI_front->Write();
-    LaBr3_front_verif->Write();
-    NaI_front_verif->Write();
-    LaBr3_back->Write();
-    NaI_back->Write();
-    LaBr3_back_verif->Write();
-    NaI_back_verif->Write();
-    add_back_front_LaBr3->Write();
-    add_back_back_LaBr3->Write();
-    add_back_front_total->Write();
-    add_back_back_total->Write();
-    file->Close();
-    print("test.root written");
-  });
+  //     for (auto const & index : front.hits_LaBr3 ) {LaBr3_front_verif    ->Fill(front.modules_pureLaBr[index].nrj);}
+  //     for (auto const & index : back .hits_LaBr3 ) {LaBr3_back_verif     ->Fill(back .modules_pureLaBr[index].nrj);}
+  //     for (auto const & index : front.hits_NaI   ) {NaI_front_verif      ->Fill(front.modules_pureLaBr[index].nrj);}
+  //     for (auto const & index : back .hits_NaI   ) {NaI_back_verif       ->Fill(back .modules_pureLaBr[index].nrj);}
+  //     for (auto const & index : front.CleanLaBr3 ) {add_back_front_LaBr3 ->Fill(front.modules[index].nrj);}
+  //     for (auto const & index : back .CleanLaBr3 ) {add_back_back_LaBr3  ->Fill(back .modules[index].nrj);}
+  //     for (auto const & index : front.HitsClean  ) {add_back_front_total ->Fill(front.modules[index].nrj);}
+  //     for (auto const & index : back .HitsClean  ) {add_back_back_total  ->Fill(back .modules[index].nrj);}
+  //   }
+  //   auto file(TFile::Open("test.root", "recreate"));
+  //   file->cd();
+  //   each_Nai->Write();
+  //   LaBr3_front->Write();
+  //   NaI_front->Write();
+  //   LaBr3_front_verif->Write();
+  //   NaI_front_verif->Write();
+  //   LaBr3_back->Write();
+  //   NaI_back->Write();
+  //   LaBr3_back_verif->Write();
+  //   NaI_back_verif->Write();
+  //   add_back_front_LaBr3->Write();
+  //   add_back_back_LaBr3->Write();
+  //   add_back_front_total->Write();
+  //   add_back_back_total->Write();
+  //   file->Close();
+  //   print("test.root written");
+  // });
+
+  /////////////////////////
+  //    !PARIS MODULE    //
+  /////////////////////////
+
+
+
+
+// __________________________________________
+
   // std::mutex myMutex;
   // unsigned nb_threads = 2;
 
@@ -209,7 +220,7 @@ int main()
   // ts.write("136_Co");
   // print(ts);
 
-
+// ______________________________________
 
   ////////////////////////////
   //   COBALT CALORIMETER   //
@@ -234,9 +245,9 @@ int main()
   // cb.loadCalibration(Calibration("../136/129_2024.calib"));
   // cb.launch("~/faster_data/N-SI-129/60Co_center.fast", 6);
   
-  ////////////////////////////
-  //   COBALT CALORIMETER   //
-  ////////////////////////////
+  /////////////////////////////
+  //   !COBALT CALORIMETER   //
+  /////////////////////////////
 
 
 
@@ -284,13 +295,13 @@ int main()
   // outfile->Close();
   // print(outfilename, "written");
 
-  ////////////////////////////
-  //   PARIS BIDIM ANGLES   //
-  ////////////////////////////
+  /////////////////////////////
+  //   !PARIS BIDIM ANGLES   //
+  /////////////////////////////
 
 
 
-
+// ____________________________________
 
   // DSSD dssd;
   // auto coeff = 180/3.14159;
@@ -306,6 +317,9 @@ int main()
   // }
 
 
+// _____________________________________
+
+
   // Calibrator calib;
   // calib.loadCalibration("../136/conversion_200ns/136_2024.calib");
   // calib.verbose(true);
@@ -313,6 +327,8 @@ int main()
   // // calib.loadRootHisto("~/faster_data/N-SI-136-sources_histo/152Eu_center.root");
   // calib.verify("test");
 
+
+// ____________________________________
 
 
   // ----------------------------------------------------- //
@@ -399,7 +415,7 @@ int main()
 
   //       guess_ADC = derivative2.meanInRange(guess_ADC-2*rebin_keV, guess_ADC+2*rebin_keV);
   //       auto minimum = minimum_in_range(derivative2.data(), derivative2.getBin(guess_ADC-rebin_keV), derivative2.getBin(guess_ADC+rebin_keV));
-        
+  
   //       guess_ADC = spectrum.getX(minimum.first);
 
   //       ADC[peak_i] = guess_ADC;
@@ -475,6 +491,9 @@ int main()
   // -----------------------------
   // END OF CALIBRATION PART
   // -----------------------------
+
+
+
 
 
   // auto file = TFile::Open("~/faster_data/N-SI-136-sources_histo/152Eu_center.root", "READ");
@@ -609,9 +628,9 @@ int main()
 
 
 
-  //////////////////
-  // MINIMISATEUR //
-  //////////////////
+  ////////////////
+  // MINIMISEUR //
+  ////////////////
 
 
 
@@ -803,9 +822,9 @@ int main()
 
 
 
-  //////////////////
-  // MINIMISATEUR //
-  //////////////////
+  ////////////////
+  // MINIMISEUR //
+  ////////////////
 
 
 

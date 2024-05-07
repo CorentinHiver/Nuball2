@@ -246,7 +246,7 @@ inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
       }
     fasterReaderMutex.lock();
       Alignator alignedTree(tempTree.get());
-      hit.reset();
+      hit.clear();
       hit.reading(tempTree.get());
     fasterReaderMutex.unlock();
       func(hit, alignedTree, std::forward<ARGS>(args)...);

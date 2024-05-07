@@ -9,7 +9,7 @@
  * @brief Event builder based on RF
  * @details
  * 
- * You need to create an instance of RF_Manager before instantiating this class this way :
+ * You need to create an instance of RF_Manager before instantiating this class 
  */
 class EventBuilderRF : public Builder
 {
@@ -27,7 +27,12 @@ public:
     auto const & dT_max = Time_cast(m_rf->period)-m_rf->offset();
     return (dT < dT_max);
   }
-  void reset() override;
+  
+  void clear() override
+  {
+    m_event -> clear(); 
+    m_status = 0;
+  }
 
   // Getters :
   auto const & getRefTime() const {return m_RF_ref_stamp;}
@@ -39,7 +44,7 @@ public:
   void setRFRefTime(Timestamp const & _RF_ref_stamp) {m_RF_ref_stamp = _RF_ref_stamp;}
   inline void setFirstHit (Hit const & hit);
 
-  /// @brief Experimental : add more period after a trigger 
+  /// @brief Experimental : add more period after a trigger (not working now I think)
   void tryAddPreprompt_simple();
   void tryAddNextHit_simple(TTree * tree, TTree * outTree, Hit & hit, int & loop, Alignator const & gindex);
   void setNbPeriodsMore(int const & periods) {m_nb_periods_more = periods;}
@@ -56,42 +61,38 @@ private:
 
 bool EventBuilderRF::build(Hit const & hit)
 {
-  if(m_event->mult>255) reset(); // 255 is the maximum number of hits allowed inside of an event
+  if(m_event->mult>255) clear(); // 255 is the maximum number of hits allowed inside of an event
   #ifdef PREPROMPT
     m_hit_buffer.emplace(hit);
   #endif //PREPROMPT
   switch (m_status)
-  { 
+  {
     // If no coincidence has been detected in previous iteration :
     case 0 : case 2 : 
+      m_event -> clear();
+     *m_event = m_first_hit; // This first hit fills the event object
+      m_event->setT0(m_RF_ref_stamp);// We set the reference RF timestamp as the t0 of the event
       if (this->coincidence(hit))
       {// Situation 1 :
         // The previous and current hit are in the same event.
         // In next call, we'll check if the next hits also belong to this event (situations 1' or 2)
-        m_event -> clear();
-       *m_event = m_first_hit;
-        m_event->push_back(hit);
-        m_first_hit.reset();
+        m_event -> push_back(hit);
+        m_first_hit.clear(); // Prepare first_hit for next event
         m_status = 1; // The event can be filled with other hits
       }
       else
       {// Situation 0 :
         // The last and current hits aren't in the same event.
-        // The last hit is therefore a single hit, alone in the time window around its RF.
-
-        // The current hit is set to be the reference hit for next call :
+        // The last hit is therefore a single hit, alone in its time window.
+        // The event 
+        // And the current hit is set to be the reference hit for next call :
         m_RF_ref_stamp = m_rf->refTime(hit.stamp);
-
-        // m_first_hit is filled with the current hit :
         m_first_hit = hit;
 
-        m_status = 0; // No event detected
+        m_status = 0; // Single event detected
 
-        if (Builder::m_keep_singles) 
-        {// We might be interested in registering single hits :
-          *m_event = m_first_hit;
-          return true;
-        }
+        // If we want to write the singles then we must return true in this situation :
+        if (Builder::m_keep_singles) return true;
       }
     break;
     
@@ -109,15 +110,13 @@ bool EventBuilderRF::build(Hit const & hit)
         // Situation 2 :
         // The current hit is outside of the event : this hit closes the event 
         // Therefore, m_event is full with all the hits of the event.
-        // We set the reference RF timestamp as the t0 of the event :
-        m_event->setT0(m_RF_ref_stamp);
         m_status = 2; // The event is complete
-        // The current hit is set to be the first hit for next call :
+        // The current hit is set to be the first hit for next event building :
         this -> setFirstHit(hit);
         return true; // The event is ready to be processed
       }
     break;
-    default: throw_error("event building issues, call DEV");
+    default: throw_error("event builder issues...");
   }
   return false; // The event is not ready to be processed
 }
@@ -204,11 +203,5 @@ void EventBuilderRF::tryAddPreprompt_simple()
 #endif //PREPROMPT
 }
 
-
-void EventBuilderRF::reset()
-{
-  m_event -> clear(); 
-  m_status = 0;
-}
 
 #endif //EVENT_BUILDER_136_HPP

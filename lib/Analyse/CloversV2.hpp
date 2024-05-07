@@ -17,18 +17,18 @@ public:
   {
     CloverModule::resetGlobalLabel(); // This allows to correctly label the CloverModules in other instances of CloversV2  
   };
-  inline auto const & operator[](int const & i) const noexcept { return m_clovers[i]; }
+  inline constexpr auto const & operator[](int const & i) const noexcept { return m_clovers[i]; }
 
-  static inline uchar subIndex(Label const & label) noexcept {return (label+1)%6;}
-  static inline bool  isClover(Label const & label) noexcept {return label<200;}
-  static inline bool  isGe(Label const & label)     noexcept {return (isClover(label) && subIndex(label)>1);}
-  static inline bool  isBGO(Label const & label)    noexcept {return (isClover(label) && subIndex(label)<2);}
+  static constexpr inline uchar subIndex(Label const & label) noexcept {return uchar_cast((label+1)%6);}
+  static constexpr inline bool  isClover(Label const & label) noexcept {return label<200;}
+  static constexpr inline bool  isGe(Label const & label)     noexcept {return (isClover(label) && subIndex(label)>1);}
+  static constexpr inline bool  isBGO(Label const & label)    noexcept {return (isClover(label) && subIndex(label)<2);}
   /// @brief label = 23 -> index = 0, label = 196 -> index = 23;
-  static inline Label index(Label const & label)    noexcept {return (label-23)/6;}
+  static constexpr inline Label index(Label const & label)    noexcept {return Label_cast((label-23)/6);}
 
   bool fill(Event const & event, int const & hit_i)
   {
-    if (analyzed) throw_error("CloversV2::fill() called while already analyzed, you need to CloversV2::reset first");
+    if (analyzed) throw_error("CloversV2::fill() called while already analyzed, you need to CloversV2::reset() first");
     auto const & label = event.labels[hit_i];
     if (isClover(label))
     {

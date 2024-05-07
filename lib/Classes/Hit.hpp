@@ -76,8 +76,8 @@ constexpr inline Time operator""_s (unsigned long long time) noexcept {return Ti
 constexpr inline Time operator""_ms(unsigned long long time) noexcept {return Time_cast(time*1.e+9l );}
 constexpr inline Time operator""_us(unsigned long long time) noexcept {return Time_cast(time*1.e+6l );}
 constexpr inline Time operator""_ns(unsigned long long time) noexcept {return Time_cast(time*1.e+3l );}
-constexpr inline Time operator""_ps(unsigned long long time) noexcept {return Time_cast(time          );}
-constexpr inline Time operator""_fs(unsigned long long time) noexcept {return Time_cast(time*1.e-3    );}
+constexpr inline Time operator""_ps(unsigned long long time) noexcept {return Time_cast(time        );}
+constexpr inline Time operator""_fs(unsigned long long time) noexcept {return Time_cast(time*1.e-3l );}
 
 constexpr inline double operator""_MeV(long double energy) noexcept {return double_cast(energy)*1000.;}
 constexpr inline double operator""_MeV(unsigned long long energy) noexcept {return double_cast(energy)*1000.;}
@@ -185,7 +185,7 @@ public:
 class Hit
 {
 public:
-  Hit(){reset();}
+  Hit(){clear();}
 
   Hit(Hit const & hit) :
     label  (hit.label),
@@ -207,7 +207,6 @@ public:
   {
     label  = hit.label;
     stamp  = hit.stamp;
-    // time   = hit.time;
     adc    = hit.adc;
     nrj    = hit.nrj;
   #ifndef QDC1MAX
@@ -221,7 +220,8 @@ public:
     pileup = hit.pileup;
     return *this;
   }
-  void reset()
+
+  void clear()
   {
     label  = 0;
     stamp  = 0ull;
@@ -263,7 +263,6 @@ public:
 
 IOptions Hit::read;
 IOptions Hit::write;
-// bool Hit::m_extTime = false;
 
 void Hit::reading(TTree * tree)
 {
@@ -273,7 +272,7 @@ void Hit::reading(TTree * tree)
 
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
-  this->reset();
+  this->clear();
 
   tree -> ResetBranchAddresses();
 
@@ -304,7 +303,7 @@ void Hit::reading(TTree * tree, std::string const & options)
 
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
-  this->reset();
+  this->clear();
 
   read.setOptions(options);
 

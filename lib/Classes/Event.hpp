@@ -155,7 +155,7 @@ public:
   // Public members :
   int mult = 0;
   Timestamp stamp = 0ull;
-  static constexpr size_t maxSize = 255;
+  static constexpr size_t maxSize = 255u;
   Label  labels  [maxSize] = {0};
   Time   times   [maxSize] = {0};
   ADC    adcs    [maxSize] = {0};
