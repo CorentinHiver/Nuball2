@@ -54,7 +54,7 @@ public:
   // Getters :
   // bool const & isCoincTriggered() const {return coincON;}
 
-  Hit const & getLastHit() const {return m_first_hit;}
+  Hit const & getFirstHit() const {return m_first_hit;}
 
   uchar const & status() const { return m_status; }
   bool isBuilding() const {return (m_status==1);}
@@ -78,6 +78,7 @@ public:
 
   // Options :
   static constexpr void keepSingles(bool const & b = true) noexcept {m_keep_singles = b;}
+  static auto const & getKeepSingles() noexcept {return m_keep_singles;}
 
 protected:
 

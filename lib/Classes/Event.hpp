@@ -140,6 +140,7 @@ public:
   void timeShift(Time const & shift) noexcept
   {
     for (int hit_i = 0; hit_i<mult; hit_i++) {timeShift(shift, hit_i);}
+    this->stamp -= shift;
   }
 
   void timeShift(Time const & shift, int const & hit_i) noexcept {times[hit_i]+=shift;}

@@ -19,14 +19,15 @@
 MTTHist<TH1F> histo_mult_trigger;
 MTTHist<TH1F> labels_histo;
 MTTHist<TH1F> histo_mult;
-MTTHist<TH2F> cleanGe_VS_time_pure_singles;
+MTTHist<TH2F> pure_singles_cristals;
+MTTHist<TH2F> pure_singles_cristals_neutrons;
+MTTHist<TH2F> pure_single_Ge_VS_time;
 MTTHist<TH2F> cleanGe_VS_time;
 MTTHist<TH2F> cleanGe_trigged_VS_time;
 MTTHist<TH2F> cleanGe_trigger_particle_VS_time;
 
-constexpr bool inline isPrompt(Time const & time)  noexcept {return -30_ns < time && time < 30_ns;}
-constexpr bool inline isDelayed(Time const & time) noexcept {return 30_ns < time && time < 180_ns;}
-// constexpr bool inline isGe(Label const & label)    noexcept {return (label<200 && (label-23)%6 > 1);}
+constexpr bool inline isPrompt(Time const & time)  noexcept {return -30_ns < time && time < 30_ns ;}
+constexpr bool inline isDelayed(Time const & time) noexcept {return  30_ns < time && time < 180_ns;}
 
 #include "Trigger136.hpp"
 
@@ -199,7 +200,9 @@ int main(int argc, char** argv)
   histo_mult_trigger.reset("mult_trig","mult_trig", 50,-1, 50);
   histo_mult.reset("mult","mult", 50,-1, 50);
   cleanGe_VS_time.reset("cleanGe_VS_time","cleanGe_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
-  cleanGe_VS_time_pure_singles.reset("cleanGe_VS_time_pure_singles","cleanGe_VS_time_pure_singles", 400,-100_ns,300_ns, 10000,0,10000);
+  pure_single_Ge_VS_time.reset("pure_single_Ge_VS_time","pure_single_Ge_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
+  pure_singles_cristals.reset("pure_singles_cristals","pure_singles_cristals", 1000,0,1000, 10000,0,10000);
+  pure_singles_cristals_neutrons.reset("pure_singles_cristals_neutrons","pure_singles_cristals_neutrons", 1000,0,1000, 10000,0,10000);
   cleanGe_trigged_VS_time.reset("cleanGe_trigged_VS_time","cleanGe_trigged_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
   cleanGe_trigger_particle_VS_time.reset("cleanGe_trigger_particle_VS_time","cleanGe_trigger_particle_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
   labels_histo.reset("labels","labels", 1000,0,1000);
@@ -442,11 +445,24 @@ int main(int argc, char** argv)
           }
           if (trigger.nb_dssd > 0) for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigger_particle_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
         }
-        if (eventBuilder.isSingle() && CloversV2::isGe(eventBuilder.getLastHit().label))
+        if (eventBuilder.isSingle())
         {
-          auto const & hit = eventBuilder.getLastHit();
-          cleanGe_VS_time_pure_singles.Fill(hit.stamp, hit.nrj);
-          cleanGe_VS_time.Fill(hit.stamp, hit.nrj);
+          if (Builder::getKeepSingles()) {outTree->Fill(); ++trig_count; ++trig_hits_count;}
+
+          // Fill histo :
+          auto const & label = eventBuilder.getEvent()->labels[0];
+          auto const & time = eventBuilder.getEvent()->times[0];
+          auto const & nrj = eventBuilder.getEvent()->nrjs[0];
+          auto const & nrj2 = eventBuilder.getEvent()->nrj2s[0];
+          if (CloversV2::isGe(label))
+          {
+            pure_single_Ge_VS_time.Fill(time, nrj);
+            cleanGe_VS_time.Fill(time, nrj);
+          }
+
+          if (300 < label && label < 800) if (0.8 < nrj/nrj2 || nrj/nrj2 > 1.2) continue; // Keep only LaBr3 part from paris
+          pure_singles_cristals.Fill(label, nrj);
+          if (10_ns < time && time < 50_ns) pure_singles_cristals_neutrons.Fill(label, nrj);
         }
         // if (eventBuilder.isSingle()) {print(*(eventBuilder.getEvent())); pauseCo();}
       }
@@ -495,12 +511,14 @@ int main(int argc, char** argv)
     unique_TFile histoFile (TFile::Open(outRootName.c_str(), "UPDATE"));
     histoFile->cd();
     cleanGe_VS_time.Write();
-    cleanGe_VS_time_pure_singles.Write();
+    pure_single_Ge_VS_time.Write();
     cleanGe_trigged_VS_time.Write();
     cleanGe_trigger_particle_VS_time.Write();
     histo_mult.Write();
     histo_mult_trigger.Write();
     labels_histo.Write();
+    pure_singles_cristals.Write();
+    pure_singles_cristals_neutrons.Write();
     histoFile->Close();
   }
   return 0;

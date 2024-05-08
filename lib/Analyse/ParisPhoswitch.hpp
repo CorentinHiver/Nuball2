@@ -23,7 +23,7 @@ public:
 
   Time time  = 0ll;
   float nrj   = 0.f;
-  char cristal = -1; // -1 : rejected, 0 : LaBr3, 1 : NaI, 2 : internal addback
+  char cristal = -1; // -1 : rejected, 0 : LaBr3, 1 : NaI, 2 : internal add-back
 
 private:
   uchar m_label = -1;

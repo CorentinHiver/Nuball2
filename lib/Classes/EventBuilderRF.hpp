@@ -69,9 +69,9 @@ bool EventBuilderRF::build(Hit const & hit)
   {
     // If no coincidence has been detected in previous iteration :
     case 0 : case 2 : 
-      m_event -> clear();
-     *m_event = m_first_hit; // This first hit fills the event object
-      m_event->setT0(m_RF_ref_stamp);// We set the reference RF timestamp as the t0 of the event
+     *m_event = m_first_hit; // Filling the event with this first hit
+      m_event -> setT0(m_RF_ref_stamp);// We set the reference RF timestamp as the t0 of the event
+
       if (this->coincidence(hit))
       {// Situation 1 :
         // The previous and current hit are in the same event.
@@ -79,24 +79,21 @@ bool EventBuilderRF::build(Hit const & hit)
         m_event -> push_back(hit);
         m_first_hit.clear(); // Prepare first_hit for next event
         m_status = 1; // The event can be filled with other hits
+        return false; // The event is not ready to be processed
       }
       else
       {// Situation 0 :
         // The last and current hits aren't in the same event.
         // The last hit is therefore a single hit, alone in its time window.
-        // The event 
         // And the current hit is set to be the reference hit for next call :
-        m_RF_ref_stamp = m_rf->refTime(hit.stamp);
-        m_first_hit = hit;
-
+        this -> setFirstHit(hit);
         m_status = 0; // Single event detected
-
         // If we want to write the singles then we must return true in this situation :
         if (Builder::m_keep_singles) return true;
       }
     break;
     
-    // If we are building an event (i.e. the two previous hit are in coincidence):
+    // If we are building an event (i.e. the two previous hit were in coincidence):
     case 1 :
       if (this->coincidence(hit))
       {
@@ -104,6 +101,7 @@ bool EventBuilderRF::build(Hit const & hit)
         // The current hit also belongs to the event
         m_event->push_back(hit);
         // NB: m_status still equals 1
+        return false; // The event is still not ready to be processed
       }
       else
       {
@@ -118,7 +116,7 @@ bool EventBuilderRF::build(Hit const & hit)
     break;
     default: throw_error("event builder issues...");
   }
-  return false; // The event is not ready to be processed
+  return false;
 }
 
 void EventBuilderRF::setFirstRF(Hit const & rf_hit)

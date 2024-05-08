@@ -91,8 +91,6 @@ std::ostream& operator<<(std::ostream& out, ParisModule const & module)
  * @brief A cluster is a group of paris that are grouped together.
  * @todo Cut this class into two pieces : a first named ParisCluster that implements a generic way to handle add-back
  * and another one called ParisNuball2 that inherits from the later and implements the geometry
- * 
- * @tparam n 
  */
 template<size_t n>
 class ParisCluster

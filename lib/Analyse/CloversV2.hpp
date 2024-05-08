@@ -19,9 +19,11 @@ public:
   };
   inline constexpr auto const & operator[](int const & i) const noexcept { return m_clovers[i]; }
 
-  static constexpr inline uchar subIndex(Label const & label) noexcept {return uchar_cast((label+1)%6);}
+  static constexpr inline uchar subIndex(Label const & label) noexcept {return uchar_cast((label-23)%6);}
   static constexpr inline bool  isClover(Label const & label) noexcept {return label<200;}
   static constexpr inline bool  isGe(Label const & label)     noexcept {return (isClover(label) && subIndex(label)>1);}
+  static constexpr inline bool  isR2(Label const & label)     noexcept {return (isClover(label) && label > 94);}
+  static constexpr inline bool  isR3(Label const & label)     noexcept {return (isClover(label) && label < 95);}
   static constexpr inline bool  isBGO(Label const & label)    noexcept {return (isClover(label) && subIndex(label)<2);}
   /// @brief label = 23 -> index = 0, label = 196 -> index = 23;
   static constexpr inline Label index(Label const & label)    noexcept {return Label_cast((label-23)/6);}
