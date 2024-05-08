@@ -81,6 +81,7 @@ constexpr inline Time operator""_fs(unsigned long long time) noexcept {return Ti
 
 constexpr inline double operator""_MeV(long double energy) noexcept {return double_cast(energy)*1000.;}
 constexpr inline double operator""_MeV(unsigned long long energy) noexcept {return double_cast(energy)*1000.;}
+
 /////////////////////
 /// IO parameters ///
 /////////////////////

@@ -208,13 +208,7 @@ int main(int argc, char** argv)
   cleanGe_trigger_particle_VS_time.reset("cleanGe_trigger_particle_VS_time","cleanGe_trigger_particle_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
   labels_histo.reset("labels","labels", 1000,0,1000);
 
-  // Setup the path accordingly to the machine :
-  Path dataPath = Path::home();
-       if ( dataPath == "/home/corentin/") dataPath+="faster_data/";
-  else if ( dataPath == "/home/faster/") dataPath="/srv/data/nuball2/";
-  else {print("Unkown HOME path -",dataPath,"- please add yours on top of this line in the main.cpp ^^^^^^^^"); return -1;}
-
-  // Input file :
+  Path dataPath = Path::home()+"/nuball2";
   Path manipPath = dataPath+manip;
 
   // Output file :
@@ -264,6 +258,7 @@ int main(int argc, char** argv)
       else // for N-SI-136 :
       {
         timeshifts.dT_with_biggest_peak_finder(); // Best peak finder for N-SI-136
+        for (Label i = 840; i<856; i++) timeshifts.dT_with_raising_edge(i);
         timeshifts.periodRF_ns(200);
       }
 
@@ -339,6 +334,9 @@ int main(int argc, char** argv)
       {
         // Time calibration :
         hit.stamp+=timeshifts[hit.label];
+        // There is a error for most DSSD rings when the timeshift have been calculated, some are slightly too early
+        // Pushing all of them by 50 ns allows us to ensure they all fit in the event they belong to
+        if (839 < hit.label  && hit.label < 856) hit.stamp += 50_ns;
 
         // Energy calibration : 
         hit.nrj = calibration(hit.adc,  hit.label); // Normal calibration

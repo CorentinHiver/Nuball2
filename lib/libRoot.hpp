@@ -1485,7 +1485,6 @@ namespace CoAnalyse
     return ret;
   }
 
-
   void test(TH2F* histo)
   {
     removeBackground(histo);
@@ -1770,6 +1769,37 @@ void GetPoint(TVirtualPad * vpad, double& x, double& y)
   x = cutg->GetX();
   y = cutg->GetY();
   delete cutg;
+}
+
+double selectXPoints(TH1* histo, std::string const & instructions)
+{
+  double x = 0; double y = 0;
+  gPad->SetTitle(instructions.c_str());
+  histo->SetTitle(instructions.c_str());
+  GetPoint(gPad->cd(), x, y);
+  gPad->Update();
+  return x;
+}
+
+TH1D* myProjectionX(TH2* histo, std::string const & name, double const & xvalue_min, double const & xvalue_max, double const & xvalue_min_bckg, double const & xvalue_max_bckg)
+{
+  TH1D* proj = histo->ProjectionX(name.c_str(), xvalue_min, xvalue_max);
+  std::unique_ptr<TH1D> bckg (histo->ProjectionX((name+"_bckg").c_str(), xvalue_min_bckg, xvalue_max_bckg));
+  proj->Add(bckg.get(), -1);
+  return proj;
+}
+
+TH1D* myProjectionX(TH2* histo, std::string const & name, double const & x_value, double const & resolution)
+{
+  if (!gPad) histo->Draw("colz");
+  histo->GetYaxis()->SetRangeUser(x_value-5*resolution, x_value+5*resolution);
+  auto const & title = histo->GetTitle();
+  double const & xvalue_min = selectXPoints(histo, "Select low edge of peak");
+  double const & xvalue_max = selectXPoints(histo, "Select high edge of peak");
+  double const & xvalue_min_bckg = selectXPoints(histo, "Select low edge of background");
+  double const & xvalue_max_bckg = selectXPoints(histo, "Select high edge of background");
+  histo->SetTitle(title);
+  return myProjectionX(histo, name, xvalue_min, xvalue_max, xvalue_min_bckg, xvalue_max_bckg);
 }
 
 

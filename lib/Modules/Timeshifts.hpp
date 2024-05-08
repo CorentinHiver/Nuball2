@@ -442,7 +442,7 @@ bool Timeshifts::setParameters(std::string const & parameter)
     else if (temp == "outData:") {is >> m_outData; setOutData(m_outData);}
     else if (temp == "mult:")    {is >> m_min_mult >> m_max_mult; setMult(m_min_mult, m_max_mult);} //by default
     else if (temp == "verbose")  {verbose(true);}
-    else {std::cout << std::endl << "ATTENTION, parameter " << temp << " not recognized !" << std::endl << std::endl; return false;}
+    else {print("\nATTENTION, parameter", temp, "not recognized !\n\n") return false;}
   }
   if (m_outData == "") 
   {
@@ -493,7 +493,7 @@ bool Timeshifts::InitialiseCorrected()
 
   // Corrected timeshifts spectra :
   m_time_spectra_corrected.resize(detectors.size());
-  m_time_spectra_corrected_bidim.reset("All corrected time spectra", "All corrected time spectra;Channel;Time[ps];#", 
+  m_time_spectra_corrected_bidim.reset("All_corrected_time_spectra", "All corrected time spectra;Channel;Time[ps];#", 
           detectors.size(), 0, detectors.size(), 1000, -m_timewindow/2, m_timewindow/2);
 
   
@@ -576,7 +576,7 @@ void Timeshifts::treatFolder(std::string const & folder, int const & nb_files)
   }
   else
   {// If no multithreading, treat each data file sequentially
-    print("Calculating timeshifts without multithreading");
+    print(BRIGHTBLUE, "Calculating timeshifts without multithreading", RESET);
     std::string filename;
     while (files.nextFileName(filename))
     {
@@ -1073,12 +1073,12 @@ void Timeshifts::writeRoot(std::string const & name)
   outFile -> Write();
   outFile -> Close();
 
-  std::cout << "Timeshifts root file saved to " << outRoot << std::endl;
+  print("Timeshifts root file saved to", outRoot);
 }
 
 bool Timeshifts::setTimeWindow_ns(Time_ns const & timewindow_ns) 
 {
-  if (timewindow_ns == 0) {std::cout << "NO TIME WINDOW !!" << std::endl; return false; }
+  if (timewindow_ns == 0) {print("NO TIME WINDOW !!"); return false; }
   m_timewindow_ns = timewindow_ns;
   m_timewindow = Time_cast(m_timewindow_ns*1000);
   print("Extracting timeshifts with a time window of ", m_timewindow_ns, " ns");
@@ -1095,14 +1095,14 @@ bool Timeshifts::setTimeReference(Label const & timeRef_label)
 {
   m_time_ref_label = timeRef_label;
   m_time_ref_name = detectors[m_time_ref_label];
-  std::cout << "Reference detector set to be " << m_time_ref_name << " (n°" << m_time_ref_label << ")" << std::endl;
+  printC("Reference detector set to be ", m_time_ref_name, " (n°", m_time_ref_label, ")");
   return true;
 }
 
 bool Timeshifts::setTimeReference(std::string const & timeRef_name)
 {
   m_time_ref_name = timeRef_name;
-  if (timeRef_name == "") {std::cout << "NO TIME REFERENCE !!" << std::endl; return false; }
+  if (timeRef_name == "") {print("NO TIME REFERENCE !!"); return false; }
   // If the string contains the label number then convert the string to int (stoi)
   // If the string contains the detector name then extract the label number from the detectors list (detectors)
   return setTimeReference( Label_cast((isNumber(timeRef_name)) ? std::stoi(timeRef_name) : detectors.getLabel(timeRef_name)));
@@ -1176,11 +1176,11 @@ TH1F* Timeshifts::shiftTimeSpectra(TH1F* histo, Label const & label, std::string
   return corrected_histo;
 }
 
-std::ostream& operator<<(std::ostream& cout, Timeshifts const & ts)
+std::ostream& operator<<(std::ostream& out, Timeshifts const & ts)
 {
   // for (Label label = 0; label<)
-  cout << ts.get();
-  return cout;
+  out << ts.get();
+  return out;
 }
 
 
