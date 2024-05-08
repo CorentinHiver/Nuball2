@@ -39,7 +39,7 @@ inline Time Timeshift_cast(T const & t) {return static_cast<Time>(t);}
  * Example at the end
  * 
  * @todo TODO separate into two different classes : Timeshifts that only holds the values, and Timeshiftor that handles the calculations
- * Of course, Timeshiftor has a Timeshifts as member and can be used as it. It can just inherit from it maybe.
+ * Of course, Timeshiftor has a Timeshifts as member and can be used as it. Or it can just inherit from it maybe.
  */
 class Timeshifts
 {
@@ -626,31 +626,31 @@ bool Timeshifts::verify(std::string const & folder, int const & nb_files)
 
   if (!detectors) throw Detectors::EmptyError();
 
-  if (m_folder_treated)
-  {
-    print("\nTimeshifts calculated, now verification time !\n");
-    for (auto const & label : detectors.labels())
-    {
-      if (!m_time_spectra[label].Merged()) continue;
-      m_time_spectra_corrected[label] = static_cast<TH1F*>(m_time_spectra[label].get()->Clone(concatenate(m_time_spectra[label].name(), "_corrected").c_str()));
-      shiftX(m_time_spectra_corrected[label].get(), -double_cast(m_timeshifts[label]));
-      if (m_use_rf) 
-      {
-        if (!m_histograms_VS_RF[label].Merged()) continue;
-        m_time_spectra_corrected_RF[label] = static_cast<TH1F*>(m_histograms_VS_RF[label].get()->Clone(concatenate(m_histograms_VS_RF[label].name(), "_corrected").c_str()));
-        shiftX(m_time_spectra_corrected_RF[label].get(), double_cast(m_timeshifts[label]));
-      }
-    }
-  }
-  else // If no time spectra already exist :
-  {
+  // if (m_folder_treated)
+  // {
+  //   print("\nTimeshifts calculated, now verification time !\n");
+  //   for (auto const & label : detectors.labels())
+  //   {
+  //     if (!m_time_spectra[label].Merged()) continue;
+  //     m_time_spectra_corrected[label] = static_cast<TH1F*>(m_time_spectra[label].get()->Clone(concatenate(m_time_spectra[label].name(), "_corrected").c_str()));
+  //     shiftX(m_time_spectra_corrected[label].get(), -double_cast(m_timeshifts[label]));
+  //     if (m_use_rf) 
+  //     {
+  //       if (!m_histograms_VS_RF[label].Merged()) continue;
+  //       m_time_spectra_corrected_RF[label] = static_cast<TH1F*>(m_histograms_VS_RF[label].get()->Clone(concatenate(m_histograms_VS_RF[label].name(), "_corrected").c_str()));
+  //       shiftX(m_time_spectra_corrected_RF[label].get(), double_cast(m_timeshifts[label]));
+  //     }
+  //   }
+  // }
+  // else // If no time spectra already exist :
+  // {
     print();
     print("Timeshifts loaded, now verification time !");
     print();
     m_corrected = true;
     this -> treatFolder(folder, nb_files);
     m_corrected = false;
-  }
+  // }
 
   print("Timeshifts verified in", timer());
 

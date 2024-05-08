@@ -37,7 +37,7 @@ std::string calibFile = "../136_2024.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_";
-int nb_files_ts = 60;
+int nb_files_ts = 200;
 int nb_files = -1;
 int rf_shift = 20_ns;
 int max_hits_in_event = -1;
@@ -172,6 +172,7 @@ int main(int argc, char** argv)
           print("(       --only-timeshift)                 : Calculate only timeshifts, force it even if it already has been calculated");
           print("(       --run)            [runName]       : set only one folder to convert");
           print("(-t  || --trigger)        [trigger]       : ", list_trigger, "|", Trigger136::legend);
+          print("(-T  || --timeshifts)     [/path/to/run]  : set the path to a folder containing the required Timeshifts/ folder");
           print("(-Th || --Thorium)                        : Treats only the thorium runs (run_nb < 75)");
           print("(-U  || --Uranium)                        : Treats only the uranium runs (run_nb >= 75)");
           print("(       --129)                            : Treats the N-SI-129 pulsed runs");
@@ -266,7 +267,7 @@ int main(int argc, char** argv)
         timeshifts.periodRF_ns(200);
       }
 
-      timeshifts.setMult(2, 4);// Only events with 2 to 4 hits are included (more means they are less than correlated)
+      timeshifts.setMult(2, 4);// Only events with 2 to 4 hits are included (more means they are less likely to be correlated)
 
       timeshifts.setOutDir(outPath.string());
       timeshifts.calculate(run_path, nb_files_ts);
