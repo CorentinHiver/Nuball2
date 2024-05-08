@@ -783,11 +783,10 @@ void Timeshifts::Fill(Event const & event, RF_Manager & rf)
 
     if(m_use_rf)
     {
-      auto const & rf_Ref = rf.relTime(event.stamp);
       auto const & label = event.labels[loop_i];
       auto const & time = event.times[loop_i];
       auto const & nrj = event.nrjs[loop_i];
-      auto const & ToF = Time_cast(rf_Ref+time);
+      auto const & ToF = rf.relTime(event.stamp+time);
 
       if (m_corrected)
       {
