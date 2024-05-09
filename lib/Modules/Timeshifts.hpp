@@ -442,7 +442,7 @@ bool Timeshifts::setParameters(std::string const & parameter)
     else if (temp == "outData:") {is >> m_outData; setOutData(m_outData);}
     else if (temp == "mult:")    {is >> m_min_mult >> m_max_mult; setMult(m_min_mult, m_max_mult);} //by default
     else if (temp == "verbose")  {verbose(true);}
-    else {print("\nATTENTION, parameter", temp, "not recognized !\n\n") return false;}
+    else {print("\nATTENTION, parameter", temp, "not recognized !\n\n"); return false;}
   }
   if (m_outData == "") 
   {

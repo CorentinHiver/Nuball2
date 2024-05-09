@@ -1794,7 +1794,6 @@ TH1D* myProjectionX(TH2* histo, std::string const & name, double const & x_value
   if (!gPad) histo->Draw("colz");
   auto projY = histo->ProjectionY(concatenate_c("projY_", histo->GetName()));
   projY->GetYaxis()->SetRangeUser(x_value-5*resolution, x_value+5*resolution);
-  auto const & title = histo->GetTitle();
   double const & xvalue_min = selectXPoints(projY, "Select low edge of peak");
   double const & xvalue_max = selectXPoints(projY, "Select high edge of peak");
   double const & xvalue_min_bckg = selectXPoints(projY, "Select low edge of background");
