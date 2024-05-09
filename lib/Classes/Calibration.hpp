@@ -220,7 +220,7 @@ inline void Calibration::calibrate(Hit & hit) const noexcept
   if (label > m_size) return;          // If the label is out of range then do no treat it
   hit.nrj = calibrate(hit.adc, label); // Call to the Calibration::calibrate(energy, label) method
 #ifndef QDC1MAX                        // This line allows one to calibrate a bit faster if not interested in the QDC2 field
-  if (hit.qdc2!=0.0) hit.nrj2 = calibrate(hit.qdc2, label); // Only calibrate the QDC2 if there is a value in the field
+  if (hit.qdc2!=0) hit.nrj2 = calibrate(hit.qdc2, label); // Only calibrate the QDC2 if there is a value in the field
   else hit.nrj2 = 0.0;
 #endif //QDC1MAX
 }
