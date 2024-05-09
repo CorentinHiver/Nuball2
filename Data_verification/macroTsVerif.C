@@ -16,8 +16,8 @@ void macroTsVerif()
     auto dT_per_run_proj = dT_per_run_file->ProjectionY();
     auto dT_per_run_RF_proj = dT_per_run_file->ProjectionY();
 
-    for (int bin = 0; bin<1000; bin++) dT_per_run->Fill(run_number, dT_per_run_proj->GetBinContent(bin));
-    for (int bin = 0; bin<800; bin++) dT_per_run_RF->Fill(run_number, dT_per_run_RF_proj->GetBinContent(bin));
+    for (int bin = 0; bin<1000; bin++) dT_per_run->SetBinContent(bin, run_number, dT_per_run_proj->GetBinContent(bin));
+    for (int bin = 0; bin<800; bin++) dT_per_run_RF->SetBinContent(bin, run_number, dT_per_run_RF_proj->GetBinContent(bin));
   }
   new TCanvas;
   dT_per_run->Draw("colz");

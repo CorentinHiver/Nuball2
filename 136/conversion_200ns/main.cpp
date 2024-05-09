@@ -237,7 +237,6 @@ int main(int argc, char** argv)
   while(runs.getNext(run))
   {
     MTCounter total_read_size;
-    MTCounter time_reading_seconds;
     Timer timer_total;
     auto const & run_path = manipPath+run;
     auto const & run_name = removeExtension(run);
@@ -331,13 +330,15 @@ int main(int argc, char** argv)
       // Loop over the .fast file //
       // ------------------------ //
       Timer read_timer;
-      while(reader.Read()) // Bottleneck section of the code, need to keep it as sober as possible 
-      { 
+      while(reader.Read())
+      {
         // Time calibration :
         hit.stamp+=timeshifts[hit.label];
         // There is a error for most DSSD rings when the timeshift have been calculated, some are slightly too early
         // Pushing all of them by 50 ns allows us to ensure they all fit in the event they belong to
         if (839 < hit.label  && hit.label < 856) hit.stamp += 50_ns;
+
+        if (hit.label == 251) hit.nrj = float_cast(hit.adc);
 
         tempTree -> Fill();
       }
@@ -345,7 +346,6 @@ int main(int argc, char** argv)
       auto rawCounts = tempTree->GetEntries();
 
       read_timer.Stop();
-      time_reading_seconds+=read_timer.TimeElapsedSec();
       
       print("Read of",raw_dataFile.shortName(),"finished here,", rawCounts,"counts in", read_timer.TimeElapsedSec(),"s (", dataSize/read_timer.TimeElapsedSec(), "Mo/s)");
 
@@ -386,7 +386,7 @@ int main(int argc, char** argv)
       EventBuilderRF eventBuilder(&event, &rf);
       eventBuilder.setFirstHit(hit);
 
-      // Initialise event trigger :
+      // Initialise event analyzer :
       Trigger136 trigger(&event);
 
       // Handle the first hit //
@@ -407,6 +407,9 @@ int main(int argc, char** argv)
       while (loop<nb_data)
       {
         tempTree -> GetEntry(gIndex[++loop]);
+        // Energy calibration : 
+        hit.nrj = calibration(hit.adc,  hit.label); // Normal calibration
+        hit.nrj2 = ((hit.qdc2 == 0) ? 0.f : calibration(hit.qdc2, hit.label)); // Calibrate the qdc2 if any
 
         if (rf.setHit(hit))
         { // Handle rf
@@ -421,12 +424,6 @@ int main(int argc, char** argv)
           // The rf hits cannot participate in the construction of an event as it is not a detector
           continue;
         }
-
-        // Energy calibration : 
-        hit.nrj = calibration(hit.adc,  hit.label); // Normal calibration
-        hit.nrj2 = ((hit.qdc2 == 0) ? 0.f : calibration(hit.qdc2, hit.label)); // Calibrate the qdc2 if any
-      
-        labels_histo.Fill(hit.label);
 
         if (eventBuilder.build(hit))
         {// Here, an event is made of at least of 2 hits (but if the Builder::keepSingles() is activated, can be only one)
@@ -467,8 +464,7 @@ int main(int argc, char** argv)
         }
         // if (eventBuilder.isSingle()) {print(*(eventBuilder.getEvent())); pauseCo();}
       }
-      convert_timer.Stop();
-      print("Conversion finished here done in", convert_timer.TimeElapsedSec() , "s (",dataSize/convert_timer.TimeElapsedSec() ,"Mo/s)");
+      print("Conversion finished here done in", convert_timer() , " (",dataSize/convert_timer.TimeSec() ,"Mo/s)");
       Timer write_timer;
 
       // Write output TTree in file :
