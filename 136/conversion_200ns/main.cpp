@@ -16,16 +16,6 @@
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors with respect to a reference
 #include <EventBuilderRF.hpp> // Event builder based on RF
 
-MTTHist<TH1F> histo_mult_trigger;
-MTTHist<TH1F> labels_histo;
-MTTHist<TH1F> histo_mult;
-MTTHist<TH2F> pure_singles_cristals;
-MTTHist<TH2F> pure_singles_cristals_neutrons;
-MTTHist<TH2F> pure_single_Ge_VS_time;
-MTTHist<TH2F> cleanGe_VS_time;
-MTTHist<TH2F> cleanGe_trigged_VS_time;
-MTTHist<TH2F> cleanGe_trigger_particle_VS_time;
-
 constexpr bool inline isPrompt(Time const & time)  noexcept {return -30_ns < time && time < 30_ns ;}
 constexpr bool inline isDelayed(Time const & time) noexcept {return  30_ns < time && time < 180_ns;}
 
@@ -197,17 +187,6 @@ int main(int argc, char** argv)
   MTObject::Initialise();
 
 
-  // Initialise the histograms
-  histo_mult_trigger.reset("mult_trig","mult_trig", 50,-1, 50);
-  histo_mult.reset("mult","mult", 50,-1, 50);
-  cleanGe_VS_time.reset("cleanGe_VS_time","cleanGe_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
-  pure_single_Ge_VS_time.reset("pure_single_Ge_VS_time","pure_single_Ge_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
-  pure_singles_cristals.reset("pure_singles_cristals","pure_singles_cristals", 1000,0,1000, 10000,0,10000);
-  pure_singles_cristals_neutrons.reset("pure_singles_cristals_neutrons","pure_singles_cristals_neutrons", 1000,0,1000, 10000,0,10000);
-  cleanGe_trigged_VS_time.reset("cleanGe_trigged_VS_time","cleanGe_trigged_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
-  cleanGe_trigger_particle_VS_time.reset("cleanGe_trigger_particle_VS_time","cleanGe_trigger_particle_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
-  labels_histo.reset("labels","labels", 1000,0,1000);
-
   Path dataPath = Path::home()+"/nuball2";
   Path manipPath = dataPath+manip;
 
@@ -236,6 +215,27 @@ int main(int argc, char** argv)
   std::string run;
   while(runs.getNext(run))
   {
+    MTTHist<TH1F> histo_mult_trigger;
+    MTTHist<TH1F> labels_histo;
+    MTTHist<TH1F> histo_mult;
+    MTTHist<TH2F> pure_singles_cristals;
+    MTTHist<TH2F> pure_singles_cristals_neutrons;
+    MTTHist<TH2F> pure_single_Ge_VS_time;
+    MTTHist<TH2F> cleanGe_VS_time;
+    MTTHist<TH2F> cleanGe_trigged_VS_time;
+    MTTHist<TH2F> cleanGe_trigger_particle_VS_time;
+
+    // Initialise the histograms
+    histo_mult_trigger.reset("mult_trig","mult_trig", 50,-1, 50);
+    histo_mult.reset("mult","mult", 50,-1, 50);
+    cleanGe_VS_time.reset("cleanGe_VS_time","cleanGe_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
+    pure_single_Ge_VS_time.reset("pure_single_Ge_VS_time","pure_single_Ge_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
+    pure_singles_cristals.reset("pure_singles_cristals","pure_singles_cristals", 1000,0,1000, 10000,0,10000);
+    pure_singles_cristals_neutrons.reset("pure_singles_cristals_neutrons","pure_singles_cristals_neutrons", 1000,0,1000, 10000,0,10000);
+    cleanGe_trigged_VS_time.reset("cleanGe_trigged_VS_time","cleanGe_trigged_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
+    cleanGe_trigger_particle_VS_time.reset("cleanGe_trigger_particle_VS_time","cleanGe_trigger_particle_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
+    labels_histo.reset("labels","labels", 1000,0,1000);
+
     MTCounter total_read_size;
     Timer timer_total;
     auto const & run_path = manipPath+run;
@@ -337,9 +337,8 @@ int main(int argc, char** argv)
         // There is a error for most DSSD rings when the timeshift have been calculated, some are slightly too early
         // Pushing all of them by 50 ns allows us to ensure they all fit in the event they belong to
         if (839 < hit.label  && hit.label < 856) hit.stamp += 50_ns;
-
         if (hit.label == 251) hit.nrj = float_cast(hit.adc);
-
+      
         tempTree -> Fill();
       }
       
@@ -366,7 +365,7 @@ int main(int argc, char** argv)
       hit.reading(tempTree.get(), "ltEQ"); // Reading label, timestamp, calibrated energy, calibrated qdc2
 
       std::string const outTree_name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
-      TTree* outTree (new TTree(outTree_name.c_str(),"Nuball2"));
+      auto outTree (new TTree(outTree_name.c_str(), "Nuball2"));
       outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - so much faster if enough RAM
       Event event;
       event.writing(outTree, "ltTEQ"); // Writing labels, timestamp, relative times, calibrated energies, calibrated qdc2s
@@ -404,9 +403,10 @@ int main(int argc, char** argv)
       ulong evts_count = 0;
       ulong trig_count = 0;
       ulong trig_hits_count = 0;
-      while (loop<nb_data)
+      while (++loop<nb_data)
       {
-        tempTree -> GetEntry(gIndex[++loop]);
+        tempTree -> GetEntry(gIndex[loop]);
+
         // Energy calibration : 
         hit.nrj = calibration(hit.adc,  hit.label); // Normal calibration
         hit.nrj2 = ((hit.qdc2 == 0) ? 0.f : calibration(hit.qdc2, hit.label)); // Calibrate the qdc2 if any
@@ -432,7 +432,10 @@ int main(int argc, char** argv)
           if (max_hits_in_event > 0  &&  event.mult > max_hits_in_event) continue;
           histo_mult.Fill(event.mult);
           if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "MEvts");
-          if (trigger.pass())
+          bool pass_trigger = trigger.pass();
+          for (auto const & index_i : trigger.clovers.GeClean) cleanGe_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+
+          if (pass_trigger)
           {
             for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigged_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
             trig_hits_count+=event.mult;

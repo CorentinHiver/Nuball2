@@ -70,17 +70,13 @@ public:
     clovers.analyze();
     for (auto const & index_i : clovers.Hits) 
     {
-      auto const & time = clovers[index_i].time;
-      if      (isPrompt(time )) ++nb_clovers_prompt;
-      else if (isDelayed(time)) ++nb_clovers_delayed;
+      if      (isPrompt(clovers[index_i].time )) ++nb_clovers_prompt;
+      else if (isDelayed(clovers[index_i].time)) ++nb_clovers_delayed;
     }
     for (auto const & index_i : clovers.GeClean)
     {
-      auto const & time = clovers[index_i].time;
-      auto const & nrj = clovers[index_i].nrj;
-      if      (isPrompt(time )) ++nb_clovers_clean_prompt;
-      else if (isDelayed(time)) ++nb_clovers_clean_delayed;
-      cleanGe_VS_time.Fill(time, nrj);
+      if      (isPrompt(clovers[index_i].time )) ++nb_clovers_clean_prompt;
+      else if (isDelayed(clovers[index_i].time)) ++nb_clovers_clean_delayed;
     }
     nb_clovers = nb_modules_prompt + nb_modules_delayed;
     nb_modules = nb_clovers + nb_modules_prompt + nb_modules_delayed;
