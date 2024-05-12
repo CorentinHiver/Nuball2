@@ -43,6 +43,14 @@
 /// @brief New line
 void print() {std::cout << std::endl;}
 
+template <class T>
+std::ostream& operator<<(std::ostream& cout, std::vector<T> const & v)
+{
+  for (auto const & e : v) cout << e << " ";
+  return cout;
+}
+
+
 /// @brief Generic print
 /// @details Automatically adds space between each input. Terminate the output with a "\\n"
 template <class T> 
@@ -93,6 +101,13 @@ std::mutex print_mutex;
 
 /// @brief New line
 void print() {print_mutex.lock(); std::cout << std::endl; print_mutex.unlock();}
+
+template <class T>
+std::ostream& operator<<(std::ostream& cout, std::vector<T> const & v)
+{
+  for (auto const & e : v) cout << e << " ";
+  return cout;
+}
 
 /// @brief Generic print
 /// @details Automatically adds space between each input. Terminate the output with a "\\n"

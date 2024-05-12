@@ -90,7 +90,7 @@ public:
 
   /// @brief Wrapper around the Calibration::calibrate() methods
   template<class... ARGS>
-  auto operator()(ARGS &&... args) const noexcept {return calibrate(std::forward<ARGS>(args)...);}
+  inline auto operator()(ARGS &&... args) const noexcept {return calibrate(std::forward<ARGS>(args)...);}
 
   /// @brief Return true if the data has been loaded
   operator bool() const & noexcept {return (m_ok && m_size>0);}
@@ -202,7 +202,7 @@ inline float Calibration::apply(float const & nrj, Label const & label) const no
 inline float Calibration::calibrate(float const & nrj, Label const & label) const noexcept
 {
   // First, one has to randomize the nrj within its bin
-  auto nrj_r = nrj+randomCo::uniform();
+  auto nrj_r = nrj+randomCo::uniform_fast();
 
   // Then, return the new value depending on the order of the calibration for this label
   return apply(nrj_r, label);

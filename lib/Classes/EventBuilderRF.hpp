@@ -93,7 +93,7 @@ bool EventBuilderRF::build(Hit const & hit)
       }
     break;
     
-    // If we are building an event (i.e. the two previous hit were in coincidence):
+    // If we are building an event (i.e. the two previous hits were in coincidence):
     case 1 :
       if (this->coincidence(hit))
       {

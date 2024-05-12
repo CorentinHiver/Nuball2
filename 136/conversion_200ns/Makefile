@@ -66,7 +66,7 @@ opt_clang: CC = clang
 opt_clang: CFLAGS += -Wno-unused-command-line-argument
 opt_clang: opt
 
-debug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-50 #-Wold-style-cast
 debug: default
 
 debug_threads: CFLAGS += -fsanitize=thread

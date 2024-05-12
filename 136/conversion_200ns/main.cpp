@@ -324,7 +324,7 @@ int main(int argc, char** argv)
       std::string tree_name = run_name + "_" + std::to_string(fileNumber);
       std::unique_ptr<TTree> tempTree (new TTree(tree_name.c_str(),tree_name.c_str()));
       tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-      hit.writing(tempTree.get(), "ltEQ");
+      hit.writing(tempTree.get(), "lteq"); // Writting label, absolute timestamp, adc and qdc2 into temporary tree
 
       // ------------------------ //
       // Loop over the .fast file //
@@ -362,7 +362,7 @@ int main(int argc, char** argv)
       // ------------------------------------------------------ //
       // Switch the temporary TTree to reading mode :
       hit.clear();
-      hit.reading(tempTree.get(), "ltEQ"); // Reading label, timestamp, calibrated energy, calibrated qdc2
+      hit.reading(tempTree.get(), "lteq"); // Reading label, timestamp, adc, qdc2
 
       std::string const outTree_name = "Nuball2"+std::to_string(MTObject::getThreadIndex());
       auto outTree (new TTree(outTree_name.c_str(), "Nuball2"));
@@ -430,40 +430,50 @@ int main(int argc, char** argv)
          // in coincidence within the time window centered around the pulsation t0 (between -rf_shift and period-rf_shift)
           ++evts_count;
           if (max_hits_in_event > 0  &&  event.mult > max_hits_in_event) continue;
-          histo_mult.Fill(event.mult);
           if ((evts_count%(int)(1.E+6)) == 0) debug(evts_count/(int)(1.E+6), "MEvts");
           bool pass_trigger = trigger.pass();
-          for (auto const & index_i : trigger.clovers.GeClean) cleanGe_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+          if (fill_histos)
+          {
+            for (auto const & index_i : trigger.clovers.GeClean) cleanGe_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+            histo_mult.Fill(event.mult);
+          }
 
           if (pass_trigger)
           {
-            for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigged_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+            if (fill_histos) 
+            {
+              for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigged_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+              histo_mult_trigger.Fill(event.mult);
+            }
             trig_hits_count+=event.mult;
-            histo_mult_trigger.Fill(event.mult);
             ++trig_count;
 
             outTree->Fill();
           }
-          if (trigger.nb_dssd > 0) for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigger_particle_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+          if (fill_histos && trigger.nb_dssd > 0) for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigger_particle_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
         }
         if (eventBuilder.isSingle())
         {
           if (Builder::getKeepSingles()) {outTree->Fill(); ++trig_count; ++trig_hits_count;}
 
-          // Fill histo :
-          auto const & label = eventBuilder.getEvent()->labels[0];
-          auto const & time = eventBuilder.getEvent()->times[0];
-          auto const & nrj = eventBuilder.getEvent()->nrjs[0];
-          auto const & nrj2 = eventBuilder.getEvent()->nrj2s[0];
-          if (CloversV2::isGe(label))
+          if (fill_histos)
           {
-            pure_single_Ge_VS_time.Fill(time, nrj);
-            cleanGe_VS_time.Fill(time, nrj);
-          }
+            // Fill histo :
+            auto const & label = eventBuilder.getEvent()->labels[0];
+            auto const & time = eventBuilder.getEvent()->times[0];
+            auto const & nrj = eventBuilder.getEvent()->nrjs[0];
+            auto const & nrj2 = eventBuilder.getEvent()->nrj2s[0];
 
-          if (300 < label && label < 800) if (0.8 < nrj/nrj2 || nrj/nrj2 > 1.2) continue; // Keep only LaBr3 part from paris
-          pure_singles_cristals.Fill(label, nrj);
-          if (10_ns < time && time < 50_ns) pure_singles_cristals_neutrons.Fill(label, nrj);
+            if (CloversV2::isGe(label))
+            {
+              pure_single_Ge_VS_time.Fill(time, nrj);
+              cleanGe_VS_time.Fill(time, nrj);
+            }
+
+            if (300 < label && label < 800) if (0.8 < nrj/nrj2 || nrj/nrj2 > 1.2) continue; // Keep only LaBr3 part from paris
+            pure_singles_cristals.Fill(label, nrj);
+            if (10_ns < time && time < 50_ns) pure_singles_cristals_neutrons.Fill(label, nrj);
+          }
         }
         // if (eventBuilder.isSingle()) {print(*(eventBuilder.getEvent())); pauseCo();}
       }

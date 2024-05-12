@@ -521,8 +521,6 @@ public:
     return *this;
   }
 
-  std::string const & path() const {return m_path;}
-  
   std::string const & get() const {return m_path;}
   std::string const & string() const {return(get());}
   // operator std::string() const & {return (get());}
@@ -643,7 +641,7 @@ private:
 
 std::ostream& operator<<(std::ostream& cout, Path const & p)
 {
-  cout << p.path();
+  cout << p.get();
   return cout;
 }
 

@@ -66,7 +66,7 @@ public:
     else if (time>1000.){time/=1000.; m_unit = "s";}
 
     std::stringstream ss;
-    ss << std::setprecision(precision) << " " << m_unit;
+    ss << std::setprecision(precision) << time << " " << m_unit;
 
     return ss.str();
   }

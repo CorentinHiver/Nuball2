@@ -54,13 +54,6 @@
 // ------------------------------------------------------- //
 // Useful overload of operator<< into a std::cout stream :
 
-template <class E>
-std::ostream& operator<<(std::ostream& cout, std::vector<E> const & v)
-{
-  for (auto const & e : v) cout << e << " ";
-  return cout;
-}
-
 template <class F, class S> 
 std::ostream& operator<<(std::ostream& cout, std::pair<F,S> const & p)
 {
