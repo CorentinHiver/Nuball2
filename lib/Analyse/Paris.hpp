@@ -78,7 +78,7 @@ public:
   
   StaticVector<uchar> Hits;
 
-  ParisCluster<36> clusterBack; // Only 28 paris physically present
+  ParisCluster<36> clusterBack;
   ParisCluster<36> clusterFront;
 
   // ______________________________________________________________ //
@@ -99,7 +99,7 @@ public:
   {
     auto const & _cos = cos(angle);
     auto const & _sin = sin(angle);
-    auto const new_nrj = hit.nrj * _cos - hit.nrj2 * _sin;
+    auto const new_nrj  = hit.nrj * _cos - hit.nrj2 * _sin;
     auto const new_nrj2 = hit.nrj * _sin + hit.nrj2 * _cos;
     hit.nrj = new_nrj;
     hit.nrj2 = new_nrj2;

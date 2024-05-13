@@ -33,38 +33,6 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
   size_t gate_bin_size = 2; // Take 2 keV
 
-  auto const & dd_gate_bin_max = maximum(dd_gates)+gate_bin_size+1;
-  std::vector<bool> dd_gate_lookup; dd_gate_lookup.reserve(dd_gate_bin_max);
-  std::vector<int> dd_index_gate_lookup; dd_index_gate_lookup.reserve(dd_gate_bin_max);
-  size_t temp_bin = 0;
-  for (size_t gate_index = 0;  gate_index<dd_gates.size(); ++gate_index)
-  {
-    for (; temp_bin<size_cast(dd_gate_bin_max); ++temp_bin) 
-    {
-      auto const & gate = dd_gates[gate_index];
-      if (temp_bin<gate-gate_bin_size) 
-      {
-        dd_gate_lookup.push_back(false);
-        dd_index_gate_lookup.push_back(0);
-      }
-      else if (temp_bin<gate+gate_bin_size+1) 
-      {
-        dd_gate_lookup.push_back(true);
-        dd_index_gate_lookup.push_back(gate_index);
-      }
-      else break;
-    }
-  }
-  auto const & pp_gate_bin_max = maximum(pp_gates)+gate_bin_size+1;
-  std::vector<bool> pp_gate_lookup; pp_gate_lookup.reserve(pp_gate_bin_max);
-  temp_bin = 0;
-  for (auto gate : pp_gates) for (; temp_bin<pp_gate_bin_max; ++temp_bin) 
-  {
-    if (temp_bin<gate-gate_bin_size) pp_gate_lookup.push_back(false);
-    else if (temp_bin<gate+gate_bin_size+1) pp_gate_lookup.push_back(true);
-    else break;
-  }
-
   MTObject::parallelise_function([&](){
 
     TRandom* random = new TRandom();
