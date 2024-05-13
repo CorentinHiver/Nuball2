@@ -12,13 +12,20 @@ float smear(float const & nrj, TRandom* random)
   return random->Gaus(nrj,nrj*((400.0/sqrt(nrj))/100.0)/2.35);
 }
 
+Label_vec const blacklist = {800, 801};
+std::unordered_map<Label, double> const maxE_Ge = {{28, 7500}, {33, 8250}, {46, 9000}, {55, 7500}, {57, 6000}, 
+                                                   {68, 7000}, {71, 9500}, {85, 7500}, {91, 8000}, {134, 8500}, 
+                                                   {135, 8500}, {136, 9000}, {142, 6000}, {145, 8000}, {146, 9000},
+                                                   {147, 9000}, {157, 9000}, {158, 9000}, {159, 9000}};
+
 void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
-  // std::string trigger = "dC1";
-  std::string trigger = "PrM1DeC1";
+  std::string trigger = "dC1";
+  // std::string trigger = "PrM1DeC1";
   // std::string trigger = "C2";
   // std::string trigger = "P";
-  bool make_triple_coinc = false;
+  bool make_triple_coinc_ddd = false;
+  bool make_triple_coinc_dpp = false;
   Timer timer;
   std::atomic<int> files_total_size(0);
   std::atomic<int> total_hits_number(0);
@@ -35,39 +42,39 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   std::mutex write_mutex;
 
   size_t gate_bin_size = 2; // Take 2 keV
-  std::vector<int> dd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750}; // keV
-  std::vector<int> dp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750}; // keV
-  std::vector<int> pp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750}; // keV
+  std::vector<int> ddd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115}; // keV
+  std::vector<int> dpp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115}; // keV
+  std::vector<int> ppp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
 
-  auto const & dd_gate_bin_max = maximum(dd_gates)+gate_bin_size+1;
-  std::vector<bool> dd_gate_lookup; dd_gate_lookup.reserve(dd_gate_bin_max);
-  std::vector<int> dd_index_gate_lookup; dd_index_gate_lookup.reserve(dd_gate_bin_max);
+  auto const & ddd_gate_bin_max = maximum(ddd_gates)+gate_bin_size+1;
+  std::vector<bool> ddd_gate_lookup; ddd_gate_lookup.reserve(ddd_gate_bin_max);
+  std::vector<int> ddd_index_gate_lookup; ddd_index_gate_lookup.reserve(ddd_gate_bin_max);
   size_t temp_bin = 0;
-  for (size_t gate_index = 0;  gate_index<dd_gates.size(); ++gate_index)
+  for (size_t gate_index = 0;  gate_index<ddd_gates.size(); ++gate_index)
   {
-    for (; temp_bin<size_cast(dd_gate_bin_max); ++temp_bin) 
+    for (; temp_bin<size_cast(ddd_gate_bin_max); ++temp_bin) 
     {
-      auto const & gate = dd_gates[gate_index];
+      auto const & gate = ddd_gates[gate_index];
       if (temp_bin<gate-gate_bin_size) 
       {
-        dd_gate_lookup.push_back(false);
-        dd_index_gate_lookup.push_back(0);
+        ddd_gate_lookup.push_back(false);
+        ddd_index_gate_lookup.push_back(0);
       }
       else if (temp_bin<gate+gate_bin_size+1) 
       {
-        dd_gate_lookup.push_back(true);
-        dd_index_gate_lookup.push_back(gate_index);
+        ddd_gate_lookup.push_back(true);
+        ddd_index_gate_lookup.push_back(gate_index);
       }
       else break;
     }
   }
-  auto const & pp_gate_bin_max = maximum(pp_gates)+gate_bin_size+1;
-  std::vector<bool> pp_gate_lookup; pp_gate_lookup.reserve(pp_gate_bin_max);
+  auto const & dpp_gate_bin_max = maximum(dpp_gates)+gate_bin_size+1;
+  std::vector<bool> dpp_gate_lookup; dpp_gate_lookup.reserve(dpp_gate_bin_max);
   temp_bin = 0;
-  for (auto gate : pp_gates) for (; temp_bin<pp_gate_bin_max; ++temp_bin) 
+  for (auto gate : dpp_gates) for (; temp_bin<dpp_gate_bin_max; ++temp_bin) 
   {
-    if (temp_bin<gate-gate_bin_size) pp_gate_lookup.push_back(false);
-    else if (temp_bin<gate+gate_bin_size+1) pp_gate_lookup.push_back(true);
+    if (temp_bin<gate-gate_bin_size) dpp_gate_lookup.push_back(false);
+    else if (temp_bin<gate+gate_bin_size+1) dpp_gate_lookup.push_back(true);
     else break;
   }
 
@@ -91,11 +98,14 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH2F> dp (new TH2F(("dp_"+std::to_string(thread_i)).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
       std::unique_ptr<TH2F> E_dT (new TH2F(("E_dT_"+std::to_string(thread_i)).c_str(), "E_dT clean", 600,-100_ns,200_ns, nb_bins_Ge,0,max_bin_Ge));
       std::unique_ptr<TH2F> E_dT_phoswitch (new TH2F(("E_dT_phoswitch_"+std::to_string(thread_i)).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, nb_bins_Ge,0,max_bin_Ge));
-      std::vector<std::unique_ptr<TH2I>> dd_gated;
-      if (make_triple_coinc) for (auto const & gate : dd_gates) dd_gated.push_back(std::unique_ptr<TH2I>(new TH2I(("dd_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
-                                        ("gamma-gamma delayed gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge)));
+      std::vector<std::unique_ptr<TH2I>> ddd_gated;
+      if (make_triple_coinc_ddd) for (auto const & gate : ddd_gates) ddd_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("ddd_gated_on_", gate, "_", (thread_i) + " delayed").c_str(), 
+                                        ("gamma-gamma delayed gated on "+std::to_string(gate)+" delayed; delayed [keV];delayed [keV]").c_str(), nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge)));
+      std::vector<std::unique_ptr<TH2I>> dpp_gated;
+      if (make_triple_coinc_dpp) for (auto const & gate : dpp_gates) dpp_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("dpp_gated_on_", gate, "_", (thread_i) + " delayed").c_str(),
+                                        ("gamma-gamma prompt gated on "+std::to_string(gate)+"delayed;prompt [keV];prompt [keV]").c_str(), nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge)));
       // std::vector<TH2I*> pp_gated;
-      // for (auto const & gate : pp_gates) pp_gated.push_back(new TH2I(("pp_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
+      // for (auto const & gate : ppp_gates) pp_gated.push_back(new TH2I(("pp_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
       //                                   ("gamma-gamma prompt gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
 
       // General codes : P = prompt, D = delayed, p = particle
@@ -209,37 +219,37 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH2F> ge_VS_BGO_prompt (new TH2F(("ge_VS_BGO_prompt_"+std::to_string(thread_i)).c_str(), "ge_VS_BGO_prompt;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
       std::unique_ptr<TH2F> ge_VS_BGO_delayed (new TH2F(("ge_VS_BGO_delayed_"+std::to_string(thread_i)).c_str(), "ge_VS_BGO_delayed;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
 
-      // Particule trigger (code p)
-      std::unique_ptr<TH1F> p_p (new TH1F(("p_p_"+std::to_string(thread_i)).c_str(), "prompt particule trigger;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_p (new TH2F(("pp_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt particule trigger;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_p (new TH1F(("d_p_"+std::to_string(thread_i)).c_str(), "delayed particule trigger;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_p (new TH2F(("dd_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed particule trigger;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_p (new TH2F(("dp_p_"+std::to_string(thread_i)).c_str(), "delayed VS prompt particule trigger;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> E_dT_p (new TH2F(("E_dT_p_"+std::to_string(thread_i)).c_str(), "E_dT_p clean particule trigger", 600,-100_ns,200_ns, nb_bins_Ge,0,max_bin_Ge));
+      // Particle trigger (code p)
+      std::unique_ptr<TH1F> p_p (new TH1F(("p_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> pp_p (new TH2F(("pp_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt particle trigger;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> d_p (new TH1F(("d_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> dd_p (new TH2F(("dd_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> dp_p (new TH2F(("dp_p_"+std::to_string(thread_i)).c_str(), "delayed VS prompt particle trigger;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> E_dT_p (new TH2F(("E_dT_p_"+std::to_string(thread_i)).c_str(), "E_dT_p clean particle trigger", 600,-100_ns,200_ns, nb_bins_Ge,0,max_bin_Ge));
       std::unique_ptr<TH1F> p_calo_p (new TH1F(("p_calo_p_"+std::to_string(thread_i)).c_str(), "prompt calorimetry particle trigger", 2000,0,20000));
       std::unique_ptr<TH1F> d_calo_p (new TH1F(("d_calo_p_"+std::to_string(thread_i)).c_str(), "prompt calorimetry particle trigger", 2000,0,20000));
 
-      std::unique_ptr<TH1F> p_pD (new TH1F(("p_pD_"+std::to_string(thread_i)).c_str(), "prompt particule trigger with delayed;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pP (new TH1F(("d_pP_"+std::to_string(thread_i)).c_str(), "delayed particule trigger with prompt;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pPC5 (new TH1F(("p_pPC5_"+std::to_string(thread_i)).c_str(), "prompt particule trigger PC5;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pPC5 (new TH1F(("d_pPC5_"+std::to_string(thread_i)).c_str(), "delayed particule trigger PC5;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pPC3 (new TH1F(("p_pPC3_"+std::to_string(thread_i)).c_str(), "prompt particule trigger PC3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pPC3 (new TH1F(("d_pPC3_"+std::to_string(thread_i)).c_str(), "delayed particule trigger PC3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pPC2 (new TH1F(("p_pPC2_"+std::to_string(thread_i)).c_str(), "prompt particule trigger PC2;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pPC2 (new TH1F(("d_pPC2_"+std::to_string(thread_i)).c_str(), "delayed particule trigger PC2;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pDC3 (new TH1F(("p_pDC3_"+std::to_string(thread_i)).c_str(), "prompt particule trigger DC3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pDC3 (new TH1F(("d_pDC3_"+std::to_string(thread_i)).c_str(), "delayed particule trigger DC3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pDC1_3 (new TH1F(("p_pDC1_3_"+std::to_string(thread_i)).c_str(), "prompt particule trigger DC1_3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pDC1_3 (new TH1F(("d_pDC1_3_"+std::to_string(thread_i)).c_str(), "delayed particule trigger DC1_3;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_pD (new TH1F(("p_pD_"+std::to_string(thread_i)).c_str(), "prompt particle trigger with delayed;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> d_pP (new TH1F(("d_pP_"+std::to_string(thread_i)).c_str(), "delayed particle trigger with prompt;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_pPC5 (new TH1F(("p_pPC5_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC5;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> d_pPC5 (new TH1F(("d_pPC5_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC5;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_pPC3 (new TH1F(("p_pPC3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC3;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> d_pPC3 (new TH1F(("d_pPC3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC3;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_pPC2 (new TH1F(("p_pPC2_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC2;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> d_pPC2 (new TH1F(("d_pPC2_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC2;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_pDC3 (new TH1F(("p_pDC3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger DC3;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> d_pDC3 (new TH1F(("d_pDC3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC3;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_pDC1_3 (new TH1F(("p_pDC1_3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger DC1_3;keV", nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> d_pDC1_3 (new TH1F(("d_pDC1_3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC1_3;keV", nb_bins_Ge,0,max_bin_Ge));
 
-      std::unique_ptr<TH2F> p_VS_PM_p (new TH2F(("p_VS_PM_p_"+std::to_string(thread_i)).c_str(), "prompt particule trigger VS prompt mult;keV", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_p (new TH2F(("d_VS_PM_p_"+std::to_string(thread_i)).c_str(), "delayed particule trigger VS prompt mult;keV", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> p_VS_DM_p (new TH2F(("p_VS_DM_p_"+std::to_string(thread_i)).c_str(), "prompt particule trigger VS delayed mult;keV", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_p (new TH2F(("d_VS_DM_p_"+std::to_string(thread_i)).c_str(), "delayed particule trigger VS delayed mult;keV", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> p_VS_PC_p (new TH2F(("p_VS_PC_p_"+std::to_string(thread_i)).c_str(), "prompt particule trigger VS prompt calorimetry;keV", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PC_p (new TH2F(("d_VS_PC_p_"+std::to_string(thread_i)).c_str(), "delayed particule trigger VS prompt calorimetry;keV", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> p_VS_DC_p (new TH2F(("p_VS_DC_p_"+std::to_string(thread_i)).c_str(), "prompt particule trigger VS delayed calorimetry;keV", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_p (new TH2F(("d_VS_DC_p_"+std::to_string(thread_i)).c_str(), "delayed particule trigger VS delayed calorimetry;keV", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> p_VS_PM_p (new TH2F(("p_VS_PM_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS prompt mult;prompt mult;prompt [keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> d_VS_PM_p (new TH2F(("d_VS_PM_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS prompt mult;prompt mult;delayed [keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> p_VS_DM_p (new TH2F(("p_VS_DM_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS delayed mult;delayed mult;prompt [keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> d_VS_DM_p (new TH2F(("d_VS_DM_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS delayed mult;delayed mult;delayed [keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> p_VS_PC_p (new TH2F(("p_VS_PC_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS prompt calorimetry;prompt calorimetry [10 bins/keV]; prompt [keV]", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> d_VS_PC_p (new TH2F(("d_VS_PC_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS prompt calorimetry;prompt calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> p_VS_DC_p (new TH2F(("p_VS_DC_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; prompt [keV]", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> d_VS_DC_p (new TH2F(("d_VS_DC_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
       
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
@@ -292,7 +302,10 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           auto const & nrj = event.nrjs[hit_i];
           auto const & nrj2 = event.nrj2s[hit_i];
 
-          // Calibrate the NaI :
+          // Remove bad Ge and overflow :
+           if (found(blacklist, label) || find_key(maxE_Ge, label) && nrj>maxE_Ge.at(label)) continue;
+
+          // Calibrate the phoswitch :
           if (Paris::is[label])
           {
             if (500 < label && label < 600) continue;
@@ -529,9 +542,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             }
           }
 
-          // Gated delayed-delayed (=triple coincidence)
+          // Gated delayed-delayed (=triple delayed coincidence)
           auto const & nrj_int = size_cast(clover_i.nrj);
-          if (make_triple_coinc && 0 < nrj_int && nrj_int < dd_gate_bin_max && dd_gate_lookup[nrj_int])
+          if (make_triple_coinc_ddd && 0 < nrj_int && nrj_int < ddd_gate_bin_max && ddd_gate_lookup[nrj_int])
           {
             for (size_t loop_j = 0; loop_j<delayed_clovers.GeClean.size(); ++loop_j)
             {
@@ -541,8 +554,23 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               {
               if (loop_i == loop_k) continue;
                 auto const & clover_k = delayed_clovers[delayed_clovers.GeClean[loop_k]];
-                dd_gated[dd_index_gate_lookup[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
-                dd_gated[dd_index_gate_lookup[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
+                ddd_gated[ddd_index_gate_lookup[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
+                ddd_gated[ddd_index_gate_lookup[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
+              }
+            }
+          }
+
+          // Gated delayed-delayed (=triple coincidence delayed prompt-prompt)
+          if (make_triple_coinc_dpp && 0 < nrj_int && nrj_int < dpp_gate_bin_max && dpp_gate_lookup[nrj_int])
+          {
+            for (size_t loop_j = 0; loop_j<prompt_clovers.GeClean.size(); ++loop_j)
+            {
+              auto const & clover_j = prompt_clovers[prompt_clovers.GeClean[loop_j]];
+              for (size_t loop_k = loop_j+1; loop_k<prompt_clovers.GeClean.size(); ++loop_k)
+              {
+                auto const & clover_k = prompt_clovers[prompt_clovers.GeClean[loop_k]];
+                dpp_gated[ddd_index_gate_lookup[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
+                dpp_gated[ddd_index_gate_lookup[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
               }
             }
           }
@@ -640,7 +668,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             p_VS_PM_p->Fill(prompt_mult, nrj);
             p_VS_DM_p->Fill(delayed_mult, nrj);
             p_VS_PC_p->Fill(prompt_calo, nrj);
-            d_VS_PC_p->Fill(delayed_calo, nrj);
+            p_VS_DC_p->Fill(delayed_calo, nrj);
             if (prompt_mult>0) p_pD->Fill(nrj);
             if (prompt_calo < 5_MeV) p_pPC5->Fill(nrj);
             if (prompt_calo < 3_MeV) p_pPC3->Fill(nrj);
@@ -658,11 +686,12 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           {
             auto const & nrj = delayed_clovers[index_i].nrj;
             d_p->Fill(nrj);
+            E_dT_p->Fill(time, nrj);
             d_VS_PM_p->Fill(prompt_mult, nrj);
             d_VS_DM_p->Fill(delayed_mult, nrj);
-            p_VS_DC_p->Fill(prompt_calo, nrj);
+            d_VS_PC_p->Fill(prompt_calo, nrj);
             d_VS_DC_p->Fill(delayed_calo, nrj);
-            if (delayed_mult>0)d_pP->Fill(nrj);
+            if (prompt_mult>0)d_pP->Fill(nrj);
             if (prompt_calo < 5_MeV) d_pPC5->Fill(nrj);
             if (prompt_calo < 3_MeV) d_pPC3->Fill(nrj);
             if (prompt_calo < 2_MeV) d_pPC2->Fill(nrj);
@@ -674,7 +703,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
         }
         
-        for (auto const & paris_nrj : prompt_phoswitch) phoswitches_prompt ->Fill(paris_nrj);
+        for (auto const & paris_nrj : prompt_phoswitch)  phoswitches_prompt ->Fill(paris_nrj);
         for (auto const & paris_nrj : delayed_phoswitch) phoswitches_delayed->Fill(paris_nrj);
 
         /////// PARIS //////////
@@ -707,8 +736,10 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         E_dT->Write("E_dT", TObject::kOverwrite);
         E_dT_phoswitch->Write("E_dT_phoswitch", TObject::kOverwrite);
         dp->Write("dp", TObject::kOverwrite);
-        if (make_triple_coinc) for (size_t gate_index = 0; gate_index<dd_gates.size(); ++gate_index) 
-          dd_gated[gate_index]->Write(("dd_gate_"+std::to_string(dd_gates[gate_index])).c_str(), TObject::kOverwrite);
+        if (make_triple_coinc_ddd) for (size_t gate_index = 0; gate_index<ddd_gates.size(); ++gate_index) 
+          ddd_gated[gate_index]->Write(("ddd_gate_"+std::to_string(ddd_gates[gate_index])).c_str(), TObject::kOverwrite);
+        if (make_triple_coinc_dpp) for (size_t gate_index = 0; gate_index<dpp_gates.size(); ++gate_index) 
+          dpp_gated[gate_index]->Write(("dpp_gate_"+std::to_string(dpp_gates[gate_index])).c_str(), TObject::kOverwrite);
 
         // Multiplicity :
         p_mult->Write("p_mult", TObject::kOverwrite);

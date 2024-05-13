@@ -1959,6 +1959,50 @@ public:
   }
 };
 
+
+class Efficiency
+{
+public:
+  Efficiency(std::string const & filename, std::string options = "ascii")
+  {
+    if (options == "ascii")
+    {
+      std::ifstream file(filename, std::ios::in);
+      int energy = 0; double value = 0;
+      while (file >> energy >> value) m_data.push_back(value/100);
+      m_max = maximum(m_data);
+    }
+  }
+  constexpr auto const & operator[](double const & energy) const {return m_data[int_cast(energy)];}
+  auto normalizedValue(double const & energy) const {return m_data[int_cast(energy)]/m_max;}
+  auto normalizedCounts(int const & counts, double const & energy) const {return counts*normalizedValue(energy);}
+
+private:
+  std::vector<double> m_data;
+  double m_max = 0.0;
+};
+
+TH1D* apply_efficiency(TH1* histo, Efficiency const & eff)
+{
+  auto const & xaxis = histo->GetXaxis();
+  auto const & bins = xaxis->GetNbins();
+  auto const & bin_min = xaxis->GetXmin();
+  auto const & bin_max = xaxis->GetXmax();
+  std::string name = histo->GetName() + std::string("_efficiency");
+  std::string title = histo->GetTitle() + std::string("_efficiency");
+
+  TH1D* ret = new TH1D(name.c_str(), title.c_str(), bins, bin_min, bin_max);
+
+  for (int bin = 0; bin<bins; ++bin)
+  {
+    auto const & nrj = histo->GetBinCenter(bin);
+    ret->SetBinContent(bin, histo->GetBinContent(bin)/eff[nrj]);
+  }
+  return ret;
+}
+
+
+
 void libRoot()
 {
   print("Welcome to Corentin's ROOT library. May you find some usefull stuff around !");
