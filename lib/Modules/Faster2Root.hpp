@@ -260,8 +260,8 @@ void Faster2Root::load(int argc, char** argv)
   this -> convert(dataPath.string(), outPath.string());
 
   // Print some additional informations at the end of the conversion :
-  print(m_total_hits.get()/(m_total_timer.TimeSec()*1.E-6), "M hits/s");
-  if (m_eventBuilding) print(m_total_events.get()/(m_total_timer.TimeSec()*1.E-6), "M events/s");
+  print(1.E-6 * m_total_hits.get()/m_total_timer.TimeSec(), "M hits/s");
+  if (m_eventBuilding) print(1.E-6 * m_total_events.get()/m_total_timer.TimeSec(), "M events/s");
 }
 
 /**
