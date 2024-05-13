@@ -145,7 +145,7 @@ public:
   void buildEvents(int time_window_ns) 
   {
     print("Performing event buiding with", time_window_ns, "ns time window");
-    m_eventbuilding = true;
+    m_eventBuilding = true;
     m_time_window = time_window_ns*1000;
   }
   void overwrite( bool const & _overwrite) {m_overwrite = _overwrite;}
@@ -171,7 +171,7 @@ protected:
   int m_nb_threads = 1;
   int m_nb_files = -1;
   Long64_t m_time_window = 1500000; // By default, a 1.5 us time gate is used
-  bool m_eventbuilding = false;
+  bool m_eventBuilding = false;
   bool m_calibrate = false;
   bool m_throw_single = false;
   bool m_overwrite = false;
@@ -242,26 +242,26 @@ void Faster2Root::load(int argc, char** argv)
   }
 
   // Checking consistency of parameters :
-  if (m_timeshifts && !m_eventbuilding) 
+  if (m_timeshifts && !m_eventBuilding) 
   {
     print("This combination of time alignement without event building is not handled");
     throw_error(error_message["DEV"]);
   }
-  if (m_use_trigger && !m_eventbuilding)
+  if (m_use_trigger && !m_eventBuilding)
   {
     throw_error("Can't use a trigger without event building ! Use parameter -e [time_window_ns] or method Faster2Root::buildEvents(time_window_ns).");
   }
 
-  // Perform initialisations :
+  // Perform initializations :
   if (m_nb_threads > 1) MTObject::Initialise(m_nb_threads);
   std::cout << std::setprecision(4);
 
   // Run the conversion :
   this -> convert(dataPath.string(), outPath.string());
 
-  // Print some additionnal informations at the end of the conversion :
-  print(m_total_hits/m_total_timer.TimeSec()*1.E-6, "Mhits/s");
-  if (m_eventbuilding) print(m_total_events/m_total_timer.TimeSec()*1.E-6, "Mevts/s");
+  // Print some additional informations at the end of the conversion :
+  print(m_total_hits.get()/(m_total_timer.TimeSec()*1.E-6), "M hits/s");
+  if (m_eventBuilding) print(m_total_events.get()/(m_total_timer.TimeSec()*1.E-6), "M events/s");
 }
 
 /**
@@ -320,17 +320,17 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   tree -> SetDirectory(nullptr); // Set the tree RAM resident : increases memory usage but speeds the process up
   Event event;
   unique_tree tempTree;
-  if (m_eventbuilding)
+  if (m_eventBuilding)
   {// Event building is done in two times : first filling a temporary tree, then reorder it after timeshift and finally create events
     tempTree.reset(new TTree("temp","temp"));
     tempTree -> SetDirectory(nullptr);
-    hit.writting(tempTree.get(), (m_calibration) ? "lsEQp" : "lseqp");
-    event.writting(tree.get(), (m_calibration) ? "lstEQp" : "lsteqp");
+    hit.writing(tempTree.get(), (m_calibration) ? "lsEQp" : "lseqp");
+    event.writing(tree.get(), (m_calibration) ? "lstEQp" : "lsteqp");
   }
   else
   {
     tree->SetTitle("Nuball2 without event building");
-    event.writting(tree.get(), (m_calibration) ? "lsEQp" : "lseqp");
+    event.writing(tree.get(), (m_calibration) ? "lsEQp" : "lseqp");
   }
 
   if (m_calibration) tree -> SetTitle((tree->GetTitle()+std::string(" with calibration")).c_str());
@@ -347,7 +347,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
       hit.nrj  = m_calibration(hit.adc, hit.label);
       hit.nrj2 = (hit.qdc2==0) ? m_calibration(hit.qdc2, hit.label) : 0.0;
     }
-    if (m_eventbuilding) tempTree -> Fill();
+    if (m_eventBuilding) tempTree -> Fill();
     else
     {// If no event building, directly writes the hits in the output tree
       event = hit;
@@ -359,7 +359,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   m_total_hits+=reader.getCounter();
   longlong evts = 0;
   longlong evts_trigg = 0;
-  if (m_eventbuilding)
+  if (m_eventBuilding)
   {// Read the temporary tree and perform event building :
     auto const & nb_data = tempTree->GetEntries();
     Alignator alignator(tempTree.get());
@@ -396,10 +396,10 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   file -> Close();
 
   std::string m_eventbuilding_output = ")";
-  if (m_eventbuilding) m_eventbuilding_output = "( "+std::to_string(evts*1.E-6)+" Mevts";
+  if (m_eventBuilding) m_eventbuilding_output = "( "+std::to_string(evts*1.E-6)+" M events";
   if (m_use_trigger) m_eventbuilding_output += "trigger in "+std::to_string(trigger_rate)+" % ))";
 
-  print(outputFile, "written (", reader.getCounter()*1.E-6, "Mhits in", timer(), m_eventbuilding_output);
+  print(outputFile, "written (", reader.getCounter()*1.E-6, "M hits in", timer(), m_eventbuilding_output);
 }
 
 
@@ -428,9 +428,9 @@ void MySimpleConvertor::convertFile(Hit & hit, FasterReader & reader, Path const
   // First, declare a tree :
   unique_tree tree(new TTree("simple","simple"));
   tree -> SetDirectory(nullptr); // To make it memory resident
-  // Next, connect the hit to the tree (Hit::writting() is a shortcut for the many TTree::Branch method to be called, 
+  // Next, connect the hit to the tree (Hit::writing() is a shortcut for the many TTree::Branch method to be called, 
   // see Hit class for more information). You can do it manually of course !
-  hit.writting(tree.get(), "lseqp");
+  hit.writing(tree.get(), "lseqp");
 
   // Now, we can read the faster file :
   while(reader.Read())

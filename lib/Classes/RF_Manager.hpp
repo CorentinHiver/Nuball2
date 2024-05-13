@@ -139,6 +139,7 @@ bool inline RF_Manager::setHit(Hit const & hit)
 
 #ifdef EVENT_HPP
   /// @brief Set an event containing the downscale hit of RF
+  /// @attention This works only when the event contains only the RF (event size == 1)
   bool inline RF_Manager::setEvent(Event const & event)
   {
     if (event.labels[0] == this -> label)
