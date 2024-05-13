@@ -324,13 +324,13 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   {// Event building is done in two times : first filling a temporary tree, then reorder it after timeshift and finally create events
     tempTree.reset(new TTree("temp","temp"));
     tempTree -> SetDirectory(nullptr);
-    hit.writing(tempTree.get(), (m_calibration) ? "lsEQp" : "lseqp");
-    event.writing(tree.get(), (m_calibration) ? "lstEQp" : "lsteqp");
+    hit.writing(tempTree.get(), (m_calibration) ? "ltEQp" : "lteqp");
+    event.writing(tree.get(), (m_calibration) ? "ltTEQp" : "ltTeqp");
   }
   else
   {
     tree->SetTitle("Nuball2 without event building");
-    event.writing(tree.get(), (m_calibration) ? "lsEQp" : "lseqp");
+    event.writing(tree.get(), (m_calibration) ? "ltEQp" : "lteqp");
   }
 
   if (m_calibration) tree -> SetTitle((tree->GetTitle()+std::string(" with calibration")).c_str());
@@ -363,7 +363,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   {// Read the temporary tree and perform event building :
     auto const & nb_data = tempTree->GetEntries();
     Alignator alignator(tempTree.get());
-    hit.reading(tempTree.get(), (m_calibration) ? "lsEQp" : "lseqp");
+    hit.reading(tempTree.get(), (m_calibration) ? "ltEQp" : "lteqp");
     CoincBuilder builder(&event, m_time_window);
     builder.keepSingles(!m_throw_single);
 
@@ -430,7 +430,7 @@ void MySimpleConvertor::convertFile(Hit & hit, FasterReader & reader, Path const
   tree -> SetDirectory(nullptr); // To make it memory resident
   // Next, connect the hit to the tree (Hit::writing() is a shortcut for the many TTree::Branch method to be called, 
   // see Hit class for more information). You can do it manually of course !
-  hit.writing(tree.get(), "lseqp");
+  hit.writing(tree.get(), "lteqp");
 
   // Now, we can read the faster file :
   while(reader.Read())

@@ -3,7 +3,8 @@
 #include <Faster2Root.hpp>
 
 /**
- * @brief Uses the Faster2Root class to convert a bunch of runs in the same folder.
+ * @brief DO NOT WORK NOW  Uses the Faster2Root class to convert a bunch of runs in the same folder.
+ * 
  * @todo shaping it better based on work done on faster2root
  */
 int main(int argc, char ** argv)
