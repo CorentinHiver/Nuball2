@@ -10,10 +10,11 @@ int main(int argc, char ** argv)
 {
   if (argc < 3) 
   {
-    print("Usage of manip2root : /path/to/manip/ /path/to/output/ [[options of manip]] [[options of faster2root]]");
-    print("manip2root options : ");
-    print("-l [list_runs] : gives a list of the runs to convert if you don't want to convert everything in the folder");
-    print("-r [list_runs] : gives a list of the runs NOT to convert if you don't want to convert everything in the folder");
+    print("Usage of manip2root : /path/to/manip/ /path/to/output/ [[options of faster2root]]");
+    // print("Usage of manip2root : /path/to/manip/ /path/to/output/ [[options of manip]] [[options of faster2root]]");
+    // print("manip2root options : ");
+    // print("-l [list_runs] : gives a list of the runs to convert if you don't want to convert everything in the folder");
+    // print("-r [list_runs] : gives a list of the runs NOT to convert if you don't want to convert everything in the folder");
     system("./faster2root"); // Here is printed as well the options of faster2root
   }
   else
@@ -24,11 +25,11 @@ int main(int argc, char ** argv)
     {
       std::string option = argv[i];
 
-           if (option == "-l") manip.readFile(option[++i]);
-      else if (option == "-r")
-      {
-        manip.readFolder()
-      }
+           if (option == "-l") manip.readFile(argv[++i]);
+      // else if (option == "-r")
+      // {
+      //   manip.readFolder(argv[++i]);
+      // }
       
       Path datapath(argv[2]);
       Path outpath(argv[3]);
