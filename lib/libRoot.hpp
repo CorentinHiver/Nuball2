@@ -1973,7 +1973,7 @@ public:
       m_max = maximum(m_data);
     }
   }
-  constexpr auto const & operator[](double const & energy) const {return m_data[int_cast(energy)];}
+  auto const & operator[](double const & energy) const {return m_data[int_cast(energy)];}
   auto normalizedValue(double const & energy) const {return m_data[int_cast(energy)]/m_max;}
   auto normalizedCounts(int const & counts, double const & energy) const {return counts*normalizedValue(energy);}
 

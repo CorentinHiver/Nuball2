@@ -271,6 +271,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       std::vector<double> prompt_phoswitch;
       std::vector<double> delayed_phoswitch;
+      
+      std::vector<double> dssd_sector;
+      std::vector<double> dssd_ring;
 
       int evt_i = 1;
       for ( ;(evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
@@ -286,14 +289,19 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         chain->GetEntry(evt_i);
 
+        // print(event);
+
         prompt_clovers.reset();
         delayed_clovers.reset();
 
-        prompt_paris.reset();
-        delayed_paris.reset();
+        // prompt_paris.reset();
+        // delayed_paris.reset();
 
         prompt_phoswitch.clear();
         delayed_phoswitch.clear();
+        
+        dssd_sector.clear();
+        dssd_ring.clear();
 
         for (int hit_i = 0; hit_i < event.mult; hit_i++)
         {
@@ -318,7 +326,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             }
             else if (40_ns < time && time < 170_ns) 
             {
-              E_dT_phoswitch->Fill(time, nrjcal);
+              delayed_phoswitch.push_back(nrjcal);
             }
           }
           if (-10_ns < time && time < 10_ns) 
@@ -335,7 +343,12 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
           // if (-5_ns < time && time < 5_ns) prompt_paris.fill(event, hit_i);           // Prompt paris
           // else if (40_ns < time && time < 170_ns) delayed_paris.fill(event, hit_i);   // Delayed paris
-          if (799 < label && label < 860) dssd_trigger = true;
+          if (799 < label && label < 860) 
+          {
+            dssd_trigger = true;
+            if (799 < label && label < 840) dssd_sector.push_back(nrj);
+            if (839 < label && label < 860) dssd_ring.push_back(nrj);
+          }
         }// End hits loop
 
         //////////////
@@ -362,6 +375,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         dp_mult->Fill(prompt_mult, delayed_mult);
 
         // -- Calorimetry -- //
+        // print(prompt_phoswitch);
+        // print(delayed_phoswitch);
+        // pauseCo();
         prompt_phoswitch_calo = sum(prompt_phoswitch);
         delayed_phoswitch_calo = sum(delayed_phoswitch);
         auto const & prompt_calo_clover = prompt_clover_calo;
@@ -378,8 +394,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         if (prompt_calo_clover     > 0 && prompt_phoswitch_calo  > 0) p_calo_clover_VS_p_calo_phoswitch -> Fill(prompt_calo_clover, prompt_phoswitch_calo);
         if (delayed_calo_clover    > 0 && delayed_phoswitch_calo > 0) d_calo_clover_VS_d_calo_phoswitch -> Fill(delayed_calo_clover, delayed_phoswitch_calo);
 
-        auto const & prompt_calo = prompt_calo_clover + smear(prompt_phoswitch_calo, random);
-        auto const & delayed_calo = delayed_calo_clover + smear(delayed_phoswitch_calo, random);
+        auto const & prompt_calo = prompt_calo_clover + prompt_phoswitch_calo;
+        auto const & delayed_calo = delayed_calo_clover + delayed_phoswitch_calo;
         p_calo->Fill(prompt_calo);
         d_calo->Fill(delayed_calo);
         if (prompt_calo > 0 && delayed_calo > 0) dp_calo->Fill(prompt_calo, delayed_calo);
@@ -652,7 +668,6 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & nrj_BGO = delayed_clovers[BGO_i].nrj_BGO;
             ge_VS_BGO_delayed->Fill(nrj_BGO, clover_i.nrj);
           }
-
         }
 
         if (dssd_trigger)
@@ -685,6 +700,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           for (auto const & index_i : delayed_clovers.GeClean)
           {
             auto const & nrj = delayed_clovers[index_i].nrj;
+            auto const & time = prompt_clovers[index_i].time;
             d_p->Fill(nrj);
             E_dT_p->Fill(time, nrj);
             d_VS_PM_p->Fill(prompt_mult, nrj);
