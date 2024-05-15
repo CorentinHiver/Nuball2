@@ -228,7 +228,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       // Particle trigger (code p)
       unique_TH1F p_p (new TH1F(("p_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F pp_p (new TH2F(("pp_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
-      unique_TH1F d_p (new TH1F(("d_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger;keV", nb_bins_nb_bins_Ge_singlesGe_bidim,0,max_bin_Gemax_bin_Ge_singles_bidim));
+      unique_TH1F d_p (new TH1F(("d_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F dd_p (new TH2F(("dd_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dp_p (new TH2F(("dp_p_"+std::to_string(thread_i)).c_str(), "delayed VS prompt particle trigger;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F E_dT_p (new TH2F(("E_dT_p_"+std::to_string(thread_i)).c_str(), "E vs time particle trigger", 600,-100_ns,200_ns, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
