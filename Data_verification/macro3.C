@@ -42,8 +42,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   std::mutex write_mutex;
 
   size_t gate_bin_size = 2; // Take 2 keV
-  std::vector<int> ddd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115}; // keV
-  std::vector<int> dpp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115}; // keV
+  std::vector<int> ddd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115, 1846, 2125}; // keV
+  std::vector<int> dpp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115, 1846, 2125}; // keV
   std::vector<int> ppp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
 
   auto const & ddd_gate_bin_max = maximum(ddd_gates)+gate_bin_size+1;
@@ -88,35 +88,39 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
     while(MTfiles.getNext(file))
     {
       files_total_size.fetch_add(size_file(file,"Mo"), std::memory_order_relaxed);
-      int nb_bins_Ge = 4096;
-      double max_bin_Ge = 4096;
+      int nb_bins_Ge_bidim = 4096;
+      double max_bin_Ge_bidim = 4096;
       // Simple spectra :
-      std::unique_ptr<TH1F> p (new TH1F(("p_"+std::to_string(thread_i)).c_str(), "prompt", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp (new TH2F(("pp_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d (new TH1F(("d_"+std::to_string(thread_i)).c_str(), "delayed", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd (new TH2F(("dd_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp (new TH2F(("dp_"+std::to_string(thread_i)).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> E_dT (new TH2F(("E_dT_"+std::to_string(thread_i)).c_str(), "E_dT clean", 600,-100_ns,200_ns, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> E_dT_phoswitch (new TH2F(("E_dT_phoswitch_"+std::to_string(thread_i)).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p (new TH1F(("p_"+std::to_string(thread_i)).c_str(), "prompt", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp (new TH2F(("pp_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_bckg (new TH2F(("pp_bckg_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt background;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d (new TH1F(("d_"+std::to_string(thread_i)).c_str(), "delayed", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd (new TH2F(("dd_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_bckg (new TH2F(("dd_bckg_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp (new TH2F(("dp_"+std::to_string(thread_i)).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> E_dT (new TH2F(("E_dT_"+std::to_string(thread_i)).c_str(), "E_dT clean", 600,-100_ns,200_ns, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> E_dT_phoswitch (new TH2F(("E_dT_phoswitch_"+std::to_string(thread_i)).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       std::vector<std::unique_ptr<TH2I>> ddd_gated;
       if (make_triple_coinc_ddd) for (auto const & gate : ddd_gates) ddd_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("ddd_gated_on_", gate, "_", (thread_i) + " delayed").c_str(), 
-                                        ("gamma-gamma delayed gated on "+std::to_string(gate)+" delayed; delayed [keV];delayed [keV]").c_str(), nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge)));
+                                        ("gamma-gamma delayed gated on "+std::to_string(gate)+" delayed; delayed [keV];delayed [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
       std::vector<std::unique_ptr<TH2I>> dpp_gated;
       if (make_triple_coinc_dpp) for (auto const & gate : dpp_gates) dpp_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("dpp_gated_on_", gate, "_", (thread_i) + " delayed").c_str(),
-                                        ("gamma-gamma prompt gated on "+std::to_string(gate)+"delayed;prompt [keV];prompt [keV]").c_str(), nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge)));
+                                        ("gamma-gamma prompt gated on "+std::to_string(gate)+"delayed;prompt [keV];prompt [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
       // std::vector<TH2I*> pp_gated;
       // for (auto const & gate : ppp_gates) pp_gated.push_back(new TH2I(("pp_gated_"+std::to_string(gate)+"_"+std::to_string(thread_i)).c_str(), 
-      //                                   ("gamma-gamma prompt gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
+      //                                   ("gamma-gamma prompt gated on "+std::to_string(gate)+";E1 [keV];E2 [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
       // General codes : P = prompt, D = delayed, p = particle
       // Multiplicity : (codes : PM = prompt multiplicity ; DM = delayed multiplicity)
+      std::unique_ptr<TH1F> p_D (new TH1F(("p_D"+std::to_string(thread_i)).c_str(), "prompt with delayed; mult", 20,0,20));
+      std::unique_ptr<TH1F> d_P (new TH1F(("d_P"+std::to_string(thread_i)).c_str(), "delayed with prompt; mult", 20,0,20));
       std::unique_ptr<TH1F> p_mult (new TH1F(("p_mult_"+std::to_string(thread_i)).c_str(), "prompt multiplicity; mult", 20,0,20));
       std::unique_ptr<TH1F> d_mult (new TH1F(("d_mult"+std::to_string(thread_i)).c_str(), "delayed multiplicity; mult", 20,0,20));
       std::unique_ptr<TH2F> dp_mult (new TH2F(("dp_mult"+std::to_string(thread_i)).c_str(), "delayed VS prompt multiplicity; prompt mult; delayed mult", 20,0,20, 20,0,20));
-      std::unique_ptr<TH2F> p_VS_PM (new TH2F(("p_VS_PM_"+std::to_string(thread_i)).c_str(), "prompt Ge VS prompt multiplicity;prompt mult; E[keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM (new TH2F(("d_VS_PM_"+std::to_string(thread_i)).c_str(), "delayed Ge VS prompt multiplicity;prompt mult; E[keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> p_VS_DM (new TH2F(("p_VS_DM_"+std::to_string(thread_i)).c_str(), "prompt Ge VS delayed multiplicity;delayed mult; E[keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM (new TH2F(("d_VS_DM_"+std::to_string(thread_i)).c_str(), "delayed Ge VS delayed multiplicity;delayed mult; E[keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH2F> p_VS_PM (new TH2F(("p_VS_PM_"+std::to_string(thread_i)).c_str(), "prompt Ge VS prompt multiplicity;prompt mult; E[keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM (new TH2F(("d_VS_PM_"+std::to_string(thread_i)).c_str(), "delayed Ge VS prompt multiplicity;prompt mult; E[keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> p_VS_DM (new TH2F(("p_VS_DM_"+std::to_string(thread_i)).c_str(), "prompt Ge VS delayed multiplicity;delayed mult; E[keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM (new TH2F(("d_VS_DM_"+std::to_string(thread_i)).c_str(), "delayed Ge VS delayed multiplicity;delayed mult; E[keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       
       // Calorimetry : (codes : DC = prompt calorimetry ; DC = delayed calorimetry)
       std::unique_ptr<TH1F> p_calo (new TH1F(("prompt_calorimetry_"+std::to_string(thread_i)).c_str(), "prompt calorimetry;Prompt calorimetry[keV]", 2000,0,20000));
@@ -132,74 +136,74 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH2F> d_VS_DC (new TH2F(("d_VS_DC_"+std::to_string(thread_i)).c_str(), "delayed Ge VS delayed calorimetry;Delayed calorimetry[keV];E[keV]", 1000,0,10000, 10000,0,10000));
 
       // Condition Prompt Calorimetry < 5 MeV (code PC5):
-      std::unique_ptr<TH1F> p_PC5 (new TH1F(("p_PC5_"+std::to_string(thread_i)).c_str(), "prompt Ge PC5", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_PC5 (new TH2F(("pp_PC5_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt PC5;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_PC5 (new TH1F(("d_PC5_"+std::to_string(thread_i)).c_str(), "delayed PC5", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_PC5 (new TH2F(("dd_PC5_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC5;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_PC5 (new TH2F(("dp_PC5_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC5;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_PC5 (new TH2F(("d_VS_DC_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC5", 1000,0,10000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_PC5 (new TH2F(("d_VS_PM_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC5", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_PC5 (new TH2F(("d_VS_DM_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC5", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_PC5 (new TH1F(("p_PC5_"+std::to_string(thread_i)).c_str(), "prompt Ge PC5", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_PC5 (new TH2F(("pp_PC5_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt PC5;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_PC5 (new TH1F(("d_PC5_"+std::to_string(thread_i)).c_str(), "delayed PC5", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_PC5 (new TH2F(("dd_PC5_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC5;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp_PC5 (new TH2F(("dp_PC5_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC5;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_PC5 (new TH2F(("d_VS_DC_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC5", 1000,0,10000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM_PC5 (new TH2F(("d_VS_PM_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC5", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_PC5 (new TH2F(("d_VS_DM_PC5_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC5", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
       // Condition Prompt Calorimetry < 3 MeV (code PC3):
-      std::unique_ptr<TH1F> p_PC3 (new TH1F(("p_PC3_"+std::to_string(thread_i)).c_str(), "prompt PC3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_PC3 (new TH2F(("pp_PC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_PC3 (new TH1F(("d_PC3_"+std::to_string(thread_i)).c_str(), "delayed PC3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_PC3 (new TH2F(("dd_PC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_PC3 (new TH2F(("dp_PC3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC3;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_PC3 (new TH2F(("d_VS_DC_PC3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC3", 1000,0,10000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_PC3 (new TH2F(("d_VS_PM_PC3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_PC3 (new TH2F(("d_VS_DM_PC3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_PC3 (new TH1F(("p_PC3_"+std::to_string(thread_i)).c_str(), "prompt PC3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_PC3 (new TH2F(("pp_PC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_PC3 (new TH1F(("d_PC3_"+std::to_string(thread_i)).c_str(), "delayed PC3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_PC3 (new TH2F(("dd_PC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp_PC3 (new TH2F(("dp_PC3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC3;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_PC3 (new TH2F(("d_VS_DC_PC3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC3", 1000,0,10000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM_PC3 (new TH2F(("d_VS_PM_PC3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_PC3 (new TH2F(("d_VS_DM_PC3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
       // Condition Prompt Calorimetry < 2 MeV (code PC2):
-      std::unique_ptr<TH1F> p_PC2 (new TH1F(("p_PC2_"+std::to_string(thread_i)).c_str(), "prompt PC2", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_PC2 (new TH2F(("pp_PC2_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt PC2;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_PC2 (new TH1F(("d_PC2_"+std::to_string(thread_i)).c_str(), "delayed PC2", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_PC2 (new TH2F(("dd_PC2_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC2;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_PC2 (new TH2F(("dp_PC2_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC2;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_PC2 (new TH2F(("d_VS_DC_PC2_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC2", 1000,0,10000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_PC2 (new TH2F(("d_VS_PM_PC2_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC2", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_PC2 (new TH2F(("d_VS_DM_PC2_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC2", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_PC2 (new TH1F(("p_PC2_"+std::to_string(thread_i)).c_str(), "prompt PC2", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_PC2 (new TH2F(("pp_PC2_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt PC2;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_PC2 (new TH1F(("d_PC2_"+std::to_string(thread_i)).c_str(), "delayed PC2", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_PC2 (new TH2F(("dd_PC2_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC2;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp_PC2 (new TH2F(("dp_PC2_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC2;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_PC2 (new TH2F(("d_VS_DC_PC2_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC2", 1000,0,10000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM_PC2 (new TH2F(("d_VS_PM_PC2_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC2", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_PC2 (new TH2F(("d_VS_DM_PC2_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC2", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       
       // Condition Delayed Calorimetry < 3 MeV (code DC3):
-      std::unique_ptr<TH1F> p_DC3 (new TH1F(("p_DC3_"+std::to_string(thread_i)).c_str(), "prompt DC3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_DC3 (new TH2F(("pp_DC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt DC3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_DC3 (new TH1F(("d_DC3_"+std::to_string(thread_i)).c_str(), "delayed DC3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_DC3 (new TH2F(("dd_DC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed DC3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_DC3 (new TH2F(("dp_DC3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt DC3;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_DC3 (new TH2F(("d_VS_DC_DC3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_DC3", 1000,0,10000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_DC3 (new TH2F(("d_VS_PM_DC3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_DC3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_DC3 (new TH2F(("d_VS_DM_DC3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_DC3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_DC3 (new TH1F(("p_DC3_"+std::to_string(thread_i)).c_str(), "prompt DC3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_DC3 (new TH2F(("pp_DC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt DC3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_DC3 (new TH1F(("d_DC3_"+std::to_string(thread_i)).c_str(), "delayed DC3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_DC3 (new TH2F(("dd_DC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed DC3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp_DC3 (new TH2F(("dp_DC3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt DC3;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_DC3 (new TH2F(("d_VS_DC_DC3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_DC3", 1000,0,10000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM_DC3 (new TH2F(("d_VS_PM_DC3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_DC3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_DC3 (new TH2F(("d_VS_DM_DC3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_DC3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       
       // Condition 1 < Delayed Calorimetry < 3 MeV (code DC1_3):
-      std::unique_ptr<TH1F> p_DC1_3 (new TH1F(("p_DC1_3_"+std::to_string(thread_i)).c_str(), "prompt DC1_3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_DC1_3 (new TH2F(("pp_DC1_3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt DC1_3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_DC1_3 (new TH1F(("d_DC1_3_"+std::to_string(thread_i)).c_str(), "delayed DC1_3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_DC1_3 (new TH2F(("dd_DC1_3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed DC1_3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_DC1_3 (new TH2F(("dp_DC1_3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt DC1_3;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_DC1_3 (new TH2F(("d_VS_DC_DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_DC1_3", 1000,0,10000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_DC1_3 (new TH2F(("d_VS_PM_DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_DC1_3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_DC1_3 (new TH2F(("d_VS_DM_DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_DC1_3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_DC1_3 (new TH1F(("p_DC1_3_"+std::to_string(thread_i)).c_str(), "prompt DC1_3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_DC1_3 (new TH2F(("pp_DC1_3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt DC1_3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_DC1_3 (new TH1F(("d_DC1_3_"+std::to_string(thread_i)).c_str(), "delayed DC1_3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_DC1_3 (new TH2F(("dd_DC1_3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed DC1_3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp_DC1_3 (new TH2F(("dp_DC1_3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt DC1_3;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_DC1_3 (new TH2F(("d_VS_DC_DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_DC1_3", 1000,0,10000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM_DC1_3 (new TH2F(("d_VS_PM_DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_DC1_3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_DC1_3 (new TH2F(("d_VS_DM_DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_DC1_3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       
       // Condition Delayed Calorimetry < 3 MeV AND Prompt Calorimetry < 3 MeV (code PC3DC3):
-      std::unique_ptr<TH1F> p_PC3DC3 (new TH1F(("p_PC3DC3_"+std::to_string(thread_i)).c_str(), "prompt PC3DC3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_PC3DC3 (new TH2F(("pp_PC3DC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt PC3DC3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_PC3DC3 (new TH1F(("d_PC3DC3_"+std::to_string(thread_i)).c_str(), "delayed PC3DC3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_PC3DC3 (new TH2F(("dd_PC3DC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC3DC3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_PC3DC3 (new TH2F(("dp_PC3DC3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC3DC3;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_PC3DC3 (new TH2F(("d_VS_DC_PC3DC3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC3DC3", 1000,0,10000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_PC3DC3 (new TH2F(("d_VS_PM_PC3DC3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC3DC3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_PC3DC3 (new TH2F(("d_VS_DM_PC3DC3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC3DC3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_PC3DC3 (new TH1F(("p_PC3DC3_"+std::to_string(thread_i)).c_str(), "prompt PC3DC3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_PC3DC3 (new TH2F(("pp_PC3DC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt PC3DC3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_PC3DC3 (new TH1F(("d_PC3DC3_"+std::to_string(thread_i)).c_str(), "delayed PC3DC3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_PC3DC3 (new TH2F(("dd_PC3DC3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC3DC3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp_PC3DC3 (new TH2F(("dp_PC3DC3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC3DC3;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_PC3DC3 (new TH2F(("d_VS_DC_PC3DC3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC3DC3", 1000,0,10000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM_PC3DC3 (new TH2F(("d_VS_PM_PC3DC3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC3DC3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_PC3DC3 (new TH2F(("d_VS_DM_PC3DC3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC3DC3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
       // Condition 1 < Delayed Calorimetry < 3 MeV AND Prompt Calorimetry < 3 MeV (code PC3DC1_3):
-      std::unique_ptr<TH1F> p_PC3DC1_3 (new TH1F(("p_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "prompt PC3DC1_3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_PC3DC1_3 (new TH2F(("pp_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt PC3DC1_3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_PC3DC1_3 (new TH1F(("d_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "delayed PC3DC1_3", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_PC3DC1_3 (new TH2F(("dd_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC3DC1_3;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_PC3DC1_3 (new TH2F(("dp_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC3DC1_3;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_PC3DC1_3 (new TH2F(("d_VS_DC_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC3DC1_3", 1000,0,10000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_PC3DC1_3 (new TH2F(("d_VS_PM_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC3DC1_3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_PC3DC1_3 (new TH2F(("d_VS_DM_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC3DC1_3", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_PC3DC1_3 (new TH1F(("p_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "prompt PC3DC1_3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_PC3DC1_3 (new TH2F(("pp_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt PC3DC1_3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_PC3DC1_3 (new TH1F(("d_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "delayed PC3DC1_3", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_PC3DC1_3 (new TH2F(("dd_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed PC3DC1_3;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp_PC3DC1_3 (new TH2F(("dp_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "delayed VS prompt PC3DC1_3;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_PC3DC1_3 (new TH2F(("d_VS_DC_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_DC_PC3DC1_3", 1000,0,10000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM_PC3DC1_3 (new TH2F(("d_VS_PM_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_PM_PC3DC1_3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_PC3DC1_3 (new TH2F(("d_VS_DM_PC3DC1_3_"+std::to_string(thread_i)).c_str(), "d_VS_DM_PC3DC1_3", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
       // Paris
       // std::unique_ptr<TH1F> paris_prompt (new TH1F(("paris_prompt_"+std::to_string(thread_i)).c_str(), "paris_prompt;keV", 10000,0,20000));
@@ -220,36 +224,46 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TH2F> ge_VS_BGO_delayed (new TH2F(("ge_VS_BGO_delayed_"+std::to_string(thread_i)).c_str(), "ge_VS_BGO_delayed;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
 
       // Particle trigger (code p)
-      std::unique_ptr<TH1F> p_p (new TH1F(("p_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> pp_p (new TH2F(("pp_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt particle trigger;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_p (new TH1F(("d_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dd_p (new TH2F(("dd_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> dp_p (new TH2F(("dp_p_"+std::to_string(thread_i)).c_str(), "delayed VS prompt particle trigger;Prompt [keV];Delayed [keV]", nb_bins_Ge,0,max_bin_Ge, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> E_dT_p (new TH2F(("E_dT_p_"+std::to_string(thread_i)).c_str(), "E_dT_p clean particle trigger", 600,-100_ns,200_ns, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_p (new TH1F(("p_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> pp_p (new TH2F(("pp_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma prompt particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_p (new TH1F(("d_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_p (new TH2F(("dd_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dp_p (new TH2F(("dp_p_"+std::to_string(thread_i)).c_str(), "delayed VS prompt particle trigger;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> E_dT_p (new TH2F(("E_dT_p_"+std::to_string(thread_i)).c_str(), "E vs time particle trigger", 600,-100_ns,200_ns, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       std::unique_ptr<TH1F> p_calo_p (new TH1F(("p_calo_p_"+std::to_string(thread_i)).c_str(), "prompt calorimetry particle trigger", 2000,0,20000));
       std::unique_ptr<TH1F> d_calo_p (new TH1F(("d_calo_p_"+std::to_string(thread_i)).c_str(), "prompt calorimetry particle trigger", 2000,0,20000));
 
-      std::unique_ptr<TH1F> p_pD (new TH1F(("p_pD_"+std::to_string(thread_i)).c_str(), "prompt particle trigger with delayed;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pP (new TH1F(("d_pP_"+std::to_string(thread_i)).c_str(), "delayed particle trigger with prompt;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pPC5 (new TH1F(("p_pPC5_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC5;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pPC5 (new TH1F(("d_pPC5_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC5;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pPC3 (new TH1F(("p_pPC3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pPC3 (new TH1F(("d_pPC3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pPC2 (new TH1F(("p_pPC2_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC2;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pPC2 (new TH1F(("d_pPC2_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC2;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pDC3 (new TH1F(("p_pDC3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger DC3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pDC3 (new TH1F(("d_pDC3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> p_pDC1_3 (new TH1F(("p_pDC1_3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger DC1_3;keV", nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH1F> d_pDC1_3 (new TH1F(("d_pDC1_3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC1_3;keV", nb_bins_Ge,0,max_bin_Ge));
+      // Prompt trigger and particle (code pP)
+      std::unique_ptr<TH1F> d_pP (new TH1F(("d_pP_"+std::to_string(thread_i)).c_str(), "with prompt gamma, delayed particle trigger;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> dd_pP (new TH2F(("dd_pP_"+std::to_string(thread_i)).c_str(), "with prompt gamma, gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_calo_pP (new TH1F(("d_calo_pP_"+std::to_string(thread_i)).c_str(), "with prompt gamma, prompt calorimetry particle trigger", 2000,0,20000));
 
-      std::unique_ptr<TH2F> p_VS_PM_p (new TH2F(("p_VS_PM_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS prompt mult;prompt mult;prompt [keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PM_p (new TH2F(("d_VS_PM_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS prompt mult;prompt mult;delayed [keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> p_VS_DM_p (new TH2F(("p_VS_DM_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS delayed mult;delayed mult;prompt [keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DM_p (new TH2F(("d_VS_DM_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS delayed mult;delayed mult;delayed [keV]", 20,0,20, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> p_VS_PC_p (new TH2F(("p_VS_PC_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS prompt calorimetry;prompt calorimetry [10 bins/keV]; prompt [keV]", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_PC_p (new TH2F(("d_VS_PC_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS prompt calorimetry;prompt calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> p_VS_DC_p (new TH2F(("p_VS_DC_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; prompt [keV]", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
-      std::unique_ptr<TH2F> d_VS_DC_p (new TH2F(("d_VS_DC_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge,0,max_bin_Ge));
+      std::unique_ptr<TH1F> p_pPC5 (new TH1F(("p_pPC5_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC5;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pPC5 (new TH1F(("d_pPC5_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC5;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> p_pPC3 (new TH1F(("p_pPC3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pPC3 (new TH1F(("d_pPC3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> p_pPC2 (new TH1F(("p_pPC2_"+std::to_string(thread_i)).c_str(), "prompt particle trigger PC2;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pPC2 (new TH1F(("d_pPC2_"+std::to_string(thread_i)).c_str(), "delayed particle trigger PC2;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> p_pDC3 (new TH1F(("p_pDC3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger DC3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pDC3 (new TH1F(("d_pDC3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pPDC3 (new TH1F(("d_pDC3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> p_pDC1_3 (new TH1F(("p_pDC1_3_"+std::to_string(thread_i)).c_str(), "prompt particle trigger DC1_3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pDC1_3 (new TH1F(("d_pDC1_3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC1_3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pPDC1_3 (new TH1F(("d_pPDC1_3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC1_3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pP5DC3 (new TH1F(("d_pPDC1_3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC1_3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH1F> d_pP5DC3 (new TH1F(("d_pPDC1_3_"+std::to_string(thread_i)).c_str(), "delayed particle trigger DC1_3;keV", nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+
+      std::unique_ptr<TH2F> p_VS_PM_p (new TH2F(("p_VS_PM_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS prompt mult;prompt mult;prompt [keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PM_p (new TH2F(("d_VS_PM_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS prompt mult;prompt mult;delayed [keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> p_VS_DM_p (new TH2F(("p_VS_DM_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS delayed mult;delayed mult;prompt [keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_p (new TH2F(("d_VS_DM_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS delayed mult;delayed mult;delayed [keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DM_pP (new TH2F(("d_VS_DM_p_"+std::to_string(thread_i)).c_str(), "with prompt, delayed particle trigger VS delayed mult;delayed mult;delayed [keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> p_VS_PC_p (new TH2F(("p_VS_PC_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS prompt calorimetry;prompt calorimetry [10 bins/keV]; prompt [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PC_p (new TH2F(("d_VS_PC_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS prompt calorimetry;prompt calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_PC_pP (new TH2F(("d_VS_PC_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS prompt calorimetry;prompt calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> p_VS_DC_p (new TH2F(("p_VS_DC_p_"+std::to_string(thread_i)).c_str(), "prompt particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; prompt [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_p (new TH2F(("d_VS_DC_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::unique_ptr<TH2F> d_VS_DC_pP (new TH2F(("d_VS_DC_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
@@ -265,6 +279,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       CloversV2 prompt_clovers;
       CloversV2 delayed_clovers;
+
+      CloversV2 last_prompt_clovers;
+      CloversV2 last_delayed_clovers;
 
       Paris prompt_paris;
       Paris delayed_paris;
@@ -311,7 +328,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           auto const & nrj2 = event.nrj2s[hit_i];
 
           // Remove bad Ge and overflow :
-           if (found(blacklist, label) || find_key(maxE_Ge, label) && nrj>maxE_Ge.at(label)) continue;
+           if (found(blacklist, label) || (find_key(maxE_Ge, label) && nrj>maxE_Ge.at(label))) continue;
 
           // Calibrate the phoswitch :
           if (Paris::is[label])
@@ -319,13 +336,14 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             if (500 < label && label < 600) continue;
             auto const & nrjcal = calibPhoswitches.calibrate(label, nrj, nrj2);
             E_dT_phoswitch->Fill(time, nrjcal);
-            short_vs_long_prompt->Fill(nrj, nrj2);
             if (-10_ns < time && time < 10_ns) 
             {
+              short_vs_long_prompt->Fill(nrj, nrj2);
               prompt_phoswitch.push_back(nrjcal);
             }
             else if (40_ns < time && time < 170_ns) 
             {
+              short_vs_long_delayed->Fill(nrj, nrj2);
               delayed_phoswitch.push_back(nrjcal);
             }
           }
@@ -396,18 +414,22 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         auto const & prompt_calo = prompt_calo_clover + prompt_phoswitch_calo;
         auto const & delayed_calo = delayed_calo_clover + delayed_phoswitch_calo;
-        p_calo->Fill(prompt_calo);
-        d_calo->Fill(delayed_calo);
+        if (0 < p_calo) p_calo->Fill(prompt_calo);
+        if (0 < d_calo) d_calo->Fill(delayed_calo);
         if (prompt_calo > 0 && delayed_calo > 0) dp_calo->Fill(prompt_calo, delayed_calo);
+        if (delayed_calo > 0 && prompt_mult > 0) d_calo_pP->Fill(delayed_calo_clover);
 
         /////// PROMPT CLEAN ///////
         for (size_t loop_i = 0; loop_i<prompt_clovers.GeClean.size(); ++loop_i)
         {
-          auto const & clover_i = prompt_clovers[prompt_clovers.GeClean[loop_i]];
+          auto const & index_i = prompt_clovers.GeClean[loop_i];
+          auto const & clover_i = prompt_clovers[index_i];
           p->Fill(clover_i.nrj);
           E_dT->Fill(clover_i.time, clover_i.nrj);
           p_VS_PM->Fill(prompt_mult, clover_i.nrj);
           p_VS_DM->Fill(delayed_mult, clover_i.nrj);
+
+          if (prompt_mult > 0) p_D->Fill(clover_i.nrj);
 
           if (prompt_calo < 5_MeV) p_PC5->Fill(clover_i.nrj);
           if (prompt_calo < 3_MeV) p_PC3->Fill(clover_i.nrj);
@@ -478,6 +500,15 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & nrj_BGO = prompt_clovers[BGO_i].nrj_BGO;
             ge_VS_BGO_prompt->Fill(nrj_BGO, clover_i.nrj);
           }
+
+          // prompt-prompt background
+          for (auto const & index_j : last_prompt_clovers.GeClean)
+          {
+            auto const & clover_j = last_prompt_clovers[index_j];
+            if (index_i == index_j) continue;
+            pp_bckg->Fill(clover_i.nrj, clover_j.nrj);
+            pp_bckg->Fill(clover_j.nrj, clover_i.nrj);
+          }
           
         }
 
@@ -494,21 +525,29 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           d_VS_PC -> Fill(prompt_calo, clover_i.nrj);
           d_VS_DC -> Fill(delayed_calo, clover_i.nrj);
 
-          if (prompt_calo < 5_MeV) d_PC5->Fill(clover_i.nrj);
-          if (prompt_calo < 3_MeV) d_PC3->Fill(clover_i.nrj);
-          if (prompt_calo < 2_MeV) d_PC2->Fill(clover_i.nrj);
+          if (prompt_mult > 0) d_P->Fill(clover_i.nrj);
+
+          if (prompt_mult > 0 && prompt_calo < 5_MeV) d_PC5->Fill(clover_i.nrj);
+          if (prompt_mult > 0 && prompt_calo < 3_MeV) d_PC3->Fill(clover_i.nrj);
+          if (prompt_mult > 0 && prompt_calo < 2_MeV) d_PC2->Fill(clover_i.nrj);
           if (delayed_calo < 3_MeV) 
           {
             d_DC3->Fill(clover_i.nrj);
-            if (prompt_calo < 3_MeV) d_PC3DC3->Fill(clover_i.nrj);
+            if (prompt_mult > 0 && prompt_calo < 3_MeV) d_PC3DC3->Fill(clover_i.nrj);
             if (1_MeV < delayed_calo) 
             {
               d_DC1_3->Fill(clover_i.nrj);
-              if (prompt_calo < 3_MeV) d_PC3DC1_3->Fill(clover_i.nrj);
+              if (prompt_mult > 0 && prompt_calo < 3_MeV) d_PC3DC1_3->Fill(clover_i.nrj);
             }
           }
           
           
+          for (auto const & index_j : last_delayed_clovers.GeClean)
+          {
+            auto const & clover_j = delayed_clovers[index_j];
+            dd_bckg->Fill(clover_i.nrj, clover_j.nrj);
+            dd_bckg->Fill(clover_j.nrj, clover_i.nrj);
+          }
           // Delayed-delayed :
           for (size_t loop_j = loop_i+1; loop_j<delayed_clovers.GeClean.size(); ++loop_j)
           {
@@ -520,18 +559,23 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             {
               dd_p->Fill(clover_i.nrj, clover_j.nrj);
               dd_p->Fill(clover_j.nrj, clover_i.nrj);
+              if (prompt_mult>0)
+              {
+                dd_pP->Fill(clover_i.nrj, clover_j.nrj);
+                dd_pP->Fill(clover_j.nrj, clover_i.nrj);
+              }
             }
-            if (prompt_calo < 5_MeV)
+            if (prompt_mult > 0 && prompt_calo < 5_MeV)
             {
               dd_PC5->Fill(clover_i.nrj, clover_j.nrj);
               dd_PC5->Fill(clover_j.nrj, clover_i.nrj);
             }
-            if (prompt_calo < 3_MeV)
+            if (prompt_mult > 0 && prompt_calo < 3_MeV)
             {
               dd_PC3->Fill(clover_i.nrj, clover_j.nrj);
               dd_PC3->Fill(clover_j.nrj, clover_i.nrj);
             }
-            if (prompt_calo < 2_MeV)
+            if (prompt_mult > 0 && prompt_calo < 2_MeV)
             {
               dd_PC2->Fill(clover_i.nrj, clover_j.nrj);
               dd_PC2->Fill(clover_j.nrj, clover_i.nrj);
@@ -544,13 +588,13 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               {
                 dd_DC1_3->Fill(clover_i.nrj, clover_j.nrj);
                 dd_DC1_3->Fill(clover_j.nrj, clover_i.nrj);
-                if (prompt_calo < 3_MeV)
+                if (prompt_mult > 0 && prompt_calo < 3_MeV)
                 {
                   dd_PC3DC1_3->Fill(clover_i.nrj, clover_j.nrj);
                   dd_PC3DC1_3->Fill(clover_j.nrj, clover_i.nrj);
                 }
               }
-              if (prompt_calo < 3_MeV)
+              if (prompt_mult > 0 && prompt_calo < 3_MeV)
               {
                   dd_PC3DC3->Fill(clover_i.nrj, clover_j.nrj);
                   dd_PC3DC3->Fill(clover_j.nrj, clover_i.nrj);
@@ -597,9 +641,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & clover_j = prompt_clovers[prompt_clovers.GeClean[loop_j]];
             dp->Fill(clover_j.nrj, clover_i.nrj);
             if (dssd_trigger) dp_p->Fill(clover_j.nrj, clover_i.nrj);
-            if (prompt_calo < 5_MeV) dp_PC5->Fill(clover_j.nrj, clover_i.nrj);
-            if (prompt_calo < 3_MeV) dp_PC3->Fill(clover_j.nrj, clover_i.nrj);
-            if (prompt_calo < 2_MeV) dp_PC2->Fill(clover_j.nrj, clover_i.nrj);
+            if (prompt_mult > 0 && prompt_calo < 5_MeV) dp_PC5->Fill(clover_j.nrj, clover_i.nrj);
+            if (prompt_mult > 0 && prompt_calo < 3_MeV) dp_PC3->Fill(clover_j.nrj, clover_i.nrj);
+            if (prompt_mult > 0 && prompt_calo < 2_MeV) dp_PC2->Fill(clover_j.nrj, clover_i.nrj);
             if (delayed_calo < 3_MeV) dp_DC3->Fill(clover_j.nrj, clover_i.nrj);
             if (delayed_calo < 3_MeV) 
             {
@@ -607,25 +651,25 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               if (1_MeV < delayed_calo) 
               {
                 dp_DC1_3->Fill(clover_j.nrj, clover_i.nrj);
-                if (prompt_calo < 3_MeV) dp_PC3DC1_3->Fill(clover_j.nrj, clover_i.nrj);
+                if (prompt_mult > 0 && prompt_calo < 3_MeV) dp_PC3DC1_3->Fill(clover_j.nrj, clover_i.nrj);
               }
-              if (prompt_calo < 3_MeV) dp_PC3DC3->Fill(clover_j.nrj, clover_i.nrj);
+              if (prompt_mult > 0 && prompt_calo < 3_MeV) dp_PC3DC3->Fill(clover_j.nrj, clover_i.nrj);
             }
           }
 
-          if (prompt_calo < 5_MeV)
+          if (prompt_mult > 0 && prompt_calo < 5_MeV)
           {
             d_VS_DC_PC5->Fill(delayed_calo, clover_i.nrj);
             d_VS_PM_PC5->Fill(prompt_mult, clover_i.nrj);
             d_VS_DM_PC5->Fill(delayed_mult, clover_i.nrj);
           }
-          if (prompt_calo < 3_MeV)
+          if (prompt_mult > 0 && prompt_calo < 3_MeV)
           {
             d_VS_DC_PC3->Fill(delayed_calo, clover_i.nrj);
             d_VS_PM_PC3->Fill(prompt_mult, clover_i.nrj);
             d_VS_DM_PC3->Fill(delayed_mult, clover_i.nrj);
           }
-          if (prompt_calo < 2_MeV)
+          if (prompt_mult > 0 && prompt_calo < 2_MeV)
           {
             d_VS_DC_PC2->Fill(delayed_calo, clover_i.nrj);
             d_VS_PM_PC2->Fill(prompt_mult, clover_i.nrj);
@@ -641,14 +685,14 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               d_VS_DC_DC1_3->Fill(delayed_calo, clover_i.nrj);
               d_VS_PM_DC1_3->Fill(prompt_mult, clover_i.nrj);
               d_VS_DM_DC1_3->Fill(delayed_mult, clover_i.nrj);
-              if (prompt_calo < 3_MeV)
+              if (prompt_mult > 0 && prompt_calo < 3_MeV)
               {
                 d_VS_DC_PC3DC1_3->Fill(delayed_calo, clover_i.nrj);
                 d_VS_PM_PC3DC1_3->Fill(prompt_mult, clover_i.nrj);
                 d_VS_DM_PC3DC1_3->Fill(delayed_mult, clover_i.nrj);
               }
             }
-            if (prompt_calo < 3_MeV)
+            if (prompt_mult > 0 && prompt_calo < 3_MeV)
             {
               d_VS_DC_PC3DC3->Fill(delayed_calo, clover_i.nrj);
               d_VS_PM_PC3DC3->Fill(prompt_mult, clover_i.nrj);
@@ -684,10 +728,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             p_VS_DM_p->Fill(delayed_mult, nrj);
             p_VS_PC_p->Fill(prompt_calo, nrj);
             p_VS_DC_p->Fill(delayed_calo, nrj);
-            if (prompt_mult>0) p_pD->Fill(nrj);
-            if (prompt_calo < 5_MeV) p_pPC5->Fill(nrj);
-            if (prompt_calo < 3_MeV) p_pPC3->Fill(nrj);
-            if (prompt_calo < 2_MeV) p_pPC2->Fill(nrj);
+            if (prompt_mult > 0 && prompt_calo < 5_MeV) p_pPC5->Fill(nrj);
+            if (prompt_mult > 0 && prompt_calo < 3_MeV) p_pPC3->Fill(nrj);
+            if (prompt_mult > 0 && prompt_calo < 2_MeV) p_pPC2->Fill(nrj);
             if (delayed_calo < 3_MeV)
             {
               p_pDC3->Fill(nrj);
@@ -707,14 +750,26 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             d_VS_DM_p->Fill(delayed_mult, nrj);
             d_VS_PC_p->Fill(prompt_calo, nrj);
             d_VS_DC_p->Fill(delayed_calo, nrj);
-            if (prompt_mult>0)d_pP->Fill(nrj);
-            if (prompt_calo < 5_MeV) d_pPC5->Fill(nrj);
-            if (prompt_calo < 3_MeV) d_pPC3->Fill(nrj);
-            if (prompt_calo < 2_MeV) d_pPC2->Fill(nrj);
+            if (prompt_mult>0)
+            {
+              d_pP->Fill(nrj);
+              d_VS_PC_pP->Fill(prompt_calo, nrj);
+              d_VS_DM_pP->Fill(delayed_mult, nrj);
+              d_VS_DC_pP->Fill(delayed_calo, nrj);
+            }
+            if (prompt_mult > 0 && prompt_calo < 5_MeV) d_pPC5->Fill(nrj);
+            if (prompt_mult > 0 && prompt_calo < 3_MeV) d_pPC3->Fill(nrj);
+            if (prompt_mult > 0 && prompt_calo < 2_MeV) d_pPC2->Fill(nrj);
             if (delayed_calo < 3_MeV)
             {
               d_pDC3->Fill(nrj);
-              if (delayed_calo > 1_MeV) d_pDC1_3->Fill(nrj);
+              if (prompt_mult > 0) d_pPDC3->Fill(nrj);
+              if (delayed_calo > 1_MeV) 
+              {
+                d_pDC1_3->Fill(nrj);
+                if (prompt_mult > 0) d_pPDC1_3->Fill(nrj);
+                if (prompt_mult > 0) d_pPDC1_3->Fill(nrj);
+              }
             }
           }
         }
@@ -733,6 +788,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // for (auto const & index : delayed_paris.front().hits_LaBr3) LaBr3_delayed -> Fill(delayed_paris.front().phoswitches[index].nrj);
         // for (auto const & index : delayed_paris.back().hits_LaBr3) LaBr3_delayed -> Fill(delayed_paris.back().phoswitches[index].nrj);
 
+        last_prompt_clovers = prompt_clovers;
+        last_delayed_clovers = delayed_clovers;
+
       }// End events loop
 
       total_hits_number.fetch_add(evt_i, std::memory_order_relaxed);
@@ -744,10 +802,13 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(), "recreate"));
         file->cd();
 
+      print("write standard spectra");
         // Energy :
         pp->Write("pp", TObject::kOverwrite);
+        pp_bckg->Write("pp_bckg", TObject::kOverwrite);
         p->Write("p", TObject::kOverwrite);
         dd->Write("dd", TObject::kOverwrite);
+        dd_bckg->Write("dd_bckg", TObject::kOverwrite);
         d->Write("d", TObject::kOverwrite);
         E_dT->Write("E_dT", TObject::kOverwrite);
         E_dT_phoswitch->Write("E_dT_phoswitch", TObject::kOverwrite);
@@ -757,15 +818,18 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         if (make_triple_coinc_dpp) for (size_t gate_index = 0; gate_index<dpp_gates.size(); ++gate_index) 
           dpp_gated[gate_index]->Write(("dpp_gate_"+std::to_string(dpp_gates[gate_index])).c_str(), TObject::kOverwrite);
 
+        print("write multiplicity spectra");
         // Multiplicity :
         p_mult->Write("p_mult", TObject::kOverwrite);
         d_mult->Write("d_mult", TObject::kOverwrite);
         dp_mult->Write("dp_mult", TObject::kOverwrite);
         p_VS_PM->Write("p_VS_PM", TObject::kOverwrite);
+        p_VS_DM->Write("p_VS_DM", TObject::kOverwrite);
         d_VS_PM->Write("d_VS_PM", TObject::kOverwrite);
         d_VS_PM->Write("d_VS_PM", TObject::kOverwrite);
         d_VS_DM->Write("d_VS_DM", TObject::kOverwrite);
 
+        print("write Calorimetry spectra");
         // Calorimetry :
         p_calo->Write("p_calo", TObject::kOverwrite);
         d_calo->Write("d_calo", TObject::kOverwrite);
@@ -780,6 +844,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         p_calo_clover_VS_p_calo_phoswitch->Write("p_calo_clover_VS_p_calo_phoswitch", TObject::kOverwrite);
         d_calo_clover_VS_d_calo_phoswitch->Write("d_calo_clover_VS_d_calo_phoswitch", TObject::kOverwrite);
 
+        print("write Calorimetry gated spectra");
         p_PC5->Write("p_PC5", TObject::kOverwrite);
         pp_PC5->Write("pp_PC5", TObject::kOverwrite);
         d_PC5->Write("d_PC5", TObject::kOverwrite);
@@ -844,6 +909,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_VS_PM_PC3DC1_3->Write("d_VS_PM_PC3DC1_3", TObject::kOverwrite);
         d_VS_DM_PC3DC1_3->Write("d_VS_DM_PC3DC1_3", TObject::kOverwrite);
 
+        print("write particule gated spectra");
+
         p_p->Write("p_p", TObject::kOverwrite);
         pp_p->Write("pp_p", TObject::kOverwrite);
         d_p->Write("d_p", TObject::kOverwrite);
@@ -852,11 +919,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         E_dT_p->Write("E_dT_p", TObject::kOverwrite);
         p_calo_p->Write("p_calo_p", TObject::kOverwrite);
         d_calo_p->Write("d_calo_p", TObject::kOverwrite);
-        d_VS_PM_p->Write("d_VS_PM_p", TObject::kOverwrite);
-        d_VS_DM_p->Write("d_VS_DM_p", TObject::kOverwrite);
-
-        p_pD->Write("p_pD", TObject::kOverwrite);
+        
         d_pP->Write("d_pP", TObject::kOverwrite);
+        dd_pP->Write("dd_pP", TObject::kOverwrite);
+        d_calo_pP->Write("d_calo_pP", TObject::kOverwrite);
+
         p_pPC5->Write("p_pPC5", TObject::kOverwrite);
         d_pPC5->Write("d_pPC5", TObject::kOverwrite);
         p_pPC3->Write("p_pPC3", TObject::kOverwrite);
@@ -865,24 +932,32 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_pPC2->Write("d_pPC2", TObject::kOverwrite);
         p_pDC3->Write("p_pDC3", TObject::kOverwrite);
         d_pDC3->Write("d_pDC3", TObject::kOverwrite);
+        d_pPDC3->Write("d_pPDC3", TObject::kOverwrite);
         p_pDC1_3->Write("p_pDC1_3", TObject::kOverwrite);
         d_pDC1_3->Write("d_pDC1_3", TObject::kOverwrite);
+        d_pPDC1_3->Write("d_pPDC1_3", TObject::kOverwrite);
+        d_pP5DC3->Write("d_pP5DC3", TObject::kOverwrite);
 
         p_VS_PM_p->Write("p_VS_PM_p", TObject::kOverwrite);
         d_VS_PM_p->Write("d_VS_PM_p", TObject::kOverwrite);
         p_VS_DM_p->Write("p_VS_DM_p", TObject::kOverwrite);
         d_VS_DM_p->Write("d_VS_DM_p", TObject::kOverwrite);
+        d_VS_DM_pP->Write("d_VS_DM_pP", TObject::kOverwrite);
 
         p_VS_PC_p->Write("p_VS_PC_p", TObject::kOverwrite);
         d_VS_PC_p->Write("d_VS_PC_p", TObject::kOverwrite);
+        d_VS_PC_pP->Write("d_VS_PC_pP", TObject::kOverwrite);
         p_VS_DC_p->Write("p_VS_DC_p", TObject::kOverwrite);
         d_VS_DC_p->Write("d_VS_DC_p", TObject::kOverwrite);
+        d_VS_DC_pP->Write("d_VS_DC_pP", TObject::kOverwrite);
 
         // Paris :
         // paris_prompt->Write("paris_prompt", TObject::kOverwrite);
         // paris_delayed->Write("paris_delayed", TObject::kOverwrite);
         // LaBr3_prompt->Write("LaBr3_prompt", TObject::kOverwrite);
         // LaBr3_delayed->Write("LaBr3_delayed", TObject::kOverwrite);
+
+        print("write paris spectra");
 
         short_vs_long_prompt->Write("phoswitches_prompt", TObject::kOverwrite);
         short_vs_long_delayed->Write("phoswitches_delayed", TObject::kOverwrite);

@@ -296,10 +296,21 @@ double peak_integral(TH1* histo, int bin_min, int bin_max, int smooth_background
   delete background;
   return ret;
 }
+std::vector<double> peak_integral(TH1* histo, std::vector<double> energies, int resolution, int smooth_background_it = 20)
+{
+  std::vector<double> ret;
+  auto background = histo->ShowBackground(smooth_background_it);
+  for (auto const & nrj : energies)
+  {
+    ret.push_back(peak_integral(histo, nrj-resolution, nrj+resolution+1, background));
+  }
+  delete background;
+  return ret;
+}
 
 double peak_over_background(TH1* histo, int bin_min, int bin_max, TH1* background)
 {
-  auto const & peak = histo     ->Integral(bin_min, bin_max);
+  auto const & peak = peak_integral(histo, bin_min, bin_max, background);
   auto const & bckg = background->Integral(bin_min, bin_max);
   return peak/bckg;
 }
@@ -324,10 +335,10 @@ double peak_over_total(TH1* histo, int bin_min, int bin_max, int smooth_backgrou
 
 double peak_significance(TH1* histo, int bin_min, int bin_max, TH1* background)
 {
-  auto const & peak = histo     ->Integral(bin_min, bin_max);
-  auto const & bckg = background->Integral(bin_min, bin_max);
-  if (peak == 0) return 0;
-  else return (peak-bckg)/sqrt(peak);
+  auto const & peak_total = histo     ->Integral(bin_min, bin_max);
+  auto const & peak_only = peak_integral(histo, bin_min, bin_max, background);
+  if (peak_total == 0) return 0;
+  else return peak_only/sqrt(peak_total);
 }
 double peak_significance(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
 {
@@ -367,7 +378,7 @@ TH1F* count_to_peak_over_background(TH1* histo, int resolution, int smooth_backg
   std::string title = histo->GetName(); title+=";keV;peak_over_background;";
   auto background = histo->ShowBackground(smooth_background_it);
   auto ret = new TH1F(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
-  for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
+  for (int bin = 0+resolution; bin<histo->GetNbinsX()-resolution; ++bin)
     ret -> SetBinContent(bin, peak_over_background(histo, bin-resolution, bin+resolution, background));
   delete background;
   return ret;

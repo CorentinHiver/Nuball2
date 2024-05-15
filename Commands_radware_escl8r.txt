@@ -3,18 +3,18 @@ AB1      add M1 gammas to top of band in level scheme
 AD       add (combine) a second .gls level scheme file
 AG       add gamma to level scheme
 AL       add level to level scheme
-AT       add general-pupose text labels
+AT       add general-purpose text labels
 CE       change energy labels of levels
 CG       change labels of gammas
 CL       change spin labels of levels
 DB       delete band from level scheme
 DG       delete gamma from level scheme
 DL       delete level from level scheme
-DT       delete general-pupose text labels
+DT       delete general-purpose text labels
 EB       edit parameters of band(s) in level scheme
 EG       edit parameters of gamma(s) in level scheme
 EL       edit parameters of level(s) in level scheme
-ET       edit general-pupose text labels
+ET       edit general-purpose text labels
 
 
 EX       expand level scheme display using cursor
@@ -32,7 +32,7 @@ MG       move gamma in level scheme
 ML       move level between bands
 MM       move multiple bands in level scheme
 MO       move level scheme display using cursor
-MT       move general-pupose text labels
+MT       move general-purpose text labels
 OC       open/close gap in level scheme using cursor
 
 

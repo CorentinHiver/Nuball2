@@ -18,6 +18,24 @@ public:
     CloverModule::resetGlobalLabel(); // This allows to correctly label the CloverModules in other instances of CloversV2  
   };
   inline constexpr auto const & operator[](int const & i) const noexcept { return m_clovers[i]; }
+  CloversV2& operator=(CloversV2 const & other)
+  {
+    calorimetryTotal = other.calorimetryTotal;
+    calorimetryGe = other.calorimetryGe;
+    calorimetryBGO = other.calorimetryBGO;
+    analyzed = other.analyzed;
+
+    for(auto const & clover : Hits) m_clovers[clover].clear();
+    Hits = other.Hits;
+    for(auto const & clover : Hits) m_clovers[clover] = other.m_clovers[clover];
+
+    Ge = other.Ge;
+    BGO = other.BGO;
+    GeClean = other.GeClean;
+    BGOClean = other.BGOClean;
+    Rejected = other.Rejected;
+    return *this;
+  }
 
   static constexpr inline uchar subIndex(Label const & label) noexcept {return uchar_cast((label-23)%6);}
   static constexpr inline bool  isClover(Label const & label) noexcept {return label<200;}

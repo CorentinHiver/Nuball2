@@ -66,6 +66,21 @@ public:
   std::array<float, 6> nrjs;
   std::array<Time, 6> times;
 
+  CloverModule& operator=(CloverModule const & other)
+  {
+    nb = other.nb;
+    nbBGO = other.nbBGO;
+    nrj = other.nrj;
+    nrj_BGO = other.nrj_BGO;
+    time = other.time;
+    time_BGO = other.time_BGO;
+    maxE_Ge = other.maxE_Ge;
+    maxE_Ge_cristal = other.maxE_Ge_cristal;
+    nrjs = other.nrjs;
+    times = other.times;
+    return *this;
+  }
+
 private:
   uchar const m_label;
   static thread_local uchar gLabel;
