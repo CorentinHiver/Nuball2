@@ -1985,6 +1985,9 @@ public:
     }
   }
   auto const & operator[](double const & energy) const {return m_data[int_cast(energy)];}
+  auto const & operator()(double const & energy) const {return m_data[int_cast(energy)];}
+  auto operator() (double const & energy1, double const & energy2) const {return m_data[int_cast(energy1)]*m_data[int_cast(energy2)];}
+  auto operator() (double const & energy1, double const & energy2, double const & energy3) const {return m_data[int_cast(energy1)]*m_data[int_cast(energy2)]*m_data[int_cast(energy3)];}
   auto normalizedValue(double const & energy) const {return m_data[int_cast(energy)]/m_max;}
   auto normalizedCounts(int const & counts, double const & energy) const {return counts*normalizedValue(energy);}
 
