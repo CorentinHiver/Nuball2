@@ -38,13 +38,20 @@ public:
   }
 
   static constexpr inline uchar subIndex(Label const & label) noexcept {return uchar_cast((label-23)%6);}
-  static constexpr inline bool  isClover(Label const & label) noexcept {return label<200;}
+  static constexpr inline bool  isClover(Label const & label) noexcept {return 22 < label && label < 200;}
   static constexpr inline bool  isGe(Label const & label)     noexcept {return (isClover(label) && subIndex(label)>1);}
   static constexpr inline bool  isR2(Label const & label)     noexcept {return (isClover(label) && label > 94);}
   static constexpr inline bool  isR3(Label const & label)     noexcept {return (isClover(label) && label < 95);}
   static constexpr inline bool  isBGO(Label const & label)    noexcept {return (isClover(label) && subIndex(label)<2);}
   /// @brief label = 23 -> index = 0, label = 196 -> index = 23;
   static constexpr inline Label index(Label const & label)    noexcept {return Label_cast((label-23)/6);}
+
+  void operator=(Event const & event)
+  {
+    this->clear();
+    for (int hit_i = 0; hit_i<event.mult; hit_i++) this->fill(event, hit_i);
+    this->analyze();
+  }
 
   bool fill(Event const & event, int const & hit_i)
   {
@@ -87,7 +94,11 @@ public:
       if(Ge_found)
       {
         if (BGO_found) Rejected.push_back(clover_index);
-        else           GeClean.push_back(clover_index);
+        else           
+        {
+          GeClean.push_back(clover_index);
+          clean.push_back(&m_clovers[clover_index]);
+        }
       }
       else if (BGO_found) BGOClean.push_back(clover_index);
       else throw_error("c pas normal ça");
@@ -107,7 +118,10 @@ public:
     GeClean.clear();
     BGOClean.clear();
     Rejected.clear();
+    clean.clear();
   }
+
+  void clear(){reset();}
 
   double calorimetryTotal = 0.0;
   double calorimetryGe = 0.0;
@@ -119,6 +133,7 @@ public:
   std::vector<Label> GeClean;
   std::vector<Label> BGOClean;
   std::vector<Label> Rejected;
+  std::vector<CloverModule*> clean;
 
 private:
   std::array<CloverModule, 24> m_clovers;

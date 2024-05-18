@@ -177,7 +177,7 @@ T minimum_index(std::vector<T> const & vector)
 
 /// @brief Order the vector from lower to higher value
 template <typename T>
-std::vector<int> & bubble_sort(std::vector<T> const & vector, std::vector<int> & ordered_indexes)
+std::vector<size_t> & bubble_sort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
 {
   // Verifications :
   if (vector.size() == 0) {printC(RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", RESET); return ordered_indexes;}

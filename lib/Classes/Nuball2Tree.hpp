@@ -6,6 +6,7 @@
 
 /**
  * @brief Access to the underlying TTree using -> operator (e.g. nuball2tree->GetEntry(n);)
+ * @details
  * 
  */
 class Nuball2Tree
@@ -31,6 +32,18 @@ public:
   operator TTree*() {return m_tree;}
 
   bool const & ok() const {return m_ok;}
+
+  bool readNext()
+  {
+    if (++m_cursor < m_entries)
+    {
+      m_tree->GetEntry(m_cursor);
+      return true;
+    }
+    else return false;
+  }
+
+  auto const & cursor() {return m_cursor;}
   
 private:
   TFile* m_file = nullptr;
@@ -40,6 +53,9 @@ private:
   std::string m_filename;
   std::string m_name = "Nuball2";
   std::string m_title;
+
+  long m_cursor = 0;
+  long m_entries = 0;
 };
 
 bool Nuball2Tree::Open(std::string const & filename)
@@ -77,6 +93,8 @@ bool Nuball2Tree::Open(std::string const & filename)
 
   print("Reading", filename);
   
+  m_entries = m_tree->GetEntries();
+
   return (m_ok = true);
 }
 

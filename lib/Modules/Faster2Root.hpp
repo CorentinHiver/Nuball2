@@ -242,9 +242,9 @@ void Faster2Root::load(int argc, char** argv)
   }
 
   // Checking consistency of parameters :
-  if (m_timeshifts && !m_eventBuilding) 
+  if (m_timeshifts == !m_eventBuilding) 
   {
-    print("This combination of time alignement without event building is not handled");
+    print("Time alignment must be set together with event building");
     throw_error(error_message["DEV"]);
   }
   if (m_use_trigger && !m_eventBuilding)

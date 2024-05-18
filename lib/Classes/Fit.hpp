@@ -96,7 +96,7 @@ public:
   double parameter3 = 0.0;
   double scalefactor = 0.0;
   double keVperADC = 0.0;
-  uchar order = 0;
+  char order = 0;
 
   std::string name;
 

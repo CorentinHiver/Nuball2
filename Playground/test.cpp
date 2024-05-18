@@ -1,21 +1,21 @@
-#include <MTObject.hpp>
-#include "../libRoot.hpp"
+// #include <MTObject.hpp>
+// #include "../libRoot.hpp"
 // #include <Paris.hpp>
-#include <CloversV2.hpp>
+// #include <CloversV2.hpp>
 // #include <Hit.hpp>
 // #include <FasterReader.hpp>
 // #include <Detectors.hpp>
 // #include <Timeshifts.hpp>
 // #include <HitBuffer.hpp>
 // #include <SourceCloverSpectra.hpp>
-#include <Calibration.hpp>
-// #include <Calibrator.hpp>
+// #include <Calibration.hpp>
+#include <Calibrator.hpp>
 // #include <RunMatrixator.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
 // #include <Convertor.hpp>
 // #include <MTRootReader.hpp>
-#include <MTFasterReader.hpp>
+// #include <MTFasterReader.hpp>
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
 // #include <AnalysedSpectra.hpp>
@@ -24,8 +24,8 @@
 // #include <SpectraCo.hpp>
 // #include "../136/Calibrate/calibrate_spectra.C"
 // #include <CobaltCalorimeter.hpp>
-#include <MTTHist.hpp>
-#include <Manip.hpp>
+// #include <MTTHist.hpp>
+// #include <Manip.hpp>
 
 // #include <TROOT.h>
 // #include <TThread.h>
@@ -320,11 +320,20 @@ int main()
 // _____________________________________
 
 
+  Calibrator calib;
+  calib.calculate("~/nuball2/N-SI-136/152Eu_center_2.fast", -1, "152Eu", "fast");
+  calib.verify("test");
+  calib.write("152Eu_before");
+
+
+// ____________________________________
+
+
   // Calibrator calib;
   // calib.loadCalibration("../136/conversion_200ns/136_2024.calib");
   // calib.verbose(true);
   // calib.loadRootHisto("~/faster_data/N-SI-136-U_histo/total/fused_histo.root");
-  // // calib.loadRootHisto("~/faster_data/N-SI-136-sources_histo/152Eu_center.root");
+  // calib.loadRootHisto("~/faster_data/N-SI-136-sources_histo/152Eu_center.root");
   // calib.verify("test");
 
 

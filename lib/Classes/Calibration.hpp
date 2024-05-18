@@ -52,6 +52,36 @@ public:
   void set(Label const & _label, float const & _intercept, float const & _slope, float const & _binom, float const &_trinom);
   std::vector<float> get(Label const & _label) const noexcept;
 
+  void correct(std::string const & filename)
+  {
+    Calibration other(filename);
+    correct(other);
+  }
+
+  void correct(Calibration const & other)
+  {
+    // E = A*ADC+B
+    // E' = A'*ADC+B' (other calibration)
+    // ADC = (E-B)/A = (E'-B')/A'
+    // => E = (A/A')(E'-B')+B
+    // =>   = (A/A')E' - (A/A')B'+B
+    //          a   E' + b
+    // => a = (A/A')   |  b = B - (A/A')B'
+    if (other.m_size != this->m_size) {error(other.m_filename, "not the same size as", m_filename);}
+    for (int label = 0; label<other.m_size; ++label)
+    {
+      // Works only for order == 1 for now
+      if (m_order[label] == other.m_order[label])
+      {
+        if (m_order[label] == 1)
+        {
+          m_slope[label] = m_slope[label]/other.m_slope[label];
+          m_intercept[label] = m_intercept[label] - m_slope[label]*other.m_intercept[label];
+        }
+      }
+    }
+  }
+
   #ifdef FIT_HPP
   void loadFits(Fits const & fits);
   #endif //FIT_HPP

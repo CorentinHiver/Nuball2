@@ -9,7 +9,7 @@ using dType = std::string;
 #define SIZE_LOOKUP 1000
 
 // All detectors lookup tables :
-// Bools isGe    (SIZE_LOOKUP);
+Bools isGe    (SIZE_LOOKUP);
 Bools isBGO   (SIZE_LOOKUP);
 Bools isLaBr3 (SIZE_LOOKUP);
 Bools isEden  (SIZE_LOOKUP);

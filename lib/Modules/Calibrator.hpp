@@ -1,6 +1,7 @@
 #ifndef CALIBRATOR_HPP
 #define CALIBRATOR_HPP
 
+#include "../MTObjects/MTObject.hpp"
 #include "../libRoot.hpp"
 
 #include "../Analyse/SpectraCo.hpp"
@@ -64,6 +65,11 @@ public:
   void writePosPeaks(std::string const & outfilename);
   void writeData(std::string const & outfilename);
   void writeRawRoot(std::string const & outfilename);
+  void write(std::string const & outfilename)
+  {
+    writeData(outfilename);
+    writeRawRoot(outfilename);
+  }
 
   void verify(std::string const & outfilename = "verify");
   void writeCalibratedHisto(std::string const & outfilename);
@@ -747,7 +753,7 @@ void Calibrator::fitCalibration(Fits & fits)
     // If faudrait aussi revoir ce fit ici ! Et éventuellement les erreurs
     auto c1 = new TCanvas(("c_"+fit.name).c_str());
     c1->cd(1);
-    TGraphErrors* gr = new TGraphErrors(nb_pics,x.data(),y.data(),ex.data(),ey.data());
+    TGraphErrors* gr = new TGraphErrors(int_cast(nb_pics),x.data(),y.data(),ex.data(),ey.data());
     gr -> SetName((fit.name+"_gr").c_str());
     TF1* linear(new TF1("lin","pol1")); //Range and number of fit parameters
     gr->Fit(linear,"q");
@@ -795,15 +801,13 @@ void Calibrator::fitCalibration(Fits & fits)
  */
 void Calibrator::analyse2(std::vector<double> peaks)
 {
-  for (auto const & it : detectors.labels())
+  for (auto const & it : detectors.getLabelsMap())
   {
     auto const & name = it.first;
     auto const & label = it.second;
 
-    debug("coucou1");
 
     if (!find_key(m_histos.spectra, label)) {printC(GREY, name, " spectra not found ", RESET); continue;}
-    debug("coucou2");
 
     auto const & rebin = m_rebin[label];
     auto const & threshold = m_threshold[label];
@@ -814,7 +818,6 @@ void Calibrator::analyse2(std::vector<double> peaks)
     auto & spectraCo = m_histos.spectra[label];
     spectraCo.removeBackground(rebin); // Allows for a cleaner peak finding
     spectraCo.derivate2(rebin); // Calculate the second derivative spectra
-    debug("coucou3");
 
     // Finds the peaks and store them in points (vector of pair<int, double>) :
     auto points = spectraCo.findPeaks(threshold, nb_bins_below); 
@@ -826,11 +829,10 @@ void Calibrator::analyse2(std::vector<double> peaks)
     unpack(points, peaks_bins, peaks_value);
 
     // Order the peaks from highest to smallest
-    std::vector<int> m_ordered_indexes; 
+    std::vector<size_t> m_ordered_indexes; 
     bubble_sort(peaks_value, m_ordered_indexes); // Ordered from lower to higher value
     invert(m_ordered_indexes);
 
-    debug("coucou5");
     // Extracts the five highest peaks :
     std::vector<int> five_max_peaks;
     for (size_t index_i = 0; (index_i<peaks.size() && index_i<peaks_bins.size()); index_i++)
@@ -844,7 +846,6 @@ void Calibrator::analyse2(std::vector<double> peaks)
       five_max_peaks.push_back(bin);
     }
     
-    debug("coucou6");
     // Finds the higher energy peak (hep)
     auto const & hep_bin = maximum(five_max_peaks); // highest energy peak bin
     auto const & hep_ADC = spectraCo.getX(hep_bin); // highest energy peak ADC
@@ -858,14 +859,14 @@ void Calibrator::analyse2(std::vector<double> peaks)
     auto const & nb_peaks = peaks.size();
 
     std::vector<double> ADC; ADC.reserve(nb_peaks);
-    debug("coucou7");
     // print(five_max_peaks);
 
-    // for (auto const & peak : peaks)
-    // {
-    //   auto const & dumb_adc = peak/ADC_to_keV;
-    //   print(five_max_peaks);
-    // }
+    for (auto const & peak : peaks)
+    {
+      auto const & dumb_adc = peak/ADC_to_keV;
+      print(dumb_adc, keV_to_ADC);
+    }
+    print(five_max_peaks);
   }
 }
 
@@ -962,7 +963,7 @@ void Calibrator::verify(std::string const & outfilename)
   if (!detectors) throw Detectors::Error();
   std::vector<size_t> nb_det_filled(detectors.nbTypes(), 0);
   print("Verification of the calibration");
-  for (auto const & it : detectors.labels()) 
+  for (auto const & it : detectors.getLabelsMap()) 
   {
     auto const & name = it.first;
     auto const & label = it.second;
@@ -989,7 +990,7 @@ void Calibrator::verify(std::string const & outfilename)
       if (m_calib && m_calib.size()>=label) 
       {
         information("reading Calibration module");
-        information(label, (int)m_calib.order(label), m_calib.intercept(label), m_calib.slope(label));
+        information(label, int_cast(m_calib.order(label)), m_calib.intercept(label), m_calib.slope(label));
         if (fit.order<0) continue;
         fit.order = m_calib.order(label);
         fit.parameter0 = m_calib.intercept(label);

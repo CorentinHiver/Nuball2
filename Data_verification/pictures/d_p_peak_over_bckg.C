@@ -4132,7 +4132,7 @@ void d_p_peak_over_bckg()
    d_p_0_peak_over_background__1->SetTitle("delayed with particle condition");
    d_p_0_peak_over_background__1->SetLineColor(4);
    d_p_0_peak_over_background__1->GetXaxis()->SetTitle("keV");
-   d_p_0_peak_over_background__1->GetXaxis()->SetRange(0, 2000);
+   d_p_0_peak_over_background__1->GetXaxis()->SetRange(0, 1500);
    d_p_0_peak_over_background__1->GetXaxis()->SetLabelFont(42);
    d_p_0_peak_over_background__1->GetXaxis()->SetTitleOffset(1);
    d_p_0_peak_over_background__1->GetXaxis()->SetTitleFont(42);
@@ -8272,7 +8272,7 @@ void d_p_peak_over_bckg()
    d_pP_0_peak_over_background__2->SetTitle("delayed with particle and prompt gamma condition");
    d_pP_0_peak_over_background__2->SetLineColor(8);
    d_pP_0_peak_over_background__2->GetXaxis()->SetTitle("keV");
-   d_pP_0_peak_over_background__2->GetXaxis()->SetRange(0,2000);
+   d_pP_0_peak_over_background__2->GetXaxis()->SetRange(0,1500);
    d_pP_0_peak_over_background__2->GetXaxis()->SetLabelFont(42);
    d_pP_0_peak_over_background__2->GetXaxis()->SetTitleOffset(1);
    d_pP_0_peak_over_background__2->GetXaxis()->SetTitleFont(42);
@@ -8287,159 +8287,197 @@ void d_p_peak_over_bckg()
    d_p_peak_over_bckg->cd();
 
 
-   auto peak_104 = new TMarker(104, 0.55, 42);
-   peak_104->SetMarkerColor(4);
-   peak_104->SetMarkerSize(1.3);
+   int U_color = 4;
+   int U_marker = 42;
+   
+   int contaminant_color = 2;
+   int contaminant_marker = 27;
+
+   int angle_rotation = 35;
+   double U_marker_size = 1.5;
+   double contaminant_marker_size = 1.5;
+
+   auto peak_104 = new TMarker(104, 0.55, U_marker);
+   peak_104->SetMarkerColor(U_color);
+   peak_104->SetMarkerSize(U_marker_size);
    peak_104->Draw("P");
    auto peak_104_text = new TLatex;
+   peak_104_text->SetTextAngle(angle_rotation);
    peak_104_text->SetTextSize(0.020);
-   peak_104_text->DrawLatex(100, 0.6, "104 keV 5^{-}_{oct}#rightarrow3^{-}_{oct}");
+   peak_104_text->DrawLatex(100, 0.65, "104 keV 5^{-}_{oct}#rightarrow3^{-}_{oct}");
    auto peak_105_text = new TLatex;
+   peak_105_text->SetTextAngle(angle_rotation);
    peak_105_text->SetTextSize(0.020);
-   peak_105_text->DrawLatex(100, 0.8, "105 keV 4^{+}_{gs}#rightarrow2^{+}_{gs}");
+   peak_105_text->DrawLatex(95, 0.85, "105 keV 4^{+}_{gs}#rightarrow2^{+}_{gs}");
 
-   auto peak_205 = new TMarker(205, 1.2, 42);
-   peak_205->SetMarkerColor(4);
-   peak_205->SetMarkerSize(1.3);
+   auto peak_162 = new TMarker(162, 0.23, contaminant_marker);
+   peak_162->SetMarkerColor(contaminant_color);
+   peak_162->SetMarkerSize(contaminant_marker_size);
+   peak_162->Draw("P");
+   auto peak_162_text = new TLatex;
+   peak_162_text->SetTextAngle(angle_rotation);
+   peak_162_text->SetTextSize(0.020);
+   peak_162_text->DrawLatex(157, 0.4, "97Zr : 162 keV 7/2^{+}_{K=4-}#rightarrow3/^{+}");
+
+   auto peak_205 = new TMarker(205, 1.2, U_marker);
+   peak_205->SetMarkerColor(U_color);
+   peak_205->SetMarkerSize(U_marker_size);
    peak_205->Draw("P");
    auto peak_205_text = new TLatex;
+   peak_205_text->SetTextAngle(angle_rotation);
    peak_205_text->SetTextSize(0.020);
-   peak_205_text->DrawLatex(200, 1.3, "205 keV 4^{-}_{K=4-}#rightarrow3^{-}_{oct}");
+   peak_205_text->DrawLatex(215, 1.2, "205 keV 4^{-}_{K=4-}#rightarrow3^{-}_{oct}");
 
-   auto peak_222 = new TMarker(222, 0.06, 42);
-   peak_222->SetMarkerColor(4);
-   peak_222->SetMarkerSize(1.3);
+   auto peak_222 = new TMarker(222, 0.06, U_marker);
+   peak_222->SetMarkerColor(U_color);
+   peak_222->SetMarkerSize(U_marker_size);
    peak_222->Draw("P");
    auto peak_222_text = new TLatex;
+   peak_222_text->SetTextAngle(0);
    peak_222_text->SetTextSize(0.020);
-   peak_222_text->DrawLatex(220, -0.2, "222 keV 1^{-}_{K=1-}#rightarrow3^{-}_{oct}");
+   peak_222_text->DrawLatex(220, 0.06, "222 keV 1^{-}_{K=1-}#rightarrow3^{-}_{oct}");
 
-   auto peak_244 = new TMarker(244, 0.47, 42);
-   peak_244->SetMarkerColor(4);
-   peak_244->SetMarkerSize(1.3);
+   auto peak_244 = new TMarker(244, 0.47, U_marker);
+   peak_244->SetMarkerColor(U_color);
+   peak_244->SetMarkerSize(U_marker_size);
    peak_244->Draw("P");
    auto peak_244_text = new TLatex;
+   peak_244_text->SetTextAngle(angle_rotation);
    peak_244_text->SetTextSize(0.020);
-   peak_244_text->DrawLatex(240, 0.6, "244 keV 2^{-}_{K=1-}#rightarrow3^{-}_{oct}");
+   peak_244_text->DrawLatex(240, 0.5, "244 keV 2^{-}_{K=1-}#rightarrow3^{-}_{oct}");
 
-   auto peak_279 = new TMarker(279, 0.41, 42);
-   peak_279->SetMarkerColor(4);
-   peak_279->SetMarkerSize(1.3);
+   auto peak_279 = new TMarker(279, 0.41, U_marker);
+   peak_279->SetMarkerColor(U_color);
+   peak_279->SetMarkerSize(U_marker_size);
    peak_279->Draw("P");
    auto peak_279_text = new TLatex;
+   peak_279_text->SetTextAngle(angle_rotation);
    peak_279_text->SetTextSize(0.020);
-   peak_279_text->DrawLatex(275, 0.5, "279 keV 1^{-}_{K=1-}#rightarrow1^{-}_{oct}");
+   peak_279_text->DrawLatex(275, 0.45, "279 keV 1^{-}_{K=1-}#rightarrow1^{-}_{oct}");
 
-   auto peak_301 = new TMarker(301, 0.45, 42);
-   peak_301->SetMarkerColor(4);
-   peak_301->SetMarkerSize(1.3);
+   auto peak_301 = new TMarker(301, 0.45, U_marker);
+   peak_301->SetMarkerColor(U_color);
+   peak_301->SetMarkerSize(U_marker_size);
    peak_301->Draw("P");
    auto peak_301_text = new TLatex;
+   peak_301_text->SetTextAngle(angle_rotation);
    peak_301_text->SetTextSize(0.020);
-   peak_301_text->DrawLatex(298, 0.55, "301 keV 2^{-}_{K=1-}#rightarrow1^{-}_{oct}");
+   peak_301_text->DrawLatex(305, 0.45, "301 keV 2^{-}_{K=1-}#rightarrow1^{-}_{oct}");
 
-   auto peak_308 = new TMarker(308, 1.10, 42);
-   peak_308->SetMarkerColor(4);
-   peak_308->SetMarkerSize(1.3);
+   auto peak_308 = new TMarker(308, 1.10, U_marker);
+   peak_308->SetMarkerColor(U_color);
+   peak_308->SetMarkerSize(U_marker_size);
    peak_308->Draw("P");
    auto peak_308_text = new TLatex;
+   peak_308_text->SetTextAngle(angle_rotation);
    peak_308_text->SetTextSize(0.020);
-   peak_308_text->DrawLatex(305, 1, "308 keV 4^{-}_{K=4-}#rightarrow3^{-}_{oct}");
+   peak_308_text->DrawLatex(305, 1.1, "308 keV 4^{-}_{K=4-}#rightarrow3^{-}_{oct}");
 
-   auto peak_352 = new TMarker(352, 0.55, 27);
-   peak_352->SetMarkerColor(2);
-   peak_352->SetMarkerSize(1.3);
+   auto peak_352 = new TMarker(352, 0.55, contaminant_marker);
+   peak_352->SetMarkerColor(contaminant_color);
+   peak_352->SetMarkerSize(contaminant_marker_size);
    peak_352->Draw("P");
    auto peak_352_text = new TLatex;
+   peak_352_text->SetTextAngle(angle_rotation);
    peak_352_text->SetTextSize(0.020);
-   peak_352_text->DrawLatex(350, 0.6, "^{95}Sr 352 keV 3/2^{+}#rightarrow1/2^{+}");
+   peak_352_text->DrawLatex(360, 0.55, "^{95}Sr 352 keV 3/2^{+}#rightarrow1/2^{+}");
 
-   auto peak_642 = new TMarker(642, 5.2, 42);
-   peak_642->SetMarkerColor(4);
-   peak_642->SetMarkerSize(1.3);
+   auto peak_642 = new TMarker(642, 5.2, U_marker);
+   peak_642->SetMarkerColor(U_color);
+   peak_642->SetMarkerSize(U_marker_size);
    peak_642->Draw("P");
    auto peak_642_text = new TLatex;
+   peak_642_text->SetTextAngle(angle_rotation);
    peak_642_text->SetTextSize(0.020);
    peak_642_text->DrawLatex(640, 5.3, "642 keV 1^{-}_{oct}#rightarrow4^{+}_{gs}");
 
-   auto peak_688 = new TMarker(688, 1.5, 42);
-   peak_688->SetMarkerColor(4);
-   peak_688->SetMarkerSize(1.3);
+   auto peak_688 = new TMarker(688, 1.5, U_marker);
+   peak_688->SetMarkerColor(U_color);
+   peak_688->SetMarkerSize(U_marker_size);
    peak_688->Draw("P");
    auto peak_688_text = new TLatex;
+   peak_688_text->SetTextAngle(angle_rotation);
    peak_688_text->SetTextSize(0.020);
    peak_688_text->DrawLatex(685, 1.6, "688 keV 1^{-}_{oct}#rightarrow4^{+}_{gs}");
 
-   auto peak_903 = new TMarker(904, 1.3, 42);
-   peak_903->SetMarkerColor(4);
-   peak_903->SetMarkerSize(1.3);
+   auto peak_903 = new TMarker(904, 1.3, U_marker);
+   peak_903->SetMarkerColor(U_color);
+   peak_903->SetMarkerSize(U_marker_size);
    peak_903->Draw("P");
    auto peak_903_text = new TLatex;
+   peak_903_text->SetTextAngle(angle_rotation);
    peak_903_text->SetTextSize(0.020);
    peak_903_text->DrawLatex(900, 1.4, "903 keV 4^{-}_{K=1-}#rightarrow4^{+}_{gs}");
 
-   auto peak_922 = new TMarker(922, 0.6, 42);
-   peak_922->SetMarkerColor(4);
-   peak_922->SetMarkerSize(1.3);
+   auto peak_922 = new TMarker(922, 0.6, U_marker);
+   peak_922->SetMarkerColor(U_color);
+   peak_922->SetMarkerSize(U_marker_size);
    peak_922->Draw("P");
    auto peak_922_text = new TLatex;
+   peak_922_text->SetTextAngle(angle_rotation);
    peak_922_text->SetTextSize(0.020);
    peak_922_text->DrawLatex(915, 0.7, "922 keV 1^{-}_{K=1-}#rightarrow2^{+}_{gs}");
 
-   auto peak_942 = new TMarker(943, 3.55, 42);
-   peak_942->SetMarkerColor(4);
-   peak_942->SetMarkerSize(1.3);
+   auto peak_942 = new TMarker(943, 3.55, U_marker);
+   peak_942->SetMarkerColor(U_color);
+   peak_942->SetMarkerSize(U_marker_size);
    peak_942->Draw("P");
    auto peak_942_text = new TLatex;
+   peak_942_text->SetTextAngle(angle_rotation);
    peak_942_text->SetTextSize(0.020);
    peak_942_text->DrawLatex(940, 3.7, "942 keV 2^{-}_{K=1-}#rightarrow2^{+}_{gs}");
 
-   auto peak_966 = new TMarker(968, 1.75, 42);
-   peak_966->SetMarkerColor(4);
-   peak_966->SetMarkerSize(1.3);
+   auto peak_966 = new TMarker(968, 1.75, U_marker);
+   peak_966->SetMarkerColor(U_color);
+   peak_966->SetMarkerSize(U_marker_size);
    peak_966->Draw("P");
    auto peak_966_text = new TLatex;
+   peak_966_text->SetTextAngle(angle_rotation);
    peak_966_text->SetTextSize(0.020);
    peak_966_text->DrawLatex(965, 1.9, "966 keV 1^{-}_{K=1-}#rightarrow0^{+}_{gs}");
 
-
-   auto peak_95Y = new TMarker(1087, 0.06, 27);
-   peak_95Y->SetMarkerColor(2);
-   peak_95Y->SetMarkerSize(1.3);
+   auto peak_95Y = new TMarker(1087, 0.06, contaminant_marker);
+   peak_95Y->SetMarkerColor(contaminant_color);
+   peak_95Y->SetMarkerSize(contaminant_marker_size);
    peak_95Y->Draw("P");
    auto peak_95Y_text = new TLatex;
+   peak_95Y_text->SetTextAngle(angle_rotation);
    peak_95Y_text->SetTextSize(0.020);
-   peak_95Y_text->DrawLatex(1080, -0.2, "^{95}T 1087 keV 13/2^{+}#rightarrow9/2^{+}");
+   peak_95Y_text->DrawLatex(1080, 0.08, "^{95}Y 1087 keV 13/2^{+}#rightarrow9/2^{+}");
 
-   auto peak_97Zr = new TMarker(1104, 0.6, 27);
-   peak_97Zr->SetMarkerColor(2);
-   peak_97Zr->SetMarkerSize(1.3);
+   auto peak_97Zr = new TMarker(1104, 0.6, contaminant_marker);
+   peak_97Zr->SetMarkerColor(contaminant_color);
+   peak_97Zr->SetMarkerSize(contaminant_marker_size);
    peak_97Zr->Draw("P");
    auto peak_97Zr_text = new TLatex;
+   peak_97Zr_text->SetTextAngle(angle_rotation);
    peak_97Zr_text->SetTextSize(0.020);
    peak_97Zr_text->DrawLatex(1100, 0.65, "^{97}Zr 1104 keV 3/2^{+}#rightarrow1/2^{+}");
 
-   auto peak_133Te = new TMarker(1151, 0.45, 27);
-   peak_133Te->SetMarkerColor(2);
-   peak_133Te->SetMarkerSize(1.3);
+   auto peak_133Te = new TMarker(1151, 0.45, contaminant_marker);
+   peak_133Te->SetMarkerColor(contaminant_color);
+   peak_133Te->SetMarkerSize(contaminant_marker_size);
    peak_133Te->Draw("P");
    auto peak_133Te_text = new TLatex;
+   peak_133Te_text->SetTextAngle(angle_rotation);
    peak_133Te_text->SetTextSize(0.020);
    peak_133Te_text->DrawLatex(1145, 0.5, "^{133}Te 1150 keV 15/2^{-}#rightarrow11/2^{-}");
 
-   auto peak_135Te = new TMarker(1181, 0.15, 27);
-   peak_135Te->SetMarkerColor(2);
-   peak_135Te->SetMarkerSize(1.3);
+   auto peak_135Te = new TMarker(1181, 0.15, contaminant_marker);
+   peak_135Te->SetMarkerColor(contaminant_color);
+   peak_135Te->SetMarkerSize(contaminant_marker_size);
    peak_135Te->Draw("P");
    auto peak_135Te_text = new TLatex;
+   peak_135Te_text->SetTextAngle(angle_rotation);
    peak_135Te_text->SetTextSize(0.020);
    peak_135Te_text->DrawLatex(1175, 0.2, "^{135}Te 1179 keV 11/2^{-}#rightarrow7/2^{-}");
 
-   auto peak_134Te = new TMarker(1280, 1.6, 27);
-   peak_134Te->SetMarkerColor(2);
-   peak_134Te->SetMarkerSize(1.3);
+   auto peak_134Te = new TMarker(1280, 1.6, contaminant_marker);
+   peak_134Te->SetMarkerColor(contaminant_color);
+   peak_134Te->SetMarkerSize(contaminant_marker_size);
    peak_134Te->Draw("P");
    auto peak_134Te_text = new TLatex;
+   peak_134Te_text->SetTextAngle(angle_rotation);
    peak_134Te_text->SetTextSize(0.020);
    peak_134Te_text->DrawLatex(1275, 1.7, "^{134}Te 1279 keV 2^{+}#rightarrow0^{+}");
 
@@ -8477,16 +8515,16 @@ void d_p_peak_over_bckg()
    entry->SetLineColor(1);
    entry->SetLineStyle(1);
    entry->SetLineWidth(1);
-   entry->SetMarkerColor(4);
-   entry->SetMarkerStyle(42);
-   entry->SetMarkerSize(2);
+   entry->SetMarkerColor(U_color);
+   entry->SetMarkerStyle(U_marker);
+   entry->SetMarkerSize(U_marker_size);
    entry->SetTextFont(42);
    entry=leg->AddEntry("Contaminants","Contaminants","p");
    entry->SetLineColor(1);
    entry->SetLineStyle(1);
    entry->SetLineWidth(1);
-   entry->SetMarkerColor(2);
-   entry->SetMarkerStyle(27);
+   entry->SetMarkerColor(contaminant_color);
+   entry->SetMarkerStyle(contaminant_marker);
    entry->SetMarkerSize(2);
    entry->SetTextFont(42);
    leg->Draw();

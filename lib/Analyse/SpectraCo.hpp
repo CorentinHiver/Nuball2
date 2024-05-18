@@ -152,7 +152,7 @@ public:
 
   SpectraCo(std::vector<double> const & _data) :
     m_spectra(_data),
-    m_size(_data.size()),
+    m_size(int_cast(_data.size())),
     m_min_x(0),
     m_max_x(double_cast(m_size))
   {
@@ -160,7 +160,7 @@ public:
   }
 
   SpectraCo(size_t const & size) : 
-    m_size(size),
+    m_size(int_cast(size)),
     m_min_x(0),
     m_max_x(double_cast(m_size))
   {
@@ -585,7 +585,7 @@ void SpectraCo::calibrate(Calibration const & calib, Label const & label)
     std::vector<double> newSpectra(m_size);
     for (int bin = 0; bin<m_size; bin++)
     {
-      auto const & new_bin = calib.apply(bin, label);
+      auto const & new_bin = calib.apply(float_cast(bin), label);
       newSpectra[bin] = this->interpolate(new_bin);
     }
     m_spectra = newSpectra;
@@ -637,7 +637,7 @@ void SpectraCo::calibrate(std::vector<double> const & coeffs)
 void SpectraCo::calibrateAndScale(std::vector<double> const & coeffs)
 {
   if (coeffs.size() < 2) throw_error("in SpectraCo::calibrateAndScale(coeffs) : coeffs size needs to be at least 2 (first coeff is offset and second is scaling)");
-  this->calibrate(sub_vec(coeffs, 0, coeffs.size()-1));
+  this->calibrate(sub_vec(coeffs, 0, int_cast(coeffs.size())-1));
   (*this)*=coeffs.back();
 }
 
@@ -797,8 +797,8 @@ SpectraCo* SpectraCo::derivative2(std::string const & name)
  */
 void SpectraCo::resizeBin(size_t const & new_size)
 {
-  m_max_x = m_max_x * (new_size/double_cast(m_size));
-  m_size = new_size;
+  m_max_x = m_max_x * (double_cast(new_size)/double_cast(m_size));
+  m_size = int_cast(new_size);
   m_spectra.resize(m_size);
   if (m_derivative) m_derivative->resizeBin(new_size);
   m_integral = sum(m_spectra);

@@ -2015,6 +2015,109 @@ TH1D* apply_efficiency(TH1* histo, Efficiency const & eff)
   return ret;
 }
 
+// #ifdef __CINT__
+class Radware
+{public:
+  Radware(TH2F* _bidim) : m_bidim(_bidim)
+  {
+    proj();
+    launch();
+  }
+  void launch()
+  {
+    draw(m_proj);
+    bool finish = false;
+    std::thread root_thread([&finish]()
+    {
+      while(!finish) gPad->WaitPrimitive(); 
+    });
+    // char in[4] = {0};
+    std::string instruction;
+    while(true)
+    {
+      std::cout << "> ";
+      std::getline(std::cin, instruction);
+      if (instruction == "ex") this->ex();
+      // else if (instruction == "root")
+      // {
+      //   print("ROOT interactive mode");
+      //   std::thread thread([&finish, &instruction](){ std::getline(std::cin, instruction);  finish = true;});
+      //   print("Press enter to stop");
+      //   thread.join(); 
+      //   print("Double click on the histogram to finish");
+      //   thread2.join();
+      // }
+      // else
+      // {
+        if (instruction == "") continue;
+        else if (instruction == "st") {finish = true; break;}
+        else if (instruction == "pr") draw(m_proj);
+        else if (instruction == "bd") draw(m_bidim, "colz");
+        else if (isNumber(instruction)) gate(std::stod(instruction));
+        else error("Wrong input...");
+      // }
+    }
+    root_thread.join();
+  }
+
+  void draw(TH1* histo, std::string const & options = "")
+  {
+    if (m_focus) {histo->GetXaxis()->SetRangeUser(m_focus->GetXaxis()->GetXmin(), m_focus->GetXaxis()->GetXmax());}
+    m_focus = histo;
+    m_focus->Draw(options.c_str());
+    gPad->Update();
+
+  }
+
+  void setHist(TH2F* _bidim) 
+  {
+    m_bidim = _bidim;
+    proj();
+  }
+  
+  void proj()
+  {
+    m_proj = static_cast<TH1*> (m_bidim->ProjectionX()->Clone("total projection"));
+    m_proj->SetTitle("total projection");
+    draw(m_proj);
+    m_focus = m_gate;
+  }
+
+  void ex()
+  {
+    auto const & low = selectXPoints(m_focus, "Low edge");
+    auto const & high = selectXPoints(m_focus, "High edge");
+    m_focus->GetXaxis()->SetRangeUser(low, high);
+    draw(m_focus);
+    gPad->Update();
+  }
+
+  void gate(double e)
+  {
+    delete m_gate;
+    auto const & bin = m_bidim->GetXaxis()->FindBin(e);
+    auto const & low_bin = e-2;
+    auto const & high_e = e+2;
+    m_gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_bin, high_e)->Clone((std::to_string(bin)+" g").c_str()));
+    m_gate->SetTitle((std::to_string(bin)+" gate").c_str());
+    draw(m_gate);
+  }
+
+  ~Radware()
+  {
+    delete m_bidim;
+    delete m_proj;
+    delete m_gate;
+    // delete m_focus;
+  }
+
+  TH2F* m_bidim = nullptr;
+  TH1* m_proj = nullptr;
+  TH1* m_gate = nullptr;
+  TH1* m_focus = nullptr;
+};
+
+// #endif //__CINT__
 
 
 void libRoot()

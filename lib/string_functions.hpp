@@ -123,13 +123,23 @@ std::string rpCommaWDots(std::string str)
 }
 
 
-/// @brief Returns true if all its characters are digits
+/// @brief Returns true if all its characters are digits (allows E to represent power and . for decimal)
 bool isNumber(std::string const & string)
 {
+  if (string.size() < 1) return false;
+  int nb_E = 0;
+  int nb_points = 0;
   for (auto const & c : string)
   {
-    if (!(isdigit(c) || "E")) return false;
+    if (!(isdigit(c)))
+    {
+      if (c == 'E') ++nb_E; 
+      else if (c == '.') ++nb_points;
+      else if (c == '+' || c == '-') continue;
+      else return false;
+    } 
   }
+  if (nb_E>1 || nb_points>1) return false;
   return true;
 }
 

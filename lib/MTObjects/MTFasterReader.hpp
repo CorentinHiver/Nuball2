@@ -21,7 +21,7 @@
  * 
  *        MTObject::Initialise(nb_threads)
  * 
- * Then instanciate this class :
+ * Then instantiate this class :
  * 
  *        MTFasterReader reader(folder_name, first_n_files);
  * 
@@ -31,7 +31,7 @@
  * 
  *        reader.readRaw(function, arguments...);
  * 
- * Carefull : this function MUST have the following arguments is this EXACT order : 
+ * Careful : this function MUST have the following arguments is this EXACT order : 
  * 
  *        return_type function(Hit & hit, FasterReader & reader, arguments...)
  * 
@@ -64,7 +64,7 @@
  *         // Do something with the argument like print(some_argument) or some_argument.Write()
  *      }
  * 
- * Here are two function examples. The third parameter has been instanciated before the MTFasterReader::readRaw() method call
+ * Here are two function examples. The third parameter has been instantiated before the MTFasterReader::readRaw() method call
  *      
  *        void counter(Hit & hit, FasterReader & reader, MTCounter & counterMT)
  *         {
@@ -165,7 +165,7 @@ bool MTFasterReader::s_progressBar = false;
 //////////////////////////////
 /** 
  * @brief Reads many faster files in parallel
- * @param func: Function used on each file in parallel. CAREFULL : must be a function or a static method
+ * @param func: Function used on each file in parallel. CAREFUL : must be a function or a static method
  * @details
  * The declared function MUST have its two first parameters as follow : type function(Hit & hit, FasterReader & reader, ...);
  * You can add any other parameter in the ..., but then you have to call them in the readRaw method call
@@ -191,7 +191,7 @@ inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
   // MTObject::parallelise_function(Read<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
     std::string filename;
-    CoProgressBar progress(&m_MTfiles.getIndex(), float_cast(m_MTfiles.size()));
+    CoProgressBar<size_t> progress(&m_MTfiles.getIndex(), float_cast(m_MTfiles.size()));
     while(nextFilename(filename))
     {
       if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
