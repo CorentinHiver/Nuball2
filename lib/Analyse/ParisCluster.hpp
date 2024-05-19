@@ -98,7 +98,50 @@ class ParisCluster
 public:
   ParisCluster() : m_label(gLabel) {gLabel++; this -> Initialise(); ParisModule::reset_g_label();}
   void Initialise();
-  void InitialiseBidims();
+  static void InitialiseBidims();
+  static void printArrays()
+  {
+    print("Positions : ");
+    std::cout << "     "       << " " << "     "       << " " << positions[24] << " " << positions[25] << " " << positions[26] << " " << "     "       << " " << "     "       << std::endl;
+    std::cout << "     "       << " " << positions[23] << " " << positions[ 8] << " " << positions[ 9] << " " << positions[10] << " " << positions[11] << " " << "     "       << std::endl;
+    std::cout << positions[35] << " " << positions[22] << " " << positions[ 0] << " " << positions[ 1] << " " << positions[ 2] << " " << positions[12] << " " << positions[27] << std::endl;
+    std::cout << positions[34] << " " << positions[21] << " " << positions[ 7] << " " << "     "       << " " << positions[ 3] << " " << positions[13] << " " << positions[28] << std::endl;
+    std::cout << positions[33] << " " << positions[20] << " " << positions[ 6] << " " << positions[ 5] << " " << positions[ 4] << " " << positions[14] << " " << positions[29] << std::endl;
+    std::cout << "     "       << " " << positions[19] << " " << positions[18] << " " << positions[17] << " " << positions[16] << " " << positions[15] << " " << "     "       << std::endl;
+    std::cout << "     "       << " " << "     "       << " " << positions[32] << " " << positions[31] << " " << positions[30] << " " << "     "       << " " << "     "       << std::endl;
+    print("_____________________");
+    print("Distances : ");
+    std::cout << std::setw(4) << "";
+    for (size_t i = 0; i<positions.size(); i++)
+    {
+      std::cout << std::setw(4) << i;
+    }
+    print();
+    print();
+    std::cout << std::fixed << std::setprecision(1);
+    for (size_t i = 0; i<positions.size(); i++) 
+    {
+      std::cout << std::setw(4) << i;
+      for (size_t j = 0; j<positions.size(); j++)
+      {
+        std::cout << std::setw(4) << distances[i][j];
+      }
+      print();
+    }
+    print();
+    for (size_t i = 0; i<positions.size(); i++) 
+    {
+      print(positions[i], ":");
+      std::cout << std::setw(5) << " "              << std::setw(5) << " "              << std::setw(5) << distances[i][24] << std::setw(5) << distances[i][25] << std::setw(5) << distances[i][26] << std::setw(5) << " "              << std::setw(5) << " "              << std::endl;
+      std::cout << std::setw(5) << " "              << std::setw(5) << distances[i][23] << std::setw(5) << distances[i][ 8] << std::setw(5) << distances[i][ 9] << std::setw(5) << distances[i][10] << std::setw(5) << distances[i][11] << std::setw(5) << " "              << std::endl;
+      std::cout << std::setw(5) << distances[i][35] << std::setw(5) << distances[i][22] << std::setw(5) << distances[i][ 0] << std::setw(5) << distances[i][ 1] << std::setw(5) << distances[i][ 2] << std::setw(5) << distances[i][12] << std::setw(5) << distances[i][27] << std::endl;
+      std::cout << std::setw(5) << distances[i][34] << std::setw(5) << distances[i][21] << std::setw(5) << distances[i][ 7] << std::setw(5) << " "              << std::setw(5) << distances[i][ 3] << std::setw(5) << distances[i][13] << std::setw(5) << distances[i][28] << std::endl;
+      std::cout << std::setw(5) << distances[i][33] << std::setw(5) << distances[i][20] << std::setw(5) << distances[i][ 6] << std::setw(5) << distances[i][ 5] << std::setw(5) << distances[i][ 4] << std::setw(5) << distances[i][14] << std::setw(5) << distances[i][29] << std::endl;
+      std::cout << std::setw(5) << " "              << std::setw(5) << distances[i][19] << std::setw(5) << distances[i][18] << std::setw(5) << distances[i][17] << std::setw(5) << distances[i][16] << std::setw(5) << distances[i][15] << std::setw(5) << " "              << std::endl;
+      std::cout << std::setw(5) << " "              << std::setw(5) << " "              << std::setw(5) << distances[i][32] << std::setw(5) << distances[i][31] << std::setw(5) << distances[i][30] << std::setw(5) << " "              << std::setw(5) << " "              << std::endl;
+      print();
+    }
+  }
   void reset();
   void fill(Event const & event, int const & hit_i, uchar const & label);
   void analyze();
@@ -108,8 +151,8 @@ public:
 
   ParisPhoswitch & operator[] (int const & i) {return phoswitches[i];}
 
-  std::array<PositionXY, n>  positions;
-  std::array<std::array<float, n>, n> distances;
+  static std::array<PositionXY, n>  positions;
+  static std::array<std::array<double, n>, n> distances;
 
   std::array<ParisPhoswitch, n> phoswitches;
   std::array<ParisModule, n> modules;
@@ -141,7 +184,10 @@ template<size_t n>
 Time ParisCluster<n>::timewindow = 10_ns;
 
 template<size_t n>
-double ParisCluster<n>::distance_max = 2;
+std::array<PositionXY, n> ParisCluster<n>::positions;
+
+template<size_t n>
+std::array<std::array<double, n>, n> ParisCluster<n>::distances = {{0}};
 
 template<size_t n>
 thread_local uchar ParisCluster<n>::gLabel = 0;
@@ -156,16 +202,19 @@ template<size_t n>
 void ParisCluster<n>::InitialiseBidims()
 {
   // Filling the positions of the detectors :  
-  auto const & i_min_R2 = Paris_R1_x.size();
-  auto const & i_min_R3 = Paris_R1_x.size()+Paris_R2_x.size();
+  auto const & i_min_R2 = ParisArrays::Paris_R1_x.size();
+  auto const & i_min_R3 = ParisArrays::Paris_R1_x.size()+ParisArrays::Paris_R2_x.size();
 #ifdef MULTITHREADING 
-  lock_mutex lock(MTObject::mutex);
+  std::lock_guard<std::recursive_mutex> lock(intialisation_mutex);
+  printC("Initializing ParisCluster<",n,"> position and distance lookup tables in thread ", MTObject::getThreadIndex());
+#else
+  printC("Initializing ParisCluster<",n,"> position and distance lookup tables");
 #endif //MULTITHREADING
-  for (size_t i = 1; i<positions.size(); i++)
+  for (size_t i = 0; i<positions.size()+1; i++)
   {
-         if (i<i_min_R2 ) positions[i] = PositionXY(Paris_R1_x[i-1       ], Paris_R1_y[i-1       ]); // Ring 1
-    else if (i<i_min_R3)  positions[i] = PositionXY(Paris_R2_x[i-i_min_R2], Paris_R2_y[i-i_min_R2]); // Ring 2
-    else                  positions[i] = PositionXY(Paris_R3_x[i-i_min_R3], Paris_R3_y[i-i_min_R3]); // Ring 3
+         if (i<i_min_R2) positions[i] = PositionXY(ParisArrays::Paris_R1_x[i           ], ParisArrays::Paris_R1_y[i           ]); // Ring 1
+    else if (i<i_min_R3) positions[i] = PositionXY(ParisArrays::Paris_R2_x[i-i_min_R2], ParisArrays::Paris_R2_y[i-i_min_R2]); // Ring 2
+    else                 positions[i] = PositionXY(ParisArrays::Paris_R3_x[i-i_min_R3], ParisArrays::Paris_R3_y[i-i_min_R3]); // Ring 3
   }
 
   // Filling the distance lookup table :
@@ -178,6 +227,7 @@ void ParisCluster<n>::InitialiseBidims()
       distances[j][i] = distance;
     }
   }
+  // printArrays();
 }
 
 template<size_t n>

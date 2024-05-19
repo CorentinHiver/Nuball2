@@ -5,22 +5,22 @@ class PositionXY
 {
 public:
   PositionXY(){}
-  PositionXY(Float_t const & x, Float_t const & y) : m_x(x), m_y(y) {}
+  PositionXY(double const & x, double const & y) : m_x(x), m_y(y) {}
   PositionXY(PositionXY const & pos) {*this = pos;}
   void operator= (PositionXY const & pos) {Set(pos.x(), pos.y());}
-  void inline Set(Float_t const & x, Float_t const & y) {m_x = x; m_y = y;}
+  void inline Set(double const & x, double const & y) {m_x = x; m_y = y;}
 
-  Float_t const & x() const {return m_x;}
-  Float_t const & y() const {return m_y;}
+  double const & x() const {return m_x;}
+  double const & y() const {return m_y;}
 
-  static inline Float_t distance(PositionXY const & coord_1, PositionXY const & coord_2)
+  static inline double distance(PositionXY const & coord_1, PositionXY const & coord_2)
   {
     auto const dx = coord_2.x()-coord_1.x();
     auto const dy = coord_2.y()-coord_1.y();
-    return (TMath::Sqrt(dx*dx+dy*dy));
+    return (sqrt(dx*dx+dy*dy));
   }
 
-  inline Float_t distance(PositionXY const & coord_2)
+  inline double distance(PositionXY const & coord_2)
   {
     return distance(*this, coord_2);
   }
@@ -28,13 +28,14 @@ public:
   void Print() {print("x :", m_x, "y : ", m_y);}
 
 private:
-  Float_t m_x = 0;
-  Float_t m_y = 0;
+  double m_x = 0;
+  double m_y = 0;
 };
 
 std::ostream& operator<< (std::ostream& out, PositionXY const & pos)
 {
-  out << "x : " << pos.x() <<  " y : " << pos.y();
+  // out << "x : " << pos.x() <<  " y : " << pos.y();
+  out << std::setw(2) << pos.x() << ";" << std::setw(2) <<  pos.y();
   return out;
 }
 #endif //POSITIONXY_H

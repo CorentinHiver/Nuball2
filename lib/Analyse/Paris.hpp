@@ -4,37 +4,54 @@
 #include "../Classes/Event.hpp"
 #include "../Classes/Detectors.hpp"
 #include "../Classes/CoProgressBar.hpp"
+std::recursive_mutex intialisation_mutex;
 #include "Arrays/Paris.h"
 #include "ParisCluster.hpp"
 #include "ParisBidimAngles.hpp"
 
-PositionXY paris_getPositionModule(std::size_t const & module_label)
-{
-       if (module_label<8)  return PositionXY(Paris_R1_x[module_label],  Paris_R1_y[module_label]);
-  else if (module_label<24) return PositionXY(Paris_R2_x[module_label-8],  Paris_R2_y[module_label-8]);
-  else                      return PositionXY(Paris_R3_x[module_label-24],  Paris_R3_y[module_label-24]);
-}
+// deprecated ??
+// PositionXY paris_getPositionModule(std::size_t const & module_label)
+// {
+//        if (module_label<8)  return PositionXY(ParisArrays::Paris_R1_x[module_label]   ,  ParisArrays::Paris_R1_y[module_label]);
+//   else if (module_label<24) return PositionXY(ParisArrays::Paris_R2_x[module_label-8] ,  ParisArrays::Paris_R2_y[module_label-8]);
+//   else                      return PositionXY(ParisArrays::Paris_R3_x[module_label-24],  ParisArrays::Paris_R3_y[module_label-24]);
+// }
 
 class Paris
 {
 public:
+  constexpr static size_t cluster_size = 36ul;
   // ________________________________________________________________ //
   // ------------------  Setting the lookup tables ------------------ //
   //  ---- From labels to index ---- //
   bool static is_paris(Label const & l)
   {
-    return (l<paris_labels[0] || l>paris_labels.back())
+    auto const & labels = ParisArrays::paris_labels;
+    return (l<labels[0] || l>labels.back())
            ? false
-           : std::binary_search(paris_labels.begin(), paris_labels.end(), l);
+           : std::binary_search(labels.begin(), labels.end(), l);
   }
 
+  /// @brief From a given label, returns its index in the ParisArrays::paris_labels array (lib/Analyse/Arrays/Paris.h)
   uchar static label_to_index (Label const & l)
   {
+    auto const & labels = ParisArrays::paris_labels;
     if (is_paris(l))
     {
-      return static_cast<uchar> ( std::find(paris_labels.begin(), paris_labels.end(), l) - paris_labels.begin() );
+      return static_cast<uchar> ( std::find(labels.begin(), labels.end(), l) - labels.begin() );
     }
     else return -1;
+  }
+
+  static Label label(uchar const & cluster, uchar const & index)
+  {
+    if (index>cluster_size) {error (index,"> cluster size (=",cluster_size,")"); return -1;}
+    
+    auto const & paris_index = (cluster)*cluster_size+index;
+
+    if (paris_index>ParisArrays::paris_labels.size()){error (index,"> paris number of labels (=",ParisArrays::paris_labels.size(),")"); return -1;}
+    
+    return ParisArrays::paris_labels[paris_index];
   }
 
   static std::array<bool,  1000> is     ; // Does the label correspond to a Paris ?
@@ -42,10 +59,10 @@ public:
   static std::array<uchar, 1000> index  ; // Link the label to the module's index in the cluster
 
   // ---- Initialization of static arrays ---- //
-  void static InitialiseArrays()
+  static void InitialiseArrays()
   {
   #ifdef MULTITHREADING 
-    lock_mutex lock(MTObject::mutex);
+    std::lock_guard<std::recursive_mutex> lock(intialisation_mutex);
   #endif //MULTITHREADING
     if (!s_initialised)
     {
@@ -58,8 +75,9 @@ public:
       {
         is[l]  = is_paris(l);
         cluster[l] = static_cast<uchar> (l>500);
-        index[l] = label_to_index(l)%(paris_labels.size()/2);
+        index[l] = label_to_index(l)%cluster_size;
       }
+      ParisCluster<cluster_size>::InitialiseBidims();
       s_initialised = true;
     }
   }
@@ -78,8 +96,8 @@ public:
   
   StaticVector<uchar> Hits;
 
-  ParisCluster<36> clusterBack;
-  ParisCluster<36> clusterFront;
+  ParisCluster<cluster_size> clusterBack;
+  ParisCluster<cluster_size> clusterFront;
 
   // ______________________________________________________________ //
 
@@ -182,16 +200,16 @@ void inline Paris::analyze()
 
 /**
  * In the following, we treat Paris Qlong VS Qshort calibration plots in order to obtain the angles necessary for rotation or orthogonalization.
- * This has been used with 22Na source.
- * The first step is to click on the main peaks, which writes a ParisAnglesFile
+ * This has successfully been used with 22Na source so far.
+ * The first step is to click on the main peaks (511 and 1274 for 22Na), which writes a ParisAnglesFile
  * Reading this file allows one to extract :
  *  the angle between the abscises axis and the LaBr3(CeBr3) diagonal
  *  the angle between the abscises axis and the NaI diagonal
  *  the angle between the internal addback anti-diagonal and the LaBr3(CeBr3) diagonal
  * 
- * The first two are used in the orthogonalization method (not written yet), the third is the angle of rotation 
+ * The first two are used in the orthogonalization method (not written yet), the third is the angle for rotation method 
  * 
- * Check the rotation method using rotate() function
+ * Check the rotation method result on the qlong vs qshort plot using rotate() function
  * 
  * Rotate and project on Qlong axis allows for a "phoswitch" calibration.
  */

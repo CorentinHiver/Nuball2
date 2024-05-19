@@ -17,6 +17,11 @@
 #include "../MTObjects/MTRootReader.hpp"
 #include "../MTObjects/MTTHist.hpp"
 
+// class CalibrationPoints
+// {
+//   CalibrationPoints()
+// };
+
 /**
  * @brief Allows one to calculate and verify calibration coefficients for various sources and detectors for Nuball2
  * @todo Calibrator::verify() DO NOT SUPPORT multithreading with MTObject !!
