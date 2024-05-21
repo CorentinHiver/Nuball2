@@ -256,7 +256,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH1F d_p (new TH1F(("d_p_"+std::to_string(thread_i)).c_str(), "delayed particle trigger;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F dd_p (new TH2F(("dd_p_"+std::to_string(thread_i)).c_str(), "gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dp_p (new TH2F(("dp_p_"+std::to_string(thread_i)).c_str(), "delayed VS prompt particle trigger;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
-      unique_TH2F E_dT_p (new TH2F(("E_dT_p_"+std::to_string(thread_i)).c_str(), "E vs time particle trigger", 600,-100_ns,200_ns, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F E_dT_p (new TH2F(("E_dT_p_"+std::to_string(thread_i)).c_str(), "E vs time particle trigger", 600,-100_ns,200_ns, nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F p_calo_p (new TH1F(("p_calo_p_"+std::to_string(thread_i)).c_str(), "prompt calorimetry particle trigger", 2000,0,20000));
       unique_TH1F d_calo_p (new TH1F(("d_calo_p_"+std::to_string(thread_i)).c_str(), "prompt calorimetry particle trigger", 2000,0,20000));
 
@@ -311,19 +311,34 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F dd_ExP (new TH2F(("dd_ExP_"+std::to_string(thread_i)).c_str(), "with correct excitation energy, gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dd_ExSIP (new TH2F(("dd_ExSIP_"+std::to_string(thread_i)).c_str(), "with best excitation energy, gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
-      constexpr static int bins_sum_Ge = 10000;
-      constexpr static int max_sum_Ge = 20000;
+      constexpr static int bins_sum_Ge = 2500;
+      constexpr static int max_sum_Ge = 5000;
       unique_TH2F d_VS_sum_C2 (new TH2F(("d_VS_sum_C2_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_P (new TH2F(("d_VS_sum_C2_P_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_pP (new TH2F(("d_VS_sum_C2_pP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge, particle + prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_ExP (new TH2F(("d_VS_sum_C2_ExP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge, particle + good Ex;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
-      unique_TH2F d_VS_sum_C2_ExSIP (new TH2F(("d_VS_sum_C2_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
-      unique_TH2F d_VS_sum_C_ExSIP (new TH2F(("d_VS_sum_C_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_sum_C2_ExSIP (new TH2F(("d_VS_sum_C2_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_sum_C_pP (new TH2F(("d_VS_sum_C_pP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_sum_C_ExP (new TH2F(("d_VS_sum_C_ExP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, particle + prompt;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_sum_C_ExSIP (new TH2F(("d_VS_sum_C_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_sum_Ge_pP (new TH2F(("d_VS_sum_Ge_pP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_sum_Ge_ExP (new TH2F(("d_VS_sum_Ge_ExP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, particle + prompt;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_sum_Ge_ExSIP (new TH2F(("d_VS_sum_Ge_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      
+      unique_TH2F dirty_d_VS_sum_C2 (new TH2F(("dirty_d_VS_sum_C2_"+std::to_string(thread_i)).c_str(), "dirty delayed Ge VS sum of two clean Ge;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dirty_d_VS_sum_C2_P (new TH2F(("dirty_d_VS_sum_C2_P_"+std::to_string(thread_i)).c_str(), "dirty delayed Ge VS sum of two clean Ge, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dirty_d_VS_sum_C2_pP (new TH2F(("dirty_d_VS_sum_C2_pP_"+std::to_string(thread_i)).c_str(), "dirty delayed Ge VS sum of two clean Ge, particle + prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dirty_d_VS_sum_C2_ExP (new TH2F(("dirty_d_VS_sum_C2_ExP_"+std::to_string(thread_i)).c_str(), "dirty delayed Ge VS sum of two clean Ge, particle + good Ex;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dirty_d_VS_sum_C2_ExSIP (new TH2F(("dirty_d_VS_sum_C2_ExSIP_"+std::to_string(thread_i)).c_str(), "dirty delayed Ge VS sum of two clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dirty_d_VS_sum_C_pP (new TH2F(("dirty_d_VS_sum_C_pP_"+std::to_string(thread_i)).c_str(), "dirty delayed Ge VS sum of all clean Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dirty_d_VS_sum_C_ExP (new TH2F(("dirty_d_VS_sum_C_ExP_"+std::to_string(thread_i)).c_str(), "dirty delayed Ge VS sum of all clean Ge, particle + prompt;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dirty_d_VS_sum_C_ExSIP (new TH2F(("dirty_d_VS_sum_C_ExSIP_"+std::to_string(thread_i)).c_str(), "dirty delayed Ge VS sum of all clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      
       unique_TH2F Ex_vs_dC_sum (new TH2F(("Ex_vs_dC_sum_"+std::to_string(thread_i)).c_str(), "Ex VS sum of all delayed clean Ge;E sum [keV]; E DSSD [keV]", bins_sum_Ge,0,max_sum_Ge, bins_Ex,0,max_Ex));
       unique_TH2F Ep_vs_dC_sum_P (new TH2F(("Ep_vs_dC_sum_P_"+std::to_string(thread_i)).c_str(), "E dssd VS sum of all delayed clean Ge;E sum [keV]; E DSSD [keV]", bins_sum_Ge,0,max_sum_Ge, bins_Ex,0,max_Ex));
       
-      unique_TH2F p_VS_DC_ExSIP (new TH2F(("p_VS_DC_ExSIP_"+std::to_string(thread_i)).c_str(), "prompt Ge VS delayed Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
-      unique_TH2F d_VS_DC_ExSIP (new TH2F(("d_VS_DC_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS delayed Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]",2000,0,20000,  nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F p_VS_DC_ExSIP (new TH2F(("p_VS_DC_ExSIP_"+std::to_string(thread_i)).c_str(), "prompt Ge VS delayed Ge, particle + best Ex for SI;Delayed calorimetry [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_DC_ExSIP (new TH2F(("d_VS_DC_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS delayed Ge, particle + best Ex for SI;Delayed calorimetry [keV]; E#gamma_{delayed}[keV]",2000,0,20000,  nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
@@ -331,9 +346,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       chain->Add(file.c_str());
       print("Reading", file);
 
-      std::string outFolder = "data/";
-      // std::string outFolder = "data/"+trigger+"/";
-      std::string out_filename = outFolder+filename;
+      std::string outFolder = "data/"+trigger+"/";
+      // std::string out_filename = outFolder+filename;
 
       Event event;
       event.reading(chain, "ltTEQ");
@@ -488,6 +502,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // auto const & delayed_paris_mult = delayed_paris.Hits.size();
         auto const & prompt_mult = prompt_clover_mult + prompt_paris_mult;
         auto const & delayed_mult = delayed_clover_mult + delayed_paris_mult;
+
+        auto const & delayed_Ge_mult = delayed_clovers.Ge.size();
+        bool Gemult[10] = {false}; Gemult[delayed_Ge_mult] = true;
         auto const & delayed_C_mult = delayed_clovers.GeClean.size();
         bool Cmult[10] = {false}; Cmult[delayed_C_mult] = true;
 
@@ -877,7 +894,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           if (prompt_mult > 0)
           {
             Emiss__P->Fill(Emiss);
-            Emiss_VS_Edelayed_p__P->Fill(delayed_calo, Emiss);
+            if (delayed_calo>0) Emiss_VS_Edelayed_p__P->Fill(delayed_calo, Emiss);
           }
         }
 
@@ -973,10 +990,10 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
                 }
               }
             }
-            
           }
         }
 
+        // Clean Ge sum
         if (Cmult[2])
         {
           auto const & Ge0 = delayed_clovers[delayed_clovers.GeClean[0]];
@@ -1005,14 +1022,81 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             }
           }
         }
-
-        if (prompt_mult > 0 && delayed_C_mult > 1)
+        
+        if (prompt_mult > 0)
         {
-          double sum_Ge = 0;
-          for (auto const & clover : delayed_clovers.clean) sum_Ge+=clover->nrj;
-          for (auto const & clover : delayed_clovers.clean) d_VS_sum_C_ExSIP->Fill(sum_Ge, clover->nrj);
-          if (Ex_p > 0 && sum_Ge>0) Ex_vs_dC_sum->Fill(sum_Ge, Ex_p);
-          if (dssd_energy > 0) Ep_vs_dC_sum_P->Fill(sum_Ge, dssd_energy);
+          double sum_clean_Ge = 0;
+          for (auto const & clover : delayed_clovers.clean) sum_clean_Ge+=clover->nrj;
+          double sum_all_Ge = 0;
+          for (auto const & clover_index : delayed_clovers.Ge) sum_clean_Ge+=delayed_clovers[clover_index].nrj;
+          for (auto const & clover : delayed_clovers.clean) 
+          {
+            if (dssd_trigger) 
+            {
+              if (sum_clean_Ge>0) d_VS_sum_C_pP->Fill(sum_clean_Ge, clover->nrj);
+              if (sum_all_Ge>0)   d_VS_sum_Ge_pP->Fill(sum_all_Ge, clover->nrj);
+            }
+            if (Ex_p>0)
+            {
+              if (sum_clean_Ge>0)
+              {
+                d_VS_sum_C_ExP->Fill(sum_clean_Ge, clover->nrj);
+                if (4_MeV < Emiss && Emiss < 6.5_MeV) d_VS_sum_C_ExSIP->Fill(sum_clean_Ge, clover->nrj);
+              }
+              if (sum_all_Ge>0)
+              {
+                d_VS_sum_Ge_ExP->Fill(sum_all_Ge, clover->nrj);
+                if (4_MeV < Emiss && Emiss < 6.5_MeV) d_VS_sum_Ge_ExSIP->Fill(sum_all_Ge, clover->nrj);
+              }
+            }
+          }
+          if (Ex_p > 0 && sum_clean_Ge>0) Ex_vs_dC_sum->Fill(sum_clean_Ge, Ex_p);
+          if (dssd_energy > 0) Ep_vs_dC_sum_P->Fill(sum_clean_Ge, dssd_energy);
+        }
+        
+        // Dirty Ge sum
+        if (Gemult[2])
+        {
+          auto const & Ge0 = delayed_clovers[delayed_clovers.Ge[0]];
+          auto const & Ge1 = delayed_clovers[delayed_clovers.Ge[1]];
+          auto const & Esum = Ge0.nrj + Ge1.nrj;
+          dirty_d_VS_sum_C2->Fill(Esum, Ge0.nrj);
+          dirty_d_VS_sum_C2->Fill(Esum, Ge1.nrj);
+          if (prompt_mult > 0)
+          {
+            dirty_d_VS_sum_C2_P->Fill(Esum, Ge0.nrj);
+            dirty_d_VS_sum_C2_P->Fill(Esum, Ge1.nrj);
+          }
+          if (dssd_trigger && prompt_mult > 0)
+          {
+            dirty_d_VS_sum_C2_pP->Fill(Esum, Ge0.nrj);
+            dirty_d_VS_sum_C2_pP->Fill(Esum, Ge1.nrj);
+            if (Ex_p > 0)
+            {
+              dirty_d_VS_sum_C2_ExP->Fill(Esum, Ge0.nrj);
+              dirty_d_VS_sum_C2_ExP->Fill(Esum, Ge1.nrj);
+              if (4_MeV < Ex_p && Ex_p < 6.5_MeV)
+              {
+                dirty_d_VS_sum_C2_ExSIP->Fill(Esum, Ge0.nrj);
+                dirty_d_VS_sum_C2_ExSIP->Fill(Esum, Ge1.nrj);
+              }
+            }
+          }
+        }
+        
+        if (prompt_mult > 0 && delayed_C_mult > 1 && )
+        {
+          double sum_clean_Ge = 0;
+          for (auto const & clover : delayed_clovers.clean) sum_clean_Ge+=clover->nrj;
+          for (auto const & clover : delayed_clovers.clean) 
+          {
+            if (dssd_trigger) dirty_d_VS_sum_C_pP->Fill(sum_clean_Ge, clover->nrj);
+            if (Ex_p>0)
+            {
+              dirty_d_VS_sum_C_ExP->Fill(sum_clean_Ge, clover->nrj);
+              if (4_MeV < Emiss && Emiss < 6.5_MeV) dirty_d_VS_sum_C_ExSIP->Fill(sum_clean_Ge, clover->nrj);
+            }
+          }
         }
 
 
@@ -1201,7 +1285,22 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_VS_sum_C2_pP->Write("d_VS_sum_C2_pP", TObject::kOverwrite);
         d_VS_sum_C2_ExP->Write("d_VS_sum_C2_ExP", TObject::kOverwrite);
         d_VS_sum_C2_ExSIP->Write("d_VS_sum_C2_ExSIP", TObject::kOverwrite);
+        d_VS_sum_C_pP->Write("d_VS_sum_C_pP", TObject::kOverwrite);
+        d_VS_sum_C_ExP->Write("d_VS_sum_C_ExP", TObject::kOverwrite);
         d_VS_sum_C_ExSIP->Write("d_VS_sum_C_ExSIP", TObject::kOverwrite);
+        d_VS_sum_Ge_pP->Write("d_VS_sum_Ge_pP", TObject::kOverwrite);
+        d_VS_sum_Ge_ExP->Write("d_VS_sum_Ge_ExP", TObject::kOverwrite);
+        d_VS_sum_Ge_ExSIP->Write("d_VS_sum_Ge_ExSIP", TObject::kOverwrite);
+
+        dirty_d_VS_sum_C2->Write("dirty_d_VS_sum_C2", TObject::kOverwrite);
+        dirty_d_VS_sum_C2_P->Write("dirty_d_VS_sum_C2_P", TObject::kOverwrite);
+        dirty_d_VS_sum_C2_pP->Write("dirty_d_VS_sum_C2_pP", TObject::kOverwrite);
+        dirty_d_VS_sum_C2_ExP->Write("dirty_d_VS_sum_C2_ExP", TObject::kOverwrite);
+        dirty_d_VS_sum_C2_ExSIP->Write("dirty_d_VS_sum_C2_ExSIP", TObject::kOverwrite);
+        dirty_d_VS_sum_C_pP->Write("dirty_d_VS_sum_C_pP", TObject::kOverwrite);
+        dirty_d_VS_sum_C_ExP->Write("dirty_d_VS_sum_C_ExP", TObject::kOverwrite);
+        dirty_d_VS_sum_C_ExSIP->Write("dirty_d_VS_sum_C_ExSIP", TObject::kOverwrite);
+
         Ex_vs_dC_sum->Write("Ex_vs_dC_sum", TObject::kOverwrite);
         Ep_vs_dC_sum_P->Write("Ep_vs_dC_sum_P", TObject::kOverwrite);
         

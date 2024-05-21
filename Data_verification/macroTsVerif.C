@@ -1,26 +1,57 @@
+#include "../lib/MTObjects/MTObject.hpp"
 #include "../lib/libRoot.hpp"
+#include "../lib/MTObjects/MTList.hpp"
 #include "../lib/Classes/FilesManager.hpp"
+#include "../lib/Classes/Nuball2Tree.hpp"
+
+int max_cursor = 1.e7;
 void macroTsVerif()
 {
-  FilesManager files(Path::home()+"nuball2/N-SI-136-root_all/Timeshifts/");
-  TH2F* dT_per_run = new TH2F("dT_per_run", "dT_per_run", 100,50,150, 1000,-750000,750000);
-  TH2F* dT_per_run_RF = new TH2F("dT_per_run_RF", "dT_per_run_RF", 100,50,150, 800,-100000,300000);
-  for (auto const & file : files)
-  {
-    auto run_number = std::stoi(split(rmPathAndExt(file), '_')[1]);
-    auto tFile(TFile::Open(file.c_str(), "READ"));
-
-    auto dT_per_run_file = tFile->Get<TH2F>("All corrected time spectra");
-    auto dT_per_run_RF_file = tFile->Get<TH2F>("All_corrected_time_spectra_RF");
-
-    auto dT_per_run_proj = dT_per_run_file->ProjectionY();
-    auto dT_per_run_RF_proj = dT_per_run_file->ProjectionY();
-
-    for (int bin = 0; bin<1000; bin++) dT_per_run->SetBinContent(bin, run_number, dT_per_run_proj->GetBinContent(bin));
-    for (int bin = 0; bin<800; bin++) dT_per_run_RF->SetBinContent(bin, run_number, dT_per_run_RF_proj->GetBinContent(bin));
-  }
-  new TCanvas;
-  dT_per_run->Draw("colz");
-  new TCanvas;
-  dT_per_run_RF->Draw("colz");
+  std::string trigger = "dC1";
+  Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
+  FilesManager files(data_path.string(), -1);
+  MTList MTfiles(files.get());
+  MTObject::Initialise(10);
+  MTObject::adjustThreadsNumber(files.size());
+  std::string outfile = "data/"+trigger+"_ts_verif.root";
+  auto outFile(TFile::Open(outfile.c_str(), "recreate"));
+  std::mutex write_mutex;
+  MTObject::parallelise_function([&](){
+    std::string file;
+    while(MTfiles.getNext(file))
+    {
+      auto const & filename = removePath(file);
+      auto const & run_name = removeExtension(filename);
+      // auto const & run_number = std::stoi(split(run_name, '_')[1]);
+      Nuball2Tree tree(file);
+      Event event(tree, "TE");
+      print("Reading", file);
+      unique_TH2F dT_label (new TH2F(("E_dT_"+run_name).c_str(),( "dT VS label clean "+run_name).c_str(), 1000,0,1000, 600,-100_ns,200_ns));
+      dT_label->SetDirectory(nullptr);
+      
+      while(tree.readNext())
+      {
+        for (int hit_i = 0; hit_i<event.mult; ++hit_i)
+        {
+          auto const & label = event.labels[hit_i];
+          auto const & time = event.times[hit_i];
+          dT_label->Fill(label, time);
+        }
+      }
+      outFile->cd();
+      dT_label->Write();
+    }
+  });
+  outFile->Close();
 }
+
+#ifndef __CINT__
+int main(int argc, char** argv)
+{
+  if (argc == 2) max_cursor = int_cast(std::stod(argv[1]));
+  macroTsVerif();
+  return 1;
+}
+#endif //__CINT__
+// g++ -g -o exec macroTsVerif.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
+// g++ -O2 -o exec macroTsVerif.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17

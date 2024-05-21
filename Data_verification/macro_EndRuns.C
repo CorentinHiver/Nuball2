@@ -129,5 +129,5 @@ int main(int argc, char** argv)
   return 1;
 }
 #endif //__CINT__
-// g++ -g -o macro_EndRuns macro_EndRuns.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
-// g++ -O2 -o macro_EndRuns macro_EndRuns.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17
+// g++ -g -o exec macro_EndRuns.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
+// g++ -O2 -o exec macro_EndRuns.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17

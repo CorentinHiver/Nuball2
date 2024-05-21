@@ -127,11 +127,11 @@ char Trigger136::choice = -1;
 std::map<char, std::string> Trigger136::names = 
 {
   {-1,"all"},
-  {0, "P"},
+  {0, "p"},
   {1, "M3G1"},
-  {2, "P_M3G1"},
-  {3, "PM2G1"},
-  {4, "P_M4G1"},
+  {2, "p_M3G1"},
+  {3, "pM2G1"},
+  {4, "p_M4G1"},
   {5, "M4G1"},
   {6, "G2"},
   {7, "C2"},
@@ -142,6 +142,6 @@ std::map<char, std::string> Trigger136::names =
   {12, "dC2"}
 };
 
-std::string Trigger136::legend = "Legend : P = Particle | G = Germanium | M = Module | C = Clean Germanium | _ = OR | p = Prompt | d = Delayed";
+std::string Trigger136::legend = "Legend : p = Particle | G = Germanium | M = Module | C = Clean Germanium | _ = OR | p = Prompt | d = Delayed";
 
 #endif // COUNTER136_HPP

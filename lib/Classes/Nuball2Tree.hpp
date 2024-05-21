@@ -25,6 +25,7 @@ public:
   void Close() {if (m_file_opened) {m_file -> Close(); m_file_opened = false; delete m_file;} else {print(m_filename, "not open");}}
 
   auto const & filename() {return m_filename;}
+  auto cd() {return m_file->cd();}
 
   TTree* get() {return m_tree;}
   auto const get() const {return m_tree;}
