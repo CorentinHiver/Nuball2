@@ -20,12 +20,16 @@ void macroTsVerif()
     std::string file;
     while(MTfiles.getNext(file))
     {
+      if (tree.cursor()%(int)(1.e+6) == 0) 
+      {
+        printC(nicer_double(tree.cursor(), 0), "hits");
+        if (max_cursor>0 && tree.cursor() > max_cursor) break;
+      }
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
       // auto const & run_number = std::stoi(split(run_name, '_')[1]);
       Nuball2Tree tree(file);
       Event event(tree, "TE");
-      print("Reading", file);
       unique_TH2F dT_label (new TH2F(("E_dT_"+run_name).c_str(),( "dT VS label clean "+run_name).c_str(), 1000,0,1000, 600,-100_ns,200_ns));
       dT_label->SetDirectory(nullptr);
       
