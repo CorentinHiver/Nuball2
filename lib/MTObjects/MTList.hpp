@@ -25,6 +25,7 @@ public:
 
   bool getNext(T & t);
   bool getNext(T & t, size_t & index);
+  bool operator>>(T & t) {return getNext(t);}
   void resetRead() {m_read_index = 0;}
   auto & getIndex() {return m_read_index;}
   void clear() {m_collection.clear();}

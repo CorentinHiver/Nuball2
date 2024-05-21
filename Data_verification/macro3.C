@@ -277,6 +277,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       // Excitation energy trigger (code Ex, ExSI = 4 MeV < Ex < 6.5 MeV)
       constexpr int bins_Ex = 1000;
       constexpr double max_Ex = 10000;
+      unique_TH2F Ex_p_VS_ring (new TH2F(("Ex_p_VS_ring_"+std::to_string(thread_i)).c_str(), "excitation energy proton VS ring number;Excitation energy [keV]" , 20,0,20, bins_Ex,0,max_Ex));
       unique_TH2F p_VS_Ex_p (new TH2F(("p_VS_Ex_p_"+std::to_string(thread_i)).c_str(), "prompt Ge VS excitation energy proton;Excitation energy [keV];keV" , bins_Ex,0,max_Ex, nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F d_VS_Ex_p__P (new TH2F(("d_VS_Ex_p__P_"+std::to_string(thread_i)).c_str(), "delayed Ge VS excitation energy proton;Excitation energy [keV];keV", bins_Ex,0,max_Ex, nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F Ex_histo (new TH1F(("Ex_histo_"+std::to_string(thread_i)).c_str(), "Excitation energy;keV", bins_Ex,0,max_Ex));
@@ -793,6 +794,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         double Ex_p = ExcitationEnergy::bad_value; // d stands for proton detected
         auto const & sector_mult = sector_labels.size();
         auto const & ring_mult = ring_labels.size();
+        auto const & ring_label = 0;
 
 
         // As many rings and sector fired
@@ -800,7 +802,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         {
           if (sector_mult == 1)
           {
-            Ex_p = Ex(sector_energy[0], ring_labels[0]);
+            ring_label = ring_labels[0];
+            Ex_p = Ex(sector_energy[0], ring_label);
           }
           // else; // Maybe to be improved
         }
@@ -832,6 +835,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         if (Ex_p>0) 
         {
           Ex_histo->Fill(Ex_p);
+          Ex_p_VS_ring->Fill(Ex_p);
           if (prompt_mult > 0)
           {
             auto const & Emiss = Ex_p-prompt_calo;

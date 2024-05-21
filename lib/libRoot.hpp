@@ -2037,7 +2037,8 @@ class Radware
     {
       std::cout << "> ";
       std::getline(std::cin, instruction);
-      if (instruction == "ex") this->ex();
+      if (instruction == "") continue;
+      else if (instruction == "ex") this->ex();
       // else if (instruction == "root")
       // {
       //   print("ROOT interactive mode");
@@ -2049,11 +2050,12 @@ class Radware
       // }
       // else
       // {
-        if (instruction == "") continue;
         else if (instruction == "st") {finish = true; break;}
-        else if (instruction == "pr") draw(m_proj);
-        else if (instruction == "bd") draw(m_bidim, "colz");
-        else if (isNumber(instruction)) gate(std::stod(instruction));
+        else if (instruction == "pr") this->draw(m_proj);
+        else if (instruction == "bd") this->draw(m_bidim, "colz");
+        else if (instruction == "in") this->integral();
+        else if (instruction == "bi") this->set_nb_it_bckg();
+        else if (isNumber(instruction)) this->gate(std::stod(instruction));
         else error("Wrong input...");
       // }
     }
@@ -2072,14 +2074,14 @@ class Radware
   void setHist(TH2F* _bidim) 
   {
     m_bidim = _bidim;
-    proj();
+    this->proj();
   }
   
   void proj()
   {
     m_proj = static_cast<TH1*> (m_bidim->ProjectionX()->Clone("total projection"));
     m_proj->SetTitle("total projection");
-    draw(m_proj);
+    this->draw(m_proj);
     m_focus = m_gate;
   }
 
@@ -2088,7 +2090,7 @@ class Radware
     auto const & low = selectXPoints(m_focus, "Low edge");
     auto const & high = selectXPoints(m_focus, "High edge");
     m_focus->GetXaxis()->SetRangeUser(low, high);
-    draw(m_focus);
+    this->draw(m_focus);
     gPad->Update();
   }
 
@@ -2100,7 +2102,17 @@ class Radware
     auto const & high_e = e+2;
     m_gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_bin, high_e)->Clone((std::to_string(bin)+" g").c_str()));
     m_gate->SetTitle((std::to_string(bin)+" gate").c_str());
-    draw(m_gate);
+    this->draw(m_gate);
+  }
+
+  void integral()
+  {
+    double start, stop;
+    print("Choose borne inf");
+    std::cin >> start;
+    print("Choose borne sup");
+    std::cin >> stop;
+    print(peak_integral(m_focus, start, stop, m_nb_it_bckg));
   }
 
   ~Radware()
@@ -2111,6 +2123,14 @@ class Radware
     // delete m_focus;
   }
 
+  void set_nb_it_bckg()
+  {
+    print("Choose iterations number for automatic background research");
+    std::cin >> m_nb_it_bckg;
+  }
+
+private:
+  int m_nb_it_bckg = 20;
   TH2F* m_bidim = nullptr;
   TH1* m_proj = nullptr;
   TH1* m_gate = nullptr;

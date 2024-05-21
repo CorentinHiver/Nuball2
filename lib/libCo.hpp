@@ -444,6 +444,13 @@ public:
     static constexpr bool value = decltype(test<T>(0))::value;
 };
 
+// -- unordered_set -- //
+
+template<class T>
+bool found (std::unordered_set<T> set, T const & e)
+{
+  return set.find(e) != set.end();
+}
 
 ///////////
 // MATHS //

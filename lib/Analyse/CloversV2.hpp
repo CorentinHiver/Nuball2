@@ -49,7 +49,14 @@ public:
   void operator=(Event const & event)
   {
     this->clear();
-    for (int hit_i = 0; hit_i<event.mult; hit_i++) this->fill(event, hit_i);
+    for (int hit_i = 0; hit_i<event.mult; hit_i++) 
+    {
+      if (event.nrjs[hit_i] < threshold) continue;// Energy threshold
+      auto const & label = event.labels[hit_i];
+      if (found(blacklist, label)) continue;// Bad detectors
+      if (found(maxE_Ge, label) && event.nrjs[hit_i] > maxE_Ge[label]) continue; // Overflow
+      this->fill(event, hit_i);
+    }
     this->analyze();
   }
 
@@ -135,9 +142,13 @@ public:
   std::vector<Label> Rejected;
   std::vector<CloverModule*> clean;
 
+  static std::unordered_set<Label> blacklist;
+  static std::unordered_map<Label, double> maxE_Ge;
+
 private:
   std::array<CloverModule, 24> m_clovers;
   bool analyzed = false;
+  constexpr static double threshold = 5; // 5 keV
 };
 
 std::ostream & operator << (std::ostream & os, CloversV2 const & clovers) noexcept

@@ -10,7 +10,8 @@
 void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
   // std::string trigger = "PrM1DeC1";
-  std::string trigger = "dC1";
+  // std::string trigger = "dC1";
+  std::string trigger = "22Na";
   // std::string trigger = "C2";
   // std::string trigger = "P";
   Timer timer;
@@ -23,10 +24,13 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   bool delayed_each_bidim = true;
   bool print_array = false;
   bool verbose = false;
+  int max_mult = 10;
 
   Calibration calibNaI("../136/coeffs_NaI.calib");
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
-  Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
+  std::string data_pat_str = "~/nuball2/N-SI-136-root_"+trigger+"/merged/";
+  if (trigger == "22Na") data_pat_str = "~/nuball2/N-SI-136-root_"+trigger+"/merged/";
+  Path data_path(data_pat_str);
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
   MTObject::Initialise(nb_threads);
@@ -61,13 +65,27 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         if (delayed_each_bidim) delayed_each_nrjcal_VS_nrj.emplace(label, new TH2F(("delayed_each_nrjcal_VS_nrj_"+thread_i_str+label_str).c_str(), 
           ("energy phoswitch vs qshort delayed"+label_str+";keV").c_str(), 1000,0,10000, 1000,0,10000));
 
-        prompt_each_phoswitch .emplace(label, new TH1F(("prompt_each_phoswitch" +thread_i_str+"_"+label_str).c_str(), ("prompt_each_phoswitch_"+label_str).c_str(), 1000,0,10000));
-        delayed_each_phoswitch.emplace(label, new TH1F(("delayed_each_phoswitch"+thread_i_str+"_"+label_str).c_str(), ("delayed_each_phoswitch_"+label_str).c_str(), 1000,0,10000));
+        prompt_each_phoswitch .emplace(label, new TH1F(("prompt_each_phoswitch" +thread_i_str+"_"+label_str).c_str(), ("prompt_each_phoswitch_"+label_str).c_str(), 2000,0,20000));
+        delayed_each_phoswitch.emplace(label, new TH1F(("delayed_each_phoswitch"+thread_i_str+"_"+label_str).c_str(), ("delayed_each_phoswitch_"+label_str).c_str(), 2000,0,20000));
 
-        prompt_each_module .emplace(label, new TH1F(("prompt_each_module" +thread_i_str+"_"+label_str).c_str(), ("prompt_each_module_"+label_str).c_str(), 1000,0,10000));
-        delayed_each_module.emplace(label, new TH1F(("delayed_each_module"+thread_i_str+"_"+label_str).c_str(), ("delayed_each_module_"+label_str).c_str(), 1000,0,10000));
+        prompt_each_module .emplace(label, new TH1F(("prompt_each_module" +thread_i_str+"_"+label_str).c_str(), ("prompt_each_module_"+label_str).c_str(), 2000,0,20000));
+        delayed_each_module.emplace(label, new TH1F(("delayed_each_module"+thread_i_str+"_"+label_str).c_str(), ("delayed_each_module_"+label_str).c_str(), 2000,0,20000));
       }
 
+      unique_TH1F prompt_front_phoswitch (new TH1F(("prompt_front_phoswitch_"+thread_i_str).c_str(), "prompt_front_phoswitch", 2000,0,20000));
+      unique_TH1F prompt_back_phoswitch (new TH1F(("prompt_back_phoswitch_"+thread_i_str).c_str(), "prompt_back_phoswitch", 2000,0,20000));
+      unique_TH1F delayed_front_phoswitch (new TH1F(("delayed_front_phoswitch_"+thread_i_str).c_str(), "delayed_front_phoswitch", 2000,0,20000));
+      unique_TH1F delayed_back_phoswitch (new TH1F(("delayed_back_phoswitch_"+thread_i_str).c_str(), "delayed_back_phoswitch", 2000,0,20000));
+      unique_TH1F prompt_front_module (new TH1F(("prompt_front_module_"+thread_i_str).c_str(), "prompt_front_module", 2000,0,20000));
+      unique_TH1F prompt_back_module (new TH1F(("prompt_back_module_"+thread_i_str).c_str(), "prompt_back_module", 2000,0,20000));
+      unique_TH1F delayed_front_module (new TH1F(("delayed_front_module_"+thread_i_str).c_str(), "delayed_front_module", 2000,0,20000));
+      unique_TH1F delayed_back_module_class (new TH1F(("delayed_back_module_class_"+thread_i_str).c_str(), "delayed_back_module_class", 2000,0,20000));
+      unique_TH1F prompt_front_module_class (new TH1F(("prompt_front_module_class_"+thread_i_str).c_str(), "prompt_front_module_class", 2000,0,20000));
+      unique_TH1F prompt_back_module_class (new TH1F(("prompt_back_module_class_"+thread_i_str).c_str(), "prompt_back_module_class", 2000,0,20000));
+      unique_TH1F delayed_front_module_class (new TH1F(("delayed_front_module_class_"+thread_i_str).c_str(), "delayed_front_module_class", 2000,0,20000));
+      unique_TH1F delayed_back_module_class (new TH1F(("delayed_back_module_class_"+thread_i_str).c_str(), "delayed_back_module_class", 2000,0,20000));
+      unique_TH1F addback_count (new TH1F(("addback_count_"+thread_i_str).c_str(), "addback_count", 1000,0,1000));
+      unique_TH1F addback_probability (new TH1F(("addback_probability_"+thread_i_str).c_str(), "addback_probability", 1000,0,1000));
       // unique_TH1F LaBr3_cristal_prompt (new TH1F(("LaBr3_cristal_prompt_"+thread_i_str).c_str(), "LaBr3_cristal_prompt;keV", 10000,0,20000));
       // unique_TH1F NaI_cristal_prompt   (new TH1F(("NaI_cristal_prompt_"+thread_i_str).c_str()  , "NaI_cristal_prompt;keV"  , 10000,0,20000));
       
@@ -90,7 +108,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       print("Reading", file);
 
       std::string outFolder = "data/"+trigger+"/";
-      std::string out_filename = outFolder+filename;
+      std::string out_filename = outFolder+run_name+"_paris_verif.root";
 
       Event event;
       event.reading(chain, "ltTEQ");
@@ -124,6 +142,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::vector<uchar>  delayed_paris_module_back_index;
       std::vector<Time>  delayed_paris_module_back_time;
 
+      Paris prompt_paris;
+      Paris delayed_paris;
+
       std::vector<size_t> hits_added;
 
       int evt_i = 1;
@@ -132,6 +153,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         if (evt_i%freq_hit_display == 0) print(nicer_double(evt_i, 0), "events");
 
         chain->GetEntry(evt_i);
+
+        if (max_mult < event.mult) continue;
+
+        prompt_paris.clear();
+        delayed_paris.clear();
 
         prompt_phoswitch_front_energy.clear();
         prompt_phoswitch_front_label.clear();
@@ -159,52 +185,64 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         delayed_paris_module_back_index.clear();
         delayed_paris_module_back_time.clear();
 
+        
+
+
+
+
         for (int hit_i = 0; hit_i < event.mult; hit_i++)
         {
           auto const & label = event.labels[hit_i];
           auto const & time  = event.times [hit_i];
-          auto const & nrj   = event.nrjs  [hit_i];
+          auto       & nrj   = event.nrjs  [hit_i];
           auto const & nrj2  = event.nrj2s [hit_i];
 
           if (Paris::is[label])
           {
             // Calibrate the phoswitch :
-            auto const & nrjcal = calibPhoswitches.calibrate(label, nrj, nrj2);
+            auto const nrjraw = nrj;
+            nrj = calibPhoswitches.calibrate(label, nrj, nrj2);
             if (-5_ns < time && time < 5_ns) // Prompt
             {
-              prompt_each_phoswitch[label]->Fill(nrjcal);
-              prompt_each_nrjcal_VS_nrj[label]->Fill(nrj, nrjcal);
+              prompt_paris.fill(event, hit_i);
+              prompt_each_phoswitch[label]->Fill(nrj);
+              prompt_each_nrjcal_VS_nrj[label]->Fill(nrjraw, nrj);
               if (Paris::cluster[label] == 0)
               {
-                prompt_phoswitch_back_energy.push_back(nrjcal);
+                prompt_back_phoswitch->Fill(nrj);
+                prompt_phoswitch_back_energy.push_back(nrj);
                 prompt_phoswitch_back_label.push_back(label);
                 prompt_phoswitch_back_time.push_back(time);
               }
               else if (Paris::cluster[label] == 1)
               {
-                prompt_phoswitch_front_energy.push_back(nrjcal);
+                prompt_front_phoswitch->Fill(nrj);
+                prompt_phoswitch_front_energy.push_back(nrj);
                 prompt_phoswitch_front_label.push_back(label);
                 prompt_phoswitch_front_time.push_back(time);
               }
-              else throw_error(concatenate("error Paris::cluster lookup table ", label, " : ", (int)Paris::cluster[label]));
+              else throw_error(concatenate("error Paris::cluster lookup table ", label, " : ", int_cast(Paris::cluster[label])));
             }
             else if (40_ns < time && time < 170_ns) // Delayed
             {
-              delayed_each_phoswitch[label]->Fill(nrjcal);
-              delayed_each_nrjcal_VS_nrj[label]->Fill(nrj, nrjcal);
+              delayed_paris.fill(event, hit_i);
+              delayed_each_phoswitch[label]->Fill(nrj);
+              delayed_each_nrjcal_VS_nrj[label]->Fill(nrjraw, nrj);
               if (Paris::cluster[label] == 0)
               {
-                delayed_phoswitch_back_energy.push_back(nrjcal);
+                delayed_back_phoswitch->Fill(nrj);
+                delayed_phoswitch_back_energy.push_back(nrj);
                 delayed_phoswitch_back_label.push_back(label);
                 delayed_phoswitch_back_time.push_back(time);
               }
               else if (Paris::cluster[label] == 1)
               {
-                delayed_phoswitch_front_energy.push_back(nrjcal);
+                delayed_front_phoswitch->Fill(nrj);
+                delayed_phoswitch_front_energy.push_back(nrj);
                 delayed_phoswitch_front_label.push_back(label);
                 delayed_phoswitch_front_time.push_back(time);
               }
-              else throw_error(concatenate("error Paris::cluster lookup table ", label, " : ", (int)Paris::cluster[label]));
+              else throw_error(concatenate("error Paris::cluster lookup table ", label, " : ", int_cast(Paris::cluster[label])));
             }
           }
 
@@ -282,10 +320,39 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         addback(delayed_phoswitch_back_energy, delayed_phoswitch_back_label, delayed_phoswitch_back_time, delayed_paris_module_back_energy, delayed_paris_module_back_index, delayed_paris_module_back_time);
         addback(delayed_phoswitch_front_energy, delayed_phoswitch_front_label, delayed_phoswitch_front_time, delayed_paris_module_front_energy, delayed_paris_module_front_index, delayed_paris_module_front_time);
         
-        for (size_t hit_i = 0; hit_i<prompt_paris_module_back_energy.size(); ++hit_i) prompt_each_module[Paris::label(0, prompt_paris_module_back_index[hit_i])]->Fill(prompt_paris_module_back_energy[hit_i]);
-        for (size_t hit_i = 0; hit_i<prompt_paris_module_front_energy.size(); ++hit_i) prompt_each_module[Paris::label(1, prompt_paris_module_front_index[hit_i])]->Fill(prompt_paris_module_front_energy[hit_i]);
-        for (size_t hit_i = 0; hit_i<delayed_paris_module_back_energy.size(); ++hit_i) delayed_each_module[Paris::label(0, delayed_paris_module_back_index[hit_i])]->Fill(delayed_paris_module_back_energy[hit_i]);
-        for (size_t hit_i = 0; hit_i<delayed_paris_module_front_energy.size(); ++hit_i) delayed_each_module[Paris::label(1, delayed_paris_module_front_index[hit_i])]->Fill(delayed_paris_module_front_energy[hit_i]);
+        for (size_t hit_i = 0; hit_i<prompt_paris_module_back_energy.size(); ++hit_i) 
+        {
+          auto const & label = Paris::label(0, prompt_paris_module_back_index[hit_i]);
+          auto const & nrj = prompt_paris_module_back_energy[hit_i];
+          prompt_back_module->Fill(nrj);
+          prompt_each_module[label]->Fill(nrj);
+        }
+        for (size_t hit_i = 0; hit_i<prompt_paris_module_front_energy.size(); ++hit_i) 
+        {
+          auto const & label = Paris::label(1, prompt_paris_module_front_index[hit_i]);
+          auto const & nrj = prompt_paris_module_front_energy[hit_i];
+          prompt_front_module->Fill(nrj);
+          prompt_each_module[label]->Fill(nrj);
+        }
+        for (size_t hit_i = 0; hit_i<delayed_paris_module_back_energy.size(); ++hit_i) 
+        {
+          auto const & label = Paris::label(0, delayed_paris_module_back_index[hit_i]);
+          auto const & nrj = delayed_paris_module_back_energy[hit_i];
+          delayed_back_module->Fill(nrj);
+          delayed_each_module[label]->Fill(nrj);
+        }
+        for (size_t hit_i = 0; hit_i<delayed_paris_module_front_energy.size(); ++hit_i) 
+        {
+          delayed_front_module->Fill(nrj);
+          auto const & label = Paris::label(1, delayed_paris_module_front_index[hit_i]);
+          auto const & nrj = delayed_paris_module_front_energy[hit_i];
+          delayed_each_module[label]->Fill(nrj);
+        }
+
+        for (auto const & index : prompt_paris.back().HitsClean) prompt_back_module_class->Fill(prompt_paris.back().modules[index].nrj);
+        for (auto const & index : prompt_paris.front().HitsClean) prompt_front_module_class->Fill(prompt_paris.front().modules[index].nrj);
+        for (auto const & index : delayed_paris.back().HitsClean) delayed_back_module_class->Fill(delayed_paris.back().modules[index].nrj);
+        for (auto const & index : delayed_paris.front().HitsClean) delayed_front_module_class->Fill(delayed_paris.front().modules[index].nrj);
       }// End events loop
 
       total_hits_number.fetch_add(evt_i, std::memory_order_relaxed);
@@ -313,6 +380,21 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // ge_VS_LaBr3_prompt->Write("ge_VS_LaBr3_prompt", TObject::kOverwrite);
         // ge_VS_LaBr3_delayed->Write("ge_VS_LaBr3_delayed", TObject::kOverwrite);
         // ge_VS_LaBr3_prompt->Write("ge_VS_LaBr3_prompt", TObject::kOverwrite);
+
+        prompt_front_phoswitch->Write();
+        prompt_back_phoswitch->Write();
+        delayed_front_phoswitch->Write();
+        delayed_back_phoswitch->Write();
+        prompt_front_module->Write();
+        prompt_back_module->Write();
+        delayed_front_module->Write();
+        delayed_back_module->Write();
+        prompt_back_module_class->Write();
+        prompt_front_module_class->Write();
+        delayed_back_module_class->Write();
+        delayed_front_module_class->Write();
+        addback_count->Write();
+        addback_probability->Write();
 
         for (Label label = 300; label<800; label++) if (Paris::is[label])
         {

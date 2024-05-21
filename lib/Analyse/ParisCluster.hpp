@@ -143,9 +143,9 @@ public:
     }
   }
   void reset();
+  void clear() {this->reset();}
   void fill(Event const & event, int const & hit_i, uchar const & label);
   void analyze();
-  void add_back(std::vector<Label> const & phoswitches_hits, std::array<ParisModule, n> & _modules, std::vector<Label> & modules_hits, Time const & _timewindow);
   auto const & label() const {return m_label;}
   auto const & size() const {return n;}
 
@@ -174,6 +174,7 @@ public:
   float total_calorimetry = 0.f;
 
 private:
+  void add_back(std::vector<Label> const & phoswitches_hits, std::array<ParisModule, n> & _modules, std::vector<Label> & modules_hits, Time const & _timewindow);
   uchar const m_label;
   static thread_local uchar gLabel;
 };
@@ -231,7 +232,7 @@ void ParisCluster<n>::InitialiseBidims()
 }
 
 template<size_t n>
-void ParisCluster<n>::reset()
+inline void ParisCluster<n>::reset()
 {
   for (auto const & index : Hits) phoswitches[index].reset();
   for (auto const & index : HitsClean) modules[index].reset();
@@ -271,7 +272,7 @@ template<size_t n>
 void ParisCluster<n>::analyze()
 {
   add_back(Hits, modules, HitsClean, timewindow);
-  add_back(hits_LaBr3, modules_pureLaBr, CleanLaBr3, LaBr3_timewindow);
+  // add_back(hits_LaBr3, modules_pureLaBr, CleanLaBr3, LaBr3_timewindow);
 }
 
 template<size_t n>
