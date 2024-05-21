@@ -196,7 +196,7 @@ thread_local uchar ParisCluster<n>::gLabel = 0;
 template<size_t n>
 void ParisCluster<n>::Initialise()
 {
-  InitialiseBidims();
+  // InitialiseBidims();
 }
 
 template<size_t n>

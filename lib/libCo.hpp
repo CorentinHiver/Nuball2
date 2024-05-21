@@ -39,6 +39,7 @@
 #include <typeindex>
 #include <typeinfo>
 #include <unordered_map>
+#include <unordered_set>
 
 // ********** C includes ************ //
 #include <csignal>
