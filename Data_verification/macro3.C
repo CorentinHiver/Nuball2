@@ -245,6 +245,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       unique_TH2F ge_VS_phoswitch_delayed (new TH2F(("ge_VS_LaBr3_delayed_"+std::to_string(thread_i)).c_str(), "ge_VS_phoswitch_delayed;Phoswitch [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F ge_VS_phoswitch_prompt (new TH2F(("ge_VS_phoswitch_prompt_"+std::to_string(thread_i)).c_str(), "ge_VS_phoswitch_prompt;Phoswitch [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
+      unique_TH2F p_VS_phoswitch_delayed (new TH2F(("d_VS_phoswitch_prompt_"+std::to_string(thread_i)).c_str(), "d_VS_phoswitch_prompt_;Phoswitch [keV]; E#gamma_{delayed} [keV]", 5000,0,20000, 10000,0,10000));
+      unique_TH2F d_VS_phoswitch_prompt (new TH2F(("d_VS_phoswitch_prompt_"+std::to_string(thread_i)).c_str(), "d_VS_phoswitch_prompt_;Phoswitch [keV]; E#gamma_{delayed} [keV]", 5000,0,20000, 10000,0,10000));
 
       // BGO
       unique_TH2F ge_VS_BGO_prompt (new TH2F(("ge_VS_BGO_prompt_"+std::to_string(thread_i)).c_str(), "ge_VS_BGO_prompt;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
@@ -318,6 +320,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F d_VS_sum_C2_pP (new TH2F(("d_VS_sum_C2_pP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge, particle + prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_ExP (new TH2F(("d_VS_sum_C2_ExP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge, particle + good Ex;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_ExSIP (new TH2F(("d_VS_sum_C2_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of two clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F p_VS_sum_C_pP (new TH2F(("p_VS_sum_C_pP_"+std::to_string(thread_i)).c_str(), "prompt Ge VS sum of all clean Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C_pP (new TH2F(("d_VS_sum_C_pP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C_ExP (new TH2F(("d_VS_sum_C_ExP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, particle + prompt;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C_ExSIP (new TH2F(("d_VS_sum_C_ExSIP_"+std::to_string(thread_i)).c_str(), "delayed Ge VS sum of all clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -347,7 +350,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       print("Reading", file);
 
       std::string outFolder = "data/"+trigger+"/";
-      // std::string out_filename = outFolder+filename;
+      std::string out_filename = outFolder+filename;
 
       Event event;
       event.reading(chain, "ltTEQ");
@@ -422,7 +425,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           auto const & nrj2 = event.nrj2s[hit_i];
 
           // Remove bad Ge and overflow :
-           if (found(blacklist, label) || (find_key(maxE_Ge, label) && nrj>maxE_Ge.at(label))) continue;
+           if ((find_key(CloversV2::maxE_Ge, label) && nrj>CloversV2::maxE_Ge.at(label))) continue;
 
           // Paris :
           if (Paris::is[label])
@@ -446,7 +449,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           // Clovers:
           if (-10_ns < time && time < 10_ns) 
           {
-            if (found(blacklist_spectro, label)) prompt_clovers.fill(event, hit_i);
+            prompt_clovers.fill(event, hit_i);
             if (CloversV2::isBGO(label)) prompt_clover_calo += nrj ;
             else if (CloversV2::isGe(label)) 
             {
@@ -780,6 +783,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               if (prompt_mult > 0 && prompt_calo < 3_MeV) dp_PC3DC3->Fill(clover_j.nrj, clover_i.nrj);
             }
           }
+          // Prompt phoswitch delayed Ge
+          for (auto const & nrj_paris : prompt_phoswitch)
+          {
+            d_VS_phoswitch_prompt->Fill(nrj_paris, clover_i.nrj);
+          }
 
           if (prompt_mult > 0 && prompt_calo < 5_MeV)
           {
@@ -1050,8 +1058,13 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               }
             }
           }
-          if (Ex_p > 0 && sum_clean_Ge>0) Ex_vs_dC_sum->Fill(sum_clean_Ge, Ex_p);
-          if (dssd_energy > 0) Ep_vs_dC_sum_P->Fill(sum_clean_Ge, dssd_energy);
+          if (sum_clean_Ge>0)
+          {
+            if (Ex_p > 0) Ex_vs_dC_sum->Fill(sum_clean_Ge, Ex_p);
+            if (dssd_energy > 0) Ep_vs_dC_sum_P->Fill(sum_clean_Ge, dssd_energy);
+          }
+              
+          for (auto const & clover : prompt_clovers.clean) if (sum_clean_Ge>0) p_VS_sum_C_pP->Fill(sum_clean_Ge, clover->nrj);
         }
         
         // Dirty Ge sum
@@ -1084,17 +1097,17 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
         }
         
-        if (prompt_mult > 0 && delayed_C_mult > 1 && )
+        if (prompt_mult > 0)
         {
-          double sum_clean_Ge = 0;
-          for (auto const & clover : delayed_clovers.clean) sum_clean_Ge+=clover->nrj;
+          double sum_dirty_Ge = 0;
+          for (auto const & index : delayed_clovers.Ge) sum_dirty_Ge+=delayed_clovers[index].nrj;
           for (auto const & clover : delayed_clovers.clean) 
           {
-            if (dssd_trigger) dirty_d_VS_sum_C_pP->Fill(sum_clean_Ge, clover->nrj);
+            if (dssd_trigger) dirty_d_VS_sum_C_pP->Fill(sum_dirty_Ge, clover->nrj);
             if (Ex_p>0)
             {
-              dirty_d_VS_sum_C_ExP->Fill(sum_clean_Ge, clover->nrj);
-              if (4_MeV < Emiss && Emiss < 6.5_MeV) dirty_d_VS_sum_C_ExSIP->Fill(sum_clean_Ge, clover->nrj);
+              dirty_d_VS_sum_C_ExP->Fill(sum_dirty_Ge, clover->nrj);
+              if (4_MeV < Emiss && Emiss < 6.5_MeV) dirty_d_VS_sum_C_ExSIP->Fill(sum_dirty_Ge, clover->nrj);
             }
           }
         }
@@ -1285,6 +1298,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_VS_sum_C2_pP->Write("d_VS_sum_C2_pP", TObject::kOverwrite);
         d_VS_sum_C2_ExP->Write("d_VS_sum_C2_ExP", TObject::kOverwrite);
         d_VS_sum_C2_ExSIP->Write("d_VS_sum_C2_ExSIP", TObject::kOverwrite);
+        p_VS_sum_C_pP->Write("p_VS_sum_C_pP", TObject::kOverwrite);
         d_VS_sum_C_pP->Write("d_VS_sum_C_pP", TObject::kOverwrite);
         d_VS_sum_C_ExP->Write("d_VS_sum_C_ExP", TObject::kOverwrite);
         d_VS_sum_C_ExSIP->Write("d_VS_sum_C_ExSIP", TObject::kOverwrite);
@@ -1332,6 +1346,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         ge_VS_phoswitch_prompt->Write("ge_VS_phoswitch_prompt", TObject::kOverwrite);
         ge_VS_phoswitch_delayed->Write("ge_VS_phoswitch_delayed", TObject::kOverwrite);
+        p_VS_phoswitch_delayed->Write("p_VS_phoswitch_delayed", TObject::kOverwrite);
+        d_VS_phoswitch_prompt->Write("d_VS_phoswitch_prompt", TObject::kOverwrite);
 
         phoswitches_prompt->Write("phoswitches_prompt", TObject::kOverwrite);
         phoswitches_delayed->Write("phoswitches_delayed", TObject::kOverwrite);

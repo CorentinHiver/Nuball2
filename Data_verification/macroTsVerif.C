@@ -20,33 +20,37 @@ void macroTsVerif()
     std::string file;
     while(MTfiles.getNext(file))
     {
-      if (tree.cursor()%(int)(1.e+6) == 0) 
-      {
-        printC(nicer_double(tree.cursor(), 0), "hits");
-        if (max_cursor>0 && tree.cursor() > max_cursor) break;
-      }
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
       // auto const & run_number = std::stoi(split(run_name, '_')[1]);
       Nuball2Tree tree(file);
-      Event event(tree, "TE");
-      unique_TH2F dT_label (new TH2F(("E_dT_"+run_name).c_str(),( "dT VS label clean "+run_name).c_str(), 1000,0,1000, 600,-100_ns,200_ns));
+      Event event(tree, "lTE");
+      unique_TH2F dT_label (new TH2F(("dT_label_"+run_name).c_str(),( "dT VS label clean "+run_name).c_str(), 1000,0,1000, 600,-100_ns,200_ns));
+      unique_TH2F dT_label_5110 (new TH2F(("dT_label_5110_"+run_name).c_str(),( "dT 5110keV VS label clean "+run_name).c_str(), 1000,0,1000, 600,-100_ns,200_ns));
       dT_label->SetDirectory(nullptr);
       
       while(tree.readNext())
       {
+        if (tree.cursor()%(int)(1.e+6) == 0) 
+        {
+          printC(nicer_double(tree.cursor(), 0), "hits");
+          if (max_cursor>0 && tree.cursor() > max_cursor) break;
+        }
         for (int hit_i = 0; hit_i<event.mult; ++hit_i)
         {
           auto const & label = event.labels[hit_i];
           auto const & time = event.times[hit_i];
           dT_label->Fill(label, time);
+          auto const & nrj = event.nrjs[hit_i];
+          if (5090<nrj && nrj<5120) dT_label_5110->Fill(label, time);
         }
       }
       outFile->cd();
-      dT_label->Write();
+      dT_label_5110->Write();
     }
   });
   outFile->Close();
+  print(outfile, "written");
 }
 
 #ifndef __CINT__

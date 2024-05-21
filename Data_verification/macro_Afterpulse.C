@@ -8,7 +8,7 @@
 #include "../lib/Classes/Timer.hpp"
 
 int max_cursor = -1;
-std::unordered_set<Label> CloversV2::blacklist = {55, 69, 70, 80, 92, 122, 129, 142, 163};
+std::unordered_set<Label> CloversV2::blacklist = {55, 69, 70, 80, 92, 97, 122, 129, 142, 163};
 std::unordered_map<Label, double> CloversV2::maxE_Ge = 
 {
   {25, 12600 }, {26, 13600 }, {27, 10500 }, {28, 7500  }, 
