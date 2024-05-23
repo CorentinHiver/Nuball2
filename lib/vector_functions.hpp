@@ -132,6 +132,21 @@ int first_index_in(std::vector<T> const & vec, T const & t)
 
 
 
+std::vector<int>& linspace(std::vector<int> & vec, int size, int begin = 0, int spacing = 1)
+{
+  vec.clear(); vec.reserve(size);
+  for (int it = begin; it<size; ++it) vec.push_back(it*spacing);
+  return vec;
+}
+
+std::vector<size_t>& linspace(std::vector<size_t> & vec, size_t size, size_t begin = 0, size_t spacing = 1)
+{
+  vec.clear(); vec.reserve(size);
+  for (size_t it = begin; it<size; ++it) vec.push_back(it*spacing);
+  return vec;
+}
+
+
 template <typename T>
 T maximum(std::vector<T> const & vector)
 {

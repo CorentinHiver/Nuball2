@@ -178,11 +178,15 @@ private:
   uchar const m_label;
   static thread_local uchar gLabel;
 };
+
 template<size_t n>
 Time ParisCluster<n>::LaBr3_timewindow = 5_ns;
 
 template<size_t n>
 Time ParisCluster<n>::timewindow = 10_ns;
+
+template<size_t n>
+double ParisCluster<n>::distance_max = 2.;
 
 template<size_t n>
 std::array<PositionXY, n> ParisCluster<n>::positions;
@@ -321,6 +325,5 @@ void ParisCluster<n>::add_back(std::vector<Label> const & phoswitches_hits, std:
     } // End j loop
   } // End i loop
 }
-
 
 #endif //PARIS_CLUSTER_HPP

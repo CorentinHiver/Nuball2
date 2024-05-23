@@ -20,7 +20,8 @@ std::recursive_mutex intialisation_mutex;
 class Paris
 {
 public:
-  constexpr static size_t cluster_size = 36ul;
+  constexpr static uchar cluster_size = 36ul;
+  constexpr static double distance_max = 2.;
   // ________________________________________________________________ //
   // ------------------  Setting the lookup tables ------------------ //
   //  ---- From labels to index ---- //
@@ -47,7 +48,7 @@ public:
   {
     if (index>cluster_size) {error (index,"> cluster size (=",cluster_size,")"); return -1;}
     
-    auto const & paris_index = (cluster)*cluster_size+index;
+    uchar const & paris_index = (cluster)*cluster_size+index;
 
     if (paris_index>ParisArrays::paris_labels.size()){error (index,"> paris number of labels (=",ParisArrays::paris_labels.size(),")"); return -1;}
     
@@ -78,6 +79,7 @@ public:
         index[l] = label_to_index(l)%cluster_size;
       }
       ParisCluster<cluster_size>::InitialiseBidims();
+      
       s_initialised = true;
     }
   }
@@ -90,6 +92,7 @@ public:
   void fill(Event const & event, size_t const & hit_i);
   void setEvent(Event const & event);
   void reset();
+  void clear(){reset();};
   void analyze();
   auto NaI_calorimetry() {return clusterBack.NaI_calorimetry + clusterFront.NaI_calorimetry;}
   auto LaBr3_calorimetry() {return clusterBack.LaBr3_calorimetry + clusterFront.LaBr3_calorimetry;}
@@ -425,6 +428,7 @@ class PhoswitchCalib
 
   double calibrate(Hit & hit) {return data.at(hit.label).calibrate(hit);}
   double calibrate(Label const & label, double const & qshort, double const & qlong) {return data.at(label).calibrate(qshort, qlong);}
+  double calibrate(Label const & label, double const & qshort, double const & qlong) const {return data.at(label).calibrate(qshort, qlong);}
 
   class Coefficients
   {public:
@@ -463,6 +467,7 @@ class PhoswitchCalib
 
     double calibrate(Hit const & hit) {return (hit.nrj * sin_a + hit.nrj2 * cos_a) * coeff;}
     double calibrate(double const & qshort, double const & qlong) {return (qshort * sin_a + qlong * cos_a) * coeff;}
+    double calibrate(double const & qshort, double const & qlong) const {return (qshort * sin_a + qlong * cos_a) * coeff;}
 
     double angle = 0;
     double cos_a = 0;

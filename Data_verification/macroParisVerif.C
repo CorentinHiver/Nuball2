@@ -6,12 +6,249 @@
 #include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/Paris.hpp"
 #include "../lib/Classes/Hit.hpp"
+#include "../lib/Classes/Nuball2Tree.hpp"
 
-void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
+using Index = uchar;
+class SimplePhoswitch
+{
+public:
+  SimplePhoswitch() : m_label(g_label++) {}
+
+  double qlong = 0.0;
+  double qshort = 0.0;
+  double nrj = 0.0;
+  double time = 0.0;
+
+  void clear()
+  {
+    qlong = 0.;
+    qshort = 0.;
+    nrj = 0.;
+    time = 0.;
+  }
+
+  auto const & label() const {return m_label;}
+
+  static void resetLabels() {g_label = 0;}
+
+private:
+  size_t static thread_local g_label;
+  size_t const m_label;
+};
+size_t thread_local SimplePhoswitch::g_label = 0;
+std::ostream& operator<<(std::ostream& out, SimplePhoswitch const & phoswitch)
+{
+  out << "Id : " << phoswitch.label() << " nrj = " << phoswitch.nrj << " time = " << phoswitch.time;
+  return out;
+}
+
+class SimpleParisModule
+{
+public:
+  SimpleParisModule() : m_label(g_label++) {}
+
+  double nrj = 0.0;
+  double time = 0.0;
+
+  void set(SimplePhoswitch const & phoswitch)
+  {
+    nrj = phoswitch.nrj;
+    time = phoswitch.time;
+  }
+
+  void add(SimplePhoswitch const & phoswitch)
+  {
+    nrj += phoswitch.nrj;
+    // Keep the time of the higher energy phoswitch
+  }
+
+  void clear()
+  {
+    nrj = 0.;
+    time = 0.;
+  }
+
+  static void resetLabels() {g_label = 0;}
+  auto const & label() const {return m_label;}
+
+private:
+  size_t static thread_local g_label;
+  size_t const m_label;
+};
+size_t thread_local SimpleParisModule::g_label = 0;
+std::ostream& operator<<(std::ostream& out, SimpleParisModule const & module)
+{
+  out << "Id : " << module.label() << " nrj = " << module.nrj << " time = " << module.time;
+  return out;
+}
+
+class SimpleCluster
+{
+public:
+  SimpleCluster() 
+  {
+    SimplePhoswitch::resetLabels();
+    SimpleParisModule::resetLabels();
+  };
+
+  // void fill(Event const & event, int const & hit_i)
+  // {
+  //   auto const & index = Paris::index[event.labels[hit_i]];
+  //   if (Paris::cluster_size < index+1) {error("in SimpleCluster::fill : index", index, ">Paris::cluster_size !!"); return;}
+  //   phoswitches_id.push_back(index);
+  //   auto & phoswitch = phoswitches[index];
+  //   phoswitch.nrj = event.nrjs[hit_i];
+  //   phoswitch.qshort = phoswitch.nrj/phoswitch.qlong;
+  //   phoswitch.qlong = event.nrj2s[hit_i];
+  // }
+
+  void fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
+  {
+    auto const & label = event.labels[hit_i];
+    auto const & index = Paris::index[label];
+
+    if (Paris::cluster_size < index+1) {error("in SimpleCluster::fill : index", index, ">Paris::cluster_size !!"); return;}
+
+    phoswitches_id.push_back(index);
+    
+    auto & phoswitch = phoswitches[index];
+    phoswitch.qshort = event.nrjs[hit_i];
+    phoswitch.qlong = event.nrj2s[hit_i];
+    phoswitch.nrj = calib.calibrate(label, phoswitch.qshort, phoswitch.qlong);
+    phoswitch.time = event.times[hit_i];
+  }
+
+  void clear()
+  {
+    for(auto const id : phoswitches_id) phoswitches[id].clear();
+    phoswitches_id.clear();
+    for(auto const id : modules_id) modules[id].clear();
+    modules_id.clear();
+    phoswitch_mult = 0;
+    module_mult = 0;
+    m_addback = false;
+    m_addback_used = false;
+  }
+
+  void addback()
+  {
+    phoswitch_mult = phoswitches_id.size();
+
+    // 1. Order the hits from the highest to lowest energy deposit :
+    std::vector<size_t> hits_ordered;
+    linspace(hits_ordered, phoswitch_mult);
+    std::sort(hits_ordered.begin(), hits_ordered.end(), [&] (int hit_i, int hit_j)
+    {
+      auto const & id_i = phoswitches_id[hit_i];
+      auto const & id_j = phoswitches_id[hit_j];
+      return phoswitches[id_i].nrj>phoswitches[id_j].nrj;
+    });
+
+
+// 2. Perform the add-back
+    std::vector<bool> phoswitches_added(phoswitch_mult, false); // List to keep track of the hits that have been used for add-back already
+    for (size_t ordered_it = 0; ordered_it<phoswitch_mult; ++ordered_it)
+    {
+      auto const & hit_i = hits_ordered[ordered_it]; // Starts with the highest energy deposit
+      if (phoswitches_added[hit_i]) continue; // If this hit has already been used for add-back with a previous hit then discard it
+
+      auto const & id_i = phoswitches_id[hit_i]; // The index of the detector in its cluster (see Paris and ParisCluster class)
+      modules[id_i].set(phoswitches[id_i]);
+
+      // Test the other detectors in the event for a potential add-back :
+      for (size_t ordered_loop_j = ordered_it+1; ordered_loop_j<phoswitch_mult; ordered_loop_j++)
+      {
+        auto const & hit_j = hits_ordered[ordered_loop_j];
+        auto const & id_j = phoswitches_id[hit_j];
+
+        // Timing : if they are not simultaneous then they don't belong to the same gamma-ray
+        if (abs(phoswitches[id_j].time - phoswitches[id_i].time) > m_time_window) continue; 
+
+        // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
+        auto const & distance_ij = ParisCluster<Paris::cluster_size>::distances[id_i][id_j];
+        if (distance_ij > m_distance_max) continue;
+
+        // They pass both conditions, so we add-back them :
+        modules[id_i].add(phoswitches[id_i]);
+        phoswitches_added[hit_j] = true;
+      }
+    }
+    module_mult = modules_id.size();
+    m_addback = true;
+    if (module_mult < phoswitch_mult) m_addback_used = true;
+    if (module_mult>0) print(m_addback_used);
+  }
+
+  std::array<SimplePhoswitch, Paris::cluster_size> phoswitches;
+  std::array<SimpleParisModule, Paris::cluster_size> modules;
+
+  std::vector<Index> phoswitches_id;
+  std::vector<Index> modules_id;
+
+  size_t phoswitch_mult = 0;
+  size_t module_mult = 0;
+
+  void setDistanceMax(double const & _distance_max) {m_distance_max = _distance_max;}
+  void setTimeWindow(double const & _time_window) {m_time_window = _time_window;}
+  auto const & isAddBack() const {return m_addback;}
+  auto const & isAddBackUsed() const {return m_addback_used;}
+
+private:
+  bool m_addback = false;
+  bool m_addback_used = false;
+  double m_distance_max = Paris::distance_max;
+  Time m_time_window = 10_ns;
+};
+std::ostream& operator<<(std::ostream& out, SimpleCluster const & cluster)
+{
+  if (cluster.isAddBackUsed()) out << "Phoswitches :" << std::endl;
+  for (auto const & phoswitch_id : cluster.phoswitches_id) out << cluster.phoswitches[phoswitch_id] << std::endl;
+  if(cluster.isAddBackUsed()) 
+  {
+    out << "Modules :" << std::endl;
+    for (auto const & module_id : cluster.modules_id) out << cluster.modules[module_id] << std::endl;
+  }
+  return out;
+}
+class SimpleParis
+{
+public:
+  SimpleParis() {}
+  void fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
+  {
+    auto const & label = event.labels[hit_i];
+    auto const & cluster = Paris::cluster[label];
+         if (cluster == 0) back.fill(event, hit_i, calib);
+    else if (cluster == 1) front.fill(event, hit_i, calib);
+    else error("SimpleParis::fill : no cluster found for label", label);
+  }
+  void addback()
+  {
+    back.addback();
+    front.addback();
+  }
+  void clear()
+  {
+    back.clear();
+    front.clear();
+  }
+  SimpleCluster back;
+  SimpleCluster front;
+};
+std::ostream& operator<<(std::ostream& out, SimpleParis const & paris)
+{
+  out << "Back cluster :" << std::endl;
+  out << paris.back;
+  out << "Front cluster :" << std::endl;
+  out << paris.front;
+  return out;
+}
+
+void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
   // std::string trigger = "PrM1DeC1";
-  // std::string trigger = "dC1";
-  std::string trigger = "22Na";
+  std::string trigger = "dC1";
+  // std::string trigger = "22Na";
   // std::string trigger = "C2";
   // std::string trigger = "P";
   Timer timer;
@@ -19,7 +256,6 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   std::atomic<int> total_hits_number(0);
   int freq_hit_display= (nb_hits_read < 2.e+7) ? 1.e+6 : 1.e+7;
   Time time_window = 10_ns;
-  Time distance_max = 2;
   bool prompt_each_bidim = true;
   bool delayed_each_bidim = true;
   bool print_array = false;
@@ -29,7 +265,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   Calibration calibNaI("../136/coeffs_NaI.calib");
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
   std::string data_pat_str = "~/nuball2/N-SI-136-root_"+trigger+"/merged/";
-  if (trigger == "22Na") data_pat_str = "~/nuball2/N-SI-136-root_"+trigger+"/merged/";
+  if (trigger == "22Na") data_pat_str = "~/nuball2/N-SI-136-root-sources/Na22_center/";
+  print(data_pat_str);
   Path data_path(data_pat_str);
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
@@ -72,46 +309,47 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         delayed_each_module.emplace(label, new TH1F(("delayed_each_module"+thread_i_str+"_"+label_str).c_str(), ("delayed_each_module_"+label_str).c_str(), 2000,0,20000));
       }
 
-      unique_TH1F prompt_front_phoswitch (new TH1F(("prompt_front_phoswitch_"+thread_i_str).c_str(), "prompt_front_phoswitch", 2000,0,20000));
-      unique_TH1F prompt_back_phoswitch (new TH1F(("prompt_back_phoswitch_"+thread_i_str).c_str(), "prompt_back_phoswitch", 2000,0,20000));
-      unique_TH1F delayed_front_phoswitch (new TH1F(("delayed_front_phoswitch_"+thread_i_str).c_str(), "delayed_front_phoswitch", 2000,0,20000));
-      unique_TH1F delayed_back_phoswitch (new TH1F(("delayed_back_phoswitch_"+thread_i_str).c_str(), "delayed_back_phoswitch", 2000,0,20000));
-      unique_TH1F prompt_front_module (new TH1F(("prompt_front_module_"+thread_i_str).c_str(), "prompt_front_module", 2000,0,20000));
-      unique_TH1F prompt_back_module (new TH1F(("prompt_back_module_"+thread_i_str).c_str(), "prompt_back_module", 2000,0,20000));
-      unique_TH1F delayed_front_module (new TH1F(("delayed_front_module_"+thread_i_str).c_str(), "delayed_front_module", 2000,0,20000));
-      unique_TH1F delayed_back_module_class (new TH1F(("delayed_back_module_class_"+thread_i_str).c_str(), "delayed_back_module_class", 2000,0,20000));
-      unique_TH1F prompt_front_module_class (new TH1F(("prompt_front_module_class_"+thread_i_str).c_str(), "prompt_front_module_class", 2000,0,20000));
-      unique_TH1F prompt_back_module_class (new TH1F(("prompt_back_module_class_"+thread_i_str).c_str(), "prompt_back_module_class", 2000,0,20000));
-      unique_TH1F delayed_front_module_class (new TH1F(("delayed_front_module_class_"+thread_i_str).c_str(), "delayed_front_module_class", 2000,0,20000));
-      unique_TH1F delayed_back_module_class (new TH1F(("delayed_back_module_class_"+thread_i_str).c_str(), "delayed_back_module_class", 2000,0,20000));
-      unique_TH1F addback_count (new TH1F(("addback_count_"+thread_i_str).c_str(), "addback_count", 1000,0,1000));
-      unique_TH1F addback_probability (new TH1F(("addback_probability_"+thread_i_str).c_str(), "addback_probability", 1000,0,1000));
-      // unique_TH1F LaBr3_cristal_prompt (new TH1F(("LaBr3_cristal_prompt_"+thread_i_str).c_str(), "LaBr3_cristal_prompt;keV", 10000,0,20000));
-      // unique_TH1F NaI_cristal_prompt   (new TH1F(("NaI_cristal_prompt_"+thread_i_str).c_str()  , "NaI_cristal_prompt;keV"  , 10000,0,20000));
-      
-      // unique_TH2F nrj2_vs_nrj_prompt  (new TH2F(("nrj2_vs_nrj_prompt_"+thread_i_str).c_str() , "nrj2_vs_nrj_prompt;keV" , 2000,0,20000, 2000,0,20000));
-      // unique_TH2F nrj2_vs_nrj_delayed (new TH2F(("nrj2_vs_nrj_delayed_"+thread_i_str).c_str(), "nrj2_vs_nrj_delayed;keV", 2000,0,20000, 2000,0,20000));
+      unique_TH1F prompt_front_phoswitch (new TH1F(("prompt_front_phoswitch_"+thread_i_str).c_str(), "prompt_front_phoswitch", 20000,0,20000));
+      unique_TH1F prompt_back_phoswitch (new TH1F(("prompt_back_phoswitch_"+thread_i_str).c_str(), "prompt_back_phoswitch", 20000,0,20000));
+      unique_TH1F delayed_front_phoswitch (new TH1F(("delayed_front_phoswitch_"+thread_i_str).c_str(), "delayed_front_phoswitch", 20000,0,20000));
+      unique_TH1F delayed_back_phoswitch (new TH1F(("delayed_back_phoswitch_"+thread_i_str).c_str(), "delayed_back_phoswitch", 20000,0,20000));
+      unique_TH1F prompt_front_module (new TH1F(("prompt_front_module_"+thread_i_str).c_str(), "prompt_front_module", 20000,0,20000));
+      unique_TH1F prompt_back_module (new TH1F(("prompt_back_module_"+thread_i_str).c_str(), "prompt_back_module", 20000,0,20000));
+      unique_TH1F delayed_front_module (new TH1F(("delayed_front_module_"+thread_i_str).c_str(), "delayed_front_module", 20000,0,20000));
+      unique_TH1F delayed_back_module (new TH1F(("delayed_back_module_"+thread_i_str).c_str(), "delayed_back_module_class", 20000,0,20000));
 
-      // unique_TH1F paris_prompt  (new TH1F(("paris_prompt_"+thread_i_str).c_str() , "paris_prompt;keV" , 10000,0,20000));
-      // unique_TH1F paris_delayed (new TH1F(("paris_delayed_"+thread_i_str).c_str(), "paris_delayed;keV", 10000,0,20000));
-      // unique_TH1F LaBr3_prompt  (new TH1F(("LaBr3_prompt_"+thread_i_str).c_str() , "LaBr3_prompt;keV" , 10000,0,20000));
-      // unique_TH1F LaBr3_delayed (new TH1F(("LaBr3_delayed_"+thread_i_str).c_str(), "LaBr3_delayed;keV", 10000,0,20000));
+      unique_TH1F prompt_front_module_class (new TH1F(("prompt_front_module_class_"+thread_i_str).c_str(), "prompt_front_module_class", 20000,0,20000));
+      unique_TH1F prompt_back_module_class (new TH1F(("prompt_back_module_class_"+thread_i_str).c_str(), "prompt_back_module_class", 20000,0,20000));
+      unique_TH1F delayed_front_module_class (new TH1F(("delayed_front_module_class_"+thread_i_str).c_str(), "delayed_front_module_class", 20000,0,20000));
+      unique_TH1F delayed_back_module_class (new TH1F(("delayed_back_module_class_"+thread_i_str).c_str(), "delayed_back_module_class", 20000,0,20000));
 
-      // unique_TH2F ge_VS_LaBr3_delayed (new TH2F(("ge_VS_LaBr3_delayed_"+thread_i_str).c_str(), "ge_VS_LaBr3_delayed;LaBr3 [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
-      // unique_TH2F ge_VS_LaBr3_prompt  (new TH2F(("ge_VS_LaBr3_prompt_"+thread_i_str).c_str() , "ge_VS_LaBr3_prompt;LaBr3 [keV]; Ge [keV]" , 5000,0,20000, 10000,0,10000));
+
+
+      unique_TH1F prompt_front_index_pattern (new TH1F(("prompt_front_index_pattern_"+thread_i_str).c_str(), "prompt_front_index_pattern", 100,0,100));
+      unique_TH1F prompt_back_index_pattern (new TH1F(("prompt_back_index_pattern_"+thread_i_str).c_str(), "prompt_back_index_pattern", 100,0,100));
+      unique_TH1F delayed_front_index_pattern (new TH1F(("delayed_front_index_pattern_"+thread_i_str).c_str(), "delayed_front_index_pattern", 100,0,100));
+      unique_TH1F delayed_back_index_pattern (new TH1F(("delayed_back_index_pattern_"+thread_i_str).c_str(), "delayed_back_index_pattern", 100,0,100));
       
+      unique_TH1F prompt_front_addback_in_index_pattern (new TH1F(("prompt_front_addback_in_index_pattern_"+thread_i_str).c_str(), "prompt_front_addback_in_index_pattern", 100,0,100));
+      unique_TH1F prompt_back_addback_in_index_pattern (new TH1F(("prompt_back_addback_in_index_pattern_"+thread_i_str).c_str(), "prompt_back_addback_in_index_pattern", 100,0,100));
+      unique_TH1F delayed_front_addback_in_index_pattern (new TH1F(("delayed_front_addback_in_index_pattern_"+thread_i_str).c_str(), "delayed_front_addback_in_index_pattern", 100,0,100));
+      unique_TH1F delayed_back_addback_in_index_pattern (new TH1F(("delayed_back_addback_in_index_pattern_"+thread_i_str).c_str(), "delayed_back_addback_in_index_pattern", 100,0,100));
+
+      unique_TH1F prompt_front_addback_out_index_pattern (new TH1F(("prompt_front_addback_out_index_pattern_"+thread_i_str).c_str(), "prompt_front_addback_out_index_pattern", 100,0,100));
+      unique_TH1F prompt_back_addback_out_index_pattern (new TH1F(("prompt_back_addback_out_index_pattern_"+thread_i_str).c_str(), "prompt_back_addback_out_index_pattern", 100,0,100));
+      unique_TH1F delayed_front_addback_out_index_pattern (new TH1F(("delayed_front_addback_out_index_pattern_"+thread_i_str).c_str(), "delayed_front_addback_out_index_pattern", 100,0,100));
+      unique_TH1F delayed_back_addback_out_index_pattern (new TH1F(("delayed_back_addback_out_index_pattern_"+thread_i_str).c_str(), "delayed_back_addback_out_index_pattern", 100,0,100));
 
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
-      TChain* chain = new TChain("Nuball2");
-      chain->Add(file.c_str());
-      print("Reading", file);
+      Nuball2Tree tree(file);
 
       std::string outFolder = "data/"+trigger+"/";
       std::string out_filename = outFolder+run_name+"_paris_verif.root";
+      if (trigger == "22Na") out_filename = "data/22Na_paris_verif/"+run_name+".root";
 
       Event event;
-      event.reading(chain, "ltTEQ");
+      event.reading(tree, "lTEQ");
 
       CloversV2 prompt_clovers;
       CloversV2 delayed_clovers;
@@ -142,17 +380,17 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::vector<uchar>  delayed_paris_module_back_index;
       std::vector<Time>  delayed_paris_module_back_time;
 
-      Paris prompt_paris;
-      Paris delayed_paris;
+      SimpleParis prompt_paris;
+      SimpleParis delayed_paris;
 
       std::vector<size_t> hits_added;
 
       int evt_i = 1;
-      for ( ;(evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
+      for ( ;(evt_i < tree->GetEntries() && evt_i < nb_hits_read); evt_i++)
       {
         if (evt_i%freq_hit_display == 0) print(nicer_double(evt_i, 0), "events");
 
-        chain->GetEntry(evt_i);
+        tree->GetEntry(evt_i);
 
         if (max_mult < event.mult) continue;
 
@@ -185,39 +423,36 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         delayed_paris_module_back_index.clear();
         delayed_paris_module_back_time.clear();
 
-        
-
-
-
-
         for (int hit_i = 0; hit_i < event.mult; hit_i++)
         {
           auto const & label = event.labels[hit_i];
           auto const & time  = event.times [hit_i];
-          auto       & nrj   = event.nrjs  [hit_i];
+          auto const & nrj   = event.nrjs  [hit_i];
           auto const & nrj2  = event.nrj2s [hit_i];
-
+          
           if (Paris::is[label])
           {
             // Calibrate the phoswitch :
-            auto const nrjraw = nrj;
-            nrj = calibPhoswitches.calibrate(label, nrj, nrj2);
+            auto const & nrjcal = calibPhoswitches.calibrate(label, nrj, nrj2);
+            auto const & index = Paris::label_to_index(label);
             if (-5_ns < time && time < 5_ns) // Prompt
             {
-              prompt_paris.fill(event, hit_i);
-              prompt_each_phoswitch[label]->Fill(nrj);
-              prompt_each_nrjcal_VS_nrj[label]->Fill(nrjraw, nrj);
+              prompt_paris.fill(event, hit_i, calibPhoswitches);
+              prompt_each_phoswitch[label]->Fill(nrjcal);
+              prompt_each_nrjcal_VS_nrj[label]->Fill(nrj, nrjcal);
               if (Paris::cluster[label] == 0)
               {
-                prompt_back_phoswitch->Fill(nrj);
-                prompt_phoswitch_back_energy.push_back(nrj);
+                prompt_back_index_pattern->Fill(index);
+                prompt_back_phoswitch->Fill(nrjcal);
+                prompt_phoswitch_back_energy.push_back(nrjcal);
                 prompt_phoswitch_back_label.push_back(label);
                 prompt_phoswitch_back_time.push_back(time);
               }
               else if (Paris::cluster[label] == 1)
               {
-                prompt_front_phoswitch->Fill(nrj);
-                prompt_phoswitch_front_energy.push_back(nrj);
+                prompt_front_index_pattern->Fill(index);
+                prompt_front_phoswitch->Fill(nrjcal);
+                prompt_phoswitch_front_energy.push_back(nrjcal);
                 prompt_phoswitch_front_label.push_back(label);
                 prompt_phoswitch_front_time.push_back(time);
               }
@@ -225,20 +460,22 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             }
             else if (40_ns < time && time < 170_ns) // Delayed
             {
-              delayed_paris.fill(event, hit_i);
-              delayed_each_phoswitch[label]->Fill(nrj);
-              delayed_each_nrjcal_VS_nrj[label]->Fill(nrjraw, nrj);
+              delayed_paris.fill(event, hit_i, calibPhoswitches);
+              delayed_each_phoswitch[label]->Fill(nrjcal);
+              delayed_each_nrjcal_VS_nrj[label]->Fill(nrj, nrjcal);
               if (Paris::cluster[label] == 0)
               {
-                delayed_back_phoswitch->Fill(nrj);
-                delayed_phoswitch_back_energy.push_back(nrj);
+                delayed_back_index_pattern->Fill(index);
+                delayed_back_phoswitch->Fill(nrjcal);
+                delayed_phoswitch_back_energy.push_back(nrjcal);
                 delayed_phoswitch_back_label.push_back(label);
                 delayed_phoswitch_back_time.push_back(time);
               }
               else if (Paris::cluster[label] == 1)
               {
-                delayed_front_phoswitch->Fill(nrj);
-                delayed_phoswitch_front_energy.push_back(nrj);
+                delayed_front_index_pattern->Fill(index);
+                delayed_front_phoswitch->Fill(nrjcal);
+                delayed_phoswitch_front_energy.push_back(nrjcal);
                 delayed_phoswitch_front_label.push_back(label);
                 delayed_phoswitch_front_time.push_back(time);
               }
@@ -251,6 +488,13 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //////////////
         // Analyse  //
         //////////////
+
+        // print(event);
+        // print("prompt paris :");
+        prompt_paris.addback();
+        // print("delayed paris :");
+        delayed_paris.addback();
+        // pauseCo();
 
         auto addback = [&](std::vector<double> const & phoswitch_energy, std::vector<Label> const & phoswitch_label, std::vector<Time> const & phoswitch_time,
                           std::vector<double> & module_energy, std::vector<uchar> & module_index, std::vector<Time> & module_time)
@@ -276,6 +520,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & time_i  = phoswitch_time  [hit_i];
             auto const & label_i = phoswitch_label [hit_i]; // The detector's global label
 
+            auto const & cluster = Paris::cluster[label_i]; // The cluster (0 back, 1 front)
             auto const & index_i = Paris::index[label_i]; // The index of the detector in its cluster (see Paris and ParisCluster class)
 
             module_energy.push_back(nrj_i);
@@ -294,11 +539,37 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               auto const & label_j = phoswitch_label[hit_j]; 
               auto const & index_j = Paris::index[label_j];
               auto const & distance_ij = ParisCluster<Paris::cluster_size>::distances[index_i][index_j];
-              if (distance_ij > distance_max) continue;
+              if (distance_ij > ParisCluster<Paris::cluster_size>::distance_max) continue;
 
               // If the two hits meets the criteria they are add-backed :
               module_energy.back()+=phoswitch_energy[hit_j];
               hits_added[hit_j] = true;
+              if (cluster == 0)
+              {
+                if (-5_ns < time_i && time_i < 5_ns) 
+                {
+                  prompt_back_addback_in_index_pattern->Fill(index_i);
+                  prompt_back_addback_out_index_pattern->Fill(index_j);
+                }
+                else 
+                {
+                  prompt_front_addback_in_index_pattern->Fill(index_i);
+                  prompt_front_addback_out_index_pattern->Fill(index_j);
+                }
+              }
+              else
+              {
+                if (-5_ns < time_i && time_i < 5_ns) 
+                {
+                  delayed_front_addback_in_index_pattern->Fill(index_i);
+                  delayed_front_addback_out_index_pattern->Fill(index_j);
+                }
+                else 
+                {
+                  delayed_front_addback_in_index_pattern->Fill(index_i);
+                  delayed_front_addback_out_index_pattern->Fill(index_j);
+                }
+              }
             } // End j loop
           }
 
@@ -343,16 +614,17 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         }
         for (size_t hit_i = 0; hit_i<delayed_paris_module_front_energy.size(); ++hit_i) 
         {
-          delayed_front_module->Fill(nrj);
           auto const & label = Paris::label(1, delayed_paris_module_front_index[hit_i]);
           auto const & nrj = delayed_paris_module_front_energy[hit_i];
+          delayed_front_module->Fill(nrj);
           delayed_each_module[label]->Fill(nrj);
         }
 
-        for (auto const & index : prompt_paris.back().HitsClean) prompt_back_module_class->Fill(prompt_paris.back().modules[index].nrj);
-        for (auto const & index : prompt_paris.front().HitsClean) prompt_front_module_class->Fill(prompt_paris.front().modules[index].nrj);
-        for (auto const & index : delayed_paris.back().HitsClean) delayed_back_module_class->Fill(delayed_paris.back().modules[index].nrj);
-        for (auto const & index : delayed_paris.front().HitsClean) delayed_front_module_class->Fill(delayed_paris.front().modules[index].nrj);
+        for (auto const & id : prompt_paris.back.modules_id) prompt_back_module_class->Fill(prompt_paris.back.modules[id].nrj);
+        for (auto const & id : prompt_paris.front.modules_id) prompt_front_module_class->Fill(prompt_paris.front.modules[id].nrj);
+        for (auto const & id : delayed_paris.back.modules_id) delayed_back_module_class->Fill(delayed_paris.back.modules[id].nrj);
+        for (auto const & id : delayed_paris.front.modules_id) delayed_front_module_class->Fill(delayed_paris.front.modules[id].nrj);
+
       }// End events loop
 
       total_hits_number.fetch_add(evt_i, std::memory_order_relaxed);
@@ -362,39 +634,58 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(),"recreate"));
         file->cd();
 
+        prompt_front_phoswitch->Write("prompt_front_phoswitch", TObject::kOverwrite);
+        prompt_back_phoswitch->Write("prompt_back_phoswitch", TObject::kOverwrite);
+        delayed_front_phoswitch->Write("delayed_front_phoswitch", TObject::kOverwrite);
+        delayed_back_phoswitch->Write("delayed_back_phoswitch", TObject::kOverwrite);
+        prompt_front_module->Write("prompt_front_module", TObject::kOverwrite);
+        prompt_back_module->Write("prompt_back_module", TObject::kOverwrite);
+        delayed_front_module->Write("delayed_front_module", TObject::kOverwrite);
+        delayed_back_module->Write("delayed_back_module", TObject::kOverwrite);
+        prompt_back_module_class->Write("prompt_back_module_class", TObject::kOverwrite);
+        prompt_front_module_class->Write("prompt_front_module_class", TObject::kOverwrite);
+        delayed_back_module_class->Write("delayed_back_module_class", TObject::kOverwrite);
+        delayed_front_module_class->Write("delayed_front_module_class", TObject::kOverwrite);
 
-        // // Paris :
-        // LaBr3_cristal_prompt->Write("LaBr3_cristal_prompt", TObject::kOverwrite);
-        // LaBr3_cristal_prompt->Write("LaBr3_cristal_prompt", TObject::kOverwrite);
-        // NaI_cristal_prompt->Write("NaI_cristal_prompt", TObject::kOverwrite);
-        // NaI_cristal_prompt->Write("NaI_cristal_prompt", TObject::kOverwrite);
-        // nrj2_vs_nrj_prompt->Write("nrj2_vs_nrj_prompt", TObject::kOverwrite);
-        // nrj2_vs_nrj_delayed->Write("nrj2_vs_nrj_delayed", TObject::kOverwrite);
-        // paris_prompt->Write("paris_prompt", TObject::kOverwrite);
-        // paris_delayed->Write("paris_delayed", TObject::kOverwrite);
-        // LaBr3_prompt->Write("LaBr3_prompt", TObject::kOverwrite);
-        // LaBr3_delayed->Write("LaBr3_delayed", TObject::kOverwrite);
+        prompt_front_index_pattern->Write("prompt_front_index_pattern", TObject::kOverwrite);
+        prompt_back_index_pattern->Write("prompt_back_index_pattern", TObject::kOverwrite);
+        delayed_front_index_pattern->Write("delayed_front_index_pattern", TObject::kOverwrite);
+        delayed_back_index_pattern->Write("delayed_back_index_pattern", TObject::kOverwrite);
 
-        // ge_VS_LaBr3_delayed->Write("ge_VS_LaBr3_delayed", TObject::kOverwrite);
-        // ge_VS_LaBr3_delayed->Write("ge_VS_LaBr3_delayed", TObject::kOverwrite);
-        // ge_VS_LaBr3_prompt->Write("ge_VS_LaBr3_prompt", TObject::kOverwrite);
-        // ge_VS_LaBr3_delayed->Write("ge_VS_LaBr3_delayed", TObject::kOverwrite);
-        // ge_VS_LaBr3_prompt->Write("ge_VS_LaBr3_prompt", TObject::kOverwrite);
+        prompt_front_addback_in_index_pattern->Write("prompt_front_addback_in_index_pattern", TObject::kOverwrite);
+        prompt_back_addback_in_index_pattern->Write("prompt_back_addback_in_index_pattern", TObject::kOverwrite);
+        delayed_front_addback_in_index_pattern->Write("delayed_front_addback_in_index_pattern", TObject::kOverwrite);
+        delayed_back_addback_in_index_pattern->Write("delayed_back_addback_in_index_pattern", TObject::kOverwrite);
 
-        prompt_front_phoswitch->Write();
-        prompt_back_phoswitch->Write();
-        delayed_front_phoswitch->Write();
-        delayed_back_phoswitch->Write();
-        prompt_front_module->Write();
-        prompt_back_module->Write();
-        delayed_front_module->Write();
-        delayed_back_module->Write();
-        prompt_back_module_class->Write();
-        prompt_front_module_class->Write();
-        delayed_back_module_class->Write();
-        delayed_front_module_class->Write();
-        addback_count->Write();
-        addback_probability->Write();
+        prompt_front_addback_out_index_pattern->Write("prompt_front_addback_out_index_pattern", TObject::kOverwrite);
+        prompt_back_addback_out_index_pattern->Write("prompt_back_addback_out_index_pattern", TObject::kOverwrite);
+        delayed_front_addback_out_index_pattern->Write("delayed_front_addback_out_index_pattern", TObject::kOverwrite);
+        delayed_back_addback_out_index_pattern->Write("delayed_back_addback_out_index_pattern", TObject::kOverwrite);
+
+        auto prompt_front_addback_in_probability = static_cast<TH1F*>(prompt_front_addback_in_index_pattern->Clone("prompt_front_addback_in_probability"));
+        prompt_front_addback_in_probability -> Divide(prompt_front_index_pattern.get());
+        prompt_front_addback_in_probability->Write();
+        auto prompt_back_addback_in_probability = static_cast<TH1F*>(prompt_back_addback_in_index_pattern->Clone("prompt_back_addback_in_probability"));
+        prompt_back_addback_in_probability -> Divide(prompt_back_index_pattern.get());
+        prompt_back_addback_in_probability->Write();
+        auto delayed_front_addback_in_probability = static_cast<TH1F*>(delayed_front_addback_in_index_pattern->Clone("delayed_front_addback_in_probability"));
+        delayed_front_addback_in_probability -> Divide(delayed_front_index_pattern.get());
+        delayed_front_addback_in_probability->Write();
+        auto delayed_back_addback_in_probability = static_cast<TH1F*>(delayed_back_addback_in_index_pattern->Clone("delayed_back_addback_in_probability"));
+        delayed_back_addback_in_probability -> Divide(delayed_back_index_pattern.get());
+        delayed_front_addback_in_probability->Write();
+        auto prompt_front_addback_out_probability = static_cast<TH1F*>(prompt_front_addback_out_index_pattern->Clone("prompt_front_addback_out_probability"));
+        prompt_front_addback_out_probability -> Divide(prompt_front_index_pattern.get());
+        prompt_front_addback_out_probability->Write();
+        auto prompt_back_addback_out_probability = static_cast<TH1F*>(prompt_back_addback_out_index_pattern->Clone("prompt_back_addback_out_probability"));
+        prompt_back_addback_out_probability -> Divide(prompt_back_index_pattern.get());
+        prompt_back_addback_out_probability->Write();
+        auto delayed_front_addback_out_probability = static_cast<TH1F*>(delayed_front_addback_out_index_pattern->Clone("delayed_front_addback_out_probability"));
+        delayed_front_addback_out_probability -> Divide(delayed_front_index_pattern.get());
+        delayed_front_addback_out_probability->Write();
+        auto delayed_back_addback_out_probability = static_cast<TH1F*>(delayed_back_addback_out_index_pattern->Clone("delayed_back_addback_out_probability"));
+        delayed_back_addback_out_probability -> Divide(delayed_back_index_pattern.get());
+        delayed_back_addback_out_probability->Write();
 
         for (Label label = 300; label<800; label++) if (Paris::is[label])
         {
@@ -418,10 +709,10 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 #ifndef __CINT__
 int main(int argc, char** argv)
 {
-       if (argc == 1) macro3();
-  else if (argc == 2) macro3(std::stoi(argv[1]));
-  else if (argc == 3) macro3(std::stoi(argv[1]), std::stod(argv[2]));
-  else if (argc == 4) macro3(std::stoi(argv[1]), std::stod(argv[2]), std::stoi(argv[3]));
+       if (argc == 1) macroParisVerif();
+  else if (argc == 2) macroParisVerif(std::stoi(argv[1]));
+  else if (argc == 3) macroParisVerif(std::stoi(argv[1]), std::stod(argv[2]));
+  else if (argc == 4) macroParisVerif(std::stoi(argv[1]), std::stod(argv[2]), std::stoi(argv[3]));
   else error("invalid arguments");
 
   return 1;

@@ -13,7 +13,7 @@ float smear(float const & nrj, TRandom* random)
   return random->Gaus(nrj,nrj*((400.0/sqrt(nrj))/100.0)/2.35);
 }
 
-std::unordered_set<Label> CloversV2::blacklist = {55, 69, 70, 80, 92, 122, 129, 142, 163};
+std::unordered_set<Label> CloversV2::blacklist = {46, 55, 69, 70, 80, 92, 97, 122, 129, 142, 163};
 std::unordered_map<Label, double> CloversV2::maxE_Ge = 
 {
   {25, 12600 }, {26, 13600 }, {27, 10500 }, {28, 7500  }, 
@@ -247,8 +247,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F ge_VS_phoswitch_delayed (new TH2F(("ge_VS_LaBr3_delayed_"+thread_i_str).c_str(), "ge_VS_phoswitch_delayed;Phoswitch [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F ge_VS_phoswitch_prompt (new TH2F(("ge_VS_phoswitch_prompt_"+thread_i_str).c_str(), "ge_VS_phoswitch_prompt;Phoswitch [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F p_VS_phoswitch_delayed (new TH2F(("p_VS_phoswitch_delayed_"+thread_i_str).c_str(), "p_VS_phoswitch_delayed;Phoswitch_{delayed} [keV]; E#gamma_{prompt} [keV]", 5000,0,20000, 10000,0,10000));
-      unique_TH2F d_VS_phoswitch_prompt (new TH2F(("d_VS_phoswitch_prompt_"+thread_i_str).c_str(), "d_VS_phoswitch_prompt_;Phoswitch_{prompt} [keV]; E#gamma_{delayed} [keV]", 5000,0,20000, 10000,0,10000));
-
+      unique_TH2F d_VS_phoswitch_prompt (new TH2F(("d_VS_phoswitch_prompt_"+thread_i_str).c_str(), "d_VS_phoswitch_prompt;Phoswitch_{prompt} [keV]; E#gamma_{delayed} [keV]", 5000,0,20000, 10000,0,10000));
+      
       // BGO
       unique_TH2F ge_VS_BGO_prompt (new TH2F(("ge_VS_BGO_prompt_"+thread_i_str).c_str(), "ge_VS_BGO_prompt;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
       unique_TH2F ge_VS_BGO_delayed (new TH2F(("ge_VS_BGO_delayed_"+thread_i_str).c_str(), "ge_VS_BGO_delayed;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
@@ -344,11 +344,12 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F p_VS_DC_ExSIP (new TH2F(("p_VS_DC_ExSIP_"+thread_i_str).c_str(), "prompt Ge VS delayed Ge, particle + best Ex for SI;Delayed calorimetry [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_DC_ExSIP (new TH2F(("d_VS_DC_ExSIP_"+thread_i_str).c_str(), "delayed Ge VS delayed Ge, particle + best Ex for SI;Delayed calorimetry [keV]; E#gamma_{delayed}[keV]",2000,0,20000,  nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
-      unique_TH1F neutron_hit_pattern (new TH1F("neutron_hit_pattern", "neutron_hit_pattern", 1000,0,1000));
-      unique_TH1F hit_pattern_2755 (new TH1F("hit_pattern_2755", "hit_pattern_2755", 1000,0,1000));
+      unique_TH1F neutron_hit_pattern (new TH1F(("neutron_hit_pattern"+thread_i_str).c_str(), "neutron_hit_pattern", 1000,0,1000));
+      unique_TH1F hit_pattern_2755 (new TH1F(("hit_pattern_2755"+thread_i_str).c_str(), "hit_pattern_2755", 1000,0,1000));
       
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
+      int const & run_number = std::stoi(split(filename, '_')[1]);
       TChain* chain = new TChain("Nuball2");
       chain->Add(file.c_str());
       print("Reading", file);
@@ -432,6 +433,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
           // Remove bad Ge and overflow :
            if ((find_key(CloversV2::maxE_Ge, label) && nrj>CloversV2::maxE_Ge.at(label))) continue;
+           if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
+           if ((label == 134 || label == 135 || label == 136) && time > 100) continue; // These detectors have strange events after 100 ns
 
           // Paris :
           if (Paris::is[label])
@@ -652,8 +655,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         /////// DELAYED CLEAN ///////
         for (size_t loop_i = 0; loop_i<delayed_clovers.GeClean.size(); ++loop_i)
         {
-          auto const & clover_i = delayed_clovers[delayed_clovers.GeClean[loop_i]];
-          if (2750 < clover_i.nrj && clover_i.nrj < 2760) hit_pattern_2755->Draw(label);
+          auto const & index_i = delayed_clovers.GeClean[loop_i];
+          auto const & clover_i = delayed_clovers[index_i];
+          if (2750 < clover_i.nrj && clover_i.nrj < 2760) hit_pattern_2755->Fill(index_i);
           d->Fill(clover_i.nrj);
           E_dT->Fill(clover_i.time, clover_i.nrj);
           

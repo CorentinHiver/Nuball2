@@ -11,24 +11,24 @@
 /// Data types ///
 //////////////////
 
-using Label     = ushort;
-using ADC       = int;
-using NRJ       = float;
-using Timestamp = ULong64_t;
-using Time      = Long64_t;
-using Time_ns   = float; // deprecated
-using Pileup    = bool;
+using Label     = ushort;    // Label (ushort)
+using ADC       = int;       // ADC (int)
+using NRJ       = float;     // Energy in keV (float)
+using Timestamp = ULong64_t; // Timestamp in ps (absolute)
+using Time      = Long64_t;  // Time in ps (relative)
+using Time_ns   = float;     // Time in ns (relative) !deprecated! 
+using Pileup    = bool;      // Pileup bit (bool) !unused!
 
 ////////////////////
 /// Data vectors ///
 ////////////////////
 
-using Label_vec   = std::vector<Label  >;
-using ADC_vec     = std::vector<ADC    >;
-using Energy_vec  = std::vector<NRJ    >;
-using Time_vec    = std::vector<Time   >;
-using Time_ns_vec = std::vector<Time_ns>; // deprecated
-using Pileup_vec  = std::vector<Pileup >;
+using Label_vec   = std::vector<Label  >; // Vector of Label (ushort)
+using ADC_vec     = std::vector<ADC    >; // Vector of ADC (int)
+using Energy_vec  = std::vector<NRJ    >; // Vector of Energy in keV (float)
+using Time_vec    = std::vector<Time   >; // Vector of Time in ps (relative)
+using Time_ns_vec = std::vector<Time_ns>; // Vector of Time in ns (relative) !deprecated!  
+using Pileup_vec  = std::vector<Pileup >; // Vector of Pileup bit (bool) !unused!
 
 
 //////////////////
