@@ -224,7 +224,7 @@ int main(int argc, char** argv)
     Timer timer_total;
     auto const & run_path = manipPath+run;
     auto const & run_name = removeExtension(run);
-    auto const & run_number = std::stoi(split(run_name, '_')[1])
+    auto const & run_number = std::stoi(split(run_name, '_')[1]);
     if(found(runs_blacklist, run_number)) continue;
 
     MTTHist<TH1F> histo_mult_trigger;
@@ -279,9 +279,9 @@ int main(int argc, char** argv)
       timeshifts.write(run_name);
     };
 
-    std::string file_dT_str = outPath.string() + "Timeshifts/" + run_name + ".dT"
+    std::string file_dT_str = outPath.string() + "Timeshifts/" + run_name + ".dT";
     if (timeshifts_path.string() != "" && timeshifts_path.exists()) file_dT_str = timeshifts_path.string() + "Timeshifts/" + run_name + ".dT";
-    if (found(runs_use_previous_timeshifts, run_number)) file_dT_str = timeshifts_path.string() + "Timeshifts/run_" + run_number-1 + ".dT";
+    if (found(runs_use_previous_timeshifts, run_number)) file_dT_str = timeshifts_path.string() + "Timeshifts/run_" + std::to_string(run_number-1) + ".dT";
     File file_dT(file_dT_str);
 
     // If only overwriting the timeshifts then no need to try to load it first :
