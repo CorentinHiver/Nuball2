@@ -45,7 +45,7 @@ void macro_EndRuns()
 
   FilesManager files(Path::home().string()+"nuball2/N-SI-136-sources/end_runs_2/");
   MTList MTfiles(files.get());
-  MTObject::Initialise(5);
+  MTObject::Initialise(10);
   MTObject::adjustThreadsNumber(files.size());
   MTObject::parallelise_function([&]()
   {
@@ -177,6 +177,7 @@ void macro_EndRuns()
 
           singles_paris->Fill(ba_module_i.nrj);
           singles_paris_back->Fill(ba_module_i.nrj);
+          singles_paris_back_VS_angle->Fill(ba_module_i.angle_to_beam(), ba_module_i.nrj);
 
           for (size_t ba_j = ba_i+1; ba_j<paris.back.module_mult; ++ba_j)
           {

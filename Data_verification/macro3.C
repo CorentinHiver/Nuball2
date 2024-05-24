@@ -319,6 +319,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       constexpr static int max_sum_Ge = 5000;
       unique_TH2F d_VS_sum_C2 (new TH2F(("d_VS_sum_C2_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_P (new TH2F(("d_VS_sum_C2_P_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_clean_sum_C2_P (new TH2F(("d_VS_clean_sum_C2_P_"+thread_i_str).c_str(), "delayed Ge VS clean sum of two clean Ge, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_pP (new TH2F(("d_VS_sum_C2_pP_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, particle + prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_ExP (new TH2F(("d_VS_sum_C2_ExP_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, particle + good Ex;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_ExSIP (new TH2F(("d_VS_sum_C2_ExSIP_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -1018,6 +1019,21 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
         }
 
+        auto isContaminant = [&](float const & energy){
+          return (
+                nrj < 100
+                || 506 < nrj && nrj < 516
+                || 594 < nrj && nrj < 605
+          )
+        };
+
+        auto hasContaminant = [&](CloversV2 const & clovers){
+          int nb_gamma_conta = 0;
+          for (auto const & index : clovers.GeClean){
+            if (isContaminant(clovers[index].nrj)) ++nb_gamma_conta;
+          return nb_gamma_conta;
+        };
+
         // Clean Ge sum
         if (Cmult[2])
         {
@@ -1030,6 +1046,12 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           {
             d_VS_sum_C2_P->Fill(Esum, Ge0.nrj);
             d_VS_sum_C2_P->Fill(Esum, Ge1.nrj);
+          
+            if (!if (hasContaminant(delayed_clovers)))
+            {
+              d_VS_clean_sum_C2_P->Fill(Esum, Ge0.nrj);
+              d_VS_clean_sum_C2_P->Fill(Esum, Ge1.nrj);
+            }
           }
           if (dssd_trigger && prompt_mult > 0)
           {
@@ -1046,6 +1068,14 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               }
             }
           }
+        }
+
+        // If one of the three gammas is a contaminant, then the two others become a C2
+        if (Cmult[3] && prompt_mult > 0 && hasContaminant(delayed_clovers) == 1) 
+        {
+          float Esum = 0;
+          for (auto const & index : delayed_clovers.GeClean) if (!isContaminant(delayed_clovers[index].nrj)) ++Esum;
+          for (auto const & index : delayed_clovers.GeClean) if (!isContaminant()) d_VS_clean_sum_C2_P->Fill(Esum, delayed_clovers[index].nrj);
         }
         
         if (prompt_mult > 0)
@@ -1312,6 +1342,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         print("write sum spectra");
         d_VS_sum_C2->Write("d_VS_sum_C2", TObject::kOverwrite);
         d_VS_sum_C2_P->Write("d_VS_sum_C2_P", TObject::kOverwrite);
+        d_VS_clean_sum_C2_P->Write("d_VS_clean_sum_C2_P", TObject::kOverwrite);
         d_VS_sum_C2_pP->Write("d_VS_sum_C2_pP", TObject::kOverwrite);
         d_VS_sum_C2_ExP->Write("d_VS_sum_C2_ExP", TObject::kOverwrite);
         d_VS_sum_C2_ExSIP->Write("d_VS_sum_C2_ExSIP", TObject::kOverwrite);

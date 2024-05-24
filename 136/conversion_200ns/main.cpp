@@ -43,7 +43,8 @@ Path timeshifts_path = "";
 ulonglong max_hits = -1;
 bool treat_129 = false;
 
-bool check_preprompt = false; // Do nothing anymore
+bool check_preprompt = false; // For timeshifts calculations : check there is no preprompt peak ()
+
 bool extend_periods = false; // To take more than one period after a event trigger, do nothing anymore
 uint nb_periods_more = 0; // Number of periods to extend after an event that triggered, do nothing anymore
 
@@ -246,6 +247,7 @@ int main(int argc, char** argv)
 
     // Timeshifts loading : 
     Timeshifts timeshifts;
+    if (check_preprompt) timeshifts.checkForPreprompt(true);
 
     // Creating a lambda that calculates the timeshifts directly from the data :
     auto calculateTimeshifts = [&](){
@@ -306,6 +308,9 @@ int main(int argc, char** argv)
       Filename filename = raw_dataFile.filename();// "                               run_number_fileNumber.fast"
       int fileNumber = std::stoi(lastPart(filename.shortName(), '_'));//                        fileNumber
       std::string run = removeLastPart(filename.shortName(), '_'); 
+
+      if (run == "run_22") return;
+      // if (run == "run_20" || "run_19") for (int label = 0; label<detectors.size(); ++label) timeshifts[label]-=30_ns;
 
       // Setting the name of the output file :
       Path outFolder (outPath+run, true);                     // /path/to/manip-root/run_number.fast/
