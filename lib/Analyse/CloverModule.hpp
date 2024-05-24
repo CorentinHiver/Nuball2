@@ -21,6 +21,7 @@ public:
   void clean() {this -> reset();}
   auto const & label() const {return m_label;}
   static void resetGlobalLabel() {gLabel = 0;}
+
   void addHit(float const & _nrj, Time const & _time, uchar const & sub_index)
   {
     if (sub_index<2) addBGO(_nrj, _time);
@@ -37,10 +38,11 @@ public:
     {
       maxE_Ge = _nrj;
       time = _time;
-      maxE_Ge_cristal = sub_index;
+      maxE_Ge_cristal = sub_index-2;
     }
     ++nb;
   }
+
   /// @brief Deprecated, use addHit instead
   void addBGO(float const & _nrj, Time const & _time) 
   {
@@ -61,7 +63,42 @@ public:
   Time time_BGO = 0.; // Time of the latest BGO, ps
 
   float maxE_Ge = 0.0;
-  uchar maxE_Ge_cristal = 0u; // Index of the Ge crystal with the most energy deposit in the clover
+  uchar maxE_Ge_cristal = 0u; // Index of the Ge crystal with the most energy deposit in the clover. [0;4]
+  
+  uchar ring() const
+  {
+    return m_label%2;
+  }
+  uchar sub_ring() const
+  {
+    if (m_label == 5) 
+    { // -pi/2 rotation
+      switch (maxE_Ge_cristal)
+      {
+        case 0: case 3 : return 2*ring()+1;
+        case 1: case 2: return 2*ring();
+      }
+    }
+    else if (m_label == 14 || m_label == 15) 
+    { // +pi/2 rotation
+      switch (maxE_Ge_cristal)
+      {
+        case 1: case 2 : return 2*ring()+1;
+        case 0: case 3: return 2*ring();
+      }
+    }
+    else if (m_label == 17) 
+    { // pi rotation
+      switch (maxE_Ge_cristal)
+      {
+        case 2: case 3 : return 2*ring()+1;
+        case 0: case 1: return 2*ring();
+      }
+    }
+    else if (maxE_Ge_cristal < 2) return 2*ring()+1; // red and green
+    else                     return 2*ring();   // black and blue
+    return 0;
+  }
 
   std::array<float, 6> nrjs;
   std::array<Time, 6> times;

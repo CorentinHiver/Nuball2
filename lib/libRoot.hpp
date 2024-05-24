@@ -190,6 +190,12 @@ int getBin0(TH1F* spectra)
   return bin0;
 }
 
+TH1D* Multiply(TH1D* histo, double const & value)
+{
+  for (int bin_i = 0; bin_i<histo->GetNbinsX(); ++bin_i) histo->SetBinContent(bin_i, histo->GetBinContent(bin_i)*value);
+  return histo;
+}
+
 /**
  * @brief Get the mean of the peak of a histogram with one nice single peak
 */

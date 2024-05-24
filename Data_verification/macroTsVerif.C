@@ -4,7 +4,7 @@
 #include "../lib/Classes/FilesManager.hpp"
 #include "../lib/Classes/Nuball2Tree.hpp"
 
-int max_cursor = 1.e7;
+int max_cursor = -1;
 void macroTsVerif()
 {
   std::string trigger = "dC1";
@@ -31,11 +31,8 @@ void macroTsVerif()
       
       while(tree.readNext())
       {
-        if (tree.cursor()%(int)(1.e+6) == 0) 
-        {
-          printC(nicer_double(tree.cursor(), 0), "hits");
-          if (max_cursor>0 && tree.cursor() > max_cursor) break;
-        }
+        if (max_cursor>0 && tree.cursor() > max_cursor) break;
+        if (tree.cursor()%(int)(1.e+7) == 0) printC(nicer_double(tree.cursor(), 0), "hits");
         for (int hit_i = 0; hit_i<event.mult; ++hit_i)
         {
           auto const & label = event.labels[hit_i];

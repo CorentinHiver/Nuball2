@@ -217,7 +217,7 @@ void ParisCluster<n>::InitialiseBidims()
 #endif //MULTITHREADING
   for (size_t i = 0; i<positions.size()+1; i++)
   {
-         if (i<i_min_R2) positions[i] = PositionXY(ParisArrays::Paris_R1_x[i           ], ParisArrays::Paris_R1_y[i           ]); // Ring 1
+         if (i<i_min_R2) positions[i] = PositionXY(ParisArrays::Paris_R1_x[i         ], ParisArrays::Paris_R1_y[i         ]); // Ring 1
     else if (i<i_min_R3) positions[i] = PositionXY(ParisArrays::Paris_R2_x[i-i_min_R2], ParisArrays::Paris_R2_y[i-i_min_R2]); // Ring 2
     else                 positions[i] = PositionXY(ParisArrays::Paris_R3_x[i-i_min_R3], ParisArrays::Paris_R3_y[i-i_min_R3]); // Ring 3
   }

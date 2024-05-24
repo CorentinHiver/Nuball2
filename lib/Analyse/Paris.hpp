@@ -75,6 +75,7 @@ public:
       for (int l = 0; l<1000; l++)
       {
         is[l]  = is_paris(l);
+        print(is[l], is_paris(l));
         cluster[l] = static_cast<uchar> (l>500);
         index[l] = label_to_index(l)%cluster_size;
       }
@@ -428,7 +429,7 @@ class PhoswitchCalib
 
   double calibrate(Hit & hit) {return data.at(hit.label).calibrate(hit);}
   double calibrate(Label const & label, double const & qshort, double const & qlong) {return data.at(label).calibrate(qshort, qlong);}
-  double calibrate(Label const & label, double const & qshort, double const & qlong) const {return data.at(label).calibrate(qshort, qlong);}
+  inline double calibrate(Label const & label, double const & qshort, double const & qlong) const {return data.at(label).calibrate(qshort, qlong);}
 
   class Coefficients
   {public:

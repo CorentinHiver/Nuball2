@@ -309,6 +309,10 @@ void Faster2Root::convert(std::string const & dataFolder, std::string const & ou
 void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & outPath)
 {
   Timer timer;
+  auto calibrate = [&hit, this](){
+    hit.nrj  = m_calibration(hit.adc, hit.label);
+    hit.nrj2 = (hit.qdc2==0) ? 0.0 : m_calibration(hit.qdc2, hit.label);
+  };
 
   //Filename manipulations :
   File inputFile = reader.filename();
@@ -324,7 +328,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   {// Event building is done in two times : first filling a temporary tree, then reorder it after timeshift and finally create events
     tempTree.reset(new TTree("temp","temp"));
     tempTree -> SetDirectory(nullptr);
-    hit.writing(tempTree.get(), (m_calibration) ? "ltEQp" : "lteqp");
+    hit.writing(tempTree.get(), "lteqp");
     event.writing(tree.get(), (m_calibration) ? "ltTEQp" : "ltTeqp");
   }
   else
@@ -342,14 +346,10 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   while(reader.Read())
   {
     if (m_timeshifts) hit.stamp += m_timeshifts[hit.label];
-    if (m_calibration)
-    {
-      hit.nrj  = m_calibration(hit.adc, hit.label);
-      hit.nrj2 = (hit.qdc2==0) ? m_calibration(hit.qdc2, hit.label) : 0.0;
-    }
     if (m_eventBuilding) tempTree -> Fill();
     else
     {// If no event building, directly writes the hits in the output tree
+      if (m_calibration) calibrate();
       event = hit;
       tree -> Fill();
     }
@@ -363,14 +363,15 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   {// Read the temporary tree and perform event building :
     auto const & nb_data = tempTree->GetEntries();
     Alignator alignator(tempTree.get());
-    hit.reading(tempTree.get(), (m_calibration) ? "ltEQp" : "lteqp");
+    hit.reading(tempTree.get(), "lteqp");
     CoincBuilder builder(&event, m_time_window);
     builder.keepSingles(!m_throw_single);
 
-    longlong loop = 1;
-    while (loop<nb_data)
+    for (longlong loop = 0; loop<nb_data; ++loop)
     {
-      tempTree -> GetEntry(alignator[loop++]);
+      // print(event);
+      tempTree -> GetEntry(alignator[loop]);
+      if (m_calibration) calibrate();
       if (builder.build(hit)) 
       {
         ++evts;

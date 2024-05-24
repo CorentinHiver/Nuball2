@@ -4,7 +4,7 @@
 #include "../lib/Classes/Calibration.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "../lib/Analyse/CloversV2.hpp"
-#include "../lib/Analyse/Paris.hpp"
+#include "../lib/Analyse/SimpleParis.hpp"
 #include "../lib/Classes/Hit.hpp"
 #include "ExcitationEnergy.hpp"
 
@@ -62,6 +62,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   MTList MTfiles(files.get());
   MTObject::Initialise(nb_threads);
   MTObject::adjustThreadsNumber(files.size());
+  Paris::InitialiseArrays();
   
   std::mutex write_mutex;
 
@@ -321,7 +322,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F d_VS_sum_C2_pP (new TH2F(("d_VS_sum_C2_pP_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, particle + prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_ExP (new TH2F(("d_VS_sum_C2_ExP_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, particle + good Ex;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_ExSIP (new TH2F(("d_VS_sum_C2_ExSIP_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
-      unique_TH2F p_VS_sum_C_pP (new TH2F(("p_VS_sum_C_pP_"+thread_i_str).c_str(), "prompt Ge VS sum of all clean Ge, particle + best Ex for SI;E sum _{delayed} [keV]; E#gamma_{prompt}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F p_VS_sum_C_pP (new TH2F(("p_VS_sum_C_pP_"+thread_i_str).c_str(), "prompt Ge VS sum of all clean Ge, particle + prompt gamma;E sum _{delayed} [keV]; E#gamma_{prompt}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C_pP (new TH2F(("d_VS_sum_C_pP_"+thread_i_str).c_str(), "delayed Ge VS sum of all clean Ge, particle + best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C_ExP (new TH2F(("d_VS_sum_C_ExP_"+thread_i_str).c_str(), "delayed Ge VS sum of all clean Ge, particle + prompt;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C_ExSIP (new TH2F(("d_VS_sum_C_ExSIP_"+thread_i_str).c_str(), "delayed Ge VS sum of all clean Ge, best Ex for SI;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -366,8 +367,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       CloversV2 last_prompt_clovers;
       CloversV2 last_delayed_clovers;
 
-      Paris prompt_paris;
-      Paris delayed_paris;
+      SimpleParis prompt_paris();
+      SimpleParis delayed_paris;
 
       std::vector<double> prompt_phoswitch;
       std::vector<double> delayed_phoswitch;
@@ -405,13 +406,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         chain->GetEntry(evt_i);
 
-        // print(event);
+        prompt_clovers.clear();
+        delayed_clovers.clear();
 
-        prompt_clovers.reset();
-        delayed_clovers.reset();
-
-        // prompt_paris.reset();
-        // delayed_paris.reset();
+        prompt_paris.clear();
+        delayed_paris.clear();
 
         prompt_phoswitch.clear();
         delayed_phoswitch.clear();
@@ -480,8 +479,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               if (nrj < 506 && 516 < nrj) delayed_clover_calo += smear(nrj, random) ;
             }
           }
-          // if (-5_ns < time && time < 5_ns) prompt_paris.fill(event, hit_i);           // Prompt paris
-          // else if (40_ns < time && time < 170_ns) delayed_paris.fill(event, hit_i);   // Delayed paris
+          if (-5_ns < time && time < 5_ns) prompt_paris.fill(event, hit_i, calibPhoswitches);           // Prompt paris
+          else if (40_ns < time && time < 170_ns) delayed_paris.fill(event, hit_i, calibPhoswitches);   // Delayed paris
 
           // Dssd :
           if (799 < label && label < 860) 
@@ -506,16 +505,16 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // First step, perform add-back and compton suppression :
         prompt_clovers.analyze();
         delayed_clovers.analyze();
-        // prompt_paris.analyze();
-        // delayed_paris.analyze();
+        prompt_paris.addback();
+        delayed_paris.addback();
 
         // -- Multiplicity -- //
         auto const & prompt_clover_mult = prompt_clovers.Hits.size();
         auto const & delayed_clover_mult = delayed_clovers.Hits.size();
-        auto const & prompt_paris_mult = prompt_phoswitch.size();
-        auto const & delayed_paris_mult = delayed_phoswitch.size();
-        // auto const & prompt_paris_mult = prompt_paris.Hits.size();
-        // auto const & delayed_paris_mult = delayed_paris.Hits.size();
+        // auto const & prompt_paris_mult = prompt_phoswitch.size();
+        // auto const & delayed_paris_mult = delayed_phoswitch.size();
+        auto const & prompt_paris_mult = prompt_paris.Hits.size();
+        auto const & delayed_paris_mult = delayed_paris.Hits.size();
         auto const & prompt_mult = prompt_clover_mult + prompt_paris_mult;
         auto const & delayed_mult = delayed_clover_mult + delayed_paris_mult;
 
@@ -649,7 +648,6 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             pp_bckg->Fill(clover_i.nrj, clover_j.nrj);
             pp_bckg->Fill(clover_j.nrj, clover_i.nrj);
           }
-          
         }
 
         /////// DELAYED CLEAN ///////
@@ -1061,7 +1059,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             if (dssd_trigger) 
             {
               if (sum_clean_Ge>0) d_VS_sum_C_pP->Fill(sum_clean_Ge, clover->nrj);
-              if (sum_all_Ge>0)   d_VS_sum_Ge_pP->Fill(sum_all_Ge, clover->nrj);
+              if (delayed_clovers.Ge.size()>1)   d_VS_sum_Ge_pP->Fill(sum_all_Ge, clover->nrj);
             }
             if (Ex_p>0)
             {
@@ -1070,7 +1068,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
                 d_VS_sum_C_ExP->Fill(sum_clean_Ge, clover->nrj);
                 if (4_MeV < Emiss && Emiss < 6.5_MeV) d_VS_sum_C_ExSIP->Fill(sum_clean_Ge, clover->nrj);
               }
-              if (sum_all_Ge>0)
+              if (delayed_clovers.Ge.size()>1)
               {
                 d_VS_sum_Ge_ExP->Fill(sum_all_Ge, clover->nrj);
                 if (4_MeV < Emiss && Emiss < 6.5_MeV) d_VS_sum_Ge_ExSIP->Fill(sum_all_Ge, clover->nrj);
