@@ -116,6 +116,7 @@ public:
     phoswitch.qlong = event.nrj2s[hit_i];
     phoswitch.nrj = calib.calibrate(label, phoswitch.qshort, phoswitch.qlong);
     phoswitch.time = event.times[hit_i];
+    calorimetry+=phoswitch.nrj;
   }
 
   void clear()
@@ -128,6 +129,7 @@ public:
     module_mult = 0;
     m_addback = false;
     m_addback_used = false;
+    calorimetry = 0;
   }
 
   void addback()
@@ -188,6 +190,7 @@ public:
   size_t phoswitch_mult = 0;
   size_t module_mult = 0;
 
+  float calorimetry = 0;
   void setDistanceMax(double const & _distance_max) {m_distance_max = _distance_max;}
   void setTimeWindow(double const & _time_window) {m_time_window = _time_window;}
   auto const & isAddBack() const {return m_addback;}
@@ -255,6 +258,7 @@ public:
   }
   int phoswitch_mult() const { return back.phoswitches_id.size() + front.phoswitches_id.size();}
   int module_mult() const { return back.modules_id.size() + front.modules_id.size();}
+  float calorimetry() const {return back.calorimetry + front.calorimetry;}
   SimpleCluster back;
   SimpleCluster front;
 

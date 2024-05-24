@@ -19,6 +19,10 @@
 constexpr bool inline isPrompt(Time const & time)  noexcept {return -30_ns < time && time < 30_ns ;}
 constexpr bool inline isDelayed(Time const & time) noexcept {return  30_ns < time && time < 180_ns;}
 
+std::unordered_set<int> runs_preprompt = {13, 14, 15, 16, 18, 19, 20};
+std::unordered_set<int> runs_blacklist = {22};
+std::unordered_set<int> runs_use_previous_timeshifts = {25, 32, 38, 73};
+
 #include "Trigger136.hpp"
 
 // 3. Declare some global variables :
@@ -216,6 +220,13 @@ int main(int argc, char** argv)
   std::string run;
   while(runs.getNext(run))
   {
+    MTCounter total_read_size;
+    Timer timer_total;
+    auto const & run_path = manipPath+run;
+    auto const & run_name = removeExtension(run);
+    auto const & run_number = std::stoi(split(run_name, '_')[1])
+    if(found(runs_blacklist, run_number)) continue;
+
     MTTHist<TH1F> histo_mult_trigger;
     MTTHist<TH1F> labels_histo;
     MTTHist<TH1F> histo_mult;
@@ -236,11 +247,6 @@ int main(int argc, char** argv)
     cleanGe_trigged_VS_time.reset("cleanGe_trigged_VS_time","cleanGe_trigged_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
     cleanGe_trigger_particle_VS_time.reset("cleanGe_trigger_particle_VS_time","cleanGe_trigger_particle_VS_time", 400,-100_ns,300_ns, 10000,0,10000);
     labels_histo.reset("labels","labels", 1000,0,1000);
-
-    MTCounter total_read_size;
-    Timer timer_total;
-    auto const & run_path = manipPath+run;
-    auto const & run_name = removeExtension(run);
 
     print("----------------");
     print("Treating ", run_name);
@@ -273,11 +279,13 @@ int main(int argc, char** argv)
       timeshifts.write(run_name);
     };
 
-    File file_dT(outPath.string() + "Timeshifts/" + run_name + ".dT");
-    if (timeshifts_path.string() != "" && timeshifts_path.exists()) file_dT = timeshifts_path.string() + "Timeshifts/" + run_name + ".dT";
+    std::string file_dT_str = outPath.string() + "Timeshifts/" + run_name + ".dT"
+    if (timeshifts_path.string() != "" && timeshifts_path.exists()) file_dT_str = timeshifts_path.string() + "Timeshifts/" + run_name + ".dT";
+    if (found(runs_use_previous_timeshifts, run_number)) file_dT_str = timeshifts_path.string() + "Timeshifts/run_" + run_number-1 + ".dT";
+    File file_dT(file_dT_str);
 
     // If only overwriting the timeshifts then no need to try to load it first :
-    if(overwrite && only_timeshifts) {calculateTimeshifts();}
+    if(overwrite && only_timeshifts) {calculateTimeshifts(); continue;}
     else
     {
       try // Try to load the data

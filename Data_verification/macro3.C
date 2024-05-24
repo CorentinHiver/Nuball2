@@ -368,11 +368,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       CloversV2 last_prompt_clovers;
       CloversV2 last_delayed_clovers;
 
-      SimpleParis prompt_paris();
-      SimpleParis delayed_paris;
+      SimpleParis prompt_paris(&calibPhoswitches);
+      SimpleParis delayed_paris(&calibPhoswitches);
 
-      std::vector<double> prompt_phoswitch;
-      std::vector<double> delayed_phoswitch;
+      // std::vector<double> prompt_phoswitch;
+      // std::vector<double> delayed_phoswitch;
 
       // std::vector<double> prompt_phoswitch_label;
       // std::vector<double> delayed_phoswitch_label;
@@ -398,8 +398,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         double prompt_clover_calo = 0;
         double delayed_clover_calo = 0;
 
-        double prompt_phoswitch_calo = 0;
-        double delayed_phoswitch_calo = 0;
+        double prompt_paris_calo = 0;
+        double delayed_paris_calo = 0;
 
         bool dssd_trigger = false;
 
@@ -413,9 +413,6 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         prompt_paris.clear();
         delayed_paris.clear();
 
-        prompt_phoswitch.clear();
-        delayed_phoswitch.clear();
-        
         sector_energy.clear();
         ring_energy.clear();
 
@@ -446,7 +443,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             if (-5_ns < time && time < 5_ns)
             {
               short_vs_long_prompt->Fill(nrj, nrj2);
-              prompt_phoswitch.push_back(nrjcal);
+              prompt_paris.fill(event, hit_i);
+              // prompt_phoswitch.push_back(nrjcal);
             }
             else if (10_ns < time && time < 40_ns)
             {
@@ -455,7 +453,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             else if (40_ns < time && time < 170_ns) 
             {
               short_vs_long_delayed->Fill(nrj, nrj2);
-              delayed_phoswitch.push_back(nrjcal);
+              delayed_paris.fill(event, hit_i);
+              // delayed_phoswitch.push_back(nrjcal);
             }
           }
 
@@ -514,8 +513,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         auto const & delayed_clover_mult = delayed_clovers.Hits.size();
         // auto const & prompt_paris_mult = prompt_phoswitch.size();
         // auto const & delayed_paris_mult = delayed_phoswitch.size();
-        auto const & prompt_paris_mult = prompt_paris.Hits.size();
-        auto const & delayed_paris_mult = delayed_paris.Hits.size();
+        auto const & prompt_paris_mult = delayed_paris.module_mult();
+        auto const & delayed_paris_mult = prompt_paris.module_mult();
         auto const & prompt_mult = prompt_clover_mult + prompt_paris_mult;
         auto const & delayed_mult = delayed_clover_mult + delayed_paris_mult;
 
@@ -529,31 +528,22 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         dp_mult->Fill(prompt_mult, delayed_mult);
 
         // -- Calorimetry -- //
-        // print(prompt_phoswitch);
-        // print(delayed_phoswitch);
-        // pauseCo();
-        prompt_phoswitch_calo = sum(prompt_phoswitch);
-        delayed_phoswitch_calo = sum(delayed_phoswitch);
-        auto const & prompt_calo_clover = prompt_clover_calo;
-        auto const & delayed_calo_clover = delayed_clover_calo;
-        // auto const & prompt_calo_clover = prompt_clovers.calorimetryBGO + prompt_clovers.calorimetryGe + prompt_phoswitch_calo;
-        // auto const & delayed_calo_clover = delayed_clovers.calorimetryBGO + delayed_clovers.calorimetryGe + delayed_phoswitch_calo;
-        // auto const & prompt_calo_paris = prompt_paris.NaI_calorimetry() + smear(prompt_paris.LaBr3_calorimetry(), random);
-        // auto const & delayed_calo_paris = delayed_paris.NaI_calorimetry() + smear(delayed_paris.LaBr3_calorimetry(), random);
+        prompt_paris_calo = prompt_paris.calorimetry();
+        delayed_paris_calo = delayed_paris.calorimetry();
         
-        if (prompt_calo_clover     > 0) p_calo_clover -> Fill(prompt_calo_clover);
-        if (delayed_calo_clover    > 0) d_calo_clover -> Fill(delayed_calo_clover);
-        if (prompt_phoswitch_calo  > 0) p_calo_phoswitch -> Fill(prompt_phoswitch_calo);
-        if (delayed_phoswitch_calo > 0) d_calo_phoswitch -> Fill(delayed_phoswitch_calo);
-        if (prompt_calo_clover     > 0 && prompt_phoswitch_calo  > 0) p_calo_clover_VS_p_calo_phoswitch -> Fill(prompt_calo_clover, prompt_phoswitch_calo);
-        if (delayed_calo_clover    > 0 && delayed_phoswitch_calo > 0) d_calo_clover_VS_d_calo_phoswitch -> Fill(delayed_calo_clover, delayed_phoswitch_calo);
+        if (prompt_clover_calo  > 0) p_calo_clover -> Fill(prompt_clover_calo);
+        if (delayed_clover_calo > 0) d_calo_clover -> Fill(delayed_clover_calo);
+        if (prompt_paris_calo   > 0) p_calo_phoswitch -> Fill(prompt_paris_calo);
+        if (delayed_paris_calo  > 0) d_calo_phoswitch -> Fill(delayed_paris_calo);
+        if (prompt_clover_calo  > 0 && prompt_paris_calo  > 0) p_calo_clover_VS_p_calo_phoswitch -> Fill(prompt_clover_calo, prompt_paris_calo);
+        if (delayed_clover_calo > 0 && delayed_paris_calo > 0) d_calo_clover_VS_d_calo_phoswitch -> Fill(delayed_clover_calo, delayed_paris_calo);
 
-        auto const & prompt_calo = prompt_calo_clover + prompt_phoswitch_calo;
-        auto const & delayed_calo = delayed_calo_clover + delayed_phoswitch_calo;
+        auto const & prompt_calo = prompt_clover_calo + prompt_paris_calo;
+        auto const & delayed_calo = delayed_clover_calo + delayed_paris_calo;
         if (0 < prompt_calo) p_calo->Fill(prompt_calo);
         if (0 < delayed_calo) d_calo->Fill(delayed_calo);
         if (prompt_calo > 0 && delayed_calo > 0) dp_calo->Fill(prompt_calo, delayed_calo);
-        if (delayed_calo > 0 && prompt_mult > 0) d_calo_pP->Fill(delayed_calo_clover);
+        if (delayed_calo > 0 && prompt_mult > 0) d_calo_pP->Fill(delayed_clover_calo);
 
         /////// PROMPT CLEAN ///////
         for (size_t loop_i = 0; loop_i<prompt_clovers.GeClean.size(); ++loop_i)
@@ -627,14 +617,12 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               }
             }
           }
-          for (auto const & nrj_paris : prompt_phoswitch)
-          {
-            ge_VS_phoswitch_prompt->Fill(nrj_paris, clover_i.nrj);
-          }
-          for (auto const & nrj_paris : delayed_phoswitch)
-          {
-            p_VS_phoswitch_delayed->Fill(nrj_paris, clover_i.nrj);
-          }
+          
+          for (auto const & id : prompt_paris.back.modules_id) ge_VS_phoswitch_prompt->Fill(prompt_paris.back.modules[id].nrj, clover_i.nrj);
+          for (auto const & id : prompt_paris.front.modules_id) ge_VS_phoswitch_prompt->Fill(prompt_paris.front.modules[id].nrj, clover_i.nrj);
+          for (auto const & id : delayed_paris.back.modules_id) p_VS_phoswitch_delayed->Fill(delayed_paris.back.modules[id].nrj, clover_i.nrj);
+          for (auto const & id : delayed_paris.front.modules_id) p_VS_phoswitch_delayed->Fill(delayed_paris.front.modules[id].nrj, clover_i.nrj);
+
           for (auto const & BGO_i : prompt_clovers.BGOClean)
           {
             auto const & nrj_BGO = prompt_clovers[BGO_i].nrj_BGO;
@@ -802,10 +790,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             }
           }
           // Prompt phoswitch delayed Ge
-          for (auto const & nrj_paris : prompt_phoswitch)
-          {
-            d_VS_phoswitch_prompt->Fill(nrj_paris, clover_i.nrj);
-          }
+          for (auto const & id : prompt_paris.back.modules_id) d_VS_phoswitch_prompt->Fill(prompt_paris.back.modules[id].nrj, clover_i.nrj);
+          for (auto const & id : prompt_paris.front.modules_id) d_VS_phoswitch_prompt->Fill(prompt_paris.front.modules[id].nrj, clover_i.nrj);
 
           if (prompt_mult > 0 && prompt_calo < 5_MeV)
           {
@@ -851,10 +837,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
 
           //// Clover VS PARIS ////
-          for (auto const & nrj_paris : delayed_phoswitch)
-          {
-            ge_VS_phoswitch_delayed->Fill(nrj_paris, clover_i.nrj);
-          }
+          for (auto const & id : delayed_paris.back.modules_id) ge_VS_phoswitch_delayed->Fill(delayed_paris.back.modules[id].nrj, clover_i.nrj);
+          for (auto const & id : delayed_paris.front.modules_id) ge_VS_phoswitch_delayed->Fill(delayed_paris.front.modules[id].nrj, clover_i.nrj);
           
           //// Clover VS BGO ////
           for (auto const & BGO_i : delayed_clovers.BGOClean)
@@ -1019,19 +1003,19 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
         }
 
-        auto isContaminant = [&](float const & energy){
+        auto isContaminant = [&](float const & nrj){
           return (
-                nrj < 100
-                || 506 < nrj && nrj < 516
-                || 594 < nrj && nrj < 605
-          )
+                                (nrj < 100)
+                || (506 < nrj && nrj < 516)
+                || (594 < nrj && nrj < 605)
+          );
         };
 
-        auto hasContaminant = [&](CloversV2 const & clovers){
+        auto hasContaminant = [&](CloversV2 const & clovers) {
           int nb_gamma_conta = 0;
           for (auto const & index : clovers.GeClean){
             if (isContaminant(clovers[index].nrj)) ++nb_gamma_conta;
-          return nb_gamma_conta;
+          return nb_gamma_conta;}
         };
 
         // Clean Ge sum
@@ -1047,7 +1031,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             d_VS_sum_C2_P->Fill(Esum, Ge0.nrj);
             d_VS_sum_C2_P->Fill(Esum, Ge1.nrj);
           
-            if (!if (hasContaminant(delayed_clovers)))
+            if (!(hasContaminant(delayed_clovers) > 0))
             {
               d_VS_clean_sum_C2_P->Fill(Esum, Ge0.nrj);
               d_VS_clean_sum_C2_P->Fill(Esum, Ge1.nrj);
@@ -1075,7 +1059,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         {
           float Esum = 0;
           for (auto const & index : delayed_clovers.GeClean) if (!isContaminant(delayed_clovers[index].nrj)) ++Esum;
-          for (auto const & index : delayed_clovers.GeClean) if (!isContaminant()) d_VS_clean_sum_C2_P->Fill(Esum, delayed_clovers[index].nrj);
+          for (auto const & index : delayed_clovers.GeClean) if (!isContaminant(delayed_clovers[index].nrj)) d_VS_clean_sum_C2_P->Fill(Esum, delayed_clovers[index].nrj);
         }
         
         if (prompt_mult > 0)
@@ -1161,8 +1145,10 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
 
         /////// PARIS //////////
-        for (auto const & paris_nrj : prompt_phoswitch)  phoswitches_prompt ->Fill(paris_nrj);
-        for (auto const & paris_nrj : delayed_phoswitch) phoswitches_delayed->Fill(paris_nrj);
+        for (auto const & id : prompt_paris.back.modules_id)  phoswitches_prompt ->Fill(prompt_paris.back.modules[id].nrj);
+        for (auto const & id : prompt_paris.front.modules_id)  phoswitches_prompt ->Fill(prompt_paris.front.modules[id].nrj);
+        for (auto const & id : delayed_paris.back.modules_id)  phoswitches_delayed ->Fill(delayed_paris.back.modules[id].nrj);
+        for (auto const & id : delayed_paris.front.modules_id)  phoswitches_delayed ->Fill(delayed_paris.front.modules[id].nrj);
         // for (auto const & index : prompt_paris.front().HitsClean) paris_prompt -> Fill(prompt_paris.front().modules[index].nrj);
         // for (auto const & index : prompt_paris.back().HitsClean) paris_prompt -> Fill(prompt_paris.back().modules[index].nrj);
         // for (auto const & index : delayed_paris.front().HitsClean) paris_delayed -> Fill(delayed_paris.front().modules[index].nrj);
