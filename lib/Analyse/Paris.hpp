@@ -21,7 +21,7 @@ class Paris
 {
 public:
   constexpr static uchar cluster_size = 36ul;
-  constexpr static double distance_max = 2.;
+  constexpr static double distance_max = 2.5;
   // ________________________________________________________________ //
   // ------------------  Setting the lookup tables ------------------ //
   //  ---- From labels to index ---- //
@@ -75,7 +75,6 @@ public:
       for (int l = 0; l<1000; l++)
       {
         is[l]  = is_paris(l);
-        print(is[l], is_paris(l));
         cluster[l] = static_cast<uchar> (l>500);
         index[l] = label_to_index(l)%cluster_size;
       }

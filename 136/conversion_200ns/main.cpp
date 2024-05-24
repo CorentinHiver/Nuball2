@@ -403,7 +403,7 @@ int main(int argc, char** argv)
       ulong evts_count = 0;
       ulong trig_count = 0;
       ulong trig_hits_count = 0;
-      while (++loop<nb_data)
+      for (;loop<nb_data; ++loop)
       {
         tempTree -> GetEntry(gIndex[loop]);
 

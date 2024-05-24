@@ -71,10 +71,13 @@ void macro_EndRuns()
       unique_TH2F ggC3(new TH2F(("ggC3_"+thread_i_str).c_str(),"ggC3",4096,0,4096, 4096,0,4096));
 
       unique_TH1F singles_paris(new TH1F(("singles_paris_"+thread_i_str).c_str(),"singles_paris",10000,0,10000));
+      unique_TH1F mult_paris(new TH1F(("mult_paris_"+thread_i_str).c_str(),"mult_paris",20,0,20));
       unique_TH1F singles_paris_front(new TH1F(("singles_paris_front_"+thread_i_str).c_str(),"singles_paris_front",10000,0,10000));
-      unique_TH2F singles_paris_front_VS_angle(new TH2F(("singles_paris_front_VS_angle_"+thread_i_str).c_str(),"singles_paris_front_VS_angle",20,-5,15, 10000,0,10000));
+      unique_TH2F singles_paris_front_VS_angle(new TH2F(("singles_paris_front_VS_angle_"+thread_i_str).c_str(),"singles_paris_front_VS_angle",200,-5,15, 10000,0,10000));
+      unique_TH1F mult_paris_front(new TH1F(("mult_paris_front_"+thread_i_str).c_str(),"mult_paris_front",20,0,20));
       unique_TH1F singles_paris_back(new TH1F(("singles_paris_back_"+thread_i_str).c_str(),"singles_paris_back",10000,0,10000));
       unique_TH2F singles_paris_back_VS_angle(new TH2F(("singles_paris_back_VS_angle_"+thread_i_str).c_str(),"singles_paris_back_VS_angle",20,-5,15, 10000,0,10000));
+      unique_TH1F mult_paris_back(new TH1F(("mult_paris_back_"+thread_i_str).c_str(),"mult_paris_back",20,0,20));
       unique_TH2F gg_paris(new TH2F(("gg_paris_"+thread_i_str).c_str(),"gg_paris",5000,0,10000, 5000,0,10000));
       unique_TH2F gg_paris_front(new TH2F(("gg_paris_front_"+thread_i_str).c_str(),"gg_paris_front",5000,0,10000, 5000,0,10000));
       unique_TH2F gg_paris_back(new TH2F(("gg_paris_back_"+thread_i_str).c_str(),"gg_paris_back",5000,0,10000, 5000,0,10000));
@@ -92,7 +95,12 @@ void macro_EndRuns()
         clovers = event;
         paris = event;
 
-        if (paris.phoswitch_mult()>0) print(paris);
+        // if (paris.module_mult()>0) 
+        // {
+        //   print(event);
+        //   print(paris);
+        //   pauseCo();
+        // }
 
         auto const absolute_time_h = double_cast(event.stamp)*1.e-12/3600.;
 
@@ -126,58 +134,61 @@ void macro_EndRuns()
           }
         }
         for (size_t hit_i=0; hit_i<clovers.Rejected.size(); ++hit_i) rejected->Fill(clovers[clovers.Rejected[hit_i]].nrj);
-      }
+        mult_paris->Fill(paris.module_mult());
+        mult_paris_front->Fill(paris.front.module_mult);
+        mult_paris_back->Fill(paris.back.module_mult);
 
-      for (size_t fr_i = 0; fr_i<paris.front.module_mult; ++fr_i)
-      {
-        auto const & fr_id_i = paris.front.modules_id[fr_i];
-        auto const & fr_module_i = paris.front.modules[fr_id_i];
-        singles_paris->Fill(fr_module_i.nrj);
-        singles_paris_front->Fill(fr_module_i.nrj);
-        singles_paris_front_VS_angle->Fill(fr_module_i.angle_to_beam(), fr_module_i.nrj);
-
-        for (size_t fr_j = 0; fr_j<paris.front.module_mult; ++fr_j)
+        for (size_t fr_i = 0; fr_i<paris.front.module_mult; ++fr_i)
         {
-          auto const & fr_id_j = paris.front.modules_id[fr_j];
-          auto const & fr_module_j = paris.front.modules[fr_id_j];
+          auto const & fr_id_i = paris.front.modules_id[fr_i];
+          auto const & fr_module_i = paris.front.modules[fr_id_i];
+          singles_paris->Fill(fr_module_i.nrj);
+          singles_paris_front->Fill(fr_module_i.nrj);
+          singles_paris_front_VS_angle->Fill(fr_module_i.angle_to_beam(), fr_module_i.nrj);
 
-          gg_paris->Fill(fr_module_i.nrj, fr_module_j.nrj);
-          gg_paris->Fill(fr_module_j.nrj, fr_module_i.nrj);
+          for (size_t fr_j = fr_i+1; fr_j<paris.front.module_mult; ++fr_j)
+          {
+            auto const & fr_id_j = paris.front.modules_id[fr_j];
+            auto const & fr_module_j = paris.front.modules[fr_id_j];
 
-          gg_paris_front->Fill(fr_module_i.nrj, fr_module_j.nrj);
-          gg_paris_front->Fill(fr_module_j.nrj, fr_module_i.nrj);
+            gg_paris->Fill(fr_module_i.nrj, fr_module_j.nrj);
+            gg_paris->Fill(fr_module_j.nrj, fr_module_i.nrj);
+
+            gg_paris_front->Fill(fr_module_i.nrj, fr_module_j.nrj);
+            gg_paris_front->Fill(fr_module_j.nrj, fr_module_i.nrj);
+          }
+
+          for (size_t ba_j = 0; ba_j<paris.back.module_mult; ++ba_j)
+          {
+            auto const & ba_id_j = paris.back.modules_id[ba_j];
+            auto const & ba_module_j = paris.back.modules[ba_id_j];
+
+            gg_paris->Fill(fr_module_i.nrj, ba_module_j.nrj);
+            gg_paris->Fill(ba_module_j.nrj, fr_module_i.nrj);
+
+            gg_paris_front_VS_back->Fill(ba_module_j.nrj, fr_module_i.nrj);
+          }
         }
-
-        for (size_t ba_j = 0; ba_j<paris.back.module_mult; ++ba_j)
+        
+        for (size_t ba_i = 0; ba_i<paris.back.module_mult; ++ba_i)
         {
-          auto const & ba_id_j = paris.back.modules_id[ba_j];
-          auto const & ba_module_j = paris.back.modules[ba_id_j];
+          auto const & ba_id_i = paris.back.modules_id[ba_i];
+          auto const & ba_module_i = paris.back.modules[ba_id_i];
 
-          gg_paris->Fill(fr_module_i.nrj, ba_module_j.nrj);
-          gg_paris->Fill(ba_module_j.nrj, fr_module_i.nrj);
+          singles_paris->Fill(ba_module_i.nrj);
+          singles_paris_back->Fill(ba_module_i.nrj);
 
-          gg_paris_front_VS_back->Fill(ba_module_j.nrj, fr_module_i.nrj);
-        }
-      }
-      
-      for (size_t ba_i = 0; ba_i<paris.back.module_mult; ++ba_i)
-      {
-        auto const & ba_id_i = paris.back.modules_id[ba_i];
-        auto const & ba_module_i = paris.back.modules[ba_id_i];
+          for (size_t ba_j = ba_i+1; ba_j<paris.back.module_mult; ++ba_j)
+          {
+            auto const & ba_id_j = paris.back.modules_id[ba_j];
+            auto const & ba_module_j = paris.back.modules[ba_id_j];
 
-        singles_paris->Fill(ba_module_i.nrj);
-        singles_paris_back->Fill(ba_module_i.nrj);
+            gg_paris->Fill(ba_module_i.nrj, ba_module_j.nrj);
+            gg_paris->Fill(ba_module_j.nrj, ba_module_i.nrj);
 
-        for (size_t ba_j = 0; ba_j<paris.back.module_mult; ++ba_j)
-        {
-          auto const & ba_id_j = paris.back.modules_id[ba_j];
-          auto const & ba_module_j = paris.back.modules[ba_id_j];
-
-          gg_paris->Fill(ba_module_i.nrj, ba_module_j.nrj);
-          gg_paris->Fill(ba_module_j.nrj, ba_module_i.nrj);
-
-          gg_paris_back->Fill(ba_module_i.nrj, ba_module_j.nrj);
-          gg_paris_back->Fill(ba_module_j.nrj, ba_module_i.nrj);
+            gg_paris_back->Fill(ba_module_i.nrj, ba_module_j.nrj);
+            gg_paris_back->Fill(ba_module_j.nrj, ba_module_i.nrj);
+          }
         }
       }
 
@@ -198,10 +209,13 @@ void macro_EndRuns()
         ggC3->Write("ggC3", TObject::kOverwrite);
 
         singles_paris->Write("singles_paris", TObject::kOverwrite);
+        mult_paris->Write("mult_paris", TObject::kOverwrite);
         singles_paris_front->Write("singles_paris_front", TObject::kOverwrite);
         singles_paris_front_VS_angle->Write("singles_paris_front_VS_angle", TObject::kOverwrite);
+        mult_paris_front->Write("mult_paris_front", TObject::kOverwrite);
         singles_paris_back->Write("singles_paris_back", TObject::kOverwrite);
         singles_paris_back_VS_angle->Write("singles_paris_back_VS_angle", TObject::kOverwrite);
+        mult_paris_back->Write("mult_paris_back", TObject::kOverwrite);
         gg_paris->Write("gg_paris", TObject::kOverwrite);
         gg_paris_front->Write("gg_paris_front", TObject::kOverwrite);
         gg_paris_back->Write("gg_paris_back", TObject::kOverwrite);
