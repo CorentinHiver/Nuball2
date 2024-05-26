@@ -511,6 +511,7 @@ public:
   bool exists() {return m_exists;}
   operator bool() const {return folder_exists(m_path);}
   bool make() { create_folder_if_none(m_path); return m_exists = true;}
+  static bool make (std::string path_name) {Path _path(path_name); return (_path.make());}
 
   Path & addFolder(Folder const & folder)
   {

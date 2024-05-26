@@ -2,6 +2,7 @@
 #include "../lib/libRoot.hpp"
 #include "../lib/Classes/FilesManager.hpp"
 #include "../lib/Classes/Calibration.hpp"
+#include "../lib/Classes/Nuball2Tree.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/SimpleParis.hpp"
@@ -43,6 +44,7 @@ std::unordered_map<Label, double> CloversV2::maxE_Ge =
 
 void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
+  std::string target = "U";
   std::string trigger = "dC1";
   // std::string trigger = "PrM1DeC1";
   // std::string trigger = "C2";
@@ -113,6 +115,12 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
     auto const & thread_i_str = std::to_string(thread_i);
     while(MTfiles.getNext(file))
     {
+      auto const & filename = removePath(file);
+      auto const & run_name = removeExtension(filename);
+      int const & run_number = std::stoi(split(filename, '_')[1]);
+      if (target == "Th" && run_number>74) continue;
+      if (target == "U" && run_number<75) continue;
+
       files_total_size.fetch_add(size_file(file,"Mo"), std::memory_order_relaxed);
       int nb_bins_Ge_singles = 10000;
       int max_bin_Ge_singles = 10000;
@@ -349,18 +357,15 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH1F neutron_hit_pattern (new TH1F(("neutron_hit_pattern"+thread_i_str).c_str(), "neutron_hit_pattern", 1000,0,1000));
       unique_TH1F hit_pattern_2755 (new TH1F(("hit_pattern_2755"+thread_i_str).c_str(), "hit_pattern_2755", 1000,0,1000));
       
-      auto const & filename = removePath(file);
-      auto const & run_name = removeExtension(filename);
-      int const & run_number = std::stoi(split(filename, '_')[1]);
-      TChain* chain = new TChain("Nuball2");
-      chain->Add(file.c_str());
+      Nuball2Tree tree(file.c_str());
       print("Reading", file);
 
-      std::string outFolder = "data/"+trigger+"/";
+      std::string outFolder = "data/"+trigger+"/"+target+"/";
+      Path::make(outFolder);
       std::string out_filename = outFolder+filename;
 
       Event event;
-      event.reading(chain, "ltTEQ");
+      event.reading(tree, "ltTEQ");
 
       CloversV2 prompt_clovers;
       CloversV2 delayed_clovers;
@@ -391,9 +396,23 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::vector<Label> sector_labels;
       std::vector<Label> ring_labels;
 
+        auto isContaminant = [&](float const & nrj){
+          return (
+                                (nrj < 100)
+                || (506 < nrj && nrj < 516)
+                || (594 < nrj && nrj < 605)
+          );
+        };
+
+        auto hasContaminant = [&](CloversV2 const & clovers) {
+          int nb_gamma_conta = 0;
+          for (auto const & index : clovers.GeClean) if (isContaminant(clovers[index].nrj)) ++nb_gamma_conta;
+          return nb_gamma_conta;
+        };
+
 
       int evt_i = 1;
-      for ( ;(evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
+      for ( ;(evt_i < tree->GetEntries() && evt_i < nb_hits_read); evt_i++)
       {
         double prompt_clover_calo = 0;
         double delayed_clover_calo = 0;
@@ -405,7 +424,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         if (evt_i%freq_hit_display == 0) print(nicer_double(evt_i, 0), "events");
 
-        chain->GetEntry(evt_i);
+        tree->GetEntry(evt_i);
 
         prompt_clovers.clear();
         delayed_clovers.clear();
@@ -1003,21 +1022,6 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
         }
 
-        auto isContaminant = [&](float const & nrj){
-          return (
-                                (nrj < 100)
-                || (506 < nrj && nrj < 516)
-                || (594 < nrj && nrj < 605)
-          );
-        };
-
-        auto hasContaminant = [&](CloversV2 const & clovers) {
-          int nb_gamma_conta = 0;
-          for (auto const & index : clovers.GeClean){
-            if (isContaminant(clovers[index].nrj)) ++nb_gamma_conta;
-          return nb_gamma_conta;}
-        };
-
         // Clean Ge sum
         if (Cmult[2])
         {
@@ -1031,7 +1035,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             d_VS_sum_C2_P->Fill(Esum, Ge0.nrj);
             d_VS_sum_C2_P->Fill(Esum, Ge1.nrj);
           
-            if (!(hasContaminant(delayed_clovers) > 0))
+            if (hasContaminant(delayed_clovers) == 0)
             {
               d_VS_clean_sum_C2_P->Fill(Esum, Ge0.nrj);
               d_VS_clean_sum_C2_P->Fill(Esum, Ge1.nrj);
@@ -1375,8 +1379,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         print("write paris spectra");
 
-        short_vs_long_prompt->Write("phoswitches_prompt", TObject::kOverwrite);
-        short_vs_long_delayed->Write("phoswitches_delayed", TObject::kOverwrite);
+        short_vs_long_prompt->Write("short_vs_long_prompt", TObject::kOverwrite);
+        short_vs_long_delayed->Write("short_vs_long_delayed", TObject::kOverwrite);
 
         ge_VS_phoswitch_prompt->Write("ge_VS_phoswitch_prompt", TObject::kOverwrite);
         ge_VS_phoswitch_delayed->Write("ge_VS_phoswitch_delayed", TObject::kOverwrite);

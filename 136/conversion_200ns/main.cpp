@@ -31,6 +31,7 @@ std::string calibFile = "../136_2024.calib";
 Folder manip = "N-SI-136";
 std::string list_runs = "list_runs.list";
 std::string output = "-root_";
+std::string target = "";
 int nb_files_ts = 200;
 int nb_files = -1;
 int rf_shift = 20_ns;
@@ -135,9 +136,11 @@ int main(int argc, char** argv)
         {
           list_runs = "Thorium.list";
           check_preprompt = true;
+          target = "Th";
         }
         else if (command == "-U" || command == "--Uranium")
         {
+          target = "U";
           list_runs = "Uranium.list";
         }
         else if (                   command == "--129")
@@ -146,6 +149,7 @@ int main(int argc, char** argv)
           list_runs = "129.list";
           calibFile = "129.calib";
           manip = "N-SI-129";
+          target = "U";
           check_preprompt = true;
         }
         else if (command == "--run")
@@ -337,7 +341,7 @@ int main(int argc, char** argv)
       std::string tree_name = run_name + "_" + std::to_string(fileNumber);
       std::unique_ptr<TTree> tempTree (new TTree(tree_name.c_str(),tree_name.c_str()));
       tempTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - much faster if enough RAM
-      hit.writing(tempTree.get(), "lteq"); // Writting label, absolute timestamp, adc and qdc2 into temporary tree
+      hit.writing(tempTree.get(), "lteq"); // Writing label, absolute timestamp, adc and qdc2 into temporary tree
 
       // ------------------------ //
       // Loop over the .fast file //
