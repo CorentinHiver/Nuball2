@@ -105,6 +105,7 @@ public:
   void fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
   {
     auto const & label = event.labels[hit_i];
+    if (!Paris::is[label]) return;
     auto const & index = Paris::index[label];
 
     if (Paris::cluster_size < index+1) {error("in SimpleCluster::fill : index", index, ">Paris::cluster_size !!"); return;}
