@@ -1819,6 +1819,27 @@ TH1D* myProjectionX(TH2* histo, std::string const & name, double const & x_value
   return myProjectionX(histo, name, xvalue_min, xvalue_max, xvalue_min_bckg, xvalue_max_bckg);
 }
 
+TH1D* myProjectionY(TH2* histo, std::string const & name, double const & xvalue_min, double const & xvalue_max, double const & xvalue_min_bckg, double const & xvalue_max_bckg)
+{
+  TH1D* proj = histo->ProjectionY(name.c_str(), xvalue_min, xvalue_max);
+  std::unique_ptr<TH1D> bckg (histo->ProjectionY((name+"_bckg").c_str(), xvalue_min_bckg, xvalue_max_bckg));
+  proj->Add(bckg.get(), -1);
+  return proj;
+}
+
+TH1D* myProjectionY(TH2* histo, std::string const & name, double const & x_value, double const & resolution)
+{
+  if (!gPad) histo->Draw("colz");
+  auto projX = histo->ProjectionX(concatenate_c("projX_", histo->GetName()));
+  projX->GetYaxis()->SetRangeUser(x_value-5*resolution, x_value+5*resolution);
+  double const & xvalue_min = selectXPoints(projX, "Select low edge of peak");
+  double const & xvalue_max = selectXPoints(projX, "Select high edge of peak");
+  double const & xvalue_min_bckg = selectXPoints(projX, "Select low edge of background");
+  double const & xvalue_max_bckg = selectXPoints(projX, "Select high edge of background");
+  delete projX;
+  return myProjectionY(histo, name, xvalue_min, xvalue_max, xvalue_min_bckg, xvalue_max_bckg);
+}
+
 
  /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
  /// @attention The edges must be well centered, this is not a peak finder.
@@ -2144,6 +2165,13 @@ private:
 };
 
 // #endif //__CINT__
+
+void simulatePeak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits)
+{
+  TRandom* random = new TRandom();
+  for (int it = 0; it<nb_hits; ++it) histo->Fill(random->Gaus(x_center, x_resolution/2.35));
+  delete random;
+}
 
 
 void libRoot()

@@ -54,6 +54,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   Timer timer;
   std::atomic<int> files_total_size(0);
   std::atomic<int> total_hits_number(0);
+  double total_time_of_beam_s = 0;
   int freq_hit_display= (nb_hits_read < 2.e+7) ? 1.e+6 : 1.e+7;
 
   // Calibration calibNaI("../136/coeffs_NaI.calib");
@@ -261,6 +262,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F paris_VS_sum_paris_M2 (new TH2F(("paris_VS_sum_paris_M2_"+thread_i_str).c_str(), "two delayed paris VS their sum;E sum [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, 1000,0,10000));
       unique_TH2F paris_VS_sum_paris_M2_P (new TH2F(("paris_VS_sum_paris_M2_P_"+thread_i_str).c_str(), "two delayed paris VS their sum, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, 1000,0,10000));
       unique_TH2F paris_VS_sum_paris_M2_pP (new TH2F(("paris_VS_sum_paris_M2_pP_"+thread_i_str).c_str(), "two delayed paris VS their sum, particle + prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, 1000,0,10000));
+      unique_TH2F prompt_paris_VS_sum_paris_M2_pP (new TH2F(("prompt_paris_VS_sum_paris_M2_pP_"+thread_i_str).c_str(), "prompt paris VS two delayed paris sum, particle + prompt trigger;E sum_{delayed} [keV]; E#gamma_{delayed}prompt[keV]", 2000,0,20000, 1000,0,10000));
 
       // BGO
       unique_TH2F ge_VS_BGO_prompt (new TH2F(("ge_VS_BGO_prompt_"+thread_i_str).c_str(), "ge_VS_BGO_prompt;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
@@ -332,6 +334,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F d_VS_sum_C2 (new TH2F(("d_VS_sum_C2_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_P (new TH2F(("d_VS_sum_C2_P_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_clean_sum_C2_P (new TH2F(("d_VS_clean_sum_C2_P_"+thread_i_str).c_str(), "delayed Ge VS clean sum of two clean Ge, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_clean_sum_C2_pP (new TH2F(("d_VS_clean_sum_C2_pP_"+thread_i_str).c_str(), "delayed Ge VS clean sum of two clean Ge, particle and prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_clean_sum_C2_PDM2 (new TH2F(("d_VS_clean_sum_C2_PDM2_"+thread_i_str).c_str(), "delayed Ge VS clean sum of two clean Ge, prompt trigger and delayed M2;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_clean_sum_C2_PM5DM2 (new TH2F(("d_VS_clean_sum_C2_PM5DM2_"+thread_i_str).c_str(), "delayed Ge VS clean sum of two clean Ge, prompt trigger and prompt M<5 and delayed M2;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_sum_C2_pP (new TH2F(("d_VS_sum_C2_pP_"+thread_i_str).c_str(), "delayed Ge VS sum of two clean Ge, particle + prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", bins_sum_Ge,0,max_sum_Ge, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -406,6 +409,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
                                 (nrj < 100)
                 || (506 < nrj && nrj < 516)
                 || (594 < nrj && nrj < 605)
+                || (1777< nrj && nrj < 1784)
           );
         };
 
@@ -415,6 +419,9 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           return nb_gamma_conta;
         };
 
+      // Handle the first hit : 
+      tree->GetEntry(0);
+      auto const & timestamp_init = event.stamp;
 
       int evt_i = 1;
       for ( ;(evt_i < tree->GetEntries() && evt_i < nb_hits_read); evt_i++)
@@ -1044,6 +1051,11 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             {
               d_VS_clean_sum_C2_P->Fill(Esum, Ge0.nrj);
               d_VS_clean_sum_C2_P->Fill(Esum, Ge1.nrj);
+              if (dssd_trigger)
+              {
+                d_VS_clean_sum_C2_pP->Fill(Esum, Ge0.nrj);
+                d_VS_clean_sum_C2_pP->Fill(Esum, Ge1.nrj);
+              }
               if (delayed_mult == 2)
               {
                  d_VS_clean_sum_C2_PDM2->Fill(Esum, Ge0.nrj);
@@ -1081,6 +1093,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           for (auto const & index : delayed_clovers.GeClean) if (!isContaminant(delayed_clovers[index].nrj)) 
           {
             d_VS_clean_sum_C2_P->Fill(Esum, delayed_clovers[index].nrj); 
+            d_VS_clean_sum_C2_pP->Fill(Esum, delayed_clovers[index].nrj); 
             if (delayed_mult == 2) d_VS_clean_sum_C2_PDM2->Fill(Esum, delayed_clovers[index].nrj);
             if (delayed_mult == 2) d_VS_clean_sum_C2_PM5DM2->Fill(Esum, delayed_clovers[index].nrj);
           }
@@ -1097,7 +1110,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             if (dssd_trigger) 
             {
               if (sum_clean_Ge>0) d_VS_sum_C_pP->Fill(sum_clean_Ge, clover->nrj);
-              if (delayed_clovers.Ge.size()>1)   d_VS_sum_Ge_pP->Fill(sum_all_Ge, clover->nrj);
+              if (delayed_clovers.Ge.size()>1) d_VS_sum_Ge_pP->Fill(sum_all_Ge, clover->nrj);
             }
             if (Ex_p>0)
             {
@@ -1175,13 +1188,13 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         for (auto const & id : delayed_paris.back.modules_id)  
         {
           auto const & nrj = delayed_paris.back.modules[id].nrj;
-          sum+=delayed_paris.back.modules[id].nrj;
+          sum+=nrj;
           phoswitches_delayed->Fill(nrj);
         }
         for (auto const & id : delayed_paris.front.modules_id)  
         {
           auto const & nrj = delayed_paris.front.modules[id].nrj;
-          sum+=delayed_paris.front.modules[id].nrj;
+          sum+=nrj;
           phoswitches_delayed->Fill(nrj);
         }
 
@@ -1196,8 +1209,10 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             for (auto const & id : delayed_paris.front.modules_id) paris_VS_sum_paris_M2_P->Fill(sum, delayed_paris.front.modules[id].nrj);
             if (dssd_trigger)
             {
-            for (auto const & id : delayed_paris.back.modules_id) paris_VS_sum_paris_M2_pP->Fill(sum, delayed_paris.back.modules[id].nrj);
-            for (auto const & id : delayed_paris.front.modules_id) paris_VS_sum_paris_M2_pP->Fill(sum, delayed_paris.front.modules[id].nrj);
+              for (auto const & id : delayed_paris.back.modules_id) paris_VS_sum_paris_M2_pP->Fill(sum, delayed_paris.back.modules[id].nrj);
+              for (auto const & id : delayed_paris.front.modules_id) paris_VS_sum_paris_M2_pP->Fill(sum, delayed_paris.front.modules[id].nrj);
+              for (auto const & id : prompt_paris.back.modules_id) prompt_paris_VS_sum_paris_M2_pP->Fill(sum, prompt_paris.back.modules[id].nrj);
+              for (auto const & id : prompt_paris.front.modules_id) prompt_paris_VS_sum_paris_M2_pP->Fill(sum, prompt_paris.front.modules[id].nrj);
             }
           }
         }
@@ -1218,9 +1233,14 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       }// End events loop
 
       total_hits_number.fetch_add(evt_i, std::memory_order_relaxed);
+      
+      // Handle last hit :
+      auto const & timestamp_final = event.stamp;
+      double run_duration_s = double_cast(timestamp_final-timestamp_init)*1E-12;
 
       // Writing the file (the mutex protects potential concurency issues)
       lock_mutex lock(write_mutex);
+      total_time_of_beam_s+=run_duration_s;
       File Filename(out_filename); Filename.makePath();
       print("writing spectra in", out_filename, "...");
       std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(), "recreate"));
@@ -1382,6 +1402,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_VS_sum_C2->Write("d_VS_sum_C2", TObject::kOverwrite);
         d_VS_sum_C2_P->Write("d_VS_sum_C2_P", TObject::kOverwrite);
         d_VS_clean_sum_C2_P->Write("d_VS_clean_sum_C2_P", TObject::kOverwrite);
+        d_VS_clean_sum_C2_pP->Write("d_VS_clean_sum_C2_pP", TObject::kOverwrite);
         d_VS_clean_sum_C2_PDM2->Write(" d_VS_clean_sum_C2_PDM2", TObject::kOverwrite);
         d_VS_clean_sum_C2_PM5DM2->Write(" d_VS_clean_sum_C2_PDM2", TObject::kOverwrite);
         d_VS_sum_C2_pP->Write("d_VS_sum_C2_pP", TObject::kOverwrite);
@@ -1441,6 +1462,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         paris_VS_sum_paris_M2->Write("paris_VS_sum_paris_M2", TObject::kOverwrite);
         paris_VS_sum_paris_M2_P->Write("paris_VS_sum_paris_M2_P", TObject::kOverwrite);
         paris_VS_sum_paris_M2_pP->Write("paris_VS_sum_paris_M2_pP", TObject::kOverwrite);
+        prompt_paris_VS_sum_paris_M2_pP->Write("prompt_paris_VS_sum_paris_M2_pP", TObject::kOverwrite);
 
         phoswitches_prompt->Write("phoswitches_prompt", TObject::kOverwrite);
         phoswitches_delayed->Write("phoswitches_delayed", TObject::kOverwrite);
