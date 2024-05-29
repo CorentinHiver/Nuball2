@@ -2173,6 +2173,19 @@ void simulatePeak(TH1* histo, double const & x_center, double const & x_resoluti
   delete random;
 }
 
+void simulatePeak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits, bool draw)
+{
+  if (draw) 
+  {
+    TH1D* newHisto = (TH1D*) histo->Clone((histo->GetName()+std::string("_simulated")).c_str());
+    simulatePeak(newHisto, x_center, x_resolution, nb_hits);
+    newHisto->SetLineColor(kRed);
+    newHisto->Draw();
+    histo->Draw("same");
+  }
+  else simulatePeak(histo, x_center, x_resolution, nb_hits); 
+}
+
 
 void libRoot()
 {

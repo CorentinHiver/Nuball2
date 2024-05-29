@@ -8,11 +8,14 @@
 #include "../lib/Analyse/SimpleParis.hpp"
 #include "../lib/Classes/Hit.hpp"
 #include "ExcitationEnergy.hpp"
+#include "CoefficientCorrection.hpp"
 
 float smear(float const & nrj, TRandom* random)
 {
   return random->Gaus(nrj,nrj*((400.0/sqrt(nrj))/100.0)/2.35);
 }
+
+constexpr static bool kCalibGe = false;
 
 std::unordered_set<Label> CloversV2::blacklist = {46, 55, 69, 70, 80, 92, 97, 122, 129, 142, 163};
 std::unordered_map<Label, double> CloversV2::maxE_Ge = 
@@ -59,6 +62,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
   // Calibration calibNaI("../136/coeffs_NaI.calib");
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
+  CoefficientCorrection calibGe;
   ExcitationEnergy Ex("../136/dssd_table.dat");
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
@@ -310,6 +314,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F p_VS_DC_p (new TH2F(("p_VS_DC_p_"+thread_i_str).c_str(), "prompt particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; prompt [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_DC_p (new TH2F(("d_VS_DC_p_"+thread_i_str).c_str(), "delayed particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_DC_pP (new TH2F(("d_VS_DC_pP_"+thread_i_str).c_str(), "delayed particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      
 
       // DSSD
       // Excitation energy trigger (code Ex, ExSI = 4 MeV < Ex < 6.5 MeV)
@@ -325,6 +330,8 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       constexpr static double max_Emis = 10000;
       unique_TH1F Emiss__P (new TH1F(("Emiss__P_"+thread_i_str).c_str(), "Missing energy;Missing energy [keV];", bins_Emiss,0,max_Emis));
       unique_TH2F Emiss_VS_Edelayed_p__P (new TH2F(("Emiss_VS_Edelayed_p__P_"+thread_i_str).c_str(), "Missing energy VS delayed energy;Calorimetry delayed [keV];Missing energy [keV]", 2000,0,20000, bins_Emiss,0,max_Emis));
+      
+      unique_TH1F d_ExP (new TH1F(("d_ExP_"+thread_i_str).c_str(), "delayed good proton; delayed [keV]", nb_bins_Ge_singles,0,max_bin_Ge_singles));
 
       unique_TH2F dd_ExP (new TH2F(("dd_ExP_"+thread_i_str).c_str(), "with correct excitation energy, gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dd_ExSIP (new TH2F(("dd_ExSIP_"+thread_i_str).c_str(), "with best excitation energy, gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -462,7 +469,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           // Remove bad Ge and overflow :
            if ((find_key(CloversV2::maxE_Ge, label) && nrj>CloversV2::maxE_Ge.at(label))) continue;
            if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
-           if ((label == 134 || label == 135 || label == 136) && time > 100) continue; // These detectors have strange events after 100 ns
+           if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
 
           // Paris :
           if (Paris::is[label])
@@ -492,6 +499,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           // Clovers:
           if (-10_ns < time && time < 10_ns) 
           {
+            if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
             prompt_clovers.fill(event, hit_i);
             if (CloversV2::isBGO(label)) prompt_clover_calo += nrj ;
             else if (CloversV2::isGe(label)) 
@@ -502,9 +510,17 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
           else if (40_ns < time && time < 170_ns) 
           {
+            if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
+            // Clean the clovers time window
+            auto const & mult = delayed_clovers.Ge.size();
+            auto const & last_clover_Ge = delayed_clovers.Ge[mult];
+            auto const & last_Ge_time = delayed_clovers[last_clover_Ge].time;
+
+            // Remove when at least 2 detectors in coincidence were detected and the new one is out of time window :
+            if (mult>1 && (event.times[hit_i] - last_Ge_time)>50_ns) continue;
             delayed_clovers.fill(event, hit_i);
             if (CloversV2::isBGO(label)) delayed_clover_calo += nrj ;
-            else if (CloversV2::isGe(label)) 
+            else if (CloversV2::isGe(label))
             {
               // Rejecting the 511 keV in the calorimetry;
               if (nrj < 506 && 516 < nrj) delayed_clover_calo += smear(nrj, random) ;
