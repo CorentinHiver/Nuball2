@@ -1809,7 +1809,7 @@ TH1D* myProjectionX(TH2* histo, std::string const & name, double const & xvalue_
 TH1D* myProjectionX(TH2* histo, std::string const & name, double const & x_value, double const & resolution)
 {
   if (!gPad) histo->Draw("colz");
-  auto projY = histo->ProjectionY(concatenate_c("projY_", histo->GetName()));
+  auto projY = histo->ProjectionY(concatenate("projY_", histo->GetName()).c_str());
   projY->GetYaxis()->SetRangeUser(x_value-5*resolution, x_value+5*resolution);
   double const & xvalue_min = selectXPoints(projY, "Select low edge of peak");
   double const & xvalue_max = selectXPoints(projY, "Select high edge of peak");
@@ -1830,7 +1830,7 @@ TH1D* myProjectionY(TH2* histo, std::string const & name, double const & xvalue_
 TH1D* myProjectionY(TH2* histo, std::string const & name, double const & x_value, double const & resolution)
 {
   if (!gPad) histo->Draw("colz");
-  auto projX = histo->ProjectionX(concatenate_c("projX_", histo->GetName()));
+  auto projX = histo->ProjectionX(concatenate("projX_", histo->GetName()).c_str());
   projX->GetYaxis()->SetRangeUser(x_value-5*resolution, x_value+5*resolution);
   double const & xvalue_min = selectXPoints(projX, "Select low edge of peak");
   double const & xvalue_max = selectXPoints(projX, "Select high edge of peak");

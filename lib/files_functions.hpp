@@ -835,6 +835,37 @@ public:
 
   bool operator==(File const & other) const {return m_file == other.m_file;}
 
+  void read(bool const & check = false)
+  {
+    if (check) this->check();
+    m_file_stream = new std::fstream(m_file, std::ios::in);
+  }
+
+  void write(bool const & make_path = false)
+  {
+    if (make_path) this->makePath();
+    m_file_stream = new std::fstream(m_file, std::ios::out);
+  }
+
+  void close()
+  {
+    m_file_stream->close();
+    delete m_file_stream;
+  }
+
+  template<class T>
+  File& operator<<(T const & t)
+  {
+    (*m_file_stream)<<t;
+    return *this;
+  }
+
+  template<class T>
+  File& operator>>(T const & t)
+  {
+    (*m_file_stream)>>t;
+    return *this;
+  }
 
 private:
   void update() {m_file = m_path.string()+m_filename.string(); check();}
@@ -872,6 +903,8 @@ private:
   std::string m_file; // Full path + short name + extension
   Path m_path;        // Path
   Filename m_filename;// Name + extension
+
+  std::fstream* m_file_stream = nullptr;
 };
 std::string operator+(Path const & path, Filename const & filename) {return path.get() + filename.get();}
 

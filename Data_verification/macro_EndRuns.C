@@ -84,6 +84,10 @@ void macro_EndRuns()
       unique_TH2F gg_paris_front(new TH2F(("gg_paris_front_"+thread_i_str).c_str(),"gg_paris_front",5000,0,10000, 5000,0,10000));
       unique_TH2F gg_paris_back(new TH2F(("gg_paris_back_"+thread_i_str).c_str(),"gg_paris_back",5000,0,10000, 5000,0,10000));
       unique_TH2F gg_paris_front_VS_back(new TH2F(("gg_paris_front_VS_back_"+thread_i_str).c_str(),"gg_paris_front_VS_back",5000,0,10000, 5000,0,10000));
+      
+      unique_TH2F Ge_VS_paris(new TH2F(("Ge_VS_paris_"+thread_i_str).c_str(),"Ge_VS_paris",5000,0,10000, 5000,0,10000));
+      unique_TH2F Ge_VS_paris_front(new TH2F(("Ge_VS_paris_front_"+thread_i_str).c_str(),"Ge_VS_paris_front",5000,0,10000, 5000,0,10000));
+      unique_TH2F Ge_VS_paris_back(new TH2F(("Ge_VS_paris_back_"+thread_i_str).c_str(),"Ge_VS_paris_back",5000,0,10000, 5000,0,10000));
 
       while(tree.readNext())
       {
@@ -96,13 +100,6 @@ void macro_EndRuns()
 
         clovers = event;
         paris = event;
-
-        // if (paris.module_mult()>0) 
-        // {
-        //   print(event);
-        //   print(paris);
-        //   pauseCo();
-        // }
 
         auto const absolute_time_h = double_cast(event.stamp)*1.e-12/3600.;
 
@@ -223,6 +220,10 @@ void macro_EndRuns()
         gg_paris_front->Write("gg_paris_front", TObject::kOverwrite);
         gg_paris_back->Write("gg_paris_back", TObject::kOverwrite);
         gg_paris_front_VS_back->Write("gg_paris_front_VS_back", TObject::kOverwrite);
+
+        Ge_VS_paris->Write("Ge_VS_paris", TObject::kOverwrite);
+        Ge_VS_paris_front->Write("Ge_VS_paris_front", TObject::kOverwrite);
+        Ge_VS_paris_back->Write("Ge_VS_paris_back", TObject::kOverwrite);
 
       output->Close();
       print(out_filename, "written");

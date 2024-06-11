@@ -161,5 +161,4 @@ std::ostream & operator << (std::ostream & os, CloversV2 const & clovers) noexce
   return os;
 }
 
-
 #endif //CLOVERSV2_HPP

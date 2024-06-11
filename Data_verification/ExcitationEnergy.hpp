@@ -34,8 +34,8 @@ class ExcitationEnergy
   constexpr static int nb_rings = 16;
   constexpr static int nb_subdivisions = 10000;
   constexpr static double max_E_bin = 7000;
-  double m_data [nb_rings+1] [nb_subdivisions+1] ;
-  double m_min_E_bin [nb_rings+1];
+  double m_data [nb_rings] [nb_subdivisions+1] ;
+  double m_min_E_bin [nb_rings];
 };
 
 #endif //EXCITATIONENERGY_HPP

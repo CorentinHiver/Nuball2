@@ -27,13 +27,35 @@ class RWMat
   void Set(unsigned short i, unsigned short j, int val) {fRWMat[i][j]=val;}
   void Set(unsigned short i, unsigned short j, double val) {fRWMat[i][j]=val;}
   void Fill(unsigned short i, unsigned short j); //increment channel by 1 count
+  TH2F* RootHisto()
+  {
+    TH2F* ret = new TH2F(fName.c_str(), fName.c_str(), 4096,0,4096, 4096,0,4096);
+    for (int i = 0; i<4096; ++i)for (int j = 0; j<4096; ++j)
+    {
+      ret->SetBinContent(i, j, this->Get(i, j));
+    }
+    return ret;
+  }
+  TH1F* Proj(ushort i)
+  {
+    TH1F* proj = new TH1F((fName+"_p"+std::to_string(i)).c_str(), (fName+"_p"+std::to_string(i)).c_str(), 4096,0,4096);
+    for (ushort bin = 0; bin<4096; ++bin) proj->SetBinContent(bin, this->Get(i, bin));
+    return proj;
+  }
+  TH1F* Proj(ushort imin, ushort imax)
+  {
+    TH1F* proj = new TH1F((fName+"_p"+std::to_string(imin)+"_"+std::to_string(imax)).c_str(), (fName+"_p"+std::to_string(imin)+"_"+std::to_string(imax)).c_str()
+    , 4096,0,4096);
+    for (ushort i = imin; i<imax; ++i) for (ushort bin = 0; bin<4096; ++bin) proj->SetBinContent(bin, fRWMat[i][bin]);
+    return proj;
+  }
   RWMat* Add(RWMat* Matrix,double val);
   double Integral();
   void ReSymmetrise();
   double FindMinMax();
   int FindMinChan();
 
- protected:
+protected:
   unsigned short   fNChannels = 0;
   std::string     fName;
   int**  fRWMat = nullptr;

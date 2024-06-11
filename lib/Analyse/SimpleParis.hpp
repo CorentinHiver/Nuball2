@@ -13,6 +13,7 @@ public:
   double qshort = 0.0;
   double nrj = 0.0;
   double time = 0.0;
+  bool rejected = false;
 
   void clear()
   {
@@ -20,6 +21,7 @@ public:
     qshort = 0.;
     nrj = 0.;
     time = 0.;
+    rejected = false;
   }
 
   auto const & label() const {return m_label;}
@@ -91,33 +93,23 @@ public:
     SimpleParisModule::resetLabels();
   };
 
-  // void fill(Event const & event, int const & hit_i)
-  // {
-  //   auto const & index = Paris::index[event.labels[hit_i]];
-  //   if (Paris::cluster_size < index+1) {error("in SimpleCluster::fill : index", index, ">Paris::cluster_size !!"); return;}
-  //   phoswitches_id.push_back(index);
-  //   auto & phoswitch = phoswitches[index];
-  //   phoswitch.nrj = event.nrjs[hit_i];
-  //   phoswitch.qshort = phoswitch.nrj/phoswitch.qlong;
-  //   phoswitch.qlong = event.nrj2s[hit_i];
-  // }
-
-  void fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
+  SimplePhoswitch* fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
   {
     auto const & label = event.labels[hit_i];
-    if (!Paris::is[label]) return;
-    auto const & index = Paris::index[label];
+    if (!Paris::is[label]) return nullptr;
+    auto const & id = Paris::index[label];
 
-    if (Paris::cluster_size < index+1) {error("in SimpleCluster::fill : index", index, ">Paris::cluster_size !!"); return;}
+    if (Paris::cluster_size < id+1) {error("in SimpleCluster::fill : index", id, "> Paris::cluster_size !!"); return nullptr;}
 
-    phoswitches_id.push_back(index);
+    phoswitches_id.push_back(id);
     
-    auto & phoswitch = phoswitches[index];
+    auto & phoswitch = phoswitches[id];
     phoswitch.qshort = event.nrjs[hit_i];
     phoswitch.qlong = event.nrj2s[hit_i];
     phoswitch.nrj = calib.calibrate(label, phoswitch.qshort, phoswitch.qlong);
     phoswitch.time = event.times[hit_i];
     calorimetry+=phoswitch.nrj;
+    return &phoswitch;
   }
 
   void clear()
@@ -166,7 +158,7 @@ public:
         auto const & id_j = phoswitches_id[hit_j];
 
         // Timing : if they are not simultaneous then they don't belong to the same gamma-ray
-        if (abs(phoswitches[id_j].time - phoswitches[id_i].time) > m_time_window) continue; 
+        if (std::abs(phoswitches[id_j].time - phoswitches[id_i].time) > m_time_window) continue; 
 
         // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
         auto const & distance_ij = ParisCluster<Paris::cluster_size>::distances[id_i][id_j];
@@ -175,6 +167,8 @@ public:
         // They pass both conditions, so we add-back them :
         modules[id_i].add(phoswitches[id_i]);
         phoswitches_added[hit_j] = true;
+        phoswitches[id_j].rejected = true;
+        phoswitches[id_i].rejected = true;
       }
     }
     module_mult = modules_id.size();
@@ -225,9 +219,10 @@ public:
   {
     auto const & label = event.labels[hit_i];
     auto const & cluster = Paris::cluster[label];
-         if (cluster == 0) back.fill(event, hit_i, calib);
-    else if (cluster == 1) front.fill(event, hit_i, calib);
+         if (cluster == 0) phoswitches.push_back(back.fill(event, hit_i, calib));
+    else if (cluster == 1) phoswitches.push_back(front.fill(event, hit_i, calib));
     else error("SimpleParis::fill : no cluster found for label", label);
+    if (phoswitches.back() == nullptr) phoswitches.pop_back();
   }
 
   void fill(Event const & event, int const & hit_i) {fill(event, hit_i, *m_calib);}
@@ -252,16 +247,34 @@ public:
     front.addback();
   }
 
+  void analyze()
+  {
+    this->addback();
+    std::sort(modules.begin(), modules.end(), [](SimpleParisModule const * p1, SimpleParisModule const * p2)
+    {
+      return p1->time < p2->time;
+    });
+    std::sort(phoswitches.begin(), phoswitches.end(), [](SimplePhoswitch const * p1, SimplePhoswitch const * p2)
+    {
+      return p1->time < p2->time;
+    });
+  }
+
   void clear()
   {
     back.clear();
     front.clear();
+    modules.clear();
+    phoswitches.clear();
   }
+  
   int phoswitch_mult() const { return back.phoswitches_id.size() + front.phoswitches_id.size();}
   int module_mult() const { return back.modules_id.size() + front.modules_id.size();}
   float calorimetry() const {return back.calorimetry + front.calorimetry;}
   SimpleCluster back;
   SimpleCluster front;
+  std::vector<SimpleParisModule*> modules;
+  std::vector<SimplePhoswitch*> phoswitches;
 
 private:
   PhoswitchCalib* m_calib;

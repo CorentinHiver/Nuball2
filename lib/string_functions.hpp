@@ -254,13 +254,14 @@ std::string concatenate(ARGS&&... args)
   return oss.str();
 }
 
-/// @brief Concatenate a series of arguments into a big string (alias)
-template<class... ARGS>
-std::string ctstr(ARGS&&... args) {return concatenate(std::forward<ARGS>(args)...);}
+// /// @brief Concatenate a series of arguments into a big string (alias)
+// template<class... ARGS>
+// std::string str_c(ARGS&&... args) {return concatenate(std::forward<ARGS>(args)...);}
 
-/// @brief concatenate string, returns a c_str (char**)
-template<class... ARGS>
-const char* concatenate_c(ARGS&&... args){return concatenate(std::forward<ARGS>(args)...).c_str();}
+// /// @brief concatenate string, returns a c_str (char**)
+// TODO : right now can't work because returning address of local temporary object
+// template<class... ARGS>
+// auto concatenate_c(ARGS&&... args){return concatenate(std::forward<ARGS>(args)...).c_str();}
 
 /// @brief concatenate string, returns a c_str (char**)
 template<class... ARGS>

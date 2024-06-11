@@ -36,6 +36,8 @@ public:
   std::unordered_map<std::string, double> const & LaBr_angles() {return m_angleLaBr;}
   std::unordered_map<std::string, double> const & NaI_angles () {return m_angleNaI ;}
 
+  operator bool() const {return m_ok;}
+
 private:
 
   bool m_ok = false;

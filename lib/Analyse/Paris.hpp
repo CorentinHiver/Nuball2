@@ -4,7 +4,7 @@
 #include "../Classes/Event.hpp"
 #include "../Classes/Detectors.hpp"
 #include "../Classes/CoProgressBar.hpp"
-std::recursive_mutex intialisation_mutex;
+std::recursive_mutex initialization_mutex;
 #include "Arrays/Paris.h"
 #include "ParisCluster.hpp"
 #include "ParisBidimAngles.hpp"
@@ -63,7 +63,7 @@ public:
   static void InitialiseArrays()
   {
   #ifdef MULTITHREADING 
-    std::lock_guard<std::recursive_mutex> lock(intialisation_mutex);
+    std::lock_guard<std::recursive_mutex> lock(initialization_mutex);
   #endif //MULTITHREADING
     if (!s_initialised)
     {
@@ -97,7 +97,8 @@ public:
   auto NaI_calorimetry() {return clusterBack.NaI_calorimetry + clusterFront.NaI_calorimetry;}
   auto LaBr3_calorimetry() {return clusterBack.LaBr3_calorimetry + clusterFront.LaBr3_calorimetry;}
   
-  StaticVector<uchar> Hits;
+  std::vector<ParisPhoswitch*> phoswitches;
+  std::vector<ParisModule*> modules;
 
   ParisCluster<cluster_size> clusterBack;
   ParisCluster<cluster_size> clusterFront;
@@ -178,6 +179,8 @@ void inline Paris::reset()
 {
   clusterBack.reset();
   clusterFront.reset();
+  modules.clear();
+  phoswitches.clear();
 }
 
 void inline Paris::setEvent(Event const & event)
@@ -198,6 +201,20 @@ void inline Paris::analyze()
 {
   clusterBack .analyze();
   clusterFront.analyze();
+  for (auto & phoswitch : clusterBack.phoswitches) phoswitches.push_back(&phoswitch);
+  for (auto & phoswitch : clusterFront.phoswitches) phoswitches.push_back(&phoswitch);
+  for (auto & module : clusterBack.modules) modules.push_back(&module);
+  for (auto & module : clusterFront.modules) modules.push_back(&module);
+
+  // std::sort(modules.begin(), modules.end(), [](ParisModule const & p1, ParisModule const & p2)
+  // {
+  //   return p1.time < p2.time;
+  // });
+
+  // std::sort(phoswitches.begin(), phoswitches.end(), [](ParisPhoswitch const & p1, ParisPhoswitch const & p2)
+  // {
+  //   return p1.time < p2.time;
+  // });
 }
 
 
@@ -493,18 +510,18 @@ void createAddbackAngleFile(std::string const & parisPoints_filename = "NaI_136_
     auto const & label = it.first;
     auto const & points_label = it.second;
     double nb_peaks = points_label.peaks.size();
-    double angle_LaBr = 0;
-    double angle_NaI = 0;
+    // double angle_LaBr = 0;
+    // double angle_NaI = 0;
 
-    // First step : calculate the angle between the short gate axis and both the LaBr3/CeBr3 and NaI diagonal : 
-    for (auto const & peak : points_label.peaks)
-    {
-      angle_LaBr+=points_label.LaBr3.at(peak).second/points_label.LaBr3.at(peak).first;
-      angle_NaI+=points_label.NaI.at(peak).second/points_label.NaI.at(peak).first;
-    }
+    // // First step : calculate the angle between the short gate axis and both the LaBr3/CeBr3 and NaI diagonal : 
+    // for (auto const & peak : points_label.peaks)
+    // {
+    //   angle_LaBr+=points_label.LaBr3.at(peak).second/points_label.LaBr3.at(peak).first;
+    //   angle_NaI+=points_label.NaI.at(peak).second/points_label.NaI.at(peak).first;
+    // }
 
-    angle_LaBr/=nb_peaks;
-    angle_NaI/=nb_peaks;
+    // angle_LaBr/=nb_peaks;
+    // angle_NaI/=nb_peaks;
 
     // Second step : calculate the angle between LaBr3/CeBr3 diagonal and the internal add-back anti-diagonal :
     double slope_mixed = 0;

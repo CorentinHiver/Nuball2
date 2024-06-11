@@ -4,6 +4,7 @@
 #include "print.hpp"
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 
 template<class T>
@@ -64,10 +65,28 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
     vector.push_back(t);
     return true;
   }
-  else
+  else return false;
+}
+
+/**
+ * @brief Pushes back the new value only if it is superior to the last one (require a number or a class with < operator)
+ * 
+ * @tparam T 
+ * @param vector 
+ * @param t 
+ * @return true 
+ * @return false 
+ */
+template <typename T>
+bool push_back_increase(std::vector<T> & vector, T const & t)
+{
+  auto const & size = vector.size();
+  if ((size == 0) || vector[size-1] < t)
   {
-    return false;
+    vector.push_back(t);
+    return true;
   }
+  else return false;
 }
 
 
@@ -165,16 +184,16 @@ T minimum(std::vector<T> const & vector)
 }
 
 template <typename T>
-T maximum_index(std::vector<T> const & vector)
+size_t maximum_index(std::vector<T> const & vector)
 {
-  int index = 0;
+  size_t index = 0;
   T value = vector[index];
-  for (int i = 0; i<vector.size(); i++) if (vector[i]>value) 
+  for (size_t i = 0; i<vector.size(); i++) if (vector[i]>value) 
   {
     value = vector[i];
     index = i;
   }
-  return value;
+  return index;
 }
 
 template <typename T>
@@ -188,6 +207,16 @@ T minimum_index(std::vector<T> const & vector)
     index = i;
   }
   return value;
+}
+
+template <typename T>
+bool is_good(std::vector<T> const & vector)
+{
+  static_assert(std::is_arithmetic<T>::value, "in is_good(std::vector<T> vector) : T must be an arithmetic type (a number)");
+  auto const & size = vector.size();
+  if (size == 0) return false;
+  for (auto const & v : vector) if (std::isnan(v) || std::isinf(v)) return false;
+  return true;
 }
 
 /// @brief Order the vector from lower to higher value

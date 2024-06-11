@@ -12,8 +12,9 @@
 class Nuball2Tree
 {
 public:
-  Nuball2Tree(std::string const & filename) : m_filename(filename) {this -> Open(m_filename);}
-  Nuball2Tree(std::string const & filename, Event & event) : m_filename(filename)
+  Nuball2Tree() noexcept = default;
+  Nuball2Tree(std::string const & filename) noexcept : m_filename(filename)  {this -> Open(m_filename);}
+  Nuball2Tree(std::string const & filename, Event & event) noexcept : m_filename(filename)
   {
     this -> Open(m_filename);
     event.reading(*this);
@@ -28,7 +29,7 @@ public:
   auto cd() {return m_file->cd();}
 
   TTree* get() {return m_tree;}
-  auto const get() const {return m_tree;}
+  auto get() const {return m_tree;}
   TTree* operator-> () {return m_tree;}
   operator TTree*() {return m_tree;}
 
@@ -42,6 +43,15 @@ public:
       return true;
     }
     else return false;
+  }
+
+  void setMaxHits(int const & maxHits) 
+  {
+    if (m_file_opened && maxHits < m_entries) 
+    {
+      m_entries = maxHits;
+      print("reading", m_entries, "events in", m_filename);
+    }
   }
 
   auto const & cursor() {return m_cursor;}

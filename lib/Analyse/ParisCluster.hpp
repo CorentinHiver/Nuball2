@@ -7,10 +7,10 @@
 #include "Arrays/Paris.h"
 
 
-class ParisModule
+class ParisModule : public Module
 {
 public:
-  ParisModule() : m_label(g_label++) {}
+  ParisModule() : Module(), m_label(g_label++){}
 
   void switch_cristal(char const & cristal)
   {
@@ -52,20 +52,20 @@ public:
     nb_LaBr3 = 0;
     nb_NaI   = 0;
     nb_mix   = 0;
-    LaBr3_calorimetry = 0.f;
-    NaI_calorimetry = 0.f;
-    total_calorimetry = 0.f;
+    // LaBr3_calorimetry = 0.f;
+    // NaI_calorimetry = 0.f;
+    // total_calorimetry = 0.f;
   }
 
-  Time time = 0ll;
-  float nrj = 0.f;
+  // Time time = 0ll;
+  // float nrj = 0.f;
   char state = -1;
   int nb_LaBr3 = 0;
   int nb_NaI   = 0;
   int nb_mix   = 0;
-  float LaBr3_calorimetry = 0.f;
-  float NaI_calorimetry = 0.f;
-  float total_calorimetry = 0.f;
+  // float LaBr3_calorimetry = 0.f;
+  // float NaI_calorimetry = 0.f;
+  // float total_calorimetry = 0.f;
 
 private:
   size_t static thread_local g_label;
@@ -192,7 +192,7 @@ template<size_t n>
 std::array<PositionXY, n> ParisCluster<n>::positions;
 
 template<size_t n>
-std::array<std::array<double, n>, n> ParisCluster<n>::distances = {{0}};
+std::array<std::array<double, n>, n> ParisCluster<n>::distances = {{{0}}};
 
 template<size_t n>
 thread_local uchar ParisCluster<n>::gLabel = 0;
@@ -210,7 +210,7 @@ void ParisCluster<n>::InitialiseBidims()
   auto const & i_min_R2 = ParisArrays::Paris_R1_x.size();
   auto const & i_min_R3 = ParisArrays::Paris_R1_x.size()+ParisArrays::Paris_R2_x.size();
 #ifdef MULTITHREADING 
-  std::lock_guard<std::recursive_mutex> lock(intialisation_mutex);
+  std::lock_guard<std::recursive_mutex> lock(initialization_mutex);
   printC("Initializing ParisCluster<",n,"> position and distance lookup tables in thread ", MTObject::getThreadIndex());
 #else
   printC("Initializing ParisCluster<",n,"> position and distance lookup tables");
@@ -314,7 +314,7 @@ void ParisCluster<n>::add_back(std::vector<Label> const & phoswitches_hits, std:
       auto const & distance_ij = distances[index_i][index_j];
 
       // Timing : if they are not simultaneous then they don't belong to the same event
-      if (abs(phoswitch_j.time-phoswitch_i.time) > _timewindow) continue; 
+      if (std::abs(phoswitch_j.time-phoswitch_i.time) > _timewindow) continue; 
 
       // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
       if (distance_ij<distance_max) continue;

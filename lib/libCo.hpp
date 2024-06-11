@@ -42,6 +42,7 @@
 #include <unordered_set>
 
 // ********** C includes ************ //
+#include <cmath>
 #include <csignal>
 #include <cstdlib>
 #include <cstring>
@@ -225,6 +226,7 @@ using ulong  = unsigned long int   ;
 using longlong  = long long int    ;
 using ulonglong  = unsigned long long int ;
 using size_t = std::size_t;
+// using abs = std::abs;
 
 // Print specialization for uchar : 
 std::ostream& operator<<(std::ostream& cout, uchar const & uc)
