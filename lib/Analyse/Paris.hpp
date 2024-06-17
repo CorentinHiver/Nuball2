@@ -4,7 +4,6 @@
 #include "../Classes/Event.hpp"
 #include "../Classes/Detectors.hpp"
 #include "../Classes/CoProgressBar.hpp"
-std::recursive_mutex initialization_mutex;
 #include "Arrays/Paris.h"
 #include "ParisCluster.hpp"
 #include "ParisBidimAngles.hpp"
@@ -20,8 +19,6 @@ std::recursive_mutex initialization_mutex;
 class Paris
 {
 public:
-  constexpr static uchar cluster_size = 36ul;
-  constexpr static double distance_max = 2.5;
   // ________________________________________________________________ //
   // ------------------  Setting the lookup tables ------------------ //
   //  ---- From labels to index ---- //
@@ -46,9 +43,9 @@ public:
 
   static Label label(uchar const & cluster, uchar const & index)
   {
-    if (index>cluster_size) {error (index,"> cluster size (=",cluster_size,")"); return -1;}
+    if (index>paris_cluster_size) {error (index,"> cluster size (=",paris_cluster_size,")"); return -1;}
     
-    uchar const & paris_index = (cluster)*cluster_size+index;
+    uchar const & paris_index = (cluster)*paris_cluster_size+index;
 
     if (paris_index>ParisArrays::paris_labels.size()){error (index,"> paris number of labels (=",ParisArrays::paris_labels.size(),")"); return -1;}
     
@@ -76,9 +73,9 @@ public:
       {
         is[l]  = is_paris(l);
         cluster[l] = static_cast<uchar> (l>500);
-        index[l] = label_to_index(l)%cluster_size;
+        index[l] = label_to_index(l)%paris_cluster_size;
       }
-      ParisCluster<cluster_size>::InitialiseBidims();
+      ParisCluster<paris_cluster_size>::InitialiseBidims();
       
       s_initialised = true;
     }
@@ -100,8 +97,8 @@ public:
   std::vector<ParisPhoswitch*> phoswitches;
   std::vector<ParisModule*> modules;
 
-  ParisCluster<cluster_size> clusterBack;
-  ParisCluster<cluster_size> clusterFront;
+  ParisCluster<paris_cluster_size> clusterBack;
+  ParisCluster<paris_cluster_size> clusterFront;
 
   // ______________________________________________________________ //
 
@@ -418,82 +415,6 @@ void clickAddbackPoints(std::string filename, std::vector<int> peaks = {511, 127
   print("NaI_136_2024.points written");
 }
 
-class PhoswitchCalib
-{public:
-  PhoswitchCalib() noexcept = default;
-  PhoswitchCalib(std::string const & filename) {read(filename);}
-
-  void read(std::string const & filename = "NaI_136_2024.angles")
-  {
-    std::ifstream file(filename, std::ios::in);
-    if (!file.good()) throw_error(concatenate("in PhoswitchCalib::PhoswitchCalib(std::string filename) : file", filename, " can't be open"));
-    Label label = 0; double angle = 0; double coeff = 0;
-    while(file >> label >> angle >> coeff) data.emplace(label, Coefficients({angle, coeff}));
-    file.close();
-    prepare();
-  }
-
-  void write(std::string const & filename = "NaI_136_2024.angles")
-  {
-    std::ofstream file(filename, std::ios::out);
-    for (auto const & it : data) file << it.first << " " << it.second.angle << " " << it.second.coeff << std::endl;
-    file.close();
-    print(filename, "written");
-  }
-
-  void prepare() {for (auto & it : data) it.second.prepare();}
-
-  double calibrate(Hit & hit) {return data.at(hit.label).calibrate(hit);}
-  double calibrate(Label const & label, double const & qshort, double const & qlong) {return data.at(label).calibrate(qshort, qlong);}
-  inline double calibrate(Label const & label, double const & qshort, double const & qlong) const {return data.at(label).calibrate(qshort, qlong);}
-
-  class Coefficients
-  {public:
-    Coefficients(std::initializer_list<double> const & inputs)
-    {
-      if (inputs.size() == 2) 
-      {
-        auto it = inputs.begin();
-        angle = *it;
-        coeff = *(++it);
-      }
-    }
-
-    Coefficients(std::pair<double, double> const & input)
-    {
-      angle = input.first;
-      coeff = input.second;
-    }
-
-    Coefficients & operator=(std::initializer_list<double> const & inputs)
-    {
-      if (inputs.size() == 2) 
-      {
-        auto it = inputs.begin();
-        angle = *it;
-        coeff = *(++it);
-      }
-      return *this;
-    }
-
-    void prepare()
-    {
-      cos_a = cos(angle);
-      sin_a = sin(angle);
-    }
-
-    double calibrate(Hit const & hit) {return (hit.nrj * sin_a + hit.nrj2 * cos_a) * coeff;}
-    double calibrate(double const & qshort, double const & qlong) {return (qshort * sin_a + qlong * cos_a) * coeff;}
-    double calibrate(double const & qshort, double const & qlong) const {return (qshort * sin_a + qlong * cos_a) * coeff;}
-
-    double angle = 0;
-    double cos_a = 0;
-    double sin_a = 0;
-    double coeff = 0;
-  };
-
-  std::map<Label, Coefficients> data;
-};
 
 // double getAddbackAngle(ParisPoints const & points)
 // {

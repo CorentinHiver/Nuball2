@@ -29,6 +29,7 @@
 #include <TPolyMarker.h>
 #include <TRandom.h>
 #include <TROOT.h>
+#include <TSpline.h>
 #include <TSpectrum.h>
 #include <TStopwatch.h>
 #include <TString.h>

@@ -7,79 +7,16 @@
 #include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/CloversV3.hpp"
 #include "../lib/Analyse/SimpleParis.hpp"
-#include "../lib/Classes/Hit.hpp"
-#include "ExcitationEnergy.hpp"
+#include "../lib/Analyse/WarsawDSSD.hpp"
+#include "../lib/Classes/Timer.hpp"
 #include "CoefficientCorrection.hpp"
-
-// class DelayedEvent
-// {public:
-//   DelayedEvent(CloversV3* clovers, Paris* paris) noexcept : 
-//     m_clovers(clovers),
-//     m_paris(paris)
-//   {
-//   }
-
-//   void analyze()
-//   {
-//     m_modules.clear();
-//     for (int clover_i = 0; clover_i<m_clovers->all.size(); ++clover_i)
-//     {
-//       auto const & time_i = m_clovers->all[clover_i];
-//       for (int clover_j = clover_i; clover_j<m_clovers->all.size(); ++clover_j)
-//       {
-//         auto const & time_j = m_clovers->all[clover_j];
-//         if (time_j-time_i < CloverModules::CloversTimeWindow)
-//         {
-
-//         }
-//       }
-
-//     }
-//   }
-// private:
-//   CloversV3* m_clovers = nullptr;
-//   Paris* m_paris = nullptr;
-//   std::vector<std::vector<uchar>> m_;
-// };
 
 float smear(float const & nrj, TRandom* random)
 {
   return random->Gaus(nrj,nrj*((400.0/sqrt(nrj))/100.0)/2.35);
 }
 
-constexpr bool gate(double const & low, double const & energy, double const & high) noexcept {return (low < energy && energy < high);}
-constexpr bool gate(Time const & low, Time const & time, Time const & high) noexcept {return (low < time && time < high);}
-constexpr bool gate(Label const & low, Label const & label, Label const & high) noexcept {return (low < label && label < high);}
-
 constexpr static bool kCalibGe = true;
-
-std::unordered_set<Label> CloversV2::blacklist = {46, 55, 69, 70, 80, 92, 97, 122, 129, 142, 163};
-std::unordered_map<Label, double> CloversV2::maxE_Ge = 
-{
-  {25, 12600 }, {26, 13600 }, {27, 10500 }, {28, 7500  }, 
-  {31, 11500 }, {32, 11400 }, {33, 8250  }, {34, 9000  }, 
-  {37, 11000 }, {38, 11100 }, {39, 11500 }, {40, 11300 }, 
-  {43, 12600 }, {44, 11900 }, {45, 11550 }, {46, 9200  }, 
-  {49, 14300 }, {50, 12800 }, {51, 13500 }, {52, 12400 }, 
-  {55, 5500  }, {56, 5800  }, 
-                {68, 7100  }, {69, 15500 }, {70, 9500  },
-  {73, 11650 }, {74, 11600 }, {75, 11800 }, {76, 11600 }, 
-  {79, 11500 }, {80, 8000  }, {81, 18200 },
-  {85, 7700  }, {86, 12000 }, {87, 12000 }, {88, 11600 }, 
-  {91, 7900  }, {92, 10000 }, {93, 11500 }, {94, 11000 }, 
-  {97, 11400 }, {98, 11400 }, {99, 11250 }, {100, 8900 }, 
-  {103, 11400 }, {104, 11600 }, {105, 11600 }, {106, 11500 }, 
-  {109, 12800 }, {110, 1800  }, {111, 13000 }, {112, 11300 }, 
-  {115, 12800 }, {116, 11500 }, {117, 10500 }, {118, 11400 }, 
-  {121, 12400 }, {122, 20000 }, {123, 10700 }, {124, 20000 }, 
-  {127, 11600 }, {128, 11700 }, {129, 10000 }, {130, 11200 }, 
-  {133, 11200 }, {134, 9350  }, {135, 9400  }, {136, 9500  }, 
-  {139, 13200 }, {140, 12400 }, {141, 12900 }, {142, 4500  }, 
-  {145, 8200  }, {146, 9600  }, {147, 9100  }, {148, 10900 }, 
-  {151, 11900 }, {152, 12200 }, {153, 11300 }, {154, 12000 }, 
-  {157, 9110  }, {158, 9120  }, {159, 9110  }, {160, 11700 }, 
-  {163, 11000 }, {164, 11600 }, {165, 11600 }, {166, 11600 }, 
-};
 
 void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
@@ -101,12 +38,12 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   CoefficientCorrection calibGe;
   // ExcitationEnergy Ex("../136/dssd_table.dat");
   ExcitationEnergy Ex("../136/U5_d_p.Ex");
+
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
   MTObject::Initialise(nb_threads);
   MTObject::adjustThreadsNumber(files.size());
-  Paris::InitialiseArrays();
   
   std::mutex write_mutex;
 
@@ -120,10 +57,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   auto const & ddd_gate_bin_max = maximum(ddd_gates)+gate_bin_size+1;
   std::vector<bool> ddd_gate_lookup; ddd_gate_lookup.reserve(ddd_gate_bin_max);
   std::vector<int> ddd_id_gate_lkp; ddd_id_gate_lkp.reserve(ddd_gate_bin_max);
-  size_t temp_bin = 0;
   for (size_t gate_index = 0;  gate_index<ddd_gates.size(); ++gate_index)
   {
-    for (; temp_bin<size_cast(ddd_gate_bin_max); ++temp_bin) 
+    for (size_t temp_bin = 0; temp_bin<size_cast(ddd_gate_bin_max); ++temp_bin) 
     {
       auto const & _gate = ddd_gates[gate_index];
       if (temp_bin<_gate-gate_bin_size) 
@@ -142,10 +78,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   auto const & dpp_gate_bin_max = maximum(dpp_gates)+gate_bin_size+1;
   std::vector<bool> dpp_gate_lookup; dpp_gate_lookup.reserve(dpp_gate_bin_max);
   std::vector<int> dpp_id_gate_lkp; dpp_id_gate_lkp.reserve(dpp_gate_bin_max);
-  temp_bin = 0;
   for (size_t gate_index = 0;  gate_index<dpp_gates.size(); ++gate_index)
   {
-    for (; temp_bin<size_cast(dpp_gate_bin_max); ++temp_bin) 
+    for (size_t temp_bin = 0; temp_bin<size_cast(dpp_gate_bin_max); ++temp_bin) 
     {
       auto const & _gate = dpp_gates[gate_index];
       if (temp_bin<_gate-gate_bin_size) 
@@ -179,8 +114,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       if (target == "U" && run_number<75) continue;
       Nuball2Tree tree(file.c_str());
       if (!tree) continue;
-
       files_total_size.fetch_add(size_file(file,"Mo"), std::memory_order_relaxed);
+
       int nb_bins_Ge_singles = 10000;
       int max_bin_Ge_singles = 10000;
       int nb_bins_Ge_bidim = 4096;
@@ -194,16 +129,16 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F dd (new TH2F(("dd_"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dd_bckg (new TH2F(("dd_bckg_"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dp (new TH2F(("dp_"+thread_i_str).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
-      unique_TH2F E_dT (new TH2F(("E_dT_"+thread_i_str).c_str(), "E_dT clean", 600,-100_ns,200_ns, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH2F E_dT (new TH2F(("E_dT_"+thread_i_str).c_str(), "E_dT clean", 600,-100_ns,200_ns, 20000,0,20000));
       unique_TH2F E_dT_phoswitch (new TH2F(("E_dT_phoswitch_"+thread_i_str).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, 2000,0,10000));
 
       std::vector<std::unique_ptr<TH2I>> ddd_gated;
       if (make_triple_coinc_ddd) for (auto const & _gate : ddd_gates) ddd_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("ddd_gated_on_", _gate, "_", thread_i, " delayed").c_str(), 
-                                        concatenate("gamma-gamma delayed gated on delayed", _gate, "keV;delayed [keV];delayed [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
+                                        concatenate("gamma-gamma delayed gated on delayed ", _gate, "keV;delayed [keV];delayed [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
 
       std::vector<std::unique_ptr<TH2I>> dpp_gated;
       if (make_triple_coinc_dpp) for (auto const & _gate : dpp_gates) dpp_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("dpp_gated_on_", _gate, "_", thread_i, " delayed").c_str(),
-                                        concatenate("gamma-gamma prompt gated on delayed", _gate, "keV;prompt [keV];prompt [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
+                                        concatenate("gamma-gamma prompt gated on delayed ", _gate, "keV;prompt [keV];prompt [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
       // std::vector<TH2I*> pp_gated;
       // for (auto const & _gate : ppp_gates) pp_gated.push_back(new TH2I(("pp_gated_"+std::to_string(_gate)+"_"+thread_i_str).c_str(), 
       //                                   ("gamma-gamma prompt gated on "+std::to_string(_gate)+";E1 [keV];E2 [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -358,7 +293,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH1F d_pDC1_3 (new TH1F(("d_pDC1_3_"+thread_i_str).c_str(), "delayed particle trigger DC1_3;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F d_pPDC1_3 (new TH1F(("d_pPDC1_3_"+thread_i_str).c_str(), "delayed particle trigger DC1_3;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F d_pPC5DC3 (new TH1F(("d_pPC5DC3_"+thread_i_str).c_str(), "delayed particle trigger PC5DC3;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH1F d_pPC5DC1_3 (new TH1F(("Ex_"+thread_i_str).c_str(), "delayed particle trigger PC5DC1_3;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH1F d_pPC5DC1_3 (new TH1F(("d_pPC5DC1_3_"+thread_i_str).c_str(), "delayed particle trigger PC5DC1_3;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
 
       unique_TH2F p_VS_PM_p (new TH2F(("p_VS_PM_p_"+thread_i_str).c_str(), "prompt particle trigger VS prompt mult;prompt mult;prompt [keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_PM_p (new TH2F(("d_VS_PM_p_"+thread_i_str).c_str(), "delayed particle trigger VS prompt mult;prompt mult;delayed [keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -372,7 +307,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F d_VS_DC_p (new TH2F(("d_VS_DC_p_"+thread_i_str).c_str(), "delayed particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_DC_pP (new TH2F(("d_VS_DC_pP_"+thread_i_str).c_str(), "delayed particle trigger VS delayed calorimetry;delayed calorimetry [10 bins/keV]; delayed [keV]", 2000,0,20000, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       
-
+      unique_TH1F d_pPC3MP3DC3MD4 (new TH1F(("d_pPC3MP3DC3MD4_"+thread_i_str).c_str(), "delayed particle trigger d_pPC3MP5DC3MD4;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      
       // DSSD
       // Excitation energy trigger (code Ex, ExSI = 4 MeV < Ex < 6.5 MeV)
       constexpr static int bins_Ex = 200;
@@ -449,6 +385,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       SimpleParis pparis(&calibPhoswitches);
       SimpleParis dparis(&calibPhoswitches);
 
+      WarsawDSSD dssd(&Ex);
+
       // std::vector<double> prompt_phoswitch;
       // std::vector<double> delayed_phoswitch;
 
@@ -463,11 +401,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       // }
       
-      std::vector<double> sector_energy;
-      std::vector<double> ring_energy;
+      // std::vector<double> sector_energy;
+      // std::vector<double> ring_energy;
 
-      std::vector<Label> sector_labels;
-      std::vector<Label> ring_labels;
+      // std::vector<Label> sector_labels;
+      // std::vector<Label> ring_labels;
 
         // auto isContaminant = [&](float const & nrj){
         //   return (
@@ -497,7 +435,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         double prompt_paris_calo = 0;
         // double delayed_paris_calo = 0;
 
-        bool dssd_trigger = false;
+        // bool dssd_trigger = false;
 
         if (evt_i%freq_hit_display == 0) print(nicer_double(evt_i, 0), "events");
 
@@ -510,11 +448,13 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         pparis.clear();
         dparis.clear();
 
-        sector_energy.clear();
-        ring_energy.clear();
+        dssd.clear();
 
-        sector_labels.clear();
-        ring_labels.clear();
+        // sector_energy.clear();
+        // ring_energy.clear();
+
+        // sector_labels.clear();
+        // ring_labels.clear();
 
         for (int hit_i = 0; hit_i < event.mult; hit_i++)
         {
@@ -538,16 +478,18 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             // E_dT_phoswitch->Fill(time, nrjcal);
             if (gate(-5_ns, time, 5_ns))
             {
-              short_vs_long_prompt->Fill(nrj, nrj2);
+              short_vs_long_prompt->Fill(nrj, nrj2); 
+              print("fill paris");
               pparis.fill(event, hit_i);
             }
-            else if (gate(10_ns, time, 40_ns))
+            else if (gate(5_ns, time, 40_ns))
             {
               neutron_hit_pattern->Fill(label);
             }
             else if (gate(40_ns, time, 170_ns) )
             {
               short_vs_long_delayed->Fill(nrj, nrj2);
+              print("fill paris");
               dparis.fill(event, hit_i);
             }
           }
@@ -573,17 +515,18 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           // Dssd :
           if (gate(799, label, 860))
           {
-            dssd_trigger = true;
-            if (gate(799, label, 840))
-            {
-              sector_labels.push_back(label);
-              sector_energy.push_back(nrj);
-            }
-            if (gate(839, label, 860))
-            {
-              ring_labels.push_back(label-840);
-              ring_energy.push_back(nrj);
-            }
+            dssd.fill(event, hit_i);
+            // dssd_trigger = true;
+            // if (gate(799, label, 840))
+            // {
+            //   sector_labels.push_back(label);
+            //   sector_energy.push_back(nrj);
+            // }
+            // if (gate(839, label, 860))
+            // {
+            //   ring_labels.push_back(label-840);
+            //   ring_energy.push_back(nrj);
+            // }
           }
         }// End hits loop
 
@@ -596,6 +539,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         dclovers.analyze();
         pparis.analyze();
         dparis.analyze();
+        dssd.analyze();
+        // print(pparis);
+        // pauseCo();
+        print("event", evt_i);
+
 
         for (auto const & id : dclovers.all_id) nb_same_dclover->Fill(dclovers[id].size());
 
@@ -638,62 +586,16 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         
         //////////////// DSSD ///////////////////
-        double Ex_p = ExcitationEnergy::bad_value; // d stands for proton detected
-        auto const & sector_mult = sector_labels.size();
-        auto const & ring_mult = ring_labels.size();
-        auto ring_label = 0;
-        auto dssd_energy = 0;
-
-
-        // As many rings and sector fired
-        if (sector_mult == ring_mult)
+        bool dssd_trigger = dssd.mult() > 0;
+        
+        auto const & Emiss = dssd.Ex_p-prompt_calo;
+        if (dssd.Ex_p>0) 
         {
-          if (sector_mult == 1)
-          {
-            ring_label = ring_labels[0];
-            dssd_energy = sector_energy[0];
-            Ex_p = Ex(dssd_energy, ring_label);
-          }
-          // else; // Maybe to be improved
-        }
-
-        if (sector_mult == 2*ring_mult)
-        {
-          if (sector_mult == 1 && abs(int_cast(ring_labels[0]-ring_labels[1])))
-          {
-            ring_label = ring_labels[0]; // To be improved maybe
-            dssd_energy = sector_energy[0];
-            Ex_p = (Ex(dssd_energy, ring_labels[0]) + Ex(dssd_energy, ring_labels[1]))/2;
-            // Might want to reject cases when the sum energy of both rings isn't equal to the one of the sector
-          }
-          // else; // Maybe to be improved
-        }
-
-        if (sector_mult == 0)
-        { // If the sector is dead then only rings fired
-          if (ring_mult == 1)
-          {
-            dssd_energy = ring_energy[0];
-            ring_label = ring_labels[0];
-            Ex_p = Ex(dssd_energy, ring_label);
-          }
-          else if (ring_mult == 2)
-          {
-            dssd_energy = ring_energy[0]+ring_energy[1];
-            ring_label = (ring_energy[0] > ring_energy[1]) ? ring_labels[0] : ring_labels[1];
-            Ex_p = Ex(dssd_energy, ring_label);
-          }
-        }
-
-        auto const & Emiss = Ex_p-prompt_calo;
-        if (Ex_p>0) 
-        {
-          Ex_p_histo->Fill(Ex_p);
-          Ex_p_VS_ring->Fill(Ex_p, ring_label);
+          Ex_p_histo->Fill(dssd.Ex_p);
+          Ex_p_VS_ring->Fill(dssd.Ex_p, dssd.ring_label);
           if (pmult > 0)
           {
             Emiss__P->Fill(Emiss);
-            // if (dcalo>0) Emiss_VS_Edelayed_p__P->Fill(dcalo, Emiss);
           }
         }
 
@@ -799,12 +701,6 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               if (pmult > 0 && prompt_calo < 3_MeV) d_PC3DC1_3->Fill(clover_i.nrj);
             }
           }
-          // for (auto const & index_j : last_delayed_clovers.GeClean)
-          // {
-          //   auto const & clover_j = delayed_clovers[index_j];
-          //   dd_bckg->Fill(clover_i.nrj, clover_j.nrj);
-          //   dd_bckg->Fill(clover_j.nrj, clover_i.nrj);
-          // }
 
           // Delayed-delayed :
           for (auto const & clover_j_it : coinc_clean)
@@ -1439,6 +1335,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         p_VS_DC_p->Write("p_VS_DC_p", TObject::kOverwrite);
         d_VS_DC_p->Write("d_VS_DC_p", TObject::kOverwrite);
         d_VS_DC_pP->Write("d_VS_DC_pP", TObject::kOverwrite);
+
+        d_pPC3MP3DC3MD4->Write("d_pPC3MP3DC3MD4", TObject::kOverwrite);
 
         print("write sum spectra");
         // d_VS_sum_C2->Write("d_VS_sum_C2", TObject::kOverwrite);

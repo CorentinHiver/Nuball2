@@ -698,6 +698,47 @@ std::string nicer_double(T const & t, int const & nb_decimals = 6)
   return ss.str();
 }
 
+//////////////////////////////////////
+// COMPILE-TIME LOOK UP TABLE (LUT) //
+//////////////////////////////////////
+
+template<std::size_t size, class Generator>
+constexpr auto LUT(Generator&& g)
+{
+  using type = decltype(g(std::size_t{0}));
+  std::array<type, size> lut{};
+  for (std::size_t i = 0; i<size; ++i) lut[i] = g(i);
+  return lut;
+}
+
+/// @brief 
+/// @attention Works only in ordered arrays
+template <typename T, std::size_t N>
+constexpr bool binary_search (std::array<T, N> const & array, T const & value)
+{
+  int low = 0;
+  int high = N - 1;
+
+  while (low <= high) {
+    int mid = (low + high) / 2;
+         if (array[mid] < value) low = mid + 1;
+    else if (array[mid] > value) high = mid - 1;
+    else return true;
+  }
+  return false;  // Value not found
+}
+
+template <typename T, std::size_t N>
+constexpr T find(const std::array<T, N>& array, const T& value) 
+{
+  for (std::size_t i = 0; i < N; ++i) {
+    if (array[i] == value) {
+      return i;
+    }
+  }
+  return -1;  // Value not found
+} 
+
 // #if (__cplusplus >= 201703L)
 
 // /**

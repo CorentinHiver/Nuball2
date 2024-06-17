@@ -27,6 +27,7 @@ std::string getExtension    (std::string const & string) { return (string.substr
 std::string getPath         (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));}
 std::string removePath      (std::string const & string) { return (string.substr(   string.find_last_of("/")+1));}
 std::string rmPathAndExt    (std::string const & string) { return            removePath(removeExtension(string));}
+std::string get_shortname   (std::string const & string) { return            removePath(removeExtension(string));}
 
 bool file_is_empty(std::ifstream& file)                { return file.peek() == std::ifstream::traits_type::eof();}
 

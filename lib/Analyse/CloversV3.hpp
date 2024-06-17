@@ -16,7 +16,6 @@
 //   }
 // };
 
-using Label = unsigned short;
 /**
  * @brief A class to simplify the analysis of the Clovers data
  * @details 

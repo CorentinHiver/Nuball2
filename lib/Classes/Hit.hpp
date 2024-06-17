@@ -18,6 +18,7 @@ using Timestamp = ULong64_t; // Timestamp in ps (absolute)
 using Time      = Long64_t;  // Time in ps (relative)
 using Time_ns   = float;     // Time in ns (relative) !deprecated! 
 using Pileup    = bool;      // Pileup bit (bool) !unused!
+using Index     = uchar;     // Used in analysis structures (Clovers, Paris...)
 
 ////////////////////
 /// Data vectors ///
@@ -79,8 +80,25 @@ constexpr inline Time operator""_ns(unsigned long long time) noexcept {return Ti
 constexpr inline Time operator""_ps(unsigned long long time) noexcept {return Time_cast(time        );}
 constexpr inline Time operator""_fs(unsigned long long time) noexcept {return Time_cast(time*1.e-3l );}
 
-constexpr inline double operator""_MeV(long double energy) noexcept {return double_cast(energy)*1000.;}
-constexpr inline double operator""_MeV(unsigned long long energy) noexcept {return double_cast(energy)*1000.;}
+// Units of particle energy. The code is based on keV.
+constexpr inline double operator""_MeV(long double energy) noexcept {return double_cast(energy)*1.e+3;}
+constexpr inline double operator""_keV(long double energy) noexcept {return double_cast(energy);}
+
+constexpr inline double operator""_MeV(unsigned long long energy) noexcept {return double_cast(energy*1.e+3l);}
+constexpr inline double operator""_keV(unsigned long long energy) noexcept {return double_cast(energy);}
+
+// General units of numbers :
+constexpr inline double operator""_G(long double number) noexcept {return double_cast(number*1.e+12);}
+constexpr inline double operator""_M(long double number) noexcept {return double_cast(number*1.e+6 );}
+constexpr inline double operator""_k(long double number) noexcept {return double_cast(number*1.e+3 );}
+
+constexpr inline double operator""_G(unsigned long long number) noexcept {return double_cast(number*1.e+12l);}
+constexpr inline double operator""_M(unsigned long long number) noexcept {return double_cast(number*1.e+6l );}
+constexpr inline double operator""_k(unsigned long long number) noexcept {return double_cast(number*1.e+3l );}
+
+constexpr inline int operator""_Gi(unsigned long long number) noexcept {return int_cast(number*1.e+12l);}
+constexpr inline int operator""_Mi(unsigned long long number) noexcept {return int_cast(number*1.e+6l );}
+constexpr inline int operator""_ki(unsigned long long number) noexcept {return int_cast(number*1.e+3l );}
 
 /////////////////////
 /// IO parameters ///

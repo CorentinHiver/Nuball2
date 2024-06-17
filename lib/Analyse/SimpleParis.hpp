@@ -1,9 +1,37 @@
 #ifndef SIMPLEPARIS
 #define SIMPLEPARIS
 
-#include "Paris.hpp"
+#include "ParisCluster.hpp"
 
-using Index = uchar;
+// Paris lookup tables :
+namespace Paris
+{
+  static constexpr auto is = LUT<1000> ([](Label const & label) {
+    return (label<ParisArrays::paris_labels[0] || label>ParisArrays::paris_labels.back())
+           ? false
+           : binary_search(ParisArrays::paris_labels, label);
+  });
+
+  static constexpr auto index = LUT<1000> ([](Label const & label) {
+    if (is[label])
+    {
+      return static_cast<Label> ( find(ParisArrays::paris_labels, label) - ParisArrays::paris_labels[0]);
+    }
+    else return Label{0};
+  });
+
+  static constexpr auto cluster_index = LUT<1000> ([](Label const & label){
+    if (is[label]) return index[label]%paris_cluster_size;
+    else return -1;
+  });
+
+  static constexpr auto cluster = LUT<1000> ([](Label const & label){
+    if (is[label]) return index[label]/paris_cluster_size;
+    else return -1;
+  });
+};
+
+// Paris classes :
 class SimplePhoswitch
 {
 public:
@@ -67,7 +95,7 @@ public:
 
   auto angle_to_beam() const
   {
-    return PositionXY::distance(PositionXY(0,0), ParisCluster<Paris::cluster_size>::positions[m_label]);
+    return PositionXY::distance(PositionXY(0,0), ParisCluster<paris_cluster_size>::positions[m_label]);
   }
 
   static void resetLabels() {g_label = 0;}
@@ -97,9 +125,9 @@ public:
   {
     auto const & label = event.labels[hit_i];
     if (!Paris::is[label]) return nullptr;
-    auto const & id = Paris::index[label];
+    auto const & id = Paris::cluster_index[label];
 
-    if (Paris::cluster_size < id+1) {error("in SimpleCluster::fill : index", id, "> Paris::cluster_size !!"); return nullptr;}
+    if (paris_cluster_size < id+1) {error("in SimpleCluster::fill : index", id, "> paris_cluster_size !!"); return nullptr;}
 
     phoswitches_id.push_back(id);
     
@@ -109,6 +137,8 @@ public:
     phoswitch.nrj = calib.calibrate(label, phoswitch.qshort, phoswitch.qlong);
     phoswitch.time = event.times[hit_i];
     calorimetry+=phoswitch.nrj;
+    print(*this);
+    pauseCo();
     return &phoswitch;
   }
 
@@ -161,8 +191,8 @@ public:
         if (std::abs(phoswitches[id_j].time - phoswitches[id_i].time) > m_time_window) continue; 
 
         // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
-        auto const & distance_ij = ParisCluster<Paris::cluster_size>::distances[id_i][id_j];
-        if (distance_ij > m_distance_max) continue;
+        auto const & distance_ij = ParisCluster<paris_cluster_size>::distances[id_i][id_j];
+        if (distance_ij > paris_distance_max) continue;
 
         // They pass both conditions, so we add-back them :
         modules[id_i].add(phoswitches[id_i]);
@@ -176,8 +206,8 @@ public:
     if (module_mult < phoswitch_mult) m_addback_used = true;
   }
 
-  std::array<SimplePhoswitch, Paris::cluster_size> phoswitches;
-  std::array<SimpleParisModule, Paris::cluster_size> modules;
+  std::array<SimplePhoswitch, paris_cluster_size> phoswitches;
+  std::array<SimpleParisModule, paris_cluster_size> modules;
 
   std::vector<Index> phoswitches_id;
   std::vector<Index> modules_id;
@@ -186,7 +216,7 @@ public:
   size_t module_mult = 0;
 
   float calorimetry = 0;
-  void setDistanceMax(double const & _distance_max) {m_distance_max = _distance_max;}
+  void setDistanceMax(double const & _distance_max) {paris_distance_max = _distance_max;}
   void setTimeWindow(double const & _time_window) {m_time_window = _time_window;}
   auto const & isAddBack() const {return m_addback;}
   auto const & isAddBackUsed() const {return m_addback_used;}
@@ -194,7 +224,6 @@ public:
 private:
   bool m_addback = false;
   bool m_addback_used = false;
-  double m_distance_max = Paris::distance_max;
   Time m_time_window = 10_ns;
 };
 std::ostream& operator<<(std::ostream& out, SimpleCluster const & cluster)

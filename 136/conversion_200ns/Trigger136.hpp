@@ -87,6 +87,7 @@ public:
   {
     if (choice<7)
     {
+      this->count();
       switch (choice)
       {
         case 0: return nb_dssd>0; //P

@@ -45,7 +45,7 @@ public:
     else return false;
   }
 
-  void setMaxHits(int const & maxHits) 
+  void setMaxHits(long const & maxHits) 
   {
     if (m_file_opened && maxHits < m_entries) 
     {
@@ -54,7 +54,11 @@ public:
     }
   }
 
-  auto const & cursor() {return m_cursor;}
+  auto const & getMaxHits() const {return m_entries;}
+
+  auto const & cursor() const {return m_cursor;}
+
+  auto & cursor() {return m_cursor;}
   
 private:
   TFile* m_file = nullptr;
