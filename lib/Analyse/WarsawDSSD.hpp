@@ -188,7 +188,7 @@ class WarsawDSSD
 
   void analyze()
   {
-    if (m_sectors.mult>2 || m_rings.mult>2) 
+    if (m_sectors.mult == 2 || m_rings.mult == 2) 
     {
       ok = false;
       return;
@@ -197,18 +197,18 @@ class WarsawDSSD
     Smult[m_sectors.mult] = true;
     Rmult[m_rings.mult] = true;
 
-    if (Rmult[0])
+    if (m_rings.mult == 0)
     {
       ok = false;
     }
-    if (Rmult[1])
+    if (m_rings.mult == 1)
     {
       ring_index = m_rings.all[0]->index();
       dssd_energy = m_rings.all[0]->nrj;
       ok = true;
     }
 
-    else if (Rmult[2])
+    else if (m_rings.mult == 2)
     {
       if (m_rings.all[0]->isVoisin(m_rings.all[1]) && m_rings.all[0]->isCoincident(m_rings.all[1]))
       {
@@ -225,23 +225,23 @@ class WarsawDSSD
 
     if (ok)
     {
-      if (Smult[0])
+      if (m_sectors.mult == 0)
       {
-        if (Rmult[0]) ok = false;
+        if (m_rings.mult == 0) ok = false;
         else
         {
           Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
-          if (Rmult[1] && ring_index > 4) ok = false; // If only one DSSD, very bad energy for all detectors with id > 4
+          if (m_rings.mult > 0 && ring_index > 4) ok = false; // If only ring(s), very bad energy for all detectors with id > 4 (may be fixed ?)
           else ok = true;
           time = 0;
         }
       }
 
-      else if (Smult[1])
+      else if (m_sectors.mult == 1)
       {
         dssd_energy = m_sectors.all[0]->nrj;
         time = m_sectors.all[0]->time;
-        if (Rmult[0])
+        if (m_rings.mult == 0)
         {
           // clean energy measure but no angle, so no precise excitation energy measurement possible
           ok = false;
@@ -249,7 +249,7 @@ class WarsawDSSD
         else ok = true;
         Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
       }
-      else if (Smult[2])
+      else if (m_sectors.mult == 2)
       {
         if (m_sectors.all[0]->isVoisin(m_sectors.all[1]) && m_sectors.all[0]->isCoincident(m_sectors.all[1]))
         {

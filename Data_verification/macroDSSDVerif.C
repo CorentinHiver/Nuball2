@@ -268,6 +268,8 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
         if (pclovers.clean.size() == 1) p_pure_singles->Fill(pclovers.clean[0]->nrj);
         else if (pclovers.clean.size() > 1) p_no_singles->Fill(pclovers.clean[0]->nrj);
 
+        if (!dssd.ok) continue;
+
         if (4_ns < dssd.time && dssd.time < 8_ns)
         {
           if (pclovers.clean.size() == 1) p_pure_singles_gate_5ns_dssd->Fill(pclovers.clean[0]->nrj);
