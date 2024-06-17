@@ -85,6 +85,9 @@ void CoProgressBar<T>::show(std::string const & message)
   if (!m_value)              throw_error("in CoProgressBar<T>::show() : the value has not been set !!");
   else if (m_value_max == 0) throw_error("in CoProgressBar<T>::show() : the maximum value has not been set !!");
 
+
+  if (( (*m_value)*100) % m_value_max != 0) return;
+
   float speed = 0.f;
   if (first_time) {timer.Restart(); speed = 0; first_time = false;}
   else {speed = 100.*(float_cast(*m_value)-float_cast(m_last_value))/(timer.TimeSec()*float_cast(m_value_max));}
@@ -98,7 +101,7 @@ void CoProgressBar<T>::show(std::string const & message)
     if (i<nb_chars) std::cout << ".";
     else            std::cout << " ";
   }
-  std::cout << "| : " << int_cast(real_percentage*100) << "% (" << std::setprecision(3) << speed << " %/s)";
+  std::cout << "| : " << int_cast(real_percentage*100) << "% (" << std::setprecision(2) << speed << " %/s)";
   if (message!="") std::cout << message ;
   std::cout << std::endl << "\033[F";// This code flushes the previous line
   std::cout.flush();

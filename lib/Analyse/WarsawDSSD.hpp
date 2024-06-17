@@ -182,6 +182,7 @@ class WarsawDSSD
     dssd_energy = 0;
     ring_index = 0;
     // angle = 0;
+    time = 0;
     ok = false;
   }
 
@@ -232,12 +233,14 @@ class WarsawDSSD
           Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
           if (Rmult[1] && ring_index > 4) ok = false; // If only one DSSD, very bad energy for all detectors with id > 4
           else ok = true;
+          time = 0;
         }
       }
 
       else if (Smult[1])
       {
         dssd_energy = m_sectors.all[0]->nrj;
+        time = m_sectors.all[0]->time;
         if (Rmult[0])
         {
           // clean energy measure but no angle, so no precise excitation energy measurement possible
@@ -252,6 +255,7 @@ class WarsawDSSD
         {
           dssd_energy = m_sectors.all[0]->nrj + m_sectors.all[1]->nrj;
           Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
+          time = (m_sectors.all[0]->nrj > m_sectors.all[1]->nrj) ? m_sectors.all[0]->time : m_sectors.all[1]->time;
           ok = true;
         }
         else ok = false;
@@ -272,6 +276,7 @@ class WarsawDSSD
   double Ex_p = ExcitationEnergy::bad_value;
   double dssd_energy = 0;
   // double angle = 0;
+  double time = 0;
   Index  ring_index = 0;
   bool   ok = false;
   bool Smult[32];

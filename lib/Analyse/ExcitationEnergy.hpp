@@ -24,8 +24,8 @@ class ExcitationEnergy
   constexpr double const & operator() (double const & nrj, int const & ring_i)
   {
     auto const & bin_nrj = int_cast(nrj*0.1);
-    if (bin_nrj < m_min_E_bin[ring_i] || bin_nrj > max_E_bin) return bad_value;
-    else return m_data[ring_i][bin_nrj];
+    if (m_min_E_bin[ring_i] < bin_nrj && bin_nrj < m_max_E_bin[ring_i]) return m_data[ring_i][bin_nrj];
+    else return bad_value;
   }
   constexpr void clean()
   {
@@ -33,10 +33,10 @@ class ExcitationEnergy
     for (auto & e : m_min_E_bin) e = bad_value;
     for (auto & e : m_max_E_bin) e = bad_value;
   }
-  constexpr static double bad_value = 1.e-42;
+  constexpr static double bad_value = -1.e-42;
   constexpr static int nb_rings = 16;
   constexpr static int nb_subdivisions = 1000;
-  constexpr static double max_E_bin = 7000;
+  // constexpr static double max_E_bin = 7000;
   std::array<std::array<double, nb_subdivisions>, nb_rings> m_data;
   std::array<int, nb_rings> m_min_E_bin;
   std::array<int, nb_rings> m_max_E_bin;
