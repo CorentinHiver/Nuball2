@@ -11,6 +11,7 @@
 #include "../lib/Classes/Timer.hpp"
 #include "../lib/Classes/CoProgressBar.hpp"
 
+#include "CoefficientCorrection.hpp"
 #include "Utils.h"
 
 constexpr static bool kCalibGe = true;
