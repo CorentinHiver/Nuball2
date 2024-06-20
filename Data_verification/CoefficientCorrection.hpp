@@ -24,9 +24,6 @@ class CoefficientCorrection
     return coeff[run_number][label][0]+(nrj*coeff[run_number][label][1])+(nrj*nrj*coeff[run_number][label][2]);
   }
 
-  // template<class... ARGS>
-  // auto operator=(ARGS && args) {return correct(std::forward<ARGS>(args...));}
-  
   double coeff[124][1000][3];
 };
 

@@ -230,6 +230,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
       Event event;
       event.reading(tree, "lTE");
       WarsawDSSD dssd(&Ex);
+      CoefficientCorrection calibGe;
 
       CloversV2 pclovers; // prompt  clovers
       // CloversV2 nclovers; // neutron clovers
@@ -274,7 +275,11 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
 
           else if (CloversV2::isClover(label))
           {
-                 if (gate(-10_ns, time,  10_ns)) pclovers.fill(event, hit_i);
+            if (gate(-10_ns, time, 10_ns)) 
+            {
+              if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
+              pclovers.fill(event, hit_i);
+            }
             // else if (gate( 10_ns, time,  40_ns)) nclovers.fill(event, hit_i);
             // else if (gate( 40_ns, time, 170_ns)) 
             // {
