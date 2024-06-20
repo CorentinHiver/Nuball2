@@ -152,7 +152,7 @@ void throw_error(std::string const & message) {throw std::runtime_error(concaten
 
 std::map<std::string, std::string> error_message = 
 {
-  {"DEV", "ASK DEV or do it yourself, sry"}
+  {"DEV", "to be done"}
 };
 
 auto pauseCo() 

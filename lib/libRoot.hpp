@@ -1591,8 +1591,14 @@ TH1F_map get_TH1F_map(TFile * file, std::vector<std::string> & names)
   return ret;
 }
 
+/**
+ * @brief Get the list of all the histograms of a certain class (TH1F, TH2F...) inside a TFile
+ * @details
+ * TFile* file(TFile::Open("file.root","read"));
+ * auto list = list_of<TH1F*>(file);
+ */
 template<class T>
-std::vector<std::string> get_names_of(TFile * file)
+std::vector<std::string> list_of(TFile * file)
 {
   std::vector<std::string> ret;
   T* temp_obj = new T;
@@ -1612,12 +1618,18 @@ std::vector<std::string> get_names_of(TFile * file)
   return ret;
 }
 
+/**
+ * @brief Create a map of all the histograms of a certain class (TH1F, TH2F...) inside a TFile
+ * @details
+ * TFile* file(TFile::Open("file.root","read"));
+ * auto map = map_of<TH1F*>(file);
+ */
 template<class T>
-std::map<std::string, T> create_map_of(TFile * file)
+std::map<std::string, T> map_of(TFile * file)
 {
-  throw_error("create_map_of<T>() DEV !!");
+  throw_error("map_of<T>() DEV !!");
   std::map<std::string, T> ret;
-  auto names (get_names_of<T>(file));
+  auto names (list_of<T>(file));
   for (auto const & name : names)
   {
     ret.emplace(name, file->Get<T>(name.c_str()));

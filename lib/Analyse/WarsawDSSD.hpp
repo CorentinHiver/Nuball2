@@ -30,10 +30,23 @@ namespace DSSD
   static constexpr double Re = 4.05; // cm : Outer radius
   static constexpr std::size_t nb_rings = 16;
   static constexpr std::size_t nb_sectors = 32;
+  static constexpr std::size_t nb_strips = nb_rings+nb_sectors;
 
+  static constexpr double ang_size_sector = 2*3.14159/nb_sectors;  
   static constexpr double size_ring = (Re-Ri)/nb_rings; // cm : 
-  static constexpr inline double angle_ring  (Index const & index) {return atan( (Ri + size_ring*index + size_ring/2.) / z);}
-  static constexpr inline double angle_sector(Index const & index) {return index;}// TODO
+  static constexpr inline double ring_radius(Index const & index) {return Ri + size_ring*index + size_ring/2.;}
+  static constexpr inline double angle_ring  (Index const & index) {return atan( ring_radius(index) / z);}
+  static constexpr inline double angle_sector(Index const & index) 
+  {
+    Index physical_index = (index<8) ? index+23 : index-8;
+    return physical_index*ang_size_sector;
+  }
+  std::pair<double, double> polar(Index const & ring_id, Index const & sector_id, TRandom * random) 
+  {
+    auto const & r = ring_radius(ring_id)+random->Uniform(-size_ring/2, size_ring/2);
+    auto const & phi = angle_sector(sector_id)+random->Uniform(-ang_size_sector/2, ang_size_sector/2);
+    return {r*cos(phi), r*sin(phi)};
+  }
 
   static constexpr Time ring_coinc_tw = 60_ns;
 };
@@ -171,15 +184,12 @@ class WarsawDSSD
 
   void clear()
   {
-    Smult[m_sectors.mult] = false;
-    Rmult[m_rings.mult] = false;
-
     m_rings.clear();
     m_sectors.clear(); 
     m_strips.clear();
 
     Ex_p = ExcitationEnergy::bad_value;
-    dssd_energy = 0;
+    nrj = 0;
     ring_index = 0;
     // angle = 0;
     time = 0;
@@ -194,9 +204,6 @@ class WarsawDSSD
       return;
     }
 
-    Smult[m_sectors.mult] = true;
-    Rmult[m_rings.mult] = true;
-
     if (m_rings.mult == 0)
     {
       ok = false;
@@ -204,7 +211,7 @@ class WarsawDSSD
     if (m_rings.mult == 1)
     {
       ring_index = m_rings.all[0]->index();
-      dssd_energy = m_rings.all[0]->nrj;
+      nrj = m_rings.all[0]->nrj;
       ok = true;
     }
 
@@ -213,7 +220,7 @@ class WarsawDSSD
       if (m_rings.all[0]->isVoisin(m_rings.all[1]) && m_rings.all[0]->isCoincident(m_rings.all[1]))
       {
         ring_index = (m_rings.all[0]->time > m_rings.all[1]->time) ? m_rings.all[0]->index() : m_rings.all[1]->index();
-        dssd_energy = m_rings.all[0]->nrj + m_rings.all[1]->nrj;
+        nrj = m_rings.all[0]->nrj + m_rings.all[1]->nrj;
         ok = true;
       }
       else 
@@ -230,7 +237,7 @@ class WarsawDSSD
         if (m_rings.mult == 0) ok = false;
         else
         {
-          Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
+          Ex_p = (*m_Ex_p)(nrj, ring_index);
           if (m_rings.mult > 0 && ring_index > 4) ok = false; // If only ring(s), very bad energy for all detectors with id > 4 (may be fixed ?)
           else ok = true;
           time = 0;
@@ -239,7 +246,7 @@ class WarsawDSSD
 
       else if (m_sectors.mult == 1)
       {
-        dssd_energy = m_sectors.all[0]->nrj;
+        nrj = m_sectors.all[0]->nrj;
         time = m_sectors.all[0]->time;
         if (m_rings.mult == 0)
         {
@@ -247,14 +254,14 @@ class WarsawDSSD
           ok = false;
         }
         else ok = true;
-        Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
+        Ex_p = (*m_Ex_p)(nrj, ring_index);
       }
       else if (m_sectors.mult == 2)
       {
         if (m_sectors.all[0]->isVoisin(m_sectors.all[1]) && m_sectors.all[0]->isCoincident(m_sectors.all[1]))
         {
-          dssd_energy = m_sectors.all[0]->nrj + m_sectors.all[1]->nrj;
-          Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
+          nrj = m_sectors.all[0]->nrj + m_sectors.all[1]->nrj;
+          Ex_p = (*m_Ex_p)(nrj, ring_index);
           time = (m_sectors.all[0]->nrj > m_sectors.all[1]->nrj) ? m_sectors.all[0]->time : m_sectors.all[1]->time;
           ok = true;
         }
@@ -274,13 +281,11 @@ class WarsawDSSD
   auto const & sectors() const {return m_sectors;}
 
   double Ex_p = ExcitationEnergy::bad_value;
-  double dssd_energy = 0;
+  double nrj = 0;
   // double angle = 0;
   double time = 0;
   Index  ring_index = 0;
   bool   ok = false;
-  bool Smult[32];
-  bool Rmult[16];
 
 private:
   RingsDSSD   m_rings;
@@ -298,8 +303,8 @@ private:
       if (m_sectors.mult == 1 && abs(sector_labels[0].time - ring_labels[0].time))
       {
         ring_index = ring_labels[0];
-        dssd_energy = sector_energy[0];
-        Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
+        nrj = sector_energy[0];
+        Ex_p = (*m_Ex_p)(nrj, ring_index);
       }
       // else; // Maybe to be improved
     }
@@ -309,8 +314,8 @@ private:
       if (m_sectors.mult == 1 && abs(int_cast(ring_labels[0]-ring_labels[1])))
       {
         ring_index = ring_labels[0]; // To be improved maybe
-        dssd_energy = sector_energy[0];
-        Ex_p = ((*m_Ex_p)(dssd_energy, ring_labels[0]) + (*m_Ex_p)(dssd_energy, ring_labels[1]))/2;
+        nrj = sector_energy[0];
+        Ex_p = ((*m_Ex_p)(nrj, ring_labels[0]) + (*m_Ex_p)(nrj, ring_labels[1]))/2;
         // Might want to reject cases when the sum energy of both rings isn't equal to the one of the sector
       }
       // else; // Maybe to be improved
@@ -320,15 +325,15 @@ private:
     { // If the sector is dead then only rings fired
       if (m_rings.mult == 1)
       {
-        dssd_energy = ring_energy[0];
+        nrj = ring_energy[0];
         ring_index = ring_labels[0];
-        Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
+        Ex_p = (*m_Ex_p)(nrj, ring_index);
       }
       else if (m_rings.mult == 2)
       {
-        dssd_energy = ring_energy[0]+ring_energy[1];
+        nrj = ring_energy[0]+ring_energy[1];
         ring_index = (ring_energy[0] > ring_energy[1]) ? ring_labels[0] : ring_labels[1];
-        Ex_p = (*m_Ex_p)(dssd_energy, ring_index);
+        Ex_p = (*m_Ex_p)(nrj, ring_index);
       }
     }
     */

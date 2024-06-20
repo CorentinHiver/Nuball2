@@ -23,15 +23,16 @@ public:
   ~Nuball2Tree() {if (m_file_opened) this->Close();}
 
   bool Open(std::string const & filename);
-  void Close() {if (m_file_opened) {m_file -> Close(); m_file_opened = false; delete m_file;} else {print(m_filename, "not open");}}
+  void Close() {if (m_file_opened) {m_file -> Close(); m_file_opened = false;} else {print(m_filename, "not open");}}
 
+  void loadRAM();
   auto const & filename() {return m_filename;}
   auto cd() {return m_file->cd();}
 
-  TTree* get() {return m_tree;}
-  auto get() const {return m_tree;}
-  TTree* operator-> () {return m_tree;}
-  operator TTree*() {return m_tree;}
+  auto get() {return m_tree.get();}
+  auto get() const {return m_tree.get();}
+  TTree* operator-> () {return m_tree.get();}
+  operator TTree*() {return m_tree.get();}
 
   bool const & ok() const {return m_ok;}
 
@@ -47,7 +48,7 @@ public:
 
   void setMaxHits(long const & maxHits) 
   {
-    if (m_file_opened && maxHits < m_entries) 
+    if (0 < m_entries && maxHits < m_entries) 
     {
       m_entries = maxHits;
       print("reading", m_entries, "events in", m_filename);
@@ -61,8 +62,8 @@ public:
   auto & cursor() {return m_cursor;}
   
 private:
-  TFile* m_file = nullptr;
-  TTree* m_tree = nullptr;
+  unique_TFile m_file;
+  unique_tree m_tree;
   bool m_ok = false;
   bool m_file_opened = false;
   std::string m_filename;
@@ -76,9 +77,9 @@ private:
 bool Nuball2Tree::Open(std::string const & filename)
 {
   // Opens the file :
-  m_file = TFile::Open(filename.c_str(), "READ");
+  m_file.reset(TFile::Open(filename.c_str(), "READ"));
 
-  if (!m_file) 
+  if (!m_file.get()) 
   {
     print("Could not find", filename, "!"); 
     return (m_ok = m_file_opened = false);
@@ -93,9 +94,9 @@ bool Nuball2Tree::Open(std::string const & filename)
   }
 
   // Extracts the tree :
-  m_tree = m_file->Get<TTree>("Nuball2");
+  m_tree.reset(m_file->Get<TTree>("Nuball2"));
 
-  if (!m_tree) 
+  if (!m_tree.get()) 
   {
     print("Nuball2 tree not found in", filename); 
     return (m_ok = false);
@@ -111,6 +112,15 @@ bool Nuball2Tree::Open(std::string const & filename)
   m_entries = m_tree->GetEntries();
 
   return (m_ok = true);
+}
+
+void Nuball2Tree::loadRAM()
+{
+  auto memory_tree = (m_tree->CloneTree());
+  memory_tree->SetDirectory(nullptr);
+  m_file->Close();
+  m_tree.reset(memory_tree);
+  m_file_opened = false;
 }
 
 std::ostream& operator<<(std::ostream& out, Nuball2Tree const & tree)

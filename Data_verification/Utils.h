@@ -4,6 +4,7 @@
 inline constexpr bool gate(double const & low, double const & energy, double const & high) noexcept {return (low < energy && energy < high);}
 inline constexpr bool gate(Time const & low, Time const & time, Time const & high) noexcept {return (low < time && time < high);}
 inline constexpr bool gate(Label const & low, Label const & label, Label const & high) noexcept {return (low < label && label < high);}
+inline constexpr bool gate(size_t const & low, size_t const & label, size_t const & high) noexcept {return (low < label && label < high);}
 
 std::unordered_set<Label> CloversV2::blacklist = {46, 55, 69, 70, 80, 92, 97, 122, 129, 142, 163};
 std::unordered_map<Label, double> CloversV2::maxE_Ge = 
