@@ -185,7 +185,7 @@ public:
   void analyze(Nuball2Tree & tree, Event & event);
   void write();
 
-  static void setMaxHits(int const & nb_max_hits) {g_nb_max_hits = nb_max_hits;}
+  static void setMaxHits(int const & nb_max_hits) {if (nb_max_hits>0) g_nb_max_hits = nb_max_hits;}
 
 private:
   /// @brief static 

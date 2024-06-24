@@ -100,6 +100,13 @@ constexpr inline int operator""_Gi(unsigned long long number) noexcept {return i
 constexpr inline int operator""_Mi(unsigned long long number) noexcept {return int_cast(number*1.e+6l );}
 constexpr inline int operator""_ki(unsigned long long number) noexcept {return int_cast(number*1.e+3l );}
 
+// Angles : 
+constexpr double to_rad(double const & deg){return deg*3.14159/180.;}
+constexpr double to_deg(double const & rad){return rad/3.14159*180.;}
+constexpr double to_rad(long double const & deg){return deg*3.14159/180.;}
+constexpr double to_deg(long double const & rad){return rad/3.14159*180.;}
+constexpr inline double operator""_deg(long double number) noexcept {return to_rad(number);}
+
 /////////////////////
 /// IO parameters ///
 /////////////////////

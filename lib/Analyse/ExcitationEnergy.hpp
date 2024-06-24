@@ -6,38 +6,56 @@ class ExcitationEnergy
   ExcitationEnergy() noexcept = default;
   ExcitationEnergy(std::string const & _filename, std::string option = "ascii") : filename(_filename)
   {
-    clean();
+    clear();
     if (option == "ascii")
     {
       std::ifstream file(filename, std::ios::in);
-      int i = 0; int EDssd = 0; int Ex = 0;
-      while(file >> i >> EDssd >> Ex) 
+      int id = 0; int EDssd = 0; int Ex = 0;
+      while(file >> id >> EDssd >> Ex) 
       {
         Ex*=10;
-        if (nb_rings < i) throw_error(concatenate("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : ring_i ", i, " > ", nb_rings));
-        if (nb_subdivisions < EDssd+1) throw_error(concatenate("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : ring_i ", i, " > ", nb_rings));
-        m_data[i][EDssd] = Ex;
+        if (nb_rings < id) throw_error(concatenate("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : ring_i ", id, " > ", nb_rings));
+        if (nb_subdivisions < EDssd) throw_error(concatenate("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : ring_i ", id, " > ", nb_rings));
+        m_data[id][EDssd] = Ex;
+        m_data_vector_Ex[id].push_back(Ex);
+        m_data_vector_EDssd[id].push_back(EDssd);
+      }
+
+      // Find the maximum and the minimum value for each ring
+      for (id = 0; id<nb_rings; ++id) 
+      {
+        m_min_E_bin[id] = m_data_vector_EDssd[id].front();
+        m_max_E_bin[id] = m_data_vector_EDssd[id].back();
       }
     }
     else error("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : option", option, "unkown !");
   }
-  constexpr double const & operator() (double const & nrj, int const & ring_i)
+  auto const & operator() (double const & nrj, int const & ring_i)
   {
     auto const & bin_nrj = int_cast(nrj*0.1);
-    if (m_min_E_bin[ring_i] < bin_nrj && bin_nrj < m_max_E_bin[ring_i]) return m_data[ring_i][bin_nrj];
+    // print(m_min_E_bin[ring_i], bin_nrj, m_max_E_bin[ring_i]);
+    // if (m_min_E_bin[ring_i] < bin_nrj && bin_nrj < m_max_E_bin[ring_i]) return m_data[ring_i][bin_nrj];
+    if (m_data[ring_i][bin_nrj] != bad_value) return m_data[ring_i][bin_nrj];
     else return bad_value;
   }
-  constexpr void clean()
+  
+  void clear()
   {
     for (auto & d : m_data) for (auto & e : d) e = bad_value;
     for (auto & e : m_min_E_bin) e = bad_value;
     for (auto & e : m_max_E_bin) e = bad_value;
+    m_data_vector_Ex.clear();
+    m_data_vector_EDssd.clear();
+    m_data_vector_Ex.resize(nb_rings);
+    m_data_vector_EDssd.resize(nb_rings);
   }
-  constexpr static double bad_value = -1.e-42;
+  constexpr static int bad_value = -42;
   constexpr static int nb_rings = 16;
   constexpr static int nb_subdivisions = 1000;
   // constexpr static double max_E_bin = 7000;
-  std::array<std::array<double, nb_subdivisions>, nb_rings> m_data;
+  std::array<std::array<int, nb_subdivisions>, nb_rings> m_data;
+  std::vector<std::vector<int>> m_data_vector_Ex;
+  std::vector<std::vector<int>> m_data_vector_EDssd;
   std::array<int, nb_rings> m_min_E_bin;
   std::array<int, nb_rings> m_max_E_bin;
 

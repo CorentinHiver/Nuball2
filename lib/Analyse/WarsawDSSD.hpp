@@ -25,7 +25,7 @@ namespace DSSD
     else return -1;
   });
 
-  static constexpr double z  = -3.25 ; // cm : Distance DSSD-target
+  static constexpr double z  = 3.25 ; // cm : Distance DSSD-target
   static constexpr double Ri = 1.58; // cm : Inner radius 
   static constexpr double Re = 4.05; // cm : Outer radius
   static constexpr std::size_t nb_rings = 16;
@@ -191,24 +191,24 @@ class WarsawDSSD
     Ex_p = ExcitationEnergy::bad_value;
     nrj = 0;
     ring_index = 0;
-    // angle = 0;
+    angle = 0;
     time = 0;
     ok = false;
   }
 
   void analyze()
   {
-    if (m_sectors.mult == 2 || m_rings.mult == 2) 
+    if (m_sectors.mult > 2 || m_rings.mult > 2) 
     {
       ok = false;
       return;
     }
 
-    if (m_rings.mult == 0)
+    else if (m_rings.mult == 0)
     {
       ok = false;
     }
-    if (m_rings.mult == 1)
+    else if (m_rings.mult == 1)
     {
       ring_index = m_rings.all[0]->index();
       nrj = m_rings.all[0]->nrj;
@@ -234,25 +234,17 @@ class WarsawDSSD
     {
       if (m_sectors.mult == 0)
       {
-        if (m_rings.mult == 0) ok = false;
-        else
-        {
-          Ex_p = (*m_Ex_p)(nrj, ring_index);
-          if (m_rings.mult > 0 && ring_index > 4) ok = false; // If only ring(s), very bad energy for all detectors with id > 4 (may be fixed ?)
-          else ok = true;
-          time = 0;
-        }
+        Ex_p = (*m_Ex_p)(nrj, ring_index);
+        if (found(std::vector<Index>({0,1,2,6,7,10,11,12,13,14}), ring_index)) ok = true;
+        else ok = false;
       }
 
       else if (m_sectors.mult == 1)
       {
         nrj = m_sectors.all[0]->nrj;
         time = m_sectors.all[0]->time;
-        if (m_rings.mult == 0)
-        {
-          // clean energy measure but no angle, so no precise excitation energy measurement possible
-          ok = false;
-        }
+        // if no ring, clean energy measure but no angle, so no precise excitation energy measurement possible :
+        if (m_rings.mult == 0) ok = false;
         else ok = true;
         Ex_p = (*m_Ex_p)(nrj, ring_index);
       }
@@ -271,7 +263,7 @@ class WarsawDSSD
 
     if (ok)
     {
-      // angle = m_rings[ring_index].angle;
+      angle = m_rings[ring_index].angle;
     }
   }
 
@@ -282,7 +274,7 @@ class WarsawDSSD
 
   double Ex_p = ExcitationEnergy::bad_value;
   double nrj = 0;
-  // double angle = 0;
+  double angle = 0;
   double time = 0;
   Index  ring_index = 0;
   bool   ok = false;
