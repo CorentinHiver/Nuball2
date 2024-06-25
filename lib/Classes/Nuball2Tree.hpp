@@ -50,8 +50,8 @@ public:
   {
     if (0 < m_entries && 0 < maxHits && maxHits < m_entries) 
     {
+      print("reading", nicer_double(maxHits,0), "events in", m_filename, "out of", nicer_double(m_entries,0));
       m_entries = maxHits;
-      print("reading", nicer_double(m_entries,0), "events in", m_filename);
     }
   }
 

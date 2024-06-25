@@ -397,7 +397,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
           for (size_t clover_j = clover_i+1; clover_j < dclovers.clean.size(); ++clover_j)
           {
             auto const & clover_bis = *(dclovers.clean[clover_j]);
-            if (abs(clover.time-clover_bis.time)>50_ns) continue;
+            if (abs(clover.time-clover_bis.time) > 50_ns) continue;
             dd_VS_DSSD_nrj->Fill(clover.nrj, clover_bis.nrj, dssd.nrj);
             dd_VS_DSSD_nrj->Fill(clover_bis.nrj, clover.nrj, dssd.nrj);
           }
