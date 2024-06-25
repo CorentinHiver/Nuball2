@@ -104,7 +104,8 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
   MTObject::Initialise();
 
 
-  ExcitationEnergy Ex("../136/U5_d_p_10umAl.Ex");
+  ExcitationEnergy Ex("../136/U5_d_p_Ex_10umAl.root");
+  // ExcitationEnergy Ex("../136/U5_d_p_10umAl.Ex");
   CoefficientCorrection calibGe;
   
   std::mutex write_mutex;

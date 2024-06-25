@@ -4,11 +4,13 @@
 class ExcitationEnergy
 {public:
   ExcitationEnergy() noexcept = default;
-  ExcitationEnergy(std::string const & _filename, std::string option = "ascii") : filename(_filename)
+  ExcitationEnergy(std::string const & _filename) : filename(_filename)
   {
     clear();
-    if (option == "ascii")
+    if (extension(_filename) == "Ex")
     {
+      // Output in Jon format
+      m_type = 0;
       std::ifstream file(filename, std::ios::in);
       int id = 0; int EDssd = 0; int Ex = 0;
       while(file >> id >> EDssd >> Ex) 
@@ -28,15 +30,43 @@ class ExcitationEnergy
         m_max_E_bin[id] = m_data_vector_EDssd[id].back();
       }
     }
-    else error("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : option", option, "unkown !");
+    else if (extension(_filename) == "root")
+    {
+      // Output splines in root file
+    #ifdef LIBROOT_HPP
+      m_type = 1;
+      auto rootfile = TFile::Open(_filename.c_str(), "READ");
+      auto spline_names = map_of<TSpline3>(rootfile);
+      splines.resize(16);
+      for (auto & e : spline_names)
+      {
+        auto & name = e.first;
+        auto spline = e.second;
+        auto const & spline_id = atoi(split(name, '_').back().c_str());
+        splines[spline_id] = spline;
+        m_min_E_bin[spline_id] = spline->GetXmin();
+        m_max_E_bin[spline_id] = spline->GetXmax();
+      }
+    #else //!LIBROOT_HPP
+      error("libRoot.hpp not included but reading a root file :",_filename);
+    #endif //LIBROOT_HPP
+    }
+    else error("in ExcitationEnergy::ExcitationEnergy(std::string filename = ",_filename,") : extension not handled !");
   }
-  auto const & operator() (double const & nrj, int const & ring_i)
+  auto operator() (double const & nrj, int const & ring_i)
   {
-    auto const & bin_nrj = int_cast(nrj*0.1);
-    // print(m_min_E_bin[ring_i], bin_nrj, m_max_E_bin[ring_i]);
-    // if (m_min_E_bin[ring_i] < bin_nrj && bin_nrj < m_max_E_bin[ring_i]) return m_data[ring_i][bin_nrj];
-    if (m_data[ring_i][bin_nrj] != bad_value) return m_data[ring_i][bin_nrj];
-    else return bad_value;
+    if (m_type == 0)
+    {
+      auto const & bin_nrj = int_cast(nrj*0.1);
+      if (m_data[ring_i][bin_nrj] != bad_value) return m_data[ring_i][bin_nrj];
+      else return bad_value;
+    }
+    else if (m_type == 1)
+    {
+      if (m_min_E_bin[ring_i] < nrj && nrj < m_max_E_bin[ring_i]) return int_cast(splines[ring_i]->Eval(nrj));
+      else return bad_value;
+    }
+    return bad_value;
   }
   
   void clear()
@@ -78,6 +108,9 @@ class ExcitationEnergy
 #endif //LIBROOT_HPP
 
   std::string filename;
+
+private:
+  int m_type = 0;
 };
 
 std::ostream& operator<<(std::ostream& out, ExcitationEnergy const & Ex)

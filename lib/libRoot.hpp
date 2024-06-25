@@ -1625,15 +1625,23 @@ std::vector<std::string> list_of(TFile * file)
  * auto map = map_of<TH1F*>(file);
  */
 template<class T>
-std::map<std::string, T> map_of(TFile * file)
+std::map<std::string, T*> map_of(TFile * file)
 {
-  throw_error("map_of<T>() DEV !!");
-  std::map<std::string, T> ret;
-  auto names (list_of<T>(file));
-  for (auto const & name : names)
+  std::map<std::string, T*> ret;
+  T* temp_obj = new T;
+  if (!file) {print("in get_names_of<T>(TFile * file) : file is nullptr"); return ret;}
+  auto list = file->GetListOfKeys();
+  for (auto&& keyAsObj : *list)
   {
-    ret.emplace(name, file->Get<T>(name.c_str()));
+    std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
+    if(strcmp(key->GetClassName(), temp_obj->ClassName()) == 0)
+    {
+      TObject* obj = key->ReadObj();
+      T* t = dynamic_cast<T*>(obj);
+      ret.emplace(t->GetName(), t);
+    }
   }
+  delete temp_obj;
   return ret;
 }
 
