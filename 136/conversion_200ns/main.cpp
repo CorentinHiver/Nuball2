@@ -81,7 +81,7 @@ int main(int argc, char** argv)
         else if (command == "-H" || command == "--histograms")
         {
           fill_histos = true;
-          print("No histograms will be saved");
+          print("Histograms will be saved");
         }
         else if (                   command == "--keep-singles")
         {

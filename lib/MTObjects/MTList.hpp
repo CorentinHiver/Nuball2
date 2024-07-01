@@ -13,6 +13,10 @@ public:
     m_collection(collection), 
     m_size(m_collection.size()) {}
 
+  MTVector(std::initializer_list<T> const & collection) : 
+    m_collection(collection), 
+    m_size(m_collection.size()) {}
+
   void set(std::vector<T> const & collection) 
   {
     lock_mutex lock(m_mutex);

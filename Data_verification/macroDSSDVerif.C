@@ -14,6 +14,7 @@
 #include "Utils.h"
 
 constexpr static bool kCalibGe = true;
+constexpr static bool k3D = false;
 
 class SpectraGate
 {
@@ -85,6 +86,7 @@ private:
   std::vector<int> m_id_gate_lkp;
 };
 
+
 void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_threads = 5)
 {
   detectors.load("../136/index_129.list");
@@ -99,15 +101,24 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
   Calibration ring_calib("../136/DSSD_ring.calib");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
+
+
+  // Excitation energy from dssd
+  ExcitationEnergy Ex_U6("../136/Excitation_energy/","U5","d","p","10umAl");
+  // ExcitationEnergy Ex_U5("../136/Excitation_energy/","U5","d","d","10umAl");
+  // ExcitationEnergy Ex_27Al("../136/Excitation_energy/","27Al","d","d","10umAl");
+  // ExcitationEnergy Ex_28Al("../136/Excitation_energy/","27Al","d","p","10umAl");
+  // ExcitationEnergy Ex_25Mg("../136/Excitation_energy/","27Al","d","a","10umAl");
+  if (!Ex_U6) return;
+  // if (!Ex_U6 || Ex_U5 || Ex_27Al || Ex_28Al || Ex_25Mg) return;
+  
+  // Gain drift of germanium detectors :
+  CoefficientCorrection calibGe("../136/GainDriftCoefficients.dat");
+  
+  // Multithreading add-on :
   MTObject::setThreadsNb(nb_threads);
   MTObject::adjustThreadsNumber(files.size());
-  MTObject::Initialise();
-
-
-  ExcitationEnergy Ex("../136/U5_d_p_Ex_10umAl.root");
-  // ExcitationEnergy Ex("../136/U5_d_p_10umAl.Ex");
-  CoefficientCorrection calibGe;
-  
+  MTObject::Initialise();  
   std::mutex write_mutex;
 
   MTObject::parallelise_function([&](){
@@ -159,8 +170,8 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
       unique_TH2F Ex_vs_angle_rings_only (new TH2F(("Ex_vs_angle_rings_only_"+thread_i_str).c_str(), "Ex_vs_angle_rings_only", 40,20,60, 1_k,0,10_MeV));
       unique_TH2F Edssd_vs_angle_rings_only (new TH2F(("Edssd_vs_angle_rings_only_"+thread_i_str).c_str(), "Edssd_vs_angle_rings_only", 40,20,60, 3_k,0,30_MeV));
 
-      std::unique_ptr<TH3I> pp_VS_DSSD_nrj (new TH3I(("pp_VS_DSSD_nrj"+thread_i_str).c_str(), "pp_VS_DSSD_nrj;E_{#gamma_{1}} [keV];E_{#gamma_{2}} [keV];E_dssd [keV]", 2048,0,4096, 2048,0,4096, 20,0,20_MeV));
-      std::unique_ptr<TH3I> dd_VS_DSSD_nrj (new TH3I(("dd_VS_DSSD_nrj"+thread_i_str).c_str(), "pp_VS_DSSD_nrj;E_{#gamma_{1}} [keV];E_{#gamma_{2}} [keV];E_dssd [keV]", 2048,0,4096, 2048,0,4096, 20,0,20_MeV));
+      std::unique_ptr<TH3I> pp_VS_DSSD_nrj ((k3D) ?new TH3I(("pp_VS_DSSD_nrj"+thread_i_str).c_str(), "pp_VS_DSSD_nrj;E_{#gamma_{1}} [keV];E_{#gamma_{2}} [keV];E_dssd [keV]", 2048,0,4096, 2048,0,4096, 20,0,20_MeV) : nullptr);
+      std::unique_ptr<TH3I> dd_VS_DSSD_nrj ((k3D) ?new TH3I(("dd_VS_DSSD_nrj"+thread_i_str).c_str(), "dd_VS_DSSD_nrj;E_{#gamma_{1}} [keV];E_{#gamma_{2}} [keV];E_dssd [keV]", 2048,0,4096, 2048,0,4096, 20,0,20_MeV) : nullptr);
       
       std::vector<unique_TH2F> E_ring_VS_sectors;
       std::vector<unique_TH2F> T_ring_VS_sectors;
@@ -216,10 +227,13 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
       std::vector<unique_TH2F> E_VS_Clover_each;
       std::vector<unique_TH2F> Ex_VS_Clover_each;
       std::vector<unique_TH2F> E_VS_T_each;
+      std::vector<unique_TH2F> E_VS_angle_each;
       std::vector<unique_TH2F> E_VS_angle_each_27Al_2210;
       std::vector<unique_TH2F> E_VS_angle_each_28Al_2270;
       std::vector<unique_TH2F> E_VS_angle_each_28Al_1130;
       std::vector<unique_TH2F> E_VS_angle_each_13C_3850;
+      std::vector<unique_TH2F> E_VS_angle_each_13C_3850_gate_proton;
+      std::vector<unique_TH2F> E_VS_angle_each_25Mg_585;
       std::vector<unique_TH2F> E_VS_angle_each_25Mg_3683;
       std::vector<unique_TH2F> E_VS_angle_each_56Fe_1238;
       std::vector<unique_TH2F> E_VS_angle_each_16O_6129;
@@ -245,37 +259,46 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
         name = "E_strip_"+strip_id_str+"_VS_time_"+thread_i_str;
         E_VS_T_each.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 250,-50_ns,200_ns, 3_k,0,30_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_27Al_2210_"+thread_i_str;
-        E_VS_angle_each_27Al_2210.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle"+thread_i_str;
+        E_VS_angle_each.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        
+        name = "E_strip_"+strip_id_str+"_VS_angle_27Al_2210_"+thread_i_str;
+        E_VS_angle_each_27Al_2210.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_28Al_2270_"+thread_i_str;
-        E_VS_angle_each_28Al_2270.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle_28Al_2270_"+thread_i_str;
+        E_VS_angle_each_28Al_2270.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_28Al_1130_"+thread_i_str;
-        E_VS_angle_each_28Al_1130.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle_28Al_1130_"+thread_i_str;
+        E_VS_angle_each_28Al_1130.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_13C_3683_"+thread_i_str;
-        E_VS_angle_each_13C_3850.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle_13C_3683_"+thread_i_str;
+        E_VS_angle_each_13C_3850.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        
+        name = "E_strip_"+strip_id_str+"_VS_angle_13C_3683_gate_proton_"+thread_i_str;
+        E_VS_angle_each_13C_3850_gate_proton.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_25Mg_3683_"+thread_i_str;
-        E_VS_angle_each_25Mg_3683.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle_25Mg_585_"+thread_i_str;
+        E_VS_angle_each_25Mg_585.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        
+        name = "E_strip_"+strip_id_str+"_VS_angle_25Mg_3683_"+thread_i_str;
+        E_VS_angle_each_25Mg_3683.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_56Fe_1238_"+thread_i_str;
-        E_VS_angle_each_56Fe_1238.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle_56Fe_1238_"+thread_i_str;
+        E_VS_angle_each_56Fe_1238.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_16O_6129_"+thread_i_str;
-        E_VS_angle_each_16O_6129.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle_16O_6129_"+thread_i_str;
+        E_VS_angle_each_16O_6129.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_17O_2184_"+thread_i_str;
-        E_VS_angle_each_17O_2184.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle_17O_2184_"+thread_i_str;
+        E_VS_angle_each_17O_2184.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
 
-        name = "E_strip_"+strip_id_str+"_VS_time_236U_642_"+thread_i_str;
-        E_VS_angle_each_236U_642.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";time [ps];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
+        name = "E_strip_"+strip_id_str+"_VS_angle_236U_642_"+thread_i_str;
+        E_VS_angle_each_236U_642.emplace_back(unique_TH2F(new TH2F((name).c_str(), (name+";Angle [#circ];Energy [keV]").c_str(), 40,20,60, 2_k,0,20_MeV)));
       }
 
       Event event;
       event.reading(tree, "lTE");
-      WarsawDSSD dssd(&Ex);
+      WarsawDSSD dssd;
 
       CloversV2 pclovers; // prompt  clovers
       // CloversV2 nclovers; // neutron clovers
@@ -349,6 +372,9 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
 
         // Clovers : 
 
+        auto const & Ex_U6_pt = (dssd.ok) ? Ex_U6(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
+        // print(Ex_U6_pt);
+
         if (pclovers.clean.size() == 1) 
         {
           p_pure_singles->Fill(pclovers.clean[0]->nrj);
@@ -368,7 +394,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
              if (dssd.time !=0) p_no_singles_VS_dssd_time->Fill(dssd.time, clover.nrj);
             p_no_singles_VS_dssd_energy->Fill(dssd.nrj, clover.nrj);
           }
-          for (size_t clover_j = clover_i+1; clover_j < pclovers.clean.size(); ++clover_j)
+          if (k3D) for (size_t clover_j = clover_i+1; clover_j < pclovers.clean.size(); ++clover_j)
           {
             auto const & clover_bis = *(pclovers.clean[clover_j]);
             pp_VS_DSSD_nrj->Fill(clover.nrj, clover_bis.nrj, dssd.nrj);
@@ -398,7 +424,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
           for (size_t clover_j = clover_i+1; clover_j < dclovers.clean.size(); ++clover_j)
           {
             auto const & clover_bis = *(dclovers.clean[clover_j]);
-            if (abs(clover.time-clover_bis.time) > 50_ns) continue;
+            if (!k3D || abs(clover.time-clover_bis.time) > 50_ns) continue;
             dd_VS_DSSD_nrj->Fill(clover.nrj, clover_bis.nrj, dssd.nrj);
             dd_VS_DSSD_nrj->Fill(clover_bis.nrj, clover.nrj, dssd.nrj);
           }
@@ -408,16 +434,16 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
         {
           if (nS>0)
           {
-            Ex_histo_sectors->Fill(dssd.Ex_p);
-            Ex_vs_Ep_sectors->Fill(dssd.nrj, dssd.Ex_p);
-            Ex_vs_angle_sectors->Fill(to_deg(dssd.angle), dssd.Ex_p);
+            Ex_histo_sectors->Fill(Ex_U6_pt);
+            Ex_vs_Ep_sectors->Fill(dssd.nrj, Ex_U6_pt);
+            Ex_vs_angle_sectors->Fill(to_deg(dssd.angle), Ex_U6_pt);
             Edssd_vs_angle_sectors->Fill(to_deg(dssd.angle), dssd.nrj);
           }
           else
           {
-            Ex_histo_rings_only->Fill(dssd.Ex_p);
-            Ex_vs_Ep_rings_only->Fill(dssd.nrj, dssd.Ex_p);
-            Ex_vs_angle_rings_only->Fill(to_deg(dssd.angle), dssd.Ex_p);
+            Ex_histo_rings_only->Fill(Ex_U6_pt);
+            Ex_vs_Ep_rings_only->Fill(dssd.nrj, Ex_U6_pt);
+            Ex_vs_angle_rings_only->Fill(to_deg(dssd.angle), Ex_U6_pt);
             Edssd_vs_angle_rings_only->Fill(to_deg(dssd.angle), dssd.nrj);
           }
         }
@@ -457,17 +483,27 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
           for (auto const & clover : pclovers.clean) 
           {
             E_VS_Clover_each [plot_id]->Fill(clover->nrj, ring1.nrj);
-            Ex_VS_Clover_each[plot_id]->Fill(clover->nrj, dssd.Ex_p);
+            Ex_VS_Clover_each[plot_id]->Fill(clover->nrj, Ex_U6_pt);
+            E_VS_angle_each[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
 
-                 if (gate(2210-5, clover->nrj, 2210+5)) E_VS_angle_each_27Al_2210[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
-            else if (gate(2270-5, clover->nrj, 2270+5)) E_VS_angle_each_28Al_2270[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
-            else if (gate(1130-5, clover->nrj, 1130+5)) E_VS_angle_each_28Al_1130[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
-            else if (gate(3830  , clover->nrj, 3870  )) E_VS_angle_each_13C_3850[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
-            else if (gate(3683-5, clover->nrj, 3683+5)) E_VS_angle_each_25Mg_3683[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+            if (nS>0 && gate_proton(dssd.time)) // The gate is possible only if there is a proton
+            {
+              if (gate(3830  , clover->nrj, 3870  )) E_VS_angle_each_13C_3850_gate_proton[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+            }
+
+                 if (gate(3830  , clover->nrj, 3870  )) E_VS_angle_each_13C_3850[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+            else if (gate(642-2 , clover->nrj, 642+2 )) E_VS_angle_each_236U_642[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+            else if (gate(2184-5, clover->nrj, 2184+5)) E_VS_angle_each_17O_2184[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+
+            else if (gate(2210-5, clover->nrj, 2210+5)) E_VS_angle_each_27Al_2210[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
             else if (gate(1238-5, clover->nrj, 1238+5)) E_VS_angle_each_56Fe_1238[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
             else if (gate(6129-5, clover->nrj, 6129+5)) E_VS_angle_each_16O_6129[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
-            else if (gate(2184-5, clover->nrj, 2184+5)) E_VS_angle_each_17O_2184[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
-            else if (gate(642-2 , clover->nrj, 642+2 )) E_VS_angle_each_236U_642[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+
+            else if (gate(2270-5, clover->nrj, 2270+5)) E_VS_angle_each_28Al_2270[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+            else if (gate(1130-5, clover->nrj, 1130+5)) E_VS_angle_each_28Al_1130[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+
+            else if (gate(3683-5, clover->nrj, 3683+5)) E_VS_angle_each_25Mg_585[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
+            else if (gate(3683-5, clover->nrj, 3683+5)) E_VS_angle_each_25Mg_3683[plot_id]->Fill(to_deg(ring1.angle), ring1.nrj);
           }
         }
 
@@ -481,13 +517,17 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
           for (auto const & clover : pclovers.clean) 
           {
             E_VS_Clover_each [id_i]->Fill(clover->nrj, sector1.nrj);
-            Ex_VS_Clover_each[id_i]->Fill(clover->nrj, dssd.Ex_p);
+            Ex_VS_Clover_each[id_i]->Fill(clover->nrj, Ex_U6_pt);
+            E_VS_angle_each[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
+
             if (dssd.ok)
             {
-                  if (gate(2210-5, clover->nrj, 2210+5)) E_VS_angle_each_27Al_2210[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
+              if( gate_proton(dssd.time)) if (gate(3850-5, clover->nrj, 3850+5)) E_VS_angle_each_13C_3850_gate_proton[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
+                   if (gate(2210-5, clover->nrj, 2210+5)) E_VS_angle_each_27Al_2210[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
               else if (gate(2270-5, clover->nrj, 2270+5)) E_VS_angle_each_28Al_2270[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
-              else if (gate(2270-5, clover->nrj, 2270+5)) E_VS_angle_each_28Al_1130[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
-              else if (gate(3683-5, clover->nrj, 3683+5)) E_VS_angle_each_13C_3850[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
+              else if (gate(1130-5, clover->nrj, 1130+5)) E_VS_angle_each_28Al_1130[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
+              else if (gate(3850-5, clover->nrj, 3850+5)) E_VS_angle_each_13C_3850[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
+              else if (gate(585-2 , clover->nrj, 585+2 )) E_VS_angle_each_25Mg_585[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
               else if (gate(3683-5, clover->nrj, 3683+5)) E_VS_angle_each_25Mg_3683[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
               else if (gate(1238-5, clover->nrj, 1238+5)) E_VS_angle_each_56Fe_1238[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
               else if (gate(6129-5, clover->nrj, 6129+5)) E_VS_angle_each_16O_6129[id_i]->Fill(to_deg(dssd.angle), sector1.nrj);
@@ -527,10 +567,8 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
         if (Ex_vs_Ep_rings_only->Integral() > 1) Ex_vs_Ep_rings_only->Write("Ex_vs_Ep_rings_only", TObject::kOverwrite);
         if (Ex_vs_angle_rings_only->Integral() > 1) Ex_vs_angle_rings_only->Write("Ex_vs_angle_rings_only", TObject::kOverwrite);
         if (Edssd_vs_angle_rings_only->Integral() > 1) Edssd_vs_angle_rings_only->Write("Edssd_vs_angle_rings_only", TObject::kOverwrite);
-        if (pp_VS_DSSD_nrj->Integral() > 1) pp_VS_DSSD_nrj->Write("pp_VS_DSSD_nrj", TObject::kOverwrite);
-        if (pp_VS_DSSD_nrj->Integral() > 1) pp_VS_DSSD_nrj->Write("pp_VS_DSSD_nrj", TObject::kOverwrite);
-        if (pp_VS_DSSD_nrj->Integral() > 1) pp_VS_DSSD_nrj->Write("pp_VS_DSSD_nrj", TObject::kOverwrite);
-        if (dd_VS_DSSD_nrj->Integral() > 1) dd_VS_DSSD_nrj->Write("dd_VS_DSSD_nrj", TObject::kOverwrite);
+        if (k3D && pp_VS_DSSD_nrj->Integral() > 1) pp_VS_DSSD_nrj->Write("pp_VS_DSSD_nrj", TObject::kOverwrite);
+        if (k3D && dd_VS_DSSD_nrj->Integral() > 1) dd_VS_DSSD_nrj->Write("dd_VS_DSSD_nrj", TObject::kOverwrite);
         
         for (auto & histo : T_ring_VS_T_ring) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_ring_VS_E_ring) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
@@ -547,10 +585,13 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
         for (auto & histo : E_VS_T_each) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_VS_Clover_each) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : Ex_VS_Clover_each) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
+        for (auto & histo : E_VS_angle_each) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_VS_angle_each_27Al_2210) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_VS_angle_each_28Al_1130) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_VS_angle_each_28Al_2270) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_VS_angle_each_13C_3850) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
+        for (auto & histo : E_VS_angle_each_13C_3850_gate_proton) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
+        for (auto & histo : E_VS_angle_each_25Mg_585) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_VS_angle_each_25Mg_3683) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_VS_angle_each_56Fe_1238) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);
         for (auto & histo : E_VS_angle_each_16O_6129) if (histo->Integral()>1) histo->Write((removeLastPart(histo->GetName(), '_')).c_str(), TObject::kOverwrite);

@@ -4,7 +4,7 @@
 
 class CoefficientCorrection
 {public:
-  CoefficientCorrection(std::string const & filename = "../136/GainDriftCoefficients.dat")
+  CoefficientCorrection(std::string const & filename)
   {
     std::ifstream file(filename);
 

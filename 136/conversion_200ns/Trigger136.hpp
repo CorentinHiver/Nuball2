@@ -11,6 +11,7 @@ public:
   size_t nb_BGO = 0;
   size_t nb_clovers = 0;
   size_t nb_modules = 0;
+  size_t nb_clovers_clean = 0;
   size_t nb_clovers_clean_prompt = 0;
   size_t nb_clovers_clean_delayed = 0;
   size_t nb_clovers_prompt = 0;
@@ -32,6 +33,7 @@ public:
     nb_BGO = 0; 
     nb_clovers = 0;
     nb_modules = 0;
+    nb_clovers_clean = 0;
     nb_clovers_clean_prompt = 0;
     nb_clovers_clean_delayed = 0;
     nb_clovers_prompt = 0;
@@ -80,6 +82,7 @@ public:
     }
     nb_clovers = nb_modules_prompt + nb_modules_delayed;
     nb_modules = nb_clovers + nb_modules_prompt + nb_modules_delayed;
+    nb_clovers_clean = nb_clovers_clean_prompt+nb_clovers_clean_delayed;
     analyzed = true;
   }
 
@@ -105,8 +108,9 @@ public:
       this->analyze();
       switch (choice)
       {
-        case 8:  return nb_clovers > 1 && nb_dssd > 0; // PC2
-        case 9:  return nb_clovers > 0 && nb_dssd > 0; // PC1
+        case 7:  return nb_clovers_clean > 1; // C2
+        case 8:  return nb_clovers_clean > 1 && nb_dssd > 0; // PC2
+        case 9:  return nb_clovers_clean > 0 && nb_dssd > 0; // PC1
         case 10: return nb_modules_prompt > 0 && nb_clovers_clean_delayed > 0;// pM1dC1
         case 11: return nb_clovers_clean_delayed > 0;// dC1
         case 12: return nb_clovers_clean_delayed > 1;// dC2

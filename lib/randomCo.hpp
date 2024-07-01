@@ -16,14 +16,14 @@ namespace randomCo
   void setSeed(int const & _seed) {generator.seed(_seed);}
 
   template<class T>
-  inline double uniform_t() noexcept
+  inline auto uniform_t() noexcept
   {
     std::uniform_real_distribution<T> distribution(0, 1);
     return distribution(generator);
   }
 
   template<class T>
-  inline double uniform_t(T const & min, T const & max) noexcept
+  inline auto uniform_t(T const & min, T const & max) noexcept
   {
     std::uniform_real_distribution<T> distribution(min, max);
     return distribution(generator);
@@ -47,8 +47,6 @@ namespace randomCo
     return distribution(generator);
   }
 
-  
-  
   /// @brief Same as uniform_t, but always generates the same sequence of random numbers (faster, less random)
   template<class T>
   inline double uniform_t_fast() noexcept

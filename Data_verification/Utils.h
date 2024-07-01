@@ -6,6 +6,10 @@ inline constexpr bool gate(Time const & low, Time const & time, Time const & hig
 inline constexpr bool gate(Label const & low, Label const & label, Label const & high) noexcept {return (low < label && label < high);}
 inline constexpr bool gate(size_t const & low, size_t const & label, size_t const & high) noexcept {return (low < label && label < high);}
 
+inline constexpr bool gate_proton(Time const & time) {return gate(-5_ns, time, 5_ns);}
+inline constexpr bool gate_deuton(Time const & time) {return gate(0_ns, time, 10_ns);}
+inline constexpr bool gate_alpha(Time const & time) {return gate(0_ns, time, 10_ns);}
+
 std::unordered_set<Label> CloversV2::blacklist = {46, 55, 69, 70, 80, 92, 97, 122, 129, 142, 163};
 std::unordered_map<Label, double> CloversV2::maxE_Ge = 
 {

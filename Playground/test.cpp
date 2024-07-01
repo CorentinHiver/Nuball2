@@ -1,7 +1,7 @@
 // #include <MTObject.hpp>
-#include "../libRoot.hpp"
+// #include "../libRoot.hpp"
 // #include <Paris.hpp>
-#include <Minimisator.hpp>
+// #include <Minimisator.hpp>
 // #include <CloversV2.hpp>
 // #include <Hit.hpp>
 // #include <FasterReader.hpp>
@@ -19,7 +19,7 @@
 // #include <MTFasterReader.hpp>
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
-// #include <AnalysedSpectra.hpp>
+#include <ExcitationEnergy.hpp>
 // #include <DSSD.hpp>
 // #include "../lib/Analyse/Paris.hpp"
 // #include <SpectraCo.hpp>
@@ -39,6 +39,17 @@ static thread_local std::mt19937 generator;
 
 int main()
 { 
+
+  /////////////////////////
+  //   EXCITATION ENERGY //
+  /////////////////////////
+
+  ExcitationEnergy Ex("../136/Excitation_energy/U5_d_p_10umAl_Ex.root");
+  // unique_TFile rootfile (TFile::Open("../136/Excitation_energy/U5_d_p_10umAl_Ex.root", "READ"));
+
+  /////////////////////////
+  //  !EXCITATION ENERGY //
+  /////////////////////////
 
   ////////////////////////
   //    PARIS MODULE    //
@@ -212,8 +223,8 @@ int main()
   // else                              MTObject::Initialise(2);
 
   // MTObject::Initialise(2);
-  detectors.load("index_129.list");
-  Timeshifts ts;
+  // detectors.load("index_129.list");
+  // Timeshifts ts;
   // ts.dT_with_biggest_peak_finder();
   // ts.setMult(2,4);
   // ts.calculate("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 20);

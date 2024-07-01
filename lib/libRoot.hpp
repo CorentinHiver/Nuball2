@@ -1622,14 +1622,14 @@ std::vector<std::string> list_of(TFile * file)
  * @brief Create a map of all the histograms of a certain class (TH1F, TH2F...) inside a TFile
  * @details
  * TFile* file(TFile::Open("file.root","read"));
- * auto map = map_of<TH1F*>(file);
+ * auto map = map_of<TH1F>(file);
  */
 template<class T>
-std::map<std::string, T*> map_of(TFile * file)
+std::map<std::string, std::unique_ptr<T>> map_of(TFile * file)
 {
-  std::map<std::string, T*> ret;
+  std::map<std::string, std::unique_ptr<T>> ret;
   T* temp_obj = new T;
-  if (!file) {print("in get_names_of<T>(TFile * file) : file is nullptr"); return ret;}
+  if (!file || file->IsZombie()) {print("in get_names_of<T>(TFile * file) : file is nullptr"); return ret;}
   auto list = file->GetListOfKeys();
   for (auto&& keyAsObj : *list)
   {
@@ -1638,7 +1638,7 @@ std::map<std::string, T*> map_of(TFile * file)
     {
       TObject* obj = key->ReadObj();
       T* t = dynamic_cast<T*>(obj);
-      ret.emplace(t->GetName(), t);
+      if (t) ret.emplace(t->GetName(), std::unique_ptr<T>(t));
     }
   }
   delete temp_obj;

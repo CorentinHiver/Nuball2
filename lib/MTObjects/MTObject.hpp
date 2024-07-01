@@ -250,7 +250,9 @@ public:
   static bool ON; // State boolean : is multithreading activated ?
   static bool activated; // State boolean : is multithreading activated ?
 
-  static auto const & getThreadIndex() {return m_thread_index;}
+  static auto getThreadStdIndex() {return std::this_thread::get_id();}
+  static auto getThreadStdIndexInt() {return std::hash<std::thread::id>{}(std::this_thread::get_id());}
+  static auto getThreadIndex() {return m_thread_index;}
   static auto const & index() {return m_thread_index;}
 
   ///@brief A function that is used when ctrl+C is pressed in order to clean some stuff

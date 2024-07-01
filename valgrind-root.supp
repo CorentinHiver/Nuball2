@@ -1627,3 +1627,55 @@
    fun:_ZN5cling5utils8platform13IsMemoryValidEPKv
 }
 
+#### Some errors I found on WSL2 (corentin)
+
+{
+   Error when opening a TFile on WSL2
+   Memcheck:Addr8
+   fun:strncmp
+   fun:is_dst
+   fun:_dl_dst_count
+   fun:expand_dynamic_string_token
+   fun:fillin_rpath.isra.0
+   fun:decompose_rpath
+   fun:_dl_map_object
+   fun:openaux
+   fun:_dl_catch_exception
+   fun:_dl_map_object_deps
+   fun:dl_open_worker_begin
+   fun:_dl_catch_exception
+}
+
+{
+   Error when opening a TFile on WSL2
+   Memcheck:Addr8
+   fun:strncmp
+   fun:is_dst
+   fun:_dl_dst_substitute
+   fun:fillin_rpath.isra.0
+   fun:decompose_rpath
+   fun:_dl_map_object
+   fun:openaux
+   fun:_dl_catch_exception
+   fun:_dl_map_object_deps
+   fun:dl_open_worker_begin
+   fun:_dl_catch_exception
+   fun:dl_open_worker
+}
+
+{
+   Error when opening a TFile on WSL2
+   Memcheck:Addr4
+   fun:_ZN4ROOT8Internal23DeleteChangesMemoryImplEv
+   fun:_ZN4ROOT8Internal19DeleteChangesMemoryEv
+   fun:_ZNK5TList8FindLinkEPK7TObjectRi
+   fun:_ZN5TList6RemoveEP7TObject
+   fun:_ZN9THashList15RecursiveRemoveEP7TObject
+   fun:_ZN5TROOT15RecursiveRemoveEP7TObject
+   fun:_ZN7TObjectD1Ev
+   fun:_ZN6TClass20SetRuntimePropertiesEv
+   fun:_ZN4ROOT8Internal23HasConsistentHashMemberER6TClass
+   fun:_ZNK5TPair27CheckTObjectHashConsistencyEv
+   fun:_ZN10THashTable3AddEP7TObject
+   fun:_ZN4TMap3AddEP7TObjectS1_
+}

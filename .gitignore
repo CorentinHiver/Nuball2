@@ -11,3 +11,7 @@
 executables/faster2histo
 executables/faster2root
 executables/manip2root
+
+#Exceptions :
+#Excitation energy root files are needed by some code
+!*_Ex.root 
