@@ -7,7 +7,7 @@
 int max_cursor = -1;
 void macroTsVerif()
 {
-  std::string trigger = "dC1";
+  std::string trigger = "P";
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), -1);
   MTList MTfiles(files.get());

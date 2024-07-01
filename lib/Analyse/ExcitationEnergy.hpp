@@ -18,7 +18,7 @@ class ExcitationEnergy
   {
     filename = _filename;
     clear();
-    if (!file_exists(filename)) {error(filename, "dos not exist !!"); return;}
+    if (!file_exists(filename)) {error(filename, "does not exist !!"); return;}
     
     m_data_vector_Ex.resize(nb_rings);
     m_data_vector_EDssd.resize(nb_rings);
@@ -62,17 +62,17 @@ class ExcitationEnergy
       for (auto & e : spline_names)
       {
         auto & name = e.first;
-        auto & spline = e.second;
-        auto const & spline_id = atoi(split(name, '_').back().c_str());
+        auto spline = e.second;
+        auto const & spline_id = std::atoi(split(name, '_').back().c_str());
         if (found(name, "pt"))
         {
-          splines_pt[spline_id] = spline.get();
+          splines_pt[spline_id] = spline;
           m_min_E_bin_pt[spline_id] = spline->GetXmin();
           m_max_E_bin_pt[spline_id] = spline->GetXmax();
         }
         else if (found(name, "stop"))
         {
-          splines_stop[spline_id] = spline.get();
+          splines_stop[spline_id] = spline;
           m_min_E_bin_stop[spline_id] = spline->GetXmin();
           m_max_E_bin_stop[spline_id] = spline->GetXmax();
         }
@@ -105,6 +105,7 @@ class ExcitationEnergy
       }
       else if (m_type == 1)
       {
+        // print(ring_i, nrj, m_min_E_bin_pt[ring_i], m_max_E_bin_pt[ring_i]);
         if (m_min_E_bin_pt[ring_i] < nrj && nrj < m_max_E_bin_pt[ring_i]) return int_cast(splines_pt[ring_i]->Eval(nrj));
         else return bad_value;
       }

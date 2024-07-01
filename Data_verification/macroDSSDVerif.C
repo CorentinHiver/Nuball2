@@ -89,6 +89,13 @@ private:
 
 void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_threads = 5)
 {
+  // Initialize variables :
+  if (gSystem->Load("libHist") == 0) {
+        std::cout << "libHist loaded successfully." << std::endl;
+    } else {
+        std::cerr << "Failed to load libHist." << std::endl;
+  }
+    
   detectors.load("../136/index_129.list");
   std::string target = "U";
   std::string trigger = "P";
@@ -97,20 +104,20 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
   std::atomic<int> total_evts_number(0);
   int freq_hit_display=(nb_hits_read < 2.e+7) ? 1.e+6 : 1.e+7;
 
+  // Handling files :
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   Calibration ring_calib("../136/DSSD_ring.calib");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
 
-
   // Excitation energy from dssd
   ExcitationEnergy Ex_U6("../136/Excitation_energy/","U5","d","p","10umAl");
-  // ExcitationEnergy Ex_U5("../136/Excitation_energy/","U5","d","d","10umAl");
-  // ExcitationEnergy Ex_27Al("../136/Excitation_energy/","27Al","d","d","10umAl");
-  // ExcitationEnergy Ex_28Al("../136/Excitation_energy/","27Al","d","p","10umAl");
-  // ExcitationEnergy Ex_25Mg("../136/Excitation_energy/","27Al","d","a","10umAl");
-  if (!Ex_U6) return;
-  // if (!Ex_U6 || Ex_U5 || Ex_27Al || Ex_28Al || Ex_25Mg) return;
+  ExcitationEnergy Ex_U5("../136/Excitation_energy/","U5","d","d","10umAl");
+  ExcitationEnergy Ex_27Al("../136/Excitation_energy/","27Al","d","d","10umAl");
+  ExcitationEnergy Ex_28Al("../136/Excitation_energy/","27Al","d","p","10umAl");
+  ExcitationEnergy Ex_25Mg("../136/Excitation_energy/","27Al","d","a","10umAl");
+  // if (!Ex_U6 ) return;
+  if (!Ex_U6 || !Ex_U5 || !Ex_27Al || !Ex_28Al || !Ex_25Mg) return;
   
   // Gain drift of germanium detectors :
   CoefficientCorrection calibGe("../136/GainDriftCoefficients.dat");
@@ -121,6 +128,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
   MTObject::Initialise();  
   std::mutex write_mutex;
 
+  // Code to apply for each file :
   MTObject::parallelise_function([&](){
     std::string file;
     auto const & thread_i = MTObject::getThreadIndex();
@@ -160,6 +168,39 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
       unique_TH2F mult_vs_index (new TH2F(("mult_vs_index_"+thread_i_str).c_str(), "mult_vs_index", 50,0,50, 10,0,10));
       unique_TH2F T_vs_index (new TH2F(("T_vs_index_"+thread_i_str).c_str(), "T_vs_index", 50,0,50, 250,-50_ns,200_ns));
       
+      unique_TH1F Ex_histo_pt_U5 (new TH1F(("Ex_histo_pt_U5_"+thread_i_str).c_str(), "Ex_histo_pt_U5", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_pt_U6 (new TH1F(("Ex_histo_pt_U6_"+thread_i_str).c_str(), "Ex_histo_pt_U6", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_pt_27Al (new TH1F(("Ex_histo_pt_27Al_"+thread_i_str).c_str(), "Ex_histo_pt_27Al", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_pt_28Al (new TH1F(("Ex_histo_pt_28Al_"+thread_i_str).c_str(), "Ex_histo_pt_28Al", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_pt_25Mg (new TH1F(("Ex_histo_pt_25Mg_"+thread_i_str).c_str(), "Ex_histo_pt_25Mg", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_stop_U5 (new TH1F(("Ex_histo_stop_U5_"+thread_i_str).c_str(), "Ex_histo_stop_U5", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_stop_U6 (new TH1F(("Ex_histo_stop_U6_"+thread_i_str).c_str(), "Ex_histo_stop_U6", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_stop_27Al (new TH1F(("Ex_histo_stop_27Al_"+thread_i_str).c_str(), "Ex_histo_stop_27Al", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_stop_28Al (new TH1F(("Ex_histo_stop_28Al_"+thread_i_str).c_str(), "Ex_histo_stop_28Al", 3_k,0,30_MeV));
+      unique_TH1F Ex_histo_stop_25Mg (new TH1F(("Ex_histo_stop_25Mg_"+thread_i_str).c_str(), "Ex_histo_stop_25Mg", 3_k,0,30_MeV));
+
+      unique_TH2F Ex_histo_pt_U5_VS_angle (new TH2F(("Ex_histo_pt_U5_VS_angle_"+thread_i_str).c_str(), "Ex histo pt U5 VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_pt_U6_VS_angle (new TH2F(("Ex_histo_pt_U6_VS_angle_"+thread_i_str).c_str(), "Ex histo pt U6 VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_pt_27Al_VS_angle (new TH2F(("Ex_histo_pt_27Al_VS_angle_"+thread_i_str).c_str(), "Ex histo pt 27Al VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_pt_28Al_VS_angle (new TH2F(("Ex_histo_pt_28Al_VS_angle_"+thread_i_str).c_str(), "Ex histo pt 28Al VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_pt_25Mg_VS_angle (new TH2F(("Ex_histo_pt_25Mg_VS_angle_"+thread_i_str).c_str(), "Ex histo pt 25Mg VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_stop_U5_VS_angle (new TH2F(("Ex_histo_stop_U5_VS_angle_"+thread_i_str).c_str(), "Ex histo stop U5 VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_stop_U6_VS_angle (new TH2F(("Ex_histo_stop_U6_VS_angle_"+thread_i_str).c_str(), "Ex histo stop U6 VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_stop_27Al_VS_angle (new TH2F(("Ex_histo_stop_27Al_VS_angle_"+thread_i_str).c_str(), "Ex histo stop 27Al VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_stop_28Al_VS_angle (new TH2F(("Ex_histo_stop_28Al_VS_angle_"+thread_i_str).c_str(), "Ex histo stop 28Al VS angle", 40,20,60, 2_k,0,20_MeV));
+      unique_TH2F Ex_histo_stop_25Mg_VS_angle (new TH2F(("Ex_histo_stop_25Mg_VS_angle_"+thread_i_str).c_str(), "Ex histo stop 25Mg VS angle", 40,20,60, 2_k,0,20_MeV));
+      
+      unique_TH2F pclover_VS_Ex_histo_pt_U5 (new TH2F(("pclover_VS_Ex_histo_pt_U5_"+thread_i_str).c_str(), "pclover VS Ex histo pt U5", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_pt_U6 (new TH2F(("pclover_VS_Ex_histo_pt_U6_"+thread_i_str).c_str(), "pclover VS Ex histo pt U6", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_pt_27Al (new TH2F(("pclover_VS_Ex_histo_pt_27Al_"+thread_i_str).c_str(), "pclover VS Ex histo pt 27Al", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_pt_28Al (new TH2F(("pclover_VS_Ex_histo_pt_28Al_"+thread_i_str).c_str(), "pclover VS Ex histo pt 28Al", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_pt_25Mg (new TH2F(("pclover_VS_Ex_histo_pt_25Mg_"+thread_i_str).c_str(), "pclover VS Ex histo pt 25Mg", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_stop_U5 (new TH2F(("pclover_VS_Ex_histo_stop_U5_"+thread_i_str).c_str(), "pclover VS Ex histo stop U5", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_stop_U6 (new TH2F(("pclover_VS_Ex_histo_stop_U6_"+thread_i_str).c_str(), "pclover VS Ex histo stop U6", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_stop_27Al (new TH2F(("pclover_VS_Ex_histo_stop_27Al_"+thread_i_str).c_str(), "pclover VS Ex histo stop 27Al", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_stop_28Al (new TH2F(("pclover_VS_Ex_histo_stop_28Al_"+thread_i_str).c_str(), "pclover VS Ex histo stop 28Al", 2_k,0,20_MeV, 7_k,0,7_MeV));
+      unique_TH2F pclover_VS_Ex_histo_stop_25Mg (new TH2F(("pclover_VS_Ex_histo_stop_25Mg_"+thread_i_str).c_str(), "pclover VS Ex histo stop 25Mg", 2_k,0,20_MeV, 7_k,0,7_MeV));
+
       unique_TH1F Ex_histo_sectors (new TH1F(("Ex_histo_sectors_"+thread_i_str).c_str(), "Ex_histo_sectors", 1_k,0,10_MeV));
       unique_TH2F Ex_vs_Ep_sectors (new TH2F(("Ex_vs_Ep_sectors_"+thread_i_str).c_str(), "Ex_vs_Ep_sectors;E_{proton} [keV];E_{x} [keV]", 1_k,0,10_MeV, 1_k,0,10_MeV));
       unique_TH2F Ex_vs_angle_sectors (new TH2F(("Ex_vs_angle_sectors_"+thread_i_str).c_str(), "Ex_vs_angle_sectors", 40,20,60, 1_k,0,10_MeV));
@@ -170,8 +211,8 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
       unique_TH2F Ex_vs_angle_rings_only (new TH2F(("Ex_vs_angle_rings_only_"+thread_i_str).c_str(), "Ex_vs_angle_rings_only", 40,20,60, 1_k,0,10_MeV));
       unique_TH2F Edssd_vs_angle_rings_only (new TH2F(("Edssd_vs_angle_rings_only_"+thread_i_str).c_str(), "Edssd_vs_angle_rings_only", 40,20,60, 3_k,0,30_MeV));
 
-      std::unique_ptr<TH3I> pp_VS_DSSD_nrj ((k3D) ?new TH3I(("pp_VS_DSSD_nrj"+thread_i_str).c_str(), "pp_VS_DSSD_nrj;E_{#gamma_{1}} [keV];E_{#gamma_{2}} [keV];E_dssd [keV]", 2048,0,4096, 2048,0,4096, 20,0,20_MeV) : nullptr);
-      std::unique_ptr<TH3I> dd_VS_DSSD_nrj ((k3D) ?new TH3I(("dd_VS_DSSD_nrj"+thread_i_str).c_str(), "dd_VS_DSSD_nrj;E_{#gamma_{1}} [keV];E_{#gamma_{2}} [keV];E_dssd [keV]", 2048,0,4096, 2048,0,4096, 20,0,20_MeV) : nullptr);
+      std::unique_ptr<TH3I> pp_VS_DSSD_nrj ((k3D) ? new TH3I(("pp_VS_DSSD_nrj"+thread_i_str).c_str(), "pp_VS_DSSD_nrj;E_{#gamma_{1}} [keV];E_{#gamma_{2}} [keV];E_dssd [keV]", 2048,0,4096, 2048,0,4096, 20,0,20_MeV) : nullptr);
+      std::unique_ptr<TH3I> dd_VS_DSSD_nrj ((k3D) ? new TH3I(("dd_VS_DSSD_nrj"+thread_i_str).c_str(), "dd_VS_DSSD_nrj;E_{#gamma_{1}} [keV];E_{#gamma_{2}} [keV];E_dssd [keV]", 2048,0,4096, 2048,0,4096, 20,0,20_MeV) : nullptr);
       
       std::vector<unique_TH2F> E_ring_VS_sectors;
       std::vector<unique_TH2F> T_ring_VS_sectors;
@@ -373,15 +414,89 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
         // Clovers : 
 
         auto const & Ex_U6_pt = (dssd.ok) ? Ex_U6(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
-        // print(Ex_U6_pt);
+        auto const & Ex_U5_pt = (dssd.ok) ? Ex_U5(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
+        auto const & Ex_27Al_pt = (dssd.ok) ? Ex_27Al(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
+        auto const & Ex_28Al_pt = (dssd.ok) ? Ex_28Al(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
+        auto const & Ex_25Mg_pt = (dssd.ok) ? Ex_25Mg(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
+        auto const & Ex_U6_stop = (dssd.ok) ? Ex_U6(dssd.nrj, dssd.ring_index, false) : ExcitationEnergy::bad_value;
+        auto const & Ex_U5_stop = (dssd.ok) ? Ex_U5(dssd.nrj, dssd.ring_index, false) : ExcitationEnergy::bad_value;
+        auto const & Ex_27Al_stop = (dssd.ok) ? Ex_27Al(dssd.nrj, dssd.ring_index, false) : ExcitationEnergy::bad_value;
+        auto const & Ex_28Al_stop = (dssd.ok) ? Ex_28Al(dssd.nrj, dssd.ring_index, false) : ExcitationEnergy::bad_value;
+        auto const & Ex_25Mg_stop = (dssd.ok) ? Ex_25Mg(dssd.nrj, dssd.ring_index, false) : ExcitationEnergy::bad_value;
 
-        if (pclovers.clean.size() == 1) 
+        if(Ex_U5_pt>0) 
         {
+          Ex_histo_pt_U5->Fill(Ex_U5_pt);
+          Ex_histo_pt_U5_VS_angle->Fill(to_deg(dssd.angle), Ex_U5_pt);
+        }
+        if(Ex_U6_pt>0) 
+        {
+          Ex_histo_pt_U6->Fill(Ex_U6_pt);
+          Ex_histo_pt_U6_VS_angle->Fill(to_deg(dssd.angle), Ex_U6_pt);
+        }
+        if(Ex_27Al_pt>0) 
+        {
+          Ex_histo_pt_27Al->Fill(Ex_27Al_pt);
+          Ex_histo_pt_27Al_VS_angle->Fill(to_deg(dssd.angle), Ex_27Al_pt);
+        }
+        if(Ex_28Al_pt>0) 
+        {
+          Ex_histo_pt_28Al->Fill(Ex_28Al_pt);
+          Ex_histo_pt_28Al_VS_angle->Fill(to_deg(dssd.angle), Ex_28Al_pt);
+        }
+        if(Ex_25Mg_pt>0) 
+        {
+          Ex_histo_pt_25Mg->Fill(Ex_25Mg_pt);
+          Ex_histo_pt_25Mg_VS_angle->Fill(to_deg(dssd.angle), Ex_25Mg_pt);
+        }
+        if(Ex_U5_stop>0) 
+        {
+          Ex_histo_stop_U5->Fill(Ex_U5_stop);
+          Ex_histo_stop_U5_VS_angle->Fill(to_deg(dssd.angle), Ex_U5_stop);
+        }
+        if(Ex_U6_stop>0) 
+        {
+          Ex_histo_stop_U6->Fill(Ex_U6_stop);
+          Ex_histo_stop_U6_VS_angle->Fill(to_deg(dssd.angle), Ex_U6_stop);
+        }
+        if(Ex_27Al_stop>0) 
+        {
+          Ex_histo_stop_27Al->Fill(Ex_27Al_stop);
+          Ex_histo_stop_27Al_VS_angle->Fill(to_deg(dssd.angle), Ex_27Al_stop);
+        }
+        if(Ex_28Al_stop>0) 
+        {
+          Ex_histo_stop_28Al->Fill(Ex_28Al_stop);
+          Ex_histo_stop_28Al_VS_angle->Fill(to_deg(dssd.angle), Ex_28Al_stop);
+        }
+        if(Ex_25Mg_stop>0)
+        {
+          Ex_histo_stop_25Mg->Fill(Ex_25Mg_stop);
+          Ex_histo_stop_25Mg_VS_angle->Fill(to_deg(dssd.angle), Ex_25Mg_stop);
+        }
+
+        // print(Ex_U6_pt ,Ex_U5_pt ,Ex_27Al_pt ,Ex_28Al_pt ,Ex_25Mg_pt);
+        // print(Ex_U6_stop ,Ex_U5_stop ,Ex_27Al_stop ,Ex_28Al_stop ,Ex_25Mg_stop);
+
+        if (pclovers.clean.size() == 1)
+        {
+          auto const & clover = *pclovers.clean[0];
           p_pure_singles->Fill(pclovers.clean[0]->nrj);
           if (dssd.ok) 
           {
-            if (dssd.time !=0) p_pure_singles_VS_dssd_time->Fill(dssd.time, pclovers.clean[0]->nrj);
-            p_pure_singles_VS_dssd_energy->Fill(dssd.nrj, pclovers.clean[0]->nrj);
+            if (dssd.time !=0) p_pure_singles_VS_dssd_time->Fill(dssd.time, clover.nrj);
+            p_pure_singles_VS_dssd_energy->Fill(dssd.nrj, clover.nrj);
+
+            if(Ex_U5_pt>0) pclover_VS_Ex_histo_pt_U5->Fill(Ex_U5_pt, clover.nrj);
+            if(Ex_U6_pt>0) pclover_VS_Ex_histo_pt_U6->Fill(Ex_U6_pt, clover.nrj);
+            if(Ex_27Al_pt>0) pclover_VS_Ex_histo_pt_27Al->Fill(Ex_27Al_pt, clover.nrj);
+            if(Ex_28Al_pt>0) pclover_VS_Ex_histo_pt_28Al->Fill(Ex_28Al_pt, clover.nrj);
+            if(Ex_25Mg_pt>0) pclover_VS_Ex_histo_pt_25Mg->Fill(Ex_25Mg_pt, clover.nrj);
+            if(Ex_U5_stop>0) pclover_VS_Ex_histo_stop_U5->Fill(Ex_U5_stop, clover.nrj);
+            if(Ex_U6_stop>0) pclover_VS_Ex_histo_stop_U6->Fill(Ex_U6_stop, clover.nrj);
+            if(Ex_27Al_stop>0) pclover_VS_Ex_histo_stop_27Al->Fill(Ex_27Al_stop, clover.nrj);
+            if(Ex_28Al_stop>0) pclover_VS_Ex_histo_stop_28Al->Fill(Ex_28Al_stop, clover.nrj);
+            if(Ex_25Mg_stop>0) pclover_VS_Ex_histo_stop_25Mg->Fill(Ex_25Mg_stop, clover.nrj);
           }
         }
 
@@ -393,6 +508,17 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
           {
              if (dssd.time !=0) p_no_singles_VS_dssd_time->Fill(dssd.time, clover.nrj);
             p_no_singles_VS_dssd_energy->Fill(dssd.nrj, clover.nrj);
+            
+            if(Ex_U5_pt>0) pclover_VS_Ex_histo_pt_U5->Fill(Ex_U5_pt, clover.nrj);
+            if(Ex_U6_pt>0) pclover_VS_Ex_histo_pt_U6->Fill(Ex_U6_pt, clover.nrj);
+            if(Ex_27Al_pt>0) pclover_VS_Ex_histo_pt_27Al->Fill(Ex_27Al_pt, clover.nrj);
+            if(Ex_28Al_pt>0) pclover_VS_Ex_histo_pt_28Al->Fill(Ex_28Al_pt, clover.nrj);
+            if(Ex_25Mg_pt>0) pclover_VS_Ex_histo_pt_25Mg->Fill(Ex_25Mg_pt, clover.nrj);
+            if(Ex_U5_stop>0) pclover_VS_Ex_histo_stop_U5->Fill(Ex_U5_stop, clover.nrj);
+            if(Ex_U6_stop>0) pclover_VS_Ex_histo_stop_U6->Fill(Ex_U6_stop, clover.nrj);
+            if(Ex_27Al_stop>0) pclover_VS_Ex_histo_stop_27Al->Fill(Ex_27Al_stop, clover.nrj);
+            if(Ex_28Al_stop>0) pclover_VS_Ex_histo_stop_28Al->Fill(Ex_28Al_stop, clover.nrj);
+            if(Ex_25Mg_stop>0) pclover_VS_Ex_histo_stop_25Mg->Fill(Ex_25Mg_stop, clover.nrj);
           }
           if (k3D) for (size_t clover_j = clover_i+1; clover_j < pclovers.clean.size(); ++clover_j)
           {
@@ -559,6 +685,40 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
         if (E_vs_index->Integral() > 1) E_vs_index->Write("E_vs_index", TObject::kOverwrite);
         if (mult_vs_index->Integral() > 1) mult_vs_index->Write("mult_vs_index", TObject::kOverwrite);
         if (T_vs_index->Integral() > 1) T_vs_index->Write("T_vs_index", TObject::kOverwrite);
+
+        if (Ex_histo_pt_U5->Integral() > 1) Ex_histo_pt_U5->Write("Ex_histo_pt_U5", TObject::kOverwrite);
+        if (Ex_histo_pt_U6->Integral() > 1) Ex_histo_pt_U6->Write("Ex_histo_pt_U6", TObject::kOverwrite);
+        if (Ex_histo_pt_27Al->Integral() > 1) Ex_histo_pt_27Al->Write("Ex_histo_pt_27Al", TObject::kOverwrite);
+        if (Ex_histo_pt_28Al->Integral() > 1) Ex_histo_pt_28Al->Write("Ex_histo_pt_28Al", TObject::kOverwrite);
+        if (Ex_histo_pt_25Mg->Integral() > 1) Ex_histo_pt_25Mg->Write("Ex_histo_pt_25Mg", TObject::kOverwrite);
+        if (Ex_histo_stop_U5->Integral() > 1) Ex_histo_stop_U5->Write("Ex_histo_stop_U5", TObject::kOverwrite);
+        if (Ex_histo_stop_U6->Integral() > 1) Ex_histo_stop_U6->Write("Ex_histo_stop_U6", TObject::kOverwrite);
+        if (Ex_histo_stop_27Al->Integral() > 1) Ex_histo_stop_27Al->Write("Ex_histo_stop_27Al", TObject::kOverwrite);
+        if (Ex_histo_stop_28Al->Integral() > 1) Ex_histo_stop_28Al->Write("Ex_histo_stop_28Al", TObject::kOverwrite);
+        if (Ex_histo_stop_25Mg->Integral() > 1) Ex_histo_stop_25Mg->Write("Ex_histo_stop_25Mg", TObject::kOverwrite);
+
+        if (Ex_histo_pt_U5_VS_angle->Integral() > 1) Ex_histo_pt_U5_VS_angle->Write("Ex_histo_pt_U5_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_pt_U6_VS_angle->Integral() > 1) Ex_histo_pt_U6_VS_angle->Write("Ex_histo_pt_U6_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_pt_27Al_VS_angle->Integral() > 1) Ex_histo_pt_27Al_VS_angle->Write("Ex_histo_pt_27Al_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_pt_28Al_VS_angle->Integral() > 1) Ex_histo_pt_28Al_VS_angle->Write("Ex_histo_pt_28Al_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_pt_25Mg_VS_angle->Integral() > 1) Ex_histo_pt_25Mg_VS_angle->Write("Ex_histo_pt_25Mg_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_stop_U5_VS_angle->Integral() > 1) Ex_histo_stop_U5_VS_angle->Write("Ex_histo_stop_U5_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_stop_U6_VS_angle->Integral() > 1) Ex_histo_stop_U6_VS_angle->Write("Ex_histo_stop_U6_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_stop_27Al_VS_angle->Integral() > 1) Ex_histo_stop_27Al_VS_angle->Write("Ex_histo_stop_27Al_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_stop_28Al_VS_angle->Integral() > 1) Ex_histo_stop_28Al_VS_angle->Write("Ex_histo_stop_28Al_VS_angle", TObject::kOverwrite);
+        if (Ex_histo_stop_25Mg_VS_angle->Integral() > 1) Ex_histo_stop_25Mg_VS_angle->Write("Ex_histo_stop_25Mg_VS_angle", TObject::kOverwrite);
+
+        if (pclover_VS_Ex_histo_pt_U5->Integral() > 1) pclover_VS_Ex_histo_pt_U5->Write("pclover_VS_Ex_histo_pt_U5", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_pt_U6->Integral() > 1) pclover_VS_Ex_histo_pt_U6->Write("pclover_VS_Ex_histo_pt_U6", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_pt_27Al->Integral() > 1) pclover_VS_Ex_histo_pt_27Al->Write("pclover_VS_Ex_histo_pt_27Al", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_pt_28Al->Integral() > 1) pclover_VS_Ex_histo_pt_28Al->Write("pclover_VS_Ex_histo_pt_28Al", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_pt_25Mg->Integral() > 1) pclover_VS_Ex_histo_pt_25Mg->Write("pclover_VS_Ex_histo_pt_25Mg", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_stop_U5->Integral() > 1) pclover_VS_Ex_histo_stop_U5->Write("pclover_VS_Ex_histo_stop_U5", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_stop_U6->Integral() > 1) pclover_VS_Ex_histo_stop_U6->Write("pclover_VS_Ex_histo_stop_U6", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_stop_27Al->Integral() > 1) pclover_VS_Ex_histo_stop_27Al->Write("pclover_VS_Ex_histo_stop_27Al", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_stop_28Al->Integral() > 1) pclover_VS_Ex_histo_stop_28Al->Write("pclover_VS_Ex_histo_stop_28Al", TObject::kOverwrite);
+        if (pclover_VS_Ex_histo_stop_25Mg->Integral() > 1) pclover_VS_Ex_histo_stop_25Mg->Write("pclover_VS_Ex_histo_stop_25Mg", TObject::kOverwrite);
+        
         if (Ex_histo_sectors->Integral() > 1) Ex_histo_sectors->Write("Ex_histo_sectors", TObject::kOverwrite);
         if (Ex_vs_Ep_sectors->Integral() > 1) Ex_vs_Ep_sectors->Write("Ex_vs_Ep_sectors", TObject::kOverwrite);
         if (Ex_vs_angle_sectors->Integral() > 1) Ex_vs_angle_sectors->Write("Ex_vs_angle_sectors", TObject::kOverwrite);
@@ -619,5 +779,5 @@ int main(int argc, char** argv)
   return 1;
 }
 #endif //__CINT__
-// g++ -g -o macroDSSDVerif macroDSSDVerif.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
-// g++ -O2 -o macroDSSDVerif macroDSSDVerif.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17
+// g++ -g -o macroDSSDVerif macroDSSDVerif.C ` root-config --cflags` `root-config --glibs --cflags --libs` -DDEBUG -lSpectrum -l -std=c++17 -Wall -Wextra
+// g++ -O2 -o macroDSSDVerif macroDSSDVerif.C ` root-config --cflags` `root-config --glibs --cflags --libs` -lSpectrum -std=c++17
