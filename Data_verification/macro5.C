@@ -10,6 +10,7 @@
 #include "../lib/Analyse/WarsawDSSD.hpp"
 #include "../lib/Classes/Timer.hpp"
 #include "CoefficientCorrection.hpp"
+#include "Utils.h"
 
 float smear(float const & nrj, TRandom* random)
 {
@@ -35,9 +36,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
   // Calibration calibNaI("../136/coeffs_NaI.calib");
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
-  CoefficientCorrection calibGe;
+  CoefficientCorrection calibGe("GainDriftCoefficients.dat");
   // ExcitationEnergy Ex("../136/dssd_table.dat");
-  ExcitationEnergy Ex("../136/Excitation_energy", "U5", "d", "p");
+  ExcitationEnergy Ex("../136/Excitation_energy", "U5", "d", "p", "10umAl");
 
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
@@ -155,6 +156,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F d_VS_PM (new TH2F(("d_VS_PM_"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity;prompt mult; E[keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F p_VS_DM (new TH2F(("p_VS_DM_"+thread_i_str).c_str(), "prompt Ge VS delayed multiplicity;delayed mult; E[keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F d_VS_DM (new TH2F(("d_VS_DM_"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity;delayed mult; E[keV]", 20,0,20, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dd_PM4DM4 (new TH2F(("dd_PM4DM4_"+thread_i_str).c_str(), "gamma-gamma delayed with prompt multiplicity < 4 and delayed multiplicity < 4;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       
       // Calorimetry : (codes : DC = prompt calorimetry ; DC = delayed calorimetry)
       unique_TH1F p_calo (new TH1F(("prompt_calorimetry_"+thread_i_str).c_str(), "prompt calorimetry;Prompt calorimetry[keV]", 2000,0,20000));
@@ -269,6 +271,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F pp_p (new TH2F(("pp_p_"+thread_i_str).c_str(), "gamma-gamma prompt particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH1F d_p (new TH1F(("d_p_"+thread_i_str).c_str(), "delayed particle trigger;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F dd_p (new TH2F(("dd_p_"+thread_i_str).c_str(), "gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dd_pPM4DM4 (new TH2F(("dd_pPM4DM4_"+thread_i_str).c_str(), "gamma-gamma delayed with particle & prompt multiplicity < 4 and delayed multiplicity < 4;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dp_p (new TH2F(("dp_p_"+thread_i_str).c_str(), "delayed VS prompt particle trigger;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F E_dT_p (new TH2F(("E_dT_p_"+thread_i_str).c_str(), "E vs time particle trigger", 600,-100_ns,200_ns, nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F p_calo_p (new TH1F(("p_calo_p_"+thread_i_str).c_str(), "prompt calorimetry particle trigger", 2000,0,20000));
@@ -282,6 +285,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       unique_TH1F p_pPC5 (new TH1F(("p_pPC5_"+thread_i_str).c_str(), "prompt particle trigger PC5;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F d_pPC5 (new TH1F(("d_pPC5_"+thread_i_str).c_str(), "delayed particle trigger PC5;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH1F d_pPC5PM4DM4 (new TH1F(("d_pPC5PM4DM4_"+thread_i_str).c_str(), "delayed particle trigger PC5 PM4 DM4;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F p_pPC3 (new TH1F(("p_pPC3_"+thread_i_str).c_str(), "prompt particle trigger PC3;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F d_pPC3 (new TH1F(("d_pPC3_"+thread_i_str).c_str(), "delayed particle trigger PC3;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F p_pPC2 (new TH1F(("p_pPC2_"+thread_i_str).c_str(), "prompt particle trigger PC2;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
@@ -313,10 +317,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       // Excitation energy trigger (code Ex, ExSI = 4 MeV < Ex < 6.5 MeV)
       constexpr static int bins_Ex = 200;
       constexpr static double max_Ex = 10000;
-      unique_TH2F Ex_p_VS_ring (new TH2F(("Ex_p_VS_ring_"+thread_i_str).c_str(), "excitation energy proton VS ring number;Excitation energy [keV]" , 20,0,20, bins_Ex,0,max_Ex));
-      unique_TH2F p_VS_Ex_p (new TH2F(("p_VS_Ex_p_"+thread_i_str).c_str(), "prompt Ge VS excitation energy proton;Excitation energy [keV];keV" , bins_Ex,0,max_Ex, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH2F d_VS_Ex_p__P (new TH2F(("d_VS_Ex_p__P_"+thread_i_str).c_str(), "delayed Ge VS excitation energy proton;Excitation energy [keV];keV", bins_Ex,0,max_Ex, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH1F Ex_p_histo (new TH1F(("Ex_p_histo_"+thread_i_str).c_str(), "Excitation energy;keV", bins_Ex,0,max_Ex));
+      unique_TH2F Ex_U6_VS_ring (new TH2F(("Ex_U6_VS_ring_"+thread_i_str).c_str(), "excitation energy proton VS ring number;Excitation energy [keV]" , 20,0,20, bins_Ex,0,max_Ex));
+      unique_TH2F p_VS_Ex_U6 (new TH2F(("p_VS_Ex_U6_"+thread_i_str).c_str(), "prompt Ge VS excitation energy proton;Excitation energy [keV];keV" , bins_Ex,0,max_Ex, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH2F d_VS_Ex_U6__P (new TH2F(("d_VS_Ex_U6__P_"+thread_i_str).c_str(), "delayed Ge VS excitation energy proton;Excitation energy [keV];keV", bins_Ex,0,max_Ex, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH1F Ex_U6_histo (new TH1F(("Ex_U6_histo_"+thread_i_str).c_str(), "Excitation energy;keV", bins_Ex,0,max_Ex));
       unique_TH2F Ex_VS_PC_p (new TH2F(("Ex_VS_PC_p_"+thread_i_str).c_str(), "excitation energy proton VS prompt calorimetry;Calorimetry prompt [keV];Excitation energy [keV]" ,2000,0,20000,  bins_Ex,0,max_Ex));
       unique_TH2F Ex_VS_DC_p__P (new TH2F(("Ex_VS_DC_p__P_"+thread_i_str).c_str(), "excitation energy proton VS delayed calorimetry;Calorimetry delayed [keV];Excitation energy [keV]", 2000,0,20000, bins_Ex,0,max_Ex));
       constexpr static int bins_Emiss = 200;
@@ -554,7 +558,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // auto const & delayed_paris_mult = delayed_phoswitch.size();
         auto const & pmult_paris = pparis.module_mult();
         // auto const & delayed_paris_mult = pparis.module_mult();
-        auto const & pmult = pmult_clover + pmult_paris;
+        auto const & PM = pmult_clover + pmult_paris;
         // auto const & dmult = delayed_clover_mult + delayed_paris_mult;
 
         // auto const & delayed_Ge_mult = delayed_clovers.Ge.size();
@@ -562,9 +566,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // auto const & delayed_C_mult = delayed_clovers.GeClean.size();
         // bool Cmult[10] = {false}; Cmult[delayed_C_mult] = true;
 
-        // p_mult->Fill(pmult);
+        // p_mult->Fill(PM);
         // d_mult->Fill(dmult);
-        // dp_mult->Fill(pmult, dmult);
+        // dp_mult->Fill(PM, dmult);
 
         // -- Calorimetry -- //
         prompt_paris_calo = pparis.calorimetry();
@@ -577,24 +581,25 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         if (prompt_clover_calo  > 0 && prompt_paris_calo  > 0) p_calo_clover_VS_p_calo_phoswitch -> Fill(prompt_clover_calo, prompt_paris_calo);
         // if (delayed_clover_calo > 0 && delayed_paris_calo > 0) d_calo_clover_VS_d_calo_phoswitch -> Fill(delayed_clover_calo, delayed_paris_calo);
 
-        auto const & prompt_calo = prompt_clover_calo + prompt_paris_calo;
-        // auto const & dcalo = delayed_clover_calo + delayed_paris_calo;
-        if (0 < prompt_calo) p_calo->Fill(prompt_calo);
-        // if (0 < dcalo) d_calo->Fill(dcalo);
-        // // if (prompt_calo > 0 && dcalo > 0) dp_calo->Fill(prompt_calo, dcalo);
-        // if (dcalo > 0 && pmult > 0) d_calo_pP->Fill(delayed_clover_calo);
+        auto const & PC = prompt_clover_calo + prompt_paris_calo;
+        // auto const & DC = delayed_clover_calo + delayed_paris_calo;
+        if (0 < PC) p_calo->Fill(PC);
+        // if (0 < DC) d_calo->Fill(DC);
+        // // if (PC > 0 && DC > 0) dp_calo->Fill(PC, DC);
+        // if (DC > 0 && PM > 0) d_calo_pP->Fill(delayed_clover_calo);
 
         
         //////////////// DSSD ///////////////////
         bool dssd_trigger = dssd.mult() > 0;
-        auto const & Ex_U6 = Ex(dssd.nrj, dssd.ring_index);
-        
-        auto const & Emiss = dssd.Ex_p-prompt_calo;
-        if (dssd.Ex_p>0) 
+        auto const & Ex_U6 = (dssd.ok) ? Ex(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
+
+        auto const & Emiss = Ex_U6-PC;
+
+        if (Ex_U6>0) 
         {
-          Ex_p_histo->Fill(dssd.Ex_p);
-          Ex_p_VS_ring->Fill(dssd.Ex_p, dssd.ring_label);
-          if (pmult > 0)
+          Ex_U6_histo->Fill(Ex_U6);
+          Ex_U6_VS_ring->Fill(Ex_U6, dssd.ring_index);
+          if (PM > 0)
           {
             Emiss__P->Fill(Emiss);
           }
@@ -607,11 +612,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           auto const & clover_i = pclovers[index_i];
           p->Fill(clover_i.nrj);
           E_dT->Fill(clover_i.time, clover_i.nrj);
-          p_VS_PM->Fill(pmult, clover_i.nrj);
+          p_VS_PM->Fill(PM, clover_i.nrj);
 
-          if (prompt_calo < 5_MeV) p_PC5->Fill(clover_i.nrj);
-          if (prompt_calo < 3_MeV) p_PC3->Fill(clover_i.nrj);
-          if (prompt_calo < 2_MeV) p_PC2->Fill(clover_i.nrj);
+          if (PC < 5_MeV) p_PC5->Fill(clover_i.nrj);
+          if (PC < 3_MeV) p_PC3->Fill(clover_i.nrj);
+          if (PC < 2_MeV) p_PC2->Fill(clover_i.nrj);
 
           // Prompt-prompt :
           for (size_t loop_j = loop_i+1; loop_j<pclovers.GeClean.size(); ++loop_j)
@@ -654,16 +659,16 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           E_dT->Fill(clover_i.time, clover_i.nrj);
 
           // Find the coincident gamma detectors to create the calorimetry :
-          double dcalo = 0;
-          int dmult = 0;
+          double DC = 0;
+          int DM = 0;
           std::vector<CloverModule*> coinc_clean;
           for (auto const & clover_j : dclovers.all)
           {
             if (std::abs(clover_i.time - clover_j->time) < bidimTimeWindow) 
             {
-              if (clover_j->nbBGO == 0) dcalo+=smear(clover_j->calo, random);
-              else dcalo+=clover_j->calo;
-              ++dmult;
+              if (clover_j->nbBGO == 0) DC+=smear(clover_j->calo, random);
+              else DC+=clover_j->calo;
+              ++DM;
               if (clover_j->isCleanGe() && clover_j!=&clover_i) coinc_clean.push_back(clover_j);
             }
           }
@@ -673,33 +678,35 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           {
             if (std::abs(clover_i.time - module->time) < 30_ns) 
             {
-              dcalo+=module->nrj;
-              ++dmult;
+              DC+=module->nrj;
+              ++DM;
               coincident_paris.push_back(module);
             }
           }
 
+          bool PM4DM4 = (DM>0 && PM>0 && PM<4 && DM<4);
+
           if (2740 < clover_i.nrj && clover_i.nrj < 2760) hit_pattern_2755->Fill(index_i);
           
-          d_VS_PM->Fill(pmult, clover_i.nrj);
-          d_VS_DM->Fill(dmult, clover_i.nrj);
+          d_VS_PM->Fill(PM, clover_i.nrj);
+          d_VS_DM->Fill(DM, clover_i.nrj);
           
-          if (prompt_calo > 10) d_VS_PC -> Fill(prompt_calo, clover_i.nrj);
-          if (dmult > 1) d_VS_DC -> Fill(dcalo, clover_i.nrj);
+          if (PC > 10) d_VS_PC -> Fill(PC, clover_i.nrj);
+          if (DM > 1) d_VS_DC -> Fill(DC, clover_i.nrj);
 
-          if (pmult > 0) d_P->Fill(clover_i.nrj);
+          if (PM > 0) d_P->Fill(clover_i.nrj);
 
-          if (pmult > 0 && prompt_calo < 5_MeV) d_PC5->Fill(clover_i.nrj);
-          if (pmult > 0 && prompt_calo < 3_MeV) d_PC3->Fill(clover_i.nrj);
-          if (pmult > 0 && prompt_calo < 2_MeV) d_PC2->Fill(clover_i.nrj);
-          if (dcalo < 3_MeV) 
+          if (PM > 0 && PC < 5_MeV) d_PC5->Fill(clover_i.nrj);
+          if (PM > 0 && PC < 3_MeV) d_PC3->Fill(clover_i.nrj);
+          if (PM > 0 && PC < 2_MeV) d_PC2->Fill(clover_i.nrj);
+          if (DC < 3_MeV) 
           {
             d_DC3->Fill(clover_i.nrj);
-            if (pmult > 0 && prompt_calo < 3_MeV) d_PC3DC3->Fill(clover_i.nrj);
-            if (1_MeV < dcalo) 
+            if (PM > 0 && PC < 3_MeV) d_PC3DC3->Fill(clover_i.nrj);
+            if (1_MeV < DC) 
             {
               d_DC1_3->Fill(clover_i.nrj);
-              if (pmult > 0 && prompt_calo < 3_MeV) d_PC3DC1_3->Fill(clover_i.nrj);
+              if (PM > 0 && PC < 3_MeV) d_PC3DC1_3->Fill(clover_i.nrj);
             }
           }
 
@@ -717,56 +724,66 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             {
               dd_p->Fill(clover_i.nrj, clover_j.nrj);
               dd_p->Fill(clover_j.nrj, clover_i.nrj);
-              if (pmult>0)
+              if (PM>0)
               {
                 dd_pP->Fill(clover_i.nrj, clover_j.nrj);
                 dd_pP->Fill(clover_j.nrj, clover_i.nrj);
+                if (PM4DM4)
+                {
+                  dd_pPM4DM4->Fill(clover_i.nrj, clover_j.nrj);
+                  dd_pPM4DM4->Fill(clover_j.nrj, clover_i.nrj);
+                }
               }
             }
             
-            if (pmult > 0)
+            if (PM > 0)
             {
               dd_P->Fill(clover_i.nrj, clover_j.nrj);
               dd_P->Fill(clover_j.nrj, clover_i.nrj);
+              if (PM4DM4)
+              {
+                dd_PM4DM4->Fill(clover_i.nrj, clover_j.nrj);
+                dd_PM4DM4->Fill(clover_j.nrj, clover_i.nrj);
+              }
             }
-            if (pmult > 0 && prompt_calo < 5_MeV)
+            if (PM > 0 && PC < 5_MeV)
             {
               dd_PC5->Fill(clover_i.nrj, clover_j.nrj);
               dd_PC5->Fill(clover_j.nrj, clover_i.nrj);
             }
-            if (pmult > 0 && prompt_calo < 3_MeV)
+            if (PM > 0 && PC < 3_MeV)
             {
               dd_PC3->Fill(clover_i.nrj, clover_j.nrj);
               dd_PC3->Fill(clover_j.nrj, clover_i.nrj);
             }
-            if (pmult > 0 && prompt_calo < 2_MeV)
+            if (PM > 0 && PC < 2_MeV)
             {
               dd_PC2->Fill(clover_i.nrj, clover_j.nrj);
               dd_PC2->Fill(clover_j.nrj, clover_i.nrj);
             }
-            if (dcalo < 3_MeV)
+            if (DC < 3_MeV)
             {
               dd_DC3->Fill(clover_i.nrj, clover_j.nrj);
               dd_DC3->Fill(clover_j.nrj, clover_i.nrj);
-              if (1_MeV < dcalo)
+              if (1_MeV < DC)
               {
                 dd_DC1_3->Fill(clover_i.nrj, clover_j.nrj);
                 dd_DC1_3->Fill(clover_j.nrj, clover_i.nrj);
-                if (pmult > 0 && prompt_calo < 3_MeV)
+                if (PM > 0 && PC < 3_MeV)
                 {
                   dd_PC3DC1_3->Fill(clover_i.nrj, clover_j.nrj);
                   dd_PC3DC1_3->Fill(clover_j.nrj, clover_i.nrj);
                 }
               }
-              if (pmult > 0 && prompt_calo < 3_MeV)
+              if (PM > 0 && PC < 3_MeV)
               {
                   dd_PC3DC3->Fill(clover_i.nrj, clover_j.nrj);
                   dd_PC3DC3->Fill(clover_j.nrj, clover_i.nrj);
               }
             }
-            if (pmult > 0 && Ex_p > 0)
+            if (PM > 0 && Ex_U6 > 0)
             {
-              d_VS_Ex_p__P->Fill(Ex_p, clover_i.nrj);
+              d_VS_Ex_U6__P->Fill(Ex_U6, clover_i.nrj);
               d_ExP->Fill(clover_i.nrj);
               if (std::abs(clover_i.time - clover_j.time) < 50_ns)
               {
@@ -819,62 +836,62 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & clover_j = pclovers[pclovers.GeClean[loop_j]];
             dp->Fill(clover_j.nrj, clover_i.nrj);
             if (dssd_trigger) dp_p->Fill(clover_j.nrj, clover_i.nrj);
-            // if (pmult > 0 && prompt_calo < 5_MeV) dp_PC5->Fill(clover_j.nrj, clover_i.nrj);
-            // if (pmult > 0 && prompt_calo < 3_MeV) dp_PC3->Fill(clover_j.nrj, clover_i.nrj);
-            // if (pmult > 0 && prompt_calo < 2_MeV) dp_PC2->Fill(clover_j.nrj, clover_i.nrj);
-            // if (dcalo < 3_MeV) dp_DC3->Fill(clover_j.nrj, clover_i.nrj);
-            // if (dcalo < 3_MeV) 
+            // if (PM > 0 && PC < 5_MeV) dp_PC5->Fill(clover_j.nrj, clover_i.nrj);
+            // if (PM > 0 && PC < 3_MeV) dp_PC3->Fill(clover_j.nrj, clover_i.nrj);
+            // if (PM > 0 && PC < 2_MeV) dp_PC2->Fill(clover_j.nrj, clover_i.nrj);
+            // if (DC < 3_MeV) dp_DC3->Fill(clover_j.nrj, clover_i.nrj);
+            // if (DC < 3_MeV) 
             // {
             //   // dp_DC3->Fill(clover_j.nrj, clover_i.nrj);
-            //   if (1_MeV < dcalo) 
+            //   if (1_MeV < DC) 
             //   {
             //     // dp_DC1_3->Fill(clover_j.nrj, clover_i.nrj);
-            //     // if (pmult > 0 && prompt_calo < 3_MeV) dp_PC3DC1_3->Fill(clover_j.nrj, clover_i.nrj);
+            //     // if (PM > 0 && PC < 3_MeV) dp_PC3DC1_3->Fill(clover_j.nrj, clover_i.nrj);
             //   }
-            //   if (pmult > 0 && prompt_calo < 3_MeV) dp_PC3DC3->Fill(clover_j.nrj, clover_i.nrj);
+            //   if (PM > 0 && PC < 3_MeV) dp_PC3DC3->Fill(clover_j.nrj, clover_i.nrj);
             // }
           }
 
-          if (pmult > 0 && prompt_calo < 5_MeV)
+          if (PM > 0 && PC < 5_MeV)
           {
-            d_VS_DC_PC5->Fill(dcalo, clover_i.nrj);
-            d_VS_PM_PC5->Fill(pmult, clover_i.nrj);
-            d_VS_DM_PC5->Fill(dmult, clover_i.nrj);
+            d_VS_DC_PC5->Fill(DC, clover_i.nrj);
+            d_VS_PM_PC5->Fill(PM, clover_i.nrj);
+            d_VS_DM_PC5->Fill(DM, clover_i.nrj);
           }
-          if (pmult > 0 && prompt_calo < 3_MeV)
+          if (PM > 0 && PC < 3_MeV)
           {
-            d_VS_DC_PC3->Fill(dcalo, clover_i.nrj);
-            d_VS_PM_PC3->Fill(pmult, clover_i.nrj);
-            d_VS_DM_PC3->Fill(dmult, clover_i.nrj);
+            d_VS_DC_PC3->Fill(DC, clover_i.nrj);
+            d_VS_PM_PC3->Fill(PM, clover_i.nrj);
+            d_VS_DM_PC3->Fill(DM, clover_i.nrj);
           }
-          if (pmult > 0 && prompt_calo < 2_MeV)
+          if (PM > 0 && PC < 2_MeV)
           {
-            d_VS_DC_PC2->Fill(dcalo, clover_i.nrj);
-            d_VS_PM_PC2->Fill(pmult, clover_i.nrj);
-            d_VS_DM_PC2->Fill(dmult, clover_i.nrj);
+            d_VS_DC_PC2->Fill(DC, clover_i.nrj);
+            d_VS_PM_PC2->Fill(PM, clover_i.nrj);
+            d_VS_DM_PC2->Fill(DM, clover_i.nrj);
           }
-          if (dcalo < 3_MeV)
+          if (DC < 3_MeV)
           {
-            d_VS_DC_DC3->Fill(dcalo, clover_i.nrj);
-            d_VS_PM_DC3->Fill(pmult, clover_i.nrj);
-            d_VS_DM_DC3->Fill(dmult, clover_i.nrj);
-            if (1_MeV < dcalo)
+            d_VS_DC_DC3->Fill(DC, clover_i.nrj);
+            d_VS_PM_DC3->Fill(PM, clover_i.nrj);
+            d_VS_DM_DC3->Fill(DM, clover_i.nrj);
+            if (1_MeV < DC)
             {
-              d_VS_DC_DC1_3->Fill(dcalo, clover_i.nrj);
-              d_VS_PM_DC1_3->Fill(pmult, clover_i.nrj);
-              d_VS_DM_DC1_3->Fill(dmult, clover_i.nrj);
-              if (pmult > 0 && prompt_calo < 3_MeV)
+              d_VS_DC_DC1_3->Fill(DC, clover_i.nrj);
+              d_VS_PM_DC1_3->Fill(PM, clover_i.nrj);
+              d_VS_DM_DC1_3->Fill(DM, clover_i.nrj);
+              if (PM > 0 && PC < 3_MeV)
               {
-                d_VS_DC_PC3DC1_3->Fill(dcalo, clover_i.nrj);
-                d_VS_PM_PC3DC1_3->Fill(pmult, clover_i.nrj);
-                d_VS_DM_PC3DC1_3->Fill(dmult, clover_i.nrj);
+                d_VS_DC_PC3DC1_3->Fill(DC, clover_i.nrj);
+                d_VS_PM_PC3DC1_3->Fill(PM, clover_i.nrj);
+                d_VS_DM_PC3DC1_3->Fill(DM, clover_i.nrj);
               }
             }
-            if (pmult > 0 && prompt_calo < 3_MeV)
+            if (PM > 0 && PC < 3_MeV)
             {
-              d_VS_DC_PC3DC3->Fill(dcalo, clover_i.nrj);
-              d_VS_PM_PC3DC3->Fill(pmult, clover_i.nrj);
-              d_VS_DM_PC3DC3->Fill(dmult, clover_i.nrj);
+              d_VS_DC_PC3DC3->Fill(DC, clover_i.nrj);
+              d_VS_PM_PC3DC3->Fill(PM, clover_i.nrj);
+              d_VS_DM_PC3DC3->Fill(DM, clover_i.nrj);
             }
           }
 
@@ -897,35 +914,40 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           {
             d_p->Fill(clover_i.nrj);
             E_dT_p->Fill(clover_i.time, clover_i.nrj);
-            d_VS_PM_p->Fill(pmult, clover_i.nrj);
-            d_VS_DM_p->Fill(dmult, clover_i.nrj);
-            d_VS_PC_p->Fill(prompt_calo, clover_i.nrj);
-            if (dmult > 1) d_VS_DC_p->Fill(dcalo, clover_i.nrj);
-            if (pmult>0)
+            d_VS_PM_p->Fill(PM, clover_i.nrj);
+            d_VS_DM_p->Fill(DM, clover_i.nrj);
+            d_VS_PC_p->Fill(PC, clover_i.nrj);
+            if (DM > 1) d_VS_DC_p->Fill(DC, clover_i.nrj);
+            if (PM>0)
             {
               d_pP->Fill(clover_i.nrj);
-              d_VS_PC_pP->Fill(prompt_calo, clover_i.nrj);
-              d_VS_DM_pP->Fill(dmult, clover_i.nrj);
-              if (dmult > 1) d_VS_DC_pP->Fill(dcalo, clover_i.nrj);
+              d_VS_PC_pP->Fill(PC, clover_i.nrj);
+              d_VS_DM_pP->Fill(DM, clover_i.nrj);
+              if (DM > 1) d_VS_DC_pP->Fill(DC, clover_i.nrj);
               if (4_MeV < Emiss && Emiss < 6.5_MeV)
               {
-                p_VS_DC_ExSIP->Fill(dcalo, clover_i.nrj);
-                d_VS_DC_ExSIP->Fill(dcalo, clover_i.nrj);
+                p_VS_DC_ExSIP->Fill(DC, clover_i.nrj);
+                d_VS_DC_ExSIP->Fill(DC, clover_i.nrj);
               }
             }
-            if (pmult > 0 && prompt_calo < 5_MeV) d_pPC5->Fill(clover_i.nrj);
-            if (pmult > 0 && prompt_calo < 3_MeV) d_pPC3->Fill(clover_i.nrj);
-            if (pmult > 0 && prompt_calo < 2_MeV) d_pPC2->Fill(clover_i.nrj);
-            if (dcalo < 3_MeV)
+            if (PM > 0 && PC < 5_MeV) 
+            {
+              d_pPC5->Fill(clover_i.nrj);
+              if (PM4DM4) d_pPC5PM4DM4->Fill(clover_i.nrj);
+            }
+            if (PM > 0 && PC < 5_MeV && PM4DM4) d_pPC5PM4DM4->Fill(clover_i.nrj);
+            if (PM > 0 && PC < 3_MeV) d_pPC3->Fill(clover_i.nrj);
+            if (PM > 0 && PC < 2_MeV) d_pPC2->Fill(clover_i.nrj);
+            if (DC < 3_MeV)
             {
               d_pDC3->Fill(clover_i.nrj);
-              if (pmult > 0) d_pPDC3->Fill(clover_i.nrj);
-              if (prompt_calo < 5_MeV) d_pPC5DC1_3->Fill(clover_i.nrj);
-              if (dcalo > 1_MeV) 
+              if (PM > 0) d_pPDC3->Fill(clover_i.nrj);
+              if (PC < 5_MeV) d_pPC5DC1_3->Fill(clover_i.nrj);
+              if (DC > 1_MeV) 
               {
                 d_pDC1_3->Fill(clover_i.nrj);
-                if (pmult > 0) d_pPDC1_3->Fill(clover_i.nrj);
-                if (prompt_calo < 5_MeV) d_pPC5DC3->Fill(clover_i.nrj);
+                if (PM > 0) d_pPDC1_3->Fill(clover_i.nrj);
+                if (PC < 5_MeV) d_pPC5DC3->Fill(clover_i.nrj);
               }
             }
           }
@@ -934,12 +956,12 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         if (dssd_trigger)
         {
-          p_calo_p->Fill(prompt_calo);
-          // d_calo_p->Fill(dcalo);
-          if (pmult > 0 && Ex_p>0) 
+          p_calo_p->Fill(PC);
+          // d_calo_p->Fill(DC);
+          if (PM > 0 && Ex_U6>0) 
           {
-            Ex_VS_PC_p->Fill(prompt_calo, Ex_p);
-            // Ex_VS_DC_p__P->Fill(dcalo, Ex_p);
+            Ex_VS_PC_p->Fill(PC, Ex_U6);
+            // Ex_VS_DC_p__P->Fill(DC, Ex_U6);
           }
           for (size_t loop_i = 0; loop_i<pclovers.GeClean.size(); ++loop_i)
           {
@@ -949,24 +971,24 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & time = clover_i.time;
             p_p->Fill(nrj);
             E_dT_p->Fill(time, nrj);
-            p_VS_PM_p->Fill(pmult, nrj);
+            p_VS_PM_p->Fill(PM, nrj);
             // p_VS_DM_p->Fill(dmult, nrj);
-            p_VS_PC_p->Fill(prompt_calo, nrj);
-            // p_VS_DC_p->Fill(dcalo, nrj);
-            if (pmult > 0 && prompt_calo < 5_MeV) p_pPC5->Fill(nrj);
-            if (pmult > 0 && prompt_calo < 3_MeV) p_pPC3->Fill(nrj);
-            if (pmult > 0 && prompt_calo < 2_MeV) p_pPC2->Fill(nrj);
-            // if (dcalo < 3_MeV)
+            p_VS_PC_p->Fill(PC, nrj);
+            // p_VS_DC_p->Fill(DC, nrj);
+            if (PM > 0 && PC < 5_MeV) p_pPC5->Fill(nrj);
+            if (PM > 0 && PC < 3_MeV) p_pPC3->Fill(nrj);
+            if (PM > 0 && PC < 2_MeV) p_pPC2->Fill(nrj);
+            // if (DC < 3_MeV)
             // {
             //   p_pDC3->Fill(nrj);
-            //   if (dcalo > 1_MeV)
+            //   if (DC > 1_MeV)
             //   {
             //     p_pDC1_3->Fill(nrj);
             //   }
             // }
-            if (pmult > 0 && Ex_p > 0)
+            if (PM > 0 && Ex_U6 > 0)
             {
-              p_VS_Ex_p->Fill(Ex_p, nrj);
+              p_VS_Ex_U6->Fill(Ex_U6, nrj);
             }
           }
         }
@@ -982,7 +1004,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //   d_VS_sum_C2->Fill(Esum, Ge1.nrj);
         //   dd_C2_ExP->Fill(Ge0.nrj, Ge1.nrj);
         //   dd_C2_ExP->Fill(Ge1.nrj, Ge0.nrj);
-        //   if (pmult < 0) continue;
+        //   if (PM < 0) continue;
         //   d_VS_sum_C2_P->Fill(Esum, Ge0.nrj);
         //   d_VS_sum_C2_P->Fill(Esum, Ge1.nrj);
         
@@ -999,7 +1021,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //     {
         //       d_VS_clean_sum_C2_PDM2->Fill(Esum, Ge0.nrj);
         //       d_VS_clean_sum_C2_PDM2->Fill(Esum, Ge1.nrj);
-        //       if (pmult < 5)
+        //       if (PM < 5)
         //       {
         //         d_VS_clean_sum_C2_PM5DM2->Fill(Esum, Ge0.nrj);
         //         d_VS_clean_sum_C2_PM5DM2->Fill(Esum, Ge1.nrj);
@@ -1010,11 +1032,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //   {
         //     d_VS_sum_C2_pP->Fill(Esum, Ge0.nrj);
         //     d_VS_sum_C2_pP->Fill(Esum, Ge1.nrj);
-        //     if (Ex_p > 0)
+        //     if (Ex_U6 > 0)
         //     {
         //       d_VS_sum_C2_ExP->Fill(Esum, Ge0.nrj);
         //       d_VS_sum_C2_ExP->Fill(Esum, Ge1.nrj);
-        //       if (4_MeV < Ex_p && Ex_p < 6.5_MeV)
+        //       if (4_MeV < Ex_U6 && Ex_U6 < 6.5_MeV)
         //       {
         //         d_VS_sum_C2_ExSIP->Fill(Esum, Ge0.nrj);
         //         d_VS_sum_C2_ExSIP->Fill(Esum, Ge1.nrj);
@@ -1024,7 +1046,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // }
 
         // // If one of the three gammas is a contaminant, then the two others become a C2
-        // if (Cmult[3] && pmult > 0 && hasContaminant(delayed_clovers) == 1) 
+        // if (Cmult[3] && PM > 0 && hasContaminant(delayed_clovers) == 1) 
         // {
         //   float Esum = 0;
         //   for (auto const & index : delayed_clovers.GeClean) if (!isContaminant(delayed_clovers[index].nrj)) ++Esum;
@@ -1037,7 +1059,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //   }
         // }
         
-        // if (pmult > 0)
+        // if (PM > 0)
         // {
         //   double sum_clean_Ge = 0;
         //   for (auto const & clover : delayed_clovers.clean) sum_clean_Ge+=clover->nrj;
@@ -1050,7 +1072,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //       if (sum_clean_Ge>0) d_VS_sum_C_pP->Fill(sum_clean_Ge, clover->nrj);
         //       if (delayed_clovers.Ge.size()>1) d_VS_sum_Ge_pP->Fill(sum_all_Ge, clover->nrj);
         //     }
-        //     if (Ex_p>0)
+        //     if (Ex_U6>0)
         //     {
         //       if (sum_clean_Ge>0)
         //       {
@@ -1066,7 +1088,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //   }
         //   if (sum_clean_Ge>0)
         //   {
-        //     if (Ex_p > 0) Ex_vs_dC_sum->Fill(sum_clean_Ge, Ex_p);
+        //     if (Ex_U6 > 0) Ex_vs_dC_sum->Fill(sum_clean_Ge, Ex_U6);
         //     if (dssd_energy > 0) Ep_vs_dC_sum_P->Fill(sum_clean_Ge, dssd_energy);
         //   }
               
@@ -1081,20 +1103,20 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //   auto const & Esum = Ge0.nrj + Ge1.nrj;
         //   dirty_d_VS_sum_C2->Fill(Esum, Ge0.nrj);
         //   dirty_d_VS_sum_C2->Fill(Esum, Ge1.nrj);
-        //   if (pmult > 0)
+        //   if (PM > 0)
         //   {
         //     dirty_d_VS_sum_C2_P->Fill(Esum, Ge0.nrj);
         //     dirty_d_VS_sum_C2_P->Fill(Esum, Ge1.nrj);
         //   }
-        //   if (dssd_trigger && pmult > 0)
+        //   if (dssd_trigger && PM > 0)
         //   {
         //     dirty_d_VS_sum_C2_pP->Fill(Esum, Ge0.nrj);
         //     dirty_d_VS_sum_C2_pP->Fill(Esum, Ge1.nrj);
-        //     if (Ex_p > 0)
+        //     if (Ex_U6 > 0)
         //     {
         //       dirty_d_VS_sum_C2_ExP->Fill(Esum, Ge0.nrj);
         //       dirty_d_VS_sum_C2_ExP->Fill(Esum, Ge1.nrj);
-        //       if (4_MeV < Ex_p && Ex_p < 6.5_MeV)
+        //       if (4_MeV < Ex_U6 && Ex_U6 < 6.5_MeV)
         //       {
         //         dirty_d_VS_sum_C2_ExSIP->Fill(Esum, Ge0.nrj);
         //         dirty_d_VS_sum_C2_ExSIP->Fill(Esum, Ge1.nrj);
@@ -1103,14 +1125,14 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //   }
         // }
         
-        // if (pmult > 0 && delayed_Ge_mult > 1)
+        // if (PM > 0 && delayed_Ge_mult > 1)
         // {
         //   double sum_all_Ge = 0;
         //   for (auto const & index : delayed_clovers.Ge) sum_all_Ge+=delayed_clovers[index].nrj;
         //   for (auto const & clover : delayed_clovers.clean) 
         //   {
         //     if (dssd_trigger) dirty_d_VS_sum_C_pP->Fill(sum_all_Ge, clover->nrj);
-        //     if (Ex_p>0)
+        //     if (Ex_U6>0)
         //     {
         //       dirty_d_VS_sum_C_ExP->Fill(sum_all_Ge, clover->nrj);
         //       if (4_MeV < Emiss && Emiss < 6.5_MeV) dirty_d_VS_sum_C_ExSIP->Fill(sum_all_Ge, clover->nrj);
@@ -1141,7 +1163,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         //   double sum = 0;
         //   for (auto const & id : dparis.back.modules_id) paris_VS_sum_paris_M2->Fill(sum, dparis.back.modules[id].nrj);
         //   for (auto const & id : dparis.front.modules_id) paris_VS_sum_paris_M2->Fill(sum, dparis.front.modules[id].nrj);
-        //   if (pmult > 0)
+        //   if (PM > 0)
         //   {
         //     for (auto const & id : dparis.back.modules_id) paris_VS_sum_paris_M2_P->Fill(sum, dparis.back.modules[id].nrj);
         //     for (auto const & id : dparis.front.modules_id) paris_VS_sum_paris_M2_P->Fill(sum, dparis.front.modules[id].nrj);
@@ -1206,6 +1228,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         p_D->Write("p_D", TObject::kOverwrite);
         d_P->Write("d_P", TObject::kOverwrite);
         dd_P->Write("dd_P", TObject::kOverwrite);
+        dd_PM4DM4->Write("dd_PM4DM4", TObject::kOverwrite);
         p_mult->Write("p_mult", TObject::kOverwrite);
         d_mult->Write("d_mult", TObject::kOverwrite);
         dp_mult->Write("dp_mult", TObject::kOverwrite);
@@ -1311,6 +1334,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         p_pPC5->Write("p_pPC5", TObject::kOverwrite);
         d_pPC5->Write("d_pPC5", TObject::kOverwrite);
+        d_pPC5PM4DM4->Write("d_pPC5PM4DM4", TObject::kOverwrite);
         p_pPC3->Write("p_pPC3", TObject::kOverwrite);
         d_pPC3->Write("d_pPC3", TObject::kOverwrite);
         p_pPC2->Write("p_pPC2", TObject::kOverwrite);
@@ -1379,10 +1403,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // LaBr3_delayed->Write("LaBr3_delayed", TObject::kOverwrite);
 
         print("Write Ex spectra");
-        Ex_p_histo->Write("Ex_p_histo", TObject::kOverwrite);
-        Ex_p_VS_ring->Write("Ex_p_VS_ring", TObject::kOverwrite);
-        p_VS_Ex_p->Write("p_VS_Ex_p", TObject::kOverwrite);
-        d_VS_Ex_p__P->Write("d_VS_Ex_p__P", TObject::kOverwrite);
+        Ex_U6_histo->Write("Ex_U6_histo", TObject::kOverwrite);
+        Ex_U6_VS_ring->Write("Ex_U6_VS_ring", TObject::kOverwrite);
+        p_VS_Ex_U6->Write("p_VS_Ex_U6", TObject::kOverwrite);
+        d_VS_Ex_U6__P->Write("d_VS_Ex_U6__P", TObject::kOverwrite);
         Ex_VS_PC_p->Write("Ex_VS_PC_p", TObject::kOverwrite);
         Ex_VS_DC_p__P->Write("Ex_VS_DC_p__P", TObject::kOverwrite);
 
