@@ -37,7 +37,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
   CoefficientCorrection calibGe;
   // ExcitationEnergy Ex("../136/dssd_table.dat");
-  ExcitationEnergy Ex("../136/U5_d_p.Ex");
+  ExcitationEnergy Ex("../136/Excitation_energy", "U5", "d", "p");
 
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
@@ -385,7 +385,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       SimpleParis pparis(&calibPhoswitches);
       SimpleParis dparis(&calibPhoswitches);
 
-      WarsawDSSD dssd(&Ex);
+      WarsawDSSD dssd;
 
       // std::vector<double> prompt_phoswitch;
       // std::vector<double> delayed_phoswitch;
@@ -587,6 +587,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         
         //////////////// DSSD ///////////////////
         bool dssd_trigger = dssd.mult() > 0;
+        auto const & Ex_U6 = Ex(dssd.nrj, dssd.ring_index);
         
         auto const & Emiss = dssd.Ex_p-prompt_calo;
         if (dssd.Ex_p>0) 

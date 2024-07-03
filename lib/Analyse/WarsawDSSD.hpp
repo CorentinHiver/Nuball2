@@ -57,7 +57,7 @@ namespace DSSD
 
 class StripDSSD
 {protected:
-  StripDSSD() : m_index(gIndex++), angle(0) {}
+  StripDSSD() noexcept : m_index(gIndex++), angle(0) {}
   StripDSSD(double const & _angle) : m_index(gIndex++), angle(_angle) {}
 
 public:
@@ -95,12 +95,12 @@ uchar thread_local StripDSSD::gIndex = 0;
 
 class RingDSSD : public StripDSSD
 {public:
-  RingDSSD() : StripDSSD(DSSD::angle_ring(StripDSSD::gIndex)) {}
+  RingDSSD() noexcept : StripDSSD(DSSD::angle_ring(StripDSSD::gIndex)) {}
 };
 
 class SectorDSSD : public StripDSSD
 {public:
-  SectorDSSD() : StripDSSD(DSSD::angle_sector(StripDSSD::gIndex)) {}
+  SectorDSSD() noexcept : StripDSSD(DSSD::angle_sector(StripDSSD::gIndex)) {}
 };
 
 /////////////
@@ -135,7 +135,7 @@ class StripsDSSD
 
 class RingsDSSD : public StripsDSSD
 {public:
-  RingsDSSD() {StripDSSD::gIndex = 0;}
+  RingsDSSD() noexcept {StripDSSD::gIndex = 0;}
   void fill(Event const & event, int const & hit_i)
   {
     auto const & index = DSSD::index_ring[event.labels[hit_i]];
@@ -151,7 +151,7 @@ private:
 
 class SectorsDSSD : public StripsDSSD
 {public:
-  SectorsDSSD() {StripDSSD::gIndex = 0;}
+  SectorsDSSD() noexcept {StripDSSD::gIndex = 0;}
   void fill(Event const & event, int const & hit_i)
   {
     auto const & id = DSSD::index_sector[event.labels[hit_i]];

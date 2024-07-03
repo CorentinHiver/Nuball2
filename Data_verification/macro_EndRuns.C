@@ -43,7 +43,7 @@ void macro_EndRuns()
   Timer timer;
 
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
-  Paris::InitialiseArrays();
+  // Paris::InitialiseArrays();
 
   FilesManager files(Path::home().string()+"nuball2/N-SI-136-sources/end_runs_2/");
   MTList MTfiles(files.get());
@@ -68,6 +68,7 @@ void macro_EndRuns()
       unique_TH1F pure_singles(new TH1F(("pure_singles_"+thread_i_str).c_str(),"pure_singles",10000,0,10000));
       unique_TH2F gg(new TH2F(("gg_"+thread_i_str).c_str(),"gg",4096,0,4096, 4096,0,4096));
       unique_TH2F g_time(new TH2F(("g_time_"+thread_i_str).c_str(),"g_time;[keV];hours",4096,0,4096, 10000,0,3));
+      unique_TH2F sumC2_time(new TH2F(("sumC2_time_"+thread_i_str).c_str(),"sumC2_time;[keV];hours",4096,0,4096, 10000,0,3));
       unique_TH2F ggC2(new TH2F(("ggC2_"+thread_i_str).c_str(),"ggC2",4096,0,4096, 4096,0,4096));
       unique_TH2F g_VS_sumC2(new TH2F(("g_VS_sumC2_"+thread_i_str).c_str(),"g_VS_sumC2",4096,0,2*4096, 4096,0,4096));
       unique_TH2F ggC3(new TH2F(("ggC3_"+thread_i_str).c_str(),"ggC3",4096,0,4096, 4096,0,4096));
@@ -120,6 +121,7 @@ void macro_EndRuns()
             gg->Fill(nrj_j, nrj_i);
             if (mult == 2)
             {
+              sumC2_time->Fill(nrj_i+nrj_j, absolute_time_h);
               ggC2->Fill(nrj_i, nrj_j);
               ggC2->Fill(nrj_j, nrj_i);
               g_VS_sumC2->Fill(nrj_i+nrj_j, nrj_i);
@@ -201,6 +203,7 @@ void macro_EndRuns()
         singles->Write("singles", TObject::kOverwrite);
         singles_VS_ring_clover->Write("singles_VS_ring_clover", TObject::kOverwrite);
         g_time->Write("g_time", TObject::kOverwrite);
+        sumC2_time->Write("sumC2_time", TObject::kOverwrite);
         pure_singles->Write("pure_singles", TObject::kOverwrite);
         rejected->Write("rejected", TObject::kOverwrite);
         gg->Write("gg", TObject::kOverwrite);
@@ -239,6 +242,7 @@ int main(int argc, char** argv)
   macro_EndRuns();
   return 1;
 }
+
 #endif //__CINT__
 // g++ -g -o exec macro_EndRuns.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
 // g++ -O2 -o exec macro_EndRuns.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17
