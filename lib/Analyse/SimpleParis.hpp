@@ -33,7 +33,7 @@ namespace Paris
 class SimplePhoswitch
 {
 public:
-  SimplePhoswitch() : m_label(g_label++) {for (int i = 0; i<1000; ++i) if (Paris::is[i]) print(i, Paris::index[i], Paris::cluster_index[i], Paris::cluster[i]); pauseCo();}
+  SimplePhoswitch() : m_label(g_label++) {}
 
   double qlong = 0.0;
   double qshort = 0.0;
@@ -135,8 +135,6 @@ public:
     phoswitch.nrj = calib.calibrate(label, phoswitch.qshort, phoswitch.qlong);
     phoswitch.time = event.times[hit_i];
     calorimetry+=phoswitch.nrj;
-    print(*this);
-    pauseCo();
     return &phoswitch;
   }
 

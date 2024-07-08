@@ -19,7 +19,7 @@ float smear(float const & nrj, TRandom* random)
 
 constexpr static bool kCalibGe = true;
 
-void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
+void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5)
 {
   detectors.load("../136/index_129.list");
   std::string target = "U";
@@ -508,7 +508,6 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             if (gate(-5_ns, time, 5_ns))
             {
               short_vs_long_prompt->Fill(nrj, nrj2); 
-              print("fill paris");
               pparis.fill(event, hit_i);
             }
             else if (gate(5_ns, time, 40_ns))
@@ -518,7 +517,6 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             else if (gate(40_ns, time, 170_ns) )
             {
               short_vs_long_delayed->Fill(nrj, nrj2);
-              print("fill paris");
               dparis.fill(event, hit_i);
             }
           }
@@ -571,7 +569,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         dssd.analyze();
         // print(pparis);
         // pauseCo();
-        print("event", evt_i);
+        // print("event", evt_i);
 
 
         for (auto const & id : dclovers.all_id) nb_same_dclover->Fill(dclovers[id].size());
@@ -1265,6 +1263,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         for (size_t it = 0; it<detectors.names().size(); ++it)
         {
           std::string name = detectors.names()[it];
+          if (name == "") continue;
           if (T_vs_run[name]->Integral() > 0) T_vs_run[name]->Write(("T_vs_run_"+name).c_str(), TObject::kOverwrite);
           if (E_vs_run[name]->Integral() > 0) E_vs_run[name]->Write(("E_vs_run_"+name).c_str(), TObject::kOverwrite);
         }

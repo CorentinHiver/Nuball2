@@ -26,11 +26,7 @@ int main(int argc, char ** argv)
     {
       std::string option = argv[i];
 
-           if (option == "-l") manip.readFile(argv[++i]);
-      // else if (option == "-r")
-      // {
-      //   manip.readFolder(argv[++i]);
-      // }
+          //  if (option == "-l") manip.readFile(argv[++i]);
       
       Path datapath(argv[2]);
       Path outpath(argv[3]);
@@ -49,19 +45,6 @@ int main(int argc, char ** argv)
         catch(OverwriteError const & error) {continue;} // If the output file already exist then move to the next folder to histogram
         delete_argv(arguments);
       }
-
-    // Manip manip(argv[1]);
-    // std::string parameters; for (int i = 4; i<argc; i++) parameters += std::string(" ")+argv[i];
-    // std::string run;
-    // while(manip >> run)
-    // {
-    //   Path input (argv[2]+run);
-    //   Path output(argv[3]+removeExtension(run), true);
-    //   std::string command = std::string("./faster2root ") + input.string() + std::string(" ") + output.string() + parameters;
-    //   print(command);
-    //   if (input) system(command.c_str());
-    //   else print(input.string(), "NOT FOUND");
-    // }
     }
   }
   return 1;

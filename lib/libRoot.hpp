@@ -2289,6 +2289,25 @@ void simulatePeak(TH1* histo, double const & x_center, double const & x_resoluti
   else simulatePeak(histo, x_center, x_resolution, nb_hits); 
 }
 
+TH2F* attemptRemoveBackground(TH2F* histo, std::string new_name = "")
+{
+  std::unique_ptr<TH1D> projX(histo->ProjectionX());
+  std::unique_ptr<TH1D> projY(histo->ProjectionY());
+  if (new_name == "") new_name = histo->GetName() + std::string("_tryRemoveBackground");
+  TH2F* ret = (TH2F*)histo->Clone(new_name.c_str());
+  auto const & integral = double_cast(histo->Integral());
+  for (int x = 0; x<projX->GetNbinsX(); ++x) for (int y = 0; y<projY->GetNbinsX(); ++y)
+  {
+    auto const & old_value = histo->GetBinContent(x,y);
+    auto const & vx = double_cast(projX->GetBinContent(x));
+    auto const & vy = double_cast(projY->GetBinContent(y));
+    auto const & new_value = old_value - int_cast(vx*vy/integral);
+    // print(x, y, old_value, new_value, vx*vy);
+    ret->SetBinContent(x,y,new_value);
+  }
+  return ret;
+}
+
 
 void libRoot()
 {

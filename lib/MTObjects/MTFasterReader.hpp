@@ -188,18 +188,19 @@ inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
 {
   if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
   m_MTfiles = m_files.getListFiles();
-  // MTObject::parallelise_function(Read<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
     std::string filename;
     CoProgressBar<size_t> progress(&m_MTfiles.getIndex(), float_cast(m_MTfiles.size()));
     while(nextFilename(filename))
     {
       if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
-    fasterReaderMutex.lock();
+
+    fasterReaderLockMutex();
       Hit hit;
       FasterReader reader(&hit, filename);
       if (s_progressBar) progress.show();
-    fasterReaderMutex.unlock();
+    fasterReaderUnlockMutex();
+
       func(hit, reader, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function has the following form : type func(Hit & hit, FasterReader & reader, ARGS... some_args)
     }
   });
@@ -232,23 +233,27 @@ inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
     while(nextFilename(filename))
     {
       if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
+
+    fasterReaderLockMutex();
       Hit hit;
-    fasterReaderMutex.lock();
       FasterReader reader(&hit, filename);
       TString name = "temp"+std::to_string(MTObject::getThreadIndex());
       unique_tree tempTree(new TTree(name, "temp"));
       hit.writing(tempTree.get());
-    fasterReaderMutex.unlock();
+    fasterReaderUnlockMutex();
+
       while (reader.Read())
       {
         hit.stamp+=m_timeshifts[hit.label];
         tempTree->Fill();
       }
-    fasterReaderMutex.lock();
+
+    fasterReaderLockMutex();
       Alignator alignedTree(tempTree.get());
       hit.clear();
       hit.reading(tempTree.get());
-    fasterReaderMutex.unlock();
+    fasterReaderUnlockMutex();
+    
       func(hit, alignedTree, std::forward<ARGS>(args)...);
     }
   });

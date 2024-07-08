@@ -14,6 +14,20 @@
   std::mutex fasterReaderMutex;
 #endif //MULTITHREADING
 
+void fasterReaderLockMutex()
+{
+#ifdef MULTITHREADING
+  fasterReaderMutex.lock();
+#endif //MULTITHREADING
+}
+
+void fasterReaderUnlockMutex()
+{
+#ifdef MULTITHREADING
+  fasterReaderMutex.unlock();
+#endif //MULTITHREADING
+}
+
 /** 
  * @class FasterReader
  * @brief Class that to reads .fast data files
