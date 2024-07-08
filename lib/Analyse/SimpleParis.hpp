@@ -7,15 +7,13 @@
 namespace Paris
 {
   static constexpr auto is = LUT<1000> ([](Label const & label) {
-    return (label<ParisArrays::paris_labels[0] || label>ParisArrays::paris_labels.back())
-           ? false
-           : binary_search(ParisArrays::paris_labels, label);
+    return binary_search(ParisArrays::paris_labels, label);
   });
 
   static constexpr auto index = LUT<1000> ([](Label const & label) {
     if (is[label])
     {
-      return static_cast<Label> ( find(ParisArrays::paris_labels, label) - ParisArrays::paris_labels[0]);
+      return static_cast<Label> (find_index(ParisArrays::paris_labels, label));
     }
     else return Label{0};
   });
@@ -35,7 +33,7 @@ namespace Paris
 class SimplePhoswitch
 {
 public:
-  SimplePhoswitch() : m_label(g_label++) {}
+  SimplePhoswitch() : m_label(g_label++) {for (int i = 0; i<1000; ++i) if (Paris::is[i]) print(i, Paris::index[i], Paris::cluster_index[i], Paris::cluster[i]); pauseCo();}
 
   double qlong = 0.0;
   double qshort = 0.0;
@@ -250,8 +248,8 @@ public:
     auto const & cluster = Paris::cluster[label];
          if (cluster == 0) phoswitches.push_back(back.fill(event, hit_i, calib));
     else if (cluster == 1) phoswitches.push_back(front.fill(event, hit_i, calib));
-    else error("SimpleParis::fill : no cluster found for label", label);
-    if (phoswitches.back() == nullptr) phoswitches.pop_back();
+    else error("SimpleParis::fill : no cluster (",cluster,") found for label", label);
+    if (phoswitches.size() > 0 && phoswitches.back() == nullptr) phoswitches.pop_back();
   }
 
   void fill(Event const & event, int const & hit_i) {fill(event, hit_i, *m_calib);}

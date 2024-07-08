@@ -1861,6 +1861,88 @@ TH1D* myProjectionY(TH2* histo, std::string const & name, double const & x_value
   return myProjectionY(histo, name, xvalue_min, xvalue_max, xvalue_min_bckg, xvalue_max_bckg);
 }
 
+TH1D* bestProjectionX(TH2F* histo, std::string name, int bin, int resolution)
+{
+  auto proTot = histo->ProjectionX();
+  TH1D* pro(histo->ProjectionX(name.c_str(), bin-resolution, bin+resolution));
+  pro->Add(proTot,-(pro->Integral()/proTot->Integral()));
+  std::unique_ptr<TH1D> pro_bckg_low(histo->ProjectionX(("proj_bckg_low_"+std::to_string(bin)).c_str(), bin-3*resolution, bin-resolution));
+  pro_bckg_low->Add(proTot,-(pro->Integral()/proTot->Integral()));
+  std::unique_ptr<TH1D> pro_bckg_high(histo->ProjectionX(("proj_bckg_high"+std::to_string(bin)).c_str(), bin+resolution, bin+3*resolution));
+  pro_bckg_high->Add(proTot,-(pro->Integral()/proTot->Integral()));
+
+  pro->Add(pro_bckg_low.get(), -(pro->Integral()/pro_bckg_low->Integral()));
+  pro->Add(pro_bckg_high.get(), -(pro->Integral()/pro_bckg_high->Integral()));
+
+  return pro;
+}
+
+// void interactiveProjectionX(TH2F* histo, int resolution)
+// {
+//   double x = 0; double y = 0; double prev_y=0;
+//   histo->Draw("colz");
+//   auto pad = gPad;
+//   auto projC = new TCanvas("Proj","Proj");
+//   while(gPad)
+//   {
+//     GetPoint(projC, x, y);
+//     if (prev_y == y) continue;
+//     prev_y = y;
+//     std::string name = "Proj_"+std::to_string(y);
+//     projC->SetName(name.c_str());
+//     if (y-3*resolution<0) {error("Lower bound reached !"); continue;}
+    
+//     auto pro = bestProjectionX(histo, name, y, resolution);
+//     pro->SetName(name.c_str());
+//     pro->SetTitle(name.c_str());
+//     projC->cd();
+//     pro->Draw();
+
+//     projC->Update();
+//     pad->cd();
+//     // std::this_thread::sleep_for(std::chrono::milliseconds(100));
+//   }
+// }
+
+/**
+ * @brief Histo is E VS time with time in ps and E in keV
+*/
+TGraph* calculateHalfLife(TH2F* histo, int min_bin, int max_bin, int sigma, std::vector<TH1D*> & projs)
+{
+  std::vector<int> bins;
+  std::vector<int> half_lifes;
+  if (min_bin-5*sigma < 0 || max_bin+5*sigma>histo->GetXaxis()->GetXmax()) {error ("in calculateHalfLife : out of bounds !"); return nullptr;}
+  auto proTot = histo->ProjectionX();
+  projs.push_back(proTot);
+  for (int bin = min_bin-4*sigma; bin < max_bin+4*sigma; ++bin)
+  {
+    auto pro = histo->ProjectionX(("proj_"+std::to_string(bin)).c_str(), bin-sigma, bin+sigma);
+    pro->Add(proTot, -(pro->Integral()/proTot->Integral()));
+    // TH1D* pro_bckg_low(histo->ProjectionX(("proj_bckg_low_"+std::to_string(bin)).c_str(), bin-3*sigma, bin-sigma));
+    // TH1D* pro_bckg_high(histo->ProjectionX(("proj_bckg_high"+std::to_string(bin)).c_str(), bin+sigma, bin+3*sigma));
+    // pro->Add(pro_bckg_low, -0.5);
+    // pro->Add(pro_bckg_high, -0.5);
+    pro->SetDirectory(nullptr);
+    projs.push_back(pro);
+
+    TF1* expo = new TF1("expo","expo");
+    pro->Fit(expo);
+    TF1* expo_pol = new TF1("expo","expo(0)+pol1(2)");
+    expo_pol->SetParameters(expo->GetParameter(0), expo->GetParameter(1));
+    pro->Fit(expo_pol);
+
+    bins.push_back(bin);
+    half_lifes.push_back(log(2)/(-1000*expo_pol->GetParameter(1)));
+    pro->Draw();
+    // pro->SetLineColor(kRed);
+    // pro_bckg_low->Draw("same");
+    // pro_bckg_high->Draw("same");
+    gPad->WaitPrimitive();
+  }
+  TGraph* ret = new TGraph(bins.size(), bins.data(), half_lifes.data());
+  return ret;
+}
+
 
  /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
  /// @attention The edges must be well centered, this is not a peak finder.

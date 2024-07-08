@@ -1,5 +1,5 @@
 // #include <MTObject.hpp>
-// #include "../libRoot.hpp"
+// #include <libRoot.hpp>
 // #include <Paris.hpp>
 // #include <Minimisator.hpp>
 // #include <CloversV2.hpp>
@@ -17,9 +17,10 @@
 // #include <Convertor.hpp>
 // #include <MTRootReader.hpp>
 // #include <MTFasterReader.hpp>
+#include <RWMat.hpp>
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
-#include <ExcitationEnergy.hpp>
+// #include <ExcitationEnergy.hpp>
 // #include <DSSD.hpp>
 // #include "../lib/Analyse/Paris.hpp"
 // #include <SpectraCo.hpp>
@@ -35,16 +36,34 @@
 // #include <vector>
 // #include <iostream>
 
-static thread_local std::mt19937 generator;
+// static thread_local std::mt19937 generator;
 
 int main()
 { 
+
+  //////////////////////////
+  // CALCULATE TIME DECAY //
+  //////////////////////////
+
+  // unique_TFile file(TFile::Open("../Data_verification/compressed.root"));
+  // file->cd();
+  // auto histo = file->Get<TH2F>("E_dT");
+  // histo->GetXaxis()->SetRangeUser(40000, 90000);
+  // // histo->RebinX()
+  // std::vector<TH1D*> projs;
+  // auto graph = calculateHalfLife(histo, 640,644,2,projs);
+  // file->Close();
+  // file.reset(TFile::Open("test.root", "recreate"));
+  // file->cd();
+  // graph->Write("data");
+  // for (auto pro : projs) pro->Write();
+  // file->Close();
 
   /////////////////////////
   //   EXCITATION ENERGY //
   /////////////////////////
 
-  ExcitationEnergy Ex("../136/Excitation_energy/U5_d_p_10umAl_Ex.root");
+  // ExcitationEnergy Ex("../136/Excitation_energy/U5_d_p_10umAl_Ex.root");
   // unique_TFile rootfile (TFile::Open("../136/Excitation_energy/U5_d_p_10umAl_Ex.root", "READ"));
 
   /////////////////////////
@@ -70,7 +89,7 @@ int main()
   //   unique_TH1F NaI_back_verif(new TH1F("NaI_back_verif", "NaI_back_verif", 2000,0,10000));
   //   unique_TH1F add_back_front_LaBr3(new TH1F("add_back_front_LaBr3", "add_back_front_LaBr3", 2000,0,10000));
   //   unique_TH1F add_back_back_LaBr3(new TH1F("add_back_back_LaBr3", "add_back_back_LaBr3", 2000,0,10000));
-  //   unique_TH1F add_back_front_total(new TH1F("add_back_front_total", "add_back_front_total", 2000,0,10000));
+  //   unique_T;H1F add_back_front_total(new TH1F("add_back_front_total", "add_back_front_total", 2000,0,10000));
   //   unique_TH1F add_back_back_total(new TH1F("add_back_back_total", "add_back_back_total", 2000,0,10000));
   //   Paris paris;
   //   auto & front = paris.front();

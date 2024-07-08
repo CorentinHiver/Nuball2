@@ -491,8 +491,8 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
           Ex_histo_stop_25Mg_VS_angle->Fill(to_deg(dssd.angle), Ex_25Mg_stop);
         }
 
-        // print(Ex_U6_pt ,Ex_U5_pt ,Ex_27Al_pt ,Ex_28Al_pt ,Ex_25Mg_pt);
-        // print(Ex_U6_stop ,Ex_U5_stop ,Ex_27Al_stop ,Ex_28Al_stop ,Ex_25Mg_stop);
+        // print(Ex_U6_pt, Ex_U5_pt, Ex_27Al_pt, Ex_28Al_pt, Ex_25Mg_pt);
+        // print(Ex_U6_stop, Ex_U5_stop, Ex_27Al_stop, Ex_28Al_stop, Ex_25Mg_stop);
 
         if (pclovers.clean.size() == 1)
         {

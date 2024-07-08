@@ -729,13 +729,9 @@ constexpr bool binary_search (std::array<T, N> const & array, T const & value)
 }
 
 template <typename T, std::size_t N>
-constexpr T find(const std::array<T, N>& array, const T& value) 
+constexpr T find_index(const std::array<T, N>& array, const T& value) 
 {
-  for (std::size_t i = 0; i < N; ++i) {
-    if (array[i] == value) {
-      return i;
-    }
-  }
+  for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return i;
   return -1;  // Value not found
 } 
 

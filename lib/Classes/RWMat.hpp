@@ -1,7 +1,42 @@
-#ifndef _RWMat_
-#define _RWMat_
+#ifndef RWMAT_HPP
+#define RWMAT_HPP
 
-#include "../libRoot.hpp"
+#ifndef LIBROOT_HPP
+  #include <string>
+  #include <TH2.h>
+  #include <TH2F.h>
+  #include <TH3I.h>
+  #include <iostream>
+  #include <iomanip>
+  #include <vector>
+
+  ////////////////////////////////////
+  // USER FRIENDLY PRINT FUNCTION : //
+  ////////////////////////////////////
+
+  void print() {std::cout << std::endl;}
+
+  template <class T>
+  std::ostream& operator<<(std::ostream& cout, std::vector<T> const & v)
+  {
+    for (auto const & e : v) cout << e << " ";
+    return cout;
+  }
+
+  /// @brief Generic print
+  /// @details Automatically adds space between each input. Terminate the output with a "\\n"
+  template <class T> 
+  void print(T const & t) {std::cout << t << std::endl;}
+
+  /// @brief Generic print
+  /// @details Automatically adds space between each input. Terminate the output with a "\\n"
+  template <class T, class... T2> 
+  void print(T const & t, T2 const &... t2) {std::cout << t << " "; print(t2...);}
+#endif //LIBROOT_HPP
+
+////////////
+// CODE : //
+////////////
 
 /**
  * @brief From Jon
@@ -273,4 +308,4 @@ int RWMat::FindMinChan()
   if (minx > miny) {miny=minx;}
   return miny;
 }
-#endif
+#endif //RWMAT_HPP

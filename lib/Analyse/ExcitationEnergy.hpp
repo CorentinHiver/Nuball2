@@ -7,6 +7,7 @@ class ExcitationEnergy
   ExcitationEnergy() noexcept = default;
   ExcitationEnergy(std::string path_to_folder, std::string target, std::string projectile, std::string ejectile, std::string additionnal_information)
   {
+    push_back_if_none(path_to_folder, '/');
     load(path_to_folder+target+"_"+projectile+"_"+ejectile+"_"+additionnal_information+"_Ex.root");
   }
   ExcitationEnergy(std::string _filename)
