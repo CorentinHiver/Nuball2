@@ -154,12 +154,12 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
       unique_TH1F p_no_singles (new TH1F(("p_no_singles_"+thread_i_str).c_str(), "p_no_singles", 10_k,0,10_MeV));
       unique_TH1F d_no_singles (new TH1F(("d_no_singles_"+thread_i_str).c_str(), "d_no_singles", 10_k,0,10_MeV));
 
-      // std::vector<unique_TH2F>
+      std::vector<unique_TH2F>
       
       unique_TH2F p_pure_singles_VS_dssd_energy (new TH2F(("p_pure_singles_VS_dssd_energy_"+thread_i_str).c_str(), "p_pure_singles_VS_dssd_energy", 2.5_k,0,50_MeV, 10_k,0,10_MeV));
       unique_TH2F d_pure_singles_VS_dssd_energy (new TH2F(("d_pure_singles_VS_dssd_energy"+thread_i_str).c_str(), "d_pure_singles_VS_dssd_energy", 2.5_k,0,50_MeV, 10_k,0,10_MeV));
-      unique_TH2F p_no_singles_VS_dssd_energy (new TH2F(("p_no_singles_VS_dssd_energy_"+thread_i_str).c_str(), "p_no_singles_VS_dssd_energy", 2.5_k,0,50_MeV, 10_k,0,10_MeV));
-      unique_TH2F d_no_singles_VS_dssd_energy (new TH2F(("d_no_singles_VS_dssd_energy"+thread_i_str).c_str(), "d_no_singles_VS_dssd_energy", 2.5_k,0,50_MeV, 10_k,0,10_MeV));
+      unique_TH2F p_no_singles_VS_dssd_energy (new TH2F(("p_no_singles_VS_dssd_energy_"+thread_i_str).c_str(), "p_no_singles_VS_dssd_energy", 2.5_k,0,50_MeV, 2_k,0,10_MeV));
+      unique_TH2F d_no_singles_VS_dssd_energy (new TH2F(("d_no_singles_VS_dssd_energy"+thread_i_str).c_str(), "d_no_singles_VS_dssd_energy", 2.5_k,0,50_MeV, 2_k,0,10_MeV));
       
       unique_TH2F p_pure_singles_VS_dssd_time (new TH2F(("p_pure_singles_VS_dssd_time_"+thread_i_str).c_str(), "p_pure_singles_VS_dssd_time", 250,-50_ns,200_ns, 10_k,0,10_MeV));
       unique_TH2F d_pure_singles_VS_dssd_time (new TH2F(("d_pure_singles_VS_dssd_time"+thread_i_str).c_str(), "d_pure_singles_VS_dssd_time", 250,-50_ns,200_ns, 10_k,0,10_MeV));

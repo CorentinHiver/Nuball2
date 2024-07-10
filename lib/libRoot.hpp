@@ -2120,10 +2120,36 @@ public:
   auto operator() (double const & energy1, double const & energy2, double const & energy3) const {return m_data[int_cast(energy1)]*m_data[int_cast(energy2)]*m_data[int_cast(energy3)];}
   auto normalizedValue(double const & energy) const {return m_data[int_cast(energy)]/m_max;}
   auto normalizedCounts(int const & counts, double const & energy) const {return counts*normalizedValue(energy);}
+  auto draw()
+  { 
+    // int argc = 0;
+    // char *argv[] = {};
+    // TApplication app("app", &argc, argv);
+
+    // Create a canvas
+    TCanvas *canvas = new TCanvas("canvas", "Interactive Canvas", 800, 600);
+
+    // Generate x values using linspace
+    std::vector<double> x;
+    linspace(x, m_data.size());
+
+    // Create the graph
+    TGraph *graph = new TGraph(m_data.size(), x.data(), m_data.data());
+    graph->SetName("Efficiency");
+    graph->SetTitle("Efficiency");
+    graph->Draw("AL");
+
+    // Update the canvas to draw the graph
+    canvas->Update();
+
+    // // Run the application in interactive mode
+    // app.Run();
+  }
 
 private:
   std::vector<double> m_data;
   double m_max = 0.0;
+  TF1* function;
 };
 
 TH1D* apply_efficiency(TH1* histo, Efficiency const & eff)
@@ -2289,21 +2315,39 @@ void simulatePeak(TH1* histo, double const & x_center, double const & x_resoluti
   else simulatePeak(histo, x_center, x_resolution, nb_hits); 
 }
 
-TH2F* attemptRemoveBackground(TH2F* histo, std::string new_name = "")
+/**
+ * @brief Simple background subtraction for bidim with Ge spectra on one axis and a background-free quantity on the x (like multiplicity, particle energy...)
+ * @details
+ * The broad spectra is on the x axis, the 
+ */
+TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_iteration_bckg = 25, bool GeOnY = true)
 {
-  std::unique_ptr<TH1D> projX(histo->ProjectionX());
-  std::unique_ptr<TH1D> projY(histo->ProjectionY());
-  if (new_name == "") new_name = histo->GetName() + std::string("_tryRemoveBackground");
   TH2F* ret = (TH2F*)histo->Clone(new_name.c_str());
-  auto const & integral = double_cast(histo->Integral());
-  for (int x = 0; x<projX->GetNbinsX(); ++x) for (int y = 0; y<projY->GetNbinsX(); ++y)
+  for (int i = 0; i<1; ++i)
   {
-    auto const & old_value = histo->GetBinContent(x,y);
-    auto const & vx = double_cast(projX->GetBinContent(x));
-    auto const & vy = double_cast(projY->GetBinContent(y));
-    auto const & new_value = old_value - int_cast(vx*vy/integral);
-    // print(x, y, old_value, new_value, vx*vy);
-    ret->SetBinContent(x,y,new_value);
+    print(i);
+    std::unique_ptr<TH1D> ProjX(ret->ProjectionX("ProjX"));
+    std::unique_ptr<TH1D> ProjY(ret->ProjectionY("ProjY"));
+    if (new_name == "") new_name = ret->GetName() + std::string("_tryRemoveBackground");
+    auto const & integral = double_cast(ret->Integral());
+
+    // Get the bacground for the Ge spectra :
+    std::unique_ptr<TH1D> bckgY ((TH1D*)ProjY->ShowBackground(nb_iteration_bckg));
+    std::unique_ptr<TH1D> projY((TH1D*)ProjY->Clone("projY"));
+    projY->Add(projY.get(), -1);
+
+    for (int x = 0; x<ProjX->GetNbinsX(); ++x) for (int y = 0; y<ProjY->GetNbinsX(); ++y)
+    {
+      auto const & old_value = ret->GetBinContent(x,y);
+      auto const & Px = double_cast(ProjX->GetBinContent(x));
+      auto const & px = 0.9*Px;
+      auto const & bx = 0.1*Px;
+      auto const & Py = double_cast(ProjY->GetBinContent(y));
+      auto const & py = double_cast(projY->GetBinContent(y));
+      auto const & by = double_cast(bckgY->GetBinContent(y));
+      auto const & new_value = old_value - int_cast(1*(px*by + py*bx + bx*by)/integral);
+      ret->SetBinContent(x,y,new_value);
+    }
   }
   return ret;
 }

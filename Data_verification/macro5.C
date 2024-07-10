@@ -131,7 +131,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         std::string name = detectors.names()[it];
         if (name == "") continue;
         T_vs_run.emplace(name, unique_TH2F(new TH2F(("T_vs_run_"+name+"_"+thread_i_str).c_str(),("T vs run "+name).c_str(), 100,50,150, 300,-50_ns,250_ns)));
-        E_vs_run.emplace(name, unique_TH2F(new TH2F(("E_vs_run_"+name+"_"+thread_i_str).c_str(),("E vs run "+name).c_str(), 100,50,150, 300,-50_ns,250_ns)));
+        E_vs_run.emplace(name, unique_TH2F(new TH2F(("E_vs_run_"+name+"_"+thread_i_str).c_str(),("E vs run "+name).c_str(), 100,50,150, 500,0,10000)));
       }
       unique_TH1F nb_same_dclover (new TH1F(("nb_same_dclover_"+thread_i_str).c_str(), "nb_same_dclover", 5,0,5));
       unique_TH1F p (new TH1F(("p_"+thread_i_str).c_str(), "prompt", nb_bins_Ge_singles,0,max_bin_Ge_singles));
@@ -143,6 +143,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
       unique_TH2F dp (new TH2F(("dp_"+thread_i_str).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F E_dT (new TH2F(("E_dT_"+thread_i_str).c_str(), "E_dT clean", 600,-100_ns,200_ns, 20000,0,20000));
       unique_TH2F E_dT_phoswitch (new TH2F(("E_dT_phoswitch_"+thread_i_str).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, 2000,0,10000));
+      unique_TH2F p_VS_dT_LaBr3 (new TH2F(("p_VS_dT_LaBr3_"+thread_i_str).c_str(), "p_VS_dT_LaBr3", 300,-100_ns,200_ns, 10000,0,10000));
       
       unique_TH1F dT_642_VS_205 (new TH1F(("dT_642_VS_205_"+thread_i_str).c_str(), "dT_642_VS_205", 300,-100_ns,200_ns));
       unique_TH1F dT_642_VS_309 (new TH1F(("dT_642_TS_309_"+thread_i_str).c_str(), "dT_642_VS_309", 300,-100_ns,200_ns));
@@ -259,15 +260,19 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
       // Paris
       // unique_TH1F paris_prompt (new TH1F(("paris_prompt_"+thread_i_str).c_str(), "paris_prompt;keV", 10000,0,20000));
       // unique_TH1F paris_delayed (new TH1F(("paris_delayed_"+thread_i_str).c_str(), "paris_delayed;keV", 10000,0,20000));
-      // unique_TH1F LaBr3_prompt (new TH1F(("LaBr3_prompt_"+thread_i_str).c_str(), "LaBr3_prompt;keV", 10000,0,20000));
-      // unique_TH1F LaBr3_delayed (new TH1F(("LaBr3_delayed_"+thread_i_str).c_str(), "LaBr3_delayed;keV", 10000,0,20000));
+      unique_TH1F LaBr3_prompt (new TH1F(("LaBr3_prompt_"+thread_i_str).c_str(), "LaBr3_prompt;keV", 10000,0,20000));
+      unique_TH1F LaBr3_delayed (new TH1F(("LaBr3_delayed_"+thread_i_str).c_str(), "LaBr3_delayed;keV", 10000,0,20000));
+      unique_TH2F d_VS_dLaBr3 (new TH2F(("d_VS_dLaBr3_"+thread_i_str).c_str(), "d_VS_dLaBr3;LaBr3 [keV];Delayed clover [keV]", 5000,0,20000, 10000,0,10000));
+      unique_TH2F pLaBr3_VS_label (new TH2F(("pLaBr3__VS_label"+thread_i_str).c_str(), "pLaBr3_VS_label;label;Prompt LaBr3 [keV]", 64,0,64, 1000,0,10000));
+      unique_TH2F dLaBr3_VS_label (new TH2F(("dLaBr3__VS_label"+thread_i_str).c_str(), "dLaBr3_VS_label;label;Delayed LaBr3 [keV]", 64,0,64, 1000,0,10000));
 
       unique_TH2F short_vs_long_prompt (new TH2F(("short_vs_long_prompt_"+thread_i_str).c_str(), "short_vs_long_prompt;keV", 1000,0,10000, 1000,0,10000));
       unique_TH2F short_vs_long_delayed (new TH2F(("short_vs_long_delayed_"+thread_i_str).c_str(), "short_vs_long_delayed;keV", 1000,0,10000, 1000,0,10000));
+      unique_TH2F short_over_long_VS_time (new TH2F(("short_over_long_VS_time_"+thread_i_str).c_str(), "short_over_long_VS_time;keV", 1000,-2,2, 600,-50_ns,250_ns));
       unique_TH1F phoswitches_prompt (new TH1F(("phoswitches_prompt_"+thread_i_str).c_str(), "Phoswitches_prompt;keV", 10000,0,20000));
       unique_TH1F phoswitches_delayed (new TH1F(("phoswitches_delayed_"+thread_i_str).c_str(), "Phoswitches_delayed;keV", 10000,0,20000));
 
-      unique_TH2F ge_VS_phoswitch_delayed (new TH2F(("ge_VS_LaBr3_delayed_"+thread_i_str).c_str(), "ge_VS_phoswitch_delayed;Phoswitch [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
+      unique_TH2F ge_VS_phoswitch_delayed (new TH2F(("ge_VS_phoswitch_delayed_"+thread_i_str).c_str(), "ge_VS_phoswitch_delayed;Phoswitch [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F ge_VS_phoswitch_prompt (new TH2F(("ge_VS_phoswitch_prompt_"+thread_i_str).c_str(), "ge_VS_phoswitch_prompt;Phoswitch [keV]; Ge [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F p_VS_phoswitch_delayed (new TH2F(("p_VS_phoswitch_delayed_"+thread_i_str).c_str(), "p_VS_phoswitch_delayed;Phoswitch_{delayed} [keV]; E#gamma_{prompt} [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F d_VS_phoswitch_prompt (new TH2F(("d_VS_phoswitch_prompt_"+thread_i_str).c_str(), "d_VS_phoswitch_prompt;Phoswitch_{prompt} [keV]; E#gamma_{delayed} [keV]", 5000,0,20000, 10000,0,10000));
@@ -412,6 +417,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
       WarsawDSSD dssd;
 
+      std::vector<Hit> LaBr3;
+      std::vector<Hit*> pLaBr3;
+      std::vector<Hit*> dLaBr3;
+
       // std::vector<double> prompt_phoswitch;
       // std::vector<double> delayed_phoswitch;
 
@@ -475,11 +484,16 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
         dssd.clear();
 
+        LaBr3.clear();
+        pLaBr3.clear();
+        dLaBr3.clear();
+
         // sector_energy.clear();
         // ring_energy.clear();
 
         // sector_labels.clear();
         // ring_labels.clear();
+
 
         for (int hit_i = 0; hit_i < event.mult; hit_i++)
         {
@@ -488,25 +502,31 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           auto const & nrj = event.nrjs[hit_i];
           auto const & nrj2 = event.nrj2s[hit_i];
 
-          if (nrj<20) continue;
+          if (nrj<20_keV) continue;
 
           // Remove bad Ge and overflow :
            if ((find_key(CloversV2::maxE_Ge, label) && nrj>CloversV2::maxE_Ge.at(label))) continue;
            if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
            if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
 
-          auto const & det_name = detectors[event.labels[hit_i]];
-          T_vs_run[det_name]->Fill(run_number, event.times[hit_i]);
-          E_vs_run[det_name]->Fill(run_number, event.times[hit_i]);
+          auto const & det_name = detectors[label];
+          if (!(Paris::is[label] && !Paris::pid_LaBr3(nrj,nrj2)))
+          {
+            E_vs_run[det_name]->Fill(run_number, nrj);
+            T_vs_run[det_name]->Fill(run_number, time);
+          }
 
           // Paris :
           if (Paris::is[label])
           {
+            if(Paris::pid_LaBr3(nrj, nrj2)) LaBr3.push_back(event[hit_i]);
             // if (500 < label && label < 600) continue; // Reject paris front inner ring
             // Calibrate the phoswitch :
             // E_dT_phoswitch->Fill(time, nrjcal);
+            short_over_long_VS_time->Fill(time,nrj/nrj2);
             if (gate(-5_ns, time, 5_ns))
             {
+              if(Paris::pid_LaBr3(nrj, nrj2)) pLaBr3.push_back(&(LaBr3.back()));
               short_vs_long_prompt->Fill(nrj, nrj2); 
               pparis.fill(event, hit_i);
             }
@@ -514,8 +534,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
             {
               neutron_hit_pattern->Fill(label);
             }
-            else if (gate(40_ns, time, 170_ns) )
+            else if (gate(40_ns, time, 170_ns))
             {
+              if(Paris::pid_LaBr3(nrj, nrj2)) dLaBr3.push_back(&(LaBr3.back()));
               short_vs_long_delayed->Fill(nrj, nrj2);
               dparis.fill(event, hit_i);
             }
@@ -530,7 +551,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
             else if (CloversV2::isGe(label)) 
             {
               // Rejecting the 511 keV in the calorimetry;
-              if (gate( 506, nrj, 516)) prompt_clover_calo += smear(nrj, random);
+              if (gate( 506_keV, nrj, 516_keV)) prompt_clover_calo += smear(nrj, random);
             }
           }
           else if (gate(40_ns, time, 170_ns) )
@@ -618,7 +639,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
         auto const & Emiss = Ex_U6-PC;
 
-        if (Ex_U6>0) 
+        if (Ex_U6>0_MeV) 
         {
           Ex_U6_histo->Fill(Ex_U6);
           Ex_U6_VS_ring->Fill(Ex_U6, dssd.ring_index);
@@ -709,12 +730,12 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
           bool PM4DM4 = (DM>0 && PM>0 && PM<4 && DM<4);
 
-          if (2740 < clover_i.nrj && clover_i.nrj < 2760) hit_pattern_2755->Fill(index_i);
+          if (2740_keV < clover_i.nrj && clover_i.nrj < 2760_keV) hit_pattern_2755->Fill(index_i);
           
           d_VS_PM->Fill(PM, clover_i.nrj);
           d_VS_DM->Fill(DM, clover_i.nrj);
           
-          if (PC > 10) d_VS_PC -> Fill(PC, clover_i.nrj);
+          if (PC > 1_keV) d_VS_PC -> Fill(PC, clover_i.nrj);
           if (DM > 1) d_VS_DC -> Fill(DC, clover_i.nrj);
 
           if (PM > 0) d_P->Fill(clover_i.nrj);
@@ -953,6 +974,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
             ge_VS_phoswitch_delayed->Fill(module->nrj, clover_i.nrj);
           }
 
+          for (auto hit : dLaBr3)
+          {
+            if (std::abs(clover_i.time - hit->time) < 30_ns) d_VS_dLaBr3->Fill(clover_i.nrj - hit->nrj);
+          }
+
           // Prompt phoswitch delayed Ge
           for (auto const & module : pparis.modules) d_VS_phoswitch_prompt->Fill(module->nrj, clover_i.nrj);
           
@@ -1012,7 +1038,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         {
           p_calo_p->Fill(PC);
           // d_calo_p->Fill(DC);
-          if (PM > 0 && Ex_U6>0) 
+          if (PM > 0 && Ex_U6>0_MeV) 
           {
             Ex_VS_PC_p->Fill(PC, Ex_U6);
             // Ex_VS_DC_p__P->Fill(DC, Ex_U6);
@@ -1040,7 +1066,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
             //     p_pDC1_3->Fill(nrj);
             //   }
             // }
-            if (PM > 0 && Ex_U6 > 0)
+            if (PM > 0 && Ex_U6 > 0_MeV)
             {
               p_VS_Ex_U6->Fill(Ex_U6, nrj);
             }
@@ -1196,6 +1222,16 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
 
         /////// PARIS //////////
+          for (auto hit : pLaBr3) 
+          {
+            pLaBr3_VS_label->Fill(Paris::index[hit->label], hit->nrj);
+            LaBr3_prompt->Fill(hit->nrj);
+          }
+          for (auto hit : dLaBr3) 
+          {
+            dLaBr3_VS_label->Fill(Paris::index[hit->label], hit->nrj);
+            LaBr3_delayed->Fill(hit->nrj);
+          }
         // double sum = 0;
         // for (auto const & id : pparis.back.modules_id)  phoswitches_prompt ->Fill(pparis.back.modules[id].nrj);
         // for (auto const & id : pparis.front.modules_id)  phoswitches_prompt ->Fill(pparis.front.modules[id].nrj);
@@ -1279,6 +1315,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         d->Write("d", TObject::kOverwrite);
         E_dT->Write("E_dT", TObject::kOverwrite);
         E_dT_phoswitch->Write("E_dT_phoswitch", TObject::kOverwrite);
+        p_VS_dT_LaBr3->Write("p_VS_dT_LaBr3", TObject::kOverwrite);
         dp->Write("dp", TObject::kOverwrite);
         if (make_triple_coinc_ddd) for (size_t gate_index = 0; gate_index<ddd_gates.size(); ++gate_index) 
           ddd_gated[gate_index]->Write(("ddd_gate_"+std::to_string(ddd_gates[gate_index])).c_str(), TObject::kOverwrite);
@@ -1473,8 +1510,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         // Paris :
         // paris_prompt->Write("paris_prompt", TObject::kOverwrite);
         // paris_delayed->Write("paris_delayed", TObject::kOverwrite);
-        // LaBr3_prompt->Write("LaBr3_prompt", TObject::kOverwrite);
-        // LaBr3_delayed->Write("LaBr3_delayed", TObject::kOverwrite);
+        LaBr3_prompt->Write("LaBr3_prompt", TObject::kOverwrite);
+        LaBr3_delayed->Write("LaBr3_delayed", TObject::kOverwrite);
+        pLaBr3_VS_label->Write("LaBr3_prompt", TObject::kOverwrite);
+        dLaBr3_VS_label->Write("LaBr3_delayed", TObject::kOverwrite);
 
         print("Write Ex spectra");
         Ex_U6_histo->Write("Ex_U6_histo", TObject::kOverwrite);
@@ -1496,6 +1535,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
         short_vs_long_prompt->Write("short_vs_long_prompt", TObject::kOverwrite);
         short_vs_long_delayed->Write("short_vs_long_delayed", TObject::kOverwrite);
+        short_over_long_VS_time->Write("short_over_long_VS_time", TObject::kOverwrite);
 
         ge_VS_phoswitch_prompt->Write("ge_VS_phoswitch_prompt", TObject::kOverwrite);
         ge_VS_phoswitch_delayed->Write("ge_VS_phoswitch_delayed", TObject::kOverwrite);

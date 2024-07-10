@@ -27,6 +27,14 @@ namespace Paris
     if (is[label]) return index[label]/paris_cluster_size;
     else return -1;
   });
+
+  
+
+  static constexpr bool pid_LaBr3(double const & qshort, double const & qlong)
+  {
+    auto const & ratio = qshort/qlong;
+    return (0.75 < ratio && ratio < 1.1);
+  }
 };
 
 // Paris classes :

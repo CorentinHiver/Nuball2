@@ -354,6 +354,9 @@ int main(int argc, char** argv)
         // There is a error for most DSSD rings when the timeshift have been calculated, some are slightly too early
         // Pushing all of them by 50 ns allows us to ensure they all fit in the event they belong to
         if (839 < hit.label  && hit.label < 856) hit.stamp += 50_ns;
+        else if (run_number == 99 && hit.label == 845) hit.stamp -= 45_ns;
+        else if (run_number == 116 && hit.label == 64) hit.stamp -= 70_ns;
+        else if (run_number > 101 && hit.label == 853) continue; // This detector is dead after this moment
         if (hit.label == 251) hit.nrj = float_cast(hit.adc);
       
         tempTree -> Fill();
