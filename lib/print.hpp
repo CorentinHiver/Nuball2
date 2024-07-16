@@ -9,7 +9,8 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#include <map>
+// #include <map>
+// #include <array>
 
 // Defining the different colors possible of the terminal
 // Usage :  cout<< <COLOR> <<....

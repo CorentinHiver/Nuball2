@@ -4,11 +4,10 @@
 /**
  * @brief Describes a Clover module
  * @details
- * Each Clover has its own label, between 0 and (nb_labels-1)
+ * Each Clover has its own index, between 0 and (nb_labels-1)
  * In Nuball2, they range from 0 to 23
  * 
  * This simple class manages the number of Ge crystals and BGO crystals that fired in the event,
- * 
  */
 
 static constexpr Time CloversTimeWindow = 50_ns;
@@ -17,19 +16,19 @@ class CloverModule
 {
 public:
   // CloverModule() {}
-  CloverModule() : m_label(gLabel) {++gLabel;}
-  CloverModule(Label const & label) : m_label(label)
+  CloverModule() : m_index(gIndex) {++gIndex;}
+  CloverModule(Index const & index) : m_index(index)
   {
   #ifdef VERBOSE_CLOVER
-    print("creating clover n°", int_cast(m_label));
+    print("creating clover n°", int_cast(m_index));
   #endif //VERBOSE_CLOVER
   }
 
   void reset();
   void clear() {this -> reset();}
   void clean() {this -> reset();}
-  auto const & label() const {return m_label;}
-  static void resetGlobalLabel() {gLabel = 0;}
+  auto const & index() const {return m_index;}
+  static void resetGlobalLabel() {gIndex = 0;}
 
   void addHit(float const & _nrj, Time const & _time, uchar const & sub_index)
   {
@@ -84,11 +83,11 @@ public:
 
   uchar ring() const
   {
-    return m_label%2;
+    return m_index%2;
   }
   uchar sub_ring() const
   {
-    if (m_label == 5) 
+    if (m_index == 5) 
     { // -pi/2 rotation
       switch (maxE_Ge_cristal)
       {
@@ -96,7 +95,7 @@ public:
         case 1: case 2: return 2*ring();
       }
     }
-    else if (m_label == 14 || m_label == 15) 
+    else if (m_index == 14 || m_index == 15) 
     { // +pi/2 rotation
       switch (maxE_Ge_cristal)
       {
@@ -104,7 +103,7 @@ public:
         case 0: case 3: return 2*ring();
       }
     }
-    else if (m_label == 17) 
+    else if (m_index == 17) 
     { // pi rotation
       switch (maxE_Ge_cristal)
       {
@@ -127,10 +126,10 @@ public:
     maxE_Ge (other.maxE_Ge),
     maxE_Ge_cristal (other.maxE_Ge_cristal),
     calo (other.calo),
-    m_label (other.m_label)
+    m_index (other.m_index)
   {
   #ifdef VERBOSE_CLOVER
-    print("copying clover n°", int_cast(m_label));
+    print("copying clover n°", int_cast(m_index));
   #endif //VERBOSE_CLOVER
   }
 
@@ -144,10 +143,10 @@ public:
     maxE_Ge (std::move(other.maxE_Ge)),
     maxE_Ge_cristal (std::move(other.maxE_Ge_cristal)),
     calo (std::move(other.calo)),
-    m_label (std::move(other.m_label))
+    m_index (std::move(other.m_index))
   {
   #ifdef VERBOSE_CLOVER
-    print("moving clover n°", int_cast(m_label));
+    print("moving clover n°", int_cast(m_index));
   #endif //VERBOSE_CLOVER
   }
 
@@ -182,11 +181,11 @@ public:
   friend class CloverModules;
 
 private:
-  uchar mutable m_label;
-  static thread_local uchar gLabel;
+  uchar mutable m_index;
+  static thread_local uchar gIndex;
 };
 
-uchar thread_local CloverModule::gLabel = 0;
+uchar thread_local CloverModule::gIndex = 0;
 
 void CloverModule::reset()
 {
@@ -206,7 +205,7 @@ void CloverModule::reset()
 std::ostream& operator<<(std::ostream& cout, CloverModule const & cloverModule)
 {
   cout << 
-    "Clover n°" << " " << int_cast(cloverModule.label()) << " : " << 
+    "Clover n°" << " " << int_cast(cloverModule.index()) << " : " << 
     "nb Ge " <<  int_cast(cloverModule.nb) << " " << 
     "nb BGO " <<  int_cast(cloverModule.nbBGO) << " ";
     if (cloverModule.nb>0)
@@ -230,16 +229,16 @@ cout << "calo : " << cloverModule.calo << "keV";
 class CloverModules
 {
 public:
-  CloverModules() noexcept : m_label(CloverModule::gLabel++) {}
+  CloverModules() noexcept : m_index(CloverModule::gIndex++) {}
   CloverModules(CloverModules const & other) :
     m_modules (other.m_modules),
-    m_label (other.m_label)
+    m_index (other.m_index)
     {}
 
   CloverModules& operator=(CloverModules const & other) //= delete; // Copy this class is forbidden so far
   {
     m_modules = other.m_modules;
-    m_label = other.m_label;
+    m_index = other.m_index;
     return *this;
   }
 
@@ -256,7 +255,7 @@ public:
     }
     if(createModule)
     {
-      CloverModule _module(m_label);
+      CloverModule _module(m_index);
       _module.addHit(_nrj, _time, sub_index);
       m_modules.emplace_back(std::move(_module));
     }
@@ -273,8 +272,8 @@ public:
   
 private:
   std::vector<CloverModule> m_modules;
-  uchar mutable m_label;
-  static thread_local uchar gLabel;
+  uchar mutable m_index;
+  static thread_local uchar gIndex;
 };
 
 std::ostream& operator<<(std::ostream& out, CloverModules const & clovers)

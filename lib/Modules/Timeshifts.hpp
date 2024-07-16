@@ -1,7 +1,7 @@
 #ifndef TIMESHIFTS_HPP
 #define TIMESHIFTS_HPP
 
-#include "../libCo.hpp"
+#include "../libRoot.hpp"
 
 #include "../Classes/Detectors.hpp"
 #include "../Classes/FasterReader.hpp"
@@ -13,7 +13,6 @@
 #include "../Classes/Timer.hpp"
 #include "../Classes/Performances.hpp"
 
-#include "../MTObjects/MTObject.hpp"
 #include "../MTObjects/MTList.hpp"
 #include "../MTObjects/MTTHist.hpp"
 
@@ -241,7 +240,7 @@ public:
   //   m_bins_per_ns_labels[label] = bin_size_ns;
   // }
 
-private:
+// private:
 
   void InitialisePreferencesArrays();
   bool m_pref_arrays_init = false;
@@ -705,20 +704,21 @@ void Timeshifts::treatFile(std::string const & filename)
 void Timeshifts::treatRootFile(std::string const & filename) 
 {
   std::unique_ptr<TFile> file (TFile::Open(filename.c_str(), "READ"));
-  std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball"));
-  Event event(tree.get(), "lte");
+  std::unique_ptr<TTree> tree (file->Get<TTree>("Nuball2"));
+  print("reading", filename);
+  Event event(tree.get());
   auto const nb_events = tree -> GetEntries();
   int event_i = 0;
   RF_Manager rf;
-  get_first_RF_of_file(tree.get(), event, rf);
-  while(event_i<nb_events)
+  if (m_use_rf) get_first_RF_of_file(tree.get(), event, rf);
+  for(;event_i<nb_events; ++event_i)
   {
     tree -> GetEntry(event_i);
     for (int hit = 0; hit<event.mult; hit++) 
     {
       if (m_corrected) event.times[event.labels[hit]] += m_timeshifts[event.labels[hit]];
     }
-    Fill(event, rf);
+    this -> Fill(event, rf);
   }
 }
 

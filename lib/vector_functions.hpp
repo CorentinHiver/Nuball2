@@ -10,7 +10,6 @@
 template<class T>
 using vector2D =  std::vector<std::vector<T>>;
 
-
 template<class T>
 T sum(std::vector<T> const & source)
 {
@@ -218,6 +217,17 @@ bool is_good(std::vector<T> const & vector)
   if (size == 0) return false;
   for (auto const & v : vector) if (std::isnan(v) || std::isinf(v)) return false;
   return true;
+}
+
+std::string strings(std::vector<std::string> const & vec, std::string const & sep = " ")
+{
+  std::ostringstream oss;
+  for (size_t i = 0; i < vec.size(); ++i) 
+  {
+    oss << vec[i];
+    if (i != vec.size() - 1) oss << sep;
+  }
+  return oss.str();
 }
 
 /// @brief Order the vector from lower to higher value

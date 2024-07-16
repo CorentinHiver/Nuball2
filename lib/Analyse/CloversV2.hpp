@@ -4,8 +4,8 @@
 #include "../Classes/Event.hpp"
 #include "CloverModule.hpp"
 
-using Label = unsigned short;
-// inline bool isGe(Label const & label) {return (label < 200 && (label+1)%6 > 1);}
+// using Index = unsigned short;
+// inline bool isGe(Index const & label) {return (label < 200 && (label+1)%6 > 1);}
 /**
  * @brief A class to simplify the analysis of the Clover data
  * @details Removes the handling of the crystal of maximal energy deposit.
@@ -25,15 +25,18 @@ public:
     calorimetryBGO = other.calorimetryBGO;
     analyzed = other.analyzed;
 
-    for(auto const & clover : Hits) m_clovers[clover].clear();
-    Hits = other.Hits;
-    for(auto const & clover : Hits) m_clovers[clover] = other.m_clovers[clover];
+    for(auto const & clover : Hits_id) m_clovers[clover].clear();
+    Hits_id = other.Hits_id;
+    for(auto const & clover : Hits_id) m_clovers[clover] = other.m_clovers[clover];
 
-    Ge = other.Ge;
-    BGO = other.BGO;
-    GeClean = other.GeClean;
-    BGOClean = other.BGOClean;
-    Rejected = other.Rejected;
+    Ge_id = other.Ge_id;
+    BGO_id = other.BGO_id;
+    GeClean_id = other.GeClean_id;
+    BGOClean_id = other.BGOClean_id;
+    Rejected_id = other.Rejected_id;
+    clean = other.clean;
+    rejected = other.rejected;
+    all = other.all;
     return *this;
   }
 
@@ -44,7 +47,7 @@ public:
   static constexpr inline bool  isR3(Label const & label)     noexcept {return (isClover(label) && label < 95);}
   static constexpr inline bool  isBGO(Label const & label)    noexcept {return (isClover(label) && subIndex(label)<2);}
   /// @brief label = 23 -> index = 0, label = 196 -> index = 23;
-  static constexpr inline Label index(Label const & label)    noexcept {return Label_cast((label-23)/6);}
+  static constexpr inline Index index(Label const & label)    noexcept {return Label_cast((label-23)/6);}
 
   void operator=(Event const & event)
   {
@@ -70,17 +73,18 @@ public:
       auto const & time = event.times[hit_i];
       auto const & clover_index = CloversV2::index(label); 
       auto const & sub_index = subIndex(label);
-      push_back_unique(Hits, clover_index);
+      push_back_unique(Hits_id, clover_index);
       m_clovers[clover_index].addHit(nrj, time, sub_index);
-      calorimetryTotal+=nrj;
       if (isGe(label))
       {
-        push_back_unique(Ge, clover_index);
-        calorimetryGe+=nrj;
+        push_back_unique(Ge_id, clover_index);
+        auto const & smeared_nrj = random->Gaus(nrj, nrj*((400_keV/sqrt(nrj))/100_keV)/2.35);
+        calorimetryTotal+=smeared_nrj;
+        calorimetryGe+=smeared_nrj;
       }
       else
       {
-        push_back_unique(BGO, clover_index);
+        push_back_unique(BGO_id, clover_index);
         calorimetryBGO+=nrj;
       }
       return true;
@@ -92,22 +96,28 @@ public:
   {
     if (analyzed) return;
     analyzed = true;
-    for (auto const & clover_index : Hits)
+    for (auto const & clover_index : Hits_id)
     {
       auto const & clover = m_clovers[clover_index];
       auto const & Ge_found = clover.nb>0;
       auto const & BGO_found = clover.nbBGO>0;
 
+      all.push_back(&clover);
+
       if(Ge_found)
       {
-        if (BGO_found) Rejected.push_back(clover_index);
+        if (BGO_found) 
+        {
+          Rejected_id.push_back(clover_index);
+          rejected.push_back(&clover);
+        }
         else           
         {
-          GeClean.push_back(clover_index);
-          clean.push_back(&m_clovers[clover_index]);
+          GeClean_id.push_back(clover_index);
+          clean.push_back(&clover);
         }
       }
-      else if (BGO_found) BGOClean.push_back(clover_index);
+      else if (BGO_found) BGOClean_id.push_back(clover_index);
       else throw_error("c pas normal ça");
     }
   }
@@ -118,14 +128,16 @@ public:
     calorimetryGe = 0.0;
     calorimetryBGO = 0.0;
     analyzed = false;
-    for(auto const & clover : Hits) m_clovers[clover].reset();
-    Hits.clear();
-    Ge.clear();
-    BGO.clear();
-    GeClean.clear();
-    BGOClean.clear();
-    Rejected.clear();
+    for(auto const & clover : Hits_id) m_clovers[clover].reset();
+    Hits_id.clear();
+    Ge_id.clear();
+    BGO_id.clear();
+    GeClean_id.clear();
+    BGOClean_id.clear();
+    Rejected_id.clear();
     clean.clear();
+    rejected.clear();
+    all.clear();
   }
 
   void clear(){reset();}
@@ -134,13 +146,22 @@ public:
   double calorimetryGe = 0.0;
   double calorimetryBGO = 0.0;
 
-  std::vector<Label> Hits;
-  std::vector<Label> Ge;
-  std::vector<Label> BGO;
-  std::vector<Label> GeClean;
-  std::vector<Label> BGOClean;
-  std::vector<Label> Rejected;
-  std::vector<CloverModule*> clean;
+  std::vector<Index> Hits_id;
+  std::vector<Index> Ge_id;
+  std::vector<Index> BGO_id;
+  std::vector<Index> GeClean_id;
+  std::vector<Index> BGOClean_id;
+  std::vector<Index> Rejected_id;
+
+  // Views :
+  std::vector<const CloverModule*> all;
+  std::vector<const CloverModule*> clean;
+  std::vector<const CloverModule*> rejected;
+
+  auto begin() {return all.begin();}
+  auto end() {return all.end();}
+  auto begin() const {return all.begin();}
+  auto end() const {return all.end();}
 
   static std::unordered_set<Label> blacklist;
   static std::unordered_map<Label, double> maxE_Ge;
@@ -149,12 +170,13 @@ private:
   std::array<CloverModule, 24> m_clovers;
   bool analyzed = false;
   constexpr static double threshold = 5; // 5 keV
+  TRandom* random = new TRandom(time(0));
 };
 
 std::ostream & operator << (std::ostream & os, CloversV2 const & clovers) noexcept
 {
-  os << clovers.Hits.size() << " clovers hit :" << std::endl;
-  for (auto const & clover_i : clovers.Hits)
+  os << clovers.Hits_id.size() << " clovers hit :" << std::endl;
+  for (auto const & clover_i : clovers.Hits_id)
   {
     os << clovers[clover_i] << std::endl;
   }

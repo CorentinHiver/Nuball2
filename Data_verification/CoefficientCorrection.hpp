@@ -6,25 +6,43 @@ class CoefficientCorrection
 {public:
   CoefficientCorrection(std::string const & filename)
   {
-    std::ifstream file(filename);
+    for (size_t i = 0; i<nb_runs; ++i) for (size_t j = 0; j<nb_det; ++j) for (size_t k = 0; k<nb_coeff; ++k) m_coeff[i][j][k] = -1.e-42f;
 
+    std::ifstream file(filename);
+    if (!file) {error("CoefficientCorrection : ", filename, "not found"); return;}
     print("Reading in the Gain Drifts ");
     int id, r;
-    double c0,c1,c2,v1,v2;
+    float c0,c1,c2,v1,v2;
     std::string line;
     while (file >> r >> id >> c0 >> c1 >> c2 >> v1 >> v2)
     {
-      coeff[r][id][0]=c0;
-      coeff[r][id][1]=c1;
-      coeff[r][id][2]=c2;
+      m_coeff[r][id][0]=c0;
+      m_coeff[r][id][1]=c1;
+      m_coeff[r][id][2]=c2;
     }
-  }
-  double correct(float const & nrj, int const run_number, Label const & label) const
-  {
-    return coeff[run_number][label][0]+(nrj*coeff[run_number][label][1])+(nrj*nrj*coeff[run_number][label][2]);
+    m_ok = true;
   }
 
-  double coeff[124][1000][3];
+  float correct(float const & nrj, int const run_number, Label const & label) const
+  {
+    return m_coeff[run_number][label][0]+(nrj*m_coeff[run_number][label][1])+(nrj*nrj*m_coeff[run_number][label][2]);
+  }
+
+  std::array<double, 3> coeff(int const run_number, Label const & label)
+  {
+    std::array<double, 3> ret;
+    return (ret = {m_coeff[run_number][label][0], m_coeff[run_number][label][1], m_coeff[run_number][label][2]});
+  }
+
+  static constexpr size_t nb_runs = 124;
+  static constexpr size_t nb_det = 1000;
+  static constexpr size_t nb_coeff = 3;
+  float m_coeff[nb_runs][nb_det][nb_coeff];
+
+  operator bool() const & {return m_ok;}
+
+private:
+  bool m_ok = false;
 };
 
 #endif //COEFFICIENTCORRECTION_HPP

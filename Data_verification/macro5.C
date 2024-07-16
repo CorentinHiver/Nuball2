@@ -50,7 +50,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
   
   std::mutex write_mutex;
 
-  constexpr Time bidimTimeWindow = 40_ns;
+  static constexpr Time bidimTimeWindow = 40_ns;
 
   size_t gate_bin_size = 2; // Take 2 keV
   std::vector<int> ddd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115, 1846, 2125}; // keV
@@ -545,18 +545,18 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           // Clovers:
           if (gate(-10_ns, time, 10_ns) )
           {
-            if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
             pclovers.fill(event, hit_i);
             if (CloversV2::isBGO(label)) prompt_clover_calo += nrj ;
             else if (CloversV2::isGe(label)) 
             {
               // Rejecting the 511 keV in the calorimetry;
+              if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
               if (gate( 506_keV, nrj, 516_keV)) prompt_clover_calo += smear(nrj, random);
             }
           }
           else if (gate(40_ns, time, 170_ns) )
           {
-            if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
+            if (kCalibGe && CloversV2::isGe(label)) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
             dclovers.fill(event, hit_i);
           }
 
@@ -873,10 +873,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
             for (size_t loop_j = 0; loop_j<coinc_clean.size(); ++loop_j)
             {
               auto const & clover_j = *(coinc_clean[loop_j]);
-              if (std::abs(clover_i.time-clover_j.time) > bidimTimeWindow) continue;
+              if (clover_i.label == clover_j.label || std::abs(clover_i.time-clover_j.time) > bidimTimeWindow) continue;
               for (size_t loop_k = loop_j+1; loop_k<coinc_clean.size(); ++loop_k)
               {
                 auto const & clover_k = *(coinc_clean[loop_k]);
+                if (clover_i.label == clover_k.label || std::abs(clover_i.time-clover_k.time) > bidimTimeWindow) continue;
                 ddd_gated[ddd_id_gate_lkp[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
                 ddd_gated[ddd_id_gate_lkp[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
               }
@@ -886,12 +887,12 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           // Gated prompt-prompt (=triple coincidence delayed prompt-prompt)
           if (make_triple_coinc_dpp && 0 < nrj_int && nrj_int < dpp_gate_bin_max && dpp_gate_lookup[nrj_int])
           {
-            for (size_t loop_j = 0; loop_j<pclovers.GeClean.size(); ++loop_j)
+            for (size_t loop_j = 0; loop_j<pclovers.clean.size(); ++loop_j)
             {
-              auto const & clover_j = pclovers[pclovers.GeClean[loop_j]];
-              for (size_t loop_k = loop_j+1; loop_k<pclovers.GeClean.size(); ++loop_k)
+              auto const & clover_j = pclovers.clean[loop_j];
+              for (size_t loop_k = loop_j+1; loop_k<pclovers.clean.size(); ++loop_k)
               {
-                auto const & clover_k = pclovers[pclovers.GeClean[loop_k]];
+                auto const & clover_k = *(pclovers.clean[loop_k]);
                 dpp_gated[dpp_id_gate_lkp[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
                 dpp_gated[dpp_id_gate_lkp[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
               }

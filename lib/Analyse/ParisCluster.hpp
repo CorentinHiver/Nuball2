@@ -9,7 +9,7 @@
 std::recursive_mutex initialization_mutex;
 
 constexpr static uchar paris_cluster_size = 36ul;
-double paris_distance_max = 2.5;
+double paris_distance_max = 1.5;
 
 class PhoswitchCalib
 {public:

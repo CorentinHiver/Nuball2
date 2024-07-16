@@ -410,7 +410,7 @@ void CobaltCalorimeter::work(Nuball2Tree & tree, Event & event)
       if (isBGO[label]) nrj*=1.11; // CALIBRATE BETTER !!!
 
       // Throw events with too low energy or too far away from the first hit :
-      if (nrj<5 || time>60000 || (isParis[label] && time>30000))
+      if (nrj<5 || time>60_ns || (isParis[label] && time>30_ns))
       {
         isRejected[hit_i] = true;
         --multiplicity;

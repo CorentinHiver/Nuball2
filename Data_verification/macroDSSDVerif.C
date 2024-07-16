@@ -125,7 +125,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
   // Multithreading add-on :
   MTObject::setThreadsNb(nb_threads);
   MTObject::adjustThreadsNumber(files.size());
-  MTObject::Initialise();  
+  MTObject::Initialise();
   std::mutex write_mutex;
 
   // Code to apply for each file :

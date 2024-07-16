@@ -58,6 +58,8 @@ public:
     rejected = false;
   }
 
+  bool isLaBr3() const noexcept {return Paris::pid_LaBr3(qshort, qlong);}
+
   auto const & label() const {return m_label;}
 
   static void resetLabels() {g_label = 0;}
@@ -90,7 +92,7 @@ public:
   void add(SimplePhoswitch const & phoswitch)
   {
     nrj += phoswitch.nrj;
-    // Keep the time of the higher energy phoswitch
+    // Keep the time of the higher energy phoswitch which was set first
   }
 
   void clear()
@@ -130,7 +132,6 @@ public:
   SimplePhoswitch* fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
   {
     auto const & label = event.labels[hit_i];
-    if (!Paris::is[label]) return nullptr;
     auto const & id = Paris::cluster_index[label];
 
     if (paris_cluster_size < id+1) {error("in SimpleCluster::fill : index", id, "> paris_cluster_size !!"); return nullptr;}
@@ -148,9 +149,9 @@ public:
 
   void clear()
   {
-    for(auto const id : phoswitches_id) phoswitches[id].clear();
+    for(auto const & id : phoswitches_id) phoswitches[id].clear();
     phoswitches_id.clear();
-    for(auto const id : modules_id) modules[id].clear();
+    for(auto const & id : modules_id) modules[id].clear();
     modules_id.clear();
     phoswitch_mult = 0;
     module_mult = 0;
@@ -163,10 +164,19 @@ public:
   {
     phoswitch_mult = phoswitches_id.size();
 
+    if (phoswitch_mult==0) return; 
+    else if (phoswitch_mult==1)
+    {// Addback algorithm not necessary if there is only one phoswitch in the cluster
+      auto const & id_i = phoswitches_id[0];
+      modules_id.push_back(id_i);
+      modules[id_i].set(phoswitches[id_i]);
+      return;
+    }
+
     // 1. Order the hits from the highest to lowest energy deposit :
-    std::vector<size_t> hits_ordered;
-    linspace(hits_ordered, phoswitch_mult);
-    std::sort(hits_ordered.begin(), hits_ordered.end(), [&] (int hit_i, int hit_j)
+    std::vector<size_t> hits_ordered(phoswitch_mult);
+    std::iota(hits_ordered.begin(), hits_ordered.end(), 0);
+    std::sort(hits_ordered.begin(), hits_ordered.end(), [&] (int const & hit_i, int const & hit_j)
     {
       auto const & id_i = phoswitches_id[hit_i];
       auto const & id_j = phoswitches_id[hit_j];
@@ -176,9 +186,9 @@ public:
 
 // 2. Perform the add-back
     std::vector<bool> phoswitches_added(phoswitch_mult, false); // List to keep track of the hits that have been used for add-back already
-    for (size_t ordered_it = 0; ordered_it<phoswitch_mult; ++ordered_it)
+    for (size_t ordered_loop_i = 0; ordered_loop_i<phoswitch_mult; ++ordered_loop_i)
     {
-      auto const & hit_i = hits_ordered[ordered_it]; // Starts with the highest energy deposit
+      auto const & hit_i = hits_ordered[ordered_loop_i]; // Starts with the highest energy deposit
       if (phoswitches_added[hit_i]) continue; // If this hit has already been used for add-back with a previous hit then discard it
 
       auto const & id_i = phoswitches_id[hit_i]; // The index of the detector in its cluster (see Paris and ParisCluster class)
@@ -186,21 +196,23 @@ public:
       modules[id_i].set(phoswitches[id_i]);
 
       // Test the other detectors in the event for a potential add-back :
-      for (size_t ordered_loop_j = ordered_it+1; ordered_loop_j<phoswitch_mult; ordered_loop_j++)
+      for (size_t ordered_loop_j = ordered_loop_i+1; ordered_loop_j<phoswitch_mult; ++ordered_loop_j)
       {
         auto const & hit_j = hits_ordered[ordered_loop_j];
         auto const & id_j = phoswitches_id[hit_j];
-
-        // Timing : if they are not simultaneous then they don't belong to the same gamma-ray
-        if (std::abs(phoswitches[id_j].time - phoswitches[id_i].time) > m_time_window) continue; 
 
         // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
         auto const & distance_ij = ParisCluster<paris_cluster_size>::distances[id_i][id_j];
         if (distance_ij > paris_distance_max) continue;
 
-        // They pass both conditions, so we add-back them :
+        // Timing : if they are not simultaneous then they don't belong to the same gamma-ray
+        if (std::abs(phoswitches[id_j].time - phoswitches[id_i].time) > m_time_window) continue; 
+
+        // They pass both conditions, so we add them back :
         modules[id_i].add(phoswitches[id_i]);
         phoswitches_added[hit_j] = true;
+
+        // If they are add-backed, it means we can Compton supress the individual phoswitches :
         phoswitches[id_j].rejected = true;
         phoswitches[id_i].rejected = true;
       }
@@ -251,6 +263,7 @@ public:
   void fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
   {
     auto const & label = event.labels[hit_i];
+    if (!Paris::is[label]) return;
     auto const & cluster = Paris::cluster[label];
          if (cluster == 0) phoswitches.push_back(back.fill(event, hit_i, calib));
     else if (cluster == 1) phoswitches.push_back(front.fill(event, hit_i, calib));
@@ -265,32 +278,39 @@ public:
     clear();
     for (int hit_i = 0; hit_i<event.mult; ++hit_i)
     {
-      if (Paris::is[event.labels[hit_i]]) this->fill(event, hit_i, calib);
+      this->fill(event, hit_i, calib);
     }
-    addback();
+    analyze();
   }
 
   void setEvent(Event const & event) {setEvent(event, *m_calib);}
 
   void operator=(Event const & event) {setEvent(event, *m_calib);}
 
-  void addback()
+  void timeOrder()
   {
-    back.addback();
-    front.addback();
-  }
-
-  void analyze()
-  {
-    this->addback();
-    std::sort(modules.begin(), modules.end(), [](SimpleParisModule const * p1, SimpleParisModule const * p2)
-    {
-      return p1->time < p2->time;
-    });
     std::sort(phoswitches.begin(), phoswitches.end(), [](SimplePhoswitch const * p1, SimplePhoswitch const * p2)
     {
       return p1->time < p2->time;
     });
+
+    std::sort(modules.begin(), modules.end(), [](SimpleParisModule const * p1, SimpleParisModule const * p2)
+    {
+      return p1->time < p2->time;
+    });
+  }
+
+  void analyze(bool const & time_order = false)
+  {
+    if (phoswitches.size() == 0) return;
+    
+    back.addback();
+    front.addback();
+
+    for (auto & module_id : back.modules_id) modules.push_back(&(back.modules[module_id]));
+    for (auto & module_id : front.modules_id) modules.push_back(&(front.modules[module_id]));
+
+    if (time_order) timeOrder();
   }
 
   void clear()

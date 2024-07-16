@@ -28,6 +28,7 @@
 #include <array>
 #include <fstream>
 #include <functional>
+#include <map>
 #include <memory>
 #include <mutex>
 #include <numeric>
@@ -40,6 +41,7 @@
 #include <typeinfo>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 // ********** C includes ************ //
 #include <cmath>
@@ -82,6 +84,13 @@ std::ostream& operator<<(std::ostream& cout, std::unordered_map<K,V> const & m)
 }
 
 template<class E, size_t size> 
+std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
+{
+  for (size_t i = 0; i<size; i++) print(a[i]);
+  return cout;
+}
+
+template<class E, int size> 
 std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
 {
   for (size_t i = 0; i<size; i++) print(a[i]);

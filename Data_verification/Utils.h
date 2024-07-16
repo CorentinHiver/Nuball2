@@ -38,5 +38,4 @@ std::unordered_map<Label, double> CloversV2::maxE_Ge =
   {163, 11000 }, {164, 11600 }, {165, 11600 }, {166, 11600 }, 
 };
 
-
 #endif //UTILS_H

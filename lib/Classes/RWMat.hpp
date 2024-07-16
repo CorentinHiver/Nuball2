@@ -59,13 +59,14 @@ class RWMat
   void Read(std::string Filename="", bool IsInteger=true); //Read matrix from file
   double Get(unsigned short i, unsigned short j) {return fRWMat[i][j];}
   auto const & GetName () const noexcept {return fName;}
+  void GetName (std::string name) noexcept {fName = name;}
   void Set(unsigned short i, unsigned short j, int val) {fRWMat[i][j]=val;}
   void Set(unsigned short i, unsigned short j, double val) {fRWMat[i][j]=val;}
   void Fill(unsigned short i, unsigned short j); //increment channel by 1 count
   TH2F* RootHisto()
   {
     TH2F* ret = new TH2F(fName.c_str(), fName.c_str(), 4096,0,4096, 4096,0,4096);
-    for (int i = 0; i<4096; ++i)for (int j = 0; j<4096; ++j)
+    for (int i = 0; i<4096; ++i) for (int j = 0; j<4096; ++j)
     {
       ret->SetBinContent(i, j, this->Get(i, j));
     }
@@ -125,17 +126,17 @@ RWMat::RWMat(MTTHist<T> & MTRootMat)
 
 RWMat::RWMat(TH2F* RootMat) //constructor from root object
 {
-   Reset(RootMat);
+  Reset(RootMat);
 }
 
 RWMat::RWMat(TH2I* RootMat) //constructor from root object
 {
-   Reset(RootMat);
+  Reset(RootMat);
 }
 
 RWMat::RWMat(TH2D* RootMat) //constructor from root object
 {
-   Reset(RootMat);
+  Reset(RootMat);
 }
 
 template<class THist>

@@ -2,6 +2,7 @@
 #define LIBROOT_HPP
 
 #include "libCo.hpp"
+
 // ********** ROOT includes ********* //
 #include <TAxis.h>
 #include <TCanvas.h>
@@ -11,6 +12,7 @@
 #include <TF1.h>
 #include <TF2.h>
 #include <TFile.h>
+#include <TFileMerger.h>
 #include <TFitResultPtr.h>
 #include <TFitResult.h>
 #include <TGraph.h>
@@ -26,6 +28,7 @@
 #include <TLegend.h>
 #include <TMarker.h>
 #include <TMath.h>
+#include <TObjString.h>
 #include <TPolyMarker.h>
 #include <TRandom.h>
 #include <TROOT.h>
@@ -2195,25 +2198,13 @@ class Radware
       std::getline(std::cin, instruction);
       if (instruction == "") continue;
       else if (instruction == "ex") this->ex();
-      // else if (instruction == "root")
-      // {
-      //   print("ROOT interactive mode");
-      //   std::thread thread([&finish, &instruction](){ std::getline(std::cin, instruction);  finish = true;});
-      //   print("Press enter to stop");
-      //   thread.join(); 
-      //   print("Double click on the histogram to finish");
-      //   thread2.join();
-      // }
-      // else
-      // {
-        else if (instruction == "st") {finish = true; break;}
-        else if (instruction == "pr") this->draw(m_proj);
-        else if (instruction == "bd") this->draw(m_bidim, "colz");
-        else if (instruction == "in") this->integral();
-        else if (instruction == "bi") this->set_nb_it_bckg();
-        else if (isNumber(instruction)) this->gate(std::stod(instruction));
-        else error("Wrong input...");
-      // }
+      else if (instruction == "st") {finish = true; break;}
+      else if (instruction == "pr") this->draw(m_proj);
+      else if (instruction == "bd") this->draw(m_bidim, "colz");
+      else if (instruction == "in") this->integral();
+      else if (instruction == "bi") this->set_nb_it_bckg();
+      else if (isNumber(instruction)) this->gate(std::stod(instruction));
+      else error("Wrong input...");
     }
     root_thread.join();
   }
@@ -2224,7 +2215,6 @@ class Radware
     m_focus = histo;
     m_focus->Draw(options.c_str());
     gPad->Update();
-
   }
 
   void setHist(TH2F* _bidim) 
@@ -2259,6 +2249,7 @@ class Radware
     m_gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_bin, high_e)->Clone((std::to_string(bin)+" g").c_str()));
     m_gate->SetTitle((std::to_string(bin)+" gate").c_str());
     this->draw(m_gate);
+    print(peak_integral(m_focus, low_bin, high_e, m_nb_it_bckg));
   }
 
   void integral()
@@ -2320,7 +2311,7 @@ void simulatePeak(TH1* histo, double const & x_center, double const & x_resoluti
  * @details
  * The broad spectra is on the x axis, the 
  */
-TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_iteration_bckg = 25, bool GeOnY = true)
+TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_iteration_bckg = 25 )
 {
   TH2F* ret = (TH2F*)histo->Clone(new_name.c_str());
   for (int i = 0; i<1; ++i)
@@ -2342,7 +2333,7 @@ TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_i
       auto const & Px = double_cast(ProjX->GetBinContent(x));
       auto const & px = 0.9*Px;
       auto const & bx = 0.1*Px;
-      auto const & Py = double_cast(ProjY->GetBinContent(y));
+      // auto const & Py = double_cast(ProjY->GetBinContent(y));
       auto const & py = double_cast(projY->GetBinContent(y));
       auto const & by = double_cast(bckgY->GetBinContent(y));
       auto const & new_value = old_value - int_cast(1*(px*by + py*bx + bx*by)/integral);
@@ -2352,6 +2343,90 @@ TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_i
   return ret;
 }
 
+/**
+ * @brief Merges files with a maximum output size
+ * 
+ * @param target the target name with extension (e.g. output)
+ */
+void hadd(std::string source, std::string target, double size_file_Mo, std::string options = "", int nb_threads = 1)
+{
+  if (found(options, "-j")) 
+  {
+    error("in libRoot hadd, please use the parameter nb_threads instead of -j option of hadd");
+    return;
+  }
+
+  // Get the list of files that matches the source wildcard
+  TString pattern = source.c_str();
+  TString command = "ls " + pattern;
+  TString result = gSystem->GetFromPipe(command.Data());
+  TObjArray* files = result.Tokenize("\n");
+  auto const & nb_files = files->GetEntries();
+  print(nb_files);
+  if (!files) {error("No file matching", source); return;}
+
+  // Get the size of each file and the total amount of files
+  double total_size = 0;
+  std::vector<double> size_files;
+  std::vector<std::string> name_files;
+  for (int i = 0; i < nb_files; ++i) 
+  {
+    TObjString* str = (TObjString*)files->At(i);
+    auto const & name = str->GetString().Data();
+    auto const & size = size_file(name,"Mo");
+    if (size > size_file_Mo) {error("Input size > output size case not handled:", size, ">", size_file_Mo, "for", name); return;}
+    name_files.push_back(name);
+    size_files.push_back(size);
+    total_size+=size;
+  }
+
+  // Estimate the number of output files. If lower than the number of threads, adjust the latter
+  auto const & estimated_nb_files_out = int_cast(total_size/size_file_Mo)+1;
+  if (nb_threads > estimated_nb_files_out) 
+  {
+    nb_threads = estimated_nb_files_out;
+    print("threads number reduced to", nb_threads);
+  }
+
+  if (nb_threads == 1) print("Running without multithreading ...");
+  else print("threads number", nb_threads);
+  
+  // Run hadd :
+  std::mutex mutex;
+  int infile_i = 0; 
+  int outfile_i = 0; 
+  bool end = false;
+
+  std::vector<std::thread> threads;
+  for (int thread_i = 0; thread_i<nb_threads; ++thread_i) threads.emplace_back([&](){
+
+    mutex.lock();
+    while(!end)
+    {
+      // Take the needed number of files :
+      std::vector<std::string> files;
+      double thread_size = 0;
+      for (; infile_i<nb_files; ++infile_i)
+      {
+        if (thread_size+size_files[infile_i]>size_file_Mo) break;
+        files.push_back(name_files[infile_i]);
+        thread_size+=size_files[infile_i];
+      }
+      if (nb_files == infile_i) end = true;
+      ++outfile_i;
+
+    mutex.unlock();
+
+      // Configure output file
+      std::string output_name = target+"_"+std::to_string(outfile_i)+".root";
+      std::string command = "hadd " + options + " " + output_name + " " + strings(files);
+      // print(command);
+      system(command.c_str());
+    }
+    mutex.unlock();
+  });
+  for (auto & thread : threads) thread.join();
+}
 
 void libRoot()
 {
