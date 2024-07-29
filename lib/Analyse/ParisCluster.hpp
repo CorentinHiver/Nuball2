@@ -9,8 +9,9 @@
 std::recursive_mutex initialization_mutex;
 
 constexpr static uchar paris_cluster_size = 36ul;
-double paris_distance_max = 1.5;
-
+constexpr static double LaBr3_timewindow = 2_ns;
+constexpr static double paris_timewindow = 5_ns;
+static double paris_distance_max = 1.5;
 class PhoswitchCalib
 {public:
   PhoswitchCalib() noexcept = default;
@@ -134,20 +135,13 @@ public:
     nb_LaBr3 = 0;
     nb_NaI   = 0;
     nb_mix   = 0;
-    // LaBr3_calorimetry = 0.f;
-    // NaI_calorimetry = 0.f;
-    // total_calorimetry = 0.f;
   }
 
   // Time time = 0ll;
-  // float nrj = 0.f;
   char state = -1;
   int nb_LaBr3 = 0;
   int nb_NaI   = 0;
   int nb_mix   = 0;
-  // float LaBr3_calorimetry = 0.f;
-  // float NaI_calorimetry = 0.f;
-  // float total_calorimetry = 0.f;
 
 private:
   size_t static thread_local g_label;
@@ -259,16 +253,17 @@ private:
   void add_back(std::vector<Label> const & phoswitches_hits, std::array<ParisModule, n> & _modules, std::vector<Label> & modules_hits, Time const & _timewindow);
   uchar const m_label;
   static thread_local uchar gLabel;
+  static bool gParisClusterInitialised;
 };
 
 template<size_t n>
-Time ParisCluster<n>::LaBr3_timewindow = 5_ns;
+Time ParisCluster<n>::LaBr3_timewindow = LaBr3_timewindow;
 
 template<size_t n>
-Time ParisCluster<n>::timewindow = 10_ns;
+Time ParisCluster<n>::timewindow = paris_timewindow;
 
 template<size_t n>
-double ParisCluster<n>::distance_max = 2.;
+double ParisCluster<n>::distance_max = paris_distance_max;
 
 template<size_t n>
 std::array<PositionXY, n> ParisCluster<n>::positions;
@@ -280,23 +275,28 @@ template<size_t n>
 thread_local uchar ParisCluster<n>::gLabel = 0;
 
 template<size_t n>
+bool ParisCluster<n>::gParisClusterInitialised = false;
+
+template<size_t n>
 void ParisCluster<n>::Initialise()
 {
-  // InitialiseBidims();
+  InitialiseBidims();
 }
 
 template<size_t n>
 void ParisCluster<n>::InitialiseBidims()
 {
-  // Filling the positions of the detectors :  
-  auto const & i_min_R2 = ParisArrays::Paris_R1_x.size();
-  auto const & i_min_R3 = ParisArrays::Paris_R1_x.size()+ParisArrays::Paris_R2_x.size();
 #ifdef MULTITHREADING 
   std::lock_guard<std::recursive_mutex> lock(initialization_mutex);
+  if (gParisClusterInitialised) return;
   printC("Initializing ParisCluster<",n,"> position and distance lookup tables in thread ", MTObject::getThreadIndex());
 #else
   printC("Initializing ParisCluster<",n,"> position and distance lookup tables");
 #endif //MULTITHREADING
+
+  // Filling the positions of the detectors :  
+  auto const & i_min_R2 = ParisArrays::Paris_R1_x.size();
+  auto const & i_min_R3 = ParisArrays::Paris_R1_x.size()+ParisArrays::Paris_R2_x.size();
   for (size_t i = 0; i<positions.size()+1; i++)
   {
          if (i<i_min_R2) positions[i] = PositionXY(ParisArrays::Paris_R1_x[i         ], ParisArrays::Paris_R1_y[i         ]); // Ring 1
@@ -315,6 +315,8 @@ void ParisCluster<n>::InitialiseBidims()
     }
   }
   // printArrays();
+  // pauseCo();
+  gParisClusterInitialised = true;
 }
 
 template<size_t n>
@@ -399,7 +401,7 @@ void ParisCluster<n>::add_back(std::vector<Label> const & phoswitches_hits, std:
       if (std::abs(phoswitch_j.time-phoswitch_i.time) > _timewindow) continue; 
 
       // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
-      if (distance_ij<distance_max) continue;
+      if (distance_ij>distance_max) continue;
 
       // If the two hits meets the criteria they are add-backed :
       _modules[index_i].add(phoswitch_j);

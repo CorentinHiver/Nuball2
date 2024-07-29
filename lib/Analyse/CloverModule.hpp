@@ -69,12 +69,12 @@ public:
 
   // In the following, if nothing is specified then it refers to the Germanium
 
-  uchar nb = 0;       // Number of Ge  crystals in the clover
+  uchar nb = 0;       // Number of Ge crystals in the clover
   uchar nbBGO = 0;    // Number of BGO crystals in the clover
   float nrj = 0.;     // Add-backed energy of Ge  Clovers
-  float nrjBGO = 0.; // Add-backed energy of BGO Clovers
+  float nrjBGO = 0.;  // Add-backed energy of BGO Clovers
   Time time = 0.;     // Time of the crystal with most energy deposit of the clover, ps
-  Time timeBGO = 0.; // Time of the latest BGO, ps
+  Time timeBGO = 0.;  // Time of the latest BGO, ps
 
   float maxE_Ge = 0.0;
   uchar maxE_Ge_cristal = 0u; // Index of the Ge crystal with the most energy deposit in the clover. [0;4]

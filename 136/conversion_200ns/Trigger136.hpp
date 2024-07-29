@@ -6,24 +6,24 @@
 class Trigger136
 {
 public:
+  Trigger136(Event* event) : m_event(event) {}
+
   size_t nb_dssd = 0;
   size_t nb_Ge = 0;
   size_t nb_BGO = 0;
   size_t nb_clovers = 0;
   size_t nb_modules = 0;
   size_t nb_clovers_clean = 0;
-  size_t nb_clovers_clean_prompt = 0;
-  size_t nb_clovers_clean_delayed = 0;
-  size_t nb_clovers_prompt = 0;
-  size_t nb_clovers_delayed = 0;
-  size_t nb_modules_prompt = 0;
-  size_t nb_modules_delayed = 0;
+  size_t nb_pclovers_clean = 0;
+  size_t nb_dclovers_clean = 0;
+  size_t nb_pclovers = 0;
+  size_t nb_dclovers = 0;
+  size_t nb_pmodules = 0;
+  size_t nb_dmodules = 0;
 
   CloversV2 clovers;
 
   static char choice;
-
-  Trigger136(Event* event) : m_event(event) {}
 
   void reset() noexcept  
   {
@@ -34,12 +34,12 @@ public:
     nb_clovers = 0;
     nb_modules = 0;
     nb_clovers_clean = 0;
-    nb_clovers_clean_prompt = 0;
-    nb_clovers_clean_delayed = 0;
-    nb_clovers_prompt = 0;
-    nb_clovers_delayed = 0;
-    nb_modules_prompt = 0;
-    nb_modules_delayed = 0;
+    nb_pclovers_clean = 0;
+    nb_dclovers_clean = 0;
+    nb_pclovers = 0;
+    nb_dclovers = 0;
+    nb_pmodules = 0;
+    nb_dmodules = 0;
     clovers.reset();
   }
   
@@ -53,8 +53,8 @@ public:
       if (isDSSD[label]) ++nb_dssd;
       else if (isLaBr3[label] || isParis[label]) 
       {
-        if (isPrompt(time)) ++nb_modules_prompt;
-        else if (isDelayed(time)) ++nb_modules_delayed;
+        if (isPrompt(time)) ++nb_pmodules;
+        else if (isDelayed(time)) ++nb_dmodules;
       }
       else if (CloversV2::isClover(label))
       {
@@ -70,19 +70,19 @@ public:
     this->count(); // Need to fill the clovers before analyzing them
     if (analyzed) throw_error("in Trigger136::analyze() : already analyzed !!"); // Don't analyze twice
     clovers.analyze();
-    for (auto const & index_i : clovers.Hits) 
+    for (auto const & id_i : clovers.Hits_id) 
     {
-      if      (isPrompt(clovers[index_i].time )) ++nb_clovers_prompt;
-      else if (isDelayed(clovers[index_i].time)) ++nb_clovers_delayed;
+      if      (isPrompt(clovers[id_i].time )) ++nb_pclovers;
+      else if (isDelayed(clovers[id_i].time)) ++nb_dclovers;
     }
-    for (auto const & index_i : clovers.GeClean)
+    for (auto const & id_i : clovers.GeClean_id)
     {
-      if      (isPrompt(clovers[index_i].time )) ++nb_clovers_clean_prompt;
-      else if (isDelayed(clovers[index_i].time)) ++nb_clovers_clean_delayed;
+      if      (isPrompt(clovers[id_i].time )) ++nb_pclovers_clean;
+      else if (isDelayed(clovers[id_i].time)) ++nb_dclovers_clean;
     }
-    nb_clovers = nb_modules_prompt + nb_modules_delayed;
-    nb_modules = nb_clovers + nb_modules_prompt + nb_modules_delayed;
-    nb_clovers_clean = nb_clovers_clean_prompt+nb_clovers_clean_delayed;
+    nb_clovers = nb_pclovers + nb_dclovers;
+    nb_modules = nb_clovers + nb_pmodules + nb_dmodules;
+    nb_clovers_clean = nb_pclovers_clean+nb_dclovers_clean;
     analyzed = true;
   }
 
@@ -111,9 +111,9 @@ public:
         case 7:  return nb_clovers_clean > 1; // C2
         case 8:  return nb_clovers_clean > 1 && nb_dssd > 0; // PC2
         case 9:  return nb_clovers_clean > 0 && nb_dssd > 0; // PC1
-        case 10: return nb_modules_prompt > 0 && nb_clovers_clean_delayed > 0;// pM1dC1
-        case 11: return nb_clovers_clean_delayed > 0;// dC1
-        case 12: return nb_clovers_clean_delayed > 1;// dC2
+        case 10: return nb_pmodules > 0 && nb_dclovers_clean > 0;// pM1dC1
+        case 11: return nb_dclovers_clean > 0;// dC1
+        case 12: return nb_dclovers_clean > 1;// dC2
         default: return true;
       }
     }

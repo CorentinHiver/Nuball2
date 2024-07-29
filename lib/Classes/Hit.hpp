@@ -216,6 +216,7 @@ public:
   Hit(Hit const & hit) :
     label  (hit.label),
     stamp  (hit.stamp),
+    time   (hit.time),
     adc    (hit.adc),
     nrj    (hit.nrj),
   #ifndef QDC1MAX
@@ -233,6 +234,7 @@ public:
   {
     label  = hit.label;
     stamp  = hit.stamp;
+    time   = hit.time;
     adc    = hit.adc;
     nrj    = hit.nrj;
   #ifndef QDC1MAX
@@ -251,6 +253,7 @@ public:
   {
     label  = 0;
     stamp  = 0ull;
+    time   = 0ll;
     adc    = 0;
     nrj    = 0.f;
   #ifndef QDC1MAX
@@ -266,6 +269,7 @@ public:
 
   Label     label  = 0;     // Label
   Timestamp stamp  = 0ull;  // Timestamp ('ull' stands for unsigned long long)
+  Time      time   = 0ll;   // Relative time
   ADC       adc    = 0;     // Energy in ADC or QDC1
   NRJ       nrj    = 0.f;   // Calibrated energy in keV
   #ifndef QDC1MAX
@@ -311,6 +315,7 @@ void Hit::reading(TTree * tree)
   
     if(branchNameStr == "label" ) {read.l  = true; tree -> SetBranchAddress("label" , & label );}
     if(branchNameStr == "stamp" ) {read.t  = true; tree -> SetBranchAddress("stamp" , & stamp );}
+    if(branchNameStr == "time" )  {read.T  = true; tree -> SetBranchAddress("time"  , & time  );}
     if(branchNameStr == "adc"   ) {read.e  = true; tree -> SetBranchAddress("adc"   , & adc   );}
     if(branchNameStr == "nrj"   ) {read.E  = true; tree -> SetBranchAddress("nrj"   , & nrj   );}
     if(branchNameStr == "qdc2"  ) {read.q  = true; tree -> SetBranchAddress("qdc2"  , & qdc2  );}
@@ -337,6 +342,7 @@ void Hit::reading(TTree * tree, std::string const & options)
   
   if (read.l ) tree -> SetBranchAddress("label"  , & label  );
   if (read.t ) tree -> SetBranchAddress("stamp"  , & stamp  );
+  if (read.T ) tree -> SetBranchAddress("time"   , & time  );
   if (read.e ) tree -> SetBranchAddress("adc"    , & adc    );
   if (read.E ) tree -> SetBranchAddress("nrj"    , & nrj    );
   if (read.q ) tree -> SetBranchAddress("qdc2"   , & qdc2   );
@@ -360,6 +366,7 @@ void Hit::writing(TTree * tree, std::string const & options)
 
   if (write.l ) tree -> Branch("label"  , & label  );
   if (write.t ) tree -> Branch("stamp"  , & stamp  );
+  if (write.T ) tree -> Branch("time"   , & time   );
   if (write.e ) tree -> Branch("adc"    , & adc    );
   if (write.E ) tree -> Branch("nrj"    , & nrj    );
   if (write.q ) tree -> Branch("qdc2"   , & qdc2   );
@@ -373,6 +380,7 @@ std::ostream& operator<<(std::ostream& cout, Hit const & hit)
 {
   cout << "l : " << hit.label;
   if (hit.stamp != 0) cout << " timestamp : " << hit.stamp;
+  if (hit.time  != 0) cout << " rel time : "  << hit.time;
   if (hit.adc   != 0) cout << " adc : "       << hit.adc ;
   if (hit.qdc2  != 0) cout << " qdc2 : "      << hit.qdc2;
   if (hit.qdc3  != 0) cout << " qdc3 : "      << hit.qdc3;

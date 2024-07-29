@@ -15,6 +15,18 @@ namespace randomCo
 
   void setSeed(int const & _seed) {generator.seed(_seed);}
 
+  inline auto uniform_int() noexcept
+  {
+    std::uniform_int_distribution distribution(0, 1);
+    return distribution(generator);
+  }
+
+  inline auto uniform_int(int const & min, int const & max) noexcept
+  {
+    std::uniform_int_distribution distribution(min, max);
+    return distribution(generator);
+  }
+
   template<class T>
   inline auto uniform_t() noexcept
   {
@@ -28,6 +40,14 @@ namespace randomCo
     std::uniform_real_distribution<T> distribution(min, max);
     return distribution(generator);
   }
+  
+  template<class T>
+  inline double gaussian_t(T mean, T stddev) noexcept
+  {
+    std::normal_distribution<T> distribution(mean, stddev);
+    return distribution(generator);
+  }
+
 
   inline double uniform() noexcept
   {
@@ -47,42 +67,6 @@ namespace randomCo
     return distribution(generator);
   }
 
-  /// @brief Same as uniform_t, but always generates the same sequence of random numbers (faster, less random)
-  template<class T>
-  inline double uniform_t_fast() noexcept
-  {
-    thread_local static std::uniform_real_distribution<T> distribution(0, 1);
-    return distribution(generator);
-  }
-
-    /// @brief Same as uniform_t, but always generates the same sequence of random numbers (faster, less random)
-  template<class T>
-  inline double uniform_t_fast(T const & min, T const & max) noexcept
-  {
-    thread_local static std::uniform_real_distribution<T> distribution(min, max);
-    return distribution(generator);
-  }
-
-  /// @brief Same as uniform, but always generates the same sequence of random numbers (faster, less random)
-  inline double uniform_fast() noexcept
-  {
-    thread_local static std::uniform_real_distribution<double> distribution(0, 1);
-    return distribution(generator);
-  }
-
-  /// @brief Same as uniform, but always generates the same sequence of random numbers (faster, less random)
-  inline double uniform_fast(const double & min, const double & max) noexcept
-  {
-    thread_local static std::uniform_real_distribution<double> distribution(min, max);
-    return distribution(generator);
-  }
-
-  /// @brief Same as gaussian, but always generates the same sequence of random numbers (faster, less random)
-  inline double gaussian_fast(double mean, double stddev) noexcept
-  {
-    thread_local static std::normal_distribution<double> distribution(mean, stddev);
-    return distribution(generator);
-  }
 }
 
 #endif //RANDOM_HPP

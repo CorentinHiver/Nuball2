@@ -459,7 +459,7 @@ public:
 // -- unordered_set -- //
 
 template<class T>
-bool found (std::unordered_set<T> set, T const & e)
+constexpr bool found (std::unordered_set<T> set, T const & e)
 {
   return set.find(e) != set.end();
 }
@@ -490,14 +490,14 @@ namespace CoBazar
 ///////////////////////////////////
 
 template<typename K, typename V> 
-inline bool find_key(std::unordered_map<K,V> const & map, K const & key)
+constexpr inline bool find_key(std::unordered_map<K,V> const & map, K const & key)
 {
   typename std::unordered_map<K, V>::const_iterator it = map.find(key);
   return it != map.end();
 }
 
 template<typename K, typename V> 
-inline bool find_value(std::unordered_map<K,V> const & map, V const & value)
+constexpr inline bool find_value(std::unordered_map<K,V> const & map, V const & value)
 {
   return (std::find_if(map.begin(), map.end(), [&](const auto& pair) {
         return pair.second == value;
@@ -711,12 +711,22 @@ std::string nicer_double(T const & t, int const & nb_decimals = 6)
 // COMPILE-TIME LOOK UP TABLE (LUT) //
 //////////////////////////////////////
 
+/**
+ * @brief Lookup table that can be generated at compile time.
+ * @details 
+ * Instanciation :
+ * constexpr auto myLut = LUT<10> ([](int i) { return i*i; }); 
+ * 
+ */
 template<std::size_t size, class Generator>
 constexpr auto LUT(Generator&& g)
 {
-  using type = decltype(g(std::size_t{0}));
+  // Deduce the return type of the lookup table :
+  using type = std::decay_t<decltype(g(std::size_t{0}))>;
+  // Instanciate the lookup table :
   std::array<type, size> lut{};
-  for (std::size_t i = 0; i<size; ++i) lut[i] = g(i);
+  // Fill the lookup table using the generator :
+  for (std::size_t i = 0; i<size; ++i) lut[i] = std::forward<Generator>(g)(i);
   return lut;
 }
 
@@ -742,6 +752,13 @@ constexpr T find_index(const std::array<T, N>& array, const T& value)
 {
   for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return i;
   return -1;  // Value not found
+} 
+
+template <typename T, std::size_t N>
+constexpr T found(const std::array<T, N>& array, const T& value) 
+{
+  for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return true;
+  return false;  // Value not found
 } 
 
 // #if (__cplusplus >= 201703L)

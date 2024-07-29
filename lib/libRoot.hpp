@@ -412,14 +412,72 @@ TH1F* count_to_peak_over_total(TH1* histo, int resolution, int smooth_background
   return ret;
 }
 
+/**
+ * @brief 
+ * 
+ * @param resolution Each peak is at bin += resolution/2
+ * @return TH1* (cast it to the actual)
+ */
+TH1F* count_to_peak_integral(TH1F* histo, int const & resolution, int const & smooth_background_it = 20)
+{
+  std::string name = histo->GetName(); name += "_significance";
+  std::string title = histo->GetName(); title+=";keV;significance";
+  auto background = histo->ShowBackground(smooth_background_it);
+  auto ret = new TH1F(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
+  for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
+    ret -> SetBinContent(bin, peak_integral(histo, bin-resolution, bin+resolution, background));
+  delete background;
+  return ret;
+}
+
+/**
+ * @brief 
+ * 
+ * @param resolution Each peak is at bin += resolution/2
+ * @return TH1* (cast it to the actual)
+ */
+TH1D* count_to_peak_integral(TH1D* histo, int const & resolution, int const & smooth_background_it = 20)
+{
+  std::string name = histo->GetName(); name += "_significance";
+  std::string title = histo->GetName(); title+=";keV;significance";
+  auto background = histo->ShowBackground(smooth_background_it);
+  auto ret = new TH1D(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
+  for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
+    ret -> SetBinContent(bin, peak_integral(histo, bin-resolution, bin+resolution, background));
+  delete background;
+  return ret;
+}
+
+/**
+ * @brief 
+ * 
+ * @param resolution Each peak is at bin += resolution/2
+ * @return TH2* 
+ */
+TH2F* count_to_peak_integral(TH2F* histo, int const & resolution, int const & smooth_background_it = 20)
+{
+  std::string name = histo->GetName(); name += "_significance";
+  std::string title = histo->GetName(); title+=";keV;"+TString(histo->GetYaxis()->GetTitle())+";significance";
+  auto ret = new TH2F(name.c_str(), title.c_str(), 
+                      histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax(), 
+                      histo->GetNbinsY(), histo->GetYaxis()->GetXmin(), histo->GetYaxis()->GetXmax());
+  for (int y = 1; y<=histo->GetNbinsY(); ++y) 
+  {
+    std::unique_ptr<TH1D> proj (histo->ProjectionX("temp", y, y));
+    std::unique_ptr<TH1D> modified_proj (count_to_peak_integral(proj.get(), resolution, smooth_background_it));
+    for (int x = 0; x<=histo->GetNbinsX(); ++x) ret->SetBinContent(x, y, modified_proj->GetBinContent(x));
+  }
+  return ret;
+}
+
 TH1F* AND(TH1* histo1, TH1* histo2, int smooth_background_it = 20)
 {
   int bins = histo1->GetNbinsX();
   double min = histo1->GetXaxis()->GetXmin();
   double max = histo1->GetXaxis()->GetXmax();
   if (bins != histo2->GetNbinsX()) bins = (histo1->GetNbinsX() < histo2->GetNbinsX()) ? histo1->GetNbinsX() : histo1->GetNbinsX();
-  if (min  != histo2->GetXaxis()->GetXmin()) {print("in AND(TH1F *histo1, TH1F *histo2) : axis inconsistent..."); return nullptr;}
-  if (max  != histo2->GetXaxis()->GetXmax()) {print("in AND(TH1F *histo1, TH1F *histo2) : axis inconsistent..."); return nullptr;}
+  if (min  != histo2->GetXaxis()->GetXmin()) {error("in AND(TH1F *histo1, TH1F *histo2) : axis inconsistent..."); return nullptr;}
+  if (max  != histo2->GetXaxis()->GetXmax()) {error("in AND(TH1F *histo1, TH1F *histo2) : axis inconsistent..."); return nullptr;}
   std::string name = histo1->GetName() + std::string("_AND_") + histo1->GetName();
   std::string title = histo1->GetTitle() + std::string("_AND_") + histo1->GetTitle();
   auto background1 = histo1->ShowBackground(smooth_background_it);
@@ -654,6 +712,7 @@ private:
   std::vector<TTree*> m_trees;
   std::vector<TFile*> m_files;
 };
+
 void TheTChain::set()
 {
   // for (auto const & expression : m_input_files_expressions)
@@ -706,6 +765,30 @@ std::ostream& operator<<(std::ostream& cout, THBinning binning)
 {
   cout << binning.bins << " " << binning.min << " " << binning.max << " ";
   return cout;
+}
+
+std::vector<double> log_bins(size_t nb_bins, int min, double power)
+{
+  if (min <= 0) throw std::invalid_argument("min and max must be positive.");
+  std::vector<double> ret(nb_bins + 1);
+  double factor = min; // Start with the initial minimum value
+  
+  for (size_t i = 0; i <= nb_bins; ++i) {
+      ret[i] = factor * std::pow(power, i);
+  }
+  return ret;
+}
+
+std::vector<double> log2_bins(size_t nb_bins, int min) {return log_bins(nb_bins, min, 2);}
+std::vector<double> log10_bins(size_t nb_bins, int min) {return log_bins(nb_bins, min, 10);}
+
+std::vector<double> linear_bins(size_t nb_bins, double min, double max)
+{
+  if (min >= max) throw std::invalid_argument("min must be less than max.");
+  std::vector<double> ret(nb_bins+1);
+  double binWidth = (max-min)/nb_bins;
+  for (size_t i = 0; i <= nb_bins; ++i) ret[i] = double(min + i * binWidth);
+  return ret;
 }
 
 
@@ -2203,6 +2286,8 @@ class Radware
       else if (instruction == "bd") this->draw(m_bidim, "colz");
       else if (instruction == "in") this->integral();
       else if (instruction == "bi") this->set_nb_it_bckg();
+      else if (instruction == "ag") this->addGate();
+      else if (instruction == "rb") this->removeBackground();
       else if (isNumber(instruction)) this->gate(std::stod(instruction));
       else error("Wrong input...");
     }
@@ -2231,6 +2316,21 @@ class Radware
     m_focus = m_gate;
   }
 
+  void addGate()
+  {
+    if (!m_gate) {error("No gate so far..."); return;}
+    std::cout << "gate to add :";
+    std::string instruction;
+    std::getline(std::cin, instruction);
+    if (!isNumber(instruction)) {error("error input : must be a number"); return;}
+    int bin = std::stoi(instruction);
+    for (int y = 0; y<m_bidim->GetNbinsY(); ++y) for (int x = bin-2; x<=bin+2; ++x)
+    {
+      m_gate->AddBinContent(y, m_bidim->GetBinContent(x, y));
+    }
+    this->draw(m_gate);
+  }
+
   void ex()
   {
     auto const & low = selectXPoints(m_focus, "Low edge");
@@ -2244,12 +2344,12 @@ class Radware
   {
     delete m_gate;
     auto const & bin = m_bidim->GetXaxis()->FindBin(e);
-    auto const & low_bin = e-2;
+    auto const & low_e = e-2;
     auto const & high_e = e+2;
-    m_gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_bin, high_e)->Clone((std::to_string(bin)+" g").c_str()));
+    m_gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_e, high_e)->Clone((std::to_string(bin)+" g").c_str()));
     m_gate->SetTitle((std::to_string(bin)+" gate").c_str());
     this->draw(m_gate);
-    print(peak_integral(m_focus, low_bin, high_e, m_nb_it_bckg));
+    print(peak_integral(m_focus, low_e, high_e, m_nb_it_bckg));
   }
 
   void integral()
@@ -2262,11 +2362,17 @@ class Radware
     print(peak_integral(m_focus, start, stop, m_nb_it_bckg));
   }
 
+  void removeBackground()
+  {
+    CoAnalyse::removeBackground(m_focus);
+    this->draw(m_focus);
+  }
+
   ~Radware()
   {
-    delete m_bidim;
-    delete m_proj;
-    delete m_gate;
+    // delete m_bidim;
+    // delete m_proj;
+    // delete m_gate;
     // delete m_focus;
   }
 
@@ -2311,12 +2417,11 @@ void simulatePeak(TH1* histo, double const & x_center, double const & x_resoluti
  * @details
  * The broad spectra is on the x axis, the 
  */
-TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_iteration_bckg = 25 )
+TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_iteration_bckg = 20 )
 {
   TH2F* ret = (TH2F*)histo->Clone(new_name.c_str());
   for (int i = 0; i<1; ++i)
   {
-    print(i);
     std::unique_ptr<TH1D> ProjX(ret->ProjectionX("ProjX"));
     std::unique_ptr<TH1D> ProjY(ret->ProjectionY("ProjY"));
     if (new_name == "") new_name = ret->GetName() + std::string("_tryRemoveBackground");
@@ -2337,8 +2442,34 @@ TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_i
       auto const & py = double_cast(projY->GetBinContent(y));
       auto const & by = double_cast(bckgY->GetBinContent(y));
       auto const & new_value = old_value - int_cast(1*(px*by + py*bx + bx*by)/integral);
-      ret->SetBinContent(x,y,new_value);
+      ret->SetBinContent(x, y, new_value);
     }
+  }
+  return ret;
+}
+
+TH2F* symetrise(TH2F* histo)
+{
+  TH2F* ret = new TH2F (TString(histo->GetName())+"_inv", histo->GetTitle(), 
+                        histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax(), 
+                        histo->GetNbinsY(), histo->GetYaxis()->GetXmin(), histo->GetYaxis()->GetXmax());
+
+  for (int x = 1; x <= histo->GetNbinsX(); ++x) for (int y = 1; y <= histo->GetNbinsY(); ++y)
+  {
+    ret->SetBinContent(x, y, histo->GetBinContent(y, x) + histo->GetBinContent(y, x));
+  }
+  return ret;
+}
+
+TH2F* invert(TH2F* histo)
+{
+  TH2F* ret = new TH2F (TString(histo->GetName())+"_inv", TString(histo->GetTitle())+";"+TString(histo->GetYaxis()->GetTitle())+";"+TString(histo->GetXaxis()->GetTitle()), 
+                        histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax(), 
+                        histo->GetNbinsY(), histo->GetYaxis()->GetXmin(), histo->GetYaxis()->GetXmax());
+
+  for (int x = 1; x <= histo->GetNbinsX(); ++x) for (int y = 1; y <= histo->GetNbinsY(); ++y)
+  {
+    ret->SetBinContent(x, y, histo->GetBinContent(y, x));
   }
   return ret;
 }

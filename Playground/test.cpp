@@ -1,5 +1,5 @@
 // #include <MTObject.hpp>
-// #include <libRoot.hpp>
+#include <libRoot.hpp>
 // #include <Paris.hpp>
 // #include <Minimisator.hpp>
 // #include <CloversV2.hpp>
@@ -17,7 +17,7 @@
 // #include <Convertor.hpp>
 // #include <MTRootReader.hpp>
 // #include <MTFasterReader.hpp>
-#include <RWMat.hpp>
+// #include <RWMat.hpp>
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
 // #include <ExcitationEnergy.hpp>
@@ -40,6 +40,22 @@
 
 int main()
 { 
+
+  ////////////////////////////
+  // CALCULATE TIME DECAY 2 //
+  ////////////////////////////
+
+  auto file = TFile::Open("../Data_verification/data/endruns.root");
+  auto histo = file->Get<TH2F>("g_time_log");
+  auto test = count_to_peak_integral(histo, 2);
+  histo->SetDirectory(nullptr);
+  test->SetDirectory(nullptr);
+  file->Close();
+  auto outfile = TFile::Open("test.root", "recreate");
+  outfile->cd();
+  histo->Write();
+  test->Write();
+  outfile->Close();
 
   //////////////////////////
   // CALCULATE TIME DECAY //

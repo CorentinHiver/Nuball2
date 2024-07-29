@@ -28,8 +28,6 @@ namespace Paris
     else return -1;
   });
 
-  
-
   static constexpr bool pid_LaBr3(double const & qshort, double const & qlong)
   {
     auto const & ratio = qshort/qlong;
@@ -92,6 +90,7 @@ public:
   void add(SimplePhoswitch const & phoswitch)
   {
     nrj += phoswitch.nrj;
+    ++m_nb;
     // Keep the time of the higher energy phoswitch which was set first
   }
 
@@ -99,6 +98,7 @@ public:
   {
     nrj = 0.;
     time = 0.;
+    m_nb = 0.;
   }
 
   auto angle_to_beam() const
@@ -108,10 +108,13 @@ public:
 
   static void resetLabels() {g_label = 0;}
   auto const & label() const {return m_label;}
+  bool addbacked() const {return m_nb>0;}
+  auto const nb() const {return m_nb>0;}
 
 private:
   size_t static thread_local g_label;
   size_t const m_label;
+  int m_nb = 0;
 };
 size_t thread_local SimpleParisModule::g_label = 0;
 std::ostream& operator<<(std::ostream& out, SimpleParisModule const & module)
@@ -127,6 +130,7 @@ public:
   {
     SimplePhoswitch::resetLabels();
     SimpleParisModule::resetLabels();
+    ParisCluster<paris_cluster_size>::InitialiseBidims();
   };
 
   SimplePhoswitch* fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
@@ -185,13 +189,12 @@ public:
 
 
 // 2. Perform the add-back
-    std::vector<bool> phoswitches_added(phoswitch_mult, false); // List to keep track of the hits that have been used for add-back already
     for (size_t ordered_loop_i = 0; ordered_loop_i<phoswitch_mult; ++ordered_loop_i)
     {
       auto const & hit_i = hits_ordered[ordered_loop_i]; // Starts with the highest energy deposit
-      if (phoswitches_added[hit_i]) continue; // If this hit has already been used for add-back with a previous hit then discard it
 
-      auto const & id_i = phoswitches_id[hit_i]; // The index of the detector in its cluster (see Paris and ParisCluster class)
+      auto const & id_i = phoswitches_id[hit_i]; // The index of the detector in its cluster (see ParisCluster class)
+      if (phoswitches[hit_i].rejected) continue; // If this hit has already been used for add-back with a previous hit then discard it
       modules_id.push_back(id_i);
       modules[id_i].set(phoswitches[id_i]);
 
@@ -199,7 +202,7 @@ public:
       for (size_t ordered_loop_j = ordered_loop_i+1; ordered_loop_j<phoswitch_mult; ++ordered_loop_j)
       {
         auto const & hit_j = hits_ordered[ordered_loop_j];
-        auto const & id_j = phoswitches_id[hit_j];
+        auto & id_j = phoswitches_id[hit_j];
 
         // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
         auto const & distance_ij = ParisCluster<paris_cluster_size>::distances[id_i][id_j];
@@ -209,17 +212,17 @@ public:
         if (std::abs(phoswitches[id_j].time - phoswitches[id_i].time) > m_time_window) continue; 
 
         // They pass both conditions, so we add them back :
-        modules[id_i].add(phoswitches[id_i]);
-        phoswitches_added[hit_j] = true;
+        modules[id_i].add(phoswitches[id_j]);
 
         // If they are add-backed, it means we can Compton supress the individual phoswitches :
         phoswitches[id_j].rejected = true;
         phoswitches[id_i].rejected = true;
+
+        m_addback_used = true;
       }
     }
     module_mult = modules_id.size();
     m_addback = true;
-    if (module_mult < phoswitch_mult) m_addback_used = true;
   }
 
   std::array<SimplePhoswitch, paris_cluster_size> phoswitches;
@@ -232,7 +235,7 @@ public:
   size_t module_mult = 0;
 
   float calorimetry = 0;
-  void setDistanceMax(double const & _distance_max) {paris_distance_max = _distance_max;}
+  static void setDistanceMax(double const & _distance_max) {paris_distance_max = _distance_max;}
   void setTimeWindow(double const & _time_window) {m_time_window = _time_window;}
   auto const & isAddBack() const {return m_addback;}
   auto const & isAddBackUsed() const {return m_addback_used;}
@@ -240,7 +243,7 @@ public:
 private:
   bool m_addback = false;
   bool m_addback_used = false;
-  Time m_time_window = 10_ns;
+  Time m_time_window = 4_ns;
 };
 std::ostream& operator<<(std::ostream& out, SimpleCluster const & cluster)
 {
@@ -269,6 +272,7 @@ public:
     else if (cluster == 1) phoswitches.push_back(front.fill(event, hit_i, calib));
     else error("SimpleParis::fill : no cluster (",cluster,") found for label", label);
     if (phoswitches.size() > 0 && phoswitches.back() == nullptr) phoswitches.pop_back();
+    if (!phoswitches.back()->rejected) clean_phoswitches.push_back(phoswitches.back());
   }
 
   void fill(Event const & event, int const & hit_i) {fill(event, hit_i, *m_calib);}
@@ -290,6 +294,11 @@ public:
   void timeOrder()
   {
     std::sort(phoswitches.begin(), phoswitches.end(), [](SimplePhoswitch const * p1, SimplePhoswitch const * p2)
+    {
+      return p1->time < p2->time;
+    });
+
+    std::sort(clean_phoswitches.begin(), clean_phoswitches.end(), [](SimplePhoswitch const * p1, SimplePhoswitch const * p2)
     {
       return p1->time < p2->time;
     });
@@ -319,6 +328,7 @@ public:
     front.clear();
     modules.clear();
     phoswitches.clear();
+    clean_phoswitches.clear();
   }
   
   int phoswitch_mult() const { return back.phoswitches_id.size() + front.phoswitches_id.size();}
@@ -328,6 +338,7 @@ public:
   SimpleCluster front;
   std::vector<SimpleParisModule*> modules;
   std::vector<SimplePhoswitch*> phoswitches;
+  std::vector<SimplePhoswitch*> clean_phoswitches;
 
 private:
   PhoswitchCalib* m_calib;

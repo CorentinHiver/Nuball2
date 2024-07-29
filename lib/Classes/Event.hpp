@@ -201,6 +201,7 @@ Hit Event::operator[](int const & hit_i)
 {// Problem about the time here ...
   Hit hit;
   hit.stamp = stamp + times[hit_i];
+  hit.time  = times [hit_i];
   hit.label = labels[hit_i];
   hit.adc   = adcs  [hit_i];
   hit.qdc2  = qdc2s [hit_i];
