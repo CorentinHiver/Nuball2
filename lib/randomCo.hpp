@@ -17,13 +17,13 @@ namespace randomCo
 
   inline auto uniform_int() noexcept
   {
-    std::uniform_int_distribution distribution(0, 1);
+    std::uniform_int_distribution<int> distribution(0, 1);
     return distribution(generator);
   }
 
   inline auto uniform_int(int const & min, int const & max) noexcept
   {
-    std::uniform_int_distribution distribution(min, max);
+    std::uniform_int_distribution<int> distribution(min, max);
     return distribution(generator);
   }
 
