@@ -11,11 +11,13 @@ class CoefficientCorrection
     std::ifstream file(filename);
     if (!file) {error("CoefficientCorrection : ", filename, "not found"); return;}
     print("Reading in the Gain Drifts ");
-    int id, r;
+    size_t id, r;
     float c0,c1,c2,v1,v2;
     std::string line;
     while (file >> r >> id >> c0 >> c1 >> c2 >> v1 >> v2)
     {
+      if (r>nb_runs-1) throw_error(concatenate ("run number", r, "out of bounds", 0, nb_runs-1));
+      if (id>nb_det-1) throw_error(concatenate ("detector number", r, "out of bounds", 0, nb_det-1));
       m_coeff[r][id][0]=c0;
       m_coeff[r][id][1]=c1;
       m_coeff[r][id][2]=c2;
@@ -37,7 +39,7 @@ class CoefficientCorrection
   static constexpr size_t nb_runs = 124;
   static constexpr size_t nb_det = 1000;
   static constexpr size_t nb_coeff = 3;
-  float m_coeff[nb_runs][nb_det][nb_coeff];
+  std::array<std::array<std::array<float, nb_coeff>, nb_det>, nb_runs> m_coeff;
 
   operator bool() const & {return m_ok;}
 

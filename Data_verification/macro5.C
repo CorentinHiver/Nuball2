@@ -1293,7 +1293,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         dd_bckg->Write("dd_bckg", TObject::kOverwrite);
         dd_prompt_veto->Write("dd_prompt_veto", TObject::kOverwrite);
         auto dd_clean = static_cast<TH2F*> (dd->Clone("dd_clean"));
-        dd_clean->Add(dd_prompt_veto, -1);
+        dd_clean->Add(dd_prompt_veto.get(), -1);
         dd_clean->Write();
         d->Write("d", TObject::kOverwrite);
         E_dT->Write("E_dT", TObject::kOverwrite);

@@ -29,21 +29,18 @@ public:
   bool build(Hit const & _hit);
 
   void reset() {m_event -> clear(); m_status = 0;}
-  bool coincidence(Hit const & hit) {
-  //   print(hit.label, hit.stamp, m_first_hit.label, m_first_hit.stamp, Time_cast(hit.stamp - m_first_hit.stamp));  
-  // std::cin.get();
-    return (Time_cast(hit.stamp - m_first_hit.stamp) < m_time_window);}
+  bool coincidence(Hit const & hit) {return (Time_cast(hit.stamp - m_first_hit.stamp) < m_time_window);}
 
   // Setters :
   void setTimeWindow(Time const & timewindow) {m_time_window = timewindow;}
   void setTimeWindow_ns(Time_ns const & timewindow_ns) {m_time_window = timewindow_ns*1000;}
 
-  // Printers :
-  void printEvent();
+  // Getters :
+  auto getEvent() const {return Builder::m_event;}
 
 private:
   // Attributes :
-  Time m_time_window = 500000ll; // 500 000 ps by default (ll = long long)
+  Time m_time_window = 500_ns; // 500 000 ps by default (ll = long long)
 };
 
 bool CoincBuilder::build(Hit const & hit)
@@ -52,46 +49,53 @@ bool CoincBuilder::build(Hit const & hit)
   switch (m_status)
   {
     case 0 : case 2 :// If no coincidence has been detected in previous iteration :
-    m_event -> clear();
-    *m_event = m_first_hit;
-    if (coincidence(hit))
-    {// Case 1 :
-      // The previous and current hit are in the same event.
-      // In next call, we'll check if the next hits also belong to this event (situations 1' or 2)
-      m_event -> push_back(hit);
-      m_status = 1; // Now, the event is being filled
-    }
-    else
-    {// Case 0 :
-      // The last and current hits aren't in the same event.
-      // The last hit is therefore a single hit, alone in the time window
-      m_first_hit = hit; // Building next event based on the last hit
-      m_status = 0; // No event detected
-      if (m_keep_singles) return true;
-    }
+      m_event -> clear();
+      *m_event = m_first_hit;
+      if (this -> coincidence(hit))
+      {// Case 1 :
+        // The previous and current hit are in the same event.
+        // In next call, we'll check if the next hits also belong to this event (situations 1' or 2)
+        m_event -> push_back(hit);
+        m_first_hit.clear();
+        m_status = 1; // Now, the event is being filled
+        return false;
+      }
+      else
+      {// Case 0 :
+        // The last and current hits aren't in the same event.
+        // The last hit is therefore a single hit, alone in the time window
+        m_first_hit = hit; // Building next event based on the last hit
+        m_status = 0; // No event detected
+        if (Builder::m_keep_singles) return true;
+      }
     break;
 
     case 1 :
-  // ... there ! Coincidence already detected, check if current hit is out of currently building event
-    if (coincidence(hit))
-    {// Case 1' :
-      // Hit in coincidence with the previous hits
-      m_event -> push_back(hit);
-    }
-    else
-    {// Case 2 : 
-      // Hit out of coincidence. Next call, go back to first condition.
-      m_first_hit = hit; // Build next event based on the current hit, that is not in the event.
-      m_status = 2; // The current event is full
-      return true; // Now the event is complete and can be treated
-    }
+    // ... there ! Coincidence already detected, check if current hit is out of currently building event
+      if (this -> coincidence(hit))
+      {// Case 1' :
+        // Hit in coincidence with the previous hits
+        m_event -> push_back(hit);
+        return false;
+      }
+      else
+      {// Case 2 : 
+        // Hit out of coincidence. Next call, go back to first condition.
+        m_first_hit = hit; // Build next event based on the current hit, that is not in the event.
+        m_status = 2; // The current event is full
+        return true; // Now the event is complete and can be treated
+      }
+    break;
+
+    default: throw_error("event builder issues...");
   }
   return false;
 }
 
-void CoincBuilder::printEvent()
+std::ostream& operator<< (std::ostream& out, CoincBuilder const & builder)
 {
-  m_event -> Print();
+  out << *(builder.getEvent());
+  return out;
 }
 
 #endif //COINC_BUILDER2_H

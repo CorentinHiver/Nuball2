@@ -165,7 +165,7 @@ bool CloversV2::fill(Event const & event, int const & hit_i)
   if (isClover(label))
   {
     auto const & nrj = event.nrjs[hit_i];
-    if ((geHasOverflow[label] && nrj>overflow_Ge.at(label))) return false;
+    // if ((geHasOverflow[label] && nrj>overflow_Ge.at(label))) return false;
 
     auto const & time = event.times[hit_i];
     auto const & clover_index = CloversV2::index(label); 

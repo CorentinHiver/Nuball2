@@ -21,9 +21,13 @@ public:
   static char inline test_gate_tan(float const & _nrj, float const & _nrj2);
   static char inline simple_pid(float const & _nrj, float const & _nrj2);
 
+  auto isLaBr3() const {return cristal == 0;}
+  auto isNaI() const {return cristal == 1;}
+  auto isMixed() const {return cristal == 2;}
+
   Time time  = 0ll;
   float nrj   = 0.f;
-  char cristal = -1; // -1 : rejected, 0 : LaBr3, 1 : NaI, 2 : internal add-back
+  char cristal = -1; // -1 : rejected, 0 : LaBr3, 1 : NaI, 2 : mixed event
 
 private:
   uchar m_label = -1;

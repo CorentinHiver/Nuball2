@@ -23,7 +23,15 @@ public:
   ~Nuball2Tree() {if (m_file_opened) this->Close();}
 
   bool Open(std::string const & filename);
-  void Close() {if (m_file_opened) {m_file -> Close(); m_file_opened = false;} else {print(m_filename, "not open");}}
+  void Close() 
+  {
+    if (m_file_opened) 
+    {
+      m_file -> Close(); 
+      m_file_opened = false;
+    }
+    else print(m_filename, "not open or already closed");
+  }
 
   void loadRAM();
   auto const & filename() {return m_filename;}
@@ -50,7 +58,7 @@ public:
   {
     if (0 < m_entries && 0 < maxHits && maxHits < m_entries) 
     {
-      print("reading", nicer_double(maxHits,0), "events in", m_filename, "out of", nicer_double(m_entries,0));
+      print("reading", nicer_double(maxHits,0), "events in", rmPathAndExt(m_filename), "out of", nicer_double(m_entries,0));
       m_entries = maxHits;
     }
   }

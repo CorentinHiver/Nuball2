@@ -192,9 +192,10 @@ public:
     for (size_t ordered_loop_i = 0; ordered_loop_i<phoswitch_mult; ++ordered_loop_i)
     {
       auto const & hit_i = hits_ordered[ordered_loop_i]; // Starts with the highest energy deposit
-
       auto const & id_i = phoswitches_id[hit_i]; // The index of the detector in its cluster (see ParisCluster class)
+
       if (phoswitches[hit_i].rejected) continue; // If this hit has already been used for add-back with a previous hit then discard it
+      
       modules_id.push_back(id_i);
       modules[id_i].set(phoswitches[id_i]);
 
@@ -203,12 +204,12 @@ public:
       {
         auto const & hit_j = hits_ordered[ordered_loop_j];
         auto & id_j = phoswitches_id[hit_j];
-
+        
         // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
         auto const & distance_ij = ParisCluster<paris_cluster_size>::distances[id_i][id_j];
         if (distance_ij > paris_distance_max) continue;
 
-        // Timing : if they are not simultaneous then they don't belong to the same gamma-ray
+        // Timing : if the hits are not simultaneous then they don't belong to the same gamma-ray
         if (std::abs(phoswitches[id_j].time - phoswitches[id_i].time) > m_time_window) continue; 
 
         // They pass both conditions, so we add them back :

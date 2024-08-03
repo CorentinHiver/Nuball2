@@ -296,7 +296,7 @@ void Faster2Root::convert(std::string const & dataFolder, std::string const & ou
   if (!dataPath) {print(dataFolder, "NOT FOUND"); throw std::runtime_error("DATA");}
   Path outPath(outputFolder, 1);
   MTFasterReader readerMT(dataPath, (nb_files>0) ? nb_files : m_nb_files);
-  readerMT.readRaw(dispatch_threads, *this, outputFolder);
+  readerMT.readRaw(dispatch_threads, *this, outputFolder); 
 }
 
 /**

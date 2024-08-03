@@ -907,7 +907,6 @@ output_mutex.unlock();
     run_infos.trigger_efficiency += trigger_efficiency/run_infos.nb_files;
     run_infos.Mo_per_sec += Mo_per_sec/run_infos.nb_files;
   }
-
 }
 
 // 5. Main

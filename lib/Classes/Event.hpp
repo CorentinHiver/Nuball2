@@ -173,20 +173,20 @@ public:
 #endif //UNSAFE
   }
       
-  // auto const & label  const (int const & hit_i) {return labels [hit_i];}
-  auto       & label        (int const & hit_i) {return labels [hit_i];}
-  // auto const & time   const (int const & hit_i) {return times  [hit_i];}
-  auto       & time         (int const & hit_i) {return times  [hit_i];}
-  // auto const & adc    const (int const & hit_i) {return adcs   [hit_i];}
-  auto       & adc          (int const & hit_i) {return adcs   [hit_i];}
-  // auto const & nrj    const (int const & hit_i) {return nrjs   [hit_i];}
-  auto       & nrj          (int const & hit_i) {return nrjs   [hit_i];}
-  // auto const & qdc2   const (int const & hit_i) {return qdc2s  [hit_i];}
-  auto       & qdc2         (int const & hit_i) {return qdc2s  [hit_i];}
-  // auto const & nrj2   const (int const & hit_i) {return nrj2s  [hit_i];}
-  auto       & nrj2         (int const & hit_i) {return nrj2s  [hit_i];}
-  // auto const & pileup const (int const & hit_i) {return pileups[hit_i];}
-  auto       & pileup       (int const & hit_i) {return pileups[hit_i];}
+  auto const & label  (int const & hit_i) const {return labels [hit_i];}
+  auto       & label  (int const & hit_i)       {return labels [hit_i];}
+  auto const & time   (int const & hit_i) const {return times  [hit_i];}
+  auto       & time   (int const & hit_i)       {return times  [hit_i];}
+  auto const & adc    (int const & hit_i) const {return adcs   [hit_i];}
+  auto       & adc    (int const & hit_i)       {return adcs   [hit_i];}
+  auto const & nrj    (int const & hit_i) const {return nrjs   [hit_i];}
+  auto       & nrj    (int const & hit_i)       {return nrjs   [hit_i];}
+  auto const & qdc2   (int const & hit_i) const {return qdc2s  [hit_i];}
+  auto       & qdc2   (int const & hit_i)       {return qdc2s  [hit_i];}
+  auto const & nrj2   (int const & hit_i) const {return nrj2s  [hit_i];}
+  auto       & nrj2   (int const & hit_i)       {return nrj2s  [hit_i];}
+  auto const & pileup (int const & hit_i) const {return pileups[hit_i];}
+  auto       & pileup (int const & hit_i)       {return pileups[hit_i];}
 
   Hit operator[](int const & hit_i);
 

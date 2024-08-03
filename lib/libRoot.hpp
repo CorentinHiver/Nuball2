@@ -1710,24 +1710,31 @@ std::vector<std::string> list_of(TFile * file)
  * TFile* file(TFile::Open("file.root","read"));
  * auto map = map_of<TH1F>(file);
  */
+
 template<class T>
-std::map<std::string, T*> map_of(TFile * file)
+std::map<std::string, T*> map_of(TFile* file)
 {
   std::map<std::string, T*> ret;
-  T* temp_obj = new T;
-  if (!file || file->IsZombie()) {print("in get_names_of<T>(TFile * file) : file is nullptr"); return ret;}
-  auto list = file->GetListOfKeys();
-  for (auto&& keyAsObj : *list)
+  if (!file || file->IsZombie())
   {
-    TKey* key (static_cast<TKey*>(keyAsObj));
-    if(strcmp(key->GetClassName(), temp_obj->ClassName()) == 0)
+    error("in map_of<T>(TFile * file) : file is nullptr or zombie");
+    return ret;
+  }
+
+  TIter next(file->GetListOfKeys());
+  TKey* key;
+  while ((key = static_cast<TKey*>(next())))
+  {
+    if (TClass::GetClass(key->GetClassName())->InheritsFrom(T::Class()))
     {
-      TObject* obj = key->ReadObj();
-      T* t = dynamic_cast<T*>(obj);
-      if (t) ret.emplace(t->GetName(), t);
+      T* obj = dynamic_cast<T*>(key->ReadObj());
+      if (obj)
+      {
+        ret.emplace(obj->GetName(), obj);
+      }
     }
   }
-  delete temp_obj;
+
   return ret;
 }
 
@@ -2504,7 +2511,7 @@ void hadd(std::string source, std::string target, double size_file_Mo, std::stri
   {
     TObjString* str = (TObjString*)files->At(i);
     auto const & name = str->GetString().Data();
-    auto const & size = size_file(name,"Mo");
+    auto const & size = size_file(name, "Mo");
     if (size > size_file_Mo) {error("Input size > output size case not handled:", size, ">", size_file_Mo, "for", name); return;}
     name_files.push_back(name);
     size_files.push_back(size);
