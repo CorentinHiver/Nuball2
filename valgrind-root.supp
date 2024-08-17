@@ -1627,7 +1627,7 @@
    fun:_ZN5cling5utils8platform13IsMemoryValidEPKv
 }
 
-#### Some errors I found on WSL2 (corentin)
+#### Some errors I found on WSL2 (Corentin Hiver)
 
 {
    Error when opening a TFile on WSL2

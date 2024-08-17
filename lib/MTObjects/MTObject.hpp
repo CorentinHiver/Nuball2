@@ -193,16 +193,16 @@ public:
     if (m_Initialised) return;
     m_Initialised = true;
 
-    signal(SIGINT, signalHandler);
+    // signal(SIGINT, signalHandler);
 
     // Initialising :
     master_thread_id = std::this_thread::get_id();
     if (nb_threads>1)
     {
       // Initialise the root thread management
-      #ifdef DEBUG
+    #ifdef DEBUG
       std::cout << "Initialise ROOT thread management..." << std::endl;
-      #endif //DEBUG
+    #endif //DEBUG
       // TThread::Initialise();
       ROOT::EnableThreadSafety();
       MTObject::ON = true;

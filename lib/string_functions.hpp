@@ -32,7 +32,7 @@ std::string removeLastPart  (std::string const & string, char const & sep) { ret
  * with removeVoids this function returns {"", "1", "2", "3", "", "5"}
  * 
 */
-void fillList(std::vector<std::string> & list, std::string string, char const & separator, bool const & removeVoids = false)
+void fillList(std::vector<std::string> & list, std::string string, std::string const & separator, bool const & removeVoids = false)
 {
   size_t pos = 0;
   while((pos = string.find(separator) ) != -1ul)
@@ -58,16 +58,21 @@ void fillList(std::vector<std::string> & list, std::string string, char const & 
   if (string.size() > 0) list.push_back(string);
 }
 
-std::vector<std::string> getList(std::string string, char const & separator, bool const & removeVoids = false)
+std::vector<std::string> getList(std::string string, std::string const & separator, bool const & removeVoids = false)
 {
   std::vector<std::string> ret;
   fillList(ret, string, separator, removeVoids);
   return ret;
 }
 
-std::vector<std::string> split(std::string string, char const & separator, bool const & removeVoids = false)
+std::vector<std::string> split(std::string string, std::string const & separator, bool const & removeVoids = false)
 {
   return getList(string, separator, removeVoids);
+}
+
+std::vector<std::string> split(std::string string, char const & separator, bool const & removeVoids = false)
+{
+  return getList(string, std::string(1, separator), removeVoids);
 }
 
 /// @brief Remove all the blank space in a string
@@ -93,7 +98,7 @@ std::string removeBlankSpace(std::string str)
 */
 std::string replaceCharacter(std::string const & inString, char const & inChar, char const & outChar)
 {
-  auto list = getList(inString, inChar);
+  auto list = getList(inString, std::string(inChar, 1));
   std::string ostring;
 
   for (auto const & string : list)
@@ -210,7 +215,7 @@ std::string argv_to_string(char** argv, int const & start_i = 0)
 char** string_to_argv(std::string const & string)
 {
   // Breaks down the string into an array of substrings (separated by a space in the string)
-  std::vector<std::string> string_array(getList(string, ' '));// Source
+  std::vector<std::string> string_array(getList(string, " "));// Source
   
   // Allocate the array
   char** charArray = new (std::nothrow) char*[string_array.size() + 1]; // +1 for the final nullptr

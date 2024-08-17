@@ -34,7 +34,6 @@ private:
 
 std::ostream& operator<< (std::ostream& out, PositionXY const & pos)
 {
-  // out << "x : " << pos.x() <<  " y : " << pos.y();
   out << std::setw(2) << pos.x() << ";" << std::setw(2) <<  pos.y();
   return out;
 }

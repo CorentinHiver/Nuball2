@@ -3,7 +3,7 @@
 // #define TRIGGER
 
 #ifdef TRIGGER
-#include <Clovers.hpp>
+#include <CloversV2.hpp>
 #endif // TRIGGER
 
 int main(int argc, char ** argv)
@@ -13,13 +13,13 @@ int main(int argc, char ** argv)
 #endif //NORMAL
 #ifdef TRIGGER
   int hit_i = 0;
-  Clovers clovers;
+  CloversV2 clovers;
   Faster2Root(argc, argv, [&hit_i, &clovers](Event const & event)
   {
-    // Example of a simple trigger (DSSD trigger in Nuball2) :
+    // Example of a simple trigger : DSSD trigger in Nuball2 :
     // for (hit_i = 0; hit_i<event.mult; hit_i++) if (event.labels[hit_i] > 799 && event.labels[hit_i] < 856 ) return true;
 
-    // Example of a trigger DSSD + 2 clean Germaniums (add-back + compton suppression) (Nuball2)
+    // Example of a clean Germaniums trigger (add-back + compton suppression) (Nuball2)
     // Works only with calibrated energies !!
     for (hit_i = 0; hit_i<event.mult; hit_i++)
     {
@@ -27,8 +27,8 @@ int main(int argc, char ** argv)
       if (label > 799 && label < 856 ) 
       {
         lock_mutex lock(MTObject::mutex);
-        clovers.SetEvent(event);
-        if (clovers.CleanGe.size() > 0) return true;
+        clovers = event;
+        if (clovers.clean.size() > 0) return true;
       }
     }
     return false;

@@ -50,19 +50,7 @@ public:
   /// @brief label = 23 -> index = 0, label = 196 -> index = 23;
   static constexpr inline Index index(Label const & label)    noexcept {return Label_cast((label-23)/6);}
 
-  void operator=(Event const & event)
-  {
-    this->clear();
-    for (int hit_i = 0; hit_i<event.mult; hit_i++) 
-    {
-      if (event.nrjs[hit_i] < threshold) continue;// Energy threshold
-      auto const & label = event.labels[hit_i];
-      if (found(blacklist, label)) continue;// Bad detectors
-      if (found(overflow_Ge, label) && event.nrjs[hit_i] > overflow_Ge[label]) continue; // Overflow
-      this->fill(event, hit_i);
-    }
-    this->analyze();
-  }
+  void operator=(Event const & event);
 
   bool fill(Event const & event, int const & hit_i);
 
@@ -157,6 +145,23 @@ static auto geHasOverflow = LUT<166> ([](Label const & label) {
   return find_key(CloversV2::overflow_Ge, label);
 });
 
+void CloversV2::operator=(Event const & event)
+{
+  this->clear();
+  for (int hit_i = 0; hit_i<event.mult; hit_i++) 
+  {
+    // auto const & label = event.labels[hit_i];
+    auto const & nrj = event.nrjs[hit_i];
+
+    if (nrj < threshold) continue;// Energy threshold
+
+    // if (CloversIsBlacklis[label])) continue;// Bad detectors
+    // if (geHasOverflow[label]) && nrj > overflow_Ge[label]) continue; // Overflow
+    this->fill(event, hit_i);
+  }
+  this->analyze();
+}
+
 bool CloversV2::fill(Event const & event, int const & hit_i)
 {
   if (m_analyzed) throw_error("CloversV2::fill() called while already m_analyzed, you need to CloversV2::reset() first");
@@ -165,13 +170,17 @@ bool CloversV2::fill(Event const & event, int const & hit_i)
   if (isClover(label))
   {
     auto const & nrj = event.nrjs[hit_i];
+    
     // if ((geHasOverflow[label] && nrj>overflow_Ge.at(label))) return false;
 
     auto const & time = event.times[hit_i];
     auto const & clover_index = CloversV2::index(label); 
     auto const & sub_index = subIndex(label);
+
     push_back_unique(Hits_id, clover_index);
+
     m_clovers[clover_index].addHit(nrj, time, sub_index);
+
     if (isGe(label))
     {
       push_back_unique(Ge_id, clover_index);
@@ -199,26 +208,28 @@ void CloversV2::analyze() noexcept
     auto const & clover = m_clovers[clover_index];
     auto const & Ge_found = clover.nb>0;
     auto const & BGO_found = clover.nbBGO>0;
+    
+    auto clover_ptr = &clover;
 
-    all.push_back(&clover);
+    all.push_back(clover_ptr);
 
     if(Ge_found)
     {
       if (BGO_found) 
       {
         Rejected_id.push_back(clover_index);
-        rejected.push_back(&clover);
+        rejected.push_back(clover_ptr);
       }
       else           
       {
         GeClean_id.push_back(clover_index);
-        clean.push_back(&clover);
+        clean.push_back(clover_ptr);
       }
     }
     else if (BGO_found) 
     {
       BGOClean_id.push_back(clover_index);
-      cleanBGO.push_back(&clover);
+      cleanBGO.push_back(clover_ptr);
     }
     else throw_error("c pas normal ça");
   }

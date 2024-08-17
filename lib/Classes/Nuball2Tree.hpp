@@ -19,6 +19,11 @@ public:
     this -> Open(m_filename);
     event.reading(*this);
   }
+  Nuball2Tree(std::string const & filename, Event & event, std::string const & options) noexcept : m_filename(filename)
+  {
+    this -> Open(m_filename);
+    event.reading(*this, options);
+  }
 
   ~Nuball2Tree() {if (m_file_opened) this->Close();}
 

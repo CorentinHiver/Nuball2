@@ -507,7 +507,7 @@ public:
   /// @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
   Path(const char* c_str, bool const & create = false) : m_path(std::string(c_str)) {loadPath(create);}
 
-  void makeFolderList() {m_recursive_folders = getList(m_path,'/');}
+  void makeFolderList() {m_recursive_folders = getList(m_path,"/");}
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return m_exists;}

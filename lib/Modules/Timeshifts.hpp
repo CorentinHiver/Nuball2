@@ -184,6 +184,9 @@ public:
   TH1F* shiftTimeSpectra(TH1F* histo, Label const & label, std::string const & unit = "ps");
 
   Time const & operator[] (int const & i) const {return m_timeshifts[i];}
+
+  void operator() (Hit & hit) const {hit.stamp += m_timeshifts[hit.label];}
+
   operator bool() const & {return m_ok;}
 
   std::vector<Time> const & get() const {return m_timeshifts;}

@@ -64,9 +64,10 @@ public:
   Event* getEvent() const {return m_event;}
 
   /// @brief Add Hits to the event. Return true when an event is complete, i.e. current hit is outside of time window.
-  /// @details
-  virtual bool build(Hit const & _hit) = 0; // pure virtual
-  virtual bool coincidence(Hit const & hit) = 0; // pure virtual
+  
+  virtual bool build(Hit const & _hit) = 0; // pure virtual : need to override it in daughter classes
+  virtual bool coincidence(Hit const & hit) {return Time_cast(hit.stamp - m_first_hit.stamp) < 100_ns;}
+  
   virtual void clear() 
   {
     m_event->clear();

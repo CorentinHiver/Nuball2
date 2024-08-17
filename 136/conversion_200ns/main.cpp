@@ -388,7 +388,7 @@ int main(int argc, char** argv)
       auto outTree (new TTree(outTree_name.c_str(), "Nuball2"));
       outTree -> SetDirectory(nullptr); // Force it to be created on RAM rather than on disk - so much faster if enough RAM
       Event event;
-      event.writing(outTree, "ltTEQ"); // Writing labels, timestamp, relative times, calibrated energies, calibrated qdc2s
+      event.writing(outTree, "mltTEQ"); // Writing labels, timestamp, relative times, calibrated energies, calibrated qdc2s
 
       // Initialise object that handles the rf
       RF_Manager rf;
@@ -454,7 +454,7 @@ int main(int argc, char** argv)
           bool pass_trigger = trigger.pass();
           if (fill_histos)
           {
-            for (auto const & index_i : trigger.clovers.GeClean) cleanGe_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+            for (auto const & id : trigger.clovers.GeClean_id) cleanGe_VS_time.Fill(trigger.clovers[id].time, trigger.clovers[id].nrj);
             histo_mult.Fill(event.mult);
           }
 
@@ -462,7 +462,7 @@ int main(int argc, char** argv)
           {
             if (fill_histos) 
             {
-              for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigged_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+              for (auto const & id : trigger.clovers.GeClean_id) cleanGe_trigged_VS_time.Fill(trigger.clovers[id].time, trigger.clovers[id].nrj);
               histo_mult_trigger.Fill(event.mult);
             }
             trig_hits_count+=event.mult;
@@ -470,7 +470,7 @@ int main(int argc, char** argv)
 
             outTree->Fill();
           }
-          if (fill_histos && trigger.nb_dssd > 0) for (auto const & index_i : trigger.clovers.GeClean) cleanGe_trigger_particle_VS_time.Fill(trigger.clovers[index_i].time, trigger.clovers[index_i].nrj);
+          if (fill_histos && trigger.nb_dssd > 0) for (auto const & id : trigger.clovers.GeClean_id) cleanGe_trigger_particle_VS_time.Fill(trigger.clovers[id].time, trigger.clovers[id].nrj);
         }
         if (eventBuilder.isSingle())
         {

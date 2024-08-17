@@ -322,19 +322,22 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   
   unique_tree tree(new TTree("Nuball2","Nuball2"));
   tree -> SetDirectory(nullptr); // Set the tree RAM resident : increases memory usage but speeds the process up
+
   Event event;
+
   unique_tree tempTree;
+
   if (m_eventBuilding)
-  {// Event building is done in two times : first filling a temporary tree, then reorder it after timeshift and finally create events
+  {// Event building is done in two times : first fill a temporary tree, then reorder it after timeshift and finally create events
     tempTree.reset(new TTree("temp","temp"));
     tempTree -> SetDirectory(nullptr);
     hit.writing(tempTree.get(), "lteqp");
-    event.writing(tree.get(), (m_calibration) ? "ltTEQp" : "ltTeqp");
+    event.writing(tree.get(), (m_calibration) ? "mltTEQp" : "mltTeqp");
   }
   else
   {
     tree->SetTitle("Nuball2 without event building");
-    event.writing(tree.get(), (m_calibration) ? "ltEQp" : "lteqp");
+    event.writing(tree.get(), (m_calibration) ? "mltEQp" : "mlteqp");
   }
 
   if (m_calibration) tree -> SetTitle((tree->GetTitle()+std::string(" with calibration")).c_str());
@@ -363,11 +366,16 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   {// Read the temporary tree and perform event building :
     auto const & nb_data = tempTree->GetEntries();
     Alignator alignator(tempTree.get());
-    hit.reading(tempTree.get(), "lteqp");
+    hit.reading(tempTree.get());
     CoincBuilder builder(&event, m_time_window);
     builder.keepSingles(!m_throw_single);
 
-    for (longlong loop = 0; loop<nb_data; ++loop)
+    // Handle first hit :
+    longlong loop = 0;
+    tempTree -> GetEntry(alignator[loop++]);
+    builder.setFirstHit(hit);
+
+    for (;loop<nb_data; ++loop)
     {
       // print(event);
       tempTree -> GetEntry(alignator[loop]);

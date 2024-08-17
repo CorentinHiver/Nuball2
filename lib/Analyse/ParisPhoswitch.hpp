@@ -53,6 +53,8 @@ void inline ParisPhoswitch::reset()
 
 char inline ParisPhoswitch::fill(Event const & event, int const & hit_i)
 {
+  if (event.nrjs[hit_i] < 10_keV || event.nrj2s[hit_i] < 10_keV) return -1;
+  
   cristal = simple_pid(event.nrjs[hit_i], event.nrj2s[hit_i]);
   time = event.times[hit_i];
   if (cristal == 0) nrj = float_cast(event.nrj2s[hit_i]);

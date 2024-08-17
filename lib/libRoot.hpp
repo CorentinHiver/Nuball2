@@ -2481,6 +2481,12 @@ TH2F* invert(TH2F* histo)
   return ret;
 }
 
+std::vector<std::string> wildcard(std::string const & name)
+{
+  TString result = gSystem->GetFromPipe(("ls "+name).c_str());
+  return getList(result.Data(), "\n");
+}
+
 /**
  * @brief Merges files with a maximum output size
  * 

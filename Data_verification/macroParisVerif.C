@@ -113,7 +113,7 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
       if (trigger == "22Na") out_filename = "data/22Na_paris_verif/"+run_name+".root";
 
       Event event;
-      event.reading(tree, "lTEQ");
+      event.reading(tree, "mlTEQ");
 
       CloversV2 prompt_clovers;
       CloversV2 delayed_clovers;

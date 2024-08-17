@@ -45,12 +45,13 @@
  * 
  * If you are only interested in a few branches, you can choose them by adding an option : 
  * 
- *        event.reading(tree, "lst"); // Reads only the multiplicity, label, timestamp and relative time.
+ *        event.reading(tree, "mltT"); // Reads only the multiplicity, label, timestamp and relative time.
  * 
  * Note the multiplicity will always be activated, because it is mandatory to read the root file.
  * 
  * A list of all the options available so far :
  * 
+ *        m : mult   multiplicity          int
  *        l : label  label                 ushort
  *        t : stamp  absolute timestamp ps ULong64_t
  *        T : time   relative timestamp ps Long64_t
@@ -65,7 +66,7 @@
  * 
  * You can use this class to write in another root tree. To do so, use the Event::writing method : 
  * 
- *        event.writing(outTree, "lstEQ"); Will write the multiplicity, timestamp, relative time in ps, calibrated energy and calibrated QDC2
+ *        event.writing(outTree, "mlstEQ"); Will write the multiplicity, timestamp, relative time in ps, calibrated energy and calibrated QDC2
  * 
  * You can as well access the written branches via the Event::write member (see the WriteIO struct definition)
  * 
@@ -79,28 +80,26 @@
  *        event.push_front(hit);
  * 
  * When the event is complete (e.g. in an event builder), you can for instance write it down or analyse it.
- * Especially useful, you can set the reference timestamp of the Event using the Event::setT0 method.
+ * 
+ * You can set the reference timestamp of the Event using the Event::setT0 method.
  * It can be an external reference timestamp like the RF or a particle timestamp for instance.
  *  
  * After using it, call Event::clear() to empty the event 
- * (not necessary if readd from a TTree because TTree::GetEntry overwrites all the fields).
+ * (not necessary if read from a TTree because TTree::GetEntry overwrites all the fields).
  */
 class Event
 {
   
 public:
 
-  Event() 
-  {
+  Event() {}
 
-  }
-
-  Event (Hit const & hit)
+  Event (Hit const & hit) noexcept
   {
     *this = hit;
   }
 
-  Event(Event const & event) :
+  Event(Event const & event) noexcept :
     mult (event.mult ),
     stamp(event.stamp),
     read (event.read ),
@@ -119,16 +118,15 @@ public:
   Event (TTree * tree, std::string const & options) {this -> reading(tree, options);}
 
   // Interface with TTree class
-  void reading(TTree * tree);
-  void reading(TTree * tree, std::string const & options);
+  void reading(TTree * tree, std::string const & options = "");
   void writing(TTree * tree, std::string const & options = "ltTeEqQ");
 
   // Interface with Hit class
-  void push_back(Hit const & hit);
-  void push_front(Hit const & hit);
+  void push_back(Hit const & hit) noexcept;
+  void push_front(Hit const & hit) noexcept;
 
-  Event& operator=(Hit const & hit);
-  Event& operator=(Event const & evt);
+  Event& operator=(Hit const & hit) noexcept ;
+  Event& operator=(Event const & evt) noexcept ;
 
   // Timing management :
   void setT0(Timestamp const & timestamp) noexcept
@@ -154,9 +152,10 @@ public:
   bool isEmpty()  const noexcept {return (mult == 0);}
 
   // Public members :
+  static constexpr size_t maxSize = 255u;
+
   int mult = 0;
   Timestamp stamp = 0ull;
-  static constexpr size_t maxSize = 255u;
   Label  labels  [maxSize] = {0};
   Time   times   [maxSize] = {0};
   ADC    adcs    [maxSize] = {0};
@@ -165,14 +164,25 @@ public:
   NRJ    nrj2s   [maxSize] = {0};
   Pileup pileups [maxSize] = {0};
 
+  void fullClear() noexcept 
+  { // Set all the fields to 0
+    std::fill(labels, labels+maxSize, 0);
+    std::fill(times, times+maxSize, 0);
+    std::fill(adcs, adcs+maxSize, 0);
+    std::fill(nrjs, nrjs+maxSize, 0);
+    std::fill(qdc2s, qdc2s+maxSize, 0);
+    std::fill(nrj2s, nrj2s+maxSize, 0);
+    std::fill(pileups, pileups+maxSize, 0);
+    mult = 0;
+  }
+
   void check_safe()
   {
 #ifndef UNSAFE
-       if (mult>254) {print("Event mult > 254 !!"); return;}
-  else if (mult<0  ) throw_error("Event mult < 0 !!");
+       if (mult > int(maxSize-2)) {print("Event mult > 255 !!"); return;}
 #endif //UNSAFE
   }
-      
+  
   auto const & label  (int const & hit_i) const {return labels [hit_i];}
   auto       & label  (int const & hit_i)       {return labels [hit_i];}
   auto const & time   (int const & hit_i) const {return times  [hit_i];}
@@ -188,7 +198,7 @@ public:
   auto const & pileup (int const & hit_i) const {return pileups[hit_i];}
   auto       & pileup (int const & hit_i)       {return pileups[hit_i];}
 
-  Hit operator[](int const & hit_i);
+  inline Hit operator[](int const & hit_i) noexcept;
 
   // I/O status :
   IOptions read;
@@ -197,7 +207,7 @@ public:
 private:
 };
 
-Hit Event::operator[](int const & hit_i) 
+inline Hit Event::operator[](int const & hit_i) noexcept
 {// Problem about the time here ...
   Hit hit;
   hit.stamp = stamp + times[hit_i];
@@ -211,7 +221,7 @@ Hit Event::operator[](int const & hit_i)
 }
 
 
-inline Event& Event::operator=(Hit const & hit)
+inline Event& Event::operator=(Hit const & hit) noexcept
 {
   mult = 1;
   stamp = hit.stamp;
@@ -225,7 +235,7 @@ inline Event& Event::operator=(Hit const & hit)
   return *this;
 }
 
-inline Event& Event::operator=(Event const & event)
+inline Event& Event::operator=(Event const & event) noexcept
 {
   read  = event.read;
   write = event.write;
@@ -241,43 +251,6 @@ inline Event& Event::operator=(Event const & event)
   return *this;
 }
 
-/**
- * @brief Automatically set branches based on the presence or not of branches in the root tree.
- * Reserved for "Nuball2" type of trees
- */
-void inline Event::reading(TTree * tree)
-{
-#ifdef MULTITHREADING
-  lock_mutex lock(mutex_events);
-#endif //MULTITHREADING
-
-  if (!tree) {print("Input tree at address 0x00 !"); return;}
-
-  tree -> ResetBranchAddresses();
-
-  auto branches = tree->GetListOfBranches();
-  for (int i = 0; i < branches->GetEntries(); ++i) 
-  {
-    auto branch = dynamic_cast<TBranch*>(branches->At(i));
-    std::string const branchName = branch->GetName();
-    
-         if (branchName == "mult"  ) {                tree -> SetBranchAddress("mult"   , &mult);}
-    else if (branchName == "label" ) {read.l = true;  tree -> SetBranchAddress("label"  , &labels );}
-    else if (branchName == "stamp" ) {read.t = true;  tree -> SetBranchAddress("stamp"  , &stamp  );}
-    else if (branchName == "time"  ) {read.T = true;  tree -> SetBranchAddress("time"   , &times  );}
-    else if (branchName == "adc"   ) {read.e = true;  tree -> SetBranchAddress("adc"    , &adcs   );}
-    else if (branchName == "nrj"   ) {read.E = true;  tree -> SetBranchAddress("nrj"    , &nrjs   );}
-    else if (branchName == "qdc2"  ) {read.q = true;  tree -> SetBranchAddress("qdc2"   , &qdc2s  );}
-    else if (branchName == "nrj2"  ) {read.Q = true;  tree -> SetBranchAddress("nrj2"   , &nrj2s  );}
-    else if (branchName == "pileup") {read.p = true;  tree -> SetBranchAddress("pileup" , &pileups);}
-    else
-    {
-      warning("branch", branchName, "unkown ... Event class can't read it !");
-    }
-  }
-  tree -> SetBranchStatus("*",true);
-}
-
 void inline Event::reading(TTree * tree, std::string const & options)
 {
 #ifdef MULTITHREADING
@@ -286,19 +259,22 @@ void inline Event::reading(TTree * tree, std::string const & options)
 
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
-  read.setOptions(options);
+  this -> fullClear();
+
+  if (options == "") read.detectLeafs(tree);
+  else read.setOptions(options);
 
   tree -> ResetBranchAddresses();
 
-              tree -> SetBranchAddress("mult"   , &mult   );
-  if (read.l) tree -> SetBranchAddress("label"  , &labels );
-  if (read.t) tree -> SetBranchAddress("stamp"  , &stamp  );
-  if (read.T) tree -> SetBranchAddress("time"   , &times  );
-  if (read.e) tree -> SetBranchAddress("adc"    , &adcs   );
-  if (read.E) tree -> SetBranchAddress("nrj"    , &nrjs   );
-  if (read.q) tree -> SetBranchAddress("qdc2"   , &qdc2s  );
-  if (read.Q) tree -> SetBranchAddress("nrj2"   , &nrj2s  );
-  if (read.p) tree -> SetBranchAddress("pileup" , &pileups);
+  if (read.m) tree -> SetBranchAddress("mult"   , & mult   );
+  if (read.l) tree -> SetBranchAddress("label"  , & labels );
+  if (read.t) tree -> SetBranchAddress("stamp"  , & stamp  );
+  if (read.T) tree -> SetBranchAddress("time"   , & times  );
+  if (read.e) tree -> SetBranchAddress("adc"    , & adcs   );
+  if (read.E) tree -> SetBranchAddress("nrj"    , & nrjs   );
+  if (read.q) tree -> SetBranchAddress("qdc2"   , & qdc2s  );
+  if (read.Q) tree -> SetBranchAddress("nrj2"   , & nrj2s  );
+  if (read.p) tree -> SetBranchAddress("pileup" , & pileups);
 
   tree -> SetBranchStatus("*",true);
 }
@@ -311,11 +287,13 @@ void inline Event::writing(TTree * tree, std::string const & options)
 
   if (!tree) {print("Output tree at address 0x00 !"); return;}
 
+  this -> fullClear();
+
   write.setOptions(options);  
 
   tree -> ResetBranchAddresses();
 
-               createBranch     (tree, &mult    , "mult"  );
+  if (write.m) createBranch     (tree, &mult    , "mult"  );
   if (write.t) createBranch     (tree, &stamp   , "stamp" );
   if (write.T) createBranchArray(tree, &times   , "time"  , "mult");
   if (write.E) createBranchArray(tree, &nrjs    , "nrj"   , "mult");
@@ -327,7 +305,7 @@ void inline Event::writing(TTree * tree, std::string const & options)
   tree -> SetBranchStatus("*",true);
 }
 
-inline void Event::push_back(Hit const & hit)
+inline void Event::push_back(Hit const & hit) noexcept
 {
   check_safe();
   labels  [mult] = hit.label;
@@ -349,7 +327,7 @@ inline void Event::push_back(Hit const & hit)
  * before the first hit that really represents the "0" of the event
  * 
  */
-inline void Event::push_front(Hit const & hit)
+inline void Event::push_front(Hit const & hit) noexcept
 {
   check_safe();
   for (auto i = mult; i>0; i--)

@@ -18,7 +18,7 @@ using Timestamp = ULong64_t; // Timestamp in ps (absolute)
 using Time      = Long64_t;  // Time in ps (relative)
 using Time_ns   = float;     // Time in ns (relative) !deprecated! 
 using Pileup    = bool;      // Pileup bit (bool) !unused!
-using Index     = uchar;     // Used in analysis structures (Clovers, Paris...)
+using Index     = uchar;     // Used in analysis structures (Clovers, Paris...). Be careful to the max value 255
 
 ////////////////////
 /// Data vectors ///
@@ -115,28 +115,47 @@ constexpr inline double operator""_deg(long double number) noexcept {return to_r
  * @brief ReadIO options
  * @details
  * 
+ * m : mult   multiplicity (events) int
  * l : label  label                 ushort
  * t : stamp  absolute timestamp ps ULong64_t
  * T : time   relative time      ps Long64_t
  * e : adc    energy in ADC         int
  * E : nrj    energy in keV         float
- * q : qdc2   energy qdc2 in ADC    float
+ * q : qdc2   energy qdc2 in ADC    int
  * Q : nrj2   energy qdc2 in keV    float
- * 3 : qdc3   energy qdc3 in ADC    float
+ * 3 : qdc3   energy qdc3 in ADC    int
  * R : nrj3   energy qdc3 in keV    float
  * p : pileup pileup                bool
  */
 class IOptions
 {
 public:
-  IOptions(){}
-  IOptions(std::string const & options) {setOptions(options);}
-  void setOptions(std::string const & options)
+  IOptions() noexcept {}
+  IOptions(std::string const & options) noexcept {setOptions(options);}
+  void reset()
   {
+    m  = false;
+    l  = false;
+    t  = false;
+    T  = false;
+    e  = false;
+    E  = false;
+    q  = false;
+    Q  = false;
+    q3 = false;
+    Q3 = false;
+    p  = false;
+    set = false;
+  }
+
+  void setOptions(std::string const & options) noexcept
+  {
+    reset();
     for (auto const & option : options)
     {
       switch (option)
       {
+        case ('m') : m  = true; break;
         case ('l') : l  = true; break;
         case ('t') : t  = true; break;
         case ('T') : T  = true; break;
@@ -150,8 +169,53 @@ public:
         default : error("Unkown parameter '", option, "' for io data");
       }
     }
+    set = true;
   }
 
+  std::string getOptions() const noexcept 
+  {
+    std::string out;
+
+    if (m) out.push_back('m');
+    if (l) out.push_back('l');
+    if (t) out.push_back('t');
+    if (T) out.push_back('T');
+    if (e) out.push_back('e');
+    if (E) out.push_back('E');
+    if (q) out.push_back('q');
+    if (Q) out.push_back('Q');
+    if (q3) out.push_back('3');
+    if (Q3) out.push_back('R');
+    if (p) out.push_back('p');
+
+    return out;
+  }
+
+  void detectLeafs(TTree * tree)
+  {
+    reset();
+    TObjArray* branches = tree->GetListOfBranches();
+    for (int i = 0; i < branches->GetEntries(); ++i) 
+    {
+      auto branch = dynamic_cast<TBranch*>(branches->At(i));
+      std::string branchNameStr(branch->GetName());
+
+      if (branchNameStr == "mult"  ) m  = true;
+      if (branchNameStr == "label" ) l  = true;
+      if (branchNameStr == "stamp" ) t  = true;
+      if (branchNameStr == "time"  ) T  = true;
+      if (branchNameStr == "adc"   ) e  = true;
+      if (branchNameStr == "nrj"   ) E  = true;
+      if (branchNameStr == "qdc2"  ) q  = true;
+      if (branchNameStr == "nrj2"  ) Q  = true;
+      if (branchNameStr == "qdc3"  ) q3 = true;
+      if (branchNameStr == "nrj3"  ) Q3 = true;
+      if (branchNameStr == "pileup") p  = true;
+    }
+    set = true;
+  }
+
+  bool m  = false; // multiplicity (events)
   bool l  = false; // label
   bool t  = false; // timestamp in ps
   bool T  = false; // relative time in ps
@@ -162,6 +226,8 @@ public:
   bool q3 = false; // qdc3 in ADC
   bool Q3 = false; // calibrated qdc3 in keV
   bool p  = false; // pileup
+
+  bool set = false;
 };
 
 /////////////////
@@ -206,7 +272,7 @@ public:
  * 
  * Nomenclature : 
  * The ADC are in INT because they represent a number of digitization channels
- * 
+ * The energies are in float because we do not need more precision than the detectors resolution, of the order of the keV for the best ones
  */
 class Hit
 {
@@ -282,49 +348,14 @@ public:
   #endif //QDC1MAX
   bool      pileup = false; // Pile-up (and saturation in QDC) tag
 
-
-  void reading (TTree * tree);
-  void reading (TTree * tree, std::string const & options);
+  void reading (TTree * tree, std::string const & options = "");
   void writing(TTree * tree, std::string const & options = "lteqp");
 
-  static IOptions read;
-  static IOptions write;
+  IOptions read;
+  IOptions write;
+
+private:
 };
-
-IOptions Hit::read;
-IOptions Hit::write;
-
-void Hit::reading(TTree * tree)
-{
-#ifdef MULTITHREADING
-  lock_mutex lock(mutex_hits);
-#endif //MULTITHREADING
-
-  if (!tree) {print("Input tree at address 0x00 !"); return;}
-
-  this->clear();
-
-  tree -> ResetBranchAddresses();
-
-  TObjArray* branches = tree->GetListOfBranches();
-  for (int i = 0; i < branches->GetEntries(); ++i) 
-  {
-    auto branch = dynamic_cast<TBranch*>(branches->At(i));
-    const char* branchName = branch->GetName();
-    std::string branchNameStr(branchName);
-  
-    if(branchNameStr == "label" ) {read.l  = true; tree -> SetBranchAddress("label" , & label );}
-    if(branchNameStr == "stamp" ) {read.t  = true; tree -> SetBranchAddress("stamp" , & stamp );}
-    if(branchNameStr == "time" )  {read.T  = true; tree -> SetBranchAddress("time"  , & time  );}
-    if(branchNameStr == "adc"   ) {read.e  = true; tree -> SetBranchAddress("adc"   , & adc   );}
-    if(branchNameStr == "nrj"   ) {read.E  = true; tree -> SetBranchAddress("nrj"   , & nrj   );}
-    if(branchNameStr == "qdc2"  ) {read.q  = true; tree -> SetBranchAddress("qdc2"  , & qdc2  );}
-    if(branchNameStr == "nrj2"  ) {read.Q  = true; tree -> SetBranchAddress("nrj2"  , & nrj2  );}
-    if(branchNameStr == "qdc3"  ) {read.q3 = true; tree -> SetBranchAddress("qdc3"  , & qdc3  );}
-    if(branchNameStr == "nrj3"  ) {read.Q3 = true; tree -> SetBranchAddress("nrj3"  , & nrj3  );}
-    if(branchNameStr == "pileup") {read.p  = true; tree -> SetBranchAddress("pileup", & pileup);}
-  }
-} 
 
 void Hit::reading(TTree * tree, std::string const & options)
 {
@@ -334,12 +365,13 @@ void Hit::reading(TTree * tree, std::string const & options)
 
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
-  this->clear();
+  this -> clear();
 
-  read.setOptions(options);
+  if (options == "") read.detectLeafs(tree);
+  else read.setOptions(options);
 
   tree -> ResetBranchAddresses();
-  
+
   if (read.l ) tree -> SetBranchAddress("label"  , & label  );
   if (read.t ) tree -> SetBranchAddress("stamp"  , & stamp  );
   if (read.T ) tree -> SetBranchAddress("time"   , & time  );
@@ -350,7 +382,7 @@ void Hit::reading(TTree * tree, std::string const & options)
   if (read.q3) tree -> SetBranchAddress("qdc3"   , & qdc3   );
   if (read.Q3) tree -> SetBranchAddress("nrj3"   , & nrj3   );
   if (read.p ) tree -> SetBranchAddress("pileup" , & pileup );
-} 
+}
 
 void Hit::writing(TTree * tree, std::string const & options)
 {

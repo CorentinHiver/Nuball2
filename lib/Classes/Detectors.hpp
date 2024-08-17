@@ -35,7 +35,7 @@ Bools isFront (SIZE_LOOKUP);
 
 // Other lookup tables :
 Label_vec compressedLabel(SIZE_LOOKUP,-1); // Used to put all the detectors one after the other
-Ints m_index(SIZE_LOOKUP,-1);
+Ints det_indexes(SIZE_LOOKUP,-1);
 
 
 /**
@@ -132,7 +132,7 @@ public:
 
   /// @brief Get the type index of the detector. Each type of detector has its own indexing system 
   /// if you have 3 Germaniums, the Ge indexes ranges from 0 to 2)
-  auto const & index(Label const & label) const {return m_index[label];}
+  auto const & index(Label const & label) const {return det_indexes[label];}
 
   /// @brief Get the default ADC histogram binning for each type of detectors
   static auto const & ADCBin(dType const & type = "")
@@ -377,7 +377,7 @@ void Detectors::makeArrays()
 
       // Counts the number of detectors for the current type :
       auto const & detector_index = m_type_counter[m_types[label]]++; // NB: Returns the number before increment
-      m_index[label] = detector_index;
+      det_indexes[label] = detector_index;
 
       auto const & _type = m_types[label];
       // Lookup table to get the name from the type and detector index :

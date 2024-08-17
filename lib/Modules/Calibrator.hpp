@@ -363,7 +363,7 @@ void Calibrator::fillRootDataHisto(std::string const & filename)
   if (!tree.get()) {print("NO Nuball2 found in", filename); return;}
 
   Event event;
-  event.reading(tree.get(), "leq");
+  event.reading(tree.get(), "mleq");
 
   print("Reading", filename);
 

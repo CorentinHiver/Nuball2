@@ -5,7 +5,6 @@
 #include "../lib/Classes/Nuball2Tree.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "../lib/Analyse/CloversV2.hpp"
-#include "../lib/Analyse/CloversV3.hpp"
 #include "../lib/Analyse/SimpleParis.hpp"
 #include "../lib/Analyse/WarsawDSSD.hpp"
 #include "../lib/Classes/Timer.hpp"
@@ -22,9 +21,17 @@ constexpr static bool bidim_by_run = false;
 
 void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5)
 {
-  detectors.load("../136/index_129.list");
   std::string target = "U";
   std::string trigger = "dC1";
+
+  Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
+  FilesManager files(data_path.string(), nb_files);
+  MTList MTfiles(files.get());
+  MTObject::setThreadsNb(nb_threads);
+  MTObject::adjustThreadsNumber(files.size());
+  MTObject::Initialise();
+
+  detectors.load("../136/index_129.list");
   // std::string trigger = "PrM1DeC1";
   // std::string trigger = "C2";
   // std::string trigger = "P";
@@ -34,21 +41,15 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
   std::atomic<int> files_total_size(0);
   std::atomic<int> total_evts_number(0);
   double total_time_of_beam_s = 0;
-  int freq_hit_display= (nb_hits_read < 2.e+7) ? 1.e+6 : 1.e+7;
+  int freq_hit_display= nb_hits_read/10;
 
   // Calibration calibNaI("../136/coeffs_NaI.calib");
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
   CoefficientCorrection calibGe("../136/GainDriftCoefficients.dat");
   // ExcitationEnergy Ex("../136/dssd_table.dat");
   ExcitationEnergy Ex("../136/Excitation_energy", "U5", "d", "p", "10umAl");
-  // ParisCluster<::InitialiseBidims();
 
-  Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
-  FilesManager files(data_path.string(), nb_files);
-  MTList MTfiles(files.get());
-  MTObject::Initialise(nb_threads);
-  MTObject::adjustThreadsNumber(files.size());
-  
+  std::mutex init_mutex;
   std::mutex write_mutex;
 
   static constexpr Time bidimTimeWindow = 40_ns;
@@ -112,8 +113,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
     while(MTfiles.getNext(file))
     {
       auto const & filename = removePath(file);
-      // auto const & run_name = removeExtension(filename);
-      int const & run_number = std::stoi(split(filename, '_')[1]);
+      auto const & run_name = removeExtension(filename);
+      auto const & run_name_vector = split(run_name, '_');
+      auto const & run_number_str = run_name_vector[1];
+      int const & run_number = std::stoi(run_number_str);
       if (target == "Th" && run_number>74) continue;
       if (target == "U" && run_number<75) continue;
       Nuball2Tree tree(file.c_str());
@@ -280,7 +283,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
       unique_TH2F p_VS_paris_module_delayed (new TH2F(("p_VS_paris_module_delayed_"+thread_i_str).c_str(), "p_VS_paris_module_delayed;Paris module_{delayed} [keV]; E#gamma_{prompt} [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F d_VS_dparis_module (new TH2F(("d_VS_dparis_module_"+thread_i_str).c_str(), "d_VS_dparis_module;Paris module_{prompt} [keV]; E#gamma_{delayed} [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F d_VS_dclean_phoswitch (new TH2F(("d_VS_dclean_phoswitch_"+thread_i_str).c_str(), "d_VS_dclean_phoswitch;Paris module_{prompt} [keV]; E#gamma_{delayed} [keV]", 5000,0,20000, 10000,0,10000));
-      unique_TH2F d_VS_pclean_phoswitch (new TH2F(("d_VS_pclean_phoswitch_"+thread_i_str).c_str(), "d_VS_dclean_phoswitch;Paris module_{prompt} [keV]; E#gamma_{delayed} [keV]", 5000,0,20000, 10000,0,10000));
+      unique_TH2F d_VS_pclean_phoswitch (new TH2F(("d_VS_pclean_phoswitch_"+thread_i_str).c_str(), "d_VS_pclean_phoswitch;Paris module_{prompt} [keV]; E#gamma_{prompt} [keV]", 5000,0,20000, 10000,0,10000));
+      unique_TH2F d_VS_daddback_module (new TH2F(("d_VS_daddback_module_"+thread_i_str).c_str(), "d_VS_daddback_module;Paris module_{prompt} [keV]; E#gamma_{prompt} [keV]", 5000,0,20000, 10000,0,10000));
 
       unique_TH2F paris_VS_sum_paris_M2 (new TH2F(("paris_VS_sum_paris_M2_"+thread_i_str).c_str(), "two delayed paris VS their sum;E sum [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, 1000,0,10000));
       unique_TH2F paris_VS_sum_paris_M2_P (new TH2F(("paris_VS_sum_paris_M2_P_"+thread_i_str).c_str(), "two delayed paris VS their sum, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, 1000,0,10000));
@@ -288,8 +292,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
       unique_TH2F prompt_paris_VS_sum_paris_M2_pP (new TH2F(("prompt_paris_VS_sum_paris_M2_pP_"+thread_i_str).c_str(), "prompt paris VS two delayed paris sum, particle + prompt trigger;E sum_{delayed} [keV]; E#gamma_{delayed}prompt[keV]", 2000,0,20000, 1000,0,10000));
 
       // BGO
-      unique_TH2F ge_VS_BGO_prompt (new TH2F(("ge_VS_BGO_prompt_"+thread_i_str).c_str(), "ge_VS_BGO_prompt;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
-      unique_TH2F ge_VS_BGO_delayed (new TH2F(("ge_VS_BGO_delayed_"+thread_i_str).c_str(), "ge_VS_BGO_delayed;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
+      unique_TH2F d_VS_pBGO (new TH2F(("d_VS_pBGO_"+thread_i_str).c_str(), "d_VS_pBGO;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
+      unique_TH2F d_VS_dBGO (new TH2F(("d_VS_dBGO_"+thread_i_str).c_str(), "d_VS_dBGO;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
+      unique_TH2F d_VS_dBGO_addback (new TH2F(("d_VS_dBGO_addback_"+thread_i_str).c_str(), "d_VS_dBGO_addback;BGO [keV]; Ge [keV]", 2000,0,20000, 10000,0,10000));
 
       // Particle trigger (code p)
       unique_TH1F p_p (new TH1F(("p_p_"+thread_i_str).c_str(), "prompt particle trigger;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
@@ -407,11 +412,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
       std::string out_filename = outFolder+filename;
 
       Event event;
-      event.reading(tree, "ltTEQ");
+      event.reading(tree, "mltTEQ");
 
       CloversV2 pclovers;
-      // CloversV2 delayed_clovers;
-
       CloversV2 dclovers;
 
       CloversV2 last_prompt_clovers;
@@ -421,10 +424,6 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
       SimpleParis dparis(&calibPhoswitches);
 
       WarsawDSSD dssd;
-
-      std::vector<Hit> LaBr3;
-      std::vector<Hit*> pLaBr3;
-      std::vector<Hit*> dLaBr3;
 
       // std::vector<double> prompt_phoswitch;
       // std::vector<double> delayed_phoswitch;
@@ -462,10 +461,12 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         // };
 
       // Handle the first hit : 
-      tree->GetEntry(0);
+      int evt_i = 0;
+      tree->GetEntry(evt_i++);
       auto const & timestamp_init = event.stamp;
 
-      int evt_i = 1;
+      print("let's roll !");
+
       for ( ;(evt_i < tree->GetEntries() && evt_i < nb_hits_read); evt_i++)
       {
         double prompt_clover_calo = 0;
@@ -483,10 +484,6 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         dparis.clear();
 
         dssd.clear();
-
-        LaBr3.clear();
-        pLaBr3.clear();
-        dLaBr3.clear();
 
         // sector_energy.clear();
         // ring_energy.clear();
@@ -521,13 +518,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           // Paris :
           if (Paris::is[label])
           {
-            if(Paris::pid_LaBr3(nrj, nrj2)) LaBr3.push_back(event[hit_i]);
             // if (500 < label && label < 600) continue; // Reject paris front inner ring
             // E_dT_phoswitch->Fill(time, nrjcal);
             short_over_long_VS_time->Fill(time, nrj/nrj2);
             if (gate(-5_ns, time, 5_ns))
             {
-              if(Paris::pid_LaBr3(nrj, nrj2)) pLaBr3.push_back(&(LaBr3.back()));
               short_vs_long_prompt->Fill(nrj, nrj2); 
               pparis.fill(event, hit_i);
             }
@@ -537,16 +532,14 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
             }
             else if (gate(40_ns, time, 170_ns))
             {
-              if(Paris::pid_LaBr3(nrj, nrj2)) dLaBr3.push_back(&(LaBr3.back()));
               short_vs_long_delayed->Fill(nrj, nrj2);
               dparis.fill(event, hit_i);
             }
           }
 
           // Clovers:
-          if (gate(-10_ns, time, 10_ns) )
+          if (gate(-20_ns, time, 20_ns) )
           {
-            pclovers.fill(event, hit_i);
             if (CloversV2::isBGO(label)) prompt_clover_calo += nrj ;
             else if (CloversV2::isGe(label)) 
             {
@@ -554,6 +547,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
               if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
               if (!gate(506_keV, nrj, 515_keV)) prompt_clover_calo += smear(nrj, random);
             }
+            pclovers.fill(event, hit_i);
           }
           else if (gate(40_ns, time, 170_ns) )
           {
@@ -562,7 +556,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           }
 
           // Dssd :
-          if (gate(799, label, 860)) dssd.fill(event, hit_i);
+          if (gate(799u, label, 860u)) dssd.fill(event, hit_i);
 
         }// End hits loop
 
@@ -655,7 +649,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           for (auto const & BGO_i : pclovers.BGOClean_id)
           {
             auto const & nrj_BGO = pclovers[BGO_i].nrjBGO;
-            ge_VS_BGO_prompt->Fill(nrj_BGO, clover_i.nrj);
+            d_VS_pBGO->Fill(nrj_BGO, clover_i.nrj);
           }
 
           // Prompt-prompt background
@@ -959,19 +953,31 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           }
 
           //// Clover VS PARIS ////
-          for (auto hit : dLaBr3)
+
+          for (auto const & module : dparis.modules) 
           {
-            if (std::abs(clover_i.time - hit->time) < 30_ns) d_VS_dLaBr3->Fill(clover_i.nrj, hit->nrj);
+            d_VS_dparis_module->Fill(module->nrj, clover_i.nrj);
+            if (module->addbacked()) d_VS_daddback_module->Fill(module->nrj, clover_i.nrj);
           }
 
-          for (auto const & module : dparis.modules) d_VS_dparis_module->Fill(module->nrj, clover_i.nrj);
-          for (auto const & dclean_phoswitch : dparis.clean_phoswitches) d_VS_dclean_phoswitch->Fill(dclean_phoswitch->nrj, clover_i.nrj);
-          for (auto const & pclean_phoswitch : pparis.clean_phoswitches) d_VS_pclean_phoswitch->Fill(pclean_phoswitch->nrj, clover_i.nrj);
+          for (auto const & dclean_phos : dparis.clean_phoswitches) 
+          {
+            d_VS_dclean_phoswitch->Fill(dclean_phos->nrj, clover_i.nrj);
+            if (dclean_phos->isLaBr3()) d_VS_dLaBr3->Fill(clover_i.nrj, dclean_phos->nrj);
+          }
+          for (auto const & pclean_phoswitch : pparis.clean_phoswitches) 
+          {
+            d_VS_pclean_phoswitch->Fill(pclean_phoswitch->nrj, clover_i.nrj);
+          }
           
           //// Clover VS BGO ////
           for (auto const & clover : dclovers.cleanBGO)
           {
-            ge_VS_BGO_delayed->Fill(clover->nrjBGO, clover_i.nrj);
+            d_VS_dBGO->Fill(clover->nrjBGO, clover_i.nrj);
+          }
+          for (auto const & clover : dclovers.rejected)
+          {
+            d_VS_dBGO_addback->Fill(clover->calo, clover_i.nrj);
           }
 
           if (dssd_trigger)
@@ -1208,16 +1214,20 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
 
         /////// PARIS //////////
-          for (auto hit : pLaBr3) 
+
+
+          for (auto const & pclean_phos : pparis.clean_phoswitches) if (pclean_phos->isLaBr3())
           {
-            pLaBr3_VS_label->Fill(Paris::index[hit->label], hit->nrj);
-            LaBr3_prompt->Fill(hit->nrj);
+            pLaBr3_VS_label->Fill(Paris::index[pclean_phos->label], pclean_phos->nrj);
+            LaBr3_prompt->Fill(pclean_phos->nrj);
           }
-          for (auto hit : dLaBr3) 
+          for (auto const & dclean_phos : dparis.clean_phoswitches) if (dclean_phos->isLaBr3())
           {
-            dLaBr3_VS_label->Fill(Paris::index[hit->label], hit->nrj);
-            LaBr3_delayed->Fill(hit->nrj);
+            dLaBr3_VS_label->Fill(Paris::index[dclean_phos->label], dclean_phos->nrj);
+            LaBr3_delayed->Fill(dclean_phos->nrj);
           }
+
+
         // double sum = 0;
         // for (auto const & id : pparis.back.modules_id)  phoswitches_prompt ->Fill(pparis.back.modules[id].nrj);
         // for (auto const & id : pparis.front.modules_id)  phoswitches_prompt ->Fill(pparis.front.modules[id].nrj);
@@ -1495,8 +1505,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         // paris_delayed->Write("paris_delayed", TObject::kOverwrite);
         LaBr3_prompt->Write("LaBr3_prompt", TObject::kOverwrite);
         LaBr3_delayed->Write("LaBr3_delayed", TObject::kOverwrite);
-        pLaBr3_VS_label->Write("LaBr3_prompt", TObject::kOverwrite);
-        dLaBr3_VS_label->Write("LaBr3_delayed", TObject::kOverwrite);
+        pLaBr3_VS_label->Write("pLaBr3_VS_label", TObject::kOverwrite);
+        dLaBr3_VS_label->Write("dLaBr3_VS_label", TObject::kOverwrite);
 
         print("Write Ex spectra");
         Ex_U6_histo->Write("Ex_U6_histo", TObject::kOverwrite);
@@ -1524,6 +1534,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         d_VS_dparis_module->Write("d_VS_dparis_module", TObject::kOverwrite);
         d_VS_dclean_phoswitch->Write("d_VS_dclean_phoswitch", TObject::kOverwrite);
         d_VS_pclean_phoswitch->Write("d_VS_pclean_phoswitch", TObject::kOverwrite);
+        d_VS_daddback_module->Write("d_VS_daddback_module", TObject::kOverwrite);
 
         paris_VS_sum_paris_M2->Write("paris_VS_sum_paris_M2", TObject::kOverwrite);
         paris_VS_sum_paris_M2_P->Write("paris_VS_sum_paris_M2_P", TObject::kOverwrite);
@@ -1533,8 +1544,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         phoswitches_prompt->Write("phoswitches_prompt", TObject::kOverwrite);
         phoswitches_delayed->Write("phoswitches_delayed", TObject::kOverwrite);
 
-        ge_VS_BGO_prompt->Write("ge_VS_BGO_prompt", TObject::kOverwrite);
-        ge_VS_BGO_delayed->Write("ge_VS_BGO_delayed", TObject::kOverwrite);
+        d_VS_pBGO->Write("d_VS_pBGO", TObject::kOverwrite);
+        d_VS_dBGO->Write("d_VS_dBGO", TObject::kOverwrite);
+        d_VS_dBGO_addback->Write("d_VS_dBGO_addback", TObject::kOverwrite);
 
         neutron_hit_pattern->Write("neutron_hit_pattern", TObject::kOverwrite);
         hit_pattern_2755->Write("hit_pattern_2755", TObject::kOverwrite);
@@ -1556,7 +1568,6 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
   print("Reading speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_evts_number/timer.TimeSec(), "M events/s");
 }
 
-#ifndef __CINT__
 int main(int argc, char** argv)
 {
        if (argc == 1) macro5();
@@ -1567,6 +1578,5 @@ int main(int argc, char** argv)
 
   return 1;
 }
-#endif //__CINT__
 // g++ -g -o exec macro5.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
 // g++ -O2 -o exec macro5.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17

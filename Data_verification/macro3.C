@@ -382,7 +382,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::string out_filename = outFolder+filename;
 
       Event event;
-      event.reading(tree, "ltTEQ");
+      event.reading(tree, "mltTEQ");
 
       CloversV2 prompt_clovers;
       CloversV2 delayed_clovers;

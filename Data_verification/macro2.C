@@ -71,7 +71,7 @@ void macro2(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::string out_filename = outFolder+filename;
 
       Event event;
-      event.reading(chain, "ltTEQ");
+      event.reading(chain, "mltTEQ");
       RF_Manager rf;
       bool rf_found = false;
       MyClovers all_clovers;

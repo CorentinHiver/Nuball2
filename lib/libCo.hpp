@@ -26,6 +26,7 @@
 // *********** STD includes ********* //
 #include <any>
 #include <array>
+// #include <execution>
 #include <fstream>
 #include <functional>
 #include <map>
@@ -50,11 +51,17 @@
 #include <cstring>
 #include <ctime>
 
+///////////////////////
+// Versions aliasing //
+///////////////////////
+
+#define Cpp17 (__cplusplus >= 201702L)
+#define Cpp14 (__cplusplus >= 201402L)
+
+
 ////////////////////////////
 // Some specialized print //
 ////////////////////////////
-
-
 // ------------------------------------------------------- //
 // Useful overload of operator<< into a std::cout stream :
 
@@ -610,17 +617,17 @@ inline bool found(std::unordered_map<K,V> const & map, K const & key) {return fi
 ////////////////////////////
 
 template <class T>
-#if (__cplusplus >= 201702L)
+#if Cpp17
 using T_is_number = std::enable_if_t<std::is_arithmetic_v<T>>;
 #else 
 using T_is_number = void;
-#endif // __cplusplus >= 201702L
+#endif // Cpp17
 
 ///////////////////////////
 //   SLOTS AND SIGNALS   // TDB
 ///////////////////////////
 
-#if (__cplusplus >= 201402L)
+#if Cpp14
 template<class... ARGS>
 class Signal
 {
@@ -661,7 +668,7 @@ class Slots
   // std::vector<std::function<void(ARGS...)>> m_slots;
 
 };
-#endif //__cplusplus >= 201402L
+#endif //Cpp14
 
 /////////////////////////
 //   SOME COOL STUFF   //

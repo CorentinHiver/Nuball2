@@ -79,7 +79,7 @@ void macro1(int choice = 0, int nb_files = -1, int nb_threads = 10)
       }
 
       Event event;
-      if (!oldVersion) event.reading(chain, "ltTEQ");
+      if (!oldVersion) event.reading(chain, "mltTEQ");
       RF_Manager rf;
       bool rf_found = false;
 

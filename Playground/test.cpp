@@ -1,5 +1,6 @@
 // #include <MTObject.hpp>
-#include <libRoot.hpp>
+// #include <libCo.hpp>
+// #include <libRoot.hpp>
 // #include <Paris.hpp>
 // #include <Minimisator.hpp>
 // #include <CloversV2.hpp>
@@ -11,7 +12,9 @@
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
-// #include <RunMatrixator.hpp>
+#include <Alignator.hpp>
+#include <Nuball2Tree.hpp>
+#include <Timer.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
 // #include <Convertor.hpp>
@@ -39,23 +42,22 @@
 // static thread_local std::mt19937 generator;
 
 int main()
-{ 
-
+{
   ////////////////////////////
   // CALCULATE TIME DECAY 2 //
   ////////////////////////////
 
-  auto file = TFile::Open("../Data_verification/data/endruns.root");
-  auto histo = file->Get<TH2F>("g_time_log");
-  auto test = count_to_peak_integral(histo, 2);
-  histo->SetDirectory(nullptr);
-  test->SetDirectory(nullptr);
-  file->Close();
-  auto outfile = TFile::Open("test.root", "recreate");
-  outfile->cd();
-  histo->Write();
-  test->Write();
-  outfile->Close();
+  // auto file = TFile::Open("../Data_verification/data/endruns.root");
+  // auto histo = file->Get<TH2F>("g_time_log");
+  // auto test = count_to_peak_integral(histo, 2);
+  // histo->SetDirectory(nullptr);
+  // test->SetDirectory(nullptr);
+  // file->Close();
+  // auto outfile = TFile::Open("test.root", "recreate");
+  // outfile->cd();
+  // histo->Write();
+  // test->Write();
+  // outfile->Close();
 
   //////////////////////////
   // CALCULATE TIME DECAY //
