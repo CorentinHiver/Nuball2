@@ -19,7 +19,7 @@ float smear(float const & nrj, TRandom* random)
 constexpr static bool kCalibGe = true;
 constexpr static bool bidim_by_run = false;
 
-void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5)
+void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
   std::string target = "U";
   std::string trigger = "dC1";
@@ -893,11 +893,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           auto const & nrj_int = size_cast(clover_i.nrj);
           if (make_triple_coinc_ddd && 0 < nrj_int && nrj_int < ddd_gate_bin_max && ddd_gate_lookup[nrj_int])
           {
-            for (size_t loop_j = 0; loop_j<CMult; ++loop_j)
+            for (size_t loop_j = 0; loop_j<coinc_clean.size(); ++loop_j)
             {
               auto const & clover_j = *(coinc_clean[loop_j]);
               if (clover_i.index() == clover_j.index() || std::abs(clover_i.time-clover_j.time) > bidimTimeWindow) continue;
-              for (size_t loop_k = loop_j+1; loop_k<CMult; ++loop_k)
+              for (size_t loop_k = loop_j+1; loop_k<coinc_clean.size(); ++loop_k)
               {
                 auto const & clover_k = *(coinc_clean[loop_k]);
                 if (clover_i.index() == clover_k.index() || std::abs(clover_i.time-clover_k.time) > bidimTimeWindow) continue;
