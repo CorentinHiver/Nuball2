@@ -75,10 +75,10 @@ public:
 
   auto const & index() const {return m_index;}
 
-  bool isVoisin(StripDSSD const & other) const {return abs(other.m_index - m_index) == 1;}
-  bool isCoincident(StripDSSD const & other) const {return abs(other.time - time) < DSSD::ring_coinc_tw;}
-  bool isVoisin(StripDSSD * other) const {return abs(other->m_index - m_index) == 1;}
-  bool isCoincident(StripDSSD * other) const {return abs(other->time - time) < DSSD::ring_coinc_tw;}
+  bool isVoisin(StripDSSD const & other) const {return std::abs(other.m_index - m_index) == 1;}
+  bool isCoincident(StripDSSD const & other) const {return std::abs(other.time - time) < DSSD::ring_coinc_tw;}
+  bool isVoisin(StripDSSD * other) const {return std::abs(other->m_index - m_index) == 1;}
+  bool isCoincident(StripDSSD * other) const {return std::abs(other->time - time) < DSSD::ring_coinc_tw;}
 
   double nrj = 0.0;
   Time time = 0;

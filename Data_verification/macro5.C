@@ -35,13 +35,13 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
   // std::string trigger = "PrM1DeC1";
   // std::string trigger = "C2";
   // std::string trigger = "P";
-  bool make_triple_coinc_ddd = false;
-  bool make_triple_coinc_dpp = false;
+  bool make_triple_coinc_ddd = true;
+  bool make_triple_coinc_dpp = true;
   Timer timer;
   std::atomic<int> files_total_size(0);
   std::atomic<int> total_evts_number(0);
   double total_time_of_beam_s = 0;
-  int freq_hit_display= nb_hits_read/10;
+  int freq_hit_display = (nb_hits_read > 1.e+100) ? 1.e+7 : nb_hits_read/10;
 
   // Calibration calibNaI("../136/coeffs_NaI.calib");
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
@@ -154,10 +154,13 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
       unique_TH2F p_VS_dT_LaBr3 (new TH2F(("p_VS_dT_LaBr3_"+thread_i_str).c_str(), "p_VS_dT_LaBr3", 300,-100_ns,200_ns, 10000,0,10000));
       
       unique_TH1F dT_642_VS_205 (new TH1F(("dT_642_VS_205_"+thread_i_str).c_str(), "dT_642_VS_205", 300,-100_ns,200_ns));
-      unique_TH1F dT_642_VS_309 (new TH1F(("dT_642_TS_309_"+thread_i_str).c_str(), "dT_642_VS_309", 300,-100_ns,200_ns));
+      unique_TH1F dT_642_VS_309 (new TH1F(("dT_642_VS_309_"+thread_i_str).c_str(), "dT_642_VS_309", 300,-100_ns,200_ns));
+      unique_TH1F dT_205_VS_104__d642 (new TH1F(("dT_205_VS_104__d642_"+thread_i_str).c_str(), "dT_205_VS_104__d642", 300,-100_ns,200_ns));
 
       unique_TH1F d_sumC2 (new TH1F(("d_sumC2_"+thread_i_str).c_str(), "d_sumC2", 2*nb_bins_Ge_singles,0,2*max_bin_Ge_singles));
       unique_TH1F d_sumC2_prompt_veto (new TH1F(("d_sumC2_prompt_veto_"+thread_i_str).c_str(), "d_sumC2_prompt_veto", 2*nb_bins_Ge_singles,0,2*max_bin_Ge_singles));
+      unique_TH2F d_VS_sumC2 (new TH2F(("d_VS_sumC2_"+thread_i_str).c_str(), "d_VS_sumC2", 2*nb_bins_Ge_bidim,0,2*max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F d_VS_sumC2_prompt_veto (new TH2F(("d_VS_sumC2_prompt_veto_"+thread_i_str).c_str(), "d_VS_sumC2_prompt_veto", 2*nb_bins_Ge_bidim,0,2*max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
 
       std::vector<std::unique_ptr<TH2I>> ddd_gated;
@@ -291,6 +294,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
       unique_TH2F d_VS_pclean_phos (new TH2F(("d_VS_pclean_phos_"+thread_i_str).c_str(), "d_VS_pclean_phos;Paris module_{prompt} [keV]; E#gamma_{prompt} [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F d_VS_daddback_mod (new TH2F(("d_VS_daddback_mod_"+thread_i_str).c_str(), "d_VS_daddback_mod;Paris module_{prompt} [keV]; E#gamma_{prompt} [keV]", 5000,0,20000, 10000,0,10000));
       unique_TH2F daddback_module_gate_1370_VS_run (new TH2F(("daddback_module_gate_1370_VS_run_"+thread_i_str).c_str(), "daddback_module_gate_1370_VS_run;run number;Paris module_{prompt} [keV];", 100,50,150, 5000,0,20000));
+      unique_TH2F daddback_module_gate_1370_VS_index (new TH2F(("daddback_module_gate_1370_VS_index_"+thread_i_str).c_str(), "daddback_module_gate_1370_VS_run;run number;Paris module_{prompt} [keV];", 100,50,150, 5000,0,20000));
 
       unique_TH2F paris_VS_sum_paris_M2 (new TH2F(("paris_VS_sum_paris_M2_"+thread_i_str).c_str(), "two delayed paris VS their sum;E sum [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, 1000,0,10000));
       unique_TH2F paris_VS_sum_paris_M2_P (new TH2F(("paris_VS_sum_paris_M2_P_"+thread_i_str).c_str(), "two delayed paris VS their sum, prompt trigger;E sum [keV]; E#gamma_{delayed}[keV]", 2000,0,20000, 1000,0,10000));
@@ -509,8 +513,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
           // Remove bad Ge and overflow :
           //  if ((find_key(CloversV2::maxE_Ge, label) && nrj>CloversV2::maxE_Ge.at(label))) continue;
-           if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
-           if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
+          if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
+          if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
 
           auto const & det_name = detectors[label]; 
           if (bidim_by_run && !(Paris::is[label] && !Paris::pid_LaBr3(nrj,nrj2)))
@@ -575,13 +579,13 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         dssd.analyze();
 
         // -- Multiplicity -- //
-        auto const & pclover_mult = pclovers.all.size();
-        auto const & pparis_mult = pparis.module_mult();
-        auto const & PM = pclover_mult + pparis_mult;
+        auto const & pcloverM = pclovers.all.size();
+        auto const & pparisM = pparis.module_mult();
+        auto const & PM = pcloverM + pparisM;
 
-        auto const & dclover_mult = dclovers.all.size();
-        auto const & dparis_mult = dparis.module_mult();
-        auto const & DM_raw = dclover_mult + dparis_mult;
+        auto const & dcloverM = dclovers.all.size();
+        auto const & dparisM = dparis.module_mult();
+        auto const & DM_raw = dcloverM + dparisM;
 
         // auto const & delayed_Ge_mult = delayed_clovers.Ge.size();
         // bool Gemult[10] = {false}; Gemult[delayed_Ge_mult] = true;
@@ -595,9 +599,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         // -- Calorimetry -- //
         auto const & prompt_paris_calo = pparis.calorimetry();
         
-        if (prompt_clover_calo  > 0) p_calo_clover -> Fill(prompt_clover_calo);
-        if (prompt_paris_calo   > 0) p_calo_phoswitch -> Fill(prompt_paris_calo);
-        if (prompt_clover_calo  > 0 && prompt_paris_calo  > 0) p_calo_clover_VS_p_calo_phoswitch -> Fill(prompt_clover_calo, prompt_paris_calo);
+        if (prompt_clover_calo > 0) p_calo_clover -> Fill(prompt_clover_calo);
+        if (prompt_paris_calo  > 0) p_calo_phoswitch -> Fill(prompt_paris_calo);
+        if (prompt_clover_calo > 0 && prompt_paris_calo > 0) p_calo_clover_VS_p_calo_phoswitch -> Fill(prompt_clover_calo, prompt_paris_calo);
         // if (delayed_clover_calo > 0 && delayed_paris_calo > 0) d_calo_clover_VS_d_calo_phoswitch -> Fill(delayed_clover_calo, delayed_paris_calo);
 
         auto const & PC = prompt_clover_calo + prompt_paris_calo;
@@ -676,7 +680,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           auto const & clover_i = *(dclovers.clean[loop_i]);
           auto const & index_i = clover_i.index();
           d->Fill(clover_i.nrj);
-          if (!dssd_trigger && PM == 0) d_prompt_veto->Fill(clover_i.nrj);
+          auto const & prompt_veto = (!dssd_trigger && PM == 0);
+          if (prompt_veto) d_prompt_veto->Fill(clover_i.nrj);
           E_dT->Fill(clover_i.time, clover_i.nrj);
 
           // Find the coincident gamma to create the calorimetry :
@@ -691,6 +696,22 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
               else DC+=clover_j->calo;
               ++DM;
               if (clover_j->isCleanGe() && clover_j!=&clover_i) coinc_clean.push_back(clover_j);
+            }
+          }
+
+          auto const & CMult = coinc_clean.size()+1;
+
+          if (CMult == 2)
+          {
+            auto const & sum = coinc_clean[0]->nrj + clover_i.nrj;
+            d_sumC2->Fill(sum);
+            d_VS_sumC2->Fill(sum, coinc_clean[0]->nrj);
+            d_VS_sumC2->Fill(sum, clover_i.nrj);
+            if (prompt_veto) 
+            {
+              d_sumC2_prompt_veto->Fill(sum);
+              d_VS_sumC2_prompt_veto->Fill(sum, coinc_clean[0]->nrj);
+              d_VS_sumC2_prompt_veto->Fill(sum, clover_i.nrj);
             }
           }
 
@@ -840,11 +861,23 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
             }
             if (gate(640_keV, clover_i.nrj, 644_keV))
             {
-              if (gate(203_keV, clover_j.nrj, 207_keV)) dT_642_VS_205->Fill(clover_i.time-clover_j.time);
+              if (gate(203_keV, clover_j.nrj, 207_keV)) 
+              {
+                dT_642_VS_205->Fill(clover_i.time-clover_j.time);
+                for (auto const & clover_k : coinc_clean)
+                {
+                  if (clover_k->index()!=clover_j.index()
+                   && clover_k->index()!=clover_i.index()
+                   && gate(103_keV, clover_k->nrj, 107_keV))
+                  {
+                    dT_205_VS_104__d642->Fill(clover_i.time-clover_j.time);
+                  }
+                }
+              }
               if (gate(307_keV, clover_j.nrj, 311_keV)) dT_642_VS_309->Fill(clover_i.time-clover_j.time);
               if (dssd_trigger)
               {
-                E_dT_p__642d->Fill(clover_i.time, clover_i.nrj);
+                E_dT_p__642d->Fill(clover_j.time, clover_j.nrj);
               }
             }
           }
@@ -860,11 +893,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           auto const & nrj_int = size_cast(clover_i.nrj);
           if (make_triple_coinc_ddd && 0 < nrj_int && nrj_int < ddd_gate_bin_max && ddd_gate_lookup[nrj_int])
           {
-            for (size_t loop_j = 0; loop_j<coinc_clean.size(); ++loop_j)
+            for (size_t loop_j = 0; loop_j<CMult; ++loop_j)
             {
               auto const & clover_j = *(coinc_clean[loop_j]);
               if (clover_i.index() == clover_j.index() || std::abs(clover_i.time-clover_j.time) > bidimTimeWindow) continue;
-              for (size_t loop_k = loop_j+1; loop_k<coinc_clean.size(); ++loop_k)
+              for (size_t loop_k = loop_j+1; loop_k<CMult; ++loop_k)
               {
                 auto const & clover_k = *(coinc_clean[loop_k]);
                 if (clover_i.index() == clover_k.index() || std::abs(clover_i.time-clover_k.time) > bidimTimeWindow) continue;
@@ -965,7 +998,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
           {
             d_VS_dparis_mod->Fill(module->nrj, clover_i.nrj);
             if (module->addbacked()) d_VS_daddback_mod->Fill(module->nrj, clover_i.nrj);
-            if (gate(1367_keV, clover_i.nrj, 1372_keV)) daddback_module_gate_1370_VS_run->Fill(run_number, module->nrj);
+            if (gate(1367_keV, clover_i.nrj, 1372_keV)) 
+            {
+              daddback_module_gate_1370_VS_run->Fill(run_number, module->nrj);
+              daddback_module_gate_1370_VS_index->Fill(module->index(), module->nrj);
+            }
           }
 
           for (auto const & dclean_phos : dparis.clean_phoswitches) 
@@ -1252,7 +1289,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         //   phoswitches_delayed->Fill(nrj);
         // }
 
-        // if (dparis_mult == 2)
+        // if (dparisM == 2)
         // {
         //   double sum = 0;
         //   for (auto const & id : dparis.back.modules_id) paris_VS_sum_paris_M2->Fill(sum, dparis.back.modules[id].nrj);
@@ -1475,6 +1512,13 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
         dT_642_VS_205->Write("dT_642_VS_205", TObject::kOverwrite);
         dT_642_VS_309->Write("dT_642_VS_309", TObject::kOverwrite);
+        dT_642_VS_309->Write("dT_642_VS_309", TObject::kOverwrite);
+        dT_205_VS_104__d642->Write("dT_205_VS_104__d642", TObject::kOverwrite);
+
+        d_sumC2->Write("d_sumC2", TObject::kOverwrite);
+        d_VS_sumC2->Write("d_VS_sumC2", TObject::kOverwrite);
+        d_sumC2_prompt_veto->Write("d_sumC2_prompt_veto", TObject::kOverwrite);
+        d_VS_sumC2_prompt_veto->Write("d_VS_sumC2_prompt_veto", TObject::kOverwrite);
 
         print("write sum spectra");
         // d_VS_sum_C2->Write("d_VS_sum_C2", TObject::kOverwrite);
@@ -1546,6 +1590,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
         d_VS_pclean_phos->Write("d_VS_pclean_phos", TObject::kOverwrite);
         d_VS_daddback_mod->Write("d_VS_daddback_mod", TObject::kOverwrite);
         daddback_module_gate_1370_VS_run->Write("daddback_module_gate_1370_VS_run", TObject::kOverwrite);
+        daddback_module_gate_1370_VS_index->Write("daddback_module_gate_1370_VS_index", TObject::kOverwrite);
 
         paris_VS_sum_paris_M2->Write("paris_VS_sum_paris_M2", TObject::kOverwrite);
         paris_VS_sum_paris_M2_P->Write("paris_VS_sum_paris_M2_P", TObject::kOverwrite);
@@ -1573,6 +1618,14 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 5
 
       file->Close();
       print(out_filename, "written");
+      if (nb_files<0)
+      {
+        std::string dest = "data/merge_"+trigger+".root";
+        std::string source = "data/"+trigger+"/"+target+"/run_*.root";
+        std::string command = "hadd -f -j 5 -d . "+ dest + " " + source;
+        print(command);
+        gSystem->Exec(command.c_str());
+      }
       // mutex freed
     }
   });

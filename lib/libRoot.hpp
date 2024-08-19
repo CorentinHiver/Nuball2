@@ -1980,46 +1980,46 @@ TH1D* bestProjectionX(TH2F* histo, std::string name, int bin, int resolution)
   return pro;
 }
 
-TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max)
+double ratio_integrals(TH1F* histo1, TH1F* histo2, int peak_min, int peak_max)
+{
+  return peak_integral(histo1, peak_min, peak_max)/peak_integral(histo2, peak_min, peak_max);
+}
+double ratio_integrals(TH1D* histo1, TH1D* histo2, int peak_min, int peak_max)
+{
+  return peak_integral(histo1, peak_min, peak_max)/peak_integral(histo2, peak_min, peak_max);
+}
+
+TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm)
 {
   std::string name = histo->GetName()+std::string("_veto_clean");
   auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
 
-  ret->Add(histo_veto, -peak_integral(histo->ProjectionX("histo_projX"), peak_norm_min, peak_norm_max)/peak_integral(histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max));
-  
+  ret->Add(histo_veto, norm);
+
+  return ret;
+}
+
+TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max)
+{
+  return removeVeto(histo, histo_veto, -ratio_integrals(histo->ProjectionX("histo_projX"), histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max));
   delete gDirectory->Get("histo_projX");
   delete gDirectory->Get("histo_veto_projX");
+}
+
+TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, double norm)
+{
+  std::string name = histo->GetName()+std::string("_veto_clean");
+  auto ret = static_cast<TH1F*>(histo->Clone(name.c_str()));
+
+  ret->Add(histo_veto, norm);
   
   return ret;
 }
 
-
-// void interactiveProjectionX(TH2F* histo, int resolution)
-// {
-//   double x = 0; double y = 0; double prev_y=0;
-//   histo->Draw("colz");
-//   auto pad = gPad;
-//   auto projC = new TCanvas("Proj","Proj");
-//   while(gPad)
-//   {
-//     GetPoint(projC, x, y);
-//     if (prev_y == y) continue;
-//     prev_y = y;
-//     std::string name = "Proj_"+std::to_string(y);
-//     projC->SetName(name.c_str());
-//     if (y-3*resolution<0) {error("Lower bound reached !"); continue;}
-    
-//     auto pro = bestProjectionX(histo, name, y, resolution);
-//     pro->SetName(name.c_str());
-//     pro->SetTitle(name.c_str());
-//     projC->cd();
-//     pro->Draw();
-
-//     projC->Update();
-//     pad->cd();
-//     // std::this_thread::sleep_for(std::chrono::milliseconds(100));
-//   }
-// }
+TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, int peak_norm_min, int peak_norm_max)
+{
+  return removeVeto(histo, histo_veto, -ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max));
+}
 
 /**
  * @brief Histo is E VS time with time in ps and E in keV
@@ -2266,7 +2266,7 @@ public:
 private:
   std::vector<double> m_data;
   double m_max = 0.0;
-  TF1* function;
+  TF1* function = nullptr;
 };
 
 TH1D* apply_efficiency(TH1* histo, Efficiency const & eff)
@@ -2309,11 +2309,7 @@ class Radware
     static bool finish = false;
     std::thread root_thread([]()
     {
-      auto prev_time = time(0);
-      while(!finish) 
-      {
-        gPad->WaitPrimitive();
-      }
+      while(!finish) gPad->WaitPrimitive();
     });
     // char in[4] = {0};
     std::string instruction;
