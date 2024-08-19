@@ -47,7 +47,9 @@
 ///////////////
 
 using unique_TH1F  = std::unique_ptr<TH1F>;
+using unique_TH1D  = std::unique_ptr<TH1D>;
 using unique_TH2F  = std::unique_ptr<TH2F>;
+using unique_TH2D  = std::unique_ptr<TH2D>;
 using unique_TFile = std::unique_ptr<TFile>;
 using unique_tree  = std::unique_ptr<TTree>;
 
@@ -1912,6 +1914,14 @@ double selectXPoints(TH1* histo, std::string const & instructions)
   return x;
 }
 
+TH1D* myProjectionX(TH2* histo, std::string const & name, double const & xvalue_min, double const & xvalue_max, double const & xvalue_min_bckg, double const & xvalue_max_bckg, int peak_norm_min, int peak_norm_max)
+{
+  TH1D* proj = histo->ProjectionX(name.c_str(), xvalue_min, xvalue_max);
+  std::unique_ptr<TH1D> bckg (histo->ProjectionX((name+"_bckg").c_str(), xvalue_min_bckg, xvalue_max_bckg));
+  proj->Add(bckg.get(), -peak_integral(proj, peak_norm_min, peak_norm_max)/peak_integral(bckg.get(), peak_norm_min, peak_norm_max));
+  return proj;
+}
+
 TH1D* myProjectionX(TH2* histo, std::string const & name, double const & xvalue_min, double const & xvalue_max, double const & xvalue_min_bckg, double const & xvalue_max_bckg)
 {
   TH1D* proj = histo->ProjectionX(name.c_str(), xvalue_min, xvalue_max);
@@ -1969,6 +1979,20 @@ TH1D* bestProjectionX(TH2F* histo, std::string name, int bin, int resolution)
 
   return pro;
 }
+
+TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max)
+{
+  std::string name = histo->GetName()+std::string("_veto_clean");
+  auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
+
+  ret->Add(histo_veto, -peak_integral(histo->ProjectionX("histo_projX"), peak_norm_min, peak_norm_max)/peak_integral(histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max));
+  
+  delete gDirectory->Get("histo_projX");
+  delete gDirectory->Get("histo_veto_projX");
+  
+  return ret;
+}
+
 
 // void interactiveProjectionX(TH2F* histo, int resolution)
 // {
@@ -2269,41 +2293,58 @@ class Radware
 {public:
   Radware(TH2F* _bidim) : m_bidim(_bidim)
   {
+    init();
     proj();
     launch();
   }
+  void init()
+  {
+    canvas->ToggleEventStatus();
+    canvas->ToggleEditor();
+    canvas->ToggleToolBar();
+    canvas->cd();
+  }
   void launch()
   {
-    draw(m_proj);
-    bool finish = false;
-    std::thread root_thread([&finish]()
+    static bool finish = false;
+    std::thread root_thread([]()
     {
-      while(!finish) gPad->WaitPrimitive(); 
+      auto prev_time = time(0);
+      while(!finish) 
+      {
+        gPad->WaitPrimitive();
+      }
     });
     // char in[4] = {0};
     std::string instruction;
-    while(true)
+    while(!finish)
     {
       std::cout << "> ";
       std::getline(std::cin, instruction);
       if (instruction == "") continue;
-      else if (instruction == "ex") this->ex();
-      else if (instruction == "st") {finish = true; break;}
-      else if (instruction == "pr") this->draw(m_proj);
-      else if (instruction == "bd") this->draw(m_bidim, "colz");
-      else if (instruction == "in") this->integral();
-      else if (instruction == "bi") this->set_nb_it_bckg();
       else if (instruction == "ag") this->addGate();
+      else if (instruction == "bd") this->draw(m_bidim, "colz");
+      else if (instruction == "bi") this->set_nb_it_bckg();
+      else if (instruction == "ds") this->display_spectrum();
+      else if (instruction == "ex") this->ex();
+      else if (instruction == "in") this->integral();
+      else if (instruction == "pr") this->draw(m_proj);
       else if (instruction == "rb") this->removeBackground();
+      else if (instruction == "sm") {this->gate_same();}
+      else if (instruction == "st") {finish = true;}
       else if (isNumber(instruction)) this->gate(std::stod(instruction));
       else error("Wrong input...");
     }
+    print("Exiting CoRadware, double click or make action on the spectra to close");
     root_thread.join();
+    print("parallel tasks joined");
   }
 
   void draw(TH1* histo, std::string const & options = "")
   {
-    if (m_focus) {histo->GetXaxis()->SetRangeUser(m_focus->GetXaxis()->GetXmin(), m_focus->GetXaxis()->GetXmax());}
+    m_nb_sm = 0;
+    canvas->cd();
+    if (m_focus) {histo->GetXaxis()->SetRangeUser(m_focus->GetXaxis()->GetBinLowEdge(m_focus->GetXaxis()->GetFirst()), m_focus->GetXaxis()->GetBinUpEdge(m_focus->GetXaxis()->GetLast()));}
     m_focus = histo;
     m_focus->Draw(options.c_str());
     gPad->Update();
@@ -2320,7 +2361,6 @@ class Radware
     m_proj = static_cast<TH1*> (m_bidim->ProjectionX()->Clone("total projection"));
     m_proj->SetTitle("total projection");
     this->draw(m_proj);
-    m_focus = m_gate;
   }
 
   void addGate()
@@ -2347,6 +2387,25 @@ class Radware
     gPad->Update();
   }
 
+  void gate_same()
+  {
+    std::string val_str;
+    print("Choose engergy to draw on top");
+    std::cin >> val_str;
+    if (!isNumber(val_str)) {error("Gate must be a number"); return;}
+    auto const & e = std::stoi(val_str);
+    auto const & bin = m_bidim->GetXaxis()->FindBin(e);
+    auto const & low_e = e-2;
+    auto const & high_e = e+2;
+    std::string name = std::to_string(bin)+" g same";
+    auto gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_e, high_e)->Clone(name.c_str()));
+    gate->SetTitle((std::to_string(bin)+" gate").c_str());
+    gate->Draw("same");
+    gate->SetLineColor(m_nice_colors[(++m_nb_sm & 111)]);
+    m_list_histo_to_delete.push_back(name);
+    gPad->Update();
+  }
+
   void gate(double e)
   {
     delete m_gate;
@@ -2366,7 +2425,7 @@ class Radware
     std::cin >> start;
     print("Choose borne sup");
     std::cin >> stop;
-    print(peak_integral(m_focus, start, stop, m_nb_it_bckg));
+    print(peak_integral(m_proj, start, stop, m_nb_it_bckg));
   }
 
   void removeBackground()
@@ -2381,6 +2440,14 @@ class Radware
     // delete m_proj;
     // delete m_gate;
     // delete m_focus;
+    for (auto const & name : m_list_histo_to_delete) delete gDirectory->Get(name.c_str());
+    canvas->Close();
+  }
+
+  void display_spectrum()
+  {
+    m_focus->GetXaxis()->UnZoom();
+    if (m_focus->InheritsFrom(TH2::Class())) m_focus->GetYaxis()->UnZoom();
   }
 
   void set_nb_it_bckg()
@@ -2390,11 +2457,16 @@ class Radware
   }
 
 private:
+  TCanvas *canvas = new TCanvas("RadwareCanvas", "RadwareCanvas");
   int m_nb_it_bckg = 20;
   TH2F* m_bidim = nullptr;
   TH1* m_proj = nullptr;
   TH1* m_gate = nullptr;
   TH1* m_focus = nullptr;
+  std::vector<std::string> m_list_histo_to_delete;
+
+  int m_nb_sm = 0;
+  std::vector<int> m_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};
 };
 
 // #endif //__CINT__

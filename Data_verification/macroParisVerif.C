@@ -463,7 +463,7 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
       // mutex freed
     }
   });
-  print("Reading speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_hits_number/timer.TimeSec(), "M events/s");
+  print(timer(), "to read", files_total_size, "Mo at a speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_hits_number/timer.TimeSec(), "M events/s");
 }
 
 #ifndef __CINT__
