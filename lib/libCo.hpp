@@ -623,6 +623,21 @@ using T_is_number = std::enable_if_t<std::is_arithmetic_v<T>>;
 using T_is_number = void;
 #endif // Cpp17
 
+template<class... T>
+constexpr std::size_t get_size() {
+    return sizeof...(T);
+}
+
+template <typename... Args>
+struct are_all_arithmetic;
+
+template <>
+struct are_all_arithmetic<> : std::true_type {};
+
+template <typename First, typename... Rest>
+struct are_all_arithmetic<First, Rest...>
+    : std::conjunction<std::is_arithmetic<First>, are_all_arithmetic<Rest...>> {};
+
 ///////////////////////////
 //   SLOTS AND SIGNALS   // TDB
 ///////////////////////////
@@ -767,6 +782,14 @@ constexpr T found(const std::array<T, N>& array, const T& value)
   for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return true;
   return false;  // Value not found
 } 
+
+//////////////////////////////////
+// MAKE SOME STD FUNC CONSTEXPR //
+//////////////////////////////////
+
+template <typename T>
+typename std::enable_if_t<std::is_arithmetic_v<T>, T>
+constexpr abs_const(T const & t) {return (t>=0) ? t : -t;}
 
 // #if (__cplusplus >= 201703L)
 

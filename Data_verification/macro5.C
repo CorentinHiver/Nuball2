@@ -37,6 +37,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   // std::string trigger = "P";
   bool make_triple_coinc_ddd = true;
   bool make_triple_coinc_dpp = true;
+  bool make_triple_coinc_ppp = true;
   Timer timer;
   std::atomic<int> files_total_size(0);
   std::atomic<int> total_evts_number(0);
@@ -54,53 +55,54 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
   static constexpr Time bidimTimeWindow = 40_ns;
 
-  size_t gate_bin_size = 2; // Take 2 keV
-  std::vector<int> ddd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115, 1846, 2125}; // keV
-  std::vector<int> dpp_gates = {205, 222, 244, 279, 301, 309, 352, 642, 688, 699, 903, 921, 942, 966, 991, 1279, 1750, 1836, 1846, 2115, 2125}; // keV
-  std::vector<int> ppp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
+  static constexpr size_t gate_bin_size = 2; // Take 2 keV
+  static constexpr std::array<int, 19> ddd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115, 1846, 2125}; // keV
+  static constexpr std::array<int, 21> dpp_gates = {205, 222, 244, 279, 301, 309, 352, 642, 688, 699, 903, 921, 942, 966, 991, 1279, 1750, 1836, 1846, 2115, 2125}; // keV
+  static constexpr std::array<int, 14> ppp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
 
-  auto const & ddd_gate_bin_max = maximum(ddd_gates)+gate_bin_size+1;
-  std::vector<bool> ddd_gate_lookup; ddd_gate_lookup.reserve(ddd_gate_bin_max);
-  std::vector<int> ddd_id_gate_lkp; ddd_id_gate_lkp.reserve(ddd_gate_bin_max);
-  for (size_t gate_index = 0;  gate_index<ddd_gates.size(); ++gate_index)
-  {
-    for (size_t temp_bin = 0; temp_bin<size_cast(ddd_gate_bin_max); ++temp_bin) 
+  static auto constexpr ddd_gate_bin_max = maximum(ddd_gates)+gate_bin_size+1;
+  static auto constexpr ddd_gate_lookup = LUT<ddd_gate_bin_max> ([](int bin){
+    for (auto const & gate : ddd_gates) if (abs_const(gate-bin)<3) return true;
+    return false;
+  });
+  static auto constexpr ddd_id_gate_lkp = LUT<ddd_gate_bin_max> ([&](int bin){
+    if (ddd_gate_lookup[bin])
     {
-      auto const & _gate = ddd_gates[gate_index];
-      if (temp_bin<_gate-gate_bin_size) 
-      {
-        ddd_gate_lookup.push_back(false);
-        ddd_id_gate_lkp.push_back(0);
-      }
-      else if (temp_bin<_gate+gate_bin_size+1) 
-      {
-        ddd_gate_lookup.push_back(true);
-        ddd_id_gate_lkp.push_back(gate_index);
-      }
-      else break;
+      for (size_t i = 0; i<ddd_gates.size(); ++i) if (abs_const(ddd_gates[i] - bin)<3) return int(i);
+      return 0;
     }
-  }
-  auto const & dpp_gate_bin_max = maximum(dpp_gates)+gate_bin_size+1;
-  std::vector<bool> dpp_gate_lookup; dpp_gate_lookup.reserve(dpp_gate_bin_max);
-  std::vector<int> dpp_id_gate_lkp; dpp_id_gate_lkp.reserve(dpp_gate_bin_max);
-  for (size_t gate_index = 0;  gate_index<dpp_gates.size(); ++gate_index)
-  {
-    for (size_t temp_bin = 0; temp_bin<size_cast(dpp_gate_bin_max); ++temp_bin) 
+    else return 0;
+  });
+  
+  static auto constexpr dpp_gate_bin_max = maximum(dpp_gates)+gate_bin_size+1;
+  static auto constexpr dpp_gate_lookup = LUT<dpp_gate_bin_max> ([](int bin){
+    for (auto const & gate : dpp_gates) if (abs_const(gate-bin)<3) return true;
+    return false;
+  });
+  static auto constexpr dpp_id_gate_lkp = LUT<dpp_gate_bin_max> ([&](int bin){
+    if (dpp_gate_lookup[bin])
     {
-      auto const & _gate = dpp_gates[gate_index];
-      if (temp_bin<_gate-gate_bin_size) 
-      {
-        dpp_gate_lookup.push_back(false);
-        dpp_id_gate_lkp.push_back(0);
-      }
-      else if (temp_bin<_gate+gate_bin_size+1) 
-      {
-        dpp_gate_lookup.push_back(true);
-        dpp_id_gate_lkp.push_back(gate_index);
-      }
-      else break;
+      for (size_t i = 0; i<dpp_gates.size(); ++i) if (abs_const(dpp_gates[i] - bin)<3) return int(i);
+      return 0;
     }
-  }
+    else return 0;
+  });
+
+  static auto constexpr ppp_gate_bin_max = maximum(ppp_gates)+gate_bin_size+1;
+  static auto constexpr ppp_gate_lookup = LUT<ppp_gate_bin_max> ([](int bin){
+    for (auto const & gate : ppp_gates) if (abs_const(gate-bin)<3) return true;
+    return false;
+  });
+  static auto constexpr ppp_id_gate_lkp = LUT<ppp_gate_bin_max> ([&](int bin){
+    if (ppp_gate_lookup[bin])
+    {
+      for (size_t i = 0; i<ppp_gates.size(); ++i) if (abs_const(ppp_gates[i] - bin)<3) return int(i);
+      return 0;
+    }
+    else return 0;
+  });
+  
+
 
   MTObject::parallelise_function([&](){
 
@@ -170,9 +172,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       std::vector<std::unique_ptr<TH2I>> dpp_gated;
       if (make_triple_coinc_dpp) for (auto const & _gate : dpp_gates) dpp_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("dpp_gated_on_", _gate, "_", thread_i, " delayed").c_str(),
                                         concatenate("gamma-gamma prompt gated on delayed ", _gate, "keV;prompt [keV];prompt [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
-      // std::vector<TH2I*> pp_gated;
-      // for (auto const & _gate : ppp_gates) pp_gated.push_back(new TH2I(("pp_gated_"+std::to_string(_gate)+"_"+thread_i_str).c_str(), 
-      //                                   ("gamma-gamma prompt gated on "+std::to_string(_gate)+";E1 [keV];E2 [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      std::vector<TH2I*> ppp_gated;
+      if (make_triple_coinc_ppp) for (auto const & _gate : ppp_gates) ppp_gated.push_back(new TH2I(("ppp_gated_"+std::to_string(_gate)+"_"+thread_i_str).c_str(), 
+                                        ("gamma-gamma prompt gated on prompt"+std::to_string(_gate)+";E1 [keV];E2 [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
       // General codes : P = prompt, D = delayed, p = particle, M multiplicity, C calorimetry, n = no 
       // Multiplicity : (codes : PM = prompt multiplicity ; DM = delayed multiplicity)
@@ -652,6 +654,22 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               pp_p->Fill(clover_i.nrj, clover_j.nrj);
               pp_p->Fill(clover_j.nrj, clover_i.nrj);
             }
+
+            // Triple coincidence ppp :
+            auto const & nrj_int = size_cast(clover_i.nrj);
+            if (make_triple_coinc_ppp && 0 < nrj_int && nrj_int < ppp_gate_bin_max && ppp_gate_lookup[nrj_int])
+            {
+              for (size_t loop_j = 0; loop_j<pclovers.clean.size(); ++loop_j)
+              {
+                auto const & clover_j = *(pclovers.clean[loop_j]);
+                for (size_t loop_k = loop_j+1; loop_k<pclovers.clean.size(); ++loop_k)
+                {
+                  auto const & clover_k = *(pclovers.clean[loop_k]);
+                  ppp_gated[ppp_id_gate_lkp[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
+                  ppp_gated[ppp_id_gate_lkp[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
+                }
+              }
+            }
           }
 
           for (auto const & BGO_i : pclovers.BGOClean_id)
@@ -912,12 +930,12 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           {
             for (size_t loop_j = 0; loop_j<pclovers.clean.size(); ++loop_j)
             {
-              auto const & clover_j = pclovers.clean[loop_j];
+              auto const & clover_j = *(pclovers.clean[loop_j]);
               for (size_t loop_k = loop_j+1; loop_k<pclovers.clean.size(); ++loop_k)
               {
                 auto const & clover_k = *(pclovers.clean[loop_k]);
-                dpp_gated[dpp_id_gate_lkp[nrj_int]]->Fill(clover_j->nrj, clover_k.nrj);
-                dpp_gated[dpp_id_gate_lkp[nrj_int]]->Fill(clover_k.nrj, clover_j->nrj);
+                dpp_gated[dpp_id_gate_lkp[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
+                dpp_gated[dpp_id_gate_lkp[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
               }
             }
           }
@@ -1360,6 +1378,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           ddd_gated[gate_index]->Write(("ddd_gate_"+std::to_string(ddd_gates[gate_index])).c_str(), TObject::kOverwrite);
         if (make_triple_coinc_dpp) for (size_t gate_index = 0; gate_index<dpp_gates.size(); ++gate_index) 
           dpp_gated[gate_index]->Write(("dpp_gate_"+std::to_string(dpp_gates[gate_index])).c_str(), TObject::kOverwrite);
+        if (make_triple_coinc_ppp) for (size_t gate_index = 0; gate_index<ppp_gates.size(); ++gate_index) 
+          ppp_gated[gate_index]->Write(("ppp_gate_"+std::to_string(ppp_gates[gate_index])).c_str(), TObject::kOverwrite);
 
         print("write multiplicity spectra");
         // Multiplicity :

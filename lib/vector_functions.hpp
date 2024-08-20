@@ -164,6 +164,14 @@ std::vector<size_t>& linspace(std::vector<size_t> & vec, size_t size, size_t beg
   return vec;
 }
 
+template <typename T, size_t n>
+constexpr T maximum(std::array<T, n> const & array)
+{
+  static_assert(n>0, "array size is 0 !!");
+  auto value = array[0];
+  for (auto const & e : array) if (e>value) value = e;
+  return value;
+}
 
 template <typename T>
 T maximum(std::vector<T> const & vector)
