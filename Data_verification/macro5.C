@@ -19,7 +19,7 @@ float smear(float const & nrj, TRandom* random)
 constexpr static bool kCalibGe = true;
 constexpr static bool bidim_by_run = false;
 
-void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
+void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8)
 {
   std::string target = "U";
   std::string trigger = "dC1";
@@ -56,9 +56,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   static constexpr Time bidimTimeWindow = 40_ns;
 
   static constexpr size_t gate_bin_size = 2; // Take 2 keV
-  static constexpr std::array<int, 19> ddd_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991, 1750, 1836, 2115, 1846, 2125}; // keV
-  static constexpr std::array<int, 21> dpp_gates = {205, 222, 244, 279, 301, 309, 352, 642, 688, 699, 903, 921, 942, 966, 991, 1279, 1750, 1836, 1846, 2115, 2125}; // keV
-  static constexpr std::array<int, 14> ppp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
+  static constexpr std::array<int, 25> ddd_gates = {99, 104, 205, 222, 244, 279, 301, 309, 642, 688, 699, 873, 885, 903, 912, 921, 942, 958, 966, 991, 1750, 1836, 1846, 2115, 2125}; // keV
+  static constexpr std::array<int, 25> dpp_gates = {99, 104, 205, 222, 244, 279, 301, 309, 352, 642, 688, 699, 873, 903, 912, 921, 942, 958, 966, 991, 1750, 1836, 1846, 2115, 2125}; // keV
+  static constexpr std::array<int, 16> ppp_gates = {99, 104, 205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
 
   static auto constexpr ddd_gate_bin_max = maximum(ddd_gates)+gate_bin_size+1;
   static auto constexpr ddd_gate_lookup = LUT<ddd_gate_bin_max> ([](int bin){
@@ -151,13 +151,18 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F dd_bckg (new TH2F(("dd_bckg_"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dd_prompt_veto (new TH2F(("dd_prompt_veto_"+thread_i_str).c_str(), "gamma-gamma delayed prompt veto;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dp (new TH2F(("dp_"+thread_i_str).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dp_particle_veto (new TH2F(("dp_particle_veto_"+thread_i_str).c_str(), "delayed VS prompt  particle veto;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F E_dT (new TH2F(("E_dT_"+thread_i_str).c_str(), "E_dT clean", 600,-100_ns,200_ns, 20000,0,20000));
       unique_TH2F E_dT_phoswitch (new TH2F(("E_dT_phoswitch_"+thread_i_str).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, 2000,0,10000));
       unique_TH2F p_VS_dT_LaBr3 (new TH2F(("p_VS_dT_LaBr3_"+thread_i_str).c_str(), "p_VS_dT_LaBr3", 300,-100_ns,200_ns, 10000,0,10000));
       
-      unique_TH1F dT_642_VS_205 (new TH1F(("dT_642_VS_205_"+thread_i_str).c_str(), "dT_642_VS_205", 300,-100_ns,200_ns));
-      unique_TH1F dT_642_VS_309 (new TH1F(("dT_642_VS_309_"+thread_i_str).c_str(), "dT_642_VS_309", 300,-100_ns,200_ns));
-      unique_TH1F dT_205_VS_104__d642 (new TH1F(("dT_205_VS_104__d642_"+thread_i_str).c_str(), "dT_205_VS_104__d642", 300,-100_ns,200_ns));
+      unique_TH1F dT_642_VS_205 (new TH1F(("dT_642_VS_205_"+thread_i_str).c_str(), "dT_642_VS_205;T(642)-T(205) [ns]", 100,-100_ns,100_ns));
+      unique_TH1F dT_642_VS_309 (new TH1F(("dT_642_VS_309_"+thread_i_str).c_str(), "dT_642_VS_309;T(642)-T(309) [ns]", 100,-100_ns,100_ns));
+      unique_TH1F dT_642_VS_279 (new TH1F(("dT_642_VS_279_"+thread_i_str).c_str(), "dT_642_VS_279;T(642)-T(279) [ns]", 100,-100_ns,100_ns));
+      unique_TH1F dT_642_VS_244 (new TH1F(("dT_642_VS_244_"+thread_i_str).c_str(), "dT_642_VS_244;T(642)-T(244) [ns]", 100,-100_ns,100_ns));
+      unique_TH1F dT_642_VS_301 (new TH1F(("dT_642_VS_301_"+thread_i_str).c_str(), "dT_642_VS_301;T(642)-T(301) [ns]", 100,-100_ns,100_ns));
+      unique_TH1F dT_205_VS_104__d642 (new TH1F(("dT_205_VS_104__d642_"+thread_i_str).c_str(), "dT_205_VS_104__d642", 50,-100_ns,100_ns));
+      unique_TH2F dT_642_VS_d (new TH2F(("dT_642_VS_d_"+thread_i_str).c_str(), "dT_642_VS_d;d[keV];T(642)-T(d) [ns]", 2500,0,5000, 50,-100_ns,100_ns));
 
       unique_TH1F d_sumC2 (new TH1F(("d_sumC2_"+thread_i_str).c_str(), "d_sumC2", 2*nb_bins_Ge_singles,0,2*max_bin_Ge_singles));
       unique_TH1F d_sumC2_prompt_veto (new TH1F(("d_sumC2_prompt_veto_"+thread_i_str).c_str(), "d_sumC2_prompt_veto", 2*nb_bins_Ge_singles,0,2*max_bin_Ge_singles));
@@ -166,22 +171,22 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
 
       std::vector<std::unique_ptr<TH2I>> ddd_gated;
-      if (make_triple_coinc_ddd) for (auto const & _gate : ddd_gates) ddd_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("ddd_gated_on_", _gate, "_", thread_i, " delayed").c_str(), 
+      if (make_triple_coinc_ddd) for (auto const & _gate : ddd_gates) ddd_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("ddd_gated_on_", _gate, "_", thread_i, "_delayed").c_str(), 
                                         concatenate("gamma-gamma delayed gated on delayed ", _gate, "keV;delayed [keV];delayed [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
 
       std::vector<std::unique_ptr<TH2I>> dpp_gated;
-      if (make_triple_coinc_dpp) for (auto const & _gate : dpp_gates) dpp_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("dpp_gated_on_", _gate, "_", thread_i, " delayed").c_str(),
+      if (make_triple_coinc_dpp) for (auto const & _gate : dpp_gates) dpp_gated.push_back(std::unique_ptr<TH2I>(new TH2I(concatenate("dpp_gated_on_", _gate, "_", thread_i, "_delayed").c_str(),
                                         concatenate("gamma-gamma prompt gated on delayed ", _gate, "keV;prompt [keV];prompt [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim)));
       std::vector<TH2I*> ppp_gated;
-      if (make_triple_coinc_ppp) for (auto const & _gate : ppp_gates) ppp_gated.push_back(new TH2I(("ppp_gated_"+std::to_string(_gate)+"_"+thread_i_str).c_str(), 
-                                        ("gamma-gamma prompt gated on prompt"+std::to_string(_gate)+";E1 [keV];E2 [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      if (make_triple_coinc_ppp) for (auto const & _gate : ppp_gates) ppp_gated.push_back(new TH2I(concatenate("ppp_gated_on_", _gate, "_", thread_i, "_prompt").c_str(), 
+                                        ("gamma-gamma prompt gated on prompt"+std::to_string(_gate)+";prompt [keV];prompt [keV]").c_str(), nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
 
       // General codes : P = prompt, D = delayed, p = particle, M multiplicity, C calorimetry, n = no 
       // Multiplicity : (codes : PM = prompt multiplicity ; DM = delayed multiplicity)
       unique_TH1F p_D (new TH1F(("p_D"+thread_i_str).c_str(), "prompt with delayed; mult", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F d_P (new TH1F(("d_P"+thread_i_str).c_str(), "delayed with prompt; mult", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F dd_P (new TH2F(("dd_P_"+thread_i_str).c_str(), "gamma-gamma delayed with prompt;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
-      unique_TH2F dd_nop (new TH2F(("dd_nop_"+thread_i_str).c_str(), "gamma-gamma delayed with prompt;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dd_particle_veto (new TH2F(("dd_nop_"+thread_i_str).c_str(), "gamma-gamma delayed particle veto;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH1F p_mult (new TH1F(("p_mult_"+thread_i_str).c_str(), "prompt multiplicity; mult", 20,0,20));
       unique_TH1F d_mult (new TH1F(("d_mult"+thread_i_str).c_str(), "delayed multiplicity; mult", 20,0,20));
       unique_TH2F dp_mult (new TH2F(("dp_mult"+thread_i_str).c_str(), "delayed VS prompt multiplicity; prompt mult; delayed mult", 20,0,20, 20,0,20));
@@ -313,6 +318,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F pp_p (new TH2F(("pp_p_"+thread_i_str).c_str(), "gamma-gamma prompt particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH1F d_p (new TH1F(("d_p_"+thread_i_str).c_str(), "delayed particle trigger;keV", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F dd_p (new TH2F(("dd_p_"+thread_i_str).c_str(), "gamma-gamma delayed particle trigger;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH2F dd_p_prompt_veto (new TH2F(("dd_p_prompt_veto_"+thread_i_str).c_str(), "gamma-gamma delayed particle trigger, prompt veto;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dd_pPM4DM4 (new TH2F(("dd_pPM4DM4_"+thread_i_str).c_str(), "gamma-gamma delayed with particle & prompt multiplicity < 4 and delayed multiplicity < 4;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dd_pPM4PC3DM4 (new TH2F(("dd_pPM4PC3DM4_"+thread_i_str).c_str(), "gamma-gamma delayed with particle & prompt multiplicity < 4 & prompt calcorimetry < 3 & delayed multiplicity < 4;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dd_pPM4PC3DM4Ex (new TH2F(("dd_pPM4PC3DM4Ex_"+thread_i_str).c_str(), "gamma-gamma delayed with particle & prompt multiplicity < 4 & prompt calcorimetry < 3 & delayed multiplicity < 4 & proton;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -634,7 +640,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         for (size_t loop_i = 0; loop_i<pclovers.GeClean_id.size(); ++loop_i)
         {
           auto const & index_i = pclovers.GeClean_id[loop_i];
-          auto const & clover_i = pclovers[index_i];
+          auto const & clover_i = pclovers[index_i]; 
           p->Fill(clover_i.nrj);
           E_dT->Fill(clover_i.time, clover_i.nrj);
           p_VS_PM->Fill(PM, clover_i.nrj);
@@ -662,9 +668,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
               for (size_t loop_j = 0; loop_j<pclovers.clean.size(); ++loop_j)
               {
                 auto const & clover_j = *(pclovers.clean[loop_j]);
+                if (clover_i.index() == clover_j.index()) continue;
                 for (size_t loop_k = loop_j+1; loop_k<pclovers.clean.size(); ++loop_k)
                 {
                   auto const & clover_k = *(pclovers.clean[loop_k]);
+                  if (clover_i.index() == clover_k.index()) continue;
                   ppp_gated[ppp_id_gate_lkp[nrj_int]]->Fill(clover_j.nrj, clover_k.nrj);
                   ppp_gated[ppp_id_gate_lkp[nrj_int]]->Fill(clover_k.nrj, clover_j.nrj);
                 }
@@ -810,6 +818,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
                   }
                 }
               }
+              else 
+              {
+                dd_p_prompt_veto->Fill(clover_i.nrj, clover_j.nrj);
+                dd_p_prompt_veto->Fill(clover_j.nrj, clover_i.nrj);
+              }
             }
             
             if (PM > 0)
@@ -824,8 +837,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             }
             else if (!dssd_trigger) // no prompt gamma nor particle
             {
-              dd_nop->Fill(clover_i.nrj, clover_j.nrj);
-              dd_nop->Fill(clover_j.nrj, clover_i.nrj);
+              dd_particle_veto->Fill(clover_i.nrj, clover_j.nrj);
+              dd_particle_veto->Fill(clover_j.nrj, clover_i.nrj);
             }
             if (PM > 0 && PC < 5_MeV)
             {
@@ -893,6 +906,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
                 }
               }
               if (gate(307_keV, clover_j.nrj, 311_keV)) dT_642_VS_309->Fill(clover_i.time-clover_j.time);
+              if (gate(277_keV, clover_j.nrj, 281_keV)) dT_642_VS_279->Fill(clover_i.time-clover_j.time);
+              if (gate(242_keV, clover_j.nrj, 246_keV)) dT_642_VS_244->Fill(clover_i.time-clover_j.time);
+              if (gate(299_keV, clover_j.nrj, 303_keV)) dT_642_VS_301->Fill(clover_i.time-clover_j.time);
+              dT_642_VS_d->Fill(clover_j.nrj, clover_i.time-clover_j.time);
               if (dssd_trigger)
               {
                 E_dT_p__642d->Fill(clover_j.time, clover_j.nrj);
@@ -946,6 +963,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & clover_j = *(pclovers.clean[loop_j]);
             dp->Fill(clover_j.nrj, clover_i.nrj);
             if (dssd_trigger) dp_p->Fill(clover_j.nrj, clover_i.nrj);
+            else dp_particle_veto->Fill(clover_j.nrj, clover_i.nrj);
             // if (PM > 0 && PC < 5_MeV) dp_PC5->Fill(clover_j.nrj, clover_i.nrj);
             // if (PM > 0 && PC < 3_MeV) dp_PC3->Fill(clover_j.nrj, clover_i.nrj);
             // if (PM > 0 && PC < 2_MeV) dp_PC2->Fill(clover_j.nrj, clover_i.nrj);
@@ -1352,6 +1370,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       total_time_of_beam_s+=run_duration_s;
       File Filename(out_filename); Filename.makePath();
       print("writing spectra in", out_filename, "...");
+
+      print("Calculate additionnal spectra :");
+      
       std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(), "recreate"));
         file->cd();
 
@@ -1363,17 +1384,16 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         pp_bckg->Write("pp_bckg", TObject::kOverwrite);
         p->Write("p", TObject::kOverwrite);
         dd->Write("dd", TObject::kOverwrite);
-        dd_bckg->Write("dd_bckg", TObject::kOverwrite);
         dd_prompt_veto->Write("dd_prompt_veto", TObject::kOverwrite);
-        auto dd_clean = static_cast<TH2F*> (dd->Clone("dd_clean"));
-        dd_clean->Add(dd_prompt_veto.get(), -1);
-        dd_clean->Write();
+        // dd_clean->Write();
+        dd_bckg->Write("dd_bckg", TObject::kOverwrite);
         d->Write("d", TObject::kOverwrite);
         d_prompt_veto->Write("d_prompt_veto", TObject::kOverwrite);
         E_dT->Write("E_dT", TObject::kOverwrite);
         E_dT_phoswitch->Write("E_dT_phoswitch", TObject::kOverwrite);
         p_VS_dT_LaBr3->Write("p_VS_dT_LaBr3", TObject::kOverwrite);
         dp->Write("dp", TObject::kOverwrite);
+        dp_particle_veto->Write("dp_particle_veto", TObject::kOverwrite);
         if (make_triple_coinc_ddd) for (size_t gate_index = 0; gate_index<ddd_gates.size(); ++gate_index) 
           ddd_gated[gate_index]->Write(("ddd_gate_"+std::to_string(ddd_gates[gate_index])).c_str(), TObject::kOverwrite);
         if (make_triple_coinc_dpp) for (size_t gate_index = 0; gate_index<dpp_gates.size(); ++gate_index) 
@@ -1385,7 +1405,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // Multiplicity :
         p_D->Write("p_D", TObject::kOverwrite);
         d_P->Write("d_P", TObject::kOverwrite);
-        dd_nop->Write("dd_nop", TObject::kOverwrite);
+        dd_particle_veto->Write("dd_particle_veto", TObject::kOverwrite);
         dd_P->Write("dd_P", TObject::kOverwrite);
         dd_PM4DM4->Write("dd_PM4DM4", TObject::kOverwrite);
         p_mult->Write("p_mult", TObject::kOverwrite);
@@ -1483,6 +1503,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         p_p->Write("p_p", TObject::kOverwrite);
         pp_p->Write("pp_p", TObject::kOverwrite);
         d_p->Write("d_p", TObject::kOverwrite);
+        dd_p->Write("dd_p", TObject::kOverwrite);
+        dd_p_prompt_veto->Write("dd_p_prompt_veto", TObject::kOverwrite);
+        // dd_p_clean->Write("dd_p_clean", TObject::kOverwrite);
         dp_p->Write("dp_p", TObject::kOverwrite);
         dd_pPM4DM4->Write("dd_pPM4DM4", TObject::kOverwrite);
         dd_pPM4PC3DM4->Write("dd_pPM4PC3DM4", TObject::kOverwrite);
@@ -1532,7 +1555,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         dT_642_VS_205->Write("dT_642_VS_205", TObject::kOverwrite);
         dT_642_VS_309->Write("dT_642_VS_309", TObject::kOverwrite);
-        dT_642_VS_309->Write("dT_642_VS_309", TObject::kOverwrite);
+        dT_642_VS_279->Write("dT_642_VS_279", TObject::kOverwrite);
+        dT_642_VS_244->Write("dT_642_VS_244", TObject::kOverwrite);
+        dT_642_VS_301->Write("dT_642_VS_301", TObject::kOverwrite);
+        dT_642_VS_d->Write("dT_642_VS_d", TObject::kOverwrite);
         dT_205_VS_104__d642->Write("dT_205_VS_104__d642", TObject::kOverwrite);
 
         d_sumC2->Write("d_sumC2", TObject::kOverwrite);
@@ -1603,8 +1629,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         short_vs_long_delayed->Write("short_vs_long_delayed", TObject::kOverwrite);
         short_over_long_VS_time->Write("short_over_long_VS_time", TObject::kOverwrite);
 
-        p_VS_dparis_mod->Write("p_VS_dparis_mod", TObject::kOverwrite);
         p_VS_pparis_mod->Write("p_VS_pparis_mod", TObject::kOverwrite);
+        p_VS_dparis_mod->Write("p_VS_dparis_mod", TObject::kOverwrite);
         d_VS_dparis_mod->Write("d_VS_dparis_mod", TObject::kOverwrite);
         d_VS_dclean_phos->Write("d_VS_dclean_phos", TObject::kOverwrite);
         d_VS_pclean_phos->Write("d_VS_pclean_phos", TObject::kOverwrite);
@@ -1642,9 +1668,29 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       {
         std::string dest = "data/merge_"+trigger+".root";
         std::string source = "data/"+trigger+"/"+target+"/run_*.root";
-        std::string command = "hadd -f -j 5 -d . "+ dest + " " + source;
+        std::string command = "hadd -f -j 8 -d . "+ dest + " " + source;
         print(command);
         gSystem->Exec(command.c_str());
+
+        print("Calculate additionnal spectra :");
+
+        auto f = TFile::Open(dest.c_str());
+
+        auto dd_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd"))->Clone("dd_clean"));
+        removeVeto(dd_clean, dd_prompt_veto.get(), 501, 521);
+        dd_clean->Write();
+
+        auto dd_p_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd_p"))->Clone("dd_p_clean"));
+        removeVeto(dd_p_clean, dd_p_prompt_veto.get(), 501, 521);
+        dd_p_clean->Write();
+
+        // Calculate the prompt-delayed background : //TODO
+        // auto dp_pv = static_cast<TH2F*>(f->Get("dp_prompt_veto"));
+        // auto proj_p_pv = dp_bckg->ProjectionX(); // Projection on prompt
+        // auto proj_pv = dp->ProjectionY();
+        // auto test = removeVeto(dp, (TH1F*)proj_p, (TH1F*)proj_d, 505,515);
+        // test->Draw();
+        // auto dp_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dp"))->Clone("dp_clean"));
       }
       // mutex freed
     }

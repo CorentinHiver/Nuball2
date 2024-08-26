@@ -80,6 +80,23 @@ std::mutex mutex_Root;
 //   HISTO MANIPULATIONS  //
 ////////////////////////////
 
+template<class THist>
+THist* Add(THist* h1, THist* h2, double factor = 1)
+{
+  auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_plus_"+TString(h2->GetName()));
+  ret->SetTitle(TString(h1->GetName())+"+"+TString(h2->GetName()));
+  ret->Add(h2, +factor);
+  return ret;
+}
+template<class THist>
+THist* Sub(THist* h1, THist* h2, double factor = 1)
+{
+  auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_"+TString(h2->GetName()));
+  ret->SetTitle(TString(h1->GetName())+"-"+TString(h2->GetName()));
+  ret->Add(h2, -factor);
+  return ret;
+}
+
 float minXaxis(TH1* histo)
 {
   return histo->GetXaxis()->GetBinLowEdge(1);
@@ -1610,6 +1627,73 @@ namespace CoAnalyse
 };
 
 
+/////////////////////
+//   Manage pads   //
+/////////////////////
+
+template<class THist = TH1>
+std::vector<THist*> get_histos(TPad * pad = nullptr)
+{
+  std::vector<THist*> ret;
+  if (!pad) 
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return ret;}
+  }
+
+  TList *primitives = gPad->GetListOfPrimitives();
+  TIterator *it = primitives->MakeIterator();
+  TObject *obj;
+  TClass *hist_class = TClass::GetClass(typeid(THist));
+
+  while ((obj = it->Next()) != nullptr) 
+  {
+    if (obj->IsA()->InheritsFrom(hist_class))
+    {
+      ret.push_back(dynamic_cast<THist*>(obj));
+    }
+  }
+  delete it;
+  return ret;
+}
+
+template<class THist = TH1>
+std::vector<std::string> get_histos_names(TPad * pad = nullptr)
+{
+  std::vector<std::string> ret;
+  if (!pad) 
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return ret;}
+  }
+  auto histos = get_histos(pad);
+  for (auto const & histo : histos) ret.push_back(histo->GetName());
+  return ret;
+}
+
+bool has_legend(TPad* pad = nullptr)
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return false;}
+  }
+  TList *primitives = gPad->GetListOfPrimitives();
+  TIterator *it = primitives->MakeIterator();
+  TObject *obj;
+
+  while ((obj = it->Next()) != nullptr) 
+  {
+    if (obj->IsA()->InheritsFrom("TLegend"))
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+
 ////////////////////////////
 //   Manage histo files   //
 ////////////////////////////
@@ -1914,6 +1998,16 @@ double selectXPoints(TH1* histo, std::string const & instructions)
   return x;
 }
 
+void addBinContent(TH1* histo, int const & bin, double const & value)
+{
+  histo->SetBinContent(bin, histo->GetBinContent(bin)-value);
+}
+
+void addBinContent(TH1* histo, int const & binx, int const & biny, double const & value)
+{
+  histo->SetBinContent(binx, biny, histo->GetBinContent(binx, biny)-value);
+}
+
 TH1D* myProjectionX(TH2* histo, std::string const & name, double const & xvalue_min, double const & xvalue_max, double const & xvalue_min_bckg, double const & xvalue_max_bckg, int peak_norm_min, int peak_norm_max)
 {
   TH1D* proj = histo->ProjectionX(name.c_str(), xvalue_min, xvalue_max);
@@ -1964,11 +2058,27 @@ TH1D* myProjectionY(TH2* histo, std::string const & name, double const & x_value
   return myProjectionY(histo, name, xvalue_min, xvalue_max, xvalue_min_bckg, xvalue_max_bckg);
 }
 
+TH1D* bestProjectionY(TH2F* histo, std::string name, int bin, int resolution)
+{
+  auto proTot = histo->ProjectionY();
+  TH1D* pro(histo->ProjectionY(name.c_str(), bin-resolution, bin+resolution));
+  pro->Add(proTot,-(pro->Integral()/proTot->Integral()));
+  std::unique_ptr<TH1D> pro_bckg_low(histo->ProjectionY(("proj_bckg_low_"+std::to_string(bin)).c_str(), bin-3*resolution, bin-resolution));
+  pro_bckg_low->Add(proTot,-(pro->Integral()/proTot->Integral()));
+  std::unique_ptr<TH1D> pro_bckg_high(histo->ProjectionY(("proj_bckg_high"+std::to_string(bin)).c_str(), bin+resolution, bin+3*resolution));
+  pro_bckg_high->Add(proTot,-(pro->Integral()/proTot->Integral()));
+
+  pro->Add(pro_bckg_low.get(), -(pro->Integral()/pro_bckg_low->Integral()));
+  pro->Add(pro_bckg_high.get(), -(pro->Integral()/pro_bckg_high->Integral()));
+
+  return pro;
+}
+
 TH1D* bestProjectionX(TH2F* histo, std::string name, int bin, int resolution)
 {
   auto proTot = histo->ProjectionX();
   TH1D* pro(histo->ProjectionX(name.c_str(), bin-resolution, bin+resolution));
-  pro->Add(proTot,-(pro->Integral()/proTot->Integral()));
+  // pro->Add(proTot,-(pro->Integral()/proTot->Integral()));
   std::unique_ptr<TH1D> pro_bckg_low(histo->ProjectionX(("proj_bckg_low_"+std::to_string(bin)).c_str(), bin-3*resolution, bin-resolution));
   pro_bckg_low->Add(proTot,-(pro->Integral()/proTot->Integral()));
   std::unique_ptr<TH1D> pro_bckg_high(histo->ProjectionX(("proj_bckg_high"+std::to_string(bin)).c_str(), bin+resolution, bin+3*resolution));
@@ -1995,6 +2105,24 @@ TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm)
   auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
 
   ret->Add(histo_veto, norm);
+
+  return ret;
+}
+
+TH2F* removeVeto(TH2F* histo, TH1F* veto_projx, TH1F* veto_projy, int bin_min, int bin_max)
+{
+  auto ret = static_cast<TH2F*>(histo->Clone(TString(histo->GetName())+"_veto_clean"));
+  auto projX = histo->ProjectionX();
+  auto projY = histo->ProjectionY();
+  auto const & normx = veto_projx->Integral(bin_min, bin_max)/(projX->Integral(bin_min, bin_max));
+  auto const & normy = veto_projy->Integral(bin_min, bin_max)/(projY->Integral(bin_min, bin_max));
+
+  for (int x = 1; x<=histo->GetNbinsX(); ++x) for (int y = 1; y<=histo->GetNbinsX(); ++y) if (histo->GetBinContent(x, y) > 0)
+  {
+    print(histo->GetBinContent(x, y));
+    // TODO !!
+    // addBinContent(histo, x, y, -int((projX->GetBinContent(x, y)+projY->GetBinContent(x, y))/2*normx));
+  }
 
   return ret;
 }
@@ -2058,6 +2186,110 @@ TGraph* calculateHalfLife(TH2F* histo, int min_bin, int max_bin, int sigma, std:
   }
   TGraph* ret = new TGraph(bins.size(), bins.data(), half_lifes.data());
   return ret;
+}
+
+
+template<class THist = TH1>
+void normalizeHistos(TPad* pad = nullptr)
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = get_histos<THist>(pad);
+  if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+  double max = 0;
+  for (auto const & hist : histos) if (max < hist->GetMaximum()) max = hist->GetMaximum();
+  if (max==0.0) {error("max is 0"); return;}
+  bool hasLegend = has_legend(pad);
+  int i = 0;
+  for (auto & hist : histos) 
+  {
+    gPad->GetListOfPrimitives()->Remove(hist);
+    hist->Scale(max/hist->GetMaximum());
+    if (i++ == 0) hist->Draw("hist");
+    else hist->Draw("hist same");
+  }
+  if (hasLegend) gPad->BuildLegend();
+  pad->Update();
+}
+
+template<class THist = TH1>
+void normalizeHistosMin(TPad* pad = nullptr)
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = get_histos<THist>(pad);
+  if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+  double min = histos[0]->hist->GetMaximum();
+  for (auto const & hist : histos) if (min < hist->GetMaximum()) min = hist->GetMaximum();
+  if (min==0.0) {error("min is 0"); return;}
+  bool hasLegend = has_legend(pad);
+  int i = 0;
+  for (auto & hist : histos) 
+  {
+    gPad->GetListOfPrimitives()->Remove(hist);
+    hist->Scale(min/hist->GetMaximum());
+    if (i++ == 0) hist->Draw("hist");
+    else hist->Draw("hist same");
+  }
+  if (hasLegend) gPad->BuildLegend();
+  pad->Update();
+}
+
+template<class THist>
+THist* AddNorm(THist* h1, THist* h2, double min_range, double max_range)
+{
+  auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_plus_norm_"+TString(h2->GetName()));
+  ret->SetTitle(TString(h1->GetName())+"+"+TString(h2->GetName()));
+
+  auto canvas = new TCanvas("temp_canvas", "temp_canvas");
+  h1->Draw();
+  h2->Draw("same");
+  h1->GetXaxis()->SetRangeUser(min_range, max_range);
+
+  double factor = h1->GetMaximum()/h2->GetMaximum();
+  ret->Add(h2, +factor);
+
+  h1->GetXaxis()->UnZoom();
+
+  delete canvas;
+  return ret;
+}
+template<class THist>
+THist* SubNorm(THist* h1, THist* h2, double min_range, double max_range)
+{
+  auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_norm_"+TString(h2->GetName()));
+  ret->SetTitle(TString(h1->GetName())+"-"+TString(h2->GetName()));
+
+  auto canvas = new TCanvas("temp_canvas", "temp_canvas");
+  h1->Draw();
+  h2->Draw("same");
+  h1->GetXaxis()->SetRangeUser(min_range, max_range);
+
+  double factor = h1->GetMaximum()/h2->GetMaximum();
+  ret->Add(h2, -factor);
+
+  h1->GetXaxis()->UnZoom();
+
+  delete canvas;
+  return ret;
+}
+
+template<class THist>
+THist* get(std::string name, TFile* file = nullptr)
+{
+  if (!file)
+  {
+    file = (TFile*)gFile;
+    if (!file) {error("no file"); return nullptr;}
+  }
+  if (auto ret = dynamic_cast<THist*>(file->Get(name.c_str()))) return ret;
+  else return nullptr;
 }
 
 
@@ -2288,52 +2520,95 @@ TH1D* apply_efficiency(TH1* histo, Efficiency const & eff)
   return ret;
 }
 
+#include <readline/readline.h>
+#include <readline/history.h>
+
 // #ifdef __CINT__
 class Radware
 {public:
-  Radware(TH2F* _bidim) : m_bidim(_bidim)
+  Radware(TH2* _bidim, int autoRemoveBackground = 0)
   {
+    m_bidim = (TH2F*) _bidim->Clone(TString(_bidim->GetName())+"_radware");
+    if (autoRemoveBackground) CoAnalyse::removeBackground(m_bidim, m_nb_it_bckg, autoRemoveBackground);
     init();
     proj();
     launch();
   }
+  
   void init()
   {
     canvas->ToggleEventStatus();
     canvas->ToggleEditor();
     canvas->ToggleToolBar();
     canvas->cd();
+    m_finish = false;
   }
+
+  static bool m_finish;
+
   void launch()
   {
-    static bool finish = false;
     std::thread root_thread([]()
     {
-      while(!finish) gPad->WaitPrimitive();
+      while(!m_finish) 
+      {
+        // gPad->WaitPrimitive();
+        gSystem->ProcessEvents();
+        gSystem->Sleep(10);
+      }
     });
-    // char in[4] = {0};
+    print(m_finish);
     std::string instruction;
-    while(!finish)
+    while(!m_finish)
     {
       std::cout << "> ";
-      std::getline(std::cin, instruction);
-      if (instruction == "") continue;
+
+      // Ctrl+D events :
+      if (!std::getline(std::cin, instruction)) 
+      {
+        print("coucou");
+        // m_finish = true;
+      }
+      else if (instruction == "") continue;
       else if (instruction == "ag") this->addGate();
       else if (instruction == "bd") this->draw(m_bidim, "colz");
       else if (instruction == "bi") this->set_nb_it_bckg();
-      else if (instruction == "ds") this->display_spectrum();
       else if (instruction == "ex") this->ex();
+      else if (instruction == "gs") this->setGateSize();
+      else if (instruction == "h" ) this->printHelp();
       else if (instruction == "in") this->integral();
-      else if (instruction == "pr") this->draw(m_proj);
+      else if (instruction == "ns") this->normalizeSpectra();
+      else if (instruction == "pr") this->proj();
       else if (instruction == "rb") this->removeBackground();
-      else if (instruction == "sm") {this->gate_same();}
-      else if (instruction == "st") {finish = true;}
+      else if (instruction == "sg") this->subGate();
+      else if (instruction == "sm") this->gate_same();
+      else if (instruction == "st") {print("coucou2"); m_finish = true;}
+      else if (instruction == "uz") this->unZoom();
       else if (isNumber(instruction)) this->gate(std::stod(instruction));
       else error("Wrong input...");
     }
-    print("Exiting CoRadware, double click or make action on the spectra to close");
+    print("Exiting CoRadware");
     root_thread.join();
-    print("parallel tasks joined");
+    free_resources();
+  }
+
+  void printHelp()
+  {
+    print("List of commands :");
+    print("ag : add gate");
+    print("bd : display bidim");
+    print("bi : set number of iterations for automatic background subtraction (rb) of one dimensional spectra");
+    print("ex : set range spectrum");
+    print("gs : set gate size in bin");
+    print("h  : display this help");
+    print("in : peak integral");
+    print("ns : normalize spectra");
+    print("pr : display total projection");
+    print("rb : remove background automatically");
+    print("sg : subtract gate");
+    print("sm : overlay another gate");
+    print("st : finish session");
+    print("uz : unzoom axis");
   }
 
   void draw(TH1* histo, std::string const & options = "")
@@ -2344,6 +2619,17 @@ class Radware
     m_focus = histo;
     m_focus->Draw(options.c_str());
     gPad->Update();
+  }
+
+  void normalizeSpectra()
+  {
+    normalizeHistos();
+  }
+
+  void setGateSize() 
+  {
+    printC("Choose gate size (current ",m_gate_size,")");
+    std::cin >> m_gate_size;
   }
 
   void setHist(TH2F* _bidim) 
@@ -2367,9 +2653,24 @@ class Radware
     std::getline(std::cin, instruction);
     if (!isNumber(instruction)) {error("error input : must be a number"); return;}
     int bin = std::stoi(instruction);
-    for (int y = 0; y<m_bidim->GetNbinsY(); ++y) for (int x = bin-2; x<=bin+2; ++x)
+    for (int y = 0; y<m_bidim->GetNbinsY(); ++y) for (int x = bin-m_gate_size; x<=bin+m_gate_size; ++x)
     {
       m_gate->AddBinContent(y, m_bidim->GetBinContent(x, y));
+    }
+    this->draw(m_gate);
+  }
+
+  void subGate()
+  {
+    if (!m_gate) {error("No gate so far..."); return;}
+    std::cout << "gate to add :";
+    std::string instruction;
+    std::getline(std::cin, instruction);
+    if (!isNumber(instruction)) {error("error input : must be a number"); return;}
+    int bin = std::stoi(instruction);
+    for (int y = 0; y<m_bidim->GetNbinsY(); ++y) for (int x = bin-m_gate_size; x<=bin+m_gate_size; ++x)
+    {
+      m_gate->AddBinContent(y, -m_bidim->GetBinContent(x, y));
     }
     this->draw(m_gate);
   }
@@ -2391,8 +2692,8 @@ class Radware
     if (!isNumber(val_str)) {error("Gate must be a number"); return;}
     auto const & e = std::stoi(val_str);
     auto const & bin = m_bidim->GetXaxis()->FindBin(e);
-    auto const & low_e = e-2;
-    auto const & high_e = e+2;
+    auto const & low_e = e-m_gate_size;
+    auto const & high_e = e+m_gate_size;
     std::string name = std::to_string(bin)+" g same";
     auto gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_e, high_e)->Clone(name.c_str()));
     gate->SetTitle((std::to_string(bin)+" gate").c_str());
@@ -2406,8 +2707,8 @@ class Radware
   {
     delete m_gate;
     auto const & bin = m_bidim->GetXaxis()->FindBin(e);
-    auto const & low_e = e-2;
-    auto const & high_e = e+2;
+    auto const & low_e = e-m_gate_size;
+    auto const & high_e = e+m_gate_size;
     m_gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_e, high_e)->Clone((std::to_string(bin)+" g").c_str()));
     m_gate->SetTitle((std::to_string(bin)+" gate").c_str());
     this->draw(m_gate);
@@ -2427,12 +2728,16 @@ class Radware
   void removeBackground()
   {
     CoAnalyse::removeBackground(m_focus);
+    if (m_focus == m_bidim)
+    {
+      this->proj();
+    }
     this->draw(m_focus);
   }
 
-  ~Radware()
+  void free_resources()
   {
-    // delete m_bidim;
+    delete m_bidim;
     // delete m_proj;
     // delete m_gate;
     // delete m_focus;
@@ -2440,8 +2745,14 @@ class Radware
     canvas->Close();
   }
 
-  void display_spectrum()
+  ~Radware()
   {
+    free_resources();
+  }
+
+  void unZoom()
+  {
+    print("unzoom");
     m_focus->GetXaxis()->UnZoom();
     if (m_focus->InheritsFrom(TH2::Class())) m_focus->GetYaxis()->UnZoom();
   }
@@ -2461,9 +2772,11 @@ private:
   TH1* m_focus = nullptr;
   std::vector<std::string> m_list_histo_to_delete;
 
+  int m_gate_size = 1;
   int m_nb_sm = 0;
   std::vector<int> m_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};
 };
+bool Radware::m_finish = false;
 
 // #endif //__CINT__
 
@@ -2519,6 +2832,44 @@ TH2F* removeBackgroundBroadVSGe(TH2F* histo, std::string new_name = "", int nb_i
       auto const & new_value = old_value - int_cast(1*(px*by + py*bx + bx*by)/integral);
       ret->SetBinContent(x, y, new_value);
     }
+  }
+  return ret;
+}
+
+// Needs to be a simmetrized histogram BEFORE background subtraction
+auto removeLine(TH2F* histo, int bin_min, int max_bin, int nb_it = 20)
+{
+  auto ret = (TH2F*) histo->Clone(TString(histo->GetName())+"_clean");
+  for (int x = 1; x<=histo->GetXaxis()->GetNbins(); ++x)
+  {
+    auto proj(histo->ProjectionY("temp", x, x));
+    auto bckg(proj->ShowBackground(nb_it));
+    for (int y = bin_min; y<=max_bin; ++y) 
+    {
+      ret->SetBinContent(y, x, bckg->GetBinContent(y));
+      ret->SetBinContent(x, y, bckg->GetBinContent(y));
+    }
+    delete proj;
+    delete bckg;
+  }
+  return ret;
+}
+
+// Needs to be a simmetrized histogram BEFORE background subtraction
+auto removeLines(TH2F* histo, std::vector<std::pair<int, int>> bins, int nb_it = 20)
+{
+  auto ret = (TH2F*) histo->Clone(TString(histo->GetName())+"_clean");
+  for (int x = 1; x<=histo->GetXaxis()->GetNbins(); ++x)
+  {
+    auto proj(histo->ProjectionY("temp", x, x));
+    auto bckg(proj->ShowBackground(nb_it));
+    for (auto const & range : bins) for (int y = range.first; y<=range.second; ++y) 
+    {
+      ret->SetBinContent(y, x, bckg->GetBinContent(y));
+      ret->SetBinContent(x, y, bckg->GetBinContent(y));
+    }
+    delete proj;
+    delete bckg;
   }
   return ret;
 }
@@ -2639,6 +2990,39 @@ void hadd(std::string source, std::string target, double size_file_Mo, std::stri
   });
   for (auto & thread : threads) thread.join();
 }
+
+//////////////////////////////
+// INTERACTIVE MANIPULATION //
+//////////////////////////////
+
+// // Normalizes h1 with respect to h2
+// template<class THist = TH1>
+// THist* normalizeHisto(THist* h1, THist* h2, std::string name = "")
+// {
+//   if (!h1) {error("h1 nullptr"); return new THist();}
+//   if (!h2) {error("h2 nullptr"); return new THist();}
+//   auto ret = (THist*) h1->Clone( (name == "") ? TString(h1->GetName())+"_norm_with_"+TString(h2->GetName()) : TString(name.c_str()) );
+//   ret->Scale(h2->GetMaximum()/h2->GetMaximum());
+//   return ret;
+// }
+
+
+// // Normalizes h1 with respect to h2
+// template<class THist = TH1>
+// THist* normalizeHisto(THist* h1, THist* h2, std::string name, double min_range, double max_range)
+// {
+//   h1->Draw();
+//   h2->Draw("same");
+//   h1->GetXaxis()->SetRangeUser(min_range, max_range);
+//   h2->GetXaxis()->SetRangeUser(min_range, max_range);
+//   auto ret = normalizeHisto(h1, h2, name);
+//   h1->GetXaxis()->UnZoom();
+//   h2->GetXaxis()->UnZoom();
+//   h1->Draw();
+//   h2->Draw("same");
+//   gPad->Update();
+//   return ret;
+// }
 
 void libRoot()
 {
