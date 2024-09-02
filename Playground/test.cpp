@@ -1,6 +1,6 @@
 // #include <MTObject.hpp>
 // #include <libCo.hpp>
-// #include <libRoot.hpp>
+#include <libRoot.hpp>
 // #include <Paris.hpp>
 // #include <Minimisator.hpp>
 // #include <CloversV2.hpp>
@@ -12,9 +12,9 @@
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
 // #include <Calibrator.hpp>
-#include <Alignator.hpp>
-#include <Nuball2Tree.hpp>
-#include <Timer.hpp>
+// #include <Alignator.hpp>
+// #include <Nuball2Tree.hpp>
+// #include <Timer.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
 // #include <Convertor.hpp>
@@ -43,6 +43,39 @@
 
 int main()
 {
+  ////////////////////
+  // SIMULATE PEAKS //
+  ////////////////////
+
+  auto file = TFile::Open("test.root", "recreate");
+  file->cd();
+
+  auto NaI_simu_3 = new TH1F("NaI_simu_3", "NaI simu 3%", 1000,0,20000);
+  auto NaI_simu_4 = new TH1F("NaI_simu_4", "NaI simu 4%", 1000,0,20000);
+  auto NaI_simu_5 = new TH1F("NaI_simu_5", "NaI simu 5%", 1000,0,20000);
+  auto NaI_simu_6 = new TH1F("NaI_simu_6", "NaI simu 6%", 1000,0,20000);
+  auto NaI_simu_7 = new TH1F("NaI_simu_7", "NaI simu 7%", 1000,0,20000);
+
+  NaI_simu_4->SetLineColor(kBlack);
+  NaI_simu_5->SetLineColor(2);
+  NaI_simu_6->SetLineColor(3);
+  NaI_simu_7->SetLineColor(4);
+
+  std::vector<double> energies = {9000, 9000-511, 9000-1022, 17619, 17619-511, 17619-1022};
+
+  for (auto const & e : energies)
+  {
+    simulatePeak(NaI_simu_3, e, e*0.03, int(1.e+6));
+    simulatePeak(NaI_simu_4, e, e*0.04, int(1.e+6));
+    simulatePeak(NaI_simu_5, e, e*0.05, int(1.e+6));
+    simulatePeak(NaI_simu_6, e, e*0.06, int(1.e+6));
+    simulatePeak(NaI_simu_7, e, e*0.07, int(1.e+6));
+  }
+
+  file->Write();
+  file->Close();
+
+
   ////////////////////////////
   // CALCULATE TIME DECAY 2 //
   ////////////////////////////

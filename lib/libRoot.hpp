@@ -48,8 +48,16 @@
 
 using unique_TH1F  = std::unique_ptr<TH1F>;
 using unique_TH1D  = std::unique_ptr<TH1D>;
+using unique_TH1I  = std::unique_ptr<TH1I>;
+
 using unique_TH2F  = std::unique_ptr<TH2F>;
 using unique_TH2D  = std::unique_ptr<TH2D>;
+using unique_TH2I  = std::unique_ptr<TH2I>;
+
+using unique_TH3F  = std::unique_ptr<TH3F>;
+using unique_TH3D  = std::unique_ptr<TH3D>;
+using unique_TH3I  = std::unique_ptr<TH3I>;
+
 using unique_TFile = std::unique_ptr<TFile>;
 using unique_tree  = std::unique_ptr<TTree>;
 
@@ -2114,8 +2122,10 @@ TH2F* removeVeto(TH2F* histo, TH1F* veto_projx, TH1F* veto_projy, int bin_min, i
   auto ret = static_cast<TH2F*>(histo->Clone(TString(histo->GetName())+"_veto_clean"));
   auto projX = histo->ProjectionX();
   auto projY = histo->ProjectionY();
-  auto const & normx = veto_projx->Integral(bin_min, bin_max)/(projX->Integral(bin_min, bin_max));
-  auto const & normy = veto_projy->Integral(bin_min, bin_max)/(projY->Integral(bin_min, bin_max));
+  // auto const & normx = veto_projx->Integral(bin_min, bin_max)/(projX->Integral(bin_min, bin_max));
+  // auto const & normy = veto_projy->Integral(bin_min, bin_max)/(projY->Integral(bin_min, bin_max));
+
+  print("TODO");
 
   for (int x = 1; x<=histo->GetNbinsX(); ++x) for (int y = 1; y<=histo->GetNbinsX(); ++y) if (histo->GetBinContent(x, y) > 0)
   {
@@ -2147,6 +2157,32 @@ TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, double norm)
 TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, int peak_norm_min, int peak_norm_max)
 {
   return removeVeto(histo, histo_veto, -ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max));
+}
+
+template<class... Args>
+TH1D* removeVeto(TH1D* histo, TH1D* histo_veto, Args... args)
+{
+  return removeVeto(dynamic_cast<TH1F*>(histo), dynamic_cast<TH1F*>(histo_veto), std::forward<Args>(args)...);
+}
+
+void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits)
+{
+  TRandom* random = new TRandom();
+  for (int it = 0; it<nb_hits; ++it) histo->Fill(random->Gaus(x_center, x_resolution/2.35));
+  delete random;
+}
+
+void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits, bool draw)
+{
+  if (draw) 
+  {
+    TH1D* newHisto = (TH1D*) histo->Clone((histo->GetName()+std::string("_simulated")).c_str());
+    simulate_peak(newHisto, x_center, x_resolution, nb_hits);
+    newHisto->SetLineColor(kRed);
+    newHisto->Draw();
+    histo->Draw("same");
+  }
+  else simulate_peak(histo, x_center, x_resolution, nb_hits); 
 }
 
 /**
@@ -2291,6 +2327,29 @@ THist* get(std::string name, TFile* file = nullptr)
   if (auto ret = dynamic_cast<THist*>(file->Get(name.c_str()))) return ret;
   else return nullptr;
 }
+
+double calculateVariance(TH1F* hist, int const & bin_min, int const & bin_max) 
+{
+  auto const & bins = bin_max-bin_min;
+  double sum = 0;
+  double sumSq = 0;
+
+  for (int i = bin_min+1; i <= bin_max; ++i) 
+  {
+    auto const & binContent = hist->GetBinContent(i);
+    sum += binContent;
+    sumSq += binContent * binContent;
+  }
+
+  auto const & mean = sum / bins;
+
+  return (sumSq / bins) - (mean * mean);
+}
+
+double calculateVariance(TH1F* hist)
+{
+  return calculateVariance(hist, 0, hist->GetNbinsX());
+} 
 
 
  /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
@@ -2528,6 +2587,8 @@ class Radware
 {public:
   Radware(TH2* _bidim, int autoRemoveBackground = 0)
   {
+    file = gFile;
+    gROOT->cd();
     m_bidim = (TH2F*) _bidim->Clone(TString(_bidim->GetName())+"_radware");
     if (autoRemoveBackground) CoAnalyse::removeBackground(m_bidim, m_nb_it_bckg, autoRemoveBackground);
     init();
@@ -2564,25 +2625,28 @@ class Radware
       std::cout << "> ";
 
       // Ctrl+D events :
-      if (!std::getline(std::cin, instruction)) 
+      auto const & getline_ret = std::getline(std::cin, instruction);
+      if (!getline_ret) 
       {
-        print("coucou");
-        // m_finish = true;
+        print("CTRL-D pressed, interactive interface will not work next time. Use st command instead");
+        m_finish = true;
       }
       else if (instruction == "") continue;
       else if (instruction == "ag") this->addGate();
-      else if (instruction == "bd") this->draw(m_bidim, "colz");
+      else if (instruction == "bd") {print("May take a while..."); this->draw(m_bidim, "colz");}
       else if (instruction == "bi") this->set_nb_it_bckg();
       else if (instruction == "ex") this->ex();
+      else if (instruction == "es") this->exportSpectrum();
       else if (instruction == "gs") this->setGateSize();
       else if (instruction == "h" ) this->printHelp();
       else if (instruction == "in") this->integral();
       else if (instruction == "ns") this->normalizeSpectra();
       else if (instruction == "pr") this->proj();
       else if (instruction == "rb") this->removeBackground();
-      else if (instruction == "sg") this->subGate();
+      else if (instruction == "sp") this->simulatePeak();
+      else if (instruction == "sg") this->addGate(false);
       else if (instruction == "sm") this->gate_same();
-      else if (instruction == "st") {print("coucou2"); m_finish = true;}
+      else if (instruction == "st") {m_finish = true;}
       else if (instruction == "uz") this->unZoom();
       else if (isNumber(instruction)) this->gate(std::stod(instruction));
       else error("Wrong input...");
@@ -2599,12 +2663,14 @@ class Radware
     print("bd : display bidim");
     print("bi : set number of iterations for automatic background subtraction (rb) of one dimensional spectra");
     print("ex : set range spectrum");
+    print("es : export spectra to the root environement");
     print("gs : set gate size in bin");
     print("h  : display this help");
     print("in : peak integral");
     print("ns : normalize spectra");
     print("pr : display total projection");
     print("rb : remove background automatically");
+    print("sp : simulate peak");
     print("sg : subtract gate");
     print("sm : overlay another gate");
     print("st : finish session");
@@ -2621,9 +2687,43 @@ class Radware
     gPad->Update();
   }
 
+  void simulatePeak()
+  {
+    int peak, resolution, nb;
+    std::string instruction;
+
+    std::cout << "peak mean : ";
+    std::getline(std::cin, instruction);
+    if (!checkIsNumber(instruction)) return;
+    peak = std::stoi(instruction);
+
+    std::cout << "resolution : ";
+    std::getline(std::cin, instruction);
+    if (!checkIsNumber(instruction)) return;
+    resolution = std::stoi(instruction);
+
+    std::cout << "nb : ";
+    std::getline(std::cin, instruction);
+    if (!checkIsNumber(instruction)) return;
+    nb = std::stoi(instruction);
+
+    simulate_peak(m_focus, peak, resolution, nb, true);
+    gPad->Update();
+  }
+
   void normalizeSpectra()
   {
     normalizeHistos();
+  }
+
+  void exportSpectrum()
+  {
+    std::cout << "gate to add : ";
+    std::string name;
+    std::getline(std::cin, name);
+    if (name.empty()) name = m_focus->GetName();
+    auto test = static_cast<TH1F*> (m_focus->Clone(name.c_str()));
+    print(TString("exporting")+test->GetName());
   }
 
   void setGateSize() 
@@ -2645,32 +2745,30 @@ class Radware
     this->draw(m_proj);
   }
 
-  void addGate()
+  void addGate(bool add = true)
   {
     if (!m_gate) {error("No gate so far..."); return;}
-    std::cout << "gate to add :";
-    std::string instruction;
-    std::getline(std::cin, instruction);
-    if (!isNumber(instruction)) {error("error input : must be a number"); return;}
-    int bin = std::stoi(instruction);
-    for (int y = 0; y<m_bidim->GetNbinsY(); ++y) for (int x = bin-m_gate_size; x<=bin+m_gate_size; ++x)
-    {
-      m_gate->AddBinContent(y, m_bidim->GetBinContent(x, y));
-    }
-    this->draw(m_gate);
-  }
 
-  void subGate()
-  {
-    if (!m_gate) {error("No gate so far..."); return;}
     std::cout << "gate to add :";
     std::string instruction;
     std::getline(std::cin, instruction);
-    if (!isNumber(instruction)) {error("error input : must be a number"); return;}
+    if (!checkIsNumber(instruction)) return;
     int bin = std::stoi(instruction);
+
+    std::cout << "weight (rtn for 1.) :";
+    std::getline(std::cin, instruction);
+    double weight = 1.;
+    if (!(instruction.empty()))
+    {
+      if (!checkIsNumber(instruction)) return;
+      weight = std::stod(instruction);
+    }
+
+    if (!add) weight*=-1.;
+
     for (int y = 0; y<m_bidim->GetNbinsY(); ++y) for (int x = bin-m_gate_size; x<=bin+m_gate_size; ++x)
     {
-      m_gate->AddBinContent(y, -m_bidim->GetBinContent(x, y));
+      m_gate->AddBinContent(y, m_bidim->GetBinContent(x, y)*weight);
     }
     this->draw(m_gate);
   }
@@ -2689,7 +2787,7 @@ class Radware
     std::string val_str;
     print("Choose engergy to draw on top");
     std::cin >> val_str;
-    if (!isNumber(val_str)) {error("Gate must be a number"); return;}
+    if (!checkIsNumber(val_str)) return;
     auto const & e = std::stoi(val_str);
     auto const & bin = m_bidim->GetXaxis()->FindBin(e);
     auto const & low_e = e-m_gate_size;
@@ -2727,22 +2825,17 @@ class Radware
 
   void removeBackground()
   {
-    CoAnalyse::removeBackground(m_focus);
     if (m_focus == m_bidim)
     {
+      print("May take a while..."); 
+      CoAnalyse::removeBackground(m_bidim, m_nb_it_bckg);
       this->proj();
     }
-    this->draw(m_focus);
-  }
-
-  void free_resources()
-  {
-    delete m_bidim;
-    // delete m_proj;
-    // delete m_gate;
-    // delete m_focus;
-    for (auto const & name : m_list_histo_to_delete) delete gDirectory->Get(name.c_str());
-    canvas->Close();
+    else 
+    {
+      CoAnalyse::removeBackground(m_focus, m_nb_it_bckg);
+      this->draw(m_focus);
+    }
   }
 
   ~Radware()
@@ -2755,6 +2848,7 @@ class Radware
     print("unzoom");
     m_focus->GetXaxis()->UnZoom();
     if (m_focus->InheritsFrom(TH2::Class())) m_focus->GetYaxis()->UnZoom();
+    gPad->Update();
   }
 
   void set_nb_it_bckg()
@@ -2764,6 +2858,27 @@ class Radware
   }
 
 private:
+
+  void free_resources()
+  {
+    delete m_bidim;
+    delete m_proj;
+    delete m_gate;
+    // delete m_focus;
+    for (auto const & name : m_list_histo_to_delete) delete gDirectory->Get(name.c_str());
+    canvas->Close();
+    if (file) file->cd();
+  }
+
+  bool checkIsNumber(std::string instruction, std::string message = "")
+  {
+    auto const & ret = isNumber(instruction);
+    if (!ret) print((message == "") ? message : "error input : must be a number");
+    return ret;
+  }
+
+  TFile* file = nullptr;
+
   TCanvas *canvas = new TCanvas("RadwareCanvas", "RadwareCanvas");
   int m_nb_it_bckg = 20;
   TH2F* m_bidim = nullptr;
@@ -2778,27 +2893,10 @@ private:
 };
 bool Radware::m_finish = false;
 
-// #endif //__CINT__
 
-void simulatePeak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits)
-{
-  TRandom* random = new TRandom();
-  for (int it = 0; it<nb_hits; ++it) histo->Fill(random->Gaus(x_center, x_resolution/2.35));
-  delete random;
-}
 
-void simulatePeak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits, bool draw)
-{
-  if (draw) 
-  {
-    TH1D* newHisto = (TH1D*) histo->Clone((histo->GetName()+std::string("_simulated")).c_str());
-    simulatePeak(newHisto, x_center, x_resolution, nb_hits);
-    newHisto->SetLineColor(kRed);
-    newHisto->Draw();
-    histo->Draw("same");
-  }
-  else simulatePeak(histo, x_center, x_resolution, nb_hits); 
-}
+
+
 
 /**
  * @brief Simple background subtraction for bidim with Ge spectra on one axis and a background-free quantity on the x (like multiplicity, particle energy...)
