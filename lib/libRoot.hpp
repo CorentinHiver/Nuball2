@@ -2117,25 +2117,25 @@ TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm)
   return ret;
 }
 
-TH2F* removeVeto(TH2F* histo, TH1F* veto_projx, TH1F* veto_projy, int bin_min, int bin_max)
-{
-  auto ret = static_cast<TH2F*>(histo->Clone(TString(histo->GetName())+"_veto_clean"));
-  auto projX = histo->ProjectionX();
-  auto projY = histo->ProjectionY();
-  // auto const & normx = veto_projx->Integral(bin_min, bin_max)/(projX->Integral(bin_min, bin_max));
-  // auto const & normy = veto_projy->Integral(bin_min, bin_max)/(projY->Integral(bin_min, bin_max));
+// TH2F* removeVeto(TH2F* histo, TH1F* veto_projx, TH1F* veto_projy, int bin_min, int bin_max)
+// {
+//   auto ret = static_cast<TH2F*>(histo->Clone(TString(histo->GetName())+"_veto_clean"));
+//   auto projX = histo->ProjectionX();
+//   auto projY = histo->ProjectionY();
+//   // auto const & normx = veto_projx->Integral(bin_min, bin_max)/(projX->Integral(bin_min, bin_max));
+//   // auto const & normy = veto_projy->Integral(bin_min, bin_max)/(projY->Integral(bin_min, bin_max));
 
-  print("TODO");
+//   print("TODO");
 
-  for (int x = 1; x<=histo->GetNbinsX(); ++x) for (int y = 1; y<=histo->GetNbinsX(); ++y) if (histo->GetBinContent(x, y) > 0)
-  {
-    print(histo->GetBinContent(x, y));
-    // TODO !!
-    // addBinContent(histo, x, y, -int((projX->GetBinContent(x, y)+projY->GetBinContent(x, y))/2*normx));
-  }
+//   for (int x = 1; x<=histo->GetNbinsX(); ++x) for (int y = 1; y<=histo->GetNbinsX(); ++y) if (histo->GetBinContent(x, y) > 0)
+//   {
+//     print(histo->GetBinContent(x, y));
+//     // TODO !!
+//     // addBinContent(histo, x, y, -int((projX->GetBinContent(x, y)+projY->GetBinContent(x, y))/2*normx));
+//   }
 
-  return ret;
-}
+//   return ret;
+// }
 
 TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max)
 {

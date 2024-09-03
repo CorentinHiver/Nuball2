@@ -13,7 +13,7 @@
 #include "CoefficientCorrection.hpp"
 #include "Utils.h"
 
-long max_cursor = 1.e+8;
+long max_cursor = 1.e+11;
 Label timing_ref_label = 252;
 Time time_window = 50_ns;
 
@@ -108,6 +108,7 @@ void Co60_efficiency()
   auto gated_addback_BGO = new TH1F("gated_addback_BGO", "gated_addback_BGO;[keV]", 500, 0, 2000);
   auto gated_only_addback_BGO = new TH1F("gated_only_addback_BGO", "gated_only_addback_BGO;[keV]", 500, 0, 2000);
 
+  auto gated_raw_phos = new TH2F("gated_raw_phos", "gated_raw_phos;[keV]", 1000, 0, 1000, 500, 0, 2000);
   auto gated_phos = new TH1F("gated_phos", "gated_phos;[keV]", 500, 0, 2000);
   auto gated_clean_phos = new TH1F("gated_clean_phos", "gated_clean_phos;[keV]", 500, 0, 2000);
   auto gated_rej_phos = new TH1F("gated_rej_phos", "gated_rej_phos;[keV]", 500, 0, 2000);
@@ -232,6 +233,7 @@ void Co60_efficiency()
         // Paris phoswitches :
         for (auto const & phos : paris.phoswitches) 
         {
+          gated_raw_phos->Fill(phos->index(), phos->qlong);
           gated_phos->Fill(phos->nrj);
 
           calo+=smearParis(phos->nrj, random);
@@ -268,7 +270,8 @@ void Co60_efficiency()
   
   if (nb_gate < 1) print("no gate found !!");
   else print(nb_gate, "gate found, along with", nb_gated, "coincident gamma, which means an absolute efficiency of", 100.*double(nb_gated)/double(nb_gate), "%");
-  print("Total efficiency :", 100.-100.*double(nb_missed)/double(nb_gate), "%");
+  print("Total efficiency :", 100.*(1-*double(nb_missed)/double(nb_gate)), "%");
+  print(nicer_double(max_cursor, 0), "evts read");
 
   // Efficiency
   auto outfile = TFile::Open("60Co_test.root", "recreate");
@@ -312,6 +315,7 @@ void Co60_efficiency()
     gated_addback_BGO->Write();
     gated_only_addback_BGO->Write();
 
+    gated_raw_phos->Write();
     gated_phos->Write();
     gated_clean_phos->Write();
     gated_rej_phos->Write();

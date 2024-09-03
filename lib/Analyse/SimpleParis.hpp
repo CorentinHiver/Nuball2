@@ -100,12 +100,12 @@ namespace Paris
 
   // Does the detector label correspond to a Paris ? 
   static constexpr auto is = LUT<1000> ([](Label const & label) {
-    return binary_search(ParisArrays::paris_labels, label);
+    return binary_search(ParisArrays::labels, label);
   });
 
   // Return the index of the label in Paris (201 = 0, )
   static constexpr auto index = LUT<1000> ([](Label const & label) {
-    if (is[label]) return static_cast<Label> (find_index(ParisArrays::paris_labels, label));
+    if (is[label]) return static_cast<Label> (find_index(ParisArrays::labels, label));
     else return Label{0};
   });
 
@@ -245,7 +245,7 @@ public:
   {
     SimplePhoswitch::resetIndexes();
     SimpleParisModule::resetIndexes();
-    for (auto & phoswitch : phoswitches) phoswitch.label = ParisArrays::paris_labels[m_index * Paris::cluster_size + phoswitch.index()];
+    for (auto & phoswitch : phoswitches) phoswitch.label = ParisArrays::labels[m_index * Paris::cluster_size + phoswitch.index()];
   };
 
   SimplePhoswitch* fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)

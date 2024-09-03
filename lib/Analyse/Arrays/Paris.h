@@ -3,7 +3,7 @@
 
 namespace ParisArrays
 {
-  static constexpr std::array<Label, 72> paris_labels =
+  static constexpr std::array<Label, 72> labels =
   {
     201, 202, 203, 204, 205, 206, 207, 208,
     301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 315, 316,

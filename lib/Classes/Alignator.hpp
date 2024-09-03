@@ -56,7 +56,6 @@ public:
 
     Event event(m_tree, "t");
 
-    auto const & nb_hits = m_tree -> GetEntries();
     m_tree -> SetBranchStatus("*", false);// Disables all the branches readability
     m_tree -> SetBranchStatus("stamp", true);// Read only the timestamp
 
