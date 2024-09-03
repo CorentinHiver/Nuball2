@@ -52,7 +52,7 @@ void raw_reader()
     bidims_rot[index].reset(("rotated_qshort_VS_qlong_"+label_str).c_str(), (label_str+"_qshort_VS_qlong_rotated").c_str(), 1000,0,200000, 1000,0,200000);
   }
 
-  MTFasterReader reader(Path(Path::home() + "nuball2/N-SI-136-sources/Na22_center.fast/"), nb_files);
+  MTFasterReader reader(Path(Path::home() + "nuball2/N-SI-136/Na22_center.fast/"), nb_files);
   reader.setTimeshifts(ts.data());
   reader.readAligned([&](Hit & hit, Alignator & tree)
   {
