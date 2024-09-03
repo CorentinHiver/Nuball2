@@ -30,9 +30,7 @@ void raw_reader()
 
   Timer timer;
 
-  PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
-  Calibration calib("../136/136_2024_Co.calib");
-  Timeshifts ts("../136/Timeshifts/60Co_after.dT");
+  PhoswitchCalib calibPhos("../136/NaI_136_2024.angles");
 
   int nb_gate = 0;
   int nb_gated = 0;
@@ -44,17 +42,15 @@ void raw_reader()
 
   Vector_MTTHist<TH2F> bidims; 
   bidims.resize(ParisArrays::labels.size());
+  Vector_MTTHist<TH2F> bidims_rot; 
+  bidims_rot.resize(ParisArrays::labels.size());
   for (auto const & label : ParisArrays::labels)
   {
     auto const & index = Paris::index[label];
     auto const & label_str = std::to_string(label);
     bidims[index].reset(("qshort_VS_qlong_"+label_str).c_str(), (label_str+"_qshort_VS_qlong").c_str(), 1000,0,200000, 1000,0,200000);
+    bidims_rot[index].reset(("rotated_qshort_VS_qlong_"+label_str).c_str(), (label_str+"_qshort_VS_qlong_rotated").c_str(), 1000,0,200000, 1000,0,200000);
   }
-
-  // Event event(tree);
-  CloversV2 clovers;
-  SimpleParis paris(&calibPhoswitches);
-  std::vector<double> rej_Ge;
 
   MTFasterReader reader(Path(Path::home() + "nuball2/N-SI-136-sources/Na22_center.fast/"), nb_files);
   reader.setTimeshifts(ts.data());
@@ -65,7 +61,8 @@ void raw_reader()
     {
       if (Paris::is[hit.label]) 
       {
-        bidims[Paris::index[hit.label]].Fill(hit.qdc2, hit.adc);
+        bidims[Paris::index[hit.label]].Fill(calibPhos.calibrate(hit.qdc2), calibPhos.calibrate(hit.adc));
+        bidims_rot[Paris::index[hit.label]].Fill(calibPhos.calibrate(hit.qdc2), calibPhos.calibrate(hit.adc));
       }
     }
   });
@@ -75,6 +72,7 @@ void raw_reader()
   outfile->cd();
 
   for (auto & histo : bidims) histo.Write();
+  for (auto & histo : bidims_rot) histo.Write();
 
   outfile->Close();
 

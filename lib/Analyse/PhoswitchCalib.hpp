@@ -1,6 +1,7 @@
 #ifndef PHOSWITCHCALIB_HPP
 #define PHOSWITCHCALIB_HPP
 
+#include "../Classes/Hit.hpp"
 class PhoswitchCalib
 {
 public:
