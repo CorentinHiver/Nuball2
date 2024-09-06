@@ -10,7 +10,7 @@
 #include "../Modules/Timeshifts.hpp"
 
 #include "../MTObjects/MTFasterReader.hpp"
-#include "../MTObjects/MTTHist.hpp"
+#include "../MTObjects/MultiHist.hpp"
 #include "../MTObjects/MTList.hpp"
 
 #define QDC1MAX
@@ -87,8 +87,8 @@ private:
   MTFasterReader m_MTreader;
   FilesManager m_files;
   std::vector<Label> m_labels;
-  std::unordered_map<Label, MTTHist<TH1F>> m_spectra;
-  std::unordered_map<Label, MTTHist<TH2F>> m_bidim;
+  std::unordered_map<Label, MultiHist<TH1F>> m_spectra;
+  std::unordered_map<Label, MultiHist<TH2F>> m_bidim;
   const char* write_mode = "RECREATE";
   Calibration m_calibration;
   Timeshifts m_timeshifts;
@@ -242,7 +242,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         if (m_nb_bins<0) m_nb_bins = int_cast(1e+6);
         if (m_bin_max<0) m_bin_max = 2e+7;
       }
-      MTTHist<TH1F> new_histogram(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max);
+      MultiHist<TH1F> new_histogram(name.c_str(), title.c_str(), m_nb_bins, 0, m_bin_max);
       m_spectra.emplace(hit.label, std::move(new_histogram));
       m_spectra[hit.label].Fill((m_calibration) ? hit.nrj : hit.adc); // Fill the spectra
 
@@ -254,7 +254,7 @@ inline void Faster2Histo::fillHisto(Hit const & hit)
         {
           auto const & name_bidim = name+"_bidim";
           auto const & title_bidim = title+" Q_long VS Q_short;Q_short [ADC];Q_long [ADC]";
-          MTTHist<TH2F> bidim(name_bidim.c_str(), title_bidim.c_str(), 
+          MultiHist<TH2F> bidim(name_bidim.c_str(), title_bidim.c_str(), 
                 m_nb_bins_paris,0,m_bin_max_paris, m_nb_bins_paris,0,m_bin_max_paris);
           m_bidim.emplace(hit.label, std::move(bidim));
         }

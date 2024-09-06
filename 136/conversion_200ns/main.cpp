@@ -5,7 +5,7 @@
 
 // 2. Include library
 #include <MTObject.hpp> // Include this first to activate the multithreading additions (#define MULTITHREADING)
-#include <MTTHist.hpp>  // Thread-safe wrapper around root histograms
+#include <MultiHist.hpp>  // Thread-safe wrapper around root histograms
 
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
@@ -231,15 +231,15 @@ int main(int argc, char** argv)
     auto const & run_number = std::stoi(split(run_name, '_')[1]);
     if(found(runs_blacklist, run_number)) continue;
 
-    MTTHist<TH1F> histo_mult_trigger;
-    MTTHist<TH1F> labels_histo;
-    MTTHist<TH1F> histo_mult;
-    MTTHist<TH2F> pure_singles_cristals;
-    MTTHist<TH2F> pure_singles_cristals_neutrons;
-    MTTHist<TH2F> pure_single_Ge_VS_time;
-    MTTHist<TH2F> cleanGe_VS_time;
-    MTTHist<TH2F> cleanGe_trigged_VS_time;
-    MTTHist<TH2F> cleanGe_trigger_particle_VS_time;
+    MultiHist<TH1F> histo_mult_trigger;
+    MultiHist<TH1F> labels_histo;
+    MultiHist<TH1F> histo_mult;
+    MultiHist<TH2F> pure_singles_cristals;
+    MultiHist<TH2F> pure_singles_cristals_neutrons;
+    MultiHist<TH2F> pure_single_Ge_VS_time;
+    MultiHist<TH2F> cleanGe_VS_time;
+    MultiHist<TH2F> cleanGe_trigged_VS_time;
+    MultiHist<TH2F> cleanGe_trigger_particle_VS_time;
 
     // Initialise the histograms
     histo_mult_trigger.reset("mult_trig","mult_trig", 50,-1, 50);

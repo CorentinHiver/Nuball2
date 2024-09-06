@@ -9,7 +9,7 @@
 #include <FasterReader.hpp>   // This class is the base for mono  threaded code
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <MTCounter.hpp>      // Use this to thread safely count what you want
-#include <MTTHist.hpp>        // Use this to thread safely fill histograms
+#include <MultiHist.hpp>        // Use this to thread safely fill histograms
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels

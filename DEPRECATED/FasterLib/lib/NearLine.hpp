@@ -43,7 +43,7 @@
 #include <Sorted_Event.hpp>
 #include <ParisLabel.hpp>
 
-#include <MTTHist.hpp>
+#include <MultiHist.hpp>
 #include <MTCounter.hpp>
 
 // Forward declaration of the modules :
@@ -259,45 +259,45 @@ private:
   //   HISTOGRAMS   //
   // -------------- //
   //Raw and calibrated histograms :
-  std::vector<MTTHist<TH1I>> m_hr_histo;
-  std::vector<MTTHist<TH1I>> m_hc_histo;
-  MTTHist<TH2I>              m_hc_bidim_histo_Ge;
-  MTTHist<TH2I>              m_hc_bidim_histo_LaBr3;
-  MTTHist<TH2I>              m_hc_bidim_histo_Paris;
+  std::vector<MultiHist<TH1I>> m_hr_histo;
+  std::vector<MultiHist<TH1I>> m_hc_histo;
+  MultiHist<TH2I>              m_hc_bidim_histo_Ge;
+  MultiHist<TH2I>              m_hc_bidim_histo_LaBr3;
+  MultiHist<TH2I>              m_hc_bidim_histo_Paris;
   //! Timeshifts calculations :
-  MTTHist<TH1F>              m_ts_histo_RF;
-  std::vector<MTTHist<TH1F>> m_ts_histo;
-  std::vector<MTTHist<TH2F>> m_ts_E_VS_deltaT;
-  MTTHist<TH1F> m_ts_DeltaT;
-  MTTHist<TH2I> m_ts_label_DeltaT;
-  MTTHist<TH1F> m_ts_EnergyRef;
-  MTTHist<TH1I> m_ts_Label;
-  MTTHist<TH1I> m_ts_mult;
+  MultiHist<TH1F>              m_ts_histo_RF;
+  std::vector<MultiHist<TH1F>> m_ts_histo;
+  std::vector<MultiHist<TH2F>> m_ts_E_VS_deltaT;
+  MultiHist<TH1F> m_ts_DeltaT;
+  MultiHist<TH2I> m_ts_label_DeltaT;
+  MultiHist<TH1F> m_ts_EnergyRef;
+  MultiHist<TH1I> m_ts_Label;
+  MultiHist<TH1I> m_ts_mult;
   //! RF check
-  MTTHist<TH1F> m_rfc_histo_RF;
-  MTTHist<TH1F> m_rfc_histo_RF_test;
-  MTTHist<TH1F> m_rfc_period;
-  MTTHist<TH2F> m_rfc_RF_label;
-  MTTHist<TH2F> m_rfc_RF_evol;
+  MultiHist<TH1F> m_rfc_histo_RF;
+  MultiHist<TH1F> m_rfc_histo_RF_test;
+  MultiHist<TH1F> m_rfc_period;
+  MultiHist<TH2F> m_rfc_RF_label;
+  MultiHist<TH2F> m_rfc_RF_evol;
 
   //!Faster2Root
-  MTTHist<TH1F> m_fr_Ge_raw;
-  MTTHist<TH1F> m_fr_Ge_prompt;
-  MTTHist<TH1F> m_fr_Ge_addback;
-  MTTHist<TH1F> m_fr_Ge_compton;
-  MTTHist<TH1F> m_fr_Ge_M1;
-  MTTHist<TH1F> m_fr_Ge_M2;
-  MTTHist<TH1F> m_fr_Ge_M3;
-  MTTHist<TH1F> m_fr_Ge_M4;
-  MTTHist<TH1F> m_fr_Ge_M5;
-  MTTHist<TH1F> m_fr_Ge_M6;
-  MTTHist<TH1F> m_fr_Ge_Msup6;
-  MTTHist<TH1F> m_fr_M;
-  MTTHist<TH2I> m_fr_C_VS_L;
-  MTTHist<TH2F> m_fr_ToF_all_det;
-  MTTHist<TH1F> m_fr_ToF;
-  MTTHist<TH1F> m_fr_dT_pulse;
-  MTTHist<TH2I> m_fr_C_VS_dT_pulse;
+  MultiHist<TH1F> m_fr_Ge_raw;
+  MultiHist<TH1F> m_fr_Ge_prompt;
+  MultiHist<TH1F> m_fr_Ge_addback;
+  MultiHist<TH1F> m_fr_Ge_compton;
+  MultiHist<TH1F> m_fr_Ge_M1;
+  MultiHist<TH1F> m_fr_Ge_M2;
+  MultiHist<TH1F> m_fr_Ge_M3;
+  MultiHist<TH1F> m_fr_Ge_M4;
+  MultiHist<TH1F> m_fr_Ge_M5;
+  MultiHist<TH1F> m_fr_Ge_M6;
+  MultiHist<TH1F> m_fr_Ge_Msup6;
+  MultiHist<TH1F> m_fr_M;
+  MultiHist<TH2I> m_fr_C_VS_L;
+  MultiHist<TH2F> m_fr_ToF_all_det;
+  MultiHist<TH1F> m_fr_ToF;
+  MultiHist<TH1F> m_fr_dT_pulse;
+  MultiHist<TH2I> m_fr_C_VS_dT_pulse;
 
 };
 

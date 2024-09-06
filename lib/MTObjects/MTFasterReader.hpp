@@ -77,7 +77,7 @@
  *         }
  *      
  * 
- *        void scalers(Hit & hit, FasterReader & reader, MTTHist<TH1> & scaler)
+ *        void scalers(Hit & hit, FasterReader & reader, MultiHist<TH1> & scaler)
  *        {
  *           while(reader.Read())
  *           {
@@ -85,7 +85,7 @@
  *           }
  *        }
  * 
- * (see MTTHist and MTCounter documentation)
+ * (see MultiHist and MTCounter documentation)
  * 
  * It is recommended to pass the variables by reference (adding the '&' character) for the parameters so that they are shared between threads.
  * Therefore this should only be done for thread safe objects, like any object in the folder MTObjects/ or stl stuff, or read-only variables.

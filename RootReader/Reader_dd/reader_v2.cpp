@@ -4,7 +4,7 @@
 #include <RF_Manager.hpp>
 #include <FilesManager.hpp>
 #include <Clovers.hpp>
-#include <MTTHist.hpp>
+#include <MultiHist.hpp>
 #include <RWMat.hxx>
 #include <MTList.hpp>
 
@@ -71,120 +71,120 @@ private:
 
   // Histograms :
 #ifndef QUALITY
-  MTTHist<TH1F> prompt_Ge;
-  MTTHist<TH1F> delayed_Ge;
-  MTTHist<TH1F> prompt_BGO;
-  MTTHist<TH1F> delayed_BGO;
-  MTTHist<TH1F> prompt_NaI;
-  MTTHist<TH1F> delayed_NaI;
-  MTTHist<TH1F> prompt_LaBr;
-  MTTHist<TH1F> delayed_LaBr;
+  MultiHist<TH1F> prompt_Ge;
+  MultiHist<TH1F> delayed_Ge;
+  MultiHist<TH1F> prompt_BGO;
+  MultiHist<TH1F> delayed_BGO;
+  MultiHist<TH1F> prompt_NaI;
+  MultiHist<TH1F> delayed_NaI;
+  MultiHist<TH1F> prompt_LaBr;
+  MultiHist<TH1F> delayed_LaBr;
 
-  MTTHist<TH1F> prompt_clean_Ge;
-  MTTHist<TH1F> delayed_clean_Ge;
+  MultiHist<TH1F> prompt_clean_Ge;
+  MultiHist<TH1F> delayed_clean_Ge;
 
-  MTTHist<TH1F> prompt_Ge_wp;
-  MTTHist<TH1F> delayed_Ge_wp;
-  MTTHist<TH1F> prompt_BGO_wp;
-  MTTHist<TH1F> delayed_BGO_wp;
-  MTTHist<TH1F> prompt_NaI_wp;
-  MTTHist<TH1F> delayed_NaI_wp;
-  MTTHist<TH1F> prompt_LaBr_wp;
-  MTTHist<TH1F> delayed_LaBr_wp;
+  MultiHist<TH1F> prompt_Ge_wp;
+  MultiHist<TH1F> delayed_Ge_wp;
+  MultiHist<TH1F> prompt_BGO_wp;
+  MultiHist<TH1F> delayed_BGO_wp;
+  MultiHist<TH1F> prompt_NaI_wp;
+  MultiHist<TH1F> delayed_NaI_wp;
+  MultiHist<TH1F> prompt_LaBr_wp;
+  MultiHist<TH1F> delayed_LaBr_wp;
 
-  MTTHist<TH1F> prompt_Ge_Clover_wp;
+  MultiHist<TH1F> prompt_Ge_Clover_wp;
   
-  MTTHist<TH1F> prompt_calo;
-  MTTHist<TH1F> prompt_calo_A;
-  MTTHist<TH1F> prompt_calo_B;
-  MTTHist<TH1F> prompt_calo_C;
-  MTTHist<TH1F> prompt_calo_D;
-  MTTHist<TH1F> prompt_calo_E;
-  MTTHist<TH1F> closest_prompt_calo_histo;
-  MTTHist<TH1F> delayed_calo;
+  MultiHist<TH1F> prompt_calo;
+  MultiHist<TH1F> prompt_calo_A;
+  MultiHist<TH1F> prompt_calo_B;
+  MultiHist<TH1F> prompt_calo_C;
+  MultiHist<TH1F> prompt_calo_D;
+  MultiHist<TH1F> prompt_calo_E;
+  MultiHist<TH1F> closest_prompt_calo_histo;
+  MultiHist<TH1F> delayed_calo;
 
-  MTTHist<TH2F> prompt_delayed_calo;
-  MTTHist<TH2F> delayed_Ge_VS_delayed_calo;
-  MTTHist<TH2F> delayed_Ge_VS_prompt_calo;
+  MultiHist<TH2F> prompt_delayed_calo;
+  MultiHist<TH2F> delayed_Ge_VS_delayed_calo;
+  MultiHist<TH2F> delayed_Ge_VS_prompt_calo;
 
-  MTTHist<TH2F> spectra_all;
-  MTTHist<TH2F> spectra_Ge_VS_run;
-  MTTHist<TH2F> spectra_BGO_VS_run;
-  MTTHist<TH2F> spectra_LaBr_VS_run;
-  MTTHist<TH2F> spectra_NaI_VS_run;
-
-
-  MTTHist<TH2F> delayed_E_VS_time_Ge_clean;
-  MTTHist<TH2F> delayed_E_VS_time_Ge_clean_wp;
-  MTTHist<TH2F> E_VS_time_BGO_wp;
-  MTTHist<TH2F> E_VS_time_LaBr_wp;
-  MTTHist<TH2F> E_VS_time_NaI_wp;
-  MTTHist<TH2F> time_all;
-  MTTHist<TH2F> time_NaI;
-  MTTHist<TH2F> time_all_knowing_pulse_A;
-  MTTHist<TH2F> time_all_knowing_pulse_B;
-  MTTHist<TH2F> time_all_knowing_pulse_C;
-  MTTHist<TH2F> time_all_knowing_pulse_D;
-  MTTHist<TH2F> time_all_knowing_pulse_E;
-  MTTHist<TH2F> time_all_knowing_only_pulse_A;
-  MTTHist<TH2F> time_all_knowing_only_pulse_B;
-  MTTHist<TH2F> time_all_knowing_only_pulse_C;
-  MTTHist<TH2F> time_all_knowing_only_pulse_D;
-  MTTHist<TH2F> time_all_knowing_only_pulse_E;
-  MTTHist<TH2F> time_all_pulse_A;
-  MTTHist<TH2F> time_all_pulse_B;
-  MTTHist<TH2F> time_all_pulse_C;
-  MTTHist<TH2F> time_all_pulse_D;
+  MultiHist<TH2F> spectra_all;
+  MultiHist<TH2F> spectra_Ge_VS_run;
+  MultiHist<TH2F> spectra_BGO_VS_run;
+  MultiHist<TH2F> spectra_LaBr_VS_run;
+  MultiHist<TH2F> spectra_NaI_VS_run;
 
 
-  // MTTHist<TH1F> delayed_Ge_wp;
-  MTTHist<TH1F> delayed_calo_wp;
-  MTTHist<TH2F> delayed_Ge_VS_delayed_calo_wp;
+  MultiHist<TH2F> delayed_E_VS_time_Ge_clean;
+  MultiHist<TH2F> delayed_E_VS_time_Ge_clean_wp;
+  MultiHist<TH2F> E_VS_time_BGO_wp;
+  MultiHist<TH2F> E_VS_time_LaBr_wp;
+  MultiHist<TH2F> E_VS_time_NaI_wp;
+  MultiHist<TH2F> time_all;
+  MultiHist<TH2F> time_NaI;
+  MultiHist<TH2F> time_all_knowing_pulse_A;
+  MultiHist<TH2F> time_all_knowing_pulse_B;
+  MultiHist<TH2F> time_all_knowing_pulse_C;
+  MultiHist<TH2F> time_all_knowing_pulse_D;
+  MultiHist<TH2F> time_all_knowing_pulse_E;
+  MultiHist<TH2F> time_all_knowing_only_pulse_A;
+  MultiHist<TH2F> time_all_knowing_only_pulse_B;
+  MultiHist<TH2F> time_all_knowing_only_pulse_C;
+  MultiHist<TH2F> time_all_knowing_only_pulse_D;
+  MultiHist<TH2F> time_all_knowing_only_pulse_E;
+  MultiHist<TH2F> time_all_pulse_A;
+  MultiHist<TH2F> time_all_pulse_B;
+  MultiHist<TH2F> time_all_pulse_C;
+  MultiHist<TH2F> time_all_pulse_D;
 
-  MTTHist<TH1F> delayed_Ge_wpp;
-  MTTHist<TH1F> delayed_calo_wpp;
-  MTTHist<TH1F> prompt_Ge_wpp;
-  MTTHist<TH2F> delayed_Ge_VS_delayed_calo_wpp;
 
-  MTTHist<TH1F> delayed_Ge_wppE;
-  MTTHist<TH1F> delayed_calo_wppE;
-  MTTHist<TH2F> delayed_Ge_VS_delayed_calo_wppE;
+  // MultiHist<TH1F> delayed_Ge_wp;
+  MultiHist<TH1F> delayed_calo_wp;
+  MultiHist<TH2F> delayed_Ge_VS_delayed_calo_wp;
 
-  MTTHist<TH2F> pp;
-  MTTHist<TH2F> dd;
-  MTTHist<TH2F> dd_wp;
-  MTTHist<TH2F> dd_wpp;
-  MTTHist<TH2F> dd_wppE;
-  MTTHist<TH2F> dp;
+  MultiHist<TH1F> delayed_Ge_wpp;
+  MultiHist<TH1F> delayed_calo_wpp;
+  MultiHist<TH1F> prompt_Ge_wpp;
+  MultiHist<TH2F> delayed_Ge_VS_delayed_calo_wpp;
 
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_A;
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_B;
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_C;
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_D;
-  MTTHist<TH1F> delayed_clean_Ge_last_pulse_E;
+  MultiHist<TH1F> delayed_Ge_wppE;
+  MultiHist<TH1F> delayed_calo_wppE;
+  MultiHist<TH2F> delayed_Ge_VS_delayed_calo_wppE;
 
-  MTTHist<TH2F> dd_time_Ge_clean;
-  MTTHist<TH2F> dd_time_Ge_clean_wp;
-  MTTHist<TH2F> delayed_Ge_clean_VS_prompt_calo;
-  MTTHist<TH2F> delayed_Ge_clean_VS_delayed_calo_wop; // With one prompt
+  MultiHist<TH2F> pp;
+  MultiHist<TH2F> dd;
+  MultiHist<TH2F> dd_wp;
+  MultiHist<TH2F> dd_wpp;
+  MultiHist<TH2F> dd_wppE;
+  MultiHist<TH2F> dp;
 
-  MTTHist<TH1F> number_of_pulses_detected;
-  MTTHist<TH1F> preprompt_spectra;
+  MultiHist<TH1F> delayed_clean_Ge_last_pulse_A;
+  MultiHist<TH1F> delayed_clean_Ge_last_pulse_B;
+  MultiHist<TH1F> delayed_clean_Ge_last_pulse_C;
+  MultiHist<TH1F> delayed_clean_Ge_last_pulse_D;
+  MultiHist<TH1F> delayed_clean_Ge_last_pulse_E;
 
-  MTTHist<TH2F> time_vs_run;
+  MultiHist<TH2F> dd_time_Ge_clean;
+  MultiHist<TH2F> dd_time_Ge_clean_wp;
+  MultiHist<TH2F> delayed_Ge_clean_VS_prompt_calo;
+  MultiHist<TH2F> delayed_Ge_clean_VS_delayed_calo_wop; // With one prompt
 
-  MTTHist<TH2F> dT_VS_sumGe;
-  MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge;
-  MTTHist<TH2F> delayed_Ge_C2_VS_prompt_Ge;
-  MTTHist<TH2F> delayed_Ge_C2_VS_prompt_mult;
-  MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_cleaned;
-  MTTHist<TH2F> delayed_Ge_C2_VS_total_Ge_rejected;
-  MTTHist<TH2F> delayed_Ge_C3_VS_total_Ge;
-  MTTHist<TH2F> delayed_Ge_C3_tot3_VS_total_Ge;
+  MultiHist<TH1F> number_of_pulses_detected;
+  MultiHist<TH1F> preprompt_spectra;
+
+  MultiHist<TH2F> time_vs_run;
+
+  MultiHist<TH2F> dT_VS_sumGe;
+  MultiHist<TH2F> delayed_Ge_C2_VS_total_Ge;
+  MultiHist<TH2F> delayed_Ge_C2_VS_prompt_Ge;
+  MultiHist<TH2F> delayed_Ge_C2_VS_prompt_mult;
+  MultiHist<TH2F> delayed_Ge_C2_VS_total_Ge_cleaned;
+  MultiHist<TH2F> delayed_Ge_C2_VS_total_Ge_rejected;
+  MultiHist<TH2F> delayed_Ge_C3_VS_total_Ge;
+  MultiHist<TH2F> delayed_Ge_C3_tot3_VS_total_Ge;
   
   // simple clean Ge delayed trigger :
-  MTTHist<TH2F> delayed_Ge_C1_VS_prompt_Ge;
-  MTTHist<TH2F> delayed_Ge_C1_VS_delayed_calo;
+  MultiHist<TH2F> delayed_Ge_C1_VS_prompt_Ge;
+  MultiHist<TH2F> delayed_Ge_C1_VS_delayed_calo;
 
   #else //QUALITY
 
@@ -348,13 +348,13 @@ void Analysator::Initialise()
   for (auto const & label : detectors.labels())
   {
     std::string name = "time_vs_run_"+detectors[label];
-    time_vs_run_each_det.emplace(label, MTTHist<TH2F>(name.c_str(), "time vs run each;run number;time [ns]", nb_runs,run_min,run_max, 2000,-1000,1000));
+    time_vs_run_each_det.emplace(label, MultiHist<TH2F>(name.c_str(), "time vs run each;run number;time [ns]", nb_runs,run_min,run_max, 2000,-1000,1000));
   }
   for (int run_i = run_min; run_i<run_max+1; run_i++)
   {
     auto name = ("time_vs_det_run_"+std::to_string(run_i));
     auto title = concatenate("time vs det run", run_i, ";run number;time [ns]");
-    time_vs_det_each_run.emplace(run_i, MTTHist<TH2F>(name.c_str(), title.c_str(), 900,0,900, 2000,-1000,1000));
+    time_vs_det_each_run.emplace(run_i, MultiHist<TH2F>(name.c_str(), title.c_str(), 900,0,900, 2000,-1000,1000));
   }
 #endif //QUALITY
 }

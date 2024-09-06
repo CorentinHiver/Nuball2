@@ -16,7 +16,7 @@
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <MTCounter.hpp>      // Use this to thread safely count what you want²
-#include <MTTHist.hpp>        // Use this to thread safely fill histograms
+#include <MultiHist.hpp>        // Use this to thread safely fill histograms
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels

@@ -4,7 +4,7 @@
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <MTCounter.hpp>      // Use this to thread safely count what you want²
-#include <MTTHist.hpp>        // Use this to thread safely fill histograms
+#include <MultiHist.hpp>        // Use this to thread safely fill histograms
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
 #include <Detectors.hpp>      // Eases the manipulation of detector's labels
@@ -76,57 +76,57 @@ std::string trigger_legend = "Legend : P = particle. G = Germanium. M = Module. 
 
 struct Histos
 {
-  MTTHist<TH1F> energy_all_Ge_raw;
-  MTTHist<TH1F> rf_all_raw;
-  MTTHist<TH2F> energy_each_raw;
-  MTTHist<TH2F> rf_each_raw;
+  MultiHist<TH1F> energy_all_Ge_raw;
+  MultiHist<TH1F> rf_all_raw;
+  MultiHist<TH2F> energy_each_raw;
+  MultiHist<TH2F> rf_each_raw;
 
   // Vector_MTTHist<TH2F> paris_bidim;
   // Vector_MTTHist<TH2F> paris_bidim_M_inf_4;
 
-  MTTHist<TH1F> energy_all_Ge;
-  MTTHist<TH1F> rf_all;
-  MTTHist<TH2F> energy_each;
-  MTTHist<TH2F> rf_each;
+  MultiHist<TH1F> energy_all_Ge;
+  MultiHist<TH1F> rf_all;
+  MultiHist<TH2F> energy_each;
+  MultiHist<TH2F> rf_each;
 
-  MTTHist<TH1F> energy_all_Ge_event;
-  MTTHist<TH1F> rf_all_event;
-  MTTHist<TH2F> energy_each_event;
-  MTTHist<TH2F> rf_each_event;
+  MultiHist<TH1F> energy_all_Ge_event;
+  MultiHist<TH1F> rf_all_event;
+  MultiHist<TH2F> energy_each_event;
+  MultiHist<TH2F> rf_each_event;
 
-  MTTHist<TH1F> energy_all_Ge_trig;
-  MTTHist<TH1F> rf_all_trig;
-  MTTHist<TH2F> energy_each_trig;
-  MTTHist<TH2F> rf_each_trig;
+  MultiHist<TH1F> energy_all_Ge_trig;
+  MultiHist<TH1F> rf_all_trig;
+  MultiHist<TH2F> energy_each_trig;
+  MultiHist<TH2F> rf_each_trig;
 
-  MTTHist<TH1F> first_Ge_spectra;
-  MTTHist<TH1F> first_Ge_spectra_Clean;
-  MTTHist<TH1F> first_Ge_spectra_Vetoed;
+  MultiHist<TH1F> first_Ge_spectra;
+  MultiHist<TH1F> first_Ge_spectra_Clean;
+  MultiHist<TH1F> first_Ge_spectra_Vetoed;
   
-  MTTHist<TH1F> all_Ge_after_trigger;
-  MTTHist<TH1F> all_Ge_after_trigger_with_prompt;
+  MultiHist<TH1F> all_Ge_after_trigger;
+  MultiHist<TH1F> all_Ge_after_trigger_with_prompt;
 
-  MTTHist<TH1F> second_Ge_spectra;
-  MTTHist<TH1F> second_Ge_spectra_Clean;
-  MTTHist<TH1F> second_Ge_spectra_Vetoed;
+  MultiHist<TH1F> second_Ge_spectra;
+  MultiHist<TH1F> second_Ge_spectra_Clean;
+  MultiHist<TH1F> second_Ge_spectra_Vetoed;
 
-  MTTHist<TH2F> BGO_VS_Ge_time;
-  MTTHist<TH2F> BGO_VS_Ge_time_prompt;
-  MTTHist<TH2F> E_Ge_BGO_dT_Ge_VS;
-  MTTHist<TH2F> BGO_VS_Ge_label;
-  MTTHist<TH2F> BGO_VS_Ge_label_vetoed;
-  MTTHist<TH2F> BGO_VS_Ge_label_clean;
+  MultiHist<TH2F> BGO_VS_Ge_time;
+  MultiHist<TH2F> BGO_VS_Ge_time_prompt;
+  MultiHist<TH2F> E_Ge_BGO_dT_Ge_VS;
+  MultiHist<TH2F> BGO_VS_Ge_label;
+  MultiHist<TH2F> BGO_VS_Ge_label_vetoed;
+  MultiHist<TH2F> BGO_VS_Ge_label_clean;
 
 
-  MTTHist<TH2F> first_Ge_time_VS_nb_delayed;
-  MTTHist<TH2F> second_Ge_time_VS_nb_delayed;
-  MTTHist<TH2F> Ge2_VS_Ge_time;
-  MTTHist<TH2F> Ge3_VS_Ge_time;
-  MTTHist<TH2F> Ge3_VS_Ge2_time;
+  MultiHist<TH2F> first_Ge_time_VS_nb_delayed;
+  MultiHist<TH2F> second_Ge_time_VS_nb_delayed;
+  MultiHist<TH2F> Ge2_VS_Ge_time;
+  MultiHist<TH2F> Ge3_VS_Ge_time;
+  MultiHist<TH2F> Ge3_VS_Ge2_time;
 
-  MTTHist<TH1F> promptGe;
-  MTTHist<TH1F> promptGe_clean;
-  MTTHist<TH1F> promptGe_vetoed;
+  MultiHist<TH1F> promptGe;
+  MultiHist<TH1F> promptGe_clean;
+  MultiHist<TH1F> promptGe_vetoed;
 
   
   TH1F* rf_evolution = nullptr;

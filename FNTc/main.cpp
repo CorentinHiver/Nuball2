@@ -4,7 +4,7 @@
 #include <MTObject.hpp>
 #include <libRoot.hpp>
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
-#include <MTTHist.hpp>        // Use this to thread safely fill histograms
+#include <MultiHist.hpp>        // Use this to thread safely fill histograms
 // #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
@@ -234,11 +234,11 @@ int main(int argc, char** argv)
   RF_Manager::setLabel(99);
   thread_local RF_Manager rf;
 
-  MTTHist<TH2F> sinogram("simple sinogram", "simple sinogram", 1000,-20,20, 1000,0,180);
-  MTTHist<TH1F> germanium("Germanium", "Germanium", 10000,0,10000);
-  MTTHist<TH1F> Ge1("Ge1", "Ge1", 10000,0,10000);
-  MTTHist<TH1F> Ge2("Ge2", "Ge2", 10000,0,10000);
-  MTTHist<TH1F> EDEN("EDEN", "EDEN", 10000,0,10000);
+  MultiHist<TH2F> sinogram("simple sinogram", "simple sinogram", 1000,-20,20, 1000,0,180);
+  MultiHist<TH1F> germanium("Germanium", "Germanium", 10000,0,10000);
+  MultiHist<TH1F> Ge1("Ge1", "Ge1", 10000,0,10000);
+  MultiHist<TH1F> Ge2("Ge2", "Ge2", 10000,0,10000);
+  MultiHist<TH1F> EDEN("EDEN", "EDEN", 10000,0,10000);
 
   auto isX = [](Label const & label) {return label == 5;}
   auto isTheta = [](Label const & label) {return label == 6;}

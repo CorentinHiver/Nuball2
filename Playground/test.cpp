@@ -29,7 +29,7 @@
 // #include <SpectraCo.hpp>
 // #include "../136/Calibrate/calibrate_spectra.C"
 // #include <CobaltCalorimeter.hpp>
-// #include <MTTHist.hpp>
+// #include <MultiHist.hpp>
 // #include <Manip.hpp>
 
 // #include <TROOT.h>
@@ -43,37 +43,48 @@
 
 int main()
 {
+  //////////////////////////////////////
+  // TEST MERGING MATCHING HISTOGRAMS //
+  //////////////////////////////////////
+
+  // auto file = TFile::Open("../Data_verification/DSSD_verif.root");
+  // file->cd();
+  // auto test = mergeAllMatching<TH2F>("E_strip*VS_clover");
+  // print((test) ? "yes" : "no");
+  // test->Draw();
+
+
   ////////////////////
   // SIMULATE PEAKS //
   ////////////////////
 
-  auto file = TFile::Open("test.root", "recreate");
-  file->cd();
+  // auto file = TFile::Open("test.root", "recreate");
+  // file->cd();
 
-  auto NaI_simu_3 = new TH1F("NaI_simu_3", "NaI simu 3%", 1000,0,20000);
-  auto NaI_simu_4 = new TH1F("NaI_simu_4", "NaI simu 4%", 1000,0,20000);
-  auto NaI_simu_5 = new TH1F("NaI_simu_5", "NaI simu 5%", 1000,0,20000);
-  auto NaI_simu_6 = new TH1F("NaI_simu_6", "NaI simu 6%", 1000,0,20000);
-  auto NaI_simu_7 = new TH1F("NaI_simu_7", "NaI simu 7%", 1000,0,20000);
+  // auto NaI_simu_3 = new TH1F("NaI_simu_3", "NaI simu 3%", 1000,0,20000);
+  // auto NaI_simu_4 = new TH1F("NaI_simu_4", "NaI simu 4%", 1000,0,20000);
+  // auto NaI_simu_5 = new TH1F("NaI_simu_5", "NaI simu 5%", 1000,0,20000);
+  // auto NaI_simu_6 = new TH1F("NaI_simu_6", "NaI simu 6%", 1000,0,20000);
+  // auto NaI_simu_7 = new TH1F("NaI_simu_7", "NaI simu 7%", 1000,0,20000);
 
-  NaI_simu_4->SetLineColor(kBlack);
-  NaI_simu_5->SetLineColor(2);
-  NaI_simu_6->SetLineColor(3);
-  NaI_simu_7->SetLineColor(4);
+  // NaI_simu_4->SetLineColor(kBlack);
+  // NaI_simu_5->SetLineColor(2);
+  // NaI_simu_6->SetLineColor(3);
+  // NaI_simu_7->SetLineColor(4);
 
-  std::vector<double> energies = {9000, 9000-511, 9000-1022, 17619, 17619-511, 17619-1022};
+  // std::vector<double> energies = {9000, 9000-511, 9000-1022, 17619, 17619-511, 17619-1022};
 
-  for (auto const & e : energies)
-  {
-    simulatePeak(NaI_simu_3, e, e*0.03, int(1.e+6));
-    simulatePeak(NaI_simu_4, e, e*0.04, int(1.e+6));
-    simulatePeak(NaI_simu_5, e, e*0.05, int(1.e+6));
-    simulatePeak(NaI_simu_6, e, e*0.06, int(1.e+6));
-    simulatePeak(NaI_simu_7, e, e*0.07, int(1.e+6));
-  }
+  // for (auto const & e : energies)
+  // {
+  //   simulatePeak(NaI_simu_3, e, e*0.03, int(1.e+6));
+  //   simulatePeak(NaI_simu_4, e, e*0.04, int(1.e+6));
+  //   simulatePeak(NaI_simu_5, e, e*0.05, int(1.e+6));
+  //   simulatePeak(NaI_simu_6, e, e*0.06, int(1.e+6));
+  //   simulatePeak(NaI_simu_7, e, e*0.07, int(1.e+6));
+  // }
 
-  file->Write();
-  file->Close();
+  // file->Write();
+  // file->Close();
 
 
   ////////////////////////////
@@ -628,7 +639,7 @@ int main()
   // resizeViewRange(histo, 0);
   // histo->Draw();
   // for (int i = 0; i<calib.size(); i++) print(i, (int)calib.getOrder()[i]);
-  // MTTHist<TH1F>::verbose(false);
+  // MultiHist<TH1F>::verbose(false);
 
 
   // Faster2Histo convertor;

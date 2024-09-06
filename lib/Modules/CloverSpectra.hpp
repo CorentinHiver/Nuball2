@@ -51,12 +51,12 @@ private:
   bool m_throw_single = false;
   bool m_writeHisto = false;
 
-  MTTHist<TH1F> m_clovers;
-  MTTHist<TH1F> m_clovers_crystal;
-  MTTHist<TH2F> m_clovers_bidim;
-  // MTTHist<TH1F> m_paris;
-  // MTTHist<TH2F> m_paris_bidim;
-  // MTTHist<TH2F> m_paris_VS_clovers;
+  MultiHist<TH1F> m_clovers;
+  MultiHist<TH1F> m_clovers_crystal;
+  MultiHist<TH2F> m_clovers_bidim;
+  // MultiHist<TH1F> m_paris;
+  // MultiHist<TH2F> m_paris_bidim;
+  // MultiHist<TH2F> m_paris_VS_clovers;
 
   Path m_dataPath;
   File m_outName;

@@ -1,7 +1,7 @@
 #ifndef ANALYSE511_H
 #define ANALYSE511_H
 #include <libRoot.hpp>
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 #include "../Classes/Parameters.hpp"
 
 
@@ -28,16 +28,16 @@ private:
   std::string m_outRoot = "Analyse511.root";
   // ---- Histograms ---- //
   // Crystal patterns :
-  MTTHist<TH2I> m_histo_crystals_label;
-  MTTHist<TH2I> m_histo_511_label_both;
-  MTTHist<TH2F> m_histo_511_both;
-  MTTHist<TH2I> m_histo_511_label_both_delayed;
-  MTTHist<TH2F> m_histo_511_both_delayed;
-  MTTHist<TH2I> m_histo_511_label_partners;
-  MTTHist<TH2F> m_histo_511_partners;
-  MTTHist<TH2I> m_histo_511_label_one_and_other_less;
-  MTTHist<TH2F> m_histo_511_one_and_other_less;
-  // MTTHist<TH2F> m_histo_opposite_crystal_nrj;
+  MultiHist<TH2I> m_histo_crystals_label;
+  MultiHist<TH2I> m_histo_511_label_both;
+  MultiHist<TH2F> m_histo_511_both;
+  MultiHist<TH2I> m_histo_511_label_both_delayed;
+  MultiHist<TH2F> m_histo_511_both_delayed;
+  MultiHist<TH2I> m_histo_511_label_partners;
+  MultiHist<TH2F> m_histo_511_partners;
+  MultiHist<TH2I> m_histo_511_label_one_and_other_less;
+  MultiHist<TH2F> m_histo_511_one_and_other_less;
+  // MultiHist<TH2F> m_histo_opposite_crystal_nrj;
   // ---- Analyse ---- //
   std::vector<Clovers> m_Clovers;
 };

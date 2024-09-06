@@ -93,184 +93,184 @@ private:
   #endif //USE_DSSD
 
   // Here create any kind of histograms :
-  MTTHist<TH1F> m_DeltaT;
-  MTTHist<TH2F> m_ToF_spectra;
-  // MTTHist<TH1F> DeltaT       ;
-  MTTHist<TH1F> m_DeltaT_LaBr3 ;
-  MTTHist<TH1F> m_DeltaT_LaBr3_ref ;
-  MTTHist<TH1F> m_DeltaT_Paris ;
-  MTTHist<TH1F> m_DeltaT_Paris_ref ;
-  MTTHist<TH2F> m_label_DeltaT ;
-  MTTHist<TH2F> m_label_DeltaT_RF ;
-  MTTHist<TH2F> m_label_DeltaT_RF_2 ;
-  MTTHist<TH2F> m_label_DeltaT_RF_3 ;
-  MTTHist<TH2F> m_DeltaT2D     ;
-  MTTHist<TH2F> m_deltaT_energy;
-  MTTHist<TH1F> m_EnergyRef    ;
+  MultiHist<TH1F> m_DeltaT;
+  MultiHist<TH2F> m_ToF_spectra;
+  // MultiHist<TH1F> DeltaT       ;
+  MultiHist<TH1F> m_DeltaT_LaBr3 ;
+  MultiHist<TH1F> m_DeltaT_LaBr3_ref ;
+  MultiHist<TH1F> m_DeltaT_Paris ;
+  MultiHist<TH1F> m_DeltaT_Paris_ref ;
+  MultiHist<TH2F> m_label_DeltaT ;
+  MultiHist<TH2F> m_label_DeltaT_RF ;
+  MultiHist<TH2F> m_label_DeltaT_RF_2 ;
+  MultiHist<TH2F> m_label_DeltaT_RF_3 ;
+  MultiHist<TH2F> m_DeltaT2D     ;
+  MultiHist<TH2F> m_deltaT_energy;
+  MultiHist<TH1F> m_EnergyRef    ;
 
     //Energy Spectra
-  MTTHist<TH1F> m_Ge_raw;
-  MTTHist<TH1F> m_Ge_prompt;
-  MTTHist<TH1F> m_Ge_addback;
-  MTTHist<TH1F> m_Clean_Ge;
-  MTTHist<TH1F> m_Compton_garbage    ;
-  MTTHist<TH1F> m_M;
-  MTTHist<TH1F> m_Ge_M1;
-  MTTHist<TH1F> m_Ge_M2;
-  MTTHist<TH1F> m_Ge_M3;
-  MTTHist<TH1F> m_Ge_M4;
-  MTTHist<TH1F> m_Ge_M5;
-  MTTHist<TH1F> m_Ge_M6;
-  MTTHist<TH1F> m_Ge_Msup6;
-  MTTHist<TH1F> m_Ge_M3_6;
-  MTTHist<TH1F> m_Ge_Single_Spectra ;
+  MultiHist<TH1F> m_Ge_raw;
+  MultiHist<TH1F> m_Ge_prompt;
+  MultiHist<TH1F> m_Ge_addback;
+  MultiHist<TH1F> m_Clean_Ge;
+  MultiHist<TH1F> m_Compton_garbage    ;
+  MultiHist<TH1F> m_M;
+  MultiHist<TH1F> m_Ge_M1;
+  MultiHist<TH1F> m_Ge_M2;
+  MultiHist<TH1F> m_Ge_M3;
+  MultiHist<TH1F> m_Ge_M4;
+  MultiHist<TH1F> m_Ge_M5;
+  MultiHist<TH1F> m_Ge_M6;
+  MultiHist<TH1F> m_Ge_Msup6;
+  MultiHist<TH1F> m_Ge_M3_6;
+  MultiHist<TH1F> m_Ge_Single_Spectra ;
 
-  MTTHist<TH1F> m_LaBr3_Spectra;
-  MTTHist<TH1F> m_Paris_Spectra;
-  MTTHist<TH1F> m_R2_Spectra;
-  MTTHist<TH1F> m_R3_Spectra;
-  MTTHist<TH1F> m_R2_Spectra_Doppler_correct;
-  MTTHist<TH1F> m_R3_Spectra_Doppler_correct;
+  MultiHist<TH1F> m_LaBr3_Spectra;
+  MultiHist<TH1F> m_Paris_Spectra;
+  MultiHist<TH1F> m_R2_Spectra;
+  MultiHist<TH1F> m_R3_Spectra;
+  MultiHist<TH1F> m_R2_Spectra_Doppler_correct;
+  MultiHist<TH1F> m_R3_Spectra_Doppler_correct;
       // - 4 rings configurations :
-  MTTHist<TH1F> m_R1_Spectra;
-  MTTHist<TH1F> m_R4_Spectra;
-  MTTHist<TH1F> m_Neutrons_Spectra;
+  MultiHist<TH1F> m_R1_Spectra;
+  MultiHist<TH1F> m_R4_Spectra;
+  MultiHist<TH1F> m_Neutrons_Spectra;
       // - paris configuration :
-  MTTHist<TH1F> m_Front_Spectra;
-  MTTHist<TH1F> m_Back_Spectra;
-  MTTHist<TH1F> m_BR1_Spectra;
-  MTTHist<TH1F> m_BR2_Spectra;
-  MTTHist<TH1F> m_BR3_Spectra;
-  MTTHist<TH1F> m_FR1_Spectra;
-  MTTHist<TH1F> m_FR2_Spectra;
-  MTTHist<TH1F> m_FR3_Spectra;
-  MTTHist<TH2F> Ge_VS_time_Paris;
+  MultiHist<TH1F> m_Front_Spectra;
+  MultiHist<TH1F> m_Back_Spectra;
+  MultiHist<TH1F> m_BR1_Spectra;
+  MultiHist<TH1F> m_BR2_Spectra;
+  MultiHist<TH1F> m_BR3_Spectra;
+  MultiHist<TH1F> m_FR1_Spectra;
+  MultiHist<TH1F> m_FR2_Spectra;
+  MultiHist<TH1F> m_FR3_Spectra;
+  MultiHist<TH2F> Ge_VS_time_Paris;
     //Gated energy spectra
-  // MTTHist<TH1F> gated_Spectra       ;
-  // MTTHist<TH1F> gated_compt_supp    ;
-  // MTTHist<TH1F> gated_compt_add_back;
-  // MTTHist<TH1F> gated_compt_veto    ;
-  // MTTHist<TH2F> gated_deltaT        ;
+  // MultiHist<TH1F> gated_Spectra       ;
+  // MultiHist<TH1F> gated_compt_supp    ;
+  // MultiHist<TH1F> gated_compt_add_back;
+  // MultiHist<TH1F> gated_compt_veto    ;
+  // MultiHist<TH2F> gated_deltaT        ;
     //Energy bidim
-  MTTHist<TH2F> m_gamma_gamma_single;
-  MTTHist<TH2F> m_clover_clover;
-  MTTHist<TH2F> m_clover_clover_compt_supp;
-  MTTHist<TH2F> m_bidim_clover_clean_M_sup_3;
-  MTTHist<TH2F> m_clover_LaBr3;
-  MTTHist<TH2F> m_Spectra_all_Paris;
-  MTTHist<TH2F> m_clover_Paris;
-  MTTHist<TH2F> m_LaBr3_LaBr3;
-  MTTHist<TH2F> m_Paris_Paris;
-  MTTHist<TH2F> m_Spectra_all_LaBr3;
-  MTTHist<TH2F> m_Spectra_all_Ge_Clover;
-  MTTHist<TH2F> m_Spectra_all_Clover;
+  MultiHist<TH2F> m_gamma_gamma_single;
+  MultiHist<TH2F> m_clover_clover;
+  MultiHist<TH2F> m_clover_clover_compt_supp;
+  MultiHist<TH2F> m_bidim_clover_clean_M_sup_3;
+  MultiHist<TH2F> m_clover_LaBr3;
+  MultiHist<TH2F> m_Spectra_all_Paris;
+  MultiHist<TH2F> m_clover_Paris;
+  MultiHist<TH2F> m_LaBr3_LaBr3;
+  MultiHist<TH2F> m_Paris_Paris;
+  MultiHist<TH2F> m_Spectra_all_LaBr3;
+  MultiHist<TH2F> m_Spectra_all_Ge_Clover;
+  MultiHist<TH2F> m_Spectra_all_Clover;
 
     //Prompt gate:
-  MTTHist<TH2F> m_p_Ge_Ge_clean;
-  MTTHist<TH2F> m_p_LaBr3_Ge;
-  MTTHist<TH2F> m_p_LaBr3_LaBr3;
-  MTTHist<TH2F> m_p_Paris_Ge;
-  MTTHist<TH2F> m_p_Paris_Ge_C1P1;
-  MTTHist<TH2F> m_p_Paris_Paris;
+  MultiHist<TH2F> m_p_Ge_Ge_clean;
+  MultiHist<TH2F> m_p_LaBr3_Ge;
+  MultiHist<TH2F> m_p_LaBr3_LaBr3;
+  MultiHist<TH2F> m_p_Paris_Ge;
+  MultiHist<TH2F> m_p_Paris_Ge_C1P1;
+  MultiHist<TH2F> m_p_Paris_Paris;
 
   //dssd :
     // Germanium and particle in coincidence :
-  MTTHist<TH1F> m_DSSD_gate_Clover;
-  MTTHist<TH2F> m_DSSD_gate_Clover_bidim;
-  MTTHist<TH2F> m_prompt_particule_gate_Clover_spectra;
-  MTTHist<TH2F> m_particule_gated_Clover_prompt_VS_delayed;
-  MTTHist<TH2F> m_clover_VS_DSSD;
-  MTTHist<TH2F> m_DSSD_R3_VS_Clover;
-  MTTHist<TH2F> m_DSSD_R4_VS_Clover;
-  MTTHist<TH2F> m_DSSD_R5_VS_Clover;
-  MTTHist<TH1F> m_DSSD_gate_Clover_delayed;
-  MTTHist<TH1F> m_DSSD_gate_Clover_prompt;
+  MultiHist<TH1F> m_DSSD_gate_Clover;
+  MultiHist<TH2F> m_DSSD_gate_Clover_bidim;
+  MultiHist<TH2F> m_prompt_particule_gate_Clover_spectra;
+  MultiHist<TH2F> m_particule_gated_Clover_prompt_VS_delayed;
+  MultiHist<TH2F> m_clover_VS_DSSD;
+  MultiHist<TH2F> m_DSSD_R3_VS_Clover;
+  MultiHist<TH2F> m_DSSD_R4_VS_Clover;
+  MultiHist<TH2F> m_DSSD_R5_VS_Clover;
+  MultiHist<TH1F> m_DSSD_gate_Clover_delayed;
+  MultiHist<TH1F> m_DSSD_gate_Clover_prompt;
 
   // Energy gate :
-  MTTHist<TH1F> m_DSSD_E_gate_197Au;
-  MTTHist<TH1F> m_DSSD_E_gate_56Fe;
-  MTTHist<TH1F> m_DSSD_E_gate_52Cr;
-  MTTHist<TH1F> m_DSSD_E_gate_12C;
-  MTTHist<TH1F> m_DSSD_E_gate_16O;
-  MTTHist<TH1F> m_DSSD_E_gate_236U;
-  MTTHist<TH1F> m_DSSD_E_gate_9Be;
-  MTTHist<TH1F> m_DSSD_wide_E_gate_16O;
+  MultiHist<TH1F> m_DSSD_E_gate_197Au;
+  MultiHist<TH1F> m_DSSD_E_gate_56Fe;
+  MultiHist<TH1F> m_DSSD_E_gate_52Cr;
+  MultiHist<TH1F> m_DSSD_E_gate_12C;
+  MultiHist<TH1F> m_DSSD_E_gate_16O;
+  MultiHist<TH1F> m_DSSD_E_gate_236U;
+  MultiHist<TH1F> m_DSSD_E_gate_9Be;
+  MultiHist<TH1F> m_DSSD_wide_E_gate_16O;
 
   //Counters :
-  MTTHist<TH1F> m_DSSD_Counter;
-  MTTHist<TH2F> m_DSSD_crosstalk_Ring;
-  MTTHist<TH2F> m_DSSD_Time_bidim;
-  MTTHist<TH2F> m_DSSD_coinc_ring_sector;
-  MTTHist<TH2F> m_DSSD_crosstalk_Sector;
-  MTTHist<TH1F> m_DSSD_mult;
-  MTTHist<TH1F> m_DSSD_mult_Ring;
-  MTTHist<TH1F> m_DSSD_mult_Sector;
-  MTTHist<TH2F> m_DSSD_mult_Sector_VS_mult_Ring;
-  MTTHist<TH2F> m_DSSD_mult_Sector_VS_mult_Ring_E_sup_10_4;
+  MultiHist<TH1F> m_DSSD_Counter;
+  MultiHist<TH2F> m_DSSD_crosstalk_Ring;
+  MultiHist<TH2F> m_DSSD_Time_bidim;
+  MultiHist<TH2F> m_DSSD_coinc_ring_sector;
+  MultiHist<TH2F> m_DSSD_crosstalk_Sector;
+  MultiHist<TH1F> m_DSSD_mult;
+  MultiHist<TH1F> m_DSSD_mult_Ring;
+  MultiHist<TH1F> m_DSSD_mult_Sector;
+  MultiHist<TH2F> m_DSSD_mult_Sector_VS_mult_Ring;
+  MultiHist<TH2F> m_DSSD_mult_Sector_VS_mult_Ring_E_sup_10_4;
 
-  MTTHist<TH1F> m_DSSD_sum_2_rings;
-  MTTHist<TH1F> m_DSSD_sum_2_sectors;
+  MultiHist<TH1F> m_DSSD_sum_2_rings;
+  MultiHist<TH1F> m_DSSD_sum_2_sectors;
 
-  MTTHist<TH2F> m_DSSD_Spectra_each_channel;
-  // MTTHist<TH2F> m_merged_DSSD; //to keep in case
-  MTTHist<TH2F> m_DSSD_Spectra_each_channel_1R1S; //when in coinc only 1 ring and 1 sector
-  MTTHist<TH2F> m_DSSD_Spectra_each_channel_coinc2Sectors;
-  MTTHist<TH2F> m_DSSD_Spectra_each_channel_coinc2Rings;
-  MTTHist<TH2F> m_DSSD_R_1_coinc;
-  MTTHist<TH2F> m_DSSD_R_0_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_1_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_2_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_3_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_4_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_5_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_6_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_7_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_8_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_9_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_10_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_11_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_12_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_13_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_14_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_15_VS_Sectors_1R1S;
-  MTTHist<TH2F> m_DSSD_R_15_VS_R_14;
-  MTTHist<TH2F> m_DSSD_R_14_VS_R_13;
-  MTTHist<TH2F> m_DSSD_R_13_VS_R_12;
-  MTTHist<TH2F> m_DSSD_R_12_VS_R_11;
-  MTTHist<TH2F> m_DSSD_R_11_VS_R_10;
-  MTTHist<TH2F> m_DSSD_banana_R1_allsectors;
-  MTTHist<TH2F> m_DSSD_banana_R1_allsectors_1R1S;
-  MTTHist<TH2F> m_DSSD_Sector_spectra_coinc;
-  MTTHist<TH1F> m_DSSD_single_Rings;
-  MTTHist<TH1F> m_DSSD_single_Sectors;
-  MTTHist<TH2F> m_DSSD_single_Sectors_1R1S_each_sector;
-  MTTHist<TH1F> m_DSSD_single_R1;
-  MTTHist<TH1F> m_DSSD_M2_R1;
-  MTTHist<TH1F> m_DSSD_Msup1_R1;
-  MTTHist<TH1F> m_DSSD_R1;
-  MTTHist<TH2F> m_DSSD_R10_R11;
-  MTTHist<TH2F> m_DSSD_R9_R10;
-  MTTHist<TH2F> m_DSSD_R8_R9;
-  MTTHist<TH2F> m_DSSD_R1_S1_1;
+  MultiHist<TH2F> m_DSSD_Spectra_each_channel;
+  // MultiHist<TH2F> m_merged_DSSD; //to keep in case
+  MultiHist<TH2F> m_DSSD_Spectra_each_channel_1R1S; //when in coinc only 1 ring and 1 sector
+  MultiHist<TH2F> m_DSSD_Spectra_each_channel_coinc2Sectors;
+  MultiHist<TH2F> m_DSSD_Spectra_each_channel_coinc2Rings;
+  MultiHist<TH2F> m_DSSD_R_1_coinc;
+  MultiHist<TH2F> m_DSSD_R_0_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_1_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_2_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_3_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_4_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_5_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_6_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_7_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_8_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_9_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_10_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_11_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_12_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_13_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_14_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_15_VS_Sectors_1R1S;
+  MultiHist<TH2F> m_DSSD_R_15_VS_R_14;
+  MultiHist<TH2F> m_DSSD_R_14_VS_R_13;
+  MultiHist<TH2F> m_DSSD_R_13_VS_R_12;
+  MultiHist<TH2F> m_DSSD_R_12_VS_R_11;
+  MultiHist<TH2F> m_DSSD_R_11_VS_R_10;
+  MultiHist<TH2F> m_DSSD_banana_R1_allsectors;
+  MultiHist<TH2F> m_DSSD_banana_R1_allsectors_1R1S;
+  MultiHist<TH2F> m_DSSD_Sector_spectra_coinc;
+  MultiHist<TH1F> m_DSSD_single_Rings;
+  MultiHist<TH1F> m_DSSD_single_Sectors;
+  MultiHist<TH2F> m_DSSD_single_Sectors_1R1S_each_sector;
+  MultiHist<TH1F> m_DSSD_single_R1;
+  MultiHist<TH1F> m_DSSD_M2_R1;
+  MultiHist<TH1F> m_DSSD_Msup1_R1;
+  MultiHist<TH1F> m_DSSD_R1;
+  MultiHist<TH2F> m_DSSD_R10_R11;
+  MultiHist<TH2F> m_DSSD_R9_R10;
+  MultiHist<TH2F> m_DSSD_R8_R9;
+  MultiHist<TH2F> m_DSSD_R1_S1_1;
 
   // ToF spectra
-  MTTHist<TH2F> m_DSSD_Tof_VS_Energy;
-  MTTHist<TH2F> m_DSSD_Tof_VS_Energy_U6;
-  MTTHist<TH2F> m_DSSD_ToF_first_blob;
-  MTTHist<TH2F> m_DSSD_ToF_second_blob;
-  MTTHist<TH2F> m_DSSD_ToF_third_blob;
-  MTTHist<TH2F> m_DSSD_ToF_third_blob_wider;
+  MultiHist<TH2F> m_DSSD_Tof_VS_Energy;
+  MultiHist<TH2F> m_DSSD_Tof_VS_Energy_U6;
+  MultiHist<TH2F> m_DSSD_ToF_first_blob;
+  MultiHist<TH2F> m_DSSD_ToF_second_blob;
+  MultiHist<TH2F> m_DSSD_ToF_third_blob;
+  MultiHist<TH2F> m_DSSD_ToF_third_blob_wider;
 
-  MTTHist<TH2F> m_DSSD_Sectors_mult_VS_spectra;
-  MTTHist<TH2F> m_DSSD_Rings_mult_VS_spectra;
+  MultiHist<TH2F> m_DSSD_Sectors_mult_VS_spectra;
+  MultiHist<TH2F> m_DSSD_Rings_mult_VS_spectra;
 
-  MTTHist<TH2F> m_DSSD_Sector_VS_ring_polar;
-  MTTHist<TH2F> m_DSSD_Sector_VS_ring_polar_scale;
-  MTTHist<TH2F> m_DSSD_Sector_VS_ring_polar_scale_smooth;
+  MultiHist<TH2F> m_DSSD_Sector_VS_ring_polar;
+  MultiHist<TH2F> m_DSSD_Sector_VS_ring_polar_scale;
+  MultiHist<TH2F> m_DSSD_Sector_VS_ring_polar_scale_smooth;
 
   // Two events within 300ns
-  MTTHist<TH2F> m_DSSD_Spectra_each_channel_last;
-  MTTHist<TH2F> m_DSSD_Spectra_each_channel_current;
+  MultiHist<TH2F> m_DSSD_Spectra_each_channel_last;
+  MultiHist<TH2F> m_DSSD_Spectra_each_channel_current;
 
 
   //   //Energy cube
@@ -279,37 +279,37 @@ private:
   // std::unique_ptr<TH3F> clover_clover_LaBr3;
   // std::unique_ptr<TH3F> clover_LaBr3_LaBr3;
     //Timing spectra
-  MTTHist<TH1F> m_Ref_VS_RF;
-  MTTHist<TH1F> m_RF_time_diff;
-  MTTHist<TH1F> m_RF_freq;
-  MTTHist<TH2F> timeshift_all;
+  MultiHist<TH1F> m_Ref_VS_RF;
+  MultiHist<TH1F> m_RF_time_diff;
+  MultiHist<TH1F> m_RF_freq;
+  MultiHist<TH2F> timeshift_all;
   // std::unique_ptr<TH1D> evolution_RF;
-  MTTHist<TH2F> m_E_VS_time_of_Ref_vs_RF;
+  MultiHist<TH2F> m_E_VS_time_of_Ref_vs_RF;
     //Neutrons
-  MTTHist<TH1F> m_EDEN_ratio;
-  MTTHist<TH2F> m_EDEN_Q1_vs_Q2;
-  MTTHist<TH1F> m_EDEN_VS_RF;
-  MTTHist<TH2F> m_EDEN_VS_RF_2D;
-  MTTHist<TH2F> m_EDEN_totE_VS_RF;
+  MultiHist<TH1F> m_EDEN_ratio;
+  MultiHist<TH2F> m_EDEN_Q1_vs_Q2;
+  MultiHist<TH1F> m_EDEN_VS_RF;
+  MultiHist<TH2F> m_EDEN_VS_RF_2D;
+  MultiHist<TH2F> m_EDEN_totE_VS_RF;
     //Other bidim
-  MTTHist<TH2S> m_clover_counter_matrice;
-  MTTHist<TH2S> m_clover_polar;
-  MTTHist<TH2S> m_Paris_xy;
-  // MTTHist<TH2S> m_clover_cross_talk;
-  MTTHist<TH1I> m_gated_counter;
+  MultiHist<TH2S> m_clover_counter_matrice;
+  MultiHist<TH2S> m_clover_polar;
+  MultiHist<TH2S> m_Paris_xy;
+  // MultiHist<TH2S> m_clover_cross_talk;
+  MultiHist<TH1I> m_gated_counter;
     //Counter
-  MTTHist<TH1I> m_Counters       ;
-  MTTHist<TH1I> m_Clover_Counter;
-  MTTHist<TH1I> m_Gated_Counter;
-  MTTHist<TH2I> m_C_VS_L;
+  MultiHist<TH1I> m_Counters       ;
+  MultiHist<TH1I> m_Clover_Counter;
+  MultiHist<TH1I> m_Gated_Counter;
+  MultiHist<TH2I> m_C_VS_L;
     //Other
-  MTTHist<TH1I> m_mult_raw;
-  MTTHist<TH1I> m_mult_module;
-  MTTHist<TH1I> m_mult_clover;
-  MTTHist<TH1I> m_mult_paris;
-  MTTHist<TH1I> m_mult_Clean_Ge;
-  MTTHist<TH1I> m_mult_BGO;
-  MTTHist<TH1F> m_gated_sum_given_pic; //somme(Qn) C {gate}
+  MultiHist<TH1I> m_mult_raw;
+  MultiHist<TH1I> m_mult_module;
+  MultiHist<TH1I> m_mult_clover;
+  MultiHist<TH1I> m_mult_paris;
+  MultiHist<TH1I> m_mult_Clean_Ge;
+  MultiHist<TH1I> m_mult_BGO;
+  MultiHist<TH1F> m_gated_sum_given_pic; //somme(Qn) C {gate}
 
   TRandom* gRandom;
 };

@@ -120,7 +120,7 @@ int main(int argc, char** argv)
   // ar.launch(p);
 
   // debug("Starting here");
-  // MTTHist<TH1F> dssd_nrj("dssd_nrj", "dssd_nrj", 1000,0,20000);
+  // MultiHist<TH1F> dssd_nrj("dssd_nrj", "dssd_nrj", 1000,0,20000);
 
   // debug("Histo created");
 

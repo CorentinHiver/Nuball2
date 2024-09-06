@@ -12,6 +12,13 @@ namespace DSSD
   static constexpr auto isSector  = LUT<LUT_size> ([](Label const & label) {return 799 < label && label < 840;});
   static constexpr auto isSector1 = LUT<LUT_size> ([](Label const & label) {return 799 < label && label < 820;});
   static constexpr auto isSector2 = LUT<LUT_size> ([](Label const & label) {return 819 < label && label < 840;});
+  
+  static constexpr double z  = 3.25 ; // cm : Distance DSSD-target
+  static constexpr double Ri = 1.58; // cm : Inner radius 
+  static constexpr double Re = 4.05; // cm : Outer radius
+  static constexpr std::size_t nb_rings = 16;
+  static constexpr std::size_t nb_sectors = 32;
+  static constexpr std::size_t nb_strips = nb_rings+nb_sectors;
 
   static constexpr auto index_ring = LUT<LUT_size> ([]  (Label const & label) 
   {
@@ -25,26 +32,27 @@ namespace DSSD
     else return -1;
   });
 
-  static constexpr double z  = 3.25 ; // cm : Distance DSSD-target
-  static constexpr double Ri = 1.58; // cm : Inner radius 
-  static constexpr double Re = 4.05; // cm : Outer radius
-  static constexpr std::size_t nb_rings = 16;
-  static constexpr std::size_t nb_sectors = 32;
-  static constexpr std::size_t nb_strips = nb_rings+nb_sectors;
-
-  static constexpr double ang_size_sector = 2*3.14159/nb_sectors;  
-  static constexpr double size_ring = (Re-Ri)/nb_rings; // cm : 
-  static constexpr inline double ring_radius(Index const & index) {return Ri + size_ring*(nb_rings-index) + size_ring/2.;}
-  static constexpr inline double angle_ring  (Index const & index) {return atan( ring_radius(index) / z);}
-  static constexpr inline double angle_sector(Index const & index) 
+  static constexpr auto index = LUT<LUT_size> ([]  (Label const & label) 
   {
-    Index physical_index = (index<8) ? index+23 : index-8;
-    return physical_index*ang_size_sector;
+         if (DSSD::isSector[label]) return int(index_sector[label]);
+    else if (DSSD::isRing  [label]) return int(index_ring[label]+nb_sectors);
+    else return int{-1};
+  });
+
+
+  static constexpr double angular_size_sector = 2*3.14159/nb_sectors;  
+  static constexpr double size_ring = (Re-Ri)/nb_rings; // cm : 
+  static constexpr inline double ring_radius(Index const & _index) {return Ri + size_ring*(nb_rings-_index) + size_ring/2.;}
+  static constexpr inline double angle_ring  (Index const & _index) {return atan( ring_radius(_index) / z);}
+  static constexpr inline double angle_sector(Index const & _index) 
+  {
+    Index physical_index = (_index<8) ? _index+23 : _index-8;
+    return physical_index*angular_size_sector;
   }
   std::pair<double, double> polar(Index const & ring_id, Index const & sector_id, TRandom * random) 
   {
     auto const & r = ring_radius(ring_id)+random->Uniform(-size_ring/2, size_ring/2);
-    auto const & phi = angle_sector(sector_id)+random->Uniform(-ang_size_sector/2, ang_size_sector/2);
+    auto const & phi = angle_sector(sector_id)+random->Uniform(-angular_size_sector/2, angular_size_sector/2);
     return {r*cos(phi), r*sin(phi)};
   }
 
@@ -159,6 +167,10 @@ class SectorsDSSD : public StripsDSSD
     StripsDSSD::fill(&(m_sectors[id]), id);
   }
   auto operator[](int const & strip_i) const {return m_sectors[strip_i];}
+  auto begin() {return m_sectors.begin();}
+  auto end() {return m_sectors.end();}
+  auto begin() const {return m_sectors.begin();}
+  auto end() const {return m_sectors.end();}
 
 private:
   std::array<SectorDSSD, DSSD::nb_sectors> m_sectors;

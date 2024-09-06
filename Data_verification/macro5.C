@@ -22,7 +22,9 @@ constexpr static bool bidim_by_run = false;
 void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8)
 {
   std::string target = "U";
-  std::string trigger = "dC1";
+  std::string trigger = "P";
+  // std::string trigger = "dC1";
+  // std::string trigger = "C2";
 
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
@@ -32,9 +34,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
   MTObject::Initialise();
 
   detectors.load("../136/index_129.list");
-  // std::string trigger = "PrM1DeC1";
-  // std::string trigger = "C2";
-  // std::string trigger = "P";
+
   bool make_triple_coinc_ddd = true;
   bool make_triple_coinc_dpp = true;
   bool make_triple_coinc_ppp = true;

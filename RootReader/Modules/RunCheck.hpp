@@ -1,7 +1,7 @@
 #ifndef RUNCHECK_H
 #define RUNCHECK_H
 #include <libRoot.hpp>
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 #include "../Classes/Parameters.hpp"
 #include "../../lib/Analyse/HistoAnalyse.hpp"
 #include <DSSD.hpp>
@@ -40,18 +40,18 @@ private:
 
   // ---- Histograms ---- //
   // Histograms for each run :
-  MTTHist<TH2F> TimeSpectra;
-  MTTHist<TH2F> CloverTimeSpectra;
-  MTTHist<TH2F> GeRunSpectra;
+  MultiHist<TH2F> TimeSpectra;
+  MultiHist<TH2F> CloverTimeSpectra;
+  MultiHist<TH2F> GeRunSpectra;
   // Bidims for each run :
-  MTTHist<TH2F> R3A1_red_vs_clover;
-  MTTHist<TH2F> R3A1_BGO1_vs_clover;
-  MTTHist<TH2F> Paris_LaBr3_vs_clover;
-  MTTHist<TH2F> Paris_NaI_vs_clover;
+  MultiHist<TH2F> R3A1_red_vs_clover;
+  MultiHist<TH2F> R3A1_BGO1_vs_clover;
+  MultiHist<TH2F> Paris_LaBr3_vs_clover;
+  MultiHist<TH2F> Paris_NaI_vs_clover;
 
   // Histograms for the whole runs :
-  MTTHist<TH2F> GeSpectraManip;
-  MTTHist<TH1F> GeSpectraTotal;
+  MultiHist<TH2F> GeSpectraManip;
+  MultiHist<TH1F> GeSpectraTotal;
   Vector_MTTHist<TH2F> TimeEachDetector;
   Vector_MTTHist<TH2F> EnergyEachDetector;
   Vector_MTTHist<TH2F> EnergyClover;

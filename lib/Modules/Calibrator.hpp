@@ -15,7 +15,7 @@
 
 #include "../MTObjects/MTFasterReader.hpp"
 #include "../MTObjects/MTRootReader.hpp"
-#include "../MTObjects/MTTHist.hpp"
+#include "../MTObjects/MultiHist.hpp"
 
 // class CalibrationPoints
 // {
@@ -146,7 +146,7 @@ public:
   {
     // Raw spectra :
     Vector_MTTHist<TH1F> raw_spectra;
-    MTTHist<TH2F> all_raw_spectra;
+    MultiHist<TH2F> all_raw_spectra;
 
     // Calibrated spectra :
     Vector_MTTHist<TH1F> calib_spectra;

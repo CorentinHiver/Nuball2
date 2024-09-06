@@ -1,7 +1,7 @@
 #ifndef NOPULSE_H
 #define NOPULSE_H
 #include <libRoot.hpp>
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 #include "../Classes/Parameters.hpp"
 
 
@@ -27,14 +27,14 @@ private:
   std::string m_outDir  = "129/NoPulse/";
   std::string m_outRoot = "NoPulse.root";
   // ---- Histograms ---- //
-  MTTHist<TH1F> pulse_DSSD;
-  MTTHist<TH1F> pulse_first_DSSD;
-  MTTHist<TH2F> Time_VS_pulse_DSSD;
-  MTTHist<TH2F> Time_VS_pulse_DSSD_ref_dssd;
-  MTTHist<TH2F> ref_dssd_VS_ref_any_DSSD;
-  MTTHist<TH2F> ref_dssd_VS_ref_any;
-  MTTHist<TH2F> Time_VS_pulse_ParisFront;
-  MTTHist<TH2F> Time_VS_pulse_ParisBack;
+  MultiHist<TH1F> pulse_DSSD;
+  MultiHist<TH1F> pulse_first_DSSD;
+  MultiHist<TH2F> Time_VS_pulse_DSSD;
+  MultiHist<TH2F> Time_VS_pulse_DSSD_ref_dssd;
+  MultiHist<TH2F> ref_dssd_VS_ref_any_DSSD;
+  MultiHist<TH2F> ref_dssd_VS_ref_any;
+  MultiHist<TH2F> Time_VS_pulse_ParisFront;
+  MultiHist<TH2F> Time_VS_pulse_ParisBack;
 };
 
 bool NoPulse::launch(Parameters & p)

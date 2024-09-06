@@ -5,7 +5,7 @@
 
 #include "../../lib/Analyse/HistoAnalyse.hpp"
 
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 
 #include "../../lib/Classes/Gate.hpp"
 #include "../../lib/Classes/RWMat.hxx"
@@ -39,23 +39,23 @@ private:
   Gate LaBr3_prompt_gate;
   Gate LaBr3_delayed_gate;
 
-  MTTHist<TH1F> Ge_spectra;
-  MTTHist<TH1F> Ge_spectra_prompt;
-  MTTHist<TH1F> Ge_spectra_delayed;
-  MTTHist<TH2F> GePrompt_VS_GePrompt;
-  MTTHist<TH2F> GeDelayed_VS_GeDelayed;
-  MTTHist<TH2F> GeDelayed_VS_GeDelayed_time;
-  MTTHist<TH2F> GeDelayed_VS_GePrompt;
-  MTTHist<TH2F> Ge_Time_VS_Spectra;
-  MTTHist<TH2F> raw_Ge_Time_VS_Spectra;
+  MultiHist<TH1F> Ge_spectra;
+  MultiHist<TH1F> Ge_spectra_prompt;
+  MultiHist<TH1F> Ge_spectra_delayed;
+  MultiHist<TH2F> GePrompt_VS_GePrompt;
+  MultiHist<TH2F> GeDelayed_VS_GeDelayed;
+  MultiHist<TH2F> GeDelayed_VS_GeDelayed_time;
+  MultiHist<TH2F> GeDelayed_VS_GePrompt;
+  MultiHist<TH2F> Ge_Time_VS_Spectra;
+  MultiHist<TH2F> raw_Ge_Time_VS_Spectra;
 
-  MTTHist<TH2F> Ge_VS_DSSD;
-  MTTHist<TH2F> GePrompt_VS_DSSD;
-  MTTHist<TH2F> GeDelayed_VS_DSSD;
-  MTTHist<TH2F> DSSD_TW;
-  MTTHist<TH2F> Ge_VS_DSSD_Time;
+  MultiHist<TH2F> Ge_VS_DSSD;
+  MultiHist<TH2F> GePrompt_VS_DSSD;
+  MultiHist<TH2F> GeDelayed_VS_DSSD;
+  MultiHist<TH2F> DSSD_TW;
+  MultiHist<TH2F> Ge_VS_DSSD_Time;
 
-  // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
+  // MultiHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 };
 
 bool AnalyseIsomer::nuball2_tree = false;

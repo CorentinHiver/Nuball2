@@ -19,7 +19,7 @@
 
 #include "../MTObjects/MTRootReader.hpp"
 #include "../MTObjects/MTFasterReader.hpp"
-#include "../MTObjects/MTTHist.hpp"
+#include "../MTObjects/MultiHist.hpp"
 
 /**
  * @brief Matrixator is used to create a bunch of matrixes : each crystal of the setup versus the (add-backed & compton cleaned) clovers
@@ -98,15 +98,15 @@ private:
 
   // Multiplity 1 or 2 :
   
-  MTTHist<TH2F> test_paris_vs_mult;
-  MTTHist<TH2F> matrix_Clovers_prompt;
-  MTTHist<TH2F> matrix_Clovers_delayed;
-  MTTHist<TH2F> matrix_Clovers_delayed_vs_prompt;
+  MultiHist<TH2F> test_paris_vs_mult;
+  MultiHist<TH2F> matrix_Clovers_prompt;
+  MultiHist<TH2F> matrix_Clovers_delayed;
+  MultiHist<TH2F> matrix_Clovers_delayed_vs_prompt;
 
-  MTTHist<TH1F> clover_singles_prompt;
-  MTTHist<TH1F> clover_singles_delayed;
-  MTTHist<TH1F> clover_singles_prompt_Compton_veto;
-  MTTHist<TH1F> clover_singles_delayed_Compton_veto;
+  MultiHist<TH1F> clover_singles_prompt;
+  MultiHist<TH1F> clover_singles_delayed;
+  MultiHist<TH1F> clover_singles_prompt_Compton_veto;
+  MultiHist<TH1F> clover_singles_delayed_Compton_veto;
 
   Calibration m_calibration;
   Timeshifts m_timeshifts;

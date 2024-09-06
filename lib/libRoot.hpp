@@ -31,6 +31,7 @@
 #include <TObjString.h>
 #include <TPolyMarker.h>
 #include <TRandom.h>
+#include <TRegexp.h>
 #include <TROOT.h>
 #include <TSpline.h>
 #include <TSpectrum.h>
@@ -83,6 +84,38 @@ std::mutex mutex_Root;
 
 // TRandom gRandom(time(0));
 
+
+/////////////////////////////////////////////////////////////
+// Generic functions using some actually nice ROOT classes //
+/////////////////////////////////////////////////////////////
+
+namespace CoLib
+{
+  Strings match_regex(Strings list, std::string pattern)
+  {
+    TRegexp reg(TString(pattern.c_str()).ReplaceAll("*", ".*"));
+    std::vector<TString> strings; for (auto const & e : list) strings.push_back(e.c_str());
+    Strings ret;
+    for (size_t i = 0; i < strings.size(); ++i) if (strings[i].Index(reg) != kNPOS) ret.push_back(list[i]);
+    return ret;
+  }
+
+  template<class T>
+  auto unload(T* obj)
+  {
+    obj->SetDirectory(nullptr);
+    delete obj;
+  }
+
+  template<class T>
+  auto clone(std::string name, std::string new_name, TFile* file = nullptr)
+  {
+    if (file == nullptr) file = gFile;
+    if (!file) { error("in clone<", T::GetClassName(), "> : file is nullptr"); return nullptr;}
+    file->cd();
+    return dynamic_cast<T*> (file->Get<T>(name.c_str())->Clone(new_name.c_str()));
+  }
+}
 
 ////////////////////////////
 //   HISTO MANIPULATIONS  //
@@ -1666,7 +1699,7 @@ std::vector<THist*> get_histos(TPad * pad = nullptr)
 }
 
 template<class THist = TH1>
-std::vector<std::string> get_histos_names(TPad * pad = nullptr)
+std::vector<std::string> pad_get_names_of(TPad * pad = nullptr)
 {
   std::vector<std::string> ret;
   if (!pad) 
@@ -1772,54 +1805,73 @@ TH1F_map get_TH1F_map(TFile * file, std::vector<std::string> & names)
 }
 
 /**
- * @brief Get the list of all the histograms of a certain class (TH1F, TH2F...) inside a TFile
+ * @brief Get the list of all the object of a certain class (TH1F, TH2F...) inside a TFile
  * @details
  * TFile* file(TFile::Open("file.root","read"));
- * auto list = list_of<TH1F*>(file);
+ * auto list = file_get_names_of<TH1F>(file);
+ * 
+ * If no file is passed as parameter, reads the current file.
+ * Internally perform a file->cd()
  */
+
 template<class T>
-std::vector<std::string> list_of(TFile * file)
+Strings file_get_names_of(TFile* file = nullptr)
 {
-  std::vector<std::string> ret;
-  T* temp_obj = new T;
-  if (!file) {print("in get_names_of<T>(TFile * file) : file is nullptr"); return ret;}
+  // init
+  Strings ret;
+  T temp_obj; 
+
+  // Check the files :
+  if (file == nullptr) file = gFile;
+  if (!file) { error("in file_get_names_of<", temp_obj->GetClassName(), ">(TFile* file): file is nullptr"); return ret;}
+  file->cd();
+
+  // Get the class name :
+  auto const & classname = temp_obj.ClassName();
+  
+  // Loop over the list of keys of every object in the TFile :
   auto list = file->GetListOfKeys();
   for (auto&& keyAsObj : *list)
   {
-    std::unique_ptr<TKey> key (static_cast<TKey*>(keyAsObj));
-    if(strcmp(key->GetClassName(), temp_obj->ClassName()) == 0)
-    {
-      TObject* obj = key->ReadObj();
-      T* t = dynamic_cast<T*>(obj);
-      ret.push_back(t->GetName());
-    }
+    auto key = dynamic_cast<TKey*>(keyAsObj);
+    if(strcmp(key->GetClassName(), classname) == 0) ret.push_back(key->GetName());
   }
-  delete temp_obj;
+
   return ret;
 }
 
+
 /**
- * @brief Create a map of all the histograms of a certain class (TH1F, TH2F...) inside a TFile
+ * @brief Creates a map of all the object of a certain class (TH1F, TH2F...) inside a TFile, indexed by their name
  * @details
  * TFile* file(TFile::Open("file.root","read"));
- * auto map = map_of<TH1F>(file);
+ * auto list = file_get_map_of<TH1F>(file);
+ * 
+ * If no file is passed as parameter, reads the current file.
+ * Internally perform a file->cd()
  */
 
 template<class T>
-std::map<std::string, T*> map_of(TFile* file)
+std::map<std::string, T*> file_get_map_of(TFile* file = nullptr)
 {
+  // init
   std::map<std::string, T*> ret;
-  if (!file || file->IsZombie())
-  {
-    error("in map_of<T>(TFile * file) : file is nullptr or zombie");
-    return ret;
-  }
+  T temp_obj; 
 
-  TIter next(file->GetListOfKeys());
-  TKey* key;
-  while ((key = static_cast<TKey*>(next())))
+  // Check the files :
+  if (file == nullptr) file = gFile;
+  if (!file) { error("in file_get_map_of<", temp_obj.ClassName(), ">(TFile* file): file is nullptr"); return ret;}
+  file->cd();
+
+  // Get the class name :
+  auto const & classname = temp_obj.ClassName();
+  
+  // Loop over the list of keys of every object in the TFile :
+  auto list = file->GetListOfKeys();
+  for (auto&& keyAsObj : *list)
   {
-    if (TClass::GetClass(key->GetClassName())->InheritsFrom(T::Class()))
+    auto key = dynamic_cast<TKey*>(keyAsObj);
+    if(strcmp(key->GetClassName(), classname) == 0) 
     {
       T* obj = dynamic_cast<T*>(key->ReadObj());
       if (obj)
@@ -1835,6 +1887,28 @@ std::map<std::string, T*> map_of(TFile* file)
 ////////////
 // OTHERS //
 ////////////
+
+template<class THist>
+THist* mergeAllMatching(std::string expression, TFile* file = nullptr)
+{
+  THist temp_histo;
+  auto list = file_get_names_of<THist>(file);
+  auto matching_list = CoLib::match_regex(list, expression);
+  if (matching_list.empty()) {error("no", temp_histo.ClassName(), "matching regex", expression, "in file", file->GetName()); return nullptr;}
+
+  auto name = expression;
+  replace_all(name, "*", "_");
+  auto ret = CoLib::clone<THist>(matching_list[0], name.c_str());
+
+  for (size_t i = 0; i<matching_list.size(); ++i) 
+  {
+    print("merging", matching_list[i].c_str());
+    auto histo = file->Get<THist>(matching_list[i].c_str());
+    ret->Add(histo);
+    CoLib::unload(histo);
+  }
+  return ret;
+}
 
 void resize_view_range(TH1F * histo)
 {
@@ -1947,6 +2021,9 @@ void draw_all_TH1(std::string const & filename, int minX = 0, int maxX = 0, int 
   }
 }
 
+/**
+ * @brief Gets the ponderated Y mean value of a TH1F between two gates
+ */
 double MeanBetweenEdges(TH1F* hist, double edge1, double edge2) 
 {
   // Find the bin indices corresponding to the edges
@@ -2011,9 +2088,14 @@ void addBinContent(TH1* histo, int const & bin, double const & value)
   histo->SetBinContent(bin, histo->GetBinContent(bin)-value);
 }
 
-void addBinContent(TH1* histo, int const & binx, int const & biny, double const & value)
+void addBinContent(TH2* histo, int const & binx, int const & biny, double const & value)
 {
   histo->SetBinContent(binx, biny, histo->GetBinContent(binx, biny)-value);
+}
+
+void addBinContent(TH3* histo, int const & binx, int const & biny, int const & binz, double const & value)
+{
+  histo->SetBinContent(binx, biny, binz, histo->GetBinContent(binx, biny, binz)-value);
 }
 
 TH1D* myProjectionX(TH2* histo, std::string const & name, double const & xvalue_min, double const & xvalue_max, double const & xvalue_min_bckg, double const & xvalue_max_bckg, int peak_norm_min, int peak_norm_max)
@@ -2098,6 +2180,108 @@ TH1D* bestProjectionX(TH2F* histo, std::string name, int bin, int resolution)
   return pro;
 }
 
+/**
+ * @brief Projection on the xy plane between [binzmin; binzmax] (gates included); 
+ *        Available types : XY, YX, XZ, ZX, YZ, ZY.
+ */
+TH2F* projection2D(TH3F* histo, int binmin = 0, int binmax = -1, std::string type = "XY", std::string name = "")
+{
+  if (histo == nullptr) {error("in projection2D : histo is nullptr"); return nullptr;}
+
+  static Strings types = {"XY", "YX", "XZ", "ZX", "YZ", "ZY"};
+  if (!found(types, type)) {error("in projection2D(type, histo) :", type, "is not known"); return nullptr;}
+  // Preparing the return histo :
+  if (name == "") name = histo->GetName()+std::string("_p")+type;
+
+  TAxis* xaxis = nullptr;
+  TAxis* yaxis = nullptr;
+  TAxis* zaxis = nullptr;
+
+  if (type == types[0])
+  {
+    xaxis = histo->GetXaxis();
+    yaxis = histo->GetYaxis();
+    zaxis = histo->GetZaxis();
+  }
+  else if (type == types[1])
+  {
+    xaxis = histo->GetYaxis();
+    yaxis = histo->GetXaxis();
+    zaxis = histo->GetZaxis();
+  }
+  else if (type == types[2])
+  {
+    xaxis = histo->GetXaxis();
+    yaxis = histo->GetZaxis();
+    zaxis = histo->GetYaxis();
+  }
+  else if (type == types[3])
+  {
+    xaxis = histo->GetZaxis();
+    yaxis = histo->GetXaxis();
+    zaxis = histo->GetYaxis();
+  }
+  else if (type == types[4])
+  {
+    xaxis = histo->GetYaxis();
+    yaxis = histo->GetZaxis();
+    zaxis = histo->GetXaxis();
+  }
+  else if (type == types[5])
+  {
+    xaxis = histo->GetZaxis();
+    yaxis = histo->GetYaxis();
+    zaxis = histo->GetXaxis();
+  }
+
+  auto const & nbinsx = xaxis->GetNbins();
+  auto const & nbinsy = yaxis->GetNbins();
+
+  auto const & minX = xaxis->GetBinLowEdge(0);
+  auto const & maxX = xaxis->GetBinLowEdge(nbinsx);
+
+  auto const & minY = yaxis->GetBinLowEdge(0);
+  auto const & maxY = yaxis->GetBinLowEdge(nbinsy);
+
+  if (binmax==-1) binmax = zaxis->GetNbins();
+
+  TH2F* ret = nullptr; 
+  if (gFile->Get<TH2F>(name.c_str())) ret = gFile->Get<TH2F>(name.c_str());
+  else 
+  {
+    ret = new TH2F(name.c_str(), name.c_str(), nbinsx,minX,maxX, nbinsy,minY,maxY);
+    ret->GetXaxis()->SetTitle(xaxis->GetTitle());
+    ret->GetYaxis()->SetTitle(yaxis->GetTitle());
+  }
+
+
+  // Perform the projection :
+  for(int binx = 1; binx<=nbinsx; ++binx) for(int biny = 1; biny<=nbinsy; ++biny) 
+  {
+    int value = 0;
+    for(int binz = binmin; binz<=binmax; ++binz) 
+    {
+           if (type == "XY") value += histo->GetBinContent(binx, biny, binz);
+      else if (type == "YX") value += histo->GetBinContent(biny, binx, binz);
+      else if (type == "XZ") value += histo->GetBinContent(binx, binz, biny);
+      else if (type == "ZX") value += histo->GetBinContent(biny, binz, binx);
+      else if (type == "YZ") value += histo->GetBinContent(binz, biny, binz);
+      else if (type == "ZY") value += histo->GetBinContent(binz, binz, biny);
+    }
+    ret->SetBinContent(binx, biny, value);
+  }
+
+  return ret;
+}
+
+TH2F* projectionXY(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "XY", name);}
+TH2F* projectionYX(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "YX", name);}
+TH2F* projectionXZ(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "XZ", name);}
+TH2F* projectionZX(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "ZX", name);}
+TH2F* projectionYZ(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "YZ", name);}
+TH2F* projectionZY(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "ZY", name);}
+
+
 double ratio_integrals(TH1F* histo1, TH1F* histo2, int peak_min, int peak_max)
 {
   return peak_integral(histo1, peak_min, peak_max)/peak_integral(histo2, peak_min, peak_max);
@@ -2107,14 +2291,232 @@ double ratio_integrals(TH1D* histo1, TH1D* histo2, int peak_min, int peak_max)
   return peak_integral(histo1, peak_min, peak_max)/peak_integral(histo2, peak_min, peak_max);
 }
 
-TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm)
+namespace CoLib
 {
-  std::string name = histo->GetName()+std::string("_veto_clean");
-  auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
+  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm)
+  {
+    std::string name = histo->GetName()+std::string("_veto_clean");
+    auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
 
-  ret->Add(histo_veto, norm);
+    ret->Add(histo_veto, norm);
 
-  return ret;
+    return ret;
+  }
+
+  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max)
+  {
+    return removeVeto(histo, histo_veto, -ratio_integrals(histo->ProjectionX("histo_projX"), histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max));
+    delete gDirectory->Get("histo_projX");
+    delete gDirectory->Get("histo_veto_projX");
+  }
+
+  TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, double norm)
+  {
+    std::string name = histo->GetName()+std::string("_veto_clean");
+    auto ret = static_cast<TH1F*>(histo->Clone(name.c_str()));
+
+    ret->Add(histo_veto, norm);
+    
+    return ret;
+  }
+
+  TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, int peak_norm_min, int peak_norm_max)
+  {
+    return removeVeto(histo, histo_veto, -ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max));
+  }
+
+  template<class... Args>
+  TH1D* removeVeto(TH1D* histo, TH1D* histo_veto, Args... args)
+  {
+    return removeVeto(dynamic_cast<TH1F*>(histo), dynamic_cast<TH1F*>(histo_veto), std::forward<Args>(args)...);
+  }
+
+  void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits)
+  {
+    TRandom* random = new TRandom();
+    for (int it = 0; it<nb_hits; ++it) histo->Fill(random->Gaus(x_center, x_resolution/2.35));
+    delete random;
+  }
+
+  void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits, bool draw)
+  {
+    if (draw) 
+    {
+      TH1D* newHisto = (TH1D*) histo->Clone((histo->GetName()+std::string("_simulated")).c_str());
+      simulate_peak(newHisto, x_center, x_resolution, nb_hits);
+      newHisto->SetLineColor(kRed);
+      newHisto->Draw();
+      histo->Draw("same");
+    }
+    else simulate_peak(histo, x_center, x_resolution, nb_hits); 
+  }
+
+  /**
+   * @brief Histo is E VS time with time in ps and E in keV
+  */
+  TGraph* calculateHalfLife(TH2F* histo, int min_bin, int max_bin, int sigma, std::vector<TH1D*> & projs)
+  {
+    std::vector<int> bins;
+    std::vector<int> half_lifes;
+    if (min_bin-5*sigma < 0 || max_bin+5*sigma>histo->GetXaxis()->GetXmax()) {error ("in calculateHalfLife : out of bounds !"); return nullptr;}
+    auto proTot = histo->ProjectionX();
+    projs.push_back(proTot);
+    for (int bin = min_bin-4*sigma; bin < max_bin+4*sigma; ++bin)
+    {
+      auto pro = histo->ProjectionX(("proj_"+std::to_string(bin)).c_str(), bin-sigma, bin+sigma);
+      pro->Add(proTot, -(pro->Integral()/proTot->Integral()));
+      // TH1D* pro_bckg_low(histo->ProjectionX(("proj_bckg_low_"+std::to_string(bin)).c_str(), bin-3*sigma, bin-sigma));
+      // TH1D* pro_bckg_high(histo->ProjectionX(("proj_bckg_high"+std::to_string(bin)).c_str(), bin+sigma, bin+3*sigma));
+      // pro->Add(pro_bckg_low, -0.5);
+      // pro->Add(pro_bckg_high, -0.5);
+      pro->SetDirectory(nullptr);
+      projs.push_back(pro);
+
+      TF1* expo = new TF1("expo","expo");
+      pro->Fit(expo);
+      TF1* expo_pol = new TF1("expo","expo(0)+pol1(2)");
+      expo_pol->SetParameters(expo->GetParameter(0), expo->GetParameter(1));
+      pro->Fit(expo_pol);
+
+      bins.push_back(bin);
+      half_lifes.push_back(log(2)/(-1000*expo_pol->GetParameter(1)));
+      pro->Draw();
+      // pro->SetLineColor(kRed);
+      // pro_bckg_low->Draw("same");
+      // pro_bckg_high->Draw("same");
+      gPad->WaitPrimitive();
+    }
+    TGraph* ret = new TGraph(bins.size(), bins.data(), half_lifes.data());
+    return ret;
+  }
+
+
+  template<class THist = TH1>
+  void normalizeHistos(TPad* pad = nullptr)
+  {
+    if (!pad)
+    {
+      pad = (TPad*)gPad;
+      if (!pad) {error("no pad"); return;}
+    }
+    auto histos = get_histos<THist>(pad);
+    if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+    double max = 0;
+    for (auto const & hist : histos) if (max < hist->GetMaximum()) max = hist->GetMaximum();
+    if (max==0.0) {error("max is 0"); return;}
+    bool hasLegend = has_legend(pad);
+    int i = 0;
+    for (auto & hist : histos) 
+    {
+      gPad->GetListOfPrimitives()->Remove(hist);
+      hist->Scale(max/hist->GetMaximum());
+      if (i++ == 0) hist->Draw("hist");
+      else hist->Draw("hist same");
+    }
+    if (hasLegend) gPad->BuildLegend();
+    pad->Update();
+  }
+
+  template<class THist = TH1>
+  void normalizeHistosMin(TPad* pad = nullptr)
+  {
+    if (!pad)
+    {
+      pad = (TPad*)gPad;
+      if (!pad) {error("no pad"); return;}
+    }
+    auto histos = get_histos<THist>(pad);
+    if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+    double min = histos[0]->hist->GetMaximum();
+    for (auto const & hist : histos) if (min < hist->GetMaximum()) min = hist->GetMaximum();
+    if (min==0.0) {error("min is 0"); return;}
+    bool hasLegend = has_legend(pad);
+    int i = 0;
+    for (auto & hist : histos) 
+    {
+      gPad->GetListOfPrimitives()->Remove(hist);
+      hist->Scale(min/hist->GetMaximum());
+      if (i++ == 0) hist->Draw("hist");
+      else hist->Draw("hist same");
+    }
+    if (hasLegend) gPad->BuildLegend();
+    pad->Update();
+  }
+
+  template<class THist>
+  THist* AddNorm(THist* h1, THist* h2, double min_range, double max_range)
+  {
+    auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_plus_norm_"+TString(h2->GetName()));
+    ret->SetTitle(TString(h1->GetName())+"+"+TString(h2->GetName()));
+
+    auto canvas = new TCanvas("temp_canvas", "temp_canvas");
+    h1->Draw();
+    h2->Draw("same");
+    h1->GetXaxis()->SetRangeUser(min_range, max_range);
+
+    double factor = h1->GetMaximum()/h2->GetMaximum();
+    ret->Add(h2, +factor);
+
+    h1->GetXaxis()->UnZoom();
+
+    delete canvas;
+    return ret;
+  }
+  template<class THist>
+  THist* SubNorm(THist* h1, THist* h2, double min_range, double max_range)
+  {
+    auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_norm_"+TString(h2->GetName()));
+    ret->SetTitle(TString(h1->GetName())+"-"+TString(h2->GetName()));
+
+    auto canvas = new TCanvas("temp_canvas", "temp_canvas");
+    h1->Draw();
+    h2->Draw("same");
+    h1->GetXaxis()->SetRangeUser(min_range, max_range);
+
+    double factor = h1->GetMaximum()/h2->GetMaximum();
+    ret->Add(h2, -factor);
+
+    h1->GetXaxis()->UnZoom();
+
+    delete canvas;
+    return ret;
+  }
+
+  template<class THist>
+  THist* get(std::string name, TFile* file = nullptr)
+  {
+    if (!file)
+    {
+      file = (TFile*)gFile;
+      if (!file) {error("no file"); return nullptr;}
+    }
+    if (auto ret = dynamic_cast<THist*>(file->Get(name.c_str()))) return ret;
+    else return nullptr;
+  }
+
+  double calculateVariance(TH1F* hist, int const & bin_min, int const & bin_max) 
+  {
+    auto const & bins = bin_max-bin_min;
+    double sum = 0;
+    double sumSq = 0;
+
+    for (int i = bin_min+1; i <= bin_max; ++i) 
+    {
+      auto const & binContent = hist->GetBinContent(i);
+      sum += binContent;
+      sumSq += binContent * binContent;
+    }
+
+    auto const & mean = sum / bins;
+
+    return (sumSq / bins) - (mean * mean);
+  }
+
+  double calculateVariance(TH1F* hist)
+  {
+    return calculateVariance(hist, 0, hist->GetNbinsX());
+  } 
+
 }
 
 // TH2F* removeVeto(TH2F* histo, TH1F* veto_projx, TH1F* veto_projy, int bin_min, int bin_max)
@@ -2137,219 +2539,6 @@ TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm)
 //   return ret;
 // }
 
-TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max)
-{
-  return removeVeto(histo, histo_veto, -ratio_integrals(histo->ProjectionX("histo_projX"), histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max));
-  delete gDirectory->Get("histo_projX");
-  delete gDirectory->Get("histo_veto_projX");
-}
-
-TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, double norm)
-{
-  std::string name = histo->GetName()+std::string("_veto_clean");
-  auto ret = static_cast<TH1F*>(histo->Clone(name.c_str()));
-
-  ret->Add(histo_veto, norm);
-  
-  return ret;
-}
-
-TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, int peak_norm_min, int peak_norm_max)
-{
-  return removeVeto(histo, histo_veto, -ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max));
-}
-
-template<class... Args>
-TH1D* removeVeto(TH1D* histo, TH1D* histo_veto, Args... args)
-{
-  return removeVeto(dynamic_cast<TH1F*>(histo), dynamic_cast<TH1F*>(histo_veto), std::forward<Args>(args)...);
-}
-
-void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits)
-{
-  TRandom* random = new TRandom();
-  for (int it = 0; it<nb_hits; ++it) histo->Fill(random->Gaus(x_center, x_resolution/2.35));
-  delete random;
-}
-
-void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits, bool draw)
-{
-  if (draw) 
-  {
-    TH1D* newHisto = (TH1D*) histo->Clone((histo->GetName()+std::string("_simulated")).c_str());
-    simulate_peak(newHisto, x_center, x_resolution, nb_hits);
-    newHisto->SetLineColor(kRed);
-    newHisto->Draw();
-    histo->Draw("same");
-  }
-  else simulate_peak(histo, x_center, x_resolution, nb_hits); 
-}
-
-/**
- * @brief Histo is E VS time with time in ps and E in keV
-*/
-TGraph* calculateHalfLife(TH2F* histo, int min_bin, int max_bin, int sigma, std::vector<TH1D*> & projs)
-{
-  std::vector<int> bins;
-  std::vector<int> half_lifes;
-  if (min_bin-5*sigma < 0 || max_bin+5*sigma>histo->GetXaxis()->GetXmax()) {error ("in calculateHalfLife : out of bounds !"); return nullptr;}
-  auto proTot = histo->ProjectionX();
-  projs.push_back(proTot);
-  for (int bin = min_bin-4*sigma; bin < max_bin+4*sigma; ++bin)
-  {
-    auto pro = histo->ProjectionX(("proj_"+std::to_string(bin)).c_str(), bin-sigma, bin+sigma);
-    pro->Add(proTot, -(pro->Integral()/proTot->Integral()));
-    // TH1D* pro_bckg_low(histo->ProjectionX(("proj_bckg_low_"+std::to_string(bin)).c_str(), bin-3*sigma, bin-sigma));
-    // TH1D* pro_bckg_high(histo->ProjectionX(("proj_bckg_high"+std::to_string(bin)).c_str(), bin+sigma, bin+3*sigma));
-    // pro->Add(pro_bckg_low, -0.5);
-    // pro->Add(pro_bckg_high, -0.5);
-    pro->SetDirectory(nullptr);
-    projs.push_back(pro);
-
-    TF1* expo = new TF1("expo","expo");
-    pro->Fit(expo);
-    TF1* expo_pol = new TF1("expo","expo(0)+pol1(2)");
-    expo_pol->SetParameters(expo->GetParameter(0), expo->GetParameter(1));
-    pro->Fit(expo_pol);
-
-    bins.push_back(bin);
-    half_lifes.push_back(log(2)/(-1000*expo_pol->GetParameter(1)));
-    pro->Draw();
-    // pro->SetLineColor(kRed);
-    // pro_bckg_low->Draw("same");
-    // pro_bckg_high->Draw("same");
-    gPad->WaitPrimitive();
-  }
-  TGraph* ret = new TGraph(bins.size(), bins.data(), half_lifes.data());
-  return ret;
-}
-
-
-template<class THist = TH1>
-void normalizeHistos(TPad* pad = nullptr)
-{
-  if (!pad)
-  {
-    pad = (TPad*)gPad;
-    if (!pad) {error("no pad"); return;}
-  }
-  auto histos = get_histos<THist>(pad);
-  if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
-  double max = 0;
-  for (auto const & hist : histos) if (max < hist->GetMaximum()) max = hist->GetMaximum();
-  if (max==0.0) {error("max is 0"); return;}
-  bool hasLegend = has_legend(pad);
-  int i = 0;
-  for (auto & hist : histos) 
-  {
-    gPad->GetListOfPrimitives()->Remove(hist);
-    hist->Scale(max/hist->GetMaximum());
-    if (i++ == 0) hist->Draw("hist");
-    else hist->Draw("hist same");
-  }
-  if (hasLegend) gPad->BuildLegend();
-  pad->Update();
-}
-
-template<class THist = TH1>
-void normalizeHistosMin(TPad* pad = nullptr)
-{
-  if (!pad)
-  {
-    pad = (TPad*)gPad;
-    if (!pad) {error("no pad"); return;}
-  }
-  auto histos = get_histos<THist>(pad);
-  if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
-  double min = histos[0]->hist->GetMaximum();
-  for (auto const & hist : histos) if (min < hist->GetMaximum()) min = hist->GetMaximum();
-  if (min==0.0) {error("min is 0"); return;}
-  bool hasLegend = has_legend(pad);
-  int i = 0;
-  for (auto & hist : histos) 
-  {
-    gPad->GetListOfPrimitives()->Remove(hist);
-    hist->Scale(min/hist->GetMaximum());
-    if (i++ == 0) hist->Draw("hist");
-    else hist->Draw("hist same");
-  }
-  if (hasLegend) gPad->BuildLegend();
-  pad->Update();
-}
-
-template<class THist>
-THist* AddNorm(THist* h1, THist* h2, double min_range, double max_range)
-{
-  auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_plus_norm_"+TString(h2->GetName()));
-  ret->SetTitle(TString(h1->GetName())+"+"+TString(h2->GetName()));
-
-  auto canvas = new TCanvas("temp_canvas", "temp_canvas");
-  h1->Draw();
-  h2->Draw("same");
-  h1->GetXaxis()->SetRangeUser(min_range, max_range);
-
-  double factor = h1->GetMaximum()/h2->GetMaximum();
-  ret->Add(h2, +factor);
-
-  h1->GetXaxis()->UnZoom();
-
-  delete canvas;
-  return ret;
-}
-template<class THist>
-THist* SubNorm(THist* h1, THist* h2, double min_range, double max_range)
-{
-  auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_norm_"+TString(h2->GetName()));
-  ret->SetTitle(TString(h1->GetName())+"-"+TString(h2->GetName()));
-
-  auto canvas = new TCanvas("temp_canvas", "temp_canvas");
-  h1->Draw();
-  h2->Draw("same");
-  h1->GetXaxis()->SetRangeUser(min_range, max_range);
-
-  double factor = h1->GetMaximum()/h2->GetMaximum();
-  ret->Add(h2, -factor);
-
-  h1->GetXaxis()->UnZoom();
-
-  delete canvas;
-  return ret;
-}
-
-template<class THist>
-THist* get(std::string name, TFile* file = nullptr)
-{
-  if (!file)
-  {
-    file = (TFile*)gFile;
-    if (!file) {error("no file"); return nullptr;}
-  }
-  if (auto ret = dynamic_cast<THist*>(file->Get(name.c_str()))) return ret;
-  else return nullptr;
-}
-
-double calculateVariance(TH1F* hist, int const & bin_min, int const & bin_max) 
-{
-  auto const & bins = bin_max-bin_min;
-  double sum = 0;
-  double sumSq = 0;
-
-  for (int i = bin_min+1; i <= bin_max; ++i) 
-  {
-    auto const & binContent = hist->GetBinContent(i);
-    sum += binContent;
-    sumSq += binContent * binContent;
-  }
-
-  auto const & mean = sum / bins;
-
-  return (sumSq / bins) - (mean * mean);
-}
-
-double calculateVariance(TH1F* hist)
-{
-  return calculateVariance(hist, 0, hist->GetNbinsX());
-} 
 
 
  /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
@@ -2360,7 +2549,6 @@ public:
   PeakFitter() = default;
   ~PeakFitter()
   {
-
   }
 
   PeakFitter(TH1* histo, double low_edge, double high_edge) : 
@@ -2707,13 +2895,13 @@ class Radware
     if (!checkIsNumber(instruction)) return;
     nb = std::stoi(instruction);
 
-    simulate_peak(m_focus, peak, resolution, nb, true);
+    CoLib::simulate_peak(m_focus, peak, resolution, nb, true);
     gPad->Update();
   }
 
   void normalizeSpectra()
   {
-    normalizeHistos();
+    CoLib::normalizeHistos();
   }
 
   void exportSpectrum()
@@ -3013,7 +3201,7 @@ void hadd(std::string source, std::string target, double size_file_Mo, std::stri
 {
   if (found(options, "-j")) 
   {
-    error("in libRoot hadd, please use the parameter nb_threads instead of -j option of hadd");
+    error("in CoLib hadd, please use the parameter nb_threads instead of -j option of hadd");
     return;
   }
 

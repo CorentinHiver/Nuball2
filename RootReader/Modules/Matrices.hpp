@@ -1,7 +1,7 @@
 #ifndef MATRICES_H
 #define MATRICES_H
 #include <libRoot.hpp>
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 #include "../../lib/Analyse/HistoAnalyse.hpp"
 #include "../Classes/Parameters.hpp"
 #include "../../lib/Analyse/EventAnalyse.hpp"
@@ -35,45 +35,45 @@ private:
   int m_bins_LaBr3 = 600; Float_t m_min_LaBr3 = 0; Float_t m_max_LaBr3 = 6000;
 
   // ---- Histograms ---- //
-  MTTHist<TH2F> m_BGO_VS_Clover;
-  MTTHist<TH2F> m_LaBr3_VS_Clover;
+  MultiHist<TH2F> m_BGO_VS_Clover;
+  MultiHist<TH2F> m_LaBr3_VS_Clover;
 
-  MTTHist<TH2F> m_R3A1_BGO_VS_all_Clover;
-  MTTHist<TH2F> m_Clean_R3A1_BGO_VS_all_Clean_Clover;
-  MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_all_Clean_Clover;
-  MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover;
-  MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_its_Clover;
-  MTTHist<TH2F> m_Vetoed_R3A1_BGO_VS_its_Clover_E_total;
+  MultiHist<TH2F> m_R3A1_BGO_VS_all_Clover;
+  MultiHist<TH2F> m_Clean_R3A1_BGO_VS_all_Clean_Clover;
+  MultiHist<TH2F> m_Vetoed_R3A1_BGO_VS_all_Clean_Clover;
+  MultiHist<TH2F> m_Vetoed_R3A1_BGO_VS_all_other_Vetoed_Clover;
+  MultiHist<TH2F> m_Vetoed_R3A1_BGO_VS_its_Clover;
+  MultiHist<TH2F> m_Vetoed_R3A1_BGO_VS_its_Clover_E_total;
 
-  MTTHist<TH2F> m_Paris_NaI_BR2D1_VS_all_Clean_Clover;
-  MTTHist<TH2F> m_Paris_BR2D1_VS_all_Clean_Clover;
-  MTTHist<TH2F> m_LaBr3_BR2D1_VS_all_Clean_Clover;
-  MTTHist<TH2F> m_NaI_BR2D1_VS_all_Clean_Clover;
-  MTTHist<TH2F> m_Paris_BR2D1_VS_all_LaBr3_Paris;
-  MTTHist<TH2F> m_Paris_BR2D1_VS_front_LaBr3_Paris;
+  MultiHist<TH2F> m_Paris_NaI_BR2D1_VS_all_Clean_Clover;
+  MultiHist<TH2F> m_Paris_BR2D1_VS_all_Clean_Clover;
+  MultiHist<TH2F> m_LaBr3_BR2D1_VS_all_Clean_Clover;
+  MultiHist<TH2F> m_NaI_BR2D1_VS_all_Clean_Clover;
+  MultiHist<TH2F> m_Paris_BR2D1_VS_all_LaBr3_Paris;
+  MultiHist<TH2F> m_Paris_BR2D1_VS_front_LaBr3_Paris;
 
-  MTTHist<TH2F> m_BR2D1_ratio_VS_time;
-  MTTHist<TH2F> m_BR2D1_ratiov1_VS_time;
-  MTTHist<TH2F> m_BR2D1_ratiov2_VS_time;
-  MTTHist<TH2F> m_BR2D1_ratiov3_VS_time;
-  MTTHist<TH2F> m_BR2D1_ratiov4_VS_time;
+  MultiHist<TH2F> m_BR2D1_ratio_VS_time;
+  MultiHist<TH2F> m_BR2D1_ratiov1_VS_time;
+  MultiHist<TH2F> m_BR2D1_ratiov2_VS_time;
+  MultiHist<TH2F> m_BR2D1_ratiov3_VS_time;
+  MultiHist<TH2F> m_BR2D1_ratiov4_VS_time;
 
-  MTTHist<TH2F> m_BR2D1_LaBr3_E_VS_time;
-  MTTHist<TH2F> m_BR2D1_NaI_E_VS_time;
+  MultiHist<TH2F> m_BR2D1_LaBr3_E_VS_time;
+  MultiHist<TH2F> m_BR2D1_NaI_E_VS_time;
 
-  MTTHist<TH2F> m_BR2D1_paris_E_VS_ratio;
-  MTTHist<TH2F> m_BR2D1_paris_E2_VS_ratio;
-  MTTHist<TH2F> m_BR2D1_paris_E_VS_ratio_m35_m25;
-  MTTHist<TH2F> m_BR2D1_paris_E_VS_ratio_m20_m5;
-  MTTHist<TH2F> m_BR2D1_paris_E_VS_ratio_m4_3;
-  MTTHist<TH2F> m_BR2D1_paris_E_VS_ratio_6_20;
+  MultiHist<TH2F> m_BR2D1_paris_E_VS_ratio;
+  MultiHist<TH2F> m_BR2D1_paris_E2_VS_ratio;
+  MultiHist<TH2F> m_BR2D1_paris_E_VS_ratio_m35_m25;
+  MultiHist<TH2F> m_BR2D1_paris_E_VS_ratio_m20_m5;
+  MultiHist<TH2F> m_BR2D1_paris_E_VS_ratio_m4_3;
+  MultiHist<TH2F> m_BR2D1_paris_E_VS_ratio_6_20;
 
-  std::vector<MTTHist<TH2F>> m_each_BGO_VS_all_Clover;
-  std::vector<MTTHist<TH2F>> m_each_LaBr3_VS_all_Clover;
+  std::vector<MultiHist<TH2F>> m_each_BGO_VS_all_Clover;
+  std::vector<MultiHist<TH2F>> m_each_LaBr3_VS_all_Clover;
 
   // std::vector<Clovers> m_Clovers;
 
-  MTTHist<TH2F> m_Clean_Ge_bidim;
+  MultiHist<TH2F> m_Clean_Ge_bidim;
 };
 
 bool Matrices::launch(Parameters & p)

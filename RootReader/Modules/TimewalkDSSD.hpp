@@ -2,7 +2,7 @@
 #define TimewalkDSSD_H
 
 #include <libRoot.hpp>
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 #include "../Classes/Parameters.hpp"
 
 class TimewalkDSSD
@@ -43,19 +43,19 @@ private:
 
   // ---- Histograms ---- //
   Vector_MTTHist<TH2F> timewalk_DSSD_sectors_nRnS;
-  MTTHist<TH2F> timewalk_DSSD_all_sectors;
-  MTTHist<TH2F> timewalk_DSSD_all_sectors_nRnS_raw;
-  MTTHist<TH2F> timewalk_DSSD_all_sectors_nRnS_raw_delayed;
-  MTTHist<TH2F> timewalk_DSSD_all_sectors_nRnS_background;
-  MTTHist<TH2F> timewalk_DSSD_all_sectors_nRnS;
-  MTTHist<TH2F> timewalk_DSSD_all_sectors_1R1S;
-  MTTHist<TH2F> timewalk_DSSD_all_sectors_2R2S;
+  MultiHist<TH2F> timewalk_DSSD_all_sectors;
+  MultiHist<TH2F> timewalk_DSSD_all_sectors_nRnS_raw;
+  MultiHist<TH2F> timewalk_DSSD_all_sectors_nRnS_raw_delayed;
+  MultiHist<TH2F> timewalk_DSSD_all_sectors_nRnS_background;
+  MultiHist<TH2F> timewalk_DSSD_all_sectors_nRnS;
+  MultiHist<TH2F> timewalk_DSSD_all_sectors_1R1S;
+  MultiHist<TH2F> timewalk_DSSD_all_sectors_2R2S;
   Vector_MTTHist<TH2F> timewalk_DSSD_rings_nRnS;
 
-  MTTHist<TH2F> timewalk_DSSD_all_sectors_1S2R;
+  MultiHist<TH2F> timewalk_DSSD_all_sectors_1S2R;
 
-  MTTHist<TH2F> DSSD_VS_Clover;
-  MTTHist<TH1F> DSSD_spectra;
+  MultiHist<TH2F> DSSD_VS_Clover;
+  MultiHist<TH1F> DSSD_spectra;
 
   Timewalks m_Timewalks_DSSD;
 };

@@ -1,6 +1,6 @@
 #ifndef CALIBRATOR_HPP
 #define CALIBRATOR_HPP
-#include <MTObjects/MTTHist.hpp>
+#include <MTObjects/MultiHist.hpp>
 #include "../Classes/Parameters.hpp"
 
 std::string param_string = "Calibrator";

@@ -2,7 +2,7 @@
 #define ANALYSERAW_H
 
 #include <libRoot.hpp>
-#include <MTTHist.hpp>
+#include <MultiHist.hpp>
 #include <RF_Manager.hpp>
 #include <Clovers.hpp>
 
@@ -49,8 +49,8 @@ private:
   Vector_MTTHist<TH2F> energy2_spectra;
 
   // Collective spectra :
-  MTTHist<TH1F> timing_Ge_RF;
-  MTTHist<TH1F> timing_BGO_RF;
+  MultiHist<TH1F> timing_Ge_RF;
+  MultiHist<TH1F> timing_BGO_RF;
 };
 
 bool AnalyseRaw::launch(Parameters & p)

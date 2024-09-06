@@ -12,7 +12,7 @@
 #include "../lib/Classes/Timer.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "../lib/MTObjects/MTFasterReader.hpp"
-#include "../lib/MTObjects/MTTHist.hpp"
+#include "../lib/MTObjects/MultiHist.hpp"
 
 #include "CoefficientCorrection.hpp"
 #include "Utils.h"

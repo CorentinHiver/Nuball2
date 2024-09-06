@@ -2,7 +2,7 @@
 #define ANALYSEDSSD_H
 
 #include <libRoot.hpp>
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 #include "../Classes/Parameters.hpp"
 
 
@@ -33,70 +33,70 @@ private:
   Float_t m_max_spectra = 0.;
 
   // ---- Histograms ---- //
-  MTTHist<TH1F> m_Ge_spectra_gate_on_particle_20MeV;
-  MTTHist<TH1F> m_Ge_spectra_gate_on_particle_sup_11MeV_R15; // Rings intérieurs
-  MTTHist<TH1F> m_Ring_14_spectra;
+  MultiHist<TH1F> m_Ge_spectra_gate_on_particle_20MeV;
+  MultiHist<TH1F> m_Ge_spectra_gate_on_particle_sup_11MeV_R15; // Rings intérieurs
+  MultiHist<TH1F> m_Ring_14_spectra;
 
-  MTTHist<TH2F> m_mult_R_VS_S;
+  MultiHist<TH2F> m_mult_R_VS_S;
 
-  MTTHist<TH2F> m_each_Sector_spectra;
-  MTTHist<TH2F> m_each_Ring_spectra;
+  MultiHist<TH2F> m_each_Sector_spectra;
+  MultiHist<TH2F> m_each_Ring_spectra;
 
   // nRnS : same number of rings and sectors
-  MTTHist<TH2F> m_each_Sector_spectra_nRnS;
-  MTTHist<TH2F> m_each_Ring_spectra_nRnS;
+  MultiHist<TH2F> m_each_Sector_spectra_nRnS;
+  MultiHist<TH2F> m_each_Ring_spectra_nRnS;
 
   // 1 ring only
-  MTTHist<TH2F> m_polar_1R;
-  MTTHist<TH1F> m_check_S_1R;
-  MTTHist<TH1F> m_linear_1R;
-  MTTHist<TH2F> m_TW_1R;
+  MultiHist<TH2F> m_polar_1R;
+  MultiHist<TH1F> m_check_S_1R;
+  MultiHist<TH1F> m_linear_1R;
+  MultiHist<TH2F> m_TW_1R;
 
   // 1 sector only
-  MTTHist<TH2F> m_polar_1S;
-  MTTHist<TH2F> m_TW_1S;
+  MultiHist<TH2F> m_polar_1S;
+  MultiHist<TH2F> m_TW_1S;
 
   //1 ring 1 sector
-  MTTHist<TH2F> m_polar_1R1S;
-  MTTHist<TH2F> m_R_VS_S;
-  MTTHist<TH2F> m_R_VS_S_time;
-  MTTHist<TH2F> m_TW_1R1S_R;
-  MTTHist<TH2F> m_TW_1R1S_S;
+  MultiHist<TH2F> m_polar_1R1S;
+  MultiHist<TH2F> m_R_VS_S;
+  MultiHist<TH2F> m_R_VS_S_time;
+  MultiHist<TH2F> m_TW_1R1S_R;
+  MultiHist<TH2F> m_TW_1R1S_S;
 
   // 1 ring and 2 sectors
-  MTTHist<TH2F> m_polar_1R2S_S1;
-  MTTHist<TH2F> m_polar_1R2S_S2;
-  MTTHist<TH2F> m_TW_1R2S_R;
-  MTTHist<TH2F> m_TW_1R2S_S1;
-  MTTHist<TH2F> m_TW_1R2S_S2;
+  MultiHist<TH2F> m_polar_1R2S_S1;
+  MultiHist<TH2F> m_polar_1R2S_S2;
+  MultiHist<TH2F> m_TW_1R2S_R;
+  MultiHist<TH2F> m_TW_1R2S_S1;
+  MultiHist<TH2F> m_TW_1R2S_S2;
 
   // 1 ring and 2 sectors
-  MTTHist<TH2F> m_polar_2R1S_R1;
-  MTTHist<TH2F> m_polar_2R1S_R2;
-  MTTHist<TH2F> m_2R1S_R1_VS_S;
-  MTTHist<TH2F> m_2R1S_R2_VS_S;
-  MTTHist<TH2F> m_2R1S_add_R1R2_VS_S;
-  MTTHist<TH2F> m_2R1S_add_R1R2_VS_S_neighbors;
-  MTTHist<TH2F> m_2R1S_select_R1_or_R2_VS_S;
-  MTTHist<TH2F> m_TW_2R1S_S;
-  MTTHist<TH2F> m_TW_2R1S_R1;
-  MTTHist<TH2F> m_TW_2R1S_R2;
-  MTTHist<TH2F> m_TW_2R1S_sum_R1R2;
+  MultiHist<TH2F> m_polar_2R1S_R1;
+  MultiHist<TH2F> m_polar_2R1S_R2;
+  MultiHist<TH2F> m_2R1S_R1_VS_S;
+  MultiHist<TH2F> m_2R1S_R2_VS_S;
+  MultiHist<TH2F> m_2R1S_add_R1R2_VS_S;
+  MultiHist<TH2F> m_2R1S_add_R1R2_VS_S_neighbors;
+  MultiHist<TH2F> m_2R1S_select_R1_or_R2_VS_S;
+  MultiHist<TH2F> m_TW_2R1S_S;
+  MultiHist<TH2F> m_TW_2R1S_R1;
+  MultiHist<TH2F> m_TW_2R1S_R2;
+  MultiHist<TH2F> m_TW_2R1S_sum_R1R2;
 
   //2 rings 2 sectors
-  MTTHist<TH2F> m_R1_VS_R2;
-  MTTHist<TH2F> m_S1_VS_S2;
-  MTTHist<TH2F> m_R1_VS_S1;
-  MTTHist<TH2F> m_R1_VS_S2;
-  MTTHist<TH2F> m_R2_VS_S1;
-  MTTHist<TH2F> m_R2_VS_S2;
+  MultiHist<TH2F> m_R1_VS_R2;
+  MultiHist<TH2F> m_S1_VS_S2;
+  MultiHist<TH2F> m_R1_VS_S1;
+  MultiHist<TH2F> m_R1_VS_S2;
+  MultiHist<TH2F> m_R2_VS_S1;
+  MultiHist<TH2F> m_R2_VS_S2;
 
-  MTTHist<TH2F> m_R1_VS_R2_time;
-  MTTHist<TH2F> m_S1_VS_S2_time;
-  MTTHist<TH2F> m_R1_VS_S1_time;
-  MTTHist<TH2F> m_R1_VS_S2_time;
-  MTTHist<TH2F> m_R2_VS_S1_time;
-  MTTHist<TH2F> m_R2_VS_S2_time;
+  MultiHist<TH2F> m_R1_VS_R2_time;
+  MultiHist<TH2F> m_S1_VS_S2_time;
+  MultiHist<TH2F> m_R1_VS_S1_time;
+  MultiHist<TH2F> m_R1_VS_S2_time;
+  MultiHist<TH2F> m_R2_VS_S1_time;
+  MultiHist<TH2F> m_R2_VS_S2_time;
 
   Vector_MTTHist<TH2F> m_each_DSSD_VS_Time;
 };

@@ -9,7 +9,7 @@
 #include "../Modules/Timeshifts.hpp"
 #include "../MTObjects/MTFasterReader.hpp"
 #include "../MTObjects/MTRootReader.hpp"
-#include "../MTObjects/MTTHist.hpp"
+#include "../MTObjects/MultiHist.hpp"
 
 class CobaltCalorimeter
 {
@@ -64,105 +64,105 @@ private:
 
   // Histograms :
   
-  MTTHist<TH1F> spectrum_Ge;
-  MTTHist<TH1F> spectrum_BGO;
-  MTTHist<TH1F> spectrum_LaBr3;
-  MTTHist<TH1F> spectrum_NaI;
-  MTTHist<TH1F> spectrum_Ge_trigger;
-  MTTHist<TH1F> spectrum_BGO_trigger;
-  MTTHist<TH1F> spectrum_LaBr3_trigger;
-  MTTHist<TH1F> spectrum_NaI_trigger;
-  MTTHist<TH2F> spectra_trigger;
+  MultiHist<TH1F> spectrum_Ge;
+  MultiHist<TH1F> spectrum_BGO;
+  MultiHist<TH1F> spectrum_LaBr3;
+  MultiHist<TH1F> spectrum_NaI;
+  MultiHist<TH1F> spectrum_Ge_trigger;
+  MultiHist<TH1F> spectrum_BGO_trigger;
+  MultiHist<TH1F> spectrum_LaBr3_trigger;
+  MultiHist<TH1F> spectrum_NaI_trigger;
+  MultiHist<TH2F> spectra_trigger;
 
-  MTTHist<TH1F> calorimetry_Ge_histo;
-  MTTHist<TH1F> calorimetry_LaBr_histo;
-  MTTHist<TH1F> calorimetry_BGO_histo;
-  MTTHist<TH1F> calorimetry_NaI_histo;
+  MultiHist<TH1F> calorimetry_Ge_histo;
+  MultiHist<TH1F> calorimetry_LaBr_histo;
+  MultiHist<TH1F> calorimetry_BGO_histo;
+  MultiHist<TH1F> calorimetry_NaI_histo;
 
-  MTTHist<TH1F> smeared_calorimetry_Ge_histo;
-  MTTHist<TH1F> smeared_calorimetry_Clover_histo;
-  MTTHist<TH1F> smeared_calorimetry_LaBr_histo;
-  MTTHist<TH1F> smeared_calorimetry_BGO_histo;
-  MTTHist<TH1F> smeared_calorimetry_NaI_histo;
-  MTTHist<TH1F> smeared_calorimetry_Paris_histo;
+  MultiHist<TH1F> smeared_calorimetry_Ge_histo;
+  MultiHist<TH1F> smeared_calorimetry_Clover_histo;
+  MultiHist<TH1F> smeared_calorimetry_LaBr_histo;
+  MultiHist<TH1F> smeared_calorimetry_BGO_histo;
+  MultiHist<TH1F> smeared_calorimetry_NaI_histo;
+  MultiHist<TH1F> smeared_calorimetry_Paris_histo;
 
-  MTTHist<TH2F> smeared_calorimetry_Ge_histo_VS_cristalMult;
-  MTTHist<TH2F> smeared_calorimetry_BGO_histo_VS_cristalMult;
-  MTTHist<TH2F> smeared_calorimetry_Clover_histo_VS_cristalMult;
-  MTTHist<TH2F> smeared_calorimetry_LaBr_histo_VS_cristalMult;
-  MTTHist<TH2F> smeared_calorimetry_NaI_histo_VS_cristalMult;
-  MTTHist<TH2F> smeared_calorimetry_Paris_histo_VS_cristalMult;
+  MultiHist<TH2F> smeared_calorimetry_Ge_histo_VS_cristalMult;
+  MultiHist<TH2F> smeared_calorimetry_BGO_histo_VS_cristalMult;
+  MultiHist<TH2F> smeared_calorimetry_Clover_histo_VS_cristalMult;
+  MultiHist<TH2F> smeared_calorimetry_LaBr_histo_VS_cristalMult;
+  MultiHist<TH2F> smeared_calorimetry_NaI_histo_VS_cristalMult;
+  MultiHist<TH2F> smeared_calorimetry_Paris_histo_VS_cristalMult;
   
-  MTTHist<TH1F> spectrum_calorimetry;
-  MTTHist<TH1F> spectrum_smeared_calorimetry;
-  MTTHist<TH1F> spectrum_smeared_calorimetry_double_cascade;
+  MultiHist<TH1F> spectrum_calorimetry;
+  MultiHist<TH1F> spectrum_smeared_calorimetry;
+  MultiHist<TH1F> spectrum_smeared_calorimetry_double_cascade;
 
-  MTTHist<TH2F> spectrum_smeared_calorimetry_VS_Multiplicity;
-  MTTHist<TH2F> calo_double_cascades_VS_multiplicity;
+  MultiHist<TH2F> spectrum_smeared_calorimetry_VS_Multiplicity;
+  MultiHist<TH2F> calo_double_cascades_VS_multiplicity;
 
-  MTTHist<TH2F> spectra_NaI_trigger;
+  MultiHist<TH2F> spectra_NaI_trigger;
 
-  MTTHist<TH2F> timewalk_Ge;
-  MTTHist<TH2F> timewalk_BGO;
-  MTTHist<TH2F> timewalk_LaBr;
-  MTTHist<TH2F> timewalk_NaI;
+  MultiHist<TH2F> timewalk_Ge;
+  MultiHist<TH2F> timewalk_BGO;
+  MultiHist<TH2F> timewalk_LaBr;
+  MultiHist<TH2F> timewalk_NaI;
 
-  MTTHist<TH2F> timing_VS_trigger;
-  MTTHist<TH2F> timing_VS_ref;
-  MTTHist<TH2F> nrj_each;
-  MTTHist<TH2F> nrj_each_trigger;
-  MTTHist<TH1F> labels;
-  MTTHist<TH2F> labels2D_trigger;
+  MultiHist<TH2F> timing_VS_trigger;
+  MultiHist<TH2F> timing_VS_ref;
+  MultiHist<TH2F> nrj_each;
+  MultiHist<TH2F> nrj_each_trigger;
+  MultiHist<TH1F> labels;
+  MultiHist<TH2F> labels2D_trigger;
 
-  MTTHist<TH1F> paris_pid;
+  MultiHist<TH1F> paris_pid;
 
-  MTTHist<TH2F> Ge_Ge;
-  MTTHist<TH2F> Ge_BGO;
-  MTTHist<TH2F> Ge_LaBr;
-  MTTHist<TH2F> Ge_NaI;
-  MTTHist<TH2F> Ge_Ge_trigger;
-  MTTHist<TH2F> Ge_BGO_trigger;
-  MTTHist<TH2F> Ge_LaBr_trigger;
-  MTTHist<TH2F> Ge_NaI_trigger;
+  MultiHist<TH2F> Ge_Ge;
+  MultiHist<TH2F> Ge_BGO;
+  MultiHist<TH2F> Ge_LaBr;
+  MultiHist<TH2F> Ge_NaI;
+  MultiHist<TH2F> Ge_Ge_trigger;
+  MultiHist<TH2F> Ge_BGO_trigger;
+  MultiHist<TH2F> Ge_LaBr_trigger;
+  MultiHist<TH2F> Ge_NaI_trigger;
 
-  MTTHist<TH2F> Ge_VS_smeared_calorimetry;
-  MTTHist<TH2F> BGO_VS_smeared_calorimetry;
-  MTTHist<TH2F> Clover_VS_smeared_calorimetry;
-  MTTHist<TH2F> NaI_VS_smeared_calorimetry;
-  MTTHist<TH2F> LaBr_VS_smeared_calorimetry;
-  MTTHist<TH2F> Paris_VS_smeared_calorimetry;
+  MultiHist<TH2F> Ge_VS_smeared_calorimetry;
+  MultiHist<TH2F> BGO_VS_smeared_calorimetry;
+  MultiHist<TH2F> Clover_VS_smeared_calorimetry;
+  MultiHist<TH2F> NaI_VS_smeared_calorimetry;
+  MultiHist<TH2F> LaBr_VS_smeared_calorimetry;
+  MultiHist<TH2F> Paris_VS_smeared_calorimetry;
 
-  MTTHist<TH2F> Ge_calo_VS_smeared_calorimetry;
-  MTTHist<TH2F> BGO_calo_VS_smeared_calorimetry;
-  MTTHist<TH2F> NaI_calo_VS_smeared_calorimetry;
-  MTTHist<TH2F> LaBr_calo_VS_smeared_calorimetry;
-  MTTHist<TH2F> Paris_calo_VS_smeared_calorimetry;
-  MTTHist<TH2F> Clover_calo_VS_smeared_calorimetry;
+  MultiHist<TH2F> Ge_calo_VS_smeared_calorimetry;
+  MultiHist<TH2F> BGO_calo_VS_smeared_calorimetry;
+  MultiHist<TH2F> NaI_calo_VS_smeared_calorimetry;
+  MultiHist<TH2F> LaBr_calo_VS_smeared_calorimetry;
+  MultiHist<TH2F> Paris_calo_VS_smeared_calorimetry;
+  MultiHist<TH2F> Clover_calo_VS_smeared_calorimetry;
 
-  MTTHist<TH2F> Ge_VS_BGO_calorimetry;
+  MultiHist<TH2F> Ge_VS_BGO_calorimetry;
 
-  MTTHist<TH2F> Ge_calo_VS_BGO_calo;
-  MTTHist<TH2F> LaBr3_calo_VS_BGO_calo;
-  MTTHist<TH2F> NaI_calo_VS_BGO_calo;
-  MTTHist<TH2F> Clover_calo_VS_BGO_calo;
-  MTTHist<TH2F> Paris_calo_VS_BGO_calo;
+  MultiHist<TH2F> Ge_calo_VS_BGO_calo;
+  MultiHist<TH2F> LaBr3_calo_VS_BGO_calo;
+  MultiHist<TH2F> NaI_calo_VS_BGO_calo;
+  MultiHist<TH2F> Clover_calo_VS_BGO_calo;
+  MultiHist<TH2F> Paris_calo_VS_BGO_calo;
 
-  MTTHist<TH2F> Ge_calo_VS_Clover_calo;
-  MTTHist<TH2F> BGO_calo_VS_Clover_calo;
-  MTTHist<TH2F> LaBr3_calo_VS_Clover_calo;
-  MTTHist<TH2F> NaI_calo_VS_Clover_calo;
-  MTTHist<TH2F> Paris_calo_VS_Clover_calo;
+  MultiHist<TH2F> Ge_calo_VS_Clover_calo;
+  MultiHist<TH2F> BGO_calo_VS_Clover_calo;
+  MultiHist<TH2F> LaBr3_calo_VS_Clover_calo;
+  MultiHist<TH2F> NaI_calo_VS_Clover_calo;
+  MultiHist<TH2F> Paris_calo_VS_Clover_calo;
 
-  MTTHist<TH2F> Ge_calo_VS_Paris_calo;
-  MTTHist<TH2F> LaBr3_calo_VS_Paris_calo;
-  MTTHist<TH2F> NaI_calo_VS_Paris_calo;
+  MultiHist<TH2F> Ge_calo_VS_Paris_calo;
+  MultiHist<TH2F> LaBr3_calo_VS_Paris_calo;
+  MultiHist<TH2F> NaI_calo_VS_Paris_calo;
 
-  MTTHist<TH2F> NaI_calo_VS_LaBr_calo;
+  MultiHist<TH2F> NaI_calo_VS_LaBr_calo;
   
-  MTTHist<TH1F> Paris_calo_without_Clover;
-  MTTHist<TH1F> Clover_calo_without_Paris;
+  MultiHist<TH1F> Paris_calo_without_Clover;
+  MultiHist<TH1F> Clover_calo_without_Paris;
 
-  MTTHist<TH1F> total_energy_per_detector;
+  MultiHist<TH1F> total_energy_per_detector;
 };
 
 void CobaltCalorimeter::Initialise()

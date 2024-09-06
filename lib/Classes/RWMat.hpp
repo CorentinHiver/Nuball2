@@ -50,7 +50,7 @@ class RWMat
   RWMat(TH2I* RootMat);  //@- constructor from Root 2D histogram
   #ifdef MTTHIST_HPP
   template<class T>
-  RWMat(MTTHist<T> & MTRootMat);  //@- constructor from MTThist 2D histogram
+  RWMat(MultiHist<T> & MTRootMat);  //@- constructor from MTThist 2D histogram
   #endif //MTTHIST_HPP
   ~RWMat();       //@- Normal destructor
   template<class THist>
@@ -111,7 +111,7 @@ RWMat::RWMat(std::string name, int nchans) //default constructor
 
 #ifdef MTTHIST_HPP
 template<class T>
-RWMat::RWMat(MTTHist<T> & MTRootMat)
+RWMat::RWMat(MultiHist<T> & MTRootMat)
 {
   if (MTRootMat.Integral() < 1)
   {

@@ -5,7 +5,7 @@
 #include <Nuball2Tree.hpp>
 #include <MTObject.hpp>
 
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 
 #include "../../lib/Analyse/HistoAnalyse.hpp"
 
@@ -120,7 +120,7 @@ public:
   void FillSorted(Event const & event, Clovers & clovers, DSSD & dssd, ParisNul & paris);
   void Write();
 
-  MTTHist<TH2F> time_ref;
+  MultiHist<TH2F> time_ref;
 
   static void choose1(bool const & b = true) {m_choose1 = b;}
 
@@ -149,129 +149,129 @@ private:
   Gate proton_prompt = {-20, 30};
 
   // Multiplicity spectra :
-  MTTHist<TH2I> prompt_mult_VS_sectors_mult;
-  MTTHist<TH2I> delayed_mult_VS_sectors_mult;
-  MTTHist<TH2F> Delayed_VS_Prompt_Mult;
-  MTTHist<TH2F> Delayed_VS_Prompt_Mult_G1;
-  MTTHist<TH2F> Delayed_VS_Prompt_Mult_G2;
-  MTTHist<TH2F> Delayed_VS_Prompt_Mult_G3;
+  MultiHist<TH2I> prompt_mult_VS_sectors_mult;
+  MultiHist<TH2I> delayed_mult_VS_sectors_mult;
+  MultiHist<TH2F> Delayed_VS_Prompt_Mult;
+  MultiHist<TH2F> Delayed_VS_Prompt_Mult_G1;
+  MultiHist<TH2F> Delayed_VS_Prompt_Mult_G2;
+  MultiHist<TH2F> Delayed_VS_Prompt_Mult_G3;
 
   // Clovers spectra :
-  MTTHist<TH1F> Ge_spectra;
-  MTTHist<TH1F> Ge_spectra_prompt;
-  MTTHist<TH1F> Ge_spectra_delayed;
-  MTTHist<TH2F> Ge_VS_Ge;
+  MultiHist<TH1F> Ge_spectra;
+  MultiHist<TH1F> Ge_spectra_prompt;
+  MultiHist<TH1F> Ge_spectra_delayed;
+  MultiHist<TH2F> Ge_VS_Ge;
 
-  MTTHist<TH2F> Ge_Time_VS_Spectra;
-  MTTHist<TH2F> raw_Ge_Time_VS_Spectra;
+  MultiHist<TH2F> Ge_Time_VS_Spectra;
+  MultiHist<TH2F> raw_Ge_Time_VS_Spectra;
 
-  MTTHist<TH2F> GePrompt_VS_GePrompt;
-  MTTHist<TH2F> GeDelayed_VS_GeDelayed;
-  MTTHist<TH2F> GeDelayed_VS_GeDelayed_time;
-  MTTHist<TH2F> GeDelayed_VS_GePrompt;
+  MultiHist<TH2F> GePrompt_VS_GePrompt;
+  MultiHist<TH2F> GeDelayed_VS_GeDelayed;
+  MultiHist<TH2F> GeDelayed_VS_GeDelayed_time;
+  MultiHist<TH2F> GeDelayed_VS_GePrompt;
 
 
-  MTTHist<TH2F> each_Ge_VS_Time;
-  MTTHist<TH2F> each_Ge_spectra;
-  MTTHist<TH2F> each_Ge_crystal_spectra;
-  MTTHist<TH2F> Ge_VS_size_event;
+  MultiHist<TH2F> each_Ge_VS_Time;
+  MultiHist<TH2F> each_Ge_spectra;
+  MultiHist<TH2F> each_Ge_crystal_spectra;
+  MultiHist<TH2F> Ge_VS_size_event;
 
   // DSSD spectra
-  MTTHist<TH1F> DSSD_Spectra;
-  MTTHist<TH2F> DSSD_Spectra_VS_angle;
-  MTTHist<TH2F> Sector_VS_Rings_mult;
-  MTTHist<TH2F> Ge_VS_DSSD;
-  MTTHist<TH2F> GePrompt_VS_DSSD;
-  MTTHist<TH2F> GeDelayed_VS_DSSD;
-  MTTHist<TH2F> DSSD_TW;
-  MTTHist<TH2F> Ge_VS_DSSD_Time;
+  MultiHist<TH1F> DSSD_Spectra;
+  MultiHist<TH2F> DSSD_Spectra_VS_angle;
+  MultiHist<TH2F> Sector_VS_Rings_mult;
+  MultiHist<TH2F> Ge_VS_DSSD;
+  MultiHist<TH2F> GePrompt_VS_DSSD;
+  MultiHist<TH2F> GeDelayed_VS_DSSD;
+  MultiHist<TH2F> DSSD_TW;
+  MultiHist<TH2F> Ge_VS_DSSD_Time;
 
-  MTTHist<TH2F> BGO_VS_Ge_511;
-  MTTHist<TH2F> BGO_VS_Ge_prompt;
-  MTTHist<TH2F> BGO_prompt_VS_Ge_prompt_mult;
-  MTTHist<TH2F> BGO_VS_Ge_delayed;
+  MultiHist<TH2F> BGO_VS_Ge_511;
+  MultiHist<TH2F> BGO_VS_Ge_prompt;
+  MultiHist<TH2F> BGO_prompt_VS_Ge_prompt_mult;
+  MultiHist<TH2F> BGO_VS_Ge_delayed;
 
 // Calorimetry :
-  MTTHist<TH1F> Nuball_calo;
-  MTTHist<TH1F> Nuball_calo_prompt;
-  MTTHist<TH1F> Nuball_calo_delayed;
-  MTTHist<TH1F> Ge_calo;
-  MTTHist<TH1F> Ge_calo_prompt;
-  MTTHist<TH1F> Ge_calo_delayed;
-  MTTHist<TH1F> BGO_calo;
-  MTTHist<TH1F> BGO_calo_prompt;
-  MTTHist<TH1F> BGO_calo_delayed;
-  MTTHist<TH1F> Paris_calo;
-  MTTHist<TH1F> Paris_calo_prompt;
-  MTTHist<TH1F> Paris_calo_delayed;
-  MTTHist<TH1F> total_calo;
-  MTTHist<TH1F> total_calo_prompt;
-  MTTHist<TH1F> total_calo_delayed;
+  MultiHist<TH1F> Nuball_calo;
+  MultiHist<TH1F> Nuball_calo_prompt;
+  MultiHist<TH1F> Nuball_calo_delayed;
+  MultiHist<TH1F> Ge_calo;
+  MultiHist<TH1F> Ge_calo_prompt;
+  MultiHist<TH1F> Ge_calo_delayed;
+  MultiHist<TH1F> BGO_calo;
+  MultiHist<TH1F> BGO_calo_prompt;
+  MultiHist<TH1F> BGO_calo_delayed;
+  MultiHist<TH1F> Paris_calo;
+  MultiHist<TH1F> Paris_calo_prompt;
+  MultiHist<TH1F> Paris_calo_delayed;
+  MultiHist<TH1F> total_calo;
+  MultiHist<TH1F> total_calo_prompt;
+  MultiHist<TH1F> total_calo_delayed;
 
-  MTTHist<TH2F> calo_prompt_total_VS_calo_total;
-  MTTHist<TH2F> calo_delayed_total_VS_calo_total;
-  MTTHist<TH2F> delayed_calo_total_VS_prompt_calo_total;
+  MultiHist<TH2F> calo_prompt_total_VS_calo_total;
+  MultiHist<TH2F> calo_delayed_total_VS_calo_total;
+  MultiHist<TH2F> delayed_calo_total_VS_prompt_calo_total;
 
-  MTTHist<TH2F> Nuball_calo_delayed_VS_prompt;
-  MTTHist<TH2F> Clover_Mult_VS_Nuball_calo;
-  MTTHist<TH2F> prompt_Clover_Mult_VS_Nuball_calo;
-  MTTHist<TH2F> delayed_Clover_Mult_VS_Nuball_calo;
-  MTTHist<TH2F> Clover_Mult_VS_Total_calo;
-  MTTHist<TH2F> prompt_Clover_Mult_VS_Total_calo;
-  MTTHist<TH2F> delayed_Clover_Mult_VS_Total_calo;
+  MultiHist<TH2F> Nuball_calo_delayed_VS_prompt;
+  MultiHist<TH2F> Clover_Mult_VS_Nuball_calo;
+  MultiHist<TH2F> prompt_Clover_Mult_VS_Nuball_calo;
+  MultiHist<TH2F> delayed_Clover_Mult_VS_Nuball_calo;
+  MultiHist<TH2F> Clover_Mult_VS_Total_calo;
+  MultiHist<TH2F> prompt_Clover_Mult_VS_Total_calo;
+  MultiHist<TH2F> delayed_Clover_Mult_VS_Total_calo;
 
-  MTTHist<TH2F> DSSD_VS_Nuball_calo;
-  MTTHist<TH2F> DSSD_VS_Total_calo;
-  MTTHist<TH2F> DSSD_VS_Total_Prompt_calo;
-  MTTHist<TH2F> DSSD_VS_Total_Delayed_calo;
+  MultiHist<TH2F> DSSD_VS_Nuball_calo;
+  MultiHist<TH2F> DSSD_VS_Total_calo;
+  MultiHist<TH2F> DSSD_VS_Total_Prompt_calo;
+  MultiHist<TH2F> DSSD_VS_Total_Delayed_calo;
 
-  MTTHist<TH2F> calo_VS_promptMult;
-  MTTHist<TH2F> calo_VS_delayedMult;
-  MTTHist<TH2F> prompt_calo_VS_promptMult;
-  MTTHist<TH2F> prompt_calo_VS_delayedMult;
-  MTTHist<TH2F> delayed_calo_VS_promptMult;
-  MTTHist<TH2F> delayed_calo_VS_delayedMult;
+  MultiHist<TH2F> calo_VS_promptMult;
+  MultiHist<TH2F> calo_VS_delayedMult;
+  MultiHist<TH2F> prompt_calo_VS_promptMult;
+  MultiHist<TH2F> prompt_calo_VS_delayedMult;
+  MultiHist<TH2F> delayed_calo_VS_promptMult;
+  MultiHist<TH2F> delayed_calo_VS_delayedMult;
 
-  MTTHist<TH2F> Ge_delayed_VS_Nuball_calo;
-  MTTHist<TH2F> Ge_delayed_VS_Total_calo;
-  MTTHist<TH2F> Ge_prompt_VS_Nuball_calo;
-  MTTHist<TH2F> Ge_prompt_VS_Total_calo;
-  MTTHist<TH2F> Ge_prompt_VS_Nuball_calo_prompt;
-  MTTHist<TH2F> Ge_prompt_VS_Total_calo_prompt;
-  MTTHist<TH2F> Ge_delayed_VS_Nuball_calo_prompt;
-  MTTHist<TH2F> Ge_delayed_VS_Total_calo_prompt;
-  MTTHist<TH2F> Ge_prompt_VS_Nuball_calo_delayed;
-  MTTHist<TH2F> Ge_prompt_VS_Total_calo_delayed;
-  MTTHist<TH2F> Ge_delayed_VS_Nuball_calo_delayed;
-  MTTHist<TH2F> Ge_delayed_VS_Total_calo_delayed;
-
-
-  MTTHist<TH2F> Delayed_Ge_VS_Missing;
-  MTTHist<TH2F> Prompt_Ge_VS_Missing;
-  MTTHist<TH2F> Prompt_Calo_VS_Missing;
-  MTTHist<TH2F> Missing_VS_Delayed_cal;
+  MultiHist<TH2F> Ge_delayed_VS_Nuball_calo;
+  MultiHist<TH2F> Ge_delayed_VS_Total_calo;
+  MultiHist<TH2F> Ge_prompt_VS_Nuball_calo;
+  MultiHist<TH2F> Ge_prompt_VS_Total_calo;
+  MultiHist<TH2F> Ge_prompt_VS_Nuball_calo_prompt;
+  MultiHist<TH2F> Ge_prompt_VS_Total_calo_prompt;
+  MultiHist<TH2F> Ge_delayed_VS_Nuball_calo_prompt;
+  MultiHist<TH2F> Ge_delayed_VS_Total_calo_prompt;
+  MultiHist<TH2F> Ge_prompt_VS_Nuball_calo_delayed;
+  MultiHist<TH2F> Ge_prompt_VS_Total_calo_delayed;
+  MultiHist<TH2F> Ge_delayed_VS_Nuball_calo_delayed;
+  MultiHist<TH2F> Ge_delayed_VS_Total_calo_delayed;
 
 
-  MTTHist<TH2F> ge_spectra_VS_mult;
-  MTTHist<TH2F> ge_spectra_VSpromptmult;
-  MTTHist<TH2F> ge_spectra_VSdelayedmult;
-  MTTHist<TH2F> ge_prompt_spectra_VS_mult;
-  MTTHist<TH2F> ge_prompt_spectra_VSpromptmult;
-  MTTHist<TH2F> ge_prompt_spectra_VSdelayedmult;
-  MTTHist<TH2F> ge_delayed_spectra_VS_mult;
-  MTTHist<TH2F> ge_delayed_spectra_VSpromptmult;
-  MTTHist<TH2F> ge_delayed_spectra_VSdelayedmult;
+  MultiHist<TH2F> Delayed_Ge_VS_Missing;
+  MultiHist<TH2F> Prompt_Ge_VS_Missing;
+  MultiHist<TH2F> Prompt_Calo_VS_Missing;
+  MultiHist<TH2F> Missing_VS_Delayed_cal;
 
-  MTTHist<TH1F> Paris_spectra_back;
-  MTTHist<TH2F> Paris_time_spectra_back;
-  MTTHist<TH2F> Paris_each_spectra_back;
-  MTTHist<TH2F> Paris_ratio_VS_time_back;
-  MTTHist<TH1F> Paris_spectra_front;
-  MTTHist<TH2F> Paris_time_spectra_front;
-  MTTHist<TH2F> Paris_each_spectra_front;
-  MTTHist<TH2F> Paris_ratio_VS_time_front;
 
-  MTTHist<TH1F> Paris_back_calibrated_VS_delayed_U6;
+  MultiHist<TH2F> ge_spectra_VS_mult;
+  MultiHist<TH2F> ge_spectra_VSpromptmult;
+  MultiHist<TH2F> ge_spectra_VSdelayedmult;
+  MultiHist<TH2F> ge_prompt_spectra_VS_mult;
+  MultiHist<TH2F> ge_prompt_spectra_VSpromptmult;
+  MultiHist<TH2F> ge_prompt_spectra_VSdelayedmult;
+  MultiHist<TH2F> ge_delayed_spectra_VS_mult;
+  MultiHist<TH2F> ge_delayed_spectra_VSpromptmult;
+  MultiHist<TH2F> ge_delayed_spectra_VSdelayedmult;
+
+  MultiHist<TH1F> Paris_spectra_back;
+  MultiHist<TH2F> Paris_time_spectra_back;
+  MultiHist<TH2F> Paris_each_spectra_back;
+  MultiHist<TH2F> Paris_ratio_VS_time_back;
+  MultiHist<TH1F> Paris_spectra_front;
+  MultiHist<TH2F> Paris_time_spectra_front;
+  MultiHist<TH2F> Paris_each_spectra_front;
+  MultiHist<TH2F> Paris_ratio_VS_time_front;
+
+  MultiHist<TH1F> Paris_back_calibrated_VS_delayed_U6;
 
   Vector_MTTHist<TH1F> Paris_singles_labr;
   Vector_MTTHist<TH1F> Paris_singles_nai;
@@ -291,7 +291,7 @@ private:
   Vector_MTTHist<TH2F> DSSD_proj3682_VS_Rings;
   Vector_MTTHist<TH2F> DSSD_proj3850_VS_Rings;
 
-  // MTTHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
+  // MultiHist<TH2F> mult_VS_Time; In order to see the evolution of Multiplicity over time. To do it, take a moving 50ns time window to group events
 
 };
 

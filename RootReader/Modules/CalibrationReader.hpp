@@ -1,7 +1,7 @@
 #ifndef CALIBRATIONREADER_H
 #define CALIBRATIONREADER_H
 #include <libRoot.hpp>
-#include <MTTHist.hpp>
+#include <MultiHist.hpp>
 #include <Clovers.hpp>
 #include <DSSD.hpp>
 #include <Paris.hpp>

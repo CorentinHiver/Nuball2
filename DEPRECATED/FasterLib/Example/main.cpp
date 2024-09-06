@@ -2,7 +2,7 @@
 #include <FasterReader.hpp>   // This class is the base for mono  threaded code
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <MTCounter.hpp> // Use this to safely count what you want
-#include <MTTHist.hpp>   // Use this to safely fill histograms
+#include <MultiHist.hpp>   // Use this to safely fill histograms
 
 // When using multithreading, you have to encapsulate the code in a function that
 // will be duplicated on several files in parallel.
@@ -10,7 +10,7 @@
 // void your_function(Hit & hit, FasterReader & reader, arguments...)
 // You can add as many arguments as you want (variadic template arguments)
 
-void countHits(Hit & hit, FasterReader & reader, MTCounter & counterMT, MTTHist<TH1F> & histo, MTTHist<TH1F> & spectra)
+void countHits(Hit & hit, FasterReader & reader, MTCounter & counterMT, MultiHist<TH1F> & histo, MultiHist<TH1F> & spectra)
 {
   // See lib/Classes/Hit.hpp for the structure of a Hit
   int counter = 0;// It is better to deal with a local counter, and only at the end add it to the MTCounter
@@ -66,8 +66,8 @@ int main()
 
   // Declare all the arguments :
   MTCounter counterMT;
-  MTTHist<TH1F> scaler("Scaler", "Scaler", 1000,0,1000);
-  MTTHist<TH1F> spectra("Spectra","Spectra", 1000,0,5000);
+  MultiHist<TH1F> scaler("Scaler", "Scaler", 1000,0,1000);
+  MultiHist<TH1F> spectra("Spectra","Spectra", 1000,0,5000);
 
   // Then execute the function :
   readerMT.execute(countHits, counterMT, scaler, spectra);

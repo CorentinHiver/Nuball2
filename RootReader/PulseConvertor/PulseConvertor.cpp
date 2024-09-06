@@ -18,7 +18,7 @@
 #include <libCo.hpp>
 #include <Event.hpp>
 #include <FilesManager.hpp>
-#include <MTTHist.hpp>
+#include <MultiHist.hpp>
 #include <MTList.hpp>
 #include <MTCounter.hpp>
 #include <Detectors.hpp>

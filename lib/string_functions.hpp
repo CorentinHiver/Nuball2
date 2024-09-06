@@ -160,8 +160,7 @@ bool remove(std::string & string, std::string const & _substr)
   auto pos = string.find(_substr);
   if (pos!=std::string::npos)
   {
-    auto first_str = string.substr(0, pos);
-    string = string.substr(0, pos)+string.substr(pos+_substr.size());
+    string = string.substr(0, pos) + string.substr(pos+_substr.size());
     return true;
   }
   else return false;
@@ -173,24 +172,52 @@ bool remove(std::string & string, char const & c)
   auto pos = string.find(c);
   if (pos!=std::string::npos)
   {
-    auto first_str = string.substr(0, pos);
-    string = string.substr(0, pos)+string.substr(pos+1);
+    string = string.substr(0, pos) + string.substr(pos+1);
     return true;
   }
   else return false;
 }
 
-/// @brief Replace substr to the string if it exists
+/// @brief Remove all the substr to the string if found
+void remove_all(std::string & string, std::string const & _substr)
+{
+  size_t pos = 0;
+  while((pos = string.find(_substr)) != std::string::npos)
+  {
+    string = string.substr(0, pos) + string.substr(pos+_substr.size());
+  }
+}
+
+/// @brief Remove all the char 'c' to the string if found
+void remove_all(std::string & string, char const & c)
+{
+  size_t pos = 0;
+  while((pos = string.find(c)) != std::string::npos)
+  {
+    string = string.substr(0, pos) + string.substr(pos+1);
+  }
+}
+
+/// @brief Replace the first substr to the string if it exists
 bool replace(std::string & string, std::string const & substr_init, std::string const & substr_substitute)
 {
   auto pos = string.find(substr_init);
   if (pos!=std::string::npos)
   {
-    auto first_str = string.substr(0, pos);
     string = string.substr(0, pos)+substr_substitute+string.substr(pos+substr_init.size());
     return true;
   }
   else return false;
+}
+
+/// @brief Replace the first substr to the string if it exists
+void replace_all(std::string & string, std::string const & substr_init, std::string const & substr_substitute)
+{
+  size_t pos = 0;
+  while((pos = string.find(substr_init)) != std::string::npos)
+  {
+    string = string.substr(0, pos)+substr_substitute+string.substr(pos+substr_init.size());
+  }
 }
 
 /**

@@ -4,7 +4,7 @@
 #include "../../lib/Classes/FilesManager.hpp"
 // #include "../../lib/Analyse/SpectraCo.hpp"
 #include "../../lib/Analyse/Clovers.hpp"
-#include "../../lib/MTObjects/MTTHist.hpp"
+#include "../../lib/MTObjects/MultiHist.hpp"
 #include "../../lib/Classes/RWMat.hxx"
 #include "../../lib/MTObjects/MTList.hpp"
 
@@ -44,34 +44,34 @@ private:
 
   // Histograms :
 
-  MTTHist<TH1F> prompt_Ge;
-  MTTHist<TH1F> delayed_Ge;
-  MTTHist<TH1F> prompt_BGO;
-  MTTHist<TH1F> delayed_BGO;
-  MTTHist<TH1F> prompt_Paris;
-  MTTHist<TH1F> delayed_Paris;
-  MTTHist<TH1F> prompt_calo;
-  MTTHist<TH1F> delayed_calo;
+  MultiHist<TH1F> prompt_Ge;
+  MultiHist<TH1F> delayed_Ge;
+  MultiHist<TH1F> prompt_BGO;
+  MultiHist<TH1F> delayed_BGO;
+  MultiHist<TH1F> prompt_Paris;
+  MultiHist<TH1F> delayed_Paris;
+  MultiHist<TH1F> prompt_calo;
+  MultiHist<TH1F> delayed_calo;
 
-  MTTHist<TH2F> prompt_delayed_calo;
-  MTTHist<TH2F> delayed_Ge_VS_delayed_calo;
-  MTTHist<TH2F> delayed_Ge_VS_prompt_calo;
+  MultiHist<TH2F> prompt_delayed_calo;
+  MultiHist<TH2F> delayed_Ge_VS_delayed_calo;
+  MultiHist<TH2F> delayed_Ge_VS_prompt_calo;
 
-  MTTHist<TH1F> delayed_Ge_wp;
-  MTTHist<TH1F> delayed_calo_wp;
-  MTTHist<TH2F> delayed_Ge_VS_delayed_calo_wp;
+  MultiHist<TH1F> delayed_Ge_wp;
+  MultiHist<TH1F> delayed_calo_wp;
+  MultiHist<TH2F> delayed_Ge_VS_delayed_calo_wp;
 
-  MTTHist<TH1F> delayed_Ge_wpp;
-  MTTHist<TH1F> delayed_calo_wpp;
-  MTTHist<TH1F> prompt_Ge_wpp;
-  MTTHist<TH2F> delayed_Ge_VS_delayed_calo_wpp;
+  MultiHist<TH1F> delayed_Ge_wpp;
+  MultiHist<TH1F> delayed_calo_wpp;
+  MultiHist<TH1F> prompt_Ge_wpp;
+  MultiHist<TH2F> delayed_Ge_VS_delayed_calo_wpp;
 
-  MTTHist<TH1F> delayed_Ge_wppE;
-  MTTHist<TH1F> delayed_calo_wppE;
-  MTTHist<TH2F> delayed_Ge_VS_delayed_calo_wppE;
+  MultiHist<TH1F> delayed_Ge_wppE;
+  MultiHist<TH1F> delayed_calo_wppE;
+  MultiHist<TH2F> delayed_Ge_VS_delayed_calo_wppE;
 
-  MTTHist<TH2F> pp;
-  MTTHist<TH2F> dd;
+  MultiHist<TH2F> pp;
+  MultiHist<TH2F> dd;
 };
 
 void Analysator::Initialise()

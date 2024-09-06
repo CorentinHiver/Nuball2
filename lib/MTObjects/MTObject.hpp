@@ -57,12 +57,12 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *          });
  *          print(a, b);
  * 
- * Example 2 : parallelise a lambda and fill a histogram using MTTHist
+ * Example 2 : parallelise a lambda and fill a histogram using MultiHist
  * 
  *        main()
  *        {
  *          MTObject::Initialise(2); // Using two concurrent threads
- *          MTTHist<TH1F> test("test", "test", 1000,0,1000); // MTTHist holds a vector of TH1F to be filled using its own Fill method
+ *          MultiHist<TH1F> test("test", "test", 1000,0,1000); // MultiHist holds a vector of TH1F to be filled using its own Fill method
  *          
  *          MTObject::parallelise_function([&]()
  *          { // Here starts the parallelized portion of code
@@ -70,15 +70,15 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *            // This method automatically fills the copy of the histogram that corresponds to its thread index :
  *            for(int i = 0; i<10000000; i++) test.Fill(random_gaussian(500, 100)); 
  *          });
- *          // Now, you may want to perform some operations on the MTTHist. 
- *          // But before, you need to merge the copies into one single spectra using MTTHist::Merge
+ *          // Now, you may want to perform some operations on the MultiHist. 
+ *          // But before, you need to merge the copies into one single spectra using MultiHist::Merge
  *          test.Merge();
  *          // Now, you can access the fused histogram using '->' operator.
  *          // It calls the TH1F itself, so you have access at all the 
  *          print(test->GetMean());
  *          auto outfile(TFile::Open("test.root", "RECREATE"));
  *          outfile->cd();
- *          // Note : you can use the MTTHist::Write method without already merged it
+ *          // Note : you can use the MultiHist::Write method without already merged it
  *          test.Write();
  *          outfile->Write();
  *          outfile->Close();

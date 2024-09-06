@@ -14,7 +14,7 @@
 #include "../Classes/Performances.hpp"
 
 #include "../MTObjects/MTList.hpp"
-#include "../MTObjects/MTTHist.hpp"
+#include "../MTObjects/MultiHist.hpp"
 
 
 /// @brief Casts a number into unsigned Time
@@ -339,20 +339,20 @@ public:
   std::string m_outData = "";
 
   // Histograms :
-  MTTHist<TH1F> m_EnergyRef; // Energy spectra of the time reference detector
-  MTTHist<TH2F> m_EnergyRef_bidim; // Energy VS Time (unused)
+  MultiHist<TH1F> m_EnergyRef; // Energy spectra of the time reference detector
+  MultiHist<TH2F> m_EnergyRef_bidim; // Energy VS Time (unused)
 
   Vector_MTTHist<TH1F> m_time_spectra; // Time spectra from coincidence with the time reference detector, one TH1F for each detector
   Vector_MTTHist<TH1F> m_time_spectra_corrected; // Time spectra from coincidence with the time reference detector, one TH1F for each detector, after timeshift
-  MTTHist<TH2F> m_time_spectra_corrected_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
+  MultiHist<TH2F> m_time_spectra_corrected_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
 
-  MTTHist<TH1F> m_histo_ref_VS_RF; // RF time spectra of the time reference detector
-  MTTHist<TH2F> m_histo_ref_vs_RF_VS_mult; // RF time spectra VS multiplicity of the time reference detector
-  MTTHist<TH1F> m_time_spectra_reference_RF_corrected; // RF time spectra VS multiplicity of the time reference detector, after timeshift
+  MultiHist<TH1F> m_histo_ref_VS_RF; // RF time spectra of the time reference detector
+  MultiHist<TH2F> m_histo_ref_vs_RF_VS_mult; // RF time spectra VS multiplicity of the time reference detector
+  MultiHist<TH1F> m_time_spectra_reference_RF_corrected; // RF time spectra VS multiplicity of the time reference detector, after timeshift
 
   Vector_MTTHist<TH1F> m_histograms_VS_RF; // RF time spectra, one TH1F for each detector
   Vector_MTTHist<TH1F> m_time_spectra_corrected_RF; // RF time spectra, one TH1F for each detector, after timeshift
-  MTTHist<TH2F> m_time_spectra_corrected_bidim_RF; // RF time spectra, X axis label, Y axis time spectra, after timeshift
+  MultiHist<TH2F> m_time_spectra_corrected_bidim_RF; // RF time spectra, X axis label, Y axis time spectra, after timeshift
 
 public:
   class NotFoundError
