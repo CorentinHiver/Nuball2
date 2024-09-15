@@ -6,13 +6,14 @@
 #include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/SimpleParis.hpp"
 #include "../lib/Classes/Hit.hpp"
+#include "../lib/Classes/Timer.hpp"
 #include "../lib/Classes/Nuball2Tree.hpp"
 
 void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
   // std::string trigger = "PrM1DeC1";
-  std::string trigger = "dC1";
-  // std::string trigger = "22Na";
+  // std::string trigger = "dC1";
+  std::string trigger = "22Na";
   // std::string trigger = "C2";
   // std::string trigger = "P";
   Timer timer;
@@ -29,7 +30,7 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
   Calibration calibNaI("../136/coeffs_NaI.calib");
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
   std::string data_pat_str = "~/nuball2/N-SI-136-root_"+trigger+"/merged/";
-  if (trigger == "22Na") data_pat_str = "~/nuball2/N-SI-136-root-sources/Na22_center/";
+  if (trigger == "22Na") data_pat_str = "~/nuball2/N-SI-136-root_sources/Na22_center/";
   print(data_pat_str);
   Path data_path(data_pat_str);
   FilesManager files(data_path.string(), nb_files);
@@ -37,9 +38,6 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
   MTObject::Initialise(nb_threads);
   MTObject::adjustThreadsNumber(files.size());
 
-  Paris::InitialiseArrays();
-  if (print_array) ParisCluster<Paris::cluster_size>::printArrays();
-  
   std::mutex write_mutex;
 
   MTObject::parallelise_function([&](){
@@ -144,8 +142,8 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
       std::vector<uchar>  delayed_paris_module_back_index;
       std::vector<Time>  delayed_paris_module_back_time;
 
-      SimpleParis prompt_paris;
-      SimpleParis delayed_paris;
+      SimpleParis prompt_paris(&calibPhoswitches);
+      SimpleParis delayed_paris(&calibPhoswitches);
 
       std::vector<size_t> hits_added;
 
@@ -198,7 +196,7 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
           {
             // Calibrate the phoswitch :
             auto const & nrjcal = calibPhoswitches.calibrate(label, nrj, nrj2);
-            auto const & index = Paris::label_to_index(label);
+            auto const & index = Paris::index[label];
             if (-5_ns < time && time < 5_ns) // Prompt
             {
               prompt_paris.fill(event, hit_i, calibPhoswitches);
@@ -253,8 +251,8 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
         // Analyse  //
         //////////////
 
-        prompt_paris.addback();
-        delayed_paris.addback();
+        prompt_paris.analyze();
+        delayed_paris.analyze();
 
         auto addback = [&](std::vector<double> const & phoswitch_energy, std::vector<Label> const & phoswitch_label, std::vector<Time> const & phoswitch_time,
                           std::vector<double> & module_energy, std::vector<uchar> & module_index, std::vector<Time> & module_time)
@@ -298,8 +296,8 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
               // Distance : if the phoswitches are physically too far away they are unlikely to be a Compton scattering of the same gamma
               auto const & label_j = phoswitch_label[hit_j]; 
               auto const & index_j = Paris::index[label_j];
-              auto const & distance_ij = ParisCluster<Paris::cluster_size>::distances[index_i][index_j];
-              if (distance_ij > ParisCluster<Paris::cluster_size>::distance_max) continue;
+              auto const & distance_ij = Paris::distances[index_i][index_j];
+              if (distance_ij > Paris::distance_max) continue;
 
               // If the two hits meets the criteria they are add-backed :
               module_energy.back()+=phoswitch_energy[hit_j];
@@ -351,34 +349,34 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
         addback(delayed_phoswitch_back_energy, delayed_phoswitch_back_label, delayed_phoswitch_back_time, delayed_paris_module_back_energy, delayed_paris_module_back_index, delayed_paris_module_back_time);
         addback(delayed_phoswitch_front_energy, delayed_phoswitch_front_label, delayed_phoswitch_front_time, delayed_paris_module_front_energy, delayed_paris_module_front_index, delayed_paris_module_front_time);
         
-        for (size_t hit_i = 0; hit_i<prompt_paris_module_back_energy.size(); ++hit_i) 
-        {
-          auto const & label = Paris::label(0, prompt_paris_module_back_index[hit_i]);
-          auto const & nrj = prompt_paris_module_back_energy[hit_i];
-          prompt_back_module->Fill(nrj);
-          prompt_each_module[label]->Fill(nrj);
-        }
-        for (size_t hit_i = 0; hit_i<prompt_paris_module_front_energy.size(); ++hit_i) 
-        {
-          auto const & label = Paris::label(1, prompt_paris_module_front_index[hit_i]);
-          auto const & nrj = prompt_paris_module_front_energy[hit_i];
-          prompt_front_module->Fill(nrj);
-          prompt_each_module[label]->Fill(nrj);
-        }
-        for (size_t hit_i = 0; hit_i<delayed_paris_module_back_energy.size(); ++hit_i) 
-        {
-          auto const & label = Paris::label(0, delayed_paris_module_back_index[hit_i]);
-          auto const & nrj = delayed_paris_module_back_energy[hit_i];
-          delayed_back_module->Fill(nrj);
-          delayed_each_module[label]->Fill(nrj);
-        }
-        for (size_t hit_i = 0; hit_i<delayed_paris_module_front_energy.size(); ++hit_i) 
-        {
-          auto const & label = Paris::label(1, delayed_paris_module_front_index[hit_i]);
-          auto const & nrj = delayed_paris_module_front_energy[hit_i];
-          delayed_front_module->Fill(nrj);
-          delayed_each_module[label]->Fill(nrj);
-        }
+        // for (size_t hit_i = 0; hit_i<prompt_paris_module_back_energy.size(); ++hit_i) 
+        // {
+        //   auto const & label = Paris::label(0, prompt_paris_module_back_index[hit_i]);
+        //   auto const & nrj = prompt_paris_module_back_energy[hit_i];
+        //   prompt_back_module->Fill(nrj);
+        //   prompt_each_module[label]->Fill(nrj);
+        // }
+        // for (size_t hit_i = 0; hit_i<prompt_paris_module_front_energy.size(); ++hit_i) 
+        // {
+        //   auto const & label = Paris::label(1, prompt_paris_module_front_index[hit_i]);
+        //   auto const & nrj = prompt_paris_module_front_energy[hit_i];
+        //   prompt_front_module->Fill(nrj);
+        //   prompt_each_module[label]->Fill(nrj);
+        // }
+        // for (size_t hit_i = 0; hit_i<delayed_paris_module_back_energy.size(); ++hit_i) 
+        // {
+        //   auto const & label = Paris::label(0, delayed_paris_module_back_index[hit_i]);
+        //   auto const & nrj = delayed_paris_module_back_energy[hit_i];
+        //   delayed_back_module->Fill(nrj);
+        //   delayed_each_module[label]->Fill(nrj);
+        // }
+        // for (size_t hit_i = 0; hit_i<delayed_paris_module_front_energy.size(); ++hit_i) 
+        // {
+        //   auto const & label = Paris::label(1, delayed_paris_module_front_index[hit_i]);
+        //   auto const & nrj = delayed_paris_module_front_energy[hit_i];
+        //   delayed_front_module->Fill(nrj);
+        //   delayed_each_module[label]->Fill(nrj);
+        // }
 
         for (auto const & id : prompt_paris.back.modules_id) prompt_back_module_class->Fill(prompt_paris.back.modules[id].nrj);
         for (auto const & id : prompt_paris.front.modules_id) prompt_front_module_class->Fill(prompt_paris.front.modules[id].nrj);

@@ -13,7 +13,6 @@
 #include "CoefficientCorrection.hpp"
 #include "Utils.h"
 
-long max_cursor = 1.e+11;
 Label timing_ref_label = 252;
 Time time_window = 50_ns;
 
@@ -23,7 +22,9 @@ float gate_high = 1335_keV;
 float coinc_low = 1171_keV;
 float coinc_high = 1176_keV;
 
-void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400, int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400)
+void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400
+//, int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400
+)
 {
   histo->GetXaxis()->SetRangeUser(coinc_low_fit, coinc_high_fit);
   double constante0 = histo -> GetMaximum();
@@ -62,7 +63,7 @@ void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit =
         "realive pe eff : ", 100.*pe_integral/histo->Integral(), "%", histo->GetName());
 }
 
-void Co60_efficiency()
+void Co60_efficiency(long max_cursor = -1)
 {
   SimpleCluster::setDistanceMax(1.1);
 
@@ -98,6 +99,7 @@ void Co60_efficiency()
   auto spectra_phos = new TH1F("spectra_phos", "spectra_BGO;[keV]", 2000, 0, 2000);
   auto gate_spectra = new TH1F("gate_spectra", "gate_spectra;[keV]", 2000, 0, 2000);
 
+  auto gated_raw_Ge = new TH1F("gated_raw_Ge", "gated_raw_Ge;[keV]", 2000, 0, 2000);
   auto gated_Ge = new TH1F("gated_Ge", "gated_Ge;[keV]", 2000, 0, 2000);
   auto gated_clean_Ge = new TH1F("gated_clean_Ge", "gated_clean_Ge;[keV]", 2000, 0, 2000);
   auto gated_rej_Ge = new TH1F("gated_rej_Ge", "gated_rej_Ge;[keV]", 2000, 0, 2000);
@@ -127,6 +129,7 @@ void Co60_efficiency()
   auto gated_caloParis = new TH1F("gated_caloParis", "gated_caloParis;[keV]", 500, 0, 2000);
 
   std::vector<double> BGO_nrjs;
+  std::vector<double> Ge_nrj;
   for (int evt_i = 0; evt_i<tree->GetEntries(); ++evt_i)
   {
     tree->GetEntry(evt_i);
@@ -136,7 +139,7 @@ void Co60_efficiency()
     rej_Ge.clear();
     BGO_nrjs.clear();
 
-    if (evt_i>max_cursor) break;
+    if (max_cursor>0 && evt_i>max_cursor) break;
     for (int hit_i = 0; hit_i<event.mult; ++hit_i)
     {
       auto const & label = event.label(hit_i);
@@ -152,6 +155,10 @@ void Co60_efficiency()
       }
       else if (Paris::is[label])
       {
+      }
+      else if (CloversV2::isGe(label))
+      {
+        if (CloversIsBlacklist[label]) continue;
       }
 
       clovers.fill(event, hit_i);
@@ -175,8 +182,9 @@ void Co60_efficiency()
 
     for (size_t hit_i = 0; hit_i<CMult; ++hit_i) 
     {
-      auto const & nrj_i = clovers.clean[hit_i]->nrj;
-      auto const & index_i = clovers.clean[hit_i]->index();
+      auto const & clover_i = *(clovers.clean[hit_i]);
+      auto const & nrj_i = clover_i.nrj;
+      auto const & index_i = clover_i.index();
       spectra_Ge->Fill(nrj_i);
       if (gate(gate_low, nrj_i, gate_high))
       {
@@ -200,10 +208,11 @@ void Co60_efficiency()
           auto const & clover_j = *(clovers.all[hit_j]);
 
           // Ge :
-          if (clover_j.nb>0 && clover_j.index() != index_i) 
+          if (clover_j.nb>0 && clover_j.index() != index_i && abs(clover_j.time-clover_i.time) < 50_ns) 
           {
             calo+=smearGe(clover_j.nrj, random);
             caloGe+=smearGe(clover_j.nrj, random);
+            for (auto const & crystal_id : clover_j.GeCrystalsId) gated_raw_Ge->Fill(clover_j.GeCrystals[crystal_id]);
             gated_Ge->Fill(clover_j.nrj);
             if (clover_j.isCleanGe())
             {
@@ -270,13 +279,14 @@ void Co60_efficiency()
   
   if (nb_gate < 1) print("no gate found !!");
   else print(nb_gate, "gate found, along with", nb_gated, "coincident gamma, which means an absolute efficiency of", 100.*double(nb_gated)/double(nb_gate), "%");
-  print("Total efficiency :", 100.*(1-*double(nb_missed)/double(nb_gate)), "%");
+  print("Total efficiency :", 100.*(1-double(nb_missed)/double(nb_gate)), "%");
   print(nicer_double(max_cursor, 0), "evts read");
 
   // Efficiency
   auto outfile = TFile::Open("60Co_test.root", "recreate");
   outfile->cd();
 
+    eff(gated_raw_Ge, nb_gate, 1150, 1190);
     eff(gated_Ge, nb_gate, 1150, 1190);
     eff(gated_clean_Ge, nb_gate, 1150, 1190);
     eff(gated_BGO, nb_gate, 800, 2000);
@@ -305,6 +315,7 @@ void Co60_efficiency()
     spectra_phos->Write();
     gate_spectra->Write();
 
+    gated_raw_Ge->Write();
     gated_Ge->Write();
     gated_clean_Ge->Write();
     gated_rej_Ge->Write();
@@ -338,9 +349,10 @@ void Co60_efficiency()
   print(timer());
 }
 
-int main()
+int main(int argc, char** argv)
 {
-  Co60_efficiency();
+  if (argc == 1) Co60_efficiency();
+  else if (argc == 2) Co60_efficiency(long(std::stod(argv[1])));
   return 1;
 }
 

@@ -24,6 +24,16 @@ public:
     this -> Open(m_filename);
     event.reading(*this, options);
   }
+  Nuball2Tree(std::string const & filename, Hit & hit) noexcept : m_filename(filename)
+  {
+    this -> Open(m_filename);
+    hit.reading(*this);
+  }
+  Nuball2Tree(std::string const & filename, Hit & hit, std::string const & options) noexcept : m_filename(filename)
+  {
+    this -> Open(m_filename);
+    hit.reading(*this, options);
+  }
 
   ~Nuball2Tree() {if (m_file_opened) this->Close();}
 
@@ -129,10 +139,11 @@ bool Nuball2Tree::Open(std::string const & filename)
 
 void Nuball2Tree::loadRAM()
 {
-  auto memory_tree = (m_tree->CloneTree());
-  memory_tree->SetDirectory(nullptr);
+  // auto memory_tree = (m_tree->CloneTree());
+  // memory_tree->SetDirectory(nullptr);
+  m_tree->SetDirectory(nullptr);
   m_file->Close();
-  m_tree = memory_tree;
+  // m_tree = memory_tree;
   m_file_opened = false;
 }
 

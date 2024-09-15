@@ -12,6 +12,11 @@
 
 static constexpr Time CloversTimeWindow = 50_ns;
 
+/**
+ * @brief Represent one clover with its 4 germaniums and 2 BGO shields.
+ * @details The sub-indexes are : [0,1] BGO, [2,4] Ge. Can be calculated as (label-23)%6.
+ * 
+ */
 class CloverModule
 {
 public:
@@ -40,15 +45,18 @@ public:
   /// @brief Deprecated, use addHit instead
   void addGe(float const & _nrj, Time const & _time, uchar const & sub_index) 
   {
+    auto const & Ge_sub_index = sub_index-2;
     nrj += _nrj;
     // The highest energy deposit most likely corresponds to the hit before scattering
     if (_nrj>maxE_Ge)
     {
       maxE_Ge = _nrj;
       time = _time;
-      maxE_Ge_cristal = sub_index-2;
+      maxE_Ge_cristal = Ge_sub_index;
     }
     ++nb;
+    GeCrystalsId.push_back(Ge_sub_index);
+    GeCrystals[Ge_sub_index]=_nrj;
   }
 
   /// @brief Deprecated, use addHit instead
@@ -75,6 +83,8 @@ public:
   float nrjBGO = 0.;  // Add-backed energy of BGO Clovers
   Time time = 0.;     // Time of the crystal with most energy deposit of the clover, ps
   Time timeBGO = 0.;  // Time of the latest BGO, ps
+  double GeCrystals[4] = {0};
+  std::vector<Index> GeCrystalsId;
 
   float maxE_Ge = 0.0;
   uchar maxE_Ge_cristal = 0u; // Index of the Ge crystal with the most energy deposit in the clover. [0;4]
@@ -200,6 +210,9 @@ void CloverModule::reset()
   maxE_Ge_cristal = '\0';
 
   calo=0.0;
+
+  for (auto const & id : GeCrystalsId) GeCrystals[id] = 0;
+  GeCrystalsId.clear();
 }
 
 std::ostream& operator<<(std::ostream& cout, CloverModule const & cloverModule)

@@ -1,6 +1,7 @@
 #ifndef COEFFICIENTCORRECTION_HPP
 #define COEFFICIENTCORRECTION_HPP
 
+#include "../lib/Classes/Hit.hpp"
 
 class CoefficientCorrection
 {public:

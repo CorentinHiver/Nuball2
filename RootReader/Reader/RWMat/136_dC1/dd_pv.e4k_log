@@ -12,3 +12,21 @@
        ...Total background spectrum file name =  dd_pv_bx.spe
 24-Aug-24 19:23:14: Percentage error on background = 5.000000
 24-Aug-24 19:23:14:  2D Scaling factor = 0.000122
+11-Sep-24 03:40:38: Energy calibration file = ../nuball.aca
+11-Sep-24 03:40:42: Efficiency calibration file = ../nuball2.aef
+11-Sep-24 03:40:45: Error for energy calibration = 0.030000
+11-Sep-24 03:40:45: Percentage error on efficiency = 3.000000
+11-Sep-24 04:24:39: Created new escl8r data file dd_pv.e4k_log
+      ...from matrix file dd_pv.m4b
+      ...by taking all 4k channels.
+11-Sep-24 04:24:47: Energy calibration file = ../nuball.aca
+11-Sep-24 04:24:56: Efficiency calibration file = ../nuball.aef
+11-Sep-24 04:25:04: Error for energy calibration = 1.000000
+11-Sep-24 04:25:04: Percentage error on efficiency = 3.000000
+11-Sep-24 04:25:06: Gaussian peak shapes selected.
+11-Sep-24 04:25:14: Peak width parameters = 1.600000 3.000000 0.000000
+11-Sep-24 04:25:14: New background spectra, no E2-enhancement.
+       ...Total projection spectrum file name =  dd_pv_px.spe
+       ...Total background spectrum file name =  dd_pv_bx.spe
+11-Sep-24 04:25:47: Percentage error on background = 5.000000
+11-Sep-24 04:25:47:  2D Scaling factor = 0.112585

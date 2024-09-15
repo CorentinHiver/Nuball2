@@ -1487,7 +1487,7 @@ namespace CoAnalyse
       // Get the biggest peaks in each projection
       auto const & peaksX = mainPeaksLookup(projX, sigmaX, threshold, 1, 1, remove511);
       auto const & peaksY = mainPeaksLookup(projY, sigmaY, threshold, 1, 1, remove511);
-      print(peaksX.size(), peaksY.size());
+      // if (peaksX.size()<)
       auto projX_bis = new TH1D("projX_bis", "projX_bis", Nx,xmin,xmax);
       auto projY_bis = new TH1D("projY_bis", "projY_bis", Ny,ymin,ymax);
       auto proj_diag = new TH1D("proj_diag", "proj_diag", 2*Nx,xmin,2*xmax);
