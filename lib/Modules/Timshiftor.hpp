@@ -276,7 +276,7 @@ public:
 
   std::string m_filename = "";
 
-  Timeshifts m_timeshifts;
+  std::vector<Time> m_timeshifts;
 //   std::vector<Time> m_timeshifts;
   std::vector<Timestamp> mt_ref_time;
 

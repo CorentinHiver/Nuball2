@@ -628,6 +628,8 @@ constexpr std::size_t get_size() {
     return sizeof...(T);
 }
 
+#endif //Cpp17
+
 template <typename... Args>
 struct are_all_arithmetic;
 
@@ -637,6 +639,8 @@ struct are_all_arithmetic<> : std::true_type {};
 template <typename First, typename... Rest>
 struct are_all_arithmetic<First, Rest...>
     : std::conjunction<std::is_arithmetic<First>, are_all_arithmetic<Rest...>> {};
+
+#endif Cpp17
 
 ///////////////////////////
 //   SLOTS AND SIGNALS   // TDB
@@ -787,9 +791,13 @@ constexpr T found(const std::array<T, N>& array, const T& value)
 // MAKE SOME STD FUNC CONSTEXPR //
 //////////////////////////////////
 
+#if Cpp17
+
 template <typename T>
 typename std::enable_if_t<std::is_arithmetic_v<T>, T>
 constexpr abs_const(T const & t) {return (t>=0) ? t : -t;}
+
+#endif //Cpp17
 
 // #if (__cplusplus >= 201703L)
 
