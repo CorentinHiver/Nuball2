@@ -509,10 +509,6 @@ THist* MultiHist<THist>::Merge()
       lock_mutex lock(m_mutex);
       this -> Merge_t();
     }
-    else
-    {
-      m_merged = m_collection[0];
-    }
     m_is_merged = true;
   }
   if (m_merged) m_integral = m_merged->Integral();

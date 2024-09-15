@@ -35,10 +35,9 @@ inline Time Timeshift_cast(T const & t) {return static_cast<Time>(t);}
  *   This module includes multithreading management using MTObject::parallelise_function(function, parameters...)
  * Goal 2 : read a timeshift file (.dT) previously calculated by this module
  * Goal 3 : apply the timeshifts by calling the operator[] : time_correct = time_shifted + timeshifts[label];
- * Example at the end
- * 
- * @todo TODO separate into two different classes : Timeshiftor that only holds the values, and Timeshiftor that handles the calculations
- * Of course, Timeshiftor has a Timeshiftor as member and can be used as it. Or it can just inherit from it maybe.
+ * Timeshiftor ts;
+ * detectors.load("index_129.list");
+ * ts.calculate()
  */
 class Timeshiftor
 {
@@ -278,10 +277,10 @@ public:
 
   std::vector<Time> m_timeshifts;
 //   std::vector<Time> m_timeshifts;
-  std::vector<Timestamp> mt_ref_time;
+  // std::vector<Timestamp> mt_ref_time;
 
-  Time_ns m_timewindow_ns = Time_ns_cast(1500);
-  Time m_timewindow = Time_cast(m_timewindow_ns*1000);
+  Time_ns m_timewindow_ns = 1500;
+  Time m_timewindow = 1500_ns;
   int m_min_mult = 2;
   int m_max_mult = 2;
   Label m_time_ref_label = 252;
@@ -344,6 +343,7 @@ public:
   MultiHist<TH2F> m_EnergyRef_bidim; // Energy VS Time (unused)
 
   Vector_MTTHist<TH1F> m_time_spectra; // Time spectra from coincidence with the time reference detector, one TH1F for each detector
+  MultiHist<TH2F> m_time_spectra_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
   Vector_MTTHist<TH1F> m_time_spectra_corrected; // Time spectra from coincidence with the time reference detector, one TH1F for each detector, after timeshift
   MultiHist<TH2F> m_time_spectra_corrected_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
 
@@ -470,11 +470,19 @@ bool Timeshiftor::InitialiseRaw()
     m_histo_ref_vs_RF_VS_mult.reset( "Ref_RF_VS_mult", "Reference RF VS multiplicity;Time[ps];Multiplicity", m_timewindow_ns*m_bins_per_ns["RF"],-m_timewindow/2,m_timewindow/2, 10,0,10 );
   }
 
+  m_time_spectra_bidim.reset("raw_spectra_VS_label", "raw_spectra_VS_label", detectors.size(),0,detectors.size(), 1000,-m_timewindow/2, m_timewindow/2);
+
   for (ushort label = 0; label<detectors.size(); label++)
   {
     if (!detectors.exists(label)) continue;
     auto const & name = detectors[label];
-    auto const & type = detectors.type(label);
+    // auto const & type = detectors.type(label);
+    std::string type;
+    if (label<200) type = (((label-23)%6 > 1)) ? "ge" : "bgo";
+    else if (label == 212) type = "RF";
+    else if (label == 252) type = "labr";
+    else if (label > 300 && label < 800) type = "paris";
+    else if (label >= 800) type="dssd";
 
     m_time_spectra[label].reset(name.c_str(), name.c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
 
@@ -483,7 +491,7 @@ bool Timeshiftor::InitialiseRaw()
       m_histograms_VS_RF[label].reset((name+"_RF").c_str(), (name+"_RF").c_str(), m_timewindow_ns*m_bins_per_ns[type], -m_timewindow/2, m_timewindow/2);
       if (type == "RF")
       {
-        m_time_spectra[label].reset(name.c_str(), name.c_str(), 1000, -100, 100);
+        m_time_spectra[label].reset(name.c_str(), name.c_str(), 1000, -m_timewindow/2, m_timewindow/2);
       }
     }
   }
@@ -545,7 +553,7 @@ bool Timeshiftor::Initialise(bool const & InitialiseRaw, bool const & Initialise
 
   if (m_Initialised) return true; // To prevent multiple initializations
 
-  mt_ref_time.resize(MTObject::getThreadsNumber(), 0);
+  // mt_ref_time.resize(MTObject::getThreadsNumber(), 0);
 
   // Check the Detectors module :
   auto const & label_max = detectors.size();
@@ -555,7 +563,7 @@ bool Timeshiftor::Initialise(bool const & InitialiseRaw, bool const & Initialise
     return (m_ok = m_Initialised = false);
   }
 
-//   m_timeshifts.resize(label_max, 0);
+  m_timeshifts.resize(label_max, 0);
   m_RF_preferred_label.resize(label_max, false);
   m_edge_preferred_label.resize(label_max, false);
   m_nb_shifts_RF_peak.resize(label_max, 0);
@@ -737,16 +745,16 @@ void Timeshiftor::treatFasterFile(std::string const & filename)
   bool const maxHitsToRead = (m_max_hits>0);
 
   RF_Manager rf;
-  rf.setPeriod_ns(m_rf_period);
 
   if(m_use_rf)
   {
+    rf.setPeriod_ns(m_rf_period);
     get_first_RF_of_file(reader, hit, rf);
   }
 
   // Handle the first hit :
   reader.Read(); 
-  mt_ref_time[MTObject::getThreadIndex()] = hit.stamp;
+  // mt_ref_time[MTObject::getThreadIndex()] = hit.stamp;
 
 
   while(reader.Read() && ((maxHitsToRead) ? (counter<m_max_hits) : true) )
@@ -760,6 +768,7 @@ void Timeshiftor::treatFasterFile(std::string const & filename)
 
     // This is used to put the energy value of the time reference in the Event (used in the Fill method) :
     if (hit.label == m_time_ref_label) hit.nrj = NRJ_cast(hit.adc); 
+    else hit.nrj = 0;
 
     if(m_use_rf) if(isRF[hit.label]) {rf.last_downscale_timestamp = hit.stamp; rf.period = hit.adc;}
 
@@ -783,8 +792,6 @@ void Timeshiftor::Fill(Event const & event, RF_Manager & rf)
 
   for (int loop_i = 0; loop_i < mult; loop_i++)
   {
-    bool coincFilled = false; // To only fill the coincidence once.
-
     if(m_use_rf)
     {
       auto const & label = event.labels[loop_i];
@@ -809,13 +816,15 @@ void Timeshiftor::Fill(Event const & event, RF_Manager & rf)
     }
 
     // We require the reference detector in the event :
-    if (event.labels[loop_i] == m_time_ref_label && !coincFilled)
+    if (event.labels[loop_i] == m_time_ref_label)
     {
-      coincFilled = true;
+      // print(event);
+      // pauseCo();
       // Extract informations of the reference :
       auto const & refPos = loop_i; // Position of the reference in the event
       auto const & refE = event.nrjs[refPos]; // Energy deposited in the reference detector
       auto const & refT = event.times[refPos];// Timestamp of the hit in the reference detector
+
 
       // Handle reference detector :
       if (refE < m_EMin_ADC) return;
@@ -837,8 +846,11 @@ void Timeshiftor::Fill(Event const & event, RF_Manager & rf)
         }
         else 
         {
+          // print(label, deltaT);
           m_time_spectra[label].Fill(deltaT);
+          m_time_spectra_bidim.Fill(label, deltaT);
         }
+        // pauseCo();
       }
     }
   }

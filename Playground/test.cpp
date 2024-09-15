@@ -7,7 +7,7 @@
 // #include <Hit.hpp>
 // #include <FasterReader.hpp>
 // #include <Detectors.hpp>
-// #include <Timeshifts.hpp>
+#include <Timeshiftor.hpp>
 // #include <HitBuffer.hpp>
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
@@ -303,14 +303,14 @@ int main()
   // if (found(Path::pwd().string(), "faster")) MTObject::Initialise(10);
   // else                              MTObject::Initialise(2);
 
-  // MTObject::Initialise(2);
-  // detectors.load("index_129.list");
-  // Timeshifts ts;
+  MTObject::Initialise(4);
+  detectors.load("index_129.list");
+  Timeshiftor ts;
   // ts.dT_with_biggest_peak_finder();
-  // ts.setMult(2,4);
-  // ts.calculate("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 20);
-  // ts.verify("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast");
-  // ts.write("136_Co");
+  ts.setMult(2,4);
+  ts.calculate(Path::home().string()+"nuball2/N-SI-136/60Co_center_after.fast", 20);
+  ts.verify(Path::home().string()+"nuball2/N-SI-136/60Co_center_after.fast", 20);
+  ts.write("136_Co_after");
   // print(ts);
 
 // ______________________________________
