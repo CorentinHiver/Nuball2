@@ -628,7 +628,7 @@ constexpr std::size_t get_size() {
     return sizeof...(T);
 }
 
-#endif //Cpp17
+#if Cpp17
 
 template <typename... Args>
 struct are_all_arithmetic;
@@ -640,7 +640,7 @@ template <typename First, typename... Rest>
 struct are_all_arithmetic<First, Rest...>
     : std::conjunction<std::is_arithmetic<First>, are_all_arithmetic<Rest...>> {};
 
-#endif Cpp17
+#endif //Cpp17
 
 ///////////////////////////
 //   SLOTS AND SIGNALS   // TDB
