@@ -192,6 +192,89 @@ bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
   return true;
 }
 
+TH2F* compressBidim(TH2F* histo, std::string axis = "x")
+{
+  int nb_columns_compressed = 0;
+  std::vector<int> not_empty_columns;
+  auto xaxis = histo->GetXaxis();
+  auto yaxis = histo->GetYaxis();
+  if (axis == "y" )
+  {
+    xaxis = yaxis;
+    yaxis = histo->GetXaxis();
+  }
+  for (int x = 0; x<xaxis->GetNbins(); ++x) for (int y = 0; y<yaxis->GetNbins(); ++y)
+  {
+    if (((axis == "x") ? histo->GetBinContent(x,y) : histo->GetBinContent(y, x)) != 0)
+    {
+      ++nb_columns_compressed;
+      not_empty_columns.push_back(x);
+      break;
+    }
+  }
+  print("nb_columns_compressed", nb_columns_compressed);
+  auto name = TString(histo->GetName())+"_compressed";
+  auto title = TString(histo->GetTitle())+"_compressed";
+  TH2F* ret = new TH2F(name, title, nb_columns_compressed, xaxis->GetXmin(), xaxis->GetBinLowEdge(nb_columns_compressed), yaxis->GetNbins(), yaxis->GetXmin(), yaxis->GetXmax());
+  for (size_t x_bis = 0; x_bis<not_empty_columns.size(); ++x_bis) for (int y = 0; y<yaxis->GetNbins(); ++y)
+  {
+    auto const & x = not_empty_columns[x_bis];
+    auto bin_content = (axis == "x") ? histo->GetBinContent(x, y) : histo->GetBinContent(y, x);
+    if (bin_content!=0)
+    {
+      if (axis == "x") ret->SetBinContent(x_bis, y, bin_content);
+      else if (axis == "y") ret->SetBinContent(y, x_bis, bin_content);
+    }
+  }
+  return ret;
+}
+
+TH2F* rotateAndCalibrate(TH2F* bidim, double angle, double const & coeff)
+{
+  auto const & name = bidim->GetName();
+  auto const & title = bidim->GetTitle();
+  
+  auto xAxis = bidim->GetXaxis();
+  auto const & binsX =  xAxis->GetNbins();
+  auto const & minX  =  xAxis->GetXmin();
+  auto const & maxX  =  xAxis->GetXmax();
+
+  auto yAxis = bidim->GetYaxis();
+  auto const & binsY = yAxis->GetNbins();
+  auto const & minY  = yAxis->GetXmin();
+  auto const & maxY  = yAxis->GetXmax();
+
+  auto rotated_bidim = new TH2F((name+std::string("_rotated")).c_str(), (title+std::string(" rotated")).c_str(), binsX,minX,maxX, binsY,minY,maxY);
+  // return rotated_bidim;
+  double _sin = sin(angle);
+  double _cos = cos(angle);
+
+  for (int binX = 0; binX<binsX; binX++)
+  {
+    for (int binY = 0; binY<binsY; binY++)
+    {
+      auto const & nb_hits   = bidim->GetBinContent(binX, binY);
+      auto const & old_long  = bidim->GetYaxis()->GetBinCenter(binY);
+      auto const & old_short = bidim->GetXaxis()->GetBinCenter(binX);
+
+      auto const & old_long_range  = bidim->GetYaxis()->GetBinCenter(binY+1)-old_long ;
+      auto const & old_short_range = bidim->GetXaxis()->GetBinCenter(binX+1)-old_short;
+      for (int hit_i = 0; hit_i<nb_hits; hit_i++)
+      {
+        auto const & rand_short = old_short + randomCo::uniform(0, old_short_range);
+        auto const & rand_long  = old_long  + randomCo::uniform(0, old_long_range);
+
+        // Rotate the NaI+both toward the long gate :
+        auto const & new_short = rand_short * _cos - rand_long * _sin; // * (abs(_tan)/_tan);
+        auto const & new_long  = coeff * (rand_short * _sin + rand_long * _cos); // * (abs(_tan)/_tan);
+
+        rotated_bidim->Fill(new_short, new_long);
+      }
+    }
+  }
+  return rotated_bidim;
+}
+
 /**
  * @brief Like AddTH1 but adjusts the binning first
  * @todo doesn't work for some reason ...

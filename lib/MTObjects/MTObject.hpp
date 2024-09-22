@@ -216,6 +216,7 @@ public:
   template <class Func, class... ARGS>
   static void parallelise_function(Func && func, ARGS &&... args)
   {
+    if (nb_threads == 1) MTObject::ON = false;
     if (MTObject::ON)
     {
       activated = true;

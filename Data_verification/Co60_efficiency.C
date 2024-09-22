@@ -128,6 +128,13 @@ void Co60_efficiency(long max_cursor = -1)
   auto gated_caloClover = new TH1F("gated_caloClover", "gated_caloClover;[keV]", 500, 0, 2000);
   auto gated_caloParis = new TH1F("gated_caloParis", "gated_caloParis;[keV]", 500, 0, 2000);
 
+  // Here I want to get the probability for a gamma ray that interacted first 
+  // inside of each kind of detector to get fully absorbed.
+  
+  auto gated_calo_include_Paris = new TH1F("gated_calo_include_Paris", "gated_calo_include_Paris;[keV]", 500, 0, 2000);
+  auto gated_calo_include_Ge = new TH1F("gated_calo_include_Ge", "gated_calo_include_Ge;[keV]", 500, 0, 2000);
+  auto gated_calo_include_BGO = new TH1F("gated_calo_include_BGO", "gated_calo_include_BGO;[keV]", 500, 0, 2000);
+
   std::vector<double> BGO_nrjs;
   std::vector<double> Ge_nrj;
   for (int evt_i = 0; evt_i<tree->GetEntries(); ++evt_i)
@@ -267,8 +274,14 @@ void Co60_efficiency(long max_cursor = -1)
 
         // Calorimetry :
         auto const & calo_Clover = caloBGO+caloGe;
-        if (calo>0) gated_calo_VS_MMult->Fill(MMult-1, calo);
-        if (calo>0) gated_calo->Fill(calo);
+        if (calo>0) 
+        {
+          gated_calo_VS_MMult->Fill(MMult-1, calo);
+          gated_calo->Fill(calo);
+          if (caloParis > 0) gated_calo_include_Paris->Fill(calo);
+          if (caloGe > 0) gated_calo_include_Ge->Fill(calo);
+          if (caloBGO > 0) gated_calo_include_BGO->Fill(calo);
+        }
         if (caloGe>0) gated_caloGe->Fill(caloGe);
         if (caloBGO>0) gated_caloBGO->Fill(caloBGO);
         if (calo_Clover>0) gated_caloClover->Fill(calo_Clover);
@@ -343,6 +356,10 @@ void Co60_efficiency(long max_cursor = -1)
     gated_caloBGO->Write();
     gated_caloClover->Write();
     gated_caloParis->Write();
+
+    gated_calo_include_Paris->Write();
+    gated_calo_include_Ge   ->Write();
+    gated_calo_include_BGO  ->Write();  
 
   outfile->Close();
   print("60Co_test.root written");

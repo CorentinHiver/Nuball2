@@ -28,9 +28,10 @@ public:
 
   void prepare() {for (auto & it : data) it.second.prepare();}
 
-  double calibrate(Hit & hit) {return data.at(hit.label).calibrate(hit);}
+  double calibrate(Hit const & hit) {return data.at(hit.label).calibrate(hit);}
   double calibrate(Label const & label, double const & qshort, double const & qlong) {return data.at(label).calibrate(qshort, qlong);}
   inline double calibrate(Label const & label, double const & qshort, double const & qlong) const {return data.at(label).calibrate(qshort, qlong);}
+  inline double calibrate_short(Label const & label, double const & qshort, double const & qlong) const {return data.at(label).calibrate_short(qshort, qlong);}
 
   class Coefficients
   {public:
@@ -70,6 +71,7 @@ public:
     double calibrate(Hit const & hit) {return (hit.nrj * sin_a + hit.nrj2 * cos_a) * coeff;}
     double calibrate(double const & qshort, double const & qlong) {return (qshort * sin_a + qlong * cos_a) * coeff;}
     double calibrate(double const & qshort, double const & qlong) const {return (qshort * sin_a + qlong * cos_a) * coeff;}
+    double calibrate_short(double const & qshort, double const & qlong) const {return (qshort * cos_a - qlong * sin_a) * coeff;}
 
     double angle = 0;
     double cos_a = 0;

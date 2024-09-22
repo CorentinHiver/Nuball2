@@ -22,9 +22,9 @@ constexpr static bool bidim_by_run = false;
 void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8)
 {
   std::string target = "U";
-  std::string trigger = "P";
+  // std::string trigger = "P";
   // std::string trigger = "dC1";
-  // std::string trigger = "C2";
+  std::string trigger = "C2";
 
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
@@ -35,9 +35,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
 
   detectors.load("../136/index_129.list");
 
-  bool make_triple_coinc_ddd = true;
-  bool make_triple_coinc_dpp = true;
-  bool make_triple_coinc_ppp = true;
+  bool make_triple_coinc_ddd = false;
+  bool make_triple_coinc_dpp = false;
+  bool make_triple_coinc_ppp = false;
   Timer timer;
   std::atomic<int> files_total_size(0);
   std::atomic<int> total_evts_number(0);
@@ -141,7 +141,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
       }
 
       unique_TH2F timestamp_hist_VS_run (new TH2F(("timestamp_hist_VS_run_"+thread_i_str).c_str(), "timestamp_hist_VS_run", 100,0,3, 100,50,150));
-      
+
+      unique_TH2F Fatima_E_dT (new TH2F(("Fatima_E_dT_"+thread_i_str).c_str(), "Fatima_E_dT", 800,-100,300, 1000,0,10000));
+      unique_TH1F p_before_correction (new TH1F(("p_before_correction_"+thread_i_str).c_str(), "prompt before correction", nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH1F d_before_correction (new TH1F(("d_before_correction"+thread_i_str).c_str(), "delayed before correction", nb_bins_Ge_singles,0,max_bin_Ge_singles));
+
       unique_TH1F p (new TH1F(("p_"+thread_i_str).c_str(), "prompt", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F pp (new TH2F(("pp_"+thread_i_str).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F pp_bckg (new TH2F(("pp_bckg_"+thread_i_str).c_str(), "gamma-gamma prompt background;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
@@ -439,6 +443,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
       CloversV2 pclovers;
       CloversV2 dclovers;
 
+      CloversV2 pclovers_raw;
+      CloversV2 dclovers_raw;
+
       CloversV2 last_prompt_clovers;
       CloversV2 last_delayed_clovers;
 
@@ -535,6 +542,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
             T_vs_run[det_name]->Fill(run_number, time);
           }
 
+          if (label == 252)
+          {
+            Fatima_E_dT->Fill(time, nrj);
+          }
+
           // Paris :
           if (Paris::is[label])
           {
@@ -563,6 +575,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
             if (CloversV2::isBGO(label)) prompt_clover_calo += nrj ;
             else if (CloversV2::isGe(label)) 
             {
+              if (CloversIsBlacklist[label]) continue;
+              pclovers_raw.fill(event, hit_i);
               // Apply the run by run correction
               if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
               if (!gate(506_keV, nrj, 515_keV)) prompt_clover_calo += smear(nrj, random);
@@ -571,6 +585,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
           }
           else if (gate(40_ns, time, 170_ns) )
           {
+            if (CloversIsBlacklist[label]) continue;
+            dclovers_raw.fill(event, hit_i);
             if (kCalibGe && CloversV2::isGe(label)) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
             dclovers.fill(event, hit_i);
           }
@@ -586,6 +602,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
         // First step, perform add-back and compton suppression :
         pclovers.analyze();
         dclovers.analyze();
+        pclovers_raw.analyze();
+        dclovers_raw.analyze();
         pparis.analyze();
         dparis.analyze();
         dssd.analyze();
@@ -623,6 +641,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
         // // if (PC > 0 && DC > 0) dp_calo->Fill(PC, DC);
         // if (DC > 0 && PM > 0) d_calo_pP->Fill(delayed_clover_calo);
 
+        ////////// RAW Ge /////////
+        for (auto const & clover : pclovers_raw.clean) p_before_correction->Fill(clover->nrj);
+        for (auto const & clover : dclovers_raw.clean) d_before_correction->Fill(clover->nrj);
+
         
         //////////////// DSSD ///////////////////
         bool dssd_trigger = dssd.mult() > 0;
@@ -641,6 +663,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
         }
 
         /////// PROMPT CLEAN ///////
+
         for (size_t loop_i = 0; loop_i<pclovers.GeClean_id.size(); ++loop_i)
         {
           auto const & index_i = pclovers.GeClean_id[loop_i];
@@ -1403,6 +1426,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
         // Energy :
         pp->Write("pp", TObject::kOverwrite);
         pp_bckg->Write("pp_bckg", TObject::kOverwrite);
+        Fatima_E_dT->Write("Fatima_E_dT", TObject::kOverwrite);
+        p_before_correction->Write("p_before_correction", TObject::kOverwrite);
+        d_before_correction->Write("d_before_correction", TObject::kOverwrite);
         p->Write("p", TObject::kOverwrite);
         dd->Write("dd", TObject::kOverwrite);
         dd_prompt_veto->Write("dd_prompt_veto", TObject::kOverwrite);
@@ -1691,34 +1717,34 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 8
 
       file->Close();
       print(out_filename, "written");
-      if (nb_files<0)
-      {
-        std::string dest = "data/merge_"+trigger+".root";
-        std::string source = "data/"+trigger+"/"+target+"/run_*.root";
-        std::string command = "hadd -f -j 8 -d . "+ dest + " " + source;
-        print(command);
-        gSystem->Exec(command.c_str());
+      // if (nb_files<0)
+      // { // Additional spectra :
+      //   std::string dest = "data/merge_"+trigger+".root";
+      //   std::string source = "data/"+trigger+"/"+target+"/run_*.root";
+      //   std::string command = "hadd -f -j 8 -d . "+ dest + " " + source;
+      //   print(command);
+      //   gSystem->Exec(command.c_str());
 
-        print("Calculate additionnal spectra :");
+      //   print("Calculate additionnal spectra :");
 
-        auto f = TFile::Open(dest.c_str(), "update");
+      //   auto f = TFile::Open(dest.c_str(), "update");
 
-        auto dd_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd"))->Clone("dd_clean"));
-        removeVeto(dd_clean, dd_prompt_veto.get(), 501, 521);
-        dd_clean->Write();
+      //   auto dd_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd"))->Clone("dd_clean"));
+      //   CoLib::removeVeto(dd_clean, dd_prompt_veto.get(), 501, 521);
+      //   dd_clean->Write();
 
-        auto dd_p_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd_p"))->Clone("dd_p_clean"));
-        removeVeto(dd_p_clean, dd_p_prompt_veto.get(), 501, 521);
-        dd_p_clean->Write();
+      //   auto dd_p_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd_p"))->Clone("dd_p_clean"));
+      //   CoLib::removeVeto(dd_p_clean, dd_p_prompt_veto.get(), 501, 521);
+      //   dd_p_clean->Write();
 
-        // Calculate the prompt-delayed background : //TODO
-        // auto dp_pv = static_cast<TH2F*>(f->Get("dp_prompt_veto"));
-        // auto proj_p_pv = dp_bckg->ProjectionX(); // Projection on prompt
-        // auto proj_pv = dp->ProjectionY();
-        // auto test = removeVeto(dp, (TH1F*)proj_p, (TH1F*)proj_d, 505,515);
-        // test->Draw();
-        // auto dp_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dp"))->Clone("dp_clean"));
-      }
+      //   // Calculate the prompt-delayed background : //TODO
+      //   // auto dp_pv = static_cast<TH2F*>(f->Get("dp_prompt_veto"));
+      //   // auto proj_p_pv = dp_bckg->ProjectionX(); // Projection on prompt
+      //   // auto proj_pv = dp->ProjectionY();
+      //   // auto test = removeVeto(dp, (TH1F*)proj_p, (TH1F*)proj_d, 505,515);
+      //   // test->Draw();
+      //   // auto dp_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dp"))->Clone("dp_clean"));
+      // }
       // mutex freed
     }
   });

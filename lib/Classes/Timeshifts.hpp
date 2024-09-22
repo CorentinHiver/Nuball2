@@ -1,8 +1,12 @@
+#ifndef TIMESHIFTS_HPP
+#define TIMESHIFTS_HPP
+
 #include "../Classes/Hit.hpp"
 
 class Timeshifts
 {
 public:
+  Timeshifts() = default;
   Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename);}
   Timeshifts(Timeshifts const & other) : m_timeshifts(other.m_timeshifts) {}
   
@@ -64,8 +68,7 @@ bool Timeshifts::load(std::string const & filename)
     if (size<label) size = label;
   }
   size++; // The size of the vector must be label_max+1
-  // Ensure there is no mismatch with the detectors module :
-  if (detectors && size<detectors.size()) size = detectors.size();
+  // if (detectors && size<detectors.size()) size = detectors.size(); // Ensure there is no mismatch with the detectors module
   inputFile.clear(); 
   inputFile.seekg(0, inputFile.beg);
 
@@ -106,3 +109,5 @@ void Timeshifts::write(std::string const & fullpath, std::string const & name)
 
   print("Timeshifts data written to", outData);
 }
+
+#endif //TIMESHIFTS_HPP

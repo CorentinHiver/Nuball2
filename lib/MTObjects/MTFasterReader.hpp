@@ -7,6 +7,8 @@
 #include "../Classes/Alignator.hpp"
 #include "../Classes/FilesManager.hpp"
 #include "../Classes/CoProgressBar.hpp"
+#include "../Classes/CoincBuilder.hpp"
+#include "../Classes/Timeshifts.hpp"
 
 
 /**
@@ -116,7 +118,10 @@ public:
   void readAligned(Func&& func, ARGS &&... args);
 
   template<class Func, class... ARGS>
-  void readAligned(std::vector<Time> timeshifts, Func&& func, ARGS &&... args) 
+  void readEvents(Time const & timewindow, Func&& func, ARGS &&... args);
+
+  template<class Func, class... ARGS>
+  void readAligned(Timeshifts timeshifts, Func&& func, ARGS &&... args) 
   {
     m_timeshifts = timeshifts;
     this -> readAligned<Func, ARGS...>(func, args...);
@@ -139,7 +144,7 @@ public:
   auto & files() {return m_files;}
 
   // Other parameters :
-  void setTimeshifts(std::vector<Time> const & timeshifts) {m_timeshifts = timeshifts;}
+  void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
   auto const & timeshift(Label const & label) const {return m_timeshifts[label];}
   static void showProgressBar(bool const & choice = true) {s_progressBar = choice;}
 
@@ -156,7 +161,7 @@ private:
   FilesManager m_files;
   MTList m_MTfiles;
 
-  std::vector<Time> m_timeshifts;
+  Timeshifts m_timeshifts;
   static bool s_progressBar;
 };
 bool MTFasterReader::s_progressBar = false;
@@ -225,8 +230,8 @@ inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
 template<class Func, class... ARGS>
 inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
 {
-  if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
-  if (m_timeshifts.size() == 0) throw_error("NO TIMESHIFT DATA PROVIDED !!");
+  if (!m_files) {print("MTFasterReader::readAligned : NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
+  if (!m_timeshifts) throw_error("MTFasterReader::readAligned : NO TIMESHIFT DATA PROVIDED !!");
   m_MTfiles = m_files.getListFiles();
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
     std::string filename;
@@ -254,7 +259,64 @@ inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
       hit.reading(tempTree.get());
     fasterReaderUnlockMutex();
     
-      func(hit, alignedTree, std::forward<ARGS>(args)...);
+      func(alignedTree, hit, std::forward<ARGS>(args)...);
+    }
+  });
+}
+
+//////////////////////////////////////
+//   Read event built faster data   //
+//////////////////////////////////////
+/**
+ * @brief Reads many faster files in parallel, providing a time-aligned and event build data
+ * 
+ * @details
+ * Use this function like this : 
+ *  MTFasterReader reader("data", nb_files);
+ *  reader.readEvents([&](Event & event));
+ * 
+ * @attention you cannot initialise anything before the event loop. Therefore, you need to use only thread-safe 
+ * objects that are defined before the loop (you can look at the thread_local key-word or my classes like MultiHist to make your own)
+ */
+template<class Func, class... ARGS>
+inline void MTFasterReader::readEvents(Time const & timewindow, Func&& func, ARGS &&... args)
+{
+  if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
+  if (!m_timeshifts) throw_error("NO TIMESHIFT DATA PROVIDED !!");
+  m_MTfiles = m_files.getListFiles();
+  MTObject::parallelise_function([&](){ // Here we are inside each thread :
+    std::string filename;
+    while(nextFilename(filename))
+    {
+      if (MTObject::kill) {print("Killing thread", MTObject::getThreadIndex()); break;}
+
+    fasterReaderLockMutex();
+      Hit hit;
+      FasterReader reader(&hit, filename);
+      TString name = "temp"+std::to_string(MTObject::getThreadIndex());
+      unique_tree tempTree(new TTree(name, "temp"));
+      hit.writing(tempTree.get());
+    fasterReaderUnlockMutex();
+
+      while (reader.Read())
+      {
+        hit.stamp+=m_timeshifts[hit.label];
+        tempTree->Fill();
+      }
+
+    fasterReaderLockMutex();
+      Alignator alignedTree(tempTree.get());
+      hit.clear();
+      hit.reading(tempTree.get());
+      Event event;
+      event.read.setOptions(hit.read.getOptions());
+      CoincBuilder coinc(&event, timewindow);
+    fasterReaderUnlockMutex();
+    
+      while (alignedTree.Read())
+      {
+        if (coinc.build(hit)) func(event, std::forward<ARGS>(args)...);
+      }
     }
   });
 }

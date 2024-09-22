@@ -4,13 +4,15 @@
 #include "../lib/libRoot.hpp"
 #include "../lib/Classes/FilesManager.hpp"
 #include "../lib/Classes/Calibration.hpp"
+#include "../lib/Classes/Timeshifts.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/SimpleParis.hpp"
 #include "../lib/Classes/Nuball2Tree.hpp"
 #include "../lib/Classes/Timer.hpp"
 
-#include "../lib/MTObjects/MTRootReader.hpp"
+#include "../lib/MTObjects/MTFasterReader.hpp"
+// #include "../lib/MTObjects/MTRootReader.hpp"
 #include "../lib/MTObjects/MultiHist.hpp"
 
 #include "CoefficientCorrection.hpp"
@@ -27,8 +29,11 @@ float gate_high = 515_keV;
 float coinc_low = 1171_keV;
 float coinc_high = 1176_keV;
 
-void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400, int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400)
+void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400
+//, int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400
+)
 {
+  if (histo->GetEntries()<1) {error("histo", histo->GetName(), "has no hit"); return;}
   histo->GetXaxis()->SetRangeUser(coinc_low_fit, coinc_high_fit);
   double constante0 = histo -> GetMaximum();
   double mean0 = histo->GetMean();
@@ -66,32 +71,35 @@ void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit =
         "realive pe eff : ", 100.*pe_integral/histo->Integral(), "%", histo->GetName());
 }
 
-void Na22_reader(int nb_files = -1, long max_cursor = 1.e+10)
+void Na22_reader(int nb_files = -1, ULong64_t max_cursor = 1.e+10)
 {
   SimpleCluster::setDistanceMax(1.1);
 
   Timer timer;
 
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
+  Calibration calib("../136/136_2024.calib");
+  Timeshifts ts("../136/136_Co_after.dT");
 
   int nb_gate = 0;
   int nb_gated = 0;
   int nb_missed = 0;
 
-  TRandom* random = new TRandom(time(0));
-
   MTObject::Initialise(nb_threads);
+  if (nb_files>0) MTObject::adjustThreadsNumber(nb_files);
 
   // TChain* tree = new TChain("Nuball2");
   // std::string path = Path::home().string()+"nuball2/N-SI-136-root-sources/60Co_3/*";
   // std::string path = Path::home().string()+"nuball2/N-SI-136-root_sources/60Co_2/*";
-  std::string path = Path::home().string()+"nuball2/N-SI-136-root_sources/Na22_center";
+  std::string path = Path::home().string()+"nuball2/N-SI-136/Na22_center.fast";
+  // std::string path = Path::home().string()+"nuball2/N-SI-136-root_sources/Na22_center";
   // tree->Add(path.c_str());
 
   MultiHist<TH2F> timing ("timing", "timing;[keV]", 1000,0,1000, 500,-250_ns,250_ns);
   MultiHist<TH2F> gated_BGO_vs_index ("gated_BGO_vs_index", "gated_BGO_vs_index;[keV]", 24,0,24, 2_k,0_MeV,2_MeV);
   MultiHist<TH2F> paris_bidim ("paris_bidim", "paris_bidim;long_gate[a.u.];short_gate[a.u.]", 1_k,0_MeV,2_MeV, 1_k,0_MeV,2_MeV);
   MultiHist<TH2F> paris_bidim_rotated ("paris_bidim_rotated", "paris_bidim_rotated;long_gate[a.u.];short_gate[a.u.]", 1_k,0_MeV,2_MeV, 1_k,0_MeV,2_MeV);
+  MultiHist<TH1F> paris_qlong ("paris_qlong", "paris_qlong;[keV]", 1_k,0_MeV,2_MeV);
 
   MultiHist<TH1F> spectra_Ge ("spectra_Ge", "spectra_Ge;[keV]", 2000, 0, 2000);
   MultiHist<TH1F> spectra_BGO ("spectra_BGO", "spectra_BGO;[keV]", 2000, 0, 2000);
@@ -127,164 +135,179 @@ void Na22_reader(int nb_files = -1, long max_cursor = 1.e+10)
   MultiHist<TH1F> gated_caloParis ("gated_caloParis", "gated_caloParis;[keV]", 500, 0, 2000);
 
   std::mutex incr_mutex;
+  CoincBuilder::keepSingles();
 
-  MTRootReader reader(path, nb_files);
-  reader.read([&](Nuball2Tree & tree, Event & event){
+  // MTRootReader reader(path, nb_files);
+  // reader.read([&](Nuball2Tree & tree, Hit & hit){
+  MTFasterReader reader(path, nb_files);
+  reader.setTimeshifts(ts);
+  reader.readAligned([&](Alignator & tree, Hit & hit){
+    Event event;
+    event.read.setOptions(hit.read.getOptions());
+    CoincBuilder coinc(&event, time_window);
+  
+    TRandom* random = new TRandom(time(0));
     
-  CloversV2 clovers;
-  SimpleParis paris(&calibPhoswitches);
-  std::vector<double> rej_Ge;
-  std::vector<double> BGO_nrjs;
+    CloversV2 clovers;
+    SimpleParis paris(&calibPhoswitches);
+    std::vector<double> rej_Ge;
+    std::vector<double> BGO_nrjs;
 
-  int nb_gate_temp = 0;
-  int nb_gated_temp = 0;
-  int nb_missed_temp = 0;
+    int nb_gate_temp = 0;
+    int nb_gated_temp = 0;
+    int nb_missed_temp = 0;
 
-  for (int evt_i = 0; evt_i<tree->GetEntries(); ++evt_i)
-  {
-    tree->GetEntry(evt_i);
-
-    clovers.clear();
-    paris.clear();
-    rej_Ge.clear();
-    BGO_nrjs.clear();
-
-    if (evt_i>max_cursor) break;
-    for (int hit_i = 0; hit_i<event.mult; ++hit_i)
+    while (tree.Read())
     {
-      auto const & label = event.label(hit_i);
-      auto & nrj = event.nrj(hit_i);
-
-      if (nrj < 10_keV) continue;
-
-      if (CloversV2::isBGO(label)) 
+      if (tree.cursor() > max_cursor) break;
+      if (coinc.build(hit))
       {
-        nrj *= 1.11;
-        if (CloversV2::index(label) == 2) nrj = 1.352 * nrj;
-        BGO_nrjs.push_back(nrj);
-      }
-      else if (Paris::is[label])
-      {
-      }
-
-      clovers.fill(event, hit_i);
-      paris.fill(event, hit_i);
-
-      if (label == timing_ref_label) for (int hit_j = 0; hit_j<event.mult; ++hit_j)
-      {
-        if (hit_j == hit_i) continue;
-        timing.Fill(event.labels[hit_j], event.times[hit_j] - event.times[hit_i]);
-      }
-    }
-
-    clovers.analyze();
-    paris.analyze();
-
-    for (auto const & id : clovers.BGO_id) spectra_BGO.Fill(clovers[id].nrjBGO);
-    for (auto const & phos : paris.phoswitches) spectra_phos.Fill(phos->nrj);
-
-    auto const & MMult = clovers.all.size()+paris.phoswitch_mult(); // Modules multiplicity
-    auto const & CMult = clovers.clean.size(); // Clean Ge multiplicity
-
-    for (size_t hit_i = 0; hit_i<CMult; ++hit_i) 
-    {
-      auto const & clover_i = *(clovers.all[hit_i]);
-      auto const & nrj_i = clover_i.nrj;
-      auto const & index_i = clover_i.index();
-      spectra_Ge.Fill(nrj_i);
-      if (gate(gate_low, nrj_i, gate_high))
-      {
-        double calo = 0;
-        double caloGe = 0;
-        double caloBGO = 0;
-        double caloParis = 0;
-
-        ++nb_gate_temp;
-
-        gate_spectra.Fill(nrj_i);
-
-        if (clovers.all.size() == 1 && paris.phoswitch_mult() == 0)
+        clovers.clear();
+        paris.clear();
+        rej_Ge.clear();
+        BGO_nrjs.clear();
+        for (int hit_i = 0; hit_i<event.mult; ++hit_i)
         {
-          ++nb_missed_temp;
+          auto const & label = event.label(hit_i);
+          auto & nrj = event.nrj(hit_i);
+          calib.calibrate(hit);
 
-          continue;
-        }
+          if (nrj < 10_keV) continue;
 
-        // For Clovers :
-        for (size_t hit_j = 0; hit_j<clovers.all.size(); ++hit_j)
-        {
-          auto const & clover_j = *(clovers.all[hit_j]);
-
-          // Ge :
-          if (clover_j.nb>0 && clover_j.index() != index_i && (abs(clover_j.time-clover_i.time)<time_window)) 
+          if (CloversV2::isBGO(label)) 
           {
-            calo+=smearGe(clover_j.nrj, random);
-            caloGe+=smearGe(clover_j.nrj, random);
-            gated_Ge.Fill(clover_j.nrj);
-            if (clover_j.isCleanGe())
-            {
-              gated_clean_Ge.Fill(clover_j.nrj);
-              if (gate(coinc_low, clover_j.nrj, coinc_high)) ++nb_gated_temp;
-            }
-            else gated_rej_Ge.Fill(clover_j.nrj);
+            nrj *= 1.11;
+            if (CloversV2::index(label) == 2) nrj = 1.352 * nrj;
+            BGO_nrjs.push_back(nrj);
+          }
+          else if (Paris::is[label])
+          {
+            paris_qlong.Fill(event.nrj2(hit_i));
           }
 
-          // for(auto const & nrj : rej_Ge) calo+=smearGe(nrj, random);
+          clovers.fill(event, hit_i);
+          paris.fill(event, hit_i);
 
-          // BGO :
-          if (clover_j.nbBGO>0)
+          if (label == timing_ref_label) for (int hit_j = 0; hit_j<event.mult; ++hit_j)
           {
-            gated_BGO_vs_index.Fill(clover_j.index(), clover_j.nrjBGO);
-            calo+=clover_j.nrjBGO;
-            caloBGO+=clover_j.nrjBGO;
-            gated_BGO.Fill(clover_j.nrjBGO);
-            gated_addback_BGO.Fill(clover_j.calo);
-            if (clover_j.nb == 0) gated_clean_BGO.Fill(clover_j.nrjBGO);
-            else gated_only_addback_BGO.Fill(clover_j.calo);
+            if (hit_j == hit_i) continue;
+            timing.Fill(event.labels[hit_j], event.times[hit_j] - event.times[hit_i]);
           }
         }
 
-        for (auto const & nrj : BGO_nrjs) gated_BGO_test.Fill(nrj);
+        clovers.analyze();
+        paris.analyze();
 
-        // Paris phoswitches :
-        for (auto const & phos : paris.phoswitches) 
+        for (auto const & id : clovers.BGO_id) spectra_BGO.Fill(clovers[id].nrjBGO);
+        for (auto const & phos : paris.phoswitches) spectra_phos.Fill(phos->nrj);
+
+        auto const & MMult = clovers.all.size()+paris.phoswitch_mult(); // Modules multiplicity
+        auto const & CMult = clovers.clean.size(); // Clean Ge multiplicity
+
+        for (auto const & phos : paris.phoswitches)
         {
           paris_bidim.Fill(phos->qlong, phos->qshort);
           paris_bidim_rotated.Fill(phos->qlong, phos->nrj);
-          gated_raw_phos.Fill(phos->index(), phos->qlong);
-          gated_phos.Fill(phos->nrj);
-
-          calo+=smearParis(phos->nrj, random);
-          caloParis+=smearParis(phos->nrj, random);
-
-          if (phos->isLaBr3()) 
-          {
-            gated_LaBr3.Fill(phos->qshort);
-            if (!phos->rejected) gated_clean_LaBr3.Fill(phos->qshort);
-          }
-
-          if (!phos->rejected) gated_clean_phos.Fill(phos->nrj);
-          else gated_rej_phos.Fill(phos->nrj);
         }
 
-        // Paris modules :
-        for (auto const & module : paris.modules)
+        for (size_t hit_i = 0; hit_i<CMult; ++hit_i) 
         {
-          gated_paris_module.Fill(module->nrj);
-          if (module->nb()>1) gated_paris_module_addbacked.Fill(module->nrj);
-        } 
+          auto const & clover_i = *(clovers.all[hit_i]);
+          auto const & nrj_i = clover_i.nrj;
+          auto const & index_i = clover_i.index();
+          spectra_Ge.Fill(nrj_i);
+          if (gate(gate_low, nrj_i, gate_high))
+          {
+            double calo = 0;
+            double caloGe = 0;
+            double caloBGO = 0;
+            double caloParis = 0;
 
-        // Calorimetry :
-        auto const & calo_Clover = caloBGO+caloGe;
-        if (calo>0) gated_calo_VS_MMult.Fill(MMult-1, calo);
-        if (calo>0) gated_calo.Fill(calo);
-        if (caloGe>0) gated_caloGe.Fill(caloGe);
-        if (caloBGO>0) gated_caloBGO.Fill(caloBGO);
-        if (calo_Clover>0) gated_caloClover.Fill(calo_Clover);
-        if (caloParis>0) gated_caloParis.Fill(caloParis);
+            ++nb_gate_temp;
+
+            gate_spectra.Fill(nrj_i);
+
+            if (clovers.all.size() == 1 && paris.phoswitch_mult() == 0)
+            {
+              ++nb_missed_temp;
+
+              continue;
+            }
+
+            // For Clovers :
+            for (size_t hit_j = 0; hit_j<clovers.all.size(); ++hit_j)
+            {
+              auto const & clover_j = *(clovers.all[hit_j]);
+
+              // Ge :
+              if (clover_j.nb>0 && clover_j.index() != index_i) 
+              {
+                calo+=smearGe(clover_j.nrj, random);
+                caloGe+=smearGe(clover_j.nrj, random);
+                gated_Ge.Fill(clover_j.nrj);
+                if (clover_j.isCleanGe())
+                {
+                  gated_clean_Ge.Fill(clover_j.nrj);
+                  if (gate(coinc_low, clover_j.nrj, coinc_high)) ++nb_gated_temp;
+                }
+                else gated_rej_Ge.Fill(clover_j.nrj);
+              }
+
+              // for(auto const & nrj : rej_Ge) calo+=smearGe(nrj, random);
+
+              // BGO :
+              if (clover_j.nbBGO>0)
+              {
+                gated_BGO_vs_index.Fill(clover_j.index(), clover_j.nrjBGO);
+                calo+=clover_j.nrjBGO;
+                caloBGO+=clover_j.nrjBGO;
+                gated_BGO.Fill(clover_j.nrjBGO);
+                gated_addback_BGO.Fill(clover_j.calo);
+                if (clover_j.nb == 0) gated_clean_BGO.Fill(clover_j.nrjBGO);
+                else gated_only_addback_BGO.Fill(clover_j.calo);
+              }
+            }
+
+            for (auto const & nrj : BGO_nrjs) gated_BGO_test.Fill(nrj);
+
+            // Paris phoswitches :
+            for (auto const & phos : paris.phoswitches)
+            {
+              gated_raw_phos.Fill(phos->index(), phos->qlong);
+              gated_phos.Fill(phos->nrj);
+
+              calo+=smearParis(phos->nrj, random);
+              caloParis+=smearParis(phos->nrj, random);
+
+              if (phos->isLaBr3()) 
+              {
+                gated_LaBr3.Fill(phos->qshort);
+                if (!phos->rejected) gated_clean_LaBr3.Fill(phos->qshort);
+              }
+
+              if (!phos->rejected) gated_clean_phos.Fill(phos->nrj);
+              else gated_rej_phos.Fill(phos->nrj);
+            }
+
+            // Paris modules :
+            for (auto const & module : paris.modules)
+            {
+              gated_paris_module.Fill(module->nrj);
+              if (module->nb()>1) gated_paris_module_addbacked.Fill(module->nrj);
+            } 
+
+            // Calorimetry :
+            auto const & calo_Clover = caloBGO+caloGe;
+            if (calo>0) gated_calo_VS_MMult.Fill(MMult-1, calo);
+            if (calo>0) gated_calo.Fill(calo);
+            if (caloGe>0) gated_caloGe.Fill(caloGe);
+            if (caloBGO>0) gated_caloBGO.Fill(caloBGO);
+            if (calo_Clover>0) gated_caloClover.Fill(calo_Clover);
+            if (caloParis>0) gated_caloParis.Fill(caloParis);
+          }
+        }
       }
     }
-  }
     incr_mutex.lock();
     nb_gate += nb_gate_temp;
     nb_gated += nb_gated_temp;
@@ -344,6 +367,7 @@ void Na22_reader(int nb_files = -1, long max_cursor = 1.e+10)
     gated_BGO_vs_index.Write();
     paris_bidim.Write();
     paris_bidim_rotated.Write();
+    paris_qlong.Write();
 
     spectra_Ge.Write();
     spectra_BGO.Write();
@@ -391,5 +415,5 @@ int main(int argc, char** argv)
   return 1;
 }
 
-// g++ -g -o Na22_reader Na22_reader.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
-// g++ -O2 -o Na22_reader Na22_reader.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17
+// g++ -g -o Na22_reader Na22_reader.C ` root-config --cflags` `root-config --glibs` $(pkg-config --cflags libfasterac) $(pkg-config --libs libfasterac) -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
+// g++ -O2 -o Na22_reader Na22_reader.C ` root-config --cflags` `root-config --glibs` $(pkg-config --cflags libfasterac) $(pkg-config --libs libfasterac) -lSpectrum -std=c++17
