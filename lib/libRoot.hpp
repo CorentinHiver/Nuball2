@@ -1795,6 +1795,19 @@ std::vector<std::string> pad_get_names_of(TPad * pad = nullptr)
   return ret;
 }
 
+void pad_remove_stats(TPad * pad = nullptr)
+{
+  if (!pad) 
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histo0 = get_histos(pad)[0];
+  histo0->SetStats(0);
+  pad->Update();
+  gPad->Update();
+}
+
 bool has_legend(TPad* pad = nullptr)
 {
   if (!pad)
