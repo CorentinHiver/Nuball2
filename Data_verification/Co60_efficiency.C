@@ -121,7 +121,8 @@ void Co60_efficiency()
   MultiHist<TH1F> gated_addback_BGO ("gated_addback_BGO", "gated_addback_BGO;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_only_addback_BGO ("gated_only_addback_BGO", "gated_only_addback_BGO;[keV]", 500, 0, 2000);
 
-  MultiHist<TH2F> gated_raw_phos ("gated_raw_phos", "gated_raw_phos;[keV]", 1000, 0, 1000, 500, 0, 2000);
+  MultiHist<TH2F> gated_Phoswitch_VS_label ("gated_Phoswitch_VS_label", "gated_Phoswitch_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
+  MultiHist<TH2F> gated_LaBr_VS_label ("gated_LaBr_VS_label", "gated_LaBr_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
   MultiHist<TH1F> gated_NaI ("gated_NaI", "NaI;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_phos_mix ("gated_phos_mix", "LaBr_{3}+phoswitch;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_phos ("gated_phos", "gated_phos;[keV]", 500, 0, 2000);
@@ -307,7 +308,8 @@ void Co60_efficiency()
           // Paris phoswitches :
           for (auto const & phos : paris.phoswitches) 
           {
-            gated_raw_phos.Fill(phos->index(), phos->qlong);
+            if (phos->isLaBr3()) gated_LaBr_VS_label.Fill(phos->label, phos->qshort);
+            else gated_Phoswitch_VS_label.Fill(phos->label, phos->qlong);
             gated_phos.Fill(phos->nrj);
 
             calo_raw+=phos->nrj;
@@ -420,7 +422,8 @@ void Co60_efficiency()
     gated_addback_BGO.Write();
     gated_only_addback_BGO.Write();
 
-    gated_raw_phos.Write();
+    gated_Phoswitch_VS_label.Write();
+    gated_LaBr_VS_label.Write();
     gated_NaI.Write();
     gated_phos_mix.Write();
     gated_phos.Write();

@@ -233,11 +233,16 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F dp_calo (new TH2F(("prompt_VS_DC_"+thread_i_str).c_str(), "delayed calorimetry VS prompt calorimetry;Delayed calorimetry[keV];Prompt calorimetry[keV]", 1000,0,10000, 1000,0,10000));
       unique_TH2F d_VS_PC (new TH2F(("d_VS_PC_"+thread_i_str).c_str(), "delayed Ge VS prompt calorimetry;Prompt calorimetry[keV];E[keV]", 1000,0,10000, nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F d_VS_DC (new TH2F(("d_VS_DC_"+thread_i_str).c_str(), "delayed Ge VS delayed calorimetry;Delayed calorimetry[keV];E[keV]", 1000,0,10000, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH3F d_VS_p_VS_PC (new TH3F(("d_VS_p_VS_PC"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity VS prompt calorimetry;Prompt calorimetry[keV];Prompt multiplicity;delayed Ge[keV]", 50,0,5000, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim));
+      unique_TH3F d_VS_p_VS_PC (new TH3F(("d_VS_p_VS_PC"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity VS prompt calorimetry;Prompt calorimetry[keV];Prompt Ge [keV];Delayed Ge[keV]", 50,0,5000, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim));
       unique_TH3F d_VS_PM_VS_PC (new TH3F(("d_VS_PM_VS_PC"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity VS prompt calorimetry;Prompt calorimetry[keV];Prompt multiplicity;delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH3F d_VS_DM_VS_DC (new TH3F(("d_VS_DM_VS_DC"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS delayed calorimetry;Delayed multiplicity;Delayed calorimetry[keV];delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH3F d_VS_DM_VS_PM (new TH3F(("d_VS_DM_VS_PM"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS prompt multiplicity;Delayed multiplicity;Prompt multiplicity;delayed Ge[keV]", 20,0,20, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH3F d_VS_DC_VS_PC (new TH3F(("d_VS_DC_VS_PC"+thread_i_str).c_str(), "delayed Ge VS delayed calorimetry VS prompt calorimetry;Delayed calorimetry[keV];Prompt calorimetry[keV];delayed Ge[keV]", 100,0,10000, 100,0,10000, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_DM_VS_DC (new TH3F(("d_VS_DM_VS_DC"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS delayed calorimetry;Delayed calorimetry[keV];Delayed multiplicity;delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_DM_VS_PM (new TH3F(("d_VS_DM_VS_PM"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS prompt multiplicity;Prompt multiplicity;Delayed multiplicity;delayed Ge[keV]", 20,0,20, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_DC_VS_PC (new TH3F(("d_VS_DC_VS_PC"+thread_i_str).c_str(), "delayed Ge VS delayed calorimetry VS prompt calorimetry;Prompt calorimetry[keV];Delayed calorimetry[keV];delayed Ge[keV]", 100,0,10000, 100,0,10000, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_p_VS_PC_particleveto (new TH3F(("d_VS_p_VS_PC_particleveto"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity VS prompt calorimetry particle veto;Prompt calorimetry[keV];Prompt Ge [keV];Delayed Ge[keV]", 50,0,5000, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim));
+      unique_TH3F d_VS_PM_VS_PC_particleveto (new TH3F(("d_VS_PM_VS_PC_particleveto"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity VS prompt calorimetry particle veto;Prompt calorimetry[keV];Prompt multiplicity;delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_DM_VS_DC_promptveto (new TH3F(("d_VS_DM_VS_DC_promptveto"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS delayed calorimetry particle veto;Delayed calorimetry[keV];Delayed multiplicity;delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_DM_VS_PM_particleveto (new TH3F(("d_VS_DM_VS_PM_particleveto"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS prompt multiplicity particle veto;Prompt multiplicity;Delayed multiplicity;delayed Ge[keV]", 20,0,20, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_DC_VS_PC_particleveto (new TH3F(("d_VS_DC_VS_PC_particleveto"+thread_i_str).c_str(), "delayed Ge VS delayed calorimetry VS prompt calorimetry particle veto;Prompt calorimetry[keV];Delayed calorimetry[keV];delayed Ge[keV]", 100,0,10000, 100,0,10000, nb_bins_Ge_singles,0,max_bin_Ge_singles));
 
       // Condition Prompt Calorimetry < 5 MeV (code PC5):
       unique_TH1F p_PC5 (new TH1F(("p_PC5_"+thread_i_str).c_str(), "prompt Ge PC5", nb_bins_Ge_singles,0,max_bin_Ge_singles));
@@ -589,7 +594,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           if (Paris::is[label])
           {
             // if (500 < label && label < 600) continue; // Reject paris front inner ring
-            E_dT_phoswitch->Fill(time, nrjcal);
+            E_dT_phoswitch->Fill(time, calibPhoswitches.calibrate(label, nrj, nrj2));
             short_over_long_VS_time->Fill(time, nrj/nrj2);
             if (gate(-5_ns, time, 5_ns))
             {
@@ -867,10 +872,17 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
 
           d_VS_DC_VS_PC -> Fill(PC, DC, clover_i.nrj);
-          d_VS_p_VS_PC -> Fill(PC, p, clover_i.nrj);
           d_VS_PM_VS_PC -> Fill(PC, PM, clover_i.nrj);
           d_VS_DM_VS_DC -> Fill(DC, DM, clover_i.nrj);
           d_VS_DM_VS_PM -> Fill(PM, DM, clover_i.nrj);
+
+          if (prompt_veto)  d_VS_DM_VS_DC_promptveto -> Fill(DC, DM, clover_i.nrj);
+          if (!dssd_trigger)
+          {
+            d_VS_DC_VS_PC_particleveto -> Fill(PC, DC, clover_i.nrj);
+            d_VS_PM_VS_PC_particleveto -> Fill(PC, PM, clover_i.nrj);
+            d_VS_DM_VS_PM_particleveto -> Fill(PM, DM, clover_i.nrj);
+          }
 
           if (DM > 1) d_VS_DC -> Fill(DC, clover_i.nrj);
 
@@ -1126,7 +1138,12 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             dp->Fill(clover_j.nrj, clover_i.nrj);
             dpt->Fill(clover_j.nrj, clover_i.nrj, clover_i.time);
             if (dssd_trigger) dp_p->Fill(clover_j.nrj, clover_i.nrj);
-            else dp_particle_veto->Fill(clover_j.nrj, clover_i.nrj);
+            else 
+            {
+              dp_particle_veto->Fill(clover_j.nrj, clover_i.nrj);
+              d_VS_p_VS_PC_particleveto -> Fill(PC, clover_j.nrj, clover_i.nrj);
+            }
+            d_VS_p_VS_PC -> Fill(PC, clover_j.nrj, clover_i.nrj);
             // if (PM > 0 && PC < 5_MeV) dp_PC5->Fill(clover_j.nrj, clover_i.nrj);
             // if (PM > 0 && PC < 3_MeV) dp_PC3->Fill(clover_j.nrj, clover_i.nrj);
             // if (PM > 0 && PC < 2_MeV) dp_PC2->Fill(clover_j.nrj, clover_i.nrj);
@@ -1609,6 +1626,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_VS_DM_VS_DC->Write("d_VS_DM_VS_DC", TObject::kOverwrite);
         d_VS_DM_VS_PM->Write("d_VS_DM_VS_PM", TObject::kOverwrite);
         d_VS_DC_VS_PC->Write("d_VS_DC_VS_PC", TObject::kOverwrite);
+        d_VS_p_VS_PC_particleveto->Write("d_VS_p_VS_PC_particleveto", TObject::kOverwrite);
+        d_VS_PM_VS_PC_particleveto->Write("d_VS_PM_VS_PC_particleveto", TObject::kOverwrite);
+        d_VS_DM_VS_DC_promptveto->Write("d_VS_DM_VS_DC_promptveto", TObject::kOverwrite);
+        d_VS_DM_VS_PM_particleveto->Write("d_VS_DM_VS_PM_particleveto", TObject::kOverwrite);
+        d_VS_DC_VS_PC_particleveto->Write("d_VS_DC_VS_PC_particleveto", TObject::kOverwrite);
 
         p_calo_clover->Write("p_calo_clover", TObject::kOverwrite);
         d_calo_clover->Write("d_calo_clover", TObject::kOverwrite);
@@ -1616,6 +1638,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_calo_phoswitch->Write("d_calo_phoswitch", TObject::kOverwrite);
         p_calo_clover_VS_p_calo_phoswitch->Write("p_calo_clover_VS_p_calo_phoswitch", TObject::kOverwrite);
         d_calo_clover_VS_d_calo_phoswitch->Write("d_calo_clover_VS_d_calo_phoswitch", TObject::kOverwrite);
+
 
         print("write Calorimetry gated spectra");
         p_PC5->Write("p_PC5", TObject::kOverwrite);
