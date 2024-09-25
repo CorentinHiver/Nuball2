@@ -122,6 +122,7 @@ void Co60_efficiency()
   MultiHist<TH1F> gated_only_addback_BGO ("gated_only_addback_BGO", "gated_only_addback_BGO;[keV]", 500, 0, 2000);
 
   MultiHist<TH2F> gated_raw_phos ("gated_raw_phos", "gated_raw_phos;[keV]", 1000, 0, 1000, 500, 0, 2000);
+  MultiHist<TH1F> gated_NaI ("gated_NaI", "NaI;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_phos_mix ("gated_phos_mix", "LaBr_{3}+phoswitch;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_phos ("gated_phos", "gated_phos;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_clean_phos ("gated_clean_phos", "gated_clean_phos;[keV]", 500, 0, 2000);
@@ -319,7 +320,11 @@ void Co60_efficiency()
               if (!phos->rejected) gated_clean_LaBr3.Fill(phos->qshort);
               gated_phos_mix.Fill(phos->qshort);
             }
-            else gated_phos_mix.Fill(phos->nrj);
+            else 
+            {
+              gated_NaI.Fill(phos->nrj);
+              gated_phos_mix.Fill(phos->nrj);
+            }
 
             if (!phos->rejected) gated_clean_phos.Fill(phos->nrj);
             else gated_rej_phos.Fill(phos->nrj);
@@ -377,6 +382,7 @@ void Co60_efficiency()
   eff(gated_clean_BGO, nb_gate, 900, 1600);
   eff(gated_addback_BGO, nb_gate, 900, 1600);
   eff(gated_only_addback_BGO, nb_gate, 900, 1600);
+  eff(gated_NaI, nb_gate, 900, 1400);
   eff(gated_phos_mix, nb_gate, 900, 1400);
   eff(gated_phos, nb_gate, 900, 1400);
   eff(gated_clean_phos, nb_gate, 900, 1400);
@@ -415,6 +421,7 @@ void Co60_efficiency()
     gated_only_addback_BGO.Write();
 
     gated_raw_phos.Write();
+    gated_NaI.Write();
     gated_phos_mix.Write();
     gated_phos.Write();
     gated_clean_phos.Write();

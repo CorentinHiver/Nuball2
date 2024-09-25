@@ -170,6 +170,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F dd_mega_prompt_veto (new TH2F(("dd_mega_veto_"+thread_i_str).c_str(), "gamma-gamma delayed prompt mega veto;E1[keV];E2[keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dp (new TH2F(("dp_"+thread_i_str).c_str(), "delayed VS prompt;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH2F dp_particle_veto (new TH2F(("dp_particle_veto_"+thread_i_str).c_str(), "delayed VS prompt  particle veto;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
+      unique_TH3F ddt (new TH3F(("ddt_"+thread_i_str).c_str(), "time_{delayed} VS delayed - delayed ;E_{prompt} [keV];E_{delayed} [keV];t_{delayed} [ns]", nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, 7,40_ns,180_ns));
+      unique_TH3F ddt_veto (new TH3F(("ddt_veto"+thread_i_str).c_str(), "time_{delayed} VS delayed - delayed prompt veto;E_{prompt} [keV];E_{delayed} [keV];t_{delayed} [ns]", nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, 7,40_ns,180_ns));
       unique_TH3F dpt (new TH3F(("dpt_"+thread_i_str).c_str(), "time_{delayed} VS delayed VS prompt ;E_{prompt} [keV];E_{delayed} [keV];t_{delayed} [ns]", nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, 7,40_ns,180_ns));
       unique_TH2F E_dT (new TH2F(("E_dT_"+thread_i_str).c_str(), "E_dT clean", 600,-100_ns,200_ns, 20000,0,20000));
       unique_TH2F E_dT_phoswitch (new TH2F(("E_dT_phoswitch_"+thread_i_str).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, 2000,0,10000));
@@ -910,11 +912,21 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             if (std::abs(clover_i.time-clover_j.time)>bidimTimeWindow) continue;
             dd->Fill(clover_i.nrj, clover_j.nrj);
             dd->Fill(clover_j.nrj, clover_i.nrj);
+
+            ddt->Fill(clover_i.nrj, clover_j.nrj, clover_j.time);
+            ddt->Fill(clover_j.nrj, clover_i.nrj, clover_j.time);
+
+            if (prompt_veto)
+            {
+              ddt_veto->Fill(clover_i.nrj, clover_j.nrj, clover_j.time);
+              ddt_veto->Fill(clover_j.nrj, clover_i.nrj, clover_j.time);
+            }
             
             if (!dssd_trigger)
             {
               dd_particle_veto->Fill(clover_i.nrj, clover_j.nrj);
               dd_particle_veto->Fill(clover_j.nrj, clover_i.nrj);
+
 
               if (PM == 0)
               {
@@ -1553,6 +1565,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         E_dT_phoswitch->Write("E_dT_phoswitch", TObject::kOverwrite);
         p_VS_dT_LaBr3->Write("p_VS_dT_LaBr3", TObject::kOverwrite);
         dp->Write("dp", TObject::kOverwrite);
+        ddt->Write("ddt", TObject::kOverwrite);
+        ddt_veto->Write("ddt_veto", TObject::kOverwrite);
+        ddt->Write("ddt", TObject::kOverwrite);
+        dpt->Write("dpt", TObject::kOverwrite);
         dpt->Write("dpt", TObject::kOverwrite);
         dp_particle_veto->Write("dp_particle_veto", TObject::kOverwrite);
         if (make_triple_coinc_ddd) for (size_t gate_index = 0; gate_index<ddd_gates.size(); ++gate_index) 
