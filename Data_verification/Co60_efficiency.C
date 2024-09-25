@@ -27,6 +27,74 @@ float gate_high = 1336_keV;
 float coinc_low = 1171_keV;
 float coinc_high = 1176_keV;
 
+std::map<Label, double> calib_NaI{
+{301,1.516666667},
+{302,0.9953125},
+{303,1.22972973},
+{304,1.268924303},
+{305,1.378787879},
+{306,1.390829694},
+{307,1.072390572},
+{308,1.349576271},
+{309,1.396929825},
+{310,1.361111111},
+{311,0.879834254},
+{312,1.428251121},
+{313,1.4030837},
+{314,1.447727273},
+{315,1.051155116},
+{316,1.268924303},
+{401,1.175276753},
+{402,1.17962963},
+{403,1.113636364},
+{404,1.162408759},
+{405,1.225},
+{406,0.983024691},
+{407,1.17962963},
+{408,1.239299611},
+{409,1.18401487},
+{410,1.284274194},
+{411,1.109756098},
+{412,1.201886792},
+{501,1.721621622},
+{502,1.188432836},
+{503,1.129432624},
+{504,1.274},
+{505,1.201886792},
+{506,1.158181818},
+{507,1.53125},
+{508,1.170955882},
+{601,1.192883895},
+{602,1.188432836},
+{603,1.047697368},
+{604,1.18401487},
+{605,1.343881857},
+{606,1.098275862},
+{607,1.327083333},
+{608,1.372844828},
+{609,1.027419355},
+{610,1.538647343},
+{611,1.141577061},
+{612,1.234496124},
+{613,1.349576271},
+{614,1.553658537},
+{615,1.175276753},
+{616,0.971036585},
+{701,0.936764706},
+{702,1.011111111},
+{703,1.18401487},
+{704,0.98},
+{705,1.125441696},
+{706,0.907407407},
+{707,1.502358491},
+{708,1.047697368},
+{709,0.786419753},
+{710,1.109756098},
+{711,1.004731861},
+{712,1.109756098},
+
+};
+
 template <class THist>
 void eff(MultiHist<THist> & histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400
 //, int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400
@@ -76,7 +144,8 @@ void Co60_efficiency()
 
   Timer timer;
 
-  PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
+  // PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
+  PhoswitchCalib calibPhoswitches("../136/NaI_136_2024_Co.angles");
 
   std::atomic<int> nb_gate_global(0);
   std::atomic<int> nb_gated_global(0);
@@ -194,6 +263,9 @@ void Co60_efficiency()
         }
         else if (Paris::is[label])
         {
+          if (Paris::pid_LaBr3(nrj, nrj2)) nrj *= 
+          else if (Paris::pid_good_phoswitch(nrj, nrj2)) nrj2*=calib_NaI[label];
+          
         }
         else if (CloversV2::isGe(label))
         {
@@ -240,7 +312,10 @@ void Co60_efficiency()
       paris.analyze();
 
       for (auto const & id : clovers.BGO_id) spectra_BGO.Fill(clovers[id].nrjBGO);
-      for (auto const & phos : paris.phoswitches) spectra_phos.Fill(phos->nrj);
+      for (auto const & phos : paris.phoswitches) 
+      {
+        if ()
+        spectra_phos.Fill(phos->nrj);
 
       auto const & MMult = clovers.all.size()+paris.phoswitch_mult(); // Modules multiplicity
       auto const & CMult = clovers.clean.size(); // Clean Ge multiplicity

@@ -229,6 +229,14 @@ TH2F* compressBidim(TH2F* histo, std::string axis = "x")
   return ret;
 }
 
+/**
+ * @brief Meant for Paris matrix rotation method
+ * 
+ * @param bidim 
+ * @param angle 
+ * @param coeff 
+ * @return TH2F* 
+ */
 TH2F* rotateAndCalibrate(TH2F* bidim, double angle, double const & coeff)
 {
   auto const & name = bidim->GetName();
@@ -273,6 +281,41 @@ TH2F* rotateAndCalibrate(TH2F* bidim, double angle, double const & coeff)
     }
   }
   return rotated_bidim;
+}
+
+/**
+ * @brief Get the last peak position object
+ * 
+ * @param threshold procentage over total
+ * @param resolution in X value (not bin)
+ * @return std::map<int, double> 
+ */
+std::map<int, double> get_last_peak_position(TH2F* histo, double threshold = 0.05, double resolution = 1)
+{
+  std::map<int, double> ret;
+  auto xaxis = histo->GetXaxis();
+  for (int xbin = 0; xbin<xaxis->GetNbins(); ++xbin)
+  {
+    auto proj = histo->ProjectionY("temp_proj", xbin, xbin);
+    auto proj_axis = proj->GetXaxis();
+    if (!proj) continue;
+    auto const & tot_integral = proj->Integral();
+    if (tot_integral < 5) continue;
+    int integral = 0;
+    int biny = proj->GetNbinsX();
+    for (;biny>0; --biny)
+    {
+      integral+=proj->GetBinContent(biny);
+      if (double(integral)/double(tot_integral) > threshold) break;
+    }
+    auto const & yvalue = proj->GetBinLowEdge(biny);
+    proj_axis->SetRangeUser(yvalue-3*resolution, yvalue+3*resolution);
+    auto mean = proj->GetMean();
+    proj_axis->SetRangeUser(mean-2*resolution, mean+2*resolution);
+    auto const & value = proj->GetBinLowEdge(proj->GetMaximumBin());
+    ret[xbin-1] = value;
+  }
+  return ret;
 }
 
 /**
