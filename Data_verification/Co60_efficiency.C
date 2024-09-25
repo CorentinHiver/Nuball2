@@ -18,6 +18,8 @@
 
 Label timing_ref_label = 252;
 Time time_window = 50_ns;
+int nb_threads = 10;
+int nb_files = -1;
 
 // All the gates are inclusive :
 float gate_low = 1331_keV;
@@ -66,7 +68,7 @@ void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit =
         "realive pe eff : ", 100.*pe_integral/histo->Integral(), "%", histo->GetName());
 }
 
-void Co60_efficiency(long max_cursor = -1)
+void Co60_efficiency()
 {
   SimpleCluster::setDistanceMax(1.1);
 
@@ -74,11 +76,14 @@ void Co60_efficiency(long max_cursor = -1)
 
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
 
-  int nb_gate = 0;
-  int nb_gated = 0;
-  int nb_missed = 0;
+  std::atomic<int> nb_gate_global(0);
+  std::atomic<int> nb_gated_global(0);
+  std::atomic<int> nb_missed_global(0);
 
   TRandom* random = new TRandom(time(0));
+
+  MTObject::Initialise(nb_threads);
+  if (nb_files>0) MTObject::adjustThreadsNumber(nb_threads);
 
 
   // TChain* tree = new TChain("Nuball2");
@@ -152,22 +157,24 @@ void Co60_efficiency(long max_cursor = -1)
   std::vector<double> Ge_nrj;
   SimpleParis paris(&calibPhoswitches);
   Event event;
-  int global_evt = -1;
+  std::atomic<int> global_evt = -1;
   // for (auto const & file : files)
-  MTRootReader reader(path);
+  MTRootReader reader(path, nb_files);
   reader.read([&](Nuball2Tree & tree, Event & event)
   {
     // Nuball2Tree tree(file, event);
-    for (int evt_i = 0; evt_i<tree->GetEntries(); ++evt_i)
+    int nb_gate = 0;
+    int nb_gated = 0; 
+    int nb_missed = 0;  
+    int evt_i = 0; 
+    for (;evt_i<tree->GetEntries(); ++evt_i)
     {
       tree->GetEntry(evt_i);
-      ++global_evt;
 
       clovers.clear();
       paris.clear();
       BGO_nrjs.clear();
 
-      if (max_cursor>0 && global_evt>max_cursor) break;
       for (int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
         auto const & label = event.label(hit_i);
@@ -334,13 +341,22 @@ void Co60_efficiency(long max_cursor = -1)
         }
       }
     }
-  
+    global_evt+=evt_i;
+    nb_gate_global += nb_gate;
+    nb_gated_global += nb_gated;
+    nb_missed_global += nb_missed;
   }
   );
+
+  int nb_gate = nb_gate_global.load();
+  int nb_gated = nb_gated_global.load();
+  int nb_missed = nb_missed_global.load();
+  int nb_evts = global_evt.load();
+
   if (nb_gate < 1) print("no gate found !!");
   else print(nb_gate, "gate found, along with", nb_gated, "coincident gamma, which means an absolute efficiency of", 100.*double(nb_gated)/double(nb_gate), "%");
   print("Total efficiency :", 100.*(1-double(nb_missed)/double(nb_gate)), "%");
-  print(nicer_double(max_cursor, 0), "evts read");
+  print(nicer_double(nb_evts, 0), "evts read");
 
   // Efficiency
   auto outfile = TFile::Open("60Co_test.root", "recreate");
@@ -421,8 +437,16 @@ void Co60_efficiency(long max_cursor = -1)
 
 int main(int argc, char** argv)
 {
-  if (argc == 1) Co60_efficiency();
-  else if (argc == 2) Co60_efficiency(long(std::stod(argv[1])));
+  if (argc == 2) 
+  {
+    nb_files =std::stoi(argv[1]);
+  }
+  else if (argc == 3)
+  {
+    nb_files =std::stoi(argv[1]);
+    nb_threads = std::stoi(argv[2]);
+  }
+  Co60_efficiency();
   return 1;
 }
 
