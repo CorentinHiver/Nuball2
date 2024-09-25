@@ -23,7 +23,7 @@ int nb_files = -1;
 
 // All the gates are inclusive :
 float gate_low = 1331_keV;
-float gate_high = 1335_keV;
+float gate_high = 1336_keV;
 float coinc_low = 1171_keV;
 float coinc_high = 1176_keV;
 
@@ -122,6 +122,7 @@ void Co60_efficiency()
   MultiHist<TH1F> gated_only_addback_BGO ("gated_only_addback_BGO", "gated_only_addback_BGO;[keV]", 500, 0, 2000);
 
   MultiHist<TH2F> gated_raw_phos ("gated_raw_phos", "gated_raw_phos;[keV]", 1000, 0, 1000, 500, 0, 2000);
+  MultiHist<TH1F> gated_phos_mix ("gated_phos_mix", "LaBr_{3}+phoswitch;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_phos ("gated_phos", "gated_phos;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_clean_phos ("gated_clean_phos", "gated_clean_phos;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_rej_phos ("gated_rej_phos", "gated_rej_phos;[keV]", 500, 0, 2000);
@@ -132,12 +133,13 @@ void Co60_efficiency()
   MultiHist<TH1F> gated_LaBr3 ("gated_LaBr3", "gated_LaBr3;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_clean_LaBr3 ("gated_clean_LaBr3", "gated_clean_LaBr3;[keV]", 500, 0, 2000);
   
-  MultiHist<TH2F> gated_calo_VS_MMult ("gated_calo_VS_MMult", "gated_calo_VS_MMult;[keV]", 10,0,10, 500,0,2000);
-  MultiHist<TH1F> gated_calo ("gated_calo", "gated_calo;[keV]", 500, 0, 2000);
-  MultiHist<TH1F> gated_caloGe ("gated_caloGe", "gated_caloGe;[keV]", 500, 0, 2000);
-  MultiHist<TH1F> gated_caloBGO ("gated_caloBGO", "gated_caloBGO;[keV]", 500, 0, 2000);
-  MultiHist<TH1F> gated_caloClover ("gated_caloClover", "gated_caloClover;[keV]", 500, 0, 2000);
-  MultiHist<TH1F> gated_caloParis ("gated_caloParis", "gated_caloParis;[keV]", 500, 0, 2000);
+  MultiHist<TH2F> gated_calo_VS_MMult ("gated_calo_VS_MMult", "gated_calo_VS_MMult;Module Multiplicity;Calorimetry[keV]", 10,0,10, 500,0,2000);
+  MultiHist<TH1F> gated_calo_raw ("gated_calo_raw", "gated_calo_raw;Calorimetry[keV]", 500, 0, 2000);
+  MultiHist<TH1F> gated_calo ("gated_calo", "gated_calo;Calorimetry[keV]", 500, 0, 2000);
+  MultiHist<TH1F> gated_caloGe ("gated_caloGe", "gated_caloGe;Calorimetry[keV]", 500, 0, 2000);
+  MultiHist<TH1F> gated_caloBGO ("gated_caloBGO", "gated_caloBGO;Calorimetry[keV]", 500, 0, 2000);
+  MultiHist<TH1F> gated_caloClover ("gated_caloClover", "gated_caloClover;Calorimetry[keV]", 500, 0, 2000);
+  MultiHist<TH1F> gated_caloParis ("gated_caloParis", "gated_caloParis;Calorimetry[keV]", 500, 0, 2000);
 
   // Here I want to get the probability for a gamma ray that interacted first 
   // inside of each kind of detector to get fully absorbed.
@@ -154,16 +156,14 @@ void Co60_efficiency()
   MultiHist<TH2F> coinc_LaBr3_E_dT_LaBr ("coinc_LaBr3_E_dT_LaBr", "coinc_LaBr3_E_dT_LaBr;[keV]", 400,-100_ns,100_ns, 1000,0,10000);
 
 
-  CloversV2 clovers;
-  std::vector<double> BGO_nrjs;
-  std::vector<double> Ge_nrj;
-  SimpleParis paris(&calibPhoswitches);
-  Event event;
   std::atomic<int> global_evt = -1;
   // for (auto const & file : files)
   MTRootReader reader(path, nb_files);
   reader.read([&](Nuball2Tree & tree, Event & event)
   {
+    CloversV2 clovers;
+    std::vector<double> BGO_nrjs;
+    SimpleParis paris(&calibPhoswitches);
     // Nuball2Tree tree(file, event);
     int nb_gate = 0;
     int nb_gated = 0; 
@@ -251,6 +251,7 @@ void Co60_efficiency()
         spectra_Ge.Fill(nrj_i);
         if (gate(gate_low, nrj_i, gate_high))
         {
+          double calo_raw = 0;
           double calo = 0;
           double caloGe = 0;
           double caloBGO = 0;
@@ -273,6 +274,7 @@ void Co60_efficiency()
             // Ge :
             if (clover_j.nb>0 && clover_j.index() != index_i && abs(clover_j.time-clover_i.time) < 50_ns) 
             {
+              calo_raw+=clover_j.nrj;
               calo+=smearGe(clover_j.nrj, random);
               caloGe+=smearGe(clover_j.nrj, random);
               for (auto const & crystal_id : clover_j.GeCrystalsId) gated_raw_Ge.Fill(clover_j.GeCrystals[crystal_id]);
@@ -289,6 +291,7 @@ void Co60_efficiency()
             if (clover_j.nbBGO>0)
             {
               gated_BGO_vs_index.Fill(clover_j.index(), clover_j.nrjBGO);
+              calo_raw+=clover_j.nrjBGO;
               calo+=clover_j.nrjBGO;
               caloBGO+=clover_j.nrjBGO;
               gated_BGO.Fill(clover_j.nrjBGO);
@@ -306,6 +309,7 @@ void Co60_efficiency()
             gated_raw_phos.Fill(phos->index(), phos->qlong);
             gated_phos.Fill(phos->nrj);
 
+            calo_raw+=phos->nrj;
             calo+=smearParis(phos->nrj, random);
             caloParis+=smearParis(phos->nrj, random);
 
@@ -313,7 +317,9 @@ void Co60_efficiency()
             {
               gated_LaBr3.Fill(phos->qshort);
               if (!phos->rejected) gated_clean_LaBr3.Fill(phos->qshort);
+              gated_phos_mix.Fill(phos->qshort);
             }
+            else gated_phos_mix.Fill(phos->nrj);
 
             if (!phos->rejected) gated_clean_phos.Fill(phos->nrj);
             else gated_rej_phos.Fill(phos->nrj);
@@ -331,6 +337,7 @@ void Co60_efficiency()
           if (calo>0) 
           {
             gated_calo_VS_MMult.Fill(MMult-1, calo);
+            gated_calo_raw.Fill(calo_raw);
             gated_calo.Fill(calo);
             if (caloParis > 0) gated_calo_include_Paris.Fill(calo);
             if (caloGe > 0) gated_calo_include_Ge.Fill(calo);
@@ -365,22 +372,24 @@ void Co60_efficiency()
   eff(gated_raw_Ge, nb_gate, 1150, 1190);
   eff(gated_Ge, nb_gate, 1150, 1190);
   eff(gated_clean_Ge, nb_gate, 1150, 1190);
-  eff(gated_BGO, nb_gate, 800, 2000);
-  eff(gated_BGO_test, nb_gate, 800, 2000);
-  eff(gated_clean_BGO, nb_gate, 500, 2000);
-  eff(gated_addback_BGO, nb_gate, 500, 2000);
-  eff(gated_only_addback_BGO, nb_gate, 500, 2000);
+  eff(gated_BGO, nb_gate, 900, 1600);
+  eff(gated_BGO_test, nb_gate, 900, 1600);
+  eff(gated_clean_BGO, nb_gate, 900, 1600);
+  eff(gated_addback_BGO, nb_gate, 900, 1600);
+  eff(gated_only_addback_BGO, nb_gate, 900, 1600);
+  eff(gated_phos_mix, nb_gate, 900, 1400);
   eff(gated_phos, nb_gate, 900, 1400);
   eff(gated_clean_phos, nb_gate, 900, 1400);
   eff(gated_paris_module, nb_gate, 900, 1400);
   eff(gated_paris_module_addbacked, nb_gate, 500, 2000);
   eff(gated_LaBr3, nb_gate, 1000, 1300);
   eff(gated_clean_LaBr3, nb_gate, 1000, 1300);
-  eff(gated_calo, nb_gate, 500, 2000);
+  eff(gated_calo_raw, nb_gate, 900, 1600);
+  eff(gated_calo, nb_gate, 900, 1600);
   eff(gated_caloGe, nb_gate, 900, 2000);
-  eff(gated_caloBGO, nb_gate, 500, 2000);
-  eff(gated_caloClover, nb_gate, 500, 2000);
-  eff(gated_caloParis, nb_gate, 500, 2000);
+  eff(gated_caloBGO, nb_gate, 700, 1700);
+  eff(gated_caloClover, nb_gate, 700, 1700);
+  eff(gated_caloParis, nb_gate, 900, 1600);
 
     auto outfile = TFile::Open("60Co_test.root", "recreate");
   outfile->cd();
@@ -406,6 +415,7 @@ void Co60_efficiency()
     gated_only_addback_BGO.Write();
 
     gated_raw_phos.Write();
+    gated_phos_mix.Write();
     gated_phos.Write();
     gated_clean_phos.Write();
     gated_rej_phos.Write();
@@ -417,6 +427,7 @@ void Co60_efficiency()
     gated_clean_LaBr3.Write();
 
     gated_calo_VS_MMult.Write();
+    gated_calo_raw.Write();
     gated_calo.Write();
     gated_caloGe.Write();
     gated_caloBGO.Write();
