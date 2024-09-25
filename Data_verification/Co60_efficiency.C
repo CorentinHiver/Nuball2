@@ -89,7 +89,7 @@ void Co60_efficiency(long max_cursor = -1)
   Event event(tree);
   CloversV2 clovers;
   SimpleParis paris(&calibPhoswitches);
-  std::vector<double> rej_Ge;
+  // std::vector<double> rej_Ge;
 
   auto timing = new TH2F("timing", "timing;[keV]", 1000,0,1000, 500,-250_ns,250_ns);
   auto gated_BGO_vs_index = new TH2F("gated_BGO_vs_index", "gated_BGO_vs_index;[keV]", 24,0,24, 2_k,0_MeV,2_MeV);
@@ -135,6 +135,13 @@ void Co60_efficiency(long max_cursor = -1)
   auto gated_calo_include_Ge = new TH1F("gated_calo_include_Ge", "gated_calo_include_Ge;[keV]", 500, 0, 2000);
   auto gated_calo_include_BGO = new TH1F("gated_calo_include_BGO", "gated_calo_include_BGO;[keV]", 500, 0, 2000);
 
+  // This section is for measure the time resolution
+  auto coinc_LaBr3_E_dT_Ge = new TH2F("coinc_LaBr3_E_dT_Ge", "coinc_LaBr3_E_dT_Ge;[keV]", 400,-100_ns,100_ns, 10000,0,10000);
+  auto coinc_LaBr3_E_dT_BGO = new TH2F("coinc_LaBr3_E_dT_BGO", "coinc_LaBr3_E_dT_BGO;[keV]", 400,-100_ns,100_ns, 1000,0,10000);
+  auto coinc_LaBr3_E_dT_phoswitch = new TH2F("coinc_LaBr3_E_dT_phoswitch", "coinc_LaBr3_E_dT_phoswitch;[keV]", 400,-100_ns,100_ns, 1000,0,10000);
+  auto coinc_LaBr3_E_dT_NaI = new TH2F("coinc_LaBr3_E_dT_NaI", "coinc_LaBr3_E_dT_NaI;[keV]", 400,-100_ns,100_ns, 1000,0,10000);
+  auto coinc_LaBr3_E_dT_LaBr = new TH2F("coinc_LaBr3_E_dT_LaBr", "coinc_LaBr3_E_dT_LaBr;[keV]", 400,-100_ns,100_ns, 1000,0,10000);
+
   std::vector<double> BGO_nrjs;
   std::vector<double> Ge_nrj;
   for (int evt_i = 0; evt_i<tree->GetEntries(); ++evt_i)
@@ -143,7 +150,7 @@ void Co60_efficiency(long max_cursor = -1)
 
     clovers.clear();
     paris.clear();
-    rej_Ge.clear();
+    // rej_Ge.clear();
     BGO_nrjs.clear();
 
     if (max_cursor>0 && evt_i>max_cursor) break;
@@ -166,6 +173,32 @@ void Co60_efficiency(long max_cursor = -1)
       else if (CloversV2::isGe(label))
       {
         if (CloversIsBlacklist[label]) continue;
+      }
+      else if (label == 252)
+      {// Calculate time resolution
+        auto const & labr_time = event.time[hit_i];
+        auto const & labr_nrj = event.nrj[hit_j];
+        
+        // Full energy gate :
+        if (gate(1130, labr_nrj, 1200) || gate(1300, labr_nrj, 1360)) for (int hit_j = 0; hit_j<event.mult; ++hit_j)
+        {
+          auto const & label_j = event.label[hit_j];
+          auto const & nrj_j = event.nrj[hit_j];
+          auto const & nrj2_j = event.nrj_j[hit_j];
+          auto const & time_j = event.time[hit_j];
+          auto const & dT = time_j-labr_time;
+
+          if (label_j == 252) continue;
+          else if (CloversVS::isGe[label_j]) coinc_LaBr3_E_dT_Ge->Fill(dT, nrj_j);
+          else if (CloversV2::isBGO[label_j]) coinc_LaBr3_E_dT_BGO->Fill(dT, nrj_j);
+          else if (Paris::is[label_j])
+          {
+            auto const & nrjcal = calibPhoswitches(label_j, nrj_j, nrj2_j)
+            coinc_LaBr3_E_dT_phoswitch->Fill(dT, nrjcal);
+            if (Paris::pid_LaBr3(nrj_j, nrj2_j)) coinc_LaBr3_E_dT_LaBr->Fill(dT, nrj_j);
+            else if (Paris::pid_good_phoswitch(nrj_j, nrj2_j)) coinc_LaBr3_E_dT_NaI(dT, nrjcal);
+          }
+        }
       }
 
       clovers.fill(event, hit_i);
@@ -360,6 +393,12 @@ void Co60_efficiency(long max_cursor = -1)
     gated_calo_include_Paris->Write();
     gated_calo_include_Ge   ->Write();
     gated_calo_include_BGO  ->Write();  
+
+    coinc_LaBr3_E_dT_Ge ->Write();
+    coinc_LaBr3_E_dT_BGO  ->Write();
+    coinc_LaBr3_E_dT_phoswitch  ->Write();
+    coinc_LaBr3_E_dT_NaI  ->Write();
+    coinc_LaBr3_E_dT_LaBr ->Write();
 
   outfile->Close();
   print("60Co_test.root written");

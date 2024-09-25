@@ -24,9 +24,10 @@ namespace Paris
   #ifdef MULTITHREADING 
     std::lock_guard<std::recursive_mutex> lock(initialization_mutex);
     if (cluster_init) return;
-    printC("Initializing ParisCluster<",cluster_size,"> position and distance lookup tables in thread ", MTObject::getThreadIndex());
+    if (MTObject::ON) printC("Initializing position and distance lookup tables in thread ", MTObject::getThreadIndex());
+    else printC("Initializing position and distance lookup tables");
   #else
-    printC("Initializing ParisCluster<",cluster_size,"> position and distance lookup tables");
+    printC("Initializing position and distance lookup tables");
   #endif //MULTITHREADING
 
     // Filling the positions of the detectors :  
@@ -123,6 +124,12 @@ namespace Paris
   {
     auto const & ratio = qshort/qlong;
     return (0.75 < ratio && ratio < 1.1);
+  }
+
+  static constexpr inline bool pid_good_phoswitch(double const & qshort, double const & qlong)
+  {
+    auto const & ratio = qshort/qlong;
+    return (-0.5 < ratio && ratio < 1.1);
   }
 
   static inline auto angle_to_beam(Index const & _index)
