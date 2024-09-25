@@ -20,10 +20,11 @@ constexpr static bool kCalibGe = true;
 
 void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
+  // std::string target = "Th";
   std::string target = "U";
   // std::string trigger = "P";
-  // std::string trigger = "dC1";
-  std::string trigger = "C2";
+  std::string trigger = "dC1";
+  // std::string trigger = "C2";
 
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
@@ -34,9 +35,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
   detectors.load("../136/index_129.list");
 
-  bool make_triple_coinc_ddd = true;
-  bool make_triple_coinc_dpp = true;
-  bool make_triple_coinc_ppp = true;
+  bool make_triple_coinc_ddd = false;
+  bool make_triple_coinc_dpp = false;
+  bool make_triple_coinc_ppp = false;
   bool bidim_by_run = false;
 
   // If to much bidims, need to reduce the number of threads
@@ -154,7 +155,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F timestamp_hist_VS_run (new TH2F(("timestamp_hist_VS_run_"+thread_i_str).c_str(), "timestamp_hist_VS_run", 100,0,3, 100,50,150));
 
       unique_TH2F Fatima_E_dT (new TH2F(("Fatima_E_dT_"+thread_i_str).c_str(), "Fatima_E_dT", 800,-100_ns,300_ns, 1000,0,10000));
-      unique_TH1F p_before_correction (new TH1F(("p_before_correction_"+thread_i_str).c_str(), "prompt before correction", nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH1F p_before_correction (new TH1F(("p_before_correction"+thread_i_str).c_str(), "prompt before correction", nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH1F d_before_correction (new TH1F(("d_before_correction"+thread_i_str).c_str(), "delayed before correction", nb_bins_Ge_singles,0,max_bin_Ge_singles));
 
       unique_TH1F n (new TH1F(("n_"+thread_i_str).c_str(), "neutrons", nb_bins_Ge_singles,0,max_bin_Ge_singles));
@@ -230,9 +231,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F dp_calo (new TH2F(("prompt_VS_DC_"+thread_i_str).c_str(), "delayed calorimetry VS prompt calorimetry;Delayed calorimetry[keV];Prompt calorimetry[keV]", 1000,0,10000, 1000,0,10000));
       unique_TH2F d_VS_PC (new TH2F(("d_VS_PC_"+thread_i_str).c_str(), "delayed Ge VS prompt calorimetry;Prompt calorimetry[keV];E[keV]", 1000,0,10000, nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH2F d_VS_DC (new TH2F(("d_VS_DC_"+thread_i_str).c_str(), "delayed Ge VS delayed calorimetry;Delayed calorimetry[keV];E[keV]", 1000,0,10000, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH3F d_VS_PM_VS_PC (new TH3F(("d_VS_PM_VS_PC"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity VS prompt calorimetry;Prompt multiplicity[keV];Prompt calorimetry[keV];delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH3F d_VS_DM_VS_DC (new TH3F(("d_VS_DM_VS_DC"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS delayed calorimetry;Delayed multiplicity[keV];Delayed calorimetry[keV];delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
-      unique_TH3F d_VS_DM_VS_PM (new TH3F(("d_VS_DM_VS_PM"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS prompt multiplicity;Delayed multiplicity[keV];Prompt multiplicity[keV];delayed Ge[keV]", 20,0,20, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_p_VS_PC (new TH3F(("d_VS_p_VS_PC"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity VS prompt calorimetry;Prompt calorimetry[keV];Prompt multiplicity;delayed Ge[keV]", 50,0,5000, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim));
+      unique_TH3F d_VS_PM_VS_PC (new TH3F(("d_VS_PM_VS_PC"+thread_i_str).c_str(), "delayed Ge VS prompt multiplicity VS prompt calorimetry;Prompt calorimetry[keV];Prompt multiplicity;delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_DM_VS_DC (new TH3F(("d_VS_DM_VS_DC"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS delayed calorimetry;Delayed multiplicity;Delayed calorimetry[keV];delayed Ge[keV]", 100,0,10000, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
+      unique_TH3F d_VS_DM_VS_PM (new TH3F(("d_VS_DM_VS_PM"+thread_i_str).c_str(), "delayed Ge VS delayed multiplicity VS prompt multiplicity;Delayed multiplicity;Prompt multiplicity;delayed Ge[keV]", 20,0,20, 20,0,20, nb_bins_Ge_singles,0,max_bin_Ge_singles));
       unique_TH3F d_VS_DC_VS_PC (new TH3F(("d_VS_DC_VS_PC"+thread_i_str).c_str(), "delayed Ge VS delayed calorimetry VS prompt calorimetry;Delayed calorimetry[keV];Prompt calorimetry[keV];delayed Ge[keV]", 100,0,10000, 100,0,10000, nb_bins_Ge_singles,0,max_bin_Ge_singles));
 
       // Condition Prompt Calorimetry < 5 MeV (code PC5):
@@ -585,7 +587,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           if (Paris::is[label])
           {
             // if (500 < label && label < 600) continue; // Reject paris front inner ring
-            // E_dT_phoswitch->Fill(time, nrjcal);
+            E_dT_phoswitch->Fill(time, nrjcal);
             short_over_long_VS_time->Fill(time, nrj/nrj2);
             if (gate(-5_ns, time, 5_ns))
             {
@@ -863,6 +865,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           }
 
           d_VS_DC_VS_PC -> Fill(PC, DC, clover_i.nrj);
+          d_VS_p_VS_PC -> Fill(PC, p, clover_i.nrj);
           d_VS_PM_VS_PC -> Fill(PC, PM, clover_i.nrj);
           d_VS_DM_VS_DC -> Fill(DC, DM, clover_i.nrj);
           d_VS_DM_VS_PM -> Fill(PM, DM, clover_i.nrj);
@@ -1585,6 +1588,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         d_VS_DC->Write("d_VS_DC", TObject::kOverwrite);
         d_VS_DC->Write("d_VS_DC", TObject::kOverwrite);
 
+        d_VS_p_VS_PC->Write("d_VS_p_VS_PC", TObject::kOverwrite);
         d_VS_PM_VS_PC->Write("d_VS_PM_VS_PC", TObject::kOverwrite);
         d_VS_DM_VS_DC->Write("d_VS_DM_VS_DC", TObject::kOverwrite);
         d_VS_DM_VS_PM->Write("d_VS_DM_VS_PM", TObject::kOverwrite);
