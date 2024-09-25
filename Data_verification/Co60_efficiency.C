@@ -27,10 +27,12 @@ float gate_high = 1335_keV;
 float coinc_low = 1171_keV;
 float coinc_high = 1176_keV;
 
-void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400
+template <class THist>
+void eff(MultiHist<THist> & histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400
 //, int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400
 )
 {
+  histo.Merge();
   histo->GetXaxis()->SetRangeUser(coinc_low_fit, coinc_high_fit);
   double constante0 = histo -> GetMaximum();
   double mean0 = histo->GetMean();
@@ -210,14 +212,14 @@ void Co60_efficiency()
             auto const & dT = time_j-labr_time;
 
             if (label_j == 252) continue;
-            else if (CloversV2::isGe(label_j)) coinc_LaBr3_E_dT_Ge->Fill(dT, nrj_j);
-            else if (CloversV2::isBGO(label_j)) coinc_LaBr3_E_dT_BGO->Fill(dT, nrj_j);
+            else if (CloversV2::isGe(label_j)) coinc_LaBr3_E_dT_Ge.Fill(dT, nrj_j);
+            else if (CloversV2::isBGO(label_j)) coinc_LaBr3_E_dT_BGO.Fill(dT, nrj_j);
             else if (Paris::is[label_j])
             {
               auto const & nrjcal = calibPhoswitches.calibrate(label_j, nrj_j, nrj2_j);
-              coinc_LaBr3_E_dT_phoswitch->Fill(dT, nrjcal);
-              if (Paris::pid_LaBr3(nrj_j, nrj2_j)) coinc_LaBr3_E_dT_LaBr->Fill(dT, nrj_j);
-              else if (Paris::pid_good_phoswitch(nrj_j, nrj2_j)) coinc_LaBr3_E_dT_NaI->Fill(dT, nrjcal);
+              coinc_LaBr3_E_dT_phoswitch.Fill(dT, nrjcal);
+              if (Paris::pid_LaBr3(nrj_j, nrj2_j)) coinc_LaBr3_E_dT_LaBr.Fill(dT, nrj_j);
+              else if (Paris::pid_good_phoswitch(nrj_j, nrj2_j)) coinc_LaBr3_E_dT_NaI.Fill(dT, nrjcal);
             }
           }
         }
@@ -228,15 +230,15 @@ void Co60_efficiency()
         if (label == timing_ref_label) for (int hit_j = 0; hit_j<event.mult; ++hit_j)
         {
           if (hit_j == hit_i) continue;
-          timing->Fill(event.labels[hit_j], event.times[hit_j] - event.times[hit_i]);
+          timing.Fill(event.labels[hit_j], event.times[hit_j] - event.times[hit_i]);
         }
       }
 
       clovers.analyze();
       paris.analyze();
 
-      for (auto const & id : clovers.BGO_id) spectra_BGO->Fill(clovers[id].nrjBGO);
-      for (auto const & phos : paris.phoswitches) spectra_phos->Fill(phos->nrj);
+      for (auto const & id : clovers.BGO_id) spectra_BGO.Fill(clovers[id].nrjBGO);
+      for (auto const & phos : paris.phoswitches) spectra_phos.Fill(phos->nrj);
 
       auto const & MMult = clovers.all.size()+paris.phoswitch_mult(); // Modules multiplicity
       auto const & CMult = clovers.clean.size(); // Clean Ge multiplicity
@@ -246,7 +248,7 @@ void Co60_efficiency()
         auto const & clover_i = *(clovers.clean[hit_i]);
         auto const & nrj_i = clover_i.nrj;
         auto const & index_i = clover_i.index();
-        spectra_Ge->Fill(nrj_i);
+        spectra_Ge.Fill(nrj_i);
         if (gate(gate_low, nrj_i, gate_high))
         {
           double calo = 0;
@@ -255,7 +257,7 @@ void Co60_efficiency()
           double caloParis = 0;
           ++nb_gate;
 
-          gate_spectra->Fill(nrj_i);
+          gate_spectra.Fill(nrj_i);
 
           if (clovers.all.size() == 1 && paris.phoswitch_mult() == 0)
           {
@@ -273,71 +275,71 @@ void Co60_efficiency()
             {
               calo+=smearGe(clover_j.nrj, random);
               caloGe+=smearGe(clover_j.nrj, random);
-              for (auto const & crystal_id : clover_j.GeCrystalsId) gated_raw_Ge->Fill(clover_j.GeCrystals[crystal_id]);
-              gated_Ge->Fill(clover_j.nrj);
+              for (auto const & crystal_id : clover_j.GeCrystalsId) gated_raw_Ge.Fill(clover_j.GeCrystals[crystal_id]);
+              gated_Ge.Fill(clover_j.nrj);
               if (clover_j.isCleanGe())
               {
-                gated_clean_Ge->Fill(clover_j.nrj);
+                gated_clean_Ge.Fill(clover_j.nrj);
                 if (gate(coinc_low, clover_j.nrj, coinc_high)) ++nb_gated;
               }
-              else gated_rej_Ge->Fill(clover_j.nrj);
+              else gated_rej_Ge.Fill(clover_j.nrj);
             }
 
             // BGO :
             if (clover_j.nbBGO>0)
             {
-              gated_BGO_vs_index->Fill(clover_j.index(), clover_j.nrjBGO);
+              gated_BGO_vs_index.Fill(clover_j.index(), clover_j.nrjBGO);
               calo+=clover_j.nrjBGO;
               caloBGO+=clover_j.nrjBGO;
-              gated_BGO->Fill(clover_j.nrjBGO);
-              gated_addback_BGO->Fill(clover_j.calo);
-              if (clover_j.nb == 0) gated_clean_BGO->Fill(clover_j.nrjBGO);
-              else gated_only_addback_BGO->Fill(clover_j.calo);
+              gated_BGO.Fill(clover_j.nrjBGO);
+              gated_addback_BGO.Fill(clover_j.calo);
+              if (clover_j.nb == 0) gated_clean_BGO.Fill(clover_j.nrjBGO);
+              else gated_only_addback_BGO.Fill(clover_j.calo);
             }
           }
 
-          for (auto const & nrj : BGO_nrjs) gated_BGO_test->Fill(nrj);
+          for (auto const & nrj : BGO_nrjs) gated_BGO_test.Fill(nrj);
 
           // Paris phoswitches :
           for (auto const & phos : paris.phoswitches) 
           {
-            gated_raw_phos->Fill(phos->index(), phos->qlong);
-            gated_phos->Fill(phos->nrj);
+            gated_raw_phos.Fill(phos->index(), phos->qlong);
+            gated_phos.Fill(phos->nrj);
 
             calo+=smearParis(phos->nrj, random);
             caloParis+=smearParis(phos->nrj, random);
 
             if (phos->isLaBr3()) 
             {
-              gated_LaBr3->Fill(phos->qshort);
-              if (!phos->rejected) gated_clean_LaBr3->Fill(phos->qshort);
+              gated_LaBr3.Fill(phos->qshort);
+              if (!phos->rejected) gated_clean_LaBr3.Fill(phos->qshort);
             }
 
-            if (!phos->rejected) gated_clean_phos->Fill(phos->nrj);
-            else gated_rej_phos->Fill(phos->nrj);
+            if (!phos->rejected) gated_clean_phos.Fill(phos->nrj);
+            else gated_rej_phos.Fill(phos->nrj);
           }
 
           // Paris modules :
           for (auto const & module : paris.modules)
           {
-            gated_paris_module->Fill(module->nrj);
-            if (module->nb()>1) gated_paris_module_addbacked->Fill(module->nrj);
+            gated_paris_module.Fill(module->nrj);
+            if (module->nb()>1) gated_paris_module_addbacked.Fill(module->nrj);
           } 
 
           // Calorimetry :
           auto const & calo_Clover = caloBGO+caloGe;
           if (calo>0) 
           {
-            gated_calo_VS_MMult->Fill(MMult-1, calo);
-            gated_calo->Fill(calo);
-            if (caloParis > 0) gated_calo_include_Paris->Fill(calo);
-            if (caloGe > 0) gated_calo_include_Ge->Fill(calo);
-            if (caloBGO > 0) gated_calo_include_BGO->Fill(calo);
+            gated_calo_VS_MMult.Fill(MMult-1, calo);
+            gated_calo.Fill(calo);
+            if (caloParis > 0) gated_calo_include_Paris.Fill(calo);
+            if (caloGe > 0) gated_calo_include_Ge.Fill(calo);
+            if (caloBGO > 0) gated_calo_include_BGO.Fill(calo);
           }
-          if (caloGe>0) gated_caloGe->Fill(caloGe);
-          if (caloBGO>0) gated_caloBGO->Fill(caloBGO);
-          if (calo_Clover>0) gated_caloClover->Fill(calo_Clover);
-          if (caloParis>0) gated_caloParis->Fill(caloParis);
+          if (caloGe>0) gated_caloGe.Fill(caloGe);
+          if (caloBGO>0) gated_caloBGO.Fill(caloBGO);
+          if (calo_Clover>0) gated_caloClover.Fill(calo_Clover);
+          if (caloParis>0) gated_caloParis.Fill(caloParis);
         }
       }
     }
@@ -359,76 +361,77 @@ void Co60_efficiency()
   print(nicer_double(nb_evts, 0), "evts read");
 
   // Efficiency
-  auto outfile = TFile::Open("60Co_test.root", "recreate");
+
+  eff(gated_raw_Ge, nb_gate, 1150, 1190);
+  eff(gated_Ge, nb_gate, 1150, 1190);
+  eff(gated_clean_Ge, nb_gate, 1150, 1190);
+  eff(gated_BGO, nb_gate, 800, 2000);
+  eff(gated_BGO_test, nb_gate, 800, 2000);
+  eff(gated_clean_BGO, nb_gate, 500, 2000);
+  eff(gated_addback_BGO, nb_gate, 500, 2000);
+  eff(gated_only_addback_BGO, nb_gate, 500, 2000);
+  eff(gated_phos, nb_gate, 900, 1400);
+  eff(gated_clean_phos, nb_gate, 900, 1400);
+  eff(gated_paris_module, nb_gate, 900, 1400);
+  eff(gated_paris_module_addbacked, nb_gate, 500, 2000);
+  eff(gated_LaBr3, nb_gate, 1000, 1300);
+  eff(gated_clean_LaBr3, nb_gate, 1000, 1300);
+  eff(gated_calo, nb_gate, 500, 2000);
+  eff(gated_caloGe, nb_gate, 900, 2000);
+  eff(gated_caloBGO, nb_gate, 500, 2000);
+  eff(gated_caloClover, nb_gate, 500, 2000);
+  eff(gated_caloParis, nb_gate, 500, 2000);
+
+    auto outfile = TFile::Open("60Co_test.root", "recreate");
   outfile->cd();
 
-    eff(gated_raw_Ge.get(), nb_gate, 1150, 1190);
-    eff(gated_Ge.get(), nb_gate, 1150, 1190);
-    eff(gated_clean_Ge.get(), nb_gate, 1150, 1190);
-    eff(gated_BGO.get(), nb_gate, 800, 2000);
-    eff(gated_BGO_test.get(), nb_gate, 800, 2000);
-    eff(gated_clean_BGO.get(), nb_gate, 500, 2000);
-    eff(gated_addback_BGO.get(), nb_gate, 500, 2000);
-    eff(gated_only_addback_BGO.get(), nb_gate, 500, 2000);
-    eff(gated_phos.get(), nb_gate, 900, 1400);
-    eff(gated_clean_phos.get(), nb_gate, 900, 1400);
-    eff(gated_paris_module.get(), nb_gate, 900, 1400);
-    eff(gated_paris_module_addbacked.get(), nb_gate, 500, 2000);
-    eff(gated_LaBr3.get(), nb_gate, 1000, 1300);
-    eff(gated_clean_LaBr3.get(), nb_gate, 1000, 1300);
-    eff(gated_calo.get(), nb_gate, 500, 2000);
-    eff(gated_caloGe.get(), nb_gate, 900, 2000);
-    eff(gated_caloBGO.get(), nb_gate, 500, 2000);
-    eff(gated_caloClover.get(), nb_gate, 500, 2000);
-    eff(gated_caloParis.get(), nb_gate, 500, 2000);
 
+    timing.Write();
+    gated_BGO_vs_index.Write();
 
-    timing->Write();
-    gated_BGO_vs_index->Write();
+    spectra_Ge.Write();
+    spectra_BGO.Write();
+    spectra_phos.Write();
+    gate_spectra.Write();
 
-    spectra_Ge->Write();
-    spectra_BGO->Write();
-    spectra_phos->Write();
-    gate_spectra->Write();
+    gated_raw_Ge.Write();
+    gated_Ge.Write();
+    gated_clean_Ge.Write();
+    gated_rej_Ge.Write();
 
-    gated_raw_Ge->Write();
-    gated_Ge->Write();
-    gated_clean_Ge->Write();
-    gated_rej_Ge->Write();
+    gated_BGO.Write();
+    gated_BGO_test.Write();
+    gated_clean_BGO.Write();
+    gated_addback_BGO.Write();
+    gated_only_addback_BGO.Write();
 
-    gated_BGO->Write();
-    gated_BGO_test->Write();
-    gated_clean_BGO->Write();
-    gated_addback_BGO->Write();
-    gated_only_addback_BGO->Write();
+    gated_raw_phos.Write();
+    gated_phos.Write();
+    gated_clean_phos.Write();
+    gated_rej_phos.Write();
 
-    gated_raw_phos->Write();
-    gated_phos->Write();
-    gated_clean_phos->Write();
-    gated_rej_phos->Write();
+    gated_paris_module.Write();
+    gated_paris_module_addbacked.Write();
 
-    gated_paris_module->Write();
-    gated_paris_module_addbacked->Write();
+    gated_LaBr3.Write();
+    gated_clean_LaBr3.Write();
 
-    gated_LaBr3->Write();
-    gated_clean_LaBr3->Write();
+    gated_calo_VS_MMult.Write();
+    gated_calo.Write();
+    gated_caloGe.Write();
+    gated_caloBGO.Write();
+    gated_caloClover.Write();
+    gated_caloParis.Write();
 
-    gated_calo_VS_MMult->Write();
-    gated_calo->Write();
-    gated_caloGe->Write();
-    gated_caloBGO->Write();
-    gated_caloClover->Write();
-    gated_caloParis->Write();
+    gated_calo_include_Paris.Write();
+    gated_calo_include_Ge   .Write();
+    gated_calo_include_BGO  .Write();  
 
-    gated_calo_include_Paris->Write();
-    gated_calo_include_Ge   ->Write();
-    gated_calo_include_BGO  ->Write();  
-
-    coinc_LaBr3_E_dT_Ge ->Write();
-    coinc_LaBr3_E_dT_BGO  ->Write();
-    coinc_LaBr3_E_dT_phoswitch  ->Write();
-    coinc_LaBr3_E_dT_NaI  ->Write();
-    coinc_LaBr3_E_dT_LaBr ->Write();
+    coinc_LaBr3_E_dT_Ge .Write();
+    coinc_LaBr3_E_dT_BGO  .Write();
+    coinc_LaBr3_E_dT_phoswitch  .Write();
+    coinc_LaBr3_E_dT_NaI  .Write();
+    coinc_LaBr3_E_dT_LaBr .Write();
 
   outfile->Close();
   print("60Co_test.root written");
