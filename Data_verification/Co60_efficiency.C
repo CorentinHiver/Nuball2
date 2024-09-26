@@ -193,7 +193,6 @@ void Co60_efficiency()
   MultiHist<TH2F> gated_Phoswitch_VS_label ("gated_Phoswitch_VS_label", "gated_Phoswitch_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
   MultiHist<TH2F> gated_LaBr_VS_label ("gated_LaBr_VS_label", "gated_LaBr_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
   MultiHist<TH1F> gated_NaI ("gated_NaI", "NaI;[keV]", 500, 0, 2000);
-  MultiHist<TH1F> gated_phos_mix ("gated_phos_mix", "LaBr_{3}+phoswitch;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_phos ("gated_phos", "gated_phos;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_clean_phos ("gated_clean_phos", "gated_clean_phos;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_rej_phos ("gated_rej_phos", "gated_rej_phos;[keV]", 500, 0, 2000);
@@ -402,12 +401,10 @@ void Co60_efficiency()
               // auto const & nrjcal = phos->qshort*calibLaBr[phos->label];
               gated_LaBr3.Fill(phos->nrj);
               if (!phos->rejected) gated_clean_LaBr3.Fill(phos->nrj);
-              gated_phos_mix.Fill(phos->nrj);
             }
             else 
             {
               gated_NaI.Fill(phos->nrj);
-              gated_phos_mix.Fill(phos->nrj);
             }
 
             if (!phos->rejected) gated_clean_phos.Fill(phos->nrj);
@@ -466,11 +463,10 @@ void Co60_efficiency()
   eff(gated_clean_BGO, nb_gate, 900, 1600);
   eff(gated_addback_BGO, nb_gate, 900, 1600);
   eff(gated_only_addback_BGO, nb_gate, 900, 1600);
-  eff(gated_NaI, nb_gate, 900, 1400);
-  eff(gated_phos_mix, nb_gate, 900, 1400);
-  eff(gated_phos, nb_gate, 900, 1400);
-  eff(gated_clean_phos, nb_gate, 900, 1400);
-  eff(gated_paris_module, nb_gate, 900, 1400);
+  eff(gated_NaI, nb_gate, 1000, 1500);
+  eff(gated_phos, nb_gate, 1000, 1500);
+  eff(gated_clean_phos, nb_gate, 1000, 1500);
+  eff(gated_paris_module, nb_gate, 1000, 1500);
   eff(gated_paris_module_addbacked, nb_gate, 500, 2000);
   eff(gated_LaBr3, nb_gate, 1000, 1300);
   eff(gated_clean_LaBr3, nb_gate, 1000, 1300);
@@ -508,7 +504,6 @@ void Co60_efficiency()
     gated_Phoswitch_VS_label.Write();
     gated_LaBr_VS_label.Write();
     gated_NaI.Write();
-    gated_phos_mix.Write();
     gated_phos.Write();
     gated_clean_phos.Write();
     gated_rej_phos.Write();

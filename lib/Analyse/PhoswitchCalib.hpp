@@ -33,6 +33,16 @@ public:
   inline double calibrate(Label const & label, double const & qshort, double const & qlong) const {return data.at(label).calibrate(qshort, qlong);}
   inline double calibrate_short(Label const & label, double const & qshort, double const & qlong) const {return data.at(label).calibrate_short(qshort, qlong);}
 
+  auto getCoeffs() const
+  {
+    std::map<Label, double> ret;
+    for (auto const & coeff : data)
+    {
+      ret.emplace(coeff.first, coeff.second.coeff);
+    }
+    return ret;
+  }
+
   class Coefficients
   {public:
     Coefficients(std::initializer_list<double> const & inputs)

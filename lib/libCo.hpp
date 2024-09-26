@@ -604,6 +604,36 @@ inline K get_min_key(std::map<K,V> const & map)
   })->first); 
 }
 
+// template<typename K, typename V, typename NewK>
+// inline auto convert(std::map<K,V> const & map) 
+// {
+//   std::map<NewK, V> ret;
+//   if (map.empty()) return ret;
+//   for (auto const & e : map) 
+//   {
+//     try{
+//        ret.emplace(static_cast<NewK>(e.first), e.second);
+//     } catch (...){
+//       throw std::runtime_error("in convert(map) : types not compatibles");
+//     }
+//   }
+//   return ret;
+// } 
+
+template<typename NewK, typename K, typename V>
+inline auto convert(std::map<K,V> const & map) 
+{
+    std::map<NewK, V> ret;
+    if (map.empty()) return ret;
+  
+    for (auto const & e : map) {
+        // Assuming K is 'unsigned short' and NewK is 'int'
+        ret.emplace(static_cast<NewK>(e.first), e.second); // Convert K (unsigned short) to NewK (int)
+    }
+  
+    return ret;
+}
+
 
 // Cross-containers found function :
 template<typename K, typename V> 
