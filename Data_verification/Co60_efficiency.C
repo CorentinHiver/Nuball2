@@ -27,6 +27,73 @@ float gate_high = 1336_keV;
 float coinc_low = 1171_keV;
 float coinc_high = 1176_keV;
 
+std::map<Label, double> calibLaBr = {
+{301, 1.00342},
+{302, 1.00342},
+{303, 1.00000},
+{304, 0.99660},
+{305, 1.01034},
+{306, 1.00342},
+{307, 1.00687},
+{308, 0.99660},
+{309, 1.00342},
+{310, 0.99322},
+{311, 1.00000},
+{312, 1.00000},
+{313, 1.00342},
+{314, 0.98653},
+{315, 0.99660},
+{316, 0.99660},
+{401, 1.00687},
+{402, 0.97993},
+{403, 0.97667},
+{404, 0.97020},
+{405, 0.99322},
+{406, 0.96700},
+{407, 0.97993},
+{408, 1.00000},
+{409, 0.98986},
+{410, 0.97020},
+{411, 0.98322},
+{412, 0.95752},
+{501, 1.01736},
+{502, 1.01034},
+{503, 0.99660},
+{504, 0.99660},
+{505, 1.01384},
+{506, 1.01384},
+{507, 1.01736},
+{508, 1.01034},
+{601, 1.10150},
+{602, 0.79620},
+{603, 0.97667},
+{604, 0.82303},
+{605, 1.00342},
+{606, 0.76501},
+{607, 1.01384},
+{608, 0.99660},
+{609, 0.99660},
+{610, 0.97993},
+{611, 0.98322},
+{612, 0.87725},
+{613, 0.98986},
+{614, 0.95440},
+{615, 0.98986},
+{616, 0.74745},
+{701, 0.98986},
+{702, 1.00000},
+{703, 0.99660},
+{704, 0.93610},
+{705, 0.97342},
+{706, 0.98986},
+{707, 0.95752},
+{708, 0.98653},
+{709, 0.97020},
+{710, 0.99322},
+{711, 0.97020},
+{712, 1.00687}
+};
+
 template <class THist>
 void eff(MultiHist<THist> & histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400
 //, int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400
@@ -104,7 +171,7 @@ void Co60_efficiency()
 
 
   MultiHist<TH2F> timing ("timing", "timing;[keV]", 1000,0,1000, 500,-250_ns,250_ns);
-  MultiHist<TH2F> gated_BGO_vs_index ("gated_BGO_vs_index", "gated_BGO_vs_index;[keV]", 24,0,24, 2_k,0_MeV,2_MeV);
+  MultiHist<TH2F> gated_BGO_vs_index ("gated_BGO_vs_index", "gated_BGO_vs_index;[keV]", 48,0,48, 500,0_MeV,2_MeV);
 
   MultiHist<TH1F> spectra_Ge ("spectra_Ge", "spectra_Ge;[keV]", 2000, 0, 2000);
   MultiHist<TH1F> spectra_BGO ("spectra_BGO", "spectra_BGO;[keV]", 2000, 0, 2000);
@@ -122,6 +189,7 @@ void Co60_efficiency()
   MultiHist<TH1F> gated_addback_BGO ("gated_addback_BGO", "gated_addback_BGO;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_only_addback_BGO ("gated_only_addback_BGO", "gated_only_addback_BGO;[keV]", 500, 0, 2000);
 
+  MultiHist<TH2F> gated_qlong_Phoswitch_VS_label ("gated_qlong_Phoswitch_VS_label", "gated_qlong_Phoswitch_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
   MultiHist<TH2F> gated_Phoswitch_VS_label ("gated_Phoswitch_VS_label", "gated_Phoswitch_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
   MultiHist<TH2F> gated_LaBr_VS_label ("gated_LaBr_VS_label", "gated_LaBr_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
   MultiHist<TH1F> gated_NaI ("gated_NaI", "NaI;[keV]", 500, 0, 2000);
@@ -165,7 +233,7 @@ void Co60_efficiency()
   reader.read([&](Nuball2Tree & tree, Event & event)
   {
     CloversV2 clovers;
-    std::vector<double> BGO_nrjs;
+    std::vector<std::pair<Label, double>> BGOs;
     SimpleParis paris(&calibPhoswitches);
     // Nuball2Tree tree(file, event);
     int nb_gate = 0;
@@ -178,7 +246,7 @@ void Co60_efficiency()
 
       clovers.clear();
       paris.clear();
-      BGO_nrjs.clear();
+      BGOs.clear();
 
       for (int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
@@ -191,10 +259,12 @@ void Co60_efficiency()
         {
           nrj *= 1.11;
           if (CloversV2::index(label) == 2) nrj = 1.352 * nrj;
-          BGO_nrjs.push_back(nrj);
+          // if (label == ) nrj = 1.352 * nrj;
+          BGOs.push_back({label, nrj});
         }
         else if (Paris::is[label])
         {
+
         }
         else if (CloversV2::isGe(label))
         {
@@ -238,6 +308,7 @@ void Co60_efficiency()
       }
 
       clovers.analyze();
+      for (auto & phos : paris.phoswitches) phos->nrj *= calibLaBr[phos->label];
       paris.analyze();
 
       for (auto const & id : clovers.BGO_id) spectra_BGO.Fill(clovers[id].nrjBGO);
@@ -293,7 +364,6 @@ void Co60_efficiency()
             // BGO :
             if (clover_j.nbBGO>0)
             {
-              gated_BGO_vs_index.Fill(clover_j.index(), clover_j.nrjBGO);
               calo_raw+=clover_j.nrjBGO;
               calo+=clover_j.nrjBGO;
               caloBGO+=clover_j.nrjBGO;
@@ -304,24 +374,35 @@ void Co60_efficiency()
             }
           }
 
-          for (auto const & nrj : BGO_nrjs) gated_BGO_test.Fill(nrj);
+          for (auto const & bgo : BGOs) 
+          {
+            auto const & label = bgo.first;
+            auto const & nrj = bgo.second;
+            gated_BGO_vs_index.Fill((label-23)%6+(label-23)/6, nrj);
+            gated_BGO_test.Fill(nrj);
+          }
 
           // Paris phoswitches :
           for (auto const & phos : paris.phoswitches) 
           {
-            if (phos->isLaBr3()) gated_LaBr_VS_label.Fill(phos->label, phos->qshort);
-            else gated_Phoswitch_VS_label.Fill(phos->label, phos->qlong);
+            if (phos->isLaBr3) gated_LaBr_VS_label.Fill(phos->label, phos->nrj);
+            else 
+            {
+              gated_Phoswitch_VS_label.Fill(phos->label, phos->nrj);
+              gated_qlong_Phoswitch_VS_label.Fill(phos->label, phos->qlong);
+            }
             gated_phos.Fill(phos->nrj);
 
             calo_raw+=phos->nrj;
             calo+=smearParis(phos->nrj, random);
             caloParis+=smearParis(phos->nrj, random);
 
-            if (phos->isLaBr3()) 
+            if (phos->isLaBr3) 
             {
-              gated_LaBr3.Fill(phos->qshort);
-              if (!phos->rejected) gated_clean_LaBr3.Fill(phos->qshort);
-              gated_phos_mix.Fill(phos->qshort);
+              // auto const & nrjcal = phos->qshort*calibLaBr[phos->label];
+              gated_LaBr3.Fill(phos->nrj);
+              if (!phos->rejected) gated_clean_LaBr3.Fill(phos->nrj);
+              gated_phos_mix.Fill(phos->nrj);
             }
             else 
             {
@@ -423,6 +504,7 @@ void Co60_efficiency()
     gated_addback_BGO.Write();
     gated_only_addback_BGO.Write();
 
+    gated_qlong_Phoswitch_VS_label.Write();
     gated_Phoswitch_VS_label.Write();
     gated_LaBr_VS_label.Write();
     gated_NaI.Write();

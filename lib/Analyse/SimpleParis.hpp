@@ -153,6 +153,8 @@ public:
   double time = 0.0;
   bool rejected = false;
   Label label = 0;
+  bool isLaBr3 = false;
+  bool isGood = false;
 
   void clear()
   {
@@ -161,19 +163,24 @@ public:
     nrj = 0.;
     time = 0.;
     rejected = false;
+    isLaBr3 = false;
+    isGood = false;
   }
 
   SimplePhoswitch* fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
   {
     qshort = event.nrjs[hit_i];
     qlong = event.nrj2s[hit_i];
-    nrj = calib.calibrate(event.labels[hit_i], qshort, qlong);
     time = event.times[hit_i];
+    isLaBr3 = Paris::pid_LaBr3(qshort, qlong);
+    isGood = Paris::pid_good_phoswitch(qshort, qlong);
+
+    if (isLaBr3) nrj = qshort;
+    else nrj = calib.calibrate(event.labels[hit_i], qshort, qlong);
 
     return this;
   }
 
-  constexpr bool isLaBr3() const noexcept {return Paris::pid_LaBr3(qshort, qlong);}
 
   auto const & index() const noexcept {return m_index;}
 
