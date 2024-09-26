@@ -28,70 +28,70 @@ float coinc_low = 1171_keV;
 float coinc_high = 1176_keV;
 
 std::map<Label, double> calibLaBr = {
-{301, 1.00342},
-{302, 1.00342},
-{303, 1.00000},
-{304, 0.99660},
-{305, 1.01034},
-{306, 1.00342},
-{307, 1.00687},
-{308, 0.99660},
-{309, 1.00342},
-{310, 0.99322},
-{311, 1.00000},
-{312, 1.00000},
-{313, 1.00342},
-{314, 0.98653},
-{315, 0.99660},
-{316, 0.99660},
-{401, 1.00687},
-{402, 0.97993},
-{403, 0.97667},
-{404, 0.97020},
-{405, 0.99322},
-{406, 0.96700},
-{407, 0.97993},
-{408, 1.00000},
-{409, 0.98986},
-{410, 0.97020},
-{411, 0.98322},
-{412, 0.95752},
-{501, 1.01736},
-{502, 1.01034},
-{503, 0.99660},
-{504, 0.99660},
-{505, 1.01384},
-{506, 1.01384},
-{507, 1.01736},
-{508, 1.01034},
-{601, 1.10150},
-{602, 0.79620},
-{603, 0.97667},
-{604, 0.82303},
-{605, 1.00342},
-{606, 0.76501},
-{607, 1.01384},
-{608, 0.99660},
-{609, 0.99660},
-{610, 0.97993},
-{611, 0.98322},
-{612, 0.87725},
-{613, 0.98986},
-{614, 0.95440},
-{615, 0.98986},
-{616, 0.74745},
-{701, 0.98986},
-{702, 1.00000},
-{703, 0.99660},
-{704, 0.93610},
-{705, 0.97342},
-{706, 0.98986},
-{707, 0.95752},
-{708, 0.98653},
-{709, 0.97020},
-{710, 0.99322},
-{711, 0.97020},
-{712, 1.00687}
+{301, 1.00232},
+{302, 1.00355},
+{303, 0.998705},
+{304, 0.998661},
+{305, 1.00534},
+{306, 1.00412},
+{307, 1.00604},
+{308, 0.995267},
+{309, 1.00071},
+{310, 0.999144},
+{311, 0.995776},
+{312, 0.999043},
+{313, 0.999239},
+{314, 0.989351},
+{315, 1.00009},
+{316, 0.995293},
+{401, 1.00433},
+{402, 0.977221},
+{403, 0.980751},
+{404, 0.972085},
+{405, 0.988895},
+{406, 0.967432},
+{407, 0.975061},
+{408, 0.999042},
+{409, 0.989256},
+{410, 0.967872},
+{411, 0.979239},
+{412, 0.959348},
+{501, 1.01598},
+{502, 1.01273},
+{503, 0.997414},
+{504, 0.9995},
+{505, 1.0099},
+{506, 1.01118},
+{507, 1.01875},
+{508, 1.01079},
+{601, 1.09881},
+{602, 0.796353},
+{603, 0.972897},
+{604, 0.822098},
+{605, 1.00082},
+{606, 0.761883},
+{607, 1.01488},
+{608, 0.995224},
+{609, 0.996967},
+{610, 0.981561},
+{611, 0.980286},
+{612, 0.879495},
+{613, 0.990487},
+{614, 0.955601},
+{615, 0.989463},
+{616, 0.749016},
+{701, 0.994545},
+{702, 1.00487},
+{703, 0.997289},
+{704, 0.942364},
+{705, 0.980697},
+{706, 0.992492},
+{707, 0.960328},
+{708, 0.985715},
+{709, 0.970808},
+{710, 0.997369},
+{711, 0.969776},
+{712, 1.00585}
 };
 
 template <class THist>
@@ -193,6 +193,7 @@ void Co60_efficiency()
   MultiHist<TH2F> gated_Phoswitch_VS_label ("gated_Phoswitch_VS_label", "gated_Phoswitch_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
   MultiHist<TH2F> gated_LaBr_VS_label ("gated_LaBr_VS_label", "gated_LaBr_VS_label;[keV]", 1000, 0, 1000, 500, 0, 2000);
   MultiHist<TH1F> gated_NaI ("gated_NaI", "NaI;[keV]", 500, 0, 2000);
+  MultiHist<TH1F> gated_phos_mix ("gated_phos_mix", "LaBr_{3}+phoswitch;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_phos ("gated_phos", "gated_phos;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_clean_phos ("gated_clean_phos", "gated_clean_phos;[keV]", 500, 0, 2000);
   MultiHist<TH1F> gated_rej_phos ("gated_rej_phos", "gated_rej_phos;[keV]", 500, 0, 2000);
@@ -401,10 +402,12 @@ void Co60_efficiency()
               // auto const & nrjcal = phos->qshort*calibLaBr[phos->label];
               gated_LaBr3.Fill(phos->nrj);
               if (!phos->rejected) gated_clean_LaBr3.Fill(phos->nrj);
+              gated_phos_mix.Fill(phos->nrj);
             }
             else 
             {
               gated_NaI.Fill(phos->nrj);
+              gated_phos_mix.Fill(phos->nrj);
             }
 
             if (!phos->rejected) gated_clean_phos.Fill(phos->nrj);
@@ -463,10 +466,11 @@ void Co60_efficiency()
   eff(gated_clean_BGO, nb_gate, 900, 1600);
   eff(gated_addback_BGO, nb_gate, 900, 1600);
   eff(gated_only_addback_BGO, nb_gate, 900, 1600);
-  eff(gated_NaI, nb_gate, 1000, 1500);
-  eff(gated_phos, nb_gate, 1000, 1500);
-  eff(gated_clean_phos, nb_gate, 1000, 1500);
-  eff(gated_paris_module, nb_gate, 1000, 1500);
+  eff(gated_NaI, nb_gate, 900, 1400);
+  eff(gated_phos_mix, nb_gate, 900, 1400);
+  eff(gated_phos, nb_gate, 900, 1400);
+  eff(gated_clean_phos, nb_gate, 900, 1400);
+  eff(gated_paris_module, nb_gate, 900, 1400);
   eff(gated_paris_module_addbacked, nb_gate, 500, 2000);
   eff(gated_LaBr3, nb_gate, 1000, 1300);
   eff(gated_clean_LaBr3, nb_gate, 1000, 1300);
@@ -504,6 +508,7 @@ void Co60_efficiency()
     gated_Phoswitch_VS_label.Write();
     gated_LaBr_VS_label.Write();
     gated_NaI.Write();
+    gated_phos_mix.Write();
     gated_phos.Write();
     gated_clean_phos.Write();
     gated_rej_phos.Write();
