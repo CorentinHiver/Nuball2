@@ -9,6 +9,7 @@
 #include "../Classes/Timer.hpp"
 #include "../Classes/Alignator.hpp"
 
+#include "../MTObjects/MTCounter.hpp"
 #include "../MTObjects/MTFasterReader.hpp"
 
 #include "Timeshifts.hpp"

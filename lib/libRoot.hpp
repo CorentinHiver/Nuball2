@@ -192,6 +192,17 @@ bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
   return true;
 }
 
+std::vector<TH1D*> allProjectionsY(TH2* histo)
+{
+  std::vector<TH1D*> ret;
+  for (int x = 0; x<histo->GetNbinsX(); ++x)
+  {
+    auto const & name = TString(histo->GetName())+"_p"+TString(std::to_string(histo->GetXaxis()->GetBinLowEdge(x)).c_str());
+    ret.push_back(histo->ProjectionY(name, x, x));
+  }
+  return ret;
+}
+
 TH2F* compressBidim(TH2F* histo, std::string axis = "x")
 {
   int nb_columns_compressed = 0;
@@ -290,7 +301,7 @@ TH2F* rotateAndCalibrate(TH2F* bidim, double angle, double const & coeff)
  * @param resolution in X value (not bin)
  * @return std::map<int, double> 
  */
-std::map<int, double> get_last_peak_position(TH2F* histo, double threshold = 0.05, double resolution = 1)
+std::map<int, double> get_last_peak_position(TH2* histo, double resolution = 1, double threshold = 0.05)
 {
   std::map<int, double> ret;
   auto xaxis = histo->GetXaxis();
@@ -313,8 +324,18 @@ std::map<int, double> get_last_peak_position(TH2F* histo, double threshold = 0.0
     auto mean = proj->GetMean();
     proj_axis->SetRangeUser(mean-2*resolution, mean+2*resolution);
     auto const & value = proj->GetBinLowEdge(proj->GetMaximumBin());
-    ret[xbin-1] = value;
+    auto const & xvalue = xaxis->GetBinLowEdge(xbin);
+    ret[xvalue] = value;
   }
+  return ret;
+}
+
+std::map<int, double> quick_calib(TH2F* histo, double peak, double resolution = 1, double threshold = 0.05)
+{
+  std::map<int, double> ret;
+  auto peaks = get_last_peak_position(histo, resolution, threshold);
+  if (peaks.empty()) error("in quick_calib : no peaks found...");
+  for (auto const & e : peaks) ret[e.first] = 1/e.second*peak;
   return ret;
 }
 

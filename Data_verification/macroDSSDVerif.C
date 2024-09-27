@@ -113,6 +113,8 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
   // Handling files :
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   Calibration ring_calib("../136/DSSD_ring.calib");
+  Calibration conversionCalib("../136/136_2024.calib");
+  Calibration triple_alpha_calib("../136/triple_alpha.calib");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
 
@@ -181,6 +183,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
       unique_TH2F p_no_singles_VS_DSSD_angle (new TH2F(("p_no_singles_VS_DSSD_angle_"+thread_i_str).c_str(), "p_no_singles_VS_DSSD_angle", 40,20,60, 10_k,0,10_MeV));
       unique_TH2F d_no_singles_VS_DSSD_angle (new TH2F(("d_no_singles_VS_DSSD_angle"+thread_i_str).c_str(), "d_no_singles_VS_DSSD_angle", 40,20,60, 10_k,0,10_MeV));
       
+      unique_TH2F E_vs_index_calib_triple_a (new TH2F(("E_vs_index_calib_triple_a"+thread_i_str).c_str(), "E_vs_index_calib_triple_a", 50,0,50, 5_k,0,50_MeV));
       unique_TH2F E_vs_index (new TH2F(("E_vs_index_"+thread_i_str).c_str(), "E_vs_index", 50,0,50, 5_k,0,50_MeV));
       unique_TH2F mult_vs_index (new TH2F(("mult_vs_index_"+thread_i_str).c_str(), "mult_vs_index", 50,0,50, 10,0,10));
       unique_TH2F T_vs_index (new TH2F(("T_vs_index_"+thread_i_str).c_str(), "T_vs_index", 50,0,50, 250,-50_ns,200_ns));
@@ -418,6 +421,8 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
               if (DSSD::isSector[label] && gate_proton(time)) hasPrompt = true;
             }
             auto const & index = DSSD::index[label];
+            auto const & adc = conversionCalib.reverse(nrj, label);
+            E_vs_index_calib_triple_a->Fill(index, triple_alpha_calib.calibrate(nrj, label));
             E_vs_index->Fill(index, nrj);
             T_vs_index->Fill(index, time);
             T_vs_run[index]->Fill(run_number, time);
@@ -787,6 +792,9 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
         if (p_no_singles_VS_DSSD_angle->Integral() > 1) p_no_singles_VS_DSSD_angle->Write("p_no_singles_VS_DSSD_angle", TObject::kOverwrite);
         if (d_no_singles_VS_DSSD_angle->Integral() > 1) d_no_singles_VS_DSSD_angle->Write("d_no_singles_VS_DSSD_angle", TObject::kOverwrite);
 
+        if (E_vs_index_calib_triple_a->Integral() > 1) E_vs_index_calib_triple_a->Write("E_vs_index_calib_triple_a", TObject::kOverwrite);
+        if (E_vs_index->Integral() > 1) E_vs_index->Write("E_vs_index", TObject::kOverwrite);
+        if (E_vs_index->Integral() > 1) E_vs_index->Write("E_vs_index", TObject::kOverwrite);
         if (E_vs_index->Integral() > 1) E_vs_index->Write("E_vs_index", TObject::kOverwrite);
         if (mult_vs_index->Integral() > 1) mult_vs_index->Write("mult_vs_index", TObject::kOverwrite);
         if (T_vs_index->Integral() > 1) T_vs_index->Write("T_vs_index", TObject::kOverwrite);

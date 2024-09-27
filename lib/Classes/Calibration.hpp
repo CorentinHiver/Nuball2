@@ -118,6 +118,54 @@ public:
   void calibrate(Hit & hit) const noexcept;
   float apply(float const & nrj, Label const & label) const noexcept;
 
+  // float reverse(float const & nrj, Label const & label) const noexcept
+  // {
+  //   switch(m_order[label])
+  //   {
+  //     case -1 : return nrj;
+  //     case 0 : 
+  //       if (m_slope[label] == 0) return 0;
+  //       else return nrj/m_slope[label];
+  //     case 1 : 
+  //       if (m_slope[label] == 0) return 0;
+  //       else return (nrj-m_intercept[label])/m_slope[label];
+  //     case 2 : 
+  //       auto delta = m_slope[label]*m_slope[label] - 4*m_binom[label]*(m_intercept[label]-nrj);
+  //       if (delta<0) {print("chelou, calibration imaginaire"); return nrj;}
+  //       else return (-m_slope[label]+sqrt(delta))/(2*m_binom[label]);
+  //     default : print("Calibration::reverse() : order", m_order[label], "not handled");
+  //     return nrj;
+  //   }
+  // }
+
+  double reverse(int label, double nrj)
+{
+    switch (m_order[label])
+    {
+        case -1: 
+            return nrj;
+
+        case 0: 
+            // Check for potential division by zero
+            if (m_slope[label] == 0) return 0;
+            else return nrj / m_slope[label];
+
+        case 1: 
+            if (m_slope[label] == 0) return 0;
+            else return (nrj - m_intercept[label]) / m_slope[label];
+
+        case 2: 
+        {
+            auto const & delta = m_slope[label] * m_slope[label] - 4 * m_binom[label] * (m_intercept[label] - nrj);
+            if (delta < 0) return nrj;
+            if (m_binom[label] == 0) return nrj;
+            return (-m_slope[label] + std::sqrt(delta)) / (2 * m_binom[label]);
+        }
+
+        default: return nrj;
+    }
+}
+
   /// @brief Wrapper around the Calibration::calibrate() methods
   template<class... ARGS>
   inline auto operator()(ARGS &&... args) const noexcept {return calibrate(std::forward<ARGS>(args)...);}

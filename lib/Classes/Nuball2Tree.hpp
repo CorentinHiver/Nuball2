@@ -58,6 +58,7 @@ public:
   operator TTree*() {return m_tree;}
 
   bool const & ok() const {return m_ok;}
+  operator bool() const {return m_ok;}
 
   bool readNext()
   {
@@ -83,6 +84,8 @@ public:
   auto const & cursor() const {return m_cursor;}
 
   auto & cursor() {return m_cursor;}
+
+  void reset() {m_cursor = 0;}
   
 private:
   unique_TFile m_file;
