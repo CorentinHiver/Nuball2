@@ -2453,10 +2453,22 @@ double ratio_integrals(TH1D* histo1, TH1D* histo2, int peak_min, int peak_max)
 
 namespace CoLib
 {
+  TH3F* removeVeto(TH3F* histo, TH3F* histo_veto, double norm)
+  {
+    std::string name = histo->GetName()+std::string("_veto_clean");
+    auto ret = static_cast<TH3F*>(histo->Clone(name.c_str()));
+    print(ret->GetName());
+
+    ret->Add(histo_veto, norm);
+
+    return ret;
+  }
+
   TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm)
   {
     std::string name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
+    print(ret->GetName());
 
     ret->Add(histo_veto, norm);
 
@@ -2938,7 +2950,7 @@ class Radware
     file = gFile;
     gROOT->cd();
     m_bidim = (TH2F*) _bidim->Clone(TString(_bidim->GetName())+"_radware");
-    if (autoRemoveBackground) CoAnalyse::removeBackground(m_bidim, m_nb_it_bckg, autoRemoveBackground);
+    if (autoRemoveBackground>0) CoAnalyse::removeBackground(m_bidim, m_nb_it_bckg, autoRemoveBackground);
     init();
     proj();
     launch();
@@ -2980,6 +2992,7 @@ class Radware
         m_finish = true;
       }
       else if (instruction == "") continue;
+      else if (instruction == "todo") this->todo();
       else if (instruction == "ag") this->addGate();
       else if (instruction == "bd") {print("May take a while..."); this->draw(m_bidim, "colz");}
       else if (instruction == "bi") this->set_nb_it_bckg();
@@ -2990,7 +3003,10 @@ class Radware
       else if (instruction == "in") this->integral();
       else if (instruction == "ns") this->normalizeSpectra();
       else if (instruction == "pr") this->proj();
+      else if (instruction == "px") this->px();
+      else if (instruction == "py") this->py();
       else if (instruction == "rb") this->removeBackground();
+      else if (instruction == "rs") pad_remove_stats();
       else if (instruction == "sp") this->simulatePeak();
       else if (instruction == "sg") this->addGate(false);
       else if (instruction == "sm") this->gate_same();
@@ -3002,6 +3018,11 @@ class Radware
     print("Exiting CoRadware");
     root_thread.join();
     free_resources();
+  }
+
+  void todo()
+  {
+    print("Faire un mode asymetrique où une gate génère les projections sur les deux axes côte à côte");
   }
 
   void printHelp()
@@ -3017,7 +3038,10 @@ class Radware
     print("in : peak integral");
     print("ns : normalize spectra");
     print("pr : display total projection");
+    print("px : projection onto the x axis");
+    print("py : projection onto the y axis (default)");
     print("rb : remove background automatically");
+    print("rs : remove stat box");
     print("sp : simulate peak");
     print("sg : subtract gate");
     print("sm : overlay another gate");
@@ -3025,12 +3049,16 @@ class Radware
     print("uz : unzoom axis");
   }
 
-  void draw(TH1* histo, std::string const & options = "")
+  void draw(TH1* histo, std::string options = "")
   {
     m_nb_sm = 0;
     canvas->cd();
-    if (m_focus) {histo->GetXaxis()->SetRangeUser(m_focus->GetXaxis()->GetBinLowEdge(m_focus->GetXaxis()->GetFirst()), m_focus->GetXaxis()->GetBinUpEdge(m_focus->GetXaxis()->GetLast()));}
+    if (m_focus) histo->GetXaxis()->SetRangeUser(
+      m_focus->GetXaxis()->GetBinLowEdge(m_focus->GetXaxis()->GetFirst()), 
+      m_focus->GetXaxis()->GetBinUpEdge(m_focus->GetXaxis()->GetLast()));
     m_focus = histo;
+    if (m_focus->InheritsFrom(TH2::Class())) options+="colz"; // For 2D
+    else options+="hist"; // For 1D
     m_focus->Draw(options.c_str());
     gPad->Update();
   }
@@ -3066,7 +3094,7 @@ class Radware
 
   void exportSpectrum()
   {
-    std::cout << "gate to add : ";
+    std::cout << "Name to set (return for " << m_focus->GetName() << ")";
     std::string name;
     std::getline(std::cin, name);
     if (name.empty()) name = m_focus->GetName();
@@ -3088,9 +3116,20 @@ class Radware
   
   void proj()
   {
-    m_proj = static_cast<TH1*> (m_bidim->ProjectionX()->Clone("total projection"));
+    if (m_py) m_proj = static_cast<TH1*> (m_bidim->ProjectionY()->Clone("total projection"));
+    else m_proj = static_cast<TH1*> (m_bidim->ProjectionX()->Clone("total projection"));
     m_proj->SetTitle("total projection");
     this->draw(m_proj);
+  }
+
+  void px()
+  {
+    m_py = false;
+  }
+
+  void py()
+  {
+    m_py = true;
   }
 
   void addGate(bool add = true)
@@ -3114,9 +3153,13 @@ class Radware
 
     if (!add) weight*=-1.;
 
-    for (int y = 0; y<m_bidim->GetNbinsY(); ++y) for (int x = bin-m_gate_size; x<=bin+m_gate_size; ++x)
+    if (m_py) for (int y = 0; y<m_bidim->GetNbinsY(); ++y) for (int x = bin-m_gate_size; x<=bin+m_gate_size; ++x)
     {
       m_gate->AddBinContent(y, m_bidim->GetBinContent(x, y)*weight);
+    }
+    else for (int x = 0; x<m_bidim->GetNbinsY(); ++x) for (int y = bin-m_gate_size; y<=bin+m_gate_size; ++y)
+    {
+      m_gate->AddBinContent(x, m_bidim->GetBinContent(x, y)*weight);
     }
     this->draw(m_gate);
   }
@@ -3137,11 +3180,13 @@ class Radware
     std::cin >> val_str;
     if (!checkIsNumber(val_str)) return;
     auto const & e = std::stoi(val_str);
-    auto const & bin = m_bidim->GetXaxis()->FindBin(e);
+    auto const & bin = m_bidim->GetXaxis()->FindBin(e)-1;
     auto const & low_e = e-m_gate_size;
     auto const & high_e = e+m_gate_size;
     std::string name = std::to_string(bin)+" g same";
-    auto gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_e, high_e)->Clone(name.c_str()));
+    auto gate = static_cast<TH1*>((m_py) 
+      ? m_bidim->ProjectionY("g", low_e, high_e)->Clone(name.c_str())
+      : m_bidim->ProjectionX("g", low_e, high_e)->Clone(name.c_str()));
     gate->SetTitle((std::to_string(bin)+" gate").c_str());
     gate->Draw("same");
     gate->SetLineColor(m_nice_colors[(++m_nb_sm & 111)]);
@@ -3152,10 +3197,12 @@ class Radware
   void gate(double e)
   {
     delete m_gate;
-    auto const & bin = m_bidim->GetXaxis()->FindBin(e);
+    auto const & bin = m_bidim->GetXaxis()->FindBin(e)-1;
     auto const & low_e = e-m_gate_size;
     auto const & high_e = e+m_gate_size;
-    m_gate = static_cast<TH1*> (m_bidim->ProjectionX("g", low_e, high_e)->Clone((std::to_string(bin)+" g").c_str()));
+    m_gate = static_cast<TH1*> ((m_py)
+      ? m_bidim->ProjectionY("g", low_e, high_e)->Clone((std::to_string(bin)+" g").c_str())
+      : m_bidim->ProjectionX("g", low_e, high_e)->Clone((std::to_string(bin)+" g").c_str()));
     m_gate->SetTitle((std::to_string(bin)+" gate").c_str());
     this->draw(m_gate);
     print(peak_integral(m_focus, low_e, high_e, m_nb_it_bckg));
@@ -3196,7 +3243,7 @@ class Radware
     print("unzoom");
     m_focus->GetXaxis()->UnZoom();
     if (m_focus->InheritsFrom(TH2::Class())) m_focus->GetYaxis()->UnZoom();
-    gPad->Update();
+    draw(m_focus);
   }
 
   void set_nb_it_bckg()
@@ -3235,6 +3282,7 @@ private:
   TH1* m_focus = nullptr;
   std::vector<std::string> m_list_histo_to_delete;
 
+  bool m_py = true;
   int m_gate_size = 1;
   int m_nb_sm = 0;
   std::vector<int> m_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};

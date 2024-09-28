@@ -172,10 +172,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       unique_TH2F dp_particle_veto (new TH2F(("dp_particle_veto_"+thread_i_str).c_str(), "delayed VS prompt  particle veto;Prompt [keV];Delayed [keV]", nb_bins_Ge_bidim,0,max_bin_Ge_bidim, nb_bins_Ge_bidim,0,max_bin_Ge_bidim));
       unique_TH3F ddt (new TH3F(("ddt_"+thread_i_str).c_str(), "time_{delayed} VS delayed - delayed ;E_{prompt} [keV];E_{delayed} [keV];t_{delayed} [ns]", nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, 7,40_ns,180_ns));
       unique_TH3F ddt_veto (new TH3F(("ddt_veto"+thread_i_str).c_str(), "time_{delayed} VS delayed - delayed prompt veto;E_{prompt} [keV];E_{delayed} [keV];t_{delayed} [ns]", nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, 7,40_ns,180_ns));
-      unique_TH3F dpt (new TH3F(("dpt_"+thread_i_str).c_str(), "time_{delayed} VS delayed VS prompt ;E_{prompt} [keV];E_{delayed} [keV];t_{delayed} [ns]", nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, 7,40_ns,180_ns));
+      unique_TH3F dpt (new TH3F(("dpt"+thread_i_str).c_str(), "time_{delayed} VS delayed VS prompt ;E_{prompt} [keV];E_{delayed} [keV];t_{delayed} [ns]", nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, 7,40_ns,180_ns));
+      unique_TH3F dpt_veto (new TH3F(("dpt_veto"+thread_i_str).c_str(), "time_{delayed} VS delayed VS prompt ;E_{prompt} [keV];E_{delayed} [keV];t_{delayed} [ns]", nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, nb_bins_Ge_bidim/2,0,max_bin_Ge_bidim, 7,40_ns,180_ns));
       unique_TH2F E_dT (new TH2F(("E_dT_"+thread_i_str).c_str(), "E_dT clean", 600,-100_ns,200_ns, 20000,0,20000));
-      unique_TH2F E_dT_phoswitch (new TH2F(("E_dT_phoswitch_"+thread_i_str).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, 2000,0,10000));
-      unique_TH2F p_VS_dT_LaBr3 (new TH2F(("p_VS_dT_LaBr3_"+thread_i_str).c_str(), "p_VS_dT_LaBr3", 300,-100_ns,200_ns, 10000,0,10000));
+      unique_TH2F E_dT_phoswitch (new TH2F(("E_dT_phoswitch"+thread_i_str).c_str(), "E_dT_phoswitch clean", 600,-100_ns,200_ns, 2000,0,10000));
+      unique_TH2F p_VS_dT_LaBr3 (new TH2F(("p_VS_dT_LaBr3"+thread_i_str).c_str(), "p_VS_dT_LaBr3", 300,-100_ns,200_ns, 10000,0,10000));
       
       unique_TH1F dT_642_VS_205 (new TH1F(("dT_642_VS_205_"+thread_i_str).c_str(), "dT_642_VS_205;T(642)-T(205) [ns]", 100,-100_ns,100_ns));
       unique_TH1F dT_642_VS_279 (new TH1F(("dT_642_VS_279_"+thread_i_str).c_str(), "dT_642_VS_279;T(642)-T(279) [ns]", 100,-100_ns,100_ns));
@@ -593,8 +594,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           // Paris :
           if (Paris::is[label])
           {
-            // if (500 < label && label < 600) continue; // Reject paris front inner ring
-            E_dT_phoswitch->Fill(time, calibPhoswitches.calibrate(label, nrj, nrj2));
+            if (found(blacklist, label)) continue;
+            if (Paris::pid_LaBr3(nrj, nrj2)) E_dT_phoswitch->Fill(time, nrj);
+            else if (Paris::pid_good_phoswitch(nrj, nrj2)) E_dT_phoswitch->Fill(time, calibPhoswitches.calibrate(label, nrj, nrj2));
             short_over_long_VS_time->Fill(time, nrj/nrj2);
             if (gate(-5_ns, time, 5_ns))
             {
@@ -1137,6 +1139,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             auto const & clover_j = *(pclovers.clean[loop_j]);
             dp->Fill(clover_j.nrj, clover_i.nrj);
             dpt->Fill(clover_j.nrj, clover_i.nrj, clover_i.time);
+            dpt_veto->Fill(clover_j.nrj, clover_i.nrj, clover_i.time);
             if (dssd_trigger) dp_p->Fill(clover_j.nrj, clover_i.nrj);
             else 
             {
@@ -1224,7 +1227,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           for (auto const & dclean_phos : dparis.clean_phoswitches) 
           {
             d_VS_dclean_phos->Fill(dclean_phos->nrj, clover_i.nrj);
-            if (dclean_phos->isLaBr3()) 
+            if (dclean_phos->isLaBr3) 
             {
               d_VS_dLaBr3->Fill(clover_i.nrj, dclean_phos->qshort);
               dT_642_Clover_VS_dLabr3->Fill(dclean_phos->qshort, dclean_phos->time-clover_i.time);// TODO
@@ -1481,12 +1484,12 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         /////// PARIS //////////
 
 
-          for (auto const & pclean_phos : pparis.clean_phoswitches) if (pclean_phos->isLaBr3())
+          for (auto const & pclean_phos : pparis.clean_phoswitches) if (pclean_phos->isLaBr3)
           {
             pLaBr3_VS_label->Fill(Paris::index[pclean_phos->label], pclean_phos->nrj);
             LaBr3_prompt->Fill(pclean_phos->nrj);
           }
-          for (auto const & dclean_phos : dparis.clean_phoswitches) if (dclean_phos->isLaBr3())
+          for (auto const & dclean_phos : dparis.clean_phoswitches) if (dclean_phos->isLaBr3)
           {
             dLaBr3_VS_label->Fill(Paris::index[dclean_phos->label], dclean_phos->nrj);
             LaBr3_delayed->Fill(dclean_phos->nrj);
@@ -1584,9 +1587,9 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         dp->Write("dp", TObject::kOverwrite);
         ddt->Write("ddt", TObject::kOverwrite);
         ddt_veto->Write("ddt_veto", TObject::kOverwrite);
-        ddt->Write("ddt", TObject::kOverwrite);
         dpt->Write("dpt", TObject::kOverwrite);
         dpt->Write("dpt", TObject::kOverwrite);
+        dpt_veto->Write("dpt_veto", TObject::kOverwrite);
         dp_particle_veto->Write("dp_particle_veto", TObject::kOverwrite);
         if (make_triple_coinc_ddd) for (size_t gate_index = 0; gate_index<ddd_gates.size(); ++gate_index) 
           ddd_gated[gate_index]->Write(("ddd_gate_"+std::to_string(ddd_gates[gate_index])).c_str(), TObject::kOverwrite);

@@ -69,12 +69,12 @@ public:
     // The following allows one to have valid relative times for both situations :
     if (shifted_timestamp>=last_downscale_timestamp)
     {// Normal case
-      auto const & relative_time = Time_cast((rf_time%period)); // This is the time separating the shifted timestamp to the t0 of the current pulse.
+      auto const & relative_time = Time_cast(rf_time%period); // This is the time separating the shifted timestamp to the t0 of the current pulse.
       return relative_time - m_offset; // Shifts back to obtain the correct relative time
     }
     else if (rf_time<0)
     {// When the RF timestamp is larger than the hit's
-      auto const & relative_time = Time_cast((period - (-rf_time)%period)); 
+      auto const & relative_time = Time_cast(period - (-rf_time)%period); 
       return relative_time - m_offset;
     }
     else 

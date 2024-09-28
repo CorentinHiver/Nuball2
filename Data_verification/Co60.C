@@ -137,7 +137,7 @@ void eff(MultiHist<THist> & histo, int nb_gate, int coinc_low_fit = 900, int coi
         "realive pe eff : ", 100.*pe_integral/histo->Integral(), "%", histo->GetName());
 }
 
-void Co60_efficiency()
+void Co60()
 {
   SimpleCluster::setDistanceMax(1.1);
 
@@ -400,9 +400,9 @@ void Co60_efficiency()
 
             if (phos->isLaBr3) 
             {
-              // auto const & nrjcal = phos->qshort*calibLaBr[phos->label];
-              gated_LaBr3.Fill(phos->nrj);
-              if (!phos->rejected) gated_clean_LaBr3.Fill(phos->nrj);
+              auto const & nrjcal = phos->qshort*calibLaBr[phos->label];
+              gated_LaBr3.Fill(nrjcal);
+              if (!phos->rejected) gated_clean_LaBr3.Fill(nrjcal);
             }
             else 
             {
@@ -479,7 +479,7 @@ void Co60_efficiency()
   eff(gated_caloClover, nb_gate, 700, 1700);
   eff(gated_caloParis, nb_gate, 900, 1600);
 
-    auto outfile = TFile::Open("60Co_test.root", "recreate");
+    auto outfile = TFile::Open("Co60_output.root", "recreate");
   outfile->cd();
 
 
@@ -551,9 +551,9 @@ int main(int argc, char** argv)
     nb_files =std::stoi(argv[1]);
     nb_threads = std::stoi(argv[2]);
   }
-  Co60_efficiency();
+  Co60();
   return 1;
 }
 
-// g++ -g -o exec Co60_efficiency.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
-// g++ -O2 -o exec Co60_efficiency.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17
+// g++ -g -o exec Co60.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
+// g++ -O2 -o exec Co60.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17
