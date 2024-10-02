@@ -3,7 +3,7 @@
 
 #include "../libCo.hpp"
 
-#include "../Classes/Hit.hpp"
+#include "../Classes/Event.hpp"
 #include "../Classes/Detectors.hpp"
 
 /**
@@ -116,6 +116,7 @@ public:
   float calibrate(size_t const & bin, Label const & label) const noexcept {return calibrate(float_cast(bin), label);}
 
   void calibrate(Hit & hit) const noexcept;
+  void calibrate(Event & event, int const & hit_i) const noexcept;
   float apply(float const & nrj, Label const & label) const noexcept;
 
   // float reverse(float const & nrj, Label const & label) const noexcept
@@ -300,6 +301,23 @@ inline void Calibration::calibrate(Hit & hit) const noexcept
 #ifndef QDC1MAX                        // This line allows one to calibrate a bit faster if not interested in the QDC2 field
   if (hit.qdc2==0) hit.nrj2 = 0.0;
   else hit.nrj2 = calibrate(hit.qdc2, label); // Only calibrate the QDC2 if there is a value in the field
+#endif //QDC1MAX
+}
+
+/**
+ * @brief Calibrate a hit
+ * @details
+ * Reads event.adcs[hit_i] and writes the calibrated value in event.nrjs[hit_i]
+ * If event.qdc2s[hit_i] > 0, writes the calibrated value in event.s[hit_i]
+*/ 
+inline void Calibration::calibrate(Event & event, int const & hit_i) const noexcept
+{
+  auto const & label = event.labels[hit_i];      // Extracts the label of the detector
+  if (label > m_size) return;          // If the label is out of range then do no treat it
+  event.nrjs[hit_i] = calibrate(event.adcs[hit_i], label); // Call to the Calibration::calibrate(energy, label) method
+#ifndef QDC1MAX                        // This line allows one to calibrate a bit faster if not interested in the QDC2 field
+  if (event.qdc2s[hit_i]==0) event.nrj2s[hit_i] = 0.0;
+  else event.nrj2s[hit_i] = calibrate(event.qdc2s[hit_i], label); // Only calibrate the QDC2 if there is a value in the field
 #endif //QDC1MAX
 }
 

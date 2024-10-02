@@ -25,8 +25,11 @@ float gate_high = 515_keV;
 float coinc_low = 1171_keV;
 float coinc_high = 1176_keV;
 
-void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400, int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400)
+void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit = 1400
+// , int coinc_low_fit_bckg = 900, int coinc_high_fit_bckg = 1400
+)
 {
+  if (!histo) return;
   histo->GetXaxis()->SetRangeUser(coinc_low_fit, coinc_high_fit);
   double constante0 = histo -> GetMaximum();
   double mean0 = histo->GetMean();
@@ -78,8 +81,6 @@ void Eu152_efficiency(int nb_files = -1, long max_cursor = 1.e+10)
   int nb_gated = 0;
   int nb_missed = 0;
 
-  TRandom* random = new TRandom(time(0));
-
   if (0 < nb_files && nb_files < nb_threads) nb_threads = nb_files;
   MTObject::Initialise(nb_threads);
 
@@ -129,37 +130,43 @@ void Eu152_efficiency(int nb_files = -1, long max_cursor = 1.e+10)
   std::mutex incr_mutex;
 
   MTRootReader reader(path, nb_files);
-  reader.read_raw(calib, ts, [&](Alignator & tree, Hit & hit){
-    
+  print("coucou0");
+  reader.read([&](Nuball2Tree & tree, Event & event){
+
+  print("coucoufin");
+  TRandom* random = new TRandom(time(0));
   CloversV2 clovers;
   SimpleParis paris(&calibPhoswitches);
   std::vector<double> rej_Ge;
   std::vector<double> BGO_nrjs;
 
-  Event event;
-  event.read.setOptions("ltEQ");
+  // Event event;
+  // event.read.setOptions("ltEQ");
 
   int nb_gate_temp = 0;
   int nb_gated_temp = 0;
   int nb_missed_temp = 0;
 
-  for (int hit_r = 0; hit_r<tree->GetEntries(); ++hit_r)
+  int evt_i = 0; 
+  while(tree.readNext())
   {
-    tree->GetEntry(hit_r);
+    // tree->GetEntry(evt_i);
 
-    if (abs(Time_cast(hit.stamp - event.stamp)) < time_window) event.push_back(hit);
-    else
-    {
+    // if (abs(Time_cast(hit.stamp - event.stamp)) < time_window) event.push_back(hit);
+    // else
+    // {
       clovers.clear();
       paris.clear();
       rej_Ge.clear();
       BGO_nrjs.clear();
 
-      if (hit_r>0 && hit_r>max_cursor) break;
+      if (evt_i++>max_cursor) break;
       for (int hit_i = 0; hit_i<event.mult; ++hit_i)
       {
         auto const & label = event.label(hit_i);
         auto & nrj = event.nrj(hit_i);
+
+        nrj = calib.calibrate(nrj, label);
 
         if (nrj < 10_keV) continue;
 
@@ -263,7 +270,7 @@ void Eu152_efficiency(int nb_files = -1, long max_cursor = 1.e+10)
             calo+=smearParis(phos->nrj, random);
             caloParis+=smearParis(phos->nrj, random);
 
-            if (phos->isLaBr3()) 
+            if (phos->isLaBr3) 
             {
               gated_LaBr3.Fill(phos->qshort);
               if (!phos->rejected) gated_clean_LaBr3.Fill(phos->qshort);
@@ -291,9 +298,9 @@ void Eu152_efficiency(int nb_files = -1, long max_cursor = 1.e+10)
         }
       }
 
-      // Prepare next hit : 
-      event = hit;
-    }
+    //   // Prepare next hit : 
+    //   event = hit;
+    // }
 
   }
     incr_mutex.lock();
@@ -328,7 +335,7 @@ void Eu152_efficiency(int nb_files = -1, long max_cursor = 1.e+10)
   gated_caloClover.Merge();
   gated_caloParis.Merge();
 
-  auto outfile = TFile::Open("22Na_test.root", "recreate");
+  auto outfile = TFile::Open("152EU_test.root", "recreate");
   outfile->cd();
 
     eff(gated_Ge.get(), nb_gate, 1150, 1190);
@@ -390,7 +397,7 @@ void Eu152_efficiency(int nb_files = -1, long max_cursor = 1.e+10)
     gated_caloParis.Write();
 
   outfile->Close();
-  print("22Na_test.root written");
+  print("152EU_test.root written");
   print(timer());
 }
 

@@ -16,8 +16,8 @@
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors with respect to a reference
 #include <EventBuilderRF.hpp> // Event builder based on RF
 
-constexpr bool inline isPrompt(Time const & time)  noexcept {return -30_ns < time && time < 30_ns ;}
-constexpr bool inline isDelayed(Time const & time) noexcept {return  30_ns < time && time < 180_ns;}
+constexpr bool inline isPrompt(Time const & time)  noexcept {return -20_ns < time && time < 20_ns ;}
+constexpr bool inline isDelayed(Time const & time) noexcept {return  20_ns < time && time < 180_ns;}
 
 std::unordered_set<int> runs_preprompt = {13, 14, 15, 16, 18, 19, 20};
 std::unordered_set<int> runs_blacklist = {22};
@@ -405,7 +405,7 @@ int main(int argc, char** argv)
       EventBuilderRF eventBuilder(&event, &rf);
       eventBuilder.setFirstHit(hit);
 
-      // Initialise event analyzer :
+      // Initialise event analyser :
       Trigger136 trigger(&event);
 
       // Handle the first hit //

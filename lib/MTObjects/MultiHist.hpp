@@ -1,6 +1,6 @@
-#ifndef MTTHIST_HPP
-#define MTTHIST_HPP
-// #define MTTHIST_MONO
+#ifndef MULTITHIST_HPP
+#define MULTITHIST_HPP
+// #define MULTITHIST_MONO
 #include "MTObject.hpp"
 #include "../libRoot.hpp"
 
@@ -29,7 +29,7 @@
  *      some_TH1F_histo.reset("name", "title:xAxis:yAxis", bins, min, max);
  * 
  * In default mode, [nb_threads] sub_histograms are created
- * \test In mono mode (MTTHIST_MONO), only one histogram is created UNDER DEVELOPMENT
+ * \test In mono mode (MULTITHIST_MONO), only one histogram is created UNDER DEVELOPMENT
  * 
  * To fill the histogram from within one thread : 
  * 
@@ -128,11 +128,11 @@ public:
     m_written  (hist.m_written  ),
     m_integral (hist.m_integral ),
     m_merged   (hist.m_merged   )
-    #ifndef MTTHIST_MONO
+    #ifndef MULTITHIST_MONO
     ,
     m_is_merged  (hist.m_is_merged),
     m_collection (hist.m_collection)
-    #endif // NO MTTHIST_MONO
+    #endif // NO MULTITHIST_MONO
     {
       throw CopyError();
     }
@@ -146,11 +146,11 @@ public:
     m_written  (std::move(hist.m_written  )),
     m_integral (std::move(hist.m_integral )),
     m_merged   (std::move(hist.m_merged   ))
-  #ifndef MTTHIST_MONO
+  #ifndef MULTITHIST_MONO
     ,
     m_is_merged  (std::move(hist.m_is_merged )),
     m_collection (std::move(hist.m_collection))
-  #endif // NO MTTHIST_MONO
+  #endif // NO MULTITHIST_MONO
   {
     // The moved object is now in an undefined state.
     // It is better to put it back to a defined state :
@@ -294,10 +294,10 @@ public:
   THist * get() const {return m_merged;}
   auto size() const {return m_collection.size();}
 
-  #ifdef MTTHIST_MONO
+  #ifdef MULTITHIST_MONO
   THist * Get() {return m_merged;}
 
-  #else // not MTTHIST_MONO :
+  #else // not MULTITHIST_MONO :
   THist* Merge();
   THist* Merge() const {static_assert(true, "Can't merge a const MultiHist");}
   void Merge_t(); // Used in multithreading
@@ -309,7 +309,7 @@ public:
 
   auto const & Integral() const {return m_integral;}
 
-  #endif //MTTHIST_MONO
+  #endif //MULTITHIST_MONO
 
 
   void setComment(std::string const & comment) {m_comment = comment;}
@@ -339,10 +339,10 @@ private:
 
   std::mutex m_mutex;
 
-#ifndef MTTHIST_MONO
+#ifndef MULTITHIST_MONO
   bool m_is_merged = false;
   std::vector<THist*> m_collection;
-#endif //MTTHIST_MONO
+#endif //MULTITHIST_MONO
 
   // static MTCounter m_nb_thread_running;      // Attempt to make the merging in parallel
   // static std::condition_variable m_condition;// Attempt to make the merging in parallel
@@ -376,9 +376,9 @@ inline void MultiHist<THist>::reset(std::string name, ARGS &&... args)
   {
     lock_mutex lock(m_mutex);
 
-  #ifdef MTTHIST_MONO
+  #ifdef MULTITHIST_MONO
     if (!m_merged) m_merged = new THist (name.c_str(), std::forward<ARGS>(args)...);
-  #else // not MTTHIST_MONO
+  #else // not MULTITHIST_MONO
    
     auto const & thread_nb = MTObject::getThreadsNb();
     auto const & thread_id = MTObject::getThreadIndex();
@@ -403,7 +403,7 @@ inline void MultiHist<THist>::reset(std::string name, ARGS &&... args)
       }
     }
 
-  #endif //MTTHIST_MONO
+  #endif //MULTITHIST_MONO
   }
   else // If MTObject is OFF
   {
@@ -441,17 +441,17 @@ template <class... ARGS>
 inline void MultiHist<THist>::Fill(ARGS &&... args) noexcept
 {
   m_integral++;
-#ifdef MTTHIST_MONO
+#ifdef MULTITHIST_MONO
   lock_mutex lock(m_mutex);
   m_merged -> Fill(std::forward<ARGS>(args)...);
 
-#else // not MTTHIST_MONO :
+#else // not MULTITHIST_MONO :
   m_collection[MTObject::getThreadIndex()]->Fill(std::forward<ARGS>(args)...);
 
-#endif //MTTHIST_MONO
+#endif //MULTITHIST_MONO
 }
 
-#ifndef MTTHIST_MONO
+#ifndef MULTITHIST_MONO
 template <class THist>
 inline void MultiHist<THist>::Merge_t()
 {
@@ -525,7 +525,7 @@ THist* MultiHist<THist>::Merged()
   }
   else return m_merged;
 }
-#endif //! MTTHIST_MONO
+#endif //! MULTITHIST_MONO
 
 // template<class THist>
 // void MultiHist<THist>::Write_i(int const & thread_index)
@@ -607,19 +607,19 @@ MultiHist<THist>::~MultiHist()
   m_collection.clear();
   // print(*this);
 
-#ifndef MTTHIST_MONO
+#ifndef MULTITHIST_MONO
   // else if (!MTObject::ON && !m_merged_deleted && m_exists && !m_outScope)
   // {
   //   m_merged_deleted = true;
   // }
-#endif //!MTTHIST_MONO
+#endif //!MULTITHIST_MONO
 
 }
 
 template <class THist>
-using Vector_MTTHist = std::vector<MultiHist<THist>>;
+using Vector_MultiHist = std::vector<MultiHist<THist>>;
 
 template <class THist>
-using Map_MTTHist = std::unordered_map<int, MultiHist<THist>>;
+using Map_MultiHist = std::unordered_map<int, MultiHist<THist>>;
 
-#endif //MTTHIST_HPP
+#endif //MULTITHIST_HPP

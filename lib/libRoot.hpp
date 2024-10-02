@@ -1566,13 +1566,13 @@ namespace CoAnalyse
       if (verbose>1) println(" ", peak);
     }
     if (verbose > 1) print();
-    for (;bin<histo->GetNbinsX()+1; ++bin) lookup.push_back(false); // After the last peak, fill false
+    for (;bin<histo->GetNbinsX()+1; ++bin) lookup.push_back(false); // After the last peak, fill false until the end
     if (remove511) for (int bin_i = 505; bin_i<517; ++bin_i)lookup[bin_i] = true;
     return lookup;
   }
 
   /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316
-  /// @param choice: 0 : classic radware | 1 : Palameta and Waddington (PW) | 2 : classic + remove diagonals | 3 : PW + remove diagonals
+  /// @param choice: 0 : classic radware | 1 : Palameta and Waddington (PW) | 2 : Palameta and Waddington asymetric
   void removeBackground(TH2 * histo, int const & niter = 20, uchar const & choice = 0, double const & threshold = 0.05, double const & sigmaX = 2., double const & sigmaY = 2., bool remove511 = false)
   {
     if (!checkMatrixSquare(histo)) {error ("The matrix must be square"); return;}
@@ -1602,7 +1602,7 @@ namespace CoAnalyse
     auto bckg_clean = new TH2F("bckg_clean","bckg_clean", Nx,xmin,xmax, Ny,ymin,ymax);
     auto bckg2D = new TH2F("bckg2D","bckg2D", Nx,xmin,xmax, Ny,ymin,ymax);
     
-    if(choice == 0 || choice == 2) // classic radware
+    if(choice == 0) // classic radware
     {
       for (int x=0; x<Nx; x++) for (int y=0; y<Ny; y++) 
       {
@@ -1622,8 +1622,9 @@ namespace CoAnalyse
         bckg_clean->SetBinContent(x, y, new_value);
       }
     }
-    if (choice > 0) // Finds the biggest peaks in the total projections :
+    else if (choice == 1 || choice == 2) // Palameta and Waddington
     {
+      //1. Finds the biggest peaks in the total projections :
       // Promotes negative values to 0 in the background-substracted projections :
       for (int bin = 1; bin<Nx; ++bin)
       {
@@ -1634,14 +1635,12 @@ namespace CoAnalyse
       // Get the biggest peaks in each projection
       auto const & peaksX = mainPeaksLookup(projX, sigmaX, threshold, 1, 1, remove511);
       auto const & peaksY = mainPeaksLookup(projY, sigmaY, threshold, 1, 1, remove511);
-      // if (peaksX.size()<)
       auto projX_bis = new TH1D("projX_bis", "projX_bis", Nx,xmin,xmax);
       auto projY_bis = new TH1D("projY_bis", "projY_bis", Ny,ymin,ymax);
-      auto proj_diag = new TH1D("proj_diag", "proj_diag", 2*Nx,xmin,2*xmax);
+      // auto proj_diag = new TH1D("proj_diag", "proj_diag", 2*Nx,xmin,2*xmax);
       int sum_y = 0; // for projX
       int sum_x = 0; // for projY
       
-      // The following works only for a symmetric matrix :
       // Create the projection without the contribution of the main peaks in projection :
       for (int bin_i = 1; bin_i<Nx; ++bin_i)
       { // i=x for projX, i=y for projY
@@ -1657,65 +1656,43 @@ namespace CoAnalyse
         projY_bis->SetBinContent(bin_i, sum_x);
       }
 
-      if (choice == 1 || choice == 3) // Palameta and Waddington
+      //2. Perform the background subtraction
+      // Calculate the constant S and A used for the method (in the classic method, S=T and A=0 )
+      auto S = projX_bis->Integral();
+      // Attempt for asymetric matrix :
+      if (choice == 2) 
       {
-        // Calculate the constant S and A used for the method (in the classic method, S=T and A=0 )
-        auto const & S = projX_bis->Integral();
-        double A = 0.0; for (int x = 0; x<Nx; ++x) if (peaksX[x]) A+=projX_bis->GetBinContent(x);
-        A/=S;
-
-        print("T, S, A", T, S, A);
-        
-        for (int x = 1; x<Nx; ++x) for (int y = 1; y<Ny; ++y)
-        {
-          auto const & Px_bis = projX_bis->GetBinContent(x);
-          auto const & Py_bis = projY_bis->GetBinContent(y);
-          auto const & bx = bckgX->GetBinContent(x);
-          auto const & by = bckgY->GetBinContent(y);
-
-          auto const & bckg_at_xy = int_cast((bx*Py_bis + by*Px_bis - A*bx*by)/S);
-          bckg2D->SetBinContent(x, y, bckg_at_xy);
-          auto const & new_value = histo->GetBinContent(x, y) - bckg_at_xy;
-          bckg_clean->SetBinContent(x, y, new_value);
-        }
+        S += projX_bis->Integral();
+        S /= 2.;
       }
+      double A = 0.0; 
+      for (int x = 0; x<Nx; ++x) if (peaksX[x]) A+=projX_bis->GetBinContent(x);
+      if (choice == 2) for (int y = 0; y<Ny; ++y) if (peaksY[y]) A+=projY_bis->GetBinContent(y);
+      A/=S;
+      if (choice == 2) A/=2.;
 
-      if (choice > 1) // Removes the diagonals
+      print("T, S, A", T, S, A);
+      
+      for (int x = 1; x<Nx; ++x) for (int y = 1; y<Ny; ++y)
       {
-        for (int bin_x = 1; bin_x<Nx; ++bin_x) for (int bin_y = 1; bin_y<Ny; ++bin_y)
-        {
-          auto const & bin_sum = bin_x+bin_y;
-          if ((size_cast(bin_sum)<peaksX.size() && peaksX[bin_sum]) ||
-              (size_cast(bin_sum)<peaksY.size() && peaksY[bin_sum]))
-          {
-            auto const & counts = bckg_clean->GetBinContent(bin_x, bin_y);
-            proj_diag->SetBinContent(bin_sum, proj_diag->GetBinContent(bin_sum)+counts);
-            bckg_clean->SetBinContent(bin_x, bin_y, 0);
-          }
-        }
+        auto const & Px_bis = projX_bis->GetBinContent(x);
+        auto const & Py_bis = projY_bis->GetBinContent(y);
+        auto const & bx = bckgX->GetBinContent(x);
+        auto const & by = bckgY->GetBinContent(y);
+
+        auto const & bckg_at_xy = int_cast((bx*Py_bis + by*Px_bis - A*bx*by)/S);
+        bckg2D->SetBinContent(x, y, bckg_at_xy);
+        auto const & new_value = histo->GetBinContent(x, y) - bckg_at_xy;
+        bckg_clean->SetBinContent(x, y, new_value);
       }
-    // #ifndef __CINT__
-    //   delete projX_bis;
-    //   delete projY_bis;
-    // #endif //!__CINT__
-    // proj_diag->Draw();
     }
 
-    for (int x=0; x<histo->GetNbinsX(); x++) for (int y=0; y<histo->GetNbinsY(); y++) 
-      histo->SetBinContent(x, y, bckg_clean->GetBinContent(x, y));
-  // #ifndef __CINT__
-  //   delete projX;
-  //   delete bckgX;
-  //   delete projY;
-  //   delete bckgY;
-  //   delete bckg_clean;
-  //   delete bckg2D;
-  // #endif //!__CINT__
+    for (int x=0; x<Nx; ++x) for (int y=0; y<Ny; ++y) histo->SetBinContent(x, y, bckg_clean->GetBinContent(x, y));
   }
 
   TH1D* projectDiagonals(TH2* histo)
   {
-    if (!checkMatrixSquare(histo)) return (new TH1D("void","void",1,0,1));
+    if (!checkMatrixSquare(histo)) {error("projectDiagonals(TH2*) : the matrix must be square"); return (new TH1D("void","void",1,0,1));}
     auto diag = new TH1D("diagProj","diagProj", 2*histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), 2*histo->GetXaxis()->GetXmax());
     auto const & nb_bins = histo->GetNbinsX()+1;
     for (int bin_x = 1; bin_x < nb_bins; ++bin_x) for (int bin_y = 1; bin_y < bin_x; ++bin_y)
@@ -1729,35 +1706,116 @@ namespace CoAnalyse
     return diag;
   }
 
-  /// @brief Work in progress
+  /// @brief TODO
   void removeDiagonals(TH2* histo, int nb_iter = 20, int choice = 0)
   {
     if (choice == 0)
     {
-      auto projDiag = projectDiagonals(histo);
-      // auto projDiag0 = static_cast<TH2*>(histo->Clone("projDiag0"));
-      auto bckgProjDiag = projDiag->ShowBackground(nb_iter, "q");
-      projDiag->Add(bckgProjDiag, -1);
+      auto InitProjDiag = projectDiagonals(histo);InitProjDiag->SetName("init proj");
+      auto InitbckgProjDiag = InitProjDiag->ShowBackground(nb_iter, "q");
+      InitProjDiag->Add(InitbckgProjDiag, -1);
+      InitProjDiag->SetLineColor(kRed);
+      InitProjDiag->Draw();
 
-      int const & T = projDiag->Integral();
-      auto clone = static_cast<TH2*>(histo->Clone("projDiag_temp"));
-      for (int bin_x = 1; bin_x < histo->GetNbinsX()+1; ++bin_x) for (int bin_y = 1; bin_y < bin_x; ++bin_y)
+      double power = 1.; 
+      for (int i = 0; i<nb_iter; ++i) 
       {
-        auto const & init_value_xy = clone->GetBinContent(bin_x, bin_y);
-        auto const & init_value_yx = clone->GetBinContent(bin_y, bin_x);
-        auto const & diag_value = projDiag->GetBinContent(bin_x+bin_y);
-        auto const & diag_bckg_value = bckgProjDiag->GetBinContent(bin_x+bin_y);
-        auto const & correction_xy = int_cast((diag_value*diag_bckg_value)/T);
-        auto const & correction_yx = int_cast((diag_value*diag_bckg_value)/T);
-        histo->SetBinContent(bin_x, bin_y, init_value_xy - correction_xy);
-        histo->SetBinContent(bin_y, bin_x, init_value_yx - correction_yx);
+        // 1 peform a first iteration
+        auto projDiag = projectDiagonals(histo);projDiag->SetName("init proj");
+        // auto bckgProjDiag = projDiag->ShowBackground(nb_iter, "q");
+        auto const & T = histo->Integral();
+        auto const & T2 = projDiag->Integral();
+        print(T,T2,T2/T);
+        auto clone = static_cast<TH2*>(histo->Clone("projDiag_temp"));
+        for (int bin_x = 1; bin_x < histo->GetNbinsX()+1; ++bin_x) for (int bin_y = 1; bin_y < bin_x; ++bin_y)
+        {
+          // First part : (bottom left corner)
+          auto const & init_value_xy = clone->GetBinContent(bin_x, bin_y);
+          auto const & init_value_yx = clone->GetBinContent(bin_y, bin_x);
+          auto const & diag_value = projDiag->GetBinContent(bin_x+bin_y);
+          // auto const & diag_bckg_value = bckgProjDiag->GetBinContent(bin_x+bin_y);
+          // auto const & correction_xy = int_cast((diag_value*diag_bckg_value)/T);
+          // auto const & correction_yx = int_cast((diag_value*diag_bckg_value)/T);
+          auto const & correction_xy = int_cast(power*diag_value*init_value_xy/T2);
+          auto const & correction_yx = int_cast(power*diag_value*init_value_yx/T2);
+          histo->SetBinContent(bin_x, bin_y, init_value_xy - correction_xy);
+          histo->SetBinContent(bin_y, bin_x, init_value_yx - correction_yx);
+
+          // Second part :(up right corner)
+          bin_y = bin_x-bin_y;
+          auto const & init_value_xy_bis = clone->GetBinContent(bin_x, bin_y);
+          auto const & init_value_yx_bis = clone->GetBinContent(bin_y, bin_x);
+          auto const & diag_value_bis = projDiag->GetBinContent(bin_x+bin_y);
+          // auto const & diag_bckg_value_bis = bckgProjDiag->GetBinContent(bin_x+bin_y);
+          // auto const & correction_xy_bis = int_cast((diag_value_bis*init_value_yx_bis)/T);
+          // auto const & correction_yx_bis = int_cast((diag_value_bis*init_value_yx_bis)/T);
+          auto const & correction_xy_bis = int_cast(power*diag_value_bis*init_value_xy_bis/T2);
+          auto const & correction_yx_bis = int_cast(power*diag_value_bis*init_value_yx_bis/T2);
+          histo->SetBinContent(bin_x, bin_y, init_value_xy_bis - correction_xy_bis);
+          histo->SetBinContent(bin_y, bin_x, init_value_xy_bis - correction_yx_bis);
+
+          bin_y = bin_x-bin_y;// Reset bin_y for next iteration
+        }
+        // //2 Determine how much it worked
+        auto after = projectDiagonals(histo);
+        auto diff = (TH1D*)projDiag->Clone("diff");
+        diff->Add(after, -1);
+        power = 1/diff->Integral();
       }
     }
     else if (choice == 1)
     {
       
     }
+    auto after = projectDiagonals(histo);
+    removeBackground(after);
+    after->Draw("same");
   }
+
+  template<typename T> T LLS(T const & value) {return (log(log(sqrt(value+1.)+1.)+1.));}
+  template<typename T> T LLS_inverse(T const & value) {return exp(exp(value -1)-1) * exp(exp(value-1)-1) -1;}
+
+  TH1F* LLS_convertor(TH1F* h)
+  {
+    auto ret = (TH1F*) h->Clone("test");
+    for (int x = 0; x<=h->GetNbinsX(); ++x) 
+    {
+      auto const & value = LLS(h->GetBinContent(x));
+      ret->SetBinContent(x, value);
+    }
+    return ret;
+  }
+
+  TH1F* SNIP_background(TH1F* h, int m, bool show = true)
+  {
+    auto b = (TH1F*) h->Clone("test");
+    b->Reset();
+    auto const & N = h->GetNbinsX();
+    std::vector v(N, 0);
+    std::vector w(N, 0);
+    for (int bin = 0; bin<N; ++bin) v[bin] = h->GetBinContent(bin);
+    // for (int bin = 0; bin<N; ++bin) v[bin] = LLS(h->GetBinContent(bin));
+    for (int p = 1; p<m; ++p)
+    {
+      for (int bin = p+1; bin<=N; ++bin)
+      {
+        auto const & a1 = v[bin];
+        auto const & a2 = (v[bin-p]+v[bin+p])/2;
+        w[bin] = std::min(a1, a2);
+      }
+      for (int bin = p+1; bin<=N; ++bin) v[bin] = w[bin];
+    }
+    for (int bin = 0; bin<N; ++bin) b->SetBinContent(bin, v[bin]);
+    // for (int bin = 0; bin<N; ++bin) b->SetBinContent(bin, LLS_inverse(v[bin]));
+    if (show)
+    {
+      h->Draw();
+      b->SetLineColor(kRed);
+      b->Draw("same");
+    }
+    return b;
+  }
+
   
   /// @brief Tests the existence of two peaks separated by gate_size (e.g. two different gamma-rays feeding or decaying from the same state)
   /// @attention The background must have been removed 
@@ -1820,7 +1878,7 @@ namespace CoAnalyse
 /////////////////////
 
 template<class THist = TH1>
-std::vector<THist*> get_histos(TPad * pad = nullptr)
+std::vector<THist*> pad_get_histos(TPad * pad = nullptr)
 {
   std::vector<THist*> ret;
   if (!pad) 
@@ -1846,6 +1904,69 @@ std::vector<THist*> get_histos(TPad * pad = nullptr)
 }
 
 template<class THist = TH1>
+std::map<std::string, THist*> pad_get_histos_map(TPad * pad = nullptr)
+{
+  std::map<std::string, THist*> ret;
+  if (!pad) 
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return ret;}
+  }
+
+  TList *primitives = gPad->GetListOfPrimitives();
+  TIterator *it = primitives->MakeIterator();
+  TObject *obj;
+  TClass *hist_class = TClass::GetClass(typeid(THist));
+
+  while ((obj = it->Next()) != nullptr) 
+  {
+    if (obj->IsA()->InheritsFrom(hist_class))
+    {
+      ret.emplace(obj->GetName(), dynamic_cast<THist*>(obj));
+    }
+  }
+  delete it;
+  return ret;
+}
+
+/**
+ * @brief 
+ * @todo MAYBE NOT PORTABLE !!! the static_cast works fine, but one should create a myDynamicCast<TH1D>(TH1F) and reverse instead
+ * @tparam THist 
+ * @param name 
+ * @param pad 
+ * @return THist* 
+ */
+template<class THist = TH1>
+THist* pad_get_histo(std::string name, TPad * pad = nullptr)
+{
+  THist* ret = nullptr;
+  if (!pad) 
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return ret;}
+  }
+
+  TList *primitives = gPad->GetListOfPrimitives();
+  TIterator *it = primitives->MakeIterator();
+  TObject *obj;
+  TClass *hist_class = TClass::GetClass(typeid(THist));
+
+  while ((obj = it->Next()) != nullptr) 
+  {
+    if (name == obj->GetName())
+    {
+      ret = static_cast<THist*>(obj);
+      if (!ret) error("pad_get_histo : can't cast", obj->ClassName(), "to", hist_class->GetName());
+      break;
+    }
+  }
+  // delete it;
+  print(ret);
+  return ret;
+}
+
+template<class THist = TH1>
 std::vector<std::string> pad_get_names_of(TPad * pad = nullptr)
 {
   std::vector<std::string> ret;
@@ -1854,7 +1975,7 @@ std::vector<std::string> pad_get_names_of(TPad * pad = nullptr)
     pad = (TPad*)gPad;
     if (!pad) {error("no pad"); return ret;}
   }
-  auto histos = get_histos(pad);
+  auto histos = pad_get_histos(pad);
   for (auto const & histo : histos) ret.push_back(histo->GetName());
   return ret;
 }
@@ -1866,7 +1987,7 @@ void pad_remove_stats(TPad * pad = nullptr)
     pad = (TPad*)gPad;
     if (!pad) {error("no pad"); return;}
   }
-  auto histo0 = get_histos(pad)[0];
+  auto histo0 = pad_get_histos(pad)[0];
   histo0->SetStats(0);
   pad->Update();
   gPad->Update();
@@ -2344,12 +2465,12 @@ TH1D* bestProjectionX(TH2F* histo, std::string name, int bin, int resolution)
  * @brief Projection on the xy plane between [binzmin; binzmax] (gates included); 
  *        Available types : XY, YX, XZ, ZX, YZ, ZY.
  */
-TH2F* projection2D(TH3F* histo, int binmin = 0, int binmax = -1, std::string type = "XY", std::string name = "")
+TH2F* myProjection2D(TH3F* histo, std::string type = "XY", int binmin = 0, int binmax = -1, std::string name = "")
 {
-  if (histo == nullptr) {error("in projection2D : histo is nullptr"); return nullptr;}
+  if (histo == nullptr) {error("in myProjection2D : histo is nullptr"); return nullptr;}
 
   static Strings types = {"XY", "YX", "XZ", "ZX", "YZ", "ZY"};
-  if (!found(types, type)) {error("in projection2D(type, histo) :", type, "is not known"); return nullptr;}
+  if (!found(types, type)) {error("in myProjection2D(type, histo) :", type, "is not known"); return nullptr;}
   // Preparing the return histo :
   if (name == "") name = histo->GetName()+std::string("_p")+type;
 
@@ -2357,6 +2478,7 @@ TH2F* projection2D(TH3F* histo, int binmin = 0, int binmax = -1, std::string typ
   TAxis* yaxis = nullptr;
   TAxis* zaxis = nullptr;
 
+  // Choose the axis accordingly to the requested output, so that the operation consist in projecting the z axis onto the XY plane
   if (type == types[0])
   {
     xaxis = histo->GetXaxis();
@@ -2394,14 +2516,14 @@ TH2F* projection2D(TH3F* histo, int binmin = 0, int binmax = -1, std::string typ
     zaxis = histo->GetXaxis();
   }
 
-  auto const & nbinsx = xaxis->GetNbins();
-  auto const & nbinsy = yaxis->GetNbins();
 
+  auto const & nbinsX = xaxis->GetNbins();
   auto const & minX = xaxis->GetBinLowEdge(0);
-  auto const & maxX = xaxis->GetBinLowEdge(nbinsx);
+  auto const & maxX = xaxis->GetBinUpEdge(nbinsX);
 
+  auto const & nbinsY = yaxis->GetNbins();
   auto const & minY = yaxis->GetBinLowEdge(0);
-  auto const & maxY = yaxis->GetBinLowEdge(nbinsy);
+  auto const & maxY = yaxis->GetBinUpEdge(nbinsY);
 
   if (binmax==-1) binmax = zaxis->GetNbins();
 
@@ -2409,14 +2531,14 @@ TH2F* projection2D(TH3F* histo, int binmin = 0, int binmax = -1, std::string typ
   if (gFile->Get<TH2F>(name.c_str())) ret = gFile->Get<TH2F>(name.c_str());
   else 
   {
-    ret = new TH2F(name.c_str(), name.c_str(), nbinsx,minX,maxX, nbinsy,minY,maxY);
+    ret = new TH2F(name.c_str(), name.c_str(), nbinsX+1,minX,maxX, nbinsY+1,minY,maxY);
     ret->GetXaxis()->SetTitle(xaxis->GetTitle());
     ret->GetYaxis()->SetTitle(yaxis->GetTitle());
   }
 
 
   // Perform the projection :
-  for(int binx = 1; binx<=nbinsx; ++binx) for(int biny = 1; biny<=nbinsy; ++biny) 
+  for(int binx = 1; binx<=nbinsX; ++binx) for(int biny = 1; biny<=nbinsY; ++biny) 
   {
     int value = 0;
     for(int binz = binmin; binz<=binmax; ++binz) 
@@ -2428,18 +2550,28 @@ TH2F* projection2D(TH3F* histo, int binmin = 0, int binmax = -1, std::string typ
       else if (type == "YZ") value += histo->GetBinContent(binz, biny, binz);
       else if (type == "ZY") value += histo->GetBinContent(binz, binz, biny);
     }
-    ret->SetBinContent(binx, biny, value);
+    ret->SetBinContent(binx+1, biny+1, value);
   }
 
   return ret;
 }
 
-TH2F* projectionXY(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "XY", name);}
-TH2F* projectionYX(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "YX", name);}
-TH2F* projectionXZ(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "XZ", name);}
-TH2F* projectionZX(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "ZX", name);}
-TH2F* projectionYZ(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "YZ", name);}
-TH2F* projectionZY(TH3F* histo, int binmin = 0, int binmax = -1, std::string name = "") {return projection2D(histo, binmin, binmax, "ZY", name);}
+TH2F* myProjection2D(TH3F* histo, std::string type = "XY", int binminGate = 0, int binmaxGate = -1, int binminBackground = 0, int binmaxBackground = -1, std::string name = "")
+{
+  auto gate = myProjection2D(histo, type, binminGate, binmaxGate, name);
+  auto bckg = myProjection2D(histo, type, binminBackground, binmaxBackground, "temp_bckg");
+  gate->Add(bckg, -1);
+  delete bckg;
+  return gate;
+}
+
+
+template<class... Args> TH2F* myProjectionXY(TH3F* histo, Args... args) {return myProjection2D(histo, "XY", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionYX(TH3F* histo, Args... args) {return myProjection2D(histo, "YX", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionXZ(TH3F* histo, Args... args) {return myProjection2D(histo, "XZ", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionZX(TH3F* histo, Args... args) {return myProjection2D(histo, "ZX", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionYZ(TH3F* histo, Args... args) {return myProjection2D(histo, "YZ", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionZY(TH3F* histo, Args... args) {return myProjection2D(histo, "ZY", std::forward<Args>(args)...);}
 
 
 double ratio_integrals(TH1F* histo1, TH1F* histo2, int peak_min, int peak_max)
@@ -2453,54 +2585,54 @@ double ratio_integrals(TH1D* histo1, TH1D* histo2, int peak_min, int peak_max)
 
 namespace CoLib
 {
-  TH3F* removeVeto(TH3F* histo, TH3F* histo_veto, double norm)
+  TH3F* removeVeto(TH3F* histo, TH3F* histo_veto, double norm = 1, std::string name = "")
   {
-    std::string name = histo->GetName()+std::string("_veto_clean");
+    if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH3F*>(histo->Clone(name.c_str()));
     print(ret->GetName());
 
-    ret->Add(histo_veto, norm);
+    ret->Add(histo_veto, -norm);
 
     return ret;
   }
 
-  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm)
+  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm, std::string name = "")
   {
-    std::string name = histo->GetName()+std::string("_veto_clean");
+    if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
     print(ret->GetName());
 
-    ret->Add(histo_veto, norm);
+    ret->Add(histo_veto, -norm);
 
     return ret;
   }
 
-  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max)
+  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "")
   {
-    return removeVeto(histo, histo_veto, -ratio_integrals(histo->ProjectionX("histo_projX"), histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max));
+    return removeVeto(histo, histo_veto, ratio_integrals(histo->ProjectionX("histo_projX"), histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max), name);
     delete gDirectory->Get("histo_projX");
     delete gDirectory->Get("histo_veto_projX");
   }
 
-  TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, double norm)
+  TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, double norm, std::string name = "")
   {
-    std::string name = histo->GetName()+std::string("_veto_clean");
+    if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH1F*>(histo->Clone(name.c_str()));
 
-    ret->Add(histo_veto, norm);
+    ret->Add(histo_veto, -norm);
     
     return ret;
   }
 
-  TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, int peak_norm_min, int peak_norm_max)
+  TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "")
   {
-    return removeVeto(histo, histo_veto, -ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max));
+    return removeVeto(histo, histo_veto, ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max), name);
   }
 
   template<class... Args>
   TH1D* removeVeto(TH1D* histo, TH1D* histo_veto, Args... args)
   {
-    return removeVeto(dynamic_cast<TH1F*>(histo), dynamic_cast<TH1F*>(histo_veto), std::forward<Args>(args)...);
+    return removeVeto(std::make_unique<TH1F*>(dynamic_cast<TH1F*>(histo)), std::make_unique<TH1F*>(dynamic_cast<TH1F*>(histo_veto)), std::forward<Args>(args)...);
   }
 
   void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits)
@@ -2512,15 +2644,32 @@ namespace CoLib
 
   void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits, bool draw)
   {
+    if (!histo) {error("in simulate_peak : histo is nullptr"); return;}
     if (draw) 
     {
-      TH1D* newHisto = (TH1D*) histo->Clone((histo->GetName()+std::string("_simulated")).c_str());
+      auto name = histo->GetName()+std::string("_simulated");
+      TH1D* newHisto = nullptr;
+      if (gFile) newHisto = gFile->Get<TH1D>(name.c_str());
+      if (!newHisto) newHisto = pad_get_histo<TH1D>(name);
+      if (!newHisto) {print("new histo"); newHisto = static_cast<TH1D*> (histo->Clone(name.c_str()));}
       simulate_peak(newHisto, x_center, x_resolution, nb_hits);
       newHisto->SetLineColor(kRed);
       newHisto->Draw();
       histo->Draw("same");
     }
     else simulate_peak(histo, x_center, x_resolution, nb_hits); 
+  }
+
+  /**
+   * @brief histo
+   * 
+   * @return double 
+   */
+  double calculateHalfLife(TH1* decay_histo)
+  {
+    TF1* fit = new TF1("expo", "expo");
+    decay_histo->Fit(fit, "Q");
+    return -log(2)/fit->GetParameter(1);
   }
 
   /**
@@ -2564,14 +2713,14 @@ namespace CoLib
 
 
   template<class THist = TH1>
-  void normalizeHistos(TPad* pad = nullptr)
+  void normalizeHistos(TPad* pad = nullptr, TString options = "nosw2")
   {
     if (!pad)
     {
       pad = (TPad*)gPad;
       if (!pad) {error("no pad"); return;}
     }
-    auto histos = get_histos<THist>(pad);
+    auto histos = pad_get_histos<THist>(pad);
     if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
     double max = 0;
     for (auto const & hist : histos) if (max < hist->GetMaximum()) max = hist->GetMaximum();
@@ -2581,9 +2730,10 @@ namespace CoLib
     for (auto & hist : histos) 
     {
       gPad->GetListOfPrimitives()->Remove(hist);
-      hist->Scale(max/hist->GetMaximum());
-      if (i++ == 0) hist->Draw("hist");
-      else hist->Draw("hist same");
+      hist->Scale(max/hist->GetMaximum(), options);
+      // for (int i = 1; i <= p->GetNbinsX(); ++i) {p->SetBinError(i, 0);} // remove the error bars
+      if (i++ == 0) hist->Draw();
+      else hist->Draw("same");
     }
     if (hasLegend) gPad->BuildLegend();
     pad->Update();
@@ -2597,7 +2747,7 @@ namespace CoLib
       pad = (TPad*)gPad;
       if (!pad) {error("no pad"); return;}
     }
-    auto histos = get_histos<THist>(pad);
+    auto histos = pad_get_histos<THist>(pad);
     if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
     double min = histos[0]->hist->GetMaximum();
     for (auto const & hist : histos) if (min < hist->GetMaximum()) min = hist->GetMaximum();

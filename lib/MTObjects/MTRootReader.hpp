@@ -55,9 +55,6 @@ public:
   bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
 
 private:
-  template<class Func, class... ARGS>
-  static void Read(MTRootReader & MTreader, Func function, ARGS &&... args);
-
   FilesManager m_files;
   MTList m_MTfiles;
 };
@@ -67,22 +64,17 @@ void MTRootReader::read(Func && func, ARGS &&... args)
 {
   if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
   m_MTfiles = m_files.getListFiles();
-  MTObject::parallelise_function(Read<Func, ARGS...>, *this, std::forward<Func>(func), std::forward<ARGS>(args)...);
-}
-
-template<class Func, class... ARGS>
-void MTRootReader::Read(MTRootReader & MTreader, Func function, ARGS &&... args)
-{ // Here we are inside each thread :
-  std::string filename;
-  while(MTreader.nextFilename(filename))
-  {
-    if (MTObject::kill) break;
-    Event event;
-    Nuball2Tree tree(filename);
-    if (!tree.ok()) continue;
-    event.reading(tree.get());
-    function(tree, event, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function (or lambda) has the following form : type func(Nuball2Tree & tree, Event & event, ARGS... some_args)
-  }
+  MTObject::parallelise_function([&](){
+    std::string filename;
+    while(nextFilename(filename))
+    {
+      if (MTObject::kill) break;
+      Event event;
+      Nuball2Tree tree(filename, event);
+      if (!tree.ok()) continue;
+      func(tree, event, std::forward<ARGS>(args)...); // If issues here, check that the parallelised function (or lambda) has the following form : type func(Nuball2Tree & tree, Event & event, ARGS... some_args)
+    }
+  });
 }
 
 template<class Func, class... ARGS>
@@ -109,8 +101,6 @@ void MTRootReader::read_raw(Calibration const & calibration, Timeshifts const & 
 
       while (tree.readNext())
       {
-        print(hit);
-        pauseCo();
         hit.stamp+=timeshifts[hit.label];
         calibration(hit);
         tempTree->Fill();

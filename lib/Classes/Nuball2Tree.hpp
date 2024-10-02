@@ -110,7 +110,7 @@ bool Nuball2Tree::Open(std::string const & filename)
     print("Could not find", filename, "!"); 
     return (m_ok = m_file_opened = false);
   }
-  
+
   m_file_opened = true;
   
   if (m_file->IsZombie()) 
