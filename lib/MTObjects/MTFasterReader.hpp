@@ -220,11 +220,11 @@ inline void MTFasterReader::readRaw(Func && func, ARGS &&... args)
  * 
  * @details
  * Use this function in the same way as readRaw, with a function like this : 
- *  func(Hit & hit, Alignator & tree, args...)
+ *  func(Alignator & tree, Hit & hit, args...)
  *  {
  *  }
  * 
- * @param func : A function (or lambda). Must be of the form func(Hit & hit, Alignator & tree, args...). 
+ * @param func : A function (or lambda). Must be of the form func(Alignator & tree, Hit & hit, args...). 
  * Alignator is a simple wrapper around a tree. Use Alignator::GetEntry.ies just as you would use TTree::GetEntry.ies
  */
 template<class Func, class... ARGS>
@@ -234,6 +234,9 @@ inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
   if (!m_timeshifts) throw_error("MTFasterReader::readAligned : NO TIMESHIFT DATA PROVIDED !!");
   m_MTfiles = m_files.getListFiles();
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
+    #ifdef DEBUGVALGRIND
+      print("entering threads");
+    #endif //DEBUGVALGRIND
     std::string filename;
     while(nextFilename(filename))
     {
@@ -285,6 +288,9 @@ inline void MTFasterReader::readEvents(Time const & timewindow, Func&& func, ARG
   if (!m_timeshifts) throw_error("NO TIMESHIFT DATA PROVIDED !!");
   m_MTfiles = m_files.getListFiles();
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
+    #ifdef DEBUGVALGRIND
+      print("entering threads");
+    #endif //DEBUGVALGRIND
     std::string filename;
     while(nextFilename(filename))
     {

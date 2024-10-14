@@ -30,9 +30,9 @@ public:
   auto GetEntry(int i) {return m_tree->GetEntry(m_index[i]);}
   auto Read() 
   {
-    if(m_cursor<m_nb_data) 
+    if(++m_cursor<m_nb_data) 
     {
-      m_tree->GetEntry(m_index[m_cursor++]);
+      m_tree->GetEntry(m_index[m_cursor]);
       return true;
     }
     else return false; 

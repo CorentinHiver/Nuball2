@@ -4,18 +4,18 @@
 #include "../lib/libRoot.hpp"
 #include "../lib/Classes/FasterReader.hpp"
 #include "../lib/Classes/Alignator.hpp"
-#include "../lib/Classes/FilesManager.hpp"
-#include "../lib/Classes/Timeshifts.hpp"
 #include "../lib/Classes/Calibration.hpp"
 #include "../lib/Classes/CoincBuilder.hpp"
+#include "../lib/Classes/FilesManager.hpp"
+// #include "../lib/Classes/MainArgParser.hpp"
+#include "../lib/Classes/Timer.hpp"
+#include "../lib/Classes/Timeshifts.hpp"
 #include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/SimpleParis.hpp"
-#include "../lib/Classes/Timer.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "../lib/MTObjects/MTFasterReader.hpp"
 #include "../lib/MTObjects/MultiHist.hpp"
 
-#include "CoefficientCorrection.hpp"
 #include "Utils.h"
 
 Time time_window = 50_ns;
@@ -23,10 +23,11 @@ Time time_window = 50_ns;
 int nb_threads = 2;
 int nb_files = -1;
 int nb_hits = -1;
+bool keep_singles = false;
 
 // std::string source = "60Co";
 // std::string source = "Na22";
-std::string source = "152Eu";
+std::string source = "Eu152";
 
 std::map<Label, double> calibLaBr = {
 {301, 1.00232},
@@ -99,7 +100,7 @@ void raw_reader()
 {
   Timer timer;
 
-  PhoswitchCalib calibPhos("../136/NaI_136_2024.angles");
+  PhoswitchCalib calibPhos("../136/NaI_136_2024_Co.angles");
   Calibration calib("../136/136_2024_Co.calib");
 
   MTObject::Initialise(nb_threads);
@@ -107,11 +108,11 @@ void raw_reader()
 
   // TRandom* random = new TRandom(time(0));
 
-  auto const & label_nb = ParisArrays::labels.size();
-
-  Vector_MultiHist<TH2F> bidims; bidims.resize(label_nb);
-  Vector_MultiHist<TH2F> bidims_rot; bidims_rot.resize(label_nb);
-  Vector_MultiHist<TH2F> bidims_rot_all; bidims_rot_all.resize(label_nb);
+  // Paris :
+  auto const & paris_nb = ParisArrays::labels.size();
+  Vector_MultiHist<TH2F> bidims; bidims.resize(paris_nb);
+  Vector_MultiHist<TH2F> bidims_rot; bidims_rot.resize(paris_nb);
+  Vector_MultiHist<TH2F> bidims_rot_all; bidims_rot_all.resize(paris_nb);
 
   for (auto const & label : ParisArrays::labels)
   {
@@ -122,38 +123,41 @@ void raw_reader()
     bidims_rot_all[index].reset(("all_rotated_qshort_VS_qlong_"+label_str).c_str(), (label_str+"_qshort_VS_qlong_all_rotated").c_str(), 1000,0,200000, 1000,0,200000);
   }
 
-  MultiHist<TH2F> raw_spectra;
-  MultiHist<TH2F> calibrated_spectra;
-  MultiHist<TH1F> Ge;
-  MultiHist<TH2F> Ge_Ge;
-  MultiHist<TH2F> Ge_BGO;
-  MultiHist<TH2F> Ge_ModuleParis;
-  MultiHist<TH2F> Ge_Phoswitch;
-  if (source == "152Eu") 
-  {
-    raw_spectra.reset("raw_spectra", "raw_spectra;label;Energy [keV]", 1000,0,1000, 200_ki,0,2_Mi);
-    calibrated_spectra.reset("calibrated_spectra", "calibrated_spectra;label;Energy [keV]", 1000,0,1000, 2000,0,2000);
-    Ge.reset("Ge", "Ge;HPGe [keV]", 2000,0,2000);
-    Ge_Ge.reset("Ge_Ge", "Ge_Ge;HPGe [keV];Ge Energy [keV]", 2000,0,2000, 2000,0,2000);
-    Ge_BGO.reset("Ge_BGO", "Ge_BGO;HPGe [keV];BGO Energy [keV]", 2000,0,2000, 500,0,5000);
-    Ge_ModuleParis.reset("Ge_ModuleParis", "Ge_ModuleParis;HPGe [keV];Paris Energy [keV]", 2000,0,2000, 2000,0,2000);
-    Ge_Phoswitch.reset("Ge_Phoswitch", "Ge_Phoswitch;HPGe [keV];Paris Energy [keV]", 2000,0,2000, 2000,0,2000);
-  }
+  // // All :
+  // Vector_MultiHist<TH2F> bidims;
+  // for (int label = 23; label<=196; ++label)
+  // {
+  //   auto name = std::to_string(23);
+  //   bidims.emplace_back(MultiHist<TH2F>((name+"_VS_HPGe").c_str(), (name+"_VS_HPGe").c_str(), 2000,0,2000,2000,0,2000));
+  // }
+
+
+  MultiHist<TH2F> raw_spectra("raw_spectra", "raw_spectra;label;Energy [keV]", 1000,0,1000, 200_ki,0,2_Mi);
+  MultiHist<TH2F> calibrated_spectra("calibrated_spectra", "calibrated_spectra;label;Energy [keV]", 1000,0,1000, 2048,0,2048);
+  MultiHist<TH1F> Ge("Ge", "Ge;HPGe [keV]", 2048,0,2048);
+  MultiHist<TH1F> Ge_clean("Ge_clean", "Ge_clean;HPGe [keV]", 2048,0,2048);
+  MultiHist<TH2F> Ge_Ge("Ge_Ge", "Ge_Ge;HPGe [keV];HPGe Energy [keV]", 2048,0,2048, 2048,0,2048);
+  MultiHist<TH2F> Ge_Ge_clean("Ge_Ge_clean", "Ge_Ge;HPGe [keV];HPGe Energy [keV]", 2048,0,2048, 2048,0,2048);
+  MultiHist<TH2F> Ge_BGO("Ge_BGO", "Ge_BGO;HPGe [keV];BGO Energy [keV]", 2048,0,2048, 500,0,5000);
+  MultiHist<TH2F> Ge_BGO_clean("Ge_BGO_clean", "Ge_BGO;HPGe [keV];BGO Energy [keV]", 2048,0,2048, 500,0,5000);
+  MultiHist<TH2F> Ge_ModuleParis("Ge_ModuleParis", "Ge_ModuleParis;HPGe [keV];Paris Energy [keV]", 2048,0,2048, 2048,0,2048);
+  MultiHist<TH2F> Ge_Phoswitch("Ge_Phoswitch", "Ge_Phoswitch;HPGe [keV];Paris Energy [keV]", 2048,0,2048, 2048,0,2048);
 
   std::string path;
   if (source == "Na22") path = Path::home().string()+"nuball2/N-SI-136/Na22_center.fast/";
   else if (source == "Co60") path = Path::home().string()+"nuball2/N-SI-136/60Co_center_after.fast/";
-  else if (source == "152Eu") path = Path::home().string()+"nuball2/N-SI-136/152_Eu_center_after.fast/";
+  else if (source == "Eu152") path = Path::home().string()+"nuball2/N-SI-136/152_Eu_center_after.fast/";
 
   MTFasterReader reader(path, nb_files);
   Timeshifts ts("../136/136_Co.dT");
 
-  Event event;
-  CoincBuilder builder(&event, time_window);
+  if (keep_singles) CoincBuilder::keepSingles();
 
   reader.setTimeshifts(ts);
   reader.readAligned([&](Alignator & tree, Hit & hit)
   {
+    Event event;
+    CoincBuilder builder(&event, time_window);
     CloversV2 clovers;
     SimpleParis paris(&calibPhos);
     while(tree.Read())
@@ -173,27 +177,32 @@ void raw_reader()
         calibrated_spectra.Fill(hit.label, nrj);
       }
 
-      
       if (builder.build(hit))
       {
-        clovers.clear();
-        // paris.clear();
         clovers = event;
-        // paris = event;
-        clovers.analyze();
-        // paris.analyze();
-        for (size_t hit_i = 0; hit_i<clovers.clean.size(); ++hit_i)
+        paris = event;
+        auto calorimetry = clovers.calorimetryTotal+paris.calorimetry();
+        for (size_t hit_i = 0; hit_i<clovers.all.size(); ++hit_i)
         {
-          auto const & clover_i = *(clovers.clean[hit_i]);
+          auto const & clover_i = *(clovers.all[hit_i]);
+          if (clover_i.nrj < 5_keV) continue;
           Ge.Fill(clover_i.nrj);
-          for (size_t hit_j = hit_i+1; hit_j<clovers.clean.size(); ++hit_j)
+          for (size_t hit_j = hit_i+1; hit_j<clovers.all.size(); ++hit_j)
           {
-            auto const & clover_j = *(clovers.clean[hit_j]);
+            auto const & clover_j = *(clovers.all[hit_j]);
+            if (clover_j.nrj < 5_keV) continue;
             Ge_Ge.Fill(clover_i.nrj, clover_j.nrj);
             Ge_Ge.Fill(clover_j.nrj, clover_i.nrj);
+            if (clover_i.isCleanGe() && clover_j.isCleanGe())
+            {
+              Ge_Ge_clean.Fill(clover_i.nrj, clover_j.nrj);
+              Ge_Ge_clean.Fill(clover_j.nrj, clover_i.nrj);
+            }
           }
-
+          if (!clover_i.isCleanGe()) continue;
+          Ge_clean.Fill(clover_i.nrj);
           for (auto const & BGO_id : clovers.BGO_id) Ge_BGO.Fill(clover_i.nrj, clovers[BGO_id].nrjBGO);
+          for (auto const & BGO_id : clovers.BGOClean_id) Ge_BGO_clean.Fill(clover_i.nrj, clovers[BGO_id].nrjBGO);
           // for (auto const & module : paris.modules) Ge_ModuleParis.Fill(clover_i.nrj, module->nrj);
           // for (auto const & phoswitch : paris.phoswitches) Ge_Phoswitch.Fill(clover_i.nrj, phoswitch->nrj);
         }
@@ -203,23 +212,35 @@ void raw_reader()
 
   // Efficiency
   TString name;
-  if (source == "Na22") name = "22Na_bidim_paris.root";
-  else if (source == "Co60") name = "60Co_bidim_paris.root";
-  else if (source == "152Eu") name = "152Eu_test.root";
+  if (source == "Na22") name = "22Na_bidims_source.root";
+  else if (source == "Co60") name = "60Co_bidims_source.root";
+  else if (source == "Eu152") name = "152Eu_bidims_source.root";
 
   auto outfile = TFile::Open(name, "recreate");
   outfile->cd();
+  
+  TNamed *metadata = new TNamed("KeepSingles", (keep_singles) ? "True" : "False");
+  metadata->Write();
 
-  for (auto & histo : bidims) histo.Write();
-  for (auto & histo : bidims_rot) histo.Write();
-  for (auto & histo : bidims_rot_all) histo.Write();
+  TNamed *tw_metadata = new TNamed("TimeWindow_ns", std::to_string(time_window/1_ns).c_str());
+  tw_metadata->Write();
 
+  print("Writting other histo");
+  Ge.Write();
+  Ge_clean.Write();
   raw_spectra.Write();
   calibrated_spectra.Write();  
   Ge_Ge.Write();
+  Ge_Ge_clean.Write();
   Ge_BGO.Write();
+  Ge_BGO_clean.Write();
   Ge_ModuleParis.Write();
   Ge_Phoswitch.Write();
+  
+  print("Writing Paris histo");
+  for (auto & histo : bidims) histo.Write();
+  for (auto & histo : bidims_rot) histo.Write();
+  for (auto & histo : bidims_rot_all) histo.Write();
 
   outfile->Close();
 
@@ -229,9 +250,21 @@ void raw_reader()
 
 int main(int argc, char** argv)
 {
-  if (argc>1) nb_files = int(std::stod(argv[1]));
-  else if (argc>2) nb_threads = int(std::stod(argv[2]));
-  else if (argc>3) nb_hits = int(std::stod(argv[2]));
+  // MainArgParser pc(argc, argv);
+  // pc.addParameter("f", [&nb_files](std::string arg_str) {);
+  // pc.parseAndDispatch();
+
+  for (int i = 1; i<argc; ++i)
+  {
+    std::string arg_str(argv[i]);
+         if (arg_str == "-f") {auto arg = int(std::stod(argv[++i])); print("number of files set to", arg); nb_files = arg;}
+    else if (arg_str == "-n") {auto arg = int(std::stod(argv[++i])); print("number of hits per file set to", nicer_double(arg), 0); nb_hits = arg;}
+    else if (arg_str == "-m") {auto arg = int(std::stod(argv[++i])); print("number of threads set to", arg); nb_threads = arg;}
+    else if (arg_str == "-s") {print("source set to", argv[++i]); source = argv[i];}
+    else if (arg_str == "--keep-singles") {print("Keep singles"); keep_singles = true;}
+    else throw_error("Unkown"+ arg_str);
+  }
+
   raw_reader();
   return 1;
 }

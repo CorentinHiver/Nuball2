@@ -174,6 +174,20 @@ void AddTH1(TH1* histo_total, TH1* histo)
   }
 }
 
+double myIntegral(TH1* histo, double bin_min = 1, double bin_max = -1)
+{
+  int integral = 0;
+  for (int bin = bin_min; bin<=bin_max; ++bin) integral += histo->GetBinContent(bin);
+  return integral;
+}
+
+double myIntegralUser(TH1* histo, double x_min, double x_max)
+{
+  int integral = 0;
+  for (int bin = histo->FindBin(x_min); bin<=histo->FindBin(x_max); ++bin) integral += histo->GetBinContent(bin);
+  return integral;
+}
+
 bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
 {
   if (!histo2) {print("TH2 do not exists"); return -1;}
@@ -200,6 +214,34 @@ std::vector<TH1D*> allProjectionsY(TH2* histo)
     auto const & name = TString(histo->GetName())+"_p"+TString(std::to_string(histo->GetXaxis()->GetBinLowEdge(x)).c_str());
     ret.push_back(histo->ProjectionY(name, x, x));
   }
+  return ret;
+}
+
+TH1F* lineariseBidim(TH2F* histo, std::string options = "")
+{
+  bool discard_null = !found(options, "A");
+  // bool discard_last = found(options, "l");
+
+  auto xaxis = histo->GetXaxis();
+  auto yaxis = histo->GetYaxis();
+  
+  auto XpBin = (xaxis->GetBinUpEdge(xaxis->GetNbins()) - xaxis->GetBinLowEdge(0))/xaxis->GetNbins();
+
+  std::vector<double> lin_vec;
+
+  for (int y = 1; y<=yaxis->GetNbins(); ++y)for (int x = 1; x<=xaxis->GetNbins(); ++x)
+  {
+    auto const & value = histo->GetBinContent(x, y);
+    if (!discard_null || value != 0) lin_vec.push_back(value);
+    // if (discard_last && x<xaxis->GetNbins()-2 && histo->GetBinContent(x+1, y) == 0) lin_vec.pop_back();
+  }
+
+  auto name = histo->GetName()+TString("_lin");
+  auto const & nb_bins = lin_vec.size();
+  auto const & minX = xaxis->GetBinLowEdge(0);
+  auto const & maxX = minX + nb_bins*XpBin;
+  auto ret = new TH1F(name, name, nb_bins, minX, maxX);
+  for (size_t bin_i = 0; bin_i<nb_bins; ++bin_i) ret->SetBinContent(bin_i+1, lin_vec[bin_i]);
   return ret;
 }
 
@@ -456,6 +498,11 @@ bool getMeanPeak(TH1F* spectra, double & mean)
   sigma = fittedPic -> GetParameter(2);
 
   return true;
+}
+
+void to_int(TH1* histo)
+{
+  for (int bin = 0; bin<histo->GetNcells(); ++bin) histo->SetBinContent(bin, int_cast(histo->GetBinContent(bin)));
 }
 
 void getData(TH1* histo, std::vector<float> & data)
@@ -719,6 +766,11 @@ void shiftX(TH1* histo, double shift)
   }
   for (int bin_i = 1; bin_i<nb_bins+1; ++bin_i) histo->SetBinContent(bin_i, temp->GetBinContent(bin_i));
   delete temp;
+}
+
+double X_per_bin(TAxis* axis)
+{
+  return (axis->GetXmax() - axis->GetXmin())/axis->GetNbins();
 }
 
 ///////////////////////////
@@ -1034,6 +1086,24 @@ namespace CoAnalyse
     }
   }
 
+  /// @brief For each X bin, normalise the Y histogram
+  TH2F* normalizeYperX(TH2F* matrix, double const & factor = 1)
+  {
+    auto ret = static_cast<TH2F*>(matrix->Clone(matrix->GetName()+TString("_normalizeYperX")));
+    int const & bins_x = matrix->GetNbinsX();
+    int const & bins_y = matrix->GetNbinsY();
+    unique_TH1D projX(matrix->ProjectionX());
+    for (int x = 1; x<bins_x; x++)
+    {
+      auto const & proj = projX->GetBinContent(x);
+      if (proj>0) for (int y = 1; y<bins_y+1; y++) 
+      {
+        ret -> SetBinContent(x, y, factor*matrix->GetBinContent(x, y)/proj*factor);
+      }
+    }
+    return ret;
+  }
+
   /// @brief Normalise the whole bidim
   void normalizeBidim(TH2* matrix, double const & factor = 1.0)
   {
@@ -1073,7 +1143,7 @@ namespace CoAnalyse
   {
     projectY(matrix, proj, matrix->GetXaxis()->FindBin(valueXmin), matrix->GetXaxis()->FindBin(valueXmax));
   }
-
+  
   /// @brief LEGACY
   void removeRandomY(TH2* matrix, int _stopX = -1, int _stopY = -1, bool writeIntermediate = false, ProjectionsBins projections = {{}})
   {
@@ -1300,6 +1370,30 @@ namespace CoAnalyse
     // std::vector<std::vector<double>> real_sub_array;
     // fill2D(real_sub_array, stopX, stopY, 0.0);
 
+    if (save_intermediate)
+    {
+      save_totProjX.emplace_back(dynamic_cast<TH1D*>(firstTotProjX->Clone("totProjX_init")));
+      save_totProjY.emplace_back(dynamic_cast<TH1D*>(firstTotProjY->Clone("totProjY_init")));
+      for (size_t proj_i = 0; proj_i<projectionsY.size(); proj_i++)
+      {
+        auto histo = new TH1F();
+        auto const & gate = projectionsY[proj_i];
+        if (gate.first == gate.second) continue;
+        projectY(matrix, histo, gate.first, gate.second);
+        auto const & histo_name = matrix_name+"_projY_"+std::to_string(int(gate.first))+"_"+std::to_string(int(gate.second))+"_init";
+        intermediate_projY[proj_i].emplace_back(dynamic_cast<TH1F*>(histo->Clone(histo_name.c_str())));
+      }
+      for (size_t proj_i = 0; proj_i<projectionsX.size(); proj_i++)
+      {
+        auto histo = new TH1F();
+        auto const & gate = projectionsX[proj_i];
+        if (gate.first == gate.second) continue;
+        projectX(matrix, histo, gate.first, gate.second);
+        auto const & histo_name = matrix_name+"_projX_"+std::to_string(gate.first)+"_"+std::to_string(gate.second)+"_init";
+        intermediate_projX[proj_i].emplace_back(dynamic_cast<TH1F*>(histo->Clone(histo_name.c_str())));
+      }
+    }
+
     print("Subtracting", matrix_name, "with", iterations, "iterations...");
     for (int it = 0; it<iterations; it++)
     {
@@ -1387,7 +1481,7 @@ namespace CoAnalyse
           auto const & gate = projectionsY[proj_i];
           if (gate.first == gate.second) continue;
           projectY(matrix, histo, gate.first, gate.second);
-          auto const & histo_name = matrix_name+"_projY_"+std::to_string(gate.first)+"_"+std::to_string(gate.second)+"_"+std::to_string(it);
+          auto const & histo_name = matrix_name+"_projY_"+std::to_string(int(gate.first))+"_"+std::to_string(int(gate.second))+"_"+std::to_string(it);
           intermediate_projY[proj_i].emplace_back(dynamic_cast<TH1F*>(histo->Clone(histo_name.c_str())));
         }
         for (size_t proj_i = 0; proj_i<projectionsX.size(); proj_i++)
@@ -1469,7 +1563,7 @@ namespace CoAnalyse
       auto const & background = histo -> ShowBackground(niter, fit_options.c_str());
       for (int bin=0; bin<histo->GetNbinsX(); bin++) 
       {
-        auto const & new_value = histo->GetBinContent(bin) - background->GetBinContent(bin);
+        auto const & new_value = histo->GetBinContent(bin) - int_cast(background->GetBinContent(bin));
         if (nice) histo->SetBinContent(bin, (new_value<1) ? 1 : new_value);
         else histo->SetBinContent(bin, new_value);
       }
@@ -1479,45 +1573,45 @@ namespace CoAnalyse
     {
       error ("weird, removeBackground(TH2*) should have been called ....");
       return;
-      char choice = 0; // 0 : X, 1 : Y, 2 : symmetric
-      // if (bidim_options.find("Y")) choice = 1;
-      // if (bidim_options.find("S")) choice = 2;
-      auto bidim = dynamic_cast<TH2F*>(histo);
+      // char choice = 0; // 0 : X, 1 : Y, 2 : symmetric
+      // // if (bidim_options.find("Y")) choice = 1;
+      // // if (bidim_options.find("S")) choice = 2;
+      // auto bidim = dynamic_cast<TH2F*>(histo);
 
-      auto const & nXbins = bidim -> GetNbinsX();
-      auto const & nYbins = bidim -> GetNbinsY();
+      // auto const & nXbins = bidim -> GetNbinsX();
+      // auto const & nYbins = bidim -> GetNbinsY();
 
-      if (choice == 2)
-      {
-        if (nXbins != nYbins) {print("CoAnalyse::removeBackground for 2D spectra is suited only for symmetric spectra"); return;}
-      }
+      // if (choice == 2)
+      // {
+      //   if (nXbins != nYbins) {print("CoAnalyse::removeBackground for 2D spectra is suited only for symmetric spectra"); return;}
+      // }
 
-      switch (choice)
-      {
-        case 0: case 2: 
-          // Subtract the background of Y spectra gating on each X bins
-          for (int binX = 0; binX<nXbins; binX++)
-          {
-            TH1F* histo1D = nullptr; 
-            projectY(bidim, histo1D, binX);
-            removeBackground(histo1D, niter);
-            setX(bidim, histo1D, binX);
-            delete histo1D;
-          }
-        break;
+      // switch (choice)
+      // {
+      //   case 0: case 2: 
+      //     // Subtract the background of Y spectra gating on each X bins
+      //     for (int binX = 0; binX<nXbins; binX++)
+      //     {
+      //       TH1F* histo1D = nullptr; 
+      //       projectY(bidim, histo1D, binX);
+      //       removeBackground(histo1D, niter);
+      //       setX(bidim, histo1D, binX);
+      //       delete histo1D;
+      //     }
+      //   break;
 
-        case 1:
-          // Subtract the background of X spectra gating on each Y bins
-          for (int binY = 0; binY<nYbins; binY++)
-          {
-            TH1F* histo1D = nullptr; new TH1F("temp","temp",nYbins, bidim->GetYaxis()->GetXmax(), bidim->GetYaxis()->GetXmin());
-            projectX(bidim, histo1D, binY);
-            removeBackground(histo1D, niter);
-            setY(bidim, histo1D, binY);
-            delete histo1D;
-          }
-        break;
-      }
+      //   case 1:
+      //     // Subtract the background of X spectra gating on each Y bins
+      //     for (int binY = 0; binY<nYbins; binY++)
+      //     {
+      //       TH1F* histo1D = nullptr; new TH1F("temp","temp",nYbins, bidim->GetYaxis()->GetXmax(), bidim->GetYaxis()->GetXmin());
+      //       projectX(bidim, histo1D, binY);
+      //       removeBackground(histo1D, niter);
+      //       setY(bidim, histo1D, binY);
+      //       delete histo1D;
+      //     }
+      //   break;
+      // }
 
       // if (choice == 2)
       // {
@@ -1573,19 +1667,28 @@ namespace CoAnalyse
 
   /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316
   /// @param choice: 0 : classic radware | 1 : Palameta and Waddington (PW) | 2 : Palameta and Waddington asymetric
-  void removeBackground(TH2 * histo, int const & niter = 20, uchar const & choice = 0, double const & threshold = 0.05, double const & sigmaX = 2., double const & sigmaY = 2., bool remove511 = false)
+  void removeBackground(
+    TH2 * histo,
+    int const & niter = 20,
+    uchar const & choice = 0,
+    double const & sigmaX = 2.,
+    double const & sigmaY = 2.,
+    double const & threshold = 0.05,
+    bool remove511 = false)
   {
-    if (!checkMatrixSquare(histo)) {error ("The matrix must be square"); return;}
+    // if (!checkMatrixSquare(histo)) {error ("The matrix must be square"); return;}
 
     auto const & T = histo->Integral();
 
     auto projX0 = histo->ProjectionX("projX0"); // Get the total X projection of the matrix
     auto bckgX = projX0->ShowBackground(niter); // Get the total X projection's fitted background 
+    to_int(bckgX);
     auto projX = static_cast<TH1D*>(projX0->Clone("projX")); // Prepare the background-clean total X projection
     projX->Add(bckgX, -1); // Calculate the background-subtracted spectra
 
     auto projY0 = histo->ProjectionY("projY0");
     auto bckgY = projY0->ShowBackground(niter);
+    to_int(bckgY);
     auto projY = static_cast<TH1D*>(projY0->Clone("projY"));
     projY->Add(bckgY, -1);
 
@@ -1659,6 +1762,7 @@ namespace CoAnalyse
       //2. Perform the background subtraction
       // Calculate the constant S and A used for the method (in the classic method, S=T and A=0 )
       auto S = projX_bis->Integral();
+
       // Attempt for asymetric matrix :
       if (choice == 2) 
       {
@@ -1686,7 +1790,6 @@ namespace CoAnalyse
         bckg_clean->SetBinContent(x, y, new_value);
       }
     }
-
     for (int x=0; x<Nx; ++x) for (int y=0; y<Ny; ++y) histo->SetBinContent(x, y, bckg_clean->GetBinContent(x, y));
   }
 
@@ -1980,6 +2083,25 @@ std::vector<std::string> pad_get_names_of(TPad * pad = nullptr)
   return ret;
 }
 
+void pad_set_Y_axis_nice(TPad * pad = nullptr)
+{
+  if (!pad) 
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos(pad);
+
+  std::vector<double> mins;
+  std::vector<double> maxs;
+  for (auto const & histo : histos)
+  {
+    mins.push_back(histo->GetMinimum()*0.9);
+    maxs.push_back(histo->GetMaximum()*1.1);
+  }
+  histos[0]->GetYaxis()->SetRangeUser(minimum(mins), maximum(maxs));
+}
+
 void pad_remove_stats(TPad * pad = nullptr)
 {
   if (!pad) 
@@ -2014,7 +2136,75 @@ bool has_legend(TPad* pad = nullptr)
   return false;
 }
 
+template<class THist = TH1>
+void pad_normalize_histos(TPad* pad = nullptr, TString options = "nosw2")
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos<THist>(pad);
+  if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+  double maxi = 0;
+  for (auto const & hist : histos) if (maxi < hist->GetMaximum()) maxi = hist->GetMaximum();
+  if (maxi==0.0) {error("max is 0"); return;}
+  bool hasLegend = has_legend(pad);
+  int i = 0;
+  for (auto & hist : histos) 
+  {
+    gPad->GetListOfPrimitives()->Remove(hist);
+    hist->Scale(maxi/hist->GetMaximum(), options);
+    // for (int i = 1; i <= p->GetNbinsX(); ++i) {p->SetBinError(i, 0);} // remove the error bars
+    if (i++ == 0) hist->Draw();
+    else hist->Draw("same");
+  }
+  if (hasLegend) gPad->BuildLegend();
+  pad->Update();
+}
 
+template<class THist = TH1>
+void pad_normalize_histos_min(TPad* pad = nullptr, TString options = "nosw2")
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos<THist>(pad);
+  if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+  double mini = histos[0]->GetMaximum();
+  for (auto const & hist : histos) if (mini > hist->GetMaximum()) mini = hist->GetMaximum();
+  if (mini==0.0) {error("min is 0"); return;}
+  bool hasLegend = has_legend(pad);
+  int i = 0;
+  for (auto & hist : histos) 
+  {
+    gPad->GetListOfPrimitives()->Remove(hist);
+    hist->Scale(mini/hist->GetMaximum(), options);
+    // for (int i = 1; i <= p->GetNbinsX(); ++i) {p->SetBinError(i, 0);} // remove the error bars
+    if (i++ == 0) hist->Draw();
+    else hist->Draw("same");
+  }
+  if (hasLegend) gPad->BuildLegend();
+  pad->Update();
+}
+
+void pad_subtract_histos(TPad* pad = nullptr)
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos<TH1>(pad);
+  if (histos.size() != 2) {error("pad_subtract_histos : needs exactly two histos"); return;}
+  histos[0]->GetXaxis()->UnZoom();
+  histos[1]->GetXaxis()->UnZoom();
+  histos[0]->Add(histos[1], -1);
+  if (has_legend(pad)) gPad->BuildLegend();
+  pad->Update();
+}
 
 ////////////////////////////
 //   Manage histo files   //
@@ -2574,14 +2764,14 @@ template<class... Args> TH2F* myProjectionYZ(TH3F* histo, Args... args) {return 
 template<class... Args> TH2F* myProjectionZY(TH3F* histo, Args... args) {return myProjection2D(histo, "ZY", std::forward<Args>(args)...);}
 
 
-double ratio_integrals(TH1F* histo1, TH1F* histo2, int peak_min, int peak_max)
+double ratio_integrals(TH1* histo1, TH1* histo2, int peak_min, int peak_max)
 {
   return peak_integral(histo1, peak_min, peak_max)/peak_integral(histo2, peak_min, peak_max);
 }
-double ratio_integrals(TH1D* histo1, TH1D* histo2, int peak_min, int peak_max)
-{
-  return peak_integral(histo1, peak_min, peak_max)/peak_integral(histo2, peak_min, peak_max);
-}
+// double ratio_integrals(TH1D* histo1, TH1D* histo2, int peak_min, int peak_max)
+// {
+//   return peak_integral(histo1, peak_min, peak_max)/peak_integral(histo2, peak_min, peak_max);
+// }
 
 namespace CoLib
 {
@@ -2614,7 +2804,7 @@ namespace CoLib
     delete gDirectory->Get("histo_veto_projX");
   }
 
-  TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, double norm, std::string name = "")
+  TH1F* removeVeto(TH1* histo, TH1* histo_veto, double norm, std::string name = "")
   {
     if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH1F*>(histo->Clone(name.c_str()));
@@ -2624,7 +2814,7 @@ namespace CoLib
     return ret;
   }
 
-  TH1F* removeVeto(TH1F* histo, TH1F* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "")
+  TH1F* removeVeto(TH1* histo, TH1* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "")
   {
     return removeVeto(histo, histo_veto, ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max), name);
   }
@@ -2711,59 +2901,6 @@ namespace CoLib
     return ret;
   }
 
-
-  template<class THist = TH1>
-  void normalizeHistos(TPad* pad = nullptr, TString options = "nosw2")
-  {
-    if (!pad)
-    {
-      pad = (TPad*)gPad;
-      if (!pad) {error("no pad"); return;}
-    }
-    auto histos = pad_get_histos<THist>(pad);
-    if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
-    double max = 0;
-    for (auto const & hist : histos) if (max < hist->GetMaximum()) max = hist->GetMaximum();
-    if (max==0.0) {error("max is 0"); return;}
-    bool hasLegend = has_legend(pad);
-    int i = 0;
-    for (auto & hist : histos) 
-    {
-      gPad->GetListOfPrimitives()->Remove(hist);
-      hist->Scale(max/hist->GetMaximum(), options);
-      // for (int i = 1; i <= p->GetNbinsX(); ++i) {p->SetBinError(i, 0);} // remove the error bars
-      if (i++ == 0) hist->Draw();
-      else hist->Draw("same");
-    }
-    if (hasLegend) gPad->BuildLegend();
-    pad->Update();
-  }
-
-  template<class THist = TH1>
-  void normalizeHistosMin(TPad* pad = nullptr)
-  {
-    if (!pad)
-    {
-      pad = (TPad*)gPad;
-      if (!pad) {error("no pad"); return;}
-    }
-    auto histos = pad_get_histos<THist>(pad);
-    if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
-    double min = histos[0]->hist->GetMaximum();
-    for (auto const & hist : histos) if (min < hist->GetMaximum()) min = hist->GetMaximum();
-    if (min==0.0) {error("min is 0"); return;}
-    bool hasLegend = has_legend(pad);
-    int i = 0;
-    for (auto & hist : histos) 
-    {
-      gPad->GetListOfPrimitives()->Remove(hist);
-      hist->Scale(min/hist->GetMaximum());
-      if (i++ == 0) hist->Draw("hist");
-      else hist->Draw("hist same");
-    }
-    if (hasLegend) gPad->BuildLegend();
-    pad->Update();
-  }
 
   template<class THist>
   THist* AddNorm(THist* h1, THist* h2, double min_range, double max_range)
@@ -3146,6 +3283,7 @@ class Radware
       else if (instruction == "ag") this->addGate();
       else if (instruction == "bd") {print("May take a while..."); this->draw(m_bidim, "colz");}
       else if (instruction == "bi") this->set_nb_it_bckg();
+      else if (instruction == "cl") this->clean();
       else if (instruction == "ex") this->ex();
       else if (instruction == "es") this->exportSpectrum();
       else if (instruction == "gs") this->setGateSize();
@@ -3159,6 +3297,7 @@ class Radware
       else if (instruction == "rs") pad_remove_stats();
       else if (instruction == "sp") this->simulatePeak();
       else if (instruction == "sg") this->addGate(false);
+      else if (instruction == "sh") pad_subtract_histos();
       else if (instruction == "sm") this->gate_same();
       else if (instruction == "st") {m_finish = true;}
       else if (instruction == "uz") this->unZoom();
@@ -3201,8 +3340,11 @@ class Radware
 
   void draw(TH1* histo, std::string options = "")
   {
+    print("coucou");
     m_nb_sm = 0;
+    print("coucou2");
     canvas->cd();
+    print("coucou3");
     if (m_focus) histo->GetXaxis()->SetRangeUser(
       m_focus->GetXaxis()->GetBinLowEdge(m_focus->GetXaxis()->GetFirst()), 
       m_focus->GetXaxis()->GetBinUpEdge(m_focus->GetXaxis()->GetLast()));
@@ -3211,6 +3353,30 @@ class Radware
     else options+="hist"; // For 1D
     m_focus->Draw(options.c_str());
     gPad->Update();
+  }
+
+  void clean()
+  {
+    if (m_focus != m_gate) {print("Cleaning is for gated spectrum only..."); return;}
+    int min_E, max_E;
+    std::string instruction;
+
+    std::cout << "normalisation peak min : ";
+    std::getline(std::cin, instruction);
+    if (!checkIsNumber(instruction)) return;
+    min_E = std::stoi(instruction);
+
+    std::cout << "normalisation peak max : ";
+    std::getline(std::cin, instruction);
+    if (!checkIsNumber(instruction)) return;
+    max_E = std::stoi(instruction);
+
+    auto clean_gate = CoLib::removeVeto(m_gate, m_proj, min_E, max_E);
+    delete m_gate;
+    m_gate = clean_gate;
+    // m_gate->Draw();
+    // gPad->Update();
+    this->draw(m_gate);
   }
 
   void simulatePeak()
@@ -3239,7 +3405,7 @@ class Radware
 
   void normalizeSpectra()
   {
-    CoLib::normalizeHistos();
+    pad_normalize_histos();
   }
 
   void exportSpectrum()
@@ -3286,6 +3452,8 @@ class Radware
   {
     if (!m_gate) {error("No gate so far..."); return;}
 
+    std::string add_str = (add) ? "add" : "subtract";
+
     std::cout << "gate to add :";
     std::string instruction;
     std::getline(std::cin, instruction);
@@ -3326,18 +3494,29 @@ class Radware
   void gate_same()
   {
     std::string val_str;
-    print("Choose engergy to draw on top");
+    print("Choose energy to draw on top");
     std::cin >> val_str;
-    if (!checkIsNumber(val_str)) return;
-    auto const & e = std::stoi(val_str);
-    auto const & bin = m_bidim->GetXaxis()->FindBin(e)-1;
-    auto const & low_e = e-m_gate_size;
-    auto const & high_e = e+m_gate_size;
-    std::string name = std::to_string(bin)+" g same";
-    auto gate = static_cast<TH1*>((m_py) 
-      ? m_bidim->ProjectionY("g", low_e, high_e)->Clone(name.c_str())
-      : m_bidim->ProjectionX("g", low_e, high_e)->Clone(name.c_str()));
-    gate->SetTitle((std::to_string(bin)+" gate").c_str());
+    TH1* gate = nullptr;
+    std::string name;
+    if (val_str == "pr") 
+    {
+      name = "m_proj2";
+      gate = ((TH1*)m_proj->Clone(name.c_str()));
+      gate->SetTitle("total projection");
+    }
+    else 
+    {
+      if (!checkIsNumber(val_str)) return;
+      auto const & e = std::stoi(val_str);
+      auto const & bin = m_bidim->GetXaxis()->FindBin(e)-1;
+      auto const & low_e = e-m_gate_size;
+      auto const & high_e = e+m_gate_size;
+      name = std::to_string(bin)+" g same";
+      gate = static_cast<TH1*>((m_py) 
+        ? m_bidim->ProjectionY("g", low_e, high_e)->Clone(name.c_str())
+        : m_bidim->ProjectionX("g", low_e, high_e)->Clone(name.c_str()));
+      gate->SetTitle((std::to_string(bin)+" gate").c_str());
+    }
     gate->Draw("same");
     gate->SetLineColor(m_nice_colors[(++m_nb_sm & 111)]);
     m_list_histo_to_delete.push_back(name);

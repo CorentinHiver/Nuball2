@@ -1,13 +1,13 @@
 #include "../../lib/libRoot.hpp"
 
-void merge_dC1_reader(std::string filename = "new_new_merge_dC1.root")
+void merge_dC1_reader(std::string filename = "merge_dC1_V2.root")
 {
   auto file = TFile::Open(filename.c_str());
   if (!file) throw_error(filename+ "absent !");
-  auto d_VS_DC = file->Get<TH2F>("d_VS_PC");
-  auto d_VS_DC_p = file->Get<TH2F>("d_VS_PC_p");
-  auto d_VS_DC_pP = file->Get<TH2F>("d_VS_PC_pP");
-  auto d_VS_DC_ExSIP = file->Get<TH2F>("d_VS_PC_ExSIP");
+  auto d_VS_DC = file->Get<TH2F>("d_VS_DC");
+  auto d_VS_DC_p = file->Get<TH2F>("d_VS_DC_p");
+  auto d_VS_DC_pP = file->Get<TH2F>("d_VS_DC_pP");
+  auto d_VS_DC_ExSIP = file->Get<TH2F>("d_VS_DC_ExSIP");
 
   auto gate2MeV_p = d_VS_DC_p->ProjectionY("gate2MeVp", 150, 250);
   auto gate2MeV_pP = d_VS_DC_pP->ProjectionY("gate2MeVpP", 150, 250);
@@ -83,5 +83,7 @@ void merge_dC1_reader(std::string filename = "new_new_merge_dC1.root")
   clean_DC_VS_PC_d642_2->ProjectionY("clean_DC_642_P_2", 1, -1)->Draw("same");
   gPad->SetLogy();
 
-  
+  new TCanvas;
+
+  d_VS_DC_VS_PC->ProjectionZ("test", 2, 30, 20, 30)->Draw()
 }

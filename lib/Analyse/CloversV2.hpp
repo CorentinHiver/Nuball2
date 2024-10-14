@@ -42,7 +42,7 @@ public:
   }
 
   static constexpr inline uchar subIndex(Label const & label) noexcept {return uchar_cast((label-23)%6);}
-  static constexpr inline bool  isClover(Label const & label) noexcept {return 22 < label && label < 200;}
+  static constexpr inline bool  isClover(Label const & label) noexcept {return 22 < label && label < 168;}
   static constexpr inline bool  isGe(Label const & label)     noexcept {return (isClover(label) && subIndex(label)>1);}
   static constexpr inline bool  isR2(Label const & label)     noexcept {return (isClover(label) && label > 94);}
   static constexpr inline bool  isR3(Label const & label)     noexcept {return (isClover(label) && label < 95);}

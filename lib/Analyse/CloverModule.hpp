@@ -31,7 +31,7 @@ public:
 
   void reset();
   void clear() {this -> reset();}
-  void clean() {this -> reset();}
+  // void clean() {this -> reset();}
   auto const & index() const {return m_index;}
   static void resetGlobalLabel() {gIndex = 0;}
 

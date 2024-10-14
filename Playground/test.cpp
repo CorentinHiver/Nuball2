@@ -1,4 +1,4 @@
-// #include <MTObject.hpp>
+#include <MTObject.hpp>
 // #include <libCo.hpp>
 #include <libRoot.hpp>
 // #include <Paris.hpp>
@@ -7,7 +7,7 @@
 // #include <Hit.hpp>
 // #include <FasterReader.hpp>
 // #include <Detectors.hpp>
-#include <Timeshiftor.hpp>
+// #include <Timeshiftor.hpp>
 // #include <HitBuffer.hpp>
 // #include <SourceCloverSpectra.hpp>
 // #include <Calibration.hpp>
@@ -15,11 +15,12 @@
 // #include <Alignator.hpp>
 // #include <Nuball2Tree.hpp>
 // #include <Timer.hpp>
+#include <RF_Manager.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
 // #include <Convertor.hpp>
 // #include <MTRootReader.hpp>
-// #include <MTFasterReader.hpp>
+#include <MTFasterReader.hpp>
 // #include <RWMat.hpp>
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
@@ -29,7 +30,7 @@
 // #include <SpectraCo.hpp>
 // #include "../136/Calibrate/calibrate_spectra.C"
 // #include <CobaltCalorimeter.hpp>
-// #include <MultiHist.hpp>
+#include <MultiHist.hpp>
 // #include <Manip.hpp>
 
 // #include <TROOT.h>
@@ -43,6 +44,25 @@
 
 int main()
 {
+
+  MTFasterReader reader(Path::home()+"nuball2/N-SI-136/run_80.fast/", 20);
+  RF_Manager rf;
+  RF_Manager::setOffset(0);
+  MTObject::Initialise(10);
+  MultiHist<TH1F> dT("dT", "dT", 300,-50_ns,250_ns);
+  reader.readAligned([&](Alignator & tree, Hit & hit){
+    while (tree.Read())
+    {
+      if (rf.setHit(hit)) continue;
+      dT.Fill(rf.relTime(hit.stamp));
+    }
+  });
+
+  auto file = TFile::Open("test.root", "recreate");
+  file->cd();
+  dT.Write();
+  file->Close();
+
   //////////////////////////////////////
   // TEST MERGING MATCHING HISTOGRAMS //
   //////////////////////////////////////
@@ -303,14 +323,14 @@ int main()
   // if (found(Path::pwd().string(), "faster")) MTObject::Initialise(10);
   // else                              MTObject::Initialise(2);
 
-  MTObject::Initialise(4);
-  detectors.load("index_129.list");
-  Timeshiftor ts;
-  // ts.dT_with_biggest_peak_finder();
-  ts.setMult(2,4);
-  ts.calculate(Path::home().string()+"nuball2/N-SI-136/60Co_center_after.fast", 20);
-  ts.verify(Path::home().string()+"nuball2/N-SI-136/60Co_center_after.fast", 20);
-  ts.write("136_Co_after");
+  // MTObject::Initialise(4);
+  // detectors.load("index_129.list");
+  // Timeshiftor ts;
+  // // ts.dT_with_biggest_peak_finder();
+  // ts.setMult(2,4);
+  // ts.calculate(Path::home().string()+"nuball2/N-SI-136/60Co_center_after.fast", 20);
+  // ts.verify(Path::home().string()+"nuball2/N-SI-136/60Co_center_after.fast", 20);
+  // ts.write("136_Co_after");
   // print(ts);
 
 // ______________________________________

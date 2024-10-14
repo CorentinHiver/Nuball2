@@ -566,7 +566,11 @@ void MultiHist<THist>::Write()
           || (m_merged -> Integral() < 1)) return;
       else
       {
-        if (m_verbose) print("writing", m_name);
+        if (m_verbose) 
+        {
+          print("writing", m_name);
+          if (MTObject::getThreadsNb()*m_merged->GetNcells() > 1.e9) print("Might take some time ...");
+        }
         m_merged -> Write(m_name.c_str(), TROOT::kOverwrite);
         m_written = true;
       }

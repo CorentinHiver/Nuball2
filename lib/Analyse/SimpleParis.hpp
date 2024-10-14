@@ -122,12 +122,14 @@ namespace Paris
 
   static constexpr inline bool pid_LaBr3(double const & qshort, double const & qlong)
   {
+    if (qshort < 0 || qlong < 0) return false;
     auto const & ratio = qshort/qlong;
     return (0.75 < ratio && ratio < 1.1);
   }
 
   static constexpr inline bool pid_good_phoswitch(double const & qshort, double const & qlong)
   {
+    if (qshort < 0 || qlong < 0) return false;
     auto const & ratio = qshort/qlong;
     return (-0.5 < ratio && ratio < 1.1);
   }
@@ -266,6 +268,10 @@ public:
   {
     auto const & label = event.labels[hit_i];
     auto const & id = Paris::cluster_index[label];
+    auto const & nrj = Paris::cluster_index[label];
+    auto const & nrj2 = Paris::cluster_index[label];
+
+    if (nrj < 0 || nrj2 < 0) return nullptr;
 
     if (Paris::cluster_size < id+1) {error("in SimpleCluster::fill : index", id, "> cluster_size !!"); return nullptr;}
 
