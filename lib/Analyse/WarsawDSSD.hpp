@@ -259,7 +259,7 @@ private:
 class WarsawDSSD
 {public:
   WarsawDSSD() noexcept = default;
-  WarsawDSSD(ExcitationEnergy* Ex) : m_Ex(Ex) {}
+  WarsawDSSD(ExcitationEnergy* Ex) noexcept : m_Ex(Ex) {}
 
   bool fill(Event const & event, int const & hit_i)
   {
