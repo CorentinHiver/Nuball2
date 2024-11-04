@@ -23,8 +23,8 @@ static std::vector<Label> blacklist = {501};
 void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
 {
 
-  // std::string target = "Th";
-  std::string target = "U";
+  std::string target = "Th";
+  // std::string target = "U";
   // std::string trigger = "P";
   std::string trigger = "dC1";
   // std::string trigger = "C2";

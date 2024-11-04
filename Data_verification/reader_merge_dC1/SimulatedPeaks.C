@@ -80,6 +80,8 @@ void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
   auto d_pP = file->Get<TH1F>("d_pP");
   auto d_VS_PC_p = file->Get<TH2F>("d_VS_PC_p");
   auto d_pPC3 = d_VS_PC_p->ProjectionY("d_pPC3_", 2, 300);
+  auto d_p_prompt_veto = file->Get<TH1F>("d_p_prompt_veto");
+  auto d_p_clean = CoLib::removeVeto(d, d_prompt_veto, 505, 515, "d_clean");
 
 
   auto dd = file->Get<TH2F>("dd");
@@ -180,7 +182,7 @@ void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
     singles_plot(d_PC3, d_PC3_canvas, "PC3 condition", E, n_P);
     singles_plot(d_PC3DC3, d_PC3DC3_canvas, "P3DC3 condition", E, n_P);
     singles_plot(d_clean, d_PC3DC3_clean_canvas, "P3DC3 veto clean condition", E, n_P);
-    singles_plot(d_p, d_p_canvas, "pP condition", E, n_pP);
+    singles_plot(d_p, d_p_canvas, "p condition", E, n_pP);
     singles_plot(d_pP, d_pP_canvas, "pP condition", E, n_pP);
     singles_plot(d_pPC3, d_pPC3_canvas, "pPC3 condition", E, n_pP);
 

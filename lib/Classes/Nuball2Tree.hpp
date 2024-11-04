@@ -84,6 +84,7 @@ public:
   auto const & cursor() const {return m_cursor;}
 
   auto & cursor() {return m_cursor;}
+  auto cursor_ptr() {return &m_cursor;}
 
   void reset() {m_cursor = 0;}
   

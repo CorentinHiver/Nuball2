@@ -93,6 +93,7 @@ public:
   // static void SetTimewalk(std::string const & fit_filename) {m_timewalk.loadFile(fit_filename);}
   // static std::array<Timewalk> m_timewalk;
 
+  void operator=(Event const & event) {this->SetEvent();}
   void SetEvent(Event const & event);
   void Fill(Event const & evt, int const & index);
 

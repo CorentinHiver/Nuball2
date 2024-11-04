@@ -112,7 +112,7 @@ public:
     else
     {
       this -> clean();
-      if (m_collection.size()<1) m_collection.reserve(1);
+      m_collection.reserve(1);
       m_merged = hist; m_is_merged = true; 
       m_exists = m_outScope = true; m_integral = hist->Integral(); 
       m_name = hist->GetName(); m_title = hist->GetTitle();
@@ -125,7 +125,7 @@ public:
     m_comment  (hist.m_comment  ),
     m_name     (hist.m_name     ),
     m_exists   (hist.m_exists   ),
-    m_written  (hist.m_written  ),
+    m_is_written  (hist.m_is_written  ),
     m_integral (hist.m_integral ),
     m_merged   (hist.m_merged   )
     #ifndef MULTITHIST_MONO
@@ -143,7 +143,7 @@ public:
     m_comment  (std::move(hist.m_comment  )),
     m_name     (std::move(hist.m_name     )),
     m_exists   (std::move(hist.m_exists   )),
-    m_written  (std::move(hist.m_written  )),
+    m_is_written  (std::move(hist.m_is_written  )),
     m_integral (std::move(hist.m_integral )),
     m_merged   (std::move(hist.m_merged   ))
   #ifndef MULTITHIST_MONO
@@ -162,11 +162,12 @@ public:
     m_comment  = "";
     m_name = "";
     m_exists = false;
-    m_written  = false;
+    m_is_written  = false;
     m_integral = 0ull;
-    delete m_merged; m_merged = nullptr;
-    for (auto & histo : m_collection) delete histo;
+    if (!m_collection.empty()) for (auto & histo : m_collection) delete histo;
+    else delete m_merged;
     m_collection.clear();
+    m_merged = nullptr;
     m_is_merged  = false;
   }
 
@@ -175,11 +176,12 @@ public:
     m_comment  = "";
     m_name = "";
     m_exists = false;
-    m_written  = false;
+    m_is_written  = false;
     m_integral = 0ull;
-    delete m_merged; m_merged = nullptr;
-    if (MTObject::ON) for (auto & histo : m_collection) delete histo;
+    if (!m_collection.empty()) for (auto & histo : m_collection) delete histo;
+    else delete m_merged;
     m_collection.clear();
+    m_merged = nullptr;
     m_is_merged  = false;
   }
 
@@ -191,24 +193,8 @@ public:
   /// @brief Copy Initializer.
   MultiHist<THist> & reset(MultiHist<THist> const & hist) 
   { 
-    // Execution stops here : it is forbidden so far to copy this object !!
+    // Execution stops here : it is forbidden to copy a MultiHist, because of the memory handling of root !!
     throw CopyError(hist);
-
-    // If want to use this constructor, one has to make the following good looking
-    m_comment  = hist.m_comment ;
-    m_name     = hist.m_name    ;
-    m_exists   = hist.m_exists  ;
-    m_written  = hist.m_written ;
-    m_integral = hist.m_integral;
-    *m_merged  = new TH1F(*hist.m_merged);
-    m_collection.reserve(hist.m_collection.size());
-    for (auto const & histo : hist.m_collection) 
-    {
-      m_collection.push_back(histo->Clone());
-      m_collection = hist.m_collection;
-      m_is_merged  = hist.m_is_merged;
-      return *this;
-    }
   }
 
   MultiHist<THist> & operator=(MultiHist<THist> const & hist)
@@ -231,8 +217,9 @@ public:
   void reset(std::nullptr_t)
   {
     m_exists = false;
-    delete m_merged; m_merged = nullptr;
-    if (MTObject::ON) for (auto & histo : m_collection) delete histo;
+    if (!m_collection.empty()) for (auto & histo : m_collection) delete histo;
+    else delete m_merged;
+    m_merged = nullptr;
   }
 
   //General initializer to construct any root histogram vector starting with its name:
@@ -279,14 +266,22 @@ public:
     if (m_merged) return m_merged;
     else 
     {
-      debug("MultiHist", m_name ,"not merged !!! Merging ..."); 
+      debug("in THist::operator->() : MultiHist", m_name ,"not merged !!! Merging ..."); 
       this -> Merge();
       if (m_merged) return m_merged;
       else return nullptr;
     }
   }
 
-  THist * operator->() const {if (m_merged) return m_merged; else return nullptr;}
+  THist * operator->() const 
+  {
+    if (m_merged) return m_merged; 
+    else 
+    {
+      debug("in THist::operator->() : MultiHist", m_name ,"not merged !!! Can't merge because calling the const method."); 
+      return nullptr;
+    }
+  }
 
 #endif //UNSAFE
 
@@ -311,7 +306,6 @@ public:
 
   #endif //MULTITHIST_MONO
 
-
   void setComment(std::string const & comment) {m_comment = comment;}
   std::string const & readComment() const {return m_comment;}
 
@@ -329,7 +323,7 @@ private:
   std::string m_title  ;
 
   bool m_exists   = false;
-  bool m_written  = false;
+  bool m_is_written  = false;
   bool m_outScope = false;
   
   ulonglong m_integral = 0ull;
@@ -389,13 +383,15 @@ inline void MultiHist<THist>::reset(std::string name, ARGS &&... args)
     }
     else
     {// In most situations, we end up here
-      if (m_collection.size()>0)
-      {// First delete any previous objects
+      if (!m_collection.empty())
+      {// First delete any previous objects (should never be the case but who knows)
         for (auto & histo : m_collection) delete histo;
         m_collection.clear();
       }
-      // Reserve enough space in the vector
+      // Reserve enough space in the vector to hold all the histograms :
       m_collection.resize(thread_nb, nullptr);
+      
+      // Fill the vector of histograms:
       for (size_t i = 0; i<thread_nb; i++) 
       {
         m_collection[i] = new THist ((name+"_"+std::to_string(i)).c_str(), std::forward<ARGS>(args)...);
@@ -440,7 +436,7 @@ template <class THist>
 template <class... ARGS>
 inline void MultiHist<THist>::Fill(ARGS &&... args) noexcept
 {
-  m_integral++;
+  ++m_integral;
 #ifdef MULTITHIST_MONO
   lock_mutex lock(m_mutex);
   m_merged -> Fill(std::forward<ARGS>(args)...);
@@ -455,17 +451,23 @@ inline void MultiHist<THist>::Fill(ARGS &&... args) noexcept
 template <class THist>
 inline void MultiHist<THist>::Merge_t()
 {
-  m_merged = static_cast<THist*> (m_collection[0]->Clone(m_name.c_str()));
-  m_merged->SetDirectory(nullptr);
-  delete m_collection[0];
-  for (size_t i = 1; i<m_collection.size(); i++) 
+  // Set the merged histogram to the address of the first histogram
+  m_merged = m_collection[0];
+  if (MTObject::ON)
   {
-    auto & histo = m_collection[i]; // Simple alias
-    if (!histo) continue;
-    if (histo->Integral() > 0) m_merged -> Add(histo);
-    delete histo;
+    for (size_t i = 1; i<m_collection.size(); i++) 
+    {
+      auto & histo = m_collection[i]; // Simple alias to call the histogram
+      if (!histo || histo->IsZombie()) continue; // If no pointer or already deleted histogram, do not treat
+      if (histo->Integral() > 0) m_merged -> Add(histo);
+      delete histo;
+    }
   }
   m_collection.clear();
+  m_merged->SetName(m_name.c_str());
+  m_merged->SetTitle(m_title.c_str());
+  m_is_merged = true;
+  m_integral = m_merged->Integral();
 }
 
 // // We could translate this inside MTObject after testing it really works
@@ -489,7 +491,6 @@ inline void MultiHist<THist>::Merge_t()
 // }
 
 /// @brief Merges the histograms
-/// @attention Can merge only once 
 template<class THist>
 THist* MultiHist<THist>::Merge()
 {
@@ -502,84 +503,59 @@ THist* MultiHist<THist>::Merge()
     delete m_merged;
     m_merged = nullptr;
   }
-  else if (!m_is_merged)
-  {
-    if (MTObject::ON)
-    {
-      lock_mutex lock(m_mutex);
-      this -> Merge_t();
-    }
-    m_is_merged = true;
-  }
-  if (m_merged) m_integral = m_merged->Integral();
+  else if (!m_is_merged) this -> Merge_t();
   return m_merged;
 }
 
 template<class THist>
 THist* MultiHist<THist>::Merged()
 {
-  if (!m_is_merged)
-  {
-    debug("No merged histogram yet for");
-    return (m_merged = new THist());
-  }
-  else return m_merged;
+  #ifdef DEBUG
+  if (!m_is_merged) print("No merged histogram yet for");
+  #endif //DEBUG
+  return m_merged;
 }
 #endif //! MULTITHIST_MONO
-
-// template<class THist>
-// void MultiHist<THist>::Write_i(int const & thread_index)
-// {
-//   if  (   !m_exists
-//         || m_collection.size()<1
-//         ||!m_collection[thread_index]
-//         || m_collection[thread_index] -> IsZombie()
-//         || m_collection[thread_index] -> Integral() < 1
-//       ) return;
-//   else
-//   {
-//     if (m_verbose) print("writing", m_name);
-//     m_collection[thread_index] -> Write();
-//     delete m_collection[thread_index];
-//     m_written = true;
-//   }
-// }
 
 template<class THist>
 void MultiHist<THist>::Write()
 {
-  if (m_exists && m_is_merged)
-  {// If the histogram has already been merged
-    if (m_verbose) print("writing", m_name);
-    m_merged -> Write(m_name.c_str(), TROOT::kOverwrite);
-    m_written = true;
-  }
-  
-  if (MTObject::ON) 
+  if (!gFile) {error("MultiHist<THist>::Write() : No output file selected for", m_name); return;}
+  bool write_ok = false;
+  m_is_written = false;
+
+  // If the histogram has already been merged :
+  if (m_exists && m_is_merged && m_merged && !m_merged->IsZombie()) write_ok = true;
+  else 
   {
-    if (MTObject::isMasterThread())
+    if (MTObject::ON) 
     {
-      this -> Merge();
-      if (   !m_exists
-          || !m_merged
-          ||  m_merged -> IsZombie()
-          || (m_merged -> Integral() < 1)) return;
-      else
+      if (MTObject::isMasterThread())
       {
-        if (m_verbose) 
-        {
-          print("writing", m_name);
-          if (MTObject::getThreadsNb()*m_merged->GetNcells() > 1.e9) print("Might take some time ...");
-        }
-        m_merged -> Write(m_name.c_str(), TROOT::kOverwrite);
-        m_written = true;
+        this -> Merge();
+        if (m_is_merged && m_exists && m_merged && !m_merged -> IsZombie() && (m_merged -> Integral() > 0)) write_ok = true;
       }
+      else error("Please write the MultiHist in the master thread");
     }
-    else error("Please write the MultiHist in the master thread");
+    else error("Error in MultiHist<THist>::Write() : histogram", m_name,"do not exist");
   }
-  else m_merged -> Write();
+
+  if (write_ok)
+  {
+    if (m_verbose) 
+    {
+      print("writing", m_name);
+      if (MTObject::getThreadsNb()*m_merged->GetNcells() > 1.e9) print("Might take some time ...");
+    }
+    m_merged -> SetDirectory(gFile);
+    m_merged -> Write();
+    // m_merged -> Write(m_name.c_str());
+    m_is_written = true;
+    // m_merged -> Write(m_name.c_str(), TROOT::kOverwrite);
+  }
 }
 
+/// @brief Print operator
 template <class THist>
 std::ostream& operator<<(std::ostream& out, MultiHist<THist> const & histo)
 {
@@ -604,20 +580,15 @@ void MultiHist<THist>::Print()
 template <class THist>
 MultiHist<THist>::~MultiHist()
 {
-  // print("---------------");
-  // print(*this);
-  delete m_merged; m_merged = nullptr;
-  if (MTObject::ON) for (auto & histo : m_collection) delete histo;
-  m_collection.clear();
-  // print(*this);
-
-#ifndef MULTITHIST_MONO
-  // else if (!MTObject::ON && !m_merged_deleted && m_exists && !m_outScope)
-  // {
-  //   m_merged_deleted = true;
-  // }
-#endif //!MULTITHIST_MONO
-
+  if (!m_is_written) 
+  {
+    if (MTObject::ON) for (auto & histo : m_collection) delete histo;
+    else delete m_merged;
+    m_collection.clear();
+  } 
+  print((m_merged) ? "la" : "pas la");
+  if (m_merged) print((m_merged->IsZombie()) ? "pas la 2" : "la 2");
+  if (m_merged && !m_merged->IsZombie()) delete m_merged;
 }
 
 template <class THist>

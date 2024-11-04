@@ -1,6 +1,8 @@
 #ifndef PHOSWITCHCALIB_HPP
 #define PHOSWITCHCALIB_HPP
 
+// Dealing with the Qshort VS Qlong matrix
+
 #include "../Classes/Hit.hpp"
 class PhoswitchCalib
 {
@@ -13,7 +15,7 @@ public:
     std::ifstream file(filename, std::ios::in);
     if (!file.good()) throw_error(concatenate("in PhoswitchCalib::PhoswitchCalib(std::string filename) : file", filename, " can't be open"));
     Label label = 0; double angle = 0; double coeff = 0;
-    while(file >> label >> angle >> coeff) data.emplace(label, Coefficients({angle, coeff}));
+    while(file >> label >> angle >> coeff) data.emplace(label, Calib({angle, coeff}));
     file.close();
     prepare();
   }
@@ -36,16 +38,16 @@ public:
   auto getCoeffs() const
   {
     std::map<Label, double> ret;
-    for (auto const & coeff : data)
+    for (auto const & calib : data)
     {
-      ret.emplace(coeff.first, coeff.second.coeff);
+      ret.emplace(calib.first, calib.second.coeff);
     }
     return ret;
   }
 
-  class Coefficients
+  class Calib
   {public:
-    Coefficients(std::initializer_list<double> const & inputs)
+    Calib(std::initializer_list<double> const & inputs)
     {
       if (inputs.size() == 2) 
       {
@@ -55,13 +57,13 @@ public:
       }
     }
 
-    Coefficients(std::pair<double, double> const & input)
+    Calib(std::pair<double, double> const & input)
     {
       angle = input.first;
       coeff = input.second;
     }
 
-    Coefficients & operator=(std::initializer_list<double> const & inputs)
+    Calib & operator=(std::initializer_list<double> const & inputs)
     {
       if (inputs.size() == 2) 
       {
@@ -89,7 +91,7 @@ public:
     double coeff = 0;
   };
 
-  std::map<Label, Coefficients> data;
+  std::map<Label, Calib> data;
 };
 
 

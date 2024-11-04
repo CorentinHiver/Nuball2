@@ -28,7 +28,13 @@
 class RF_Manager
 {
 public:
-  RF_Manager(Time const & _period = 400000, Label const & label_RF = 251) {label = label_RF; period = _period;}
+  RF_Manager(Time const & _period = 400000) :
+    period(_period)
+  {
+    #ifdef MULTITHREADING
+      if (MTObject::ON && MTObject::isMasterThread()) print("In multithread mode, you souldn't instanciate RF_Manager in the master thread");
+    #endif //MULTITHREADING
+  }
   bool setHit(Hit const & hit);
 #ifdef EVENT_HPP
   bool setHit(Event const & event, int const & hit_i);

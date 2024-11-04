@@ -778,7 +778,7 @@ std::vector<PeakEnergy> refineAssociations(const std::vector<double>& positions,
 }
 
 
-std::tuple<double,double,double,double,double,double>PeakFitting_HR(TH1F *h,double position,double gamma_energy,double gamma_energy_err,double gamma_intensity,double _Ndecays)
+std::tuple<double,double,double,double,double,double> PeakFitting_HR(TH1F *h,double position,double gamma_energy,double gamma_energy_err,double gamma_intensity,double _Ndecays)
 {
     double peakpos = 0;
     double peakpos_err = 0;

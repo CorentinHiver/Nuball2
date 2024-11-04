@@ -1,14 +1,16 @@
 #ifndef PARISBIDIMANGLES_HPP
 #define PARISBIDIMANGLES_HPP
 
+// Dealing with the Qshort VS Qlong matrix
 class ParisBidimAngles
 {
 public:
   ParisBidimAngles() noexcept {};
   ParisBidimAngles(std::string const & filename) : m_filename(filename) {load(filename);}
+  
   void load(std::string const & filename);
-
   void write(std::string const & filename);
+  void calculate(std::string const & filename);
 
   std::pair<double, double> const & operator[] (std::string name) {return m_angles.at(name);}
   
@@ -74,6 +76,11 @@ std::ostream& operator<<(std::ostream& out, ParisBidimAngles const & angles)
   for (auto const & name : angles.names()) out << name << " " << angles.angleNaI(name) << " " << angles.angleLaBr(name) << std::endl;
   
   return out;
+}
+
+void calculate(std::string const & filename)
+{
+  
 }
 
 void ParisBidimAngles::write(std::string const & filename)

@@ -337,6 +337,52 @@ TH2F* rotateAndCalibrate(TH2F* bidim, double angle, double const & coeff)
 }
 
 /**
+ * @brief Meant for Paris matrix Q_{short}/Q_{long} VS Qshort or Qlong
+ * @param slope: true -> slope; false -> inverted slope
+ * @param VSaxisX: true -> slope VS x axis ; false -> slope VS y axis
+ */
+TH2F* slopeVSaxis(TH2F* bidim, bool slope = true, bool VSaxisX = true)
+{
+  auto const & name = bidim->GetName();
+  auto const & title = bidim->GetTitle();
+  
+  auto xAxis = bidim->GetXaxis();
+  auto const & binsX =  xAxis->GetNbins();
+  auto const & minX  =  xAxis->GetXmin();
+  auto const & maxX  =  xAxis->GetXmax();
+
+  auto yAxis = bidim->GetYaxis();
+  auto const & binsY = yAxis->GetNbins();
+  auto const & minY  = yAxis->GetXmin();
+  auto const & maxY  = yAxis->GetXmax();
+
+  auto slopeBidim = new TH2F((name+std::string("_slope")).c_str(), (title+std::string(" slope")).c_str(), binsX,minX,maxX, 1000, 0, 10);
+  // return slopeBidim;
+
+  for (int binX = 0; binX<binsX; binX++)
+  {
+    for (int binY = 0; binY<binsY; binY++)
+    {
+      auto const & nb_hits   = bidim->GetBinContent(binX, binY);
+      auto const & oldX  = bidim->GetXaxis()->GetBinCenter(binX);
+      auto const & oldY = bidim->GetYaxis()->GetBinCenter(binY);
+
+      auto const & oldX_range  = bidim->GetYaxis()->GetBinCenter(binX+1)-oldX ;
+      auto const & oldY_range = bidim->GetXaxis()->GetBinCenter(binY+1)-oldY;
+      for (int hit_i = 0; hit_i<nb_hits; hit_i++)
+      {
+        auto const & randX = oldY + randomCo::uniform(0, oldY_range);
+        auto const & randY  = oldX  + randomCo::uniform(0, oldX_range);
+        auto const & _slope = (slope) ? randX/randY : randY/randX;
+        auto const & _xaxis = (VSaxisX) ? randX : randY;
+        slopeBidim->Fill(_xaxis, _slope);
+      }
+    }
+  }
+  return slopeBidim;
+}
+
+/**
  * @brief Get the last peak position object
  * 
  * @param threshold procentage over total
@@ -2544,7 +2590,17 @@ void GetPoint(TVirtualPad * vpad, double& x, double& y)
   delete cutg;
 }
 
-double selectXPoints(TH1* histo, std::string const & instructions)
+CoLib::Point selectPoint(TH1* histo, std::string const & instructions)
+{
+  double x = 0; double y = 0;
+  gPad->SetTitle(instructions.c_str());
+  histo->SetTitle(instructions.c_str());
+  GetPoint(gPad->cd(), x, y);
+  gPad->Update();
+  return {x, y};
+}
+
+double selectPointX(TH1* histo, std::string const & instructions)
 {
   double x = 0; double y = 0;
   gPad->SetTitle(instructions.c_str());
@@ -2552,6 +2608,16 @@ double selectXPoints(TH1* histo, std::string const & instructions)
   GetPoint(gPad->cd(), x, y);
   gPad->Update();
   return x;
+}
+
+double selectYPoint(TH1* histo, std::string const & instructions)
+{
+  double x = 0; double y = 0;
+  gPad->SetTitle(instructions.c_str());
+  histo->SetTitle(instructions.c_str());
+  GetPoint(gPad->cd(), x, y);
+  gPad->Update();
+  return y;
 }
 
 void addBinContent(TH1* histo, int const & bin, double const & value)
@@ -2590,10 +2656,10 @@ TH1D* myProjectionX(TH2* histo, std::string const & name, double const & x_value
   if (!gPad) histo->Draw("colz");
   auto projY = histo->ProjectionY(concatenate("projY_", histo->GetName()).c_str());
   projY->GetYaxis()->SetRangeUser(x_value-5*resolution, x_value+5*resolution);
-  double const & xvalue_min = selectXPoints(projY, "Select low edge of peak");
-  double const & xvalue_max = selectXPoints(projY, "Select high edge of peak");
-  double const & xvalue_min_bckg = selectXPoints(projY, "Select low edge of background");
-  double const & xvalue_max_bckg = selectXPoints(projY, "Select high edge of background");
+  double const & xvalue_min = selectPointX(projY, "Select low edge of peak");
+  double const & xvalue_max = selectPointX(projY, "Select high edge of peak");
+  double const & xvalue_min_bckg = selectPointX(projY, "Select low edge of background");
+  double const & xvalue_max_bckg = selectPointX(projY, "Select high edge of background");
   delete projY;
   return myProjectionX(histo, name, xvalue_min, xvalue_max, xvalue_min_bckg, xvalue_max_bckg);
 }
@@ -2611,10 +2677,10 @@ TH1D* myProjectionY(TH2* histo, std::string const & name, double const & x_value
   if (!gPad) histo->Draw("colz");
   auto projX = histo->ProjectionX(concatenate("projX_", histo->GetName()).c_str());
   projX->GetYaxis()->SetRangeUser(x_value-5*resolution, x_value+5*resolution);
-  double const & xvalue_min = selectXPoints(projX, "Select low edge of peak");
-  double const & xvalue_max = selectXPoints(projX, "Select high edge of peak");
-  double const & xvalue_min_bckg = selectXPoints(projX, "Select low edge of background");
-  double const & xvalue_max_bckg = selectXPoints(projX, "Select high edge of background");
+  double const & xvalue_min = selectPointX(projX, "Select low edge of peak");
+  double const & xvalue_max = selectPointX(projX, "Select high edge of peak");
+  double const & xvalue_min_bckg = selectPointX(projX, "Select low edge of background");
+  double const & xvalue_max_bckg = selectPointX(projX, "Select high edge of background");
   delete projX;
   return myProjectionY(histo, name, xvalue_min, xvalue_max, xvalue_min_bckg, xvalue_max_bckg);
 }
@@ -3484,8 +3550,8 @@ class Radware
 
   void ex()
   {
-    auto const & low = selectXPoints(m_focus, "Low edge");
-    auto const & high = selectXPoints(m_focus, "High edge");
+    auto const & low = selectPointX(m_focus, "Low edge");
+    auto const & high = selectPointX(m_focus, "High edge");
     m_focus->GetXaxis()->SetRangeUser(low, high);
     this->draw(m_focus);
     gPad->Update();

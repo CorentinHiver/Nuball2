@@ -482,13 +482,23 @@ template<class T> T positive_modulo(T const & dividend, T const & divisor)
   return ret;
 }
 
-namespace CoBazar
+namespace CoLib
 {
   template<class T, class... ARGS>
   inline T sum(T i, ARGS... args) {return i+sum(args...);}
 
   template<class... ARGS>
   inline double mean(ARGS... args) {return double_cast(sum(args...) / sizeof...(args));}
+
+  using Point = std::pair<double, double>;
+  constexpr static Point rotate(double const & x, double const & y, double const & angle) 
+  {
+    return Point(x * cos(angle) - y * sin(angle), x * sin(angle) + y * cos(angle));
+  }
+  constexpr static Point rotate(Point const & point, double const & angle) 
+  {
+    return Point(point.first * cos(angle) - point.second * sin(angle), point.first * sin(angle) + point.second * cos(angle));
+  }
 }
 
 
@@ -723,7 +733,7 @@ class Slots
 //   SOME COOL STUFF   //
 /////////////////////////
 
-namespace CoBazar
+namespace CoLib
 {
   void progress_bar(float const & progress_percent, int width = 50)
   {

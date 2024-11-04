@@ -10,7 +10,7 @@
  * 
  * parameters 1-3 : sigmoid for the left step
  * parameters 4-6 : normal gaussian
- * parameters 7-9 : second gaussian for neutrons loss
+ * parameters 7-9 : second gaussian from neutrons damage
  * 
  * @param xx: spectrum data
  * @param pp: 0 : null 1 : back const | 2 : back slope | 3 : back exp | 4 : amplitude | 5 : mean | 6 : resolution (2.35482*sigma) | 7 : Lambda | 8 : Rho | 9 : S

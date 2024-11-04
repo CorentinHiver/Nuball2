@@ -57,7 +57,7 @@ private:
 template<class T>
 void CoProgressBar<T>::showEvery(long const & freq)
 {
-  if ((*m_value%freq) == 0) this->showFast();
+  if ((*m_value%freq) == 0 || float_cast(*m_value) == m_value_max-1) this->showFast();
 }
 
 template<class T>

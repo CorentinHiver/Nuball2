@@ -191,10 +191,10 @@ class FasterReader
 
 	// Grouped data management :
 	ushort               m_group_read_cursor = 0;
-  ushort               m_group_write_cursor = 0;
+    ushort               m_group_write_cursor = 0;
 	std::vector<Hit *>   m_hit_group_buffer;
 	faster_file_reader_p m_reader = NULL;
-	faster_data_p        m_data;
+	faster_data_p        m_data = NULL;
 
 	void TreatTrapez(faster_data_p const & _data);
 	void TreatCRRC4 (faster_data_p const & _data);
@@ -220,7 +220,7 @@ bool inline FasterReader::Reset()
 	m_counter = 0;
 	m_group_read_cursor = 0;
 	m_group_write_cursor = 0;
-	m_data = nullptr;
+	m_data = NULL;
 
 #ifdef FASTER_GROUP
   m_write = false;
@@ -235,6 +235,7 @@ bool inline FasterReader::Initialise()
 {
 #ifdef FASTER_GROUP
 // TODO recode this because I'm just creating a vector of pointers all pointing to the same Hit !!
+	static_assert(true, "FASTER_GROUP not working (emitted from FasterReader::Initialise())");
 	m_hit_group_buffer.resize(5000, &m_empty_hit); //If the number of hits in one group exceeds 5000 then it will crash
 	m_group_write_cursor = 0;
 	m_group_read_cursor = 0;

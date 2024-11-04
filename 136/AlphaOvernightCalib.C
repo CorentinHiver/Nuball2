@@ -20,7 +20,7 @@ double peakPos(TH1* h, double raw_peak, double resolution)
   return ret;
 }
 
-void AlphaOvernightCalib()
+void AlphaOvernightCalib(bool calib = true)
 {
   Event event;
   Nuball2Tree tree("alpha_overnight.root", event);

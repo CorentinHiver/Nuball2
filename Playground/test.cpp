@@ -42,26 +42,31 @@
 
 // static thread_local std::mt19937 generator;
 
-int main()
+int main(int argc, char** argv)
 {
-
-  MTFasterReader reader(Path::home()+"nuball2/N-SI-136/run_80.fast/", 20);
-  RF_Manager rf;
-  RF_Manager::setOffset(0);
-  MTObject::Initialise(10);
-  MultiHist<TH1F> dT("dT", "dT", 300,-50_ns,250_ns);
-  reader.readAligned([&](Alignator & tree, Hit & hit){
-    while (tree.Read())
+  Timer timer;
+  MTFasterReader reader(Path::home()+"nuball2/N-SI-136/run_75.fast/", 20);
+  // RF_Manager::setOffset(20);
+  FasterReader::setMaxHits(1.e6);
+  MTObject::Initialise(2);
+  Timeshifts ts(Path::home()+"nuball2/N-SI-136-root_all/Timeshifts/run_75.dT");
+  MultiHist<TH2F> dT("dT", "dT", 1000,0,1000, 300,-50_ns,250_ns);
+  // reader.setTimeshifts(ts);
+  reader.readRaw([&](Hit & hit, FasterReader & reader){
+    RF_Manager rf;
+    while (reader.Read())
     {
+      hit.stamp += ts[hit.label]; 
       if (rf.setHit(hit)) continue;
-      dT.Fill(rf.relTime(hit.stamp));
+      dT.Fill(hit.label, rf.relTime(hit.stamp));
     }
   });
 
-  auto file = TFile::Open("test.root", "recreate");
+  std::unique_ptr<TFile> file (TFile::Open("test.root", "recreate"));
   file->cd();
   dT.Write();
   file->Close();
+  print("test.root written after", timer());
 
   //////////////////////////////////////
   // TEST MERGING MATCHING HISTOGRAMS //
