@@ -353,8 +353,8 @@ TH2F* slopeVSaxis(TH2F* bidim, bool slope = true, bool VSaxisX = true)
 
   auto yAxis = bidim->GetYaxis();
   auto const & binsY = yAxis->GetNbins();
-  auto const & minY  = yAxis->GetXmin();
-  auto const & maxY  = yAxis->GetXmax();
+  // auto const & minY  = yAxis->GetXmin();
+  // auto const & maxY  = yAxis->GetXmax();
 
   auto slopeBidim = new TH2F((name+std::string("_slope")).c_str(), (title+std::string(" slope")).c_str(), binsX,minX,maxX, 1000, 0, 10);
   // return slopeBidim;
@@ -3406,11 +3406,8 @@ class Radware
 
   void draw(TH1* histo, std::string options = "")
   {
-    print("coucou");
     m_nb_sm = 0;
-    print("coucou2");
     canvas->cd();
-    print("coucou3");
     if (m_focus) histo->GetXaxis()->SetRangeUser(
       m_focus->GetXaxis()->GetBinLowEdge(m_focus->GetXaxis()->GetFirst()), 
       m_focus->GetXaxis()->GetBinUpEdge(m_focus->GetXaxis()->GetLast()));

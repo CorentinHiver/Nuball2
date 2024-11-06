@@ -129,8 +129,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       auto const & run_name_vector = split(run_name, '_');
       auto const & run_number_str = run_name_vector[1];
       int const & run_number = std::stoi(run_number_str);
-      if (target == "Th" && run_number>74) continue;
-      if (target == "U" && run_number<75) continue;
+      if (target == "Th" && run_number>72) continue;
+      if (target == "U" && run_number<74) continue;
       Nuball2Tree tree(file.c_str());
       if (!tree) continue;
       files_total_size.fetch_add(size_file(file,"Mo"), std::memory_order_relaxed);
@@ -707,12 +707,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         
         //////////////// DSSD ///////////////////
         bool dssd_trigger = dssd.mult() > 0;
-        auto const & first_sector = dssd.sectors()[0];
         bool proton_trigger = 
               (dssd.sectors().mult == 1) 
           &&  (dssd.rings().mult < 3) 
-          &&  (first_sector.nrj < 8_MeV) 
-          &&  gate(-10_ns,first_sector.time,10_ns);
+          &&  (dssd.sectors()[0].nrj < 8_MeV) 
+          &&  gate(-10_ns,dssd.sectors()[0].time, 10_ns);
         
         auto const & Ex_U6 = (dssd.ok) ? Ex(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
 
@@ -935,7 +934,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
           // Delayed-delayed :
           // for (auto const & clover_j_it : coinc_clean)
-          for (int loop_j = loop_i+1; loop_j<dclovers.clean.size(); ++loop_j)
+          for (size_t loop_j = loop_i+1; loop_j<dclovers.clean.size(); ++loop_j)
           {
             auto const & clover_j = *(dclovers.clean[loop_j]);
             // auto const & index_j = clover_j.index()();
@@ -1934,7 +1933,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
     for (size_t run_i = 0; run_i<time_runs.size(); ++run_i) if(time_runs[run_i] > 0) time_file << run_i << " " << time_runs[run_i] << std::endl;
     time_file.close();
 
-    std::string dest = "data/merge_"+trigger+".root";
+    std::string dest = "data/merge_"+trigger+"_"+target+".root";
     std::string source = "data/"+trigger+"/"+target+"/run_*.root";
     std::string nb_threads_str = std::to_string(nb_threads);
     std::string command = "hadd -f -j "+ nb_threads_str+ " -d . "+ dest + " " + source;

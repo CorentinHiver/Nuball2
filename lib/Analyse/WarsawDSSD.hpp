@@ -258,8 +258,8 @@ private:
 
 class WarsawDSSD
 {public:
-  WarsawDSSD() noexcept = default;
-  WarsawDSSD(ExcitationEnergy* Ex) noexcept : m_Ex(Ex) {}
+  WarsawDSSD() = default;
+  WarsawDSSD(ExcitationEnergy* Ex) : m_Ex(Ex) {}
 
   bool fill(Event const & event, int const & hit_i)
   {
@@ -380,7 +380,7 @@ class WarsawDSSD
       sector_angles.push_back(sector.time);
       auto & nrj = sector_nrjs.back();
       auto & time = sector_times.back();
-      auto & angle = sector_angles.back();
+      // auto & angle = sector_angles.back();
       if (addback_sectors) for (int sector_j = sector_i+1; sector_j<m_sectors.mult; ++sector_j)
       { // Loop over the other sectors of the event :
         auto const & sector_bis = m_sectors[sector_j];
@@ -396,7 +396,7 @@ class WarsawDSSD
     }
 
     // Addback for rings
-    for (int ring_i = 0; ring_i<m_rings.size(); ++ring_i)
+    for (size_t ring_i = 0; ring_i<m_rings.size(); ++ring_i)
     {
       if (ring_rejected[ring_i]) continue; // If already used in add-back, do not treat twice
       auto const & ring = m_rings[ring_i];
@@ -406,7 +406,7 @@ class WarsawDSSD
       auto & nrj = ring_nrjs.back();
       auto & time = ring_times.back();
       auto & angle = ring_angles.back();
-      if (addback_rings) for (int ring_j = ring_i+1; ring_j<m_rings.size(); ++ring_j)
+      if (addback_rings) for (size_t ring_j = ring_i+1; ring_j<m_rings.size(); ++ring_j)
       { // Loop over the other rings of the event :
         auto const & ring_bis = m_rings[ring_j];
         if (ring.isVoisin(ring_bis)) // If the two rings i and j are neighbors :
