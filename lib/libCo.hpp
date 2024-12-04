@@ -839,6 +839,24 @@ constexpr abs_const(T const & t) {return (t>=0) ? t : -t;}
 
 #endif //Cpp17
 
+////////////////////
+// User interface //
+////////////////////
+
+std::string askUser(std::string message)
+{
+  print(message);
+  std::string ret;
+  std::getline(std::cin, ret);
+  return ret;
+}
+
+bool askUserYN(std::string message)
+{
+  return (askUser(message) == "y");
+}
+
+
 // #if (__cplusplus >= 201703L)
 
 // /**

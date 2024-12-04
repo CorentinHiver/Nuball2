@@ -13,16 +13,16 @@
 
 float smear(float const & nrj, TRandom* random)
 {
-  return random->Gaus(nrj,nrj*((400.0/sqrt(nrj))/100.0)/2.35);
+  return random->Gaus(nrj,nrj*((300.0/sqrt(nrj))/100.0)/2.35);
 }
 
 constexpr static bool kCalibGe = true;
 
 static std::vector<Label> blacklist = {501};
 
-void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 10)
+void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
 {
-
+  if (nb_hits_read<0) nb_hits_read = 1.e+50;
   std::string target = "Th";
   // std::string target = "U";
   // std::string trigger = "P";
@@ -43,7 +43,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   bool make_triple_coinc_ppp = false;
   bool bidim_by_run = false;
 
-  // If to much bidims, need to reduce the number of threads
+  // If too much bidims, need to reduce the number of threads
   if (make_triple_coinc_ddd || make_triple_coinc_dpp || make_triple_coinc_ppp) nb_threads = 8;
   if (bidim_by_run) nb_threads = 5;
 
@@ -125,6 +125,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
     while(MTfiles.getNext(file))
     {
       auto const & filename = removePath(file);
+      print(file);
       auto const & run_name = removeExtension(filename);
       auto const & run_name_vector = split(run_name, '_');
       auto const & run_number_str = run_name_vector[1];
@@ -492,8 +493,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       CloversV2 pclovers;
       CloversV2 dclovers;
 
-      CloversV2 pclovers_raw;
-      CloversV2 dclovers_raw;
+      // CloversV2 pclovers_raw;
+      // CloversV2 dclovers_raw;
 
       // CloversV2 last_prompt_clovers;
       // CloversV2 last_delayed_clovers;
@@ -551,8 +552,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
         tree->GetEntry(evt_i);
 
-        pclovers_raw.clear();
-        dclovers_raw.clear();
+        // pclovers_raw.clear();
+        // dclovers_raw.clear();
 
         pclovers.clear();
         dclovers.clear();
@@ -627,10 +628,10 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
             else if (CloversV2::isGe(label)) 
             {
               if (CloversIsBlacklist[label]) continue;
-              pclovers_raw.fill(event, hit_i);
+              // pclovers_raw.fill(event, hit_i);
               // Apply the run by run correction
               if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
-              if (!gate(506_keV, nrj, 515_keV)) prompt_clover_calo += smear(nrj, random);
+              if (!gate(505_keV, nrj, 515_keV)) prompt_clover_calo += smear(nrj, random);
             }
             pclovers.fill(event, hit_i);
           }
@@ -643,7 +644,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           else if (gate(40_ns, time, 170_ns) )
           {
             if (CloversIsBlacklist[label]) continue;
-            dclovers_raw.fill(event, hit_i);
+            // dclovers_raw.fill(event, hit_i);
             // if (kCalibGe && CloversV2::isGe(label)) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
             dclovers.fill(event, hit_i);
           }
@@ -661,8 +662,8 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // First step, perform add-back and compton suppression :
         pclovers.analyze();
         dclovers.analyze();
-        pclovers_raw.analyze();
-        dclovers_raw.analyze();
+        // pclovers_raw.analyze();
+        // dclovers_raw.analyze();
         pparis.analyze();
         dparis.analyze();
         dssd.analyze();
@@ -701,17 +702,19 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
         // if (DC > 0 && PM > 0) d_calo_pP->Fill(delayed_clover_calo);
 
         ////////// RAW Ge /////////
-        for (auto const & clover : pclovers_raw.clean) p_before_correction->Fill(clover->nrj);
-        for (auto const & clover : dclovers_raw.clean) d_before_correction->Fill(clover->nrj);
+        // for (auto const & clover : pclovers_raw.clean) p_before_correction->Fill(clover->nrj);
+        // for (auto const & clover : dclovers_raw.clean) d_before_correction->Fill(clover->nrj);
 
         
         //////////////// DSSD ///////////////////
         bool dssd_trigger = dssd.mult() > 0;
-        bool proton_trigger = 
-              (dssd.sectors().mult == 1) 
-          &&  (dssd.rings().mult < 3) 
-          &&  (dssd.sectors()[0].nrj < 8_MeV) 
-          &&  gate(-10_ns,dssd.sectors()[0].time, 10_ns);
+        // bool proton_trigger = 
+        //       (dssd.sectors().mult == 1) 
+        //   &&  (dssd.rings().mult < 3) 
+        //   &&  (dssd.sectors()[0].nrj < 8_MeV) 
+        //   &&  gate(-10_ns,dssd.sectors()[0].time, 10_ns);
+        bool proton_trigger = true;
+        for (auto sector : dssd.sectors()) if (sector.nrj < 8_MeV && gate(-10_ns,sector.time, 10_ns)) proton_trigger = false;
         
         auto const & Ex_U6 = (dssd.ok) ? Ex(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
 
@@ -861,7 +864,7 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
           std::vector<const SimpleParisModule*> coincident_paris;
           for (auto const & module : dparis.modules)
           {
-            if (std::abs(clover_i.time - module->time) < 30_ns) 
+            if (std::abs(clover_i.time - module->time) < bidimTimeWindow) 
             {
               DC+=module->nrj;
               ++DM;
@@ -1927,7 +1930,11 @@ void macro5(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
   });
   print("Total beam time :", total_time_of_beam_s);
   print("Reading speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_evts_number/timer.TimeSec(), "M events/s");
-  if (nb_files<0)
+  if (nb_files<0 
+  #ifdef DEBUG
+    || askUserYN("Do you want to merge the files ? (y/N)")
+  #endif // DEBUG
+  )
   {
     std::ofstream time_file("timefile.runs");
     for (size_t run_i = 0; run_i<time_runs.size(); ++run_i) if(time_runs[run_i] > 0) time_file << run_i << " " << time_runs[run_i] << std::endl;

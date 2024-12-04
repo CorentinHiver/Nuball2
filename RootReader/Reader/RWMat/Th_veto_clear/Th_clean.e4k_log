@@ -1,0 +1,16 @@
+03-Dec-24 14:58:45: Created new escl8r data file Th_clean.e4k_log
+      ...from matrix file Th_clean.m4b
+      ...by taking all 4k channels.
+03-Dec-24 14:58:54: Energy calibration file = ../nuball.aca
+03-Dec-24 14:59:01: Efficiency calibration file = ../nuball2.aef
+03-Dec-24 14:59:10: Error for energy calibration = 0.030000
+03-Dec-24 14:59:10: Percentage error on efficiency = 3.000000
+03-Dec-24 14:59:13: Gaussian peak shapes selected.
+03-Dec-24 14:59:19: Peak width parameters = 3.000000 1.414214 0.000000
+03-Dec-24 14:59:19: New background spectra, no E2-enhancement.
+       ...Total projection spectrum file name =  Th_clean_px.spe
+       ...Total background spectrum file name =  Th_clean_bx.spe
+03-Dec-24 14:59:37: Percentage error on background = 5.000000
+03-Dec-24 14:59:37:  2D Scaling factor = 0.579990
+03-Dec-24 15:14:15: Gaussian peak shapes selected.
+03-Dec-24 15:14:30: Peak width parameters = 2.500000 1.000000 0.100000

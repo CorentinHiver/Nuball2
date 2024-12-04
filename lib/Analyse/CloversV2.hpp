@@ -194,6 +194,8 @@ bool CloversV2::fill(Event const & event, int const & hit_i)
       calorimetryTotal+=nrj;
       calorimetryBGO+=nrj;
     }
+
+
     return true;
   }
   return false;
@@ -206,6 +208,9 @@ void CloversV2::analyze() noexcept
   for (auto const & clover_index : Hits_id)
   {
     auto const & clover = m_clovers[clover_index];
+    print(clover);
+    pauseCo();
+
     auto const & Ge_found = clover.nb>0;
     auto const & BGO_found = clover.nbBGO>0;
     

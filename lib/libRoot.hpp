@@ -2812,7 +2812,16 @@ TH2F* myProjection2D(TH3F* histo, std::string type = "XY", int binmin = 0, int b
   return ret;
 }
 
-TH2F* myProjection2D(TH3F* histo, std::string type = "XY", int binminGate = 0, int binmaxGate = -1, int binminBackground = 0, int binmaxBackground = -1, std::string name = "")
+
+template<class... Args> TH2F* myProjectionXY(TH3F* histo, Args... args) {return myProjection2D(histo, "XY", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionYX(TH3F* histo, Args... args) {return myProjection2D(histo, "YX", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionXZ(TH3F* histo, Args... args) {return myProjection2D(histo, "XZ", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionZX(TH3F* histo, Args... args) {return myProjection2D(histo, "ZX", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionYZ(TH3F* histo, Args... args) {return myProjection2D(histo, "YZ", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionZY(TH3F* histo, Args... args) {return myProjection2D(histo, "ZY", std::forward<Args>(args)...);}
+
+
+TH2F* myProjection2Db(TH3F* histo, std::string type = "XY", int binminGate = 0, int binmaxGate = -1, int binminBackground = 0, int binmaxBackground = -1, std::string name = "")
 {
   auto gate = myProjection2D(histo, type, binminGate, binmaxGate, name);
   auto bckg = myProjection2D(histo, type, binminBackground, binmaxBackground, "temp_bckg");
@@ -2821,13 +2830,12 @@ TH2F* myProjection2D(TH3F* histo, std::string type = "XY", int binminGate = 0, i
   return gate;
 }
 
-
-template<class... Args> TH2F* myProjectionXY(TH3F* histo, Args... args) {return myProjection2D(histo, "XY", std::forward<Args>(args)...);}
-template<class... Args> TH2F* myProjectionYX(TH3F* histo, Args... args) {return myProjection2D(histo, "YX", std::forward<Args>(args)...);}
-template<class... Args> TH2F* myProjectionXZ(TH3F* histo, Args... args) {return myProjection2D(histo, "XZ", std::forward<Args>(args)...);}
-template<class... Args> TH2F* myProjectionZX(TH3F* histo, Args... args) {return myProjection2D(histo, "ZX", std::forward<Args>(args)...);}
-template<class... Args> TH2F* myProjectionYZ(TH3F* histo, Args... args) {return myProjection2D(histo, "YZ", std::forward<Args>(args)...);}
-template<class... Args> TH2F* myProjectionZY(TH3F* histo, Args... args) {return myProjection2D(histo, "ZY", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionXYb(TH3F* histo, Args... args) {return myProjection2Db(histo, "XY", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionYXb(TH3F* histo, Args... args) {return myProjection2Db(histo, "YX", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionXZb(TH3F* histo, Args... args) {return myProjection2Db(histo, "XZ", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionZXb(TH3F* histo, Args... args) {return myProjection2Db(histo, "ZX", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionYZb(TH3F* histo, Args... args) {return myProjection2Db(histo, "YZ", std::forward<Args>(args)...);}
+template<class... Args> TH2F* myProjectionZYb(TH3F* histo, Args... args) {return myProjection2Db(histo, "ZY", std::forward<Args>(args)...);}
 
 
 double ratio_integrals(TH1* histo1, TH1* histo2, int peak_min, int peak_max)
@@ -2841,55 +2849,80 @@ double ratio_integrals(TH1* histo1, TH1* histo2, int peak_min, int peak_max)
 
 namespace CoLib
 {
-  TH3F* removeVeto(TH3F* histo, TH3F* histo_veto, double norm = 1, std::string name = "")
+  TH3F* removeVeto(TH3F* histo, TH3F* histo_veto, double norm = 1, std::string name = "", bool nice = false)
   {
     if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH3F*>(histo->Clone(name.c_str()));
     print(ret->GetName());
 
-    ret->Add(histo_veto, -norm);
+    ret->Add(histo_veto, (nice) ? -norm : ((norm<1) ? 0 : int(-norm)));
 
     return ret;
   }
 
-  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm, std::string name = "")
+  // TODO : nice ne fonctionne pas
+  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm, std::string name = "", bool nice = false)
   {
     if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
     print(ret->GetName());
 
-    ret->Add(histo_veto, -norm);
+    if (nice)
+    {
+      print("coucou");
+      for (int x = 0; x<histo->GetNbinsX(); ++x) for (int y = 0; y<histo->GetNbinsX(); ++y)
+      {
+        ret->SetBinContent(x, y, ret->GetBinContent(x, y) - int_cast(histo_veto->GetBinContent(x, y) * norm));
+      }
+    }
+    else
+    {
+      ret->Add(histo_veto, -norm);
+    }
 
     return ret;
   }
 
-  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "")
+  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "", bool nice = false)
   {
-    return removeVeto(histo, histo_veto, ratio_integrals(histo->ProjectionX("histo_projX"), histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max), name);
+    auto ret = removeVeto(histo, histo_veto, ratio_integrals(histo->ProjectionX("histo_projX"), histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max), name, nice);
     delete gDirectory->Get("histo_projX");
     delete gDirectory->Get("histo_veto_projX");
+    return ret;
   }
 
-  TH1F* removeVeto(TH1* histo, TH1* histo_veto, double norm, std::string name = "")
+  TH1F* removeVeto(TH1* histo, TH1* histo_veto, double norm, std::string name = "", bool nice = false)
   {
     if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH1F*>(histo->Clone(name.c_str()));
+
+    if (nice)
+    {
+      for (int x = 0; x<histo->GetNbinsX(); ++x)
+      {
+        ret->SetBinContent(x, ret->GetBinContent(x) - int_cast(histo_veto->GetBinContent(x) * norm));
+      }
+    }
+    else
+    {
+      ret->Add(histo_veto, -norm);
+    }
 
     ret->Add(histo_veto, -norm);
     
     return ret;
   }
 
-  TH1F* removeVeto(TH1* histo, TH1* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "")
+  TH1F* removeVeto(TH1* histo, TH1* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "", bool nice = false)
   {
-    return removeVeto(histo, histo_veto, ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max), name);
+    return removeVeto(histo, histo_veto, ratio_integrals(histo, histo_veto, peak_norm_min, peak_norm_max), name, nice);
   }
 
-  template<class... Args>
-  TH1D* removeVeto(TH1D* histo, TH1D* histo_veto, Args... args)
-  {
-    return removeVeto(std::make_unique<TH1F*>(dynamic_cast<TH1F*>(histo)), std::make_unique<TH1F*>(dynamic_cast<TH1F*>(histo_veto)), std::forward<Args>(args)...);
-  }
+  // template<class... Args>
+  // TH1D* removeVeto(TH1D* histo, TH1D* histo_veto, Args... args)
+  // {
+  //   return removeVeto(std::make_unique<TH1F*>(dynamic_cast<TH1F*>(histo)), std::make_unique<TH1F*>(dynamic_cast<TH1F*>(histo_veto)), std::forward<Args>(args)...);
+  // }
 
   void simulate_peak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits)
   {
@@ -2964,6 +2997,82 @@ namespace CoLib
       gPad->WaitPrimitive();
     }
     TGraph* ret = new TGraph(bins.size(), bins.data(), half_lifes.data());
+    return ret;
+  }
+
+  /**
+   * @brief Calculate half-life for 3D matrices in the form XYZ = E_1E_2t
+   * 
+   * @param histo 
+   * @param gate_bins 
+   */
+  void calculateHalfLife3D(TH3F* histo, std::vector<std::pair<int, int>> gates)
+  {
+
+    // auto xaxis = histo->GetXaxis();
+    // auto yaxis = histo->GetYaxis();
+    auto zaxis = histo->GetZaxis();
+
+    // auto E1bins = xaxis->GetNbins();
+    // auto E2bins = yaxis->GetNbins();
+    auto time_bins = zaxis->GetNbins();
+
+    std::vector<int> xvec; linspace(xvec, time_bins);
+
+    for (auto const & gate : gates)
+    {
+      auto const & E1 = gate.first;
+      auto const & E2 = gate.second;
+      std::vector<int> counts;
+      std::vector<int> bckg_counts;
+      std::vector<int> net_counts;
+      for (int t = 1; t<time_bins; ++t)
+      {
+        counts.push_back(histo->GetBinContent(E1, E2, t));
+        int bckg_count = 0;
+        for (int E1_bckg = E1-1; E1_bckg <= E1+1; ++E1_bckg) for (int E2_bckg = E2-1; E2_bckg <= E2+1; ++E2_bckg)
+        {
+          if (E1_bckg!=E1 && E2_bckg!=E2) bckg_count += int(histo->GetBinContent(E1_bckg, E2_bckg, t)/8);
+        }
+        bckg_counts.push_back(bckg_count);
+        net_counts.push_back(histo->GetBinContent(E1, E2, t)-bckg_count);
+      }
+      auto graph = new TGraph(counts.size(), xvec.data(), counts.data());
+      auto graph2 = new TGraph(counts.size(), xvec.data(), bckg_counts.data());
+      auto graph3 = new TGraph(counts.size(), xvec.data(), net_counts.data());
+
+      graph->SetLineColor(kBlue);
+      graph2->SetLineColor(kRed);  
+      graph3->SetLineColor(kGreen);  
+
+      graph->Draw();
+      graph2->Draw("same");
+      graph3->Draw("same");
+      gPad->WaitPrimitive();
+    }
+  }
+
+  TGraph* meanXvsY(TH2* bidim)
+  {
+    std::vector<double> values;
+    std::vector<double> means;
+    for (int y = 1; y<=bidim->GetNbinsY(); ++y) 
+    {
+      values.push_back(bidim->GetYaxis()->GetBinCenter(y));
+      double mean = 0;
+      double total = 0;
+      for (int x = 1; x<=bidim->GetNbinsX(); ++x)
+      {
+        auto const & binvalue = bidim->GetBinContent(x, y);
+        auto const & xvalue = bidim->GetXaxis()->GetBinCenter(x);
+        total+=binvalue;
+        mean+=xvalue*binvalue;
+      }
+      if (total==0) means.push_back(0);
+      else means.push_back(mean/total);
+    }
+    auto ret = new TGraph(values.size(), values.data(), means.data());
+    ret->GetXaxis()->SetTitle(bidim->GetYaxis()->GetTitle()); // TODO
     return ret;
   }
 
@@ -3331,6 +3440,7 @@ class Radware
         gSystem->Sleep(10);
       }
     });
+    
     print(m_finish);
     std::string instruction;
     while(!m_finish)
@@ -3341,7 +3451,7 @@ class Radware
       auto const & getline_ret = std::getline(std::cin, instruction);
       if (!getline_ret) 
       {
-        print("CTRL-D pressed, interactive interface will not work next time. Use st command instead");
+        error("CTRL-D pressed, interactive interface will not work next time. Use st command instead");
         m_finish = true;
       }
       else if (instruction == "") continue;
@@ -3350,6 +3460,7 @@ class Radware
       else if (instruction == "bd") {print("May take a while..."); this->draw(m_bidim, "colz");}
       else if (instruction == "bi") this->set_nb_it_bckg();
       else if (instruction == "cl") this->clean();
+      // else if (instruction == "di") this->projectDiag();
       else if (instruction == "ex") this->ex();
       else if (instruction == "es") this->exportSpectrum();
       else if (instruction == "gs") this->setGateSize();
@@ -3361,9 +3472,9 @@ class Radware
       else if (instruction == "py") this->py();
       else if (instruction == "rb") this->removeBackground();
       else if (instruction == "rs") pad_remove_stats();
-      else if (instruction == "sp") this->simulatePeak();
       else if (instruction == "sg") this->addGate(false);
       else if (instruction == "sh") pad_subtract_histos();
+      else if (instruction == "sp") this->simulatePeak();
       else if (instruction == "sm") this->gate_same();
       else if (instruction == "st") {m_finish = true;}
       else if (instruction == "uz") this->unZoom();
@@ -3386,6 +3497,8 @@ class Radware
     print("ag : add gate");
     print("bd : display bidim");
     print("bi : set number of iterations for automatic background subtraction (rb) of one dimensional spectra");
+    print("cl : clean");
+    // print("di : project bidim diagonal");
     print("ex : set range spectrum");
     print("es : export spectra to the root environement");
     print("gs : set gate size in bin");
@@ -3397,8 +3510,9 @@ class Radware
     print("py : projection onto the y axis (default)");
     print("rb : remove background automatically");
     print("rs : remove stat box");
-    print("sp : simulate peak");
     print("sg : subtract gate");
+    print("sh : subtract the two displayed histograms");
+    print("sp : simulate peak");
     print("sm : overlay another gate");
     print("st : finish session");
     print("uz : unzoom axis");
@@ -3495,9 +3609,16 @@ class Radware
   
   void proj()
   {
-    if (m_py) m_proj = static_cast<TH1*> (m_bidim->ProjectionY()->Clone("total projection"));
-    else m_proj = static_cast<TH1*> (m_bidim->ProjectionX()->Clone("total projection"));
-    m_proj->SetTitle("total projection");
+    if (m_py) 
+    {
+      m_proj = static_cast<TH1*> (m_bidim->ProjectionY()->Clone("total projection y"));
+      m_proj->SetTitle("total projection y");
+    }
+    else 
+    {
+      m_proj = static_cast<TH1*> (m_bidim->ProjectionX()->Clone("total projection x"));
+      m_proj->SetTitle("total projection x");
+    }
     this->draw(m_proj);
   }
 
@@ -3620,7 +3741,7 @@ class Radware
     }
     else 
     {
-      CoAnalyse::removeBackground(m_focus, m_nb_it_bckg);
+      CoAnalyse::removeBackground(m_focus, m_nb_it_bckg, "", true);
       this->draw(m_focus);
     }
   }
@@ -3680,9 +3801,6 @@ private:
   std::vector<int> m_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};
 };
 bool Radware::m_finish = false;
-
-
-
 
 
 
