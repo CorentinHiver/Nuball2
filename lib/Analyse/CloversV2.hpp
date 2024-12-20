@@ -17,6 +17,7 @@ public:
   {
     CloverModule::resetGlobalLabel(); // This allows to correctly label the CloverModules in other instances of CloversV2  
   };
+  ~CloversV2() {delete random;}
   inline constexpr auto const & operator[](int const & i) const noexcept { return m_clovers[i]; }
   CloversV2& operator=(CloversV2 const & other)
   {
@@ -107,6 +108,7 @@ private:
   bool m_analyzed = false;
   constexpr static double threshold = 5; // 5 keV
   TRandom* random = new TRandom(time(0));
+  double calorimetry = 0;
 };
 
 std::unordered_set<Label> CloversV2::blacklist = {46, 55, 64, 69, 70, 80, 92, 97, 122, 129, 142, 163};

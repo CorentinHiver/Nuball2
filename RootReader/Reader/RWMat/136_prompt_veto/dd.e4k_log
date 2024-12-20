@@ -1,0 +1,17 @@
+05-Dec-24 13:14:07: Created new escl8r data file dd.e4k_log
+      ...from matrix file dd.m4b
+      ...by taking all 4k channels.
+05-Dec-24 13:14:14: Energy calibration file = ../nuball.aca
+05-Dec-24 13:14:18: Efficiency calibration file = ../nuball2.aef
+05-Dec-24 13:14:19: Error for energy calibration = 0.030000
+05-Dec-24 13:14:19: Percentage error on efficiency = 3.000000
+05-Dec-24 13:14:19: Gaussian peak shapes selected.
+05-Dec-24 13:14:25: Peak width parameters = 3.000000 1.414214 0.000000
+05-Dec-24 13:14:25: New background spectra, no E2-enhancement.
+       ...Total projection spectrum file name =  dd_px.spe
+       ...Total background spectrum file name =  dd_bx.spe
+05-Dec-24 13:14:38: Percentage error on background = 5.000000
+05-Dec-24 13:14:38:  2D Scaling factor = 0.000164
+05-Dec-24 13:58:08:  2D Scaling factor = 0.1
+05-Dec-24 14:04:06:  2D Scaling factor = 0.2
+05-Dec-24 14:04:56:  2D Scaling factor = 0.3

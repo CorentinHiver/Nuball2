@@ -16,6 +16,7 @@ public:
 
 
   bool nextFileName(std::string & filename, size_t const & step = 1);
+  bool getNext(std::string & filename) {return nextFileName(filename);}
 
   // Adds either a single file or reads a .list containing a list of files
   virtual bool addFiles(std::string const & _filename);

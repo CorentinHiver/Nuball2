@@ -856,6 +856,28 @@ bool askUserYN(std::string message)
   return (askUser(message) == "y");
 }
 
+////////////////
+// Algorithms //
+////////////////
+
+
+/// @brief Calculate the slope for two extremal points, then correct it with the residues of the intermediat points.
+template<class T> double quickSlope(std::vector<T> x, std::vector<T> y)
+{
+  if (x.size()!=y.size()) throw_error("quickSlope : x and y don't have the same size !!");
+  auto const & N = x.size()-1;
+  double slope = (y[N]-y[0])/(x[N]-x[0]);
+  double correctionSum = 0;
+  for (size_t i = 1; i<N-1; ++i)
+  {
+    auto const & dx = x[i]-x[0];
+    auto const & residues = y[i] - (y[0] + slope*dx);
+    correctionSum += residues/dx;
+  }
+
+  double correction = ((N-1) > 0) ? (correctionSum / (N-1)) : 0.0;
+  return slope+correction;
+}
 
 // #if (__cplusplus >= 201703L)
 

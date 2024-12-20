@@ -23,8 +23,8 @@ static std::vector<Label> blacklist = {501};
 void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
 {
   if (nb_hits_read<0) nb_hits_read = 1.e+50;
-  std::string target = "Th";
-  // std::string target = "U";
+  // std::string target = "Th";
+  std::string target = "U";
   // std::string trigger = "P";
   std::string trigger = "dC1";
   // std::string trigger = "C2";
@@ -60,7 +60,7 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
   // ExcitationEnergy Ex("../136/dssd_table.dat");
   ExcitationEnergy Ex("../136/Excitation_energy", "U5", "d", "p", "10umAl");
 
-  std::mutex init_mutex;
+  // std::mutex init_mutex;
   std::mutex write_mutex;
 
   static constexpr Time bidimTimeWindow = 40_ns;
@@ -125,14 +125,13 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
     while(MTfiles.getNext(file))
     {
       auto const & filename = removePath(file);
-      print(file);
       auto const & run_name = removeExtension(filename);
       auto const & run_name_vector = split(run_name, '_');
       auto const & run_number_str = run_name_vector[1];
       int const & run_number = std::stoi(run_number_str);
       if (target == "Th" && run_number>72) continue;
       if (target == "U" && run_number<74) continue;
-      Nuball2Tree tree(file.c_str());
+      Nuball2Tree tree(file);
       if (!tree) continue;
       files_total_size.fetch_add(size_file(file,"Mo"), std::memory_order_relaxed);
 
@@ -713,8 +712,8 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
         //   &&  (dssd.rings().mult < 3) 
         //   &&  (dssd.sectors()[0].nrj < 8_MeV) 
         //   &&  gate(-10_ns,dssd.sectors()[0].time, 10_ns);
-        bool proton_trigger = true;
-        for (auto sector : dssd.sectors()) if (sector.nrj < 8_MeV && gate(-10_ns,sector.time, 10_ns)) proton_trigger = false;
+        bool proton_trigger = false;
+        for (auto sector : dssd.sectors()) if (sector->nrj < 8_MeV && gate(-10_ns,sector->time, 10_ns)) proton_trigger = true;
         
         auto const & Ex_U6 = (dssd.ok) ? Ex(dssd.nrj, dssd.ring_index) : ExcitationEnergy::bad_value;
 
@@ -1927,6 +1926,7 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
       file->Close();
       print(out_filename, "written");
     }
+    delete random;
   });
   print("Total beam time :", total_time_of_beam_s);
   print("Reading speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_evts_number/timer.TimeSec(), "M events/s");
@@ -1967,7 +1967,7 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
   //   // test->Draw();
   //   // auto dp_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dp"))->Clone("dp_clean"));
   }
-  print("run time :", timer());
+  print("analysis time :", timer());
 }
 
 int main(int argc, char** argv)

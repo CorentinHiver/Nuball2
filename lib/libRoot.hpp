@@ -93,7 +93,7 @@ namespace CoLib
 {
   Strings match_regex(Strings list, std::string pattern)
   {
-    TRegexp reg(TString(pattern.c_str()).ReplaceAll("*", ".*"));
+    TRegexp reg((TString(pattern.c_str()).ReplaceAll("*", ".*")).ReplaceAll("?", "."));
     std::vector<TString> strings; for (auto const & e : list) strings.push_back(e.c_str());
     Strings ret;
     for (size_t i = 0; i < strings.size(); ++i) if (strings[i].Index(reg) != kNPOS) ret.push_back(list[i]);
@@ -111,7 +111,7 @@ namespace CoLib
   auto clone(std::string name, std::string new_name, TFile* file = nullptr)
   {
     if (file == nullptr) file = gFile;
-    if (!file) { error("in clone<", T::GetClassName(), "> : file is nullptr"); return nullptr;}
+    // if (!file) { error("in clone<", T::GetClassName(), "> : file is nullptr"); return nullptr;}
     file->cd();
     return dynamic_cast<T*> (file->Get<T>(name.c_str())->Clone(new_name.c_str()));
   }
@@ -135,6 +135,14 @@ THist* Sub(THist* h1, THist* h2, double factor = 1)
   auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_"+TString(h2->GetName()));
   ret->SetTitle(TString(h1->GetName())+"-"+TString(h2->GetName()));
   ret->Add(h2, -factor);
+  return ret;
+}
+
+TH1* Mult(TH1* h1, TH1* h2, double factor = 1)
+{
+  auto ret = (TH1*) h1->Clone(TString(h1->GetName())+"_times_"+TString(h2->GetName()));
+  ret->SetTitle(TString(h1->GetName())+"#times"+TString(h2->GetName()));
+  for (size_t bin = 1; bin<h1->GetNbinsX(); ++bin) ret->SetBinContent(bin, h1->GetBinContent(bin)*h2->GetBinContent(bin));
   return ret;
 }
 
@@ -1921,12 +1929,12 @@ namespace CoAnalyse
     after->Draw("same");
   }
 
-  template<typename T> T LLS(T const & value) {return (log(log(sqrt(value+1.)+1.)+1.));}
+  template<typename T> T LLS(T const & value) {return (log(log(sqrt(std::abs(value)+1.)+1.)+1.));}
   template<typename T> T LLS_inverse(T const & value) {return exp(exp(value -1)-1) * exp(exp(value-1)-1) -1;}
 
   TH1F* LLS_convertor(TH1F* h)
   {
-    auto ret = (TH1F*) h->Clone("test");
+    auto ret = (TH1F*) h->Clone(h->GetName()+TString("_LLS"));
     for (int x = 0; x<=h->GetNbinsX(); ++x) 
     {
       auto const & value = LLS(h->GetBinContent(x));
@@ -2336,15 +2344,15 @@ Strings file_get_names_of(TFile* file = nullptr)
 {
   // init
   Strings ret;
-  T temp_obj; 
+  T *temp_obj = new T(); 
 
   // Check the files :
   if (file == nullptr) file = gFile;
-  if (!file) { error("in file_get_names_of<", temp_obj->GetClassName(), ">(TFile* file): file is nullptr"); return ret;}
+  if (!file) { error("in file_get_names_of<", temp_obj->ClassName(), ">(TFile* file): file is nullptr"); return ret;}
   file->cd();
 
   // Get the class name :
-  auto const & classname = temp_obj.ClassName();
+  auto const & classname = temp_obj->ClassName();
   
   // Loop over the list of keys of every object in the TFile :
   auto list = file->GetListOfKeys();
@@ -2353,7 +2361,7 @@ Strings file_get_names_of(TFile* file = nullptr)
     auto key = dynamic_cast<TKey*>(keyAsObj);
     if(strcmp(key->GetClassName(), classname) == 0) ret.push_back(key->GetName());
   }
-
+  delete temp_obj;
   return ret;
 }
 
@@ -2405,9 +2413,129 @@ std::map<std::string, T*> file_get_map_of(TFile* file = nullptr)
 // OTHERS //
 ////////////
 
+// Clone an empty histogram with the same binning
+TH1F* cloneEmpty(const TH1F* histo, const std::string& name = "", const std::string& title = "")
+{
+  if (!histo) throw std::invalid_argument("Input histogram is null!");
+  auto xaxis = histo->GetXaxis();
+  int N_binsX = xaxis->GetNbins();
+  std::string new_name = name.empty() ? std::string(histo->GetName()) + "_Clone" : name;
+  std::string new_title = title.empty() ? histo->GetTitle() : title;
+  return new TH1F(new_name.c_str(), new_title.c_str(), N_binsX, xaxis->GetXmin(), xaxis->GetXmax());
+}
+
+// Compute the first derivative of a histogram
+TH1F* derivate(const TH1F* histo, size_t smooth = 1) 
+{
+  if (!histo) throw std::invalid_argument("Input histogram is null!");
+  if (smooth == 0) throw std::invalid_argument("Smoothing factor must be greater than 0!");
+
+  auto result = cloneEmpty(histo, histo->GetName()+std::string("der"));
+  size_t N = histo->GetNbinsX();
+
+  for (size_t bin = 1; bin <= N; ++bin)
+  { // ROOT bins are 1-indexed
+    size_t lower_bin = std::max(1ul, bin - smooth); // Ensure within valid range
+    size_t upper_bin = std::min(N, bin + smooth); // Ensure within valid range
+
+    double low_sum = 0.0, up_sum = 0.0;
+
+    // Sum left and right bin contents
+    for (size_t i = lower_bin; i < bin; ++i) low_sum += histo->GetBinContent(i);
+    for (size_t i = bin + 1; i <= upper_bin; ++i) up_sum += histo->GetBinContent(i);
+
+    // Calculate the derivative
+    double smooth_range = (upper_bin - bin) + (bin - lower_bin);
+    result->SetBinContent(bin, (up_sum - low_sum) / smooth_range);
+  }
+
+  return result;
+}
+
+// Compute the second derivative of a histogram
+TH1F* derivate2(const TH1F* histo, size_t smooth = 1) 
+{
+  auto intermediate = derivate(histo, smooth);
+  auto result = derivate(intermediate, smooth);
+  delete intermediate; // Free intermediate memory
+  return result;
+}
+
+/// @brief Attempt to adapt the derivative with different smoothing approaches
+/// @param: choice == 0, derivative with quadratic weight
+/// choise == 1, slope of points before and after
+/// @todo
+TH1F* peaky(const TH1F* histo, int choice = 0, size_t smooth = 1)
+{
+  if (!histo) throw std::invalid_argument("Input histogram is null!");
+  if (smooth == 0) throw std::invalid_argument("Smoothing factor must be greater than 0!");
+
+  auto result = cloneEmpty(histo, histo->GetName()+std::string("der"));
+  size_t N = histo->GetNbinsX();
+
+  std::vector<double> before;
+  std::vector<double> after;
+  std::vector<double> before_X; linspace(before_X,smooth+1);
+  std::vector<double> after_X; linspace(after_X,3,smooth+1);
+
+
+  for (size_t bin = 1+smooth; bin <= N-smooth; ++bin)
+  { // ROOT bins are 1-indexed
+    size_t lower_bin = std::max(1ul, bin - smooth); // Ensure within valid range
+    size_t upper_bin = std::min(N, bin + smooth); // Ensure within valid range
+
+    if (choice == 0)
+    {
+      double low_sum = 0.0, up_sum = 0.0;
+
+      // Sum left and right bin contents
+      for (size_t i = lower_bin; i < bin; ++i) low_sum += histo->GetBinContent(i)/((bin-i)*(bin-i));
+      for (size_t i = bin + 1; i <= upper_bin; ++i) up_sum += histo->GetBinContent(i)/((i-bin)*(i-bin));
+
+      // Calculate the derivative
+      double smooth_range = (upper_bin - bin) + (bin - lower_bin);
+      result->SetBinContent(bin, (up_sum - low_sum) / smooth_range);
+    }
+
+    else if (choice == 1)
+    {
+      before.clear();
+      after.clear();
+
+      for (size_t i = lower_bin; i < bin; ++i) before.push_back(histo->GetBinContent(i));
+      before.push_back(histo->GetBinContent(bin));
+      after.push_back(histo->GetBinContent(bin));
+      for (size_t i = bin + 1; i <= upper_bin; ++i) after.push_back(histo->GetBinContent(i));
+
+      auto graph_before = new TGraph(smooth, before.data(), before.data());
+      auto graph_after = new TGraph(smooth, after.data(), after.data());
+
+      TF1 fitFunc("fitFunc", "[0] + [1]*x", 0, 6);
+      graph_before->Fit(&fitFunc);
+      int slope_before = 
+      graph_after->Fit(&fitFunc);
+    }
+
+  }
+
+  return result;
+}
+
+// Compute the second derivative of a histogram with different smoothing approaches
+TH1F* peaky2(const TH1F* histo, size_t smooth = 1) 
+{
+  auto intermediate = peaky(histo, smooth);
+  auto result = peaky(intermediate, smooth);
+  delete intermediate; // Free intermediate memory
+  return result;
+}
+
+
+
 template<class THist>
 THist* mergeAllMatching(std::string expression, TFile* file = nullptr)
 {
+  if (file == nullptr) file = gFile;
   THist temp_histo;
   auto list = file_get_names_of<THist>(file);
   auto matching_list = CoLib::match_regex(list, expression);
@@ -2421,6 +2549,29 @@ THist* mergeAllMatching(std::string expression, TFile* file = nullptr)
   {
     print("merging", matching_list[i].c_str());
     auto histo = file->Get<THist>(matching_list[i].c_str());
+    ret->Add(histo);
+    CoLib::unload(histo);
+  }
+  return ret;
+}
+
+template<>
+TH1F* mergeAllMatching(std::string expression, TFile* file = nullptr)
+{
+  if (file == nullptr) file = gFile;
+  TH1F temp_histo;
+  auto list = file_get_names_of<TH1F>(file);
+  auto matching_list = CoLib::match_regex(list, expression);
+  if (matching_list.empty()) {error("no", temp_histo.ClassName(), "matching regex", expression, "in file", file->GetName()); return nullptr;}
+
+  auto name = expression;
+  replace_all(name, "*", "_");
+  auto ret = CoLib::clone<TH1F>(matching_list[0], name.c_str());
+
+  for (size_t i = 0; i<matching_list.size(); ++i) 
+  {
+    print("merging", matching_list[i].c_str());
+    auto histo = file->Get<TH1F>(matching_list[i].c_str());
     ret->Add(histo);
     CoLib::unload(histo);
   }
@@ -2849,7 +3000,7 @@ double ratio_integrals(TH1* histo1, TH1* histo2, int peak_min, int peak_max)
 
 namespace CoLib
 {
-  TH3F* removeVeto(TH3F* histo, TH3F* histo_veto, double norm = 1, std::string name = "", bool nice = false)
+  TH3F* removeVeto(TH3F* histo, TH3F* histo_veto, double norm = 1, std::string name = "", bool nice = true)
   {
     if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH3F*>(histo->Clone(name.c_str()));
@@ -2861,7 +3012,7 @@ namespace CoLib
   }
 
   // TODO : nice ne fonctionne pas
-  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm, std::string name = "", bool nice = false)
+  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm, std::string name = "", bool nice = true)
   {
     if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
@@ -2869,7 +3020,6 @@ namespace CoLib
 
     if (nice)
     {
-      print("coucou");
       for (int x = 0; x<histo->GetNbinsX(); ++x) for (int y = 0; y<histo->GetNbinsX(); ++y)
       {
         ret->SetBinContent(x, y, ret->GetBinContent(x, y) - int_cast(histo_veto->GetBinContent(x, y) * norm));
@@ -2883,7 +3033,7 @@ namespace CoLib
     return ret;
   }
 
-  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "", bool nice = false)
+  TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, int peak_norm_min, int peak_norm_max, std::string name = "", bool nice = true)
   {
     auto ret = removeVeto(histo, histo_veto, ratio_integrals(histo->ProjectionX("histo_projX"), histo_veto->ProjectionX("histo_veto_projX"), peak_norm_min, peak_norm_max), name, nice);
     delete gDirectory->Get("histo_projX");
@@ -2891,7 +3041,7 @@ namespace CoLib
     return ret;
   }
 
-  TH1F* removeVeto(TH1* histo, TH1* histo_veto, double norm, std::string name = "", bool nice = false)
+  TH1F* removeVeto(TH1* histo, TH1* histo_veto, double norm, std::string name = "", bool nice = true)
   {
     if (name == "") name = histo->GetName()+std::string("_veto_clean");
     auto ret = static_cast<TH1F*>(histo->Clone(name.c_str()));
@@ -3478,6 +3628,8 @@ class Radware
       else if (instruction == "sm") this->gate_same();
       else if (instruction == "st") {m_finish = true;}
       else if (instruction == "uz") this->unZoom();
+      else if (instruction == "+") this->gate(m_gate_number+1);
+      else if (instruction == "-") this->gate(m_gate_number-1);
       else if (isNumber(instruction)) this->gate(std::stod(instruction));
       else error("Wrong input...");
     }
@@ -3636,9 +3788,7 @@ class Radware
   {
     if (!m_gate) {error("No gate so far..."); return;}
 
-    std::string add_str = (add) ? "add" : "subtract";
-
-    std::cout << "gate to add :";
+    std::cout << "gate to " << ((add) ? "add" : "subtract") << " :";
     std::string instruction;
     std::getline(std::cin, instruction);
     if (!checkIsNumber(instruction)) return;
@@ -3710,6 +3860,7 @@ class Radware
   void gate(double e)
   {
     delete m_gate;
+    m_gate_number = e;
     auto const & bin = m_bidim->GetXaxis()->FindBin(e)-1;
     auto const & low_e = e-m_gate_size;
     auto const & high_e = e+m_gate_size;
@@ -3797,6 +3948,7 @@ private:
 
   bool m_py = true;
   int m_gate_size = 1;
+  double m_gate_number = 0;
   int m_nb_sm = 0;
   std::vector<int> m_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};
 };
@@ -4030,7 +4182,7 @@ void hadd(std::string source, std::string target, double size_file_Mo, std::stri
 
 void libRoot()
 {
-  print("Welcome to Corentin's ROOT library. May you find some usefull stuff around !");
+  print("Welcome, may you find some usefull stuff around");
 }
 
 #endif //LIBROOT_HPP
