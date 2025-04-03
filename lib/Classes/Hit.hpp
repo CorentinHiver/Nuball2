@@ -13,7 +13,7 @@
 
 using Label     = ushort;    // Label (ushort)
 using ADC       = int;       // ADC (int)
-using NRJ       = float;     // Energy in keV (float)
+using NRJ       = float;    // Energy in keV (float) // Changed to double for Geant4
 using Timestamp = ULong64_t; // Timestamp in ps (absolute)
 using Time      = Long64_t;  // Time in ps (relative)
 using Time_ns   = float;     // Time in ns (relative) !deprecated! 
@@ -134,17 +134,17 @@ public:
   IOptions(std::string const & options) noexcept {setOptions(options);}
   void reset()
   {
-    m  = false;
-    l  = false;
-    t  = false;
-    T  = false;
-    e  = false;
-    E  = false;
-    q  = false;
-    Q  = false;
-    q3 = false;
-    Q3 = false;
-    p  = false;
+    m  = false; // m : mult   multiplicity (events) int
+    l  = false; // l : label  label                 ushort
+    t  = false; // t : stamp  absolute timestamp ps ULong64_t
+    T  = false; // T : time   relative time      ps Long64_t
+    e  = false; // e : adc    energy in ADC         int
+    E  = false; // E : nrj    energy in keV         float
+    q  = false; // q : qdc2   energy qdc2 in ADC    int
+    Q  = false; // Q : nrj2   energy qdc2 in keV    float
+    q3 = false; // 3 : qdc3   energy qdc3 in ADC    int
+    Q3 = false; // R : nrj3   energy qdc3 in keV    float
+    p  = false; // p : pileup pileup                bool
     set = false;
   }
 

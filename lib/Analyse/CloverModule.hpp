@@ -33,6 +33,7 @@ public:
   void clear() {this -> reset();}
   // void clean() {this -> reset();}
   auto const & index() const {return m_index;}
+  auto label() const {return 23+m_index*6+maxE_Ge_cristal;}
   static void resetGlobalLabel() {gIndex = 0;}
 
   void addHit(float const & _nrj, Time const & _time, uchar const & sub_index)
@@ -229,8 +230,8 @@ cout << "nrj : " <<  cloverModule.nrj << " " <<
     }
     if (cloverModule.nbBGO>0)
     {
-cout << "nrj : " <<  cloverModule.nrjBGO << " " << 
-        "time:  " <<  cloverModule.timeBGO/1000. << " ns ";
+cout << "nrj BGO : " <<  cloverModule.nrjBGO << " " << 
+        "time BGO :  " <<  cloverModule.timeBGO/1000. << " ns ";
     }
     if (cloverModule.nb>0 && cloverModule.nbBGO>0)
     {

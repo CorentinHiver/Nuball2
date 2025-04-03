@@ -7,6 +7,22 @@ using hr_clock_t = std::chrono::high_resolution_clock;
 using time_point_t = std::chrono::time_point<hr_clock_t>;
 using duration_milli_t = std::chrono::duration<double, std::milli>;
 
+template <typename T>
+std::string nicer_seconds(T const & time, int nb_decimals = 3)
+{
+  T _time = time;
+  std::string unit;
+        if (_time<120.  )  {             ; unit = " s"  ;}
+  else if (_time<3600. )  {_time/=60.   ; unit = " min";}
+  else if (_time<86400.)  {_time/=3600. ; unit = " h"  ;}
+  else                    {_time/=86400.; unit = " j"  ;}
+
+  if (unit == "s") nb_decimals = 0;
+  std::stringstream ss;
+  ss << std::fixed << std::setprecision(nb_decimals) << _time << unit;
+  return ss.str();
+}
+
 class Timer
 {
 public:

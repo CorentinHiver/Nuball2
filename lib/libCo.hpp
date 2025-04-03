@@ -164,19 +164,26 @@ std::string time_string_inverse()
   }
 }
 
-void throw_error(std::string const & message) {throw std::runtime_error(concatenate(RED, message, RESET));}
+template <typename T>
+std::string to_binary(T num) {
+    return std::bitset<sizeof(T) * 8>(num).to_string(); // Uses full bit width of T
+}
+
+void throw_error(std::string const & message) {throw std::runtime_error(concatenate(CoLib::Color::RED, message, CoLib::Color::RESET));}
 
 std::map<std::string, std::string> error_message = 
 {
-  {"DEV", "to be done"}
+  {"DEV", "to be done"},
+  {"WOW", "Ok, wow"},
+  {"WTF", "What the fuck ??"}
 };
 
 auto pauseCo() 
 {
-  #ifdef MULTITHREADING
+#ifdef MULTITHREADING
   if (MTObject::kill) exit(MTSIGEXIT);
   lock_mutex lock(MTObject::mutex);
-  #endif //MULTITHREADING
+#endif //MULTITHREADING
 
   std::cout << "Programme paused, please press enter"; 
   return std::cin.get();
@@ -184,10 +191,10 @@ auto pauseCo()
 
 auto pauseCo(std::string const & message) 
 {
-  #ifdef MULTITHREADING
+#ifdef MULTITHREADING
   if (MTObject::kill) exit(MTSIGEXIT);
   lock_mutex lock(MTObject::mutex);
-  #endif //MULTITHREADING
+#endif //MULTITHREADING
 
   std::cout << message << std::endl;
   return std::cin.get();
@@ -195,10 +202,10 @@ auto pauseCo(std::string const & message)
 
 void pauseDebug(std::string const & message = "") 
 {
-  #ifdef DEBUG
+#ifdef DEBUG
   if (message == "") pauseCo();
   else pauseCo(message);
-  #endif
+#endif //DEBUG
 }
 
 ////////////////

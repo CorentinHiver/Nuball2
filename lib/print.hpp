@@ -13,31 +13,37 @@
 // #include <array>
 
 // Defining the different colors possible of the terminal
-// Usage :  cout<< <COLOR> <<....
+// Usage :  cout<< CoLib::Color::<COLOR> <<....
 //          ...
-//          cout << ... << RESET
+//          cout << ... << CoLib::Color::RESET
 
-#define RESET   "\u001b[0m"
-
-#define BLACK   "\u001b[30m"
-#define RED     "\u001b[31m"
-#define GREEN   "\u001b[32m"
-#define YELLOW  "\u001b[33m"
-#define BLUE    "\u001b[34m"
-#define MAGENTA "\u001b[35m"
-#define CYAN    "\u001b[36m"
-#define WHITE   "\u001b[37m"
-
-#define BRIGHTBLACK   "\u001b[30;1m"
-#define BRIGHTRED     "\u001b[31;1m"
-#define BRIGHTGREEN   "\u001b[32;1m"
-#define BRIGHTYELLOW  "\u001b[33;1m"
-#define BRIGHTBLUE    "\u001b[34;1m"
-#define BRIGHTMAGENTA "\u001b[35;1m"
-#define BRIGHTCYAN    "\u001b[36;1m"
-#define BRIGHTWHITE   "\u001b[37;1m"
-
-#define GREY "\u001b[38;5;8m"
+namespace CoLib
+{
+  namespace Color
+  {
+    const char* RESET   = "\u001b[0m";
+  
+    const char* BLACK   = "\u001b[30m";
+    const char* RED     = "\u001b[31m";
+    const char* GREEN   = "\u001b[32m";
+    const char* YELLOW  = "\u001b[33m";
+    const char* BLUE    = "\u001b[34m";
+    const char* MAGENTA = "\u001b[35m";
+    const char* CYAN    = "\u001b[36m";
+    const char* WHITE   = "\u001b[37m";
+  
+    const char* BRIGHTBLACK   = "\u001b[30;1m";
+    const char* BRIGHTRED     = "\u001b[31;1m";
+    const char* BRIGHTGREEN   = "\u001b[32;1m";
+    const char* BRIGHTYELLOW  = "\u001b[33;1m";
+    const char* BRIGHTBLUE    = "\u001b[34;1m";
+    const char* BRIGHTMAGENTA = "\u001b[35;1m";
+    const char* BRIGHTCYAN    = "\u001b[36;1m";
+    const char* BRIGHTWHITE   = "\u001b[37;1m";
+  
+    const char* GREY = "\u001b[38;5;8m";
+  }
+}
 
 #ifndef MULTITHREADING
 
@@ -72,6 +78,17 @@ void printC(T const & t) {std::cout << t << std::endl;}
 /// @details Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n"
 template <class T, class... T2> 
 void printC(T const & t, T2 const &... t2) {std::cout << t; printC(t2...);}
+
+
+/// @brief Generic print separated by tabulation
+/// @details Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n"
+template <class T> 
+void printT(T const & t) {std::cout << t << std::endl;}
+
+/// @brief Generic print concatenated
+/// @details Concatenate the ouput, i.e. do not add space between each input. Terminate the output with a "\\n"
+template <class T, class... T2> 
+void printT(T const & t, T2 const &... t2) {std::cout << t << "\t"; printT(t2...);}
 
 
 /// @brief Generic print in one line
@@ -182,27 +199,27 @@ std::string type_of(T const & t)
 template <class... T>
 void warning(T const & ... t)
 {
-  std::cout << YELLOW;
+  std::cout << CoLib::Color::YELLOW;
   print(t...);
-  std::cout << RESET;
+  std::cout << CoLib::Color::RESET;
 }
 
 /// @brief Print in red
 template <class... T>
 void error(T const & ... t)
 {
-  std::cout << RED;
+  std::cout << CoLib::Color::RED;
   print(t...);
-  std::cout << RESET;
+  std::cout << CoLib::Color::RESET;
 }
 
 /// @brief Print in grey
 template <class... T>
 void information(T const & ... t)
 {
-  std::cout << GREY;
+  std::cout << CoLib::Color::GREY;
   print(t...);
-  std::cout << RESET;
+  std::cout << CoLib::Color::RESET;
 }
 
 #endif //PRINT_HPP

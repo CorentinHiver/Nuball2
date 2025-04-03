@@ -244,7 +244,7 @@ template <typename T>
 std::vector<size_t> & bubble_sort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
 {
   // Verifications :
-  if (vector.size() == 0) {printC(RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", RESET); return ordered_indexes;}
+  if (vector.size() == 0) {printC(CoLib::Color::RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", CoLib::Color::RESET); return ordered_indexes;}
   if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());
 
   // Initializations :

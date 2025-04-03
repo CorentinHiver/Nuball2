@@ -24,6 +24,7 @@
 #include <TH2F.h>
 #include <TH3I.h>
 #include <TKey.h>
+#include <TLatex.h>
 #include <TLeaf.h>
 #include <TLegend.h>
 #include <TMarker.h>
@@ -79,7 +80,7 @@ inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 ///////////////////////////
 
 #ifdef MULTITHREADING
-std::mutex mutex_Root;
+  std::mutex mutex_Root;
 #endif //MULTITHREADING
 
 // TRandom gRandom(time(0));
@@ -88,6 +89,19 @@ std::mutex mutex_Root;
 /////////////////////////////////////////////////////////////
 // Generic functions using some actually nice ROOT classes //
 /////////////////////////////////////////////////////////////
+
+
+/// @brief This method allows one to get the x and y values of where the user clicks on the graph
+void GetPoint(TVirtualPad * vpad, double& x, double& y)
+{
+  auto pad = static_cast<TPad*>(vpad);
+  pad->Update();
+  auto cutg = static_cast<TMarker*> (pad->WaitPrimitive("TMarker","Marker"));
+  if (!cutg) {print("CAN'T FIND THE PAD OR MOUSE CLICK"); return;}
+  x = cutg->GetX();
+  y = cutg->GetY();
+  delete cutg;
+}
 
 namespace CoLib
 {
@@ -117,6 +131,17 @@ namespace CoLib
   }
 }
 
+/////////////////////////////////////
+//   Some Convenient Definitions   //
+/////////////////////////////////////
+
+std::vector<int> ROOT_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};
+
+auto getROOTniceColors(int i)
+{
+  return ROOT_nice_colors[(i & 111)];
+}
+
 ////////////////////////////
 //   HISTO MANIPULATIONS  //
 ////////////////////////////
@@ -129,12 +154,26 @@ THist* Add(THist* h1, THist* h2, double factor = 1)
   ret->Add(h2, +factor);
   return ret;
 }
+
 template<class THist>
-THist* Sub(THist* h1, THist* h2, double factor = 1)
+THist* Sub(THist* h1, THist* h2, double factor = 1.)
+{
+  auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_"+TString(h2->GetName()));
+  ret->SetTitle(TString(h1->GetName())+"-" + ((factor == 1.) ? "" : std::to_string(factor).c_str()) + TString(h2->GetName()));
+  ret->Add(h2, -factor);
+  return ret;
+}
+
+template<class THist>
+THist* SubInteger(THist* h1, THist* h2, double factor = 1)
 {
   auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_"+TString(h2->GetName()));
   ret->SetTitle(TString(h1->GetName())+"-"+TString(h2->GetName()));
-  ret->Add(h2, -factor);
+  for (int bin_i = 0; bin_i<h1->GetNbinsX(); ++bin_i) 
+  {
+    auto const & diff = static_cast<int>(factor*h2->GetBinContent(bin_i));
+    ret->SetBinContent(bin_i, ret->GetBinContent(bin_i)-diff);
+  }
   return ret;
 }
 
@@ -142,7 +181,7 @@ TH1* Mult(TH1* h1, TH1* h2, double factor = 1)
 {
   auto ret = (TH1*) h1->Clone(TString(h1->GetName())+"_times_"+TString(h2->GetName()));
   ret->SetTitle(TString(h1->GetName())+"#times"+TString(h2->GetName()));
-  for (size_t bin = 1; bin<h1->GetNbinsX(); ++bin) ret->SetBinContent(bin, h1->GetBinContent(bin)*h2->GetBinContent(bin));
+  for (int bin = 1; bin<h1->GetNbinsX(); ++bin) ret->SetBinContent(bin, h1->GetBinContent(bin)*h2->GetBinContent(bin)*factor);
   return ret;
 }
 
@@ -607,6 +646,7 @@ double peak_integral(TH1* histo, int bin_min, int bin_max, TH1* background)
   auto const & bckg = background->Integral(bin_min, bin_max);
   return peak-bckg;
 }
+
 double peak_integral(TH1* histo, int bin_min, int bin_max, int smooth_background_it = 20)
 {
   auto background = histo->ShowBackground(smooth_background_it);
@@ -614,6 +654,7 @@ double peak_integral(TH1* histo, int bin_min, int bin_max, int smooth_background
   delete background;
   return ret;
 }
+
 std::vector<double> peak_integral(TH1* histo, std::vector<double> energies, int resolution, int smooth_background_it = 20)
 {
   std::vector<double> ret;
@@ -690,6 +731,22 @@ TH1F* count_to_peak_significance(TH1* histo, int resolution, int smooth_backgrou
  * @param resolution Each peak is at bin += resolution/2
  * @return TH1F* 
  */
+TH1F* count_to_peak_significance(TH1* histo, int resolution, TH1* background)
+{
+  std::string name = histo->GetName(); name += "_significance";
+  std::string title = histo->GetName(); title+=";keV;significance;";
+  auto ret = new TH1F(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
+  for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
+    ret -> SetBinContent(bin, peak_significance(histo, bin-resolution, bin+resolution, background));
+  return ret;
+}
+
+/**
+ * @brief 
+ * 
+ * @param resolution Each peak is at bin += resolution/2
+ * @return TH1F* 
+ */
 TH1F* count_to_peak_over_background(TH1* histo, int resolution, int smooth_background_it = 20)
 {
   std::string name = histo->GetName(); name += "_peak_over_background";
@@ -728,8 +785,8 @@ TH1F* count_to_peak_over_total(TH1* histo, int resolution, int smooth_background
  */
 TH1F* count_to_peak_integral(TH1F* histo, int const & resolution, int const & smooth_background_it = 20)
 {
-  std::string name = histo->GetName(); name += "_significance";
-  std::string title = histo->GetName(); title+=";keV;significance";
+  std::string name = histo->GetName(); name += "_peak_integral";
+  std::string title = histo->GetName(); title+=";keV;peak_integral";
   auto background = histo->ShowBackground(smooth_background_it);
   auto ret = new TH1F(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
   for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
@@ -746,8 +803,8 @@ TH1F* count_to_peak_integral(TH1F* histo, int const & resolution, int const & sm
  */
 TH1D* count_to_peak_integral(TH1D* histo, int const & resolution, int const & smooth_background_it = 20)
 {
-  std::string name = histo->GetName(); name += "_significance";
-  std::string title = histo->GetName(); title+=";keV;significance";
+  std::string name = histo->GetName(); name += "_peak_integral";
+  std::string title = histo->GetName(); title+=";keV;peak_integral";
   auto background = histo->ShowBackground(smooth_background_it);
   auto ret = new TH1D(name.c_str(), title.c_str(), histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax());
   for (int bin = 0+resolution; bin<histo->GetNbinsX(); ++bin)
@@ -764,8 +821,8 @@ TH1D* count_to_peak_integral(TH1D* histo, int const & resolution, int const & sm
  */
 TH2F* count_to_peak_integral(TH2F* histo, int const & resolution, int const & smooth_background_it = 20)
 {
-  std::string name = histo->GetName(); name += "_significance";
-  std::string title = histo->GetName(); title+=";keV;"+TString(histo->GetYaxis()->GetTitle())+";significance";
+  std::string name = histo->GetName(); name += "_peak_integral";
+  std::string title = histo->GetName(); title+=";keV;"+TString(histo->GetYaxis()->GetTitle())+";peak_integral";
   auto ret = new TH2F(name.c_str(), title.c_str(), 
                       histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), histo->GetXaxis()->GetXmax(), 
                       histo->GetNbinsY(), histo->GetYaxis()->GetXmin(), histo->GetYaxis()->GetXmax());
@@ -1015,8 +1072,8 @@ private:
     m_trees.push_back( m_files.back() -> Get<TTree>(m_name.c_str()) );
   }
 
-  std::vector<std::string> m_input_files_expressions;
-  std::vector<std::string> m_files_vec;
+  Strings m_input_files_expressions;
+  Strings m_files_vec;
 
   UInt_t    m_tree_cursor = 0;
   ULong64_t m_evt_cursor = 0;
@@ -1092,6 +1149,10 @@ std::vector<double> log_bins(size_t nb_bins, int min, double power)
   return ret;
 }
 
+//////////////
+// LOG BINS //
+//////////////
+
 std::vector<double> log2_bins(size_t nb_bins, int min) {return log_bins(nb_bins, min, 2);}
 std::vector<double> log10_bins(size_t nb_bins, int min) {return log_bins(nb_bins, min, 10);}
 
@@ -1111,6 +1172,36 @@ std::vector<double> linear_bins(size_t nb_bins, double min, double max)
 
 namespace CoAnalyse
 {
+  /**
+   * @brief Returns the average number of hits per keV for by default 5 energy interval.
+   * @details This is used to estimate the significance of a peak in a low-count spectrum
+   * @todo Il semble qu'il y a un décalage de quelques bins
+   * 
+   * @param histo : gamma spectrum with x axis in keV
+   * @param dE_zone : divide the histogram into zones of dE_zone keV large to calculate the count per keV
+   * @return std::vector<double> 
+   */
+  std::vector<double> counts_per_keV(TH1* histo, int dE_zone = 100)
+  {
+    auto const & nX = histo->GetNbinsX();
+    auto const & xmax = histo->GetXaxis()->GetXmax();
+    auto const & xmin = histo->GetXaxis()->GetXmin();
+    auto const & range = xmax - xmin;
+    auto const & n_zones = size_cast(range/dE_zone); // Get the number of zones
+    auto const & nX_zone = nX/n_zones;
+    std::vector<double> ret(nX+1);
+    std::vector<double> data;
+    for (size_t zone_i = 0; zone_i<n_zones; ++zone_i)
+    {
+      auto const & bin_low = 1+zone_i*nX_zone;
+      auto const & bin_high = (zone_i+1)*nX_zone;
+      auto const & integral = histo->Integral(bin_low, bin_high);
+      data.push_back(integral/dE_zone);
+    }
+    for (int bin_i = 1; bin_i<=nX; ++bin_i) ret[bin_i] = data[int(bin_i/nX_zone)];
+    return ret;
+  }
+
   bool inline checkMatrixSquare(TH2* mat) noexcept
   {
     if (!mat) {error(" in CoAnalyse::checkMatrixSquare(TH2* mat) : mat is nullptr"); return false;}
@@ -1121,6 +1212,20 @@ namespace CoAnalyse
   }
   /// @brief Vector of pairs of min and max bins 
   using ProjectionsBins = std::vector<std::pair<double,double>>;
+
+  /// @brief Get a sub-histogram between x1 and x2
+  template<class THist>
+  THist* sub_histo(THist* histo, int xmin, int xmax)
+  {
+    auto name = TString(histo->GetName())+("_"+std::to_string(xmin)+"_"+std::to_string(xmax)).c_str();
+    auto bin_low = histo->GetBinLowEdge(xmin);
+    auto bin_high = histo->GetBinLowEdge(xmax)+1;
+    auto const & N = bin_high-bin_low;
+    auto ret = new THist(name, name, N, xmin, xmax);
+    int dest_bin = 0;
+    for (int bin_i = bin_low; bin_i<bin_high; ++bin_i) ret->SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
+    return ret;
+  }
 
   /// @brief For each X bin, normalise the Y histogram
   void normalizeY(TH2* matrix, double const & factor = 1)
@@ -2124,9 +2229,9 @@ THist* pad_get_histo(std::string name, TPad * pad = nullptr)
 }
 
 template<class THist = TH1>
-std::vector<std::string> pad_get_names_of(TPad * pad = nullptr)
+Strings pad_get_names_of(TPad * pad = nullptr)
 {
-  std::vector<std::string> ret;
+  Strings ret;
   if (!pad) 
   {
     pad = (TPad*)gPad;
@@ -2137,6 +2242,11 @@ std::vector<std::string> pad_get_names_of(TPad * pad = nullptr)
   return ret;
 }
 
+/**
+ * @brief Sets the Y axis so that one can see the minimum and the maximum of each spectrum
+ * 
+ * @param pad 
+ */
 void pad_set_Y_axis_nice(TPad * pad = nullptr)
 {
   if (!pad) 
@@ -2156,6 +2266,32 @@ void pad_set_Y_axis_nice(TPad * pad = nullptr)
   histos[0]->GetYaxis()->SetRangeUser(minimum(mins), maximum(maxs));
 }
 
+void pad_set_colors(TPad * pad = nullptr)
+{
+  if (!pad) 
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos(pad);
+
+  for (size_t histo_i = 0; histo_i<histos.size(); ++histo_i)
+  {
+    histos[histo_i]->SetLineColor(getROOTniceColors(histo_i));    
+  }
+}
+
+void pad_set_title_with_names(TPad * pad = nullptr)
+{
+  if (!pad) 
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos(pad);
+  for (auto & histo : histos) histo->SetTitle(histo->GetName());
+}
+
 void pad_remove_stats(TPad * pad = nullptr)
 {
   if (!pad) 
@@ -2169,7 +2305,7 @@ void pad_remove_stats(TPad * pad = nullptr)
   gPad->Update();
 }
 
-bool has_legend(TPad* pad = nullptr)
+bool pad_has_legend(TPad* pad = nullptr)
 {
   if (!pad)
   {
@@ -2203,13 +2339,12 @@ void pad_normalize_histos(TPad* pad = nullptr, TString options = "nosw2")
   double maxi = 0;
   for (auto const & hist : histos) if (maxi < hist->GetMaximum()) maxi = hist->GetMaximum();
   if (maxi==0.0) {error("max is 0"); return;}
-  bool hasLegend = has_legend(pad);
+  bool hasLegend = pad_has_legend(pad);
   int i = 0;
   for (auto & hist : histos) 
   {
     gPad->GetListOfPrimitives()->Remove(hist);
     hist->Scale(maxi/hist->GetMaximum(), options);
-    // for (int i = 1; i <= p->GetNbinsX(); ++i) {p->SetBinError(i, 0);} // remove the error bars
     if (i++ == 0) hist->Draw();
     else hist->Draw("same");
   }
@@ -2230,13 +2365,74 @@ void pad_normalize_histos_min(TPad* pad = nullptr, TString options = "nosw2")
   double mini = histos[0]->GetMaximum();
   for (auto const & hist : histos) if (mini > hist->GetMaximum()) mini = hist->GetMaximum();
   if (mini==0.0) {error("min is 0"); return;}
-  bool hasLegend = has_legend(pad);
+  bool hasLegend = pad_has_legend(pad);
   int i = 0;
   for (auto & hist : histos) 
   {
     gPad->GetListOfPrimitives()->Remove(hist);
     hist->Scale(mini/hist->GetMaximum(), options);
-    // for (int i = 1; i <= p->GetNbinsX(); ++i) {p->SetBinError(i, 0);} // remove the error bars
+    if (i++ == 0) hist->Draw();
+    else hist->Draw("same");
+  }
+  if (hasLegend) gPad->BuildLegend();
+  pad->Update();
+}
+
+template<class THist = TH1>
+void pad_normalize_histos_click(TPad* pad = nullptr, TString options = "nosw2")
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos<TH1>(pad);
+  if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+  
+  double x, y;
+  GetPoint(pad, x, y);
+  auto bin = histos[0]->GetXaxis()->FindBin(x);
+
+  double maxi = 0;
+  for (auto const & hist : histos) if (maxi < hist->GetBinContent(bin)) maxi = hist->GetMaximum();
+  if (maxi==0.0) {error("max is 0"); return;}
+  bool hasLegend = pad_has_legend(pad);
+  int i = 0;
+  for (auto & hist : histos) 
+  {
+    gPad->GetListOfPrimitives()->Remove(hist);
+    hist->Scale(maxi/hist->GetBinContent(bin), options);
+    if (i++ == 0) hist->Draw();
+    else hist->Draw("same");
+  }
+  if (hasLegend) gPad->BuildLegend();
+  pad->Update();
+}
+
+template<class THist = TH1>
+void pad_normalize_histos_click_min(TPad* pad = nullptr, TString options = "nosw2")
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos<TH1>(pad);
+  if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+  
+  double x, y;
+  GetPoint(pad, x, y);
+  auto bin = histos[0]->GetXaxis()->FindBin(x);
+
+  double mini = histos[0]->GetBinContent(bin);
+  for (auto const & hist : histos) if (mini > hist->GetBinContent(bin)) mini = hist->GetBinContent(bin);
+  if (mini==0.0) {error("min is 0"); return;}
+  bool hasLegend = pad_has_legend(pad);
+  int i = 0;
+  for (auto & hist : histos) 
+  {
+    gPad->GetListOfPrimitives()->Remove(hist);
+    hist->Scale(mini/hist->GetBinContent(bin), options);
     if (i++ == 0) hist->Draw();
     else hist->Draw("same");
   }
@@ -2256,17 +2452,45 @@ void pad_subtract_histos(TPad* pad = nullptr)
   histos[0]->GetXaxis()->UnZoom();
   histos[1]->GetXaxis()->UnZoom();
   histos[0]->Add(histos[1], -1);
-  if (has_legend(pad)) gPad->BuildLegend();
+  if (pad_has_legend(pad)) gPad->BuildLegend();
   pad->Update();
 }
+
+void pad_show_peaks(Double_t sigma=2, Option_t *option="", Double_t threshold=0.05, TPad* pad = nullptr)
+{
+  if (!pad)
+  {
+    pad = (TPad*)gPad;
+    if (!pad) {error("no pad"); return;}
+  }
+  auto histos = pad_get_histos<TH1>(pad);
+  if (histos.size() != 1) {error("pad_show_peaks : implemented for one histogram"); return;}
+  auto histo = histos[0];
+  histo->ShowPeaks(sigma, option, threshold);
+  auto markers = static_cast<TPolyMarker*>(histo->GetListOfFunctions()->FindObject("TPolyMarker")); // Extracts the peaks list
+  auto N = markers->GetN(); // Get the number of peaks
+  auto raw_X = markers->GetX(); // Get the X values of the maximum of the peak (double*)
+  auto raw_Y = markers->GetY(); // Get the X values of the maximum of the peak (double*)
+  
+  std::vector<TLatex*> latex;
+  for (int i = 0; i<N; ++i)
+  {
+    latex.push_back(new TLatex());
+    latex.back()->SetTextSize(0.04);
+    latex.back()->SetTextAlign(12); // Align the text
+    std::string text = std::to_string(int(raw_X[i]-0.5));
+    latex.back()->DrawLatex(raw_X[i], raw_Y[i], text.c_str());
+  }
+}
+
 
 ////////////////////////////
 //   Manage histo files   //
 ////////////////////////////
 
-std::vector<std::string> get_list_histo(TFile * file, std::string const & class_name = "TH1F")
+Strings get_list_histo(TFile * file, std::string const & class_name = "TH1F")
 {
-  std::vector<std::string> ret;
+  Strings ret;
   if (!file) {error("in get_list_histo(TFile * file, std::string class_name) : file is nullptr"); return ret;}
   auto list = file->GetListOfKeys();
   for (auto&& keyAsObj : *list)
@@ -2292,7 +2516,7 @@ std::map<std::string, THist> get_map_histo(TFile * file, std::string const & cla
   return ret;
 }
 
-std::vector<std::string> get_TH1F_names(std::string const & filename)
+Strings get_TH1F_names(std::string const & filename)
 {
   auto file = TFile::Open(filename.c_str());
   auto ret =  get_list_histo(file, "TH1F");
@@ -2300,7 +2524,7 @@ std::vector<std::string> get_TH1F_names(std::string const & filename)
   return ret;
 }
 
-std::vector<std::string> get_TH1F_names(TFile * file)
+Strings get_TH1F_names(TFile * file)
 {
   return get_list_histo(file, "TH1F");
 }
@@ -2318,7 +2542,7 @@ TH1F_map get_TH1F_map(TFile * file)
   return ret;
 }
 
-TH1F_map get_TH1F_map(TFile * file, std::vector<std::string> & names)
+TH1F_map get_TH1F_map(TFile * file, Strings & names)
 {
   TH1F_map ret;
   names = get_TH1F_names(file);
@@ -2507,13 +2731,14 @@ TH1F* peaky(const TH1F* histo, int choice = 0, size_t smooth = 1)
       after.push_back(histo->GetBinContent(bin));
       for (size_t i = bin + 1; i <= upper_bin; ++i) after.push_back(histo->GetBinContent(i));
 
-      auto graph_before = new TGraph(smooth, before.data(), before.data());
-      auto graph_after = new TGraph(smooth, after.data(), after.data());
+      // auto graph_before = new TGraph(smooth, before.data(), before.data());
+      // auto graph_after = new TGraph(smooth, after.data(), after.data());
 
-      TF1 fitFunc("fitFunc", "[0] + [1]*x", 0, 6);
-      graph_before->Fit(&fitFunc);
-      int slope_before = 
-      graph_after->Fit(&fitFunc);
+      // TODO
+      // TF1 fitFunc("fitFunc", "[0] + [1]*x", 0, 6);
+      // graph_before->Fit(&fitFunc);
+      // int slope_before = 
+      // graph_after->Fit(&fitFunc);
     }
 
   }
@@ -2556,7 +2781,7 @@ THist* mergeAllMatching(std::string expression, TFile* file = nullptr)
 }
 
 template<>
-TH1F* mergeAllMatching(std::string expression, TFile* file = nullptr)
+TH1F* mergeAllMatching(std::string expression, TFile* file)
 {
   if (file == nullptr) file = gFile;
   TH1F temp_histo;
@@ -2727,18 +2952,6 @@ void removeFits(TH1* histo)
       --i; // Decrement index because funcs size has changed
     }
   }
-}
-
-/// @brief This method allows one to get the x and y values of where the user clicks on the graph
-void GetPoint(TVirtualPad * vpad, double& x, double& y)
-{
-  auto pad = static_cast<TPad*>(vpad);
-  pad->Update();
-  auto cutg = static_cast<TMarker*> (pad->WaitPrimitive("TMarker","Marker"));
-  if (!cutg) {print("CAN'T FIND THE PAD OR MOUSE CLICK"); return;}
-  x = cutg->GetX();
-  y = cutg->GetY();
-  delete cutg;
 }
 
 CoLib::Point selectPoint(TH1* histo, std::string const & instructions)
@@ -3278,6 +3491,7 @@ namespace CoLib
     else return nullptr;
   }
 
+  /// @brief For low_count spectra : calculate the mean count/keV in a given region and returns the variance
   double calculateVariance(TH1F* hist, int const & bin_min, int const & bin_max) 
   {
     auto const & bins = bin_max-bin_min;
@@ -3296,10 +3510,65 @@ namespace CoLib
     return (sumSq / bins) - (mean * mean);
   }
 
+  /// @brief For low_count spectra : calculate the mean count/keV in a given region and returns the variance
   double calculateVariance(TH1F* hist)
   {
     return calculateVariance(hist, 0, hist->GetNbinsX());
   } 
+
+  auto adaptative_mean(TH1F* hist, int length)
+  {
+    auto const & bins = hist->GetNbinsX();
+    TH1F *out = new TH1F("out", "out", bins, hist->GetXaxis()->GetXmin(), hist->GetXaxis()->GetXmax());
+    int sum = 0;
+    for(size_t bin = 1; bin<2*length+1; ++bin) sum += hist->GetBinContent(bin);
+    for (size_t bin = length+1; bin<=bins-length; ++bin)
+    {
+      out->SetBinContent(bin, sum/(2*length+1));
+      sum-=hist->GetBinContent(bin-length);
+      sum+=hist->GetBinContent(bin+length+1);
+    }
+    out->SetLineColor(kRed);
+    return out;
+  }
+
+  /// @brief 
+  /// @param hist 
+  /// @param length 
+  /// @param bin_min must be at least length bins from the edge
+  /// @param bin_max must be at least length bins from the edge
+  auto adaptative_mean(TH1F* hist, int length, size_t bin_min, size_t bin_max)
+  {
+    auto const & bins = hist->GetNbinsX();
+    
+    if (bin_min<length) throw_error("CoLib::adaptative_mean : bin_min must be at least length bins from the edge.");
+    if ((bins-bin_max)<length) throw_error("CoLib::adaptative_mean : bin_max must be at least length bins from the edge.");
+
+    TH1F* out = new TH1F("out", "out", bins, hist->GetXaxis()->GetXmin(), hist->GetXaxis()->GetXmax());
+    int sum = 0;
+    for(size_t bin = bin_min-length+1; bin<bin_min+length+1; ++bin) sum += hist->GetBinContent(bin);
+    for (size_t bin = bin_min+1; bin<=bin_max; ++bin)
+    {
+      out->SetBinContent(bin, sum/(2*length));
+      sum-=hist->GetBinContent(bin-length);
+      sum+=hist->GetBinContent(bin+length);
+    }
+    out->SetLineColor(kRed);
+    return out;
+  }
+
+  void plot_variance(TH1F* hist, int const & bin_min, int const & bin_max)
+  {
+    auto const & bins = bin_max-bin_min;
+    auto means = adaptative_mean(hist, 5, bin_min, bin_max);
+    std::vector<double> diffs;
+    for (int bin = bin_min+1; bin <= bin_max; ++bin) diffs.push_back(hist->GetBinContent(bin) - means->GetBinContent(bin));
+    auto const & min = minimum(diffs);
+    auto const & max = maximum(diffs);
+    auto temp = new TH1F("temp","temp",int(max-min), min, max);
+    for (auto const & diff : diffs) temp->Fill(diff);
+    temp->Draw();
+  }
 
 }
 
@@ -3349,12 +3618,12 @@ public:
   /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
   void fit(TH1* histo, double low_edge, double high_edge, double mean = -1, double sigma = -1, double constante = -1)
   {
-    #ifdef __CINT__
+  #ifdef __CINT__
     histo->GetXaxis()->SetRangeUser(low_edge, high_edge);
     histo->Draw();
     gPad->Update();
     gPad->WaitPrimitive();
-    #endif //__CINT__
+  #endif //__CINT__
     if (mean == -1) mean = (high_edge+low_edge)/2;
     if (constante == -1) constante = histo->GetMaximum();
     if (sigma == -1) sigma = (high_edge-low_edge)/5.;
@@ -3852,7 +4121,7 @@ class Radware
       gate->SetTitle((std::to_string(bin)+" gate").c_str());
     }
     gate->Draw("same");
-    gate->SetLineColor(m_nice_colors[(++m_nb_sm & 111)]);
+    gate->SetLineColor(ROOT_nice_colors[(++m_nb_sm & 111)]);
     m_list_histo_to_delete.push_back(name);
     gPad->Update();
   }
@@ -3944,13 +4213,12 @@ private:
   TH1* m_proj = nullptr;
   TH1* m_gate = nullptr;
   TH1* m_focus = nullptr;
-  std::vector<std::string> m_list_histo_to_delete;
+  Strings m_list_histo_to_delete;
 
   bool m_py = true;
   int m_gate_size = 1;
   double m_gate_number = 0;
   int m_nb_sm = 0;
-  std::vector<int> m_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};
 };
 bool Radware::m_finish = false;
 
@@ -4056,7 +4324,7 @@ TH2F* invert(TH2F* histo)
   return ret;
 }
 
-std::vector<std::string> wildcard(std::string const & name)
+Strings wildcard(std::string const & name)
 {
   TString result = gSystem->GetFromPipe(("ls "+name).c_str());
   return getList(result.Data(), "\n");
@@ -4087,7 +4355,7 @@ void hadd(std::string source, std::string target, double size_file_Mo, std::stri
   // Get the size of each file and the total amount of files
   double total_size = 0;
   std::vector<double> size_files;
-  std::vector<std::string> name_files;
+  Strings name_files;
   for (int i = 0; i < nb_files; ++i) 
   {
     TObjString* str = (TObjString*)files->At(i);
@@ -4123,7 +4391,7 @@ void hadd(std::string source, std::string target, double size_file_Mo, std::stri
     while(!end)
     {
       // Take the needed number of files :
-      std::vector<std::string> files;
+      Strings files;
       double thread_size = 0;
       for (; infile_i<nb_files; ++infile_i)
       {

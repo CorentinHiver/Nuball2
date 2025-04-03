@@ -9,6 +9,7 @@
 /////////////////////
 // PARIS NAMESPACE //
 /////////////////////
+
 namespace Paris
 {
   constexpr static uchar cluster_size = 36ul;
@@ -24,10 +25,10 @@ namespace Paris
   #ifdef MULTITHREADING 
     std::lock_guard<std::recursive_mutex> lock(initialization_mutex);
     if (cluster_init) return;
-    if (MTObject::ON) printC("Initializing position and distance lookup tables in thread ", MTObject::getThreadIndex());
-    else printC("Initializing position and distance lookup tables");
+    if (MTObject::ON) printC("Initializing Paris position and distance lookup tables in thread ", MTObject::getThreadIndex());
+    else printC("Initializing Paris position and distance lookup tables");
   #else
-    printC("Initializing position and distance lookup tables");
+    printC("Initializing Paris position and distance lookup tables");
   #endif //MULTITHREADING
 
     // Filling the positions of the detectors :  
@@ -169,6 +170,20 @@ public:
     isGood = false;
   }
 
+  SimplePhoswitch* fill(Event const & event, int const & hit_i)
+  {
+    qshort = event.nrjs[hit_i];
+    qlong = event.nrj2s[hit_i];
+    time = event.times[hit_i];
+    isLaBr3 = Paris::pid_LaBr3(qshort, qlong);
+    isGood = Paris::pid_good_phoswitch(qshort, qlong);
+
+    if (isLaBr3) nrj = qshort;
+    else nrj = qlong;
+
+    return this;
+  }
+
   SimplePhoswitch* fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
   {
     qshort = event.nrjs[hit_i];
@@ -182,7 +197,6 @@ public:
 
     return this;
   }
-
 
   auto const & index() const noexcept {return m_index;}
 
@@ -214,6 +228,7 @@ public:
   {
     nrj = phoswitch.nrj;
     time = phoswitch.time;
+    m_isLaBr3 = phoswitch.isLaBr3;
     ++m_nb;
   }
 
@@ -221,11 +236,13 @@ public:
   {
     nrj += phoswitch.nrj;
     ++m_nb;
-    // Keep the time of the higher energy phoswitch which was set first
+    m_isLaBr3 = m_isLaBr3 && phoswitch.isLaBr3;
+    // Keep the time of the higher energy phoswitch which shoud have been set first in the accepted add-back method
   }
 
   void clear()
   {
+    m_isLaBr3 = false;
     nrj = 0.;
     time = 0.;
     m_nb = 0.;
@@ -233,12 +250,14 @@ public:
 
   static void resetIndexes() noexcept {g_index = 0;}
 
-  auto const & index() const noexcept {return m_index;}
-  auto const & nb   () const noexcept {return m_nb   ;}
+  auto const & index  () const noexcept {return m_index  ;}
+  auto const & nb     () const noexcept {return m_nb     ;}
+  auto const & isLaBr3() const noexcept {return m_isLaBr3;}
 
   bool addbacked() const noexcept {return m_nb>0;}
 
 private:
+  bool m_isLaBr3 = false;
   size_t static thread_local g_index;
   size_t const m_index;
   int m_nb = 0;
@@ -264,6 +283,26 @@ public:
     for (auto & phoswitch : phoswitches) phoswitch.label = ParisArrays::labels[m_index * Paris::cluster_size + phoswitch.index()];
   };
 
+  SimplePhoswitch* fill(Event const & event, int const & hit_i)
+  {
+    auto const & label = event.labels[hit_i];
+    auto const & id = Paris::cluster_index[label];
+    auto const & nrj = Paris::cluster_index[label];
+    auto const & nrj2 = Paris::cluster_index[label];
+
+    if (nrj < 0 || nrj2 < 0) return nullptr;
+
+    if (Paris::cluster_size < id+1) {error("in SimpleCluster::fill : index", id, "> cluster_size !!"); return nullptr;}
+
+    phoswitches_id.push_back(id);
+    
+    auto ret = phoswitches[id].fill(event, hit_i);
+
+    calorimetry+=phoswitches[id].nrj;
+
+    return ret;
+  }
+
   SimplePhoswitch* fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
   {
     auto const & label = event.labels[hit_i];
@@ -288,7 +327,8 @@ public:
   {
     for(auto const & id : phoswitches_id) phoswitches[id].clear();
     phoswitches_id.clear();
-    for(auto const & id : modules_id) modules[id].clear();
+    // for(auto const & id : modules_id) modules[id].clear();
+    for(auto & module : modules) module.clear();
     modules_id.clear();
     phoswitch_mult = 0;
     module_mult = 0;
@@ -405,10 +445,27 @@ std::ostream& operator<<(std::ostream& out, SimpleCluster const & cluster)
 class SimpleParis
 {
 public:
-  SimpleParis(PhoswitchCalib* calib) : m_calib(calib) 
+  SimpleParis(PhoswitchCalib* calib = nullptr) : m_calib(calib) 
   {
     SimpleCluster::resetIndexes();
     Paris::InitialiseBidims();
+  }
+
+  void fill(Event const & event, int const & hit_i)
+  {
+    auto const & label = event.labels[hit_i];
+
+    if (!Paris::is[label]) return;
+
+    auto const & cluster = Paris::cluster[label];
+
+         if (cluster == 0) phoswitches.push_back(back .fill(event, hit_i));
+    else if (cluster == 1) phoswitches.push_back(front.fill(event, hit_i));    
+    else error("SimpleParis::fill : no cluster (",cluster,") found for label", label);
+
+    if (phoswitches.size() > 0 && phoswitches.back() == nullptr) phoswitches.pop_back();
+
+    if (!phoswitches.back()->rejected) clean_phoswitches.push_back(phoswitches.back());
   }
 
   void fill(Event const & event, int const & hit_i, PhoswitchCalib const & calib)
@@ -428,7 +485,11 @@ public:
     if (!phoswitches.back()->rejected) clean_phoswitches.push_back(phoswitches.back());
   }
 
-  void fill(Event const & event, int const & hit_i) {fill(event, hit_i, *m_calib);}
+  // void fill(Event const & event, int const & hit_i) 
+  // {
+  //   if (m_calib) fill(event, hit_i, *m_calib);
+  //   else fill(event, hit_i);
+  // }
 
   void setEvent(Event const & event, PhoswitchCalib const & calib)
   {
@@ -437,9 +498,14 @@ public:
     analyze();
   }
 
-  void setEvent(Event const & event) {setEvent(event, *m_calib);}
+  void setEvent(Event const & event)
+  {
+    clear();
+    for (int hit_i = 0; hit_i<event.mult; ++hit_i) this->fill(event, hit_i);
+    analyze();
+  }
 
-  void operator=(Event const & event) {setEvent(event, *m_calib);}
+  void operator=(Event const & event) {(m_calib) ? setEvent(event, *m_calib) : setEvent(event);}
 
   void timeOrder()
   {
@@ -494,6 +560,7 @@ public:
 private:
   PhoswitchCalib* m_calib = nullptr;
 };
+
 std::ostream& operator<<(std::ostream& out, SimpleParis const & paris)
 {
   out << "Back cluster :" << std::endl;

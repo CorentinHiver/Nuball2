@@ -39,7 +39,10 @@ public:
   // Show methods :
   void show(std::string const & message = "");
   void showFast();
+  void showEvery();
   void showEvery(long const & freq);
+
+  void setFrequence(long const & freq) {m_freq = freq;}
 
 private:
 
@@ -52,7 +55,14 @@ private:
   Timer timer;
 
   bool first_time = true;
+  long m_freq = 1;
 };
+
+template<class T>
+void CoProgressBar<T>::showEvery()
+{
+  if ((*m_value%m_freq) == 0 || float_cast(*m_value) == m_value_max-1) this->showFast();
+}
 
 template<class T>
 void CoProgressBar<T>::showEvery(long const & freq)

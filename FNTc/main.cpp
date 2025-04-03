@@ -5,7 +5,6 @@
 #include <libRoot.hpp>
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <MultiHist.hpp>        // Use this to thread safely fill histograms
-// #include <Detectors.hpp>      // Eases the manipulation of detector's labels
 #include <Calibration.hpp>    // Either loads or calculate calibration coefficients
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors
 #include <RF_Manager.hpp>     // Eases manipulation of RF information
@@ -15,9 +14,17 @@
 All the distances are given in mm
 Z axis from bottom to top
 Y axis in the direction of the beam
-X axis : if looking in the direction of the beam (towards y positive), x increases to the right
+X axis : if looking in the direction of the beam (accelerator in the back, EDEN in the front), x increases to the right
 
 */
+
+// LABELS TO BE CONFIRMED
+
+constexpr Label labelGe1 = 2;
+constexpr Label labelGe2 = 3;
+constexpr Label labelEDEN = 1;
+constexpr Label labelX = 5;
+constexpr Label labelTheta = 6;
 
 class Point
 {
@@ -48,6 +55,10 @@ public:
 
   Point operator+(Point const & other) const {return Point({m_x + other.m_x, m_y + other.m_y});}
   Point operator-(Point const & other) const {return Point({m_x - other.m_x, m_y - other.m_y});}
+
+  Point& operator+=(Point const & other) {m_x += other.m_x; m_y += other.m_y; return *this;}
+  Point& shift     (Point const & other) {m_x += other.m_x; m_y += other.m_y; return *this;}
+  Point& operator-=(Point const & other) {m_x -= other.m_x; m_y -= other.m_y; return *this;}
 
   Point& operator=(Point const & other) 
   {
@@ -83,28 +94,28 @@ private:
 class Cone
 {
 public:
-  Cone(Point const & left_first, Point const & left_last, Point const & right_first, Point const & right_last) :
-    m_left_first  (left_first),
-    m_left_last   (left_last),
+  Cone(Point const & small_1, Point const & small_2, Point const & right_first, Point const & right_last) :
+    m_small_1  (small_1),
+    m_small_2   (small_2),
     m_right_first (right_first),
     m_right_last  (right_last)
   {}
 
   Cone(Point const & pointCenterSmall, double const & radiusSmall, Point const & pointCenterLarge, double const & radiusLarge) :
-    m_left_first  (pointCenterSmall),
-    m_left_last   (pointCenterSmall),
+    m_small_1  (pointCenterSmall),
+    m_small_2   (pointCenterSmall),
     m_right_first (pointCenterLarge),
     m_right_last  (pointCenterLarge)
   {
-    m_left_first .shiftX(-radiusSmall);
-    m_left_last  .shiftX( radiusSmall);
+    m_small_1 .shiftX(-radiusSmall);
+    m_small_2  .shiftX( radiusSmall);
     m_right_first.shiftX(-radiusLarge);
     m_right_last .shiftX( radiusLarge);
   }
 
 private:
-  Point m_left_first;
-  Point m_left_last;
+  Point m_small_1;
+  Point m_small_2;
   Point m_right_first;
   Point m_right_last;
 
@@ -125,16 +136,16 @@ private:
 class NeutronCollimator
 {
 public:
-  NeutronCollimator(Point const & startPoint,  double const & lenght, double const & inner_radius, double const & outer_radius = 100) :
+  NeutronCollimator(Point const & startPoint,  double const & length, double const & inner_radius, double const & outer_radius) :
     m_startPoint(startPoint),
-    m_lenght(lenght),
+    m_length(length),
     m_inner_radius(inner_radius),
     m_outer_radius(outer_radius)
   {}
 
 private:
   Point  m_startPoint;
-  double m_lenght;
+  double m_length;
   double m_inner_radius;
   double m_outer_radius;
 };
@@ -155,31 +166,38 @@ private:
 class ScanningTable
 {
 public:
-  ScanningTable(Point const & left_extrema, Point const & right_extrema, double const & radius) :
-    m_left_extrema(left_extrema),
-    m_right_extrema(right_extrema),
+  // ScanningTable(Point const & left_extrema, Point const & right_extrema, double const & radius) :
+  //   m_left_extrema(left_extrema),
+  //   m_right_extrema(right_extrema),
+  //   m_radius(radius)
+  // {
+  // }
+
+  ScanningTable(Point const & center, double const & radius) :
+    m_center(center),
     m_radius(radius)
   {
   }
 
 private:
-  Point m_left_extrema;
-  Point m_right_extrema;
+  // Point m_left_extrema;
+  // Point m_right_extrema;
+  // double m_radius;
+  Point m_center;
   double m_radius;
-  double m_y;
 };
 
 class Setup
 {
 public:
-  Setup(NeutronBeam & beam, ScanningTable & table) :
-    m_beam (&beam),
-    m_table (&table)
+  Setup(NeutronBeam * beam, ScanningTable * table) :
+    m_beam (beam),
+    m_table (table)
   {}
 
 private:
-  NeutronBeam * m_beam;
-  ScanningTable * m_table;
+  NeutronBeam * m_beam = nullptr;
+  ScanningTable * m_table = nullptr;
 };
 
 class Sinogram
@@ -221,17 +239,17 @@ int main(int argc, char** argv)
   Path path = "~/FNT/"+run;
 
   // Load some modules :
-  // detectors.load("index_FNTc.list");
+  // // detectors.load("index_FNTc.list");
   Calibration calib("FNTc.calib");
   Timeshifts timeshifts("FNTc.timeshifts");
 
   // LicorneSource source({0, 0});
-  // NeutronCollimator collimator({0,0}, 100, 10);
+  // NeutronCollimator collimator({0,0}, 100, 10, 100);
+  // ScanningTable table({0,0}, 200);
   // NeutronBeam beam(source, collimator);
-  // thread_local ScanningTable table({-20,0}, {20,0}, 20);
+  // Setup setup(&beam, &table);
 
-  // Setup setup(beam, table);
-  RF_Manager::setLabel(99);
+  RF_Manager::label = 99;
   thread_local RF_Manager rf;
 
   MultiHist<TH2F> sinogram("simple sinogram", "simple sinogram", 1000,-20,20, 1000,0,180);
@@ -240,14 +258,21 @@ int main(int argc, char** argv)
   MultiHist<TH1F> Ge2("Ge2", "Ge2", 10000,0,10000);
   MultiHist<TH1F> EDEN("EDEN", "EDEN", 10000,0,10000);
 
-  auto isX = [](Label const & label) {return label == 5;}
-  auto isTheta = [](Label const & label) {return label == 6;}
-  auto isGe = [](Label const & label) {return label == 6;}
-  auto isEden = [](Label const & label) {return label == 6;}
+  // auto isX = [](Label const & label) {return label == 5;};
+  // auto isTheta = [](Label const & label) {return label == 6;};
+  // auto isGe = [](Label const & label) {return label == 3;};
+  // auto isEden = [](Label const & label) {return label == 4;};
+
+  static auto constexpr isGe    = LUT<10> ([](Label const & label) {return label == labelGe1 || label == labelGe2;});
+  static auto constexpr isGe1   = LUT<10> ([](Label const & label) {return label == labelGe1;});
+  static auto constexpr isGe2   = LUT<10> ([](Label const & label) {return label == labelGe2;});
+  static auto constexpr isEden  = LUT<10> ([](Label const & label) {return label == labelEDEN;});
+  static auto constexpr isX     = LUT<10> ([](Label const & label) {return label == labelX;});
+  static auto constexpr isTheta = LUT<10> ([](Label const & label) {return label == labelTheta;});
 
   MTFasterReader reader(path);
-  reader.setTimeshifts(timeshifts.get());
-  reader.readAligned([&](Hit & hit, Alignator & tree){
+  reader.setTimeshifts(timeshifts);
+  reader.readAligned([&](Alignator & tree, Hit & hit){
     // Treat each faster file in parallel
     double x = NAN;
     double theta = NAN;

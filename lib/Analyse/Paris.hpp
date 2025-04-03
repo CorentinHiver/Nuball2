@@ -16,6 +16,7 @@
 //   else                      return PositionXY(ParisArrays::Paris_R3_x[module_label-24],  ParisArrays::Paris_R3_y[module_label-24]);
 // }
 
+/// @brief DEPRECATED, use SimpleParis instead
 class Paris
 {
 public:
