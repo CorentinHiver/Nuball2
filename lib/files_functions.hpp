@@ -892,7 +892,7 @@ private:
       m_path = getPath(file);
       m_filename = removePath(file);
     }
-    else 
+    else
     {
       m_path = Path::pwd();
       m_filename = file;

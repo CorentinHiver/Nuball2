@@ -29,7 +29,7 @@ int main(int argc, char ** argv)
     {
       std::string run_name = rmPathAndExt(run);
       Path input (concatenate(datapath, run_name, ".fast"));
-      File output (outpath, run_name+".root");
+      File output (outpath + run_name+".root");
       if (!input.exists()) continue;
       auto arguments = string_to_argv(concatenate("faster2histo", argv_to_string(argv, 4), " -F ", input, " -1 -O ", output));
       print(argv_to_string(arguments));

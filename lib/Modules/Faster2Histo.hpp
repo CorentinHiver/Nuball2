@@ -32,7 +32,7 @@ public:
   Faster2Histo(int argc, char** argv);
   ~Faster2Histo(){print(m_timer());}
   /// @brief To launch the application after instanciation
-  void load(int const & argc, char** argv);
+  bool load(int const & argc, char** argv);
   
   /// @brief Adds [nb_files] files to convert inside of [folder]
   void addFolder(Path folder, int const & nb_files = -1) 
@@ -91,7 +91,15 @@ public:
   /// @brief Allows to overwrite the output file if it exists. Option -o
   void overwrite(bool const & _overwrite) noexcept {m_overwrite = _overwrite;}
 
+  /////////////
+  // Getters //
+  /////////////
+
+  bool const & ok() const {return m_ok;}
+  operator bool() const & {return this->ok();}
+
 private:
+  bool m_ok = false;
   Timer m_timer;
   void printParameters() const noexcept;
   static void dispatch_threads(Hit & hit, FasterReader & reader, Faster2Histo & f2h) {f2h.treatFile(hit, reader);}
@@ -123,9 +131,11 @@ private:
 Faster2Histo::Faster2Histo(int argc, char** argv)
 {
   TH1::AddDirectory(kFALSE);
-  this -> load(argc, argv);
-  this -> multirun();
-  this -> write();
+  if (this -> load(argc, argv))
+  {
+    this -> multirun();
+    this -> write();
+  }
 }
 
 void Faster2Histo::printParameters() const noexcept
@@ -156,7 +166,7 @@ void Faster2Histo::printParameters() const noexcept
   exit(1);
 }
 
-void Faster2Histo::load(int const & argc, char** argv)
+bool Faster2Histo::load(int const & argc, char** argv)
 {
   if (argc<2)
   {
@@ -192,11 +202,17 @@ void Faster2Histo::load(int const & argc, char** argv)
   }
 
   // Checking the number of files to treat :
-  if (m_files.size()<1) throw_error("NO FILE TO READ !!!");
+  if (!m_files)
+  {
+    error("NO FILE TO READ !!!");
+    return (m_ok = false);
+  }
   // Checking the output filename is not already used :
-  if (!m_overwrite && File(m_outFile).exists()) {throw OverwriteError(m_outFile.string()+" already exists ! Use option -o or method Faster2Histo::overwrite(true)");} 
-  // if (!m_overwrite && File(m_outFile).exists()) {throw_error(m_outFile.string()+" already exists ! Use option -o or method Faster2Histo::overwrite(true)");} 
-
+  if (!m_overwrite && File(m_outFile).exists()) 
+  {
+    throw OverwriteError(m_outFile.string()+" already exists ! Use option -o or method Faster2Histo::overwrite(true)");
+  } 
+  return (m_ok = true);
 }
 
 inline void Faster2Histo::multirun(int const & nb_threads)
@@ -292,13 +308,12 @@ void Faster2Histo::write(std::string const & out_filename) noexcept
 {
   if (out_filename != "") m_outFile = out_filename;
   print("-----------------");
-  File file(m_outPath.string()+m_outFile.filename().string());
-  print(m_outPath.string());
+  // File file(m_outPath.string()+m_outFile.filename().string());
   print("-----------------");
-  if (!file.path()) file.makePath();
-  file.setExtension("root");
+  if (!m_outFile.path()) m_outFile.makePath();
+  m_outFile.setExtension("root");
 
-  auto outFile = TFile::Open(file.c_str(), m_write_mode);
+  auto outFile = TFile::Open(m_outFile.c_str(), m_write_mode);
   outFile->cd();
   // Ordering of the unordered_map keys (stored in m_labels):
   auto ordered_labels_indexes = bubble_sort(m_labels);
@@ -307,7 +322,7 @@ void Faster2Histo::write(std::string const & out_filename) noexcept
   if (m_bidim_paris) for (auto & label_index : ordered_labels_indexes) m_bidim[m_labels[label_index]].Write();
   // outFile->Write();
   outFile->Close();
-  print(file, "written");
+  print(m_outFile, "written");
 }
 
 #endif // FASTER2HISTO_HPP
