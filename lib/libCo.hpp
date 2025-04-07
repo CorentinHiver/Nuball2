@@ -26,9 +26,10 @@
 // *********** STD includes ********* //
 #include <any>
 #include <array>
-// #include <execution>
+#include <bitset>
 #include <fstream>
 #include <functional>
+#include <initializer_list>
 #include <map>
 #include <memory>
 #include <mutex>

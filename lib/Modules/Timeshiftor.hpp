@@ -342,17 +342,17 @@ public:
   MultiHist<TH1F> m_EnergyRef; // Energy spectra of the time reference detector
   MultiHist<TH2F> m_EnergyRef_bidim; // Energy VS Time (unused)
 
-  Vector_MTTHist<TH1F> m_time_spectra; // Time spectra from coincidence with the time reference detector, one TH1F for each detector
+  Vector_MultiHist<TH1F> m_time_spectra; // Time spectra from coincidence with the time reference detector, one TH1F for each detector
   MultiHist<TH2F> m_time_spectra_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
-  Vector_MTTHist<TH1F> m_time_spectra_corrected; // Time spectra from coincidence with the time reference detector, one TH1F for each detector, after timeshift
+  Vector_MultiHist<TH1F> m_time_spectra_corrected; // Time spectra from coincidence with the time reference detector, one TH1F for each detector, after timeshift
   MultiHist<TH2F> m_time_spectra_corrected_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
 
   MultiHist<TH1F> m_histo_ref_VS_RF; // RF time spectra of the time reference detector
   MultiHist<TH2F> m_histo_ref_vs_RF_VS_mult; // RF time spectra VS multiplicity of the time reference detector
   MultiHist<TH1F> m_time_spectra_reference_RF_corrected; // RF time spectra VS multiplicity of the time reference detector, after timeshift
 
-  Vector_MTTHist<TH1F> m_histograms_VS_RF; // RF time spectra, one TH1F for each detector
-  Vector_MTTHist<TH1F> m_time_spectra_corrected_RF; // RF time spectra, one TH1F for each detector, after timeshift
+  Vector_MultiHist<TH1F> m_histograms_VS_RF; // RF time spectra, one TH1F for each detector
+  Vector_MultiHist<TH1F> m_time_spectra_corrected_RF; // RF time spectra, one TH1F for each detector, after timeshift
   MultiHist<TH2F> m_time_spectra_corrected_bidim_RF; // RF time spectra, X axis label, Y axis time spectra, after timeshift
 
 public:
@@ -579,7 +579,7 @@ void Timeshiftor::treatFolder(std::string const & folder, int const & nb_files)
 
   if (MTObject::ON)
   {// If multithreading, treat each data file of the folder in parallel
-    print(BRIGHTBLUE, "Calculating timeshifts with", MTObject::getThreadsNb(),"threads", RESET);
+    print(CoLib::Color::BRIGHTBLUE, "Calculating timeshifts with", MTObject::getThreadsNb(),"threads", CoLib::Color::RESET);
     MTList files_MT(files.getListFiles());
     // The FileManager object isn't thread safe. 
     // That is why one has to encapsulate the files list inside a MTList (Multi-Threaded List) :
@@ -587,7 +587,7 @@ void Timeshiftor::treatFolder(std::string const & folder, int const & nb_files)
   }
   else
   {// If no multithreading, treat each data file sequentially
-    print(BRIGHTBLUE, "Calculating timeshifts without multithreading", RESET);
+    print(CoLib::Color::BRIGHTBLUE, "Calculating timeshifts without multithreading", CoLib::Color::RESET);
     std::string filename;
     while (files.nextFileName(filename))
     {

@@ -15,12 +15,12 @@
 // #include <Alignator.hpp>
 // #include <Nuball2Tree.hpp>
 // #include <Timer.hpp>
-#include <RF_Manager.hpp>
+// #include <RF_Manager.hpp>
 // #include <SpectraAlignator.hpp>
 // #include <FasterReader.hpp>
 // #include <Convertor.hpp>
 // #include <MTRootReader.hpp>
-#include <MTFasterReader.hpp>
+// #include <MTFasterReader.hpp>
 // #include <RWMat.hpp>
 // #include <Faster2Histo.hpp>
 // #include <EvolutionPeaks.hpp>
@@ -30,8 +30,9 @@
 // #include <SpectraCo.hpp>
 // #include "../136/Calibrate/calibrate_spectra.C"
 // #include <CobaltCalorimeter.hpp>
-#include <MultiHist.hpp>
+// #include <MultiHist.hpp>
 // #include <Manip.hpp>
+#include <RunMatrixator.hpp>
 
 // #include <TROOT.h>
 // #include <TThread.h>
@@ -44,29 +45,29 @@
 
 int main(int argc, char** argv)
 {
-  Timer timer;
-  MTFasterReader reader(Path::home()+"nuball2/N-SI-136/run_75.fast/", 20);
-  // RF_Manager::setOffset(20);
-  FasterReader::setMaxHits(1.e6);
-  MTObject::Initialise(2);
-  Timeshifts ts(Path::home()+"nuball2/N-SI-136-root_all/Timeshifts/run_75.dT");
-  MultiHist<TH2F> dT("dT", "dT", 1000,0,1000, 300,-50_ns,250_ns);
-  // reader.setTimeshifts(ts);
-  reader.readRaw([&](Hit & hit, FasterReader & reader){
-    RF_Manager rf;
-    while (reader.Read())
-    {
-      hit.stamp += ts[hit.label]; 
-      if (rf.setHit(hit)) continue;
-      dT.Fill(hit.label, rf.relTime(hit.stamp));
-    }
-  });
+  // Timer timer;
+  // MTFasterReader reader(Path::home()+"nuball2/N-SI-136/run_75.fast/", 20);
+  // // RF_Manager::setOffset(20);
+  // FasterReader::setMaxHits(1.e6);
+  // MTObject::Initialise(2);
+  // Timeshifts ts(Path::home()+"nuball2/N-SI-136-root_all/Timeshifts/run_75.dT");
+  // MultiHist<TH2F> dT("dT", "dT", 1000,0,1000, 300,-50_ns,250_ns);
+  // // reader.setTimeshifts(ts);
+  // reader.readRaw([&](Hit & hit, FasterReader & reader){
+  //   RF_Manager rf;
+  //   while (reader.Read())
+  //   {
+  //     hit.stamp += ts[hit.label]; 
+  //     if (rf.setHit(hit)) continue;
+  //     dT.Fill(hit.label, rf.relTime(hit.stamp));
+  //   }
+  // });
 
-  std::unique_ptr<TFile> file (TFile::Open("test.root", "recreate"));
-  file->cd();
-  dT.Write();
-  file->Close();
-  print("test.root written after", timer());
+  // std::unique_ptr<TFile> file (TFile::Open("test.root", "recreate"));
+  // file->cd();
+  // dT.Write();
+  // file->Close();
+  // print("test.root written after", timer());
 
   //////////////////////////////////////
   // TEST MERGING MATCHING HISTOGRAMS //
@@ -772,6 +773,7 @@ int main(int argc, char** argv)
   // SpectraCo spectrum_ref(histo_ref);
   // spectrum_ref.name()+="_ref";
 
+
   // // // auto histo_ref = file_ref->Get<TH1F>("PARIS_BR3D2_prompt_singles");
   // // // histo_ref->Rebin(2);
   // // SpectraCo spectrum_ref(histo_ref);
@@ -787,33 +789,33 @@ int main(int argc, char** argv)
   // // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_delayed_singles");
   // SpectraCo spectrum_test(histo_test);
   // spectrum_test.name()+="_test";
-  // // spectrum_test.removeBackground(20);
-  // // // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
-  // // // histo_test->Rebin(2);
-  // // auto histo_test_realigned = new TH1F();
-  // // // auto free_degrees = 4;
-  // // // // print(argc);
-  // // // // if (argc>3) deg = std::stoi(argv[2]);
-  // // delete histo_test; histo_test = spectrum_test.createTH1F();
+  // spectrum_test.removeBackground(20);
+  // // auto histo_test = file_test->Get<TH1F>("PARIS_BR3D2_prompt_singles");
+  // // histo_test->Rebin(2);
+  // auto histo_test_realigned = new TH1F();
+  // // auto free_degrees = 4;
+  // // // print(argc);
+  // // // if (argc>3) deg = std::stoi(argv[2]);
+  // delete histo_test; histo_test = spectrum_test.createTH1F();
 
   // // alignator.alignSpectra(spectrum_test.createTH1F(), histo_test_realigned);
   // // alignator.newAlignement(spectrum_test.createTH1F(), histo_test_realigned);
 
-  // // auto diff = spectrum_ref-spectrum_test;
-  // // diff.name ("diff");
-  // // diff.title("diff");
+  // auto diff = spectrum_ref-spectrum_test;
+  // diff.name ("diff");
+  // diff.title("diff");
 
-  // // auto diffSquare(diff);
-  // // diffSquare.name ("diff calc");
-  // // diffSquare.title("diff calc");
-  // // for (int bin_i = 0; bin_i<diffSquare.size(); bin_i++)
-  // // {
-  // //   if (spectrum_ref[bin_i]==0 || spectrum_test[bin_i]==0) continue;
-  // //   double const & weight = (1/spectrum_ref[bin_i] + 1/spectrum_test[bin_i])/2; // V = sigma² = 1/N,
-  // //   diffSquare[bin_i] = diff[bin_i]*diff[bin_i]*weight;
-  // // }
+  // auto diffSquare(diff);
+  // diffSquare.name ("diff calc");
+  // diffSquare.title("diff calc");
+  // for (int bin_i = 0; bin_i<diffSquare.size(); bin_i++)
+  // {
+  //   if (spectrum_ref[bin_i]==0 || spectrum_test[bin_i]==0) continue;
+  //   double const & weight = (1/spectrum_ref[bin_i] + 1/spectrum_test[bin_i])/2; // V = sigma² = 1/N,
+  //   diffSquare[bin_i] = diff[bin_i]*diff[bin_i]*weight;
+  // }
   
-  // // Minimisator min;
+  // Minimisator min;
 
   // ObjectiveFunctionChi2 func(&spectrum_ref, &spectrum_test);
   // // print(func.evaluate({5, 1, 1}));
@@ -1045,21 +1047,21 @@ int main(int argc, char** argv)
   // // --- RUN MATRIXATOR : --- //
 
   // // rm.keepSingles();
-  // for (int run_i = 75; run_i<76; run_i++)
-  // {
-  //   RunMatrixator rm;
-  //   // rm.dontMatrixate("ge");
-  //   // rm.dontMatrixate("paris");
-  //   rm.maxRawMult(10);
+  for (int run_i = 75; run_i<76; run_i++)
+  {
+    RunMatrixator rm;
+    // rm.dontMatrixate("ge");
+    // rm.dontMatrixate("paris");
+    rm.maxRawMult(10);
 
-  //   rm.setCalibration("../../136/conversion_200ns/136_v2.calib");
+    rm.setCalibration("../../136/conversion_200ns/136_v2.calib");
     
-  //   Timeshifts ts("136.dT");
-  //   rm.setTimeshifts(ts);
+    Timeshifts ts("136.dT");
+    rm.setTimeshifts(ts);
 
-  //   std::string run_str = "run_"+std::to_string(run_i); 
-  //   rm.run(datapath+"N-SI-136/"+run_str+".fast/");
-  // }
+    std::string run_str = "run_"+std::to_string(run_i); 
+    rm.run(datapath+"N-SI-136/"+run_str+".fast/");
+  }
 
   // --- Up to date example : --- //
   // Calibration calib;

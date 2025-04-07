@@ -11,7 +11,7 @@ int main(int argc, char ** argv)
   {
     print("Usage of manip2histo : runs.list /path/to/manip /path/to/output [[parameters_of_faster2histo]]");
     print("Disabled Faster2Histo features in manip2histo executable : -O -F -f --out_path");
-    Faster2Histo(0, argv);
+    Faster2Histo(0, argv); // Simply prints the parameters
   }
   else
   {
@@ -21,7 +21,7 @@ int main(int argc, char ** argv)
     print();
     Manip manip(argv[1]);
     Path datapath(argv[2]);
-    Path outpath(argv[3]);
+    Path outpath(argv[3], true);
     if (!datapath.exists()) throw_error(concatenate(datapath, " doesn't exist !"));
     
     std::string run;

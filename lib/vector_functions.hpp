@@ -287,9 +287,9 @@ std::vector<size_t> & bubble_sort(std::vector<T> const & vector, std::vector<siz
 
 /// @brief Order the vector from lower to higher value
 template <typename T>
-std::vector<int> bubble_sort(std::vector<T> const & vector)
+std::vector<size_t> bubble_sort(std::vector<T> const & vector)
 {
-  std::vector<int> ordered_indexes(vector.size());
+  std::vector<size_t> ordered_indexes(vector.size());
   bubble_sort(vector, ordered_indexes);
   return ordered_indexes;
 }

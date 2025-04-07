@@ -17,9 +17,9 @@ FRAMEWORK_LIB_PATH := ../lib
 
 # ----------------------------------------------------
 # Then write down the name of the main file 
-#SRCEXE := faster2histo.cpp
-#SRCEXE := manip2histo.cpp
-SRCEXE := faster2root.cpp
+# SRCEXE := faster2histo.cpp
+SRCEXE := manip2histo.cpp
+# SRCEXE := faster2root.cpp
 #SRCEXE := manip2root.cpp
 #SRCEXE := manipTS.cpp
 
@@ -65,10 +65,10 @@ $(EXE): $(SRCEXE:.cpp=.o) ${HEADER_FILES}
 opt: CFLAGS += -O2
 opt: default
 
-debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-30 #-Wold-style-cast
 debug: default
 
-debug_opt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debug_opt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-30 #-Wold-style-cast
 debug_opt: default
 
 clean:

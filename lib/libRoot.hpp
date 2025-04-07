@@ -85,7 +85,6 @@ inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 
 // TRandom gRandom(time(0));
 
-
 /////////////////////////////////////////////////////////////
 // Generic functions using some actually nice ROOT classes //
 /////////////////////////////////////////////////////////////
@@ -138,7 +137,7 @@ namespace CoLib
 std::vector<int> ROOT_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};
 
 auto getROOTniceColors(int i)
-{
+{ // Get the nice colors abovedefined. The "i & 111" is equivalent to "i modulo 8"
   return ROOT_nice_colors[(i & 111)];
 }
 
@@ -835,54 +834,276 @@ TH2F* count_to_peak_integral(TH2F* histo, int const & resolution, int const & sm
   return ret;
 }
 
-TH1F* AND(TH1* histo1, TH1* histo2, int smooth_background_it = 20)
+namespace CoLib
 {
-  int bins = histo1->GetNbinsX();
-  double min = histo1->GetXaxis()->GetXmin();
-  double max = histo1->GetXaxis()->GetXmax();
-  if (bins != histo2->GetNbinsX()) bins = (histo1->GetNbinsX() < histo2->GetNbinsX()) ? histo1->GetNbinsX() : histo1->GetNbinsX();
-  if (min  != histo2->GetXaxis()->GetXmin()) {error("in AND(TH1F *histo1, TH1F *histo2) : axis inconsistent..."); return nullptr;}
-  if (max  != histo2->GetXaxis()->GetXmax()) {error("in AND(TH1F *histo1, TH1F *histo2) : axis inconsistent..."); return nullptr;}
-  std::string name = histo1->GetName() + std::string("_AND_") + histo1->GetName();
-  std::string title = histo1->GetTitle() + std::string("_AND_") + histo1->GetTitle();
-  auto background1 = histo1->ShowBackground(smooth_background_it);
-  auto background2 = histo2->ShowBackground(smooth_background_it);
-  auto ret = new TH1F(name.c_str(), title.c_str(), bins, min, max);
-  for (int bin = 0; bin<bins; ++bin)
+  template<class THist>
+  THist* AND(THist* histo1, THist* histo2, int smooth_background_it = 20)
   {
-    auto const & count_1 = histo1->GetBinContent(bin) - background1->GetBinContent(bin) ;
-    auto const & count_2 = histo2->GetBinContent(bin) - background2->GetBinContent(bin) ;
-    ret->SetBinContent(bin, (count_1<count_2) ? count_1 : count_2);
+    int bins = histo1->GetNbinsX();
+    double min = histo1->GetXaxis()->GetXmin();
+    double max = histo1->GetXaxis()->GetXmax();
+    if (bins != histo2->GetNbinsX()) bins = (histo1->GetNbinsX() < histo2->GetNbinsX()) ? histo1->GetNbinsX() : histo1->GetNbinsX();
+    if (min  != histo2->GetXaxis()->GetXmin()) {error("in AND(THist *histo1, THist *histo2) : axis inconsistent..."); return nullptr;}
+    if (max  != histo2->GetXaxis()->GetXmax()) {error("in AND(THist *histo1, THist *histo2) : axis inconsistent..."); return nullptr;}
+    TString name = histo1->GetName() + TString("_AND_") + histo1->GetName();
+    TString title = histo1->GetTitle() + TString("_AND_") + histo1->GetTitle();
+    auto background1 = histo1->ShowBackground(smooth_background_it);
+    auto background2 = histo2->ShowBackground(smooth_background_it);
+    auto ret = new THist(name, title, bins, min, max);
+    for (int bin = 0; bin<bins; ++bin)
+    {
+      auto const & count_1 = histo1->GetBinContent(bin) - background1->GetBinContent(bin) ;
+      auto const & count_2 = histo2->GetBinContent(bin) - background2->GetBinContent(bin) ;
+      ret->SetBinContent(bin, (count_1<count_2) ? count_1 : count_2);
+    }
+    return ret;
   }
-  return ret;
 }
 
+template<class THist>
+THist* operator&(THist histo1, THist histo2) {return CoLib::AND(&histo1, &histo2);}
 
-/// @brief Shifts a histogram by 'shift' X value
-/// @param shift Shifts each bin content by 'shift' units of the x axis
-void shiftX(TH1* histo, double shift)
+namespace CoLib
 {
-  auto temp = static_cast<TH1*> (histo->Clone(concatenate(histo->GetName(), "_shifted").c_str()));
-  auto const & xmin = histo->GetXaxis()->GetXmin();
-  auto const & xmax = histo->GetXaxis()->GetXmax();
-
-  auto const & nb_bins = histo->GetNbinsX();
-  for (int bin_i = 1; bin_i<nb_bins+1; ++bin_i)
+  /// @brief Shifts a histogram by 'shift' X value
+  /// @param shift Shifts each bin content by 'shift' units of the x axis
+  void shiftX(TH1* histo, double shift)
   {
-    auto const & value = histo->GetBinCenter(bin_i);
-    auto const & shifted_value = value-shift;
-    if (shifted_value < xmin|| shifted_value > xmax) 
-         temp->SetBinContent(bin_i, 0);
-    else temp->SetBinContent(bin_i, histo->Interpolate(shifted_value));
+    auto temp = static_cast<TH1*> (histo->Clone(concatenate(histo->GetName(), "_shifted").c_str()));
+    auto const & xmin = histo->GetXaxis()->GetXmin();
+    auto const & xmax = histo->GetXaxis()->GetXmax();
+
+    auto const & nb_bins = histo->GetNbinsX();
+    for (int bin_i = 1; bin_i<nb_bins+1; ++bin_i)
+    {
+      auto const & value = histo->GetBinCenter(bin_i);
+      auto const & shifted_value = value-shift;
+      if (shifted_value < xmin|| shifted_value > xmax) 
+          temp->SetBinContent(bin_i, 0);
+      else temp->SetBinContent(bin_i, histo->Interpolate(shifted_value));
+    }
+    for (int bin_i = 1; bin_i<nb_bins+1; ++bin_i) histo->SetBinContent(bin_i, temp->GetBinContent(bin_i));
+    delete temp;
   }
-  for (int bin_i = 1; bin_i<nb_bins+1; ++bin_i) histo->SetBinContent(bin_i, temp->GetBinContent(bin_i));
-  delete temp;
 }
 
 double X_per_bin(TAxis* axis)
 {
   return (axis->GetXmax() - axis->GetXmin())/axis->GetNbins();
 }
+
+#ifdef DEVCO
+namespace CoLib
+{
+  /// @brief First-order interpolation to get the value of a non-integer bin, most likely from calibration
+  /// @param histo 
+  /// @param calibrated_bin 
+  /// @return 
+  double linearInterpolatedBinContent(TH1* histo, double const & calibrated_bin)
+  {
+    int bin_i = static_cast<int>(calibrated_bin); //bin_i
+    if (0 < bin_i || bin_i > (histo->GetNbinsX()-2)) return 0; // todo Faire attention au -2, c'est peut-être -1 ou -3 dans un TH1
+    auto const & a = histo->GetBinContent(bin_i+1) - histo->GetBinContent(bin_i);// a  =  y_i+1 - y_i
+    auto const & b = histo->GetBinContent(bin_i)   - a*bin_i;                    // b  =  y_i - a*bin_i
+    return a*calibrated_bin+b;
+  }
+
+  double linearInterpolatedXContent(TH1F* hist, double const & x) 
+  {
+    int bin = hist->FindBin(x);
+    
+    // Prevent out-of-range access
+    if (bin <= 0) return hist->GetBinContent(bin);
+    if (bin >= hist->GetNbinsX()) bin = hist->GetNbinsX() - 1;
+
+    double x0 = hist->GetBinCenter(bin);
+    double y0 = hist->GetBinContent(bin);
+
+    double x1 = hist->GetBinCenter(bin + 1);
+    double y1 = hist->GetBinContent(bin + 1);
+
+    if (x1 == x0) return y0; // prevent division by zero
+
+    return y0 + (y1 - y0) * (x - x0) / (x1 - x0);
+  }
+
+  /// @brief Quadratic interpolation to get the value of any random X value
+  /// @param hist 
+  /// @param x 
+  /// @return 
+  double quadraticInterpolatedXContent(TH1F* hist, double const & x)
+  {
+    int bin = hist->FindBin(x);
+
+    // Ensure enough bins around for quadratic interpolation
+    if (bin <= 1) bin = 2;
+    if (bin >= hist->GetNbinsX() - 1) bin = hist->GetNbinsX() - 1;
+
+    double x0 = hist->GetBinCenter(bin - 1);
+    double y0 = hist->GetBinContent(bin - 1);
+
+    double x1 = hist->GetBinCenter(bin);
+    double y1 = hist->GetBinContent(bin);
+
+    double x2 = hist->GetBinCenter(bin + 1);
+    double y2 = hist->GetBinContent(bin + 1);
+
+    // Lagrange quadratic interpolation formula
+    double L0 = ((x - x1)*(x - x2)) / ((x0 - x1)*(x0 - x2));
+    double L1 = ((x - x0)*(x - x2)) / ((x1 - x0)*(x1 - x2));
+    double L2 = ((x - x0)*(x - x1)) / ((x2 - x0)*(x2 - x1));
+
+    return y0 * L0 + y1 * L1 + y2 * L2;
+  }
+
+
+  /**
+   * @brief X-Calibrating and Y-Scaling a spectrum
+   */
+  class CalibAndScale
+  {
+  public:
+
+    // Constructors and loaders :
+    CalibAndScale(){}
+    void init()
+    {
+      m_order = m_coeffs.size()-1;
+    }
+    CalibAndScale(std::initializer_list<double> initList)
+    {
+      auto it = initList.begin();
+      for (int i = 0; i<initList.size()-1; ++i) m_coeffs.push_back(double_cast(*it++));
+      m_scale = double_cast(*it++);
+      init();
+    }
+    CalibAndScale& operator=(std::initializer_list<double> initList)
+    {
+      auto it = initList.begin();
+      for (int i = 0; i<initList.size()-1; ++i) m_coeffs.push_back(double_cast(*it++));
+      m_scale = double_cast(*it++);
+      init();
+      return *this;
+    }    
+    void setCoeffs(std::initializer_list<double> initCoeffs)
+    {
+      m_coeffs = initCoeffs;
+      init();
+    }
+    void setScale (double scale) {m_scale = scale;}
+
+    CalibAndScale(std::vector<double> const & vec)
+    {
+      for (int i = 0; i<vec.size()-1; ++i) m_coeffs.push_back(vec[i]);
+      m_scale = vec.back();
+      init();
+    }
+    CalibAndScale& operator=(std::vector<double> const & vec)
+    {
+      for (int i = 0; i<vec.size()-1; ++i) m_coeffs.push_back(vec[i]);
+      m_scale = vec.back();
+      init();
+      return *this;
+    }
+    void setCoeffs(std::vector<double> initCoeffs)
+    {
+      m_coeffs = initCoeffs;
+      init();
+    }
+
+    CalibAndScale(CalibAndScale const & other) : 
+      m_coeffs(other.m_coeffs), m_scale(other.m_scale)
+    {init();}
+    CalibAndScale& operator=(CalibAndScale const & other)
+    {
+      m_coeffs = other.m_coeffs;
+      m_scale  = other.m_scale ; 
+      init();
+      return *this;
+    }
+
+    // Getters :
+    std::vector<double> get() const {
+      auto ret = m_coeffs;
+      ret.push_back(m_scale);
+      return ret;
+    }
+    auto const & getCoeffs() const {return m_coeffs;}
+    auto const & getScale () const {return m_scale ;}
+
+    // Methods :
+
+    double calibrate(double const & value)
+    {
+      if (m_order < 0) return value;
+      double ret = 0.;
+      double power = 1.;
+      for (int order = 0; order <= m_order; ++order)
+      {
+        ret += power * m_coeffs[order];
+        power *= value;  // Compute value^order iteratively instead of using std::pow
+      }
+      return ret;
+    }
+
+    /// @brief Calibrate and scale a histogram
+    /// @tparam THist: Any TH1
+    /// @param hist: Histogram
+    /// @return Calibrated and scaled histogram
+    template<class THist>
+    THist* operator()(THist* hist, std::string option)
+    {
+      TString name  = hist->GetName()  + TString("_m");
+      TString title = hist->GetTitle() + TString("_m");
+
+      if (m_order < 0) // No calibration
+      {
+        auto ret = dynamic_cast<THist*>(hist->Clone());
+        return ret;
+      }
+
+      auto xaxis = hist->GetXaxis();
+      auto const & bins = xaxis->GetNbins();
+      auto const & xmin = xaxis->GetBinLowEdge(1);
+      auto const & xmax = xaxis->GetBinLowEdge(bins+1);
+
+      if (m_order == 0) // Simple shift
+      {
+        auto ret = dynamic_cast<THist*>(hist->Clone());
+        shiftX(ret, m_coeffs[0]);
+        return ret;
+      }
+      else // Calibration
+      {
+        auto ret = new THist(name, title, bins, xmin, xmax);
+        for (int bin = 1; bin<=bins; ++bin)
+        {
+          auto const & new_bin = this->calibrate(bin);
+          int new_value = 0;
+          // if (found(option, "lin") || bin==1 || bin==bins) 
+          new_value = linearInterpolatedXContent(hist, new_bin);
+          // else if (found(option, "quad")) new_value = quadraticInterpolatedXContent(hist, new_bin);
+          ret->SetBinContent(bin, new_value);
+          print(bin, new_bin, hist->GetBinContent(bin), new_value);
+        }
+        // For expanded regions, some bins may have been skipped
+        return ret;
+      }
+    }
+
+  private:
+    std::vector<double> m_coeffs;
+    double m_scale = 1.;
+    int m_order;
+  };
+  
+  // double chi2 (TH1* ref_histo, TH1* test_histo, std::vector<double> coefficient)
+  // Double_t chi2 = h1->Chi2Test(h2, "CHI2");
+  // std::vector<double> (TH1* reference, TH1* )
+}
+#endif //DEVCO
+
+
 
 ///////////////////////////
 //   TREE MANIPULATIONS  //
@@ -3516,7 +3737,7 @@ namespace CoLib
     return calculateVariance(hist, 0, hist->GetNbinsX());
   } 
 
-  auto adaptative_mean(TH1F* hist, int length)
+  auto adaptative_mean(TH1F* hist, size_t length)
   {
     auto const & bins = hist->GetNbinsX();
     TH1F *out = new TH1F("out", "out", bins, hist->GetXaxis()->GetXmin(), hist->GetXaxis()->GetXmax());
@@ -3537,7 +3758,7 @@ namespace CoLib
   /// @param length 
   /// @param bin_min must be at least length bins from the edge
   /// @param bin_max must be at least length bins from the edge
-  auto adaptative_mean(TH1F* hist, int length, size_t bin_min, size_t bin_max)
+  auto adaptative_mean(TH1F* hist, size_t length, size_t bin_min, size_t bin_max)
   {
     auto const & bins = hist->GetNbinsX();
     
@@ -3557,9 +3778,9 @@ namespace CoLib
     return out;
   }
 
+  // TODO ?
   void plot_variance(TH1F* hist, int const & bin_min, int const & bin_max)
   {
-    auto const & bins = bin_max-bin_min;
     auto means = adaptative_mean(hist, 5, bin_min, bin_max);
     std::vector<double> diffs;
     for (int bin = bin_min+1; bin <= bin_max; ++bin) diffs.push_back(hist->GetBinContent(bin) - means->GetBinContent(bin));
@@ -4414,39 +4635,6 @@ void hadd(std::string source, std::string target, double size_file_Mo, std::stri
   });
   for (auto & thread : threads) thread.join();
 }
-
-//////////////////////////////
-// INTERACTIVE MANIPULATION //
-//////////////////////////////
-
-// // Normalizes h1 with respect to h2
-// template<class THist = TH1>
-// THist* normalizeHisto(THist* h1, THist* h2, std::string name = "")
-// {
-//   if (!h1) {error("h1 nullptr"); return new THist();}
-//   if (!h2) {error("h2 nullptr"); return new THist();}
-//   auto ret = (THist*) h1->Clone( (name == "") ? TString(h1->GetName())+"_norm_with_"+TString(h2->GetName()) : TString(name.c_str()) );
-//   ret->Scale(h2->GetMaximum()/h2->GetMaximum());
-//   return ret;
-// }
-
-
-// // Normalizes h1 with respect to h2
-// template<class THist = TH1>
-// THist* normalizeHisto(THist* h1, THist* h2, std::string name, double min_range, double max_range)
-// {
-//   h1->Draw();
-//   h2->Draw("same");
-//   h1->GetXaxis()->SetRangeUser(min_range, max_range);
-//   h2->GetXaxis()->SetRangeUser(min_range, max_range);
-//   auto ret = normalizeHisto(h1, h2, name);
-//   h1->GetXaxis()->UnZoom();
-//   h2->GetXaxis()->UnZoom();
-//   h1->Draw();
-//   h2->Draw("same");
-//   gPad->Update();
-//   return ret;
-// }
 
 void libRoot()
 {

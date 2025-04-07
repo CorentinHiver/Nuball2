@@ -1,6 +1,6 @@
 #ifndef MULTITHIST_HPP
 #define MULTITHIST_HPP
-// #define MULTITHIST_MONO
+// #define MULTITHIST_MONO Not tested !!
 #include "MTObject.hpp"
 #include "../libRoot.hpp"
 
@@ -12,30 +12,35 @@
  * Inspiration :
  * https://root.cern.ch/doc/master/TThreadedObject_8hxx_source.html#l00167
  *
- * \attention As for any class using my multithreading, Initialise the number of threads 
- * BEFORE instantiating any object :
+ * \attention As for any class using my MTObject multithreading manager, Initialise the number of threads 
+ * BEFORE instantiating any MTObject :
  * 
  *      MTObject::Initialise(nb_threads)
  * 
- * 
- * 
  * Instantiation :
  * 
- *      MultiHist<TH1F> some_TH1F_histo(<normal arguments for TH1F objects>);
+ *      MultiHist<TH1F> some_TH1F_histo("name", "title:xAxis:yAxis", bins, min, max);
  * 
  * Or
  * 
- *      MultiHist<TH1F> some_TH1F_histo;
+ *      MultiHist<TH1I> some_TH1F_histo;
  *      some_TH1F_histo.reset("name", "title:xAxis:yAxis", bins, min, max);
  * 
+ * You can also use a container : 
+ * 
+ *      Vector_MultiHist<TH1D> histograms_vec;
+ *      emplaceMultiHist(histograms_vec, "name", "title:xAxis:yAxis", bins, min, max);
+ * 
+ *      Map_MultiHist<TH2F> histograms_map;
+ *      emplaceMultiHist(histograms_map, label, "name", "title:xAxis:yAxis:xAxis", binsX, minX, maxX, binsY, minY, maxY)
+ * 
  * In default mode, [nb_threads] sub_histograms are created
- * \test In mono mode (MULTITHIST_MONO), only one histogram is created UNDER DEVELOPMENT
  * 
  * To fill the histogram from within one thread : 
  * 
  *          some_TH1F_histo[MTObject::getThreadIndex()]->Fill(<normal arguments for TH1*::Fill()>)
  * 
- * Or in a more concise way (preferred) :
+ * Or in a more concise way (prefered) :
  * 
  *          some_TH1F_histo.Fill(<normal arguments for TH1*::Fill()>)
  * 
@@ -185,12 +190,9 @@ public:
     m_is_merged  = false;
   }
 
-  // void operator=(std::nullptr_t) {reset(nullptr);}
-
-
   // ---   GENERIC INSTANTIATION --- //
 
-  /// @brief Copy Initializer.
+  /// @brief Copy Initializer. @attention Forbidden so far ! (lead to many errors ...)
   MultiHist<THist> & reset(MultiHist<THist> const & hist) 
   { 
     // Execution stops here : it is forbidden to copy a MultiHist, because of the memory handling of root !!
@@ -521,11 +523,11 @@ template<class THist>
 void MultiHist<THist>::Write()
 {
   if (!gFile) {error("MultiHist<THist>::Write() : No output file selected for", m_name); return;}
-  bool write_ok = false;
+  bool ready_for_write = false;
   m_is_written = false;
 
   // If the histogram has already been merged :
-  if (m_exists && m_is_merged && m_merged && !m_merged->IsZombie()) write_ok = true;
+  if (m_exists && m_is_merged && m_merged && !m_merged->IsZombie()) ready_for_write = true;
   else 
   {
     if (MTObject::ON) 
@@ -533,25 +535,25 @@ void MultiHist<THist>::Write()
       if (MTObject::isMasterThread())
       {
         this -> Merge();
-        if (m_is_merged && m_exists && m_merged && !m_merged -> IsZombie() && (m_merged -> Integral() > 0)) write_ok = true;
+        if (m_is_merged && m_exists && m_merged && !m_merged -> IsZombie() && (m_merged -> Integral() > 0)) ready_for_write = true;
       }
       else error("Please write the MultiHist in the master thread");
     }
-    else error("Error in MultiHist<THist>::Write() : histogram", m_name,"do not exist");
+    else error("Error in MultiHist<THist>::Write() : histogram", m_name, "do not exist (so far, monothread is not working I think ...)");
   }
 
-  if (write_ok)
+  if (ready_for_write)
   {
     if (m_verbose) 
     {
       print("writing", m_name);
-      if (MTObject::getThreadsNb()*m_merged->GetNcells() > 1.e9) print("Might take some time ...");
+      if (MTObject::getThreadsNb()*m_merged->GetNcells() > 1.e9) print("Might take some time ..."); // If there is more than 1B bins in total
     }
     m_merged -> SetDirectory(gFile);
-    m_merged -> Write();
+    // m_merged -> Write();
     // m_merged -> Write(m_name.c_str());
+    m_merged -> Write(m_name.c_str(), TROOT::kOverwrite);
     m_is_written = true;
-    // m_merged -> Write(m_name.c_str(), TROOT::kOverwrite);
   }
 }
 
@@ -581,20 +583,48 @@ template <class THist>
 MultiHist<THist>::~MultiHist()
 {
   if (!m_is_written) 
-  {
+  { // If the histogram have been written then ROOT handles the memory
     if (MTObject::ON) for (auto & histo : m_collection) delete histo;
     else delete m_merged;
     m_collection.clear();
-  } 
-  print((m_merged) ? "la" : "pas la");
-  if (m_merged) print((m_merged->IsZombie()) ? "pas la 2" : "la 2");
-  if (m_merged && !m_merged->IsZombie()) delete m_merged;
+  }
 }
+
+// Useful containers
 
 template <class THist>
 using Vector_MultiHist = std::vector<MultiHist<THist>>;
 
-template <class THist>
-using Map_MultiHist = std::unordered_map<int, MultiHist<THist>>;
+template <class THist, typename T = int>
+using Map_MultiHist = std::unordered_map<T, MultiHist<THist>>;
+
+// Useful containers' methods
+
+template<class THist, typename... ARGS>
+void emplaceMultiHist(std::vector<THist>& vec, ARGS&&... args) {
+    vec.emplace_back(std::forward<ARGS>(args)...);
+}
+
+/**
+ * @brief Create in place a new MultiHist in an Map_MultiHist.
+ * 
+ * Skips the usual move operation by the use of std::piecewise_construct : it is LITTERALLY built in place
+ * 
+ * @tparam THist: Any TH1* type from TH1I to TH3D
+ * @tparam T: Key type (default int). Can be string or anything you want that can works as a key.
+ * @tparam ARGS: Generic template variadic argument
+ * @param map: Map_MultiHist<THist, T>. 
+ * @param label: Must be unique
+ * @param args: Usual arguments of MultiHist (see its definition). e.g. "name", "title", nbins, min, max)
+ */
+template<class THist, typename T, typename... ARGS>
+void emplaceMultiHist(Map_MultiHist<THist, T> & map, T const & label, ARGS&&... args) 
+{
+  map.emplace(
+    std::piecewise_construct,
+    std::forward_as_tuple(label),
+    std::forward_as_tuple(std::forward<ARGS>(args)...)
+  );
+}
 
 #endif //MULTITHIST_HPP
