@@ -7,6 +7,7 @@
  */
 int main(int argc, char ** argv)
 {
+  Timer timer;
   if (argc < 4) 
   {
     print("Usage of manip2histo : runs.list /path/to/manip /path/to/output [[parameters_of_faster2histo]]");
@@ -39,5 +40,6 @@ int main(int argc, char ** argv)
     }
   }
   return 1;
+  print(timer());
 }
 // ./manip2histo parameters/Uranium.list ~/faster_data/N-SI-136 ../Playground/testFolder/

@@ -222,4 +222,30 @@ void information(T const & ... t)
   std::cout << CoLib::Color::RESET;
 }
 
+std::string nicer_bool(bool const & some_bool)
+{
+  return ((some_bool) 
+      ? (CoLib::Color::BLUE + std::string("true") + CoLib::Color::RESET) 
+      : (CoLib::Color::RED  + std::string("false") + CoLib::Color::RESET)
+  );
+}
+
+// template <class... T>
+// void printHex(T &&... t) 
+// {
+//   print(std::hex, std::forward<T>(t)..., std::dec);
+// }
+
+class Hextech
+{
+public:
+  template <class... T>
+  static inline void printh(T &&... t)
+  {
+    std::cout << std::hex;
+    print(t...);
+    std::cout << std::dec;
+  }
+};
+
 #endif //PRINT_HPP

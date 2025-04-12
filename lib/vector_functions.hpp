@@ -151,7 +151,7 @@ int first_index_in(std::vector<T> const & vec, T const & t)
 
 
 template<class T>
-std::vector<T>& linspace(std::vector<T> & vec, int size, int begin = 0, int spacing = 1)
+std::vector<T>& linspace(std::vector<T> & vec, size_t size, int begin = 0, int spacing = 1)
 {
   vec.clear(); vec.reserve(size);
   for (int it = begin; it<size; ++it) vec.push_back(static_cast<T>(it*spacing));
@@ -163,6 +163,14 @@ std::vector<size_t>& linspace(std::vector<size_t> & vec, size_t size, size_t beg
   vec.clear(); vec.reserve(size);
   for (size_t it = begin; it<size; ++it) vec.push_back(it*spacing);
   return vec;
+}
+
+template<class T>
+std::vector<T> linspace(size_t size, T begin = 0, T spacing = 1)
+{
+  std::vector<T> ret;
+  linspace(ret, size, begin, spacing);
+  return ret;
 }
 
 template <typename T, size_t n>

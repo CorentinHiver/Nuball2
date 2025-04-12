@@ -458,6 +458,21 @@ std::ostream& operator<<(std::ostream& cout, Bools const & bools)
 using Strings = std::vector<std::string>;
 using Ints = std::vector<int>;
 
+std::string mergeStrings(Strings const & strings, std::string const & sep = "")
+{
+  std::string ret;
+  for (auto const & str : strings) ret += str + sep;
+  return removeLastPart(ret, sep); // Remove the last sep
+}
+
+template<class T>
+std::string mergeStrings(std::vector<T> const & strings, std::string const & sep = "")
+{
+  std::string ret;
+  for (auto const & str : strings) ret += std::to_string(str) + sep;
+  return removeLastPart(ret, sep); // Remove the last sep
+}
+
 template<typename T>
 struct is_container {
 private:

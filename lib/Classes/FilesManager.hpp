@@ -57,8 +57,9 @@ public:
     return ret;
   }
 
-  bool isEmpty () const { return (this->size() == 0);}
-  operator bool() const {return !isEmpty();}
+  bool empty () const { return m_listFiles.empty();}
+  bool isEmpty () const { return this->empty();}
+  operator bool() const {return !empty();}
 
 
   //Files reader :

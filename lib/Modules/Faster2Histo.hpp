@@ -211,7 +211,7 @@ bool Faster2Histo::load(int const & argc, char** argv)
   if (!m_overwrite && File(m_outFile).exists()) 
   {
     throw OverwriteError(m_outFile.string()+" already exists ! Use option -o or method Faster2Histo::overwrite(true)");
-  } 
+  }
   return (m_ok = true);
 }
 

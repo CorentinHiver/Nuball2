@@ -93,7 +93,7 @@
  * 
  * 
  *  
- *  Section 2 : Format 
+ *  Section 2 : Output Format 
  * 
  * The root tree is made of 6 leaves : 
  *  
@@ -106,9 +106,7 @@
  * 
  * The output will therefore depend on wether you calibrated the data or not
  * 
- * In the code, the main object handling the event data is Event. You have to have a look at its complete description
- * if you are to read the data
- *  
+ * In the code, the main object handling the event data is Event.
  * 
  */
 class Faster2Root

@@ -420,8 +420,8 @@ std::ostream& operator<<(std::ostream& cout, Folder const & folder)
   return cout;
 }
 
-Folder operator+(std::string const & string, Folder const & folder) { return (string + folder.string());}
-Folder operator+(const char * string, Folder const & folder) { return (std::string(string) + folder.string());}
+// Folder operator+(std::string const & string, Folder const & folder) { return (string + folder.string());}
+// Folder operator+(const char * string, Folder const & folder) { return (std::string(string) + folder.string());}
 
 /**
  * @brief EXPERIMENTAL Object used to hold a list of folders
@@ -738,7 +738,7 @@ std::ostream& operator<<(std::ostream& os, Filename const & filename)
 }
 
 /**
- * @brief EXPERIMENTAL Composed of a Path and a Filename
+ * @brief EXPERIMENTAL A File is made of a Path and a Filename
  * @details
  * A File object is composed of a Path and a Filename object, which are composed of :
  *  - A list of folder that forms the Path to the file

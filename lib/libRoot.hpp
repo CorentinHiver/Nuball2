@@ -892,7 +892,6 @@ double X_per_bin(TAxis* axis)
   return (axis->GetXmax() - axis->GetXmin())/axis->GetNbins();
 }
 
-#ifdef DEVCO
 namespace CoLib
 {
   /// @brief First-order interpolation to get the value of a non-integer bin, most likely from calibration
@@ -908,7 +907,7 @@ namespace CoLib
     return a*calibrated_bin+b;
   }
 
-  double linearInterpolatedXContent(TH1F* hist, double const & x) 
+  double linearInterpolatedXContent(TH1F* hist, double const & x)
   {
     int bin = hist->FindBin(x);
     
@@ -955,7 +954,79 @@ namespace CoLib
 
     return y0 * L0 + y1 * L1 + y2 * L2;
   }
+  
+  class InterpolatedSpectrum
+  {
+  public:
+    InterpolatedSpectrum() noexcept = default;
+    InterpolatedSpectrum(TH1 const * hist, int order = 1) noexcept {
+      set(hist, order);
+    }
 
+    void set(TH1 const * hist, int order = 1)
+    {
+      m_order = order;
+      m_coeffs.resize(m_order + 1);
+      int nbins = hist->GetNbinsX();
+      for (auto & coeff : m_coeffs)
+        coeff.resize(nbins + 2); // account for bin numbering starting at 1
+    
+      for (int bin = 1; bin <= nbins; ++bin)
+      {
+        if (m_order == 1)
+        {
+          auto const & coeff = linearInterpolationCoeffs(hist, bin);
+          m_coeffs[0][bin] = coeff.second; // b (intercept)
+          m_coeffs[1][bin] = coeff.first;  // a (slope)
+        }
+        else
+        {
+          throw_error("InterpolatedSpectrum : order must be 1");
+        }
+      }
+      m_ok = true;
+    }
+
+    InterpolatedSpectrum& operator=(TH1 const * hist)
+    {
+      this->set(hist);
+      return *this;
+    }
+
+    std::pair<double, double> linearInterpolationCoeffs(TH1 const * hist, int const & bin)
+    {
+      int nbins = hist->GetNbinsX();
+    
+      if (bin < 2 || bin >= nbins)
+      {
+        auto const & y = hist->GetBinContent(std::min(std::max(bin, 1), nbins));
+        return {0.0, y};
+      }
+    
+      auto const & y0 = hist->GetBinContent(bin);
+      auto const & y1 = hist->GetBinContent(bin + 1);
+    
+      double a = y1 - y0;//    // slope
+      double b = y0 - a * bin; // intercept
+    
+      return {a, b}; // return (a, b)
+    }
+    
+    double operator[](double const & new_bin) const noexcept
+    {
+      int bin = int_cast(new_bin);
+      if (bin < 1 || bin >= static_cast<int>(m_coeffs[0].size())) return 0.0;
+    
+      return m_coeffs[0][bin] + m_coeffs[1][bin] * new_bin;
+    }
+
+    operator bool() const & {return m_ok;}
+
+  private:
+    size_t m_order = -1; 
+    std::vector<std::vector<double>> m_coeffs;
+    bool m_ok = false;
+  };
 
   /**
    * @brief X-Calibrating and Y-Scaling a spectrum
@@ -966,12 +1037,14 @@ namespace CoLib
 
     // Constructors and loaders :
     CalibAndScale(){}
+    template<class THist> CalibAndScale(THist * histo){this->setHisto(histo);}
     void init()
     {
       m_order = m_coeffs.size()-1;
     }
     CalibAndScale(std::initializer_list<double> initList)
     {
+      m_coeffs.clear();
       auto it = initList.begin();
       for (int i = 0; i<initList.size()-1; ++i) m_coeffs.push_back(double_cast(*it++));
       m_scale = double_cast(*it++);
@@ -979,6 +1052,7 @@ namespace CoLib
     }
     CalibAndScale& operator=(std::initializer_list<double> initList)
     {
+      m_coeffs.clear();
       auto it = initList.begin();
       for (int i = 0; i<initList.size()-1; ++i) m_coeffs.push_back(double_cast(*it++));
       m_scale = double_cast(*it++);
@@ -987,6 +1061,7 @@ namespace CoLib
     }    
     void setCoeffs(std::initializer_list<double> initCoeffs)
     {
+      m_coeffs.clear();
       m_coeffs = initCoeffs;
       init();
     }
@@ -994,12 +1069,14 @@ namespace CoLib
 
     CalibAndScale(std::vector<double> const & vec)
     {
+      m_coeffs.clear();
       for (int i = 0; i<vec.size()-1; ++i) m_coeffs.push_back(vec[i]);
       m_scale = vec.back();
       init();
     }
     CalibAndScale& operator=(std::vector<double> const & vec)
     {
+      m_coeffs.clear();
       for (int i = 0; i<vec.size()-1; ++i) m_coeffs.push_back(vec[i]);
       m_scale = vec.back();
       init();
@@ -1011,15 +1088,23 @@ namespace CoLib
       init();
     }
 
-    CalibAndScale(CalibAndScale const & other) : 
-      m_coeffs(other.m_coeffs), m_scale(other.m_scale)
-    {init();}
+    CalibAndScale(CalibAndScale const & other) : m_coeffs(other.m_coeffs), m_scale(other.m_scale) {
+      init();
+    }
+
     CalibAndScale& operator=(CalibAndScale const & other)
     {
       m_coeffs = other.m_coeffs;
       m_scale  = other.m_scale ; 
       init();
       return *this;
+    }
+
+    template<class THist>
+    void setHisto(THist * histo)
+    {
+      m_base_histo = histo;
+      m_interpol.set(histo);
     }
 
     // Getters :
@@ -1033,7 +1118,7 @@ namespace CoLib
 
     // Methods :
 
-    double calibrate(double const & value)
+    double calibrate(double const & value) const
     {
       if (m_order < 0) return value;
       double ret = 0.;
@@ -1046,12 +1131,18 @@ namespace CoLib
       return ret;
     }
 
+    double operator[](double const & bin) const
+    {
+      return m_interpol[this->calibrate(bin)]*m_scale;
+    }
+
     /// @brief Calibrate and scale a histogram
+    /// @deprecated
     /// @tparam THist: Any TH1
     /// @param hist: Histogram
     /// @return Calibrated and scaled histogram
     template<class THist>
-    THist* operator()(THist* hist, std::string option)
+    THist* operator()(THist* const hist) const
     {
       TString name  = hist->GetName()  + TString("_m");
       TString title = hist->GetTitle() + TString("_m");
@@ -1076,33 +1167,201 @@ namespace CoLib
       else // Calibration
       {
         auto ret = new THist(name, title, bins, xmin, xmax);
+        InterpolatedSpectrum interpol(hist);
         for (int bin = 1; bin<=bins; ++bin)
         {
-          auto const & new_bin = this->calibrate(bin);
-          int new_value = 0;
-          // if (found(option, "lin") || bin==1 || bin==bins) 
-          new_value = linearInterpolatedXContent(hist, new_bin);
-          // else if (found(option, "quad")) new_value = quadraticInterpolatedXContent(hist, new_bin);
-          ret->SetBinContent(bin, new_value);
-          print(bin, new_bin, hist->GetBinContent(bin), new_value);
+          ret->SetBinContent(bin, interpol[this->calibrate(bin)]*m_scale);
         }
         // For expanded regions, some bins may have been skipped
         return ret;
       }
     }
 
+    TH1F* getCalibratedHisto(std::string const & _name) const
+    {
+      TString name  = (m_base_histo->GetName()  + std::string("_") + _name).c_str();
+      TString title = (m_base_histo->GetTitle() + std::string("_") + _name).c_str();
+
+      if (m_order < 0) // No calibration
+      {
+        auto ret = dynamic_cast<TH1F*>(m_base_histo->Clone());
+        return ret;
+      }
+
+      auto xaxis = m_base_histo->GetXaxis();
+      auto const & bins = xaxis->GetNbins();
+      auto const & xmin = xaxis->GetBinLowEdge(1);
+      auto const & xmax = xaxis->GetBinLowEdge(bins+1);
+
+      if (m_order == 0) // Simple shift
+      {
+        auto ret = dynamic_cast<TH1F*>(m_base_histo->Clone());
+        shiftX(ret, m_coeffs[0]);
+        return ret;
+      }
+      else // Calibration
+      {
+        auto ret = new TH1F(name, title, bins, xmin, xmax);
+        for (int bin = 1; bin<=bins; ++bin)
+        {
+          ret->SetBinContent(bin, m_interpol[this->calibrate(bin)]*m_scale);
+        }
+        // For expanded regions, some bins may have been skipped
+        return ret;
+      }
+    }
+
+    TH1F const * getHisto() const {return m_base_histo;}
+
   private:
+    TH1F* m_base_histo = nullptr;
+    InterpolatedSpectrum m_interpol;
     std::vector<double> m_coeffs;
     double m_scale = 1.;
     int m_order;
   };
-  
-  // double chi2 (TH1* ref_histo, TH1* test_histo, std::vector<double> coefficient)
-  // Double_t chi2 = h1->Chi2Test(h2, "CHI2");
-  // std::vector<double> (TH1* reference, TH1* )
-}
-#endif //DEVCO
 
+  class Chi2Calculator
+  {
+  public:
+    Chi2Calculator(TH1* reference) : m_reference(reference){}
+    template<class THist>
+    double operator()(THist* const test, CalibAndScale const & calib)
+    {
+      auto testCal = calib(test);
+      testCal->SetName((test->GetName() + std::string("calib : ") + mergeStrings(calib.get(), "_")).c_str());
+      // testCal->Write();
+      return calculate(testCal);
+      // return m_reference->Chi2Test(testCal);
+    }
+    
+    template<class THist> double calculate(THist* const testCal)
+    {
+      double sum_errors_squared = 0.0;
+      auto const & bins = testCal->GetNbinsX();
+  
+      for (int bin = 0; bin<bins; bin++) if (testCal->GetBinContent(bin)>0)
+      {
+        // Calculate the difference for this bin :
+        auto const & diff = m_reference->GetBinContent(bin)-testCal->GetBinContent(bin);
+  
+        // Variance of the bin :
+        double const & weight = 1/testCal->GetBinContent(bin); // V = sigma² = 1/N
+  
+        // Add the diff to the total squared diff of the spectra :
+        sum_errors_squared += diff*diff*weight;
+  
+      }
+      return sum_errors_squared/bins;
+    }
+
+    double calculate(CalibAndScale const & calib)
+    {
+      double sum_errors_squared = 0.0;
+
+      auto const & bins = calib.getHisto()->GetNbinsX();
+  
+      for (int bin = 0; bin<bins; bin++) if (calib[bin]>0)
+      {
+        // Calculate the difference for this bin :
+        auto const & diff = m_reference->GetBinContent(bin)-calib[bin];
+  
+        // Variance of the bin :
+        double const & weight = 1/calib[bin]; // V = sigma² = 1/N
+  
+        // Add the diff to the total squared diff of the spectra :
+        sum_errors_squared += diff*diff*weight;
+  
+      }
+      return sum_errors_squared/bins;
+    }
+    
+  private:
+    TH1* m_reference = nullptr;
+  };
+
+  struct MinimiserVariable
+  {
+    double min = 0.;
+    double max = 0.;
+    double step = 0.;
+    int nb_steps = 0; 
+
+    MinimiserVariable(std::initializer_list<double> init)
+    {
+      auto it = init.begin();
+      min = double_cast(*it++);
+      max = double_cast(*it++);
+      nb_steps = int_cast(*it++);
+      calculateStep();
+    }
+
+    MinimiserVariable& operator=(std::initializer_list<double> init)
+    {
+      auto it = init.begin();
+      min = double_cast(*it++);
+      max = double_cast(*it++);
+      nb_steps = int_cast(*it++);
+      calculateStep();
+      return *this;
+    }
+
+  private:
+    void calculateStep() {step = (max-min)/double_cast(nb_steps);}
+
+  };
+
+  class Minimiser
+  {
+  public:
+    template<class THist>
+    Minimiser(THist* reference, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
+    {
+      Chi2Calculator chi2Calc(reference);
+      CalibAndScale calib(test);
+      m_calib.setHisto(test);
+      m_chi2map = new TH3F("chi2map", "chi2map;x;y;z", 
+                          xParam.nb_steps, xParam.min, xParam.max+1e-5, 
+                          yParam.nb_steps, yParam.min, yParam.max+1e-5,
+                          zParam.nb_steps, zParam.min, zParam.max+1e-5
+                        );
+
+      for (auto stepx = 0; stepx<=xParam.nb_steps; ++stepx)
+      {
+        for (auto stepy = 0; stepy<=yParam.nb_steps; ++stepy)
+        {
+          for (auto stepz = 0; stepz<=zParam.nb_steps; ++stepz)
+          {
+            auto const & x = xParam.min+stepx*xParam.step;
+            auto const & y = yParam.min+stepy*yParam.step;
+            auto const & z = zParam.min+stepz*zParam.step;
+            calib = {x, y, z};
+
+            // auto testCalib = calib.getCalibratedHisto(mergeStrings(calib.get()));
+            // auto chi2 = chi2Calc.calculate(testCalib);
+            auto chi2 = chi2Calc.calculate(calib);
+            if (chi2<m_min_chi2) 
+            {
+              m_min_chi2 = chi2;
+              print(chi2, calib.get());
+              m_calib = calib;
+            }
+            m_chi2map->Fill(x, y, z, chi2);
+          }
+        }
+      }
+    }
+
+    auto const & getCalib() const {return m_calib;}
+    auto const & getMinChi2() const {return m_min_chi2;}
+    auto & getChi2Map() const {return m_chi2map;}
+
+  private:
+    double m_min_chi2 = 1e100;
+    CalibAndScale m_calib;
+    TH3F* m_chi2map = nullptr;
+  };
+}
 
 
 ///////////////////////////
@@ -1436,15 +1695,15 @@ namespace CoAnalyse
 
   /// @brief Get a sub-histogram between x1 and x2
   template<class THist>
-  THist* sub_histo(THist* histo, int xmin, int xmax)
+  THist* subHisto(THist* histo, int xmin, int xmax)
   {
     auto name = TString(histo->GetName())+("_"+std::to_string(xmin)+"_"+std::to_string(xmax)).c_str();
     auto bin_low = histo->GetBinLowEdge(xmin);
-    auto bin_high = histo->GetBinLowEdge(xmax)+1;
+    auto bin_high = histo->GetBinLowEdge(xmax);
     auto const & N = bin_high-bin_low;
     auto ret = new THist(name, name, N, xmin, xmax);
     int dest_bin = 0;
-    for (int bin_i = bin_low; bin_i<bin_high; ++bin_i) ret->SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
+    for (int bin_i = bin_low; bin_i<=bin_high; ++bin_i) ret->SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
     return ret;
   }
 
@@ -2566,7 +2825,7 @@ void pad_normalize_histos(TPad* pad = nullptr, TString options = "nosw2")
   {
     gPad->GetListOfPrimitives()->Remove(hist);
     hist->Scale(maxi/hist->GetMaximum(), options);
-    if (i++ == 0) hist->Draw();
+    if (i++ == 0) hist->Draw(); // i is incremented after the comparison
     else hist->Draw("same");
   }
   if (hasLegend) gPad->BuildLegend();
