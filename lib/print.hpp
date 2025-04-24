@@ -105,7 +105,11 @@ void println(T const & t, T2 const &... t2) {std::cout << t; println(t2...);}
 void print_precision(int n = 6) {std::cout << std::setprecision(n);}
 
 /// @brief Requires #define DEBUG or -D DEBUG in the compile line
-template <class... ARGS> void debug(ARGS &&... args) 
+template <class... ARGS> void debug(ARGS &&... 
+#ifdef DEBUG
+  args
+#endif //DEBUG
+) 
 {
 #ifdef DEBUG
   print(std::forward<ARGS>(args)...);
@@ -230,11 +234,15 @@ std::string nicer_bool(bool const & some_bool)
   );
 }
 
-// template <class... T>
-// void printHex(T &&... t) 
-// {
-//   print(std::hex, std::forward<T>(t)..., std::dec);
-// }
+template <size_t __length__, char fillWith = '0', class T>
+void printfill(T const & t){
+  std::cout << std::setfill(fillWith) << std::setw(__length__) << t;
+}
+
+/// @brief Generic print
+/// @details Automatically adds space between each input. Terminate the output with a "\\n"
+template <size_t __length__, char fillWith = '0', class T, class... T2> 
+void printfill(T const & t, T2 const &... t2) {std::cout << std::setfill(fillWith) << std::setw(__length__) << t << " "; printfill<__length__, fillWith>(t2...);}
 
 class Hextech
 {
@@ -245,6 +253,22 @@ public:
     std::cout << std::hex;
     print(t...);
     std::cout << std::dec;
+  }
+
+  template <size_t __length__, class... T>
+  static inline void printhfill0(T &&... t)
+  {
+    std::cout << std::hex;
+    printfill<__length__>(t...);
+    std::cout << std::dec << std::endl;
+  }
+
+  template <size_t __length__, char fillWith = '0', class... T>
+  static inline void printhfill(T &&... t)
+  {
+    std::cout << std::hex;
+    printfill<__length__, fillWith>(t...);
+    std::cout << std::dec << std::endl;
   }
 };
 

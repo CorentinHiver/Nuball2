@@ -44,6 +44,14 @@
 #include <TTree.h>
 #include <TTreeIndex.h>
 
+#ifdef INCLUDE_MINUIT
+// Require additional -lMinuit2 in the compilation line
+  #include "Minuit2/Minuit2Minimizer.h"
+  #include "Math/Functor.h"
+  #include "Math/Factory.h"
+  #include "Math/Minimizer.h"
+#endif //INCLUDE_MINUIT
+
 ///////////////
 //   Usings  //
 ///////////////
@@ -1088,15 +1096,14 @@ namespace CoLib
       init();
     }
 
-    CalibAndScale(CalibAndScale const & other) : m_coeffs(other.m_coeffs), m_scale(other.m_scale) {
-      init();
-    }
+    CalibAndScale(CalibAndScale const & other) : 
+    m_coeffs(other.m_coeffs), m_scale(other.m_scale), m_order (other.m_order){}
 
     CalibAndScale& operator=(CalibAndScale const & other)
     {
       m_coeffs = other.m_coeffs;
-      m_scale  = other.m_scale ; 
-      init();
+      m_scale  = other.m_scale ;
+      m_order  = other.m_order;
       return *this;
     }
 
@@ -1275,13 +1282,45 @@ namespace CoLib
       }
       return sum_errors_squared/bins;
     }
+
+    double calculateForMinuit(double const * par)
+    {
+      double sum_errors_squared = 0.0;
+
+      auto calib = *m_calib; // Dereference aliasing for elegance and effiency
+      calib = {par[0], par[1], par[2]};
+
+      auto const & bins = calib.getHisto()->GetNbinsX();
+  
+      for (int bin = 0; bin<bins; bin++) if (calib[bin]>0)
+      {
+        // Calculate the difference for this bin :
+        auto const & diff = m_reference->GetBinContent(bin)-calib[bin];
+  
+        // Variance of the bin :
+        double const & weight = 1/calib[bin]; // V = sigma² = 1/N
+  
+        // Add the diff to the total squared diff of the spectra :
+        sum_errors_squared += diff*diff*weight;
+  
+      }
+      return sum_errors_squared/bins;
+    }
+
+    void setCalibForMinuit(CalibAndScale * calib)
+    {
+      m_calib = calib;
+    }
     
   private:
+    CalibAndScale * m_calib = nullptr;
     TH1* m_reference = nullptr;
   };
 
   struct MinimiserVariable
   {
+    double initGuess = 0.;
+    double bound = 0.;
     double min = 0.;
     double max = 0.;
     double step = 0.;
@@ -1290,65 +1329,150 @@ namespace CoLib
     MinimiserVariable(std::initializer_list<double> init)
     {
       auto it = init.begin();
-      min = double_cast(*it++);
-      max = double_cast(*it++);
+      initGuess = double_cast(*it++);
+      bound = double_cast(*it++);
       nb_steps = int_cast(*it++);
-      calculateStep();
+      initialize();
     }
 
     MinimiserVariable& operator=(std::initializer_list<double> init)
     {
       auto it = init.begin();
-      min = double_cast(*it++);
-      max = double_cast(*it++);
+      initGuess = double_cast(*it++);
+      bound = double_cast(*it++);
       nb_steps = int_cast(*it++);
-      calculateStep();
+      initialize();
       return *this;
     }
 
   private:
-    void calculateStep() {step = (max-min)/double_cast(nb_steps);}
-
+    void initialize() 
+    {
+      step = bound/nb_steps;
+    }
   };
 
   class Minimiser
   {
   public:
+    Minimiser(){}
     template<class THist>
-    Minimiser(THist* reference, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
+    void calculate(THist* reference, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
     {
       Chi2Calculator chi2Calc(reference);
       CalibAndScale calib(test);
+      chi2Calc.setCalibForMinuit(&calib);
       m_calib.setHisto(test);
-      m_chi2map = new TH3F("chi2map", "chi2map;x;y;z", 
-                          xParam.nb_steps, xParam.min, xParam.max+1e-5, 
-                          yParam.nb_steps, yParam.min, yParam.max+1e-5,
-                          zParam.nb_steps, zParam.min, zParam.max+1e-5
-                        );
-
-      for (auto stepx = 0; stepx<=xParam.nb_steps; ++stepx)
+      if (m_bruteforce)
       {
-        for (auto stepy = 0; stepy<=yParam.nb_steps; ++stepy)
-        {
-          for (auto stepz = 0; stepz<=zParam.nb_steps; ++stepz)
-          {
-            auto const & x = xParam.min+stepx*xParam.step;
-            auto const & y = yParam.min+stepy*yParam.step;
-            auto const & z = zParam.min+stepz*zParam.step;
-            calib = {x, y, z};
+        m_chi2map = new TH3F("chi2map", "chi2map;x;y;z", 
+                            xParam.nb_steps, xParam.min, xParam.max+1e-5, 
+                            yParam.nb_steps, yParam.min, yParam.max+1e-5,
+                            zParam.nb_steps, zParam.min, zParam.max+1e-5
+                          );
 
-            // auto testCalib = calib.getCalibratedHisto(mergeStrings(calib.get()));
-            // auto chi2 = chi2Calc.calculate(testCalib);
-            auto chi2 = chi2Calc.calculate(calib);
-            if (chi2<m_min_chi2) 
+        // print (xParam.initGuess, xParam.step);
+        // pauseCo();
+
+        double x = 0, y = 0, z = 0;
+  
+        for (int stepx = 0; stepx<xParam.nb_steps * 2; ++stepx)
+        {
+          for (int stepy = 0; stepy<yParam.nb_steps * 2; ++stepy)
+          {
+            for (int stepz = 0; stepz<zParam.nb_steps * 2; ++stepz)
             {
-              m_min_chi2 = chi2;
-              print(chi2, calib.get());
-              m_calib = calib;
+              if (stepx < xParam.nb_steps) x = xParam.initGuess + stepx*xParam.step;
+              else                         x = xParam.initGuess + (xParam.nb_steps-stepx-1)*xParam.step;
+              if (stepy < yParam.nb_steps) y = yParam.initGuess + stepy*yParam.step;
+              else                         y = yParam.initGuess + (yParam.nb_steps-stepy-1)*yParam.step;
+              if (stepz < zParam.nb_steps) z = zParam.initGuess + stepz*zParam.step;
+              else                         z = zParam.initGuess + (zParam.nb_steps-stepz-1)*zParam.step;
+
+              calib = {x, y, z};
+  
+              auto chi2 = chi2Calc.calculate(calib);
+              if (chi2<m_min_chi2) 
+              {
+                m_min_chi2 = chi2;
+                m_calib = calib;
+              }
+              m_chi2map->Fill(x, y, z, chi2);
             }
-            m_chi2map->Fill(x, y, z, chi2);
           }
         }
+        if (m_multistages)
+        {
+          print(m_calib.get());
+          for (int stage = 1; stage<m_nb_stages; ++stage)
+          {
+            xParam = {m_calib.get()[0], m_calib.get()[0] + xParam.step, double_cast(xParam.nb_steps)}; // The double cast is only for expliciting the conversion
+            yParam = {m_calib.get()[1], m_calib.get()[1] + xParam.step, double_cast(yParam.nb_steps)};
+            zParam = {m_calib.get()[2], m_calib.get()[2] + xParam.step, double_cast(zParam.nb_steps)};
+
+            for (auto stepx = 1; stepx<xParam.nb_steps; ++stepx)
+            {
+              for (auto stepy = 1; stepy<yParam.nb_steps; ++stepy)
+              {
+                for (auto stepz = 1; stepz<zParam.nb_steps; ++stepz)
+                {
+                  auto const & x2 = xParam.initGuess + (xParam.nb_steps < xParam.nb_steps/2) ? (+stepx*xParam.step) : (-stepx*xParam.step);
+                  auto const & y2 = yParam.initGuess + (xParam.nb_steps < xParam.nb_steps/2) ? (+stepy*yParam.step) : (-stepy*yParam.step);
+                  auto const & z2 = zParam.initGuess + (xParam.nb_steps < xParam.nb_steps/2) ? (+stepz*zParam.step) : (-stepz*zParam.step);
+
+                  calib = {x2, y2, z2};
+      
+                  auto chi2 = chi2Calc.calculate(calib);
+                  if (chi2<m_min_chi2) 
+                  {
+                    m_min_chi2 = chi2;
+                    m_calib = calib;
+                  }
+                  m_chi2map->Fill(x2, y2, z2, chi2);
+                }
+              }
+            }
+
+          }
+        }
+      }
+      else
+      {
+      #ifdef INCLUDE_MINUIT
+        // ROOT::Math::Minimizer* minimizer = new ROOT::Minuit2::Minuit2Minimizer("Migrad") ;
+        auto minimizer = new ROOT::Minuit2::Minuit2Minimizer(ROOT::Minuit2::kMigrad);
+        // ROOT::Math::Minimizer* minimizer = ROOT::Math::Factory::CreateMinimizer("Minuit2", "Migrad");
+        
+        // Set properties
+        minimizer->SetMaxFunctionCalls(100000); // for Minuit/Minuit2
+        // minimizer->SetMaxIterations(10000);     // for GSL
+        minimizer->SetTolerance(0.001);
+        minimizer->SetPrintLevel(1);            // 0: silent, 1: default
+        
+
+        // Create Functor object
+        auto func = [&chi2Calc](const double* x) {
+          return chi2Calc.calculateForMinuit(x);
+        };
+        ROOT::Math::Functor f(func, 3);
+
+        // Set function and initial values
+        minimizer->SetFunction(f);
+        minimizer->SetVariable(0, "param_x0", 0.0, xParam.step);
+        minimizer->SetVariable(1, "param_x1", 1.0, yParam.step);
+        minimizer->SetVariable(2, "param_x2", 1.0, zParam.step);
+        
+        // Perform minimization
+        minimizer->Minimize();
+
+        // Get results
+        const double* xs = minimizer->X();
+        m_calib = {xs[0], xs[1], xs[2]};
+        // std::cout << "Minimum at: x0 = " << xs[0] << ", x1 = " << xs[1] << ", x2 = " << xs[2] << std::endl;
+        // std::cout << "Minimum value: f = " << minimizer->MinValue() << std::endl;
+      #else 
+        throw_error("Compile with -DINCLUDE_MINUIT");
+      #endif //INCLUDE_MINUIT
       }
     }
 
@@ -1356,13 +1480,23 @@ namespace CoLib
     auto const & getMinChi2() const {return m_min_chi2;}
     auto & getChi2Map() const {return m_chi2map;}
 
+    void brutefore(bool const & b) {m_bruteforce = b;}
+    void multistages(int nb_stages)
+    {
+      m_nb_stages = nb_stages;
+      m_multistages = true;
+    }
+
+
   private:
+    bool m_bruteforce = true;
+    bool m_multistages = false;
+    int m_nb_stages = 1;
     double m_min_chi2 = 1e100;
     CalibAndScale m_calib;
     TH3F* m_chi2map = nullptr;
   };
 }
-
 
 ///////////////////////////
 //   TREE MANIPULATIONS  //
@@ -1706,6 +1840,7 @@ namespace CoAnalyse
     for (int bin_i = bin_low; bin_i<=bin_high; ++bin_i) ret->SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
     return ret;
   }
+  #ifndef MINIMALIST 
 
   /// @brief For each X bin, normalise the Y histogram
   void normalizeY(TH2* matrix, double const & factor = 1)
@@ -4899,6 +5034,11 @@ void libRoot()
 {
   print("Welcome, may you find some usefull stuff around");
 }
+
+#else //!MINIMALIST
+};
+
+#endif //MINIMALIST 
 
 #endif //LIBROOT_HPP
 

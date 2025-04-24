@@ -7,7 +7,6 @@
 #include <algorithm>
 #include <cmath>
 
-
 template<class T>
 using vector2D =  std::vector<std::vector<T>>;
 
@@ -154,7 +153,7 @@ template<class T>
 std::vector<T>& linspace(std::vector<T> & vec, size_t size, int begin = 0, int spacing = 1)
 {
   vec.clear(); vec.reserve(size);
-  for (int it = begin; it<size; ++it) vec.push_back(static_cast<T>(it*spacing));
+  for (size_t it = 0; it<size; ++it) vec.push_back(static_cast<T>(it * spacing + begin));
   return vec;
 }
 
@@ -294,7 +293,7 @@ std::vector<size_t> & bubble_sort(std::vector<T> const & vector, std::vector<siz
 }
 
 /// @brief Order the vector from lower to higher value
-template <typename T>
+template <class T>
 std::vector<size_t> bubble_sort(std::vector<T> const & vector)
 {
   std::vector<size_t> ordered_indexes(vector.size());
@@ -302,7 +301,7 @@ std::vector<size_t> bubble_sort(std::vector<T> const & vector)
   return ordered_indexes;
 }
 
-template <typename T>
+template <class T>
 void invert(std::vector<T> & vector)
 {
   std::reverse(vector.begin(), vector.end());
@@ -328,6 +327,136 @@ auto sub_vec(std::vector<T> const & vec, int const & start, int const & length)
   return std::vector<T>(vec.begin() + start, vec.begin() + start + length);
 }
 
+/**
+ * @brief Returns the first order unit derivative of the given vector.
+ * 
+ * @param vec 
+ * @param smooth 
+ * @return std::vector<T> 
+ */
+template<class T>
+std::vector<T> derivate(std::vector<T> const & vec, int const & smooth = 1)
+{
+  auto const & N = vec.size();
+  std::vector<T> ret; ret.reserve(N);
+
+  auto const & smooth_range = 2*smooth;
+  int lower_bin = 0;
+  int upper_bin = 0;
+  double low_sum = 0.0;
+  double up_sum = 0.0;
+  for (int bin = 0; bin<N; bin++)
+  {
+    lower_bin = bin-smooth;
+    upper_bin = bin+smooth;
+
+    // Before all, handle side effects : 
+    // At the beginning and the end of the spectra, there are not enough bins on both sides to smooth correctly
+    // Therefore, we have to set a correct number of bins
+    if (lower_bin<0)
+    {// For the first bins of the histogram
+      lower_bin = 0;
+      upper_bin = 2*bin;
+    }
+    else if (upper_bin > N-1)
+    {// For the last bins of the histogram
+      lower_bin = 2*bin-N;
+      upper_bin = N;
+    }
+
+    low_sum = 0.0;
+    up_sum = 0.0;
+
+    // First, sum the content of all the bins on the left :
+    for (int bin_low = lower_bin; bin_low<bin; bin_low++) {low_sum+=vec[bin_low];}
+
+    // Second, sum the content of all the bins on the right :
+    for (int bin_up = bin+1; bin_up<upper_bin; bin_up++) {up_sum+=vec[bin_up];}
+
+    // Calculate the derivative : (sum_right - sum_left) / (x_right - x_left)
+    auto const & derivative = (up_sum - low_sum) / smooth_range;
+    
+    ret.push_back(derivative);
+
+    return ret;
+  }
+}
+
+/**
+ * @brief Returns the first order derivative of the given y values based on the x axis
+ * 
+ * @tparam T 
+ * @param x 
+ * @param y 
+ * @param smooth 
+ * @return std::vector<T> 
+ */
+template<class T>
+std::vector<T> derivate(std::vector<T> const & x, std::vector<T> const & y, int const & smooth = 1)
+{
+  auto const & N = x.size();
+  if (N != y.size()) error("derivate(X, Y) : X and Y vectors size mismatch");
+  std::vector<T> ret; ret.reserve(N);
+
+  auto const & smooth_range = 2*smooth;
+
+  int    lower_bin = 0  ;
+  int    upper_bin = 0  ;
+  double low_sum   = 0.0;
+  double up_sum    = 0.0;
+
+  for (int bin = 0; bin<N; bin++)
+  {
+    lower_bin = bin - smooth;
+    upper_bin = bin + smooth;
+
+    // Before all, handle side effects : 
+    // At the beginning and the end of the spectra, there are not enough bins on both sides to smooth correctly
+    // Therefore, we have to set a correct number of bins
+    if (lower_bin<0)
+    {// For the first bins of the histogram
+      lower_bin = 0;
+      upper_bin = 2*bin;
+    }
+    else if (upper_bin > N-1)
+    {// For the last bins of the histogram
+      lower_bin = 2*bin-N;
+      upper_bin = N;
+    }
+
+    low_sum = 0.0;
+    up_sum  = 0.0;
+
+    // First, sum the content of all the bins on the left :
+    for (int bin_low = lower_bin; bin_low<bin; bin_low++) {low_sum+=y[bin_low];}
+
+    // Second, sum the content of all the bins on the right :
+    for (int bin_up = bin+1; bin_up<upper_bin; bin_up++) {up_sum+=y[bin_up];}
+
+    // Calculate the derivative : (sum_right - sum_left) / (x_right - x_left)
+    auto const & derivative = (up_sum - low_sum) / (x[upper_bin] - y[lower_bin]);
+
+    ret.push_back(derivative);
+
+    return ret;
+  }
+}
+
+template <class T>
+std::vector<T> scale(std::vector<T> const & vec, double const & scaling)
+{
+  std::vector<T> ret; ret.reserve(vec.size());
+  for (auto const & v : vec) ret.push_back(v*scaling);
+  return ret;
+}
+
+template <class T>
+std::vector<T> & scale(std::vector<T> * vec, double const & scaling)
+{
+  for (auto & v : *vec) v *= scaling;
+  return *vec;
+}
+
 ////////////////////////////
 //   CLASS STATIC VECTOR  //
 ////////////////////////////
@@ -336,6 +465,7 @@ auto sub_vec(std::vector<T> const & vec, int const & start, int const & length)
  * @brief An efficient container for dynamic arrays with a known and fixed maximum size
  * @attention Prototype, has some memory management issues in some cases ...
  * @deprecated With optimisation option, std::vector is almost as efficient as this class ...
+ * @todo clear without destroying objects may save time for large objects
  * @details
  * This class is meant to handle a vector of data that needs to be resized a lot.
  * To do so, declare it this way :
@@ -368,192 +498,192 @@ auto sub_vec(std::vector<T> const & vec, int const & start, int const & length)
  * not been found in the vector. It may require t to have a comparison operator (not tested yet).
  * 
  * Now, if for some reason you want to modify the capacity of the vector, you can use static_resize(new_size).
+ template<class T>
+ class StaticVector
+ {
+ public:
+   StaticVector() = default;
+ 
+   /// @brief Create a new Static_vector with size static_size
+   StaticVector(std::size_t const & static_size) : m_static_size(static_size) {reserve();}
+ 
+   /// @brief Create a new Static_vector with size static_size and fill it with element e
+   StaticVector(std::size_t const & static_size, T const & e) : m_static_size(static_size) 
+   {
+     reserve(); 
+     fill_static(e);
+   }
+ 
+   /// @brief Create a new Static_vector by copy (duplicate)
+   StaticVector(StaticVector<T> const & vector) : 
+     m_static_size(vector.m_static_size),
+     m_dynamic_size(vector.m_dynamic_size),
+     m_deleted(vector.m_deleted)
+   { reserve(); *m_data = *(vector.m_data); }
+ 
+   /// @brief Move constructor
+   StaticVector(StaticVector<T>&& other)
+   {
+     *this = std::move(other);
+   }
+ 
+   ~StaticVector()
+   {
+     if(!m_deleted)
+     {
+       if (m_static_size > 0)
+       {
+         delete[] m_data;
+         m_deleted = true;
+       }
+     }
+     else 
+     {
+       print("W: StaticVector double delete, be careful (this is a just a warning message)");
+     }
+   }
+ 
+   /// @brief Deletes the underlying data
+   void deallocate ()
+   {
+     if (m_static_size > 0) 
+     {
+       delete[] m_data;
+       m_static_size = m_dynamic_size = 0;
+     }
+   }
+ 
+   /// @brief Copy the values of another vector
+   StaticVector& operator=(StaticVector<T> const & vector)
+   {
+     if (vector.m_static_size == m_static_size && m_static_size == 0) return *this;
+     else
+     {
+       if (m_static_size > 0) delete[] m_data;
+       m_static_size = vector.m_static_size;
+       m_data = new T[m_static_size];
+     }
+ 
+     m_dynamic_size = vector.m_dynamic_size;
+     *m_data = *(vector.m_data);
+     return *this;
+   }
+ 
+   /// @brief Only reset the user size to new_size (default 0). Do not touch the data. Use for performances.
+   void resize(std::size_t const & new_size = 0) {m_dynamic_size = new_size;}
+   void clear () {m_dynamic_size = 0;}
+ 
+   /// @brief Delete memory, reset the user size to 0 and allocate new_size memory
+   void static_resize(std::size_t const & new_size = 0)
+   {
+     if (m_static_size) delete[] m_data;
+     m_dynamic_size = 0;
+     m_static_size = new_size;
+     reserve();
+   }
+   void static_resize(std::size_t const & new_size, T const & t)
+   {
+     static_resize(new_size);
+     fill_static(t);
+   }
+ 
+   void inline checkCapacity() const
+   {
+   #ifndef UNSAFE
+     if (m_dynamic_size > m_static_size) std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
+   #endif //UNSAFE
+   }
+ 
+   void inline checkCapacity() 
+   {
+   #ifndef UNSAFE
+     if (m_dynamic_size > m_static_size) std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
+   #endif //UNSAFE
+   }
+ 
+   /// @brief Does the vector contain element e ?
+   /// @param t: variable in read-only mode
+   virtual bool has(T const & t) const {return (std::find(this -> begin(), this -> end(), t) != this -> end());}
+ 
+   /// @brief Does the vector contain element e ?
+   /// @param t: direct access to the variable
+   virtual bool has(T & t) const {return (std::find(this -> begin(), this -> end(), t) != this -> end());}
+ 
+   /// @brief Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
+   void push_back(T const & e) 
+   {
+     checkCapacity();
+     m_data[m_dynamic_size++] = e;
+   }
+ 
+   /// @brief Move the element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
+   void move_back(T && e) 
+   {
+     checkCapacity();
+     m_data[m_dynamic_size++] = std::move(e);
+   }
+ 
+   /// @brief Add element to the back of the vector only if the vector do not contain it
+   bool push_back_unique(T const & t) 
+   {
+     if (!this->has(t)) 
+     {
+       this -> push_back(t);
+       return true;
+     }
+     else return false;
+   }
+ 
+   /// @brief Return iterator to the beginning of the vector
+   virtual T* begin() {return m_data;}
+ 
+   /// @brief Return iterator to the end of the vector
+   virtual T* end()  {return m_data+m_dynamic_size;}
+ 
+   /// @brief Return iterator to the beginning of the vector
+   virtual T* begin() const {return m_data;}
+ 
+   /// @brief Return iterator to the end of the vector
+   virtual T* end() const {return m_data+m_dynamic_size;}
+ 
+   /// @brief Return the position of the write cursor
+   auto const & size() const {return m_dynamic_size;}
+ 
+   /// @brief Return the ith element 
+   T & operator[] (std::size_t const & i) const 
+   {
+     checkCapacity();
+     return m_data[i];
+   }
+ 
+   /// @brief Return the ith element and check i do not exceed the size of the vector
+   T const & at(std::size_t const & i) const {if (i < m_static_size) return m_data[i]; else return m_data[0];}
+ 
+   /// @brief Return a pointer to the underlying data
+   T* data() {return m_data;}
+ 
+   /// @brief Fills the vector with element e within user size
+   void fill(T const & e) {memset(m_data, e, m_dynamic_size * sizeof(e));}
+ 
+   /// @brief Fills the vector with element e within static size
+   void fill_static(T const & e) {memset(m_data, e, m_static_size * sizeof(e));}
+ 
+   void reserve() {m_data = new T[m_static_size];}
+ 
+ private:
+   T* m_data; // Underlying data dynamic array
+   size_t m_dynamic_size = 0; // User size
+   size_t m_static_size = 0;  // Maximum size
+   bool m_deleted = false; // Is the class deleted or not
+ };
+ 
+ template<class T>
+ std::ostream& operator<<(std::ostream& cout, StaticVector<T> const & vector)
+ {
+   for (auto const & e : vector) cout << e << " ";
+   return cout;
+ }
 */
-template<class T>
-class StaticVector
-{
-public:
-  StaticVector() = default;
-
-  /// @brief Create a new Static_vector with size static_size
-  StaticVector(std::size_t const & static_size) : m_static_size(static_size) {reserve();}
-
-  /// @brief Create a new Static_vector with size static_size and fill it with element e
-  StaticVector(std::size_t const & static_size, T const & e) : m_static_size(static_size) 
-  {
-    reserve(); 
-    fill_static(e);
-  }
-
-  /// @brief Create a new Static_vector by copy (duplicate)
-  StaticVector(StaticVector<T> const & vector) : 
-    m_static_size(vector.m_static_size),
-    m_dynamic_size(vector.m_dynamic_size),
-    m_deleted(vector.m_deleted)
-  { reserve(); *m_data = *(vector.m_data); }
-
-  /// @brief Move constructor
-  StaticVector(StaticVector<T>&& other)
-  {
-    *this = std::move(other);
-  }
-
-  ~StaticVector()
-  {
-    if(!m_deleted)
-    {
-      if (m_static_size > 0)
-      {
-        delete[] m_data;
-        m_deleted = true;
-      }
-    }
-    else 
-    {
-      print("W: StaticVector double delete, be careful (this is a just a warning message)");
-    }
-  }
-
-  /// @brief Deletes the underlying data
-  void deallocate ()
-  {
-    if (m_static_size > 0) 
-    {
-      delete[] m_data;
-      m_static_size = m_dynamic_size = 0;
-    }
-  }
-
-  /// @brief Copy the values of another vector
-  StaticVector& operator=(StaticVector<T> const & vector)
-  {
-    if (vector.m_static_size == m_static_size && m_static_size == 0) return *this;
-    else
-    {
-      if (m_static_size > 0) delete[] m_data;
-      m_static_size = vector.m_static_size;
-      m_data = new T[m_static_size];
-    }
-
-    m_dynamic_size = vector.m_dynamic_size;
-    *m_data = *(vector.m_data);
-    return *this;
-  }
-
-  /// @brief Only reset the user size to new_size (default 0). Do not touch the data. Use for performances.
-  void resize(std::size_t const & new_size = 0) {m_dynamic_size = new_size;}
-  void clear () {m_dynamic_size = 0;}
-
-  /// @brief Delete memory, reset the user size to 0 and allocate new_size memory
-  void static_resize(std::size_t const & new_size = 0)
-  {
-    if (m_static_size) delete[] m_data;
-    m_dynamic_size = 0;
-    m_static_size = new_size;
-    reserve();
-  }
-  void static_resize(std::size_t const & new_size, T const & t)
-  {
-    static_resize(new_size);
-    fill_static(t);
-  }
-
-  void inline checkCapacity() const
-  {
-  #ifndef UNSAFE
-    if (m_dynamic_size > m_static_size) std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
-  #endif //UNSAFE
-  }
-
-  void inline checkCapacity() 
-  {
-  #ifndef UNSAFE
-    if (m_dynamic_size > m_static_size) std::cout << "Capacity of StaticVector<" << typeid(T).name() << "> with size " << m_static_size << " exceeded" << std::endl;
-  #endif //UNSAFE
-  }
-
-  /// @brief Does the vector contain element e ?
-  /// @param t: variable in read-only mode
-  virtual bool has(T const & t) const {return (std::find(this -> begin(), this -> end(), t) != this -> end());}
-
-  /// @brief Does the vector contain element e ?
-  /// @param t: direct access to the variable
-  virtual bool has(T & t) const {return (std::find(this -> begin(), this -> end(), t) != this -> end());}
-
-  /// @brief Add element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
-  void push_back(T const & e) 
-  {
-    checkCapacity();
-    m_data[m_dynamic_size++] = e;
-  }
-
-  /// @brief Move the element to the back of the vector. Use for performances. Unsafe. define SAFE for less performance but size checking
-  void move_back(T && e) 
-  {
-    checkCapacity();
-    m_data[m_dynamic_size++] = std::move(e);
-  }
-
-  /// @brief Add element to the back of the vector only if the vector do not contain it
-  bool push_back_unique(T const & t) 
-  {
-    if (!this->has(t)) 
-    {
-      this -> push_back(t);
-      return true;
-    }
-    else return false;
-  }
-
-  /// @brief Return iterator to the beginning of the vector
-  virtual T* begin() {return m_data;}
-
-  /// @brief Return iterator to the end of the vector
-  virtual T* end()  {return m_data+m_dynamic_size;}
-
-  /// @brief Return iterator to the beginning of the vector
-  virtual T* begin() const {return m_data;}
-
-  /// @brief Return iterator to the end of the vector
-  virtual T* end() const {return m_data+m_dynamic_size;}
-
-  /// @brief Return the position of the write cursor
-  auto const & size() const {return m_dynamic_size;}
-
-  /// @brief Return the ith element 
-  T & operator[] (std::size_t const & i) const 
-  {
-    checkCapacity();
-    return m_data[i];
-  }
-
-  /// @brief Return the ith element and check i do not exceed the size of the vector
-  T const & at(std::size_t const & i) const {if (i < m_static_size) return m_data[i]; else return m_data[0];}
-
-  /// @brief Return a pointer to the underlying data
-  T* data() {return m_data;}
-
-  /// @brief Fills the vector with element e within user size
-  void fill(T const & e) {memset(m_data, e, m_dynamic_size * sizeof(e));}
-
-  /// @brief Fills the vector with element e within static size
-  void fill_static(T const & e) {memset(m_data, e, m_static_size * sizeof(e));}
-
-  void reserve() {m_data = new T[m_static_size];}
-
-private:
-  T* m_data; // Underlying data dynamic array
-  size_t m_dynamic_size = 0; // User size
-  size_t m_static_size = 0;  // Maximum size
-  bool m_deleted = false; // Is the class deleted or not
-};
-
-template<class T>
-std::ostream& operator<<(std::ostream& cout, StaticVector<T> const & vector)
-{
-  for (auto const & e : vector) cout << e << " ";
-  return cout;
-}
 
 /*
 template<T>

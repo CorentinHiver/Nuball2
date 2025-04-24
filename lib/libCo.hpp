@@ -105,6 +105,15 @@ std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
   return cout;
 }
 
+///////////////////////////////
+// Variadic helper functions //
+///////////////////////////////
+
+template<std::size_t I, typename... T>
+constexpr auto get_ith_element(std::tuple<T...> t) {
+    return std::get<I>(t);
+}
+
 //////////////
 //   UNITS  //
 //////////////
@@ -179,33 +188,29 @@ std::map<std::string, std::string> error_message =
   {"WTF", "What the fuck ??"}
 };
 
-auto pauseCo() 
+auto pauseCo(std::string message = "") 
 {
 #ifdef MULTITHREADING
   if (MTObject::kill) exit(MTSIGEXIT);
   lock_mutex lock(MTObject::mutex);
 #endif //MULTITHREADING
 
-  std::cout << "Programme paused, please press enter"; 
+  if (message == "") message = "Programme paused, please press enter";
+  std::cout << message;
   return std::cin.get();
 }
 
-auto pauseCo(std::string const & message) 
-{
-#ifdef MULTITHREADING
-  if (MTObject::kill) exit(MTSIGEXIT);
-  lock_mutex lock(MTObject::mutex);
-#endif //MULTITHREADING
-
-  std::cout << message << std::endl;
-  return std::cin.get();
-}
-
-void pauseDebug(std::string const & message = "") 
-{
+void pauseDebug(std::string const &
 #ifdef DEBUG
-  if (message == "") pauseCo();
-  else pauseCo(message);
+   message = ""
+#else //!DEBUG
+  = std::string() // Optimized out without -DDEBUG
+#endif //DEBUG
+) 
+{
+  // Optimizing out without -DDEBUG :
+#ifdef DEBUG
+  pauseCo(message);
 #endif //DEBUG
 }
 
@@ -544,6 +549,13 @@ constexpr inline bool find_value(std::unordered_map<K,V> const & map, V const & 
     }));
 }
 
+/// @brief Simple alias to find_key
+template<typename K, typename V> 
+constexpr inline bool key_found(K const & key, std::unordered_map<K,V> const & map)
+{
+  return find_key(map, key);
+}
+
 /////////////////////////
 //    MAPS FUNCTIONS   //
 /////////////////////////
@@ -778,7 +790,7 @@ namespace CoLib
 }
 
 template <class T>
-std::string nicer_double(T const & t, int const & nb_decimals = 6)
+std::string nicer_double(T const & t, int const & nb_decimals = 0)
 {
   auto value = double_cast(t);
   std::string s;
