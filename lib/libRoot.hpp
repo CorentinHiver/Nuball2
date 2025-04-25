@@ -1321,10 +1321,10 @@ namespace CoLib
   {
     double initGuess = 0.;
     double bound = 0.;
-    double min = 0.;
-    double max = 0.;
     double step = 0.;
-    int nb_steps = 0; 
+    int nb_steps = 0;
+    double min = 0; 
+    double max = 0; 
 
     MinimiserVariable(std::initializer_list<double> init)
     {
@@ -1348,7 +1348,9 @@ namespace CoLib
   private:
     void initialize() 
     {
-      step = bound/nb_steps;
+      step = bound / nb_steps;
+      min = initGuess - nb_steps * step;
+      max = initGuess + nb_steps * step;
     }
   };
 
@@ -1365,11 +1367,11 @@ namespace CoLib
       m_calib.setHisto(test);
       if (m_bruteforce)
       {
-        m_chi2map = new TH3F("chi2map", "chi2map;x;y;z", 
-                            xParam.nb_steps, xParam.min, xParam.max+1e-5, 
-                            yParam.nb_steps, yParam.min, yParam.max+1e-5,
-                            zParam.nb_steps, zParam.min, zParam.max+1e-5
-                          );
+        // m_chi2map = new TH3F("chi2map", "chi2map;x;y;z", 
+        //                     xParam.nb_steps, xParam.min, xParam.max+1e-5, 
+        //                     yParam.nb_steps, yParam.min, yParam.max+1e-5,
+        //                     zParam.nb_steps, zParam.min, zParam.max+1e-5
+        //                   );
 
         // print (xParam.initGuess, xParam.step);
         // pauseCo();
@@ -1397,7 +1399,7 @@ namespace CoLib
                 m_min_chi2 = chi2;
                 m_calib = calib;
               }
-              m_chi2map->Fill(x, y, z, chi2);
+              if (m_chi2map) m_chi2map->Fill(x, y, z, chi2);
             }
           }
         }
@@ -1478,7 +1480,7 @@ namespace CoLib
 
     auto const & getCalib() const {return m_calib;}
     auto const & getMinChi2() const {return m_min_chi2;}
-    auto & getChi2Map() const {return m_chi2map;}
+    auto & getChi2Map() const {return (m_chi2map) ? m_chi2map : new TH3F();}
 
     void brutefore(bool const & b) {m_bruteforce = b;}
     void multistages(int nb_stages)
