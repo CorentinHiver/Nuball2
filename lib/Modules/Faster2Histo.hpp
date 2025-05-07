@@ -7,6 +7,7 @@
 #include "../Classes/FilesManager.hpp"
 #include "../Classes/Timer.hpp"
 #include "../Classes/Calibration.hpp"
+#include "../Classes/CalibAndScale.hpp"
 #include "../Classes/Timeshifts.hpp"
 
 #include "../MTObjects/MTFasterReader.hpp"
@@ -78,6 +79,8 @@ public:
   /// @brief Interface with the ROOT write mode. Default = "RECREATE". 
   /// @details If you want to use "APPEND" for instance, you have to use the overwrite option (-o)
   void setWriteMode(const char* mode) noexcept {delete[] m_write_mode; m_write_mode = mode;}
+  /// @brief Loads the .align file needed. Option -a
+  void loadAlignement(std::string const & alignement_file) {m_alignement.load(alignement_file);}
   /// @brief Loads the .calib file needed. Option -c
   void loadCalibration(std::string const & calibration_file) {m_calibration.load(calibration_file);}
   /// @brief Loads the .dT file needed. Option -t
@@ -110,6 +113,7 @@ private:
   Map_MultiHist<TH1F, Label> m_spectra;
   Map_MultiHist<TH2F, Label> m_bidim;
   const char* m_write_mode = "RECREATE";
+  CalibAndScale m_alignement;
   Calibration m_calibration;
   Timeshifts m_timeshifts;
   TriggerHit m_trigger = [](Hit const & hit) {return true;};
@@ -146,6 +150,7 @@ void Faster2Histo::printParameters() const noexcept
   print("");
   print("parameters :");
   print("");
+  print("-a [alignement_file]        : Loads the run-bu-run calibration correction file");
   print("-c [calibration_file]       : Loads the calibration file");
   print("-f [file_name]              : add a new .fast file");
   print("-F [folder_name] [nb_files] : add a new folder with a certain amount of .fast files (-1 to take all of them)");
@@ -177,7 +182,8 @@ bool Faster2Histo::load(int const & argc, char** argv)
   for (int i = 1; i<argc; i++)
   {
     std::string command = argv[i];
-         if (command == "-c") {loadCalibration(argv[++i]);}
+         if (command == "-a") {loadAlignement (argv[++i]);}
+    else if (command == "-c") {loadCalibration(argv[++i]);}
     else if (command == "-f") {this -> addFile(argv[++i]);}
     else if (command == "-F") 
     {
@@ -231,10 +237,19 @@ void Faster2Histo::treatFile(Hit & _hit, FasterReader & reader)
 {
   Timer timer;
   // If the calibration loaded then calibrate the hits :
-  if (m_calibration) while(reader.Read()) 
-  { // Loop through the hits of the data file
-    m_calibration(_hit);
-    fillHisto(_hit);
+  if (m_calibration) 
+  {
+    if (m_alignement) while(reader.Read()) // With calibration and alignement
+    { // Loop through the hits of the data file
+      m_calibration(_hit);
+      _hit.nrj = m_alignement.linear_inv_calib(_hit.nrj);
+      fillHisto(_hit);
+    }
+    else while(reader.Read()) // With calibration
+    { // Loop through the hits of the data file
+      m_calibration(_hit);
+      fillHisto(_hit);
+    }
   }
   else while(reader.Read()) fillHisto(_hit); // With no calibration
   

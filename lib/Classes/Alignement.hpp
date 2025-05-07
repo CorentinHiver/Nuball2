@@ -1,0 +1,6 @@
+#ifndef ALIGNEMENT_HPP
+#define ALIGNEMENT_HPP
+
+
+
+#endif //ALIGNEMENT_HPP

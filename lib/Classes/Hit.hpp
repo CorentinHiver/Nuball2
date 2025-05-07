@@ -1,7 +1,7 @@
 #ifndef HIT_HPP
 #define HIT_HPP
 
-#include "../libRoot.hpp"
+#include "TTree.h"
 
 #ifdef MULTITHREADING
   std::mutex mutex_hits;

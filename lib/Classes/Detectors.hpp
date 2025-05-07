@@ -1,8 +1,9 @@
 #ifndef DETECTORS_HPP
 #define DETECTORS_HPP
 
-#include "../libRoot.hpp"
 #include "Hit.hpp"
+#include "TH1F.h"
+#include "TFile.h"
 
 using dType = std::string;
 
@@ -135,35 +136,35 @@ public:
   auto const & index(Label const & label) const {return det_indexes[label];}
 
   /// @brief Get the default ADC histogram binning for each type of detectors
-  static auto const & ADCBin(dType const & type = "")
-  {
-    auto const & it = ADC_bins.find(type);
-    if (it != ADC_bins.end()) return it->second;
-    else return ADC_bins["default"];
-  }
+  // static auto const & ADCBin(dType const & type = "")
+  // {
+  //   auto const & it = ADC_bins.find(type);
+  //   if (it != ADC_bins.end()) return it->second;
+  //   else return ADC_bins["default"];
+  // }
 
-  /// @brief Get the default energy (keV) histogram binning for each type of detectors
-  static auto const & energyBin(dType const & type = "")
-  {
-    auto const & it = energy_bins.find(type);
-    if (it != energy_bins.end()) return it->second;
-    else return energy_bins["default"];
-  }
+  // /// @brief Get the default energy (keV) histogram binning for each type of detectors
+  // static auto const & energyBin(dType const & type = "")
+  // {
+  //   auto const & it = energy_bins.find(type);
+  //   if (it != energy_bins.end()) return it->second;
+  //   else return energy_bins["default"];
+  // }
   
-  /// @brief Get the default energy (keV) bidimensionnal histogram binning for each type of detectors
-  static auto const & energyBidimBin(dType const & type = "")
-  {
-    auto const & it = energy_bidim_bins.find(type);
-    if (it != energy_bidim_bins.end()) return it->second;
-    else return energy_bidim_bins["default"];
-  }
+  // /// @brief Get the default energy (keV) bidimensionnal histogram binning for each type of detectors
+  // static auto const & energyBidimBin(dType const & type = "")
+  // {
+  //   auto const & it = energy_bidim_bins.find(type);
+  //   if (it != energy_bidim_bins.end()) return it->second;
+  //   else return energy_bidim_bins["default"];
+  // }
 
-  /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
-  static auto & getADCBin() {return ADC_bins;}
-  /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
-  static auto & getEnergyBin() {return energy_bins;}
-  /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
-  static auto & getBidimBin() {return energy_bidim_bins;}
+  // /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
+  // static auto & getADCBin() {return ADC_bins;}
+  // /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
+  // static auto & getEnergyBin() {return energy_bins;}
+  // /// @brief Get the default energy (keV) bidimensionnal histogram binning for all types of detectors
+  // static auto & getBidimBin() {return energy_bidim_bins;}
 
   /// @brief Prints out the list of labels
   // TODO : a more clever print with also the type and index
@@ -198,9 +199,9 @@ protected:
   std::unordered_map<dType, Label_vec> m_labels;
 
   // Binning informations :
-  static std::unordered_map<dType, THBinning> energy_bins;
-  static std::unordered_map<dType, THBinning> ADC_bins;
-  static std::unordered_map<dType, THBinning> energy_bidim_bins;
+  // static std::unordered_map<dType, THBinning> energy_bins;
+  // static std::unordered_map<dType, THBinning> ADC_bins;
+  // static std::unordered_map<dType, THBinning> energy_bidim_bins;
 
   public:
   
@@ -300,7 +301,7 @@ void Detectors::makeArrays()
   for (Label label = 0; label<this->size(); label++)
   {
     auto const & det_name = m_list[label];
-    std::istringstream is(replaceCharacter(det_name, '_', ' '));
+    std::istringstream is(replace_all(det_name, "_", " "));
     std::string str;
 
     // Looping through the subparts of the name "subpart_subpart_..._subpart"
@@ -363,7 +364,6 @@ void Detectors::makeArrays()
         isRing[label] = true;
       }
     }
-
     // Other lookup tables :
     isClover[label] = (label>22 && label<167);
     labelToClover[label] = uchar_cast((isClover[label]) ? (label-23)/6 : -1);
@@ -395,62 +395,62 @@ void Detectors::makeArrays()
   for (size_t index = 0; index<m_types_ID.size(); index++) m_types_index[m_types_ID[index]] = int_cast(index);
 }
 
-std::unordered_map<dType, THBinning> Detectors::ADC_bins = 
-{
-  {"ge"     , {10000, 0., 200000. }},
-  {"bgo"    , {1000 , 0., 200000. }},
-  {"labr"   , {2000 , 0., 200000. }},
-  {"paris"  , {2000 , 0., 200000. }},
-  {"eden"   , {1000 , 0., 200000. }},
-  {"dssd"   , {1000 , 0., 200000. }},
-  {"default", {10000, 0., 1000000.}}
-};
+// std::unordered_map<dType, THBinning> Detectors::ADC_bins = 
+// {
+//   {"ge"     , {10000, 0., 200000. }},
+//   {"bgo"    , {1000 , 0., 200000. }},
+//   {"labr"   , {2000 , 0., 200000. }},
+//   {"paris"  , {2000 , 0., 200000. }},
+//   {"eden"   , {1000 , 0., 200000. }},
+//   {"dssd"   , {1000 , 0., 200000. }},
+//   {"default", {10000, 0., 1000000.}}
+// };
 
-std::unordered_map<dType, THBinning> Detectors::energy_bins = 
-{
-  {"ge"     , {10000, 0., 10000.}},
-  {"bgo"    , {1000 , 0., 10000.}},
-  {"labr"   , {2000 , 0., 10000.}},
-  {"paris"  , {2000 , 0., 10000.}},
-  {"eden"   , {1000 ,-2., 2.    }},
-  {"dssd"   , {1000 , 0., 20000.}},
-  {"default", {1000 , 0., 50000.}}
-};
+// std::unordered_map<dType, THBinning> Detectors::energy_bins = 
+// {
+//   {"ge"     , {10000, 0., 10000.}},
+//   {"bgo"    , {1000 , 0., 10000.}},
+//   {"labr"   , {2000 , 0., 10000.}},
+//   {"paris"  , {2000 , 0., 10000.}},
+//   {"eden"   , {1000 ,-2., 2.    }},
+//   {"dssd"   , {1000 , 0., 20000.}},
+//   {"default", {1000 , 0., 50000.}}
+// };
 
-std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins = 
-{
-  {"ge"     , {5000, 0., 10000.}},
-  {"bgo"    , {250 , 0., 10000.}},
-  {"labr"   , {1000, 0., 10000.}},
-  {"paris"  , {1000, 0., 10000.}},
-  {"eden"   , {1000,-2., 2.    }},
-  {"dssd"   , {200 , 0., 20000.}},
-  {"default", {200 , 0., 20000.}}
-};
+// std::unordered_map<dType, THBinning> Detectors::energy_bidim_bins = 
+// {
+//   {"ge"     , {5000, 0., 10000.}},
+//   {"bgo"    , {250 , 0., 10000.}},
+//   {"labr"   , {1000, 0., 10000.}},
+//   {"paris"  , {1000, 0., 10000.}},
+//   {"eden"   , {1000,-2., 2.    }},
+//   {"dssd"   , {200 , 0., 20000.}},
+//   {"default", {200 , 0., 20000.}}
+// };
 
-std::map<Label, TH1F*> loadFormattedTH1F(TFile * file)
-{
-  if (!file || file->IsZombie()) throw_error(concatenate(file->GetName(), " can't be open !!"));
-  if(!detectors) throw_error(concatenate("As the histograms are labeled with names, one has to provide the correct index.list file !! ",
-                                        "Use parameter -i [filename] or detectors.load(filename)."));
-  std::map<Label, TH1F*> ret;
-  auto list_histo = get_TH1F_map(file);
-  // ret.reserve(list_histo.size()); // Might be unnecessary/dangerous optimisation
+// std::map<Label, TH1F*> loadFormattedTH1F(TFile * file)
+// {
+//   if (!file || file->IsZombie()) throw_error(concatenate(file->GetName(), " can't be open !!"));
+//   if(!detectors) throw_error(concatenate("As the histograms are labeled with names, one has to provide the correct index.list file !! ",
+//                                         "Use parameter -i [filename] or detectors.load(filename)."));
+//   std::map<Label, TH1F*> ret;
+//   auto list_histo = get_TH1F_map(file);
+//   // ret.reserve(list_histo.size()); // Might be unnecessary/dangerous optimisation
 
-  for (auto const & pair : list_histo)
-  {
-    std::string name = pair.first;
-    auto const & histo = pair.second;
-    Strings possible_additional_text = {"_adc", "_energy", "_calib", "_raw"};
-    for (auto const & text : possible_additional_text) remove(name, text);
-    if (found(detectors.names(), name))
-    {// Either the histogram label is already the label in int, or is the name of the detector
-      try                                 {ret.emplace(string_to<Label>(name), histo);}
-      catch(CastImpossible const & error) {ret.emplace(       detectors[name], histo);}
-    }
-  }
-  return ret;
-}
+//   for (auto const & pair : list_histo)
+//   {
+//     std::string name = pair.first;
+//     auto const & histo = pair.second;
+//     Strings possible_additional_text = {"_adc", "_energy", "_calib", "_raw"};
+//     for (auto const & text : possible_additional_text) remove(name, text);
+//     if (found(detectors.names(), name))
+//     {// Either the histogram label is already the label in int, or is the name of the detector
+//       try                                 {ret.emplace(string_to<Label>(name), histo);}
+//       catch(CastImpossible const & error) {ret.emplace(       detectors[name], histo);}
+//     }
+//   }
+//   return ret;
+// }
 
 
 #endif //DETECTORS_HPP

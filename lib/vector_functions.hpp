@@ -148,6 +148,9 @@ int first_index_in(std::vector<T> const & vec, T const & t)
   return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
 }
 
+//////////////
+// LINSPACE //
+//////////////
 
 template<class T>
 std::vector<T>& linspace(std::vector<T> & vec, size_t size, int begin = 0, int spacing = 1)
@@ -170,6 +173,46 @@ std::vector<T> linspace(size_t size, T begin = 0, T spacing = 1)
   std::vector<T> ret;
   linspace(ret, size, begin, spacing);
   return ret;
+}
+
+template<class T>
+std::vector<T> linspace_for(std::vector<T> const & values, T begin = 0, T spacing = 1)
+{
+  std::vector<T> ret;
+  linspace(ret, values.size(), begin, spacing);
+  return ret;
+}
+
+
+template<class T>
+auto c_linspace(std::vector<T> & vec, size_t size, int begin = 0, int spacing = 1)
+{
+  vec.clear(); vec.reserve(size);
+  for (size_t it = 0; it<size; ++it) vec.push_back(static_cast<T>(it * spacing + begin));
+  return vec.data();
+}
+
+auto c_linspace(std::vector<size_t> & vec, size_t size, size_t begin = 0, size_t spacing = 1)
+{
+  vec.clear(); vec.reserve(size);
+  for (size_t it = begin; it<size; ++it) vec.push_back(it*spacing);
+  return vec.data();
+}
+
+template<class T>
+auto c_linspace(size_t size, T begin = 0, T spacing = 1)
+{
+  std::vector<T> ret;
+  c_linspace(ret, size, begin, spacing);
+  return ret.data();
+}
+
+template<class T>
+auto c_linspace_for(std::vector<T> const & values, T begin = 0, T spacing = 1)
+{
+  std::vector<T> ret;
+  c_linspace(ret, values.size(), begin, spacing);
+  return ret.data();
 }
 
 template <typename T, size_t n>

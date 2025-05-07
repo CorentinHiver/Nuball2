@@ -295,6 +295,89 @@ constexpr inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
 ///@brief Check if the given double has integer precision
 bool is_int (double const & x) {return std::trunc(x) == x;}
 
+
+////////////////
+// CheckTypes //
+////////////////
+
+// Function template that checks if T is a floating-point type
+template <typename T, typename std::enable_if<std::is_floating_point<T>::value, bool>::type = true>
+inline constexpr bool is_floating() noexcept {
+    return true;
+}
+template <typename T, typename std::enable_if<std::is_floating_point<T>::value, bool>::type = true>
+inline bool is_floating(T const &) noexcept {
+    return true;
+}
+
+// Overload for non-floating-point types
+template <typename T, typename std::enable_if<!std::is_floating_point<T>::value, bool>::type = true>
+inline constexpr bool is_floating() noexcept {
+    return false;
+}
+template <typename T, typename std::enable_if<!std::is_floating_point<T>::value, bool>::type = true>
+inline bool is_floating(T const &) noexcept {
+    return false;
+}
+
+// Function template that checks if T is a signed type
+template <typename T, typename std::enable_if<std::is_signed<T>::value, bool>::type = true>
+inline constexpr bool is_signed() noexcept {
+    return true;
+}
+template <typename T, typename std::enable_if<std::is_signed<T>::value, bool>::type = true>
+inline bool is_signed(T const &) noexcept {
+    return true;
+}
+
+// Overload for unsigned types
+template <typename T, typename std::enable_if<std::is_unsigned<T>::value, bool>::type = true>
+inline constexpr bool is_signed() noexcept {
+    return false;
+}
+template <typename T, typename std::enable_if<std::is_unsigned<T>::value, bool>::type = true>
+inline bool is_signed(T const &) noexcept {
+    return false;
+}
+
+// Function template that checks if T is an unsigned type
+template <typename T, typename std::enable_if<std::is_unsigned<T>::value, bool>::type = true>
+inline constexpr bool is_unsigned() noexcept {
+    return true;
+}
+template <typename T, typename std::enable_if<std::is_unsigned<T>::value, bool>::type = true>
+inline bool is_unsigned(T const &) noexcept {
+    return true;
+}
+
+// Overload for signed types
+template <typename T, typename std::enable_if<std::is_signed<T>::value, bool>::type = true>
+inline constexpr bool is_unsigned() noexcept {
+    return false;
+}
+template <typename T, typename std::enable_if<std::is_signed<T>::value, bool>::type = true>
+inline bool is_unsigned(T const &) noexcept {
+    return false;
+}
+
+template <typename Ttest, typename T, typename std::enable_if<std::is_same<T, Ttest>::value, bool>::type = true>
+inline constexpr bool is_type_of() noexcept {
+    return true;
+}
+template <typename Ttest, typename T, typename std::enable_if<std::is_same<T, Ttest>::value, bool>::type = true>
+inline bool is_type_of(T const &) noexcept {
+    return true;
+}
+
+template <typename Ttest, typename T, typename std::enable_if<!std::is_same<T, Ttest>::value, bool>::type = true>
+inline constexpr bool is_type_of() noexcept {
+    return false;
+}
+template <typename Ttest, typename T, typename std::enable_if<!std::is_same<T, Ttest>::value, bool>::type = true>
+inline bool is_type_of(T const &) noexcept {
+    return false;
+}
+
 ////////////////////////
 // General converters //
 ////////////////////////

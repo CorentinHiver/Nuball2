@@ -7,17 +7,27 @@
 
 #include <algorithm>
 #include <dirent.h>
-#include <filesystem>
 #include <fstream>
 #include <glob.h>
 #include <iostream>
 #include <map>
-#if __cplusplus >= 201703L
-  namespace fs = std::filesystem;
-#else 
-  #warning ("In version of c++ < 17, '...' fold expression not defined, and <filesystem> not loaded. Some parts of the code might not behave as expected...")
-#endif // C++ 17
 
+#if __GNUC__ >= 9 // g++ version
+	#include <filesystem>
+  #if __cplusplus >= 201703L
+    #include <filesystem>
+    namespace fs = std::filesystem;
+  #else 
+    #warning ("In version of c++ < 17, '...' fold expression not defined, and <filesystem> not loaded. Some parts of the code might not behave as expected...")
+  #endif // C++ 17
+#else // __GNUC__ < 9 
+	#include <experimental/filesystem>
+  #if __cplusplus >= 201703L
+	  namespace fs = std::experimental::filesystem;
+  #else 
+    #warning ("In version of c++ < 17, '...' fold expression not defined, and <filesystem> not loaded. Some parts of the code might not behave as expected...")
+  #endif // C++ 17
+#endif
 //----------------------------------------------------//
 //       General files and folders manipulations      //
 //----------------------------------------------------//
@@ -112,7 +122,7 @@ bool folder_exists(std::string folderName, bool const & verbose)
 {
   push_back_if_none(folderName, '/');
   if (folder_exists(folderName)) return true;
-  if (verbose) std::cout << "Folder " << folderName << " not found..." << std::endl;
+  if (verbose) print("Folder ", folderName, " not found...");
   return false;
 }
 
@@ -200,7 +210,7 @@ std::vector<std::string> list_files_in_folder
   struct dirent *file = nullptr;
   DIR *dp = nullptr;
   dp = opendir(foldername.c_str());
-  if (dp == nullptr) {std::cout << "Folder " << foldername << " not found..." << std::endl; return ret;}
+  if (dp == nullptr) {print("Folder ", foldername, " not found..."); return ret;}
   std::string name = "";
   while ( (file = readdir(dp)))
   {
@@ -225,7 +235,7 @@ std::vector<std::string> list_file_names_in_folder
   struct dirent *file = nullptr;
   DIR *dp = nullptr;
   dp = opendir(foldername.c_str());
-  if (dp == nullptr) {std::cout << "Folder " << foldername << " not found..." << std::endl; return ret;}
+  if (dp == nullptr) {print("Folder ", foldername, " not found..."); return ret;}
   std::string name = "";
   while ( (file = readdir(dp)))
   {
@@ -414,10 +424,10 @@ private:
   std::string m_folder;
 };
 
-std::ostream& operator<<(std::ostream& cout, Folder const & folder)
+std::ostream& operator<<(std::ostream& out, Folder const & folder)
 {
-  cout << folder.string();
-  return cout;
+  out << folder.string();
+  return out;
 }
 
 // Folder operator+(std::string const & string, Folder const & folder) { return (string + folder.string());}
@@ -479,11 +489,11 @@ private:
   std::vector<Folder> m_folders;
 };
 
-std::ostream& operator<<(std::ostream& cout, Folders const & folders)
+std::ostream& operator<<(std::ostream& out, Folders const & folders)
 {
   auto const & vector = folders.get();
-  for (auto folder : vector) cout << folder << " ";
-  return cout;
+  for (auto folder : vector) out << folder << " ";
+  return out;
 }
 
 /**
@@ -642,10 +652,10 @@ private:
   Folders m_recursive_folders;
 };
 
-std::ostream& operator<<(std::ostream& cout, Path const & p)
+std::ostream& operator<<(std::ostream& out, Path const & p)
 {
-  cout << p.get();
-  return cout;
+  out << p.get();
+  return out;
 }
 
 /**
@@ -910,10 +920,10 @@ private:
 };
 std::string operator+(Path const & path, Filename const & filename) {return path.get() + filename.get();}
 
-std::ostream& operator<<(std::ostream& cout, File const & file)
+std::ostream& operator<<(std::ostream& out, File const & file)
 {
-  cout << file.get();
-  return cout;
+  out << file.get();
+  return out;
 }
 
 #endif //FILES_HPP

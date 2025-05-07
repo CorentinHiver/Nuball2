@@ -23,7 +23,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  * 
  * POSIX-based multithreading.
  * If you want to use the power of multithreading, this class can be convenient.
- * Please include this class before any other in order to activate multithreading additions in the rest of the library.
+ * Please include this class before any other from this library in order to activate multithreading additions.
  * 
  * First thing to do is to setup the number of threads then to Initialise them :
  * 
