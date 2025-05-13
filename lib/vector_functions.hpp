@@ -215,6 +215,36 @@ auto c_linspace_for(std::vector<T> const & values, T begin = 0, T spacing = 1)
   return ret.data();
 }
 
+
+// TODO : logspace, like linspace but logarithmic 
+// template<class T>
+// std::vector<T> logspace(std::vector<double> & vec, size_t size, T begin = 0, double power = 10)
+// {
+//   if (min <= 0) throw std::invalid_argument("min and max must be positive.");
+//   double factor = min; // Start with the initial minimum value
+  
+//   for (size_t i = 0; i < size; ++i) vec[i] = factor * std::pow(power, i);
+
+//   return vec;
+// }
+
+// template<class T>
+// std::vector<T> logspace(size_t size, T begin = 0, double power = 10)
+// {
+//   if (min <= 0) throw std::invalid_argument("min and max must be positive.");
+//   std::vector<double> ret(size);
+//   double factor = min; // Start with the initial minimum value
+  
+//   for (size_t i = 0; i < size; ++i) ret[i] = factor * std::pow(power, i);
+  
+//   return ret;
+// }
+
+// std::vector<double> log2space(size_t nb_bins, int min) {return logspace(nb_bins, min, 2);}
+// std::vector<double> log10space(size_t nb_bins, int min) {return logspace(nb_bins, min, 10);}
+
+
+
 template <typename T, size_t n>
 constexpr T maximum(std::array<T, n> const & array)
 {

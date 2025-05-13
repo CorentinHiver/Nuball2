@@ -2,7 +2,8 @@
 #define MULTITHIST_HPP
 // #define MULTITHIST_MONO Not tested !!
 #include "MTObject.hpp"
-#include "../libRoot.hpp"
+#include "../libCo.hpp"
+#include "TFile.h"
 
 /**
  * @brief Multithreading wrapper for all THist spectra of root library
@@ -318,7 +319,6 @@ public:
   auto & mutex() {return m_mutex;}
 
 private:
-
 
   std::string m_comment;
   std::string m_name   ;

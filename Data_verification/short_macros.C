@@ -49,22 +49,18 @@ void short_macros(int choice = 1)
     // Second macro : test fourrier transform cutoff (may be used to compress histograms)
     auto d2 = file->Get<TH2F>("dp_p");
     auto d1 = d2->ProjectionX("test",640,644);
-    auto d = CoAnalyse::sub_histo(d1, 600, 1600);
-    print("coucou0");
+    auto d = CoAnalyse::subHisto(d1, 600, 1600);
     // auto d = file->Get<TH1F>("d");
     // Fourrier transform of a spectrum
     int n = d->GetNbinsX();
     Double_t *mydata = new Double_t[n];
-    print("coucou1");
     for (Int_t i = 0; i < n; i++) {mydata[i] =d->GetBinContent(i+1);}
     TVirtualFFT *fft = TVirtualFFT::FFT(1, &n, "R2C M");
     fft->SetPoints(mydata);
     fft->Transform();
     TH1 *output = 0;
-    print("coucou2");
     output = TH1::TransformHisto(fft, output, "RE");
     output->Draw();
-    print("coucou3");
     // Remove low_frequency :
     // for (Int_t i = 0; i < 10; i++) {output -> SetBinContent(i+1, 0);}
     // for (Int_t i = 0; i < 10; i++) {output -> SetBinContent(10000-i, 0);}
@@ -72,31 +68,25 @@ void short_macros(int choice = 1)
     double *im = new double[n];
     fft->GetPointsComplex(re, im);
     
-    print("coucou4");
     size_t k_cutoff_high = 85; // %
     size_t k_cutoff_low = 0; // %
     for (size_t i = 0; i < size_cast(k_cutoff_high*n/100.); i++) {re[n-i-1] = 0;im[n-i-1] = 0;}
     for (size_t i = 0; i < size_cast(k_cutoff_low*n/100.) ; i++) {re[i  ] = 0;im[i  ] = 0;}
     
-    print("coucou5");
     // Inverse :
     TVirtualFFT *ifft = TVirtualFFT::FFT(1, &n, "C2R M"); // Complex-to-Real
     ifft->SetPointsComplex(re, im);
     ifft->Transform();
-    print("coucou6");
     
     double *filtered_data = new double[n];
     ifft->GetPoints(filtered_data);
     // Normalize the result correctly
-    print("coucou6");
     for (size_t i = 0; i < n; i++) {filtered_data[i] /= n;}
     TH1F *h_filtered = new TH1F("filtered_spectrum", "Filtered Gamma Spectrum", n, d->GetXaxis()->GetXmin(), d->GetXaxis()->GetXmax());
     for (size_t i = 0; i < n; i++) {h_filtered->SetBinContent(i + 1, filtered_data[i]);} // Normalize
     h_filtered->Draw();
-    print("coucou7");
     d->Draw("same");
     h_filtered->SetLineColor(kBlack);
-    print("coucou8");
     d->SetLineColor(kRed);
     // SubInteger(d, h_filtered)->Draw();
   }
@@ -117,6 +107,28 @@ void short_macros(int choice = 1)
     auto pp990 = dpp_236U->ProjectionX("pp990",989,991);
     pp1181->Draw();
     auto cpk_pp1181 = CoAnalyse::counts_per_keV(pp1181, 10);
-    cpk_pp1181    
+    // cpk_pp1181    
+  }
+  else if (choice == 3)
+  {
+    auto dd_p = file->Get<TH2F>("dd_p");
+    auto dd_p_prompt_veto = file->Get<TH2F>("dd_p_prompt_veto");
+    auto dd_p_veto_clean = CoLib::removeVeto(dd_p, dd_p_prompt_veto, 505, 515);
+    auto d642 = dd_p_veto_clean->ProjectionX("d642", 641, 644);
+    CoAnalyse::removeBackground(d642, 15);
+    auto nndc = dynamic_cast<TH1D*>(d642->Clone("nndc"));
+    for (int i = 0; i<nndc->GetNbinsX(); ++i) nndc->SetBinContent(i, 0);
+    CoLib::simulate_peak(nndc, 103.4, 2, 88   );
+    CoLib::simulate_peak(nndc, 204.6, 2, 1800 );
+    CoLib::simulate_peak(nndc, 243.6, 2, 21   );
+    CoLib::simulate_peak(nndc, 300  , 2, 255  );
+    CoLib::simulate_peak(nndc, 308  , 2, 67   );
+    CoLib::shiftX(d642, -1);
+    d642->GetXaxis()->SetRangeUser(0, 500);
+    d642->SetTitle("gate 642 keV");
+    d642->Draw();
+    nndc->SetLineColor(kRed);
+    nndc->SetTitle("NNDC expectations");
+    nndc->Draw("same");
   }
 }

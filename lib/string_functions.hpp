@@ -211,6 +211,21 @@ void replace_all(std::string & string, std::string const & substr_init, std::str
   }
 }
 
+std::string mergeStrings(std::vector<std::string> const & strings, std::string const & sep = "")
+{
+  std::string ret;
+  for (auto const & str : strings) ret += str + sep;
+  return removeLastPart(ret, sep); // Remove the last sep
+}
+
+template<class T>
+std::string mergeStrings(std::vector<T> const & strings, std::string const & sep = "")
+{
+  std::string ret;
+  for (auto const & str : strings) ret += std::to_string(str) + sep;
+  return removeLastPart(ret, sep); // Remove the last sep
+}
+
 /**
  * @brief Convert i_th first arguments of argv into a string (), by default starting at the first 
  * @attention argv MUST be null-terminated

@@ -172,7 +172,7 @@ CloversV2& CloversV2::operator=(Event const & event)
 
 bool CloversV2::fill(Event const & event, int const & hit_i)
 {
-  if (m_analyzed) throw_error("CloversV2::fill() called while already m_analyzed, you need to CloversV2::reset() first");
+  if (m_analyzed) throw_error("CloversV2::fill() called while already analyzed, you need to CloversV2::reset() first");
   auto const & label = event.labels[hit_i];
 
   if (isClover(label))

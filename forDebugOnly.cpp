@@ -1,10 +1,15 @@
 #define DEVCO
-#include "lib/libRoot.hpp"
-#include "lib/Classes/FilesManager.hpp"
-#include "lib/Analyse/SpectraAlignator.hpp"
+// #include "lib/libRoot.hpp"
+// #include "lib/Classes/FilesManager.hpp"
+// #include "lib/Analyse/SpectraAlignator.hpp"
+// #include "lib/MTObjects/MultiHist.hpp"
+// #include "lib/libRoot.hpp"
+#include "lib/libRootHeader.hpp"
+// #include  "lib/Modules/CoRadware.hpp"
 
 int main()
 {
+  // print(CoLib::typeRoot<float>());
   // auto fileRef = TFile::Open("136/calibrate_2025/histos/run_76.root", "READ"); fileRef->cd();
   // auto histoRef = fileRef->Get<TH1F>("PARIS_FR1D5");
 

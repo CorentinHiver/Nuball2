@@ -56,9 +56,9 @@
 // Versions aliasing //
 ///////////////////////
 
+#define Cpp20 (__cplusplus >= 202002L)
 #define Cpp17 (__cplusplus >= 201702L)
 #define Cpp14 (__cplusplus >= 201402L)
-
 
 ////////////////////////////
 // Some specialized print //
@@ -147,7 +147,7 @@ std::string time_string()
 }
 
 /// @brief Returns a string in the format yy_mm_dd_hh_mm
-std::string time_string_inverse()
+std::string time_string_fr()
 {
   std::time_t currentTime = std::time(nullptr);
   std::tm* timeInfo = std::localtime(&currentTime);
@@ -378,10 +378,11 @@ inline bool is_type_of(T const &) noexcept {
     return false;
 }
 
-////////////////////////
-// General converters //
-////////////////////////
+/////////////
+//  CASTS  //
+/////////////
 
+/// @brief Error to throw when a cast was not successful
 class CastImpossible {
 public:
   CastImpossible() noexcept = default;
@@ -545,21 +546,6 @@ std::ostream& operator<<(std::ostream& cout, Bools const & bools)
 
 using Strings = std::vector<std::string>;
 using Ints = std::vector<int>;
-
-std::string mergeStrings(Strings const & strings, std::string const & sep = "")
-{
-  std::string ret;
-  for (auto const & str : strings) ret += str + sep;
-  return removeLastPart(ret, sep); // Remove the last sep
-}
-
-template<class T>
-std::string mergeStrings(std::vector<T> const & strings, std::string const & sep = "")
-{
-  std::string ret;
-  for (auto const & str : strings) ret += std::to_string(str) + sep;
-  return removeLastPart(ret, sep); // Remove the last sep
-}
 
 template<typename T>
 struct is_container {

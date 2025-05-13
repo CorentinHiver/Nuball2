@@ -13,10 +13,11 @@
 
 float smear(float const & nrj, TRandom* random)
 {
-  return random->Gaus(nrj,nrj*((300.0/sqrt(nrj))/100.0)/2.35);
+  return random->Gaus(nrj, nrj*((300.0/sqrt(nrj))/100.0)/2.35);
 }
 
 constexpr static bool kCalibGe = false;
+constexpr static double E_gate_length = 2;
 
 static std::vector<Label> blacklist = {501};
 
@@ -38,15 +39,7 @@ void test1(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
 
   detectors.load("../136/index_129.list");
 
-  bool make_triple_coinc_ddd = false;
-  bool make_triple_coinc_dpp = false;
-  bool make_triple_coinc_ppp = false;
-  bool bidim_by_run = false;
-
   // If too much bidims, need to reduce the number of threads (hardcode!)
-  if (make_triple_coinc_ddd || make_triple_coinc_dpp || make_triple_coinc_ppp) nb_threads = std::min(8, nb_threads);
-  if (bidim_by_run) nb_threads =  std::min(5, nb_threads);
-
   Timer timer;
   std::atomic<int> files_total_size(0);
   std::atomic<int> total_evts_number(0);
@@ -61,55 +54,6 @@ void test1(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
 
   // std::mutex init_mutex;
   std::mutex write_mutex;
-
-  static constexpr Time bidimTimeWindow = 40_ns;
-
-  static constexpr size_t gate_bin_size = 2; // Take 2 keV
-  static constexpr std::array<int, 25> ddd_gates = {99, 104, 205, 222, 244, 279, 301, 309, 642, 688, 699, 873, 885, 903, 912, 921, 942, 958, 966, 991, 1750, 1836, 1846, 2115, 2125}; // keV
-  static constexpr std::array<int, 25> dpp_gates = {99, 104, 205, 222, 244, 279, 301, 309, 352, 642, 688, 699, 873, 903, 912, 921, 942, 958, 966, 991, 1750, 1836, 1846, 2115, 2125}; // keV
-  static constexpr std::array<int, 16> ppp_gates = {99, 104, 205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
-
-  static auto constexpr ddd_gate_bin_max = maximum(ddd_gates)+gate_bin_size+1;
-  static auto constexpr ddd_gate_lookup = LUT<ddd_gate_bin_max> ([](int bin){
-    for (auto const & gate : ddd_gates) if (abs_const(gate-bin)<3) return true;
-    return false;
-  });
-  static auto constexpr ddd_id_gate_lkp = LUT<ddd_gate_bin_max> ([&](int bin){
-    if (ddd_gate_lookup[bin])
-    {
-      for (size_t i = 0; i<ddd_gates.size(); ++i) if (abs_const(ddd_gates[i] - bin)<3) return int(i);
-      return 0;
-    }
-    else return 0;
-  });
-  
-  static auto constexpr dpp_gate_bin_max = maximum(dpp_gates)+gate_bin_size+1;
-  static auto constexpr dpp_gate_lookup = LUT<dpp_gate_bin_max> ([](int bin){
-    for (auto const & gate : dpp_gates) if (abs_const(gate-bin)<3) return true;
-    return false;
-  });
-  static auto constexpr dpp_id_gate_lkp = LUT<dpp_gate_bin_max> ([&](int bin){
-    if (dpp_gate_lookup[bin])
-    {
-      for (size_t i = 0; i<dpp_gates.size(); ++i) if (abs_const(dpp_gates[i] - bin)<3) return int(i);
-      return 0;
-    }
-    else return 0;
-  });
-
-  static auto constexpr ppp_gate_bin_max = maximum(ppp_gates)+gate_bin_size+1;
-  static auto constexpr ppp_gate_lookup = LUT<ppp_gate_bin_max> ([](int bin){
-    for (auto const & gate : ppp_gates) if (abs_const(gate-bin)<3) return true;
-    return false;
-  });
-  static auto constexpr ppp_id_gate_lkp = LUT<ppp_gate_bin_max> ([&](int bin){
-    if (ppp_gate_lookup[bin])
-    {
-      for (size_t i = 0; i<ppp_gates.size(); ++i) if (abs_const(ppp_gates[i] - bin)<3) return int(i);
-      return 0;
-    }
-    else return 0;
-  });
 
   std::vector<double> run_times(200,0);
   
@@ -139,28 +83,40 @@ void test1(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
       int nb_bins_Ge_bidim = 4096;
       double max_bin_Ge_bidim = 4096;
 
-      unique_TH1F Te134_IYR (new TH1F(("Te134_IYR_"+thread_i_str).c_str(), "Te134_IYR", 1000, -500_ns, 500_ns));
+      
+      static const std::unordered_map<std::string, std::pair<double, double>> coinc_isotopes = {
+        {"97ZR", {162, 1103}},
+        {"Te132", {697, 974}},
+        {"Te133", {126, 1151}},
+        {"Te134", {297, 1279}}
+      };
+
+      std::unordered_map<std::string, unique_TH1F> time_coincs; 
+      std::unordered_map<std::string, unique_TH1F> IYRs;   
+      std::unordered_map<std::string, unique_TH2F> HigherE_coinc_E_VS_time;  
+      std::unordered_map<std::string, unique_TH2F> LowerE_coinc_E_VS_time;  
+
+      for (auto const & it : coinc_isotopes)
+      {
+        auto const & name = it.first;
+        auto const & energies = it.second;
+        time_coincs.emplace(name, new TH1F((name+"_coinc_"+thread_i_str).c_str(), "Zr97_coinc", 1000, -500_ns, 500_ns));
+        IYRs.emplace(name, new TH1F((name+"_IYR_"+thread_i_str).c_str(), "Zr97_IYR", 1000, -500_ns, 500_ns));
+        LowerE_coinc_E_VS_time.emplace(name, new TH2F((name+"_"+std::to_string(int(energies.first))+"_coinc_E_VS_time_"+thread_i_str).c_str(), "Zr97_1279coin_VS_time", 
+          1000,-500_ns,500_ns, 4000,0,4000));
+        HigherE_coinc_E_VS_time.emplace(name, new TH2F((name+"_"+std::to_string(int(energies.second))+"_coinc_E_VS_time_"+thread_i_str).c_str(), "Zr97_1279coin_VS_time", 
+          1000,-500_ns,500_ns, 4000,0,4000));
+      }
 
       std::string outFolder = "data/"+trigger+"/"+target+"/";
       Path::make(outFolder);
-      std::string out_filename = outFolder+filename+"_iyr";
+      std::string out_filename = outFolder+filename;
       print(out_filename);
 
       Event event;
       event.reading(tree, "mltTEQ");
 
-      CloversV2 pclovers;
-      CloversV2 dclovers;
-
-      // CloversV2 pclovers_raw;
-      // CloversV2 dclovers_raw;
-
-      // CloversV2 last_prompt_clovers;
-      // CloversV2 last_delayed_clovers;
-
-      SimpleParis pparis(&calibPhoswitches);
-      SimpleParis nparis(&calibPhoswitches);
-      SimpleParis dparis(&calibPhoswitches);
+      CloversV2 clovers;
 
       // Handle the first hit : 
       int evt_i = 0;
@@ -175,96 +131,19 @@ void test1(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
 
         tree->GetEntry(evt_i);
 
-        // pclovers_raw.clear();
-        // dclovers_raw.clear();
-
-        pclovers.clear();
-        dclovers.clear();
-
-        pparis.clear();
-        nparis.clear();
-        dparis.clear();
-
-        auto const absolute_time_h = double_cast(event.stamp)*1.e-12/3600.;
-        // timestamp_hist_VS_run->Fill(absolute_time_h, run_number);
+        clovers.clear();
 
         for (int hit_i = 0; hit_i < event.mult; hit_i++)
         {
-          auto const & label = event.labels[hit_i];
-          auto const & time =  event.times[hit_i];
-          auto const & nrj = event.nrjs[hit_i];
-          auto const & nrj2 = event.nrj2s[hit_i];
-
-          if (nrj<20_keV) continue;
+          auto const & label = event[hit_i].label;
+          auto const & time = event[hit_i].time;
+          if (event[hit_i].nrj < 20_keV) continue;
 
           // Remove bad Ge and overflow :
-          //  if ((find_key(CloversV2::maxE_Ge, label) && nrj>CloversV2::maxE_Ge.at(label))) continue;
           if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
           if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
 
-          auto const & det_name = detectors[label]; 
-          if (bidim_by_run && !(Paris::is[label] && !Paris::pid_LaBr3(nrj,nrj2)))
-          {
-            // E_vs_run[det_name]->Fill(run_number, nrj);
-            // T_vs_run[det_name]->Fill(run_number, time);
-          }
-
-          if (label == 252)
-          {
-            // Fatima_E_dT->Fill(time, nrj);
-          }
-
-          // Paris :
-          if (Paris::is[label])
-          {
-            if (found(blacklist, label)) continue;
-            // if (Paris::pid_LaBr3(nrj, nrj2)) E_dT_phoswitch->Fill(time, nrj);
-            // else if (Paris::pid_good_phoswitch(nrj, nrj2)) E_dT_phoswitch->Fill(time, calibPhoswitches.calibrate(label, nrj, nrj2));
-            // short_over_long_VS_time->Fill(time, nrj/nrj2);
-            if (gate(-5_ns, time, 5_ns))
-            {
-              // short_vs_long_prompt->Fill(nrj, nrj2); 
-              pparis.fill(event, hit_i);
-            }
-            else if (gate(5_ns, time, 40_ns))
-            {
-              // neutron_hit_pattern->Fill(label);
-              nparis.fill(event, hit_i);
-            }
-            else if (gate(40_ns, time, 170_ns))
-            {
-              // short_vs_long_delayed->Fill(nrj, nrj2);
-              dparis.fill(event, hit_i);
-            }
-          }
-
-          // Clovers:
-          if (gate(-20_ns, time, 20_ns) )
-          {
-            if (CloversV2::isBGO(label)) prompt_clover_calo += nrj ;
-            else if (CloversV2::isGe(label)) 
-            {
-              if (CloversIsBlacklist[label]) continue;
-              // pclovers_raw.fill(event, hit_i);
-              // Apply the run by run correction
-              // if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
-              if (!gate(505_keV, nrj, 515_keV)) prompt_clover_calo += smear(nrj, random);
-            }
-            pclovers.fill(event, hit_i);
-          }
-          else if (gate(20_ns, time, 40_ns))
-          {
-            if (CloversIsBlacklist[label]) continue;
-            // if (kCalibGe && CloversV2::isGe(label)) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
-            // n->Fill(nrj);
-          }
-          else if (gate(40_ns, time, 170_ns) )
-          {
-            if (CloversIsBlacklist[label]) continue;
-            // dclovers_raw.fill(event, hit_i);
-            // if (kCalibGe && CloversV2::isGe(label)) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
-            dclovers.fill(event, hit_i);
-          }
+          clovers.fill(event, hit_i);
 
         }// End hits loop
       
@@ -272,65 +151,83 @@ void test1(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
         // Analyse  //
         //////////////
 
-
         // First step, perform add-back and compton suppression :
-        pclovers.analyze();
-        dclovers.analyze();
-        // pclovers_raw.analyze();
-        // dclovers_raw.analyze();
-        pparis.analyze();
-        nparis.analyze();
-        dparis.analyze();
+        clovers.analyze();
 
-        // -- Multiplicity -- //
-        auto const & pcloverM = pclovers.all.size();
-        auto const & pparisM = pparis.module_mult();
-        auto const & PM = pcloverM + pparisM;
+        if (clovers.clean.size() < 3) continue;
 
-        auto const & dcloverM = dclovers.all.size();
-        auto const & dparisM = dparis.module_mult();
-        auto const & DM_raw = dcloverM + dparisM;
-
-        for (size_t loop_i = 0; loop_i<pclovers.GeClean_id.size(); ++loop_i)
+        auto fillHistos = [&](std::string const & name, CloverModule const & clover_lowE, CloverModule const & clover_highE)
         {
-          auto const & index_i = pclovers.GeClean_id[loop_i];
-          auto const & clover_i = pclovers[index_i];
+          time_coincs.at(name) -> Fill(clover_lowE .time - clover_highE.time);
+          time_coincs.at(name) -> Fill(clover_highE.time - clover_lowE .time);
 
-          // Prompt-prompt :
-          for (size_t loop_j = loop_i+1; loop_j<pclovers.GeClean_id.size(); ++loop_j)
+          IYRs.at(name) -> Fill(clover_lowE .time);
+          IYRs.at(name) -> Fill(clover_highE.time);
+
+        };
+
+        for (size_t loop_i = 0; loop_i<clovers.GeClean_id.size(); ++loop_i)
+        {
+          auto const & index_i = clovers.GeClean_id[loop_i];
+          auto const & clover_i = clovers[index_i];   
+
+          for (auto const & coinc_isotope : coinc_isotopes)
           {
-            auto const & clover_j = pclovers[pclovers.GeClean_id[loop_j]];
+            auto const & name = coinc_isotope.first;
+            auto const & low_energy = coinc_isotope.second.first;
+            auto const & high_energy = coinc_isotope.second.second;
+            if (gate(low_energy-E_gate_length, clover_i.nrj, low_energy+E_gate_length))
+            {
+              for (size_t loop_j = loop_i+1; loop_j<clovers.GeClean_id.size(); ++loop_j)
+              {
+                auto const & clover_j = clovers[clovers.GeClean_id[loop_j]];
 
-            if (gate(295., clover_i.nrj, 300.) && gate(1277., clover_j.nrj, 1281.))
-              Te134_IYR->Fill(clover_i.time - clover_j.time);
-            else if (gate(295., clover_j.nrj, 300.) && gate(1277., clover_i.nrj, 1281.))
-              Te134_IYR->Fill(clover_j.time - clover_i.time);
+                LowerE_coinc_E_VS_time .at(name) -> Fill(clover_j.time, clover_j.nrj);
+
+                if (gate(high_energy-E_gate_length, clover_j.nrj, high_energy+E_gate_length)) 
+                  fillHistos(name, clover_i, clover_j);
+              }
+            }
+            else if (gate(high_energy-E_gate_length, clover_i.nrj, high_energy+E_gate_length))
+            {
+              for (size_t loop_j = loop_i+1; loop_j<clovers.GeClean_id.size(); ++loop_j)
+              {
+                auto const & clover_j = clovers[clovers.GeClean_id[loop_j]];
+
+                HigherE_coinc_E_VS_time.at(name) -> Fill(clover_j.time, clover_j.nrj);
+
+                if (gate(low_energy-E_gate_length, clover_j.nrj, low_energy+E_gate_length))
+                  fillHistos(name, clover_j, clover_i);
+              }
+            }
           }
         }
       }
       total_evts_number.fetch_add(evt_i, std::memory_order_relaxed);
         
-        // Handle last hit :
-        auto const & timestamp_final = event.stamp;
-        double run_duration_s = Time_cast(timestamp_final-timestamp_init)*1E-12;
-  
-        // Writing the file (the mutex protects potential concurency issues)
-        lock_mutex lock(write_mutex);
-        time_runs[run_number] = run_duration_s;
-  
-        print("run of", nicer_seconds(run_duration_s));
-  
-        total_time_of_beam_s+=run_duration_s;
-        File Filename(out_filename); Filename.makePath();
-        print("writing spectra in", out_filename, "...");
-  
-        print("Calculate additionnal spectra :");
-        
-        std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(), "recreate"));
-          file->cd();
-          Te134_IYR->Write("d_calo_p", TObject::kOverwrite);
-        file->Close();
-        print(out_filename, "written");
+      // Handle last hit :
+      auto const & timestamp_final = event.stamp;
+      double run_duration_s = Time_cast(timestamp_final-timestamp_init)*1E-12;
+
+      // Writing the file (the mutex protects potential concurency issues)
+      lock_mutex lock(write_mutex);
+      time_runs[run_number] = run_duration_s;
+
+      print("run of", nicer_seconds(run_duration_s));
+
+      total_time_of_beam_s+=run_duration_s;
+      File Filename(out_filename); Filename.makePath();
+      print("writing spectra in", out_filename, "...");
+      
+      std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(), "recreate")); file->cd();
+
+        for (auto & it : time_coincs              ) it.second->Write();
+        for (auto & it : IYRs                     ) it.second->Write();
+        for (auto & it : HigherE_coinc_E_VS_time  ) it.second->Write();
+        for (auto & it : LowerE_coinc_E_VS_time   ) it.second->Write();
+      
+      file->Close();
+      print(out_filename, "written");
     };
   });
 
@@ -353,25 +250,20 @@ void test1(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
     print(command);
     gSystem->Exec(command.c_str());
 
-  //   print("Calculate additionnal spectra :");
-
-  //   auto f = TFile::Open(dest.c_str(), "update");
-
-  //   auto dd_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd"))->Clone("dd_clean"));
-  //   CoLib::removeVeto(dd_clean, dd_prompt_veto.get(), 501, 521);
-  //   dd_clean->Write();
-
-  //   auto dd_p_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd_p"))->Clone("dd_p_clean"));
-  //   CoLib::removeVeto(dd_p_clean, dd_p_prompt_veto.get(), 501, 521);
-  //   dd_p_clean->Write();
-
-  //   // Calculate the prompt-delayed background : //TODO
-  //   // auto dp_pv = static_cast<TH2F*>(f->Get("dp_prompt_veto"));
-  //   // auto proj_p_pv = dp_bckg->ProjectionX(); // Projection on prompt
-  //   // auto proj_pv = dp->ProjectionY();
-  //   // auto test = removeVeto(dp, (TH1F*)proj_p, (TH1F*)proj_d, 505,515);
-  //   // test->Draw();
-  //   // auto dp_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dp"))->Clone("dp_clean"));
   }
   print("analysis time :", timer());
 }
+
+int main(int argc, char** argv)
+{
+       if (argc == 1) test1();
+  else if (argc == 2) test1(std::stoi(argv[1]));
+  else if (argc == 3) test1(std::stoi(argv[1]), std::stod(argv[2]));
+  else if (argc == 4) test1(std::stoi(argv[1]), std::stod(argv[2]), std::stoi(argv[3]));
+  else error("invalid arguments");
+
+  return 1;
+}
+
+// g++ -g -o exec test1.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
+// g++ -O2 -o exec test1.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17
