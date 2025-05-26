@@ -2512,6 +2512,18 @@ namespace CoLib
       auto histos = CoLib::Pad::get_histos(pad);
       for (auto & histo : histos) histo->SetTitle(histo->GetName());
     }
+    
+    void remove_background(TPad* pad = nullptr, int nb_it = 15)
+    {
+      if (!pad)
+      {
+        pad = (TPad*)gPad;
+        if (!pad) {error("no pad"); return;}
+      }
+      auto histos = CoLib::Pad::get_histos<TH1>(pad);
+      for (auto & histo : histos) CoLib::removeBackground(histo, nb_it);
+      gPad->Update();
+    }
   
     void remove_stats(TPad * pad = nullptr)
     {
@@ -3337,7 +3349,7 @@ namespace CoLib
 
         // Configure output file
         std::string output_name = target+"_"+std::to_string(outfile_i)+".root";
-        std::string command = "hadd " + options + " " + output_name + " " + strings(files);
+        std::string command = "hadd " + options + " " + output_name + " " + mergeStrings(files);
         // print(command);
         system(command.c_str());
       }

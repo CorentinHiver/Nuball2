@@ -308,70 +308,104 @@ bool is_good(std::vector<T> const & vector)
   return true;
 }
 
-std::string strings(std::vector<std::string> const & vec, std::string const & sep = " ")
+namespace CoLib
 {
-  std::ostringstream oss;
-  for (size_t i = 0; i < vec.size(); ++i) 
+  /// @brief Order the vector from lower to higher value
+  /// @tparam T must have operator< overloaded if user defined class 
+  template <typename T>
+  std::vector<size_t> & bubble_sort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
   {
-    oss << vec[i];
-    if (i != vec.size() - 1) oss << sep;
-  }
-  return oss.str();
-}
-
-/// @brief Order the vector from lower to higher value
-template <typename T>
-std::vector<size_t> & bubble_sort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
-{
-  // Verifications :
-  if (vector.size() == 0) {printC(CoLib::Color::RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", CoLib::Color::RESET); return ordered_indexes;}
-  if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());
-
-  // Initializations :
-  T v = vector[0];
-  ordered_indexes[0] = 0;
-  size_t j = 0;
-
-  // Loop through the vector :
-  for (size_t i = 0;i<vector.size(); i++)
-  {
-    // Initial guess : the ith ordered_indexes's index corresponds to the vector's ith index 
-    // (e.g. the 5th bin has initial value 5 (ordered_indexes[5] = 5))
-    ordered_indexes[i] = i;
-
-    // Check this assumption : v holds the value of ith value of vector
-    v = vector[i];
-
-    // Find the true jth index of the ith vector's index
-    j = i;
-
-    // Loop goes on until the (j-1)th vector's value is lower than the ith value
-    while((j>0) && vector[ordered_indexes[j-1]] > v)
+    // Verifications :
+    if (vector.size() == 0) {printC(CoLib::Color::RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", CoLib::Color::RESET); return ordered_indexes;}
+    if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());
+  
+    // Initializations :
+    T v = vector[0];
+    ordered_indexes[0] = 0;
+    size_t j = 0;
+  
+    // Loop through the vector :
+    for (size_t i = 0;i<vector.size(); i++)
     {
-      // If the (j-1)th value is higher than the ith value then switch the indexes.
-      ordered_indexes[j] = ordered_indexes[j-1];
-      --j;
+      // Initial guess : the ith ordered_indexes's index corresponds to the vector's ith index 
+      // (e.g. the 5th bin has initial value 5 (ordered_indexes[5] = 5))
+      ordered_indexes[i] = i;
+  
+      // Check this assumption : v holds the value of ith value of vector
+      v = vector[i];
+  
+      // Find the true jth index of the ith vector's index
+      j = i;
+  
+      // Loop goes on until the (j-1)th vector's value is lower than the ith value
+      while((j>0) && vector[ordered_indexes[j-1]] > v)
+      {
+        // If the (j-1)th value is higher than the ith value then switch the indexes.
+        ordered_indexes[j] = ordered_indexes[j-1];
+        --j;
+      }
+  
+      // Save the correct position of the index
+      ordered_indexes[j] = i;
     }
-
-    // Save the correct position of the index
-    ordered_indexes[j] = i;
+  
+    // Note that this method is iterative : if the 1st value is higher than the 2nd,
+    // ordered_index[0] = 1 and ordered_index[1] = 0. If now the 3rd value is higher than 
+    // the 2nd but lower than the 1st (for i = 2), vector[ordered_index[1]] > v
+    // but vector[ordered_index[0]] < v : the result is indeed {1, 2, 0}
+  
+    return ordered_indexes;
+  }
+  
+  /// @brief Order the vector from lower to higher value
+  /// @tparam T must have operator< overloaded if user defined class 
+  template <class T>
+  std::vector<size_t> bubble_sort(std::vector<T> const & vector)
+  {
+    std::vector<size_t> ordered_indexes(vector.size());
+    bubble_sort(vector, ordered_indexes);
+    return ordered_indexes;
   }
 
-  // Note that this method is iterative : if the 1st value is higher than the 2nd,
-  // ordered_index[0] = 1 and ordered_index[1] = 0. If now the 3rd value is higher than 
-  // the 2nd but lower than the 1st (for i = 2), vector[ordered_index[1]] > v
-  // but vector[ordered_index[0]] < v : the result is indeed {1, 2, 0}
+  /// @brief Order the vector from lower to higher value using various methods
+  /// @param method: so far, only default "bubble" method is implemented, using CoLib::bubble_sort
+  /// @tparam T must have operator< overloaded if user defined class 
+  template <class T>
+  std::vector<T>& sort(std::vector<T> & vector, std::string method = "bubble")
+  {
+    if (method == "bubble")
+    {
+      auto const & sorted_indices = CoLib::bubble_sort(vector);
+      std::vector<T> buff = vector;
+      vector.clear();
+      for (auto const & id : sorted_indices) vector.push_back(buff[id]);
+      return vector;
+    }
+    else error("sorting method", method, "unkown...");
+    return vector;
+  }
 
-  return ordered_indexes;
-}
+  /// @brief Fills vector to_fill with ordered elements from vector fill_from
+  /// @tparam T must have operator< overloaded if user defined class 
+  template <class T>
+  std::vector<T>& fill_sorted(std::vector<T> & to_fill, std::vector<T> const & fill_from)
+  {
+    auto const & sorted_indices = CoLib::bubble_sort(fill_from);
+    int to_fill_it = 0;
+    for (auto const & id : sorted_indices)
+    {
+      auto & e = fill_from[id];
+      if (to_fill_it<to_fill.size()) for (;to_fill_it < to_fill.size(); ++to_fill_it)
+      {
+        if (e > to_fill[to_fill_it]) to_fill.insert(to_fill.begin()+to_fill_it, e);
+        break;
+      }
+      else to_fill.push_back(e);
+    }
+    return to_fill;
+  }
 
-/// @brief Order the vector from lower to higher value
-template <class T>
-std::vector<size_t> bubble_sort(std::vector<T> const & vector)
-{
-  std::vector<size_t> ordered_indexes(vector.size());
-  bubble_sort(vector, ordered_indexes);
-  return ordered_indexes;
+  // Coder la memem chose pour un deque car c'est plus efficace !
 }
 
 template <class T>

@@ -45,7 +45,7 @@ namespace CoLib
   }
 }
 
-#ifndef MULTITHREADING
+#ifndef COMULTITHREADING
 
 /// @brief New line
 void print() {std::cout << std::endl;}
@@ -115,7 +115,6 @@ template <class... ARGS> void debug(ARGS &&...
   print(std::forward<ARGS>(args)...);
 #endif //DEBUG
 }
-
 
 #else
 
@@ -187,7 +186,7 @@ void printMT(ARGS &&... args)
   print(std::forward<ARGS>(args)...);
 }
 
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
 
 // Extracts the name of the types (overloaded for user defined objects):

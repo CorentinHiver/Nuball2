@@ -27,6 +27,7 @@
 #include <TLatex.h>
 #include <TLeaf.h>
 #include <TLegend.h>
+#include <TLine.h>
 #include <TMarker.h>
 #include <TMath.h>
 #include <TObjString.h>
@@ -87,8 +88,8 @@ inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 // Some Initialisiations //
 ///////////////////////////
 
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   std::mutex mutex_Root;
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
 #endif //LIBROOTHEADER_HPP

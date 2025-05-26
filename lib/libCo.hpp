@@ -69,7 +69,7 @@
 template <class F, class S> 
 std::ostream& operator<<(std::ostream& cout, std::pair<F,S> const & p)
 {
-  cout << " {" << p.first << ", " << p.second << "}" << std::endl;
+  cout << " {" << p.first << ", " << p.second << "}";
   return cout;
 }
 
@@ -77,7 +77,7 @@ template <class K, class V>
 std::ostream& operator<<(std::ostream& cout, std::map<K,V> const & m)
 {
   cout << "{";
-  for (auto const & pair : m) cout << pair;
+  for (auto const & pair : m) cout << pair << std::endl;
   cout << "}\n";
   return cout;
 }
@@ -86,7 +86,7 @@ template <class K, class V>
 std::ostream& operator<<(std::ostream& cout, std::unordered_map<K,V> const & m)
 {
   cout << "{";
-  for (auto const & pair : m) cout << pair;
+  for (auto const & pair : m) cout << pair << std::endl;
   cout << "}\n";
   return cout;
 }
@@ -190,10 +190,10 @@ std::map<std::string, std::string> error_message =
 
 auto pauseCo(std::string message = "") 
 {
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   if (MTObject::kill) exit(MTSIGEXIT);
   lock_mutex lock(MTObject::mutex);
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
   if (message == "") message = "Programme paused, please press enter";
   std::cout << message;
@@ -485,7 +485,8 @@ public:
     return m_size;
   }
 
-  void resize(size_t size) {
+  void resize(size_t size) 
+  {
          if (m_size == size) return;
     else if (size>m_reserved_size)
     {
@@ -497,7 +498,8 @@ public:
     for (;m_size<size;++m_size) m_data[m_size] = false;
   }
 
-  void resize(size_t size, bool const & value) {
+  void resize(size_t size, bool const & value) 
+  {
     if (size>m_reserved_size)
     {
       delete[] m_data;
@@ -547,6 +549,17 @@ std::ostream& operator<<(std::ostream& cout, Bools const & bools)
 using Strings = std::vector<std::string>;
 using Ints = std::vector<int>;
 
+std::string fuseStrings(std::vector<std::string> const & vec, std::string const & sep = " ")
+{
+  std::ostringstream oss;
+  for (size_t i = 0; i < vec.size(); ++i) 
+  {
+    oss << vec[i];
+    if (i != vec.size() - 1) oss << sep;
+  }
+  return oss.str();
+}
+
 template<typename T>
 struct is_container {
 private:
@@ -571,6 +584,14 @@ constexpr bool found (std::unordered_set<T> set, T const & e)
 ///////////
 // MATHS //
 ///////////
+
+namespace CoLib
+{
+  template<class T>
+  constexpr T pow(T x, unsigned int n) {
+      return (n == 0) ? 1 : x * pow(x, n - 1);
+  }
+}
 
 template<class T> T positive_modulo(T const & dividend, T const & divisor)
 {
@@ -620,7 +641,7 @@ constexpr inline bool find_value(std::unordered_map<K,V> const & map, V const & 
 
 /// @brief Simple alias to find_key
 template<typename K, typename V> 
-constexpr inline bool key_found(K const & key, std::unordered_map<K,V> const & map)
+constexpr inline bool key_found(std::unordered_map<K,V> const & map, K const & key)
 {
   return find_key(map, key);
 }

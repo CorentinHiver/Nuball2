@@ -8,10 +8,13 @@
 #include <mutex>
 #include <vector>
 #include <iostream>
-#include "TROOT.h"
-#include "TThread.h"
 
-#define MULTITHREADING
+#ifdef ROOT_TObject // Check for root handling
+  #include "TROOT.h"
+  #include "TThread.h"
+#endif //ROOT_TObject
+
+#define COMULTITHREADING
 #define MTSIGEXIT 42
 
 using lock_mutex = const std::lock_guard<std::mutex>;
@@ -203,8 +206,9 @@ public:
     #ifdef DEBUG
       std::cout << "Initialise ROOT thread management..." << std::endl;
     #endif //DEBUG
-      // TThread::Initialise();
+    #ifdef ROOT_TObject // Check for root handling
       ROOT::EnableThreadSafety();
+    #endif //ROOT_TObject 
       MTObject::ON = true;
       std::cout << "MTObject Initialised with " << nb_threads << " threads " << std::endl;
     }
@@ -221,10 +225,18 @@ public:
     {
       activated = true;
       m_threads.reserve(nb_threads); // Memory pre-allocation (used for performances reasons)
-      for (size_t i = 0; i<nb_threads; i++) m_threads.emplace_back( [i, &func, &args...] ()
+      for (size_t id = 0; id<nb_threads; id++) m_threads.emplace_back( [id, &func, &args...] ()
       {// Inside this lambda function, we already are inside the threads, so the parallelized section starts NOW :
-        m_thread_index = i; // Index the thread
+        m_thread_index = id; // Index the thread
+
+      #if __cplusplus >= 201702L // c++17 or above
+        std::invoke(std::forward<Func>(func), std::forward<ARGS>(args)...); // Run the function inside thread
+
+      #else // Before c++17, std::invoke is not defined. Note that member method can't be called in this way, 
+            // you need to create a static method or helper function that calls the member method
         func(std::forward<ARGS>(args)...); // Run the function inside thread
+      #endif // __cplusplus >= 201702L
+
       });
       for(auto & thread : m_threads) thread.join(); //Closes threads, waiting fot everyone to finish
       m_threads.clear(); // Flushes memory

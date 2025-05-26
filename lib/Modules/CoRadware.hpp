@@ -69,6 +69,7 @@ class CoRadware
       else if (instruction == "px") this->px();
       else if (instruction == "py") this->py();
       else if (instruction == "rb") this->removeBackground();
+      else if (instruction == "rp") this->removeProjection();
       else if (instruction == "rs") CoLib::Pad::remove_stats();
       else if (instruction == "sg") this->addGate(false);
       else if (instruction == "sh") CoLib::Pad::subtract_histos();
@@ -109,6 +110,7 @@ class CoRadware
     print("px : projection onto the x axis");
     print("py : projection onto the y axis (default)");
     print("rb : remove background automatically");
+    print("rp : remove total projection automatically");
     print("rs : remove stat box");
     print("sg : subtract gate");
     print("sh : subtract the two displayed histograms");
@@ -182,7 +184,7 @@ class CoRadware
 
   void normalizeSpectra()
   {
-    CoLib::Pad::normalize_histos();
+    CoLib::Pad::normalize_histos_min();
   }
 
   void exportSpectrum()
@@ -273,11 +275,10 @@ class CoRadware
     gPad->Update();
   }
 
-  void gate_same()
+  void gate_same(std::string val_str = "")
   {
-    std::string val_str;
     print("Choose energy to draw on top");
-    std::cin >> val_str;
+    if (val_str == "") std::cin >> val_str;
     TH1* gate = nullptr;
     std::string name;
     if (val_str == "pr") 
@@ -343,6 +344,22 @@ class CoRadware
       CoLib::removeBackground(m_focus, m_nb_it_bckg, "", true);
       this->draw(m_focus);
     }
+  }
+
+  void removeProjection()
+  {
+    if (m_focus == m_bidim)
+    {
+      print("Can't remove projection of the bidim...");
+      return;
+    }
+    if (!m_proj) m_proj = (m_py) ? m_bidim->ProjectionY() : m_bidim->ProjectionX();
+    this->draw(m_proj, "same");
+    CoLib::Pad::normalize_histos_min();
+    CoLib::Pad::subtract_histos();
+    m_focus = CoLib::Pad::get_histos()[0];
+    gPad->Clear();
+    this->draw(m_focus);
   }
 
   ~CoRadware()
