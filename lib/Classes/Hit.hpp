@@ -3,9 +3,9 @@
 
 #include "TTree.h"
 
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   std::mutex mutex_hits;
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
 //////////////////
 /// Data types ///
@@ -359,9 +359,9 @@ private:
 
 void Hit::reading(TTree * tree, std::string const & options)
 {
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   lock_mutex lock(mutex_hits);
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 
@@ -386,9 +386,9 @@ void Hit::reading(TTree * tree, std::string const & options)
 
 void Hit::writing(TTree * tree, std::string const & options)
 {
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   lock_mutex lock(mutex_hits);
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
   if (!tree) {print("Input tree at address 0x00 !"); return;}
 

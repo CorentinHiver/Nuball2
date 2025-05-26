@@ -10,22 +10,22 @@
 #include "fasterac/rf.h"
 #include "fasterac/utils.h"
 
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   std::mutex fasterReaderMutex;
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
 void fasterReaderLockMutex()
 {
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   fasterReaderMutex.lock();
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 }
 
 void fasterReaderUnlockMutex()
 {
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   fasterReaderMutex.unlock();
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 }
 
 /** 

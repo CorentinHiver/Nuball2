@@ -211,13 +211,13 @@ void ParisCluster<n>::Initialise()
 template<size_t n>
 void ParisCluster<n>::InitialiseBidims()
 {
-#ifdef MULTITHREADING 
+#ifdef COMULTITHREADING 
   std::lock_guard<std::recursive_mutex> lock(initialization_mutex);
   if (gParisClusterInitialised) return;
   printC("Initializing ParisCluster<",n,"> position and distance lookup tables in thread ", MTObject::getThreadIndex());
 #else
   printC("Initializing ParisCluster<",n,"> position and distance lookup tables");
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
   // Filling the positions of the detectors :  
   auto const & i_min_R2 = ParisArrays::Paris_R1_x.size();

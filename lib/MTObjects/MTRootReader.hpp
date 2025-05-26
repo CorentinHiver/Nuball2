@@ -11,22 +11,22 @@
 #include "../Classes/Calibration.hpp"
 #include "../Classes/Timeshifts.hpp"
 
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   std::mutex rootReaderMutex;
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
 void rootReaderLockMutex()
 {
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   rootReaderMutex.lock();
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 }
 
 void rootReaderUnlockMutex()
 {
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   rootReaderMutex.unlock();
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 }
 
 /**

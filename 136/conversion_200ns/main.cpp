@@ -4,7 +4,7 @@
 // #define UNSAFE       // To unlock a little bit of speed, should not be significant though... and may lead to unexpected surprises !
 
 // 2. Include library
-#include <MTObject.hpp> // Include this first to activate the multithreading additions (#define MULTITHREADING)
+#include <MTObject.hpp> // Include this first to activate the multithreading additions (#define COMULTITHREADING)
 #include <MultiHist.hpp>  // Thread-safe wrapper around root histograms
 
 #include <Alignator.hpp>      // Align a TTree if some events are shuffled in time

@@ -103,6 +103,10 @@ private:
 
 bool Nuball2Tree::Open(std::string const & filename)
 {
+#ifdef COMULTITHREADING
+MTObject::mutex.lock();
+#endif //COMULTITHREADING
+
   // Opens the file :
   m_file.reset(TFile::Open(filename.c_str(), "READ"));
 
@@ -119,9 +123,12 @@ bool Nuball2Tree::Open(std::string const & filename)
     print(filename, "is a Zombie !"); 
     return (m_ok = false);
   }
-
   // Extracts the tree :
   m_tree = m_file->Get<TTree>("Nuball2");
+
+#ifdef COMULTITHREADING
+MTObject::mutex.unlock();
+#endif //COMULTITHREADING
 
   if (!m_tree) 
   {
@@ -141,15 +148,15 @@ bool Nuball2Tree::Open(std::string const & filename)
   return (m_ok = true);
 }
 
-void Nuball2Tree::loadRAM()
-{
-  // auto memory_tree = (m_tree->CloneTree());
-  // memory_tree->SetDirectory(nullptr);
-  m_tree->SetDirectory(nullptr);
-  m_file->Close();
-  // m_tree = memory_tree;
-  m_file_opened = false;
-}
+// void Nuball2Tree::loadRAM()
+// {
+//   // auto memory_tree = (m_tree->CloneTree());
+//   // memory_tree->SetDirectory(nullptr);
+//   m_tree->SetDirectory(nullptr);
+//   m_file->Close();
+//   // m_tree = memory_tree;
+//   m_file_opened = false;
+// }
 
 std::ostream& operator<<(std::ostream& out, Nuball2Tree const & tree)
 {

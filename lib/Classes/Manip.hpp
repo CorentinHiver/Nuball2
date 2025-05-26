@@ -75,7 +75,7 @@ public:
     if(MTObject::ON) return (m_MTOn = MTOn);
     else 
     {
-      if (MTOn) print("MULTITHREADING ISN'T InitialiseD !");
+      if (MTOn) print("COMULTITHREADING ISN'T InitialiseD !");
       return false;
     }
   }

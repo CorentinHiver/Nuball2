@@ -22,14 +22,14 @@ namespace Paris
 
   static void InitialiseBidims()
   {
-  #ifdef MULTITHREADING 
+  #ifdef COMULTITHREADING 
     std::lock_guard<std::recursive_mutex> lock(initialization_mutex);
     if (cluster_init) return;
     if (MTObject::ON) printC("Initializing Paris position and distance lookup tables in thread ", MTObject::getThreadIndex());
     else printC("Initializing Paris position and distance lookup tables");
   #else
     printC("Initializing Paris position and distance lookup tables");
-  #endif //MULTITHREADING
+  #endif //COMULTITHREADING
 
     // Filling the positions of the detectors :  
     auto const & i_min_R2 = ParisArrays::Paris_R1_x.size();

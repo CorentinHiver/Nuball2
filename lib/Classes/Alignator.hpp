@@ -78,9 +78,9 @@ public:
     print(nb, "wrong order");
   }
 
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   std::mutex mutex;
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
 operator TTree*() {return m_tree;}
 
@@ -100,9 +100,9 @@ bool Alignator::m_use_std = false;
 
 void Alignator::alignIndexes(bool align)
 {
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   mutex.lock();
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
   m_nb_data = m_tree -> GetEntries();
 
   if (m_nb_data==0) {print("NO DATA IN ROOT TREE !"); return;}
@@ -120,9 +120,9 @@ void Alignator::alignIndexes(bool align)
 
   std::vector<Timestamp> timestamp_buffer(nb_hits, 0);
 
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   mutex.unlock();
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
   // First creates a buffer of all the timestamps :
   for (int i = 0; i<nb_hits; i++)
@@ -163,15 +163,15 @@ void Alignator::alignIndexes(bool align)
     }
   }
 
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   mutex.lock();
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 
   m_tree -> SetBranchStatus("*", true); //enables again the whole tree to be read
   
-#ifdef MULTITHREADING
+#ifdef COMULTITHREADING
   mutex.unlock();
-#endif //MULTITHREADING
+#endif //COMULTITHREADING
 }
 
 /**

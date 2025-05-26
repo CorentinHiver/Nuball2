@@ -55,9 +55,9 @@ public:
 
   void static InitialiseArrays()
   {
-    #ifdef MULTITHREADING
+    #ifdef COMULTITHREADING
       lock_mutex lock(MTObject::mutex);
-    #endif //MULTITHREADING
+    #endif //COMULTITHREADING
     if (!s_Initialised)
     {
       print("Initialising DSSD arrays");

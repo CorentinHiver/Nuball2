@@ -11,6 +11,9 @@
 #include "CoefficientCorrection.hpp"
 #include "Utils.h"
 
+#define CLEANER
+#define MTON
+
 float smear(float const & nrj, TRandom* random)
 {
   return random->Gaus(nrj,nrj*((300.0/sqrt(nrj))/100.0)/2.35);
@@ -32,9 +35,12 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
+
+#ifdef MTON
   MTObject::setThreadsNb(nb_threads);
   MTObject::adjustThreadsNumber(files.size());
   MTObject::Initialise();
+#endif //MTON
 
   detectors.load("../136/index_129.list");
 
@@ -113,15 +119,22 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
   });
 
   std::vector<double> run_times(200,0);
-  
+#ifdef MTON
   MTObject::parallelise_function([&](){
+#endif //MTON
 
     TRandom* random = new TRandom();
     random->SetSeed(time(0));
 
     std::string file;
+
+  #ifdef MTON
     auto const & thread_i = MTObject::getThreadIndex();
     auto const & thread_i_str = std::to_string(thread_i);
+  #else 
+    int thread_i = 0;
+    std::string thread_i_str = "0";
+  #endif //MTON
     while(MTfiles.getNext(file))
     {
       auto const & filename = removePath(file);
@@ -131,9 +144,11 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
       int const & run_number = std::stoi(run_number_str);
       if (target == "Th" && run_number>72) continue;
       if (target == "U" && run_number<74) continue;
+    // MTObject::mutex.lock();
       Nuball2Tree tree(file);
+    // MTObject::mutex.unlock();
       if (!tree) continue;
-      files_total_size.fetch_add(size_file(file,"Mo"), std::memory_order_relaxed);
+      files_total_size.fetch_add(size_file(file, "Mo"), std::memory_order_relaxed);
 
       int nb_bins_Ge_singles = 10000;
       int max_bin_Ge_singles = 10000;
@@ -687,6 +702,8 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
         auto const & dparisM = dparis.module_mult();
         auto const & DM_raw = dcloverM + dparisM;
 
+        auto const & Mtot = PM + DM_raw;
+
         // auto const & delayed_Ge_mult = delayed_clovers.Ge.size();
         // bool Gemult[10] = {false}; Gemult[delayed_Ge_mult] = true;
         // auto const & delayed_C_mult = delayed_clovers.GeClean_id.size();
@@ -695,6 +712,10 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
         p_mult->Fill(PM);
         d_mult->Fill(DM_raw);
         dp_mult->Fill(PM, DM_raw);
+
+      #ifdef CLEANER
+        if (Mtot>10) continue; 
+      #endif //CLEANER
 
         // -- Calorimetry -- //
         auto const & prompt_paris_calo = pparis.calorimetry();
@@ -881,6 +902,10 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
               coincident_paris.push_back(module);
             }
           }
+
+        #ifdef CLEANER
+          if (DC > 2_MeV) continue;
+        #endif //CLEANER
 
           bool PM4DM4 = (DM>0 && PM>0 && PM<4 && DM<4);
 
@@ -1955,8 +1980,9 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
       print(out_filename, "written");
     }
     delete random;
+#ifdef MTON
   });
-
+#endif //MTON
   print("Total beam time :", nicer_seconds(total_time_of_beam_s));
   print("Reading speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_evts_number/timer.TimeSec(), "M events/s");
   if (nb_files<0 
@@ -2009,5 +2035,5 @@ int main(int argc, char** argv)
 
   return 1;
 }
-// g++ -g -o exec macro5.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
+// g++ -Og -g -o exec macro5.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
 // g++ -O2 -o exec macro5.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17

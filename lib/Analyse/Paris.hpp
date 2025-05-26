@@ -60,16 +60,16 @@ public:
   // ---- Initialization of static arrays ---- //
   static void InitialiseArrays()
   {
-  #ifdef MULTITHREADING 
+  #ifdef COMULTITHREADING 
     std::lock_guard<std::recursive_mutex> lock(initialization_mutex);
-  #endif //MULTITHREADING
+  #endif //COMULTITHREADING
     if (!s_initialised)
     {
-    #ifdef MULTITHREADING
+    #ifdef COMULTITHREADING
       print("Initialising Paris arrays in thread", MTObject::getThreadIndex());
     #else
       print("Initialising Paris arrays");
-    #endif //MULTITHREADING
+    #endif //COMULTITHREADING
       for (int l = 0; l<1000; l++)
       {
         is[l]  = is_paris(l);

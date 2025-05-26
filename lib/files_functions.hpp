@@ -135,9 +135,9 @@ void create_folder_if_none(std::string const & folderName)
   }
   if(!folder_exists(folderName))
   {
-  #ifdef MULTITHREADING
+  #ifdef COMULTITHREADING
     lock_mutex lock(MTObject::mutex);
-  #endif //MULTITHREADING
+  #endif //COMULTITHREADING
     print("Creating folder", folderName);
     // mkdir -p to create the full path if needed (otherwise crashes if some directory of the path is missing)
     system(("mkdir -p "+folderName).c_str());
@@ -590,9 +590,9 @@ private:
 
   void loadPath(bool const & create = false)
   {
-  #ifdef MULTITHREADING
+  #ifdef COMULTITHREADING
     // lock_mutex lock(MTObject::mutex);
-  #endif //MULTITHREADING
+  #endif //COMULTITHREADING
 
     m_recursive_folders.clear();
     if (m_path[0]=='/')

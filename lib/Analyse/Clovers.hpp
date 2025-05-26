@@ -70,9 +70,9 @@ public:
   /// @brief Static Initialise. Allows one to use the arrays event if no object has been instantiated
   static void InitialiseArrays()
   {
-    #ifdef MULTITHREADING
+    #ifdef COMULTITHREADING
       lock_mutex lock(MTObject::mutex);
-    #endif //MULTITHREADING
+    #endif //COMULTITHREADING
     if (!s_initialised)
     {
       // debug("Initialising clovers arrays");
