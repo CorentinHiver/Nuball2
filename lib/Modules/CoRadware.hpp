@@ -10,7 +10,7 @@ class CoRadware
     file = gFile;
     gROOT->cd();
     m_bidim = (TH2F*) _bidim->Clone(TString(_bidim->GetName())+"_radware");
-    if (autoRemoveBackground>0) CoLib::removeBackground(m_bidim, m_nb_it_bckg, autoRemoveBackground);
+    if (autoRemoveBackground>0) Colib::removeBackground(m_bidim, m_nb_it_bckg, autoRemoveBackground);
     init();
     proj();
     launch();
@@ -70,9 +70,9 @@ class CoRadware
       else if (instruction == "py") this->py();
       else if (instruction == "rb") this->removeBackground();
       else if (instruction == "rp") this->removeProjection();
-      else if (instruction == "rs") CoLib::Pad::remove_stats();
+      else if (instruction == "rs") Colib::Pad::remove_stats();
       else if (instruction == "sg") this->addGate(false);
-      else if (instruction == "sh") CoLib::Pad::subtract_histos();
+      else if (instruction == "sh") Colib::Pad::subtract_histos();
       else if (instruction == "sp") this->simulatePeak();
       else if (instruction == "sm") this->gate_same();
       else if (instruction == "st") {m_finish = true;}
@@ -150,7 +150,7 @@ class CoRadware
     if (!checkIsNumber(instruction)) return;
     max_E = std::stoi(instruction);
 
-    auto clean_gate = CoLib::removeVeto(m_gate, m_proj, min_E, max_E);
+    auto clean_gate = Colib::removeVeto(m_gate, m_proj, min_E, max_E);
     delete m_gate;
     m_gate = clean_gate;
     // m_gate->Draw();
@@ -178,13 +178,13 @@ class CoRadware
     if (!checkIsNumber(instruction)) return;
     nb = std::stoi(instruction);
 
-    CoLib::simulatePeak(m_focus, peak, resolution, nb, true);
+    Colib::simulatePeak(m_focus, peak, resolution, nb, true);
     gPad->Update();
   }
 
   void normalizeSpectra()
   {
-    CoLib::Pad::normalize_histos_min();
+    Colib::Pad::normalize_histos_min();
   }
 
   void exportSpectrum()
@@ -194,7 +194,8 @@ class CoRadware
     std::getline(std::cin, name);
     if (name.empty()) name = m_focus->GetName();
     auto test = static_cast<TH1F*> (m_focus->Clone(name.c_str()));
-    print(TString("exporting")+test->GetName());
+    test->SetDirectory(file);
+    print("Exporting", test->GetName());
   }
 
   void setGateSize() 
@@ -268,8 +269,8 @@ class CoRadware
 
   void ex()
   {
-    auto const & low = CoLib::selectPointX(m_focus, "Low edge");
-    auto const & high = CoLib::selectPointX(m_focus, "High edge");
+    auto const & low = Colib::selectPointX(m_focus, "Low edge");
+    auto const & high = Colib::selectPointX(m_focus, "High edge");
     m_focus->GetXaxis()->SetRangeUser(low, high);
     this->draw(m_focus);
     gPad->Update();
@@ -301,7 +302,7 @@ class CoRadware
       gate->SetTitle((std::to_string(bin)+" gate").c_str());
     }
     gate->Draw("same");
-    gate->SetLineColor(CoLib::ROOT_nice_colors[(++m_nb_sm & 111)]);
+    gate->SetLineColor(Colib::ROOT_nice_colors[(++m_nb_sm & 111)]);
     m_list_histo_to_delete.push_back(name);
     gPad->Update();
   }
@@ -318,7 +319,7 @@ class CoRadware
       : m_bidim->ProjectionX("g", low_e, high_e)->Clone((std::to_string(bin)+" g").c_str()));
     m_gate->SetTitle((std::to_string(bin)+" gate").c_str());
     this->draw(m_gate);
-    print(CoLib::peakIntegral(m_focus, low_e, high_e, m_nb_it_bckg));
+    print(Colib::peakIntegral(m_focus, low_e, high_e, m_nb_it_bckg));
   }
 
   void integral()
@@ -328,7 +329,7 @@ class CoRadware
     std::cin >> start;
     print("Choose borne sup");
     std::cin >> stop;
-    print(CoLib::peakIntegral(m_proj, start, stop, m_nb_it_bckg));
+    print(Colib::peakIntegral(m_proj, start, stop, m_nb_it_bckg));
   }
 
   void removeBackground()
@@ -336,12 +337,12 @@ class CoRadware
     if (m_focus == m_bidim)
     {
       print("May take a while..."); 
-      CoLib::removeBackground(m_bidim, m_nb_it_bckg);
+      Colib::removeBackground(m_bidim, m_nb_it_bckg);
       this->proj();
     }
     else 
     {
-      CoLib::removeBackground(m_focus, m_nb_it_bckg, "", true);
+      Colib::removeBackground(m_focus, m_nb_it_bckg, "", true);
       this->draw(m_focus);
     }
   }
@@ -355,9 +356,9 @@ class CoRadware
     }
     if (!m_proj) m_proj = (m_py) ? m_bidim->ProjectionY() : m_bidim->ProjectionX();
     this->draw(m_proj, "same");
-    CoLib::Pad::normalize_histos_min();
-    CoLib::Pad::subtract_histos();
-    m_focus = CoLib::Pad::get_histos()[0];
+    Colib::Pad::normalize_histos_min();
+    Colib::Pad::subtract_histos();
+    m_focus = Colib::Pad::get_histos()[0];
     gPad->Clear();
     this->draw(m_focus);
   }
@@ -370,9 +371,10 @@ class CoRadware
   void unZoom()
   {
     print("unzoom");
-    m_focus->GetXaxis()->UnZoom();
-    if (m_focus->InheritsFrom(TH2::Class())) m_focus->GetYaxis()->UnZoom();
-    draw(m_focus);
+    auto histo = Colib::Pad::get_histos()[0];
+    histo->GetXaxis()->UnZoom();
+    if (histo->InheritsFrom(TH2::Class())) histo->GetYaxis()->UnZoom();
+    
   }
 
   void set_nb_it_bckg()

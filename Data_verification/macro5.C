@@ -118,7 +118,6 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
     else return 0;
   });
 
-  std::vector<double> run_times(200,0);
 #ifdef MTON
   MTObject::parallelise_function([&](){
 #endif //MTON
@@ -2007,11 +2006,11 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
   //   auto f = TFile::Open(dest.c_str(), "update");
 
   //   auto dd_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd"))->Clone("dd_clean"));
-  //   CoLib::removeVeto(dd_clean, dd_prompt_veto.get(), 501, 521);
+  //   Colib::removeVeto(dd_clean, dd_prompt_veto.get(), 501, 521);
   //   dd_clean->Write();
 
   //   auto dd_p_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd_p"))->Clone("dd_p_clean"));
-  //   CoLib::removeVeto(dd_p_clean, dd_p_prompt_veto.get(), 501, 521);
+  //   Colib::removeVeto(dd_p_clean, dd_p_prompt_veto.get(), 501, 521);
   //   dd_p_clean->Write();
 
   //   // Calculate the prompt-delayed background : //TODO

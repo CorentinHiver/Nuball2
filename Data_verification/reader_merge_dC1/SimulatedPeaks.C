@@ -43,7 +43,7 @@ auto gate_plot(int i, THist * histo, TCanvas * canvas, std::string name, double 
   print(name, ": bckg counts =", bckg_counts, "net count : ", net_data_count, "th counts", 
   nb, "-> sigma = ", nicer_double(net_data_count/std::sqrt(bckg_counts), 2), "sigma th = ", nicer_double(nb/std::sqrt(bckg_counts), 2));
   // auto histo_bckg = static_cast<TH1F*>(clone->Clone(("d_clean_642g_bckg_"+std::to_string(int(E))).c_str()));
-  CoLib::simulate_peak(histo_bckg, E, R, nb);
+  Colib::simulate_peak(histo_bckg, E, R, nb);
   histo_bckg->SetLineColor(kRed);
   histo_bckg->Draw();
   clone->Draw("same");
@@ -74,19 +74,19 @@ void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
   auto d_VS_DC_VS_PC = file->Get<TH3F>("d_VS_DC_VS_PC");
   auto d_PC3DC3 = (TH1F*)d_VS_DC_VS_PC->ProjectionZ("d_PC3DC3_", 2, 30, 2, 30);
   auto d_prompt_veto = file->Get<TH1F>("d_prompt_veto");
-  auto d_clean = CoLib::removeVeto(d, d_prompt_veto, 505, 515, "d_clean");
+  auto d_clean = Colib::removeVeto(d, d_prompt_veto, 505, 515, "d_clean");
 
   auto d_p = file->Get<TH1F>("d_p");
   auto d_pP = file->Get<TH1F>("d_pP");
   auto d_VS_PC_p = file->Get<TH2F>("d_VS_PC_p");
   auto d_pPC3 = d_VS_PC_p->ProjectionY("d_pPC3_", 2, 300);
   auto d_p_prompt_veto = file->Get<TH1F>("d_p_prompt_veto");
-  auto d_p_clean = CoLib::removeVeto(d, d_prompt_veto, 505, 515, "d_clean");
+  auto d_p_clean = Colib::removeVeto(d, d_prompt_veto, 505, 515, "d_clean");
 
 
   auto dd = file->Get<TH2F>("dd");
   auto dd_prompt_veto = file->Get<TH2F>("dd_prompt_veto");
-  auto dd_clean = CoLib::removeVeto(dd, dd_prompt_veto, 505, 515, "dd_clean");
+  auto dd_clean = Colib::removeVeto(dd, dd_prompt_veto, 505, 515, "dd_clean");
   // CoAnalyse::removeBackground(dd_clean);
   auto d_clean_642g = dd->ProjectionX("d_clean_642g", 640, 644);
   auto d_clean_966g = dd->ProjectionX("d_clean_966g", 963, 968);
@@ -95,14 +95,14 @@ void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
 
   auto dd_PC3DC3 = file->Get<TH2F>("dd_PC3DC3");
   // auto dd_prompt_veto = file->Get<TH2F>("dd_prompt_veto");
-  // auto dd_clean = CoLib::removeVeto(dd_PC3DC3, dd_prompt_veto, 505, 515, "dd_clean");
+  // auto dd_clean = Colib::removeVeto(dd_PC3DC3, dd_prompt_veto, 505, 515, "dd_clean");
   // CoAnalyse::removeBackground(dd_clean);
   auto d_PC3DC3_clean_642g = dd_PC3DC3->ProjectionX("d_PC3DC3_clean_642g", 640, 644);
   auto d_PC3DC3_clean_966g = dd_PC3DC3->ProjectionX("d_PC3DC3_clean_966g", 963, 968);
 
   auto dd_p = file->Get<TH2F>("dd_p");
   // auto dd_p_prompt_veto = file->Get<TH2F>("dd_p_prompt_veto");
-  // auto dd_p_clean = CoLib::removeVeto(dd_p, dd_p_prompt_veto, 505, 515, "dd_p_clean");
+  // auto dd_p_clean = Colib::removeVeto(dd_p, dd_p_prompt_veto, 505, 515, "dd_p_clean");
   // CoAnalyse::removeBackground(dd_p_clean);
   auto d_p_clean_642g = dd_p->ProjectionX("d_p_clean_642g", 640, 644);
   auto d_p_clean_966g = dd_p->ProjectionX("d_p_clean_966g", 963, 968);
@@ -111,7 +111,7 @@ void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
 
   auto dd_pP = file->Get<TH2F>("dd_pP");
   // auto dd_pP_prompt_veto = file->Get<TH2F>("dd_pP_prompt_veto");
-  // auto dd_pP_clean = CoLib::removeVeto(dd_pP, dd_pP_prompt_veto, 505, 515);
+  // auto dd_pP_clean = Colib::removeVeto(dd_pP, dd_pP_prompt_veto, 505, 515);
   // CoAnalyse::removeBackground(dd_pP);
   auto d_pP_clean_642g = dd_pP->ProjectionX("d_pP_clean_642g", 640, 644);
   auto d_pP_clean_966g = dd_pP->ProjectionX("d_pP_clean_966g", 963, 968);
@@ -151,7 +151,7 @@ void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
     print(name, ": bckg counts =", bckg_counts, "net count : ", net_data_count, "th counts", 
       nb, "-> sigma = ", nicer_double(net_data_count/std::sqrt(bckg_counts), 2), "sigma th = ", nicer_double(nb/std::sqrt(bckg_counts), 2));
     // auto histo_bckg = static_cast<TH1F*>(histo->Clone(("d_bckg_"+std::to_string(int(E))).c_str()));
-    CoLib::simulate_peak(histo_bckg, E, R, nb);
+    Colib::simulate_peak(histo_bckg, E, R, nb);
     histo_bckg->SetLineColor(kRed);
     histo_bckg->Draw();
     histo->Draw("same");

@@ -7,7 +7,7 @@
 #include "../libCo.hpp"
 #include "../Classes/CalibAndScale.hpp"
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Get a sub-histogram between x1 and x2
   template<class THist>

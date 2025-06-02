@@ -52,6 +52,8 @@ public:
   static constexpr inline bool  isBGO   (Label const & label) noexcept {return (isClover(label) && subIndex(label)<2);}
   /// @brief label = 23 -> index = 0, label = 196 -> index = 23;
   static constexpr inline Index index(Label const & label)    noexcept {return Label_cast((label-23)/6);}
+  
+  static constexpr auto is = LUT<1000> ([](Label const & label) {return 22 < label && label < 168;});
 
   CloversV2& operator=(Event const & event);
 

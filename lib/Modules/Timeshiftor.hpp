@@ -579,7 +579,7 @@ void Timeshiftor::treatFolder(std::string const & folder, int const & nb_files)
 
   if (MTObject::ON)
   {// If multithreading, treat each data file of the folder in parallel
-    print(CoLib::Color::BRIGHTBLUE, "Calculating timeshifts with", MTObject::getThreadsNb(),"threads", CoLib::Color::RESET);
+    print(Colib::Color::BRIGHTBLUE, "Calculating timeshifts with", MTObject::getThreadsNb(),"threads", Colib::Color::RESET);
     MTList files_MT(files.getListFiles());
     // The FileManager object isn't thread safe. 
     // That is why one has to encapsulate the files list inside a MTList (Multi-Threaded List) :
@@ -587,7 +587,7 @@ void Timeshiftor::treatFolder(std::string const & folder, int const & nb_files)
   }
   else
   {// If no multithreading, treat each data file sequentially
-    print(CoLib::Color::BRIGHTBLUE, "Calculating timeshifts without multithreading", CoLib::Color::RESET);
+    print(Colib::Color::BRIGHTBLUE, "Calculating timeshifts without multithreading", Colib::Color::RESET);
     std::string filename;
     while (files.nextFileName(filename))
     {

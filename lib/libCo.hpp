@@ -46,6 +46,8 @@
 #include <vector>
 
 // ********** C includes ************ //
+
+#include <climits>
 #include <cmath>
 #include <csignal>
 #include <cstdlib>
@@ -179,7 +181,7 @@ std::string to_binary(T num) {
     return std::bitset<sizeof(T) * 8>(num).to_string(); // Uses full bit width of T
 }
 
-void throw_error(std::string const & message) {throw std::runtime_error(concatenate(CoLib::Color::RED, message, CoLib::Color::RESET));}
+void throw_error(std::string const & message) {throw std::runtime_error(concatenate(Colib::Color::RED, message, Colib::Color::RESET));}
 
 std::map<std::string, std::string> error_message = 
 {
@@ -585,12 +587,42 @@ constexpr bool found (std::unordered_set<T> set, T const & e)
 // MATHS //
 ///////////
 
-namespace CoLib
+namespace Colib
 {
+  /**
+   * @brief Compiled power calculation, faster than std::pow, but limited to unsigned integer power
+   * @param x : value (any)
+   * @param n : power (unsigned integer)
+   * @return constexpr T 
+   */
   template<class T>
-  constexpr T pow(T x, unsigned int n) {
+  inline constexpr T pow(T x, unsigned int n) {
       return (n == 0) ? 1 : x * pow(x, n - 1);
   }
+
+  /**
+   * @brief Compiled power calculation, faster than std::pow, but limited to unsigned integer power
+   * @param x : value (any)
+   * @param n : power (unsigned integer)
+   * @return constexpr T 
+   */
+  template<class T>
+  inline constexpr T abs(T x) { return (x < 0) ? -x : x; }
+
+  template <typename T>
+  inline constexpr T big() {
+      // Calculate the number of bits in the type T
+      const int num_bits = sizeof(T) * CHAR_BIT;
+
+      // For signed types, set all bits except the sign bit
+      // For unsigned types, set all bits
+      if (std::is_signed<T>::value) {
+          return ~(static_cast<T>(1) << (num_bits - 1));
+      } else {
+          return ~static_cast<T>(0);
+      }
+  }
+
 }
 
 template<class T> T positive_modulo(T const & dividend, T const & divisor)
@@ -600,7 +632,7 @@ template<class T> T positive_modulo(T const & dividend, T const & divisor)
   return ret;
 }
 
-namespace CoLib
+namespace Colib
 {
   template<class T, class... ARGS>
   inline T sum(T i, ARGS... args) {return i+sum(args...);}
@@ -858,7 +890,7 @@ class Slots
 //   SOME COOL STUFF   //
 /////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   void progress_bar(float const & progress_percent, int width = 50)
   {

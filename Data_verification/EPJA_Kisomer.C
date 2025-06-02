@@ -27,20 +27,26 @@ auto placeLine(double x1, double y1, double x2, double y2, double width = 2, dou
 
 void EPJA_Kisomer()
 {
-  auto file = TFile::Open("data/merge_C2.root","read");
+  TString filename = "data/merge_C2.root";
+  auto file = TFile::Open(filename,"read");
   file->cd();
 
   auto dd = file->Get<TH2F>("dd");
   auto dd_prompt_veto = file->Get<TH2F>("dd_prompt_veto");
-  auto dd_veto_clean = CoLib::removeVeto(dd, dd_prompt_veto, 500, 520);
-  CoLib::removeBackground(dd_veto_clean, 15);
+  auto dd_veto_clean = Colib::removeVeto(dd, dd_prompt_veto, 500, 520);
+  Colib::removeBackground(dd_veto_clean, 15);
 
   auto dd_p = file->Get<TH2F>("dd_p");
   auto dd_p_prompt_veto = file->Get<TH2F>("dd_p_prompt_veto");
-  auto dd_p_veto_clean = CoLib::removeVeto(dd_p, dd_p_prompt_veto, 500, 520);
-  CoLib::removeBackground(dd_p_veto_clean, 15);
+  auto dd_p_veto_clean = Colib::removeVeto(dd_p, dd_p_prompt_veto, 500, 520);
+  Colib::removeBackground(dd_p_veto_clean, 15);
 
+  auto dp = file->Get<TH2F>("dp");
+  auto dp_bckg_removed = Colib::clone(dp, "dp_bckg_removed");
   auto dp_p = file->Get<TH2F>("dp_p");
+  auto dp_p_bckg_removed = Colib::clone(dp_p, "dp_p_bckg_removed");
+  Colib::removeBackground(dp_bckg_removed, 15);
+  Colib::removeBackground(dp_p_bckg_removed, 12);
 
   //////////////
   // GATE 903 //
@@ -49,7 +55,7 @@ void EPJA_Kisomer()
   auto canvas903 = new TCanvas("canvas903", "canvas903", 1000, 600); canvas903->cd();
 
   auto d903 = dd_veto_clean->ProjectionX("d903", 903, 904);
-  CoLib::Multiply(d903, 0.5);
+  Colib::Multiply(d903, 0.5);
   auto const & d903_xaxis = d903->GetXaxis();
   d903_xaxis->SetTitle("E_{#gamma delayed} [keV]");
 
@@ -83,7 +89,7 @@ void EPJA_Kisomer()
   
   legend_d903->Draw();
 
-  CoLib::Pad::remove_stats();
+  Colib::Pad::remove_stats();
 
   ///////////////////////
   // GATE 903 particle //
@@ -92,7 +98,7 @@ void EPJA_Kisomer()
   auto canvas903_p = new TCanvas("canvas903_p", "canvas903_p", 1000, 600); canvas903_p->cd();
 
   auto d903_p = dd_p_veto_clean->ProjectionX("d903_p", 903, 904);
-  CoLib::Multiply(d903_p, 0.5);
+  Colib::Multiply(d903_p, 0.5);
   auto const & d903_p_xaxis = d903_p->GetXaxis();
   d903_p_xaxis->SetTitle("E_{#gamma delayed} [keV]");
 
@@ -126,7 +132,7 @@ void EPJA_Kisomer()
   
   legend_d903_p->Draw();
 
-  CoLib::Pad::remove_stats();
+  Colib::Pad::remove_stats();
 
   /////////////////////
   // GATE 642 proton //
@@ -135,7 +141,7 @@ void EPJA_Kisomer()
   auto canvas642 = new TCanvas("canvas642", "canvas642", 1000, 600); canvas642->cd();
 
   auto d642 = dd_p_veto_clean->ProjectionX("d642", 641, 644);
-  CoLib::Multiply(d642, 0.5);
+  Colib::Multiply(d642, 0.5);
   auto const & d642_xaxis = d642->GetXaxis();
   d642_xaxis->SetTitle("E_{#gamma delayed} [keV]");
   d642_xaxis->SetRangeUser(0,500);
@@ -162,17 +168,17 @@ void EPJA_Kisomer()
    
   d642->SetTitle("gate delayed 642");
 
-  CoLib::Pad::remove_background();
-  CoLib::Pad::remove_stats();
+  Colib::Pad::remove_background();
+  Colib::Pad::remove_stats();
 
   double resolution = 2.5;
   auto nndc642 = new TH1F("NNDC","NNDC",500,0,500);
-  CoLib::simulatePeak(nndc642, 103, resolution, 106);
-  CoLib::simulatePeak(nndc642, 204, resolution, 2160);
-  CoLib::simulatePeak(nndc642, 243, resolution, 26);
-  CoLib::simulatePeak(nndc642, 300, resolution, 306);
-  CoLib::simulatePeak(nndc642, 307, resolution, 81);
-  CoLib::shiftX(nndc642, 1);
+  Colib::simulatePeak(nndc642, 103, resolution, 261);
+  Colib::simulatePeak(nndc642, 204, resolution, 5333);
+  Colib::simulatePeak(nndc642, 243, resolution, 64);
+  Colib::simulatePeak(nndc642, 300, resolution, 756);
+  Colib::simulatePeak(nndc642, 307, resolution, 200);
+  Colib::shiftX(nndc642, 1);
   nndc642->SetLineColor(kRed);
   nndc642->Draw("same");
 
@@ -198,11 +204,11 @@ void EPJA_Kisomer()
   d642p -> Draw();
   dp_p_projX -> Draw("same");
   d642p->GetXaxis()->SetRangeUser(212, 215);
-  CoLib::Pad::normalize_histos_min();
+  Colib::Pad::normalize_histos_min();
   d642p->GetXaxis()->UnZoom();
-  CoLib::Pad::subtract_histos();
+  Colib::Pad::subtract_histos();
   delete dp_p_projX;
-  CoLib::Pad::remove_background();
+  Colib::Pad::remove_background();
   gPad->Update();
   d642p->GetXaxis()->SetRangeUser(0, 1000);
   d642p->GetYaxis()->SetRangeUser(0, 500);
@@ -211,7 +217,7 @@ void EPJA_Kisomer()
   XrayX = 140;
   XrayY = 250;
   placeText(d642p, "X-rays", XrayX, XrayY);
-  placeLine(96, 300, XrayX, XrayY);
+  placeLine(96, 270, XrayX, XrayY);
   placeLine(99, 350, XrayX, XrayY);
   placeLine(111, 180, XrayX, XrayY);
   placeLine(115, 80, XrayX, XrayY);
@@ -235,19 +241,72 @@ void EPJA_Kisomer()
 
   legend_d642p->Draw();
 
-  CoLib::Pad::remove_stats();
+  Colib::Pad::remove_stats();
+
+  /////////////////////////////////
+  // PROMPT 367 DELAYED SPECTRUM //
+  /////////////////////////////////
+
+  auto canvasPrompt367Delayed = new TCanvas("canvasPrompt367Delayed", "canvasPrompt367Delayed", 1000, 600); canvasPrompt367Delayed->cd();
+
+  auto p367d_p = dp_p->ProjectionY("gate_prompt_367", 366, 368);
+  auto dp_p_projY = dp_p->ProjectionY();
+
+  p367d_p -> Draw();
+  dp_p_projY -> Draw("same");
+  p367d_p->GetXaxis()->SetRangeUser(212, 215); // TODO
+  Colib::Pad::normalize_histos_min();
+  p367d_p->GetXaxis()->UnZoom();
+  Colib::Pad::subtract_histos();
+  delete dp_p_projY;
+  Colib::Pad::remove_background();
+  gPad->Update();
+  p367d_p->GetXaxis()->SetRangeUser(0, 1000);
+  p367d_p->GetYaxis()->SetRangeUser(0, 500);
+  p367d_p->GetXaxis()->SetTitle("E_{#gamma delayed} [keV]");
+
+  // XrayX = 140;
+  // XrayY = 250;
+  // placeText(p367d_p, "X-rays", XrayX, XrayY);
+  // placeLine(96, 270, XrayX, XrayY);
+  // placeLine(99, 350, XrayX, XrayY);
+  // placeLine(111, 180, XrayX, XrayY);
+  // placeLine(115, 80, XrayX, XrayY);
+  
+  // placeTextPeak(p367d_p, "136", 135);
+  // placeText(p367d_p, "239", 215, 40);
+  // placeText(p367d_p, "294", 255, 60);
+  // placeText(p367d_p, "308", 290, 100);
+  // placeTextPeak(p367d_p, "367", 367);
+  // placeTextPeak(p367d_p, "(511)", 510, 0, 90);
+  // placeText(p367d_p, "522", 521, 75);
+  // placeTextPeak(p367d_p, "721", 721);
+
+  p367d_p->SetTitle("gate delayed 642");
+
+  TLegend *legend_p367d_p = new TLegend(0.55, 0.8, 0.9, 0.9);
+  legend_p367d_p->SetBorderSize(0);
+  legend_p367d_p->SetFillStyle(0);
+  legend_p367d_p->SetTextSize(0.05);
+  legend_p367d_p->AddEntry(p367d_p, p367d_p->GetTitle(), "l");
+
+  legend_p367d_p->Draw();
+
+  Colib::Pad::remove_stats();
 
   ///////////
   // WRITE //
   ///////////
 
   TString outname = "EPJA_figures.root";
+  if (filename == "merge_C2.root") outname = "new_EPJA_figures.root";
   auto outfile = TFile::Open(outname, "recreate");
   outfile->cd();
     canvas903->Write();
     canvas903_p->Write();
     canvas642->Write();
     canvasPrompt642->Write();
+    canvasPrompt367Delayed->Write();
   outfile->Close();
   file->Close();
   print(outname, "written");

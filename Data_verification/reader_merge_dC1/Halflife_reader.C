@@ -9,7 +9,7 @@ void Halflife_reader(std::string filename = "merge_dC1.root")
   auto dd_p = file->Get<TH2F>("dd_p");
   CoAnalyse::removerBackground(dd_p, 15);
   if (!ddt || !ddt_veto) throw_error("Histograms not present");
-  auto clean_ddt = CoLib::removeVeto(ddt, ddt_veto, 1.10335, "clean_ddt");
+  auto clean_ddt = Colib::removeVeto(ddt, ddt_veto, 1.10335, "clean_ddt");
   clean_ddt->SetTitle(clean_ddt->GetName());
   auto dt642 = myProjectionXZ(clean_ddt, 640/2, 644/2, "dt642");
   new TCanvas;
@@ -21,7 +21,7 @@ void Halflife_reader(std::string filename = "merge_dC1.root")
   int i = 1;
   for (auto const & histo : pad_get_histos()) histo->SetLineColor(++i);
   gPad->BuildLegend();
-  CoLib::normalizeHistos();
+  Colib::normalizeHistos();
   // gPad->
   // new TCanvas;
   // dt642->Draw();
@@ -48,7 +48,7 @@ void Halflife_reader(std::string filename = "merge_dC1.root")
   //   gate->Draw();
   //   c->cd(2);
   //   gate642->Draw();
-  //   print(value, CoLib::calculateHalfLife(gate));
-  //   print(value, CoLib::calculateHalfLife(gate642));
+  //   print(value, Colib::calculateHalfLife(gate));
+  //   print(value, Colib::calculateHalfLife(gate642));
   // }
 }

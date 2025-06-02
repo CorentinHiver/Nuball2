@@ -293,15 +293,15 @@ void inline Event::writing(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-  if (write.m) CoLib::createBranch     (tree, &mult    , "mult"  );
-  if (write.t) CoLib::createBranch     (tree, &stamp   , "stamp" );
-  if (write.T) CoLib::createBranchArray(tree, &times   , "time"  , "mult");
-  if (write.E) CoLib::createBranchArray(tree, &nrjs    , "nrj"   , "mult");
-  if (write.Q) CoLib::createBranchArray(tree, &nrj2s   , "nrj2"  , "mult");
-  if (write.e) CoLib::createBranchArray(tree, &adcs    , "adc"   , "mult");
-  if (write.q) CoLib::createBranchArray(tree, &qdc2s   , "qdc2"  , "mult");
-  if (write.l) CoLib::createBranchArray(tree, &labels  , "label" , "mult");
-  if (write.p) CoLib::createBranchArray(tree, &pileups , "pileup", "mult");
+  if (write.m) Colib::createBranch     (tree, &mult    , "mult"  );
+  if (write.t) Colib::createBranch     (tree, &stamp   , "stamp" );
+  if (write.T) Colib::createBranchArray(tree, &times   , "time"  , "mult");
+  if (write.E) Colib::createBranchArray(tree, &nrjs    , "nrj"   , "mult");
+  if (write.Q) Colib::createBranchArray(tree, &nrj2s   , "nrj2"  , "mult");
+  if (write.e) Colib::createBranchArray(tree, &adcs    , "adc"   , "mult");
+  if (write.q) Colib::createBranchArray(tree, &qdc2s   , "qdc2"  , "mult");
+  if (write.l) Colib::createBranchArray(tree, &labels  , "label" , "mult");
+  if (write.p) Colib::createBranchArray(tree, &pileups , "pileup", "mult");
   tree -> SetBranchStatus("*",true);
 }
 

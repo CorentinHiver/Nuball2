@@ -10,7 +10,7 @@
 
 #include "TTree.h"
 #include "TBranch.h"
-using MinVar = CoLib::MinimiserVariable;
+using MinVar = Colib::MinimiserVariable;
 
 // int i = 0; 
 
@@ -50,7 +50,7 @@ void DataAlignement(bool overwrite = true)
     {"ge" , {1, 5e-2, 10}}
   };
   
-  CoLib::Minimiser::fillHisto(true);
+  Colib::Minimiser::fillHisto(true);
 
   // Open ref file :
   TString ref_filename = "../136/calibrate_2025/histos/run_75.root";
@@ -84,7 +84,7 @@ void DataAlignement(bool overwrite = true)
       print(spectrumName, "is not found");
       continue;
     }
-    auto refHisto = CoLib::subHisto(refHistoRaw, minX[type], maxX[type]);
+    auto refHisto = Colib::subHisto(refHistoRaw, minX[type], maxX[type]);
     refHisto->Rebin(rebining[type]);
     refHisto->SetName(spectrumName+"_ref");
   
@@ -120,7 +120,7 @@ void DataAlignement(bool overwrite = true)
   #endif //MULTI
       
     // Define the thread local stuff here :
-      CoLib::Chi2Calculator chi2calc(refHisto);
+      Colib::Chi2Calculator chi2calc(refHisto);
   
     #ifdef MULTI
       std::string filename;
@@ -134,7 +134,7 @@ void DataAlignement(bool overwrite = true)
         if (filename == std::string(ref_filename)) continue; // Do not compare the test spectrum with itself
     
         auto testFile = TFile::Open(filename.c_str(), "READ"); testFile->cd();
-        auto testHisto = CoLib::subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
+        auto testHisto = Colib::subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
     
         testHisto->Rebin(rebining[type]);
         auto testName = testHisto->GetName() + std::string("_") + std::to_string(run_number);
@@ -145,7 +145,7 @@ void DataAlignement(bool overwrite = true)
         // Minimise //
         //////////////
   
-        CoLib::Minimiser firstMini;
+        Colib::Minimiser firstMini;
         firstMini.calculate(refHisto, testHisto, b.at(type), a.at(type), C.at(type));
 
         auto chi2map = firstMini.getChi2Map();
@@ -171,7 +171,7 @@ void DataAlignement(bool overwrite = true)
           {"ge" , {firstCalib[2], 1e-2, 10}}
         };
   
-        CoLib::Minimiser mini;
+        Colib::Minimiser mini;
         mini.calculate(refHisto, testHisto, b2.at(type), a2.at(type), C2.at(type));
   
   #ifdef MULTI

@@ -7,7 +7,7 @@
 #include "ParisBidimAngles.hpp"
 #include "PhoswitchCalib.hpp"
 
-using Point = CoLib::Point;
+using Point = Colib::Point;
 
 /// @brief A list of LaBr3 and NaI full energy peaks' points in the Qlong VS Qshort calibration plots
 class ParisPoints
@@ -222,8 +222,8 @@ void ParisPointsFile::createAddbackAngleFile(std::string const & parisPoints_fil
     {
       auto const & LaBr3 = points_label.LaBr3.at(peak);
       auto const & NaI = points_label.NaI.at(peak);
-      Point rotated_LaBr3 = CoLib::rotate(LaBr3, angle);
-      Point rotated_NaI = CoLib::rotate(NaI, angle);
+      Point rotated_LaBr3 = Colib::rotate(LaBr3, angle);
+      Point rotated_NaI = Colib::rotate(NaI, angle);
       points.push_back((rotated_LaBr3.second+rotated_NaI.second)/2); // We store the average of both of the rotated points for each energy
     }
 

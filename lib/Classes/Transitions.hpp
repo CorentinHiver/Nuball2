@@ -48,7 +48,7 @@ struct ConversionCoefficient
   }
 };
 
-namespace CoLib
+namespace Colib
 {
   double static gate(double const & energyTransition, double const & energy, double const & resolution)
   {
@@ -163,15 +163,15 @@ public:
   double Weisskopf() const 
   {
     auto const & M = multipolarity();
-          if (M == "E1") return 1.0e+14 *   std::pow(A, 2/3.) * CoLib::pow(energy, 3);
-    else  if (M == "E2") return 7.3e+7  *   std::pow(A, 4/3.) * CoLib::pow(energy, 5);
-    else  if (M == "E3") return 34.e+0  * CoLib::pow(A, 3   ) * CoLib::pow(energy, 7);
-    else  if (M == "E4") return 1.1e-5  *   std::pow(A, 8/3.) * CoLib::pow(energy, 9);
+          if (M == "E1") return 1.0e+14 *   std::pow(A, 2/3.) * Colib::pow(energy, 3);
+    else  if (M == "E2") return 7.3e+7  *   std::pow(A, 4/3.) * Colib::pow(energy, 5);
+    else  if (M == "E3") return 34.e+0  * Colib::pow(A, 3   ) * Colib::pow(energy, 7);
+    else  if (M == "E4") return 1.1e-5  *   std::pow(A, 8/3.) * Colib::pow(energy, 9);
 
-    else  if (M == "M1") return 5.6e+13 *                       CoLib::pow(energy, 3);
-    else  if (M == "M2") return 3.5e+7  *   std::pow(A, 2/3.) * CoLib::pow(energy, 5);
-    else  if (M == "M3") return 16.e+0  *   std::pow(A, 2/3.) * CoLib::pow(energy, 7);
-    else  if (M == "M4") return 4.5e-6  * CoLib::pow(A, 2   ) * CoLib::pow(energy, 9);
+    else  if (M == "M1") return 5.6e+13 *                       Colib::pow(energy, 3);
+    else  if (M == "M2") return 3.5e+7  *   std::pow(A, 2/3.) * Colib::pow(energy, 5);
+    else  if (M == "M3") return 16.e+0  *   std::pow(A, 2/3.) * Colib::pow(energy, 7);
+    else  if (M == "M4") return 4.5e-6  * Colib::pow(A, 2   ) * Colib::pow(energy, 9);
     else return -42.;
   }
 
@@ -320,7 +320,7 @@ public:
 
     for (auto const & transition : m_transitions) 
     {
-      if (CoLib::gate(transition.energy, energy, resolution)) // Gating : transition energy match input "energy"
+      if (Colib::gate(transition.energy, energy, resolution)) // Gating : transition energy match input "energy"
       {
         auto const & node = m_nodes[transition.fromLevel()->label()];
 

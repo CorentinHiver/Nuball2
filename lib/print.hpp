@@ -13,11 +13,11 @@
 // #include <array>
 
 // Defining the different colors possible of the terminal
-// Usage :  cout<< CoLib::Color::<COLOR> <<....
+// Usage :  cout<< Colib::Color::<COLOR> <<....
 //          ...
-//          cout << ... << CoLib::Color::RESET
+//          cout << ... << Colib::Color::RESET
 
-namespace CoLib
+namespace Colib
 {
   namespace Color
   {
@@ -202,34 +202,34 @@ std::string type_of(T const & t)
 template <class... T>
 void warning(T const & ... t)
 {
-  std::cout << CoLib::Color::YELLOW;
+  std::cout << Colib::Color::YELLOW;
   print(t...);
-  std::cout << CoLib::Color::RESET;
+  std::cout << Colib::Color::RESET;
 }
 
 /// @brief Print in red
 template <class... T>
 void error(T const & ... t)
 {
-  std::cout << CoLib::Color::RED;
+  std::cout << Colib::Color::RED;
   print(t...);
-  std::cout << CoLib::Color::RESET;
+  std::cout << Colib::Color::RESET;
 }
 
 /// @brief Print in grey
 template <class... T>
 void information(T const & ... t)
 {
-  std::cout << CoLib::Color::GREY;
+  std::cout << Colib::Color::GREY;
   print(t...);
-  std::cout << CoLib::Color::RESET;
+  std::cout << Colib::Color::RESET;
 }
 
 std::string nicer_bool(bool const & some_bool)
 {
   return ((some_bool) 
-      ? (CoLib::Color::BLUE + std::string("true") + CoLib::Color::RESET) 
-      : (CoLib::Color::RED  + std::string("false") + CoLib::Color::RESET)
+      ? (Colib::Color::BLUE + std::string("true") + Colib::Color::RESET) 
+      : (Colib::Color::RED  + std::string("false") + Colib::Color::RESET)
   );
 }
 

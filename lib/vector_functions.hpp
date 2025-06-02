@@ -308,7 +308,7 @@ bool is_good(std::vector<T> const & vector)
   return true;
 }
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Order the vector from lower to higher value
   /// @tparam T must have operator< overloaded if user defined class 
@@ -316,7 +316,7 @@ namespace CoLib
   std::vector<size_t> & bubble_sort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
   {
     // Verifications :
-    if (vector.size() == 0) {printC(CoLib::Color::RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", CoLib::Color::RESET); return ordered_indexes;}
+    if (vector.size() == 0) {printC(Colib::Color::RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", Colib::Color::RESET); return ordered_indexes;}
     if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());
   
     // Initializations :
@@ -368,14 +368,14 @@ namespace CoLib
   }
 
   /// @brief Order the vector from lower to higher value using various methods
-  /// @param method: so far, only default "bubble" method is implemented, using CoLib::bubble_sort
+  /// @param method: so far, only default "bubble" method is implemented, using Colib::bubble_sort
   /// @tparam T must have operator< overloaded if user defined class 
   template <class T>
   std::vector<T>& sort(std::vector<T> & vector, std::string method = "bubble")
   {
     if (method == "bubble")
     {
-      auto const & sorted_indices = CoLib::bubble_sort(vector);
+      auto const & sorted_indices = Colib::bubble_sort(vector);
       std::vector<T> buff = vector;
       vector.clear();
       for (auto const & id : sorted_indices) vector.push_back(buff[id]);
@@ -390,7 +390,7 @@ namespace CoLib
   template <class T>
   std::vector<T>& fill_sorted(std::vector<T> & to_fill, std::vector<T> const & fill_from)
   {
-    auto const & sorted_indices = CoLib::bubble_sort(fill_from);
+    auto const & sorted_indices = Colib::bubble_sort(fill_from);
     int to_fill_it = 0;
     for (auto const & id : sorted_indices)
     {

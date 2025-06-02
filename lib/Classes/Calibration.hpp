@@ -255,7 +255,7 @@ private:
 public:
   class NotFound
   {public:
-    NotFound(std::string const & filename) : m_filename(filename) {print(CoLib::Color::RED, filename, "not found", CoLib::Color::RESET);}
+    NotFound(std::string const & filename) : m_filename(filename) {print(Colib::Color::RED, filename, "not found", Colib::Color::RESET);}
     std::string const & getFilename() const {return m_filename;}
   private:
     std::string const & m_filename;

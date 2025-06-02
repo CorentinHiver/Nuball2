@@ -376,13 +376,13 @@ public:
   class HistoNull
   {
     public:
-    HistoNull() {printC(CoLib::Color::GREY, "SpectraCo::HistoNull :", CoLib::Color::RESET, CoLib::Color::RED, " loaded histogram is nullptr", CoLib::Color::RESET);}
+    HistoNull() {printC(Colib::Color::GREY, "SpectraCo::HistoNull :", Colib::Color::RESET, Colib::Color::RED, " loaded histogram is nullptr", Colib::Color::RESET);}
   };
 
   class HistoZombie
   {
     public:
-    HistoZombie() {printC(CoLib::Color::GREY, "SpectraCo::HistoZombie :", CoLib::Color::RESET, CoLib::Color::RED, " loaded histogram is zombie", CoLib::Color::RESET);}
+    HistoZombie() {printC(Colib::Color::GREY, "SpectraCo::HistoZombie :", Colib::Color::RESET, Colib::Color::RED, " loaded histogram is zombie", Colib::Color::RESET);}
   };
 
   class SizeMissmatch

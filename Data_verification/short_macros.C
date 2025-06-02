@@ -113,17 +113,17 @@ void short_macros(int choice = 1)
   {
     auto dd_p = file->Get<TH2F>("dd_p");
     auto dd_p_prompt_veto = file->Get<TH2F>("dd_p_prompt_veto");
-    auto dd_p_veto_clean = CoLib::removeVeto(dd_p, dd_p_prompt_veto, 505, 515);
+    auto dd_p_veto_clean = Colib::removeVeto(dd_p, dd_p_prompt_veto, 505, 515);
     auto d642 = dd_p_veto_clean->ProjectionX("d642", 641, 644);
     CoAnalyse::removeBackground(d642, 15);
     auto nndc = dynamic_cast<TH1D*>(d642->Clone("nndc"));
     for (int i = 0; i<nndc->GetNbinsX(); ++i) nndc->SetBinContent(i, 0);
-    CoLib::simulate_peak(nndc, 103.4, 2, 88   );
-    CoLib::simulate_peak(nndc, 204.6, 2, 1800 );
-    CoLib::simulate_peak(nndc, 243.6, 2, 21   );
-    CoLib::simulate_peak(nndc, 300  , 2, 255  );
-    CoLib::simulate_peak(nndc, 308  , 2, 67   );
-    CoLib::shiftX(d642, -1);
+    Colib::simulate_peak(nndc, 103.4, 2, 88   );
+    Colib::simulate_peak(nndc, 204.6, 2, 1800 );
+    Colib::simulate_peak(nndc, 243.6, 2, 21   );
+    Colib::simulate_peak(nndc, 300  , 2, 255  );
+    Colib::simulate_peak(nndc, 308  , 2, 67   );
+    Colib::shiftX(d642, -1);
     d642->GetXaxis()->SetRangeUser(0, 500);
     d642->SetTitle("gate 642 keV");
     d642->Draw();

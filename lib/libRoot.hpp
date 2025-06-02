@@ -6,7 +6,7 @@
 // Generic functions using some actually nice ROOT classes //
 /////////////////////////////////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief This method allows one to get the x and y values of where the user clicks on the graph
   void GetPoint(TVirtualPad * vpad, double& x, double& y)
@@ -43,13 +43,20 @@ namespace CoLib
     file->cd();
     return dynamic_cast<T*> (file->Get<T>(name.c_str())->Clone(new_name.c_str()));
   }
+
+  template<class T>
+  auto clone(T* histo, std::string new_name = "")
+  {
+    if (new_name == "") new_name = histo->GetName() + std::string("_clone");
+    return dynamic_cast<T*> (histo->Clone(new_name.c_str()));
+  }
 }
 
 /////////////////////////////////////
 //   Some Convenient Definitions   //
 /////////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   std::vector<int> ROOT_nice_colors = { 1, 2, 4, 6, 8, 9, 11, 30};
   
@@ -63,10 +70,10 @@ namespace CoLib
 //  HISTO SIMPLE MANIPULATIONS  //
 //////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Clone h1 and adds h2 by the given factor
-  /// @else if different binning, use CoLib::AddGeneral
+  /// @else if different binning, use Colib::AddGeneral
   template<class THist>
   THist* Add(THist* h1, THist* h2, double factor = 1)
   {
@@ -170,7 +177,7 @@ namespace CoLib
   }
 
   template<class THist> 
-  THist* operator&(THist histo1, THist histo2) {return CoLib::AND(&histo1, &histo2);}
+  THist* operator&(THist histo1, THist histo2) {return Colib::AND(&histo1, &histo2);}
 
   void toInt(TH1* histo)
   {
@@ -223,7 +230,7 @@ namespace CoLib
 // HISTOGRAM SIMPLE INFORMATIONS //
 ///////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Checks that the histogram can be used
   bool checkHisto(TH1* histo)
@@ -261,7 +268,7 @@ namespace CoLib
   double getIntegralUser(TH1 * histo, double x_min, double x_max)
   {
     double integral = 0.0;
-    if (!checkHisto(histo)) {error("CoLib::getIntegralUser(TH1 * histo) : histo does not exists"); return integral;}
+    if (!checkHisto(histo)) {error("Colib::getIntegralUser(TH1 * histo) : histo does not exists"); return integral;}
     
     // Invert if x_min < x_max
     if (x_max<x_min) 
@@ -283,7 +290,7 @@ namespace CoLib
   int getBinX0(TH1F const * histo)
   {
     int bin0 = 0;
-    if (!checkHisto(histo)) {error("CoLib::getBinX0(TH1F const * histo) : histo does not exists"); return bin0;}
+    if (!checkHisto(histo)) {error("Colib::getBinX0(TH1F const * histo) : histo does not exists"); return bin0;}
     auto const bins = histo -> GetXaxis() -> GetNbins();
     std::vector<double> lowEdges(bins);
     histo -> GetXaxis() -> GetLowEdge(lowEdges.data());
@@ -307,12 +314,12 @@ namespace CoLib
   }
 
   
-  CoLib::Point selectPoint(TH1* histo, std::string const & instructions)
+  Colib::Point selectPoint(TH1* histo, std::string const & instructions)
   {
     double x = 0; double y = 0;
     gPad->SetTitle(instructions.c_str());
     histo->SetTitle(instructions.c_str());
-    CoLib::GetPoint(gPad->cd(), x, y);
+    Colib::GetPoint(gPad->cd(), x, y);
     gPad->Update();
     return {x, y};
   }
@@ -322,7 +329,7 @@ namespace CoLib
     double x = 0; double y = 0;
     gPad->SetTitle(instructions.c_str());
     histo->SetTitle(instructions.c_str());
-    CoLib::GetPoint(gPad->cd(), x, y);
+    Colib::GetPoint(gPad->cd(), x, y);
     gPad->Update();
     return x;
   }
@@ -332,7 +339,7 @@ namespace CoLib
     double x = 0; double y = 0;
     gPad->SetTitle(instructions.c_str());
     histo->SetTitle(instructions.c_str());
-    CoLib::GetPoint(gPad->cd(), x, y);
+    Colib::GetPoint(gPad->cd(), x, y);
     gPad->Update();
     return y;
   }
@@ -343,13 +350,13 @@ namespace CoLib
 // MORE COMPLEX HISTOGRAM MANIPULATIONS //
 //////////////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief returns a vector of TH1s, which corresponding to the Y projection of each X bin
   std::vector<TH1D*> allProjectionsY(TH2 const * histo)
   {
     std::vector<TH1D*> ret;
-    if (!checkHisto(histo)) {error("CoLib::allProjectionsY(TH2 const * histo) : histo does not exists"); return ret;}
+    if (!checkHisto(histo)) {error("Colib::allProjectionsY(TH2 const * histo) : histo does not exists"); return ret;}
     for (int x = 0; x<histo->GetNbinsX(); ++x)
     {
       auto const & name = TString(histo->GetName())+"_p"+TString(std::to_string(histo->GetXaxis()->GetBinLowEdge(x)).c_str());
@@ -363,7 +370,7 @@ namespace CoLib
   std::vector<TH1D*> allProjectionsY(TH2 const * histo, int const & nb_bins)
   {
     std::vector<TH1D*> ret;
-    if (!checkHisto(histo)) {error("CoLib::allProjectionsY(TH2 const * histo) : histo does not exists"); return ret;}
+    if (!checkHisto(histo)) {error("Colib::allProjectionsY(TH2 const * histo) : histo does not exists"); return ret;}
     int nb_iterations = histo->GetNbinsX()/nb_bins;
     for (int iteration = 0; iteration < nb_iterations; ++iteration)
     {
@@ -388,7 +395,7 @@ namespace CoLib
   THist* lineariseBidim(TBidim const * histo, std::string options = "")
   {
     std::vector<double> lin_vec;
-    if (!checkHisto(histo)) {error("CoLib::lineariseBidim(TBidim const * histo) : histo does not exists"); return lin_vec;}
+    if (!checkHisto(histo)) {error("Colib::lineariseBidim(TBidim const * histo) : histo does not exists"); return lin_vec;}
 
     bool discard_null = !found(options, "A");
   
@@ -425,7 +432,7 @@ namespace CoLib
   TBidim* compressBidim(TBidim* histo, std::string axis = "x")
   {
     std::vector<int> not_empty_columns;
-    if (!checkHisto(histo)) {error("CoLib::compressBidim(TBidim* histo) :histo does not exists"); return not_empty_columns;}
+    if (!checkHisto(histo)) {error("Colib::compressBidim(TBidim* histo) :histo does not exists"); return not_empty_columns;}
     
     int nb_columns_compressed = 0;
     auto xaxis = histo->GetXaxis();
@@ -474,8 +481,8 @@ namespace CoLib
    */
   bool AddTH1ByValue(TH2* histo2, TH1* histo1, int index, bool x = true)
   {
-    if (!checkHisto(histo1)) {error("CoLib::AddTH1ByValue(TH2*, TH1*) :TH1 does not exists"); return -1;}
-    if (!checkHisto(histo2)) {error("CoLib::AddTH1ByValue(TH2*, TH1*) :TH2 does not exists"); return -1;}
+    if (!checkHisto(histo1)) {error("Colib::AddTH1ByValue(TH2*, TH1*) :TH1 does not exists"); return -1;}
+    if (!checkHisto(histo2)) {error("Colib::AddTH1ByValue(TH2*, TH1*) :TH2 does not exists"); return -1;}
 
     auto axis = (x) ? histo2 -> GetXaxis() : histo2 -> GetYaxis();
     
@@ -515,13 +522,13 @@ namespace CoLib
 // MORE COMPLEX HISTOGRAM INFORMATIONS //
 /////////////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Finds the next bin at which the spectrum goes below the threshold. If already below, it needs to go above first.
   /// @attention modifies bin_ptr that can then act as a cursor in an iterative call
   int findNextBinBelow(TH1* histo, int * bin_ptr, double const & threshold)
   {
-    if (!checkHisto(histo)) {error("CoLib::findNextBinBelow(TH1* histo) : histo does not exists"); return -1;}
+    if (!checkHisto(histo)) {error("Colib::findNextBinBelow(TH1* histo) : histo does not exists"); return -1;}
     auto & bin = *bin_ptr;
     if (histo->GetBinContent(bin) < threshold)
     {
@@ -549,7 +556,7 @@ namespace CoLib
   /// @attention modifies bin_ptr that can then act as a cursor in an iterative call
   int findNextBinAbove(TH1* histo, int * bin_ptr, double threshold)
   {
-    if (!checkHisto(histo)) {error("CoLib::findNextBinBelow(TH1* histo) : histo does not exists"); return -1;}
+    if (!checkHisto(histo)) {error("Colib::findNextBinBelow(TH1* histo) : histo does not exists"); return -1;}
     auto & bin = *bin_ptr;
     if (histo->GetBinContent(bin) > threshold)
     {
@@ -575,7 +582,7 @@ namespace CoLib
    
   bool inline checkMatrixSquare(TH2* mat) noexcept
   {
-    if (!mat) {error(" in CoLib::checkMatrixSquare(TH2* mat) : mat is nullptr"); return false;}
+    if (!mat) {error(" in Colib::checkMatrixSquare(TH2* mat) : mat is nullptr"); return false;}
     return (mat->GetNbinsX() == mat->GetNbinsY()
     || mat->GetXaxis()->GetXmin()== mat->GetYaxis()->GetXmin()
     || mat->GetXaxis()->GetXmax()== mat->GetYaxis()->GetXmax());
@@ -587,7 +594,7 @@ namespace CoLib
 //  SPECTRA SIMPLE MANIPULATIONS  //
 ////////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Shifts a histogram by 'shift' X value
   /// @param shift Shifts each bin content by 'shift' units of the x axis
@@ -616,7 +623,7 @@ namespace CoLib
 //  SPECTRA SIMPLE INFORMATIONS  //
 ///////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
 
   /**
@@ -630,7 +637,7 @@ namespace CoLib
   std::unordered_map<int, double> getLastPeakPosition(TH2* spectra, double resolution = 1, double threshold = 0.05)
   {
     std::unordered_map<int, double> ret;
-    if (!checkHisto(spectra)) {error("CoLib::getLastPeakPosition(TH2* spectra) : spectra does not exists"); return ret;}
+    if (!checkHisto(spectra)) {error("Colib::getLastPeakPosition(TH2* spectra) : spectra does not exists"); return ret;}
     auto xaxis = spectra->GetXaxis();
     for (int xbin = 0; xbin<xaxis->GetNbins(); ++xbin)
     {
@@ -669,8 +676,8 @@ namespace CoLib
   std::unordered_map<int, double> quickCalib(TH2F* spectra, double peakE, double resolution = 1, double threshold = 0.05)
   {
     std::unordered_map<int, double> ret;
-    if (!checkHisto(spectra)) {error("CoLib::quickCalib(TH2 * spectra) : spectra does not exists"); return ret;}
-    auto peaks = CoLib::getLastPeakPosition(spectra, resolution, threshold);
+    if (!checkHisto(spectra)) {error("Colib::quickCalib(TH2 * spectra) : spectra does not exists"); return ret;}
+    auto peaks = Colib::getLastPeakPosition(spectra, resolution, threshold);
     for (auto const & e : peaks) ret[e.first] = peakE*e.second;
     return ret;
   }
@@ -687,8 +694,8 @@ namespace CoLib
   std::unordered_map<int, double> quickCalib(TH2F* spectra, Container const & peakE, double resolution = 1, double threshold = 0.05)
   {
     std::unordered_map<int, double> ret;
-    if (!checkHisto(spectra)) {error("CoLib::quickCalib(TH2 * spectra) : spectra does not exists"); return ret;}
-    auto peaks = CoLib::getLastPeakPosition(spectra, resolution, threshold);
+    if (!checkHisto(spectra)) {error("Colib::quickCalib(TH2 * spectra) : spectra does not exists"); return ret;}
+    auto peaks = Colib::getLastPeakPosition(spectra, resolution, threshold);
     for (auto const & e : peaks) ret[e.first] = peakE[e.first]/e.second;
     return ret;
   }
@@ -697,7 +704,7 @@ namespace CoLib
   template<class THist>
   bool getMeanPeak(THist* spectrum, double & mean)
   {
-    if (!checkHisto(spectrum)) {error("CoLib::getMeanPeak(THist* spectrum) : spectrum does not exists"); return false;}
+    if (!checkHisto(spectrum)) {error("Colib::getMeanPeak(THist* spectrum) : spectrum does not exists"); return false;}
     
     // Declaration :
     double pospic, amppic, widthpic;
@@ -762,7 +769,7 @@ namespace CoLib
   double peakIntegral(TH1* spectrum, int bin_min, int bin_max, int smooth_background_it = 20)
   {
     auto background = spectrum->ShowBackground(smooth_background_it);
-    auto ret = CoLib::peakIntegral(spectrum, bin_min, bin_max, background);
+    auto ret = Colib::peakIntegral(spectrum, bin_min, bin_max, background);
     delete background;
     return ret;
   }
@@ -772,7 +779,7 @@ namespace CoLib
     std::vector<double> ret;
     for (auto const & nrj : energies)
     {
-      ret.push_back(CoLib::peakIntegral(spectrum, nrj-resolution, nrj+resolution+1, background));
+      ret.push_back(Colib::peakIntegral(spectrum, nrj-resolution, nrj+resolution+1, background));
     }
     return ret;
   }
@@ -800,7 +807,7 @@ namespace CoLib
   double peakIntegralUser(TH1* spectrum, double x_min, double x_max, int smooth_background_it = 20)
   {
     auto background = spectrum->ShowBackground(smooth_background_it);
-    auto ret = CoLib::peakIntegralUser(spectrum, x_min, x_max, background);
+    auto ret = Colib::peakIntegralUser(spectrum, x_min, x_max, background);
     delete background;
     return ret;
   }
@@ -810,7 +817,7 @@ namespace CoLib
     std::vector<double> ret;
     for (auto const & nrj : energies)
     {
-      ret.push_back(CoLib::peakIntegralUser(spectrum, nrj-resolution, nrj+resolution+1, background));
+      ret.push_back(Colib::peakIntegralUser(spectrum, nrj-resolution, nrj+resolution+1, background));
     }
     return ret;
   }
@@ -827,7 +834,7 @@ namespace CoLib
   /// @brief Calculates the net integral of the peak divided by the background integral. Requires spectrum with wide enough range to infer the background
   double peakOverBackground(TH1* spectrum, int bin_min, int bin_max, TH1* background)
   {
-    auto const & peak = CoLib::peakIntegral(spectrum, bin_min, bin_max, background);
+    auto const & peak = Colib::peakIntegral(spectrum, bin_min, bin_max, background);
     auto const & bckg = background->Integral(bin_min, bin_max);
     return peak/bckg;
   }
@@ -835,7 +842,7 @@ namespace CoLib
   double peakOverBackground(TH1* spectrum, int bin_min, int bin_max, int smooth_background_it = 20)
   {
     auto background = spectrum->ShowBackground(smooth_background_it);
-    auto ret = CoLib::peakOverBackground(spectrum, bin_min, bin_max, background);
+    auto ret = Colib::peakOverBackground(spectrum, bin_min, bin_max, background);
     delete background;
     return ret;
   }
@@ -844,24 +851,24 @@ namespace CoLib
   {
     auto total = spectrum->Integral();
     if (total == 0) return 0;
-    else return CoLib::peakIntegral(spectrum, bin_min, bin_max, background)/total;
+    else return Colib::peakIntegral(spectrum, bin_min, bin_max, background)/total;
   }
   double peakOverTotal(TH1* spectrum, int bin_min, int bin_max, int smooth_background_it = 20)
   {
-    return CoLib::peakIntegral(spectrum, bin_min, bin_max, smooth_background_it)/spectrum->Integral();
+    return Colib::peakIntegral(spectrum, bin_min, bin_max, smooth_background_it)/spectrum->Integral();
   }
   
   double peakSignificance(TH1* spectrum, int bin_min, int bin_max, TH1* background)
   {
     auto const & peak_total = spectrum->Integral(bin_min, bin_max);
-    auto const & peak_only = CoLib::peakIntegral(spectrum, bin_min, bin_max, background);
+    auto const & peak_only = Colib::peakIntegral(spectrum, bin_min, bin_max, background);
     if (peak_total == 0) return 0;
     else return peak_only/sqrt(peak_total);
   }
   double peakSignificance(TH1* spectrum, int bin_min, int bin_max, int smooth_background_it = 20)
   {
     auto background = spectrum->ShowBackground(smooth_background_it, "");
-    auto ret = CoLib::peakSignificance(spectrum, bin_min, bin_max, background);
+    auto ret = Colib::peakSignificance(spectrum, bin_min, bin_max, background);
     delete background;
     return ret;
   }
@@ -888,7 +895,7 @@ namespace CoLib
   /// @brief Get the ratio of the integral of the same peak in two different spectra
   double ratio_integrals(TH1* spectrum1, TH1* spectrum2, int peak_min, int peak_max)
   {
-    return CoLib::peakIntegral(spectrum1, peak_min, peak_max)/CoLib::peakIntegral(spectrum2, peak_min, peak_max);
+    return Colib::peakIntegral(spectrum1, peak_min, peak_max)/Colib::peakIntegral(spectrum2, peak_min, peak_max);
   }
 
 }
@@ -897,13 +904,13 @@ namespace CoLib
 // MORE COMPLEX SPECTRA MANIPULATIONS  //
 /////////////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Get a sub-histogram between x1 and x2
   template<class THist>
   THist* subHisto(THist* spectrum, int xmin, int xmax)
   {
-    if (!checkHisto(spectrum)) {error("CoLib::subHisto(THist* spectrum) : spectrum does not exists"); return nullptr;}
+    if (!checkHisto(spectrum)) {error("Colib::subHisto(THist* spectrum) : spectrum does not exists"); return nullptr;}
     auto name = TString(spectrum->GetName())+("_"+std::to_string(xmin)+"_"+std::to_string(xmax)).c_str();
     auto bin_low = spectrum->GetBinLowEdge(xmin);
     auto bin_high = spectrum->GetBinLowEdge(xmax);
@@ -917,7 +924,7 @@ namespace CoLib
   /// @brief For each X bin, normalise the Y histogram
   void normalizeY(TH2* matrix, double const & factor = 1)
   {
-    if (!checkHisto(matrix)) {error("CoLib::normalizeY(TH2* matrix) : matrix does not exists"); return;}
+    if (!checkHisto(matrix)) {error("Colib::normalizeY(TH2* matrix) : matrix does not exists"); return;}
     int const & bins_x = matrix->GetNbinsX();
     int const & bins_y = matrix->GetNbinsY();
     for (int x = 1; x<bins_x; x++)
@@ -936,7 +943,7 @@ namespace CoLib
   /// @brief For each X bin, normalise the Y histogram
   TH2F* normalizeYperX(TH2F* matrix, double const & factor = 1)
   {
-    if (!checkHisto(matrix)) {error("CoLib::normalizeYperX(TH2F* matrix) : matrix does not exists"); return nullptr;}
+    if (!checkHisto(matrix)) {error("Colib::normalizeYperX(TH2F* matrix) : matrix does not exists"); return nullptr;}
     auto ret = static_cast<TH2F*>(matrix->Clone(matrix->GetName()+TString("_normalizeYperX")));
     int const & bins_x = matrix->GetNbinsX();
     int const & bins_y = matrix->GetNbinsY();
@@ -955,7 +962,7 @@ namespace CoLib
   /// @brief Normalise the whole bidim. Modifies the matrix
   void normalizeBidim(TH2* matrix, double const & factor = 1.0)
   {
-    if (!checkHisto(matrix)) {error("CoLib::normalizeBidim(TH2F* matrix) : matrix does not exists"); return;}
+    if (!checkHisto(matrix)) {error("Colib::normalizeBidim(TH2F* matrix) : matrix does not exists"); return;}
     auto const & bins_x = matrix->GetNbinsX();
     auto const & bins_y = matrix->GetNbinsY();
     double const & max = matrix->GetMaximum();
@@ -969,16 +976,16 @@ namespace CoLib
   /// @brief Set Y histogram proj in matrix at binX.
   void setX(TH2* matrix, TH1* proj, int const & binX)
   {
-    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoLib::setX");}
-    if (proj == nullptr) {throw_error("Projection histo nullptr in CoLib::setX");}
+    if (matrix == nullptr){throw_error("Matrix histo nullptr in Colib::setX");}
+    if (proj == nullptr) {throw_error("Projection histo nullptr in Colib::setX");}
     for (int binY = 0; binY<matrix->GetNbinsY(); binY++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
   /// @brief Set X histogram proj in matrix at binY.
   void setY(TH2* matrix, TH1* proj, int const & binY)
   {
-    if (matrix == nullptr){throw_error("Matrix histo nullptr in CoLib::setY");}
-    if (proj == nullptr) {throw_error("Projection histo nullptr in CoLib::setY");}
+    if (matrix == nullptr){throw_error("Matrix histo nullptr in Colib::setY");}
+    if (proj == nullptr) {throw_error("Projection histo nullptr in Colib::setY");}
     for (int binX = 0; binX<matrix->GetNbinsX(); binX++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
@@ -998,12 +1005,12 @@ namespace CoLib
       TH1D* newHisto = nullptr;
       if (gFile) newHisto = gFile->Get<TH1D>(name.c_str());
       if (!newHisto) {print("Creating", name); newHisto = static_cast<TH1D*> (histo->Clone(name.c_str()));}
-      CoLib::simulatePeak(newHisto, x_center, x_resolution, nb_hits);
+      Colib::simulatePeak(newHisto, x_center, x_resolution, nb_hits);
       newHisto->SetLineColor(kRed);
       newHisto->Draw();
       histo->Draw("same");
     }
-    else CoLib::simulatePeak(histo, x_center, x_resolution, nb_hits); 
+    else Colib::simulatePeak(histo, x_center, x_resolution, nb_hits); 
   }
   
   TH2F* symetrise(TH2F* histo)
@@ -1038,7 +1045,7 @@ namespace CoLib
 // MORE COMPLEX SPECTRA INFORMATIONS  //
 ////////////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /**
    * @brief Returns the calculated peak significance for each peak centered around each bin
@@ -1048,7 +1055,7 @@ namespace CoLib
    */
   TH1F* countToPeakSignificance(TH1* spectrum, int const & resolution, TH1* background)
   {
-    if (!checkHisto(spectrum)) {error("CoLib::countToPeakSignificance(TH2 * spectrum) : spectrum does not exists"); return nullptr;}
+    if (!checkHisto(spectrum)) {error("Colib::countToPeakSignificance(TH2 * spectrum) : spectrum does not exists"); return nullptr;}
     std::string name = spectrum->GetName(); name += "_significance";
     std::string title = spectrum->GetName(); title+=";keV;significance;";
     auto ret = new TH1F(name.c_str(), title.c_str(), spectrum->GetNbinsX(), spectrum->GetXaxis()->GetXmin(), spectrum->GetXaxis()->GetXmax());
@@ -1064,9 +1071,9 @@ namespace CoLib
    */
   TH1F* countToPeakSignificance(TH1* spectrum, int const & resolution, int smooth_background_it = 20)
   {
-    if (!checkHisto(spectrum)) {error("CoLib::countToPeakSignificance(TH2 * spectrum) : spectrum does not exists"); return nullptr;}
+    if (!checkHisto(spectrum)) {error("Colib::countToPeakSignificance(TH2 * spectrum) : spectrum does not exists"); return nullptr;}
     auto background = spectrum->ShowBackground(smooth_background_it);
-    auto ret = CoLib::countToPeakSignificance(spectrum, resolution, background);
+    auto ret = Colib::countToPeakSignificance(spectrum, resolution, background);
     delete background;
     return ret;
   }
@@ -1083,7 +1090,7 @@ namespace CoLib
     std::string title = spectrum->GetName(); title+=";keV;peakOverBackground;";
     auto ret = new TH1F(name.c_str(), title.c_str(), spectrum->GetNbinsX(), spectrum->GetXaxis()->GetXmin(), spectrum->GetXaxis()->GetXmax());
     for (int bin = 0+resolution; bin<spectrum->GetNbinsX()-resolution; ++bin)
-      ret -> SetBinContent(bin, CoLib::peakOverBackground(spectrum, bin-resolution, bin+resolution, background));
+      ret -> SetBinContent(bin, Colib::peakOverBackground(spectrum, bin-resolution, bin+resolution, background));
     return ret;
   }
   /**
@@ -1095,7 +1102,7 @@ namespace CoLib
   TH1F* countToPeakOverBackground(TH1* spectrum, int resolution, int smooth_background_it = 20)
   {
     auto background = spectrum->ShowBackground(smooth_background_it);
-    auto ret = CoLib::countToPeakOverBackground(spectrum, resolution, background);
+    auto ret = Colib::countToPeakOverBackground(spectrum, resolution, background);
     delete background;
     return ret;
   }
@@ -1124,7 +1131,7 @@ namespace CoLib
   TH1F* countToPeakOverTotal(TH1* spectrum, int resolution, int smooth_background_it = 20)
   {
     auto background = spectrum->ShowBackground(smooth_background_it);
-    auto ret = CoLib::countToPeakOverTotal(spectrum, resolution, background);
+    auto ret = Colib::countToPeakOverTotal(spectrum, resolution, background);
     delete background;
     return ret;
   }
@@ -1139,10 +1146,10 @@ namespace CoLib
   THist* countToPeakIntegral(THist* spectrum, int const & resolution, TH1* background)
   {
     std::string name = spectrum->GetName(); name += "_CoLib::peakIntegral";
-    std::string title = spectrum->GetName(); title+=";keV;CoLib::peakIntegral";
+    std::string title = spectrum->GetName(); title+=";keV;Colib::peakIntegral";
     auto ret = new THist(name.c_str(), title.c_str(), spectrum->GetNbinsX(), spectrum->GetXaxis()->GetXmin(), spectrum->GetXaxis()->GetXmax());
     for (int bin = 0+resolution; bin<spectrum->GetNbinsX(); ++bin)
-      ret -> SetBinContent(bin, CoLib::peakIntegral(spectrum, bin-resolution, bin+resolution, background));
+      ret -> SetBinContent(bin, Colib::peakIntegral(spectrum, bin-resolution, bin+resolution, background));
     return ret;
   }
   
@@ -1170,14 +1177,14 @@ namespace CoLib
   TH2F* countToPeakIntegral(TH2F* spectrum, int const & resolution, int const & smooth_background_it = 20)
   {
     std::string name = spectrum->GetName(); name += "_CoLib::peakIntegral";
-    std::string title = spectrum->GetName(); title+=";keV;"+TString(spectrum->GetYaxis()->GetTitle())+";CoLib::peakIntegral";
+    std::string title = spectrum->GetName(); title+=";keV;"+TString(spectrum->GetYaxis()->GetTitle())+";Colib::peakIntegral";
     auto ret = new TH2F(name.c_str(), title.c_str(), 
                         spectrum->GetNbinsX(), spectrum->GetXaxis()->GetXmin(), spectrum->GetXaxis()->GetXmax(), 
                         spectrum->GetNbinsY(), spectrum->GetYaxis()->GetXmin(), spectrum->GetYaxis()->GetXmax());
     for (int y = 1; y<=spectrum->GetNbinsY(); ++y) 
     {
       std::unique_ptr<TH1D> proj (spectrum->ProjectionX("temp", y, y));
-      std::unique_ptr<TH1D> modified_proj (CoLib::countToPeakIntegral(proj.get(), resolution, smooth_background_it));
+      std::unique_ptr<TH1D> modified_proj (Colib::countToPeakIntegral(proj.get(), resolution, smooth_background_it));
       for (int x = 0; x<=spectrum->GetNbinsX(); ++x) ret->SetBinContent(x, y, modified_proj->GetBinContent(x));
     }
     return ret;
@@ -1199,7 +1206,7 @@ namespace CoLib
   {
     auto const & nX = spectrum->GetNbinsX();
     std::vector<double> ret(nX+1);
-    if (!checkHisto(spectrum)) {error("CoLib::countsPerKeV(TH1* spectrum) : spectrum does not exists"); return ret;}
+    if (!checkHisto(spectrum)) {error("Colib::countsPerKeV(TH1* spectrum) : spectrum does not exists"); return ret;}
     auto const & xmax = spectrum->GetXaxis()->GetXmax();
     auto const & xmin = spectrum->GetXaxis()->GetXmin();
     auto const & range = xmax - xmin;
@@ -1235,7 +1242,7 @@ namespace CoLib
     if (!histo) throw std::invalid_argument("Input histogram is null!");
     if (smooth == 0) throw std::invalid_argument("Smoothing factor must be greater than 0!");
 
-    auto result = CoLib::cloneEmpty(histo, histo->GetName()+std::string("der"));
+    auto result = Colib::cloneEmpty(histo, histo->GetName()+std::string("der"));
     size_t N = histo->GetNbinsX();
 
     for (size_t bin = 1; bin <= N; ++bin)
@@ -1278,7 +1285,7 @@ std::ostream& operator<<(std::ostream& out, TTree * tree)
   return out;
 }
 
-namespace CoLib
+namespace Colib
 {
   //-----------------//
   // TREE ALIGNEMENT //
@@ -1488,12 +1495,12 @@ std::ostream& operator<<(std::ostream& cout, THBinning binning)
 //   PROJECTIONS   //
 /////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Project matrix on Y axis at a given X bin. This fills proj.
   void projectY(TH2* matrix, TH1* proj, int const & binX)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoLib::projectY");}
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectY");}
     auto const & nbBins = matrix->GetNbinsY();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins,getYmin(matrix), getYmax(matrix));
@@ -1503,7 +1510,7 @@ namespace CoLib
   /// @brief Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. This fills proj.
   void projectY(TH2* matrix, TH1* proj, int const & binXmin, int const & binXmax)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoLib::projectY");}
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectY");}
     auto const & nbBins = matrix->GetNbinsY();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins, getYmin(matrix), getYmax(matrix));
@@ -1520,7 +1527,7 @@ namespace CoLib
   /// @brief Project the whole matrix on the X axis. This fills proj.
   void projectX(TH2* matrix, TH1* proj)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoLib::projectX");}
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectX");}
     auto const & nbBins = matrix->GetNbinsX();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins, getXmin(matrix), getXmax(matrix));
@@ -1530,7 +1537,7 @@ namespace CoLib
   /// @brief Project on X axis at a given Y bin. This fills proj.
   void projectX(TH2* matrix, TH1* proj, int const & binY)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoLib::projectX");}
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectX");}
     auto const & nbBins = matrix->GetNbinsX();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins,getXmin(matrix), getXmax(matrix));
@@ -1540,7 +1547,7 @@ namespace CoLib
   /// @brief Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. This fills proj.
   void projectX(TH2* matrix, TH1* proj, int const & binYmin, int const & binYmax)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in CoLib::projectX");}
+    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectX");}
     auto const & nbBins = matrix->GetNbinsX();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins, getXmin(matrix), getXmax(matrix));
@@ -1558,7 +1565,7 @@ namespace CoLib
   {
     TH1D* proj = histo->ProjectionX(name.c_str(), xvalue_min, xvalue_max);
     std::unique_ptr<TH1D> bckg (histo->ProjectionX((name+"_bckg").c_str(), xvalue_min_bckg, xvalue_max_bckg));
-    proj->Add(bckg.get(), -CoLib::peakIntegral(proj, peak_norm_min, peak_norm_max)/CoLib::peakIntegral(bckg.get(), peak_norm_min, peak_norm_max));
+    proj->Add(bckg.get(), -Colib::peakIntegral(proj, peak_norm_min, peak_norm_max)/Colib::peakIntegral(bckg.get(), peak_norm_min, peak_norm_max));
     return proj;
   }
 
@@ -1760,11 +1767,11 @@ namespace CoLib
 //   COANALYSE   //
 ///////////////////
 
-namespace CoLib
+namespace Colib
 {
   std::vector<bool> mainPeaksLookup(TH1D* histo, double const & sigma = 2., double const & threshold = 0.05, double const & n_sigma = 2, int const & verbose = 0, bool remove511 = false)
   {
-    if (!histo) {error("in CoLib::mainPeaksLookup() : histo is nullptr"); return std::vector<bool>(0);}
+    if (!histo) {error("in Colib::mainPeaksLookup() : histo is nullptr"); return std::vector<bool>(0);}
     std::vector<double> peaks;
     auto xAxis = histo->GetXaxis();
     if (remove511) xAxis->SetRangeUser(0, 500);
@@ -1843,7 +1850,7 @@ namespace CoLib
 
       // if (choice == 2)
       // {
-      //   if (nXbins != nYbins) {error("CoLib::removeBackground for 2D spectra is suited only for symmetric spectra"); return;}
+      //   if (nXbins != nYbins) {error("Colib::removeBackground for 2D spectra is suited only for symmetric spectra"); return;}
       // }
 
       // switch (choice)
@@ -1894,7 +1901,7 @@ namespace CoLib
 
     auto projX0 = histo->ProjectionX("projX0"); // Get the total X projection of the matrix
     auto bckgX = projX0->ShowBackground(niter); // Get the total X projection's fitted background 
-    CoLib::toInt(bckgX);
+    Colib::toInt(bckgX);
     auto projX = static_cast<TH1D*>(projX0->Clone("projX")); // Prepare the background-clean total X projection
     projX->Add(bckgX, -1); // Calculate the background-subtracted spectra
 
@@ -2306,7 +2313,7 @@ namespace CoLib
 //  BACKGROUND REMOVAL TESTS  //
 ////////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   template<typename T> T LLS(T const & value) {return (log(log(sqrt(std::abs(value)+1.)+1.)+1.));}
   template<typename T> T LLS_inverse(T const & value) {return exp(exp(value -1)-1) * exp(exp(value-1)-1) -1;}
@@ -2358,7 +2365,7 @@ namespace CoLib
 //   Manage pads   //
 /////////////////////
 
-namespace CoLib
+namespace Colib
 {
   namespace Pad
   {
@@ -2442,7 +2449,7 @@ namespace CoLib
         if (name == obj->GetName())
         {
           ret = static_cast<THist*>(obj);
-          if (!ret) error("CoLib::Pad::get_histo() : can't cast", obj->ClassName(), "to", hist_class->GetName());
+          if (!ret) error("Colib::Pad::get_histo() : can't cast", obj->ClassName(), "to", hist_class->GetName());
           break;
         }
       }
@@ -2458,7 +2465,7 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return ret;}
       }
-      auto histos = CoLib::Pad::get_histos(pad);
+      auto histos = Colib::Pad::get_histos(pad);
       for (auto const & histo : histos) ret.push_back(histo->GetName());
       return ret;
     }
@@ -2475,7 +2482,7 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos(pad);
+      auto histos = Colib::Pad::get_histos(pad);
   
       std::vector<double> mins;
       std::vector<double> maxs;
@@ -2494,11 +2501,11 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos(pad);
+      auto histos = Colib::Pad::get_histos(pad);
   
       for (size_t histo_i = 0; histo_i<histos.size(); ++histo_i)
       {
-        histos[histo_i]->SetLineColor(CoLib::getROOTniceColors(histo_i));    
+        histos[histo_i]->SetLineColor(Colib::getROOTniceColors(histo_i));    
       }
     }
   
@@ -2509,7 +2516,7 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos(pad);
+      auto histos = Colib::Pad::get_histos(pad);
       for (auto & histo : histos) histo->SetTitle(histo->GetName());
     }
     
@@ -2520,8 +2527,8 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos<TH1>(pad);
-      for (auto & histo : histos) CoLib::removeBackground(histo, nb_it);
+      auto histos = Colib::Pad::get_histos<TH1>(pad);
+      for (auto & histo : histos) Colib::removeBackground(histo, nb_it);
       gPad->Update();
     }
   
@@ -2532,7 +2539,7 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histo0 = CoLib::Pad::get_histos(pad)[0];
+      auto histo0 = Colib::Pad::get_histos(pad)[0];
       histo0->SetStats(0);
       pad->Update();
       gPad->Update();
@@ -2567,12 +2574,12 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos<THist>(pad);
+      auto histos = Colib::Pad::get_histos<THist>(pad);
       if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
       double maxi = 0;
       for (auto const & hist : histos) if (maxi < hist->GetMaximum()) maxi = hist->GetMaximum();
       if (maxi==0.0) {error("max is 0"); return;}
-      bool hasLegend = CoLib::Pad::has_legend(pad);
+      bool hasLegend = Colib::Pad::has_legend(pad);
       int i = 0;
       for (auto & hist : histos) 
       {
@@ -2593,12 +2600,12 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos<THist>(pad);
+      auto histos = Colib::Pad::get_histos<THist>(pad);
       if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
       double mini = histos[0]->GetMaximum();
       for (auto const & hist : histos) if (mini > hist->GetMaximum()) mini = hist->GetMaximum();
       if (mini==0.0) {error("min is 0"); return;}
-      bool hasLegend = CoLib::Pad::has_legend(pad);
+      bool hasLegend = Colib::Pad::has_legend(pad);
       int i = 0;
       for (auto & hist : histos) 
       {
@@ -2619,17 +2626,17 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos<TH1>(pad);
+      auto histos = Colib::Pad::get_histos<TH1>(pad);
       if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
       
       double x, y;
-      CoLib::GetPoint(pad, x, y);
+      Colib::GetPoint(pad, x, y);
       auto bin = histos[0]->GetXaxis()->FindBin(x);
     
       double maxi = 0;
       for (auto const & hist : histos) if (maxi < hist->GetBinContent(bin)) maxi = hist->GetMaximum();
       if (maxi==0.0) {error("max is 0"); return;}
-      bool hasLegend = CoLib::Pad::has_legend(pad);
+      bool hasLegend = Colib::Pad::has_legend(pad);
       int i = 0;
       for (auto & hist : histos) 
       {
@@ -2650,17 +2657,17 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos<TH1>(pad);
+      auto histos = Colib::Pad::get_histos<TH1>(pad);
       if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
       
       double x, y;
-      CoLib::GetPoint(pad, x, y);
+      Colib::GetPoint(pad, x, y);
       auto bin = histos[0]->GetXaxis()->FindBin(x);
     
       double mini = histos[0]->GetBinContent(bin);
       for (auto const & hist : histos) if (mini > hist->GetBinContent(bin)) mini = hist->GetBinContent(bin);
       if (mini==0.0) {error("min is 0"); return;}
-      bool hasLegend = CoLib::Pad::has_legend(pad);
+      bool hasLegend = Colib::Pad::has_legend(pad);
       int i = 0;
       for (auto & hist : histos) 
       {
@@ -2680,12 +2687,12 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos<TH1>(pad);
-      if (histos.size() != 2) {error("CoLib::Pad::subtract_histos : needs exactly two histos"); return;}
+      auto histos = Colib::Pad::get_histos<TH1>(pad);
+      if (histos.size() != 2) {error("Colib::Pad::subtract_histos : needs exactly two histos"); return;}
       histos[0]->GetXaxis()->UnZoom();
       histos[1]->GetXaxis()->UnZoom();
       histos[0]->Add(histos[1], -1);
-      if (CoLib::Pad::has_legend(pad)) gPad->BuildLegend();
+      if (Colib::Pad::has_legend(pad)) gPad->BuildLegend();
       pad->Update();
     }
     
@@ -2696,8 +2703,8 @@ namespace CoLib
         pad = (TPad*)gPad;
         if (!pad) {error("no pad"); return;}
       }
-      auto histos = CoLib::Pad::get_histos<TH1>(pad);
-      if (histos.size() != 1) {error("CoLib::Pad::show_peaks : implemented for one histogram"); return;}
+      auto histos = Colib::Pad::get_histos<TH1>(pad);
+      if (histos.size() != 1) {error("Colib::Pad::show_peaks : implemented for one histogram"); return;}
       auto histo = histos[0];
       histo->ShowPeaks(sigma, option, threshold);
       auto markers = static_cast<TPolyMarker*>(histo->GetListOfFunctions()->FindObject("TPolyMarker")); // Extracts the peaks list
@@ -2718,9 +2725,9 @@ namespace CoLib
   
     void simulate_peak(double const & x_center, double const & x_resolution, int const & nb_hits)
     {
-      auto const & histos = CoLib::Pad::get_histos();
-      if (histos.empty()) {error("CoLib::Pad::simulate_peak : no histo in pad"); return;}
-      CoLib::simulatePeak(histos[0], x_center, x_resolution, nb_hits, true);
+      auto const & histos = Colib::Pad::get_histos();
+      if (histos.empty()) {error("Colib::Pad::simulate_peak : no histo in pad"); return;}
+      Colib::simulatePeak(histos[0], x_center, x_resolution, nb_hits, true);
     }
   }
 }
@@ -2729,7 +2736,7 @@ namespace CoLib
 //   Manage histo files   //
 ////////////////////////////
 
-namespace CoLib
+namespace Colib
 {
   template<class THist>
   THist* get(std::string name, TFile* file = nullptr)
@@ -2984,19 +2991,19 @@ namespace CoLib
     if (file == nullptr) file = gFile;
     THist temp_histo;
     auto list = file_get_names_of<THist>(file);
-    auto matching_list = CoLib::match_regex(list, expression);
+    auto matching_list = Colib::match_regex(list, expression);
     if (matching_list.empty()) {error("no", temp_histo.ClassName(), "matching regex", expression, "in file", file->GetName()); return nullptr;}
 
     auto name = expression;
     replace_all(name, "*", "_");
-    auto ret = CoLib::clone<THist>(matching_list[0], name.c_str());
+    auto ret = Colib::clone<THist>(matching_list[0], name.c_str());
 
     for (size_t i = 0; i<matching_list.size(); ++i) 
     {
       print("merging", matching_list[i].c_str());
       auto histo = file->Get<THist>(matching_list[i].c_str());
       ret->Add(histo);
-      CoLib::unload(histo);
+      Colib::unload(histo);
     }
     return ret;
   }
@@ -3008,19 +3015,19 @@ namespace CoLib
     if (file == nullptr) file = gFile;
     TH1F temp_histo;
     auto list = file_get_names_of<TH1F>(file);
-    auto matching_list = CoLib::match_regex(list, expression);
+    auto matching_list = Colib::match_regex(list, expression);
     if (matching_list.empty()) {error("no", temp_histo.ClassName(), "matching regex", expression, "in file", file->GetName()); return nullptr;}
 
     auto name = expression;
     replace_all(name, "*", "_");
-    auto ret = CoLib::clone<TH1F>(matching_list[0], name.c_str());
+    auto ret = Colib::clone<TH1F>(matching_list[0], name.c_str());
 
     for (size_t i = 0; i<matching_list.size(); ++i) 
     {
       print("merging", matching_list[i].c_str());
       auto histo = file->Get<TH1F>(matching_list[i].c_str());
       ret->Add(histo);
-      CoLib::unload(histo);
+      Colib::unload(histo);
     }
     return ret;
   }
@@ -3031,7 +3038,7 @@ namespace CoLib
 /////////////////////
 //  MISCELLANEOUS  //
 /////////////////////
-namespace CoLib
+namespace Colib
 {
   double calculateHalfLife(TH1* decay_histo)
   {
@@ -3244,8 +3251,8 @@ namespace CoLib
   {
     auto const & bins = hist->GetNbinsX();
     
-    if (bin_min<length) throw_error("CoLib::adaptative_mean : bin_min must be at least length bins from the edge.");
-    if ((bins-bin_max)<length) throw_error("CoLib::adaptative_mean : bin_max must be at least length bins from the edge.");
+    if (bin_min<length) throw_error("Colib::adaptative_mean : bin_min must be at least length bins from the edge.");
+    if ((bins-bin_max)<length) throw_error("Colib::adaptative_mean : bin_max must be at least length bins from the edge.");
 
     TH1F* out = new TH1F("out", "out", bins, hist->GetXaxis()->GetXmin(), hist->GetXaxis()->GetXmax());
     int sum = 0;
@@ -3282,7 +3289,7 @@ namespace CoLib
   {
     if (found(options, "-j")) 
     {
-      error("in CoLib hadd, please use the parameter nb_threads instead of -j option of hadd");
+      error("in Colib hadd, please use the parameter nb_threads instead of -j option of hadd");
       return;
     }
 
@@ -3363,7 +3370,7 @@ namespace CoLib
 //  SOME CLASSES  //
 ////////////////////
 
-namespace CoLib
+namespace Colib
 {
   /// @brief Allows one to fit a peak of a histogram in the range [low_edge, high_edge]
   /// @attention The edges must be well centered, this is not a peak finder.

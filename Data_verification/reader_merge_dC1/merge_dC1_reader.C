@@ -35,15 +35,15 @@ void merge_dC1_reader(std::string filename = "merge_dC1_V2.root")
   c->cd(1);
   gate3MeV_2Mev_p->Draw();
   gate3MeV_2Mev_pP->Draw("same");
-  CoLib::normalizeHistos();
+  Colib::normalizeHistos();
   c->cd(2);
   gate3MeV_4Mev_p->Draw();
   gate3MeV_4Mev_pP->Draw("same");
-  CoLib::normalizeHistos();
+  Colib::normalizeHistos();
   c->cd(3);
   gate2MeV_p->Draw();
   gate2MeV_pP->Draw("same");
-  CoLib::normalizeHistos();
+  Colib::normalizeHistos();
 
   // Autre piste :
 
@@ -67,7 +67,7 @@ void merge_dC1_reader(std::string filename = "merge_dC1_V2.root")
 
   // Veto remove
   auto d_VS_DC_VS_PC_particleveto = file->Get<TH3F>("d_VS_DC_VS_PC_particleveto");
-  auto clean_d_VS_DC_VS_PC = CoLib::removeVeto(d_VS_DC_VS_PC, d_VS_DC_VS_PC_particleveto, 1.005);
+  auto clean_d_VS_DC_VS_PC = Colib::removeVeto(d_VS_DC_VS_PC, d_VS_DC_VS_PC_particleveto, 1.005);
 
   auto clean_DC_VS_PC_d642 = myProjectionXY(clean_d_VS_DC_VS_PC, 640, 644, "clean_DC_VS_PC_d642");
   auto clean_DC_VS_PC_d642_2 = myProjectionXY(clean_d_VS_DC_VS_PC, 640, 644, "clean_DC_VS_PC_d642_2");

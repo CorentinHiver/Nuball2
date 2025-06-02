@@ -57,7 +57,7 @@ class ExcitationEnergy
       m_type = 1;
       // unique_TFile rootfile (TFile::Open("../136/U5_d_d_10umAl_Ex.root", "READ"));
       unique_TFile rootfile (TFile::Open(filename.c_str(), "READ"));
-      auto splines = CoLib::file_get_map_of<TSpline3>(rootfile.get());
+      auto splines = Colib::file_get_map_of<TSpline3>(rootfile.get());
       splines_pt.resize(nb_rings, nullptr);
       splines_stop.resize(nb_rings, nullptr);
       for (auto & e : splines)
