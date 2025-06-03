@@ -1,5 +1,5 @@
-#ifndef SIMPLEDSSD_HPP
-#define SIMPLEDSSD_HPP
+#ifndef WARSAWDSSD_HPP
+#define WARSAWDSSD_HPP
 
 #include "../Classes/Event.hpp"
 #include "ExcitationEnergy.hpp"
@@ -66,16 +66,15 @@ namespace DSSD
 class CellDSSD
 {
 public:
-  CellDSSD(float const & _Ering, float const & _Esector, Time const & _Tring, Time const & _Tsector, double const & _ring_angle, double const & _theta):
-  Ering(_Ering),
-  Esector(_Esector),
-  Tring(_Tring),
-  Tsector(_Tsector),
-  ring_angle(_ring_angle),
-  theta(_theta)
-  {
-    nrj = (Ering+Esector)/2;
-  }
+    CellDSSD(float const & _Ering, float const & _Esector, Time const & _Tring, Time const & _Tsector, double const & _ring_angle, double const & _theta):
+      Ering(_Ering),
+      Esector(_Esector),
+      Tring(_Tring),
+      Tsector(_Tsector),
+      ring_angle(_ring_angle),
+      theta(_theta)
+    {nrj = (Ering + Esector) / 2;}
+
   float Ering = 0;
   float Esector = 0;
   Time Tring = 0;
@@ -83,7 +82,7 @@ public:
   double ring_angle = 0;
   double theta = 0;
   float nrj = 0;
-  bool random = false;
+  bool random = false; // See WarsawDSSD::BuildCell method
 };
 
 class CellsDSSD
@@ -155,10 +154,10 @@ public:
 
   static uchar thread_local gIndex;
 protected:
-  uchar mutable m_index;
+  uchar mutable m_index = 0;
 
 public:
-  double mutable angle;
+  double mutable angle = 0.;
 };
 
 uchar thread_local StripDSSD::gIndex = 0;
@@ -176,19 +175,18 @@ class SectorDSSD : public StripDSSD
 /////////////
 /// FACES ///
 /////////////
-/**
- * @brief Group of strips, either rings or sectors
- */
+/// @brief Group of strips, either rings or sectors
 class StripsDSSD
 {public:
   StripsDSSD() noexcept = default;
 
-  void fill(StripDSSD* strip, Index const & index)
-  {
-    strips.push_back(strip);
-    strips_id.push_back(index);
-    ++mult;
-  }
+  void virtual fill() = 0;
+  // void fill(StripDSSD* strip, Index const & index)
+  // {
+  //   strips.push_back(strip);
+  //   strips_id.push_back(index);
+  //   ++mult;
+  // }
 
   void clear()
   {
@@ -209,16 +207,14 @@ class StripsDSSD
   int mult = 0;
 };
 
-/**
- * @brief Group of rings
- * 
- */
+/// @brief Group of rings
 class RingsDSSD : public StripsDSSD
 {public:
   RingsDSSD() noexcept {StripDSSD::gIndex = 0;}
   StripDSSD* fill(Event const & event, int const & hit_i)
   {
     auto const & index = DSSD::index_ring[event.labels[hit_i]];
+    if (index<0) throw_error("In RingsDSSD::fill(Event event, int hit_i) : index < 0");
     auto ret = m_rings[index].fill(event, hit_i);
     StripsDSSD::fill(&(m_rings[index]), index);
     return ret;
@@ -231,10 +227,7 @@ private:
   std::array<RingDSSD, DSSD::nb_rings> m_rings;
 };
 
-/**
- * @brief Group of sectors
- * 
- */
+/// @brief Group of sectors
 class SectorsDSSD : public StripsDSSD
 {public:
   SectorsDSSD() noexcept {StripDSSD::gIndex = 0;}
@@ -293,48 +286,49 @@ class WarsawDSSD
       return;
     }
 
-    else if (m_rings.mult == 0)
+    switch (m_rings.mult)
     {
-      ok = false;
-    }
-    else if (m_rings.mult == 1)
-    {
-      ring_index = m_rings.strips[0]->index();
-      nrj = m_rings.strips[0]->nrj;
-      ok = true;
-    }
-
-    else if (m_rings.mult == 2)
-    {
-      if (m_rings.strips[0]->isVoisin(m_rings.strips[1]) && m_rings.strips[0]->isCoincident(m_rings.strips[1]))
-      {
-        ring_index = (m_rings.strips[0]->time > m_rings.strips[1]->time) ? m_rings.strips[0]->index() : m_rings.strips[1]->index();
-        nrj = m_rings.strips[0]->nrj + m_rings.strips[1]->nrj;
-        ok = true;
-      }
-      else 
-      {
+      case 0:
         ok = false;
-        return;
-      }
+        break;
+
+      case 1: 
+        ring_index = m_rings.strips[0]->index();
+        nrj = m_rings.strips[0]->nrj;
+        ok = true;
+        break;
+
+      case 2: 
+        if (m_rings.strips[0]->isVoisin(m_rings.strips[1]) && m_rings.strips[0]->isCoincident(m_rings.strips[1]))
+        {
+          ring_index = (m_rings.strips[0]->time > m_rings.strips[1]->time) ? m_rings.strips[0]->index() : m_rings.strips[1]->index();
+          nrj = m_rings.strips[0]->nrj + m_rings.strips[1]->nrj;
+          ok = true;
+        }
+        else ok = false;
+        break;
+
+      default:
+        ok = false;
+        break;
     }
 
-    if (ok)
+    if (!ok) return;
+
+    switch (m_sectors.mult)
     {
-      if (m_sectors.mult == 0)
-      {        
+      case 0 :
         if (found(good_rings, ring_index)) ok = true;
         else ok = false;
-      }
+        break;
 
-      else if (m_sectors.mult == 1)
-      {
+      case 1 :
         nrj = m_sectors.strips[0]->nrj;
         time = m_sectors.strips[0]->time;
-        ok = (m_rings.mult > 0); // if no ring, clean energy measure but no angle, so no precise excitation energy measurement possible :
-      }
-      else if (m_sectors.mult == 2)
-      {
+        ok = (m_rings.mult > 0); // if no ring, clean energy measure but no angle, so no precise excitation energy measurement possible.
+        break;
+
+      case 2 :
         if (m_sectors.strips[0]->isVoisin(m_sectors.strips[1]) && m_sectors.strips[0]->isCoincident(m_sectors.strips[1]))
         {
           nrj = m_sectors.strips[0]->nrj + m_sectors.strips[1]->nrj;
@@ -342,10 +336,14 @@ class WarsawDSSD
           ok = true;
         }
         else ok = false;
-      }
+        break;
+
+      default:
+        ok = false;
+        break;
     }
 
-    if (ok) angle = m_rings[ring_index].angle;
+    angle = m_rings[ring_index].angle;
   }
 
   /// @brief Can handle up to four simultaneous particles. 
@@ -476,7 +474,7 @@ private:
   ExcitationEnergy* m_Ex = nullptr;
 };
 
-#endif //SIMPLEDSSD_HPP
+#endif //WARSAWDSSD_HPP
 
 /*
     // As many rings and sectors fired

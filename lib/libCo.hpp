@@ -220,6 +220,19 @@ void pauseDebug(std::string const &
 //    Types   //
 ////////////////
 
+
+template<class T>
+std::string type_of(T const & t)
+{
+  return typeid(t).name();
+}
+
+template<class T>
+std::string type_of()
+{
+  return typeid(T).name();
+}
+
 /// @brief Casts a any type into an bool
 template<typename T>
 constexpr inline bool bool_cast(T const & t) {return static_cast<bool>(t);}

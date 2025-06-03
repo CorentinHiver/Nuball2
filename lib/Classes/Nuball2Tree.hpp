@@ -104,13 +104,16 @@ private:
 bool Nuball2Tree::Open(std::string const & filename)
 {
 #ifdef COMULTITHREADING
-MTObject::mutex.lock();
+{
+  lock_mutex lock(MTObject::mutex);
 #endif //COMULTITHREADING
+
+  if (m_file && !m_file->IsZombie() && m_file->IsOpen()) m_file->Close();
 
   // Opens the file :
   m_file.reset(TFile::Open(filename.c_str(), "READ"));
 
-  if (!m_file.get()) 
+  if (!m_file)
   {
     print("Could not find", filename, "!"); 
     return (m_ok = m_file_opened = false);
@@ -127,7 +130,7 @@ MTObject::mutex.lock();
   m_tree = m_file->Get<TTree>("Nuball2");
 
 #ifdef COMULTITHREADING
-MTObject::mutex.unlock();
+}
 #endif //COMULTITHREADING
 
   if (!m_tree) 

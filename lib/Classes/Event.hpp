@@ -198,7 +198,7 @@ public:
   auto const & pileup (int const & hit_i) const {return pileups[hit_i];}
   auto       & pileup (int const & hit_i)       {return pileups[hit_i];}
 
-  inline Hit operator[](int const & hit_i) noexcept;
+  inline Hit operator[](int const & hit_i) const noexcept;
 
   // I/O status :
   IOptions read;
@@ -207,7 +207,7 @@ public:
 private:
 };
 
-inline Hit Event::operator[](int const & hit_i) noexcept
+inline Hit Event::operator[](int const & hit_i) const noexcept
 {// Problem about the time here ...
   Hit hit;
   hit.stamp = stamp + times[hit_i];

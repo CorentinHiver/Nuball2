@@ -1,12 +1,15 @@
+#include "TROOT.h"
 #include "../lib/MTObjects/MTObject.hpp"
 #include "../lib/libRoot.hpp"
 #include "../lib/Classes/FilesManager.hpp"
-#include "../lib/Classes/Calibration.hpp"
+#include "../lib/Classes/Detectors.hpp"
+// #include "../lib/Classes/Calibration.hpp"
 #include "../lib/Classes/Nuball2Tree.hpp"
 #include "../lib/MTObjects/MTList.hpp"
 #include "../lib/Analyse/CloversV2.hpp"
 #include "../lib/Analyse/SimpleParis.hpp"
-#include "../lib/Analyse/WarsawDSSD.hpp"
+#include "../lib/Analyse/SimpleDSSD.hpp"
+// #include "../lib/Analyse/WarsawDSSD.hpp"
 #include "../lib/Classes/Timer.hpp"
 #include "CoefficientCorrection.hpp"
 #include "Utils.h"
@@ -27,6 +30,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   std::string target = "U";
   std::string trigger = "C2";
 
+  // TH1::AddDirectory(false);
+
   Timer timer;
   long long freqEvtDisplay = nbEvtMax/10;
   if (nbEvtMax<0) 
@@ -45,6 +50,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
 
+  std::mutex read_mutex;
   std::mutex write_mutex;
   
   MTObject::parallelise_function([&]()
@@ -59,6 +65,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
     while(MTfiles.getNext(file))
     {
+      // -- Input file : -- //
       auto const & filename = removePath(file);
       auto const & run_name = removeExtension(filename);
       auto const & run_name_vector = split(run_name, '_');
@@ -66,32 +73,45 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       int const & run_number = std::stoi(run_number_str);
       if (target == "Th" && run_number>72) continue;
       if (target == "U" && run_number<74) continue;
+
+      // Nuball2Tree tree(file);
+      // std::unique_ptr<TFile> infile; infile.reset(TFile::Open(file.c_str(), "READ"));
+    read_mutex.lock();
+      TFile* infile = TFile::Open(file.c_str(), "READ");
+      if (!infile || infile->IsZombie()){error("Can't read valid", file); continue;}
+      TTree* tree = static_cast<TTree*>(infile->Get("Nuball2"));
+      if (!tree || tree->IsZombie()) {error("Can't find valid Nuball2 tree in", filename); continue;}
+    read_mutex.unlock();
       
-      Nuball2Tree tree(file);
-  
-      if (!tree) {error("Can't open Nuball2 tree at", filename); continue;}
-  
-      unique_TH2F pp (new TH2F(("pp"+thread_i_str).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
-      unique_TH2F dd (new TH2F(("dd"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
-      unique_TH2F dp (new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
-      unique_TH2F dd_pveto (new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096));
-      
-      std::string outFolder = "data/"+trigger+"/"+target+"/";
-  
-      Path::make(outFolder);
-      std::string out_filename = outFolder+removeExtension(filename)+"_v2.root";
-  
+      // -- Creating analysis modules -- //
       Event event;
       event.reading(tree, "mltTEQ");
-  
+
       CloversV2 pclovers;
       CloversV2 dclovers;
   
       SimpleParis pparis(&calibPhoswitches);
       SimpleParis dparis(&calibPhoswitches);
   
-      WarsawDSSD dssd;
+      DSSD::Simple dssd;
+      // WarsawDSSD dssd;
+
+      // -- Output file : -- //
+
+      std::string outFolder = "data/"+trigger+"/"+target+"/";
+      Path::make(outFolder);
+      std::string out_filename = outFolder+removeExtension(filename)+"_v2.root";
+      File Filename(out_filename); Filename.makePath();
+      TFile* outfile = TFile::Open(out_filename.c_str(), "recreate");
+      // std::unique_ptr<TFile> outfile (TFile::Open(out_filename.c_str(), "recreate"));
   
+      TH2F* pp = new TH2F(("pp"+thread_i_str).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dd = new TH2F(("dd"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      
+      // -- Start processing the data -- //
+
       auto const Nevt = tree->GetEntries();
   
       for (int evt_i = 0; (evt_i < Nevt && evt_i < nbEvtMax); evt_i++)
@@ -100,7 +120,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   
         tree->GetEntry(evt_i);
 
-        // Clear modules
+        // -- Clear modules -- //
   
         pclovers.clear();
         dclovers.clear();
@@ -110,7 +130,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   
         dssd.clear();
 
-        // Fill modules
+        // -- Fill modules -- //
 
         for (int hit_i = 0; hit_i < event.mult; hit_i++)
         {
@@ -136,7 +156,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           else if (DSSD::is[label]) dssd.fill(event, hit_i);
         }
 
-        // Analyse modules
+        // -- Analyse modules -- //
   
         pclovers.analyze();
         dclovers.analyze();
@@ -144,7 +164,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         dparis.analyze();
         dssd.analyze();
 
-        // Multiplicity
+        // -- Multiplicity -- //
   
         auto const & PMclover = pclovers.all.size();
         auto const & PMparis  = pparis.module_mult();
@@ -160,7 +180,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         if (Mtot > MaxMult) continue;
       #endif //MaxMult
 
-        // Calorimetry
+        // -- Calorimetry -- //
 
         auto const & PC_clover = pclovers.calorimetryTotal;
         auto const & PC_paris  = pparis.calorimetry();
@@ -182,12 +202,12 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         if (!dssdTrigger) continue;
       #endif //ParticleTrigger
 
-        // Prompt
+        // -- Prompt -- //
         for (size_t loop_i = 0; loop_i<pclovers.clean.size(); ++loop_i)
         {
           auto const & clover0 = pclovers.clean[loop_i];
 
-          // Prompt-prompt
+          // -- Prompt-prompt -- //
           for (size_t loop_j = loop_i+1; loop_j<pclovers.clean.size(); ++loop_j)
           {
             auto const & clover1 = pclovers.clean[loop_j];
@@ -195,21 +215,20 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
             pp->Fill(clover1->nrj, clover0->nrj);
           }
 
-          // Prompt-delayed
+          // -- Prompt-delayed -- //
           for (size_t loop_j = 0; loop_j<dclovers.clean.size(); ++loop_j)
           {
             auto const & dclover = dclovers.clean[loop_j];
-
             dp->Fill(clover0->nrj, dclover->nrj);
           }
         }
 
-        // Delayed
+        // -- Delayed -- //
         for (size_t loop_i = 0; loop_i<dclovers.clean.size(); ++loop_i)
         {
           auto const & clover0 = dclovers.clean[loop_i];
           
-          // Delayed-delayed
+          // -- Delayed-delayed -- //
           for (size_t loop_j = loop_i+1; loop_j<dclovers.clean.size(); ++loop_j)
           {
             auto const & clover1 = dclovers.clean[loop_j];
@@ -217,7 +236,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
             dd->Fill(clover0->nrj, clover1->nrj);
             dd->Fill(clover1->nrj, clover0->nrj);
             
-            // Prompt veto
+            // -- Prompt veto -- /:
             if (PM == 0)
             {
               dd_pveto->Fill(clover0->nrj, clover1->nrj);
@@ -226,31 +245,37 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           }
         }
       }
+
       
       lock_mutex lock(write_mutex);
-
-      File Filename(out_filename); Filename.makePath();
+      
       print("writing spectra in", out_filename, "...");
 
-      std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(), "recreate"));
-      file->cd(); 
+      outfile->cd();
         pp -> Write("pp", TObject::kOverwrite);
         dd -> Write("dd", TObject::kOverwrite);
         dp -> Write("dp", TObject::kOverwrite);
         dd_pveto -> Write("dd_pveto", TObject::kOverwrite);
-      file->Close();
-      print(out_filename, "written");
+
+      outfile->Close();
+      delete outfile;
+
+      infile->Close();
+      delete infile;
+
+      print(out_filename, "written"); 
     }
   // Multithreading stops here. 
   });
 
-  // Here merging files from each directory
+  // -- Merging the files from each run -- //
   std::string dest = "data/merge_"+trigger+"_"+target+"_v2.root";
   std::string source = "data/"+trigger+"/"+target+"/run_*_v2.root";
   std::string nb_threads_str = std::to_string(nb_threads);
   std::string command = "hadd -f -j "+ nb_threads_str+ " -d . "+ dest + " " + source;
   print(command);
   gSystem->Exec(command.c_str());
+  print(timer());
 }
 
 int main(int argc, char** argv)
