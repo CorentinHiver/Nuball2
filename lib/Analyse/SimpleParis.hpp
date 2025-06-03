@@ -357,7 +357,7 @@ public:
     {
       auto const & id_i = phoswitches_id[hit_i];
       auto const & id_j = phoswitches_id[hit_j];
-      return phoswitches[id_i].nrj>phoswitches[id_j].nrj;
+      return phoswitches[id_i].nrj > phoswitches[id_j].nrj;
     });
 
 // 2. Perform the add-back
@@ -532,8 +532,8 @@ public:
     back.addback();
     front.addback();
 
-    for (auto & module_id : back.modules_id) modules.push_back(&(back.modules[module_id]));
-    for (auto & module_id : front.modules_id) modules.push_back(&(front.modules[module_id]));
+    for (auto const & module_id : back.modules_id) modules.push_back(&(back.modules[module_id]));
+    for (auto const & module_id : front.modules_id) modules.push_back(&(front.modules[module_id]));
 
     if (time_order) timeOrder();
   }

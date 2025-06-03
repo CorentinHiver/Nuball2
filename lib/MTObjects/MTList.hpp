@@ -27,7 +27,7 @@ public:
 
   typename std::vector<T> const & get() const {return m_collection;}
 
-  bool getNext(T & t);
+  bool getNext(T & t) noexcept;
   bool getNext(T & t, size_t & index);
   bool operator>>(T & t) {return getNext(t);}
   void resetRead() {m_read_index = 0;}
@@ -84,7 +84,7 @@ std::ostream& operator<<(std::ostream& cout, MTVector<T> const & list)
 }
 
 template<class T>
-inline bool MTVector<T>::getNext(T & t)
+inline bool MTVector<T>::getNext(T & t) noexcept
 {
   lock_mutex lock(m_mutex);
   if (m_read_index<m_size)

@@ -364,11 +364,11 @@ inline std::ostream& operator<<(std::ostream& cout, Event const & event)
   {
     cout << "label : " << event.labels[i] << " ";
     if(event.times  [i] != 0) cout << "time : "     + std::to_string(event.times [i])+" ps  " ;
-    if(event.adcs   [i] != 0) cout << "adc : "      + std::to_string(event.adcs  [i])+" ";
-    if(event.qdc2s  [i] != 0) cout << "qdc2 : "     + std::to_string(event.qdc2s [i])+" ";
+    if(event.adcs   [i] != 0) cout << "adc : "      + std::to_string(event.adcs  [i])+" "     ;
+    if(event.qdc2s  [i] != 0) cout << "qdc2 : "     + std::to_string(event.qdc2s [i])+" "     ;
     if(event.nrjs   [i] != 0) cout << "energy : "   + std::to_string(event.nrjs  [i])+" keV  ";
     if(event.nrj2s  [i] != 0) cout << "energy 2 : " + std::to_string(event.nrj2s [i])+" keV  ";
-    if(event.pileups[i] != 0) cout << "pileup"                                                 ;
+    if(event.pileups[i] != 0) cout << "\u001b[31m pileup \u001b[0m"                           ;
     cout << std::endl;
   }
   cout << "--- " << std::endl;

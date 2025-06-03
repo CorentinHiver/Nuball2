@@ -216,6 +216,13 @@ void pauseDebug(std::string const &
 #endif //DEBUG
 }
 
+template <class... T>
+void printPause(T const & ... t)
+{
+  print(t...);
+  pauseCo();
+}
+
 ////////////////
 //    Types   //
 ////////////////

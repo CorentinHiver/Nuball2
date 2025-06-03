@@ -191,9 +191,11 @@ bool CloversV2::fill(Event const & event, int const & hit_i)
     if (isGe(label))
     {
       push_back_unique(Ge_id, clover_index);
-      auto const & smeared_nrj = randomCo::gaussian(nrj, nrj*((400_keV/sqrt(nrj))/100_keV)/2.35);
-      calorimetryTotal+=smeared_nrj;
-      calorimetryGe+=smeared_nrj;
+      // auto const & smeared_nrj = randomCo::gaussian(nrj, nrj*((400_keV/sqrt(nrj))/100_keV)/2.35);
+      // calorimetryTotal+=smeared_nrj;
+      // calorimetryGe+=smeared_nrj;
+      calorimetryTotal += nrj;
+      calorimetryGe    += nrj;
     }
     else
     {

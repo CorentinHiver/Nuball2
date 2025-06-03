@@ -145,7 +145,7 @@ public:
     q3 = false; // 3 : qdc3   energy qdc3 in ADC    int
     Q3 = false; // R : nrj3   energy qdc3 in keV    float
     p  = false; // p : pileup pileup                bool
-    set = false;
+    set = false;// internal state
   }
 
   void setOptions(std::string const & options) noexcept
@@ -419,7 +419,7 @@ std::ostream& operator<<(std::ostream& cout, Hit const & hit)
   if (hit.nrj   != 0) cout << " nrj : "       << hit.nrj ;
   if (hit.nrj2  != 0) cout << " nrj2 : "      << hit.nrj2;
   if (hit.nrj3  != 0) cout << " nrj3 : "      << hit.nrj3;
-  if (hit.pileup)     cout << " pileup";
+  if (hit.pileup)     cout << "\u001b[31m pileup \u001b[0m";
   return cout;
 }
 

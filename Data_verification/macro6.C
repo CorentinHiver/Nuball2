@@ -30,7 +30,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   std::string target = "U";
   std::string trigger = "C2";
 
-  // TH1::AddDirectory(false);
+  TH1::AddDirectory(false);
 
   Timer timer;
   long long freqEvtDisplay = nbEvtMax/10;
@@ -77,15 +77,16 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       // Nuball2Tree tree(file);
       // std::unique_ptr<TFile> infile; infile.reset(TFile::Open(file.c_str(), "READ"));
     read_mutex.lock();
+      print("reading", file);
       TFile* infile = TFile::Open(file.c_str(), "READ");
       if (!infile || infile->IsZombie()){error("Can't read valid", file); continue;}
       TTree* tree = static_cast<TTree*>(infile->Get("Nuball2"));
       if (!tree || tree->IsZombie()) {error("Can't find valid Nuball2 tree in", filename); continue;}
     read_mutex.unlock();
-      
+
       // -- Creating analysis modules -- //
       Event event;
-      event.reading(tree, "mltTEQ");
+      event.reading(tree, "mltTEQp");
 
       CloversV2 pclovers;
       CloversV2 dclovers;
@@ -130,6 +131,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   
         dssd.clear();
 
+        std::vector<Hit> hits;
+
         // -- Fill modules -- //
 
         for (int hit_i = 0; hit_i < event.mult; hit_i++)
@@ -137,8 +140,10 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           auto const & label = event.labels[hit_i];
           auto const & time =  event.times[hit_i];
           auto const & nrj = event.nrjs[hit_i];
+          auto const & nrj2 = event.nrj2s[hit_i];
   
-          if (nrj<20_keV) continue;
+          if (nrj < 20_keV) continue;
+          if (nrj2 < 0) continue;
   
           if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
           if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
@@ -154,6 +159,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
             else if (gate( 40_ns, time, 180_ns)) dclovers.fill(event, hit_i);
           }
           else if (DSSD::is[label]) dssd.fill(event, hit_i);
+          hits.push_back(event[hit_i]);
         }
 
         // -- Analyse modules -- //
@@ -227,7 +233,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         for (size_t loop_i = 0; loop_i<dclovers.clean.size(); ++loop_i)
         {
           auto const & clover0 = dclovers.clean[loop_i];
-          
           // -- Delayed-delayed -- //
           for (size_t loop_j = loop_i+1; loop_j<dclovers.clean.size(); ++loop_j)
           {
@@ -262,6 +267,11 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
       infile->Close();
       delete infile;
+
+      delete pp;
+      delete dd;
+      delete dp;
+      delete dd_pveto;
 
       print(out_filename, "written"); 
     }

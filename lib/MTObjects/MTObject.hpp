@@ -208,7 +208,7 @@ public:
     #endif //DEBUG
     #ifdef ROOT_TObject // Check for root handling
       ROOT::EnableThreadSafety();
-      ROOT::EnableImplicitMT();
+      // ROOT::EnableImplicitMT();
     #endif //ROOT_TObject 
       MTObject::ON = true;
       std::cout << "MTObject Initialised with " << nb_threads << " threads " << std::endl;
