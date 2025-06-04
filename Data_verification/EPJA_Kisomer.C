@@ -91,7 +91,6 @@ void EPJA_Kisomer()
   /////////////////////
 
   auto canvas642 = new TCanvas("canvas642", "canvas642", 1000, 600); canvas642->cd();
-
   {
     auto d642 = dd_veto_clean->ProjectionX("d642", 641, 644);
     Colib::Multiply(d642, 0.5);

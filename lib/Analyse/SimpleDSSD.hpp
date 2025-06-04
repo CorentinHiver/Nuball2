@@ -35,7 +35,9 @@ namespace DSSD
     void fill(Event const & event, int const & hit_i) noexcept
     {
       auto const & label = event[hit_i].label;
+
       if (!DSSD::is[label]) return;
+
       auto const & index = DSSD::index[label];
       if(DSSD::isRing[label]) 
       {
@@ -47,6 +49,7 @@ namespace DSSD
         m_sectStrips[index].fill(event, hit_i);
         sectors.push_back(&m_sectStrips[index]);
       }
+      
       ++m_mult;
     }
 
@@ -56,6 +59,7 @@ namespace DSSD
       for (auto & sector : sectors) sector -> clear();
       rings  .clear();
       sectors.clear();
+      m_mult = 0;
     }
 
     void analyze() noexcept 
