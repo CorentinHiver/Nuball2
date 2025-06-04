@@ -311,7 +311,7 @@ class CoRadware
   {
     delete m_gate;
     m_gate_number = e;
-    auto const & bin = m_bidim->GetXaxis()->FindBin(e)-1;
+    auto const & bin = m_bidim->GetXaxis()->FindBin(e);
     auto const & low_e = e-m_gate_size;
     auto const & high_e = e+m_gate_size;
     m_gate = static_cast<TH1*> ((m_py)
@@ -374,7 +374,7 @@ class CoRadware
     auto histo = Colib::Pad::get_histos()[0];
     histo->GetXaxis()->UnZoom();
     if (histo->InheritsFrom(TH2::Class())) histo->GetYaxis()->UnZoom();
-    
+    gPad->Update();
   }
 
   void set_nb_it_bckg()

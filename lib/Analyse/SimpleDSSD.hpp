@@ -35,28 +35,41 @@ namespace DSSD
     void fill(Event const & event, int const & hit_i) noexcept
     {
       auto const & label = event[hit_i].label;
-      if (!DSSD::is[hit_i]) return;
+      if (!DSSD::is[label]) return;
       auto const & index = DSSD::index[label];
-      ((DSSD::isRing[label]) ? rings[index] : sectors[index]).fill(event, hit_i);
+      if(DSSD::isRing[label]) 
+      {
+        m_ringStrips[index].fill(event, hit_i);
+        rings.push_back(&m_ringStrips[index]);
+      }
+      else 
+      {
+        m_sectStrips[index].fill(event, hit_i);
+        sectors.push_back(&m_sectStrips[index]);
+      }
+      ++m_mult;
     }
 
     void clear() noexcept
     {
-      for (auto & ring : rings) ring.clear();
-      for (auto & sector : sectors) sector.clear();
+      for (auto & ring   : rings)   ring   -> clear();
+      for (auto & sector : sectors) sector -> clear();
+      rings  .clear();
+      sectors.clear();
     }
 
     void analyze() noexcept 
     {
-      m_mult = rings.size() + sectors.size();
     }
 
-    auto const & mult() const {return m_mult;}
+    auto const & mult() const noexcept {return m_mult;}
 
-    std::array<Strip, nb_rings> rings;
-    std::array<Strip, nb_sectors> sectors;
-
+    std::vector<Strip*> rings;
+    std::vector<Strip*> sectors;
+    
   private:
+    std::array<Strip, nb_rings> m_ringStrips;
+    std::array<Strip, nb_sectors> m_sectStrips;
     int m_mult = 0;
   };
 

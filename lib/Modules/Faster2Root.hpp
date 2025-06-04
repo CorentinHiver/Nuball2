@@ -100,8 +100,8 @@
  *  type              name          Description
  *  int               mult          Multiplicity : number of hits in the event
  *  unsigned short [] label         Labels
- *  int/float      [] ADC/nrj       (ADC/QDC1) / Calibrated energy
- *  int/float      [] QDC2/nrj2     QDC2       / Calibrated energy in QDC2
+ *  int / float    [] ADC  / nrj    (ADC / QDC1) Calibrated energy
+ *  int / float    [] QDC2 / nrj2   (0   / QDC2) Calibrated energy in QDC2
  *  bool           [] pileup        Pileup/Saturation bit
  * 
  * The output will therefore depend on wether you calibrated the data or not

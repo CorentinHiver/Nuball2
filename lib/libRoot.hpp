@@ -1224,16 +1224,40 @@ namespace Colib
     return ret;
   }
 
+  TH2F* copy(TH2F const * spectrumFrom, TH2F* spectrumTo)
+  {
+    if (spectrumFrom->GetNbinsX() != spectrumTo->GetNbinsX() || spectrumFrom->GetNbinsY() != spectrumTo->GetNbinsY()) return nullptr;
+    for (int i = 0; i <= spectrumFrom->GetNbinsX() + 1; ++i) 
+    {
+      spectrumTo->SetBinContent(i, spectrumFrom->GetBinContent(i));
+      spectrumTo->SetBinError(i, spectrumFrom->GetBinError(i));
+    }
+    return spectrumTo;
+  }
   
   /// @brief Clone an empty histogram with the same binning
-  TH1F* cloneEmpty(const TH1F* histo, const std::string& name = "", const std::string& title = "")
+  template<class THist>
+  THist* clone(const THist* histo, const std::string& name = "", const std::string& title = "")
   {
     if (!histo) throw std::invalid_argument("Input histogram is null!");
-    auto xaxis = histo->GetXaxis();
-    int N_binsX = xaxis->GetNbins();
     std::string new_name = name.empty() ? std::string(histo->GetName()) + "_Clone" : name;
     std::string new_title = title.empty() ? histo->GetTitle() : title;
-    return new TH1F(new_name.c_str(), new_title.c_str(), N_binsX, xaxis->GetXmin(), xaxis->GetXmax());
+    auto ret = static_cast<THist*>(histo->Clone(name.c_str()));
+    ret->SetTitle(new_title.c_str());
+    return ret;
+  }
+  
+  /// @brief Clone an empty histogram with the same binning
+  template<class THist>
+  THist* cloneEmpty(const THist* histo, const std::string& name = "", const std::string& title = "")
+  {
+    if (!histo) throw std::invalid_argument("Input histogram is null!");
+    std::string new_name = name.empty() ? std::string(histo->GetName()) + "_Clone" : name;
+    std::string new_title = title.empty() ? histo->GetTitle() : title;
+    auto ret = static_cast<THist*>(histo->Clone(name.c_str()));
+    ret->SetTitle(new_title.c_str());
+    ret->Reset();
+    return ret;
   }
 
   /// @brief Compute the first derivative of a histogram
@@ -1834,6 +1858,7 @@ namespace Colib
         if (nice) histo->SetBinContent(bin, (new_value<1) ? 1 : new_value);
         else histo->SetBinContent(bin, new_value);
       }
+      if (gPad) gPad->Update();
     }
 
     else if (dim == 2)
@@ -1894,7 +1919,7 @@ namespace Colib
 
   /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316
   /// @param choice: 0 : classic radware | 1 : Palameta and Waddington (PW) | 2 : Palameta and Waddington asymetric
-  void removeBackground(TH2 * histo, int const & niter = 20, uchar const & choice = 0, double const & sigmaX = 2., 
+  TH2F * removeBackground(TH2F * histo, int const & niter = 20, uchar const & choice = 0, double const & sigmaX = 2., 
                         double const & sigmaY = 2., double const & threshold = 0.05, bool remove511 = false)
   {
     auto const & T = histo->Integral();
@@ -2010,12 +2035,16 @@ namespace Colib
       }
     }
     for (int x=0; x<Nx; ++x) for (int y=0; y<Ny; ++y) histo->SetBinContent(x, y, bckg_clean->GetBinContent(x, y));
+    if (gPad) gPad->Update();
+    return histo;
   }
 
   TH1D* projectDiagonals(TH2* histo)
   {
+    auto const & name = histo->GetName() + TString("_diagProj");
+    print(name);
     if (!checkMatrixSquare(histo)) {error("projectDiagonals(TH2*) : the matrix must be square"); return (new TH1D("void","void",1,0,1));}
-    auto diag = new TH1D("diagProj","diagProj", 2*histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), 2*histo->GetXaxis()->GetXmax());
+    auto diag = new TH1D(name,name, 2*histo->GetNbinsX(), histo->GetXaxis()->GetXmin(), 2*histo->GetXaxis()->GetXmax());
     auto const & nb_bins = histo->GetNbinsX()+1;
     for (int bin_x = 1; bin_x < nb_bins; ++bin_x) for (int bin_y = 1; bin_y < bin_x; ++bin_y)
     {
@@ -2218,8 +2247,9 @@ namespace Colib
   TH2F* removeVeto(TH2F* histo, TH2F* histo_veto, double norm, std::string name = "", bool nice = true)
   {
     if (name == "") name = histo->GetName()+std::string("_veto_clean");
-    auto ret = static_cast<TH2F*>(histo->Clone(name.c_str()));
-    print(ret->GetName());
+    auto ret = gDirectory->Get<TH2F>(name.c_str());
+    ret = clone(histo, name, name);
+    print(name);
 
     if (nice)
     {
@@ -3610,7 +3640,7 @@ auto removeLine(TH2F* histo, int bin_min, int max_bin, int nb_it = 20)
   {
     auto proj(histo->ProjectionY("temp", x, x));
     auto bckg(proj->ShowBackground(nb_it));
-    for (int y = bin_min; y<=max_bin; ++y) 
+    for (int y = bin_min+1; y<=max_bin; ++y) 
     {
       ret->SetBinContent(y, x, bckg->GetBinContent(y));
       ret->SetBinContent(x, y, bckg->GetBinContent(y));
