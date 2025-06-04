@@ -387,7 +387,7 @@ public:
         // They pass both conditions, so we add them back :
         modules[id_i].add(phoswitches[id_j]);
 
-        // If they are add-backed, it means we can Compton supress the individual phoswitches :
+        // If they are add-backed, it means we can reject the individual phoswitches used in the procedure :
         phoswitches[id_j].rejected = true;
         phoswitches[id_i].rejected = true;
 

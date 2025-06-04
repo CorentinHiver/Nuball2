@@ -76,13 +76,18 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
       // Nuball2Tree tree(file);
       // std::unique_ptr<TFile> infile; infile.reset(TFile::Open(file.c_str(), "READ"));
-    read_mutex.lock();
-      print("reading", file);
-      TFile* infile = TFile::Open(file.c_str(), "READ");
-      if (!infile || infile->IsZombie()){error("Can't read valid", file); continue;}
-      TTree* tree = static_cast<TTree*>(infile->Get("Nuball2"));
-      if (!tree || tree->IsZombie()) {error("Can't find valid Nuball2 tree in", filename); continue;}
-    read_mutex.unlock();
+
+      TFile* infile = nullptr;
+      TTree* tree = nullptr;
+
+      {
+        lock_mutex lock(read_mutex);
+        print("reading", file);
+        infile = TFile::Open(file.c_str(), "READ");
+        if (!infile || infile->IsZombie()){error("Can't read valid", file); continue;}
+        tree = static_cast<TTree*>(infile->Get("Nuball2"));
+        if (!tree || tree->IsZombie()) {error("Can't find valid Nuball2 tree in", filename); continue;}
+      }
 
       // -- Creating analysis modules -- //
       Event event;
