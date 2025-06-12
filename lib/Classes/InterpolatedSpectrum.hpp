@@ -2,6 +2,7 @@
 #define INTERPOLATED_SPECTRUM_HPP
 
 #include "../libCo.hpp"
+#include "TH1.h"
 
 class InterpolatedSpectrum
 {

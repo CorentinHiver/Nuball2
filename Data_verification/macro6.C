@@ -10,9 +10,11 @@
 #include "../lib/Analyse/SimpleParis.hpp"
 #include "../lib/Analyse/SimpleDSSD.hpp"
 // #include "../lib/Analyse/WarsawDSSD.hpp"
+#include "../lib/Classes/CalibAndScale.hpp"
 #include "../lib/Classes/Timer.hpp"
 #include "CoefficientCorrection.hpp"
 #include "Utils.h"
+
 
 #define MaxMult 10
 // #define MaxPM 10
@@ -44,11 +46,28 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   if (nb_threads>1) MTObject::Initialise(nb_threads);
   
   detectors.load("../136/index_129.list");
+  
+  // Get the calibration parameters :
+    // Paris rotation angles :
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
+
+  // Alignement
+  CalibAndScales::verbose(0);
+  std::unordered_map<int, CalibAndScales> alignement;
+  for (auto const & detector : detectors)
+  {
+    if (detector == "") continue;
+    auto const & label = detectors[detector];
+    alignement.emplace(label, "Alignement/"+detector+".align");
+  }
+
+  // Data files :
 
   Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
+
+  // Prepare parallelisation :
 
   std::mutex read_mutex;
   std::mutex write_mutex;
@@ -110,6 +129,9 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       File Filename(out_filename); Filename.makePath();
       TFile* outfile = TFile::Open(out_filename.c_str(), "recreate");
       // std::unique_ptr<TFile> outfile (TFile::Open(out_filename.c_str(), "recreate"));
+      
+      TH1F* d_before = new TH1F(("d_before"+thread_i_str).c_str(), "gamma delayed before alignement;E1[keV];E2[keV]", 20000,0,20000);
+      TH1F* d_after = new TH1F(("d_after"+thread_i_str).c_str(), "gamma delayed before alignement;E1[keV];E2[keV]", 20000,0,20000);
   
       TH2F* pp = new TH2F(("pp"+thread_i_str).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd = new TH2F(("dd"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
@@ -146,9 +168,12 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           auto const & time =  event.times[hit_i];
           auto const & nrj = event.nrjs[hit_i];
           auto const & nrj2 = event.nrj2s[hit_i];
+          auto nrjBefore = nrj;
   
           if (nrj < 20_keV) continue;
           if (nrj2 < 0) continue;
+
+          event.nrjs[hit_i] = alignement.at(label)[run_number].linear_inv_calib(nrj);
   
           if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
           if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
@@ -162,6 +187,12 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           {
                  if (gate(-10_ns, time,  10_ns)) pclovers.fill(event, hit_i);
             else if (gate( 40_ns, time, 180_ns)) dclovers.fill(event, hit_i);
+
+            if (gate( 40_ns, time, 180_ns))
+            {
+              d_before->Fill(nrjBefore);
+              d_after->Fill(nrj);
+            }
           }
           else if (DSSD::is[label]) dssd.fill(event, hit_i);
           hits.push_back(event[hit_i]);
@@ -238,6 +269,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         for (size_t loop_i = 0; loop_i<dclovers.clean.size(); ++loop_i)
         {
           auto const & clover0 = dclovers.clean[loop_i];
+          
           // -- Delayed-delayed -- //
           for (size_t loop_j = loop_i+1; loop_j<dclovers.clean.size(); ++loop_j)
           {
@@ -246,7 +278,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
             dd->Fill(clover0->nrj, clover1->nrj);
             dd->Fill(clover1->nrj, clover0->nrj);
             
-            // -- Prompt veto -- /:
+            // -- Prompt veto -- //
             if (PM == 0)
             {
               dd_pveto->Fill(clover0->nrj, clover1->nrj);
@@ -256,12 +288,15 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         }
       }
 
+      // -- Write the data (monothread) -- //
       
       lock_mutex lock(write_mutex);
       
       print("writing spectra in", out_filename, "...");
 
       outfile->cd();
+        d_before -> Write("d_before", TObject::kOverwrite);
+        d_after -> Write("d_after", TObject::kOverwrite);
         pp -> Write("pp", TObject::kOverwrite);
         dd -> Write("dd", TObject::kOverwrite);
         dp -> Write("dp", TObject::kOverwrite);

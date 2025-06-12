@@ -131,7 +131,7 @@ void DataAlignement(bool overwrite = true)
       {
         auto file = File(filename);
         int run_number = std::stoi(split(file.filename().shortName(), "_")[1]);
-        if (filename == std::string(ref_filename)) continue; // Do not compare the test spectrum with itself
+        if (filename == std::string(ref_filename.Data())) continue; // Do not compare the test spectrum with itself
     
         auto testFile = TFile::Open(filename.c_str(), "READ"); testFile->cd();
         auto testHisto = Colib::subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
@@ -263,4 +263,4 @@ int main(int argc, char** argv)
   return 1;
 }
 
-// g++ -O2 -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++20 -DMT
+// g++ -O2 -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++20

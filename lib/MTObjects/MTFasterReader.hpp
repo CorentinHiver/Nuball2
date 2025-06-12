@@ -130,7 +130,7 @@ public:
   // Files handling :
   bool addFolder(Path path, int const & nb_files = -1) 
   {
-    return m_files.addFolder(path, nb_files);
+    return m_files.addFolder(path.string(), nb_files);
   }
 
   bool addFile(File file) 
@@ -276,7 +276,9 @@ inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
  * @details
  * Use this function like this : 
  *  MTFasterReader reader("data", nb_files);
- *  reader.readEvents([&](Event & event));
+ *  reader.readEvents([&](Event & event){
+ *  
+ * });
  * 
  * @attention you cannot initialise anything before the event loop. Therefore, you need to use only thread-safe 
  * objects that are defined before the loop (you can look at the thread_local key-word or my classes like MultiHist to make your own)
@@ -336,8 +338,8 @@ inline void MTFasterReader::readEvents(Time const & timewindow, Func&& func, ARG
 // {
   
 // }
-  // template<class Func, class... ARGS>
-  // static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
+//   template<class Func, class... ARGS>
+//   static void Read(MTFasterReader & MTreader, Func function, ARGS &&... args);
 
 // template<class Func, class... ARGS>
 // inline void MTFasterReader::Read(MTFasterReader & MTReader, Func function, ARGS &&... args)

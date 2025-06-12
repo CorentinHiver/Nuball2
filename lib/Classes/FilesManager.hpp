@@ -23,10 +23,6 @@ public:
   virtual bool addFile (std::string const & _filename) {return addFiles(_filename);}
   // Adds a given number of files with a .root or .fast inside the given folder (by default all the files, or the nb_files first ones)
   virtual bool addFolder    (std::string folder, long nb_files = -1, std::vector<std::string> const & extensions = {"root", "fast"});
-  virtual bool addFolder    (Path const & folder, long nb_files = -1, std::vector<std::string> const & extensions = {"root", "fast"})
-  {
-    return this -> addFolder(folder.string(), nb_files, extensions);
-  }
   virtual void flushFiles ();
   void Print        () { for (auto const & file : m_listFiles) print(file);}
   void printFolders () { for (auto const & folder : m_listFolder) print(folder);}

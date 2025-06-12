@@ -14,7 +14,9 @@
 #include <MTCounter.hpp>      // Use this to thread safely count what you want²
 #include <MTFasterReader.hpp> // This class is the base for multi threaded code
 #include <Timeshifts.hpp>     // Either loads or calculate timeshifts between detectors with respect to a reference
+#include <Timeshiftor.hpp>    // Calculates the timeshifts
 #include <EventBuilderRF.hpp> // Event builder based on RF
+#include <CalibAndScale.hpp>  // Alignement calibration
 
 constexpr bool inline isPrompt(Time const & time)  noexcept {return -20_ns < time && time < 20_ns ;}
 constexpr bool inline isDelayed(Time const & time) noexcept {return  20_ns < time && time < 180_ns;}
@@ -209,6 +211,13 @@ int main(int argc, char** argv)
 
   // Load some modules :
   detectors.load("index_129.list");
+  // CalibAndScales::verbose(0);
+  // std::unordered_map<std::string, CalibAndScales> alignement;
+  // for (auto const & detector : detectors)
+  // {
+  //   if (detector == "") continue;
+  //   alignement.emplace(detector, "Data_verification/Alignement/"+detector+".align");
+  // }
   Calibration calibration(calibFile);
   Manip runs(list_runs);
   if (one_run_folder!="") runs.setFolder(one_run_folder);
@@ -216,6 +225,7 @@ int main(int argc, char** argv)
   // Checking that all the modules have been loaded correctly :
   if (!calibration) throw Calibration::NotFound(calibFile);
   if (!runs) throw Manip::NotFound(runs);
+  for (auto const & it : alignement) if (!it.second) throw CalibAndScales::Error;
 
   // Setup some parameters :
   RF_Manager::setOffset(rf_shift);
@@ -256,7 +266,7 @@ int main(int argc, char** argv)
     print("Treating ", run_name);
 
     // Timeshifts loading : 
-    Timeshifts timeshifts;
+    Timeshiftor timeshifts;
     if (check_preprompt) timeshifts.checkForPreprompt(true);
 
     // Creating a lambda that calculates the timeshifts directly from the data :
@@ -296,7 +306,7 @@ int main(int argc, char** argv)
       {
         timeshifts.load(file_dT.string());
       }
-      catch(Timeshifts::NotFoundError & error)
+      catch(Timeshiftor::NotFoundError const & error)
       { // If no timeshifts data if available for the run already, calculate it from the data :
         calculateTimeshifts();
       }
@@ -350,7 +360,7 @@ int main(int argc, char** argv)
       while(reader.Read())
       {
         // Time calibration :
-        hit.stamp+=timeshifts[hit.label];
+        hit.stamp += timeshifts[hit.label];
         // There is a error for most DSSD rings when the timeshift have been calculated, some are slightly too early
         // Pushing all of them by 50 ns allows us to ensure they all fit in the event they belong to
         if (839 < hit.label  && hit.label < 856) hit.stamp += 50_ns;

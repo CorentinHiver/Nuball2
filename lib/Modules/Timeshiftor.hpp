@@ -333,7 +333,7 @@ public:
   };
 
   std::string m_outDir = "";
-  std::string m_ts_outDir = "Timeshiftor/";
+  std::string m_ts_outDir = "Timeshifts/";
   Path m_outPath;
   std::string m_outRoot = "timeshifts.root";
   std::string m_outData = "";
@@ -970,7 +970,7 @@ void Timeshiftor::analyse()
 
       else if (m_biggest_peak_finder || m_biggest_peak_finder_label[label])
       {
-        BiggestPeakFitter fitter(m_histograms_VS_RF[label].get());
+        Colib::BiggestPeakFitter fitter(m_histograms_VS_RF[label].get());
         m_timeshifts[label] = RF_zero-Timeshift_cast(fitter.getMean());
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
       }
@@ -978,7 +978,7 @@ void Timeshiftor::analyse()
       else
       {
         double mean = 0.;
-        if (getMeanPeak(m_histograms_VS_RF[label].get(), mean)) m_timeshifts[label] = RF_zero-Timeshift_cast(mean);
+        if (Colib::getMeanPeak(m_histograms_VS_RF[label].get(), mean)) m_timeshifts[label] = RF_zero-Timeshift_cast(mean);
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_histograms_VS_RF[label] -> GetMaximum()), "counts.");
       }
     }
@@ -999,7 +999,7 @@ void Timeshiftor::analyse()
 
       else if (m_biggest_peak_finder || m_biggest_peak_finder_label[label])
       {
-        BiggestPeakFitter fitter(m_time_spectra[label].get());
+        Colib::BiggestPeakFitter fitter(m_time_spectra[label].get());
         m_timeshifts[label] = Timeshift_cast(fitter.getMean());
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
@@ -1007,7 +1007,7 @@ void Timeshiftor::analyse()
       else
       {// For all the other detectors :
         double mean = 0.;
-        if (getMeanPeak(m_time_spectra[label].get(), mean)) m_timeshifts[label] = Timeshift_cast(mean); else m_timeshifts[label] = 0;
+        if (Colib::getMeanPeak(m_time_spectra[label].get(), mean)) m_timeshifts[label] = Timeshift_cast(mean); else m_timeshifts[label] = 0;
         if (m_verbose) print( "Mean :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
     }

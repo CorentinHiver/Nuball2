@@ -135,6 +135,7 @@ namespace Colib
   }
 
   /// @brief 
+  /// @param x: true if index refers to a X bin, false if x refers to a Y bin
   bool AddTH1(TH2* histo2, TH1* histo1, int index, bool x = true)
   {
     if (!histo2) {print("TH2 do not exists"); return -1;}

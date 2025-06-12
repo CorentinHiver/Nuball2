@@ -4,6 +4,7 @@
 #include "MTObject.hpp"
 #include "../libCo.hpp"
 #include "TFile.h"
+#include "TROOT.h"
 
 /**
  * @brief Multithreading wrapper for all THist spectra of root library
@@ -126,42 +127,42 @@ public:
   }
 
   /// @brief Copy constructor
-  template <class... ARGS>
-  MultiHist<THist>(MultiHist<THist> const & hist) : 
-    m_comment  (hist.m_comment  ),
-    m_name     (hist.m_name     ),
-    m_exists   (hist.m_exists   ),
-    m_is_written  (hist.m_is_written  ),
-    m_integral (hist.m_integral ),
-    m_merged   (hist.m_merged   )
-    #ifndef MULTITHIST_MONO
-    ,
-    m_is_merged  (hist.m_is_merged),
-    m_collection (hist.m_collection)
-    #endif // NO MULTITHIST_MONO
-    {
-      throw CopyError();
-    }
+  // template <class... ARGS>
+  // MultiHist<THist>(MultiHist<THist> const & hist) : 
+  //   m_comment    (hist.m_comment  ),
+  //   m_name       (hist.m_name     ),
+  //   m_exists     (hist.m_exists   ),
+  //   m_is_written (hist.m_is_written  ),
+  //   m_integral   (hist.m_integral ),
+  //   m_merged     (hist.m_merged   )
+  //   #ifndef MULTITHIST_MONO
+  //   ,
+  //   m_is_merged  (hist.m_is_merged),
+  //   m_collection (hist.m_collection)
+  //   #endif // NO MULTITHIST_MONO
+  //   {
+  //     throw CopyError();
+  //   }
     
   /// @brief Move constructor
-  template <class... ARGS>
-  MultiHist<THist>(MultiHist<THist> && hist) : 
-    m_comment  (std::move(hist.m_comment  )),
-    m_name     (std::move(hist.m_name     )),
-    m_exists   (std::move(hist.m_exists   )),
-    m_is_written  (std::move(hist.m_is_written  )),
-    m_integral (std::move(hist.m_integral )),
-    m_merged   (std::move(hist.m_merged   ))
-  #ifndef MULTITHIST_MONO
-    ,
-    m_is_merged  (std::move(hist.m_is_merged )),
-    m_collection (std::move(hist.m_collection))
-  #endif // NO MULTITHIST_MONO
-  {
-    // The moved object is now in an undefined state.
-    // It is better to put it back to a defined state :
-    hist.cleanMove(); 
-  }
+  // template <class... ARGS>
+  // MultiHist<THist>(MultiHist<THist> && hist) : 
+  //   m_comment  (std::move(hist.m_comment  )),
+  //   m_name     (std::move(hist.m_name     )),
+  //   m_exists   (std::move(hist.m_exists   )),
+  //   m_is_written  (std::move(hist.m_is_written  )),
+  //   m_integral (std::move(hist.m_integral )),
+  //   m_merged   (std::move(hist.m_merged   ))
+  // #ifndef MULTITHIST_MONO
+  //   ,
+  //   m_is_merged  (std::move(hist.m_is_merged )),
+  //   m_collection (std::move(hist.m_collection))
+  // #endif // NO MULTITHIST_MONO
+  // {
+  //   // The moved object is now in an undefined state.
+  //   // It is better to put it back to a defined state :
+  //   hist.cleanMove(); 
+  // }
 
   void clean()
   {

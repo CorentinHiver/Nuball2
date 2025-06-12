@@ -1,50 +1,66 @@
 #define DEVCO
 // #include "lib/libRoot.hpp"
 // #include "lib/Classes/FilesManager.hpp"
-#include "lib/Classes/Transitions.hpp"
+// #include "lib/Classes/Transitions.hpp"
 // #include "lib/Analyse/SpectraAlignator.hpp"
 // #include "lib/MTObjects/MultiHist.hpp"
 // #include "lib/libRoot.hpp"
 // #include "lib/libRootHeader.hpp"
 // #include  "lib/Modules/CoRadware.hpp"
+// #include  "lib/Classes/CalibAndScale.hpp"
+// #include  "lib/Classes/FilesManager.hpp"
+// #include  "lib/Classes/Detectors.hpp"
+#include  "lib/Analyse/CloversV2.hpp"
 
 int main()
 {
-  Nucleus<236, 92> U236("Uranium 236");
-  U236.addLevelFast(1230, 0, 1); // 0
-  U236.addLevelFast(1010, 0, 0); // 1
-  U236.addLevelFast(900, 1, 1);  // 2
-  U236.addLevelFast(700, 2, 0);  // 3
-  U236.addLevelFast(400, 3, 1);  // 4
-  U236.addLevelFast(50, 4, 0);   // 5
-  U236.addLevelFast(0, 5, 1);    // 6
+  CloversV2 clovers;
+
+  // print(m_calib);
+  // CalibAndScale _calib; _calib.readFrom(alignFilename, "100");
+  // print(_calib);
+  
+  // for (auto const & alignFilename : alignFiles)
+  // {
+  //   print(File(alignFilename).filename());
+  //   CalibAndScale _calib; _calib.readFrom(alignFilename);
+  //   m_alignement.emplace(File(alignFilename).filename(), _calib);
+  // }
+
+  // Nucleus<236, 92> U236("Uranium 236");
+  // U236.addLevelFast(1230, 0, 1); // 0
+  // U236.addLevelFast(1010, 0, 0); // 1
+  // U236.addLevelFast(900, 1, 1);  // 2
+  // U236.addLevelFast(700, 2, 0);  // 3
+  // U236.addLevelFast(400, 3, 1);  // 4
+  // U236.addLevelFast(50, 4, 0);   // 5
+  // U236.addLevelFast(0, 5, 1);    // 6
    
-  U236.processLevels();
+  // U236.processLevels();
 
-  U236.addTransition(0, 1, 0.5);  // 220
-  U236.addTransition(0, 2, 0.5);  // 330
+  // U236.addTransition(0, 1, 0.5);  // 220
+  // U236.addTransition(0, 2, 0.5);  // 330
 
-  U236.addTransition(1, 2, 1/3.); // 110
-  U236.addTransition(1, 3, 1/3.); // 310
-  U236.addTransition(1, 4, 1/3.); // 610
+  // U236.addTransition(1, 2, 1/3.); // 110
+  // U236.addTransition(1, 3, 1/3.); // 310
+  // U236.addTransition(1, 4, 1/3.); // 610
 
-  U236.addTransition(2, 3, 1/3.); // 200
-  U236.addTransition(2, 4, 1/3.); // 500
-  U236.addTransition(2, 6, 1/3.); // 900
+  // U236.addTransition(2, 3, 1/3.); // 200
+  // U236.addTransition(2, 4, 1/3.); // 500
+  // U236.addTransition(2, 6, 1/3.); // 900
 
-  U236.addTransition(3, 4, 0.5);  // 300
-  U236.addTransition(3, 5, 0.5);  // 650
+  // U236.addTransition(3, 4, 0.5);  // 300
+  // U236.addTransition(3, 5, 0.5);  // 650
 
-  U236.addTransition(4, 5, 0.5);  // 350
-  U236.addTransition(4, 6, 0.5);  // 400
+  // U236.addTransition(4, 5, 0.5);  // 350
+  // U236.addTransition(4, 6, 0.5);  // 400
 
-  U236.addTransition(5, 6, 1);    // 50
+  // U236.addTransition(5, 6, 1);    // 50
 
-  U236.processTransitions();
+  // U236.processTransitions();
 
-  print(U236.gate(350, 1, 1000)); // 4 -> 5 Feed direct 4 : 300, 500, 610 | Indirect feed : {3 : 200, 310} {2 : 110} | Direct decay : {50}
+  // print(U236.gate(350, 1, 1000)); // 4 -> 5 Feed direct 4 : 300, 500, 610 | Indirect feed : {3 : 200, 310} {2 : 110} | Direct decay : {50}
 
-  // print(Colib::typeRoot<float>());
   // auto fileRef = TFile::Open("136/calibrate_2025/histos/run_76.root", "READ"); fileRef->cd();
   // auto histoRef = fileRef->Get<TH1F>("PARIS_FR1D5");
 

@@ -38,9 +38,11 @@
 #include <stdexcept>
 #include <string>
 #include <stack>
+#include <sys/ioctl.h>
 #include <thread>
 #include <typeindex>
 #include <typeinfo>
+#include <unistd.h>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
@@ -114,6 +116,28 @@ std::ostream& operator<<(std::ostream& cout, std::array<E,size> const & a)
 template<std::size_t I, typename... T>
 constexpr auto get_ith_element(std::tuple<T...> t) {
     return std::get<I>(t);
+}
+
+
+////////////////////////
+// TERMINAL KNOWLEDGE //
+////////////////////////
+
+namespace Colib
+{
+  int getTerminalRows() 
+  {
+    struct winsize w;
+    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) return 24; // fallback
+    return w.ws_row;
+  }
+  
+  int getTerminalCols() 
+  {
+    struct winsize w;
+    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) return 80; // fallback
+    return w.ws_col;
+  }
 }
 
 //////////////
@@ -958,7 +982,7 @@ std::string nicer_double(T const & t, int const & nb_decimals = 0)
  * @brief Lookup table that can be generated at compile time.
  * @details 
  * Instanciation :
- * constexpr auto myLut = LUT<10> ([](int i) { return i*i; }); 
+ * constexpr auto squares = LUT<10> ([](int i) { return i*i; }); 
  * 
  */
 template<std::size_t size, class Generator>

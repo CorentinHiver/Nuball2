@@ -30,7 +30,7 @@ SRCEXE := main.cpp
 # ==================================================
 
 FASTERAC_CFLAGS := $(shell pkg-config --cflags libfasterac)
-FASTERAC_LIBS   := $(shell pkg-config --libs libfasterac)
+FASTERAC_LIBS   := $(shell pkg-config --libs   libfasterac)
 
 ROOT_CFLAGS     := $(shell root-config --cflags)
 ROOT_LIBS       := $(shell root-config --libs)
@@ -45,7 +45,7 @@ HEADER_INCLUDES := $(addprefix -I,$(shell find $(HEADER_DIR) -type d ))
 	${CC} -c $< ${CFLAGS} ${LIBS} ${HEADER_INCLUDES}
 
 CC        = g++
-CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -Wall -lstdc++ -ltbb
+CFLAGS    = ${FASTERAC_CFLAGS} ${ROOT_CFLAGS} -pthread -std=c++17 -std=c++20 -Wall -lstdc++ -ltbb
 LIBS      = ${FASTERAC_LIBS}   ${ROOT_LIBS}
 
 # Set SRCEXE to the name of the source file you want to compile
@@ -66,16 +66,16 @@ opt_clang: CC = clang
 opt_clang: CFLAGS += -Wno-unused-command-line-argument
 opt_clang: opt
 
-debug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-50 #-Wold-style-cast
+debug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-50 #-Wold-style-cast -fno-inline
 debug: default
 
 debug_threads: CFLAGS += -fsanitize=thread
 debug_threads: debug
 
-debugopt: CFLAGS += -fno-inline -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast
+debugopt: CFLAGS += -g -O2 -DDEBUG -Wextra -ftemplate-depth-25 #-Wold-style-cast -fno-inline
 debugopt: default
 
-harddebug: CFLAGS += -fno-inline -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast
+harddebug: CFLAGS += -g -O0 -DDEBUG -Wextra -ftemplate-depth-25 -Wconversion -Wno-float-conversion -Wold-style-cast # -fno-inline
 harddebug: default
 
 debug_clang: CC = clang

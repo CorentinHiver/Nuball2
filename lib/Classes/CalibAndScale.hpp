@@ -27,7 +27,7 @@ public:
   {
     m_coeffs.clear();
     auto it = initList.begin();
-    for (int i = 0; i<initList.size()-1; ++i) m_coeffs.push_back(double_cast(*it++));
+    for (size_t i = 0; i<initList.size()-1; ++i) m_coeffs.push_back(double_cast(*it++));
     m_scale = double_cast(*it++);
     init();
   }
@@ -35,7 +35,7 @@ public:
   {
     m_coeffs.clear();
     auto it = initList.begin();
-    for (int i = 0; i<initList.size()-1; ++i) m_coeffs.push_back(double_cast(*it++));
+    for (size_t i = 0; i<initList.size()-1; ++i) m_coeffs.push_back(double_cast(*it++));
     m_scale = double_cast(*it++);
     init();
     return *this;
@@ -51,14 +51,14 @@ public:
   CalibAndScale(std::vector<double> const & vec)
   {
     m_coeffs.clear();
-    for (int i = 0; i<vec.size()-1; ++i) m_coeffs.push_back(vec[i]);
+    for (size_t i = 0; i<vec.size()-1; ++i) m_coeffs.push_back(vec[i]);
     m_scale = vec.back();
     init();
   }
   CalibAndScale& operator=(std::vector<double> const & vec)
   {
     m_coeffs.clear();
-    for (int i = 0; i<vec.size()-1; ++i) m_coeffs.push_back(vec[i]);
+    for (size_t i = 0; i<vec.size()-1; ++i) m_coeffs.push_back(vec[i]);
     m_scale = vec.back();
     init();
     return *this;
@@ -70,7 +70,7 @@ public:
   }
 
   CalibAndScale(CalibAndScale const & other) : 
-  m_coeffs(other.m_coeffs), m_scale(other.m_scale), m_order(other.m_order), m_ok(other.m_ok)
+    m_ok(other.m_ok), m_coeffs(other.m_coeffs), m_scale(other.m_scale), m_order(other.m_order)
   {
   }
 
@@ -168,6 +168,20 @@ public:
     out << " " << m_scale << std::endl;
   }
 
+  friend std::istream& operator>>(std::istream& is, CalibAndScale & calib) 
+  {
+    double tmp;
+    while(is >> tmp) 
+    {
+      if (tmp > 1.e-10) calib.m_coeffs.push_back(tmp);
+      else              calib.m_coeffs.push_back(0  );
+    }
+    calib.m_scale = calib.m_coeffs.back();
+    calib.m_coeffs.pop_back();
+    calib.init();
+    return is;
+  }
+
   void readFrom(std::string const & filename, std::string const & prepend)
   {
     std::ifstream in(filename, std::ios::in);
@@ -180,11 +194,7 @@ public:
       if(line.substr(0, prepend.size()) == prepend)
       {
         std::istringstream iss(line.substr(prepend.size()));
-        double tmp;
-        while(iss >> tmp) m_coeffs.push_back(tmp);
-        m_scale = m_coeffs.back();
-        m_coeffs.pop_back();
-        init();
+        iss >> *this;
       }
     }
   }
@@ -229,6 +239,54 @@ private:
   double m_scale = 1.;
   int m_order = 0;
 };
+
+
+class CalibAndScales
+{
+public:
+  CalibAndScales() noexcept = default;
+  CalibAndScales(std::string const & filename)
+  {
+    std::ifstream in(filename);
+    if (!in.good()) {if (sVerbose>0) error("in CalibSCales::CalibSCales(filename) : ", filename, "unreachable"); return;}
+    std::string line;
+
+    while(std::getline(in, line))
+    {
+      int label;
+      std::istringstream iss(line);
+      iss >> label;
+      iss >> m_calibs[label];
+    }
+    m_ok = true;
+  }
+
+  operator bool() const & {return m_ok;}
+
+  class Error
+  {
+    Error(){}
+  };
+
+  static void verbose(int v) {sVerbose = v;}
+
+  friend std::ostream& operator<<(std::ostream& out, CalibAndScales const & calibs)
+  {
+    for (auto const & calib : calibs.m_calibs) out << calib << std::endl;
+    return out;
+  }
+
+  auto const & operator[](Label const & label) {return m_calibs.at(label);}
+
+private:
+  bool m_ok = false;
+  std::unordered_map<int, CalibAndScale> m_calibs;
+  static size_t sVerbose;
+};
+
+
+
+size_t CalibAndScales::sVerbose = 1;
 
 
 #endif //CALIBANDSCALE_HPP

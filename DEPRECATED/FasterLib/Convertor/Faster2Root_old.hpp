@@ -210,7 +210,7 @@ void Faster2Root::treatFile(std::string const & filename)
 
   time_read.Stop();
 
-  ULong64_t nb_data = rootTree -> GetEntries();
+  auto nb_data = rootTree -> GetEntries();
   // Align in time after the timeshift (can shuffle some hits)
   std::vector<int> gindex(nb_data);
   std::iota(std::begin(gindex), std::end(gindex), 0); // Fill with 0,1,2,...,nb_data
@@ -220,7 +220,7 @@ void Faster2Root::treatFile(std::string const & filename)
   Timer time_conv;
 
   // Sets the output tree :
-  std::unique_ptr<TTree> outTree (new TTree("Nuball", "DataTreeEventBuild C1L2 C2"));
+  std::unique_ptr<TTree> outTree (new TTree("Nuball", "DataTreeEventBuild"));
   outTree -> SetDirectory(nullptr);
   outTree -> Branch("mult",   &buffer.mult);
   outTree -> Branch("label",  &buffer.labels , "label[mult]/s" );

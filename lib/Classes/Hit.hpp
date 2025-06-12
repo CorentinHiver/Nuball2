@@ -2,6 +2,7 @@
 #define HIT_HPP
 
 #include "TTree.h"
+#include "../libCo.hpp"
 
 #ifdef COMULTITHREADING
   std::mutex mutex_hits;
@@ -35,6 +36,10 @@ using Pileup_vec  = std::vector<Pileup >; // Vector of Pileup bit (bool) !unused
 //////////////////
 /// Data casts ///
 //////////////////
+
+/// @brief Casts a number into unsigned Label
+template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+constexpr inline Label Index_cast(T const & t) {return static_cast<Index>(t);}
 
 /// @brief Casts a number into unsigned Label
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>

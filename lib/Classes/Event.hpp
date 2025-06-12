@@ -2,6 +2,7 @@
 #define EVENT_HPP
 
 #include "Hit.hpp"
+#include "../libRoot.hpp"
 
 #ifdef COMULTITHREADING
   std::mutex mutex_events;
