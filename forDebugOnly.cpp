@@ -7,14 +7,18 @@
 // #include "lib/libRoot.hpp"
 // #include "lib/libRootHeader.hpp"
 // #include  "lib/Modules/CoRadware.hpp"
+#include  "lib/Modules/Timeshiftor.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
 // #include  "lib/Classes/FilesManager.hpp"
 // #include  "lib/Classes/Detectors.hpp"
-#include  "lib/Analyse/CloversV2.hpp"
+// #include  "lib/Analyse/CloversV2.hpp"
 
 int main()
 {
-  CloversV2 clovers;
+  Timeshiftor ts;
+  detectors.load("136/index_129.list");
+  ts.calculate("/home/corentin/nuball2/N-SI-136/60Co_center_after.fast/");
+  // CloversV2 clovers;
 
   // print(m_calib);
   // CalibAndScale _calib; _calib.readFrom(alignFilename, "100");

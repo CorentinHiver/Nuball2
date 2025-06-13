@@ -246,6 +246,12 @@ void printPause(T const & ... t)
   print(t...);
   pauseCo();
 }
+template <class... T>
+void printAndPause(T const & ... t)
+{
+  print(t...);
+  pauseCo();
+}
 
 ////////////////
 //    Types   //

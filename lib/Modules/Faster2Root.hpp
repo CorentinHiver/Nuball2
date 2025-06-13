@@ -136,7 +136,10 @@ public:
   }
 
   void setTimeshifts(Timeshifts const & timeshifts) {m_timeshifts = timeshifts;}
-  void loadTimeshifts(std::string const & dTfile)   {m_timeshifts.load(dTfile);}
+  void loadTimeshifts(std::string const & dTfile)   
+  {
+    m_timeshifts.load(dTfile);
+  }
   void setCalibration(Calibration const & calibration) {m_calibration = calibration;}
   void loadCalibration(std::string const & calibFile)  {m_calibration.load(calibFile);}
   void setNbFiles(int const & nb_files = -1) {m_nb_files = nb_files;}
@@ -148,19 +151,20 @@ public:
     m_time_window = time_window_ns*1000;
   }
   void overwrite( bool const & _overwrite) {m_overwrite = _overwrite;}
-
-  void convert(std::string const & dataFolder, std::string const & outputFolder, int const & nb_files = -1);
-
   void setTrigger(TriggerEvent other) {m_trigger = other; m_use_trigger = true;}
   void loadTriggerFile(std::string const & file);
   void throwSingles(bool const & _throw_single = true) {m_throw_single = _throw_single;}
+  
+  void convert(std::string const & dataFolder, std::string const & outputFolder, int const & nb_files = -1);
+
+
+  void static printParameters() noexcept;
 
 protected:
   void load(int argc, char** argv);
   /// @brief Dispatch the Faster2Root::convertFile() method through the threads
   static void dispatch_threads(Hit & hit, FasterReader & reader, Faster2Root & convertor, Path const & outPath) 
   {convertor.convertFile(hit, reader, outPath);}
-  virtual void printParameters() const;
 
   virtual void convertFile(Hit & hit, FasterReader & reader, Path const & outPath);
 
@@ -169,7 +173,7 @@ protected:
 
   int m_nb_threads = 1;
   int m_nb_files = -1;
-  Long64_t m_time_window = 1500000; // By default, a 1.5 us time gate is used
+  Long64_t m_time_window = 1500_ns; // By default, a 1.5 us time gate is used
   bool m_eventBuilding = false;
   bool m_calibrate = false;
   bool m_throw_single = false;
@@ -188,7 +192,7 @@ protected:
   std::vector<Label> m_triggering_labels;
 };
 
-void Faster2Root::printParameters() const
+void Faster2Root::printParameters() noexcept
 {
   print("");
   print("Usage of Faster2Root : /path/to/data /path/to/output [[parameters]]");
@@ -196,14 +200,16 @@ void Faster2Root::printParameters() const
   print("parameters :");
   print("");
   print("-c [calibration_file]  : Loads the calibration file");
-  print("-e [time_window_ns]    : Perform event building with time_window_ns = 1500 ns by default");
+  print("-e [time_window_ns]    : Perform event building");
   print("-f [files_number]      : Choose the total number of files to treat inside a data folder");
   print("-i [ID_file]           : Load ID file (necessary if trigger is used)");
   print("-n [hits_number]       : Choose the number of hits to read inside a file");
   print("-m [threads_number]    : Choose the number of files to treat in parallel");
-  print("-t [time_window_ns]    : Loads timeshift data");
+  print("-o                     : Overwrite the output");
+  // print("-rf                    : Use RF (To do)");
+  print("-t [timeshift_file]    : Loads timeshift data. If no timeshift data available, use Timeshiftor to calculate them.");
   print("--throw-singles        : If you are not interested in single hits");
-  print("--trigger [filename]   : Load a trigger file (look at documentation)");
+  print("--trigger [filename]   : Load a trigger file (simple label-based trigger, look at documentation)");
   exit(1);
 }
 
@@ -231,7 +237,7 @@ void Faster2Root::load(int argc, char** argv)
     else if (command == "-f") setNbFiles(std::stoi(argv[++i]));
     else if (command == "-i") detectors.load(argv[++i]);
     else if (command == "-m") setNbThreads(std::stoi(argv[++i]));
-    else if (command == "-n") FasterReader::setMaxHits(std::stoi(argv[++i]));
+    else if (command == "-n") FasterReader::setMaxHits(static_cast<ulonglong>(std::stod(argv[++i])));
     else if (command == "-o") overwrite(true);
     else if (command == "-rf") m_use_RF = true; // TBD
     else if (command == "-t") loadTimeshifts(argv[++i]);
@@ -241,10 +247,14 @@ void Faster2Root::load(int argc, char** argv)
   }
 
   // Checking consistency of parameters :
-  if (m_timeshifts == !m_eventBuilding) 
+  if (m_eventBuilding && !m_timeshifts)
   {
-    print("Time alignment must be set together with event building");
+    print(Colib::Color::RED, "Time alignment must be set together with event building. Use lib/Modules/Timeshiftor.hpp to calculate them.", Colib::Color::RESET);
     throw_error(error_message["DEV"]);
+  }
+  else if (!m_eventBuilding && m_timeshifts)
+  {
+    warning("Time aligned but no event building, hits will still be shuffled (can be developped if needed, not so complicated)");
   }
   if (m_use_trigger && !m_eventBuilding)
   {
@@ -308,7 +318,8 @@ void Faster2Root::convert(std::string const & dataFolder, std::string const & ou
 void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & outPath)
 {
   Timer timer;
-  auto calibrate = [&hit, this](){
+  auto calibrate = [&hit, this]()
+  {
     hit.nrj  = m_calibration(hit.adc, hit.label);
     hit.nrj2 = (hit.qdc2==0) ? 0.0 : m_calibration(hit.qdc2, hit.label);
   };
@@ -321,28 +332,29 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   
   unique_tree tree(new TTree("Nuball2","Nuball2"));
   tree -> SetDirectory(nullptr); // Set the tree RAM resident : increases memory usage but speeds the process up
+  
+  unique_tree tempTree;
 
   Event event;
 
-  unique_tree tempTree;
-
   if (m_eventBuilding)
-  {// Event building is done in two times : first fill a temporary tree, then reorder it after timeshift and finally create events
+  {// Event building is done in two steps : fill a temporary tree with hits, then time-reorder it, then build event in the output tree
     tempTree.reset(new TTree("temp","temp"));
     tempTree -> SetDirectory(nullptr);
-    hit.writing(tempTree.get(), "lteqp");
+    hit  .writing(tempTree.get(), "lteqp");
     event.writing(tree.get(), (m_calibration) ? "mltTEQp" : "mltTeqp");
   }
   else
   {
     tree->SetTitle("Nuball2 without event building");
     event.writing(tree.get(), (m_calibration) ? "mltEQp" : "mlteqp");
+    pauseCo();
   }
 
-  if (m_calibration) tree -> SetTitle((tree->GetTitle()+std::string(" with calibration")).c_str());
-  if (m_timeshifts)  tree -> SetTitle((tree->GetTitle()+std::string(" with timeshifts" )).c_str());
-  if (m_loaded_trigger)  tree -> SetTitle((tree->GetTitle()+std::string(" with trigger loaded from ") + m_trigger_file).c_str());
-  else if (m_use_trigger) tree -> SetTitle((tree->GetTitle()+std::string(" with user defined trigger")).c_str());
+  if (m_calibration     ) tree -> SetTitle((tree->GetTitle()+std::string(" with calibration"         )                 ).c_str());
+  if (m_timeshifts      ) tree -> SetTitle((tree->GetTitle()+std::string(" with timeshifts"          )                 ).c_str());
+  if (m_loaded_trigger  ) tree -> SetTitle((tree->GetTitle()+std::string(" with trigger loaded from ") + m_trigger_file).c_str());
+  else if (m_use_trigger) tree -> SetTitle((tree->GetTitle()+std::string(" with user defined trigger")                 ).c_str());
 
 // Read faster data to fill the memory resident tree :
   while(reader.Read())
@@ -358,8 +370,8 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   }
 
   if (reader.getCounter()<1) {print("NO DATA IN FILE", reader.getFilename()); throw_error("DATA");}
-  m_total_hits+=reader.getCounter();
-  longlong evts = 0;
+  m_total_hits += reader.getCounter();
+  longlong evts       = 0;
   longlong evts_trigg = 0;
   if (m_eventBuilding)
   {// Read the temporary tree and perform event building :
@@ -376,7 +388,6 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
 
     for (;loop<nb_data; ++loop)
     {
-      // print(event);
       tempTree -> GetEntry(alignator[loop]);
       if (m_calibration) calibrate();
       if (builder.build(hit)) 
@@ -391,7 +402,6 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
     }
   }
 
-
   m_total_events+=evts;
   m_trigg_events+=evts_trigg;
   float trigger_rate = 100.*evts_trigg/evts;
@@ -404,7 +414,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   file -> Close();
 
   std::string m_eventbuilding_output = ")";
-  if (m_eventBuilding) m_eventbuilding_output = "( "+std::to_string(evts*1.E-6)+" M events";
+  if (m_eventBuilding) m_eventbuilding_output = "( "+std::to_string(evts*1.E-6)+" M events ) )";
   if (m_use_trigger) m_eventbuilding_output += "trigger in "+std::to_string(trigger_rate)+" % ))";
 
   print(outputFile, "written (", reader.getCounter()*1.E-6, "M hits in", timer(), m_eventbuilding_output);
@@ -428,14 +438,16 @@ public:
 
   // Define here the classes and parameters you would like to share bewteen threads.
   // You already share all the protected members of Faster2Root
-  // Be careful not to write in them !!
+  // Be careful not to override them !!
 };
 
 void MySimpleConvertor::convertFile(Hit & hit, FasterReader & reader, Path const & outPath)
 {
   // First, declare a tree :
-  unique_tree tree(new TTree("simple","simple"));
-  tree -> SetDirectory(nullptr); // To make it memory resident
+  unique_tree tree(new TTree("simple nuball","simple"));
+
+  tree -> SetDirectory(nullptr); // To make it memory resident, optionnal (faster but more RAM consumption)
+
   // Next, connect the hit to the tree (Hit::writing() is a shortcut for the many TTree::Branch method to be called, 
   // see Hit class for more information). You can do it manually of course !
   hit.writing(tree.get(), "lteqp");

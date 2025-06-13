@@ -15,6 +15,8 @@
 #include "CoefficientCorrection.hpp"
 #include "Utils.h"
 
+///
+/// V3 : use of alignement
 
 #define MaxMult 10
 // #define MaxPM 10
@@ -319,8 +321,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   });
 
   // -- Merging the files from each run -- //
-  std::string dest = "data/merge_"+trigger+"_"+target+"_v2.root";
-  std::string source = "data/"+trigger+"/"+target+"/run_*_v2.root";
+  std::string dest = "data/merge_"+trigger+"_"+target+"_v3.root";
+  std::string source = "data/"+trigger+"/"+target+"/run_*_v3.root";
   std::string nb_threads_str = std::to_string(nb_threads);
   std::string command = "hadd -f -j "+ nb_threads_str+ " -d . "+ dest + " " + source;
   print(command);

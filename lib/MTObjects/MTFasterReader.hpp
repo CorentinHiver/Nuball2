@@ -100,13 +100,13 @@ public:
   /**
    * @brief Default constructor
    */
-  MTFasterReader(){}
+  MTFasterReader() noexcept = default;
   /**
- * @brief Regular constructor
- * 
- * @param path : The path to the path containing the .fast files to read
- * @param nb_files : Default -1, takes all the files
- */
+   * @brief Regular constructor
+   * 
+   * @param path : The path to the path containing the .fast files to read
+   * @param nb_files : Default -1, takes all the files
+   */
   MTFasterReader(Path path, int const & nb_files = -1) {addFolder(path, nb_files);}
 
   MTFasterReader(FilesManager const & files) {m_files = files;}
@@ -153,8 +153,8 @@ private:
   // Private methods that handles the multi-threading
 
 
-  template<class Func, class... ARGS>
-  static void Realign(MTFasterReader & MTreader, Func function, ARGS &&... args);
+  // template<class Func, class... ARGS>
+  // static void Realign(MTFasterReader & MTreader, Func function, ARGS &&... args);
 
   bool nextFilename(std::string & filename) {return m_MTfiles.getNext(filename);}
 

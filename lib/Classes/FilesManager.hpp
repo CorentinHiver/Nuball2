@@ -101,6 +101,16 @@ protected:
   std::map<std::string, ListFiles> m_listFilesInFolder;
   bool isReadable = false;
   bool verbose = false;
+
+public:
+  class FolderEmpty
+  {
+    public:
+    FolderEmpty(std::string const & folder)
+    {
+      print(folder, "empty !");
+    }
+  };
 };
 
 bool FilesManager::addFiles(std::string const & _filename)
@@ -155,7 +165,7 @@ bool FilesManager::addFolder(std::string _foldername, long _nb_files, std::vecto
   }
   else
   {
-    throw std::runtime_error("Folder '"+_foldername+"' empty !!");
+    throw FolderEmpty(_foldername);
     return false;
   }
 }

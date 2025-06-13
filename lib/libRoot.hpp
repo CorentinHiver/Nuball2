@@ -1040,6 +1040,20 @@ namespace Colib
     return ret;
   }
 
+  TH1F* integrate(TH1F const * histo)
+  {
+    if (!histo) {error("in Colib::integrat(histo) : histo is nullptr"); return nullptr;}
+    auto ret = dynamic_cast<TH1F*>(histo->Clone(histo->GetName()+TString("_integrated")));
+
+    int integral = 0;
+    for (int x = 1; x <= histo->GetNbinsX(); ++x)
+    {
+      integral += histo->GetBinContent(x);
+      ret->SetBinContent(x, integral);
+    }
+    return ret;
+  }
+
 }
 
 ////////////////////////////////////////
@@ -1420,25 +1434,25 @@ namespace Colib
   static const std::unordered_map<std::type_index, std::string> typeRootMap = 
   {
     // Bool :
-    {typeid(          true), "O"},
+    {static_cast<std::type_index>(typeid(          true)), "O"},
 
     // Integers :
-    {typeid(  char_cast(1)), "B"}, {typeid( uchar_cast(1)), "b"},
-    {typeid( short_cast(1)), "S"}, {typeid(ushort_cast(1)), "s"},
-    {typeid(   int_cast(1)), "I"}, {typeid(  uint_cast(1)), "i"},
-    {typeid(  long_cast(1)), "G"}, {typeid( ulong_cast(1)), "g"},
+    {static_cast<std::type_index>(typeid(  char_cast(1))), "B"}, {static_cast<std::type_index>(typeid( uchar_cast(1))), "b"},
+    {static_cast<std::type_index>(typeid( short_cast(1))), "S"}, {static_cast<std::type_index>(typeid(ushort_cast(1))), "s"},
+    {static_cast<std::type_index>(typeid(   int_cast(1))), "I"}, {static_cast<std::type_index>(typeid(  uint_cast(1))), "i"},
+    {static_cast<std::type_index>(typeid(  long_cast(1))), "G"}, {static_cast<std::type_index>(typeid( ulong_cast(1))), "g"},
 
     // Floating point :
-    {typeid(double_cast(1)), "D"}, {typeid( float_cast(1)), "F"},
+    {static_cast<std::type_index>(typeid(double_cast(1))), "D"}, {static_cast<std::type_index>(typeid( float_cast(1))), "F"},
 
     // ROOT types :
-    {typeid(Long64_cast(1)), "L"}, {typeid(ULong64_cast(1)), "l"}
+    {static_cast<std::type_index>(typeid(Long64_cast(1))), "L"}, {static_cast<std::type_index>(typeid(ULong64_cast(1))), "l"}
   };
 
   template<class T>
   std::string typeRoot(T const & t)
   {
-    auto const & typeIndex = std::type_index(typeid(t));
+    auto const & typeIndex = static_cast<std::type_index>(typeid(t));
     auto it = typeRootMap.find(typeIndex);
     if (it != typeRootMap.end()) return it->second;
     else                         return "Unknown";
@@ -1448,7 +1462,7 @@ namespace Colib
   std::string typeRoot()
   {
     T t;
-    auto const & typeIndex = std::type_index(typeid(t));
+    auto const & typeIndex = static_cast<std::type_index>(typeid(t));
     auto it = typeRootMap.find(typeIndex);
     if (it != typeRootMap.end()) return it->second;
     else                         return "Unknown";
@@ -1467,7 +1481,7 @@ namespace Colib
   template<class T>
   auto createBranchArray(TTree* tree, T * array, std::string const & name, std::string const & name_size, int buffsize = 64000)
   {
-    auto const & type_root_format = name+"["+name_size+"]/"+typeRoot<T>();
+    auto const & type_root_format = name+"["+name_size+"]/"+typeRoot(**array);
     return (tree -> Branch(name.c_str(), array, type_root_format.c_str(), buffsize));
   }
 
@@ -3673,8 +3687,16 @@ auto removeLines(TH2F* histo, std::vector<std::pair<int, int>> bins, int nb_it =
 
 Strings wildcard(std::string const & name)
 {
-  TString result = gSystem->GetFromPipe(("ls "+name).c_str());
-  return getList(result.Data(), "\n");
+  Strings ret;
+  std::istringstream iss(gSystem->GetFromPipe(("ls "+name).c_str()).Data());
+  print(iss.str());
+  std::string tmp;
+  while(iss >> tmp) 
+  {
+    print("coucou", tmp);
+    ret.push_back(tmp);
+  }
+  return ret;
 }
 
 

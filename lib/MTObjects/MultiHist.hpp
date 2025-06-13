@@ -540,7 +540,7 @@ void MultiHist<THist>::Write()
       }
       else error("Please write the MultiHist in the master thread");
     }
-    else error("Error in MultiHist<THist>::Write() : histogram", m_name, "do not exist (so far, monothread is not working I think ...)");
+    else debug("Possible error in MultiHist<THist>::Write() : histogram", m_name, "do not exist (so far, monothread is not working I think ...)");
   }
 
   if (ready_for_write)

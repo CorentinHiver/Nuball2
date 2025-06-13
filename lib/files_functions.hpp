@@ -477,7 +477,14 @@ public:
   auto size() const {return m_folders.size();}
 
   auto begin() const {return m_folders.begin();}
-  auto end  () const {return m_folders.end();}
+  auto end  () const {return m_folders.end  ();}
+  auto begin()       {return m_folders.begin();}
+  auto end  ()       {return m_folders.end  ();}
+
+  auto const & front() const {return m_folders.front();}
+  auto const & back () const {return m_folders.back ();}
+  auto         front()       {return m_folders.front();}
+  auto         back ()       {return m_folders.back ();}
 
   auto const & list() const {return m_folders;}
   auto const & get()  const {return m_folders;}
@@ -517,7 +524,7 @@ public:
   /// @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
   Path(const char* c_str, bool const & create = false) : m_path(std::string(c_str)) {loadPath(create);}
 
-  void makeFolderList() {m_recursive_folders = getList(m_path,"/");}
+  void makeFolderList() {m_recursive_folders = getList(m_path,"/", true);}
 
   int  nbFiles() {return nb_files_in_folder(m_path);}
   bool exists() {return m_exists;}
@@ -525,14 +532,14 @@ public:
   bool make() { create_folder_if_none(m_path); return m_exists = true;}
   static bool make (std::string path_name) {Path _path(path_name); return (_path.make());}
 
-  Path & addFolder(Folder const & folder)
-  {
-    if (file_exists(m_path+=folder.get()))
-    {
-      m_recursive_folders.push_back(folder.name());
-    }
-    return *this;
-  }
+  // Path & addFolder(Folder const & folder)
+  // {
+  //   if (file_exists(m_path+=folder.get()))
+  //   {
+  //     m_recursive_folders.push_back(folder.name());
+  //   }
+  //   return *this;
+  // }
 
   std::string const & get() const {return m_path;}
   std::string const & string() const {return(get());}
@@ -543,10 +550,14 @@ public:
   std::string operator+(const char* addString) {return (m_path+static_cast<std::string>(addString));}
   Path operator+(Folder const & folder) {return Path(m_path+folder.get());}
 
-  Folder const & operator[] (uint const & i) const {return m_recursive_folders[i];}
-  Folder const & folder() const {return m_recursive_folders.get().back();}
+  /// @brief Returns the number of folders composing the path
   auto size() const {return m_recursive_folders.size();}
+  /// @brief Returns the list of folders composing the path
   Folders const & getFolders() const {return m_recursive_folders;}
+  /// @brief Returns the ith folder from the path
+  Folder const & operator[] (size_t const & i) const {return ( (i<this->size()) ? m_recursive_folders[i] : m_recursive_folders.back());}
+  /// @brief Returns the folder's name (i.e., without the whole path)
+  Folder const & folder() const {return m_recursive_folders.get().back();}
 
   Path & operator=(std::string const & inputString)
   {
@@ -573,7 +584,7 @@ public:
     return *this;
   }
 
-  Path & operator+=(std::string const & addString)
+  Path const & operator+=(std::string const & addString)
   {
     auto str = addString;
     push_back_if_none(str, '/');

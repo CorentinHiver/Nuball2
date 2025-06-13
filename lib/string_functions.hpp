@@ -244,7 +244,7 @@ std::string argv_to_string(char** argv, int const & start_i = 0)
 }
 
 /// @brief Create a null terminated C-style array of char from a string
-/// @attention you'll have to delete the allocated memory
+/// @attention you'll have to delete the allocated memory using delete_argv()
 char** string_to_argv(std::string const & string)
 {
   // Breaks down the string into an array of substrings (separated by a space in the string)

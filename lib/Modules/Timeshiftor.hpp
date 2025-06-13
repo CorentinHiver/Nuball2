@@ -38,6 +38,8 @@ inline Time Timeshift_cast(T const & t) {return static_cast<Time>(t);}
  * Timeshiftor ts;
  * detectors.load("index_129.list");
  * ts.calculate()
+ * 
+ * @todo This code has a lot of legacy parts and is very confusing, I feel sorry for anyone wanting to read it, cleaning it might be a good idea
  */
 class Timeshiftor
 {
@@ -347,6 +349,8 @@ public:
   Vector_MultiHist<TH1F> m_time_spectra_corrected; // Time spectra from coincidence with the time reference detector, one TH1F for each detector, after timeshift
   MultiHist<TH2F> m_time_spectra_corrected_bidim; // Time spectra from coincidence with the time reference detector, X axis label, Y axis time spectra, after timeshift
 
+  std::unordered_map<std::string, TH1F*> integratedHistos;
+
   MultiHist<TH1F> m_histo_ref_VS_RF; // RF time spectra of the time reference detector
   MultiHist<TH2F> m_histo_ref_vs_RF_VS_mult; // RF time spectra VS multiplicity of the time reference detector
   MultiHist<TH1F> m_time_spectra_reference_RF_corrected; // RF time spectra VS multiplicity of the time reference detector, after timeshift
@@ -580,9 +584,9 @@ void Timeshiftor::treatFolder(std::string const & folder, int const & nb_files)
   if (MTObject::ON)
   {// If multithreading, treat each data file of the folder in parallel
     print(Colib::Color::BRIGHTBLUE, "Calculating timeshifts with", MTObject::getThreadsNb(),"threads", Colib::Color::RESET);
-    MTList files_MT(files.getListFiles());
     // The FileManager object isn't thread safe. 
     // That is why one has to encapsulate the files list inside a MTList (Multi-Threaded List) :
+    MTList files_MT(files.getListFiles());
     MTObject::parallelise_function(treatFilesMT, *this, files_MT);
   }
   else
@@ -846,7 +850,6 @@ void Timeshiftor::Fill(Event const & event, RF_Manager & rf)
         }
         else 
         {
-          // print(label, deltaT);
           m_time_spectra[label].Fill(deltaT);
           m_time_spectra_bidim.Fill(label, deltaT);
         }
@@ -896,21 +899,9 @@ double getRFGammaPrompt(TH1F * hist, bool const & check_preprompt)
   else return maxBin_ps;
 }
 
-std::vector<Time> forced_shifts;
-
 void Timeshiftor::analyse()
 {
-  forced_shifts.resize(detectors.size(), 0ll);
-  for (uint label = 0; label<forced_shifts.size(); label++)
-  {
-    switch (label)
-    {
-      // case 56: case 58: forced_shifts[label] = -400000; break;
-      default: forced_shifts[label] = 0; break;
-    }
-  }
-
-  bool has_RF = false;
+  bool has_RF = false; // TODO check this variable
 
   m_histo_ref_VS_RF.Merge();
   if(m_use_rf)
@@ -944,13 +935,6 @@ void Timeshiftor::analyse()
 
     m_time_spectra[label].Merge();
    if (m_use_rf) m_histograms_VS_RF[label].Merge();
-
-    // Need to change that afterwards !!!
-    if (forced_shifts[label] != 0)
-    {
-      m_timeshifts[label] = forced_shifts[label];
-      continue;
-    }
 
     // A. If RF, one can decide to use the RF time spectra to calculate the time shifts.
     // Attention !!! This works only if the normal dT peak is bewteen 0 and the RF period, otherwise there will be a shift
@@ -986,13 +970,26 @@ void Timeshiftor::analyse()
     // B. Using normal coincidence time spectra : 
     else
     {
-      if (m_time_spectra[label].Integral() < 50 ) {print("Not a lot of hits : only", m_time_spectra[label].Integral(), "for", name); continue;}
+      if (m_time_spectra[label].Integral() < 10000 ) 
+      {
+        print("Not a lot of hits : only", m_time_spectra[label].Integral(), "for", name);
+        if (m_time_spectra[label].get())
+        {
+          print("Falling back to classic integration");
+          auto integratedHisto = Colib::integrate(m_time_spectra[label].get());
+          integratedHistos.emplace(m_time_spectra[label].get()->GetName(), integratedHisto);
+          auto const & threshold = integratedHisto->GetMaximum() / 2;
+          m_timeshifts[label] = Timeshift_cast(integratedHisto->GetBinCenter(integratedHisto->FindFirstBinAbove(threshold)));
+        }
+        else print("Skip");
+        continue;
+      }
 
       if (m_edge_preferred[type])
       {
-        auto const & amppic = m_time_spectra[label] -> GetMaximum();
+        auto const & amppic     = m_time_spectra[label] -> GetMaximum();
         auto const & peak_begin = m_time_spectra[label] -> FindFirstBinAbove(amppic*0.8);
-        auto const & peak_bins = m_time_spectra[label] -> GetBinCenter(peak_begin);
+        auto const & peak_bins  = m_time_spectra[label] -> GetBinCenter(peak_begin);
         m_timeshifts[label] = Timeshift_cast(peak_bins); // In ps
         if (m_verbose) print( "Edge :", m_timeshifts[label], "with max =", int_cast(m_time_spectra[label] -> GetMaximum()), "counts.");
       }
@@ -1068,6 +1065,7 @@ void Timeshiftor::writeRoot(std::string const & name)
   if (outFile.get() == nullptr) {print("Cannot open file ", outRoot, " !!!\nAbort !");return;}
 
   m_EnergyRef.Write();
+  m_time_spectra_bidim.Write();
   m_time_spectra_corrected_bidim.Write();
 
   if (m_use_rf)
@@ -1076,15 +1074,17 @@ void Timeshiftor::writeRoot(std::string const & name)
     m_histo_ref_VS_RF.Write();
     m_time_spectra_corrected_bidim_RF.Write();
   }
-
-  for (auto & histo : m_time_spectra) histo.Write();
+  
+  for (auto & histo : m_time_spectra          ) histo.Write();
   for (auto & histo : m_time_spectra_corrected) histo.Write();
 
   if (m_use_rf)
   {
-    for (auto & histo : m_histograms_VS_RF) histo.Write();
-    for (auto & histo : m_time_spectra_corrected_RF) histo.Write();
+    for (auto & histo : m_histograms_VS_RF          ) histo.Write();
+    for (auto & histo : m_time_spectra_corrected_RF ) histo.Write();
   }
+
+  for (auto const & it : integratedHistos) it.second->Write();
 
   outFile -> Write();
   outFile -> Close();
@@ -1194,7 +1194,6 @@ TH1F* Timeshiftor::shiftTimeSpectra(TH1F* histo, Label const & label, std::strin
 
 std::ostream& operator<<(std::ostream& out, Timeshiftor const & ts)
 {
-  // for (Label label = 0; label<)
   out << ts.get();
   return out;
 }

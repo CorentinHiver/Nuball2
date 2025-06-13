@@ -385,6 +385,6 @@ inline void Event::Print() const noexcept
 /// Trigger definition ///
 //////////////////////////
 
-using TriggerEvent = std::function<bool(const Event&)>;
+using TriggerEvent = std::function<bool(Event&)>;
 
 #endif //EVENT_HPP

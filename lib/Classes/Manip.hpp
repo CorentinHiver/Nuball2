@@ -10,63 +10,79 @@ class Manip
 {
 public:
 
-  Manip(){}
+  Manip() {if(MTObject::ON) m_MTOn  = true;}
 
-  Manip(std::string const & runs_file) : m_runs_files(runs_file) {readFile(m_runs_files);}
-
-  void readFile(std::string const & runs_file)
+  Manip(std::string const & data) : Manip()
   {
-    std::ifstream file;
-    file.open(runs_file);
-    if (!file.good()){print(runs_file, "NOT FOUND !"); m_ok = false; return;}
+    if (extension(data) == "list") addListFile(data);
+    else                           addPath     (data);
+  }
+  Manip(Path const & path, std::string const & data) {addListFile(path, data);}
+
+  void addPath(std::string const & path)
+  {
+    print(path);
+    if (found(path, "*"))
+    {
+      auto list_rus = wildcard(path);
+    }
+    else
+    {
+      m_listRuns.push_back(path);
+    }
+    if (m_MTOn) m_listRunsMT = m_listRuns;
+  }
+
+  void addListFile(std::string const & runs_file)
+  {
+    std::ifstream file(runs_file);
+    if (!file.good()){print(runs_file, "NOT FOUND !"); return;}
     std::string line;
-    while(file >> line) list_runs.push_back(line);
+    while(file >> line) m_listRuns.push_back(line);
     file.close();
-    if (m_MTOn) list_runs_MT = list_runs;
-    m_ok = true;
+    if (m_MTOn) m_listRunsMT = m_listRuns;
   }
 
-  auto const & get() const {return list_runs;}
-
-  /// @brief Clears the previously set list of folders and replace it with folder.
-  void setFolder(std::string const & folder)
+  void addListFile(Path const & path, std::string const & runs_file)
   {
-    list_runs.clear();
-    list_runs.push_back(folder);
-    if (m_MTOn) list_runs_MT = list_runs;
-    m_ok = true;
+    std::ifstream file(runs_file);
+    if (!file.good()){print(runs_file, "NOT FOUND !"); return;}
+    std::string line;
+    while(file >> line) m_listRuns.push_back(path.string()+line);
+    file.close();
+    if (m_MTOn) m_listRunsMT = m_listRuns;
   }
 
-  /// @brief Clears the previously set list of folders and replace it with folder.
-  void addFolder(std::string const & folder)
-  {
-    list_runs.push_back(folder);
-    if (m_MTOn) list_runs_MT.push_back(folder);
-  }
+  auto const & get() const {return m_listRuns;}
 
-  /// @brief Reads the list file containing the list of folders
-  void readFile()
-  {
-    m_runs_files = m_dataPath + m_manip + m_file;
-    readFile(m_runs_files);
-  }
+  // /// @brief Add a folders
+  // void addFolder(std::string const & folder)
+  // {
+  //   m_listRuns.push_back(folder);
+  //   print(m_listRuns);
+  //   if (m_MTOn) m_listRunsMT.push_back(folder);
+  // }
 
-  /// @brief @deprecated Set the path of the list file containing the list of folders
-  void setDataPath(std::string const & dataPath)
-  {
-    m_dataPath = dataPath;
-  }
+  // /// @brief Clears the previously set list of folders and replace it with folder.
+  // void setFolder(std::string const & folder)
+  // {
+  //   m_listRuns.clear();
+  //   m_listRuns.push_back(folder);
+  //   if (m_MTOn) m_listRunsMT = m_listRuns;
+  //   m_ok = true;
+  // }
 
-  /// @brief @deprecated Set the name of the folder inside the dataPath containing the list file containing the list of folders
-  void setManipName(std::string const & manipName)
-  {
-    m_manip = manipName;
-  }
+  // /// @brief Reads the list file containing the list of folders
+  // void readListFile()
+  // {
+  //   m_runs_files = m_dataPath + m_manip + m_file;
+  //   readListFile(m_runs_files);
+  // }
 
-  void setFileName(std::string const & filename)
-  {
-    m_file = filename;
-  }
+  // void setFileName(std::string const & filename)
+  // {
+  //   m_file = filename;
+  // }
 
   ///@brief To allow several threads to work on different runs on parallel
   ///@details MTObject needs to have been Initialised before creating the 
@@ -75,23 +91,21 @@ public:
     if(MTObject::ON) return (m_MTOn = MTOn);
     else 
     {
-      if (MTOn) print("COMULTITHREADING ISN'T InitialiseD !");
+      if (MTOn) print("COMULTITHREADING ISN'T Initialised !");
       return false;
     }
   }
 
-  operator bool() const & {return m_ok;}
-
-  // void Print() { (m_MTOn) ? list_runs_MT.Print() : print(list_runs); }
+  operator bool() {return (m_listRuns.size()>0);}
 
   bool getNext(std::string & run)
   {
-    if (m_MTOn) return list_runs_MT.getNext(run);
+    if (m_MTOn) return m_listRunsMT.getNext(run);
     else 
     {
-      if (i<list_runs.size())
+      if (m_cursor<m_listRuns.size())
       {
-        run = list_runs[i++];
+        run = m_listRuns[m_cursor++];
         return true;
       }
       else
@@ -106,35 +120,26 @@ public:
     return this->getNext(string);
   }
 
-  void reset() { i = 0; }
+  void reset() { m_cursor = 0; }
+
+  
+  friend std::ostream& operator<<(std::ostream& out, Manip const & manip)
+  {
+    out << manip.get();
+    return out;
+  }
 
 private:  
-  uint i = 0;
-  bool m_ok = false;
-  bool m_MTOn = false; // Multithreading on
+  uint m_cursor = 0;
+  bool static inline m_MTOn = false; // Multithreading ON
 
-  Path m_dataPath;
-  std::string m_runs_files;
-  Folder m_manip;
-  std::string m_file;
+  // Path m_dataPath;
+  // Folder m_manip;
+  // std::string m_file;
 
-  std::vector<std::string> list_runs;
-  MTList list_runs_MT;
-
-public:
-  class NotFound
-  { public:
-    NotFound(Manip const & manip) 
-    {
-      print("the manip at", manip.m_manip.string(), "is not okay ...");
-    }
-  };
+  Strings m_listRuns;
+  MTList m_listRunsMT;
 };
 
-std::ostream& operator<<(std::ostream& cout, Manip const & manip)
-{
-  cout << manip.get();
-  return cout;
-}
 
 #endif //MANIP_HPP
