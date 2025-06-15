@@ -121,7 +121,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       SimpleParis dparis(&calibPhoswitches);
   
       DSSD::Simple dssd;
-      // WarsawDSSD dssd;
 
       // -- Output file : -- //
 
@@ -175,10 +174,13 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           if (nrj < 20_keV) continue;
           if (nrj2 < 0) continue;
 
-          auto const & align = alignement.at(label);
-          if (!align.hasRun(run_number)) continue;
-
-          event.nrjs[hit_i] = align[run_number].linear_inv_calib(nrj);
+          if (label < 800)
+          {
+            auto const & align = alignement.at(label);
+            if (!align.hasRun(run_number)) continue;
+  
+            event.nrjs[hit_i] = align[run_number].linear_inv_calib(nrj);
+          }
   
           if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
           if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
@@ -210,6 +212,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         pparis.analyze();
         dparis.analyze();
         dssd.analyze();
+
 
         // -- Multiplicity -- //
   

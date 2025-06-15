@@ -9,6 +9,9 @@
 /**
  * @brief A class to simplify the analysis of the Clover data
  * @details Removes the handling of the crystal of maximal energy deposit.
+ * @todo Create a "greylist" for HPGe to reject because of poor resolution, but still usable for calorimetry 
+ * and Compton rejection of other HPGe of the same clover (i.e., they may have bad energy resolution, 
+ * if their timing is good they should be considered "grey")
  */
 class CloversV2
 {
@@ -45,14 +48,6 @@ public:
     return *this;
   }
 
-  // static constexpr inline uchar subIndex(Label const & label) noexcept {return uchar_cast((label-23)%6);}
-  // static constexpr inline bool  isClover(Label const & label) noexcept {return 22 < label && label < 168;}
-  // static constexpr inline bool  isGe    (Label const & label) noexcept {return (isClover(label) && subIndex(label)>1);}
-  // static constexpr inline bool  isR2    (Label const & label) noexcept {return (isClover(label) && label > 94);}
-  // static constexpr inline bool  isR3    (Label const & label) noexcept {return (isClover(label) && label < 95);}
-  // static constexpr inline bool  isBGO   (Label const & label) noexcept {return (isClover(label) && subIndex(label)<2);}
-  // static constexpr inline Index index(Label const & label)    noexcept {return Label_cast((label-23)/6);}
-  
   /// @brief The clover index (labels [23;29] -> 0, labels [190;196] -> 23)
   static constexpr auto index        = LUT<1000> ([](Label const & label) -> Index {return Index_cast((label-23)/6);});
   static constexpr auto subIndex     = LUT<1000> ([](Label const & label) -> Index {return Index_cast((label-23)%6);});
@@ -145,6 +140,7 @@ public:
 
   static bool rejectDetector(Label const & label, NRJ const & nrj)
   {
+    bool ret = false;
     if (sUseBlacklist)
     {
       // User-selected blacklisted detectors labels :
@@ -152,9 +148,8 @@ public:
         return found(sBlacklist, _label);
       });
 
-      return blacklistedLabel[label];
+      ret = blacklistedLabel[label];
     } 
-    else return false;
 
     if (sUseOverflow)
     {
@@ -162,15 +157,20 @@ public:
       static auto hasOverflow = LUT<1000>([](Label const & _label){
         return found(sOverflow  , _label);
       });
-       return hasOverflow[label] && nrj > sOverflow[label];
+       ret = hasOverflow[label] && nrj > sOverflow[label];
     }
+    return ret;
   }
 
 private:
 
+  // Data
   std::array<CloverModule, 24> m_clovers;
-  bool m_analyzed = false;
 
+  // Parameters :
+  // Member :
+  bool m_analyzed = false;
+  // Static :
   static inline double sThreshold = 5_keV;
   static inline double sSmearedCaloRes = 400_keV;
   static inline bool sSmearGeCalorimetry = false;
@@ -189,7 +189,7 @@ bool CloversV2::fill(Event const & event, int const & hit_i)
   auto const & nrj   = event.nrjs  [hit_i];
   
   if (CloversV2::rejectDetector(label, nrj)) return false;
-
+  
   if (CloversV2::is[label])
   {
     auto const & nrj          = event.nrjs         [hit_i];
@@ -204,7 +204,7 @@ bool CloversV2::fill(Event const & event, int const & hit_i)
     auto calo = nrj;
     if (isGe[label])
     {
-      if (sSmearGeCalorimetry) 
+      if (sSmearGeCalorimetry)
         calo = randomCo::gaussian(nrj, nrj*((sSmearedCaloRes/sqrt(nrj))/100_keV)/2.35);
       push_back_unique(Ge_id, clover_index);
       calorimetryGe += calo;
