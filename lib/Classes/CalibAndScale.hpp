@@ -276,7 +276,8 @@ public:
     return out;
   }
 
-  auto const & operator[](Label const & label) {return m_calibs.at(label);}
+  auto const & operator[](int const & run) const {return m_calibs.at(run);}
+  bool hasRun(int const & run) const {return found(m_calibs, run);}
 
 private:
   bool m_ok = false;

@@ -55,7 +55,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
   // Alignement
   CalibAndScales::verbose(0);
-  std::unordered_map<int, CalibAndScales> alignement;
+  static std::unordered_map<Label, CalibAndScales> alignement;
   for (auto const & detector : detectors)
   {
     if (detector == "") continue;
@@ -127,7 +127,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
       std::string outFolder = "data/"+trigger+"/"+target+"/";
       Path::make(outFolder);
-      std::string out_filename = outFolder+removeExtension(filename)+"_v2.root";
+      std::string out_filename = outFolder+removeExtension(filename)+"_v3.root";
       File Filename(out_filename); Filename.makePath();
       TFile* outfile = TFile::Open(out_filename.c_str(), "recreate");
       // std::unique_ptr<TFile> outfile (TFile::Open(out_filename.c_str(), "recreate"));
@@ -175,7 +175,10 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           if (nrj < 20_keV) continue;
           if (nrj2 < 0) continue;
 
-          event.nrjs[hit_i] = alignement.at(label)[run_number].linear_inv_calib(nrj);
+          auto const & align = alignement.at(label);
+          if (!align.hasRun(run_number)) continue;
+
+          event.nrjs[hit_i] = align[run_number].linear_inv_calib(nrj);
   
           if (label == 65 && run_number == 116) continue; // This detector's timing slipped in this run
           if ((label == 134 || label == 135 || label == 136) && time > 100_ns) continue; // These detectors have strange events after 100 ns
