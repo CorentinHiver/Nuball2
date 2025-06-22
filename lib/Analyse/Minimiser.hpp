@@ -242,7 +242,11 @@ namespace Colib
       m_calib.setHisto(test);
       if (m_bruteforce)
       {
-        if (s_fill_histo) m_chi2map = new TH3F("chi2map", "chi2map;x;y;z", 
+        TString chi2map_name = "chi2map";
+      #ifdef COMULTITHREADING
+        chi2map_name += MTObject::getThreadIndex();
+      #endif //COMULTITHREADING
+        if (s_fill_histo) m_chi2map = new TH3F(chi2map_name, "chi2map;x;y;z", 
                             xParam.nb_steps*2+1, xParam.min, xParam.max*(1+1e-5), 
                             yParam.nb_steps*2+1, yParam.min, yParam.max*(1+1e-5),
                             zParam.nb_steps*2+1, zParam.min, zParam.max*(1+1e-5)
