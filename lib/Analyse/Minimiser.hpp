@@ -9,20 +9,6 @@
 
 namespace Colib
 {
-  // /// @brief Get a sub-histogram between x1 and x2
-  // template<class THist>
-  // THist* subHisto(THist* histo, int xmin, int xmax)
-  // {
-  //   auto name = TString(histo->GetName())+("_"+std::to_string(xmin)+"_"+std::to_string(xmax)).c_str();
-  //   auto bin_low = histo->GetBinLowEdge(xmin);
-  //   auto bin_high = histo->GetBinLowEdge(xmax);
-  //   auto const & N = bin_high-bin_low;
-  //   auto ret = new THist(name, name, N, xmin, xmax);
-  //   int dest_bin = 0;
-  //   for (int bin_i = bin_low; bin_i<=bin_high; ++bin_i) ret->SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
-  //   return ret;
-  // }
-
   /// @brief First-order interpolation to get the value of a non-integer bin, most likely from calibration
   /// @param histo 
   /// @param calibrated_bin 
