@@ -1,8 +1,8 @@
-#define COMULTITHREADING 3
-#ifdef COMULTITHREADING
+#define MULTI 3
+#ifdef MULTI
   #include "../lib/MTObjects/MTObject.hpp"
   #include "../lib/MTObjects/MTList.hpp"
-#endif //COMULTITHREADING
+#endif //MULTI
 
 #include "../lib/Classes/FilesManager.hpp"
 #include "../lib/Classes/Timer.hpp"
