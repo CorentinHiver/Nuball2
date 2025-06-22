@@ -34,9 +34,9 @@ THist* subHisto(THist* histo, int xmin, int xmax)
 void DataAlignement(bool overwrite = true)
 {
   Timer timer;
-#ifdef COMULTITHREADING
-  MTObject::Initialise(COMULTITHREADING);
-#endif //COMULTITHREADING
+#ifdef MULTI
+  MTObject::Initialise(MULTI);
+#endif //MULTI
 
   // Parameters :
 
