@@ -1,8 +1,8 @@
-#define MULTI 3
-#ifdef MULTI
+#define COMULTITHREADING 3
+#ifdef COMULTITHREADING
   #include "../lib/MTObjects/MTObject.hpp"
   #include "../lib/MTObjects/MTList.hpp"
-#endif //MULTI
+#endif //COMULTITHREADING
 
 #include "../lib/Classes/FilesManager.hpp"
 #include "../lib/Classes/Timer.hpp"
@@ -34,9 +34,9 @@ THist* subHisto(THist* histo, int xmin, int xmax)
 void DataAlignement(bool overwrite = true)
 {
   Timer timer;
-#ifdef MULTI
-  MTObject::Initialise(MULTI);
-#endif //MULTI
+#ifdef COMULTITHREADING
+  MTObject::Initialise(COMULTITHREADING);
+#endif //COMULTITHREADING
 
   // Parameters :
 
@@ -92,6 +92,7 @@ void DataAlignement(bool overwrite = true)
     TString spectrumName = detector.c_str();
     auto outFilename = "Alignement/" + spectrumName + ".root";
     if (!overwrite && File(outFilename).exists()) {print("Do not overwrite", outFilename); continue;}
+    print(outFilename);
 
     auto label = detectors[detector];
     auto type = detectors.type(label);
@@ -148,7 +149,7 @@ void DataAlignement(bool overwrite = true)
     // print(spectrumName, a);
     calibs.setCalib(ref_run_number, CalibAndScale({a.at(type).initGuess, b.at(type).initGuess, C.at(type).initGuess}));
     
-  #ifdef MULTI
+  #ifdef COMULTITHREADING
     MTList MTfiles (files.get());
     MTObject::parallelise_function([&](){
       
@@ -156,16 +157,13 @@ void DataAlignement(bool overwrite = true)
     std::string filename;
     while(MTfiles.getNext(filename))
     {
-
-      print(filename);
-
-  #else // !MULTI
+      MTObject::lock();
+  #else // !COMULTITHREADING
 
     Colib::Chi2Calculator chi2calc(refHisto);
     for (auto const & filename : files)
     {
-
-  #endif //MULTI
+  #endif //COMULTITHREADING
       auto file = File(filename);
       int run_number = std::stoi(split(file.filename().shortName(), "_")[1]);
       if (file == ref_filename) continue; // Do not compare the test spectrum with itself
@@ -177,10 +175,6 @@ void DataAlignement(bool overwrite = true)
       auto testName = testHisto->GetName() + std::string("_") + std::to_string(run_number);
       testHisto->SetName(testName.c_str());
       testHisto->Scale(refHisto->Integral()/testHisto->Integral());
-
-    #ifdef MULTI
-      MTObject::mutex.lock();
-    #endif //MULTI
 
       for (int bin = 1; bin<=testHisto->GetNbinsX(); ++bin)
       {
@@ -194,9 +188,9 @@ void DataAlignement(bool overwrite = true)
 
       Colib::Minimiser firstMini;
 
-    #ifdef MULTI
-      MTObject::mutex.unlock();
-    #endif //MULTI
+    #ifdef COMULTITHREADING
+      MTObject::unlock();
+    #endif //COMULTITHREADING
 
       firstMini.calculate(chi2calc, testHisto, b.at(type), a.at(type), C.at(type));
 
@@ -209,27 +203,27 @@ void DataAlignement(bool overwrite = true)
         chi2map->SetName((testName+"_chi2_init").c_str());
         chi2map->SetTitle((testName+";b;a;C").c_str());
 
-      #ifdef MULTI
+      #ifdef COMULTITHREADING
         lock_mutex lock(MTObject::mutex);
-      #endif //MULTI
+      #endif //COMULTITHREADING
         first_chi2maps.push_back(chi2map);
       }
 
       auto first_calib = firstMini.getCalib();
 
-    #ifdef MULTI
+    #ifdef COMULTITHREADING
       {
         lock_mutex lock(MTObject::mutex);
-    #endif //MULTI
+    #endif //COMULTITHREADING
 
         best_first_bs[run_number] = first_calib.getCoeffs()[0];
         best_first_as[run_number] = first_calib.getCoeffs()[1];
         best_first_Cs[run_number] = first_calib.getScale();
       
         calibs.setCalib(run_number, first_calib);
-    #ifdef MULTI
+    #ifdef COMULTITHREADING
       }      
-    #endif //MULTI
+    #endif //COMULTITHREADING
 
       if (more_precise)
       { // TODO Rendre thread-safe
@@ -285,9 +279,9 @@ void DataAlignement(bool overwrite = true)
       else 
       {
         auto calibratedHisto = firstMini.getCalib().getCalibratedHisto(testName+"_best_calib");
-      #ifdef MULTI
+      #ifdef COMULTITHREADING
         lock_mutex lock(MTObject::mutex);
-      #endif //MULTI
+      #endif //COMULTITHREADING
         for (int bin = 1; bin<=calibratedHisto->GetNbinsX(); ++bin)
         {
           spectraCorrected->SetBinContent(bin, run_number, calibratedHisto->GetBinContent(bin));
@@ -300,9 +294,9 @@ void DataAlignement(bool overwrite = true)
   
       testFile->Close();
     }
-  #ifdef MULTI
+  #ifdef COMULTITHREADING
     });
-  #endif //MULTI
+  #endif //COMULTITHREADING
 
     std::ofstream datafile(dataFile);
     datafile << calibs;

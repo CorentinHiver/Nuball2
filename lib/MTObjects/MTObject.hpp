@@ -274,6 +274,9 @@ public:
   /// so you can capture all the variables at the location you use this method
   static void setExitFunction(std::function<void(void)> const & function) {m_exit_function = function;}
 
+  static void lock()   {mutex.lock()  ;}
+  static void unlock() {mutex.unlock();}
+
 private:
   static std::thread::id master_thread_id; 
   static thread_local size_t m_thread_index; // thread_local variable, meaning it will hold different values for each thread it is in
