@@ -1,3 +1,4 @@
+#define MULTI 3
 #ifdef MULTI
   #include "../lib/MTObjects/MTObject.hpp"
   #include "../lib/MTObjects/MTList.hpp"
@@ -12,55 +13,69 @@
 #include "TBranch.h"
 using MinVar = Colib::MinimiserVariable;
 
-// int i = 0; 
+constexpr double precision = 1;
+// constexpr double precision = 1.e0;
+
+constexpr bool more_precise = false;
 
 void DataAlignement(bool overwrite = true)
 {
-#ifdef MULTI
-    MTObject::Initialise(MULTI);
-#endif //MULTI
-
   Timer timer;
+#ifdef MULTI
+  MTObject::Initialise(MULTI);
+#endif //MULTI
 
   // Parameters :
 
   std::unordered_map<std::string, int> minX = {
-    {"bgo", 100},
-    {"ge" , 50}
+    {"bgo"  , 100 },
+    {"ge"   , 50  },
+    {"paris", 50  },
+    {"dssd" , 2000}
   }; 
   std::unordered_map<std::string, int> maxX = {
-    {"bgo", 10000},
-    {"ge" , 6000 }
+    {"bgo"  , 15000},
+    {"ge"   , 15000},
+    {"paris", 10000},
+    {"dssd" , 15000}
   };
+
   std::unordered_map<std::string, int> rebining = {
-    {"bgo", 20},
-    {"ge" , 1}
+    {"bgo"  , 50},
+    {"ge"   , 2 },
+    {"paris", 10},
+    {"dssd" , 50}
   };
   
   std::unordered_map<std::string, MinVar> b = {
-    {"bgo", {0, 20  , 10}},
-    {"ge" , {0, 2   , 10}}
+    {"bgo"   , {0, 10  , 20*precision}},
+    {"ge"    , {0, 2   , 10*precision}},
+    {"dssd"  , {0, 10  , 20*precision}},
+    {"paris" , {0, 2   , 20*precision}}
   };
   std::unordered_map<std::string, MinVar> a = {
-    {"bgo", {1, 1e-1, 10}},
-    {"ge" , {1, 5e-3, 10}}
+    {"bgo"   , {1, 2e-1, 200*precision}},
+    {"ge"    , {1, 5e-3, 20 *precision}},
+    {"dssd"  , {1, 2e-1, 200*precision}},
+    {"paris" , {1, 1e-2, 100*precision}}
   };
   std::unordered_map<std::string, MinVar> C = {
-    {"bgo", {1, 5e-2, 10}},
-    {"ge" , {1, 5e-2, 10}}
+    {"bgo"   , {1, 1e-1, 20*precision}},
+    {"ge"    , {1, 5e-2, 20*precision}},
+    {"dssd"  , {1, 2e-1, 20*precision}},
+    {"paris" , {1, 5e-2, 20*precision}}
   };
   
   Colib::Minimiser::fillHisto(true);
 
   // Open ref file :
-  TString ref_filename = "../136/calibrate_2025/histos/run_75.root";
-  
+  File ref_filename = "../136/calibrate_2025/histos/run_75.root";
+  int ref_run_number = std::stoi(split(ref_filename.shortName(), "_")[1]);
   detectors.load("../136/index_129.list");
 
   for (auto const & detector : detectors)
   {
-    if (detector == "R3A6_blue" || detector == "R3A6_blue") continue;
-    if (detector == "") continue;
+    if (detector == "" || detector != "PARIS_BR2D14") continue;
     TString spectrumName = detector.c_str();
     auto outFilename = "Alignement/" + spectrumName + ".root";
     if (!overwrite && File(outFilename).exists()) {print("Do not overwrite", outFilename); continue;}
@@ -78,7 +93,7 @@ void DataAlignement(bool overwrite = true)
     
     // Some initializations :
     
-    auto refFile = TFile::Open(ref_filename, "READ"); refFile->cd();
+    auto refFile = TFile::Open(ref_filename.c_str(), "READ"); refFile->cd();
     auto refHistoRaw = refFile->Get<TH1F>(spectrumName);
     if (!refHistoRaw){
       print(spectrumName, "is not found");
@@ -105,6 +120,9 @@ void DataAlignement(bool overwrite = true)
     spectraCorrected -> SetDirectory(nullptr);
     std::vector<double> init_chi2s(150, 0);
     std::vector<double> best_chi2s(150, 0);
+    std::vector<double> best_first_bs(150, 0);
+    std::vector<double> best_first_as(150, 1);
+    std::vector<double> best_first_Cs(150, 1);
     std::vector<double> best_bs(150, 0);
     std::vector<double> best_as(150, 1);
     std::vector<double> best_Cs(150, 1);
@@ -113,73 +131,112 @@ void DataAlignement(bool overwrite = true)
     std::vector<TH3*> final_chi2maps;
   
     FilesManager files("../136/calibrate_2025/histos/");
-  
+    CalibAndScales calibs;
+    for (auto const & it : a) print(it.first, it.second);
+    // print(spectrumName, a);
+    calibs.setCalib(ref_run_number, CalibAndScale({a.at(type).initGuess, b.at(type).initGuess, C.at(type).initGuess}));
+    
   #ifdef MULTI
-    MTList MTfiles(files.get());
+    MTList MTfiles (files.get());
     MTObject::parallelise_function([&](){
-  #endif //MULTI
       
-    // Define the thread local stuff here :
-      Colib::Chi2Calculator chi2calc(refHisto);
+    Colib::Chi2Calculator chi2calc(refHisto);
+    std::string filename;
+    while(MTfiles.getNext(filename))
+    {
+
+      print(filename);
+
+  #else // !MULTI
+
+    Colib::Chi2Calculator chi2calc(refHisto);
+    for (auto const & filename : files)
+    {
+
+  #endif //MULTI
+      auto file = File(filename);
+      int run_number = std::stoi(split(file.filename().shortName(), "_")[1]);
+      if (file == ref_filename) continue; // Do not compare the test spectrum with itself
   
+      auto testFile = TFile::Open(filename.c_str(), "READ"); testFile->cd();
+      auto testHisto = Colib::subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
+  
+      testHisto->Rebin(rebining[type]);
+      auto testName = testHisto->GetName() + std::string("_") + std::to_string(run_number);
+      testHisto->SetName(testName.c_str());
+      testHisto->Scale(refHisto->Integral()/testHisto->Integral());
+
     #ifdef MULTI
-      std::string filename;
-      while(MTfiles.getNext(filename))
-    #else // !MULTI
-      for (auto const & filename : files)
-    #endif // MULTI
+      MTObject::mutex.lock();
+    #endif //MULTI
+
+      for (int bin = 1; bin<=testHisto->GetNbinsX(); ++bin)
       {
-        auto file = File(filename);
-        int run_number = std::stoi(split(file.filename().shortName(), "_")[1]);
-        if (filename == std::string(ref_filename.Data())) continue; // Do not compare the test spectrum with itself
-    
-        auto testFile = TFile::Open(filename.c_str(), "READ"); testFile->cd();
-        auto testHisto = Colib::subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
-    
-        testHisto->Rebin(rebining[type]);
-        auto testName = testHisto->GetName() + std::string("_") + std::to_string(run_number);
-        testHisto->SetName(testName.c_str());
-        testHisto->Scale(refHisto->Integral()/testHisto->Integral());
-  
-        //////////////
-        // Minimise //
-        //////////////
-  
-        Colib::Minimiser firstMini;
-        firstMini.calculate(refHisto, testHisto, b.at(type), a.at(type), C.at(type));
+        spectra->SetBinContent(bin, run_number, testHisto->GetBinContent(bin));
+        totalHisto->SetBinContent(bin, totalHisto->GetBinContent(bin) + testHisto->GetBinContent(bin));
+      }
 
-        auto chi2map = firstMini.getChi2Map();
-        if (chi2map) 
-        {
-          chi2map->SetDirectory(nullptr);
-          chi2map->SetName((testName+"_chi2_init").c_str());
-          chi2map->SetTitle((testName+";b;a;C").c_str());
-          first_chi2maps.push_back(chi2map);
-        }
+      //////////////
+      // Minimise //
+      //////////////
 
-        auto firstCalib = firstMini.getCalib().get();
+      Colib::Minimiser firstMini;
+
+    #ifdef MULTI
+      MTObject::mutex.unlock();
+    #endif //MULTI
+
+      firstMini.calculate(chi2calc, testHisto, b.at(type), a.at(type), C.at(type));
+
+      init_chi2s[run_number] = chi2calc.calculate(testHisto);
+
+      auto chi2map = firstMini.getChi2Map();
+      if (chi2map) 
+      {
+        chi2map->SetDirectory(nullptr);
+        chi2map->SetName((testName+"_chi2_init").c_str());
+        chi2map->SetTitle((testName+";b;a;C").c_str());
+
+      #ifdef MULTI
+        lock_mutex lock(MTObject::mutex);
+      #endif //MULTI
+        first_chi2maps.push_back(chi2map);
+      }
+
+      auto first_calib = firstMini.getCalib();
+
+    #ifdef MULTI
+      {
+        lock_mutex lock(MTObject::mutex);
+    #endif //MULTI
+
+        best_first_bs[run_number] = first_calib.getCoeffs()[0];
+        best_first_as[run_number] = first_calib.getCoeffs()[1];
+        best_first_Cs[run_number] = first_calib.getScale();
+      
+        calibs.setCalib(run_number, first_calib);
+    #ifdef MULTI
+      }      
+    #endif //MULTI
+
+      if (more_precise)
+      { // TODO Rendre thread-safe
         std::unordered_map<std::string, MinVar> b2 = {
-          {"bgo", {firstCalib[0], 2  , 10}},
-          {"ge" , {firstCalib[0], 0.5, 10}}
+          {"bgo", {first_calib[0], 2  , 10}},
+          {"ge" , {first_calib[0], 0.5, 10}}
         };
         std::unordered_map<std::string, MinVar> a2 = {
-          {"bgo", {firstCalib[1], 1e-2, 10}},
-          {"ge" , {firstCalib[1], 1e-3, 10}}
+          {"bgo", {first_calib[1], 1e-2, 10}},
+          {"ge" , {first_calib[1], 1e-3, 10}}
         };
         std::unordered_map<std::string, MinVar> C2 = {
-          {"bgo", {firstCalib[2], 1e-2, 10}},
-          {"ge" , {firstCalib[2], 1e-2, 10}}
+          {"bgo", {first_calib[2], 1e-2, 10}},
+          {"ge" , {first_calib[2], 1e-2, 10}}
         };
-  
+
         Colib::Minimiser mini;
         mini.calculate(refHisto, testHisto, b2.at(type), a2.at(type), C2.at(type));
   
-  #ifdef MULTI
-        lock_mutex lock(MTObject::mutex); // Make the end of the loop thread safe
-  #endif // MULTI
-  
-        init_chi2s[run_number] = chi2calc.calculate(testHisto);
-    
         for (int bin = 1; bin<=testHisto->GetNbinsX(); ++bin)
         {
           spectra->SetBinContent(bin, run_number, testHisto->GetBinContent(bin));
@@ -208,16 +265,36 @@ void DataAlignement(bool overwrite = true)
         best_bs[run_number] = best_calib[0];
         best_as[run_number] = best_calib[1];
         best_Cs[run_number] = best_calib[2];
-  
+        
         print(run_number, mini.getMinChi2(), best_calib);
-    
-        testFile->Close();
-
+        
         mini.getCalib().writeTo(dataFile, std::to_string(run_number));
       }
+      else 
+      {
+        auto calibratedHisto = firstMini.getCalib().getCalibratedHisto(testName+"_best_calib");
+      #ifdef MULTI
+        lock_mutex lock(MTObject::mutex);
+      #endif //MULTI
+        for (int bin = 1; bin<=calibratedHisto->GetNbinsX(); ++bin)
+        {
+          spectraCorrected->SetBinContent(bin, run_number, calibratedHisto->GetBinContent(bin));
+          totalHistoCorrected->SetBinContent(bin, totalHistoCorrected->GetBinContent(bin) + calibratedHisto->GetBinContent(bin));
+        }
+        best_chi2s[run_number] = firstMini.getMinChi2();
+        print("coucou");
+        print(run_number, firstMini.getMinChi2(), first_calib);
+        // firstMini.getCalib().writeTo(dataFile, std::to_string(run_number)); 
+      }
+  
+      testFile->Close();
+    }
   #ifdef MULTI
     });
   #endif //MULTI
+
+    std::ofstream datafile(dataFile);
+    datafile << calibs;
   
     auto outFile = TFile::Open(outFilename, "RECREATE"); outFile->cd();
   
@@ -228,6 +305,22 @@ void DataAlignement(bool overwrite = true)
     auto best_chi2_evol = new TH1F("best_chi2_evol", "best_chi2_evol;run;best #chi^{2}", best_chi2s.size(), 0, best_chi2s.size());
     for (int bin = 0; bin<best_chi2s.size(); ++bin) best_chi2_evol->SetBinContent(bin+1, best_chi2s[bin]);
     best_chi2_evol->Write("best_chi2_evol");
+
+    
+  
+    auto best_first_bs_evol = new TH1F("best_first_bs_evol", "best_first_bs_evol;run;best b", best_first_bs.size(), 0, best_first_bs.size());
+    for (int bin = 0; bin<best_first_bs.size(); ++bin) best_first_bs_evol->SetBinContent(bin+1, best_first_bs[bin]);
+    best_first_bs_evol->Write("best_first_bs_evol");
+  
+    auto best_first_as_evol = new TH1F("best_first_as_evol", "best_first_as_evol;run;best a", best_first_as.size(), 0, best_first_as.size());
+    for (int bin = 0; bin<best_first_as.size(); ++bin) best_first_as_evol->SetBinContent(bin+1, best_first_as[bin]);
+    best_first_as_evol->Write("best_first_as_evol");
+    
+    auto best_first_Cs_evol = new TH1F("best_first_Cs_evol", "best_first_Cs_evol;run;best C", best_first_Cs.size(), 0, best_first_Cs.size());
+    for (int bin = 0; bin<best_first_Cs.size(); ++bin) best_first_Cs_evol->SetBinContent(bin+1, best_first_Cs[bin]);
+    best_first_Cs_evol->Write("best_first_Cs_evol");
+
+
   
     auto best_bs_evol = new TH1F("best_bs_evol", "best_bs_evol;run;best b", best_bs.size(), 0, best_bs.size());
     for (int bin = 0; bin<best_bs.size(); ++bin) best_bs_evol->SetBinContent(bin+1, best_bs[bin]);
@@ -263,4 +356,5 @@ int main(int argc, char** argv)
   return 1;
 }
 
+// g++ -g  -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum
 // g++ -O2 -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++20

@@ -1,13 +1,13 @@
 #ifndef CLOVERMODULE_H
 #define CLOVERMODULE_H
-#include "Module.hpp"
+
 /**
  * @brief Describes a Clover module
  * @details
  * Each Clover has its own index, between 0 and (nb_labels-1)
  * In Nuball2, they range from 0 to 23
  * 
- * This simple class manages the number of Ge crystals and BGO crystals that fired in the event,
+ * This class manages the number of Ge crystals and BGO crystals that fired in the event,
  */
 
 /**
@@ -52,20 +52,21 @@ public:
 
   static void resetGlobalLabel() {gIndex = 0;}
 
-  void addHit(float const & _nrj, Time const & _time, uchar const & sub_index)
+  void addHit(float const & _nrj, Time const & _time, uchar const & sub_index, bool grey_listed = false)
   {
     calo += _nrj;
-    if (sub_index<2) addBGO(_nrj, _time);
-    else             addGe (_nrj, _time, sub_index);
+    if (sub_index<2 || grey_listed) addBGO(_nrj, _time);
+    else                            addGe (_nrj, _time, sub_index);
   }
 
   /// @brief Deprecated, use addHit instead
   void addGe(float const & _nrj, Time const & _time, uchar const & sub_index) 
   {
     auto const & Ge_sub_index = sub_index-2;
+    // if (grey_listed) 
     nrj += _nrj;
     // The highest energy deposit most likely corresponds to the hit before scattering
-    if (_nrj>maxE_Ge)
+    if (_nrj > maxE_Ge)
     {
       maxE_Ge = _nrj;
       time = _time;
@@ -121,6 +122,7 @@ public:
         case 0: case 1 : return 2*ring();
       }
     }
+    // No rotation : 
     else if (maxE_Ge_cristal < 2) return 2*ring()+1; // red and green
     else                          return 2*ring();   // black and blue
     return 0;

@@ -170,7 +170,7 @@ public:
 
   friend std::istream& operator>>(std::istream& is, CalibAndScale & calib) 
   {
-    double tmp;
+    double tmp = 0;
     while(is >> tmp) 
     {
       if (tmp > 1.e-10) calib.m_coeffs.push_back(tmp);
@@ -203,6 +203,12 @@ public:
   {
     out << "coeffs " << calib.m_coeffs << " scale " << calib.m_scale;
     return out;
+  }
+
+  friend std::ofstream& operator<<(std::ofstream& fout, CalibAndScale const & calib)
+  {
+    fout << calib.m_coeffs << " " << calib.m_scale;
+    return fout;
   }
 
   operator bool() const & {return m_ok;}
@@ -261,6 +267,11 @@ public:
     m_ok = true;
   }
 
+  void setCalib(int const & run_number, CalibAndScale const & calib)
+  {
+    m_calibs.emplace(run_number, calib);
+  }
+
   operator bool() const & {return m_ok;}
 
   class Error
@@ -270,15 +281,24 @@ public:
 
   static void verbose(int v) {sVerbose = v;}
 
+  auto const & operator[](int const & run) const {return m_calibs.at(run);}
+  bool hasRun(int const & run) const {return found(m_calibs, run);}
+
+  
   friend std::ostream& operator<<(std::ostream& out, CalibAndScales const & calibs)
   {
     for (auto const & calib : calibs.m_calibs) out << calib << std::endl;
     return out;
   }
 
-  auto const & operator[](int const & run) const {return m_calibs.at(run);}
-  bool hasRun(int const & run) const {return found(m_calibs, run);}
-
+  friend std::ofstream& operator<<(std::ofstream& fout, CalibAndScales const & calibs)
+  {
+    auto runs = list_of_keys(calibs.m_calibs);
+    std::sort(runs.begin(), runs.end());
+    for (auto const & run : runs) fout << run << " " << calibs[run] << std::endl;
+    return fout;
+  }
+  
 private:
   bool m_ok = false;
   std::unordered_map<int, CalibAndScale> m_calibs;

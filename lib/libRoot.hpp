@@ -1860,9 +1860,9 @@ namespace Colib
    *    - "S" (symmetric): Loop through the X bins, find the background on the Y projection, then symmetrize the bidim
    * @param nice: if true, the minimum values of the bin content is 1.
    */
-  void removeBackground(TH1 * histo, int const & niter = 20, std::string const & fit_options = "", bool nice = false) noexcept
+  TH1 * removeBackground(TH1 * histo, int const & niter = 20, std::string const & fit_options = "", bool nice = false) noexcept
   {
-    if (!histo || histo->IsZombie()) return;
+    if (!histo || histo->IsZombie()) return nullptr;
     auto const & dim = histo->GetDimension();
     if (dim == 1)
     {
@@ -1875,61 +1875,7 @@ namespace Colib
       }
       if (gPad) gPad->Update();
     }
-
-    else if (dim == 2)
-    {
-      error ("weird, removeBackground(TH2*) should have been called ....");
-      return;
-      // char choice = 0; // 0 : X, 1 : Y, 2 : symmetric
-      // // if (bidim_options.find("Y")) choice = 1;
-      // // if (bidim_options.find("S")) choice = 2;
-      // auto bidim = dynamic_cast<TH2F*>(histo);
-
-      // auto const & nXbins = bidim -> GetNbinsX();
-      // auto const & nYbins = bidim -> GetNbinsY();
-
-      // if (choice == 2)
-      // {
-      //   if (nXbins != nYbins) {error("Colib::removeBackground for 2D spectra is suited only for symmetric spectra"); return;}
-      // }
-
-      // switch (choice)
-      // {
-      //   case 0: case 2: 
-      //     // Subtract the background of Y spectra gating on each X bins
-      //     for (int binX = 0; binX<nXbins; binX++)
-      //     {
-      //       TH1F* histo1D = nullptr; 
-      //       projectY(bidim, histo1D, binX);
-      //       removeBackground(histo1D, niter);
-      //       setX(bidim, histo1D, binX);
-      //       delete histo1D;
-      //     }
-      //   break;
-
-      //   case 1:
-      //     // Subtract the background of X spectra gating on each Y bins
-      //     for (int binY = 0; binY<nYbins; binY++)
-      //     {
-      //       TH1F* histo1D = nullptr; new TH1F("temp","temp",nYbins, bidim->GetYaxis()->GetXmax(), bidim->GetYaxis()->GetXmin());
-      //       projectX(bidim, histo1D, binY);
-      //       removeBackground(histo1D, niter);
-      //       setY(bidim, histo1D, binY);
-      //       delete histo1D;
-      //     }
-      //   break;
-      // }
-
-      // if (choice == 2)
-      // {
-      //   //2. Re-symmetrize the matrix : (PROTOTYPAL !)
-      //   print("Symmetrization : ");
-      //   for (int binY = 0; binY<nYbins; binY++) for (int binX = 0; binX<nXbins; binX++)
-      //   {
-      //     histo->SetBinContent(binX, binY, histo->GetBinContent(binY, binX));
-      //   }
-      // }
-    }
+    return histo;
   }
 
   /// @brief Based on Radware methods D.C. Radford/Nucl. Instr. and Meth. in Phys. Res. A 361 (1995) 306-316

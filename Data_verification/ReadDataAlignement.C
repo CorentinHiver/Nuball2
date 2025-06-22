@@ -4,7 +4,7 @@
 void ReadDataAlignement()
 {
   CalibAndScale calib;
-  auto file = TFile::Open("Alignement/R3A1_blue.root", "READ");
+  auto file = TFile::Open("Alignement/PARIS_BR2D14.root", "READ");
   auto raw_spectra = file->Get<TH2F>("spectra");
   auto corrected_spectra = new TH2F("myCorrectedSpectra", "myCorrectedSpectra", 
       raw_spectra->GetNbinsX(), raw_spectra->GetXaxis()->GetXmin(), raw_spectra->GetXaxis()->GetXmax(), 
@@ -21,7 +21,7 @@ void ReadDataAlignement()
     {
       for (int bin_x = 1; bin_x<raw_spectra->GetNbinsX(); ++bin_x)
       {
-        auto nb_counts = raw_spectra->GetBinContent(bin_x, run_i) / max * 10000;
+        auto nb_counts = raw_spectra->GetBinContent(bin_x, run_i) / max * 1000;
         for (int count_i = 0; count_i<nb_counts; ++count_i)
         {
           double calibrated_x = calib.linear_inv_calib(bin_x+randomCo::uniform());

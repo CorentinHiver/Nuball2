@@ -18,19 +18,23 @@
 ///
 /// V3 : use of alignement
 
+// TODO : calculer l'alignement pour tout le monde
+
+#define MaxMult 10
+#define ParticleTrigger
+
 #ifdef KISOMER
-  #define MaxMult 10
   #define MaxMultDelayed 6
   #define MaxCaloDelayed 3_MeV
   #define MinMultDelayed 1
-  #define ParticleTrigger
 #endif // KISOMER
 
 #ifdef SHAPEISOMER
-  #define MaxMult 10
+  #define MaxCaloPrompt 3_MeV
   #define MinMultDelayed 1
   #define MaxMultDelayed 5
-  #define MinMultDelayed 2_MeV
+  #define MinCaloDelayed 1.2_MeV
+  #define MaxCaloDelayed 3.5_MeV
 #endif //SHAPEISOMER
 
 constexpr Time coincTw = 40_ns;
@@ -66,8 +70,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
     {163, 11000 }, {164, 11600 }, {165, 11600 }, {166, 11600 }, 
   });
 
-  std::string target = "U";
-  std::string trigger = "C2";
+  std::string target  = "U" ;
+  std::string dataset = "C2";
 
   TH1::AddDirectory(false);
 
@@ -109,7 +113,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
   // Data files :
 
-  Path data_path("~/nuball2/N-SI-136-root_"+trigger+"/merged/");
+  Path data_path("~/nuball2/N-SI-136-root_"+dataset+"/merged/");
   FilesManager files(data_path.string(), nb_files);
   MTList MTfiles(files.get());
 
@@ -174,7 +178,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
       // -- Output file : -- //
 
-      std::string outFolder = "data/"+trigger+"/"+target+"/";
+      std::string outFolder = "data/"+dataset+"/"+target+"/";
       Path::make(outFolder);
       std::string out_filename = outFolder+removeExtension(filename)+"_v3.root";
       File Filename(out_filename); Filename.makePath();
@@ -194,7 +198,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       
       TH2F* pp = new TH2F(("pp"+thread_i_str).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd = new TH2F(("dd"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
-      TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dd_PM1 = new TH2F(("dd_PM1"+thread_i_str).c_str(), "gamma-gamma delayed Prompt Multiplicity #supeq 1;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       
       ////////////////////////
@@ -300,9 +305,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       #ifdef MaxMultPrompt
         if (PM > MaxMultPrompt) continue;
       #endif //MaxMultPrompt
-      #ifdef MinMultPrompt
-        if (PM < MinMultPrompt) continue;
-      #endif //MinMultPrompt
 
           // -- Delayed multiplicity -- //
         auto const & DMclover = dclovers.all.size();
@@ -339,9 +341,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       #ifdef MaxCaloPrompt
         if (PC > MaxCaloPrompt) continue;
       #endif //MaxCaloPrompt
-      #ifdef MinCaloPrompt
-        if (PC < MinCaloPrompt) continue;
-      #endif //MinCaloPrompt
 
           // -- Delayed calorimetry -- //
 
@@ -468,6 +467,11 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
               dd_pveto->Fill(dclover0->nrj, dclover1->nrj);
               dd_pveto->Fill(dclover1->nrj, dclover0->nrj);
             }
+            else
+            {
+              dd_PM1->Fill(dclover0->nrj, dclover1->nrj);
+              dd_PM1->Fill(dclover1->nrj, dclover0->nrj);
+            }
           }
         }
       }
@@ -492,6 +496,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         dd -> Write("dd", TObject::kOverwrite);
         dp -> Write("dp", TObject::kOverwrite);
         dd_pveto -> Write("dd_pveto", TObject::kOverwrite);
+        dd_PM1 -> Write("dd_PM1", TObject::kOverwrite);
 
       outfile->Close();
       delete outfile;
@@ -499,10 +504,18 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       infile->Close();
       delete infile;
 
+      delete p_before;
+      delete d_before;
+      delete pp_before;
+      delete dd_before;
+      delete dp_before;
+      delete dd_pveto_before;
+
       delete pp;
       delete dd;
       delete dp;
       delete dd_pveto;
+      delete dd_PM1;
 
       print(out_filename, "written"); 
     }
@@ -510,8 +523,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   });
 
   // -- Merging the files from each run -- //
-  std::string dest = "data/merge_"+trigger+"_"+target+"_v3.root";
-  std::string source = "data/"+trigger+"/"+target+"/run_*_v3.root";
+  std::string dest = "data/merge_"+dataset+"_"+target+"_v3.root";
+  std::string source = "data/"+dataset+"/"+target+"/run_*_v3.root";
   std::string nb_threads_str = std::to_string(nb_threads);
   std::string command = "hadd -f -j "+ nb_threads_str+ " -d . "+ dest + " " + source;
   print(command);

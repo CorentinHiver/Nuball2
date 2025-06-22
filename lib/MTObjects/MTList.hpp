@@ -52,8 +52,8 @@ public:
     return *this;
   }
 
-  auto begin() {return m_collection.begin();}
-  auto end() {return m_collection.end();}
+  // auto end() {return m_collection.end();} // Not thread safe
+  // auto begin() {return m_collection.begin();} // Not thread safe
 
   operator std::vector<T>() & {return m_collection;}
 
@@ -66,12 +66,75 @@ public:
     lock_mutex lock(m_mutex);
     print(m_collection);
   }
+// Shared lock object to manage the mutex for direct range-based for loops
+    struct SharedLock {
+        SharedLock(std::mutex& mtx) : m_mutex(mtx) {
+            m_mutex.lock();
+        }
+        ~SharedLock() {
+            m_mutex.unlock();
+        }
+        std::mutex& m_mutex;
+    };
+
+    // Custom iterator for thread-safe direct iteration
+    class LockingIterator {
+    public:
+        using iterator_category = std::forward_iterator_tag;
+        using value_type = T;
+        using difference_type = std::ptrdiff_t;
+        using pointer = T*;
+        using reference = T&;
+
+        LockingIterator(std::shared_ptr<SharedLock> lock, typename std::vector<T>::iterator it)
+            : m_lock(lock), m_it(it) {}
+
+        reference operator*() const { return *m_it; }
+        pointer operator->() const { return &(*m_it); }
+
+        LockingIterator& operator++() {
+            ++m_it;
+            return *this;
+        }
+
+        LockingIterator operator++(int) {
+            LockingIterator tmp = *this;
+            ++(*this);
+            return tmp;
+        }
+
+        bool operator==(const LockingIterator& other) const {
+            return m_it == other.m_it;
+        }
+
+        bool operator!=(const LockingIterator& other) const {
+            return !(*this == other);
+        }
+
+    private:
+        std::shared_ptr<SharedLock> m_lock;
+        typename std::vector<T>::iterator m_it;
+    };
+
+    // Thread-safe begin() and end() for direct range-based for loops
+    LockingIterator begin() {
+        m_iteration_lock = std::make_shared<SharedLock>(m_mutex);
+        return LockingIterator(m_iteration_lock, m_collection.begin());
+    }
+
+    LockingIterator end() {
+        if (!m_iteration_lock) {
+            throw std::runtime_error("end() called before begin()");
+        }
+        return LockingIterator(m_iteration_lock, m_collection.end());
+    }
 
 private:
   mutable std::mutex m_mutex;
   std::vector<T> m_collection;
   size_t m_size = 0;
   size_t m_read_index = 0;
+  mutable std::shared_ptr<SharedLock> m_iteration_lock; // For direct iteration locking
 };
 
 using MTList = MTVector<std::string>;

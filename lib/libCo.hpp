@@ -728,6 +728,18 @@ constexpr inline bool key_found(std::unordered_map<K,V> const & map, K const & k
   return find_key(map, key);
 }
 
+
+/// @brief Returns the list of keys in a map
+/// @details This method is only looking in the keys, not the values
+template<typename K, typename V> 
+inline std::vector<K> list_of_keys(std::unordered_map<K,V> const & map)
+{
+  std::vector<K> ret;
+  for (auto const & it : map) ret.push_back(it.first);
+  return ret;
+}
+
+
 /////////////////////////
 //    MAPS FUNCTIONS   //
 /////////////////////////

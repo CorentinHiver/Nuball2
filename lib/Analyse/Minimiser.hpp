@@ -9,19 +9,19 @@
 
 namespace Colib
 {
-  /// @brief Get a sub-histogram between x1 and x2
-  template<class THist>
-  THist* subHisto(THist* histo, int xmin, int xmax)
-  {
-    auto name = TString(histo->GetName())+("_"+std::to_string(xmin)+"_"+std::to_string(xmax)).c_str();
-    auto bin_low = histo->GetBinLowEdge(xmin);
-    auto bin_high = histo->GetBinLowEdge(xmax);
-    auto const & N = bin_high-bin_low;
-    auto ret = new THist(name, name, N, xmin, xmax);
-    int dest_bin = 0;
-    for (int bin_i = bin_low; bin_i<=bin_high; ++bin_i) ret->SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
-    return ret;
-  }
+  // /// @brief Get a sub-histogram between x1 and x2
+  // template<class THist>
+  // THist* subHisto(THist* histo, int xmin, int xmax)
+  // {
+  //   auto name = TString(histo->GetName())+("_"+std::to_string(xmin)+"_"+std::to_string(xmax)).c_str();
+  //   auto bin_low = histo->GetBinLowEdge(xmin);
+  //   auto bin_high = histo->GetBinLowEdge(xmax);
+  //   auto const & N = bin_high-bin_low;
+  //   auto ret = new THist(name, name, N, xmin, xmax);
+  //   int dest_bin = 0;
+  //   for (int bin_i = bin_low; bin_i<=bin_high; ++bin_i) ret->SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
+  //   return ret;
+  // }
 
   /// @brief First-order interpolation to get the value of a non-integer bin, most likely from calibration
   /// @param histo 
@@ -96,7 +96,7 @@ namespace Colib
       return calculate(testCal);
     }
     
-    template<class THist> double calculate(THist* const testCal)
+    template<class THist> double calculate(THist* const testCal) const
     {
       double sum_errors_squared = 0.0;
       auto const & bins = testCal->GetNbinsX();
@@ -116,7 +116,7 @@ namespace Colib
       return sum_errors_squared/bins;
     }
 
-    double calculate(CalibAndScale const & calib)
+    double calculate(CalibAndScale const & calib) const
     {
       double sum_errors_squared = 0.0;
 
@@ -198,6 +198,19 @@ namespace Colib
       initialize();
       return *this;
     }
+
+    friend std::ostream& operator<<(std::ostream& out, MinimiserVariable const & minvar)
+    {
+      out << 
+            " initGuess " << minvar.initGuess <<
+            " bound "     << minvar.bound     <<
+            " step "      << minvar.step      <<
+            " nb_steps "  << minvar.nb_steps  <<
+            " min "       << minvar.min       <<
+            " max "       << minvar.max       << 
+            std::endl;
+      return out ;
+    }
   
   private:
     void initialize() 
@@ -232,6 +245,12 @@ namespace Colib
     void calculate(THist* reference, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
     {
       Chi2Calculator chi2Calc(reference);
+      this->calculate(chi2Calc, test, xParam, yParam, zParam);
+    }
+
+    template<class THist>
+    void calculate(Chi2Calculator & chi2Calc, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
+    {
       CalibAndScale calib(test);
       chi2Calc.setCalibForMinuit(&calib);
       m_calib.setHisto(test);
