@@ -112,7 +112,7 @@ void DataAlignement(bool overwrite = true)
       print(spectrumName, "is not found");
       continue;
     }
-    auto refHisto = Colib::subHisto(refHistoRaw, minX[type], maxX[type]);
+    auto refHisto = subHisto(refHistoRaw, minX[type], maxX[type]);
     refHisto->Rebin(rebining[type]);
     refHisto->SetName(spectrumName+"_ref");
   
@@ -172,7 +172,7 @@ void DataAlignement(bool overwrite = true)
       if (file == ref_filename) continue; // Do not compare the test spectrum with itself
   
       auto testFile = TFile::Open(filename.c_str(), "READ"); testFile->cd();
-      auto testHisto = Colib::subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
+      auto testHisto = subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
   
       testHisto->Rebin(rebining[type]);
       auto testName = testHisto->GetName() + std::string("_") + std::to_string(run_number);
