@@ -92,7 +92,6 @@ void DataAlignement(bool overwrite = true)
     TString spectrumName = detector.c_str();
     auto outFilename = "Alignement/" + spectrumName + ".root";
     if (!overwrite && File(outFilename).exists()) {print("Do not overwrite", outFilename); continue;}
-    print(outFilename);
 
     auto label = detectors[detector];
     auto type = detectors.type(label);
@@ -295,7 +294,6 @@ void DataAlignement(bool overwrite = true)
           totalHistoCorrected->SetBinContent(bin, totalHistoCorrected->GetBinContent(bin) + calibratedHisto->GetBinContent(bin));
         }
         best_chi2s[run_number] = firstMini.getMinChi2();
-        print("coucou");
         print(run_number, firstMini.getMinChi2(), first_calib);
         // firstMini.getCalib().writeTo(dataFile, std::to_string(run_number)); 
       }
