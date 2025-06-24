@@ -172,7 +172,9 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       CloversV2 dclovers;
   
       SimpleParis pparis(&calibPhoswitches);
+      SimpleParis nparis(&calibPhoswitches);
       SimpleParis dparis(&calibPhoswitches);
+      std::vector<SimpleParisModule*> parisModules;
   
       DSSD::Simple dssd;
 
@@ -201,6 +203,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       TH2F* dd_PM1 = new TH2F(("dd_PM1"+thread_i_str).c_str(), "gamma-gamma delayed Prompt Multiplicity #supeq 1;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+
+      TH2F* d_tParis = new TH2F(("d_tParis"+thread_i_str).c_str(), "gamma VS time paris;E1[keV];time[ps]", 4096,0,4096, 210,-25,185);
       
       ////////////////////////
       // -- PROCESS DATA -- //
@@ -226,6 +230,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         dclovers.clear();
   
         pparis.clear();
+        nparis.clear();
         dparis.clear();
   
         dssd.clear();
@@ -252,6 +257,11 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
               pparis_before.fill(event, hit_i);
               if (!align(event, hit_i, run_number)) continue;
               pparis.fill(event, hit_i);
+            }
+            else if (gate(10_ns, time,  40_ns)) 
+            {
+              if (!align(event, hit_i, run_number)) continue;
+              nparis.fill(event, hit_i);
             }
             else if (gate( 40_ns, time, 180_ns)) 
             {
@@ -290,7 +300,12 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         pclovers.analyze();
         dclovers.analyze();
         pparis.analyze();
+        nparis.analyze();
         dparis.analyze();
+        // Easily accessible paris modules :
+        for (auto & pmodule : pparis.modules) parisModules.push_back(pmodule);
+        for (auto & pmodule : nparis.modules) parisModules.push_back(pmodule);
+        for (auto & pmodule : dparis.modules) parisModules.push_back(pmodule);
         dssd.analyze();
 
         ////////////////////////
@@ -473,6 +488,9 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
               dd_PM1->Fill(dclover1->nrj, dclover0->nrj);
             }
           }
+
+          // -- Delayed VS PARIS -- //
+          for (auto const & module1 : parisModules) d_tParis->Fill(dclover0->nrj, module1->time);
         }
       }
 
@@ -497,6 +515,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         dp -> Write("dp", TObject::kOverwrite);
         dd_pveto -> Write("dd_pveto", TObject::kOverwrite);
         dd_PM1 -> Write("dd_PM1", TObject::kOverwrite);
+        
+        d_tParis -> Write("d_tParis", TObject::kOverwrite);
 
       outfile->Close();
       delete outfile;

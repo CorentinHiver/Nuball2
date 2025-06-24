@@ -1,6 +1,8 @@
 #ifndef CLOVERMODULE_H
 #define CLOVERMODULE_H
 
+#include "../Classes/Hit.hpp"
+
 /**
  * @brief Describes a Clover module
  * @details
@@ -85,48 +87,98 @@ public:
     ++nbBGO;
   }
 
-  bool hasGe      () const {return nb    >  0 ;}
-  bool hasBGO     () const {return nbBGO >  0 ;}
-  bool isCleanGe  () const {return nbBGO == 0 ;}
-  bool isCleanBGO () const {return nb    == 0 ;}
-  bool isRejected () const {return nbBGO > 0 && nb > 0;}
-  uchar nbCrystals() const {return nb + nbBGO;}
+  constexpr bool hasGe      () const {return nb    >  0 ;}
+  constexpr bool hasBGO     () const {return nbBGO >  0 ;}
+  constexpr bool isCleanGe  () const {return nbBGO == 0 ;}
+  constexpr bool isCleanBGO () const {return nb    == 0 ;}
+  constexpr bool isRejected () const {return nbBGO > 0 && nb > 0;}
+  constexpr uchar nbCrystals() const {return nb + nbBGO;}
 
-  uchar ring() const
+  /// @brief Returns 0 for R3 and 1 for R2
+  constexpr uchar ring() const {return m_index % 2;}
+
+  // Rotation 1 : m_index == 5
+  // Rotation 2 : m_index == 14 || m_index == 15
+  // Rotation 3 : m_index == 17
+
+  static inline std::array<std::size_t, 24> s_rotations = {0};
+
+  static bool setRotation(size_t const & index, size_t const & rotation) 
   {
-    return m_index % 2;
+    if (index>23) {error("In CloverModule::setRotationsFile : label is", index ,"! There are only 24 Clovers..."); return false;}
+    if (rotation > 3) {error("In CloverModule::setRotationsFile : for label", index, "the rotation is >3. What do you mean ?"); return false;}
+    s_rotations[index] = rotation;
+    return true;
   }
+  
+  bool setRotation(size_t const & rotation) {return setRotation(m_index, rotation);}
+
+  static bool setRotationsFile(std::ifstream & file)
+  {
+    std::string line;
+    while(std::getline(file, line))
+    {
+      std::istringstream iss(line);
+      size_t index = 0;
+      size_t rotation = 0;
+      iss >> index >> rotation;
+      if (!setRotation(index, rotation)) return false;
+    }
+    return true;
+  }
+
+  
+  static bool setRotationsFile(std::string const & filename)
+  {
+    std::ifstream file(filename);
+    if (!file.is_open()) {error("In CloverModule::setRotationsFile : file", filename, "can't be opened"); return false;}
+    auto const & ret = setRotationsFile(file);
+    file.close();
+    return ret;
+  }
+
+  /// @brief returns 0 for R3 upstream, 1 for R3 downstream, 2 for R2 upstream, 3 for R2 downstream
   uchar sub_ring() const
   {
-    if (m_index == 5) 
-    { // -pi/2 rotation
-      switch (maxE_Ge_cristal)
+    auto const & rotation = s_rotations[m_index];
+    switch (rotation)
+    {
+      case 0 : // No rotation 
       {
-        case 0: case 3 : return 2*ring()+1;
-        case 1: case 2 : return 2*ring();
+        switch (maxE_Ge_cristal)
+        {
+          case 0: case 1: return 2*ring()+1;
+          case 2: case 3: return 2*ring();
+        }
       }
-    }
-    else if (m_index == 14 || m_index == 15) 
-    { // +pi/2 rotation
-      switch (maxE_Ge_cristal)
+      case 1 : // -pi/2 rotation
       {
-        case 1: case 2 : return 2*ring()+1;
-        case 0: case 3 : return 2*ring();
+        switch (maxE_Ge_cristal)
+        {
+          case 0: case 3 : return 2*ring()+1;
+          case 1: case 2 : return 2*ring();
+        }
       }
-    }
-    else if (m_index == 17) 
-    { // pi rotation
-      switch (maxE_Ge_cristal)
+      case 2 : // pi/2 rotation
       {
-        case 2: case 3 : return 2*ring()+1;
-        case 0: case 1 : return 2*ring();
+        switch (maxE_Ge_cristal)
+        {
+          case 1: case 2 : return 2*ring()+1;
+          case 0: case 3 : return 2*ring();
+        }
       }
+      case 3 : // pi rotation
+      {
+        switch (maxE_Ge_cristal)
+        {
+          case 2: case 3 : return 2*ring()+1;
+          case 0: case 1 : return 2*ring();
+        }
+      }
+      default : return -1;
     }
-    // No rotation : 
-    else if (maxE_Ge_cristal < 2) return 2*ring()+1; // red and green
-    else                          return 2*ring();   // black and blue
-    return 0;
   }
+
 
   // Copy constructors and operators :
 

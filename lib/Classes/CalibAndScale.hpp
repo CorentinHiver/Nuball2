@@ -182,7 +182,7 @@ public:
     return is;
   }
 
-  void readFrom(std::string const & filename, std::string const & prepend)
+  bool readFrom(std::string const & filename, std::string const & prepend)
   {
     std::ifstream in(filename, std::ios::in);
     std::string line;
@@ -195,8 +195,10 @@ public:
       {
         std::istringstream iss(line.substr(prepend.size()));
         iss >> *this;
+        return true;
       }
     }
+    return false;
   }
 
   friend std::ostream& operator<<(std::ostream& out, CalibAndScale const & calib)
@@ -207,7 +209,7 @@ public:
 
   friend std::ofstream& operator<<(std::ofstream& fout, CalibAndScale const & calib)
   {
-    fout << calib.m_coeffs << " " << calib.m_scale;
+    fout << calib.m_coeffs << calib.m_scale;
     return fout;
   }
 

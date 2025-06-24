@@ -193,8 +193,7 @@ namespace Colib
             " step "      << minvar.step      <<
             " nb_steps "  << minvar.nb_steps  <<
             " min "       << minvar.min       <<
-            " max "       << minvar.max       << 
-            std::endl;
+            " max "       << minvar.max       ;
       return out ;
     }
   

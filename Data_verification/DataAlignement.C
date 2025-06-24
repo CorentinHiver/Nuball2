@@ -1,4 +1,3 @@
-#define MULTI 3
 #ifdef MULTI
   #include "../lib/MTObjects/MTObject.hpp"
   #include "../lib/MTObjects/MTList.hpp"
@@ -13,9 +12,9 @@
 #include "TBranch.h"
 using MinVar = Colib::MinimiserVariable;
 
-constexpr double precision = 2.;
-
 constexpr bool more_precise = false;
+
+constexpr double precision = 1;
 
 /// @brief Get a sub-histogram between x1 and x2
 template<class THist>
@@ -33,6 +32,7 @@ THist* subHisto(THist* histo, int xmin, int xmax)
 
 void DataAlignement(bool overwrite = true)
 {
+  
   Timer timer;
 #ifdef MULTI
   MTObject::Initialise(MULTI);
@@ -61,19 +61,19 @@ void DataAlignement(bool overwrite = true)
   };
   
   std::unordered_map<std::string, MinVar> b = {
-    {"bgo"   , {0, 10  , 20*precision}},
-    {"ge"    , {0, 2   , 10*precision}},
+    {"bgo"   , {0, 5   , 20*precision}},
+    {"ge"    , {0, 1   , 20*precision}},
     {"dssd"  , {0, 10  , 20*precision}},
     {"paris" , {0, 2   , 20*precision}}
   };
   std::unordered_map<std::string, MinVar> a = {
     {"bgo"   , {1, 2e-1, 200*precision}},
-    {"ge"    , {1, 5e-3, 20 *precision}},
+    {"ge"    , {1, 5e-3,  20*precision}},
     {"dssd"  , {1, 2e-1, 200*precision}},
-    {"paris" , {1, 1e-2, 100*precision}}
+    {"paris" , {1, 2e-2, 200*precision}}
   };
   std::unordered_map<std::string, MinVar> C = {
-    {"bgo"   , {1, 1e-1, 20*precision}},
+    {"bgo"   , {1, 5e-2, 20*precision}},
     {"ge"    , {1, 5e-2, 20*precision}},
     {"dssd"  , {1, 2e-1, 20*precision}},
     {"paris" , {1, 5e-2, 20*precision}}
@@ -88,6 +88,7 @@ void DataAlignement(bool overwrite = true)
 
   for (auto const & detector : detectors)
   {
+    Timer timerDetector;
     if (detector == "") continue;
     TString spectrumName = detector.c_str();
     auto outFilename = "Alignement/" + spectrumName + ".root";
@@ -96,22 +97,15 @@ void DataAlignement(bool overwrite = true)
 
     auto label = detectors[detector];
     auto type = detectors.type(label);
-    if (!found(minX, type))
-    {
-      error(type, "dont have minX");
-      continue;
-    }
+    if (!found(minX, type)) { error(type, "dont have minX"); continue; }
     File dataFile = "Alignement/"+detector+".align";
     if (dataFile.exists()) std::remove(dataFile.c_str());
     
     // Some initializations :
-    
     auto refFile = TFile::Open(ref_filename.c_str(), "READ"); refFile->cd();
     auto refHistoRaw = refFile->Get<TH1F>(spectrumName);
-    if (!refHistoRaw){
-      print(spectrumName, "is not found");
-      continue;
-    }
+    if (!refHistoRaw) {print(spectrumName, "is not found"); continue;}
+    if (refHistoRaw->Integral() < 1000){print(spectrumName, "has low count (<10)"); continue;}
     auto refHisto = subHisto(refHistoRaw, minX[type], maxX[type]);
     refHisto->Rebin(rebining[type]);
     refHisto->SetName(spectrumName+"_ref");
@@ -150,6 +144,7 @@ void DataAlignement(bool overwrite = true)
     calibs.setCalib(ref_run_number, CalibAndScale({a.at(type).initGuess, b.at(type).initGuess, C.at(type).initGuess}));
     
   #ifdef COMULTITHREADING
+    std::mutex mutex;
     MTList MTfiles (files.get());
     MTObject::parallelise_function([&](){
       
@@ -157,23 +152,31 @@ void DataAlignement(bool overwrite = true)
     std::string filename;
     while(MTfiles.getNext(filename))
     {
-      MTObject::lock();
   #else // !COMULTITHREADING
 
     Colib::Chi2Calculator chi2calc(refHisto);
     for (auto const & filename : files)
     {
   #endif //COMULTITHREADING
+
       auto file = File(filename);
       int run_number = std::stoi(split(file.filename().shortName(), "_")[1]);
       if (file == ref_filename) continue; // Do not compare the test spectrum with itself
   
       auto testFile = TFile::Open(filename.c_str(), "READ"); testFile->cd();
-      auto testHisto = subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
-  
+      TH1F* testHisto = nullptr;
+      TString testName;
+
+    #ifdef COMULTITHREADING
+    {
+      lock_mutex lock(mutex);
+    #endif //COMULTITHREADING
+
+      testHisto = subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
+
       testHisto->Rebin(rebining[type]);
-      auto testName = testHisto->GetName() + std::string("_") + std::to_string(run_number);
-      testHisto->SetName(testName.c_str());
+      testName = testHisto->GetName() + TString("_") + std::to_string(run_number).c_str();
+      testHisto->SetName(testName);
       testHisto->Scale(refHisto->Integral()/testHisto->Integral());
 
       for (int bin = 1; bin<=testHisto->GetNbinsX(); ++bin)
@@ -186,12 +189,12 @@ void DataAlignement(bool overwrite = true)
       // Minimise //
       //////////////
 
-      Colib::Minimiser firstMini;
-
-    #ifdef COMULTITHREADING
-      MTObject::unlock();
+      
+      #ifdef COMULTITHREADING
+    }
     #endif //COMULTITHREADING
-
+    
+      Colib::Minimiser firstMini;
       firstMini.calculate(chi2calc, testHisto, b.at(type), a.at(type), C.at(type));
 
       init_chi2s[run_number] = chi2calc.calculate(testHisto);
@@ -200,11 +203,11 @@ void DataAlignement(bool overwrite = true)
       if (chi2map) 
       {
         chi2map->SetDirectory(nullptr);
-        chi2map->SetName((testName+"_chi2_init").c_str());
-        chi2map->SetTitle((testName+";b;a;C").c_str());
+        chi2map->SetName(testName+"_chi2_init");
+        chi2map->SetTitle(testName+";b;a;C");
 
       #ifdef COMULTITHREADING
-        lock_mutex lock(MTObject::mutex);
+        lock_mutex lock(mutex);
       #endif //COMULTITHREADING
         first_chi2maps.push_back(chi2map);
       }
@@ -213,7 +216,7 @@ void DataAlignement(bool overwrite = true)
 
     #ifdef COMULTITHREADING
       {
-        lock_mutex lock(MTObject::mutex);
+        lock_mutex lock(mutex);
     #endif //COMULTITHREADING
 
         best_first_bs[run_number] = first_calib.getCoeffs()[0];
@@ -249,7 +252,7 @@ void DataAlignement(bool overwrite = true)
           totalHisto->SetBinContent(bin, totalHisto->GetBinContent(bin) + testHisto->GetBinContent(bin));
         }
     
-        auto calibratedHisto = mini.getCalib().getCalibratedHisto(testName+"_best_calib");
+        auto calibratedHisto = mini.getCalib().getCalibratedHisto((testName+"_best_calib").Data());
         for (int bin = 1; bin<=calibratedHisto->GetNbinsX(); ++bin)
         {
           spectraCorrected->SetBinContent(bin, run_number, calibratedHisto->GetBinContent(bin));
@@ -258,11 +261,12 @@ void DataAlignement(bool overwrite = true)
     
         best_chi2s[run_number] = mini.getMinChi2();
         auto chi2map2 = mini.getChi2Map(); 
+
         if (chi2map2)
         {
           chi2map2->SetDirectory(nullptr);
-          chi2map2->SetName((testName+"_chi2_final").c_str());
-          chi2map2->SetTitle((testName+";b;a;C").c_str());
+          chi2map2->SetName(testName+"_chi2_final");
+          chi2map2->SetTitle(testName+";b;a;C");
           final_chi2maps.push_back(chi2map2);
         }
         
@@ -278,9 +282,9 @@ void DataAlignement(bool overwrite = true)
       }
       else 
       {
-        auto calibratedHisto = firstMini.getCalib().getCalibratedHisto(testName+"_best_calib");
+        auto calibratedHisto = firstMini.getCalib().getCalibratedHisto((testName+"_best_calib").Data());
       #ifdef COMULTITHREADING
-        lock_mutex lock(MTObject::mutex);
+        lock_mutex lock(mutex);
       #endif //COMULTITHREADING
         for (int bin = 1; bin<=calibratedHisto->GetNbinsX(); ++bin)
         {
@@ -289,7 +293,6 @@ void DataAlignement(bool overwrite = true)
         }
         best_chi2s[run_number] = firstMini.getMinChi2();
         print(run_number, firstMini.getMinChi2(), first_calib);
-        // firstMini.getCalib().writeTo(dataFile, std::to_string(run_number)); 
       }
   
       testFile->Close();
@@ -299,7 +302,7 @@ void DataAlignement(bool overwrite = true)
   #endif //COMULTITHREADING
 
     std::ofstream datafile(dataFile);
-    datafile << calibs;
+    for (auto const & calib : calibs) datafile << calib << std::endl;
   
     auto outFile = TFile::Open(outFilename, "RECREATE"); outFile->cd();
   
@@ -325,7 +328,7 @@ void DataAlignement(bool overwrite = true)
     for (int bin = 0; bin<best_first_Cs.size(); ++bin) best_first_Cs_evol->SetBinContent(bin+1, best_first_Cs[bin]);
     best_first_Cs_evol->Write("best_first_Cs_evol");
 
-
+    
   
     auto best_bs_evol = new TH1F("best_bs_evol", "best_bs_evol;run;best b", best_bs.size(), 0, best_bs.size());
     for (int bin = 0; bin<best_bs.size(); ++bin) best_bs_evol->SetBinContent(bin+1, best_bs[bin]);
@@ -342,16 +345,28 @@ void DataAlignement(bool overwrite = true)
     refHisto->Write();
     totalHisto->Write();
     totalHistoCorrected->Write();
-  
-    for (auto & histo : first_chi2maps) histo->Write();
-    for (auto & histo : final_chi2maps) histo->Write();
-  
     spectra->Write();
     spectraCorrected->Write();
+    
+    for (auto & histo : first_chi2maps) histo->Write();
+    for (auto & histo : final_chi2maps) histo->Write();
+    
     outFile->Close();
+
+    for (auto & histo : first_chi2maps) delete histo;
+    for (auto & histo : final_chi2maps) delete histo;
+
+    delete refHisto;
+    delete totalHisto;
+    delete totalHistoCorrected;
+    delete spectra;
+    delete spectraCorrected;
+    delete outFile;
+
     print(outFilename, "written");
-    print(timer());
+    print(timerDetector());
   }
+  print(timer());
 }
 
 int main(int argc, char** argv)

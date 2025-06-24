@@ -88,7 +88,7 @@ namespace Colib
   THist* Sub(THist* h1, THist* h2, double factor = 1.)
   {
     auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_"+TString(h2->GetName()));
-    ret->SetTitle(TString(h1->GetName())+"-" + ((factor == 1.) ? "" : std::to_string(factor).c_str()) + TString(h2->GetName()));
+    ret->SetTitle(TString(h1->GetTitle())+"-" + ((factor == 1.) ? "" : std::to_string(factor).c_str()) + TString(h2->GetTitle()));
     ret->Add(h2, -factor);
     return ret;
   }
@@ -98,7 +98,7 @@ namespace Colib
   THist* SubInteger(THist* h1, THist* h2, double factor = 1)
   {
     auto ret = (THist*) h1->Clone(TString(h1->GetName())+"_minus_"+TString(h2->GetName()));
-    ret->SetTitle(TString(h1->GetName())+"-"+TString(h2->GetName()));
+    ret->SetTitle(TString(h1->GetTitle())+"-"+TString(h2->GetTitle()));
     for (int bin_i = 0; bin_i<h1->GetNbinsX(); ++bin_i) 
     {
       auto const & diff = static_cast<int>(factor*h2->GetBinContent(bin_i));
@@ -111,7 +111,7 @@ namespace Colib
   TH1* Mult(TH1* h1, TH1* h2, double factor = 1)
   {
     auto ret = (TH1*) h1->Clone(TString(h1->GetName())+"_times_"+TString(h2->GetName()));
-    ret->SetTitle(TString(h1->GetName())+"#times"+TString(h2->GetName()));
+    ret->SetTitle(TString(h1->GetTitle())+"#times"+TString(h2->GetTitle()));
     for (int bin = 1; bin<h1->GetNbinsX(); ++bin) ret->SetBinContent(bin, h1->GetBinContent(bin)*h2->GetBinContent(bin)*factor);
     return ret;
   }
@@ -120,6 +120,41 @@ namespace Colib
   TH1* Multiply(TH1* histo, double const & factor)
   {
     for (int bin_i = 0; bin_i<histo->GetNbinsX(); ++bin_i) histo->SetBinContent(bin_i, histo->GetBinContent(bin_i)*factor);
+    return histo;
+  }
+
+  template<class... Args>
+  auto CellDiv(TH1* h1, TH1* h2, TH1* filled, double factor = 1, Args... args)
+  {
+    auto const & binCont = h2 -> GetBinContent(std::forward<Args>(args)...);
+    if (binCont != 0)     filled -> SetBinContent(std::forward<Args>(args)..., h1 -> GetBinContent(std::forward<Args>(args)...)/(binCont*factor));
+    else                  filled -> SetBinContent(std::forward<Args>(args)..., 0);
+  }
+
+  /// @brief Clone h1 and divide it by factor*h2
+  TH1* Div(TH1* h1, TH1* h2, double factor = 1)
+  {
+    if (factor == 0) {warning("Colib::Div(TH1* h1, TH1* h2, double factor) : Can't divide by factor = 0. Returning nullptr."); return nullptr;}
+    auto ret = (TH1*) h1 -> Clone(TString(h1 -> GetName())+"_div_"+TString(h2 -> GetName()));
+    ret -> SetTitle(TString(h1 -> GetTitle())+"/"+TString(h2 -> GetTitle()));
+    for (int binx = 1; binx<h1 -> GetNbinsX(); ++binx) 
+      if (h1 -> GetNbinsY() > 2) // 2,3D
+        for (int biny = 1; biny<h1 -> GetNbinsY(); ++biny)
+          if (h1 -> GetNbinsZ() > 2) // 3D
+            for (int binz = 1; binz<h1 -> GetNbinsZ(); ++binz)
+              CellDiv(h1, h2, ret, factor, binx, biny, binz);
+          else // 2D
+            CellDiv(h1, h2, ret, factor, binx, biny);
+      else // 1D
+        CellDiv(h1, h2, ret, factor, binx);
+    return ret;
+  }
+  
+  /// @brief Divide h1 by a factor
+  TH1* Divide(TH1* histo, double const & factor)
+  {
+    if (factor == 0) {warning("Colib::Divide(TH1* histo, double factor) : Can't divide by factor = 0. Returning nullptr."); return nullptr;}
+    for (int bin_i = 0; bin_i<histo->GetNbinsX(); ++bin_i) histo->SetBinContent(bin_i, histo->GetBinContent(bin_i)/factor);
     return histo;
   }
 
