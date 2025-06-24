@@ -232,6 +232,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         pparis.clear();
         nparis.clear();
         dparis.clear();
+        parisModules.clear();
   
         dssd.clear();
 
@@ -501,6 +502,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       print("writing spectra in", out_filename, "...");
 
       outfile->cd();
+      
         p_before -> Write("p_before", TObject::kOverwrite);
         d_before -> Write("d_before", TObject::kOverwrite);
         pp_before -> Write("pp_before", TObject::kOverwrite);
@@ -536,6 +538,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       delete dp;
       delete dd_pveto;
       delete dd_PM1;
+
+      delete d_tParis;
 
       print(out_filename, "written"); 
     }

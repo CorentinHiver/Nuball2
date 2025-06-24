@@ -377,4 +377,4 @@ int main(int argc, char** argv)
 }
 
 // g++ -g  -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum
-// g++ -O2 -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++20
+// g++ -O2 -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17

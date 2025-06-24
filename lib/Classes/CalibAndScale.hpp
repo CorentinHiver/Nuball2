@@ -201,12 +201,14 @@ public:
     return false;
   }
 
+  /// @brief Print on console
   friend std::ostream& operator<<(std::ostream& out, CalibAndScale const & calib)
   {
     out << "coeffs " << calib.m_coeffs << " scale " << calib.m_scale;
     return out;
   }
 
+  /// @brief Write to output file
   friend std::ofstream& operator<<(std::ofstream& fout, CalibAndScale const & calib)
   {
     fout << calib.m_coeffs << calib.m_scale;
