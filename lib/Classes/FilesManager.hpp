@@ -24,17 +24,18 @@ public:
   // Adds a given number of files with a .root or .fast inside the given folder (by default all the files, or the nb_files first ones)
   virtual bool addFolder    (std::string folder, long nb_files = -1, std::vector<std::string> const & extensions = {"root", "fast"});
   virtual void flushFiles ();
-  void Print        () { for (auto const & file : m_listFiles) print(file);}
+
+  void Print        () { for (auto const & file   : m_listFiles)  print(file  );}
   void printFolders () { for (auto const & folder : m_listFolder) print(folder);}
 
   //Getters :
   Path const & path() const {return m_path;}
   auto const & get() const {return m_listFiles;}
   auto & get() {return m_listFiles;}
-  ListFiles   const & getListFiles     () const { return m_listFiles ;}
-  ListFolders const & getListFolders   () const { return m_listFolder;}
+  ListFiles   const & getListFiles  () const { return m_listFiles ;}
+  ListFolders const & getListFolders() const { return m_listFolder;}
 
-  ListFiles const & getFilesInFolder (std::string folder)
+  ListFiles const & getFilesInFolder(std::string folder)
   {
     if (folder.back()!='/') folder.push_back('/');
     return m_listFilesInFolder[folder];
@@ -46,14 +47,14 @@ public:
   float diskSize() const 
   {
     float ret = 0;
-    for (std::size_t i = 0; i<size(); i++)
+    for (size_t i = 0; i < this -> size(); i++)
     {
       ret+=size_file(m_listFiles[i]);
     }
     return ret;
   }
 
-  bool empty () const { return m_listFiles.empty();}
+  bool empty   () const { return m_listFiles.empty();}
   bool isEmpty () const { return this->empty();}
   operator bool() const {return !empty();}
 

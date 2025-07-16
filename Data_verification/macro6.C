@@ -27,6 +27,7 @@
   #define MaxMultDelayed 6
   #define MaxCaloDelayed 3_MeV
   #define MinMultDelayed 1
+  #define FILE_SUFFIXE "Kisomer"
 #endif // KISOMER
 
 #ifdef SHAPEISOMER
@@ -35,7 +36,15 @@
   #define MaxMultDelayed 5
   #define MinCaloDelayed 1.2_MeV
   #define MaxCaloDelayed 3.5_MeV
+  #define FILE_SUFFIXE "ShapeIsomer"
 #endif //SHAPEISOMER
+
+#ifdef PROMPT_ONLY
+  #define MaxCaloPrompt 3_MeV
+  #define MaxMultPrompt 10
+  #define MaxMultDelayed 0
+  #define FILE_SUFFIXE "PromptOnly"
+#endif //PROMPT_ONLY
 
 constexpr Time coincTw = 40_ns;
 
@@ -43,32 +52,32 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 {
   CloversV2::setBlacklist({46, 55, 64, 69, 70, 80, 92, 97, 122, 129, 142, 163});
 
-  CloversV2::setOverflow( 
-  {
-    {25, 12600 }, {26, 13600 }, {27, 10500 }, {28, 7500  }, 
-    {31, 11500 }, {32, 11400 }, {33, 8250  }, {34, 9000  }, 
-    {37, 11000 }, {38, 11100 }, {39, 11500 }, {40, 11300 }, 
-    {43, 12600 }, {44, 11900 }, {45, 11550 }, {46, 9200  }, 
-    {49, 14300 }, {50, 12800 }, {51, 13500 }, {52, 12400 }, 
-    {55, 5500  }, {56, 5500  }, 
-                  {68, 7100  }, {69, 15500 }, {70, 9500  },
-    {73, 11650 }, {74, 11600 }, {75, 11800 }, {76, 11600 }, 
-    {79, 11500 }, {80, 8000  }, {81, 18200 },
-    {85, 7700  }, {86, 12000 }, {87, 12000 }, {88, 11600 }, 
-    {91, 7900  }, {92, 10000 }, {93, 11500 }, {94, 11000 }, 
-    {97, 11400 }, {98, 11400 }, {99, 11250 }, {100, 8900 }, 
-    {103, 11400 }, {104, 11600 }, {105, 11600 }, {106, 11500 }, 
-    {109, 12800 }, {110, 1800  }, {111, 13000 }, {112, 11300 }, 
-    {115, 12800 }, {116, 11500 }, {117, 10500 }, {118, 11400 }, 
-    {121, 12400 }, {122, 20000 }, {123, 10700 }, {124, 20000 }, 
-    {127, 11600 }, {128, 11700 }, {129, 10000 }, {130, 11200 }, 
-    {133, 11200 }, {134, 9350  }, {135, 9400  }, {136, 9500  }, 
-    {139, 13200 }, {140, 12400 }, {141, 12900 }, {142, 4500  }, 
-    {145, 8200  }, {146, 9600  }, {147, 9100  }, {148, 10900 }, 
-    {151, 11900 }, {152, 12200 }, {153, 11300 }, {154, 12000 }, 
-    {157, 9110  }, {158, 9120  }, {159, 9110  }, {160, 11700 }, 
-    {163, 11000 }, {164, 11600 }, {165, 11600 }, {166, 11600 }, 
-  });
+  // CloversV2::setOverflow( 
+  // {
+  //   {25, 12600 }, {26, 13600 }, {27, 10500 }, {28, 7500  }, 
+  //   {31, 11500 }, {32, 11400 }, {33, 8250  }, {34, 9000  }, 
+  //   {37, 11000 }, {38, 11100 }, {39, 11500 }, {40, 11300 }, 
+  //   {43, 12600 }, {44, 11900 }, {45, 11550 }, {46, 9200  }, 
+  //   {49, 14300 }, {50, 12800 }, {51, 13500 }, {52, 12400 }, 
+  //   {55, 5500  }, {56, 5500  }, 
+  //                 {68, 7100  }, {69, 15500 }, {70, 9500  },
+  //   {73, 11650 }, {74, 11600 }, {75, 11800 }, {76, 11600 }, 
+  //   {79, 11500 }, {80, 8000  }, {81, 18200 },
+  //   {85, 7700  }, {86, 12000 }, {87, 12000 }, {88, 11600 }, 
+  //   {91, 7900  }, {92, 10000 }, {93, 11500 }, {94, 11000 }, 
+  //   {97, 11400 }, {98, 11400 }, {99, 11250 }, {100, 8900 }, 
+  //   {103, 11400 }, {104, 11600 }, {105, 11600 }, {106, 11500 }, 
+  //   {109, 12800 }, {110, 1800  }, {111, 13000 }, {112, 11300 }, 
+  //   {115, 12800 }, {116, 11500 }, {117, 10500 }, {118, 11400 }, 
+  //   {121, 12400 }, {122, 20000 }, {123, 10700 }, {124, 20000 }, 
+  //   {127, 11600 }, {128, 11700 }, {129, 10000 }, {130, 11200 }, 
+  //   {133, 11200 }, {134, 9350  }, {135, 9400  }, {136, 9500  }, 
+  //   {139, 13200 }, {140, 12400 }, {141, 12900 }, {142, 4500  }, 
+  //   {145, 8200  }, {146, 9600  }, {147, 9100  }, {148, 10900 }, 
+  //   {151, 11900 }, {152, 12200 }, {153, 11300 }, {154, 12000 }, 
+  //   {157, 9110  }, {158, 9120  }, {159, 9110  }, {160, 11700 }, 
+  //   {163, 11000 }, {164, 11600 }, {165, 11600 }, {166, 11600 }, 
+  // });
 
   std::string target  = "U" ;
   std::string dataset = "C2";
@@ -147,7 +156,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       // std::unique_ptr<TFile> infile; infile.reset(TFile::Open(file.c_str(), "READ"));
 
       TFile* infile = nullptr;
-      TTree* tree = nullptr;
+      TTree* tree   = nullptr;
 
       {
         lock_mutex lock(read_mutex);
@@ -162,11 +171,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       Event event;
       event.reading(tree, "mltTEQp");
 
-      CloversV2 pclovers_before;
-      CloversV2 dclovers_before;
   
-      SimpleParis pparis_before(&calibPhoswitches);
-      SimpleParis dparis_before(&calibPhoswitches);
 
       CloversV2 pclovers;
       CloversV2 dclovers;
@@ -181,22 +186,21 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       // -- Output file : -- //
 
       std::string outFolder = "data/"+dataset+"/"+target+"/";
+
+    #ifdef FILE_SUFFIXE
+      outFolder+=FILE_SUFFIXE;
+    #endif //FILE_SUFFIXE
+
       Path::make(outFolder);
       std::string out_filename = outFolder+removeExtension(filename)+"_v3.root";
       File Filename(out_filename); Filename.makePath();
       TFile* outfile = TFile::Open(out_filename.c_str(), "recreate");
       // std::unique_ptr<TFile> outfile (TFile::Open(out_filename.c_str(), "recreate"));
       
-      TH1F* p_before = new TH1F(("p_before"+thread_i_str).c_str(), "gamma delayed before alignement;E1[keV];E2[keV]", 20000,0,20000);
       TH1F* p_after = new TH1F(("p_after"+thread_i_str).c_str(), "gamma delayed after alignement;E1[keV];E2[keV]", 20000,0,20000);
       
-      TH1F* d_before = new TH1F(("d_before"+thread_i_str).c_str(), "gamma delayed before alignement;E1[keV];E2[keV]", 20000,0,20000);
       TH1F* d_after = new TH1F(("d_after"+thread_i_str).c_str(), "gamma delayed after alignement;E1[keV];E2[keV]", 20000,0,20000);
   
-      TH2F* pp_before = new TH2F(("pp_before"+thread_i_str).c_str(), "gamma-gamma prompt before alignement;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
-      TH2F* dd_before = new TH2F(("dd_before"+thread_i_str).c_str(), "gamma-gamma delayed before alignement;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
-      TH2F* dp_before = new TH2F(("dp_before"+thread_i_str).c_str(), "gamma-gamma prompt-delayed before alignement;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
-      TH2F* dd_pveto_before = new TH2F(("dd_pveto_before"+thread_i_str).c_str(), "gamma-gamma delayed pveto before alignement;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       
       TH2F* pp = new TH2F(("pp"+thread_i_str).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd = new TH2F(("dd"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
@@ -204,7 +208,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
 
-      TH2F* d_tParis = new TH2F(("d_tParis"+thread_i_str).c_str(), "gamma VS time paris;E1[keV];time[ps]", 4096,0,4096, 210,-25,185);
+      TH2F* d_tParis = new TH2F(("d_tParis"+thread_i_str).c_str(), "gamma VS time paris;E1[keV];time[ps]", 4096,0,4096, 210_ns,-25_ns,185_ns);
       
       ////////////////////////
       // -- PROCESS DATA -- //
@@ -220,11 +224,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
         // -- Clear modules -- //
   
-        pclovers_before.clear();
-        dclovers_before.clear();
   
-        pparis_before.clear();
-        dparis_before.clear();
 
         pclovers.clear();
         dclovers.clear();
@@ -255,7 +255,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           {
                 if (gate(-10_ns, time,  10_ns)) 
             {
-              pparis_before.fill(event, hit_i);
               if (!align(event, hit_i, run_number)) continue;
               pparis.fill(event, hit_i);
             }
@@ -266,7 +265,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
             }
             else if (gate( 40_ns, time, 180_ns)) 
             {
-              dparis_before.fill(event, hit_i);
               if (!align(event, hit_i, run_number)) continue;
               dparis.fill(event, hit_i);
             }
@@ -275,14 +273,12 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           {
                 if (gate(-10_ns, time,  10_ns)) 
             {
-              pclovers_before.fill(event, hit_i);
               if (!align(event, hit_i, run_number)) continue;
               pclovers.fill(event, hit_i);
             }
 
             else if (gate( 40_ns, time, 180_ns)) 
             {
-              dclovers_before.fill(event, hit_i);
               if (!align(event, hit_i, run_number)) continue;
               dclovers.fill(event, hit_i);
             }
@@ -293,10 +289,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
         // -- Analyse modules -- //
   
-        pclovers_before.analyze();
-        dclovers_before.analyze();
-        pparis_before.analyze();
-        dparis_before.analyze();
 
         pclovers.analyze();
         dclovers.analyze();
@@ -392,54 +384,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         if (!dssdTrigger) continue;
       #endif //ParticleTrigger
 
-        //////////////////////////////////////
-        // -- ANALYSIS BEFORE ALIGNEMENT -- //
-        //////////////////////////////////////
-
-        // -- Prompt -- //
-        for (size_t loop_i = 0; loop_i<pclovers_before.clean.size(); ++loop_i)
-        {
-          auto const & pclover0 = pclovers_before.clean[loop_i];
-          p_before->Fill(pclover0->nrj);
-
-          // -- Prompt-prompt -- //
-          for (size_t loop_j = loop_i+1; loop_j<pclovers_before.clean.size(); ++loop_j)
-          {
-            auto const & pclover1 = pclovers_before.clean[loop_j];
-            pp_before->Fill(pclover0->nrj, pclover1->nrj);
-            pp_before->Fill(pclover1->nrj, pclover0->nrj);
-          }
-
-          // -- Prompt-delayed -- //
-          for (auto dclover : dclovers_before.clean)
-          {
-            dp_before->Fill(pclover0->nrj, dclover->nrj);
-          }
-        }
-
-        // -- Delayed -- //
-        for (size_t loop_i = 0; loop_i<dclovers_before.clean.size(); ++loop_i)
-        {
-          auto const & dclover0 = dclovers_before.clean[loop_i];
-          d_before->Fill(dclover0->nrj);
-          
-          // -- Delayed-delayed -- //
-          for (size_t loop_j = loop_i+1; loop_j<dclovers_before.clean.size(); ++loop_j)
-          {
-            auto const & dclover1 = dclovers_before.clean[loop_j];
-            if (Colib::abs(dclover0->time - dclover1->time) > coincTw) continue;
-            dd_before->Fill(dclover0->nrj, dclover1->nrj);
-            dd_before->Fill(dclover1->nrj, dclover0->nrj);
-            
-            // -- Prompt veto -- //
-            if (PM == 0)
-            {
-              dd_pveto_before->Fill(dclover0->nrj, dclover1->nrj);
-              dd_pveto_before->Fill(dclover1->nrj, dclover0->nrj);
-            }
-          }
-        }
-
         /////////////////////
         // -- ANALYSIS -- //
         /////////////////////
@@ -449,6 +393,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         {
           auto const & pclover0 = pclovers.clean[loop_i];
           p_after->Fill(pclover0->nrj);
+
           // -- Prompt-prompt -- //
           for (size_t loop_j = loop_i+1; loop_j<pclovers.clean.size(); ++loop_j)
           {
@@ -469,6 +414,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         {
           auto const & dclover0 = dclovers.clean[loop_i];
           d_after->Fill(dclover0->nrj);
+
           // -- Delayed-delayed -- //
           for (size_t loop_j = loop_i+1; loop_j<dclovers.clean.size(); ++loop_j)
           {
@@ -502,13 +448,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       print("writing spectra in", out_filename, "...");
 
       outfile->cd();
-      
-        p_before -> Write("p_before", TObject::kOverwrite);
-        d_before -> Write("d_before", TObject::kOverwrite);
-        pp_before -> Write("pp_before", TObject::kOverwrite);
-        dd_before -> Write("dd_before", TObject::kOverwrite);
-        dp_before -> Write("dp_before", TObject::kOverwrite);
-        dd_pveto_before -> Write("dd_pveto_before", TObject::kOverwrite);
+
 
         p_after -> Write("p_after", TObject::kOverwrite);
         d_after -> Write("d_after", TObject::kOverwrite);
@@ -526,12 +466,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       infile->Close();
       delete infile;
 
-      delete p_before;
-      delete d_before;
-      delete pp_before;
-      delete dd_before;
-      delete dp_before;
-      delete dd_pveto_before;
 
       delete pp;
       delete dd;

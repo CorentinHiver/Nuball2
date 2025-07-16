@@ -10,10 +10,11 @@ void placeText(TH1* histo, std::string text_str, double x, double y, double size
   text->DrawLatex(x, y, text_str.c_str());
 }
 
-auto placeTextPeak(TH1* histo, std::string text_str, double peak, double size = 0.04, double rotation = 0, TCanvas * c = nullptr)
+auto placeTextPeak(TH1* histo, std::string text_str, double peak, double size = 0.04, double rotation = 0, double lift = 0.01, TCanvas * c = nullptr)
 {
+  if (size == 0.) size = 0.04;
   auto const & y = histo->GetBinContent(histo->GetXaxis()->FindBin(peak));
-  auto const & yshift = histo->GetMaximum()*0.02;
+  auto const & yshift = histo->GetMaximum()*lift;
   placeText(histo, text_str, peak, y+yshift, size, rotation, c);
 };
 
@@ -27,14 +28,14 @@ auto placeLine(double x1, double y1, double x2, double y2, double width = 2, dou
 
 void EPJA_Kisomer()
 {
-  TString filename = "data/merge_C2_U_v2.root";
+  TString filename = "merge_C2_U_v3.root";
   auto file = TFile::Open(filename,"read");
   file->cd();
 
 
   auto dd = file->Get<TH2F>("dd");
   auto dd_pveto = file->Get<TH2F>("dd_pveto");
-  auto dd_veto_clean = Colib::removeVeto(dd, dd_pveto, 1.099);
+  auto dd_veto_clean = Colib::removeVeto(dd, dd_pveto, 1.055);
   Colib::removeBackground(dd_veto_clean, 15);
 
   auto dp = file->Get<TH2F>("dp");
@@ -49,7 +50,6 @@ void EPJA_Kisomer()
   {
     canvas903->cd();
     auto d903 = dd_veto_clean->ProjectionX("d903", 903, 904);
-    Colib::Multiply(d903, 0.5);
     auto const & d903_xaxis = d903->GetXaxis();
     d903_xaxis->SetTitle("E_{#gamma delayed} [keV]");
 
@@ -93,7 +93,6 @@ void EPJA_Kisomer()
   auto canvas642 = new TCanvas("canvas642", "canvas642", 1000, 600); canvas642->cd();
   {
     auto d642 = dd_veto_clean->ProjectionX("d642", 641, 644);
-    Colib::Multiply(d642, 0.5);
     auto const & d642_xaxis = d642->GetXaxis();
     d642_xaxis->SetTitle("E_{#gamma delayed} [keV]");
     d642_xaxis->SetRangeUser(0,500);
@@ -150,7 +149,6 @@ void EPJA_Kisomer()
   /////////////////////////////////
 
   auto canvasPrompt642 = new TCanvas("canvasPrompt642", "canvasPrompt642", 1000, 600); canvasPrompt642->cd();
-
   {
     auto d642p = dp->ProjectionX("gate_delayed_642", 641, 644);
     auto dp_px = dp->ProjectionX();
@@ -203,7 +201,6 @@ void EPJA_Kisomer()
   /////////////////////////////////
 
   auto canvasPrompt367Delayed = new TCanvas("canvasPrompt367Delayed", "canvasPrompt367Delayed", 1000, 600); canvasPrompt367Delayed->cd();
-
   {
     auto p367d = dp->ProjectionY("gate_prompt_367", 366, 368);
     auto dp_py = dp->ProjectionY();
@@ -251,18 +248,57 @@ void EPJA_Kisomer()
     Colib::Pad::remove_stats();
   }
 
+  ///////////////
+  // Gated 595 //
+  ///////////////
+
+  TString filename2 = "merge_C2.root";
+  file2 = TFile::Open(filename2,"read");
+  file2->cd();
+
+  auto dd_raw = file->Get<TH2F>("dd"); // Should be good
+  
+
+  auto canvasDelayed595Delayed = new TCanvas("canvasDelayed595Delayed", "canvasDelayed595Delayed", 1000, 600); canvasDelayed595Delayed->cd();
+  {
+    auto d595 = dd_veto_clean->ProjectionX("d595", 641, 644);
+
+    auto const & d595_xaxis = d595->GetXaxis();
+    d595_xaxis->SetTitle("E_{#gamma delayed} [keV]");
+    d595_xaxis->SetRangeUser(0,1500);
+    // d595->GetYaxis()->SetRangeUser(d595->GetMinimum(), 800);
+  
+    d595->Draw();
+
+    d595->SetTitle("gate delayed 595");
+
+    placeTextPeak(d595, "204", 205);
+    placeTextPeak(d595, "308", 308);
+    placeTextPeak(d595, "595", 595);
+    placeTextPeak(d595, "834 2^{+}#rightarrow^{+}", 834);
+    placeTextPeak(d595, "1046", 1046);
+  
+    Colib::Pad::remove_background();
+    Colib::Pad::remove_stats();
+    gPad->Update();
+    while(true) gPad->WaitPrimitive();
+  }
+
   ///////////
   // WRITE //
   ///////////
 
   TString outname = "EPJA_figures.root";
   if (filename == "merge_C2.root") outname = "new_EPJA_figures.root";
+  else if (filename == "merge_C2_U_v3.root") outname = "EPJA_figures_v3_raw.root";
+
   auto outfile = TFile::Open(outname, "recreate");
   outfile->cd();
     canvas903->Write();
     canvas642->Write();
     canvasPrompt642->Write();
     canvasPrompt367Delayed->Write();
+    canvasDelayed595Delayed->Write();
   outfile->Close();
   file->Close();
   print(outname, "written");

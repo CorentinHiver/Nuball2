@@ -9,7 +9,7 @@ class HitBuffer
 {
 public:
   HitBuffer(size_t size = 100) : m_max_size(size) {m_buffer.resize(size);}
-
+  
   void push_back(Hit const & hit) {m_buffer[m_size++] = hit;}
   void clear() {m_size = 0; m_buffer.clear(); m_buffer.resize(m_max_size); m_step = 0; m_nb_clear++;}
 
@@ -45,13 +45,16 @@ public:
   auto       & step()       {return m_step;}
 
   /**
-   * @brief Shifts the buffer of hits by a certain amount
+   * @brief DEPRECATED Shifts the buffer of hits by a certain amount
    * @todo Make it functionnal maybe ?
    * 
    * @param n:
-   * if n == 0 nothing happens
-   * if n>0 shifts the buffer to the right by n indexes, expends the size if needed. Creates empty slots at beginning.
-   * if n<0 moves the n last cells to the beginning, size stays the same. Overflow logic : the first hits are moved to the end
+   *    if n = 0 nothing happens
+   * 
+   *    if n>0 shifts the buffer to the right by n indexes, expands the size if needed. Creates empty slots at beginning.
+   * 
+   *    if n<0 moves the n last cells to the beginning, size stays the same. Overflow logic : the first hits are moved to the end.
+   * 
    * @details
    * Example : 
    * HitBuffer buffer = {hit1, hit2, hit3, hit4};
@@ -59,7 +62,7 @@ public:
    * buffer.shift(-2); // buffer = {hit3, hit4, hit1, hit2}
    * Carefull : for n>0 , need to copy twice the data, so it can be very long for big buffers
    */
-  void shift(int n)
+  void shift(int n = 0)
   {
     if (n == 0) return;
     else if (n>0)

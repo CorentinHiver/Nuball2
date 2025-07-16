@@ -2139,7 +2139,7 @@ namespace Colib
 
   /// @brief Attempt to adapt the derivative with different smoothing approaches
   /// @param: choice == 0, derivative with quadratic weight
-  /// choise == 1, slope of points before and after
+  /// choice == 1, slope of points before and after
   /// @todo
   TH1F* peaky(const TH1F* histo, int choice = 0, size_t smooth = 1)
   {
@@ -2743,7 +2743,7 @@ namespace Colib
       {
         latex.push_back(new TLatex());
         latex.back()->SetTextSize(0.04);
-        latex.back()->SetTextAlign(12); // Align the text
+        latex.back()->SetTextAlign(12);
         std::string text = std::to_string(int(raw_X[i]-0.5));
         latex.back()->DrawLatex(raw_X[i], raw_Y[i], text.c_str());
       }
