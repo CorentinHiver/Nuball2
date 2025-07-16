@@ -56,7 +56,7 @@ namespace Paris
     cluster_init = true;
   }
 
-  static void printArrays()
+  void printArrays()
   {
     print("Positions : ");
     std::cout << "     "       << " " << "     "       << " " << positions[24] << " " << positions[25] << " " << positions[26] << " " << "     "       << " " << "     "       << std::endl;
