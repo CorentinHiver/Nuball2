@@ -57,6 +57,13 @@ std::ostream& operator<<(std::ostream& cout, std::vector<T> const & v)
   return cout;
 }
 
+template <class T>
+std::ofstream& operator<<(std::ofstream& cout, std::vector<T> const & v)
+{
+  for (auto const & e : v) cout << e << " ";
+  return cout;
+}
+
 
 /// @brief Generic print
 /// @details Automatically adds space between each input. Terminate the output with a "\\n"

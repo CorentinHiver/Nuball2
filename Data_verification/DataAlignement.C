@@ -6,7 +6,8 @@
 #include "../lib/Classes/FilesManager.hpp"
 #include "../lib/Classes/Timer.hpp"
 #include "../lib/Classes/Detectors.hpp"
-#include "../lib/Analyse/Minimiser.hpp"
+
+#include "../lib/Analyse/Chi2Minimiser.hpp"
 
 #include "TTree.h"
 #include "TBranch.h"
@@ -79,7 +80,7 @@ void DataAlignement(bool overwrite = true)
     {"paris" , {1, 5e-2, 20*precision}}
   };
   
-  Colib::Minimiser::fillHisto(true);
+  Colib::Chi2Minimiser::fillHisto(true);
 
   // Open ref file :
   File ref_filename = "../136/calibrate_2025/histos/run_75.root";
@@ -140,10 +141,10 @@ void DataAlignement(bool overwrite = true)
     FilesManager files("../136/calibrate_2025/histos/");
     CalibAndScales calibs;
     for (auto const & it : a) print(it.first, it.second);
-    // print(spectrumName, a);
     calibs.setCalib(ref_run_number, CalibAndScale({a.at(type).initGuess, b.at(type).initGuess, C.at(type).initGuess}));
     
   #ifdef COMULTITHREADING
+
     std::mutex mutex;
     MTList MTfiles (files.get());
     MTObject::parallelise_function([&](){
@@ -152,12 +153,14 @@ void DataAlignement(bool overwrite = true)
     std::string filename;
     while(MTfiles.getNext(filename))
     {
+
   #else // !COMULTITHREADING
 
     Colib::Chi2Calculator chi2calc(refHisto);
     for (auto const & filename : files)
     {
-  #endif //COMULTITHREADING
+
+  #endif // COMULTITHREADING
 
       auto file = File(filename);
       int run_number = std::stoi(split(file.filename().shortName(), "_")[1]);
@@ -166,35 +169,32 @@ void DataAlignement(bool overwrite = true)
       auto testFile = TFile::Open(filename.c_str(), "READ"); testFile->cd();
       TH1F* testHisto = nullptr;
       TString testName;
-
-    #ifdef COMULTITHREADING
-    {
-      lock_mutex lock(mutex);
-    #endif //COMULTITHREADING
-
-      testHisto = subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
-
-      testHisto->Rebin(rebining[type]);
-      testName = testHisto->GetName() + TString("_") + std::to_string(run_number).c_str();
-      testHisto->SetName(testName);
-      testHisto->Scale(refHisto->Integral()/testHisto->Integral());
-
-      for (int bin = 1; bin<=testHisto->GetNbinsX(); ++bin)
+      
       {
-        spectra->SetBinContent(bin, run_number, testHisto->GetBinContent(bin));
-        totalHisto->SetBinContent(bin, totalHisto->GetBinContent(bin) + testHisto->GetBinContent(bin));
+      #ifdef COMULTITHREADING
+        lock_mutex lock(mutex);
+      #endif //COMULTITHREADING
+
+        testHisto = subHisto(testFile->Get<TH1F>(spectrumName), minX[type], maxX[type]);
+
+        testHisto->Rebin(rebining[type]);
+        testName = testHisto->GetName() + TString("_") + std::to_string(run_number).c_str();
+        testHisto->SetName(testName);
+        testHisto->Scale(refHisto->Integral()/testHisto->Integral());
+
+        for (int bin = 1; bin<=testHisto->GetNbinsX(); ++bin)
+        {
+          spectra->SetBinContent(bin, run_number, testHisto->GetBinContent(bin));
+          totalHisto->SetBinContent(bin, totalHisto->GetBinContent(bin) + testHisto->GetBinContent(bin));
+        }
       }
 
       //////////////
       // Minimise //
       //////////////
-
-      
-      #ifdef COMULTITHREADING
-    }
-    #endif //COMULTITHREADING
     
-      Colib::Minimiser firstMini;
+    
+      Colib::Chi2Minimiser firstMini;
       firstMini.calculate(chi2calc, testHisto, b.at(type), a.at(type), C.at(type));
 
       init_chi2s[run_number] = chi2calc.calculate(testHisto);
@@ -243,7 +243,7 @@ void DataAlignement(bool overwrite = true)
           {"ge" , {first_calib[2], 1e-2, 10}}
         };
 
-        Colib::Minimiser mini;
+        Colib::Chi2Minimiser mini;
         mini.calculate(refHisto, testHisto, b2.at(type), a2.at(type), C2.at(type));
   
         for (int bin = 1; bin<=testHisto->GetNbinsX(); ++bin)
@@ -252,7 +252,7 @@ void DataAlignement(bool overwrite = true)
           totalHisto->SetBinContent(bin, totalHisto->GetBinContent(bin) + testHisto->GetBinContent(bin));
         }
     
-        auto calibratedHisto = mini.getCalib().getCalibratedHisto((testName+"_best_calib").Data());
+        auto calibratedHisto = mini.getHistoTest().getCalibratedHisto((testName+"_best_calib").Data());
         for (int bin = 1; bin<=calibratedHisto->GetNbinsX(); ++bin)
         {
           spectraCorrected->SetBinContent(bin, run_number, calibratedHisto->GetBinContent(bin));
@@ -282,7 +282,7 @@ void DataAlignement(bool overwrite = true)
       }
       else 
       {
-        auto calibratedHisto = firstMini.getCalib().getCalibratedHisto((testName+"_best_calib").Data());
+        auto calibratedHisto = firstMini.getHistoTest().getCalibratedHisto((testName+"_best_calib").Data());
       #ifdef COMULTITHREADING
         lock_mutex lock(mutex);
       #endif //COMULTITHREADING

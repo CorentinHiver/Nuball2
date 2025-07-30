@@ -9,10 +9,10 @@ class InterpolatedSpectrum
 public:
   InterpolatedSpectrum() noexcept = default;
   InterpolatedSpectrum(TH1 const * hist, int order = 1) noexcept {
-    this -> set(hist, order);
+    this -> setHisto(hist, order);
   }
 
-  void set(TH1 const * hist, int order = 1)
+  void setHisto(TH1 const * hist, int order = 1)
   {
     m_order = order;
     m_coeffs.resize(m_order + 1);
@@ -29,7 +29,7 @@ public:
       }
       else
       {
-        throw_error("InterpolatedSpectrum : order must be 1");
+        throw_error("InterpolatedSpectrum : the only handled order is 1 so far");
       }
     }
     m_ok = true;
@@ -37,12 +37,12 @@ public:
 
   InterpolatedSpectrum& operator=(TH1 const * hist)
   {
-    this->set(hist);
+    this->setHisto(hist);
     return *this;
   }
 
   /// @brief Calculates the linear interpolation coefficients of the spectrum between the given bin and bin+1
-  /// @details If at the limits of the spectrum, returns slope = 0 and the intercept is the maximum bin value
+  /// @details If at the extrema of the spectrum, returns slope = 0 and the intercept is the maximum bin value
   /// @returns A pair <slope, intercept>
   std::pair<double, double> linInterpol(TH1 const * hist, int const & bin)
   {

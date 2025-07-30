@@ -7,17 +7,25 @@
 // #include "lib/libRoot.hpp"
 // #include "lib/libRootHeader.hpp"
 // #include  "lib/Modules/CoRadware.hpp"
-#include  "lib/Modules/Timeshiftor.hpp"
+// #include  "lib/Modules/Timeshiftor.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
 // #include  "lib/Classes/FilesManager.hpp"
 // #include  "lib/Classes/Detectors.hpp"
 // #include  "lib/Analyse/CloversV2.hpp"
+// #include  "lib/Classes/FlexibleHisto.hpp"
+#include  "lib/Analyse/Minimiser.hpp"
+// #include  "lib/Classes/CalibAndScale.hpp"
 
 int main()
 {
-  Timeshiftor ts;
-  detectors.load("136/index_129.list");
-  ts.calculate("/home/corentin/nuball2/N-SI-136/60Co_center_after.fast/");
+  TH1F* histo = new TH1F("test","test",1000,0,1000);
+  for (int i = 0; i<1000; ++i) histo->Fill(randomCo::fast_dirty_uniform());
+  FlexibleHisto histo_flex(histo);
+  Minimiser min;
+  // CalibAndScale calib;
+  // Timeshiftor ts;
+  // detectors.load("136/index_129.list");
+  // ts.calculate("/home/corentin/nuball2/N-SI-136/60Co_center_after.fast/");
   // CloversV2 clovers;
 
   // print(m_calib);
@@ -95,9 +103,6 @@ int main()
 
   // fileTest->Close();
   // fileRef->Close();
-
-  
-
 
   return 0;
 };

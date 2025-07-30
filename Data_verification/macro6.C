@@ -101,7 +101,8 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
     // Paris rotation angles :
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
 
-  // Alignement
+  // Alignement :
+  
   CalibAndScales::verbose(0);
   static std::unordered_map<int, CalibAndScales> alignements;
   for (auto const & detector : detectors)
@@ -197,18 +198,13 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       TFile* outfile = TFile::Open(out_filename.c_str(), "recreate");
       // std::unique_ptr<TFile> outfile (TFile::Open(out_filename.c_str(), "recreate"));
       
-      TH1F* p_after = new TH1F(("p_after"+thread_i_str).c_str(), "gamma delayed after alignement;E1[keV];E2[keV]", 20000,0,20000);
-      
-      TH1F* d_after = new TH1F(("d_after"+thread_i_str).c_str(), "gamma delayed after alignement;E1[keV];E2[keV]", 20000,0,20000);
-  
-      
       TH2F* pp = new TH2F(("pp"+thread_i_str).c_str(), "gamma-gamma prompt;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd = new TH2F(("dd"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd_PM1 = new TH2F(("dd_PM1"+thread_i_str).c_str(), "gamma-gamma delayed Prompt Multiplicity #supeq 1;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
 
-      TH2F* d_tParis = new TH2F(("d_tParis"+thread_i_str).c_str(), "gamma VS time paris;E1[keV];time[ps]", 4096,0,4096, 210_ns,-25_ns,185_ns);
+      TH2F* d_tParis = new TH2F(("d_tParis"+thread_i_str).c_str(), "gamma VS time paris;E1[keV];time[ps]", 4096,0,4096, 210,-25_ns,185_ns);
       
       ////////////////////////
       // -- PROCESS DATA -- //
@@ -223,8 +219,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         tree->GetEntry(evt_i);
 
         // -- Clear modules -- //
-  
-  
 
         pclovers.clear();
         dclovers.clear();
@@ -326,7 +320,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         if (DM < MinMultDelayed) continue;
       #endif //MinMultDelayed
 
-
           // -- Total multiplicity -- //
         auto const & Mtot = PM + DM;
 
@@ -351,7 +344,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       #endif //MaxCaloPrompt
 
           // -- Delayed calorimetry -- //
-
         auto const & DC_clover = dclovers.calorimetryTotal;
         auto const & DC_paris  = dparis.calorimetry();
         auto const & DC = DC_clover + DC_paris;
@@ -368,10 +360,10 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         auto const & Ctot = PC + DC;
 
       #ifdef MaxCalo
-        if (DC > MaxCalo) continue;
+        if (Ctot > MaxCalo) continue;
       #endif //MaxCalo
       #ifdef MinCalo
-        if (DC < MinCalo) continue;
+        if (Ctot < MinCalo) continue;
       #endif //MinCalo
 
         /////////////////////
@@ -392,7 +384,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         for (size_t loop_i = 0; loop_i<pclovers.clean.size(); ++loop_i)
         {
           auto const & pclover0 = pclovers.clean[loop_i];
-          p_after->Fill(pclover0->nrj);
 
           // -- Prompt-prompt -- //
           for (size_t loop_j = loop_i+1; loop_j<pclovers.clean.size(); ++loop_j)
@@ -413,7 +404,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         for (size_t loop_i = 0; loop_i<dclovers.clean.size(); ++loop_i)
         {
           auto const & dclover0 = dclovers.clean[loop_i];
-          d_after->Fill(dclover0->nrj);
 
           // -- Delayed-delayed -- //
           for (size_t loop_j = loop_i+1; loop_j<dclovers.clean.size(); ++loop_j)
@@ -450,8 +440,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       outfile->cd();
 
 
-        p_after -> Write("p_after", TObject::kOverwrite);
-        d_after -> Write("d_after", TObject::kOverwrite);
         pp -> Write("pp", TObject::kOverwrite);
         dd -> Write("dd", TObject::kOverwrite);
         dp -> Write("dp", TObject::kOverwrite);
@@ -492,7 +480,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   dest+=FILE_SUFFIXE;
 #endif //FILE_SUFFIXE  
   dest+"/run_*_v3.root";
-  
+
   std::string nb_threads_str = std::to_string(nb_threads);
   std::string command = "hadd -f -j "+ nb_threads_str+ " -d . "+ dest + " " + source;
   print(command);
@@ -510,5 +498,5 @@ int main(int argc, char** argv)
 
   return 1;
 }
-// g++ -Og -g -o exec macro6.C ` root-config --cflags` `root-config --glibs` -DDEBUG -lSpectrum -std=c++17 -Wall -Wextra
-// g++ -O2 -o exec macro6.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17
+// g++ -Og -g -o exec macro6.C ` root-config --cflags` `root-config --glibs` -DDEBUG -std=c++17 -Wall -Wextra
+// g++ -O2 -o exec macro6.C ` root-config --cflags` `root-config --glibs` -std=c++17

@@ -5,7 +5,7 @@
 #include "Timer.hpp"
 
 /**
- * @brief Displays an auto-updating progress
+ * @brief Displays an auto-updating progress bar
  * @example
  * 
  *        int i = 0;
