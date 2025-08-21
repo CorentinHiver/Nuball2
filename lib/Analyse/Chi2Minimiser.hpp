@@ -155,7 +155,7 @@ namespace Colib
   public:
     Chi2Minimiser(){}
     
-    ~Chi2Minimiser(){delete m_chi2map;}
+    // ~Chi2Minimiser(){delete m_chi2map;}
 
     void calculate(Chi2Calculator & chi2Calc, FlexibleHisto const & histo_flex)
     {

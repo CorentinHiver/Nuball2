@@ -16,7 +16,7 @@ using MinVar = Colib::MinimiserVariable;
 
 constexpr bool more_precise = false;
 
-constexpr double precision = 0.2;
+constexpr double precision = 1;
 
 /// @brief Get a sub-histogram between x1 and x2
 template<class THist>
@@ -37,7 +37,7 @@ void DataAlignement(bool overwrite = true)
 
   // Tests pour corriger des bugs
   // gROOT->SetBatch(true);
-    TH1::AddDirectory(false);
+  TH1::AddDirectory(false);
 
   Timer timer;
 #ifdef MULTI
@@ -207,7 +207,7 @@ void DataAlignement(bool overwrite = true)
       auto chi2map = firstMini.getChi2Map();
       if (chi2map) 
       {
-        chi2map->SetDirectory(nullptr);
+        // chi2map->SetDirectory(nullptr);
         chi2map->SetName(testName+"_chi2_init");
         chi2map->SetTitle(testName+";b;a;C");
 
@@ -269,7 +269,7 @@ void DataAlignement(bool overwrite = true)
 
         if (chi2map2)
         {
-          chi2map2->SetDirectory(nullptr);
+          // chi2map2->SetDirectory(nullptr);
           chi2map2->SetName(testName+"_chi2_final");
           chi2map2->SetTitle(testName+";b;a;C");
           final_chi2maps.push_back(chi2map2);
@@ -355,8 +355,9 @@ void DataAlignement(bool overwrite = true)
     spectra->Write();
     spectraCorrected->Write();
     
-    for (auto & histo : first_chi2maps) histo->Write();
-    for (auto & histo : final_chi2maps) histo->Write(); // If more_precise==true
+    for (auto & histo : first_chi2maps) {if (histo) histo->Write();}
+    for (auto & histo : final_chi2maps) {if (histo) histo->Write();}
+     // If more_precise==true
     
     outFile->Close();
 
