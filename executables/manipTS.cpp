@@ -6,7 +6,7 @@
 #define QDC1MAX
 
 /**
- * @brief Uses the manip2histo executable to make energy spectra a bunch of runs in the same folder, given a list of runs.
+ * @brief Uses the manip2histo executable to calculate time shifts between detectors of a bunch of runs in the same folder, given a list of runs.
  * @details
  * 
  * Tip : to easily create a runs.list file, simply do the following : 

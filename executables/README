@@ -3,11 +3,11 @@ You a have set of executables with their source code, a Makefile and some additi
 
 If you want to modify any executable : 
     modify the source code
-    uncomment the correct 'SRCEXE := *' line
+    uncomment the correct 'SRCEXE := exec_name' line
     make the executable using either : 
-        make
-        make debug
-        make opt
+        make       #no option
+        make debug #debug symbols
+        make opt   #gcc optimizations
 
 If you want to know the parameters of an executable, one has to simply call the executable : 
 $ ./executable

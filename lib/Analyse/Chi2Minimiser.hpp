@@ -13,7 +13,9 @@ namespace Colib
   class Chi2Calculator
   {
   public:
-    Chi2Calculator(TH1* reference) : m_reference(reference){}
+    Chi2Calculator(TH1* reference) : m_reference(reference) {}
+
+    ~Chi2Calculator() {delete m_histo_flex;}
     
     template<class THist>
     double operator()(THist* const test, FlexibleHisto const & histo)
@@ -94,7 +96,7 @@ namespace Colib
     }
     
   private:
-    FlexibleHisto * m_histo_flex = nullptr;
+    FlexibleHisto * m_histo_flex = nullptr; // Used only for the minuit interface
     TH1* m_reference = nullptr;
   };
   
@@ -152,6 +154,8 @@ namespace Colib
   {
   public:
     Chi2Minimiser(){}
+    
+    ~Chi2Minimiser(){delete m_chi2map;}
 
     void calculate(Chi2Calculator & chi2Calc, FlexibleHisto const & histo_flex)
     {
@@ -161,7 +165,7 @@ namespace Colib
         m_min_chi2 = chi2;
         m_histo_flex = histo_flex;
       }
-      if (s_fill_histo) 
+      if (s_fill_histo && m_chi2map) 
       {
         auto parameters = histo_flex.getCalib().get();
         m_chi2map->Fill(parameters[0], parameters[1], parameters[2], chi2);
@@ -169,14 +173,14 @@ namespace Colib
     }
     
     template<class THist>
-    void calculate(THist* reference, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
+    void minmise(THist* reference, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
     {
       Chi2Calculator chi2Calc(reference);
-      this->calculate(chi2Calc, test, xParam, yParam, zParam);
+      this->minmise(chi2Calc, test, xParam, yParam, zParam);
     }
 
     template<class THist>
-    void calculate(Chi2Calculator & chi2Calc, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
+    void minimise(Chi2Calculator & chi2Calc, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
     {
       FlexibleHisto histo_flex(test);
       m_histo_flex.setHisto(test);
@@ -186,11 +190,15 @@ namespace Colib
       #ifdef COMULTITHREADING
         chi2map_name += MTObject::getThreadIndex();
       #endif //COMULTITHREADING
-        if (s_fill_histo) m_chi2map = new TH3F(chi2map_name, "chi2map;x;y;z", 
-                            xParam.nb_steps*2+1, xParam.min, xParam.max*(1+1e-5), 
-                            yParam.nb_steps*2+1, yParam.min, yParam.max*(1+1e-5),
-                            zParam.nb_steps*2+1, zParam.min, zParam.max*(1+1e-5)
+        if (s_fill_histo && !m_chi2map) 
+        {
+          m_chi2map = new TH3F(chi2map_name, "chi2map;x;y;z", 
+                            xParam.nb_steps * 2 + 1, xParam.min, xParam.max * (1 + 1e-5), 
+                            yParam.nb_steps * 2 + 1, yParam.min, yParam.max * (1 + 1e-5),
+                            zParam.nb_steps * 2 + 1, zParam.min, zParam.max * (1 + 1e-5)
                           );
+          m_chi2map -> SetDirectory(nullptr);
+        }
 
         for (int stepx = 0; stepx<xParam.nb_steps*2; ++stepx) {
           for (int stepy = 0; stepy<yParam.nb_steps*2; ++stepy) {
@@ -198,13 +206,13 @@ namespace Colib
 
               // 1. Set the calibration
               histo_flex.setCalibAndScale({
-                xParam.min + stepx*xParam.step, 
+                xParam.min + stepx*xParam.step,
                 yParam.min + stepy*yParam.step,
                 zParam.min + stepz*zParam.step
               });
               
               // 2. Calculate the chi2 between the reference spectrum and the calibrated and scaled histogram
-              calculate(chi2Calc, histo_flex);
+              this -> calculate(chi2Calc, histo_flex);
             }
           }
         }
@@ -265,11 +273,13 @@ namespace Colib
     static void fillHisto(bool const & b) {s_fill_histo = b;}
   
   private:
+
     static bool s_fill_histo; 
     bool m_bruteforce = true;
     bool m_multistages = false;
     int m_nb_stages = 1;
     double m_min_chi2 = 1e100;
+    
     FlexibleHisto m_histo_flex;
     TH3F* m_chi2map = nullptr;
   };

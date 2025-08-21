@@ -56,7 +56,7 @@ public:
   
     auto const & y0 = hist->GetBinContent(bin);
     auto const & y1 = hist->GetBinContent(bin + 1);
-  
+
     double a = y1 - y0;      // slope
     double b = y0 - a * bin; // intercept
   

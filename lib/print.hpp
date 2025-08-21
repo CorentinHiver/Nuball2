@@ -51,17 +51,17 @@ namespace Colib
 void print() {std::cout << std::endl;}
 
 template <class T>
-std::ostream& operator<<(std::ostream& cout, std::vector<T> const & v)
+std::ostream& operator<<(std::ostream& out, std::vector<T> const & v)
 {
-  for (auto const & e : v) cout << e << " ";
-  return cout;
+  for (auto const & e : v) out << e << " ";
+  return out;
 }
 
 template <class T>
-std::ofstream& operator<<(std::ofstream& cout, std::vector<T> const & v)
+std::ofstream& operator<<(std::ofstream& fout, std::vector<T> const & v)
 {
-  for (auto const & e : v) cout << e << " ";
-  return cout;
+  for (auto const & e : v) fout << e << " ";
+  return fout;
 }
 
 

@@ -1,6 +1,9 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+#include <iomanip>
+#include <map>
+
 #include <chrono>
 
 using hr_clock_t = std::chrono::high_resolution_clock;

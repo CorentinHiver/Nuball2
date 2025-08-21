@@ -242,7 +242,7 @@ std::ostream& operator<<(std::ostream& out, CalibAndScale const & calib)
 
 std::ofstream& operator<<(std::ofstream& fout, CalibAndScale const & calib)  
 {
-  fout << calib.m_coeffs << calib.m_scale;
+  fout << calib;
   return fout;
 }
 

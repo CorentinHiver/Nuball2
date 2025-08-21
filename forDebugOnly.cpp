@@ -13,7 +13,7 @@
 // #include  "lib/Classes/Detectors.hpp"
 // #include  "lib/Analyse/CloversV2.hpp"
 // #include  "lib/Classes/FlexibleHisto.hpp"
-#include  "lib/Analyse/Minimiser.hpp"
+#include  "lib/Analyse/Chi2Minimiser.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
 
 int main()
@@ -21,7 +21,7 @@ int main()
   TH1F* histo = new TH1F("test","test",1000,0,1000);
   for (int i = 0; i<1000; ++i) histo->Fill(randomCo::fast_dirty_uniform());
   FlexibleHisto histo_flex(histo);
-  Minimiser min;
+  Chi2Minimiser min;
   // CalibAndScale calib;
   // Timeshiftor ts;
   // detectors.load("136/index_129.list");
