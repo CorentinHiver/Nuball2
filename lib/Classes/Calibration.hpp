@@ -70,9 +70,9 @@ public:
     if (other.m_size != this->m_size) {error(other.m_filename, "not the same size as", m_filename);}
     for (int label = 0; label<other.m_size; ++label)
     {
-      // Works only for order == 1 for now
       if (m_order[label] == other.m_order[label])
       {
+        // Works only for order == 1 for now
         if (m_order[label] == 1)
         {
           m_slope[label] = m_slope[label]/other.m_slope[label];

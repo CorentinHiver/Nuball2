@@ -45,7 +45,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  * through a static function first. 
  * 
  * 
- * Example 1 : simplest example : parallelise a lambda.
+ * Example 1 : simplest example : parallelise a lambda function.
  * 
  *        main()
  *        {
@@ -65,7 +65,7 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *        main()
  *        {
  *          MTObject::Initialise(2); // Using two concurrent threads
- *          MultiHist<TH1F> test("test", "test", 1000,0,1000); // MultiHist holds a vector of TH1F to be filled using its own Fill method
+ *          MultiHist<TH1F> test("test", "test", 1000,0,1000); // MultiHist holds a vector of TH1Fs to be filled using the TH1::Fill method
  *          
  *          MTObject::parallelise_function([&]()
  *          { // Here starts the parallelized portion of code
@@ -87,29 +87,6 @@ using lock_mutex = const std::lock_guard<std::mutex>;
  *          outfile->Close();
  *          return 0;
  *        }
- * 
- * Example 3 : parallelize a non-static method of a class :
- * 
- *        class MyClass
- *        {
- *        public:
- *          MyClass() {}
- *          void function_to_multithread(argument_1, argument_2, ...){....}
- *
- *          static void helper_function(MyClass & myClass, argument_1, argument_2, ...) {return myClass.function_to_multithread(argument_1, argument_2, ...);}
- *        };
- *
- *        int main()
- *        {
- *         ...
- *          MTObject::parallelise_function(myClass.helper_function, argument_1, argument_2, ....);
- *         ...
- *        }
- * 
- * @todo 
- * Trying to make this work :
- * template<class... ARGS>
- * static ret_type helper_function(MyClass & myClass, ARGS... args) {return myClass.function_to_multithread(std::forward<ARGS>(args)...);}
  */
 
 
@@ -163,7 +140,7 @@ public:
 
   static bool kill;
 
-  static void signalHandler(int signal)
+  static void signalHandler(int signal) // Attempt to handle ctrl+C, but seems to have been corrected in newer root versions
   {
     if (signal == SIGINT)
     {
@@ -196,7 +173,7 @@ public:
     if (m_Initialised) return;
     m_Initialised = true;
 
-    // signal(SIGINT, signalHandler);
+    // signal(SIGINT, signalHandler); // Attempt to handle ctrl+C, but seems to have been corrected in newer root versions
 
     // Initialising :
     master_thread_id = std::this_thread::get_id();

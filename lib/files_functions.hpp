@@ -318,6 +318,7 @@ template <class N, class D> std::string percent(N const & n, D const & d)
   return (std::to_string(100*static_cast<double>(n)/static_cast<double>(d))+"%");
 }
 
+/// @brief TODO
 template<class Index, class T>
 class CoDataFrame
 {
@@ -538,6 +539,7 @@ public:
   //   {
   //     m_recursive_folders.push_back(folder.name());
   //   }
+  //   cleanPath();
   //   return *this;
   // }
 
@@ -547,8 +549,8 @@ public:
   auto c_str() {return m_path.c_str();}
 
   std::string operator+(std::string const & addString) {return (m_path+addString);}
-  std::string operator+(const char* addString) {return (m_path+static_cast<std::string>(addString));}
-  Path operator+(Folder const & folder) {return Path(m_path+folder.get());}
+  std::string operator+(const char* addString) {return (m_path + static_cast<std::string>(addString));}
+  Path operator+(Folder const & folder) {return Path(m_path + folder.get());}
 
   /// @brief Returns the number of folders composing the path
   auto size() const {return m_recursive_folders.size();}
