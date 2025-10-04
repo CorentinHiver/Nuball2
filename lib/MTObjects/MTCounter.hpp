@@ -14,7 +14,7 @@ class MTCounter
 public:
   MTCounter() = default;
 
-  template<typename T, typename check_T_is_number = T_is_number<T>>
+  template<typename T, typename check_T_is_number = Colib::T_is_number<T>>
   MTCounter(T const & value) : m_counter(size_cast(value)) {}
 
   operator size_t() const { return m_counter.load(); }
@@ -31,13 +31,13 @@ public:
   size_t decr()           {return m_counter.fetch_sub(-1, std::memory_order_seq_cst)-1;}
   size_t decrement()      {return m_counter.fetch_sub(-1, std::memory_order_seq_cst)-1;}
 
-  template <typename T, typename check_T_is_number = T_is_number<T>>
+  template <typename T, typename check_T_is_number = Colib::T_is_number<T>>
   void add(T const & t) {return m_counter.fetch_add(size_cast(t), std::memory_order_seq_cst);}
 
-  template <typename T, typename check_T_is_number = T_is_number<T>>
+  template <typename T, typename check_T_is_number = Colib::T_is_number<T>>
   void operator+=(T const & t) {m_counter.fetch_add(size_cast(t), std::memory_order_relaxed);}
 
-  template <typename T, typename check_T_is_number = T_is_number<T>>
+  template <typename T, typename check_T_is_number = Colib::T_is_number<T>>
   void operator=(T const & t) {m_counter.store(size_cast(t), std::memory_order_relaxed);}
 
 private:

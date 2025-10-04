@@ -230,7 +230,7 @@
 }
 
 {
-   Strings allocated in TStreamerInfo::Compile
+   Colib::Strings allocated in TStreamerInfo::Compile
    Memcheck:Leak
    fun:_Zna?
    fun:_ZN7TString7ReplaceEiiPKci

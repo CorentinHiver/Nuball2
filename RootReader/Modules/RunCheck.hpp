@@ -219,7 +219,7 @@ void RunCheck::FillSorted(Clovers const & clovers, DSSD const & dssd, Event cons
       {
         // print(ge_crystal, clover.nrj, clovers.cristaux_nrj[ge_crystal]);
         // print(R3A1_red_vs_clover.Integral());
-        // pauseCo();
+        // Colib::pause();
         R3A1_red_vs_clover.Fill(clover.nrj, clovers.cristaux_nrj[ge_crystal]);
       }
     }

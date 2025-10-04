@@ -3,7 +3,7 @@
 void merge_dC1_reader(std::string filename = "merge_dC1_V2.root")
 {
   auto file = TFile::Open(filename.c_str());
-  if (!file) throw_error(filename+ "absent !");
+  if (!file) Colib::throw_error(filename+ "absent !");
   auto d_VS_DC = file->Get<TH2F>("d_VS_DC");
   auto d_VS_DC_p = file->Get<TH2F>("d_VS_DC_p");
   auto d_VS_DC_pP = file->Get<TH2F>("d_VS_DC_pP");

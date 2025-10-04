@@ -92,7 +92,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
     freqEvtDisplay = 1.e+7;
   }
 
-  if (nb_threads==0) throw_error("Need at least 1 thread, not" + std::to_string(nb_threads));
+  if (nb_threads==0) Colib::throw_error("Need at least 1 thread, not" + std::to_string(nb_threads));
   if (nb_threads>1) MTObject::Initialise(nb_threads);
   
   detectors.load("../136/index_129.list");
@@ -203,6 +203,11 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       TH2F* dd_PM1 = new TH2F(("dd_PM1"+thread_i_str).c_str(), "gamma-gamma delayed Prompt Multiplicity #supeq 1;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      
+      TH2F* dd = new TH2F(("dd"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dd_PM1 = new TH2F(("dd_PM1"+thread_i_str).c_str(), "gamma-gamma delayed Prompt Multiplicity #supeq 1;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
 
       TH2F* d_tParis = new TH2F(("d_tParis"+thread_i_str).c_str(), "gamma VS time paris;E1[keV];time[ps]", 4096,0,4096, 210,-25_ns,185_ns);
       
@@ -214,7 +219,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   
       for (int evt_i = 0; (evt_i < Nevt && evt_i < nbEvtMax); evt_i++)
       {
-        if (evt_i>0 && evt_i%freqEvtDisplay == 0) print(nicer_double(evt_i, 0), "events");
+        if (evt_i>0 && evt_i%freqEvtDisplay == 0) print(Colib::nicer_double(evt_i, 0), "events");
   
         tree->GetEntry(evt_i);
 
@@ -479,7 +484,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 #ifdef FILE_SUFFIXE
   dest+=FILE_SUFFIXE;
 #endif //FILE_SUFFIXE  
-  dest+"/run_*_v3.root";
+  dest+="/run_*_v3.root";
 
   std::string nb_threads_str = std::to_string(nb_threads);
   std::string command = "hadd -f -j "+ nb_threads_str+ " -d . "+ dest + " " + source;

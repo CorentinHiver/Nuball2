@@ -10,7 +10,7 @@ int nb_it_veto = 20;
 void EfficiencyReader(std::string filename = "merge_dC1_V2.root")
 {
   auto file = TFile::Open(filename.c_str());
-  if (!file) throw_error(filename+ "absent !");
+  if (!file) Colib::throw_error(filename+ "absent !");
 
   auto dd = file->Get<TH2F>("dd");
   auto dd_p = file->Get<TH2F>("dd_p");

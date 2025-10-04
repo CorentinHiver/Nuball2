@@ -52,7 +52,7 @@ namespace Paris
       }
     }
     // printArrays();
-    // pauseCo();
+    // Colib::pause();
     cluster_init = true;
   }
 
@@ -101,22 +101,22 @@ namespace Paris
   }
 
   // Does the detector label correspond to a Paris ? 
-  static constexpr auto is = LUT<1000> ([](Label const & label) {
-    return binary_search(ParisArrays::labels, label);
+  static constexpr auto is = Colib::LUT<1000> ([](Label const & label) {
+    return Colib::binary_search(ParisArrays::labels, label);
   });
 
   // Return the index of the label in Paris (201 = 0, )
-  static constexpr auto index = LUT<1000> ([](Label const & label) {
+  static constexpr auto index = Colib::LUT<1000> ([](Label const & label) {
     if (is[label]) return static_cast<Label> (find_index(ParisArrays::labels, label));
     else return Label{0};
   });
 
-  static constexpr auto cluster_index = LUT<1000> ([](Label const & label){
+  static constexpr auto cluster_index = Colib::LUT<1000> ([](Label const & label){
     if (is[label]) return Paris::index[label]%cluster_size;
     else return -1;
   });
 
-  static constexpr auto cluster = LUT<1000> ([](Label const & label){
+  static constexpr auto cluster = Colib::LUT<1000> ([](Label const & label){
     if (is[label]) return index[label]/cluster_size;
     else return -1;
   });

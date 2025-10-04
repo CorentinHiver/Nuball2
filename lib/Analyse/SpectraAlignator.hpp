@@ -55,14 +55,14 @@ public:
 
   void copy(Vertice const & other)
   {
-    if (this -> m_dim != other.m_dim) throw_error("in Vertice::copy(Vertice const & _vertice) : dimension of _vertice different from that of the vertice");
+    if (this -> m_dim != other.m_dim) Colib::throw_error("in Vertice::copy(Vertice const & _vertice) : dimension of _vertice different from that of the vertice");
     m_coordinates = other.m_coordinates;
     m_dim = other.m_dim;
     m_value = other.m_value;
   }
   void copy(Vertice && other)
   {
-    if (this -> m_dim != other.m_dim) throw_error("in Vertice::copy(Vertice && _vertice) : dimension of _vertice different from that of the vertice");
+    if (this -> m_dim != other.m_dim) Colib::throw_error("in Vertice::copy(Vertice && _vertice) : dimension of _vertice different from that of the vertice");
     m_coordinates = std::move(other.m_coordinates);
     m_dim = std::move(other.m_dim);
     m_value = std::move(other.m_value);
@@ -70,7 +70,7 @@ public:
   }
   void copy(std::vector<double> const & point)
   {
-    if (point.size() != m_dim) throw_error("in Vertice::copy(std::vector<double> const & point) : dimension of the point different from that of the vertice");
+    if (point.size() != m_dim) Colib::throw_error("in Vertice::copy(std::vector<double> const & point) : dimension of the point different from that of the vertice");
     m_coordinates = point;
     m_value = NAN;
   }
@@ -136,7 +136,7 @@ public:
 
   Vertice operator+(Vertice const & other) const
   {
-    if (other.size() != m_dim) throw_error("in Vertice::operator+(Vertice const & other) : other and vertice not the same size !!");
+    if (other.size() != m_dim) Colib::throw_error("in Vertice::operator+(Vertice const & other) : other and vertice not the same size !!");
     std::vector<double> coords;
     for (size_t i = 0; i<other.size(); i++) coords.push_back(m_coordinates[i] + other[i]);
     return Vertice(coords);
@@ -146,7 +146,7 @@ public:
   {
     if (other.size() != m_dim) 
     {
-      throw_error("in Vertice::operator-(Vertice const & other) : other and vertice not the same size !!");
+      Colib::throw_error("in Vertice::operator-(Vertice const & other) : other and vertice not the same size !!");
     }
     std::vector<double> coords;
     for (size_t i = 0; i<other.size(); i++) coords.push_back(m_coordinates[i] - other[i]);
@@ -156,8 +156,8 @@ public:
   // Vectorial product : TBD !!!
   Vertice operator*(Vertice const & other) const
   {
-    throw_error("operator Vertice*Vertice not implemented yet !!");
-    // if (other.size() != m_dim) throw_error("in Vertice::operator+(Vertice const & other) : other and vertice not the same size !!");
+    Colib::throw_error("operator Vertice*Vertice not implemented yet !!");
+    // if (other.size() != m_dim) Colib::throw_error("in Vertice::operator+(Vertice const & other) : other and vertice not the same size !!");
     std::vector<double> coords = other.get();
     // for (size_t i = 0; i<other.size(); i++) coords.push_back(m_coordinates[i]*other[i]);
     // return Vertice(coords);
@@ -248,7 +248,7 @@ public:
     m_dim(m_size-1)
   {
     for (auto const & vertex : vertices) if (vertex.size() != this->m_dim) 
-      throw_error("in Simplex::Simplex(std::vector<Vertice> const & vertices) : dimension conflict of at least one vertex (simplex must have dim+1 vertices)");
+      Colib::throw_error("in Simplex::Simplex(std::vector<Vertice> const & vertices) : dimension conflict of at least one vertex (simplex must have dim+1 vertices)");
   }
 
   Simplex(Simplex const & other) : 
@@ -298,7 +298,7 @@ public:
 
   auto centroid(size_t const & n_best)
   {
-    if (n_best>m_size) throw_error("in Simplex(size_t n_best) : n_best is higher than the size of the simplex");
+    if (n_best>m_size) Colib::throw_error("in Simplex(size_t n_best) : n_best is higher than the size of the simplex");
     if (n_best == 0) return (m_centroid = m_vertices[0]); // 1D case
     debug("centroid calculation : ");
     for (size_t vertice_i = 0; vertice_i<n_best; ++vertice_i) debug(vertice_i, m_vertices[vertice_i]);
@@ -501,13 +501,13 @@ public:
     Simplex simplex(m_initial_vertice);
 
     auto const & n = simplex.dim();// The dimension of the problem
-    if (n==0) throw_error("in Minimisator::nelderMead() : The problem is null dimensioned !!");
-    else if (n==1) throw_error("in Minimisator::nelderMead() : The problem is 1 dimension, currently not supported !!");
+    if (n==0) Colib::throw_error("in Minimisator::nelderMead() : The problem is null dimensioned !!");
+    else if (n==1) Colib::throw_error("in Minimisator::nelderMead() : The problem is 1 dimension, currently not supported !!");
 
     // nmParam.adjustToDimension(simplex.dim());
 
     if (simplex.dim() != m_steps.size()) 
-      throw_error("in Minimisator::nelderMead(), the dimension of the vertices do not match the dimensions of the initial steps");
+      Colib::throw_error("in Minimisator::nelderMead(), the dimension of the vertices do not match the dimensions of the initial steps");
 
     // Create a rectangle triangle with :
     for (size_t vertice_i = 1; vertice_i<simplex.size(); ++vertice_i)
@@ -661,7 +661,7 @@ public:
     //     print(m_grad_vertices[coeff_i].get(), before, after, before-after);
     //     if (before == after) m_weights[coeff_i]*=10;
     //     else m_weights[coeff_i]/= after - before;
-    //     pauseCo(" ");
+    //     Colib::pause(" ");
     //   }
     // }
     // print(m_weights);
@@ -944,7 +944,7 @@ private:
 //       // print(spectra[bin], weight, new_bin, new_value, error, sum_errors_squared);
 //     }
 //     // print(sum_errors_squared/(nb_bins_studied-m_nb_freedom_degrees));
-//     // pauseCo();
+//     // Colib::pause();
 //     return sum_errors_squared/(nb_bins_studied-m_nb_freedom_degrees);
 //   }
 

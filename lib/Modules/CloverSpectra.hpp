@@ -66,8 +66,8 @@ inline void CloverSpectra::fillHisto(std::string const & datapath, int nb_files)
 {
   if (datapath != "") m_dataPath = datapath;
   if (nb_files>0) m_nb_files = nb_files;
-  if (!m_timeshifts) throw_error("no timeshifts !!");
-  if (!m_calibration) throw_error("no calibration !!");
+  if (!m_timeshifts) Colib::throw_error("no timeshifts !!");
+  if (!m_calibration) Colib::throw_error("no calibration !!");
   if (m_dataPath.string().find(".fast/")!=std::string::npos)
   {
     dataKind = 0;
@@ -80,7 +80,7 @@ inline void CloverSpectra::writeHisto(std::string const & outName)
 {
   if (outName!="") m_outName = outName;
   auto file = TFile::Open(m_outName.c_str(), "recreate");
-  if (!file) throw_error("Output file" + m_outName + std::string("cannot be created"));
+  if (!file) Colib::throw_error("Output file" + m_outName + std::string("cannot be created"));
   file -> cd();
   m_clovers.Write();
   m_clovers_crystal.Write();
@@ -117,7 +117,7 @@ inline void CloverSpectra::Initialise(int argc, char** argv)
   {
     print("Not enough parameters !!!");
     printParameters();
-    throw_error("Parameters");
+    Colib::throw_error("Parameters");
   }
 
   setDataPath(argv[1]);

@@ -139,7 +139,7 @@ class FasterReader
 	static void setMaxHits(ulonglong maxHits)
 	{
 		s_maxHits = maxHits;
-		printC(nicer_double(s_maxHits, 0), "hits to read in the file");
+		printC(Colib::nicer_double(s_maxHits, 0), "hits to read in the file");
 	}
 	static auto getMaxHits() { return s_maxHits; }
 	static void setVerbose(int i = 1) { m_verbose = i; }
@@ -203,7 +203,7 @@ class FasterReader
 	void TreatQDC3  (faster_data_p const & _data);
 	void TreatRF    (faster_data_p const & _data);
 
-	std::unordered_map<std::string, bool> error_message;
+	std::unordered_map<std::string, bool> Colib::error_message;
 };
 
 ulonglong FasterReader::s_maxHits = -1;
@@ -563,18 +563,18 @@ void inline FasterReader::TreatQDC2(const faster_data_p &data)
 	faster_data_load(data, &qdc);
 	m_hit->adc = qdc.q1;
 #ifdef QDC1MAX
-	if (!error_message["QDC2"])
+	if (!Colib::error_message["QDC2"])
 	{
 		error("QDC2 found despite #define QDC1MAX ");
-		error_message["QDC2"] = true;
+		Colib::error_message["QDC2"] = true;
 	}
   #else
     m_hit->qdc2 = qdc.q2;
     #ifdef QDC2MAX
-      if (!error_message["QDC3"])
+      if (!Colib::error_message["QDC3"])
       {
         error("QDC3 found despite #define QDC1MAX or #define QDC2MAX");
-        error_message["QDC3"] = true;
+        Colib::error_message["QDC3"] = true;
       }
     #endif //QDC2MAX
 #endif //QDC1MAX
@@ -592,18 +592,18 @@ void inline FasterReader::TreatQDC3(const faster_data_p &data)
 	faster_data_load(data, &qdc);
 	m_hit->adc = qdc.q1;
 #ifdef QDC1MAX
-    if (!error_message["QDC3"])
+    if (!Colib::error_message["QDC3"])
     {
       print("QDC3 found despite #define QDC1MAX ");
-      error_message["QDC3"] = true;
+      Colib::error_message["QDC3"] = true;
     }
   #else
     m_hit->qdc2 = qdc.q2;
     #ifdef QDC2MAX
-      if (!error_message["QDC3"])
+      if (!Colib::error_message["QDC3"])
       {
         print("QDC3 found despite #define QDC1MAX or #define QDC2MAX");
-        error_message["QDC3"] = true;
+        Colib::error_message["QDC3"] = true;
       }
     #else
     m_hit->qdc3 = qdc.q3;

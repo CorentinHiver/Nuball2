@@ -698,7 +698,7 @@ void convert(Hit & hit, FasterReader & reader,
             event.setT0(ref_time);
 
             // debug(event);
-            // pauseDebug();
+            // Colib::pauseDebug();
 
             // --------------------------//
             //8. --- Write the Event --- //
@@ -854,7 +854,7 @@ int main(int argc, char** argv)
       }
       catch(std::invalid_argument const & error) 
       {
-        throw_error("Can't interpret" + std::string(argv[i]) + "as an integer");
+        Colib::throw_error("Can't interpret" + std::string(argv[i]) + "as an integer");
       }
     }
   }

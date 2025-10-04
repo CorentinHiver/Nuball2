@@ -127,7 +127,7 @@ void test1(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
       {
         double prompt_clover_calo = 0;
 
-        if (evt_i>0 && evt_i%freq_hit_display == 0) print(nicer_double(evt_i, 0), "events");
+        if (evt_i>0 && evt_i%freq_hit_display == 0) print(Colib::nicer_double(evt_i, 0), "events");
 
         tree->GetEntry(evt_i);
 

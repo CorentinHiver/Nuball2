@@ -1120,7 +1120,7 @@ int main(int argc, char** argv)
     //       }
     //       else if(isDelayed(time_ns)) totalE_delayed+=smeared_energy;
     //       // print(nrj,smear(nrj, label, random), totalE_prompt, totalE_delayed);
-    //       // pauseCo();
+    //       // Colib::pause();
     //     }
 
     //     if (isGe[label])

@@ -187,7 +187,7 @@ int main(int argc, char** argv)
       }
       catch(std::invalid_argument const & error) 
       {
-        throw_error("Can't interpret " + std::string(argv[i]) + " as an integer...");
+        Colib::throw_error("Can't interpret " + std::string(argv[i]) + " as an integer...");
       }
     }
   }
@@ -505,7 +505,7 @@ int main(int argc, char** argv)
             if (10_ns < time && time < 50_ns) pure_singles_cristals_neutrons.Fill(label, nrj);
           }
         }
-        // if (eventBuilder.isSingle()) {print(*(eventBuilder.getEvent())); pauseCo();}
+        // if (eventBuilder.isSingle()) {print(*(eventBuilder.getEvent())); Colib::pause();}
       }
       print("Conversion finished here done in", convert_timer() , " (",dataSize/convert_timer.TimeSec() ,"Mo/s)");
       Timer write_timer;

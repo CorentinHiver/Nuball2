@@ -137,7 +137,7 @@ private:
   // Folder m_manip;
   // std::string m_file;
 
-  Strings m_listRuns;
+  Colib::Strings m_listRuns;
   MTList m_listRunsMT;
 };
 

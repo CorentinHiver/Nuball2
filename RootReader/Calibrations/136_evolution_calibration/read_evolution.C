@@ -9,7 +9,7 @@ void read_evolution(Path folder = "")
   Calibration calib()
   print("start");
   if (folder == Path::pwd()) folder = Path("~/faster_data/N-SI-136-U_histo");
-  if (!folder) throw_error(concatenate("Folder ", folder, " do not exist"));
+  if (!folder) Colib::throw_error(concatenate("Folder ", folder, " do not exist"));
   FilesManager files(folder);
   // auto c = new TCanvas("coucou");
   int i = 0; 

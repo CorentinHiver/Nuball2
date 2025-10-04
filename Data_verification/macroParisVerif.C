@@ -150,7 +150,7 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
       int evt_i = 1;
       for ( ;(evt_i < tree->GetEntries() && evt_i < nb_hits_read); evt_i++)
       {
-        if (evt_i%freq_hit_display == 0) print(nicer_double(evt_i, 0), "events");
+        if (evt_i%freq_hit_display == 0) print(Colib::nicer_double(evt_i, 0), "events");
 
         tree->GetEntry(evt_i);
 
@@ -218,7 +218,7 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
                 prompt_phoswitch_front_label.push_back(label);
                 prompt_phoswitch_front_time.push_back(time);
               }
-              else throw_error(concatenate("error Paris::cluster lookup table ", label, " : ", int_cast(Paris::cluster[label])));
+              else Colib::throw_error(concatenate("error Paris::cluster lookup table ", label, " : ", int_cast(Paris::cluster[label])));
             }
             else if (40_ns < time && time < 170_ns) // Delayed
             {
@@ -241,7 +241,7 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
                 delayed_phoswitch_front_label.push_back(label);
                 delayed_phoswitch_front_time.push_back(time);
               }
-              else throw_error(concatenate("error Paris::cluster lookup table ", label, " : ", int_cast(Paris::cluster[label])));
+              else Colib::throw_error(concatenate("error Paris::cluster lookup table ", label, " : ", int_cast(Paris::cluster[label])));
             }
           }
 
@@ -339,7 +339,7 @@ void macroParisVerif(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_th
             for (size_t i = 0; i<phoswitch_mult; i++) print(phoswitch_energy[i], phoswitch_label[i], phoswitch_time[i]);
             print("modules : energy, index, time");
             for (size_t i = 0; i<module_energy.size(); i++) print(module_energy[i], module_index[i], module_time[i]);
-            pauseCo();
+            Colib::pause();
           }
         }; // End of addback definition
         

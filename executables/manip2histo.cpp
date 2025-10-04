@@ -23,7 +23,7 @@ int main(int argc, char ** argv)
     Manip manip(argv[1]);
     Path datapath(argv[2]);
     Path outpath(argv[3], true);
-    if (!datapath.exists()) throw_error(concatenate(datapath, " doesn't exist !"));
+    if (!datapath.exists()) Colib::throw_error(concatenate(datapath, " doesn't exist !"));
     
     std::string run;
     while(manip >> run)

@@ -32,7 +32,7 @@ void macroTsVerif()
       while(tree.readNext())
       {
         if (max_cursor>0 && tree.cursor() > max_cursor) break;
-        if (tree.cursor()%(int)(1.e+7) == 0) printC(nicer_double(tree.cursor(), 0), "hits");
+        if (tree.cursor()%(int)(1.e+7) == 0) printC(Colib::nicer_double(tree.cursor(), 0), "hits");
         for (int hit_i = 0; hit_i<event.mult; ++hit_i)
         {
           auto const & label = event.labels[hit_i];

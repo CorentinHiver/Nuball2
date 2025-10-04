@@ -829,7 +829,7 @@ output_mutex.unlock();
             event.setT0(last_prompt_ref_pulse_timestamp);// The t0 is set to be the closest prompt pulse with gamma hits
 
             // debug(event);
-            // pauseDebug();
+            // Colib::pauseDebug();
 
             // --------------------------//
             //8. --- Write the Event --- //
@@ -837,7 +837,7 @@ output_mutex.unlock();
             if (histoed) for (int hit_i = 0; hit_i<event.mult; hit_i++)
             {
               // debug(event.labels[hit_i], (event.times[hit_i])/1000.);
-              // pauseDebug();
+              // Colib::pauseDebug();
               histos.time_VS_det.Fill(event.labels[hit_i], (event.times[hit_i])/1000.);
               if (isGe[event.labels[hit_i]]) histos.energy_all_Ge_trigg.Fill(event.nrjs[hit_i]);
               // histos.time_VS_det.Fill(event.labels[hit_i], event.times[hit_i]/1000.);
@@ -1020,7 +1020,7 @@ int main(int argc, char** argv)
       }
       catch(std::invalid_argument const & error) 
       {
-        throw_error("Can't interpret" + std::string(argv[i]) + "as an integer");
+        Colib::throw_error("Can't interpret" + std::string(argv[i]) + "as an integer");
       }
     }
   }

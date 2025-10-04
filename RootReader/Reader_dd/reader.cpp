@@ -39,7 +39,7 @@ public:
   static inline Label index(Label const & label) noexcept {return (label-23)/6;}
   bool fill(Event const & event, int const & hit_i)
   {
-    if (analyzed) throw_error("MyClovers::fill() called while already analyzed, you need to MyClovers::reset first");
+    if (analyzed) Colib::throw_error("MyClovers::fill() called while already analyzed, you need to MyClovers::reset first");
     auto const & label = event.labels[hit_i];
     if (isClover[label])
     {
@@ -489,7 +489,7 @@ MTObject::mutex.unlock();
   if (g_nb_max_hits>-1) nb_evts = g_nb_max_hits;
   for (int evt_i = 0; evt_i<nb_evts; ++evt_i)
   { // Iterate over the events of the file
-    if(evt_i>0 && evt_i%int_cast(1.e+7) == 0) printC(nicer_double(evt_i, 2), "evts"); 
+    if(evt_i>0 && evt_i%int_cast(1.e+7) == 0) printC(Colib::nicer_double(evt_i, 2), "evts"); 
 
     tree->GetEntry(evt_i);
 
@@ -679,7 +679,7 @@ MTObject::mutex.unlock();
 
     // // print(clovers_delayed);
     // // print(clovers_prompt);
-    // // pauseCo();
+    // // Colib::pause();
 
     // for (auto const & clover_i : clovers_prompt.BGO)
     // {
@@ -1027,24 +1027,24 @@ int main(int argc, char** argv)
     else if (param == "-n") Analysator::setMaxHits(std::stoi(argv[++i]));
     else if (param == "-p") 
     {
-      if(read_C2 || read_new || simple_d) throw_error("Can't have more than one trigger"); 
+      if(read_C2 || read_new || simple_d) Colib::throw_error("Can't have more than one trigger"); 
       read_particle = true;
     }
     else if (param == "-d") 
     {
-      if(read_C2 || read_new || read_particle) throw_error("Can't have more than one trigger"); 
+      if(read_C2 || read_new || read_particle) Colib::throw_error("Can't have more than one trigger"); 
       simple_d = true;
     }
     else if (param == "-m") nb_threads = std::stoi(argv[++i]);
     else if (param == "--129") read_129 = true;
     else if (param == "--C2") 
     {
-      if(simple_d || read_new || read_particle) throw_error("Can't have more than one trigger"); 
+      if(simple_d || read_new || read_particle) Colib::throw_error("Can't have more than one trigger"); 
       read_C2 = true;
     }
     else if (param == "--new") 
     {
-      if(simple_d || read_C2) throw_error("Can't have more than one trigger"); 
+      if(simple_d || read_C2) Colib::throw_error("Can't have more than one trigger"); 
       read_new = true;
     }
     else
@@ -1170,7 +1170,7 @@ int main(int argc, char** argv)
     //       }
     //       else if(isDelayed(time_ns)) totalE_delayed+=smeared_energy;
     //       // print(nrj,smear(nrj, label, random), totalE_prompt, totalE_delayed);
-    //       // pauseCo();
+    //       // Colib::pause();
     //     }
 
     //     if (isGe[label])

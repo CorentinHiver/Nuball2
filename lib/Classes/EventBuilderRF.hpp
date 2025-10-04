@@ -114,7 +114,7 @@ bool EventBuilderRF::build(Hit const & hit)
         return true; // The event is ready to be processed
       }
     break;
-    default: throw_error("event builder issues...");
+    default: Colib::throw_error("event builder issues...");
   }
   return false;
 }

@@ -13,7 +13,7 @@ public:
   void read(std::string const & filename = "NaI_136_2024.angles")
   {
     std::ifstream file(filename, std::ios::in);
-    if (!file.good()) throw_error(concatenate("in PhoswitchCalib::PhoswitchCalib(std::string filename) : file", filename, " can't be open"));
+    if (!file.good()) Colib::throw_error(concatenate("in PhoswitchCalib::PhoswitchCalib(std::string filename) : file", filename, " can't be open"));
     Label label = 0; double angle = 0; double coeff = 0;
     while(file >> label >> angle >> coeff) data.emplace(label, Calib({angle, coeff}));
     file.close();

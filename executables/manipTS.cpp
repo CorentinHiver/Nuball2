@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
       std::string command = argv[i];
            if (command == "-m") nb_threads = std::stoi(argv[++i]);
       else if (command == "-n") nb_files = std::stoi(argv[++i]);
-      else throw_error(concatenate("Unkown command", command));
+      else Colib::throw_error(concatenate("Unkown command", command));
     }
 
     MTObject::Initialise(nb_threads);
@@ -40,7 +40,7 @@ int main(int argc, char ** argv)
     Manip manip(argv[1]);
     Path datapath(argv[2]);
     Path outpath("Timeshifts");
-    if (!datapath.exists()) throw_error(concatenate(datapath, " doesn't exist !"));
+    if (!datapath.exists()) Colib::throw_error(concatenate(datapath, " doesn't exist !"));
     
     std::string run;
     while(manip >> run)

@@ -411,7 +411,7 @@ private:
   TH1* m_proj = nullptr;
   TH1* m_gate = nullptr;
   TH1* m_focus = nullptr;
-  Strings m_list_histo_to_delete;
+  Colib::Strings m_list_histo_to_delete;
 
   bool m_py = true;
   int m_gate_size = 1;

@@ -233,7 +233,7 @@ int main(int argc, char** argv)
     }
   }
 
-  if (run=="") throw_error("No run...");
+  if (run=="") Colib::throw_error("No run...");
 
   // Setup the path accordingly to the machine :
   Path path = "~/FNT/"+run;
@@ -263,12 +263,12 @@ int main(int argc, char** argv)
   // auto isGe = [](Label const & label) {return label == 3;};
   // auto isEden = [](Label const & label) {return label == 4;};
 
-  static auto constexpr isGe    = LUT<10> ([](Label const & label) {return label == labelGe1 || label == labelGe2;});
-  static auto constexpr isGe1   = LUT<10> ([](Label const & label) {return label == labelGe1;});
-  static auto constexpr isGe2   = LUT<10> ([](Label const & label) {return label == labelGe2;});
-  static auto constexpr isEden  = LUT<10> ([](Label const & label) {return label == labelEDEN;});
-  static auto constexpr isX     = LUT<10> ([](Label const & label) {return label == labelX;});
-  static auto constexpr isTheta = LUT<10> ([](Label const & label) {return label == labelTheta;});
+  static auto constexpr isGe    = Colib::LUT<10> ([](Label const & label) {return label == labelGe1 || label == labelGe2;});
+  static auto constexpr isGe1   = Colib::LUT<10> ([](Label const & label) {return label == labelGe1;});
+  static auto constexpr isGe2   = Colib::LUT<10> ([](Label const & label) {return label == labelGe2;});
+  static auto constexpr isEden  = Colib::LUT<10> ([](Label const & label) {return label == labelEDEN;});
+  static auto constexpr isX     = Colib::LUT<10> ([](Label const & label) {return label == labelX;});
+  static auto constexpr isTheta = Colib::LUT<10> ([](Label const & label) {return label == labelTheta;});
 
   MTFasterReader reader(path);
   reader.setTimeshifts(timeshifts);

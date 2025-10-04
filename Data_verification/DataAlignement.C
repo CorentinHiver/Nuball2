@@ -10,41 +10,45 @@
 #include "../lib/Analyse/Chi2Minimiser.hpp"
 
 #include "TTree.h"
-#include "TROOT.h"
 #include "TBranch.h"
 using MinVar = Colib::MinimiserVariable;
 
-constexpr bool more_precise = false;
+constexpr bool more_precise = false; // Not working yet
 
 constexpr double precision = 1;
 
-/// @brief Get a sub-histogram between x1 and x2
-template<class THist>
-THist* subHisto(THist* histo, int xmin, int xmax)
-{
-  auto name = TString(histo->GetName())+("_"+std::to_string(xmin)+"_"+std::to_string(xmax)).c_str();
-  auto bin_low = histo->GetBinLowEdge(xmin);
-  auto bin_high = histo->GetBinLowEdge(xmax);
-  auto const & N = bin_high-bin_low;
-  auto ret = new THist(name, name, N, xmin, xmax);
-  int dest_bin = 0;
-  for (int bin_i = bin_low; bin_i<=bin_high; ++bin_i) ret->SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
-  return ret;
-}
+// /// @brief Get a sub-histogram between x1 and x2
+// template<class THist>
+// THist* subHisto(THist* histo, int xmin, int xmax)
+// {
+//   auto name = TString(histo->GetName())+("_"+std::to_string(xmin)+"_"+std::to_string(xmax)).c_str();
+//   auto bin_low  = histo -> GetBinLowEdge(xmin);
+//   auto bin_high = histo -> GetBinLowEdge(xmax);
+//   auto const & N = bin_high - bin_low;
+//   auto ret = new THist(name, name, N, xmin, xmax);
+//   int dest_bin = 0;
+//   for (int bin_i = bin_low; bin_i <= bin_high; ++bin_i) ret -> SetBinContent(dest_bin++, histo->GetBinContent(bin_i));
+//   return ret;
+// }
 
 void DataAlignement(bool overwrite = true)
 {
-
-  // Tests pour corriger des bugs
-  // gROOT->SetBatch(true);
-  TH1::AddDirectory(false);
+  TH1::AddDirectory(false); // To manually handle the ROOT implicit directory management that is not thread safe (thank you ROOT)
 
   Timer timer;
+
 #ifdef MULTI
   MTObject::Initialise(MULTI);
 #endif //MULTI
 
-  // Parameters :
+  // -- Data parameters -- //
+  
+  int ref_run_number = 75;
+  File ref_filename = "../136/calibrate_2025/histos/run_"+std::to_string(ref_run_number)+".root";
+  detectors.load("../136/index_129.list");
+  Path folder("Alignement/", true);
+
+  // -- Minimisation parameters -- //
 
   std::unordered_map<std::string, int> minX = {
     {"bgo"  , 100 },
@@ -54,14 +58,14 @@ void DataAlignement(bool overwrite = true)
   };
 
   std::unordered_map<std::string, int> maxX = {
-    {"bgo"  , 15000},
+    {"bgo"  , 5000 },
     {"ge"   , 15000},
     {"paris", 10000},
     {"dssd" , 15000}
   };
 
   std::unordered_map<std::string, int> rebining = {
-    {"bgo"  , 50},
+    {"bgo"  , 20},
     {"ge"   , 2 },
     {"paris", 10},
     {"dssd" , 50}
@@ -82,53 +86,59 @@ void DataAlignement(bool overwrite = true)
   };
 
   std::unordered_map<std::string, MinVar> C = {
-    {"bgo"   , {1, 5e-2, 20*precision}},
+    {"bgo"   , {1, 1e-1, 20*precision}},
     {"ge"    , {1, 5e-2, 20*precision}},
     {"dssd"  , {1, 2e-1, 20*precision}},
     {"paris" , {1, 5e-2, 20*precision}}
   };
   
-  Colib::Chi2Minimiser::fillHisto(true);
+  Colib::Chi2Minimiser::fillHisto(true); // To get the chi2 maps, better comment this for precision > 1
 
-  // Open ref file :
-  File ref_filename = "../136/calibrate_2025/histos/run_75.root";
-  int ref_run_number = std::stoi(split(ref_filename.shortName(), "_")[1]);
-  detectors.load("../136/index_129.list");
+  FilesManager files("../136/calibrate_2025/histos/");
 
   for (auto const & detector : detectors)
   {
     Timer timerDetector;
+
+    // -- Extracting detector information -- //
+
     if (detector == "") continue;
+    print(detector);
     TString spectrumName = detector.c_str();
-    Path folder("Alignement/", true);
     auto outFilename = folder.c_str() + spectrumName + ".root";
     if (!overwrite && File(outFilename).exists()) {print("Do not overwrite", outFilename); continue;}
-    print(outFilename);
 
     auto label = detectors[detector];
     auto type = detectors.type(label);
-    if (!found(minX, type)) { error(type, "dont have minX"); continue; }
+    if (!key_found(minX, type)) { error(type, "dont have minX"); continue; }
     File dataFile = folder + detector + ".align";
     if (dataFile.exists()) std::remove(dataFile.c_str());
     
-    // Some initializations :
-    auto refFile = TFile::Open(ref_filename.c_str(), "READ");
+    // -- Extracting reference spectrum -- //
+    auto refFile = TFile::Open(ref_filename.c_str(), "READ", "", 0);
     auto refHistoRaw = refFile->Get<TH1F>(spectrumName);
     if (!refHistoRaw) {print(spectrumName, "is not found"); continue;}
     if (refHistoRaw->Integral() < 1000){print(spectrumName, "has low count (<10)"); continue;}
-    auto refHisto = subHisto(refHistoRaw, minX[type], maxX[type]);
+    // auto refHisto = subHisto(refHistoRaw, minX[type], maxX[type]);
+    auto refHisto = dynamic_cast<TH1F*> (refHistoRaw->Clone(spectrumName+"_ref"));
     refHisto->Rebin(rebining[type]);
-    refHisto->SetName(spectrumName+"_ref");
+    refFile->Close();
+    // refHisto->SetName(spectrumName+"_ref");
+
+    // -- Initialize cumulative spectra -- //
   
     auto totalHisto = dynamic_cast<TH1F*> (refHisto->Clone("totalHisto"));
     auto totalHistoCorrected = dynamic_cast<TH1F*> (refHisto->Clone("totalHistoCorrected"));
-  
-    refFile->Close();
-  
-    // Calculate and minimize chi2 :
-    
-    auto spectra = new TH2F("spectra", "spectra;run;energy", refHisto->GetNbinsX(), minX[type], maxX[type], 150, 0, 150);
-    auto spectraCorrected = new TH2F("spectraCorrected", "spectraCorrected;run;energy", refHisto -> GetNbinsX(), minX[type], maxX[type], 150, 0, 150);
+
+    auto minXspectra = refHisto->GetXaxis()->GetXmin();
+    auto maxXspectra = refHisto->GetXaxis()->GetXmax();
+  ;
+    // -- Initialize usefull indicators -- //
+
+    // auto spectra = new TH2F("spectra", "spectra;run;energy", refHisto->GetNbinsX(), minX[type], maxX[type], 150, 0, 150);
+    // auto spectraCorrected = new TH2F("spectraCorrected", "spectraCorrected;run;energy", refHisto -> GetNbinsX(), minX[type], maxX[type], 150, 0, 150);
+    auto spectra = new TH2F("spectra", "spectra;run;energy", refHisto->GetNbinsX(), minXspectra, maxXspectra, 150, 0, 150);
+    auto spectraCorrected = new TH2F("spectraCorrected", "spectraCorrected;run;energy", refHisto -> GetNbinsX(), minXspectra, maxXspectra, 150, 0, 150);
     std::vector<double> init_chi2s(150, 0);
     std::vector<double> best_chi2s(150, 0);
     std::vector<double> best_first_bs(150, 0);
@@ -140,8 +150,9 @@ void DataAlignement(bool overwrite = true)
     std::vector<CalibAndScale> bestCalibs;
     std::vector<TH3*> first_chi2maps;
     std::vector<TH3*> final_chi2maps;
+
+    // -- Load the files -- //
   
-    FilesManager files("../136/calibrate_2025/histos/");
     CalibAndScales calibs;
     for (auto const & it : a) print(it.first, it.second);
     calibs.setCalib(ref_run_number, CalibAndScale({a.at(type).initGuess, b.at(type).initGuess, C.at(type).initGuess}));
@@ -164,28 +175,32 @@ void DataAlignement(bool overwrite = true)
     {
 
   #endif // COMULTITHREADING
+      
+      chi2calc.setBounds(minX[type], maxX[type]);
 
       auto file = File(filename);
       int run_number = std::stoi(split(file.filename().shortName(), "_")[1]);
       if (file == ref_filename) continue; // Do not compare the test spectrum with itself
   
+      // The following objects cannot be instanciated in multi-threading mode, ...
       TFile* testFile = nullptr; 
-      TH1F* testHisto = nullptr;
+      TH1F*  testHisto = nullptr;
       TString testName;
       
-      {
+      { // ... reason why we have to open a mutex-locked section for this (thank you ROOT)
       #ifdef COMULTITHREADING
         lock_mutex lock(mutex);
       #endif //COMULTITHREADING
 
         testFile = TFile::Open(filename.c_str(), "READ");
 
-        testHisto = subHisto(testFile -> Get<TH1F>(spectrumName), minX[type], maxX[type]);
+        // testHisto = subHisto(testFile -> Get<TH1F>(spectrumName), minX[type], maxX[type]);
+        testHisto = testFile -> Get<TH1F>(spectrumName);
 
+        testHisto -> SetName(spectrumName + TString("_") + std::to_string(run_number).c_str());
+        // testHisto = dynamic_cast<TH1F*> (testHisto->Clone(testName));
         testHisto -> Rebin(rebining[type]);
-        testName = testHisto -> GetName() + TString("_") + std::to_string(run_number).c_str();
-        testHisto -> SetName(testName);
-        testHisto -> Scale(refHisto -> Integral() / testHisto -> Integral());
+        testHisto -> Scale(refHisto -> Integral() / testHisto -> Integral()); // Raw scaling for easing later minimisation
 
         for (int bin = 1; bin <= testHisto -> GetNbinsX(); ++bin)
         {
@@ -199,7 +214,6 @@ void DataAlignement(bool overwrite = true)
       //////////////
     
       Colib::Chi2Minimiser firstMini;
-      // firstMini.setEnergyRange()
       firstMini.minimise(chi2calc, testHisto, b.at(type), a.at(type), C.at(type));
 
       init_chi2s[run_number] = chi2calc.calculate(testHisto);
@@ -291,13 +305,13 @@ void DataAlignement(bool overwrite = true)
       #ifdef COMULTITHREADING
         lock_mutex lock(mutex);
       #endif //COMULTITHREADING
-        for (int bin = 1; bin<=calibratedHisto->GetNbinsX(); ++bin)
+        for (int bin = 1; bin <= calibratedHisto->GetNbinsX(); ++bin)
         {
           spectraCorrected->SetBinContent(bin, run_number, calibratedHisto->GetBinContent(bin));
           totalHistoCorrected->SetBinContent(bin, totalHistoCorrected->GetBinContent(bin) + calibratedHisto->GetBinContent(bin));
         }
         best_chi2s[run_number] = firstMini.getMinChi2();
-        print(run_number, firstMini.getMinChi2(), first_calib);
+        print(run_number, init_chi2s[run_number], firstMini.getMinChi2(), first_calib);
       }
     #ifdef COMULTITHREADING
       lock_mutex lock(mutex);
@@ -308,8 +322,9 @@ void DataAlignement(bool overwrite = true)
     });
   #endif //COMULTITHREADING
 
-    std::ofstream datafile(dataFile);
-    for (auto const & calib : calibs) datafile << calib << std::endl;
+    std::ofstream fout(dataFile, std::ios::app);
+    fout << calibs; // TODO Ca s'ecrit comme dans ostream, pas un ofstream
+    // for (auto const & run : list_of_keys(calibs)) calibs[run].writeTo(dataFile);
   
     auto outFile = TFile::Open(outFilename, "RECREATE"); outFile->cd();
   
@@ -384,5 +399,5 @@ int main(int argc, char** argv)
   return 1;
 }
 
-// g++ -g  -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++20 -DMULTI=2
-// g++ -O2 -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -std=c++17 -DMULTI=9
+// g++ -g  -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -DMULTI=2
+// g++ -O2 -o exec DataAlignement.C ` root-config --cflags` `root-config --glibs` -lSpectrum -DMULTI=9

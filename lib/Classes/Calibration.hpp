@@ -105,7 +105,7 @@ public:
       histo->GetXaxis()->Set(histo->GetNbinsX(), new_min, new_max);
       histo->GetXaxis()->SetRangeUser(new_min, new_max);
     }
-    else throw_error(concatenate("Can't use Calibration::calibrateAxis(TH1F*, Label) with calibration order > 1 yet", error_message["DEV"]));
+    else Colib::throw_error(concatenate("Can't use Calibration::calibrateAxis(TH1F*, Label) with calibration order > 1 yet", Colib::error_message["DEV"]));
   }
 #endif //ROOT_TH1
 
@@ -390,8 +390,8 @@ bool Calibration::load(File const & file)
   m_filename = file.string();
   std::ifstream inputfile(m_filename, std::ifstream::in);
 
-  if (!inputfile.good()) {print("CAN'T OPEN THE CALIBRATION FILE " + m_filename); throw_error("CALIBRATION");}
-  else if (file_is_empty(inputfile)) {print("CALIBRATION FILE", m_filename, "EMPTY !"); throw_error("CALIBRATION");}
+  if (!inputfile.good()) {print("CAN'T OPEN THE CALIBRATION FILE " + m_filename); Colib::throw_error("CALIBRATION");}
+  else if (file_is_empty(inputfile)) {print("CALIBRATION FILE", m_filename, "EMPTY !"); Colib::throw_error("CALIBRATION");}
   std::string line = "";
   Label size = 0;
   Label label = 0;

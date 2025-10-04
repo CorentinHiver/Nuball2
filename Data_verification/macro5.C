@@ -14,6 +14,8 @@
 #define CLEANER
 #define MTON
 
+using namespace Colib;
+
 float smear(float const & nrj, TRandom* random)
 {
   return random->Gaus(nrj,nrj*((300.0/sqrt(nrj))/100.0)/2.35);
@@ -158,8 +160,8 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
       std::unordered_map<std::string, unique_TH2F> T_vs_run;
       std::unordered_map<std::string, unique_TH2F> E_vs_run;
       auto constexpr binning_E = LUT<1000>([](Label const & label){
-             if (CloversV2::isBGO(label)) return 500;
-        else if (CloversV2::isGe (label)) return 10000;
+             if (CloversV2::isBGO[label]) return 500;
+        else if (CloversV2::isGe [label]) return 10000;
         else if (Paris::is       [label]) return 500;
         else                              return 500;
       });
@@ -647,10 +649,10 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
           // Clovers:
           if (gate(-20_ns, time, 20_ns) )
           {
-            if (CloversV2::isBGO(label)) prompt_clover_calo += nrj ;
-            else if (CloversV2::isGe(label)) 
+            if (CloversV2::isBGO[label]) prompt_clover_calo += nrj ;
+            else if (CloversV2::isGe[label]) 
             {
-              if (CloversIsBlacklist[label]) continue;
+              // if (CloversIsBlacklist[label]) continue;
               // pclovers_raw.fill(event, hit_i);
               // Apply the run by run correction
               if (kCalibGe) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
@@ -660,15 +662,15 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
           }
           else if (gate(20_ns, time, 40_ns))
           {
-            if (CloversIsBlacklist[label]) continue;
-            // if (kCalibGe && CloversV2::isGe(label)) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
+            // if (CloversIsBlacklist[label]) continue;
+            // if (kCalibGe && CloversV2::isGe[label]) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
             n->Fill(nrj);
           }
           else if (gate(40_ns, time, 170_ns) )
           {
-            if (CloversIsBlacklist[label]) continue;
+            // if (CloversIsBlacklist[label]) continue;
             // dclovers_raw.fill(event, hit_i);
-            // if (kCalibGe && CloversV2::isGe(label)) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
+            // if (kCalibGe && CloversV2::isGe[label]) event.nrjs[hit_i] = calibGe.correct(nrj, run_number, label);
             dclovers.fill(event, hit_i);
           }
 
@@ -2006,11 +2008,11 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
   //   auto f = TFile::Open(dest.c_str(), "update");
 
   //   auto dd_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd"))->Clone("dd_clean"));
-  //   Colib::removeVeto(dd_clean, dd_prompt_veto.get(), 501, 521);
+  //   removeVeto(dd_clean, dd_prompt_veto.get(), 501, 521);
   //   dd_clean->Write();
 
   //   auto dd_p_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dd_p"))->Clone("dd_p_clean"));
-  //   Colib::removeVeto(dd_p_clean, dd_p_prompt_veto.get(), 501, 521);
+  //   removeVeto(dd_p_clean, dd_p_prompt_veto.get(), 501, 521);
   //   dd_p_clean->Write();
 
   //   // Calculate the prompt-delayed background : //TODO

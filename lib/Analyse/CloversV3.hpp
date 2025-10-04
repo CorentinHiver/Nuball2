@@ -20,6 +20,7 @@
  * @brief A class to simplify the analysis of the Clovers data
  * @details 
  *  Contains 24 vector of clovers. Usually only one clover per vector is created.
+ *  Not used in analysis yet, there were some problems...
  */
 class CloversV3
 {
@@ -65,7 +66,7 @@ public:
 
   bool fill(Event const & event, int const & hit_i)
   {
-    if (analyzed) throw_error("CloversV3::fill() called while already analyzed, you need to CloversV3::reset() first");
+    if (analyzed) Colib::throw_error("CloversV3::fill() called while already analyzed, you need to CloversV3::reset() first");
     auto const & label = event.labels[hit_i];
     if (isClover(label))
     {

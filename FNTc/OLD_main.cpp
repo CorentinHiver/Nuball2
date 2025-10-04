@@ -38,7 +38,7 @@ int main(int argc, char** argv)
     }
   }
 
-  if (run=="") throw_error("No run...");
+  if (run=="") Colib::throw_error("No run...");
 
   // Setup the path accordingly to the machine :
   Path path = "~/FNT/"+run;

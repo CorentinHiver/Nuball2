@@ -74,7 +74,7 @@ public:
   {
     if (0 < m_entries && 0 < maxHits && maxHits < m_entries) 
     {
-      print("reading", nicer_double(maxHits,0), "events in", rmPathAndExt(m_filename), "out of", nicer_double(m_entries,0));
+      print("reading", Colib::nicer_double(maxHits,0), "events in", rmPathAndExt(m_filename), "out of", Colib::nicer_double(m_entries,0));
       m_entries = maxHits;
     }
   }

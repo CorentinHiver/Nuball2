@@ -591,7 +591,7 @@ void Clovers::Analyse_more()
 
 }
 
-// template<class T> T positive_modulo(T const & dividend, T const & divisor)
+// template<class T> T Colib::positive_modulo(T const & dividend, T const & divisor)
 // {
 //   auto ret = dividend % divisor;
 //   if (ret<0) ret+=divisor;
@@ -635,15 +635,15 @@ uchar Clovers::label_to_cristal(Label const & l)
 
       // pi/2 rotated (-> -pi/2 rotation) : R2A6
     case 17:
-       Ge_cristal = positive_modulo((Ge_cristal-1), 4); break;
+       Ge_cristal = Colib::positive_modulo((Ge_cristal-1), 4); break;
 
       // -pi/2 rotated (-> pi/2 rotation) : R3A3, R3A4
     case 2: case 3:
-      Ge_cristal = positive_modulo((Ge_cristal+1), 4); break;
+      Ge_cristal = Colib::positive_modulo((Ge_cristal+1), 4); break;
 
       // pi rotation : R3A5
     case 4:
-      Ge_cristal = positive_modulo((Ge_cristal+2), 4); break;
+      Ge_cristal = Colib::positive_modulo((Ge_cristal+2), 4); break;
     }
     return clover+Ge_cristal;
   }

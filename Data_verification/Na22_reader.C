@@ -67,7 +67,7 @@ void eff(TH1F* histo, int nb_gate, int coinc_low_fit = 900, int coinc_high_fit =
   histo->GetXaxis()->UnZoom();
 
   std::cout << std::setprecision(4);
-  print("Efficiency :", nicer_double(histo->GetEntries(), 0), nicer_double(nb_gate, 0), 100.*double(histo->GetEntries()/nb_gate), "% Full-energy :", 100.*double(pe_integral/nb_gate), "%", 
+  print("Efficiency :", Colib::nicer_double(histo->GetEntries(), 0), Colib::nicer_double(nb_gate, 0), 100.*double(histo->GetEntries()/nb_gate), "% Full-energy :", 100.*double(pe_integral/nb_gate), "%", 
         "realive pe eff : ", 100.*pe_integral/histo->Integral(), "%", histo->GetName());
 }
 
@@ -318,7 +318,7 @@ void Na22_reader(int nb_files = -1, ULong64_t max_cursor = 1.e+10)
   if (nb_gate < 1) print("no gate found !!");
   else print(nb_gate, "gate found, along with", nb_gated, "coincident gamma, which means an absolute efficiency of", 100.*double(nb_gated)/double(nb_gate), "%");
   print("Total efficiency :", 100.*(1-double(nb_missed)/double(nb_gate)), "%");
-  print(nicer_double(max_cursor, 0), "evts read");
+  print(Colib::nicer_double(max_cursor, 0), "evts read");
 
   // Efficiency
   gated_Ge.Merge();

@@ -20,11 +20,11 @@ namespace Colib
     delete cutg;
   }
 
-  Strings match_regex(Strings list, std::string pattern)
+  Colib::Strings match_regex(Colib::Strings list, std::string pattern)
   {
     TRegexp reg((TString(pattern.c_str()).ReplaceAll("*", ".*")).ReplaceAll("?", "."));
     std::vector<TString> strings; for (auto const & e : list) strings.push_back(e.c_str());
-    Strings ret;
+    Colib::Strings ret;
     for (size_t i = 0; i < strings.size(); ++i) if (strings[i].Index(reg) != kNPOS) ret.push_back(list[i]);
     return ret;
   }
@@ -1012,21 +1012,22 @@ namespace Colib
   /// @brief Set Y histogram proj in matrix at binX.
   void setX(TH2* matrix, TH1* proj, int const & binX)
   {
-    if (matrix == nullptr){throw_error("Matrix histo nullptr in Colib::setX");}
-    if (proj == nullptr) {throw_error("Projection histo nullptr in Colib::setX");}
+    if (matrix == nullptr){Colib::throw_error("Matrix histo nullptr in Colib::setX");}
+    if (proj == nullptr) {Colib::throw_error("Projection histo nullptr in Colib::setX");}
     for (int binY = 0; binY<matrix->GetNbinsY(); binY++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
   /// @brief Set X histogram proj in matrix at binY.
   void setY(TH2* matrix, TH1* proj, int const & binY)
   {
-    if (matrix == nullptr){throw_error("Matrix histo nullptr in Colib::setY");}
-    if (proj == nullptr) {throw_error("Projection histo nullptr in Colib::setY");}
+    if (matrix == nullptr){Colib::throw_error("Matrix histo nullptr in Colib::setY");}
+    if (proj == nullptr) {Colib::throw_error("Projection histo nullptr in Colib::setY");}
     for (int binX = 0; binX<matrix->GetNbinsX(); binX++) matrix->SetBinContent(binX, binY, proj->GetBinContent(binY));
   }
 
   void simulatePeak(TH1* histo, double const & x_center, double const & x_resolution, int const & nb_hits)
   {
+    if (!histo) {error("in simulate_peak : histo is nullptr"); return;}
     TRandom* random = new TRandom();
     for (int it = 0; it<nb_hits; ++it) histo->Fill(random->Gaus(x_center, x_resolution/2.35));
     delete random;
@@ -1038,13 +1039,14 @@ namespace Colib
     if (draw) 
     {
       auto name = histo->GetName()+std::string("_simulated");
-      TH1D* newHisto = nullptr;
-      if (gFile) newHisto = gFile->Get<TH1D>(name.c_str());
-      if (!newHisto) {print("Creating", name); newHisto = static_cast<TH1D*> (histo->Clone(name.c_str()));}
+      // TH1D* newHisto = nullptr;
+      // if (gFile) newHisto = gFile->Get<TH1D>(name.c_str());
+      // if (!newHisto) {print("Creating", name); newHisto = static_cast<TH1D*> (histo->Clone(name.c_str()));}
+      auto newHisto = histo->ShowBackground(15);
       Colib::simulatePeak(newHisto, x_center, x_resolution, nb_hits);
       newHisto->SetLineColor(kRed);
-      newHisto->Draw();
-      histo->Draw("same");
+      histo->Draw();
+      newHisto->Draw("same");
     }
     else Colib::simulatePeak(histo, x_center, x_resolution, nb_hits); 
   }
@@ -1574,7 +1576,7 @@ namespace Colib
   /// @brief Project matrix on Y axis at a given X bin. This fills proj.
   void projectY(TH2* matrix, TH1* proj, int const & binX)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectY");}
+    if (matrix == nullptr) {Colib::throw_error("Matrix histo nullptr in Colib::projectY");}
     auto const & nbBins = matrix->GetNbinsY();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins,getYmin(matrix), getYmax(matrix));
@@ -1584,7 +1586,7 @@ namespace Colib
   /// @brief Project matrix on Y axis between bin binXmin included and binXmax excluded [binXmin;binXmax[. This fills proj.
   void projectY(TH2* matrix, TH1* proj, int const & binXmin, int const & binXmax)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectY");}
+    if (matrix == nullptr) {Colib::throw_error("Matrix histo nullptr in Colib::projectY");}
     auto const & nbBins = matrix->GetNbinsY();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins, getYmin(matrix), getYmax(matrix));
@@ -1601,7 +1603,7 @@ namespace Colib
   /// @brief Project the whole matrix on the X axis. This fills proj.
   void projectX(TH2* matrix, TH1* proj)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectX");}
+    if (matrix == nullptr) {Colib::throw_error("Matrix histo nullptr in Colib::projectX");}
     auto const & nbBins = matrix->GetNbinsX();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins, getXmin(matrix), getXmax(matrix));
@@ -1611,7 +1613,7 @@ namespace Colib
   /// @brief Project on X axis at a given Y bin. This fills proj.
   void projectX(TH2* matrix, TH1* proj, int const & binY)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectX");}
+    if (matrix == nullptr) {Colib::throw_error("Matrix histo nullptr in Colib::projectX");}
     auto const & nbBins = matrix->GetNbinsX();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins,getXmin(matrix), getXmax(matrix));
@@ -1621,7 +1623,7 @@ namespace Colib
   /// @brief Project on X axis between bin binYmin included and binYmax excluded [binYmin;binYmax[. This fills proj.
   void projectX(TH2* matrix, TH1* proj, int const & binYmin, int const & binYmax)
   {
-    if (matrix == nullptr) {throw_error("Matrix histo nullptr in Colib::projectX");}
+    if (matrix == nullptr) {Colib::throw_error("Matrix histo nullptr in Colib::projectX");}
     auto const & nbBins = matrix->GetNbinsX();
     if (proj == nullptr) proj = new TH1F();
     proj->SetBins(nbBins, getXmin(matrix), getXmax(matrix));
@@ -1725,7 +1727,7 @@ namespace Colib
   {
     if (histo == nullptr) {error("in myProjection2D : histo is nullptr"); return nullptr;}
 
-    static Strings types = {"XY", "YX", "XZ", "ZX", "YZ", "ZY"};
+    static Colib::Strings types = {"XY", "YX", "XZ", "ZX", "YZ", "ZY"};
     if (!found(types, type)) {error("in myProjection2D(type, histo) :", type, "is not known"); return nullptr;}
     // Preparing the return histo :
     if (name == "") name = histo->GetName()+std::string("_p")+type;
@@ -2483,9 +2485,9 @@ namespace Colib
     }
   
     template<class THist = TH1>
-    Strings get_names_of(TPad * pad = nullptr)
+    Colib::Strings get_names_of(TPad * pad = nullptr)
     {
-      Strings ret;
+      Colib::Strings ret;
       if (!pad) 
       {
         pad = (TPad*)gPad;
@@ -2590,6 +2592,32 @@ namespace Colib
         }
       }
       return false;
+    }
+
+    template<class THist = TH1>
+    void multiply_histos(double coeff, TPad* pad = nullptr, TString options = "nosw2")
+    {
+      if (!pad)
+      {
+        pad = (TPad*)gPad;
+        if (!pad) {error("no pad"); return;}
+      }
+      auto histos = Colib::Pad::get_histos<THist>(pad);
+      if (histos.empty()){error("no", TClass::GetClass(typeid(THist))->GetName(), "drawn in pad"); return;}
+      double maxi = 0;
+      for (auto const & hist : histos) if (maxi < hist->GetMaximum()) maxi = hist->GetMaximum();
+      if (maxi==0.0) {error("max is 0"); return;}
+      bool hasLegend = Colib::Pad::has_legend(pad);
+      bool first = true;
+      for (auto & hist : histos) 
+      {
+        gPad->GetListOfPrimitives()->Remove(hist);
+        hist->Scale(coeff, options);
+        if (first) {hist->Draw(); first = false;}
+        else hist->Draw("same");
+      }
+      if (hasLegend) gPad->BuildLegend();
+      pad->Update();
     }
     
     template<class THist = TH1>
@@ -2776,9 +2804,9 @@ namespace Colib
     else return nullptr;
   }
 
-  Strings get_list_histo(TFile * file, std::string const & class_name = "TH1F")
+  Colib::Strings get_list_histo(TFile * file, std::string const & class_name = "TH1F")
   {
-    Strings ret;
+    Colib::Strings ret;
     if (!file) {error("in get_list_histo(TFile * file, std::string class_name) : file is nullptr"); return ret;}
     auto list = file->GetListOfKeys();
     for (auto&& keyAsObj : *list)
@@ -2804,7 +2832,7 @@ namespace Colib
     return ret;
   }
   
-  Strings get_TH1F_names(std::string const & filename)
+  Colib::Strings get_TH1F_names(std::string const & filename)
   {
     auto file = TFile::Open(filename.c_str());
     auto ret =  get_list_histo(file, "TH1F");
@@ -2812,7 +2840,7 @@ namespace Colib
     return ret;
   }
   
-  Strings get_TH1F_names(TFile * file)
+  Colib::Strings get_TH1F_names(TFile * file)
   {
     return get_list_histo(file, "TH1F");
   }
@@ -2830,7 +2858,7 @@ namespace Colib
     return ret;
   }
   
-  TH1F_map get_TH1F_map(TFile * file, Strings & names)
+  TH1F_map get_TH1F_map(TFile * file, Colib::Strings & names)
   {
     TH1F_map ret;
     names = get_TH1F_names(file);
@@ -2851,10 +2879,10 @@ namespace Colib
    * Internally perform a file->cd()
    */
   template<class T>
-  Strings file_get_names_of(TFile* file = nullptr)
+  Colib::Strings file_get_names_of(TFile* file = nullptr)
   {
     // init
-    Strings ret;
+    Colib::Strings ret;
     T *temp_obj = new T(); 
   
     // Check the files :
@@ -3277,8 +3305,8 @@ namespace Colib
   {
     auto const & bins = hist->GetNbinsX();
     
-    if (bin_min<length) throw_error("Colib::adaptative_mean : bin_min must be at least length bins from the edge.");
-    if ((bins-bin_max)<length) throw_error("Colib::adaptative_mean : bin_max must be at least length bins from the edge.");
+    if (bin_min<length) Colib::throw_error("Colib::adaptative_mean : bin_min must be at least length bins from the edge.");
+    if ((bins-bin_max)<length) Colib::throw_error("Colib::adaptative_mean : bin_max must be at least length bins from the edge.");
 
     TH1F* out = new TH1F("out", "out", bins, hist->GetXaxis()->GetXmin(), hist->GetXaxis()->GetXmax());
     int sum = 0;
@@ -3331,7 +3359,7 @@ namespace Colib
     // Get the size of each file and the total amount of files
     double total_size = 0;
     std::vector<double> size_files;
-    Strings name_files;
+    Colib::Strings name_files;
     for (int i = 0; i < nb_files; ++i) 
     {
       TObjString* str = (TObjString*)files->At(i);
@@ -3367,7 +3395,7 @@ namespace Colib
       {
         mutex.lock();
         // Take the needed number of files :
-        Strings files;
+        Colib::Strings files;
         double thread_size = 0;
         for (; infile_i<nb_files; ++infile_i)
         {
@@ -3666,9 +3694,9 @@ auto removeLines(TH2F* histo, std::vector<std::pair<int, int>> bins, int nb_it =
   return ret;
 }
 
-Strings wildcard(std::string const & name)
+Colib::Strings wildcard(std::string const & name)
 {
-  Strings ret;
+  Colib::Strings ret;
   std::istringstream iss(gSystem->GetFromPipe(("ls "+name).c_str()).Data());
   print(iss.str());
   std::string tmp;
@@ -3691,7 +3719,7 @@ void libRoot()
 
  // unique_TFile file(TFile::Open(filename.c_str(), "READ"));
   // file -> cd();
-  // if (!file.get()->IsOpen()) throw_error("Can't open"+filename);
+  // if (!file.get()->IsOpen()) Colib::throw_error("Can't open"+filename);
   // print("Reading", filename);
   
   // TIter nextKey(file->GetListOfKeys());
@@ -3714,7 +3742,7 @@ void libRoot()
   //       {
   //         print(all_TH1F[histo_nb]->GetName());
   //         if (name == all_TH1F[histo_nb]->GetName()) all_TH1F[histo_nb]->Add(histo);
-  //         else throw_error("Root files not identical !!!");
+  //         else Colib::throw_error("Root files not identical !!!");
   //       }
   //       histo_nb++;
   //     }
@@ -3810,8 +3838,8 @@ void libRoot()
   //     m_trees.push_back( m_files.back() -> Get<TTree>(m_name.c_str()) );
   //   }
   
-  //   Strings m_input_files_expressions;
-  //   Strings m_files_vec;
+  //   Colib::Strings m_input_files_expressions;
+  //   Colib::Strings m_files_vec;
   
   //   UInt_t    m_tree_cursor = 0;
   //   ULong64_t m_evt_cursor = 0;

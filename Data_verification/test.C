@@ -9,14 +9,14 @@ void test(){
   static constexpr std::array<int, 14> ppp_gates = {205, 222, 244, 279, 301, 309, 642, 688, 699, 903, 921, 942, 966, 991}; // keV
 
   static auto constexpr ddd_gate_bin_max = maximum(ddd_gates)+gate_bin_size+1;
-  static auto constexpr ddd_gate_lookup = LUT<ddd_gate_bin_max> ([](int bin){
-    for (auto const & gate : ddd_gates) if (abs_const(gate-bin)<3) return true;
+  static auto constexpr ddd_gate_lookup = Colib::LUT<ddd_gate_bin_max> ([](int bin){
+    for (auto const & gate : ddd_gates) if (Colib::abs_const(gate-bin)<3) return true;
     return false;
   });
-  static auto constexpr ddd_id_gate_lkp = LUT<ddd_gate_bin_max> ([&](int bin){
+  static auto constexpr ddd_id_gate_lkp = Colib::LUT<ddd_gate_bin_max> ([&](int bin){
     if (ddd_gate_lookup[bin])
     {
-      for (int i = 0; i<ddd_gates.size(); ++i) if (abs_const(ddd_gates[i] - bin)<3) return i;
+      for (int i = 0; i<ddd_gates.size(); ++i) if (Colib::abs_const(ddd_gates[i] - bin)<3) return i;
       print("wierd....");
       return 0;
     }

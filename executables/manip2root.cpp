@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
       else if (data == "-O") outpathStr = argv[argi++];
       else manip.addPath(data);
     }
-    if (!manip) throw_error(concatenate("manip", manip, " empty !"));
+    if (!manip) Colib::throw_error(concatenate("manip", manip, " empty !"));
     
     if (outpathStr == defaultOutpath)
     {

@@ -3,12 +3,12 @@
 void Halflife_reader(std::string filename = "merge_dC1.root")
 {
   auto file = TFile::Open(filename.c_str());
-  if (!file) throw_error(filename+ "absent !");
+  if (!file) Colib::throw_error(filename+ "absent !");
   auto ddt = file->Get<TH3F>("ddt");
   auto ddt_veto = file->Get<TH3F>("ddt_veto");
   auto dd_p = file->Get<TH2F>("dd_p");
   CoAnalyse::removerBackground(dd_p, 15);
-  if (!ddt || !ddt_veto) throw_error("Histograms not present");
+  if (!ddt || !ddt_veto) Colib::throw_error("Histograms not present");
   auto clean_ddt = Colib::removeVeto(ddt, ddt_veto, 1.10335, "clean_ddt");
   clean_ddt->SetTitle(clean_ddt->GetName());
   auto dt642 = myProjectionXZ(clean_ddt, 640/2, 644/2, "dt642");

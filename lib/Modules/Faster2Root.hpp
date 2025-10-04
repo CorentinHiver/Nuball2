@@ -243,14 +243,14 @@ void Faster2Root::load(int argc, char** argv)
     else if (command == "-t") loadTimeshifts(argv[++i]);
     else if (command == "--throw-singles") m_throw_single = true;
     else if (command == "--trigger") loadTriggerFile(argv[++i]);
-    else {throw_error("Unkown command" + command);}
+    else {Colib::throw_error("Unkown command" + command);}
   }
 
   // Checking consistency of parameters :
   if (m_eventBuilding && !m_timeshifts)
   {
     print(Colib::Color::RED, "Time alignment must be set together with event building. Use lib/Modules/Timeshiftor.hpp to calculate them.", Colib::Color::RESET);
-    throw_error(error_message["DEV"]);
+    Colib::throw_error(Colib::error_message["DEV"]);
   }
   else if (!m_eventBuilding && m_timeshifts)
   {
@@ -258,7 +258,7 @@ void Faster2Root::load(int argc, char** argv)
   }
   if (m_use_trigger && !m_eventBuilding)
   {
-    throw_error("Can't use a trigger without event building ! Use parameter -e [time_window_ns] or method Faster2Root::buildEvents(time_window_ns).");
+    Colib::throw_error("Can't use a trigger without event building ! Use parameter -e [time_window_ns] or method Faster2Root::buildEvents(time_window_ns).");
   }
 
   // Perform initializations :
@@ -348,7 +348,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
   {
     tree->SetTitle("Nuball2 without event building");
     event.writing(tree.get(), (m_calibration) ? "mltEQp" : "mlteqp");
-    pauseCo();
+    Colib::pause();
   }
 
   if (m_calibration     ) tree -> SetTitle((tree->GetTitle()+std::string(" with calibration"         )                 ).c_str());
@@ -369,7 +369,7 @@ void Faster2Root::convertFile(Hit & hit, FasterReader & reader, Path const & out
     }
   }
 
-  if (reader.getCounter()<1) {print("NO DATA IN FILE", reader.getFilename()); throw_error("DATA");}
+  if (reader.getCounter()<1) {print("NO DATA IN FILE", reader.getFilename()); Colib::throw_error("DATA");}
   m_total_hits += reader.getCounter();
   longlong evts       = 0;
   longlong evts_trigg = 0;

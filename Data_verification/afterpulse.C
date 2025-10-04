@@ -16,7 +16,7 @@ void afterpulse()
   CloversV2 clovers;
   while(tree.readNext())
   {
-    if (tree.cursor()%(int)(1.e7) == 0) print(nicer_double(tree.cursor(), 0));
+    if (tree.cursor()%(int)(1.e7) == 0) print(Colib::nicer_double(tree.cursor(), 0));
     clovers = event;
     auto const & multC = clovers.clean.size();
     if (multC == 1) singles -> Fill(clovers.clean[0]->nrj);

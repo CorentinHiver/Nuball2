@@ -76,10 +76,9 @@ public:
 
   /// @brief Writes the coefficients in a file in the following way : "label coeff0 coeff1 coeff2 ... scale"
   void writeTo(std::string const & filename, std::string const & label) const;
-  /// @brief Print on console
+  void writeTo(std::ostream & out, std::string const  label) const;
+  /// @brief Print or write
   friend std::ostream& operator<<(std::ostream& out, CalibAndScale const & calib);
-  /// @brief Write to output file (but unlike CalibAndScale::writeTo, without a label)
-  friend std::ofstream& operator<<(std::ofstream& fout, CalibAndScale const & calib);
 
   operator bool() const & {return m_ok;}
 
@@ -123,21 +122,18 @@ public:
 
   auto const & operator[](int const & run) const {return m_calibs.at(run);}
   
-  bool hasRun(int const & run) const {return found(m_calibs, run);}
+  bool hasRun(int const & run) const {return key_found(m_calibs, run);}
 
+  auto const & get() const {return m_calibs;}
   
   friend std::ostream& operator<<(std::ostream& out, CalibAndScales const & calibs)
   {
-    for (auto const & calib : calibs.m_calibs) out << calib << std::endl;
-    return out;
-  }
+    auto runs = Colib::list_of_keys(calibs.get());
 
-  friend std::ofstream& operator<<(std::ofstream& fout, CalibAndScales const & calibs)
-  {
-    auto runs = list_of_keys(calibs.m_calibs);
-    std::sort(runs.begin(), runs.end());
-    for (auto const & run : runs) fout << run << " " << calibs[run] << std::endl;
-    return fout;
+    if (dynamic_cast<std::ofstream*>(&out)) for (auto const & run : runs) calibs[run].writeTo(out, std::to_string(run));
+    else for (auto const & run : runs) out << calibs[run] << std::endl;
+
+    return out;
   }
 
   auto begin() {return m_calibs.begin();}
@@ -240,11 +236,11 @@ std::ostream& operator<<(std::ostream& out, CalibAndScale const & calib)
   return out;
 }
 
-std::ofstream& operator<<(std::ofstream& fout, CalibAndScale const & calib)  
-{
-  fout << calib;
-  return fout;
-}
+// std::ofstream& operator<<(std::ofstream& fout, CalibAndScale const & calib)  
+// {
+//   fout << calib;
+//   return fout;
+// }
 
 double CalibAndScale::linear_inv_calib(double const & value) const
 {
@@ -268,10 +264,14 @@ double CalibAndScale::calibrate(double const & value) const
   return ret;
 }
 
-
 void CalibAndScale::writeTo(std::string const & filename, std::string const & label) const
 {
   std::ofstream out(filename, std::ios::out | std::ios::app);
+  this -> writeTo(filename, label);
+}
+
+void CalibAndScale::writeTo(std::ostream & out, std::string const  label) const
+{
   out << label;
   for (auto const & coeff : m_coeffs) out << " " << coeff;
   out << " " << m_scale << std::endl;

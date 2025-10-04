@@ -80,7 +80,7 @@ void macro2(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
 
       for (int evt_i = 1; (evt_i < chain->GetEntries() && evt_i < nb_hits_read); evt_i++)
       {
-        if (evt_i%((int)1.e+6) == 0) print(nicer_double(evt_i, 0), "events");
+        if (evt_i%((int)1.e+6) == 0) print(Colib::nicer_double(evt_i, 0), "events");
 
         chain->GetEntry(evt_i);
 

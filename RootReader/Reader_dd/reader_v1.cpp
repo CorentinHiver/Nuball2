@@ -196,7 +196,7 @@ void Analysator::analyse()
           if(time_ns<5) totalE_prompt+=smear(nrj, label, random);
           else if(time_ns>20) totalE_delayed+=smear(nrj, label, random);
           // print(nrj,smear(nrj, label, random), totalE_prompt, totalE_delayed);
-          // pauseCo();
+          // Colib::pause();
         }
 
         if (isGe[label])

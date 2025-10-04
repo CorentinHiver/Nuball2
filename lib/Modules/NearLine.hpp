@@ -69,7 +69,7 @@ bool NearLine::readParam(int argc, char ** argv)
 
 NearLine::NearLine(int argc, char ** argv)
 {
-  if (!readParam) throw_error("Wrong parameters...");
+  if (!readParam) Colib::throw_error("Wrong parameters...");
 }
 
 NearLine::~NearLine()

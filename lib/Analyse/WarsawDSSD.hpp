@@ -7,11 +7,11 @@
 namespace DSSD
 {
   static constexpr size_t LUT_size = 1000;
-  static constexpr auto is        = LUT<LUT_size> ([](Label const & label) {return 799 < label && label < 856;});
-  static constexpr auto isRing    = LUT<LUT_size> ([](Label const & label) {return 839 < label && label < 856;});
-  static constexpr auto isSector  = LUT<LUT_size> ([](Label const & label) {return 799 < label && label < 840;});
-  static constexpr auto isSector1 = LUT<LUT_size> ([](Label const & label) {return 799 < label && label < 820;});
-  static constexpr auto isSector2 = LUT<LUT_size> ([](Label const & label) {return 819 < label && label < 840;});
+  static constexpr auto is        = Colib::LUT<LUT_size> ([](Label const & label) {return 799 < label && label < 856;});
+  static constexpr auto isRing    = Colib::LUT<LUT_size> ([](Label const & label) {return 839 < label && label < 856;});
+  static constexpr auto isSector  = Colib::LUT<LUT_size> ([](Label const & label) {return 799 < label && label < 840;});
+  static constexpr auto isSector1 = Colib::LUT<LUT_size> ([](Label const & label) {return 799 < label && label < 820;});
+  static constexpr auto isSector2 = Colib::LUT<LUT_size> ([](Label const & label) {return 819 < label && label < 840;});
   
   static constexpr double z  = 3.25 ; // cm : Distance DSSD-target
   static constexpr double Ri = 1.58; // cm : Inner radius 
@@ -20,19 +20,19 @@ namespace DSSD
   static constexpr std::size_t nb_sectors = 32;
   static constexpr std::size_t nb_strips = nb_rings+nb_sectors;
 
-  static constexpr auto index_ring = LUT<LUT_size> ([]  (Label const & label) 
+  static constexpr auto index_ring = Colib::LUT<LUT_size> ([]  (Label const & label) 
   {
     return (DSSD::isRing[label]) ? label-840 : -1;
   });
 
-  static constexpr auto index_sector = LUT<LUT_size> ([]  (Label const & label) 
+  static constexpr auto index_sector = Colib::LUT<LUT_size> ([]  (Label const & label) 
   {
          if (DSSD::isSector1[label]) return label-800;
     else if (DSSD::isSector2[label]) return label-805;
     else return -1;
   });
 
-  static constexpr auto index = LUT<LUT_size> ([]  (Label const & label) 
+  static constexpr auto index = Colib::LUT<LUT_size> ([]  (Label const & label) 
   {
          if (DSSD::isSector[label]) return int(index_sector[label]);
     else if (DSSD::isRing  [label]) return int(index_ring[label]+nb_sectors);
@@ -180,13 +180,13 @@ class StripsDSSD
 {public:
   StripsDSSD() noexcept = default;
 
-  void virtual fill() = 0;
-  // void fill(StripDSSD* strip, Index const & index)
-  // {
-  //   strips.push_back(strip);
-  //   strips_id.push_back(index);
-  //   ++mult;
-  // }
+  // void virtual fill() = 0;
+  void fill(StripDSSD* strip, Index const & index)
+  {
+    strips.push_back(strip);
+    strips_id.push_back(index);
+    ++mult;
+  }
 
   void clear()
   {
@@ -214,7 +214,7 @@ class RingsDSSD : public StripsDSSD
   StripDSSD* fill(Event const & event, int const & hit_i)
   {
     auto const & index = DSSD::index_ring[event.labels[hit_i]];
-    if (index<0) throw_error("In RingsDSSD::fill(Event event, int hit_i) : index < 0");
+    if (index<0) Colib::throw_error("In RingsDSSD::fill(Event event, int hit_i) : index < 0");
     auto ret = m_rings[index].fill(event, hit_i);
     StripsDSSD::fill(&(m_rings[index]), index);
     return ret;
@@ -390,7 +390,7 @@ class WarsawDSSD
         }
       }
       // print("sector", sector.nrj, sector.time, sector.angle);
-      // pauseCo();
+      // Colib::pause();
     }
 
     // Addback for rings
@@ -416,7 +416,7 @@ class WarsawDSSD
         }
       }
       // print("ring", nrj, time, angle);
-      // pauseCo();
+      // Colib::pause();
     }
 
     std::vector<bool> sector_matched(m_sectors.mult, false); // Sector found its ring match

@@ -186,7 +186,7 @@ int main(int argc, char** argv)
   //   for (int evt_i = 0; evt_i < tree->GetEntries(); evt_i++) 
   //   // for (int evt_i = 1; evt_i < 10000000; evt_i++) 
   //   {
-  //     if (evt_i%int_cast(1.e+5) == 0) print(nicer_double(evt_i, 1));
+  //     if (evt_i%int_cast(1.e+5) == 0) print(Colib::nicer_double(evt_i, 1));
   //     tree->GetEntry(evt_i);
   //     for (int hit_i = 0; hit_i <event.mult; ++hit_i) if (Paris::is[event.labels[hit_i]])
   //     {
@@ -868,7 +868,7 @@ int main(int argc, char** argv)
   //   if (minVertice.size() == 4) function->Fill(a0, a1, func.evaluate({a0, a1, min_a2, min_C}));
   //   if (minVertice.size() == 5) function->Fill(a0, a1, func.evaluate({a0, a1, min_a2, min_a3, min_C}));
   // }
-  //   // pauseCo();
+  //   // Colib::pause();
   // }
 
   // // print("creating chi2 graph 3D");
@@ -881,7 +881,7 @@ int main(int argc, char** argv)
   // //   auto const & C = function3D->GetZaxis()->GetBinCenter(bin_C);
   // //   function3D->Fill(a0, a1, C, func.evaluate({a0, a1, C}));
   // // }
-  // //   // pauseCo();
+  // //   // Colib::pause();
   // // }
 
   // std::vector<TGraph*> graphs;
@@ -1139,7 +1139,7 @@ int main(int argc, char** argv)
   // calib.writeCalibratedHisto("calib/test_calib_rootdata_152Eu.root");
 
   // calibration.loadRootHisto("232Th.root");
-  // pauseCo();
+  // Colib::pause();
   // calibration.verbose(true);
   // calibration.calculate(argv[1], (argc>2) ? std::stoi(argv[2]) : -1, "152Eu");
   // calibration.loadData("/home/corentin/faster_data/N-SI-136/152_Eu_center_after.fast", 20);

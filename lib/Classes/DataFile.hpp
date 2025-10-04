@@ -76,7 +76,7 @@ public:
   void setColumn(std::string const & column) 
   {
     m_chosen_column = first_index_in(m_labels_column, column);
-    if (m_chosen_column == m_labels_column.size()) throw_error(concatenate(
+    if (m_chosen_column == m_labels_column.size()) Colib::throw_error(concatenate(
       "column name ", column, " not found in the data loaded from ", m_input_filename));
   }
 
@@ -155,7 +155,7 @@ protected:
   DataLine m_header; // The header still in strings
 
   //Manages the columns :
-  Strings m_labels_column; // List of the index of the columns
+  Colib::Strings m_labels_column; // List of the index of the columns
   DataPoints m_data_points; // the label of wanted columns casted in the data type
   Bools m_column_name_casted; // To check which column label could not be casted 
   bool m_all_column_name_casted = false; // To check if all the column label could be caster

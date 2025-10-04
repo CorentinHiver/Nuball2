@@ -204,7 +204,7 @@ bool Faster2Histo::load(int const & argc, char** argv)
     else if (command == "--paris_bidim") { m_bidim_paris = true;}
     else if (command == "--paris_bins")    {m_nb_bins_paris = std::stoi(argv[++i]);}
     else if (command == "--paris_bin_max") {m_bin_max_paris = std::stod(argv[++i]);} 
-    else {throw_error("Unkown command " + command);}
+    else {Colib::throw_error("Unkown command " + command);}
   }
 
   // Checking the number of files to treat :

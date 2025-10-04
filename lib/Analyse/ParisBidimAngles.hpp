@@ -114,8 +114,8 @@ void ParisBidimAngles::load(std::string const & _filename)
 
   std::ifstream inputfile(filename, std::ios::in);
 
-  if (!inputfile.good()) {print("CAN'T OPEN THE PARIS ANGLES FILE " + filename); throw_error("PARIS ANGLES");}
-  else if (file_is_empty(inputfile)) {print("PARIS ANGLES FILE", filename, "EMPTY !"); throw_error("PARIS ANGLES");}
+  if (!inputfile.good()) {print("CAN'T OPEN THE PARIS ANGLES FILE " + filename); Colib::throw_error("PARIS ANGLES");}
+  else if (file_is_empty(inputfile)) {print("PARIS ANGLES FILE", filename, "EMPTY !"); Colib::throw_error("PARIS ANGLES");}
 
   std::string line;
   getline(inputfile, line);

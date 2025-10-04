@@ -9,7 +9,6 @@
 
 namespace Colib
 {
-  
   class Chi2Calculator
   {
   public:
@@ -21,49 +20,70 @@ namespace Colib
     double operator()(THist* const test, FlexibleHisto const & histo)
     {
       auto testCal = histo(test);
-      testCal->SetName((test->GetName() + std::string("calib : ") + mergeStrings(histo.getCalib().get(), "_")).c_str());
+      testCal -> SetName((test -> GetName() + std::string("calib : ") + mergeStrings(histo.getCalib().get(), "_")).c_str());
       return calculate(testCal);
     }
     
-    template<class THist> double calculate(THist* const testCal) const
+    /// @brief Calculates the chi2 between the reference histogram and a given histogram
+    template<class THist> double calculate(THist* const histo) const
     {
       double sum_errors_squared = 0.0;
-      auto const & bins = testCal->GetNbinsX();
-  
-      for (int bin = 0; bin<bins; bin++) if (testCal->GetBinContent(bin)>0)
+      auto bin_min = histo->FindBin(m_bounds.first);
+      auto bin_max = histo -> GetNbinsX();
+
+      if (0 < m_bounds.second)
+      {
+        auto const & test_bin_max = histo->FindBin(m_bounds.second);
+        if (test_bin_max < bin_max) bin_max = test_bin_max;
+      }
+
+      for (int bin = bin_min; bin<bin_max; ++bin) if (histo -> GetBinContent(bin)>0)
       {
         // Calculate the difference for this bin :
-        auto const & diff = m_reference->GetBinContent(bin) - testCal->GetBinContent(bin);
-  
+        auto const & diff = m_reference -> GetBinContent(bin) - histo -> GetBinContent(bin);
+
         // Variance of the bin :
-        double const & weight = 1/testCal->GetBinContent(bin); // V = sigma² = 1/N
-  
+        double const & weight = 1 / histo -> GetBinContent(bin); // V = sigma² = 1/N
+
         // Add the diff to the total squared diff of the spectra :
         sum_errors_squared += diff*diff*weight;
-  
+
       }
-      return sum_errors_squared/bins;
+      return sum_errors_squared/(bin_max - bin_min);
     }
 
+    /// @brief Calculates the chi2 between the reference histogram and a given flexible histogram
     double calculate(FlexibleHisto const & histo_flex) const
     {
-      double sum_errors_squared = 0.0;
+      auto histo = histo_flex.getHisto();
 
-      auto const & bins = histo_flex.getHisto()->GetNbinsX();
-  
-      for (int bin = 0; bin<bins; bin++) if (histo_flex[bin]>0)
+      double sum_errors_squared = 0.0;
+      auto bin_min = histo->FindBin(m_bounds.first);
+      auto bin_max = histo -> GetNbinsX();
+
+      if (0 < m_bounds.second)
+      {
+        auto const & test_bin_max = histo->FindBin(m_bounds.second);
+        if (test_bin_max < bin_max) bin_max = test_bin_max;
+      }
+
+      // std::vector<double> values;
+
+      for (int bin = bin_min; bin<bin_max; bin++) if (int(histo_flex[bin])>0)
       {
         // Calculate the difference for this bin :
-        auto const & diff = m_reference->GetBinContent(bin)-histo_flex[bin];
+        auto const & diff = m_reference -> GetBinContent(bin) - histo_flex[bin];
   
         // Variance of the bin :
         double const & weight = 1/histo_flex[bin]; // V = sigma² = 1/N
   
         // Add the diff to the total squared diff of the spectra :
         sum_errors_squared += diff*diff*weight;
-  
+        // values.push_back(diff*diff*weight);
+        if (diff*diff*weight>1e7) print(diff*diff*weight); // work in progress
       }
-      return sum_errors_squared/bins;
+      // print(*std::max_element(values.begin(), values.end()));
+      return sum_errors_squared/(bin_max - bin_min);
     }
 
     double calculateForMinuit(double const * par)
@@ -73,12 +93,12 @@ namespace Colib
       auto histo_flex = *m_histo_flex; // Dereference aliasing for elegance and effiency
       histo_flex.setCalibAndScale({par[0], par[1], par[2]});
 
-      auto const & bins = histo_flex.getHisto()->GetNbinsX();
+      auto const & bins = histo_flex.getHisto() -> GetNbinsX();
   
       for (int bin = 0; bin<bins; bin++) if (histo_flex[bin]>0)
       {
         // Calculate the difference for this bin :
-        auto const & diff = m_reference->GetBinContent(bin)-histo_flex[bin];
+        auto const & diff = m_reference -> GetBinContent(bin)-histo_flex[bin];
   
         // Variance of the bin :
         double const & weight = 1/histo_flex[bin]; // V = sigma² = 1/N
@@ -95,9 +115,14 @@ namespace Colib
       m_histo_flex = histo_flex;
     }
     
+    void setBounds(std::pair<int, int> bounds) {m_bounds = bounds;}
+    void setBounds(int bound_min, int bound_max) {m_bounds = {bound_min, bound_max};}
+
   private:
+    std::mutex m_mutex;
     FlexibleHisto * m_histo_flex = nullptr; // Used only for the minuit interface
     TH1* m_reference = nullptr;
+    std::pair<int, int> m_bounds = {0,-1};
   };
   
   struct MinimiserVariable
@@ -172,12 +197,12 @@ namespace Colib
       }
     }
     
-    template<class THist>
-    void minmise(THist* reference, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
-    {
-      Chi2Calculator chi2Calc(reference);
-      this->minmise(chi2Calc, test, xParam, yParam, zParam);
-    }
+    // template<class THist>
+    // void minmise(THist* reference, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
+    // {
+    //   Chi2Calculator chi2Calc(reference);
+    //   this->minmise(chi2Calc, test, xParam, yParam, zParam);
+    // }
 
     template<class THist>
     void minimise(Chi2Calculator & chi2Calc, THist* test, MinimiserVariable xParam, MinimiserVariable yParam, MinimiserVariable zParam)
@@ -253,7 +278,7 @@ namespace Colib
         // std::cout << "Minimum at: x0 = " << xs[0] << ", x1 = " << xs[1] << ", x2 = " << xs[2] << std::endl;
         // std::cout << "Minimum value: f = " << minimizer->MinValue() << std::endl;
       #else 
-        throw_error("Compile with -DINCLUDE_MINUIT");
+        Colib::throw_error("Compile with -DINCLUDE_MINUIT");
       #endif //INCLUDE_MINUIT
       }
     }

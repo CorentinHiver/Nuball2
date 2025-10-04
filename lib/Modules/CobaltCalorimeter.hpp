@@ -297,7 +297,7 @@ void CobaltCalorimeter::launchRoot(std::string const & foldername, int nb_files)
 bool CobaltCalorimeter::NaI_pid(float nrj, float nrj2)
 {
   // debug((nrj2-nrj)/double_cast(nrj2));
-  // pauseDebug();
+  // Colib::pauseDebug();
   paris_pid.Fill((nrj2-nrj)/double_cast(nrj2));
   return ((nrj2-nrj)/double_cast(nrj2) > 0.15);
 }
@@ -694,7 +694,7 @@ void CobaltCalorimeter::Analyse()
 
   print("full energy efficiency : ", int_cast(PE_efficiency*100.), "%");
 
-  // pauseCo();
+  // Colib::pause();
 
   print("----------------");
 
@@ -706,7 +706,7 @@ void CobaltCalorimeter::write()
   File outFilename(m_outFilename);
   outFilename.setExtension("root");
   auto outfile(TFile::Open(outFilename.c_str(), "RECREATE"));
-  if (!outfile) throw_error(concatenate("Can't create outfile ", outFilename.c_str()).c_str());
+  if (!outfile) Colib::throw_error(concatenate("Can't create outfile ", outFilename.c_str()).c_str());
 
   outfile->cd();
   // labels.Write();

@@ -85,7 +85,7 @@ public:
     }
     else 
     {
-      throw_error("FATAL : inconsistency in the timestamps !!! in RF_Manager::relTime()");
+      Colib::throw_error("FATAL : inconsistency in the timestamps !!! in RF_Manager::relTime()");
       return 0;
     }
   }

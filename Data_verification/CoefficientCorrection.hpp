@@ -17,8 +17,8 @@ class CoefficientCorrection
     std::string line;
     while (file >> r >> id >> c0 >> c1 >> c2 >> v1 >> v2)
     {
-      if (r>nb_runs-1) throw_error(concatenate ("run number", r, "out of bounds", 0, nb_runs-1));
-      if (id>nb_det-1) throw_error(concatenate ("detector number", r, "out of bounds", 0, nb_det-1));
+      if (r>nb_runs-1) Colib::throw_error(concatenate ("run number", r, "out of bounds", 0, nb_runs-1));
+      if (id>nb_det-1) Colib::throw_error(concatenate ("detector number", r, "out of bounds", 0, nb_det-1));
       m_coeff[r][id][0]=c0;
       m_coeff[r][id][1]=c1;
       m_coeff[r][id][2]=c2;

@@ -63,7 +63,7 @@ public:
     Initialise_dontMatrixate();
 
     // Check if the type exists :
-    if (!found(detectors.types(), type)) throw_error("RunMatrixator::dontMatrixate(type) : type unkown");
+    if (!found(detectors.types(), type)) Colib::throw_error("RunMatrixator::dontMatrixate(type) : type unkown");
 
     // Fill the map :
     m_dontMatrixateType[type] = true;
@@ -76,7 +76,7 @@ public:
     // Initialise if not :
     Initialise_dontMatrixate();
     // Check entry :
-    if (label>m_dontMatrixateLabel.size()) throw_error("RunMatrixator::dontMatrixate(label) : label out of range");
+    if (label>m_dontMatrixateLabel.size()) Colib::throw_error("RunMatrixator::dontMatrixate(label) : label out of range");
     m_dontMatrixateLabel[label] = true;
   }
 
@@ -130,8 +130,8 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
   // Fills the matrices :
   if (data == "fast")
   {
-    if (!m_calibration) throw_error("NO CALIBRATION");
-    if (!m_timeshifts)  throw_error("NO TIMESHIFTS" );
+    if (!m_calibration) Colib::throw_error("NO CALIBRATION");
+    if (!m_timeshifts)  Colib::throw_error("NO TIMESHIFTS" );
 
     MTFasterReader mt_reader(m_runpath);
     mt_reader.readRaw(dispatch_faster_reader, *this);
@@ -141,7 +141,7 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
     MTRootReader mt_reader(m_runpath);
     mt_reader.execute(dispatch_root_reader, *this);
   }
-  else throw_error("Unkown data kind ! Only handles root and fast");
+  else Colib::throw_error("Unkown data kind ! Only handles root and fast");
   
   print("Reading done in", timer(), timer.unit());
 
@@ -153,7 +153,7 @@ void RunMatrixator::run(std::string const & runpath, std::string const & data)
 void RunMatrixator::Initialise()
 {
   // Hit::setExternalTime(true); // Allows to directly calculate the rf time instead of the relative time
-  if (!detectors) {print("Please Initialise the Detectors"); throw_error("Detectors not loaded");}
+  if (!detectors) {print("Please Initialise the Detectors"); Colib::throw_error("Detectors not loaded");}
   this -> Initialise_dontMatrixate();
   if (m_keep_singles) Builder::keepSingles();
 
@@ -513,7 +513,7 @@ void RunMatrixator::Write()
   // Never tried this try... catch...
   try
   {
-    if (!file) throw_error("Error");
+    if (!file) Colib::throw_error("Error");
   }
   catch(std::runtime_error const & error)
   {

@@ -68,7 +68,7 @@ bool push_back_unique(std::vector<T> & vector, T const & t)
 }
 
 /**
- * @brief Pushes back the new value only if it is superior to the last one (require a number or a class with < operator)
+ * @brief Pushes back the new value only if it is superior to the last one (requires a number or a class with < operator)
  * 
  * @tparam T 
  * @param vector 

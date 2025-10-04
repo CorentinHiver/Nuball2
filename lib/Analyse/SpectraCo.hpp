@@ -428,7 +428,7 @@ std::ostream& operator<<(std::ostream& out, SpectraCo const & spectra)
 template<>
 std::string type_of<SpectraCo>(SpectraCo const & spectra)
 {
-  return "SpectraCo_"+type_of(spectra.minX());
+  return "SpectraCo_"+Colib::type_of(spectra.minX());
 }
 
 ///////////////////
@@ -478,7 +478,7 @@ void SpectraCo::load(TH1* root_spectra)
   else if (root_spectra->IsZombie()) throw HistoZombie();
   if (root_spectra->IsA()->InheritsFrom(TH2::Class()) || root_spectra->IsA()->InheritsFrom(TH3::Class()))
   {
-    throw_error("In SpectraCo::load(TH1* root_spectra) : root_spectra is a TH2 or TH3 !!");
+    Colib::throw_error("In SpectraCo::load(TH1* root_spectra) : root_spectra is a TH2 or TH3 !!");
   }
   m_loaded_TH1 = root_spectra;
 
@@ -636,7 +636,7 @@ void SpectraCo::calibrate(std::vector<double> const & coeffs)
  */
 void SpectraCo::calibrateAndScale(std::vector<double> const & coeffs)
 {
-  if (coeffs.size() < 2) throw_error("in SpectraCo::calibrateAndScale(coeffs) : coeffs size needs to be at least 2 (first coeff is offset and second is scaling)");
+  if (coeffs.size() < 2) Colib::throw_error("in SpectraCo::calibrateAndScale(coeffs) : coeffs size needs to be at least 2 (first coeff is offset and second is scaling)");
   this->calibrate(sub_vec(coeffs, 0, int_cast(coeffs.size())-1));
   (*this)*=coeffs.back();
 }
@@ -1036,7 +1036,7 @@ SpectraPoints const & SpectraCo::findPeaks(int const & threshold, int const & nb
 //  */
 // void SpectraCo::rebin(int const & factor)
 // {
-//   if (factor<1) throw_error("in SpectraCo::rebin(int factor) : factor can't be < 1");
+//   if (factor<1) Colib::throw_error("in SpectraCo::rebin(int factor) : factor can't be < 1");
 //   auto const & rest     = m_size % factor;
 //   int  const & new_size = m_size / factor;
 //   std::vector<double> new_vector(new_size, 0); // Fills the new vector with 0
@@ -1045,7 +1045,7 @@ SpectraPoints const & SpectraCo::findPeaks(int const & threshold, int const & nb
 //   {
 //     m_rebin*=factor; // Saves the rebin factor
 //     for (int new_bin_it = 0; new_bin_it<new_size; new_bin_it++){ 
-//       // pauseCo(); print(new_bin_it);
+//       // Colib::pause(); print(new_bin_it);
 //       for (int bin_j = 0; bin_j<factor; bin_j ++){
 //         // print(int_cast(new_bin_it * factor + bin_j), m_spectra[int_cast(new_bin_it * factor + bin_j)]);
 //         new_vector[new_bin_it] += m_spectra[int_cast(new_bin_it * factor + bin_j)];

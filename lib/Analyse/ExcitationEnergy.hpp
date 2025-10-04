@@ -33,8 +33,8 @@ class ExcitationEnergy
       while(file >> id >> EDssd >> Ex) 
       {
         Ex*=10;
-        if (nb_rings < id) throw_error(concatenate("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : ring_i ", id, " > ", nb_rings));
-        if (nb_subdivisions < EDssd) throw_error(concatenate("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : ring_i ", id, " > ", nb_rings));
+        if (nb_rings < id) Colib::throw_error(concatenate("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : ring_i ", id, " > ", nb_rings));
+        if (nb_subdivisions < EDssd) Colib::throw_error(concatenate("in ExcitationEnergy::ExcitationEnergy(std::string filename, std::string option) : ring_i ", id, " > ", nb_rings));
         m_data[id][EDssd] = Ex;
         m_data_vector_Ex[id].push_back(Ex);
         m_data_vector_EDssd[id].push_back(EDssd);

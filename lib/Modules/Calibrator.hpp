@@ -174,7 +174,7 @@ void Calibrator::histograms::Initialise()
     if (max_label == 0) 
     {
       print("Error using Detector class in Calibrator module."); 
-      throw std::runtime_error(error_message["DEV"]);
+      throw std::runtime_error(Colib::error_message["DEV"]);
     }
     // All the detectors spectra in one plot :
     all_raw_spectra.reset("All_detectors", "All detectors", 
@@ -221,11 +221,11 @@ void Calibrator::histograms::setTypeBins(std::string const & parameters)
     std::string type;
     std::string which_histo;
     is>>type;
-    if (type == "null") {throw_error(type+"type is not recognized for binning in Calibrator");}
+    if (type == "null") {Colib::throw_error(type+"type is not recognized for binning in Calibrator");}
     is >> which_histo;
          if (which_histo == "raw"  ) is >> ADCbins[type].bins >> ADCbins[type].min >> ADCbins[type].max;
     else if (which_histo == "calib") is >> Energybins[type].bins >> Energybins[type].min >> Energybins[type].max;
-    else {throw_error(which_histo+" histo of Calibrator module not recognized ");}
+    else {Colib::throw_error(which_histo+" histo of Calibrator module not recognized ");}
   }
 }
 
@@ -260,7 +260,7 @@ void Calibrator::calculate(std::string const & histograms, std::string const & s
 void Calibrator::loadFitInfo(std::string const & fit_info_file)
 {
   std::ifstream file(fit_info_file, std::ios::in);
-  if (!file.good()) throw_error(concatenate("CANT OPEN ", fit_info_file));
+  if (!file.good()) Colib::throw_error(concatenate("CANT OPEN ", fit_info_file));
   std::string line;
   getline(file, line);
   auto m_header = getList(line, ' ');
@@ -307,7 +307,7 @@ void Calibrator::loadRootHisto(std::string const & histograms)
   
   readFile = TFile::Open(histograms.c_str());
   readFile->cd();
-  if (!readFile || !readFile->IsOpen()) throw_error("Can't open"+histograms);
+  if (!readFile || !readFile->IsOpen()) Colib::throw_error("Can't open"+histograms);
   auto histos (loadFormattedTH1F(readFile));
   for (auto const & it : histos) 
   {

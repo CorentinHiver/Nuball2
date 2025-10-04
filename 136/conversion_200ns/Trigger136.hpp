@@ -68,7 +68,7 @@ public:
   void analyze()
   {
     this->count(); // Need to fill the clovers before analyzing them
-    if (analyzed) throw_error("in Trigger136::analyze() : already analyzed !!"); // Don't analyze twice
+    if (analyzed) Colib::throw_error("in Trigger136::analyze() : already analyzed !!"); // Don't analyze twice
     clovers.analyze();
     for (auto const & id_i : clovers.Hits_id) 
     {

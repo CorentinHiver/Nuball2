@@ -74,7 +74,7 @@ public:
 
   void check(std::initializer_list<T> bounds)
   {
-    if (bounds.size()%2 == 1) throw_error(" Gates Initialiser must have an even number of bounds (one lower and one higher bound)");
+    if (bounds.size()%2 == 1) Colib::throw_error(" Gates Initialiser must have an even number of bounds (one lower and one higher bound)");
   }
   std::size_t const & size() const {return m_size;}
 

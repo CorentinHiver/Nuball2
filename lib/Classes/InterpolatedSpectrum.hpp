@@ -29,7 +29,7 @@ public:
       }
       else
       {
-        throw_error("InterpolatedSpectrum : the only handled order is 1 so far");
+        Colib::throw_error("InterpolatedSpectrum : the only handled order is 1 so far");
       }
     }
     m_ok = true;

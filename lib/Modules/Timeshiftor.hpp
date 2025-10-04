@@ -232,7 +232,7 @@ public:
 
   void rebin(std::string const & detector, Time_ns const & bin_size_ns)
   {
-    if (!find_key(m_bins_per_ns, detector)) throw_error("in Timeshiftor::rebin(std::string detector, float bin_size_ns) : detector not known !!");
+    if (!find_key(m_bins_per_ns, detector)) Colib::throw_error("in Timeshiftor::rebin(std::string detector, float bin_size_ns) : detector not known !!");
     m_bins_per_ns[detector] = bin_size_ns;
   }
 
@@ -823,7 +823,7 @@ void Timeshiftor::Fill(Event const & event, RF_Manager & rf)
     if (event.labels[loop_i] == m_time_ref_label)
     {
       // print(event);
-      // pauseCo();
+      // Colib::pause();
       // Extract informations of the reference :
       auto const & refPos = loop_i; // Position of the reference in the event
       auto const & refE = event.nrjs[refPos]; // Energy deposited in the reference detector
@@ -853,7 +853,7 @@ void Timeshiftor::Fill(Event const & event, RF_Manager & rf)
           m_time_spectra[label].Fill(deltaT);
           m_time_spectra_bidim.Fill(label, deltaT);
         }
-        // pauseCo();
+        // Colib::pause();
       }
     }
   }

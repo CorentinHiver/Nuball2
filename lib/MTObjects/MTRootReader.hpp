@@ -81,7 +81,7 @@ template<class Func, class... ARGS>
 void MTRootReader::read_raw(Calibration const & calibration, Timeshifts const & timeshifts, Func&& func, ARGS &&... args)
 { // Here we are inside each thread :
   if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
-  if (!timeshifts) throw_error("NO TIMESHIFT DATA PROVIDED !!");
+  if (!timeshifts) Colib::throw_error("NO TIMESHIFT DATA PROVIDED !!");
   m_MTfiles = m_files.getListFiles();
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
     std::string filename;

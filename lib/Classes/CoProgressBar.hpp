@@ -73,8 +73,8 @@ void CoProgressBar<T>::showEvery(long const & freq)
 template<class T>
 void CoProgressBar<T>::showFast()
 {
-  if (!m_value)              throw_error("in CoProgressBar<T>::show() : the value has not been set !!");
-  else if (m_value_max == 0) throw_error("in CoProgressBar<T>::show() : the maximum value has not been set !!");
+  if (!m_value)              Colib::throw_error("in CoProgressBar<T>::show() : the value has not been set !!");
+  else if (m_value_max == 0) Colib::throw_error("in CoProgressBar<T>::show() : the maximum value has not been set !!");
 
   auto const & real_percentage = float_cast(*m_value)/m_value_max;
   auto const & nb_chars = int_cast(real_percentage*m_width);
@@ -92,8 +92,8 @@ void CoProgressBar<T>::showFast()
 template<class T>
 void CoProgressBar<T>::show(std::string const & message)
 {
-  if (!m_value)              throw_error("in CoProgressBar<T>::show() : the value has not been set !!");
-  else if (m_value_max == 0) throw_error("in CoProgressBar<T>::show() : the maximum value has not been set !!");
+  if (!m_value)              Colib::throw_error("in CoProgressBar<T>::show() : the value has not been set !!");
+  else if (m_value_max == 0) Colib::throw_error("in CoProgressBar<T>::show() : the maximum value has not been set !!");
 
 
   if (( (*m_value)*100) % m_value_max != 0) return;

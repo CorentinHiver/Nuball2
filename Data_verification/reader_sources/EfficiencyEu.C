@@ -9,7 +9,7 @@ void EfficiencyEu(std::string filename = "152Eu_bidims_source.root")
 {
   auto file = TFile::Open(filename.c_str());
   auto metadata_keepsingles = file->Get<TNamed>("KeepSingles");
-  if (metadata_keepsingles->GetTitle() != std::string("True")) {throw_error("KeepSingles Required");}
+  if (metadata_keepsingles->GetTitle() != std::string("True")) {Colib::throw_error("KeepSingles Required");}
   auto Ge = file->Get<TH1F>("Ge_clean");
   new TCanvas;
   Ge->Draw();

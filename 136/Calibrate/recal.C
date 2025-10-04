@@ -15,7 +15,7 @@ void recal(std::string choice_detectors = "PARIS", std::vector<double> peaks = {
 {
   std::vector<double> Eu152 = {121.7830, 344.2760, 778.9030, 964.1310, 1408.0110};
   std::vector<double> Th232 = {238.632, 338.32, 510.770, 583.191, 911.204, 2614.533};
-  if (choice_detectors == "DSSD") throw_error("Can't be used for DSSD");
+  if (choice_detectors == "DSSD") Colib::throw_error("Can't be used for DSSD");
   detectors.load("index_129.list");
 #ifdef NSI129
   // std::string infile = "~/faster_data/N-SI-129-run_histo/merged/fused_histo.root";

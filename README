@@ -1,5 +1,20 @@
 For any questions, contact me @ corentin.hiver.pro@proton.me
 
 ------------------------
+
 To update git repository
 sh MAJ.sh
+
+------------------------
+
+To make the library accessible, copy the lines
+of interest to bashrc :
+
+export CPLUS_INCLUDE_PATH=/path/to/Nuball2/lib:$CPLUS_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/path/to/Nuball2/lib/MTObjects:$CPLUS_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/path/to/Nuball2/lib/Classes:$CPLUS_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/path/to/Nuball2/lib/Analyse:$CPLUS_INCLUDE_PATH
+
+or 
+
+source /path/to/Nuball2/lib/source.sh

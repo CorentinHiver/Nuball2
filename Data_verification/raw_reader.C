@@ -258,11 +258,11 @@ int main(int argc, char** argv)
   {
     std::string arg_str(argv[i]);
          if (arg_str == "-f") {auto arg = int(std::stod(argv[++i])); print("number of files set to", arg); nb_files = arg;}
-    else if (arg_str == "-n") {auto arg = int(std::stod(argv[++i])); print("number of hits per file set to", nicer_double(arg), 0); nb_hits = arg;}
+    else if (arg_str == "-n") {auto arg = int(std::stod(argv[++i])); print("number of hits per file set to", Colib::nicer_double(arg), 0); nb_hits = arg;}
     else if (arg_str == "-m") {auto arg = int(std::stod(argv[++i])); print("number of threads set to", arg); nb_threads = arg;}
     else if (arg_str == "-s") {print("source set to", argv[++i]); source = argv[i];}
     else if (arg_str == "--keep-singles") {print("Keep singles"); keep_singles = true;}
-    else throw_error("Unkown"+ arg_str);
+    else Colib::throw_error("Unkown"+ arg_str);
   }
 
   raw_reader();

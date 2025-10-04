@@ -41,7 +41,7 @@ auto gate_plot(int i, THist * histo, TCanvas * canvas, std::string name, double 
   auto data_counts = myIntegralUser(histo, E-R/2.35*2., E+R/2.35*2.);
   auto net_data_count = data_counts-bckg_counts;
   print(name, ": bckg counts =", bckg_counts, "net count : ", net_data_count, "th counts", 
-  nb, "-> sigma = ", nicer_double(net_data_count/std::sqrt(bckg_counts), 2), "sigma th = ", nicer_double(nb/std::sqrt(bckg_counts), 2));
+  nb, "-> sigma = ", Colib::nicer_double(net_data_count/std::sqrt(bckg_counts), 2), "sigma th = ", Colib::nicer_double(nb/std::sqrt(bckg_counts), 2));
   // auto histo_bckg = static_cast<TH1F*>(clone->Clone(("d_clean_642g_bckg_"+std::to_string(int(E))).c_str()));
   Colib::simulate_peak(histo_bckg, E, R, nb);
   histo_bckg->SetLineColor(kRed);
@@ -60,11 +60,11 @@ auto gate_plot(int i, THist * histo, TCanvas * canvas, std::string name, double 
 
 void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
 {
-  print("nb_SI : ", nicer_double(nb_SI, 3));
+  print("nb_SI : ", Colib::nicer_double(nb_SI, 3));
   print("yield_236, yield_SI : ", yield_236, yield_SI, "/s");
   print();
   auto file = TFile::Open(filename.c_str());
-  if (!file) throw_error(filename+ "absent !");
+  if (!file) Colib::throw_error(filename+ "absent !");
 
   auto d = file->Get<TH1F>("d");
   auto d_P = file->Get<TH1F>("d_P");
@@ -149,7 +149,7 @@ void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
     auto data_counts = myIntegralUser(histo, E-R/2.35*2., E+R/2.35*2.);
     auto net_data_count = data_counts-bckg_counts;
     print(name, ": bckg counts =", bckg_counts, "net count : ", net_data_count, "th counts", 
-      nb, "-> sigma = ", nicer_double(net_data_count/std::sqrt(bckg_counts), 2), "sigma th = ", nicer_double(nb/std::sqrt(bckg_counts), 2));
+      nb, "-> sigma = ", Colib::nicer_double(net_data_count/std::sqrt(bckg_counts), 2), "sigma th = ", Colib::nicer_double(nb/std::sqrt(bckg_counts), 2));
     // auto histo_bckg = static_cast<TH1F*>(histo->Clone(("d_bckg_"+std::to_string(int(E))).c_str()));
     Colib::simulate_peak(histo_bckg, E, R, nb);
     histo_bckg->SetLineColor(kRed);

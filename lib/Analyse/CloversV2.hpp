@@ -8,7 +8,6 @@
 // inline bool isGe(Index const & label) {return (label < 200 && (label+1)%6 > 1);}
 /**
  * @brief A class to simplify the analysis of the Clover data
- * @details Removes the handling of the crystal of maximal energy deposit.
  * @todo Create a "greylist" for HPGe to reject because of poor resolution, but still usable for calorimetry 
  * and Compton rejection of other HPGe of the same clover (i.e., they may have bad energy resolution, 
  * if their timing is good they should be considered "grey")
@@ -49,14 +48,14 @@ public:
   }
 
   /// @brief The clover index (labels [23;29] -> 0, labels [190;196] -> 23)
-  static constexpr auto index        = LUT<1000> ([](Label const & label) -> Index {return Index_cast((label-23)/6);});
-  static constexpr auto subIndex     = LUT<1000> ([](Label const & label) -> Index {return Index_cast((label-23)%6);});
+  static constexpr auto index        = Colib::LUT<1000> ([](Label const & label) -> Index {return Index_cast((label-23)/6);});
+  static constexpr auto subIndex     = Colib::LUT<1000> ([](Label const & label) -> Index {return Index_cast((label-23)%6);});
   static constexpr auto crystalIndex = subIndex; // Aliasing
-  static constexpr auto is           = LUT<1000> ([](Label const & label) -> bool  {return 22 < label && label < 168;});
-  static constexpr auto isGe         = LUT<1000> ([](Label const & label) -> bool  {return is[label] && subIndex[label] > 1;});
-  static constexpr auto isBGO        = LUT<1000> ([](Label const & label) -> bool  {return is[label] && subIndex[label] < 2;});
-  static constexpr auto isR2         = LUT<1000> ([](Label const & label) -> bool  {return is[label] && label > 94;});
-  static constexpr auto isR3         = LUT<1000> ([](Label const & label) -> bool  {return is[label] && label < 95;});
+  static constexpr auto is           = Colib::LUT<1000> ([](Label const & label) -> bool  {return 22 < label && label < 168;});
+  static constexpr auto isGe         = Colib::LUT<1000> ([](Label const & label) -> bool  {return is[label] && subIndex[label] > 1;});
+  static constexpr auto isBGO        = Colib::LUT<1000> ([](Label const & label) -> bool  {return is[label] && subIndex[label] < 2;});
+  static constexpr auto isR2         = Colib::LUT<1000> ([](Label const & label) -> bool  {return is[label] && label > 94;});
+  static constexpr auto isR3         = Colib::LUT<1000> ([](Label const & label) -> bool  {return is[label] && label < 95;});
   
   bool fill   (Event const & event, int const & hit_i);
   bool fillRaw(Event const & event, int const & hit_i);
@@ -135,8 +134,8 @@ public:
   static void setBlacklist         (Blacklist const & blacklist         ) {sBlacklist          = blacklist         ;}
   static void setOverflow          (Overflow  const & overflow_Ge       ) {sOverflow           = overflow_Ge       ;}
   
-  static void useBlacklist  (bool const & b = true) {sUseBlacklist = b;}
-  static void rejectOverflow(bool const & b = true) {sUseOverflow  = b;}
+  static void rejectBlacklist(bool const & b = true) {sUseBlacklist = b;}
+  static void rejectOverflow (bool const & b = true) {sUseOverflow  = b;}
 
   static bool rejectDetector(Label const & label, NRJ const & nrj)
   {
@@ -144,7 +143,7 @@ public:
     if (sUseBlacklist)
     {
       // User-selected blacklisted detectors labels :
-      static auto blacklistedLabel = LUT<1000>([](Label const & _label) {
+      static auto blacklistedLabel = Colib::LUT<1000>([](Label const & _label) {
         return found(sBlacklist, _label);
       });
 
@@ -154,8 +153,8 @@ public:
     if (sUseOverflow)
     {
       // User-selected overflow energy value :
-      static auto hasOverflow = LUT<1000>([](Label const & _label){
-        return found(sOverflow  , _label);
+      static auto hasOverflow = Colib::LUT<1000>([](Label const & _label){
+        return key_found(sOverflow, _label);
       });
        ret = hasOverflow[label] && nrj > sOverflow[label];
     }
@@ -184,7 +183,7 @@ private:
  */
 bool CloversV2::fill(Event const & event, int const & hit_i)
 {
-  if (m_analyzed) throw_error("CloversV2::fill() called while already analyzed, you need to CloversV2::reset() (or clear()) first");
+  if (m_analyzed) Colib::throw_error("CloversV2::fill() called while already analyzed, you need to CloversV2::reset() (or clear()) first");
   auto const & label = event.labels[hit_i];
   auto const & nrj   = event.nrjs  [hit_i];
   
@@ -229,7 +228,7 @@ bool CloversV2::fill(Event const & event, int const & hit_i)
  */
 bool CloversV2::fillRaw(Event const & event, int const & hit_i)
 {
-  if (m_analyzed) throw_error("CloversV2::fillRaw() called while already analyzed, you need to CloversV2::reset() (or clear()) first");
+  if (m_analyzed) Colib::throw_error("CloversV2::fillRaw() called while already analyzed, you need to CloversV2::reset() (or clear()) first");
   auto const & label = event.labels[hit_i];
   auto const & nrj   = event.adcs  [hit_i];
 
@@ -307,7 +306,7 @@ void CloversV2::analyze() noexcept
       BGO        .push_back(clover_ptr);
       cleanBGO   .push_back(clover_ptr);
     }
-    else throw_error("CloversV2::analyze() : aille aille aille");
+    else Colib::throw_error("CloversV2::analyze() : aille aille aille");
   }
 }
 
@@ -346,7 +345,7 @@ void CloversV2::analyzeRaw() noexcept
       BGOClean_id.push_back(clover_index);
       cleanBGO.push_back(clover_ptr);
     }
-    else throw_error("c pas normal ça");
+    else Colib::throw_error("c pas normal ça");
   }
 }
 

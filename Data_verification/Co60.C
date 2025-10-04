@@ -66,7 +66,7 @@ void eff(MultiHist<THist> & histo, int nb_gate, int coinc_low_fit = 900, int coi
   histo->GetXaxis()->UnZoom();
 
   std::cout << std::setprecision(4);
-  print("Efficiency :", nicer_double(histo->GetEntries(), 0), nicer_double(nb_gate, 0), 100.*double(histo->GetEntries()/nb_gate), "% Full-energy :", 100.*double(pe_integral/nb_gate), "%", 
+  print("Efficiency :", Colib::nicer_double(histo->GetEntries(), 0), Colib::nicer_double(nb_gate, 0), 100.*double(histo->GetEntries()/nb_gate), "% Full-energy :", 100.*double(pe_integral/nb_gate), "%", 
         "realive pe eff : ", 100.*pe_integral/histo->Integral(), "%", histo->GetName());
 }
 
@@ -98,9 +98,9 @@ void Co60()
   // tree->Add(path.c_str());
 
   // print(tree->GetNtrees(), "files found in", path);
-  // if (tree->GetNtrees()==0) throw_error(concatenate("No files in ", path));
+  // if (tree->GetNtrees()==0) Colib::throw_error(concatenate("No files in ", path));
   // print(files.size(), "files found in", path);
-  // if (files.isEmpty()) throw_error(concatenate("No files in ", path));
+  // if (files.isEmpty()) Colib::throw_error(concatenate("No files in ", path));
 
 
   MultiHist<TH2F> timing ("timing", "timing;[keV]", 1000,0,1000, 500,-250_ns,250_ns);
@@ -386,7 +386,7 @@ void Co60()
   if (nb_gate < 1) print("no gate found !!");
   else print(nb_gate, "gate found, along with", nb_gated, "coincident gamma, which means an absolute efficiency of", 100.*double(nb_gated)/double(nb_gate), "%");
   print("Total efficiency :", 100.*(1-double(nb_missed)/double(nb_gate)), "%");
-  print(nicer_double(nb_evts, 0), "evts read");
+  print(Colib::nicer_double(nb_evts, 0), "evts read");
 
   // Efficiency
 

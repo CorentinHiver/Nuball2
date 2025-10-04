@@ -57,7 +57,7 @@ void macro_Afterpulse()
   {
     if (tree.cursor()%(int)(1.e+6) == 0) 
     {
-      printC(nicer_double(tree.cursor(), 0), "hits");
+      printC(Colib::nicer_double(tree.cursor(), 0), "hits");
       if (max_cursor>0 && tree.cursor() > max_cursor) break;
     }
     test->SetBinContent(tree.cursor(), event.stamp);

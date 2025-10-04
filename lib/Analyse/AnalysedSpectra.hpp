@@ -339,8 +339,8 @@ public:
     m_size(peaks.size()),
     m_order(order)
   {
-    if (peaks.size() != ADCs.size()) throw_error(concatenate("The peak vector has size ", peaks.size(), " and ADC vector size ", ADCs.size()));
-    if (order>2) throw_error("PeaksCalibrator DONT HANDLE order of fit > 2");
+    if (peaks.size() != ADCs.size()) Colib::throw_error(concatenate("The peak vector has size ", peaks.size(), " and ADC vector size ", ADCs.size()));
+    if (order>2) Colib::throw_error("PeaksCalibrator DONT HANDLE order of fit > 2");
 
     m_graph = new TGraph(m_size, ADCs.data(), peaks.data());
     TF1* the_fit = nullptr;

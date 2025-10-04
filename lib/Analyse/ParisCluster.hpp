@@ -240,7 +240,7 @@ void ParisCluster<n>::InitialiseBidims()
     }
   }
   // printArrays();
-  // pauseCo();
+  // Colib::pause();
   gParisClusterInitialised = true;
 }
 

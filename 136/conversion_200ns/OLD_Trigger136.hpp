@@ -67,7 +67,7 @@ public:
   void analyze()
   {
     this->count(); // Need to fill the clovers before analyzing them
-    if (analyzed) throw_error("in Trigger136::analyze() : already analyzed !!"); // Don't analyze twice
+    if (analyzed) Colib::throw_error("in Trigger136::analyze() : already analyzed !!"); // Don't analyze twice
     prompt_clover.analyze();
     delayed_clover.analyze();
     for (auto const & index_i : prompt_clover.GeClean) cleanGe_VS_time.Fill(prompt_clover[index_i].time, prompt_clover[index_i].nrj);

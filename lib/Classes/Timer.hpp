@@ -61,7 +61,7 @@ public:
 
   auto Time(std::string const & unit)
   {
-    if (!found(m_units, unit)) {print("in Timer::Time(string unit) : unit", unit, "unkown... ms by default"); return Time();}
+    if (!key_found(m_units, unit)) {print("in Timer::Time(string unit) : unit", unit, "unkown... ms by default"); return Time();}
     return Time()/m_units[unit];
   }
 

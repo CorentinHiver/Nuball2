@@ -10,33 +10,33 @@ using dType = std::string;
 #define SIZE_LOOKUP 1000
 
 // All detectors lookup tables :
-Bools isGe    (SIZE_LOOKUP);
-Bools isBGO   (SIZE_LOOKUP);
-Bools isLaBr3 (SIZE_LOOKUP);
-Bools isEden  (SIZE_LOOKUP);
-Bools isRF    (SIZE_LOOKUP);
-Bools isParis (SIZE_LOOKUP);
-Bools isDSSD  (SIZE_LOOKUP);
+Colib::Bools isGe    (SIZE_LOOKUP);
+Colib::Bools isBGO   (SIZE_LOOKUP);
+Colib::Bools isLaBr3 (SIZE_LOOKUP);
+Colib::Bools isEden  (SIZE_LOOKUP);
+Colib::Bools isRF    (SIZE_LOOKUP);
+Colib::Bools isParis (SIZE_LOOKUP);
+Colib::Bools isDSSD  (SIZE_LOOKUP);
 
 // -- Clover specific lookup tables -- //
 
-Bools isClover(SIZE_LOOKUP);// is the 
+Colib::Bools isClover(SIZE_LOOKUP);// is the 
 std::vector<uchar> labelToClover(SIZE_LOOKUP,0);
 std::vector<uchar> labelToBGOcrystal(SIZE_LOOKUP,0);
 std::vector<uchar> labelToGeCrystal(SIZE_LOOKUP,0);
-Strings clover_pos (SIZE_LOOKUP,"");
+Colib::Strings clover_pos (SIZE_LOOKUP,"");
 
 // DSSD specific lookup tables :
-Bools isSector(SIZE_LOOKUP);
-Bools isS1    (SIZE_LOOKUP);
-Bools isS2    (SIZE_LOOKUP);
-Bools isRing  (SIZE_LOOKUP);
-Bools isBack  (SIZE_LOOKUP);
-Bools isFront (SIZE_LOOKUP);
+Colib::Bools isSector(SIZE_LOOKUP);
+Colib::Bools isS1    (SIZE_LOOKUP);
+Colib::Bools isS2    (SIZE_LOOKUP);
+Colib::Bools isRing  (SIZE_LOOKUP);
+Colib::Bools isBack  (SIZE_LOOKUP);
+Colib::Bools isFront (SIZE_LOOKUP);
 
 // Other lookup tables :
 Label_vec compressedLabel(SIZE_LOOKUP,-1); // Used to put all the detectors one after the other
-Ints det_indexes(SIZE_LOOKUP,-1);
+Colib::Ints det_indexes(SIZE_LOOKUP,-1);
 
 
 /**
@@ -56,7 +56,7 @@ public:
 
   Detectors(){}
 
-  Strings types_handled = {"ge", "bgo", "labr", "paris", "dssd", "eden", "RF", "default"};
+  Colib::Strings types_handled = {"ge", "bgo", "labr", "paris", "dssd", "eden", "RF", "default"};
 
   // static bool typeHandled(int const & id) const {} TODO
   // static bool typeID(int const & id) const {} TODO
@@ -121,7 +121,7 @@ public:
   /// @brief Returns the number of detector of each type
   auto const & nbOfType(dType const & type) 
   {
-    if (!found(m_types, type)) throw_error("Detectors " + type + " not handled");
+    if (!found(m_types, type)) Colib::throw_error("Detectors " + type + " not handled");
     return m_type_counter[type];
   }
 
@@ -186,16 +186,16 @@ protected:
   std::string m_filename;
 
   // Arrays :
-  Strings m_types = Strings(SIZE_LOOKUP);
-  Bools   m_exists;
-  Strings m_list;
-  Strings m_types_ID;
+  Colib::Strings m_types = Colib::Strings(SIZE_LOOKUP);
+  Colib::Bools   m_exists;
+  Colib::Strings m_list;
+  Colib::Strings m_types_ID;
 
   std::vector<Label> m_labels_vector;
   std::unordered_map<std::string, Label> m_labels_map;
   std::unordered_map<dType, int> m_types_index;
   std::unordered_map<dType, int> m_type_counter; // To get the number of detectors of each type. 
-  std::unordered_map<dType, Strings> m_names;
+  std::unordered_map<dType, Colib::Strings> m_names;
   std::unordered_map<dType, Label_vec> m_labels;
 
   // Binning informations :
@@ -430,8 +430,8 @@ void Detectors::makeArrays()
 
 // std::map<Label, TH1F*> loadFormattedTH1F(TFile * file)
 // {
-//   if (!file || file->IsZombie()) throw_error(concatenate(file->GetName(), " can't be open !!"));
-//   if(!detectors) throw_error(concatenate("As the histograms are labeled with names, one has to provide the correct index.list file !! ",
+//   if (!file || file->IsZombie()) Colib::throw_error(concatenate(file->GetName(), " can't be open !!"));
+//   if(!detectors) Colib::throw_error(concatenate("As the histograms are labeled with names, one has to provide the correct index.list file !! ",
 //                                         "Use parameter -i [filename] or detectors.load(filename)."));
 //   std::map<Label, TH1F*> ret;
 //   auto list_histo = get_TH1F_map(file);
@@ -441,7 +441,7 @@ void Detectors::makeArrays()
 //   {
 //     std::string name = pair.first;
 //     auto const & histo = pair.second;
-//     Strings possible_additional_text = {"_adc", "_energy", "_calib", "_raw"};
+//     Colib::Strings possible_additional_text = {"_adc", "_energy", "_calib", "_raw"};
 //     for (auto const & text : possible_additional_text) remove(name, text);
 //     if (found(detectors.names(), name))
 //     {// Either the histogram label is already the label in int, or is the name of the detector

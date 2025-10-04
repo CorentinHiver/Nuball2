@@ -327,7 +327,7 @@ public:
   void read(std::string const & filename)
   {
     std::ifstream file(filename, std::ios::in);
-    if (!file.good()) throw_error(concatenate("in ParisPointsFile::ParisPointsFile(std::string filename) : file ", filename, " can't be open"));
+    if (!file.good()) Colib::throw_error(concatenate("in ParisPointsFile::ParisPointsFile(std::string filename) : file ", filename, " can't be open"));
     std::string line;
     // Header : 
     std::getline(file, line);
@@ -910,7 +910,7 @@ void click_all_in_one()
 //     residues_peak1.push_back(xBin_max_peak1[bin_it ]-first_slope*bins[bin_it]);
 //     residues_peak2.push_back(xBin_max_peak2[bin_it ]-second_slope*bins[bin_it]);
 //   }
-//   // pauseCo();
+//   // Colib::pause();
 
 //   auto graph_residues_peak1(new TGraph(nb_points, bins.data(), residues_peak1.data()));
 //   graph_residues_peak1->SetName(concatenate("First_peak_", bidim->GetName(), "_residues").c_str());
@@ -979,7 +979,7 @@ void click_all_in_one()
 
 // TH2F* Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI, bool quickNdirty)
 // {
-//   if (!bidim) throw_error("in Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI) : bidim is nullptr");
+//   if (!bidim) Colib::throw_error("in Paris::rotate(TH2F* bidim, double angleLaBr, double angleNaI) : bidim is nullptr");
 //   if (quickNdirty) print("pas beau ...");
 
 //   ADC short_shift = 2000;

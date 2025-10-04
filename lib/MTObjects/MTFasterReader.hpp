@@ -231,7 +231,7 @@ template<class Func, class... ARGS>
 inline void MTFasterReader::readAligned(Func&& func, ARGS &&... args)
 {
   if (!m_files) {print("MTFasterReader::readAligned : NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
-  if (!m_timeshifts) throw_error("MTFasterReader::readAligned : NO TIMESHIFT DATA PROVIDED !!");
+  if (!m_timeshifts) Colib::throw_error("MTFasterReader::readAligned : NO TIMESHIFT DATA PROVIDED !!");
   m_MTfiles = m_files.getListFiles();
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
     #ifdef DEBUGVALGRIND
@@ -287,7 +287,7 @@ template<class Func, class... ARGS>
 inline void MTFasterReader::readEvents(Time const & timewindow, Func&& func, ARGS &&... args)
 {
   if (!m_files) {print("NO DATA FILE FOUND"); throw std::runtime_error("DATA");}
-  if (!m_timeshifts) throw_error("NO TIMESHIFT DATA PROVIDED !!");
+  if (!m_timeshifts) Colib::throw_error("NO TIMESHIFT DATA PROVIDED !!");
   m_MTfiles = m_files.getListFiles();
   MTObject::parallelise_function([&](){ // Here we are inside each thread :
     #ifdef DEBUGVALGRIND

@@ -30,7 +30,7 @@ void readCalib(std::string const & filename = "136_Eu.calpoints")
   for (int index = 0; index<N; index++) 
   {
     auto const & data_index = data_column_index[index]; // The actual index of the row in the file
-    if (data_index>=nb_columns) throw_error("Column "+ std::to_string(data_index) + " out of bonds");
+    if (data_index>=nb_columns) Colib::throw_error("Column "+ std::to_string(data_index) + " out of bonds");
     try
     {
       data_points.push_back(std::stod(m_header[data_index]));
@@ -75,7 +75,7 @@ void readCalib(std::string const & filename = "136_Eu.calpoints")
       //   catch(const std::exception& e)
       //   {
       //     // m_data[index].push_back(-1);
-      //     // if (m_warning_is_error) throw_error(e.what());
+      //     // if (m_warning_is_error) Colib::throw_error(e.what());
       //     print("line", row_i, "column", index, "raised", e.what());
       //   }
       // }
@@ -119,7 +119,7 @@ void readCalib(std::string const & filename = "136_Eu.calpoints")
       }
     }
     
-    if (x.size() != y.size() || N_points!=x.size()) throw_error("size !!");
+    if (x.size() != y.size() || N_points!=x.size()) Colib::throw_error("size !!");
 
     graphs.emplace_back(new TGraphErrors(N_points,x.data(),y.data(),ex.data(),ey.data()));
     auto & graph = graphs.back();

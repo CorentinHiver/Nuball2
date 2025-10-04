@@ -11,7 +11,7 @@ public:
   {
     if (!TFile::IsOpen())
     {
-      pauseCo("Can't open", filename, "in recreate mode !! If already open, please close it if it is open then press a button");
+      Colib::pause("Can't open", filename, "in recreate mode !! If already open, please close it if it is open then press a button");
       TFile::Open(filename.c_str(), option.c_str(), title.c_str(), compress);
     }
   }

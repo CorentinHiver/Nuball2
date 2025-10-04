@@ -419,7 +419,7 @@ void Transitions()
 {
   Nucleus<236, 92> U236("Uranium 236");
 
-//   // Pour une session interactive, on peut faire une LUT avec tous les noyaux existant
+//   // Pour une session interactive, on peut faire une Colib::LUT avec tous les noyaux existant
 //   // et la session simplement la lit
 
   U236.addLevelFast(1052, 4, false); // 0

@@ -99,7 +99,7 @@ public:
   void read(std::string const & filename)
   {
     std::ifstream file(filename, std::ios::in);
-    if (!file.good()) throw_error(concatenate("in ParisPointsFile::ParisPointsFile(std::string filename) : file ", filename, " can't be open"));
+    if (!file.good()) Colib::throw_error(concatenate("in ParisPointsFile::ParisPointsFile(std::string filename) : file ", filename, " can't be open"));
     std::string line;
     // Header : 
     std::getline(file, line);

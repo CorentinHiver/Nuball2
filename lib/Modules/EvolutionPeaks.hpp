@@ -93,7 +93,7 @@ void EvolutionPeaks::loadParameters(int argc, char** argv)
     else if (command == "-o") overwrite(true);
     else if (command == "-O") setOutputName(argv[++i]);
     else if (command == "--rebin") loadRebin(argv[++i]);
-    else {throw_error("Unkown command" + command);}
+    else {Colib::throw_error("Unkown command" + command);}
   }
 
   print("Loaded");
@@ -102,8 +102,8 @@ void EvolutionPeaks::loadParameters(int argc, char** argv)
 void EvolutionPeaks::run()
 {
   FilesManager files(m_dataPath);
-  if (!files) throw_error("DATA");
-  if (m_output.exists() && !m_overwrite) throw_error(concatenate(m_output, " already exists"));
+  if (!files) Colib::throw_error("DATA");
+  if (m_output.exists() && !m_overwrite) Colib::throw_error(concatenate(m_output, " already exists"));
 
   std::vector<int> run_numbers;
   std::string file;
@@ -148,7 +148,7 @@ void EvolutionPeaks::run()
         catch(CastImpossible const & error)
         {
           if(detectors) labels.push_back(detectors[histo_name]);
-          else throw_error(concatenate("As the histograms are labeled with names, one has to provide the correct index.list file !! "
+          else Colib::throw_error(concatenate("As the histograms are labeled with names, one has to provide the correct index.list file !! "
                             "Use parameter -i [filename] or detectors.load(filename)."));
         }
         if (m_calib && m_calib.order(labels.back())>-1 && m_calib.order(labels.back())<2) 
@@ -235,7 +235,7 @@ void EvolutionPeaks::run()
   //   unique_TFile file(TFile::Open(name.c_str(), "READ"));
   //   file->cd();// Going back to the input file scope
   //   auto histo_BR2D1 = file->Get<TH1F>("R3A1_red");
-  //   if (!histo_BR2D1) throw_error("CANT FIND PARIS_BR2D1");
+  //   if (!histo_BR2D1) Colib::throw_error("CANT FIND PARIS_BR2D1");
 
   //   // ------------------------------ //
   //   // -- First linear calibration -- //

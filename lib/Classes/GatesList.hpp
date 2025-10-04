@@ -7,8 +7,8 @@ class GatesList
 public:
   explicit GatesList(int gate_bin_size = 2, std::array<int, n> const & array) 
   {
-    static_assert(are_all_arithmetic<T...>::value, "All types must be arithmetic.");
-    get_size<T...>();
+    static_assert(Colib::are_all_arithmetic<T...>::value, "All types must be arithmetic.");
+    Colib::get_size<T...>();
   }
 };
 
