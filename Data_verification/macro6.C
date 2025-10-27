@@ -15,15 +15,12 @@
 #include "CoefficientCorrection.hpp"
 #include "Utils.h"
 
-///
 /// V3 : use of alignement
 
-// TODO : calculer l'alignement pour tout le monde
-
 #define MaxMult 10
-#define ParticleTrigger
 
 #ifdef KISOMER
+  #define ParticleTrigger
   #define MaxMultDelayed 6
   #define MaxCaloDelayed 3_MeV
   #define MinMultDelayed 1
@@ -52,33 +49,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 {
   CloversV2::setBlacklist({46, 55, 64, 69, 70, 80, 92, 97, 122, 129, 142, 163});
 
-  // CloversV2::setOverflow( 
-  // {
-  //   {25, 12600 }, {26, 13600 }, {27, 10500 }, {28, 7500  }, 
-  //   {31, 11500 }, {32, 11400 }, {33, 8250  }, {34, 9000  }, 
-  //   {37, 11000 }, {38, 11100 }, {39, 11500 }, {40, 11300 }, 
-  //   {43, 12600 }, {44, 11900 }, {45, 11550 }, {46, 9200  }, 
-  //   {49, 14300 }, {50, 12800 }, {51, 13500 }, {52, 12400 }, 
-  //   {55, 5500  }, {56, 5500  }, 
-  //                 {68, 7100  }, {69, 15500 }, {70, 9500  },
-  //   {73, 11650 }, {74, 11600 }, {75, 11800 }, {76, 11600 }, 
-  //   {79, 11500 }, {80, 8000  }, {81, 18200 },
-  //   {85, 7700  }, {86, 12000 }, {87, 12000 }, {88, 11600 }, 
-  //   {91, 7900  }, {92, 10000 }, {93, 11500 }, {94, 11000 }, 
-  //   {97, 11400 }, {98, 11400 }, {99, 11250 }, {100, 8900 }, 
-  //   {103, 11400 }, {104, 11600 }, {105, 11600 }, {106, 11500 }, 
-  //   {109, 12800 }, {110, 1800  }, {111, 13000 }, {112, 11300 }, 
-  //   {115, 12800 }, {116, 11500 }, {117, 10500 }, {118, 11400 }, 
-  //   {121, 12400 }, {122, 20000 }, {123, 10700 }, {124, 20000 }, 
-  //   {127, 11600 }, {128, 11700 }, {129, 10000 }, {130, 11200 }, 
-  //   {133, 11200 }, {134, 9350  }, {135, 9400  }, {136, 9500  }, 
-  //   {139, 13200 }, {140, 12400 }, {141, 12900 }, {142, 4500  }, 
-  //   {145, 8200  }, {146, 9600  }, {147, 9100  }, {148, 10900 }, 
-  //   {151, 11900 }, {152, 12200 }, {153, 11300 }, {154, 12000 }, 
-  //   {157, 9110  }, {158, 9120  }, {159, 9110  }, {160, 11700 }, 
-  //   {163, 11000 }, {164, 11600 }, {165, 11600 }, {166, 11600 }, 
-  // });
-
   std::string target  = "U" ;
   std::string dataset = "C2";
 
@@ -102,7 +72,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   PhoswitchCalib calibPhoswitches("../136/NaI_136_2024.angles");
 
   // Alignement :
-  
+
   CalibAndScales::verbose(0);
   static std::unordered_map<int, CalibAndScales> alignements;
   for (auto const & detector : detectors)
@@ -153,13 +123,10 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       if (target == "Th" && run_number>72) continue;
       if (target == "U" && run_number<74) continue;
 
-      // Nuball2Tree tree(file);
-      // std::unique_ptr<TFile> infile; infile.reset(TFile::Open(file.c_str(), "READ"));
-
       TFile* infile = nullptr;
       TTree* tree   = nullptr;
 
-      {
+      { // Have to lock the multithreading because of ROOT internally-managed pointers
         lock_mutex lock(read_mutex);
         print("reading", file);
         infile = TFile::Open(file.c_str(), "READ");
@@ -171,8 +138,6 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       // -- Creating analysis modules -- //
       Event event;
       event.reading(tree, "mltTEQp");
-
-  
 
       CloversV2 pclovers;
       CloversV2 dclovers;
@@ -204,10 +169,10 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
       TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
       TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
       
-      TH2F* dd = new TH2F(("dd"+thread_i_str).c_str(), "gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
-      TH2F* dd_PM1 = new TH2F(("dd_PM1"+thread_i_str).c_str(), "gamma-gamma delayed Prompt Multiplicity #supeq 1;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
-      TH2F* dp = new TH2F(("dp"+thread_i_str).c_str(), "gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
-      TH2F* dd_pveto = new TH2F(("dd_pveto"+thread_i_str).c_str(), "gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dd_PC3DC3 = new TH2F(("dd_PC3DC3"+thread_i_str).c_str(), "PC3DC3 gamma-gamma delayed;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dd_PM1_PC3DC3 = new TH2F(("dd_PM1_PC3DC3"+thread_i_str).c_str(), "PC3DC3 gamma-gamma delayed Prompt Multiplicity #supeq 1;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dp_PC3DC3 = new TH2F(("dp_PC3DC3"+thread_i_str).c_str(), "PC3DC3 gamma-gamma prompt-delayed;Prompt#gamma[keV];Delayed#gamma[keV]", 4096,0,4096, 4096,0,4096);
+      TH2F* dd_pveto_PC3DC3 = new TH2F(("dd_pveto_PC3DC3"+thread_i_str).c_str(), "PC3DC3 gamma-gamma delayed pveto;E1[keV];E2[keV]", 4096,0,4096, 4096,0,4096);
 
       TH2F* d_tParis = new TH2F(("d_tParis"+thread_i_str).c_str(), "gamma VS time paris;E1[keV];time[ps]", 4096,0,4096, 210,-25_ns,185_ns);
       
@@ -434,6 +399,59 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
           // -- Delayed VS PARIS -- //
           for (auto const & module1 : parisModules) d_tParis->Fill(dclover0->nrj, module1->time);
         }
+      
+        if (PC < 3_MeV && DC < 3_MeV)
+        {        
+          // -- Prompt -- //
+          for (size_t loop_i = 0; loop_i<pclovers.clean.size(); ++loop_i)
+          {
+            auto const & pclover0 = pclovers.clean[loop_i];
+
+            // -- Prompt-prompt -- //
+            for (size_t loop_j = loop_i+1; loop_j<pclovers.clean.size(); ++loop_j)
+            {
+              auto const & pclover1 = pclovers.clean[loop_j];
+              pp_PC3DC3->Fill(pclover0->nrj, pclover1->nrj);
+              pp_PC3DC3->Fill(pclover1->nrj, pclover0->nrj);
+            }
+
+            // -- Prompt-delayed -- //
+            for (auto dclover : dclovers.clean)
+            {
+              dp_PC3DC3->Fill(pclover0->nrj, dclover->nrj);
+            }
+          }
+
+          // -- Delayed -- //
+          for (size_t loop_i = 0; loop_i<dclovers.clean.size(); ++loop_i)
+        {
+          auto const & dclover0 = dclovers.clean[loop_i];
+
+          // -- Delayed-delayed -- //
+          for (size_t loop_j = loop_i+1; loop_j<dclovers.clean.size(); ++loop_j)
+          {
+            auto const & dclover1 = dclovers.clean[loop_j];
+            if (Colib::abs(dclover0->time - dclover1->time) > coincTw) continue;
+            dd_PC3DC3->Fill(dclover0->nrj, dclover1->nrj);
+            dd_PC3DC3->Fill(dclover1->nrj, dclover0->nrj);
+            
+            // -- Prompt veto -- //
+            if (PM == 0)
+            {
+              dd_pveto_PC3DC3->Fill(dclover0->nrj, dclover1->nrj);
+              dd_pveto_PC3DC3->Fill(dclover1->nrj, dclover0->nrj);
+            }
+            else
+            {
+              dd_PM1_PC3DC3->Fill(dclover0->nrj, dclover1->nrj);
+              dd_PM1_PC3DC3->Fill(dclover1->nrj, dclover0->nrj);
+            }
+          }
+
+          // -- Delayed VS PARIS -- //
+          for (auto const & module1 : parisModules) d_tParis->Fill(dclover0->nrj, module1->time);
+        }
+        }
       }
 
       // -- Write the data (monothread) -- //
@@ -450,6 +468,12 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
         dp -> Write("dp", TObject::kOverwrite);
         dd_pveto -> Write("dd_pveto", TObject::kOverwrite);
         dd_PM1 -> Write("dd_PM1", TObject::kOverwrite);
+        
+        pp_PC3DC3 -> Write("pp_PC3DC3", TObject::kOverwrite);
+        dd_PC3DC3 -> Write("dd_PC3DC3", TObject::kOverwrite);
+        dp_PC3DC3 -> Write("dp_PC3DC3", TObject::kOverwrite);
+        dd_pveto_PC3DC3 -> Write("dd_pveto_PC3DC3", TObject::kOverwrite);
+        dd_PM1_PC3DC3 -> Write("dd_PM1_PC3DC3", TObject::kOverwrite);
         
         d_tParis -> Write("d_tParis", TObject::kOverwrite);
 

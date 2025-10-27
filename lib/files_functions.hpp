@@ -31,315 +31,303 @@
 //----------------------------------------------------//
 //       General files and folders manipulations      //
 //----------------------------------------------------//
-
-std::string removeExtension (std::string const & string) { return (string.substr(0, string.find_last_of(".")  ));}
-std::string extension       (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
-std::string getExtension    (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
-std::string getPath         (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));}
-std::string removePath      (std::string const & string) { return (string.substr(   string.find_last_of("/")+1));}
-std::string rmPathAndExt    (std::string const & string) { return            removePath(removeExtension(string));}
-std::string get_shortname   (std::string const & string) { return            removePath(removeExtension(string));}
-
-bool file_is_empty(std::ifstream& file)                { return file.peek() == std::ifstream::traits_type::eof();}
-
-void go_to_beginning(std::ifstream& file) {file.seekg(0, std::ios::beg);}
-
-std::map<std::string, float> size_file_unit =
+namespace Colib
 {
-  {"o",  1.},
-  {"ko", 1024.},
-  {"Mo", 1048576.},
-  {"Go", 1073741824.},
-  {"B",  1.},
-  {"kB", 1024.},
-  {"MB", 1048576.},
-  {"GB", 1073741824.}
-};
-
-float size_file_conversion(float const & size, std::string const & unit_i, std::string const & unit_o)
-{
-  return size * (size_file_unit[unit_i]/size_file_unit[unit_o]);
-}
-
-float size_file(std::ifstream& file, std::string const & unit = "o")
-{
-  auto const init = file.tellg();
-  file.seekg(0, std::ios::end);
-  auto const ret = file.tellg();
-  file.seekg(init);// Go back to inital place in the file
-  return (static_cast<float>(ret)/size_file_unit[unit]);
-}
-
-float size_file(std::string filename, std::string const & unit = "o")
-{
-  std::ifstream f (filename, std::ios::binary);
-  return size_file(f, unit);
-}
-
-bool hasPath(std::string const & file) {return (getPath(file) != "");}
-
-bool file_exists(std::string fileName)
-{
-  std::string path = getPath(fileName);
-  std::string name = removePath(fileName);
-  struct dirent *file = nullptr;
-  DIR *dp = nullptr;
-  dp = opendir(path.c_str());
-  if(dp == nullptr) return false;
-  else
+  std::string removeExtension (std::string const & string) { return (string.substr(0, string.find_last_of(".")  ));}
+  std::string extension       (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
+  std::string getExtension    (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
+  std::string getPath         (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));}
+  std::string removePath      (std::string const & string) { return (string.substr(   string.find_last_of("/")+1));}
+  std::string rmPathAndExt    (std::string const & string) { return            removePath(removeExtension(string));}
+  std::string getShortname    (std::string const & string) { return            removePath(removeExtension(string));}
+  
+  bool fileIsEmpty(std::ifstream& file) { return file.peek() == std::ifstream::traits_type::eof();}
+  
+  void goToBeginning(std::ifstream& file) {file.seekg(0, std::ios::beg);}
+  
+  static const std::unordered_map<std::string, float> size_file_unit =
   {
-    while ((file = readdir(dp)))
+    {"o",  1.},
+    {"ko", 1024.},
+    {"Mo", 1048576.},
+    {"Go", 1073741824.},
+    {"B",  1.},
+    {"kB", 1024.},
+    {"MB", 1048576.},
+    {"GB", 1073741824.}
+  };
+  
+  float sizeFileConversion(float const & size, std::string const & unit_i, std::string const & unit_o)
+  {
+    return size * (size_file_unit.at(unit_i)/size_file_unit.at(unit_o));
+  }
+  
+  float sizeFile(std::ifstream& file, std::string const & unit = "o")
+  {
+    auto const init = file.tellg();
+    file.seekg(0, std::ios::end);
+    auto const ret = file.tellg();
+    file.seekg(init);// Go back to inital place in the file
+    return (static_cast<float>(ret)/size_file_unit.at(unit));
+  }
+  
+  float sizeFile(std::string filename, std::string const & unit = "o")
+  {
+    std::ifstream f (filename, std::ios::binary);
+    return sizeFile(f, unit);
+  }
+  
+  float sizeFileBestUnit()
+  {
+  
+  }
+  
+  bool hasPath(std::string const & file) {return (getPath(file) != "");}
+  
+  bool fileExists(std::string fileName)
+  {
+    std::string path = getPath(fileName);
+    std::string name = removePath(fileName);
+    struct dirent *file = nullptr;
+    DIR *dp = nullptr;
+    dp = opendir(path.c_str());
+    if(dp == nullptr) return false;
+    else
     {
-      if (!strcmp(file -> d_name, name.c_str()))
+      while ((file = readdir(dp)))
       {
-        closedir(dp);
-        return true;
+        if (!strcmp(file -> d_name, name.c_str()))
+        {
+          closedir(dp);
+          return true;
+        }
       }
     }
+    closedir(dp);
+    return false;
   }
-  closedir(dp);
-  return false;
-}
-
-std::string & push_back_if_none(std::string & string, char const & character)
-{
-  if (string.back() != character) string.push_back(character);
-  return string;
-}
-
-bool folder_exists(std::string folderName)
-{
-  push_back_if_none(folderName, '/');
-  DIR *dp = nullptr;
-  dp = opendir(folderName.c_str());
-  bool ret = (dp != nullptr);
-  std::string str = ((dp!=nullptr) ? "oui" : "non");
-  if (dp) closedir(dp);
-  return ret;
-}
-
-bool folder_exists(std::string folderName, bool const & verbose)
-{
-  push_back_if_none(folderName, '/');
-  if (folder_exists(folderName)) return true;
-  if (verbose) print("Folder ", folderName, " not found...");
-  return false;
-}
-
-void create_folder_if_none(std::string const & folderName)
-{
-  if (folderName=="")
+  
+  std::string & pushBackIfNone(std::string & string, char const & character)
   {
-    print("No folder asked for !");
-    return;
+    if (string.back() != character) string.push_back(character);
+    return string;
   }
-  if(!folder_exists(folderName))
+  
+  bool folderExists(std::string folderName)
   {
-  #ifdef COMULTITHREADING
-    lock_mutex lock(MTObject::mutex);
-  #endif //COMULTITHREADING
-    print("Creating folder", folderName);
-    // mkdir -p to create the full path if needed (otherwise crashes if some directory of the path is missing)
-    system(("mkdir -p "+folderName).c_str());
+    pushBackIfNone(folderName, '/');
+    DIR *dp = nullptr;
+    dp = opendir(folderName.c_str());
+    bool ret = (dp != nullptr);
+    std::string str = ((dp!=nullptr) ? "oui" : "non");
+    if (dp) closedir(dp);
+    return ret;
+  }
+  
+  bool folderExists(std::string folderName, bool const & verbose)
+  {
+    pushBackIfNone(folderName, '/');
+    if (folderExists(folderName)) return true;
+    if (verbose) print("Folder ", folderName, " not found...");
+    return false;
+  }
+  
+  void createFolderIfNone(std::string const & folderName)
+  {
+    if (folderName=="")
+    {
+      print("No folder asked for !");
+      return;
+    }
+    if(!folderExists(folderName))
+    {
+    #ifdef COMULTITHREADING
+      lock_mutex lock(MTObject::mutex);
+    #endif //COMULTITHREADING
+      print("Creating folder", folderName);
+      // mkdir -p to create the full path if needed (otherwise crashes if some directory of the path is missing)
+      system(("mkdir -p "+folderName).c_str());
+    }
+  }
+  
+  int nbFilesInFolder(std::string & folderName)
+  {
+    int ret = -1;
+    pushBackIfNone(folderName, '/');
+    DIR *dp = nullptr;
+    dp = opendir(folderName.c_str());
+    if(dp == nullptr) ret = -1;
+    else
+    {
+      int i = 0;
+      while ((readdir(dp))) i++;
+      ret = i;
+    }
+    closedir(dp);
+    return ret;
+  }
+  
+  /// @brief Not sure what this does
+  std::string getFilenameAt(std::string & folderName, int pos)
+  {
+    std::string ret;
+    pushBackIfNone(folderName, '/');
+    struct dirent *file = nullptr;
+    DIR *dp = nullptr;
+    dp = opendir(folderName.c_str());
+    if(dp == nullptr) ret = "";
+    else
+    {
+      int i = 0;
+      while ((file = readdir(dp)) && i<pos) i++;
+    }
+    ret = file -> d_name;
+    closedir(dp);
+    return ret;
+  }
+  
+  std::vector<std::string> listFilesInFolder
+  (
+    std::string const & foldername = "./", 
+    std::vector<std::string> const & extensions = {"*"},
+    bool const & reorder = true
+  )
+  {
+    std::vector<std::string> ret;
+    struct dirent *file = nullptr;
+    DIR *dp = nullptr;
+    dp = opendir(foldername.c_str());
+    if (dp == nullptr) {print("Folder ", foldername, " not found..."); return ret;}
+    std::string name = "";
+    while ( (file = readdir(dp)))
+    {
+      name = file->d_name;
+      std::string const & ext = extension(name);
+      if (extensions[0] == "*" || find(extensions.begin(), extensions.end(), ext) != extensions.end()) ret.push_back(foldername+name);
+    }
+    closedir(dp);
+    delete file;
+    if (reorder) std::sort(ret.begin(), ret.end());
+    return ret;
+  }
+  
+  std::vector<std::string> listFileNamesInFolder
+  (
+    std::string const & foldername = "./", 
+    std::vector<std::string> const & extensions = {"*"},
+    bool const & reorder = true
+  )
+  {
+    std::vector<std::string> ret;
+    struct dirent *file = nullptr;
+    DIR *dp = nullptr;
+    dp = opendir(foldername.c_str());
+    if (dp == nullptr) {print("Folder ", foldername, " not found..."); return ret;}
+    std::string name = "";
+    while ( (file = readdir(dp)))
+    {
+      name = file->d_name;
+      std::string const & ext = extension(name);
+      if (extensions[0] == "*" || find(extensions.begin(), extensions.end(), ext) != extensions.end()) ret.push_back(name);
+    }
+    closedir(dp);
+    delete file;
+    if (reorder) std::sort(ret.begin(), ret.end());
+    return ret;
+  }
+  
+  int checkNewFile(std::string & folderName, std::string & lastFile)
+  {
+    int ret = -1;
+    pushBackIfNone(folderName, '/');
+    DIR *dp = nullptr;
+    dp = opendir(folderName.c_str());
+    struct dirent *file = nullptr;
+    if(dp == nullptr) ret = -1;
+    else
+    {
+      int i = 0;
+      while ((file = readdir(dp)))
+      {
+        lastFile = file -> d_name;
+        i++;
+      }
+      ret = i;
+    }
+    closedir(dp);
+    return ret;
+  }
+  
+  std::vector<std::string> listFileReader(std::string const & filename)
+  {
+    std::vector<std::string> list;
+  
+    std::ifstream listFile(filename,std::ios::in);
+    if(!listFile.good())
+    {
+      print("List file", filename, "not found !");
+    }
+    else
+    {
+      std::string line;
+      while(getline(listFile,line))
+      {
+        list.push_back(line);
+      }
+    }
+    return list;
+  }
+  
+  std::vector<std::string> findFilesWildcard(std::string const & expression)
+  {
+    std::vector<std::string> ret;
+  
+    glob_t result;
+    if (glob(expression.c_str(), GLOB_TILDE, NULL, &result) == 0)
+    {
+      for (size_t i = 0; i < result.gl_pathc; ++i)
+      {
+        ret.push_back(result.gl_pathv[i]);
+      }
+      globfree(&result);
+    }
+    return ret;
+  }
+  
+  void findFilesWildcard(std::string const & expression, std::vector<std::string> & vec)
+  {
+    auto const files = findFilesWildcard(expression);
+    for (auto const & file : files) vec.push_back(file);
+  }
+  
+  template <class N, class D> std::string percent(N const & n, D const & d)
+  {
+    return (std::to_string(100*static_cast<double>(n)/static_cast<double>(d))+"%");
   }
 }
 
-int nb_files_in_folder(std::string & folderName)
-{
-  int ret = -1;
-  push_back_if_none(folderName, '/');
-  DIR *dp = nullptr;
-  dp = opendir(folderName.c_str());
-  if(dp == nullptr) ret = -1;
-  else
-  {
-    int i = 0;
-    while ((readdir(dp))) i++;
-    ret = i;
-  }
-  closedir(dp);
-  return ret;
-}
-
-// /**
-//  * @brief Reads .list file
-//  * 
-//  * @param folderName 
-//  * @return std::vector<std::istringstream> 
-//  */
-// std::vector<std::istringstream> loadFilelist(std::string const & folderName)
+// /// @brief TODO
+// template<class Index, class T>
+// class CoDataFrame
 // {
-//   std::vector<std::istringstream> ret;
-//   std::ifstream file(folderName, std::ios::in);
-//   std::string line;
-//   while(getline(file, line))
-//   {
-//     std::istringstream stream(line);
-//     ret.push_back(stream);
-//   }
-//   file.close();
-//   return ret;
-// }
+// public:
+//   CoDataFrame() = default;
+//   CoDataFrame(std::string const & filename, std::string const & type = "csv");
 
-std::string get_filename_at(std::string & folderName, int pos)
-{
-  std::string ret;
-  push_back_if_none(folderName, '/');
-  struct dirent *file = nullptr;
-  DIR *dp = nullptr;
-  dp = opendir(folderName.c_str());
-  if(dp == nullptr) ret = "";
-  else
-  {
-    int i = 0;
-    while ((file = readdir(dp)) && i<pos) i++;
-  }
-  ret = file -> d_name;
-  closedir(dp);
-  return ret;
-}
+//   auto const & filename() const {return m_filename;}
+//   void load(std::string const & filename, std::string const & type);
 
-std::vector<std::string> list_files_in_folder
-(
-  std::string const & foldername = "./", 
-  std::vector<std::string> const & extensions = {"*"},
-  bool const & reorder = true
-)
-{
-  std::vector<std::string> ret;
-  struct dirent *file = nullptr;
-  DIR *dp = nullptr;
-  dp = opendir(foldername.c_str());
-  if (dp == nullptr) {print("Folder ", foldername, " not found..."); return ret;}
-  std::string name = "";
-  while ( (file = readdir(dp)))
-  {
-    name = file->d_name;
-    std::string const & ext = extension(name);
-    if (extensions[0] == "*" || find(extensions.begin(), extensions.end(), ext) != extensions.end()) ret.push_back(foldername+name);
-  }
-  closedir(dp);
-  delete file;
-  if (reorder) std::sort(ret.begin(), ret.end());
-  return ret;
-}
+//   void operator<<(std::istringstream & iss);
 
-std::vector<std::string> list_file_names_in_folder
-(
-  std::string const & foldername = "./", 
-  std::vector<std::string> const & extensions = {"*"},
-  bool const & reorder = true
-)
-{
-  std::vector<std::string> ret;
-  struct dirent *file = nullptr;
-  DIR *dp = nullptr;
-  dp = opendir(foldername.c_str());
-  if (dp == nullptr) {print("Folder ", foldername, " not found..."); return ret;}
-  std::string name = "";
-  while ( (file = readdir(dp)))
-  {
-    name = file->d_name;
-    std::string const & ext = extension(name);
-    if (extensions[0] == "*" || find(extensions.begin(), extensions.end(), ext) != extensions.end()) ret.push_back(name);
-  }
-  closedir(dp);
-  delete file;
-  if (reorder) std::sort(ret.begin(), ret.end());
-  return ret;
-}
+// private:
+//   std::vector<Index> m_index;
+//   std::vector<std::vector<T>> m_data;
 
-int check_new_file(std::string & folderName, std::string & lastFile)
-{
-  int ret = -1;
-  push_back_if_none(folderName, '/');
-  DIR *dp = nullptr;
-  dp = opendir(folderName.c_str());
-  struct dirent *file = nullptr;
-  if(dp == nullptr) ret = -1;
-  else
-  {
-    int i = 0;
-    while ((file = readdir(dp)))
-    {
-      lastFile = file -> d_name;
-      i++;
-    }
-    ret = i;
-  }
-  closedir(dp);
-  return ret;
-}
+//   size_t size = 0;
+//   bool good = false;
 
-std::vector<std::string> listFileReader(std::string const & filename)
-{
-  std::vector<std::string> list;
-
-  std::ifstream listFile(filename,std::ios::in);
-  if(!listFile.good())
-  {
-    print("List file", filename, "not found !");
-  }
-  else
-  {
-    std::string line;
-    while(getline(listFile,line))
-    {
-      list.push_back(line);
-    }
-  }
-  return list;
-}
-
-std::vector<std::string> findFilesWildcard(std::string const & expression)
-{
-  std::vector<std::string> ret;
-
-  glob_t result;
-  if (glob(expression.c_str(), GLOB_TILDE, NULL, &result) == 0)
-  {
-    for (size_t i = 0; i < result.gl_pathc; ++i)
-    {
-      ret.push_back(result.gl_pathv[i]);
-    }
-    globfree(&result);
-  }
-  return ret;
-}
-
-void findFilesWildcard(std::string const & expression, std::vector<std::string> & vec)
-{
-  auto const files = findFilesWildcard(expression);
-  for (auto const & file : files) vec.push_back(file);
-}
-
-template <class N, class D> std::string percent(N const & n, D const & d)
-{
-  return (std::to_string(100*static_cast<double>(n)/static_cast<double>(d))+"%");
-}
-
-/// @brief TODO
-template<class Index, class T>
-class CoDataFrame
-{
-public:
-  CoDataFrame() = default;
-  CoDataFrame(std::string const & filename, std::string const & type = "csv");
-
-  auto const & filename() const {return m_filename;}
-  void load(std::string const & filename, std::string const & type);
-
-  void operator<<(std::istringstream & iss);
-
-private:
-  std::vector<Index> m_index;
-  std::vector<std::vector<T>> m_data;
-
-  size_t size = 0;
-  bool good = false;
-
-  std::string m_filename;
-};
+//   std::string m_filename;
+// };
 
 
 // ----------------------------------- //
@@ -527,15 +515,15 @@ public:
 
   void makeFolderList() {m_recursive_folders = getList(m_path,"/", true);}
 
-  int  nbFiles() {return nb_files_in_folder(m_path);}
+  int  nbFiles() {return nbFilesInFolder(m_path);}
   bool exists() {return m_exists;}
-  operator bool() const {return folder_exists(m_path);}
-  bool make() { create_folder_if_none(m_path); return m_exists = true;}
+  operator bool() const {return folderExists(m_path);}
+  bool make() { createFolderIfNone(m_path); return m_exists = true;}
   static bool make (std::string path_name) {Path _path(path_name); return (_path.make());}
 
   // Path & addFolder(Folder const & folder)
   // {
-  //   if (file_exists(m_path+=folder.get()))
+  //   if (fileExists(m_path+=folder.get()))
   //   {
   //     m_recursive_folders.push_back(folder.name());
   //   }
@@ -589,7 +577,7 @@ public:
   Path const & operator+=(std::string const & addString)
   {
     auto str = addString;
-    push_back_if_none(str, '/');
+    pushBackIfNone(str, '/');
     m_path+=str;
     return *this;
   }
@@ -622,7 +610,7 @@ private:
     }
 
     // To ensure it finishes with a '/' :
-    push_back_if_none(m_path, '/');
+    pushBackIfNone(m_path, '/');
 
     //Additional information ;
     this -> makeFolderList();
@@ -632,7 +620,7 @@ private:
 
     // Create the folder if it doesn't exist yet :
     if (create) {this -> make();}
-    else if (!(m_exists = folder_exists(m_path))) print(m_path+" doesn't exist !!");
+    else if (!(m_exists = folderExists(m_path))) print(m_path+" doesn't exist !!");
 
   }
 
@@ -855,8 +843,8 @@ public:
 
   operator bool() const & {return m_ok;}
   bool const & ok()       {return m_ok;}
-  bool exists() const {return file_exists(m_file);}
-  auto size(std::string const & unit = "o") const {return size_file(m_file, unit);}
+  bool exists() const {return fileExists(m_file);}
+  auto size(std::string const & unit = "o") const {return sizeFile(m_file, unit);}
 
   bool operator==(File const & other) const {return m_file == other.m_file;}
 
@@ -898,7 +886,7 @@ private:
   {
     if (m_path.exists())
     {
-      if (file_exists(m_file) || !check_verif) m_ok = true;
+      if (fileExists(m_file) || !check_verif) m_ok = true;
       else {print("The file", m_file, "is unreachable in folder", m_path); m_ok = false;}
     }
     else

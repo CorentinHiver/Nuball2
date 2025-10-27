@@ -28,22 +28,24 @@ constexpr int duration = 3.1e5; // secondes
 constexpr double yield_236 = nb_236U/double(duration); // secondes
 constexpr double yield_SI = nb_SI/double(duration); // secondes
 
-template<class THist>
-auto gate_plot(int i, THist * histo, TCanvas * canvas, std::string name, double E, int nb)
+// template<class THist>
+// auto gate_plot(int i, THist * histo, TCanvas * canvas, std::string name, double E, int nb)
+auto gate_plot(int i, TH1D * histo, TCanvas * canvas, std::string name, double E, int nb)
 {
-  auto clone = (THist*) (histo->Clone((histo->GetName()+name).c_str()));
+  auto clone = (TH1D*) (histo->Clone((histo->GetName()+name).c_str()));
+  // auto clone = (THist*) (histo->Clone((histo->GetName()+name).c_str()));
   canvas->cd(i+1);
   canvas->SetTitle(name.c_str());
   canvas->SetWindowSize(1000, 500);
   auto histo_bckg = clone->ShowBackground(15);
-  to_int(histo_bckg);
+  Colib::to_int(histo_bckg);
   auto bckg_counts = myIntegralUser(histo_bckg, E-R/2.35*2., E+R/2.35*2.);
   auto data_counts = myIntegralUser(histo, E-R/2.35*2., E+R/2.35*2.);
   auto net_data_count = data_counts-bckg_counts;
   print(name, ": bckg counts =", bckg_counts, "net count : ", net_data_count, "th counts", 
   nb, "-> sigma = ", Colib::nicer_double(net_data_count/std::sqrt(bckg_counts), 2), "sigma th = ", Colib::nicer_double(nb/std::sqrt(bckg_counts), 2));
   // auto histo_bckg = static_cast<TH1F*>(clone->Clone(("d_clean_642g_bckg_"+std::to_string(int(E))).c_str()));
-  Colib::simulate_peak(histo_bckg, E, R, nb);
+  Colib::simulatePeak(histo_bckg, E, R, nb);
   histo_bckg->SetLineColor(kRed);
   histo_bckg->Draw();
   clone->Draw("same");
@@ -151,7 +153,7 @@ void SimulatedPeaks(std::string filename = "merge_dC1_V2.root")
     print(name, ": bckg counts =", bckg_counts, "net count : ", net_data_count, "th counts", 
       nb, "-> sigma = ", Colib::nicer_double(net_data_count/std::sqrt(bckg_counts), 2), "sigma th = ", Colib::nicer_double(nb/std::sqrt(bckg_counts), 2));
     // auto histo_bckg = static_cast<TH1F*>(histo->Clone(("d_bckg_"+std::to_string(int(E))).c_str()));
-    Colib::simulate_peak(histo_bckg, E, R, nb);
+    Colib::simulatePeak(histo_bckg, E, R, nb);
     histo_bckg->SetLineColor(kRed);
     histo_bckg->Draw();
     histo->Draw("same");

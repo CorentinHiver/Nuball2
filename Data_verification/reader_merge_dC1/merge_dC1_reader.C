@@ -1,6 +1,6 @@
 #include "../../lib/libRoot.hpp"
 
-void merge_dC1_reader(std::string filename = "merge_dC1_V2.root")
+void merge_dC1_reader(std::string filename = "../merge_dC1.root")
 {
   auto file = TFile::Open(filename.c_str());
   if (!file) Colib::throw_error(filename+ "absent !");
@@ -35,25 +35,25 @@ void merge_dC1_reader(std::string filename = "merge_dC1_V2.root")
   c->cd(1);
   gate3MeV_2Mev_p->Draw();
   gate3MeV_2Mev_pP->Draw("same");
-  Colib::normalizeHistos();
+  Colib::Pad::normalize_histos();
   c->cd(2);
   gate3MeV_4Mev_p->Draw();
   gate3MeV_4Mev_pP->Draw("same");
-  Colib::normalizeHistos();
+  Colib::Pad::normalize_histos();
   c->cd(3);
   gate2MeV_p->Draw();
   gate2MeV_pP->Draw("same");
-  Colib::normalizeHistos();
+  Colib::Pad::normalize_histos();
 
   // Autre piste :
 
   auto d_VS_DC_VS_PC = file->Get<TH3F>("d_VS_DC_VS_PC");
 
-  auto DC_VS_PC_d642 = myProjectionXY(d_VS_DC_VS_PC, 640, 644, "DC_VS_PC_d642");
-  auto DC_VS_PC_d642_2 = myProjectionXY(d_VS_DC_VS_PC, 640, 644, "DC_VS_PC_d642_2");
+  auto DC_VS_PC_d642 = Colib::myProjectionXY(d_VS_DC_VS_PC, 640, 644, "DC_VS_PC_d642");
+  auto DC_VS_PC_d642_2 = Colib::myProjectionXY(d_VS_DC_VS_PC, 640, 644, "DC_VS_PC_d642_2");
 
-  auto DC_VS_PC_d637 = myProjectionXY(d_VS_DC_VS_PC, 635, 639, "DC_VS_PC_d637");
-  auto DC_VS_PC_d653 = myProjectionXY(d_VS_DC_VS_PC, 651, 655, "DC_VS_PC_d653");
+  auto DC_VS_PC_d637 = Colib::myProjectionXY(d_VS_DC_VS_PC, 635, 639, "DC_VS_PC_d637");
+  auto DC_VS_PC_d653 = Colib::myProjectionXY(d_VS_DC_VS_PC, 651, 655, "DC_VS_PC_d653");
 
   DC_VS_PC_d642->Add(DC_VS_PC_d637, -1);
   DC_VS_PC_d642_2->Add(DC_VS_PC_d653, -1);
@@ -69,11 +69,11 @@ void merge_dC1_reader(std::string filename = "merge_dC1_V2.root")
   auto d_VS_DC_VS_PC_particleveto = file->Get<TH3F>("d_VS_DC_VS_PC_particleveto");
   auto clean_d_VS_DC_VS_PC = Colib::removeVeto(d_VS_DC_VS_PC, d_VS_DC_VS_PC_particleveto, 1.005);
 
-  auto clean_DC_VS_PC_d642 = myProjectionXY(clean_d_VS_DC_VS_PC, 640, 644, "clean_DC_VS_PC_d642");
-  auto clean_DC_VS_PC_d642_2 = myProjectionXY(clean_d_VS_DC_VS_PC, 640, 644, "clean_DC_VS_PC_d642_2");
+  auto clean_DC_VS_PC_d642 = Colib::myProjectionXY(clean_d_VS_DC_VS_PC, 640, 644, "clean_DC_VS_PC_d642");
+  auto clean_DC_VS_PC_d642_2 = Colib::myProjectionXY(clean_d_VS_DC_VS_PC, 640, 644, "clean_DC_VS_PC_d642_2");
 
-  auto clean_DC_VS_PC_d637 = myProjectionXY(clean_d_VS_DC_VS_PC, 635, 639, "clean_DC_VS_PC_d637");
-  auto clean_DC_VS_PC_d653 = myProjectionXY(clean_d_VS_DC_VS_PC, 651, 655, "clean_DC_VS_PC_d653");
+  auto clean_DC_VS_PC_d637 = Colib::myProjectionXY(clean_d_VS_DC_VS_PC, 635, 639, "clean_DC_VS_PC_d637");
+  auto clean_DC_VS_PC_d653 = Colib::myProjectionXY(clean_d_VS_DC_VS_PC, 651, 655, "clean_DC_VS_PC_d653");
 
   clean_DC_VS_PC_d642->Add(clean_DC_VS_PC_d637, -1);
   clean_DC_VS_PC_d642_2->Add(clean_DC_VS_PC_d653, -1);
@@ -85,5 +85,5 @@ void merge_dC1_reader(std::string filename = "merge_dC1_V2.root")
 
   new TCanvas;
 
-  d_VS_DC_VS_PC->ProjectionZ("test", 2, 30, 20, 30)->Draw()
+  d_VS_DC_VS_PC->ProjectionZ("test", 2, 30, 20, 30)->Draw();
 }

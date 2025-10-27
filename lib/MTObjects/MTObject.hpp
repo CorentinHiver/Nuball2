@@ -4,10 +4,11 @@
 #include <csignal>
 #include <future>
 #include <functional>
-#include <thread>
-#include <mutex>
-#include <vector>
 #include <iostream>
+#include <mutex>
+#include <string>
+#include <thread>
+#include <vector>
 
 #ifdef ROOT_TObject // Check for root handling
   #include "TROOT.h"
@@ -277,6 +278,71 @@ std::mutex MTmutex;
 std::thread::id MTObject::master_thread_id;
 thread_local size_t MTObject::m_thread_index = 0;
 std::vector<std::thread> MTObject::m_threads;
+
+
+// ---------------------------------------- //
+// Some usefull classes for multi threading //
+// ---------------------------------------- //
+
+namespace Colib
+{
+  // Shared lock object to manage the mutex for direct range-based for loops
+  class SharedLock 
+  {
+  public:
+    SharedLock(std::mutex& mtx) : m_mutex(mtx) 
+    {
+      m_mutex.lock();
+    }
+    ~SharedLock() 
+    {
+      m_mutex.unlock();
+    }
+    std::mutex& m_mutex;
+    static auto create(std::mutex & mutex)
+    {
+      return std::make_shared<SharedLock>(mutex);
+    }
+  };
+
+  // auto createSharedLock(std::mutex & mutex)
+  // {
+  //   return std::make_shared<Colib::SharedLock>(mutex);
+  // }
+  
+  // Custom iterator for thread-safe direct iteration
+  template<class T>
+  class LockingIterator 
+  {
+  public:
+      LockingIterator(std::shared_ptr<SharedLock> lock, typename std::vector<T>::iterator it) :
+          m_lock(lock), m_it(it) 
+      {}
+
+      T& operator*() const { return *m_it; }
+      T* operator->() const { return &(*m_it); }
+
+      LockingIterator& operator++() 
+      {
+        ++m_it;
+        return *this;
+      }
+
+      LockingIterator operator++(int) 
+      {
+        auto tmp = *this;
+        ++(*this);
+        return tmp;
+      }
+
+      bool operator==(const LockingIterator& other) const {return m_it == other.m_it;}
+      bool operator!=(const LockingIterator& other) const {return !(*this == other);}
+
+  private:
+      std::shared_ptr<SharedLock> m_lock;
+      typename std::vector<T>::iterator m_it;
+  };
+}
 
 
 #endif //MTOBJECT_HPP

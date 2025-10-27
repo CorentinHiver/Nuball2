@@ -7,7 +7,7 @@ std::vector<int> peaks_veto = {895, 1546, 1902, 2055, 2973};
 int R_veto = 4;
 int nb_it_veto = 20;
 
-void EfficiencyReader(std::string filename = "merge_dC1_V2.root")
+void EfficiencyReader(std::string filename = "../merge_dC1.root")
 {
   auto file = TFile::Open(filename.c_str());
   if (!file) Colib::throw_error(filename+ "absent !");
@@ -31,9 +31,9 @@ void EfficiencyReader(std::string filename = "merge_dC1_V2.root")
 
   for (auto const & peak : peaks) 
   {
-    auto eff_p = peak_integral(d642_p, peak-R, peak+R, nb_it)/peak_integral(d642, peak-R, peak+R, nb_it);
-    auto eff_P = peak_integral(d642_P, peak-R, peak+R, nb_it)/peak_integral(d642, peak-R, peak+R, nb_it);
-    auto eff_pP = peak_integral(d642_pP, peak-R, peak+R, nb_it)/peak_integral(d642, peak-R, peak+R, nb_it);
+    auto eff_p = Colib::peakIntegral(d642_p, peak-R, peak+R, nb_it)/Colib::peakIntegral(d642, peak-R, peak+R, nb_it);
+    auto eff_P = Colib::peakIntegral(d642_P, peak-R, peak+R, nb_it)/Colib::peakIntegral(d642, peak-R, peak+R, nb_it);
+    auto eff_pP = Colib::peakIntegral(d642_pP, peak-R, peak+R, nb_it)/Colib::peakIntegral(d642, peak-R, peak+R, nb_it);
     print(peak, eff_p, eff_P, eff_pP);
     mean_eff_p += eff_p;
     mean_eff_P += eff_P;
@@ -54,9 +54,9 @@ void EfficiencyReader(std::string filename = "merge_dC1_V2.root")
 
   for (auto const & peak : peaks_veto) 
   {
-    auto eff_p_veto = peak_integral(d642_p, peak-R_veto, peak+R_veto, nb_it_veto)/peak_integral(d642, peak-R_veto, peak+R_veto, nb_it_veto);
-    auto eff_P_veto = peak_integral(d642_P, peak-R_veto, peak+R_veto, nb_it_veto)/peak_integral(d642, peak-R_veto, peak+R_veto, nb_it_veto);
-    auto eff_pP_veto = peak_integral(d642_pP, peak-R_veto, peak+R_veto, nb_it_veto)/peak_integral(d642, peak-R, peak+R, nb_it_veto);
+    auto eff_p_veto = Colib::peakIntegral(d642_p, peak-R_veto, peak+R_veto, nb_it_veto)/Colib::peakIntegral(d642, peak-R_veto, peak+R_veto, nb_it_veto);
+    auto eff_P_veto = Colib::peakIntegral(d642_P, peak-R_veto, peak+R_veto, nb_it_veto)/Colib::peakIntegral(d642, peak-R_veto, peak+R_veto, nb_it_veto);
+    auto eff_pP_veto = Colib::peakIntegral(d642_pP, peak-R_veto, peak+R_veto, nb_it_veto)/Colib::peakIntegral(d642, peak-R, peak+R, nb_it_veto);
     print(peak, eff_p_veto, eff_P_veto, eff_pP_veto);
     mean_eff_p_veto += eff_p_veto;
     mean_eff_P_veto += eff_P_veto;

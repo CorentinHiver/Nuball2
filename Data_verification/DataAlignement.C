@@ -235,7 +235,7 @@ void DataAlignement(bool overwrite = true)
 
     #ifdef COMULTITHREADING
       {
-        lock_mutex lock(mutex);
+        lock_mutex lock(mutex); //TODO peut-etre a enlever
     #endif //COMULTITHREADING
 
         best_first_bs[run_number] = first_calib.getCoeffs()[0];

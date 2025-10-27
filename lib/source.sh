@@ -38,6 +38,3 @@ if [[ -n "$NEW_PATH" ]]; then
 else
     export CPLUS_INCLUDE_PATH="$OLD_PATH"
 fi
-
-# Print the result for verification
-echo "Updated CPLUS_INCLUDE_PATH: $CPLUS_INCLUDE_PATH"
