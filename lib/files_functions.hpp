@@ -6,11 +6,13 @@
 #include "string_functions.hpp"
 
 #include <algorithm>
+#include <cmath>
 #include <dirent.h>
 #include <fstream>
 #include <glob.h>
 #include <iostream>
 #include <map>
+#include <tuple>
 
 #if __GNUC__ >= 9 // g++ version
 	#include <filesystem>
@@ -77,9 +79,41 @@ namespace Colib
     return sizeFile(f, unit);
   }
   
-  float sizeFileBestUnit()
+  std::tuple<double, std::string> sizeFileBestUnit(std::ifstream& file)
   {
+    auto const & size = sizeFile(file);
+    auto order_of_magnitude = int(std::log10(std::abs(size)));
+    std::string unit;
+         if (order_of_magnitude<3) unit = "o" ;
+    else if (order_of_magnitude<6) unit = "ko";
+    else if (order_of_magnitude<9) unit = "Mo";
+    else                           unit = "Go";
+    return std::tuple<double, std::string>(sizeFileConversion(size, "o", unit), unit); 
+  }
+
+  std::tuple<double, std::string> sizeFileBestUnit(std::string filename)
+  {
+    std::ifstream f (filename, std::ios::binary);
+    return sizeFileBestUnit(f);
+  }
   
+  
+  std::string sizeFileBestUnitString(std::ifstream& file)
+  {
+    auto const & size = sizeFile(file);
+    auto order_of_magnitude = int(std::log10(std::abs(size)));
+    std::string unit;
+         if (order_of_magnitude<3) unit = "o" ;
+    else if (order_of_magnitude<6) unit = "ko";
+    else if (order_of_magnitude<9) unit = "Mo";
+    else                           unit = "Go";
+    return std::to_string(sizeFileConversion(size, "o", unit)) + " " + unit; 
+  }
+
+  std::string sizeFileBestUnitString(std::string filename)
+  {
+    std::ifstream f (filename, std::ios::binary);
+    return sizeFileBestUnitString(f);
   }
   
   bool hasPath(std::string const & file) {return (getPath(file) != "");}
@@ -515,10 +549,10 @@ public:
 
   void makeFolderList() {m_recursive_folders = getList(m_path,"/", true);}
 
-  int  nbFiles() {return nbFilesInFolder(m_path);}
+  int  nbFiles() {return Colib::nbFilesInFolder(m_path);}
   bool exists() {return m_exists;}
-  operator bool() const {return folderExists(m_path);}
-  bool make() { createFolderIfNone(m_path); return m_exists = true;}
+  operator bool() const {return Colib::folderExists(m_path);}
+  bool make() { Colib::createFolderIfNone(m_path); return m_exists = true;}
   static bool make (std::string path_name) {Path _path(path_name); return (_path.make());}
 
   // Path & addFolder(Folder const & folder)
@@ -577,7 +611,7 @@ public:
   Path const & operator+=(std::string const & addString)
   {
     auto str = addString;
-    pushBackIfNone(str, '/');
+    Colib::pushBackIfNone(str, '/');
     m_path+=str;
     return *this;
   }
@@ -610,7 +644,7 @@ private:
     }
 
     // To ensure it finishes with a '/' :
-    pushBackIfNone(m_path, '/');
+    Colib::pushBackIfNone(m_path, '/');
 
     //Additional information ;
     this -> makeFolderList();
@@ -620,7 +654,7 @@ private:
 
     // Create the folder if it doesn't exist yet :
     if (create) {this -> make();}
-    else if (!(m_exists = folderExists(m_path))) print(m_path+" doesn't exist !!");
+    else if (!(m_exists = Colib::folderExists(m_path))) print(m_path+" doesn't exist !!");
 
   }
 
@@ -724,12 +758,12 @@ private:
 
   void fill(std::string const & filename)
   {
-    if (hasPath(filename)) {print(filename, "is not a filename...");}
+    if (Colib::hasPath(filename)) {print(filename, "is not a filename...");}
     else
     {
       m_fullName = filename;
-      m_shortName = rmPathAndExt(filename);
-      m_extension = getExtension(filename);
+      m_shortName = Colib::rmPathAndExt(filename);
+      m_extension = Colib::getExtension(filename);
       if (m_extension == "")
       {
         m_extension = "extension";
@@ -843,8 +877,8 @@ public:
 
   operator bool() const & {return m_ok;}
   bool const & ok()       {return m_ok;}
-  bool exists() const {return fileExists(m_file);}
-  auto size(std::string const & unit = "o") const {return sizeFile(m_file, unit);}
+  bool exists() const {return Colib::fileExists(m_file);}
+  auto size(std::string const & unit = "o") const {return Colib::sizeFile(m_file, unit);}
 
   bool operator==(File const & other) const {return m_file == other.m_file;}
 
@@ -886,7 +920,7 @@ private:
   {
     if (m_path.exists())
     {
-      if (fileExists(m_file) || !check_verif) m_ok = true;
+      if (Colib::fileExists(m_file) || !check_verif) m_ok = true;
       else {print("The file", m_file, "is unreachable in folder", m_path); m_ok = false;}
     }
     else
@@ -898,10 +932,10 @@ private:
 
   void fill(std::string const & file)
   {
-    if (hasPath(file))
+    if (Colib::hasPath(file))
     {
-      m_path = getPath(file);
-      m_filename = removePath(file);
+      m_path = Colib::getPath(file);
+      m_filename = Colib::removePath(file);
     }
     else
     {
