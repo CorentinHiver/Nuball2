@@ -49,7 +49,7 @@ public:
     float ret = 0;
     for (size_t i = 0; i < this -> size(); i++)
     {
-      ret+=size_file(m_listFiles[i]);
+      ret+=Colib::sizeFile(m_listFiles[i]);
     }
     return ret;
   }
@@ -116,9 +116,9 @@ public:
 
 bool FilesManager::addFiles(std::string const & _filename)
 {
-  m_path = getPath(_filename);
+  m_path = Colib::getPath(_filename);
   uint numberFiles = 0;
-  if (extension(_filename) == "list")
+  if (Colib::extension(_filename) == "list")
   {// using the "data" file as an input containing the path to the actual data .root or .fast files
     std::ifstream inputsFile (_filename);
     if (!inputsFile.is_open() || !inputsFile.good())
@@ -130,7 +130,7 @@ bool FilesManager::addFiles(std::string const & _filename)
     while(inputsFile.good())
     {
       getline(inputsFile, oneline);
-      if( oneline.size() > 1  &&  (extension(oneline) == "root" || extension(oneline) == "fast"))
+      if( oneline.size() > 1  &&  (Colib::extension(oneline) == "root" || Colib::extension(oneline) == "fast"))
       {
         m_listFiles.push_back(oneline);
         numberFiles++;
@@ -139,20 +139,20 @@ bool FilesManager::addFiles(std::string const & _filename)
     inputsFile.close();
     return true;
   }
-  else if (extension(_filename) == "root" || extension(_filename) == "fast")
+  else if (Colib::extension(_filename) == "root" || Colib::extension(_filename) == "fast")
   {// there is only one .root or .fast file
     m_listFiles.push_back(_filename);
     numberFiles = 1;
     return true;
   }
-  else {std::cout << "File " << _filename << "not taken into account. Extension" << extension(_filename)
+  else {std::cout << "File " << _filename << "not taken into account. Extension" << Colib::extension(_filename)
   << "unkown..." << std::endl << "Abort..." << std::endl;return false;}
 }
 
 bool FilesManager::addFolder(std::string _foldername, long _nb_files, std::vector<std::string> const & extensions)
 {
-  push_back_if_none(_foldername, '/');
-  auto listfile = list_files_in_folder(_foldername, extensions); // Default .root OR .fast files only
+  Colib::pushBackIfNone(_foldername, '/');
+  auto listfile = Colib::listFilesInFolder(_foldername, extensions); // Default .root OR .fast files only
   if (listfile.size() > 0)
   {
     std::sort(listfile.begin(), listfile.end());// Sorts the entries
