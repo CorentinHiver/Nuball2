@@ -7,35 +7,39 @@
 #include <algorithm>
 #include <cmath>
 
-template<class T>
-using vector2D =  std::vector<std::vector<T>>;
-
-template<class T>
-T sum(std::vector<T> const & source)
+namespace Colib
 {
-  T sum = 0;
-  for (auto const & value : source) sum += value;
-  return sum;
-}
+  template<class T>
+  using vector2D =  std::vector<std::vector<T>>;
+  
+  template<class T>
+  T sum(std::vector<T> const & source)
+  {
+    T sum = 0;
+    for (auto const & value : source) sum += value;
+    return sum;
+  }
+  
+  template<class T>
+  T mean(std::vector<T> const & source)
+  {
+    T mean = 0;
+    for (auto const & value : source) mean += value;
+    return mean/static_cast<T>(source.size());
+  }
+  
+  template<class T>
+  std::vector<T> push_back(std::vector<T> const & target, T const & value)
+  {
+    target.push_back(value);
+  }
+  
+  template<class T>
+  std::vector<T> push_back(std::vector<T> const & target, std::vector<T> const & source)
+  {
+    for (auto const & value : source) target.push_back(value);
+  }
 
-template<class T>
-T mean(std::vector<T> const & source)
-{
-  T mean = 0;
-  for (auto const & value : source) mean += value;
-  return mean/static_cast<T>(source.size());
-}
-
-template<class T>
-std::vector<T> push_back(std::vector<T> const & target, T const & value)
-{
-  target.push_back(value);
-}
-
-template<class T>
-std::vector<T> push_back(std::vector<T> const & target, std::vector<T> const & source)
-{
-  for (auto const & value : source) target.push_back(value);
 }
 
 template<class T>
@@ -48,7 +52,7 @@ std::istream& operator>>(std::istream& input, std::vector<T> vector)
 }
 
 template < class T >
-std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)
+std::istringstream & operator>>(std::istringstream & is, std::vector<T>& v)
 {
   T t;
   is >> t;
@@ -56,163 +60,160 @@ std::istringstream & operator >> (std::istringstream & is, std::vector<T>& v)
   return is;
 }
 
-template <typename T>
-bool push_back_unique(std::vector<T> & vector, T const & t)
+namespace Colib
 {
-  if (std::find(std::begin(vector), std::end(vector), t) == std::end(vector))
+  /// @brief Pushes back the new value only if it is superior to the last one (requires a number or a class with < operator)
+  template <typename T>
+  bool pushBackIncrease(std::vector<T> & vector, T const & t)
   {
-    vector.push_back(t);
-    return true;
+    auto const & size = vector.size();
+    if ((size == 0) || vector[size-1] < t)
+    {
+      vector.push_back(t);
+      return true;
+    }
+    else return false;
   }
-  else return false;
-}
-
-/**
- * @brief Pushes back the new value only if it is superior to the last one (requires a number or a class with < operator)
- * 
- * @tparam T 
- * @param vector 
- * @param t 
- * @return true 
- * @return false 
- */
-template <typename T>
-bool push_back_increase(std::vector<T> & vector, T const & t)
-{
-  auto const & size = vector.size();
-  if ((size == 0) || vector[size-1] < t)
+  
+  template<class T>
+  void fill2D(vector2D<T> & vec2, size_t const & size_x, size_t const & size_y, T const & obj)
   {
-    vector.push_back(t);
-    return true;
+    vec2.reserve(size_x);
+    for (size_t i = 0; i<size_x; i++) vec2.emplace_back(std::vector<T>(size_y, obj));
   }
-  else return false;
-}
+  
+  template <typename T>
+  bool found(std::vector<T> const & vec, T const & t)
+  {
+    return (std::find(vec.begin(), vec.end(), t) != vec.end());
+  }
+  
+  template <typename T>
+  bool found(std::vector<T> & vec, T const & t)
+  {
+    return (std::find(vec.begin(), vec.end(), t) != vec.end());
+  }
+  
+  template <typename T>
+  bool found(std::vector<T> const & vec, T & t)
+  {
+    return (std::find(vec.begin(), vec.end(), t) != vec.end());
+  }
+  
+  template <typename T>
+  bool found(std::vector<T> & vec, T & t)
+  {
+    return (std::find(vec.begin(), vec.end(), t) != vec.end());
+  }
+
+  /// @brief Pushes back the new value only if it is not already present in the vector (makes a unefficient find check every push_back)
+  template <typename T>
+  bool pushBackUnique(std::vector<T> & vector, T const & t)
+  {
+    if (found(vector, t))
+    {
+      vector.push_back(t);
+      return true;
+    }
+    else return false;
+  }
+  
+  template <typename T>
+  int firstIndexIn(std::vector<T> & vec, T & t)
+  {
+    return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
+  }
+  
+  template <typename T>
+  int firstIndexIn(std::vector<T> & vec, T const & t)
+  {
+    return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
+  }
+  
+  template <typename T>
+  int firstIndexIn(std::vector<T> const & vec, T & t)
+  {
+    return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
+  }
+  
+  template <typename T>
+  int firstIndexIn(std::vector<T> const & vec, T const & t)
+  {
+    return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
+  }
+
+}    
 
 
-template<class T>
-void fill2D(vector2D<T> & vec2, size_t const & size_x, size_t const & size_y, T const & obj)
-{
-  vec2.reserve(size_x);
-  for (size_t i = 0; i<size_x; i++) vec2.emplace_back(std::vector<T>(size_y, obj));
-}
-
-
-
-template <typename T>
-bool found(std::vector<T> const & vec, T const & t)
-{
-  return (std::find(vec.begin(), vec.end(), t) != vec.end());
-}
-
-template <typename T>
-bool found(std::vector<T> & vec, T const & t)
-{
-  return (std::find(vec.begin(), vec.end(), t) != vec.end());
-}
-
-template <typename T>
-bool found(std::vector<T> const & vec, T & t)
-{
-  return (std::find(vec.begin(), vec.end(), t) != vec.end());
-}
-
-template <typename T>
-bool found(std::vector<T> & vec, T & t)
-{
-  return (std::find(vec.begin(), vec.end(), t) != vec.end());
-}
-
-
-
-template <typename T>
-int first_index_in(std::vector<T> & vec, T & t)
-{
-  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
-}
-
-template <typename T>
-int first_index_in(std::vector<T> & vec, T const & t)
-{
-  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
-}
-
-template <typename T>
-int first_index_in(std::vector<T> const & vec, T & t)
-{
-  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
-}
-
-template <typename T>
-int first_index_in(std::vector<T> const & vec, T const & t)
-{
-  return (std::distance(vec.begin(), std::find(vec.begin(), vec.end(), t) != vec.end()));
-}
 
 //////////////
 // LINSPACE //
 //////////////
 
-template<class T>
-std::vector<T>& linspace(std::vector<T> & vec, size_t size, int begin = 0, int spacing = 1)
+namespace Colib
 {
-  vec.clear(); vec.reserve(size);
-  for (size_t it = 0; it<size; ++it) vec.push_back(static_cast<T>(it * spacing + begin));
-  return vec;
-}
+  template<class T>
+  std::vector<T>& linspace(std::vector<T> & vec, size_t size, int begin = 0, int spacing = 1)
+  {
+    vec.clear(); vec.reserve(size);
+    for (size_t it = 0; it<size; ++it) vec.push_back(static_cast<T>(it * spacing + begin));
+    return vec;
+  }
+  
+  std::vector<size_t>& linspace(std::vector<size_t> & vec, size_t size, size_t begin = 0, size_t spacing = 1)
+  {
+    vec.clear(); vec.reserve(size);
+    for (size_t it = begin; it<size; ++it) vec.push_back(it*spacing);
+    return vec;
+  }
+  
+  template<class T>
+  std::vector<T> linspace(size_t size, T begin = 0, T spacing = 1)
+  {
+    std::vector<T> ret;
+    linspace(ret, size, begin, spacing);
+    return ret;
+  }
+  
+  template<class T>
+  std::vector<T> linspaceFor(std::vector<T> const & values, T begin = 0, T spacing = 1)
+  {
+    std::vector<T> ret;
+    linspace(ret, values.size(), begin, spacing);
+    return ret;
+  }
+  
+  template<class T>
+  auto c_linspace(std::vector<T> & vec, size_t size, int begin = 0, int spacing = 1)
+  {
+    vec.clear(); vec.reserve(size);
+    for (size_t it = 0; it<size; ++it) vec.push_back(static_cast<T>(it * spacing + begin));
+    return vec.data();
+  }
+  
+  auto c_linspace(std::vector<size_t> & vec, size_t size, size_t begin = 0, size_t spacing = 1)
+  {
+    vec.clear(); vec.reserve(size);
+    for (size_t it = begin; it<size; ++it) vec.push_back(it*spacing);
+    return vec.data();
+  }
+  
+  template<class T>
+  auto c_linspace(size_t size, T begin = 0, T spacing = 1)
+  {
+    std::vector<T> ret;
+    c_linspace(ret, size, begin, spacing);
+    return ret.data();
+  }
+  
+  template<class T>
+  auto c_linspaceFor(std::vector<T> const & values, T begin = 0, T spacing = 1)
+  {
+    std::vector<T> ret;
+    c_linspace(ret, values.size(), begin, spacing);
+    return ret.data();
+  }
 
-std::vector<size_t>& linspace(std::vector<size_t> & vec, size_t size, size_t begin = 0, size_t spacing = 1)
-{
-  vec.clear(); vec.reserve(size);
-  for (size_t it = begin; it<size; ++it) vec.push_back(it*spacing);
-  return vec;
-}
-
-template<class T>
-std::vector<T> linspace(size_t size, T begin = 0, T spacing = 1)
-{
-  std::vector<T> ret;
-  linspace(ret, size, begin, spacing);
-  return ret;
-}
-
-template<class T>
-std::vector<T> linspace_for(std::vector<T> const & values, T begin = 0, T spacing = 1)
-{
-  std::vector<T> ret;
-  linspace(ret, values.size(), begin, spacing);
-  return ret;
-}
-
-
-template<class T>
-auto c_linspace(std::vector<T> & vec, size_t size, int begin = 0, int spacing = 1)
-{
-  vec.clear(); vec.reserve(size);
-  for (size_t it = 0; it<size; ++it) vec.push_back(static_cast<T>(it * spacing + begin));
-  return vec.data();
-}
-
-auto c_linspace(std::vector<size_t> & vec, size_t size, size_t begin = 0, size_t spacing = 1)
-{
-  vec.clear(); vec.reserve(size);
-  for (size_t it = begin; it<size; ++it) vec.push_back(it*spacing);
-  return vec.data();
-}
-
-template<class T>
-auto c_linspace(size_t size, T begin = 0, T spacing = 1)
-{
-  std::vector<T> ret;
-  c_linspace(ret, size, begin, spacing);
-  return ret.data();
-}
-
-template<class T>
-auto c_linspace_for(std::vector<T> const & values, T begin = 0, T spacing = 1)
-{
-  std::vector<T> ret;
-  c_linspace(ret, values.size(), begin, spacing);
-  return ret.data();
 }
 
 
@@ -244,68 +245,70 @@ auto c_linspace_for(std::vector<T> const & values, T begin = 0, T spacing = 1)
 // std::vector<double> log10space(size_t nb_bins, int min) {return logspace(nb_bins, min, 10);}
 
 
-
-template <typename T, size_t n>
-constexpr T maximum(std::array<T, n> const & array)
+namespace Colib
 {
-  static_assert(n>0, "array size is 0 !!");
-  auto value = array[0];
-  for (auto const & e : array) if (e>value) value = e;
-  return value;
-}
-
-template <typename T>
-T maximum(std::vector<T> const & vector)
-{
-  if (vector.size() < 1 ) throw std::runtime_error("vector size is 0 !!");
-  auto value = vector[0];
-  for (auto const & e : vector) if (e>value) value = e;
-  return value;
-}
-
-template <typename T>
-T minimum(std::vector<T> const & vector)
-{
-  if (vector.size() < 1 ) throw std::runtime_error("vector size is 0 !!");
-  auto value = vector[0];
-  for (auto const & e : vector) if (e<value) value = e;
-  return value;
-}
-
-template <typename T>
-size_t maximum_index(std::vector<T> const & vector)
-{
-  size_t index = 0;
-  T value = vector[index];
-  for (size_t i = 0; i<vector.size(); i++) if (vector[i]>value) 
+  template <typename T, size_t n>
+  constexpr T maximum(std::array<T, n> const & array)
   {
-    value = vector[i];
-    index = i;
+    static_assert(n>0, "array size is 0 !!");
+    auto value = array[0];
+    for (auto const & e : array) if (e>value) value = e;
+    return value;
   }
-  return index;
-}
-
-template <typename T>
-T minimum_index(std::vector<T> const & vector)
-{
-  int index = 0;
-  T value = vector[index];
-  for (int i = 0; i<vector.size(); i++) if (vector[i]<value) 
+  
+  template <typename T>
+  T maximum(std::vector<T> const & vector)
   {
-    value = vector[i];
-    index = i;
+    if (vector.size() < 1 ) throw std::runtime_error("vector size is 0 !!");
+    auto value = vector[0];
+    for (auto const & e : vector) if (e>value) value = e;
+    return value;
   }
-  return value;
-}
-
-template <typename T>
-bool is_good(std::vector<T> const & vector)
-{
-  static_assert(std::is_arithmetic<T>::value, "in is_good(std::vector<T> vector) : T must be an arithmetic type (a number)");
-  auto const & size = vector.size();
-  if (size == 0) return false;
-  for (auto const & v : vector) if (std::isnan(v) || std::isinf(v)) return false;
-  return true;
+  
+  template <typename T>
+  T minimum(std::vector<T> const & vector)
+  {
+    if (vector.size() < 1 ) throw std::runtime_error("vector size is 0 !!");
+    auto value = vector[0];
+    for (auto const & e : vector) if (e<value) value = e;
+    return value;
+  }
+  
+  template <typename T>
+  size_t maximumIndex(std::vector<T> const & vector)
+  {
+    size_t index = 0;
+    T value = vector[index];
+    for (size_t i = 0; i<vector.size(); i++) if (vector[i]>value) 
+    {
+      value = vector[i];
+      index = i;
+    }
+    return index;
+  }
+  
+  template <typename T>
+  T minimumIndex(std::vector<T> const & vector)
+  {
+    int index = 0;
+    T value = vector[index];
+    for (int i = 0; i<vector.size(); i++) if (vector[i]<value) 
+    {
+      value = vector[i];
+      index = i;
+    }
+    return value;
+  }
+  
+  template <typename T>
+  bool isGood(std::vector<T> const & vector)
+  {
+    static_assert(std::is_arithmetic<T>::value, "in is_good(std::vector<T> vector) : T must be an arithmetic type (a number)");
+    auto const & size = vector.size();
+    if (size == 0) return false;
+    for (auto const & v : vector) if (std::isnan(v) || std::isinf(v)) return false;
+    return true;
+  }
 }
 
 namespace Colib
@@ -313,7 +316,7 @@ namespace Colib
   /// @brief Order the vector from lower to higher value
   /// @tparam T must have operator< overloaded if user defined class 
   template <typename T>
-  std::vector<size_t> & bubble_sort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
+  std::vector<size_t> & bubbleSort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
   {
     // Verifications :
     if (vector.size() == 0) {printC(Colib::Color::RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", Colib::Color::RESET); return ordered_indexes;}
@@ -356,11 +359,11 @@ namespace Colib
   
     return ordered_indexes;
   }
-  
+
   /// @brief Order the vector from lower to higher value
   /// @tparam T must have operator< overloaded if user defined class 
   template <class T>
-  std::vector<size_t> bubble_sort(std::vector<T> const & vector)
+  std::vector<size_t> bubbleSort(std::vector<T> const & vector)
   {
     std::vector<size_t> ordered_indexes(vector.size());
     bubble_sort(vector, ordered_indexes);
@@ -372,196 +375,182 @@ namespace Colib
   /// @tparam T must have operator< overloaded if user defined class 
   template <class T>
   std::vector<T>& sort(std::vector<T> & vector, std::string method = "bubble")
-  {
-    if (method == "bubble")
     {
-      auto const & sorted_indices = Colib::bubble_sort(vector);
-      std::vector<T> buff = vector;
-      vector.clear();
-      for (auto const & id : sorted_indices) vector.push_back(buff[id]);
+      if (method == "bubble")
+      {
+        auto const & sorted_indices = Colib::bubbleSort(vector);
+        std::vector<T> buff = vector;
+        vector.clear();
+        for (auto const & id : sorted_indices) vector.push_back(buff[id]);
+        return vector;
+      }
+      else error("sorting method", method, "unkown...");
       return vector;
     }
-    else error("sorting method", method, "unkown...");
-    return vector;
-  }
-
+  
   /// @brief Fills vector to_fill with ordered elements from vector fill_from
   /// @tparam T must have operator< overloaded if user defined class 
   template <class T>
-  std::vector<T>& fill_sorted(std::vector<T> & to_fill, std::vector<T> const & fill_from)
-  {
-    auto const & sorted_indices = Colib::bubble_sort(fill_from);
-    int to_fill_it = 0;
-    for (auto const & id : sorted_indices)
+  std::vector<T>& fillSorted(std::vector<T> & to_fill, std::vector<T> const & fill_from)
     {
-      auto & e = fill_from[id];
-      if (to_fill_it<to_fill.size()) for (;to_fill_it < to_fill.size(); ++to_fill_it)
+      auto const & sorted_indices = Colib::bubbleSort(fill_from);
+      int to_fill_it = 0;
+      for (auto const & id : sorted_indices)
       {
-        if (e > to_fill[to_fill_it]) to_fill.insert(to_fill.begin()+to_fill_it, e);
-        break;
+        auto & e = fill_from[id];
+        if (to_fill_it<to_fill.size()) for (;to_fill_it < to_fill.size(); ++to_fill_it)
+        {
+          if (e > to_fill[to_fill_it]) to_fill.insert(to_fill.begin()+to_fill_it, e);
+          break;
+        }
+        else to_fill.push_back(e);
       }
-      else to_fill.push_back(e);
+      return to_fill;
     }
-    return to_fill;
-  }
-
-  // Coder la memem chose pour un deque car c'est plus efficace !
-}
-
-template <class T>
-void invert(std::vector<T> & vector)
-{
-  std::reverse(vector.begin(), vector.end());
-}
-
-template<class K, class V>
-void unpack(std::vector<std::pair<K,V>> const & pairs, std::vector<K> & keys, std::vector<V> & values)
-{
-  keys.reserve(pairs.size());
-  values.reserve(pairs.size());
-  for (auto const & pair : pairs)
+  
+  // Coder la meme chose pour un deque car c'est plus efficace !
+ 
+  template <class T>
+  void invert(std::vector<T> & vector)
   {
-    keys.push_back(pair.first);
-    values.push_back(pair.second);
+    std::reverse(vector.begin(), vector.end());
   }
-}
-
-/// @brief Returns the vector in the range [start, start+length[.
-/// @details E.g. vec = {1,2,3,4,5} ; sub_vec(vec, 1, 3) -> {2, 3, 4};
-template<class T>
-auto sub_vec(std::vector<T> const & vec, int const & start, int const & length)
-{
-  return std::vector<T>(vec.begin() + start, vec.begin() + start + length);
-}
-
-/**
- * @brief Returns the first order unit derivative of the given vector.
- * 
- * @param vec 
- * @param smooth 
- * @return std::vector<T> 
- */
-template<class T>
-std::vector<T> derivate(std::vector<T> const & vec, int const & smooth = 1)
-{
-  auto const & N = vec.size();
-  std::vector<T> ret; ret.reserve(N);
-
-  auto const & smooth_range = 2*smooth;
-  int lower_bin = 0;
-  int upper_bin = 0;
-  double low_sum = 0.0;
-  double up_sum = 0.0;
-  for (int bin = 0; bin<N; bin++)
+  
+  template<class K, class V>
+  void unpack(std::vector<std::pair<K,V>> const & pairs, std::vector<K> & keys, std::vector<V> & values)
   {
-    lower_bin = bin-smooth;
-    upper_bin = bin+smooth;
-
-    // Before all, handle side effects : 
-    // At the beginning and the end of the spectra, there are not enough bins on both sides to smooth correctly
-    // Therefore, we have to set a correct number of bins
-    if (lower_bin<0)
-    {// For the first bins of the histogram
-      lower_bin = 0;
-      upper_bin = 2*bin;
+    keys.reserve(pairs.size());
+    values.reserve(pairs.size());
+    for (auto const & pair : pairs)
+    {
+      keys.push_back(pair.first);
+      values.push_back(pair.second);
     }
-    else if (upper_bin > N-1)
-    {// For the last bins of the histogram
-      lower_bin = 2*bin-N;
-      upper_bin = N;
+  }
+  
+  /// @brief Returns the vector in the range [start, start+length[.
+  /// @details E.g. vec = {1,2,3,4,5} ; sub_vec(vec, 1, 3) -> {2, 3, 4};
+  template<class T>
+  auto subVec(std::vector<T> const & vec, int const & start, int const & length)
+  {
+    return std::vector<T>(vec.begin() + start, vec.begin() + start + length);
+  }
+  
+  /// @brief Returns the first order unit derivative of the given vector.
+  template<class T>
+  std::vector<T> derivate(std::vector<T> const & vec, int const & smooth = 1)
+  {
+    auto const & N = vec.size();
+    std::vector<T> ret; ret.reserve(N);
+  
+    auto const & smooth_range = 2*smooth;
+    int lower_bin = 0;
+    int upper_bin = 0;
+    double low_sum = 0.0;
+    double up_sum = 0.0;
+    for (int bin = 0; bin<N; bin++)
+    {
+      lower_bin = bin-smooth;
+      upper_bin = bin+smooth;
+  
+      // Before all, handle side effects : 
+      // At the beginning and the end of the spectra, there are not enough bins on both sides to smooth correctly
+      // Therefore, we have to set a correct number of bins
+      if (lower_bin<0)
+      {// For the first bins of the histogram
+        lower_bin = 0;
+        upper_bin = 2*bin;
+      }
+      else if (upper_bin > N-1)
+      {// For the last bins of the histogram
+        lower_bin = 2*bin-N;
+        upper_bin = N;
+      }
+  
+      low_sum = 0.0;
+      up_sum = 0.0;
+  
+      // First, sum the content of all the bins on the left :
+      for (int bin_low = lower_bin; bin_low<bin; bin_low++) {low_sum+=vec[bin_low];}
+  
+      // Second, sum the content of all the bins on the right :
+      for (int bin_up = bin+1; bin_up<upper_bin; bin_up++) {up_sum+=vec[bin_up];}
+  
+      // Calculate the derivative : (sum_right - sum_left) / (x_right - x_left)
+      auto const & derivative = (up_sum - low_sum) / smooth_range;
+      
+      ret.push_back(derivative);
+  
+      return ret;
     }
-
-    low_sum = 0.0;
-    up_sum = 0.0;
-
-    // First, sum the content of all the bins on the left :
-    for (int bin_low = lower_bin; bin_low<bin; bin_low++) {low_sum+=vec[bin_low];}
-
-    // Second, sum the content of all the bins on the right :
-    for (int bin_up = bin+1; bin_up<upper_bin; bin_up++) {up_sum+=vec[bin_up];}
-
-    // Calculate the derivative : (sum_right - sum_left) / (x_right - x_left)
-    auto const & derivative = (up_sum - low_sum) / smooth_range;
-    
-    ret.push_back(derivative);
-
+  }
+  
+  /// @brief Returns the first order derivative of the given y values based on the x axis
+  template<class T>
+  std::vector<T> derivate(std::vector<T> const & x, std::vector<T> const & y, int const & smooth = 1)
+  {
+    auto const & N = x.size();
+    if (N != y.size()) error("derivate(X, Y) : X and Y vectors size mismatch");
+    std::vector<T> ret; ret.reserve(N);
+  
+    auto const & smooth_range = 2*smooth;
+  
+    int    lower_bin = 0  ;
+    int    upper_bin = 0  ;
+    double low_sum   = 0.0;
+    double up_sum    = 0.0;
+  
+    for (int bin = 0; bin<N; bin++)
+    {
+      lower_bin = bin - smooth;
+      upper_bin = bin + smooth;
+  
+      // Before all, handle side effects : 
+      // At the beginning and the end of the spectra, there are not enough bins on both sides to smooth correctly
+      // Therefore, we have to set a correct number of bins
+      if (lower_bin<0)
+      {// For the first bins of the histogram
+        lower_bin = 0;
+        upper_bin = 2*bin;
+      }
+      else if (upper_bin > N-1)
+      {// For the last bins of the histogram
+        lower_bin = 2*bin-N;
+        upper_bin = N;
+      }
+  
+      low_sum = 0.0;
+      up_sum  = 0.0;
+  
+      // First, sum the content of all the bins on the left :
+      for (int bin_low = lower_bin; bin_low<bin; bin_low++) {low_sum+=y[bin_low];}
+  
+      // Second, sum the content of all the bins on the right :
+      for (int bin_up = bin+1; bin_up<upper_bin; bin_up++) {up_sum+=y[bin_up];}
+  
+      // Calculate the derivative : (sum_right - sum_left) / (x_right - x_left)
+      auto const & derivative = (up_sum - low_sum) / (x[upper_bin] - y[lower_bin]);
+  
+      ret.push_back(derivative);
+  
+      return ret;
+    }
+  }
+  
+  template <class T>
+  std::vector<T> scale(std::vector<T> const & vec, double const & scaling)
+  {
+    std::vector<T> ret; ret.reserve(vec.size());
+    for (auto const & v : vec) ret.push_back(v*scaling);
     return ret;
   }
-}
-
-/**
- * @brief Returns the first order derivative of the given y values based on the x axis
- * 
- * @tparam T 
- * @param x 
- * @param y 
- * @param smooth 
- * @return std::vector<T> 
- */
-template<class T>
-std::vector<T> derivate(std::vector<T> const & x, std::vector<T> const & y, int const & smooth = 1)
-{
-  auto const & N = x.size();
-  if (N != y.size()) error("derivate(X, Y) : X and Y vectors size mismatch");
-  std::vector<T> ret; ret.reserve(N);
-
-  auto const & smooth_range = 2*smooth;
-
-  int    lower_bin = 0  ;
-  int    upper_bin = 0  ;
-  double low_sum   = 0.0;
-  double up_sum    = 0.0;
-
-  for (int bin = 0; bin<N; bin++)
+  
+  template <class T>
+  std::vector<T> & scale(std::vector<T> & vec, double const & scaling)
   {
-    lower_bin = bin - smooth;
-    upper_bin = bin + smooth;
-
-    // Before all, handle side effects : 
-    // At the beginning and the end of the spectra, there are not enough bins on both sides to smooth correctly
-    // Therefore, we have to set a correct number of bins
-    if (lower_bin<0)
-    {// For the first bins of the histogram
-      lower_bin = 0;
-      upper_bin = 2*bin;
-    }
-    else if (upper_bin > N-1)
-    {// For the last bins of the histogram
-      lower_bin = 2*bin-N;
-      upper_bin = N;
-    }
-
-    low_sum = 0.0;
-    up_sum  = 0.0;
-
-    // First, sum the content of all the bins on the left :
-    for (int bin_low = lower_bin; bin_low<bin; bin_low++) {low_sum+=y[bin_low];}
-
-    // Second, sum the content of all the bins on the right :
-    for (int bin_up = bin+1; bin_up<upper_bin; bin_up++) {up_sum+=y[bin_up];}
-
-    // Calculate the derivative : (sum_right - sum_left) / (x_right - x_left)
-    auto const & derivative = (up_sum - low_sum) / (x[upper_bin] - y[lower_bin]);
-
-    ret.push_back(derivative);
-
-    return ret;
+    for (auto & v : vec) v *= scaling;
+    return vec;
   }
-}
-
-template <class T>
-std::vector<T> scale(std::vector<T> const & vec, double const & scaling)
-{
-  std::vector<T> ret; ret.reserve(vec.size());
-  for (auto const & v : vec) ret.push_back(v*scaling);
-  return ret;
-}
-
-template <class T>
-std::vector<T> & scale(std::vector<T> * vec, double const & scaling)
-{
-  for (auto & v : *vec) v *= scaling;
-  return *vec;
 }
 
 ////////////////////////////
@@ -569,7 +558,7 @@ std::vector<T> & scale(std::vector<T> * vec, double const & scaling)
 ////////////////////////////
 
 /**
- * @brief An efficient container for dynamic arrays with a known and fixed maximum size
+ * @brief DEPRECATED An efficient container for dynamic arrays with a known and fixed maximum size
  * @attention Prototype, has some memory management issues in some cases ...
  * @deprecated With optimisation option, std::vector is almost as efficient as this class ...
  * @todo clear without destroying objects may save time for large objects
