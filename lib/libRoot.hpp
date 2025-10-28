@@ -3125,7 +3125,7 @@ namespace Colib
   /// @brief allows one to fuse all the histograms with the same name from different files
   void fuse_all_histo(std::string const & folder, std::string const & outRoot = "fused_histo.root", bool const & bidim = true)
   {
-    auto const files = list_files_in_folder(folder, {"root"});
+    auto const files = listFilesInFolder(folder, {"root"});
     bool first_file = true;
     std::vector<std::unique_ptr<TH1>> all_TH1F;
     for (auto const & filename : files)
@@ -3540,7 +3540,7 @@ namespace Colib
     {
       TObjString* str = (TObjString*)files->At(i);
       auto const & name = str->GetString().Data();
-      auto const & size = size_file(name, "Mo");
+      auto const & size = sizeFile(name, "Mo");
       if (size > size_file_Mo) {error("Input size > output size case not handled:", size, ">", size_file_Mo, "for", name); return;}
       name_files.push_back(name);
       size_files.push_back(size);
