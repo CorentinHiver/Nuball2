@@ -1,9 +1,8 @@
-#ifndef TIMER_H
-#define TIMER_H
+#ifndef TIMER_HPP
+#define TIMER_HPP
 
 #include <iomanip>
 #include <map>
-
 #include <chrono>
 
 using hr_clock_t = std::chrono::high_resolution_clock;
@@ -61,7 +60,7 @@ public:
 
   auto Time(std::string const & unit)
   {
-    if (!key_found(m_units, unit)) {print("in Timer::Time(string unit) : unit", unit, "unkown... ms by default"); return Time();}
+    // if (!key_found(m_units, unit)) {print("in Timer::Time(string unit) : unit", unit, "unkown... ms by default"); return Time();}
     return Time()/m_units[unit];
   }
 
@@ -107,7 +106,7 @@ private:
 
   duration_milli_t d_milli;
   std::string m_unit = "ms";
-  std::map<std::string, double> m_units = 
+  std::unordered_map<std::string, double> m_units = 
   {
     {"ms" , 1.},
     {"s"  , 1000.},
@@ -122,4 +121,4 @@ std::ostream& operator<<(std::ostream& out, Timer & timer)
   return out;
 }
 
-#endif //TIMER_H
+#endif //TIMER_HPP
