@@ -1,11 +1,11 @@
 #define DEVCO
 // #include "lib/libRoot.hpp"
-#include "lib/Classes/Timer.hpp"
+// #include "lib/Classes/Timer.hpp"
 // #include "lib/Classes/FilesManager.hpp"
 // #include "lib/Classes/Transitions.hpp"
 // #include "lib/Analyse/SpectraAlignator.hpp"
 // #include "lib/MTObjects/MultiHist.hpp"
-// #include "lib/libRoot.hpp"
+#include "lib/libRoot.hpp"
 // #include "lib/libRootHeader.hpp"
 // #include  "lib/Modules/CoRadware.hpp"
 // #include  "lib/Modules/Timeshiftor.hpp"
@@ -16,25 +16,28 @@
 // #include  "lib/Classes/FlexibleHisto.hpp"
 // #include  "lib/Analyse/Chi2Minimiser.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
-#include "lib/FasterReader/FasterRootInterface.hpp"
+// #include "lib/FasterReader/FasterRootInterface.hpp"
 // #include "lib/FasterReader/FasterReaderV2.hpp"
 // #include "TH1F.h"
 // #include "TH2F.h"
-#include "TFile.h"
+// #include "TFile.h"
 
 int main()
 {
-  size_t nbHits = 1e4;
 
-  Timer timer;
-  auto tree = new TTree("test", "test");
-  Hit hit;
-  hit.writing(tree);
-  FasterRootInterface reader("/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast", &hit);
-  reader.setMaxHits(nbHits);
-  while (reader.readNextRootHit()) tree->Fill();
-  reader.close();
-  print(timer());
+
+
+  // size_t nbHits = 1e4;
+
+  // Timer timer;
+  // auto tree = new TTree("test", "test");
+  // Hit hit;
+  // hit.writing(tree);
+  // FasterRootInterface reader("/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast", &hit);
+  // reader.setMaxHits(nbHits);
+  // while (reader.readNextRootHit()) tree->Fill();
+  // reader.close();
+  // print(timer());
 
 
   // auto histo = new TH1F("test", "test", nbHits, 0, nbHits);
@@ -56,12 +59,12 @@ int main()
   // //   histo->SetBinContent(reader.getCursor(), hit.stamp);
   // //   histo2->Fill(hit.label, hit.stamp);
   // // }
-  auto out = TFile::Open("test.root", "recreate");
-  out->cd();
-  tree->Write();
-  // histo2->Write();
-  // out->Write();
-  out->Close();
+  // auto out = TFile::Open("test.root", "recreate");
+  // out->cd();
+  // tree->Write();
+  // // histo2->Write();
+  // // out->Write();
+  // out->Close();
 
 
   // TH1F* histo = new TH1F("test","test",1000,0,1000);

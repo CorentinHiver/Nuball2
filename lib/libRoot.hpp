@@ -1087,18 +1087,18 @@ namespace Colib
    * @param dE_zone : divide the histogram into zones of dE_zone keV large to calculate the count per keV
    * @return std::vector<double> 
    */
-  TH1F* countsPerKeVHisto(TH1* spectrum, int dE_zone = 5, int bckg_nbIterations = 15)
+  TH1F* countsPerKeVHisto(TH1* spectrum, int dE_zone = 5)//, int bckg_nbIterations = 15)
   {
     TH1F* ret = nullptr;
     if (!checkHisto(spectrum)) {error("Colib::countsPerKeV(TH1* spectrum) : spectrum does not exists"); return ret;}
     // auto bckg = spectrum->ShowBackground(bckg_nbIterations);
 
-    auto const & nX = spectrum->GetNbinsX();
-    auto const & xmin = spectrum->GetXaxis()->GetXmin();
-    auto const & xmax = spectrum->GetXaxis()->GetXmax();
+    auto const & nX   = spectrum -> GetNbinsX();
+    auto const & xmin = spectrum -> GetXaxis() -> GetXmin();
+    auto const & xmax = spectrum -> GetXaxis() -> GetXmax();
 
-    auto const & name = spectrum->GetName()+TString("_countsPerKeV");
-    auto const & title = spectrum->GetTitle()+TString("_countsPerKeV");
+    auto const & name  = spectrum -> GetName()  + TString("_countsPerKeV");
+    auto const & title = spectrum -> GetTitle() + TString("_countsPerKeV");
     ret = new TH1F(name, title, nX, xmin, xmax);
 
     auto const & range = xmax - xmin;
@@ -1114,7 +1114,7 @@ namespace Colib
     }
     for (int bin_i = 1; bin_i<=nX; ++bin_i) 
     {
-      int data_i = int(bin_i/nX_zone);
+      auto data_i = size_t(bin_i/nX_zone);
       if (data_i<data.size()) ret->SetBinContent(bin_i, data[data_i]);
       else break;
     }
@@ -1138,7 +1138,7 @@ namespace Colib
       // TH1D* newHisto = nullptr;
       // if (gFile) newHisto = gFile->Get<TH1D>(name.c_str());
       // if (!newHisto) {print("Creating", name); newHisto = static_cast<TH1D*> (histo->Clone(name.c_str()));}
-      auto newHisto = countsPerKeVHisto(histo, 20, 15); // maybe externialise these parameters
+      auto newHisto = countsPerKeVHisto(histo, 20);//, 15); // maybe externialise these parameters
       // for (int bin = 1; bin<=histo->GetNbinsX(); ++bin) newHisto -> SetBinContent(bin, int(newHisto->GetBinContent(bin)));
       Colib::simulatePeak(newHisto, x_center, x_resolution, nb_hits);
       newHisto->SetLineColor(kRed);
@@ -1251,8 +1251,8 @@ namespace Colib
     auto const & yname  = std::string(yaxis -> GetName ());
     auto const & ytitle = std::string(yaxis -> GetTitle());
     auto const & ybins  = yaxis -> GetNbins();
-    auto const & ymin   = yaxis -> GetXmin();
-    auto const & ymax   = yaxis -> GetXmax();
+    // auto const & ymin   = yaxis -> GetXmin();
+    // auto const & ymax   = yaxis -> GetXmax();
 
     auto const & name  = histoName  + "_mean_" + yname  + "_VS_" + xname ;
     auto const & title = histoTitle + "_mean_" + ytitle + "_VS_" + xtitle;
@@ -1271,7 +1271,7 @@ namespace Colib
         ymean += histo->GetBinContent(binx, biny) * histo->GetYaxis()->GetBinCenter(biny);
         ytot  += histo->GetBinContent(binx, biny);
       }
-      ret -> SetBinContent(binx, ymean/ytot);
+      ret -> SetBinContent(binx, ymean/nYbins);
     }
     return ret;
   }
@@ -1294,8 +1294,8 @@ namespace Colib
     auto const & yname  = std::string(yaxis -> GetName ());
     auto const & ytitle = std::string(yaxis -> GetTitle());
     auto const & ybins  = yaxis -> GetNbins();
-    auto const & ymin   = yaxis -> GetXmin();
-    auto const & ymax   = yaxis -> GetXmax();
+    // auto const & ymin   = yaxis -> GetXmin();
+    // auto const & ymax   = yaxis -> GetXmax();
 
     auto const & name  = histoName  + "_bin"+ std::to_string(binGate) + "_" + yname  + "_VS_" + xname ;
     auto const & title = name + ";" + xtitle;
@@ -1544,8 +1544,8 @@ namespace Colib
     if (!checkHisto(histo)) {error("Colib::countsPerKeV(TH1* histo) : histo does not exists"); return ret;}
     
     auto const & bins = histo->GetNbinsX();
-    auto const & xmin = histo->GetXaxis()->GetXmin();
-    auto const & xmax = histo->GetXaxis()->GetXmax();
+    // auto const & xmin = histo->GetXaxis()->GetXmin();
+    // auto const & xmax = histo->GetXaxis()->GetXmax();
     auto const & vmin = histo->GetMinimum();
     auto const & vmax = histo->GetMaximum();
 

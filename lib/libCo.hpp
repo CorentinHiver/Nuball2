@@ -35,6 +35,7 @@
 #include <mutex>
 #include <numeric>
 #include <queue>
+#include <regex>
 #include <stdexcept>
 #include <string>
 #include <stack>
@@ -1159,8 +1160,9 @@ namespace Colib
 
   std::vector<std::string> match_regex(std::vector<std::string> list, std::string pattern) 
   {
-     // Step 1: Replace * with .*
+    // Step 1: Replace * with .*
     std::string step1 = std::regex_replace(pattern, std::regex("\\*"), ".*");
+    
     // Step 2: Replace ? with .
     std::string regex_pattern = std::regex_replace(step1, std::regex("\\?"), ".");
 
@@ -1173,7 +1175,6 @@ namespace Colib
 
     return ret;
   }
-
 }
 
 #endif //LIBCO_HPP
