@@ -1127,7 +1127,6 @@ namespace Colib
       auto const & residues = y[i] - (y[0] + slope*dx);
       correctionSum += residues/dx;
     }
-  
     double correction = ((N-1) > 0) ? (correctionSum / (N-1)) : 0.0;
     return slope+correction;
   }
