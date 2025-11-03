@@ -2,6 +2,8 @@
 #define LIBROOT_HPP
 
 #include "libRootHeader.hpp"
+#include "libCo.hpp"
+
 /////////////////////////////////////////////////////////////
 // Generic functions using some actually nice ROOT classes //
 /////////////////////////////////////////////////////////////
@@ -11,17 +13,6 @@ namespace Colib
   //////////////////////
   // String functions //
   //////////////////////
-
-  /// @brief Returns a list of files matching name (really the parsed output of the bash command "ls name")
-  Colib::Strings wildcard(std::string const & name)
-  {
-    Colib::Strings ret;
-    std::istringstream iss(gSystem->GetFromPipe(("ls "+name).c_str()).Data());
-    print(iss.str());
-    std::string tmp;
-    while(iss >> tmp) ret.push_back(tmp);
-    return ret;
-  }
 
   /// @brief Returns the list of strings that match the regex pattern
   Colib::Strings match_regex(Colib::Strings list, std::string pattern)

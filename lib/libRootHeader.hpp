@@ -1,8 +1,6 @@
 #ifndef LIBROOTHEADER_HPP
 #define LIBROOTHEADER_HPP
 
-#include "libCo.hpp"
-
 // ********** ROOT includes ********* //
 #include <TAxis.h>
 #include <TCanvas.h>

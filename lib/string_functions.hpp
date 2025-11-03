@@ -305,4 +305,5 @@ std::string concatenate(ARGS&&... args)
 template<class... ARGS>
 std::string ctcstr(ARGS&&... args) {return concatenate(std::forward<ARGS>(args)...);}
 
+
 #endif //STRING_FUNCTIONS_HPP

@@ -311,7 +311,7 @@ bool inline FasterReader::ReadSimple()
 	while (bool_cast(m_data = faster_file_reader_next(m_reader)))
 	{
     // Additionally, ReadData returns true only when a data whose alias is handled is reached
-    // Therefore, this returns true only when the
+    // Therefore, this returns true only when some data is read with a handled alias
 		if(ReadData(m_data)) return true;
 	}
   // End of the file :

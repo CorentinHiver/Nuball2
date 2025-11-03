@@ -1,5 +1,6 @@
 #define DEVCO
 // #include "lib/libRoot.hpp"
+#include "lib/Classes/Timer.hpp"
 // #include "lib/Classes/FilesManager.hpp"
 // #include "lib/Classes/Transitions.hpp"
 // #include "lib/Analyse/SpectraAlignator.hpp"
@@ -13,15 +14,60 @@
 // #include  "lib/Classes/Detectors.hpp"
 // #include  "lib/Analyse/CloversV2.hpp"
 // #include  "lib/Classes/FlexibleHisto.hpp"
-#include  "lib/Analyse/Chi2Minimiser.hpp"
+// #include  "lib/Analyse/Chi2Minimiser.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
+#include "lib/FasterReader/FasterRootInterface.hpp"
+// #include "lib/FasterReader/FasterReaderV2.hpp"
+// #include "TH1F.h"
+// #include "TH2F.h"
+#include "TFile.h"
 
 int main()
 {
-  TH1F* histo = new TH1F("test","test",1000,0,1000);
-  for (int i = 0; i<1000; ++i) histo->Fill(randomCo::fast_dirty_uniform());
-  FlexibleHisto histo_flex(histo);
-  Chi2Minimiser min;
+  size_t nbHits = 1e4;
+
+  Timer timer;
+  auto tree = new TTree("test", "test");
+  Hit hit;
+  hit.writing(tree);
+  FasterRootInterface reader("/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast", &hit);
+  reader.setMaxHits(nbHits);
+  while (reader.readNextRootHit()) tree->Fill();
+  reader.close();
+  print(timer());
+
+
+  // auto histo = new TH1F("test", "test", nbHits, 0, nbHits);
+  // auto histo2 = new TH2F("test2", "test2", 1000,0,1000, 1000,0,1e13);
+  // Timer timer2;
+  // FasterReaderV2 reader2("/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast");
+  // while(bool_cast(reader2.readNextHit()) && reader2.getCursor() < nbHits) 
+  // //   {
+  //     reader.print();
+  // //     histo->SetBinContent(reader.getCursor(), reader.getTimestamp());
+  // //     histo2->Fill(reader.getHeader().label, reader.getTimestamp());
+  // //   }
+  // reader2.close();
+  // print(timer2());
+  // // Hit hit;
+  // // FasterReaderV2 reader(&hit, "/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast");
+  // // while(reader.readNextHit() && reader.getCursor() < nbHits)
+  // // {
+  // //   histo->SetBinContent(reader.getCursor(), hit.stamp);
+  // //   histo2->Fill(hit.label, hit.stamp);
+  // // }
+  auto out = TFile::Open("test.root", "recreate");
+  out->cd();
+  tree->Write();
+  // histo2->Write();
+  // out->Write();
+  out->Close();
+
+
+  // TH1F* histo = new TH1F("test","test",1000,0,1000);
+  // for (int i = 0; i<1000; ++i) histo->Fill(randomCo::fast_dirty_uniform());
+  // FlexibleHisto histo_flex(histo);
+  // Chi2Minimiser min;
   // CalibAndScale calib;
   // Timeshiftor ts;
   // detectors.load("136/index_129.list");

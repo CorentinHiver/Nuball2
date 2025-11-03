@@ -14,7 +14,7 @@
 
 using Label     = ushort;    // Label (ushort)
 using ADC       = int;       // ADC (int)
-using NRJ       = float;    // Energy in keV (float) // Changed to double for Geant4
+using NRJ       = float;     // Energy in keV (float)
 using Timestamp = ULong64_t; // Timestamp in ps (absolute)
 using Time      = Long64_t;  // Time in ps (relative)
 using Time_ns   = float;     // Time in ns (relative) !deprecated! 
@@ -290,14 +290,10 @@ public:
     time   (hit.time),
     adc    (hit.adc),
     nrj    (hit.nrj),
-  #ifndef QDC1MAX
     qdc2   (hit.qdc2),
     nrj2   (hit.nrj2),
-#ifndef QDC2MAX
     qdc3   (hit.qdc3),
     nrj3   (hit.nrj3),
-#endif //QDC2MAX
-  #endif //QDC1MAX
     pileup (hit.pileup)
     {}
 
@@ -308,14 +304,10 @@ public:
     time   = hit.time;
     adc    = hit.adc;
     nrj    = hit.nrj;
-  #ifndef QDC1MAX
     qdc2   = hit.qdc2;
     nrj2   = hit.nrj2,
-#ifndef QDC2MAX
     qdc3   = hit.qdc3;
     nrj3   = hit.nrj3,
-#endif //QDC2MAX
-  #endif //QDC1MAX
     pileup = hit.pileup;
     return *this;
   }
@@ -327,14 +319,10 @@ public:
     time   = 0ll;
     adc    = 0;
     nrj    = 0.f;
-  #ifndef QDC1MAX
     qdc2   = 0;
     nrj2   = 0.f;
-#ifndef QDC2MAX
     qdc3   = 0;
     nrj3   = 0.f;
-#endif //QDC2MAX
-  #endif //QDC1MAX
     pileup = false;
   }
 
@@ -343,14 +331,10 @@ public:
   Time      time   = 0ll;   // Relative time
   ADC       adc    = 0;     // Energy in ADC or QDC1
   NRJ       nrj    = 0.f;   // Calibrated energy in keV
-  #ifndef QDC1MAX
   ADC       qdc2   = 0;     // Energy in qdc2
   NRJ       nrj2   = 0.f;   // Calibrated energy in qdc2 in keV
-    #ifndef QDC2MAX
   ADC       qdc3   = 0;     // Energy in qdc3
   NRJ       nrj3   = 0.f;   // Calibrated energy in qdc3 in keV
-    #endif //QDC2MAX
-  #endif //QDC1MAX
   bool      pileup = false; // Pile-up (and saturation in QDC) tag
 
   void reading (TTree * tree, std::string const & options = "");
@@ -415,12 +399,12 @@ void Hit::writing(TTree * tree, std::string const & options)
 
 std::ostream& operator<<(std::ostream& cout, Hit const & hit)
 {
-  cout << "l : " << hit.label;
-  if (hit.stamp != 0) cout << " timestamp : " << hit.stamp;
+  cout << "l : " << std::setw(3) << hit.label;
+  if (hit.stamp != 0) cout << std::setprecision(7) << " timestamp : " << double(hit.stamp*1e-12) << " s ";
   if (hit.time  != 0) cout << " rel time : "  << hit.time;
-  if (hit.adc   != 0) cout << " adc : "       << hit.adc ;
-  if (hit.qdc2  != 0) cout << " qdc2 : "      << hit.qdc2;
-  if (hit.qdc3  != 0) cout << " qdc3 : "      << hit.qdc3;
+  if (hit.adc   != 0) cout << " adc : " << std::setw(8) << hit.adc;
+  if (hit.qdc2  != 0) cout << " qdc2 : "<< std::setw(8) << hit.qdc2;
+  if (hit.qdc3  != 0) cout << " qdc3 : "<< std::setw(8) << hit.qdc3;
   if (hit.nrj   != 0) cout << " nrj : "       << hit.nrj ;
   if (hit.nrj2  != 0) cout << " nrj2 : "      << hit.nrj2;
   if (hit.nrj3  != 0) cout << " nrj3 : "      << hit.nrj3;

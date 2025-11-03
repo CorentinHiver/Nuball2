@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <map>
 #include <chrono>
+#include <unordered_map>
 
 using hr_clock_t = std::chrono::high_resolution_clock;
 using time_point_t = std::chrono::time_point<hr_clock_t>;
@@ -14,7 +15,7 @@ std::string nicer_seconds(T const & time, int nb_decimals = 3)
 {
   T _time = time;
   std::string unit;
-        if (_time<120.  )  {             ; unit = " s"  ;}
+        if (_time<120.  ) {             ; unit = " s"  ;}
   else if (_time<3600. )  {_time/=60.   ; unit = " min";}
   else if (_time<86400.)  {_time/=3600. ; unit = " h"  ;}
   else                    {_time/=86400.; unit = " j"  ;}
