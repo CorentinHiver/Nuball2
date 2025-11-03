@@ -1143,20 +1143,10 @@ namespace Colib
     std::array<char, 128> buffer;
     std::string result;
     std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
-    if (!pipe) throw std::runtime_error("popen() failed!");
+    if (!pipe) throw std::runtime_error("in Colib::execTerminal : popen() failed!");
     while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) result += buffer.data();
     return result;
   }
-
-  // std::vector<std::string> wildcard(std::string const & name)
-  // {
-  //   std::vector<std::string> ret;
-  //   std::istringstream iss(execTerminal(("ls "+name).c_str()));
-  //   print(iss.str());
-  //   std::string tmp;
-  //   while(iss >> tmp) ret.push_back(tmp);
-  //   return ret;
-  // }
 
   std::vector<std::string> match_regex(std::vector<std::string> list, std::string pattern) 
   {
