@@ -460,506 +460,510 @@ std::ostream& operator<<(std::ostream& out, Folder const & folder)
 /**
  * @brief EXPERIMENTAL Object used to hold a list of folders
  */
-class Folders
+namespace Colib
 {
-public:
 
-  Folders(){}
-
-  Folders(std::vector<std::string> const & folders)
+  class Folders
   {
-    for (auto const & folder : folders) {m_folders.push_back(Folder(folder));}
-  }
-
-  Folders(std::vector<Folder> const & folders) {m_folders = folders;}
-
-  Folders(Folders const & folders) { m_folders = folders.m_folders; }
-
-  Folders& operator=(Folders const & folders) { m_folders = folders.m_folders; return *this;}
-  Folders& operator=(std::vector<std::string> const & folders)
-  {
-    for (auto const & folder : folders) {m_folders.push_back(Folder(folder));} return *this;
-  }
-
-  std::string string() const 
-  {
-    std::string ret;
-    for (auto const & folder : m_folders) ret+=folder.string();
-    return ret;
-  }
-
-  operator std::string() { return this -> string(); }
-  operator std::vector<Folder>() const &  {return m_folders;}
-  Folder const & operator[] (size_t const & i) const {return m_folders[i];}
-
-  auto erase(size_t const & pos)                    {return (m_folders.erase(m_folders.begin()+pos)                            );}
-  auto erase(size_t const & pos, size_t const & size) {return (m_folders.erase(m_folders.begin()+pos), m_folders.begin()+pos+size);}
-
-  void clear() {m_folders.resize(0);}
-  Folders & resize(int const & size) {m_folders.resize(size); return *this;}
-
-  auto size() const {return m_folders.size();}
-
-  auto begin() const {return m_folders.begin();}
-  auto end  () const {return m_folders.end  ();}
-  auto begin()       {return m_folders.begin();}
-  auto end  ()       {return m_folders.end  ();}
-
-  auto const & front() const {return m_folders.front();}
-  auto const & back () const {return m_folders.back ();}
-  auto         front()       {return m_folders.front();}
-  auto         back ()       {return m_folders.back ();}
-
-  auto const & list() const {return m_folders;}
-  auto const & get()  const {return m_folders;}
-
-  void push_back(Folder const & folder) {m_folders.push_back(folder);}
-
-private:
-
-  std::vector<Folder> m_folders;
-};
-
-std::ostream& operator<<(std::ostream& out, Folders const & folders)
-{
-  auto const & vector = folders.get();
-  for (auto folder : vector) out << folder << " ";
-  return out;
-}
-
-/**
- * @brief EXPERIMENTAL Object used to hold the complete path of a giver folder
- * 
- * @details
- * You can use either a full path from the root ("/.../.../") or from the home directory ("~/.../.../")
- * 
- * So far, relative paths are not supported (yet hopefully)
- * 
- */
-class Path
-{
-public:
-  Path(){}
-  Path(Path const & path) : m_exists(path.m_exists), m_path(path.m_path) {}
-
-  /// @brief Turns a string to a path, creating it if create = true and it doesn't already exists
-  Path(std::string const & path, bool const & create = false) : m_path(path) {loadPath(create);}
-
-  /// @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
-  Path(const char* c_str, bool const & create = false) : m_path(std::string(c_str)) {loadPath(create);}
-
-  void makeFolderList() {m_recursive_folders = getList(m_path,"/", true);}
-
-  int  nbFiles() {return Colib::nbFilesInFolder(m_path);}
-  bool exists() {return m_exists;}
-  operator bool() const {return Colib::folderExists(m_path);}
-  bool make() { Colib::createFolderIfNone(m_path); return m_exists = true;}
-  static bool make (std::string path_name) {Path _path(path_name); return (_path.make());}
-
-  // Path & addFolder(Folder const & folder)
-  // {
-  //   if (fileExists(m_path+=folder.get()))
-  //   {
-  //     m_recursive_folders.push_back(folder.name());
-  //   }
-  //   cleanPath();
-  //   return *this;
-  // }
-
-  std::string const & get() const {return m_path;}
-  std::string const & string() const {return(get());}
-  // operator std::string() const & {return (get());}
-  auto c_str() {return m_path.c_str();}
-
-  std::string operator+(std::string const & addString) {return (m_path+addString);}
-  std::string operator+(const char* addString) {return (m_path + static_cast<std::string>(addString));}
-  Path operator+(Folder const & folder) {return Path(m_path + folder.get());}
-
-  /// @brief Returns the number of folders composing the path
-  auto size() const {return m_recursive_folders.size();}
-  /// @brief Returns the list of folders composing the path
-  Folders const & getFolders() const {return m_recursive_folders;}
-  /// @brief Returns the ith folder from the path
-  Folder const & operator[] (size_t const & i) const {return ( (i<this->size()) ? m_recursive_folders[i] : m_recursive_folders.back());}
-  /// @brief Returns the folder's name (i.e., without the whole path)
-  Folder const & folder() const {return m_recursive_folders.get().back();}
-
-  Path & operator=(std::string const & inputString)
-  {
-    m_path = inputString;
-    this -> loadPath();
-    return *this;
-  }
-  Path & operator=(Path & path) 
-  {
-    m_path = path.m_path;
-    this -> loadPath();
-    return *this;
-  }
-  Path & operator=(Path const & path) 
-  {
-    m_path = path.m_path;
-    this -> loadPath();
-    return *this;
-  }
-  Path & operator=(const char* path) 
-  {
-    m_path = path;
-    this -> loadPath();
-    return *this;
-  }
-
-  Path const & operator+=(std::string const & addString)
-  {
-    auto str = addString;
-    Colib::pushBackIfNone(str, '/');
-    m_path+=str;
-    return *this;
-  }
-
-  bool operator==(std::string const & cmprStr) {return (cmprStr == m_path);}
-
-  static Path home() {return Path(std::string(std::getenv("HOME")));}
-  static Path pwd() {return Path(std::string(std::getenv("PWD")));}
-
-private:
-
-  void loadPath(bool const & create = false)
-  {
-  #ifdef COMULTITHREADING
-    // lock_mutex lock(MTObject::mutex);
-  #endif //COMULTITHREADING
-
-    m_recursive_folders.clear();
-    if (m_path[0]=='/')
-    {// Absolute path
-    }
-    else if (m_path[0]=='~')
-    {// Home path
-      m_path.erase(0,1);
-      m_path = home()+m_path;
-    }
-    else
-    {// Relative path
-      m_path = pwd()+m_path;
-    }
-
-    // To ensure it finishes with a '/' :
-    Colib::pushBackIfNone(m_path, '/');
-
-    //Additional information ;
-    this -> makeFolderList();
-
-    // To clean the path of the ./ and ../
-    this -> cleanPath();
-
-    // Create the folder if it doesn't exist yet :
-    if (create) {this -> make();}
-    else if (!(m_exists = Colib::folderExists(m_path))) print(m_path+" doesn't exist !!");
-
-  }
-
-  /// @brief To remove extraneous ./ or ../
-  void cleanPath()
-  {
-    for (std::size_t i = 0; i<m_recursive_folders.size(); i++)
+  public:
+  
+    Folders(){}
+  
+    Folders(std::vector<std::string> const & folders)
     {
-      auto const & folder = m_recursive_folders[i];
-      if (folder == "../")
+      for (auto const & folder : folders) {m_folders.push_back(Folder(folder));}
+    }
+  
+    Folders(std::vector<Folder> const & folders) {m_folders = folders;}
+  
+    Folders(Folders const & folders) { m_folders = folders.m_folders; }
+  
+    Folders& operator=(Folders const & folders) { m_folders = folders.m_folders; return *this;}
+    Folders& operator=(std::vector<std::string> const & folders)
+    {
+      for (auto const & folder : folders) {m_folders.push_back(Folder(folder));} return *this;
+    }
+  
+    std::string string() const 
+    {
+      std::string ret;
+      for (auto const & folder : m_folders) ret+=folder.string();
+      return ret;
+    }
+  
+    operator std::string() { return this -> string(); }
+    operator std::vector<Folder>() const &  {return m_folders;}
+    Folder const & operator[] (size_t const & i) const {return m_folders[i];}
+  
+    auto erase(size_t const & pos)                    {return (m_folders.erase(m_folders.begin()+pos)                            );}
+    auto erase(size_t const & pos, size_t const & size) {return (m_folders.erase(m_folders.begin()+pos), m_folders.begin()+pos+size);}
+  
+    void clear() {m_folders.resize(0);}
+    Folders & resize(int const & size) {m_folders.resize(size); return *this;}
+  
+    auto size() const {return m_folders.size();}
+  
+    auto begin() const {return m_folders.begin();}
+    auto end  () const {return m_folders.end  ();}
+    auto begin()       {return m_folders.begin();}
+    auto end  ()       {return m_folders.end  ();}
+  
+    auto const & front() const {return m_folders.front();}
+    auto const & back () const {return m_folders.back ();}
+    auto         front()       {return m_folders.front();}
+    auto         back ()       {return m_folders.back ();}
+  
+    auto const & list() const {return m_folders;}
+    auto const & get()  const {return m_folders;}
+  
+    void push_back(Folder const & folder) {m_folders.push_back(folder);}
+  
+  private:
+  
+    std::vector<Folder> m_folders;
+  };
+  
+  std::ostream& operator<<(std::ostream& out, Folders const & folders)
+  {
+    auto const & vector = folders.get();
+    for (auto folder : vector) out << folder << " ";
+    return out;
+  }
+
+  /**
+   * @brief EXPERIMENTAL Object used to hold the complete path of a giver folder
+   * 
+   * @details
+   * You can use either a full path from the root ("/.../.../") or from the home directory ("~/.../.../")
+   * 
+   * So far, relative paths are not supported (yet hopefully)
+   * 
+   */
+  class Path
+  {
+  public:
+    Path(){}
+    Path(Path const & path) : m_exists(path.m_exists), m_path(path.m_path) {}
+
+    /// @brief Turns a string to a path, creating it if create = true and it doesn't already exists
+    Path(std::string const & path, bool const & create = false) : m_path(path) {loadPath(create);}
+
+    /// @brief Turns a C string to a path, creating it if create = true and it doesn't already exists
+    Path(const char* c_str, bool const & create = false) : m_path(std::string(c_str)) {loadPath(create);}
+
+    void makeFolderList() {m_recursive_folders = getList(m_path,"/", true);}
+
+    int  nbFiles() {return Colib::nbFilesInFolder(m_path);}
+    bool exists() {return m_exists;}
+    operator bool() const {return Colib::folderExists(m_path);}
+    bool make() { Colib::createFolderIfNone(m_path); return m_exists = true;}
+    static bool make (std::string path_name) {Path _path(path_name); return (_path.make());}
+
+    // Path & addFolder(Folder const & folder)
+    // {
+    //   if (fileExists(m_path+=folder.get()))
+    //   {
+    //     m_recursive_folders.push_back(folder.name());
+    //   }
+    //   cleanPath();
+    //   return *this;
+    // }
+
+    std::string const & get() const {return m_path;}
+    std::string const & string() const {return(get());}
+    // operator std::string() const & {return (get());}
+    auto c_str() {return m_path.c_str();}
+
+    std::string operator+(std::string const & addString) {return (m_path+addString);}
+    std::string operator+(const char* addString) {return (m_path + static_cast<std::string>(addString));}
+    Path operator+(Folder const & folder) {return Path(m_path + folder.get());}
+
+    /// @brief Returns the number of folders composing the path
+    auto size() const {return m_recursive_folders.size();}
+    /// @brief Returns the list of folders composing the path
+    Folders const & getFolders() const {return m_recursive_folders;}
+    /// @brief Returns the ith folder from the path
+    Folder const & operator[] (size_t const & i) const {return ( (i<this->size()) ? m_recursive_folders[i] : m_recursive_folders.back());}
+    /// @brief Returns the folder's name (i.e., without the whole path)
+    Folder const & folder() const {return m_recursive_folders.get().back();}
+
+    Path & operator=(std::string const & inputString)
+    {
+      m_path = inputString;
+      this -> loadPath();
+      return *this;
+    }
+    Path & operator=(Path & path) 
+    {
+      m_path = path.m_path;
+      this -> loadPath();
+      return *this;
+    }
+    Path & operator=(Path const & path) 
+    {
+      m_path = path.m_path;
+      this -> loadPath();
+      return *this;
+    }
+    Path & operator=(const char* path) 
+    {
+      m_path = path;
+      this -> loadPath();
+      return *this;
+    }
+
+    Path const & operator+=(std::string const & addString)
+    {
+      auto str = addString;
+      Colib::pushBackIfNone(str, '/');
+      m_path+=str;
+      return *this;
+    }
+
+    bool operator==(std::string const & cmprStr) {return (cmprStr == m_path);}
+
+    static Path home() {return Path(std::string(std::getenv("HOME")));}
+    static Path pwd() {return Path(std::string(std::getenv("PWD")));}
+
+  private:
+
+    void loadPath(bool const & create = false)
+    {
+    #ifdef COMULTITHREADING
+      // lock_mutex lock(MTObject::mutex);
+    #endif //COMULTITHREADING
+
+      m_recursive_folders.clear();
+      if (m_path[0]=='/')
+      {// Absolute path
+      }
+      else if (m_path[0]=='~')
+      {// Home path
+        m_path.erase(0,1);
+        m_path = home()+m_path;
+      }
+      else
+      {// Relative path
+        m_path = pwd()+m_path;
+      }
+
+      // To ensure it finishes with a '/' :
+      Colib::pushBackIfNone(m_path, '/');
+
+      //Additional information ;
+      this -> makeFolderList();
+
+      // To clean the path of the ./ and ../
+      this -> cleanPath();
+
+      // Create the folder if it doesn't exist yet :
+      if (create) {this -> make();}
+      else if (!(m_exists = Colib::folderExists(m_path))) print(m_path+" doesn't exist !!");
+
+    }
+
+    /// @brief To remove extraneous ./ or ../
+    void cleanPath()
+    {
+      for (std::size_t i = 0; i<m_recursive_folders.size(); i++)
       {
-        m_recursive_folders.erase(i);   // Delete ".." folder
-        if (i>0) 
+        auto const & folder = m_recursive_folders[i];
+        if (folder == "../")
         {
-          m_recursive_folders.erase(--i); // Delete previous folder that is "cancelled" by ".."
-          --i; // Go back to previous folder
+          m_recursive_folders.erase(i);   // Delete ".." folder
+          if (i>0) 
+          {
+            m_recursive_folders.erase(--i); // Delete previous folder that is "cancelled" by ".."
+            --i; // Go back to previous folder
+          }
+        }
+        else if (folder == "./")
+        {
+          m_recursive_folders.erase(i); // Delete "." folder
         }
       }
-      else if (folder == "./")
+      m_path = "/"+m_recursive_folders.string();
+    }
+
+
+    bool m_exists = false;
+    std::string m_path;
+    Folders m_recursive_folders;
+  };
+
+  std::ostream& operator<<(std::ostream& out, Path const & p)
+  {
+    out << p.get();
+    return out;
+  }
+
+  /**
+   * @brief EXPERIMENTAL Contains the short name and the extension of a given file, without any knowledge of its path
+   */
+  class Filename
+  {
+  public:
+    Filename(){}
+    Filename(std::string const & _filename)
+    {
+      this -> fill(_filename);
+    }
+
+    Filename(Filename const & _filename) : m_fullName(_filename.m_fullName), m_shortName(_filename.m_shortName), m_extension(_filename.m_extension) {}
+
+    Filename & operator=(Filename const & _filename)
+    {
+      m_fullName = _filename.m_fullName;
+      m_shortName = _filename.m_shortName;
+      m_extension = _filename.m_extension;
+      return *this;
+    }
+
+    Filename & operator=(std::string const & _filename)
+    {
+      this -> fill(_filename);
+      return *this;
+    }
+
+    Filename & operator=(const char* _filename)
+    {
+      this -> fill(std::string(_filename));
+      return *this;
+    }
+
+    operator std::string() const & {return m_fullName;}
+    std::string const & get() const {return m_fullName;}
+    std::string const & string() const {return m_fullName;}
+    std::string c_str() const {return m_fullName.c_str();}
+
+    /// @brief Full name stands for the file name with the path nor the extension
+    std::string const & fullName() const {return m_fullName;}
+
+    /// @brief Short name stands for the file name without the path nor the extension
+    std::string const & shortName() const {return m_shortName;}
+
+    std::string const & extension() const {return m_extension;}
+
+    void setExtension(std::string const & new_extension) 
+    {
+      m_extension = new_extension; 
+      remove(m_extension, '.');
+      update();
+    }
+
+
+
+  private:
+
+    void update()
+    {
+      m_fullName = m_shortName + "." + m_extension;
+    }
+
+    void fill(std::string const & filename)
+    {
+      if (Colib::hasPath(filename)) {print(filename, "is not a filename...");}
+      else
       {
-        m_recursive_folders.erase(i); // Delete "." folder
+        m_fullName = filename;
+        m_shortName = Colib::rmPathAndExt(filename);
+        m_extension = Colib::getExtension(filename);
+        if (m_extension == "")
+        {
+          m_extension = "extension";
+          update();
+        }
       }
     }
-    m_path = "/"+m_recursive_folders.string();
+    std::string m_fullName;
+    std::string m_shortName;
+    std::string m_extension;
+  };
+
+  std::ostream& operator<<(std::ostream& os, Filename const & filename)
+  {
+    os << filename.fullName();
+    return os;
   }
 
-
-  bool m_exists = false;
-  std::string m_path;
-  Folders m_recursive_folders;
-};
-
-std::ostream& operator<<(std::ostream& out, Path const & p)
-{
-  out << p.get();
-  return out;
-}
-
-/**
- * @brief EXPERIMENTAL Contains the short name and the extension of a given file, without any knowledge of its path
- */
-class Filename
-{
-public:
-  Filename(){}
-  Filename(std::string const & _filename)
+  /**
+   * @brief EXPERIMENTAL A File is made of a Path and a Filename
+   * @details
+   * A File object is composed of a Path and a Filename object, which are composed of :
+   *  - A list of folder that forms the Path to the file
+   *  - A short name and an extension for the Filename
+   * @todo rethink the checkMode logic ...
+   */
+  class File
   {
-    this -> fill(_filename);
-  }
+  public:
+    File(){}
+    File(File const & file) : 
+            m_ok(file.m_ok)    ,
+            m_file(file.m_file), 
+            m_path(file.m_path), 
+            m_filename(file.m_filename) 
+    {}
 
-  Filename(Filename const & _filename) : m_fullName(_filename.m_fullName), m_shortName(_filename.m_shortName), m_extension(_filename.m_extension) {}
-
-  Filename & operator=(Filename const & _filename)
-  {
-    m_fullName = _filename.m_fullName;
-    m_shortName = _filename.m_shortName;
-    m_extension = _filename.m_extension;
-    return *this;
-  }
-
-  Filename & operator=(std::string const & _filename)
-  {
-    this -> fill(_filename);
-    return *this;
-  }
-
-  Filename & operator=(const char* _filename)
-  {
-    this -> fill(std::string(_filename));
-    return *this;
-  }
-
-  operator std::string() const & {return m_fullName;}
-  std::string const & get() const {return m_fullName;}
-  std::string const & string() const {return m_fullName;}
-  std::string c_str() const {return m_fullName.c_str();}
-
-  /// @brief Full name stands for the file name with the path nor the extension
-  std::string const & fullName() const {return m_fullName;}
-
-  /// @brief Short name stands for the file name without the path nor the extension
-  std::string const & shortName() const {return m_shortName;}
-
-  std::string const & extension() const {return m_extension;}
-
-  void setExtension(std::string const & new_extension) 
-  {
-    m_extension = new_extension; 
-    remove(m_extension, '.');
-    update();
-  }
-
-
-
-private:
-
-  void update()
-  {
-    m_fullName = m_shortName + "." + m_extension;
-  }
-
-  void fill(std::string const & filename)
-  {
-    if (Colib::hasPath(filename)) {print(filename, "is not a filename...");}
-    else
+    File(std::string const & file, std::string const & mode = "") 
     {
-      m_fullName = filename;
-      m_shortName = Colib::rmPathAndExt(filename);
-      m_extension = Colib::getExtension(filename);
-      if (m_extension == "")
+      fill(file);
+      checkMode(mode);
+      check();
+    }
+
+    File(const char * file, std::string const & mode = "") 
+    {
+      fill(file);
+      checkMode(mode);
+      check();
+    }
+    
+    File(Path const & path, Filename const & filename, std::string const & mode = "") :
+      m_path(path), 
+      m_filename(filename) 
+    {
+      update();
+      checkMode(mode);
+      check();
+    }
+
+    void checkMode(std::string const & mode)
+    {
+      if (mode == "in" || mode == "read" || mode == "input") check_verif = true;
+    }
+
+    auto c_str() {return m_file.c_str();}
+    auto c_str() const {return m_file.c_str();}
+
+    File & operator=(std::string const & file) 
+    {
+      this -> fill(file);
+      check();
+      return *this;
+    }
+    File & operator=(const char * file) 
+    {
+      this -> fill(std::string(file));
+      check();
+      return *this;
+    }
+    File & operator=(File const & file) 
+    {
+      m_ok   = file.m_ok  ;
+      m_file = file.m_file;
+      m_path = file.m_path;
+      m_filename = file.m_filename;
+      return *this;
+    }
+
+    operator std::string() const &     {return m_file;}
+    std::string const & string() const {return m_file;}
+    std::string const & get   () const {return m_file;}
+
+    Path const & path  () const {return m_path;}
+    Folder const & folder() const {return m_path.folder();}
+    Filename    const & name    () const {return m_filename;}
+    
+    /// @brief Filename stands for the file name without the path but with the extension
+    Filename    const & filename() const {return m_filename;}
+
+    /// @brief Filename stands for the file name without the path but with the extension
+    Filename          & filename()       {return m_filename;}
+
+    /// @brief Short name stands for the file name without the path nor the extension
+    std::string const & shortName() const {return m_filename.shortName();}  
+
+    std::string const & extension() const {return m_filename.extension();}
+
+    void setExtension(std::string const & new_extension) {m_filename.setExtension(new_extension); update();}
+    void makePath() {m_path.make();}
+
+    operator bool() const & {return m_ok;}
+    bool const & ok()       {return m_ok;}
+    bool exists() const {return Colib::fileExists(m_file);}
+    auto size(std::string const & unit = "o") const {return Colib::sizeFile(m_file, unit);}
+
+    bool operator==(File const & other) const {return m_file == other.m_file;}
+
+    void read(bool const & check = false)
+    {
+      if (check) this->check();
+      m_file_stream = new std::fstream(m_file, std::ios::in);
+    }
+
+    void write(bool const & make_path = false)
+    {
+      if (make_path) this->makePath();
+      m_file_stream = new std::fstream(m_file, std::ios::out);
+    }
+
+    void close()
+    {
+      m_file_stream->close();
+      delete m_file_stream;
+    }
+
+    template<class T>
+    File& operator<<(T const & t)
+    {
+      (*m_file_stream)<<t;
+      return *this;
+    }
+
+    template<class T>
+    File& operator>>(T const & t)
+    {
+      (*m_file_stream)>>t;
+      return *this;
+    }
+
+  private:
+    void update() {m_file = m_path.string()+m_filename.string(); check();}
+    void check()
+    {
+      if (m_path.exists())
       {
-        m_extension = "extension";
-        update();
+        if (Colib::fileExists(m_file) || !check_verif) m_ok = true;
+        else {print("The file", m_file, "is unreachable in folder", m_path); m_ok = false;}
+      }
+      else
+      {
+        print("The path of the file", m_file, "is unreachable");
+        m_ok = false;
       }
     }
-  }
-  std::string m_fullName;
-  std::string m_shortName;
-  std::string m_extension;
-};
 
-std::ostream& operator<<(std::ostream& os, Filename const & filename)
-{
-  os << filename.fullName();
-  return os;
-}
-
-/**
- * @brief EXPERIMENTAL A File is made of a Path and a Filename
- * @details
- * A File object is composed of a Path and a Filename object, which are composed of :
- *  - A list of folder that forms the Path to the file
- *  - A short name and an extension for the Filename
- * @todo rethink the checkMode logic ...
- */
-class File
-{
-public:
-  File(){}
-  File(File const & file) : 
-          m_ok(file.m_ok)    ,
-          m_file(file.m_file), 
-          m_path(file.m_path), 
-          m_filename(file.m_filename) 
-  {}
-
-  File(std::string const & file, std::string const & mode = "") 
-  {
-    fill(file);
-    checkMode(mode);
-    check();
-  }
-
-  File(const char * file, std::string const & mode = "") 
-  {
-    fill(file);
-    checkMode(mode);
-    check();
-  }
-  
-  File(Path const & path, Filename const & filename, std::string const & mode = "") :
-    m_path(path), 
-    m_filename(filename) 
-  {
-    update();
-    checkMode(mode);
-    check();
-  }
-
-  void checkMode(std::string const & mode)
-  {
-    if (mode == "in" || mode == "read" || mode == "input") check_verif = true;
-  }
-
-  auto c_str() {return m_file.c_str();}
-  auto c_str() const {return m_file.c_str();}
-
-  File & operator=(std::string const & file) 
-  {
-    this -> fill(file);
-    check();
-    return *this;
-  }
-  File & operator=(const char * file) 
-  {
-    this -> fill(std::string(file));
-    check();
-    return *this;
-  }
-  File & operator=(File const & file) 
-  {
-    m_ok   = file.m_ok  ;
-    m_file = file.m_file;
-    m_path = file.m_path;
-    m_filename = file.m_filename;
-    return *this;
-  }
-
-  operator std::string() const &     {return m_file;}
-  std::string const & string() const {return m_file;}
-  std::string const & get   () const {return m_file;}
-
-  Path const & path  () const {return m_path;}
-  Folder const & folder() const {return m_path.folder();}
-  Filename    const & name    () const {return m_filename;}
-  
-  /// @brief Filename stands for the file name without the path but with the extension
-  Filename    const & filename() const {return m_filename;}
-
-  /// @brief Filename stands for the file name without the path but with the extension
-  Filename          & filename()       {return m_filename;}
-
-  /// @brief Short name stands for the file name without the path nor the extension
-  std::string const & shortName() const {return m_filename.shortName();}  
-
-  std::string const & extension() const {return m_filename.extension();}
-
-  void setExtension(std::string const & new_extension) {m_filename.setExtension(new_extension); update();}
-  void makePath() {m_path.make();}
-
-  operator bool() const & {return m_ok;}
-  bool const & ok()       {return m_ok;}
-  bool exists() const {return Colib::fileExists(m_file);}
-  auto size(std::string const & unit = "o") const {return Colib::sizeFile(m_file, unit);}
-
-  bool operator==(File const & other) const {return m_file == other.m_file;}
-
-  void read(bool const & check = false)
-  {
-    if (check) this->check();
-    m_file_stream = new std::fstream(m_file, std::ios::in);
-  }
-
-  void write(bool const & make_path = false)
-  {
-    if (make_path) this->makePath();
-    m_file_stream = new std::fstream(m_file, std::ios::out);
-  }
-
-  void close()
-  {
-    m_file_stream->close();
-    delete m_file_stream;
-  }
-
-  template<class T>
-  File& operator<<(T const & t)
-  {
-    (*m_file_stream)<<t;
-    return *this;
-  }
-
-  template<class T>
-  File& operator>>(T const & t)
-  {
-    (*m_file_stream)>>t;
-    return *this;
-  }
-
-private:
-  void update() {m_file = m_path.string()+m_filename.string(); check();}
-  void check()
-  {
-    if (m_path.exists())
+    void fill(std::string const & file)
     {
-      if (Colib::fileExists(m_file) || !check_verif) m_ok = true;
-      else {print("The file", m_file, "is unreachable in folder", m_path); m_ok = false;}
+      if (Colib::hasPath(file))
+      {
+        m_path = Colib::getPath(file);
+        m_filename = Colib::removePath(file);
+      }
+      else
+      {
+        m_path = Path::pwd();
+        m_filename = file;
+      }
+      this -> update();
     }
-    else
-    {
-      print("The path of the file", m_file, "is unreachable");
-      m_ok = false;
-    }
-  }
 
-  void fill(std::string const & file)
+    bool m_ok = false;
+    bool check_verif = false;
+    std::string m_file; // Full path + short name + extension
+    Path m_path;        // Path
+    Filename m_filename;// Name + extension
+
+    std::fstream* m_file_stream = nullptr;
+  };
+  std::string operator+(Path const & path, Filename const & filename) {return path.get() + filename.get();}
+
+  std::ostream& operator<<(std::ostream& out, File const & file)
   {
-    if (Colib::hasPath(file))
-    {
-      m_path = Colib::getPath(file);
-      m_filename = Colib::removePath(file);
-    }
-    else
-    {
-      m_path = Path::pwd();
-      m_filename = file;
-    }
-    this -> update();
+    out << file.get();
+    return out;
   }
-
-  bool m_ok = false;
-  bool check_verif = false;
-  std::string m_file; // Full path + short name + extension
-  Path m_path;        // Path
-  Filename m_filename;// Name + extension
-
-  std::fstream* m_file_stream = nullptr;
-};
-std::string operator+(Path const & path, Filename const & filename) {return path.get() + filename.get();}
-
-std::ostream& operator<<(std::ostream& out, File const & file)
-{
-  out << file.get();
-  return out;
 }
 
 #endif //FILES_HPP

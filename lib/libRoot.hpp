@@ -10,19 +10,19 @@
 
 namespace Colib
 {
-  //////////////////////
-  // String functions //
-  //////////////////////
+  // //////////////////////
+  // // String functions //
+  // //////////////////////
 
-  /// @brief Returns the list of strings that match the regex pattern
-  Colib::Strings match_regex(Colib::Strings list, std::string pattern)
-  {
-    TRegexp reg((TString(pattern.c_str()).ReplaceAll("*", ".*")).ReplaceAll("?", "."));
-    std::vector<TString> strings; for (auto const & e : list) strings.push_back(e.c_str());
-    Colib::Strings ret;
-    for (size_t i = 0; i < strings.size(); ++i) if (strings[i].Index(reg) != kNPOS) ret.push_back(list[i]);
-    return ret;
-  }
+  // /// @brief Returns the list of strings that match the regex pattern
+  // Colib::Strings match_regex(Colib::Strings list, std::string pattern)
+  // {
+  //   TRegexp reg((TString(pattern.c_str()).ReplaceAll("*", ".*")).ReplaceAll("?", "."));
+  //   std::vector<TString> strings; for (auto const & e : list) strings.push_back(e.c_str());
+  //   Colib::Strings ret;
+  //   for (size_t i = 0; i < strings.size(); ++i) if (strings[i].Index(reg) != kNPOS) ret.push_back(list[i]);
+  //   return ret;
+  // }
 
   ///////////////////////
   // TObject functions //
@@ -441,7 +441,7 @@ namespace Colib
    * @param histo
    * @param options : A : discards null Y value
    * @return THist* the linearized TH2
-   * @todo : if intersting, maybe add more options, like in which cay to linarize
+   * @todo : if intersting, maybe add more options, like in which way to linarize
    */
   template<class TBidim, class THist>
   THist* lineariseBidim(TBidim const * histo, std::string options = "")

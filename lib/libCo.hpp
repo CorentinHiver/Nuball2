@@ -721,53 +721,58 @@ namespace Colib
 //    ARRAY FUNCTIONS   //
 //////////////////////////
 
-template <typename T, std::size_t N>
-constexpr int find_index(const std::array<T, N>& array, const T& value) 
+namespace Colib
 {
-  for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return i;
-  return -1;  // Value not found
-} 
-
-template <typename T, std::size_t N>
-constexpr T found(const std::array<T, N>& array, const T& value) 
-{
-  for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return true;
-  return false;  // Value not found
-} 
+  template <typename T, std::size_t N>
+  constexpr int find_index(const std::array<T, N>& array, const T& value) 
+  {
+    for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return i;
+    return -1;  // Value not found
+  } 
+  
+  template <typename T, std::size_t N>
+  constexpr T found(const std::array<T, N>& array, const T& value) 
+  {
+    for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return true;
+    return false;  // Value not found
+  } 
+}
 
 
 ///////////////////////////////////
 //    UNORDERED SETS FUNCTIONS   //
 ///////////////////////////////////
 
-template<class T>
-constexpr bool found (std::unordered_set<T> set, T const & e)
+namespace Colib
 {
-  return set.find(e) != set.end();
+  template<class T>
+  constexpr bool found (std::unordered_set<T> set, T const & e)
+  {
+    return set.find(e) != set.end();
+  }
 }
-
 
 ///////////////////////////////////
 //    UNORDERED MAPS FUNCTIONS   //
 ///////////////////////////////////
 
-template<typename K, typename V> 
-constexpr inline bool key_found(std::unordered_map<K,V> const & map, K const & key)
-{
-  typename std::unordered_map<K, V>::const_iterator it = map.find(key);
-  return it != map.end();
-}
-
-template<typename K, typename V> 
-constexpr inline bool value_found(std::unordered_map<K,V> const & map, V const & value)
-{
-  return (std::find_if(map.begin(), map.end(), [&](const auto& pair) {
-        return pair.second == value;
-    }));
-}
-
 namespace Colib
 {
+  template<typename K, typename V> 
+  constexpr inline bool key_found(std::unordered_map<K,V> const & map, K const & key)
+  {
+    typename std::unordered_map<K, V>::const_iterator it = map.find(key);
+    return it != map.end();
+  }
+
+  template<typename K, typename V> 
+  constexpr inline bool value_found(std::unordered_map<K,V> const & map, V const & value)
+  {
+    return (std::find_if(map.begin(), map.end(), [&](const auto& pair) {
+          return pair.second == value;
+      }));
+  }
+
   /// @brief Returns the list of keys in a map
   /// @details This method is only looking in the keys, not the values
   template<typename K, typename V> 
@@ -785,106 +790,109 @@ namespace Colib
 //    MAPS FUNCTIONS   //
 /////////////////////////
 
-/// @brief Returns yes if the key is found in the map
-/// @details This method is only looking in the keys, not in the values
-template<typename K, typename V> 
-constexpr inline bool key_found(std::map<K,V> const & map, K const & key)
+namespace Colib
 {
-  typename std::map<K, V>::const_iterator it = map.find(key);
-  return it != map.end();
-}
-
-/// @brief Returns the list of keys in a map
-/// @details This method is only looking in the keys, not the values
-template<typename K, typename V> 
-inline std::vector<K> list_of_keys(std::map<K,V> const & map)
-{
-  std::vector<K> ret;
-  for (auto const & it : map) ret.push_back(it.first);
-  return ret;
-}
-
-/// @brief Returns yes if the value is found in the map
-/// @details This method is only looking in the values, not in the keys
-template<typename K, typename V> 
-inline bool value_found(std::map<K,V> const & map, V const & value)
-{
-  return (std::find_if(map.begin(), map.end(), [&](const auto& pair) {
-        return pair.second == value;
-    }));
-}
-
-/// @brief Returns the element with the maximum value
-/// @details This method is only comparing values, not keys
-template<typename K, typename V> 
-inline std::pair<K,V> get_max_element(std::map<K,V> const & map) 
-{
-  return *std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+  /// @brief Returns yes if the key is found in the map
+  /// @details This method is only looking in the keys, not in the values
+  template<typename K, typename V> 
+  constexpr inline bool key_found(std::map<K,V> const & map, K const & key)
   {
-    return p1.second < p2.second;
-  }); 
-}
+    typename std::map<K, V>::const_iterator it = map.find(key);
+    return it != map.end();
+  }
 
-/// @brief Returns the maximum value stored in the map
-/// @details This method is only looking for values, not keys
-template<typename K, typename V> 
-inline V get_max_value(std::map<K,V> const & map) 
-{
-  return (std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+  /// @brief Returns the list of keys in a map
+  /// @details This method is only looking in the keys, not the values
+  template<typename K, typename V> 
+  inline std::vector<K> list_of_keys(std::map<K,V> const & map)
   {
-    return p1.second < p2.second;
-  })->second); 
-}
-
-/// @brief Returns the maximum key stored in the map
-/// @details This method is only looking for values, not keys
-template<typename K, typename V> 
-inline K get_max_key(std::map<K,V> const & map) 
-{
-  return (*std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
-  {
-        return p1.first < p2.first;
-  })->first); 
-}
-
-template<typename K, typename V> 
-inline std::pair<K,V> get_min(std::map<K,V> const & map) 
-{
-  return *std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
-  {
-        return p1.second > p2.second;
-  }); 
-}
-
-template<typename K, typename V> 
-inline V get_min_value(std::map<K,V> const & map) 
-{
-  return (std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
-  {
-        return p1.second > p2.second;
-  })->second); 
-}
-
-template<typename K, typename V> 
-inline K get_min_key(std::map<K,V> const & map) 
-{
-  return (*std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
-  {
-        return p1.first > p2.first;
-  })->first); 
-}
-
-template<typename NewK, typename K, typename V>
-inline auto convert(std::map<K,V> const & map) 
-{
-    std::map<NewK, V> ret;
-    if (map.empty()) return ret;
-  
-    for (auto const & e : map) {
-        ret.emplace(static_cast<NewK>(e.first), e.second);
-    }
-  
+    std::vector<K> ret;
+    for (auto const & it : map) ret.push_back(it.first);
     return ret;
+  }
+
+  /// @brief Returns yes if the value is found in the map
+  /// @details This method is only looking in the values, not in the keys
+  template<typename K, typename V> 
+  inline bool value_found(std::map<K,V> const & map, V const & value)
+  {
+    return (std::find_if(map.begin(), map.end(), [&](const auto& pair) {
+          return pair.second == value;
+      }));
+  }
+
+  /// @brief Returns the element with the maximum value
+  /// @details This method is only comparing values, not keys
+  template<typename K, typename V> 
+  inline std::pair<K,V> get_max_element(std::map<K,V> const & map) 
+  {
+    return *std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+    {
+      return p1.second < p2.second;
+    }); 
+  }
+
+  /// @brief Returns the maximum value stored in the map
+  /// @details This method is only looking for values, not keys
+  template<typename K, typename V> 
+  inline V get_max_value(std::map<K,V> const & map) 
+  {
+    return (std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+    {
+      return p1.second < p2.second;
+    })->second); 
+  }
+
+  /// @brief Returns the maximum key stored in the map
+  /// @details This method is only looking for values, not keys
+  template<typename K, typename V> 
+  inline K get_max_key(std::map<K,V> const & map) 
+  {
+    return (*std::max_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+    {
+          return p1.first < p2.first;
+    })->first); 
+  }
+
+  template<typename K, typename V> 
+  inline std::pair<K,V> get_min(std::map<K,V> const & map) 
+  {
+    return *std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+    {
+          return p1.second > p2.second;
+    }); 
+  }
+
+  template<typename K, typename V> 
+  inline V get_min_value(std::map<K,V> const & map) 
+  {
+    return (std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+    {
+          return p1.second > p2.second;
+    })->second); 
+  }
+
+  template<typename K, typename V> 
+  inline K get_min_key(std::map<K,V> const & map) 
+  {
+    return (*std::min_element(map.begin(), map.end(), [] (const std::pair<K,V> & p1, const std::pair<K,V> & p2) 
+    {
+          return p1.first > p2.first;
+    })->first); 
+  }
+
+  template<typename NewK, typename K, typename V>
+  inline auto convert(std::map<K,V> const & map) 
+  {
+      std::map<NewK, V> ret;
+      if (map.empty()) return ret;
+    
+      for (auto const & e : map) {
+          ret.emplace(static_cast<NewK>(e.first), e.second);
+      }
+    
+      return ret;
+  }
 }
 
 ////////////////////////////
@@ -1122,6 +1130,50 @@ namespace Colib
     double correction = ((N-1) > 0) ? (correctionSum / (N-1)) : 0.0;
     return slope+correction;
   }
+}
+  
+  /////////////////////////////
+  // Get the terminal output //
+  /////////////////////////////
+namespace Colib
+{
+  std::string execTerminal(std::string cmd) 
+  {
+    std::array<char, 128> buffer;
+    std::string result;
+    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
+    if (!pipe) throw std::runtime_error("popen() failed!");
+    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) result += buffer.data();
+    return result;
+  }
+
+  std::vector<std::string> wildcard(std::string const & name)
+  {
+    std::vector<std::string> ret;
+    std::istringstream iss(execTerminal(("ls "+name).c_str()));
+    print(iss.str());
+    std::string tmp;
+    while(iss >> tmp) ret.push_back(tmp);
+    return ret;
+  }
+
+  std::vector<std::string> match_regex(std::vector<std::string> list, std::string pattern) 
+  {
+     // Step 1: Replace * with .*
+    std::string step1 = std::regex_replace(pattern, std::regex("\\*"), ".*");
+    // Step 2: Replace ? with .
+    std::string regex_pattern = std::regex_replace(step1, std::regex("\\?"), ".");
+
+    // Compile the regex
+    std::regex reg(regex_pattern);
+    std::vector<std::string> ret;
+
+    // Match each string in the list
+    for (const auto& s : list) if (std::regex_search(s, reg)) ret.push_back(s);
+
+    return ret;
+  }
+
 }
 
 #endif //LIBCO_HPP
