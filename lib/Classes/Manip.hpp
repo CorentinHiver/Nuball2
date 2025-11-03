@@ -24,7 +24,7 @@ public:
     print(path);
     if (found(path, "*"))
     {
-      auto list_rus = wildcard(path);
+      auto list_rus = findFilesWildcard(path);
     }
     else
     {

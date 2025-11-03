@@ -15,11 +15,11 @@ namespace Colib
   // //////////////////////
 
   // /// @brief Returns the list of strings that match the regex pattern
-  // Colib::Strings match_regex(Colib::Strings list, std::string pattern)
+  // std::vector<std::string> match_regex(std::vector<std::string> list, std::string pattern)
   // {
   //   TRegexp reg((TString(pattern.c_str()).ReplaceAll("*", ".*")).ReplaceAll("?", "."));
   //   std::vector<TString> strings; for (auto const & e : list) strings.push_back(e.c_str());
-  //   Colib::Strings ret;
+  //   std::vector<std::string> ret;
   //   for (size_t i = 0; i < strings.size(); ++i) if (strings[i].Index(reg) != kNPOS) ret.push_back(list[i]);
   //   return ret;
   // }
@@ -1894,7 +1894,7 @@ namespace Colib
   {
     if (histo == nullptr) {error("in myProjection2D : histo is nullptr"); return nullptr;}
 
-    static Colib::Strings types = {"XY", "YX", "XZ", "ZX", "YZ", "ZY"};
+    static std::vector<std::string> types = {"XY", "YX", "XZ", "ZX", "YZ", "ZY"};
     if (!found(types, type)) {error("in myProjection2D(type, histo) :", type, "is not known"); return nullptr;}
     // Preparing the return histo :
     if (name == "") name = histo->GetName()+std::string("_p")+type;
@@ -2652,9 +2652,9 @@ namespace Colib
     }
   
     template<class THist = TH1>
-    Colib::Strings get_names_of(TPad * pad = nullptr)
+    std::vector<std::string> get_names_of(TPad * pad = nullptr)
     {
-      Colib::Strings ret;
+      std::vector<std::string> ret;
       if (!pad) 
       {
         pad = (TPad*)gPad;
@@ -2971,9 +2971,9 @@ namespace Colib
     else return nullptr;
   }
 
-  Colib::Strings get_list_histo(TFile * file, std::string const & class_name = "TH1F")
+  std::vector<std::string> get_list_histo(TFile * file, std::string const & class_name = "TH1F")
   {
-    Colib::Strings ret;
+    std::vector<std::string> ret;
     if (!file) {error("in get_list_histo(TFile * file, std::string class_name) : file is nullptr"); return ret;}
     auto list = file->GetListOfKeys();
     for (auto&& keyAsObj : *list)
@@ -2999,7 +2999,7 @@ namespace Colib
     return ret;
   }
   
-  Colib::Strings get_TH1F_names(std::string const & filename)
+  std::vector<std::string> get_TH1F_names(std::string const & filename)
   {
     auto file = TFile::Open(filename.c_str());
     auto ret =  get_list_histo(file, "TH1F");
@@ -3007,7 +3007,7 @@ namespace Colib
     return ret;
   }
   
-  Colib::Strings get_TH1F_names(TFile * file)
+  std::vector<std::string> get_TH1F_names(TFile * file)
   {
     return get_list_histo(file, "TH1F");
   }
@@ -3025,7 +3025,7 @@ namespace Colib
     return ret;
   }
   
-  TH1F_map get_TH1F_map(TFile * file, Colib::Strings & names)
+  TH1F_map get_TH1F_map(TFile * file, std::vector<std::string> & names)
   {
     TH1F_map ret;
     names = get_TH1F_names(file);
@@ -3046,10 +3046,10 @@ namespace Colib
    * Internally perform a file->cd()
    */
   template<class T>
-  Colib::Strings file_get_names_of(TFile* file = nullptr)
+  std::vector<std::string> file_get_names_of(TFile* file = nullptr)
   {
     // init
-    Colib::Strings ret;
+    std::vector<std::string> ret;
     T *temp_obj = new T(); 
   
     // Check the files :
@@ -3502,44 +3502,32 @@ namespace Colib
   }
   
   /**
-   * @brief Merges files with a maximum output size
+   * @brief Wrapper around ROOT hadd (merges .root files) with a maximum output size
    * 
    * @param target the target name with extension (e.g. output)
    */
-  void hadd(std::string source, std::string target, double size_file_Mo, std::string options = "", int nb_threads = 1)
+  void hadd(std::string source, std::string target, double size_file_Mo, std::string hadd_options = "", size_t nb_threads = 1)
   {
-    if (found(options, "-j")) 
+    if (found(hadd_options, "-j")) 
     {
       error("in Colib hadd, please use the parameter nb_threads instead of -j option of hadd");
       return;
     }
-
-    // Get the list of files that matches the source wildcard
-    TString pattern = source.c_str();
-    TString command = "ls " + pattern;
-    TString result = gSystem->GetFromPipe(command.Data());
-    TObjArray* files = result.Tokenize("\n");
-    auto const & nb_files = files->GetEntries();
-    print(nb_files);
-    if (!files) {error("No file matching", source); return;}
-
+    std::vector<std::string> filenames = findFilesWildcard(source);
+    if (filenames.empty()) {error("No file matching", source); return;}
     // Get the size of each file and the total amount of files
     double total_size = 0;
-    std::vector<double> size_files;
-    Colib::Strings name_files;
-    for (int i = 0; i < nb_files; ++i) 
+    std::vector<double> size_files(filenames.size());
+    for (auto const & filename : filenames) 
     {
-      TObjString* str = (TObjString*)files->At(i);
-      auto const & name = str->GetString().Data();
-      auto const & size = sizeFile(name, "Mo");
-      if (size > size_file_Mo) {error("Input size > output size case not handled:", size, ">", size_file_Mo, "for", name); return;}
-      name_files.push_back(name);
+      auto const & size = sizeFile(filename, "Mo");
+      if (size > size_file_Mo) {error("Input size > output size case not handled:", size, ">", size_file_Mo, "for", filename); return;}
       size_files.push_back(size);
       total_size+=size;
     }
 
     // Estimate the number of output files. If lower than the number of threads, adjust the latter
-    auto const & estimated_nb_files_out = int_cast(total_size/size_file_Mo)+1;
+    auto const & estimated_nb_files_out = size_cast(total_size/size_file_Mo)+1;
     if (nb_threads > estimated_nb_files_out) 
     {
       nb_threads = estimated_nb_files_out;
@@ -3551,33 +3539,33 @@ namespace Colib
     
     // Run hadd :
     std::mutex mutex;
-    int infile_i = 0; 
-    int outfile_i = 0; 
+    size_t infile_i = 0; 
+    size_t outfile_i = 0;
     bool end = false;
 
     std::vector<std::thread> threads;
-    for (int thread_i = 0; thread_i<nb_threads; ++thread_i) threads.emplace_back([&](){
+    for (size_t thread_i = 0; thread_i<nb_threads; ++thread_i) threads.emplace_back([&](){
 
       while(!end)
       {
         mutex.lock();
         // Take the needed number of files :
-        Colib::Strings files;
+        std::vector<std::string> files;
         double thread_size = 0;
-        for (; infile_i<nb_files; ++infile_i)
+        for (; infile_i<filenames.size(); ++infile_i)
         {
           if (thread_size+size_files[infile_i]>size_file_Mo) break;
-          files.push_back(name_files[infile_i]);
+          files.push_back(filenames[infile_i]);
           thread_size+=size_files[infile_i];
         }
-        if (nb_files == infile_i) end = true;
+        if (filenames.size() == infile_i) end = true;
         ++outfile_i;
 
         mutex.unlock();
 
         // Configure output file
         std::string output_name = target+"_"+std::to_string(outfile_i)+".root";
-        std::string command = "hadd " + options + " " + output_name + " " + mergeStrings(files);
+        std::string command = "hadd " + hadd_options + " " + output_name + " " + mergeStrings(files);
         // print(command);
         system(command.c_str());
       }
@@ -4000,8 +3988,8 @@ void libRoot()
   //     m_trees.push_back( m_files.back() -> Get<TTree>(m_name.c_str()) );
   //   }
   
-  //   Colib::Strings m_input_files_expressions;
-  //   Colib::Strings m_files_vec;
+  //   std::vector<std::string> m_input_files_expressions;
+  //   std::vector<std::string> m_files_vec;
   
   //   UInt_t    m_tree_cursor = 0;
   //   ULong64_t m_evt_cursor = 0;

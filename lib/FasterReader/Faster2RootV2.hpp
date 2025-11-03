@@ -10,13 +10,13 @@ public:
 
   void addFiles(std::string files)
   {
-    auto const & filenames = Colib::wildcard(files);
+    auto const & filenames = Colib::findFilesWildcard(files);
     for (auto const & filename : filenames) m_files.push_back(filename);
   }
 
   void addFolder(std::string folder)
   {
-    auto const & filenames = Colib::wildcard(folder+"*");
+    auto const & filenames = Colib::findFilesWildcard(folder+"*");
     for (auto const & filename : filenames) m_files.push_back(filename);
   }
 

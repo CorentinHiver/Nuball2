@@ -25,8 +25,6 @@
 int main()
 {
 
-
-
   // size_t nbHits = 1e4;
 
   // Timer timer;
