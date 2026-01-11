@@ -94,9 +94,8 @@ private:
   TTree* m_tree = nullptr;
   // TTree* m_out_tree; // TBD
 
-  static bool m_use_std;
+  inline static bool m_use_std = false;
 };
-bool Alignator::m_use_std = false;
 
 void Alignator::alignIndexes(bool align)
 {

@@ -247,7 +247,7 @@ void Detectors::readFile(std::string const & filename)
     error(concatenate("Can't open ID file named '", filename, "'"));
     return;
   }
-  else if (file_is_empty(inputFile))
+  else if (fileIsEmpty(inputFile))
   {
     m_ok = m_loaded = false;
     print(filename, "is empty !!");

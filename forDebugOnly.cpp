@@ -5,8 +5,10 @@
 // #include "lib/Classes/Transitions.hpp"
 // #include "lib/Analyse/SpectraAlignator.hpp"
 // #include "lib/MTObjects/MultiHist.hpp"
-#include "lib/libRoot.hpp"
+// #include "lib/libRoot.hpp"
 // #include "lib/libRootHeader.hpp"
+#include "lib/FasterReader/FasterRunReader.hpp"
+// #include "lib/FasterReader/FasterRootInterface.hpp"
 // #include  "lib/Modules/CoRadware.hpp"
 // #include  "lib/Modules/Timeshiftor.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
@@ -22,9 +24,34 @@
 // #include "TH2F.h"
 // #include "TFile.h"
 
-int main()
+int main(int argc, char** argv)
 {
+  Timer totTimer;
 
+  FasterRunReader reader;
+  reader.addFiles(argv[1]);
+  if (argc>2) reader.setMaxHits(static_cast<int>(atof(argv[2])));
+  // reader.convert();
+  reader.setTimeWindow(1e6);
+  reader.setEventTrigger([](Event const & event) -> bool {
+    return ((1 < event.mult) && (event.mult < 5));
+  });
+  reader.mergeAndConvert();
+
+  print("Time : ", totTimer());
+
+  // FasterRootInterface interface(argv[1]);
+  // // FasterRootInterface interface("/home/corentin/faster/136/60Co_center.fast/60Co_center_0001.fast");
+  // if (2<argc) interface.setMaxHits(static_cast<int>(atof(argv[2])));
+  // // interface.convert_raw("test.root");
+
+  // interface.loadDatafile();
+  // interface.checkTimeSorting();
+  // interface.writeData("test.root");
+  
+
+  // Faster2RootV2 reader;
+  // reader.addFiles(argv[1]);
   // size_t nbHits = 1e4;
 
   // Timer timer;

@@ -391,7 +391,7 @@ bool Timeshiftor::load(std::string const & filename)
 {
   std::ifstream inputFile(filename, std::ifstream::in);
   if (!inputFile.good()) {throw NotFoundError(filename);}
-  else if (file_is_empty(inputFile)) {print("TIMESHIFT FILE", filename, "EMPTY !");return false;}
+  else if (fileIsEmpty(inputFile)) {print("TIMESHIFT FILE", filename, "EMPTY !");return false;}
   std::string line = ""; // Reading buffer
   Label label = 0; // Reading buffer
 

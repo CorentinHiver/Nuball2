@@ -2,7 +2,6 @@
 #define EVENT_HPP
 
 #include "Hit.hpp"
-#include "../libRoot.hpp"
 
 #ifdef COMULTITHREADING
   std::mutex mutex_events;
@@ -88,6 +87,46 @@
  * After using it, call Event::clear() to empty the event 
  * (not necessary if read from a TTree because TTree::GetEntry overwrites all the fields).
  */
+
+  /////////////////////////////////
+  // DECOUPLING FROM LIBROOT.HPP //
+  /////////////////////////////////
+
+namespace ColibBis
+{
+  template<class T> std::string typeRoot()          {return "Unknown";}
+  template<> std::string typeRoot<bool>()           {return "O";}
+  template<> std::string typeRoot<char>()           {return "B";}
+  template<> std::string typeRoot<unsigned char>()  {return "b";}
+  template<> std::string typeRoot<short>()          {return "S";}
+  template<> std::string typeRoot<unsigned short>() {return "s";}
+  template<> std::string typeRoot<int>()            {return "I";}
+  template<> std::string typeRoot<unsigned int>()   {return "i";}
+  template<> std::string typeRoot<long>()           {return "G";}
+  template<> std::string typeRoot<unsigned long>()  {return "g";}
+  template<> std::string typeRoot<double>()         {return "D";}
+  template<> std::string typeRoot<float>()          {return "F";}
+  template<> std::string typeRoot<Long64_t>()       {return "L";}
+  template<> std::string typeRoot<ULong64_t>()      {return "l";}
+
+  
+  /// @brief Create a branch for a given value and name
+  template<class T>
+  auto createBranch(TTree* tree, std::string const & name, T * value, int buffsize = 32000)
+  {
+    std::string type_root_format = name+"/"+typeRoot<T>();
+    return (tree -> Branch(name.c_str(), value, type_root_format.c_str(), buffsize));
+  }
+
+  /// @brief Create a branch for a given array and name
+  /// @param name_size: The name of the leaf that holds the size of the array (like the event multiplicity)
+  template<class T>
+  TBranch* createBranchArray(TTree* tree, std::string const & name, T * array, std::string const & name_size, int buffsize = 32000)
+  {
+    std::string type_root_format = name + "[" + name_size + "]/" + typeRoot<std::remove_extent_t<T>>();
+    return tree->Branch(name.c_str(), array, type_root_format.c_str(), buffsize);
+  }
+}
 class Event
 {
   
@@ -126,8 +165,9 @@ public:
   void push_back(Hit const & hit) noexcept;
   void push_front(Hit const & hit) noexcept;
 
-  Event& operator=(Hit const & hit) noexcept ;
-  Event& operator=(Event const & evt) noexcept ;
+  inline Event& operator=(Hit const & hit) noexcept ;
+  inline Event& operator=(Event const & evt) noexcept = default ;  
+  inline Event& operator=(Event && event) noexcept = default;
 
   // Timing management :
   void setT0(Timestamp const & timestamp) noexcept
@@ -153,7 +193,7 @@ public:
   bool isEmpty()  const noexcept {return (mult == 0);}
 
   // Public members :
-  static constexpr size_t maxSize = 255u;
+  inline static constexpr size_t maxSize = 255u;
 
   int mult = 0;
   Timestamp stamp = 0ull;
@@ -209,18 +249,18 @@ private:
 };
 
 inline Hit Event::operator[](int const & hit_i) const noexcept
-{// Problem about the time here ...
-  Hit hit;
-  hit.stamp = stamp + times[hit_i];
-  hit.time  = times [hit_i];
-  hit.label = labels[hit_i];
-  hit.adc   = adcs  [hit_i];
-  hit.qdc2  = qdc2s [hit_i];
-  hit.nrj   = nrjs  [hit_i];
-  hit.nrj2  = nrj2s [hit_i];
-  return hit;
+{// Problem about the time here ... // ENCORE LE CAS ??
+  return Hit(
+    labels[hit_i], 
+    stamp + times[hit_i], 
+    times [hit_i], 
+    adcs  [hit_i], 
+    nrjs  [hit_i], 
+    qdc2s [hit_i], 
+    nrj2s [hit_i], 
+    pileups[hit_i]
+  );
 }
-
 
 inline Event& Event::operator=(Hit const & hit) noexcept
 {
@@ -236,21 +276,21 @@ inline Event& Event::operator=(Hit const & hit) noexcept
   return *this;
 }
 
-inline Event& Event::operator=(Event const & event) noexcept
-{
-  read  = event.read;
-  write = event.write;
-  mult  = event.mult;
-  if (write.t || read.t) stamp = event.stamp;
-  if (write.l || read.l) std::copy_n(event.labels   , mult ,  labels );
-  if (write.T || read.T) std::copy_n(event.times    , mult ,  times  );
-  if (write.e || read.e) std::copy_n(event.adcs     , mult ,  adcs   );
-  if (write.q || read.q) std::copy_n(event.qdc2s    , mult ,  qdc2s  );
-  if (write.E || read.E) std::copy_n(event.nrjs     , mult ,  nrjs   );
-  if (write.Q || read.Q) std::copy_n(event.nrj2s    , mult ,  nrj2s  );
-  if (write.p || read.p) std::copy_n(event.pileups  , mult ,  pileups);
-  return *this;
-}
+// inline Event& Event::operator=(Event const & event) noexcept 
+// {
+//   read  = event.read;
+//   write = event.write;
+//   mult  = event.mult;
+//   if (write.t || read.t) stamp = event.stamp;
+//   if (write.l || read.l) std::copy_n(event.labels   , mult ,  labels );
+//   if (write.T || read.T) std::copy_n(event.times    , mult ,  times  );
+//   if (write.e || read.e) std::copy_n(event.adcs     , mult ,  adcs   );
+//   if (write.q || read.q) std::copy_n(event.qdc2s    , mult ,  qdc2s  );
+//   if (write.E || read.E) std::copy_n(event.nrjs     , mult ,  nrjs   );
+//   if (write.Q || read.Q) std::copy_n(event.nrj2s    , mult ,  nrj2s  );
+//   if (write.p || read.p) std::copy_n(event.pileups  , mult ,  pileups);
+//   return *this;
+// }
 
 void inline Event::reading(TTree * tree, std::string const & options)
 {
@@ -294,28 +334,33 @@ void inline Event::writing(TTree * tree, std::string const & options)
 
   tree -> ResetBranchAddresses();
 
-  if (write.m) Colib::createBranch     (tree, &mult    , "mult"  );
-  if (write.t) Colib::createBranch     (tree, &stamp   , "stamp" );
-  if (write.T) Colib::createBranchArray(tree, &times   , "time"  , "mult");
-  if (write.E) Colib::createBranchArray(tree, &nrjs    , "nrj"   , "mult");
-  if (write.Q) Colib::createBranchArray(tree, &nrj2s   , "nrj2"  , "mult");
-  if (write.e) Colib::createBranchArray(tree, &adcs    , "adc"   , "mult");
-  if (write.q) Colib::createBranchArray(tree, &qdc2s   , "qdc2"  , "mult");
-  if (write.l) Colib::createBranchArray(tree, &labels  , "label" , "mult");
-  if (write.p) Colib::createBranchArray(tree, &pileups , "pileup", "mult");
+  if (write.m) ColibBis::createBranch     (tree,  "mult"   , &mult   );
+  if (write.t) ColibBis::createBranch     (tree,  "stamp"  , &stamp  );
+  if (write.T) ColibBis::createBranchArray(tree,  "time"   , &times  , "mult");
+  if (write.E) ColibBis::createBranchArray(tree,  "nrj"    , &nrjs   , "mult");
+  if (write.Q) ColibBis::createBranchArray(tree,  "nrj2"   , &nrj2s  , "mult");
+  if (write.e) ColibBis::createBranchArray(tree,  "adc"    , &adcs   , "mult");
+  if (write.q) ColibBis::createBranchArray(tree,  "qdc2"   , &qdc2s  , "mult");
+  if (write.l) ColibBis::createBranchArray(tree,  "label"  , &labels , "mult");
+  if (write.p) ColibBis::createBranchArray(tree,  "pileup" , &pileups, "mult");
+  
   tree -> SetBranchStatus("*",true);
 }
 
 inline void Event::push_back(Hit const & hit) noexcept
 {
   check_safe();
-  labels  [mult] = hit.label;
-  times   [mult] = Time_cast(hit.stamp-stamp);
-  adcs    [mult] = hit.adc;
-  nrjs    [mult] = hit.nrj;
-  qdc2s   [mult] = hit.qdc2;
-  nrj2s   [mult] = hit.nrj2;
-  pileups [mult] = hit.pileup;
+  if (mult == 0) *this = hit;
+  else
+  {
+    labels  [mult] = hit.label;
+    times   [mult] = Time_cast(hit.stamp-stamp);
+    adcs    [mult] = hit.adc   ;
+    nrjs    [mult] = hit.nrj   ;
+    qdc2s   [mult] = hit.qdc2  ;
+    nrj2s   [mult] = hit.nrj2  ;
+    pileups [mult] = hit.pileup;
+  }
   ++mult;
 }
 
@@ -385,6 +430,6 @@ inline void Event::Print() const noexcept
 /// Trigger definition ///
 //////////////////////////
 
-using TriggerEvent = std::function<bool(Event&)>;
+using EventTrigger = std::function<bool(const Event&)>;
 
 #endif //EVENT_HPP

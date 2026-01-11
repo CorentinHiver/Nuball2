@@ -637,7 +637,7 @@ Timeshift arrayTimeShift(std::string const & deltaT_filename = "")
     print("Could not open the time shifts file - '", deltaT_filename, "'");
     return timeshift;
   }
-  else if (file_is_empty(inputfile))
+  else if (fileIsEmpty(inputfile))
   {
     print("time shift file - '", deltaT_filename, "' is empty !");
     return timeshift;
@@ -672,7 +672,7 @@ Labels arrayID(std::string const & IDpid)
   if (!inputfile.is_open())
     {std::cerr << "Could not open the array file - '"
     << IDpid << "'" << std::endl;return labels;}
-  else if (file_is_empty(inputfile))
+  else if (fileIsEmpty(inputfile))
     {std::cerr << "time shift file - '" << IDpid
     << "' is empty !" << std::endl;return labels;}
   // ----------------------------------------------------- //

@@ -1677,60 +1677,92 @@ namespace Colib
   //---------------------//
   // TREE BRANCH FILLING //
   //---------------------//
+  template<class T> std::string typeRoot()          {return "Unknown";}
+  template<> std::string typeRoot<bool>()           {return "O";}
+  template<> std::string typeRoot<char>()           {return "B";}
+  template<> std::string typeRoot<unsigned char>()  {return "b";}
+  template<> std::string typeRoot<short>()          {return "S";}
+  template<> std::string typeRoot<unsigned short>() {return "s";}
+  template<> std::string typeRoot<int>()            {return "I";}
+  template<> std::string typeRoot<unsigned int>()   {return "i";}
+  template<> std::string typeRoot<long>()           {return "G";}
+  template<> std::string typeRoot<unsigned long>()  {return "g";}
+  template<> std::string typeRoot<double>()         {return "D";}
+  template<> std::string typeRoot<float>()          {return "F";}
+  template<> std::string typeRoot<Long64_t>()       {return "L";}
+  template<> std::string typeRoot<ULong64_t>()      {return "l";}
 
-  static const std::unordered_map<std::type_index, std::string> typeRootMap = 
-  {
-    // Bool :
-    {static_cast<std::type_index>(typeid(          true)), "O"},
-
-    // Integers :
-    {static_cast<std::type_index>(typeid(  char_cast(1))), "B"}, {static_cast<std::type_index>(typeid( uchar_cast(1))), "b"},
-    {static_cast<std::type_index>(typeid( short_cast(1))), "S"}, {static_cast<std::type_index>(typeid(ushort_cast(1))), "s"},
-    {static_cast<std::type_index>(typeid(   int_cast(1))), "I"}, {static_cast<std::type_index>(typeid(  uint_cast(1))), "i"},
-    {static_cast<std::type_index>(typeid(  long_cast(1))), "G"}, {static_cast<std::type_index>(typeid( ulong_cast(1))), "g"},
-
-    // Floating point :
-    {static_cast<std::type_index>(typeid(double_cast(1))), "D"}, {static_cast<std::type_index>(typeid( float_cast(1))), "F"},
-
-    // ROOT types :
-    {static_cast<std::type_index>(typeid(Long64_cast(1))), "L"}, {static_cast<std::type_index>(typeid(ULong64_cast(1))), "l"}
-  };
-
-  template<class T>
-  std::string typeRoot(T const & t)
-  {
-    auto const & typeIndex = static_cast<std::type_index>(typeid(t));
-    auto it = typeRootMap.find(typeIndex);
-    if (it != typeRootMap.end()) return it->second;
-    else                         return "Unknown";
-  }
-
-  template<class T>
-  std::string typeRoot()
-  {
-    T t;
-    auto const & typeIndex = static_cast<std::type_index>(typeid(t));
-    auto it = typeRootMap.find(typeIndex);
-    if (it != typeRootMap.end()) return it->second;
-    else                         return "Unknown";
-  }
-
+  
   /// @brief Create a branch for a given value and name
   template<class T>
-  auto createBranch(TTree* tree, T * value, std::string const & name, int buffsize = 64000)
+  auto createBranch(TTree* tree, T * value, std::string const & name, int buffsize = 32000)
   {
-    auto const & type_root_format = name+"/"+typeRoot<T>();
+    std::string type_root_format = name+"/"+typeRoot<T>();
     return (tree -> Branch(name.c_str(), value, type_root_format.c_str(), buffsize));
   }
 
   /// @brief Create a branch for a given array and name
-  /// @param name_size: The name of the leaf that holds the size of the array
+  /// @param name_size: The name of the leaf that holds the size of the array (like the event multiplicity)
   template<class T>
-  auto createBranchArray(TTree* tree, T * array, std::string const & name, std::string const & name_size, int buffsize = 64000)
+  TBranch* createBranchArray(TTree* tree, std::string const & name, T * array, std::string const & name_size, int buffsize = 32000)
   {
-    auto const & type_root_format = name+"["+name_size+"]/"+typeRoot(**array);
-    return (tree -> Branch(name.c_str(), array, type_root_format.c_str(), buffsize));
+    std::string type_root_format = name + "[" + name_size + "]/" + typeRoot<std::remove_extent_t<T>>();
+    return tree->Branch(name.c_str(), array, type_root_format.c_str(), buffsize);
   }
+
+  // static const std::unordered_map<std::type_index, std::string> typeRootMap = 
+  // {
+  //   // Bool :
+  //   {static_cast<std::type_index>(typeid(          true)), "O"},
+
+  //   // Integers :
+  //   {static_cast<std::type_index>(typeid(  char_cast(1))), "B"}, {static_cast<std::type_index>(typeid( uchar_cast(1))), "b"},
+  //   {static_cast<std::type_index>(typeid( short_cast(1))), "S"}, {static_cast<std::type_index>(typeid(ushort_cast(1))), "s"},
+  //   {static_cast<std::type_index>(typeid(   int_cast(1))), "I"}, {static_cast<std::type_index>(typeid(  uint_cast(1))), "i"},
+  //   {static_cast<std::type_index>(typeid(  long_cast(1))), "G"}, {static_cast<std::type_index>(typeid( ulong_cast(1))), "g"},
+
+  //   // Floating point :
+  //   {static_cast<std::type_index>(typeid(double_cast(1))), "D"}, {static_cast<std::type_index>(typeid( float_cast(1))), "F"},
+
+  //   // ROOT types :
+  //   {static_cast<std::type_index>(typeid(Long64_cast(1))), "L"}, {static_cast<std::type_index>(typeid(ULong64_cast(1))), "l"}
+  // };
+
+  // template<class T>
+  // std::string typeRoot(T const & t)
+  // {
+  //   auto const & typeIndex = static_cast<std::type_index>(typeid(t));
+  //   auto it = typeRootMap.find(typeIndex);
+  //   if (it != typeRootMap.end()) return it->second;
+  //   else                         return "Unknown";
+  // }
+
+  // template<class T>
+  // std::string typeRoot()
+  // {
+  //   T t;
+  //   auto const & typeIndex = static_cast<std::type_index>(typeid(t));
+  //   auto it = typeRootMap.find(typeIndex);
+  //   if (it != typeRootMap.end()) return it->second;
+  //   else                         return "Unknown";
+  // }
+
+  // /// @brief Create a branch for a given value and name
+  // template<class T>
+  // auto createBranch(TTree* tree, T * value, std::string const & name, int buffsize = 64000)
+  // {
+  //   auto const & type_root_format = name+"/"+typeRoot<T>();
+  //   return (tree -> Branch(name.c_str(), value, type_root_format.c_str(), buffsize));
+  // }
+
+  // /// @brief Create a branch for a given array and name
+  // /// @param name_size: The name of the leaf that holds the size of the array
+  // template<class T>
+  // auto createBranchArray(TTree* tree, T * array, std::string const & name, std::string const & name_size, int buffsize = 64000)
+  // {
+  //   auto const & type_root_format = name+"["+name_size+"]/"+typeRoot(**array);
+  //   return (tree -> Branch(name.c_str(), array, type_root_format.c_str(), buffsize));
+  // }
 
 }
 

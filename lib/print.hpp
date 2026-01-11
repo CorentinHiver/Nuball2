@@ -99,24 +99,30 @@ void printT(T const & t, T2 const &... t2) {std::cout << t << "\t"; printT(t2...
 
 
 /// @brief Generic print in one line
-/// @details Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a "\\n"
+/// @details Automatically adds space between each input. Do not terminate the output with a "\\n"
 template <class T> 
 void println(T const & t) {std::cout << t;}
 
 /// @brief Generic print in one line
-/// @details Concatenate the ouput, i.e. do not add space between each input. Do not terminate the output with a "\\n"
+/// @details Automatically adds space between each input. Do not terminate the output with a "\\n"
 template <class T, class... T2> 
-void println(T const & t, T2 const &... t2) {std::cout << t; println(t2...);}
+void println(T const & t, T2 const &... t2) {std::cout << t << " "; println(t2...);}
 
 /// @brief Set the floating point precision displayed.
 void print_precision(int n = 6) {std::cout << std::setprecision(n);}
+
+/// @brief Print same line
+/// @details Automatically adds space between each input. Do not terminate the output with a "\\n". 
+/// Go back at the beginning of the line.
+template <class... Ts> 
+void printsln(Ts &&... ts) {std::cout << "\r"; println(std::forward<Ts>(ts)...); std::cout << std::flush;}
 
 /// @brief Requires #define DEBUG or -D DEBUG in the compile line
 template <class... ARGS> void debug(ARGS &&... 
 #ifdef DEBUG
   args
 #endif //DEBUG
-) 
+)
 {
 #ifdef DEBUG
   print(std::forward<ARGS>(args)...);

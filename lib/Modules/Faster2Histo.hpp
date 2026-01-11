@@ -47,7 +47,7 @@ public:
   }
 
   /// @brief @todo UNUSED until event building is done
-  void setTrigger(TriggerHit trigger) {m_trigger = trigger;}
+  void setTrigger(HitTrigger trigger) {m_trigger = trigger;}
   
   /////////
   // Run //
@@ -116,7 +116,7 @@ private:
   CalibAndScale m_alignement;
   Calibration m_calibration;
   Timeshifts m_timeshifts;
-  TriggerHit m_trigger = [](Hit const & hit) {return true;};
+  HitTrigger m_trigger = [](Hit const & hit) {return true;};
   
   Path m_outPath = Path::pwd();
   File m_outFile = "spectra.root";

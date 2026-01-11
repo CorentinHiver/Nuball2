@@ -57,6 +57,15 @@
 #include <cstring>
 #include <ctime>
 
+// ------------- //
+// -- MACROS -- //
+// ------------- //
+
+#define STR_IMPL(x) #x
+#define STR(x) STR_IMPL(x)
+
+#define HEADER(x) STR(x.hpp)
+
 ///////////////////////
 // Versions aliasing //
 ///////////////////////
@@ -64,6 +73,10 @@
 #define Cpp20 (__cplusplus >= 202002L)
 #define Cpp17 (__cplusplus >= 201702L)
 #define Cpp14 (__cplusplus >= 201402L)
+
+#define ROOTCpp20 defined(__CLING__) && defined(__CLING__CXX20__)
+#define ROOTCpp17 defined(__CLING__) && defined(__CLING__CXX17__)
+#define ROOTCpp14 defined(__CLING__) && defined(__CLING__CXX14__)
 
 // Useful overload of operator<< into a std::cout stream :
 
@@ -708,11 +721,11 @@ namespace Colib
 
   using Point = std::pair<double, double>;
 
-  constexpr static Point rotate(double const & x, double const & y, double const & angle) 
+  Point rotate(double const & x, double const & y, double const & angle) 
   {
     return Point(x * cos(angle) - y * sin(angle), x * sin(angle) + y * cos(angle));
   }
-  constexpr static Point rotate(Point const & point, double const & angle) 
+   Point rotate(Point const & point, double const & angle) 
   {
     return Point(point.first * cos(angle) - point.second * sin(angle), point.first * sin(angle) + point.second * cos(angle));
   }
@@ -1011,7 +1024,8 @@ namespace Colib
   {
     auto value = double_cast(t);
     std::string s;
-        if (value<1.e-9)  {value*=1.e+12; s = " f";}
+    if (value == T{0}) {s = "";}
+    else if (value<1.e-9)  {value*=1.e+12; s = " f";}
     else if (value<1.e-6)  {value*=1.e+9 ; s = " n";}
     else if (value<1.e-3)  {value*=1.e+6 ; s = " µ";}
     else if (value<1.e+0)  {value*=1.e+3 ; s = " m";}
@@ -1036,7 +1050,7 @@ namespace Colib
   /**
    * @brief Lookup table that can be generated at compile time.
    * @details 
-   * Instanciation :
+   * Example instanciation :
    * constexpr auto squares = LUT<10> ([](int i) { return i*i; }); 
    * 
    */
@@ -1060,13 +1074,14 @@ namespace Colib
     int low = 0;
     int high = N - 1;
   
-    while (low <= high) {
+    while (low <= high) 
+    {
       int mid = (low + high) / 2;
-           if (array[mid] < value) low = mid + 1;
+           if (array[mid] < value) low  = mid + 1;
       else if (array[mid] > value) high = mid - 1;
-      else return true;
+      else return true; // Value found
     }
-    return false;  // Value not found
+    return false;       // Value not found
   }
 }
 
@@ -1135,6 +1150,7 @@ namespace Colib
   /////////////////////////////
   // Get the terminal output //
   /////////////////////////////
+  
 namespace Colib
 {
   std::string execTerminal(std::string cmd) 

@@ -328,7 +328,7 @@ namespace Colib
     size_t j = 0;
   
     // Loop through the vector :
-    for (size_t i = 0;i<vector.size(); i++)
+    for (size_t i = 0; i < vector.size(); i++)
     {
       // Initial guess : the ith ordered_indexes's index corresponds to the vector's ith index 
       // (e.g. the 5th bin has initial value 5 (ordered_indexes[5] = 5))
@@ -433,7 +433,17 @@ namespace Colib
   template<class T>
   auto subVec(std::vector<T> const & vec, int const & start, int const & length)
   {
-    return std::vector<T>(vec.begin() + start, vec.begin() + start + length);
+    if (vec.size() < length) return std::vector<T>(vec.begin() + start, vec.begin() + start + length);
+    else return vec;
+  }
+
+  /// @brief Returns the vector in the range [0, length[.
+  /// @details E.g. vec = {1,2,3,4,5} ; subVec(vec, 3) -> {1, 2, 3};
+  template<class T>
+  auto subVec(std::vector<T> const & vec, int const & length)
+  {
+    if (vec.size() < static_cast<size_t>(length)) return std::vector<T>(vec.begin(), vec.begin() + length);
+    else return vec;
   }
   
   /// @brief Returns the first order unit derivative of the given vector.

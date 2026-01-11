@@ -3,6 +3,7 @@
 
 #include "zlib.h"
 #include "../libCo.hpp"
+#include "../Classes/Timeshifts.hpp"
 
 struct FasterReaderConfig {
     static constexpr int __bufferSize__ = 4096;
@@ -13,8 +14,10 @@ struct FasterReaderConfig {
 template <class Config = FasterReaderConfig>
 class FasterReaderV2_t
 {
-
 public :
+  using clock_t = uint64_t;
+  using time_t  = double long;
+
   static const unsigned char FASTER_MAGIC = 0xAA;
 
   enum class Alias : unsigned char
@@ -35,7 +38,7 @@ public :
   };
 
 	FasterReaderV2_t() noexcept = default;
-	~FasterReaderV2_t() {close();};
+	~FasterReaderV2_t() {close();}
 	FasterReaderV2_t(std::string const & filename) noexcept
 	{
 		open(filename);
@@ -43,9 +46,10 @@ public :
 
 	virtual bool open(std::string const & filename) noexcept
 	{
+    m_cursor = 0;
     m_filename = filename;
 		m_datafile = gzopen(filename.c_str(), "rb");
-		if (!m_datafile) 
+		if (!m_datafile)
 		{
 			error("Couldn't find "+ filename + " !");
 			return false;
@@ -53,61 +57,72 @@ public :
 		return (m_open = true);
 	}
 
-  virtual Alias readNextHit()
+  Alias readNextHit() noexcept
   {
     while(loadData()) if (readData()) return m_header.alias();
     return Alias::EOF_FASTER;
   }
 
-	virtual bool loadData()
+	inline bool loadData() noexcept
 	{
     ++m_cursor;
-		if (gzeof(m_datafile)) return false; // At the end of the file, return false;
-		int n = gzread(m_datafile, &m_header, sizeof(m_header)) ;
-    if (n != sizeof(m_header))   Colib::throw_error("in FasterReaderV2::readNext() : header reading " + gzlibError(n));
+		int n = gzread(m_datafile, &m_header, sizeof(m_header)) ; // Try to read the next header
+		if (gzeof(m_datafile)) return false; // If at the end of the file, the previous gzread failed and gzeof is true. Return false.
+    if (n != sizeof(m_header))   error("in FasterReaderV2::readNext() : header reading " + gzlibError(n));
 		if (m_header.buff_size == 0) return true; // No data to read, according to fasterac it's not a big deal (maybe for counters ?)
     n = gzread(m_datafile, &m_buffer, m_header.buff_size);
-    if (n != m_header.buff_size) Colib::throw_error("in FasterReaderV2::readNext() : data dumping " + gzlibError(n));
-    if (m_header.magic != FASTER_MAGIC) Colib::throw_error("in FasterReaderV2::readNext() : magic check failed !!"+std::to_string(m_header.magic)+ "!="+std::to_string(FASTER_MAGIC));
+    if (n != m_header.buff_size) error("in FasterReaderV2::readNext() : data dumping " + gzlibError(n));
+    if (m_header.magic != FASTER_MAGIC) error("in FasterReaderV2::readNext() : magic check failed !!"+std::to_string(m_header.magic)+ "!="+std::to_string(FASTER_MAGIC));
     return true;
 	}
 
-  virtual bool readData()
+  inline bool readData() noexcept
   {
-    checkGroups          (); // If the faster files have been written in group mode (i.e. event building), this functionnality is not available
+    checkGroups          (); // If the faster files have been written in group mode (i.e. event building), this class can't read it (yet)
     extractTimestamp     (); // Load the raw timestamp - the high resolution timestamp is added in switch_aliases
     return switch_aliases(); // Read the data based on the type_alias. Returns false if one is not handled.
 	}
 
-  auto const & getTimestamp() const {return m_timestamp;}
-  
-  auto const & getHeader() const {return m_header;}
-
-  unsigned long long getClock() const
+  inline auto applyTimeshifts() noexcept
   {
-    unsigned long long clock = 0;
+    if (static_cast<size_t>(m_header.label+1) < m_timeshifts.size()) m_timestamp += m_timeshifts[m_header.label];
+  }
+
+  inline auto const & getTimestamp() const noexcept {return m_timestamp;}
+  
+  inline auto const & getHeader() const noexcept {return m_header;}
+
+  inline clock_t getClock() const noexcept
+  {
+    clock_t clock = 0;
     memcpy(&clock, m_header.clock, Config::__clockByteSize__); 
     return clock * Config::__tick_ps__;
   }
   
-  double long getClock_ns() const
+  inline time_t getClock_ps() const noexcept
   {
-    unsigned long long clock = 0;
-    memcpy(&clock, m_header.clock, Config::__clockByteSize__); 
-    return clock * Config::__tick_ps__ * 1e-3;
+    return static_cast<time_t>(getClock());
+  }
+  
+  inline time_t getClock_ns() const noexcept
+  {
+    return static_cast<time_t>(getClock()) * 1e-03;
   }
 
-  double long getClock_s() const
+  inline time_t getClock_ms() const noexcept
   {
-    unsigned long long clock = 0;
-    memcpy(&clock, m_header.clock, Config::__clockByteSize__); 
-    return clock * Config::__tick_ps__ * 1e-12;
+    return static_cast<time_t>(getClock()) * 1e-06;
   }
 
-  void print() const
+  inline time_t getClock_s() const noexcept
   {
-    std::cout << std::setw(10) << m_cursor       << " ";
-    std::cout << std::setw( 3) << m_header.label << " ";
+    return static_cast<time_t>(getClock()) * 1e-12;
+  }
+
+  void Print() const noexcept
+  {
+    std::cout << std::setw(10) << m_cursor       <<    " ";
+    std::cout << std::setw( 3) << m_header.label <<    " ";
     std::cout << std::setw(15) << getClock()     << " ps ";
     std::cout << std::setw(15) << m_timestamp    << " ps ";
     switch(m_header.alias())
@@ -119,19 +134,29 @@ public :
       case Alias::QDC_TDC_X2     : std::cout << m_qdc_data.template get<2>(); break;
       case Alias::QDC_TDC_X3     : std::cout << m_qdc_data.template get<3>(); break;
       case Alias::QDC_TDC_X4     : std::cout << m_qdc_data.template get<4>(); break;
-      default: ;
+      default: std::cerr << "unkown data type";
     } 
     std::cout << std::endl;
   }
 
   auto const & getCursor() const noexcept {return m_cursor;}
 
-	virtual void close()
+	inline void close() noexcept
 	{
     if (m_open) gzclose(m_datafile);
+    m_cursor = 0;
+    m_open = false;
 	}
 
-  struct TrapezSpectro 
+  void loadTimeshifts(std::string tsFile) {m_timeshifts.load(tsFile);}
+
+  //////////////////////
+  // -- Structures -- //
+  //////////////////////
+
+  struct DataStructure{};
+
+  struct TrapezSpectro : public DataStructure
   {//  from Trapezoidal_Spectro_Caras or Trapezoidal_Spectro_Mosahr
     signed   measure   : 23;
     signed   tdc       :  6;
@@ -152,7 +177,7 @@ public :
     }
   };
 
-  struct RFData
+  struct RFData : public DataStructure
   {
     unsigned period    : 31;
     unsigned saturated :  1;
@@ -167,7 +192,7 @@ public :
     }
   };
 
-  struct CRRC4Spectro
+  struct CRRC4Spectro : public DataStructure
   { //  from CRRC4_Spectro_Caras or CRRC4_Spectro_Mosahr
     unsigned pad1      : 10;
     signed   delta_t   : 16; // position of max relative to trigger (ns)
@@ -195,7 +220,7 @@ public :
   };
 
   template<int n>
-  struct QDCSpectro_xn
+  struct QDCSpectro_xn : public DataStructure
   { // Creates a QDC_xn with n the number of gates
     QDCSpectro qdc[n];
     int32_t tdc = 0;
@@ -212,7 +237,6 @@ public :
         out << std::setw(10) << data[i].measure << " qdc" << i+1;
         saturated |= data[i].saturated;
       }
-      // if (saturated) printSaturated(out);
       if (saturated) out << " saturated";
       return out;
     }
@@ -232,7 +256,7 @@ public :
       else if constexpr (n == 2) return qdc_spectro_x2;
       else if constexpr (n == 3) return qdc_spectro_x3;
       else if constexpr (n == 4) return qdc_spectro_x4;
-      else static_assert(n >= 1 && n <= 4, "Invalid QDC index");
+      else static_assert(n >= 1 && n <= 4, "Invalid QDC index"); // To check
     }
 
     template <int n>
@@ -242,7 +266,7 @@ public :
       else if constexpr (n == 2) return qdc_spectro_x2;
       else if constexpr (n == 3) return qdc_spectro_x3;
       else if constexpr (n == 4) return qdc_spectro_x4;
-      else static_assert(n >= 1 && n <= 4, "Invalid QDC index");
+      else static_assert(n >= 1 && n <= 4, "Invalid QDC index"); // To check
     }
   };
 
@@ -253,19 +277,19 @@ public :
   
 protected :
 
-  virtual void checkGroups()
+  inline void checkGroups() noexcept
   {
-    if (m_header.alias() == Alias::GROUP) Colib::throw_error("Group mode is not handled in FasterReaderV2 (sry) !!!");
+    if (m_header.alias() == Alias::GROUP) error("Group mode is not handled in FasterReaderV2 (sry) !!!");
   }
 
-  void extractTimestamp() // should be private
+  inline void extractTimestamp() noexcept
   {
-    m_timestamp = 0; // TEST !!
+    m_timestamp = 0;
     memcpy(&m_timestamp, m_header.clock, Config::__clockByteSize__); 
     m_timestamp *= Config::__tick_ps__;
   }
 
-  bool switch_aliases()
+  inline bool switch_aliases() noexcept
   {
     switch(m_header.alias())
     {
@@ -280,25 +304,22 @@ protected :
     }
   }
 
-  static constexpr std::string gzlibError(int err)  noexcept// Should make an object to handle gzlib errors
+  inline static constexpr std::string gzlibError(int err)  noexcept// Should make an object to handle gzlib errors
   {
     if (err < 0) return "failed, gzlib error, verify file integrity with \"gunzip -t filename\", and check thread safety";
     else         return "incomplete read, got "+std::to_string(err)+" instead of "+std::to_string(sizeof(m_header));
   }
 
-  template<class T>
-  constexpr bool loadBuffer(T & structure) noexcept {return bool_cast(memcpy(&structure, m_buffer, sizeof(T)));} // Helper function (should be private ?)
-
-  bool loadBufferTrapez () 
+  inline bool loadBufferTrapez() noexcept
   {
     loadBuffer(m_trapez_spectro);
     m_timestamp += m_trapez_spectro.tdc * tdc_clock_LSB_6bits;
     return true;
   }
 
-  template<int n> auto & getQDC(){return m_qdc_data.template get<n>();}
-  template<int n>
-  bool loadBufferQDC() 
+  template<int n> inline auto & getQDC(){return m_qdc_data.template get<n>();}
+
+  template<int n> inline bool loadBufferQDC() 
   {
     auto & qdc_data = getQDC<n>();
     loadBuffer(qdc_data);
@@ -320,7 +341,6 @@ protected :
     return true;
   }
 
-
   static constexpr std::ostream & printSaturated(std::ostream & out) { out << Colib::Color::RED << " saturated" << Colib::Color::RESET; return out;}
 
   static constexpr long double tdc_clock_LSB_8bits = Config::__tick_ps__ / 256; //  sample length + 8 bits tdc -> lsb = 2000 / 2^8
@@ -338,16 +358,20 @@ protected :
 
   unsigned long long m_timestamp;
 
-  size_t m_cursor = 0;
-
 	std::string m_filename;
 	gzFile m_datafile;
   bool m_open = false;
+  size_t m_cursor = 0;
 
 	Header m_header;
   char m_buffer[Config::__bufferSize__];
 
-  // Hit *m_hit = nullptr;
+private:
+
+  template<class T>
+  constexpr bool loadBuffer(T & structure) noexcept {return static_cast<bool>(memcpy(&structure, m_buffer, sizeof(T)));} // Helper function (should be private ?)
+  
+  Timeshifts m_timeshifts;
 };
 
 using FasterReaderV2 = FasterReaderV2_t<>;

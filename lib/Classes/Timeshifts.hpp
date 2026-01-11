@@ -1,11 +1,15 @@
 #ifndef TIMESHIFTS_HPP
 #define TIMESHIFTS_HPP
 
-#include "../Classes/Hit.hpp"
+#include "../libCo.hpp"
 
 class Timeshifts
 {
 public:
+
+  using Timeshift_t = int64_t;
+  using Timeshifts_t = std::vector<Timeshift_t>;
+
   Timeshifts() = default;
   Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename);}
   Timeshifts(Timeshifts const & other) : m_timeshifts(other.m_timeshifts) {}
@@ -17,31 +21,37 @@ public:
     return *this;
   }
 
-
   /// @brief Use this method to load timeshifts from a .dT file
   bool load(std::string const & filename);
 
-  Time const & operator[] (int const & i) const {return m_timeshifts[i];}
+  auto const & operator[] (int const & i) const {return m_timeshifts[i];}
+  Timeshifts & operator*= (double const & f) {for (auto & dT : m_timeshifts) dT*=f; return *this;}
+
+#ifdef HIT_HPP // If Hit.hpp is included (Nuball2)
   void operator() (Hit & hit) const {hit.stamp += m_timeshifts[hit.label];}
-  std::vector<Time> const & get() const {return m_timeshifts;}
-  std::vector<Time> const & data() const {return m_timeshifts;}
-  Time const & get(int const & i) const {return m_timeshifts[i];}
+#endif //HIT_HPP
+
+  Timeshifts_t const & get() const {return m_timeshifts;}
+  Timeshifts_t const & data() const {return m_timeshifts;}
+  auto const & get(int const & i) const {return m_timeshifts[i];}
   operator bool() const & {return m_ok;}
 
   void write(std::string const & fullpath, std::string const & name);
 
+  auto size() const {return m_timeshifts.size();}
+
 private:
   std::string m_filename;
-  std::vector<Time> m_timeshifts;
+  Timeshifts_t m_timeshifts;
   bool m_ok = false;
   int m_nb_detectors = 0;
-  Path m_outPath;
+  Colib::Path m_outPath;
   
   public:
   class NotFoundError
   {
   public:
-    NotFoundError(std::string const & filename) : m_filename(filename) {error("Timeshiftor::NotFoundError", filename);}
+    NotFoundError(std::string const & filename) : m_filename(filename) {error("Timeshifts::NotFoundError", filename);}
     auto const & getFilename() const {return m_filename;}
   private:
     std::string m_filename;
@@ -53,36 +63,16 @@ bool Timeshifts::load(std::string const & filename)
 {
   std::ifstream inputFile(filename, std::ifstream::in);
   if (!inputFile.good()) {throw NotFoundError(filename);}
-  else if (file_is_empty(inputFile)) {print("TIMESHIFT FILE", filename, "EMPTY !");return false;}
+  else if (Colib::fileIsEmpty(inputFile)) {print("TIMESHIFT FILE", filename, "EMPTY !");return false;}
   std::string line = ""; // Reading buffer
-  Label label = 0; // Reading buffer
-
-  // ----------------------------------------------------- //
-  // First extract the maximum label
-  Label size = 0;
-  // Infer the number of detectors from the higher label in calbration file
+  size_t label = 0; // Reading buffer
   while (getline(inputFile, line))
   { 
     std::istringstream iss(line);
     iss >> label;
-    if (size<label) size = label;
-  }
-  size++; // The size of the vector must be label_max+1
-  // if (detectors && size<detectors.size()) size = detectors.size(); // Ensure there is no mismatch with the detectors module
-  inputFile.clear(); 
-  inputFile.seekg(0, inputFile.beg);
-
-  // ----------------------------------------------------- //
-  // Now fill the vector
-  m_timeshifts.resize(size, 0);
-  Time shift = 0;
-  while (getline(inputFile, line))
-  { // Then fill the array
-    m_nb_detectors++;
-    std::istringstream iss(line);
-    iss >> label >> shift;
-    m_timeshifts[label] = shift;
-    shift = 0;
+    if (m_timeshifts.size() <= label) m_timeshifts.resize(label+1);
+    iss >> m_timeshifts[label];
+    ++m_nb_detectors;
   }
   inputFile.close();
   print("Timeshifts extracted from", filename);
@@ -91,15 +81,15 @@ bool Timeshifts::load(std::string const & filename)
 
 void Timeshifts::write(std::string const & fullpath, std::string const & name)
 {
-  m_outPath = Path (fullpath, true);
+  m_outPath = Colib::Path (fullpath, true);
   if (!m_outPath) {m_ok = false; return;}
 
-  File outData (m_outPath+name);
+  Colib::File outData (m_outPath+name);
   outData.setExtension(".dT");
 
   std::ofstream outTimeshiftsFile(outData, std::ios::out);
   
-  for (Label label = 0; label<m_timeshifts.size(); label++)
+  for (size_t label = 0; label<m_timeshifts.size(); label++)
   {
     auto const & dT = m_timeshifts[label];
     if (dT != 0) outTimeshiftsFile << label << "\t" << dT << std::endl;

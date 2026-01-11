@@ -391,7 +391,7 @@ bool Calibration::load(File const & file)
   std::ifstream inputfile(m_filename, std::ifstream::in);
 
   if (!inputfile.good()) {print("CAN'T OPEN THE CALIBRATION FILE " + m_filename); Colib::throw_error("CALIBRATION");}
-  else if (file_is_empty(inputfile)) {print("CALIBRATION FILE", m_filename, "EMPTY !"); Colib::throw_error("CALIBRATION");}
+  else if (fileIsEmpty(inputfile)) {print("CALIBRATION FILE", m_filename, "EMPTY !"); Colib::throw_error("CALIBRATION");}
   std::string line = "";
   Label size = 0;
   Label label = 0;
