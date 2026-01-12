@@ -30,6 +30,7 @@ public:
 
   bool readNextFile(bool eventBuilding = true)
   {
+    if (m_files.empty()) Colib::throw_error("No files");
     if (m_files.size() <= m_file_i) return false;
     auto const & file = m_files[m_file_i++];
     m_reader.loadDatafile(file);
@@ -42,9 +43,10 @@ public:
   }
 
   void setMaxHits(int nb) {m_reader.setMaxHits(nb);}
-  void setHitTrigger  (HitTrigger   trigger) {m_reader.setHitTrigger  (trigger);}
-  void setEventTrigger(EventTrigger trigger) {m_reader.setEventTrigger(trigger);}
-  void setTimeWindow(Time time_window){m_reader.setTimeWindow(time_window);}
+  void setHitTrigger  (HitTrigger          trigger    ) {m_reader.setHitTrigger  (trigger)    ;}
+  void setEventTrigger(EventTrigger        trigger    ) {m_reader.setEventTrigger(trigger)    ;}
+  void setTimeWindow  (Time                time_window) {m_reader.setTimeWindow  (time_window);}
+  void setTimeShifts  (std::string const & tsFile     ) {m_reader.loadTimeshifts (tsFile)     ;}
 
   void convert()
   {
@@ -54,20 +56,30 @@ public:
 
   void mergeAndConvert(bool eventBuilding = true)
   {
-    print(m_files);
     if (m_files.empty()) Colib::throw_error("No files");
     m_reader.loadDatafiles(m_files);
     m_reader.timeSorting();
+    m_reader.checkTimeSorting();
     std::string outFolder = "./"; // Externalise
     auto outFile = outFolder + Colib::removeLastPart(Colib::removePath(m_files[0]), '_')+".root";
     if (eventBuilding) m_reader.writeEvents(outFile);
     else               m_reader.writeHits  (outFile);
   }
 
+  void mergeAndConvertWithRef(Label refLabel)
+  {
+    if (m_files.empty()) Colib::throw_error("No files");
+    m_reader.loadDatafiles(m_files);
+    m_reader.timeSorting();
+    std::string outFolder = "./"; // Externalise
+    auto outFile = outFolder + Colib::removeLastPart(Colib::removePath(m_files[0]), '_')+".root";
+    m_reader.writeEventsWithRef(refLabel, outFile);
+  }
+
 private:
   std::vector<std::string> m_files;
   FasterRootInterface m_reader;
 
-  // State variables :
+  // readNextFile() state variables :
   size_t m_file_i = 0;
 };

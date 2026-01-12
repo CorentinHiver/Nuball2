@@ -3,7 +3,7 @@ ROOT_LIBS       := $(shell root-config --libs)
 GZLIB_CFLAGS    := -lz
 
 exec: $(HEADERS) forDebugOnly.cpp
-	g++ -o exec forDebugOnly.cpp $(ROOT_CFLAGS) $(ROOT_LIBS) $(GZLIB_CFLAGS) -g -Wall -Wextra -std=c++20
+	g++ -o exec forDebugOnly.cpp $(ROOT_CFLAGS) $(ROOT_LIBS) $(GZLIB_CFLAGS) -O2 -Wall -Wextra -std=c++20
 
 clean:
 	rm exec

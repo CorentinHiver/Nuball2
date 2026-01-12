@@ -27,18 +27,19 @@
 int main(int argc, char** argv)
 {
   Timer totTimer;
-
+  FasterRootInterface::setTreeInMemory();
   FasterRunReader reader;
   reader.addFiles(argv[1]);
   if (argc>2) reader.setMaxHits(static_cast<int>(atof(argv[2])));
-  // reader.convert();
-  reader.setTimeWindow(1e6);
+  reader.setTimeWindow(2_us);
   reader.setEventTrigger([](Event const & event) -> bool {
     return ((1 < event.mult) && (event.mult < 5));
   });
-  reader.mergeAndConvert();
+  reader.mergeAndConvertWithRef(23);
 
   print("Time : ", totTimer());
+
+  // reader.convert();
 
   // FasterRootInterface interface(argv[1]);
   // // FasterRootInterface interface("/home/corentin/faster/136/60Co_center.fast/60Co_center_0001.fast");

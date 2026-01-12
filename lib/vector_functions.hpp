@@ -316,10 +316,10 @@ namespace Colib
   /// @brief Order the vector from lower to higher value
   /// @tparam T must have operator< overloaded if user defined class 
   template <typename T>
-  std::vector<size_t> & bubbleSort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
+  std::vector<size_t> & insertionSort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes)
   {
     // Verifications :
-    if (vector.size() == 0) {printC(Colib::Color::RED, "In bubble_sort(vector, ordered_indexes) : vector size is zero !", Colib::Color::RESET); return ordered_indexes;}
+    if (vector.size() == 0) {printC(Colib::Color::RED, "In insertionSort(vector, ordered_indexes) : vector size is zero !", Colib::Color::RESET); return ordered_indexes;}
     if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());
   
     // Initializations :
@@ -363,22 +363,78 @@ namespace Colib
   /// @brief Order the vector from lower to higher value
   /// @tparam T must have operator< overloaded if user defined class 
   template <class T>
-  std::vector<size_t> bubbleSort(std::vector<T> const & vector)
+  std::vector<size_t> insertionSort(std::vector<T> const & vector)
   {
     std::vector<size_t> ordered_indexes(vector.size());
-    bubble_sort(vector, ordered_indexes);
+    insertionSort(vector, ordered_indexes);
+    return ordered_indexes;
+  }
+
+  /// @brief Order the vector from lower to higher value
+  /// @tparam T must have operator< overloaded if user defined class 
+  template <typename T>
+  std::vector<size_t> & insertionSortPtr(std::vector<T*> const & vector, std::vector<size_t> & ordered_indexes)
+  {
+    // Verifications :
+    if (vector.size() == 0) {printC(Colib::Color::RED, "In insertionSortPtr(vector, ordered_indexes) : vector size is zero !", Colib::Color::RESET); return ordered_indexes;}
+    if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());
+  
+    // Initializations :
+    T v = *(vector[0]);
+    size_t j = 0;
+  
+    // Loop through the vector :
+    for (size_t i = 0; i < vector.size(); i++)
+    {
+      // Initial guess : the ith ordered_indexes's index corresponds to the vector's ith index 
+      // (e.g. the 5th bin has initial value 5 (ordered_indexes[5] = 5))
+      ordered_indexes[i] = i;
+  
+      // Check this assumption : v holds the value of ith value of vector
+      v = *(vector[i]);
+  
+      // Find the true jth index of the ith vector's index
+      j = i;
+  
+      // Loop goes on until the (j-1)th vector's value is lower than the ith value
+      while((j>0) && *(vector[ordered_indexes[j-1]]) > v)
+      {
+        // If the (j-1)th value is higher than the ith value then switch the indexes.
+        ordered_indexes[j] = ordered_indexes[j-1];
+        --j;
+      }
+  
+      // Save the correct position of the index
+      ordered_indexes[j] = i;
+    }
+  
+    // Note that this method is iterative : if the 1st value is higher than the 2nd,
+    // ordered_index[0] = 1 and ordered_index[1] = 0. If now the 3rd value is higher than 
+    // the 2nd but lower than the 1st (for i = 2), vector[ordered_index[1]] > v
+    // but vector[ordered_index[0]] < v : the result is indeed {1, 2, 0}
+  
+    return ordered_indexes;
+  }
+
+  /// @brief Order the vector from lower to higher value
+  /// @tparam T must have operator< overloaded if user defined class 
+  template <class T>
+  std::vector<size_t> insertionSortPtr(std::vector<T*> const & vector)
+  {
+    std::vector<size_t> ordered_indexes(vector.size());
+    insertionSortPtr(vector, ordered_indexes);
     return ordered_indexes;
   }
 
   /// @brief Order the vector from lower to higher value using various methods
-  /// @param method: so far, only default "bubble" method is implemented, using Colib::bubble_sort
+  /// @param method: so far, only default "insertion" method is implemented, using Colib::insertionSort
   /// @tparam T must have operator< overloaded if user defined class 
   template <class T>
-  std::vector<T>& sort(std::vector<T> & vector, std::string method = "bubble")
+  std::vector<T>& sort(std::vector<T> & vector, std::string method = "insertion")
     {
-      if (method == "bubble")
+      if (method == "insertion")
       {
-        auto const & sorted_indices = Colib::bubbleSort(vector);
+        auto const & sorted_indices = Colib::insertionSort(vector);
         std::vector<T> buff = vector;
         vector.clear();
         for (auto const & id : sorted_indices) vector.push_back(buff[id]);
@@ -393,7 +449,7 @@ namespace Colib
   template <class T>
   std::vector<T>& fillSorted(std::vector<T> & to_fill, std::vector<T> const & fill_from)
     {
-      auto const & sorted_indices = Colib::bubbleSort(fill_from);
+      auto const & sorted_indices = Colib::insertionSort(fill_from);
       int to_fill_it = 0;
       for (auto const & id : sorted_indices)
       {
@@ -811,7 +867,7 @@ public:
   auto operator=(std::Initializer_list<T>       & init_list) {m_vector = vector;}
   auto operator=(std::Initializer_list<T>         init_list) {m_vector = vector;}
 
-  void bubble_sort() {bubble_sort(m_vector, m_index);}
+  void insertionSort() {insertionSort(m_vector, m_index);}
   /// @brief @attention you need to check bounds
   auto const & getNextOrder() const {return m_vector[m_index[m_iterator++]];}
   /// @brief @attention you need to check bounds
@@ -832,7 +888,7 @@ public:
 private:
   std::vector<T> m_vector;
 
-  // For bubble sort :
+  // For insertion sort :
   std::vector<int> m_index;
   int m_iterator = 0;
 };

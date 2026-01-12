@@ -2,7 +2,7 @@
 #define RF_MANAGER_H
 
 #include "../libCo.hpp"
-#include "../libRoot.hpp"
+// #include "../libRoot.hpp"
 #include "Event.hpp"
 
 /**
@@ -96,7 +96,7 @@ public:
 
   void inline set(Timestamp new_timestamp, Timestamp _period) 
   {
-    auto const & tPeriod = Time_cast(new_timestamp-last_downscale_timestamp);
+    auto const & tPeriod = Time_cast(new_timestamp - last_downscale_timestamp);
 
     // The RF is downscaled every 1000 RF pulses. 
     // There are two cases : either the RF is indeed downscaled as expected 
@@ -174,12 +174,14 @@ bool inline RF_Manager::setHit(Hit const & hit)
   {
     event.setT0(relTime(event.stamp));
   }
+
 #endif //EVENT_HPP
 
 //--------------------//
 //--- Helper class ---//
 //--------------------//
 
+#ifdef __CINT__
 /// @brief Helper class for applying RF_Manager to various interfaces
 class RF_Extractor
 {
@@ -190,11 +192,11 @@ public:
 #endif //ALIGNATOR_HPP
 
 #ifdef EVENT_HPP
-  RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_t maxEvts = Long64_cast(1.E+7));
+  RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_t maxEvts = Time_cast(1.E+7));
 #endif //EVENT_HPP
 
 #ifdef FASTERREADER_HPP
-  RF_Extractor(FasterReader & reader, RF_Manager & rf, Hit & hit, Long64_t maxEvts = Long64_cast(1.E+7));
+  RF_Extractor(FasterReader & reader, RF_Manager & rf, Hit & hit, Long64_t maxEvts = Time_cast(1.E+7));
 #endif //FASTERREADER_HPP
 
   auto const & cursor() const {return m_cursor;}
@@ -226,6 +228,12 @@ RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_
   if (m_cursor == maxEvts) {print("NO RF DATA FOUND !"); m_ok = false; return;}
   m_ok = true;
 }
+
+RF_Extractor::RF_Extractor(std::vector<Hit*> const & hits, RF_Manager & rf, Event & event, Long64_t maxEvts = Time_cast(1.E+7))
+{
+
+}
+
 #endif //EVENT_HPP
 
 #ifdef FASTERREADER_HPP // TODO
@@ -239,5 +247,6 @@ RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_
 //   reader.Reset();
 // }
 #endif //FASTERREADER_HPP
+#endif // __CINT__
 
 #endif //RF_MANAGER_H

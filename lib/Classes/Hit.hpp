@@ -311,6 +311,9 @@ public:
   void reading(TTree * tree, std::string const & options = "");
   void writing(TTree * tree, std::string const & options = "lteqp");
 
+  inline bool operator<(Hit const & other) const noexcept {return stamp < other.stamp;}
+  inline bool operator>(Hit const & other) const noexcept {return stamp > other.stamp;}
+
   IOptions read;
   IOptions write;
 

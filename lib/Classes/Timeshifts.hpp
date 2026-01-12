@@ -3,6 +3,10 @@
 
 #include "../libCo.hpp"
 
+/**
+ * @brief Timeshifts class. Hold a list of pair label timeshift, in ps;
+ * 
+ */
 class Timeshifts
 {
 public:

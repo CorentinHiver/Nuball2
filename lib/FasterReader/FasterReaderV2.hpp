@@ -39,10 +39,10 @@ public :
 
 	FasterReaderV2_t() noexcept = default;
 	~FasterReaderV2_t() {close();}
-	FasterReaderV2_t(std::string const & filename) noexcept
-	{
-		open(filename);
-	}
+  FasterReaderV2_t(std::string const & filename) noexcept
+  {
+    open(filename);
+  }
 
 	virtual bool open(std::string const & filename) noexcept
 	{
@@ -57,7 +57,7 @@ public :
 		return (m_open = true);
 	}
 
-  Alias readNextHit() noexcept
+  constexpr inline Alias readNextHit() noexcept
   {
     while(loadData()) if (readData()) return m_header.alias();
     return Alias::EOF_FASTER;
@@ -76,45 +76,45 @@ public :
     return true;
 	}
 
-  inline bool readData() noexcept
+  constexpr inline bool readData() noexcept
   {
     checkGroups          (); // If the faster files have been written in group mode (i.e. event building), this class can't read it (yet)
     extractTimestamp     (); // Load the raw timestamp - the high resolution timestamp is added in switch_aliases
     return switch_aliases(); // Read the data based on the type_alias. Returns false if one is not handled.
 	}
 
-  inline auto applyTimeshifts() noexcept
+  constexpr inline void applyTimeshifts() noexcept
   {
     if (static_cast<size_t>(m_header.label+1) < m_timeshifts.size()) m_timestamp += m_timeshifts[m_header.label];
   }
 
-  inline auto const & getTimestamp() const noexcept {return m_timestamp;}
+  constexpr inline auto const & getTimestamp() const noexcept {return m_timestamp;}
   
-  inline auto const & getHeader() const noexcept {return m_header;}
+  constexpr inline auto const & getHeader() const noexcept {return m_header;}
 
-  inline clock_t getClock() const noexcept
+  constexpr inline clock_t getClock() const noexcept
   {
     clock_t clock = 0;
     memcpy(&clock, m_header.clock, Config::__clockByteSize__); 
     return clock * Config::__tick_ps__;
   }
   
-  inline time_t getClock_ps() const noexcept
+  constexpr inline time_t getClock_ps() const noexcept
   {
     return static_cast<time_t>(getClock());
   }
   
-  inline time_t getClock_ns() const noexcept
+  constexpr inline time_t getClock_ns() const noexcept
   {
     return static_cast<time_t>(getClock()) * 1e-03;
   }
 
-  inline time_t getClock_ms() const noexcept
+  constexpr inline time_t getClock_ms() const noexcept
   {
     return static_cast<time_t>(getClock()) * 1e-06;
   }
 
-  inline time_t getClock_s() const noexcept
+  constexpr inline time_t getClock_s() const noexcept
   {
     return static_cast<time_t>(getClock()) * 1e-12;
   }
@@ -154,7 +154,7 @@ public :
   // -- Structures -- //
   //////////////////////
 
-  struct DataStructure{};
+  struct DataStructure{}; // Not used, for extra readability only
 
   struct TrapezSpectro : public DataStructure
   {//  from Trapezoidal_Spectro_Caras or Trapezoidal_Spectro_Mosahr
@@ -164,7 +164,7 @@ public :
     unsigned saturated :  1;
     unsigned sat_cpz   :  1;
 
-    constexpr auto tdc_ps() const {return tdc * tdc_clock_LSB_6bits;}
+    inline constexpr auto tdc_ps() const noexcept {return tdc * tdc_clock_LSB_6bits;}
     
     friend std::ostream & operator << (std::ostream & out, TrapezSpectro const & data)
     {
@@ -202,7 +202,7 @@ public :
     unsigned saturated :  1;
     unsigned pileup    :  1;
 
-    int deltaT_ps(){return delta_t * 8000;}
+    inline constexpr int deltaT_ps() const noexcept {return delta_t * 8000;}
     
     friend std::ostream & operator << (std::ostream & out, CRRC4Spectro const & data)
     {
@@ -225,8 +225,8 @@ public :
     QDCSpectro qdc[n];
     int32_t tdc = 0;
 
-    constexpr auto tdc_ps() const {return tdc * tdc_clock_LSB_8bits;}
-    auto const & operator[] (int const & i) const {return qdc[i];}
+    inline constexpr auto         tdc_ps     ()              const noexcept {return tdc * tdc_clock_LSB_8bits;}
+    inline constexpr auto const & operator[] (int const & i) const noexcept {return qdc[i];}
 
     friend std::ostream & operator << (std::ostream & out, QDCSpectro_xn<n> const & data)
     {
@@ -250,7 +250,7 @@ public :
     QDCSpectro_xn<4> qdc_spectro_x4;
 
     template <int n>
-    QDCSpectro_xn<n> & get()
+    inline QDCSpectro_xn<n> & get() noexcept
     {
            if constexpr (n == 1) return qdc_spectro_x1;
       else if constexpr (n == 2) return qdc_spectro_x2;
@@ -260,7 +260,7 @@ public :
     }
 
     template <int n>
-    QDCSpectro_xn<n> const & get() const
+    inline constexpr QDCSpectro_xn<n> const & get() const noexcept
     {
            if constexpr (n == 1) return qdc_spectro_x1;
       else if constexpr (n == 2) return qdc_spectro_x2;
@@ -277,19 +277,19 @@ public :
   
 protected :
 
-  inline void checkGroups() noexcept
+  constexpr inline void checkGroups() const noexcept
   {
     if (m_header.alias() == Alias::GROUP) error("Group mode is not handled in FasterReaderV2 (sry) !!!");
   }
 
-  inline void extractTimestamp() noexcept
+  constexpr inline void extractTimestamp() noexcept
   {
     m_timestamp = 0;
     memcpy(&m_timestamp, m_header.clock, Config::__clockByteSize__); 
     m_timestamp *= Config::__tick_ps__;
   }
 
-  inline bool switch_aliases() noexcept
+  constexpr inline bool switch_aliases() noexcept
   {
     switch(m_header.alias())
     {
@@ -304,7 +304,7 @@ protected :
     }
   }
 
-  inline static constexpr std::string gzlibError(int err)  noexcept// Should make an object to handle gzlib errors
+  inline static constexpr std::string gzlibError(int err) noexcept// Should make an object to handle gzlib errors ?
   {
     if (err < 0) return "failed, gzlib error, verify file integrity with \"gunzip -t filename\", and check thread safety";
     else         return "incomplete read, got "+std::to_string(err)+" instead of "+std::to_string(sizeof(m_header));
@@ -317,7 +317,8 @@ protected :
     return true;
   }
 
-  template<int n> inline auto & getQDC(){return m_qdc_data.template get<n>();}
+  template<int n> 
+  constexpr inline auto & getQDC() {return m_qdc_data.template get<n>();}
 
   template<int n> inline bool loadBufferQDC() 
   {
@@ -327,14 +328,14 @@ protected :
     return true;
   }
 
-  bool loadBufferRF() 
+  bool loadBufferRF() noexcept
   { // Maybe to correct, I'm not using pll_dt ...
     loadBuffer(m_rf_data);
     m_timestamp += m_rf_data.trig_dt * tdc_clock_LSB_8bits; 
     return true;
   }
 
-  bool loadBufferCRRC4() 
+  constexpr bool loadBufferCRRC4() noexcept
   {
     loadBuffer(m_crrc4_spectro);
     // There is no tdc in m_crrc4_spectro
@@ -353,7 +354,7 @@ protected :
     unsigned char  clock [Config::__clockByteSize__];
     unsigned short label     ;
     unsigned short buff_size ;
-    auto alias() const noexcept {return static_cast<Alias>(type_alias);}
+    inline constexpr Alias alias() const noexcept {return static_cast<Alias>(type_alias);}
   };
 
   unsigned long long m_timestamp;
