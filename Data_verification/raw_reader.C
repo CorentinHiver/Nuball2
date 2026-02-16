@@ -245,7 +245,7 @@ void raw_reader()
   outfile->Close();
 
   print(name, "written");
-  print(timer());
+  print(timer);
 }
 
 int main(int argc, char** argv)

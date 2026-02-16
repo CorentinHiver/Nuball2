@@ -6,150 +6,111 @@
 #include <chrono>
 #include <unordered_map>
 
-using       hr_clock_t = std::chrono::high_resolution_clock;
-using     time_point_t = std::chrono::time_point<hr_clock_t>;
-using duration_milli_t = std::chrono::duration<double, std::milli>;
-
-namespace Colib
-{
-  template <typename T>
-  std::string nicer_seconds(T const & time, int nb_decimals = 3)
-  {
-    T _time = time;
-    std::string unit;
-    
-    if      (time < 1.e-6 ) { _time *= 1.e9 ;  unit = " ns" ;}
-    else if (time < 1.e-3 ) { _time *= 1.e6 ;  unit = " us" ;}
-    else if (time < 1.    ) { _time *= 1.e3 ;  unit = " ms" ;}
-    else if (time < 60.   ) {                  unit = " s"  ;}
-    else if (time < 3600. ) { _time /= 60.  ;  unit = " min";}
-    else if (time < 86400.) { _time /= 3600.;  unit = " h"  ;}
-    else                    { _time /= 86400.; unit = " j"  ;}
-
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(nb_decimals) << _time << unit;
-    return ss.str();
-  }
-
-  template <typename T>
-  std::string nicer_milliseconds(T const & time, int nb_decimals = 3)
-  {
-    return nicer_seconds(static_cast<T>(time*1e-3), nb_decimals);
-  }
-};
-
-/**
- * @brief Timer class. Two usages : time elapsed since creation(or last Restart), or time elapsed between each Start() and Stop(). Non thread-safe.
- */
 class Timer
 {
 public:
-  Timer() noexcept { Start(); }
+  using clock_t     = std::chrono::steady_clock;
+  using time_point  = clock_t::time_point;
+  using duration_ms = std::chrono::duration<double, std::milli>;
 
-  /// @brief Gets the absolute timestamp
-  time_point_t Now() const noexcept
+  Timer() noexcept
   {
-    return m_clock.now();
+    restart();
   }
 
-  /// @brief Starts counting the time elapsed until next Stop() call.
-  time_point_t const & Start()
+  /// Current timestamp
+  static time_point now() noexcept
   {
-    return (m_start = Now());
+    return clock_t::now();
   }
 
-  /// @brief Starts counting the time elapsed until next Stop() call. Resets the time elapsed counting.
-  time_point_t const & Restart()
+  /// Start (or resume) timing
+  void start() noexcept
   {
-    d_milli = duration_milli_t::zero();
-    return Start();
+    m_start = now();
+    m_running = true;
   }
 
-  /// @brief Stops counting the time, increments m_stop accordingly
-  time_point_t const & Stop()
+  /// Restart and clear accumulated time
+  void restart() noexcept
   {
-    m_stop = Now();
-    d_milli += duration_milli_t(m_stop - m_start);
-    return (m_stop);
+    m_elapsed = duration_ms::zero();
+    m_start   = now();
+    m_running = true;
   }
 
-  ///@brief Print the time since last Restart, in milliseconds
-  double Time() const noexcept
+  /// Stop timing and accumulate elapsed duration
+  void stop() noexcept
   {
-    return(duration_milli_t(Now() - m_start).count());
+    if (m_running)
+    {
+      m_elapsed += duration_ms(now() - m_start);
+      m_running = false;
+    }
   }
 
-  ///@brief Print the time since last Restart, in the required time unit (ms, s, min, h, j)
-  double Time(std::string const & unit) const noexcept
+  /// Elapsed time since last start/restart (milliseconds)
+  double elapsed_ms() const noexcept
   {
-    return Time()/m_units.at(unit);
+    if (m_running)
+      return (m_elapsed + duration_ms(now() - m_start)).count();
+    return m_elapsed.count();
   }
 
-  ///@brief Print the time since last Restart, in seconds
-  double TimeSec() const noexcept
+  /// Elapsed time in seconds
+  double elapsed_sec() const noexcept
   {
-    Now();
-    return(duration_milli_t(Now() - m_start).count()/1000.);
+    return elapsed_ms() * 1e-3;
   }
 
-  ///@brief Print the time measured between each Start and Stop, in milliseconds
-  double TimeElapsed() const noexcept
+  /// Elapsed time with unit conversion
+  double elapsed(std::string_view unit) const
   {
-    return d_milli.count();
+    return elapsed_ms() / unit_scale(unit);
   }
 
-  ///@brief Print the time measured between each Start and Stop, in seconds
-  double TimeElapsedSec() const noexcept
+  /// Human-readable formatting
+  std::string format(int precision = 6) const
   {
-    return d_milli.count()/1000.;
+    double value = elapsed_ms();
+    std::string_view unit = "ms";
+
+    if      (value >= 86'400'000.0) { value /= 86'400'000.0; unit = "d";   }
+    else if (value >= 3'600'000.0)  { value /= 3'600'000.0;  unit = "h";   }
+    else if (value >= 60'000.0)     { value /= 60'000.0;     unit = "min"; }
+    else if (value >= 1'000.0)      { value /= 1'000.0;      unit = "s";   }
+    else if (value < 1.0)           { value *= 1'000.0;      unit = "µs";  }
+
+    std::ostringstream oss;
+    oss << std::fixed << std::setprecision(precision)
+        << value << ' ' << unit;
+    return oss.str();
   }
 
-  ///@brief Print the time since creation or last Restart()
-  std::string operator() (int const & precision = 6) const noexcept
-  {
-    double time = Time();
-    std::string unit = "ms";
-    
-         if (time>86400000.) {time /= 86400000.; unit =   "j";}
-    else if (time>3600000. ) {time /=  3600000.; unit =   "h";}
-    else if (time>120000.  ) {time /=    60000.; unit = "min";}
-    else if (time>1000.    ) {time /=     1000.; unit =   "s";}
-    else if (time>0.001    ) {time *=        1.; unit =  "ms";}
-    else if (time>1.e-6    ) {time *=     1000.; unit =  "us";}
+  /// @brief Deprecated, remove the () where it is used
+  std::string operator()() const {return format();}
 
-    std::stringstream ss;
-    ss << std::fixed << std::setprecision(precision) << time << " " << unit;
-    return ss.str();
-  }
-
-  ///@brief Print the time measured between each Start and Stop
-  std::string timeElapsed() const noexcept
+  friend inline std::ostream& operator<<(std::ostream& os, const Timer& timer)
   {
-    return Colib::nicer_milliseconds(d_milli.count());
+    return os << timer.format();
   }
 
 private:
-
-  hr_clock_t m_clock;
-
-  time_point_t m_start;
-  time_point_t m_stop;
-
-  duration_milli_t d_milli;
-  std::unordered_map<std::string, double> m_units = 
+  static double unit_scale(std::string_view unit)
   {
-    {"ms" , 1.},
-    {"s"  , 1000.},
-    {"min", 60000.},
-    {"h"  , 3600000.},
-    {"j"  , 86400000.},
-  };
+    if (unit == "ms")  return 1.0;
+    if (unit == "s")   return 1'000.0;
+    if (unit == "min") return 60'000.0;
+    if (unit == "h")   return 3'600'000.0;
+    if (unit == "d")   return 86'400'000.0;
+
+    throw std::invalid_argument("Timer: unknown time unit");
+  }
+
+private:
+  time_point  m_start{};
+  duration_ms m_elapsed{0};
+  bool        m_running{false};
 };
 
-std::ostream& operator<<(std::ostream& out, Timer & timer)
-{
-  out << timer();
-  return out;
-}
-
-#endif //TIMER_HPP
+#endif // TIMER_HPP

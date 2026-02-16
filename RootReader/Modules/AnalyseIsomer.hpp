@@ -103,7 +103,7 @@ void AnalyseIsomer::run(Parameters & p, AnalyseIsomer & ai)
       ai.FillRaw(event);
       ai.FillSorted(event_s,event);
     } // End event loop
-    auto const & time = timer();
+    auto const & time = timer;
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
   } // End files loop
 }

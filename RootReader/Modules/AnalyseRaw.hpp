@@ -98,7 +98,7 @@ void AnalyseRaw::treatFile(Parameters & p, AnalyseRaw & analyseRaw)
       // event_s.sortEvent(event);
       // analyseRaw.FillSorted(event_s,event);
     } // End event loop
-    auto const & time = timer();
+    auto const & time = timer;
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/s");
     file->Close();
   } // End files loop

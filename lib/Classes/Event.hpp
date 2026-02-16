@@ -1,4 +1,4 @@
-#ifndef EVENT_HPP
+#pragma once
 #define EVENT_HPP
 
 #include "Hit.hpp"
@@ -8,10 +8,8 @@
 #endif //COMULTITHREADING
 
 /**
- * @brief Event object used for reading and writing event from/to root files in Nuball2-like TTree format, 
+ * @brief NOT UP TO DATE !!! Event object used for reading and writing event from/to root files in Nuball2-like TTree format, 
  * perform event building and trigger for faster to root conversion and data analysis.
- * 
- * @version 2.0 Removed the time2s handling
  * 
  * @details
  * 
@@ -88,81 +86,37 @@
  * (not necessary if read from a TTree because TTree::GetEntry overwrites all the fields).
  */
 
-  /////////////////////////////////
-  // DECOUPLING FROM LIBROOT.HPP //
-  /////////////////////////////////
-
-namespace ColibBis
-{
-  template<class T> std::string typeRoot()          {return "Unknown";}
-  template<> std::string typeRoot<bool>()           {return "O";}
-  template<> std::string typeRoot<char>()           {return "B";}
-  template<> std::string typeRoot<unsigned char>()  {return "b";}
-  template<> std::string typeRoot<short>()          {return "S";}
-  template<> std::string typeRoot<unsigned short>() {return "s";}
-  template<> std::string typeRoot<int>()            {return "I";}
-  template<> std::string typeRoot<unsigned int>()   {return "i";}
-  template<> std::string typeRoot<long>()           {return "G";}
-  template<> std::string typeRoot<unsigned long>()  {return "g";}
-  template<> std::string typeRoot<double>()         {return "D";}
-  template<> std::string typeRoot<float>()          {return "F";}
-  template<> std::string typeRoot<Long64_t>()       {return "L";}
-  template<> std::string typeRoot<ULong64_t>()      {return "l";}
-
-  
-  /// @brief Create a branch for a given value and name
-  template<class T>
-  auto createBranch(TTree* tree, std::string const & name, T * value, int buffsize = 32000)
-  {
-    std::string type_root_format = name+"/"+typeRoot<T>();
-    return (tree -> Branch(name.c_str(), value, type_root_format.c_str(), buffsize));
-  }
-
-  /// @brief Create a branch for a given array and name
-  /// @param name_size: The name of the leaf that holds the size of the array (like the event multiplicity)
-  template<class T>
-  TBranch* createBranchArray(TTree* tree, std::string const & name, T * array, std::string const & name_size, int buffsize = 32000)
-  {
-    std::string type_root_format = name + "[" + name_size + "]/" + typeRoot<std::remove_extent_t<T>>();
-    return tree->Branch(name.c_str(), array, type_root_format.c_str(), buffsize);
-  }
-}
 class Event
 {
-  
 public:
 
-  Event() {}
+  Event() noexcept = default;
 
   Event (Hit const & hit) noexcept
   {
     *this = hit;
   }
 
-  Event(Event const & event) noexcept :
-    mult (event.mult ),
-    stamp(event.stamp),
-    read (event.read ),
-    write(event.write)
-  {
-    std::copy_n(event.labels   , mult ,  labels );
-    std::copy_n(event.times    , mult ,  times  );
-    std::copy_n(event.adcs     , mult ,  adcs   );
-    std::copy_n(event.qdc2s    , mult ,  qdc2s  );
-    std::copy_n(event.nrjs     , mult ,  nrjs   );
-    std::copy_n(event.nrj2s    , mult ,  nrj2s  );
-    std::copy_n(event.pileups  , mult ,  pileups);
-  }
+  Event(Event const & event) noexcept = default;
+  Event(Event && event) noexcept = default;
 
-  Event (TTree * tree) {this -> reading(tree);}
-  Event (TTree * tree, std::string const & options) {this -> reading(tree, options);}
-
-  // Interface with TTree class
-  void reading(TTree * tree, std::string const & options = "");
-  void writing(TTree * tree, std::string const & options = "ltTeEqQ");
+  // Event(Event const & event) noexcept :
+  //   mult (event.mult ),
+  //   stamp(event.stamp),
+  //   readOpt (event.readOpt ),
+  //   writeOpt(event.writeOpt)
+  // {
+  //   std::copy_n(event.labels   , mult ,  labels );
+  //   std::copy_n(event.times    , mult ,  times  );
+  //   std::copy_n(event.adcs     , mult ,  adcs   );
+  //   std::copy_n(event.qdc2s    , mult ,  qdc2s  );
+  //   std::copy_n(event.nrjs     , mult ,  nrjs   );
+  //   std::copy_n(event.nrj2s    , mult ,  nrj2s  );
+  //   std::copy_n(event.pileups  , mult ,  pileups);
+  // }
 
   // Interface with Hit class
-  void push_back(Hit const & hit) noexcept;
+  void push_back (Hit const & hit) noexcept;
   void push_front(Hit const & hit) noexcept;
 
   inline Event& operator=(Hit const & hit) noexcept ;
@@ -170,19 +124,18 @@ public:
   inline Event& operator=(Event && event) noexcept = default;
 
   // Timing management :
-  void setT0(Timestamp const & timestamp) noexcept
+
+  void setT0(Timestamp const & newTimestamp) noexcept
   {
-    auto const & shift = Time_cast(this->stamp - timestamp);
-    this -> timeShift(shift);
+    auto const shift = Time_cast(this->stamp - newTimestamp);
+    for (int hit_i = 0; hit_i < mult; hit_i++) times[hit_i] += shift;
+    this->stamp = newTimestamp;
   }
 
-  void timeShift(Time const & shift) noexcept
+  void setT0(Hit const & hit) noexcept
   {
-    for (int hit_i = 0; hit_i<mult; hit_i++) {timeShift(shift, hit_i);}
-    this->stamp -= shift;
+    setT0(hit.stamp);
   }
-
-  void timeShift(Time const & shift, int const & hit_i) noexcept {times[hit_i]+=shift;}
 
   // Usual methods :
   void Print() const noexcept;
@@ -207,13 +160,13 @@ public:
 
   void fullClear() noexcept 
   { // Set all the fields to 0
-    std::fill(labels, labels+maxSize, 0);
-    std::fill(times, times+maxSize, 0);
-    std::fill(adcs, adcs+maxSize, 0);
-    std::fill(nrjs, nrjs+maxSize, 0);
-    std::fill(qdc2s, qdc2s+maxSize, 0);
-    std::fill(nrj2s, nrj2s+maxSize, 0);
-    std::fill(pileups, pileups+maxSize, 0);
+    std::fill(labels , labels  + maxSize, 0);
+    std::fill(times  , times   + maxSize, 0);
+    std::fill(adcs   , adcs    + maxSize, 0);
+    std::fill(nrjs   , nrjs    + maxSize, 0);
+    std::fill(qdc2s  , qdc2s   + maxSize, 0);
+    std::fill(nrj2s  , nrj2s   + maxSize, 0);
+    std::fill(pileups, pileups + maxSize, 0);
     mult = 0;
   }
 
@@ -239,11 +192,9 @@ public:
   auto const & pileup (int const & hit_i) const {return pileups[hit_i];}
   auto       & pileup (int const & hit_i)       {return pileups[hit_i];}
 
+  // std::vector-like interface
   inline Hit operator[](int const & hit_i) const noexcept;
-
-  // I/O status :
-  IOptions read;
-  IOptions write;
+  size_t size() const noexcept {return size_cast(mult);}
 
 private:
 };
@@ -276,81 +227,10 @@ inline Event& Event::operator=(Hit const & hit) noexcept
   return *this;
 }
 
-// inline Event& Event::operator=(Event const & event) noexcept 
-// {
-//   read  = event.read;
-//   write = event.write;
-//   mult  = event.mult;
-//   if (write.t || read.t) stamp = event.stamp;
-//   if (write.l || read.l) std::copy_n(event.labels   , mult ,  labels );
-//   if (write.T || read.T) std::copy_n(event.times    , mult ,  times  );
-//   if (write.e || read.e) std::copy_n(event.adcs     , mult ,  adcs   );
-//   if (write.q || read.q) std::copy_n(event.qdc2s    , mult ,  qdc2s  );
-//   if (write.E || read.E) std::copy_n(event.nrjs     , mult ,  nrjs   );
-//   if (write.Q || read.Q) std::copy_n(event.nrj2s    , mult ,  nrj2s  );
-//   if (write.p || read.p) std::copy_n(event.pileups  , mult ,  pileups);
-//   return *this;
-// }
-
-void inline Event::reading(TTree * tree, std::string const & options)
-{
-#ifdef COMULTITHREADING
-  lock_mutex lock(mutex_events);
-#endif //COMULTITHREADING
-
-  if (!tree) {print("Input tree at address 0x00 !"); return;}
-
-  this -> fullClear();
-
-  if (options == "") read.detectLeafs(tree);
-  else read.setOptions(options);
-
-  tree -> ResetBranchAddresses();
-
-  if (read.m) tree -> SetBranchAddress("mult"   , & mult   );
-  if (read.l) tree -> SetBranchAddress("label"  , & labels );
-  if (read.t) tree -> SetBranchAddress("stamp"  , & stamp  );
-  if (read.T) tree -> SetBranchAddress("time"   , & times  );
-  if (read.e) tree -> SetBranchAddress("adc"    , & adcs   );
-  if (read.E) tree -> SetBranchAddress("nrj"    , & nrjs   );
-  if (read.q) tree -> SetBranchAddress("qdc2"   , & qdc2s  );
-  if (read.Q) tree -> SetBranchAddress("nrj2"   , & nrj2s  );
-  if (read.p) tree -> SetBranchAddress("pileup" , & pileups);
-
-  tree -> SetBranchStatus("*",true);
-}
-
-void inline Event::writing(TTree * tree, std::string const & options)
-{
-#ifdef COMULTITHREADING
-  lock_mutex lock(mutex_events);
-#endif //COMULTITHREADING
-
-  if (!tree) {print("Output tree at address 0x00 !"); return;}
-
-  this -> fullClear();
-
-  write.setOptions(options);  
-
-  tree -> ResetBranchAddresses();
-
-  if (write.m) ColibBis::createBranch     (tree,  "mult"   , &mult   );
-  if (write.t) ColibBis::createBranch     (tree,  "stamp"  , &stamp  );
-  if (write.T) ColibBis::createBranchArray(tree,  "time"   , &times  , "mult");
-  if (write.E) ColibBis::createBranchArray(tree,  "nrj"    , &nrjs   , "mult");
-  if (write.Q) ColibBis::createBranchArray(tree,  "nrj2"   , &nrj2s  , "mult");
-  if (write.e) ColibBis::createBranchArray(tree,  "adc"    , &adcs   , "mult");
-  if (write.q) ColibBis::createBranchArray(tree,  "qdc2"   , &qdc2s  , "mult");
-  if (write.l) ColibBis::createBranchArray(tree,  "label"  , &labels , "mult");
-  if (write.p) ColibBis::createBranchArray(tree,  "pileup" , &pileups, "mult");
-  
-  tree -> SetBranchStatus("*",true);
-}
-
 inline void Event::push_back(Hit const & hit) noexcept
 {
   check_safe();
-  if (mult == 0) *this = hit;
+  if (mult == 0) *this = hit; // Use of Event::operator=(Hit)
   else
   {
     labels  [mult] = hit.label;
@@ -360,8 +240,8 @@ inline void Event::push_back(Hit const & hit) noexcept
     qdc2s   [mult] = hit.qdc2  ;
     nrj2s   [mult] = hit.nrj2  ;
     pileups [mult] = hit.pileup;
+    ++mult;
   }
-  ++mult;
 }
 
 /**
@@ -370,7 +250,10 @@ inline void Event::push_back(Hit const & hit) noexcept
  * 
  * @details
  * About the timestamp of the event, we keep the same as this additional event is located
- * before the first hit that really represents the "0" of the event
+ * before the first hit that really represents the "0" of the event. Use Event::setT0 if
+ * you want to modify the event's timestamp
+ * 
+ * @attention Not efficient !! Use if no other choice or not called often. 
  * 
  */
 inline void Event::push_front(Hit const & hit) noexcept
@@ -403,18 +286,18 @@ inline std::ostream& operator<<(std::ostream& cout, Event const & event)
 #endif //COMULTITHREADING
 
   cout << std::endl << "---" << std::endl;
-  cout << event.mult << " hits : ";
-  if (event.stamp != 0) cout << "Timestamp : " << event.stamp << " ps";
+  cout << event.mult << " hits. ";
+  if (event.stamp != 0) cout << "Timestamp : " << event.stamp << " ps(" << std::fixed << std::setw(10) << Colib::nicer_seconds(event.stamp*1e-12) << ")";
   std::cout << std::endl;
   for (int i = 0; i<event.mult;i++)
   {
-    cout << "label : " << event.labels[i] << " ";
-    if(event.times  [i] != 0) cout << "time : "     + std::to_string(event.times [i])+" ps  " ;
-    if(event.adcs   [i] != 0) cout << "adc : "      + std::to_string(event.adcs  [i])+" "     ;
-    if(event.qdc2s  [i] != 0) cout << "qdc2 : "     + std::to_string(event.qdc2s [i])+" "     ;
-    if(event.nrjs   [i] != 0) cout << "energy : "   + std::to_string(event.nrjs  [i])+" keV  ";
-    if(event.nrj2s  [i] != 0) cout << "energy 2 : " + std::to_string(event.nrj2s [i])+" keV  ";
-    if(event.pileups[i] != 0) cout << "\u001b[31m pileup \u001b[0m"                           ;
+    cout << "label : " << std::fixed << std::setw(3)  << event.labels[i] << " ";
+    cout << "time : "     << std::fixed << std::setw(10) << std::setprecision(10) << std::right << event.times [i] << +" ps  " ;
+    if(event.adcs   [i] != 0) cout << "adc : "      << std::fixed << std::setw( 6) << std::setprecision( 6) << std::right << event.adcs  [i] << +" "     ;
+    if(event.qdc2s  [i] != 0) cout << "qdc2 : "     << std::fixed << std::setw( 6) << std::setprecision( 6) << std::right << event.qdc2s [i] << +" "     ;
+    if(event.nrjs   [i] != 0) cout << "energy : "   << std::fixed << std::setw( 5) << std::setprecision( 4) << std::right << event.nrjs  [i] << +" keV  ";
+    if(event.nrj2s  [i] != 0) cout << "energy 2 : " << std::fixed << std::setw( 5) << std::setprecision( 4) << std::right << event.nrj2s [i] << +" keV  ";
+    if(event.pileups[i] != 0) cout << "\u001b[31m pileup \u001b[0m";
     cout << std::endl;
   }
   cout << "--- " << std::endl;
@@ -432,4 +315,18 @@ inline void Event::Print() const noexcept
 
 using EventTrigger = std::function<bool(const Event&)>;
 
-#endif //EVENT_HPP
+// inline Event& Event::operator=(Event const & event) noexcept 
+// {
+//   read  = event.read;
+//   write = event.write;
+//   mult  = event.mult;
+//   if (write.t || read.t) stamp = event.stamp;
+//   if (write.l || read.l) std::copy_n(event.labels   , mult ,  labels );
+//   if (write.T || read.T) std::copy_n(event.times    , mult ,  times  );
+//   if (write.e || read.e) std::copy_n(event.adcs     , mult ,  adcs   );
+//   if (write.q || read.q) std::copy_n(event.qdc2s    , mult ,  qdc2s  );
+//   if (write.E || read.E) std::copy_n(event.nrjs     , mult ,  nrjs   );
+//   if (write.Q || read.Q) std::copy_n(event.nrj2s    , mult ,  nrj2s  );
+//   if (write.p || read.p) std::copy_n(event.pileups  , mult ,  pileups);
+//   return *this;
+// }

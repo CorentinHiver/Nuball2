@@ -139,7 +139,7 @@ void AnalyseDSSD::run(Parameters & p, AnalyseDSSD & analysedssd)
       analysedssd.FillRaw(event);
       analysedssd.FillSorted(event_s,event);
     } // End event loop
-    auto const & time = timer();
+    auto const & time = timer;
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
   } // End files loop
 }

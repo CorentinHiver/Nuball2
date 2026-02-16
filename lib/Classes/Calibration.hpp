@@ -1,10 +1,7 @@
-#ifndef CALIBRATION_HPP
-#define CALIBRATION_HPP
+#pragma once
 
-#include "../libCo.hpp"
+#include "Event.hpp"
 
-#include "../Classes/Event.hpp"
-#include "../Classes/Detectors.hpp"
 
 /**
  * @brief A convenient class for handling coefficient calibration up to 3rd order
@@ -44,11 +41,11 @@ public:
   }
 
   /// @brief Constructor loading calibration from a file
-  Calibration(File const & file) {load(file);}
+  Calibration(std::string const & file) {load(file);}
   /// @brief Copy operator twicked to load calibration from a file
-  Calibration const & operator=(File const & file) {load(file); return *this;}
+  Calibration const & operator=(std::string const & file) {load(file); return *this;}
   /// @brief Loading calibration from a file
-  bool load(File const & file);
+  bool load(std::string const & file);
   void set(Label const & _label, float const & _intercept, float const & _slope, float const & _binom, float const &_trinom);
   std::vector<float> get(Label const & _label) const noexcept;
 
@@ -70,10 +67,11 @@ public:
     if (other.m_size != this->m_size) {error(other.m_filename, "not the same size as", m_filename);}
     for (int label = 0; label<other.m_size; ++label)
     {
+      if (m_order[label] == 0 && other.m_slope[label] == 0) continue;
       if (m_order[label] == other.m_order[label])
       {
-        // Works only for order == 1 for now
-        if (m_order[label] == 1)
+        // Works only for 1st order for now
+        if (m_order[label] == 1 && other.m_order[label] == 1)
         {
           m_slope[label] = m_slope[label]/other.m_slope[label];
           m_intercept[label] = m_intercept[label] - m_slope[label]*other.m_intercept[label];
@@ -281,7 +279,8 @@ inline float Calibration::apply(float const & nrj, Label const & label) const no
 inline float Calibration::calibrate(float const & nrj, Label const & label) const noexcept
 {
   // First, one has to randomize the nrj within its bin
-  auto nrj_r = nrj+randomCo::uniform();
+  auto const nrj_r = nrj + randomCo::ultra_fast_uniform();
+  // auto nrj_r = nrj+randomCo::uniform();
 
   // Then, return the new value depending on the order of the calibration for this label
   return apply(nrj_r, label);
@@ -313,7 +312,7 @@ inline void Calibration::calibrate(Hit & hit) const noexcept
 inline void Calibration::calibrate(Event & event, int const & hit_i) const noexcept
 {
   auto const & label = event.labels[hit_i];      // Extracts the label of the detector
-  if (label > m_size) return;          // If the label is out of range then do no treat it
+  if (m_size <= label) return;          // If the label is out of range then do no treat it
   event.nrjs[hit_i] = calibrate(event.adcs[hit_i], label); // Call to the Calibration::calibrate(energy, label) method
 #ifndef QDC1MAX                        // This line allows one to calibrate a bit faster if not interested in the QDC2 field
   if (event.qdc2s[hit_i]==0) event.nrj2s[hit_i] = 0.0;
@@ -378,20 +377,20 @@ void Calibration::resize(int const & size)
 
 void Calibration::clear() noexcept
 {
-m_order    .clear();
-m_intercept.clear();
-m_slope    .clear();
-m_binom    .clear();
-m_trinom   .clear();
+  m_order    .clear();
+  m_intercept.clear();
+  m_slope    .clear();
+  m_binom    .clear();
+  m_trinom   .clear();
 }
 
-bool Calibration::load(File const & file)
+bool Calibration::load(std::string const & file)
 {
-  m_filename = file.string();
+  m_filename = file;
   std::ifstream inputfile(m_filename, std::ifstream::in);
 
   if (!inputfile.good()) {print("CAN'T OPEN THE CALIBRATION FILE " + m_filename); Colib::throw_error("CALIBRATION");}
-  else if (fileIsEmpty(inputfile)) {print("CALIBRATION FILE", m_filename, "EMPTY !"); Colib::throw_error("CALIBRATION");}
+  else if (Colib::fileIsEmpty(inputfile)) {print("CALIBRATION FILE", m_filename, "EMPTY !"); Colib::throw_error("CALIBRATION");}
   std::string line = "";
   Label size = 0;
   Label label = 0;
@@ -406,11 +405,11 @@ bool Calibration::load(File const & file)
   }
   size++; // The size of the vector must be label_max+1
   // Ensure there is no mismatch with the detectors module :
-  if (detectors)
-  {
-    if (size<detectors.size()) size = detectors.size();
-    else detectors.resize(size);
-  }
+  // if (detectors)
+  // {
+  //   if (size<detectors.size()) size = detectors.size();
+  //   else detectors.resize(size);
+  // }
   inputfile.clear();
   inputfile.seekg(0, std::ios::beg); // back to the start of the file
   m_size = size;
@@ -462,8 +461,9 @@ void Calibration::Print(Label const & label)
   auto const & calib_order = m_order[label];
   if (calib_order < 0) return;
 
-  if(detectors) std::cout << detectors[label] << " : ";
-  else         std::cout <<           label  << " : ";
+  // if(detectors) std::cout << detectors[label] << " : ";
+  // else         
+  std::cout <<           label  << " : ";
 
   if (calib_order == 0) {std::cout << 0 << " " << m_slope[label];}
   else //if (calib_order > 0)
@@ -484,14 +484,13 @@ void Calibration::Print(Label const & label)
 /// @brief Writes down the calibration file
 void Calibration::write(std::string const & outfilename)
 {
-  File outFile(outfilename);
-  outFile.setExtension("calib");
-  outFile.makePath(); // Create the path if it doesn't already exist
+  Colib::setExtension(outfilename, "calib");
+  Colib::fileEnsurePath(outfilename); // Create the path if it doesn't already exist
 
-  std::ofstream outfile(outFile.string(), std::ios::out);
+  std::ofstream outfile(outfilename, std::ios::out);
   outfile << *this;
   outfile.close();
-  print(outFile.string(), "written");
+  print(outfilename, "written");
 }
 
 #ifdef FIT_HPP
@@ -511,4 +510,3 @@ void Calibration::loadFits(Fits const & fits)
 }
 #endif //FIT_HPP
 
-#endif //CALIBRATION_HPP

@@ -398,7 +398,7 @@ void Eu152_efficiency(int nb_files = -1, long max_cursor = 1.e+10)
 
   outfile->Close();
   print("152EU_test.root written");
-  print(timer());
+  print(timer);
 }
 
 int main(int argc, char** argv)

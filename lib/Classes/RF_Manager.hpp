@@ -58,7 +58,7 @@ public:
 
   Time relTime(Timestamp const & timestamp) const
   {
-    if (period == 0) throw std::runtime_error("RF period = 0 !!!");
+    if (period == 0) throw std::runtime_error("RF period = 0 !!! Did you set it ?");
 
     // Shifts the timestamp in order to be able to get hits before the 0. Indeed, we calculate the relative time using a modulo. 
     // With no shift, the relative time is always positive (there cannot be negative result out of the modulo operation).
@@ -73,21 +73,21 @@ public:
     // Now, there are two possibilities. Normally, the reference timestamp is lower than the shifted timestamp.
     // But in some cases, the reference timestamp is higher than the shifted timestamp (when looking "in the past").
     // The following allows one to have valid relative times for both situations :
-    if (shifted_timestamp>=last_downscale_timestamp)
+    Time relative_time;
+    if (last_downscale_timestamp <= shifted_timestamp)
     {// Normal case
-      auto const & relative_time = Time_cast(rf_time%period); // This is the time separating the shifted timestamp to the t0 of the current pulse.
-      return relative_time - m_offset; // Shifts back to obtain the correct relative time
+      relative_time = Time_cast(rf_time%period); // This is the time separating the shifted timestamp to the t0 of the current pulse.
     }
     else if (rf_time<0)
     {// When the RF timestamp is larger than the hit's
-      auto const & relative_time = Time_cast(period - (-rf_time)%period); 
-      return relative_time - m_offset;
+      relative_time = Time_cast(period - (-rf_time)%period); 
     }
     else 
     {
       Colib::throw_error("FATAL : inconsistency in the timestamps !!! in RF_Manager::relTime()");
       return 0;
     }
+    return relative_time - m_offset; // Shifts back to obtain the correct relative time
   }
   Time relTime(Hit const & hit) const {return relTime(hit.stamp);}
 
@@ -96,20 +96,33 @@ public:
 
   void inline set(Timestamp new_timestamp, Timestamp _period) 
   {
-    auto const & tPeriod = Time_cast(new_timestamp - last_downscale_timestamp);
+    // If this is the first ever downscaled data, just read the data in the energy field :
+    if (!s_calculateRF || last_downscale_timestamp == 0) period = double_cast(_period);
 
-    // The RF is downscaled every 1000 RF pulses. 
-    // There are two cases : either the RF is indeed downscaled as expected 
-    // and the difference of timestamps should be in the order of 1000 RF pulses:
-    if (tPeriod > 0 && tPeriod<Time_cast(1.5*double_cast(period))*1000000) period = Time_cast(double_cast(tPeriod)/1000.);
+    else 
+    {
+      auto const & period_calc = Time_cast(new_timestamp - last_downscale_timestamp);
+  
+      // The RF is downscaled every 1000 RF pulses. Hence, the difference 
+      // between old and new timestamps should be in the order of 1000 RF pulses:
+      auto const & period_theo = Time_cast(1.5*double_cast(_period))*1000000;
+      if (period_calc > 0 && period_calc < period_theo) period = Time_cast(double_cast(period_calc)/1000.);
+      
+      // If it is not, then use the period provided by the user :
+      else period = double_cast(_period);
+    }
 
-    // If it is not, then use the period provided by the user :
-    else period = double_cast(_period);
-
-    // Either way, we need to update the timestamp of the last downscale RF :
+    // Register the timestamp of the last downscaled RF :
     last_downscale_timestamp = new_timestamp;
   }
 
+  bool findFirst(std::vector<Hit> const & hits, std::vector<size_t> const & sortedId)
+  {
+    for(auto const & id : sortedId) if (setHit(hits[id])) return true;
+    return false;
+  }
+
+  static void calculateRF(bool b = true) {s_calculateRF = b;}
 
   // Attributes :
 
@@ -117,14 +130,12 @@ public:
 
   Time period = 0;
 
-  static Label label;
-
-private:
-  static Time m_offset;
+  inline static Label label = 251;
+  
+  private:
+  inline static Time m_offset = 50_ns;
+  inline static bool s_calculateRF = false;
 };
-
-Time  RF_Manager::m_offset = 50000;
-Label RF_Manager::label = 251;
 
 std::ostream& operator<<(std::ostream& cout, RF_Manager const & rf)
 {
@@ -136,8 +147,8 @@ bool inline RF_Manager::setHit(Hit const & hit)
 {
   if (hit.label == this -> label)
   {
-    if (hit.adc == 0) this -> set(hit.stamp,Timestamp_cast(hit.nrj));
-    else              this -> set(hit.stamp,Timestamp_cast(hit.adc));
+    if (hit.nrj == 0) this -> set(hit.stamp, Timestamp_cast(hit.adc));
+    else              this -> set(hit.stamp, Timestamp_cast(hit.nrj));
     return true;
   }
   else return false;
@@ -229,7 +240,7 @@ RF_Extractor::RF_Extractor(TTree * tree, RF_Manager & rf, Event & event, Long64_
   m_ok = true;
 }
 
-RF_Extractor::RF_Extractor(std::vector<Hit*> const & hits, RF_Manager & rf, Event & event, Long64_t maxEvts = Time_cast(1.E+7))
+RF_Extractor::RF_Extractor(std::vector<> const & hits, RF_Manager & rf, Event & event, Long64_t maxEvts = Time_cast(1.E+7))
 {
 
 }

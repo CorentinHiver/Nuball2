@@ -1,2 +1,0 @@
-Avec la ligne à 158 keV, on obtient les décroissances du 56Co, créé par la réaction 56Fe(p,n)
-Avec la ligne à 856 keV, on obtient les décroissances du 56Fe, créé par la réaction 56Fe(p,p')

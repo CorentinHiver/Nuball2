@@ -1,7 +1,0 @@
-ID: ID/index_120.dat
-TIMESHIFT_DATA: load: deltaT_test.dat
-# THRESHOLD: 10 //keV
-
-# ANALYSE: timewindow: 350 time_ref: R1A1_FATIMA_LaBr3 outRoot: analyse_tests.root
-
-HISTOGRAM: raw_histo_tests.root

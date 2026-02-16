@@ -120,7 +120,7 @@ void Matrices::run(Parameters & p, Matrices & matrices)
       matrices.FillAnalysed(event_a);
       // matrices.FillRaw(event);
     } // End event loop
-    auto const & time = timer();
+    auto const & time = timer;
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
   } // End files loop
 }

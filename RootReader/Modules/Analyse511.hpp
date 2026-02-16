@@ -78,7 +78,7 @@ void Analyse511::run(Parameters & p, Analyse511 & analyse_511)
       analyse_511.FillRaw(event);
       // analyse_511.FillSorted(event_s,event);
     } // End event loop
-    auto const & time = timer();
+    auto const & time = timer;
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/s");
   } // End files loop
 }

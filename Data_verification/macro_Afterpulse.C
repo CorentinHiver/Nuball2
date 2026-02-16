@@ -116,7 +116,7 @@ void macro_Afterpulse()
   ggC3->Write();
   output->Close();
   print("afterpulse_analysed.root written");
-  print(timer());
+  print(timer);
 }
 
 #ifndef __CINT__

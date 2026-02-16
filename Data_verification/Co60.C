@@ -470,7 +470,7 @@ void Co60()
 
   outfile->Close();
   print("60Co_test.root written");
-  print(timer());
+  print(timer);
 }
 
 int main(int argc, char** argv)

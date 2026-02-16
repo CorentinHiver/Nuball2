@@ -1,7 +1,0 @@
-#ifndef RF_EXTRACTOR_HPP
-#define RF_EXTRACTOR_HPP
-
-#include <libRoot.hpp>
-#include <RF_Manager.hpp>
-
-#endif //RF_EXTRACTOR_HPP

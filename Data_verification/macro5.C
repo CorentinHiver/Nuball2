@@ -2023,7 +2023,7 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
   //   // test->Draw();
   //   // auto dp_clean = static_cast<TH2F*> (static_cast<TH2F*>(f->Get("dp"))->Clone("dp_clean"));
   }
-  print("analysis time :", timer());
+  print("analysis time :", timer);
 }
 
 int main(int argc, char** argv)

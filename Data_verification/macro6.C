@@ -514,7 +514,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   std::string command = "hadd -f -j "+ nb_threads_str+ " -d . "+ dest + " " + source;
   print(command);
   gSystem->Exec(command.c_str());
-  print(timer());
+  print(timer);
 }
 
 int main(int argc, char** argv)

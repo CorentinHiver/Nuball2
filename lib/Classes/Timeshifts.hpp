@@ -3,10 +3,6 @@
 
 #include "../libCo.hpp"
 
-/**
- * @brief Timeshifts class. Hold a list of pair label timeshift, in ps;
- * 
- */
 class Timeshifts
 {
 public:
@@ -14,34 +10,57 @@ public:
   using Timeshift_t = int64_t;
   using Timeshifts_t = std::vector<Timeshift_t>;
 
+  /// @brief Default constructor
   Timeshifts() = default;
-  Timeshifts(std::string const & filename) : m_filename(filename) {this -> load(m_filename);}
-  Timeshifts(Timeshifts const & other) : m_timeshifts(other.m_timeshifts) {}
-  
-  Timeshifts& operator=(Timeshifts const & other)
+
+  /// @brief Constructor to instanciate a Timeshift object with already loaded data located in the given .dT file
+  Timeshifts(std::string const & filename) : m_filename(filename) 
   {
-    m_timeshifts = other.m_timeshifts;
-    m_ok = other.m_ok;
-    return *this;
+    this -> load(m_filename);
   }
+  
+  /// @brief Default copy constructor
+  Timeshifts(Timeshifts const & other) noexcept = default;
+  
+  /// @brief Default copy method
+  Timeshifts& operator=(Timeshifts const & other) noexcept = default;
 
   /// @brief Use this method to load timeshifts from a .dT file
   bool load(std::string const & filename);
 
-  auto const & operator[] (int const & i) const {return m_timeshifts[i];}
-  Timeshifts & operator*= (double const & f) {for (auto & dT : m_timeshifts) dT*=f; return *this;}
-
-#ifdef HIT_HPP // If Hit.hpp is included (Nuball2)
-  void operator() (Hit & hit) const {hit.stamp += m_timeshifts[hit.label];}
-#endif //HIT_HPP
-
-  Timeshifts_t const & get() const {return m_timeshifts;}
-  Timeshifts_t const & data() const {return m_timeshifts;}
-  auto const & get(int const & i) const {return m_timeshifts[i];}
-  operator bool() const & {return m_ok;}
-
+  /// @brief Saves the timeshift file to disk
   void write(std::string const & fullpath, std::string const & name);
 
+  /// @brief Returns the timeshift of the detector with the given label
+  auto const & operator[] (int const & label) const {return m_timeshifts[label];}
+
+  /// @brief Returns the timeshift of the detector with the given label
+  auto const & get(int const & i) const {return m_timeshifts[i];}
+
+  #ifdef HIT_HPP // If Hit.hpp is included (Nuball2)
+    /// @brief Returns the timeshift of the detector with the label of the given hit
+    void operator() (Hit & hit) const {hit.stamp += m_timeshifts[hit.label];}
+  #endif //HIT_HPP
+
+  /// @brief Multiplies each element of the timeshift vector by a given factor f
+  Timeshifts & operator*= (double const & f) {for (auto & dT : m_timeshifts) dT*=f; return *this;}
+
+  /// @brief Returns a reference to the timeshift vector (std::vector<int64_t>)
+  Timeshifts_t & get() {return m_timeshifts;}
+
+  /// @brief Returns a read-only access to the timeshift vector (std::vector<int64_t>)
+  Timeshifts_t const & data() const {return m_timeshifts;}
+  
+  /// @brief Returns weither the timestamp vector has been filled correctly
+  operator bool() const & {return m_ok;}
+
+  /// @brief Returns weither the timestamp vector has been filled correctly
+  auto const & isOk() const {return m_ok;}
+
+  /// @brief Returns weither the timestamp vector is empty
+  auto empty() const {return m_timeshifts.empty();}
+
+  /// @brief Returns the size of the timestamp vector
   auto size() const {return m_timeshifts.size();}
 
 private:
@@ -49,13 +68,14 @@ private:
   Timeshifts_t m_timeshifts;
   bool m_ok = false;
   int m_nb_detectors = 0;
-  Colib::Path m_outPath;
+  // Colib::Path m_outPath;
+  std::string m_outPath;
   
   public:
   class NotFoundError
   {
   public:
-    NotFoundError(std::string const & filename) : m_filename(filename) {error("Timeshifts::NotFoundError", filename);}
+    NotFoundError(std::string const & filename) : m_filename(filename) {error("Timeshiftor::NotFoundError", filename);}
     auto const & getFilename() const {return m_filename;}
   private:
     std::string m_filename;
@@ -80,16 +100,16 @@ bool Timeshifts::load(std::string const & filename)
   }
   inputFile.close();
   print("Timeshifts extracted from", filename);
-  return (m_ok = true);
+  return (m_ok = !m_timeshifts.empty());
 }
 
 void Timeshifts::write(std::string const & fullpath, std::string const & name)
 {
-  m_outPath = Colib::Path (fullpath, true);
-  if (!m_outPath) {m_ok = false; return;}
+  m_outPath = fullpath;
+  Colib::ensurePath(m_outPath);
 
-  Colib::File outData (m_outPath+name);
-  outData.setExtension(".dT");
+  std::string outData = m_outPath + name;
+  Colib::setExtension(outData, ".dT");
 
   std::ofstream outTimeshiftsFile(outData, std::ios::out);
   

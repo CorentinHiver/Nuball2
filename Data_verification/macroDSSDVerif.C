@@ -895,7 +895,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
     pp_dssd_ok.Write();
   outFile->Close();
   print("pp_triggerP.root written");
-  print("Reading in ", timer(), "at a speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_evts_number/timer.TimeSec(), "M events/s");
+  print("Reading in ", timer, "at a speed of", files_total_size/timer.TimeSec(), "Mo/s | ", 1.e-6*total_evts_number/timer.TimeSec(), "M events/s");
 }
 
 #ifndef __CINT__

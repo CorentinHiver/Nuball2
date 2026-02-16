@@ -1,14 +1,13 @@
-#ifndef RANDOM_HPP
-#define RANDOM_HPP
+#pragma once
 
-#include <random>
 #include <cstdint>
 #include <chrono>
+#include <random>
+#include <thread>
 
-#if __cplusplus >= 202002L
-  #include <bit>
-  #define CPP20
-#endif //__cplusplus >= 202002L
+#ifndef cpp20
+#define cpp20 (__cplusplus >= 202002L)
+#endif //cpp20
 
 std::random_device rd;
 std::mt19937 gen(rd());
@@ -55,7 +54,6 @@ namespace randomCo
     return distribution(generator);
   }
 
-
   inline double uniform() noexcept
   {
     std::uniform_real_distribution<double> distribution(0, 1);
@@ -68,26 +66,7 @@ namespace randomCo
     return distribution(generator);
   }
 
-#ifdef CPP20
-  inline float fast_dirty_uniform() noexcept {
-    static thread_local uint32_t counter = 1;
   
-    // Combine time with counter to vary each call
-    auto now = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    uint64_t state = static_cast<uint64_t>(now) ^ (counter++);
-  
-    // Xorshift32
-    state ^= state << 13;
-    state ^= state >> 17;
-    state ^= state << 5;
-  
-    uint32_t ieee_float = 0x3F800000 | (state >> 9);
-    return std::bit_cast<float>(ieee_float) - 1.0f;
-  }
-#else // CPP < 20
-  inline float fast_dirty_uniform() noexcept {return fast_uniform();}
-#endif //CPP20
-
   inline double uniform(const double & min, const double & max) noexcept
   {
     std::uniform_real_distribution<double> distribution(min, max);
@@ -100,6 +79,54 @@ namespace randomCo
     return distribution(generator);
   }
 
-}
+#ifdef cpp20
+  /// @brief This is NOT true pseudo-random generation, but works like a charm for ADC to float convertion
+  /// @tparam n_pow_size MUST be < 20 to keep pleasant compilation time 
+  template<size_t n_pow_size = 16>
+  requires(8 <= n_pow_size && n_pow_size < 20)
+  inline float ultra_fast_uniform_n() noexcept 
+  {
+    // 1. Compile-time constants
+    static constexpr size_t size = 1ULL << n_pow_size;
+    static constexpr size_t mask = size - 1;
+    static constexpr float step = 1.0f / static_cast<float>(size);
 
-#endif //RANDOM_HPP
+    // 2. Compile-time Table Generation
+    static constexpr auto lut = []() 
+    {
+      std::array<float, size> table{};
+      
+      // Fill with perfectly granular steps: 0, 1/size, 2/size...
+      for (size_t i = 0; i < size; ++i) table[i] = i * step;
+
+      // Shuffle using a constexpr-friendly PRNG (Fisher-Yates)
+      uint32_t state = 0x12345;
+      for (size_t i = size - 1; i > 0; --i) 
+      {
+          // Simple LCG for shuffle
+          state = state * 1664525u + 1013904223u;
+          size_t j = state % (i + 1);
+          
+          float temp = table[i];
+          table[i] = table[j];
+          table[j] = temp;
+      }
+      return table;
+    }();
+
+    // 3. Runtime Access (Initialized once, modified only in following line with index++
+    static thread_local size_t index = static_cast<size_t>(
+      std::chrono::high_resolution_clock::now().time_since_epoch().count());
+
+    return lut[(++index) & mask];
+  }
+
+  /// @brief This is NOT true pseudo-random generation, but should works like a charm for ADC to float convertion
+  /// Uses ultra_fast_uniform_n<16>, i.e. a random number between 0 and 2^16=65536 (will produce the same number every 65536 calls)
+  inline float ultra_fast_uniform() noexcept 
+  {
+    return ultra_fast_uniform_n<16>();
+  }
+
+#endif //CPP20
+}

@@ -1,14 +1,27 @@
 #define DEVCO
+// #define MULTITHREAD 2
+
+#include "lib/Classes/Timer.hpp"
+
+// #include "lib/libCo.hpp"
 // #include "lib/libRoot.hpp"
-// #include "lib/Classes/Timer.hpp"
+// #include "lib/CoMT/CoMT.hpp"
+// #include "lib/print.hpp"
+// #include "lib/randomCo.hpp"
 // #include "lib/Classes/FilesManager.hpp"
+// #include "lib/Classes/Hit.hpp"
+// #include "lib/Classes/Event.hpp"
+// #include "lib/Classes/Arguments.hpp"
+// #include "lib/Classes/Calibration.hpp"
 // #include "lib/Classes/Transitions.hpp"
 // #include "lib/Analyse/SpectraAlignator.hpp"
 // #include "lib/MTObjects/MultiHist.hpp"
-// #include "lib/libRoot.hpp"
 // #include "lib/libRootHeader.hpp"
-#include "lib/FasterReader/FasterRunReader.hpp"
+// #include "lib/RootReader/RootReader.hpp"
+// #include "lib/RootReader/TimeshiftCalculator.hpp"
 // #include "lib/FasterReader/FasterRootInterface.hpp"
+// #include "lib/RootReader/RootRunReader.hpp"
+#include "lib/FasterReader/FasterRunReader.hpp"
 // #include  "lib/Modules/CoRadware.hpp"
 // #include  "lib/Modules/Timeshiftor.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
@@ -19,27 +32,84 @@
 // #include  "lib/Analyse/Chi2Minimiser.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
 // #include "lib/FasterReader/FasterRootInterface.hpp"
-// #include "lib/FasterReader/FasterReaderV2.hpp"
+// #include "lib/FasterReader/FasterReader.hpp"
 // #include "TH1F.h"
 // #include "TH2F.h"
 // #include "TFile.h"
 
+using namespace Colib;
+
 int main(int argc, char** argv)
 {
   Timer totTimer;
-  FasterRootInterface::setTreeInMemory();
-  FasterRunReader reader;
-  reader.addFiles(argv[1]);
-  if (argc>2) reader.setMaxHits(static_cast<int>(atof(argv[2])));
-  reader.setTimeWindow(2_us);
-  reader.setEventTrigger([](Event const & event) -> bool {
-    return ((1 < event.mult) && (event.mult < 5));
+
+
+  // Event event;
+
+
+  // MT::parallelise_function_nb<4>([](){
+  //   for (int i = 0; i<10000; ++i) {print(i); if(MT::isKilled()) break;}
+  //   MT::kill();
+  // });
+
+
+  // print (randomCo::ultra_fast_random_generator());
+
+
+
+  // TimeshiftCalculator ts_cal(argv[1]);
+  // ts_cal.setBins<NSI136::maxLabel>([](Label label) -> Time {
+  //        if (NSI136::isGe [label])   return   1_ns;
+  //   else if (NSI136::isBGO[label])   return 500_ps;
+  //   else if (label == 251)           return 100_ps;
+  //   else if (label == 252)           return 100_ps;
+  //   else if (NSI136::isParis[label]) return 100_ps;
+  //   else if (NSI136::isDSSD[label])  return   1_ns;
+  //   else                             return  10_ns;
+  // });
+  // ts_cal.calculate();
+
+
+
+  // RootReader reader(argv[1]);
+  // while(reader.readNext()) print(reader);
+
+
+
+  // RootRunReader reader(argc, argv);
+  // reader.run();
+
+
+
+  // FasterRootInterface::setTreeInMemory();
+  FasterRunReader reader(argc, argv);
+  reader.setEventTrigger([](Event const & event){
+    for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (NSI136::isGe[event.labels[hit_i]]) return true;
+    return false;
   });
-  reader.mergeAndConvertWithRef(23);
+  reader.run();
+  
 
-  print("Time : ", totTimer());
 
-  // reader.convert();
+  // FasterRootInterface::setTreeInMemory();
+  // FasterRunReader reader(argc, argv);
+  // reader.run();
+  
+
+
+  // FasterRunReader reader;
+  // reader.addFiles(argv[1]);
+  // if (argc>2) reader.setMaxHits(static_cast<int>(atof(argv[2])));
+  // reader.setTimeWindow(500_ns);
+  // reader.setMaxLoadedFiles(5);
+  // reader.setOverwrite();
+  // reader.setEventTrigger([](Event const & event) -> bool {
+  //   return ((1 < event.mult) && (event.mult < 5));
+  // });
+  // reader.mergeAndConvertWithRF(251);
+  // reader.mergeAndConvertWithRef(252);
+
+  
 
   // FasterRootInterface interface(argv[1]);
   // // FasterRootInterface interface("/home/corentin/faster/136/60Co_center.fast/60Co_center_0001.fast");
@@ -63,13 +133,13 @@ int main(int argc, char** argv)
   // reader.setMaxHits(nbHits);
   // while (reader.readNextRootHit()) tree->Fill();
   // reader.close();
-  // print(timer());
+  // print(timer);
 
 
   // auto histo = new TH1F("test", "test", nbHits, 0, nbHits);
   // auto histo2 = new TH2F("test2", "test2", 1000,0,1000, 1000,0,1e13);
   // Timer timer2;
-  // FasterReaderV2 reader2("/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast");
+  // FasterReader reader2("/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast");
   // while(bool_cast(reader2.readNextHit()) && reader2.getCursor() < nbHits) 
   // //   {
   //     reader.print();
@@ -79,7 +149,7 @@ int main(int argc, char** argv)
   // reader2.close();
   // print(timer2());
   // // Hit hit;
-  // // FasterReaderV2 reader(&hit, "/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast");
+  // // FasterReader reader(&hit, "/home/corentin/nuball2/N-SI-136/run_75.fast/run_75_0001.fast");
   // // while(reader.readNextHit() && reader.getCursor() < nbHits)
   // // {
   // //   histo->SetBinContent(reader.getCursor(), hit.stamp);
@@ -179,6 +249,7 @@ int main(int argc, char** argv)
   // fileTest->Close();
   // fileRef->Close();
 
+  print("Time : ", totTimer);
   return 0;
 };
 

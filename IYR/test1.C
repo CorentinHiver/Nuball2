@@ -251,7 +251,7 @@ void test1(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
     gSystem->Exec(command.c_str());
 
   }
-  print("analysis time :", timer());
+  print("analysis time :", timer);
 }
 
 int main(int argc, char** argv)

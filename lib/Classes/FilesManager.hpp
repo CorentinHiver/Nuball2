@@ -154,7 +154,7 @@ namespace Colib
   
   bool FilesManager::addFolder(std::string _foldername, long _nb_files, std::vector<std::string> const & extensions)
   {
-    Colib::pushBackIfNone(_foldername, '/');
+    Colib::appendIfMissing(_foldername, '/');
     auto listfile = Colib::listFilesInFolder(_foldername, extensions); // Default .root OR .fast files only
     if (listfile.size() > 0)
     {

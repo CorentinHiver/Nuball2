@@ -166,7 +166,7 @@ void RunCheck::run(Parameters & p, RunCheck & runcheck)
     runcheck.AnalyseRun();
     runcheck.WriteRun(_run);
 
-    auto const & time = timer();
+    auto const & time = timer;
     print(_run, time, timer.unit(), ":", run_size/timer.TimeSec(), "Mo/s");
   } // End runs loop
 }

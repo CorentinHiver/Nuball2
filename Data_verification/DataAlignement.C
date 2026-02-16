@@ -389,7 +389,7 @@ void DataAlignement(bool overwrite = true)
     print(outFilename, "written");
     print(timerDetector());
   }
-  print(timer());
+  print(timer);
 }
 
 int main(int argc, char** argv)

@@ -324,7 +324,7 @@ void macro_EndRuns()
   system("hadd -d . -j 10 -f data/endruns.root data/end_runs/*");
   // print("hadd -d . -j 10 -f data/60Co.root data/60Co_center_after/60Co136*");
   // system("hadd -d . -j 10 -f data/60Co.root data/60Co_center_after/60Co136*");
-  print(timer());
+  print(timer);
 }
 
 #ifndef __CINT__

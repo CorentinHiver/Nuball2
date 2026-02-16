@@ -100,7 +100,7 @@ void TimewalkDSSD::run(Parameters & p, TimewalkDSSD & TimewalkDSSD)
       TimewalkDSSD.FillSorted(event_s,event);
       TimewalkDSSD.FillRaw(event);
     } // End event loop
-    auto const & time = timer();
+    auto const & time = timer;
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/s");
   } // End files loop
 }

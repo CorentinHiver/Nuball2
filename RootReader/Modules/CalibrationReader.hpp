@@ -87,7 +87,7 @@ void CalibrationReader::treatFile(Parameters & p, CalibrationReader & calibratio
 
       calibrationReader.FillSorted(clovers, dssd, paris, event);
     } // End event loop
-    auto const & time = timer();
+    auto const & time = timer;
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/s");
     file -> Close();
   } // End files loop

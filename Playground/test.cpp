@@ -67,7 +67,7 @@ int main(int argc, char** argv)
   // file->cd();
   // dT.Write();
   // file->Close();
-  // print("test.root written after", timer());
+  // print("test.root written after", timer);
 
   //////////////////////////////////////
   // TEST MERGING MATCHING HISTOGRAMS //

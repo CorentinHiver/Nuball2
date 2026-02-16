@@ -62,7 +62,7 @@ void Calibrator::run(Parameters & p, Calibrator & calibration)
       calibration.FillSorted(event_s, event);
       calibration.FillRaw(event);
     } // End event loop
-    auto const & time = timer();
+    auto const & time = timer;
     print(removePath(rootfile), time, timer.unit(), ":", filesize/timer.TimeSec(), "Mo/sec");
   } // End files loop
 }

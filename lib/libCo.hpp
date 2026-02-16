@@ -30,6 +30,7 @@
 #include <fstream>
 #include <functional>
 #include <initializer_list>
+#include <limits>
 #include <map>
 #include <memory>
 #include <mutex>
@@ -135,18 +136,21 @@ namespace Colib
 
 namespace Colib
 {
-  int getTerminalRows() 
+  namespace Terminal
   {
-    struct winsize w;
-    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) return 24; // fallback
-    return w.ws_row;
-  }
-  
-  int getTerminalCols() 
-  {
-    struct winsize w;
-    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) return 80; // fallback
-    return w.ws_col;
+    int getTerminalRows() 
+    {
+      struct winsize w;
+      if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) return 24; // fallback
+      return w.ws_row;
+    }
+    
+    int getTerminalCols() 
+    {
+      struct winsize w;
+      if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) return 80; // fallback
+      return w.ws_col;
+    }
   }
 }
 
@@ -156,6 +160,31 @@ namespace Colib
 
 namespace Colib
 {
+  template <typename T>
+  std::string nicer_seconds(T const & time, int nb_decimals = 3)
+  {
+    T _time = time;
+    std::string unit;
+    
+    if      (time < 1.e-6 ) { _time *= 1.e9 ;  unit = " ns" ;}
+    else if (time < 1.e-3 ) { _time *= 1.e6 ;  unit = " us" ;}
+    else if (time < 1.    ) { _time *= 1.e3 ;  unit = " ms" ;}
+    else if (time < 60.   ) {                  unit = " s"  ;}
+    else if (time < 3600. ) { _time /= 60.  ;  unit = " min";}
+    else if (time < 86400.) { _time /= 3600.;  unit = " h"  ;}
+    else                    { _time /= 86400.; unit = " j"  ;}
+
+    std::stringstream ss;
+    ss << std::fixed << std::setprecision(nb_decimals) << _time << unit;
+    return ss.str();
+  }
+
+  template <typename T>
+  std::string nicer_milliseconds(T const & time, int nb_decimals = 3)
+  {
+    return nicer_seconds(static_cast<T>(time*1e-3), nb_decimals);
+  }
+
   /// @brief Returns a string in the format mm_hh_dd_mm_yy
   std::string time_string()
   {
@@ -307,7 +336,7 @@ namespace Colib
     pause();
   }
   template <class... T>
-  void printAndPause(T const & ... t)
+  constexpr void printAndPause(T const & ... t)
   {
     print(t...);
     pause();
@@ -693,17 +722,16 @@ namespace Colib
 
   /// @brief Gives the biggest number of the given type
   template <typename T>
-  inline constexpr T big() {
-      // Calculate the number of bits in the type T
-      const int num_bits = sizeof(T) * CHAR_BIT;
+  inline constexpr T big() 
+  {
+    // // Calculate the number of bits in the type T
+    // const int num_bits = sizeof(T) * CHAR_BIT;
 
-      // For signed types, set all bits except the sign bit
-      // For unsigned types, set all bits
-      if (std::is_signed<T>::value) {
-          return ~(static_cast<T>(1) << (num_bits - 1));
-      } else {
-          return ~static_cast<T>(0);
-      }
+    // // For signed types, set all bits except the sign bit
+    // // For unsigned types, set all bits
+    // if (std::is_signed<T>::value) return ~(static_cast<T>(1) << (num_bits - 1));
+    // else                          return ~static_cast<T>(0);
+    return std::numeric_limits<T>::max();
   }
 
   template<class T> T positive_modulo(T const & dividend, T const & divisor)
@@ -738,11 +766,11 @@ namespace Colib
 namespace Colib
 {
   template <typename T, std::size_t N>
-  constexpr int find_index(const std::array<T, N>& array, const T& value) 
+  constexpr std::size_t findIndex(const std::array<T, N>& array, const T& value) 
   {
     for (std::size_t i = 0; i < N; ++i) if (array[i] == value) return i;
-    return -1;  // Value not found
-  } 
+    return N;  // Value not found, test with findIndex(...) != array.size()
+  }
   
   template <typename T, std::size_t N>
   constexpr T found(const std::array<T, N>& array, const T& value) 
@@ -797,6 +825,7 @@ namespace Colib
     if (ordered) std::sort(ret.begin(), ret.end());
     return ret;
   }
+
 }
 
 
@@ -895,18 +924,16 @@ namespace Colib
     })->first); 
   }
 
-  template<typename NewK, typename K, typename V>
-  inline auto convert(std::map<K,V> const & map) 
+  template<typename NewKey, typename Key, typename T>
+  std::map<NewKey, T> map_key_cast(const std::map<Key, T>& input)
   {
-      std::map<NewK, V> ret;
-      if (map.empty()) return ret;
-    
-      for (auto const & e : map) {
-          ret.emplace(static_cast<NewK>(e.first), e.second);
-      }
-    
-      return ret;
+    static_assert(std::is_convertible_v<Key, NewKey>, "Keys must be convertible");
+
+    std::map<NewKey, T> result;
+    for (const auto& [k, v] : input) result.emplace(static_cast<NewKey>(k), v);
+    return result;
   }
+
 }
 
 ////////////////////////////
@@ -942,6 +969,34 @@ namespace Colib
 
 #endif //Cpp17
 
+}
+
+////////////////////////
+// Generic containers //
+////////////////////////
+
+namespace Colib
+{
+  template<typename Map>
+  auto unpack(const Map& input)
+  {
+    using K = typename Map::key_type;
+    using V = typename Map::mapped_type;
+
+    std::vector<K> keys;
+    std::vector<V> values;
+
+    keys.reserve(input.size());
+    values.reserve(input.size());
+
+    for (const auto& [k, v] : input)
+    {
+      keys.emplace_back(k);
+      values.emplace_back(v);
+    }
+
+    return std::pair{std::move(keys), std::move(values)};
+  }
 }
 
 
@@ -1038,6 +1093,16 @@ namespace Colib
     ss << std::fixed << std::setprecision(nb_decimals) << value << s;
     return ss.str();
   }
+
+  template <class T1, class T2>
+  std::string percent(T1 const & value, T2 const & ref, int const & nb_decimals = 0)
+  {
+    static_assert(std::is_same<T1, T2>::value, "Value and Ref must be of the same type!");
+    if (ref == 0) return Colib::Color::RED+std::string("Colib::percent(): Dividing by 0")+Colib::Color::RESET;
+    std::stringstream ss;
+    ss << std::fixed << std::setw(nb_decimals+4) << std::right << std::setprecision(nb_decimals) << (100.*value)/ref <<"%";
+    return ss.str();
+  }
 }
 
 
@@ -1054,17 +1119,33 @@ namespace Colib
    * constexpr auto squares = LUT<10> ([](int i) { return i*i; }); 
    * 
    */
-  template<std::size_t size, class Generator>
-  constexpr auto LUT(Generator&& g)
+  #if defined(Cpp20)
+
+  template <std::size_t size, class Generator>
+  constexpr auto LUT(Generator g)
   {
-    // Deduce the return type of the lookup table :
-    using type = std::decay_t<decltype(g(std::size_t{0}))>;
-    // Instanciate the lookup table :
-    std::array<type, size> lut{};
-    // Fill the lookup table using the generator :
-    for (std::size_t i = 0; i<size; ++i) lut[i] = std::forward<Generator>(g)(i);
-    return lut;
+      using type = std::remove_cvref_t<decltype(g(std::size_t{0}))>;
+      std::array<type, size> lut;
+      for (std::size_t i = 0; i < size; ++i) lut[i] = g(i);
+      return lut;
   }
+
+  #elif defined(Cpp17)
+  
+    namespace detail {
+        template <class Generator, std::size_t... Is>
+        constexpr auto LUT_impl(Generator&& g, std::index_sequence<Is...>) {
+            using type = std::decay_t<decltype(g(std::size_t{0}))>;
+            // Direct initialization of the array (no default-init + assignment)
+            return std::array<type, sizeof...(Is)>{ g(Is)... };
+        }
+    }
+
+    template <std::size_t size, class Generator>
+    constexpr auto LUT(Generator&& g) {
+        return detail::LUT_impl(std::forward<Generator>(g), std::make_index_sequence<size>{});
+    }
+  #endif
   
   /// @brief faster binary_search than std::binary_search, works only in ordered arrays
   /// @attention Works only in ordered arrays
@@ -1153,14 +1234,17 @@ namespace Colib
   
 namespace Colib
 {
-  std::string execTerminal(std::string cmd) 
+  namespace Terminal
   {
-    std::array<char, 128> buffer;
-    std::string result;
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
-    if (!pipe) throw std::runtime_error("in Colib::execTerminal : popen() failed!");
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) result += buffer.data();
-    return result;
+    std::string execTerminal(std::string cmd) 
+    {
+      std::array<char, 128> buffer;
+      std::string result;
+      std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
+      if (!pipe) throw std::runtime_error("in Colib::execTerminal : popen() failed!");
+      while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) result += buffer.data();
+      return result;
+    }
   }
 
   std::vector<std::string> match_regex(std::vector<std::string> list, std::string pattern) 

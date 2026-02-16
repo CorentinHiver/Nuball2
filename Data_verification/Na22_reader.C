@@ -404,7 +404,7 @@ void Na22_reader(int nb_files = -1, ULong64_t max_cursor = 1.e+10)
 
   outfile->Close();
   print("22Na_test.root written");
-  print(timer());
+  print(timer);
 }
 
 int main(int argc, char** argv)

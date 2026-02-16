@@ -123,7 +123,7 @@ int main(int argc, char** argv)
       ai.FillSorted(event_s,event);
       ai.FillRaw(event);
     } // End event loop
-    auto const & time = timer()/1000; // en s
+    auto const & time = timer/1000; // en s
     print(rmPathAndExt(rootfile), ":", size/1000000., "Mevt treated in", time, "s -> ", size/time/1000000, "Mevts/s");
   } // End files loop
 

@@ -107,7 +107,7 @@ namespace Paris
 
   // Return the index of the label in Paris (201 = 0, )
   static constexpr auto index = Colib::LUT<1000> ([](Label const & label) {
-    if (is[label]) return static_cast<Label> (find_index(ParisArrays::labels, label));
+    if (is[label]) return static_cast<Label> (findIndex(ParisArrays::labels, label));
     else return Label{0};
   });
 
