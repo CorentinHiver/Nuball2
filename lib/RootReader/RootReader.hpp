@@ -67,9 +67,9 @@ public:
   auto nbEntries() const noexcept {return (treeOk()) ? m_maxEntries : 0;}
   void setMaxHits(ULong64_t nb) {m_maxEntries = nb;}
 
-  void printLoadingPercents() const 
+  void printLoadingPercents(size_t freq = 1_Mi) const 
   {
-    if ((m_cursor == nbEntries()) || (m_cursor % (nbEntries()/100) == 0)) 
+    if ((m_cursor == nbEntries()) || (m_cursor % (nbEntries()/freq) == 0)) 
       printsln(Colib::nicer_double(m_cursor), Colib::percent(m_cursor, ULong64_cast(m_tree->GetEntries())), "     ");
   }
 

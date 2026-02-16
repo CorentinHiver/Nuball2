@@ -160,24 +160,103 @@ namespace Colib
 
 namespace Colib
 {
-  template <typename T>
-  std::string nicer_seconds(T const & time, int nb_decimals = 3)
-  {
-    T _time = time;
-    std::string unit;
+  // template <typename T>
+  // std::string nicer_seconds(T const & time, int nb_decimals = 3)
+  // {
+  //   T _time = time;
+  //   std::string unit;
     
-    if      (time < 1.e-6 ) { _time *= 1.e9 ;  unit = " ns" ;}
-    else if (time < 1.e-3 ) { _time *= 1.e6 ;  unit = " us" ;}
-    else if (time < 1.    ) { _time *= 1.e3 ;  unit = " ms" ;}
-    else if (time < 60.   ) {                  unit = " s"  ;}
-    else if (time < 3600. ) { _time /= 60.  ;  unit = " min";}
-    else if (time < 86400.) { _time /= 3600.;  unit = " h"  ;}
-    else                    { _time /= 86400.; unit = " j"  ;}
+  //   // Units of second
+  //   if (time < 1.)
+  //   {
+  //          if (time < 1e-6 ) { _time *= 1e9 ;  unit = " ns" ;}
+  //     else if (time < 1e-3 ) { _time *= 1e6 ;  unit = " us" ;}
+  //     else { _time *= 1e3 ;  unit = " ms" ;}
+  //     std::stringstream ss;
+  //     ss << std::fixed << std::setprecision(nb_decimals) << _time << unit;
+  //     return ss.str();
+  //   }
+         
+  //   // Mixing seconds, minutes, hours and days
+  //   else
+  //   {
+  //     std::stringstream ss;
+  //     ss << std::fixed;
+  //     int temp = time/86400.;
+  //     ss << temp << " j";
+  //     temp = time-temp*86400./3600.;
+  //     ss << time/ 3600. << " h";
+  //     ss << time/   60. << " min";
+  //     return ss.str();
+  //   }
+  // }
+  template <typename T>
+std::string nicer_seconds(T time, int nb_decimals = 3)
+{
+    static_assert(std::is_floating_point_v<T>, "nicer_seconds expects floating-point type");
+
+    if (time < 0.0) {
+        return "-" + nicer_seconds(-time, nb_decimals);
+    }
 
     std::stringstream ss;
-    ss << std::fixed << std::setprecision(nb_decimals) << _time << unit;
+    ss << std::fixed << std::setprecision(nb_decimals);
+
+    // Small durations ────────────────
+    if (time < 1.0)
+    {
+        if (time < 1e-6) {
+            ss << (time * 1e9) << " ns";
+        }
+        else if (time < 1e-3) {
+            ss << (time * 1e6) << " µs";   // proper micro symbol
+        }
+        else {
+            ss << (time * 1e3) << " ms";
+        }
+        return ss.str();
+    }
+
+    // Larger durations ────────────────
+    int days    = static_cast<int>(std::floor(time / 86400.0));
+    double rem  = time - days * 86400.0;
+
+    int hours   = static_cast<int>(std::floor(rem / 3600.0));
+    rem        -= hours * 3600.0;
+
+    int minutes = static_cast<int>(std::floor(rem / 60.0));
+    rem        -= minutes * 60.0;
+
+    double seconds = rem;
+
+    ss.str("");  // clear stream
+    ss.clear();
+
+    bool need_space = false;
+
+    if (days > 0) {
+        ss << days << "d";
+        need_space = true;
+    }
+
+    if (hours > 0 || days > 0) {
+        if (need_space) ss << " ";
+        ss << hours << "h";
+        need_space = true;
+    }
+
+    if (minutes > 0 || hours > 0 || days > 0) {
+        if (need_space) ss << " ";
+        ss << minutes << "min";
+        need_space = true;
+    }
+
+    // Always show seconds when < 60 s or when higher units exist
+    if (need_space) ss << " ";
+    ss << seconds << "s";
+
     return ss.str();
-  }
+}
 
   template <typename T>
   std::string nicer_milliseconds(T const & time, int nb_decimals = 3)
@@ -1240,7 +1319,7 @@ namespace Colib
     {
       std::array<char, 128> buffer;
       std::string result;
-      std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
+      auto pipe = std::unique_ptr<FILE, int (*)(FILE*)>(popen(cmd.c_str(), "r"), [](FILE* f) { return pclose(f); });
       if (!pipe) throw std::runtime_error("in Colib::execTerminal : popen() failed!");
       while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) result += buffer.data();
       return result;

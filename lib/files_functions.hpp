@@ -190,7 +190,7 @@ namespace Colib
     system(("mkdir -p "+path).c_str());
   }
 
-  void ensurePath(std::string const & path)
+  void ensurePath(std::string const & path, bool verbose = 0)
   {
     if (path=="")
     {
@@ -202,7 +202,7 @@ namespace Colib
     #endif //COMULTITHREADING
     if(!pathExists(path))
     {
-      print("Creating path", path);
+      if (verbose) print("Creating path", path);
       // mkdir -p to create the full path if needed (otherwise crashes if some directory of the path is missing)
       system(("mkdir -p "+path).c_str());
     }

@@ -243,7 +243,7 @@ public:
       else eventID.clear();
     }
     // print();
-    print(m_eventIDbuffer.size(), "events");
+    printsln(m_eventIDbuffer.size(), "events");
     m_eventBuilt = true;
   }
 
@@ -305,7 +305,7 @@ public:
   // Writing data to .root //
   // --------------------- //
 
-  void writeHits(std::string const & rootFilename, std::string options = "ltqe")
+  std::string writeHits(std::string const & rootFilename, std::string options = "ltqe")
   {
     ++m_nb_outputs;
     openRootFile(rootFilename);
@@ -324,9 +324,10 @@ public:
     writeTree();
     printsln("Nuball2 written in", rootFilename);
     clearIO();
+    return rootFilename;
   }
 
-  void writeEvents(std::string const & rootFilename, std::string options = "ltTqe")
+  std::string writeEvents(std::string const & rootFilename, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEvents();
     ++m_nb_outputs;
@@ -355,9 +356,10 @@ public:
     writeTree();
     printsln("Nuball2 written in", filename);
     clearIO();
+    return filename;
   }
 
-  void writeEventsWithRef(std::string const & rootFilename, Label refLabel = 252, std::string options = "ltTqe")
+  std::string writeEventsWithRef(std::string const & rootFilename, Label refLabel = 252, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEventsWithRef(refLabel);
     ++m_nb_outputs;
@@ -389,9 +391,10 @@ public:
     writeTree();
     printsln("Nuball2 written in", filename);
     clearIO();
+    return filename;
   }
 
-  void writeEventsWithRF(std::string const & rootFilename, Label rfLabel = 251, std::string options = "ltTqe")
+  std::string writeEventsWithRF(std::string const & rootFilename, Label rfLabel = 251, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEventsWithRf(rfLabel);
     auto const filename = Colib::removeExtension(rootFilename)+"_rf.root";
@@ -422,10 +425,10 @@ public:
         m_tree->Fill();
       }
     }
-    print();
     writeTree();
-    print("Nuball2 written in", filename);
+    printsln("Nuball2 written in", filename);
     clearIO();
+    return filename;
   }
 
   inline void calibrateEvent(Event & event)

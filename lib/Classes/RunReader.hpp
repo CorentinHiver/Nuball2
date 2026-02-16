@@ -89,6 +89,7 @@ public:
   {
     p_outPath = path;
     if (p_outPath.back() != '/') p_outPath.push_back('/');
+    Colib::ensurePath(p_outPath, true);
   }
 
   bool checkOutput (std::string const & outFile)

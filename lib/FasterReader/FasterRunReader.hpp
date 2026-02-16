@@ -26,7 +26,6 @@ public:
     print("--rf-label                    : Sets the label of the channel where the rf is downscaled");
     // print("-m [threads_number]        : Choose the number of files to treat in multithread mode (default: 1)");
     print("-T [time_window]              : Not used if --hits activated. Sets the event building time window in ns (default : 2000 ns). In RF mode : number of pulses (TODO!)");
-    // print("--out_path [output_path]   : Set the output path (default ./)");
     print();
   };
   bool processArg(Arguments & args)
@@ -137,8 +136,8 @@ public:
   }
   void setRF(Label rfLabel)
   {
+    setRF();
     m_rfLabel = rfLabel;
-    m_useRF = true;
   }
   void buildEvents(bool b = true) {m_buildEvents = b;}
 
@@ -152,10 +151,10 @@ public:
     auto & reader = m_readers.front();
   #endif// MULTITHREAD
     reader.timeSorting();
-         if (m_useRF      ) reader.writeEventsWithRF (outFile, m_rfLabel);
-    else if (m_useRef     ) reader.writeEventsWithRef(outFile, m_refLabel);
-    else if (m_buildEvents) reader.writeEvents       (outFile);
-    else                    reader.writeHits         (outFile);
+         if (m_useRF      ) m_outputFile = reader.writeEventsWithRF (outFile, m_rfLabel);
+    else if (m_useRef     ) m_outputFile = reader.writeEventsWithRef(outFile, m_refLabel);
+    else if (m_buildEvents) m_outputFile = reader.writeEvents       (outFile);
+    else                    m_outputFile = reader.writeHits         (outFile);
   }
 
 #ifdef MULTITHREAD  
@@ -246,9 +245,13 @@ public:
   }
 #endif //MULTITHREAD
 
+  auto getOutputFilename() const {return (m_merge) ? m_outputFile : "No merged output";}
+
 protected:
 
   std::array<FasterRootInterface, p_nbThreads> m_readers;
+
+  std::string m_outputFile = {};
 
   // Other convenience attributes:
   int m_maxFilesInMemory = 1;
