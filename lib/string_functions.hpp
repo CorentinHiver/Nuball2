@@ -26,6 +26,13 @@ namespace Colib
   /// @brief Returns the string to the left of the last occurrence of sep in the string
   std::string removeLastPart  (std::string const & string, char const & sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
 
+  std::string removeAll(std::string string, std::string const & other) 
+  {
+    size_t pos;
+    while ((pos = string.find(other)) != std::string::npos) string.erase(pos, other.size());
+    return string;
+}
+
   /**
    * @brief Cuts a string into pieces separated by the given separator like ';' or ' ' or ','
    * 

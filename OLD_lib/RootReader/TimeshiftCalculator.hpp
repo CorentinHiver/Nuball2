@@ -1,0 +1,83 @@
+#pragma once
+
+#include "RootReader.hpp"
+#include "../Classes/Timeshifts.hpp"
+#include <ROOT/RDataFrame.hxx>
+
+class TimeshiftCalculator : public RootReader
+{
+public:
+  template<class... ARGS>
+  TimeshiftCalculator(ARGS &&... args) noexcept : RootReader(std::forward<ARGS>(args)...) {}
+  void calculate()
+  {
+    Label minLabel = std::numeric_limits<Label>::min(); // To determine the detectors in presence
+    Label maxLabel = std::numeric_limits<Label>::max(); // To determine the detectors in presence
+    Time  mindT    = std::numeric_limits<Label>::min(); // To determine the coincidence time window
+    Time  maxdT    = std::numeric_limits<Label>::min(); // To determine the coincidence time window
+    auto labels = new TH1F("label", "label", 1_Mi, 0, 1_M);
+
+    Event event(m_tree, "lT");
+    while(RootReader::readNext()) 
+    {
+      if (int(1e7) < RootReader::getCursor()) break; // The maximum number of hits to read. We apply a 10% margin anyway, so 1e7 hits is usually large enough to cover the full range
+      for(int hit_i = 0; hit_i < event.mult; ++hit_i)
+      {
+        printLoadingPercents();
+        auto const & label_i = event.labels[hit_i];
+        auto const & time_i  = event.times [hit_i];
+        minLabel = std::min(minLabel, label_i);
+        maxLabel = std::max(minLabel, label_i);
+        mindT    = std::min(mindT   , time_i );
+        maxdT    = std::max(maxdT   , time_i );
+        labels -> Fill(label_i);
+      }
+    }
+    print();
+    mindT*=0.9; // Get a 10% margin
+    maxdT*=1.1; // Get a 10% margin
+    auto const defaultBin = (maxdT - mindT)/10; // Default binning = 10ps
+
+    if (maxLabel == 0) Colib::throw_error("No detector !!");
+    for (Label label = minLabel; label <= maxLabel; ++label)
+    {
+      if (0 == labels->GetBinContent(label+1)) continue;
+      m_labels.push_back(label);
+      
+      auto const & bins = (Colib::key_found(m_binl, label)) ? ((maxdT - mindT) / m_binl.at(label)) : (defaultBin);
+      auto label_str = std::to_string(label);
+      std::string name = "dT_" + label_str;
+      m_histos.emplace(label, new TH1F(name.c_str(), ("dT " + label_str).c_str(), bins, mindT, maxdT));
+      printsln(Colib::percent(label-minLabel, maxLabel-minLabel), "     ");
+    }
+    print();
+    RootReader::restart();
+    while(RootReader::readNext())
+    {
+      printLoadingPercents();
+      for(int hit_i = 0; hit_i<event.mult; ++hit_i) m_histos.at(event.labels[hit_i])->Fill(event.times[hit_i]);
+    }
+    printLoadingPercents(); print();
+    auto outFile = TFile::Open("test.root","recreate");
+    outFile -> cd();
+    for (auto const & label : m_labels) if (0 < m_histos.at(label)->GetEntries()) m_histos.at(label) -> Write();
+    outFile -> Close();
+  }
+
+  void setBins(std::unordered_map<Label, Time> const & bins) {m_binl = bins;}
+
+  template <Label labels, class Generator>
+  constexpr void setBins(Generator g)
+  {
+    for (Label label = 0; label<labels; ++label)
+    {
+      m_binl.emplace(label, g(label));
+    }
+  }
+  
+private:
+  Timeshifts m_ts;
+  std::unordered_map<Label, TH1*> m_histos;
+  std::unordered_map<Label, Time> m_binl; // Bin length in ps
+  std::vector<Label> m_labels;
+};

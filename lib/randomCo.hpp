@@ -123,10 +123,12 @@ namespace randomCo
 
   /// @brief This is NOT true pseudo-random generation, but should works like a charm for ADC to float convertion
   /// Uses ultra_fast_uniform_n<16>, i.e. a random number between 0 and 2^16=65536 (will produce the same number every 65536 calls)
+#if !defined(__CLING__) || defined(__ROOTCLING__)
   inline float ultra_fast_uniform() noexcept 
   {
     return ultra_fast_uniform_n<16>();
   }
+#endif // Not in interactive ROOT session
 
 #endif //CPP20
 }

@@ -198,9 +198,12 @@ namespace Colib
   #ifdef COMULTITHREADING
     lock_mutex lock(MTObject::mutex);
   #endif //COMULTITHREADING
-    print("Creating path", path);
-    // mkdir -p to create the full path if needed (otherwise crashes if some directory of the path is missing)
-    system(("mkdir -p "+path).c_str());
+    if (!pathExists(path))
+    {
+      print("Creating path", path);
+      // mkdir -p to create the full path if needed (otherwise crashes if some directory of the path is missing)
+      system(("mkdir -p "+path).c_str());
+    }
   }
 
   void ensurePath(std::string const & path, bool verbose = 0)

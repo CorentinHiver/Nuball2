@@ -1,0 +1,758 @@
+#ifndef HIT_HPP
+#define HIT_HPP
+
+#include "TTree.h"
+#include "../libCo.hpp"
+#include "../Nuball2.hh"
+
+/////////////////////
+/// IO parameters ///
+/////////////////////
+
+/**
+ * @brief 
+ * ReadIO options. All branches are false by default and need to be activated, 
+ * except mult that is true by default and needs to be deactivated
+ * @details
+ * 
+ * legend 
+ *    symbol : branch_name  full name  SI_unit  c++_type  default_value
+ * 
+ * m : mult   multiplicity (events)  N/A int       true
+ * l : label  label                  N/A ushort    false
+ * t : stamp  absolute timestamp     ps  ULong64_t false
+ * T : time   relative time          ps  Long64_t  false
+ * e : adc    energy                 ADC int       false
+ * E : nrj    energy                 keV float     false
+ * q : qdc2   energy qdc2            ADC int       false
+ * Q : nrj2   energy qdc2            keV float     false
+ * 3 : qdc3   energy qdc3            ADC int       false
+ * R : nrj3   energy qdc3            keV float     false
+ * p : pileup pileup                 N/A bool      false
+ */
+struct IOptions
+{
+  IOptions() noexcept { reset(); }
+  IOptions(std::string const & options) { setOptions(options); }
+
+  void reset() noexcept
+  {
+    m = 1; // m is activated by default as per your comments
+    l = 0; t = 0; T = 0; e = 0; E = 0; q = 0; 
+    Q = 0; q3 = 0; Q3 = 0; p = 0; set = 0; r = 0; w = 0;
+  }
+
+  void setOptions(std::string const & options)
+  {
+    reset();
+    for (char option : options)
+    {
+      switch (option)
+      {
+        case 'm': unset_m() ; break; // Special case: deactivated if passed
+        case 'l': set_l()   ; break;
+        case 't': set_t()   ; break;
+        case 'T': set_T()   ; break;
+        case 'e': set_e()   ; break;
+        case 'E': set_E()   ; break;
+        case 'q': set_q()   ; break;
+        case 'Q': set_Q()   ; break;
+        case '3': set_q3()  ; break;
+        case 'R': set_Q3()  ; break;
+        case 'p': set_p()   ; break;
+        default : 
+          throw std::invalid_argument("Unknown parameter '" + std::string(1, option) + "' for io data");
+      }
+    }
+    set_set();
+  }
+
+  std::string getOptions() const noexcept 
+  {
+    std::string out;
+
+    if (isset())
+    {
+      if (isset_m ()) out.push_back('m');
+      if (isset_l ()) out.push_back('l');
+      if (isset_t ()) out.push_back('t');
+      if (isset_T ()) out.push_back('T');
+      if (isset_e ()) out.push_back('e');
+      if (isset_E ()) out.push_back('E');
+      if (isset_q ()) out.push_back('q');
+      if (isset_Q ()) out.push_back('Q');
+      if (isset_q3()) out.push_back('3');
+      if (isset_Q3()) out.push_back('R');
+      if (isset_p ()) out.push_back('p');
+    }
+
+    return out;
+  }
+
+  void detectLeafs(TTree * tree)
+  {
+    if (!tree) return; // Safety check
+
+    reset();
+    unset_m(); // Unset default 'm' so we rely strictly on what the tree actually contains
+
+    TObjArray* branches = tree->GetListOfBranches();
+    if (!branches) return;
+
+    for (int i = 0; i < branches->GetEntries(); ++i) 
+    {
+      auto branch = dynamic_cast<TBranch*>(branches->At(i));
+      if (!branch) continue;
+
+      std::string branchNameStr(branch->GetName());
+
+      if (branchNameStr == "mult"  ) set_m ();
+      if (branchNameStr == "label" ) set_l ();
+      if (branchNameStr == "stamp" ) set_t ();
+      if (branchNameStr == "time"  ) set_T ();
+      if (branchNameStr == "adc"   ) set_e ();
+      if (branchNameStr == "nrj"   ) set_E ();
+      if (branchNameStr == "qdc2"  ) set_q ();
+      if (branchNameStr == "nrj2"  ) set_Q ();
+      if (branchNameStr == "qdc3"  ) set_q3();
+      if (branchNameStr == "nrj3"  ) set_Q3();
+      if (branchNameStr == "pileup") set_p ();
+    }
+    set_set(); // Use the existing function to toggle 'set' flag
+    set_r();
+  }
+
+  friend std::ostream& operator<<(std::ostream& out, IOptions const & options)
+  {
+    if (options.isset())
+    {
+      if(options.read    ()) out << "read ";
+      if(options.write   ()) out << "write ";
+      if(options.isset_m ()) out << "m ";
+      if(options.isset_l ()) out << "l ";
+      if(options.isset_t ()) out << "t ";
+      if(options.isset_T ()) out << "T ";
+      if(options.isset_e ()) out << "e ";
+      if(options.isset_E ()) out << "E ";
+      if(options.isset_q ()) out << "q ";
+      if(options.isset_Q ()) out << "Q ";
+      if(options.isset_q3()) out << "q3 ";
+      if(options.isset_Q3()) out << "Q3 ";
+      if(options.isset_p ()) out << "p ";
+      out << std::endl;
+    }
+    else 
+    {
+      out << "IOption not set" << std::endl;
+    }
+    return out;
+  }
+
+  void set_m  () noexcept {m   = 1;}
+  void set_l  () noexcept {l   = 1;}
+  void set_t  () noexcept {t   = 1;}
+  void set_T  () noexcept {T   = 1;}
+  void set_e  () noexcept {e   = 1;}
+  void set_E  () noexcept {E   = 1;}
+  void set_q  () noexcept {q   = 1;}
+  void set_Q  () noexcept {Q   = 1;}
+  void set_q3 () noexcept {q3  = 1;}
+  void set_Q3 () noexcept {Q3  = 1;}
+  void set_p  () noexcept {p   = 1;}
+  void set_r  () noexcept {r   = 1;}
+  void set_w  () noexcept {w   = 1;}
+  void set_set() noexcept {set = 1;}
+
+  void unset_m  () noexcept {m   = 0;}
+  void unset_l  () noexcept {l   = 0;}
+  void unset_t  () noexcept {t   = 0;}
+  void unset_T  () noexcept {T   = 0;}
+  void unset_e  () noexcept {e   = 0;}
+  void unset_E  () noexcept {E   = 0;}
+  void unset_q  () noexcept {q   = 0;}
+  void unset_Q  () noexcept {Q   = 0;}
+  void unset_q3 () noexcept {q3  = 0;}
+  void unset_Q3 () noexcept {Q3  = 0;}
+  void unset_p  () noexcept {p   = 0;}
+  void unset_r  () noexcept {r   = 0;}
+  void unset_w  () noexcept {w   = 0;}
+  void unset_set() noexcept {set = 0;}
+
+  bool isset_m () const noexcept {return static_cast<bool>(m  );}
+  bool isset_l () const noexcept {return static_cast<bool>(l  );}
+  bool isset_t () const noexcept {return static_cast<bool>(t  );}
+  bool isset_T () const noexcept {return static_cast<bool>(T  );}
+  bool isset_e () const noexcept {return static_cast<bool>(e  );}
+  bool isset_E () const noexcept {return static_cast<bool>(E  );}
+  bool isset_q () const noexcept {return static_cast<bool>(q  );}
+  bool isset_Q () const noexcept {return static_cast<bool>(Q  );}
+  bool isset_q3() const noexcept {return static_cast<bool>(q3 );}
+  bool isset_Q3() const noexcept {return static_cast<bool>(Q3 );}
+  bool isset_p () const noexcept {return static_cast<bool>(p  );}
+  bool isset   () const noexcept {return static_cast<bool>(set);}
+  bool read    () const noexcept {return static_cast<bool>(r  );}
+  bool write   () const noexcept {return static_cast<bool>(w  );}
+
+private:
+  // Initialized to 0 by default constructor via reset()
+  uint16_t m   : 1; // multiplicity (events)
+  uint16_t l   : 1; // label
+  uint16_t t   : 1; // timestamp in ps
+  uint16_t T   : 1; // relative time in ps
+  uint16_t e   : 1; // energy in ADC
+  uint16_t E   : 1; // calibrated energy in keV
+  uint16_t q   : 1; // qdc2 in ADC
+  uint16_t Q   : 1; // calibrated qdc2 in keV
+  uint16_t q3  : 1; // qdc3 in ADC
+  uint16_t Q3  : 1; // calibrated qdc3 in keV
+  uint16_t p   : 1; // pileup
+  uint16_t set : 1; // is the option set or not
+  uint16_t r   : 1; // read mode 
+  uint16_t w   : 1; // write mode
+};
+// class IOptions
+// {
+// public:
+//   IOptions() noexcept {}
+//   IOptions(std::string const & options) noexcept {setOptions(options);}
+//   void reset()
+//   {
+//     state=1;
+//   }
+
+//   void setOptions(std::string const & options) noexcept
+//   {
+//     reset();
+//     for (auto const & option : options)
+//     {
+//       switch (option)
+//       {
+//         case ('m') : m  = false; break;
+//         case ('l') : l  = true ; break;
+//         case ('t') : t  = true ; break;
+//         case ('T') : T  = true ; break;
+//         case ('e') : e  = true ; break;
+//         case ('E') : E  = true ; break;
+//         case ('q') : q  = true ; break;
+//         case ('Q') : Q  = true ; break;
+//         case ('3') : q3 = true ; break;
+//         case ('R') : Q3 = true ; break;
+//         case ('p') : p  = true ; break;
+//         default : error("Unkown parameter '", option, "' for io data");
+//       }
+//     }
+//     set_set();
+//   }
+
+//   std::string getOptions() const noexcept 
+//   {
+//     std::string out;
+
+//     if (isset())
+
+//     if (isset_m ()) out.push_back('m');
+//     if (isset_l ()) out.push_back('l');
+//     if (isset_t ()) out.push_back('t');
+//     if (isset_T ()) out.push_back('T');
+//     if (isset_e ()) out.push_back('e');
+//     if (isset_E ()) out.push_back('E');
+//     if (isset_q ()) out.push_back('q');
+//     if (isset_Q ()) out.push_back('Q');
+//     if (isset_q3()) out.push_back('3');
+//     if (isset_Q3()) out.push_back('R');
+//     if (isset_p ()) out.push_back('p');
+
+//     return out;
+//   }
+
+//   void detectLeafs(TTree * tree)
+//   {
+//     reset();
+//     TObjArray* branches = tree->GetListOfBranches();
+//     for (int i = 0; i < branches->GetEntries(); ++i) 
+//     {
+//       auto branch = dynamic_cast<TBranch*>(branches->At(i));
+//       std::string branchNameStr(branch->GetName());
+
+//       if (branchNameStr == "mult"  ) set_m ();
+//       if (branchNameStr == "label" ) set_l ();
+//       if (branchNameStr == "stamp" ) set_t ();
+//       if (branchNameStr == "time"  ) set_T ();
+//       if (branchNameStr == "adc"   ) set_e ();
+//       if (branchNameStr == "nrj"   ) set_E ();
+//       if (branchNameStr == "qdc2"  ) set_q ();
+//       if (branchNameStr == "nrj2"  ) set_Q ();
+//       if (branchNameStr == "qdc3"  ) set_q3();
+//       if (branchNameStr == "nrj3"  ) set_Q3();
+//       if (branchNameStr == "pileup") set_p ();
+//     }
+//     set = true;
+//   }
+
+//   friend std::ostream& operator<<(std::ostream& out, IOptions const & options)
+//   {
+//     if (options.set)
+//     {
+//       out << ()
+//       if(options.isset_m ()) out << "m ";
+//       if(options.isset_l ()) out << "l ";
+//       if(options.isset_t ()) out << "t ";
+//       if(options.isset_T ()) out << "T ";
+//       if(options.isset_e ()) out << "e ";
+//       if(options.isset_E ()) out << "E ";
+//       if(options.isset_q ()) out << "q ";
+//       if(options.isset_Q ()) out << "Q ";
+//       if(options.isset_q3()) out << "q3 ";
+//       if(options.isset_Q3()) out << "Q3 ";
+//       if(options.isset_p ()) out << "p ";
+//       out << std::endl;
+//     }
+//     else out << "IOption not set" << std::endl;
+//     return out;
+//   }
+
+//   void set_m () {state -= m ;}
+//   void set_l () {state += l ;}
+//   void set_t () {state += t ;}
+//   void set_T () {state += T ;}
+//   void set_e () {state += e ;}
+//   void set_E () {state += E ;}
+//   void set_q () {state += q ;}
+//   void set_Q () {state += Q ;}
+//   void set_q3() {state += q3;}
+//   void set_Q3() {state += Q3;}
+//   void set_p () {state += p ;}
+
+//   void unset_m () {state += m ;}
+//   void unset_l () {state -= l ;}
+//   void unset_t () {state -= t ;}
+//   void unset_T () {state -= T ;}
+//   void unset_e () {state -= e ;}
+//   void unset_E () {state -= E ;}
+//   void unset_q () {state -= q ;}
+//   void unset_Q () {state -= Q ;}
+//   void unset_q3() {state -= q3;}
+//   void unset_Q3() {state -= Q3;}
+//   void unset_p () {state -= p ;}
+
+//   bool isset_m () const {return state & m ;}
+//   bool isset_l () const {return state & l ;}
+//   bool isset_t () const {return state & t ;}
+//   bool isset_T () const {return state & T ;}
+//   bool isset_e () const {return state & e ;}
+//   bool isset_E () const {return state & E ;}
+//   bool isset_q () const {return state & q ;}
+//   bool isset_Q () const {return state & Q ;}
+//   bool isset_q3() const {return state & q3;}
+//   bool isset_Q3() const {return state & Q3;}
+//   bool isset_p () const {return state & p ;}
+
+//   bool set_set () const {return state += set;}
+//   bool isset () const {return state & set;}
+
+//   std::bit state = 1;
+
+// private:
+
+//   inline constexpr static uint16_t m   = 0b0000000000001; // multiplicity (events)
+//   inline constexpr static uint16_t l   = 0b0000000000010; // label
+//   inline constexpr static uint16_t t   = 0b0000000000100; // timestamp in ps
+//   inline constexpr static uint16_t T   = 0b0000000001000; // relative time in ps
+//   inline constexpr static uint16_t e   = 0b0000000010000; // energy in ADC
+//   inline constexpr static uint16_t E   = 0b0000000100000; // calibrated energy in keV
+//   inline constexpr static uint16_t q   = 0b0000001000000; // qdc2 in ADC
+//   inline constexpr static uint16_t Q   = 0b0000010000000; // calibrated qdc2 in keV
+//   inline constexpr static uint16_t q3  = 0b0000100000000; // qdc3 in ADC
+//   inline constexpr static uint16_t Q3  = 0b0001000000000; // calibrated qdc3 in keV
+//   inline constexpr static uint16_t p   = 0b0010000000000; // pileup
+//   inline constexpr static uint16_t set = 0b0100000000000; // is the option set or not
+//   inline constexpr static uint16_t rw  = 0b1000000000000; // read (0) or write (1)
+// };
+// class IOptions
+// {
+// public:
+//   IOptions() noexcept {}
+//   IOptions(std::string const & options) noexcept {setOptions(options);}
+//   void reset()
+//   {
+//                 // symbol : branch_name  full name  SI_unit  c++_type  default_value
+//     m  = true ; // m : mult   multiplicity (events)  N/A int       true
+//     l  = false; // l : label  label                  N/A ushort    false
+//     t  = false; // t : stamp  absolute timestamp     ps  ULong64_t false
+//     T  = false; // T : time   relative time          ps  Long64_t  false
+//     e  = false; // e : adc    energy                 ADC int       false
+//     E  = false; // E : nrj    energy                 keV float     false
+//     q  = false; // q : qdc2   energy qdc2            ADC int       false
+//     Q  = false; // Q : nrj2   energy qdc2            keV float     false
+//     q3 = false; // 3 : qdc3   energy qdc3            ADC int       false
+//     Q3 = false; // R : nrj3   energy qdc3            keV float     false
+//     p  = false; // p : pileup pileup                 N/A bool      false
+//     set = false;// internal state
+//   }
+
+//   void setOptions(std::string const & options) noexcept
+//   {
+//     reset();
+//     for (auto const & option : options)
+//     {
+//       switch (option)
+//       {
+//         case ('m') : m  = false; break;
+//         case ('l') : l  = true ; break;
+//         case ('t') : t  = true ; break;
+//         case ('T') : T  = true ; break;
+//         case ('e') : e  = true ; break;
+//         case ('E') : E  = true ; break;
+//         case ('q') : q  = true ; break;
+//         case ('Q') : Q  = true ; break;
+//         case ('3') : q3 = true ; break;
+//         case ('R') : Q3 = true ; break;
+//         case ('p') : p  = true ; break;
+//         default : error("Unkown parameter '", option, "' for io data");
+//       }
+//     }
+//     set = true;
+//   }
+
+//   std::string getOptions() const noexcept 
+//   {
+//     std::string out;
+
+//     if (m) out.push_back('m');
+//     if (l) out.push_back('l');
+//     if (t) out.push_back('t');
+//     if (T) out.push_back('T');
+//     if (e) out.push_back('e');
+//     if (E) out.push_back('E');
+//     if (q) out.push_back('q');
+//     if (Q) out.push_back('Q');
+//     if (q3) out.push_back('3');
+//     if (Q3) out.push_back('R');
+//     if (p) out.push_back('p');
+
+//     return out;
+//   }
+
+//   void detectLeafs(TTree * tree)
+//   {
+//     reset();
+//     TObjArray* branches = tree->GetListOfBranches();
+//     for (int i = 0; i < branches->GetEntries(); ++i) 
+//     {
+//       auto branch = dynamic_cast<TBranch*>(branches->At(i));
+//       std::string branchNameStr(branch->GetName());
+
+//       if (branchNameStr == "mult"  ) m  = true ;
+//       if (branchNameStr == "label" ) l  = true ;
+//       if (branchNameStr == "stamp" ) t  = true ;
+//       if (branchNameStr == "time"  ) T  = true ;
+//       if (branchNameStr == "adc"   ) e  = true ;
+//       if (branchNameStr == "nrj"   ) E  = true ;
+//       if (branchNameStr == "qdc2"  ) q  = true ;
+//       if (branchNameStr == "nrj2"  ) Q  = true ;
+//       if (branchNameStr == "qdc3"  ) q3 = true ;
+//       if (branchNameStr == "nrj3"  ) Q3 = true ;
+//       if (branchNameStr == "pileup") p  = true ;
+//     }
+//     set = true;
+//   }
+
+//   friend std::ostream& operator<<(std::ostream& out, IOptions const & options)
+//   {
+//     if (options.set)
+//     {
+//       if(options.m) out << "m ";
+//       if(options.l) out << "l ";
+//       if(options.t) out << "t ";
+//       if(options.T) out << "T ";
+//       if(options.e) out << "e ";
+//       if(options.E) out << "E ";
+//       if(options.q) out << "q ";
+//       if(options.Q) out << "Q ";
+//       if(options.q3) out << "q3 ";
+//       if(options.Q3) out << "Q3 ";
+//       if(options.p) out << "p ";
+//       out << std::endl;
+//     }
+//     else out << "IOption not set" << std::endl;
+//     return out;
+//   }
+
+//   bool m  = true ; // multiplicity (events)
+//   bool l  = false; // label
+//   bool t  = false; // timestamp in ps
+//   bool T  = false; // relative time in ps
+//   bool e  = false; // energy in ADC
+//   bool E  = false; // calibrated energy in keV
+//   bool q  = false; // qdc2 in ADC
+//   bool Q  = false; // calibrated qdc2 in keV
+//   bool q3 = false; // qdc3 in ADC
+//   bool Q3 = false; // calibrated qdc3 in keV
+//   bool p  = false; // pileup
+
+//   bool set = false;
+// };
+
+/////////////////
+/// Hit class ///
+/////////////////
+
+/**
+ * @brief This class is used to store conveniently the data from reading the faster data. You can either treat data directly or write it in root trees
+ * @details
+ * 
+ * This class is used as an interface between the faster data and root.
+ * 
+ * Connect it to a FasterReader to read data :
+ * 
+ *      Hit hit;
+ *      FasterReader.setHit(&hit);
+ *      while(reader.Read())
+ *      {
+ *        doSomething with the hit...
+ *      }
+ * 
+ * Connect it to a Root Tree : 
+ * 
+ *    1. To convert data to a raw root tree :
+ * 
+ *      Hit hit;
+ *      TTree * tree = new TTree("Nuball2","Nuball2");
+ *      FasterReader.setHit(&hit);
+ *      hit.writing(tree);
+ *      while(reader.Read())
+ *      {
+ *        tree -> Fill();
+ *      }
+ * 
+ *    2. To read this raw root tree :
+ *      
+ *      hit.reading(tree);
+ *      for (int hit = 0; hit<tree->GetEntries(); hit++)
+ *      {
+ *        do something with the hit ...
+ *      }
+ * 
+ * Nomenclature : 
+ * The ADC are in INT because they represent a number of digitization channels
+ * The energies are in float because we do not need more precision than the detectors resolution, of the order of the keV for the best ones
+ */
+class Hit
+{
+public:
+  Hit(){clear();}
+
+  Hit(
+      Label     _label  ,  
+      Timestamp _stamp  ,  
+      Time      _time   ,   
+      ADC       _adc    ,    
+      NRJ       _nrj    ,    
+      ADC       _qdc2   ,   
+      NRJ       _nrj2   ,   
+      ADC       _qdc3   ,   
+      NRJ       _nrj3   ,   
+      bool      _pileup ) :
+    label  (_label ),
+    stamp  (_stamp ),
+    time   (_time  ),
+    adc    (_adc   ),
+    nrj    (_nrj   ),
+    qdc2   (_qdc2  ),
+    nrj2   (_nrj2  ),
+    qdc3   (_qdc3  ),
+    nrj3   (_nrj3  ),
+    pileup (_pileup)
+    {}
+
+  Hit(
+      Label     _label  ,  
+      Timestamp _stamp  ,  
+      Time      _time   ,   
+      ADC       _adc    ,    
+      NRJ       _nrj    ,    
+      ADC       _qdc2   ,   
+      NRJ       _nrj2   ,   
+      bool      _pileup ) :
+    label  (_label ),
+    stamp  (_stamp ),
+    time   (_time  ),
+    adc    (_adc   ),
+    nrj    (_nrj   ),
+    qdc2   (_qdc2  ),
+    nrj2   (_nrj2  ),
+    pileup (_pileup)
+    {}
+  
+    Hit(
+      Label     _label  ,  
+      Timestamp _stamp  ,  
+      Time      _time   ,   
+      NRJ       _nrj    ,    
+      NRJ       _nrj2   ,   
+      bool      _pileup ) :
+    label  (_label ),
+    stamp  (_stamp ),
+    time   (_time  ),
+    nrj    (_nrj   ),
+    nrj2   (_nrj2  ),
+    pileup (_pileup)
+    {}
+    
+  Hit(
+      Label     _label  ,  
+      Timestamp _stamp  ,  
+      Time      _time   ,   
+      ADC       _adc    ,    
+      ADC       _qdc2   ,   
+      bool      _pileup ) :
+    label  (_label ),
+    stamp  (_stamp ),
+    time   (_time  ),
+    adc    (_adc   ),
+    qdc2   (_qdc2  ),
+    pileup (_pileup)
+    {}
+
+  Hit(Hit const & hit) :
+    label  (hit.label ),
+    stamp  (hit.stamp ),
+    time   (hit.time  ),
+    adc    (hit.adc   ),
+    nrj    (hit.nrj   ),
+    qdc2   (hit.qdc2  ),
+    nrj2   (hit.nrj2  ),
+    qdc3   (hit.qdc3  ),
+    nrj3   (hit.nrj3  ),
+    pileup (hit.pileup)
+    {}
+
+  Hit& operator=(Hit const & hit)
+  {
+    label  = hit.label;
+    stamp  = hit.stamp;
+    time   = hit.time;
+    adc    = hit.adc;
+    nrj    = hit.nrj;
+    qdc2   = hit.qdc2;
+    nrj2   = hit.nrj2,
+    qdc3   = hit.qdc3;
+    nrj3   = hit.nrj3,
+    pileup = hit.pileup;
+    return *this;
+  }
+
+  void clear()
+  {
+    label  = 0;
+    stamp  = 0ull;
+    time   = 0ll;
+    adc    = 0;
+    nrj    = 0.f;
+    qdc2   = 0;
+    nrj2   = 0.f;
+    qdc3   = 0;
+    nrj3   = 0.f;
+    pileup = false;
+  }
+
+  Label     label  = 0;     // Label (identification number)
+  Timestamp stamp  = 0ull;  // Timestamp ('ull' stands for unsigned long long)
+  Time      time   = 0ll;   // Relative time ('ull' stands for long long)
+  ADC       adc    = 0;     // Energy in ADC or QDC1
+  NRJ       nrj    = 0.f;   // Calibrated energy in keV
+  ADC       qdc2   = 0;     // Energy in qdc2
+  NRJ       nrj2   = 0.f;   // Calibrated energy in qdc2 in keV
+  ADC       qdc3   = 0;     // Energy in qdc3
+  NRJ       nrj3   = 0.f;   // Calibrated energy in qdc3 in keV
+  bool      pileup = false; // Pile-up (and saturation in QDC) tag
+
+  inline bool operator<(Hit const & other) const noexcept {return stamp < other.stamp;}
+  inline bool operator>(Hit const & other) const noexcept {return stamp > other.stamp;}
+
+  auto constexpr getTimestamp_s() const {return stamp/double(1_s);}
+
+private:
+};
+
+std::ostream& operator<<(std::ostream& cout, Hit const & hit)
+{
+  cout << "l : " << std::setw(3) << hit.label;
+  if (hit.stamp != 0) cout << std::setprecision(7) << " timestamp : " << double(hit.stamp*1e-12) << " s ";
+  if (hit.time  != 0) cout << " rel time : "  << hit.time;
+  if (hit.adc   != 0) cout << " adc : " << std::setw(8) << hit.adc;
+  if (hit.qdc2  != 0) cout << " qdc2 : "<< std::setw(8) << hit.qdc2;
+  if (hit.qdc3  != 0) cout << " qdc3 : "<< std::setw(8) << hit.qdc3;
+  if (hit.nrj   != 0) cout << " nrj : "       << hit.nrj ;
+  if (hit.nrj2  != 0) cout << " nrj2 : "      << hit.nrj2;
+  if (hit.nrj3  != 0) cout << " nrj3 : "      << hit.nrj3;
+  if (hit.pileup)     cout << "\u001b[31m pileup \u001b[0m";
+  return cout;
+}
+
+class RootHit : public Hit
+{
+public:
+  template<class... ARGS>
+  RootHit(ARGS &&... args) : Hit(std::forward<ARGS>(args)...) {}
+
+  void Hit::reading(TTree * tree, std::string const & options)
+  {
+  #ifdef COMULTITHREADING
+    lock_mutex lock(mutex_hits);
+  #endif //COMULTITHREADING
+
+    if (!tree) {print("Input tree at address 0x00 !"); return;}
+
+    this -> clear();
+
+    if (options == "") read.detectLeafs(tree);
+    else read.setOptions(options);
+
+    tree -> ResetBranchAddresses();
+
+    if (read.l ) tree -> SetBranchAddress("label"  , & label  );
+    if (read.t ) tree -> SetBranchAddress("stamp"  , & stamp  );
+    if (read.T ) tree -> SetBranchAddress("time"   , & time   );
+    if (read.e ) tree -> SetBranchAddress("adc"    , & adc    );
+    if (read.E ) tree -> SetBranchAddress("nrj"    , & nrj    );
+    if (read.q ) tree -> SetBranchAddress("qdc2"   , & qdc2   );
+    if (read.Q ) tree -> SetBranchAddress("nrj2"   , & nrj2   );
+    if (read.q3) tree -> SetBranchAddress("qdc3"   , & qdc3   );
+    if (read.Q3) tree -> SetBranchAddress("nrj3"   , & nrj3   );
+    if (read.p ) tree -> SetBranchAddress("pileup" , & pileup );
+  }
+
+  void writing(TTree * tree, std::string const & options = "lteqp")
+  {
+  #ifdef COMULTITHREADING
+    lock_mutex lock(mutex_hits);
+  #endif //COMULTITHREADING
+
+    if (!tree) {print("Input tree at address 0x00 !"); return;}
+
+    write.setOptions(options);
+
+    tree -> ResetBranchAddresses();
+
+    if (write.l ) tree -> Branch("label"  , & label  );
+    if (write.t ) tree -> Branch("stamp"  , & stamp  );
+    if (write.T ) tree -> Branch("time"   , & time   );
+    if (write.e ) tree -> Branch("adc"    , & adc    );
+    if (write.E ) tree -> Branch("nrj"    , & nrj    );
+    if (write.q ) tree -> Branch("qdc2"   , & qdc2   );
+    if (write.Q ) tree -> Branch("nrj2"   , & nrj2   );
+    if (write.q3) tree -> Branch("qdc3"   , & qdc3   );
+    if (write.Q3) tree -> Branch("nrj3"   , & nrj3   );
+    if (write.p ) tree -> Branch("pileup" , & pileup );
+  }
+private:
+  IOptions readOpt;
+  IOptions writeOpt;
+}
+
+
+using HitTrigger = std::function<bool(const Hit&)>;
+
+
+#endif //HIT_HPP

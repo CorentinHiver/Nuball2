@@ -61,7 +61,7 @@ namespace Colib
   }
 }
 
-#if defined(MT_AVAILABLE) || defined (COMULTITHREADING)
+#if defined(MULTITHREAD) || defined (COMULTITHREADING)
 inline std::mutex print_mutex;
 
 using lock_mutex = std::lock_guard<std::mutex>;
@@ -126,22 +126,7 @@ namespace Colib
 template <class... Ts> 
 void printsln(Ts &&... ts)  noexcept
 {
-  std::lock_guard<std::mutex> lock(Colib::cout_mutex);  // Lock to ensure atomic output.
-  std::cout << "\r"; 
-  println(std::forward<Ts>(ts)...); 
-  std::cout << std::flush;
-}
-
-template <class... Ts> 
-void printslnt(Ts &&... ts)  noexcept
-{
-  int thread_idx = Colib::MT::getThreadIndex();  // Assuming this returns 0 to Nthreads-1.
-  std::lock_guard<std::mutex> lock(Colib::cout_mutex);
-  std::cout << "[" << thread_idx << "] ";
-  std::cout << "\033[" << (thread_idx + 1) << ";1H\r";  // Position to row (thread_idx + 1), column 1, then carriage return.
-  println(std::forward<Ts>(ts)...); 
-  std::cout << std::flush;
-  // Optionally, reposition cursor back to a neutral spot, like the bottom: std::cout << "\033[" << (Nthreads + 1) << ";1H";
+  Colib::MT::printsln(std::forward<Ts>(ts)...);
 }
 
 #else

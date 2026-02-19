@@ -1,0 +1,10 @@
+
+ID: ID/index_120.dat
+
+NB_THREADS: 3
+
+DATADIR: /home/corentin/faster_data/N-SI-120/E2_152Eu_overnight.fast/
+
+OUTDIR: Calibration/
+
+CALIBRATE: source: 152Eu outCalib: run_oct2022_before.dat outRoot: run_oct2022_before.root

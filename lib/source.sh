@@ -14,7 +14,7 @@ NEW_PATH=""
 # List of directories to add (relative to SCRIPT_DIR)
 dirs=(
     "$SCRIPT_DIR"
-    "$SCRIPT_DIR/MTObjects"
+    # "$SCRIPT_DIR/MTObjects"
     "$SCRIPT_DIR/Classes"
     "$SCRIPT_DIR/Analyse"
 )

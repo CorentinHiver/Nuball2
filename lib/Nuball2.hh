@@ -75,21 +75,6 @@ constexpr inline ULong64_t ULong64_cast(T const & t) {return static_cast<ULong64
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
 constexpr inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
 
-class RootHeader : public TObject
-{
-  int status = 0;
-  inline constexpr static int calibrated = 0b00001;
-  inline constexpr static int timeshift = 0b00010;
-  inline constexpr static int corrected = 0b00100;
-
-public:
-  std::string comments;
-  bool isCalibrated() const {return status & calibrated;}
-  void setCalibrated() {status |= calibrated;}
-  bool isTimeshifted() const {return status & timeshift;}
-  void setTimeshifted() {status |= timeshift;}
-};
-
 namespace NSI136
 {
   static constexpr size_t LUT_s = 1000; // Look-up-table size
@@ -122,3 +107,25 @@ namespace NSI136
 
   static constexpr Label maxLabel = Label_cast(LUT_s);
 }
+
+// class RootHeader : public TObject
+// {
+//   int8_t status = 0;
+//   inline constexpr static int calibrated = 0b00001;
+//   inline constexpr static int timeshift = 0b00010;
+//   inline constexpr static int corrected = 0b00100;
+//   inline constexpr static int finished = 0b01000;
+
+// public:
+//   RootHeader() = default;
+//   virtual ~RootHeader() = default;
+//   ClassDef(RootHeader, 1);
+
+//   bool isCalibrated () const {return status & calibrated;}
+//   bool isTimeshifted() const {return status & timeshift ;}
+//   bool isFinished   () const {return status & finished  ;}
+//   void setCalibrated () {status |= calibrated;}
+//   void setTimeshifted() {status |= timeshift ;}
+//   void setFinished   () {status |= finished  ;}
+  
+// };

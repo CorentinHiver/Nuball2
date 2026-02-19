@@ -49,8 +49,13 @@ public :
     if (filename.back() == '/') Colib::throw_error("In FasterRootV2::open("+filename+"): not a file !");
     m_cursor = 0;
     m_filename = filename;
-		m_datafile = gzopen(filename.c_str(), "rb");
-		if (!m_datafile)
+    fs::path p(m_filename);
+    if(!fs::is_regular_file(p)) 
+    {
+      error(filename + " is not a file !");
+      return false;
+    }
+		if (!(m_datafile = gzopen(filename.c_str(), "rb")))
 		{
 			error("Couldn't find "+ filename + " !");
 			return false;
@@ -200,7 +205,7 @@ public :
       signed trig_dt   : 32;
       signed pll_dt    : 32;
 
-    static inline constexpr double period_to_ns = 1.0 / pow (2.0, 19);
+    static constexpr inline double period_to_ns = 1.0 / pow (2.0, 19);
     inline constexpr double period_ns() const noexcept {return period * period_to_ns;}
     inline constexpr double period_ps() const noexcept {return period_ns() * 1000.;}
 
@@ -244,7 +249,7 @@ public :
     QDCSpectro qdc[n];
     int32_t tdc = 0;
 
-    static constexpr double adc_mv = 0.036468506 * 2.0;
+    static constexpr inline double adc_mv = 0.036468506 * 2.0;
     
     inline constexpr auto qdc_mv (int qdc_i) const noexcept { return qdc_i * adc_mv; }
     inline constexpr auto tdc_ps ()          const noexcept { return tdc * tdc_clock_LSB_8bits; }

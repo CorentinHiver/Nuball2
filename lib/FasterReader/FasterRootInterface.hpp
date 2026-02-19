@@ -114,6 +114,7 @@ public:
   /// @brief Loads the already open .fast file in memory. Don't forget to close it afterwards.
   constexpr inline bool loadDatafile() noexcept
   {
+    if (!m_open) return false;
     ++m_file_id;
     if (m_cursor_max <= m_hits.size()) return false; // Do not treat the file if the maximum number of hits is already reached
     if (m_cursor_max < Colib::big<ulonglong>()) m_hits.reserve(m_cursor_max);
@@ -140,12 +141,11 @@ public:
     m_filesNb = filenames.size();
     if (m_file_id >= m_filesNb) return false;
 
-    size_t remaining = m_filesNb - m_file_id;
-    size_t toLoad    = std::min(maxFiles, remaining);
+    size_t const toLoad = std::min(maxFiles, m_filesNb - m_file_id);
 
     for (size_t i = 0; i < toLoad; ++i) loadDatafile(filenames[m_file_id]);
 
-    return toLoad > 0;   // or just return true;
+    return toLoad > 0;
   }
 
   auto & data() {return m_hits;}
@@ -154,12 +154,19 @@ public:
   // Data Operations //
   // --------------- //
 
-  void timeSorting()
+  bool timeSorting()
   {
+    if (m_hits.size() == 0) 
+    {
+      error("Time sorting not possible on empty hits buffer");
+      return false;
+    }
+    if (m_timeSorted == true) return true;
     printsln("Time sorting....");
     prepareSortedIndexes();
     m_timeSorted = true;
     Colib::insertionSort(m_hits, m_sortedIDs);
+    return true;
   }
 
   void checkTimeSorting()
@@ -175,7 +182,7 @@ public:
 
   void buildEvents()
   {
-    prepareSortedIndexes();
+    timeSorting();
     if (m_sortedIDs.size() == 0) return;
     // In the following, ID and index refer to the position of the hit in the buffer 
     // (different from the label of the detector, which is used to identify it)
@@ -209,7 +216,7 @@ public:
 
   void buildEventsWithRef(Label refLabel) noexcept
   {
-    prepareSortedIndexes();
+    timeSorting();
     std::vector<size_t> eventID;
     m_eventIDbuffer.clear();
     m_eventIDbuffer.reserve(m_sortedIDs.size()/10);
@@ -250,7 +257,7 @@ public:
 
   void buildEventsWithRf(Label rfLabel, int shift = 50_ns)
   {
-    prepareSortedIndexes();
+    timeSorting();
     // In the following, ID and index refer to the position of the hit in the buffer 
     // (different from the label of the detector, which is used to identify it)
     // 1. Initialize the event buffer
@@ -324,7 +331,7 @@ public:
       printHitsProgress(event_i, "Writting hits :  ");
     }
     writeTree();
-    printsln("Nuball2 written in", rootFilename);
+    printsln("Nuball2 written in ", rootFilename);
     clearIO();
   }
 
@@ -355,7 +362,7 @@ public:
       }
     }
     writeTree();
-    printsln("Nuball2 written in", rootFile->GetName());
+    printsln("Nuball2 written in ", rootFile->GetName());
     clearIO();
   }
 
@@ -388,7 +395,7 @@ public:
       }
     }
     writeTree();
-    printsln("Nuball2 written in", rootFile->GetName());
+    printsln("Nuball2 written in ", rootFile->GetName());
     clearIO();
   }
 
@@ -424,7 +431,7 @@ public:
       }
     }
     writeTree();
-    printsln("Nuball2 written in", rootFile->GetName());
+    printsln("Nuball2 written in ", rootFile->GetName());
     clearIO();
   }
 
@@ -464,9 +471,9 @@ public:
     {
       if (m_cursor_max < Colib::big<ulonglong>()) 
     #ifdef MULTITHREAD
-        printslnt("File", m_file_id, "/", m_filesNb, Colib::nicer_double(m_cursor_total, 2));
+        Colib::MT::printsln("File ", m_file_id, " / ", m_filesNb, " ", Colib::nicer_double(m_cursor_total, 2));
       else 
-        printslnt("File", m_file_id, "/", m_filesNb, Colib::nicer_double(m_cursor_total, 2), Colib::nicer_seconds(m_hits.back().getTimestamp_s()));
+        Colib::MT::printsln("File ", m_file_id, " / ", m_filesNb, " ", Colib::nicer_double(m_cursor_total, 2), " ", Colib::nicer_seconds(m_hits.back().getTimestamp_s()));
     #else //!MULTITHREAD
         printsln("File", m_file_id, "/", m_filesNb, Colib::nicer_double(m_cursor_total, 2));
       else 
