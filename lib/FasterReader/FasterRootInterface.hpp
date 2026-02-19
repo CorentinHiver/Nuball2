@@ -65,7 +65,7 @@ public:
 
   auto initializeTree(std::string treeName, std::string treeTitle)
   {
-    m_tree = gFile->Get<TTree>("Nuball2");
+    m_tree = gFile->Get<TTree>(treeName.c_str());
     if (!m_tree) m_tree = new TTree(treeName.c_str(), treeTitle.c_str());
     return m_tree;
   }
@@ -314,8 +314,9 @@ public:
 
     auto const calibrate = m_calibrate; // Possible optimization
     if (calibrate) options = "ltTEQ";
-    RootHit o_hit; o_hit.writing(m_tree, options);
-
+    RootHit o_hit; 
+    if (m_nb_outputs == 1) o_hit.writing(m_tree, options);
+    else o_hit.reading(m_tree, options);
     for(size_t event_i = 0; event_i<m_eventIDbuffer.size(); ++event_i) for (auto const & hit_id : m_eventIDbuffer[event_i]) 
     {
       o_hit = m_hits[hit_id];
@@ -330,13 +331,14 @@ public:
   void writeEvents(std::string const & rootFilename, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEvents();
-    ++m_nb_outputs;
-    auto rootFile = openRootFile(rootFilename, (m_nb_outputs==1) ? "recreate" : "update");
+    auto rootFile = openRootFile(rootFilename, (m_nb_outputs++ == 1) ? "recreate" : "update");
     initializeTree("Nuball2","Nuball2_Events");
 
     auto const calibrate = m_calibrate; // Possible optimization
     if (calibrate) options = "ltTEQ";
-    RootEvent o_event; o_event.writing(m_tree, options);
+    RootEvent o_event; 
+    if (m_nb_outputs == 1) o_event.writing(m_tree, options);
+    else o_event.reading(m_tree, options);
 
     for(size_t event_i = 0; event_i<m_eventIDbuffer.size(); ++event_i)
     {
@@ -360,14 +362,14 @@ public:
   void writeEventsWithRef(std::string const & rootFilename, Label refLabel = 252, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEventsWithRef(refLabel);
-    ++m_nb_outputs;
-
-    auto rootFile = openRootFile(rootFilename, (m_nb_outputs==1) ? "recreate" : "update");
+    auto rootFile = openRootFile(rootFilename, (m_nb_outputs++ == 0) ? "recreate" : "update");
     initializeTree("Nuball2", "Nuball2_EventsRef"+std::to_string(refLabel));
 
     auto const calibrate = m_calibrate; // Possible optimization
     if (calibrate) options = "ltTEQ";
-    RootEvent o_event; o_event.writing(m_tree, options);
+    RootEvent o_event; 
+    if (m_nb_outputs == 1) o_event.writing(m_tree, options);
+    else o_event.reading(m_tree, options);
 
     for(size_t event_i = 0; event_i<m_eventIDbuffer.size(); ++event_i)
     {
@@ -393,13 +395,14 @@ public:
   void writeEventsWithRF(std::string const & rootFilename, Label rfLabel = 251, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEventsWithRf(rfLabel);
-    ++m_nb_outputs;
     auto rootFile = openRootFile(rootFilename, (m_nb_outputs++ == 0) ? "recreate" : "update");
     initializeTree("Nuball2", "Nuball2_EventsRF");
 
     auto const calibrate = m_calibrate; // Possible optimization
     if (calibrate) options = "ltTEQ";
-    RootEvent o_event; o_event.writing(m_tree, options);
+    RootEvent o_event; 
+    if (m_nb_outputs == 1) o_event.writing(m_tree, options);
+    else o_event.reading(m_tree, options);
 
     for(size_t event_i = 0; event_i<m_eventIDbuffer.size(); ++event_i)
     {

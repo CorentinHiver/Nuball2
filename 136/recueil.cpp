@@ -17,10 +17,10 @@ int main(int argc, char** argv)
     if (args == "--ts" || args == "--timeshifs")
     {
       auto sub_arg = args.load<std::string>();
-      std::string dataPath = "~/nuball2/N-SI-136/run*.fast/";
-      std::string outputPath = "~/nuball2/N-SI-136_root/dT/";
       if (sub_arg == "all")
       {
+        std::string dataPath = "~/nuball2/N-SI-136/run*.fast/";
+        std::string outputPath = "~/nuball2/N-SI-136_root/dT/";
         std::vector<std::string> runs (Colib::findFilesWildcard(dataPath));
         for (auto const & run : runs)
         {
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
         {
           TimeshiftCalculator ts_cal(dTfilename);
           ts_cal.setBins<NSI136::maxLabel>([](Label label) -> Time {
-                if (NSI136::isGe [label])   return    2_ns;
+                 if (NSI136::isGe [label])   return    2_ns;
             else if (NSI136::isBGO[label])   return   1_ns;
             else if (label == 251)           return 100_ps;
             else if (label == 252)           return 100_ps;
@@ -73,7 +73,7 @@ int main(int argc, char** argv)
       FasterRunReader reader(args);
       reader.run();
     }
-    else Colib::throw_error(args.getArg() + "unkown !!");
+    else Colib::throw_error(args.getArg() + " unkown !!");
   }
 
 
