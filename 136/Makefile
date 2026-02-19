@@ -29,4 +29,4 @@ clean:
 	rm -f recueil
 
 cleanOpt:
-	rm *.gcda *.gcno
+	rm -f *.gcda *.gcno

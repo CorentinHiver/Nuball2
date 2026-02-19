@@ -57,6 +57,7 @@ public:
 
   auto openRootFile(std::string rootname, std::string option = "RECREATE")
   {
+    rootname = Colib::removeExtension(rootname)+".root";
     m_file = TFile::Open(rootname.c_str(), option.c_str());
     if (s_treeInMemory) gROOT->cd();
     return m_file;
@@ -305,7 +306,7 @@ public:
   // Writing data to .root //
   // --------------------- //
 
-  std::string writeHits(std::string const & rootFilename, std::string options = "ltqe")
+  void writeHits(std::string const & rootFilename, std::string options = "ltqe")
   {
     ++m_nb_outputs;
     openRootFile(rootFilename);
@@ -324,15 +325,13 @@ public:
     writeTree();
     printsln("Nuball2 written in", rootFilename);
     clearIO();
-    return rootFilename;
   }
 
-  std::string writeEvents(std::string const & rootFilename, std::string options = "ltTqe")
+  void writeEvents(std::string const & rootFilename, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEvents();
     ++m_nb_outputs;
-    auto const filename = Colib::removeExtension(rootFilename)+".root";
-    openRootFile(filename, (m_nb_outputs==1) ? "recreate" : "update");
+    auto rootFile = openRootFile(rootFilename, (m_nb_outputs==1) ? "recreate" : "update");
     initializeTree("Nuball2","Nuball2_Events");
 
     auto const calibrate = m_calibrate; // Possible optimization
@@ -354,18 +353,16 @@ public:
       }
     }
     writeTree();
-    printsln("Nuball2 written in", filename);
+    printsln("Nuball2 written in", rootFile->GetName());
     clearIO();
-    return filename;
   }
 
-  std::string writeEventsWithRef(std::string const & rootFilename, Label refLabel = 252, std::string options = "ltTqe")
+  void writeEventsWithRef(std::string const & rootFilename, Label refLabel = 252, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEventsWithRef(refLabel);
     ++m_nb_outputs;
-    auto const filename = Colib::removeExtension(rootFilename)+"_ref_"+std::to_string(refLabel)+".root";
 
-    openRootFile(filename, (m_nb_outputs==1) ? "recreate" : "update");
+    auto rootFile = openRootFile(rootFilename, (m_nb_outputs==1) ? "recreate" : "update");
     initializeTree("Nuball2", "Nuball2_EventsRef"+std::to_string(refLabel));
 
     auto const calibrate = m_calibrate; // Possible optimization
@@ -389,17 +386,15 @@ public:
       }
     }
     writeTree();
-    printsln("Nuball2 written in", filename);
+    printsln("Nuball2 written in", rootFile->GetName());
     clearIO();
-    return filename;
   }
 
-  std::string writeEventsWithRF(std::string const & rootFilename, Label rfLabel = 251, std::string options = "ltTqe")
+  void writeEventsWithRF(std::string const & rootFilename, Label rfLabel = 251, std::string options = "ltTqe")
   {
     if (!m_eventBuilt) buildEventsWithRf(rfLabel);
-    auto const filename = Colib::removeExtension(rootFilename)+"_rf.root";
-
-    openRootFile(filename, (m_nb_outputs++ == 0) ? "recreate" : "update");
+    ++m_nb_outputs;
+    auto rootFile = openRootFile(rootFilename, (m_nb_outputs++ == 0) ? "recreate" : "update");
     initializeTree("Nuball2", "Nuball2_EventsRF");
 
     auto const calibrate = m_calibrate; // Possible optimization
@@ -426,9 +421,8 @@ public:
       }
     }
     writeTree();
-    printsln("Nuball2 written in", filename);
+    printsln("Nuball2 written in", rootFile->GetName());
     clearIO();
-    return filename;
   }
 
   inline void calibrateEvent(Event & event)

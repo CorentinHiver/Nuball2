@@ -17,7 +17,7 @@ public:
   void open(std::string const & filename)
   {
     m_file = TFile::Open(filename.c_str());
-    if (!fileOk()) Colib::throw_error(filename+" not available !");
+    if (!fileOk()) Colib::throw_error("'"+filename+"' not available !");
     m_tree = m_file->Get<TTree>("Nuball2");
     if (!treeOk()) Colib::throw_error(filename+" has no Nuball2 tree available !");
     if(std::string(m_tree -> GetTitle()) == "Nuball2_Hits") 

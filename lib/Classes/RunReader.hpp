@@ -92,14 +92,18 @@ public:
     Colib::ensurePath(p_outPath, true);
   }
 
-  bool checkOutput (std::string const & outFile)
+  bool checkOutput(std::string const & outFile)
   {
-    if (Colib::fileExists(outFile) && !p_overwrite) 
+    if (Colib::fileExists(outFile))
     {
-      error(outFile, "already exists ! Use -o mode or RunReader::setOverwrite()");
-      return false;
+      if (p_overwrite) fs::remove(outFile);
+      else
+      {
+        error(outFile, "already exists ! Use -o mode or RunReader::setOverwrite()");
+        return false;
+      }
     }
-    else return true;
+    return true;
   }
   
 #ifdef MULTITHREAD

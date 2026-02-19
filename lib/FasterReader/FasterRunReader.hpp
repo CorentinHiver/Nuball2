@@ -143,21 +143,39 @@ public:
 
   // Data processing :
 
+  static std::string renameOutputRef(std::string const & m_outputFile, Label m_refLabel) {
+    return Colib::removeExtension(m_outputFile)+"_ref_"+std::to_string(m_refLabel)+".root";
+  }
+
+  static std::string renameOutputRF(std::string const & m_outputFile) {
+    return Colib::removeExtension(m_outputFile)+"_rf.root";
+  }
+
   void processData(std::string const & outFile)
   {
+    m_outputFile = outFile;
   #ifdef MULTITHREAD
     auto & reader = m_readers[Colib::MT::getThreadIndex()];
   #else // !MULTITHREAD
     auto & reader = m_readers.front();
   #endif// MULTITHREAD
     reader.timeSorting();
-         if (m_useRF      ) m_outputFile = reader.writeEventsWithRF (outFile, m_rfLabel);
-    else if (m_useRef     ) m_outputFile = reader.writeEventsWithRef(outFile, m_refLabel);
-    else if (m_buildEvents) m_outputFile = reader.writeEvents       (outFile);
-    else                    m_outputFile = reader.writeHits         (outFile);
+    if (m_useRF) 
+    {
+      m_outputFile = renameOutputRF(m_outputFile);
+      reader.writeEventsWithRF (m_outputFile, m_rfLabel);
+    }
+    else if (m_useRef) 
+    {
+      m_outputFile = renameOutputRef(m_outputFile, m_refLabel);
+      reader.writeEventsWithRef(m_outputFile, m_refLabel);
+    }
+    else if (m_buildEvents) reader.writeEvents       (m_outputFile);
+    else                    reader.writeHits         (m_outputFile);
   }
 
 #ifdef MULTITHREAD  
+// Surely not up to date !!!
   void run()
   {
     distributeFiles();
@@ -229,7 +247,10 @@ public:
     if (m_merge)
     {
       outFile = outPath + Colib::removeLastPart(Colib::removePath(files[0]), '_')+".root";
-      if(!checkOutput(outFile)) return;
+           if (m_useRef && !checkOutput(renameOutputRef(outFile, m_refLabel))) return;
+      else if (m_useRF  && !checkOutput(renameOutputRF(outFile))) return;
+      else if (!checkOutput(outFile)) return;
+
       while(m_readers[0].loadDatafiles(files, m_maxFilesInMemory)) processData(outFile);
     }
     else
@@ -254,7 +275,7 @@ protected:
   std::string m_outputFile = {};
 
   // Other convenience attributes:
-  int m_maxFilesInMemory = 1;
+  int m_maxFilesInMemory = {1};
   bool m_buildEvents = true;
   bool m_merge = false;
   bool m_useRef = false;

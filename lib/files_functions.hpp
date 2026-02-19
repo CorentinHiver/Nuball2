@@ -39,10 +39,23 @@ namespace Colib
   std::string removeExtension (std::string const & string) { return (string.substr(0, string.find_last_of(".")  ));}
   std::string extension       (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
   std::string getExtension    (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
-  std::string getPath         (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));}
   std::string removePath      (std::string const & string) { return (string.substr(   string.find_last_of("/")+1));}
   std::string rmPathAndExt    (std::string const & string) { return            removePath(removeExtension(string));}
   std::string getShortname    (std::string const & string) { return            removePath(removeExtension(string));}
+  std::string getRawPath      (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));}
+
+  std::string getHome() {return std::getenv("HOME");}
+  std::string getPwd () {return std::getenv("PWD" );}
+  std::string getPath(std::string const & string) 
+  { 
+    if (string[0] != '/')
+    {
+           if (string[0] == '.') return getPwd () + getRawPath(string.substr(1, string.size()-1));
+      else if (string[0] == '~') return getHome() + getRawPath(string.substr(1, string.size()-1));
+      else error("Colib::getPath()", string, "not a path");
+    }
+    return getRawPath(string);
+  }
   
   std::string setExtension(std::string const & string, std::string const & extension)
   {

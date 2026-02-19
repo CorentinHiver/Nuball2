@@ -17,15 +17,17 @@ int main(int argc, char** argv)
     if (args == "--ts" || args == "--timeshifs")
     {
       auto sub_arg = args.load<std::string>();
+      std::string dataPath = "~/nuball2/N-SI-136/run*.fast/";
+      std::string outputPath = "~/nuball2/N-SI-136_root/dT/";
       if (sub_arg == "all")
       {
-        std::vector<std::string> runs (Colib::findFilesWildcard("~/nuball2/N-SI-136/run*.fast/"));
+        std::vector<std::string> runs (Colib::findFilesWildcard(dataPath));
         for (auto const & run : runs)
         {
           print("Calculating dT output for", run);
           FasterRunReader reader;
           reader.addFiles(run+"*");
-          reader.setOutputPath("~/nuball2/N-SI-136_root/dT/");
+          reader.setOutputPath(outputPath);
           reader.setMaxFilesMemory(2); // NOMBRE A CHANGER
           reader.setOverwrite(false);
           reader.setMerge(true);
@@ -33,7 +35,12 @@ int main(int argc, char** argv)
 
           reader.run();
 
-          TimeshiftCalculator ts_cal(reader.getOutputFilename());
+          print();
+        }
+
+        for (auto const & dTfilename : Colib::findFilesWildcard(outputPath+"*"))
+        {
+          TimeshiftCalculator ts_cal(dTfilename);
           ts_cal.setBins<NSI136::maxLabel>([](Label label) -> Time {
                 if (NSI136::isGe [label])   return    2_ns;
             else if (NSI136::isBGO[label])   return   1_ns;
