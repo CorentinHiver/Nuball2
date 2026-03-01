@@ -206,12 +206,16 @@ public:
     {
       outFile = Colib::removeLastPart(Colib::removePath(files[0]), '_')+".root";
       std::string outFilePath;
-      std::string tempOutFilePath = outPath + "temp_" + outFile;
-      if (m_useRef) outFilePath = renameOutputRef(outPath + outFile, m_refLabel);
-      if (m_useRF ) outFilePath = renameOutputRF (outPath + outFile);
+           if (m_useRef) outFilePath = renameOutputRef(outPath + outFile, m_refLabel);
+      else if (m_useRF ) outFilePath = renameOutputRF (outPath + outFile);
       else outFilePath = outPath + outFile;
+      
+      print("m_useRef", nicer_bool(m_useRef), renameOutputRef(outPath + outFile, m_refLabel));
+      print("m_useRF", nicer_bool(m_useRF), renameOutputRF (outPath + outFile));
       print(outFilePath);
       if (!checkOutput(outFilePath)) return;
+
+      std::string tempOutFilePath = outPath + "temp_" + outFile;
 
     #ifdef CoMT
 

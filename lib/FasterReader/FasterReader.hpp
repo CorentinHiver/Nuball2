@@ -59,7 +59,7 @@ public :
 			error("Couldn't find "+ filename + " !");
 			return false;
 		}
-    if(gzbuffer(m_datafile, 8 * 1024 * 1024) < 0) error("Couldn't expand gz buffer for "+ filename + " !");;
+    if(gzbuffer(m_datafile, 4 * 1024 * 1024) < 0) error("Couldn't expand gz buffer for "+ filename + " !");;
 		return (m_open = true);
 	}
 
