@@ -72,7 +72,7 @@ public:
   void setOverwrite(bool b = true) {p_overwrite = b;}
   void setOutputPath(std::string const & path) 
   {
-    p_outPath = path;
+    p_outPath = Colib::getPath(path);
     if (p_outPath.back() != '/') p_outPath.push_back('/');
     Colib::makePath(p_outPath, true);
   }
@@ -97,7 +97,7 @@ public:
 protected:
   
   std::vector<std::string> p_files;
-  std::string p_outPath = "./";
+  std::string p_outPath = Colib::getPwd();
   bool p_overwrite = false;
   uint64_t p_nbMaxHits = -1;
   uint64_t p_nbTotMaxHits = Colib::big<uint64_t>();

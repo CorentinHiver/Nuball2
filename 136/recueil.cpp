@@ -53,7 +53,7 @@ int main(int argc, char** argv)
         {
           if (run == "/home/faster/nuball2/N-SI-136/run_39.fast") continue;
           FasterRunReader reader;
-          reader.addFiles(run+"/*");
+          reader.addFiles(run+"/*", 10);
           reader.setOutputPath(outputPath+"ref252/");
           reader.setMaxFilesMemory((getHome() == "/home/faster") ? 5 : 2);
           reader.setOverwrite(false);
@@ -71,6 +71,7 @@ int main(int argc, char** argv)
         for (auto const & dTfilename : findFilesWildcard(outputPath+"ref252/*"))
         {
           TimeshiftCalculator ts_cal(dTfilename);
+          ts_cal.setOutputName(Colib::appendFilename(dTfilename, "_dT"));
           ts_cal.setBins<NSI136::maxLabel>(dTbinning);
           ts_cal.calculate();
         }

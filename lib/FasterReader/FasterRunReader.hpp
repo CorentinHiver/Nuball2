@@ -143,27 +143,19 @@ public:
 
   // Data processing :
 
-  static std::string renameOutputRef(std::string const & m_outputFile, Label m_refLabel) {
-    return Colib::removeExtension(m_outputFile)+"_ref_"+std::to_string(m_refLabel)+".root";
+  static std::string renameOutputRef(std::string const & outputFile, Label m_refLabel) {
+    return Colib::removeExtension(outputFile)+"_ref_"+std::to_string(m_refLabel)+".root";
   }
 
-  static std::string renameOutputRF(std::string const & m_outputFile) {
-    return Colib::removeExtension(m_outputFile)+"_rf.root";
+  static std::string renameOutputRF(std::string const & outputFile) {
+    return Colib::removeExtension(outputFile)+"_rf.root";
   }
 
   void processData(std::string const & outFile)
   {
     m_outputFile = outFile;
-    if (m_useRF) 
-    {
-      m_outputFile = renameOutputRF(m_outputFile);
-      m_reader.writeEventsWithRF (m_outputFile, m_rfLabel);
-    }
-    else if (m_useRef) 
-    {
-      m_outputFile = renameOutputRef(m_outputFile, m_refLabel);
-      m_reader.writeEventsWithRef(m_outputFile, m_refLabel);
-    }
+         if (m_useRF)       m_reader.writeEventsWithRF (m_outputFile, m_rfLabel);
+    else if (m_useRef)      m_reader.writeEventsWithRef(m_outputFile, m_refLabel);
     else if (m_buildEvents) m_reader.writeEvents       (m_outputFile);
     else                    m_reader.writeHits         (m_outputFile);
   }
@@ -194,6 +186,13 @@ public:
 
 #endif // CoMT
 
+  std::string formatOutput(std::string const & rawOutput)
+  {
+         if (m_useRF ) return renameOutputRF (rawOutput);
+    else if (m_useRef) return renameOutputRef(rawOutput, m_refLabel);
+    else return rawOutput;
+  }
+
   void run()
   {
     auto const & files   = RunReader::p_files;   // Aliasing for clarity
@@ -205,17 +204,9 @@ public:
     if (m_merge)
     {
       outFile = Colib::removeLastPart(Colib::removePath(files[0]), '_')+".root";
-      std::string outFilePath;
-           if (m_useRef) outFilePath = renameOutputRef(outPath + outFile, m_refLabel);
-      else if (m_useRF ) outFilePath = renameOutputRF (outPath + outFile);
-      else outFilePath = outPath + outFile;
       
-      print("m_useRef", nicer_bool(m_useRef), renameOutputRef(outPath + outFile, m_refLabel));
-      print("m_useRF", nicer_bool(m_useRF), renameOutputRF (outPath + outFile));
-      print(outFilePath);
-      if (!checkOutput(outFilePath)) return;
-
-      std::string tempOutFilePath = outPath + "temp_" + outFile;
+      if (!checkOutput(formatOutput(outPath + outFile))) return;
+    print(formatOutput(outPath + "temp_" + outFile), formatOutput(outPath + outFile), Colib::fileExists(formatOutput(outPath + "temp_" + outFile)));
 
     #ifdef CoMT
 
@@ -244,14 +235,15 @@ public:
 
       Colib::MT::parallelise_stream(my_producer, my_consumer);
   #else // NO DEV
-      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(tempOutFilePath);
+      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(formatOutput(outPath + "temp_" + outFile));
   #endif // DEV
 
     #else // NO CoMT
       while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(tempOutFilePath);
     #endif // CoMT
 
-      std::rename(tempOutFilePath.c_str(), outFilePath.c_str());
+      std::rename(formatOutput(outPath + "temp_" + outFile).c_str(), formatOutput(outPath + outFile).c_str());
+      m_outputFile = formatOutput(outPath + outFile);
     }
     else
     {
@@ -271,7 +263,7 @@ protected:
 
   FasterRootInterface m_reader;
 
-  std::string m_outputFile = {};
+  std::string m_outputFile;
 
   // Other convenience attributes:
   int m_maxFilesInMemory = {1};

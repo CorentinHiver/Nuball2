@@ -10,6 +10,10 @@ class TimeshiftCalculator : public RootReader
 public:
   template<class... ARGS>
   TimeshiftCalculator(ARGS &&... args) noexcept : RootReader(std::forward<ARGS>(args)...) {}
+  void setOutputName(std::string const & name)
+  {
+    m_outName = name;
+  }
   void calculate()
   {
     Label minLabel = std::numeric_limits<Label>::max(); // To determine the detectors in presence
@@ -63,8 +67,8 @@ public:
       printLoadingPercents(1_ki);
       for(int hit_i = 0; hit_i<event.mult; ++hit_i) m_histos.at(event.labels[hit_i])->Fill(event.times[hit_i]);
     }
-    // print();
-    auto outFile = TFile::Open("test.root","recreate");
+    print();
+    auto outFile = TFile::Open(m_outName.c_str(),"recreate");
     outFile -> cd();
     for (auto const & label : m_labels) if (0 < m_histos.at(label)->GetEntries()) m_histos.at(label) -> Write();
     outFile -> Close();
@@ -83,6 +87,7 @@ public:
   
 private:
   Timeshifts m_ts;
+  std::string m_outName;
   std::unordered_map<Label, TH1*> m_histos;
   std::unordered_map<Label, Time> m_binl; // Bin length in ps
   std::vector<Label> m_labels;
