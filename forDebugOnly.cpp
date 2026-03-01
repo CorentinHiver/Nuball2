@@ -1,5 +1,9 @@
 #define DEVCO
-// #define MULTITHREAD 2
+#define MULTITHREAD 2
+
+#ifdef MULTITHREAD
+  #include "lib/CoMT/CoMT.hpp"
+#endif // MULTITHREAD
 
 #include "lib/Classes/Timer.hpp"
 
@@ -20,14 +24,19 @@
 // #include "lib/RootReader/RootReader.hpp"
 // #include "lib/RootReader/TimeshiftCalculator.hpp"
 // #include "lib/FasterReader/FasterRootInterface.hpp"
+// #include "lib/FasterReader/FasterRunReader.hpp"
+#include "lib/FasterReader/FasterReader.hpp"
 // #include "lib/RootReader/RootRunReader.hpp"
-#include "lib/FasterReader/FasterRunReader.hpp"
+// #include "lib/FasterReader/RootInterface.hpp"
 // #include  "lib/Modules/CoRadware.hpp"
 // #include  "lib/Modules/Timeshiftor.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
 // #include  "lib/Classes/FilesManager.hpp"
 // #include  "lib/Classes/Detectors.hpp"
-// #include  "lib/Analyse/CloversV2.hpp"
+// #include  "lib/Analysis/Paris.hpp"
+// #include  "lib/Analysis/Phoswitch.hpp"
+// #include  "lib/Analysis/Paris.hpp"
+// #include  "lib/Analysis/Clovers.hpp"
 // #include  "lib/Classes/FlexibleHisto.hpp"
 // #include  "lib/Analyse/Chi2Minimiser.hpp"
 // #include  "lib/Classes/CalibAndScale.hpp"
@@ -42,6 +51,18 @@ using namespace Colib;
 int main(int argc, char** argv)
 {
   Timer totTimer;
+
+  print(argc, argv);
+
+  FasterReader reader;
+
+  // Paris::Cluster<26> Cluster;
+
+  // Paris::Module Module;
+
+  // Phoswitch phoswitch;
+
+  // Clovers clovers;
 
 
   // Event event;
@@ -81,13 +102,13 @@ int main(int argc, char** argv)
 
 
 
-  // FasterRootInterface::setTreeInMemory();
-  FasterRunReader reader(argc, argv);
-  reader.setEventTrigger([](Event const & event){
-    for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (NSI136::isGe[event.labels[hit_i]]) return true;
-    return false;
-  });
-  reader.run();
+  // FasterRunReader reader(argc, argv);
+  // reader.setRef(252);
+  // // reader.setEventTrigger([](Event const & event){
+  // //   for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (NSI136::isGe[event.labels[hit_i]]) return true;
+  // //   return false;
+  // // });
+  // reader.run();
   
 
 

@@ -36,18 +36,18 @@ public:
         labels -> Fill(label_i);
       }
     }
-    print();
+    // print();
     mindT*=0.9; // Get a 10% margin
     maxdT*=1.1; // Get a 10% margin
     auto const defaultBin = (maxdT - mindT)/10; // Default binning = 10ps
 
-    print(minLabel, maxLabel, mindT, maxdT);
+    // print(minLabel, maxLabel, mindT, maxdT);
 
     if (maxLabel == std::numeric_limits<Label>::min()) Colib::throw_error("No detector !!");
     for (Label label = minLabel; label <= maxLabel; ++label)
     {
-      print(label);
-      print(labels->GetBinContent(label+1), (Colib::key_found(m_binl, label)) ? ((maxdT - mindT) / m_binl.at(label)) : (defaultBin));
+      // print(label);
+      // print(labels->GetBinContent(label+1), (Colib::key_found(m_binl, label)) ? ((maxdT - mindT) / m_binl.at(label)) : (defaultBin));
       if (labels->GetBinContent(label+1) <= 1) continue;
       m_labels.push_back(label);
       
@@ -56,14 +56,14 @@ public:
       std::string name = "dT_" + label_str;
       m_histos.emplace(label, new TH1F(name.c_str(), ("dT " + label_str).c_str(), bins, mindT, maxdT));
     }
-    print();
+    // print();
     RootReader::restart();
     while(RootReader::readNext())
     {
       printLoadingPercents(1_ki);
       for(int hit_i = 0; hit_i<event.mult; ++hit_i) m_histos.at(event.labels[hit_i])->Fill(event.times[hit_i]);
     }
-    print();
+    // print();
     auto outFile = TFile::Open("test.root","recreate");
     outFile -> cd();
     for (auto const & label : m_labels) if (0 < m_histos.at(label)->GetEntries()) m_histos.at(label) -> Write();

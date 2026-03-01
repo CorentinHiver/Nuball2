@@ -519,10 +519,13 @@ public:
     // Evaluate the result of the objective function for each vertice.
     simplex.evaluate(computeFunction);
     
-    if (verbose) print();
-    if (verbose) print("initial guess : ", m_initial_vertice);
-    if (verbose) print("first simplex : ", simplex);
-    if (verbose) print();
+    if (verbose) 
+    {
+      print();
+      print("initial guess : ", m_initial_vertice);
+      print("first simplex : ", simplex);
+      print();
+    }
     g_simplex_history.push_back(simplex);
 
     // Sorts the simplex based on the evaluated value of the vertices.

@@ -115,7 +115,7 @@ public:
   // Interface with FasterRootInterface :
   void setMaxHits       (int                 nb         ) {m_reader.setMaxHits     (nb)                ;}
   void setTotMaxHits    (int                 nb         ) {m_reader.setTotMaxHits  (nb)                ;}
-  void setHitTrigger    (HitTrigger          trigger    ) {m_reader.setHitTrigger  (trigger)           ;}
+  // void setHitTrigger    (HitTrigger          trigger    ) {m_reader.setHitTrigger  (trigger)           ;}
   void setEventTrigger  (EventTrigger        trigger    ) {m_reader.setEventTrigger(trigger)           ;}
   void setTimeWindow    (Time                time_window) {m_reader.setTimeWindow  (time_window)       ;}
   void setTimeShifts    (std::string const & tsFile     ) {m_reader.loadTimeshifts (tsFile)            ;}
@@ -168,6 +168,31 @@ public:
     else                    m_reader.writeHits         (m_outputFile);
   }
 
+#if defined (MULTITHREAD) && defined (DEV)
+// Work in progress
+// Maintenant il faut inclure des pools de threads pour lire les données en serial mais traiter et écrire les données en parallèle
+  void processDataMT(std::string const & outFile)
+  {
+    if (!Colib::MT::isMasterThread()) return processData(outFile);
+
+    m_outputFile = outFile;
+    static thread_local RootInterface writer;
+    writer.setData(std::move(m_reader.data()));
+    if (m_useRF) 
+    {
+      m_outputFile = renameOutputRF(m_outputFile);
+      writer.writeEventsWithRF (m_outputFile, m_rfLabel);
+    }
+    else if (m_useRef) 
+    {
+      m_outputFile = renameOutputRef(m_outputFile, m_refLabel);
+      writer.writeEventsWithRef(m_outputFile, m_refLabel);
+    }
+    else if (m_buildEvents) writer.writeEvents       (m_outputFile);
+    else                    writer.writeHits         (m_outputFile);
+  }
+
+#endif // CoMT
 
   void run()
   {
@@ -176,19 +201,53 @@ public:
 
     if (files.empty()) Colib::throw_error("No files");
     std::string outFile;
-    std::string tempOutFile;
 
     if (m_merge)
     {
-      outFile = outPath + Colib::removeLastPart(Colib::removePath(files[0]), '_')+".root";
-      tempOutFile = outPath + "temp_" + Colib::removeLastPart(Colib::removePath(files[0]), '_')+".root";
-           if (m_useRef && !checkOutput(renameOutputRef(outFile, m_refLabel))) return;
-      else if (m_useRF  && !checkOutput(renameOutputRF(outFile))) return;
-      else if (!checkOutput(outFile)) return;
+      outFile = Colib::removeLastPart(Colib::removePath(files[0]), '_')+".root";
+      std::string outFilePath;
+      std::string tempOutFilePath = outPath + "temp_" + outFile;
+      if (m_useRef) outFilePath = renameOutputRef(outPath + outFile, m_refLabel);
+      if (m_useRF ) outFilePath = renameOutputRF (outPath + outFile);
+      else outFilePath = outPath + outFile;
+      print(outFilePath);
+      if (!checkOutput(outFilePath)) return;
 
-      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(tempOutFile);
+    #ifdef CoMT
 
-      std::rename(tempOutFile.c_str(), outFile.c_str());
+  #ifdef DEV
+      auto my_producer = [&]() mutable -> std::optional<std::vector<Hit>> {
+        if (m_reader.loadDatafiles(files, m_maxFilesInMemory)) return m_reader.data() ;
+        else return std::nullopt;
+      };
+      auto my_consumer = [&](std::vector<Hit> && data) {
+        static thread_local RootInterface writer;
+        auto thread_filename = outPath + Colib::removeExtension(outFile)+std::to_string(Colib::MT::getThreadIndex())+".root";
+        writer.setData(std::move(data));
+        if (m_useRF) 
+        {
+          thread_filename = renameOutputRF(thread_filename);
+          writer.writeEventsWithRF (thread_filename, m_rfLabel);
+        }
+        else if (m_useRef) 
+        {
+          thread_filename = renameOutputRef(thread_filename, m_refLabel);
+          writer.writeEventsWithRef(thread_filename, m_refLabel);
+        }
+        else if (m_buildEvents) writer.writeEvents       (thread_filename);
+        else                    writer.writeHits         (thread_filename);
+      };
+
+      Colib::MT::parallelise_stream(my_producer, my_consumer);
+  #else // NO DEV
+      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(tempOutFilePath);
+  #endif // DEV
+
+    #else // NO CoMT
+      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(tempOutFilePath);
+    #endif // CoMT
+
+      std::rename(tempOutFilePath.c_str(), outFilePath.c_str());
     }
     else
     {
@@ -219,75 +278,3 @@ protected:
   Label m_refLabel = 252;
   Label m_rfLabel = 251;
 };
-
-
-
-// #ifdef MULTITHREAD
-//   auto & reader = m_reader[Colib::MT::getThreadIndex()];
-// #else // !MULTITHREAD
-// #endif// MULTITHREAD
-
-
-// #ifdef MULTITHREAD  
-// // Surely not up to date !!!
-//   void run()
-//   {
-//     distributeFiles();
-//     auto const & files   = RunReader::p_distributedFiles;   // Aliasing for clarity
-//     auto const & outPath = RunReader::p_outPath; // Aliasing for clarity
-
-//     if (files.empty()) Colib::throw_error("No files");
-//     std::string outFile;
-    
-//     if (m_merge)
-//     {
-//       outFile = outPath + Colib::removeLastPart(Colib::removePath(files[0][0]), '_') + ".root";
-//       std::vector<std::string> tempFiles;
-//       for (size_t thread_i = 0; thread_i<p_nbThreads; ++thread_i) 
-//         tempFiles.push_back(Colib::appendFilename(outFile, std::to_string(thread_i)));
-
-//       if(!checkOutput(outFile)) return;
-
-//       Colib::MT::parallelise_function(p_nbThreads, [this, &files, &tempFiles]()
-//       {// Parallel section:
-//         auto const thread_i = Colib::MT::getThreadIndex();
-//         while(m_reader[thread_i].loadDatafiles(files[thread_i], m_maxFilesInMemory)) 
-//           processData(tempFiles[thread_i]);
-//       });
-
-//       Colib::pause();
-
-//       print("Merging the output");
-
-//       TFileMerger mergingFile;
-//       mergingFile.OutputFile(outFile.c_str(), "RECREATE");
-//       for (auto const & file : tempFiles) mergingFile.AddFile(file.c_str());
-
-//       if (mergingFile.Merge())
-//       {
-//         std::string rmCommand = "rm ";
-//         for (auto const & file : tempFiles) rmCommand += file+" ";
-//         gSystem->Exec(rmCommand.c_str());
-//       }
-//       else
-//       {
-//         error("In FasterRunReader::run() - in multithread mode, final merge failed (try to use hadd instead)");
-//       }
-//     }
-//     else
-//     {
-//       Colib::MT::parallelise_function(p_nbThreads, [this, &files, &outPath, &outFile]()
-//       {// Parallel section:
-//         auto const thread_i = Colib::MT::getThreadIndex();
-//         for (auto const & dataFile : files[thread_i])
-//         {
-//           outFile = outPath + Colib::removeExtension(Colib::removePath(dataFile))+".root";
-//           if(!checkOutput(outFile)) return;
-//           m_reader[thread_i].loadDatafile(dataFile);
-//           processData(outFile);
-//         }
-//       });
-//     }
-//   }
-// #else //!MULTITHREAD
-// #endif //MULTITHREAD

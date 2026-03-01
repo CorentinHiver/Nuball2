@@ -1,14 +1,13 @@
-#ifndef FASTERREADERV2_HPP
-#define FASTERREADERV2_HPP
+#pragma once
 
 #include "zlib.h"
 #include "../libCo.hpp"
 #include "../Classes/Timeshifts.hpp"
 
 struct FasterReaderConfig {
-    static constexpr int __bufferSize__ = 4096; // Size of the buffer dta is loaded into. Increase if some hits may be bigger than this (grouped mode i.e.)
-    static constexpr int __clockByteSize__ = 6; // Number of bytes coding for the clock. Should be adjusted only in case of hardware change.
-    static constexpr int __clockByte_ps__ = 2000; // Length of one byte of timestamp in ps.
+    static constexpr int _bufferSize_ = 4096; // Size of the buffer data is loaded into. Increase if some hits may be bigger than this (grouped mode i.e.)
+    static constexpr int _clockByteSize_ = 6; // Number of bytes coding for the clock. Should be adjusted only in case of hardware change.
+    static constexpr int _clockByte_ps_ = 2000; // Length of one byte of timestamp in ps.
 };
 
 template <class Config = FasterReaderConfig>
@@ -18,7 +17,7 @@ public :
   using clock_t = uint64_t;
   using time_t  = double long;
 
-  static const unsigned char FASTER_MAGIC = 0xAA;
+  static constexpr unsigned char FASTER_MAGIC = 0xAA;
 
   enum class Alias : unsigned char
   {
@@ -60,6 +59,7 @@ public :
 			error("Couldn't find "+ filename + " !");
 			return false;
 		}
+    if(gzbuffer(m_datafile, 8 * 1024 * 1024) < 0) error("Couldn't expand gz buffer for "+ filename + " !");;
 		return (m_open = true);
 	}
 
@@ -69,19 +69,63 @@ public :
     return Alias::EOF_FASTER;
   }
 
+// #ifdef DEV
+//   template<size_t _size_ = Config::_bufferSize_>
+//   class Buffer
+//   {
+//   public:
+//     Buffer() noexcept = default;
+//     void load(gzFile & datafile) 
+//     {
+//       m_cursor = 0;
+//       m_size = gzread(datafile, &m_buffer, _size_);
+//       m_endFile = gzeof(datafile);
+//       empty = false;
+//       return n;
+//     }
+//     int loadNextHeader() {
+//       if (_size_ <= m_cursor) Colib::throw_error(concat("In", m_filename, ": error with buffer loading !"));
+//     }
+//     constexpr bool loadBuffer(T & structure, int offset) noexcept {return static_cast<bool>(memcpy(&structure, m_buffer, sizeof(T)));}
+
+//     bool empty = true;
+//     bool endFile = false;
+
+//   private:
+//     bool last_read = true;
+//     char m_buffer[_size_];
+//     size_t m_cursor = 0;
+//     size_t m_size = 0;
+//   } m_buffer;
+// #endif // DEV
+
 	/// @brief Loads the data in the buffer
 	inline bool loadData() noexcept
 	{
     if (!m_open) error(m_filename, "not open");
+  #ifdef CoMT
+    if (m_cursor % int(1e6) == 0 && Colib::MT::isKilled()) return false;
+  #endif // CoMT
+  // #ifdef DEV
+
+  //   ++m_cursor;
+  //   // Load the buffer
+  //   if (buffer.empty) load(m_datafile);
+	// 	if (buffer.endFile) return false; // If at the end of the file, the previous gzread failed and gzeof is true. Return false.
+  //   buffer.loadHeader();
+    
+  // #else // NO DEV, production :
     ++m_cursor;
 		int n = gzread(m_datafile, &m_header, sizeof(m_header)) ; // Try to read the next header
 		if (gzeof(m_datafile)) return false; // If at the end of the file, the previous gzread failed and gzeof is true. Return false.
     if (n != sizeof(m_header))   error("in FasterReader::readNext("+m_filename+") : header reading " + gzlibError(n));
 		if (m_header.buff_size == 0) return true; // No data to read, according to fasterac it's not a big deal (maybe for counters ?)
+    if (Config::_bufferSize_ <= m_header.buff_size) error("in FasterReader::loadData(): buffer of size", Config::_bufferSize_, "too small for data of size", m_header.buff_size);
     n = gzread(m_datafile, &m_buffer, m_header.buff_size); // Loads the data into the buffer
     if (n != m_header.buff_size) error("in FasterReader::readNext("+m_filename+") : data dumping " + gzlibError(n));
     if (m_header.magic != FASTER_MAGIC) error("in FasterReader::readNext("+m_filename+") : magic check failed !!"+std::to_string(m_header.magic)+ "!="+std::to_string(FASTER_MAGIC));
     return true;
+  // #endif // DEV
 	}
 
 
@@ -90,7 +134,6 @@ public :
   {
     for(size_t hit_i = 0; hit_i<nbHits; ++hit_i)
       if (!loadData()) return false; // If end of file reached return false
-    m_cursor += nbHits;
     return true;
   }
 
@@ -113,8 +156,8 @@ public :
   constexpr inline clock_t getClock() const noexcept
   {
     clock_t clock = 0;
-    memcpy(&clock, m_header.clock, Config::__clockByteSize__); 
-    return clock * Config::__clockByte_ps__/256.;
+    memcpy(&clock, m_header.clock, Config::_clockByteSize_); 
+    return clock * Config::_clockByte_ps_/256.;
   }
   
   constexpr inline time_t getClock_ps() const noexcept
@@ -165,6 +208,7 @@ public :
     if (m_open) gzclose(m_datafile);
     m_cursor = 0;
     m_open = false;
+    m_file_id++; // If another file is open, its ID number will be increased
 	}
 
   void loadTimeshifts (std::string const & tsFile) {m_tshifts.load(tsFile)       ;}
@@ -309,8 +353,8 @@ protected :
   constexpr inline void extractTimestamp() noexcept
   {
     m_timestamp = 0;
-    memcpy(&m_timestamp, m_header.clock, Config::__clockByteSize__); 
-    m_timestamp *= Config::__clockByte_ps__;
+    memcpy(&m_timestamp, m_header.clock, Config::_clockByteSize_); 
+    m_timestamp *= Config::_clockByte_ps_;
     applyTimeshifts();
   }
 
@@ -369,13 +413,13 @@ protected :
 
   static constexpr std::ostream & printSaturated(std::ostream & out) noexcept { out << Colib::Color::RED << " saturated" << Colib::Color::RESET; return out;}
 
-  static constexpr long double tdc_clock_LSB_8bits = Config::__clockByte_ps__ / 256; //  sample length + 8 bits tdc -> lsb = 2000 / 2^8
-  static constexpr long double tdc_clock_LSB_6bits = Config::__clockByte_ps__ / 64 ; //  sample length + 6 bits tdc -> lsb = 2000 / 2^6
+  static constexpr long double tdc_clock_LSB_8bits = Config::_clockByte_ps_ / 256; //  sample length + 8 bits tdc -> lsb = 2000 / 2^8
+  static constexpr long double tdc_clock_LSB_6bits = Config::_clockByte_ps_ / 64 ; //  sample length + 6 bits tdc -> lsb = 2000 / 2^6
 
   struct Header {
     unsigned char  type_alias;
     unsigned char  magic     ;
-    unsigned char  clock [Config::__clockByteSize__];
+    unsigned char  clock [Config::_clockByteSize_];
     unsigned short label     ;
     unsigned short buff_size ;
     inline constexpr Alias alias() const noexcept {return static_cast<Alias>(type_alias);}
@@ -389,21 +433,29 @@ protected :
   size_t m_cursor = 0;
 
 	Header m_header;
-  char m_buffer[Config::__bufferSize__];
+
+// #ifndef DEV
+  char m_buffer[Config::_bufferSize_];
+// #endif // DEV
+
+  virtual void fullClear() noexcept
+  {
+    m_file_id = {};
+  }
+
+  size_t m_file_id = {}; // Count the number of files opened
 
 private:
 
+// #ifdef DEV
   template<class T>
   constexpr bool loadBuffer(T & structure) noexcept {return static_cast<bool>(memcpy(&structure, m_buffer, sizeof(T)));}
-  
+// #endif // DEV
+
   Timeshifts  m_tshifts;
 };
 
 using FasterReader = FasterReader_t<>;
-
-#endif //FASTERREADERV2_HPP
-
-
 
   // { // Content of one QDC
   //   signed   measure   : 31;

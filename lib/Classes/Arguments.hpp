@@ -94,7 +94,7 @@ private:
 public:
   struct MissingArg
   {
-    MissingArg() noexcept = default;
+    // MissingArg() noexcept = default;
     MissingArg(std::string const & argument, bool _print = false) : 
       message(argument+" needs at least another parameter !") 
     {

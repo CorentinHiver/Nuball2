@@ -300,6 +300,11 @@ namespace Colib
     (oss << ... << my_to_string(std::forward<ARGS>(args)));
     return oss.str();
   }
+
+  template<class... ARGS>
+  std::string concat(ARGS&&... args) {return concatenate(std::forward<ARGS>(args)...);}
+
+
   
   // /// @brief Concatenate a series of arguments into a big string (alias)
   // template<class... ARGS>
@@ -310,10 +315,6 @@ namespace Colib
   // template<class... ARGS>
   // auto concatenate_c(ARGS&&... args){return concatenate(std::forward<ARGS>(args)...).c_str();}
   
-  /// @brief concatenate string, returns a c_str (char**)
-  template<class... ARGS>
-  std::string ctcstr(ARGS&&... args) {return concatenate(std::forward<ARGS>(args)...);}
-
 }  
 
 #endif //STRING_FUNCTIONS_HPP

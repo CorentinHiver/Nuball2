@@ -79,6 +79,19 @@
 #define ROOTCpp17 defined(__CLING__) && defined(__CLING__CXX17__)
 #define ROOTCpp14 defined(__CLING__) && defined(__CLING__CXX14__)
 
+//System//
+
+bool is_SSD(const std::string& device_name = "sda") 
+{
+  std::string path = "/sys/block/" + device_name + "/queue/rotational";
+  std::ifstream file(path);
+  if (!file) return false; // Par sécurité, on assume HDD si on ne peut pas lire
+
+  int val;
+  file >> val;
+  return val == 0;
+}
+
 // Useful overload of operator<< into a std::cout stream :
 
 template <class F, class S> 
@@ -1198,34 +1211,88 @@ namespace Colib
    * constexpr auto squares = LUT<10> ([](int i) { return i*i; }); 
    * 
    */
-  #if defined(Cpp20)
+#if defined(Cpp20)
 
   template <std::size_t size, class Generator>
   constexpr auto LUT(Generator g)
   {
-      using type = std::remove_cvref_t<decltype(g(std::size_t{0}))>;
-      std::array<type, size> lut;
-      for (std::size_t i = 0; i < size; ++i) lut[i] = g(i);
-      return lut;
+    using type = std::remove_cvref_t<decltype(g(std::size_t{0}))>;
+    std::array<type, size> lut;
+    for (std::size_t i = 0; i < size; ++i) lut[i] = g(i);
+    return lut;
   }
 
-  #elif defined(Cpp17)
+#elif defined(Cpp17)
   
-    namespace detail {
-        template <class Generator, std::size_t... Is>
-        constexpr auto LUT_impl(Generator&& g, std::index_sequence<Is...>) {
-            using type = std::decay_t<decltype(g(std::size_t{0}))>;
-            // Direct initialization of the array (no default-init + assignment)
-            return std::array<type, sizeof...(Is)>{ g(Is)... };
-        }
+  namespace detail 
+  {
+    template <class Generator, std::size_t... Is>
+    constexpr auto LUT_impl(Generator&& g, std::index_sequence<Is...>) 
+    {
+      using type = std::decay_t<decltype(g(std::size_t{0}))>;
+      // Direct initialization of the array (no default-init + assignment)
+      return std::array<type, sizeof...(Is)>{ g(Is)... };
     }
+  }
 
-    template <std::size_t size, class Generator>
-    constexpr auto LUT(Generator&& g) {
-        return detail::LUT_impl(std::forward<Generator>(g), std::make_index_sequence<size>{});
-    }
-  #endif
-  
+  template <std::size_t size, class Generator>
+  constexpr auto LUT(Generator&& g) {return detail::LUT_impl(std::forward<Generator>(g), std::make_index_sequence<size>{});}
+
+#endif // defined(Cpp20) || defined(Cpp17)
+
+#if defined(Cpp20) || defined(Cpp17)
+
+  template <class T, std::size_t size>
+  constexpr size_t lutEntries(std::array<T, size> const & lut) noexcept
+  {
+    size_t ret = 0;
+    for (auto const & entry : lut) if (entry != T{}) ++ret;
+    return ret;
+  }
+
+ template <class T, std::size_t size, class... Arrays>
+  constexpr size_t lutsEntries_sum(const std::array<T, size>& first, const Arrays&... rest) noexcept
+  {
+    static_assert((std::is_same_v<Arrays, std::array<T, size>> && ...), "All LUTs must have same type and size");
+    return lutEntries(first) + (lutEntries(rest) + ... + size_t{0});
+  }
+
+  template <class T, std::size_t size, class... Arrays>
+  constexpr size_t lutsEntries_OR(const std::array<T, size>& first, const Arrays&... rest) noexcept
+  {
+    static_assert((std::is_same_v<Arrays, std::array<T, size>> && ...), "All LUTs must have same type and size");
+    size_t ret = 0;
+    for (std::size_t i = 0; i < size; ++i) if ((first[i] != T{}) || ((rest[i] != T{}) || ...)) ++ret;
+    return ret;
+  }
+
+  template <class T, std::size_t size, class... Arrays>
+  constexpr size_t lutsEntries_AND(const std::array<T, size>& first, const Arrays&... rest) noexcept
+  {
+    static_assert((std::is_same_v<Arrays, std::array<T, size>> && ...), "All LUTs must have same type and size");
+    size_t ret = 0;
+    for (std::size_t i = 0; i < size; ++i) if ((first[i] != T{}) && ((rest[i] != T{}) && ...)) ++ret;
+    return ret;
+  }
+
+  template <std::size_t size, class... Arrays>
+  constexpr bool lut_OR(std::size_t index, const std::array<bool, size>& first, const Arrays&... rest) noexcept
+  {
+    static_assert((std::is_same_v<Arrays, std::array<bool, size>> && ...), "All LUTs must be std::array<bool, size>");
+    if (index >= size) return false;
+    return first[index] || (rest[index] || ...);
+  }
+
+  template <std::size_t size, class... Arrays>
+  constexpr bool lut_AND(std::size_t index, const std::array<bool, size>& first, const Arrays&... rest) noexcept
+  {
+    static_assert((std::is_same_v<Arrays, std::array<bool, size>> && ...), "All LUTs must be std::array<bool, size>");
+    if (index >= size) return false;
+    return first[index] && (rest[index] && ...);
+  }
+
+#endif // defined(Cpp20) || defined(Cpp17)
+
   /// @brief faster binary_search than std::binary_search, works only in ordered arrays
   /// @attention Works only in ordered arrays
   template <typename T, std::size_t N>

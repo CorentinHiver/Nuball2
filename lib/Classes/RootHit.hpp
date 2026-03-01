@@ -5,9 +5,9 @@
 
 class RootHit : public Hit
 {
-#ifdef MULTITHREAD
+#ifdef CoMT
   inline static std::mutex mutex_hits;
-#endif //MULTITHREAD
+#endif // CoMT
 
 public:
   template<class... ARGS>
@@ -15,9 +15,9 @@ public:
 
   void reading(TTree * tree, std::string const & options = "")
   {
-  #ifdef MULTITHREAD
+  #ifdef CoMT
     lock_mutex lock(mutex_hits);
-  #endif //MULTITHREAD
+  #endif // CoMT
 
     if (!tree) {print("Input tree at address 0x00 !"); return;}
 
@@ -42,9 +42,9 @@ public:
 
   void writing(TTree * tree, std::string const & options = "lteqp")
   {
-  #ifdef MULTITHREAD
+  #ifdef CoMT
     lock_mutex lock(mutex_hits);
-  #endif //MULTITHREAD
+  #endif // CoMT
 
     if (!tree) {print("Input tree at address 0x00 !"); return;}
 

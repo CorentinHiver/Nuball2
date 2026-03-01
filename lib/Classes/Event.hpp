@@ -119,6 +119,7 @@ public:
   void push_back (Hit const & hit) noexcept;
   void push_front(Hit const & hit) noexcept;
 
+  inline bool operator==(Event const & other) const noexcept;
   inline Event& operator=(Hit const & hit) noexcept ;
   inline Event& operator=(Event const & evt) noexcept = default ;  
   inline Event& operator=(Event && event) noexcept = default;
@@ -202,15 +203,32 @@ private:
 inline Hit Event::operator[](int const & hit_i) const noexcept
 {// Problem about the time here ... // ENCORE LE CAS ??
   return Hit(
-    labels[hit_i], 
+    labels [hit_i], 
     stamp + times[hit_i], 
-    times [hit_i], 
-    adcs  [hit_i], 
-    nrjs  [hit_i], 
-    qdc2s [hit_i], 
-    nrj2s [hit_i], 
+    times  [hit_i], 
+    adcs   [hit_i], 
+    nrjs   [hit_i], 
+    qdc2s  [hit_i], 
+    nrj2s  [hit_i], 
     pileups[hit_i]
   );
+}
+
+inline bool Event::operator==(Event const & other) const noexcept
+{
+  if (mult != other.mult) return false;
+  if (stamp != other.stamp) return false;
+  for (int i = 0; i<mult; ++i)
+  {
+    if (labels  [i] != other.labels  [i]) return false;
+    if (times   [i] != other.times   [i]) return false;
+    if (adcs    [i] != other.adcs    [i]) return false;
+    if (nrjs    [i] != other.nrjs    [i]) return false;
+    if (qdc2s   [i] != other.qdc2s   [i]) return false;
+    if (nrj2s   [i] != other.nrj2s   [i]) return false;
+    if (pileups [i] != other.pileups [i]) return false;
+  }
+  return true;
 }
 
 inline Event& Event::operator=(Hit const & hit) noexcept

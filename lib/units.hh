@@ -7,7 +7,7 @@
 //////////////////////
 
 using Time   = int64_t;
-using Energy_t = double ;
+using Energy_t = float ;
 
 ///////////////
 // Constants //

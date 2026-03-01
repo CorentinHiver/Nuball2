@@ -106,7 +106,7 @@ bool Timeshifts::load(std::string const & filename)
 void Timeshifts::write(std::string const & fullpath, std::string const & name)
 {
   m_outPath = fullpath;
-  Colib::ensurePath(m_outPath);
+  Colib::makePath(m_outPath);
 
   std::string outData = m_outPath + name;
   Colib::setExtension(outData, ".dT");

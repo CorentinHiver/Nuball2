@@ -26,7 +26,6 @@ public:
   {
     if (args.size() == 0) {printArgs(); return false;}
 
-
     if (args == "-c")
     {
       p_calib.load(args.load<std::string>());
@@ -75,11 +74,12 @@ public:
   {
     p_outPath = path;
     if (p_outPath.back() != '/') p_outPath.push_back('/');
-    Colib::ensurePath(p_outPath, true);
+    Colib::makePath(p_outPath, true);
   }
 
   bool checkOutput(std::string const & outFile)
   {
+    print(outFile);
     if (Colib::fileExists(outFile))
     {
       if (p_overwrite) fs::remove(outFile);
@@ -105,22 +105,3 @@ protected:
   Timeshifts p_timeshift;
   Calibration p_calib;
 };
-
-// #ifdef MULTITHREAD
-//   print("-m [threads_number]     : Choose the number of threads (default 1)");
-// #endif //MULTITHREAD
-
-// #ifdef MULTITHREAD
-//   if (args == "-m")
-//   {
-//     p_nbThreads = args.load<size_t>();
-//   }
-// #endif //MULTITHREAD
-
-    
-// #ifdef MULTITHREAD
-//   inline static constexpr size_t p_nbThreads = MULTITHREAD;
-//   std::array<std::vector<std::string>, p_nbThreads> p_distributedFiles;
-// #else // !MULTITHREAD
-  // inline static constexpr size_t p_nbThreads = 1;
-// #endif // MULTITHREAD

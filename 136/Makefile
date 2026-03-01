@@ -3,7 +3,7 @@ ROOT_LIBS   := $(shell root-config --libs)
 LIBS    		:= -lz
 OPT 			  := -march=native 
 # MT := -DMULTITHREAD=4
-MT := 
+# MT := 
 TEST :=
 # TEST := -ffast-math
 

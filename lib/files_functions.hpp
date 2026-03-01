@@ -52,7 +52,8 @@ namespace Colib
     {
            if (string[0] == '.') return getPwd () + getRawPath(string.substr(1, string.size()-1));
       else if (string[0] == '~') return getHome() + getRawPath(string.substr(1, string.size()-1));
-      else error("Colib::getPath()", string, "not a path");
+      else                       return getPwd () + "/" + getRawPath(string);
+      // else error("Colib::getPath()", string, "not a path");
     }
     return getRawPath(string);
   }
@@ -188,35 +189,18 @@ namespace Colib
     return false;
   }
   
-  void makePath(std::string const & path)
+  void makePath(std::string path, bool verbose = 0)
   {
     if (path=="")
     {
       print("Colib::makePath(): No path !");
       return;
     }
-  #ifdef COMULTITHREADING
-    lock_mutex lock(MTObject::mutex);
-  #endif //COMULTITHREADING
+  #ifdef CoMT
+    lock_mutex lock(Colib::MT::mutex);
+  #endif //CoMT
+    path = getPath(path);
     if (!pathExists(path))
-    {
-      print("Creating path", path);
-      // mkdir -p to create the full path if needed (otherwise crashes if some directory of the path is missing)
-      system(("mkdir -p "+path).c_str());
-    }
-  }
-
-  void ensurePath(std::string const & path, bool verbose = 0)
-  {
-    if (path=="")
-    {
-      print("Colib::ensurePath(): No path !");
-      return;
-    }
-    #ifdef COMULTITHREADING
-      lock_mutex lock(MTObject::mutex);
-    #endif //COMULTITHREADING
-    if(!pathExists(path))
     {
       if (verbose) print("Creating path", path);
       // mkdir -p to create the full path if needed (otherwise crashes if some directory of the path is missing)
@@ -226,7 +210,7 @@ namespace Colib
 
   void fileEnsurePath(std::string const & fileName)
   {
-    ensurePath(getPath(fileName));
+    makePath(getPath(fileName));
   }
   
   int nbFilesInFolder(std::string & folder)

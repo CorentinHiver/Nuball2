@@ -1,5 +1,7 @@
 #pragma once
 
+#define CoMT
+
 #include <atomic>
 #include <vector>
 #include <thread>
@@ -9,6 +11,9 @@
 #include <csignal>
 #include <cstring>
 #include <algorithm> // For std::clamp
+#include <queue>
+#include <condition_variable>
+#include <optional>
 
 // Portability check for write/unistd
 #ifdef _WIN32
@@ -101,7 +106,7 @@ namespace Colib
       {
         if (m_killed.load()) ::_exit(42); // Second Ctrl+C: Force exit immediately
 
-        m_killed.store(true);
+        m_killed.exchange(true);
         const char* msg = "\n[MT] Ctrl+C caught. Waiting for threads to finish... Press again to force quit.\n";
         // Async-signal-safe write
         WRITE_FUNC(STDOUT_FD, msg, (unsigned int)strlen(msg));
@@ -173,22 +178,47 @@ namespace Colib
       std::cout << "\033[" << nb_threads << "A" << std::flush;
     }
 
+    // template <typename... Ts>
+    // void printsln(Ts&&... args) noexcept 
+    // {
+    //   std::lock_guard<std::mutex> lock(cout_mutex);
+    //   size_t idx = getThreadIndex();
+
+    //   if (idx > 0) std::cout << "\033[" << idx << "B";
+
+    //   std::cout << "\033[2K\r";
+
+    //   if (!isMasterThread()) std::cout << "[" << idx << "] ";
+    //   ((std::cout << std::forward<Ts>(args) << ' '), ...);
+
+    //   if (idx > 0) std::cout << "\r\033[" << idx << "A";
+    //   else std::cout << "\r";
+
+    //   std::cout << std::flush;
+    // }
+
     template <typename... Ts>
     void printsln(Ts&&... args) noexcept 
     {
       std::lock_guard<std::mutex> lock(cout_mutex);
       size_t idx = getThreadIndex();
 
+      // 1. Temporarily disable terminal line wrapping
+      std::cout << "\033[?7l";
+
       if (idx > 0) std::cout << "\033[" << idx << "B";
 
       std::cout << "\033[2K\r";
 
       if (!isMasterThread()) std::cout << "[" << idx << "] ";
-      (std::cout << ... << std::forward<Ts>(args));
+      ((std::cout << std::forward<Ts>(args) << ' '), ...);
 
       if (idx > 0) std::cout << "\r\033[" << idx << "A";
       else std::cout << "\r";
 
+      // 2. Re-enable terminal line wrapping
+      std::cout << "\033[?7h";
+      
       std::cout << std::flush;
     }
 
@@ -243,7 +273,8 @@ namespace Colib
         WRITE_FUNC(STDOUT_FD, msg, (unsigned int)strlen(msg));
         ::_exit(42);
       }
-      // reset_after_threads(s_nbThreads);
+
+      reset_after_threads(s_nbThreads);
     }
 
     /**
@@ -268,6 +299,107 @@ namespace Colib
       parallelise_function(std::forward<Func>(func), std::forward<Args>(args)...);
     }
 
+    template <typename T>
+    class SafeQueue {
+        std::queue<T> q;
+        std::mutex m;
+        std::condition_variable cv;
+        bool finished = false;
+
+    public:
+        void push(T val) {
+            {
+                std::lock_guard<std::mutex> lock(m);
+                q.push(std::move(val));
+            }
+            cv.notify_one();
+        }
+
+        void set_finished() {
+            {
+                std::lock_guard<std::mutex> lock(m);
+                finished = true;
+            }
+            cv.notify_all();
+        }
+
+        bool pop(T& out) {
+            std::unique_lock<std::mutex> lock(m);
+            cv.wait(lock, [this] { return !q.empty() || finished; });
+            if (q.empty()) return false;
+            out = std::move(q.front());
+            q.pop();
+            return true;
+        }
+    };
+
+    /**
+     * @brief Master thread produces data, Workers consume it in parallel.
+     * * @param producer A function: std::optional<T>(void). Return std::nullopt when done.
+     * @param consumer A function: void(T data).
+     */
+    template <typename Producer, typename Consumer>
+    void parallelise_stream(Producer&& producer, Consumer&& consumer)
+    {
+        // 1. Automatically deduce T from the Producer's return type
+        // We expect Producer to return std::optional<T>, so we grab the 'value_type'
+        using ReturnType = std::invoke_result_t<Producer>;
+        using T = typename ReturnType::value_type;
+
+        size_t total_threads = s_nbThreads.load();
+        
+        if (total_threads <= 1) {
+            local_thread_index = 0;
+            local_thread_role = ThreadRole::Master;
+            while (auto data = producer()) {
+                if (isKilled()) break;
+                consumer(std::move(*data));
+            }
+            return;
+        }
+
+        reserve_thread_lines(total_threads);
+        
+        SafeQueue<T> queue;
+        m_activated = true;
+        std::vector<std::thread> workers;
+        workers.reserve(total_threads - 1);
+
+        // 2. Launch Workers
+        for (size_t id = 1; id < total_threads; ++id) {
+            workers.emplace_back([&, id]() {
+                local_thread_index = id;
+                local_thread_role = ThreadRole::Worker;
+                T item;
+                while (queue.pop(item)) {
+                    if (isKilled()) break;
+                    consumer(std::move(item));
+                }
+            });
+        }
+
+        // 3. Master Thread
+        local_thread_index = 0;
+        local_thread_role = ThreadRole::Master;
+        
+        while (auto data = producer()) {
+            if (isKilled()) break;
+            queue.push(std::move(*data));
+        }
+
+        queue.set_finished();
+        for (auto& t : workers) if (t.joinable()) t.join();
+
+        m_activated = false;
+        reset_after_threads(total_threads);
+
+        if (isKilled()) {
+            const char* msg = "\n[MT] Stream interrupted.\n";
+            WRITE_FUNC(STDOUT_FD, msg, (unsigned int)strlen(msg));
+            ::_exit(42);
+        }
+    }
+
     ////////////////////
     // Helper methods //
     ////////////////////
@@ -282,8 +414,6 @@ namespace Colib
 
       ret.resize(nbThreads);
 
-      std::cout << (nbThreads) << std::endl;
-      
       const size_t total = initVec.size();
       const size_t chunk_size = total / nbThreads;
       const size_t remainder  = total % nbThreads;

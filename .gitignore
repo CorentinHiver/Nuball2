@@ -8,9 +8,6 @@
 *.ek4
 *.spe
 *.info
-executables/faster2histo
-executables/faster2root
-executables/manip2root
 exec
 # OLD_lib/
 
