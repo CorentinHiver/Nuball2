@@ -238,6 +238,9 @@ public:
     #endif // CoMT
 
       while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(formatOutput(outPath + "temp_" + outFile));
+    #ifdef CoMT
+      if (Colib::MT::isKilled()) return;
+    #endif //CoMT
       std::rename(formatOutput(outPath + "temp_" + outFile).c_str(), formatOutput(outPath + outFile).c_str());
       m_outputFile = formatOutput(outPath + outFile);
     }

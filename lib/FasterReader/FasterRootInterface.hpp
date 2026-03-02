@@ -100,7 +100,7 @@ public:
   /// @brief Loads a given number.fast files in memory.
   bool loadDatafiles(std::vector<std::string> const & filenames, size_t maxFiles = std::numeric_limits<size_t>::max())
   {
-  #if defined (CoMT) && defined(DEV) 
+  #if defined (CoMT) && !defined(DEV) 
     printsln("Worker waiting in line !");
     lock_mutex lock(read_mutex);
   #endif // CoMT but no DEV 
