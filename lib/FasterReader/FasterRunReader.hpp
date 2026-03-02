@@ -206,9 +206,9 @@ public:
       outFile = Colib::removeLastPart(Colib::removePath(files[0]), '_')+".root";
       
       if (!checkOutput(formatOutput(outPath + outFile))) return;
-    print(formatOutput(outPath + "temp_" + outFile), formatOutput(outPath + outFile), Colib::fileExists(formatOutput(outPath + "temp_" + outFile)));
 
     #ifdef CoMT
+      if (Colib::MT::isKilled()) return;
 
   #ifdef DEV
       auto my_producer = [&]() mutable -> std::optional<std::vector<Hit>> {
