@@ -66,7 +66,7 @@ public:
   {
     auto const & filenames = Colib::findFilesWildcard(files);
     if(filenames.empty()) return;
-    size_t const nbFiles = (nb<1) ? std::min(filenames.size(), size_t(nb)) : nb;
+    size_t const nbFiles = (nb<1) ? filenames.size() : std::min(filenames.size(), size_t(nb));
     for (size_t file_i = 0; file_i < nbFiles; ++file_i) p_files.push_back(filenames[file_i]);
   }
   void setOverwrite(bool b = true) {p_overwrite = b;}
