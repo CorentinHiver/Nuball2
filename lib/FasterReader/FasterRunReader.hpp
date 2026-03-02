@@ -234,14 +234,10 @@ public:
       };
 
       Colib::MT::parallelise_stream(my_producer, my_consumer);
-  #else // NO DEV
-      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(formatOutput(outPath + "temp_" + outFile));
-  #endif // DEV
-
-    #else // NO CoMT
-      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(tempOutFilePath);
+    #endif // DEV
     #endif // CoMT
 
+      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(formatOutput(outPath + "temp_" + outFile));
       std::rename(formatOutput(outPath + "temp_" + outFile).c_str(), formatOutput(outPath + outFile).c_str());
       m_outputFile = formatOutput(outPath + outFile);
     }
