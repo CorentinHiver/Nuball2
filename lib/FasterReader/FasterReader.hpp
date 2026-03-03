@@ -69,7 +69,6 @@ public :
     return Alias::EOF_FASTER;
   }
 
-
 	/// @brief Loads the data in the buffer
 	inline bool loadData() noexcept
 	{
@@ -78,28 +77,13 @@ public :
     if (m_cursor % int(1e6) == 0 && Colib::MT::isKilled()) return false;
   #endif // CoMT
   
+    if (!m_header.load(m_datafile, m_filename, m_nbErrors, m_cursor)) return false;
+    if (m_header.data_size == 0) return true; // No data to read, according to fasterac we just skip it (maybe for counters ?)
     ++m_cursor;
-		int n = gzread(m_datafile, &m_header, sizeof(m_header)) ; // Try to read the next header
-		if (gzeof(m_datafile)) return false; // If at the end of the file, the previous gzread failed and gzeof is true. Return false.
-    if (n != sizeof(m_header))   error("in FasterReader::readNext("+m_filename+") : header reading " + gzlibError(n));
-    if (m_header.magic != FASTER_MAGIC) error("in FasterReader::readNext("+m_filename+") : magic check failed !!  ("+std::to_string(m_header.magic)+ "!="+std::to_string(FASTER_MAGIC)+")");
-		if (m_header.buff_size == 0) return true; // No data to read, according to fasterac it's not a big deal (maybe for counters ?)
-    if (Config::_bufferSize_ <= m_header.buff_size) 
-    {
-      ++m_nbErrors;
-      error("in FasterReader::loadData("+m_filename+") for Hit n", m_cursor,": buffer of size", Config::_bufferSize_, "too small for data of size", m_header.buff_size);
-      char* temp_buff = new char[m_header.buff_size];
-      n = gzread(m_datafile, temp_buff, m_header.buff_size);
-      std::ofstream(m_filename+"_readError.txt", (m_nbErrors == 1) ? std::ios::out : std::ios::app) 
-        << "Hit n " << m_cursor << " buffer of size " << Config::_bufferSize_ << " too small for data of size " << m_header.buff_size << "\n";
-      if (n != m_header.buff_size) error("in FasterReader::readNext("+m_filename+") : data dumping " + gzlibError(n));
-      loadData();
-    }
-    n = gzread(m_datafile, &m_buffer, m_header.buff_size); // Loads the data into the buffer
-    if (n != m_header.buff_size) error("in FasterReader::readNext("+m_filename+") : data dumping " + gzlibError(n));
+    int n = gzread(m_datafile, &m_buffer, m_header.data_size); // Loads the data into the buffer
+    if (n != m_header.data_size) error("Event n", m_cursor, ": in FasterReader::readNext(" + m_filename + ") : data dumping " + gzlibError(n));
     return true;
 	}
-
 
   /// @brief EXPERIMENTAL skipHits may not behave as expected
   inline bool skipHits(size_t nbHits) noexcept
@@ -178,8 +162,9 @@ public :
 	inline void close() noexcept
 	{
     if (m_open) gzclose(m_datafile);
-    m_cursor = 0;
+    m_cursor = {};
     m_open = false;
+    m_nbErrors = {};
     m_file_id++; // If another file is open, its ID number will be increased
 	}
 
@@ -330,6 +315,21 @@ protected :
     applyTimeshifts();
   }
 
+  constexpr static bool sizeof_alias(Alias alias) noexcept
+  {
+    switch(alias)
+    {
+      case Alias::TRAPEZ_SPECTRO : return sizeof(TrapezSpectro);
+      case Alias::RF_DATA        : return sizeof(RFData);
+      case Alias::CRRC4_SPECTRO  : return sizeof(CRRC4Spectro);
+      case Alias::QDC_TDC_X1     : return sizeof(QDCSpectro_xn<1>);
+      case Alias::QDC_TDC_X2     : return sizeof(QDCSpectro_xn<2>);
+      case Alias::QDC_TDC_X3     : return sizeof(QDCSpectro_xn<3>);
+      case Alias::QDC_TDC_X4     : return sizeof(QDCSpectro_xn<4>);
+      default: return false;
+    }
+  }
+
   constexpr inline bool switch_aliases() noexcept
   {
     switch(m_header.alias())
@@ -393,8 +393,95 @@ protected :
     unsigned char  magic     ;
     unsigned char  clock [Config::_clockByteSize_];
     unsigned short label     ;
-    unsigned short buff_size ;
+    unsigned short data_size ;
     inline constexpr Alias alias() const noexcept {return static_cast<Alias>(type_alias);}
+    constexpr int size() const noexcept {return sizeof(*this);}
+
+    friend std::ostream& operator<<(std::ostream& out, Header const & header)
+    {
+      out << "alias: " << header.type_alias << " magic: " << header.magic << " label: " << header.label << " data_size: " << header.data_size;
+      return out;
+    }
+
+    bool load(gzFile & datafile, std::string const & filename, size_t & nbErrors, size_t const & cursor)
+    {
+		  int n = gzread(datafile, this, size()) ; // Try to read the next header
+      if (gzeof(datafile)) return false; // If at the end of the file, the previous gzread failed and gzeof is true. Return false to stop the reading.
+      if (n != size())   error("in FasterReader::readNext("+filename+") : header reading " + gzlibError(n));
+
+      if (this->magic != FASTER_MAGIC) 
+      {
+      #ifdef CoMT
+        lock_mutex lock(Colib::MT::mutex);
+      #endif //CoMT
+        // 1. Print error
+        ++nbErrors;
+        error("Event n", cursor, ": in FasterReader::readNext("+filename+") : magic check failed !!  ("+std::to_string(this->magic)+ "!="+std::to_string(FASTER_MAGIC)+")");
+        printsln("Trying to recover track ...");
+        int bytesSkipped = 0;
+        // 2. Try to recover the next header
+        bool eof = this->recoverNextHeader(datafile, bytesSkipped);
+        // 3. Log the error
+        std::ofstream(filename+"_readError.txt", (nbErrors == 1) ? std::ios::out : std::ios::app) 
+          << "Hit n " << cursor << " bytes skipped " << bytesSkipped << " : Magic check failed " << int(this->magic) << " != " << int(FASTER_MAGIC) << std::endl;
+        if (eof) return false;
+      }
+
+      if (Config::_bufferSize_ <= this->data_size) 
+      {
+      #ifdef CoMT
+        lock_mutex lock(Colib::MT::mutex);
+      #endif //CoMT
+        ++nbErrors;
+        // 1. Print error
+        auto bigSize = this->data_size;
+        error("Event n", cursor, ": in FasterReader::loadData("+filename+") for Hit n", cursor,": buffer of size", Config::_bufferSize_, "too small for data of size", bigSize);
+        // 2. Try to recover the next header
+        // 2.1. Read the supposedly next header in the next chunk of data. 
+        int n = gzread(datafile, this, size()) ; // Try to read the next header
+        if (gzeof(datafile)) return false;
+        if (n != size())   error("in FasterReader::readNext("+filename+") : header reading " + gzlibError(n));
+        int bytesSkipped = 0;
+        // 2.2. Chances are low it will actually be a header, reason why we try to get the next one
+        bool eof = this->recoverNextHeader(datafile, bytesSkipped);
+                // 3. Log the error
+        std::ofstream(filename+"_readError.txt", (nbErrors == 1) ? std::ios::out : std::ios::app) 
+          << "Hit n " << cursor << " buffer of size " << Config::_bufferSize_ << " too small for data of size " << bigSize << std::endl;
+        if (eof) return false;
+      }
+      return true;
+    }
+
+    bool recoverNextHeader(gzFile datafile, int & bytesSkipped)
+    {
+      constexpr size_t HSIZE = sizeof(Header);
+      unsigned char temp_buff[HSIZE];
+
+      memcpy(temp_buff, this, HSIZE);
+
+      // Fill initial temp_buff
+      int bytes = HSIZE;
+
+      while (true)
+      {
+        Header* candidate = reinterpret_cast<Header*>(temp_buff);
+
+        if (candidate->magic == FASTER_MAGIC && candidate->data_size > 0 && candidate->data_size == sizeof_alias(candidate->alias()))
+        {
+          *this = *candidate;
+          return true;
+        }
+
+        // Shift left by 1 byte
+        memmove(temp_buff, temp_buff + 1, HSIZE - 1);
+
+        // Read next byte
+        bytes = gzread(datafile, temp_buff + HSIZE - 1, 1);
+        if (gzeof(datafile)) return false;
+        if (bytes != 1) return bytes; // EOF
+        ++bytesSkipped;
+      }
+    }
   };
 
   unsigned long long m_timestamp;
@@ -425,7 +512,13 @@ private:
   Timeshifts  m_tshifts;
 };
 
-using FasterReader = FasterReader_t<>;
+struct FasterReaderConfigNoGroupNoTrace {
+  static constexpr int _bufferSize_ = 256; // Size of the buffer data is loaded into. Increase if some hits may be bigger than this (grouped mode i.e.)
+  static constexpr int _clockByteSize_ = 6; // Number of bytes coding for the clock. Should be adjusted only in case of hardware change.
+  static constexpr int _clockByte_ps_ = 2000; // Length of one byte of timestamp in ps.
+};
+
+using FasterReader = FasterReader_t<FasterReaderConfigNoGroupNoTrace>;
 
   // { // Content of one QDC
   //   signed   measure   : 31;

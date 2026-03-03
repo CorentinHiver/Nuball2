@@ -178,25 +178,6 @@ namespace Colib
       std::cout << "\033[" << nb_threads << "A" << std::flush;
     }
 
-    // template <typename... Ts>
-    // void printsln(Ts&&... args) noexcept 
-    // {
-    //   std::lock_guard<std::mutex> lock(cout_mutex);
-    //   size_t idx = getThreadIndex();
-
-    //   if (idx > 0) std::cout << "\033[" << idx << "B";
-
-    //   std::cout << "\033[2K\r";
-
-    //   if (!isMasterThread()) std::cout << "[" << idx << "] ";
-    //   ((std::cout << std::forward<Ts>(args) << ' '), ...);
-
-    //   if (idx > 0) std::cout << "\r\033[" << idx << "A";
-    //   else std::cout << "\r";
-
-    //   std::cout << std::flush;
-    // }
-
     template <typename... Ts>
     void printsln(Ts&&... args) noexcept 
     {
