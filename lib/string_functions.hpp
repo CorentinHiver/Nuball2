@@ -26,6 +26,10 @@ namespace Colib
   /// @brief Returns the string to the left of the last occurrence of sep in the string
   std::string removeLastPart  (std::string const & string, char const & sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
 
+  /// @brief Returns the string without the firsdt character
+  std::string popFront(std::string const & string) { return (string.substr(1, string.size()-1));}
+  std::string pop(std::string const & string) { return (string.substr(1, string.size()-1));}
+
   std::string removeAll(std::string string, std::string const & other) 
   {
     size_t pos;
@@ -108,13 +112,17 @@ namespace Colib
     return ostring;
   }
 
-  /**
-   * @brief Removes the first character of a string
-   * 
-   * @attention Careful, time complexity makes it really heavy on big string
-   */
-  std::string & pop_front(std::string & string) {if (string.size() > 0) string.erase(0,1); return string;}
+  /// @brief Removes the first character of a string
+  std::string pop_front(std::string const & string) {return string.substr(1);}
+  
+  /// @brief Removes the first character of a string
+  std::string pop_back(std::string const & string) {return string.substr(0,string.size()-1);}
 
+  /// @brief Removes the first character of a string
+  std::string & pop_front(std::string & string) {if (0 < string.size()) string.erase(0,1); return string;}
+  
+  /// @brief Removes the first character of a string
+  std::string & pop_back(std::string & string) {if (0 < string.size()) string.erase(string.size()-1,1); return string;}
 
   /// @brief Replace all the commas of a std::string with dots
   std::string rpCommaWDots(std::string str)

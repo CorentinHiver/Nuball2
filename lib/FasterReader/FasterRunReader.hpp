@@ -18,6 +18,7 @@ public:
     print();  
     // print("-a [alignement_file]        : Loads the run-by-run calibration correction file");
     // print("-n       [hits_number]        : Choose the number of hits to read inside a file (default: all)");
+    print("-i --in-memory                : [0;1], default 1: The ROOT file is written in memory then dumped, or written little by little.");
     print("-nf      [nb_files_in_memory] : In merge mode : sets the maximum number of files to load at once");
     print("--hits                        : Do not perform event building (skipped in --ref and --rf modes)");
     print("--merge                       : merge the outputs");
@@ -40,38 +41,15 @@ public:
   
       else while(args.next()) if (!RunReader::processArg(args))
       {
-             if (args == "-nf")
-        {
-          setMaxFilesMemory(args.load<int>());
-        }
-        else if (args == "--hits")
-        {
-          buildEvents(false);
-        }
-        else if (args == "--merge")
-        {
-          setMerge(true);
-        }
-        else if (args == "--rf")
-        {
-          setRF();
-        }
-        else if (args == "--rf-label")
-        {
-          setRF(args.load<Label>());
-        }
-        else if (args == "--ref")
-        {
-          setRef(args.load<Label>());
-        }
-        else if (args == "-T")
-        {
-          setTimeWindow(static_cast<Time>(args.load<double>()));
-        }
-        else
-        {
-          Colib::throw_error(args.getArg() + " unkown parameter");
-        }
+             if (args == "-nf"       ) setMaxFilesMemory(args.load<int>());
+        else if (args == "--hits"    ) buildEvents(false);
+        else if (args == "--merge"   ) setMerge(true);
+        else if (args == "--rf"      ) setRF();
+        else if (args == "--rf-label") setRF(args.load<Label>());
+        else if (args == "--ref"     ) setRef(args.load<Label>());
+        else if (args == "-T"        ) setTimeWindow(static_cast<Time>(args.load<double>()));
+        else if (args == "-i" || args == "in-memory") FasterRootInterface::setTreeInMemory(true);
+        else Colib::throw_error(args.getArg() + " unkown parameter");
       }
     }
     catch(Arguments::MissingArg & error)
@@ -248,7 +226,7 @@ public:
     {
       for (auto const & dataFile : files)
       {
-        outFile = outPath + Colib::removeExtension(Colib::removePath(dataFile))+".root";
+        outFile = outPath + Colib::removeLastPart(Colib::removePath(files[0]), '_')+".root";
         if(!checkOutput(outFile)) return;
         m_reader.loadDatafile(dataFile);
         processData(outFile);
@@ -257,14 +235,19 @@ public:
   }
 
   auto getOutputFilename() const {return (m_merge) ? m_outputFile : "No merged output";}
+  void addFileBlacklist(std::string const & file)
+  {
+    m_fileBlacklist.push_back(file);
+  }
 
 protected:
 
   FasterRootInterface m_reader;
 
   std::string m_outputFile;
-
+  
   // Other convenience attributes:
+  std::vector<std::string> m_fileBlacklist;
   int m_maxFilesInMemory = {1};
   bool m_buildEvents = true;
   bool m_merge = false;

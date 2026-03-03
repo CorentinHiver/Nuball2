@@ -97,7 +97,7 @@ public:
 protected:
   
   std::vector<std::string> p_files;
-  std::string p_outPath = Colib::getPwd();
+  std::string p_outPath = Colib::getPwdPath();
   bool p_overwrite = false;
   uint64_t p_nbMaxHits = -1;
   uint64_t p_nbTotMaxHits = Colib::big<uint64_t>();

@@ -34,7 +34,7 @@
 //----------------------------------------------------//
 //       General files and folders manipulations      //
 //----------------------------------------------------//
-namespace Colib
+namespace Colib 
 {
   std::string removeExtension (std::string const & string) { return (string.substr(0, string.find_last_of(".")  ));}
   std::string extension       (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
@@ -44,16 +44,21 @@ namespace Colib
   std::string getShortname    (std::string const & string) { return            removePath(removeExtension(string));}
   std::string getRawPath      (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));}
 
+  /// @brief Return /home/usr
   std::string getHome() {return std::getenv("HOME");}
+  /// @brief Return /path/to/current/folder
   std::string getPwd () {return std::getenv("PWD" );}
+  /// @brief Return /home/usr/
+  std::string getHomePath() {return std::getenv("HOME")+std::string("/");}
+  /// @brief Return /path/to/current/folder/
+  std::string getPwdPath () {return std::getenv("PWD" )+std::string("/");}
   std::string getPath(std::string const & string) 
   { 
     if (string[0] != '/')
     {
-           if (string[0] == '.') return getPwd () + getRawPath(string.substr(1, string.size()-1));
-      else if (string[0] == '~') return getHome() + getRawPath(string.substr(1, string.size()-1));
-      else                       return getPwd () + "/" + getRawPath(string);
-      // else error("Colib::getPath()", string, "not a path");
+      if (string[0] == '.')  return getPwd () + getRawPath(popFront(string));
+      else if (string[0] == '~') return getHome() + getRawPath(pop_front(string));
+      else                       return getPwd () + getRawPath(string);
     }
     return getRawPath(string);
   }

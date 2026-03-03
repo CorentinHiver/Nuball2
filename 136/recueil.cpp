@@ -53,6 +53,7 @@ int main(int argc, char** argv)
         {
           // if (run == "/home/faster/nuball2/N-SI-136/run_39.fast") continue;
           FasterRunReader reader;
+          reader.addFileBlacklist("/home/faster/nuball2/N-SI-136/run_39.fast/run_39_0014.fast");
           reader.addFiles(run+"/*");
           reader.setOutputPath(outputPath+"ref252/");
           reader.setMaxFilesMemory((getHome() == "/home/faster") ? 5 : 2);

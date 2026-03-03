@@ -419,7 +419,27 @@ std::vector<T>& fillSorted(std::vector<T> & to_fill, std::vector<T> const & fill
     return to_fill;
   }
 
-  // Coder la meme chose pour un deque car c'est plus efficace !
+  /// @brief Removes instances of blacklisted elements in a list. Elements must have a comparison operator ==.
+  /// @return The number of removed entries
+  template <class T>
+  bool removeBlacklist(std::vector<T> & list, std::vector<T> const & blacklist)
+  {
+    std::vector<int> ids;
+    int offset = 0;
+    bool isfound = false;
+    for (int i = 0; i<list.size(); ++i) 
+    {
+      isfound = false;
+      for (auto const & b : blacklist) if (found(list, b)) 
+      {
+        ++offset;
+        isfound = true;
+        break;
+      }
+      if (isfound) continue;
+      if (0 < offset) list[i] = list[i+offset];
+    }
+  }
  
   template <class T>
   void invert(std::vector<T> & vector)

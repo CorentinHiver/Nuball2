@@ -69,35 +69,6 @@ public :
     return Alias::EOF_FASTER;
   }
 
-// #ifdef DEV
-//   template<size_t _size_ = Config::_bufferSize_>
-//   class Buffer
-//   {
-//   public:
-//     Buffer() noexcept = default;
-//     void load(gzFile & datafile) 
-//     {
-//       m_cursor = 0;
-//       m_size = gzread(datafile, &m_buffer, _size_);
-//       m_endFile = gzeof(datafile);
-//       empty = false;
-//       return n;
-//     }
-//     int loadNextHeader() {
-//       if (_size_ <= m_cursor) Colib::throw_error(concat("In", m_filename, ": error with buffer loading !"));
-//     }
-//     constexpr bool loadBuffer(T & structure, int offset) noexcept {return static_cast<bool>(memcpy(&structure, m_buffer, sizeof(T)));}
-
-//     bool empty = true;
-//     bool endFile = false;
-
-//   private:
-//     bool last_read = true;
-//     char m_buffer[_size_];
-//     size_t m_cursor = 0;
-//     size_t m_size = 0;
-//   } m_buffer;
-// #endif // DEV
 
 	/// @brief Loads the data in the buffer
 	inline bool loadData() noexcept
@@ -106,26 +77,27 @@ public :
   #ifdef CoMT
     if (m_cursor % int(1e6) == 0 && Colib::MT::isKilled()) return false;
   #endif // CoMT
-  // #ifdef DEV
-
-  //   ++m_cursor;
-  //   // Load the buffer
-  //   if (buffer.empty) load(m_datafile);
-	// 	if (buffer.endFile) return false; // If at the end of the file, the previous gzread failed and gzeof is true. Return false.
-  //   buffer.loadHeader();
-    
-  // #else // NO DEV, production :
+  
     ++m_cursor;
 		int n = gzread(m_datafile, &m_header, sizeof(m_header)) ; // Try to read the next header
 		if (gzeof(m_datafile)) return false; // If at the end of the file, the previous gzread failed and gzeof is true. Return false.
     if (n != sizeof(m_header))   error("in FasterReader::readNext("+m_filename+") : header reading " + gzlibError(n));
+    if (m_header.magic != FASTER_MAGIC) error("in FasterReader::readNext("+m_filename+") : magic check failed !!  ("+std::to_string(m_header.magic)+ "!="+std::to_string(FASTER_MAGIC)+")");
 		if (m_header.buff_size == 0) return true; // No data to read, according to fasterac it's not a big deal (maybe for counters ?)
-    if (Config::_bufferSize_ <= m_header.buff_size) error("in FasterReader::loadData(): buffer of size", Config::_bufferSize_, "too small for data of size", m_header.buff_size);
+    if (Config::_bufferSize_ <= m_header.buff_size) 
+    {
+      ++m_nbErrors;
+      error("in FasterReader::loadData("+m_filename+") for Hit n", m_cursor,": buffer of size", Config::_bufferSize_, "too small for data of size", m_header.buff_size);
+      char* temp_buff = new char[m_header.buff_size];
+      n = gzread(m_datafile, temp_buff, m_header.buff_size);
+      std::ofstream(m_filename+"_readError.txt", (m_nbErrors == 1) ? std::ios::out : std::ios::app) 
+        << "Hit n " << m_cursor << " buffer of size " << Config::_bufferSize_ << " too small for data of size " << m_header.buff_size << "\n";
+      if (n != m_header.buff_size) error("in FasterReader::readNext("+m_filename+") : data dumping " + gzlibError(n));
+      loadData();
+    }
     n = gzread(m_datafile, &m_buffer, m_header.buff_size); // Loads the data into the buffer
     if (n != m_header.buff_size) error("in FasterReader::readNext("+m_filename+") : data dumping " + gzlibError(n));
-    if (m_header.magic != FASTER_MAGIC) error("in FasterReader::readNext("+m_filename+") : magic check failed !!"+std::to_string(m_header.magic)+ "!="+std::to_string(FASTER_MAGIC));
     return true;
-  // #endif // DEV
 	}
 
 
@@ -221,7 +193,7 @@ public :
 
   struct DataStructure{}; // Not used, for extra readability only
 
-  struct TrapezSpectro : public DataStructure
+  struct TrapezSpectro final : public DataStructure
   {//  from Trapezoidal_Spectro_Caras or Trapezoidal_Spectro_Mosahr
     signed   measure   : 23;
     signed   tdc       :  6;
@@ -242,7 +214,7 @@ public :
     }
   };
 
-  struct RFData : public DataStructure
+  struct RFData final  : public DataStructure
   {
     unsigned period    : 31;
     unsigned saturated :  1;
@@ -261,7 +233,7 @@ public :
     }
   };
 
-  struct CRRC4Spectro : public DataStructure
+  struct CRRC4Spectro final  : public DataStructure
   { //  from CRRC4_Spectro_Caras or CRRC4_Spectro_Mosahr
     unsigned pad1      : 10;
     signed   delta_t   : 16; // position of max relative to trigger (ns)
@@ -288,7 +260,7 @@ public :
   };
 
   template<int n>
-  struct QDCSpectro_xn : public DataStructure
+  struct QDCSpectro_xn final  : public DataStructure
   { 
     QDCSpectro qdc[n];
     int32_t tdc = 0;
@@ -434,9 +406,7 @@ protected :
 
 	Header m_header;
 
-// #ifndef DEV
   char m_buffer[Config::_bufferSize_];
-// #endif // DEV
 
   virtual void fullClear() noexcept
   {
@@ -447,10 +417,10 @@ protected :
 
 private:
 
-// #ifdef DEV
+  size_t m_nbErrors = {};
+
   template<class T>
   constexpr bool loadBuffer(T & structure) noexcept {return static_cast<bool>(memcpy(&structure, m_buffer, sizeof(T)));}
-// #endif // DEV
 
   Timeshifts  m_tshifts;
 };
@@ -514,3 +484,40 @@ using FasterReader = FasterReader_t<>;
   //     else static_assert(n >= 1 && n <= 4, "Invalid QDC index"); // To check
   //   }
   // };
+
+
+
+  
+//   template<size_t _size_ = Config::_bufferSize_>
+//   class Buffer
+//   {
+//   public:
+//     Buffer() noexcept = default;
+//     void load(gzFile & datafile) 
+//     {
+//       m_cursor = 0;
+//       m_size = gzread(datafile, &m_buffer, _size_);
+//       m_endFile = gzeof(datafile);
+//       empty = false;
+//       return n;
+//     }
+//     int loadNextHeader() {
+//       if (_size_ <= m_cursor) Colib::throw_error(concat("In", m_filename, ": error with buffer loading !"));
+//     }
+//     constexpr bool loadBuffer(T & structure, int offset) noexcept {return static_cast<bool>(memcpy(&structure, m_buffer, sizeof(T)));}
+
+//     bool empty = true;
+//     bool endFile = false;
+
+//   private:
+//     bool last_read = true;
+//     char m_buffer[_size_];
+//     size_t m_cursor = 0;
+//     size_t m_size = 0;
+//   } m_buffer;
+
+  //   ++m_cursor;
+  //   // Load the buffer
+  //   if (buffer.empty) load(m_datafile);
+	// 	if (buffer.endFile) return false; // If at the end of the file, the previous gzread failed and gzeof is true. Return false.
+  //   buffer.loadHeader();
