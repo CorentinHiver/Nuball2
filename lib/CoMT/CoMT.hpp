@@ -102,14 +102,22 @@ namespace Colib
     
     void signalHandler(int signal) noexcept
     {
-      if (signal == SIGINT)
+      if (m_activated.load())
       {
-        if (m_killed.load()) ::_exit(42); // Second Ctrl+C: Force exit immediately
-
-        m_killed.exchange(true);
-        const char* msg = "\n[MT] Ctrl+C caught. Waiting for threads to finish... Press again to force quit.\n";
-        // Async-signal-safe write
-        WRITE_FUNC(STDOUT_FD, msg, (unsigned int)strlen(msg));
+        if (signal == SIGINT)
+        {
+          if (m_killed.load()) ::_exit(42); // Second Ctrl+C: Force exit immediately
+  
+          m_killed.exchange(true);
+          const char* msg = "\n[MT] Ctrl+C caught. Waiting for threads to finish... Press again to force quit.\n";
+          // Async-signal-safe write
+          WRITE_FUNC(STDOUT_FD, msg, (unsigned int)strlen(msg));
+        }
+      }
+      else 
+      {
+        std::cout << std::endl;
+        ::_exit(42); // If not in multithread mode : immediate exit
       }
     }
 
@@ -223,7 +231,7 @@ namespace Colib
         return;
       }
 
-      m_activated = true;
+      m_activated.exchange(true);
       std::vector<std::thread> workers;
       workers.reserve(s_nbThreads);
 
@@ -245,7 +253,7 @@ namespace Colib
       for (auto& t : workers) if (t.joinable()) t.join();
 
       local_thread_role  = ThreadRole::Master;
-      m_activated = false;
+      m_activated.exchange(false);
 
       // 4. Handle Exit Request
       if (isKilled())

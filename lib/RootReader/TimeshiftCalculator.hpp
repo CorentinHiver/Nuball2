@@ -14,27 +14,27 @@ public:
 
   void setOutputName(std::string const & name) {m_outName = name;}
 
-  void makeHisto(Label refLabel = 252, bool _calculate = true, std::pair<ADC, ADC> ref_adc_gate = {0, std::numeric_limits<ADC>::max()})
+  void makeHisto(Label refLabel = 252, bool _calculate = true, std::string outPath = "./", std::string output = "auto.dT")//, std::pair<ADC, ADC> ref_adc_gate = {0, std::numeric_limits<ADC>::max()})
   {
     TH1::AddDirectory(kFALSE);
-    ref_adc_gate=ref_adc_gate;
+    // ref_adc_gate=ref_adc_gate;
     Label minLabel = std::numeric_limits<Label>::max(); // To determine the detectors in presence
     Label maxLabel = std::numeric_limits<Label>::min(); // To determine the detectors in presence
     Time  mindT    = std::numeric_limits<Label>::max(); // To determine the coincidence time window
     Time  maxdT    = std::numeric_limits<Label>::min(); // To determine the coincidence time window
     auto labels = new TH1F("label", "label", 1_Mi, 0, 1_M);
 
-    RootEvent event;
-    event.reading(m_tree, "mlT");
+    // RootEvent event;
+    // event.reading(m_tree, "mlT");
     while(RootReader::readNext()) 
     {
       // The maximum number of hits to read is 1e7. We apply a 10% margin anyway, so 1e7 hits should be large enough to cover the full range of dT
       if (int(1e7) < RootReader::getCursor()) break; 
-      for(int hit_i = 0; hit_i < event.mult; ++hit_i)
+      for(int hit_i = 0; hit_i < m_event.mult; ++hit_i)
       {
-        printLoadingPercents(10);
-        auto const & label_i = event.labels[hit_i];
-        auto const & time_i  = event.times [hit_i];
+        printLoadingPercents();
+        auto const & label_i = m_event.labels[hit_i];
+        auto const & time_i  = m_event.times [hit_i];
         minLabel = std::min(minLabel, label_i);
         maxLabel = std::max(maxLabel, label_i);
         mindT    = std::min(mindT   , time_i );
@@ -60,28 +60,25 @@ public:
       std::string name = "dT_" + label_str;
       m_histos.emplace(label, new TH1F(name.c_str(), ("dT " + label_str).c_str(), bins, mindT, maxdT));
     }
-    print(m_labels);
+    // print(m_labels);
     // for (auto const & histo: m_histos) 
     // for (auto const & label : m_labels) if (!Colib::key_found(m_histos, label)) print(label);
     // print();
     RootReader::restart();
     while(RootReader::readNext())
     {
-      printLoadingPercents(1_ki);
-      // bool gated = false;
-      // for(int hit_i = 0; hit_i<event.mult && !gated; ++hit_i)
-      // {
-      //   if ( event.labels[hit_i] == refLabel )
-      //   //   && ref_adc_gate.first < event.adc[hit_i] 
-      //   //   &&                      event.adc[hit_i] < ref_adc_gate.first)
-      //     {
-      //       gated = true;
-      //       break;
-      //     }
-      // }
-      // if (gated) 
-      for(int hit_i = 0; hit_i<event.mult; ++hit_i)
-        m_histos.at(event.labels[hit_i])->Fill(event.times[hit_i]);
+      printLoadingPercents();
+      bool gated = false;
+      for(int hit_i = 0; hit_i<m_event.mult; ++hit_i)
+        if ( m_event.labels[hit_i] == refLabel )
+        //   && ref_adc_gate.first < m_event.adc[hit_i] 
+        //   &&                      m_event.adc[hit_i] < ref_adc_gate.first)
+        {
+          gated = true;
+          break;
+        }
+      if (gated) for(int hit_i = 0; hit_i<m_event.mult; ++hit_i)
+        m_histos.at(m_event.labels[hit_i])->Fill(m_event.times[hit_i]);
     }
     RootReader::m_file->Close();
     print();
@@ -99,7 +96,7 @@ public:
       }
     }
     outFile -> Close();
-    ts.write("./", "test.dT");
+    ts.write(outPath, output);
   }
 
   static Time calculate_dT(TH1* histo)

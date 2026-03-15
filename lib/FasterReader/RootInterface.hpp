@@ -358,6 +358,7 @@ public:
   // ---------- //
   // Parameters //
   // ---------- //
+  
   constexpr void printEventsProgress(size_t cursor, size_t freq = 1_Mi) const noexcept
   {
     if (m_hits.size() != 0 && (cursor % freq == 0 || cursor+1 == m_eventIDbuffer.size()))

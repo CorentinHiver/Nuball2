@@ -138,7 +138,6 @@ public:
     return out;
   }
 
-
 private:
   Label static inline thread_local g_index = 0;
   Label mutable m_index;

@@ -20,12 +20,12 @@ public:
     if (!fileOk()) Colib::throw_error("'"+filename+"' not available !");
     m_tree = m_file->Get<TTree>("Nuball2");
     if (!treeOk()) Colib::throw_error(filename+" has no Nuball2 tree available !");
-    if(std::string(m_tree -> GetTitle()) == "Nuball2_Hits") 
+    if(Colib::found(m_tree -> GetTitle(), "Hits"))
     {
       m_hit.reading(m_tree);
       m_useHits = true;
     }
-    else if(std::string(m_tree -> GetTitle()) == "Nuball2_Events") 
+    else if(Colib::found(m_tree -> GetTitle(), "Events"))
     {
       m_event.reading(m_tree);
       m_useEvents = true;
@@ -48,6 +48,14 @@ public:
 
   auto const & getCursor() const { return m_cursor;}
 
+  bool const & useHits  () const {return m_useHits  ;}
+  bool const & useEvents() const {return m_useEvents;}
+
+  auto const & getHit  () const {return m_hit  ;}
+  auto &       getHit  ()       {return m_hit  ;}
+  auto const & getEvent() const {return m_event;}
+  auto &       getEvent()       {return m_event;}
+
   friend std::ostream& operator<<(std::ostream& out, RootReader const & reader)
   {
     if (reader.useHits()) out << reader.getHit();
@@ -55,22 +63,17 @@ public:
     return out;
   }
 
-  bool const & useHits  () const {return m_useHits  ;}
-  bool const & useEvents() const {return m_useEvents;}
-
-  Hit   const & getHit  () const {return m_hit  ;}
-  Event const & getEvent() const {return m_event;}
-
   bool treeOk() const {return (m_tree && !m_tree->IsZombie());}
   bool fileOk() const {return (m_file && !m_file->IsZombie());}
 
   auto nbEntries() const noexcept {return (treeOk()) ? m_maxEntries : 0;}
   void setMaxHits(ULong64_t nb) {m_maxEntries = nb;}
 
-  void printLoadingPercents(size_t freq = 1_Mi) const 
+  void printLoadingPercents() const 
   {
-    if ((m_cursor == nbEntries()) || (m_cursor % (nbEntries()/freq) == 0)) 
-      printsln(Colib::nicer_double(m_cursor), Colib::percent(m_cursor, ULong64_cast(m_tree->GetEntries())), "     ");
+    if (nbEntries() == 0) printsln("No entries ...");
+    else if ((m_cursor == nbEntries()) || nbEntries()<100 || (m_cursor % (nbEntries()/100) == 0)) 
+      printsln(Colib::nicer_double(m_cursor), Colib::percent(m_cursor, ULong64_cast(nbEntries())), "     ");
   }
 
 protected:

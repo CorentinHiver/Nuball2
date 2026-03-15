@@ -19,8 +19,11 @@ int main(int argc, char** argv)
     print("Usage :");
     return 0;
   }
-  static string dataPath = "~/nuball2/N-SI-136/";
-  static string outputPath = "~/nuball2/N-SI-136_root/";
+  static string data = "~/nuball2/N-SI-136/";
+  static string output = "~/nuball2/N-SI-136_root/";
+  auto const dataPath = Colib::getPath(data); 
+  auto const outputPath = Colib::getPath(output); 
+  auto const tsPath = outputPath+"timeshifts/";
 
   auto dTbinning = [](Label label) -> Time {
                  if (NSI136::isGe [label])   return   2_ns;
@@ -68,20 +71,47 @@ int main(int argc, char** argv)
         });
       #endif // CoMT
 
-        for (auto const & dTfilename : findFilesWildcard(outputPath+"ref252/*_ref_252.root"))
+        for (auto const & gatedRootFile : findFilesWildcard(outputPath+"ref252/*_ref_252.root"))
         {
-          TimeshiftCalculator ts_cal(dTfilename);
-          ts_cal.makeHisto(252, true);
-          // ts_cal.setOutputName(Colib::appendFilename(dTfilename, "_dT"));
-          // ts_cal.setBins<NSI136::maxLabel>(dTbinning);
-          // ts_cal.calculate();
+          TimeshiftCalculator ts_cal(gatedRootFile);
+          std::string tsFilename = Colib::removePath(Colib::setExtension(Colib::removeAll(gatedRootFile, "_ref_252"), "dT"));
+          ts_cal.makeHisto(252, true, tsPath, tsFilename);
         }
       }
       else if (sub_arg == "-f")
       {
-        TimeshiftCalculator ts_cal(args.load<string>());
+        auto const & gatedRootFile = args.load<string>();
+        TimeshiftCalculator ts_cal(gatedRootFile);
+        std::string tsFilename = Colib::removePath(Colib::setExtension(Colib::removeAll(gatedRootFile, "_ref_252"), "dT"));
+        ts_cal.makeHisto(252, true, tsPath, tsFilename);
         // ts_cal.setBins<NSI136::maxLabel>(dTbinning);
         // ts_cal.calculate();
+      }
+
+      else if (sub_arg == "check")
+      {
+        print("Testing timeshifts");
+        for (auto const & gatedRootFile : findFilesWildcard(outputPath+"ref252/*_ref_252.root"))
+        {
+          std::string tsFilename = tsPath+Colib::removePath(Colib::setExtension(Colib::removeAll(gatedRootFile, "_ref_252"), "dT"));
+          Timeshifts ts; ts.load(tsFilename);
+          auto outputPathCorr = Colib::getPath(outputPath+"tcorr/");
+          std::string outputCorr = outputPathCorr + Colib::removePath(Colib::removeAll(gatedRootFile, "_ref_252"));
+          RootInterface interface;
+          interface.openRootFile(outputCorr);
+          interface.initializeTree("Nuball2", "Nuball2_Events_ts_corr");
+          RootReader reader(gatedRootFile);
+          reader.getEvent().writing(interface.getTree());
+          while(reader.readNext())
+          {
+            reader.printLoadingPercents();
+            auto & event = reader.getEvent();
+            for (int i = 0; i<event.mult; ++i) event.times[i] += ts[event.labels[i]];
+            interface.getTree()->Fill();
+          }
+          interface.writeTree();
+          print(outputCorr, "written");
+        }
       }
     }
     else if (args == "--fast" || args == "--faster-reader")
@@ -93,11 +123,11 @@ int main(int argc, char** argv)
     {
       auto sub_arg = args.load<string>();
       vector<string> runs(findFilesWildcard(dataPath+"run*.fast"));
-      if (sub_arg == "U")
-      {
-        vector<string> real_runs;
-        // for (auto const & run: runs) if ()
-      }
+      // if (sub_arg == "U")
+      // {
+      //   vector<string> real_runs;
+      //   // for (auto const & run: runs) if ()
+      // }
     }
     else if (args == "--comp" || args == "--compare")
     {

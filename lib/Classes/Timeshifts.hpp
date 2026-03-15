@@ -120,7 +120,7 @@ void Timeshifts::write(std::string const & fullpath, std::string const & name)
   std::string outData = m_outPath + name;
   Colib::setExtension(outData, ".dT");
 
-  std::ofstream outTimeshiftsFile(outData, std::ios::out);
+  std::ofstream outTimeshiftsFile(outData);
   
   for (size_t label = 0; label<m_timeshifts.size(); label++)
   {

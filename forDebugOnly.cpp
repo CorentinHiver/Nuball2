@@ -22,7 +22,7 @@
 // #include "lib/MTObjects/MultiHist.hpp"
 // #include "lib/libRootHeader.hpp"
 // #include "lib/RootReader/RootReader.hpp"
-#include "lib/RootReader/TimeshiftCalculator.hpp"
+// #include "lib/RootReader/TimeshiftCalculator.hpp"
 // #include "lib/FasterReader/FasterRootInterface.hpp"
 // #include "lib/FasterReader/FasterRunReader.hpp"
 // #include "lib/FasterReader/FasterReader_fast.hpp"
@@ -33,9 +33,8 @@
 // #include  "lib/Classes/CalibAndScale.hpp"
 // #include  "lib/Classes/FilesManager.hpp"
 // #include  "lib/Classes/Detectors.hpp"
-// #include  "lib/Analysis/Paris.hpp"
+#include  "lib/Analysis/Paris.hpp"
 // #include  "lib/Analysis/Phoswitch.hpp"
-// #include  "lib/Analysis/Paris.hpp"
 // #include  "lib/Analysis/Clovers.hpp"
 // #include  "lib/Classes/FlexibleHisto.hpp"
 // #include  "lib/Analyse/Chi2Minimiser.hpp"
@@ -54,8 +53,8 @@ int main(int argc, char** argv)
 
   print(argc, argv);
 
-  TimeshiftCalculator calc("/home/corentin/nuball2/N-SI-136_root/ref252/60Co_center_after_ref_252.root");
-  calc.makeHisto(252, true);
+  // TimeshiftCalculator calc("/home/corentin/nuball2/N-SI-136_root/ref252/60Co_center_after_ref_252.root");
+  // calc.makeHisto(252, true);
 
   // TimeshiftCalculator::calculate("/home/corentin/nuball2/N-SI-136_root/ref252/60Co_center_after_ref_252.root");
 
@@ -71,6 +70,8 @@ int main(int argc, char** argv)
 
   // FasterReader reader;
 
+  NSI136::FrontCluster front;
+  
   // Paris::Cluster<26> Cluster;
 
   // Paris::Module Module;

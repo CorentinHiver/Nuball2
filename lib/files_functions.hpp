@@ -54,13 +54,10 @@ namespace Colib
   std::string getPwdPath () {return std::getenv("PWD" )+std::string("/");}
   std::string getPath(std::string const & string) 
   { 
-    if (string[0] != '/')
-    {
-      if (string[0] == '.')  return getPwd () + getRawPath(popFront(string));
-      else if (string[0] == '~') return getHome() + getRawPath(pop_front(string));
-      else                       return getPwd () + getRawPath(string);
-    }
-    return getRawPath(string);
+         if (string[0] == '/') return getRawPath(string);
+    else if (string[0] == '.') return getPwd () + getRawPath(popFront(string));
+    else if (string[0] == '~') return getHome() + getRawPath(pop_front(string));
+    else                       return getPwd () + getRawPath(string);
   }
   
   std::string setExtension(std::string const & string, std::string const & extension)
@@ -72,6 +69,22 @@ namespace Colib
   {
     return removeExtension(string)+app+"."+extension(string);
   }  
+
+  std::vector<std::string> pathToFolders(std::string const & string)
+  {
+    print(getPath(string));
+    return getList(getPath(string), "/");
+  }
+
+  std::string fatherFolder(std::string const & string, size_t nb_generations = 1)
+  {
+    auto const folders = pathToFolders(string);
+    std::string output;
+    if (folders.size() <= nb_generations) return "/";
+    for (size_t i = 0; i<folders.size()-nb_generations; ++i) output+=folders[i]+"/";
+    return output;
+  }
+
   bool fileIsEmpty(std::ifstream& file) { return file.peek() == std::ifstream::traits_type::eof();}
   
   void goToBeginning(std::ifstream& file) {file.seekg(0, std::ios::beg);}
