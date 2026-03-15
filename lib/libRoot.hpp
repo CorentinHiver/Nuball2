@@ -1696,7 +1696,7 @@ namespace Colib
   
   /// @brief Create a branch for a given value and name
   template<class T>
-  auto createBranch(TTree* tree, std::string const & name, T * value, int buffsize = 256_ki)
+  auto createBranch(TTree* tree, std::string const & name, T * value, int buffsize = 256000)
   {
     std::string type_root_format = name+"/"+typeRoot<T>();
     return (tree -> Branch(name.c_str(), value, type_root_format.c_str(), buffsize));
@@ -1705,13 +1705,11 @@ namespace Colib
   /// @brief Create a branch for a given array and name
   /// @param name_size: The name of the leaf that holds the size of the array (like the event multiplicity)
   template<class T>
-  TBranch* createBranchArray(TTree* tree, std::string const & name, T * array, std::string const & name_size, int buffsize = 256_ki)
+  TBranch* createBranchArray(TTree* tree, std::string const & name, T * array, std::string const & name_size, int buffsize = 256000)
   {
     std::string type_root_format = name + "[" + name_size + "]/" + typeRoot<std::remove_extent_t<T>>();
     return tree->Branch(name.c_str(), array, type_root_format.c_str(), buffsize);
   }
-
-
 }
 
 /////////////////////

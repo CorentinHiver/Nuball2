@@ -254,7 +254,7 @@ void macro_EndRuns()
 
       // std::string out_filename = "data/60Co_center_after/"+file_shortname+".root";
       std::string out_filename = "data/end_runs/"+file_shortname+".root";
-      File Filename(out_filename); Filename.makePath();
+      File Filename(out_filename); Filename.mkdir();
       auto output(TFile::Open(Filename.c_str(), "recreate"));
       output->cd();
 

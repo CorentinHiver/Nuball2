@@ -62,26 +62,26 @@ int main(int argc, char** argv)
           reader.setRef(252);
 
           reader.run();
-          // print();
         }
 
       #ifdef CoMT
         });
       #endif // CoMT
 
-        for (auto const & dTfilename : findFilesWildcard(outputPath+"ref252/*"))
+        for (auto const & dTfilename : findFilesWildcard(outputPath+"ref252/*_ref_252.root"))
         {
           TimeshiftCalculator ts_cal(dTfilename);
-          ts_cal.setOutputName(Colib::appendFilename(dTfilename, "_dT"));
-          ts_cal.setBins<NSI136::maxLabel>(dTbinning);
-          ts_cal.calculate();
+          ts_cal.makeHisto(252, true);
+          // ts_cal.setOutputName(Colib::appendFilename(dTfilename, "_dT"));
+          // ts_cal.setBins<NSI136::maxLabel>(dTbinning);
+          // ts_cal.calculate();
         }
       }
       else if (sub_arg == "-f")
       {
         TimeshiftCalculator ts_cal(args.load<string>());
-        ts_cal.setBins<NSI136::maxLabel>(dTbinning);
-        ts_cal.calculate();
+        // ts_cal.setBins<NSI136::maxLabel>(dTbinning);
+        // ts_cal.calculate();
       }
     }
     else if (args == "--fast" || args == "--faster-reader")

@@ -22,10 +22,10 @@
 // #include "lib/MTObjects/MultiHist.hpp"
 // #include "lib/libRootHeader.hpp"
 // #include "lib/RootReader/RootReader.hpp"
-// #include "lib/RootReader/TimeshiftCalculator.hpp"
+#include "lib/RootReader/TimeshiftCalculator.hpp"
 // #include "lib/FasterReader/FasterRootInterface.hpp"
 // #include "lib/FasterReader/FasterRunReader.hpp"
-#include "lib/FasterReader/FasterReader.hpp"
+// #include "lib/FasterReader/FasterReader_fast.hpp"
 // #include "lib/RootReader/RootRunReader.hpp"
 // #include "lib/FasterReader/RootInterface.hpp"
 // #include  "lib/Modules/CoRadware.hpp"
@@ -54,7 +54,22 @@ int main(int argc, char** argv)
 
   print(argc, argv);
 
-  FasterReader reader;
+  TimeshiftCalculator calc("/home/corentin/nuball2/N-SI-136_root/ref252/60Co_center_after_ref_252.root");
+  calc.makeHisto(252, true);
+
+  // TimeshiftCalculator::calculate("/home/corentin/nuball2/N-SI-136_root/ref252/60Co_center_after_ref_252.root");
+
+  // FastGzipStreamer reader;
+  // reader.open("/home/corentin/run_39_0014.fast");
+  // FasterReader::Header header;
+  // for (int i = 0; i<int(1e6); ++i)
+  // {
+  //   if (reader[i] != char{}) print(int(reader[i]));
+  //   // print(reader.read(&header, sizeof(FasterReader::Header)));
+  //   // print(Colib::nicer_double(reader.size()), header);
+  // }
+
+  // FasterReader reader;
 
   // Paris::Cluster<26> Cluster;
 
@@ -75,7 +90,6 @@ int main(int argc, char** argv)
 
 
   // print (randomCo::ultra_fast_random_generator());
-
 
 
   // TimeshiftCalculator ts_cal(argv[1]);

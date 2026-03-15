@@ -18,16 +18,34 @@ us = 1e-6
 ms = 1e-3
 s  = 1e+0
 
-fissilityFactor = 50.8
+# Options :
 
-useMetagFissility = True
-correctHaliflives = False
+fissilityFactor = 50.8
+useMetagFissility = False
+correctHaliflives = True
+#Plot
+LABELSIZE=15
+
+# Choose which minimization to perform :
+# Always minimize delta at least
+CLASSIC=True
+MIN_N=True
+MIN_N1=False
+WO_U = False
+
+outputFolder="/mnt/c/Users/coren/OneDrive/CNRS/Nuball2/Calculations/SystematicPlots/"
+if useMetagFissility:
+  outputFolder+="Metag/"
+elif correctHaliflives:
+  outputFolder+="halftCorr/"
+else :
+  outputFolder+="classic/"
 
 xlabelFissility = str()
 if useMetagFissility:
-  xlabelFissility = r'$Z^2 / A \times \left[2(a_s / a_c)\left[1 - \frac{\kappa (N - Z)^2}{A^2}\right]\right]^{-1}$'
+  xlabelFissility = r'$\chi = Z^2 / A \times \left[2(a_s / a_c)\left[1 - \frac{\kappa (N - Z)^2}{A^2}\right]\right]^{-1}$'
 else:
-  xlabelFissility = r'$Z^2/(50.8 \times A)$'
+  xlabelFissility = r'$\chi = Z^2/(50.8 \times A)$'
 
 # Minimization :
 
@@ -37,8 +55,8 @@ def linear(x, a, b):
 def quadratic(x, a, b, c):
   return a * x * x + b * x + c
 
-# function = linear
-function = quadratic
+function = linear
+# function = quadratic
 
 def auto_time_unit(t_seconds):
   prefixes = {
@@ -67,32 +85,45 @@ def auto_time_unit(t_seconds):
 
 elements = {87: "Fr", 88: "Ra", 89: "Ac", 90: "Th", 91: "Pa", 92: "U", 93: "Np", 94: "Pu", 95: "Am", 96: "Cm", 97: "Bk", 98: "Cf"}
 
-colors = {97:'b', 96: 'g', 95: 'r', 94: 'c', 93: 'm', 92: 'y', 91: 'aquamarine', 90: 'k', 89: 'mediumseagreen'}
-Znames= ['Bk', 'Cm', 'Am', 'Pu', 'Np', 'U', 'Pa', 'Th', 'Ac']
+colors = {97:'b', 96: 'g', 95: 'r', 94: 'c', 93: 'm', 92: 'y', 91: 'darkgray', 90: 'k', 89: 'mediumseagreen', 88:'darkmagenta', 87:'orange'}
+markers = {97:'^', 96: 'o', 95: 'v', 94: 'p', 93: 's', 92: 'd', 91: '>', 90: 's', 89: 'P'}
+Znames= ['Bk', 'Cm', 'Am', 'Pu', 'Np', 'U', 'Pa', 'Th', 'Ac', 'Ra', 'Fr']
+
+def isEven(x):
+  return x%2 == 0
+def areEven(x1, x2):
+  return isEven(x1) and isEven(x2)
+def isOdd(x):
+  return x%2 == 1
+def areOdd(x1, x2):
+  return isOdd(x1) and isOdd(x2)
+def areOddEven(x1, x2):
+  return isOdd(x1) and isEven(x2) or isEven(x1) and isOdd(x2)
 
 class Params:
-  def __init__(self, delta=0, NC=0, N0=146, NC2 = 0, N02=148, ZC=0, Z0=100, ZC2=0, Z02=90):
+  def __init__(self, delta=0, aN=0, N0=146, aN2 = 0, N02=148, aZ=0, Z0=100, aZ2=0, Z02=90, aBarrierHeight=0):
     self.delta = delta
-    self.NC     = NC
-    self.N0     = N0
-    self.NC2    = NC2
-    self.N02    = N02
-    self.ZC     = ZC
-    self.Z0     = Z0
-    self.ZC2    = ZC2
-    self.Z02    = Z02
+    self.aN    = aN
+    self.N0    = N0
+    self.aN2   = aN2
+    self.N02   = N02
+    self.aZ    = aZ
+    self.Z0    = Z0
+    self.aZ2   = aZ2
+    self.Z02   = Z02
+    self.aBarrierHeight = aBarrierHeight
   def __str__(self):
     lines = ["Best fit:"]
     if self.delta != 0:
       lines.append(f"delta = {self.delta}")
-    if self.NC != 0:
-      lines.append(f"NC = {self.NC}, N0 = {self.N0}")
-    if self.NC2 != 0:
-      lines.append(f"NC2 = {self.NC2}, N02 = {self.N02}")
-    if self.ZC != 0:
-      lines.append(f"ZC = {self.ZC}, Z0 = {self.Z0}")
-    if self.ZC2 != 0:
-      lines.append(f"ZC2 = {self.ZC2}, Z02 = {self.Z02}")
+    if self.aN != 0:
+      lines.append(f"aN = {self.aN}, N0 = {self.N0}")
+    if self.aN2 != 0:
+      lines.append(f"aN2 = {self.aN2}, N02 = {self.N02}")
+    if self.aZ != 0:
+      lines.append(f"aZ = {self.aZ}, Z0 = {self.Z0}")
+    if self.aZ2 != 0:
+      lines.append(f"aZ2 = {self.aZ2}, Z02 = {self.Z02}")
     if not lines:
       return "empty"
     return ", ".join(lines)
@@ -107,24 +138,26 @@ def calcFissility(Z, A, factor = fissilityFactor):
   else:
     return Z**2 / A / factor
 
-def estimateHalflifeLog(Z:int, A:int, a:float, b:float, args:Params):
-  t_corr = function(calcFissility(Z, A), a, b)
+def estimateHalflifeLog(Z:int, A:int, constants, args:Params, function=function):
+  t_corr = function(calcFissility(Z, A), *constants)
   N = A-Z
   if (N % 2 == 1) :
     t_corr += args.delta
   if (Z % 2 == 1) :
     t_corr += args.delta
-  t_corr -= args.NC * (N-args.N0)**2
-  # if Z == 94:
-  t_corr -= args.NC2 * (N-args.N02)**2
+  t_corr += args.aN * (N-args.N0)**2
+  t_corr += args.aN2 * (N-args.N02)**2
+  t_corr += args.aZ * (Z-args.Z0)**2
   return t_corr
 
-def estimateHalflife(Z:int, A:int, a:float, b:float, args:Params):
-  return math.pow(10, estimateHalflifeLog(Z, A, a, b, args))
+def estimateHalflife(Z:int, A:int, constants, args:Params, function=function):
+  return math.pow(10, estimateHalflifeLog(Z, A, constants, args, function))
 
-def estimateHalflifeStr(Z, A, a, b, args:Params):
-  val, unit = auto_time_unit(estimateHalflife(Z, A, a, b, args))
+def estimateHalflifeStr(Z, A, constants, args:Params, function=function):
+  val, unit = auto_time_unit(estimateHalflife(Z, A, constants, args, function))
   return f"{val:.2f} {unit}"
+
+
 # Declarations :
 
 class Isotope:
@@ -150,20 +183,20 @@ class Isotope:
     if (self.Z % 2 == 1) :
       t -= args.delta
       
-    t += args.NC * (self.N-args.N0)**2
-    t += args.NC2 * (self.N-args.N02)**2
-    t += args.ZC * (self.Z-args.Z0)**2
+    t -= args.aN * (self.N-args.N0)**2
+    t -= args.aN2 * (self.N-args.N02)**2
+    t -= args.aZ * (self.Z-args.Z0)**2
   
     return t
   
-  def estimateHalflifeLog(self, a, b, args:Params):
-    return estimateHalflifeLog(self.Z, self.A, a, b, args)
+  def estimateHalflifeLog(self, constants, args:Params):
+    return estimateHalflifeLog(self.Z, self.A, constants, args)
   
-  def estimateHalflife(self, a, b, args:Params):
-    return estimateHalflife(self.Z, self.A, a, b, args)
+  def estimateHalflife(self, constants, args:Params):
+    return estimateHalflife(self.Z, self.A, constants, args)
   
-  def estimateHalflifeStr(self, a, b, args:Params):
-    return estimateHalflifeStr(self.Z, self.A, a, b, args)
+  def estimateHalflifeStr(self, constants, args:Params):
+    return estimateHalflifeStr(self.Z, self.A, constants, args)
   
   def __str__(self):
     return f"{self.name}, fissility={int(self.fissility*100)/100.}"
@@ -173,12 +206,11 @@ class Isotope:
 
 # Data :
 
-
 FI = np.array([
 # Uranium
   Isotope(92, 235,   5.6 * ( 0.01  if correctHaliflives else 1) * ms),
-  Isotope(92, 236, 116   * ( 8     if correctHaliflives else 1) * ns),
-  Isotope(92, 238, 195   * (20     if correctHaliflives else 1) * ns),
+  Isotope(92, 236, 116   * ns),
+  Isotope(92, 238, 195   * ns),
 # Neptunium
   Isotope(93, 237,  40   / (1.9e-3 if correctHaliflives else 1) * ns),
 # Plutonium
@@ -198,14 +230,14 @@ FI = np.array([
   Isotope(97, 242, 600   * ns), Isotope(97, 244, 820   * ns), Isotope(97, 245,   2   * ns)
 ])
 
-indices = [[symbol, [e.Z == Z for e in FI]] for Z, symbol in elements.items()]
-indices_evenN = [[symbol, [e.Z == Z and e.N%2==0 for e in FI]] for Z, symbol in elements.items()]
-indices_oddN  = [[symbol, [e.Z == Z and e.N%2==1 for e in FI]] for Z, symbol in elements.items()]
-indices_evenZ = [[symbol, [e.Z == Z and e.Z%2==0 for e in FI]] for Z, symbol in elements.items()]
-indices_oddZ  = [[symbol, [e.Z == Z and e.Z%2==1 for e in FI]] for Z, symbol in elements.items()]
-indices_oddodd  = [[symbol, [e.Z == Z and e.Z%2==1 and e.N%2==1 for e in FI]] for Z, symbol in elements.items()]
-indices_eveneven  = [[symbol, [e.Z == Z and e.Z%2==0 and e.N%2==0 for e in FI]] for Z, symbol in elements.items()]
-indices_oddeven  = [[symbol, [e.Z == Z and ((e.Z%2==0 and e.N%2==1) or (e.Z%2==1 and e.N%2==0)) for e in FI]] for Z, symbol in elements.items()]
+indices           = [[symbol, [e.Z == Z                            for e in FI]] for Z, symbol in elements.items()]
+indices_evenN     = [[symbol, [e.Z == Z and isEven(e.N)            for e in FI]] for Z, symbol in elements.items()]
+indices_oddN      = [[symbol, [e.Z == Z and isOdd(e.N)             for e in FI]] for Z, symbol in elements.items()]
+indices_evenZ     = [[symbol, [e.Z == Z and isEven(e.Z)            for e in FI]] for Z, symbol in elements.items()]
+indices_oddZ      = [[symbol, [e.Z == Z and isOdd(e.Z)             for e in FI]] for Z, symbol in elements.items()]
+indices_oddodd    = [[symbol, [e.Z == Z and areOdd(e.Z, e.N)       for e in FI]] for Z, symbol in elements.items()]
+indices_eveneven  = [[symbol, [e.Z == Z and areEven(e.Z, e.N)      for e in FI]] for Z, symbol in elements.items()]
+indices_oddeven   = [[symbol, [e.Z == Z and (areOddEven(e.Z, e.N)) for e in FI]] for Z, symbol in elements.items()]
 
 # Vectorization :
 
@@ -225,12 +257,6 @@ remove_U = [e.Z != 92 for e in FI]
 def resetColors():
   plt.gca().set_prop_cycle(None)
 
-def plotFI():
-  y = np.array([e.logt for e in FI])
-  for name, index in indices :
-    plt.plot(fissilities[index], y[index], label=name, linestyle='-', marker='o')
-  plt.legend()
-
 def fitFI(function, t_corr, x=fissilities, sigma_t_corr=None):
   popt, pcov = curve_fit(function, x, t_corr, sigma=sigma_t_corr)
   residuals = t_corr - function(x, *popt)
@@ -242,26 +268,65 @@ def fitFI(function, t_corr, x=fissilities, sigma_t_corr=None):
   reduced_chisq = chisq / dof
   return reduced_chisq  # Return reduced chi-squared
 
-def plot_halft(args:Params, x=fissilities, xlabel='fissility', function=linear, plotfit=True):
+# def plotFI():
+#   logt = np.array([e.logt for e in FI])
+#   for name, index in indices :
+#     if (len(Zs[index]) != 0):
+#       plt.plot(fissilities[index], logt[index], linestyle='-', color=colors[Zs[index][0]])
+#   for name, index in indices_oddN :
+#     if (len(Zs[index]) != 0):
+#       Z = Zs[index][0]
+#       plt.plot(fissilities[index], logt[index], linestyle = '', color=colors[Z], marker=markers[Z], markerfacecolor='1')
+#   for name, index in indices_evenN :
+#     if (len(Zs[index]) != 0):
+#       Z = Zs[index][0]
+#       plt.plot(fissilities[index], logt[index], linestyle = '', color=colors[Z], label=name, marker=markers[Z])
+#   plt.legend()
+
+def plot_logt(args:Params, x=fissilities, xlabel='fissility', function=function, plotfit=True, corrected = True, grid = False):
   plt.figure()
+  if args==Params():
+    corrected = True
   halft = np.array([e.correctHalflifeLog(args) for e in FI])
   for name, index in indices :
     if (len(Zs[index]) != 0):
-      plt.plot(x[index], halft[index], label=name, linestyle='-', color=colors[Zs[index][0]], marker='o')
+      Z = Zs[index][0]
+      plt.plot(x[index], halft[index], linestyle='-', color=colors[Z])
+  for name, index in indices_oddN :
+    if (len(Zs[index]) != 0):
+      Z = Zs[index][0]
+      plt.plot(x[index], halft[index], linestyle = '', color=colors[Z], marker=markers[Z], markerfacecolor='1')
+  for name, index in indices_evenN :
+    if (len(Zs[index]) != 0):
+      Z = Zs[index][0]
+      plt.plot(x[index], halft[index], linestyle = '', color=colors[Z], label=name, marker=markers[Z])
     
   if xlabel == 'fissility':
     xlabel = xlabelFissility
-  plt.xlabel(xlabel)
-  plt.ylabel(r'$\ln_{10}(\tau_{fission})$')
+  plt.xlabel(xlabel, fontsize=LABELSIZE)
+  if corrected:
+    plt.ylabel(r'$\ln_{10}(\tau_{fission}^{corr})$', fontsize=LABELSIZE)
+  else:
+    plt.ylabel(r'$\ln_{10}(\tau_{fission})$', fontsize=LABELSIZE)
 
   if (plotfit):
     popt, pcov = curve_fit(function, x, halft)
     x_plot = np.linspace(np.min(x), np.max(x))
     t_plot = function(x_plot, *popt)
     plt.plot(x_plot, t_plot)
-  plt.legend()
 
-def plot_halft_residues(args:Params, x=fissilities, xlabel='fissility', function=linear):
+  plt.plot([], [], marker='', linestyle='', label='--')
+  plt.plot([], [], marker='o', markerfacecolor='1', markeredgecolor='b', label='Odd', linestyle='')
+  plt.plot([], [], marker='o', markerfacecolor='b', markeredgecolor='b', label='Even', linestyle='')
+  plt.legend(loc="upper right")
+  fig = plt.gcf()
+  fig.set_size_inches(7, 6)
+  plt.xticks(fontsize=14)
+  plt.yticks(fontsize=14)
+  if grid:
+    plt.grid() 
+
+def plot_halft_residues(args:Params, x=fissilities, xlabel='fissility', function=linear, diffEvenOdd = False, plotFit = False, plotRange = False, grid = False):
   plt.figure()
   halft = np.array([e.correctHalflifeLog(args) for e in FI])
   popt, pcov = curve_fit(function, fissilities, halft)
@@ -274,21 +339,47 @@ def plot_halft_residues(args:Params, x=fissilities, xlabel='fissility', function
     ax = plt.gca()
     ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
 
-  for name, index in indices_oddN :
-    if (len(Zs[index]) != 0):
-      plt.plot(x[index], residues[index], linestyle='-', color=colors[Zs[index][0]], marker='o')
-  for name, index in indices_evenN :
-    if (len(Zs[index]) != 0):
-      plt.plot(x[index], residues[index], label=name, color=colors[Zs[index][0]], linestyle='-', marker='v')
+  if diffEvenOdd:
+    for name, index in indices_oddN :
+      if (len(Zs[index]) != 0):
+        plt.plot(x[index], residues[index], label=name, linestyle='-', color=colors[Zs[index][0]], marker='o')
+    for name, index in indices_evenN :
+      if (len(Zs[index]) != 0):
+        plt.plot(x[index], residues[index], color=colors[Zs[index][0]], linestyle='-', marker='v')
+  else:
+    for name, index in indices :
+      if (len(Zs[index]) != 0):
+        Z = Zs[index][0]
+        plt.plot(x[index], residues[index], linestyle='-', color=colors[Z])
+    for name, index in indices_oddN :
+      if (len(Zs[index]) != 0):
+        Z = Zs[index][0]
+        plt.plot(x[index], residues[index], linestyle = '', color=colors[Z], marker=markers[Z], markerfacecolor='1')
+    for name, index in indices_evenN :
+      if (len(Zs[index]) != 0):
+        Z = Zs[index][0]
+        plt.plot(x[index], residues[index], linestyle = '', color=colors[Z], label=name, marker=markers[Z])
+    
+    plt.plot([], [], marker='', linestyle='', label='--')
+    plt.plot([], [], marker='o', markerfacecolor='1', markeredgecolor='b', label='Odd', linestyle='')
+    plt.plot([], [], marker='o', markerfacecolor='b', markeredgecolor='b', label='Even', linestyle='')
 
   x_plot = np.linspace(np.min(x), np.max(x))
   y_plot = np.zeros_like(x_plot)
-  plt.plot(x_plot, y_plot, color='cyan')
-  plt.plot(x_plot, y_plot+1, color='red')
-  plt.plot(x_plot, y_plot-1, color='red')
-  plt.xlabel(xlabel)
-  plt.ylabel(r'$\ln_{10}(\tau_{fission})_{corrected} - \ln_{10}(\tau_{fission})$')
-  plt.legend()
+  if plotFit :
+    plt.plot(x_plot, y_plot, color='cyan')
+  if plotRange: 
+    plt.plot(x_plot, y_plot+1, color='red')
+    plt.plot(x_plot, y_plot-1, color='red')
+  plt.xlabel(xlabel, fontsize=LABELSIZE)
+  plt.ylabel(r'$\ln_{10}(\tau_{fission}^{corr}) - \ln_{10}(\tau_{fission})$', fontsize=LABELSIZE)
+  plt.legend(loc="upper right")
+  fig = plt.gcf()
+  fig.set_size_inches(7, 6)
+  plt.xticks(fontsize=14)
+  plt.yticks(fontsize=14)
+  if grid:
+    plt.grid() 
   
 def plot_halft_estimate(args:Params, x=fissilities, function=linear):
   plt.figure()
@@ -302,7 +393,7 @@ def plot_halft_estimate(args:Params, x=fissilities, function=linear):
   plt.legend()
 
 
-  plot_halft(args=args, function=function)
+  plot_logt(args=args, function=function)
   plot_halft_residues(args=args, function=function)
   plot_halft_residues(args=args, x=Ns, xlabel='N', function=function)
   plot_halft_residues(args=args, x=Zs, xlabel='Z', function=function)
@@ -310,8 +401,11 @@ def plot_halft_estimate(args:Params, x=fissilities, function=linear):
 
   plt.show()
 
+
+# Minimization:
+
 # Minimize with respect to delta
-if False:
+if CLASSIC and not MIN_N and not MIN_N1 and not WO_U:
   def minimizeFunc(args) :
     delta,= args
     data = np.array([e.correctHalflifeLog(Params(delta=delta)) for e in FI])
@@ -327,23 +421,32 @@ if False:
   )
 
   best_delta, = result.x
-  best_data = np.array([e.correctHalflifeLog(Params(delta=best_delta)) for e in FI])
-  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}")
-
   best_param = Params(delta=best_delta)
+  best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
+  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}")
+  
+  popt, pcov = curve_fit(function, fissilities, best_data)
+  a, b = popt
+  print(f'{a:.2f}x + {b:.2f}')
 
-  plot_halft(args=Params(delta=0), function=function, plotfit=False)
-  plot_halft(args=best_param, function=function)
-  plot_halft(args=best_param, x=Ns, xlabel='N', function=function, plotfit=False)
-  plot_halft_residues(args=best_param, function=function)
-  plot_halft_residues(args=best_param, x=Ns, xlabel='N', function=function)
-  plot_halft_residues(args=best_param, x=Zs, xlabel='Z', function=function)
-  plot_halft_residues(args=best_param, x=As, xlabel='A', function=function)
+  
+  plot_logt(args=Params(), plotfit=False, corrected=False)
+  plt.savefig(outputFolder+"RawHalflives.png", dpi=300)
+  plot_logt(args=Params(), plotfit=True, corrected=False)
+  plt.savefig(outputFolder+"RawHalflives_fit.png", dpi=300)
+  plot_logt(args=best_param)
+  plt.savefig(outputFolder+"DeltaHalflives.png", dpi=300)
+  # plot_logt(args=best_param, x=Ns, xlabel='N', plotfit=False)
+  # plot_halft_residues(args=best_param)
+  plot_halft_residues(args=best_param, x=Ns, xlabel='N')
+  plt.savefig(outputFolder+"DeltaHalflives_ResiduesVsN.png", dpi=300)
+  # plot_halft_residues(args=best_param, x=Zs, xlabel='Z')
+  # plot_halft_residues(args=best_param, x=As, xlabel='A')
 
   plt.show()
 
 # Minimize with respect to delta BUT without U
-if False:
+if CLASSIC and not MIN_N and not MIN_N1 and WO_U:
   def minimizeFunc(args) :
     delta,= args
     data = np.array([e.correctHalflifeLog(Params(delta=delta)) for e in FI[remove_U]])
@@ -364,9 +467,9 @@ if False:
 
   best_param = Params(delta=best_delta)
 
-  plot_halft(args=Params(delta=0), function=function, plotfit=False)
-  plot_halft(args=best_param, function=function)
-  plot_halft(args=best_param, x=Ns, xlabel='N', function=function, plotfit=False)
+  plot_logt(args=Params(delta=0), function=function, plotfit=False)
+  plot_logt(args=best_param, function=function)
+  plot_logt(args=best_param, x=Ns, xlabel='N', function=function, plotfit=False)
   plot_halft_residues(args=best_param, function=function)
   plot_halft_residues(args=best_param, x=Ns, xlabel='N', function=function)
   plot_halft_residues(args=best_param, x=Zs, xlabel='Z', function=function)
@@ -375,10 +478,10 @@ if False:
   plt.show()
   
 # Minimize with respect to N and delta
-if False:
+if CLASSIC and MIN_N and not MIN_N1 and not WO_U:
   def minimizeFunc(args) :
-    delta, NC, N0 = args
-    params = Params(delta=delta, NC=NC, N0=N0)
+    delta, aN, N0 = args
+    params = Params(delta=delta, aN=aN, N0=N0)
     data = np.array([e.correctHalflifeLog(params) for e in FI])
     return fitFI(function, data) 
 
@@ -392,61 +495,33 @@ if False:
   )
 
   best_delta, best_NC, best_N0 = result.x
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0)
   best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
-  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}")
+  print(f"Chi2 = {fitFI(function, best_data) }, {best_param}")
   
   popt, pcov = curve_fit(function, fissilities, best_data)
   print(popt)
 
-  plotFI()
-  plot_halft(args=best_param, function=function)
-  plot_halft_residues(args=best_param, function=function)
-  plot_halft_residues(args=best_param, x=Ns, xlabel="N", function=function)
-  plot_halft_residues(args=best_param, x=Zs, xlabel="Z", function=function)
-  plot_halft_residues(args=best_param, x=As, xlabel="A", function=function)
-  
-  plt.show()
+  plot_logt(args=Params(), plotfit=False)
+  plt.savefig("/mnt/c/Users/coren/OneDrive/CNRS/Nuball2/Calculations/SystematicPlots/RawHalflives.png", dpi=300)
 
-# Minimize with respect to N01, N02 and delta
-if False:
-  def minimizeFunc(args) :
-    delta, NC, N01, NC2, N02 = args
-    params = Params(delta=delta, NC=NC, N0=N01, NC2=NC2, N02=N02)
-    data = np.array([e.correctHalflifeLog(params) for e in FI])
-    return fitFI(function, data) 
 
-  initial_params = [3.0, 1., 146, 1., 148]
-  bounds = [(0, 5), (-1,1), (140, 152), (-1,1), (147, 152)]
-  result = minimize(
-      minimizeFunc,
-      initial_params,
-      bounds=bounds,  
-      method='L-BFGS-B' 
-  )
 
-  best_delta, best_NC, best_N0, best_NC2, best_N02 = result.x
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0, NC2=best_NC2, N02=best_N02)
-  best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
-  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}, NC2 = {best_NC2}, N02={best_N02}")
-  
-  popt, pcov = curve_fit(function, fissilities, best_data)
-  print(popt)
-
-  plotFI()
-  plot_halft(args=best_param, function=function)
-  plot_halft_residues(args=best_param, function=function)
-  plot_halft_residues(args=best_param, x=Ns, xlabel="N", function=function)
-  plot_halft_residues(args=best_param, x=Zs, xlabel="Z", function=function)
-  plot_halft_residues(args=best_param, x=As, xlabel="A", function=function)
+  plot_logt(args=best_param)
+  plt.savefig("/mnt/c/Users/coren/OneDrive/CNRS/Nuball2/Calculations/SystematicPlots/CorrectedHalflives.png", dpi=300)
+  plot_halft_residues(args=best_param)
+  plot_halft_residues(args=best_param, x=Ns, xlabel="N")
+  plt.savefig("/mnt/c/Users/coren/OneDrive/CNRS/Nuball2/Calculations/SystematicPlots/NDeltaHalflives_ResiduesVsN.png", dpi=300)
+  plot_halft_residues(args=best_param, x=Zs, xlabel="Z")
+  plot_halft_residues(args=best_param, x=As, xlabel="A")
   
   plt.show()
 
 # Minimize with respect to N and delta BUT without Uranium
-if False:
+if CLASSIC and MIN_N and MIN_N1 and WO_U:
   def minimizeFunc(args) :
-    delta, NC, N0 = args
-    params = Params(delta=delta, NC=NC, N0=N0)
+    delta, aN, N0 = args
+    params = Params(delta=delta, aN=aN, N0=N0)
     data = np.array([e.correctHalflifeLog(params) for e in FI[remove_U]])
     return fitFI(function, data, fissilities[remove_U]) 
 
@@ -460,11 +535,11 @@ if False:
   )
 
   best_delta, best_NC, best_N0 = result.x
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0)
   best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
-  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}")
+  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, aN = {best_NC}, N0={best_N0}")
 
-  plot_halft(args=best_param, function=function)
+  plot_logt(args=best_param, function=function)
   plot_halft_residues(args=best_param, function=function)
   plot_halft_residues(args=best_param, x=Ns, xlabel="N", function=function)
   plot_halft_residues(args=best_param, x=Zs, xlabel="Z", function=function)
@@ -472,13 +547,47 @@ if False:
   
   plt.show()
 
+# Minimize with respect to N01, N02 and delta
+if CLASSIC and MIN_N and MIN_N1 and not WO_U:
+  def minimizeFunc(args) :
+    delta, aN, N01, aN2, N02 = args
+    params = Params(delta=delta, aN=aN, N0=N01, aN2=aN2, N02=N02)
+    data = np.array([e.correctHalflifeLog(params) for e in FI])
+    return fitFI(function, data) 
+
+  initial_params = [3.0, 1., 146, 1., 148]
+  bounds = [(0, 5), (-1,1), (140, 152), (-1,1), (147, 152)]
+  result = minimize(
+      minimizeFunc,
+      initial_params,
+      bounds=bounds,  
+      method='L-BFGS-B' 
+  )
+
+  best_delta, best_NC, best_N0, best_NC2, best_N02 = result.x
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0, aN2=best_NC2, N02=best_N02)
+  best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
+  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, aN = {best_NC}, N0={best_N0}, aN2 = {best_NC2}, N02={best_N02}")
+  
+  popt, pcov = curve_fit(function, fissilities, best_data)
+  print(popt)
+
+  plot_logt(Params())
+  plot_logt(args=best_param)
+  plot_halft_residues(args=best_param)
+  plot_halft_residues(args=best_param, x=Ns, xlabel="N")
+  plot_halft_residues(args=best_param, x=Zs, xlabel="Z")
+  plot_halft_residues(args=best_param, x=As, xlabel="A")
+  
+  plt.show()
+
 # Minimize with respect to N, Z and delta
 if False:
   def minimizeFunc(args) :
-    delta, NC, N0, ZC, Z0 = args
-    params = Params(delta=delta, NC=NC, N0=N0, ZC=ZC, Z0=Z0)
+    delta, aN, N0, aZ, Z0 = args
+    params = Params(delta=delta, aN=aN, N0=N0, aZ=aZ, Z0=Z0)
     data = np.array([e.correctHalflifeLog(params) for e in FI])
-    # data = np.array([e.correctHalflifeLog(Params(delta=delta, NC=NC, N0=N0, ZC=ZC, Z0=Z0)) for e in FI])
+    # data = np.array([e.correctHalflifeLog(Params(delta=delta, aN=aN, N0=N0, aZ=aZ, Z0=Z0)) for e in FI])
     return fitFI(function, data, fissilities) 
 
   initial_params = [3.0, 0., 146, 0., 95]
@@ -491,12 +600,12 @@ if False:
   )
 
   best_delta, best_NC, best_N0, best_ZC, best_Z0 = result.x
-  best_data = np.array([e.correctHalflifeLog(Params(delta=best_delta, NC=best_NC, N0=best_N0, ZC=best_ZC, Z0=best_Z0)) for e in FI])
-  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}, ZC = {best_ZC}, Z0={best_Z0}")
+  best_data = np.array([e.correctHalflifeLog(Params(delta=best_delta, aN=best_NC, N0=best_N0, aZ=best_ZC, Z0=best_Z0)) for e in FI])
+  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, aN = {best_NC}, N0={best_N0}, aZ = {best_ZC}, Z0={best_Z0}")
 
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0, ZC=best_ZC, Z0=best_Z0)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0, aZ=best_ZC, Z0=best_Z0)
 
-  plot_halft(args=best_param, function=function)
+  plot_logt(args=best_param, function=function)
   plot_halft_residues(args=best_param, function=function)
   plot_halft_residues(args=best_param, x=Ns, xlabel="N", function=function)
   plot_halft_residues(args=best_param, x=Zs, xlabel="Z", function=function)
@@ -507,10 +616,10 @@ if False:
 # Minimize with respect to N, Z and delta BUT without Uranium
 if False:
   def minimizeFunc(args) :
-    delta, NC, N0, ZC, Z0 = args
-    params = Params(delta=delta, NC=NC, N0=N0, ZC=ZC, Z0=Z0)
+    delta, aN, N0, aZ, Z0 = args
+    params = Params(delta=delta, aN=aN, N0=N0, aZ=aZ, Z0=Z0)
     data = np.array([e.correctHalflifeLog(params) for e in FI[remove_U]])
-    # data = np.array([e.correctHalflifeLog(Params(delta=delta, NC=NC, N0=N0, ZC=ZC, Z0=Z0)) for e in FI])
+    # data = np.array([e.correctHalflifeLog(Params(delta=delta, aN=aN, N0=N0, aZ=aZ, Z0=Z0)) for e in FI])
     return fitFI(function, data, fissilities[remove_U]) 
 
   initial_params = [3.0, 0., 146, 0., 95]
@@ -523,12 +632,12 @@ if False:
   )
 
   best_delta, best_NC, best_N0, best_ZC, best_Z0 = result.x
-  best_data = np.array([e.correctHalflifeLog(Params(delta=best_delta, NC=best_NC, N0=best_N0, ZC=best_ZC, Z0=best_Z0)) for e in FI])
-  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}, ZC = {best_ZC}, Z0={best_Z0}")
+  best_data = np.array([e.correctHalflifeLog(Params(delta=best_delta, aN=best_NC, N0=best_N0, aZ=best_ZC, Z0=best_Z0)) for e in FI])
+  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, aN = {best_NC}, N0={best_N0}, aZ = {best_ZC}, Z0={best_Z0}")
 
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0, ZC=best_ZC, Z0=best_Z0)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0, aZ=best_ZC, Z0=best_Z0)
 
-  plot_halft(args=best_param, function=function)
+  plot_logt(args=best_param, function=function)
   plot_halft_residues(args=best_param, function=function)
   plot_halft_residues(args=best_param, x=Ns, xlabel="N", function=function)
   plot_halft_residues(args=best_param, x=Zs, xlabel="Z", function=function)
@@ -539,8 +648,8 @@ if False:
 # Minimize with respect to N, Z, Z2 and delta
 if False:
   def minimizeFunc(args) :
-    delta, NC, N0, ZC, Z0, ZC2, Z02 = args
-    data = np.array([e.correctHalflifeLog(Params(delta=delta, NC=NC, N0=N0, ZC=ZC, Z0=Z0, ZC2=ZC2, Z02=Z02)) for e in FI])
+    delta, aN, N0, aZ, Z0, aZ2, Z02 = args
+    data = np.array([e.correctHalflifeLog(Params(delta=delta, aN=aN, N0=N0, aZ=aZ, Z0=Z0, aZ2=aZ2, Z02=Z02)) for e in FI])
     return fitFI(function, data) 
 
   initial_params = [3.0, 0., 146, 0., 95, 0., 91]
@@ -553,12 +662,12 @@ if False:
   )
 
   best_delta, best_NC, best_N0, best_ZC, best_Z0, best_ZC2, best_Z02 = result.x
-  best_data = np.array([e.correctHalflifeLog(Params(delta=best_delta, NC=best_NC, N0=best_N0, ZC=best_ZC, Z0=best_Z0,  ZC2=best_ZC, Z02=best_Z0)) for e in FI])
-  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}, ZC = {best_ZC}, Z0={best_Z0}, ZC2 = {best_ZC2}, Z02={best_Z02}")
+  best_data = np.array([e.correctHalflifeLog(Params(delta=best_delta, aN=best_NC, N0=best_N0, aZ=best_ZC, Z0=best_Z0,  aZ2=best_ZC, Z02=best_Z0)) for e in FI])
+  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, aN = {best_NC}, N0={best_N0}, aZ = {best_ZC}, Z0={best_Z0}, aZ2 = {best_ZC2}, Z02={best_Z02}")
 
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0, ZC=best_ZC, Z0=best_Z0, ZC2=best_ZC2, Z02=best_Z02)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0, aZ=best_ZC, Z0=best_Z0, aZ2=best_ZC2, Z02=best_Z02)
 
-  plot_halft(args=best_param, function=function)
+  plot_logt(args=best_param, function=function)
   plot_halft_residues(args=best_param, function=function)
   plot_halft_residues(args=best_param, x=Ns, function=function)
   plot_halft_residues(args=best_param, x=Zs, function=function)
@@ -586,10 +695,10 @@ if False:
     for j, Z0 in enumerate(Z0s):  
 
       def minimizeFuncLocal(args) :
-        delta, NC = args
-        params = Params(delta=delta, NC=NC, N0=N0, ZC=0.1, Z0=Z0)
-        # delta, NC, ZC = args
-        # params = Params(delta=delta, NC=NC, N0=N0, ZC=ZC, Z0=Z0)
+        delta, aN = args
+        params = Params(delta=delta, aN=aN, N0=N0, aZ=0.1, Z0=Z0)
+        # delta, aN, aZ = args
+        # params = Params(delta=delta, aN=aN, N0=N0, aZ=aZ, Z0=Z0)
         data = np.array([e.correctHalflifeLog(params) for e in FI[remove_U]])
         return fitFI(function, data, fissilities[remove_U]) 
 
@@ -624,7 +733,7 @@ if False:
 
   plotN0Z0(chi2, title="chi2")
 
-  #plot NC NZ
+  #plot aN NZ
   best_i, best_j = np.unravel_index(
     np.argmin(chi2),          # flat index of the minimum
     chi2.shape                # original shape
@@ -681,8 +790,8 @@ if False:
     for j, N0 in enumerate(N0s):
       
       def minimizeFuncLocal(args) :
-        NC = args[0]
-        data = np.array([e.correctHalflifeLog(Params(delta=delta, NC=NC, N0=N0)) for e in FI])
+        aN = args[0]
+        data = np.array([e.correctHalflifeLog(Params(delta=delta, aN=aN, N0=N0)) for e in FI])
         return fitFI(function, data)
       
       result = minimize(
@@ -691,9 +800,9 @@ if False:
           bounds=bounds,
           method='L-BFGS-B' 
       )
-      NC = result.x[0]
+      aN = result.x[0]
       chi2[i, j] = minimizeFuncLocal(result.x)
-      NCs[i, j] = NC
+      NCs[i, j] = aN
     
   min_N0   = chi2.min(axis=0)
   min_delta= chi2.min(axis=1)
@@ -744,13 +853,13 @@ if False:
   plt.ylabel(r'$\delta$')
   plt.show()
 
-# ----- Minimize Z0 after finding delta, N0 and NC ---- #
+# ----- Minimize Z0 after finding delta, N0 and aN ---- #
 
 if False:
 
   def minimizeFunc(args) :
-    delta, NC, N0 = args
-    params = Params(delta=delta, NC=NC, N0=N0)
+    delta, aN, N0 = args
+    params = Params(delta=delta, aN=aN, N0=N0)
     data = np.array([e.correctHalflifeLog(params) for e in FI])
     return fitFI(function, data, fissilities) 
 
@@ -764,11 +873,11 @@ if False:
   )
 
   best_delta, best_NC, best_N0 = result.x
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0)
   best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
   print(f"Chi2 = {fitFI(function, best_data) }, {best_param}")
   
-  plot_halft(args=best_param, function=function)
+  plot_logt(args=best_param, function=function)
   plt.title("Before minZ")
   
   rebin = 1/10
@@ -781,8 +890,8 @@ if False:
   
   for i, Z0 in enumerate(tqdm(Z0s, desc="Progress")):
     def minimizeFuncLocal(args) :
-      ZC, = args
-      param=Params(delta=best_delta, NC=best_NC, N0=best_N0, ZC=ZC, Z0=Z0)
+      aZ, = args
+      param=Params(delta=best_delta, aN=best_NC, N0=best_N0, aZ=aZ, Z0=Z0)
       data = np.array([e.correctHalflifeLog(param) for e in FI])
       return fitFI(function, data, fissilities)
   
@@ -792,9 +901,9 @@ if False:
       bounds=bounds,
       method='L-BFGS-B' 
     )
-    ZC, = result.x
+    aZ, = result.x
     chi2[i] = minimizeFuncLocal(result.x)
-    ZCs[i] = ZC
+    ZCs[i] = aZ
   
   plt.figure()
   plt.plot(Z0s, chi2)
@@ -806,12 +915,12 @@ if False:
   best_Z0 = Z0s[np.argmin(chi2)]
   best_ZC = ZCs[np.argmin(chi2)]
 
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0, ZC=best_ZC, Z0=best_Z0)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0, aZ=best_ZC, Z0=best_Z0)
   best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
   print(f"Chi2 = {fitFI(function, best_data) }, {best_param}")
-  # print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}")
+  # print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, aN = {best_NC}, N0={best_N0}")
 
-  plot_halft(args=best_param, function=function)
+  plot_logt(args=best_param, function=function)
   plt.title("After minZ")
   
   popt, pcov = curve_fit(function, fissilities, best_data)
@@ -902,14 +1011,13 @@ if False:
 
   plt.show()
 
-# ----- Minimize Z0 after finding delta, N0 and NC, exploring a bit around N0---- #
+# ----- Minimize Z0 after finding delta, N0 and aN, exploring a bit around N0---- #
 # Saddle !!
 
-if True:
-
+if False:
   def minimizeFunc(args) :
-    delta, NC, N0 = args
-    params = Params(delta=delta, NC=NC, N0=N0)
+    delta, aN, N0 = args
+    params = Params(delta=delta, aN=aN, N0=N0)
     data = np.array([e.correctHalflifeLog(params) for e in FI])
     return fitFI(function, data) 
 
@@ -923,7 +1031,7 @@ if True:
   )
 
   best_delta, best_NC, best_N0 = result.x
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0)
   best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
   print(f"Chi2 = {fitFI(function, best_data) }, {best_param}")
   
@@ -939,8 +1047,8 @@ if True:
   for i, Z0 in enumerate(tqdm(Z0s, desc="Progress")):
     for j, N0 in enumerate(N0s):
       def minimizeFuncLocal(args) :
-        ZC, = args
-        param=Params(delta=best_delta, NC=best_NC, N0=N0, ZC=ZC, Z0=Z0)
+        aZ, = args
+        param=Params(delta=best_delta, aN=best_NC, N0=N0, aZ=aZ, Z0=Z0)
         data = np.array([e.correctHalflifeLog(param) for e in FI])
         return fitFI(function, data, fissilities)
     
@@ -950,9 +1058,9 @@ if True:
           bounds=bounds,
           method='L-BFGS-B' 
       )
-      ZC, = result.x
+      aZ, = result.x
       chi2[i, j] = minimizeFuncLocal(result.x)
-      ZCs[i, j] = ZC
+      ZCs[i, j] = aZ
   
   plt.figure()
   chi2 = np.array(chi2)
@@ -981,15 +1089,15 @@ if True:
   plt.ylabel(r'$N_0$')
   plt.show()
 
-if False:
+if True:
   # def minimizeFunc(args) :
-  #   delta, NC, N0, NC2, N02 = args
-  #   params = Params(delta=delta, NC=NC, N0=N0, NC2=NC2, N02=N02)
+  #   delta, aN, N0, aN2, N02 = args
+  #   params = Params(delta=delta, aN=aN, N0=N0, aN2=aN2, N02=N02)
   #   data = np.array([e.correctHalflifeLog(params) for e in FI])
   #   return fitFI(function, data, fissilities) 
   def minimizeFunc(args) :
-    delta, NC, N0 = args
-    params = Params(delta=delta, NC=NC, N0=N0)
+    delta, aN, N0 = args
+    params = Params(delta=delta, aN=aN, N0=N0)
     data = np.array([e.correctHalflifeLog(params) for e in FI])
     return fitFI(function, data, fissilities) 
 
@@ -1006,62 +1114,75 @@ if False:
   )
 
   # best_delta, best_NC, best_N0, best_NC2, best_N02 = result.x
-  # best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0, NC2=best_NC2, N02=best_N02)
+  # best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0, aN2=best_NC2, N02=best_N02)
   # best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
-  # print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}, NC2 = {best_NC2}, N02={best_N02}")
+  # print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, aN = {best_NC}, N0={best_N0}, aN2 = {best_NC2}, N02={best_N02}")
   best_delta, best_NC, best_N0 = result.x
-  best_param = Params(delta=best_delta, NC=best_NC, N0=best_N0)
+  best_param = Params(delta=best_delta, aN=best_NC, N0=best_N0)
   best_data = np.array([e.correctHalflifeLog(best_param) for e in FI])
-  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, NC = {best_NC}, N0={best_N0}")
+  print(f"Chi2 = {fitFI(function, best_data) }, Best fit: delta = {best_delta}, aN = {best_NC}, N0={best_N0}")
 
   popt, pcov = curve_fit(function, fissilities, best_data)
-  a, b = popt
-  print(f"{a:1f}", f"{b:1f}")
+  print(popt)
 
   Ra228 = Isotope(88,228)
-  print("Ra228", Ra228.estimateHalflifeStr(a, b, best_param))
+  print("Ra228", Ra228.estimateHalflifeStr(popt, best_param))
+
+  Ra228 = Isotope(88,228)
+  print("Ra228", Ra228.estimateHalflifeStr(popt, best_param))
 
   Ra230 = Isotope(88,230)
-  print("Ra230", Ra230.estimateHalflifeStr(a, b, best_param))
+  print("Ra230", Ra230.estimateHalflifeStr(popt, best_param))
+
+  U232 = Isotope(92,232)
+  print("U232", U232.estimateHalflifeStr(popt, best_param))
+
+  U233 = Isotope(92,233)
+  print("U233", U233.estimateHalflifeStr(popt, best_param))
 
   U234 = Isotope(92,234)
-  print("U234", U234.estimateHalflifeStr(a, b, best_param))
+  print("U234", U234.estimateHalflifeStr(popt, best_param))
+
+  U235 = Isotope(92,235)
+  print("U235", U235.estimateHalflifeStr(popt, best_param))
 
   U236 = Isotope(92,236)
-  print("U236", U236.estimateHalflifeStr(a, b, best_param))
+  print("U236", U236.estimateHalflifeStr(popt, best_param))
 
   U237 = Isotope(92,237)
-  print("U237", U237.estimateHalflifeStr(a, b, best_param))
+  print("U237", U237.estimateHalflifeStr(popt, best_param))
 
   U238 = Isotope(92,238)
-  print("U238", U238.estimateHalflifeStr(a, b, best_param))
-
-  Th230 = Isotope(90,230)
-  print("Th230", Th230.estimateHalflifeStr(a, b, best_param))
+  print("U238", U238.estimateHalflifeStr(popt, best_param))
 
   Th231 = Isotope(90,231)
-  print("Th231", Th231.estimateHalflifeStr(a, b, best_param))
+  print("Th231", Th231.estimateHalflifeStr(popt, best_param))
 
   Th232 = Isotope(90,232)
-  print("Th232", Th232.estimateHalflifeStr(a, b, best_param))
+  print("Th232", Th232.estimateHalflifeStr(popt, best_param))
 
+  Th233 = Isotope(90,233)
+  print("Th233", Th233.estimateHalflifeStr(popt, best_param))
+  
   Am242 = Isotope(95,242)
-  print("Am242", Am242.estimateHalflifeStr(a, b, best_param))
+  print("Am242", Am242.estimateHalflifeStr(popt, best_param))
 
   for e in FI:
-    print(e.name, e.estimateHalflifeStr(a, b, best_param)) 
+    print(e.name, e.estimateHalflifeStr(popt, best_param)) 
 
 
   NsPlot = [
-    (97, np.arange(236, 252)), #Bk
-    (96, np.arange(235, 250)), #Cm
-    (95, np.arange(235, 250)), #Am
-    (94, np.arange(233, 250)), #Pu
-    (93, np.arange(230, 250)), #Np
-    (92, np.arange(230, 250)), #U
-    (91, np.arange(226, 248)), #Pa
-    (90, np.arange(228, 248)), #Th
-    (89, np.arange(225, 248))  #Ac
+    (97, np.arange(236, 252)) #Bk
+    ,(96, np.arange(235, 250)) #Cm
+    ,(95, np.arange(235, 250)) #Am
+    ,(94, np.arange(233, 250)) #Pu
+    ,(93, np.arange(230, 250)) #Np
+    ,(92, np.arange(230, 250)) #U
+    ,(91, np.arange(226, 248)) #Pa
+    ,(90, np.arange(228, 248)) #Th
+    ,(89, np.arange(225, 248)) #Ac
+    ,(88, np.arange(223, 245)) #Ra
+    ,(87, np.arange(220, 242)) #Fr
   ]
   i = 0
   plt.figure(1)
@@ -1080,13 +1201,13 @@ if False:
     for A in e[1]:
       N = A-Z
       if N%2 == 0:
-        pointsNeven.append(estimateHalflifeLog(Z, A, a, b, best_param))
+        pointsNeven.append(estimateHalflifeLog(Z, A, popt, best_param))
         fissilities_even.append(calcFissility(Z, A))
         A_evenN.append(A)
         Z_evenN.append(Z)
         N_evenN.append(N)
       else:
-        pointsNodd.append(estimateHalflifeLog(Z, A, a, b, best_param))
+        pointsNodd.append(estimateHalflifeLog(Z, A, popt, best_param))
         fissilities_odd.append(calcFissility(Z, A))
         A_oddN.append(A)
         Z_oddN.append(Z)
@@ -1115,18 +1236,17 @@ if False:
       # plt.plot(Ns[index], y[index], color=colors[Zs[index][0]], linestyle='', marker='o')
       # plt.plot(As[index], y[index], color=colors[Zs[index][0]], linestyle='', marker='o')
       # plt.plot(Zs[index], y[index], color=colors[Zs[index][0]], linestyle='', marker='o')
-  
-  plt.plot(Th230.fissility, estimateHalflifeLog(Th230.Z, Th230.A, a, b, best_param), marker='s', ms=5, color='0')
-  plt.annotate(r'$^{230}$Th', xy = (Th230.fissility, estimateHalflifeLog(Th230.Z, Th230.A, a, b, best_param)))
-  plt.plot(Th231.fissility, estimateHalflifeLog(Th231.Z, Th231.A, a, b, best_param), marker='s', ms=5, color='0')
-  plt.annotate(r'$^{231}$Th', xy = (Th231.fissility, estimateHalflifeLog(Th231.Z, Th231.A, a, b, best_param)))
-  plt.plot(Th232.fissility, estimateHalflifeLog(Th232.Z, Th232.A, a, b, best_param), marker='s', ms=5, color='0')
-  plt.annotate(r'$^{232}$Th', xy = (Th232.fissility, estimateHalflifeLog(Th232.Z, Th232.A, a, b, best_param)))
-
+  plt.plot(Th231.fissility, estimateHalflifeLog(Th231.Z, Th231.A, popt, best_param), marker='s', ms=5, color='0')
+  plt.annotate(r'$^{231}$Th', xy = (Th231.fissility, estimateHalflifeLog(Th231.Z, Th231.A, popt, best_param)))
+  plt.plot(Th232.fissility, estimateHalflifeLog(Th232.Z, Th232.A, popt, best_param), marker='s', ms=5, color='0')
+  plt.annotate(r'$^{232}$Th', xy = (Th232.fissility, estimateHalflifeLog(Th232.Z, Th232.A, popt, best_param)))
+  plt.plot(Th233.fissility, estimateHalflifeLog(Th233.Z, Th233.A, popt, best_param), marker='s', ms=5, color='0')
+  plt.annotate(r'$^{233}$Th', xy = (Th233.fissility, estimateHalflifeLog(Th233.Z, Th233.A, popt, best_param)))
+ 
   plt.xlabel(xlabelFissility)
   plt.legend()
   ax = plt.gca()
   ax.xaxis.set_major_locator(ticker.MultipleLocator(0.01))
   ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
   plt.grid()
-  plt.show()
+  plt.show()()

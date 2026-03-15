@@ -1272,7 +1272,7 @@ void macro3(int nb_files = -1, double nb_hits_read = 1.e+200, int nb_threads = 1
       // Writing the file (the mutex protects potential concurency issues)
       lock_mutex lock(write_mutex);
       total_time_of_beam_s+=run_duration_s;
-      File Filename(out_filename); Filename.makePath();
+      File Filename(out_filename); Filename.mkdir();
       print("writing spectra in", out_filename, "...");
       std::unique_ptr<TFile> file (TFile::Open(out_filename.c_str(), "recreate"));
         file->cd();

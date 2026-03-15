@@ -91,35 +91,16 @@ class Event
 public:
 
   Event() noexcept = default;
-
-  Event (Hit const & hit) noexcept
-  {
-    *this = hit;
-  }
-
   Event(Event const & event) noexcept = default;
-  Event(Event && event) noexcept = default;
-
-  // Event(Event const & event) noexcept :
-  //   mult (event.mult ),
-  //   stamp(event.stamp),
-  //   readOpt (event.readOpt ),
-  //   writeOpt(event.writeOpt)
-  // {
-  //   std::copy_n(event.labels   , mult ,  labels );
-  //   std::copy_n(event.times    , mult ,  times  );
-  //   std::copy_n(event.adcs     , mult ,  adcs   );
-  //   std::copy_n(event.qdc2s    , mult ,  qdc2s  );
-  //   std::copy_n(event.nrjs     , mult ,  nrjs   );
-  //   std::copy_n(event.nrj2s    , mult ,  nrj2s  );
-  //   std::copy_n(event.pileups  , mult ,  pileups);
-  // }
+  Event(Event      && event) noexcept = default;
+  Event(Hit   const & hit  ) noexcept {*this = hit;}
 
   // Interface with Hit class
-  void push_back (Hit const & hit) noexcept;
-  void push_front(Hit const & hit) noexcept;
+  inline void push_back (Hit const & hit) noexcept;
+  inline void push_front(Hit const & hit) noexcept;
 
   inline bool operator==(Event const & other) const noexcept;
+
   inline Event& operator=(Hit const & hit) noexcept ;
   inline Event& operator=(Event const & evt) noexcept = default ;  
   inline Event& operator=(Event && event) noexcept = default;
@@ -181,9 +162,9 @@ public:
   auto const & label  (int const & hit_i) const {return labels [hit_i];}
   auto       & label  (int const & hit_i)       {return labels [hit_i];}
   auto const & time   (int const & hit_i) const {return times  [hit_i];}
-  auto       & time   (int const & hit_i)       {return times  [hit_i];}
+  // auto       & time   (int const & hit_i)       {return times  [hit_i];}
   auto const & adc    (int const & hit_i) const {return adcs   [hit_i];}
-  auto       & adc    (int const & hit_i)       {return adcs   [hit_i];}
+  // auto       & adc    (int const & hit_i)       {return adcs   [hit_i];}
   auto const & nrj    (int const & hit_i) const {return nrjs   [hit_i];}
   auto       & nrj    (int const & hit_i)       {return nrjs   [hit_i];}
   auto const & qdc2   (int const & hit_i) const {return qdc2s  [hit_i];}

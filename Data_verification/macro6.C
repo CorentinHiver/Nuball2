@@ -159,7 +159,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
 
       Path::make(outFolder);
       std::string out_filename = outFolder+removeExtension(filename)+"_v3.root";
-      File Filename(out_filename); Filename.makePath();
+      File Filename(out_filename); Filename.mkdir();
       TFile* outfile = TFile::Open(out_filename.c_str(), "recreate");
       // std::unique_ptr<TFile> outfile (TFile::Open(out_filename.c_str(), "recreate"));
       

@@ -1632,7 +1632,7 @@ void macro5(int nb_files = -1, double nb_hits_read = -1, int nb_threads = 10)
       print("run of", nicer_seconds(run_duration_s));
 
       total_time_of_beam_s+=run_duration_s;
-      File Filename(out_filename); Filename.makePath();
+      File Filename(out_filename); Filename.mkdir();
       print("writing spectra in", out_filename, "...");
 
       print("Calculate additionnal spectra :");

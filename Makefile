@@ -1,6 +1,6 @@
 ROOT_CFLAGS := $(shell root-config --cflags)
 ROOT_LIBS   := $(shell root-config --libs)
-LIBS    		:= -lz
+LIBS    		:= -lz -ldeflate
 OPT 			  := -march=native 
 # MT := -DMULTITHREAD=4
 MT := 

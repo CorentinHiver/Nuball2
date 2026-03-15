@@ -74,7 +74,7 @@ public:
   {
     p_outPath = Colib::getPath(path);
     if (p_outPath.back() != '/') p_outPath.push_back('/');
-    Colib::makePath(p_outPath, true);
+    Colib::mkdir(p_outPath, true);
   }
 
   bool checkOutput(std::string const & outFile)

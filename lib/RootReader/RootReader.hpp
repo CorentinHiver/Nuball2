@@ -30,7 +30,7 @@ public:
       m_event.reading(m_tree);
       m_useEvents = true;
     }
-    m_maxEntries = m_tree->GetEntries();
+    m_maxEntries = std::min(static_cast<ULong64_t>(m_tree->GetEntries()), m_maxEntries);
     print(filename, "open with", m_maxEntries, "entries");
   }
 
@@ -83,5 +83,5 @@ protected:
   bool m_useHits   = false;
   bool m_useEvents = false;
   ULong64_t m_cursor = 0;
-  ULong64_t m_maxEntries = 0;
+  ULong64_t m_maxEntries = Colib::big<ULong64_t>();
 };

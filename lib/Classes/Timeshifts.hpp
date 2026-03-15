@@ -63,12 +63,21 @@ public:
   /// @brief Returns the size of the timestamp vector
   auto size() const {return m_timeshifts.size();}
 
+  void resize(size_t size) {m_timeshifts.resize(size);}
+
+  void set(size_t label, Timeshift_t ts) 
+  {
+    if (m_timeshifts.size() < label) m_timeshifts.resize(label*2);
+    m_timeshifts[label] = ts;
+  }
+
+  auto const & nbDetectors() const {return m_nb_detectors;}
+
 private:
   std::string m_filename;
   Timeshifts_t m_timeshifts;
   bool m_ok = false;
   int m_nb_detectors = 0;
-  // Colib::Path m_outPath;
   std::string m_outPath;
   
   public:
@@ -106,7 +115,7 @@ bool Timeshifts::load(std::string const & filename)
 void Timeshifts::write(std::string const & fullpath, std::string const & name)
 {
   m_outPath = fullpath;
-  Colib::makePath(m_outPath);
+  Colib::mkdir(m_outPath);
 
   std::string outData = m_outPath + name;
   Colib::setExtension(outData, ".dT");

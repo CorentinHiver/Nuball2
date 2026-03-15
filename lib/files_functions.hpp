@@ -194,11 +194,11 @@ namespace Colib
     return false;
   }
   
-  void makePath(std::string path, bool verbose = 0)
+  void mkdir(std::string path, bool verbose = 0)
   {
     if (path=="")
     {
-      print("Colib::makePath(): No path !");
+      print("Colib::mkdir(): No path !");
       return;
     }
   #ifdef CoMT
@@ -215,7 +215,7 @@ namespace Colib
 
   void fileEnsurePath(std::string const & fileName)
   {
-    makePath(getPath(fileName));
+    mkdir(getPath(fileName));
   }
   
   int nbFilesInFolder(std::string & folder)
@@ -922,7 +922,7 @@ namespace Colib
 //     std::string const & extension() const {return m_filename.extension();}
 
 //     void setExtension(std::string const & new_extension) {m_filename.setExtension(new_extension); update();}
-//     void makePath() {m_path.make();}
+//     void mkdir() {m_path.make();}
 
 //     operator bool() const & {return m_ok;}
 //     bool const & ok()       {return m_ok;}
@@ -939,7 +939,7 @@ namespace Colib
 
 //     void write(bool const & make_path = false)
 //     {
-//       if (make_path) this->makePath();
+//       if (make_path) this->mkdir();
 //       m_file_stream = new std::fstream(m_file, std::ios::out);
 //     }
 

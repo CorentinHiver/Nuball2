@@ -1009,7 +1009,7 @@ void AnalyseIsomer::Write()
   }
 
   File outfilename(m_outDir+m_outRoot);
-  outfilename.makePath(); // Create the output folder if it doesn't exist
+  outfilename.mkdir(); // Create the output folder if it doesn't exist
   unique_TFile outfile(TFile::Open((m_outDir+m_outRoot).c_str(),"recreate"));
   outfile -> cd();
 

@@ -256,6 +256,8 @@ namespace Colib
       }
 
       reset_after_threads(s_nbThreads);
+      std::cout << std::endl;
+      std::cout << "Parallel processing over" << std::endl;;
     }
 
     /**

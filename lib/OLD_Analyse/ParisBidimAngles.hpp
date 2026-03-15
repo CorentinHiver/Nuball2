@@ -88,7 +88,7 @@ void ParisBidimAngles::write(std::string const & filename)
   File outFile(filename);
   outFile.setExtension(m_extension);
   if (outFile.exists()) {print("Overwritting the file", filename, ", press the button to proceed"); std::cin.get();}
-  else (outFile.makePath()); // Create the path if it doesn't already exist
+  else (outFile.mkdir()); // Create the path if it doesn't already exist
 
   std::ofstream outfile(outFile.string(), std::ios::out);
   outfile << *this;
