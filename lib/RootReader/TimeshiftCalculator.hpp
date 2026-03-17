@@ -54,7 +54,6 @@ public:
       std::string name = "dT_" + label_str;
       m_histos.emplace(label, new TH1F(name.c_str(), ("dT " + label_str).c_str(), bins, mindT, maxdT));
     }
-    print();
     RootReader::restart();
     while(RootReader::readNext())
     {
@@ -84,6 +83,8 @@ public:
       auto method = classic;
       if (Colib::found(m_labels_simpleMax, label)) method = simpleMax;
       if (Colib::found(m_labels_raisingEdge, label)) method = raisingEdge;
+      
+      if (Colib::key_found(m_rebins, label)) histo->Rebin(m_rebins.at(label));
 
       if (0 < histo->GetEntries()) 
       {
@@ -169,12 +170,14 @@ public:
 
   void setSimpleMax  (Label label) {m_labels_simpleMax.push_back(label);}
   void setRaisingEdge(Label label) {m_labels_raisingEdge.push_back(label);}
+  void rebin (Label label, int bins) {m_rebins.emplace(label, bins);}
 
 private:
   Timeshifts m_ts;
   std::string m_outName = "test.root";
   std::unordered_map<Label, TH1*> m_histos;
   std::unordered_map<Label, Time> m_binl; // Bin length in ps
+  std::unordered_map<Label, int> m_rebins; // Rebin the default
   std::vector<Label> m_labels;
 
   // Parameters:

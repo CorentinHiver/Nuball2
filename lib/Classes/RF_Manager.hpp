@@ -74,13 +74,14 @@ public:
     // But in some cases, the reference timestamp is higher than the shifted timestamp (when looking "in the past").
     // The following allows one to have valid relative times for both situations :
     Time relative_time;
+    const static thread_local auto lperiod = m_nbPulses*period;
     if (last_downscale_timestamp <= shifted_timestamp)
     {// Normal case
-      relative_time = Time_cast(rf_time%period); // This is the time separating the shifted timestamp to the t0 of the current pulse.
+      relative_time = Time_cast(rf_time%lperiod); // This is the time separating the shifted timestamp to the t0 of the current pulse.
     }
     else if (rf_time<0)
     {// When the RF timestamp is larger than the hit's
-      relative_time = Time_cast(period - (-rf_time)%period); 
+      relative_time = Time_cast(lperiod - (-rf_time)%lperiod); 
     }
     else 
     {
@@ -124,6 +125,8 @@ public:
 
   static void calculateRF(bool b = true) {s_calculateRF = b;}
 
+  void setNbPulses(int nbRFpulses = 1) {m_nbPulses = nbRFpulses;}
+
   // Attributes :
 
   Timestamp last_downscale_timestamp = 0;
@@ -135,6 +138,7 @@ public:
   private:
   inline static Time m_offset = 50_ns;
   inline static bool s_calculateRF = false;
+  int m_nbPulses = 1;
 };
 
 std::ostream& operator<<(std::ostream& cout, RF_Manager const & rf)

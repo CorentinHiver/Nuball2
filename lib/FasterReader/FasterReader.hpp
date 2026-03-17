@@ -95,6 +95,7 @@ public :
 
   constexpr inline bool readData() noexcept
   {
+    if (isBlacklisted()) return false; // Check if the label is on the black list
     checkGroups          (); // If the faster files have been written in group mode (i.e. event building), this class can't read it (yet)
     extractTimestamp     (); // Load the raw timestamp - the high resolution timestamp is added in switch_aliases
     return switch_aliases(); // Read the data based on the type_alias. Returns false if one is not handled.
@@ -158,6 +159,12 @@ public :
 
   auto const & getCursor() const noexcept {return m_cursor;}
   bool setCursor(size_t cursor) noexcept{return skipHits(m_cursor-cursor);} // Returns false if end of file reached
+  void setLabelBlacklist(std::vector<Label> const & labels)
+  {
+    m_nbBlacklistedDets = Colib::maximum(labels);
+    m_blacklist.resize(m_nbBlacklistedDets, false);
+    for (auto const & label : labels) m_blacklist[label] = true;
+  }
 
 	inline void close() noexcept
 	{
@@ -302,6 +309,11 @@ public :
   
 protected :
 
+  constexpr inline bool isBlacklisted() const noexcept
+  {
+    if (m_header.label < m_nbBlacklistedDets && m_blacklist[m_header.label]) return true;
+    return false;
+  }
   constexpr inline void checkGroups() const noexcept
   {
     if (m_header.alias() == Alias::GROUP) error("Group mode is not handled in FasterReader (sry) !!!");
@@ -434,8 +446,8 @@ protected :
       #endif //CoMT
         ++nbErrors;
         // 1. Print error
-        auto bigSize = this->data_size;
-        error("Event n", cursor, ": in FasterReader::loadData("+filename+") for Hit n", cursor,": buffer of size", Config::_bufferSize_, "too small for data of size", bigSize);
+        auto tooBigSize = this->data_size;
+        error("Event n", cursor, ": in FasterReader::loadData("+filename+") for Hit n", cursor,": buffer of size", Config::_bufferSize_, "too small for data of size", tooBigSize);
         // 2. Try to recover the next header
         // 2.1. Read the supposedly next header in the next chunk of data. 
         int n = gzread(datafile, this, size()) ; // Try to read the next header
@@ -446,7 +458,7 @@ protected :
         bool eof = this->recoverNextHeader(datafile, bytesSkipped);
                 // 3. Log the error
         std::ofstream(filename+"_readError.txt", (nbErrors == 1) ? std::ios::out : std::ios::app) 
-          << "Hit n " << cursor << " buffer of size " << Config::_bufferSize_ << " too small for data of size " << bigSize << std::endl;
+          << "Hit n " << cursor << " buffer of size " << Config::_bufferSize_ << " too small for data of size " << tooBigSize << std::endl;
         if (eof) return false;
       }
       return true;
@@ -484,7 +496,7 @@ protected :
     }
   };
 
-  unsigned long long m_timestamp;
+  unsigned long long m_timestamp{};
 
 	std::string m_filename;
 	gzFile m_datafile;
@@ -503,6 +515,9 @@ protected :
   size_t m_file_id = {}; // Count the number of files opened
 
 private:
+
+  std::vector<bool> m_blacklist;
+  unsigned int m_nbBlacklistedDets = 0;
 
   size_t m_nbErrors = {};
 

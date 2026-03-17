@@ -27,22 +27,42 @@ public:
   constexpr bool loadNextRootHit() noexcept
   {
     if (m_nb_hits_max < m_hits.size() || m_nb_hits_tot_max < m_nb_hits_tot ) return false;
-    m_hits.emplace_back(); // Create a new empty hit at the end of the vector, which will be modified by the following code : 
+    auto & hit = m_hits.emplace_back(); // Create a new empty hit at the end of the vector, which will be modified by the following code :
     // cleanQDCs();
     switch(FasterReader::readNextHit())
     {
-      case FasterReader::Alias::TRAPEZ_SPECTRO : loadTrapez(); break;
-      case FasterReader::Alias::RF_DATA        : loadRF    (); break;
-      case FasterReader::Alias::CRRC4_SPECTRO  : loadCRRC4 (); break;
-      case FasterReader::Alias::QDC_TDC_X1     : loadQDC<1>(); break;
-      case FasterReader::Alias::QDC_TDC_X2     : loadQDC<2>(); break;
-      case FasterReader::Alias::QDC_TDC_X3     : loadQDC<3>(); break;
-      case FasterReader::Alias::QDC_TDC_X4     : loadQDC<4>(); break;
+      case FasterReader::Alias::TRAPEZ_SPECTRO : loadTrapez(hit); break;
+      case FasterReader::Alias::RF_DATA        : loadRF    (hit); break;
+      case FasterReader::Alias::CRRC4_SPECTRO  : loadCRRC4 (hit); break;
+      case FasterReader::Alias::QDC_TDC_X1     : loadQDC<1>(hit); break;
+      case FasterReader::Alias::QDC_TDC_X2     : loadQDC<2>(hit); break;
+      case FasterReader::Alias::QDC_TDC_X3     : loadQDC<3>(hit); break;
+      case FasterReader::Alias::QDC_TDC_X4     : loadQDC<4>(hit); break;
       case FasterReader::Alias::EOF_FASTER     : return false; // End of file
       default: error("Unkown alias", static_cast<int>(m_header.alias()));
     }
-    loadLabel(); 
-    loadTimestamp();
+    loadLabel(hit); 
+    loadTimestamp(hit);
+    return true;
+  }
+  
+  constexpr bool loadNextHit() noexcept
+  {
+    if (m_nb_hits_tot_max < m_nb_hits_tot ) return false;
+    switch(FasterReader::readNextHit())
+    {
+      case FasterReader::Alias::TRAPEZ_SPECTRO : loadTrapez(m_hit); break;
+      case FasterReader::Alias::RF_DATA        : loadRF    (m_hit); break;
+      case FasterReader::Alias::CRRC4_SPECTRO  : loadCRRC4 (m_hit); break;
+      case FasterReader::Alias::QDC_TDC_X1     : loadQDC<1>(m_hit); break;
+      case FasterReader::Alias::QDC_TDC_X2     : loadQDC<2>(m_hit); break;
+      case FasterReader::Alias::QDC_TDC_X3     : loadQDC<3>(m_hit); break;
+      case FasterReader::Alias::QDC_TDC_X4     : loadQDC<4>(m_hit); break;
+      case FasterReader::Alias::EOF_FASTER     : return false; // End of file
+      default: error("Unkown alias", static_cast<int>(m_header.alias()));
+    }
+    loadLabel(m_hit); 
+    loadTimestamp(m_hit);
     return true;
   }
 
@@ -116,6 +136,7 @@ public:
   }
 
   auto & data() {return m_hits;}
+  auto const & sortedIDs() const {return m_sortedIDs;}
 
   void clearFull() noexcept override
   {
@@ -142,16 +163,12 @@ public:
 
  
   // Options setters:
-  // Static (true for all instances)
-  // Member ()
   void setMaxHits       (ulonglong    max         ) noexcept {m_nb_hits_max       = max       ;}
   void setTotMaxHits    (ulonglong    max         ) noexcept {m_nb_hits_tot_max   = max       ;}
   // void setHitTrigger    (HitTrigger   trigger     ) noexcept {m_trigger          = trigger    ;}
 
   void setCalibration(Calibration && calib) noexcept
   {
-    print(calib);
-    print(calib.size());
     if (0 < calib.size())
     {
       m_calibrate = true;
@@ -159,65 +176,56 @@ public:
     }
   }
 
-  // Options getters :
   constexpr auto const & getMaxHits() const noexcept {return m_nb_hits_max;}
+
+  constexpr auto const & getHit() const noexcept {return m_hit;}
+  constexpr auto       & getHit()       noexcept {return m_hit;}
 
 private:
 
-  // inline constexpr void fillVector() noexcept
-  // {
-  //   m_hits.emplace_back(Hit);
-  //   newInternalHit();
-  // }
-
-  // inline constexpr void cleanQDCs() noexcept
-  // {
-  //   m_hits.back().qdc2 = 0;
-  //   m_hits.back().qdc3 = 0;
-  // }
-
-  inline constexpr void loadLabel() noexcept
+  inline constexpr void loadLabel(Hit & hit) noexcept
   {
-    m_hits.back().label = FasterReader::m_header.label;
+    hit.label = FasterReader::m_header.label;
   }
 
-  inline constexpr void loadTimestamp() noexcept {m_hits.back().stamp = FasterReader::m_timestamp;}
+  inline constexpr void loadTimestamp(Hit & hit) noexcept {hit.stamp = FasterReader::m_timestamp;}
   
-  inline constexpr void loadTrapez() noexcept
+  inline constexpr void loadTrapez(Hit & hit) noexcept
   {
-    m_hits.back().adc    = FasterReader::m_trapez_spectro.measure;
-    m_hits.back().pileup = (FasterReader::m_trapez_spectro.pileup == 1 || FasterReader::m_trapez_spectro.saturated == 1 || FasterReader::m_trapez_spectro.sat_cpz == 1);
+    hit.adc    = FasterReader::m_trapez_spectro.measure;
+    hit.pileup = (FasterReader::m_trapez_spectro.pileup == 1 || FasterReader::m_trapez_spectro.saturated == 1 || FasterReader::m_trapez_spectro.sat_cpz == 1);
   }
 
-  inline constexpr void loadRF() noexcept
+  inline constexpr void loadRF(Hit & hit) noexcept
   {
-    m_hits.back().adc = static_cast<ADC>(FasterReader::m_rf_data.period_ps());
-    m_hits.back().pileup = FasterReader::m_rf_data.saturated; 
+    hit.adc = static_cast<ADC>(FasterReader::m_rf_data.period_ps());
+    hit.pileup = FasterReader::m_rf_data.saturated; 
   }
 
-  inline constexpr void loadCRRC4() noexcept
+  inline constexpr void loadCRRC4(Hit & hit) noexcept
   {
-    m_hits.back().adc = FasterReader::m_crrc4_spectro.measure;
-    m_hits.back().pileup = (FasterReader::m_crrc4_spectro.pileup == 1 || FasterReader::m_crrc4_spectro.saturated == 1);
+    hit.adc = FasterReader::m_crrc4_spectro.measure;
+    hit.pileup = (FasterReader::m_crrc4_spectro.pileup == 1 || FasterReader::m_crrc4_spectro.saturated == 1);
   }
 
   template<int n>
-  inline constexpr void loadQDC() noexcept
+  inline constexpr void loadQDC(Hit & hit) noexcept
   {
     auto qdc_data = FasterReader::template getQDC<n>();
-    m_hits.back().pileup = false;
+    hit.pileup = false;
     if constexpr (n>0)  
     {
-      m_hits.back().adc  = qdc_data[0].measure; m_hits.back().pileup |= qdc_data[0].saturated;
+      hit.adc  = qdc_data[0].measure; hit.pileup |= qdc_data[0].saturated;
       if constexpr (n>1)  
       {
-        m_hits.back().qdc2 = qdc_data[1].measure; m_hits.back().pileup |= qdc_data[1].saturated;
-        if constexpr (n>2)  {m_hits.back().qdc3 = qdc_data[2].measure; m_hits.back().pileup |= qdc_data[2].saturated;}
+        hit.qdc2 = qdc_data[1].measure; hit.pileup |= qdc_data[1].saturated;
+        if constexpr (n>2)  {hit.qdc3 = qdc_data[2].measure; hit.pileup |= qdc_data[2].saturated;}
       }
     }
   }
 
   // I/O :
+  Hit m_hit;
   size_t m_filesNb = 1;
   ulonglong m_nb_hits_max = Colib::big<ulonglong>();
   ulonglong m_nb_hits_tot_max = Colib::big<ulonglong>();

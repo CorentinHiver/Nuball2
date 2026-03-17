@@ -1222,10 +1222,10 @@ namespace Colib
     return lut;
   }
 
-  template<class Generator>
+  template<class T, class Generator>
   constexpr auto computeList(size_t N_it, Generator g)
   {
-    std::vector<int> vec{};
+    std::vector<T> vec{};
     for (size_t i = 0; i < N_it; ++i) if (g(i)) vec.push_back(i);
     return vec;
   }

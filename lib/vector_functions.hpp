@@ -243,7 +243,7 @@ namespace Colib
   template <typename T>
   T maximum(std::vector<T> const & vector)
   {
-    if (vector.size() < 1 ) throw std::runtime_error("vector size is 0 !!");
+    if (vector.size() < 1 ) throw std::runtime_error("Colib::maximum(vector): vector size is 0 !!");
     auto value = vector[0];
     for (auto const & e : vector) if (e>value) value = e;
     return value;
@@ -252,7 +252,7 @@ namespace Colib
   template <typename T>
   T minimum(std::vector<T> const & vector)
   {
-    if (vector.size() < 1 ) throw std::runtime_error("vector size is 0 !!");
+    if (vector.size() < 1 ) throw std::runtime_error("Colib::maximum(vector): vector size is 0 !!");
     auto value = vector[0];
     for (auto const & e : vector) if (e<value) value = e;
     return value;

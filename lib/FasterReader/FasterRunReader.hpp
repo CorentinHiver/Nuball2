@@ -23,8 +23,7 @@ public:
     print("--hits                        : Do not perform event building (skipped in --ref and --rf modes)");
     print("--merge                       : merge the outputs");
     print("--ref    [label]              : use a detector as time reference and build events around it (usefull for time shift calculations)");
-    print("--rf                          : use rf with downscaled pulse. Frequency is automatically extracted from the data");
-    print("--rf-label                    : Sets the label of the channel where the rf is downscaled");
+    print("--rf     [label]              : use a channel as downscaled pulse RF frequency, automatically extracted from the data");
     // print("-m [threads_number]        : Choose the number of files to treat in multithread mode (default: 1)");
     print("-T [time_window]              : Not used if --hits activated. Sets the event building time window in ns (default : 2000 ns). In RF mode : number of pulses (TODO!)");
     print();
@@ -44,8 +43,7 @@ public:
              if (args == "-nf"       ) setMaxFilesMemory(args.load<int>());
         else if (args == "--hits"    ) buildEvents(false);
         else if (args == "--merge"   ) setMerge(true);
-        else if (args == "--rf"      ) setRF();
-        else if (args == "--rf-label") setRF(args.load<Label>());
+        else if (args == "--rf"      ) setRF(args.load<Label>());
         else if (args == "--ref"     ) setRef(args.load<Label>());
         else if (args == "-T"        ) setTimeWindow(static_cast<Time>(args.load<double>()));
         else if (args == "-i" || args == "in-memory") FasterRootInterface::setTreeInMemory(true);
@@ -108,15 +106,13 @@ public:
     m_useRef = true;
     m_refLabel = refLabel;
   }
-  void setRF()
-  {
-    m_useRF = true;
-  }
   void setRF(Label rfLabel)
   {
-    setRF();
+    m_useRF = true;
     m_rfLabel = rfLabel;
   }
+  void setNbRfPulses(int nb) {m_nbRFpulses = nb;}
+  void setRfShift(Time shift) {m_RFshift = shift;}
   void buildEvents(bool b = true) {m_buildEvents = b;}
 
   // Data processing :
@@ -132,13 +128,13 @@ public:
   void processData(std::string const & outFile)
   {
     m_outputFile = outFile;
-         if (m_useRF)       m_reader.writeEventsWithRF (m_outputFile, m_rfLabel);
+         if (m_useRF)       m_reader.writeEventsWithRF (m_outputFile, m_rfLabel, m_RFshift, m_nbRFpulses);
     else if (m_useRef)      m_reader.writeEventsWithRef(m_outputFile, m_refLabel);
     else if (m_buildEvents) m_reader.writeEvents       (m_outputFile);
     else                    m_reader.writeHits         (m_outputFile);
   }
 
-#if defined (MULTITHREAD) && defined (DEV)
+#if defined (CoMT) && defined (DEV)
 // Work in progress
 // Maintenant il faut inclure des pools de threads pour lire les données en serial mais traiter et écrire les données en parallèle
   void processDataMT(std::string const & outFile)
@@ -212,7 +208,7 @@ public:
       };
 
       Colib::MT::parallelise_stream(my_producer, my_consumer);
-    #endif // DEV
+  #endif // DEV
     #endif // CoMT
 
       while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(formatOutput(outPath + "temp_" + outFile));
@@ -239,6 +235,15 @@ public:
   {
     m_fileBlacklist.push_back(file);
   }
+  void addDetectorBlacklist(Label label)
+  {
+    m_detectorBlacklist.push_back(label);
+  }
+
+  void setBlacklists()
+  {
+    if (0 < m_detectorBlacklist.size()) m_reader.setLabelBlacklist(m_detectorBlacklist);
+  }
 
 protected:
 
@@ -248,11 +253,14 @@ protected:
   
   // Other convenience attributes:
   std::vector<std::string> m_fileBlacklist;
+  std::vector<Label> m_detectorBlacklist;
   int m_maxFilesInMemory = {1};
   bool m_buildEvents = true;
   bool m_merge = false;
   bool m_useRef = false;
   bool m_useRF = false;
+  int m_nbRFpulses = 1;
+  Time m_RFshift = 50_ns;
   Label m_refLabel = 252;
   Label m_rfLabel = 251;
 };

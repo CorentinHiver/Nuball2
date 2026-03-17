@@ -230,6 +230,11 @@ namespace Colib
   {
     mkdir(getPath(fileName));
   }
+
+  void rmFile(std::string const & filename)
+  {
+    std::remove(filename.c_str());
+  }
   
   int nbFilesInFolder(std::string & folder)
   {

@@ -96,6 +96,7 @@ public:
     // 2. Loop through the hits buffer
     for (size_t loop_i = 1; loop_i < m_sortedIDs.size(); ++loop_i)
     {
+      checkMT();
       printHitsProgress(loop_i, "Event building :  ");
       auto const & hit_id     =  m_sortedIDs [loop_i         ];
       auto const & hit        =  m_hits      [hit_id         ];
@@ -124,6 +125,7 @@ public:
     m_eventIDbuffer.reserve(m_sortedIDs.size()/10);
     for (size_t loop_i = 1; loop_i < m_sortedIDs.size(); ++loop_i) 
     {  
+      checkMT();
       printHitsProgress(loop_i, "Event building :  ");
       auto const & hit_ref = m_hits[m_sortedIDs[loop_i]];
       if (hit_ref.label != refLabel) continue;
@@ -157,7 +159,7 @@ public:
     m_eventBuilt = true;
   }
 
-  void buildEventsWithRf(Label rfLabel, int shift = 50_ns)
+  void buildEventsWithRf(Label rfLabel, Time shift = 50_ns, int nbRFpulses = 1)
   {
     timeSorting();
     // In the following, ID and index refer to the position of the hit in the buffer 
@@ -170,6 +172,7 @@ public:
     m_eventIDbuffer.reserve(m_sortedIDs.size()/10); // Optimization attempt : reserve a size that would perfectly match an event buffer with mean multiplicity of 10
 
     RF_Manager rf;
+    rf.setNbPulses(nbRFpulses);
     rf.label = rfLabel;
     rf.setOffset(shift);
     bool b = rf.findFirst(m_hits, m_sortedIDs);
@@ -181,13 +184,13 @@ public:
 
     for (size_t loop_i = 1; loop_i < m_sortedIDs.size(); ++loop_i)
     {
+      checkMT();
       printHitsProgress(loop_i, "Event building with RF at label " + std::to_string(rfLabel) + " :  ");
       auto const & hit_id     =  m_sortedIDs [loop_i];
       auto const & hit        =  m_hits      [hit_id];
 
       if (rf.setHit(hit)) continue; // Do not register RF hits, only extract the period
 
-      // Include shift
       auto const & dT     = Time_cast(hit.stamp - pulseTimestamp);
       auto const & dT_max = rf.period - rf.offset();
 
@@ -250,6 +253,7 @@ public:
 
     for(size_t event_i = 0; event_i<m_eventIDbuffer.size(); ++event_i)
     {
+      if (checkMT()) break;
       o_event.clear();
       for (auto const & hit_id : m_eventIDbuffer[event_i]) 
       {
@@ -283,6 +287,7 @@ public:
       o_event.clear();
       for (auto const & hit_id : m_eventIDbuffer[event_i]) 
       {
+        if (checkMT()) break;
         auto const & hit = m_hits[hit_id];
         o_event.push_back(hit);
         if(hit.label == refLabel) o_event.setT0(hit);
@@ -297,9 +302,9 @@ public:
     writeTree();
   }
 
-  void writeEventsWithRF(std::string const & rootFilename, Label rfLabel = 251, std::string options = "ltTqe")
+  void writeEventsWithRF(std::string const & rootFilename, Label rfLabel = 251, Time shift = 50_ns, int nbRFpulses = 1, std::string options = "ltTqe")
   {
-    if (!m_eventBuilt) buildEventsWithRf(rfLabel);
+    if (!m_eventBuilt) buildEventsWithRf(rfLabel, shift, nbRFpulses);
     openRootFile(rootFilename, (m_nb_outputs++ == 0) ? "recreate" : "update");
     initializeTree("Nuball2", "Nuball2_EventsRF");
 
@@ -311,6 +316,7 @@ public:
 
     for(size_t event_i = 0; event_i<m_eventIDbuffer.size(); ++event_i)
     {
+      if (checkMT()) break;
       printEventsProgress(event_i);
       auto const & evt_ids = m_eventIDbuffer[event_i];
       o_event.clear();
@@ -372,6 +378,15 @@ public:
       printsln(prepend, Colib::nicer_double(cursor, 2), Colib::nicer_double((100.*cursor)/m_hits.size(), 1), "%");
   }
 
+  inline bool checkMT() noexcept
+  {
+    #ifdef CoMT
+      return Colib::MT::isKilled();
+    #else // no CoMT
+      return false;
+    #endif //CoMT
+  }
+
 
 protected:
 
@@ -400,18 +415,18 @@ protected:
   HitTrigger   m_trigger      = [](Hit   const & hit  ) {return !hit.pileup     ;};
 
   // Event building members :
-  Time m_timeWindow = 1_us;
-  RF_Manager m_rf;
-  std::vector<Timestamp> m_rfTimestamps; // One timestamp per event
+  Time m_timeWindow{1_us};
+  RF_Manager m_rf{};
+  std::vector<Timestamp> m_rfTimestamps{}; // One timestamp per event
   
   // States : 
-  bool m_timeSorted = false;
-  bool m_eventBuilt = false;
+  bool m_timeSorted{};
+  bool m_eventBuilt{};
 
   // IO
-  size_t m_nb_outputs = {}; // The number of times the .root file has been filled
+  size_t m_nb_outputs{}; // The number of times the .root file has been filled
 
   // Data :  
-  Calibration m_calib;
-  bool m_calibrate = {};
+  Calibration m_calib{};
+  bool m_calibrate{};
 };
