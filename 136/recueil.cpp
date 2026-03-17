@@ -18,9 +18,9 @@ constexpr bool C2trigger(Event const & event);
 constexpr bool dC1trigger(Event const & event);
 
 constexpr array<Label, LUT_s> timeBlacklist = {70, 97, 800, 801, 840, 841, 849};
-constexpr auto timeBlacklist_LUT = LUT<LUT_s>([&timeBlacklist](Label label) -> bool {return found(timeBlacklist, label);});
+constexpr auto timeBlacklist_LUT = LUT<LUT_s>([](Label label) -> bool {return found(timeBlacklist, label);});
 constexpr array<Label, LUT_s> spectroBlacklist = {70, 80, 92, 122, 129, 163};
-constexpr auto spectroBlacklist_LUT = LUT<LUT_s>([&spectroBlacklist](Label label) -> bool {return found(spectroBlacklist, label);});
+constexpr auto spectroBlacklist_LUT = LUT<LUT_s>([](Label label) -> bool {return found(spectroBlacklist, label);});
 
 int main(int argc, char** argv)
 {
@@ -251,11 +251,11 @@ constexpr bool C2trigger(Event const & event)
   bitset<24> Ge;
   bitset<24> BGO;
 
-  if (timeBlacklist_LUT[label] || spectroBlacklist_LUT[label]) continue;
-
   for (int hit_i = 0; hit_i<event.mult; ++hit_i)
   {
     auto const & label = event.labels[hit_i];
+    if (timeBlacklist_LUT[label] || spectroBlacklist_LUT[label]) continue;
+
          if (isBGO[label]) BGO.set(cloverIndex[label]);
     else if (isGe [label]) Ge .set(cloverIndex[label]);
   }

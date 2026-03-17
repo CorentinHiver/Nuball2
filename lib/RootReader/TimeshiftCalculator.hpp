@@ -46,7 +46,6 @@ public:
     if (maxLabel == std::numeric_limits<Label>::min()) Colib::throw_error("No detector !!");
     for (Label label = minLabel; label <= maxLabel; ++label)
     {
-      std::cout << label << " " <<  labels->GetBinContent(label+1);
       if (labels->GetBinContent(label+1) < 1) continue;
       m_labels.push_back(label);
       
@@ -85,8 +84,6 @@ public:
       auto method = classic;
       if (Colib::found(m_labels_simpleMax, label)) method = simpleMax;
       if (Colib::found(m_labels_raisingEdge, label)) method = raisingEdge;
-
-      print(label, method);
 
       if (0 < histo->GetEntries()) 
       {
@@ -149,7 +146,7 @@ public:
     }
     ts.write(outPath, output);
   }
-  
+
   static void calculate(std::string dataFilename, std::string output = "auto.dT", std::string outPath = "./")
   {
     auto file = TFile::Open(dataFilename.c_str(), "READ");
