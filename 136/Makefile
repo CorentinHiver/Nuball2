@@ -14,7 +14,7 @@ recueil: $(HEADERS) recueil.cpp
 opt: OPT += -O3 #-flto=auto -funroll-loops -fomit-frame-pointer
 opt: recueil
 
-debug: OPT += -g -DDEBUG
+debug: OPT += -g -DDEBUG -fno-inline
 debug: recueil
 
 gen_opt: OPT += -fprofile-generate

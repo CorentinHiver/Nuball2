@@ -41,47 +41,52 @@ using Pileup_vec  = std::vector<Pileup >; // Vector of Pileup bit (bool) !unused
 
 /// @brief Casts a number into unsigned Label
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline Label Index_cast(T const & t) {return static_cast<Index>(t);}
+constexpr inline Label Index_cast(T t) {return static_cast<Index>(t);}
 
 /// @brief Casts a number into unsigned Label
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline Label Label_cast(T const & t) {return static_cast<Label>(t);}
+constexpr inline Label Label_cast(T t) {return static_cast<Label>(t);}
 
 /// @brief Casts a number into unsigned ADC
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline ADC ADC_cast(T const & t) {return static_cast<ADC>(t);}
+constexpr inline ADC ADC_cast(T t) {return static_cast<ADC>(t);}
 
 /// @brief Casts a number into unsigned Time
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline Time Time_cast(T const & t) {return static_cast<Time>(t);}
+constexpr inline Time Time_cast(T t) {return static_cast<Time>(t);}
 
 /// @brief Casts a number into unsigned NRJ
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline NRJ NRJ_cast(T const & t) {return static_cast<NRJ>(t);}
+constexpr inline NRJ NRJ_cast(T t) {return static_cast<NRJ>(t);}
 
 /// @brief Casts a number into unsigned Time_ns
 /// @deprecated
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline Time_ns Time_ns_cast(T const & t) {return static_cast<Time_ns>(t);}
+constexpr inline Time_ns Time_ns_cast(T t) {return static_cast<Time_ns>(t);}
 
 /// @brief Casts a number into unsigned Timestamp
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline Timestamp Timestamp_cast(T const & t) {return static_cast<Timestamp>(t);}
+constexpr inline Timestamp Timestamp_cast(T t) {return static_cast<Timestamp>(t);}
 
 /// @brief Casts a number into unsigned Timestamp
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline ULong64_t ULong64_cast(T const & t) {return static_cast<ULong64_t>(t);}
+constexpr inline ULong64_t ULong64_cast(T t) {return static_cast<ULong64_t>(t);}
 
 /// @brief Casts a number into unsigned Timestamp
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline Long64_t Long64_cast(T const & t) {return static_cast<Long64_t>(t);}
+constexpr inline Long64_t Long64_cast(T t) {return static_cast<Long64_t>(t);}
 
-inline std::string runNumberStr(std::string const & runFilename) {return Colib::split(runFilename, '_')[1];}
-inline int         runNumber   (std::string const & runFilename) {return std::stoi(runNumberStr(runFilename));}
+/////////////////
+// FILE NAMING //
+/////////////////
 
-////////////////
-// MAX values //
-////////////////
+inline std::string runName     (std::string runPath) {return Colib::removeExtension(Colib::removePath(Colib::removeLast(runPath, "/")));}
+inline std::string runNumberStr(std::string runName) {return Colib::split(runName, '_')[1];}
+inline int         runNumber   (std::string runName) {return std::stoi(runNumberStr(runName));}
+
+////////////
+// Values //
+////////////
 
 constexpr inline auto LabelMax = std::numeric_limits<Label>::max();
 
@@ -91,34 +96,33 @@ namespace NSI136
 
   // CLOVERS //
 
-  static constexpr auto cloverIndex  = Colib::LUT<LUT_s> ([](Label const & label) -> Index {return Index_cast((label-23)/6);});
-  static constexpr auto crystalIndex = Colib::LUT<LUT_s> ([](Label const & label) -> Index {return Index_cast((label-23)%6);});
-  static constexpr auto isClover     = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return 22 < label && label < 168;});
-  static constexpr auto isGe         = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return isClover[label] && crystalIndex[label] > 1;});
-  static constexpr auto isBGO        = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return isClover[label] && crystalIndex[label] < 2;});
-  static constexpr auto isR2         = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return isClover[label] && cloverIndex [label] > 12;});
-  static constexpr auto isR3         = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return isClover[label] && cloverIndex [label] < 13;});
+  static constexpr auto cloverIndex  = Colib::LUT<LUT_s> ([](Label label) -> Index {return Index_cast((label-23)/6);});
+  static constexpr auto crystalIndex = Colib::LUT<LUT_s> ([](Label label) -> Index {return Index_cast((label-23)%6);});
+  static constexpr auto isClover     = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 22 < label && label < 168;});
+  static constexpr auto isGe         = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && crystalIndex[label] > 1;});
+  static constexpr auto isBGO        = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && crystalIndex[label] < 2;});
+  static constexpr auto isR2         = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && cloverIndex [label] > 12;});
+  static constexpr auto isR3         = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && cloverIndex [label] < 13;});
   
   //   RF   //
 
-  static constexpr auto isRF         = Colib::LUT<LUT_s> ([](Label const & label) -> bool {return label == 251;});
+  static constexpr auto isRF         = Colib::LUT<LUT_s> ([](Label label) -> bool {return label == 251;});
   
-  //   Ref   //
+  //   REF   //
 
-  static constexpr auto isRefLaBr    = Colib::LUT<LUT_s> ([](Label const & label) -> bool {return label == 252;});
+  static constexpr auto isRefLaBr    = Colib::LUT<LUT_s> ([](Label label) -> bool {return label == 252;});
 
-    
   //  PARIS  //
 
-  // static constexpr auto isBR1   = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return 200 < label && label < 209;});
-  static constexpr auto isBR2   = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return 300 < label && label < 317;});
-  static constexpr auto isBR3   = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return 400 < label && label < 413;});
-  static constexpr auto isFR1   = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return 500 < label && label < 509;});
-  static constexpr auto isFR2   = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return 600 < label && label < 617;});
-  static constexpr auto isFR3   = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return 700 < label && label < 713;});
-  static constexpr auto isBR    = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return Colib::lut_OR(label, isBR2, isBR3);});
-  static constexpr auto isFR    = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return Colib::lut_OR(label, isFR1, isFR2, isFR3);});
-  static constexpr auto isParis = Colib::LUT<LUT_s> ([](Label const & label) -> bool  {return Colib::lut_OR(label, isBR2, isBR3, isFR1, isFR2, isFR3);});
+  // static constexpr auto isBR1   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 200 < label && label < 209;});
+  static constexpr auto isBR2   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 300 < label && label < 317;});
+  static constexpr auto isBR3   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 400 < label && label < 413;});
+  static constexpr auto isFR1   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 500 < label && label < 509;});
+  static constexpr auto isFR2   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 600 < label && label < 617;});
+  static constexpr auto isFR3   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 700 < label && label < 713;});
+  static constexpr auto isBR    = Colib::LUT<LUT_s> ([](Label label) -> bool  {return Colib::lut_OR(label, isBR2, isBR3);});
+  static constexpr auto isFR    = Colib::LUT<LUT_s> ([](Label label) -> bool  {return Colib::lut_OR(label, isFR1, isFR2, isFR3);});
+  static constexpr auto isParis = Colib::LUT<LUT_s> ([](Label label) -> bool  {return Colib::lut_OR(label, isBR2, isBR3, isFR1, isFR2, isFR3);});
   static constexpr auto ParisRingIndex = Colib::LUT<LUT_s> ([](Label const label) -> Label  
   {
       if (!isParis[label]) return LabelMax;
@@ -149,34 +153,27 @@ namespace NSI136
 
   //  DSSD  //
   
-  static constexpr auto isRing    = Colib::LUT<LUT_s> ([](Label const & label) {return 839 < label && label < 856;});
-  static constexpr auto isSector1 = Colib::LUT<LUT_s> ([](Label const & label) {return 799 < label && label < 820;});
-  static constexpr auto isSector2 = Colib::LUT<LUT_s> ([](Label const & label) {return 819 < label && label < 840;});
-  static constexpr auto isSector  = Colib::LUT<LUT_s> ([](Label const & label) {return Colib::lut_OR(label, isSector1, isSector2);});
-  static constexpr auto isDSSD    = Colib::LUT<LUT_s> ([](Label const & label) {return Colib::lut_OR(label, isRing, isSector);});
+  static constexpr auto isSector1 = Colib::LUT<LUT_s> ([](Label label) {return 799 < label && label < 816;});
+  static constexpr auto isSector2 = Colib::LUT<LUT_s> ([](Label label) {return 819 < label && label < 836;});
+  static constexpr auto isRing    = Colib::LUT<LUT_s> ([](Label label) {return 839 < label && label < 856;});
+  static constexpr auto isSector  = Colib::LUT<LUT_s> ([](Label label) {return Colib::lut_OR(label, isSector1, isSector2);});
+  static constexpr auto isDSSD    = Colib::LUT<LUT_s> ([](Label label) {return Colib::lut_OR(label, isRing, isSector);});
+  
+
+  ////////////
+  // Labels //
+  ////////////
+
+  static const auto labelsGe     = Colib::computeList(LUT_s, [](Label label){return (isGe    [label]);});
+  static const auto labelsBGO    = Colib::computeList(LUT_s, [](Label label){return (isBGO   [label]);});
+  static const auto labelsClover = Colib::computeList(LUT_s, [](Label label){return (isClover[label]);});
+  static const auto labelsParis  = Colib::computeList(LUT_s, [](Label label){return (isParis [label]);});
+  static const auto labelsBR     = Colib::computeList(LUT_s, [](Label label){return (isBR    [label]);});
+  static const auto labelsFR     = Colib::computeList(LUT_s, [](Label label){return (isFR    [label]);});
+  static const auto labelsDSSD   = Colib::computeList(LUT_s, [](Label label){return (isDSSD  [label]);});
 
   static constexpr Label maxLabel = Label_cast(LUT_s);
+
+  static constexpr ADC GeOverflow = 5e5; // The overflow bin is almost the same for all Ge
+  static constexpr ADC GeADCThreshold = 500;
 }
-
-// #include "TObject.h"
-// class RootHeader : public TObject
-// {
-//   int8_t status = 0;
-//   inline constexpr static int calibrated = 0b00001;
-//   inline constexpr static int timeshift = 0b00010;
-//   inline constexpr static int corrected = 0b00100;
-//   inline constexpr static int finished = 0b01000;
-
-// public:
-//   RootHeader() = default;
-//   virtual ~RootHeader() = default;
-//   ClassDef(RootHeader, 1);
-
-//   bool isCalibrated () const {return status & calibrated;}
-//   bool isTimeshifted() const {return status & timeshift ;}
-//   bool isFinished   () const {return status & finished  ;}
-//   void setCalibrated () {status |= calibrated;}
-//   void setTimeshifted() {status |= timeshift ;}
-//   void setFinished   () {status |= finished  ;}
-  
-// };

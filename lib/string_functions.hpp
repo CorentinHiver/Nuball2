@@ -18,24 +18,30 @@ namespace Colib
   std::string removeLastPart  (std::string const & string, std::string const & sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
 
   /// @brief Returns the string to the left of the first occurrence of sep in the string
-  std::string firstPart       (std::string const & string, char const & sep) { return (string.substr(0, string.find_first_of(sep) ));  }
+  std::string firstPart       (std::string const & string, char sep) { return (string.substr(0, string.find_first_of(sep) ));  }
   /// @brief Returns the string to the right of the last occurrence of sep in the string
-  std::string lastPart        (std::string const & string, char const & sep) { return (string.substr(   string.find_last_of(sep)+1));  }
+  std::string lastPart        (std::string const & string, char sep) { return (string.substr(   string.find_last_of(sep)+1));  }
   /// @brief Returns the string to the right of the first occurrence of sep in the string
-  std::string removeFirstPart (std::string const & string, char const & sep) { return (string.substr(   string.find_first_of(sep) ));  }
+  std::string removeFirstPart (std::string const & string, char sep) { return (string.substr(   string.find_first_of(sep) ));  }
   /// @brief Returns the string to the left of the last occurrence of sep in the string
-  std::string removeLastPart  (std::string const & string, char const & sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
+  std::string removeLastPart  (std::string const & string, char sep) { return (string.substr(0, string.find_last_of(sep)  ));  }
 
-  /// @brief Returns the string without the firsdt character
+  /// @brief Returns the string without the first character
   std::string popFront(std::string const & string) { return (string.substr(1, string.size()-1));}
-  std::string pop(std::string const & string) { return (string.substr(1, string.size()-1));}
+  std::string popBack(std::string const & string) { return (string.substr(string.size()-1));}
 
   std::string removeAll(std::string string, std::string const & other) 
   {
     size_t pos;
     while ((pos = string.find(other)) != std::string::npos) string.erase(pos, other.size());
     return string;
-}
+  }
+
+  std::string removeLast(std::string string, std::string const & other) 
+  {
+    string.erase(string.find_last_of(other), other.size());
+    return string;
+  }
 
   /**
    * @brief Cuts a string into pieces separated by the given separator like ';' or ' ' or ','

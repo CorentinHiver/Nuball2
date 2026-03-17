@@ -272,7 +272,7 @@ std::string nicer_seconds(T time, int nb_decimals = 3)
 }
 
   template <typename T>
-  std::string nicer_milliseconds(T const & time, int nb_decimals = 3)
+  std::string nicer_milliseconds(T time, int nb_decimals = 3)
   {
     return nicer_seconds(static_cast<T>(time*1e-3), nb_decimals);
   }
@@ -455,31 +455,31 @@ namespace Colib
 
 /// @brief Casts a any type into an bool
 template<typename T>
-constexpr inline bool bool_cast(T const & t) {return static_cast<bool>(t);}
+constexpr inline bool bool_cast(T t) {return static_cast<bool>(t);}
 
 /// @brief Casts a number into an char
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline char char_cast(T const & t) {return static_cast<char>(t);}
+constexpr inline char char_cast(T t) {return static_cast<char>(t);}
 
 /// @brief Casts a number into an short
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline short short_cast(T const & t) {return static_cast<short>(t);}
+constexpr inline short short_cast(T t) {return static_cast<short>(t);}
 
 /// @brief Casts a number into an int
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline int int_cast(T const & t) {return static_cast<int>(t);}
+constexpr inline int int_cast(T t) {return static_cast<int>(t);}
 
 /// @brief Casts a number into an long
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline long long_cast(T const & t) {return static_cast<long>(t);}
+constexpr inline long long_cast(T t) {return static_cast<long>(t);}
 
 /// @brief Casts a number into a float
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline float float_cast(T const & t) {return static_cast<float>(t);}
+constexpr inline float float_cast(T t) {return static_cast<float>(t);}
 
 /// @brief Casts a number into an double
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline double double_cast(T const & t) {return static_cast<double>(t);}
+constexpr inline double double_cast(T t) {return static_cast<double>(t);}
 
 
 // Type short names :
@@ -493,7 +493,7 @@ using size_t = std::size_t;
 // using abs = std::abs;
 
 // Print specialization for uchar : 
-std::ostream& operator<<(std::ostream& cout, uchar const & uc)
+std::ostream& operator<<(std::ostream& cout, uchar uc)
 {
   std::cout << static_cast<int>(uc);
   return cout;
@@ -501,31 +501,31 @@ std::ostream& operator<<(std::ostream& cout, uchar const & uc)
 
 /// @brief Casts a number into unsigned char (uchar)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline uchar uchar_cast(T const & t) {return static_cast<uchar>(t);}
+constexpr inline uchar uchar_cast(T t) {return static_cast<uchar>(t);}
 
 /// @brief Casts a number into unsigned short (ushort)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline ushort ushort_cast(T const & t) {return static_cast<ushort>(t);}
+constexpr inline ushort ushort_cast(T t) {return static_cast<ushort>(t);}
 
 /// @brief Casts a number into unsigned int (uint)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline uint  uint_cast(T const & t) {return static_cast<uint>(t);}
+constexpr inline uint  uint_cast(T t) {return static_cast<uint>(t);}
 
 /// @brief Casts a number into unsigned long (ulong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline ulong ulong_cast(T const & t) {return static_cast<ulong>(t);}
+constexpr inline ulong ulong_cast(T t) {return static_cast<ulong>(t);}
 
 /// @brief Casts a number into unsigned long long (ulonglong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline ulonglong ulonglong_cast(T const & t) {return static_cast<ulonglong>(t);}
+constexpr inline ulonglong ulonglong_cast(T t) {return static_cast<ulonglong>(t);}
 
 /// @brief Casts a number into long long (longlong)
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline longlong longlong_cast(T const & t) {return static_cast<longlong>(t);}
+constexpr inline longlong longlong_cast(T t) {return static_cast<longlong>(t);}
 
 /// @brief Casts a number into std::size_t
 template<typename T,  typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-constexpr inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
+constexpr inline size_t size_cast(T t) {return static_cast<size_t>(t);}
 
 
 ////////////////
@@ -535,7 +535,7 @@ constexpr inline size_t size_cast(T const & t) {return static_cast<size_t>(t);}
 namespace Colib
 {
   ///@brief Check if the given double has integer precision
-  bool is_int (double const & x) {return std::trunc(x) == x;}
+  bool is_int (double x) {return std::trunc(x) == x;}
   
   // Function template that checks if T is a floating-point type
   template <typename T, typename std::enable_if<std::is_floating_point<T>::value, bool>::type = true>
@@ -543,7 +543,7 @@ namespace Colib
     return true;
   }
   template <typename T, typename std::enable_if<std::is_floating_point<T>::value, bool>::type = true>
-  inline bool is_floating(T const &) noexcept {
+  inline bool is_floating(T) noexcept {
     return true;
   }
   
@@ -553,7 +553,7 @@ namespace Colib
     return false;
   }
   template <typename T, typename std::enable_if<!std::is_floating_point<T>::value, bool>::type = true>
-  inline bool is_floating(T const &) noexcept {
+  inline bool is_floating(T) noexcept {
     return false;
   }
   
@@ -563,7 +563,7 @@ namespace Colib
     return true;
   }
   template <typename T, typename std::enable_if<std::is_signed<T>::value, bool>::type = true>
-  inline bool is_signed(T const &) noexcept {
+  inline bool is_signed(T) noexcept {
     return true;
   }
   
@@ -573,7 +573,7 @@ namespace Colib
     return false;
   }
   template <typename T, typename std::enable_if<std::is_unsigned<T>::value, bool>::type = true>
-  inline bool is_signed(T const &) noexcept {
+  inline bool is_signed(T) noexcept {
     return false;
   }
   
@@ -583,7 +583,7 @@ namespace Colib
     return true;
   }
   template <typename T, typename std::enable_if<std::is_unsigned<T>::value, bool>::type = true>
-  inline bool is_unsigned(T const &) noexcept {
+  inline bool is_unsigned(T) noexcept {
     return true;
   }
   
@@ -593,7 +593,7 @@ namespace Colib
     return false;
   }
   template <typename T, typename std::enable_if<std::is_signed<T>::value, bool>::type = true>
-  inline bool is_unsigned(T const &) noexcept {
+  inline bool is_unsigned(T) noexcept {
     return false;
   }
   
@@ -602,7 +602,7 @@ namespace Colib
     return true;
   }
   template <typename Ttest, typename T, typename std::enable_if<std::is_same<T, Ttest>::value, bool>::type = true>
-  inline bool is_type_of(T const &) noexcept {
+  inline bool is_type_of(T) noexcept {
     return true;
   }
   
@@ -611,7 +611,7 @@ namespace Colib
     return false;
   }
   template <typename Ttest, typename T, typename std::enable_if<!std::is_same<T, Ttest>::value, bool>::type = true>
-  inline bool is_type_of(T const &) noexcept {
+  inline bool is_type_of(T) noexcept {
     return false;
   }
 }
@@ -632,7 +632,7 @@ namespace Colib
 
   public:
     Bools() noexcept = default;
-    Bools(size_t size, bool const & value = false) noexcept : m_size(size), m_reserved_size(2*size) {
+    Bools(size_t size, bool value = false) noexcept : m_size(size), m_reserved_size(2*size) {
       m_data = new bool[m_reserved_size];
       memset(m_data, value ? 1 : 0, m_size * sizeof(bool));
     }
@@ -674,7 +674,7 @@ namespace Colib
       return *this;
     }
 
-    void push_back(bool const & value)
+    void push_back(bool value)
     {
       this -> resize(m_size+1);
       m_data[m_size++] = value;
@@ -684,11 +684,11 @@ namespace Colib
       delete[] m_data;
     }
 
-    bool       & operator[](size_t const & index)       {
+    bool       & operator[](size_t index)       {
       return m_data[index];
     }
 
-    bool const & operator[](size_t const & index) const {
+    bool const & operator[](size_t index) const {
       return m_data[index];
     }
 
@@ -709,7 +709,7 @@ namespace Colib
       for (;m_size<size;++m_size) m_data[m_size] = false;
     }
 
-    void resize(size_t size, bool const & value) 
+    void resize(size_t size, bool value) 
     {
       if (size>m_reserved_size)
       {
@@ -826,7 +826,7 @@ namespace Colib
     return std::numeric_limits<T>::max();
   }
 
-  template<class T> T positive_modulo(T const & dividend, T const & divisor)
+  template<class T> T positive_modulo(T dividend, T divisor)
   {
     auto ret = dividend % divisor;
     if (ret<0) ret+=divisor;
@@ -841,11 +841,11 @@ namespace Colib
 
   using Point = std::pair<double, double>;
 
-  Point rotate(double const & x, double const & y, double const & angle) 
+  Point rotate(double x, double y, double angle) 
   {
     return Point(x * cos(angle) - y * sin(angle), x * sin(angle) + y * cos(angle));
   }
-   Point rotate(Point const & point, double const & angle) 
+   Point rotate(Point const & point, double angle) 
   {
     return Point(point.first * cos(angle) - point.second * sin(angle), point.first * sin(angle) + point.second * cos(angle));
   }
@@ -1149,7 +1149,7 @@ namespace Colib
 
 namespace Colib
 {
-  void progress_bar(float const & progress_percent, int width = 50)
+  void progress_bar(float progress_percent, int width = 50)
   {
     auto const & nb_chars = int_cast(progress_percent/100.*width);
 
@@ -1163,11 +1163,11 @@ namespace Colib
     std::cout.flush();
   }
 
-  void short_progress_bar(float const & progress_percent) {progress_bar(progress_percent, 10 );}
-  void long_progress_bar (float const & progress_percent) {progress_bar(progress_percent, 100);}
+  void short_progress_bar(float progress_percent) {progress_bar(progress_percent, 10 );}
+  void long_progress_bar (float progress_percent) {progress_bar(progress_percent, 100);}
   
   template <class T>
-  std::string nicer_double(T const & t, int const & nb_decimals = 0)
+  std::string nicer_double(T t, int nb_decimals = 0)
   {
     auto value = double_cast(t);
     std::string s;
@@ -1187,7 +1187,7 @@ namespace Colib
   }
 
   template <class T1, class T2>
-  std::string percent(T1 const & value, T2 const & ref, int const & nb_decimals = 0)
+  std::string percent(T1 value, T2 ref, int nb_decimals = 0)
   {
     static_assert(std::is_same<T1, T2>::value, "Value and Ref must be of the same type!");
     if (ref == 0) return Colib::Color::RED+std::string("Colib::percent(): Dividing by 0")+Colib::Color::RESET;
@@ -1220,6 +1220,14 @@ namespace Colib
     std::array<type, size> lut;
     for (std::size_t i = 0; i < size; ++i) lut[i] = g(i);
     return lut;
+  }
+
+  template<class Generator>
+  constexpr auto computeList(size_t N_it, Generator g)
+  {
+    std::vector<int> vec{};
+    for (size_t i = 0; i < N_it; ++i) if (g(i)) vec.push_back(i);
+    return vec;
   }
 
 #elif defined(Cpp17)
@@ -1291,6 +1299,16 @@ namespace Colib
     return first[index] && (rest[index] && ...);
   }
 
+  template<size_t N, class Generator>
+  constexpr auto precompute(Generator g)
+  {
+    std::array<int, N> arr{};
+    for (size_t i = 0; i < N; ++i)
+        arr[i] = g(i);
+    return arr;
+  }
+
+
 #endif // defined(Cpp20) || defined(Cpp17)
 
   /// @brief faster binary_search than std::binary_search, works only in ordered arrays
@@ -1323,7 +1341,7 @@ namespace Colib
   template <typename T>
   typename std::enable_if_t<std::is_arithmetic_v<T>, T>
   /// @brief Returns the absolute value of t (can be used at compiled time)
-  constexpr abs_const(T const & t) {return (t>=0) ? t : -t;}
+  constexpr abs_const(T t) {return (t>=0) ? t : -t;}
 
 #endif //Cpp17
 }

@@ -78,7 +78,7 @@ namespace Paris
     Phoswitch& fill(Event const & event, int const & hit_i)
     {
       auto const & label = event.labels[hit_i];
-      auto const & id    = NSI136::ParisClusterIndex[label];
+      auto const & id    = NSI136::ParisIndex[label];
       auto const & nrj   = event.nrjs[hit_i];
       auto const & nrj2  = event.nrj2s[hit_i];
       auto const & time  = event.times[hit_i];

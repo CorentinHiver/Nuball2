@@ -13,32 +13,12 @@ public:
   Calibration() = default;
 
   /// @brief Copy constructor
-  Calibration (Calibration const & otherCalib) :
-    m_filename  (otherCalib.m_filename),
-    m_ok        (otherCalib.m_ok),
-    m_nb_det    (otherCalib.m_nb_det),
-    m_size      (otherCalib.m_size),
-    m_order     (otherCalib.m_order),
-    m_intercept (otherCalib.m_intercept),
-    m_slope     (otherCalib.m_slope),
-    m_binom     (otherCalib.m_binom),
-    m_trinom    (otherCalib.m_trinom)
-  {
-  }
+  Calibration (Calibration const & otherCalib) noexcept = default;
 
   /// @brief Copy operator
-  Calibration const & operator=(Calibration const & otherCalib) 
-  {
-    m_ok        = otherCalib.m_ok;
-    m_nb_det    = otherCalib.m_nb_det;
-    m_size      = otherCalib.m_size;
-    m_order     = otherCalib.m_order;
-    m_intercept = otherCalib.m_intercept;
-    m_slope     = otherCalib.m_slope;
-    m_binom     = otherCalib.m_binom;
-    m_trinom    = otherCalib.m_trinom;
-    return *this;
-  }
+  constexpr Calibration & operator=(Calibration const & otherCalib) noexcept = default;
+  /// @brief Copy operator
+  constexpr Calibration & operator=(Calibration && otherCalib) noexcept = default;
 
   /// @brief Constructor loading calibration from a file
   Calibration(std::string const & file) {load(file);}
@@ -117,25 +97,6 @@ public:
   void calibrate(Event & event, int const & hit_i) const noexcept;
   float apply(float const & nrj, Label const & label) const noexcept;
 
-  // float reverse(float const & nrj, Label const & label) const noexcept
-  // {
-  //   switch(m_order[label])
-  //   {
-  //     case -1 : return nrj;
-  //     case 0 : 
-  //       if (m_slope[label] == 0) return 0;
-  //       else return nrj/m_slope[label];
-  //     case 1 : 
-  //       if (m_slope[label] == 0) return 0;
-  //       else return (nrj-m_intercept[label])/m_slope[label];
-  //     case 2 : 
-  //       auto delta = m_slope[label]*m_slope[label] - 4*m_binom[label]*(m_intercept[label]-nrj);
-  //       if (delta<0) {print("chelou, calibration imaginaire"); return nrj;}
-  //       else return (-m_slope[label]+sqrt(delta))/(2*m_binom[label]);
-  //     default : print("Calibration::reverse() : order", m_order[label], "not handled");
-  //     return nrj;
-  //   }
-  // }
 
   double reverse(int label, double nrj)
 {
@@ -419,7 +380,6 @@ bool Calibration::load(std::string const & file)
   float slope = 1.f, binom = 0.f, trinom = 0.f, intercept = 0.f;
   while (getline(inputfile, line))
   {
-
     m_nb_det++;
     std::istringstream iss (line);
     iss >> label >> intercept >> slope >> binom >> trinom;
@@ -510,3 +470,24 @@ void Calibration::loadFits(Fits const & fits)
 }
 #endif //FIT_HPP
 
+
+
+  // float reverse(float const & nrj, Label const & label) const noexcept
+  // {
+  //   switch(m_order[label])
+  //   {
+  //     case -1 : return nrj;
+  //     case 0 : 
+  //       if (m_slope[label] == 0) return 0;
+  //       else return nrj/m_slope[label];
+  //     case 1 : 
+  //       if (m_slope[label] == 0) return 0;
+  //       else return (nrj-m_intercept[label])/m_slope[label];
+  //     case 2 : 
+  //       auto delta = m_slope[label]*m_slope[label] - 4*m_binom[label]*(m_intercept[label]-nrj);
+  //       if (delta<0) {print("chelou, calibration imaginaire"); return nrj;}
+  //       else return (-m_slope[label]+sqrt(delta))/(2*m_binom[label]);
+  //     default : print("Calibration::reverse() : order", m_order[label], "not handled");
+  //     return nrj;
+  //   }
+  // }

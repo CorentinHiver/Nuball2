@@ -148,9 +148,11 @@ public:
   void setTotMaxHits    (ulonglong    max         ) noexcept {m_nb_hits_tot_max   = max       ;}
   // void setHitTrigger    (HitTrigger   trigger     ) noexcept {m_trigger          = trigger    ;}
 
-  void setCalibration(Calibration && calib ) noexcept
+  void setCalibration(Calibration && calib) noexcept
   {
-    if (0 < m_calib.size())
+    print(calib);
+    print(calib.size());
+    if (0 < calib.size())
     {
       m_calibrate = true;
       m_calib = std::move(calib);
