@@ -66,6 +66,8 @@ public:
   bool treeOk() const {return (m_tree && !m_tree->IsZombie());}
   bool fileOk() const {return (m_file && !m_file->IsZombie());}
 
+  auto getTree() {return m_tree;}
+
   auto nbEntries() const noexcept {return (treeOk()) ? m_maxEntries : 0;}
   void setMaxHits(ULong64_t nb) {m_maxEntries = nb;}
 

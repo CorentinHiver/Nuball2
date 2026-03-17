@@ -36,6 +36,7 @@ public:
 
   auto       & getTree ()       {return m_tree;}
   auto const & getTree () const {return m_tree;}
+  auto getFile() {return m_file;}
 
   auto & data() {return m_hits;}
 
