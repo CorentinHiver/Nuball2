@@ -164,14 +164,15 @@ int main(int argc, char** argv)
           bidim->Write();
           outFile->Close();
         }
+        print(filename, "written");
       }
 
       // -- The results will be disapointing for some detectors because there isn't enough coincidence statistics -- //
       // -- Use the beam pulse that is now synchronized to extract events with good pulse timing. Downscaled ! -- //
-      else if (sub_arg == "more")
+      else if (sub_arg == "checkpulse")
       {
-        print("Use synchronized detectors to better synchronize the detectors");
-
+        print("check synchronization with pulsation");
+        bool overwrite = true;
       #ifdef CoMT
         MT::Initialise(min(static_cast<int>(runs.size()), MULTITHREAD));
         auto const dispatchesd_runs = MT::distribute(runs);
@@ -208,6 +209,28 @@ int main(int argc, char** argv)
           }
           auto max_T = abs(refRF->GetXaxis()->GetBinLowEdge(refRF->GetMaximumBin()));
           if (max_T < 2_ns) ts.set(252, max_T);
+          {
+            lock_mutex lock(MT::mutex);
+            auto file = TFile::Open("checkpulse_dT.root", (overwrite) ? "recreate" : "update");
+            refRF->Write();
+            file->Close();
+            overwrite = false;
+          }
+          auto refRFall = new TH2F((name+"_all").c_str(), (name+"_all").c_str(), 1000,0,1000, 3000, -100_ns, 200_ns);
+          rf.findFirst(reader.data(), reader.sortedIDs());
+          for (auto const & hit_i : reader.sortedIDs())
+          {
+            auto const & hit = reader.data()[hit_i];
+            if (rf.setHit(hit)) continue;
+            refRFall->Fill(hit.label, rf.relTime(hit));
+          }
+          {
+            lock_mutex lock(MT::mutex);
+            auto file = TFile::Open("checkpulse_dT.root", "update");
+            refRFall->Write();
+            file->Close();
+            overwrite = false;
+          }
         }
         
       #ifdef CoMT
@@ -379,6 +402,7 @@ int main(int argc, char** argv)
 void calculateTimeshifts(string filename, string outputPath)
 {
   TimeshiftCalculator ts_cal(filename);
+  ts_cal.setOutputName(runName(filename)+"_dT.root");
   string tsFilename = removePath(setExtension(removeAll(filename, "_ref_252"), "dT"));
   ts_cal.setSimpleMax(251);
   vector<Label> weirdDSSD = {800, 801, 841, 849};
@@ -387,10 +411,16 @@ void calculateTimeshifts(string filename, string outputPath)
     if (found(weirdDSSD, label)) 
     {
       ts_cal.setSimpleMax(251);
+      ts_cal.rebin(label, 200);
+    }
+    else 
+    {
+      ts_cal.setRaisingEdge(label);
       ts_cal.rebin(label, 20);
     }
-    else ts_cal.setRaisingEdge(label);
   }
+  for (auto const & label : labelsClover) ts_cal.rebin(label, 20);
+  ts_cal.rebin(251, 20);
   ts_cal.makeHisto(252, true, outputPath, tsFilename);
 }
 

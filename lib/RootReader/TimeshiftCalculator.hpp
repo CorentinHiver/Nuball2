@@ -174,7 +174,7 @@ public:
 
 private:
   Timeshifts m_ts;
-  std::string m_outName = "test.root";
+  std::string m_outName = "dT.root";
   std::unordered_map<Label, TH1*> m_histos;
   std::unordered_map<Label, Time> m_binl; // Bin length in ps
   std::unordered_map<Label, int> m_rebins; // Rebin the default
