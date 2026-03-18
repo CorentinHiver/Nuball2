@@ -295,26 +295,25 @@ int main(int argc, char** argv)
         }
         Calibration calib(calibFile);
       #ifdef CoMT
-        auto const dispatchesd_files = MT::distribute(files);
-      MT::parallelise_function([&, dispatchesd_files](){
-        for (auto const & filename : dispatchesd_files[MT::getThreadIndex()])
+        auto dispatchesd_files = MT::distribute(files);
+      MT::parallelise_function([&](){
+        files = dispatchesd_files[MT::getThreadIndex()];
         auto thread_str = std::to_string(MT::getThreadIndex());
-      #else // NO CoMT
-        for (auto const & filename : files)
-        {
+      #else //no CoMT
+        std::string thread_str = "";
       #endif // CoMT
-          auto allSpectra = new TH2F(("allSpectra"+thread_str).c_str(), ("allSpectra"+thread_str+";label;nrj[keV]").c_str(), 1000,0,1000, 10_ki,0,10_MeV);
-          auto GeSpectra = new TH2F(("GeSpectra"+thread_str).c_str(), ("GeSpectra"+thread_str+";GeLabel;nrj[keV]").c_str(), 100,0,100, 10_ki,0,10_MeV);
-          auto BGOSpectra = new TH2F(("BGOSpectra"+thread_str).c_str(), ("BGOSpectra"+thread_str+";BGOLabel;nrj[keV]").c_str(), 30,0,30, 1_ki,0,10_MeV);
-          auto ParisSpectra = new TH2F(("ParisSpectra"+thread_str).c_str(), ("ParisSpectra"+thread_str+";ParisLabel;nrj[keV]").c_str(), 100,0,100, 2_ki,0,10_MeV);
-          auto DSSDSpectra = new TH2F(("DSSDSpectra"+thread_str).c_str(), ("DSSDSpectra"+thread_str+";DSSDLabel;nrj[keV]").c_str(), 50,0,50, 1_ki,0,30_MeV);
-          FasterRootInterface reader(filename);
-          while(reader.loadDatafiles(dispatchesd_files, 5))
+          auto allSpectra   = new TH2F(("allSpectra"  +thread_str).c_str(), "allSpectra;label;nrj[keV]"       , 1000,0,1000, 10_ki,0,10_MeV);
+          auto GeSpectra    = new TH2F(("GeSpectra"   +thread_str).c_str(), "GeSpectra;GeLabel;nrj[keV]"      , 100 ,0, 100, 10_ki,0,10_MeV);
+          auto BGOSpectra   = new TH2F(("BGOSpectra"  +thread_str).c_str(), "BGOSpectra;BGOLabel;nrj[keV]"    , 30  ,0,  30,  1_ki,0,10_MeV);
+          auto ParisSpectra = new TH2F(("ParisSpectra"+thread_str).c_str(), "ParisSpectra;ParisLabel;nrj[keV]", 100 ,0, 100,  2_ki,0,10_MeV);
+          auto DSSDSpectra  = new TH2F(("DSSDSpectra" +thread_str).c_str(), "DSSDSpectra;DSSDLabel;nrj[keV]"  , 50  ,0,  50,  1_ki,0,30_MeV);
+          FasterRootInterface reader;
+          while(reader.loadDatafiles(files, 5))
           {
             reader.timeSorting();
             for (auto const & hit_i : reader.sortedIDs())
             {
-              auto const & hit = reader.data()[hit_i];
+              auto & hit = reader.data()[hit_i];
               calib.calibrate(hit);
 
               allSpectra->Fill(hit.label, hit.nrj);
@@ -328,7 +327,6 @@ int main(int argc, char** argv)
               }
             }
           }
-        }
       #ifdef CoMT
         });
       #endif // CoMT
@@ -353,7 +351,7 @@ int main(int argc, char** argv)
           // print(" -c  || --calibration: Calibration file to use. Default:", tsPath);
           print(" -h  || --help: display this help");
         }
-        else throw_error("in --spectra run," args, "argument is not known");
+        else throw_error("in --spectra run,"+args.getArg()+"argument is not known");
 
       }
 

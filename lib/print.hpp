@@ -75,7 +75,7 @@ inline void print() noexcept
 
 /// Print with space separation + newline
 template <class... Args>
-void print(const Args&... args) noexcept
+constexpr inline void print(const Args&... args) noexcept
 {
   lock_mutex lock(print_mutex);
   ((std::cout << args << ' '), ...);
@@ -84,7 +84,7 @@ void print(const Args&... args) noexcept
 
 /// Concatenated print + newline
 template <class... Args>
-void printC(const Args&... args) noexcept
+constexpr inline void printC(const Args&... args) noexcept
 {
   lock_mutex lock(print_mutex);
   ((std::cout << args), ...);
@@ -93,7 +93,7 @@ void printC(const Args&... args) noexcept
 
 /// Concatenated print, no newline
 template <class... Args>
-void println(const Args&... args) noexcept
+constexpr inline void println(const Args&... args) noexcept
 {
   lock_mutex lock(print_mutex);
   ((std::cout << args), ...);
@@ -108,7 +108,7 @@ inline void print_precision(int n = 6) noexcept
 
 /// Debug print (requires -DDEBUG)
 template <class... Args>
-void debug(Args&&... args) noexcept
+constexpr inline void debug(Args&&... args) noexcept
 {
 #ifdef DEBUG
   print(std::forward<Args>(args)...);
@@ -124,7 +124,7 @@ namespace Colib
 /// @details Automatically adds space between each input. Do not terminate the output with a "\\n". 
 /// Go back at the beginning of the line.
 template <class... Ts> 
-void printsln(Ts &&... ts)  noexcept
+constexpr inline void printsln(Ts &&... ts)  noexcept
 {
   Colib::MT::printsln(std::forward<Ts>(ts)...);
 }
@@ -133,7 +133,7 @@ void printsln(Ts &&... ts)  noexcept
 
 
 /// @brief New line
-void print() noexcept {std::cout << std::endl;}
+inline void print() noexcept {std::cout << std::endl;}
 
 /// @brief Generic print
 /// @details Automatically adds space between each input. Terminate the output with a "\\n"
@@ -234,17 +234,21 @@ constexpr void information(T const & ... t) noexcept
   std::cout << Colib::Color::RESET;
 }
 
+#ifdef Cpp20
 constexpr std::string nicer_bool(bool const some_bool) noexcept
+#else // Cpp<20
+std::string nicer_bool(bool const some_bool) noexcept
+#endif // Cpp20
 {
-    using namespace Colib::Color;
+  using namespace Colib::Color;
 
-    if (some_bool) return (std::string{BLUE} + "true " + RESET);
-    else           return (std::string{RED } + "false" + RESET);
+  if (some_bool) return (std::string{BLUE} + "true " + RESET);
+  else           return (std::string{RED } + "false" + RESET);
 }
 
 /// @brief Prints a fixed-size output filled with 0 where t is not printed
 template <size_t __length__, char fillWith = '0', class T>
-constexpr void printfill(T const & t) noexcept {
+void printfill(T const & t) noexcept {
   std::cout << std::setfill(fillWith) << std::setw(__length__) << t;
 }
 

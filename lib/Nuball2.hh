@@ -107,11 +107,11 @@ namespace NSI136
   
   //   RF   //
 
-  static constexpr auto isRF         = Colib::LUT<LUT_s> ([](Label label) -> bool {return label == 251;});
+  static constexpr auto isRF = Colib::LUT<LUT_s> ([](Label label) -> bool {return label == 251;});
   
   //   REF   //
 
-  static constexpr auto isRefLaBr    = Colib::LUT<LUT_s> ([](Label label) -> bool {return label == 252;});
+  static constexpr auto isRef = Colib::LUT<LUT_s> ([](Label label) -> bool {return label == 252;});
 
   //  PARIS  //
 
@@ -164,7 +164,7 @@ namespace NSI136
   {
     enum Type {Ge, BGO, Ref, RF, Paris, DSSD, DEFAULT};
   }
-  
+
   static constexpr auto detectorType = Colib::LUT<LUT_s> ([](Label label){
     if (isGe[label]) return Detector::Ge;
     else if (isBGO[label]) return Detector::BGO;
@@ -173,7 +173,7 @@ namespace NSI136
     else if (isParis[label]) return Detector::Paris;
     else if (isDSSD[label]) return Detector::DSSD;
     else return Detector::DEFAULT;
-  })
+  });
   
   ////////////
   // Labels //
