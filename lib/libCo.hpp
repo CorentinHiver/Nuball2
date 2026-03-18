@@ -151,14 +151,14 @@ namespace Colib
 {
   namespace Terminal
   {
-    int getTerminalRows() 
+    int getRows() 
     {
       struct winsize w;
       if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) return 24; // fallback
       return w.ws_row;
     }
     
-    int getTerminalCols() 
+    int getCols() 
     {
       struct winsize w;
       if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) return 80; // fallback

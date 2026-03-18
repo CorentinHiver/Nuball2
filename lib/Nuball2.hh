@@ -103,6 +103,7 @@ namespace NSI136
   static constexpr auto isBGO        = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && crystalIndex[label] < 2;});
   static constexpr auto isR2         = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && cloverIndex [label] > 12;});
   static constexpr auto isR3         = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && cloverIndex [label] < 13;});
+  static constexpr auto GeIndex      = Colib::LUT<LUT_s> ([](Label label) -> Label {return (isGe[label]) ? crystalIndex[label]-2+4*cloverIndex[label] : -1;});
   
   //   RF   //
 
@@ -158,6 +159,21 @@ namespace NSI136
   static constexpr auto isRing    = Colib::LUT<LUT_s> ([](Label label) {return 839 < label && label < 856;});
   static constexpr auto isSector  = Colib::LUT<LUT_s> ([](Label label) {return Colib::lut_OR(label, isSector1, isSector2);});
   static constexpr auto isDSSD    = Colib::LUT<LUT_s> ([](Label label) {return Colib::lut_OR(label, isRing, isSector);});
+
+  namespace Detector
+  {
+    enum Type {Ge, BGO, Ref, RF, Paris, DSSD, DEFAULT};
+  }
+  
+  static constexpr auto detectorType = Colib::LUT<LUT_s> ([](Label label){
+    if (isGe[label]) return Detector::Ge;
+    else if (isBGO[label]) return Detector::BGO;
+    else if (isRef[label]) return Detector::Ref;
+    else if (isRF[label]) return Detector::RF;
+    else if (isParis[label]) return Detector::Paris;
+    else if (isDSSD[label]) return Detector::DSSD;
+    else return Detector::DEFAULT;
+  })
   
   ////////////
   // Labels //

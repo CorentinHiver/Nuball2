@@ -40,10 +40,11 @@ namespace Colib
   std::string extension       (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
   std::string getExtension    (std::string const & string) { return (string.substr(   string.find_last_of(".")+1));}
   std::string removePath      (std::string const & string) { return (string.substr(   string.find_last_of("/")+1));}
+  std::string getFilename     (std::string const & string) { return            removePath(string)                 ;}
   std::string rmPathAndExt    (std::string const & string) { return            removePath(removeExtension(string));}
   std::string getShortname    (std::string const & string) { return            removePath(removeExtension(string));}
   std::string getRawPath      (std::string const & string) { return (string.substr(0, string.find_last_of("/")+1));}
-
+  
   /// @brief Return /home/usr
   std::string getHome() {return std::getenv("HOME");}
   /// @brief Return /path/to/current/folder

@@ -2,14 +2,13 @@
 #define MULTITHREAD 2
 
 #ifdef MULTITHREAD
-  #include "lib/CoMT/CoMT.hpp"
+  #include "lib/Classes/CoMT.hpp"
 #endif // MULTITHREAD
 
 #include "lib/Classes/Timer.hpp"
 
 // #include "lib/libCo.hpp"
 // #include "lib/libRoot.hpp"
-// #include "lib/CoMT/CoMT.hpp"
 // #include "lib/print.hpp"
 // #include "lib/randomCo.hpp"
 // #include "lib/Classes/FilesManager.hpp"
