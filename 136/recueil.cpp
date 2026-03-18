@@ -363,7 +363,8 @@ int main(int argc, char** argv)
     #endif // CoMT
       {
         auto run_name = runName(run);
-        print(run, run_name);
+        printsln(run, run_name);
+        if (runNumber(run_name) < 13) continue;
         string tsFilename = tsPath+setExtension(run_name, "dT");
         string calibFilename = calibPath+"temp_136.calib";
 
