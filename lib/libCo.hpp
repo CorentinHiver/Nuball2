@@ -812,19 +812,13 @@ namespace Colib
   template<class T>
   inline constexpr T abs(T x) { return (x < 0) ? -x : x; }
 
-  /// @brief Gives the biggest number of the given type
+  /// @brief Gives the maximum number of the given type
   template <typename T>
-  inline constexpr T big() 
-  {
-    // // Calculate the number of bits in the type T
-    // const int num_bits = sizeof(T) * CHAR_BIT;
+  inline constexpr T max(){return std::numeric_limits<T>::max();}
 
-    // // For signed types, set all bits except the sign bit
-    // // For unsigned types, set all bits
-    // if (std::is_signed<T>::value) return ~(static_cast<T>(1) << (num_bits - 1));
-    // else                          return ~static_cast<T>(0);
-    return std::numeric_limits<T>::max();
-  }
+  /// @brief Gives the minimum number of the given type (0 for unsigned, -max for others)
+  template <typename T>
+  inline constexpr T min(){return std::numeric_limits<T>::min();}
 
   template<class T> T positive_modulo(T dividend, T divisor)
   {
@@ -839,15 +833,36 @@ namespace Colib
   template<class... ARGS>
   inline double mean(ARGS... args) {return double_cast(sum(args...) / sizeof...(args));}
 
-  using Point = std::pair<double, double>;
+  // Geometry
+
+  struct Point   {double x, y;};
+  struct Point3D {double x, y, z;};
+
+  double distance(Point const & p1, Point const & p2) {return std::hypot(p1.x - p2.x, p1.y - p2.y);}
+  double distance(Point3D const & p1, Point3D const & p2) {return std::hypot(p1.x - p2.x, p1.y - p2.y, p1.z - p2.z);}
 
   Point rotate(double x, double y, double angle) 
   {
-    return Point(x * cos(angle) - y * sin(angle), x * sin(angle) + y * cos(angle));
+    const double s = std::sin(angle);
+    const double c = std::cos(angle);
+    return { x * c - y * s, x * s + y * c };
   }
-   Point rotate(Point const & point, double angle) 
+  Point rotate(Point const & point, double angle) {return rotate(point.x, point.y, angle);}
+
+  Point3D rotateX(Point3D p, double angle) 
   {
-    return Point(point.first * cos(angle) - point.second * sin(angle), point.first * sin(angle) + point.second * cos(angle));
+    double s = std::sin(angle), c = std::cos(angle);
+    return { p.x, p.y * c - p.z * s, p.y * s + p.z * c };
+  }
+  Point3D rotateY(Point3D p, double angle) 
+  {
+    double s = std::sin(angle), c = std::cos(angle);
+    return { p.x * c + p.z * s, p.y, -p.x * s + p.z * c };
+  }
+  Point3D rotateZ(Point3D p, double angle) 
+  {
+    double s = std::sin(angle), c = std::cos(angle);
+    return { p.x * c - p.y * s, p.x * s + p.y * c, p.z };
   }
 }
 

@@ -45,21 +45,25 @@ public :
 
 	virtual bool open(std::string const & filename) noexcept
 	{
+  #ifdef CoMT
+    lock_mutex lock(Colib::MT::mutex);
+  #endif //CoMT
+
     if (filename.back() == '/') Colib::throw_error("In FasterRootV2::open("+filename+"): not a file !");
     m_cursor = 0;
     m_filename = filename;
     fs::path p(m_filename);
     if(!fs::is_regular_file(p)) 
     {
-      error(filename + " is not a file !");
+      error(m_filename + " is not a file !");
       return false;
     }
-		if (!(m_datafile = gzopen(filename.c_str(), "rb")))
+		if (!(m_datafile = gzopen(m_filename.c_str(), "rb")))
 		{
-			error("Couldn't find "+ filename + " !");
+			error("Couldn't find "+ m_filename + " !");
 			return false;
 		}
-    if(gzbuffer(m_datafile, 4 * 1024 * 1024) < 0) error("Couldn't expand gz buffer for "+ filename + " !");;
+    if(gzbuffer(m_datafile, 1 * 1024 * 1024) < 0) error("Couldn't expand gz buffer for "+ m_filename + " !");;
 		return (m_open = true);
 	}
 

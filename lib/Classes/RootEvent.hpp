@@ -3,31 +3,27 @@
 #include "RootHit.hpp"
 #include "Event.hpp"
 
-  /////////////////////////////////
-  // DECOUPLING FROM LIBROOT.HPP //
-  /////////////////////////////////
-
-namespace ColibBis
+namespace RootBranches
 {
-  template<class T> std::string typeRoot()          {return "Unknown";}
-  template<> std::string typeRoot<bool>()           {return "O";}
-  template<> std::string typeRoot<char>()           {return "B";}
-  template<> std::string typeRoot<unsigned char>()  {return "b";}
-  template<> std::string typeRoot<short>()          {return "S";}
+  template<class T> std::string typeRoot         () {return "Unknown";}
+  template<> std::string typeRoot<bool>          () {return "O";}
+  template<> std::string typeRoot<char>          () {return "B";}
+  template<> std::string typeRoot<unsigned char> () {return "b";}
+  template<> std::string typeRoot<short>         () {return "S";}
   template<> std::string typeRoot<unsigned short>() {return "s";}
-  template<> std::string typeRoot<int>()            {return "I";}
-  template<> std::string typeRoot<unsigned int>()   {return "i";}
-  template<> std::string typeRoot<long>()           {return "G";}
-  template<> std::string typeRoot<unsigned long>()  {return "g";}
-  template<> std::string typeRoot<double>()         {return "D";}
-  template<> std::string typeRoot<float>()          {return "F";}
-  template<> std::string typeRoot<Long64_t>()       {return "L";}
-  template<> std::string typeRoot<ULong64_t>()      {return "l";}
+  template<> std::string typeRoot<int>           () {return "I";}
+  template<> std::string typeRoot<unsigned int>  () {return "i";}
+  template<> std::string typeRoot<long>          () {return "G";}
+  template<> std::string typeRoot<unsigned long> () {return "g";}
+  template<> std::string typeRoot<double>        () {return "D";}
+  template<> std::string typeRoot<float>         () {return "F";}
+  template<> std::string typeRoot<Long64_t>      () {return "L";}
+  template<> std::string typeRoot<ULong64_t>     () {return "l";}
 
   
   /// @brief Create a branch for a given value and name
   template<class T>
-  auto createBranch(TTree* tree, std::string const & name, T * value, int buffsize = 256_ki)
+  auto createBranch(TTree* tree, std::string const & name, T * value, int buffsize = 128_ki)
   {
     std::string type_root_format = name+"/"+typeRoot<T>();
     return (tree -> Branch(name.c_str(), value, type_root_format.c_str(), buffsize));
@@ -36,12 +32,12 @@ namespace ColibBis
   /// @brief Create a branch for a given array and name
   /// @param name_size: The name of the leaf that holds the size of the array (like the event multiplicity)
   template<class T>
-  TBranch* createBranchArray(TTree* tree, std::string const & name, T * array, std::string const & name_size, int buffsize = 256_ki)
+  TBranch* createBranchArray(TTree* tree, std::string const & name, T * array, std::string const & name_size, int buffsize = 128_ki)
   {
     std::string type_root_format = name + "[" + name_size + "]/" + typeRoot<std::remove_extent_t<T>>();
     return tree->Branch(name.c_str(), array, type_root_format.c_str(), buffsize);
   }
-}
+};
 
 class RootEvent : public Event
 {
@@ -94,16 +90,16 @@ public:
 
     tree -> ResetBranchAddresses();
 
-    ColibBis::createBranch(tree,"mult", &mult);
+    RootBranches::createBranch(tree,"mult", &mult);
     
-    if (writeOpt.test("t")) ColibBis::createBranch     (tree,  "stamp"  , &stamp  );
-    if (writeOpt.test("T")) ColibBis::createBranchArray(tree,  "time"   , &times  , "mult");
-    if (writeOpt.test("E")) ColibBis::createBranchArray(tree,  "nrj"    , &nrjs   , "mult");
-    if (writeOpt.test("Q")) ColibBis::createBranchArray(tree,  "nrj2"   , &nrj2s  , "mult");
-    if (writeOpt.test("e")) ColibBis::createBranchArray(tree,  "adc"    , &adcs   , "mult");
-    if (writeOpt.test("q")) ColibBis::createBranchArray(tree,  "qdc2"   , &qdc2s  , "mult");
-    if (writeOpt.test("l")) ColibBis::createBranchArray(tree,  "label"  , &labels , "mult");
-    if (writeOpt.test("p")) ColibBis::createBranchArray(tree,  "pileup" , &pileups, "mult");
+    if (writeOpt.test("t")) RootBranches::createBranch     (tree,  "stamp"  , &stamp  );
+    if (writeOpt.test("T")) RootBranches::createBranchArray(tree,  "time"   , &times  , "mult");
+    if (writeOpt.test("E")) RootBranches::createBranchArray(tree,  "nrj"    , &nrjs   , "mult");
+    if (writeOpt.test("Q")) RootBranches::createBranchArray(tree,  "nrj2"   , &nrj2s  , "mult");
+    if (writeOpt.test("e")) RootBranches::createBranchArray(tree,  "adc"    , &adcs   , "mult");
+    if (writeOpt.test("q")) RootBranches::createBranchArray(tree,  "qdc2"   , &qdc2s  , "mult");
+    if (writeOpt.test("l")) RootBranches::createBranchArray(tree,  "label"  , &labels , "mult");
+    if (writeOpt.test("p")) RootBranches::createBranchArray(tree,  "pileup" , &pileups, "mult");
     
     tree -> SetBranchStatus("*",true);
   }

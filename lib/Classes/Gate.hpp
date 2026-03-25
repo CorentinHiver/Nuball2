@@ -1,6 +1,4 @@
-#ifndef GATE_HPP
-#define GATE_HPP
-
+#pragma once
 #include "../libCo.hpp"
 
 /**
@@ -12,8 +10,9 @@ template<typename T>
 class Gate_t
 {
 public:
-  Gate_t(){}
-  Gate_t(std::initializer_list<T> inputs) 
+  constexpr Gate_t() noexcept = default;
+  constexpr Gate_t(T s, T e) noexcept : start(s), stop(e) {}
+  constexpr Gate_t(std::initializer_list<T> inputs) 
   {
     if (inputs.size() == 2) 
     {
@@ -21,20 +20,23 @@ public:
       start = *it;
       stop = *(++it);
     }
+    // else Colib::throw_error("in Gate(", inputs, ") : input size > 2 !!");
   }
+  // void operator= (std::pair <T,T> const & gate) {start = gate.first; stop = gate.second;}
+  // void operator= (Gate_t const & timegate) {start = timegate.start; stop = timegate.stop;}
+  constexpr Gate_t& operator= (Gate_t const & timegate) noexcept = default;
 
-  void operator= (std::pair <T,T> const & gate) {start = gate.first; stop = gate.second;}
-  void operator= (Gate_t const & timegate) {start = timegate.start; stop = timegate.stop;}
-
-  bool operator() (T const & e) {return (e>start && e<stop);}
-  bool isIn       (T const & e) {return (e>start && e<stop);}
-
+  [[nodiscard]] constexpr bool operator() (T const & e) const {return (e>start && e<stop);}
+  [[nodiscard]] constexpr bool isIn      (T const & e) const {return (e>start && e<stop);}
   T start = 0.;
   T stop = 0.;
-
-  void use(bool const & _use = true) {m_use = _use;}
-  bool const & used() const {return m_use;}
-
+  constexpr void use(bool const & _use = true) {m_use = _use;}
+  [[nodiscard]] constexpr bool const & used() const {return m_use;}
+  friend std::ostream& operator<<(std::ostream& out, Gate_t const & gate)
+  {
+    out << gate.start << " " << gate.stop;
+    return out;
+  }
 private:
   bool m_use = false;
 };
@@ -48,42 +50,40 @@ template<typename T>
 class Gates_t
 {
 public:
-  Gates_t(){}
-  Gates_t(std::initializer_list<T> bounds) : m_size(bounds.size()/2)
+  constexpr Gates_t() noexcept = default;
+  constexpr Gates_t(std::initializer_list<T> bounds) : m_size(bounds.size()/2)
   {
     check(bounds);
+    m_gates.reserve(m_size); // Efficiency: reserve space
+    
     bool low = true;
+    T s;
     for (auto const & bound : bounds)
     {
-      if (low) start.push_back(bound);
-      else     stop .push_back(bound);
+      if (low) s = bound;
+      else     m_gates.push_back({s, bound});
       low = !low;
     }
   }
-
-  bool isIn(T const & t) 
+  // C++17: Marked const so it can be used in read-only contexts
+  [[nodiscard]] constexpr bool isIn(T const & t) const
   {
     for (std::size_t i = 0; i<m_size; i++)
     {
-      if (t>start[i] && t<stop[i]) return true;
+      if (t>m_gates[i].first && t<m_gates[i].second) return true;
     }
     return false;
   }
-
-  bool operator() (T const & t) const {return isIn(t);}
-
+  [[nodiscard]] constexpr bool operator() (T const & t) const {return isIn(t);}
   void check(std::initializer_list<T> bounds)
   {
-    if (bounds.size()%2 == 1) Colib::throw_error(" Gates Initialiser must have an even number of bounds (one lower and one higher bound)");
+    if (bounds.size()%2 == 1) Colib::throw_error(" Gates Initialiser must have an even number of bounds");
   }
-  std::size_t const & size() const {return m_size;}
-
+  
+  [[nodiscard]] std::size_t const & size() const {return m_size;}
 private:
-  std::vector<T> start;
-  std::vector<T> stop ;
+  std::vector<std::pair<T,T>> m_gates;
   std::size_t m_size = 0;
 };
 
 using Gates = Gates_t<float>;
-
-#endif //GATE_HPP

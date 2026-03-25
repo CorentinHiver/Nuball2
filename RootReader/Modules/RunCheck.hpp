@@ -71,7 +71,7 @@ bool RunCheck::launch(Parameters & p)
 
 void RunCheck::InitialiseManip()
 {
-  auto const & nbThreads = MTObject::getThreadsNb();
+  auto const & nbThreads = MTObject::getNbThreads();
   m_name_run.resize(nbThreads);
   print("Initialise the manip histograms...");
   GeSpectraManip.reset("Each_Clover_Spectra", "Each Clover Spectra", 24,0,24, 10000,0,10000);

@@ -83,7 +83,7 @@ public:
       histo->GetXaxis()->Set(histo->GetNbinsX(), new_min, new_max);
       histo->GetXaxis()->SetRangeUser(new_min, new_max);
     }
-    else Colib::throw_error(concatenate("Can't use Calibration::calibrateAxis(TH1F*, Label) with calibration order > 1 yet", Colib::error_message["DEV"]));
+    else Colib::throw_error(Colib::concatenate("Can't use Calibration::calibrateAxis(TH1F*, Label) with calibration order > 1 yet", Colib::error_message["DEV"]));
   }
 #endif //ROOT_TH1
 
@@ -97,34 +97,33 @@ public:
   void calibrate(Event & event, int const & hit_i) const noexcept;
   float apply(float const & nrj, Label const & label) const noexcept;
 
-
   double reverse(int label, double nrj)
-{
+  {
     switch (m_order[label])
     {
-        case -1: 
-            return nrj;
+      case -1: 
+        return nrj;
 
-        case 0: 
-            // Check for potential division by zero
-            if (m_slope[label] == 0) return 0;
-            else return nrj / m_slope[label];
+      case 0: 
+        // Check for potential division by zero
+        if (m_slope[label] == 0) return 0;
+        else return nrj / m_slope[label];
 
-        case 1: 
-            if (m_slope[label] == 0) return 0;
-            else return (nrj - m_intercept[label]) / m_slope[label];
+      case 1: 
+        if (m_slope[label] == 0) return 0;
+        else return (nrj - m_intercept[label]) / m_slope[label];
 
-        case 2: 
-        {
-            auto const & delta = m_slope[label] * m_slope[label] - 4 * m_binom[label] * (m_intercept[label] - nrj);
-            if (delta < 0) return nrj;
-            if (m_binom[label] == 0) return nrj;
-            return (-m_slope[label] + std::sqrt(delta)) / (2 * m_binom[label]);
-        }
+      case 2: 
+      {
+        auto const & delta = m_slope[label] * m_slope[label] - 4 * m_binom[label] * (m_intercept[label] - nrj);
+        if (delta < 0) return nrj;
+        if (m_binom[label] == 0) return nrj;
+        return (-m_slope[label] + std::sqrt(delta)) / (2 * m_binom[label]);
+      }
 
-        default: return nrj;
+      default: return nrj;
     }
-}
+  }
 
   /// @brief Wrapper around the Calibration::calibrate() methods
   template<class... ARGS>
@@ -386,7 +385,7 @@ bool Calibration::load(std::string const & file)
     this -> set(label, intercept, slope, binom, trinom);
     intercept = 0.f; slope = 1.f; binom = 0.f; trinom = 0.f;
   }
-  print("Calibration extracted from", m_filename);
+  // print("Calibration extracted from", m_filename);
   return (m_ok = true);
 }
 

@@ -85,8 +85,8 @@ protected:
   RootEvent m_event;
 
   // States:
-  bool m_useHits   = false;
-  bool m_useEvents = false;
-  ULong64_t m_cursor = 0;
-  ULong64_t m_maxEntries = Colib::big<ULong64_t>();
+  bool m_useHits    {};
+  bool m_useEvents  {};
+  ULong64_t m_cursor{};
+  ULong64_t m_maxEntries = Colib::max<ULong64_t>();
 };

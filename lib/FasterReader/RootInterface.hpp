@@ -64,7 +64,7 @@ public:
       return false;
     }
     if (m_timeSorted == true) return true;
-    printsln("Time sorting....");
+    // printsln("Time sorting....");
     prepareSortedIndexes();
     m_timeSorted = true;
     Colib::insertionSort(m_hits, m_sortedIDs);
@@ -368,14 +368,14 @@ public:
   
   constexpr void printEventsProgress(size_t cursor, size_t freq = 1_Mi) const noexcept
   {
-    if (m_hits.size() != 0 && (cursor % freq == 0 || cursor+1 == m_eventIDbuffer.size()))
-      printsln("Writting events : ", Colib::nicer_double(cursor, 2), Colib::nicer_double((100.*cursor)/m_eventIDbuffer.size(), 1), "%");
+    // if (m_hits.size() != 0 && (cursor % freq == 0 || cursor+1 == m_eventIDbuffer.size()))
+    //   printsln("Writting events : ", Colib::nicer_double(cursor, 2), Colib::nicer_double((100.*cursor)/m_eventIDbuffer.size(), 1), "%");
   }
 
   constexpr void printHitsProgress(size_t cursor, std::string prepend = "", size_t freq = 1_Mi) const noexcept
   {
-    if (m_hits.size() != 0 && (cursor % freq == 0 || cursor+1 == m_hits.size()))
-      printsln(prepend, Colib::nicer_double(cursor, 2), Colib::nicer_double((100.*cursor)/m_hits.size(), 1), "%");
+    // if (m_hits.size() != 0 && (cursor % freq == 0 || cursor+1 == m_hits.size()))
+    //   printsln(prepend, Colib::nicer_double(cursor, 2), Colib::nicer_double((100.*cursor)/m_hits.size(), 1), "%");
   }
 
   inline bool checkMT() noexcept

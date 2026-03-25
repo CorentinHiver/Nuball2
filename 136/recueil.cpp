@@ -4,6 +4,8 @@
   #include "../lib/Classes/CoMT.hpp"
 #endif // MULTITHREAD
 
+#include "../lib/Classes/MThisto.hpp"
+
 #include "../lib/Classes/Arguments.hpp"
 #include "../lib/FasterReader/FasterRunReader.hpp"
 #include "../lib/RootReader/RootReader.hpp"
@@ -28,29 +30,27 @@ int main(int argc, char** argv)
   if (argc == 1)
   {
     print("Usage :");
+    print("First: : Parameters");
+    print("-m || --multithreading  [nbThreads] : if compiled in MT mode, sets the number of threads");
     return 0;
   }
   static string data = "~/nuball2/N-SI-136/";
   static string output = "~/nuball2/N-SI-136_root/";
-  auto const dataPath = getPath(data); 
-  auto const outputPath = getPath(output); 
+  auto const dataPath = nicerPath(data); 
+  auto const outputPath = nicerPath(output); 
   auto tsPath = outputPath+"timeshifts/";
   auto const calibPath = outputPath+"calib/";
   vector<string> runs(findFilesWildcard(dataPath+"run*.fast/"));
 #ifdef CoMT
   MT::Initialise(MULTITHREAD);
-  auto const dispatchesd_runs = MT::distribute(runs);
+  auto dispatched_runs = MT::distribute(runs);
 #endif // CoMT
 
-  // auto dTbinning = [](Label label) -> Time {
-  //                if (isGe [label])   return   2_ns;
-  //           else if (isBGO[label])   return   1_ns;
-  //           else if (label == 251)           return 100_ps;
-  //           else if (label == 252)           return 100_ps;
-  //           else if (isParis[label]) return 100_ps;
-  //           else if (isDSSD[label])  return   2_ns;
-  //           else                             return  10_ns;
-  // };
+  enum Trigger{dC1, p, C2}; // The default trigger is placed at the end so that it is used if the user input is erroneous.
+  constexpr vector<string> trig_names = {"dC1", "p", "C2"};
+  vector<string> trig_outputs = [&](){vector<string> out; for (auto const & trig : trig_names) out.push_back(outputPath+"run_"+trig+"/");}
+  int trigger = C2;
+
 
   Arguments args(argc, argv);
   while(args.next())
@@ -58,8 +58,14 @@ int main(int argc, char** argv)
     ////////////////////////////
     // Time shift calculation //
     ////////////////////////////
+    if (args == "-m" || args == "--multithreading")
+    {
+    #ifdef CoMT
+      MT::Initialise(args.load<int>());
+    #endif // CoMT
+    }
 
-    if (args == "--ts" || args == "--timeshifs")
+    else if (args == "--ts" || args == "--timeshifs")
     {
       auto sub_arg = args.load<string>();
 
@@ -70,7 +76,7 @@ int main(int argc, char** argv)
         print("Creating time-reference-gated data");
       #ifdef CoMT
         MT::parallelise_function([&](){
-        for (auto const & run : dispatchesd_runs[MT::getThreadIndex()])
+        for (auto const & run : dispatched_runs[MT::getThreadIndex()])
       #else // NO CoMT
         for (auto const & run : runs)
       #endif // CoMT
@@ -78,7 +84,8 @@ int main(int argc, char** argv)
           FasterRunReader reader;
           reader.addFiles(run+"*");
           reader.setOutputPath(outputPath+"ref252/");
-          reader.setMaxFilesMemory((getHome() == "/home/faster") ? 5 : 2);
+          reader.setHitsBufferSize(500_ki);
+          // reader.setMaxFilesMemory((getHome() == "/home/faster") ? 5 : 2);
           reader.setOverwrite(false);
           reader.setMerge(true);
           reader.setRef(252);
@@ -93,12 +100,12 @@ int main(int argc, char** argv)
 
       // -- Then, calculate the time difference -- //
 
-      else if (sub_arg == "calc" || sub_arg == "all")
+      if (sub_arg == "calc" || sub_arg == "all")
       {
         vector<string> runsGated(findFilesWildcard(outputPath+"ref252/run*_ref_252.root"));
       #ifdef CoMT
         MT::parallelise_function([&](){
-        for (auto const & run : dispatchesd_runs[MT::getThreadIndex()])
+        for (auto const & run : dispatched_runs[MT::getThreadIndex()])
       #else // NO CoMT
         for (auto const & run : runsGated)
       #endif // CoMT
@@ -112,14 +119,14 @@ int main(int argc, char** argv)
 
       // -- Check the result -- //
 
-      else if (sub_arg == "check" || sub_arg == "all")
+      if (sub_arg == "check" || sub_arg == "all")
       {
         print("Testing timeshifts");
         for (auto const & gatedRootFile : findFilesWildcard(outputPath+"ref252/*_ref_252.root"))
         {
           string tsFilename = tsPath+removePath(setExtension(removeAll(gatedRootFile, "_ref_252"), "dT"));
           Timeshifts ts; ts.load(tsFilename);
-          auto outputPathCorr = getPath(outputPath+"tcorr/");
+          auto outputPathCorr = nicerPath(outputPath+"tcorr/");
           string outputCorr = outputPathCorr + removePath(gatedRootFile);
           RootInterface interface;
           interface.openRootFile(outputCorr);
@@ -141,7 +148,7 @@ int main(int argc, char** argv)
       
       // -- Extract the histograms from the result -- //
       
-      else if (sub_arg == "checkhisto" || sub_arg == "all")
+      if (sub_arg == "checkhisto" || sub_arg == "all")
       {
         auto filename = outputPath+"tcorr/ref252_dT.root";
         bool overwrite = true;
@@ -170,13 +177,13 @@ int main(int argc, char** argv)
 
       // -- The results will be disapointing for some detectors because there isn't enough coincidence statistics -- //
       // -- Use the beam pulse that is now synchronized to extract events with good pulse timing. Downscaled ! -- //
-      else if (sub_arg == "checkpulse" || sub_arg == "all")
+      if (sub_arg == "checkpulse" || sub_arg == "all")
       {
         print("check synchronization with pulsation");
         bool overwrite = true;
       #ifdef CoMT
         MT::parallelise_function([&](){
-        for (auto const & run : dispatchesd_runs[MT::getThreadIndex()])
+        for (auto const & run : dispatched_runs[MT::getThreadIndex()])
       #else // NO CoMT
         for (auto const & run : runs)
       #endif // CoMT
@@ -209,7 +216,9 @@ int main(int argc, char** argv)
           auto max_T = abs(refRF->GetXaxis()->GetBinLowEdge(refRF->GetMaximumBin()));
           if (max_T < 2_ns) ts.set(252, max_T);
           {
+#ifdef CoMT
             lock_mutex lock(MT::mutex);
+#endif // CoMT
             auto file = TFile::Open("checkpulse_dT.root", (overwrite) ? "recreate" : "update");
             refRF->Write();
             file->Close();
@@ -224,7 +233,9 @@ int main(int argc, char** argv)
             refRFall->Fill(hit.label, rf.relTime(hit));
           }
           {
+#ifdef CoMT
             lock_mutex lock(MT::mutex);
+#endif // CoMT
             auto file = TFile::Open("checkpulse_dT.root", "update");
             refRFall->Write();
             file->Close();
@@ -242,11 +253,13 @@ int main(int argc, char** argv)
         calculateTimeshifts(args.load<string>(), tsPath);
       }
     }
+
     else if (args == "--fast" || args == "--faster-reader")
     {
       FasterRunReader reader(args);
       reader.run();
     }
+
     else if (args == "--spectra")
     {
       auto sub_arg = args.load<string>();
@@ -254,7 +267,7 @@ int main(int argc, char** argv)
       {
       #ifdef CoMT
         MT::parallelise_function([&](){
-        for (auto const & run : dispatchesd_runs[MT::getThreadIndex()])
+        for (auto const & run : dispatched_runs[MT::getThreadIndex()])
       #else // NO CoMT
         for (auto const & run : runs)
       #endif // CoMT
@@ -284,9 +297,16 @@ int main(int argc, char** argv)
         });
       #endif // CoMT
       }
-      else if (args == "run")
+      else if (sub_arg == "run")
       {
-        auto files = findFilesWildcard(getPath(args.load<string>())+"*");
+        auto files = findFilesWildcard(nicerPath(args.load<string>())+"*");
+
+        MT::Histo<TH2F> allSpectra   ("allSpectra"  , "allSpectra;label;nrj[keV]"       , 1000,0,1000, 10_ki,0,10_MeV);
+        MT::Histo<TH2F> GeSpectra    ("GeSpectra"   , "GeSpectra;GeLabel;nrj[keV]"      , 100 ,0, 100, 10_ki,0,10_MeV);
+        MT::Histo<TH2F> BGOSpectra   ("BGOSpectra"  , "BGOSpectra;BGOLabel;nrj[keV]"    , 30  ,0,  30,  1_ki,0,10_MeV);
+        MT::Histo<TH2F> ParisSpectra ("ParisSpectra", "ParisSpectra;ParisLabel;nrj[keV]", 100 ,0, 100,  2_ki,0,10_MeV);
+        MT::Histo<TH2F> DSSDSpectra  ("DSSDSpectra" , "DSSDSpectra;DSSDLabel;nrj[keV]"  , 50  ,0,  50,  1_ki,0,30_MeV);
+
         auto calibFile = calibPath+"temp_136.calib";
         if (0 < args.nbRemainingArgs()) while(args.next())
         {
@@ -297,50 +317,62 @@ int main(int argc, char** argv)
       #ifdef CoMT
         auto dispatchesd_files = MT::distribute(files);
       MT::parallelise_function([&](){
-        files = dispatchesd_files[MT::getThreadIndex()];
         auto thread_str = std::to_string(MT::getThreadIndex());
+        auto files_to_read = dispatchesd_files[MT::getThreadIndex()];
       #else //no CoMT
+        auto files_to_read = files;
         std::string thread_str = "";
       #endif // CoMT
-          auto allSpectra   = new TH2F(("allSpectra"  +thread_str).c_str(), "allSpectra;label;nrj[keV]"       , 1000,0,1000, 10_ki,0,10_MeV);
-          auto GeSpectra    = new TH2F(("GeSpectra"   +thread_str).c_str(), "GeSpectra;GeLabel;nrj[keV]"      , 100 ,0, 100, 10_ki,0,10_MeV);
-          auto BGOSpectra   = new TH2F(("BGOSpectra"  +thread_str).c_str(), "BGOSpectra;BGOLabel;nrj[keV]"    , 30  ,0,  30,  1_ki,0,10_MeV);
-          auto ParisSpectra = new TH2F(("ParisSpectra"+thread_str).c_str(), "ParisSpectra;ParisLabel;nrj[keV]", 100 ,0, 100,  2_ki,0,10_MeV);
-          auto DSSDSpectra  = new TH2F(("DSSDSpectra" +thread_str).c_str(), "DSSDSpectra;DSSDLabel;nrj[keV]"  , 50  ,0,  50,  1_ki,0,30_MeV);
-          FasterRootInterface reader;
-          while(reader.loadDatafiles(files, 5))
+        size_t cursor = 0;
+        for (auto const & file : files_to_read)
+        {
+          printsln(thread_str, getFilename(file));
+          ++cursor;
+          FasterRootInterface reader(file);
+          while(reader.loadNextHit())
           {
-            reader.timeSorting();
-            for (auto const & hit_i : reader.sortedIDs())
-            {
-              auto & hit = reader.data()[hit_i];
-              calib.calibrate(hit);
+            auto & hit = reader.getHit();
+          #ifdef CoMT
+            if (MT::isKilled()) break;
+          #endif //CoMT
+            // if (cursor%int(1e6) == 0) printsln(getFilename(file), Colib::nicer_double(cursor, 2), Colib::nicer_seconds(hit.getTimestamp_s()));
 
-              allSpectra->Fill(hit.label, hit.nrj);
-              switch (detectorType[hit.label])
-              {
-                case Detector::Ge : GeSpectra->Fill(labelsGe[hit.label], hit.nrj); break;
-                case Detector::BGO : BGOSpectra->Fill(labelsBGO[hit.label], hit.nrj); break;
-                case Detector::Paris : ParisSpectra->Fill(labelsBGO[hit.label], hit.nrj); break;
-                case Detector::DSSD : DSSDSpectra->Fill(labelsBGO[hit.label], hit.nrj); break;
-                default: continue;
-              }
+            if (isGe[hit.label && hit.adc<NSI136::GeOverflow]) continue;
+            calib.calibrate(hit);
+
+            allSpectra->Fill(hit.label, hit.nrj);
+            switch (detectorType[hit.label])
+            {
+              case Detector::Ge    : GeSpectra    -> Fill(GeIndex   [hit.label], hit.nrj); break;
+              case Detector::BGO   : BGOSpectra   -> Fill(BGOIndex  [hit.label], hit.nrj); break;
+              case Detector::Paris : ParisSpectra -> Fill(ParisIndex[hit.label], hit.nrj); break;
+              case Detector::DSSD  : DSSDSpectra  -> Fill(DSSDIndex [hit.label], hit.nrj); break;
+              default: continue;
             }
           }
+        }
       #ifdef CoMT
         });
       #endif // CoMT
+
+        std::string name = "test.root";
+        auto outFile = TFile::Open(name.c_str(), "recreate");
+        allSpectra   -> Write();
+        GeSpectra    -> Write();
+        BGOSpectra   -> Write();
+        ParisSpectra -> Write();
+        DSSDSpectra  -> Write();
+        outFile -> Close();
+        print(name, "written");
       }
     }
     else if (args == "--run")
     {
-      enum Trigger{dC1, p, C2}; // The default trigger is placed at the end so that it is used if the user input is erroneous.
-      vector<string> trig_names = {"dC1", "p", "C2"};
-      int trigger = C2;
-
+      bool overwrite{false};
       while(args.next())
       {
              if (args == "-t"  || args == "--trigger") trigger = findIndex(trig_names, args.load<string>());
+        
         // else if (args == "-ts" || args == "--timeshifts") tsPath = args.load<string>();
         // else if (args == "-c" || args == "--calibration") calibPath = args.load<string>();
         else if (args == "-h"  || args == "--help:")
@@ -350,14 +382,23 @@ int main(int argc, char** argv)
           // print(" -ts || --timeshifts: Path to the timeshift files to use. Default:", tsPath);
           // print(" -c  || --calibration: Calibration file to use. Default:", tsPath);
           print(" -h  || --help: display this help");
+          print(" -o || --overwrite : overwrite the output") overwrite = true;
         }
         else throw_error("in --spectra run,"+args.getArg()+"argument is not known");
-
+      }
+      auto runs_to_convert = runs;
+      if (!overwrite) 
+      {
+        // Manually check for already calculated runs if we don't want to overwrite them
+        // We also set FasterRunReader::setOverwrite for safety reason
+        vector<string> rootruns(findFilesWildcard(trig_outputs[trigger]+"run*.root"));
+        for (auto const & root_file : rootruns)
       }
 
     #ifdef CoMT
+      dispatched_runs = 
       MT::parallelise_function([&](){
-      for (auto const & run : dispatchesd_runs[MT::getThreadIndex()])
+      for (auto const & run : dispatched_runs[MT::getThreadIndex()])
     #else // NO CoMT
       for (auto const & run : runs)
     #endif // CoMT
@@ -368,13 +409,13 @@ int main(int argc, char** argv)
         string tsFilename = tsPath+setExtension(run_name, "dT");
         string calibFilename = calibPath+"temp_136.calib";
 
-        auto outputPathConversion = getPath(outputPath+"run_"+trig_names[trigger]+"/");
+        auto outputPathConversion = trig_outputs[trigger];
 
         FasterRunReader reader;
         reader.addFiles(run+"/*");
         reader.setOutputPath(outputPathConversion);
-        reader.setMaxFilesMemory((getHome() == "/home/faster") ? 5 : 2);
-        reader.setOverwrite(false);
+        // reader.setMaxFilesMemory((getHome() == "/home/faster") ? 5 : 2);
+        reader.setOverwrite(overwrite);
         reader.setMerge(true);
         reader.setRF(251);
         reader.setTimeShifts(tsFilename);
@@ -383,7 +424,7 @@ int main(int argc, char** argv)
         switch(trigger)
         {
           case (dC1): reader.setEventTrigger(dC1trigger); break;
-          case (p): reader.setEventTrigger(ptrigger); break;
+          case (p  ): reader.setEventTrigger(ptrigger); break;
           case (C2 ): default:    
                       reader.setEventTrigger(C2trigger);
         }
@@ -441,6 +482,30 @@ int main(int argc, char** argv)
       {
         print(arg.message);
       }
+    }
+    else if (args == "analyse")
+    {
+      trigger = findIndex(trig_names, args.load<string>());
+      vector<string> rootruns(findFilesWildcard(trig_outputs[trigger]+"run*.root"));
+      if (sub_arg == "assess")
+      {
+#ifdef CoMT
+          dispatched_rootruns = MT::distribute(rootruns)
+          MT::parallelise_function([&](){
+          for (auto const & run : dispatched_rootruns[MT::getThreadIndex()])
+#else // NO CoMT
+          for (auto const & run : dispatched_rootruns)
+#endif // CoMT
+          {
+            string test = "test";
+            MT::Histo<TH2F> pp(test+"pp", test+"pp", 4096,0,4096, 4096,0,4096);
+            MT::Histo<TH2F> dd(test+"dd", test+"dd", 4096,0,4096, 4096,0,4096);
+          }
+#ifdef CoMT
+          });
+#endif // CoMT
+      }
+
     }
     else throw_error(args.getArg() + " unkown !!");
   }
@@ -516,9 +581,9 @@ constexpr bool dC1trigger(Event const & event)
     if (timeBlacklist_LUT[label] || spectroBlacklist_LUT[label]) continue;
 
     auto const & time = event.times[hit_i];
-    if (40<time && time<180)
+    if (40_ns<time && time<180_ns)
     {
-           if (isBGO[label]) dBGO.set(cloverIndex[label]);
+      if (isBGO[label]) dBGO.set(cloverIndex[label]);
       else if (isGe [label]) dGe .set(cloverIndex[label]);
     }
   }
@@ -531,15 +596,24 @@ constexpr bool dC1trigger(Event const & event)
   return 0 < nb_dC;
 }
 
+// auto dTbinning = [](Label label) -> Time {
+//                if (isGe [label])   return   2_ns;
+//           else if (isBGO[label])   return   1_ns;
+//           else if (label == 251)           return 100_ps;
+//           else if (label == 252)           return 100_ps;
+//           else if (isParis[label]) return 100_ps;
+//           else if (isDSSD[label])  return   2_ns;
+//           else                             return  10_ns;
+// };
 
 
 // else if (sub_arg == "pulsecalc")
 // {
 //   vector<string> runsGated(findFilesWildcard(outputPath+"ref252/run*_ref_252.root"));
 // #ifdef CoMT
-//   auto const dispatchesd_runs = MT::distribute(runsGated);
+//   auto const dispatched_runs = MT::distribute(runsGated);
 //   MT::parallelise_function([&](){
-//   for (auto const & run : dispatchesd_runs[MT::getThreadIndex()])
+//   for (auto const & run : dispatched_runs[MT::getThreadIndex()])
 // #else // NO CoMT
 //   for (auto const & run : runsGated)
 // #endif // CoMT
@@ -557,7 +631,7 @@ constexpr bool dC1trigger(Event const & event)
 //   {
 //     string tsFilename = tsPath+removePath(setExtension(gatedRootFile, "dT"));
 //     Timeshifts ts; ts.load(tsFilename);
-//     auto outputPathCorr = getPath(outputPath+"tcorrpulse/");
+//     auto outputPathCorr = nicerPath(outputPath+"tcorrpulse/");
 //     string outputCorr = outputPathCorr + removePath(gatedRootFile);
 //     RootInterface interface;
 //     interface.openRootFile(outputCorr);

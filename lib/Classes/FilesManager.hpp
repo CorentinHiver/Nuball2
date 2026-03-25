@@ -119,7 +119,7 @@ namespace Colib
   
   bool FilesManager::addFiles(std::string const & _filename)
   {
-    m_path = Colib::getPath(_filename);
+    m_path = Colib::nicerPath(_filename);
     uint numberFiles = 0;
     if (Colib::extension(_filename) == "list")
     {// using the "data" file as an input containing the path to the actual data .root or .fast files

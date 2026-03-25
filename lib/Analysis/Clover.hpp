@@ -17,21 +17,19 @@ public:
 
   // Member variables :
   
-  uint8_t  nb      = {};  // Number of Ge and BGO crystals in the clover
-  uint8_t  nbBGO   = {};  // Number of BGO crystals in the clover
-  Energy_t nrj     = {}; // Add-backed energy of Ge  Clovers
-  Energy_t nrjBGO  = {}; // Add-backed energy of BGO Clovers
-  Time     time    = {}; // Time of the crystal with most energy deposit of the clover, ps
-  Time     timeBGO = {}; // Time of the latest BGO, ps
+  uint8_t  nb      {};  // Number of Ge and BGO crystals in the clover
+  uint8_t  nbBGO   {};  // Number of BGO crystals in the clover
+  Energy_t nrj     {}; // Add-backed energy of Ge  Clovers
+  Energy_t nrjBGO  {}; // Add-backed energy of BGO Clovers
+  Time     time    {}; // Time of the crystal with most energy deposit of the clover, ps
+  Time     timeBGO {}; // Time of the latest BGO, ps
 
   std::array<Energy_t, 4> GeCrystals{{}};  // The four cristals
   std::vector<Index>      GeCrystalsId  ;  // The index of the four cristals
 
-  Energy_t maxE_Ge = {};
-  Index    maxE_Ge_cristal = {}; // Index of the Ge crystal with the most energy deposit in the clover. [0;4]
+  Energy_t maxE_Ge {};
+  Index    maxE_Ge_cristal {}; // Index of the Ge crystal with the most energy deposit in the clover. [0;4]
   
-  Energy_t calo = {};     // Total energy deposit in the clover
-
   // Constructors : 
   Clover() : m_index(gIndex) {++gIndex;}
   Clover(Index const & index) : m_index(index)
@@ -52,22 +50,20 @@ public:
     timeBGO          = {};
     maxE_Ge          = {};
     maxE_Ge_cristal  = {};
-    calo             = {};
 
     GeCrystals      = {{}};
 
     GeCrystalsId.clear();
   }
   auto const & index() const noexcept {return m_index;}
-  auto         label() const noexcept {return 23 + 6*m_index* + maxE_Ge_cristal;}
+  auto         label() const noexcept {return 23 + 6*m_index + maxE_Ge_cristal;}
 
   static constexpr inline void resetGlobalLabel() noexcept {gIndex = 0;}
 
-  void addHit(float const & _nrj, Time const & _time, Index const & sub_index, bool grey_listed = false) noexcept
+  void addHit(float const & _nrj, Time const & _time, Index const & sub_index) noexcept
   {
-    calo += _nrj;
-    if (sub_index<2 || grey_listed) addBGO(_nrj, _time);
-    else                            addGe (_nrj, _time, sub_index);
+    if (sub_index<2) addBGO(_nrj, _time);
+    else             addGe (_nrj, _time, sub_index);
   }
 
   constexpr inline bool hasGe      () const noexcept {return nb    >  0 ;}
@@ -81,11 +77,9 @@ private:
   void addGe(float const & _nrj, Time const & _time, Index const & sub_index) 
   {
     auto const & Ge_sub_index = sub_index-2;
-    // if (grey_listed) 
     nrj += _nrj;
-    // The highest energy deposit most likely corresponds to the hit before scattering
     if (_nrj > maxE_Ge)
-    {
+    { // The highest energy deposit most likely corresponds to the hit before scattering
       maxE_Ge = _nrj;
       time = _time;
       maxE_Ge_cristal = Ge_sub_index;
@@ -134,12 +128,6 @@ std::ostream& operator<<(std::ostream& out, Clover const & cloverModule)
 
     "nrj BGO : " <<  cloverModule.nrjBGO << " " << 
     "time BGO :  " <<  cloverModule.timeBGO/1000. << " ns ";
-
-    }
-    if (cloverModule.nb>0 && cloverModule.nbBGO>0)
-    { out << 
-
-    "calo : " << cloverModule.calo << "keV";
 
     }
   return out;

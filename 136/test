@@ -1,0 +1,4 @@
+L1 (Data): 48K x 8 instances
+L1 (Instruction): 64K x 8 instances
+L2 (Unified): 2560K x 8 instances
+L3 (Unified): 8192K x 8 instances

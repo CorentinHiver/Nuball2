@@ -17,38 +17,15 @@ public:
   }
   ~Clovers() noexcept = default;
   
+  NRJ smearGe(NRJ nrj) const {return randomCo::gaussian(nrj, nrj * ((sSmearedCaloR / sqrt(nrj)) / NRJ{100}) / 2.35 );}
   Clovers& operator=(Clovers const & other) noexcept = default;
-  
-  bool fill   (Event const & event, int const & hit_i);
-  bool fillRaw(Event const & event, int const & hit_i);
-  
+  void fill (Event const & event, int const & hit_i);
   Clovers& load      (Event const & event);
-  Clovers& loadRaw   (Event const & event);
   Clovers& operator= (Event const & event);
-
   void analyze   () noexcept;
-  void analyzeRaw() noexcept;
 
-  void clear() noexcept
-  {
-    calorimetryTotal  = {};
-    calorimetryGe     = {};
-    calorimetryBGO    = {};
-    m_analyzed        = {};
-    for(auto const & clover_id : hits) 
-      m_clovers[clover_id].clear();
-    hits    .clear();
-    Ge      .clear();
-    BGO     .clear();
-    clean   .clear();
-    cleanBGO.clear();
-    rejected.clear();
-  }
-
-  NRJ calorimetryTotal = {};
-  NRJ calorimetryGe    = {};
-  NRJ calorimetryBGO   = {};
-
+  void clear() noexcept;
+  
   // Indices :
 
   std::vector<Index> hits    ;
@@ -58,7 +35,15 @@ public:
   std::vector<Index> cleanBGO;
   std::vector<Index> rejected;
 
-  inline constexpr auto const & operator[] (int const & i) const noexcept { return m_clovers[i]; }
+  // Calorimetry
+
+  NRJ calorimetryTotal = {};
+  NRJ calorimetryGe    = {};
+  NRJ calorimetryBGO   = {};
+
+  int moduleMult() const {return hits.size();}
+
+  constexpr auto const & operator[] (int const & i) const noexcept { return m_clovers[i]; }
 
   // Static parameters :
 
@@ -68,19 +53,19 @@ public:
   static inline Blacklist sBlacklist;
   static inline Overflow  sOverflow ;
 
-  static void setEnergyThreshold (NRJ threshold  ) {sThreshold    = threshold   ;}
-  static void setSmearGeCaloR    (NRJ resolution ) {sSmearedCaloR = resolution  ; sSmearGeCalo = true;}
+  static void setEnergyThreshold (NRJ threshold  ) noexcept {sThreshold    = threshold   ;}
+  static void setSmearGeCaloR    (NRJ resolution ) noexcept {sSmearedCaloR = resolution  ; sSmearGeCalo = true;}
 
-  static void setBlacklist (Blacklist const & blacklist   ) {sBlacklist = blacklist  ; sUseBlacklist = true;}
-  static void setOverflow  (Overflow  const & overflow_Ge ) {sOverflow  = overflow_Ge; sUseOverflow  = true;}
+  static void setBlacklist (Blacklist const & blacklist   ) noexcept {sBlacklist = blacklist  ; sUseBlacklist = true;}
+  static void setOverflow  (Overflow  const & overflow_Ge ) noexcept {sOverflow  = overflow_Ge; sUseOverflow  = true;}
   
-  static bool rejectDetector(Label const & label, NRJ const & nrj)
+  static bool rejectDetector(Label const & label, NRJ const & nrj) noexcept
   {
     bool ret = false;
     if (sUseBlacklist)
     {
       // User-selected blacklisted detectors labels :
-      static thread_local auto const blacklistedLabel = Colib::LUT<1000>([](Label const & _label) {
+      static thread_local const auto blacklistedLabel = Colib::LUT<1000>([](Label const & _label) {
         return Colib::found(sBlacklist, _label);
       });
 
@@ -90,13 +75,18 @@ public:
     if (sUseOverflow)
     {
       // User-selected overflow energy value :
-      static auto hasOverflow = Colib::LUT<1000>([](Label const & _label){
+      static thread_local const auto hasOverflow = Colib::LUT<1000>([](Label const & _label){
         return Colib::key_found(sOverflow, _label);
       });
        ret = hasOverflow[label] && nrj > sOverflow[label];
     }
     return ret;
   }
+
+  auto begin()       {return m_clovers.begin();}
+  auto end  ()       {return m_clovers.end  ();}
+  auto begin() const {return m_clovers.begin();}
+  auto end  () const {return m_clovers.end  ();}
 
 private:
 
@@ -105,13 +95,13 @@ private:
 
   // Parameters :
   // Member :
-  bool m_analyzed = {};
+  bool m_analyzed {};
   // Static :
-  static inline NRJ  sThreshold    = {5_keV  };
-  static inline NRJ  sSmearedCaloR = {400_keV};
-  static inline bool sSmearGeCalo  = {};
-  static inline bool sUseBlacklist = {};
-  static inline bool sUseOverflow  = {};
+  static inline NRJ  sThreshold    {5_keV  };
+  static inline NRJ  sSmearedCaloR {400_keV};
+  static inline bool sSmearGeCalo  {};
+  static inline bool sUseBlacklist {};
+  static inline bool sUseOverflow  {};
 
 public:
 
@@ -138,7 +128,6 @@ public:
     }
     return true;
   }
-
   
   static bool setRotationsFile(std::string const & filename)
   {
@@ -149,7 +138,7 @@ public:
     return ret;
   }
 
-  static Index constexpr rotate(Index const sub_index) noexcept
+  static constexpr Index rotate(Index const sub_index) noexcept
   {
     if (sub_index < 2) return sub_index; // do not rotate BGO
     auto const Ge_sub_index = sub_index - 2;
@@ -164,95 +153,44 @@ public:
   }
   
   /// @brief Returns 0 for R3 and 1 for R2
-  static constexpr Index ring(Index clover_index) const {return clover_index % 2;}
+  static constexpr Index ring(Index clover_index) {return clover_index % 2;}
 };
+
+void Clovers::clear() noexcept
+{
+  calorimetryTotal  = {};
+  calorimetryGe     = {};
+  calorimetryBGO    = {};
+  m_analyzed        = {};
+  for(auto const & clover_id : hits) m_clovers[clover_id].clear();
+  hits    .clear();
+  Ge      .clear();
+  BGO     .clear();
+  clean   .clear();
+  cleanBGO.clear();
+  rejected.clear();
+}
 
 /**
  * @brief 
  * @attention Extracts energy from the nrj field, i.e., calibrated energy in keV, hence requires calibration
  */
-bool Clovers::fill(Event const & event, int const & hit_i)
+void Clovers::fill(Event const & event, int const & hit_i)
 {
-  if (m_analyzed) Colib::throw_error("Clovers::fill() called while already analyzed, you need to Clovers::reset() (or clear()) first");
+  if (m_analyzed) Colib::throw_error("Clovers::fill() called while already analyzed, you need to call Clovers::clear() first");
+
   auto const & label = event.labels[hit_i];
   auto const & nrj   = event.nrjs  [hit_i];
-  
-  if (Clovers::rejectDetector(label, nrj)) return false;
-  
-  if (NSI136::isClover[label])
-  {
-    auto const & nrj          = event.nrjs          [hit_i];
-    auto const & time         = event.times         [hit_i];
-    auto const & clover_index = NSI136::cloverIndex [label];
 
-    auto const & sub_index = rotate(NSI136::crystalIndex[label]);
-
-    Colib::pushBackUnique(hits, clover_index);
-
-    m_clovers[clover_index].addHit(nrj, time, sub_index);
-    
-    NRJ calo;
-    if (NSI136::isGe[label])
-    {
-      calo = (sSmearGeCalo) ? randomCo::gaussian( nrj, nrj * ((sSmearedCaloR / sqrt(nrj)) / NRJ{100}) / 2.35 ) : nrj;
-      Colib::pushBackUnique(Ge, clover_index);
-      calorimetryGe += calo;
-    }
-    else
-    {
-      Colib::pushBackUnique(BGO, clover_index);
-      calo = nrj;
-      calorimetryBGO += calo;
-    }
-
-    calorimetryTotal += calo;
-    
-    return true;
-  }
-  return false;
-}
-
-/**
- * @brief In fillRaw, the adc value is read instead of nrj. 
- * @attention No calibration, therefore calorimetry and add-back values mean nothing and are not calculated
- * 
- */
-bool Clovers::fillRaw(Event const & event, int const & hit_i)
-{
-  if (m_analyzed) Colib::throw_error("Clovers::fillRaw() called while already analyzed, you need to Clovers::reset() (or clear()) first");
-  auto const & label = event.labels[hit_i];
-  auto const & nrj   = event.adcs  [hit_i];
-
-  if (rejectDetector(label, nrj)) return false;
-
-  if (NSI136::isGe[label])
-  {
-    auto const & nrj          = event.adcs          [hit_i];
-    auto const & time         = event.times         [hit_i];
-    auto const & clover_index = NSI136::cloverIndex [label];
-    auto const & sub_index    = rotate(NSI136::crystalIndex[label]);
-
-    Colib::pushBackUnique(hits, clover_index);
-
-    m_clovers[clover_index].addHit(nrj, time, sub_index);
-
-    return true;
-  }
-  return false;
+  if (NSI136::isClover[label] && !Clovers::rejectDetector(label, nrj))
+    m_clovers[NSI136::cloverIndex[label]].addHit(nrj, event.times[hit_i], NSI136::crystalIndex[label]);
+    // m_clovers[NSI136::cloverIndex[label]].addHit(nrj, event.times[hit_i], rotate(NSI136::crystalIndex[label]));
 }
 
 Clovers& Clovers::load(Event const & event)
 {
   clear();
   for (int hit_i = 0; hit_i<event.mult; hit_i++) fill(event, hit_i);
-  analyze();
-  return *this;
-}
-
-Clovers& Clovers::loadRaw(Event const & event)
-{
-  clear();
-  for (int hit_i = 0; hit_i<event.mult; hit_i++) fillRaw(event, hit_i);
   analyze();
   return *this;
 }
@@ -266,31 +204,37 @@ void Clovers::analyze() noexcept
 {
   if (m_analyzed) return;
   m_analyzed = true;
-  for (auto const & clover_index : hits)
+  for (auto const & clover : m_clovers)
   {
-    auto const & clover    = m_clovers[clover_index];
-    auto const & Ge_found  = clover.nb    > 0;
-    auto const & BGO_found = clover.nbBGO > 0;
-
-    if(Ge_found)
+    auto const & index = clover.index();
+    NRJ calo{};
+    if(clover.hasGe())
     {
-      Ge.push_back(clover_index);
-      if (BGO_found) 
+      hits.push_back(index);
+      Ge  .push_back(index);
+      calo = (sSmearGeCalo) ? smearGe(clover.nrj) : clover.nrj;
+      calorimetryGe += calo;
+      if (clover.hasBGO())
       {
-        rejected.push_back(clover_index);
-        BGO     .push_back(clover_index);
+        rejected.push_back(index);
+        BGO     .push_back(index);
+        calo           += clover.nrjBGO;
+        calorimetryBGO += clover.nrjBGO;
       }
       else
       {
-        clean.push_back(clover_index);
+        clean.push_back(index);
       }
     }
-    else if (BGO_found) 
+    else if (clover.hasBGO()) 
     {
-      cleanBGO.push_back(clover_index);
-      BGO     .push_back(clover_index);
+      hits    .push_back(index);
+      cleanBGO.push_back(index);
+      BGO     .push_back(index);
+      calo            = clover.nrjBGO;
+      calorimetryBGO += clover.nrjBGO;
     }
-    else Colib::throw_error("Clovers::analyze() : aille aille aille");
+    calorimetryTotal += calo;
   }
 }
 
@@ -303,3 +247,42 @@ std::ostream & operator<<(std::ostream & os, Clovers const & clovers) noexcept
   }
   return os;
 }
+
+
+// /**
+//  * @brief In fillRaw, the adc value is read instead of nrj. 
+//  * @attention No calibration, therefore calorimetry and add-back values mean nothing and are not calculated
+//  * 
+//  */
+// bool Clovers::fillRaw(Event const & event, int const & hit_i)
+// {
+//   if (m_analyzed) Colib::throw_error("Clovers::fillRaw() called while already analyzed, you need to Clovers::reset() (or clear()) first");
+//   auto const & label = event.labels[hit_i];
+//   auto const & nrj   = event.adcs  [hit_i];
+
+//   if (rejectDetector(label, nrj)) return false;
+
+//   if (NSI136::isGe[label])
+//   {
+//     auto const & nrj          = event.adcs          [hit_i];
+//     auto const & time         = event.times         [hit_i];
+//     auto const & clover_index = NSI136::cloverIndex [label];
+//     auto const & sub_index    = rotate(NSI136::crystalIndex[label]);
+
+//     Colib::pushBackUnique(hits, clover_index);
+
+//     m_clovers[clover_index].addHit(nrj, time, sub_index);
+
+//     return true;
+//   }
+//   return false;
+// }
+
+
+// Clovers& Clovers::loadRaw(Event const & event)
+// {
+//   clear();
+//   for (int hit_i = 0; hit_i<event.mult; hit_i++) fillRaw(event, hit_i);
+//   analyze();
+//   return *this;
+// }

@@ -53,11 +53,11 @@ namespace Colib
   std::string getHomePath() {return std::getenv("HOME")+std::string("/");}
   /// @brief Return /path/to/current/folder/
   std::string getPwdPath () {return std::getenv("PWD" )+std::string("/");}
-  std::string getPath(std::string const & string) 
+  std::string nicerPath(std::string const & string) 
   { 
          if (string[0] == '/') return getRawPath(string);
     else if (string[0] == '.') return getPwd () + getRawPath(popFront(string));
-    else if (string[0] == '~') return getHome() + getRawPath(pop_front(string));
+    else if (string[0] == '~') return getHome() + getRawPath(popFront(string));
     else                       return getPwd () + getRawPath(string);
   }
   
@@ -73,8 +73,8 @@ namespace Colib
 
   std::vector<std::string> pathToFolders(std::string const & string)
   {
-    print(getPath(string));
-    return getList(getPath(string), "/");
+    print(nicerPath(string));
+    return getList(nicerPath(string), "/");
   }
 
   std::string fatherFolder(std::string const & string, size_t nb_generations = 1)
@@ -158,11 +158,11 @@ namespace Colib
     return sizeFileBestUnitString(f);
   }
   
-  bool hasPath(std::string const & file) {return (getPath(file) != "");}
+  bool hasPath(std::string const & file) {return (nicerPath(file) != "");}
   
   bool fileExists(std::string fileName)
   {
-    std::string path = getPath(fileName);
+    std::string path = nicerPath(fileName);
     std::string name = removePath(fileName);
     struct dirent *file = nullptr;
     DIR *dp = nullptr;
@@ -218,7 +218,7 @@ namespace Colib
   #ifdef CoMT
     lock_mutex lock(Colib::MT::mutex);
   #endif //CoMT
-    path = getPath(path);
+    path = nicerPath(path);
     if (!pathExists(path))
     {
       if (verbose) print("Creating path", path);
@@ -229,7 +229,7 @@ namespace Colib
 
   void fileEnsurePath(std::string const & fileName)
   {
-    mkdir(getPath(fileName));
+    mkdir(nicerPath(fileName));
   }
 
   void rmFile(std::string const & filename)
@@ -1002,7 +1002,7 @@ namespace Colib
 //     {
 //       if (Colib::hasPath(file))
 //       {
-//         m_path = Colib::getPath(file);
+//         m_path = Colib::nicerPath(file);
 //         m_filename = Colib::removePath(file);
 //       }
 //       else

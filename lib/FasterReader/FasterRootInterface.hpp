@@ -99,7 +99,7 @@ public:
   {
     if (!m_open) return false;
     if (m_nb_hits_max <= m_hits.size()) return false; // Do not treat the file if the maximum number of hits is already reached
-    if (m_nb_hits_max < Colib::big<ulonglong>()) m_hits.reserve(m_nb_hits_max);
+    if (m_nb_hits_max < Colib::max<ulonglong>()) m_hits.reserve(m_nb_hits_max);
     while(loadNextRootHit())
     {
       printLoadingHitsProgress();
@@ -118,10 +118,10 @@ public:
   }
 
   /// @brief Loads a given number.fast files in memory.
-  bool loadDatafiles(std::vector<std::string> const & filenames, size_t maxFiles = std::numeric_limits<size_t>::max())
+  bool loadDatafiles(std::vector<std::string> const & filenames, size_t maxFiles = Colib::max<size_t>())
   {
   #if defined (CoMT) && !defined(DEV) 
-    printsln("Worker waiting in line !");
+    // printsln("Worker waiting in line !");
     lock_mutex lock(read_mutex);
   #endif // CoMT but no DEV 
 
@@ -133,6 +133,37 @@ public:
     for (size_t i = 0; i < toLoad; ++i) loadDatafile(filenames[m_file_id]);
 
     return 0 < toLoad;
+  }
+
+  /// @brief Loads a given number.fast files in memory in a user-defined buffer size.
+  bool loadDatafilesBuffer(std::vector<std::string> const & filenames, size_t maxHitsBuffer = Colib::max<size_t>(), size_t maxFiles = Colib::max<size_t>())
+  {
+  #if defined (CoMT) && !defined(DEV) 
+    // printsln("Worker waiting in line !");
+    lock_mutex lock(read_mutex);
+  #endif // CoMT but no DEV 
+
+    m_filesNb = filenames.size();
+    if (m_filesNb     <= m_file_id    ) return false; // Do not treat the file if the maximum number of files is already reached
+    if (m_nb_hits_max <= m_hits.size()) return false; // Do not treat the file if the maximum number of hits is already reached
+
+    size_t const fileToLoad = std::min(maxFiles, m_filesNb - m_file_id);
+
+    for (size_t i = 0; i < fileToLoad; ++i) 
+    {
+      if (!m_open) FasterReader::open(filenames[m_file_id]); // Open the file if not already
+      while(loadNextRootHit())
+      {
+        printLoadingHitsProgress();
+        ++m_nb_hits_tot;
+        if (maxHitsBuffer <= m_hits.size()) return true;
+      }
+      FasterReader::close();
+      if (m_filesNb <= m_file_id) return false;
+      FasterReader::open(filenames[m_file_id]); // Open the file if not already
+    }
+
+    return 0 < fileToLoad;
   }
 
   auto & data() {return m_hits;}
@@ -147,14 +178,14 @@ public:
 
   constexpr inline void printLoadingHitsProgress() const noexcept
   {
-    if (m_nb_hits_tot % 1_Mi == 0)
-    {
-      if (m_nb_hits_max < Colib::big<ulonglong>()) 
-        printsln("File", Colib::getShortname(m_filename), m_file_id, "/", m_filesNb, Colib::nicer_double(m_nb_hits_tot, 1), 
-          Colib::nicer_seconds(m_hits.back().getTimestamp_s()), Colib::nicer_double((100.*m_nb_hits_tot)/m_nb_hits_max, 1), "%");
-      else
-        printsln("File", Colib::getShortname(m_filename), m_file_id, "/", m_filesNb, Colib::nicer_double(m_nb_hits_tot, 1), Colib::nicer_seconds(m_hits.back().getTimestamp_s()));
-    }
+    // if (m_nb_hits_tot % 1_Mi == 0)
+    // {
+    //   if (m_nb_hits_max < Colib::max<ulonglong>()) 
+    //     printsln("File", Colib::getShortname(m_filename), m_file_id, "/", m_filesNb, Colib::nicer_double(m_nb_hits_tot, 1), 
+    //       Colib::nicer_seconds(m_hits.back().getTimestamp_s()), Colib::nicer_double((100.*m_nb_hits_tot)/m_nb_hits_max, 1), "%");
+    //   else
+    //     printsln("File", Colib::getShortname(m_filename), m_file_id, "/", m_filesNb, Colib::nicer_double(m_nb_hits_tot, 1), Colib::nicer_seconds(m_hits.back().getTimestamp_s()));
+    // }
   }
 
   // --------------- //
@@ -227,8 +258,8 @@ private:
   // I/O :
   Hit m_hit;
   size_t m_filesNb = 1;
-  ulonglong m_nb_hits_max = Colib::big<ulonglong>();
-  ulonglong m_nb_hits_tot_max = Colib::big<ulonglong>();
+  ulonglong m_nb_hits_max = Colib::max<ulonglong>();
+  ulonglong m_nb_hits_tot_max = Colib::max<ulonglong>();
   size_t m_nb_hits_tot = {}; // The total number of hits loaded since the first file 
 #if defined (MULTITHREAD) && !defined(DEV) 
   inline static std::mutex read_mutex;

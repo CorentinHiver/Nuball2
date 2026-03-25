@@ -99,6 +99,7 @@ public:
   void setCalibration   (Calibration      && calib      ) {m_reader.setCalibration (std::move(calib  ));}
 
   // Other interface :
+  void setHitsBufferSize (size_t nbHits) {m_hitsBufferSize = nbHits;}
   void setMaxFilesMemory(int nb) {m_maxFilesInMemory = nb;}
   void setMerge(bool b = true) {m_merge = b;}
   void setRef(Label refLabel)
@@ -128,6 +129,10 @@ public:
   void processData(std::string const & outFile)
   {
     m_outputFile = outFile;
+    if (m_buildEvents)
+    {
+      m_reader.
+    }
          if (m_useRF)       m_reader.writeEventsWithRF (m_outputFile, m_rfLabel, m_RFshift, m_nbRFpulses);
     else if (m_useRef)      m_reader.writeEventsWithRef(m_outputFile, m_refLabel);
     else if (m_buildEvents) m_reader.writeEvents       (m_outputFile);
@@ -211,7 +216,8 @@ public:
   #endif // DEV
     #endif // CoMT
 
-      while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(formatOutput(outPath + "temp_" + outFile));
+      if (m_hitsBufferSize<Colib::max<size_t>()) while(m_reader.loadDatafilesBuffer(files, 500_ki, m_maxFilesInMemory)) processData(formatOutput(outPath + "temp_" + outFile));
+      else while(m_reader.loadDatafiles(files, m_maxFilesInMemory)) processData(formatOutput(outPath + "temp_" + outFile));
     #ifdef CoMT
       if (Colib::MT::isKilled()) return;
     #endif //CoMT
@@ -254,7 +260,8 @@ protected:
   // Other convenience attributes:
   std::vector<std::string> m_fileBlacklist;
   std::vector<Label> m_detectorBlacklist;
-  int m_maxFilesInMemory = {1};
+  size_t m_hitsBufferSize{Colib::max<size_t>()};
+  int m_maxFilesInMemory{1};
   bool m_buildEvents = true;
   bool m_merge = false;
   bool m_useRef = false;

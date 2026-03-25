@@ -87,7 +87,7 @@ void Analyse511::InitialiseManip()
 {
   print("Initialise Arrays");
   Clovers::Initialise();
-  m_Clovers.resize(MTObject::getThreadsNb());
+  m_Clovers.resize(MTObject::getNbThreads());
   print("Initialise histograms");
   m_histo_crystals_label.reset("crystals_patern","all crystals patterns", 144,0,144, 144,0,144);
 

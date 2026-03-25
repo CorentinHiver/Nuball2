@@ -64,36 +64,38 @@ namespace Paris
     uint16_t m_nb      = {};
   };
 
-  template<size_t size>
+  template<size_t t_size>
   class Cluster
   {
+  protected:
+    static constexpr auto cluster_size = t_size;
   public:
     Cluster() : m_index(g_index++)
     {
       Phoswitch::resetIndexes();
       Module::resetIndexes();
-      // for (auto & phoswitch : phoswitches) phoswitch.label = ParisArrays::labels[m_index * size + phoswitch.index()];
+      // for (auto & phoswitch : phoswitches) phoswitch.label = ParisArrays::labels[m_index * cluster_size + phoswitch.index()];
     };
 
-    Phoswitch& fill(Event const & event, int const & hit_i)
+    // template <class PIDfunction>
+    // Phoswitch& fill(Event const & event, int const & hit_i, int id, PIDfunction pid = Phoswitch::simplePid)
+    Phoswitch& fill(Event const & event, int const & hit_i, unsigned int cluster_id)
     {
-      auto const & label = event.labels[hit_i];
-      auto const & id    = NSI136::ParisIndex[label];
-      auto const & nrj   = event.nrjs[hit_i];
-      auto const & nrj2  = event.nrj2s[hit_i];
-      auto const & time  = event.times[hit_i];
+      auto const & nrj   = event.nrjs  [hit_i];
+      auto const & nrj2  = event.nrj2s [hit_i];
+      auto const & time  = event.times [hit_i];
 
       if (nrj < 0 || nrj2 < 0) return emptyPhoswitch;
 
-      if (size < id+1) {error("in Cluster::fill : index", id, "> cluster_size !!"); return emptyPhoswitch;}
+      if (cluster_size < cluster_id+1) {error("in Cluster::fill : index", cluster_id, "> cluster_size !!"); return emptyPhoswitch;}
 
-      phoswitches_id.push_back(id);
+      phoswitches_id.push_back(cluster_id);
 
-      auto ret = phoswitches[id].fill(nrj, nrj2, time, Phoswitch::simplePid);
+      phoswitches[cluster_id].fillWithPid(nrj, nrj2, time, Phoswitch::simplePid);
 
-      calorimetry+=phoswitches[id].nrj;
+      calorimetry += phoswitches[cluster_id].nrj;
 
-      return phoswitches[id];
+      return phoswitches[cluster_id];
     }
 
     void clear()
@@ -110,18 +112,22 @@ namespace Paris
       calorimetry = 0;
     }
 
+    static constexpr auto & size() {return cluster_size;}
+
+    std::array<Phoswitch, cluster_size> phoswitches;
+    std::array<bool, cluster_size> rejected_phoswitches;
+    std::array<Module, cluster_size> modules;
+
     Phoswitch emptyPhoswitch;
     Module    emptyModule;
-
-    std::array<Phoswitch, size> phoswitches;
-    std::array<bool, size> rejected_phoswitches;
-    std::array<Module, size> modules;
 
     std::vector<Index> phoswitches_id;
     std::vector<Index> modules_id;
 
     size_t phoswitch_mult = 0;
     size_t module_mult = 0;
+
+    static inline std::array<std::array<double, cluster_size>, cluster_size> distances;
 
     inline static int distanceMax = 2;
 
@@ -145,74 +151,6 @@ namespace Paris
       return out;
     }
 
-    virtual void addback() = 0;
-
-  protected:
-    bool m_addback = false;
-    bool m_addback_used = false;
-    Time m_time_window = 4_ns;
-    
-    Index inline static thread_local g_index= 0;
-    Index const m_index;
-  };
-}
-
-namespace NSI136
-{
-  static constexpr std::array<double, 8> Paris_R1_x =
-  {
-    -1,  0,  1,
-     1,
-     1,  0, -1,
-    -1
-  };
-
-  static constexpr std::array<double, 8> Paris_R1_y =
-  {
-     1,  1,  1,
-     0,
-    -1, -1, -1,
-     0
-  };
-
-  static constexpr std::array<double, 16> Paris_R2_x =
-  {
-        -1,  0,  1,  2,
-     2,  2,  2,
-     2,  1,  0, -1, -2,
-    -2, -2, -2,
-    -2
-  };
-
-  static constexpr std::array<double, 16> Paris_R2_y =
-  {
-         2,  2,  2,  2,
-     1,  0, -1,
-    -2, -2, -2, -2, -2,
-    -1,  0,  1,
-     2
-  };
-
-  static constexpr std::array<double, 12> Paris_R3_x =
-  {
-    -1,  0,  1,
-     3,  3,  3,
-     1,  0, -1,
-    -3, -3, -3,
-  };
-
-  static constexpr std::array<double, 12> Paris_R3_y =
-  {
-     3,  3,  3,
-     1,  0, -1,
-    -3, -3, -3,
-    -1,  0,  1,
-  };
-  
-  class FrontCluster : public Paris::Cluster<36>
-  {
-    public:
-    template<class... ARGS> FrontCluster(ARGS... args) {Paris::Cluster<36>(std::forward<ARGS>(args)...);}
     void addback()
     {
       phoswitch_mult = phoswitches_id.size();
@@ -228,8 +166,14 @@ namespace NSI136
 
       // 1. Order the hits from the highest to lowest energy deposit :
       std::vector<size_t> hits_ordered(phoswitch_mult);
-      std::iota(hits_ordered.begin(), hits_ordered.end(), 0);
-      std::sort(hits_ordered.begin(), hits_ordered.end(), [&] (int const & hit_i, int const & hit_j)
+      // std::iota(hits_ordered.begin(), hits_ordered.end(), 0);
+      // std::sort(hits_ordered.begin(), hits_ordered.end(), [&] (int const & hit_i, int const & hit_j)
+      // {
+      //   auto const & id_i = phoswitches_id[hit_i];
+      //   auto const & id_j = phoswitches_id[hit_j];
+      //   return phoswitches[id_i].nrj > phoswitches[id_j].nrj;
+      // });
+      Colib::insertionSort(hits_ordered, hits_ordered, [&] (int const & hit_i, int const & hit_j)
       {
         auto const & id_i = phoswitches_id[hit_i];
         auto const & id_j = phoswitches_id[hit_j];
@@ -273,5 +217,13 @@ namespace NSI136
       module_mult = modules_id.size();
       m_addback = true;
     }
+
+  protected:
+    bool m_addback = false;
+    bool m_addback_used = false;
+    Time m_time_window = 4_ns;
+    
+    Index inline static thread_local g_index= 0;
+    Index const m_index;
   };
 }

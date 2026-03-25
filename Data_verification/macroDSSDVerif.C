@@ -389,7 +389,7 @@ void macroDSSDVerif(int nb_files = -1, long nb_hits_read = 1.e+12, int nb_thread
       CoProgressBar progressbar(&tree.cursor(), tree.getMaxHits());
       while(tree.readNext())
       {
-        if (MTObject::getThreadsNb()==1) progressbar.show();
+        if (MTObject::getNbThreads()==1) progressbar.show();
         else if (tree.cursor()%freq_hit_display == 0) print (Colib::nicer_double (tree.cursor(), 0));
 
         // Clear the containers for the new loop

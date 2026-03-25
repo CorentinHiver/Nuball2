@@ -118,11 +118,11 @@ namespace Colib
     return ostring;
   }
 
-  /// @brief Removes the first character of a string
-  std::string pop_front(std::string const & string) {return string.substr(1);}
+  // /// @brief Removes the first character of a string
+  // std::string pop_front(std::string const & string) {return string.substr(1);}
   
-  /// @brief Removes the first character of a string
-  std::string pop_back(std::string const & string) {return string.substr(0,string.size()-1);}
+  // /// @brief Removes the first character of a string
+  // std::string pop_back(std::string const & string) {return string.substr(0,string.size()-1);}
 
   /// @brief Removes the first character of a string
   std::string & pop_front(std::string & string) {if (0 < string.size()) string.erase(0,1); return string;}
@@ -143,23 +143,14 @@ namespace Colib
 
 
   /// @brief Returns true if all its characters are digits (allows E to represent power and . for decimal)
-  bool isNumber(std::string const & string)
+  bool isNumber(std::string const & s) 
   {
-    if (string.size() < 1) return false;
-    int nb_E = 0;
-    int nb_points = 0;
-    for (auto const & c : string)
-    {
-      if (!(isdigit(c)))
-      {
-        if (c == 'E') ++nb_E; 
-        else if (c == '.') ++nb_points;
-        else if (c == '+' || c == '-') continue;
-        else return false;
-      } 
-    }
-    if (nb_E>1 || nb_points>1) return false;
-    return true;
+    char* endptr = nullptr;
+    // strtod works for decimals and scientific notation (1.2E10)
+    std::strtod(s.c_str(), &endptr);
+    
+    // If endptr points to the end of the string, it's a valid number
+    return endptr != s.c_str() && *endptr == '\0';
   }
 
   /// @brief Returns true if the string has at least one occurrence of substr

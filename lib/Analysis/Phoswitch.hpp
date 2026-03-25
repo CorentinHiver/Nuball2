@@ -130,6 +130,9 @@ public:
   auto const & index() const noexcept {return m_index;}
   static void resetIndexes() noexcept {g_index = 0;}
 
+  bool operator<(Phoswitch const & other) {return time < other.time;}
+  bool operator>(Phoswitch const & other) {return time > other.time;}
+
   friend std::ostream& operator<<(std::ostream& out, Phoswitch const & phoswitch)
   {
     out << "crystal : ";
@@ -142,7 +145,7 @@ private:
   Label static inline thread_local g_index = 0;
   Label mutable m_index;
 
-  static RotationCalib m_calib;
+  static inline RotationCalib m_calib;
 };
 
 Index inline Phoswitch::fill(NRJ nrj1, NRJ nrj2, Time _time)

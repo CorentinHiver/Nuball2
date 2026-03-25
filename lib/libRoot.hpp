@@ -3981,7 +3981,7 @@ void libRoot()
   // {
   //   // for (auto const & expression : m_input_files_expressions)
   //   // {
-  //   //   if (!folder_exists(expression)) {print("folder",getPath(expression),"empty !");return;}
+  //   //   if (!folder_exists(expression)) {print("folder",nicerPath(expression),"empty !");return;}
   //   //   if (expression.back() == '/')
   //   //   {// If a folder is given then search the whole folder for .root files
   //   //     findFilesWildcard(expression+"*.root", m_files_vec);

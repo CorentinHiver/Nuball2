@@ -110,7 +110,7 @@ namespace Colib
   template <typename T>
   bool pushBackUnique(std::vector<T> & vector, T const & t)
   {
-    if (found(vector, t))
+    if (!found(vector, t))
     {
       vector.push_back(t);
       return true;
@@ -297,6 +297,45 @@ namespace Colib
 
 namespace Colib
 {
+  /// @brief Order the vector from lower to higher value
+  /// @tparam T must have operator< overloaded if user defined class 
+  template <typename T, class CheckFunction>
+  std::vector<size_t> & insertionSort(std::vector<T> const & vector, std::vector<size_t> & ordered_indexes, CheckFunction checkFunction)
+  {
+    // Verifications :
+    if (vector.size() == 0) {printC(Colib::Color::RED, "In insertionSort(vector, ordered_indexes) : vector size is zero !", Colib::Color::RESET); return ordered_indexes;}
+    if (vector.size() != ordered_indexes.size()) ordered_indexes.resize(vector.size());  
+    // Initializations :
+    T v = vector[0];
+    ordered_indexes[0] = 0;
+    size_t j = 0;  
+    // Loop through the vector :
+    for (size_t i = 0; i < vector.size(); i++)
+    {
+      // Initial guess : the ith ordered_indexes's index corresponds to the vector's ith index 
+      // (e.g. the 5th bin has initial value 5 (ordered_indexes[5] = 5))
+      ordered_indexes[i] = i;  
+      // Check this assumption : v holds the value of ith value of vector
+      v = vector[i];  
+      // Find the true jth index of the ith vector's index
+      j = i;  
+      // Loop goes on until the (j-1)th vector's value is lower than the ith value
+      while((j>0) && checkFunction(vector[ordered_indexes[j-1]], v))
+      {
+        // If the (j-1)th value is higher than the ith value then switch the indexes.
+        ordered_indexes[j] = ordered_indexes[j-1];
+        --j;
+      }  
+      // Save the correct position of the index
+      ordered_indexes[j] = i;
+    }  
+    // Note that this method is iterative : if the 1st value is higher than the 2nd,
+    // ordered_index[0] = 1 and ordered_index[1] = 0. If now the 3rd value is higher than 
+    // the 2nd but lower than the 1st (for i = 2), vector[ordered_index[1]] > v
+    // but vector[ordered_index[0]] < v : the result is indeed {1, 2, 0}
+    return ordered_indexes;
+  }
+
   /// @brief Order the vector from lower to higher value
   /// @tparam T must have operator< overloaded if user defined class 
   template <typename T>

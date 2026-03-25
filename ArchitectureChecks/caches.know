@@ -1,0 +1,60 @@
+#!/bin/bash
+
+printf "=== DIAGNOSTIC MATÉRIEL ET BUS ===\n"
+
+# 1. CACHES CPU (Shared vs Dedicated)
+printf "\n[1. Caches CPU]\n"
+printf "%-18s %-10s %-12s %s\n" "Niveau" "Taille" "Instances" "Partage"
+for i in /sys/devices/system/cpu/cpu0/cache/index*; do
+    [ -d "$i" ] || continue
+    idx=$(basename "$i")
+    level=$(cat "$i/level"); type=$(cat "$i/type"); size=$(cat "$i/size")
+    instances=$(ls -d /sys/devices/system/cpu/cpu*/cache/"$idx" 2>/dev/null | wc -l)
+    sharing=$(cat "$i/shared_cpu_list")
+    printf "%-18s %-10s %-12s %s\n" "L$level ($type)" "$size" "$instances" "Cœurs: $sharing"
+done
+
+# 2. MÉMOIRE VIVE
+printf "\n[2. Mémoire Vive]\n"
+grep -E "MemTotal|MemAvailable" /proc/meminfo | awk '{print $1, $2/1024 " MiB"}'
+
+# 3. STOCKAGE
+printf "\n[3. Stockage]\n"
+printf "%-10s %-10s %-10s %s\n" "Nom" "Taille" "Type" "Modèle"
+for d in /sys/block/sd* /sys/block/nvme* /sys/block/vd*; do
+    [ -e "$d" ] || continue
+    name=$(basename "$d")
+    size_sectors=$(cat "$d/size" 2>/dev/null || echo 0)
+    size_gb=$(awk "BEGIN {printf \"%.1f\", $size_sectors * 512 / 1024 / 1024 / 1024}")
+    rotational=$(cat "$d/queue/rotational" 2>/dev/null)
+    [ "$rotational" = "0" ] && type="SSD" || type="HDD"
+    model=$(cat "$d/device/model" 2>/dev/null || echo "Virtual Disk")
+    printf "%-10s %-10s %-10s %s\n" "$name" "${size_gb}GB" "$type" "$model"
+done
+
+# 4. BUS PCI & BANDWIDTH (The deep dive)
+printf "\n[4. Analyse du Bus PCI Express]\n"
+printf "%-15s %-10s %-10s %-15s\n" "ID Périphérique" "Vitesse" "Largeur" "Bande Passante Est."
+
+for dev in /sys/bus/pci/devices/*; do
+    [ -e "$dev/max_link_speed" ] || continue
+    
+    id=$(basename "$dev")
+    speed=$(cat "$dev/max_link_speed" 2>/dev/null)
+    width=$(cat "$dev/max_link_width" 2>/dev/null)
+    
+    # If values are missing (common in some VMs), skip or label
+    if [ -z "$speed" ] || [ -z "$width" ]; then
+        printf "%-15s %-10s %-10s %-15s\n" "$id" "N/A" "N/A" "Virtuel/Inconnu"
+        continue
+    fi
+
+    # Calculate GB/s based on PCIe Gen standards
+    # Gen 1: 2.5 GT/s | Gen 2: 5.0 GT/s | Gen 3: 8.0 GT/s | Gen 4: 16.0 GT/s
+    speed_val=$(echo "$speed" | awk '{print $1}')
+    
+    # Simple logic: (Speed * Width) / 8 (ignoring encoding overhead for simplicity)
+    bw=$(awk "BEGIN {printf \"%.2f\", ($speed_val * $width) / 8}")
+    
+    printf "%-15s %-10s %-10s %-15s\n" "$id" "$speed GT/s" "x$width" "~$bw GB/s"
+done

@@ -58,7 +58,7 @@ void macro6(int nb_files = -1, long long nbEvtMax = -1, int nb_threads = 10)
   long long freqEvtDisplay = nbEvtMax/10;
   if (nbEvtMax<0) 
   {
-    nbEvtMax = Colib::big<long long>();
+    nbEvtMax = Colib::max<long long>();
     freqEvtDisplay = 1.e+7;
   }
 

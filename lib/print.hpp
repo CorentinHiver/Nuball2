@@ -10,6 +10,8 @@
 #include <iomanip>
 #include <vector>
 
+#include "Terminal.hh"
+
 /// Stream vector support
 template <class T>
 inline std::ostream& operator<<(std::ostream& os, const std::vector<T>& v) noexcept
@@ -32,32 +34,27 @@ namespace Colib
 {
   namespace Color
   {
-    constexpr char RESET[]   = "\u001b[0m";
+    constexpr char RESET         [] = "\u001b[0m";
   
-    constexpr char BLACK[]   = "\u001b[30m";
-    constexpr char RED[]     = "\u001b[31m";
-    constexpr char GREEN[]   = "\u001b[32m";
-    constexpr char YELLOW[]  = "\u001b[33m";
-    constexpr char BLUE[]    = "\u001b[34m";
-    constexpr char MAGENTA[] = "\u001b[35m";
-    constexpr char CYAN[]    = "\u001b[36m";
-    constexpr char WHITE[]   = "\u001b[37m";
+    constexpr char BLACK         [] = "\u001b[30m";
+    constexpr char RED           [] = "\u001b[31m";
+    constexpr char GREEN         [] = "\u001b[32m";
+    constexpr char YELLOW        [] = "\u001b[33m";
+    constexpr char BLUE          [] = "\u001b[34m";
+    constexpr char MAGENTA       [] = "\u001b[35m";
+    constexpr char CYAN          [] = "\u001b[36m";
+    constexpr char WHITE         [] = "\u001b[37m";
   
-    constexpr char BRIGHTBLACK[]   = "\u001b[30;1m";
-    constexpr char BRIGHTRED[]     = "\u001b[31;1m";
-    constexpr char BRIGHTGREEN[]   = "\u001b[32;1m";
-    constexpr char BRIGHTYELLOW[]  = "\u001b[33;1m";
-    constexpr char BRIGHTBLUE[]    = "\u001b[34;1m";
-    constexpr char BRIGHTMAGENTA[] = "\u001b[35;1m";
-    constexpr char BRIGHTCYAN[]    = "\u001b[36;1m";
-    constexpr char BRIGHTWHITE[]   = "\u001b[37;1m";
+    constexpr char BRIGHTBLACK   [] = "\u001b[30;1m";
+    constexpr char BRIGHTRED     [] = "\u001b[31;1m";
+    constexpr char BRIGHTGREEN   [] = "\u001b[32;1m";
+    constexpr char BRIGHTYELLOW  [] = "\u001b[33;1m";
+    constexpr char BRIGHTBLUE    [] = "\u001b[34;1m";
+    constexpr char BRIGHTMAGENTA [] = "\u001b[35;1m";
+    constexpr char BRIGHTCYAN    [] = "\u001b[36;1m";
+    constexpr char BRIGHTWHITE   [] = "\u001b[37;1m";
   
-    constexpr char GREY[] = "\u001b[38;5;8m";
-  }
-
-  namespace Terminal
-  {
-    constexpr char CLEAR_ROW[] = "\033[2K\r";
+    constexpr char GREY          [] = "\u001b[38;5;8m";
   }
 }
 
@@ -69,40 +66,42 @@ using lock_mutex = std::lock_guard<std::mutex>;
 /// Print newline only
 inline void print() noexcept
 {
-  lock_mutex lock(print_mutex);
-  std::cout << '\n';
+  Colib::MT::inject_print([](){ std::cout << Colib::Terminal::NEWLINE; });
 }
 
 /// Print with space separation + newline
 template <class... Args>
 constexpr inline void print(const Args&... args) noexcept
 {
-  lock_mutex lock(print_mutex);
-  ((std::cout << args << ' '), ...);
-  std::cout << '\n';
+  Colib::MT::inject_print([&]() {
+    ((std::cout << args << ' '), ...);
+    std::cout << Colib::Terminal::NEWLINE;
+  });
 }
 
 /// Concatenated print + newline
 template <class... Args>
 constexpr inline void printC(const Args&... args) noexcept
 {
-  lock_mutex lock(print_mutex);
-  ((std::cout << args), ...);
-  std::cout << '\n';
+  Colib::MT::inject_print([&]() {
+      ((std::cout << args), ...);
+      std::cout << Colib::Terminal::NEWLINE;
+    });
 }
 
 /// Concatenated print, no newline
 template <class... Args>
 constexpr inline void println(const Args&... args) noexcept
 {
-  lock_mutex lock(print_mutex);
-  ((std::cout << args), ...);
+  Colib::MT::inject_print([&]() {
+      ((std::cout << args), ...);
+    });
 }
 
 /// Set floating precision
 inline void print_precision(int n = 6) noexcept
 {
-  lock_mutex lock(print_mutex);
+  std::lock_guard<std::mutex> lock(Colib::MT::cout_mutex);
   std::cout << std::setprecision(n);
 }
 

@@ -45,21 +45,29 @@ constexpr inline Energy_t operator""_MeV(unsigned long long energy) noexcept {re
 constexpr inline Energy_t operator""_keV(unsigned long long energy) noexcept {return static_cast<Energy_t>(energy*MeVs*1.0e-03);}
 
 // General units of numbers : Giga Mega kilo
-constexpr inline long double operator""_G(long double number) noexcept {return static_cast<double>(number*1.e+09);}
-constexpr inline long double operator""_M(long double number) noexcept {return static_cast<double>(number*1.e+06);}
-constexpr inline long double operator""_k(long double number) noexcept {return static_cast<double>(number*1.e+03);}
+constexpr inline long double operator""_G(long double n) noexcept {return static_cast<double>(n*1.e+09);}
+constexpr inline long double operator""_M(long double n) noexcept {return static_cast<double>(n*1.e+06);}
+constexpr inline long double operator""_k(long double n) noexcept {return static_cast<double>(n*1.e+03);}
 
-constexpr inline long double operator""_G(unsigned long long number) noexcept {return static_cast<double>(number*1.e+09l);}
-constexpr inline long double operator""_M(unsigned long long number) noexcept {return static_cast<double>(number*1.e+06l);}
-constexpr inline long double operator""_k(unsigned long long number) noexcept {return static_cast<double>(number*1.e+03l);}
+constexpr inline long double operator""_G(unsigned long long n) noexcept {return static_cast<double>(n*1.e+09l);}
+constexpr inline long double operator""_M(unsigned long long n) noexcept {return static_cast<double>(n*1.e+06l);}
+constexpr inline long double operator""_k(unsigned long long n) noexcept {return static_cast<double>(n*1.e+03l);}
 
 // General units of integer numbers : Giga Mega kilo
-constexpr inline uint64_t operator""_Gi(         long double number) noexcept {return static_cast<uint64_t>(number*1.e+9);}
-constexpr inline uint64_t operator""_Mi(         long double number) noexcept {return static_cast<uint64_t>(number*1.e+6);}
-constexpr inline uint64_t operator""_ki(         long double number) noexcept {return static_cast<uint64_t>(number*1.e+3);}
-constexpr inline uint64_t operator""_Gi(unsigned long long   number) noexcept {return number*1.e+9l;}
-constexpr inline uint64_t operator""_Mi(unsigned long long   number) noexcept {return number*1.e+6l;}
-constexpr inline uint64_t operator""_ki(unsigned long long   number) noexcept {return number*1.e+3l;}
+constexpr inline uint64_t operator""_Gi(         long double n) noexcept {return static_cast<uint64_t>(n*1.e+9);}
+constexpr inline uint64_t operator""_Mi(         long double n) noexcept {return static_cast<uint64_t>(n*1.e+6);}
+constexpr inline uint64_t operator""_ki(         long double n) noexcept {return static_cast<uint64_t>(n*1.e+3);}
+constexpr inline uint64_t operator""_Gi(unsigned long long   n) noexcept {return n*1.e+9l;}
+constexpr inline uint64_t operator""_Mi(unsigned long long   n) noexcept {return n*1.e+6l;}
+constexpr inline uint64_t operator""_ki(unsigned long long   n) noexcept {return n*1.e+3l;}
+
+// Informatic units : Giga Mega kilo  octets
+constexpr inline uint64_t operator"" _Ko(         long double n) noexcept {return static_cast<uint64_t>(n * 1024.0L);}
+constexpr inline uint64_t operator"" _Mo(         long double n) noexcept {return static_cast<uint64_t>(n * 1024.0L * 1024.0L);}
+constexpr inline uint64_t operator"" _Go(         long double n) noexcept {return static_cast<uint64_t>(n * 1024.0L * 1024.0L * 1024.0L);}
+constexpr inline uint64_t operator"" _Ko(unsigned long long   n) noexcept {return n * 1024ULL;}
+constexpr inline uint64_t operator"" _Mo(unsigned long long   n) noexcept {return n * 1024ULL * 1024ULL;}
+constexpr inline uint64_t operator"" _Go(unsigned long long   n) noexcept {return n * 1024ULL * 1024ULL * 1024ULL;}
 
 // Angles :
 constexpr inline double to_rad(double const & deg){return deg*3.14159/180.;}

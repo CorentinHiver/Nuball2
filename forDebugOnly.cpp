@@ -2,17 +2,19 @@
 #define MULTITHREAD 2
 
 #ifdef MULTITHREAD
-  #include "lib/Classes/CoMT.hpp"
+  #include "lib/CoMT.hpp"
 #endif // MULTITHREAD
+
 
 #include "lib/Classes/Timer.hpp"
 
 // #include "lib/libCo.hpp"
 // #include "lib/libRoot.hpp"
-// #include "lib/print.hpp"
+#include "lib/print.hpp"
 // #include "lib/randomCo.hpp"
 // #include "lib/Classes/FilesManager.hpp"
 // #include "lib/Classes/Hit.hpp"
+// #include "lib/Classes/RootEvent.hpp"
 // #include "lib/Classes/Event.hpp"
 // #include "lib/Classes/Arguments.hpp"
 // #include "lib/Classes/Calibration.hpp"
@@ -20,24 +22,26 @@
 // #include "lib/Analyse/SpectraAlignator.hpp"
 // #include "lib/MTObjects/MultiHist.hpp"
 // #include "lib/libRootHeader.hpp"
-// #include "lib/RootReader/RootReader.hpp"
-// #include "lib/RootReader/TimeshiftCalculator.hpp"
 // #include "lib/FasterReader/FasterRootInterface.hpp"
 // #include "lib/FasterReader/FasterRunReader.hpp"
 // #include "lib/FasterReader/FasterReader_fast.hpp"
-// #include "lib/RootReader/RootRunReader.hpp"
 // #include "lib/FasterReader/RootInterface.hpp"
-// #include  "lib/Modules/CoRadware.hpp"
-// #include  "lib/Modules/Timeshiftor.hpp"
-// #include  "lib/Classes/CalibAndScale.hpp"
-// #include  "lib/Classes/FilesManager.hpp"
-// #include  "lib/Classes/Detectors.hpp"
-#include  "lib/Analysis/Paris.hpp"
-// #include  "lib/Analysis/Phoswitch.hpp"
-// #include  "lib/Analysis/Clovers.hpp"
-// #include  "lib/Classes/FlexibleHisto.hpp"
-// #include  "lib/Analyse/Chi2Minimiser.hpp"
-// #include  "lib/Classes/CalibAndScale.hpp"
+// #include "lib/RootReader/RootRunReader.hpp"
+// #include "lib/RootReader/RootReader.hpp"
+// #include "lib/RootReader/TimeshiftCalculator.hpp"
+// #include "lib/Modules/CoRadware.hpp"
+// #include "lib/Modules/Timeshiftor.hpp"
+// #include "lib/Classes/CalibAndScale.hpp"
+// #include "lib/Classes/FilesManager.hpp"
+// #include "lib/Classes/Detectors.hpp"
+// #include "lib/Classes/MThisto.hpp"
+// #include "lib/Classes/FlexibleHisto.hpp"
+// #include "lib/Classes/CalibAndScale.hpp"
+#include "136/Analysis/ParisNSI136.hpp"
+// #include "lib/Analysis/Paris.hpp"
+// #include "lib/Analysis/Phoswitch.hpp"
+// #include "lib/Analysis/Clovers.hpp"
+// #include "lib/Analyse/Chi2Minimiser.hpp"
 // #include "lib/FasterReader/FasterRootInterface.hpp"
 // #include "lib/FasterReader/FasterReader.hpp"
 // #include "TH1F.h"
@@ -49,8 +53,33 @@ using namespace Colib;
 int main(int argc, char** argv)
 {
   Timer totTimer;
-
   print(argc, argv);
+
+
+
+
+  // MT::Initialise(4);
+
+  // MT::Histo<TH2F> histo("test", "test", 10,0,10, 100,0,100);
+
+  // MT::parallelise_function<5>([&](){
+  //   time_t timestamp;
+  //   while(true)
+  //   {
+  //     if (MT::isKilled()) return;
+  //     time(&timestamp);
+  //     // printsln(ctime(&timestamp));
+  //     printsln("thread", MT::getThreadIndex(), timestamp);
+  //     print("thread", MT::getThreadIndex(), timestamp);
+
+  //     std::this_thread::sleep_until(std::chrono::system_clock::now() + std::chrono::milliseconds(100));
+  //   }
+  // });
+
+  // auto file = TFile::Open("test.root", "recreate");
+  // file->cd();
+  // histo->Write();
+  // file->Close();
 
   // TimeshiftCalculator calc("/home/corentin/nuball2/N-SI-136_root/ref252/60Co_center_after_ref_252.root");
   // calc.makeHisto(252, true);
@@ -69,7 +98,12 @@ int main(int argc, char** argv)
 
   // FasterReader reader;
 
-  NSI136::FrontCluster front;
+  // NSI136::FrontCluster front;
+
+  // using namespace NSI136;
+  // ParisWall front;
+  // ParisWall back;
+  // print(ParisWall::size()*2 - ParisR1size);
   
   // Paris::Cluster<26> Cluster;
 
@@ -80,7 +114,7 @@ int main(int argc, char** argv)
   // Clovers clovers;
 
 
-  // Event event;
+  // RootEvent event;
 
 
   // MT::parallelise_function_nb<4>([](){
@@ -117,11 +151,12 @@ int main(int argc, char** argv)
 
 
   // FasterRunReader reader(argc, argv);
-  // reader.setRef(252);
-  // // reader.setEventTrigger([](Event const & event){
-  // //   for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (NSI136::isGe[event.labels[hit_i]]) return true;
-  // //   return false;
-  // // });
+  // // reader.setRef(252);
+  // reader.setEventTrigger([](Event const & event){
+  //   if (10 < event.mult) return false;
+  //   for (int hit_i = 0; hit_i<event.mult; ++hit_i) if (NSI136::isGe[event.labels[hit_i]]) return true;
+  //   return false;
+  // });
   // reader.run();
   
 
@@ -146,7 +181,10 @@ int main(int argc, char** argv)
 
   
 
-  // FasterRootInterface interface(argv[1]);
+  // FasterRootInterface interface;
+  // // while(interface.loadDatafiles(Colib::findFilesWildcard(argv[1]), 5)) {printsln(interface.getCursor()); interface.timeSorting(); interface.clearIO();}
+  // while(interface.loadDatafilesBuffer(Colib::findFilesWildcard(argv[1]), 500_ki, 1)) {interface.timeSorting(); interface.clearIO();}
+  
   // // FasterRootInterface interface("/home/corentin/faster/136/60Co_center.fast/60Co_center_0001.fast");
   // if (2<argc) interface.setMaxHits(static_cast<int>(atof(argv[2])));
   // // interface.convert_raw("test.root");

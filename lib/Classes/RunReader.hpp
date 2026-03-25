@@ -72,7 +72,7 @@ public:
   void setOverwrite(bool b = true) {p_overwrite = b;}
   void setOutputPath(std::string const & path) 
   {
-    p_outPath = Colib::getPath(path);
+    p_outPath = Colib::nicerPath(path);
     if (p_outPath.back() != '/') p_outPath.push_back('/');
     Colib::mkdir(p_outPath, true);
   }
@@ -100,7 +100,7 @@ protected:
   std::string p_outPath = Colib::getPwdPath();
   bool p_overwrite = false;
   uint64_t p_nbMaxHits = -1;
-  uint64_t p_nbTotMaxHits = Colib::big<uint64_t>();
+  uint64_t p_nbTotMaxHits = Colib::max<uint64_t>();
   
   Timeshifts p_timeshift;
   Calibration p_calib;

@@ -6,6 +6,11 @@
   std::mutex Nuball2mutex;
 #endif // CoMT
 
+#include <iostream>
+#include <charconv> // Required for from_chars
+#include <string_view>
+#include <system_error>
+
 #include "units.hh"
 #include "libCo.hpp"
 #include "RtypesCore.h"
@@ -82,7 +87,12 @@ constexpr inline Long64_t Long64_cast(T t) {return static_cast<Long64_t>(t);}
 
 inline std::string runName     (std::string runPath) {return Colib::removeExtension(Colib::removePath(Colib::removeLast(runPath, "/")));}
 inline std::string runNumberStr(std::string runName) {return Colib::split(runName, '_')[1];}
-inline int         runNumber   (std::string runName) {return std::stoi(runNumberStr(runName));}
+inline int         runNumber   (std::string runName) 
+{
+  auto nbStr = runNumberStr(runName);
+  if (Colib::isNumber(nbStr))return std::stoi(nbStr);
+  else return -1;
+}
 
 ////////////
 // Values //
@@ -98,12 +108,12 @@ namespace NSI136
 
   static constexpr auto cloverIndex  = Colib::LUT<LUT_s> ([](Label label) -> Index {return Index_cast((label-23)/6);});
   static constexpr auto crystalIndex = Colib::LUT<LUT_s> ([](Label label) -> Index {return Index_cast((label-23)%6);});
+
   static constexpr auto isClover     = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 22 < label && label < 168;});
   static constexpr auto isGe         = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && crystalIndex[label] > 1;});
   static constexpr auto isBGO        = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && crystalIndex[label] < 2;});
   static constexpr auto isR2         = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && cloverIndex [label] > 12;});
   static constexpr auto isR3         = Colib::LUT<LUT_s> ([](Label label) -> bool  {return isClover[label] && cloverIndex [label] < 13;});
-  static constexpr auto GeIndex      = Colib::LUT<LUT_s> ([](Label label) -> Label {return (isGe[label]) ? crystalIndex[label]-2+4*cloverIndex[label] : -1;});
   
   //   RF   //
 
@@ -121,12 +131,48 @@ namespace NSI136
   static constexpr auto isFR1   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 500 < label && label < 509;});
   static constexpr auto isFR2   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 600 < label && label < 617;});
   static constexpr auto isFR3   = Colib::LUT<LUT_s> ([](Label label) -> bool  {return 700 < label && label < 713;});
-  static constexpr auto isBR    = Colib::LUT<LUT_s> ([](Label label) -> bool  {return Colib::lut_OR(label, isBR2, isBR3);});
-  static constexpr auto isFR    = Colib::LUT<LUT_s> ([](Label label) -> bool  {return Colib::lut_OR(label, isFR1, isFR2, isFR3);});
+  static constexpr auto isBack  = Colib::LUT<LUT_s> ([](Label label) -> bool  {return Colib::lut_OR(label, isBR2, isBR3);});
+  static constexpr auto isFront = Colib::LUT<LUT_s> ([](Label label) -> bool  {return Colib::lut_OR(label, isFR1, isFR2, isFR3);});
   static constexpr auto isParis = Colib::LUT<LUT_s> ([](Label label) -> bool  {return Colib::lut_OR(label, isBR2, isBR3, isFR1, isFR2, isFR3);});
+
+  //  DSSD  //
+  
+  static constexpr auto isSector1 = Colib::LUT<LUT_s> ([](Label label) {return 799 < label && label < 816;});
+  static constexpr auto isSector2 = Colib::LUT<LUT_s> ([](Label label) {return 819 < label && label < 836;});
+  static constexpr auto isRing    = Colib::LUT<LUT_s> ([](Label label) {return 839 < label && label < 856;});
+  static constexpr auto isSector  = Colib::LUT<LUT_s> ([](Label label) {return Colib::lut_OR(label, isSector1, isSector2);});
+  static constexpr auto isDSSD    = Colib::LUT<LUT_s> ([](Label label) {return Colib::lut_OR(label, isRing, isSector);});
+  
+  ////////////
+  // Labels //
+  ////////////
+
+  static const auto labelsGe     = Colib::computeList<Label> (LUT_s, [](Label label){return (isGe    [label]);});
+  static const auto labelsBGO    = Colib::computeList<Label> (LUT_s, [](Label label){return (isBGO   [label]);});
+  static const auto labelsClover = Colib::computeList<Label> (LUT_s, [](Label label){return (isClover[label]);});
+  static const auto labelsParis  = Colib::computeList<Label> (LUT_s, [](Label label){return (isParis [label]);});
+  static const auto labelsBR     = Colib::computeList<Label> (LUT_s, [](Label label){return (isBack  [label]);});
+  static const auto labelsFR     = Colib::computeList<Label> (LUT_s, [](Label label){return (isFront [label]);});
+  static const auto labelsDSSD   = Colib::computeList<Label> (LUT_s, [](Label label){return (isDSSD  [label]);});
+
+  ///////////
+  // Index //
+  ///////////
+  
+  static constexpr auto GeIndex      = Colib::LUT<LUT_s> ([](Label label) -> Label {return (isGe[label ]) ? crystalIndex[label]-2+4*cloverIndex[label] : LabelMax;});
+  static constexpr auto BGOIndex     = Colib::LUT<LUT_s> ([](Label label) -> Label {return (isBGO[label]) ? crystalIndex[label]+2*cloverIndex[label] : LabelMax;});
+  static constexpr auto DSSDIndex    = Colib::LUT<LUT_s> ([](Label label) -> Label 
+  {
+    if (!isDSSD[label]) return LabelMax;
+         if (isSector1[label]) return label - 800;
+    else if (isSector2[label]) return label - 804;
+    else if (isRing   [label]) return label - 808;
+    else return LabelMax;
+  });
+
   static constexpr auto ParisRingIndex = Colib::LUT<LUT_s> ([](Label const label) -> Label  
   {
-      if (!isParis[label]) return LabelMax;
+    if (!isParis[label]) return LabelMax;
          if (isBR2[label]) return label - 301;
     else if (isBR3[label]) return label - 401;
     else if (isFR1[label]) return label - 501;
@@ -147,25 +193,21 @@ namespace NSI136
   static constexpr auto ParisClusterIndex = Colib::LUT<LUT_s> ([](Label const label) -> Label  
   {
      if (!isParis[label]) return LabelMax;
-    else if (isBR[label]) return ParisIndex[label];
-    else if (isFR[label]) return ParisIndex[label] - Colib::lutEntries(isBR);
+    else if (isBack [label]) return ParisIndex[label];
+    else if (isFront[label]) return ParisIndex[label] - Colib::lutEntries(isBack);
     else return LabelMax;
   });
 
-  //  DSSD  //
   
-  static constexpr auto isSector1 = Colib::LUT<LUT_s> ([](Label label) {return 799 < label && label < 816;});
-  static constexpr auto isSector2 = Colib::LUT<LUT_s> ([](Label label) {return 819 < label && label < 836;});
-  static constexpr auto isRing    = Colib::LUT<LUT_s> ([](Label label) {return 839 < label && label < 856;});
-  static constexpr auto isSector  = Colib::LUT<LUT_s> ([](Label label) {return Colib::lut_OR(label, isSector1, isSector2);});
-  static constexpr auto isDSSD    = Colib::LUT<LUT_s> ([](Label label) {return Colib::lut_OR(label, isRing, isSector);});
-
   namespace Detector
   {
-    enum Type {Ge, BGO, Ref, RF, Paris, DSSD, DEFAULT};
+    enum Types {Ge, BGO, Ref, RF, Paris, DSSD, DEFAULT};
+    constexpr size_t nbTypes = DEFAULT;
+    std::array<std::string, Detector::DEFAULT> Names = {"Ge", "BGO", "Ref", "RF", "Paris", "DSSD"};
   }
 
-  static constexpr auto detectorType = Colib::LUT<LUT_s> ([](Label label){
+
+  static constexpr auto detectorType = Colib::LUT<NSI136::LUT_s> ([](Label label){
     if (isGe[label]) return Detector::Ge;
     else if (isBGO[label]) return Detector::BGO;
     else if (isRef[label]) return Detector::Ref;
@@ -174,18 +216,6 @@ namespace NSI136
     else if (isDSSD[label]) return Detector::DSSD;
     else return Detector::DEFAULT;
   });
-  
-  ////////////
-  // Labels //
-  ////////////
-
-  static const auto labelsGe     = Colib::computeList<Label> (LUT_s, [](Label label){return (isGe    [label]);});
-  static const auto labelsBGO    = Colib::computeList<Label> (LUT_s, [](Label label){return (isBGO   [label]);});
-  static const auto labelsClover = Colib::computeList<Label> (LUT_s, [](Label label){return (isClover[label]);});
-  static const auto labelsParis  = Colib::computeList<Label> (LUT_s, [](Label label){return (isParis [label]);});
-  static const auto labelsBR     = Colib::computeList<Label> (LUT_s, [](Label label){return (isBR    [label]);});
-  static const auto labelsFR     = Colib::computeList<Label> (LUT_s, [](Label label){return (isFR    [label]);});
-  static const auto labelsDSSD   = Colib::computeList<Label> (LUT_s, [](Label label){return (isDSSD  [label]);});
 
   static constexpr Label maxLabel = Label_cast(LUT_s);
 
